@@ -50,6 +50,24 @@ impl Device {
     // TODO: fn scene(&self) with sane error handling / drop behavior?
     // TODO: examples
 
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-evictmanagedresources)]\
+    /// IDirect3DDevice9::EvictManagedResources
+    ///
+    /// Evicts all managed resources, including both Direct3D and driver-managed resources.
+    ///
+    /// This function causes only the [Pool::Default] copy of resources to be evicted.
+    /// The resource copy in system memory is retained. See [Pool].
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::OUTOFVIDEOMEMORY]
+    /// *   [D3DERR::COMMAND_UNPARSED]
+    /// *   Ok(())
+    pub(crate) fn evict_managed_resources(&self) -> Result<(), MethodError> {
+        let hr = unsafe { self.0.EvictManagedResources() };
+        MethodError::check("IDirect3DDevice9::EvictManagedResources", hr)
+    }
+
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getavailabletexturemem)\]
     /// IDirect3DDevice9::GetAvailableTextureMem
     ///
@@ -105,6 +123,13 @@ impl Device {
     for _ in 0..1000 { assert_eq!(D3DERR::INVALIDCALL, device.begin_scene()); }
     device.end_scene().unwrap();
     for _ in 0..1000 { assert_eq!(D3DERR::INVALIDCALL, device.end_scene()); }
+}
+
+#[test] fn evict_managed_resources() {
+    let device = Device::test();
+    for _ in 0..1000 { device.evict_managed_resources().unwrap(); }
+    // TODO: Create some Pool::Default and Pool::Managed resources
+    // as I understand it, this will only evict cached copies of the latter which is only a perf thing
 }
 
 #[test] fn get_available_texture_mem() {

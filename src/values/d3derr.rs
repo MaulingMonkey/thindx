@@ -111,6 +111,15 @@ impl D3DERR {
 
 
 
+/// Undocumented / poorly documented semi-internal errors
+#[allow(overflowing_literals)]
+impl D3DERR {
+    /// The command was unparsed.
+    pub const COMMAND_UNPARSED          : D3DERR = D3DERR(0x88760BB8 as _);
+}
+
+
+
 /// Errors that aren't part of the D3DERR_\* family, but might still be returned by Direct3D API calls.
 #[allow(overflowing_literals)]
 impl D3DERR {
@@ -147,6 +156,8 @@ impl D3DERR {
             D3DERR::INVALIDCALL                 => Some(("D3DERR_INVALIDCALL",                  "The method call is invalid. For example, a method's parameter may not be a valid pointer.")),
             D3DERR::DRIVERINVALIDCALL           => Some(("D3DERR_DRIVERINVALIDCALL",            "Not used.")),
             D3DERR::WASSTILLDRAWING             => Some(("D3DERR_WASSTILLDRAWING",              "The previous blit operation that is transferring information to or from this surface is incomplete.")),
+
+            D3DERR::COMMAND_UNPARSED            => Some(("D3DERR_COMMAND_UNPARSED",             "The command was unparsed.")),
 
             D3DERR::OUTOFMEMORY                 => Some(("E_OUTOFMEMORY",                       "Ran out of memory")),
 
