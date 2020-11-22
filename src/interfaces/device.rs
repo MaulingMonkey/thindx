@@ -26,7 +26,7 @@ impl Device {
     ///
     /// ### Returns
     ///
-    /// *   `D3DERR::INVALIDCALL`   if the device was already within a scene (e.g. [begin_scene] was called twice without an intervening [end_scene])
+    /// *   [D3DERR::INVALIDCALL]   if the device was already within a scene (e.g. [begin_scene] was called twice without an intervening [end_scene])
     /// *   `Ok(())`                if the device was not already within a scene, and now is
     ///
     /// [begin_scene]:          #method.begin_scene
@@ -42,7 +42,7 @@ impl Device {
     ///
     /// ### Returns
     ///
-    /// *   `D3DERR::INVALIDCALL`   if the device was not within a scene (e.g. [end_scene] was called without a [begin_scene], or was called a second time)
+    /// *   [D3DERR::INVALIDCALL]   if the device was not within a scene (e.g. [end_scene] was called without a [begin_scene], or was called a second time)
     /// *   `Ok(())`                if the device was within a scene that has now ended
     ///
     /// [begin_scene]:          #method.begin_scene
@@ -84,7 +84,7 @@ impl Device {
     ///
     /// ### Returns
     ///
-    /// *   `D3DERR::INVALIDCALL`   if the device was already within a state block
+    /// *   [D3DERR::INVALIDCALL]   if the device was already within a state block
     /// *   `Ok(())`                otherwise
     pub fn begin_state_block(&self) -> Result<(), MethodError> {
         let hr = unsafe { self.0.BeginStateBlock() };
@@ -96,7 +96,7 @@ impl Device {
     ///
     /// ### Returns
     ///
-    /// *   `D3DERR::INVALIDCALL`   if the device wasn't within a state block
+    /// *   [D3DERR::INVALIDCALL]   if the device wasn't within a state block
     /// *   `Ok(state_block)`       if a state block was successfully captured
     pub fn end_state_block(&self) -> Result<StateBlock, MethodError> {
         let mut sb = null_mut();
@@ -133,11 +133,11 @@ impl Device {
     ///
     /// ### Returns
     ///
-    /// * `D3DERR::INVALIDCALL`     if `rects.len()` > `u32::MAX`
-    /// * `D3DERR::INVALIDCALL`     if all non-`rects` parameters were `None`
-    /// * `D3DERR::INVALIDCALL`     if `color`   was `Some(...)` without a render target being bound
-    /// * `D3DERR::INVALIDCALL`     if `depth`   was `Some(...)` without a depth buffer being bound
-    /// * `D3DERR::INVALIDCALL`     if `stencil` was `Some(...)` without a stencil buffer being bound
+    /// * [D3DERR::INVALIDCALL]     if `rects.len()` > `u32::MAX`
+    /// * [D3DERR::INVALIDCALL]     if all non-`rects` parameters were `None`
+    /// * [D3DERR::INVALIDCALL]     if `color`   was `Some(...)` without a render target being bound
+    /// * [D3DERR::INVALIDCALL]     if `depth`   was `Some(...)` without a depth buffer being bound
+    /// * [D3DERR::INVALIDCALL]     if `stencil` was `Some(...)` without a stencil buffer being bound
     /// * `Ok(())`                  otherwise
     pub fn clear(&self, rects: Option<&[Rect]>, color: Option<Color>, depth: Option<f32>, stencil: Option<u32>) -> Result<(), MethodError> {
         // TODO: more clear docs
@@ -260,9 +260,9 @@ impl Device {
     ///
     /// ### Returns
     ///
-    /// * `D3DERR::INVALIDCALL`     if `surface` isn't from [Pool::Default] ?
-    /// * `D3DERR::INVALIDCALL`     if `surface` isn't a supported format ?
-    /// * `D3DERR::INVALIDCALL`     if `rect` exceeds the bounds of the surface
+    /// * [D3DERR::INVALIDCALL]     if `surface` isn't from [Pool::Default] ?
+    /// * [D3DERR::INVALIDCALL]     if `surface` isn't a supported format ?
+    /// * [D3DERR::INVALIDCALL]     if `rect` exceeds the bounds of the surface
     /// * `Ok(())`                  on success
     pub fn color_fill(&self, surface: &Surface, rect: Option<Rect>, color: impl Into<Color>) -> Result<(), MethodError> {
         let rect = rect.map(RECT::from);
@@ -307,12 +307,12 @@ impl Device {
     ///
     /// ### Returns
     ///
-    /// * `D3DERR_NOTAVAILABLE`
-    /// * `D3DERR_DEVICELOST`
-    /// * `D3DERR_INVALIDCALL`
-    /// * `D3DERR_OUTOFVIDEOMEMORY`
-    /// * `D3DERR_OUTOFMEMORY`
-    /// * `Ok(SwapChain)`
+    /// * [D3DERR::NOTAVAILABLE]
+    /// * [D3DERR::DEVICELOST]
+    /// * [D3DERR::INVALIDCALL]
+    /// * [D3DERR::OUTOFVIDEOMEMORY]
+    /// * [D3DERR::OUTOFMEMORY]
+    /// * Ok([SwapChain])
     ///
     /// ### See Also
     ///
@@ -340,9 +340,9 @@ impl Device {
     ///
     /// ### Returns
     ///
-    /// * `D3DERR::???`             `render_target_index` > [Caps].NumSimultaneousRTs ?
-    /// * `Ok(Some(Surface))`       the render target bound to that index
-    /// * `Ok(None)`                no render target was bound to that index
+    /// * [D3DERR]::???             `render_target_index` > [Caps].NumSimultaneousRTs ?
+    /// * Ok(Some([Surface]))       the render target bound to that index
+    /// * Ok(None)                  no render target was bound to that index
     ///
     /// [Multiple Render Targets (Direct3D 9)]:         https://docs.microsoft.com/en-us/windows/win32/direct3d9/multiple-render-targets
     fn get_render_target(&self, render_target_index: u32) -> Result<Option<Surface>, MethodError> {
@@ -362,8 +362,8 @@ impl Device {
     ///
     /// ### Returns
     ///
-    /// * `D3DERR::INVALIDCALL`         if `render_target_index == 0` and `render_target == None`
-    /// * `D3DERR::INVALIDCALL`         if `render_target == Some(surface)` and `surface.usage() != Usage::RenderTarget`
+    /// * [D3DERR::INVALIDCALL]         if `render_target_index == 0` and `render_target == None`
+    /// * [D3DERR::INVALIDCALL]         if `render_target == Some(surface)` and `surface.usage() != Usage::RenderTarget`
     /// * `Ok(())`                      if the render target was successfully bound
     fn set_render_target(&self, render_target_index: u32, render_target: Option<&Surface>) -> Result<(), MethodError> {
         let rt = render_target.map_or(null_mut(), |rt| rt.as_raw());
@@ -413,9 +413,9 @@ impl Device {
     ///
     /// ### Returns
     ///
-    /// * <span style="inaccurate">`D3DERR::INVALIDCALL`     ...?</span>
-    /// * `Ok(Some(Surface))`       the render target bound to that index
-    /// * `Ok(None)`                no render target was bound to that index
+    /// * <span style="inaccurate">[D3DERR::INVALIDCALL] ...?</span>
+    /// * Ok(Some([Surface]))       the render target bound to that index
+    /// * Ok(None)                  no render target was bound to that index
     ///
     /// [Multiple Render Targets (Direct3D 9)]:         https://docs.microsoft.com/en-us/windows/win32/direct3d9/multiple-render-targets
     fn get_depth_stencil_surface(&self) -> Result<Option<Surface>, MethodError> {
@@ -435,7 +435,7 @@ impl Device {
     ///
     /// ### Returns
     ///
-    /// * `D3DERR::INVALIDCALL`         if `depth_stencil_surface == Some(surface)` and `surface.usage() != Usage::DepthStencil`
+    /// * [D3DERR::INVALIDCALL]         if `depth_stencil_surface == Some(surface)` and `surface.usage() != Usage::DepthStencil`
     /// * `Ok(())`                      if the depth stencil was successfully (un)bound
     fn set_depth_stencil_surface(&self, depth_stencil_surface: Option<&Surface>) -> Result<(), MethodError> {
         let ds = depth_stencil_surface.map_or(null_mut(), |ds| ds.as_raw());

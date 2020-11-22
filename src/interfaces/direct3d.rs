@@ -42,7 +42,7 @@ impl Direct3D {
     ///
     /// *   `Err(())`       on an invalid SDK version
     /// *   `Err(())`       if d3d access is forbidden? (services?)
-    /// *   `Ok(Direct3D)`  otherwise
+    /// *   Ok([Direct3D])  otherwise
     ///
     /// ### Example
     ///
@@ -84,9 +84,9 @@ impl Direct3D {
     ///
     /// ### Returns
     ///
-    /// *   `D3DERR::INVALIDCALL`   if `adapter` >= `self.get_adapter_count()`
-    /// *   `D3DERR::INVALIDCALL`   on most bad parameters
-    /// *   <span class="inaccurate">`D3DERR::NOTAVAILABLE` "If a depth-stencil format is not compatible"</span>
+    /// *   [D3DERR::INVALIDCALL]   if `adapter` >= `self.get_adapter_count()`
+    /// *   [D3DERR::INVALIDCALL]   on most bad parameters
+    /// *   <span class="inaccurate">[D3DERR::NOTAVAILABLE] "If a depth-stencil format is not compatible"</span>
     /// *   `Ok(())`                if the adapter x render target x depth stencil format combination is supported
     ///
     /// ### Example
@@ -132,10 +132,10 @@ impl Direct3D {
     ///
     /// ### Returns
     ///
-    /// *   `D3DERR::INVALIDCALL`   if `adapter` >= `self.get_adapter_count()`
-    /// *   `D3DERR::INVALIDCALL`   on most bad parameters
-    /// *   <span class="inaccurate">`D3DERR::NOTAVAILABLE` "if the format is not acceptable to the device for this usage"</span>
-    /// *   `Ok(())`                if the format is supported
+    /// *   [D3DERR::INVALIDCALL]       if `adapter` >= `self.get_adapter_count()`
+    /// *   [D3DERR::INVALIDCALL]       on most bad parameters
+    /// *   <span class="inaccurate">[D3DERR::NOTAVAILABLE] "if the format is not acceptable to the device for this usage"</span>
+    /// *   `Ok(())`                    if the format is supported
     ///
     /// ### Example
     ///
@@ -180,12 +180,12 @@ impl Direct3D {
     ///
     /// ### Returns
     ///
-    /// *   `D3DERR::INVALIDCALL`   if `adapter` >= `self.get_adapter_count()`
-    /// *   `D3DERR::INVALIDDEVICE` if `device_type` is invalid
-    /// *   `D3DERR::NOTAVAILABLE`  on an invalid source format
-    /// *   `D3DERR::NOTAVAILABLE`  on an invalid target format
-    /// *   `D3DERR::NOTAVAILABLE`  when the device cannot convert between the formats
-    /// *   `Ok(())`                if the device can convert from `source_format` to `target_format`
+    /// *   [D3DERR::INVALIDCALL]       if `adapter` >= `self.get_adapter_count()`
+    /// *   [D3DERR::INVALIDDEVICE]     if `device_type` is invalid
+    /// *   [D3DERR::NOTAVAILABLE]      on an invalid source format
+    /// *   [D3DERR::NOTAVAILABLE]      on an invalid target format
+    /// *   [D3DERR::NOTAVAILABLE]      when the device cannot convert between the formats
+    /// *   `Ok(())`                    if the device can convert from `source_format` to `target_format`
     ///
     /// ### Example
     ///
@@ -229,8 +229,8 @@ impl Direct3D {
     ///
     /// ### Returns
     ///
-    /// *   `D3DERR::INVALIDCALL`   if `adapter` >= `self.get_adapter_count()`
-    /// *   `D3DERR::NOTAVAILABLE`  on invalid surface formats, unless `D3DMULTISAMPLE_NONE`
+    /// *   [D3DERR::INVALIDCALL]   if `adapter` >= `self.get_adapter_count()`
+    /// *   [D3DERR::NOTAVAILABLE]  on invalid surface formats, unless `D3DMULTISAMPLE_NONE`
     /// *   `Ok(quality_levels)`    if the multisampling type is valid for the given format
     ///
     /// ### Example
@@ -276,9 +276,9 @@ impl Direct3D {
     ///
     /// ### Returns
     ///
-    /// *   `D3DERR::INVALIDCALL`   if `adapter` >= `self.get_adapter_count()`
-    /// *   `D3DERR::INVALIDCALL`   if `device_type` is invalid
-    /// *   `D3DERR::NOTAVAILABLE`  if `adapter_format` x `back_buffer_format` x `windowed` is invalid
+    /// *   [D3DERR::INVALIDCALL]   if `adapter` >= `self.get_adapter_count()`
+    /// *   [D3DERR::INVALIDCALL]   if `device_type` is invalid
+    /// *   [D3DERR::NOTAVAILABLE]  if `adapter_format` x `back_buffer_format` x `windowed` is invalid
     /// *   `Ok(())`                otherwise
     ///
     /// ### Example
@@ -400,9 +400,9 @@ impl Direct3D {
     ///
     /// ### Returns
     ///
-    /// * `D3DERR::INVALIDCALL`     - if `adapter` >= `self.get_adapter_count()`
-    /// * `D3DERR::INVALIDCALL`     - if `mode` >= `self.get_adapter_mode_count(adapter, format)`
-    /// * `Ok(D3DDISPLAYMODE)`      - otherwise
+    /// *   [D3DERR::INVALIDCALL]       if `adapter` >= `self.get_adapter_count()`
+    /// *   [D3DERR::INVALIDCALL]       if `mode` >= `self.get_adapter_mode_count(adapter, format)`
+    /// *   Ok([D3DDISPLAYMODE])        otherwise
     ///
     /// ### Example
     ///
@@ -554,9 +554,9 @@ impl Direct3D {
     ///
     /// ### Returns
     ///
-    /// * `D3DERR::INVALIDCALL`     - if `adapter` >= `self.get_adapter_count()`
-    /// * `D3DERR::INVALIDCALL`     - if `flags` isn't valid (0, D3DENUM_WHQL_LEVEL, ...)
-    /// * `Ok(AdapterIdentifier)`   - otherwise
+    /// *   [D3DERR::INVALIDCALL]       if `adapter` >= `self.get_adapter_count()`
+    /// *   [D3DERR::INVALIDCALL]       if `flags` isn't valid (0, D3DENUM_WHQL_LEVEL, ...)
+    /// *   Ok([AdapterIdentifier])     otherwise
     ///
     /// ### Example
     ///
@@ -623,10 +623,10 @@ impl Direct3D {
     ///
     /// ### Returns
     ///
-    /// * `0` - if `adapter` >= `self.get_adapter_count()`
-    /// * `0` - if `format` is an invalid format
-    /// * `0` - if `format` is an unsupported format
-    /// * `n` - the number of modes you can query [enum_adapter_modes] for
+    /// *   `0`         if `adapter` >= `self.get_adapter_count()`
+    /// *   `0`         if `format` is an invalid format
+    /// *   `0`         if `format` is an unsupported format
+    /// *   `n`         modes you can query [enum_adapter_modes] for
     ///
     /// ### Example
     ///
@@ -690,8 +690,8 @@ impl Direct3D {
     ///
     /// ### Returns
     ///
-    /// * `Err(())`         - on an invalid `adapter`
-    /// * `Ok(HMONITOR)`    - otherwise
+    /// *   `Err(())`               on an invalid `adapter`
+    /// *   Ok([HMONITOR])          otherwise
     ///
     /// ### Example
     ///
@@ -721,9 +721,9 @@ impl Direct3D {
     ///
     /// ### Returns
     ///
-    /// * `D3DERR::INVALIDCALL`     - on an invalid `adapter`
-    /// * `D3DERR::INVALIDDEVICE`   - on an invalid `device_type`
-    /// * `Ok(D3DCAPS9)`            - otherwise
+    /// *   [D3DERR::INVALIDCALL]       on an invalid `adapter`
+    /// *   [D3DERR::INVALIDDEVICE]     on an invalid `device_type`
+    /// *   Ok([Caps])                  otherwise
     ///
     /// ### Example
     ///
