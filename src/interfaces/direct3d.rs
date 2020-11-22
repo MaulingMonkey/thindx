@@ -541,7 +541,7 @@ impl Direct3D {
         d3d.get_adapter_display_mode(adapter).unwrap_or_else(|err| panic!("unable to query display mode of adapter {} of {}: {}", adapter+1, adapters, err));
     }
     for adapter in adapters..(100+adapters) {
-        d3d.get_adapter_display_mode(adapter).err().unwrap_or_else(|| panic!("expected an error querying display mode of adapter {} of {} (out of bounds)", adapter+1, adapters));
+        assert_eq!(D3DERR::INVALIDCALL, d3d.get_adapter_display_mode(adapter).err());
     }
 }
 
