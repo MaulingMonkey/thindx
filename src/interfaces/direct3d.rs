@@ -389,9 +389,7 @@ impl Direct3D {
     }
 }
 
-#[test] fn create_device() {
-    // TODO
-}
+// #[test] fn create_device() {} // TODO
 
 
 
