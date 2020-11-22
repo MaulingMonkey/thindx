@@ -111,6 +111,82 @@ impl D3DERR {
 
 
 
+#[cfg(feature = "9ex")]
+impl D3D {
+    /// At least one allocation that comprises the resources is on disk.
+    ///
+    /// Direct3D 9Ex only.
+    pub const S_NOT_RESIDENT                : D3DERR = MAKE_D3DSTATUS(2165);
+
+    /// No allocations that comprise the resources are on disk. However, at least one allocation is not in GPU-accessible memory.
+    ///
+    /// Direct3D 9Ex only.
+    pub const S_RESIDENT_IN_SHARED_MEMORY   : D3DERR = MAKE_D3DSTATUS(2166);
+
+    /// The desktop display mode has been changed.
+    /// The application can continue rendering, but there might be color conversion/stretching.
+    /// Pick a back buffer format similar to the current display mode, and call Reset to recreate the swap chains.
+    /// The device will leave this state after a Reset is called.
+    ///
+    /// Direct3D 9Ex only.
+    pub const S_PRESENT_MODE_CHANGED        : D3DERR = MAKE_D3DSTATUS(2167);
+
+    /// The presentation area is occluded.
+    /// Occlusion means that the presentation window is minimized or another device entered the fullscreen mode on the same monitor as the presentation window and the presentation window is completely on that monitor.
+    /// Occlusion will not occur if the client area is covered by another Window.
+    ///
+    /// Occluded applications can continue rendering and all calls will succeed, but the occluded presentation window will not be updated.
+    /// Preferably the application should stop rendering to the presentation window using the device and keep calling CheckDeviceState until S_OK or S_PRESENT_MODE_CHANGED returns.
+    ///
+    /// Direct3D 9Ex only.
+    pub const S_PRESENT_OCCLUDED            : D3DERR = MAKE_D3DSTATUS(2168);
+}
+
+#[cfg(feature = "9ex")]
+impl D3DERR {
+    /// The hardware adapter has been removed.
+    /// Application must destroy the device, do enumeration of adapters and create another Direct3D device.
+    /// If application continues rendering without calling Reset, the rendering calls will succeed.
+    ///
+    /// Applies to Direct3D 9Ex only.
+    pub const DEVICEREMOVED                 : D3DERR = MAKE_D3DHRESULT(2160);
+
+    /// The device that returned this code caused the hardware adapter to be reset by the OS.
+    /// Most applications should destroy the device and quit.
+    /// Applications that must continue should destroy all video memory objects (surfaces, textures, state blocks etc) and call Reset() to put the device in a default state.
+    /// If the application then continues rendering in the same way, the device will return to this state.
+    ///
+    /// Applies to Direct3D 9Ex only.
+    pub const DEVICEHUNG                    : D3DERR = MAKE_D3DHRESULT(2164);
+
+    /// The device does not support overlay for the specified size or display mode.
+    ///
+    /// Direct3D 9Ex under Windows 7 only.
+    pub const UNSUPPORTEDOVERLAY            : D3DERR = MAKE_D3DHRESULT(2171);
+
+    /// The device does not support overlay for the specified surface format.
+    ///
+    /// Direct3D 9Ex under Windows 7 only.
+    pub const UNSUPPORTEDOVERLAYFORMAT      : D3DERR = MAKE_D3DHRESULT(2172);
+
+    /// The specified content cannot be protected.
+    ///
+    /// Direct3D 9Ex under Windows 7 only.
+    pub const CANNOTPROTECTCONTENT          : D3DERR = MAKE_D3DHRESULT(2173);
+
+    /// The specified cryptographic algorithm is not supported.
+    ///
+    /// Direct3D 9Ex under Windows 7 only.
+    pub const UNSUPPORTEDCRYPTO             : D3DERR = MAKE_D3DHRESULT(2174);
+
+    /// The present statistics have no orderly sequence.
+    ///
+    /// Direct3D 9Ex under Windows 7 only.
+    pub const PRESENT_STATISTICS_DISJOINT   : D3DERR = MAKE_D3DHRESULT(2180);
+}
+
+
+
 /// Undocumented / poorly documented semi-internal errors
 #[allow(overflowing_literals)]
 impl D3DERR {
@@ -131,7 +207,7 @@ impl D3DERR {
     fn id_desc(self) -> Option<(&'static str, &'static str)> {
         match self {
             D3D::OK                             => Some(("D3D_OK",                              "No error occured.")),
-            D3D::OK_NOAUTOGEN                   => Some(("D3DOK_NOAUTOGEN",                     "This is a success code. However, the autogeneration of mipmaps is not supported for this format. This means that resource creation will succeed but the mipmap levels will not be automatically generated.")),
+            D3D::OK_NOAUTOGEN                   => Some(("D3DOK_NOAUTOGEN",                     "The autogeneration of mipmaps is not supported for this format.")),
 
             D3DERR::WRONGTEXTUREFORMAT          => Some(("D3DERR_WRONGTEXTUREFORMAT",           "The pixel format of the texture surface is not valid.")),
             D3DERR::UNSUPPORTEDCOLOROPERATION   => Some(("D3DERR_UNSUPPORTEDCOLOROPERATION",    "The device does not support a specified texture-blending operation for color values.")),
@@ -148,14 +224,27 @@ impl D3DERR {
 
             D3DERR::NOTFOUND                    => Some(("D3DERR_NOTFOUND",                     "The requested item was not found.")),
             D3DERR::MOREDATA                    => Some(("D3DERR_MOREDATA",                     "There is more data available than the specified buffer size can hold.")),
-            D3DERR::DEVICELOST                  => Some(("D3DERR_DEVICELOST",                   "The device has been lost but cannot be reset at this time. Therefore, rendering is not possible. A Direct3D device object other than the one that returned this code caused the hardware adapter to be reset by the OS. Delete all video memory objects (surfaces, textures, state blocks) and call Reset() to return the device to a default state. If the application continues rendering without a reset, the rendering calls will succeed.")),
+            D3DERR::DEVICELOST                  => Some(("D3DERR_DEVICELOST",                   "The device has been lost but cannot be reset at this time.")),
             D3DERR::DEVICENOTRESET              => Some(("D3DERR_DEVICENOTRESET",               "The device has been lost but can be reset at this time.")),
             D3DERR::NOTAVAILABLE                => Some(("D3DERR_NOTAVAILABLE",                 "This device does not support the queried technique.")),
-            D3DERR::OUTOFVIDEOMEMORY            => Some(("D3DERR_OUTOFVIDEOMEMORY",             "Direct3D does not have enough display memory to perform the operation. The device is using more resources in a single scene than can fit simultaneously into video memory. Present, PresentEx, or CheckDeviceState can return this error. Recovery is similar to D3DERR_DEVICEHUNG, though the application may want to reduce its per-frame memory usage as well to avoid having the error recur.")),
+            D3DERR::OUTOFVIDEOMEMORY            => Some(("D3DERR_OUTOFVIDEOMEMORY",             "Direct3D does not have enough display memory to perform the operation. The device is using more resources in a single scene than can fit simultaneously into video memory.")),
             D3DERR::INVALIDDEVICE               => Some(("D3DERR_INVALIDDEVICE",                "The requested device type is not valid.")),
             D3DERR::INVALIDCALL                 => Some(("D3DERR_INVALIDCALL",                  "The method call is invalid. For example, a method's parameter may not be a valid pointer.")),
             D3DERR::DRIVERINVALIDCALL           => Some(("D3DERR_DRIVERINVALIDCALL",            "Not used.")),
             D3DERR::WASSTILLDRAWING             => Some(("D3DERR_WASSTILLDRAWING",              "The previous blit operation that is transferring information to or from this surface is incomplete.")),
+
+            #[cfg(feature = "9ex")] D3D::S_NOT_RESIDENT                 => Some(("S_NOT_RESIDENT",                  "At least one allocation that comprises the resources is on disk.")),
+            #[cfg(feature = "9ex")] D3D::S_RESIDENT_IN_SHARED_MEMORY    => Some(("S_RESIDENT_IN_SHARED_MEMORY",     "No allocations that comprise the resources are on disk. However, at least one allocation is not in GPU-accessible memory.")),
+            #[cfg(feature = "9ex")] D3D::S_PRESENT_MODE_CHANGED         => Some(("S_PRESENT_MODE_CHANGED",          "The desktop display mode has been changed.")),
+            #[cfg(feature = "9ex")] D3D::S_PRESENT_OCCLUDED             => Some(("S_PRESENT_OCCLUDED",              "The presentation area is occluded.")),
+
+            #[cfg(feature = "9ex")] D3DERR::DEVICEREMOVED               => Some(("D3DERR_DEVICEREMOVED",                "The hardware adapter has been removed.")),
+            #[cfg(feature = "9ex")] D3DERR::DEVICEHUNG                  => Some(("D3DERR_DEVICEHUNG",                   "The device that returned this code caused the hardware adapter to be reset by the OS.")),
+            #[cfg(feature = "9ex")] D3DERR::UNSUPPORTEDOVERLAY          => Some(("D3DERR_UNSUPPORTEDOVERLAY",           "The device does not support overlay for the specified size or display mode.")),
+            #[cfg(feature = "9ex")] D3DERR::UNSUPPORTEDOVERLAYFORMAT    => Some(("D3DERR_UNSUPPORTEDOVERLAYFORMAT",     "The device does not support overlay for the specified surface format.")),
+            #[cfg(feature = "9ex")] D3DERR::CANNOTPROTECTCONTENT        => Some(("D3DERR_CANNOTPROTECTCONTENT",         "The specified content cannot be protected.")),
+            #[cfg(feature = "9ex")] D3DERR::UNSUPPORTEDCRYPTO           => Some(("D3DERR_UNSUPPORTEDCRYPTO",            "The specified cryptographic algorithm is not supported.")),
+            #[cfg(feature = "9ex")] D3DERR::PRESENT_STATISTICS_DISJOINT => Some(("D3DERR_PRESENT_STATISTICS_DISJOINT",  "The present statistics have no orderly sequence.")),
 
             D3DERR::COMMAND_UNPARSED            => Some(("D3DERR_COMMAND_UNPARSED",             "The command was unparsed.")),
 
