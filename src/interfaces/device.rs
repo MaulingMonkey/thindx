@@ -12,6 +12,7 @@ use crate::*;
 /// # Table of Contents
 /// | Topic                                         | Overview |
 /// | --------------------------------------------- | -------- |
+/// | [Drawing](#drawing)                           | Draw primitives
 /// | [Buffers](#buffers)                           | Bind/Create/Update [IndexBuffer]s and [VertexBuffer]s
 /// | [Queries](#queries)                           | Create/Check Occlusion and other [Query]s
 /// | [Shaders](#shaders)                           | Bind/Create [PixelShader]s and [VertexShader]s

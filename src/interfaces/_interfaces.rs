@@ -1,5 +1,6 @@
 use crate::*;
 
+mod device_draw;
 mod buffers;        pub use buffers::*;
 mod direct3d;       pub use direct3d::Direct3D;
 mod direct3dex;
