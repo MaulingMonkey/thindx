@@ -1,8 +1,15 @@
 use crate::*;
 
-mod device;     pub use device::Device;
-mod direct3d;   pub use direct3d::Direct3D;
+mod buffers;        pub use buffers::*;
+mod device;         pub use device::Device;
+mod direct3d;       pub use direct3d::Direct3D;
 mod direct3dex;
+mod query;          pub use query::*;
+mod shaders;        pub use shaders::*;
+mod state_block;    pub use state_block::*;
+mod surface;        pub use surface::*;
+mod swap_chain;     pub use swap_chain::*;
+mod texture;        pub use texture::*;
 
 
 
@@ -18,18 +25,6 @@ pub struct Unknown(mcom::Rc<winapi::um::unknwnbase::IUnknown>);
 #[derive(Clone)] #[repr(transparent)]
 pub struct Direct3DEx(mcom::Rc<winapi::shared::d3d9::IDirect3D9Ex>);
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dbasetexture9)\]
-/// (extends [Resource])
-/// [Texture], [CubeTexture], or [VolumeTexture]
-#[derive(Clone)] #[repr(transparent)]
-pub struct BaseTexture(mcom::Rc<winapi::shared::d3d9::IDirect3DBaseTexture9>);
-
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dcubetexture9)\]
-/// (extends [BaseTexture])
-/// 6-faced 2D texture for use with [cube mapping](https://en.wikipedia.org/wiki/Cube_mapping)
-#[derive(Clone)] #[repr(transparent)]
-pub struct CubeTexture(mcom::Rc<winapi::shared::d3d9::IDirect3DCubeTexture9>);
-
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3ddevice9ex)\]
 /// (extends [Device])
 /// Core interface used for general rendering, resource creation, etc.
@@ -37,85 +32,20 @@ pub struct CubeTexture(mcom::Rc<winapi::shared::d3d9::IDirect3DCubeTexture9>);
 #[derive(Clone)] #[repr(transparent)]
 pub struct DeviceEx(mcom::Rc<winapi::shared::d3d9::IDirect3DDevice9Ex>);
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dindexbuffer9)\]
-/// (extends [Resource])
-/// An [index buffer](https://docs.microsoft.com/en-us/windows/win32/direct3d9/rendering-from-vertex-and-index-buffers#scenario-2-drawing-two-triangles-with-indexing)
-/// indexes verticies in a [VertexBuffer] when rendering.
-#[derive(Clone)] #[repr(transparent)]
-pub struct IndexBuffer(mcom::Rc<winapi::shared::d3d9::IDirect3DIndexBuffer9>);
-
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dpixelshader9)\]
-/// A [pixel/fragment shader](https://en.wikipedia.org/wiki/Shader#Pixel_shaders) is a GPU program, run on rasterized fragments.
-#[derive(Clone)] #[repr(transparent)]
-pub struct PixelShader(mcom::Rc<winapi::shared::d3d9::IDirect3DPixelShader9>);
-
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dquery9)\]
-/// An asyncronous GPU query for [occlusion or other information](https://docs.microsoft.com/en-us/windows/win32/direct3d9/queries).
-#[derive(Clone)] #[repr(transparent)]
-pub struct Query(mcom::Rc<winapi::shared::d3d9::IDirect3DQuery9>);
-
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dresource9)\]
 /// [\*Texture\*](crate::BaseTexture), [Surface] (but not <strike>[Volume]</strike>!), [IndexBuffer], [VertexBuffer], but not <strike>[\*Shader](crate::PixelShader)</strike>!
 #[derive(Clone)] #[repr(transparent)]
 pub struct Resource(mcom::Rc<winapi::shared::d3d9::IDirect3DResource9>);
-
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dstateblock9)\]
-/// Used to [capture/save and restore](https://docs.microsoft.com/en-us/windows/win32/direct3d9/state-blocks-save-and-restore-state)
-/// changes to [Device] state.
-#[derive(Clone)] #[repr(transparent)]
-pub struct StateBlock(mcom::Rc<winapi::shared::d3d9::IDirect3DStateBlock9>);
-
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dsurface9)\]
-/// (extends [Resource])
-/// A dense 2-dimensional region of data, often belonging to a [Texture]
-#[derive(Clone)] #[repr(transparent)]
-pub struct Surface(mcom::Rc<winapi::shared::d3d9::IDirect3DSurface9>);
-
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dswapchain9)\]
-/// Manages swapping buffers for a view.
-#[derive(Clone)] #[repr(transparent)]
-pub struct SwapChain(mcom::Rc<winapi::shared::d3d9::IDirect3DSwapChain9>);
-
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dswapchain9ex)\]
-/// (extends [SwapChain])
-/// Adds more querying options.
-#[cfg(feature = "9ex")]
-#[derive(Clone)] #[repr(transparent)]
-pub struct SwapChainEx(mcom::Rc<winapi::shared::d3d9::IDirect3DSwapChain9Ex>);
-
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dtexture9)\]
-/// (extends [BaseTexture])
-/// A dense 2-dimensional set of "pixels"
-#[derive(Clone)] #[repr(transparent)]
-pub struct Texture(mcom::Rc<winapi::shared::d3d9::IDirect3DTexture9>);
-
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dvertexbuffer9)\]
-/// (extends [Resource])
-/// A [vertex buffer](https://docs.microsoft.com/en-us/windows/win32/direct3d9/rendering-from-vertex-and-index-buffers#scenario-2-drawing-two-triangles-with-indexing)
-/// typically contains points of a mesh to be rendered.
-#[derive(Clone)] #[repr(transparent)]
-pub struct VertexBuffer(mcom::Rc<winapi::shared::d3d9::IDirect3DVertexBuffer9>);
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dvertexdeclaration9)\]
 /// Describes the layout of the contents of a [VertexBuffer]
 #[derive(Clone)] #[repr(transparent)]
 pub struct VertexDeclaration(mcom::Rc<winapi::shared::d3d9::IDirect3DVertexDeclaration9>);
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dvertexshader9)\]
-/// A [vertex shader](https://en.wikipedia.org/wiki/Shader#Vertex_shaders) transforms mesh verticies when rendering.
-#[derive(Clone)] #[repr(transparent)]
-pub struct VertexShader(mcom::Rc<winapi::shared::d3d9::IDirect3DVertexShader9>);
-
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dvolume9)\]
 /// A dense 3-dimensional region of data, often belonging to a [VolumeTexture]
 #[derive(Clone)] #[repr(transparent)]
 pub struct Volume(mcom::Rc<winapi::shared::d3d9::IDirect3DVolume9>);
-
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dvolumetexture9)\]
-/// (extends [BaseTexture])
-/// A dense 3-dimensional set of "pixels"
-#[derive(Clone)] #[repr(transparent)]
-pub struct VolumeTexture(mcom::Rc<winapi::shared::d3d9::IDirect3DVolumeTexture9>);
 
 
 
