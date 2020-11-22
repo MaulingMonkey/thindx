@@ -107,9 +107,13 @@ impl D3DERR {
 
     /// The previous blit operation that is transferring information to or from this surface is incomplete.
     pub const WASSTILLDRAWING           : D3DERR = MAKE_D3DHRESULT(540);
+}
 
 
 
+/// Errors that aren't part of the D3DERR_\* family, but might still be returned by Direct3D API calls.
+#[allow(overflowing_literals)]
+impl D3DERR {
     /// Ran out of memory.
     pub const OUTOFMEMORY               : D3DERR = D3DERR(E_OUTOFMEMORY);
 }
