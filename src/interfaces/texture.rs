@@ -32,12 +32,19 @@ pub struct VolumeTexture(pub(super) mcom::Rc<winapi::shared::d3d9::IDirect3DVolu
 
 
 
-/// [TextureBase] creation methods
+/// [BaseTexture] creation methods
 impl Device {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createcubetexture)\]
     /// IDirect3DDevice9::CreateCubeTexture
     ///
     /// Creates a cube texture resource.
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]
+    /// *   [D3DERR::OUTOFVIDEOMEMORY]
+    /// *   [D3DERR::OUTOFMEMORY]
+    /// *   Ok([CubeTexture])
     pub(crate) fn create_cube_texture(&self, edge_length: u32, levels: u32, usage: Usage, format: Format, pool: Pool, _shared_handle: impl SharedHandleParam) -> Result<CubeTexture, MethodError> {
         let mut texture = null_mut();
         let hr = unsafe { self.0.CreateCubeTexture(edge_length, levels, usage.into(), format.into(), pool.into(), &mut texture, null_mut()) };
@@ -45,17 +52,43 @@ impl Device {
         Ok(unsafe { CubeTexture::from_raw(texture) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createtexture)
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createtexture)\]
     /// IDirect3DDevice9::CreateTexture
     ///
     /// Creates a texture resource.
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]
+    /// *   [D3DERR::OUTOFVIDEOMEMORY]
+    /// *   [D3DERR::OUTOFMEMORY]
+    /// *   Ok([Texture])
     pub(crate) fn create_texture(&self, width: u32, height: u32, levels: u32, usage: Usage, format: Format, pool: Pool, _shared_handle: impl SharedHandleParam) -> Result<Texture, MethodError> {
         let mut texture = null_mut();
         let hr = unsafe { self.0.CreateTexture(width, height, levels, usage.into(), format.into(), pool.into(), &mut texture, null_mut()) };
         MethodError::check("IDirect3DDevice9::CreateTexture", hr)?;
         Ok(unsafe { Texture::from_raw(texture) })
     }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createvolumetexture)\]
+    /// IDirect3DDevice9::CreateVolumeTexture
+    ///
+    /// Creates a volume texture resource.
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]
+    /// *   [D3DERR::OUTOFVIDEOMEMORY]
+    /// *   [D3DERR::OUTOFMEMORY]
+    /// *   Ok([VolumeTexture])
+    pub(crate) fn create_volume_texture(&self, width: u32, height: u32, depth: u32, levels: u32, usage: Usage, format: Format, pool: Pool, _shared_handle: impl SharedHandleParam) -> Result<VolumeTexture, MethodError> {
+        let mut volumetexture = null_mut();
+        let hr = unsafe { self.0.CreateVolumeTexture(width, height, depth, levels, usage.into(), format.into(), pool.into(), &mut volumetexture, null_mut()) };
+        MethodError::check("IDirect3DDevice9::CreateVolumeTexture", hr)?;
+        Ok(unsafe { VolumeTexture::from_raw(volumetexture) })
+    }
 }
 
 // #[test] fn create_cube_texture() {} // TODO
 // #[test] fn create_texture() {} // TODO
+// #[test] fn create_volume_texture() {} // TODO
