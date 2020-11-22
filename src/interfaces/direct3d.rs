@@ -781,7 +781,7 @@ impl Direct3D {
 
 
 #[cfg(test)] impl Direct3D {
-    fn test() -> Self {
+    pub fn test() -> Self {
         unsafe { Direct3D::create(SdkVersion::default()).unwrap() }
     }
 }

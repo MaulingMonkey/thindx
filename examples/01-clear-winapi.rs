@@ -104,9 +104,8 @@ fn main() {
         DEVICE.with(|d| {
             let device = d.borrow();
             if let Some(device) = device.as_ref() {
+                device.clear(None, Some(Color::argb(0xFF664422)), None, None).unwrap();
                 let device = unsafe { &*device.as_raw() };
-                let color : D3DCOLOR = 0xFF664422; // ARGB
-                assert!(SUCCEEDED(unsafe { device.Clear(0, null(), D3DCLEAR_TARGET, color, 0.0, 0) }));
                 assert!(SUCCEEDED(unsafe { device.Present(null(), null(), null_mut(), null()) }));
             }
         });

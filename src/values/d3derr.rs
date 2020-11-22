@@ -166,6 +166,15 @@ impl Debug for D3DERR {
 
 impl std::error::Error for D3DERR {}
 
+impl PartialEq<HRESULT> for D3DERR { fn eq(&self, other: &HRESULT)   -> bool { self.0 == *other } }
+impl PartialEq<D3DERR> for HRESULT { fn eq(&self, other: &D3DERR)    -> bool { other.0 == *self } }
+
+impl PartialEq<Option<D3DERR>> for D3DERR { fn eq(&self, other: &Option<D3DERR>) -> bool { Some(self) == other.as_ref() } }
+impl PartialEq<D3DERR> for Option<D3DERR> { fn eq(&self, other: &D3DERR)         -> bool { Some(other) == self.as_ref() } }
+
+impl PartialEq<Option<MethodError>> for D3DERR { fn eq(&self, other: &Option<MethodError>) -> bool { Some(*self) == other.as_ref().map(|e| e.d3derr()) } }
+impl PartialEq<D3DERR> for Option<MethodError> { fn eq(&self, other: &D3DERR)              -> bool { Some(*other) == self.as_ref().map(|e| e.d3derr()) } }
+
 impl<O> PartialEq<Result<O, D3DERR>> for D3DERR { fn eq(&self, other: &Result<O, D3DERR>) -> bool { Some(self) == other.as_ref().err() } }
 impl<O> PartialEq<D3DERR> for Result<O, D3DERR> { fn eq(&self, other: &D3DERR)            -> bool { Some(other) == self.as_ref().err() } }
 

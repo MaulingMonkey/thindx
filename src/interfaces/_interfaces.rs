@@ -1,5 +1,6 @@
 use crate::*;
 
+mod device;     pub use device::Device;
 mod direct3d;   pub use direct3d::Direct3D;
 mod direct3dex;
 
@@ -28,11 +29,6 @@ pub struct BaseTexture(mcom::Rc<winapi::shared::d3d9::IDirect3DBaseTexture9>);
 /// 6-faced 2D texture for use with [cube mapping](https://en.wikipedia.org/wiki/Cube_mapping)
 #[derive(Clone)] #[repr(transparent)]
 pub struct CubeTexture(mcom::Rc<winapi::shared::d3d9::IDirect3DCubeTexture9>);
-
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3ddevice9)\]
-/// Core interface used for general rendering, resource creation, etc.
-#[derive(Clone)] #[repr(transparent)]
-pub struct Device(mcom::Rc<winapi::shared::d3d9::IDirect3DDevice9>);
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3ddevice9ex)\]
 /// (extends [Device])
@@ -147,6 +143,7 @@ macro_rules! convert {
             type Raw = $winapi;
 
             unsafe fn from_raw(raw: *mut Self::Raw) -> Self { Self(mcom::Rc::from_raw(raw)) }
+            unsafe fn from_raw_opt(raw: *mut Self::Raw) -> Option<Self> { Some(Self(mcom::Rc::from_raw_opt(raw)?)) }
             fn into_raw(self) -> *mut Self::Raw { self.0.into_raw() }
             fn as_raw(&self) -> *mut Self::Raw { self.0.as_ptr() }
         }

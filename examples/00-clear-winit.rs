@@ -65,8 +65,7 @@ fn main() {
                 std::process::exit(0); // device must outlast HWND which is about to be destroyed - kill the process instead
             },
             Event::MainEventsCleared => {
-                let color : D3DCOLOR = 0xFF224466; // ARGB
-                assert!(SUCCEEDED(unsafe { (*device.as_raw()).Clear(0, null(), D3DCLEAR_TARGET, color, 0.0, 0) }));
+                device.clear(None, Some(Color::argb(0xFF224466)), None, None).unwrap();
                 assert!(SUCCEEDED(unsafe { (*device.as_raw()).Present(null(), null(), null_mut(), null()) }));
             },
             _ => {},

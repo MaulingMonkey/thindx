@@ -1,9 +1,11 @@
 mod adapter_identifier;     pub use adapter_identifier::*;
 mod caps;                   pub use caps::*;
+mod color;                  pub use color::*;
 mod d3derr;                 pub use d3derr::*;
 mod devtype;                pub use devtype::*;
 mod format;                 pub use format::*;
 mod multi_sample_type;      pub use multi_sample_type::*;
 mod pool;                   pub use pool::*;
 mod resource_type;          pub use resource_type::*;
+mod rect;                   pub use rect::*;
 mod sdk_version;            pub use sdk_version::*;
