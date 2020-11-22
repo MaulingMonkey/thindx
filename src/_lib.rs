@@ -65,6 +65,7 @@
 //! | [Format]                                  | [D3DFORMAT]               | Texture and vertex element formats
 //! | [MultiSample]                             | [D3DMULTISAMPLE_TYPE]     | Defines the levels of full-scene multisampling to apply
 //! | [Pool]                                    | [D3DPOOL]                 | Specifies what memory pool [Resource]s should be stored in
+//! | [PrimitiveType]                           | [D3DPRIMITIVETYPE]        | Defines the primitives supported by Direct3D.
 //! | [QueryType]                               | [D3DQUERYTYPE]            | Identifies the query type.
 //! | [ResourceType]                            | [D3DRESOURCETYPE]         | Specifies the type of a [Resource]/[Volume]
 //! | [SdkVersion]                              | DWORD                     | Specify what Direct3D SDK to use ([Direct3D](crate::Direct3D)\[[Ex](crate::Direct3DEx)\]::[create](crate::Direct3D::create)'s only parameter)
@@ -112,6 +113,7 @@
 //! [D3DLOCK_*]:                https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dlock
 //! [D3DMULTISAMPLE_TYPE]:      https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dmultisample-type
 //! [D3DPOOL]:                  https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dpool
+//! [D3DPRIMITIVETYPE]:         https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dprimitivetype
 //! [D3DQUERYTYPE]:             https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dquerytype
 //! [D3DRECT]:                  https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3drect
 //! [D3DRESOURCETYPE]:          https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dresourcetype

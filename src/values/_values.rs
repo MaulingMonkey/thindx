@@ -8,6 +8,7 @@ mod format;                 pub use format::*;
 mod lock;                   pub use lock::*;
 mod multi_sample_type;      pub use multi_sample_type::*;
 mod pool;                   pub use pool::*;
+mod primitive_type;         pub use primitive_type::*;
 mod query_type;             pub use query_type::*;
 mod resource_type;          pub use resource_type::*;
 mod rect;                   pub use rect::*;
