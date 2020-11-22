@@ -59,6 +59,24 @@ impl Device {
         MethodError::check("IDirect3DDevice9::CreateAdditionalSwapChain", hr)?;
         Ok(SwapChain::from_raw(swap_chain))
     }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-reset)\]
+    /// IDirect3DDevice9::Reset
+    ///
+    /// Resets the type, size, and format of the swap chain.
+    ///
+    /// ### Returns
+    ///
+    /// * [D3DERR::DEVICELOST]
+    /// * [D3DERR::DEVICEREMOVED]
+    /// * [D3DERR::DRIVERINTERNALERROR]
+    /// * [D3DERR::OUTOFVIDEOMEMORY]
+    /// * Ok(())
+    pub unsafe fn reset(&self, presentation_parameters: &mut D3DPRESENT_PARAMETERS) -> Result<(), MethodError> {
+        let hr = self.0.Reset(presentation_parameters);
+        MethodError::check("IDirect3DDevice9::Reset", hr)
+    }
 }
 
 // #[test] fn create_additional_swap_chain() {} // TODO
+// #[test] fn reset() {} // TODO
