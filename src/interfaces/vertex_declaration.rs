@@ -27,14 +27,12 @@ impl Device {
     ///
     /// ### Returns
     ///
-    /// *   [D3DERR::INVALIDCALL]   if `elements.len()` > `u32::MAX`
     /// *   [D3DERR::INVALIDCALL]   if `elements.last()` != `Some(D3DDECL_END)`
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok([VertexDeclaration])
     ///
     /// [Vertex Declaration (Direct3D 9)]:          https://docs.microsoft.com/en-us/windows/desktop/direct3d9/vertex-declaration
     pub(crate) fn create_vertex_declaration(&self, elements: &[D3DVERTEXELEMENT9]) -> Result<VertexDeclaration, MethodError> {
-        let n : u32 = elements.len().try_into().map_err(|_| MethodError("Device::create_vertex_declaration", D3DERR::INVALIDCALL))?;
         let end = elements.last().ok_or(MethodError("Device::create_vertex_declaration", D3DERR::INVALIDCALL))?;
         // This check is required for CreateVertexDeclaration to be sound!
         if !ve_eq(&end, &D3DDECL_END) { return Err(MethodError("Device::create_vertex_declaration", D3DERR::INVALIDCALL)); }
