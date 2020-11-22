@@ -119,6 +119,14 @@ impl Device {
         }
     }
 
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getfrontbufferdata)\]
+    /// IDirect3DDevice9::GetFrontBufferData
+    pub(crate) fn get_front_buffer_data(&self, swap_chain: u32, surface: &Surface) -> Result<(), MethodError> {
+        // TODO: verify soundness before making pub
+        let hr = unsafe { self.0.GetFrontBufferData(swap_chain, surface.as_raw()) };
+        MethodError::check("IDirect3DDevice9::GetFrontBufferData", hr)
+    }
+
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setdepthstencilsurface)\]
     /// IDirect3DDevice9::SetDepthStencilSurface
     ///
@@ -252,6 +260,8 @@ impl Device {
         assert_eq!(D3DERR::INVALIDCALL, device.set_render_target(i, Some(&rt0)));
     }
 }
+
+// #[test] fn get_front_buffer_data() {} // TODO
 
 #[test] fn clear() {
     // TODO: fuzz rects harder
