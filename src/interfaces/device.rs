@@ -1,6 +1,7 @@
 use crate::*;
 
 use winapi::shared::d3d9types::*;
+use winapi::shared::windef::RECT;
 
 use std::convert::TryInto;
 use std::ptr::{null, null_mut};
@@ -245,6 +246,42 @@ impl Device {
             device.set_depth_stencil_surface(autods.as_ref()).unwrap();
         }
     }
+}
+
+
+
+impl Device {
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-colorfill)\]
+    /// IDirect3DDevice9::ColorFill
+    ///
+    /// Allows an application to fill a rectangular area of a [Pool::Default] surface with a specified color.
+    ///
+    /// ### Returns
+    ///
+    /// * `D3DERR::INVALIDCALL`     if `surface` isn't from [Pool::Default] ?
+    /// * `D3DERR::INVALIDCALL`     if `surface` isn't a supported format ?
+    /// * `D3DERR::INVALIDCALL`     if `rect` exceeds the bounds of the surface
+    /// * `Ok(())`                  on success
+    pub fn color_fill(&self, surface: &Surface, rect: Option<Rect>, color: impl Into<Color>) -> Result<(), MethodError> {
+        let rect = rect.map(RECT::from);
+        let rect = rect.as_ref().map_or(null(), |r| r);
+        let hr = unsafe { self.0.ColorFill(surface.as_raw(), rect, color.into().into()) };
+        MethodError::check("IDirect3DDevice9::ColorFill", hr)
+    }
+}
+
+#[test] fn color_fill() {
+    let device = Device::test();
+    let rt0 = device.get_render_target(0).unwrap().unwrap();
+    device.color_fill(&rt0, None, Color::argb(0xFF112233)).unwrap();
+    device.color_fill(&rt0, Some(Rect::from([0..1, 0..1])), Color::argb(0xFF112233)).unwrap();
+    assert_eq!(D3DERR::INVALIDCALL, device.color_fill(&rt0, Some( Rect::from([-1..1, -1..1])                 ), Color::argb(0xFF112233)));
+    assert_eq!(D3DERR::INVALIDCALL, device.color_fill(&rt0, Some( Rect::from([0..100000, 0..100000])         ), Color::argb(0xFF112233)));
+    assert_eq!(D3DERR::INVALIDCALL, device.color_fill(&rt0, Some( Rect::from([10000..-10000, 10000..-10000]) ), Color::argb(0xFF112233)));
+    assert_eq!(D3DERR::INVALIDCALL, device.color_fill(&rt0, Some( Rect::from([-10000..10000, -10000..10000]) ), Color::argb(0xFF112233)));
+
+    // TODO: test unsupported pools
+    // TODO: test unsupported formats
 }
 
 

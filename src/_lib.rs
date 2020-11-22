@@ -54,7 +54,7 @@
 //! | [AdapterIdentifier]                       | [D3DADAPTER_IDENTIFIER9]  | Adapter metadata (driver, description, driver version, vendor/device ids, ...)
 //! | [Caps]                                    | [D3DCAPS9]                | Adapter/device capabilities and limitations
 //! | [Color]                                   | [D3DCOLOR]                | 0xAA<span style="color: red">RR</span><span style="color: green">GG</span><span style="color: blue">BB</span> style 32-bit color
-//! | [Rect]                                    | [D3DRECT]                 | `[0i32 .. 1i32, 2i32 .. 3i32]` signed x/y range structure
+//! | [Rect]                                    | [D3DRECT] / [RECT]        | `[0i32 .. 1i32, 2i32 .. 3i32]` signed x/y range structure
 //!
 //! ### Enum-like Values
 //!
@@ -103,6 +103,7 @@
 //! [D3DPOOL]:                  https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dpool
 //! [D3DRECT]:                  https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3drect
 //! [D3DRESOURCETYPE]:          https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dresourcetype
+//! [RECT]:                     https://docs.microsoft.com/en-us/windows/win32/api/windef/ns-windef-rect
 
 use mcom::Rc;
 
