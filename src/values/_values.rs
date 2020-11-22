@@ -1,4 +1,5 @@
 mod adapter_identifier;     pub use adapter_identifier::*;
+mod back_buffer_type;       pub use back_buffer_type::*;
 mod caps;                   pub use caps::*;
 mod color;                  pub use color::*;
 mod d3derr;                 pub use d3derr::*;

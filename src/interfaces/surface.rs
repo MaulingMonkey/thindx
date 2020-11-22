@@ -62,6 +62,22 @@ impl Device {
 
 /// [Surface] selection methods
 impl Device {
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getbackbuffer)\]
+    /// IDirect3DDevice9::GetBackBuffer
+    ///
+    /// Retrieves a back buffer from the device's swap chain.
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]           if `back_buffer` >= number of back buffers
+    /// *   Ok([Surface])
+    pub(crate) fn get_back_buffer(&self, swap_chain: u32, back_buffer: u32, type_: BackBufferType) -> Result<Surface, MethodError> {
+        let mut surface = null_mut();
+        let hr = unsafe { self.0.GetBackBuffer(swap_chain, back_buffer, type_.into(), &mut surface) };
+        MethodError::check("IDirect3DDevice9::GetBackBuffer", hr)?;
+        Ok(unsafe { Surface::from_raw(surface) })
+    }
+
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getdepthstencilsurface)\]
     /// IDirect3DDevice9::GetDepthStencilSurface
     ///
@@ -138,6 +154,8 @@ impl Device {
         MethodError::check("IDirect3DDevice9::SetRenderTarget", hr)
     }
 }
+
+// #[test] fn get_back_buffer() {} // TODO
 
 #[test] fn get_set_depth_stencil_surface() {
     let device = Device::test_pp(|pp| {
