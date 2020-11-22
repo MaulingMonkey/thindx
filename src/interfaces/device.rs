@@ -5,6 +5,8 @@ use crate::*;
 use winapi::shared::d3d9types::*;
 use winapi::shared::windef::RECT;
 
+type FVF = u32;
+
 use std::convert::TryInto;
 use std::ptr::{null, null_mut};
 
@@ -78,6 +80,7 @@ impl Device {
 
 
 
+/// [StateBlock] management
 impl Device {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-beginstateblock)\]
     /// IDirect3DDevice9::BeginStateBlock
@@ -89,6 +92,28 @@ impl Device {
     pub fn begin_state_block(&self) -> Result<(), MethodError> {
         let hr = unsafe { self.0.BeginStateBlock() };
         MethodError::check("IDirect3DDevice9::BeginStateBlock", hr)
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createstateblock)\]
+    /// IDirect3DDevice9::CreateStateBlock
+    ///
+    /// Creates a new state block that contains the values for all device states, vertex-related states, or pixel-related states.
+    ///
+    /// Vertex-related device states typically refer to those states that affect how the system processes vertices.
+    /// Pixel-related states generally refer to device states that affect how the system processes pixel or depth-buffer data during rasterization.
+    /// Some states are contained in both groups.
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]
+    /// *   [D3DERR::OUTOFVIDEOMEMORY]
+    /// *   [D3DERR::OUTOFMEMORY]
+    /// *   Ok([StateBlock])
+    fn create_state_block(&self, type_: StateBlockType) -> Result<StateBlock, MethodError> {
+        let mut sb = null_mut();
+        let hr = unsafe { self.0.CreateStateBlock(type_.into(), &mut sb) };
+        MethodError::check("IDirect3DDevice9::CreateStateBlock", hr)?;
+        Ok(unsafe { StateBlock::from_raw(sb) })
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-endstateblock)\]
@@ -122,6 +147,8 @@ impl Device {
     device.end_state_block().unwrap();
     assert_eq!(D3DERR::INVALIDCALL, device.end_state_block().err());
 }
+
+// TODO: test explicit state capturing
 
 
 
@@ -328,6 +355,152 @@ impl Device {
 }
 
 // #[test] fn create_additional_swap_chain() {} // TODO
+
+
+
+/// [TextureBase] creation methods
+impl Device {
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createcubetexture)\]
+    /// IDirect3DDevice9::CreateCubeTexture
+    ///
+    /// Creates a cube texture resource.
+    fn create_cube_texture(&self, edge_length: u32, levels: u32, usage: Usage, format: Format, pool: Pool, _shared_handle: impl SharedHandleParam) -> Result<CubeTexture, MethodError> {
+        let mut texture = null_mut();
+        let hr = unsafe { self.0.CreateCubeTexture(edge_length, levels, usage.into(), format.into(), pool.into(), &mut texture, null_mut()) };
+        MethodError::check("IDirect3DDevice9::CreateCubeTexture", hr)?;
+        Ok(unsafe { CubeTexture::from_raw(texture) })
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createtexture)
+    /// IDirect3DDevice9::CreateTexture
+    ///
+    /// Creates a texture resource.
+    fn create_texture(&self, width: u32, height: u32, levels: u32, usage: Usage, format: Format, pool: Pool, _shared_handle: impl SharedHandleParam) -> Result<Texture, MethodError> {
+        let mut texture = null_mut();
+        let hr = unsafe { self.0.CreateTexture(width, height, levels, usage.into(), format.into(), pool.into(), &mut texture, null_mut()) };
+        MethodError::check("IDirect3DDevice9::CreateTexture", hr)?;
+        Ok(unsafe { Texture::from_raw(texture) })
+    }
+}
+
+// #[test] fn create_cube_texture() {} // TODO
+// #[test] fn create_texture() {} // TODO
+
+
+
+/// [Surface] creation methods
+impl Device {
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createdepthstencilsurface)\]
+    /// IDirect3DDevice9::CreateDepthStencilSurface
+    ///
+    /// Creates a depth-stencil resource.
+    fn create_depth_stencil_surface(&self, width: u32, height: u32, format: Format, multi_sample: MultiSample, multi_sample_quality: u32, discard: bool, _shared_handle: impl SharedHandleParam) -> Result<Surface, MethodError> {
+        let mut surface = null_mut();
+        let hr = unsafe { self.0.CreateDepthStencilSurface(width, height, format.into(), multi_sample.into(), multi_sample_quality, discard.into(), &mut surface, null_mut()) };
+        MethodError::check("IDirect3DDevice9::CreateDepthStencilSurface", hr)?;
+        Ok(unsafe { Surface::from_raw(surface) })
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createoffscreenplainsurface)\]
+    /// IDirect3DDevice9::CreateOffscreenPlainSurface
+    ///
+    /// Create an off-screen surface.
+    fn create_offscreen_plain_surface(&self, width: u32, height: u32, format: Format, pool: Pool, _shared_handle: impl SharedHandleParam) -> Result<Surface, MethodError> {
+        let mut surface = null_mut();
+        let hr = unsafe { self.0.CreateOffscreenPlainSurface(width, height, format.into(), pool.into(), &mut surface, null_mut()) };
+        MethodError::check("IDirect3DDevice9::CreateOffscreenPlainSurface", hr)?;
+        Ok(unsafe { Surface::from_raw(surface) })
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createrendertarget)\]
+    /// IDirect3DDevice9::CreateRenderTarget
+    ///
+    /// Creates a render-target surface.
+    fn create_render_target(&self, width: u32, height: u32, format: Format, multi_sample: MultiSample, multi_sample_quality: u32, lockable: bool, _shared_handle: impl SharedHandleParam) -> Result<Surface, MethodError> {
+        let mut surface = null_mut();
+        let hr = unsafe { self.0.CreateRenderTarget(width, height, format.into(), multi_sample.into(), multi_sample_quality, lockable.into(), &mut surface, null_mut()) };
+        MethodError::check("IDirect3DDevice9::CreateRenderTarget", hr)?;
+        Ok(unsafe { Surface::from_raw(surface) })
+    }
+}
+
+// #[test] fn create_depth_stencil_surface() {} // TODO
+// #[test] fn create_offscreen_plain_surface() {} // TODO
+// #[test] fn create_render_target() {} // TODO
+
+
+
+/// Resource creation
+impl Device {
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createindexbuffer)\]
+    /// IDirect3DDevice9::CreateIndexBuffer
+    ///
+    /// Creates an index buffer.
+    fn create_index_buffer(&self, length: u32, usage: Usage, format: Format, pool: Pool, _shared_handle: impl SharedHandleParam) -> Result<IndexBuffer, MethodError> {
+        let mut buffer = null_mut();
+        let hr = unsafe { self.0.CreateIndexBuffer(length, usage.into(), format.into(), pool.into(), &mut buffer, null_mut()) };
+        MethodError::check("IDirect3DDevice9::CreateIndexBuffer", hr)?;
+        Ok(unsafe { IndexBuffer::from_raw(buffer) })
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createvertexbuffer)\]
+    /// IDirect3DDevice9::CreateVertexBuffer
+    ///
+    /// Creates an vertex buffer.
+    fn create_vertex_buffer(&self, length: u32, usage: Usage, fvf: FVF, pool: Pool, _shared_handle: impl SharedHandleParam) -> Result<VertexBuffer, MethodError> {
+        let mut buffer = null_mut();
+        let hr = unsafe { self.0.CreateVertexBuffer(length, usage.into(), fvf, pool.into(), &mut buffer, null_mut()) };
+        MethodError::check("IDirect3DDevice9::CreateVertexBuffer", hr)?;
+        Ok(unsafe { VertexBuffer::from_raw(buffer) })
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createpixelshader)\]
+    /// IDirect3DDevice9::CreatePixelShader
+    ///
+    /// Creates a pixel shader.
+    ///
+    /// ### Safety
+    ///
+    /// The caller must pass a valid shader blob.
+    /// The underlying Direct3D API is unsound - it doesn't even take a length for the DWORD array.
+    /// This function will likely attempt to validate the shader blob bytecode in the future and/or offload such validation onto the parameter, but until then this is unsound as heck.
+    /// Do not trust user-generated-content for shader bytecode blobs.
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]
+    /// *   [D3DERR::OUTOFVIDEOMEMORY]
+    /// *   [D3DERR::OUTOFMEMORY]
+    /// *   Ok([PixelShader])
+    pub unsafe fn create_pixel_shader(&self, function: &[u32]) -> Result<PixelShader, MethodError> {
+        let mut shader = null_mut();
+        let hr = self.0.CreatePixelShader(function.as_ptr(), &mut shader);
+        MethodError::check("IDirect3DDevice9::CreatePixelShader", hr)?;
+        Ok(PixelShader::from_raw(shader))
+    }
+}
+
+// #[test] fn create_index_buffer() {} // TODO
+// #[test] fn create_vertex_buffer() {} // TODO
+// #[test] fn create_pixel_shader() {} // TODO
+
+
+
+/// [Query] management
+impl Device {
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createquery)\]
+    /// IDirect3DDevice9::CreateQuery
+    ///
+    /// Creates a status query.
+    fn create_query(&self, type_: QueryType) -> Result<Query, MethodError> {
+        let mut query = null_mut();
+        let hr = unsafe { self.0.CreateQuery(type_.into(), &mut query) };
+        MethodError::check("IDirect3DDevice9::CreateQuery", hr)?;
+        Ok(unsafe { Query::from_raw(query) })
+    }
+}
+
+// #[test] fn create_query() {} // TODO
 
 
 
