@@ -1,3 +1,5 @@
+#![allow(dead_code)] // TODO: remove
+
 use crate::*;
 
 use winapi::shared::d3d9types::*;
@@ -342,7 +344,7 @@ impl Device {
     assert_eq!(rt0.as_raw(), device.get_render_target(0).expect("RT0 inaccessable").expect("RT0 null").as_raw());
 
     // muck with probably-in-bounds RTs
-    for i in 1..max_rts {
+    for _i in 1..max_rts {
         // TODO: create real textures to bind
         // println!("rt[{}]", i);
         // device.set_render_target(i, Some(&rt0)).unwrap();
