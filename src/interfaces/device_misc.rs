@@ -2,6 +2,8 @@
 
 use crate::*;
 
+use winapi::shared::d3d9types::D3DCLIPSTATUS9;
+
 
 
 /// # Miscellanious
@@ -91,6 +93,36 @@ impl Device {
         MethodError::check("IDirect3DDevice9::GetClipPlane", hr)?;
         Ok(plane)
     }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getclipstatus)\]
+    /// IDirect3DDevice9::GetClipStatus
+    ///
+    /// Retrieves the clip status.
+    ///
+    /// ### Returns
+    ///
+    /// *   <span class="inaccurate">[D3DERR::INVALIDCALL]  - "if the argument is invalid", but this should always be valid"
+    /// *   Ok([ClipStatus])
+    ///
+    /// ### Example
+    ///
+    /// ```rust,no_run
+    /// # use thin3d9::*;
+    /// # let device : Device = unimplemented!();
+    /// println!("{:?}", device.get_clip_status().unwrap());
+    /// ```
+    ///
+    /// ### Output
+    ///
+    /// ```text
+    /// ClipStatus { ClipUnion: 0, ClipIntersection: 4294967295 }
+    /// ```
+    pub fn get_clip_status(&self) -> Result<ClipStatus, MethodError> {
+        let mut status = D3DCLIPSTATUS9 { ClipUnion: 0, ClipIntersection: 0 };
+        let hr = unsafe { self.0.GetClipStatus(&mut status) };
+        MethodError::check("IDirect3DDevice9::GetClipStatus", hr)?;
+        Ok(ClipStatus::from_unchecked(status))
+    }
 }
 
 #[test] fn evict_managed_resources() {
@@ -107,7 +139,12 @@ impl Device {
 }
 
 #[test] fn get_clip_plane() {
-    let device = Device::test();
-    let _plane0  = device.get_clip_plane(0).unwrap();
+    let device  = Device::test();
+    let _plane0 = device.get_clip_plane(0).unwrap();
     let _planen = device.get_clip_plane(!0).unwrap(); // never fails?
+}
+
+#[test] fn get_clip_status() {
+    let device = Device::test();
+    let _status = device.get_clip_status().unwrap(); // never fails?
 }
