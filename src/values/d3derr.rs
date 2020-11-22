@@ -1,4 +1,4 @@
-use winapi::shared::winerror::{HRESULT, SUCCEEDED};
+use winapi::shared::winerror::{HRESULT, SUCCEEDED, *};
 
 use std::fmt::{self, Debug, Display, Formatter};
 
@@ -107,6 +107,11 @@ impl D3DERR {
 
     /// The previous blit operation that is transferring information to or from this surface is incomplete.
     pub const WASSTILLDRAWING           : D3DERR = MAKE_D3DHRESULT(540);
+
+
+
+    /// Ran out of memory.
+    pub const OUTOFMEMORY               : D3DERR = D3DERR(E_OUTOFMEMORY);
 }
 
 impl D3DERR {
@@ -138,6 +143,8 @@ impl D3DERR {
             D3DERR::INVALIDCALL                 => Some(("D3DERR_INVALIDCALL",                  "The method call is invalid. For example, a method's parameter may not be a valid pointer.")),
             D3DERR::DRIVERINVALIDCALL           => Some(("D3DERR_DRIVERINVALIDCALL",            "Not used.")),
             D3DERR::WASSTILLDRAWING             => Some(("D3DERR_WASSTILLDRAWING",              "The previous blit operation that is transferring information to or from this surface is incomplete.")),
+
+            D3DERR::OUTOFMEMORY                 => Some(("E_OUTOFMEMORY",                       "Ran out of memory")),
 
             _                                   => None,
         }
