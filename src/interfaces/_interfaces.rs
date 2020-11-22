@@ -1,7 +1,6 @@
 use crate::*;
 
 mod buffers;        pub use buffers::*;
-mod device;         pub use device::Device;
 mod direct3d;       pub use direct3d::Direct3D;
 mod direct3dex;
 mod query;          pub use query::*;
@@ -11,6 +10,7 @@ mod surface;        pub use surface::*;
 mod swap_chain;     pub use swap_chain::*;
 mod texture;        pub use texture::*;
 mod vertex_declaration; pub use vertex_declaration::*;
+mod device;         pub use device::Device;
 
 
 

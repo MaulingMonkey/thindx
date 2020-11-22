@@ -15,7 +15,8 @@ pub struct VertexDeclaration(pub(super) mcom::Rc<winapi::shared::d3d9::IDirect3D
 
 
 
-/// [VertexDeclaration] methods
+/// # VertexDeclarations
+/// Bind/Create [VertexDeclaration]s for describing [VertexBuffer] layouts
 impl Device {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createvertexdeclaration)\]
     /// IDirect3DDevice9::CreateVertexDeclaration

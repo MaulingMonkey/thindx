@@ -18,7 +18,8 @@ pub struct Surface(pub(super) mcom::Rc<winapi::shared::d3d9::IDirect3DSurface9>)
 
 
 
-/// [Surface] creation methods
+/// # Surfaces
+/// Bind/Create [Surface]s for back buffers, render targets, depth stencil, etc.
 impl Device {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createdepthstencilsurface)\]
     /// IDirect3DDevice9::CreateDepthStencilSurface
@@ -52,16 +53,7 @@ impl Device {
         MethodError::check("IDirect3DDevice9::CreateRenderTarget", hr)?;
         Ok(unsafe { Surface::from_raw(surface) })
     }
-}
 
-// #[test] fn create_depth_stencil_surface() {} // TODO
-// #[test] fn create_offscreen_plain_surface() {} // TODO
-// #[test] fn create_render_target() {} // TODO
-
-
-
-/// [Surface] selection methods
-impl Device {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getbackbuffer)\]
     /// IDirect3DDevice9::GetBackBuffer
     ///
@@ -153,64 +145,7 @@ impl Device {
         let hr = unsafe { self.0.SetRenderTarget(render_target_index, rt) };
         MethodError::check("IDirect3DDevice9::SetRenderTarget", hr)
     }
-}
 
-// #[test] fn get_back_buffer() {} // TODO
-
-#[test] fn get_set_depth_stencil_surface() {
-    let device = Device::test_pp(|pp| {
-        pp.EnableAutoDepthStencil = true.into();
-        pp.AutoDepthStencilFormat = Format::D24S8.into();
-    }).unwrap();
-
-    let ds = device.get_depth_stencil_surface().unwrap().unwrap();
-    assert_eq!(ds.as_raw(), device.get_depth_stencil_surface().unwrap().unwrap().as_raw());
-    device.set_depth_stencil_surface(Some(&ds)).unwrap();
-    assert_eq!(ds.as_raw(), device.get_depth_stencil_surface().unwrap().unwrap().as_raw());
-    device.set_depth_stencil_surface(None).unwrap();
-    assert!(device.get_depth_stencil_surface().unwrap().is_none());
-
-    // TODO: What happens with pure devices?
-    // TODO: What happens with setting surfaces with poor formats?
-    // TODO: What happens with setting surfaces with mismatched resolutions?
-}
-
-#[test] fn get_set_render_target() {
-    let device = Device::test();
-    //let caps = device...
-    let max_rts = 4; // TODO: caps
-
-    // attempt to muck with RT0
-    let rt0 = device.get_render_target(0).expect("RT0 inaccessable").expect("RT0 null");
-    device.set_render_target(0, Some(&rt0)).unwrap();
-    assert_eq!(rt0.as_raw(), device.get_render_target(0).expect("RT0 inaccessable").expect("RT0 null").as_raw());
-    assert_eq!(D3DERR::INVALIDCALL, device.set_render_target(0, None));
-    assert_eq!(rt0.as_raw(), device.get_render_target(0).expect("RT0 inaccessable").expect("RT0 null").as_raw());
-    device.set_render_target(0, Some(&rt0)).unwrap();
-    assert_eq!(rt0.as_raw(), device.get_render_target(0).expect("RT0 inaccessable").expect("RT0 null").as_raw());
-
-    // muck with probably-in-bounds RTs
-    for _i in 1..max_rts {
-        // TODO: create real textures to bind
-        // println!("rt[{}]", i);
-        // device.set_render_target(i, Some(&rt0)).unwrap();
-    }
-
-    // TODO: What happens with setting surfaces with poor formats?
-    // TODO: What happens with setting surfaces with mismatched resolutions?
-
-    // muck with probably-out-of-bounds RTs
-    for i in [100, 1000, 100000, !0].iter().copied() {
-        // TODO: create real textures to bind
-        assert_eq!(D3DERR::INVALIDCALL, device.set_render_target(i, Some(&rt0)));
-    }
-}
-
-
-
-/// [Surface] manipulation methods
-
-impl Device {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-clear)\]
     /// IDirect3DDevice9::Clear
     ///
@@ -260,6 +195,61 @@ impl Device {
         let rect = rect.as_ref().map_or(null(), |r| r);
         let hr = unsafe { self.0.ColorFill(surface.as_raw(), rect, color.into().into()) };
         MethodError::check("IDirect3DDevice9::ColorFill", hr)
+    }
+}
+
+// #[test] fn create_depth_stencil_surface() {} // TODO
+// #[test] fn create_offscreen_plain_surface() {} // TODO
+// #[test] fn create_render_target() {} // TODO
+
+// #[test] fn get_back_buffer() {} // TODO
+
+#[test] fn get_set_depth_stencil_surface() {
+    let device = Device::test_pp(|pp| {
+        pp.EnableAutoDepthStencil = true.into();
+        pp.AutoDepthStencilFormat = Format::D24S8.into();
+    }).unwrap();
+
+    let ds = device.get_depth_stencil_surface().unwrap().unwrap();
+    assert_eq!(ds.as_raw(), device.get_depth_stencil_surface().unwrap().unwrap().as_raw());
+    device.set_depth_stencil_surface(Some(&ds)).unwrap();
+    assert_eq!(ds.as_raw(), device.get_depth_stencil_surface().unwrap().unwrap().as_raw());
+    device.set_depth_stencil_surface(None).unwrap();
+    assert!(device.get_depth_stencil_surface().unwrap().is_none());
+
+    // TODO: What happens with pure devices?
+    // TODO: What happens with setting surfaces with poor formats?
+    // TODO: What happens with setting surfaces with mismatched resolutions?
+}
+
+#[test] fn get_set_render_target() {
+    let device = Device::test();
+    //let caps = device...
+    let max_rts = 4; // TODO: caps
+
+    // attempt to muck with RT0
+    let rt0 = device.get_render_target(0).expect("RT0 inaccessable").expect("RT0 null");
+    device.set_render_target(0, Some(&rt0)).unwrap();
+    assert_eq!(rt0.as_raw(), device.get_render_target(0).expect("RT0 inaccessable").expect("RT0 null").as_raw());
+    assert_eq!(D3DERR::INVALIDCALL, device.set_render_target(0, None));
+    assert_eq!(rt0.as_raw(), device.get_render_target(0).expect("RT0 inaccessable").expect("RT0 null").as_raw());
+    device.set_render_target(0, Some(&rt0)).unwrap();
+    assert_eq!(rt0.as_raw(), device.get_render_target(0).expect("RT0 inaccessable").expect("RT0 null").as_raw());
+
+    // muck with probably-in-bounds RTs
+    for _i in 1..max_rts {
+        // TODO: create real textures to bind
+        // println!("rt[{}]", i);
+        // device.set_render_target(i, Some(&rt0)).unwrap();
+    }
+
+    // TODO: What happens with setting surfaces with poor formats?
+    // TODO: What happens with setting surfaces with mismatched resolutions?
+
+    // muck with probably-out-of-bounds RTs
+    for i in [100, 1000, 100000, !0].iter().copied() {
+        // TODO: create real textures to bind
+        assert_eq!(D3DERR::INVALIDCALL, device.set_render_target(i, Some(&rt0)));
     }
 }
 

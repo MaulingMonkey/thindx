@@ -6,14 +6,28 @@ use crate::*;
 // TODO: fuzz / torture-test Device operations in randomized combinations for odd interactions
 
 
-
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3ddevice9)\]
 /// Core interface used for general rendering, resource creation, etc.
+///
+/// # Table of Contents
+/// | Topic                                         | Overview |
+/// | --------------------------------------------- | -------- |
+/// | [Buffers](#buffers)                           | Bind/Create/Update [IndexBuffer]s and [VertexBuffer]s
+/// | [Queries](#queries)                           | Create/Check Occlusion and other [Query]s
+/// | [Shaders](#shaders)                           | Bind/Create [PixelShader]s and [VertexShader]s
+/// | [StateBlocks](#stateblocks)                   | Create/Capture/Replay Direct3D states via [StateBlock]s
+/// | [Surfaces](#surfaces)                         | Bind/Create [Surface]s for back buffers, render targets, depth stencil, etc.
+/// | [SwapChains](#swapchains)                     | Create [SwapChain]s / [SwapChainEx]s for multi-window rendering
+/// | [Textures](#textures)                         | Bind/Create/Update [Texture]s, [CubeTexture]s, and [VolumeTexture]s
+/// | [VertexDeclarations](#vertexdeclarations)     | Bind/Create [VertexDeclaration]s for describing [VertexBuffer] layouts
+/// | [Miscellanious](#miscellanious)               | Scenes, States, Metadata, etc.
 #[derive(Clone)] #[repr(transparent)]
 pub struct Device(pub(super) mcom::Rc<winapi::shared::d3d9::IDirect3DDevice9>);
 
 
 
+/// # Miscellanious
+/// Scenes, States, Metadata, etc.
 impl Device {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-beginscene)\]
     /// IDirect3DDevice9::BeginScene

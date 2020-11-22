@@ -16,7 +16,8 @@ pub struct VertexShader(pub(super) mcom::Rc<winapi::shared::d3d9::IDirect3DVerte
 
 
 
-/// {[Pixel](crate::PixelShader),[Vertex](crate::VertexShader)}Shader creation
+/// # Shaders
+/// Bind/Create [PixelShader]s and [VertexShader]s
 impl Device {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createpixelshader)\]
     /// IDirect3DDevice9::CreatePixelShader

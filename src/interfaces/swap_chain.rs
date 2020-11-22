@@ -20,6 +20,8 @@ pub struct SwapChainEx(pub(super) mcom::Rc<winapi::shared::d3d9::IDirect3DSwapCh
 
 
 
+/// # SwapChains
+/// Create [SwapChain]s / [SwapChainEx]s for multi-window rendering
 impl Device {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createadditionalswapchain)\]
     /// IDirect3DDevice9::CreateAdditionalSwapChain

@@ -13,7 +13,8 @@ pub struct Query(pub(super) mcom::Rc<winapi::shared::d3d9::IDirect3DQuery9>);
 
 
 
-/// [Query] management
+/// # Queries
+/// Create/Check Occlusion and other [Query]s
 impl Device {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createquery)\]
     /// IDirect3DDevice9::CreateQuery

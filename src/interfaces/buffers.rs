@@ -24,7 +24,8 @@ pub struct VertexBuffer(pub(super) mcom::Rc<winapi::shared::d3d9::IDirect3DVerte
 
 
 
-/// {[Index](crate::IndexBuffer),[Vertex](crate::VertexBuffer)}Buffer Creation
+/// # Buffers
+/// Bind/Create/Update [IndexBuffer]s and [VertexBuffer]s
 impl Device {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createindexbuffer)\]
     /// IDirect3DDevice9::CreateIndexBuffer

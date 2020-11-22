@@ -14,7 +14,8 @@ pub struct StateBlock(pub(super) mcom::Rc<winapi::shared::d3d9::IDirect3DStateBl
 
 
 
-/// [StateBlock] management
+/// # StateBlocks
+/// Create/Capture/Replay Direct3D states via [StateBlock]s
 impl Device {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-beginstateblock)\]
     /// IDirect3DDevice9::BeginStateBlock

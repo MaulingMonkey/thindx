@@ -32,7 +32,8 @@ pub struct VolumeTexture(pub(super) mcom::Rc<winapi::shared::d3d9::IDirect3DVolu
 
 
 
-/// [BaseTexture] creation methods
+/// # Textures
+/// Bind/Create/Update [Texture]s, [CubeTexture]s, and [VolumeTexture]s
 impl Device {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createcubetexture)\]
     /// IDirect3DDevice9::CreateCubeTexture
