@@ -61,6 +61,36 @@ impl Device {
     pub fn get_available_texture_mem(&self) -> u32 {
         unsafe { self.0.GetAvailableTextureMem() }
     }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getclipplane)\]
+    /// IDirect3DDevice9::GetClipPlane
+    ///
+    /// Retrieves the coefficients of a user-defined clipping plane for the device.
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]   if the index exceeds the maximum clipping pane index supported by the device (if there is such a limit)
+    /// *   `Ok([A, B, C, D])`, where points `Ax + By + Cz + Dw >= 0` are visible
+    ///
+    /// ### Example
+    ///
+    /// ```rust,no_run
+    /// # use thin3d9::*;
+    /// # let device : Device = unimplemented!();
+    /// println!("{:?}", device.get_clip_plane(0).unwrap());
+    /// ```
+    ///
+    /// ### Output
+    ///
+    /// ```text
+    /// [0.0, 0.0, 0.0, 0.0]
+    /// ```
+    pub fn get_clip_plane(&self, index: u32) -> Result<[f32; 4], MethodError> {
+        let mut plane = [0.0, 0.0, 0.0, 0.0];
+        let hr = unsafe { self.0.GetClipPlane(index, plane.as_mut_ptr()) };
+        MethodError::check("IDirect3DDevice9::GetClipPlane", hr)?;
+        Ok(plane)
+    }
 }
 
 #[test] fn evict_managed_resources() {
@@ -74,4 +104,10 @@ impl Device {
     let device = Device::test();
     let available = device.get_available_texture_mem();
     assert!(available >= 1024 * 1024 * 1024); // probably a bug if our modern computer doesn't have at least 1 GiB of video mem available
+}
+
+#[test] fn get_clip_plane() {
+    let device = Device::test();
+    let _plane0  = device.get_clip_plane(0).unwrap();
+    let _planen = device.get_clip_plane(!0).unwrap(); // never fails?
 }
