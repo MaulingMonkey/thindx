@@ -10,6 +10,7 @@ mod state_block;    pub use state_block::*;
 mod surface;        pub use surface::*;
 mod swap_chain;     pub use swap_chain::*;
 mod texture;        pub use texture::*;
+mod vertex_declaration; pub use vertex_declaration::*;
 
 
 
@@ -36,11 +37,6 @@ pub struct DeviceEx(mcom::Rc<winapi::shared::d3d9::IDirect3DDevice9Ex>);
 /// [\*Texture\*](crate::BaseTexture), [Surface] (but not <strike>[Volume]</strike>!), [IndexBuffer], [VertexBuffer], but not <strike>[\*Shader](crate::PixelShader)</strike>!
 #[derive(Clone)] #[repr(transparent)]
 pub struct Resource(mcom::Rc<winapi::shared::d3d9::IDirect3DResource9>);
-
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dvertexdeclaration9)\]
-/// Describes the layout of the contents of a [VertexBuffer]
-#[derive(Clone)] #[repr(transparent)]
-pub struct VertexDeclaration(mcom::Rc<winapi::shared::d3d9::IDirect3DVertexDeclaration9>);
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dvolume9)\]
 /// A dense 3-dimensional region of data, often belonging to a [VolumeTexture]
