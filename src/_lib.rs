@@ -68,6 +68,7 @@
 //! | [QueryType]                               | [D3DQUERYTYPE]            | Identifies the query type.
 //! | [ResourceType]                            | [D3DRESOURCETYPE]         | Specifies the type of a [Resource]/[Volume]
 //! | [SdkVersion]                              | DWORD                     | Specify what Direct3D SDK to use ([Direct3D](crate::Direct3D)\[[Ex](crate::Direct3DEx)\]::[create](crate::Direct3D::create)'s only parameter)
+//! | [StateBlockType]                          | [D3DSTATEBLOCKTYPE]       | Predefined sets of pipeline state used by state blocks
 //!
 //! ### Flags-like Values
 //!
@@ -114,6 +115,7 @@
 //! [D3DQUERYTYPE]:             https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dquerytype
 //! [D3DRECT]:                  https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3drect
 //! [D3DRESOURCETYPE]:          https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dresourcetype
+//! [D3DSTATEBLOCKTYPE]:        https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dstateblocktype
 //! [D3DUSAGE_*]:               https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dusage
 //! [RECT]:                     https://docs.microsoft.com/en-us/windows/win32/api/windef/ns-windef-rect
 
