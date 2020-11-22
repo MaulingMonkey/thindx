@@ -1,5 +1,6 @@
 use crate::*;
 
+mod device;         pub use device::Device;
 mod device_draw;
 mod buffers;        pub use buffers::*;
 mod direct3d;       pub use direct3d::Direct3D;
@@ -11,8 +12,7 @@ mod surface;        pub use surface::*;
 mod swap_chain;     pub use swap_chain::*;
 mod texture;        pub use texture::*;
 mod vertex_declaration; pub use vertex_declaration::*;
-mod device;         pub use device::Device;
-
+mod device_misc;
 
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/unknwn/nn-unknwn-iunknown)\]
