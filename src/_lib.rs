@@ -75,6 +75,7 @@
 //!
 //! | `thin3d9` type                            | docs.microsoft.com        | description   |
 //! | ----------------------------------------- | ------------------------- | ------------- |
+//! | [FVF]                                     | DWORD ([D3DFVF_*])        | Describes the contents of vertices interleaved in a single data stream.
 //! | [Lock]                                    | DWORD ([D3DLOCK_*])       | A combination of zero or more locking options that describe the type of lock to perform.
 //! | [Usage]                                   | DWORD ([D3DUSAGE_*])      | Usage options that identify how resources are to be used.
 //!
@@ -110,6 +111,7 @@
 //! [D3DDEVTYPE]:               https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddevtype
 //! [D3DERR]:                   https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3derr
 //! [D3DFORMAT]:                https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dformat
+//! [D3DFVF_*]:                 https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dfvf
 //! [D3DLOCK_*]:                https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dlock
 //! [D3DMULTISAMPLE_TYPE]:      https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dmultisample-type
 //! [D3DPOOL]:                  https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dpool

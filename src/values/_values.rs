@@ -6,6 +6,7 @@ mod color;                  pub use color::*;
 mod d3derr;                 pub use d3derr::*;
 mod devtype;                pub use devtype::*;
 mod format;                 pub use format::*;
+mod fvf;                    pub use fvf::*;
 mod lock;                   pub use lock::*;
 mod multi_sample_type;      pub use multi_sample_type::*;
 mod pool;                   pub use pool::*;
