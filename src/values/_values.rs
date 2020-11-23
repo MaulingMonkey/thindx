@@ -6,6 +6,7 @@ mod clip_status;            pub use clip_status::*;
 mod color;                  pub use color::*;
 mod d3derr;                 pub use d3derr::*;
 mod devtype;                pub use devtype::*;
+mod display_mode;           pub use display_mode::*;
 mod format;                 pub use format::*;
 mod fvf;                    pub use fvf::*;
 mod lock;                   pub use lock::*;
