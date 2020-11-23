@@ -30,6 +30,8 @@ impl Usage {
 
 #[allow(non_upper_case_globals)] // These are enum-like
 impl Usage {
+    pub const None                          : Usage = Usage(0);
+
     /// The resource will automatically generate mipmaps.
     /// See [Automatic Generation of Mipmaps (Direct3D 9)].
     /// Automatic generation of mipmaps is not supported for volume textures and depth stencil surfaces/textures.
