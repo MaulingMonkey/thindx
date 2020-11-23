@@ -24,6 +24,7 @@ impl D3D {
 // d3d9helper.h
 const _FACD3D : u32 = 0x876;
 #[allow(non_snake_case)] const fn MAKE_D3DHRESULT(code: u32) -> D3DERR { MAKE_HRESULT(1, _FACD3D, code) }
+#[allow(non_snake_case)] const fn MAKE_DDHRESULT(code: u32)  -> D3DERR { MAKE_HRESULT(1, _FACD3D, code) } // Yes, _FACD3D is the same
 #[allow(non_snake_case)] const fn MAKE_D3DSTATUS (code: u32) -> D3DERR { MAKE_HRESULT(0, _FACD3D, code) }
 #[allow(non_snake_case)] const fn MAKE_HRESULT(sev: u32, fac: u32, code: u32) -> D3DERR { D3DERR((sev << 31 | fac << 16 | code) as HRESULT) }
 
@@ -187,6 +188,40 @@ impl D3DERR {
 
 
 
+/// [D3DXERR_*](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxerr) constants associated with the D3DX utility library (that D3D itself might sometimes use)
+impl D3DERR {
+    // https://github.com/apitrace/dxsdk/blob/master/Include/d3dx9.h
+
+    /// The index buffer cannot be modified.
+    pub const CANNOTMODIFYINDEXBUFFER   : D3DERR = MAKE_DDHRESULT(2900);
+
+    /// The mesh is invalid.
+    pub const INVALIDMESH               : D3DERR = MAKE_DDHRESULT(2901);
+
+    /// Attribute sort (D3DXMESHOPT_ATTRSORT) is not supported as an optimization technique.
+    pub const CANNOTATTRSORT            : D3DERR = MAKE_DDHRESULT(2902);
+
+    /// Skinning is not supported.
+    pub const SKINNINGNOTSUPPORTED      : D3DERR = MAKE_DDHRESULT(2903);
+
+    /// Too many influences specified.
+    pub const TOOMANYINFLUENCES         : D3DERR = MAKE_DDHRESULT(2904);
+
+    /// The data is invalid.
+    pub const INVALIDDATA               : D3DERR = MAKE_DDHRESULT(2905);
+
+    /// The mesh has no data.
+    pub const LOADEDMESHASNODATA        : D3DERR = MAKE_DDHRESULT(2906);
+
+    /// A fragment with that name already exists.
+    pub const DUPLICATENAMEDFRAGMENT    : D3DERR = MAKE_DDHRESULT(2907);
+
+    /// The last item cannot be deleted.
+    pub const CANNOTREMOVELASTITEM      : D3DERR = MAKE_DDHRESULT(2908);
+}
+
+
+
 /// Undocumented / poorly documented semi-internal errors
 #[allow(overflowing_literals)]
 impl D3DERR {
@@ -245,6 +280,16 @@ impl D3DERR {
             #[cfg(feature = "9ex")] D3DERR::CANNOTPROTECTCONTENT        => Some(("D3DERR_CANNOTPROTECTCONTENT",         "The specified content cannot be protected.")),
             #[cfg(feature = "9ex")] D3DERR::UNSUPPORTEDCRYPTO           => Some(("D3DERR_UNSUPPORTEDCRYPTO",            "The specified cryptographic algorithm is not supported.")),
             #[cfg(feature = "9ex")] D3DERR::PRESENT_STATISTICS_DISJOINT => Some(("D3DERR_PRESENT_STATISTICS_DISJOINT",  "The present statistics have no orderly sequence.")),
+
+            D3DERR::CANNOTMODIFYINDEXBUFFER     => Some(("D3DXERR_CANNOTMODIFYINDEXBUFFER", "The index buffer cannot be modified.")),
+            D3DERR::INVALIDMESH                 => Some(("D3DXERR_INVALIDMESH",             "The mesh is invalid.")),
+            D3DERR::CANNOTATTRSORT              => Some(("D3DXERR_CANNOTATTRSORT",          "Attribute sort (D3DXMESHOPT_ATTRSORT) is not supported as an optimization technique.")),
+            D3DERR::SKINNINGNOTSUPPORTED        => Some(("D3DXERR_SKINNINGNOTSUPPORTED",    "Skinning is not supported.")),
+            D3DERR::TOOMANYINFLUENCES           => Some(("D3DXERR_TOOMANYINFLUENCES",       "Too many influences specified.")),
+            D3DERR::INVALIDDATA                 => Some(("D3DXERR_INVALIDDATA",             "The data is invalid.")),
+            D3DERR::LOADEDMESHASNODATA          => Some(("D3DXERR_LOADEDMESHASNODATA",      "The mesh has no data.")),
+            D3DERR::DUPLICATENAMEDFRAGMENT      => Some(("D3DXERR_DUPLICATENAMEDFRAGMENT",  "A fragment with that name already exists.")),
+            D3DERR::CANNOTREMOVELASTITEM        => Some(("D3DXERR_CANNOTREMOVELASTITEM",    "The last item cannot be deleted.")),
 
             D3DERR::COMMAND_UNPARSED            => Some(("D3DERR_COMMAND_UNPARSED",             "The command was unparsed.")),
 
