@@ -3,6 +3,7 @@ mod clip_status;            pub use clip_status::*;
 mod d3derr;                 pub use d3derr::*;
 mod devtype;                pub use devtype::*;
 mod format;                 pub use format::*;
+mod light_type;             pub use light_type::*;
 mod multi_sample_type;      pub use multi_sample_type::*;
 mod pool;                   pub use pool::*;
 mod primitive_type;         pub use primitive_type::*;

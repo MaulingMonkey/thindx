@@ -279,6 +279,61 @@ impl Device {
         ramp
     }
 
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getlight)\]
+    /// IDirect3DDevice9::GetLight
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]   - if no light was previously set at `index`
+    /// *   Ok([Light])
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use doc::*; let device = Device::test();
+    /// assert_eq!(D3DERR::INVALIDCALL, device.get_light(0));
+    ///
+    /// let mut light = Light::default();
+    /// light.Type = LightType::Point.into();
+    /// // ...
+    /// device.set_light(0, light).unwrap();
+    ///
+    /// let light = device.get_light(0).unwrap();
+    /// ```
+    pub fn get_light(&self, index: u32) -> Result<Light, MethodError> {
+        let mut light = Light::default();
+        let hr = unsafe { self.0.GetLight(index, &mut *light) };
+        MethodError::check("IDirect3DDevice9::GetLight", hr)?;
+        Ok(light)
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getlightenable)
+    /// IDirect3DDevice9::GetLightEnable
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]       If the light was never explicitly previously enabled or disabled
+    /// *   [D3DERR::INVALIDCALL]       The device is a pure device?
+    /// *   Ok(`true`)                  The light is enabled
+    /// *   Ok(`false`)                 The light is disabled
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use doc::*; let device = Device::test();
+    /// assert_eq!(D3DERR::INVALIDCALL, device.get_light_enable(0));
+    ///
+    /// device.light_enable(0, false).unwrap();
+    ///
+    /// let enabled0 = device.get_light_enable(0).unwrap();
+    /// assert_eq!(enabled0, false);
+    /// ```
+    pub fn get_light_enable(&self, index: u32) -> Result<bool, MethodError> {
+        let mut enable = 0;
+        let hr = unsafe { self.0.GetLightEnable(index, &mut enable) };
+        MethodError::check("IDirect3DDevice9::GetLightEnable", hr)?;
+        Ok(enable != 0)
+    }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setfvf)\]
     /// IDirect3DDevice9::SetFVF
@@ -328,6 +383,53 @@ impl Device {
     /// [Gamma (Direct3D 9)]:           https://docs.microsoft.com/en-us/windows/desktop/direct3d9/gamma
     pub fn set_gamma_ramp(&self, swap_chain: u32, flags: impl Into<SGR>, ramp: &D3DGAMMARAMP) {
         let _nohr : () = unsafe { self.0.SetGammaRamp(swap_chain, flags.into().into(), ramp) };
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setlight)\]
+    /// IDirect3DDevice9::SetLight
+    ///
+    /// Assigns a set of lighting properties for this device.
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]
+    /// *   Ok(`()`)
+    ///
+    /// ### Example
+    ///
+    /// ```rust,no_run
+    /// # use doc::*; let device = Device::test();
+    /// let mut light = Light::default();
+    /// light.Type = LightType::Point.into();
+    /// // ...
+    /// device.set_light(0, light).unwrap();
+    /// ```
+    pub fn set_light(&self, index: u32, light: impl Into<Light>) -> Result<(), MethodError> {
+        let light = light.into();
+        let hr = unsafe { self.0.SetLight(index, &*light) };
+        MethodError::check("IDirect3DDevice9::SetLight", hr)
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-lightenable)\]
+    /// IDirect3DDevice9::LightEnable
+    ///
+    /// Enables or disables a set of lighting parameters within a device.
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]
+    /// *   Ok(`()`)
+    ///
+    /// ### Example
+    ///
+    /// ```rust,no_run
+    /// # use doc::*; let device = Device::test();
+    /// device.light_enable(0, true).unwrap();
+    /// device.light_enable(0, false).unwrap();
+    /// ```
+    pub fn light_enable(&self, index: u32, enable: bool) -> Result<(), MethodError> {
+        let hr = unsafe { self.0.LightEnable(index, enable.into()) };
+        MethodError::check("IDirect3DDevice9::LightEnable", hr)
     }
 }
 
