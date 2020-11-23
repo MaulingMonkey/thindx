@@ -2,7 +2,7 @@
 
 use crate::*;
 
-use winapi::shared::d3d9types::D3DCLIPSTATUS9;
+use winapi::shared::d3d9types::*;
 
 
 
@@ -120,6 +120,22 @@ impl Device {
         MethodError::check("IDirect3DDevice9::GetClipStatus", hr)?;
         Ok(ClipStatus::from_unchecked(status))
     }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getcreationparameters)\]
+    /// IDirect3DDevice9::GetCreationParameters
+    ///
+    /// Retrieves the creation parameters of the device.
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]   "if the returned argument is invalid" (impossible via thin3d9?)
+    /// *   Ok(())
+    pub fn get_creation_parameters(&self) -> Result<D3DDEVICE_CREATION_PARAMETERS, MethodError> {
+        let mut dcp = unsafe { std::mem::zeroed::<D3DDEVICE_CREATION_PARAMETERS>() };
+        let hr = unsafe { self.0.GetCreationParameters(&mut dcp) };
+        MethodError::check("IDirect3DDevice9::GetCreationParameters", hr)?;
+        Ok(dcp)
+    }
 }
 
 #[test] fn evict_managed_resources() {
@@ -144,4 +160,9 @@ impl Device {
 #[test] fn get_clip_status() {
     let device = Device::test();
     let _status = device.get_clip_status().unwrap(); // never fails?
+}
+
+#[test] fn get_creation_parameters() {
+    let device = Device::test();
+    let _dcp = device.get_creation_parameters().unwrap(); // never fails?
 }
