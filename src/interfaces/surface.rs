@@ -14,7 +14,7 @@ use std::ptr::{null, null_mut};
 /// (extends [Resource])
 /// A dense 2-dimensional region of data, often belonging to a [Texture]
 #[derive(Clone)] #[repr(transparent)]
-pub struct Surface(pub(super) mcom::Rc<winapi::shared::d3d9::IDirect3DSurface9>);
+pub struct Surface(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DSurface9>);
 
 
 

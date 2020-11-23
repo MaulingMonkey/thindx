@@ -10,25 +10,25 @@ use std::ptr::{null_mut};
 /// (extends [Resource])
 /// [Texture], [CubeTexture], or [VolumeTexture]
 #[derive(Clone)] #[repr(transparent)]
-pub struct BaseTexture(pub(super) mcom::Rc<winapi::shared::d3d9::IDirect3DBaseTexture9>);
+pub struct BaseTexture(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DBaseTexture9>);
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dcubetexture9)\]
 /// (extends [BaseTexture])
 /// 6-faced 2D texture for use with [cube mapping](https://en.wikipedia.org/wiki/Cube_mapping)
 #[derive(Clone)] #[repr(transparent)]
-pub struct CubeTexture(pub(super) mcom::Rc<winapi::shared::d3d9::IDirect3DCubeTexture9>);
+pub struct CubeTexture(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DCubeTexture9>);
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dtexture9)\]
 /// (extends [BaseTexture])
 /// A dense 2-dimensional set of "pixels"
 #[derive(Clone)] #[repr(transparent)]
-pub struct Texture(pub(super) mcom::Rc<winapi::shared::d3d9::IDirect3DTexture9>);
+pub struct Texture(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DTexture9>);
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dvolumetexture9)\]
 /// (extends [BaseTexture])
 /// A dense 3-dimensional set of "pixels"
 #[derive(Clone)] #[repr(transparent)]
-pub struct VolumeTexture(pub(super) mcom::Rc<winapi::shared::d3d9::IDirect3DVolumeTexture9>);
+pub struct VolumeTexture(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DVolumeTexture9>);
 
 
 

@@ -8,12 +8,12 @@ use std::ptr::null_mut;
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dpixelshader9)\]
 /// A [pixel/fragment shader](https://en.wikipedia.org/wiki/Shader#Pixel_shaders) is a GPU program, run on rasterized fragments.
 #[derive(Clone)] #[repr(transparent)]
-pub struct PixelShader(pub(super) mcom::Rc<winapi::shared::d3d9::IDirect3DPixelShader9>);
+pub struct PixelShader(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DPixelShader9>);
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dvertexshader9)\]
 /// A [vertex shader](https://en.wikipedia.org/wiki/Shader#Vertex_shaders) transforms mesh verticies when rendering.
 #[derive(Clone)] #[repr(transparent)]
-pub struct VertexShader(pub(super) mcom::Rc<winapi::shared::d3d9::IDirect3DVertexShader9>);
+pub struct VertexShader(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DVertexShader9>);
 
 
 

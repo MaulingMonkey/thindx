@@ -18,7 +18,7 @@ type ModeIndex      = u32;
 /// Microsoft's documentation claims that several APIs return [D3DERR::NOTAVAILABLE] when, in my testing, they return [D3DERR::INVALIDCALL] instead.
 /// Do not trust the greyed out, crossed out, air quoted documentation <span class="inaccurate">like this</span>!
 #[derive(Clone)] #[repr(transparent)]
-pub struct Direct3D(pub(super) mcom::Rc<winapi::shared::d3d9::IDirect3D9>);
+pub struct Direct3D(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3D9>);
 
 
 

@@ -9,7 +9,7 @@ use std::ptr::null_mut;
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dquery9)\]
 /// An asyncronous GPU query for [occlusion or other information](https://docs.microsoft.com/en-us/windows/win32/direct3d9/queries).
 #[derive(Clone)] #[repr(transparent)]
-pub struct Query(pub(super) mcom::Rc<winapi::shared::d3d9::IDirect3DQuery9>);
+pub struct Query(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DQuery9>);
 
 
 

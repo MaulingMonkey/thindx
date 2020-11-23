@@ -11,7 +11,7 @@ use std::ptr::null_mut;
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dvertexdeclaration9)\]
 /// Describes the layout of the contents of a [VertexBuffer]
 #[derive(Clone)] #[repr(transparent)]
-pub struct VertexDeclaration(pub(super) mcom::Rc<winapi::shared::d3d9::IDirect3DVertexDeclaration9>);
+pub struct VertexDeclaration(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DVertexDeclaration9>);
 
 
 

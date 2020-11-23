@@ -11,14 +11,14 @@ use std::ptr::null_mut;
 /// An [index buffer](https://docs.microsoft.com/en-us/windows/win32/direct3d9/rendering-from-vertex-and-index-buffers#scenario-2-drawing-two-triangles-with-indexing)
 /// indexes verticies in a [VertexBuffer] when rendering.
 #[derive(Clone)] #[repr(transparent)]
-pub struct IndexBuffer(pub(super) mcom::Rc<winapi::shared::d3d9::IDirect3DIndexBuffer9>);
+pub struct IndexBuffer(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DIndexBuffer9>);
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dvertexbuffer9)\]
 /// (extends [Resource])
 /// A [vertex buffer](https://docs.microsoft.com/en-us/windows/win32/direct3d9/rendering-from-vertex-and-index-buffers#scenario-2-drawing-two-triangles-with-indexing)
 /// typically contains points of a mesh to be rendered.
 #[derive(Clone)] #[repr(transparent)]
-pub struct VertexBuffer(pub(super) mcom::Rc<winapi::shared::d3d9::IDirect3DVertexBuffer9>);
+pub struct VertexBuffer(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DVertexBuffer9>);
 
 
 

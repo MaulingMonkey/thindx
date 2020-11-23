@@ -10,7 +10,7 @@ use std::ptr::null_mut;
 /// Used to [capture/save and restore](https://docs.microsoft.com/en-us/windows/win32/direct3d9/state-blocks-save-and-restore-state)
 /// changes to [Device] state.
 #[derive(Clone)] #[repr(transparent)]
-pub struct StateBlock(pub(super) mcom::Rc<winapi::shared::d3d9::IDirect3DStateBlock9>);
+pub struct StateBlock(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DStateBlock9>);
 
 
 
