@@ -356,6 +356,25 @@ impl Device {
         Ok(material)
     }
 
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getnpatchmode)\]
+    /// IDirect3DDevice9::GetNPatchMode
+    ///
+    /// Gets the N-patch mode segments.
+    ///
+    /// Specifies the number of subdivision segments.
+    /// If the number of segments is less than 1.0, N-patches are disabled.
+    /// The default value is 0.0.
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use doc::*; let device = Device::test();
+    /// assert_eq!(device.get_npatch_mode(), 0.0);
+    /// ```
+    pub fn get_npatch_mode(&self) -> f32 {
+        unsafe { self.0.GetNPatchMode() }
+    }
+
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setfvf)\]
     /// IDirect3DDevice9::SetFVF
     ///
@@ -474,6 +493,26 @@ impl Device {
     pub fn set_material(&self, material: impl Into<Material>) -> Result<(), MethodError> {
         let hr = unsafe { self.0.SetMaterial(&*material.into()) };
         MethodError::check("IDirect3DDevice9::SetMaterial", hr)
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getnpatchmode)\]
+    /// IDirect3DDevice9::SetNPatchMode
+    ///
+    /// Specifies the number of subdivision segments.
+    /// If the number of segments is less than 1.0, N-patches are disabled.
+    /// The default value is 0.0.
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use doc::*; let device = Device::test();
+    /// device.set_npatch_mode(0.0).unwrap();
+    /// device.set_npatch_mode(1.0).unwrap();
+    /// device.set_npatch_mode(9001.0).unwrap();
+    /// ```
+    pub fn set_npatch_mode(&self, mode: f32) -> Result<(), MethodError> {
+        let hr = unsafe { self.0.SetNPatchMode(mode) };
+        MethodError::check("IDirect3DDevice9::SetNPatchMode", hr)
     }
 }
 
