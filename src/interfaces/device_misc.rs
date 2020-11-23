@@ -4,6 +4,8 @@ use crate::*;
 
 use winapi::shared::d3d9types::*;
 
+use std::ptr::null_mut;
+
 
 
 /// # Miscellanious
@@ -177,6 +179,27 @@ impl Device {
         let hr = unsafe { self.0.GetDeviceCaps(&mut *caps) };
         MethodError::check("IDirect3DDevice9::GetDeviceCaps", hr)?;
         Ok(caps)
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getdirect3d)\]
+    /// IDirect3DDevice9::GetDirect3D
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]       "If the method fails" (impossible via thin3d9?)
+    /// *   Ok([Direct3D])              otherwise
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use doc::*; let device = Device::test();
+    /// let d3d : Direct3D = device.get_direct3d().unwrap();
+    /// ```
+    pub fn get_direct3d(&self) -> Result<Direct3D, MethodError> {
+        let mut d3d = null_mut();
+        let hr = unsafe { self.0.GetDirect3D(&mut d3d) };
+        MethodError::check("IDirect3DDevice9::GetDirect3D", hr)?;
+        Ok(unsafe { Direct3D::from_raw(d3d) })
     }
 }
 
