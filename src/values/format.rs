@@ -143,9 +143,12 @@ impl Format {
 
 }
 
+#[allow(non_upper_case_globals)] // enum-like
 impl Format {
     /// Surface format is unknown
     pub const UNKNOWN               : Format = Format(D3DFMT_UNKNOWN);
+    pub const Unknown               : Format = Format::UNKNOWN;
+
     pub const R8G8B8                : Format = Format(D3DFMT_R8G8B8);
     pub const A8R8G8B8              : Format = Format(D3DFMT_A8R8G8B8);
     pub const X8R8G8B8              : Format = Format(D3DFMT_X8R8G8B8);
@@ -209,6 +212,9 @@ impl Format {
     pub const VERTEXDATA            : Format = Format(D3DFMT_VERTEXDATA);
     pub const INDEX16               : Format = Format(D3DFMT_INDEX16);
     pub const INDEX32               : Format = Format(D3DFMT_INDEX32);
+    pub const VertexData            : Format = Format::VERTEXDATA;
+    pub const Index16               : Format = Format::INDEX16;
+    pub const Index32               : Format = Format::INDEX32;
 
     pub const Q16W16V16U16          : Format = Format(D3DFMT_Q16W16V16U16);
 
@@ -233,6 +239,7 @@ impl Format {
 
     /// Binary format indicating that the data has no inherent type.
     #[cfg(feature = "9ex")] pub const BINARYBUFFER          : Format = Format(D3DFMT_BINARYBUFFER);
+    #[cfg(feature = "9ex")] pub const BinaryBuffer          : Format = Format::BINARYBUFFER;
 }
 
 impl Format {
