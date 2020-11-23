@@ -291,7 +291,9 @@ impl Device {
     ///
     /// ```rust
     /// # use doc::*; let device = Device::test();
-    /// assert_eq!(D3DERR::INVALIDCALL, device.get_light(0));
+    /// for light in [0, 1, 100, 10000, 1000000, !0].iter().copied() {
+    ///     assert_eq!(D3DERR::INVALIDCALL, device.get_light(light));
+    /// }
     ///
     /// let mut light = Light::default();
     /// light.Type = LightType::Point.into();
@@ -299,10 +301,13 @@ impl Device {
     /// device.set_light(0, light).unwrap();
     ///
     /// let light = device.get_light(0).unwrap();
+    /// for light in [1, 100, 10000, 1000000, !0].iter().copied() {
+    ///     assert_eq!(D3DERR::INVALIDCALL, device.get_light(light));
+    /// }
     /// ```
     pub fn get_light(&self, index: u32) -> Result<Light, MethodError> {
         let mut light = Light::default();
-        let hr = unsafe { self.0.GetLight(index, &mut *light) };
+        let hr = unsafe { self.0.GetLight(index.into(), &mut *light) };
         MethodError::check("IDirect3DDevice9::GetLight", hr)?;
         Ok(light)
     }
@@ -321,12 +326,17 @@ impl Device {
     ///
     /// ```rust
     /// # use doc::*; let device = Device::test();
-    /// assert_eq!(D3DERR::INVALIDCALL, device.get_light_enable(0));
+    /// for light in [0, 1, 100, 10000, 1000000, !0].iter().copied() {
+    ///     assert_eq!(D3DERR::INVALIDCALL, device.get_light_enable(light));
+    /// }
     ///
     /// device.light_enable(0, false).unwrap();
     ///
     /// let enabled0 = device.get_light_enable(0).unwrap();
     /// assert_eq!(enabled0, false);
+    /// for light in [1, 100, 10000, 1000000, !0].iter().copied() {
+    ///     assert_eq!(D3DERR::INVALIDCALL, device.get_light_enable(light));
+    /// }
     /// ```
     pub fn get_light_enable(&self, index: u32) -> Result<bool, MethodError> {
         let mut enable = 0;
@@ -471,23 +481,71 @@ impl Device {
     ///
     /// Assigns a set of lighting properties for this device.
     ///
+    /// Avoids unsoundness by limiting the `index` to [u16], instead of accepting [u32] like the underlying API does.
+    ///
     /// ### Returns
     ///
-    /// *   [D3DERR::INVALIDCALL]
     /// *   Ok(`()`)
     ///
     /// ### Example
     ///
-    /// ```rust,no_run
+    /// ```rust
     /// # use doc::*; let device = Device::test();
     /// let mut light = Light::default();
     /// light.Type = LightType::Point.into();
     /// // ...
-    /// device.set_light(0, light).unwrap();
+    /// device.set_light(0,  light).unwrap(); // Ok
+    /// device.set_light(1,  light).unwrap(); // Ok
+    /// device.set_light(!0, light).unwrap(); // Ok (16-bit)
     /// ```
-    pub fn set_light(&self, index: u32, light: impl Into<Light>) -> Result<(), MethodError> {
+    pub fn set_light(&self, index: u16, light: impl Into<Light>) -> Result<(), MethodError> {
+        // Safe: `index` max == `u16::MAX` == `0xFFFF`, well bellow when GArrayT starts buffer overflowing (`0x1000_0000 - 8`)
+        unsafe { self.set_light_unchecked(index.into(), light.into()) }
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setlight)\]
+    /// IDirect3DDevice9::SetLight
+    ///
+    /// Assigns a set of lighting properties for this device.
+    ///
+    /// ### Safety
+    ///
+    /// *   This will buffer overflow and crash (or worse!) if `index` >= `0x1000_0000 - 8` on some systems:
+    ///     ```text
+    ///     d3d9.dll!CHandle::CHandle(void)
+    ///     d3d9.dll!`eh vector constructor iterator'(void *,unsigned __int64,int,void (*)(void *),void (*)(void *))
+    ///     d3d9.dll!GArrayT<struct CHandle>::AllocArray(unsigned long)
+    ///     d3d9.dll!GArrayT<CHandle>::Grow()
+    ///     d3d9.dll!CD3DHal::SetLightI()
+    ///     d3d9.dll!CD3DBase::SetLight()
+    ///     ```
+    ///     It appears that some array of 16-byte structures (`CHandle`s?) + header size overflows a 32-bit size.
+    ///     This successfully allocates, and then is copied into, resulting in a buffer overflow.
+    /// *   Other, smaller sizes may also crash on other system I haven't tested.
+    /// *   Prefer [set_light] (limits the index to [u16], and is thus 100% infalliable.)
+    ///
+    /// [set_light]:                #fn.set_light
+    ///
+    /// ### Returns
+    ///
+    /// *   Ok(`()`)
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use doc::*; let device = Device::test();
+    /// let mut light = Light::default();
+    /// light.Type = LightType::Point.into();
+    /// // ...
+    /// unsafe {
+    ///     device.set_light_unchecked(0, light).unwrap(); // Ok
+    ///     device.set_light_unchecked(1, light).unwrap(); // Ok
+    ///     // device.set_light_unchecked(!0, light).unwrap(); // XXX: Buffer overflow, crash, or worse!
+    /// }
+    /// ```
+    pub unsafe fn set_light_unchecked(&self, index: u32, light: impl Into<Light>) -> Result<(), MethodError> {
         let light = light.into();
-        let hr = unsafe { self.0.SetLight(index, &*light) };
+        let hr = self.0.SetLight(index, &*light);
         MethodError::check("IDirect3DDevice9::SetLight", hr)
     }
 
@@ -496,20 +554,66 @@ impl Device {
     ///
     /// Enables or disables a set of lighting parameters within a device.
     ///
+    /// Avoids unsoundness by limiting the `index` to [u16], instead of accepting [u32] like the underlying API does.
+    ///
     /// ### Returns
     ///
-    /// *   [D3DERR::INVALIDCALL]
+    /// *   <span class="inaccurate">[D3DERR::INVALIDCALL]</span>
     /// *   Ok(`()`)
     ///
     /// ### Example
     ///
-    /// ```rust,no_run
+    /// ```rust
     /// # use doc::*; let device = Device::test();
-    /// device.light_enable(0, true).unwrap();
-    /// device.light_enable(0, false).unwrap();
+    /// device.light_enable(0,  true).unwrap(); // Ok
+    /// device.light_enable(1,  true).unwrap(); // Ok
+    /// device.light_enable(!0, true).unwrap(); // Ok (16-bit)
     /// ```
-    pub fn light_enable(&self, index: u32, enable: bool) -> Result<(), MethodError> {
-        let hr = unsafe { self.0.LightEnable(index, enable.into()) };
+    pub fn light_enable(&self, index: u16, enable: bool) -> Result<(), MethodError> {
+        // Safe: `index` max == `u16::MAX` == `0xFFFF`, well bellow when GArrayT starts buffer overflowing (`0x1000_0000 - 8`)
+        unsafe { self.light_enable_unchecked(index.into(), enable) }
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-lightenable)\]
+    /// IDirect3DDevice9::LightEnable
+    ///
+    /// Enables or disables a set of lighting parameters within a device.
+    ///
+    /// ### Safety
+    ///
+    /// *   This will buffer overflow and crash (or worse!) if `index` >= `0x1000_0000 - 8` on some systems:
+    ///     ```text
+    ///     d3d9.dll!CHandle::CHandle(void)
+    ///     d3d9.dll!`eh vector constructor iterator'(void *,unsigned __int64,int,void (*)(void *),void (*)(void *))
+    ///     d3d9.dll!GArrayT<struct CHandle>::AllocArray(unsigned long)
+    ///     d3d9.dll!GArrayT<CHandle>::Grow()
+    ///     d3d9.dll!CD3DHal::SetLightI()
+    ///     d3d9.dll!CD3DBase::SetLight()
+    ///     ```
+    ///     It appears that some array of 16-byte structures (`CHandle`s?) + header size overflows a 32-bit size.
+    ///     This successfully allocates, and then is copied into, resulting in a buffer overflow.
+    /// *   Other, smaller sizes may also crash on other system I haven't tested.
+    /// *   Prefer [light_enable] (limits the index to [u16], and is thus 100% infalliable.)
+    ///
+    /// [light_enable]:                #fn.light_enable
+    ///
+    /// ### Returns
+    ///
+    /// *   <span class="inaccurate">[D3DERR::INVALIDCALL]</span>
+    /// *   Ok(`()`)
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use doc::*; let device = Device::test();
+    /// unsafe {
+    ///     device.light_enable_unchecked(0, true).unwrap();
+    ///     device.light_enable_unchecked(0, false).unwrap();
+    ///     // device.light_enable_unchecked(!0, true).unwrap(); // XXX: Buffer overflow, crash, or worse!
+    /// }
+    /// ```
+    pub unsafe fn light_enable_unchecked(&self, index: u32, enable: bool) -> Result<(), MethodError> {
+        let hr = self.0.LightEnable(index, enable.into());
         MethodError::check("IDirect3DDevice9::LightEnable", hr)
     }
 
