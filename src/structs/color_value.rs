@@ -2,7 +2,6 @@ use crate::*;
 
 use winapi::shared::d3d9types::*;
 
-use std::fmt::{self, Debug, Formatter};
 use std::ops::{Deref, DerefMut};
 
 
@@ -11,44 +10,59 @@ use std::ops::{Deref, DerefMut};
 /// D3DCOLORVALUE
 ///
 /// Describes color values.
-#[derive(Clone, Copy)]
-#[repr(transparent)] pub struct ColorValue(D3DCOLORVALUE);
+///
+/// You can set the members of this structure to values outside the range of 0 through 1 to implement some unusual effects.
+/// Values greater than 1 produce strong lights that tend to wash out a scene.
+/// Negative values produce dark lights that actually remove light from a scene.
+#[derive(Clone, Copy, Debug, Default)]
+#[repr(C)] pub struct ColorValue {
+    /// Floating-point value that specifies the <span style="color: red">red</span> component of a color.
+    /// This value generally is in the range from 0.0 through 1.0.
+    /// A value of 0.0 indicates the complete absence of the red component, while a value of 1.0 indicates that red is fully present.
+    pub r: f32,
+
+    /// Floating-point value that specifies the <span style="color: green">green</span> component of a color.
+    /// This value generally is in the range from 0.0 through 1.0.
+    /// A value of 0.0 indicates the complete absence of the green component, while a value of 1.0 indicates that green is fully present.
+    pub g: f32,
+
+    /// Floating-point value that specifies the <span style="color: blue">blue</span> component of a color.
+    /// This value generally is in the range from 0.0 through 1.0.
+    /// A value of 0.0 indicates the complete absence of the blue component, while a value of 1.0 indicates that blue is fully present.
+    pub b: f32,
+
+    /// Floating-point value that specifies the alpha component of a color.
+    /// This value generally is in the range from 0.0 through 1.0.
+    /// A value of 0.0 indicates fully transparent, while a value of 1.0 indicates fully opaque.
+    pub a: f32,
+}
 
 impl ColorValue {
-    pub fn red(&self) -> f32 { self.0.r }
-    pub fn green(&self) -> f32 { self.0.g }
-    pub fn blue(&self) -> f32 { self.0.b }
-    pub fn alpha(&self) -> f32 { self.0.a }
+    pub fn red(&self) -> f32 { self.r }
+    pub fn green(&self) -> f32 { self.g }
+    pub fn blue(&self) -> f32 { self.b }
+    pub fn alpha(&self) -> f32 { self.a }
 }
 
-impl Default for ColorValue {
-    fn default() -> Self { Self(D3DCOLORVALUE { r: 0.0, g: 0.0, b: 0.0, a: 0.0 }) }
-}
+impl Deref    for ColorValue { fn deref    (&    self) -> &    Self::Target { unsafe { std::mem::transmute(self) } } type Target = D3DCOLORVALUE; }
+impl DerefMut for ColorValue { fn deref_mut(&mut self) -> &mut Self::Target { unsafe { std::mem::transmute(self) } } }
+impl From<D3DCOLORVALUE> for ColorValue { fn from(value: D3DCOLORVALUE) -> Self { unsafe { std::mem::transmute(value) } } }
+impl From<ColorValue> for D3DCOLORVALUE { fn from(value: ColorValue   ) -> Self { unsafe { std::mem::transmute(value) } } }
 
-impl Deref for ColorValue {
-    type Target = D3DCOLORVALUE;
-    fn deref(&self) -> &Self::Target { &self.0 }
-}
+#[test] fn layout() {
+    let thin = ColorValue::default();
+    let d3d  = unsafe { std::mem::zeroed::<D3DCOLORVALUE>() };
 
-impl DerefMut for ColorValue {
-    fn deref_mut(&mut self) -> &mut Self::Target { &mut self.0 }
-}
+    assert_eq!(std::mem::size_of_val (&thin), std::mem::size_of_val (&d3d));
+    assert_eq!(std::mem::align_of_val(&thin), std::mem::align_of_val(&d3d));
+    assert_eq!(offset(&thin, &thin.r), offset(&d3d, &d3d.r));
+    assert_eq!(offset(&thin, &thin.g), offset(&d3d, &d3d.g));
+    assert_eq!(offset(&thin, &thin.b), offset(&d3d, &d3d.b));
+    assert_eq!(offset(&thin, &thin.a), offset(&d3d, &d3d.a));
 
-impl Debug for ColorValue {
-    fn fmt(&self, f: &mut Formatter) -> fmt::Result {
-        f.debug_struct("ColorValue")
-            .field("r", &self.0.r)
-            .field("g", &self.0.g)
-            .field("b", &self.0.b)
-            .field("a", &self.0.a)
-            .finish()
+    fn offset<S, F>(s: &S, f: &F) -> usize {
+        let s : *const S = s;
+        let f : *const F = f;
+        (f as usize) - (s as usize)
     }
-}
-
-impl From<D3DCOLORVALUE> for ColorValue {
-    fn from(value: D3DCOLORVALUE) -> Self { Self(value) }
-}
-
-impl From<ColorValue> for D3DCOLORVALUE {
-    fn from(value: ColorValue) -> Self { value.0 }
 }
