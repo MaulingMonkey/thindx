@@ -93,6 +93,15 @@ impl Default for FVF {
     fn default() -> Self { FVF(0) }
 }
 
+impl Deref for FVF {
+    type Target = D3DFVF;
+    fn deref(&self) -> &Self::Target { &self.0 }
+}
+
+impl DerefMut for FVF {
+    fn deref_mut(&mut self) -> &mut Self::Target { &mut self.0 }
+}
+
 impl From<FVF> for D3DFVF {
     fn from(value: FVF) -> Self { value.0 }
 }
