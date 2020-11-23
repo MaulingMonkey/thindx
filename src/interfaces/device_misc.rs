@@ -152,6 +152,32 @@ impl Device {
         MethodError::check("IDirect3DDevice9::GetCurrentTexturePalette", hr)?;
         Ok(pal)
     }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getdevicecaps)\]
+    /// IDirect3DDevice9::GetDeviceCaps
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]       "If the method fails" (impossible via thin3d9?)
+    /// *   Ok([Caps])                  otherwise
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use doc::*; let device = Device::test();
+    /// let caps : Caps = device.get_device_caps().unwrap();
+    /// assert_eq!(caps.DeviceType,     DevType::HAL.into());
+    /// assert_eq!(caps.AdapterOrdinal, 0);
+    /// assert!(caps.MaxTextureWidth  > 0);
+    /// assert!(caps.MaxTextureHeight > 0);
+    /// // ...
+    /// ```
+    pub fn get_device_caps(&self) -> Result<Caps, MethodError> {
+        let mut caps = Caps::default();
+        let hr = unsafe { self.0.GetDeviceCaps(&mut *caps) };
+        MethodError::check("IDirect3DDevice9::GetDeviceCaps", hr)?;
+        Ok(caps)
+    }
 }
 
 #[test] fn evict_managed_resources() {
