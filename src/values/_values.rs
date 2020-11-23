@@ -1,5 +1,6 @@
 mod adapter_identifier;     pub use adapter_identifier::*;
 mod back_buffer_type;       pub use back_buffer_type::*;
+mod bool32_;                pub use bool32_::*;
 mod caps;                   pub use caps::*;
 mod clip_status;            pub use clip_status::*;
 mod color;                  pub use color::*;

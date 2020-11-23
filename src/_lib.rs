@@ -51,6 +51,7 @@
 //!
 //! | `thin3d9` type                            | docs.microsoft.com        | description   |
 //! | ----------------------------------------- | ------------------------- | ------------- |
+//! | [bool32]                                  | [BOOL]                    | 32-bit boolean type that's ABI-compatible with Win32's [BOOL]
 //! | [AdapterIdentifier]                       | [D3DADAPTER_IDENTIFIER9]  | Adapter metadata (driver, description, driver version, vendor/device ids, ...)
 //! | [Caps]                                    | [D3DCAPS9]                | Adapter/device capabilities and limitations
 //! | [Color]                                   | [D3DCOLOR]                | 0xAA<span style="color: red">RR</span><span style="color: green">GG</span><span style="color: blue">BB</span> style 32-bit color
@@ -104,6 +105,7 @@
 //! | `impl-from-unchecked` | Implement [From]\<[D3DFORMAT]\> for [Format] and similar traits.<br>While these should generally be sound, and may ease porting (e.g. they'll allow using `D3DFMT_UNKNOWN` instead of [Format::UNKNOWN]), they'll also ease authoring bugs (e.g. they'll allow using `9001` for an [Into]\<[Format]\> parameter as well.)
 //!
 //!
+//! [BOOL]:                     https://docs.microsoft.com/en-us/windows/win32/winprog/windows-data-types#BOOL
 //! [Direct3D9]:                https://docs.microsoft.com/en-us/windows/win32/api/d3d9/
 //! [D3DADAPTER_IDENTIFIER9]:   https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dadapter-identifier9
 //! [D3DCAPS9]:                 https://docs.microsoft.com/en-us/windows/win32/api/d3d9caps/ns-d3d9caps-d3dcaps9

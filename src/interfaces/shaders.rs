@@ -1,5 +1,6 @@
 use crate::*;
 
+use std::convert::*;
 use std::ptr::null_mut;
 
 
@@ -133,6 +134,178 @@ impl Device {
         let hr = unsafe { self.0.GetVertexShader(&mut shader) };
         MethodError::check("IDirect3DDevice9::GetVertexShader", hr)?;
         Ok(unsafe { VertexShader::from_raw(shader) })
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setpixelshaderconstantb)\]
+    /// IDirect3DDevice9::SetPixelShaderConstantB
+    ///
+    /// Sets boolean shader constants.
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]       If `constant_data.len()` > `u32::MAX`
+    /// *   [D3DERR::INVALIDCALL]       If `start_register + constant_data.len()` > max boolean registers?
+    /// *   Ok(())
+    pub fn set_pixel_shader_constant_b(&self, start_register: u32, constant_data: &[bool32]) -> Result<(), MethodError> {
+        let n : u32 = constant_data.len().try_into().map_err(|_| MethodError("Device::set_pixel_shader_constant_b", D3DERR::INVALIDCALL))?;
+        let hr = unsafe { self.0.SetPixelShaderConstantB(start_register, constant_data.as_ptr().cast(), n) };
+        MethodError::check("IDirect3DDevice9::SetPixelShaderConstantB", hr)
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setpixelshaderconstantf)\]
+    /// IDirect3DDevice9::SetPixelShaderConstantF
+    ///
+    /// Sets floating-point shader constants.
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]       If `constant_data.len() / 4` > `u32::MAX`
+    /// *   [D3DERR::INVALIDCALL]       If `constant_data.len() % 4` != `0` (not a multiple of vectors)
+    /// *   [D3DERR::INVALIDCALL]       If `start_register + constant_data.len()/4` > max floating point vector registers?
+    /// *   Ok(())
+    pub fn set_pixel_shader_constant_f(&self, start_register: u32, constant_data: &[f32]) -> Result<(), MethodError> {
+        let n = constant_data.len();
+        if (n % 4) != 0 { return Err(MethodError("Device::set_pixel_shader_constant_f", D3DERR::INVALIDCALL)); }
+        let n : u32 = (n/4).try_into().map_err(|_| MethodError("Device::set_pixel_shader_constant_f", D3DERR::INVALIDCALL))?;
+        let hr = unsafe { self.0.SetPixelShaderConstantF(start_register, constant_data.as_ptr(), n) };
+        MethodError::check("IDirect3DDevice9::SetPixelShaderConstantF", hr)
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setpixelshaderconstantf)\]
+    /// IDirect3DDevice9::SetPixelShaderConstantF
+    ///
+    /// Sets floating-point shader constants.
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]       If `constant_data.len()` > `u32::MAX`
+    /// *   [D3DERR::INVALIDCALL]       If `start_register + constant_data.len()` > max floating point vector registers?
+    /// *   Ok(())
+    pub fn set_pixel_shader_constant_fv(&self, start_register: u32, constant_data: &[[f32; 4]]) -> Result<(), MethodError> {
+        let n : u32 = constant_data.len().try_into().map_err(|_| MethodError("Device::set_pixel_shader_constant_fv", D3DERR::INVALIDCALL))?;
+        let hr = unsafe { self.0.SetPixelShaderConstantF(start_register, constant_data.as_ptr().cast(), n) };
+        MethodError::check("IDirect3DDevice9::SetPixelShaderConstantF", hr)
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setpixelshaderconstanti)\]
+    /// IDirect3DDevice9::SetPixelShaderConstantI
+    ///
+    /// Sets integer shader constants.
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]       If `constant_data.len() / 4` > `u32::MAX`
+    /// *   [D3DERR::INVALIDCALL]       If `constant_data.len() % 4` != `0` (not a multiple of vectors)
+    /// *   [D3DERR::INVALIDCALL]       If `start_register + constant_data.len()/4` > max floating point vector registers?
+    /// *   Ok(())
+    pub fn set_pixel_shader_constant_i(&self, start_register: u32, constant_data: &[i32]) -> Result<(), MethodError> {
+        let n = constant_data.len();
+        if (n % 4) != 0 { return Err(MethodError("Device::set_pixel_shader_constant_i", D3DERR::INVALIDCALL)); }
+        let n : u32 = (n/4).try_into().map_err(|_| MethodError("Device::set_pixel_shader_constant_i", D3DERR::INVALIDCALL))?;
+        let hr = unsafe { self.0.SetPixelShaderConstantI(start_register, constant_data.as_ptr(), n) };
+        MethodError::check("IDirect3DDevice9::SetPixelShaderConstantI", hr)
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setpixelshaderconstanti)\]
+    /// IDirect3DDevice9::SetPixelShaderConstantI
+    ///
+    /// Sets integer shader constants.
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]       If `constant_data.len()` > `u32::MAX`
+    /// *   [D3DERR::INVALIDCALL]       If `start_register + constant_data.len()` > max floating point vector registers?
+    /// *   Ok(())
+    pub fn set_pixel_shader_constant_iv(&self, start_register: u32, constant_data: &[[i32; 4]]) -> Result<(), MethodError> {
+        let n : u32 = constant_data.len().try_into().map_err(|_| MethodError("Device::set_pixel_shader_constant_iv", D3DERR::INVALIDCALL))?;
+        let hr = unsafe { self.0.SetPixelShaderConstantI(start_register, constant_data.as_ptr().cast(), n) };
+        MethodError::check("IDirect3DDevice9::SetPixelShaderConstantI", hr)
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setvertexshaderconstantb)\]
+    /// IDirect3DDevice9::SetVertexShaderConstantB
+    ///
+    /// Sets boolean shader constants.
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]       If `constant_data.len()` > `u32::MAX`
+    /// *   [D3DERR::INVALIDCALL]       If `start_register + constant_data.len()` > max boolean registers?
+    /// *   Ok(())
+    pub fn set_vertex_shader_constant_b(&self, start_register: u32, constant_data: &[bool32]) -> Result<(), MethodError> {
+        let n : u32 = constant_data.len().try_into().map_err(|_| MethodError("Device::set_vertex_shader_constant_b", D3DERR::INVALIDCALL))?;
+        let hr = unsafe { self.0.SetVertexShaderConstantB(start_register, constant_data.as_ptr().cast(), n) };
+        MethodError::check("IDirect3DDevice9::SetVertexShaderConstantB", hr)
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setvertexshaderconstantf)\]
+    /// IDirect3DDevice9::SetVertexShaderConstantF
+    ///
+    /// Sets floating-point shader constants.
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]       If `constant_data.len() / 4` > `u32::MAX`
+    /// *   [D3DERR::INVALIDCALL]       If `constant_data.len() % 4` != `0` (not a multiple of vectors)
+    /// *   [D3DERR::INVALIDCALL]       If `start_register + constant_data.len()/4` > max floating point vector registers?
+    /// *   Ok(())
+    pub fn set_vertex_shader_constant_f(&self, start_register: u32, constant_data: &[f32]) -> Result<(), MethodError> {
+        let n = constant_data.len();
+        if (n % 4) != 0 { return Err(MethodError("Device::set_vertex_shader_constant_f", D3DERR::INVALIDCALL)); }
+        let n : u32 = (n/4).try_into().map_err(|_| MethodError("Device::set_vertex_shader_constant_f", D3DERR::INVALIDCALL))?;
+        let hr = unsafe { self.0.SetVertexShaderConstantF(start_register, constant_data.as_ptr(), n) };
+        MethodError::check("IDirect3DDevice9::SetVertexShaderConstantF", hr)
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setvertexshaderconstantf)\]
+    /// IDirect3DDevice9::SetVertexShaderConstantF
+    ///
+    /// Sets floating-point shader constants.
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]       If `constant_data.len()` > `u32::MAX`
+    /// *   [D3DERR::INVALIDCALL]       If `start_register + constant_data.len()` > max floating point vector registers?
+    /// *   Ok(())
+    pub fn set_vertex_shader_constant_fv(&self, start_register: u32, constant_data: &[[f32; 4]]) -> Result<(), MethodError> {
+        let n : u32 = constant_data.len().try_into().map_err(|_| MethodError("Device::set_vertex_shader_constant_fv", D3DERR::INVALIDCALL))?;
+        let hr = unsafe { self.0.SetVertexShaderConstantF(start_register, constant_data.as_ptr().cast(), n) };
+        MethodError::check("IDirect3DDevice9::SetVertexShaderConstantF", hr)
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setvertexshaderconstanti)\]
+    /// IDirect3DDevice9::SetVertexShaderConstantI
+    ///
+    /// Sets integer shader constants.
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]       If `constant_data.len() / 4` > `u32::MAX`
+    /// *   [D3DERR::INVALIDCALL]       If `constant_data.len() % 4` != `0` (not a multiple of vectors)
+    /// *   [D3DERR::INVALIDCALL]       If `start_register + constant_data.len()/4` > max floating point vector registers?
+    /// *   Ok(())
+    pub fn set_vertex_shader_constant_i(&self, start_register: u32, constant_data: &[i32]) -> Result<(), MethodError> {
+        let n = constant_data.len();
+        if (n % 4) != 0 { return Err(MethodError("Device::set_vertex_shader_constant_i", D3DERR::INVALIDCALL)); }
+        let n : u32 = (n/4).try_into().map_err(|_| MethodError("Device::set_vertex_shader_constant_i", D3DERR::INVALIDCALL))?;
+        let hr = unsafe { self.0.SetVertexShaderConstantI(start_register, constant_data.as_ptr(), n) };
+        MethodError::check("IDirect3DDevice9::SetVertexShaderConstantI", hr)
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setvertexshaderconstanti)\]
+    /// IDirect3DDevice9::SetVertexShaderConstantI
+    ///
+    /// Sets integer shader constants.
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]       If `constant_data.len()` > `u32::MAX`
+    /// *   [D3DERR::INVALIDCALL]       If `start_register + constant_data.len()` > max floating point vector registers?
+    /// *   Ok(())
+    pub fn set_vertex_shader_constant_iv(&self, start_register: u32, constant_data: &[[i32; 4]]) -> Result<(), MethodError> {
+        let n : u32 = constant_data.len().try_into().map_err(|_| MethodError("Device::set_vertex_shader_constant_iv", D3DERR::INVALIDCALL))?;
+        let hr = unsafe { self.0.SetVertexShaderConstantI(start_register, constant_data.as_ptr().cast(), n) };
+        MethodError::check("IDirect3DDevice9::SetVertexShaderConstantI", hr)
     }
 }
 
