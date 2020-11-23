@@ -335,6 +335,27 @@ impl Device {
         Ok(enable != 0)
     }
 
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getmaterial)\]
+    /// IDirect3DDevice9::GetMaterial
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]   If the material is invalid
+    /// *   Ok([Material])
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use doc::*; let device = Device::test();
+    /// let material = device.get_material().unwrap();
+    /// ```
+    pub fn get_material(&self) -> Result<Material, MethodError> {
+        let mut material = Material::default();
+        let hr = unsafe { self.0.GetMaterial(&mut *material) };
+        MethodError::check("IDirect3DDevice9::GetMaterial", hr)?;
+        Ok(material)
+    }
+
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setfvf)\]
     /// IDirect3DDevice9::SetFVF
     ///
@@ -430,6 +451,29 @@ impl Device {
     pub fn light_enable(&self, index: u32, enable: bool) -> Result<(), MethodError> {
         let hr = unsafe { self.0.LightEnable(index, enable.into()) };
         MethodError::check("IDirect3DDevice9::LightEnable", hr)
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setmaterial)\]
+    /// IDirect3DDevice9::SetMaterial
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]   If the material is invalid
+    /// *   Ok(`()`)
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use doc::*; let device = Device::test();
+    /// let material = Material {
+    ///     diffuse: ColorValue::default(),
+    ///     .. Material::default()
+    /// };
+    /// device.set_material(material).unwrap();
+    /// ```
+    pub fn set_material(&self, material: impl Into<Material>) -> Result<(), MethodError> {
+        let hr = unsafe { self.0.SetMaterial(&*material.into()) };
+        MethodError::check("IDirect3DDevice9::SetMaterial", hr)
     }
 }
 
