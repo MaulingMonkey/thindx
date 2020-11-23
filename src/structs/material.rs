@@ -10,7 +10,7 @@ use std::ops::{Deref, DerefMut};
 /// D3DMATERIAL9
 ///
 /// Defines material properties.
-#[derive(Clone, Copy, Debug)]
+#[derive(Clone, Copy, Debug, Default)]
 #[repr(C)] pub struct Material {
     /// [Diffuse](https://docs.microsoft.com/en-us/windows/uwp/graphics-concepts/diffuse-lighting) lighting
     pub diffuse:    ColorValue,
@@ -26,18 +26,6 @@ use std::ops::{Deref, DerefMut};
 
     /// Floating-point value specifying the sharpness of specular highlights. The higher the value, the sharper the highlight.
     pub power:      f32,
-}
-
-impl Default for Material {
-    fn default() -> Self {
-        Self {
-            diffuse:    ColorValue::default(),
-            ambient:    ColorValue::default(),
-            specular:   ColorValue::default(),
-            emissive:   ColorValue::default(),
-            power:      0.0,
-        }
-    }
 }
 
 impl Deref    for Material { fn deref    (&    self) -> &    Self::Target { unsafe { std::mem::transmute(self) } } type Target = D3DMATERIAL9; }
