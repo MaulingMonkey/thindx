@@ -761,8 +761,11 @@ impl Direct3D {
     }
 }
 
-#[cfg(test)] struct Invalid;
+#[cfg(test)] pub(crate) struct Invalid;
 #[cfg(test)] impl From<Invalid> for DevType         { fn from(_: Invalid) -> Self { Self::from_unchecked(!0) } }
 #[cfg(test)] impl From<Invalid> for Format          { fn from(_: Invalid) -> Self { Self::from_unchecked(!0) } }
-#[cfg(test)] impl From<Invalid> for MultiSample { fn from(_: Invalid) -> Self { Self::from_unchecked(!0) } }
+#[cfg(test)] impl From<Invalid> for FVF             { fn from(_: Invalid) -> Self { Self::from_unchecked(!0) } }
+#[cfg(test)] impl From<Invalid> for MultiSample     { fn from(_: Invalid) -> Self { Self::from_unchecked(!0) } }
+#[cfg(test)] impl From<Invalid> for Pool            { fn from(_: Invalid) -> Self { Self::from_unchecked(!0) } }
 #[cfg(test)] impl From<Invalid> for ResourceType    { fn from(_: Invalid) -> Self { Self::from_unchecked(!0) } }
+#[cfg(test)] impl From<Invalid> for Usage           { fn from(_: Invalid) -> Self { Self::from_unchecked(!0) } }
