@@ -128,13 +128,29 @@ impl Device {
     ///
     /// ### Returns
     ///
-    /// *   [D3DERR::INVALIDCALL]   "if the returned argument is invalid" (impossible via thin3d9?)
+    /// *   [D3DERR::INVALIDCALL]   "If the returned argument is invalid" (impossible via thin3d9?)
     /// *   Ok(())
     pub fn get_creation_parameters(&self) -> Result<D3DDEVICE_CREATION_PARAMETERS, MethodError> {
         let mut dcp = unsafe { std::mem::zeroed::<D3DDEVICE_CREATION_PARAMETERS>() };
         let hr = unsafe { self.0.GetCreationParameters(&mut dcp) };
         MethodError::check("IDirect3DDevice9::GetCreationParameters", hr)?;
         Ok(dcp)
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getcurrenttexturepalette)\]
+    /// IDirect3DDevice9::GetCurrentTexturePalette
+    ///
+    /// Retrieves the current texture palette
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]   "If the method fails" (impossible via thin3d9?)
+    /// *   Ok(`texture_palette_index`)
+    pub fn get_current_texture_palette(&self) -> Result<u32, MethodError> {
+        let mut pal = 0;
+        let hr = unsafe { self.0.GetCurrentTexturePalette(&mut pal) };
+        MethodError::check("IDirect3DDevice9::GetCurrentTexturePalette", hr)?;
+        Ok(pal)
     }
 }
 
@@ -165,4 +181,10 @@ impl Device {
 #[test] fn get_creation_parameters() {
     let device = Device::test();
     let _dcp = device.get_creation_parameters().unwrap(); // never fails?
+}
+
+#[test] fn get_current_texture_palette() {
+    let device = Device::test();
+    let pal = device.get_current_texture_palette().unwrap(); // never fails?
+    assert!(pal == 0 || pal == 0xFFFF); // 0xFFFF on my machine - some specific "no palette" constant?
 }
