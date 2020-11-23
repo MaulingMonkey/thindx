@@ -9,9 +9,9 @@ use std::fmt::{self, Debug, Formatter};
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dbackbuffer-type)\]
 /// D3DBACKBUFFER_TYPE
 ///
-/// Predefined sets of pipeline state used by state blocks (see [State Blocks Save and Restore State (Direct3D 9)]).
+/// Defines constants that describe the type of back buffer.
 ///
-/// [State Blocks Save and Restore State (Direct3D 9)]:         https://docs.microsoft.com/en-us/windows/win32/direct3d9/state-blocks-save-and-restore-state
+/// Direct3D 9 does not support stereo view, so Direct3D does not use the D3DBACKBUFFER_TYPE_LEFT and D3DBACKBUFFER_TYPE_RIGHT values of this enumerated type.
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)] pub struct BackBufferType(D3DBACKBUFFER_TYPE);
 
@@ -29,9 +29,14 @@ impl BackBufferType {
 
 #[allow(non_upper_case_globals)] // These are enum-like
 impl BackBufferType {
-    pub const Mono          : BackBufferType = BackBufferType(D3DSBT_ALL);
-    pub const Left    : BackBufferType = BackBufferType(D3DSBT_PIXELSTATE);
-    pub const Right   : BackBufferType = BackBufferType(D3DSBT_VERTEXSTATE);
+    /// Specifies a nonstereo swap chain.
+    pub const Mono  : BackBufferType = BackBufferType(D3DBACKBUFFER_TYPE_MONO);
+
+    /// Specifies the left side of a stereo pair in a swap chain.
+    pub const Left  : BackBufferType = BackBufferType(D3DBACKBUFFER_TYPE_LEFT);
+
+    /// Specifies the right side of a stereo pair in a swap chain.
+    pub const Right : BackBufferType = BackBufferType(D3DBACKBUFFER_TYPE_RIGHT);
 }
 
 impl Default for BackBufferType {

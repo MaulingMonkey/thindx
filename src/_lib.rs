@@ -54,6 +54,7 @@
 //! | `thin3d9` type                            | docs.microsoft.com        | description   |
 //! | ----------------------------------------- | ------------------------- | ------------- |
 //! | [D3D](crate::D3D)\[[ERR](crate::D3DERR)\] | [D3DERR]                  | Windows HRESULTs optimized for displaying Direct3D errors
+//! | [BackBufferType]                          | [D3DBACKBUFFER_TYPE]      | 
 //! | [DevType]                                 | [D3DDEVTYPE]              | Specifies what kind of [Device] should be created
 //! | [Format]                                  | [D3DFORMAT]               | Texture and vertex element formats
 //! | [LightType]                               | [D3DLIGHTTYPE]            | Defines the type of a light ([Point](crate::LightType::Point), [Spot](crate::LightType::Spot), or [Directional](crate::LightType::Directional))
@@ -65,6 +66,7 @@
 //! | [StateBlockType]                          | [D3DSTATEBLOCKTYPE]       | Predefined sets of pipeline state used by state blocks
 //!
 //! [D3DERR]:                   https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3derr
+//! [D3DBACKBUFFER_TYPE]:       https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dbackbuffer-type
 //! [D3DDEVTYPE]:               https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddevtype
 //! [D3DFORMAT]:                https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dformat
 //! [D3DLIGHTTYPE]:             https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dlighttype
