@@ -17,5 +17,6 @@ mod query_type;             pub use query_type::*;
 mod resource_type;          pub use resource_type::*;
 mod rect;                   pub use rect::*;
 mod sdk_version;            pub use sdk_version::*;
+mod sgr;                    pub use sgr::*;
 mod state_block_type;       pub use state_block_type::*;
 mod usage;                  pub use usage::*;

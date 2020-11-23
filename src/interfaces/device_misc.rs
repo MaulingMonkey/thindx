@@ -260,6 +260,26 @@ impl Device {
         Ok(fvf)
     }
 
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getgammaramp)\]
+    /// IDirect3DDevice9::GetGammaRamp
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DGAMMARAMP]
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use doc::*; let device = Device::test();
+    /// let ramp = device.get_gamma_ramp(0);
+    /// ```
+    pub fn get_gamma_ramp(&self, swap_chain: u32) -> D3DGAMMARAMP {
+        let mut ramp = unsafe { std::mem::zeroed::<D3DGAMMARAMP>() };
+        let _nohr : () = unsafe { self.0.GetGammaRamp(swap_chain, &mut ramp) };
+        ramp
+    }
+
+
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setfvf)\]
     /// IDirect3DDevice9::SetFVF
     ///
@@ -278,6 +298,36 @@ impl Device {
     pub fn set_fvf(&self, fvf: impl Into<FVF>) -> Result<(), MethodError> {
         let hr = unsafe { self.0.SetFVF(fvf.into().into()) };
         MethodError::check("IDirect3DDevice9::SetFVF", hr)
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setgammaramp)\]
+    /// IDirect3DDevice9::SetGammaRamp
+    ///
+    /// Sets the gamma correction ramp for the implicit swap chain. This method will affect the entire screen (not just the active window if you are running in windowed mode).
+    ///
+    /// If the device does not support gamma ramps in the swap chain's current presentation mode (full-screen or windowed), no error return is given.
+    /// Applications can check the D3DCAPS2_FULLSCREENGAMMA and D3DCAPS2_CANCALIBRATEGAMMA capability bits in the Caps2 member of the D3DCAPS9 structure to determine the capabilities of the device and whether a calibrator is installed.
+    ///
+    /// For windowed gamma correction presentation, use [SwapChain::present] if the hardware supports the feature.
+    /// In DirectX 8, SetGammaRamp will set the gamma ramp only on a full-screen mode application.
+    /// For more information about gamma correction, see [Gamma (Direct3D 9)].
+    ///
+    /// ### Returns
+    ///
+    /// *   `()`
+    ///
+    /// ### Example
+    ///
+    /// ```rust,no_run
+    /// # use doc::*; let device = Device::test();
+    /// let ramp = device.get_gamma_ramp(0);
+    /// // ...modify ramp?..
+    /// device.set_gamma_ramp(0, SGR::NoCalibration, &ramp);
+    /// ```
+    ///
+    /// [Gamma (Direct3D 9)]:           https://docs.microsoft.com/en-us/windows/desktop/direct3d9/gamma
+    pub fn set_gamma_ramp(&self, swap_chain: u32, flags: impl Into<SGR>, ramp: &D3DGAMMARAMP) {
+        let _nohr : () = unsafe { self.0.SetGammaRamp(swap_chain, flags.into().into(), ramp) };
     }
 }
 
