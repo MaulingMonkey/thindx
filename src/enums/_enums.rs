@@ -1,5 +1,4 @@
 mod back_buffer_type;       pub use back_buffer_type::*;
-mod clip_status;            pub use clip_status::*;
 mod d3derr;                 pub use d3derr::*;
 mod devtype;                pub use devtype::*;
 mod format;                 pub use format::*;
