@@ -102,11 +102,13 @@
 //! | [Caps]                                    | [D3DCAPS9]                | Adapter/device capabilities and limitations
 //! | [DisplayMode]                             | [D3DDISPLAYMODE]          | A display mode ({ Width: u32, Height: u32, RefreshRate: u32, format(): [Format] })
 //! | [Rect]                                    | [D3DRECT] / [RECT]        | `[0i32 .. 1i32, 2i32 .. 3i32]` signed x/y range structure
+//! | [Viewport]                                | [D3DVIEWPORT]             | An x/y/width/height/min_z/max_z area to render into
 //!
 //! [D3DADAPTER_IDENTIFIER9]:   https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dadapter-identifier9
 //! [D3DCAPS9]:                 https://docs.microsoft.com/en-us/windows/win32/api/d3d9caps/ns-d3d9caps-d3dcaps9
 //! [D3DDISPLAYMODE]:           https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddisplaymode
 //! [D3DRECT]:                  https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3drect
+//! [D3DVIEWPORT]:              https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dviewport9
 //! [RECT]:                     https://docs.microsoft.com/en-us/windows/win32/api/windef/ns-windef-rect
 //!
 //! ### Values

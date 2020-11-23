@@ -6,3 +6,4 @@ mod light;                  pub use light::*;
 mod material;               pub use material::*;
 mod rect;                   pub use rect::*;
 mod vector;                 pub use vector::*;
+mod viewport;               pub use viewport::*;

@@ -24,6 +24,7 @@ use crate::*;
 /// | [VertexDeclarations](#vertexdeclarations)     | Bind/Create [VertexDeclaration]s for describing [VertexBuffer] layouts
 /// | [Miscellanious](#miscellanious)               | Metadata, etc.
 /// | [Lighting](#lighting-16-bit)                  | Configure (and query) [Light]ing
+/// | [Viewports](#viewports)                       | Configure (and query) the [Viewport]
 #[derive(Clone)] #[repr(transparent)]
 pub struct Device(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DDevice9>);
 
