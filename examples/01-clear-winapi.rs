@@ -61,7 +61,7 @@ fn main() {
     let hwnd = unsafe { CreateWindowExW(
         0,
         wch_c!("SampleWndClass").as_ptr(),
-        wch_c!("00-clear-winapi - thin3d9 example").as_ptr(),
+        wch_c!("01-clear-winapi - thin3d9 example").as_ptr(),
         WS_OVERLAPPEDWINDOW,
         CW_USEDEFAULT,
         CW_USEDEFAULT,
