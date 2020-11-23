@@ -98,16 +98,69 @@ impl Device {
         MethodError::check("IDirect3DDevice9::CreateVertexBuffer", hr)?;
         Ok(unsafe { VertexBuffer::from_raw(buffer) })
     }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setindices)\]
+    /// IDirect3DDevice9::SetIndices
+    ///
+    /// Sets index data.
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use doc::*; let device = Device::test();
+    /// let tri = device.create_index_buffer(3*2, Usage::None, Format::Index16, Pool::Default, ()).unwrap();
+    /// // ...initialize tri...
+    ///
+    /// device.set_indices(&tri).unwrap();          // bind the index buffer
+    /// device.set_indices(Some(&tri)).unwrap();    // bind the index buffer
+    /// device.set_indices(None).unwrap();          // unbind the index buffer
+    /// ```
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]       (perhaps only on an invalid [IndexBuffer] that thin3d9's API prevents? perhaps when mixing IBs from different devices?)
+    /// *   Ok(())
+    pub fn set_indices<'ib>(&self, index_data: impl Into<Option<&'ib IndexBuffer>>) -> Result<(), MethodError> {
+        let index_data = index_data.into();
+        let ptr = index_data.map_or(null_mut(), |id| id.as_raw());
+        let hr = unsafe { self.0.SetIndices(ptr) };
+        MethodError::check("IDirect3DDevice9::SetIndices", hr)
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getindices)\]
+    /// IDirect3DDevice9::GetIndices
+    ///
+    /// Retrieves index data.
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use doc::*; let device = Device::test();
+    /// let ib : Option<IndexBuffer> = device.get_indices().unwrap();
+    /// assert!(ib.is_none(), "device has no index buffer by default");
+    /// ```
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]       if the device is a pure device?
+    /// *   Ok(Some([IndexBuffer]))     if an index buffer was bound
+    /// *   Ok(None)                    if no index buffer was bound
+    pub fn get_indices(&self) -> Result<Option<IndexBuffer>, MethodError> {
+        let mut buffer = null_mut();
+        let hr = unsafe { self.0.GetIndices(&mut buffer) };
+        MethodError::check("IDirect3DDevice9::GetIndices", hr)?;
+        Ok(unsafe { IndexBuffer::from_raw_opt(buffer) })
+    }
 }
 
 
 
-#[test] fn create_index_buffer() {
+#[test] fn index_buffer() {
     let device = Device::test();
 
-    let _tri16 = device.create_index_buffer(3*2, Usage::None, Format::Index16, Pool::Default, ()).unwrap(); // simple triangle IB
-    let _odd16 = device.create_index_buffer(3*3, Usage::None, Format::Index16, Pool::Default, ()).unwrap(); // weird size (9)
-    let _tri32 = device.create_index_buffer(3*4, Usage::None, Format::Index32, Pool::Default, ()).unwrap(); // simple triangle IB
+    let tri16 = device.create_index_buffer(3*2, Usage::None, Format::Index16, Pool::Default, ()).unwrap(); // simple triangle IB
+    let odd16 = device.create_index_buffer(3*3, Usage::None, Format::Index16, Pool::Default, ()).unwrap(); // weird size (9)
+    let tri32 = device.create_index_buffer(3*4, Usage::None, Format::Index32, Pool::Default, ()).unwrap(); // simple triangle IB
 
     assert_eq!(D3DERR::INVALIDCALL, device.create_index_buffer(0,    Usage::None, Format::Index16,  Pool::Default, ()).err(), "empty");
     assert_eq!(D3DERR::INVALIDCALL, device.create_index_buffer(1,    Usage::None, Format::Index16,  Pool::Default, ()).err(), "too small for 16-bit IndexBuffer");
@@ -117,6 +170,28 @@ impl Device {
     assert_eq!(D3DERR::INVALIDCALL, device.create_index_buffer(1000, Usage::None, Format::X8B8G8R8, Pool::Default, ()).err(), "bad format");
     assert_eq!(D3DERR::INVALIDCALL, device.create_index_buffer(1000, Usage::None, Invalid,          Pool::Default, ()).err(), "bad format");
     assert_eq!(D3DERR::INVALIDCALL, device.create_index_buffer(1000, Usage::None, Format::Index16,  Invalid,       ()).err(), "bad pool");
+
+    assert!(device.get_indices().unwrap().is_none());
+
+    device.set_indices(&tri16).unwrap();
+    assert_eq!(device.get_indices().unwrap().unwrap().as_raw(), tri16.as_raw());
+    device.set_indices(Some(&tri16)).unwrap();
+    assert_eq!(device.get_indices().unwrap().unwrap().as_raw(), tri16.as_raw());
+
+    device.set_indices(&odd16).unwrap();
+    assert_eq!(device.get_indices().unwrap().unwrap().as_raw(), odd16.as_raw());
+    device.set_indices(Some(&odd16)).unwrap();
+    assert_eq!(device.get_indices().unwrap().unwrap().as_raw(), odd16.as_raw());
+
+    device.set_indices(&tri32).unwrap();
+    assert_eq!(device.get_indices().unwrap().unwrap().as_raw(), tri32.as_raw());
+    device.set_indices(Some(&tri32)).unwrap();
+    assert_eq!(device.get_indices().unwrap().unwrap().as_raw(), tri32.as_raw());
+
+    device.set_indices(None).unwrap();
+    assert!(device.get_indices().unwrap().is_none());
+
+    // TODO: multiple device tests
 }
 
 #[test] fn create_vertex_buffer() {
@@ -134,4 +209,6 @@ impl Device {
     assert_eq!(D3DERR::INVALIDCALL, device.create_vertex_buffer(1000, Invalid,     FVF::XYZ, Pool::Default, ()).err(), "invalid usage");
     let _badfmt =                   device.create_vertex_buffer(1000, Usage::None, Invalid,  Pool::Default, ()).unwrap(); // apparently no such thing as a bad FVF?
     assert_eq!(D3DERR::INVALIDCALL, device.create_vertex_buffer(1000, Usage::None, FVF::XYZ, Invalid,       ()).err(), "bad pool");
+
+    // TODO: multiple device tests
 }
