@@ -10,7 +10,7 @@ use std::ops::{Deref, DerefMut};
 
 /// 32-bit boolean type that's ABI-compatible with Win32's [BOOL].
 ///
-/// 99% of the time, you should prefer the (typically 8-bit) [bool] in your interfaces and simply convert between types.
+/// 99% of the time, you should prefer the (typically 8-bit) [bool](https://doc.rust-lang.org/std/primitive.bool.html) in your interfaces and simply convert between types.
 /// However, some Direct3D APIs take arrays, or structures expected to conform to a specific ABI.
 /// [bool32] can be used in these cases to avoid the need for internal allocations for mere ABI conversions.
 ///
