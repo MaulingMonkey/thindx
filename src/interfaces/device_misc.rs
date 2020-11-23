@@ -44,9 +44,8 @@ impl Device {
     ///
     /// ### Example
     ///
-    /// ```rust,no_run
-    /// # use thin3d9::*;
-    /// # let device : Device = unimplemented!();
+    /// ```rust
+    /// # use doc::*; let device = Device::test();
     /// let available = device.get_available_texture_mem();
     /// if available >= 0xFFE0_0000 {
     ///     println!("> 4 GiB available");
@@ -76,9 +75,8 @@ impl Device {
     ///
     /// ### Example
     ///
-    /// ```rust,no_run
-    /// # use thin3d9::*;
-    /// # let device : Device = unimplemented!();
+    /// ```rust
+    /// # use doc::*; let device = Device::test();
     /// println!("{:?}", device.get_clip_plane(0).unwrap());
     /// ```
     ///
@@ -106,9 +104,8 @@ impl Device {
     ///
     /// ### Example
     ///
-    /// ```rust,no_run
-    /// # use thin3d9::*;
-    /// # let device : Device = unimplemented!();
+    /// ```rust
+    /// # use doc::*; let device = Device::test();
     /// println!("{:?}", device.get_clip_status().unwrap());
     /// ```
     ///

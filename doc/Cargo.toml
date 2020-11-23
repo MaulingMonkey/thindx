@@ -1,0 +1,43 @@
+# https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[package]
+name            = "doc"
+description     = "documentation support - note that this crate marks Direct3D/Device creation safe, which isn't 100% sound"
+version         = "0.0.0-git"
+authors         = ["MaulingMonkey <git@maulingmonkey.com>"]
+edition         = "2018"
+publish         = false
+license         = "Apache-2.0 OR MIT"
+
+[lib]
+path            = "_doc.rs"
+
+
+
+[target.'cfg(windows)'.dependencies]
+thin3d9             = { path = ".." }
+mcom                = "0.1.1"
+#mcom               = { git = "https://github.com/MaulingMonkey/mcom" }
+raw-window-handle   = "0.3"
+wchar               = "0.6"
+winit               = "0.23"
+
+[target.'cfg(windows)'.dependencies.winapi]
+version         = "0.3.9"
+features = [
+    # shared
+    "d3d9",
+    "d3d9caps",
+    "d3d9types",
+    "guiddef",
+    "minwindef",
+    "windef",
+    "winerror",
+
+    # um
+    "debugapi",
+    "libloaderapi",
+    "unknwnbase",
+    "windef",
+    "winuser",
+]

@@ -3,6 +3,7 @@
 [workspace]
 members = [
     ".",
+    "doc",
 ]
 
 [package]
@@ -39,6 +40,9 @@ impl-poor-defaults  = []
 impl-from-unchecked = []
 
 
+
+[dev-dependencies]
+doc                 = { path = "doc" }
 
 [target.'cfg(windows)'.dependencies]
 mcom = "0.1.1"

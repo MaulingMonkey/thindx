@@ -92,9 +92,8 @@ impl Direct3D {
     /// ### Example
     ///
     /// ```rust
-    /// # use thin3d9::*;
-    /// # use winapi::shared::{d3d9::*, d3d9types::*};
-    /// # let d3d = unsafe { Direct3D::create(SdkVersion::default()) }.unwrap();
+    /// # use doc::*;
+    /// # let d3d = Direct3D::test();
     /// assert!([Format::D24S8, Format::D24X8, Format::D16, Format::D32].iter().copied().any(|fmt|
     ///     d3d.check_depth_stencil_match(
     ///         D3DADAPTER_DEFAULT,
@@ -140,9 +139,7 @@ impl Direct3D {
     /// ### Example
     ///
     /// ```rust
-    /// # use thin3d9::*;
-    /// # use winapi::shared::{d3d9::*, d3d9types::*};
-    /// # let d3d = unsafe { Direct3D::create(SdkVersion::default()) }.unwrap();
+    /// # use doc::*; let d3d = Direct3D::test();
     /// assert!(d3d.check_device_format(
     ///     D3DADAPTER_DEFAULT,
     ///     DevType::HAL,
@@ -190,9 +187,7 @@ impl Direct3D {
     /// ### Example
     ///
     /// ```rust
-    /// # use thin3d9::*;
-    /// # use winapi::shared::{d3d9::*, d3d9types::*};
-    /// # let d3d = unsafe { Direct3D::create(SdkVersion::default()) }.unwrap();
+    /// # use doc::*; let d3d = Direct3D::test();
     /// assert!(d3d.check_device_format_conversion(
     ///     D3DADAPTER_DEFAULT,
     ///     DevType::HAL,
@@ -236,9 +231,7 @@ impl Direct3D {
     /// ### Example
     ///
     /// ```rust
-    /// # use thin3d9::*;
-    /// # use winapi::shared::{d3d9::*, d3d9types::*};
-    /// # let d3d = unsafe { Direct3D::create(SdkVersion::default()) }.unwrap();
+    /// # use doc::*; let d3d = Direct3D::test();
     /// assert!(d3d.check_device_multi_sample_type(
     ///     D3DADAPTER_DEFAULT,
     ///     DevType::HAL,
@@ -284,9 +277,7 @@ impl Direct3D {
     /// ### Example
     ///
     /// ```rust
-    /// # use thin3d9::*;
-    /// # use winapi::shared::{d3d9::*, d3d9types::*};
-    /// # let d3d = unsafe { Direct3D::create(SdkVersion::default()) }.unwrap();
+    /// # use doc::*; let d3d = Direct3D::test();
     /// assert!(d3d.check_device_type(
     ///     D3DADAPTER_DEFAULT, // adapter
     ///     DevType::HAL,       // device_type
@@ -343,10 +334,7 @@ impl Direct3D {
     /// ### Example
     ///
     /// ```rust
-    /// # use thin3d9::*;
-    /// # use winapi::shared::{d3d9::*, d3d9types::*};
-    /// # use std::ptr::null_mut;
-    /// # let d3d = unsafe { Direct3D::create(SdkVersion::default()) }.unwrap();
+    /// # use doc::*; let d3d = Direct3D::test();
     /// let device = unsafe { d3d.create_device(
     ///     D3DADAPTER_DEFAULT,     // adapter
     ///     DevType::HAL,           // device_type
@@ -359,18 +347,18 @@ impl Direct3D {
     ///         BackBufferHeight:           0,
     ///         BackBufferCount:            0,
     ///
-    ///         // In/Out - if this equals D3DFMT_UNKNOWN it will be changed when
+    ///         // In/Out - if this equals Format::UNKNOWN it will be changed when
     ///         // create_device returns
-    ///         BackBufferFormat:           D3DFMT_X8R8G8B8,
+    ///         BackBufferFormat:           Format::X8R8G8B8.into(),
     ///
     ///         // In parameters
-    ///         MultiSampleType:            D3DMULTISAMPLE_NONE,
+    ///         MultiSampleType:            MultiSample::None.into(),
     ///         MultiSampleQuality:         0,
     ///         SwapEffect:                 D3DSWAPEFFECT_DISCARD,
     ///         hDeviceWindow:              null_mut(),
     ///         Windowed:                   true.into(),
     ///         EnableAutoDepthStencil:     false.into(),
-    ///         AutoDepthStencilFormat:     D3DFMT_UNKNOWN,
+    ///         AutoDepthStencilFormat:     Format::UNKNOWN.into(),
     ///         Flags:                      0,
     ///         FullScreen_RefreshRateInHz: 0,
     ///         PresentationInterval:       0,
@@ -407,8 +395,7 @@ impl Direct3D {
     /// ### Example
     ///
     /// ```rust
-    /// # use thin3d9::*;
-    /// # let d3d = unsafe { Direct3D::create(SdkVersion::default()) }.unwrap();
+    /// # use doc::*; let d3d = Direct3D::test();
     /// let adapter = 0;
     /// let fmt = Format::X8R8G8B8;
     /// for mode in 0..d3d.get_adapter_mode_count(adapter, fmt) {
@@ -478,8 +465,7 @@ impl Direct3D {
     /// ### Example
     ///
     /// ```rust
-    /// # use thin3d9::*;
-    /// # let d3d = unsafe { Direct3D::create(SdkVersion::default()) }.unwrap();
+    /// # use doc::*; let d3d = Direct3D::test();
     /// println!("{} adapters", d3d.get_adapter_count());
     /// ```
     ///
@@ -508,9 +494,7 @@ impl Direct3D {
     /// ### Example
     ///
     /// ```rust
-    /// # use thin3d9::*;
-    /// # use winapi::shared::d3d9types::*;
-    /// # let d3d = unsafe { Direct3D::create(SdkVersion::default()) }.unwrap();
+    /// # use doc::*; let d3d = Direct3D::test();
     /// for adapter in 0..d3d.get_adapter_count() {
     ///     let mode = d3d.get_adapter_display_mode(adapter).unwrap();
     ///     let D3DDISPLAYMODE { Width: w, Height: h, RefreshRate: hz, Format: fmt } = mode;
@@ -561,9 +545,7 @@ impl Direct3D {
     /// ### Example
     ///
     /// ```rust
-    /// # use thin3d9::*;
-    /// # use winapi::shared::windef::HMONITOR;
-    /// # let d3d = unsafe { Direct3D::create(SdkVersion::default()) }.unwrap();
+    /// # use doc::*; let d3d = Direct3D::test();
     /// eprintln!("{:#?}", d3d.get_adapter_identifier(0, 0).unwrap());
     /// ```
     ///
@@ -631,8 +613,7 @@ impl Direct3D {
     /// ### Example
     ///
     /// ```rust
-    /// # use thin3d9::*;
-    /// # let d3d = unsafe { Direct3D::create(SdkVersion::default()) }.unwrap();
+    /// # use doc::*; let d3d = Direct3D::test();
     /// for fmt in [Format::X8R8G8B8, Format::A8R8G8B8].iter().copied() {
     ///     let modes = d3d.get_adapter_mode_count(0, fmt);
     ///     println!("adapter 1: {:?}: {} mode(s)", fmt, modes);
@@ -696,9 +677,7 @@ impl Direct3D {
     /// ### Example
     ///
     /// ```rust
-    /// # use thin3d9::*;
-    /// # use winapi::shared::windef::HMONITOR;
-    /// # let d3d = unsafe { Direct3D::create(SdkVersion::default()) }.unwrap();
+    /// # use doc::*; let d3d = Direct3D::test();
     /// let monitor : HMONITOR = d3d.get_adapter_monitor(   0).unwrap();
     /// let error   : ()       = d3d.get_adapter_monitor(9001).unwrap_err();
     /// ```
@@ -728,9 +707,7 @@ impl Direct3D {
     /// ### Example
     ///
     /// ```rust
-    /// # use thin3d9::*;
-    /// # use winapi::shared::windef::HMONITOR;
-    /// # let d3d = unsafe { Direct3D::create(SdkVersion::default()) }.unwrap();
+    /// # use doc::*; let d3d = Direct3D::test();
     /// let caps : Caps = d3d.get_device_caps(0, DevType::HAL).unwrap();
     /// assert_eq!(caps.DeviceType,     DevType::HAL.into());
     /// assert_eq!(caps.AdapterOrdinal, 0);
