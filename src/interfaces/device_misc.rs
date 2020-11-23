@@ -375,6 +375,47 @@ impl Device {
         unsafe { self.0.GetNPatchMode() }
     }
 
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getpaletteentries)\]
+    /// IDirect3DDevice9::GetPaletteEntries
+    ///
+    /// Retrieves palette entries.
+    ///
+    /// ### Safety
+    ///
+    /// This function may crash if no palette was previously set!
+    ///
+    /// * Windows version:      `10.0.19041.630`
+    /// * `d3d9.dll` version:   `10.0.19041.546`
+    /// * Driver version:       `24.20.11026.2001`
+    /// * Driver name:          `C:\Windows\System32\DriverStore\FileRepository\u0332836.inf_amd64_9f6b5ef5a1aed97e\B332771\aticfx64.dll,...`
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]   "If the method fails"
+    /// *   Ok(`()`)
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use doc::*; let device = Device::test();
+    /// // XXX: No palette set, this may crash!!!
+    /// // let pal = unsafe { device.get_palette_entries(0) }.unwrap();
+    ///
+    /// device.set_palette_entries(0, &[Color::argb(0xFF112233); 256]).unwrap();
+    ///
+    /// let pal = unsafe { device.get_palette_entries(0) }.unwrap();
+    /// assert_eq!(pal.len(), 256);
+    /// assert_eq!(pal[  0], Color::argb(0xFF112233));
+    /// assert_eq!(pal[255], Color::argb(0xFF112233));
+    /// ```
+    pub unsafe fn get_palette_entries(&self, palette_number: u32) -> Result<[Color; 256], MethodError> {
+        // D3D9 uses PALETTEENTRYs but misuses the flags field.  D3DCOLORs are much better fits.
+        let mut colors = [Color::argb(0); 256];
+        let hr = self.0.GetPaletteEntries(palette_number, colors.as_mut_ptr().cast());
+        MethodError::check("IDirect3DDevice9::GetPaletteEntries", hr)?;
+        Ok(colors)
+    }
+
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setfvf)\]
     /// IDirect3DDevice9::SetFVF
     ///
@@ -513,6 +554,29 @@ impl Device {
     pub fn set_npatch_mode(&self, mode: f32) -> Result<(), MethodError> {
         let hr = unsafe { self.0.SetNPatchMode(mode) };
         MethodError::check("IDirect3DDevice9::SetNPatchMode", hr)
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setpaletteentries)\]
+    /// IDirect3DDevice9::SetPaletteEntries
+    ///
+    /// Sets palette entries.
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]   If D3DPTEXTURECAPS_ALPHAPALETTE is not set and any entries has an alpha other than 1.0.
+    /// *   Ok(`()`)
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use doc::*; let device = Device::test();
+    /// let pal = [Color::argb(0xFF112233); 256];
+    /// device.set_palette_entries(0, &pal).unwrap();
+    /// ```
+    pub fn set_palette_entries(&self, palette_number: u32, entries: &[Color; 256]) -> Result<(), MethodError> {
+        // D3D9 uses PALETTEENTRYs but misuses the flags field.  D3DCOLORs are much better fits.
+        let hr = unsafe { self.0.SetPaletteEntries(palette_number, entries.as_ptr().cast()) };
+        MethodError::check("IDirect3DDevice9::SetPaletteEntries", hr)
     }
 }
 

@@ -11,7 +11,7 @@ use std::fmt::{self, Debug, Formatter};
 /// D3DCOLOR
 ///
 /// 0xAA<span style="color: red">RR</span><span style="color: green">GG</span><span style="color: blue">BB</span>
-#[derive(Clone, Copy)]
+#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)] pub struct Color(D3DCOLOR);
 
 impl Color {
