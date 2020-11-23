@@ -2,7 +2,6 @@ use crate::*;
 
 use winapi::shared::d3d9types::*;
 
-use std::fmt::{self, Debug, Formatter};
 use std::ops::{Deref, DerefMut};
 
 
@@ -11,72 +10,118 @@ use std::ops::{Deref, DerefMut};
 /// D3DLIGHT9
 ///
 /// Defines a set of lighting properties.
-#[derive(Clone, Copy)]
-#[repr(transparent)] pub struct Light(D3DLIGHT9);
+#[derive(Clone, Copy, Debug, Default)]
+#[repr(C)] pub struct Light {
+    /// Type of the light source.
+    pub light_type:     LightType,
 
-impl Light {
-    pub fn light_type(&self)    -> LightType { LightType::from_unchecked(self.0.Type) }
-    pub fn diffuse(&self)       -> ColorValue { ColorValue::from(self.0.Diffuse) }
-    pub fn specular(&self)      -> ColorValue { ColorValue::from(self.0.Specular) }
-    pub fn ambient(&self)       -> ColorValue { ColorValue::from(self.0.Ambient) }
-    pub fn position(&self)      -> Vector { Vector::from(self.0.Position) }
-    pub fn direction(&self)     -> Vector { Vector::from(self.0.Direction) }
+    /// [Diffuse](https://docs.microsoft.com/en-us/windows/uwp/graphics-concepts/diffuse-lighting) color emitted by the light.
+    pub diffuse:        ColorValue,
+
+    /// [Specular](https://docs.microsoft.com/en-us/windows/uwp/graphics-concepts/specular-lighting) color emitted by the light.
+    pub specular:       ColorValue,
+
+    /// [Ambient](https://docs.microsoft.com/en-us/windows/uwp/graphics-concepts/ambient-lighting) color emitted by the light.
+    pub ambient:        ColorValue,
+
+    /// Position of the light in world space.  This member has no meaning for [Directional] lights, and is ignored in that case.
+    ///
+    /// [Directional]:                      crate::LightType::Directional
+    pub position:       Vector,
+
+    /// Direction that the light is pointing in world space.
+    /// This member has meaning only for [Directional] and [Spot]lights.
+    /// This vector need not be normalized, but it should have a nonzero length.
+    ///
+    /// [Directional]:      crate::LightType::Directional
+    /// [Spot]:             crate::LightType::Spot
+    pub direction:      Vector,
+
+    /// Distance beyond which the light has no effect.
+    /// The maximum allowable value for this member is the square root of [f32::MAX].
+    /// This member does not affect [Directional] lights.
+    ///
+    /// [Directional]:                      crate::LightType::Directional
+    pub range:          f32,
+
+    /// Decrease in illumination between a spotlight's inner cone (the angle specified by [theta](#structfield.theta)) and the outer edge of the outer cone (the angle specified by [phi](#structfield.phi)).
+    ///
+    /// The effect of falloff on the lighting is subtle.
+    /// Furthermore, a small performance penalty is incurred by shaping the falloff curve.
+    /// For these reasons, most developers set this value to 1.0.
+    pub falloff:        f32,
+
+    /// Value specifying how the light intensity changes over distance.
+    /// Attenuation values are ignored for [Directional] lights.
+    /// This member represents an attenuation constant.
+    /// For information about attenuation, see [Light Properties (Direct3D 9)].
+    /// Valid values for this member range from 0.0 to infinity.
+    /// For non-directional lights, all three attenuation values should not be set to 0.0 at the same time.
+    ///
+    /// [Directional]:                      crate::LightType::Directional
+    /// [Light Properties (Direct3D 9)]:    https://docs.microsoft.com/en-us/windows/win32/direct3d9/light-properties
+    pub attenuation0:   f32,
+
+    /// Value specifying how the light intensity changes over distance.
+    /// Attenuation values are ignored for [Directional] lights.
+    /// This member represents an attenuation constant.
+    /// For information about attenuation, see [Light Properties (Direct3D 9)].
+    /// Valid values for this member range from 0.0 to infinity.
+    /// For non-[Directional] lights, all three attenuation values should not be set to 0.0 at the same time.
+    ///
+    /// [Directional]:                      crate::LightType::Directional
+    /// [Light Properties (Direct3D 9)]:    https://docs.microsoft.com/en-us/windows/win32/direct3d9/light-properties
+    pub attenuation1:   f32,
+
+    /// Value specifying how the light intensity changes over distance.
+    /// Attenuation values are ignored for [Directional] lights.
+    /// This member represents an attenuation constant.
+    /// For information about attenuation, see [Light Properties (Direct3D 9)].
+    /// Valid values for this member range from 0.0 to infinity.
+    /// For non-[Directional] lights, all three attenuation values should not be set to 0.0 at the same time.
+    ///
+    /// [Directional]:                      crate::LightType::Directional
+    /// [Light Properties (Direct3D 9)]:    https://docs.microsoft.com/en-us/windows/win32/direct3d9/light-properties
+    pub attenuation2:   f32,
+
+    /// Angle, in radians, of a spotlight's inner cone - that is, the fully illuminated spotlight cone.
+    /// This value must be in the range from 0 through the value specified by [phi](#structfield.phi).
+    pub theta:          f32,
+
+    /// Angle, in radians, defining the outer edge of the spotlight's outer cone.
+    /// Points outside this cone are not lit by the spotlight.
+    /// This value must be between 0 and [std::f32::consts::PI].
+    pub phi:            f32,
 }
 
-impl Default for Light {
-    fn default() -> Self {
-        Self(D3DLIGHT9 {
-            // reduce usage of the danger keyword by manually initializing
-            Type:           0,
-            Diffuse:        D3DCOLORVALUE { r: 0.0, g: 0.0, b: 0.0, a: 0.0 },
-            Specular:       D3DCOLORVALUE { r: 0.0, g: 0.0, b: 0.0, a: 0.0 },
-            Ambient:        D3DCOLORVALUE { r: 0.0, g: 0.0, b: 0.0, a: 0.0 },
-            Position:       D3DVECTOR { x: 0.0, y: 0.0, z: 0.0 },
-            Direction:      D3DVECTOR { x: 0.0, y: 0.0, z: 0.0 },
-            Range:          0.0,
-            Falloff:        0.0,
-            Attenuation0:   0.0,
-            Attenuation1:   0.0,
-            Attenuation2:   0.0,
-            Theta:          0.0,
-            Phi:            0.0,
-        })
+impl Deref    for Light { fn deref    (&    self) -> &    Self::Target { unsafe { std::mem::transmute(self) } } type Target = D3DLIGHT9; }
+impl DerefMut for Light { fn deref_mut(&mut self) -> &mut Self::Target { unsafe { std::mem::transmute(self) } } }
+impl From<D3DLIGHT9> for Light { fn from(value: D3DLIGHT9) -> Self { unsafe { std::mem::transmute(value) } } }
+impl From<Light> for D3DLIGHT9 { fn from(value: Light    ) -> Self { unsafe { std::mem::transmute(value) } } }
+
+#[test] fn layout() {
+    let thin = Light::default();
+    let d3d  = unsafe { std::mem::zeroed::<D3DLIGHT9>() };
+
+    assert_eq!(std::mem::size_of_val (&thin), std::mem::size_of_val (&d3d));
+    assert_eq!(std::mem::align_of_val(&thin), std::mem::align_of_val(&d3d));
+    assert_eq!(offset(&thin, &thin.light_type   ), offset(&d3d, &d3d.Type           ));
+    assert_eq!(offset(&thin, &thin.diffuse      ), offset(&d3d, &d3d.Diffuse        ));
+    assert_eq!(offset(&thin, &thin.specular     ), offset(&d3d, &d3d.Specular       ));
+    assert_eq!(offset(&thin, &thin.ambient      ), offset(&d3d, &d3d.Ambient        ));
+    assert_eq!(offset(&thin, &thin.position     ), offset(&d3d, &d3d.Position       ));
+    assert_eq!(offset(&thin, &thin.direction    ), offset(&d3d, &d3d.Direction      ));
+    assert_eq!(offset(&thin, &thin.range        ), offset(&d3d, &d3d.Range          ));
+    assert_eq!(offset(&thin, &thin.falloff      ), offset(&d3d, &d3d.Falloff        ));
+    assert_eq!(offset(&thin, &thin.attenuation0 ), offset(&d3d, &d3d.Attenuation0   ));
+    assert_eq!(offset(&thin, &thin.attenuation1 ), offset(&d3d, &d3d.Attenuation1   ));
+    assert_eq!(offset(&thin, &thin.attenuation2 ), offset(&d3d, &d3d.Attenuation2   ));
+    assert_eq!(offset(&thin, &thin.theta        ), offset(&d3d, &d3d.Theta          ));
+    assert_eq!(offset(&thin, &thin.phi          ), offset(&d3d, &d3d.Phi            ));
+
+    fn offset<S, F>(s: &S, f: &F) -> usize {
+        let s : *const S = s;
+        let f : *const F = f;
+        (f as usize) - (s as usize)
     }
-}
-
-impl Deref for Light {
-    type Target = D3DLIGHT9;
-    fn deref(&self) -> &Self::Target { &self.0 }
-}
-
-impl DerefMut for Light {
-    fn deref_mut(&mut self) -> &mut Self::Target { &mut self.0 }
-}
-
-impl Debug for Light {
-    fn fmt(&self, f: &mut Formatter) -> fmt::Result {
-        f.debug_struct("Light")
-            .field("Type",          &self.light_type())
-            .field("Diffuse",       &self.diffuse())
-            .field("Specular",      &self.specular())
-            .field("Ambient",       &self.ambient())
-            .field("Position",      &self.position())
-            .field("Direction",     &self.direction())
-            .field("Range",         &self.0.Range)
-            .field("Falloff",       &self.0.Falloff)
-            .field("Attenuation0",  &self.0.Attenuation0)
-            .field("Attenuation1",  &self.0.Attenuation1)
-            .field("Attenuation2",  &self.0.Attenuation2)
-            .field("Theta",         &self.0.Theta)
-            .field("Phi",           &self.0.Phi)
-            .finish()
-    }
-}
-
-impl From<D3DLIGHT9> for Light {
-    fn from(value: D3DLIGHT9) -> Self { Self(value) }
-}
-
-impl From<Light> for D3DLIGHT9 {
-    fn from(value: Light) -> Self { value.0 }
 }
