@@ -11,6 +11,8 @@
 //! *   Greenfield projects targeting ancient APIs for some reason
 //! *   Graphics middleware looking to integrate into existing D3D9 codebases
 //! 
+//! [Direct3D9]:                https://docs.microsoft.com/en-us/windows/win32/api/d3d9/
+//!
 //! ### Why not [winapi] directly?
 //! 
 //! *   This crate aims to make fns safe/sound/slightly rusty when possible
@@ -47,17 +49,6 @@
 //! &nbsp;  ├─ [StateBlock]
 //! &nbsp;  └─ [VertexDeclaration]</span></div>
 //!
-//! ### Structures
-//!
-//! | `thin3d9` type                            | docs.microsoft.com        | description   |
-//! | ----------------------------------------- | ------------------------- | ------------- |
-//! | [bool32]                                  | [BOOL]                    | 32-bit boolean type that's ABI-compatible with Win32's [BOOL]
-//! | [AdapterIdentifier]                       | [D3DADAPTER_IDENTIFIER9]  | Adapter metadata (driver, description, driver version, vendor/device ids, ...)
-//! | [Caps]                                    | [D3DCAPS9]                | Adapter/device capabilities and limitations
-//! | [Color]                                   | [D3DCOLOR]                | 0xAA<span style="color: red">RR</span><span style="color: green">GG</span><span style="color: blue">BB</span> style 32-bit color
-//! | [DisplayMode]                             | [D3DDISPLAYMODE]          | A display mode ({ Width: u32, Height: u32, RefreshRate: u32, format(): [Format] })
-//! | [Rect]                                    | [D3DRECT] / [RECT]        | `[0i32 .. 1i32, 2i32 .. 3i32]` signed x/y range structure
-//!
 //! ### Enum-like Values
 //!
 //! | `thin3d9` type                            | docs.microsoft.com        | description   |
@@ -73,6 +64,35 @@
 //! | [SdkVersion]                              | DWORD                     | Specify what Direct3D SDK to use ([Direct3D](crate::Direct3D)\[[Ex](crate::Direct3DEx)\]::[create](crate::Direct3D::create)'s only parameter)
 //! | [StateBlockType]                          | [D3DSTATEBLOCKTYPE]       | Predefined sets of pipeline state used by state blocks
 //!
+//! [D3DERR]:                   https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3derr
+//! [D3DDEVTYPE]:               https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddevtype
+//! [D3DFORMAT]:                https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dformat
+//! [D3DMULTISAMPLE_TYPE]:      https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dmultisample-type
+//! [D3DPOOL]:                  https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dpool
+//! [D3DPRIMITIVETYPE]:         https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dprimitivetype
+//! [D3DQUERYTYPE]:             https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dquerytype
+//! [D3DRESOURCETYPE]:          https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dresourcetype
+//! [D3DSTATEBLOCKTYPE]:        https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dstateblocktype
+//!
+//! ### Structures
+//!
+//! | `thin3d9` type                            | docs.microsoft.com        | description   |
+//! | ----------------------------------------- | ------------------------- | ------------- |
+//! | [bool32]                                  | [BOOL]                    | 32-bit boolean type that's ABI-compatible with Win32's [BOOL]
+//! | [AdapterIdentifier]                       | [D3DADAPTER_IDENTIFIER9]  | Adapter metadata (driver, description, driver version, vendor/device ids, ...)
+//! | [Caps]                                    | [D3DCAPS9]                | Adapter/device capabilities and limitations
+//! | [Color]                                   | [D3DCOLOR]                | 0xAA<span style="color: red">RR</span><span style="color: green">GG</span><span style="color: blue">BB</span> style 32-bit color
+//! | [DisplayMode]                             | [D3DDISPLAYMODE]          | A display mode ({ Width: u32, Height: u32, RefreshRate: u32, format(): [Format] })
+//! | [Rect]                                    | [D3DRECT] / [RECT]        | `[0i32 .. 1i32, 2i32 .. 3i32]` signed x/y range structure
+//!
+//! [BOOL]:                     https://docs.microsoft.com/en-us/windows/win32/winprog/windows-data-types#BOOL
+//! [D3DADAPTER_IDENTIFIER9]:   https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dadapter-identifier9
+//! [D3DCAPS9]:                 https://docs.microsoft.com/en-us/windows/win32/api/d3d9caps/ns-d3d9caps-d3dcaps9
+//! [D3DCOLOR]:                 https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dcolor
+//! [D3DDISPLAYMODE]:           https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddisplaymode
+//! [D3DRECT]:                  https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3drect
+//! [RECT]:                     https://docs.microsoft.com/en-us/windows/win32/api/windef/ns-windef-rect
+//!
 //! ### Flags-like Values
 //!
 //! | `thin3d9` type                            | docs.microsoft.com        | description   |
@@ -81,12 +101,17 @@
 //! | [Lock]                                    | DWORD ([D3DLOCK_*])       | A combination of zero or more locking options that describe the type of lock to perform.
 //! | [Usage]                                   | DWORD ([D3DUSAGE_*])      | Usage options that identify how resources are to be used.
 //!
+//! [D3DFVF_*]:                 https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dfvf
+//! [D3DLOCK_*]:                https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dlock
+//! [D3DUSAGE_*]:               https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dusage
+//!
 //! ### Traits
 //!
 //! | `thin3d9` type                            | docs.microsoft.com        | description   |
 //! | ----------------------------------------- | ------------------------- | ------------- |
 //! | unsafe [Raw]                              |                           | Conversion trait for converting between [thin3d9](crate) ⇄ [winapi]
 //! | unsafe [SharedHandleParam]                | \*mut HANDLE              | Placeholder for [Sharing Resources](https://docs.microsoft.com/en-us/windows/win32/direct3d9/dx9lh#sharing-resources) `*mut HANDLE`s
+//!
 //!
 //! ### Re-Exports
 //!
@@ -104,28 +129,6 @@
 //! | `impl-poor-defaults`  | Implement [Default] for a bunch of types... even when there might not be a super sane default.
 //! |                       | Default: disabled     |
 //! | `impl-from-unchecked` | Implement [From]\<[D3DFORMAT]\> for [Format] and similar traits.<br>While these should generally be sound, and may ease porting (e.g. they'll allow using `D3DFMT_UNKNOWN` instead of [Format::UNKNOWN]), they'll also ease authoring bugs (e.g. they'll allow using `9001` for an [Into]\<[Format]\> parameter as well.)
-//!
-//!
-//! [BOOL]:                     https://docs.microsoft.com/en-us/windows/win32/winprog/windows-data-types#BOOL
-//! [Direct3D9]:                https://docs.microsoft.com/en-us/windows/win32/api/d3d9/
-//! [D3DADAPTER_IDENTIFIER9]:   https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dadapter-identifier9
-//! [D3DCAPS9]:                 https://docs.microsoft.com/en-us/windows/win32/api/d3d9caps/ns-d3d9caps-d3dcaps9
-//! [D3DCOLOR]:                 https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dcolor
-//! [D3DDEVTYPE]:               https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddevtype
-//! [D3DDISPLAYMODE]:           https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddisplaymode
-//! [D3DERR]:                   https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3derr
-//! [D3DFORMAT]:                https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dformat
-//! [D3DFVF_*]:                 https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dfvf
-//! [D3DLOCK_*]:                https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dlock
-//! [D3DMULTISAMPLE_TYPE]:      https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dmultisample-type
-//! [D3DPOOL]:                  https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dpool
-//! [D3DPRIMITIVETYPE]:         https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dprimitivetype
-//! [D3DQUERYTYPE]:             https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dquerytype
-//! [D3DRECT]:                  https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3drect
-//! [D3DRESOURCETYPE]:          https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dresourcetype
-//! [D3DSTATEBLOCKTYPE]:        https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dstateblocktype
-//! [D3DUSAGE_*]:               https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dusage
-//! [RECT]:                     https://docs.microsoft.com/en-us/windows/win32/api/windef/ns-windef-rect
 
 use mcom::Rc;
 
