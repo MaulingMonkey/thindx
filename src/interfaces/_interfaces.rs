@@ -3,7 +3,7 @@ use crate::*;
 mod device;         pub use device::Device;
 mod device_draw;
 mod buffers;        pub use buffers::*;
-mod direct3d;       pub use direct3d::Direct3D;
+mod direct3d;       pub use direct3d::*;
 mod direct3dex;
 mod query;          pub use query::*;
 mod shaders;        pub use shaders::*;
