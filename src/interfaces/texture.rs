@@ -159,6 +159,8 @@ impl Device {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-settexture)\]
     /// IDirect3DDevice9::SetTexture
     ///
+    /// Assigns a texture to a stage for a device.
+    ///
     /// ### Safety
     ///
     /// *   This function will crash (or worse!) if `stage` is too large (> `MaxSimultaneousTextures`?)
@@ -192,5 +194,82 @@ impl Device {
         MethodError::check("IDirect3DDevice9::SetTexture", hr)
     }
 }
+
+
+
+/// # Textures
+/// Bind/Create/Update [Texture]s, [CubeTexture]s, and [VolumeTexture]s
+impl SafeDevice {
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-settexture)\]
+    /// IDirect3DDevice9::SetTexture
+    ///
+    /// Assigns a texture to a stage for a device.
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]   if `stage` >= `self.caps().MaxSimultaneousTextures`
+    /// *   Ok(())
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use doc::*; let device = SafeDevice::test();
+    /// let texture = device.create_texture(128, 128, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
+    ///
+    /// device.set_texture(0, &texture).unwrap();
+    /// device.set_texture(1, Some(&*texture)).unwrap();
+    /// device.set_texture(2, None).unwrap();
+    ///
+    /// assert_eq!(device.get_texture(0).unwrap().map(|t| t.as_raw()), Some((*texture).as_raw()));
+    /// assert_eq!(device.get_texture(1).unwrap().map(|t| t.as_raw()), Some((*texture).as_raw()));
+    /// assert!(   device.get_texture(2).unwrap().is_none());
+    ///
+    /// assert_eq!(D3DERR::INVALIDCALL, device.set_texture(1000,   &texture));
+    /// assert_eq!(D3DERR::INVALIDCALL, device.set_texture(10000,  &texture));
+    /// assert_eq!(D3DERR::INVALIDCALL, device.set_texture(100000, &texture));
+    /// assert_eq!(D3DERR::INVALIDCALL, device.set_texture(!0,     &texture));
+    /// ```
+    pub fn set_texture<'t>(&self, stage: u32, texture: impl Into<Option<&'t BaseTexture>>) -> Result<(), MethodError> {
+        if stage >= self.caps().MaxSimultaneousTextures {
+            Err(MethodError("SafeDevice::set_texture", D3DERR::INVALIDCALL))
+        } else {
+            // Safe thanks to bounds check
+            unsafe { self.device().set_texture(stage, texture) }
+        }
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-gettexture)\]
+    /// IDirect3DDevice9::GetTexture
+    ///
+    /// Retrieves a texture assigned to a stage for a device.
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]       If the device is a pure device?
+    /// *   [D3DERR::INVALIDCALL]       If `stage` >= `device.caps().MaxSimultaneousTextures`
+    /// *   Ok(Some([BaseTexture]))     If a texture was bound to that stage
+    /// *   Ok(None)                    If no texture was bound to that stage
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use doc::*; let device = SafeDevice::test();
+    /// let texture = device.create_texture(128, 128, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
+    /// device.set_texture(1, &texture).unwrap();
+    /// 
+    /// assert!(device.get_texture(0).unwrap().is_none());
+    /// assert_eq!(device.get_texture(1).unwrap().unwrap().as_raw(), (*texture).as_raw());
+    /// ```
+    pub fn get_texture(&self, stage: u32) -> Result<Option<BaseTexture>, MethodError> {
+        if stage >= self.caps().MaxSimultaneousTextures {
+            Err(MethodError("SafeDevice::get_texture", D3DERR::INVALIDCALL))
+        } else {
+            // Safe, because we force-initialized up to MaxSimultaneousTextures (see SOUND1)
+            unsafe { self.device().get_texture(stage) }
+        }
+    }
+}
+
+
 
 impl<'t> From<&'t Texture> for Option<&'t BaseTexture> { fn from(t: &'t Texture) -> Self { Some(&*t) } }

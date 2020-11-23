@@ -86,3 +86,8 @@ impl DeviceExt for Device {
         unsafe { d3d.create_device(0, DevType::HAL, null_mut(), behavior, &mut pp) }
     }
 }
+
+impl DeviceExt for SafeDevice {
+    fn test() -> Self { SafeDevice::new(Device::test()).unwrap() }
+    fn test_pp(ppf: impl FnOnce(&mut D3DPRESENT_PARAMETERS)) -> Result<Self, MethodError> { SafeDevice::new(Device::test_pp(ppf)?) }
+}

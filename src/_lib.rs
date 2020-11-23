@@ -120,6 +120,12 @@
 //! [BOOL]:                     https://docs.microsoft.com/en-us/windows/win32/winprog/windows-data-types#BOOL
 //! [D3DCOLOR]:                 https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dcolor
 //!
+//! ### Wrappers
+//!
+//! | Wrapper type                              | Underlying type           | description   |
+//! | ----------------------------------------- | ------------------------- | ------------- |
+//! | [SafeDevice]                              | [Device]                  | Device pointer + enough metadata to make more API calls safe
+//!
 //! ### Re-Exports
 //!
 //! | crate     | version   |
@@ -141,13 +147,16 @@ use mcom::Rc;
 
 #[doc(no_inline)]                                   pub extern crate mcom;
 #[doc(no_inline)]                                   pub extern crate winapi;
+
+// These define types which later mods may extend
+#[path="wrappers/_wrappers.rs"]     mod wrappers;   pub use wrappers::*;
+#[path="interfaces/_interfaces.rs"] mod interfaces; pub use interfaces::*;
+
 #[path="enums/_enums.rs"]           mod enums;      pub use enums::*;
 #[path="flags/_flags.rs"]           mod flags;      pub use flags::*;
-#[path="interfaces/_interfaces.rs"] mod interfaces; pub use interfaces::*;
 #[path="structs/_structs.rs"]       mod structs;    pub use structs::*;
 #[path="traits/_traits.rs"]         mod traits;     pub use traits::*;
 #[path="values/_values.rs"]         mod values;     pub use values::*;
-
 
 
 
