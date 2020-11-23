@@ -49,7 +49,7 @@
 //! &nbsp;  ├─ [StateBlock]
 //! &nbsp;  └─ [VertexDeclaration]</span></div>
 //!
-//! ### Enum-like Values
+//! ### Enums
 //!
 //! | `thin3d9` type                            | docs.microsoft.com        | description   |
 //! | ----------------------------------------- | ------------------------- | ------------- |
@@ -61,7 +61,6 @@
 //! | [PrimitiveType]                           | [D3DPRIMITIVETYPE]        | Defines the primitives supported by Direct3D.
 //! | [QueryType]                               | [D3DQUERYTYPE]            | Identifies the query type.
 //! | [ResourceType]                            | [D3DRESOURCETYPE]         | Specifies the type of a [Resource]/[Volume]
-//! | [SdkVersion]                              | DWORD                     | Specify what Direct3D SDK to use ([Direct3D](crate::Direct3D)\[[Ex](crate::Direct3DEx)\]::[create](crate::Direct3D::create)'s only parameter)
 //! | [StateBlockType]                          | [D3DSTATEBLOCKTYPE]       | Predefined sets of pipeline state used by state blocks
 //!
 //! [D3DERR]:                   https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3derr
@@ -74,32 +73,13 @@
 //! [D3DRESOURCETYPE]:          https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dresourcetype
 //! [D3DSTATEBLOCKTYPE]:        https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dstateblocktype
 //!
-//! ### Structures
+//! ### Flags
 //!
 //! | `thin3d9` type                            | docs.microsoft.com        | description   |
 //! | ----------------------------------------- | ------------------------- | ------------- |
-//! | [bool32]                                  | [BOOL]                    | 32-bit boolean type that's ABI-compatible with Win32's [BOOL]
-//! | [AdapterIdentifier]                       | [D3DADAPTER_IDENTIFIER9]  | Adapter metadata (driver, description, driver version, vendor/device ids, ...)
-//! | [Caps]                                    | [D3DCAPS9]                | Adapter/device capabilities and limitations
-//! | [Color]                                   | [D3DCOLOR]                | 0xAA<span style="color: red">RR</span><span style="color: green">GG</span><span style="color: blue">BB</span> style 32-bit color
-//! | [DisplayMode]                             | [D3DDISPLAYMODE]          | A display mode ({ Width: u32, Height: u32, RefreshRate: u32, format(): [Format] })
-//! | [Rect]                                    | [D3DRECT] / [RECT]        | `[0i32 .. 1i32, 2i32 .. 3i32]` signed x/y range structure
-//!
-//! [BOOL]:                     https://docs.microsoft.com/en-us/windows/win32/winprog/windows-data-types#BOOL
-//! [D3DADAPTER_IDENTIFIER9]:   https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dadapter-identifier9
-//! [D3DCAPS9]:                 https://docs.microsoft.com/en-us/windows/win32/api/d3d9caps/ns-d3d9caps-d3dcaps9
-//! [D3DCOLOR]:                 https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dcolor
-//! [D3DDISPLAYMODE]:           https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddisplaymode
-//! [D3DRECT]:                  https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3drect
-//! [RECT]:                     https://docs.microsoft.com/en-us/windows/win32/api/windef/ns-windef-rect
-//!
-//! ### Flags-like Values
-//!
-//! | `thin3d9` type                            | docs.microsoft.com        | description   |
-//! | ----------------------------------------- | ------------------------- | ------------- |
-//! | [FVF]                                     | DWORD ([D3DFVF_*])        | Describes the contents of vertices interleaved in a single data stream.
-//! | [Lock]                                    | DWORD ([D3DLOCK_*])       | A combination of zero or more locking options that describe the type of lock to perform.
-//! | [Usage]                                   | DWORD ([D3DUSAGE_*])      | Usage options that identify how resources are to be used.
+//! | [FVF]                                     | [D3DFVF_*]                | Describes the contents of vertices interleaved in a single data stream.
+//! | [Lock]                                    | [D3DLOCK_*]               | A combination of zero or more locking options that describe the type of lock to perform.
+//! | [Usage]                                   | [D3DUSAGE_*]              | Usage options that identify how resources are to be used.
 //!
 //! [D3DFVF_*]:                 https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dfvf
 //! [D3DLOCK_*]:                https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dlock
@@ -112,6 +92,31 @@
 //! | unsafe [Raw]                              |                           | Conversion trait for converting between [thin3d9](crate) ⇄ [winapi]
 //! | unsafe [SharedHandleParam]                | \*mut HANDLE              | Placeholder for [Sharing Resources](https://docs.microsoft.com/en-us/windows/win32/direct3d9/dx9lh#sharing-resources) `*mut HANDLE`s
 //!
+//! ### Structures
+//!
+//! | `thin3d9` type                            | docs.microsoft.com        | description   |
+//! | ----------------------------------------- | ------------------------- | ------------- |
+//! | [AdapterIdentifier]                       | [D3DADAPTER_IDENTIFIER9]  | Adapter metadata (driver, description, driver version, vendor/device ids, ...)
+//! | [Caps]                                    | [D3DCAPS9]                | Adapter/device capabilities and limitations
+//! | [DisplayMode]                             | [D3DDISPLAYMODE]          | A display mode ({ Width: u32, Height: u32, RefreshRate: u32, format(): [Format] })
+//! | [Rect]                                    | [D3DRECT] / [RECT]        | `[0i32 .. 1i32, 2i32 .. 3i32]` signed x/y range structure
+//!
+//! [D3DADAPTER_IDENTIFIER9]:   https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dadapter-identifier9
+//! [D3DCAPS9]:                 https://docs.microsoft.com/en-us/windows/win32/api/d3d9caps/ns-d3d9caps-d3dcaps9
+//! [D3DDISPLAYMODE]:           https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddisplaymode
+//! [D3DRECT]:                  https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3drect
+//! [RECT]:                     https://docs.microsoft.com/en-us/windows/win32/api/windef/ns-windef-rect
+//!
+//! ### Values
+//!
+//! | `thin3d9` type                            | docs.microsoft.com        | description   |
+//! | ----------------------------------------- | ------------------------- | ------------- |
+//! | [bool32]                                  | [BOOL]                    | 32-bit boolean type that's ABI-compatible with Win32's [BOOL]
+//! | [Color]                                   | [D3DCOLOR]                | 0xAA<span style="color: red">RR</span><span style="color: green">GG</span><span style="color: blue">BB</span> style 32-bit color
+//! | [SdkVersion]                              | DWORD                     | Specify what Direct3D SDK to use ([Direct3D](crate::Direct3D)\[[Ex](crate::Direct3DEx)\]::[create](crate::Direct3D::create)'s only parameter)
+//!
+//! [BOOL]:                     https://docs.microsoft.com/en-us/windows/win32/winprog/windows-data-types#BOOL
+//! [D3DCOLOR]:                 https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dcolor
 //!
 //! ### Re-Exports
 //!
@@ -134,9 +139,12 @@ use mcom::Rc;
 
 #[doc(no_inline)]                                   pub extern crate mcom;
 #[doc(no_inline)]                                   pub extern crate winapi;
+#[path="enums/_enums.rs"]           mod enums;      pub use enums::*;
+#[path="flags/_flags.rs"]           mod flags;      pub use flags::*;
 #[path="interfaces/_interfaces.rs"] mod interfaces; pub use interfaces::*;
+#[path="structs/_structs.rs"]       mod structs;    pub use structs::*;
+#[path="traits/_traits.rs"]         mod traits;     pub use traits::*;
 #[path="values/_values.rs"]         mod values;     pub use values::*;
-#[path="traits/_traits.rs"]         pub mod traits; #[doc(no_inline)] pub use traits::*;
 
 
 
