@@ -46,9 +46,17 @@ impl Device {
     /// *   [D3DERR::OUTOFVIDEOMEMORY]
     /// *   [D3DERR::OUTOFMEMORY]
     /// *   Ok([CubeTexture])
-    pub(crate) fn create_cube_texture(&self, edge_length: u32, levels: u32, usage: Usage, format: Format, pool: Pool, _shared_handle: impl SharedHandleParam) -> Result<CubeTexture, MethodError> {
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use doc::*; let device = Device::test();
+    /// // Create a 6 x 128x128 ARGB cubemap with no mipmaps
+    /// let texture = device.create_cube_texture(128, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
+    /// ```
+    pub fn create_cube_texture(&self, edge_length: u32, levels: u32, usage: impl Into<Usage>, format: impl Into<Format>, pool: impl Into<Pool>, _shared_handle: impl SharedHandleParam) -> Result<CubeTexture, MethodError> {
         let mut texture = null_mut();
-        let hr = unsafe { self.0.CreateCubeTexture(edge_length, levels, usage.into(), format.into(), pool.into(), &mut texture, null_mut()) };
+        let hr = unsafe { self.0.CreateCubeTexture(edge_length, levels, usage.into().into(), format.into().into(), pool.into().into(), &mut texture, null_mut()) };
         MethodError::check("IDirect3DDevice9::CreateCubeTexture", hr)?;
         Ok(unsafe { CubeTexture::from_raw(texture) })
     }
@@ -64,9 +72,17 @@ impl Device {
     /// *   [D3DERR::OUTOFVIDEOMEMORY]
     /// *   [D3DERR::OUTOFMEMORY]
     /// *   Ok([Texture])
-    pub(crate) fn create_texture(&self, width: u32, height: u32, levels: u32, usage: Usage, format: Format, pool: Pool, _shared_handle: impl SharedHandleParam) -> Result<Texture, MethodError> {
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use doc::*; let device = Device::test();
+    /// // Create a 128x128 ARGB texture with no mipmaps
+    /// let texture = device.create_texture(128, 128, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
+    /// ```
+    pub fn create_texture(&self, width: u32, height: u32, levels: u32, usage: impl Into<Usage>, format: impl Into<Format>, pool: impl Into<Pool>, _shared_handle: impl SharedHandleParam) -> Result<Texture, MethodError> {
         let mut texture = null_mut();
-        let hr = unsafe { self.0.CreateTexture(width, height, levels, usage.into(), format.into(), pool.into(), &mut texture, null_mut()) };
+        let hr = unsafe { self.0.CreateTexture(width, height, levels, usage.into().into(), format.into().into(), pool.into().into(), &mut texture, null_mut()) };
         MethodError::check("IDirect3DDevice9::CreateTexture", hr)?;
         Ok(unsafe { Texture::from_raw(texture) })
     }
@@ -82,9 +98,17 @@ impl Device {
     /// *   [D3DERR::OUTOFVIDEOMEMORY]
     /// *   [D3DERR::OUTOFMEMORY]
     /// *   Ok([VolumeTexture])
-    pub(crate) fn create_volume_texture(&self, width: u32, height: u32, depth: u32, levels: u32, usage: Usage, format: Format, pool: Pool, _shared_handle: impl SharedHandleParam) -> Result<VolumeTexture, MethodError> {
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use doc::*; let device = Device::test();
+    /// // Create a 32x32x32 volumetric ARGB texture with no mipmaps
+    /// let texture = device.create_volume_texture(32, 32, 32, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
+    /// ```
+    pub fn create_volume_texture(&self, width: u32, height: u32, depth: u32, levels: u32, usage: impl Into<Usage>, format: impl Into<Format>, pool: impl Into<Pool>, _shared_handle: impl SharedHandleParam) -> Result<VolumeTexture, MethodError> {
         let mut volumetexture = null_mut();
-        let hr = unsafe { self.0.CreateVolumeTexture(width, height, depth, levels, usage.into(), format.into(), pool.into(), &mut volumetexture, null_mut()) };
+        let hr = unsafe { self.0.CreateVolumeTexture(width, height, depth, levels, usage.into().into(), format.into().into(), pool.into().into(), &mut volumetexture, null_mut()) };
         MethodError::check("IDirect3DDevice9::CreateVolumeTexture", hr)?;
         Ok(unsafe { VolumeTexture::from_raw(volumetexture) })
     }
