@@ -12,9 +12,17 @@ use std::ops::{Deref, DerefMut};
 /// Describes the display mode.
 #[derive(Clone, Copy, Default, Debug)]
 #[repr(C)] pub struct DisplayMode {
+    /// Screen width, in pixels.
     pub width:          u32,
+
+    /// Screen height, in pixels.
     pub height:         u32,
+
+    /// Refresh rate, in refreshes per seconds (hz).
+    /// The value of 0 indicates an adapter default.
     pub refresh_rate:   u32,
+
+    /// Surface format of the display mode / screen.
     pub format:         Format,
 }
 
