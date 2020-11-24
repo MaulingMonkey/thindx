@@ -14,3 +14,4 @@ mod resource_type;          pub use resource_type::*;
 mod sgr;                    pub use sgr::*;
 mod state_block_type;       pub use state_block_type::*;
 mod stream_source;          pub use stream_source::*;
+mod swap_effect;            pub use swap_effect::*;

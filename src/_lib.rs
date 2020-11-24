@@ -68,6 +68,7 @@
 //! | [ResourceType]                            | [D3DRESOURCETYPE]         | Specifies the type of a [Resource]/[Volume]
 //! | [SGR]                                     | [D3DSGR]                  | Indicates whether gamma correction should be applied.
 //! | [StateBlockType]                          | [D3DSTATEBLOCKTYPE]       | Predefined sets of pipeline state used by state blocks
+//! | [SwapEffect]                              | [D3DSWAPEFFECT]           | Defines [Device::present] swap effects.
 //!
 //! [D3DERR]:                   https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3derr
 //! [D3DBACKBUFFER_TYPE]:       https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dbackbuffer-type
@@ -84,6 +85,7 @@
 //! [D3DRESOURCETYPE]:          https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dresourcetype
 //! [D3DSGR]:                   https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dsgr
 //! [D3DSTATEBLOCKTYPE]:        https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dstateblocktype
+//! [D3DSWAPEFFECT]:            https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dswapeffect
 //!
 //! ### Flags
 //!
