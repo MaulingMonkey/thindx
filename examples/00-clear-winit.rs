@@ -7,7 +7,6 @@ use raw_window_handle::windows::*;
 
 use winapi::shared::d3d9caps::*;
 use winapi::shared::d3d9types::*;
-use winapi::shared::winerror::SUCCEEDED;
 
 use winapi::um::debugapi::*;
 
@@ -64,7 +63,7 @@ fn main() {
             },
             Event::MainEventsCleared => {
                 device.clear(None, Some(Color::argb(0xFF224466)), None, None).unwrap();
-                assert!(SUCCEEDED(unsafe { (*device.as_raw()).Present(null(), null(), null_mut(), null()) }));
+                unsafe { device.present(None, None, null_mut(), None) }.unwrap(); // TODO: Handle D3DERR::DEVICELOST
             },
             _ => {},
         }

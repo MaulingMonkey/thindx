@@ -2,6 +2,8 @@
 
 use crate::*;
 
+use std::ptr::*;
+
 // TODO: support for Device s in doc comment examples (via dev crate?)
 // TODO: fuzz / torture-test Device operations in randomized combinations for odd interactions
 
@@ -67,6 +69,65 @@ impl Device {
 
     // TODO: fn scene(&self) with sane error handling / drop behavior?
     // TODO: examples
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-present)\]
+    /// IDirect3DDevice9::Present
+    ///
+    /// Presents the contents of the next buffer in the sequence of back buffers owned by the device.
+    ///
+    /// ### Safety
+    ///
+    /// *   It's likely unsound to use an invalid, non-null `hwnd`
+    /// *   It's likely unsound to use a null `hwnd` if the original `presentation_parameters.hDeviceWindow` is an invalid, non-null HWND
+    /// *   Out of bounds rects might also be an issue IDK?
+    ///
+    /// ### Arguments
+    ///
+    /// *   `source_rect`   - "Must be [None]" unless the [SwapChain] was created with [SwapEffect::Copy].  Can still be [None] even then (the entire source surface is presented.)
+    /// *   `dest_rect`     - "Must be [None]" unless the [SwapChain] was created with [SwapEffect::Copy].  Can still be [None] even then (the entire client area is filled.)
+    /// *   `hwnd`
+    /// *   `dirty_region`  - "Must be [None]" unless the [SwapChain] was created with [SwapEffect::Copy].  Can still be [None] even then (the entire region will be considered dirty.)  The implementation is free to copy more than the exact dirty region.
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::DEVICEREMOVED]     When you least expect it
+    /// *   [D3DERR::INVALIDCALL]       If called within a [Device::begin_scene] .. [Device::end_scene] section, if the render target is the current render target.
+    /// *   Ok(`()`)
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use std::ptr::null_mut;   let hwnd = null_mut();
+    /// # use doc::*;               let device = Device::test();
+    /// // Present the entire back buffer (should work with all swap chains, probably:)
+    /// unsafe { device.present(None, None, null_mut(), None) }.unwrap();
+    /// // TODO: Handle D3DERR::DEVICEREMOVED
+    ///
+    /// // Or, with a SwapEffect::Copy swap chain, this should succeed (might succeed by simply ignoring the args, even for other SwapEffect s:)
+    /// let _ = unsafe { device.present(Rect::from((0,0)..(100,100)), Rect::from((0,0)..(100,100)), hwnd, None) };
+    /// ```
+    pub unsafe fn present<'r>(&self, source_rect: impl Into<Option<Rect>>, dest_rect: impl Into<Option<Rect>>, hwnd: impl Into<HWND>, dirty_region: impl Into<Option<&'r RgnData>>) -> Result<(), MethodError> {
+        let source_rect     = source_rect.into();
+        let dest_rect       = dest_rect.into();
+        let hwnd            = hwnd.into();
+        let _dirty_region   = dirty_region;
+
+        let source_rect     = source_rect   .map_or(null(), |r| &*r).cast();
+        let dest_rect       = dest_rect     .map_or(null(), |r| &*r).cast();
+
+        let hr = self.0.Present(source_rect, dest_rect, hwnd, null());
+        MethodError::check("IDirect3DDevice9::Present", hr)
+    }
+}
+
+/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/wingdi/ns-wingdi-rgndata)\]
+/// RGNDATA placeholder
+///
+/// RGNDATA is a header-prefixed array.  While constructable in Rust, they're slightly awkward at best.
+#[repr(C)]
+pub struct RgnData {
+    rdh:    winapi::um::wingdi::RGNDATAHEADER,
+    buffer: [Rect],
 }
 
 #[test] fn begin_end_scene() {

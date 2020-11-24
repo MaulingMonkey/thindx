@@ -8,7 +8,6 @@ use winapi::shared::d3d9caps::*;
 use winapi::shared::d3d9types::*;
 use winapi::shared::minwindef::*;
 use winapi::shared::windef::*;
-use winapi::shared::winerror::SUCCEEDED;
 
 use winapi::um::debugapi::*;
 use winapi::um::libloaderapi::*;
@@ -103,8 +102,7 @@ fn main() {
             let device = d.borrow();
             if let Some(device) = device.as_ref() {
                 device.clear(None, Some(Color::argb(0xFF664422)), None, None).unwrap();
-                let device = unsafe { &*device.as_raw() };
-                assert!(SUCCEEDED(unsafe { device.Present(null(), null(), null_mut(), null()) }));
+                unsafe { device.present(None, None, null_mut(), None) }.unwrap(); // TODO: Handle D3DERR::DEVICELOST
             }
         });
     }
