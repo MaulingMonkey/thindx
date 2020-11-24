@@ -75,5 +75,5 @@ impl From<DeclUsage8> for D3DDECLUSAGE {
 
 #[cfg(feature = "impl-from-unchecked")]
 impl From<D3DDECLUSAGE> for DeclUsage8 {
-    fn from(value: D3DDECLUSAGE) -> Self { Self(value) }
+    fn from(value: D3DDECLUSAGE) -> Self { Self(value as u8) }
 }

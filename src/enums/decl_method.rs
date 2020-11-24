@@ -61,5 +61,5 @@ impl From<DeclMethod8> for D3DDECLMETHOD {
 
 #[cfg(feature = "impl-from-unchecked")]
 impl From<D3DDECLMETHOD> for DeclMethod8 {
-    fn from(value: D3DDECLMETHOD) -> Self { Self(value) }
+    fn from(value: D3DDECLMETHOD) -> Self { Self(value as u8) }
 }

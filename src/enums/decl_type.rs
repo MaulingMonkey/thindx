@@ -83,5 +83,5 @@ impl From<DeclType8> for D3DDECLTYPE {
 
 #[cfg(feature = "impl-from-unchecked")]
 impl From<D3DDECLTYPE> for DeclType8 {
-    fn from(value: D3DDECLTYPE) -> Self { Self(value) }
+    fn from(value: D3DDECLTYPE) -> Self { Self(value as u8) }
 }
