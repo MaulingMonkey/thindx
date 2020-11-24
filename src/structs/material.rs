@@ -33,21 +33,4 @@ impl DerefMut for Material { fn deref_mut(&mut self) -> &mut Self::Target { unsa
 impl From<D3DMATERIAL9> for Material { fn from(value: D3DMATERIAL9) -> Self { unsafe { std::mem::transmute(value) } } }
 impl From<Material> for D3DMATERIAL9 { fn from(value: Material    ) -> Self { unsafe { std::mem::transmute(value) } } }
 
-#[test] fn layout() {
-    let thin = Material::default();
-    let d3d  = unsafe { std::mem::zeroed::<D3DMATERIAL9>() };
-
-    assert_eq!(std::mem::size_of_val (&thin), std::mem::size_of_val (&d3d));
-    assert_eq!(std::mem::align_of_val(&thin), std::mem::align_of_val(&d3d));
-    assert_eq!(offset(&thin, &thin.diffuse ), offset(&d3d, &d3d.Diffuse ));
-    assert_eq!(offset(&thin, &thin.ambient ), offset(&d3d, &d3d.Ambient ));
-    assert_eq!(offset(&thin, &thin.specular), offset(&d3d, &d3d.Specular));
-    assert_eq!(offset(&thin, &thin.emissive), offset(&d3d, &d3d.Emissive));
-    assert_eq!(offset(&thin, &thin.power   ), offset(&d3d, &d3d.Power   ));
-
-    fn offset<S, F>(s: &S, f: &F) -> usize {
-        let s : *const S = s;
-        let f : *const F = f;
-        (f as usize) - (s as usize)
-    }
-}
+test_layout! { Material => unsafe D3DMATERIAL9 { diffuse => Diffuse, ambient => Ambient, specular => Specular, emissive => Emissive, power => Power } }
