@@ -202,27 +202,6 @@ impl Device {
         Ok(unsafe { Direct3D::from_raw(d3d) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getfvf)\]
-    /// IDirect3DDevice9::GetFVF
-    ///
-    /// ### Returns
-    ///
-    /// *   [D3DERR::INVALIDCALL]       "If the method fails" (impossible via thin3d9?)
-    /// *   Ok([FVF])
-    ///
-    /// ### Example
-    ///
-    /// ```rust
-    /// # use doc::*; let device = Device::test();
-    /// assert_eq!(device.get_fvf().unwrap(), FVF::None);
-    /// ```
-    pub fn get_fvf(&self) -> Result<FVF, MethodError> {
-        let mut fvf = FVF::None;
-        let hr = unsafe { self.0.GetFVF(&mut *fvf) };
-        MethodError::check("IDirect3DDevice9::GetFVF", hr)?;
-        Ok(fvf)
-    }
-
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getgammaramp)\]
     /// IDirect3DDevice9::GetGammaRamp
     ///
@@ -321,26 +300,6 @@ impl Device {
         let hr = self.0.GetPaletteEntries(palette_number, colors.as_mut_ptr().cast());
         MethodError::check("IDirect3DDevice9::GetPaletteEntries", hr)?;
         Ok(colors)
-    }
-
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setfvf)\]
-    /// IDirect3DDevice9::SetFVF
-    ///
-    /// ### Returns
-    ///
-    /// *   [D3DERR::INVALIDCALL]       "If the method fails (impossible via thin3d9?)
-    /// *   Ok(())
-    ///
-    /// ### Example
-    ///
-    /// ```rust
-    /// # use doc::*; let device = Device::test();
-    /// device.set_fvf(FVF::None).unwrap();
-    /// device.set_fvf(FVF::XYZ).unwrap();
-    /// ```
-    pub fn set_fvf(&self, fvf: impl Into<FVF>) -> Result<(), MethodError> {
-        let hr = unsafe { self.0.SetFVF(fvf.into().into()) };
-        MethodError::check("IDirect3DDevice9::SetFVF", hr)
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setgammaramp)\]
