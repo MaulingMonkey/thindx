@@ -47,7 +47,7 @@ impl Direct3DEx {
     /// *   The caller's codebase is responsible for ensuring any [HWND]s (`hwnd`, `presentation_parameters.hDeviceWindow`) outlive the [Device].
     ///      See [Direct3D::create_device] for guidance and details.
     /// *   `fullscreen_display_modes` is assumed to contain an entry for every adapter if `behavior_flags & D3DCREATE_ADAPTERGROUP_DEVICE` (TODO: enforce this via checks?)
-    pub unsafe fn create_device_ex(&self, adapter: u32, device_type: impl Into<DevType>, hwnd: HWND, behavior_flags: u32, presentation_parameters: &mut D3DPRESENT_PARAMETERS, fullscreen_display_modes: &mut [D3DDISPLAYMODEEX]) -> Result<DeviceEx, MethodError> {
+    pub unsafe fn create_device_ex(&self, adapter: u32, device_type: impl Into<DevType>, hwnd: HWND, behavior_flags: impl Into<Create>, presentation_parameters: &mut D3DPRESENT_PARAMETERS, fullscreen_display_modes: &mut [D3DDISPLAYMODEEX]) -> Result<DeviceEx, MethodError> {
         for fdm in fullscreen_display_modes.iter_mut() {
             fdm.Size = std::mem::size_of_val(fdm).try_into().unwrap();
         }
@@ -55,7 +55,7 @@ impl Direct3DEx {
         // TODO: examples, returns, etc.
         let mut device = null_mut();
         let modes = if fullscreen_display_modes.is_empty() { null_mut() } else { fullscreen_display_modes.as_mut_ptr() };
-        let hr = self.0.CreateDeviceEx(adapter, device_type.into().into(), hwnd, behavior_flags, presentation_parameters, modes, &mut device);
+        let hr = self.0.CreateDeviceEx(adapter, device_type.into().into(), hwnd, behavior_flags.into().into(), presentation_parameters, modes, &mut device);
         MethodError::check("IDirect3D9Ex::CreateDeviceEx", hr)?;
         Ok(DeviceEx::from_raw(device))
     }
