@@ -2,6 +2,8 @@
 
 use crate::*;
 
+use winapi::ctypes::c_void;
+
 use std::ptr::null_mut;
 
 
@@ -10,6 +12,12 @@ use std::ptr::null_mut;
 /// (extends [Resource])
 /// An [index buffer](https://docs.microsoft.com/en-us/windows/win32/direct3d9/rendering-from-vertex-and-index-buffers#scenario-2-drawing-two-triangles-with-indexing)
 /// indexes verticies in a [VertexBuffer] when rendering.
+///
+/// ### See Also
+///
+/// *   [Device::create_index_buffer]
+/// *   [Device::set_indices]
+/// *   [Device::get_indices]
 #[derive(Clone)] #[repr(transparent)]
 pub struct IndexBuffer(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DIndexBuffer9>);
 
@@ -17,6 +25,14 @@ pub struct IndexBuffer(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DIndexB
 /// (extends [Resource])
 /// A [vertex buffer](https://docs.microsoft.com/en-us/windows/win32/direct3d9/rendering-from-vertex-and-index-buffers#scenario-2-drawing-two-triangles-with-indexing)
 /// typically contains points of a mesh to be rendered.
+///
+/// ### See Also
+///
+/// *   [Device::create_vertex_buffer]
+/// *   [Device::set_stream_source]
+/// *   [Device::set_stream_source_freq]
+/// *   [Device::get_stream_source]
+/// *   [Device::get_stream_source_freq]
 #[derive(Clone)] #[repr(transparent)]
 pub struct VertexBuffer(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DVertexBuffer9>);
 
@@ -151,6 +167,185 @@ impl Device {
         MethodError::check("IDirect3DDevice9::GetIndices", hr)?;
         Ok(unsafe { IndexBuffer::from_raw_opt(buffer) })
     }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setstreamsource)\]
+    /// IDirect3DDevice9::SetStreamSource
+    ///
+    /// Binds a vertex buffer to a device data stream. For more information, see [Setting the Stream Source (Direct3D 9)].
+    ///
+    /// [Setting the Stream Source (Direct3D 9)]:       https://docs.microsoft.com/en-us/windows/desktop/direct3d9/setting-the-stream-source
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]       if the [VertexBuffer] belongs to another device?
+    /// *   Ok(`()`)
+    pub fn set_stream_source<'b>(&self, stream_number: u32, stream_data: impl Into<Option<&'b VertexBuffer>>, offset_in_bytes: u32, stride: u32) -> Result<(), MethodError> {
+        let stream_data = stream_data.into();
+        let stream_data = stream_data.map_or(null_mut(), |sd| sd.as_raw());
+        let hr = unsafe { self.0.SetStreamSource(stream_number, stream_data, offset_in_bytes, stride) };
+        MethodError::check("IDirect3DDevice9::SetStreamSource", hr)
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setstreamsourcefreq)\]
+    /// IDirect3DDevice9::SetStreamSourceFreq
+    ///
+    /// Sets the stream source frequency divider value. This may be used to draw several instances of geometry.
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]
+    /// *   Ok(`()`)
+    pub fn set_stream_source_freq(&self, stream_number: u32, setting: impl Into<StreamSource>) -> Result<(), MethodError> {
+        let setting = setting.into().into();
+        let hr = unsafe { self.0.SetStreamSourceFreq(stream_number, setting) };
+        MethodError::check("IDirect3DDevice9::SetStreamSourceFreq", hr)
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getstreamsource)\]
+    /// IDirect3DDevice9::GetStreamSource
+    ///
+    /// Retrieves a vertex buffer bound to the specified data stream.
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]   The device was a pure device?
+    /// *   Ok(Some([VertexBuffer]), `offset_in_bytes`, `stride`)
+    /// *   Ok(None, 0, 0)
+    pub fn get_stream_source(&self, stream_number: u32) -> Result<(Option<VertexBuffer>, u32, u32), MethodError> {
+        let mut buffer = null_mut();
+        let mut offset = 0;
+        let mut stride = 0;
+        let hr = unsafe { self.0.GetStreamSource(stream_number, &mut buffer, &mut offset, &mut stride) };
+        MethodError::check("IDirect3DDevice9::GetStreamSource", hr)?;
+        let buffer = unsafe { VertexBuffer::from_raw_opt(buffer) };
+        Ok((buffer, offset, stride))
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getstreamsourcefreq)\]
+    /// IDirect3DDevice9::GetStreamSourceFreq
+    ///
+    /// Gets the stream source frequency divider value.
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]   The device was a pure device?
+    /// *   Ok([StreamSource])
+    pub fn get_stream_source_freq(&self, stream_number: u32) -> Result<StreamSource, MethodError> {
+        let mut freq = 0;
+        let hr = unsafe { self.0.GetStreamSourceFreq(stream_number, &mut freq) };
+        MethodError::check("IDirect3DDevice9::GetStreamSourceFreq", hr)?;
+        Ok(StreamSource::from_unchecked(freq))
+    }
+}
+
+
+
+impl IndexBuffer {
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dindexbuffer9-getdesc)\]
+    /// IDirect3DIndexBuffer9::GetDesc
+    ///
+    /// Retrieves a description of the index buffer.
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]   The device was pure?
+    /// *   Ok([IndexBufferDesc])
+    pub fn get_desc(&self) -> Result<IndexBufferDesc, MethodError> {
+        let mut desc = IndexBufferDesc::default();
+        let hr = unsafe { self.0.GetDesc(&mut *desc) };
+        MethodError::check("IDirect3DIndexBuffer9::GetDesc", hr)?;
+        Ok(desc)
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dindexbuffer9-lock)\]
+    /// IDirect3DIndexBuffer9::Lock
+    ///
+    /// ### Safety
+    ///
+    /// *   Invalid, out-of-bounds `offset` / `size`s might be unsound
+    /// *   Violating the constraints imposed by `flags` is definitely unsound
+    /// *   Having multiple writers to the resulting pointer (including from other locks?) is also super unsound
+    ///
+    /// Sound users of this API will lock, modify, and unlock in such a way as to prevent any other concurrent modifier of the data in question.
+    /// This is simplified by the Direct3D APIs being \![Send], \![Sync], but care must be involved with traits that could execute arbitrary code.
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]
+    /// *   Ok(data)
+    pub unsafe fn lock_unchecked(&self, offset: u32, size: u32, flags: impl Into<Lock>) -> Result<*mut c_void, MethodError> {
+        let mut data = null_mut();
+        let hr = self.0.Lock(offset, size, &mut data, flags.into().into());
+        MethodError::check("IDirect3DIndexBuffer9::Lock", hr)?;
+        Ok(data)
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dindexbuffer9-unlock)\]
+    /// IDirect3DIndexBuffer9::Unlock
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]   The index buffer wasn't locked?
+    /// *   Ok(`()`)
+    pub fn unlock(&self) -> Result<(), MethodError> {
+        let hr = unsafe { self.0.Unlock() };
+        MethodError::check("IDirect3DIndexBuffer9::Unlock", hr)
+    }
+}
+
+
+
+impl VertexBuffer {
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexbuffer9-getdesc)\]
+    /// IDirect3DVertexBuffer9::GetDesc
+    ///
+    /// Retrieves a description of the vertex buffer.
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]   The device was pure?
+    /// *   Ok([VertexBufferDesc])
+    pub fn get_desc(&self) -> Result<VertexBufferDesc, MethodError> {
+        let mut desc = VertexBufferDesc::default();
+        let hr = unsafe { self.0.GetDesc(&mut *desc) };
+        MethodError::check("IDirect3DVertexBuffer9::GetDesc", hr)?;
+        Ok(desc)
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexbuffer9-lock)\]
+    /// IDirect3DVertexBuffer9::Lock
+    ///
+    /// ### Safety
+    ///
+    /// *   Invalid, out-of-bounds `offset` / `size`s might be unsound
+    /// *   Violating the constraints imposed by `flags` is definitely unsound
+    /// *   Having multiple writers to the resulting pointer (including from other locks?) is also super unsound
+    ///
+    /// Sound users of this API will lock, modify, and unlock in such a way as to prevent any other concurrent modifier of the data in question.
+    /// This is simplified by the Direct3D APIs being \![Send], \![Sync], but care must be involved with traits that could execute arbitrary code.
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]
+    /// *   Ok(data)
+    pub unsafe fn lock_unchecked(&self, offset: u32, size: u32, flags: impl Into<Lock>) -> Result<*mut c_void, MethodError> {
+        let mut data = null_mut();
+        let hr = self.0.Lock(offset, size, &mut data, flags.into().into());
+        MethodError::check("IDirect3DVertexBuffer9::Lock", hr)?;
+        Ok(data)
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexbuffer9-unlock)\]
+    /// IDirect3DVertexBuffer9::Unlock
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]   The vertex buffer wasn't locked?
+    /// *   Ok(`()`)
+    pub fn unlock(&self) -> Result<(), MethodError> {
+        let hr = unsafe { self.0.Unlock() };
+        MethodError::check("IDirect3DVertexBuffer9::Unlock", hr)
+    }
 }
 
 
@@ -212,3 +407,6 @@ impl Device {
 
     // TODO: multiple device tests
 }
+
+// TODO: a lot more testing
+// TODO: examples
