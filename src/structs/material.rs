@@ -42,7 +42,7 @@ test_layout! { Material => unsafe D3DMATERIAL9 { diffuse => Diffuse, ambient => 
 
 
 
-/// # Materails
+/// # Materials
 impl Device {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setmaterial)\]
     /// IDirect3DDevice9::SetMaterial
