@@ -1,5 +1,8 @@
 mod back_buffer_type;       pub use back_buffer_type::*;
 mod d3derr;                 pub use d3derr::*;
+mod decl_method;            pub use decl_method::*;
+mod decl_type;              pub use decl_type::*;
+mod decl_usage;             pub use decl_usage::*;
 mod devtype;                pub use devtype::*;
 mod format;                 pub use format::*;
 mod light_type;             pub use light_type::*;

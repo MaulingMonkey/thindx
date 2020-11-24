@@ -46,8 +46,8 @@
 //! &nbsp;  │      ├─ [PixelShader] - per-fragment GPU program
 //! &nbsp;  │      └─ [VertexShader] - per-vertex GPU program
 //! &nbsp;  ├─ [Query]
-//! &nbsp;  ├─ [StateBlock]
-//! &nbsp;  └─ [VertexDeclaration]</span></div>
+//! &nbsp;  ├─ [StateBlock]</span>
+//! &nbsp;  └─ [VertexDeclaration] - Describes the layout of the contents of a [VertexBuffer]</div>
 //!
 //! ### Enums
 //!

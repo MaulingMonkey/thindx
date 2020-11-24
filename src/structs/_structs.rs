@@ -7,4 +7,5 @@ mod light;                  pub use light::*;
 mod material;               pub use material::*;
 mod rect;                   pub use rect::*;
 mod vector;                 pub use vector::*;
+mod vertex_element;         pub use vertex_element::*;
 mod viewport;               pub use viewport::*;
