@@ -4,7 +4,7 @@ mod device;         pub use device::Device;
 mod device_draw;
 mod buffers;        pub use buffers::*;
 mod direct3d;       pub use direct3d::*;
-mod direct3dex;
+mod direct3dex;     pub use direct3dex::*;
 mod query;          pub use query::*;
 mod shaders;        pub use shaders::*;
 mod state_block;    pub use state_block::*;
@@ -19,13 +19,6 @@ mod device_misc;
 /// Base COM interface all D3D9 types eventually derive from.
 #[derive(Clone)] #[repr(transparent)]
 pub struct Unknown(mcom::Rc<winapi::um::unknwnbase::IUnknown>);
-
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3d9ex)\]
-/// (extends [Direct3D])
-/// Factory for use in creating your initial [DeviceEx].
-#[cfg(feature = "9ex")]
-#[derive(Clone)] #[repr(transparent)]
-pub struct Direct3DEx(mcom::Rc<winapi::shared::d3d9::IDirect3D9Ex>);
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3ddevice9ex)\]
 /// (extends [Device])
