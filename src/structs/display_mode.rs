@@ -10,6 +10,10 @@ use std::ops::{Deref, DerefMut};
 /// D3DDISPLAYMODE
 ///
 /// Describes the display mode.
+///
+/// ### See Also
+///
+/// *   [Device::get_display_mode]
 #[derive(Clone, Copy, Default, Debug)]
 #[repr(C)] pub struct DisplayMode {
     /// Screen width, in pixels.

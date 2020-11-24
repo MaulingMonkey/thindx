@@ -10,6 +10,18 @@ use std::ops::{Deref, DerefMut};
 /// D3DLIGHT9
 ///
 /// Defines a set of lighting properties.
+///
+/// ### See Also
+///
+/// *   [Device::set_light]
+/// *   [Device::light_enable]
+/// *   [Device::get_light]
+/// *   [Device::get_light_enable]
+/// ---
+/// *   [Device::set_light_32_unchecked]
+/// *   [Device::light_enable_32_unchecked]
+/// *   [Device::get_light_32]
+/// *   [Device::get_light_enable_32]
 #[derive(Clone, Copy, Debug, Default)]
 #[repr(C)] pub struct Light {
     /// Type of the light source.

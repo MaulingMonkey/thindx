@@ -10,6 +10,11 @@ use std::ops::{Deref, DerefMut};
 /// D3DVIEWPORT9
 ///
 /// Defines Viewport properties.
+///
+/// ### See Also
+///
+/// *   [Device::set_viewport]
+/// *   [Device::get_viewport]
 #[derive(Clone, Copy, Debug, Default)]
 #[repr(C)] pub struct Viewport {
     /// Pixel coordinate of the upper-left corner of the viewport on the render-target surface.
