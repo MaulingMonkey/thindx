@@ -8,7 +8,7 @@ use std::ops::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dlock)\]
+/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dgetdata-flush)\]
 /// DWORD / D3DGETDATA_*
 ///
 /// Controls how [Query::get_data_inplace] behaves.
@@ -16,7 +16,7 @@ use std::ops::*;
 #[repr(transparent)] pub struct GetData(D3DGETDATA);
 
 impl GetData {
-    pub const fn from_unchecked(lock: D3DGETDATA) -> Self { Self(lock) }
+    pub const fn from_unchecked(gd: D3DGETDATA) -> Self { Self(gd) }
     pub const fn into(self) -> D3DGETDATA { self.0 }
 }
 
