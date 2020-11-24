@@ -99,30 +99,21 @@ impl DerefMut for Light { fn deref_mut(&mut self) -> &mut Self::Target { unsafe 
 impl From<D3DLIGHT9> for Light { fn from(value: D3DLIGHT9) -> Self { unsafe { std::mem::transmute(value) } } }
 impl From<Light> for D3DLIGHT9 { fn from(value: Light    ) -> Self { unsafe { std::mem::transmute(value) } } }
 
-#[test] fn layout() {
-    let thin = Light::default();
-    let d3d  = unsafe { std::mem::zeroed::<D3DLIGHT9>() };
-
-    assert_eq!(std::mem::size_of_val (&thin), std::mem::size_of_val (&d3d));
-    assert_eq!(std::mem::align_of_val(&thin), std::mem::align_of_val(&d3d));
-    assert_eq!(offset(&thin, &thin.light_type   ), offset(&d3d, &d3d.Type           ));
-    assert_eq!(offset(&thin, &thin.diffuse      ), offset(&d3d, &d3d.Diffuse        ));
-    assert_eq!(offset(&thin, &thin.specular     ), offset(&d3d, &d3d.Specular       ));
-    assert_eq!(offset(&thin, &thin.ambient      ), offset(&d3d, &d3d.Ambient        ));
-    assert_eq!(offset(&thin, &thin.position     ), offset(&d3d, &d3d.Position       ));
-    assert_eq!(offset(&thin, &thin.direction    ), offset(&d3d, &d3d.Direction      ));
-    assert_eq!(offset(&thin, &thin.range        ), offset(&d3d, &d3d.Range          ));
-    assert_eq!(offset(&thin, &thin.falloff      ), offset(&d3d, &d3d.Falloff        ));
-    assert_eq!(offset(&thin, &thin.attenuation0 ), offset(&d3d, &d3d.Attenuation0   ));
-    assert_eq!(offset(&thin, &thin.attenuation1 ), offset(&d3d, &d3d.Attenuation1   ));
-    assert_eq!(offset(&thin, &thin.attenuation2 ), offset(&d3d, &d3d.Attenuation2   ));
-    assert_eq!(offset(&thin, &thin.theta        ), offset(&d3d, &d3d.Theta          ));
-    assert_eq!(offset(&thin, &thin.phi          ), offset(&d3d, &d3d.Phi            ));
-
-    fn offset<S, F>(s: &S, f: &F) -> usize {
-        let s : *const S = s;
-        let f : *const F = f;
-        (f as usize) - (s as usize)
+test_layout! {
+    Light => unsafe D3DLIGHT9 {
+        light_type      => Type,
+        diffuse         => Diffuse,
+        specular        => Specular,
+        ambient         => Ambient,
+        position        => Position,
+        direction       => Direction,
+        range           => Range,
+        falloff         => Falloff,
+        attenuation0    => Attenuation0,
+        attenuation1    => Attenuation1,
+        attenuation2    => Attenuation2,
+        theta           => Theta,
+        phi             => Phi,
     }
 }
 
