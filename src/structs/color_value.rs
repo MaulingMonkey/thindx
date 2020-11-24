@@ -49,20 +49,4 @@ impl DerefMut for ColorValue { fn deref_mut(&mut self) -> &mut Self::Target { un
 impl From<D3DCOLORVALUE> for ColorValue { fn from(value: D3DCOLORVALUE) -> Self { unsafe { std::mem::transmute(value) } } }
 impl From<ColorValue> for D3DCOLORVALUE { fn from(value: ColorValue   ) -> Self { unsafe { std::mem::transmute(value) } } }
 
-#[test] fn layout() {
-    let thin = ColorValue::default();
-    let d3d  = unsafe { std::mem::zeroed::<D3DCOLORVALUE>() };
-
-    assert_eq!(std::mem::size_of_val (&thin), std::mem::size_of_val (&d3d));
-    assert_eq!(std::mem::align_of_val(&thin), std::mem::align_of_val(&d3d));
-    assert_eq!(offset(&thin, &thin.r), offset(&d3d, &d3d.r));
-    assert_eq!(offset(&thin, &thin.g), offset(&d3d, &d3d.g));
-    assert_eq!(offset(&thin, &thin.b), offset(&d3d, &d3d.b));
-    assert_eq!(offset(&thin, &thin.a), offset(&d3d, &d3d.a));
-
-    fn offset<S, F>(s: &S, f: &F) -> usize {
-        let s : *const S = s;
-        let f : *const F = f;
-        (f as usize) - (s as usize)
-    }
-}
+test_layout! { ColorValue => unsafe D3DCOLORVALUE { r => r, g => g, b => b, a => a } }
