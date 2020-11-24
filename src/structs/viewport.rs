@@ -47,25 +47,7 @@ impl DerefMut for Viewport { fn deref_mut(&mut self) -> &mut Self::Target { unsa
 impl From<D3DVIEWPORT9> for Viewport { fn from(value: D3DVIEWPORT9) -> Self { unsafe { std::mem::transmute(value) } } }
 impl From<Viewport> for D3DVIEWPORT9 { fn from(value: Viewport    ) -> Self { unsafe { std::mem::transmute(value) } } }
 
-#[test] fn layout() {
-    let thin = Viewport::default();
-    let d3d  = unsafe { std::mem::zeroed::<D3DVIEWPORT9>() };
-
-    assert_eq!(std::mem::size_of_val (&thin), std::mem::size_of_val (&d3d));
-    assert_eq!(std::mem::align_of_val(&thin), std::mem::align_of_val(&d3d));
-    assert_eq!(offset(&thin, &thin.x        ), offset(&d3d, &d3d.X ));
-    assert_eq!(offset(&thin, &thin.y        ), offset(&d3d, &d3d.Y ));
-    assert_eq!(offset(&thin, &thin.width    ), offset(&d3d, &d3d.Width ));
-    assert_eq!(offset(&thin, &thin.height   ), offset(&d3d, &d3d.Height ));
-    assert_eq!(offset(&thin, &thin.min_z    ), offset(&d3d, &d3d.MinZ ));
-    assert_eq!(offset(&thin, &thin.max_z    ), offset(&d3d, &d3d.MaxZ ));
-
-    fn offset<S, F>(s: &S, f: &F) -> usize {
-        let s : *const S = s;
-        let f : *const F = f;
-        (f as usize) - (s as usize)
-    }
-}
+test_layout! { Viewport => unsafe D3DVIEWPORT9 { x => X, y => Y, width => Width, height => Height, min_z => MinZ, max_z => MaxZ } }
 
 
 
