@@ -54,7 +54,10 @@
 //! | `thin3d9` type                            | docs.microsoft.com        | description   |
 //! | ----------------------------------------- | ------------------------- | ------------- |
 //! | [D3D](crate::D3D)\[[ERR](crate::D3DERR)\] | [D3DERR]                  | Windows HRESULTs optimized for displaying Direct3D errors
-//! | [BackBufferType]                          | [D3DBACKBUFFER_TYPE]      | 
+//! | [BackBufferType]                          | [D3DBACKBUFFER_TYPE]      | [Mono](crate::BackBufferType::Mono), [Left](crate::BackBufferType::Left), or [Right](crate::BackBufferType::Right)
+//! | [DeclMethod8]                             | [D3DDECLMETHOD]           | Operation performed by the tessellator (or any procedural geometry routine).
+//! | [DeclType8]                               | [D3DDECLTYPE]             | [Float1](crate::DeclType8::Float1), [Float2](crate::DeclType8::Float2), ... - Defines a vertex declaration data type.
+//! | [DeclUsage8]                              | [D3DDECLUSAGE]            | [Position](crate::DeclUsage8::Position), [TexCoord](crate::DeclUsage8::TexCoord), ... - Identifies the intended use of vertex data.
 //! | [DevType]                                 | [D3DDEVTYPE]              | Specifies what kind of [Device] should be created
 //! | [Format]                                  | [D3DFORMAT]               | Texture and vertex element formats
 //! | [LightType]                               | [D3DLIGHTTYPE]            | Defines the type of a light ([Point](crate::LightType::Point), [Spot](crate::LightType::Spot), or [Directional](crate::LightType::Directional))
@@ -63,10 +66,14 @@
 //! | [PrimitiveType]                           | [D3DPRIMITIVETYPE]        | Defines the primitives supported by Direct3D.
 //! | [QueryType]                               | [D3DQUERYTYPE]            | Identifies the query type.
 //! | [ResourceType]                            | [D3DRESOURCETYPE]         | Specifies the type of a [Resource]/[Volume]
+//! | [SGR]                                     | [D3DSGR]                  | Indicates whether gamma correction should be applied.
 //! | [StateBlockType]                          | [D3DSTATEBLOCKTYPE]       | Predefined sets of pipeline state used by state blocks
 //!
 //! [D3DERR]:                   https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3derr
 //! [D3DBACKBUFFER_TYPE]:       https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dbackbuffer-type
+//! [D3DDECLMETHOD]:            https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddeclmethod
+//! [D3DDECLTYPE]:              https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddecltype
+//! [D3DDECLUSAGE]:             https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddeclusage
 //! [D3DDEVTYPE]:               https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddevtype
 //! [D3DFORMAT]:                https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dformat
 //! [D3DLIGHTTYPE]:             https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dlighttype
@@ -75,6 +82,7 @@
 //! [D3DPRIMITIVETYPE]:         https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dprimitivetype
 //! [D3DQUERYTYPE]:             https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dquerytype
 //! [D3DRESOURCETYPE]:          https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dresourcetype
+//! [D3DSGR]:                   https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dsgr
 //! [D3DSTATEBLOCKTYPE]:        https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dstateblocktype
 //!
 //! ### Flags
@@ -107,16 +115,26 @@
 //! | [AdapterIdentifier]                       | [D3DADAPTER_IDENTIFIER9]  | Adapter metadata (driver, description, driver version, vendor/device ids, ...)
 //! | [Caps]                                    | [D3DCAPS9]                | Adapter/device capabilities and limitations
 //! | [ClipStatus]                              | [D3DCLIPSTATUS9]          | Describes the current clip status.
+//! | [ColorValue]                              | [D3DCOLORVALUE]           | A <code>{ <span style="color: red">r</span>, <span style="color: green">g</span>, <span style="color: blue">b</span>, a }</code> floating-point color
 //! | [DisplayMode]                             | [D3DDISPLAYMODE]          | A `{ width, height, refresh_rate, format }` display mode
+//! | [Light]                                   | [D3DLIGHT9]               | Describes lighting information
+//! | [Material]                                | [D3DMATERIAL9]            | Describes a material that responds to lighting
 //! | [Rect]                                    | [D3DRECT] / [RECT]        | `[0i32 .. 1i32, 2i32 .. 3i32]` signed x/y range structure
-//! | [Viewport]                                | [D3DVIEWPORT]             | A `{ x, y, width, height, min_z, max_z }` area to render into
+//! | [Vector]                                  | [D3DVECTOR]               | A `{ x, y, z }` 3-dimensional floating point position
+//! | [VertexElement]                           | [D3DVERTEXELEMENT9]       | An element of a [VertexDeclaration]
+//! | [Viewport]                                | [D3DVIEWPORT9]            | A `{ x, y, width, height, min_z, max_z }` area to render into
 //!
 //! [D3DADAPTER_IDENTIFIER9]:   https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dadapter-identifier9
 //! [D3DCAPS9]:                 https://docs.microsoft.com/en-us/windows/win32/api/d3d9caps/ns-d3d9caps-d3dcaps9
 //! [D3DCLIPSTATUS9]:           https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dclipstatus9
+//! [D3DCOLORVALUE]:            https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dcolorvalue
 //! [D3DDISPLAYMODE]:           https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddisplaymode
+//! [D3DLIGHT9]:                https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dlight9
+//! [D3DMATERIAL9]:             https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dmaterial9
 //! [D3DRECT]:                  https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3drect
-//! [D3DVIEWPORT]:              https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dviewport9
+//! [D3DVECTOR]:                https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dvector
+//! [D3DVERTEXELEMENT9]:        https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dvertexelement9
+//! [D3DVIEWPORT9]:             https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dviewport9
 //! [RECT]:                     https://docs.microsoft.com/en-us/windows/win32/api/windef/ns-windef-rect
 //!
 //! ### Values
@@ -125,10 +143,12 @@
 //! | ----------------------------------------- | ------------------------- | ------------- |
 //! | [bool32]                                  | [BOOL]                    | 32-bit boolean type that's ABI-compatible with Win32's [BOOL]
 //! | [Color]                                   | [D3DCOLOR]                | 0xAA<span style="color: red">RR</span><span style="color: green">GG</span><span style="color: blue">BB</span> style 32-bit color
+//! | [Luid]                                    | [LUID]                    | A 64-bit locally unique identifier
 //! | [SdkVersion]                              | DWORD                     | Specify what Direct3D SDK to use ([Direct3D](crate::Direct3D)\[[Ex](crate::Direct3DEx)\]::[create](crate::Direct3D::create)'s only parameter)
 //!
 //! [BOOL]:                     https://docs.microsoft.com/en-us/windows/win32/winprog/windows-data-types#BOOL
 //! [D3DCOLOR]:                 https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dcolor
+//! [LUID]:                     https://docs.microsoft.com/en-us/previous-versions/windows/hardware/drivers/ff549708(v=vs.85)
 //!
 //! ### Wrappers
 //!
