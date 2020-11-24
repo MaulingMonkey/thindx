@@ -45,8 +45,8 @@
 //! &nbsp;  │      ├─ [Volume] - 3D buffer of pixels
 //! &nbsp;  │      ├─ [PixelShader] - per-fragment GPU program
 //! &nbsp;  │      └─ [VertexShader] - per-vertex GPU program
-//! &nbsp;  ├─ [Query]
-//! &nbsp;  ├─ [StateBlock]</span>
+//! &nbsp;  ├─ [Query]</span>
+//! &nbsp;  ├─ [StateBlock] - Used to [capture/save and restore](https://docs.microsoft.com/en-us/windows/win32/direct3d9/state-blocks-save-and-restore-state) changes to [Device] state.
 //! &nbsp;  └─ [VertexDeclaration] - Describes the layout of the contents of a [VertexBuffer]</div>
 //!
 //! ### Enums

@@ -9,6 +9,12 @@ use std::ptr::null_mut;
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dstateblock9)\]
 /// Used to [capture/save and restore](https://docs.microsoft.com/en-us/windows/win32/direct3d9/state-blocks-save-and-restore-state)
 /// changes to [Device] state.
+///
+/// ### See Also
+///
+/// *   [Device::begin_state_block]
+/// *   [Device::create_state_block]
+/// *   [Device::end_state_block]
 #[derive(Clone)] #[repr(transparent)]
 pub struct StateBlock(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DStateBlock9>);
 
@@ -84,3 +90,51 @@ impl Device {
 }
 
 // TODO: test explicit state capturing
+
+
+
+impl StateBlock {
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dstateblock9-apply)\]
+    /// IDirect3DStateBlock9::Apply
+    ///
+    /// Apply the state block to the current device state.
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]
+    /// *   Ok(`()`)
+    pub fn apply(&self) -> Result<(), MethodError> {
+        let hr = unsafe { self.0.Apply() };
+        MethodError::check("IDirect3DStateBlock9::Apply", hr)
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dstateblock9-capture)\]
+    /// IDirect3DStateBlock9::Capture
+    ///
+    /// Capture the current value of states that are included in a stateblock.
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]
+    /// *   Ok(`()`)
+    pub fn capture(&self) -> Result<(), MethodError> {
+        let hr = unsafe { self.0.Capture() };
+        MethodError::check("IDirect3DStateBlock9::Capture", hr)
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dstateblock9-getdevice)\]
+    /// IDirect3DStateBlock9::GetDevice
+    ///
+    /// Gets the device.
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]   (Pure device?)
+    /// *   Ok([Device])
+    pub fn get_device(&self) -> Result<Device, MethodError> {
+        let mut device = null_mut();
+        let hr = unsafe { self.0.GetDevice(&mut device) };
+        MethodError::check("IDirect3DStateBlock9::GetDevice", hr)?;
+        Ok(unsafe { Device::from_raw(device) })
+    }
+}
