@@ -221,27 +221,6 @@ impl Device {
         ramp
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getmaterial)\]
-    /// IDirect3DDevice9::GetMaterial
-    ///
-    /// ### Returns
-    ///
-    /// *   [D3DERR::INVALIDCALL]   If the material is invalid
-    /// *   Ok([Material])
-    ///
-    /// ### Example
-    ///
-    /// ```rust
-    /// # use doc::*; let device = Device::test();
-    /// let material = device.get_material().unwrap();
-    /// ```
-    pub fn get_material(&self) -> Result<Material, MethodError> {
-        let mut material = Material::default();
-        let hr = unsafe { self.0.GetMaterial(&mut *material) };
-        MethodError::check("IDirect3DDevice9::GetMaterial", hr)?;
-        Ok(material)
-    }
-
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getnpatchmode)\]
     /// IDirect3DDevice9::GetNPatchMode
     ///
@@ -330,29 +309,6 @@ impl Device {
     /// [Gamma (Direct3D 9)]:           https://docs.microsoft.com/en-us/windows/desktop/direct3d9/gamma
     pub fn set_gamma_ramp(&self, swap_chain: u32, flags: impl Into<SGR>, ramp: &D3DGAMMARAMP) {
         let _nohr : () = unsafe { self.0.SetGammaRamp(swap_chain, flags.into().into(), ramp) };
-    }
-
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setmaterial)\]
-    /// IDirect3DDevice9::SetMaterial
-    ///
-    /// ### Returns
-    ///
-    /// *   [D3DERR::INVALIDCALL]   If the material is invalid
-    /// *   Ok(`()`)
-    ///
-    /// ### Example
-    ///
-    /// ```rust
-    /// # use doc::*; let device = Device::test();
-    /// let material = Material {
-    ///     diffuse: ColorValue::default(),
-    ///     .. Material::default()
-    /// };
-    /// device.set_material(material).unwrap();
-    /// ```
-    pub fn set_material(&self, material: impl Into<Material>) -> Result<(), MethodError> {
-        let hr = unsafe { self.0.SetMaterial(&*material.into()) };
-        MethodError::check("IDirect3DDevice9::SetMaterial", hr)
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getnpatchmode)\]
