@@ -2,8 +2,6 @@
 
 use crate::*;
 
-use winapi::shared::d3d9types::*;
-
 use std::ptr::null_mut;
 
 
