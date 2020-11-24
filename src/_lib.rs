@@ -89,12 +89,14 @@
 //!
 //! | `thin3d9` type                            | docs.microsoft.com        | description   |
 //! | ----------------------------------------- | ------------------------- | ------------- |
+//! | [Create]                                  | [D3DCREATE_*]             | A combination of one or more flags that controls [Direct3D::create_device] behavior.
 //! | [FVF]                                     | [D3DFVF_*]                | Describes the contents of vertices interleaved in a single data stream.
 //! | [GetData]                                 | [D3DGETDATA_*]            | Controls how [Query::get_data_inplace] behaves
 //! | [Issue]                                   | [D3DISSUE_*]              | Controls how [Query::issue] behaves
 //! | [Lock]                                    | [D3DLOCK_*]               | A combination of zero or more locking options that describe the type of lock to perform.
 //! | [Usage]                                   | [D3DUSAGE_*]              | Usage options that identify how resources are to be used.
 //!
+//! [D3DCREATE_*]:              https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dcreate
 //! [D3DFVF_*]:                 https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dfvf
 //! [D3DGETDATA_*]:             https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3dquery9-getdata
 //! [D3DISSUE_*]:               https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3dquery9-issue

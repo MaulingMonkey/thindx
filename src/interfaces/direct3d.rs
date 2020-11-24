@@ -339,7 +339,7 @@ impl Direct3D {
     ///     D3DADAPTER_DEFAULT,     // adapter
     ///     DevType::HAL,           // device_type
     ///     null_mut(),             // focus_window
-    ///     D3DCREATE_FPU_PRESERVE, // behavior_flags
+    ///     Create::FpuPreserve,    // behavior_flags
     ///     &mut D3DPRESENT_PARAMETERS {
     ///         // In/Out paramters - if these are 0 before the method create_device
     ///         // is called, they will be changed when create_device returns
@@ -368,10 +368,10 @@ impl Direct3D {
     /// ```
     ///
     /// [WM_DESTROY]:           https://docs.microsoft.com/en-us/windows/win32/winmsg/wm-destroy
-    pub unsafe fn create_device(&self, adapter: AdapterIndex, device_type: impl Into<DevType>, focus_window: HWND, behavior_flags: u32, present_parameters: &mut D3DPRESENT_PARAMETERS) -> Result<Device, MethodError> {
+    pub unsafe fn create_device(&self, adapter: AdapterIndex, device_type: impl Into<DevType>, focus_window: HWND, behavior_flags: impl Into<Create>, present_parameters: &mut D3DPRESENT_PARAMETERS) -> Result<Device, MethodError> {
         // TODO: better doc comments
         let mut device = null_mut();
-        let hr = self.0.CreateDevice(adapter, device_type.into().into(), focus_window, behavior_flags, present_parameters, &mut device);
+        let hr = self.0.CreateDevice(adapter, device_type.into().into(), focus_window, behavior_flags.into().into(), present_parameters, &mut device);
         MethodError::check("IDirect3D9::CreateDevice", hr)?;
         Ok(Device::from_raw(device))
     }

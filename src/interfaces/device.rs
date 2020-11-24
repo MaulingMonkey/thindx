@@ -97,7 +97,6 @@ impl Device {
         // winit's new_any_thread is unix-only, but I want/need threaded windows unit tests, so create an HWND from scratch.
         use wchar::wch_c;
 
-        use winapi::shared::d3d9::*;
         use winapi::shared::d3d9caps::*;
         use winapi::shared::d3d9types::*;
         use winapi::shared::windef::*;
@@ -154,10 +153,10 @@ impl Device {
         ppf(&mut pp);
 
         let behavior =
-            //D3DCREATE_DISABLE_PRINTSCREEN | // not implemented by winapi?
-            D3DCREATE_FPU_PRESERVE |
-            D3DCREATE_HARDWARE_VERTEXPROCESSING |
-            D3DCREATE_NOWINDOWCHANGES;
+            Create::DisablePrintScreen |
+            Create::FpuPreserve |
+            Create::HardwareVertexProcessing |
+            Create::NoWindowChanges;
 
         let d3d = Direct3D::test();
         unsafe { d3d.create_device(0, DevType::HAL, null_mut(), behavior, &mut pp) }

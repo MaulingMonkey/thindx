@@ -4,7 +4,6 @@ use thin3d9::*;
 
 use wchar::wch_c;
 
-use winapi::shared::d3d9::*;
 use winapi::shared::d3d9caps::*;
 use winapi::shared::d3d9types::*;
 use winapi::shared::minwindef::*;
@@ -83,12 +82,11 @@ fn main() {
         .. unsafe { std::mem::zeroed() }
     };
 
-    // https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dcreate
     let behavior =
-        //D3DCREATE_DISABLE_PRINTSCREEN | // not implemented by winapi?
-        D3DCREATE_FPU_PRESERVE |
-        D3DCREATE_HARDWARE_VERTEXPROCESSING |
-        D3DCREATE_NOWINDOWCHANGES;
+        Create::DisablePrintScreen |
+        Create::FpuPreserve |
+        Create::HardwareVertexProcessing |
+        Create::NoWindowChanges;
 
     let device = D3D.with(|d3d| unsafe { d3d.create_device(0, DevType::HAL, null_mut(), behavior, &mut pp) }).unwrap();
     DEVICE.with(|d| *d.borrow_mut() = Some(device));
