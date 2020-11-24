@@ -42,9 +42,9 @@
 //! &nbsp;  │      ├─ [IndexBuffer]
 //! &nbsp;  │      └─ [VertexBuffer]
 //! &nbsp;  ├─ <strike>[Resource]</strike> You'd expect these to be resources, but they aren't - they derive from [Unknown].
-//! &nbsp;  │      ├─ [Volume] - 3D buffer of pixels
+//! &nbsp;  │      ├─ [Volume] - 3D buffer of pixels</span>
 //! &nbsp;  │      ├─ [PixelShader] - per-fragment GPU program
-//! &nbsp;  │      └─ [VertexShader] - per-vertex GPU program</span>
+//! &nbsp;  │      └─ [VertexShader] - per-vertex GPU program
 //! &nbsp;  ├─ [Query] - An asyncronous GPU query for [occlusion or other information](https://docs.microsoft.com/en-us/windows/win32/direct3d9/queries).
 //! &nbsp;  ├─ [StateBlock] - Used to [capture/save and restore](https://docs.microsoft.com/en-us/windows/win32/direct3d9/state-blocks-save-and-restore-state) changes to [Device] state.
 //! &nbsp;  └─ [VertexDeclaration] - Describes the layout of the contents of a [VertexBuffer]</div>

@@ -7,11 +7,33 @@ use std::ptr::null_mut;
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dpixelshader9)\]
 /// A [pixel/fragment shader](https://en.wikipedia.org/wiki/Shader#Pixel_shaders) is a GPU program, run on rasterized fragments.
+///
+/// ### See Also
+///
+/// *   [Device::create_pixel_shader]
+/// *   [Device::set_pixel_shader]
+/// *   [Device::get_pixel_shader]
+/// *   [Device::set_pixel_shader_constant_b]
+/// *   [Device::set_pixel_shader_constant_f]
+/// *   [Device::set_pixel_shader_constant_fv]
+/// *   [Device::set_pixel_shader_constant_i]
+/// *   [Device::set_pixel_shader_constant_iv]
 #[derive(Clone)] #[repr(transparent)]
 pub struct PixelShader(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DPixelShader9>);
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dvertexshader9)\]
 /// A [vertex shader](https://en.wikipedia.org/wiki/Shader#Vertex_shaders) transforms mesh verticies when rendering.
+///
+/// ### See Also
+///
+/// *   [Device::create_vertex_shader]
+/// *   [Device::set_vertex_shader]
+/// *   [Device::get_vertex_shader]
+/// *   [Device::set_vertex_shader_constant_b]
+/// *   [Device::set_vertex_shader_constant_f]
+/// *   [Device::set_vertex_shader_constant_fv]
+/// *   [Device::set_vertex_shader_constant_i]
+/// *   [Device::set_vertex_shader_constant_iv]
 #[derive(Clone)] #[repr(transparent)]
 pub struct VertexShader(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DVertexShader9>);
 
@@ -311,3 +333,148 @@ impl Device {
 
 // #[test] fn create_pixel_shader() {} // TODO
 // #[test] fn create_vertex_shader() {} // TODO
+
+
+
+impl PixelShader {
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dpixelshader9-getdevice)\]
+    /// IDirect3DPixelShader9::GetDevice
+    ///
+    /// Gets the [Device].
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]   The device was pure?
+    /// *   Ok([Device])
+    pub fn get_device(&self) -> Result<Device, MethodError> {
+        let mut device = null_mut();
+        let hr = unsafe { self.0.GetDevice(&mut device) };
+        MethodError::check("IDirect3DPixelShader9::GetDevice", hr)?;
+        Ok(unsafe { Device::from_raw(device) })
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dpixelshader9-getfunction)\]
+    /// IDirect3DPixelShader9::GetFunction
+    ///
+    /// Gets the size of the shader function data.
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]   The device was pure?
+    /// *   Ok(`size`)
+    pub fn get_function_size(&self) -> Result<u32, MethodError> {
+        let mut size = 0;
+        let hr = unsafe { self.0.GetFunction(null_mut(), &mut size) };
+        MethodError::check("IDirect3DPixelShader9::GetFunction", hr)?;
+        Ok(size)
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dpixelshader9-getfunction)\]
+    /// IDirect3DPixelShader9::GetFunction
+    ///
+    /// Gets the shader function data.
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]   The device was pure?
+    /// *   Ok(`&data[???]`)        Function data was read
+    pub fn get_function_inplace<'d>(&self, data: &'d mut [u8]) -> Result<&'d [u8], MethodError> {
+        let mut size = data.len().try_into().map_err(|_| MethodError("PixelShader::get_function_inplace", D3DERR::INVALIDCALL))?;
+        // XXX: Do I need a get_function_size check in here too?
+        let hr = unsafe { self.0.GetFunction(data.as_mut_ptr().cast(), &mut size) };
+        MethodError::check("IDirect3DPixelShader9::GetFunction", hr)?;
+        Ok(&data[0..(size as usize)])
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dpixelshader9-getfunction)\]
+    /// IDirect3DPixelShader9::GetFunction
+    ///
+    /// Gets the shader function data.
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]   The device was pure?
+    /// *   Ok([Vec]&lt;[u8]&gt;)    Function data was read
+    pub fn get_function(&self) -> Result<Vec<u8>, MethodError> {
+        let mut size = self.get_function_size()?;
+        let mut data = vec![0u8; size as usize];
+        let hr = unsafe { self.0.GetFunction(data.as_mut_ptr().cast(), &mut size) };
+        MethodError::check("IDirect3DPixelShader9::GetFunction", hr)?;
+        debug_assert_eq!(data.len(), size as usize);
+        Ok(data)
+    }
+}
+
+
+
+impl VertexShader {
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexshader9-getdevice)\]
+    /// IDirect3DVertexShader9::GetDevice
+    ///
+    /// Gets the [Device].
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]   The device was pure?
+    /// *   Ok([Device])
+    pub fn get_device(&self) -> Result<Device, MethodError> {
+        let mut device = null_mut();
+        let hr = unsafe { self.0.GetDevice(&mut device) };
+        MethodError::check("IDirect3DVertexShader9::GetDevice", hr)?;
+        Ok(unsafe { Device::from_raw(device) })
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexshader9-getfunction)\]
+    /// IDirect3DVertexShader9::GetFunction
+    ///
+    /// Gets the size of the shader function data.
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]   The device was pure?
+    /// *   Ok(`size`)
+    pub fn get_function_size(&self) -> Result<u32, MethodError> {
+        let mut size = 0;
+        let hr = unsafe { self.0.GetFunction(null_mut(), &mut size) };
+        MethodError::check("IDirect3DVertexShader9::GetFunction", hr)?;
+        Ok(size)
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexshader9-getfunction)\]
+    /// IDirect3DVertexShader9::GetFunction
+    ///
+    /// Gets the shader function data.
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]   The device was pure?
+    /// *   Ok(`&data[???]`)        Function data was read
+    pub fn get_function_inplace<'d>(&self, data: &'d mut [u8]) -> Result<&'d [u8], MethodError> {
+        let mut size = data.len().try_into().map_err(|_| MethodError("VertexShader::get_function_inplace", D3DERR::INVALIDCALL))?;
+        // XXX: Do I need a get_function_size check in here too?
+        let hr = unsafe { self.0.GetFunction(data.as_mut_ptr().cast(), &mut size) };
+        MethodError::check("IDirect3DVertexShader9::GetFunction", hr)?;
+        Ok(&data[0..(size as usize)])
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexshader9-getfunction)\]
+    /// IDirect3DVertexShader9::GetFunction
+    ///
+    /// Gets the shader function data.
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]   The device was pure?
+    /// *   Ok([Vec]&lt;[u8]&gt;)    Function data was read
+    pub fn get_function(&self) -> Result<Vec<u8>, MethodError> {
+        let mut size = self.get_function_size()?;
+        let mut data = vec![0u8; size as usize];
+        let hr = unsafe { self.0.GetFunction(data.as_mut_ptr().cast(), &mut size) };
+        MethodError::check("IDirect3DVertexShader9::GetFunction", hr)?;
+        debug_assert_eq!(data.len(), size as usize);
+        Ok(data)
+    }
+}
+
+// TODO: testing, glorious testing
+// TODO: examples
