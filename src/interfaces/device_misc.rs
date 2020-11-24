@@ -202,43 +202,6 @@ impl Device {
         Ok(unsafe { Direct3D::from_raw(d3d) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getdisplaymode)\]
-    /// IDirect3DDevice9::GetDisplayMode
-    ///
-    /// ### Returns
-    ///
-    /// *   [D3DERR::INVALIDCALL]       "If the method fails" (impossible via thin3d9?)
-    /// *   Ok([DisplayMode])
-    ///
-    /// ### Example
-    ///
-    /// ```rust
-    /// # use doc::*; let device = Device::test();
-    /// let mode : DisplayMode = device.get_display_mode(0).unwrap();
-    /// println!("{:#?}", mode);
-    /// assert!(mode.Width > 0);
-    /// assert!(mode.width() > 0);
-    /// assert_eq!(mode.Format, Format::X8R8G8B8.into());
-    /// assert_eq!(mode.format(), Format::X8R8G8B8);
-    /// ```
-    ///
-    /// ### Outputs
-    ///
-    /// ```text
-    /// DisplayMode {
-    ///     Width: 2160,
-    ///     Height: 3840,
-    ///     RefreshRate: 60,
-    ///     Format: Format(D3DFMT_X8R8G8B8),
-    /// }
-    /// ```
-    pub fn get_display_mode(&self, swap_chain: u32) -> Result<DisplayMode, MethodError> {
-        let mut dm = DisplayMode::default();
-        let hr = unsafe { self.0.GetDisplayMode(swap_chain, &mut *dm) };
-        MethodError::check("IDirect3DDevice9::GetDisplayMode", hr)?;
-        Ok(dm)
-    }
-
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getfvf)\]
     /// IDirect3DDevice9::GetFVF
     ///
