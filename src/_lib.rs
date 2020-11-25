@@ -202,6 +202,9 @@ use mcom::Rc;
 #[path="traits/_traits.rs"]         mod traits;     pub use traits::*;
 #[path="values/_values.rs"]         mod values;     pub use values::*;
 
+#[path="extra/_extra.rs"] #[cfg(        feature = "extra"        )] pub mod extra;
+#[path="extra/_extra.rs"] #[cfg(all(not(feature = "extra"), test))] mod extra;
+
 
 
 // Several of these should probably be wrapped...?

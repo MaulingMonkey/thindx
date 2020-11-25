@@ -120,11 +120,3 @@ impl Direct3DEx {
 }
 
 // TODO: so much more test coverage!
-
-
-
-#[cfg(test)] impl Direct3DEx {
-    pub fn test() -> Self {
-        unsafe { Direct3DEx::create(SdkVersion::default()).unwrap() }
-    }
-}

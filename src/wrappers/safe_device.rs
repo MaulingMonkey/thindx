@@ -38,15 +38,3 @@ impl Deref for SafeDevice {
     type Target = Device;
     fn deref(&self) -> &Self::Target { self.device() }
 }
-
-
-
-#[cfg(test)] impl SafeDevice {
-    pub fn test() -> Self {
-        SafeDevice::new(Device::test()).unwrap()
-    }
-
-    pub fn test_pp(ppf: impl FnOnce(&mut D3DPRESENT_PARAMETERS)) -> Result<Self, MethodError> {
-        Ok(SafeDevice::new(Device::test_pp(ppf)?)?)
-    }
-}

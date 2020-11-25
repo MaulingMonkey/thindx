@@ -755,12 +755,6 @@ impl Direct3D {
 
 
 
-#[cfg(test)] impl Direct3D {
-    pub fn test() -> Self {
-        unsafe { Direct3D::create(SdkVersion::default()).unwrap() }
-    }
-}
-
 #[cfg(test)] pub(crate) struct Invalid;
 #[cfg(test)] impl From<Invalid> for DevType         { fn from(_: Invalid) -> Self { Self::from_unchecked(!0) } }
 #[cfg(test)] impl From<Invalid> for Format          { fn from(_: Invalid) -> Self { Self::from_unchecked(!0) } }

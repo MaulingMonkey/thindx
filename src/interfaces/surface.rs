@@ -213,7 +213,7 @@ impl Device {
 // #[test] fn get_back_buffer() {} // TODO
 
 #[test] fn get_set_depth_stencil_surface() {
-    let device = Device::test_pp(|pp| {
+    let device = Device::test_pp(false, |pp, _| {
         pp.EnableAutoDepthStencil = true.into();
         pp.AutoDepthStencilFormat = Format::D24S8.into();
     }).unwrap();
@@ -280,7 +280,7 @@ impl Device {
         (Some(Format::D32F_LOCKABLE),   true,       false,      true    ),
         (Some(Format::X8_LOCKABLE),     false,      false,      false   ),
     ].iter().copied() {
-        let device = Device::test_pp(|pp| {
+        let device = Device::test_pp(false, |pp, _| {
             if let Some(ds_fmt) = ds_fmt {
                 pp.EnableAutoDepthStencil = true.into();
                 pp.AutoDepthStencilFormat = ds_fmt.into();

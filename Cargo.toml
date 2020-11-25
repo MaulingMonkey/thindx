@@ -36,6 +36,7 @@ default             = [
     # "impl-from-unchecked",
 ]
 9ex                 = []
+extra               = []
 impl-poor-defaults  = []
 impl-from-unchecked = []
 
@@ -45,8 +46,9 @@ impl-from-unchecked = []
 doc                 = { path = "doc" }
 
 [target.'cfg(windows)'.dependencies]
-mcom = "0.1.1"
-#mcom = { git = "https://github.com/MaulingMonkey/mcom" }
+wchar               = "0.6"
+mcom                = "0.1.1"
+#mcom                = { git = "https://github.com/MaulingMonkey/mcom" }
 
 [target.'cfg(windows)'.dependencies.winapi]
 version         = "0.3.9"

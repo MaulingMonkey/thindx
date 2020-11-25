@@ -7,8 +7,3 @@ pub use winapi::shared::d3d9types::D3DSWAPEFFECT_DISCARD;
 pub use winapi::shared::windef::HMONITOR;
 
 pub use std::ptr::{null, null_mut};
-
-
-
-mod device_ext;     pub use device_ext::*;
-mod direct3d_ext;   pub use direct3d_ext::*;

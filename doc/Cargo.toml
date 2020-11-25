@@ -15,7 +15,7 @@ path            = "_doc.rs"
 
 
 [target.'cfg(windows)'.dependencies]
-thin3d9             = { path = ".." }
+thin3d9             = { path = "..", features = ["extra"] }
 mcom                = "0.1.1"
 #mcom               = { git = "https://github.com/MaulingMonkey/mcom" }
 raw-window-handle   = "0.3"
