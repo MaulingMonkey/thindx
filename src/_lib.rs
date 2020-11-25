@@ -181,6 +181,9 @@
 //! |                       | Default: disabled     |
 //! | `impl-from-unchecked` | Implement [From]\<[D3DFORMAT]\> for [Format] and similar traits.<br>While these should generally be sound, and may ease porting (e.g. they'll allow using `D3DFMT_UNKNOWN` instead of [Format::UNKNOWN]), they'll also ease authoring bugs (e.g. they'll allow using `9001` for an [Into]\<[Format]\> parameter as well.)
 
+#![allow(broken_intra_doc_links)] // TODO: temporary
+#![deny(unreachable_patterns)]
+
 #[macro_use] mod macros;
 #[allow(unused_imports)] use macros::*;
 
