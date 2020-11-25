@@ -2,8 +2,6 @@
 
 use winapi::shared::d3d9types::*;
 
-use std::fmt::{self, Debug, Formatter};
-
 
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dlighttype)\]
@@ -16,24 +14,13 @@ use std::fmt::{self, Debug, Formatter};
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)] pub struct LightType(D3DLIGHTTYPE);
 
-impl LightType {
-    /// Convert a raw [D3DLIGHTTYPE] value into a [LightType].  This is *probably* safe... probably...
-    ///
-    /// [D3DLIGHTTYPE]:       https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dlighttype
-    pub const fn from_unchecked(lighttype: D3DLIGHTTYPE) -> Self { Self(lighttype) }
+enumish! { LightType => D3DLIGHTTYPE; Point, Spot, Directional }
 
-    /// Convert a [LightType] into a raw [D3DLIGHTTYPE].
-    ///
-    /// [D3DLIGHTTYPE]:       https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dlighttype
-    pub const fn into(self) -> D3DLIGHTTYPE { self.0 }
-}
-
-#[allow(non_upper_case_globals)] // These are enum-like
-impl LightType {
+#[allow(non_upper_case_globals)] impl LightType { // These are enum-like
     /// Light is a [point] source. The light has a position in space and radiates light in all directions.
     ///
     /// [point]:        https://docs.microsoft.com/en-us/windows/uwp/graphics-concepts/light-types#point-light
-    pub const Point         : LightType = LightType(D3DLIGHT_POINT);
+    pub const Point         : LightType = LightType(D3DLIGHT_POINT); // 1
 
     /// Light is a [spotlight] source.
     /// This light is like a point light, except that the illumination is limited to a cone.
@@ -49,26 +36,6 @@ impl LightType {
     pub const Directional   : LightType = LightType(D3DLIGHT_DIRECTIONAL);
 }
 
-impl Debug for LightType {
-    fn fmt(&self, f: &mut Formatter) -> fmt::Result {
-        match *self {
-            LightType::Point        => write!(f, "LightType::Point"),
-            LightType::Spot         => write!(f, "LightType::Spot"),
-            LightType::Directional  => write!(f, "LightType::Directional"),
-            other                   => write!(f, "LightType({})", other.0 as u32),
-        }
-    }
-}
-
 impl Default for LightType {
-    fn default() -> Self { LightType::from_unchecked(0) }
-}
-
-impl From<LightType> for D3DLIGHTTYPE {
-    fn from(value: LightType) -> Self { value.0 }
-}
-
-#[cfg(feature = "impl-from-unchecked")]
-impl From<D3DLIGHTTYPE> for LightType {
-    fn from(value: D3DLIGHTTYPE) -> Self { Self(value) }
+    fn default() -> Self { LightType(0) }
 }

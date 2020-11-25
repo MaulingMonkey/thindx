@@ -2,21 +2,15 @@
 
 use winapi::shared::d3d9types::*;
 
-use std::fmt::{self, Debug, Formatter};
-
 
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dmultisample-type)\]
 /// D3DMULTISAMPLE_TYPE
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)] pub struct MultiSample(D3DMULTISAMPLE_TYPE);
+pub type MultiSampleType = MultiSample;
 
 impl MultiSample {
-    /// Convert a raw [D3DMULTISAMPLE_TYPE] value into a [MultiSample].  This is *probably* safe... probably....
-    ///
-    /// [D3DMULTISAMPLE_TYPE]:      https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dmultisample-type
-    pub const fn from_unchecked(multisampletype: D3DMULTISAMPLE_TYPE) -> Self { Self(multisampletype) }
-
     /// Convert a number of samples between 1 and 16 into a [MultiSample]
     pub const fn from_samples(samples: u8) -> Option<Self> {
         match samples {
@@ -25,23 +19,19 @@ impl MultiSample {
             _                   => None,
         }
     }
-
-    /// Convert a [MultiSample] into a raw [D3DMULTISAMPLE_TYPE].
-    ///
-    /// [D3DMULTISAMPLE_TYPE]:      https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dmultisample-type
-    pub const fn into(self) -> D3DMULTISAMPLE_TYPE { self.0 }
 }
 
-#[allow(non_upper_case_globals)] // These are enum-like
-impl MultiSample {
+enumish! { MultiSample => D3DMULTISAMPLE_TYPE; None, NonMaskable, X2, X3, X4, X5, X6, X7, X8, X9, X10, X11, X12, X13, X14, X15, X16 }
+
+#[allow(non_upper_case_globals)] impl MultiSample { // These are enum-like
     /// No level of full-scene multisampling is available.
-    pub const None          : MultiSample = MultiSample(D3DMULTISAMPLE_NONE);
+    pub const None          : MultiSample = MultiSample(D3DMULTISAMPLE_NONE); // 0
 
     /// Enables the multisample quality value.
-    pub const NonMaskable   : MultiSample = MultiSample(D3DMULTISAMPLE_NONMASKABLE);
+    pub const NonMaskable   : MultiSample = MultiSample(D3DMULTISAMPLE_NONMASKABLE); // 1
 
-    pub const X2            : MultiSample = MultiSample(D3DMULTISAMPLE_2_SAMPLES);
-    pub const X3            : MultiSample = MultiSample(D3DMULTISAMPLE_3_SAMPLES);
+    pub const X2            : MultiSample = MultiSample(D3DMULTISAMPLE_2_SAMPLES); // 2
+    pub const X3            : MultiSample = MultiSample(D3DMULTISAMPLE_3_SAMPLES); // 3
     pub const X4            : MultiSample = MultiSample(D3DMULTISAMPLE_4_SAMPLES);
     pub const X5            : MultiSample = MultiSample(D3DMULTISAMPLE_5_SAMPLES);
     pub const X6            : MultiSample = MultiSample(D3DMULTISAMPLE_6_SAMPLES);
@@ -58,24 +48,5 @@ impl MultiSample {
 }
 
 impl Default for MultiSample {
-    fn default() -> Self { MultiSample::None }
-}
-
-impl Debug for MultiSample {
-    fn fmt(&self, f: &mut Formatter) -> fmt::Result {
-        match *self {
-            MultiSample::None           => write!(f, "MultiSample::None"),
-            MultiSample::NonMaskable    => write!(f, "MultiSample::NonMaskable"),
-            other                       => write!(f, "MultiSample({})", other.0),
-        }
-    }
-}
-
-impl From<MultiSample> for D3DMULTISAMPLE_TYPE {
-    fn from(value: MultiSample) -> Self { value.0 }
-}
-
-#[cfg(feature = "impl-from-unchecked")]
-impl From<D3DMULTISAMPLE_TYPE> for MultiSample {
-    fn from(value: D3DMULTISAMPLE_TYPE) -> Self { Self(value) }
+    fn default() -> Self { MultiSample::None } // 0
 }

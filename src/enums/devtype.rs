@@ -2,8 +2,6 @@
 
 use winapi::shared::d3d9types::*;
 
-use std::fmt::{self, Debug, Formatter};
-
 
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddevtype)\]
@@ -17,22 +15,11 @@ use std::fmt::{self, Debug, Formatter};
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)] pub struct DevType(D3DDEVTYPE);
 
-impl DevType {
-    /// Convert a raw [D3DDEVTYPE] value into a [DevType].  This is *probably* safe... probably...
-    ///
-    /// [D3DDEVTYPE]:       https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddevtype
-    pub const fn from_unchecked(devtype: D3DDEVTYPE) -> Self { Self(devtype) }
+enumish! { DevType => D3DDEVTYPE; HAL, NullRef, Ref, SW }
 
-    /// Convert a [DevType] into a raw [D3DDEVTYPE].
-    ///
-    /// [D3DDEVTYPE]:       https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddevtype
-    pub const fn into(self) -> D3DDEVTYPE { self.0 }
-}
-
-#[allow(non_upper_case_globals)] // These are enum-like
-impl DevType {
+#[allow(non_upper_case_globals)] impl DevType { // These are enum-like
     /// Hardware rasterization. Shading is done with software, hardware, or mixed transform and lighting.
-    pub const HAL       : DevType = DevType(D3DDEVTYPE_HAL);
+    pub const HAL       : DevType = DevType(D3DDEVTYPE_HAL); // 1
 
     /// Initialize Direct3D on a computer that has neither hardware nor reference rasterization available, and enable resources for 3D content creation.
     pub const NullRef   : DevType = DevType(D3DDEVTYPE_NULLREF);
@@ -46,8 +33,7 @@ impl DevType {
     pub const SW        : DevType = DevType(D3DDEVTYPE_SW);
 }
 
-#[doc(hidden)]
-impl DevType {
+#[doc(hidden)] impl DevType {
     /// Initialize Direct3D on a computer that has neither hardware nor reference rasterization available, and enable resources for 3D content creation.
     pub const NULLREF   : DevType = DevType(D3DDEVTYPE_NULLREF);
 
@@ -57,28 +43,7 @@ impl DevType {
     pub const REF       : DevType = DevType(D3DDEVTYPE_REF);
 }
 
-impl Debug for DevType {
-    fn fmt(&self, f: &mut Formatter) -> fmt::Result {
-        match *self {
-            DevType::HAL        => write!(f, "DevType::HAL"),
-            DevType::NullRef    => write!(f, "DevType::NullRef"),
-            DevType::Ref        => write!(f, "DevType::Ref"),
-            DevType::SW         => write!(f, "DevType::SW"),
-            other               => write!(f, "DevType({})", other.0 as u32),
-        }
-    }
-}
-
-#[cfg(feature = "impl-poor-defaults")] // Actually this seems like a pretty sane default
+#[cfg(feature = "impl-poor-defaults")]
 impl Default for DevType {
-    fn default() -> Self { DevType::HAL }
-}
-
-impl From<DevType> for D3DDEVTYPE {
-    fn from(value: DevType) -> Self { value.0 }
-}
-
-#[cfg(feature = "impl-from-unchecked")]
-impl From<D3DDEVTYPE> for DevType {
-    fn from(value: D3DDEVTYPE) -> Self { Self(value) }
+    fn default() -> Self { DevType::HAL } // 1
 }

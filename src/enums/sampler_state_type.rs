@@ -2,31 +2,28 @@
 
 use winapi::shared::d3d9types::*;
 
-use std::fmt::{self, Debug, Formatter};
-
 
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)\]
 /// D3DSAMPLERSTATETYPE
+///
+/// Sampler states define texture sampling operations such as texture addressing and texture filtering.
+/// Some sampler states set-up vertex processing, and some set-up pixel processing.
+/// Sampler states can be saved and restored using stateblocks (see [State Blocks Save and Restore State (Direct3D 9)]).
+///
+/// [State Blocks Save and Restore State (Direct3D 9)]:     https://docs.microsoft.com/en-us/windows/win32/direct3d9/state-blocks-save-and-restore-state
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)] pub struct SamplerStateType(D3DSAMPLERSTATETYPE);
 pub type Samp = SamplerStateType;
 
-impl SamplerStateType {
-    /// Convert a raw [D3DSAMPLERSTATETYPE] value into a [SamplerStateType].  This is *probably* safe... probably....
-    ///
-    /// [D3DSAMPLERSTATETYPE]:      https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype
-    pub const fn from_unchecked(samplerstatetype: D3DSAMPLERSTATETYPE) -> Self { Self(samplerstatetype) }
-
-    /// Convert a [SamplerStateType] into a raw [D3DSAMPLERSTATETYPE].
-    ///
-    /// [D3DSAMPLERSTATETYPE]:      https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype
-    pub const fn into(self) -> D3DSAMPLERSTATETYPE { self.0 }
+enumish! {
+    Samp => D3DSAMPLERSTATETYPE;
+    AddressU, AddressV, AddressW, BorderColor, MagFilter, MinFilter, MipFilter,
+    MipMapLODBias, MaxMipLevel, MaxAnisotropy, SRGBTexture, ElementIndex, DMapOffset,
 }
 
-#[allow(non_upper_case_globals)] // These are enum-like
-impl SamplerStateType {
-    pub const AddressU          : SamplerStateType = SamplerStateType(D3DSAMP_ADDRESSU);
+#[allow(non_upper_case_globals)] impl SamplerStateType { // These are enum-like
+    pub const AddressU          : SamplerStateType = SamplerStateType(D3DSAMP_ADDRESSU); // 1
     pub const AddressV          : SamplerStateType = SamplerStateType(D3DSAMP_ADDRESSV);
     pub const AddressW          : SamplerStateType = SamplerStateType(D3DSAMP_ADDRESSW);
     pub const BorderColor       : SamplerStateType = SamplerStateType(D3DSAMP_BORDERCOLOR);
@@ -44,34 +41,4 @@ impl SamplerStateType {
 #[cfg(feature = "impl-poor-defaults")]
 impl Default for SamplerStateType {
     fn default() -> Self { SamplerStateType(0) }
-}
-
-impl Debug for SamplerStateType {
-    fn fmt(&self, f: &mut Formatter) -> fmt::Result {
-        match *self {
-            SamplerStateType::AddressU          => write!(f, "SamplerStateType::AddressU"),
-            SamplerStateType::AddressV          => write!(f, "SamplerStateType::AddressV"),
-            SamplerStateType::AddressW          => write!(f, "SamplerStateType::AddressW"),
-            SamplerStateType::BorderColor       => write!(f, "SamplerStateType::BorderColor"),
-            SamplerStateType::MagFilter         => write!(f, "SamplerStateType::MagFilter"),
-            SamplerStateType::MinFilter         => write!(f, "SamplerStateType::MinFilter"),
-            SamplerStateType::MipFilter         => write!(f, "SamplerStateType::MipFilter"),
-            SamplerStateType::MipMapLODBias     => write!(f, "SamplerStateType::MipMapLODBias"),
-            SamplerStateType::MaxMipLevel       => write!(f, "SamplerStateType::MaxMipLevel"),
-            SamplerStateType::MaxAnisotropy     => write!(f, "SamplerStateType::MaxAnisotropy"),
-            SamplerStateType::SRGBTexture       => write!(f, "SamplerStateType::SRGBTexture"),
-            SamplerStateType::ElementIndex      => write!(f, "SamplerStateType::ElementIndex"),
-            SamplerStateType::DMapOffset        => write!(f, "SamplerStateType::DMapOffset"),
-            other                               => write!(f, "SamplerStateType({})", other.0),
-        }
-    }
-}
-
-impl From<SamplerStateType> for D3DSAMPLERSTATETYPE {
-    fn from(value: SamplerStateType) -> Self { value.0 }
-}
-
-#[cfg(feature = "impl-from-unchecked")]
-impl From<D3DSAMPLERSTATETYPE> for SamplerStateType {
-    fn from(value: D3DSAMPLERSTATETYPE) -> Self { Self(value) }
 }

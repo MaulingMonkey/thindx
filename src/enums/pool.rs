@@ -2,29 +2,18 @@
 
 use winapi::shared::d3d9types::*;
 
-use std::fmt::{self, Debug, Formatter};
-
 
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dpool)\]
 /// D3DPOOL
+///
+/// Defines the memory class that holds the buffers for a resource.
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)] pub struct Pool(D3DPOOL);
 
-impl Pool {
-    /// Convert a raw [D3DPOOL] value into a [Pool].  This is *probably* safe... probably....
-    ///
-    /// [D3DPOOL]:      https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dpool
-    pub const fn from_unchecked(pool: D3DPOOL) -> Self { Self(pool) }
+enumish! { Pool => D3DPOOL; Default, Managed, SystemMem, Scratch }
 
-    /// Convert a [Pool] into a raw [D3DPOOL].
-    ///
-    /// [D3DPOOL]:      https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dpool
-    pub const fn into(self) -> D3DPOOL { self.0 }
-}
-
-#[allow(non_upper_case_globals)] // These are enum-like
-impl Pool {
+#[allow(non_upper_case_globals)] impl Pool { // These are enum-like
     /// Resources are placed in the memory pool most appropriate for the set of usages requested for the given resource.
     /// This is usually video memory, including both local video memory and AGP memory.
     /// The [Pool::Default] pool is separate from [Pool::Managed] and [Pool::SystemMem], and it specifies that the resource is placed in the preferred memory for device access.
@@ -43,7 +32,7 @@ impl Pool {
     /// [IDirect3DDevice9::GetRenderTargetData]:    https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getrendertargetdata
     /// [IDirect3DDevice9::Reset]:                  https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-reset
     /// [Lost Devices (Direct3D 9)]:                https://docs.microsoft.com/en-us/windows/win32/direct3d9/lost-devices
-    pub const Default   : Pool = Pool(D3DPOOL_DEFAULT);
+    pub const Default   : Pool = Pool(D3DPOOL_DEFAULT); // 0
 
     /// Resources are copied automatically to device-accessible memory as needed.
     /// Managed resources are backed by system memory and do not need to be recreated when a device is lost.
@@ -116,28 +105,6 @@ impl Pool {
     pub const SCRATCH   : Pool = Pool(D3DPOOL_SCRATCH);
 }
 
-#[cfg(feature = "impl-poor-defaults")] // Actually this seems like a pretty sane default?
 impl Default for Pool {
-    fn default() -> Self { Pool::Default }
-}
-
-impl Debug for Pool {
-    fn fmt(&self, f: &mut Formatter) -> fmt::Result {
-        match *self {
-            Pool::Default   => write!(f, "Pool::Default"),
-            Pool::Managed   => write!(f, "Pool::Managed"),
-            Pool::SystemMem => write!(f, "Pool::SystemMem"),
-            Pool::Scratch   => write!(f, "Pool::Scratch"),
-            other           => write!(f, "Pool({})", other.0),
-        }
-    }
-}
-
-impl From<Pool> for D3DPOOL {
-    fn from(value: Pool) -> Self { value.0 }
-}
-
-#[cfg(feature = "impl-from-unchecked")]
-impl From<D3DPOOL> for Pool {
-    fn from(value: D3DPOOL) -> Self { Self(value) }
+    fn default() -> Self { Pool::Default } // 0
 }

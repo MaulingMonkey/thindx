@@ -9,7 +9,7 @@ use winapi::shared::d3d9types::*;
 ///
 /// Defines constants that describe the type of back buffer.
 ///
-/// Direct3D 9 does not support stereo view, so Direct3D does not use the D3DBACKBUFFER_TYPE_LEFT and D3DBACKBUFFER_TYPE_RIGHT values of this enumerated type.
+/// Direct3D 9 does not support stereo view, so Direct3D does not use the [BackBufferType::Left] and [BackBufferType::Right] values of this enumerated type.
 ///
 /// ### See Also
 ///
@@ -20,10 +20,9 @@ use winapi::shared::d3d9types::*;
 
 enumish! { BackBufferType => D3DBACKBUFFER_TYPE; Mono, Left, Right }
 
-#[allow(non_upper_case_globals)] // These are enum-like
-impl BackBufferType {
+#[allow(non_upper_case_globals)] impl BackBufferType { // These are enum-like
     /// Specifies a nonstereo swap chain.
-    pub const Mono  : BackBufferType = BackBufferType(D3DBACKBUFFER_TYPE_MONO);
+    pub const Mono  : BackBufferType = BackBufferType(D3DBACKBUFFER_TYPE_MONO); // 0
 
     /// Specifies the left side of a stereo pair in a swap chain.
     pub const Left  : BackBufferType = BackBufferType(D3DBACKBUFFER_TYPE_LEFT);
@@ -32,6 +31,17 @@ impl BackBufferType {
     pub const Right : BackBufferType = BackBufferType(D3DBACKBUFFER_TYPE_RIGHT);
 }
 
+#[doc(hidden)] impl BackBufferType {
+    /// Specifies a nonstereo swap chain.
+    pub const MONO  : BackBufferType = BackBufferType(D3DBACKBUFFER_TYPE_MONO);
+
+    /// Specifies the left side of a stereo pair in a swap chain.
+    pub const LEFT  : BackBufferType = BackBufferType(D3DBACKBUFFER_TYPE_LEFT);
+
+    /// Specifies the right side of a stereo pair in a swap chain.
+    pub const RIGHT : BackBufferType = BackBufferType(D3DBACKBUFFER_TYPE_RIGHT);
+}
+
 impl Default for BackBufferType {
-    fn default() -> Self { BackBufferType::Mono }
+    fn default() -> Self { BackBufferType::Mono } // 0
 }

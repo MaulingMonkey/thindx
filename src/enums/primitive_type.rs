@@ -2,8 +2,6 @@
 
 use winapi::shared::d3d9types::*;
 
-use std::fmt::{self, Debug, Formatter};
-
 
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dprimitivetype)\]
@@ -17,23 +15,13 @@ use std::fmt::{self, Debug, Formatter};
 /// [Triangle Fans (Direct3D 9)]:   https://docs.microsoft.com/en-us/windows/win32/direct3d9/triangle-fans
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)] pub struct PrimitiveType(D3DPRIMITIVETYPE);
+pub type PT = PrimitiveType;
 
-impl PrimitiveType {
-    /// Convert a raw [D3DPRIMITIVETYPE] value into a [PrimitiveType].  This is *probably* safe... probably....
-    ///
-    /// [D3DPRIMITIVETYPE]:      https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dprimitivetype
-    pub const fn from_unchecked(primitivetype: D3DPRIMITIVETYPE) -> Self { Self(primitivetype) }
+enumish! { PT => D3DPRIMITIVETYPE; PointList, LineList, LineStrip, TriangleList, TriangleStrip, TriangleFan }
 
-    /// Convert a [PrimitiveType] into a raw [D3DPRIMITIVETYPE].
-    ///
-    /// [D3DPRIMITIVETYPE]:      https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dprimitivetype
-    pub const fn into(self) -> D3DPRIMITIVETYPE { self.0 }
-}
-
-#[allow(non_upper_case_globals)] // These are enum-like
-impl PrimitiveType {
+#[allow(non_upper_case_globals)] impl PrimitiveType { // These are enum-like
     /// Renders the vertices as a collection of isolated points. This value is unsupported for indexed primitives.
-    pub const PointList         : PrimitiveType = PrimitiveType(D3DPT_POINTLIST);
+    pub const PointList         : PrimitiveType = PrimitiveType(D3DPT_POINTLIST); // 1
 
     /// Renders the vertices as a list of isolated straight line segments.
     pub const LineList          : PrimitiveType = PrimitiveType(D3DPT_LINELIST);
@@ -56,27 +44,4 @@ impl PrimitiveType {
 #[cfg(feature = "impl-poor-defaults")]
 impl Default for PrimitiveType {
     fn default() -> Self { PrimitiveType(0) }
-}
-
-impl Debug for PrimitiveType {
-    fn fmt(&self, f: &mut Formatter) -> fmt::Result {
-        match *self {
-            PrimitiveType::PointList        => write!(f, "PrimitiveType::PointList"),
-            PrimitiveType::LineList         => write!(f, "PrimitiveType::LineList"),
-            PrimitiveType::LineStrip        => write!(f, "PrimitiveType::LineStrip"),
-            PrimitiveType::TriangleList     => write!(f, "PrimitiveType::TriangleList"),
-            PrimitiveType::TriangleStrip    => write!(f, "PrimitiveType::TriangleStrip"),
-            PrimitiveType::TriangleFan      => write!(f, "PrimitiveType::TriangleFan"),
-            other                           => write!(f, "PrimitiveType({})", other.0),
-        }
-    }
-}
-
-impl From<PrimitiveType> for D3DPRIMITIVETYPE {
-    fn from(value: PrimitiveType) -> Self { value.0 }
-}
-
-#[cfg(feature = "impl-from-unchecked")]
-impl From<D3DPRIMITIVETYPE> for PrimitiveType {
-    fn from(value: D3DPRIMITIVETYPE) -> Self { Self(value) }
 }

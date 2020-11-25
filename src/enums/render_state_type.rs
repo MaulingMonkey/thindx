@@ -2,31 +2,43 @@
 
 use winapi::shared::d3d9types::*;
 
-use std::fmt::{self, Debug, Formatter};
-
 
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)\]
 /// D3DRENDERSTATETYPE
+///
+/// Render states define set-up states for all kinds of vertex and pixel processing.
+/// Some render states set up vertex processing, and some set up pixel processing (see [Render States (Direct3D 9)]).
+/// Render states can be saved and restored using stateblocks (see [State Blocks Save and Restore State (Direct3D 9)]).
+///
+/// [Render States (Direct3D 9)]:                       https://docs.microsoft.com/en-us/windows/win32/direct3d9/render-states
+/// [State Blocks Save and Restore State (Direct3D 9)]: https://docs.microsoft.com/en-us/windows/win32/direct3d9/state-blocks-save-and-restore-state
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)] pub struct RenderStateType(D3DRENDERSTATETYPE);
 pub type RS = RenderStateType;
 
-impl RenderStateType {
-    /// Convert a raw [D3DRENDERSTATETYPE] value into a [RenderStateType].  This is *probably* safe... probably....
-    ///
-    /// [D3DRENDERSTATETYPE]:      https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype
-    pub const fn from_unchecked(renderstatetype: D3DRENDERSTATETYPE) -> Self { Self(renderstatetype) }
-
-    /// Convert a [RenderStateType] into a raw [D3DRENDERSTATETYPE].
-    ///
-    /// [D3DRENDERSTATETYPE]:      https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype
-    pub const fn into(self) -> D3DRENDERSTATETYPE { self.0 }
+enumish! {
+    RS => D3DRENDERSTATETYPE;
+    ZEnable, FillMode, ShadeMode, ZWriteEnable, AlphaTestEnable, LastPixel, SrcBlend, DestBlend,
+    CullMode, ZFunc, AlphaRef, AlphaFunc, DitherEnable, AlphaBlendEnable, FogEnable, SpecularEnable,
+    FogColor, FogTableMode, FogStart, FogEnd, FogDensity, RangeFogEnable,
+    StencilEnable, StencilFail, StencilZFail, StencilPass, StencilFunc, StencilRef, StencilMask, StencilWriteMask, TextureFactor,
+    Wrap0, Wrap1, Wrap2, Wrap3, Wrap4, Wrap5, Wrap6, Wrap7,
+    Clipping, Lighting, Ambient, FogVertexMode, ColorVertex, LocalViewer, NormalizeNormals,
+    DiffuseMaterialSource, SpecularMaterialSource, AmbientMaterialSource, EmissiveMaterialSource, VertexBlend, ClipPlaneEnable,
+    PointSize, PointSizeMin, PointSpriteEnable, PointScaleEnable, PointScaleA, PointScaleB, PointScaleC,
+    MultiSampleAntiAlias, MultiSampleMask, PatchEdgeStyle, DebugMonitorToken, PointSizeMax, IndexedVertexBlendEnable,
+    ColorWriteEnable, TweenFactor, BlendOp, PositionDegree, NormalDegree, ScissorTestEnable, SlopeScaleDepthBias,
+    AntiAliasedLineEnable, MinTessellationLevel, MaxTessellationLevel, AdaptiveTessX, AdaptiveTessY, AdaptiveTessZ, AdaptiveTessW,
+    EnableAdaptiveTessellation, TwoSidedStencilMode, CcwStencilFail, CcwStencilZFail, CcwStencilPass, CcwStencilFunc,
+    ColorWriteEnable1, ColorWriteEnable2, ColorWriteEnable3, BlendFactor, SRGBWriteEnable, DepthBias,
+    Wrap8, Wrap9, Wrap10, Wrap11, Wrap12, Wrap13, Wrap14, Wrap15,
+    SeparateAlphaBlendEnable, SrcBlendAlpha, DestBlendAlpha, BlendOpAlpha,
 }
 
 #[allow(non_upper_case_globals)] // These are enum-like
 impl RenderStateType {
-    pub const ZEnable                       : RenderStateType = RenderStateType(D3DRS_ZENABLE);
+    pub const ZEnable                       : RenderStateType = RenderStateType(D3DRS_ZENABLE); // 7
     pub const FillMode                      : RenderStateType = RenderStateType(D3DRS_FILLMODE);
     pub const ShadeMode                     : RenderStateType = RenderStateType(D3DRS_SHADEMODE);
     pub const ZWriteEnable                  : RenderStateType = RenderStateType(D3DRS_ZWRITEENABLE);
@@ -134,124 +146,4 @@ impl RenderStateType {
 #[cfg(feature = "impl-poor-defaults")]
 impl Default for RenderStateType {
     fn default() -> Self { RenderStateType(0) }
-}
-
-impl Debug for RenderStateType {
-    fn fmt(&self, f: &mut Formatter) -> fmt::Result {
-        match *self {
-            RenderStateType::ZEnable                    => write!(f, "RenderStateType::ZEnable"),
-            RenderStateType::FillMode                   => write!(f, "RenderStateType::FillMode"),
-            RenderStateType::ShadeMode                  => write!(f, "RenderStateType::ShadeMode"),
-            RenderStateType::ZWriteEnable               => write!(f, "RenderStateType::ZWriteEnable"),
-            RenderStateType::AlphaTestEnable            => write!(f, "RenderStateType::AlphaTestEnable"),
-            RenderStateType::LastPixel                  => write!(f, "RenderStateType::LastPixel"),
-            RenderStateType::SrcBlend                   => write!(f, "RenderStateType::SrcBlend"),
-            RenderStateType::DestBlend                  => write!(f, "RenderStateType::DestBlend"),
-            RenderStateType::CullMode                   => write!(f, "RenderStateType::CullMode"),
-            RenderStateType::ZFunc                      => write!(f, "RenderStateType::ZFunc"),
-            RenderStateType::AlphaRef                   => write!(f, "RenderStateType::AlphaRef"),
-            RenderStateType::AlphaFunc                  => write!(f, "RenderStateType::AlphaFunc"),
-            RenderStateType::DitherEnable               => write!(f, "RenderStateType::DitherEnable"),
-            RenderStateType::AlphaBlendEnable           => write!(f, "RenderStateType::AlphaBlendEnable"),
-            RenderStateType::FogEnable                  => write!(f, "RenderStateType::FogEnable"),
-            RenderStateType::SpecularEnable             => write!(f, "RenderStateType::SpecularEnable"),
-            RenderStateType::FogColor                   => write!(f, "RenderStateType::FogColor"),
-            RenderStateType::FogTableMode               => write!(f, "RenderStateType::FogTableMode"),
-            RenderStateType::FogStart                   => write!(f, "RenderStateType::FogStart"),
-            RenderStateType::FogEnd                     => write!(f, "RenderStateType::FogEnd"),
-            RenderStateType::FogDensity                 => write!(f, "RenderStateType::FogDensity"),
-            RenderStateType::RangeFogEnable             => write!(f, "RenderStateType::RangeFogEnable"),
-            RenderStateType::StencilEnable              => write!(f, "RenderStateType::StencilEnable"),
-            RenderStateType::StencilFail                => write!(f, "RenderStateType::StencilFail"),
-            RenderStateType::StencilZFail               => write!(f, "RenderStateType::StencilZFail"),
-            RenderStateType::StencilPass                => write!(f, "RenderStateType::StencilPass"),
-            RenderStateType::StencilFunc                => write!(f, "RenderStateType::StencilFunc"),
-            RenderStateType::StencilRef                 => write!(f, "RenderStateType::StencilRef"),
-            RenderStateType::StencilMask                => write!(f, "RenderStateType::StencilMask"),
-            RenderStateType::StencilWriteMask           => write!(f, "RenderStateType::StencilWriteMask"),
-            RenderStateType::TextureFactor              => write!(f, "RenderStateType::TextureFactor"),
-            RenderStateType::Wrap0                      => write!(f, "RenderStateType::Wrap0"),
-            RenderStateType::Wrap1                      => write!(f, "RenderStateType::Wrap1"),
-            RenderStateType::Wrap2                      => write!(f, "RenderStateType::Wrap2"),
-            RenderStateType::Wrap3                      => write!(f, "RenderStateType::Wrap3"),
-            RenderStateType::Wrap4                      => write!(f, "RenderStateType::Wrap4"),
-            RenderStateType::Wrap5                      => write!(f, "RenderStateType::Wrap5"),
-            RenderStateType::Wrap6                      => write!(f, "RenderStateType::Wrap6"),
-            RenderStateType::Wrap7                      => write!(f, "RenderStateType::Wrap7"),
-            RenderStateType::Clipping                   => write!(f, "RenderStateType::Clipping"),
-            RenderStateType::Lighting                   => write!(f, "RenderStateType::Lighting"),
-            RenderStateType::Ambient                    => write!(f, "RenderStateType::Ambient"),
-            RenderStateType::FogVertexMode              => write!(f, "RenderStateType::FogVertexMode"),
-            RenderStateType::ColorVertex                => write!(f, "RenderStateType::ColorVertex"),
-            RenderStateType::LocalViewer                => write!(f, "RenderStateType::LocalViewer"),
-            RenderStateType::NormalizeNormals           => write!(f, "RenderStateType::NormalizeNormals"),
-            RenderStateType::DiffuseMaterialSource      => write!(f, "RenderStateType::DiffuseMaterialSource"),
-            RenderStateType::SpecularMaterialSource     => write!(f, "RenderStateType::SpecularMaterialSource"),
-            RenderStateType::AmbientMaterialSource      => write!(f, "RenderStateType::AmbientMaterialSource"),
-            RenderStateType::EmissiveMaterialSource     => write!(f, "RenderStateType::EmissiveMaterialSource"),
-            RenderStateType::VertexBlend                => write!(f, "RenderStateType::VertexBlend"),
-            RenderStateType::ClipPlaneEnable            => write!(f, "RenderStateType::ClipPlaneEnable"),
-            RenderStateType::PointSize                  => write!(f, "RenderStateType::PointSize"),
-            RenderStateType::PointSizeMin               => write!(f, "RenderStateType::PointSizeMin"),
-            RenderStateType::PointSpriteEnable          => write!(f, "RenderStateType::PointSpriteEnable"),
-            RenderStateType::PointScaleEnable           => write!(f, "RenderStateType::PointScaleEnable"),
-            RenderStateType::PointScaleA                => write!(f, "RenderStateType::PointScaleA"),
-            RenderStateType::PointScaleB                => write!(f, "RenderStateType::PointScaleB"),
-            RenderStateType::PointScaleC                => write!(f, "RenderStateType::PointScaleC"),
-            RenderStateType::MultiSampleAntiAlias       => write!(f, "RenderStateType::MultiSampleAntiAlias"),
-            RenderStateType::MultiSampleMask            => write!(f, "RenderStateType::MultiSampleMask"),
-            RenderStateType::PatchEdgeStyle             => write!(f, "RenderStateType::PatchEdgeStyle"),
-            RenderStateType::DebugMonitorToken          => write!(f, "RenderStateType::DebugMonitorToken"),
-            RenderStateType::PointSizeMax               => write!(f, "RenderStateType::PointSizeMax"),
-            RenderStateType::IndexedVertexBlendEnable   => write!(f, "RenderStateType::IndexedVertexBlendEnable"),
-            RenderStateType::ColorWriteEnable           => write!(f, "RenderStateType::ColorWriteEnable"),
-            RenderStateType::TweenFactor                => write!(f, "RenderStateType::TweenFactor"),
-            RenderStateType::BlendOp                    => write!(f, "RenderStateType::BlendOp"),
-            RenderStateType::PositionDegree             => write!(f, "RenderStateType::PositionDegree"),
-            RenderStateType::NormalDegree               => write!(f, "RenderStateType::NormalDegree"),
-            RenderStateType::ScissorTestEnable          => write!(f, "RenderStateType::ScissorTestEnable"),
-            RenderStateType::SlopeScaleDepthBias        => write!(f, "RenderStateType::SlopeScaleDepthBias"),
-            RenderStateType::AntiAliasedLineEnable      => write!(f, "RenderStateType::AntiAliasedLineEnable"),
-            RenderStateType::MinTessellationLevel       => write!(f, "RenderStateType::MinTessellationLevel"),
-            RenderStateType::MaxTessellationLevel       => write!(f, "RenderStateType::MaxTessellationLevel"),
-            RenderStateType::AdaptiveTessX              => write!(f, "RenderStateType::AdaptiveTessX"),
-            RenderStateType::AdaptiveTessY              => write!(f, "RenderStateType::AdaptiveTessY"),
-            RenderStateType::AdaptiveTessZ              => write!(f, "RenderStateType::AdaptiveTessZ"),
-            RenderStateType::AdaptiveTessW              => write!(f, "RenderStateType::AdaptiveTessW"),
-            RenderStateType::EnableAdaptiveTessellation => write!(f, "RenderStateType::EnableAdaptiveTessellation"),
-            RenderStateType::TwoSidedStencilMode        => write!(f, "RenderStateType::TwoSidedStencilMode"),
-            RenderStateType::CcwStencilFail             => write!(f, "RenderStateType::CcwStencilFail"),
-            RenderStateType::CcwStencilZFail            => write!(f, "RenderStateType::CcwStencilZFail"),
-            RenderStateType::CcwStencilPass             => write!(f, "RenderStateType::CcwStencilPass"),
-            RenderStateType::CcwStencilFunc             => write!(f, "RenderStateType::CcwStencilFunc"),
-            RenderStateType::ColorWriteEnable1          => write!(f, "RenderStateType::ColorWriteEnable1"),
-            RenderStateType::ColorWriteEnable2          => write!(f, "RenderStateType::ColorWriteEnable2"),
-            RenderStateType::ColorWriteEnable3          => write!(f, "RenderStateType::ColorWriteEnable3"),
-            RenderStateType::BlendFactor                => write!(f, "RenderStateType::BlendFactor"),
-            RenderStateType::SRGBWriteEnable            => write!(f, "RenderStateType::SRGBWriteEnable"),
-            RenderStateType::DepthBias                  => write!(f, "RenderStateType::DepthBias"),
-            RenderStateType::Wrap8                      => write!(f, "RenderStateType::Wrap8"),
-            RenderStateType::Wrap9                      => write!(f, "RenderStateType::Wrap9"),
-            RenderStateType::Wrap10                     => write!(f, "RenderStateType::Wrap10"),
-            RenderStateType::Wrap11                     => write!(f, "RenderStateType::Wrap11"),
-            RenderStateType::Wrap12                     => write!(f, "RenderStateType::Wrap12"),
-            RenderStateType::Wrap13                     => write!(f, "RenderStateType::Wrap13"),
-            RenderStateType::Wrap14                     => write!(f, "RenderStateType::Wrap14"),
-            RenderStateType::Wrap15                     => write!(f, "RenderStateType::Wrap15"),
-            RenderStateType::SeparateAlphaBlendEnable   => write!(f, "RenderStateType::SeparateAlphaBlendEnable"),
-            RenderStateType::SrcBlendAlpha              => write!(f, "RenderStateType::SrcBlendAlpha"),
-            RenderStateType::DestBlendAlpha             => write!(f, "RenderStateType::DestBlendAlpha"),
-            RenderStateType::BlendOpAlpha               => write!(f, "RenderStateType::BlendOpAlpha"),
-            other                                       => write!(f, "RenderStateType({})", other.0),
-        }
-    }
-}
-
-impl From<RenderStateType> for D3DRENDERSTATETYPE {
-    fn from(value: RenderStateType) -> Self { value.0 }
-}
-
-#[cfg(feature = "impl-from-unchecked")]
-impl From<D3DRENDERSTATETYPE> for RenderStateType {
-    fn from(value: D3DRENDERSTATETYPE) -> Self { Self(value) }
 }

@@ -27,7 +27,7 @@
 }
 
 macro_rules! enumish {
-    ( $enumish:ty => $d3d:ty; $($ident:ident),* ) => {
+    ( $enumish:ty => $d3d:ty; $($ident:ident),* $(,)? ) => {
         impl std::fmt::Debug for $enumish {
             fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
                 match *self {
@@ -40,21 +40,21 @@ macro_rules! enumish {
         }
 
         impl From<$enumish> for $d3d {
-            fn from(value: $enumish) -> Self { value.0 }
+            fn from(value: $enumish) -> Self { value.0.into() }
         }
 
         #[cfg(feature = "impl-from-unchecked")]
         impl From<$d3d> for $enumish {
-            fn from(value: $d3d) -> Self { Self(value) }
+            fn from(value: $d3d) -> Self { Self(value.into()) }
         }
 
         impl $enumish {
             /// Convert from an underlying [winapi] `D3D...` type.
             /// This is *probably* safe... probably...
-            pub const fn from_unchecked(d3d: $d3d) -> Self { Self(d3d) }
+            pub const fn from_unchecked(d3d: $d3d) -> Self { Self(d3d as _) }
 
             /// Convert back into an underlying [winapi] `D3D...` type.
-            pub const fn into(self) -> $d3d { self.0 }
+            pub const fn into(self) -> $d3d { self.0 as _ }
         }
     }
 }

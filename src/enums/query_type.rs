@@ -2,8 +2,6 @@
 
 use winapi::shared::d3d9types::*;
 
-use std::fmt::{self, Debug, Formatter};
-
 
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dquerytype)\]
@@ -15,22 +13,16 @@ use std::fmt::{self, Debug, Formatter};
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)] pub struct QueryType(D3DQUERYTYPE);
 
-impl QueryType {
-    /// Convert a raw [D3DQUERYTYPE] value into a [QueryType].  This is *probably* safe... probably....
-    ///
-    /// [D3DQUERYTYPE]:      https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dquerytype
-    pub const fn from_unchecked(querytype: D3DQUERYTYPE) -> Self { Self(querytype) }
-
-    /// Convert a [QueryType] into a raw [D3DQUERYTYPE].
-    ///
-    /// [D3DQUERYTYPE]:      https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dquerytype
-    pub const fn into(self) -> D3DQUERYTYPE { self.0 }
+enumish! {
+    QueryType => D3DQUERYTYPE;
+    VCache, ResourceManager, VertexStats, Event, Occlusion, TimeStamp, TimeStampDisjoint, TimeStampFreq,
+    PipelineTimings, InterfaceTimings, VertexTimings, PixelTimings, BandwidthTimings, CacheUtilization,
+    MemoryPressure,
 }
 
-#[allow(non_upper_case_globals)] // These are enum-like
-impl QueryType {
+#[allow(non_upper_case_globals)] impl QueryType { // These are enum-like
     /// Query for driver hints about data layout for vertex caching.
-    pub const VCache            : QueryType = QueryType(D3DQUERYTYPE_VCACHE);
+    pub const VCache            : QueryType = QueryType(D3DQUERYTYPE_VCACHE); // 4
 
     /// Query the resource manager. For this query, the device behavior flags must include D3DCREATE_DISABLE_DRIVER_MANAGEMENT.
     pub const ResourceManager   : QueryType = QueryType(D3DQUERYTYPE_RESOURCEMANAGER);
@@ -81,41 +73,11 @@ impl QueryType {
     /// D3DQUERYTYPE_MEMORYPRESSURE is only available in Direct3D9Ex running on Windows 7 (or more current operating system).
     #[cfg(feature = "9ex")]
     pub const MemoryPressure    : QueryType = QueryType(D3DQUERYTYPE_MEMORYPRESSURE);
+    #[cfg(not(feature = "9ex"))]
+    pub(crate) const MemoryPressure : QueryType = QueryType(D3DQUERYTYPE_MEMORYPRESSURE);
 }
 
 #[cfg(feature = "impl-poor-defaults")]
 impl Default for QueryType {
     fn default() -> Self { QueryType(0) }
-}
-
-impl Debug for QueryType {
-    fn fmt(&self, f: &mut Formatter) -> fmt::Result {
-        match *self {
-            QueryType::VCache               => write!(f, "QueryType::VCache"),
-            QueryType::ResourceManager      => write!(f, "QueryType::ResourceManager"),
-            QueryType::VertexStats          => write!(f, "QueryType::VertexStats"),
-            QueryType::Event                => write!(f, "QueryType::Event"),
-            QueryType::Occlusion            => write!(f, "QueryType::Occlusion"),
-            QueryType::TimeStamp            => write!(f, "QueryType::TimeStamp"),
-            QueryType::TimeStampDisjoint    => write!(f, "QueryType::TimeStampDisjoint"),
-            QueryType::TimeStampFreq        => write!(f, "QueryType::TimeStampFreq"),
-            QueryType::PipelineTimings      => write!(f, "QueryType::PipelineTimings"),
-            QueryType::InterfaceTimings     => write!(f, "QueryType::InterfaceTimings"),
-            QueryType::VertexTimings        => write!(f, "QueryType::VertexTimings"),
-            QueryType::PixelTimings         => write!(f, "QueryType::PixelTimings"),
-            QueryType::BandwidthTimings     => write!(f, "QueryType::BandwidthTimings"),
-            QueryType::CacheUtilization     => write!(f, "QueryType::CacheUtilization"),
-            QueryType::MemoryPressure       => write!(f, "QueryType::MemoryPressure"),
-            other                           => write!(f, "QueryType({})", other.0),
-        }
-    }
-}
-
-impl From<QueryType> for D3DQUERYTYPE {
-    fn from(value: QueryType) -> Self { value.0 }
-}
-
-#[cfg(feature = "impl-from-unchecked")]
-impl From<D3DQUERYTYPE> for QueryType {
-    fn from(value: D3DQUERYTYPE) -> Self { Self(value) }
 }

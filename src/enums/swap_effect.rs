@@ -2,8 +2,6 @@
 
 use winapi::shared::d3d9types::*;
 
-use std::fmt::{self, Debug, Formatter};
-
 
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dswapeffect)\]
@@ -13,20 +11,9 @@ use std::fmt::{self, Debug, Formatter};
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)] pub struct SwapEffect(D3DSWAPEFFECT);
 
-impl SwapEffect {
-    /// Convert a raw [D3DSWAPEFFECT] into a [SwapEffect].  This is *probably* safe... probably...
-    ///
-    /// [D3DSWAPEFFECT]:      https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dswapeffect
-    pub const fn from_unchecked(resource_type: D3DSWAPEFFECT) -> Self { Self(resource_type) }
+enumish! { SwapEffect => D3DSWAPEFFECT; Discard, Flip, Copy, Overlay, FlipEx }
 
-    /// Convert a [SwapEffect] into a raw [D3DSWAPEFFECT].
-    ///
-    /// [D3DSWAPEFFECT]:      https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dswapeffect
-    pub const fn into(self) -> D3DSWAPEFFECT { self.0 }
-}
-
-#[allow(non_upper_case_globals)] // These are enum-like
-impl SwapEffect {
+#[allow(non_upper_case_globals)] impl SwapEffect { // These are enum-like
     /// When a swap chain is created with a swap effect of [SwapEffect::Flip] or [SwapEffect::Copy], the runtime will guarantee that an [Device::present] operation will not affect the content of any of the back buffers.
     /// Unfortunately, meeting this guarantee can involve substantial video memory or processing overheads, especially when implementing flip semantics for a windowed swap chain or copy semantics for a full-screen swap chain.
     /// An application may use the [SwapEffect::Discard] swap effect to avoid these overheads and to enable the display driver to select the most efficient presentation technique for the swap chain.
@@ -74,27 +61,5 @@ impl SwapEffect {
 
 #[cfg(feature = "impl-poor-defaults")]
 impl Default for SwapEffect {
-    fn default() -> Self { SwapEffect::from_unchecked(0) }
-}
-
-impl Debug for SwapEffect {
-    fn fmt(&self, f: &mut Formatter) -> fmt::Result {
-        match *self {
-            SwapEffect::Discard => write!(f, "SwapEffect::Discard"),
-            SwapEffect::Flip    => write!(f, "SwapEffect::Flip"),
-            SwapEffect::Copy    => write!(f, "SwapEffect::Copy"),
-            SwapEffect::Overlay => write!(f, "SwapEffect::Overlay"),
-            SwapEffect::FlipEx  => write!(f, "SwapEffect::FlipEx"),
-            other               => write!(f, "SwapEffect({})", other.0),
-        }
-    }
-}
-
-impl From<SwapEffect> for D3DSWAPEFFECT {
-    fn from(value: SwapEffect) -> Self { value.0 }
-}
-
-#[cfg(feature = "impl-from-unchecked")]
-impl From<D3DSWAPEFFECT> for SwapEffect {
-    fn from(value: D3DSWAPEFFECT) -> Self { Self(value) }
+    fn default() -> Self { SwapEffect(0) }
 }

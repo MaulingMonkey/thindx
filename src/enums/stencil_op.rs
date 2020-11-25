@@ -2,29 +2,18 @@
 
 use winapi::shared::d3d9types::*;
 
-use std::fmt::{self, Debug, Formatter};
-
 
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dstencilop)\]
 /// D3DSTENCILOP
+///
+/// Defines stencil-buffer operations.
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)] pub struct StencilOp(D3DSTENCILOP);
 
-impl StencilOp {
-    /// Convert a raw [D3DSTENCILOP] value into a [StencilOp].  This is *probably* safe... probably....
-    ///
-    /// [D3DSTENCILOP]:      https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dstencilop
-    pub const fn from_unchecked(stencilop: D3DSTENCILOP) -> Self { Self(stencilop) }
+enumish! { StencilOp => D3DSTENCILOP; Keep, Zero, Replace, IncrSat, DecrSat, Invert, Incr, Decr }
 
-    /// Convert a [StencilOp] into a raw [D3DSTENCILOP].
-    ///
-    /// [D3DSTENCILOP]:      https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dstencilop
-    pub const fn into(self) -> D3DSTENCILOP { self.0 }
-}
-
-#[allow(non_upper_case_globals)] // These are enum-like
-impl StencilOp {
+#[allow(non_upper_case_globals)] impl StencilOp { // These are enum-like
     pub const Keep          : StencilOp = StencilOp(D3DSTENCILOP_KEEP);
     pub const Zero          : StencilOp = StencilOp(D3DSTENCILOP_ZERO);
     pub const Replace       : StencilOp = StencilOp(D3DSTENCILOP_REPLACE);
@@ -35,32 +24,7 @@ impl StencilOp {
     pub const Decr          : StencilOp = StencilOp(D3DSTENCILOP_DECR);
 }
 
-#[cfg(feature = "impl-poor-defaults")] // Actually this seems like a pretty sane default?
+#[cfg(feature = "impl-poor-defaults")]
 impl Default for StencilOp {
     fn default() -> Self { StencilOp(0) }
-}
-
-impl Debug for StencilOp {
-    fn fmt(&self, f: &mut Formatter) -> fmt::Result {
-        match *self {
-            StencilOp::Keep     => write!(f, "StencilOp::Keep"),
-            StencilOp::Zero     => write!(f, "StencilOp::Zero"),
-            StencilOp::Replace  => write!(f, "StencilOp::Replace"),
-            StencilOp::IncrSat  => write!(f, "StencilOp::IncrSat"),
-            StencilOp::DecrSat  => write!(f, "StencilOp::DecrSat"),
-            StencilOp::Invert   => write!(f, "StencilOp::Invert"),
-            StencilOp::Incr     => write!(f, "StencilOp::Incr"),
-            StencilOp::Decr     => write!(f, "StencilOp::Decr"),
-            other               => write!(f, "StencilOp({})", other.0),
-        }
-    }
-}
-
-impl From<StencilOp> for D3DSTENCILOP {
-    fn from(value: StencilOp) -> Self { value.0 }
-}
-
-#[cfg(feature = "impl-from-unchecked")]
-impl From<D3DSTENCILOP> for StencilOp {
-    fn from(value: D3DSTENCILOP) -> Self { Self(value) }
 }

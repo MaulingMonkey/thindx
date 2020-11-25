@@ -7,7 +7,6 @@ use std::fmt::{self, Debug, Formatter};
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dstreamsource)\]
 /// D3DSTREAMSOURCE
 ///
 /// Used for specifying which streams should use instanced rendering.
@@ -19,19 +18,14 @@ use std::fmt::{self, Debug, Formatter};
 #[repr(transparent)] pub struct StreamSource(D3DSTREAMSOURCE);
 
 impl StreamSource {
-    /// Convert a raw [D3DSTREAMSOURCE] into a [StreamSource].  This is *probably* safe... probably...
-    ///
-    /// [D3DSTREAMSOURCE]:      https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dstreamsource
+    /// Convert a raw [winapi] `D3DSTREAMSOURCE_*` into a [StreamSource].  This is *probably* safe... probably...
     pub const fn from_unchecked(resource_type: D3DSTREAMSOURCE) -> Self { Self(resource_type) }
 
-    /// Convert a [StreamSource] into a raw [D3DSTREAMSOURCE].
-    ///
-    /// [D3DSTREAMSOURCE]:      https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dstreamsource
+    /// Convert a [StreamSource] into a raw [winapi] `D3DSTREAMSOURCE_*`.
     pub const fn into(self) -> D3DSTREAMSOURCE { self.0 }
 }
 
-#[allow(non_upper_case_globals)] // These are enum-like
-impl StreamSource {
+#[allow(non_upper_case_globals)] impl StreamSource { // These are enum-like
     /// A regular, non-instanced vertex data stream
     pub fn regular() -> Self { Self(1) }
 

@@ -2,8 +2,6 @@
 
 use winapi::shared::d3d9types::*;
 
-use std::fmt::{self, Debug, Formatter};
-
 
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dstateblocktype)\]
@@ -14,21 +12,11 @@ use std::fmt::{self, Debug, Formatter};
 /// [State Blocks Save and Restore State (Direct3D 9)]:         https://docs.microsoft.com/en-us/windows/win32/direct3d9/state-blocks-save-and-restore-state
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)] pub struct StateBlockType(D3DSTATEBLOCKTYPE);
+pub type SBT = StateBlockType;
 
-impl StateBlockType {
-    /// Convert a raw [D3DSTATEBLOCKTYPE] value into a [StateBlockType].  This is *probably* safe... probably....
-    ///
-    /// [D3DSTATEBLOCKTYPE]:      https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dstateblocktype
-    pub const fn from_unchecked(stateblocktype: D3DSTATEBLOCKTYPE) -> Self { Self(stateblocktype) }
+enumish! { SBT => D3DSTATEBLOCKTYPE; All, PixelState, VertexState }
 
-    /// Convert a [StateBlockType] into a raw [D3DSTATEBLOCKTYPE].
-    ///
-    /// [D3DSTATEBLOCKTYPE]:      https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dstateblocktype
-    pub const fn into(self) -> D3DSTATEBLOCKTYPE { self.0 }
-}
-
-#[allow(non_upper_case_globals)] // These are enum-like
-impl StateBlockType {
+#[allow(non_upper_case_globals)] impl StateBlockType { // These are enum-like
     /// Capture the current [device state](https://docs.microsoft.com/en-us/windows/win32/direct3d9/saving-all-device-states-with-a-stateblock).
     pub const All           : StateBlockType = StateBlockType(D3DSBT_ALL);
 
@@ -39,27 +27,7 @@ impl StateBlockType {
     pub const VertexState   : StateBlockType = StateBlockType(D3DSBT_VERTEXSTATE);
 }
 
-#[cfg(feature = "impl-poor-defaults")] // Actually this seems like a pretty sane default?
+#[cfg(feature = "impl-poor-defaults")]
 impl Default for StateBlockType {
-    fn default() -> Self { StateBlockType::All }
-}
-
-impl Debug for StateBlockType {
-    fn fmt(&self, f: &mut Formatter) -> fmt::Result {
-        match *self {
-            StateBlockType::All         => write!(f, "StateBlockType::All"),
-            StateBlockType::PixelState  => write!(f, "StateBlockType::PixelState"),
-            StateBlockType::VertexState => write!(f, "StateBlockType::VertexState"),
-            other                       => write!(f, "StateBlockType({})", other.0),
-        }
-    }
-}
-
-impl From<StateBlockType> for D3DSTATEBLOCKTYPE {
-    fn from(value: StateBlockType) -> Self { value.0 }
-}
-
-#[cfg(feature = "impl-from-unchecked")]
-impl From<D3DSTATEBLOCKTYPE> for StateBlockType {
-    fn from(value: D3DSTATEBLOCKTYPE) -> Self { Self(value) }
+    fn default() -> Self { StateBlockType::All } // 1
 }
