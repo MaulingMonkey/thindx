@@ -25,3 +25,36 @@
     let f : *const F = f;
     (f as usize) - (s as usize)
 }
+
+macro_rules! enumish {
+    ( $enumish:ty => $d3d:ty; $($ident:ident),* ) => {
+        impl std::fmt::Debug for $enumish {
+            fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
+                match *self {
+                    $(
+                        < $enumish > :: $ident =>  write!(f, concat!(stringify!($enumish), "::", stringify!($ident))),
+                    )*
+                    other                   => write!(f, "{}({})", stringify!($enumish), other.0),
+                }
+            }
+        }
+
+        impl From<$enumish> for $d3d {
+            fn from(value: $enumish) -> Self { value.0 }
+        }
+
+        #[cfg(feature = "impl-from-unchecked")]
+        impl From<$d3d> for $enumish {
+            fn from(value: $d3d) -> Self { Self(value) }
+        }
+
+        impl $enumish {
+            /// Convert from an underlying [winapi] `D3D...` type.
+            /// This is *probably* safe... probably...
+            pub const fn from_unchecked(d3d: $d3d) -> Self { Self(d3d) }
+
+            /// Convert back into an underlying [winapi] `D3D...` type.
+            pub const fn into(self) -> $d3d { self.0 }
+        }
+    }
+}
