@@ -1,3 +1,5 @@
+#[allow(unused_imports)] use crate::*;
+
 use winapi::shared::winerror::{HRESULT, SUCCEEDED, *};
 
 use std::fmt::{self, Debug, Display, Formatter};
@@ -28,8 +30,7 @@ const _FACD3D : u32 = 0x876;
 #[allow(non_snake_case)] const fn MAKE_D3DSTATUS (code: u32) -> D3DERR { MAKE_HRESULT(0, _FACD3D, code) }
 #[allow(non_snake_case)] const fn MAKE_HRESULT(sev: u32, fac: u32, code: u32) -> D3DERR { D3DERR((sev << 31 | fac << 16 | code) as HRESULT) }
 
-#[allow(overflowing_literals)]
-impl D3DERR {
+#[allow(overflowing_literals)] impl D3DERR {
     /// The pixel format of the texture surface is not valid.
     pub const WRONGTEXTUREFORMAT        : D3DERR = MAKE_D3DHRESULT(2072);
 
@@ -112,8 +113,7 @@ impl D3DERR {
 
 
 
-#[cfg(feature = "9ex")]
-impl D3D {
+#[cfg(feature = "9ex")] impl D3D {
     /// At least one allocation that comprises the resources is on disk.
     ///
     /// Direct3D 9Ex only.
@@ -143,8 +143,7 @@ impl D3D {
     pub const S_PRESENT_OCCLUDED            : D3DERR = MAKE_D3DSTATUS(2168);
 }
 
-#[cfg(feature = "9ex")]
-impl D3DERR {
+#[cfg(feature = "9ex")] impl D3DERR {
     /// The hardware adapter has been removed.
     /// Application must destroy the device, do enumeration of adapters and create another Direct3D device.
     /// If application continues rendering without calling Reset, the rendering calls will succeed.
@@ -223,8 +222,7 @@ impl D3DERR {
 
 
 /// Undocumented / poorly documented semi-internal errors
-#[allow(overflowing_literals)]
-impl D3DERR {
+#[allow(overflowing_literals)] impl D3DERR {
     /// The command was unparsed.
     pub const COMMAND_UNPARSED          : D3DERR = D3DERR(0x88760BB8 as _);
 }
@@ -232,11 +230,27 @@ impl D3DERR {
 
 
 /// Errors that aren't part of the D3DERR_\* family, but might still be returned by Direct3D API calls.
-#[allow(overflowing_literals)]
-impl D3DERR {
+#[allow(overflowing_literals)] impl D3DERR {
     /// Ran out of memory.
     pub const OUTOFMEMORY               : D3DERR = D3DERR(E_OUTOFMEMORY);
 }
+
+
+
+/// Thin3D-specific errors
+///
+/// * `0xA.......`  - **S**everity and **C**ustomer bits for [HRESULT](https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-erref/0642cb2f-2075-4469-918c-4441e69c548a)s
+/// * `0x.73D....`  - **T**hin **3D** error codes
+/// * `0x....0001`  - Error codes
+#[allow(overflowing_literals)] impl D3DERR {
+    /// `0xA73D0001`    Large slice passed to D3D API that only accepts a 32-bit length
+    pub const SLICE_OVERFLOW    : D3DERR = D3DERR(0xA73D0001 as _);
+
+    /// `0xA73D0002`    Resource belonging to one [Device] was passed to a different [Device].  To avoid undefined behavior, Direct3D was not called.
+    pub const DEVICE_MISMATCH   : D3DERR = D3DERR(0xA73D0002 as _);
+}
+
+
 
 impl D3DERR {
     fn id_desc(self) -> Option<(&'static str, &'static str)> {
@@ -294,6 +308,9 @@ impl D3DERR {
             D3DERR::COMMAND_UNPARSED            => Some(("D3DERR_COMMAND_UNPARSED",             "The command was unparsed.")),
 
             D3DERR::OUTOFMEMORY                 => Some(("E_OUTOFMEMORY",                       "Ran out of memory")),
+
+            D3DERR::SLICE_OVERFLOW              => Some(("THIN3DERR_SLICE_OVERFLOW",        "Large slice passed to D3D API that only accepts a 32-bit length")),
+            D3DERR::DEVICE_MISMATCH             => Some(("THIN3DERR_DEVICE_MISMATCH",       "Resource belonging to one Device was passed to a different Device.  To avoid undefined behavior, Direct3D was not called.")),
 
             _                                   => None,
         }

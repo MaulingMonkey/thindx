@@ -7,6 +7,7 @@ mod buffers;        pub use buffers::*;
 mod direct3d;       pub use direct3d::*;
 mod direct3dex;     pub use direct3dex::*;
 mod query;          pub use query::*;
+mod resource;       pub use resource::*;
 mod shaders;        pub use shaders::*;
 mod state_block;    pub use state_block::*;
 mod surface;        pub use surface::*;
@@ -20,11 +21,6 @@ mod device_misc;
 /// Base COM interface all D3D9 types eventually derive from.
 #[derive(Clone)] #[repr(transparent)]
 pub struct Unknown(mcom::Rc<winapi::um::unknwnbase::IUnknown>);
-
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dresource9)\]
-/// [\*Texture\*](crate::BaseTexture), [Surface] (but not <strike>[Volume]</strike>!), [IndexBuffer], [VertexBuffer], but not <strike>[\*Shader](crate::PixelShader)</strike>!
-#[derive(Clone)] #[repr(transparent)]
-pub struct Resource(mcom::Rc<winapi::shared::d3d9::IDirect3DResource9>);
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dvolume9)\]
 /// A dense 3-dimensional region of data, often belonging to a [VolumeTexture]
