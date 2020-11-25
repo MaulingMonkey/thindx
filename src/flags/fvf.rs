@@ -3,7 +3,6 @@
 use winapi::shared::d3d9types::*;
 type D3DFVF = u32; // there's no actual type
 
-use std::fmt::{self, Debug, Formatter};
 use std::ops::*;
 
 
@@ -15,20 +14,16 @@ use std::ops::*;
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)] pub struct FVF(D3DFVF);
 
-impl FVF {
-    /// Convert a raw [D3DFVF] value into a [FVF].  This is *probably* safe... probably...
-    ///
-    /// [D3DFVF]:       https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dfvf
-    pub const fn from_unchecked(fvf: D3DFVF) -> Self { Self(fvf) }
-
-    /// Convert a [FVF] into a raw [D3DFVF].
-    ///
-    /// [D3DFVF]:       https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dfvf
-    pub const fn into(self) -> D3DFVF { self.0 }
+flags! {
+    FVF => D3DFVF;
+    LastBetaUByte4, LastBetaD3DColor,
+    Reserved2, Reserved0,
+    Tex8, Tex7, Tex6, Tex5, Tex4, Tex3, Tex2, Tex1,// Tex0,
+    XYZW, XYZB5, XYZB4, XYZB3, XYZB2, XYZB1, XYZRHW, XYZ,
+    Specular, PSize, Normal, Diffuse, None,
 }
 
-#[allow(non_upper_case_globals)] // These are enum-like
-impl FVF {
+#[allow(non_upper_case_globals)] impl FVF { // These are enum-like
     pub const None              : FVF = FVF(0);
 
     // Vertex Data Flags
@@ -73,24 +68,8 @@ impl FVF {
     pub const TexCountShift     : u32 = D3DFVF_TEXCOUNT_SHIFT;
 }
 
-impl BitOrAssign for FVF {
-    fn bitor_assign(&mut self, other: Self) { self.0 |= other.0 }
-}
-
-impl BitOr for FVF {
-    type Output = Self;
-    fn bitor(self, other: Self) -> Self { Self(self.0 | other.0) }
-}
-
-impl Debug for FVF {
-    fn fmt(&self, f: &mut Formatter) -> fmt::Result {
-        write!(f, "FVF({})", self.0) // TODO: split up flags into human readable constants
-    }
-}
-
-#[cfg(feature = "impl-poor-defaults")] // Actually this seems like a pretty sane default?
 impl Default for FVF {
-    fn default() -> Self { FVF(0) }
+    fn default() -> Self { FVF::None }
 }
 
 impl Deref for FVF {
@@ -100,15 +79,6 @@ impl Deref for FVF {
 
 impl DerefMut for FVF {
     fn deref_mut(&mut self) -> &mut Self::Target { &mut self.0 }
-}
-
-impl From<FVF> for D3DFVF {
-    fn from(value: FVF) -> Self { value.0 }
-}
-
-#[cfg(feature = "impl-from-unchecked")]
-impl From<D3DFVF> for FVF {
-    fn from(value: D3DFVF) -> Self { Self(value) }
 }
 
 

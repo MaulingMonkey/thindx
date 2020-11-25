@@ -3,9 +3,6 @@
 use winapi::shared::d3d9types::*;
 type D3DUSAGE = u32; // there's no actual type
 
-use std::fmt::{self, Debug, Formatter};
-use std::ops::*;
-
 
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dusage)\]
@@ -16,20 +13,13 @@ use std::ops::*;
 #[repr(transparent)] pub struct Usage(D3DUSAGE);
 // TODO: usage table from https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dusage#usage-and-resource-combinations?
 
-impl Usage {
-    /// Convert a raw [D3DUSAGE] value into a [Usage].  This is *probably* safe... probably...
-    ///
-    /// [D3DUSAGE]:       https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dusage
-    pub const fn from_unchecked(usage: D3DUSAGE) -> Self { Self(usage) }
-
-    /// Convert a [Usage] into a raw [D3DUSAGE].
-    ///
-    /// [D3DUSAGE]:       https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dusage
-    pub const fn into(self) -> D3DUSAGE { self.0 }
+flags! {
+    Usage => D3DUSAGE;
+    None, AutoGenMipMap, DepthStencil, DMap, DoNotClip, Dynamic, NonSecure, NPatches, Points, RenderTarget, RTPatches,
+    SoftwareProcessing, TextAPI, WriteOnly, RestrictedContent, RestrictSharedResource, RestrictSharedResourceDriver,
 }
 
-#[allow(non_upper_case_globals)] // These are enum-like
-impl Usage {
+#[allow(non_upper_case_globals)] impl Usage { // These are enum-like
     pub const None                          : Usage = Usage(0);
 
     /// The resource will automatically generate mipmaps.
@@ -75,6 +65,8 @@ impl Usage {
     /// Differences between **Direct3D 9** and **Direct3D 9Ex**: This flag is available in Direct3D 9Ex only.
     #[cfg(feature = "9ex")]
     pub const NonSecure                     : Usage = Usage(D3DUSAGE_NONSECURE);
+    #[cfg(not(feature = "9ex"))]
+    pub(crate) const NonSecure              : Usage = Usage(D3DUSAGE_NONSECURE);
 
     /// Set to indicate that the vertex buffer is to be used for drawing N-patches.
     pub const NPatches                      : Usage = Usage(D3DUSAGE_NPATCHES);
@@ -108,6 +100,8 @@ impl Usage {
     /// **Differences between Direct3D 9 and Direct3D 9Ex:** This flag is available in Direct3D 9Ex only.
     #[cfg(feature = "9ex")]
     pub const TextAPI                       : Usage = Usage(D3DUSAGE_TEXTAPI);
+    #[cfg(not(feature = "9ex"))]
+    pub(crate) const TextAPI                : Usage = Usage(D3DUSAGE_TEXTAPI);
 
     /// Informs the system that the application writes only to the vertex buffer.
     /// Using this flag enables the driver to choose the best memory location for efficient write operations and rendering.
@@ -121,12 +115,16 @@ impl Usage {
     /// **Differences between Direct3D 9 and Direct3D 9Ex:** This flag is available in Direct3D 9Ex only.
     #[cfg(feature = "9ex")]
     pub const RestrictedContent             : Usage = Usage(D3DUSAGE_RESTRICTED_CONTENT);
+    #[cfg(not(feature = "9ex"))]
+    pub(crate) const RestrictedContent      : Usage = Usage(D3DUSAGE_RESTRICTED_CONTENT);
 
     /// Setting this flag indicates that access to the shared resource should be restricted.
     ///
     /// **Differences between Direct3D 9 and Direct3D 9Ex:** This flag is available in Direct3D 9Ex only.
     #[cfg(feature = "9ex")]
     pub const RestrictSharedResource        : Usage = Usage(D3DUSAGE_RESTRICT_SHARED_RESOURCE);
+    #[cfg(not(feature = "9ex"))]
+    pub(crate) const RestrictSharedResource : Usage = Usage(D3DUSAGE_RESTRICT_SHARED_RESOURCE);
 
     /// Setting this flag indicates that the driver should restrict access to the shared resource.
     /// The caller must create an authenticated channel with the driver.
@@ -135,51 +133,10 @@ impl Usage {
     /// **Differences between Direct3D 9 and Direct3D 9Ex:** This flag is available in Direct3D 9Ex only.
     #[cfg(feature = "9ex")]
     pub const RestrictSharedResourceDriver  : Usage = Usage(D3DUSAGE_RESTRICT_SHARED_RESOURCE_DRIVER);
+    #[cfg(not(feature = "9ex"))]
+    pub(crate) const RestrictSharedResourceDriver : Usage = Usage(D3DUSAGE_RESTRICT_SHARED_RESOURCE_DRIVER);
 }
 
-impl BitOrAssign for Usage {
-    fn bitor_assign(&mut self, other: Self) { self.0 |= other.0 }
-}
-
-impl BitOr for Usage {
-    type Output = Self;
-    fn bitor(self, other: Self) -> Self { Self(self.0 | other.0) }
-}
-
-impl Debug for Usage {
-    fn fmt(&self, f: &mut Formatter) -> fmt::Result {
-        match *self {
-            Usage::AutoGenMipMap                => write!(f, "Usage::AutoGenMipMap"),
-            Usage::DepthStencil                 => write!(f, "Usage::DepthStencil"),
-            Usage::DMap                         => write!(f, "Usage::DMap"),
-            Usage::DoNotClip                    => write!(f, "Usage::DoNotClip"),
-            Usage::Dynamic                      => write!(f, "Usage::Dynamic"),
-            Usage::NonSecure                    => write!(f, "Usage::NonSecure"),
-            Usage::NPatches                     => write!(f, "Usage::NPatches"),
-            Usage::Points                       => write!(f, "Usage::Points"),
-            Usage::RenderTarget                 => write!(f, "Usage::RenderTarget"),
-            Usage::RTPatches                    => write!(f, "Usage::RTPatches"),
-            Usage::SoftwareProcessing           => write!(f, "Usage::SoftwareProcessing"),
-            Usage::TextAPI                      => write!(f, "Usage::TextAPI"),
-            Usage::WriteOnly                    => write!(f, "Usage::WriteOnly"),
-            Usage::RestrictedContent            => write!(f, "Usage::RestrictedContent"),
-            Usage::RestrictSharedResource       => write!(f, "Usage::RestrictSharedResource"),
-            Usage::RestrictSharedResourceDriver => write!(f, "Usage::RestrictSharedResourceDriver"),
-            other                               => write!(f, "Usage({})", other.0 as u32),
-        }
-    }
-}
-
-#[cfg(feature = "impl-poor-defaults")] // Actually this seems like a pretty sane default?
 impl Default for Usage {
-    fn default() -> Self { Usage(0) }
-}
-
-impl From<Usage> for D3DUSAGE {
-    fn from(value: Usage) -> Self { value.0 }
-}
-
-#[cfg(feature = "impl-from-unchecked")]
-impl From<D3DUSAGE> for Usage {
-    fn from(value: D3DUSAGE) -> Self { Self(value) }
+    fn default() -> Self { Usage::None }
 }

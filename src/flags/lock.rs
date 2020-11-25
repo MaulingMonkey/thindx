@@ -3,9 +3,6 @@
 use winapi::shared::d3d9types::*;
 type D3DLOCK = u32; // there's no actual type
 
-use std::fmt::{self, Debug, Formatter};
-use std::ops::*;
-
 
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dlock)\]
@@ -15,20 +12,9 @@ use std::ops::*;
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)] pub struct Lock(D3DLOCK);
 
-impl Lock {
-    /// Convert a raw [D3DLOCK] value into a [Lock].  This is *probably* safe... probably...
-    ///
-    /// [D3DLOCK]:       https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dlock
-    pub const fn from_unchecked(lock: D3DLOCK) -> Self { Self(lock) }
+flags! { Lock => D3DLOCK; None, Discard, DoNotWait, NoDirtyUpdate, NoOverwrite, NoSysLock, ReadOnly }
 
-    /// Convert a [Lock] into a raw [D3DLOCK].
-    ///
-    /// [D3DLOCK]:       https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dlock
-    pub const fn into(self) -> D3DLOCK { self.0 }
-}
-
-#[allow(non_upper_case_globals)] // These are enum-like
-impl Lock {
+#[allow(non_upper_case_globals)] impl Lock { // These are enum-like
     /// No lock flags
     pub const None              : Lock = Lock(0);
 
@@ -65,39 +51,6 @@ impl Lock {
     pub const ReadOnly          : Lock = Lock(D3DLOCK_READONLY);
 }
 
-impl BitOrAssign for Lock {
-    fn bitor_assign(&mut self, other: Self) { self.0 |= other.0 }
-}
-
-impl BitOr for Lock {
-    type Output = Self;
-    fn bitor(self, other: Self) -> Self { Self(self.0 | other.0) }
-}
-
-impl Debug for Lock {
-    fn fmt(&self, f: &mut Formatter) -> fmt::Result {
-        match *self {
-            Lock::Discard       => write!(f, "Lock::Discard"),
-            Lock::DoNotWait     => write!(f, "Lock::DoNotWait"),
-            Lock::NoDirtyUpdate => write!(f, "Lock::NoDirtyUpdate"),
-            Lock::NoOverwrite   => write!(f, "Lock::NoOverwrite"),
-            Lock::NoSysLock     => write!(f, "Lock::NoSysLock"),
-            Lock::ReadOnly      => write!(f, "Lock::ReadOnly"),
-            other               => write!(f, "Lock({})", other.0),
-        }
-    }
-}
-
-#[cfg(feature = "impl-poor-defaults")] // Actually this seems like a pretty sane default?
 impl Default for Lock {
-    fn default() -> Self { Lock(0) }
-}
-
-impl From<Lock> for D3DLOCK {
-    fn from(value: Lock) -> Self { value.0 }
-}
-
-#[cfg(feature = "impl-from-unchecked")]
-impl From<D3DLOCK> for Lock {
-    fn from(value: D3DLOCK) -> Self { Self(value) }
+    fn default() -> Self { Lock::None }
 }
