@@ -10,6 +10,11 @@ use winapi::shared::d3d9types::*;
 /// Defines constants that describe the type of back buffer.
 ///
 /// Direct3D 9 does not support stereo view, so Direct3D does not use the D3DBACKBUFFER_TYPE_LEFT and D3DBACKBUFFER_TYPE_RIGHT values of this enumerated type.
+///
+/// ### See Also
+///
+/// *   [Device::get_back_buffer]
+/// *   [SwapChain::get_back_buffer]
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)] pub struct BackBufferType(D3DBACKBUFFER_TYPE);
 
