@@ -13,7 +13,7 @@
 //! 
 //! [Direct3D9]:                https://docs.microsoft.com/en-us/windows/win32/api/d3d9/
 //!
-//! ### Why not [winapi] directly?
+//! ### Why not `winapi` directly?
 //! 
 //! *   This crate aims to make fns safe/sound/slightly rusty when possible
 //! *   Attempts to verify API soundness through mass unit tests, even if they mostly test Direct3D9's behavior.
@@ -37,8 +37,8 @@
 //! &nbsp;  │      ├─ [Surface] - 2D buffer of pixels
 //! &nbsp;  │      ├─ [BaseTexture] - A GPU-friendly collection of pixels
 //! &nbsp;  │      │      ├─ [Texture] - 2D texture
-//! &nbsp;  │      │      ├─ [CubeTexture] - 6-sided 2D texture
-//! &nbsp;  │      │      └─ [VolumeTexture] - Dense 3D texture</span>
+//! &nbsp;  │      │      ├─ [CubeTexture] - 6-sided 2D texture</span>
+//! &nbsp;  │      │      └─ [VolumeTexture] - Dense 3D texture
 //! &nbsp;  │      ├─ [IndexBuffer] - An [index buffer](https://docs.microsoft.com/en-us/windows/win32/direct3d9/rendering-from-vertex-and-index-buffers#scenario-2-drawing-two-triangles-with-indexing) indexes verticies in a [VertexBuffer] when rendering.
 //! &nbsp;  │      └─ [VertexBuffer] - A [vertex buffer](https://docs.microsoft.com/en-us/windows/win32/direct3d9/rendering-from-vertex-and-index-buffers#scenario-2-drawing-two-triangles-with-indexing) typically contains points of a mesh to be rendered.
 //! &nbsp;  ├─ <strike>[Resource]</strike> You'd expect these to be resources, but they aren't - they derive from [Unknown].

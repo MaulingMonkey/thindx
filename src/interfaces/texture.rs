@@ -2,7 +2,9 @@
 
 use crate::*;
 
-use std::ptr::{null_mut};
+use winapi::shared::d3d9types::*;
+
+use std::ptr::*;
 
 
 
@@ -50,7 +52,7 @@ impl Device {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = Device::test();
+    /// # use doc::*; let device = Device::pure();
     /// // Create a 6 x 128x128 ARGB cubemap with no mipmaps
     /// let texture = device.create_cube_texture(128, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
     /// assert_eq!(D3DERR::INVALIDCALL, device.create_cube_texture(1 << 15, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).err());
@@ -77,7 +79,7 @@ impl Device {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = Device::test();
+    /// # use doc::*; let device = Device::pure();
     /// // Create a 128x128 ARGB texture with no mipmaps
     /// let texture = device.create_texture(128, 128, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
     /// assert_eq!(D3DERR::INVALIDCALL, device.create_texture(1 << 15, 1 << 15, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).err());
@@ -104,7 +106,7 @@ impl Device {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = Device::test();
+    /// # use doc::*; let device = Device::pure();
     /// // Create a 32x32x32 volumetric ARGB texture with no mipmaps
     /// let texture = device.create_volume_texture(32, 32, 32, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
     /// assert_eq!(D3DERR::INVALIDCALL, device.create_volume_texture(1 << 10, 1 << 10, 1 << 10, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).err());
@@ -134,7 +136,7 @@ impl Device {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = Device::test();
+    /// # use doc::*; let device = Device::pure();
     /// // XXX: No texture set for stage 0, this may crash!!!
     /// // let texture = unsafe { device.get_texture(0) }.unwrap();
     ///
@@ -173,7 +175,7 @@ impl Device {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = Device::test();
+    /// # use doc::*; let device = Device::pure();
     /// let texture = device.create_texture(128, 128, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
     ///
     /// unsafe{device.set_texture(0,      &texture  )}.unwrap();
@@ -213,7 +215,7 @@ impl SafeDevice {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = SafeDevice::test();
+    /// # use doc::*; let device = SafeDevice::pure();
     /// let texture = device.create_texture(128, 128, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
     ///
     /// device.set_texture(0, &texture).unwrap();
@@ -253,7 +255,7 @@ impl SafeDevice {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = SafeDevice::test();
+    /// # use doc::*; let device = SafeDevice::pure();
     /// let texture = device.create_texture(128, 128, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
     /// device.set_texture(1, &texture).unwrap();
     /// 
@@ -268,6 +270,163 @@ impl SafeDevice {
             unsafe { self.device().get_texture(stage) }
         }
     }
+}
+
+
+
+impl VolumeTexture {
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolumetexture9-adddirtybox)\]
+    /// IDirect3DVolumeTexture9::AddDirtyBox
+    ///
+    /// Adds a dirty region to a volume texture resource.
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use doc::*; let device = Device::pure();
+    /// # let texture = device.create_volume_texture(32, 32, 32, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
+    /// texture.add_dirty_box(None).unwrap();
+    /// texture.add_dirty_box(Box::from((0,0,0) .. (32,32,32))).unwrap();
+    /// ```
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]
+    /// *   Ok(`()`)
+    pub fn add_dirty_box(&self, dirty_box: impl Into<Option<Box>>) -> Result<(), MethodError> {
+        let dirty_box   = dirty_box.into();
+        let dirty_box   = dirty_box.as_ref().map_or(null(), |b| &**b);
+        let hr = unsafe { self.0.AddDirtyBox(dirty_box) };
+        MethodError::check("IDirect3DVolumeTexture9::AddDirtyBox", hr)
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolumetexture9-getleveldesc)\]
+    /// IDirect3DVolumeTexture9::GetLevelDesc
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use doc::*; let device = Device::pure();
+    /// # let texture = device.create_volume_texture(32, 32, 32, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
+    /// let level0 : VolumeDesc = texture.get_level_desc(0).unwrap();
+    /// assert_eq!(level0.format, Format::A8R8G8B8);
+    /// assert_eq!(level0.r#type, ResourceType::Volume);
+    /// assert_eq!(level0.usage,  Usage::None);
+    /// assert_eq!(level0.pool,   Pool::Default);
+    /// assert_eq!(level0.width,  32);
+    /// assert_eq!(level0.height, 32);
+    /// assert_eq!(level0.depth,  32);
+    /// ```
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]
+    /// *   Ok([VolumeDesc])
+    pub fn get_level_desc(&self, level: u32) -> Result<VolumeDesc, MethodError> {
+        let mut desc = VolumeDesc::default();
+        let hr = unsafe { self.0.GetLevelDesc(level, &mut *desc) };
+        MethodError::check("IDirect3DVolumeTexture9::GetLevelDesc", hr)?;
+        Ok(desc)
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolumetexture9-getvolumelevel)\]
+    /// IDirect3DVolumeTexture9::GetVolumeLevel
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use doc::*; let device = Device::pure();
+    /// # let texture = device.create_volume_texture(32, 32, 32, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
+    /// let level0 : Volume = texture.get_volume_level(0).unwrap();
+    /// // get_container, get_desc, get_device, lock_box, ...
+    /// let desc : VolumeDesc = level0.get_desc().unwrap();
+    /// assert_eq!(desc.format, Format::A8R8G8B8);
+    /// assert_eq!(desc.r#type, ResourceType::Volume);
+    /// assert_eq!(desc.usage,  Usage::None);
+    /// assert_eq!(desc.pool,   Pool::Default);
+    /// assert_eq!(desc.width,  32);
+    /// assert_eq!(desc.height, 32);
+    /// assert_eq!(desc.depth,  32);
+    /// ```
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]
+    /// *   Ok([Volume])
+    pub fn get_volume_level(&self, level: u32) -> Result<Volume, MethodError> {
+        let mut volume = null_mut();
+        let hr = unsafe { self.0.GetVolumeLevel(level, &mut volume) };
+        MethodError::check("IDirect3DVolumeTexture9::GetVolumeLevel", hr)?;
+        Ok(unsafe { Volume::from_raw(volume) })
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolumetexture9-lockbox)\]
+    /// IDirect3DVolumeTexture9::LockBox
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use doc::*; let device = Device::pure();
+    /// // Pool::Default textures cannot be locked
+    /// let texture = device.create_volume_texture(32, 32, 32, 1, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
+    /// assert_eq!(D3DERR::INVALIDCALL, unsafe { texture.lock_box_unchecked(0, Box::from((0,0,0)..(32,32,4)), Lock::None) }.err());
+    ///
+    /// // Pool::Managed textures *can* be locked
+    /// let data = [[[Color::argb(0xFF112233); 32]; 32]; 32];
+    /// let texture = device.create_volume_texture(32, 32, 32, 1, Usage::None, Format::A8R8G8B8, Pool::Managed, ()).unwrap();
+    /// unsafe {
+    ///     let bits = texture.lock_box_unchecked(0, Box::from((0,0,0)..(32,32,4)), Lock::None).unwrap();
+    ///     for z in 0..32 { for y in 0..32 {
+    ///         let src = data[z][y].as_ptr();
+    ///         let dst = (bits.pBits as *mut u8).add(y * bits.RowPitch as usize + z * bits.SlicePitch as usize);
+    ///         std::ptr::copy(src, dst.cast(), 32);
+    ///     }}
+    /// }
+    /// texture.unlock_box(0).unwrap();
+    /// ```
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]   If the texture belongs to [Pool::Default]
+    /// *   Ok([D3DLOCKED_BOX])
+    pub unsafe fn lock_box_unchecked(&self, level: u32, box_: impl Into<Option<Box>>, lock: impl Into<Lock>) -> Result<D3DLOCKED_BOX, MethodError> {
+        let box_    = box_.into();
+        let box_    = box_.as_ref().map_or(null(), |b| &**b);
+        let lock    = lock.into().into();
+        let mut lockedbox = std::mem::zeroed::<D3DLOCKED_BOX>();
+        let hr = self.0.LockBox(level, &mut lockedbox, box_, lock);
+        MethodError::check("IDirect3DVolumeTexture9::LockBox", hr)?;
+        Ok(lockedbox)
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolumetexture9-unlockbox)\]
+    /// IDirect3DVolumeTexture9::UnlockBox
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use doc::*; let device = Device::pure();
+    /// # let texture = device.create_volume_texture(32, 32, 32, 0, Usage::None, Format::A8R8G8B8, Pool::Managed, ()).unwrap();
+    /// assert_eq!(D3DERR::INVALIDCALL, texture.unlock_box(0));
+    ///
+    /// unsafe {
+    ///     let bits = texture.lock_box_unchecked(0, None, Lock::None).unwrap();
+    ///     // ...copy data to bits.pBits...
+    /// }
+    /// texture.unlock_box(0).unwrap();
+    /// assert_eq!(D3DERR::INVALIDCALL, texture.unlock_box(0));
+    /// ```
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]   If the texture wasn't locked
+    /// *   Ok(`()`)
+    pub fn unlock_box(&self, level: u32) -> Result<(), MethodError> {
+        let hr = unsafe { self.0.UnlockBox(level) };
+        MethodError::check("IDirect3DVolumeTexture9::UnlockBox", hr)
+    }
+
+    // TODO: Saner texture init/update methods
 }
 
 
