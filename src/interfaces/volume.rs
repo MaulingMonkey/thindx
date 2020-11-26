@@ -121,9 +121,9 @@ impl Volume {
     ///
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok([D3DLOCKED_BOX])
-    pub unsafe fn lock_box_unchecked(&self, box_: impl Into<Option<Box>>, flags: impl Into<Lock>) -> Result<D3DLOCKED_BOX, MethodError> {
+    pub unsafe fn lock_box_unchecked(&self, box_: impl IntoBoxOrFull, flags: impl Into<Lock>) -> Result<D3DLOCKED_BOX, MethodError> {
         let mut locked = std::mem::zeroed::<D3DLOCKED_BOX>();
-        let box_ = box_.into();
+        let box_ = box_.into_box();
         let box_ = box_.as_ref().map_or(null(), |b| &**b);
         let hr = self.0.LockBox(&mut locked, box_, flags.into().into());
         MethodError::check("IDirect3DVolume9::LockBox", hr)?;

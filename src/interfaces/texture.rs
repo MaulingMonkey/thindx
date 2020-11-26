@@ -285,7 +285,8 @@ impl VolumeTexture {
     /// ```rust
     /// # use doc::*; let device = Device::pure();
     /// # let texture = device.create_volume_texture(32, 32, 32, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
-    /// texture.add_dirty_box(None).unwrap();
+    /// texture.add_dirty_box(..).unwrap();
+    /// texture.add_dirty_box((0,0,0) .. (32,32,32)).unwrap();
     /// texture.add_dirty_box(Box::from((0,0,0) .. (32,32,32))).unwrap();
     /// ```
     ///
@@ -293,8 +294,8 @@ impl VolumeTexture {
     ///
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok(`()`)
-    pub fn add_dirty_box(&self, dirty_box: impl Into<Option<Box>>) -> Result<(), MethodError> {
-        let dirty_box   = dirty_box.into();
+    pub fn add_dirty_box(&self, dirty_box: impl IntoBoxOrFull) -> Result<(), MethodError> {
+        let dirty_box   = dirty_box.into_box();
         let dirty_box   = dirty_box.as_ref().map_or(null(), |b| &**b);
         let hr = unsafe { self.0.AddDirtyBox(dirty_box) };
         MethodError::check("IDirect3DVolumeTexture9::AddDirtyBox", hr)
@@ -369,7 +370,7 @@ impl VolumeTexture {
     /// # use doc::*; let device = Device::pure();
     /// // Pool::Default textures cannot be locked
     /// let texture = device.create_volume_texture(32, 32, 32, 1, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
-    /// assert_eq!(D3DERR::INVALIDCALL, unsafe { texture.lock_box_unchecked(0, Box::from((0,0,0)..(32,32,4)), Lock::None) }.err());
+    /// assert_eq!(D3DERR::INVALIDCALL, unsafe { texture.lock_box_unchecked(0, .., Lock::None) }.err());
     ///
     /// // Pool::Managed textures *can* be locked
     /// let data = [[[Color::argb(0xFF112233); 32]; 32]; 32];
@@ -389,8 +390,8 @@ impl VolumeTexture {
     ///
     /// *   [D3DERR::INVALIDCALL]   If the texture belongs to [Pool::Default]
     /// *   Ok([D3DLOCKED_BOX])
-    pub unsafe fn lock_box_unchecked(&self, level: u32, box_: impl Into<Option<Box>>, lock: impl Into<Lock>) -> Result<D3DLOCKED_BOX, MethodError> {
-        let box_    = box_.into();
+    pub unsafe fn lock_box_unchecked(&self, level: u32, box_: impl IntoBoxOrFull, lock: impl Into<Lock>) -> Result<D3DLOCKED_BOX, MethodError> {
+        let box_    = box_.into_box();
         let box_    = box_.as_ref().map_or(null(), |b| &**b);
         let lock    = lock.into().into();
         let mut lockedbox = std::mem::zeroed::<D3DLOCKED_BOX>();
@@ -410,7 +411,7 @@ impl VolumeTexture {
     /// assert_eq!(D3DERR::INVALIDCALL, texture.unlock_box(0));
     ///
     /// unsafe {
-    ///     let bits = texture.lock_box_unchecked(0, None, Lock::None).unwrap();
+    ///     let bits = texture.lock_box_unchecked(0, .., Lock::None).unwrap();
     ///     // ...copy data to bits.pBits...
     /// }
     /// texture.unlock_box(0).unwrap();

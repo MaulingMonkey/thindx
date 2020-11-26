@@ -119,16 +119,16 @@ impl Device {
     /// # use std::ptr::null_mut;   let hwnd = null_mut();
     /// # use doc::*;               let device = Device::test();
     /// // Present the entire back buffer (should work with all swap chains, probably:)
-    /// device.present(None, None, (), None).unwrap();
+    /// device.present(.., .., (), None).unwrap();
     /// // TODO: Handle D3DERR::DEVICEREMOVED
     ///
     /// // Or, with a SwapEffect::Copy swap chain, this should succeed (might succeed by simply ignoring the args, even for other SwapEffect s:)
     /// let hwnd = unsafe { SafeHWND::assert(&hwnd) };
-    /// let _ = device.present(Rect::from((0,0)..(100,100)), Rect::from((0,0)..(100,100)), hwnd, None);
+    /// let _ = device.present((0,0)..(100,100), Rect::from((0,0)..(100,100)), hwnd, None);
     /// ```
-    pub fn present<'r>(&self, source_rect: impl Into<Option<Rect>>, dest_rect: impl Into<Option<Rect>>, dest_window_override: impl AsHWND, dirty_region: impl Into<Option<&'r RgnData>>) -> Result<(), MethodError> {
-        let source_rect     = source_rect.into();
-        let dest_rect       = dest_rect.into();
+    pub fn present<'r>(&self, source_rect: impl IntoRectOrFull, dest_rect: impl IntoRectOrFull, dest_window_override: impl AsHWND, dirty_region: impl Into<Option<&'r RgnData>>) -> Result<(), MethodError> {
+        let source_rect     = source_rect.into_rect();
+        let dest_rect       = dest_rect.into_rect();
         let hwnd            = dest_window_override.as_hwnd();
         let dirty_region    = dirty_region.into();
 
@@ -182,7 +182,7 @@ pub struct RgnData {
 
 #[test] fn present() {
     let device = Device::test_pp(false, |pp, _| pp.SwapEffect = SwapEffect::Copy.into()).unwrap();
-    device.present(None, None, (), None).unwrap();
+    device.present(.., .., (), None).unwrap();
 
     for rect in [
         (0, 0) .. (1, 1),
@@ -197,6 +197,6 @@ pub struct RgnData {
         (i32::MAX, i32::MAX) .. (i32::MIN, i32::MIN),
     ].iter().cloned() {
         let rect = Rect::from(rect);
-        device.present(Some(rect), Some(rect), (), None).unwrap();
+        device.present(rect, rect, (), None).unwrap();
     }
 }

@@ -102,7 +102,7 @@ fn main() {
             let device = d.borrow();
             if let Some(device) = device.as_ref() {
                 device.clear(None, Some(Color::argb(0xFF664422)), None, None).unwrap();
-                device.present(None, None, (), None).unwrap(); // TODO: Handle D3DERR::DEVICELOST
+                device.present(.., .., (), None).unwrap(); // TODO: Handle D3DERR::DEVICELOST
             }
         });
     }
