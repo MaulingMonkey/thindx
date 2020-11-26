@@ -1,10 +1,10 @@
-#![allow(dead_code)] // TODO: remove
-
 use crate::*;
 
 use winapi::ctypes::c_void;
 
 use std::ptr::null_mut;
+
+const MAX_ALLOC : u32 = 0xFFFF_0000;
 
 
 
@@ -70,6 +70,11 @@ impl Device {
     /// *   [D3DERR::OUTOFMEMORY]
     /// *   Ok([IndexBuffer])
     pub fn create_index_buffer(&self, length: u32, usage: impl Into<Usage>, format: impl Into<Format>, pool: impl Into<Pool>, shared_handle: impl SharedHandleParam) -> Result<IndexBuffer, MethodError> {
+        // !0 will fail OUTOFMEMORY
+        // !0/2 spammed will fail OUTOFVIDEOMEMORY
+        // !0-4 spammed will "succeed", hinting at an arithmetic overflow within d3d or the driver
+        if length > MAX_ALLOC { return Err(MethodError("Device::create_vertex_buffer", D3DERR::ALLOC_OVERFLOW)); }
+
         let _ = shared_handle;
         let mut buffer = null_mut();
         let hr = unsafe { self.0.CreateIndexBuffer(length, usage.into().into(), format.into().into(), pool.into().into(), &mut buffer, null_mut()) };
@@ -105,10 +110,16 @@ impl Device {
     ///
     /// *   [D3DERR::INVALIDCALL]       if `length` cannot hold at least one [FVF]-sized vertex (1 if [FVF::None])
     /// *   [D3DERR::INVALIDCALL]       if `usage` or `pool` is invalid
-    /// *   [D3DERR::OUTOFVIDEOMEMORY]
-    /// *   [D3DERR::OUTOFMEMORY]
+    /// *   [D3DERR::OUTOFVIDEOMEMORY]  if allocation failed (driver or gpu memory)
+    /// *   [D3DERR::OUTOFMEMORY]       if allocation failed (driver or d3d runtime)
+    /// *   [D3DERR::ALLOC_OVERFLOW]    if allocation rejected by thin3d9 to avoid possible UB
     /// *   Ok([VertexBuffer])
     pub fn create_vertex_buffer(&self, length: u32, usage: impl Into<Usage>, fvf: impl Into<FVF>, pool: impl Into<Pool>, _shared_handle: impl SharedHandleParam) -> Result<VertexBuffer, MethodError> {
+        // !0 will fail OUTOFMEMORY
+        // !0/2 spammed will fail OUTOFVIDEOMEMORY
+        // !0-4 spammed will "succeed", hinting at an arithmetic overflow within d3d or the driver
+        if length > MAX_ALLOC { return Err(MethodError("Device::create_vertex_buffer", D3DERR::ALLOC_OVERFLOW)); }
+
         let mut buffer = null_mut();
         let hr = unsafe { self.0.CreateVertexBuffer(length, usage.into().into(), fvf.into().into(), pool.into().into(), &mut buffer, null_mut()) };
         MethodError::check("IDirect3DDevice9::CreateVertexBuffer", hr)?;
@@ -554,4 +565,42 @@ impl VertexBuffer {
     assert_eq!(D3DERR::INVALIDCALL, device.create_vertex_buffer(1000, Usage::None, FVF::XYZ, Invalid,       ()).err(), "bad pool");
 }
 
-// TODO: a lot more testing
+#[test] fn overflow_allocs() {
+    fn index_loop_alloc_size(alloc: u32) -> Result<(), MethodError> {
+        let device = Device::pure();
+        let mut ibs = Vec::new();
+        for _n in 0..1000 { ibs.push(device.create_index_buffer(alloc, Usage::None, Format::Index16, Pool::Default, ())?); }
+        panic!("expected overflow_allocs::index_loop_alloc_size(0x{:08x}) to fail before collecting 1000 allocs", alloc);
+    }
+
+    fn vertex_loop_alloc_size(alloc: u32) -> Result<(), MethodError> {
+        let device = Device::pure();
+        let mut vbs = Vec::new();
+        for _n in 0..1000 { vbs.push(device.create_vertex_buffer(alloc, Usage::None, FVF::None, Pool::Default, ())?); }
+        panic!("expected overflow_allocs::vertex_loop_alloc_size(0x{:08x}) to fail before collecting 1000 allocs", alloc);
+    }
+
+    for n in [
+        !0,
+        !0-4,
+        !0-100,
+        MAX_ALLOC,
+        0xF000_0000,
+        !0/2,
+        !0/8,
+    ].iter().copied() {
+        match index_loop_alloc_size(n).unwrap_err().d3derr() {
+            D3DERR::OUTOFMEMORY         => {}, // expected
+            D3DERR::OUTOFVIDEOMEMORY    => {}, // expected
+            D3DERR::ALLOC_OVERFLOW      => {}, // expected
+            other => panic!("index_loop_alloc_size(0x{:08x}), expected a different kind of error, got: {}", n, other),
+        }
+
+        match vertex_loop_alloc_size(n).unwrap_err().d3derr() {
+            D3DERR::OUTOFMEMORY         => {}, // expected
+            D3DERR::OUTOFVIDEOMEMORY    => {}, // expected
+            D3DERR::ALLOC_OVERFLOW      => {}, // expected
+            other => panic!("vertex_loop_alloc_size(0x{:08x}), expected a different kind of error, got: {}", n, other),
+        }
+    }
+}
