@@ -41,8 +41,8 @@
 //! &nbsp;  │      │      └─ [VolumeTexture] - Dense 3D texture</span>
 //! &nbsp;  │      ├─ [IndexBuffer] - An [index buffer](https://docs.microsoft.com/en-us/windows/win32/direct3d9/rendering-from-vertex-and-index-buffers#scenario-2-drawing-two-triangles-with-indexing) indexes verticies in a [VertexBuffer] when rendering.
 //! &nbsp;  │      └─ [VertexBuffer] - A [vertex buffer](https://docs.microsoft.com/en-us/windows/win32/direct3d9/rendering-from-vertex-and-index-buffers#scenario-2-drawing-two-triangles-with-indexing) typically contains points of a mesh to be rendered.
-//! &nbsp;  ├─ <strike>[Resource]</strike> You'd expect these to be resources, but they aren't - they derive from [Unknown].<span style="opacity: 25%">
-//! &nbsp;  │      ├─ [Volume] - 3D buffer of pixels</span>
+//! &nbsp;  ├─ <strike>[Resource]</strike> You'd expect these to be resources, but they aren't - they derive from [Unknown].
+//! &nbsp;  │      ├─ [Volume] - 3D buffer of pixels
 //! &nbsp;  │      ├─ [PixelShader] - per-fragment GPU program
 //! &nbsp;  │      └─ [VertexShader] - per-vertex GPU program
 //! &nbsp;  ├─ [Query] - An asyncronous GPU query for [occlusion or other information](https://docs.microsoft.com/en-us/windows/win32/direct3d9/queries).

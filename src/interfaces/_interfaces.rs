@@ -13,15 +13,11 @@ mod state_block;    pub use state_block::*;
 mod surface;        pub use surface::*;
 mod swap_chain;     pub use swap_chain::*;
 mod texture;        pub use texture::*;
-mod vertex_declaration; pub use vertex_declaration::*;
 mod unknown;        pub use unknown::*;
+mod vertex_declaration; pub use vertex_declaration::*;
+mod volume;         pub use volume::*;
 mod device_misc;
 
-
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dvolume9)\]
-/// A dense 3-dimensional region of data, often belonging to a [VolumeTexture]
-#[derive(Clone)] #[repr(transparent)]
-pub struct Volume(mcom::Rc<winapi::shared::d3d9::IDirect3DVolume9>);
 
 
 

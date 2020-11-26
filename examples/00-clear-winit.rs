@@ -20,7 +20,7 @@ use std::ptr::*;
 
 
 fn main() {
-    std::panic::set_hook(Box::new(|pi| unsafe {
+    std::panic::set_hook(std::boxed::Box::new(|pi| unsafe {
         eprintln!("{}", pi);
         if IsDebuggerPresent() != 0 { DebugBreak(); }
         std::process::exit(1);

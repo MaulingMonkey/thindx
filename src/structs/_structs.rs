@@ -1,4 +1,5 @@
 mod adapter_identifier;     pub use adapter_identifier::*;
+mod r#box;                  pub use r#box::*;
 mod caps;                   pub use caps::*;
 mod clip_status;            pub use clip_status::*;
 mod color_value;            pub use color_value::*;
@@ -11,3 +12,4 @@ mod vector;                 pub use vector::*;
 mod vertex_buffer_desc;     pub use vertex_buffer_desc::*;
 mod vertex_element;         pub use vertex_element::*;
 mod viewport;               pub use viewport::*;
+mod volume_desc;            pub use volume_desc::*;
