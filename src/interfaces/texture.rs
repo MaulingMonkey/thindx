@@ -606,6 +606,160 @@ impl CubeTexture {
 
 
 impl Texture {
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dtexture9-adddirtyrect)\]
+    /// IDirect3DTexture9::AddDirtyRect
+    ///
+    /// Adds a dirty region to a texture resource.
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]   if `bounds` exceeds bounds or has negative dimensions
+    /// *   Ok(`()`)
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use doc::*; let device = SafeDevice::pure();
+    /// let texture = device.create_texture(128, 128, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
+    /// texture.add_dirty_rect(..).unwrap();
+    /// texture.add_dirty_rect((0,0) .. (128,128)).unwrap();
+    ///
+    /// assert_eq!(D3DERR::INVALIDCALL, texture.add_dirty_rect((-1, -1) .. (128, 128)).err(), "out of bounds");
+    /// assert_eq!(D3DERR::INVALIDCALL, texture.add_dirty_rect((0, 0) .. (129, 129)).err(), "out of bounds");
+    /// assert_eq!(D3DERR::INVALIDCALL, texture.add_dirty_rect((128, 128) .. (0, 0)).err(), "inverted bounds");
+    /// assert_eq!(D3DERR::INVALIDCALL, texture.add_dirty_rect((i32::MIN, i32::MIN) .. (i32::MAX, i32::MAX)).err(), "out of bounds");
+    /// ```
+    pub fn add_dirty_rect(&self, dirty_rect: impl IntoRectOrFull) -> Result<(), MethodError> {
+        let dirty_rect = dirty_rect.into_rect();
+        let dirty_rect = dirty_rect.as_ref().map_or(null(), |dr| &**dr);
+        let hr = unsafe { self.0.AddDirtyRect(dirty_rect.cast()) };
+        MethodError::check("IDirect3DTexture9::AddDirtyRect", hr)
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dtexture9-getsurfacelevel)\]
+    /// IDirect3DTexture9::GetSurfaceLevel
+    ///
+    /// Retrieves a texture map surface.
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]
+    /// *   Ok([Surface])
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use doc::*; let device = SafeDevice::pure();
+    /// let texture = device.create_texture(128, 128, 8, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
+    /// let surface0px : Surface = texture.get_surface_level(0).unwrap();
+    /// assert_eq!(D3DERR::INVALIDCALL, texture.get_surface_level(8).err(), "only levels 0 .. 7 are valid");
+    /// # assert_eq!(D3DERR::INVALIDCALL, texture.get_surface_level(!0).err(), "level !0");
+    /// ```
+    pub fn get_surface_level(&self, level: u32) -> Result<Surface, MethodError> {
+        let mut surface = null_mut();
+        let hr = unsafe { self.0.GetSurfaceLevel(level, &mut surface) };
+        MethodError::check("IDirect3DTexture9::GetSurfaceLevel", hr)?;
+        Ok(unsafe { Surface::from_raw(surface) })
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dtexture9-getleveldesc)\]
+    /// IDirect3DTexture9::GetLevelDesc
+    ///
+    /// Retrieves a description of one face of the specified cube texture level.
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]   if `level` >= `get_level_count`
+    /// *   Ok([SurfaceDesc])
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use doc::*; let device = SafeDevice::pure();
+    /// let texture = device.create_texture(128, 128, 8, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
+    /// let desc : SurfaceDesc = texture.get_level_desc(0).unwrap();
+    /// assert_eq!(D3DERR::INVALIDCALL, texture.get_level_desc(8).err(), "only levels 0..7 are valid");
+    /// # assert_eq!(D3DERR::INVALIDCALL, texture.get_level_desc(!0).err(), "!0");
+    /// # assert_eq!(D3DERR::INVALIDCALL, texture.get_level_desc(!0-4).err(), "!0-4");
+    /// # assert_eq!(D3DERR::INVALIDCALL, texture.get_level_desc(!0-100).err(), "!0-100");
+    /// ```
+    pub fn get_level_desc(&self, level: u32) -> Result<SurfaceDesc, MethodError> {
+        let mut desc = SurfaceDesc::default();
+        let hr = unsafe { self.0.GetLevelDesc(level, &mut *desc) };
+        MethodError::check("IDirect3DTexture9::GetLevelDesc", hr)?;
+        Ok(desc)
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dtexture9-lockrect)\]
+    /// IDirect3DTexture9::LockRect
+    ///
+    /// Locks a rectangle on a cube texture resource.
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]
+    /// *   Ok([D3DLOCKED_RECT])
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use doc::*; let device = SafeDevice::pure();
+    /// const W : usize = 128;
+    /// const H : usize = 128;
+    /// let texture = device.create_texture(W as u32, H as u32, 8, Usage::None, Format::A8R8G8B8, Pool::Managed, ()).unwrap();
+    /// let data = [[Color::argb(0xFF112233); W]; H];
+    /// unsafe {
+    ///     let lock = texture.lock_rect_unchecked(0, .., Lock::None).unwrap();
+    ///     for y in 0..H {
+    ///         let src = data[y].as_ptr();
+    ///         let dst = (lock.pBits as *mut u8).add(y * lock.Pitch as usize);
+    ///         std::ptr::copy(src, dst.cast(), W);
+    ///     }
+    ///     texture.unlock_rect(0).unwrap();
+    /// }
+    /// ```
+    pub unsafe fn lock_rect_unchecked(&self, level: u32, rect: impl IntoRectOrFull, flags: impl Into<Lock>) -> Result<D3DLOCKED_RECT, MethodError> {
+        let rect = rect.into_rect();
+        let rect = rect.as_ref().map_or(null(), |r| &**r);
+        let flags = flags.into().into();
+        let mut locked = std::mem::zeroed::<D3DLOCKED_RECT>();
+        let hr = self.0.LockRect(level, &mut locked, rect.cast(), flags);
+        MethodError::check("IDirect3DTexture9::LockRect", hr)?;
+        Ok(locked)
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dtexture9-unlockrect)\]
+    /// IDirect3DTexture9::UnlockRect
+    ///
+    /// Unlocks a rectangle on a cube texture resource.
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]
+    /// *   Ok(`()`)
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use doc::*; let device = SafeDevice::pure();
+    /// const W : usize = 128;
+    /// const H : usize = 128;
+    /// let texture = device.create_texture(W as u32, H as u32, 8, Usage::None, Format::A8R8G8B8, Pool::Managed, ()).unwrap();
+    /// let data = [[Color::argb(0xFF112233); W]; H];
+    /// unsafe {
+    ///     let lock = texture.lock_rect_unchecked(0, .., Lock::None).unwrap();
+    ///     for y in 0..H {
+    ///         let src = data[y].as_ptr();
+    ///         let dst = (lock.pBits as *mut u8).add(y * lock.Pitch as usize);
+    ///         std::ptr::copy(src, dst.cast(), W);
+    ///     }
+    ///     texture.unlock_rect(0).unwrap();
+    /// }
+    /// ```
+    pub fn unlock_rect(&self, level: u32) -> Result<(), MethodError> {
+        let hr = unsafe { self.0.UnlockRect(level) };
+        MethodError::check("IDirect3DTexture9::UnlockRect", hr)
+    }
 }
 
 

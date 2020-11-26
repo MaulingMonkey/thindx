@@ -34,10 +34,10 @@
 //! &nbsp;  ├─ [Device]\[[Ex](crate::DeviceEx)\] - Create resources associated with an individual GPU
 //! &nbsp;  ├─ [SwapChain]\[[Ex](crate::SwapChainEx)\] - Manages swapping buffers for individual "views" (monitors/windows)
 //! &nbsp;  ├─ [Resource]
-//! &nbsp;  │      ├─ [Surface] - 2D buffer of pixels
+//! &nbsp;  │      ├─ [Surface] - 2D buffer of pixels</span>
 //! &nbsp;  │      ├─ [BaseTexture] - A GPU-friendly collection of pixels
+//! &nbsp;  │      │      ├─ [CubeTexture] - 6-sided 2D texture
 //! &nbsp;  │      │      ├─ [Texture] - 2D texture
-//! &nbsp;  │      │      ├─ [CubeTexture] - 6-sided 2D texture</span>
 //! &nbsp;  │      │      └─ [VolumeTexture] - Dense 3D texture
 //! &nbsp;  │      ├─ [IndexBuffer] - An [index buffer](https://docs.microsoft.com/en-us/windows/win32/direct3d9/rendering-from-vertex-and-index-buffers#scenario-2-drawing-two-triangles-with-indexing) indexes verticies in a [VertexBuffer] when rendering.
 //! &nbsp;  │      └─ [VertexBuffer] - A [vertex buffer](https://docs.microsoft.com/en-us/windows/win32/direct3d9/rendering-from-vertex-and-index-buffers#scenario-2-drawing-two-triangles-with-indexing) typically contains points of a mesh to be rendered.
