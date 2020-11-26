@@ -184,6 +184,8 @@
 #![allow(broken_intra_doc_links)] // TODO: temporary
 #![deny(unreachable_patterns)]
 
+#[cfg(test)] fn testfast() -> bool { std::env::var_os("TESTFAST").is_some() }
+
 #[macro_use] mod macros;
 #[allow(unused_imports)] use macros::*;
 

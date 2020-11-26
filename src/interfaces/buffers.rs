@@ -566,6 +566,8 @@ impl VertexBuffer {
 }
 
 #[test] fn overflow_allocs() {
+    if testfast() { return; }
+
     fn index_loop_alloc_size(alloc: u32) -> Result<(), MethodError> {
         let device = Device::pure();
         let mut ibs = Vec::new();
