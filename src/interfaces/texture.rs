@@ -442,6 +442,165 @@ impl BaseTexture {
 
 
 impl CubeTexture {
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcubetexture9-adddirtyrect)\]
+    /// IDirect3DCubeTexture9::AddDirtyRect
+    ///
+    /// Adds a dirty region to a cube texture resource.
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]   if `face` is invalid
+    /// *   [D3DERR::INVALIDCALL]   if `bounds` exceeds bounds or has negative dimensions
+    /// *   Ok(`()`)
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use doc::*; let device = SafeDevice::pure();
+    /// let texture = device.create_cube_texture(128, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
+    /// texture.add_dirty_rect(CubeMapFace::PositiveX, ..).unwrap();
+    /// texture.add_dirty_rect(CubeMapFace::PositiveY, (0,0) .. (128,128)).unwrap();
+    ///
+    /// assert_eq!(D3DERR::INVALIDCALL, texture.add_dirty_rect(CubeMapFace::PositiveY, (-1, -1) .. (128, 128)).err(), "out of bounds");
+    /// assert_eq!(D3DERR::INVALIDCALL, texture.add_dirty_rect(CubeMapFace::PositiveY, (0, 0) .. (129, 129)).err(), "out of bounds");
+    /// assert_eq!(D3DERR::INVALIDCALL, texture.add_dirty_rect(CubeMapFace::PositiveY, (128, 128) .. (0, 0)).err(), "inverted bounds");
+    /// assert_eq!(D3DERR::INVALIDCALL, texture.add_dirty_rect(CubeMapFace::PositiveY, (i32::MIN, i32::MIN) .. (i32::MAX, i32::MAX)).err(), "out of bounds");
+    /// assert_eq!(D3DERR::INVALIDCALL, texture.add_dirty_rect(CubeMapFace::from_unchecked(6), ..).err(), "invalid face");
+    /// ```
+    pub fn add_dirty_rect(&self, face: impl Into<CubeMapFace>, dirty_rect: impl IntoRectOrFull) -> Result<(), MethodError> {
+        let face = face.into().into();
+        let dirty_rect = dirty_rect.into_rect();
+        let dirty_rect = dirty_rect.as_ref().map_or(null(), |dr| &**dr);
+        let hr = unsafe { self.0.AddDirtyRect(face, dirty_rect.cast()) };
+        MethodError::check("IDirect3DCubeTexture9::AddDirtyRect", hr)
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcubetexture9-getcubemapsurface)\]
+    /// IDirect3DCubeTexture9::GetCubeMapSurface
+    ///
+    /// Retrieves a cube texture map surface.
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]
+    /// *   Ok([Surface])
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use doc::*; let device = SafeDevice::pure();
+    /// let texture = device.create_cube_texture(128, 8, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
+    /// let surface0px : Surface = texture.get_cube_map_surface(CubeMapFace::PositiveX, 0).unwrap();
+    /// assert_eq!(D3DERR::INVALIDCALL, texture.get_cube_map_surface(CubeMapFace::PositiveX, 8).err(), "only levels 0 .. 7 are valid");
+    /// # assert_eq!(D3DERR::INVALIDCALL, texture.get_cube_map_surface(CubeMapFace::PositiveX, !0).err(), "level !0");
+    /// # assert_eq!(D3DERR::INVALIDCALL, texture.get_cube_map_surface(CubeMapFace::from_unchecked(!0), 0).err(), "invalid face");
+    /// ```
+    pub fn get_cube_map_surface(&self, face: impl Into<CubeMapFace>, level: u32) -> Result<Surface, MethodError> {
+        let face = face.into().into();
+        let mut surface = null_mut();
+        let hr = unsafe { self.0.GetCubeMapSurface(face, level, &mut surface) };
+        MethodError::check("IDirect3DCubeTexture9::GetCubeMapSurface", hr)?;
+        Ok(unsafe { Surface::from_raw(surface) })
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcubetexture9-getleveldesc)\]
+    /// IDirect3DCubeTexture9::GetLevelDesc
+    ///
+    /// Retrieves a description of one face of the specified cube texture level.
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]   if `level` >= `get_level_count`
+    /// *   Ok([SurfaceDesc])
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use doc::*; let device = SafeDevice::pure();
+    /// let texture = device.create_cube_texture(128, 8, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
+    /// let desc : SurfaceDesc = texture.get_level_desc(0).unwrap();
+    /// assert_eq!(D3DERR::INVALIDCALL, texture.get_level_desc(8).err(), "only levels 0..7 are valid");
+    /// # assert_eq!(D3DERR::INVALIDCALL, texture.get_level_desc(!0).err(), "!0");
+    /// # assert_eq!(D3DERR::INVALIDCALL, texture.get_level_desc(!0-4).err(), "!0-4");
+    /// # assert_eq!(D3DERR::INVALIDCALL, texture.get_level_desc(!0-100).err(), "!0-100");
+    /// ```
+    pub fn get_level_desc(&self, level: u32) -> Result<SurfaceDesc, MethodError> {
+        let mut desc = SurfaceDesc::default();
+        let hr = unsafe { self.0.GetLevelDesc(level, &mut *desc) };
+        MethodError::check("IDirect3DCubeTexture9::GetLevelDesc", hr)?;
+        Ok(desc)
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcubetexture9-lockrect)\]
+    /// IDirect3DCubeTexture9::LockRect
+    ///
+    /// Locks a rectangle on a cube texture resource.
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]
+    /// *   Ok([D3DLOCKED_RECT])
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use doc::*; let device = SafeDevice::pure();
+    /// const S : usize = 128;
+    /// let texture = device.create_cube_texture(S as u32, 8, Usage::None, Format::A8R8G8B8, Pool::Managed, ()).unwrap();
+    /// let data = [[Color::argb(0xFF112233); S]; S];
+    /// unsafe {
+    ///     let lock = texture.lock_rect_unchecked(CubeMapFace::PositiveX, 0, .., Lock::None).unwrap();
+    ///     for y in 0..S {
+    ///         let src = data[y].as_ptr();
+    ///         let dst = (lock.pBits as *mut u8).add(y * lock.Pitch as usize);
+    ///         std::ptr::copy(src, dst.cast(), S);
+    ///     }
+    ///     texture.unlock_rect(CubeMapFace::PositiveX, 0).unwrap();
+    /// }
+    /// ```
+    pub unsafe fn lock_rect_unchecked(&self, face: impl Into<CubeMapFace>, level: u32, rect: impl IntoRectOrFull, flags: impl Into<Lock>) -> Result<D3DLOCKED_RECT, MethodError> {
+        let face = face.into().into();
+        let rect = rect.into_rect();
+        let rect = rect.as_ref().map_or(null(), |r| &**r);
+        let flags = flags.into().into();
+        let mut locked = std::mem::zeroed::<D3DLOCKED_RECT>();
+        let hr = self.0.LockRect(face, level, &mut locked, rect.cast(), flags);
+        MethodError::check("IDirect3DCubeTexture9::LockRect", hr)?;
+        Ok(locked)
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcubetexture9-unlockrect)\]
+    /// IDirect3DCubeTexture9::UnlockRect
+    ///
+    /// Unlocks a rectangle on a cube texture resource.
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]
+    /// *   Ok(`()`)
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use doc::*; let device = SafeDevice::pure();
+    /// const S : usize = 128;
+    /// let texture = device.create_cube_texture(S as u32, 8, Usage::None, Format::A8R8G8B8, Pool::Managed, ()).unwrap();
+    /// let data = [[Color::argb(0xFF112233); S]; S];
+    /// unsafe {
+    ///     let lock = texture.lock_rect_unchecked(CubeMapFace::PositiveX, 0, .., Lock::None).unwrap();
+    ///     for y in 0..S {
+    ///         let src = data[y].as_ptr();
+    ///         let dst = (lock.pBits as *mut u8).add(y * lock.Pitch as usize);
+    ///         std::ptr::copy(src, dst.cast(), S);
+    ///     }
+    ///     texture.unlock_rect(CubeMapFace::PositiveX, 0).unwrap();
+    /// }
+    /// // TODO
+    /// ```
+    pub fn unlock_rect(&self, face: impl Into<CubeMapFace>, level: u32) -> Result<(), MethodError> {
+        let hr = unsafe { self.0.UnlockRect(face.into().into(), level) };
+        MethodError::check("IDirect3DCubeTexture9::UnlockRect", hr)
+    }
 }
 
 

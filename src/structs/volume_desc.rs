@@ -9,7 +9,7 @@ use std::ops::{Deref, DerefMut};
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dvolume-desc)\]
 /// D3DVOLUME_DESC 
 ///
-/// Describes a volume.
+/// Describes a [Volume].
 #[derive(Clone, Copy, Debug, Default)]
 #[repr(C)] pub struct VolumeDesc {
     pub format:     Format,

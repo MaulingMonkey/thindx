@@ -8,6 +8,7 @@ mod index_buffer_desc;      pub use index_buffer_desc::*;
 mod light;                  pub use light::*;
 mod material;               pub use material::*;
 mod rect;                   pub use rect::*;
+mod surface_desc;           pub use surface_desc::*;
 mod vector;                 pub use vector::*;
 mod vertex_buffer_desc;     pub use vertex_buffer_desc::*;
 mod vertex_element;         pub use vertex_element::*;
