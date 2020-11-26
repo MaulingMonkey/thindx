@@ -2,6 +2,8 @@
 
 use crate::*;
 
+use winapi::um::wingdi::*;
+
 use std::ptr::*;
 
 // TODO: support for Device s in doc comment examples (via dev crate?)
@@ -38,6 +40,15 @@ impl Device {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-beginscene)\]
     /// IDirect3DDevice9::BeginScene
     ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use doc::*; let device = Device::pure();
+    /// device.begin_scene().unwrap();
+    /// // ...issue draw calls and stuff...
+    /// device.end_scene().unwrap();
+    /// ```
+    ///
     /// ### Returns
     ///
     /// *   [D3DERR::INVALIDCALL]   if the device was already within a scene (e.g. [begin_scene] was called twice without an intervening [end_scene])
@@ -54,6 +65,15 @@ impl Device {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-endscene)\]
     /// IDirect3DDevice9::EndScene
     ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use doc::*; let device = Device::pure();
+    /// device.begin_scene().unwrap();
+    /// // ...issue draw calls and stuff...
+    /// device.end_scene().unwrap();
+    /// ```
+    ///
     /// ### Returns
     ///
     /// *   [D3DERR::INVALIDCALL]   if the device was not within a scene (e.g. [end_scene] was called without a [begin_scene], or was called a second time)
@@ -68,7 +88,6 @@ impl Device {
     }
 
     // TODO: fn scene(&self) with sane error handling / drop behavior?
-    // TODO: examples
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-present)\]
     /// IDirect3DDevice9::Present
@@ -83,10 +102,10 @@ impl Device {
     ///
     /// ### Arguments
     ///
-    /// *   `source_rect`   - "Must be [None]" unless the [SwapChain] was created with [SwapEffect::Copy].  Can still be [None] even then (the entire source surface is presented.)
-    /// *   `dest_rect`     - "Must be [None]" unless the [SwapChain] was created with [SwapEffect::Copy].  Can still be [None] even then (the entire client area is filled.)
-    /// *   `hwnd`
-    /// *   `dirty_region`  - "Must be [None]" unless the [SwapChain] was created with [SwapEffect::Copy].  Can still be [None] even then (the entire region will be considered dirty.)  The implementation is free to copy more than the exact dirty region.
+    /// *   `source_rect`           - "Must be [None]" unless the [SwapChain] was created with [SwapEffect::Copy].  Can still be [None] even then (the entire source surface is presented.)
+    /// *   `dest_rect`             - "Must be [None]" unless the [SwapChain] was created with [SwapEffect::Copy].  Can still be [None] even then (the entire client area is filled.)
+    /// *   `dest_window_override`  - The destination window to render to.  If null / `()`, the runtime uses the `hDeviceWindow` member of D3DPRESENT_PARAMETERS for the presentation.
+    /// *   `dirty_region`          - "Must be [None]" unless the [SwapChain] was created with [SwapEffect::Copy].  Can still be [None] even then (the entire region will be considered dirty.)  The implementation is free to copy more than the exact dirty region.
     ///
     /// ### Returns
     ///
@@ -100,22 +119,34 @@ impl Device {
     /// # use std::ptr::null_mut;   let hwnd = null_mut();
     /// # use doc::*;               let device = Device::test();
     /// // Present the entire back buffer (should work with all swap chains, probably:)
-    /// unsafe { device.present(None, None, null_mut(), None) }.unwrap();
+    /// device.present(None, None, (), None).unwrap();
     /// // TODO: Handle D3DERR::DEVICEREMOVED
     ///
     /// // Or, with a SwapEffect::Copy swap chain, this should succeed (might succeed by simply ignoring the args, even for other SwapEffect s:)
-    /// let _ = unsafe { device.present(Rect::from((0,0)..(100,100)), Rect::from((0,0)..(100,100)), hwnd, None) };
+    /// let hwnd = unsafe { SafeHWND::assert(&hwnd) };
+    /// let _ = device.present(Rect::from((0,0)..(100,100)), Rect::from((0,0)..(100,100)), hwnd, None);
     /// ```
-    pub unsafe fn present<'r>(&self, source_rect: impl Into<Option<Rect>>, dest_rect: impl Into<Option<Rect>>, hwnd: impl Into<HWND>, dirty_region: impl Into<Option<&'r RgnData>>) -> Result<(), MethodError> {
+    pub fn present<'r>(&self, source_rect: impl Into<Option<Rect>>, dest_rect: impl Into<Option<Rect>>, dest_window_override: impl AsHWND, dirty_region: impl Into<Option<&'r RgnData>>) -> Result<(), MethodError> {
         let source_rect     = source_rect.into();
         let dest_rect       = dest_rect.into();
-        let hwnd            = hwnd.into();
-        let _dirty_region   = dirty_region;
+        let hwnd            = dest_window_override.as_hwnd();
+        let dirty_region    = dirty_region.into();
 
         let source_rect     = source_rect   .map_or(null(), |r| &*r).cast();
         let dest_rect       = dest_rect     .map_or(null(), |r| &*r).cast();
+        let dirty_region    = match dirty_region {
+            None => null::<RGNDATA>(),
+            Some(dr) => {
+                if dr.rdh.dwSize as usize   != std::mem::size_of::<RGNDATAHEADER>() { return Err(MethodError("Device::present", D3DERR::INVALID_STRUCT_FIELD)); }
+                if dr.rdh.iType             != RDH_RECTANGLES                       { return Err(MethodError("Device::present", D3DERR::INVALID_STRUCT_FIELD)); }
+                if dr.rdh.nCount as usize   > dr.buffer.len()                       { return Err(MethodError("Device::present", D3DERR::INVALID_STRUCT_FIELD)); }
+                if dr.rdh.nRgnSize as usize > std::mem::size_of_val(dr)             { return Err(MethodError("Device::present", D3DERR::INVALID_STRUCT_FIELD)); }
+                let dr : *const RgnData = dr;
+                dr.cast()
+            },
+        };
 
-        let hr = self.0.Present(source_rect, dest_rect, hwnd, null());
+        let hr = unsafe { self.0.Present(source_rect, dest_rect, hwnd, dirty_region) };
         MethodError::check("IDirect3DDevice9::Present", hr)
     }
 }
@@ -126,7 +157,7 @@ impl Device {
 /// RGNDATA is a header-prefixed array.  While constructable in Rust, they're slightly awkward at best.
 #[repr(C)]
 pub struct RgnData {
-    rdh:    winapi::um::wingdi::RGNDATAHEADER,
+    rdh:    RGNDATAHEADER,
     buffer: [Rect],
 }
 
@@ -147,4 +178,25 @@ pub struct RgnData {
     for _ in 0..1000 { assert_eq!(D3DERR::INVALIDCALL, device.begin_scene()); }
     device.end_scene().unwrap();
     for _ in 0..1000 { assert_eq!(D3DERR::INVALIDCALL, device.end_scene()); }
+}
+
+#[test] fn present() {
+    let device = Device::test_pp(false, |pp, _| pp.SwapEffect = SwapEffect::Copy.into()).unwrap();
+    device.present(None, None, (), None).unwrap();
+
+    for rect in [
+        (0, 0) .. (1, 1),
+        (-100, -100) .. (100, 100),
+        (100, 100) .. (-100, -100),
+        (-1000, -1000) .. (1000, 1000),
+        (1000, 1000) .. (-1000, -1000),
+        (-100000, -100000) .. (100000, 100000),
+        (0, 0) .. (100000, 100000),
+        (0, 0) .. (i32::MAX, i32::MAX),
+        (i32::MIN, i32::MIN) .. (i32::MAX, i32::MAX),
+        (i32::MAX, i32::MAX) .. (i32::MIN, i32::MIN),
+    ].iter().cloned() {
+        let rect = Rect::from(rect);
+        device.present(Some(rect), Some(rect), (), None).unwrap();
+    }
 }

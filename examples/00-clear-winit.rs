@@ -63,7 +63,7 @@ fn main() {
             },
             Event::MainEventsCleared => {
                 device.clear(None, Some(Color::argb(0xFF224466)), None, None).unwrap();
-                unsafe { device.present(None, None, null_mut(), None) }.unwrap(); // TODO: Handle D3DERR::DEVICELOST
+                device.present(None, None, (), None).unwrap(); // TODO: Handle D3DERR::DEVICELOST
             },
             _ => {},
         }

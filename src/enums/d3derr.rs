@@ -251,6 +251,9 @@ impl D3DERR {
 
     /// `0xA73D0003`    Large allocation was requested.  thin3d9 prevented the request to avoid arithmetic overflows inside of Direct3D / drivers which could lead to undefined behavior.
     pub const ALLOC_OVERFLOW    : D3DERR = D3DERR(0xA73D0003 as _);
+
+    /// `0xA73D0004`    A structure contained some kind of field such as `dwSize` or `iType` that was invalid.
+    pub const INVALID_STRUCT_FIELD : D3DERR = D3DERR(0xA73D0004 as _);
 }
 
 
@@ -315,6 +318,7 @@ impl D3DERR {
             D3DERR::SLICE_OVERFLOW              => Some(("THIN3DERR_SLICE_OVERFLOW",        "Large slice passed to D3D API that only accepts a 32-bit length")),
             D3DERR::DEVICE_MISMATCH             => Some(("THIN3DERR_DEVICE_MISMATCH",       "Resource belonging to one Device was passed to a different Device.  To avoid undefined behavior, Direct3D was not called.")),
             D3DERR::ALLOC_OVERFLOW              => Some(("THIN3DERR_ALLOC_OVERFLOW",        "Large allocation size passed to Device.  To avoid undefined behavior from arithmetic overflows, Direct3D was not called.")),
+            D3DERR::INVALID_STRUCT_FIELD        => Some(("THIN3DERR_INVALID_STRUCT_FIELD",  "A structure contained some kind of field such as `dwSize` or `iType` that was invalid.")),
 
             _                                   => None,
         }
