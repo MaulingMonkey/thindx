@@ -274,6 +274,183 @@ impl SafeDevice {
 
 
 
+impl BaseTexture {
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-generatemipsublevels)\]
+    /// IDirect3DBaseTexture9::GenerateMipSubLevels
+    ///
+    /// Generate mipmap sublevels.
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use doc::*; let device = SafeDevice::pure();
+    /// # let texture = device.create_texture(128, 128, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
+    /// texture.generate_mip_sub_levels();
+    /// ```
+    pub fn generate_mip_sub_levels(&self) {
+        unsafe { self.0.GenerateMipSubLevels() }
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-getautogenfiltertype)\]
+    /// IDirect3DBaseTexture9::GetAutoGenFilterType
+    ///
+    /// Get the filter type that is used for automatically generated mipmap sublevels.
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use doc::*; let device = SafeDevice::pure();
+    /// # let texture = device.create_texture(128, 128, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
+    /// assert_eq!(TextureFilterType::Linear, texture.get_auto_gen_filter_type());
+    /// ```
+    pub fn get_auto_gen_filter_type(&self) -> TextureFilterType {
+        TextureFilterType::from_unchecked(unsafe { self.0.GetAutoGenFilterType() })
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-getlevelcount)\]
+    /// IDirect3DBaseTexture9::GetLevelCount
+    ///
+    /// Returns the number of texture levels in a multilevel texture.
+    ///
+    /// **Warning:**  If you create a texture with [Usage::AutoGenMipMap] to make that texture automatically generate sublevels, get_level_count always returns 1 for the number of levels.
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]
+    /// *   Ok(`1`)                 If created with [Usage::AutoGenMipMap]
+    /// *   Ok(`levels`)            Otherwise
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use doc::*; let device = SafeDevice::pure();
+    /// // Automatic level count
+    /// let texture = device.create_texture(128, 128, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
+    /// assert_eq!(8, texture.get_level_count()); // [128, 64, 32, 16, 8, 4, 2, 1].len() == 8
+    ///
+    /// // Explicit level count
+    /// let texture = device.create_texture(128, 128, 3, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
+    /// assert_eq!(3, texture.get_level_count());
+    /// ```
+    pub fn get_level_count(&self) -> u32 {
+        unsafe { self.0.GetLevelCount() }
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-getlod)\]
+    /// IDirect3DBaseTexture9::GetLOD
+    ///
+    /// Returns a value clamped to the maximum level-of-detail set for a managed texture (this method is not supported for an unmanaged texture).
+    ///
+    /// ### Returns
+    ///
+    /// *   `lod`   [Pool::Managed] textures
+    /// *   `0`     Unmanaged textures
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use doc::*; let device = SafeDevice::pure();
+    /// let texture = device.create_texture(128, 128, 0, Usage::None, Format::A8R8G8B8, Pool::Managed, ()).unwrap();
+    /// assert_eq!(0, texture.get_lod());
+    /// assert_eq!(0, texture.set_lod(5));
+    /// assert_eq!(5, texture.get_lod());
+    ///
+    /// // Silently noops for unmanaged textures:
+    /// let texture = device.create_texture(128, 128, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
+    /// assert_eq!(0, texture.get_lod());
+    /// assert_eq!(0, texture.set_lod(5));
+    /// assert_eq!(0, texture.get_lod());
+    /// ```
+    pub fn get_lod(&self) -> u32 {
+        unsafe { self.0.GetLOD() }
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-setautogenfiltertype)\]
+    /// IDirect3DBaseTexture9::SetAutoGenFilterType
+    ///
+    /// Changing the filter type "dirties" the mipmap sublevels and causes them to be regenerated.
+    ////
+    /// The (default) filter type set at texture creation time is [TexF::Linear].
+    /// If the driver does not support a linear filter, the filter type will be set to [TexF::Point].
+    /// All filter types supported by the driver for regular texture filtering are supported for autogeneration except [TexF::None].
+    /// `set_auto_gen_filter_type` will fail unless the driver sets the appropriate `D3DPTFILTERCAPS_MINFxxx` caps.
+    /// These values are specified in the TextureFilterCaps and/or CubeTextureFilterCaps members of [Caps].
+    ///
+    /// For more information about texture filter types, see [TextureFilterType].
+    ///
+    /// This method has no effect if the texture is not created with [Usage::AutoGenMipMap].
+    /// In this case, no failure is returned. For more information about usage constants, see [Usage].
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]   On invalid [TextureFilterType]s
+    /// *   [D3DERR::INVALIDCALL]   On [TextureFilterType]s not supported by the driver
+    /// *   Ok(`()`)
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use doc::*; let device = SafeDevice::pure();
+    /// # let texture = device.create_texture(128, 128, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
+    /// texture.set_auto_gen_filter_type(TextureFilterType::Point).unwrap();
+    /// texture.set_auto_gen_filter_type(TextureFilterType::Linear).unwrap();
+    ///
+    /// let _ = texture.set_auto_gen_filter_type(TextureFilterType::ConvolutionMono); // may not be supported
+    ///
+    /// assert_eq!(D3DERR::INVALIDCALL, texture.set_auto_gen_filter_type(TextureFilterType::None).err());
+    /// assert_eq!(D3DERR::INVALIDCALL, texture.set_auto_gen_filter_type(TextureFilterType::from_unchecked(9001)).err());
+    /// assert_eq!(D3DERR::INVALIDCALL, texture.set_auto_gen_filter_type(TextureFilterType::from_unchecked(!0)).err());
+    /// assert_eq!(D3DERR::INVALIDCALL, texture.set_auto_gen_filter_type(TextureFilterType::from_unchecked(!0-4)).err());
+    /// assert_eq!(D3DERR::INVALIDCALL, texture.set_auto_gen_filter_type(TextureFilterType::from_unchecked(!0-100)).err());
+    /// ```
+    pub fn set_auto_gen_filter_type(&self, filter_type: impl Into<TextureFilterType>) -> Result<(), MethodError> {
+        let hr = unsafe { self.0.SetAutoGenFilterType(filter_type.into().into()) };
+        MethodError::check("IDirect3DBaseTexture9::SetAutoGenFilterType", hr)
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-setlod)\]
+    /// IDirect3DBaseTexture9::SetLOD
+    ///
+    /// Sets the most detailed level-of-detail for a [Pool::Managed] texture.
+    ///
+    /// ### Returns
+    ///
+    /// *   `0`                 - for nonmanaged textures (e.g. not [Pool::Managed]?)
+    /// *   `old_lod` : [u32]   - the previous most detailed level-of-detail supported.
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use doc::*; let device = SafeDevice::pure();
+    /// let texture = device.create_texture(128, 128, 0, Usage::None, Format::A8R8G8B8, Pool::Managed, ()).unwrap();
+    /// assert_eq!(0, texture.set_lod(5));
+    /// assert_eq!(5, texture.set_lod(6));
+    /// assert_eq!(6, texture.set_lod(9001));
+    /// assert_eq!(7, texture.set_lod(0)); // 9001 was clamped to `get_level_count()-1`
+    ///
+    /// // Silently noops for unmanaged textures:
+    /// let texture = device.create_texture(128, 128, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
+    /// assert_eq!(0, texture.get_lod());
+    /// assert_eq!(0, texture.set_lod(5));
+    /// assert_eq!(0, texture.get_lod());
+    /// ```
+    pub fn set_lod(&self, new_lod: u32) -> u32 {
+        unsafe { self.0.SetLOD(new_lod) }
+    }
+}
+
+
+
+impl CubeTexture {
+}
+
+
+
+impl Texture {
+}
+
+
+
 impl VolumeTexture {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolumetexture9-adddirtybox)\]
     /// IDirect3DVolumeTexture9::AddDirtyBox
