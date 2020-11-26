@@ -45,7 +45,7 @@ macro_rules! enumish {
 
         #[cfg(feature = "impl-from-unchecked")]
         impl From<$d3d> for $enumish {
-            fn from(value: $d3d) -> Self { Self(value.into()) }
+            fn from(value: $d3d) -> Self { Self(value as _) }
         }
 
         impl $enumish {
@@ -102,7 +102,7 @@ macro_rules! flags {
 
         #[cfg(feature = "impl-from-unchecked")]
         impl From<$d3d> for $flagish {
-            fn from(value: $d3d) -> Self { Self(value.into()) }
+            fn from(value: $d3d) -> Self { Self(value as _) }
         }
 
         impl $flagish {
