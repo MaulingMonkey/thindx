@@ -21,6 +21,18 @@ use std::ptr::null_mut;
 pub struct Resource(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DResource9>);
 
 impl Resource {
+    /// Check if `self` is compatible with `device`, returning an `Err(...)` if it isn't.
+    pub(crate) fn check_compatible_with(&self, device: &Device, method: &'static str) -> Result<(), MethodError> {
+        let my_device = self.get_device()?;
+        if my_device.as_raw() == device.as_raw() {
+            Ok(())
+        } else {
+            Err(MethodError(method, D3DERR::DEVICE_MISMATCH))
+        }
+    }
+}
+
+impl Resource {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-freeprivatedata)\]
     /// IDirect3DResource9::FreePrivateData
     ///

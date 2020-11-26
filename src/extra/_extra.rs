@@ -76,6 +76,15 @@ thread_local! {
 #[doc(hidden)] impl Device {
     pub fn test() -> Self { Self::test_pp(false, |_,_|{}).unwrap() }
     pub fn pure() -> Self { Self::test_pp(false, |_,c| *c |= Create::PureDevice).unwrap() }
+    pub fn test2() -> [Self; 2] {[
+        Self::test_pp(false, |_,_|{}).unwrap(),
+        Self::test_pp(true,  |_,_|{}).unwrap(),
+    ]}
+    pub fn pure2() -> [Self; 2] {[
+        Self::test_pp(false, |_,c| *c |= Create::PureDevice).unwrap(),
+        Self::test_pp(true,  |_,c| *c |= Create::PureDevice).unwrap(),
+    ]}
+
     pub fn test_pp(two: bool, ppf: impl FnOnce(&mut D3DPRESENT_PARAMETERS, &mut Create)) -> Result<Self, MethodError> {
         let mut behavior = Create::DisablePrintScreen | Create::FpuPreserve | Create::HardwareVertexProcessing | Create::NoWindowChanges;
         let mut pp = D3DPRESENT_PARAMETERS {
@@ -95,6 +104,15 @@ thread_local! {
 #[doc(hidden)] impl DeviceEx {
     pub fn test() -> Self { Self::test_pp(false, |_, _|{}).unwrap() }
     pub fn pure() -> Self { Self::test_pp(false, |_,c| *c |= Create::PureDevice).unwrap() }
+    pub fn test2() -> [Self; 2] {[
+        Self::test_pp(false, |_,_|{}).unwrap(),
+        Self::test_pp(true,  |_,_|{}).unwrap(),
+    ]}
+    pub fn pure2() -> [Self; 2] {[
+        Self::test_pp(false, |_,c| *c |= Create::PureDevice).unwrap(),
+        Self::test_pp(true,  |_,c| *c |= Create::PureDevice).unwrap(),
+    ]}
+
     pub fn test_pp(two: bool, ppf: impl FnOnce(&mut D3DPRESENT_PARAMETERS, &mut Create)) -> Result<Self, MethodError> {
         let mut behavior = Create::DisablePrintScreen | Create::FpuPreserve | Create::HardwareVertexProcessing | Create::NoWindowChanges;
         let mut pp = D3DPRESENT_PARAMETERS {

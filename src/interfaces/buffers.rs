@@ -57,8 +57,8 @@ impl Device {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = Device::test();
-    /// let single_triangle = device.create_index_buffer(3 * 2, Usage::None, Format::Index16, Pool::Managed, ()).unwrap();
+    /// # use doc::*; let device = Device::pure();
+    /// let tri = device.create_index_buffer(3 * 2, Usage::None, Format::Index16, Pool::Managed, ()).unwrap();
     /// ```
     ///
     /// ### Returns
@@ -95,10 +95,10 @@ impl Device {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = Device::test();
+    /// # use doc::*; let device = Device::pure();
     /// let vert_size = 3 * 4; // XYZ * floats
     /// let length = 3 * vert_size; // 3 verts
-    /// let single_triangle = device.create_vertex_buffer(length, Usage::None, FVF::XYZ, Pool::Managed, ()).unwrap();
+    /// let tri = device.create_vertex_buffer(length, Usage::None, FVF::XYZ, Pool::Managed, ()).unwrap();
     /// ```
     ///
     /// ### Returns
@@ -123,22 +123,28 @@ impl Device {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = Device::test();
+    /// # use doc::*; let [device, device2] = Device::pure2();
     /// let tri = device.create_index_buffer(3*2, Usage::None, Format::Index16, Pool::Default, ()).unwrap();
     /// // ...initialize tri...
     ///
     /// device.set_indices(&tri).unwrap();          // bind the index buffer
     /// device.set_indices(Some(&tri)).unwrap();    // bind the index buffer
     /// device.set_indices(None).unwrap();          // unbind the index buffer
+    ///
+    /// assert_eq!(device2.set_indices(&tri), D3DERR::DEVICE_MISMATCH);
     /// ```
     ///
     /// ### Returns
     ///
-    /// *   [D3DERR::INVALIDCALL]       (perhaps only on an invalid [IndexBuffer] that thin3d9's API prevents? perhaps when mixing IBs from different devices?)
+    /// *   [D3DERR::INVALIDCALL]       (perhaps only on an invalid [IndexBuffer] that thin3d9's API prevents?)
+    /// *   [D3DERR::DEVICE_MISMATCH]   If the [IndexBuffer] was created with a different [Device].
     /// *   Ok(())
     pub fn set_indices<'ib>(&self, index_data: impl Into<Option<&'ib IndexBuffer>>) -> Result<(), MethodError> {
-        let index_data = index_data.into();
-        let ptr = index_data.map_or(null_mut(), |id| id.as_raw());
+        let ptr = match index_data.into() {
+            None => null_mut(),
+            Some(ib) => { ib.check_compatible_with(self, "Device::set_indices")?; ib.as_raw() }
+            // Mixing index buffers between devices crashes on my computer, compatability check 100% necessary!
+        };
         let hr = unsafe { self.0.SetIndices(ptr) };
         MethodError::check("IDirect3DDevice9::SetIndices", hr)
     }
@@ -151,14 +157,18 @@ impl Device {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = Device::test();
+    /// # use doc::*; let device = Device::pure();
+    /// # let tri = device.create_index_buffer(3*2, Usage::None, Format::Index16, Pool::Default, ()).unwrap();
     /// let ib : Option<IndexBuffer> = device.get_indices().unwrap();
     /// assert!(ib.is_none(), "device has no index buffer by default");
+    ///
+    /// device.set_indices(Some(&tri));
+    /// assert_eq!(tri.as_raw(), device.get_indices().unwrap().unwrap().as_raw());
     /// ```
     ///
     /// ### Returns
     ///
-    /// *   [D3DERR::INVALIDCALL]       if the device is a pure device?
+    /// *   [D3DERR::INVALIDCALL]
     /// *   Ok(Some([IndexBuffer]))     if an index buffer was bound
     /// *   Ok(None)                    if no index buffer was bound
     pub fn get_indices(&self) -> Result<Option<IndexBuffer>, MethodError> {
@@ -175,13 +185,31 @@ impl Device {
     ///
     /// [Setting the Stream Source (Direct3D 9)]:       https://docs.microsoft.com/en-us/windows/desktop/direct3d9/setting-the-stream-source
     ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use doc::*; let [device, device2] = Device::pure2();
+    /// let tri = device.create_vertex_buffer(3*4*3, Usage::None, FVF::XYZ, Pool::Default, ()).unwrap();
+    /// // ...initialize tri...
+    /// device.set_stream_source(0, &tri,       0, 4*3).unwrap(); // bind the vertex buffer
+    /// device.set_stream_source(0, Some(&tri), 0, 4*3).unwrap(); // bind the vertex buffer
+    /// device.set_stream_source(0, None,       0, 0  ).unwrap(); // unbind the vertex buffer
+    ///
+    /// assert_eq!(device2.set_stream_source(0, &tri, 0, 4*3), D3DERR::DEVICE_MISMATCH);
+    /// ```
+    ///
     /// ### Returns
     ///
     /// *   [D3DERR::INVALIDCALL]       if the [VertexBuffer] belongs to another device?
+    /// *   [D3DERR::DEVICE_MISMATCH]   If the [IndexBuffer] was created with a different [Device].
     /// *   Ok(`()`)
     pub fn set_stream_source<'b>(&self, stream_number: u32, stream_data: impl Into<Option<&'b VertexBuffer>>, offset_in_bytes: u32, stride: u32) -> Result<(), MethodError> {
-        let stream_data = stream_data.into();
-        let stream_data = stream_data.map_or(null_mut(), |sd| sd.as_raw());
+        let stream_data = match stream_data.into() {
+            None => null_mut(),
+            Some(sd) => { sd.check_compatible_with(self, "Device::set_stream_source")?; sd.as_raw() },
+            // XXX: Might be able to skip check_compatible_with with software vertex buffers?  Those might be safe?
+            // They don't seem to crash for me, but I'm erring on the side of caution for now.
+        };
         let hr = unsafe { self.0.SetStreamSource(stream_number, stream_data, offset_in_bytes, stride) };
         MethodError::check("IDirect3DDevice9::SetStreamSource", hr)
     }
@@ -190,6 +218,21 @@ impl Device {
     /// IDirect3DDevice9::SetStreamSourceFreq
     ///
     /// Sets the stream source frequency divider value. This may be used to draw several instances of geometry.
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use doc::*; let device = Device::pure();
+    /// // Setup instanced rendering, 100 instances, with:
+    /// // shared geometry in stream 0, repeated 100 times:
+    /// device.set_stream_source_freq(0, StreamSource::indexed_data(100)).unwrap();
+    /// // per-instance data in stream 1:
+    /// device.set_stream_source_freq(1, StreamSource::instance_data(1)).unwrap();
+    ///
+    /// // Restore non-instanced rendering
+    /// device.set_stream_source_freq(0, StreamSource::regular()).unwrap();
+    /// device.set_stream_source_freq(1, StreamSource::regular()).unwrap();
+    /// ```
     ///
     /// ### Returns
     ///
@@ -206,11 +249,31 @@ impl Device {
     ///
     /// Retrieves a vertex buffer bound to the specified data stream.
     ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use doc::*; let device = Device::pure();
+    /// // No stream bound to start
+    /// let (vb, offset, stride) = device.get_stream_source(0).unwrap();
+    /// assert!(vb.is_none());
+    /// assert_eq!(offset, 0);
+    /// assert_eq!(stride, 0);
+    ///
+    /// let tri = device.create_vertex_buffer(3*4*3, Usage::None, FVF::XYZ, Pool::Default, ()).unwrap();
+    /// device.set_stream_source(0, &tri, 0, 4*3).unwrap(); // bind the vertex buffer
+    ///
+    /// // No stream bound to start
+    /// let (vb, offset, stride) = device.get_stream_source(0).unwrap();
+    /// assert_eq!(vb.map(|vb| vb.as_raw()), Some(tri.as_raw()));
+    /// assert_eq!(offset, 0);
+    /// assert_eq!(stride, 4*3);
+    /// ```
+    ///
     /// ### Returns
     ///
-    /// *   [D3DERR::INVALIDCALL]   The device was a pure device?
+    /// *   [D3DERR::INVALIDCALL]
     /// *   Ok(Some([VertexBuffer]), `offset_in_bytes`, `stride`)
-    /// *   Ok(None, 0, 0)
+    /// *   Ok(`(None, 0, 0)`)
     pub fn get_stream_source(&self, stream_number: u32) -> Result<(Option<VertexBuffer>, u32, u32), MethodError> {
         let mut buffer = null_mut();
         let mut offset = 0;
@@ -226,9 +289,23 @@ impl Device {
     ///
     /// Gets the stream source frequency divider value.
     ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use doc::*; let device = Device::pure();
+    /// assert_eq!(device.get_stream_source_freq(0).unwrap(), StreamSource::regular());
+    /// assert_eq!(device.get_stream_source_freq(1).unwrap(), StreamSource::regular());
+    ///
+    /// device.set_stream_source_freq(0, StreamSource::indexed_data(100)).unwrap();
+    /// device.set_stream_source_freq(1, StreamSource::instance_data(1)).unwrap();
+    ///
+    /// assert_eq!(device.get_stream_source_freq(0).unwrap(), StreamSource::indexed_data(100));
+    /// assert_eq!(device.get_stream_source_freq(1).unwrap(), StreamSource::instance_data(1));
+    /// ```
+    ///
     /// ### Returns
     ///
-    /// *   [D3DERR::INVALIDCALL]   The device was a pure device?
+    /// *   [D3DERR::INVALIDCALL]
     /// *   Ok([StreamSource])
     pub fn get_stream_source_freq(&self, stream_number: u32) -> Result<StreamSource, MethodError> {
         let mut freq = 0;
@@ -246,9 +323,22 @@ impl IndexBuffer {
     ///
     /// Retrieves a description of the index buffer.
     ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use doc::*; let device = Device::pure();
+    /// let tri = device.create_index_buffer(3 * 2, Usage::None, Format::Index16, Pool::Managed, ()).unwrap();
+    /// let desc : IndexBufferDesc = tri.get_desc().unwrap();
+    /// assert_eq!(desc.format, Format::Index16);
+    /// assert_eq!(desc.r#type, ResourceType::IndexBuffer);
+    /// assert_eq!(desc.usage,  Usage::None);
+    /// assert_eq!(desc.pool,   Pool::Managed);
+    /// assert_eq!(desc.size,   6);
+    /// ```
+    ///
     /// ### Returns
     ///
-    /// *   [D3DERR::INVALIDCALL]   The device was pure?
+    /// *   [D3DERR::INVALIDCALL]
     /// *   Ok([IndexBufferDesc])
     pub fn get_desc(&self) -> Result<IndexBufferDesc, MethodError> {
         let mut desc = IndexBufferDesc::default();
@@ -269,6 +359,19 @@ impl IndexBuffer {
     /// Sound users of this API will lock, modify, and unlock in such a way as to prevent any other concurrent modifier of the data in question.
     /// This is simplified by the Direct3D APIs being \![Send], \![Sync], but care must be involved with traits that could execute arbitrary code.
     ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use doc::*; let device = Device::pure();
+    /// let tri = device.create_index_buffer(3 * 2, Usage::None, Format::Index16, Pool::Managed, ()).unwrap();
+    /// let data : &[u16] = &[0, 1, 2];
+    /// unsafe {
+    ///     let d = tri.lock_unchecked(0, 0, Lock::None).unwrap();
+    ///     std::ptr::copy_nonoverlapping(data.as_ptr(), d.cast(), data.len());
+    /// }
+    /// tri.unlock().unwrap();
+    /// ```
+    ///
     /// ### Returns
     ///
     /// *   [D3DERR::INVALIDCALL]
@@ -282,6 +385,14 @@ impl IndexBuffer {
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dindexbuffer9-unlock)\]
     /// IDirect3DIndexBuffer9::Unlock
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use doc::*; let device = Device::pure();
+    /// let tri = device.create_index_buffer(3*4*3, Usage::None, Format::Index16, Pool::Managed, ()).unwrap();
+    /// tri.unlock().unwrap(); // may succeed, even if the buffer wasn't locked <_<;;
+    /// ```
     ///
     /// ### Returns
     ///
@@ -301,9 +412,23 @@ impl VertexBuffer {
     ///
     /// Retrieves a description of the vertex buffer.
     ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use doc::*; let device = Device::pure();
+    /// let tri = device.create_vertex_buffer(3*4*3, Usage::None, FVF::XYZ, Pool::Managed, ()).unwrap();
+    /// let desc : VertexBufferDesc = dbg!(tri.get_desc().unwrap());
+    /// assert_eq!(desc.format, Format::VertexData);
+    /// assert_eq!(desc.r#type, ResourceType::VertexBuffer);
+    /// assert_eq!(desc.usage,  Usage::None);
+    /// assert_eq!(desc.pool,   Pool::Managed);
+    /// assert_eq!(desc.size,   36);
+    /// assert_eq!(desc.fvf,    FVF::XYZ);
+    /// ```
+    ///
     /// ### Returns
     ///
-    /// *   [D3DERR::INVALIDCALL]   The device was pure?
+    /// *   [D3DERR::INVALIDCALL]
     /// *   Ok([VertexBufferDesc])
     pub fn get_desc(&self) -> Result<VertexBufferDesc, MethodError> {
         let mut desc = VertexBufferDesc::default();
@@ -324,6 +449,23 @@ impl VertexBuffer {
     /// Sound users of this API will lock, modify, and unlock in such a way as to prevent any other concurrent modifier of the data in question.
     /// This is simplified by the Direct3D APIs being \![Send], \![Sync], but care must be involved with traits that could execute arbitrary code.
     ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use doc::*; let device = Device::pure();
+    /// let tri = device.create_vertex_buffer(3*4*3, Usage::None, FVF::XYZ, Pool::Managed, ()).unwrap();
+    /// let data : &[[f32; 3]] = &[
+    ///     [0.0, 1.0, 0.0],
+    ///     [1.0, 0.0, 0.0],
+    ///     [0.0, 0.0, 1.0],
+    /// ];
+    /// unsafe {
+    ///     let d = tri.lock_unchecked(0, std::mem::size_of_val(data) as u32, Lock::None).unwrap();
+    ///     std::ptr::copy_nonoverlapping(data.as_ptr(), d.cast(), data.len());
+    /// }
+    /// tri.unlock().unwrap();
+    /// ```
+    ///
     /// ### Returns
     ///
     /// *   [D3DERR::INVALIDCALL]
@@ -338,9 +480,17 @@ impl VertexBuffer {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexbuffer9-unlock)\]
     /// IDirect3DVertexBuffer9::Unlock
     ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use doc::*; let device = Device::pure();
+    /// let tri = device.create_vertex_buffer(3*4*3, Usage::None, FVF::XYZ, Pool::Managed, ()).unwrap();
+    /// tri.unlock().unwrap(); // may succeed, even if the buffer wasn't locked <_<;;
+    /// ```
+    ///
     /// ### Returns
     ///
-    /// *   [D3DERR::INVALIDCALL]   The vertex buffer wasn't locked?
+    /// *   [D3DERR::INVALIDCALL]
     /// *   Ok(`()`)
     pub fn unlock(&self) -> Result<(), MethodError> {
         let hr = unsafe { self.0.Unlock() };
@@ -351,7 +501,7 @@ impl VertexBuffer {
 
 
 #[test] fn index_buffer() {
-    let device = Device::test();
+    let device = Device::pure();
 
     let tri16 = device.create_index_buffer(3*2, Usage::None, Format::Index16, Pool::Default, ()).unwrap(); // simple triangle IB
     let odd16 = device.create_index_buffer(3*3, Usage::None, Format::Index16, Pool::Default, ()).unwrap(); // weird size (9)
@@ -385,12 +535,10 @@ impl VertexBuffer {
 
     device.set_indices(None).unwrap();
     assert!(device.get_indices().unwrap().is_none());
-
-    // TODO: multiple device tests
 }
 
 #[test] fn create_vertex_buffer() {
-    let device = Device::test();
+    let device = Device::pure();
 
     let _trixyz = device.create_vertex_buffer(3*4*3, Usage::None, FVF::None, Pool::Default, ()).unwrap(); // simple triangle VB (no FVF)
     let _quadxyz= device.create_vertex_buffer(4*4*3, Usage::None, FVF::None, Pool::Default, ()).unwrap(); // simple quad     VB (no FVF)
@@ -404,9 +552,6 @@ impl VertexBuffer {
     assert_eq!(D3DERR::INVALIDCALL, device.create_vertex_buffer(1000, Invalid,     FVF::XYZ, Pool::Default, ()).err(), "invalid usage");
     let _badfmt =                   device.create_vertex_buffer(1000, Usage::None, Invalid,  Pool::Default, ()).unwrap(); // apparently no such thing as a bad FVF?
     assert_eq!(D3DERR::INVALIDCALL, device.create_vertex_buffer(1000, Usage::None, FVF::XYZ, Invalid,       ()).err(), "bad pool");
-
-    // TODO: multiple device tests
 }
 
 // TODO: a lot more testing
-// TODO: examples
