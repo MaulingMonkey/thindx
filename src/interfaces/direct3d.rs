@@ -49,6 +49,7 @@ impl Direct3D {
     /// ```rust
     /// use thin3d9::*;
     /// let d3d = unsafe { Direct3D::create(SdkVersion::default()) }.unwrap();
+    /// drop_final(d3d);
     /// ```
     pub unsafe fn create(sdk_version: SdkVersion) -> Result<Self, ()> {
         let d3d9 = Direct3DCreate9(sdk_version.into());

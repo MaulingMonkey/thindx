@@ -14,13 +14,9 @@ mod surface;        pub use surface::*;
 mod swap_chain;     pub use swap_chain::*;
 mod texture;        pub use texture::*;
 mod vertex_declaration; pub use vertex_declaration::*;
+mod unknown;        pub use unknown::*;
 mod device_misc;
 
-
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/unknwn/nn-unknwn-iunknown)\]
-/// Base COM interface all D3D9 types eventually derive from.
-#[derive(Clone)] #[repr(transparent)]
-pub struct Unknown(mcom::Rc<winapi::um::unknwnbase::IUnknown>);
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dvolume9)\]
 /// A dense 3-dimensional region of data, often belonging to a [VolumeTexture]
