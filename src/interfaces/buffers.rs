@@ -73,7 +73,7 @@ impl Device {
         // !0 will fail OUTOFMEMORY
         // !0/2 spammed will fail OUTOFVIDEOMEMORY
         // !0-4 spammed will "succeed", hinting at an arithmetic overflow within d3d or the driver
-        if length > MAX_ALLOC { return Err(MethodError("Device::create_vertex_buffer", D3DERR::ALLOC_OVERFLOW)); }
+        if length > MAX_ALLOC { return Err(MethodError("Device::create_index_buffer", D3DERR::ALLOC_OVERFLOW)); }
 
         let _ = shared_handle;
         let mut buffer = null_mut();
