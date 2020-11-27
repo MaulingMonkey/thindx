@@ -6,8 +6,9 @@ use winapi::shared::ntdef::*;
 
 use winapi::um::d3dcommon::*;
 
-mod compile;        pub use compile::*;
-mod compile2;       pub use compile2::*;
+mod compile_from_file;              pub use compile_from_file::*;
+mod compile;                        pub use compile::*;
+mod compile2;                       pub use compile2::*;
 
 
 
@@ -62,6 +63,20 @@ pub struct D3DCompiler {
         ppCode:             *mut *mut ID3DBlob,
         ppErrorMsgs:        *mut *mut ID3DBlob,
     ) -> HRESULT>,
+
+    /// D3DCompiler_47.dll
+    /// Possibly as early as D3DCompiler_44.dll ?  Need more install
+    pub(crate) D3DCompileFromFile: Option<unsafe extern "system" fn (
+        pFileName:          LPCWSTR,
+        pDefines:           *const D3D_SHADER_MACRO,
+        pInclude:           *mut ID3DInclude,
+        pEntrypoint:        LPCSTR,
+        pTarget:            LPCSTR,
+        Flags1:             UINT,
+        Flags2:             UINT,
+        ppCode:             *mut *mut ID3DBlob,
+        ppErrorMsgs:        *mut *mut ID3DBlob,
+    ) -> HRESULT>,
 }
 
 impl D3DCompiler {
@@ -71,6 +86,7 @@ impl D3DCompiler {
         unsafe{Ok(Self{
             D3DCompile:             lib.sym_opt("D3DCompile\0"),
             D3DCompile2:            lib.sym_opt("D3DCompile2\0"),
+            D3DCompileFromFile:     lib.sym_opt("D3DCompileFromFile\0"),
         })}
     }
 }
