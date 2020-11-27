@@ -110,6 +110,7 @@ impl Device {
     /// ### Returns
     ///
     /// *   [D3DERR::DEVICEREMOVED]     When you least expect it
+    /// *   [D3DERR::DEVICELOST]        When switching into/out-of fullscreen, or when invoking `C:\Windows\System32\DXCap.exe -forcetdr`
     /// *   [D3DERR::INVALIDCALL]       If called within a [Device::begin_scene] .. [Device::end_scene] section, if the render target is the current render target.
     /// *   Ok(`()`)
     ///
@@ -124,7 +125,13 @@ impl Device {
     ///
     /// // Or, with a SwapEffect::Copy swap chain, this should succeed (might succeed by simply ignoring the args, even for other SwapEffect s:)
     /// let hwnd = unsafe { SafeHWND::assert(&hwnd) };
-    /// let _ = device.present((0,0)..(100,100), Rect::from((0,0)..(100,100)), hwnd, None);
+    /// match device.present((0,0)..(100,100), Rect::from((0,0)..(100,100)), hwnd, None).map_err(|e| e.d3derr()) {
+    ///     Ok(()) => {}, // Huzzah!
+    ///     Err(D3DERR::DEVICEREMOVED   ) => { /* oooh, a removable GPU?  Nifty!  Might switch to the laptop's built-in Device (might have different caps!) */ },
+    ///     Err(D3DERR::DEVICELOST      ) => { /* switching fullscreen modes? GPU driver crashed? might prompt the user before recreating the device to avoid hang loops */ },
+    ///     Err(D3DERR::DEVICEHUNG      ) => { /* ...is it your fault? crazy shaders? might prompt the user before recreating the device to avoid hang loops */ },
+    ///     Err(other                   ) => panic!("oh no something bad happened: {}", other),
+    /// }
     /// ```
     pub fn present<'r>(&self, source_rect: impl IntoRectOrFull, dest_rect: impl IntoRectOrFull, dest_window_override: impl AsHWND, dirty_region: impl Into<Option<&'r RgnData>>) -> Result<(), MethodError> {
         let source_rect     = source_rect.into_rect();
