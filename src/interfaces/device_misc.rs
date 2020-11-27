@@ -24,7 +24,7 @@ impl Device {
     /// *   [D3DERR::OUTOFVIDEOMEMORY]
     /// *   [D3DERR::COMMAND_UNPARSED]
     /// *   Ok(())
-    pub(crate) fn evict_managed_resources(&self) -> Result<(), MethodError> {
+    pub fn evict_managed_resources(&self) -> Result<(), MethodError> {
         let hr = unsafe { self.0.EvictManagedResources() };
         MethodError::check("IDirect3DDevice9::EvictManagedResources", hr)
     }

@@ -27,7 +27,7 @@ impl Device {
     /// IDirect3DDevice9::CreateQuery
     ///
     /// Creates a status query.
-    pub(crate) fn create_query(&self, type_: QueryType) -> Result<Query, MethodError> {
+    pub fn create_query(&self, type_: QueryType) -> Result<Query, MethodError> {
         let mut query = null_mut();
         let hr = unsafe { self.0.CreateQuery(type_.into(), &mut query) };
         MethodError::check("IDirect3DDevice9::CreateQuery", hr)?;

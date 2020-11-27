@@ -50,7 +50,7 @@ impl Device {
     /// *   [D3DERR::OUTOFVIDEOMEMORY]
     /// *   [D3DERR::OUTOFMEMORY]
     /// *   Ok([StateBlock])
-    pub(crate) fn create_state_block(&self, type_: StateBlockType) -> Result<StateBlock, MethodError> {
+    pub fn create_state_block(&self, type_: StateBlockType) -> Result<StateBlock, MethodError> {
         let mut sb = null_mut();
         let hr = unsafe { self.0.CreateStateBlock(type_.into(), &mut sb) };
         MethodError::check("IDirect3DDevice9::CreateStateBlock", hr)?;

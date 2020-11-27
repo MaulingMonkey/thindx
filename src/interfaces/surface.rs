@@ -26,7 +26,7 @@ impl Device {
     /// IDirect3DDevice9::CreateDepthStencilSurface
     ///
     /// Creates a depth-stencil resource.
-    pub(crate) fn create_depth_stencil_surface(&self, width: u32, height: u32, format: Format, multi_sample: MultiSample, multi_sample_quality: u32, discard: bool, _shared_handle: impl SharedHandleParam) -> Result<Surface, MethodError> {
+    pub fn create_depth_stencil_surface(&self, width: u32, height: u32, format: Format, multi_sample: MultiSample, multi_sample_quality: u32, discard: bool, _shared_handle: impl SharedHandleParam) -> Result<Surface, MethodError> {
         let mut surface = null_mut();
         let hr = unsafe { self.0.CreateDepthStencilSurface(width, height, format.into(), multi_sample.into(), multi_sample_quality, discard.into(), &mut surface, null_mut()) };
         MethodError::check("IDirect3DDevice9::CreateDepthStencilSurface", hr)?;
@@ -37,7 +37,7 @@ impl Device {
     /// IDirect3DDevice9::CreateOffscreenPlainSurface
     ///
     /// Create an off-screen surface.
-    pub(crate) fn create_offscreen_plain_surface(&self, width: u32, height: u32, format: Format, pool: Pool, _shared_handle: impl SharedHandleParam) -> Result<Surface, MethodError> {
+    pub fn create_offscreen_plain_surface(&self, width: u32, height: u32, format: Format, pool: Pool, _shared_handle: impl SharedHandleParam) -> Result<Surface, MethodError> {
         let mut surface = null_mut();
         let hr = unsafe { self.0.CreateOffscreenPlainSurface(width, height, format.into(), pool.into(), &mut surface, null_mut()) };
         MethodError::check("IDirect3DDevice9::CreateOffscreenPlainSurface", hr)?;
@@ -48,7 +48,7 @@ impl Device {
     /// IDirect3DDevice9::CreateRenderTarget
     ///
     /// Creates a render-target surface.
-    pub(crate) fn create_render_target(&self, width: u32, height: u32, format: Format, multi_sample: MultiSample, multi_sample_quality: u32, lockable: bool, _shared_handle: impl SharedHandleParam) -> Result<Surface, MethodError> {
+    pub fn create_render_target(&self, width: u32, height: u32, format: Format, multi_sample: MultiSample, multi_sample_quality: u32, lockable: bool, _shared_handle: impl SharedHandleParam) -> Result<Surface, MethodError> {
         let mut surface = null_mut();
         let hr = unsafe { self.0.CreateRenderTarget(width, height, format.into(), multi_sample.into(), multi_sample_quality, lockable.into(), &mut surface, null_mut()) };
         MethodError::check("IDirect3DDevice9::CreateRenderTarget", hr)?;
@@ -64,7 +64,7 @@ impl Device {
     ///
     /// *   [D3DERR::INVALIDCALL]           if `back_buffer` >= number of back buffers
     /// *   Ok([Surface])
-    pub(crate) fn get_back_buffer(&self, swap_chain: u32, back_buffer: u32, type_: BackBufferType) -> Result<Surface, MethodError> {
+    pub fn get_back_buffer(&self, swap_chain: u32, back_buffer: u32, type_: BackBufferType) -> Result<Surface, MethodError> {
         let mut surface = null_mut();
         let hr = unsafe { self.0.GetBackBuffer(swap_chain, back_buffer, type_.into(), &mut surface) };
         MethodError::check("IDirect3DDevice9::GetBackBuffer", hr)?;
@@ -83,7 +83,7 @@ impl Device {
     /// * Ok(None)                  no render target was bound to that index
     ///
     /// [Multiple Render Targets (Direct3D 9)]:         https://docs.microsoft.com/en-us/windows/win32/direct3d9/multiple-render-targets
-    pub(crate) fn get_depth_stencil_surface(&self) -> Result<Option<Surface>, MethodError> {
+    pub fn get_depth_stencil_surface(&self) -> Result<Option<Surface>, MethodError> {
         // TODO: verify soundness before making pub
         let mut ds = null_mut();
         let hr = unsafe { self.0.GetDepthStencilSurface(&mut ds) };
@@ -108,7 +108,7 @@ impl Device {
     /// * Ok(None)                  no render target was bound to that index
     ///
     /// [Multiple Render Targets (Direct3D 9)]:         https://docs.microsoft.com/en-us/windows/win32/direct3d9/multiple-render-targets
-    pub(crate) fn get_render_target(&self, render_target_index: u32) -> Result<Option<Surface>, MethodError> {
+    pub fn get_render_target(&self, render_target_index: u32) -> Result<Option<Surface>, MethodError> {
         // TODO: verify soundness before making pub
         let mut rt = null_mut();
         let hr = unsafe { self.0.GetRenderTarget(render_target_index, &mut rt) };
@@ -122,7 +122,7 @@ impl Device {
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getfrontbufferdata)\]
     /// IDirect3DDevice9::GetFrontBufferData
-    pub(crate) fn get_front_buffer_data(&self, swap_chain: u32, surface: &Surface) -> Result<(), MethodError> {
+    pub fn get_front_buffer_data(&self, swap_chain: u32, surface: &Surface) -> Result<(), MethodError> {
         // TODO: verify soundness before making pub
         let hr = unsafe { self.0.GetFrontBufferData(swap_chain, surface.as_raw()) };
         MethodError::check("IDirect3DDevice9::GetFrontBufferData", hr)
@@ -135,7 +135,7 @@ impl Device {
     ///
     /// * [D3DERR::INVALIDCALL]         if `depth_stencil_surface == Some(surface)` and `surface.usage() != Usage::DepthStencil`
     /// * `Ok(())`                      if the depth stencil was successfully (un)bound
-    pub(crate) fn set_depth_stencil_surface(&self, depth_stencil_surface: Option<&Surface>) -> Result<(), MethodError> {
+    pub fn set_depth_stencil_surface(&self, depth_stencil_surface: Option<&Surface>) -> Result<(), MethodError> {
         let ds = depth_stencil_surface.map_or(null_mut(), |ds| ds.as_raw());
         let hr = unsafe { self.0.SetDepthStencilSurface(ds) };
         MethodError::check("IDirect3DDevice9::SetDepthStencilSurface", hr)
@@ -149,7 +149,7 @@ impl Device {
     /// * [D3DERR::INVALIDCALL]         if `render_target_index == 0` and `render_target == None`
     /// * [D3DERR::INVALIDCALL]         if `render_target == Some(surface)` and `surface.usage() != Usage::RenderTarget`
     /// * `Ok(())`                      if the render target was successfully bound
-    pub(crate) fn set_render_target(&self, render_target_index: u32, render_target: Option<&Surface>) -> Result<(), MethodError> {
+    pub fn set_render_target(&self, render_target_index: u32, render_target: Option<&Surface>) -> Result<(), MethodError> {
         let rt = render_target.map_or(null_mut(), |rt| rt.as_raw());
         let hr = unsafe { self.0.SetRenderTarget(render_target_index, rt) };
         MethodError::check("IDirect3DDevice9::SetRenderTarget", hr)

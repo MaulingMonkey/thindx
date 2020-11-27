@@ -30,7 +30,7 @@ impl Device {
     /// *   Ok([VertexDeclaration])
     ///
     /// [Vertex Declaration (Direct3D 9)]:          https://docs.microsoft.com/en-us/windows/desktop/direct3d9/vertex-declaration
-    pub(crate) fn create_vertex_declaration(&self, elements: &[VertexElement]) -> Result<VertexDeclaration, MethodError> {
+    pub fn create_vertex_declaration(&self, elements: &[VertexElement]) -> Result<VertexDeclaration, MethodError> {
         let end = elements.last().ok_or(MethodError("Device::create_vertex_declaration", D3DERR::INVALIDCALL))?;
         // This check is required for CreateVertexDeclaration to be sound!
         if *end != VertexElement::END { return Err(MethodError("Device::create_vertex_declaration", D3DERR::INVALIDCALL)); }

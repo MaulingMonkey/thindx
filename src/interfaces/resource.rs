@@ -22,7 +22,7 @@ pub struct Resource(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DResource9
 
 impl Resource {
     /// Check if `self` is compatible with `device`, returning an `Err(...)` if it isn't.
-    pub(crate) fn check_compatible_with(&self, device: &Device, method: &'static str) -> Result<(), MethodError> {
+    pub fn check_compatible_with(&self, device: &Device, method: &'static str) -> Result<(), MethodError> {
         let my_device = self.get_device()?;
         if my_device.as_raw() == device.as_raw() {
             Ok(())
