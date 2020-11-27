@@ -10,7 +10,7 @@ use winapi::shared::d3d9types::*;
 /// Defines the sampler texture types for vertex shaders.
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)] pub struct SamplerTextureType(D3DSAMPLER_TEXTURE_TYPE);
-pub type STT = SamplerTextureType;
+pub use SamplerTextureType as STT;
 
 enumish! { STT => D3DSAMPLER_TEXTURE_TYPE; Unknown, _2D, Cube, Volume }
 

@@ -10,7 +10,7 @@ use winapi::shared::d3d9types::*;
 /// Defines constants that describe the supported shading modes.
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)] pub struct ShadeMode(D3DSHADEMODE);
-pub type Shade = ShadeMode;
+pub use ShadeMode as Shade;
 
 enumish! { Shade => D3DSHADEMODE; Flat, Gouraud, Phong }
 

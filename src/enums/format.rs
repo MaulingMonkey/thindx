@@ -126,9 +126,9 @@ use std::fmt::{self, Debug, Formatter};
 /// | [`Format::A32B32G32R32F`] |
 /// | |
 /// | [`Format::CxV8U8`]        |
-
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)] pub struct Format(u32);
+pub use Format as Fmt;
 
 impl Format {
     /// Convert a raw [D3DFORMAT] value into a [Format].  This is *probably* safe... probably...

@@ -9,8 +9,8 @@ use winapi::shared::d3d9types::*;
 ///
 /// Defines the debug monitor tokens.
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[repr(transparent)] pub struct DMT(D3DDEBUGMONITORTOKENS);
-pub type DebugMonitorTokens = DMT;
+#[repr(transparent)] pub struct DebugMonitorTokens(D3DDEBUGMONITORTOKENS);
+pub use DebugMonitorTokens as DMT;
 
 enumish! { DMT => D3DDEBUGMONITORTOKENS; Enable, Disable }
 

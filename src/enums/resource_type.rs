@@ -10,7 +10,7 @@ use winapi::shared::d3d9types::*;
 /// Specifies the type of a [Resource]
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)] pub struct ResourceType(D3DRESOURCETYPE);
-pub type RType = ResourceType;
+pub use ResourceType as RType;
 
 enumish! { ResourceType => D3DRESOURCETYPE; Surface, Volume, Texture, VolumeTexture, CubeTexture, VertexBuffer, IndexBuffer }
 

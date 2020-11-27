@@ -15,7 +15,7 @@ use winapi::shared::d3d9types::*;
 /// [Triangle Fans (Direct3D 9)]:   https://docs.microsoft.com/en-us/windows/win32/direct3d9/triangle-fans
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)] pub struct PrimitiveType(D3DPRIMITIVETYPE);
-pub type PT = PrimitiveType;
+pub use PrimitiveType as PT;
 
 enumish! { PT => D3DPRIMITIVETYPE; PointList, LineList, LineStrip, TriangleList, TriangleStrip, TriangleFan }
 

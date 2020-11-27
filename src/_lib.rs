@@ -51,41 +51,173 @@
 //!
 //! ### Enums
 //!
+//! ⚠️ **NOTE:** D3D `enum`s are represented as Rust `struct`s to avoid undefined behavior related to unlisted enumerants.
+//!
+//! ⚠️ **NOTE:** [DeclMethod8], [DeclType8], and [DeclUsage8] are all 8-bit, despite `enum D3DDECL*` being 32-bit.<br>
+//! &nbsp; &nbsp; &nbsp; &nbsp; ❌ This makes them unsuitable for raw function FFI, due to ABI mismatches.<br>
+//! &nbsp; &nbsp; &nbsp; &nbsp; ✔️ This makes them suitable for [VertexElement] FFI, as [D3DVERTEXELEMENT9]::{Method,Type,and Usage} are all `BYTE`s.<br>
+//!
+//! | `thin3d9` value                           | docs.microsoft.com        | description   |
+//! | ----------------------------------------- | ------------------------- | ------------- |
+//! | [D3D](crate::D3D)\[[ERR](crate::D3DERR)\]::\* | [D3DERR]_\*           | Windows HRESULTs optimized for displaying Direct3D errors
+//! | [BackBufferType]::\*                      | [D3DBACKBUFFER_TYPE]_\*   | [Mono](crate::BackBufferType::Mono), [Left](crate::BackBufferType::Left), or [Right](crate::BackBufferType::Right)
+//! | [Basis]::\*                               | [D3DBASISTYPE]_\*         |
+//! | [Blend]::\*                               | [D3DBLEND]_\*             |
+//! | [BlendOp]::\*                             | [D3DBLENDOP]_\*           |
+//! | [Cmp]::\*                                 | [D3DCMP]_\*               |
+//! | [ComposeRects]::\*                        | [D3DCOMPOSERECTS]_\*      |
+//! | [CubeMapFace]::\*                         | [D3DCUBEMAP_FACE]_\*      | Which face of a cubemap to lock/update/acquire/???
+//! | [Cull]::\*                                | [D3DCULL]_\*              | [None](crate::Cull::None), [CW](crate::Cull::CW), [CCW](crate::Cull::CCW)
+//! | [DMT]::\*                                 | [D3DDMT]_\*               |
+//! | [DeclMethod8]::\*                         | [D3DDECLMETHOD]_\*        | Tesselation method.
+//! | [DeclType8]::\*                           | [D3DDECLTYPE]_\*          | [Float1](crate::DeclType8::Float1), [Float2](crate::DeclType8::Float2), ... - Defines a vertex declaration data type.
+//! | [DeclUsage8]::\*                          | [D3DDECLUSAGE]_\*         | [Position](crate::DeclUsage8::Position), [TexCoord](crate::DeclUsage8::TexCoord), ... - Defines the intended use of vertex data.
+//! | [Degree]::\*                              | [D3DDEGREE]_\*            |
+//! | [DevType]::\*                             | [D3DDEVTYPE]_\*           | Specifies what kind of [Device] should be created
+//! | [DisplayRotation]::\*                     | [D3DDISPLAYROTATION]_\*   |
+//! | [Fill]::\*                                | [D3DFILL]_\*              |
+//! | [Fog]::\*                                 | [D3DFOG]_\*               |
+//! | [Fmt]::\*                                 | [D3DFMT]_\*               | Texture and vertex element formats
+//! | [LightType]::\*                           | [D3DLIGHTTYPE]_\*         | Defines the type of a light ([Point](crate::LightType::Point), [Spot](crate::LightType::Spot), or [Directional](crate::LightType::Directional))
+//! | [MCS]::\*                                 | [D3DMCS]_\*               |
+//! | [MultiSample]::\*                         | [D3DMULTISAMPLE]_\*       |
+//! | [PatchEdge]::\*                           | [D3DPATCHEDGE]_\*         |
+//! | [Pool]::\*                                | [D3DPOOL]_\*              | Specifies what memory pool [Resource]s should be stored in
+//! | [PT]::\*                                  | [D3DPT]_\*                |
+//! | [QueryType]::\*                           | [D3DQUERYTYPE]_\*         | Identifies the query type.
+//! | [RS]::\*                                  | [D3DRS]_\*                |
+//! | [RType]::\*                               | [D3DRTYPE]_\*             |
+//! | [Samp]::\*                                | [D3DSAMP]_\*              |
+//! | [STT]::\*                                 | [D3DSTT]_\*               |
+//! | [ScanlineOrdering]::\*                    | [D3DSCANLINEORDERING]_\*  |
+//! | [SGR]::\*                                 | [D3DSGR]_\*               | Indicates whether gamma correction should be applied.
+//! | [Shade]::\*                               | [D3DSHADE]_\*             |
+//! | [SBT]::\*                                 | [D3DSBT]_\*               |
+//! | [StencilOp]::\*                           | [D3DSTENCILOP]_\*         |
+//! | [StreamSource]::\*                        | [D3DSTREAMSOURCE]_\*      |
+//! | [SwapEffect]::\*                          | [D3DSWAPEFFECT]_\*        | Defines [Device::present] swap effects.
+//! | [TAddress]::\*                            | [D3DTADDRESS]_\*          |
+//! | [TexF]::\*                                | [D3DTEXF]_\*              |
+//! | [TOP]::\*                                 | [D3DTOP]_\*               |
+//! | [TSS]::\*                                 | [D3DTSS]_\*               |
+//! | [TS]::\*                                  | [D3DTS]_\*                |
+//! | [ZB]::\*                                  | [D3DZB]_\*                |
+//!
 //! | `thin3d9` type                            | docs.microsoft.com        | description   |
 //! | ----------------------------------------- | ------------------------- | ------------- |
 //! | [D3D](crate::D3D)\[[ERR](crate::D3DERR)\] | [D3DERR]                  | Windows HRESULTs optimized for displaying Direct3D errors
 //! | [BackBufferType]                          | [D3DBACKBUFFER_TYPE]      | [Mono](crate::BackBufferType::Mono), [Left](crate::BackBufferType::Left), or [Right](crate::BackBufferType::Right)
-//! | [DeclMethod8]                             | [D3DDECLMETHOD]           | Operation performed by the tessellator (or any procedural geometry routine).
+//! | [BasisType]                               | [D3DBASISTYPE]            |
+//! | [Blend]                                   | [D3DBLEND]                |
+//! | [BlendOp]                                 | [D3DBLENDOP]              |
+//! | [CmpFunc]                                 | [D3DCMPFUNC]              |
+//! | [ComposeRectsOp]                          | [D3DCOMPOSERECTSOP]       |
+//! | [CubeMapFace]                             | [D3DCUBEMAP_FACES]        | Which face of a cubemap to lock/update/acquire/???
+//! | <span class="inaccurate">[CubeMapFaces]   | [D3DCUBEMAP_FACES]        | This isn't a mask, [CubeMapFace] reads way better in all contexts!
+//! | [Cull]                                    | [D3DCULL]                 | [None](crate::Cull::None), [CW](crate::Cull::CW)], [CCW](crate::Cull::CCW)
+//! | [DebugMonitorTokens]                      | [D3DDEBUGMONITORTOKENS]   |
+//! | [DeclMethod8]                             | [D3DDECLMETHOD]           | Tesselation method.
 //! | [DeclType8]                               | [D3DDECLTYPE]             | [Float1](crate::DeclType8::Float1), [Float2](crate::DeclType8::Float2), ... - Defines a vertex declaration data type.
-//! | [DeclUsage8]                              | [D3DDECLUSAGE]            | [Position](crate::DeclUsage8::Position), [TexCoord](crate::DeclUsage8::TexCoord), ... - Identifies the intended use of vertex data.
+//! | [DeclUsage8]                              | [D3DDECLUSAGE]            | [Position](crate::DeclUsage8::Position), [TexCoord](crate::DeclUsage8::TexCoord), ... - Defines the intended use of vertex data.
+//! | [DegreeType]                              | [D3DDEGREETYPE]           |
 //! | [DevType]                                 | [D3DDEVTYPE]              | Specifies what kind of [Device] should be created
+//! | [DisplayRotation]                         | [D3DDISPLAYROTATION]      |
+//! | [FillMode]                                | [D3DFILLMODE]             |
+//! | [FogMode]                                 | [D3DFOGMODE]              |
 //! | [Format]                                  | [D3DFORMAT]               | Texture and vertex element formats
 //! | [LightType]                               | [D3DLIGHTTYPE]            | Defines the type of a light ([Point](crate::LightType::Point), [Spot](crate::LightType::Spot), or [Directional](crate::LightType::Directional))
-//! | [MultiSample]                             | [D3DMULTISAMPLE_TYPE]     | Defines the levels of full-scene multisampling to apply
+//! | [MaterialColorSource]                     | [D3DMATERIALCOLORSOURCE]  |
+//! | [MultiSampleType]                         | [D3DMULTISAMPLE_TYPE]     | Defines the levels of full-scene multisampling to apply
+//! | [PatchEdgeStyle]                          | [D3DPATCHEDGESTYLE]       |
 //! | [Pool]                                    | [D3DPOOL]                 | Specifies what memory pool [Resource]s should be stored in
 //! | [PrimitiveType]                           | [D3DPRIMITIVETYPE]        | Defines the primitives supported by Direct3D.
 //! | [QueryType]                               | [D3DQUERYTYPE]            | Identifies the query type.
+//! | [RenderStateType]                         | [D3DRENDERSTATETYPE]      |
 //! | [ResourceType]                            | [D3DRESOURCETYPE]         | Specifies the type of a [Resource]/[Volume]
+//! | [SamplerStateType]                        | [D3DSAMPLERSTATETYPE]     |
+//! | [SamplerTextureType]                      | [D3DSAMPLER_TEXTURE_TYPE] |
+//! | [ScanlineOrdering]                        | [D3DSCANLINEORDERING]     |
 //! | [SGR]                                     | [D3DSGR]                  | Indicates whether gamma correction should be applied.
+//! | [ShadeMode]                               | [D3DSHADEMODE]            |
 //! | [StateBlockType]                          | [D3DSTATEBLOCKTYPE]       | Predefined sets of pipeline state used by state blocks
+//! | [StencilOp]                               | [D3DSTENCILOP]            |
+//! | [StreamSource]                            | [D3DSTREAMSOURCE]         |
 //! | [SwapEffect]                              | [D3DSWAPEFFECT]           | Defines [Device::present] swap effects.
+//! | [TextureAddress]                          | [D3DTEXTUREADDRESS]       |
+//! | [TextureFilterType]                       | [D3DTEXTUREFILTERTYPE]    |
+//! | [TextureOp]                               | [D3DTEXTUREOP]            |
+//! | [TextureStageStateType]                   | [D3DTEXTURESTAGESTATETYPE]|
+//! | [TransformStateType]                      | [D3DTRANSFORMSTATETYPE]   |
+//! | [ZBufferType]                             | [D3DZBUFFERTYPE]          |
 //!
 //! [D3DERR]:                   https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3derr
 //! [D3DBACKBUFFER_TYPE]:       https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dbackbuffer-type
+//! [D3DBASIS]:                 https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dbasistype
+//! [D3DBASISTYPE]:             https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dbasistype
+//! [D3DBLEND]:                 https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dblend
+//! [D3DBLENDOP]:               https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dblendop
+//! [D3DCMP]:                   https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dcmpfunc
+//! [D3DCMPFUNC]:               https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dcmpfunc
+//! [D3DCOMPOSERECTS]:          https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dcomposerectsop
+//! [D3DCOMPOSERECTSOP]:        https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dcomposerectsop
+//! [D3DCUBEMAP_FACE]:          https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dcubemap-faces
+//! [D3DCUBEMAP_FACES]:         https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dcubemap-faces
+//! [D3DCULL]:                  https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dcull
+//! [D3DDMT]:                   https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddebugmonitortokens
+//! [D3DDEBUGMONITORTOKENS]:    https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddebugmonitortokens
 //! [D3DDECLMETHOD]:            https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddeclmethod
 //! [D3DDECLTYPE]:              https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddecltype
 //! [D3DDECLUSAGE]:             https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddeclusage
+//! [D3DDEGREE]:                https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddegreetype
+//! [D3DDEGREETYPE]:            https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddegreetype
 //! [D3DDEVTYPE]:               https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddevtype
+//! [D3DDISPLAYROTATION]:       https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddisplayrotation
+//! [D3DFILL]:                  https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dfillmode
+//! [D3DFILLMODE]:              https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dfillmode
+//! [D3DFOG]:                   https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dfogmode
+//! [D3DFOGMODE]:               https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dfogmode
+//! [D3DFMT]:                   https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dformat
 //! [D3DFORMAT]:                https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dformat
 //! [D3DLIGHTTYPE]:             https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dlighttype
+//! [D3DMCS]:                   https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dmaterialcolorsource
+//! [D3DMATERIALCOLORSOURCE]:   https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dmaterialcolorsource
+//! [D3DMULTISAMPLE]:           https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dmultisample-type
 //! [D3DMULTISAMPLE_TYPE]:      https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dmultisample-type
+//! [D3DPATCHEDGE]:             https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dpatchedgestyle
+//! [D3DPATCHEDGESTYLE]:        https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dpatchedgestyle
 //! [D3DPOOL]:                  https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dpool
+//! [D3DPT]:                    https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dprimitivetype
 //! [D3DPRIMITIVETYPE]:         https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dprimitivetype
 //! [D3DQUERYTYPE]:             https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dquerytype
+//! [D3DRS]:                    https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype
+//! [D3DRENDERSTATETYPE]:       https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype
+//! [D3DRTYPE]:                 https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dresourcetype
 //! [D3DRESOURCETYPE]:          https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dresourcetype
+//! [D3DSAMP]:                  https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype
+//! [D3DSAMPLERSTATETYPE]:      https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype
+//! [D3DSTT]:                   https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dsampler-texture-type
+//! [D3DSAMPLER_TEXTURE_TYPE]:  https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dsampler-texture-type
+//! [D3DSCANLINEORDERING]:      https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dscanlineordering
 //! [D3DSGR]:                   https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dsgr
+//! [D3DSHADE]:                 https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dshademode
+//! [D3DSHADEMODE]:             https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dshademode
+//! [D3DSBT]:                   https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dstateblocktype
 //! [D3DSTATEBLOCKTYPE]:        https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dstateblocktype
+//! [D3DSTENCILOP]:             https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dstencilop
+//! [D3DSTREAMSOURCE]:          https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dstreamsource
 //! [D3DSWAPEFFECT]:            https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dswapeffect
+//! [D3DTADDRESS]:              https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dtextureaddress
+//! [D3DTEXTUREADDRESS]:        https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dtextureaddress
+//! [D3DTEXF]:                  https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dtexturefiltertype
+//! [D3DTEXTUREFILTERTYPE]:     https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dtexturefiltertype
+//! [D3DTOP]:                   https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dtextureop
+//! [D3DTEXTUREOP]:             https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dtextureop
+//! [D3DTSS]:                   https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dtexturestagestatetype
+//! [D3DTEXTURESTAGESTATETYPE]: https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dtexturestagestatetype
+//! [D3DTS]:                    https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dtransformstatetype
+//! [D3DTRANSFORMSTATETYPE]:    https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dtransformstatetype
+//! [D3DZB]:                    https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dzbuffertype
+//! [D3DZBUFFERTYPE]:           https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dzbuffertype
 //!
 //! ### Flags
 //!

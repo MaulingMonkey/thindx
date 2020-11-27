@@ -10,7 +10,7 @@ use winapi::shared::d3d9types::*;
 /// Defines whether the current tessellation mode is [Discrete](crate::PatchEdge::Discrete) or [Continuous](crate::patchEdge::Continuous].
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)] pub struct PatchEdgeStyle(D3DPATCHEDGESTYLE);
-pub type PatchEdge = PatchEdgeStyle;
+pub use PatchEdgeStyle as PatchEdge;
 
 enumish! { PatchEdge => D3DPATCHEDGESTYLE; Discrete, Continuous }
 

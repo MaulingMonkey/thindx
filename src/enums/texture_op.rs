@@ -10,7 +10,7 @@ use winapi::shared::d3d9types::*;
 /// Defines per-stage texture-blending operations.
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)] pub struct TextureOp(D3DTEXTUREOP);
-pub type TOP = TextureOp;
+pub use TextureOp as TOP;
 
 enumish! {
     TOP => D3DTEXTUREOP;

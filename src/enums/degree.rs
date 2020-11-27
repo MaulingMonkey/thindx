@@ -9,8 +9,8 @@ use winapi::shared::d3d9types::*;
 ///
 /// Defines the degree of the variables in the equation that describes a curve.
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[repr(transparent)] pub struct Degree(D3DDEGREETYPE);
-pub type DegreeType = Degree;
+#[repr(transparent)] pub struct DegreeType(D3DDEGREETYPE);
+pub use DegreeType as Degree;
 
 enumish! { Degree => D3DDEGREETYPE; Linear, Quadratic, Cubic, Quintic }
 

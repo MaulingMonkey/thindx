@@ -8,7 +8,7 @@ use winapi::shared::d3d9types::*;
 /// D3DZBUFFERTYPE
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)] pub struct ZBufferType(D3DZBUFFERTYPE);
-pub type ZB = ZBufferType;
+pub use ZBufferType as ZB;
 
 enumish! { ZB => D3DZBUFFERTYPE; False, True, UseW }
 

@@ -15,7 +15,7 @@ use winapi::shared::d3d9types::*;
 /// [State Blocks Save and Restore State (Direct3D 9)]: https://docs.microsoft.com/en-us/windows/win32/direct3d9/state-blocks-save-and-restore-state
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)] pub struct RenderStateType(D3DRENDERSTATETYPE);
-pub type RS = RenderStateType;
+pub use RenderStateType as RS;
 
 enumish! {
     RS => D3DRENDERSTATETYPE;

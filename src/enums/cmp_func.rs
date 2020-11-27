@@ -10,7 +10,7 @@ use winapi::shared::d3d9types::*;
 /// Defines the supported compare functions.
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)] pub struct CmpFunc(D3DCMPFUNC);
-pub type Cmp = CmpFunc;
+pub use CmpFunc as Cmp;
 
 enumish! { Cmp => D3DCMPFUNC; Never, Less, Equal, LessEqual, Greater, NotEqual, GreaterEqual, Always }
 

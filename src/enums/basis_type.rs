@@ -9,8 +9,8 @@ use winapi::shared::d3d9types::*;
 ///
 /// Defines the basis type of a high-order patch surface.
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[repr(transparent)] pub struct Basis(D3DBASISTYPE);
-pub type BasisType = Basis;
+#[repr(transparent)] pub struct BasisType(D3DBASISTYPE);
+pub use BasisType as Basis;
 
 enumish! { Basis => D3DBASISTYPE; Bezier, BSpline, CatmullRom }
 

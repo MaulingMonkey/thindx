@@ -10,7 +10,7 @@ use winapi::shared::d3d9types::*;
 /// Describes the supported texture-addressing modes.
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)] pub struct TextureAddress(D3DTEXTUREADDRESS);
-pub type TAddress = TextureAddress;
+pub use TextureAddress as TAddress;
 
 enumish! { TAddress => D3DTEXTUREADDRESS; Wrap, Mirror, Clamp, Border, MirrorOnce }
 

@@ -7,8 +7,8 @@ use winapi::shared::d3d9types::*;
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dmultisample-type)\]
 /// D3DMULTISAMPLE_TYPE
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[repr(transparent)] pub struct MultiSample(D3DMULTISAMPLE_TYPE);
-pub type MultiSampleType = MultiSample;
+#[repr(transparent)] pub struct MultiSampleType(D3DMULTISAMPLE_TYPE);
+pub use MultiSampleType as MultiSample;
 
 impl MultiSample {
     /// Convert a number of samples between 1 and 16 into a [MultiSample]

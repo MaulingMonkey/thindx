@@ -9,8 +9,8 @@ use winapi::shared::d3d9types::*;
 ///
 /// Defines constants that describe the fog mode.
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[repr(transparent)] pub struct Fog(D3DFOGMODE);
-pub type FogMode = Fog;
+#[repr(transparent)] pub struct FogMode(D3DFOGMODE);
+pub use FogMode as Fog;
 
 enumish! { Fog => D3DFOGMODE; None, Exp, Exp2, Linear }
 

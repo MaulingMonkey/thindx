@@ -9,8 +9,8 @@ use winapi::shared::d3d9types::*;
 ///
 /// Defines constants describing the fill mode.
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[repr(transparent)] pub struct Fill(D3DFILLMODE);
-pub type FillMode = Fill;
+#[repr(transparent)] pub struct FillMode(D3DFILLMODE);
+pub use FillMode as Fill;
 
 enumish! { Fill => D3DFILLMODE; Point, Wireframe, Solid }
 

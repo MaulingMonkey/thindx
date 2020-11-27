@@ -10,7 +10,7 @@ use winapi::shared::d3d9types::*;
 /// Defines the location at which a color or color component must be accessed for lighting calculations.
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)] pub struct MaterialColorSource(D3DMATERIALCOLORSOURCE);
-pub type MCS = MaterialColorSource;
+pub use MaterialColorSource as MCS;
 
 enumish! { MCS => D3DMATERIALCOLORSOURCE; Material, Color1, Color2 }
 

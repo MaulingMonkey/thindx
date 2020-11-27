@@ -10,7 +10,7 @@ use winapi::shared::d3d9types::*;
 /// Defines texture filtering modes for a texture stage.
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)] pub struct TextureFilterType(D3DTEXTUREFILTERTYPE);
-pub type TexF = TextureFilterType;
+pub use TextureFilterType as TexF;
 
 enumish! { TexF => D3DTEXTUREFILTERTYPE; None, Point, Linear, Anisotropic, PyramidalQuad, GaussianQuad, ConvolutionMono }
 

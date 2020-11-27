@@ -10,7 +10,7 @@ use winapi::shared::d3d9types::*;
 /// Defines constants that describe transformation state values.
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)] pub struct TransformStateType(D3DTRANSFORMSTATETYPE);
-pub type TS = TransformStateType;
+pub use TransformStateType as TS;
 
 enumish! { TS => D3DTRANSFORMSTATETYPE; View, Projection, Texture0, Texture1, Texture2, Texture3, Texture4, Texture5, Texture6, Texture7 }
 
