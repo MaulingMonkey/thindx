@@ -164,8 +164,8 @@ impl Device {
 /// RGNDATA is a header-prefixed array.  While constructable in Rust, they're slightly awkward at best.
 #[repr(C)]
 pub struct RgnData {
-    rdh:    RGNDATAHEADER,
-    buffer: [Rect],
+    pub(crate) rdh:    RGNDATAHEADER,
+    pub(crate) buffer: [Rect],
 }
 
 #[test] fn begin_end_scene() {

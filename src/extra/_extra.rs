@@ -125,13 +125,6 @@ thread_local! {
 
         ppf(&mut pp, &mut behavior);
         let d3d = Direct3DEx::test();
-        unsafe { d3d.create_device_ex(0, DevType::HAL, null_mut(), behavior, &mut pp, &mut [D3DDISPLAYMODEEX{
-            Size:               std::mem::size_of::<D3DDISPLAYMODEEX>().try_into().unwrap(),
-            Width:              0,
-            Height:             0,
-            Format:             Format::Unknown.into(),
-            RefreshRate:        0,
-            ScanLineOrdering:   0,
-        }])}
+        unsafe { d3d.create_device_ex(0, DevType::HAL, null_mut(), behavior, &mut pp, &mut []) }
     }
 }
