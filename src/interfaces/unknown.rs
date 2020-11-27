@@ -30,21 +30,21 @@ impl Unknown {
 /// *   Middleware acquiring refcounts
 /// *   Graphics debuggers acquiring refcounts
 /// *   ???
-pub fn drop_final(unk: impl AsRef<Unknown>) {
-    let rc = unk.as_ref().approx_refcount();
+pub fn drop_final(unk: impl AsUnknown) {
+    let rc = unk.as_unk().approx_refcount();
     debug_assert_eq!(1, rc, "this wasn't the final object");
 }
 
 
 
-pub trait AsRef<Unknown> {
-    fn as_ref(&self) -> &Unknown;
+pub trait AsUnknown {
+    fn as_unk(&self) -> &Unknown;
 }
 
-impl AsRef<Unknown> for Unknown {
-    fn as_ref(&self) -> &Unknown { self }
+impl AsUnknown for Unknown {
+    fn as_unk(&self) -> &Unknown { self }
 }
 
-impl<T: Deref> AsRef<Unknown> for T where T::Target : AsRef<Unknown> {
-    fn as_ref(&self) -> &Unknown { (**self).as_ref() }
+impl<T: Deref> AsUnknown for T where T::Target : AsUnknown {
+    fn as_unk(&self) -> &Unknown { (**self).as_unk() }
 }
