@@ -1,6 +1,6 @@
 use crate::*;
 
-use wchar::wch_c;
+use winstr::bstr;
 
 use winapi::shared::d3d9caps::*;
 use winapi::shared::d3d9types::*;
@@ -24,14 +24,14 @@ pub fn create_window(title: &str) -> HWND {
             lpfnWndProc:    Some(DefWindowProcW),
             hInstance:      hinstance,
             hCursor:        hcursor,
-            lpszClassName:  wch_c!("Thin3D9Extra").as_ptr(),
+            lpszClassName:  bstr!("Thin3D9Extra").as_lpcwstr(),
             .. std::mem::zeroed()
         };
         RegisterClassW(&wc); // might fail if previously registered
     
         let hwnd = CreateWindowExW(
             0,
-            wch_c!("Thin3D9Extra").as_ptr(),
+            bstr!("Thin3D9Extra").as_lpcwstr(),
             title.encode_utf16().chain(Some(0)).collect::<Vec<_>>().as_ptr(),
             0, //WS_OVERLAPPEDWINDOW,
             CW_USEDEFAULT,

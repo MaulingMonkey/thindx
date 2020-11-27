@@ -2,7 +2,7 @@
 
 use thin3d9::*;
 
-use wchar::wch_c;
+use winstr::bstr;
 
 use winapi::shared::d3d9caps::*;
 use winapi::shared::d3d9types::*;
@@ -51,15 +51,15 @@ fn main() {
         lpfnWndProc:    Some(window_proc),
         hInstance:      hinstance,
         hCursor:        hcursor,
-        lpszClassName:  wch_c!("SampleWndClass").as_ptr(),
+        lpszClassName:  bstr!("SampleWndClass").as_lpcwstr(),
         .. unsafe { std::mem::zeroed() }
     };
     assert_ne!(0, unsafe { RegisterClassW(&wc) });
 
     let hwnd = unsafe { CreateWindowExW(
         0,
-        wch_c!("SampleWndClass").as_ptr(),
-        wch_c!("01-clear-winapi - thin3d9 example").as_ptr(),
+        bstr!("SampleWndClass").as_lpcwstr(),
+        bstr!("01-clear-winapi - thin3d9 example").as_lpcwstr(),
         WS_OVERLAPPEDWINDOW,
         CW_USEDEFAULT,
         CW_USEDEFAULT,

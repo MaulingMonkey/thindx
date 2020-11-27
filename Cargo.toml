@@ -47,7 +47,7 @@ impl-from-unchecked = []
 doc                 = { path = "doc" }
 
 [target.'cfg(windows)'.dependencies]
-wchar               = "0.6"
+winstr              = "0.0.2"
 mcom                = "0.1.1"
 #mcom                = { git = "https://github.com/MaulingMonkey/mcom" }
 
@@ -70,7 +70,7 @@ features = [
 
 [target.'cfg(windows)'.dev-dependencies]
 raw-window-handle   = "0.3"
-wchar               = "0.6"
+winstr              = "0.0.2"
 winit               = "0.23"
 
 [target.'cfg(windows)'.dev-dependencies.winapi]
