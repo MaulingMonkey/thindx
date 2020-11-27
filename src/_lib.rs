@@ -32,9 +32,9 @@
 //! [Unknown] - The root type from which all sane COM types derive
 //! &nbsp;  ├─ [Direct3D]\[[Ex](crate::Direct3DEx)\] - Core factories for creating [Device]\[[Ex](crate::Direct3DEx)\]s and [SwapChain]\[[Ex](crate::SwapChainEx)\]s<span style="opacity: 25%">
 //! &nbsp;  ├─ [Device]\[[Ex](crate::DeviceEx)\] - Create resources associated with an individual GPU
-//! &nbsp;  ├─ [SwapChain]\[[Ex](crate::SwapChainEx)\] - Manages swapping buffers for individual "views" (monitors/windows)
+//! &nbsp;  ├─ [SwapChain]\[[Ex](crate::SwapChainEx)\] - Manages swapping buffers for individual "views" (monitors/windows)</span>
 //! &nbsp;  ├─ [Resource]
-//! &nbsp;  │      ├─ [Surface] - 2D buffer of pixels</span>
+//! &nbsp;  │      ├─ [Surface] - 2D buffer of pixels
 //! &nbsp;  │      ├─ [BaseTexture] - A GPU-friendly collection of pixels
 //! &nbsp;  │      │      ├─ [CubeTexture] - 6-sided 2D texture
 //! &nbsp;  │      │      ├─ [Texture] - 2D texture
