@@ -18,8 +18,8 @@ impl D3DCompiler {
     ///                       Use [StandardFileInclude] if you want to resolve `#include`s relative to `source_name`.
     /// *   `entrypoint`    - An optional entrypoint such as `Some("vs_main")`.  Ignored if `target` is `"fx_*"`.
     /// *   `target`        - A target shader profile such as `Some("ps_3_0")`, `Some("vs_5_0")`, `Some("fx_4_0")`, etc.
-    /// *   `flags1`        - [D3DCOMPILE_*](https://docs.microsoft.com/en-us/windows/win32/direct3dhlsl/d3dcompile-constants) constants.
-    /// *   `flags2`        - [D3DCOMPILE_EFFECT_*](https://docs.microsoft.com/en-us/windows/win32/direct3dhlsl/d3dcompile-effect-constants) constants.  Ignored except for `fx_*` targets.
+    /// *   `flags1`        - [Compile]::\* constants.
+    /// *   `flags2`        - [CompileEffect]::\* constants.
     /// *   `secondary_data_flags`  - D3DCOMPILE_SECDATA_* constants.
     /// *   `secondary_data`    - A pointer to secondary data. If you don't pass secondary data, set to [None].
     ///
@@ -47,8 +47,8 @@ impl D3DCompiler {
         include:                impl AsID3DInclude,
         entrypoint:             impl Into<Option<&'s str>>,
         target:                 impl Into<Option<&'s str>>,
-        flags1:                 u32, // TODO: type
-        flags2:                 u32, // TODO: type
+        flags1:                 impl Into<Compile>,
+        flags2:                 impl Into<CompileEffect>,
         secondary_data_flags:   u32, // TODO: type
         secondary_data:         impl Into<Option<&'s [u8]>>,
     ) -> Result<CompileResult, ErrorKind> {
@@ -66,6 +66,8 @@ impl D3DCompiler {
         let target      = target        .as_ref().map_or(null(), |s| s.as_ptr().cast());
 
         let include     = include.as_id3dinclude();
+        let flags1      = flags1.into().into();
+        let flags2      = flags2.into().into();
 
         let secondary_data      = secondary_data.into();
         let secondary_data_len  = secondary_data.map_or(0, |sd| sd.len());

@@ -8,6 +8,7 @@
 
 
 #[path="dll/_dll.rs"]               mod dll;          pub use dll::*;
+#[path="flags/_flags.rs"]           mod flags;        pub use flags::*;
 #[path="interfaces/_interfaces.rs"] mod interfaces;   pub use interfaces::*;
 
 pub use enumerations::*;

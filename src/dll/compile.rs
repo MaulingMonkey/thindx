@@ -18,8 +18,8 @@ impl D3DCompiler {
     ///                       Use [StandardFileInclude] if you want to resolve `#include`s relative to `source_name`.
     /// *   `entrypoint`    - An optional entrypoint such as `Some("main")`.  Ignored if `target` is `fx_*`.
     /// *   `target`        - A target shader profile such as `ps_3_0`, `vs_5_0`, `fx_4_0`, etc.
-    /// *   `flags1`        - [D3DCOMPILE_*](https://docs.microsoft.com/en-us/windows/win32/direct3dhlsl/d3dcompile-constants) constants.
-    /// *   `flags2`        - [D3DCOMPILE_EFFECT_*](https://docs.microsoft.com/en-us/windows/win32/direct3dhlsl/d3dcompile-effect-constants) constants.  Ignored except for `fx_*` targets.
+    /// *   `flags1`        - [Compile]::\* constants.
+    /// *   `flags2`        - [CompileEffect]::\* constants.
     ///
     /// ### Returns
     /// *   Err([ErrorKind::MISSING_DLL_EXPORT])    - `d3dcompiler_39.dll` and earlier
@@ -41,8 +41,8 @@ impl D3DCompiler {
         include:        impl AsID3DInclude,
         entrypoint:     impl Into<Option<&'s str>>,
         target:         impl Into<Option<&'s str>>,
-        flags1:         u32, // TODO: type
-        flags2:         u32, // TODO: type
+        flags1:         impl Into<Compile>,
+        flags2:         impl Into<CompileEffect>,
     ) -> Result<CompileResult, ErrorKind> {
         // Early outs
         let f           = self.D3DCompile.ok_or(ErrorKind::MISSING_DLL_EXPORT)?;
@@ -58,6 +58,8 @@ impl D3DCompiler {
         let target      = target        .as_ref().map_or(null(), |s| s.as_ptr().cast());
 
         let include     = include.as_id3dinclude();
+        let flags1      = flags1.into().into();
+        let flags2      = flags2.into().into();
 
         let mut code   = null_mut();
         let mut errors = null_mut();
