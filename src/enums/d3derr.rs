@@ -244,19 +244,19 @@ impl D3DERR {
 ///
 /// * `0xA.......`  - **S**everity and **C**ustomer bits for [HRESULT](https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-erref/0642cb2f-2075-4469-918c-4441e69c548a)s
 /// * `0x.73D....`  - **T**hin **3D** error codes
-/// * `0x....0001`  - Error codes
+/// * `0x....9001`  - Error codes
 #[allow(overflowing_literals)] impl D3DERR {
-    /// `0xA73D0001`    Large slice passed to D3D API that only accepts a 32-bit length
-    pub const SLICE_OVERFLOW    : D3DERR = D3DERR(0xA73D0001 as _);
+    /// `0xA73D9001`    Large slice passed to D3D API that only accepts a 32-bit length
+    pub const SLICE_OVERFLOW    : D3DERR = D3DERR(0xA73D9001 as _);
 
-    /// `0xA73D0002`    Resource belonging to one [Device] was passed to a different [Device].  To avoid undefined behavior, Direct3D was not called.
-    pub const DEVICE_MISMATCH   : D3DERR = D3DERR(0xA73D0002 as _);
+    /// `0xA73D9002`    Resource belonging to one [Device] was passed to a different [Device].  To avoid undefined behavior, Direct3D was not called.
+    pub const DEVICE_MISMATCH   : D3DERR = D3DERR(0xA73D9002 as _);
 
-    /// `0xA73D0003`    Large allocation was requested.  thin3d9 prevented the request to avoid arithmetic overflows inside of Direct3D / drivers which could lead to undefined behavior.
-    pub const ALLOC_OVERFLOW    : D3DERR = D3DERR(0xA73D0003 as _);
+    /// `0xA73D9003`    Large allocation was requested.  thin3d9 prevented the request to avoid arithmetic overflows inside of Direct3D / drivers which could lead to undefined behavior.
+    pub const ALLOC_OVERFLOW    : D3DERR = D3DERR(0xA73D9003 as _);
 
-    /// `0xA73D0004`    A structure contained some kind of field such as `dwSize` or `iType` that was invalid.
-    pub const INVALID_STRUCT_FIELD : D3DERR = D3DERR(0xA73D0004 as _);
+    /// `0xA73D9004`    A structure contained some kind of field such as `dwSize` or `iType` that was invalid.
+    pub const INVALID_STRUCT_FIELD : D3DERR = D3DERR(0xA73D9004 as _);
 }
 
 
