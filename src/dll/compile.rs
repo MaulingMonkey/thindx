@@ -7,6 +7,8 @@ impl D3DCompiler {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dcompile)\]
     /// D3DCompile
     ///
+    /// Compile HLSL code or an effect file into bytecode for a given target.
+    ///
     /// ### Arguments
     /// *   `src_data`      - The shader source code
     /// *   `source_name`   - An optional shader name such as `Some("myshader.hlsl")` for debug purpouses.
@@ -20,6 +22,7 @@ impl D3DCompiler {
     /// *   `flags2`        - [D3DCOMPILE_EFFECT_*](https://docs.microsoft.com/en-us/windows/win32/direct3dhlsl/d3dcompile-effect-constants) constants.  Ignored except for `fx_*` targets.
     ///
     /// ### Returns
+    /// *   Err([ErrorKind::MISSING_DLL_EXPORT])    - `d3dcompiler_39.dll` and earlier
     /// *   Ok([CompileResult] { code, errors })
     ///
     /// ### Example

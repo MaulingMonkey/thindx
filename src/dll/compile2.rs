@@ -7,11 +7,7 @@ impl D3DCompiler {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dcompile2)\]
     /// D3DCompile2
     ///
-    /// The difference between [compile2](Self::compile2) and [compile](Self::compile) is that [compile2](Self::compile2)
-    /// takes some optional parameters (`secondary_data_flags` and `secondary_data`) that can be used to control some
-    /// aspects of how bytecode is generated.  Refer to the descriptions of these parameters for more details. There is
-    /// no difference otherwise to the efficiency of the bytecode generated between [compile2](Self::compile2) and
-    /// [compile](Self::compile).
+    /// Compiles Microsoft High Level Shader Language (HLSL) code into bytecode for a given target.
     ///
     /// ### Arguments
     /// *   `src_data`      - The shader source code
@@ -28,6 +24,7 @@ impl D3DCompiler {
     /// *   `secondary_data`    - A pointer to secondary data. If you don't pass secondary data, set to [None].
     ///
     /// ### Returns
+    /// *   Err([ErrorKind::MISSING_DLL_EXPORT])    - `d3dcompiler_4?.dll` and earlier
     /// *   Ok([CompileResult] { code, errors })
     ///
     /// ### Example
@@ -35,6 +32,13 @@ impl D3DCompiler {
     /// # use thin3dcompiler::*;
     /// // TODO
     /// ```
+    ///
+    /// ### Remarks
+    /// The difference between [compile2](Self::compile2) and [compile](Self::compile) is that [compile2](Self::compile2)
+    /// takes some optional parameters (`secondary_data_flags` and `secondary_data`) that can be used to control some
+    /// aspects of how bytecode is generated.  Refer to the descriptions of these parameters for more details. There is
+    /// no difference otherwise to the efficiency of the bytecode generated between [compile2](Self::compile2) and
+    /// [compile](Self::compile).
     pub fn compile2<'s>(
         &self,
         src_data:               &[u8],

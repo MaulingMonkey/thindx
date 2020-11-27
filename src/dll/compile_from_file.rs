@@ -11,6 +11,11 @@ impl D3DCompiler {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dcompilefromfile)\]
     /// D3DCompileFromFile
     ///
+    /// > **Note:** You can use this API to develop your Windows Store apps, but you can't use it in apps that you submit to the Windows Store.
+    /// > Refer to the section, "Compiling shaders for UWP", in the remarks for [compile2](Self::compile2).
+    ///
+    /// Compiles Microsoft High Level Shader Language (HLSL) code into bytecode for a given target.
+    ///
     /// ### Arguments
     /// *   `file_name`     - The shader file to compile
     /// *   `defines`       - An optional array of defines.  Use `()` if no extra defines are desired.
@@ -23,6 +28,7 @@ impl D3DCompiler {
     /// *   `flags2`        - [D3DCOMPILE_EFFECT_*](https://docs.microsoft.com/en-us/windows/win32/direct3dhlsl/d3dcompile-effect-constants) constants.  Ignored except for `fx_*` targets.
     ///
     /// ### Returns
+    /// *   Err([ErrorKind::MISSING_DLL_EXPORT])    - `d3dcompiler_4?.dll` and earlier
     /// *   Ok([CompileResult] { code, errors })
     ///
     /// ### Example
