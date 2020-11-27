@@ -4,6 +4,7 @@
 members = [
     ".",
     "doc",
+    "xtask",
 ]
 
 [package]
