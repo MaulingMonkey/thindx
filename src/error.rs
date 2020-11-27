@@ -18,18 +18,30 @@ const D3DERR_WASSTILLDRAWING    : HRESULT = MAKE_D3DHRESULT(540);
 enumish! {
     ErrorKind => HRESULT;
 
+    // ErrorKind
+    MISSING_DLL_EXPORT,
+
+    // D3D11_ERROR
     FILE_NOT_FOUND,
     TOO_MANY_UNIQUE_STATE_OBJECTS,
     TOO_MANY_UNIQUE_VIEW_OBJECTS,
     DEFERRED_CONTEXT_MAP_WITHOUT_INITIAL_DISCARD,
+
+    // D3DERR
     INVALIDCALL,
     WASSTILLDRAWING,
+
+    // DXGI_ERROR
     INVALID_CALL,
     WAS_STILL_DRAWING,
+
+    // E
     FAIL,
     INVALIDARG,
     OUTOFMEMORY,
     NOTIMPL,
+
+    // S
     FALSE,
     OK,
 }
@@ -46,6 +58,11 @@ impl ErrorKind {
             Ok(())
         }
     }
+}
+
+#[allow(overflowing_literals)] impl ErrorKind {
+    /// `0xA73DC001`    This version of `d3dcompiler_##.dll` doesn't support this fn
+    pub const MISSING_DLL_EXPORT : ErrorKind = ErrorKind(0xA73DC001);
 }
 
 impl D3D11_ERROR {

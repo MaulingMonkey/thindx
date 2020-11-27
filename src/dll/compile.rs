@@ -27,6 +27,9 @@ impl D3DCompiler {
     /// # use thin3dcompiler::*;
     /// // TODO
     /// ```
+    ///
+    /// <div class="version"><b>Note:</b> This fn was introduced by d3dcompiler_40.dll, and is unavailable in earlier versions.</div>
+    #[cfg_attr(not(d3dcompiler="40"), deprecated(note = "D3DCompiler::compile wasn't added until d3dcompiler_40.dll"))]
     pub fn compile<'s>(
         &self,
         src_data:       &[u8],
@@ -39,6 +42,7 @@ impl D3DCompiler {
         flags2:         u32, // TODO: type
     ) -> Result<CompileResult, ErrorKind> {
         // Early outs
+        let f           = self.D3DCompile.ok_or(ErrorKind::MISSING_DLL_EXPORT)?;
         let defines     = defines.as_shader_macros()?;
 
         // Note: No error checking occurs for internal `\0`s - they will simply terminate the string earlier than expected.
@@ -54,7 +58,7 @@ impl D3DCompiler {
 
         let mut code   = null_mut();
         let mut errors = null_mut();
-        let hr = unsafe { (self.D3DCompile)(
+        let hr = unsafe { f(
             src_data.as_ptr().cast(), src_data.len(),
             source_name, defines, include, entrypoint, target,
             flags1, flags2, &mut code, &mut errors,

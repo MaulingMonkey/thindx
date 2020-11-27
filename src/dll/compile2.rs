@@ -49,6 +49,7 @@ impl D3DCompiler {
         secondary_data:         impl Into<Option<&'s [u8]>>,
     ) -> Result<CompileResult, ErrorKind> {
         // Early outs
+        let f           = self.D3DCompile2.ok_or(ErrorKind::MISSING_DLL_EXPORT)?;
         let defines     = defines.as_shader_macros()?;
 
         // Note: No error checking occurs for internal `\0`s - they will simply terminate the string earlier than expected.
@@ -68,7 +69,7 @@ impl D3DCompiler {
 
         let mut code   = null_mut();
         let mut errors = null_mut();
-        let hr = unsafe { (self.D3DCompile2)(
+        let hr = unsafe { f(
             src_data.as_ptr().cast(), src_data.len(),
             source_name, defines, include, entrypoint, target,
             flags1, flags2, secondary_data_flags, secondary_data, secondary_data_len,

@@ -14,7 +14,23 @@ mod compile2;       pub use compile2::*;
 /// Lazily-loaded `d3dcompiler_NN.dll`
 #[allow(non_snake_case)] // fn ptrs
 pub struct D3DCompiler {
-    pub(crate) D3DCompile: unsafe extern "system" fn (
+    // d3dcompiler_33.dll only exposes:
+    //      D3DCompileFromMemory
+    //      D3DDisassembleCode
+    //      D3DDisassembleEffect
+    //      D3DGetCodeDebugInfo
+    //      D3DGetInputAndOutputSignatureBlob
+    //      D3DGetInputSignatureBlob
+    //      D3DGetOutputSignatureBlob
+    //      D3DPreprocessFromMemory
+    //      D3DReflectCode
+    //      DebugSetMute
+
+    // ..= D3DCompiler_39.dll
+    // D3DCompileFromMemory
+
+    /// D3DCompiler_40.dll ..=
+    pub(crate) D3DCompile: Option<unsafe extern "system" fn (
         pSrcData:       LPCVOID,
         SrcDataSize:    SIZE_T,
         pSourceName:    LPCSTR,
@@ -26,8 +42,11 @@ pub struct D3DCompiler {
         Flags2:         UINT,
         ppCode:         *mut *mut ID3DBlob,
         ppErrorMsgs:    *mut *mut ID3DBlob,
-    ) -> HRESULT,
-    pub(crate) D3DCompile2: unsafe extern "system" fn (
+    ) -> HRESULT>,
+
+    /// D3DCompiler_47.dll
+    /// Possibly as early as D3DCompiler_44.dll ?  Need more install
+    pub(crate) D3DCompile2: Option<unsafe extern "system" fn (
         pSrcData:           LPCVOID,
         SrcDataSize:        SIZE_T,
         pSourceName:        LPCSTR,
@@ -42,7 +61,7 @@ pub struct D3DCompiler {
         SecondaryDataSize:  SIZE_T,
         ppCode:             *mut *mut ID3DBlob,
         ppErrorMsgs:        *mut *mut ID3DBlob,
-    ) -> HRESULT,
+    ) -> HRESULT>,
 }
 
 impl D3DCompiler {
@@ -50,13 +69,22 @@ impl D3DCompiler {
         let name = format!("d3dcompiler_{}.dll", version);
         let lib = Library::load(name)?;
         unsafe{Ok(Self{
-            D3DCompile:             lib.sym("D3DCompile\0")?,
-            D3DCompile2:            lib.sym("D3DCompile2\0")?,
+            D3DCompile:             lib.sym_opt("D3DCompile\0"),
+            D3DCompile2:            lib.sym_opt("D3DCompile2\0"),
         })}
     }
 }
 
 
+#[test] fn d3dcompiler_nn() {
+    for nn in [
+        // All versions I have installed
+        33, 34, 35, 36, 37, 38, 38, 40, 41, 42, 43, 47,
+    ].iter().copied() {
+        println!("loading d3dcompiler_{}.dll", nn);
+        let _ = D3DCompiler::new(nn).unwrap();
+    }
+}
 
 #[test] fn d3dcompiler_47() {
     let _d3dc47 = D3DCompiler::new(47).unwrap();
