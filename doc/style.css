@@ -1,0 +1,35 @@
+/* Used throughout to better space out impls/methods */
+#main > h3.impl {
+    margin-top:     2.4em;
+}
+
+
+
+/* Highlight ### Safety sections */
+h3[id^="safety"] {
+    background:     rgb(255, 207, 118);
+    color:          black;
+    padding:        6px;
+    border:         none;
+}
+
+h3[id^="safety"] > a {
+    color:          black !important;
+}
+
+
+
+/* Mark inaccurate documentation sourced from other locations */
+.inaccurate {
+    text-decoration:    line-through;
+    opacity:            33%;
+}
+
+
+
+/* Version notes */
+.version {
+    padding:        0.5em 1em;
+    background:     #EEE;
+    border-radius:  0.3em;
+}

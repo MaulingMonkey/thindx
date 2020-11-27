@@ -1,0 +1,49 @@
+# https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[workspace]
+members = [
+    ".",
+]
+
+[package]
+name            = "thin3dcompiler"
+version         = "0.0.0-git"
+authors         = ["MaulingMonkey <git@maulingmonkey.com>"]
+edition         = "2018"
+repository      = "https://github.com/MaulingMonkey/thin3dcompiler"
+documentation   = "https://docs.rs/thin3dcompiler"
+license         = "Apache-2.0 OR MIT"
+readme          = "Readme.md"
+description     = "Thin D3DCompiler wrappers"
+keywords        = ["directx", "direct3d", "d3dcompiler", "hlsl"]
+categories      = ["api-bindings", "graphics", "os::windows-apis", "rendering::graphics-api"]
+exclude         = [".vscode"]
+
+[package.metadata.docs.rs]
+default-target  = "x86_64-pc-windows-msvc"
+targets         = ["x86_64-pc-windows-msvc", "i686-pc-windows-msvc"]
+all-features    = true
+
+[lib]
+path            = "src/_lib.rs"
+
+
+
+[target.'cfg(windows)'.dependencies]
+minidl          = "0.1.0"
+winstr          = "0.0.2"
+mcom            = "0.1.1"
+#mcom            = { git = "https://github.com/MaulingMonkey/mcom" }
+
+[target.'cfg(windows)'.dependencies.winapi]
+version         = "0.3.9"
+features = [
+    # shared
+    "d3dcompiler",
+    "guiddef",
+    "winerror",
+
+    # um
+    "unknwnbase",
+    "windef",
+]
