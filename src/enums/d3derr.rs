@@ -233,6 +233,9 @@ impl D3DERR {
 #[allow(overflowing_literals)] impl D3DERR {
     /// Ran out of memory.
     pub const OUTOFMEMORY               : D3DERR = D3DERR(E_OUTOFMEMORY);
+
+    /// No such interface supported.
+    pub const NOINTERFACE               : D3DERR = D3DERR(E_NOINTERFACE);
 }
 
 
@@ -314,6 +317,7 @@ impl D3DERR {
             D3DERR::COMMAND_UNPARSED            => Some(("D3DERR_COMMAND_UNPARSED",             "The command was unparsed.")),
 
             D3DERR::OUTOFMEMORY                 => Some(("E_OUTOFMEMORY",                       "Ran out of memory")),
+            D3DERR::NOINTERFACE                 => Some(("E_NOINTERFACE",                       "No such interface supported")),
 
             D3DERR::SLICE_OVERFLOW              => Some(("THIN3DERR_SLICE_OVERFLOW",        "Large slice passed to D3D API that only accepts a 32-bit length")),
             D3DERR::DEVICE_MISMATCH             => Some(("THIN3DERR_DEVICE_MISMATCH",       "Resource belonging to one Device was passed to a different Device.  To avoid undefined behavior, Direct3D was not called.")),

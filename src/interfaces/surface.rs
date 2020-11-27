@@ -2,8 +2,9 @@
 
 use crate::*;
 
+use winapi::Interface;
 use winapi::shared::d3d9types::*;
-use winapi::shared::windef::RECT;
+use winapi::shared::windef::{RECT, HDC};
 
 use std::convert::TryInto;
 use std::ptr::{null, null_mut};
@@ -205,6 +206,188 @@ impl Device {
         MethodError::check("IDirect3DDevice9::ColorFill", hr)
     }
 }
+
+
+
+impl Surface {
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3dsurface9-getcontainer)\]
+    /// IDirect3DSurface9::GetContainer
+    ///
+    /// Provides access to the parent cube texture or texture (mipmap) object, if this surface is a child level of a cube texture or a mipmap. This method can also provide access to the parent swap chain if the surface is a back-buffer child.
+    ///
+    /// ### Returns
+    /// *   [D3DERR::INVALIDCALL]
+    /// *   [D3DERR::NOINTERFACE]   The container doesn't implement `C`'s interface.
+    /// *   Ok(`C`)
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use doc::*; let device = Device::test();
+    /// # let texture = device.create_texture(128, 128, 8, Usage::None, Format::A8R8G8B8, Pool::Managed, ()).unwrap();
+    /// # let surface = texture.get_surface_level(0).unwrap();
+    /// let texture = surface.get_container::<Texture>().unwrap();
+    /// assert_eq!(D3DERR::NOINTERFACE, surface.get_container::<Device>().err());
+    /// ```
+    pub fn get_container<C: Raw>(&self) -> Result<C, MethodError> where C::Raw : Interface {
+        let mut container = null_mut();
+        let hr = unsafe { self.0.GetContainer(&C::Raw::uuidof(), &mut container) };
+        MethodError::check("IDirect3DVolume9::GetContainer", hr)?;
+        Ok(unsafe { C::from_raw(container.cast()) })
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3dsurface9-getdc)\]
+    /// IDirect3DSurface9::GetDC
+    ///
+    /// Retrieves a device context.
+    ///
+    /// ### Returns
+    /// *   [D3DERR::INVALIDCALL]   If a device context was already retrieved
+    /// *   Ok([HDC])
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use doc::*; let device = Device::test();
+    /// # let texture = device.create_texture(128, 128, 8, Usage::None, Format::A8R8G8B8, Pool::Managed, ()).unwrap();
+    /// # let surface = texture.get_surface_level(0).unwrap();
+    /// let dc = surface.get_dc().unwrap();
+    /// assert!(!dc.is_null());
+    ///
+    /// assert_eq!(D3DERR::INVALIDCALL, surface.get_dc().err(), "HDC already acquired");
+    /// ```
+    pub fn get_dc(&self) -> Result<HDC, MethodError> {
+        let mut hdc = null_mut();
+        let hr = unsafe { self.0.GetDC(&mut hdc) };
+        MethodError::check("IDirect3DSurface9::GetDC", hr)?;
+        Ok(hdc)
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3dsurface9-getdesc)\]
+    /// IDirect3DSurface9::GetDesc
+    ///
+    /// Retrieves a description of the surface.
+    ///
+    /// ### Returns
+    /// *   [D3DERR::INVALIDCALL]
+    /// *   Ok([SurfaceDesc])
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use doc::*; let device = Device::test();
+    /// let texture = device.create_texture(128, 128, 8, Usage::None, Format::A8R8G8B8, Pool::Managed, ()).unwrap();
+    /// let surface = texture.get_surface_level(0).unwrap();
+    /// let desc : SurfaceDesc = surface.get_desc().unwrap();
+    /// assert_eq!(desc.width,  128);
+    /// assert_eq!(desc.height, 128);
+    /// // ...
+    /// ```
+    pub fn get_desc(&self) -> Result<SurfaceDesc, MethodError> {
+        let mut desc = SurfaceDesc::default();
+        let hr = unsafe { self.0.GetDesc(&mut *desc) };
+        MethodError::check("IDirect3DSurface9::GetDesc", hr)?;
+        Ok(desc)
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3dsurface9-lockrect)\]
+    /// IDirect3DSurface9::LockRect
+    ///
+    /// Locks a rectangle on a surface.
+    ///
+    /// ### Returns
+    /// *   [D3DERR::INVALIDCALL]
+    /// *   Ok([D3DLOCKED_RECT])
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use doc::*; let device = Device::test();
+    /// let texture = device.create_texture(128, 128, 8, Usage::None, Format::A8R8G8B8, Pool::Managed, ()).unwrap();
+    /// let surface = texture.get_surface_level(0).unwrap();
+    /// let data = [[Color::argb(0xFF112233); 128]; 128];
+    /// unsafe {
+    ///     let lock = surface.lock_rect_unchecked(.., Lock::None).unwrap();
+    ///     for y in 0..128 {
+    ///         let src = data[y].as_ptr();
+    ///         let dst = (lock.pBits as *mut u8).add(y * lock.Pitch as usize);
+    ///         std::ptr::copy(src, dst.cast(), 128);
+    ///     }
+    ///     surface.unlock_rect();
+    /// }
+    /// ```
+    pub unsafe fn lock_rect_unchecked(&self, rect: impl IntoRectOrFull, flags: impl Into<Lock>) -> Result<D3DLOCKED_RECT, MethodError> {
+        let rect = rect.into_rect();
+        let rect = rect.as_ref().map_or(null(), |b| &**b);
+        let mut locked = std::mem::zeroed::<D3DLOCKED_RECT>();
+        let hr = self.0.LockRect(&mut locked, rect.cast(), flags.into().into());
+        MethodError::check("IDirect3DSurface9::LockRect", hr)?;
+        Ok(locked)
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3dsurface9-releasedc)\]
+    /// IDirect3DSurface9::ReleaseDC
+    ///
+    /// Release a device context handle.
+    ///
+    /// ### Returns
+    /// *   [D3DERR::INVALIDCALL]
+    /// *   Ok(`()`)
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use doc::*; let device = Device::test();
+    /// # let texture = device.create_texture(128, 128, 8, Usage::None, Format::A8R8G8B8, Pool::Managed, ()).unwrap();
+    /// # let surface = texture.get_surface_level(0).unwrap();
+    /// let dc = surface.get_dc().unwrap();
+    /// assert!(!dc.is_null());
+    ///
+    /// assert_eq!(D3DERR::INVALIDCALL, surface.get_dc().err(), "HDC already acquired");
+    /// assert_eq!(D3DERR::INVALIDCALL, surface.release_dc(42 as _).err(), "not the right HDC");
+    ///
+    /// surface.release_dc(dc).unwrap();
+    /// let dc = surface.get_dc().unwrap();
+    /// surface.release_dc(dc).unwrap();
+    /// ```
+    pub fn release_dc(&self, hdc: HDC) -> Result<(), MethodError> {
+        let hr = unsafe { self.0.ReleaseDC(hdc) };
+        MethodError::check("IDirect3DSurface9::ReleaseDC", hr)
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3dsurface9-unlockrect)\]
+    /// IDirect3DSurface9::UnlockRect
+    ///
+    /// Unlocks a rectangle on a surface.
+    ///
+    /// ### Returns
+    /// *   [D3DERR::INVALIDCALL]
+    /// *   Ok(`()`)
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use doc::*; let device = Device::test();
+    /// let texture = device.create_texture(128, 128, 8, Usage::None, Format::A8R8G8B8, Pool::Managed, ()).unwrap();
+    /// let surface = texture.get_surface_level(0).unwrap();
+    /// let data = [[Color::argb(0xFF112233); 128]; 128];
+    /// unsafe {
+    ///     let lock = surface.lock_rect_unchecked(.., Lock::None).unwrap();
+    ///     for y in 0..128 {
+    ///         let src = data[y].as_ptr();
+    ///         let dst = (lock.pBits as *mut u8).add(y * lock.Pitch as usize);
+    ///         std::ptr::copy(src, dst.cast(), 128);
+    ///     }
+    ///     surface.unlock_rect();
+    /// }
+    /// ```
+    pub fn unlock_rect(&self) -> Result<(), MethodError> {
+        let hr = unsafe { self.0.UnlockRect() };
+        MethodError::check("IDirect3DSurface9::UnlockRect", hr)
+    }
+}
+
+
 
 // #[test] fn create_depth_stencil_surface() {} // TODO
 // #[test] fn create_offscreen_plain_surface() {} // TODO
