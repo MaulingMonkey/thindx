@@ -18,6 +18,7 @@ mod create_blob;                    pub use create_blob::*;
 mod create_function_linking_graph;  pub use create_function_linking_graph::*;
 mod create_linker;                  pub use create_linker::*;
 
+mod read_file_to_blob;              pub use read_file_to_blob::*;
 mod reflect;                        pub use reflect::*;
 mod reflect_library;                pub use reflect_library::*;
 mod set_blob_part;                  pub use set_blob_part::*;
@@ -115,7 +116,11 @@ pub struct D3DCompiler {
     // TODO: D3DGetTraceInstructionOffsets
     // TODO: D3DLoadModule
     // TODO: D3DPreprocess
-    // TODO: D3DReadFileToBlob
+
+    pub(crate) D3DReadFileToBlob: Option<unsafe extern "system" fn (
+        pFileName:          LPCWSTR,
+        ppContents:         *mut *mut ID3DBlob,
+    ) -> HRESULT>,
 
     pub(crate) D3DReflect: Option<unsafe extern "system" fn (
         pSrcData:           LPCVOID,

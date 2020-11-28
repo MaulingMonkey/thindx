@@ -28,6 +28,7 @@ impl D3DCompiler {
             D3DCreateFunctionLinkingGraph:  lib.sym_opt("D3DCreateFunctionLinkingGraph\0"),
             D3DCreateLinker:        lib.sym_opt("D3DCreateLinker\0"),
 
+            D3DReadFileToBlob:      lib.sym_opt("D3DReadFileToBlob\0"),
             D3DReflect:             lib.sym_opt("D3DReflect\0"),
             D3DReflectLibrary:      lib.sym_opt("D3DReflectLibrary\0"),
             D3DSetBlobPart:         lib.sym_opt("D3DSetBlobPart\0"),
