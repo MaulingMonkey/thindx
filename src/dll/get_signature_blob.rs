@@ -43,7 +43,7 @@ impl D3DCompiler {
     /// > unavailable for releases after Windows 8.1. Instead use [get_glob_part](Self::get_blob_part) with the
     /// > [Blob::InputSignatureBlob] value.
     ///
-    /// Gets the input and output signatures from a compilation result.
+    /// Gets the input signature from a compilation result.
     ///
     /// ### Returns
     /// *   Ok([ReadOnlyBlob])
@@ -76,7 +76,7 @@ impl D3DCompiler {
     /// > unavailable for releases after Windows 8.1. Instead use [get_glob_part](Self::get_blob_part) with the
     /// > [Blob::OutputSignatureBlob] value.
     ///
-    /// Gets the input and output signatures from a compilation result.
+    /// Gets the output signature from a compilation result.
     ///
     /// ### Returns
     /// *   Ok([ReadOnlyBlob])
