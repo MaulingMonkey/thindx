@@ -94,6 +94,7 @@ pub struct CompileResult {
 
 
 
+/// { kind: [ErrorKind], shader: Option&lt;[ReadOnlyBlob]&gt;, errors: Option&lt;[ReadOnlyBlob]&gt; }
 pub struct CompileError {
     pub kind:       ErrorKind,
     pub shader:     Option<ReadOnlyBlob>, // may or may not have generated a shader blob despite errors
