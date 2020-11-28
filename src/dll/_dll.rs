@@ -17,17 +17,7 @@ mod create_blob;                    pub use create_blob::*;
 /// Lazily-loaded `d3dcompiler_NN.dll`
 #[allow(non_snake_case)] // fn ptrs
 pub struct D3DCompiler {
-    // d3dcompiler_33.dll only exposes:
-    //      D3DCompileFromMemory
-    //      D3DDisassembleCode
-    //      D3DDisassembleEffect
-    //      D3DGetCodeDebugInfo
-    //      D3DGetInputAndOutputSignatureBlob
-    //      D3DGetInputSignatureBlob
-    //      D3DGetOutputSignatureBlob
-    //      D3DPreprocessFromMemory
-    //      D3DReflectCode
-    //      DebugSetMute
+    // https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/
 
     // ..= D3DCompiler_39.dll
     // D3DCompileFromMemory
@@ -93,6 +83,27 @@ pub struct D3DCompiler {
         Size:               SIZE_T,
         ppBlob:             *mut *mut ID3DBlob,
     ) -> HRESULT>,
+
+    // TODO: D3DCreateFunctionLinkingGraph
+    // TODO: D3DCreateLinker
+    // TODO: D3DDecompressShaders
+    // TODO: D3DDisassemble
+    // TODO: D3DDisassemble10Effect
+    // TODO: D3DDisassembleRegion
+    // TODO: D3DGetBlobPart
+    // TODO: D3DGetDebugInfo
+    // TODO: D3DGetInputAndOutputSignatureBlob
+    // TODO: D3DGetInputSignatureBlob
+    // TODO: D3DGetOutputSignatureBlob
+    // TODO: D3DGetTraceInstructionOffsets
+    // TODO: D3DLoadModule
+    // TODO: D3DPreprocess
+    // TODO: D3DReadFileToBlob
+    // TODO: D3DReflect
+    // TODO: D3DReflectLibrary
+    // TODO: D3DSetBlobPart
+    // TODO: D3DStripShader
+    // TODO: D3DWriteBlobToFile
 }
 
 impl D3DCompiler {
