@@ -23,7 +23,7 @@ impl D3DCompiler {
     /// ### Example
     /// ```rust
     /// # use thin3dcompiler::*; let compiler = D3DCompiler::new(47).unwrap();
-    /// # let shader : ReadOnlyBlob = compiler.compile_from_file(r"test\data\basic.hlsl", (), (), "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap().shader;
+    /// # let shader : ReadOnlyBlob = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap().shader;
     /// compiler.set_blob_part(shader.get_buffer(), Blob::PrivateData, (), "testing 123".as_bytes()).unwrap();
     /// ```
     ///

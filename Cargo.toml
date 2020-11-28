@@ -30,6 +30,7 @@ path            = "src/_lib.rs"
 
 
 [target.'cfg(windows)'.dependencies]
+void            = "=1.0.2"
 minidl          = "0.1.0"
 winstr          = "0.0.2"
 mcom            = "0.1.1"

@@ -30,8 +30,8 @@ impl D3DCompiler {
     /// ```rust
     /// # use thin3dcompiler::*; let compiler = D3DCompiler::new(47).unwrap();
     /// let basic_hlsl = std::fs::read(r"test\data\basic.hlsl").unwrap();
-    /// let ps = compiler.compile2(&basic_hlsl, r"test\data\basic.hlsl", (), (), "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None, CompileSecData::None, None).unwrap();
-    /// let vs = compiler.compile2(&basic_hlsl, r"test\data\basic.hlsl", (), (), "vs_main", "vs_4_0", Compile::Debug, CompileEffect::None, CompileSecData::None, None).unwrap();
+    /// let ps = compiler.compile2(&basic_hlsl, r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None, CompileSecData::None, None).unwrap();
+    /// let vs = compiler.compile2(&basic_hlsl, r"test\data\basic.hlsl", None, None, "vs_main", "vs_4_0", Compile::Debug, CompileEffect::None, CompileSecData::None, None).unwrap();
     /// ```
     ///
     /// ### Remarks

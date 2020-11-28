@@ -25,7 +25,7 @@ impl D3DCompiler {
     /// ```rust
     /// # use thin3dcompiler::*; let compiler = D3DCompiler::new(47).unwrap();
     /// // TODO: figure out what reflect actually takes and demo that.
-    /// let ps = compiler.compile_from_file(r"test\data\basic.hlsl", (), (), "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap();
+    /// let ps = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap();
     /// let r = compiler.reflect::<d3d11::ShaderReflection>(ps.shader.get_buffer()).unwrap();
     ///
     /// // Invalid interface:

@@ -26,7 +26,7 @@ impl D3DCompiler {
     /// ```rust
     /// # use thin3dcompiler::*; let compiler = D3DCompiler::new(47).unwrap();
     /// let basic_hlsl = std::fs::read(r"test\data\basic.hlsl").unwrap();
-    /// let ps = compiler.preprocess(&basic_hlsl, r"test\data\basic.hlsl", (), ()).unwrap();
+    /// let ps = compiler.preprocess(&basic_hlsl, r"test\data\basic.hlsl", (), None).unwrap();
     /// println!("{}", String::from_utf8_lossy(ps.shader.get_buffer()));
     /// ```
     ///

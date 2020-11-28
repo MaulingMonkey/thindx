@@ -18,7 +18,7 @@ impl D3DCompiler {
     /// ### Example
     /// ```rust
     /// # use thin3dcompiler::*; let compiler = D3DCompiler::new(47).unwrap();
-    /// # let shader = compiler.compile_from_file(r"test\data\basic.hlsl", (), (), "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap().shader;
+    /// # let shader = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap().shader;
     /// let signature = compiler.get_input_and_output_signature_blob(shader.get_buffer()).unwrap();
     /// println!("{:?}", signature.get_buffer());
     /// ```
@@ -51,7 +51,7 @@ impl D3DCompiler {
     /// ### Example
     /// ```rust
     /// # use thin3dcompiler::*; let compiler = D3DCompiler::new(47).unwrap();
-    /// # let shader = compiler.compile_from_file(r"test\data\basic.hlsl", (), (), "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap().shader;
+    /// # let shader = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap().shader;
     /// let signature = compiler.get_input_signature_blob(shader.get_buffer()).unwrap();
     /// println!("{:?}", signature.get_buffer());
     /// ```
@@ -84,7 +84,7 @@ impl D3DCompiler {
     /// ### Example
     /// ```rust
     /// # use thin3dcompiler::*; let compiler = D3DCompiler::new(47).unwrap();
-    /// # let shader = compiler.compile_from_file(r"test\data\basic.hlsl", (), (), "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap().shader;
+    /// # let shader = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap().shader;
     /// let signature = compiler.get_output_signature_blob(shader.get_buffer()).unwrap();
     /// println!("{:?}", signature.get_buffer());
     /// ```

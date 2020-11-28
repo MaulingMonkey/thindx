@@ -21,7 +21,7 @@ impl D3DCompiler {
     /// ### Example
     /// ```rust
     /// # use thin3dcompiler::*; let compiler = D3DCompiler::new(47).unwrap();
-    /// let ps : CompileResult = compiler.compile_from_file(r"test\data\basic.hlsl", (), (), "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap();
+    /// let ps : CompileResult = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap();
     /// let ps : ReadOnlyBlob = compiler.strip_shader(ps.shader.get_buffer(), CompilerStripFlags::DebugInfo).unwrap();
     /// ```
     ///

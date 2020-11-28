@@ -33,8 +33,8 @@ impl D3DCompiler {
     /// ### Example
     /// ```rust
     /// # use thin3dcompiler::*; let compiler = D3DCompiler::new(47).unwrap();
-    /// let ps = compiler.compile_from_file(r"test\data\basic.hlsl", (), (), "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap();
-    /// let vs = compiler.compile_from_file(r"test\data\basic.hlsl", (), (), "vs_main", "vs_4_0", Compile::Debug, CompileEffect::None).unwrap();
+    /// let ps = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap();
+    /// let vs = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "vs_main", "vs_4_0", Compile::Debug, CompileEffect::None).unwrap();
     /// ```
     ///
     /// <div class="note"><b>Note:</b> You can use this API to develop your Windows Store apps, but you can't use it in apps that you submit to the Windows Store.</div>

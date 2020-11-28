@@ -17,7 +17,7 @@ impl D3DCompiler {
     /// ### Example
     /// ```rust
     /// # use thin3dcompiler::*; let compiler = D3DCompiler::new(47).unwrap();
-    /// # let shader = compiler.compile_from_file(r"test\data\basic.hlsl", (), (), "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap().shader;
+    /// # let shader = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap().shader;
     /// println!("{}", compiler.get_trace_instruction_offsets_count(shader.get_buffer(), GetInstOffsets::None, 0, !0).unwrap());
     /// ```
     ///
@@ -54,7 +54,7 @@ impl D3DCompiler {
     /// ### Example
     /// ```rust
     /// # use thin3dcompiler::*; let compiler = D3DCompiler::new(47).unwrap();
-    /// # let shader = compiler.compile_from_file(r"test\data\basic.hlsl", (), (), "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap().shader;
+    /// # let shader = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap().shader;
     /// let mut offsets = [0; 128];
     /// let offsets = compiler.get_trace_instruction_offsets_inplace(shader.get_buffer(), GetInstOffsets::None, 0, &mut offsets).unwrap();
     /// println!("{:?}", offsets);
@@ -93,7 +93,7 @@ impl D3DCompiler {
     /// ### Example
     /// ```rust
     /// # use thin3dcompiler::*; let compiler = D3DCompiler::new(47).unwrap();
-    /// # let shader = compiler.compile_from_file(r"test\data\basic.hlsl", (), (), "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap().shader;
+    /// # let shader = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap().shader;
     /// let offsets = compiler.get_trace_instruction_offsets(shader.get_buffer(), GetInstOffsets::None, 0, !0).unwrap();
     /// println!("{:?}", offsets);
     /// ```

@@ -21,7 +21,7 @@ impl D3DCompiler {
     /// ```rust,no_run
     /// # use thin3dcompiler::*; let compiler = D3DCompiler::new(47).unwrap();
     /// # let shader_src = std::fs::read(r"test\data\basic.hlsl").unwrap();
-    /// # let compiled_shader = compiler.compile_from_file(r"test\data\basic.hlsl", (), (), "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap().shader;
+    /// # let compiled_shader = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap().shader;
     /// // TODO: This doesn't seem to work?
     ///
     /// let debug_info = compiler.get_debug_info(&shader_src).unwrap();
