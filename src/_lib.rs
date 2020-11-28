@@ -25,4 +25,4 @@ mod traits {
     mod raw;                    pub use raw::*;
 }
 
-mod error;                      pub use error::*;
+mod error_kind;                 pub use error_kind::*;
