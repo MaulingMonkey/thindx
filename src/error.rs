@@ -19,11 +19,23 @@ pub struct Error {
 impl Error {
     pub fn kind(&self) -> ErrorKind { self.kind }
 
+    pub(crate) fn check(method: &'static str, hr: HRESULT) -> Result<(), Self> {
+        if !SUCCEEDED(hr) {
+            Err(Self {
+                kind:   ErrorKind(hr),
+                method: Some(method),
+                errors: None,
+            })
+        } else {
+            Ok(())
+        }
+    }
+
     /// ### Safety
     ///
     /// * If `!SUCCEEDED(hr)`, this accesses and takes over ownership of `errors` and returns `Err(...)`.
     /// * Otherwise, `errors` is left untouched.
-    pub(crate) unsafe fn check(method: &'static str, hr: HRESULT, errors: *mut ID3DBlob) -> Result<(), Self> {
+    pub(crate) unsafe fn check_blob(method: &'static str, hr: HRESULT, errors: *mut ID3DBlob) -> Result<(), Self> {
         if !SUCCEEDED(hr) {
             let errors = ReadOnlyBlob::from_raw_opt(errors);
             Err(Self {

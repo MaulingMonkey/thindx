@@ -88,7 +88,7 @@ impl FunctionLinkingGraph {
         let mut module = null_mut();
         let mut errors = null_mut();
         let hr = unsafe { self.0.CreateModuleInstance(&mut module, &mut errors) };
-        unsafe { Error::check("ID3D11FunctionLinkingGraph::CreateModuleInstance", hr, errors)? };
+        unsafe { Error::check_blob("ID3D11FunctionLinkingGraph::CreateModuleInstance", hr, errors)? };
         let module = unsafe { ModuleInstance::from_raw(module) };
         let errors = unsafe { ReadOnlyBlob::from_raw_opt(errors) };
         Ok((module, errors))

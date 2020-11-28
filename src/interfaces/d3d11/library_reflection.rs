@@ -3,8 +3,6 @@ use crate::d3d11::*;
 
 use winapi::um::d3d11shader::*;
 
-use std::ptr::*;
-
 
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11libraryreflection)\]
@@ -22,7 +20,7 @@ impl LibraryReflection {
     pub fn get_desc(&self) -> Result<D3D11_LIBRARY_DESC, Error> {
         let mut desc = unsafe { std::mem::zeroed::<D3D11_LIBRARY_DESC>() }; // TODO: structify?
         let hr = unsafe { self.0.GetDesc(&mut desc) };
-        unsafe { Error::check("ID3D11LibraryReflection::GetDesc", hr, null_mut()) }?;
+        Error::check("ID3D11LibraryReflection::GetDesc", hr)?;
         Ok(desc)
     }
 
