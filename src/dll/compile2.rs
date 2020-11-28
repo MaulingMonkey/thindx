@@ -19,7 +19,7 @@ impl D3DCompiler {
     /// *   `target`        - A target shader profile such as `Some("ps_3_0")`, `Some("vs_5_0")`, `Some("fx_4_0")`, etc.
     /// *   `flags1`        - [Compile]::\* constants.
     /// *   `flags2`        - [CompileEffect]::\* constants.
-    /// *   `secondary_data_flags`  - D3DCOMPILE_SECDATA_* constants.
+    /// *   `secondary_data_flags`  - [CompileSecData]::\* constants.
     /// *   `secondary_data`    - A pointer to secondary data. If you don't pass secondary data, set to [None].
     ///
     /// ### Returns
@@ -30,8 +30,8 @@ impl D3DCompiler {
     /// ```rust
     /// # use thin3dcompiler::*; let compiler = D3DCompiler::new(47).unwrap();
     /// let basic_hlsl = std::fs::read(r"test\data\basic.hlsl").unwrap();
-    /// let ps = compiler.compile2(&basic_hlsl, r"test\data\basic.hlsl", (), (), "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None, 0, None).unwrap();
-    /// let vs = compiler.compile2(&basic_hlsl, r"test\data\basic.hlsl", (), (), "vs_main", "vs_4_0", Compile::Debug, CompileEffect::None, 0, None).unwrap();
+    /// let ps = compiler.compile2(&basic_hlsl, r"test\data\basic.hlsl", (), (), "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None, CompileSecData::None, None).unwrap();
+    /// let vs = compiler.compile2(&basic_hlsl, r"test\data\basic.hlsl", (), (), "vs_main", "vs_4_0", Compile::Debug, CompileEffect::None, CompileSecData::None, None).unwrap();
     /// ```
     ///
     /// ### Remarks
@@ -50,7 +50,7 @@ impl D3DCompiler {
         target:                 impl Into<Option<&'s str>>,
         flags1:                 impl Into<Compile>,
         flags2:                 impl Into<CompileEffect>,
-        secondary_data_flags:   u32, // TODO: type
+        secondary_data_flags:   impl Into<CompileSecData>,
         secondary_data:         impl Into<Option<&'s [u8]>>,
     ) -> Result<CompileResult, CompileError> {
         // Early outs
@@ -69,6 +69,7 @@ impl D3DCompiler {
         let include     = include.as_id3dinclude();
         let flags1      = flags1.into().into();
         let flags2      = flags2.into().into();
+        let secondary_data_flags = secondary_data_flags.into().into();
 
         let secondary_data      = secondary_data.into();
         let secondary_data_len  = secondary_data.map_or(0, |sd| sd.len());
