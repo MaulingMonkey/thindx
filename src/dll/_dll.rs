@@ -1,4 +1,5 @@
 use winapi::shared::basetsd::*;
+use winapi::shared::guiddef::*;
 use winapi::shared::minwindef::*;
 use winapi::shared::ntdef::*;
 
@@ -17,6 +18,7 @@ mod create_blob;                    pub use create_blob::*;
 mod create_function_linking_graph;  pub use create_function_linking_graph::*;
 mod create_linker;                  pub use create_linker::*;
 
+mod reflect_library;                pub use reflect_library::*;
 mod set_blob_part;                  pub use set_blob_part::*;
 mod strip_shader;                   pub use strip_shader::*;
 mod write_blob_to_file;             pub use write_blob_to_file::*;
@@ -114,7 +116,13 @@ pub struct D3DCompiler {
     // TODO: D3DPreprocess
     // TODO: D3DReadFileToBlob
     // TODO: D3DReflect
-    // TODO: D3DReflectLibrary
+
+    pub(crate) D3DReflectLibrary: Option<unsafe extern "system" fn (
+        pSrcData:           LPCVOID,
+        SrcDataSize:        SIZE_T,
+        riid:               REFIID,
+        ppReflector:        *mut LPVOID,
+    ) -> HRESULT>,
 
     pub(crate) D3DSetBlobPart: Option<unsafe extern "system" fn (
         pSrcData:           LPCVOID,
