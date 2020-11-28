@@ -37,19 +37,19 @@ enumish! {
 
     /// The blob part is program database (PDB) information.
     ///
-    /// <div class="version"><b>Note:</b> This value is supported by the d3dcompiler_44.dll or later version of the file.</div>
+    /// <div class="note"><b>Note:</b> This value is supported by the d3dcompiler_44.dll or later version of the file.</div>
     #[cfg_attr(not(d3dcompiler="44"), deprecated(note = "Blob::Pdb wasn't added until d3dcompiler_44.dll"))]
     pub const Pdb                              : Blob = Blob(D3D_BLOB_PDB);
 
     /// The blob part is private data.
     ///
-    /// <div class="version"><b>Note:</b> This value is supported by the d3dcompiler_44.dll or later version of the file.</div>
+    /// <div class="note"><b>Note:</b> This value is supported by the d3dcompiler_44.dll or later version of the file.</div>
     #[cfg_attr(not(d3dcompiler="44"), deprecated(note = "Blob::PrivateData wasn't added until d3dcompiler_44.dll"))]
     pub const PrivateData                      : Blob = Blob(D3D_BLOB_PRIVATE_DATA);
 
     /// The blob part is a root signature. Refer to [Specifying Root Signatures in HLSL] for more information on using Direct3D12 with HLSL.
     ///
-    /// <div class="version"><b>Note:</b> This value is supported by the d3dcompiler_47.dll or later version of the file.</div>
+    /// <div class="note"><b>Note:</b> This value is supported by the d3dcompiler_47.dll or later version of the file.</div>
     ///
     /// [Specifying Root Signatures in HLSL]:   https://docs.microsoft.com/en-us/windows/desktop/direct3d12/specifying-root-signatures-in-hlsl
     #[cfg_attr(not(d3dcompiler="47"), deprecated(note = "Blob::RootSignature wasn't added until d3dcompiler_47.dll"))]
@@ -58,26 +58,26 @@ enumish! {
     /// The blob part is the debug name of the shader. If the application does not specify the debug name itself,
     /// an auto-generated name matching the PDB file of the shader is provided instead.
     ///
-    /// <div class="version"><b>Note:</b> This value is supported by the d3dcompiler_47.dll, as available on the Windows 10 Fall Creators Update and its SDK, or later version of the file.</div>
+    /// <div class="note"><b>Note:</b> This value is supported by the d3dcompiler_47.dll, as available on the Windows 10 Fall Creators Update and its SDK, or later version of the file.</div>
     #[cfg_attr(not(d3dcompiler="47"), deprecated(note = "Blob::DebugName wasn't added until d3dcompiler_47.dll"))]
     pub const DebugName                        : Blob = Blob(D3D_BLOB_DEBUG_NAME);
 
-    /// <div class="version"><b>Note:</b> This value identifies a test part and is only produced by special compiler versions. Therefore, this part type is typically not present in shaders.</div>
+    /// <div class="note"><b>Note:</b> This value identifies a test part and is only produced by special compiler versions. Therefore, this part type is typically not present in shaders.</div>
     #[cfg_attr(not(d3dcompiler="test"), deprecated(note = "Blob::TestAlternateShader is only produced by special compiler versions."))]
     pub const TestAlternateShader              : Blob = Blob(D3D_BLOB_TEST_ALTERNATE_SHADER);
 
 
-    /// <div class="version"><b>Note:</b> This value identifies a test part and is only produced by special compiler versions. Therefore, this part type is typically not present in shaders.</div>
+    /// <div class="note"><b>Note:</b> This value identifies a test part and is only produced by special compiler versions. Therefore, this part type is typically not present in shaders.</div>
     #[cfg_attr(not(d3dcompiler="test"), deprecated(note = "Blob::TestCompileDetails is only produced by special compiler versions."))]
     pub const TestCompileDetails               : Blob = Blob(D3D_BLOB_TEST_COMPILE_DETAILS);
 
 
-    /// <div class="version"><b>Note:</b> This value identifies a test part and is only produced by special compiler versions. Therefore, this part type is typically not present in shaders.</div>
+    /// <div class="note"><b>Note:</b> This value identifies a test part and is only produced by special compiler versions. Therefore, this part type is typically not present in shaders.</div>
     #[cfg_attr(not(d3dcompiler="test"), deprecated(note = "Blob::TestCompilePerf is only produced by special compiler versions."))]
     pub const TestCompilePerf                  : Blob = Blob(D3D_BLOB_TEST_COMPILE_PERF);
 
 
-    /// <div class="version"><b>Note:</b> This value identifies a test part and is only produced by special compiler versions. Therefore, this part type is typically not present in shaders.</div>
+    /// <div class="note"><b>Note:</b> This value identifies a test part and is only produced by special compiler versions. Therefore, this part type is typically not present in shaders.</div>
     #[cfg_attr(not(d3dcompiler="test"), deprecated(note = "Blob::TestCompileReport is only produced by special compiler versions."))]
     pub const TestCompileReport                : Blob = Blob(D3D_BLOB_TEST_COMPILE_REPORT);
 }

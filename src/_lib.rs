@@ -11,16 +11,11 @@
 #[path="dll/_dll.rs"]               mod dll;          pub use dll::*;
 #[path="flags/_flags.rs"]           mod flags;        pub use flags::*;
 #[path="interfaces/_interfaces.rs"] mod interfaces;   pub use interfaces::*;
+#[path="structures/_structures.rs"] mod structures;   pub use structures::*;
 
 pub use enumerations::*;
 mod enumerations {
     mod blob_part;              pub use blob_part::*;
-}
-
-
-pub use structures::*;
-mod structures {
-    mod shader_data;            pub use shader_data::*;
 }
 
 pub use traits::*;

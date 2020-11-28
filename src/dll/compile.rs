@@ -31,7 +31,7 @@ impl D3DCompiler {
     /// // TODO
     /// ```
     ///
-    /// <div class="version"><b>Note:</b> This fn was introduced by d3dcompiler_40.dll, and is unavailable in earlier versions.</div>
+    /// <div class="note"><b>Note:</b> This fn was introduced by d3dcompiler_40.dll, and is unavailable in earlier versions.</div>
     #[cfg_attr(not(d3dcompiler="40"), deprecated(note = "D3DCompiler::compile wasn't added until d3dcompiler_40.dll"))]
     pub fn compile<'s>(
         &self,

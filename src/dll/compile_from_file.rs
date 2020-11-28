@@ -36,6 +36,8 @@ impl D3DCompiler {
     /// # use thin3dcompiler::*;
     /// // TODO
     /// ```
+    ///
+    /// <div class="note"><b>Note:</b> You can use this API to develop your Windows Store apps, but you can't use it in apps that you submit to the Windows Store.</div>
     pub fn compile_from_file<'s>(
         &self,
         file_name:      impl AsRef<Path>,

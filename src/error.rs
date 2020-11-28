@@ -63,6 +63,10 @@ impl ErrorKind {
 #[allow(overflowing_literals)] impl ErrorKind {
     /// `0xA73DC001`    This version of `d3dcompiler_##.dll` doesn't support this fn
     pub const MISSING_DLL_EXPORT : ErrorKind = ErrorKind(0xA73DC001);
+
+    /// `0xA73DC002`    Slice length exceeded some kind of length limit (typically a conversion to a 32-bit length, or
+    ///                 an extra cap introduced by thin3dcompiler to avoid undefined behavior from allocation size overflows.)
+    pub const SLICE_TOO_LARGE : ErrorKind = ErrorKind(0xA73DC002);
 }
 
 impl D3D11_ERROR {
