@@ -1,3 +1,4 @@
+#![allow(broken_intra_doc_links)] // temporary
 #![deny(unreachable_patterns)]
 
 #[macro_use] mod macros;
