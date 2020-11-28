@@ -17,6 +17,7 @@ mod create_blob;                    pub use create_blob::*;
 mod create_function_linking_graph;  pub use create_function_linking_graph::*;
 mod create_linker;                  pub use create_linker::*;
 
+mod strip_shader;                   pub use strip_shader::*;
 mod write_blob_to_file;             pub use write_blob_to_file::*;
 
 /// Lazily-loaded `d3dcompiler_NN.dll`
@@ -114,7 +115,13 @@ pub struct D3DCompiler {
     // TODO: D3DReflect
     // TODO: D3DReflectLibrary
     // TODO: D3DSetBlobPart
-    // TODO: D3DStripShader
+
+    pub(crate) D3DStripShader: Option<unsafe extern "system" fn (
+        pShaderBytecode:    LPCVOID ,
+        BytecodeLength:     SIZE_T,
+        uStripFlags:        UINT,
+        ppStrippedBlob:     *mut *mut ID3DBlob,
+    ) -> HRESULT>,
 
     pub(crate) D3DWriteBlobToFile: Option<unsafe extern "system" fn (
         pBlob:      *mut ID3DBlob,
