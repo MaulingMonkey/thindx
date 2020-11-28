@@ -7,7 +7,7 @@ pub mod d3d11 {
 
     // These don't implement IUnknown:
     //mod function_parameter_reflection;      pub use function_parameter_reflection::*;
-    //mod function_reflection;                pub use function_reflection::*;
+    mod function_reflection;                pub use function_reflection::*;
 
     mod library_reflection;                 pub use library_reflection::*;
     mod linker;                             pub use linker::*;
@@ -64,7 +64,6 @@ convert!(unsafe ReadOnlyBlob => Unknown,                            winapi::um::
 
 convert!(unsafe d3d11::FunctionLinkingGraph => Unknown,             winapi::um::d3d11shader::ID3D11FunctionLinkingGraph);
 //convert!(unsafe d3d11::FunctionParameterReflection => Unknown,      winapi::um::d3d11shader::ID3D11FunctionParameterReflection);
-//convert!(unsafe d3d11::FunctionReflection => Unknown,               winapi::um::d3d11shader::ID3D11FunctionReflection);
 convert!(unsafe d3d11::LibraryReflection => Unknown,                winapi::um::d3d11shader::ID3D11LibraryReflection);
 convert!(unsafe d3d11::Linker => Unknown,                           winapi::um::d3d11shader::ID3D11Linker);
 convert!(unsafe d3d11::LinkingNode => Unknown,                      winapi::um::d3d11shader::ID3D11LinkingNode);
