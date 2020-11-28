@@ -11,6 +11,9 @@ use std::ptr::NonNull;
 /// ID3D11FunctionReflection
 ///
 /// A function-reflection interface accesses function info.
+///
+/// ### See Also
+/// *   [LibraryReflection::get_function_by_index]
 #[derive(Clone)] #[repr(transparent)]
 pub struct FunctionReflection<'r> {
     ptr:        NonNull<ID3D11FunctionReflection>,
@@ -19,7 +22,7 @@ pub struct FunctionReflection<'r> {
 
 // TODO: macrofiy this boilerplate too?
 impl<'r> FunctionReflection<'r> {
-    pub unsafe fn from_raw(_: &'r LibraryReflection, fr: *mut ID3D11FunctionReflection) -> Option<Self> {
+    pub(crate) unsafe fn from_raw(_: &'r LibraryReflection, fr: *mut ID3D11FunctionReflection) -> Option<Self> {
         Some(Self {
             ptr:        NonNull::new(fr)?,
             phantom:    PhantomData,
