@@ -1,5 +1,3 @@
-use minidl::*;
-
 use winapi::shared::basetsd::*;
 use winapi::shared::minwindef::*;
 use winapi::shared::ntdef::*;
@@ -7,12 +5,14 @@ use winapi::shared::ntdef::*;
 use winapi::um::d3dcommon::*;
 use winapi::um::d3dcompiler::*;
 
+
+
+mod _new;                           pub use _new::*;
 mod compile_from_file;              pub use compile_from_file::*;
 mod compile;                        pub use compile::*;
 mod compile2;                       pub use compile2::*;
 mod compress_shaders;               pub use compress_shaders::*;
 mod create_blob;                    pub use create_blob::*;
-
 
 /// Lazily-loaded `d3dcompiler_NN.dll`
 #[allow(non_snake_case)] // fn ptrs
@@ -106,19 +106,6 @@ pub struct D3DCompiler {
     // TODO: D3DWriteBlobToFile
 }
 
-impl D3DCompiler {
-    pub fn new(version: u32) -> Result<Self> {
-        let name = format!("d3dcompiler_{}.dll", version);
-        let lib = Library::load(name)?;
-        unsafe{Ok(Self{
-            D3DCompile:             lib.sym_opt("D3DCompile\0"),
-            D3DCompile2:            lib.sym_opt("D3DCompile2\0"),
-            D3DCompileFromFile:     lib.sym_opt("D3DCompileFromFile\0"),
-            D3DCompressShaders:     lib.sym_opt("D3DCompressShaders\0"),
-            D3DCreateBlob:          lib.sym_opt("D3DCreateBlob\0"),
-        })}
-    }
-}
 
 
 #[test] fn d3dcompiler_nn() {
