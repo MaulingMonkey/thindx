@@ -27,6 +27,8 @@ impl D3DCompiler {
             D3DCreateBlob:          lib.sym_opt("D3DCreateBlob\0"),
             D3DCreateFunctionLinkingGraph:  lib.sym_opt("D3DCreateFunctionLinkingGraph\0"),
             D3DCreateLinker:        lib.sym_opt("D3DCreateLinker\0"),
+
+            D3DWriteBlobToFile:     lib.sym_opt("D3DWriteBlobToFile\0"),
         })}
     }
 }

@@ -17,6 +17,8 @@ mod create_blob;                    pub use create_blob::*;
 mod create_function_linking_graph;  pub use create_function_linking_graph::*;
 mod create_linker;                  pub use create_linker::*;
 
+mod write_blob_to_file;             pub use write_blob_to_file::*;
+
 /// Lazily-loaded `d3dcompiler_NN.dll`
 #[allow(non_snake_case)] // fn ptrs
 pub struct D3DCompiler {
@@ -113,7 +115,12 @@ pub struct D3DCompiler {
     // TODO: D3DReflectLibrary
     // TODO: D3DSetBlobPart
     // TODO: D3DStripShader
-    // TODO: D3DWriteBlobToFile
+
+    pub(crate) D3DWriteBlobToFile: Option<unsafe extern "system" fn (
+        pBlob:      *mut ID3DBlob,
+        pFileName:  LPCWSTR,
+        bOverwrite: BOOL,
+    ) -> HRESULT>,
 }
 
 
