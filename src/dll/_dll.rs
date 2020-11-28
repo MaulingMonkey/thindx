@@ -15,6 +15,7 @@ mod compile2;                       pub use compile2::*;
 mod compress_shaders;               pub use compress_shaders::*;
 mod create_blob;                    pub use create_blob::*;
 mod create_function_linking_graph;  pub use create_function_linking_graph::*;
+mod create_linker;                  pub use create_linker::*;
 
 /// Lazily-loaded `d3dcompiler_NN.dll`
 #[allow(non_snake_case)] // fn ptrs
@@ -91,7 +92,10 @@ pub struct D3DCompiler {
         ppFunctionLinkingGraph: *mut *mut ID3D11FunctionLinkingGraph,
     ) -> HRESULT>,
 
-    // TODO: D3DCreateLinker
+    pub(crate) D3DCreateLinker: Option<unsafe extern "system" fn (
+        ppLinker:               *mut *mut ID3D11Linker,
+    ) -> HRESULT>,
+
     // TODO: D3DDecompressShaders
     // TODO: D3DDisassemble
     // TODO: D3DDisassemble10Effect
