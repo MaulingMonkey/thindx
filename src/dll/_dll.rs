@@ -4,6 +4,7 @@ use winapi::shared::ntdef::*;
 
 use winapi::um::d3dcommon::*;
 use winapi::um::d3dcompiler::*;
+use winapi::um::d3d11shader::*;
 
 
 
@@ -13,6 +14,7 @@ mod compile;                        pub use compile::*;
 mod compile2;                       pub use compile2::*;
 mod compress_shaders;               pub use compress_shaders::*;
 mod create_blob;                    pub use create_blob::*;
+mod create_function_linking_graph;  pub use create_function_linking_graph::*;
 
 /// Lazily-loaded `d3dcompiler_NN.dll`
 #[allow(non_snake_case)] // fn ptrs
@@ -84,7 +86,11 @@ pub struct D3DCompiler {
         ppBlob:             *mut *mut ID3DBlob,
     ) -> HRESULT>,
 
-    // TODO: D3DCreateFunctionLinkingGraph
+    pub(crate) D3DCreateFunctionLinkingGraph: Option<unsafe extern "system" fn (
+        uFlags:                 UINT,
+        ppFunctionLinkingGraph: *mut *mut ID3D11FunctionLinkingGraph,
+    ) -> HRESULT>,
+
     // TODO: D3DCreateLinker
     // TODO: D3DDecompressShaders
     // TODO: D3DDisassemble

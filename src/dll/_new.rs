@@ -25,6 +25,7 @@ impl D3DCompiler {
             D3DCompileFromFile:     lib.sym_opt("D3DCompileFromFile\0"),
             D3DCompressShaders:     lib.sym_opt("D3DCompressShaders\0"),
             D3DCreateBlob:          lib.sym_opt("D3DCreateBlob\0"),
+            D3DCreateFunctionLinkingGraph:  lib.sym_opt("D3DCreateFunctionLinkingGraph\0"),
         })}
     }
 }
