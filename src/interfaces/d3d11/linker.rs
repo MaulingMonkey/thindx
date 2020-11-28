@@ -10,6 +10,9 @@ use std::ptr::*;
 /// ID3D11Linker
 ///
 /// A linker interface is used to link a shader module.
+///
+/// ### See Also
+/// *   [D3DCompiler::create_linker]
 #[derive(Clone)] #[repr(transparent)]
 pub struct Linker(pub(crate) mcom::Rc<winapi::um::d3d11shader::ID3D11Linker>);
 
