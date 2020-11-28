@@ -17,6 +17,7 @@ mod create_blob;                    pub use create_blob::*;
 mod create_function_linking_graph;  pub use create_function_linking_graph::*;
 mod create_linker;                  pub use create_linker::*;
 
+mod set_blob_part;                  pub use set_blob_part::*;
 mod strip_shader;                   pub use strip_shader::*;
 mod write_blob_to_file;             pub use write_blob_to_file::*;
 
@@ -114,7 +115,16 @@ pub struct D3DCompiler {
     // TODO: D3DReadFileToBlob
     // TODO: D3DReflect
     // TODO: D3DReflectLibrary
-    // TODO: D3DSetBlobPart
+
+    pub(crate) D3DSetBlobPart: Option<unsafe extern "system" fn (
+        pSrcData:           LPCVOID,
+        SrcDataSize:        SIZE_T,
+        Part:               D3D_BLOB_PART,
+        Flags:              UINT,
+        pPart:              LPCVOID,
+        PartSize:           SIZE_T,
+        ppNewShader:        *mut *mut ID3DBlob,
+    ) -> HRESULT>,
 
     pub(crate) D3DStripShader: Option<unsafe extern "system" fn (
         pShaderBytecode:    LPCVOID ,
