@@ -11,6 +11,7 @@ mod compile_from_file;              pub use compile_from_file::*;
 mod compile;                        pub use compile::*;
 mod compile2;                       pub use compile2::*;
 mod compress_shaders;               pub use compress_shaders::*;
+mod create_blob;                    pub use create_blob::*;
 
 
 /// Lazily-loaded `d3dcompiler_NN.dll`
@@ -79,11 +80,18 @@ pub struct D3DCompiler {
         ppErrorMsgs:        *mut *mut ID3DBlob,
     ) -> HRESULT>,
 
+    /// D3DCOMPILER_43.dll
     pub(crate) D3DCompressShaders: Option<unsafe extern "system" fn (
         uNumShaders:        UINT,
         pShaderData:        *mut D3D_SHADER_DATA,
         uFlags:             UINT,
         ppCompressedData:   *mut *mut ID3DBlob,
+    ) -> HRESULT>,
+
+    /// D3DCOMPILER_43.dll
+    pub(crate) D3DCreateBlob: Option<unsafe extern "system" fn (
+        Size:               SIZE_T,
+        ppBlob:             *mut *mut ID3DBlob,
     ) -> HRESULT>,
 }
 
@@ -96,6 +104,7 @@ impl D3DCompiler {
             D3DCompile2:            lib.sym_opt("D3DCompile2\0"),
             D3DCompileFromFile:     lib.sym_opt("D3DCompileFromFile\0"),
             D3DCompressShaders:     lib.sym_opt("D3DCompressShaders\0"),
+            D3DCreateBlob:          lib.sym_opt("D3DCreateBlob\0"),
         })}
     }
 }
