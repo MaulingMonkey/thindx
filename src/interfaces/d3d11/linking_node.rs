@@ -4,3 +4,6 @@
 /// A linking-node interface is used for shader linking.
 #[derive(Clone)] #[repr(transparent)]
 pub struct LinkingNode(pub(crate) mcom::Rc<winapi::um::d3d11shader::ID3D11LinkingNode>);
+
+// This space intentionally left blank!
+// It has no methods beyond the default IUnknown methods.
