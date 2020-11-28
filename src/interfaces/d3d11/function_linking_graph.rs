@@ -69,15 +69,26 @@ impl FunctionLinkingGraph {
     /// ```rust
     /// # use thin3dcompiler::*; use d3d11::*;
     /// # let compiler = D3DCompiler::new(47).unwrap();
-    /// let flg : FunctionLinkingGraph = compiler.create_function_linking_graph(()).unwrap();
-    /// assert_eq!(Some(E::FAIL), flg.create_module_instance().err()); // Nothing created yet
+    /// # let flg : FunctionLinkingGraph = compiler.create_function_linking_graph(()).unwrap();
+    /// // Nothing created yet
+    /// let error : Error = flg.create_module_instance().err().unwrap();
+    /// assert_eq!(E::FAIL, error.kind());
+    /// println!("{}", error);
+    ///
+    /// // TODO: successful example
     /// ```
-    pub fn create_module_instance(&self) -> Result<(ModuleInstance, Option<ReadOnlyBlob>), ErrorKind> {
+    ///
+    /// ### Outputs
+    /// ```text
+    /// ID3D11FunctionLinkingGraph::CreateModuleInstance failed (ErrorKind::FAIL)
+    /// error X9021: ID3D11FunctionLinkingGraph::CreateModuleInstance: FLG has no nodes
+    /// ```
+    pub fn create_module_instance(&self) -> Result<(ModuleInstance, Option<ReadOnlyBlob>), Error> {
         // TODO: named tuple return?  better error type that can carry the blob?
         let mut module = null_mut();
         let mut errors = null_mut();
         let hr = unsafe { self.0.CreateModuleInstance(&mut module, &mut errors) };
-        ErrorKind::check(hr)?;
+        unsafe { Error::check("ID3D11FunctionLinkingGraph::CreateModuleInstance", hr, errors)? };
         let module = unsafe { ModuleInstance::from_raw(module) };
         let errors = unsafe { ReadOnlyBlob::from_raw_opt(errors) };
         Ok((module, errors))
@@ -112,19 +123,24 @@ impl FunctionLinkingGraph {
     ///
     /// Gets the error from the last function call of the function-linking-graph.
     ///
+    /// ### Returns
+    /// *   Ok(Some([ReadOnlyBlob]))    - The errors in question
+    /// *   Ok(None)                    - There were no errors
+    /// *   Err([ErrorKind])            - Ironically, there was an error in attempting to acquire the errors.
+    ///
     /// ### Example
     /// ```rust
     /// # use thin3dcompiler::*; use d3d11::*;
     /// # let compiler = D3DCompiler::new(47).unwrap();
     /// # let flg : FunctionLinkingGraph = compiler.create_function_linking_graph(()).unwrap();
-    /// // TODO
-    /// // flg.get_last_error().unwrap();
+    /// let errors : Option<ReadOnlyBlob> = flg.get_last_error().unwrap();
+    /// assert!(errors.is_none(), "No errors were reported by flg");
     /// ```
-    pub fn get_last_error(&self) -> Result<ReadOnlyBlob, ErrorKind> {
+    pub fn get_last_error(&self) -> Result<Option<ReadOnlyBlob>, ErrorKind> {
         let mut errors = null_mut();
         let hr = unsafe { self.0.GetLastError(&mut errors) };
         ErrorKind::check(hr)?;
-        Ok(unsafe { ReadOnlyBlob::from_raw(errors) })
+        Ok(unsafe { ReadOnlyBlob::from_raw_opt(errors) })
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionlinkinggraph-passvalue)\]
@@ -208,4 +224,6 @@ impl FunctionLinkingGraph {
         ErrorKind::check(hr)?;
         Ok(LinkingNode::from_raw(node))
     }
+
+    // TODO: safe alternatives to set_{input,output}_signature
 }

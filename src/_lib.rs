@@ -26,3 +26,4 @@ mod traits {
 }
 
 mod error_kind;                 pub use error_kind::*;
+mod error;                      pub use error::*;
