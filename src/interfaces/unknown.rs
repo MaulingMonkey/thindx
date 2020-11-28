@@ -9,6 +9,7 @@ pub struct Unknown(pub(crate) mcom::Rc<winapi::um::unknwnbase::IUnknown>);
 
 
 
+/// Auto trait implemented for anything that can chain-[Deref] to [thin3dcompiler::Unknown](crate::Unknown).
 pub trait AsUnknown {
     fn as_unk(&self) -> &Unknown;
 }
