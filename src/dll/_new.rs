@@ -28,6 +28,7 @@ impl D3DCompiler {
             D3DCreateFunctionLinkingGraph:  lib.sym_opt("D3DCreateFunctionLinkingGraph\0"),
             D3DCreateLinker:        lib.sym_opt("D3DCreateLinker\0"),
 
+            D3DGetDebugInfo:                    lib.sym_opt("D3DGetDebugInfo\0"),
             D3DGetInputAndOutputSignatureBlob:  lib.sym_opt("D3DGetInputAndOutputSignatureBlob\0"),
             D3DGetInputSignatureBlob:           lib.sym_opt("D3DGetInputSignatureBlob\0"),
             D3DGetOutputSignatureBlob:          lib.sym_opt("D3DGetOutputSignatureBlob\0"),
