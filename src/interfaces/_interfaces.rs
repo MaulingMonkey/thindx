@@ -4,22 +4,17 @@ use crate::*;
 /// d3d11shader.h interfaces, structures, and enumerations
 pub mod d3d11 {
     mod function_linking_graph;             pub use function_linking_graph::*;
-
-    // These don't implement IUnknown:
-    //mod function_parameter_reflection;      pub use function_parameter_reflection::*;
+    mod function_parameter_reflection;      pub use function_parameter_reflection::*;
     mod function_reflection;                pub use function_reflection::*;
-
     mod library_reflection;                 pub use library_reflection::*;
     mod linker;                             pub use linker::*;
     mod linking_node;                       pub use linking_node::*;
     mod module_instance;                    pub use module_instance::*;
     mod module;                             pub use module::*;
     mod shader_reflection;                  pub use shader_reflection::*;
-
-    // These don't implement IUnknown:
-    //mod shader_reflection_constant_buffer;  pub use shader_reflection_constant_buffer::*;
-    //mod shader_reflection_type;             pub use shader_reflection_type::*;
-    //mod shader_reflection_variable;         pub use shader_reflection_variable::*;
+    mod shader_reflection_constant_buffer;  pub use shader_reflection_constant_buffer::*;
+    mod shader_reflection_type;             pub use shader_reflection_type::*;
+    mod shader_reflection_variable;         pub use shader_reflection_variable::*;
 }
 
 mod blob;               pub use blob::*;
@@ -63,13 +58,9 @@ convert!(unsafe Unknown,                                            winapi::um::
 convert!(unsafe ReadOnlyBlob => Unknown,                            winapi::um::d3dcommon::ID3DBlob);
 
 convert!(unsafe d3d11::FunctionLinkingGraph => Unknown,             winapi::um::d3d11shader::ID3D11FunctionLinkingGraph);
-//convert!(unsafe d3d11::FunctionParameterReflection => Unknown,      winapi::um::d3d11shader::ID3D11FunctionParameterReflection);
 convert!(unsafe d3d11::LibraryReflection => Unknown,                winapi::um::d3d11shader::ID3D11LibraryReflection);
 convert!(unsafe d3d11::Linker => Unknown,                           winapi::um::d3d11shader::ID3D11Linker);
 convert!(unsafe d3d11::LinkingNode => Unknown,                      winapi::um::d3d11shader::ID3D11LinkingNode);
 convert!(unsafe d3d11::Module => Unknown,                           winapi::um::d3d11shader::ID3D11Module);
 convert!(unsafe d3d11::ModuleInstance => Unknown,                   winapi::um::d3d11shader::ID3D11ModuleInstance);
 convert!(unsafe d3d11::ShaderReflection => Unknown,                 winapi::um::d3d11shader::ID3D11ShaderReflection);
-//convert!(unsafe d3d11::ShaderReflectionConstantBuffer => Unknown,   winapi::um::d3d11shader::ID3D11ShaderReflectionConstantBuffer);
-//convert!(unsafe d3d11::ShaderReflectionType => Unknown,             winapi::um::d3d11shader::ID3D11ShaderReflectionType);
-//convert!(unsafe d3d11::ShaderReflectionVariable => Unknown,         winapi::um::d3d11shader::ID3D11ShaderReflectionVariable);

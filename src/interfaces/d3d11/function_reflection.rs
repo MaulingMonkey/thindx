@@ -20,7 +20,6 @@ pub struct FunctionReflection<'r> {
     phantom:    PhantomData<&'r LibraryReflection>,
 }
 
-// TODO: macrofiy this boilerplate too?
 impl<'r> FunctionReflection<'r> {
     pub(crate) unsafe fn from_raw(_: &'r LibraryReflection, fr: *mut ID3D11FunctionReflection) -> Option<Self> {
         Some(Self {
