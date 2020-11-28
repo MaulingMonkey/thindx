@@ -18,6 +18,7 @@ mod create_blob;                    pub use create_blob::*;
 mod create_function_linking_graph;  pub use create_function_linking_graph::*;
 mod create_linker;                  pub use create_linker::*;
 
+mod get_trace_instruction_offsets;  pub use get_trace_instruction_offsets::*;
 mod load_module;                    pub use load_module::*;
 mod preprocess;                     pub use preprocess::*;
 mod read_file_to_blob;              pub use read_file_to_blob::*;
@@ -115,7 +116,16 @@ pub struct D3DCompiler {
     // TODO: D3DGetInputAndOutputSignatureBlob
     // TODO: D3DGetInputSignatureBlob
     // TODO: D3DGetOutputSignatureBlob
-    // TODO: D3DGetTraceInstructionOffsets
+
+    pub(crate) D3DGetTraceInstructionOffsets: Option<unsafe extern "system" fn (
+        pSrcData:       LPCVOID,
+        SrcDataSize:    SIZE_T,
+        Flags:          UINT,
+        StartInstIndex: SIZE_T,
+        NumInsts:       SIZE_T,
+        pOffsets:       *mut SIZE_T,
+        pTotalInsts:    *mut SIZE_T,
+    ) -> HRESULT>,
 
     pub(crate) D3DLoadModule: Option<unsafe extern "system" fn (
         pSrcData:       LPCVOID,

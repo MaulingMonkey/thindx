@@ -19,6 +19,8 @@ pub struct Error {
 impl Error {
     pub fn kind(&self) -> ErrorKind { self.kind }
 
+    pub(crate) fn new(method: &'static str, kind: ErrorKind) -> Self { Self { kind, method: Some(method), errors: None } }
+
     pub(crate) fn check(method: &'static str, hr: HRESULT) -> Result<(), Self> {
         if !SUCCEEDED(hr) {
             Err(Self {
