@@ -10,6 +10,12 @@ impl D3DCompiler {
     /// ### Returns
     /// *   Err([std::io::Error])   - if `d3dcompiler_{version}.dll` could not be loaded
     /// *   Ok([D3DCompiler])       - `d3dcompiler_{version}.dll` was found
+    ///
+    /// ### Example
+    /// ```rust
+    /// use thin3dcompiler::*;
+    /// let compiler = D3DCompiler::new(47).unwrap();
+    /// ```
     pub fn new(version: u32) -> Result<Self> {
         let name = format!("d3dcompiler_{}.dll", version);
         let lib = Library::load(name)?;

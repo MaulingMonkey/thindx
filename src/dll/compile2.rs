@@ -28,8 +28,10 @@ impl D3DCompiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*;
-    /// // TODO
+    /// # use thin3dcompiler::*; let compiler = D3DCompiler::new(47).unwrap();
+    /// let basic_hlsl = std::fs::read(r"test\data\basic.hlsl").unwrap();
+    /// let ps = compiler.compile2(&basic_hlsl, r"test\data\basic.hlsl", (), (), "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None, 0, None).unwrap();
+    /// let vs = compiler.compile2(&basic_hlsl, r"test\data\basic.hlsl", (), (), "vs_main", "vs_4_0", Compile::Debug, CompileEffect::None, 0, None).unwrap();
     /// ```
     ///
     /// ### Remarks
@@ -50,7 +52,7 @@ impl D3DCompiler {
         flags2:                 impl Into<CompileEffect>,
         secondary_data_flags:   u32, // TODO: type
         secondary_data:         impl Into<Option<&'s [u8]>>,
-    ) -> Result<CompileResult, ErrorKind> {
+    ) -> Result<CompileResult, CompileError> {
         // Early outs
         let f           = self.D3DCompile2.ok_or(ErrorKind::MISSING_DLL_EXPORT)?;
         let defines     = defines.as_shader_macros()?;
@@ -72,18 +74,22 @@ impl D3DCompiler {
         let secondary_data_len  = secondary_data.map_or(0, |sd| sd.len());
         let secondary_data      = secondary_data.map_or(null(), |sd| sd.as_ptr()).cast();
 
-        let mut code   = null_mut();
+        let mut shader = null_mut();
         let mut errors = null_mut();
         let hr = unsafe { f(
             src_data.as_ptr().cast(), src_data.len(),
             source_name, defines, include, entrypoint, target,
             flags1, flags2, secondary_data_flags, secondary_data, secondary_data_len,
-            &mut code, &mut errors,
+            &mut shader, &mut errors,
         )};
-        ErrorKind::check(hr)?;
+        ErrorKind::check(hr).map_err(|kind| CompileError {
+            kind,
+            shader: unsafe { ReadOnlyBlob::from_raw_opt(shader as *mut _) },
+            errors: unsafe { ReadOnlyBlob::from_raw_opt(errors as *mut _) },
+        })?;
 
         Ok(CompileResult {
-            code:   unsafe { ReadOnlyBlob::from_raw(code as *mut _) },
+            shader: unsafe { ReadOnlyBlob::from_raw(shader as *mut _) },
             errors: unsafe { ReadOnlyBlob::from_raw_opt(errors as *mut _) },
         })
     }

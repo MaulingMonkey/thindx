@@ -32,8 +32,9 @@ impl D3DCompiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*;
-    /// // TODO
+    /// # use thin3dcompiler::*; let compiler = D3DCompiler::new(47).unwrap();
+    /// let ps = compiler.compile_from_file(r"test\data\basic.hlsl", (), (), "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap();
+    /// let vs = compiler.compile_from_file(r"test\data\basic.hlsl", (), (), "vs_main", "vs_4_0", Compile::Debug, CompileEffect::None).unwrap();
     /// ```
     ///
     /// <div class="note"><b>Note:</b> You can use this API to develop your Windows Store apps, but you can't use it in apps that you submit to the Windows Store.</div>
@@ -46,7 +47,7 @@ impl D3DCompiler {
         target:         impl Into<Option<&'s str>>,
         flags1:         impl Into<Compile>,
         flags2:         impl Into<CompileEffect>,
-    ) -> Result<CompileResult, ErrorKind> {
+    ) -> Result<CompileResult, CompileError> {
         // Early outs
         let f           = self.D3DCompileFromFile.ok_or(ErrorKind::MISSING_DLL_EXPORT)?;
         let defines     = defines.as_shader_macros()?;
@@ -64,17 +65,21 @@ impl D3DCompiler {
         let flags1      = flags1.into().into();
         let flags2      = flags2.into().into();
 
-        let mut code   = null_mut();
+        let mut shader = null_mut();
         let mut errors = null_mut();
         let hr = unsafe { f(
             file_name.as_ptr(),
             defines, include, entrypoint, target,
-            flags1, flags2, &mut code, &mut errors,
+            flags1, flags2, &mut shader, &mut errors,
         )};
-        ErrorKind::check(hr)?;
+        ErrorKind::check(hr).map_err(|kind| CompileError {
+            kind,
+            shader: unsafe { ReadOnlyBlob::from_raw_opt(shader as *mut _) },
+            errors: unsafe { ReadOnlyBlob::from_raw_opt(errors as *mut _) },
+        })?;
 
         Ok(CompileResult {
-            code:   unsafe { ReadOnlyBlob::from_raw(code as *mut _) },
+            shader: unsafe { ReadOnlyBlob::from_raw(shader as *mut _) },
             errors: unsafe { ReadOnlyBlob::from_raw_opt(errors as *mut _) },
         })
     }

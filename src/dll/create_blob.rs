@@ -17,8 +17,10 @@ impl D3DCompiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*;
-    /// // TODO
+    /// # use thin3dcompiler::*; let compiler = D3DCompiler::new(47).unwrap();
+    /// let blob = compiler.create_read_only_blob(&[1,2,3,4]).unwrap();
+    /// assert_eq!(blob.get_buffer_size(),  4           );
+    /// assert_eq!(blob.get_buffer(),       &[1,2,3,4]  );
     /// ```
     ///
     /// <div class="note"><b>Note:</b> This fn was introduced by d3dcompiler_43.dll, and is unavailable in earlier versions.</div>
