@@ -1,5 +1,4 @@
 use crate::*;
-use crate::traits::Raw;
 
 use std::convert::TryInto;
 use std::ptr::*;
