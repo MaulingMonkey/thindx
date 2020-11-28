@@ -18,6 +18,7 @@ mod create_blob;                    pub use create_blob::*;
 mod create_function_linking_graph;  pub use create_function_linking_graph::*;
 mod create_linker;                  pub use create_linker::*;
 
+mod get_signature_blob;             pub use get_signature_blob::*;
 mod get_trace_instruction_offsets;  pub use get_trace_instruction_offsets::*;
 mod load_module;                    pub use load_module::*;
 mod preprocess;                     pub use preprocess::*;
@@ -113,9 +114,24 @@ pub struct D3DCompiler {
     // TODO: D3DDisassembleRegion
     // TODO: D3DGetBlobPart
     // TODO: D3DGetDebugInfo
-    // TODO: D3DGetInputAndOutputSignatureBlob
-    // TODO: D3DGetInputSignatureBlob
-    // TODO: D3DGetOutputSignatureBlob
+
+    pub(crate) D3DGetInputAndOutputSignatureBlob: Option<unsafe extern "system" fn(
+        pSrcData:           LPCVOID,
+        SrcDataSize:        SIZE_T,
+        ppSignatureBlob:    *mut *mut ID3DBlob,
+    ) -> HRESULT>,
+
+    pub(crate) D3DGetInputSignatureBlob: Option<unsafe extern "system" fn(
+        pSrcData:           LPCVOID,
+        SrcDataSize:        SIZE_T,
+        ppSignatureBlob:    *mut *mut ID3DBlob,
+    ) -> HRESULT>,
+
+    pub(crate) D3DGetOutputSignatureBlob: Option<unsafe extern "system" fn(
+        pSrcData:           LPCVOID,
+        SrcDataSize:        SIZE_T,
+        ppSignatureBlob:    *mut *mut ID3DBlob,
+    ) -> HRESULT>,
 
     pub(crate) D3DGetTraceInstructionOffsets: Option<unsafe extern "system" fn (
         pSrcData:       LPCVOID,
