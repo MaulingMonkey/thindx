@@ -13,7 +13,7 @@ use std::ptr::NonNull;
 /// This shader-reflection interface provides access to a variable.
 ///
 /// ### See Also
-/// *   [ShaderReflection::]
+/// *   [ShaderReflection::get_variable_by_name]
 #[derive(Clone)] #[repr(transparent)]
 pub struct ShaderReflectionVariable<'r> {
     ptr:        NonNull<ID3D11ShaderReflectionVariable>,

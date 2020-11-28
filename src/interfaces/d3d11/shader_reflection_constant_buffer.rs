@@ -13,7 +13,8 @@ use std::ptr::NonNull;
 /// This shader-reflection interface provides access to a constant buffer.
 ///
 /// ### See Also
-/// *   [ShaderReflection::]
+/// *   [ShaderReflection::get_constant_buffer_by_index]
+/// *   [ShaderReflection::get_constant_buffer_by_name]
 #[derive(Clone)] #[repr(transparent)]
 pub struct ShaderReflectionConstantBuffer<'r> {
     ptr:        NonNull<ID3D11ShaderReflectionConstantBuffer>,
