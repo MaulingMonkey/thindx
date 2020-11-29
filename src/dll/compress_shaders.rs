@@ -70,6 +70,8 @@ impl D3DCompiler {
     //      * if `indices` has duplicates, those are null
     //  * if `indices` is null:
     //      * treated as if indicies == (start_index .. start_index + num_shaders).collect()
+    //
+    // https://github.com/MaulingMonkey/thin3dcompiler/issues/5
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3ddecompressshaders)\]
     /// D3DDecompressShaders

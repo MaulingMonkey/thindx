@@ -37,8 +37,28 @@ mod write_blob_to_file;             pub use write_blob_to_file::*;
 pub struct D3DCompiler {
     // https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/
 
-    // ..= D3DCompiler_39.dll
+
+    // https://github.com/MaulingMonkey/thin3dcompiler/issues/2
+    // D3D10 APIs not exposed:
+    // D3DDisassemble10Effect
+
+
+    // https://github.com/MaulingMonkey/thin3dcompiler/issues/3
+    // Undocumented APIs not exposed:
+    // D3DAssemble
+
+
+    // https://github.com/MaulingMonkey/thin3dcompiler/issues/4
+    // Legacy APIs not (yet?) exposed:
     // D3DCompileFromMemory
+    // D3DDisassembleCode
+    // D3DDisassembleEffect
+    // D3DGetCodeDebugInfo
+    // D3DPreprocessFromMemory
+
+    // https://github.com/MaulingMonkey/thin3dcompiler/issues/6
+    // d3d11shadertracing.h not (yet?) exposed:
+    // D3DDisassemble11Trace
 
     /// D3DCompiler_40.dll ..=
     pub(crate) D3DCompile: Option<unsafe extern "system" fn (
@@ -122,8 +142,13 @@ pub struct D3DCompiler {
         pTotalShaders:      *mut UINT,
     ) -> HRESULT>,
 
-    // TODO: D3DDisassemble
-    // TODO: D3DDisassemble10Effect
+    pub(crate) D3DDisassemble: Option<unsafe extern "system" fn(
+        pSrcData:           LPCVOID,
+        SrcDataSize:        SIZE_T,
+        Flags:              UINT,
+        szComments:         LPCSTR,
+        ppDisassembly:      *mut *mut ID3DBlob,
+    ) -> HRESULT>,
 
     pub(crate) D3DDisassembleRegion: Option<unsafe extern "system" fn (
         pSrcData:           LPCVOID,

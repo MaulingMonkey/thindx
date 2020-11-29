@@ -58,6 +58,7 @@
 //! &nbsp;    ├─ [reflect_library](D3DCompiler::reflect_library)(...) - ???
 //! &nbsp;    │
 //! &nbsp;    │  **Bytecode Debugging**
+//! &nbsp;    ├─ [disassemble](D3DCompiler::disassemble)(...) - disassemble bytecode as human readable text
 //! &nbsp;    ├─ [disassemble_region](D3DCompiler::disassemble_region)(...) - disassemble bytecode as human readable text
 //! &nbsp;    ├─ [get_trace_instruction_offsets_count](D3DCompiler::get_trace_instruction_offsets_count)(...) - get the number of trace instruction byte offsets
 //! &nbsp;    ├─ [get_trace_instruction_offsets_inplace](D3DCompiler::get_trace_instruction_offsets_inplace)(...) - read trace instruction byte offsets
