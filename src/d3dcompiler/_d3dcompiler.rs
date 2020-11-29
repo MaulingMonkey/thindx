@@ -18,7 +18,7 @@ mod parts;                          pub use parts::*;
 mod reflection;                     pub use reflection::*;
 mod debugging;                      pub use debugging::*;
 mod blobs;                          pub use blobs::*;
-mod factories_d3d11;                pub use factories_d3d11::*;
+mod d3d11;                          pub use d3d11::*;
 
 
 
