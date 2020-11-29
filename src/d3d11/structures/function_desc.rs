@@ -6,8 +6,6 @@ use winapi::um::d3d11shader::*;
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/ns-d3d11shader-d3d11_function_desc)\]
 /// D3D11_FUNCTION_DESC
-///
-/// &amp;\[[u8]\] equivalent that's ABI-compatible with some D3D APIs
 #[derive(Clone, Copy, Default)]
 #[repr(C)] pub struct FunctionDesc<'s> {
     version:                        u32,

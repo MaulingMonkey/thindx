@@ -9,8 +9,6 @@ use std::ptr::*;
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/ns-d3d11shader-d3d11_shader_variable_desc)\]
 /// D3D11_SHADER_VARIABLE_DESC
-///
-/// &amp;\[[u8]\] equivalent that's ABI-compatible with some D3D APIs
 #[derive(Clone, Copy)]
 #[repr(C)] pub struct ShaderVariableDesc<'s> {
     name:           Option<CStrPtr<'s>>,
