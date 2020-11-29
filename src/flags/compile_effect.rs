@@ -8,7 +8,12 @@ use winapi::um::d3dcompiler::*;
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3dhlsl/d3dcompile-effect-constants)\]
 /// DWORD / D3DCOMPILE_EFFECT_*
 ///
-/// These constants direct how the compiler compiles an effect file or how the runtime processes the effect file.
+/// Flags controlling how HLSL **effects** shaders are compiled.
+///
+/// ### See Also
+/// *   [D3DCompiler::compile_from_file]
+/// *   [D3DCompiler::compile]
+/// *   [D3DCompiler::compile2]
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)] pub struct CompileEffect(D3DCOMPILE_EFFECT);
 

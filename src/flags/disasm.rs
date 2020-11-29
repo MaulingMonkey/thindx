@@ -8,7 +8,7 @@ use winapi::um::d3dcompiler::*;
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3ddisassembleregion#parameters)\]
 /// UINT / D3D_DISASM_\*
 ///
-/// A combination of zero or more flags controlling how [D3DCompiler::disassemble_region] disassembles the compiled shader data.
+/// Flags controlling how [D3DCompiler::disassemble_region] disassembles the compiled shader data.
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)] pub struct Disasm(UINT);
 

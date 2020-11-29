@@ -1,3 +1,12 @@
+/* used in _lib.rs to line up line drawing characters */
+.interface-tree {
+    line-height:     1.21em;
+    margin-top:     -1.21em;
+    white-space:    pre;
+}
+
+
+
 /* Used throughout to better space out impls/methods */
 #main > h3.impl {
     margin-top:     2.4em;

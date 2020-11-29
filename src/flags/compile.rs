@@ -8,7 +8,12 @@ type D3DCOMPILE = u32; // there's no actual type
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3dhlsl/d3dcompile-constants)\]
 /// DWORD / D3DCOMPILE_*
 ///
-/// A combination of zero or more Compileing options that describe the type of Compile to perform.
+/// Flags controlling how HLSL shaders are compiled to bytecode.
+///
+/// ### See Also
+/// *   [D3DCompiler::compile_from_file]
+/// *   [D3DCompiler::compile]
+/// *   [D3DCompiler::compile2]
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)] pub struct Compile(D3DCOMPILE);
 
