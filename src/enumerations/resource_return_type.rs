@@ -10,16 +10,31 @@ use winapi::um::d3dcommon::*;
 #[repr(transparent)] pub struct ResourceReturnType(D3D_RESOURCE_RETURN_TYPE);
 #[doc(hidden)] pub use ResourceReturnType as ReturnType;
 
-enumish! {
-    ReturnType => D3D_RESOURCE_RETURN_TYPE;
-}
+// Note: D3D10_* aliases D3D_* despite poor docs kinda implying otherwise (see d3dcommon.h)
+// Note: D3D11_* aliases D3D_* despite poor docs kinda implying otherwise (see d3dcommon.h)
+
+enumish! { ReturnType => D3D_RESOURCE_RETURN_TYPE; UNorm, SNorm, SInt, UInt, Float, Mixed, Double, Continued }
 
 #[allow(non_upper_case_globals)] impl ReturnType { // These are enum-like
-    // TODO
+    pub const UNorm     : ReturnType = ReturnType(D3D_RETURN_TYPE_UNORM); // 1
+    pub const SNorm     : ReturnType = ReturnType(D3D_RETURN_TYPE_SNORM);
+    pub const SInt      : ReturnType = ReturnType(D3D_RETURN_TYPE_SINT);
+    pub const UInt      : ReturnType = ReturnType(D3D_RETURN_TYPE_UINT);
+    pub const Float     : ReturnType = ReturnType(D3D_RETURN_TYPE_FLOAT);
+    pub const Mixed     : ReturnType = ReturnType(D3D_RETURN_TYPE_MIXED);
+    pub const Double    : ReturnType = ReturnType(D3D_RETURN_TYPE_DOUBLE);
+    pub const Continued : ReturnType = ReturnType(D3D_RETURN_TYPE_CONTINUED);
 }
 
 #[doc(hidden)] impl ReturnType { // Ctrl+C Ctrl+V support
-    // TODO
+    pub const UNORM     : ReturnType = ReturnType(D3D_RETURN_TYPE_UNORM); // 1
+    pub const SNORM     : ReturnType = ReturnType(D3D_RETURN_TYPE_SNORM);
+    pub const SINT      : ReturnType = ReturnType(D3D_RETURN_TYPE_SINT);
+    pub const UINT      : ReturnType = ReturnType(D3D_RETURN_TYPE_UINT);
+    pub const FLOAT     : ReturnType = ReturnType(D3D_RETURN_TYPE_FLOAT);
+    pub const MIXED     : ReturnType = ReturnType(D3D_RETURN_TYPE_MIXED);
+    pub const DOUBLE    : ReturnType = ReturnType(D3D_RETURN_TYPE_DOUBLE);
+    pub const CONTINUED : ReturnType = ReturnType(D3D_RETURN_TYPE_CONTINUED);
 }
 
 impl Default for ReturnType {
