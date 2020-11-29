@@ -8,7 +8,7 @@ use winapi::um::d3d11shader::*;
 /// D3D11_SHADER_INPUT_BIND_DESC
 #[derive(Clone, Copy, Default)]
 #[repr(C)] pub struct ShaderDesc<'s> {
-    name:           Option<CStrPtr<'s>>,
+    name:           Option<&'s AbiCStr>,
     r#type:         ShaderInputType,
     bind_point:     u32,
     bind_count:     u32,

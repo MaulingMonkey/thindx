@@ -9,7 +9,7 @@ use winapi::um::d3d11shader::*;
 #[derive(Clone, Copy, Default)]
 #[repr(C)] pub struct FunctionDesc<'s> {
     version:                        u32,
-    creator:                        Option<CStrPtr<'s>>,
+    creator:                        Option<&'s AbiCStr>,
     flags:                          Compile,
     constant_buffers:               u32,
     bound_resources:                u32,
@@ -36,7 +36,7 @@ use winapi::um::d3d11shader::*;
     bitwise_instruction_count:      u32,
     min_feature_level:              FeatureLevel,
     required_feature_flags:         ShaderRequires,
-    name:                           Option<CStrPtr<'s>>,
+    name:                           Option<&'s AbiCStr>,
     function_parameter_count:       i32,
     has_return:                     bool32,
     has_10_level_9_vertex_shader:   bool32,

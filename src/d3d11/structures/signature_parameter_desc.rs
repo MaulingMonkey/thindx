@@ -8,7 +8,7 @@ use winapi::um::d3d11shader::*;
 /// D3D11_SIGNATURE_PARAMETER_DESC
 #[derive(Clone, Copy, Default)]
 #[repr(C)] pub struct SignatureParameterDesc<'s> {
-    semantic_name:      Option<CStrPtr<'s>>,
+    semantic_name:      Option<&'s AbiCStr>,
     semantic_index:     u32,
     register:           u32,
     system_value_type:  Name,

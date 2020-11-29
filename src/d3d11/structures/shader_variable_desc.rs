@@ -11,7 +11,7 @@ use std::ptr::*;
 /// D3D11_SHADER_VARIABLE_DESC
 #[derive(Clone, Copy)]
 #[repr(C)] pub struct ShaderVariableDesc<'s> {
-    name:           Option<CStrPtr<'s>>,
+    name:           Option<&'s AbiCStr>,
     start_offset:   u32,
     size:           u32,
     flags:          ShaderVariableFlags,

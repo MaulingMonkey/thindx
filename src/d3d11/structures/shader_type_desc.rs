@@ -15,7 +15,7 @@ use winapi::um::d3d11shader::*;
     elements:   u32,
     members:    u32,
     offset:     u32,
-    name:       Option<CStrPtr<'s>>,
+    name:       Option<&'s AbiCStr>,
 }
 
 test_layout! { ShaderTypeDesc => unsafe D3D11_SHADER_TYPE_DESC {

@@ -8,8 +8,8 @@ use winapi::um::d3d11shader::*;
 /// D3D11_PARAMETER_DESC
 #[derive(Clone, Copy, Default)]
 #[repr(C)] pub struct ParameterDesc<'s> {
-    name:                   Option<CStrPtr<'s>>,
-    semantic_name:          Option<CStrPtr<'s>>,
+    name:                   Option<&'s AbiCStr>,
+    semantic_name:          Option<&'s AbiCStr>,
     r#type:                 ShaderVariableType,
     class:                  ShaderVariableClass,
     rows:                   u32,

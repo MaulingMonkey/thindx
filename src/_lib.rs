@@ -132,6 +132,6 @@ pub use abibool::bool32;
 #[path="structures/_structures.rs"]     mod structures;     pub use structures::*;
 #[path="traits/_traits.rs"]             mod traits;         pub use traits::*;
 
-mod cstr_ptr;                   pub use cstr_ptr::*;
+mod abi_cstr;                   pub use abi_cstr::*;
 mod error_kind;                 pub use error_kind::*;
 mod error;                      pub use error::*;

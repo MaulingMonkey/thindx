@@ -9,7 +9,7 @@ use winapi::um::d3d11shader::*;
 /// D3D11_SHADER_BUFFER_DESC
 #[derive(Clone, Copy, Default)]
 #[repr(C)] pub struct ShaderBufferDesc<'s> {
-    name:                           Option<CStrPtr<'s>>,
+    name:                           Option<&'s AbiCStr>,
     r#type:                         CbufferType,
     variables:                      u32,
     size:                           u32,
