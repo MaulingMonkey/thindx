@@ -21,7 +21,7 @@ use std::ops::{Deref, DerefMut};
 
 impl bool32 {
     pub const TRUE  : bool32 = bool32(1);
-    pub const FALSE : bool32 = bool32(1);
+    pub const FALSE : bool32 = bool32(0);
 
     pub fn from(value: impl Into<Self>) -> Self { value.into() }
 }
