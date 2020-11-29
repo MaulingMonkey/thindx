@@ -10,16 +10,22 @@ use winapi::um::d3dcommon::*;
 #[repr(transparent)] pub struct RegisterComponentType(D3D_REGISTER_COMPONENT_TYPE);
 #[doc(hidden)] pub use RegisterComponentType as RegisterComponent;
 
-enumish! {
-    RegisterComponent => D3D_REGISTER_COMPONENT_TYPE;
-}
+// Note: D3D10_* aliases D3D_* despite poor docs kinda implying otherwise (see d3dcommon.h)
+
+enumish! { RegisterComponent => D3D_REGISTER_COMPONENT_TYPE; Unknown, UInt32, SInt32, Float32 }
 
 #[allow(non_upper_case_globals)] impl RegisterComponent { // These are enum-like
-    // TODO
+    pub const Unknown   : RegisterComponent = RegisterComponent(D3D_REGISTER_COMPONENT_UNKNOWN);
+    pub const UInt32    : RegisterComponent = RegisterComponent(D3D_REGISTER_COMPONENT_UINT32);
+    pub const SInt32    : RegisterComponent = RegisterComponent(D3D_REGISTER_COMPONENT_SINT32);
+    pub const Float32   : RegisterComponent = RegisterComponent(D3D_REGISTER_COMPONENT_FLOAT32);
 }
 
 #[doc(hidden)] impl RegisterComponent { // Ctrl+C Ctrl+V support
-    // TODO
+    pub const UNKNOWN   : RegisterComponent = RegisterComponent(D3D_REGISTER_COMPONENT_UNKNOWN);
+    pub const UINT32    : RegisterComponent = RegisterComponent(D3D_REGISTER_COMPONENT_UINT32);
+    pub const SINT32    : RegisterComponent = RegisterComponent(D3D_REGISTER_COMPONENT_SINT32);
+    pub const FLOAT32   : RegisterComponent = RegisterComponent(D3D_REGISTER_COMPONENT_FLOAT32);
 }
 
 impl Default for RegisterComponent {
