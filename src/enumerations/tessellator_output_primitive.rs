@@ -9,16 +9,24 @@ use winapi::um::d3dcommon::*;
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)] pub struct TessellatorOutputPrimitive(D3D_TESSELLATOR_OUTPUT_PRIMITIVE);
 
-enumish! {
-    TessellatorOutputPrimitive => D3D_TESSELLATOR_OUTPUT_PRIMITIVE;
-}
+// Note: D3D11_* aliases D3D_* despite poor docs kinda implying otherwise (see d3dcommon.h)
+
+enumish! { TessellatorOutputPrimitive => D3D_TESSELLATOR_OUTPUT_PRIMITIVE; Undefined, Point, Line, TriangleCW, TriangleCCW }
 
 #[allow(non_upper_case_globals)] impl TessellatorOutputPrimitive { // These are enum-like
-    // TODO
+    pub const Undefined     : TessellatorOutputPrimitive = TessellatorOutputPrimitive(D3D_TESSELLATOR_OUTPUT_UNDEFINED);
+    pub const Point         : TessellatorOutputPrimitive = TessellatorOutputPrimitive(D3D_TESSELLATOR_OUTPUT_POINT);
+    pub const Line          : TessellatorOutputPrimitive = TessellatorOutputPrimitive(D3D_TESSELLATOR_OUTPUT_LINE);
+    pub const TriangleCW    : TessellatorOutputPrimitive = TessellatorOutputPrimitive(D3D_TESSELLATOR_OUTPUT_TRIANGLE_CW);
+    pub const TriangleCCW   : TessellatorOutputPrimitive = TessellatorOutputPrimitive(D3D_TESSELLATOR_OUTPUT_TRIANGLE_CCW);
 }
 
 #[doc(hidden)] impl TessellatorOutputPrimitive { // Ctrl+C Ctrl+V support
-    // TODO
+    pub const UNDEFINED     : TessellatorOutputPrimitive = TessellatorOutputPrimitive(D3D_TESSELLATOR_OUTPUT_UNDEFINED);
+    pub const POINT         : TessellatorOutputPrimitive = TessellatorOutputPrimitive(D3D_TESSELLATOR_OUTPUT_POINT);
+    pub const LINE          : TessellatorOutputPrimitive = TessellatorOutputPrimitive(D3D_TESSELLATOR_OUTPUT_LINE);
+    pub const TRIANGLE_CW   : TessellatorOutputPrimitive = TessellatorOutputPrimitive(D3D_TESSELLATOR_OUTPUT_TRIANGLE_CW);
+    pub const TRIANGLE_CCW  : TessellatorOutputPrimitive = TessellatorOutputPrimitive(D3D_TESSELLATOR_OUTPUT_TRIANGLE_CCW);
 }
 
 impl Default for TessellatorOutputPrimitive {
