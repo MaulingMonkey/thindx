@@ -11,7 +11,7 @@ use winapi::um::d3dcommon::*;
 /// Flags controlling how [D3DCompiler::disassemble_region] disassembles the compiled shader data.
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)] pub struct ShaderCbufferFlags(UINT);
-use ShaderCbufferFlags as CBF;
+#[doc(hidden)] pub use ShaderCbufferFlags as CBF;
 
 flags! { CBF => UINT; None, UserPacked }
 
