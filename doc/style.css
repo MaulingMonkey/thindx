@@ -28,6 +28,20 @@ h3[id^="safety"] > a {
 
 
 
+/* Highlight # impl sections */
+#main > .docblock > h1.section-header {
+    background:     rgb(118, 200, 255);
+    color:          black;
+    padding:        6px;
+    border:         none;
+}
+
+#main > .docblock > h1.section-header > a {
+    color:          black !important;
+}
+
+
+
 /* Mark inaccurate documentation sourced from other locations */
 .inaccurate {
     text-decoration:    line-through;

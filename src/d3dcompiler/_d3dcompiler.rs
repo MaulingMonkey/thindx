@@ -1,3 +1,5 @@
+#[allow(unused_imports)] use crate::*;
+
 use winapi::shared::basetsd::*;
 use winapi::shared::guiddef::*;
 use winapi::shared::minwindef::*;
@@ -9,30 +11,65 @@ use winapi::um::d3d11shader::*;
 
 
 
-mod _new;                           pub use _new::*;
-mod compile_from_file;              pub use compile_from_file::*;
+mod constructors;                   pub use constructors::*;
 mod compile;                        pub use compile::*;
-mod compile2;                       pub use compile2::*;
-mod compress_shaders;               pub use compress_shaders::*;
-mod create_blob;                    pub use create_blob::*;
-mod create_function_linking_graph;  pub use create_function_linking_graph::*;
-mod create_linker;                  pub use create_linker::*;
+mod archive;                        pub use archive::*;
+mod parts;                          pub use parts::*;
+mod reflection;                     pub use reflection::*;
+mod debugging;                      pub use debugging::*;
+mod blobs;                          pub use blobs::*;
+mod factories_d3d11;                pub use factories_d3d11::*;
 
-mod disassemble_region;             pub use disassemble_region::*;
-mod get_blob_part;                  pub use get_blob_part::*;
-mod get_debug_info;                 pub use get_debug_info::*;
-mod get_signature_blob;             pub use get_signature_blob::*;
-mod get_trace_instruction_offsets;  pub use get_trace_instruction_offsets::*;
-mod load_module;                    pub use load_module::*;
-mod preprocess;                     pub use preprocess::*;
-mod read_file_to_blob;              pub use read_file_to_blob::*;
-mod reflect;                        pub use reflect::*;
-mod reflect_library;                pub use reflect_library::*;
-mod set_blob_part;                  pub use set_blob_part::*;
-mod strip_shader;                   pub use strip_shader::*;
-mod write_blob_to_file;             pub use write_blob_to_file::*;
+
 
 /// Lazily-loaded `d3dcompiler_NN.dll`
+///
+/// <div class="interface-tree">
+///
+/// &nbsp;   **[Constructors](#constructors)**
+/// [new](D3DCompiler::new)(version: [u32]) -> Result&lt;[D3DCompiler]&gt;
+/// 
+/// &nbsp;   **[Compile & Preprocess HLSL to Bytecode](#compile)**
+/// [compile_from_file](D3DCompiler::compile_from_file)(...) - compile hlsl to bytecode
+/// [compile](D3DCompiler::compile)(...) - compile hlsl to bytecode
+/// [compile2](D3DCompiler::compile2)(...) - compile hlsl to bytecode
+/// [preprocess](D3DCompiler::preprocess)(...) - preprocess HLSL `#include`s and `#define`s
+///
+/// &nbsp;   **[Manipulate Bytecode Archives](#archive)**
+/// [compress_shaders](D3DCompiler::compress_shaders)(...) - compress hlsl or bytecode
+/// [decompress_shaders](D3DCompiler::decompress_shaders)(...) - decompress shaders
+/// [decompress_shaders_inplace](D3DCompiler::decompress_shaders_inplace)(...) - decompress shaders without allocating
+/// [decompress_shaders_count](D3DCompiler::decompress_shaders_count)(...) - get the number of shaders in a compressed archive
+///
+/// &nbsp;   **[Manipulate Bytecode by BlobPart](#parts)**
+/// [get_blob_part](D3DCompiler::get_blob_part)(...) - read a [BlobPart] of a shader bytecode blob
+/// [get_debug_info](D3DCompiler::get_debug_info)(...) - read [BlobPart::DebugInfo] of a shader bytecode blob
+/// [get_input_and_output_signature_blob](D3DCompiler::get_input_and_output_signature_blob)(...) - read [BlobPart::InputAndOutputSignatureBlob] of a shader bytecode blob
+/// [get_input_signature_blob](D3DCompiler::get_input_signature_blob)(...) - read [BlobPart::InputSignatureBlob] of a shader bytecode blob
+/// [get_output_signature_blob](D3DCompiler::get_output_signature_blob)(...) - read [BlobPart::OutputSignatureBlob] of a shader bytecode blob
+/// [set_blob_part](D3DCompiler::set_blob_part)(...) - write a [BlobPart] of a shader bytecode blob
+/// [strip_shader](D3DCompiler::strip_shader)(...) - strip debug information etc. from bytecode
+///
+/// &nbsp;   **[Bytecode Reflection](#reflection)**
+/// [reflect](D3DCompiler::reflect)(...) - reflect over a single shader's bytecode
+/// [reflect_library](D3DCompiler::reflect_library)(...) - ???
+///
+/// &nbsp;   **[Bytecode Debugging](#debugging)**
+/// [disassemble](D3DCompiler::disassemble)(...) - disassemble bytecode as human readable text
+/// [disassemble_region](D3DCompiler::disassemble_region)(...) - disassemble bytecode as human readable text
+/// [get_trace_instruction_offsets_count](D3DCompiler::get_trace_instruction_offsets_count)(...) - get the number of trace instruction byte offsets
+/// [get_trace_instruction_offsets_inplace](D3DCompiler::get_trace_instruction_offsets_inplace)(...) - read trace instruction byte offsets
+/// [get_trace_instruction_offsets](D3DCompiler::get_trace_instruction_offsets)(...) - read trace instruction byte offsets
+///
+/// &nbsp;   **[ReadOnlyBlob Utilities](#blobs)**
+/// [create_read_only_blob](D3DCompiler::create_read_only_blob)(...) - create a [ReadOnlyBlob] from memory
+/// [read_file_to_blob](D3DCompiler::read_file_to_blob)(...) - read a [ReadOnlyBlob] from disk
+/// [write_blob_to_file](D3DCompiler::write_blob_to_file)(...) - write a [ReadOnlyBlob] to disk
+///
+/// &nbsp;   **[D3D11 Factories & APIs](#d3d11)**
+/// [create_function_linking_graph](D3DCompiler::create_function_linking_graph)(...) - create a [d3d11::FunctionLinkingGraph]
+/// [create_linker](D3DCompiler::create_linker)(...) - create a [d3d11::Linker]
+/// [load_module](D3DCompiler::load_module)(...) - load a [d3d11::Module]</div>
 #[allow(non_snake_case)] // fn ptrs
 pub struct D3DCompiler {
     // https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/

@@ -4,6 +4,7 @@ use minidl::*;
 
 
 
+/// <h1 id="constructors" class="section-header"><a href="#constructors">Constructors</a></h1>
 impl D3DCompiler {
     /// Attempt to load `d3dcompiler_{version}.dll` from system paths.
     ///

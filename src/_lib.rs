@@ -23,62 +23,46 @@
 //! later turn out that I need to change the API to make constructing shader blobs from untrusted sources `unsafe`,
 //! unless I want to write my own bytecode validator from scratch (I don't, way out of project scope!)
 //!
-//! ### Core API
+//! ### Quickstart
 //!
-//! <div class="interface-tree">
+//! ```rust
+//! use thin3dcompiler::*;
 //!
-//! [D3DCompiler] - a lazily-loaded `d3dcompiler_NN.dll` that lets you report missing DLLs in a friendly way.
-//! &nbsp;    │
-//! &nbsp;    │  **[D3DCompiler] constructors**
-//! &nbsp;    ├─ [new](D3DCompiler::new)(version: [u32]) -> Result&lt;[D3DCompiler]&gt;
-//! &nbsp;    │
-//! &nbsp;    │  **Compile HLSL to Bytecode**
-//! &nbsp;    ├─ [compile_from_file](D3DCompiler::compile_from_file)(...) - compile hlsl to bytecode
-//! &nbsp;    ├─ [compile](D3DCompiler::compile)(...) - compile hlsl to bytecode
-//! &nbsp;    ├─ [compile2](D3DCompiler::compile2)(...) - compile hlsl to bytecode
-//! &nbsp;    ├─ [preprocess](D3DCompiler::preprocess)(...) - preprocess HLSL `#include`s and `#define`s
-//! &nbsp;    │
-//! &nbsp;    │  **Bytecode Manipulation**
-//! &nbsp;    ├─ [compress_shaders](D3DCompiler::compress_shaders)(...) - compress hlsl or bytecode
-//! &nbsp;    ├─ [decompress_shaders](D3DCompiler::decompress_shaders)(...) - decompress shaders
-//! &nbsp;    ├─ [decompress_shaders_inplace](D3DCompiler::decompress_shaders_inplace)(...) - decompress shaders without allocating
-//! &nbsp;    ├─ [decompress_shaders_count](D3DCompiler::decompress_shaders_count)(...) - get the number of shaders in a compressed archive
-//! &nbsp;    │
-//! &nbsp;    │  **Bytecode [BlobPart] Manipulation**
-//! &nbsp;    ├─ [get_blob_part](D3DCompiler::get_blob_part)(...) - read a [BlobPart] of a shader bytecode blob
-//! &nbsp;    ├─ [get_debug_info](D3DCompiler::get_debug_info)(...) - read [BlobPart::DebugInfo] of a shader bytecode blob
-//! &nbsp;    ├─ [get_input_and_output_signature_blob](D3DCompiler::get_input_and_output_signature_blob)(...) - read [BlobPart::InputAndOutputSignatureBlob] of a shader bytecode blob
-//! &nbsp;    ├─ [get_input_signature_blob](D3DCompiler::get_input_signature_blob)(...) - read [BlobPart::InputSignatureBlob] of a shader bytecode blob
-//! &nbsp;    ├─ [get_output_signature_blob](D3DCompiler::get_output_signature_blob)(...) - read [BlobPart::OutputSignatureBlob] of a shader bytecode blob
-//! &nbsp;    ├─ [set_blob_part](D3DCompiler::set_blob_part)(...) - write a [BlobPart] of a shader bytecode blob
-//! &nbsp;    ├─ [strip_shader](D3DCompiler::strip_shader)(...) - strip debug information etc. from bytecode
-//! &nbsp;    │
-//! &nbsp;    │  **Bytecode Reflection**
-//! &nbsp;    ├─ [reflect](D3DCompiler::reflect)(...) - reflect over a single shader's bytecode
-//! &nbsp;    ├─ [reflect_library](D3DCompiler::reflect_library)(...) - ???
-//! &nbsp;    │
-//! &nbsp;    │  **Bytecode Debugging**
-//! &nbsp;    ├─ [disassemble](D3DCompiler::disassemble)(...) - disassemble bytecode as human readable text
-//! &nbsp;    ├─ [disassemble_region](D3DCompiler::disassemble_region)(...) - disassemble bytecode as human readable text
-//! &nbsp;    ├─ [get_trace_instruction_offsets_count](D3DCompiler::get_trace_instruction_offsets_count)(...) - get the number of trace instruction byte offsets
-//! &nbsp;    ├─ [get_trace_instruction_offsets_inplace](D3DCompiler::get_trace_instruction_offsets_inplace)(...) - read trace instruction byte offsets
-//! &nbsp;    ├─ [get_trace_instruction_offsets](D3DCompiler::get_trace_instruction_offsets)(...) - read trace instruction byte offsets
-//! &nbsp;    │
-//! &nbsp;    │  **[ReadOnlyBlob] Utilities**
-//! &nbsp;    ├─ [create_read_only_blob](D3DCompiler::create_read_only_blob)(...) - create a [ReadOnlyBlob] from memory
-//! &nbsp;    ├─ [read_file_to_blob](D3DCompiler::read_file_to_blob)(...) - read a [ReadOnlyBlob] from disk
-//! &nbsp;    ├─ [write_blob_to_file](D3DCompiler::write_blob_to_file)(...) - write a [ReadOnlyBlob] to disk
-//! &nbsp;    │
-//! &nbsp;    │  **Create [d3d11] Factories/APIs**
-//! &nbsp;    ├─ [create_function_linking_graph](D3DCompiler::create_function_linking_graph)(...) - create a [d3d11::FunctionLinkingGraph]
-//! &nbsp;    ├─ [create_linker](D3DCompiler::create_linker)(...) - create a [d3d11::Linker]
-//! &nbsp;    └─ [load_module](D3DCompiler::load_module)(...) - load a [d3d11::Module]
+//! let compiler = D3DCompiler::new(47).unwrap(); // Loads d3dcompiler_47.dll
 //!
-//! <span class="inaccurate">DXCompiler</span> - TODO:  a lazily-loaded `dxcompiler.dll`
-//! &nbsp;    │
-//! &nbsp;    └ ???
+//! // Compile a pixel shader to shader model 4.0 bytecode
+//! let result = compiler.compile_from_file(
+//!     r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0",
+//!     Compile::Debug, CompileEffect::None,
+//! );
 //!
-//! </div>
+//! // You want diagnostics?  You got diagnostics!
+//! let pixel_shader : ReadOnlyBlob = match result {
+//!     Ok(CompileResult { shader, errors: None }) => shader,
+//!     Ok(CompileResult { shader, errors: Some(errors) }) => {
+//!         println!("Shader built OK with warnings:");
+//!         println!("{}", String::from_utf8_lossy(errors.get_buffer()));
+//!         shader
+//!     },
+//!     Err(error) => {
+//!         println!("Shader failed to build:");
+//!         println!("{}", error);
+//!         return;
+//!     },
+//! };
+//!
+//! // Get the raw bytes out of the ReadOnlyBlob
+//! let bytes : &[u8] = pixel_shader.get_buffer();
+//! ```
+//!
+//! See [D3DCompiler] for a *lot* more methods you can use!
+//!
+//! ### Factories
+//!
+//! | thin3dcompiler                                | docs.microsoft.com    | Desc |
+//! | --------------------------------------------- | --------------------- | ---- |
+//! | [D3DCompiler]                                 | `d3dcompiler_##.dll`  | The main factory for FXC bytecode (shader model 5 and earlier)
+//! | <span class="inaccurate">DXCompiler</span>    | `dxcompiler.dll`      | The main factory for DXC bytecode (shader model 6+)
 //!
 //! ### Enumerations
 //!
@@ -128,14 +112,6 @@
 //!
 //! [ID3DInclude]:              https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nn-d3dcommon-id3dinclude
 //! [D3D_SHADER_MACRO]:         https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ns-d3dcommon-d3d_shader_macro
-//!
-//!
-//!
-//!
-//!
-
-// TODO: fix ???s above
-
 
 
 

@@ -5,6 +5,7 @@ use std::ptr::*;
 
 
 
+/// <h1 id="archive" class="section-header"><a href="#archive">Manipulate Bytecode Archives</a></h1>
 impl D3DCompiler {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dcompressshaders)\]
     /// D3DCompressShaders
