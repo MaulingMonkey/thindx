@@ -27,7 +27,7 @@ impl D3DCompiler {
     /// # use thin3dcompiler::*; let compiler = D3DCompiler::new(47).unwrap();
     /// let blob : ReadOnlyBlob = compiler.read_file_to_blob(r"test\data\basic.hlsl").unwrap();
     ///
-    /// assert!(compiler.read_file_to_blob(r"test\data\nonexistant").is_err(), "file shouldn't exist");
+    /// assert!(compiler.read_file_to_blob(r"test\data\nonexistant").is_err(), "shouldn't exist");
     /// assert!(compiler.read_file_to_blob(r"test\data").is_err(), "can't read folder");
     /// ```
     ///
