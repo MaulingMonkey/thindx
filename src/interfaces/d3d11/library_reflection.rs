@@ -17,7 +17,13 @@ impl LibraryReflection {
     /// ID3D11LibraryReflection::GetDesc
     ///
     /// Get a library descriptor structure for the library reflection.
-    pub fn get_desc(&self) -> Result<D3D11_LIBRARY_DESC, Error> {
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use thin3dcompiler::*;
+    /// // TODO
+    /// ```
+    pub fn get_desc_raw(&self) -> Result<D3D11_LIBRARY_DESC, Error> {
         let mut desc = unsafe { std::mem::zeroed::<D3D11_LIBRARY_DESC>() }; // TODO: structify?
         let hr = unsafe { self.0.GetDesc(&mut desc) };
         Error::check("ID3D11LibraryReflection::GetDesc", hr)?;
@@ -28,6 +34,12 @@ impl LibraryReflection {
     /// ID3D11LibraryReflection::GetFunctionByIndex
     ///
     /// Gets the function reflector.
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use thin3dcompiler::*;
+    /// // TODO
+    /// ```
     pub fn get_function_by_index(&self, function_index: i32) -> Option<FunctionReflection> {
         let ptr = unsafe { self.0.GetFunctionByIndex(function_index) };
         unsafe { FunctionReflection::from_raw(self, ptr) }

@@ -14,7 +14,7 @@ use std::ptr::NonNull;
 /// A function-parameter-reflection interface accesses function-parameter info.
 ///
 /// ### See Also
-/// *   [ShaderReflection::]
+/// *   [FunctionReflection::get_function_parameter]
 #[derive(Clone)] #[repr(transparent)]
 pub struct FunctionParameterReflection<'r> {
     ptr:        NonNull<ID3D11FunctionParameterReflection>,
