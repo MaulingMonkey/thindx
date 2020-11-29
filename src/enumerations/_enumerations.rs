@@ -1,5 +1,10 @@
 mod blob_part;                          pub use blob_part::*;
 mod feature_level;                      pub use feature_level::*;
 mod interpolation_mode;                 pub use interpolation_mode::*;
+mod primitive_topology;                 pub use primitive_topology::*;
+mod primitive;                          pub use primitive::*;
 mod shader_variable_class;              pub use shader_variable_class::*;
 mod shader_variable_type;               pub use shader_variable_type::*;
+mod tessellator_domain;                 pub use tessellator_domain::*;
+mod tessellator_output_primitive;       pub use tessellator_output_primitive::*;
+mod tessellator_partitioning;           pub use tessellator_partitioning::*;
