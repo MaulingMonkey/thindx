@@ -17,9 +17,9 @@ impl D3DCompiler {
     ///
     /// ### Arguments
     /// *   `file_name`     - The shader file to compile
-    /// *   `defines`       - An optional array of defines.  Use `()` if no extra defines are desired.
+    /// *   `defines`       - An optional array of defines.  Use [None] if no extra defines are desired.
     /// *   `include`       - An optional interface for dispatching `#include`s.
-    ///                       Use `()` if `#include`s should not be supported.
+    ///                       Use [None] if `#include`s should not be supported.
     ///                       Use [StandardFileInclude] if you want to resolve `#include`s relative to `source_name`.
     /// *   `entrypoint`    - An optional entrypoint such as `Some("main")`.  Ignored if `target` is `fx_*`.
     /// *   `target`        - A target shader profile such as `ps_3_0`, `vs_5_0`, `fx_4_0`, etc.
@@ -27,14 +27,26 @@ impl D3DCompiler {
     /// *   `flags2`        - [CompileEffect]::\* constants.
     ///
     /// ### Returns
-    /// *   Err([ErrorKind::MISSING_DLL_EXPORT])    - `d3dcompiler_4?.dll` and earlier
-    /// *   Ok([CompileResult] { code, errors })
+    /// *   Ok([CompileResult] { code: [ReadOnlyBlob], errors: [Option]&lt;[ReadOnlyBlob]&gt; })
+    /// *   Err([CompileError]) where `error.kind` ==
+    ///     *   [ErrorKind::MISSING_DLL_EXPORT]     - `d3dcompiler_4?.dll` and earlier
+    ///     *   [D3DERR::INVALIDCALL]               - on invalid parameters such as nonexistant `target`s
+    ///     *   [E::FAIL]                           - if the shader failed to compile
     ///
     /// ### Example
     /// ```rust
     /// # use thin3dcompiler::*; let compiler = D3DCompiler::new(47).unwrap();
-    /// let ps = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap();
-    /// let vs = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "vs_main", "vs_4_0", Compile::Debug, CompileEffect::None).unwrap();
+    /// let pixel_shader = compiler.compile_from_file(
+    ///     r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0",
+    ///     Compile::Debug, CompileEffect::None,
+    /// ).unwrap();
+    ///
+    /// let vertex_shader = compiler.compile_from_file(
+    ///     r"test\data\basic.hlsl", None, StandardFileInclude, "vs_main", "vs_4_0",
+    ///     Compile::Debug, CompileEffect::None,
+    /// ).unwrap();
+    ///
+    /// // TODO: defines/includes examples
     /// ```
     ///
     /// <div class="note"><b>Note:</b> You can use this API to develop your Windows Store apps, but you can't use it in apps that you submit to the Windows Store.</div>
