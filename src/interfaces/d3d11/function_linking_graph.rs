@@ -37,7 +37,7 @@ impl FunctionLinkingGraph {
     /// ```rust
     /// # use thin3dcompiler::*; use d3d11::*;
     /// # let compiler = D3DCompiler::new(47).unwrap();
-    /// # let flg : FunctionLinkingGraph = compiler.create_function_linking_graph(()).unwrap();
+    /// # let flg : FunctionLinkingGraph = compiler.create_function_linking_graph(None).unwrap();
     /// // TODO
     /// // flg.call_function().unwrap();
     /// ```
@@ -69,7 +69,7 @@ impl FunctionLinkingGraph {
     /// ```rust
     /// # use thin3dcompiler::*; use d3d11::*;
     /// # let compiler = D3DCompiler::new(47).unwrap();
-    /// # let flg : FunctionLinkingGraph = compiler.create_function_linking_graph(()).unwrap();
+    /// # let flg : FunctionLinkingGraph = compiler.create_function_linking_graph(None).unwrap();
     /// // Nothing created yet
     /// let error : Error = flg.create_module_instance().err().unwrap();
     /// assert_eq!(E::FAIL, error.kind());
@@ -106,7 +106,7 @@ impl FunctionLinkingGraph {
     /// ```rust
     /// # use thin3dcompiler::*; use d3d11::*;
     /// # let compiler = D3DCompiler::new(47).unwrap();
-    /// # let flg : FunctionLinkingGraph = compiler.create_function_linking_graph(()).unwrap();
+    /// # let flg : FunctionLinkingGraph = compiler.create_function_linking_graph(None).unwrap();
     /// let hlsl = flg.generate_hlsl(()).unwrap();
     /// ```
     pub fn generate_hlsl(&self, flags: ()) -> Result<ReadOnlyBlob, ErrorKind> {
@@ -132,7 +132,7 @@ impl FunctionLinkingGraph {
     /// ```rust
     /// # use thin3dcompiler::*; use d3d11::*;
     /// # let compiler = D3DCompiler::new(47).unwrap();
-    /// # let flg : FunctionLinkingGraph = compiler.create_function_linking_graph(()).unwrap();
+    /// # let flg : FunctionLinkingGraph = compiler.create_function_linking_graph(None).unwrap();
     /// let errors : Option<ReadOnlyBlob> = flg.get_last_error().unwrap();
     /// assert!(errors.is_none(), "No errors were reported by flg");
     /// ```
@@ -152,7 +152,7 @@ impl FunctionLinkingGraph {
     /// ```rust
     /// # use thin3dcompiler::*; use d3d11::*;
     /// # let compiler = D3DCompiler::new(47).unwrap();
-    /// # let flg : FunctionLinkingGraph = compiler.create_function_linking_graph(()).unwrap();
+    /// # let flg : FunctionLinkingGraph = compiler.create_function_linking_graph(None).unwrap();
     /// // TODO
     /// // flg.pass_value().unwrap();
     /// ```
@@ -170,7 +170,7 @@ impl FunctionLinkingGraph {
     /// ```rust
     /// # use thin3dcompiler::*; use d3d11::*;
     /// # let compiler = D3DCompiler::new(47).unwrap();
-    /// # let flg : FunctionLinkingGraph = compiler.create_function_linking_graph(()).unwrap();
+    /// # let flg : FunctionLinkingGraph = compiler.create_function_linking_graph(None).unwrap();
     /// // TODO
     /// // flg.pass_value_with_swizzle().unwrap();
     /// ```
@@ -190,7 +190,7 @@ impl FunctionLinkingGraph {
     /// ```rust
     /// # use thin3dcompiler::*; use d3d11::*;
     /// # let compiler = D3DCompiler::new(47).unwrap();
-    /// # let flg : FunctionLinkingGraph = compiler.create_function_linking_graph(()).unwrap();
+    /// # let flg : FunctionLinkingGraph = compiler.create_function_linking_graph(None).unwrap();
     /// // TODO
     /// // flg.set_input_signature().unwrap();
     /// ```
@@ -212,7 +212,7 @@ impl FunctionLinkingGraph {
     /// ```rust
     /// # use thin3dcompiler::*; use d3d11::*;
     /// # let compiler = D3DCompiler::new(47).unwrap();
-    /// # let flg : FunctionLinkingGraph = compiler.create_function_linking_graph(()).unwrap();
+    /// # let flg : FunctionLinkingGraph = compiler.create_function_linking_graph(None).unwrap();
     /// // TODO
     /// // flg.set_output_signature().unwrap();
     /// ```

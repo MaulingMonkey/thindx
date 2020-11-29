@@ -13,7 +13,7 @@ impl D3DCompiler {
     /// > to create precompiled HLSL functions, package them into libraries, and link them into full shaders at run time.
     ///
     /// ### Arguments
-    /// *   `flags`         - Reserved, initialize with `()`
+    /// *   `flags`         - Reserved, initialize with `None`
     ///
     /// ### Returns
     /// *   Err([ErrorKind::MISSING_DLL_EXPORT])    - `d3dcompiler_4?.dll` and earlier
@@ -22,9 +22,9 @@ impl D3DCompiler {
     /// ### Example
     /// ```rust
     /// # use thin3dcompiler::*; let compiler = D3DCompiler::new(47).unwrap();
-    /// let flg: d3d11::FunctionLinkingGraph = compiler.create_function_linking_graph(()).unwrap();
+    /// let flg: d3d11::FunctionLinkingGraph = compiler.create_function_linking_graph(None).unwrap();
     /// ```
-    pub fn create_function_linking_graph(&self, flags: ()) -> Result<d3d11::FunctionLinkingGraph, ErrorKind> {
+    pub fn create_function_linking_graph(&self, flags: Option<void::Void>) -> Result<d3d11::FunctionLinkingGraph, ErrorKind> {
         // Early outs
         let f = self.D3DCreateFunctionLinkingGraph.ok_or(ErrorKind::MISSING_DLL_EXPORT)?;
 
