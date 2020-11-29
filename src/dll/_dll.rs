@@ -18,6 +18,7 @@ mod create_blob;                    pub use create_blob::*;
 mod create_function_linking_graph;  pub use create_function_linking_graph::*;
 mod create_linker;                  pub use create_linker::*;
 
+mod disassemble_region;             pub use disassemble_region::*;
 mod get_blob_part;                  pub use get_blob_part::*;
 mod get_debug_info;                 pub use get_debug_info::*;
 mod get_signature_blob;             pub use get_signature_blob::*;
@@ -113,7 +114,17 @@ pub struct D3DCompiler {
     // TODO: D3DDecompressShaders
     // TODO: D3DDisassemble
     // TODO: D3DDisassemble10Effect
-    // TODO: D3DDisassembleRegion
+
+    pub(crate) D3DDisassembleRegion: Option<unsafe extern "system" fn (
+        pSrcData:           LPCVOID,
+        SrcDataSize:        SIZE_T,
+        Flags:              UINT,
+        szComments:         LPCSTR,
+        StartByteOffset:    SIZE_T,
+        NumInsts:           SIZE_T,
+        pFinishByteOffset:  *mut SIZE_T,
+        ppDisassembly:      *mut *mut ID3DBlob,
+    ) -> HRESULT>,
 
     pub(crate) D3DGetBlobPart: Option<unsafe extern "system" fn(
         pSrcData:           LPCVOID,
