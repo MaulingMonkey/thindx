@@ -11,14 +11,17 @@ impl D3DCompiler {
     /// Retrieves the number of byte offsets for instructions within a section of shader code.
     ///
     /// ### Returns
-    /// *   Err([ErrorKind::MISSING_DLL_EXPORT])    - `d3dcompiler_43.dll` and earlier
-    /// *   Ok(...)
+    /// *   Ok([usize])                             - the number of available trace instruction offsets in that range
+    /// *   Err([Error]) where `error.kind()` ==
+    ///     *   [ErrorKind::MISSING_DLL_EXPORT]    - `d3dcompiler_43.dll` and earlier
     ///
     /// ### Example
     /// ```rust
     /// # use thin3dcompiler::*; let compiler = D3DCompiler::new(47).unwrap();
     /// # let shader = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap().shader;
-    /// println!("{}", compiler.get_trace_instruction_offsets_count(shader.get_buffer(), GetInstOffsets::None, 0, !0).unwrap());
+    /// println!("{}", compiler.get_trace_instruction_offsets_count(
+    ///     shader.get_buffer(), GetInstOffsets::None, 0, std::usize::MAX
+    /// ).unwrap());
     /// ```
     ///
     /// ### Output
@@ -48,15 +51,18 @@ impl D3DCompiler {
     /// Retrieves the byte offsets for instructions within a section of shader code.
     ///
     /// ### Returns
-    /// *   Err([ErrorKind::MISSING_DLL_EXPORT])    - `d3dcompiler_43.dll` and earlier
-    /// *   Ok(...)
+    /// *   Ok(&amp;\[[usize]\])                    - the trace instruction offsets in `offsets` that were read
+    /// *   Err([Error]) where `error.kind()` ==
+    ///     *   [ErrorKind::MISSING_DLL_EXPORT]     - `d3dcompiler_43.dll` and earlier
     ///
     /// ### Example
     /// ```rust
     /// # use thin3dcompiler::*; let compiler = D3DCompiler::new(47).unwrap();
     /// # let shader = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap().shader;
     /// let mut offsets = [0; 128];
-    /// let offsets = compiler.get_trace_instruction_offsets_inplace(shader.get_buffer(), GetInstOffsets::None, 0, &mut offsets).unwrap();
+    /// let offsets : &[usize] = compiler.get_trace_instruction_offsets_inplace(
+    ///     shader.get_buffer(), GetInstOffsets::None, 0, &mut offsets
+    /// ).unwrap();
     /// println!("{:?}", offsets);
     /// ```
     ///
@@ -87,14 +93,17 @@ impl D3DCompiler {
     /// Retrieves the byte offsets for instructions within a section of shader code.
     ///
     /// ### Returns
-    /// *   Err([ErrorKind::MISSING_DLL_EXPORT])    - `d3dcompiler_43.dll` and earlier
-    /// *   Ok(...)
+    /// *   Ok([Vec]&lt;[usize]&gt;)                    - trace instruction offsets
+    /// *   Err([Error]) where `error.kind()` ==
+    ///     *   [ErrorKind::MISSING_DLL_EXPORT]         - `d3dcompiler_43.dll` and earlier
     ///
     /// ### Example
     /// ```rust
     /// # use thin3dcompiler::*; let compiler = D3DCompiler::new(47).unwrap();
     /// # let shader = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap().shader;
-    /// let offsets = compiler.get_trace_instruction_offsets(shader.get_buffer(), GetInstOffsets::None, 0, !0).unwrap();
+    /// let offsets : Vec<usize> = compiler.get_trace_instruction_offsets(
+    ///     shader.get_buffer(), GetInstOffsets::None, 0, std::usize::MAX
+    /// ).unwrap();
     /// println!("{:?}", offsets);
     /// ```
     ///
