@@ -1,6 +1,7 @@
 #[allow(unused_imports)] use crate::*;
 
 use winapi::shared::minwindef::UINT;
+use winapi::um::d3dcommon::*;
 
 
 
