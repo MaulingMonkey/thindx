@@ -20,6 +20,8 @@ enumish! {
 
     // ErrorKind
     MISSING_DLL_EXPORT,
+    SLICE_TOO_LARGE,
+    STRING_CONTAINS_NULS,
 
     // D3D11_ERROR
     FILE_NOT_FOUND,
@@ -67,6 +69,9 @@ impl ErrorKind {
     /// `0xA73DC002`    Slice length exceeded some kind of length limit (typically a conversion to a 32-bit length, or
     ///                 an extra cap introduced by thin3dcompiler to avoid undefined behavior from allocation size overflows.)
     pub const SLICE_TOO_LARGE : ErrorKind = ErrorKind(0xA73DC002);
+
+    /// `0xA73DC003`    String contains unexpected internal `\0`s when being passed to a function taking C-style `\0`-*terminated* strings.
+    pub const STRING_CONTAINS_NULS : ErrorKind = ErrorKind(0xA73DC003);
 }
 
 impl D3D11_ERROR {

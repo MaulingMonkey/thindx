@@ -1,7 +1,6 @@
 use crate::*;
 use crate::d3d11::*;
 
-use std::ffi::CString;
 use std::ptr::*;
 
 
@@ -21,14 +20,14 @@ impl Module {
     /// ### Arguments
     /// *   `namespace` - The name of a shader module to initialize.  This can be [None] if you don't want to specify a name for the module.
     ///
-    /// ### Examples
+    /// ### Example
     /// ```rust
     /// # use thin3dcompiler::*;
     /// // TODO
     /// ```
-    pub fn create_instance(&self, namespace: impl Into<Option<CString>>) -> Result<ModuleInstance, Error> {
-        let namespace = namespace.into();
-        let namespace = namespace.as_ref().map_or(null(), |s| s.as_ptr());
+    pub fn create_instance(&self, namespace: impl TryIntoAsOptCStr) -> Result<ModuleInstance, Error> {
+        let namespace = namespace.try_into().map_err(|e| Error::new("ID3D11Module::CreateInstance", e))?;
+        let namespace = namespace.as_opt_cstr();
 
         let mut instance = null_mut();
         let hr = unsafe { self.0.CreateInstance(namespace, &mut instance) };

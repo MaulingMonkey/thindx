@@ -81,12 +81,12 @@ impl D3DCompiler {
         &self,
         src_data:           &[u8],
         flags:              impl Into<Disasm>,
-        comments:           impl Into<Option<&'s str>>,
+        comments:           impl TryIntoAsOptCStr,
     ) -> Result<ReadOnlyBlob, Error> {
         let f = self.D3DDisassemble.ok_or(Error::new("D3DDisassemble", ErrorKind::MISSING_DLL_EXPORT))?;
         let flags = flags.into().into();
-        let comments = comments.into().map(|s| s.bytes().chain(Some(0)).collect::<Vec<_>>());
-        let comments = comments.as_ref().map_or(null(), |s| s.as_ptr().cast());
+        let comments = comments.try_into()?;
+        let comments = comments.as_opt_cstr();
         let mut disassembly = null_mut();
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), flags, comments, &mut disassembly) };
         Error::check("D3DDisassemble", hr)?;
@@ -166,14 +166,14 @@ impl D3DCompiler {
         &self,
         src_data:           &[u8],
         flags:              impl Into<Disasm>,
-        comments:           impl Into<Option<&'s str>>,
+        comments:           impl TryIntoAsOptCStr,
         start_byte_offset:  usize,
         num_insts:          usize,
     ) -> Result<DisassembledRegion, Error> {
         let f = self.D3DDisassembleRegion.ok_or(Error::new("D3DDisassembleRegion", ErrorKind::MISSING_DLL_EXPORT))?;
         let flags = flags.into().into();
-        let comments = comments.into().map(|s| s.bytes().chain(Some(0)).collect::<Vec<_>>());
-        let comments = comments.as_ref().map_or(null(), |s| s.as_ptr().cast());
+        let comments = comments.try_into()?;
+        let comments = comments.as_opt_cstr();
         let mut disassembly = null_mut();
         let mut finish_byte_offset = 0;
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), flags, comments, start_byte_offset, num_insts, &mut finish_byte_offset, &mut disassembly) };

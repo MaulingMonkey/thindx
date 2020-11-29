@@ -107,9 +107,9 @@ impl<'r> ShaderReflectionType<'r> {
     /// # use thin3dcompiler::*;
     /// // TODO
     /// ```
-    pub fn get_member_type_by_name(&self, name: &str) -> Option<ShaderReflectionType<'r>> {
-        let name = name.bytes().chain(Some(0)).collect::<Vec<_>>();
-        let ptr = unsafe { self.ptr.as_ref().GetMemberTypeByName(name.as_ptr().cast()) };
+    pub fn get_member_type_by_name(&self, name: impl TryIntoAsCStr) -> Option<ShaderReflectionType<'r>> {
+        let name = name.try_into().ok()?;
+        let ptr = unsafe { self.ptr.as_ref().GetMemberTypeByName(name.as_cstr()) };
         unsafe { ShaderReflectionType::from_raw(self.phantom, ptr) }
     }
 

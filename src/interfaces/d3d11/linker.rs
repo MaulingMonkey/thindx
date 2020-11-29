@@ -1,7 +1,6 @@
 use crate::*;
 use crate::d3d11::*;
 
-use std::ffi::*;
 use std::ptr::*;
 
 
@@ -45,11 +44,11 @@ impl Linker {
     /// # use thin3dcompiler::*;
     /// // TODO
     /// ```
-    pub fn link(&self, entry: &ModuleInstance, entry_name: impl Into<CString>, target_name: impl Into<CString>, flags: ()) -> Result<CompileResult, Error> {
-        let entry_name  = entry_name.into();
-        let target_name = target_name.into();
-        let entry_name  = entry_name.as_ptr();
-        let target_name = target_name.as_ptr();
+    pub fn link(&self, entry: &ModuleInstance, entry_name: impl TryIntoAsCStr, target_name: impl TryIntoAsCStr, flags: ()) -> Result<CompileResult, Error> {
+        let entry_name  = entry_name .try_into().map_err(|e| Error::new("ID3D11Linker::Link", e))?;
+        let target_name = target_name.try_into().map_err(|e| Error::new("ID3D11Linker::Link", e))?;
+        let entry_name  = entry_name .as_cstr();
+        let target_name = target_name.as_cstr();
 
         let _ = flags; let flags = 0;
 
@@ -66,7 +65,7 @@ impl Linker {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11linker-uselibrary)\]
     /// ID3D11Linker::UseLibrary
     ///
-    ///
+    /// Adds an instance of a library module to be used for linking.
     ///
     /// ### Example
     /// ```rust

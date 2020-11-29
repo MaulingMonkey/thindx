@@ -114,8 +114,8 @@ impl D3DCompiler {
         file_name:      impl AsRef<Path>,
         defines:        impl AsShaderMacros,
         include:        impl AsID3DInclude,
-        entrypoint:     impl Into<Option<&'s str>>,
-        target:         impl Into<Option<&'s str>>,
+        entrypoint:     impl TryIntoAsOptCStr,
+        target:         impl TryIntoAsCStr,
         flags1:         impl Into<Compile>,
         flags2:         impl Into<CompileEffect>,
     ) -> Result<CompileResult, CompileError> {
@@ -125,12 +125,10 @@ impl D3DCompiler {
 
         let file_name = file_name.as_ref().as_os_str().encode_wide().chain(Some(0)).collect::<Vec<_>>();
 
-        // Note: No error checking occurs for internal `\0`s - they will simply terminate the string earlier than expected.
-        // Note: We should perhaps reject non-ASCII values instead of allowing UTF8
-        let entrypoint  = entrypoint    .into().map(|s| s.bytes().chain(Some(0)).collect::<Vec<_>>());
-        let target      = target        .into().map(|s| s.bytes().chain(Some(0)).collect::<Vec<_>>());
-        let entrypoint  = entrypoint    .as_ref().map_or(null(), |s| s.as_ptr().cast());
-        let target      = target        .as_ref().map_or(null(), |s| s.as_ptr().cast());
+        let entrypoint  = entrypoint.try_into().map_err(|e| CompileError { kind: e, shader: None, errors: None })?;
+        let target      = target    .try_into().map_err(|e| CompileError { kind: e, shader: None, errors: None })?;
+        let entrypoint  = entrypoint.as_opt_cstr();
+        let target      = target    .as_cstr();
 
         let include     = include.as_id3dinclude();
         let flags1      = flags1.into().into();
@@ -200,11 +198,11 @@ impl D3DCompiler {
     pub fn compile<'s>(
         &self,
         src_data:       &[u8],
-        source_name:    impl Into<Option<&'s str>>,
+        source_name:    impl TryIntoAsOptCStr,
         defines:        impl AsShaderMacros,
         include:        impl AsID3DInclude,
-        entrypoint:     impl Into<Option<&'s str>>,
-        target:         impl Into<Option<&'s str>>,
+        entrypoint:     impl TryIntoAsOptCStr,
+        target:         impl TryIntoAsCStr,
         flags1:         impl Into<Compile>,
         flags2:         impl Into<CompileEffect>,
     ) -> Result<CompileResult, CompileError> {
@@ -214,12 +212,12 @@ impl D3DCompiler {
 
         // Note: No error checking occurs for internal `\0`s - they will simply terminate the string earlier than expected.
         // Note: We should perhaps reject non-ASCII values instead of allowing UTF8
-        let source_name = source_name   .into().map(|s| s.bytes().chain(Some(0)).collect::<Vec<_>>());
-        let entrypoint  = entrypoint    .into().map(|s| s.bytes().chain(Some(0)).collect::<Vec<_>>());
-        let target      = target        .into().map(|s| s.bytes().chain(Some(0)).collect::<Vec<_>>());
-        let source_name = source_name   .as_ref().map_or(null(), |s| s.as_ptr().cast());
-        let entrypoint  = entrypoint    .as_ref().map_or(null(), |s| s.as_ptr().cast());
-        let target      = target        .as_ref().map_or(null(), |s| s.as_ptr().cast());
+        let source_name = source_name   .try_into().map_err(|e| CompileError { kind: e, shader: None, errors: None })?;
+        let entrypoint  = entrypoint    .try_into().map_err(|e| CompileError { kind: e, shader: None, errors: None })?;
+        let target      = target        .try_into().map_err(|e| CompileError { kind: e, shader: None, errors: None })?;
+        let source_name = source_name   .as_opt_cstr();
+        let entrypoint  = entrypoint    .as_opt_cstr();
+        let target      = target        .as_cstr();
 
         let include     = include.as_id3dinclude();
         let flags1      = flags1.into().into();
@@ -295,11 +293,11 @@ impl D3DCompiler {
     pub fn compile2<'s>(
         &self,
         src_data:               &[u8],
-        source_name:            impl Into<Option<&'s str>>,
+        source_name:            impl TryIntoAsOptCStr,
         defines:                impl AsShaderMacros,
         include:                impl AsID3DInclude,
-        entrypoint:             impl Into<Option<&'s str>>,
-        target:                 impl Into<Option<&'s str>>,
+        entrypoint:             impl TryIntoAsOptCStr,
+        target:                 impl TryIntoAsCStr,
         flags1:                 impl Into<Compile>,
         flags2:                 impl Into<CompileEffect>,
         secondary_data_flags:   impl Into<CompileSecData>,
@@ -311,12 +309,12 @@ impl D3DCompiler {
 
         // Note: No error checking occurs for internal `\0`s - they will simply terminate the string earlier than expected.
         // Note: We should perhaps reject non-ASCII values instead of allowing UTF8
-        let source_name = source_name   .into().map(|s| s.bytes().chain(Some(0)).collect::<Vec<_>>());
-        let entrypoint  = entrypoint    .into().map(|s| s.bytes().chain(Some(0)).collect::<Vec<_>>());
-        let target      = target        .into().map(|s| s.bytes().chain(Some(0)).collect::<Vec<_>>());
-        let source_name = source_name   .as_ref().map_or(null(), |s| s.as_ptr().cast());
-        let entrypoint  = entrypoint    .as_ref().map_or(null(), |s| s.as_ptr().cast());
-        let target      = target        .as_ref().map_or(null(), |s| s.as_ptr().cast());
+        let source_name = source_name   .try_into().map_err(|e| CompileError { kind: e, shader: None, errors: None })?;
+        let entrypoint  = entrypoint    .try_into().map_err(|e| CompileError { kind: e, shader: None, errors: None })?;
+        let target      = target        .try_into().map_err(|e| CompileError { kind: e, shader: None, errors: None })?;
+        let source_name = source_name   .as_opt_cstr();
+        let entrypoint  = entrypoint    .as_opt_cstr();
+        let target      = target        .as_cstr();
 
         let include     = include.as_id3dinclude();
         let flags1      = flags1.into().into();
@@ -391,7 +389,7 @@ impl D3DCompiler {
     pub fn preprocess<'s>(
         &self,
         src_data:       &[u8],
-        source_name:    impl Into<Option<&'s str>>,
+        source_name:    impl TryIntoAsOptCStr,
         defines:        impl AsShaderMacros,
         include:        impl AsID3DInclude,
     ) -> Result<CompileResult, CompileError> {
@@ -401,8 +399,8 @@ impl D3DCompiler {
 
         // Note: No error checking occurs for internal `\0`s - they will simply terminate the string earlier than expected.
         // Note: We should perhaps reject non-ASCII values instead of allowing UTF8
-        let source_name = source_name.into().map(|s| s.bytes().chain(Some(0)).collect::<Vec<_>>());
-        let source_name = source_name.as_ref().map_or(null(), |s| s.as_ptr().cast());
+        let source_name = source_name.try_into().map_err(|e| CompileError { kind: e, shader: None, errors: None })?;
+        let source_name = source_name.as_opt_cstr();
         let include     = include.as_id3dinclude();
 
         let mut shader = null_mut();

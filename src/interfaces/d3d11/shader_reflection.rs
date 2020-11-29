@@ -4,8 +4,6 @@ use crate::d3d11::*;
 use winapi::um::d3dcommon::*;
 use winapi::um::d3d11shader::*;
 
-use std::ffi::*;
-
 
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11shaderreflection)\]
@@ -55,8 +53,8 @@ impl ShaderReflection {
     /// # use thin3dcompiler::*;
     /// // TODO
     /// ```
-    pub fn get_constant_buffer_by_name(&self, name: impl Into<CString>) -> Option<ShaderReflectionConstantBuffer> {
-        let ptr = unsafe { self.0.GetConstantBufferByName(name.into().as_ptr()) };
+    pub fn get_constant_buffer_by_name(&self, name: impl TryIntoAsCStr) -> Option<ShaderReflectionConstantBuffer> {
+        let ptr = unsafe { self.0.GetConstantBufferByName(name.try_into().ok()?.as_cstr()) };
         unsafe { ShaderReflectionConstantBuffer::from_raw(self, ptr) }
     }
 
@@ -256,9 +254,10 @@ impl ShaderReflection {
     /// # use thin3dcompiler::*;
     /// // TODO
     /// ```
-    pub fn get_resource_binding_desc_by_name_raw(&self, name: impl Into<CString>) -> Result<D3D11_SHADER_INPUT_BIND_DESC, Error> {
+    pub fn get_resource_binding_desc_by_name_raw(&self, name: impl TryIntoAsCStr) -> Result<D3D11_SHADER_INPUT_BIND_DESC, Error> {
+        let name = name.try_into().map_err(|e| Error::new("ID3D11ShaderReflection::GetResourceBindingDescByName", e))?;
         let mut desc = unsafe { std::mem::zeroed::<D3D11_SHADER_INPUT_BIND_DESC>() };
-        let hr = unsafe { self.0.GetResourceBindingDescByName(name.into().as_ptr(), &mut desc) };
+        let hr = unsafe { self.0.GetResourceBindingDescByName(name.as_cstr(), &mut desc) };
         Error::check("ID3D11ShaderReflection::GetResourceBindingDescByName", hr)?;
         Ok(desc)
     }
@@ -290,8 +289,8 @@ impl ShaderReflection {
     /// # use thin3dcompiler::*;
     /// // TODO
     /// ```
-    pub fn get_variable_by_name(&self, name: impl Into<CString>) -> Option<ShaderReflectionVariable> {
-        let ptr = unsafe { self.0.GetVariableByName(name.into().as_ptr()) };
+    pub fn get_variable_by_name(&self, name: impl TryIntoAsCStr) -> Option<ShaderReflectionVariable> {
+        let ptr = unsafe { self.0.GetVariableByName(name.try_into().ok()?.as_cstr()) };
         unsafe { ShaderReflectionVariable::from_raw(self, ptr) }
     }
 

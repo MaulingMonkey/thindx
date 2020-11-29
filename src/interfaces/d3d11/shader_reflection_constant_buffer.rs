@@ -74,9 +74,9 @@ impl<'r> ShaderReflectionConstantBuffer<'r> {
     /// # use thin3dcompiler::*;
     /// // TODO
     /// ```
-    pub fn get_variable_by_name(&self, name: &str) -> Option<ShaderReflectionVariable<'r>> {
-        let name = name.bytes().chain(Some(0)).collect::<Vec<_>>();
-        let ptr = unsafe { self.ptr.as_ref().GetVariableByName(name.as_ptr().cast()) };
+    pub fn get_variable_by_name(&self, name: impl TryIntoAsCStr) -> Option<ShaderReflectionVariable<'r>> {
+        let name = name.try_into().ok()?;
+        let ptr = unsafe { self.ptr.as_ref().GetVariableByName(name.as_cstr()) };
         unsafe { ShaderReflectionVariable::from_raw(self.phantom, ptr) }
     }
 }
