@@ -1,8 +1,11 @@
 mod blob_part;                          pub use blob_part::*;
 mod feature_level;                      pub use feature_level::*;
 mod interpolation_mode;                 pub use interpolation_mode::*;
+mod min_precision;                      pub use min_precision::*;
+mod name;                               pub use name::*;
 mod primitive_topology;                 pub use primitive_topology::*;
 mod primitive;                          pub use primitive::*;
+mod register_component_type;            pub use register_component_type::*;
 mod resource_return_type;               pub use resource_return_type::*;
 mod shader_input_flags;                 pub use shader_input_flags::*;
 mod shader_input_type;                  pub use shader_input_type::*;
