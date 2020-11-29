@@ -97,11 +97,7 @@ impl D3DCompiler {
     }
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3ddisassembleregion)\]
-/// D3DDisassembleRegion's `pFinishByteOffset` and `ppDisassembly` output parameters
-///
-/// ### See Also
-/// *   [D3DCompiler::disassemble_region]
+/// { disassembly: [ReadOnlyBlob], finish_byte_offset: [usize] }
 pub struct DisassembledRegion {
     pub disassembly:        ReadOnlyBlob,
     pub finish_byte_offset: usize,
