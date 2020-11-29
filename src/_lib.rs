@@ -40,6 +40,9 @@
 //! &nbsp;    │
 //! &nbsp;    │  **Bytecode Manipulation**
 //! &nbsp;    ├─ [compress_shaders](D3DCompiler::compress_shaders)(...) - compress hlsl or bytecode
+//! &nbsp;    ├─ [decompress_shaders](D3DCompiler::decompress_shaders)(...) - decompress shaders
+//! &nbsp;    ├─ [decompress_shaders_inplace](D3DCompiler::decompress_shaders_inplace)(...) - decompress shaders without allocating
+//! &nbsp;    ├─ [decompress_shaders_count](D3DCompiler::decompress_shaders_count)(...) - get the number of shaders in a compressed archive
 //! &nbsp;    ├─ [strip_shader](D3DCompiler::strip_shader)(...) - strip debug information etc. from bytecode
 //! &nbsp;    │
 //! &nbsp;    │  **Bytecode [BlobPart] Manipulation**
