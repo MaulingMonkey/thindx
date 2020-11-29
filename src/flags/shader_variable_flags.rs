@@ -1,6 +1,7 @@
 #[allow(unused_imports)] use crate::*;
 
 use winapi::shared::minwindef::UINT;
+use winapi::um::d3dcommon::*;
 
 
 
@@ -10,18 +11,25 @@ use winapi::shared::minwindef::UINT;
 /// Flags controlling how [D3DCompiler::disassemble_region] disassembles the compiled shader data.
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)] pub struct ShaderVariableFlags(UINT);
+#[doc(hidden)] pub use ShaderVariableFlags as SVF;
 
-flags! { ShaderVariableFlags => UINT; None }
+flags! { SVF => UINT; None, UserPacked, Used, InterfacePointer, InterfaceParameter }
 
-#[allow(non_upper_case_globals)] impl ShaderVariableFlags { // These are enum-like
-    pub const None          : ShaderVariableFlags = ShaderVariableFlags(0);
-    // TODO
+#[allow(non_upper_case_globals)] impl SVF { // These are enum-like
+    pub const None                  : SVF = SVF(0);
+    pub const UserPacked            : SVF = SVF(D3D_SVF_USERPACKED);
+    pub const Used                  : SVF = SVF(D3D_SVF_USED);
+    pub const InterfacePointer      : SVF = SVF(D3D_SVF_INTERFACE_POINTER);
+    pub const InterfaceParameter    : SVF = SVF(D3D_SVF_INTERFACE_PARAMETER);
 }
 
-#[doc(hidden)] impl ShaderVariableFlags { // Ctrl+C Ctrl+V support
-    // TODO
+#[doc(hidden)] impl SVF { // Ctrl+C Ctrl+V support
+    pub const USERPACKED            : SVF = SVF(D3D_SVF_USERPACKED);
+    pub const USED                  : SVF = SVF(D3D_SVF_USED);
+    pub const INTERFACE_POINTER     : SVF = SVF(D3D_SVF_INTERFACE_POINTER);
+    pub const INTERFACE_PARAMETER   : SVF = SVF(D3D_SVF_INTERFACE_PARAMETER);
 }
 
-impl Default for ShaderVariableFlags {
-    fn default() -> Self { ShaderVariableFlags::None }
+impl Default for SVF {
+    fn default() -> Self { SVF::None }
 }
