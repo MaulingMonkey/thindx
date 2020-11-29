@@ -120,6 +120,8 @@
 
 #[macro_use] mod macros; #[cfg(test)] use macros::*;
 
+pub use abibool::bool32;
+
 
 
 #[path="d3dcompiler/_d3dcompiler.rs"]   mod d3dcompiler;    pub use d3dcompiler::*;
@@ -129,7 +131,6 @@
 #[path="interfaces/_interfaces.rs"]     mod interfaces;     pub use interfaces::*;
 #[path="structures/_structures.rs"]     mod structures;     pub use structures::*;
 #[path="traits/_traits.rs"]             mod traits;         pub use traits::*;
-#[path="values/_values.rs"]             mod values;         pub use values::*;
 
 mod cstr_ptr;                   pub use cstr_ptr::*;
 mod error_kind;                 pub use error_kind::*;

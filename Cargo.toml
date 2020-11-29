@@ -30,6 +30,7 @@ path            = "src/_lib.rs"
 
 
 [target.'cfg(windows)'.dependencies]
+abibool         = "0.5"
 void            = "=1.0.2"
 minidl          = "0.1.0"
 winstr          = "0.0.2"
