@@ -1,8 +1,6 @@
 use crate::*;
 
-#[allow(unused_imports)] use winapi::um::d3dcommon::*;
-#[allow(unused_imports)] use winapi::um::d3dcompiler::*;
-#[allow(unused_imports)] use winapi::um::d3d11shader::*;
+use winapi::um::d3d11shader::*;
 
 
 
