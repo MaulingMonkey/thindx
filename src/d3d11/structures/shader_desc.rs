@@ -4,7 +4,7 @@ use winapi::um::d3d11shader::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/ns-d3d11shader-d3d11_library_desc)\]
+/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/ns-d3d11shader-d3d11_shader_desc)\]
 /// D3D11_SHADER_DESC
 ///
 /// &amp;\[[u8]\] equivalent that's ABI-compatible with some D3D APIs
