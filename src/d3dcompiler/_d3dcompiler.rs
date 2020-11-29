@@ -61,7 +61,7 @@ pub struct D3DCompiler {
     // D3DDisassemble11Trace
 
     /// D3DCompiler_40.dll ..=
-    pub(crate) D3DCompile: Option<unsafe extern "system" fn (
+    D3DCompile: Option<unsafe extern "system" fn (
         pSrcData:       LPCVOID,
         SrcDataSize:    SIZE_T,
         pSourceName:    LPCSTR,
@@ -77,7 +77,7 @@ pub struct D3DCompiler {
 
     /// D3DCompiler_47.dll
     /// Possibly as early as D3DCompiler_44.dll ?  Need more install
-    pub(crate) D3DCompile2: Option<unsafe extern "system" fn (
+    D3DCompile2: Option<unsafe extern "system" fn (
         pSrcData:           LPCVOID,
         SrcDataSize:        SIZE_T,
         pSourceName:        LPCSTR,
@@ -96,7 +96,7 @@ pub struct D3DCompiler {
 
     /// D3DCompiler_47.dll
     /// Possibly as early as D3DCompiler_44.dll ?  Need more install
-    pub(crate) D3DCompileFromFile: Option<unsafe extern "system" fn (
+    D3DCompileFromFile: Option<unsafe extern "system" fn (
         pFileName:          LPCWSTR,
         pDefines:           *const D3D_SHADER_MACRO,
         pInclude:           *mut ID3DInclude,
@@ -109,7 +109,7 @@ pub struct D3DCompiler {
     ) -> HRESULT>,
 
     /// D3DCOMPILER_43.dll
-    pub(crate) D3DCompressShaders: Option<unsafe extern "system" fn (
+    D3DCompressShaders: Option<unsafe extern "system" fn (
         uNumShaders:        UINT,
         pShaderData:        *mut D3D_SHADER_DATA,
         uFlags:             UINT,
@@ -117,21 +117,21 @@ pub struct D3DCompiler {
     ) -> HRESULT>,
 
     /// D3DCOMPILER_43.dll
-    pub(crate) D3DCreateBlob: Option<unsafe extern "system" fn (
+    D3DCreateBlob: Option<unsafe extern "system" fn (
         Size:               SIZE_T,
         ppBlob:             *mut *mut ID3DBlob,
     ) -> HRESULT>,
 
-    pub(crate) D3DCreateFunctionLinkingGraph: Option<unsafe extern "system" fn (
+    D3DCreateFunctionLinkingGraph: Option<unsafe extern "system" fn (
         uFlags:                 UINT,
         ppFunctionLinkingGraph: *mut *mut ID3D11FunctionLinkingGraph,
     ) -> HRESULT>,
 
-    pub(crate) D3DCreateLinker: Option<unsafe extern "system" fn (
+    D3DCreateLinker: Option<unsafe extern "system" fn (
         ppLinker:               *mut *mut ID3D11Linker,
     ) -> HRESULT>,
 
-    pub(crate) D3DDecompressShaders: Option<unsafe extern "system" fn (
+    D3DDecompressShaders: Option<unsafe extern "system" fn (
         pSrcData:           LPCVOID,
         SrcDataSize:        SIZE_T,
         uNumShaders:        UINT,
@@ -142,7 +142,7 @@ pub struct D3DCompiler {
         pTotalShaders:      *mut UINT,
     ) -> HRESULT>,
 
-    pub(crate) D3DDisassemble: Option<unsafe extern "system" fn(
+    D3DDisassemble: Option<unsafe extern "system" fn(
         pSrcData:           LPCVOID,
         SrcDataSize:        SIZE_T,
         Flags:              UINT,
@@ -150,7 +150,7 @@ pub struct D3DCompiler {
         ppDisassembly:      *mut *mut ID3DBlob,
     ) -> HRESULT>,
 
-    pub(crate) D3DDisassembleRegion: Option<unsafe extern "system" fn (
+    D3DDisassembleRegion: Option<unsafe extern "system" fn (
         pSrcData:           LPCVOID,
         SrcDataSize:        SIZE_T,
         Flags:              UINT,
@@ -161,7 +161,7 @@ pub struct D3DCompiler {
         ppDisassembly:      *mut *mut ID3DBlob,
     ) -> HRESULT>,
 
-    pub(crate) D3DGetBlobPart: Option<unsafe extern "system" fn(
+    D3DGetBlobPart: Option<unsafe extern "system" fn(
         pSrcData:           LPCVOID,
         SrcDataSize:        SIZE_T,
         Part:               D3D_BLOB_PART,
@@ -169,31 +169,31 @@ pub struct D3DCompiler {
         ppPart:             *mut *mut ID3DBlob,
     ) -> HRESULT>,
 
-    pub(crate) D3DGetDebugInfo: Option<unsafe extern "system" fn(
+    D3DGetDebugInfo: Option<unsafe extern "system" fn(
         pSrcData:           LPCVOID,
         SrcDataSize:        SIZE_T,
         ppSignatureBlob:    *mut *mut ID3DBlob,
     ) -> HRESULT>,
 
-    pub(crate) D3DGetInputAndOutputSignatureBlob: Option<unsafe extern "system" fn(
+    D3DGetInputAndOutputSignatureBlob: Option<unsafe extern "system" fn(
         pSrcData:           LPCVOID,
         SrcDataSize:        SIZE_T,
         ppSignatureBlob:    *mut *mut ID3DBlob,
     ) -> HRESULT>,
 
-    pub(crate) D3DGetInputSignatureBlob: Option<unsafe extern "system" fn(
+    D3DGetInputSignatureBlob: Option<unsafe extern "system" fn(
         pSrcData:           LPCVOID,
         SrcDataSize:        SIZE_T,
         ppSignatureBlob:    *mut *mut ID3DBlob,
     ) -> HRESULT>,
 
-    pub(crate) D3DGetOutputSignatureBlob: Option<unsafe extern "system" fn(
+    D3DGetOutputSignatureBlob: Option<unsafe extern "system" fn(
         pSrcData:           LPCVOID,
         SrcDataSize:        SIZE_T,
         ppSignatureBlob:    *mut *mut ID3DBlob,
     ) -> HRESULT>,
 
-    pub(crate) D3DGetTraceInstructionOffsets: Option<unsafe extern "system" fn (
+    D3DGetTraceInstructionOffsets: Option<unsafe extern "system" fn (
         pSrcData:       LPCVOID,
         SrcDataSize:    SIZE_T,
         Flags:          UINT,
@@ -203,13 +203,13 @@ pub struct D3DCompiler {
         pTotalInsts:    *mut SIZE_T,
     ) -> HRESULT>,
 
-    pub(crate) D3DLoadModule: Option<unsafe extern "system" fn (
+    D3DLoadModule: Option<unsafe extern "system" fn (
         pSrcData:       LPCVOID,
         cbSrcDataSize:  SIZE_T,
         ppModule:       *mut *mut ID3D11Module,
     ) -> HRESULT>,
 
-    pub(crate) D3DPreprocess: Option<unsafe extern "system" fn (
+    D3DPreprocess: Option<unsafe extern "system" fn (
         pSrcData:       LPCVOID,
         SrcDataSize:    SIZE_T,
         pSourceName:    LPCSTR,
@@ -219,26 +219,26 @@ pub struct D3DCompiler {
         ppErrorMsgs:    *mut *mut ID3DBlob,
     ) -> HRESULT>,
 
-    pub(crate) D3DReadFileToBlob: Option<unsafe extern "system" fn (
+    D3DReadFileToBlob: Option<unsafe extern "system" fn (
         pFileName:          LPCWSTR,
         ppContents:         *mut *mut ID3DBlob,
     ) -> HRESULT>,
 
-    pub(crate) D3DReflect: Option<unsafe extern "system" fn (
+    D3DReflect: Option<unsafe extern "system" fn (
         pSrcData:           LPCVOID,
         SrcDataSize:        SIZE_T,
         pInterface:         REFIID,
         ppReflector:        *mut LPVOID,
     ) -> HRESULT>,
 
-    pub(crate) D3DReflectLibrary: Option<unsafe extern "system" fn (
+    D3DReflectLibrary: Option<unsafe extern "system" fn (
         pSrcData:           LPCVOID,
         SrcDataSize:        SIZE_T,
         riid:               REFIID,
         ppReflector:        *mut LPVOID,
     ) -> HRESULT>,
 
-    pub(crate) D3DSetBlobPart: Option<unsafe extern "system" fn (
+    D3DSetBlobPart: Option<unsafe extern "system" fn (
         pSrcData:           LPCVOID,
         SrcDataSize:        SIZE_T,
         Part:               D3D_BLOB_PART,
@@ -248,14 +248,14 @@ pub struct D3DCompiler {
         ppNewShader:        *mut *mut ID3DBlob,
     ) -> HRESULT>,
 
-    pub(crate) D3DStripShader: Option<unsafe extern "system" fn (
+    D3DStripShader: Option<unsafe extern "system" fn (
         pShaderBytecode:    LPCVOID ,
         BytecodeLength:     SIZE_T,
         uStripFlags:        UINT,
         ppStrippedBlob:     *mut *mut ID3DBlob,
     ) -> HRESULT>,
 
-    pub(crate) D3DWriteBlobToFile: Option<unsafe extern "system" fn (
+    D3DWriteBlobToFile: Option<unsafe extern "system" fn (
         pBlob:      *mut ID3DBlob,
         pFileName:  LPCWSTR,
         bOverwrite: BOOL,
