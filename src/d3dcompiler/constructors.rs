@@ -1,7 +1,5 @@
 use crate::*;
 
-use minidl::*;
-
 
 
 /// <h1 id="constructors" class="section-header"><a href="#constructors">Constructors</a></h1>
@@ -17,9 +15,9 @@ impl D3DCompiler {
     /// use thin3dcompiler::*;
     /// let compiler = D3DCompiler::new(47).unwrap();
     /// ```
-    pub fn new(version: u32) -> Result<Self> {
+    pub fn new(version: u32) -> Result<Self, std::io::Error> {
         let name = format!("d3dcompiler_{}.dll", version);
-        let lib = Library::load(name)?;
+        let lib = minidl::Library::load(name)?;
         unsafe{Ok(Self{
             D3DCompile:                         lib.sym_opt("D3DCompile\0"),
             D3DCompile2:                        lib.sym_opt("D3DCompile2\0"),
