@@ -10,18 +10,22 @@ use winapi::shared::minwindef::UINT;
 /// Flags controlling how [D3DCompiler::disassemble_region] disassembles the compiled shader data.
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)] pub struct ShaderCbufferFlags(UINT);
+use ShaderCbufferFlags as CBF;
 
-flags! { ShaderCbufferFlags => UINT; None }
+flags! { CBF => UINT; None, UserPacked }
 
-#[allow(non_upper_case_globals)] impl ShaderCbufferFlags { // These are enum-like
-    const None          : ShaderCbufferFlags = ShaderCbufferFlags(0);
-    // TODO
+#[allow(non_upper_case_globals)] impl CBF { // These are enum-like
+    pub const None          : CBF = CBF(0);
+
+    /// Bind the constant buffer to an input slot defined in HLSL code (instead of letting the compiler choose the input slot).
+    pub const UserPacked    : CBF = CBF(D3D_CBF_USERPACKED);
 }
 
-#[doc(hidden)] impl ShaderCbufferFlags { // Ctrl+C Ctrl+V support
-    // TODO
+#[doc(hidden)] impl CBF { // Ctrl+C Ctrl+V support
+    /// Bind the constant buffer to an input slot defined in HLSL code (instead of letting the compiler choose the input slot).
+    pub const USERPACKED    : CBF = CBF(D3D_CBF_USERPACKED);
 }
 
-impl Default for ShaderCbufferFlags {
-    fn default() -> Self { ShaderCbufferFlags::None }
+impl Default for CBF {
+    fn default() -> Self { CBF::None }
 }
