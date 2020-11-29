@@ -14,11 +14,55 @@ enumish! {
 }
 
 #[allow(non_upper_case_globals)] impl MinPrecision { // These are enum-like
-    // TODO
+    /// Default minimum precision, which is 32-bit precision.
+    pub const Default     : MinPrecision = MinPrecision(D3D_MIN_PRECISION_DEFAULT);
+
+    /// Minimum precision is min16float, which is 16-bit floating point.
+    pub const Float16     : MinPrecision = MinPrecision(D3D_MIN_PRECISION_FLOAT_16);
+
+    /// Minimum precision is min10float, which is 10-bit floating point.
+    pub const Float2_8    : MinPrecision = MinPrecision(D3D_MIN_PRECISION_FLOAT_2_8);
+
+    /// Reserved
+    pub const Reserved    : MinPrecision = MinPrecision(D3D_MIN_PRECISION_RESERVED);
+
+    /// Minimum precision is min16int, which is 16-bit signed integer.
+    pub const SInt16      : MinPrecision = MinPrecision(D3D_MIN_PRECISION_SINT_16);
+
+    /// Minimum precision is min16uint, which is 16-bit unsigned integer.
+    pub const UInt16      : MinPrecision = MinPrecision(D3D_MIN_PRECISION_UINT_16);
+
+    /// Minimum precision is any 16-bit value.
+    pub const Any16       : MinPrecision = MinPrecision(D3D_MIN_PRECISION_ANY_16);
+
+    /// Minimum precision is any 10-bit value.
+    pub const Any10       : MinPrecision = MinPrecision(D3D_MIN_PRECISION_ANY_10);
 }
 
 #[doc(hidden)] impl MinPrecision { // Ctrl+C Ctrl+V support
-    // TODO
+    /// Default minimum precision, which is 32-bit precision.
+    pub const DEFAULT     : MinPrecision = MinPrecision(D3D_MIN_PRECISION_DEFAULT);
+
+    /// Minimum precision is min16float, which is 16-bit floating point.
+    pub const FLOAT_16    : MinPrecision = MinPrecision(D3D_MIN_PRECISION_FLOAT_16);
+
+    /// Minimum precision is min10float, which is 10-bit floating point.
+    pub const FLOAT_2_8   : MinPrecision = MinPrecision(D3D_MIN_PRECISION_FLOAT_2_8);
+
+    /// Reserved
+    pub const RESERVED    : MinPrecision = MinPrecision(D3D_MIN_PRECISION_RESERVED);
+
+    /// Minimum precision is min16int, which is 16-bit signed integer.
+    pub const SINT_16     : MinPrecision = MinPrecision(D3D_MIN_PRECISION_SINT_16);
+
+    /// Minimum precision is min16uint, which is 16-bit unsigned integer.
+    pub const UINT_16     : MinPrecision = MinPrecision(D3D_MIN_PRECISION_UINT_16);
+
+    /// Minimum precision is any 16-bit value.
+    pub const ANY_16      : MinPrecision = MinPrecision(D3D_MIN_PRECISION_ANY_16);
+
+    /// Minimum precision is any 10-bit value.
+    pub const ANY_10      : MinPrecision = MinPrecision(D3D_MIN_PRECISION_ANY_10);
 }
 
 impl Default for MinPrecision {
