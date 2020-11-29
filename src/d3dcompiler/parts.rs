@@ -222,7 +222,7 @@ impl D3DCompiler {
         flags:              (),
         part_data:          &[u8],
     ) -> Result<ReadOnlyBlob, Error> {
-        let f = self.D3DSetBlobPart.ok_or(ErrorKind::MISSING_DLL_EXPORT)?;
+        let f = self.D3DSetBlobPart.ok_or(Error::new("D3DSetBlobPart", ErrorKind::MISSING_DLL_EXPORT))?;
 
         let _ = flags; let flags = 0;
         let mut blob = null_mut();
@@ -264,7 +264,7 @@ impl D3DCompiler {
         shader_bytecode:    &[u8],
         strip_flags:        impl Into<CompilerStripFlags>,
     ) -> Result<ReadOnlyBlob, Error> {
-        let f = self.D3DStripShader.ok_or(ErrorKind::MISSING_DLL_EXPORT)?;
+        let f = self.D3DStripShader.ok_or(Error::new("D3DStripShader", ErrorKind::MISSING_DLL_EXPORT))?;
         let mut blob = null_mut();
         let hr = unsafe { f(shader_bytecode.as_ptr().cast(), shader_bytecode.len(), strip_flags.into().into(), &mut blob) };
         Error::check("D3DStripShader", hr)?;

@@ -45,7 +45,7 @@ impl D3DCompiler {
     /// <div class="note"><b>Note:</b>  The D3dcompiler_40.dll or later version of the file contains the D3DReflect compiler function.</div>
     #[cfg_attr(not(d3dcompiler="40"), deprecated(note = "D3DCompiler::reflect wasn't added until d3dcompiler_40.dll"))]
     pub fn reflect<I: Raw>(&self, src_data: &[u8]) -> Result<I, Error> where I::Raw : Interface {
-        let f = self.D3DReflect.ok_or(ErrorKind::MISSING_DLL_EXPORT)?;
+        let f = self.D3DReflect.ok_or(Error::new("D3DReflect", ErrorKind::MISSING_DLL_EXPORT))?;
 
         let mut reflector = null_mut();
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), &I::Raw::uuidof(), &mut reflector) };
@@ -80,7 +80,7 @@ impl D3DCompiler {
     /// assert_eq!(Some(D3DERR::INVALIDCALL), r.err().map(|e| e.kind()));
     /// ```
     pub fn reflect_library<C: Raw>(&self, src_data: &[u8]) -> Result<C, Error> where C::Raw : Interface {
-        let f = self.D3DReflectLibrary.ok_or(ErrorKind::MISSING_DLL_EXPORT)?;
+        let f = self.D3DReflectLibrary.ok_or(Error::new("D3DReflectLibrary", ErrorKind::MISSING_DLL_EXPORT))?;
 
         let mut reflector = null_mut();
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), &C::Raw::uuidof(), &mut reflector) };

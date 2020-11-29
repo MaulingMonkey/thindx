@@ -24,15 +24,12 @@ impl D3DCompiler {
     /// # use thin3dcompiler::*; let compiler = D3DCompiler::new(47).unwrap();
     /// let flg: d3d11::FunctionLinkingGraph = compiler.create_function_linking_graph(None).unwrap();
     /// ```
-    pub fn create_function_linking_graph(&self, flags: Option<void::Void>) -> Result<d3d11::FunctionLinkingGraph, ErrorKind> {
-        // Early outs
-        let f = self.D3DCreateFunctionLinkingGraph.ok_or(ErrorKind::MISSING_DLL_EXPORT)?;
-
+    pub fn create_function_linking_graph(&self, flags: Option<void::Void>) -> Result<d3d11::FunctionLinkingGraph, Error> {
+        let f = self.D3DCreateFunctionLinkingGraph.ok_or(Error::new("D3DCreateFunctionLinkingGraph", ErrorKind::MISSING_DLL_EXPORT))?;
         let _ = flags; let flags = 0;
-
         let mut flg = null_mut();
         let hr = unsafe { f(flags, &mut flg) };
-        ErrorKind::check(hr)?;
+        Error::check("D3DCreateFunctionLinkingGraph", hr)?;
         Ok(unsafe { d3d11::FunctionLinkingGraph::from_raw(flg) })
     }
 
@@ -54,13 +51,11 @@ impl D3DCompiler {
     /// # use thin3dcompiler::*; let compiler = D3DCompiler::new(47).unwrap();
     /// let linker : d3d11::Linker = compiler.create_linker().unwrap();
     /// ```
-    pub fn create_linker(&self) -> Result<d3d11::Linker, ErrorKind> {
-        // Early outs
-        let f           = self.D3DCreateLinker.ok_or(ErrorKind::MISSING_DLL_EXPORT)?;
-
+    pub fn create_linker(&self) -> Result<d3d11::Linker, Error> {
+        let f = self.D3DCreateLinker.ok_or(Error::new("D3DCreateFunctionLinkingGraph", ErrorKind::MISSING_DLL_EXPORT))?;
         let mut linker = null_mut();
         let hr = unsafe { f(&mut linker) };
-        ErrorKind::check(hr)?;
+        Error::check("D3DCreateFunctionLinkingGraph", hr)?;
 
         Ok(unsafe { d3d11::Linker::from_raw(linker) })
     }
@@ -87,8 +82,7 @@ impl D3DCompiler {
     /// // TODO
     /// ```
     pub fn load_module(&self, data: &[u8]) -> Result<d3d11::Module, Error> {
-        let f = self.D3DLoadModule.ok_or(ErrorKind::MISSING_DLL_EXPORT)?;
-
+        let f = self.D3DLoadModule.ok_or(Error::new("D3DLoadModule", ErrorKind::MISSING_DLL_EXPORT))?;
         let mut module = null_mut();
         let hr = unsafe { f(data.as_ptr().cast(), data.len(), &mut module) };
         Error::check("D3DLoadModule", hr)?;

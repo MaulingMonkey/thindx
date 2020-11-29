@@ -48,17 +48,17 @@ impl D3DCompiler {
         &self,
         shaders:                &[ShaderData],
         flags:                  impl Into<CompressShader>,
-    ) -> Result<ReadOnlyBlob, ErrorKind> {
+    ) -> Result<ReadOnlyBlob, Error> {
         // Early outs
-        let f           = self.D3DCompressShaders.ok_or(ErrorKind::MISSING_DLL_EXPORT)?;
-        let num_shaders = shaders.len().try_into().map_err(|_| ErrorKind::MISSING_DLL_EXPORT)?;
+        let f           = self.D3DCompressShaders.ok_or(Error::new("D3DCompressShaders", ErrorKind::MISSING_DLL_EXPORT))?;
+        let num_shaders = shaders.len().try_into().map_err(|_| Error::new("D3DCompressShaders", ErrorKind::MISSING_DLL_EXPORT))?;
 
         let shader_data = shaders.as_ptr() as *mut _; // TODO: Is the `mut` sane?
         let flags       = flags.into().into();
 
         let mut compressed_data = null_mut();
         let hr = unsafe { f(num_shaders, shader_data, flags, &mut compressed_data) };
-        ErrorKind::check(hr)?;
+        Error::check("D3DCompressShaders", hr)?;
         Ok(unsafe { ReadOnlyBlob::from_raw(compressed_data) })
         // TODO: Wait, this takes multiple shaders.  Does this also *return* an array of blobs, perhaps?
     }
@@ -97,14 +97,14 @@ impl D3DCompiler {
     /// # ];
     /// #
     /// # let compress = compiler.compress_shaders(&tocompress, CompressShader::default()).unwrap();
-    /// assert_eq!(Ok(2), compiler.decompress_shaders_count(compress.get_buffer()));
+    /// assert_eq!(2, compiler.decompress_shaders_count(compress.get_buffer()).unwrap());
     /// ```
     ///
     /// <div class="note"><b>Note:</b> You can use this API to develop your Windows Store apps, but you can't use it in apps that you submit to the Windows Store.</div>
     /// <div class="note"><b>Note:</b> This fn was introduced by d3dcompiler_43.dll, and is unavailable in earlier versions.</div>
     #[cfg_attr(not(d3dcompiler="43"), deprecated(note = "D3DCompiler::compile wasn't added until d3dcompiler_43.dll"))]
-    pub fn decompress_shaders_count(&self, src_data: &[u8]) -> Result<u32, ErrorKind> {
-        let f = self.D3DDecompressShaders.ok_or(ErrorKind::MISSING_DLL_EXPORT)?;
+    pub fn decompress_shaders_count(&self, src_data: &[u8]) -> Result<u32, Error> {
+        let f = self.D3DDecompressShaders.ok_or(Error::new("D3DDecompressShaders", ErrorKind::MISSING_DLL_EXPORT))?;
         let mut shader = null_mut(); // D3DDecompressShaders will fail with E_FAIL if ppShaders is null, even if it doesn't use it
         let mut total_shaders = 0;
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), 0, 0, null_mut(), 0, &mut shader, &mut total_shaders) };
@@ -160,9 +160,9 @@ impl D3DCompiler {
         flags:                  impl Into<Option<void::Void>>,
         start_index:            u32,
         out_shaders:            &'s mut [Option<ReadOnlyBlob>],
-    ) -> Result<&'s [Option<ReadOnlyBlob>], ErrorKind> {
-        let f = self.D3DDecompressShaders.ok_or(ErrorKind::MISSING_DLL_EXPORT)?;
-        let n : u32 = out_shaders.len().try_into().map_err(|_| ErrorKind::SLICE_TOO_LARGE)?;
+    ) -> Result<&'s [Option<ReadOnlyBlob>], Error> {
+        let f = self.D3DDecompressShaders.ok_or(Error::new("D3DDecompressShaders", ErrorKind::MISSING_DLL_EXPORT))?;
+        let n : u32 = out_shaders.len().try_into().map_err(|_| Error::new("D3DDecompressShaders", ErrorKind::SLICE_TOO_LARGE))?;
         let _ = flags;
 
         for shader in out_shaders.iter_mut() { *shader = None; } // D3DCompressShaders will overwrite
@@ -212,7 +212,7 @@ impl D3DCompiler {
         src_data:               &[u8],
         flags:                  impl Into<Option<void::Void>>,
         _range:                 std::ops::RangeFull,
-    ) -> Result<Vec<Option<ReadOnlyBlob>>, ErrorKind> {
+    ) -> Result<Vec<Option<ReadOnlyBlob>>, Error> {
         let n = self.decompress_shaders_count(src_data)? as usize;
         let mut v = Vec::new();
         v.resize_with(n, || None);

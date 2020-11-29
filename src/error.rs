@@ -11,9 +11,9 @@ use std::fmt::{self, Debug, Display, Formatter};
 /// { kind: [ErrorKind], method, errors }
 #[derive(Clone)]
 pub struct Error {
-    kind:       ErrorKind,
-    method:     Option<&'static str>,
-    errors:     Option<ReadOnlyBlob>,
+    pub(crate) kind:       ErrorKind,
+    pub(crate) method:     Option<&'static str>,
+    pub(crate) errors:     Option<ReadOnlyBlob>,
 }
 
 impl Error {
@@ -63,7 +63,7 @@ impl Error {
 }
 
 impl From<Error> for ErrorKind { fn from(error: Error       ) -> ErrorKind { error.kind } }
-impl From<ErrorKind> for Error { fn from(error: ErrorKind   ) -> Error { Error { kind: error, method: None, errors: None } } }
+//impl From<ErrorKind> for Error { fn from(error: ErrorKind   ) -> Error { Error { kind: error, method: None, errors: None } } }
 
 impl std::error::Error for Error {}
 

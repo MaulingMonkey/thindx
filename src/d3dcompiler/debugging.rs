@@ -85,7 +85,7 @@ impl D3DCompiler {
     ) -> Result<ReadOnlyBlob, Error> {
         let f = self.D3DDisassemble.ok_or(Error::new("D3DDisassemble", ErrorKind::MISSING_DLL_EXPORT))?;
         let flags = flags.into().into();
-        let comments = comments.try_into()?;
+        let comments = comments.try_into().map_err(|e| Error::new("D3DDisassemble", e))?;
         let comments = comments.as_opt_cstr();
         let mut disassembly = null_mut();
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), flags, comments, &mut disassembly) };
@@ -172,7 +172,7 @@ impl D3DCompiler {
     ) -> Result<DisassembledRegion, Error> {
         let f = self.D3DDisassembleRegion.ok_or(Error::new("D3DDisassembleRegion", ErrorKind::MISSING_DLL_EXPORT))?;
         let flags = flags.into().into();
-        let comments = comments.try_into()?;
+        let comments = comments.try_into().map_err(|e| Error::new("D3DDisassembleRegion", e))?;
         let comments = comments.as_opt_cstr();
         let mut disassembly = null_mut();
         let mut finish_byte_offset = 0;
