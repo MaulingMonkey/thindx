@@ -9,7 +9,7 @@ use winapi::um::d3d11shader::*;
 #[derive(Clone, Copy, Default)]
 #[repr(C)] pub struct LibraryDesc<'s> {
     creator:                        Option<CStrPtr<'s>>,
-    flags:                          u32,
+    flags:                          Compile,
     function_count:                 u32,
 }
 

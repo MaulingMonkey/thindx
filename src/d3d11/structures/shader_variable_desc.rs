@@ -14,7 +14,7 @@ use std::ptr::*;
     name:           Option<CStrPtr<'s>>,
     start_offset:   u32,
     size:           u32,
-    flags:          u32,
+    flags:          ShaderVariableFlags,
     default_value:  LPVOID, // TODO: hmm... this is OKish for read, but not for write
     start_texture:  u32,
     texture_size:   u32,
@@ -28,7 +28,7 @@ impl Default for ShaderVariableDesc<'static> {
             name:           None,
             start_offset:   0,
             size:           0,
-            flags:          0,
+            flags:          ShaderVariableFlags::None,
             default_value:  null_mut(),
             start_texture:  0,
             texture_size:   0,

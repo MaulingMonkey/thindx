@@ -10,11 +10,10 @@ use winapi::um::d3dcommon::*;
 #[repr(transparent)] pub struct ShaderInputFlags(D3D_SHADER_INPUT_FLAGS);
 #[doc(hidden)] pub use ShaderInputFlags as SIF;
 
-enumish! {
-    SIF => D3D_SHADER_INPUT_FLAGS;
-}
+flags! { SIF => D3D_SHADER_INPUT_FLAGS; None }
 
 #[allow(non_upper_case_globals)] impl SIF { // These are enum-like
+    const None          : SIF = SIF(0);
     // TODO
 }
 
@@ -23,5 +22,5 @@ enumish! {
 }
 
 impl Default for SIF {
-    fn default() -> Self { SIF(0) }
+    fn default() -> Self { SIF::None }
 }

@@ -10,7 +10,7 @@ use winapi::um::d3d11shader::*;
 #[repr(C)] pub struct ShaderDesc<'s> {
     version:                        u32,
     creator:                        Option<CStrPtr<'s>>,
-    flags:                          u32,
+    flags:                          u32, // Compile?  docs aren't clear
     constant_buffers:               u32,
     bound_resources:                u32,
     input_parameters:               u32,

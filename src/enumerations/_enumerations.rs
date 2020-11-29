@@ -7,7 +7,6 @@ mod primitive_topology;                 pub use primitive_topology::*;
 mod primitive;                          pub use primitive::*;
 mod register_component_type;            pub use register_component_type::*;
 mod resource_return_type;               pub use resource_return_type::*;
-mod shader_input_flags;                 pub use shader_input_flags::*;
 mod shader_input_type;                  pub use shader_input_type::*;
 mod shader_variable_class;              pub use shader_variable_class::*;
 mod shader_variable_type;               pub use shader_variable_type::*;

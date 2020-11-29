@@ -12,7 +12,7 @@ use winapi::um::d3d11shader::*;
     r#type:         ShaderInputType,
     bind_point:     u32,
     bind_count:     u32,
-    flags:          u32,
+    flags:          ShaderInputFlags,
     return_type:    ResourceReturnType,
     dimension:      SrvDimension,
     num_samples:    u32,

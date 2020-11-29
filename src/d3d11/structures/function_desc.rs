@@ -10,7 +10,7 @@ use winapi::um::d3d11shader::*;
 #[repr(C)] pub struct FunctionDesc<'s> {
     version:                        u32,
     creator:                        Option<CStrPtr<'s>>,
-    flags:                          u32,
+    flags:                          Compile,
     constant_buffers:               u32,
     bound_resources:                u32,
     instruction_count:              u32,
@@ -35,7 +35,7 @@ use winapi::um::d3d11shader::*;
     conversion_instruction_count:   u32,
     bitwise_instruction_count:      u32,
     min_feature_level:              FeatureLevel,
-    required_feature_flags:         u64,
+    required_feature_flags:         ShaderRequires,
     name:                           Option<CStrPtr<'s>>,
     function_parameter_count:       i32,
     has_return:                     bool32,
