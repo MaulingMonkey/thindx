@@ -24,7 +24,13 @@ impl D3DCompiler {
     /// ```rust
     /// # use thin3dcompiler::*; let compiler = D3DCompiler::new(47).unwrap();
     /// # let shader : ReadOnlyBlob = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap().shader;
-    /// compiler.set_blob_part(shader.get_buffer(), Blob::PrivateData, (), "testing 123".as_bytes()).unwrap();
+    /// let shader2 = compiler.set_blob_part(
+    ///     shader.get_buffer(), Blob::PrivateData, (), b"testing 123"
+    /// ).unwrap();
+    ///
+    /// assert_eq!(b"testing 123", compiler.get_blob_part(
+    ///     shader2.get_buffer(), Blob::PrivateData, None
+    /// ).unwrap().get_buffer());
     /// ```
     ///
     /// <div class="note"><b>Note:</b>  The D3dcompiler_44.dll or later version of the file contains the D3DSetBlobPart compiler function.</div>

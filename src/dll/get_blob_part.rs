@@ -24,20 +24,14 @@ impl D3DCompiler {
     /// ### Example
     /// ```rust
     /// # use thin3dcompiler::*; let compiler = D3DCompiler::new(47).unwrap();
-    /// # let shader = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap().shader;
-    /// # let shader = shader.get_buffer();
-    /// let section = BlobPart::InputSignatureBlob;
+    /// # let shader : ReadOnlyBlob = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap().shader;
+    /// let shader2 = compiler.set_blob_part(
+    ///     shader.get_buffer(), Blob::PrivateData, (), b"testing 123"
+    /// ).unwrap();
     ///
-    /// let sig = compiler.get_blob_part(shader, section, None).unwrap();
-    /// println!("{:?}", sig.get_buffer());
-    ///
-    /// let err = compiler.get_blob_part(&[], section, None).err();
-    /// assert_eq!(Some(D3DERR::INVALIDCALL), err.map(|e| e.kind()));
-    /// ```
-    ///
-    /// ### Output
-    /// ```text
-    /// [68, 88, 66, 67, ...
+    /// assert_eq!(b"testing 123", compiler.get_blob_part(
+    ///     shader2.get_buffer(), Blob::PrivateData, None
+    /// ).unwrap().get_buffer());
     /// ```
     ///
     /// <div class="note"><b>Note:</b> This fn was introduced by d3dcompiler_43.dll, and is unavailable in earlier versions.</div>
