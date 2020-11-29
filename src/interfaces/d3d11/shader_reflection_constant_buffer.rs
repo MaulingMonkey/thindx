@@ -31,4 +31,52 @@ impl<'r> ShaderReflectionConstantBuffer<'r> {
     }
 }
 
-// TODO: methods
+impl<'r> ShaderReflectionConstantBuffer<'r> {
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectionconstantbuffer-getdesc)\]
+    /// ID3D11ShaderReflectionConstantBuffer::GetDesc
+    ///
+    /// Get a constant-buffer description.
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use thin3dcompiler::*;
+    /// // TODO
+    /// ```
+    pub fn get_desc_raw(&self) -> Result<D3D11_SHADER_BUFFER_DESC, Error> {
+        let mut desc = unsafe { std::mem::zeroed::<D3D11_SHADER_BUFFER_DESC>() };
+        let hr = unsafe { self.ptr.as_ref().GetDesc(&mut desc) };
+        Error::check("ID3D11ShaderReflectionConstantBuffer::GetDesc", hr)?;
+        Ok(desc)
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectionconstantbuffer-getvariablebyindex)\]
+    /// ID3D11ShaderReflectionConstantBuffer::GetVariableByIndex
+    ///
+    /// Get a shader-reflection variable by index.
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use thin3dcompiler::*;
+    /// // TODO
+    /// ```
+    pub fn get_variable_by_index(&self, index: u32) -> Option<ShaderReflectionVariable<'r>> {
+        let ptr = unsafe { self.ptr.as_ref().GetVariableByIndex(index) };
+        unsafe { ShaderReflectionVariable::from_raw(self.phantom, ptr) }
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectionconstantbuffer-getvariablebyname)\]
+    /// ID3D11ShaderReflectionConstantBuffer::GetVariableByName
+    ///
+    /// Get a shader-reflection variable by name.
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use thin3dcompiler::*;
+    /// // TODO
+    /// ```
+    pub fn get_variable_by_name(&self, name: &str) -> Option<ShaderReflectionVariable<'r>> {
+        let name = name.bytes().chain(Some(0)).collect::<Vec<_>>();
+        let ptr = unsafe { self.ptr.as_ref().GetVariableByName(name.as_ptr().cast()) };
+        unsafe { ShaderReflectionVariable::from_raw(self.phantom, ptr) }
+    }
+}
