@@ -1,3 +1,7 @@
+use winapi::um::d3dcommon::ID3DBlob;
+
+
+
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/previous-versions/windows/desktop/legacy/ff728743(v=vs.85))\]
 /// ID3DBlob
 ///
@@ -9,7 +13,7 @@
 /// While enforced by the safe interface here, raw `unsafe` winapi can totally let you write to the buffer.
 /// This is your one warning!
 #[derive(Clone)] #[repr(transparent)]
-pub struct ReadOnlyBlob(pub(crate) mcom::Rc<winapi::um::d3dcommon::ID3DBlob>);
+pub struct ReadOnlyBlob(pub(crate) mcom::Rc<ID3DBlob>);
 
 impl ReadOnlyBlob {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/previous-versions/windows/desktop/legacy/ff728745(v=vs.85))\]
@@ -29,4 +33,10 @@ impl ReadOnlyBlob {
         let ptr = unsafe { self.0.GetBufferPointer() } as *const u8;
         unsafe { std::slice::from_raw_parts(ptr, size) }
     }
+}
+
+#[test] fn layout() {
+    use std::mem::*;
+    assert_eq!(align_of::<Option<ReadOnlyBlob>>(), align_of::<*mut ID3DBlob>());
+    assert_eq!(size_of::< Option<ReadOnlyBlob>>(), size_of::< *mut ID3DBlob>());
 }

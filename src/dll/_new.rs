@@ -27,6 +27,7 @@ impl D3DCompiler {
             D3DCreateBlob:          lib.sym_opt("D3DCreateBlob\0"),
             D3DCreateFunctionLinkingGraph:  lib.sym_opt("D3DCreateFunctionLinkingGraph\0"),
             D3DCreateLinker:        lib.sym_opt("D3DCreateLinker\0"),
+            D3DDecompressShaders:   lib.sym_opt("D3DDecompressShaders\0"),
 
             D3DDisassembleRegion:               lib.sym_opt("D3DDisassembleRegion\0"),
             D3DGetBlobPart:                     lib.sym_opt("D3DGetBlobPart\0"),

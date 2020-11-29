@@ -111,7 +111,17 @@ pub struct D3DCompiler {
         ppLinker:               *mut *mut ID3D11Linker,
     ) -> HRESULT>,
 
-    // TODO: D3DDecompressShaders
+    pub(crate) D3DDecompressShaders: Option<unsafe extern "system" fn (
+        pSrcData:           LPCVOID,
+        SrcDataSize:        SIZE_T,
+        uNumShaders:        UINT,
+        uStartIndex:        UINT,
+        pIndices:           *mut UINT,
+        uFlags:             UINT,
+        ppShaders:          *mut *mut ID3DBlob,
+        pTotalShaders:      *mut UINT,
+    ) -> HRESULT>,
+
     // TODO: D3DDisassemble
     // TODO: D3DDisassemble10Effect
 
