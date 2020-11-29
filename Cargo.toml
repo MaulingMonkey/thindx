@@ -47,6 +47,7 @@ impl-from-unchecked = []
 doc                 = { path = "doc" }
 
 [target.'cfg(windows)'.dependencies]
+abibool             = "0.5"
 winstr              = "0.0.2"
 mcom                = "0.1.1"
 #mcom                = { git = "https://github.com/MaulingMonkey/mcom" }

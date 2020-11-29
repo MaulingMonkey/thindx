@@ -321,6 +321,7 @@
 #[macro_use] mod macros;
 #[allow(unused_imports)] use macros::*;
 
+pub use abibool::bool32;
 use mcom::Rc;
 
 #[doc(no_inline)]                                   pub extern crate mcom;
