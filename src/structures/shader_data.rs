@@ -1,6 +1,8 @@
 use winapi::um::d3dcompiler::*;
 
+use std::borrow::Borrow;
 use std::marker::PhantomData;
+use std::ops::Deref;
 use std::ptr::*;
 
 
@@ -8,7 +10,7 @@ use std::ptr::*;
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/ns-d3dcompiler-d3d_shader_data)\]
 /// D3D_SHADER_DATA
 ///
-/// Describes shader data.
+/// &amp;\[[u8]\] equivalent that's ABI-compatible with some D3D APIs
 #[derive(Clone, Copy)]
 #[repr(C)] pub struct ShaderData<'d> {
     data:               D3D_SHADER_DATA,
@@ -23,6 +25,10 @@ impl<'d> ShaderData<'d> {
 
 impl AsRef<[u8]> for ShaderData<'_> {
     fn as_ref(&self) -> &[u8] { self.bytes() }
+}
+
+impl Borrow<[u8]> for ShaderData<'_> {
+    fn borrow(&self) -> &[u8] { self.bytes() }
 }
 
 impl<'d> From<&'d [u8]> for ShaderData<'d> {
@@ -47,6 +53,11 @@ impl Default for ShaderData<'_> {
             phantom_data: PhantomData,
         }
     }
+}
+
+impl Deref for ShaderData<'_> {
+    type Target = [u8];
+    fn deref(&self) -> &Self::Target { self.bytes() }
 }
 
 #[test] fn layout() {
