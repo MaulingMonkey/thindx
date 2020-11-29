@@ -24,12 +24,16 @@ impl D3DCompiler {
     /// ### Example
     /// ```rust
     /// # use thin3dcompiler::*; let compiler = D3DCompiler::new(47).unwrap();
-    /// // TODO: figure out what reflect actually takes and demo that.
-    /// let ps = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap();
-    /// let r = compiler.reflect::<d3d11::ShaderReflection>(ps.shader.get_buffer()).unwrap();
+    /// let shader = compiler.compile_from_file(
+    ///     r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0",
+    ///     Compile::Debug, CompileEffect::None
+    /// ).unwrap().shader;
+    ///
+    /// // Should succeed:
+    /// let r = compiler.reflect::<d3d11::ShaderReflection>(shader.get_buffer()).unwrap();
     ///
     /// // Invalid interface:
-    /// let r = compiler.reflect::<Unknown>(ps.shader.get_buffer());
+    /// let r = compiler.reflect::<Unknown>(shader.get_buffer());
     /// assert_eq!(Some(D3DERR::INVALIDARG), r.err().map(|e| e.kind()));
     ///
     /// // Invalid `src_data`:
