@@ -17,6 +17,7 @@ pub mod d3d11 {
     mod shader_reflection_variable;         pub use shader_reflection_variable::*;
 
     // structure
+    mod function_desc;                      pub use function_desc::*;
     mod parameter_desc;                     pub use parameter_desc::*;
 }
 

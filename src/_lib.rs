@@ -128,6 +128,7 @@
 #[path="interfaces/_interfaces.rs"]     mod interfaces;     pub use interfaces::*;
 #[path="structures/_structures.rs"]     mod structures;     pub use structures::*;
 #[path="traits/_traits.rs"]             mod traits;         pub use traits::*;
+#[path="values/_values.rs"]             mod values;         pub use values::*;
 
 mod cstr_ptr;                   pub use cstr_ptr::*;
 mod error_kind;                 pub use error_kind::*;

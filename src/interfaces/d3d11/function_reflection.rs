@@ -72,9 +72,9 @@ impl<'r> FunctionReflection<'r> {
     /// # use thin3dcompiler::*;
     /// // TODO
     /// ```
-    pub fn get_desc_raw(&self) -> Result<D3D11_FUNCTION_DESC, Error> {
-        let mut desc = unsafe { std::mem::zeroed::<D3D11_FUNCTION_DESC>() };
-        let hr = unsafe { self.ptr.as_ref().GetDesc(&mut desc) };
+    pub fn get_desc(&self) -> Result<FunctionDesc<'r>, Error> {
+        let mut desc = FunctionDesc::default();
+        let hr = unsafe { self.ptr.as_ref().GetDesc(desc.as_mut_ptr()) };
         Error::check("ID3D11FunctionReflection::GetDesc", hr)?;
         Ok(desc)
     }
