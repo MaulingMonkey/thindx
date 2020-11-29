@@ -22,7 +22,6 @@
     };
 }
 
-#[allow(dead_code)] // XXX: temporary
 #[cfg(test)] pub fn offset_of<S, F>(s: &S, f: &F) -> usize {
     let s : *const S = s;
     let f : *const F = f;

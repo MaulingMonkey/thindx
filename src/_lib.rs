@@ -118,7 +118,7 @@
 #![allow(broken_intra_doc_links)] // temporary
 #![deny(unreachable_patterns)]
 
-#[macro_use] mod macros;
+#[macro_use] mod macros; #[cfg(test)] use macros::*;
 
 
 
@@ -129,5 +129,6 @@
 #[path="structures/_structures.rs"]     mod structures;     pub use structures::*;
 #[path="traits/_traits.rs"]             mod traits;         pub use traits::*;
 
+mod cstr_ptr;                   pub use cstr_ptr::*;
 mod error_kind;                 pub use error_kind::*;
 mod error;                      pub use error::*;

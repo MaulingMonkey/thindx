@@ -15,6 +15,9 @@ pub mod d3d11 {
     mod shader_reflection_constant_buffer;  pub use shader_reflection_constant_buffer::*;
     mod shader_reflection_type;             pub use shader_reflection_type::*;
     mod shader_reflection_variable;         pub use shader_reflection_variable::*;
+
+    // structure
+    mod parameter_desc;                     pub use parameter_desc::*;
 }
 
 mod blob;               pub use blob::*;

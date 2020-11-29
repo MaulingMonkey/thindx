@@ -39,9 +39,9 @@ impl<'r> FunctionParameterReflection<'r> {
     /// # use thin3dcompiler::*;
     /// // TODO
     /// ```
-    pub fn get_desc_raw(&self) -> Result<D3D11_PARAMETER_DESC, Error> {
-        let mut desc = unsafe { std::mem::zeroed::<D3D11_PARAMETER_DESC>() };
-        let hr = unsafe { self.ptr.as_ref().GetDesc(&mut desc) };
+    pub fn get_desc(&self) -> Result<ParameterDesc<'r>, Error> {
+        let mut desc = ParameterDesc::default();
+        let hr = unsafe { self.ptr.as_ref().GetDesc(&mut desc as *mut _ as *mut _) };
         Error::check("ID3D11FunctionParameterReflection::GetDesc", hr)?;
         Ok(desc)
     }

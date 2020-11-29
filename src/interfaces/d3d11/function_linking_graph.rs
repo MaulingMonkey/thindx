@@ -1,8 +1,6 @@
 use crate::*;
 use crate::d3d11::*;
 
-use winapi::um::d3d11shader::*;
-
 use std::convert::TryInto;
 use std::ptr::*;
 
@@ -194,13 +192,13 @@ impl FunctionLinkingGraph {
     /// // TODO
     /// // flg.set_input_signature().unwrap();
     /// ```
-    pub unsafe fn set_input_signature_raw(&self, input_parameters: &[D3D11_PARAMETER_DESC]) -> Result<LinkingNode, Error> {
+    pub fn set_input_signature(&self, input_parameters: &[ParameterDesc]) -> Result<LinkingNode, Error> {
         let n = input_parameters.len().try_into().map_err(|_| Error::new("ID3D11FunctionLinkingGraph::SetInputSignature", ErrorKind::SLICE_TOO_LARGE))?;
 
         let mut node = null_mut();
-        let hr = self.0.SetInputSignature(input_parameters.as_ptr(), n, &mut node);
+        let hr = unsafe { self.0.SetInputSignature(input_parameters.as_ptr().cast(), n, &mut node) };
         Error::check("ID3D11FunctionLinkingGraph::SetInputSignature", hr)?;
-        Ok(LinkingNode::from_raw(node))
+        Ok(unsafe { LinkingNode::from_raw(node) })
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionlinkinggraph-setoutputsignature)\]
@@ -216,13 +214,13 @@ impl FunctionLinkingGraph {
     /// // TODO
     /// // flg.set_output_signature().unwrap();
     /// ```
-    pub unsafe fn set_output_signature_raw(&self, output_parameters: &[D3D11_PARAMETER_DESC]) -> Result<LinkingNode, Error> {
+    pub fn set_output_signature(&self, output_parameters: &[ParameterDesc]) -> Result<LinkingNode, Error> {
         let n = output_parameters.len().try_into().map_err(|_| Error::new("ID3D11FunctionLinkingGraph::SetOutputSignature", ErrorKind::SLICE_TOO_LARGE))?;
 
         let mut node = null_mut();
-        let hr = self.0.SetOutputSignature(output_parameters.as_ptr(), n, &mut node);
+        let hr = unsafe { self.0.SetOutputSignature(output_parameters.as_ptr().cast(), n, &mut node) };
         Error::check("ID3D11FunctionLinkingGraph::SetOutputSignature", hr)?;
-        Ok(LinkingNode::from_raw(node))
+        Ok(unsafe { LinkingNode::from_raw(node) })
     }
 
     // TODO: safe alternatives to set_{input,output}_signature
