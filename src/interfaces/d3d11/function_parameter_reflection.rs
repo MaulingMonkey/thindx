@@ -30,4 +30,19 @@ impl<'r> FunctionParameterReflection<'r> {
     }
 }
 
-// TODO: methods
+impl<'r> FunctionParameterReflection<'r> {
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionparameterreflection-getdesc)\]
+    /// ID3D11FunctionParameterReflection::GetDesc
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use thin3dcompiler::*;
+    /// // TODO
+    /// ```
+    pub fn get_desc_raw(&self) -> Result<D3D11_PARAMETER_DESC, Error> {
+        let mut desc = unsafe { std::mem::zeroed::<D3D11_PARAMETER_DESC>() };
+        let hr = unsafe { self.ptr.as_ref().GetDesc(&mut desc) };
+        Error::check("ID3D11FunctionParameterReflection::GetDesc", hr)?;
+        Ok(desc)
+    }
+}
