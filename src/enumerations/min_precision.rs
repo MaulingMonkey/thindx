@@ -9,9 +9,7 @@ use winapi::um::d3dcommon::*;
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)] pub struct MinPrecision(D3D_MIN_PRECISION);
 
-enumish! {
-    MinPrecision => D3D_MIN_PRECISION;
-}
+enumish! { MinPrecision => D3D_MIN_PRECISION; Default, Float16, Float2_8, Reserved, SInt16, UInt16, Any16, Any10 }
 
 #[allow(non_upper_case_globals)] impl MinPrecision { // These are enum-like
     /// Default minimum precision, which is 32-bit precision.
