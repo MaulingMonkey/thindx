@@ -1,3 +1,4 @@
+use crate::*;
 use crate::d3d11::*;
 
 use winapi::um::d3d11shader::*;
@@ -18,13 +19,13 @@ use std::ptr::NonNull;
 #[derive(Clone)] #[repr(transparent)]
 pub struct ShaderReflectionConstantBuffer<'r> {
     ptr:        NonNull<ID3D11ShaderReflectionConstantBuffer>,
-    phantom:    PhantomData<&'r ShaderReflection>,
+    phantom:    PhantomData<&'r LibraryReflection>,
 }
 
 impl<'r> ShaderReflectionConstantBuffer<'r> {
-    pub(crate) unsafe fn from_raw(_: &'r ShaderReflection, fpr: *mut ID3D11ShaderReflectionConstantBuffer) -> Option<Self> {
+    pub(crate) unsafe fn from_raw(_: impl ParentOrPhantom<'r>, srcb: *mut ID3D11ShaderReflectionConstantBuffer) -> Option<Self> {
         Some(Self {
-            ptr:        NonNull::new(fpr)?,
+            ptr:        NonNull::new(srcb)?,
             phantom:    PhantomData,
         })
     }

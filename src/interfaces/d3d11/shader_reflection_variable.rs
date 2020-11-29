@@ -1,3 +1,4 @@
+use crate::*;
 use crate::d3d11::*;
 
 use winapi::um::d3d11shader::*;
@@ -21,7 +22,7 @@ pub struct ShaderReflectionVariable<'r> {
 }
 
 impl<'r> ShaderReflectionVariable<'r> {
-    pub(crate) unsafe fn from_raw(_: &'r ShaderReflection, fpr: *mut ID3D11ShaderReflectionVariable) -> Option<Self> {
+    pub(crate) unsafe fn from_raw(_: impl ParentOrPhantom<'r>, fpr: *mut ID3D11ShaderReflectionVariable) -> Option<Self> {
         Some(Self {
             ptr:        NonNull::new(fpr)?,
             phantom:    PhantomData,
