@@ -43,7 +43,6 @@
 //! &nbsp;    ├─ [decompress_shaders](D3DCompiler::decompress_shaders)(...) - decompress shaders
 //! &nbsp;    ├─ [decompress_shaders_inplace](D3DCompiler::decompress_shaders_inplace)(...) - decompress shaders without allocating
 //! &nbsp;    ├─ [decompress_shaders_count](D3DCompiler::decompress_shaders_count)(...) - get the number of shaders in a compressed archive
-//! &nbsp;    ├─ [strip_shader](D3DCompiler::strip_shader)(...) - strip debug information etc. from bytecode
 //! &nbsp;    │
 //! &nbsp;    │  **Bytecode [BlobPart] Manipulation**
 //! &nbsp;    ├─ [get_blob_part](D3DCompiler::get_blob_part)(...) - read a [BlobPart] of a shader bytecode blob
@@ -52,6 +51,7 @@
 //! &nbsp;    ├─ [get_input_signature_blob](D3DCompiler::get_input_signature_blob)(...) - read [BlobPart::InputSignatureBlob] of a shader bytecode blob
 //! &nbsp;    ├─ [get_output_signature_blob](D3DCompiler::get_output_signature_blob)(...) - read [BlobPart::OutputSignatureBlob] of a shader bytecode blob
 //! &nbsp;    ├─ [set_blob_part](D3DCompiler::set_blob_part)(...) - write a [BlobPart] of a shader bytecode blob
+//! &nbsp;    ├─ [strip_shader](D3DCompiler::strip_shader)(...) - strip debug information etc. from bytecode
 //! &nbsp;    │
 //! &nbsp;    │  **Bytecode Reflection**
 //! &nbsp;    ├─ [reflect](D3DCompiler::reflect)(...) - reflect over a single shader's bytecode
@@ -72,9 +72,7 @@
 //! &nbsp;    │  **Create [d3d11] Factories/APIs**
 //! &nbsp;    ├─ [create_function_linking_graph](D3DCompiler::create_function_linking_graph)(...) - create a [d3d11::FunctionLinkingGraph]
 //! &nbsp;    ├─ [create_linker](D3DCompiler::create_linker)(...) - create a [d3d11::Linker]
-//! &nbsp;    ├─ [load_module](D3DCompiler::load_module)(...) - load a [d3d11::Module]
-//! &nbsp;    │
-//! &nbsp;    └ ???
+//! &nbsp;    └─ [load_module](D3DCompiler::load_module)(...) - load a [d3d11::Module]
 //!
 //! <span class="inaccurate">DXCompiler</span> - TODO:  a lazily-loaded `dxcompiler.dll`
 //! &nbsp;    │
