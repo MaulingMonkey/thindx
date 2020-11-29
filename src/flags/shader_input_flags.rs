@@ -10,15 +10,25 @@ use winapi::um::d3dcommon::*;
 #[repr(transparent)] pub struct ShaderInputFlags(D3D_SHADER_INPUT_FLAGS);
 #[doc(hidden)] pub use ShaderInputFlags as SIF;
 
-flags! { SIF => D3D_SHADER_INPUT_FLAGS; None }
+flags! { SIF => D3D_SHADER_INPUT_FLAGS; None, UserPacked, ComparisonSampler, TextureComponent0, TextureComponent1, TextureComponents, Unused }
 
 #[allow(non_upper_case_globals)] impl SIF { // These are enum-like
-    const None          : SIF = SIF(0);
-    // TODO
+    pub const None                  : SIF = SIF(0);
+    pub const UserPacked            : SIF = SIF(D3D_SIF_USERPACKED);
+    pub const ComparisonSampler     : SIF = SIF(D3D_SIF_COMPARISON_SAMPLER);
+    pub const TextureComponent0     : SIF = SIF(D3D_SIF_TEXTURE_COMPONENT_0);
+    pub const TextureComponent1     : SIF = SIF(D3D_SIF_TEXTURE_COMPONENT_1);
+    pub const TextureComponents     : SIF = SIF(D3D_SIF_TEXTURE_COMPONENTS);
+    pub const Unused                : SIF = SIF(D3D_SIF_UNUSED);
 }
 
 #[doc(hidden)] impl SIF { // Ctrl+C Ctrl+V support
-    // TODO
+    pub const USERPACKED            : SIF = SIF(D3D_SIF_USERPACKED);
+    pub const COMPARISON_SAMPLER    : SIF = SIF(D3D_SIF_COMPARISON_SAMPLER);
+    pub const TEXTURE_COMPONENT_0   : SIF = SIF(D3D_SIF_TEXTURE_COMPONENT_0);
+    pub const TEXTURE_COMPONENT_1   : SIF = SIF(D3D_SIF_TEXTURE_COMPONENT_1);
+    pub const TEXTURE_COMPONENTS    : SIF = SIF(D3D_SIF_TEXTURE_COMPONENTS);
+    pub const UNUSED                : SIF = SIF(D3D_SIF_UNUSED);
 }
 
 impl Default for SIF {
