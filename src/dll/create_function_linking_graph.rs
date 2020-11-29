@@ -21,7 +21,7 @@ impl D3DCompiler {
     /// ### Example
     /// ```rust
     /// # use thin3dcompiler::*; let compiler = D3DCompiler::new(47).unwrap();
-    /// let flg : d3d11::FunctionLinkingGraph = compiler.create_function_linking_graph(()).unwrap();
+    /// let flg: d3d11::FunctionLinkingGraph = compiler.create_function_linking_graph(()).unwrap();
     /// ```
     pub fn create_function_linking_graph(&self, flags: ()) -> Result<d3d11::FunctionLinkingGraph, ErrorKind> {
         // Early outs
