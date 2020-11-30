@@ -32,7 +32,7 @@
 //!
 //! | interface                     | d3dcommon.h           |
 //! | ----------------------------- | --------------------- |
-//! | [ReadOnlyBlob]                | [ID3DBlob](https://docs.microsoft.com/en-us/previous-versions/windows/desktop/legacy/ff728743(v=vs.85))
+//! | [ReadOnlyBlob]                | [ID3D10Blob](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nn-d3dcommon-id3d10blob) / [ID3DBlob](https://docs.microsoft.com/en-us/previous-versions/windows/desktop/legacy/ff728743(v=vs.85))
 //! | trait [AsID3DInclude]         | [ID3DInclude](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nn-d3dcommon-id3dinclude)
 //!
 //! | structure                     | d3dcommon.h           |
