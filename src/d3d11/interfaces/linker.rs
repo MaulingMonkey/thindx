@@ -15,6 +15,8 @@ use std::ptr::*;
 #[derive(Clone)] #[repr(transparent)]
 pub struct Linker(pub(crate) mcom::Rc<winapi::um::d3d11shader::ID3D11Linker>);
 
+convert!(unsafe Linker => Unknown, winapi::um::d3d11shader::ID3D11Linker);
+
 impl Linker {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11linker-addclipplanefromcbuffer)\]
     /// ID3D11Linker::AddClipPlaneFromCBuffer

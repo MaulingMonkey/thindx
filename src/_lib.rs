@@ -118,20 +118,14 @@
 #![allow(broken_intra_doc_links)] // temporary
 #![deny(unreachable_patterns)]
 
-#[macro_use] mod macros; #[cfg(test)] use macros::*;
+pub use thindx::core::*;
+pub use thindx::d3dcommon::*;
+pub use thindx::d3dcompiler::*;
+pub use thindx::d3d11shader::*;
 
-pub use abibool::bool32;
+use thindx::core::mcom;
 
 
 
 #[path="d3dcompiler/_d3dcompiler.rs"]   mod d3dcompiler;    pub use d3dcompiler::*;
 #[path="d3d11/_d3d11.rs"]               pub mod d3d11;
-#[path="enumerations/_enumerations.rs"] mod enumerations;   pub use enumerations::*;
-#[path="flags/_flags.rs"]               mod flags;          pub use flags::*;
-#[path="interfaces/_interfaces.rs"]     mod interfaces;     pub use interfaces::*;
-#[path="structures/_structures.rs"]     mod structures;     pub use structures::*;
-#[path="traits/_traits.rs"]             mod traits;         pub use traits::*;
-
-mod abi_cstr;                   pub use abi_cstr::*;
-mod error_kind;                 pub use error_kind::*;
-mod error;                      pub use error::*;

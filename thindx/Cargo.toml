@@ -1,0 +1,35 @@
+# https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[package]
+name                    = "thindx"
+version                 = "0.0.0-git"
+authors                 = ["MaulingMonkey <git@maulingmonkey.com>"]
+edition                 = "2018"
+repository              = "https://github.com/MaulingMonkey/thindx"
+documentation           = "https://docs.rs/thindx"
+license                 = "Apache-2.0 OR MIT"
+readme                  = "Readme.md"
+description             = "Thin DirectX wrappers"
+keywords                = ["directx", "direct3d", "d3dcompiler"]
+categories              = ["api-bindings", "graphics", "os::windows-apis", "rendering::graphics-api"]
+
+[package.metadata.docs.rs]
+default-target          = "x86_64-pc-windows-msvc"
+targets                 = ["x86_64-pc-windows-msvc", "i686-pc-windows-msvc"]
+all-features            = true
+
+[lib]
+path                    = "src/_thindx.rs"
+
+[features]
+default = ["d3d11shader", "d3dcommon", "d3dcompiler"] # XXX
+
+d3d11shader             = ["thindx-d3d11shader" ]
+d3dcommon               = ["thindx-d3dcommon"   ]
+d3dcompiler             = ["thindx-d3dcompiler" ]
+
+[target.'cfg(windows)'.dependencies]
+thindx-core             = { version = "0.0.0-git", path = "../thindx-core"                          }
+thindx-d3d11shader      = { version = "0.0.0-git", path = "../thindx-d3d11shader",  optional = true }
+thindx-d3dcommon        = { version = "0.0.0-git", path = "../thindx-d3dcommon",    optional = true }
+thindx-d3dcompiler      = { version = "0.0.0-git", path = "../thindx-d3dcompiler",  optional = true }

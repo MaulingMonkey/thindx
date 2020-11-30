@@ -11,6 +11,8 @@ use std::ptr::*;
 #[derive(Clone)] #[repr(transparent)]
 pub struct Module(pub(crate) mcom::Rc<winapi::um::d3d11shader::ID3D11Module>);
 
+convert!(unsafe Module => Unknown, winapi::um::d3d11shader::ID3D11Module);
+
 impl Module {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11module-createinstance)\]
     /// ID3D11Module::CreateInstance

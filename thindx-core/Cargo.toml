@@ -1,0 +1,30 @@
+# https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[package]
+name                    = "thindx-core"
+version                 = "0.0.0-git"
+authors                 = ["MaulingMonkey <git@maulingmonkey.com>"]
+edition                 = "2018"
+repository              = "https://github.com/MaulingMonkey/thindx"
+documentation           = "https://docs.rs/thindx"
+license                 = "Apache-2.0 OR MIT"
+readme                  = "Readme.md"
+description             = "Thin DirectX wrappers"
+keywords                = ["directx", "direct3d", "d3dcompiler"]
+categories              = ["api-bindings", "graphics", "os::windows-apis", "rendering::graphics-api"]
+
+[package.metadata.docs.rs]
+default-target          = "x86_64-pc-windows-msvc"
+targets                 = ["x86_64-pc-windows-msvc", "i686-pc-windows-msvc"]
+all-features            = true
+
+[lib]
+path                    = "src/_thindx_core.rs"
+
+[target.'cfg(windows)'.dependencies]
+mcom                    = "0.1.1"
+#mcom                    = { git = "https://github.com/MaulingMonkey/mcom" }
+
+[target.'cfg(windows)'.dependencies.winapi]
+version                 = "0.3.9"
+features                = ["unknwnbase"]

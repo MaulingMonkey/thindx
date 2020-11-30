@@ -3,6 +3,8 @@
 [workspace]
 members = [
     ".",
+    "thindx",
+    "thindx-*",
 ]
 
 [package]
@@ -30,12 +32,10 @@ path            = "src/_lib.rs"
 
 
 [target.'cfg(windows)'.dependencies]
-abibool         = "0.5"
+thindx          = { version = "0.0.0-git", path = "thindx" }
 void            = "=1.0.2"
 minidl          = "0.1.0"
 winstr          = "0.0.2"
-mcom            = "0.1.1"
-#mcom            = { git = "https://github.com/MaulingMonkey/mcom" }
 
 [target.'cfg(windows)'.dependencies.winapi]
 version         = "0.3.9"

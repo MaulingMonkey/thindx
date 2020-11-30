@@ -39,7 +39,7 @@ impl CompileError {
 
 impl From<Error> for CompileError {
     fn from(e: Error) -> Self {
-        let Error { kind, method, errors } = e;
+        let Error { kind, method, errors, .. } = e;
         Self { kind, method, errors, shader: None }
     }
 }
