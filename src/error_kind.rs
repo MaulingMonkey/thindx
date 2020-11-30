@@ -5,6 +5,8 @@ const D3DERR_WASSTILLDRAWING    : HRESULT = MAKE_D3DHRESULT(540);
 
 
 
+// https://docs.microsoft.com/en-us/windows/win32/com/structure-of-com-error-codes
+
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/desktop/direct3d11/d3d11-graphics-reference-returnvalues)\] HRESULT
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)] pub struct ErrorKind(pub(crate) HRESULT);
