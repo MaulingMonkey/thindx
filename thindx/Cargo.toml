@@ -25,6 +25,7 @@ path            = "src/_lib.rs"
 
 
 [target.'cfg(windows)'.dependencies]
+thindx-zzz-internal-proc-macros = { version = "0.0.0-git", path = "../thindx-zzz-internal-proc-macros" }
 abibool         = "0.5"
 void            = "=1.0.2"
 minidl          = "0.1.0"

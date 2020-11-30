@@ -74,9 +74,7 @@ impl D3DCompiler {
     /// ret
     /// // Approximately 2 instruction slots used
     /// ```
-    ///
-    /// <div class="note"><b>Note:</b> This fn was introduced by d3dcompiler_40.dll, and is unavailable in earlier versions.</div>
-    #[cfg_attr(not(d3dcompiler="40"), deprecated(note = "D3DCompiler::compile wasn't added until d3dcompiler_40.dll"))]
+    #[requires(d3dcompiler=40)]
     pub fn disassemble<'s>(
         &self,
         src_data:           &[u8],
@@ -159,9 +157,7 @@ impl D3DCompiler {
     /// ret
     /// // Approximately 2 instruction slots used
     /// ```
-    ///
-    /// <div class="note"><b>Note:</b> This fn was introduced by d3dcompiler_44.dll, and is unavailable in earlier versions.</div>
-    #[cfg_attr(not(d3dcompiler="44"), deprecated(note = "D3DCompiler::compile wasn't added until d3dcompiler_44.dll"))]
+    #[requires(d3dcompiler=44)]
     pub fn disassemble_region<'s>(
         &self,
         src_data:           &[u8],
@@ -207,9 +203,7 @@ impl D3DCompiler {
     /// ```text
     /// 2
     /// ```
-    ///
-    /// <div class="note"><b>Note:</b> This fn was introduced by d3dcompiler_44.dll, and is unavailable in earlier versions.</div>
-    #[cfg_attr(not(d3dcompiler="44"), deprecated(note = "D3DCompiler::compile wasn't added until d3dcompiler_44.dll"))]
+    #[requires(d3dcompiler=44)]
     pub fn get_trace_instruction_offsets_count(
         &self,
         src_data:           &[u8],
@@ -249,9 +243,7 @@ impl D3DCompiler {
     /// ```text
     /// [32, 52]
     /// ```
-    ///
-    /// <div class="note"><b>Note:</b> This fn was introduced by d3dcompiler_44.dll, and is unavailable in earlier versions.</div>
-    #[cfg_attr(not(d3dcompiler="44"), deprecated(note = "D3DCompiler::compile wasn't added until d3dcompiler_44.dll"))]
+    #[requires(d3dcompiler=44)]
     pub fn get_trace_instruction_offsets_inplace<'o>(
         &self,
         src_data:           &[u8],
@@ -290,9 +282,7 @@ impl D3DCompiler {
     /// ```text
     /// [32, 52]
     /// ```
-    ///
-    /// <div class="note"><b>Note:</b> This fn was introduced by d3dcompiler_44.dll, and is unavailable in earlier versions.</div>
-    #[cfg_attr(not(d3dcompiler="44"), deprecated(note = "D3DCompiler::compile wasn't added until d3dcompiler_44.dll"))]
+    #[requires(d3dcompiler=44)]
     pub fn get_trace_instruction_offsets(
         &self,
         src_data:           &[u8],

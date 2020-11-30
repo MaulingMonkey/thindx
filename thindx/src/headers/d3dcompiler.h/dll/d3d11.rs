@@ -24,6 +24,7 @@ impl D3DCompiler {
     /// # use thindx::*; let compiler = D3DCompiler::new(47).unwrap();
     /// let flg: d3d11::FunctionLinkingGraph = compiler.create_function_linking_graph(None).unwrap();
     /// ```
+    #[requires(d3dcompiler=47)]
     pub fn create_function_linking_graph(&self, flags: Option<void::Void>) -> Result<d3d11::FunctionLinkingGraph, Error> {
         let f = self.D3DCreateFunctionLinkingGraph.ok_or(Error::new("D3DCreateFunctionLinkingGraph", THINERR::MISSING_DLL_EXPORT))?;
         let _ = flags; let flags = 0;
@@ -51,6 +52,7 @@ impl D3DCompiler {
     /// # use thindx::*; let compiler = D3DCompiler::new(47).unwrap();
     /// let linker : d3d11::Linker = compiler.create_linker().unwrap();
     /// ```
+    #[requires(d3dcompiler=47)]
     pub fn create_linker(&self) -> Result<d3d11::Linker, Error> {
         let f = self.D3DCreateLinker.ok_or(Error::new("D3DCreateFunctionLinkingGraph", THINERR::MISSING_DLL_EXPORT))?;
         let mut linker = null_mut();
@@ -81,6 +83,7 @@ impl D3DCompiler {
     /// # use thindx::*; let compiler = D3DCompiler::new(47).unwrap();
     /// // TODO
     /// ```
+    #[requires(d3dcompiler=47)]
     pub fn load_module(&self, data: &[u8]) -> Result<d3d11::Module, Error> {
         let f = self.D3DLoadModule.ok_or(Error::new("D3DLoadModule", THINERR::MISSING_DLL_EXPORT))?;
         let mut module = null_mut();

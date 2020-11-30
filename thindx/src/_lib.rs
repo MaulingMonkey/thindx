@@ -119,6 +119,7 @@
 #![deny(unreachable_patterns)]
 
 #[macro_use] mod macros; #[cfg(test)] use macros::*;
+use thindx_zzz_internal_proc_macros::*;
 
 pub use abibool::bool32;
 

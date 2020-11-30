@@ -34,9 +34,7 @@ impl D3DCompiler {
     ///     shader2.get_buffer(), Blob::PrivateData, None
     /// ).unwrap().get_buffer());
     /// ```
-    ///
-    /// <div class="note"><b>Note:</b> This fn was introduced by d3dcompiler_43.dll, and is unavailable in earlier versions.</div>
-    #[cfg_attr(not(d3dcompiler="43"), deprecated(note = "D3DCompiler::compile wasn't added until d3dcompiler_43.dll"))]
+    #[requires(d3dcompiler=43)]
     pub fn get_blob_part(&self, src_data: &[u8], part: impl Into<BlobPart>, flags: Option<void::Void>) -> Result<ReadOnlyBlob, Error> {
         let f = self.D3DGetBlobPart.ok_or(Error::new("D3DGetBlobPart", THINERR::MISSING_DLL_EXPORT))?;
         let part = part.into().into();
@@ -74,9 +72,7 @@ impl D3DCompiler {
     /// let debug_info = compiler.get_debug_info(compiled_shader.get_buffer()).unwrap();
     /// println!("{:?}", debug_info.get_buffer());
     /// ```
-    ///
-    /// <div class="note"><b>Note:</b> This fn was introduced by d3dcompiler_40.dll, and is unavailable in earlier versions.</div>
-    #[cfg_attr(not(d3dcompiler="40"), deprecated(note = "D3DCompiler::compile wasn't added until d3dcompiler_40.dll"))]
+    #[requires(d3dcompiler=40)]
     pub fn get_debug_info(&self, src_data: &[u8]) -> Result<ReadOnlyBlob, Error> {
         let f = self.D3DGetDebugInfo.ok_or(Error::new("D3DGetDebugInfo", THINERR::MISSING_DLL_EXPORT))?;
 
@@ -110,6 +106,7 @@ impl D3DCompiler {
     /// ```text
     /// [68, 88, 66, 67, 97, ...
     /// ```
+    // #[requires(d3dcompiler=33)] // or earlier?
     pub fn get_input_and_output_signature_blob(&self, src_data: &[u8]) -> Result<ReadOnlyBlob, Error> {
         let f = self.D3DGetInputAndOutputSignatureBlob.ok_or(Error::new("D3DGetInputAndOutputSignatureBlob", THINERR::MISSING_DLL_EXPORT))?;
 
@@ -143,6 +140,7 @@ impl D3DCompiler {
     /// ```text
     /// [68, 88, 66, 67, 53, ...
     /// ```
+    // #[requires(d3dcompiler=33)] // or earlier?
     pub fn get_input_signature_blob(&self, src_data: &[u8]) -> Result<ReadOnlyBlob, Error> {
         let f = self.D3DGetInputSignatureBlob.ok_or(Error::new("D3DGetInputSignatureBlob", THINERR::MISSING_DLL_EXPORT))?;
 
@@ -176,6 +174,7 @@ impl D3DCompiler {
     /// ```text
     /// [68, 88, 66, 67, 210, ...
     /// ```
+    // #[requires(d3dcompiler=33)] // or earlier?
     pub fn get_output_signature_blob(&self, src_data: &[u8]) -> Result<ReadOnlyBlob, Error> {
         let f = self.D3DGetOutputSignatureBlob.ok_or(Error::new("D3DGetOutputSignatureBlob", THINERR::MISSING_DLL_EXPORT))?;
 
@@ -212,9 +211,7 @@ impl D3DCompiler {
     ///     shader2.get_buffer(), Blob::PrivateData, None
     /// ).unwrap().get_buffer());
     /// ```
-    ///
-    /// <div class="note"><b>Note:</b>  The D3dcompiler_44.dll or later version of the file contains the D3DSetBlobPart compiler function.</div>
-    #[cfg_attr(not(d3dcompiler="44"), deprecated(note = "D3DCompiler::set_blob_part wasn't added until d3dcompiler_44.dll"))]
+    #[requires(d3dcompiler=44)]
     pub fn set_blob_part<'s>(
         &self,
         src_data:           &[u8],
@@ -256,9 +253,7 @@ impl D3DCompiler {
     ///     shader.get_buffer(), CompilerStripFlags::DebugInfo
     /// ).unwrap();
     /// ```
-    ///
-    /// <div class="note"><b>Note:</b>  The D3dcompiler_40.dll or later version of the file contains the D3DStripShader compiler function.</div>
-    #[cfg_attr(not(d3dcompiler="40"), deprecated(note = "D3DCompiler::strip_shader wasn't added until d3dcompiler_40.dll"))]
+    #[requires(d3dcompiler=40)]
     pub fn strip_shader<'s>(
         &self,
         shader_bytecode:    &[u8],

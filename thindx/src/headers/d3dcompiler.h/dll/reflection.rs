@@ -41,9 +41,7 @@ impl D3DCompiler {
     /// let r = compiler.reflect::<d3d11::ShaderReflection>(&[]);
     /// assert_eq!(Some(D3DERR::INVALIDCALL), r.err().map(|e| e.kind()));
     /// ```
-    ///
-    /// <div class="note"><b>Note:</b>  The D3dcompiler_40.dll or later version of the file contains the D3DReflect compiler function.</div>
-    #[cfg_attr(not(d3dcompiler="40"), deprecated(note = "D3DCompiler::reflect wasn't added until d3dcompiler_40.dll"))]
+    #[requires(d3dcompiler=40)]
     pub fn reflect<I: Raw>(&self, src_data: &[u8]) -> Result<I, Error> where I::Raw : Interface {
         let f = self.D3DReflect.ok_or(Error::new("D3DReflect", THINERR::MISSING_DLL_EXPORT))?;
 
@@ -79,6 +77,7 @@ impl D3DCompiler {
     /// let r = compiler.reflect_library::<d3d11::LibraryReflection>(&[]);
     /// assert_eq!(Some(D3DERR::INVALIDCALL), r.err().map(|e| e.kind()));
     /// ```
+    //#[requires(d3dcompiler=47)] // ?
     pub fn reflect_library<C: Raw>(&self, src_data: &[u8]) -> Result<C, Error> where C::Raw : Interface {
         let f = self.D3DReflectLibrary.ok_or(Error::new("D3DReflectLibrary", THINERR::MISSING_DLL_EXPORT))?;
 

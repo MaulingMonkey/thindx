@@ -111,8 +111,8 @@ impl D3DCompiler {
     ///
     /// // TODO: defines/includes examples
     /// ```
-    ///
-    /// <div class="note"><b>Note:</b> You can use this API to develop your Windows Store apps, but you can't use it in apps that you submit to the Windows Store.</div>
+    #[requires(!store)]
+    // #[requires(d3dcompiler=47)] // ?
     pub fn compile_from_file<'s>(
         &self,
         file_name:      impl AsRef<Path>,
@@ -197,9 +197,7 @@ impl D3DCompiler {
     ///     Compile::Debug, CompileEffect::None,
     /// ).unwrap();
     /// ```
-    ///
-    /// <div class="note"><b>Note:</b> This fn was introduced by d3dcompiler_40.dll, and is unavailable in earlier versions.</div>
-    #[cfg_attr(not(d3dcompiler="40"), deprecated(note = "D3DCompiler::compile wasn't added until d3dcompiler_40.dll"))]
+    #[requires(d3dcompiler=40)]
     pub fn compile<'s>(
         &self,
         src_data:       &[u8],
@@ -296,6 +294,7 @@ impl D3DCompiler {
     /// aspects of how bytecode is generated.  Refer to the descriptions of these parameters for more details. There is
     /// no difference otherwise to the efficiency of the bytecode generated between [compile2](Self::compile2) and
     /// [compile](Self::compile).
+    //#[requires(d3dcompiler=47)] // ?
     pub fn compile2<'s>(
         &self,
         src_data:               &[u8],
@@ -390,9 +389,7 @@ impl D3DCompiler {
     /// struct VsToPs {
     /// ...
     /// ```
-    ///
-    /// <div class="note"><b>Note:</b> This fn was introduced by d3dcompiler_40.dll, and is unavailable in earlier versions.</div>
-    #[cfg_attr(not(d3dcompiler="40"), deprecated(note = "D3DCompiler::compile wasn't added until d3dcompiler_40.dll"))]
+    #[requires(d3dcompiler=40)]
     pub fn preprocess<'s>(
         &self,
         src_data:       &[u8],

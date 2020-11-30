@@ -2,5 +2,5 @@
 
 [workspace]
 members = [
-    "thindx",
+    "thin*",
 ]

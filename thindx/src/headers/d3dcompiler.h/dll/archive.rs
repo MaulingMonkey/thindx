@@ -40,10 +40,8 @@ impl D3DCompiler {
     /// to_compress: [493 bytes, 58 bytes]
     /// compressed:   432 bytes
     /// ```
-    ///
-    /// <div class="note"><b>Note:</b> You can use this API to develop your Windows Store apps, but you can't use it in apps that you submit to the Windows Store.</div>
-    /// <div class="note"><b>Note:</b> This fn was introduced by d3dcompiler_43.dll, and is unavailable in earlier versions.</div>
-    #[cfg_attr(not(d3dcompiler="43"), deprecated(note = "D3DCompiler::compile wasn't added until d3dcompiler_43.dll"))]
+    #[requires(!store)]
+    #[requires(d3dcompiler=43)]
     pub fn compress_shaders(
         &self,
         shaders:                &[ShaderData],
@@ -99,10 +97,8 @@ impl D3DCompiler {
     /// # let compress = compiler.compress_shaders(&tocompress, CompressShader::default()).unwrap();
     /// assert_eq!(2, compiler.decompress_shaders_count(compress.get_buffer()).unwrap());
     /// ```
-    ///
-    /// <div class="note"><b>Note:</b> You can use this API to develop your Windows Store apps, but you can't use it in apps that you submit to the Windows Store.</div>
-    /// <div class="note"><b>Note:</b> This fn was introduced by d3dcompiler_43.dll, and is unavailable in earlier versions.</div>
-    #[cfg_attr(not(d3dcompiler="43"), deprecated(note = "D3DCompiler::compile wasn't added until d3dcompiler_43.dll"))]
+    #[requires(!store)]
+    #[requires(d3dcompiler=43)]
     pub fn decompress_shaders_count(&self, src_data: &[u8]) -> Result<u32, Error> {
         let f = self.D3DDecompressShaders.ok_or(Error::new("D3DDecompressShaders", THINERR::MISSING_DLL_EXPORT))?;
         let mut shader = null_mut(); // D3DDecompressShaders will fail with E_FAIL if ppShaders is null, even if it doesn't use it
@@ -150,10 +146,8 @@ impl D3DCompiler {
     /// assert_eq!(&plain_txt[..],  decompressed[1].as_ref().unwrap().get_buffer());
     /// assert!(decompressed[2].is_none());
     /// ```
-    ///
-    /// <div class="note"><b>Note:</b> You can use this API to develop your Windows Store apps, but you can't use it in apps that you submit to the Windows Store.</div>
-    /// <div class="note"><b>Note:</b> This fn was introduced by d3dcompiler_43.dll, and is unavailable in earlier versions.</div>
-    #[cfg_attr(not(d3dcompiler="43"), deprecated(note = "D3DCompiler::compile wasn't added until d3dcompiler_43.dll"))]
+    #[requires(!store)]
+    #[requires(d3dcompiler=43)]
     pub fn decompress_shaders_inplace<'s>(
         &self,
         src_data:               &[u8],
@@ -203,10 +197,8 @@ impl D3DCompiler {
     /// assert_eq!(basic_hlsl, decompressed[0].as_ref().unwrap().get_buffer());
     /// assert_eq!(plain_txt,  decompressed[1].as_ref().unwrap().get_buffer());
     /// ```
-    ///
-    /// <div class="note"><b>Note:</b> You can use this API to develop your Windows Store apps, but you can't use it in apps that you submit to the Windows Store.</div>
-    /// <div class="note"><b>Note:</b> This fn was introduced by d3dcompiler_43.dll, and is unavailable in earlier versions.</div>
-    #[cfg_attr(not(d3dcompiler="43"), deprecated(note = "D3DCompiler::compile wasn't added until d3dcompiler_43.dll"))]
+    #[requires(!store)]
+    #[requires(d3dcompiler=43)]
     pub fn decompress_shaders<'s>(
         &self,
         src_data:               &[u8],

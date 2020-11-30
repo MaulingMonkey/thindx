@@ -25,9 +25,7 @@ impl D3DCompiler {
     /// assert_eq!(blob.get_buffer_size(),  4           );
     /// assert_eq!(blob.get_buffer(),       &[1,2,3,4]  );
     /// ```
-    ///
-    /// <div class="note"><b>Note:</b> This fn was introduced by d3dcompiler_43.dll, and is unavailable in earlier versions.</div>
-    #[cfg_attr(not(d3dcompiler="43"), deprecated(note = "D3DCompiler::compile wasn't added until d3dcompiler_43.dll"))]
+    #[requires(d3dcompiler=43)]
     pub fn create_read_only_blob(&self, data: &[u8]) -> Result<ReadOnlyBlob, Error> {
         let f = self.D3DCreateBlob.ok_or(Error::new("D3DCreateBlob", THINERR::MISSING_DLL_EXPORT))?;
 
@@ -66,9 +64,7 @@ impl D3DCompiler {
     /// assert!(compiler.read_file_to_blob(r"test\data\nonexistant").is_err(), "shouldn't exist");
     /// assert!(compiler.read_file_to_blob(r"test\data").is_err(), "can't read folder");
     /// ```
-    ///
-    /// <div class="note"><b>Note:</b>  The D3dcompiler_44.dll or later version of the file contains the D3DReadFileToBlob compiler function.</div>
-    #[cfg_attr(not(d3dcompiler="44"), deprecated(note = "D3DCompiler::read_file_to_blob wasn't added until d3dcompiler_44.dll"))]
+    #[requires(d3dcompiler=44)]
     pub fn read_file_to_blob<'s>(&self, file_name: impl AsRef<Path>) -> Result<ReadOnlyBlob, Error> {
         let f = self.D3DReadFileToBlob.ok_or(Error::new("D3DReadFileToBlob", THINERR::MISSING_DLL_EXPORT))?;
         let file_name = file_name.as_ref().as_os_str().encode_wide().chain(Some(0)).collect::<Vec<_>>();
@@ -103,9 +99,7 @@ impl D3DCompiler {
     /// compiler.write_blob_to_file(&blob, r"..\target\1234.bin", true).unwrap();
     /// compiler.write_blob_to_file(&blob, r"..\target\1234.bin", false).unwrap_err();
     /// ```
-    ///
-    /// <div class="note"><b>Note:</b>  The D3dcompiler_44.dll or later version of the file contains the D3DWriteBlobToFile compiler function.</div>
-    #[cfg_attr(not(d3dcompiler="44"), deprecated(note = "D3DCompiler::write_blob_to_file wasn't added until d3dcompiler_44.dll"))]
+    #[requires(d3dcompiler=44)]
     pub fn write_blob_to_file<'s>(
         &self,
         blob:       &ReadOnlyBlob,
