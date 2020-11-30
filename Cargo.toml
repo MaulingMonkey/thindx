@@ -6,12 +6,12 @@ members = [
 ]
 
 [package]
-name            = "thin3dcompiler"
+name            = "thindx"
 version         = "0.0.0-git"
 authors         = ["MaulingMonkey <git@maulingmonkey.com>"]
 edition         = "2018"
-repository      = "https://github.com/MaulingMonkey/thin3dcompiler"
-documentation   = "https://docs.rs/thin3dcompiler"
+repository      = "https://github.com/MaulingMonkey/thindx"
+documentation   = "https://docs.rs/thindx"
 license         = "Apache-2.0 OR MIT"
 readme          = "Readme.md"
 description     = "Thin D3DCompiler wrappers"

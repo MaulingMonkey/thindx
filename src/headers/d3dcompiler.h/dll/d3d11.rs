@@ -21,7 +21,7 @@ impl D3DCompiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*; let compiler = D3DCompiler::new(47).unwrap();
+    /// # use thindx::*; let compiler = D3DCompiler::new(47).unwrap();
     /// let flg: d3d11::FunctionLinkingGraph = compiler.create_function_linking_graph(None).unwrap();
     /// ```
     pub fn create_function_linking_graph(&self, flags: Option<void::Void>) -> Result<d3d11::FunctionLinkingGraph, Error> {
@@ -48,7 +48,7 @@ impl D3DCompiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*; let compiler = D3DCompiler::new(47).unwrap();
+    /// # use thindx::*; let compiler = D3DCompiler::new(47).unwrap();
     /// let linker : d3d11::Linker = compiler.create_linker().unwrap();
     /// ```
     pub fn create_linker(&self) -> Result<d3d11::Linker, Error> {
@@ -78,7 +78,7 @@ impl D3DCompiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*; let compiler = D3DCompiler::new(47).unwrap();
+    /// # use thindx::*; let compiler = D3DCompiler::new(47).unwrap();
     /// // TODO
     /// ```
     pub fn load_module(&self, data: &[u8]) -> Result<d3d11::Module, Error> {

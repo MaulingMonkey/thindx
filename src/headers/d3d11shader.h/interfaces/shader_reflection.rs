@@ -23,7 +23,7 @@ impl ShaderReflection {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*;
+    /// # use thindx::*;
     /// // TODO
     /// ```
     pub fn get_bitwise_instruction_count(&self) -> u32 {
@@ -37,7 +37,7 @@ impl ShaderReflection {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*;
+    /// # use thindx::*;
     /// // TODO
     /// ```
     pub fn get_constant_buffer_by_index(&self, index: u32) -> Option<ShaderReflectionConstantBuffer> {
@@ -52,7 +52,7 @@ impl ShaderReflection {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*;
+    /// # use thindx::*;
     /// // TODO
     /// ```
     pub fn get_constant_buffer_by_name(&self, name: impl TryIntoAsCStr) -> Option<ShaderReflectionConstantBuffer> {
@@ -67,7 +67,7 @@ impl ShaderReflection {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*;
+    /// # use thindx::*;
     /// // TODO
     /// ```
     pub fn get_conversion_instruction_count(&self) -> u32 {
@@ -81,7 +81,7 @@ impl ShaderReflection {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*;
+    /// # use thindx::*;
     /// // TODO
     /// ```
     pub fn get_desc_raw(&self) -> Result<D3D11_SHADER_DESC, Error> {
@@ -98,7 +98,7 @@ impl ShaderReflection {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*;
+    /// # use thindx::*;
     /// // TODO
     /// ```
     pub fn get_gs_input_primitive(&self) -> D3D_PRIMITIVE {
@@ -112,7 +112,7 @@ impl ShaderReflection {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*;
+    /// # use thindx::*;
     /// // TODO
     /// ```
     pub fn get_input_parameter_desc_raw(&self, parameter_index: u32) -> Result<D3D11_SIGNATURE_PARAMETER_DESC, Error> {
@@ -129,7 +129,7 @@ impl ShaderReflection {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*;
+    /// # use thindx::*;
     /// // TODO
     /// ```
     pub fn get_min_feature_level(&self) -> Result<D3D_FEATURE_LEVEL, Error> {
@@ -146,7 +146,7 @@ impl ShaderReflection {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*;
+    /// # use thindx::*;
     /// // TODO
     /// ```
     pub fn get_movc_instruction_count(&self) -> u32 {
@@ -160,7 +160,7 @@ impl ShaderReflection {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*;
+    /// # use thindx::*;
     /// // TODO
     /// ```
     pub fn get_mov_instruction_count(&self) -> u32 {
@@ -174,7 +174,7 @@ impl ShaderReflection {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*;
+    /// # use thindx::*;
     /// // TODO
     /// ```
     pub fn get_num_interface_slots(&self) -> u32 {
@@ -188,7 +188,7 @@ impl ShaderReflection {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*;
+    /// # use thindx::*;
     /// // TODO
     /// ```
     pub fn get_output_parameter_desc_raw(&self, parameter_index: u32) -> Result<D3D11_SIGNATURE_PARAMETER_DESC, Error> {
@@ -205,7 +205,7 @@ impl ShaderReflection {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*;
+    /// # use thindx::*;
     /// // TODO
     /// ```
     pub fn get_patch_constant_parameter_desc_raw(&self, parameter_index: u32) -> Result<D3D11_SIGNATURE_PARAMETER_DESC, Error> {
@@ -222,7 +222,7 @@ impl ShaderReflection {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*;
+    /// # use thindx::*;
     /// // TODO
     /// ```
     pub fn get_requires_flags(&self) -> u64 { // TODO: flagify
@@ -236,7 +236,7 @@ impl ShaderReflection {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*;
+    /// # use thindx::*;
     /// // TODO
     /// ```
     pub fn get_resource_binding_desc_raw(&self, resource_index: u32) -> Result<D3D11_SHADER_INPUT_BIND_DESC, Error> {
@@ -253,7 +253,7 @@ impl ShaderReflection {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*;
+    /// # use thindx::*;
     /// // TODO
     /// ```
     pub fn get_resource_binding_desc_by_name_raw(&self, name: impl TryIntoAsCStr) -> Result<D3D11_SHADER_INPUT_BIND_DESC, Error> {
@@ -271,7 +271,7 @@ impl ShaderReflection {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*;
+    /// # use thindx::*;
     /// // TODO
     /// ```
     pub fn get_thread_group_size(&self) -> (u32, u32, u32) {
@@ -288,7 +288,7 @@ impl ShaderReflection {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*;
+    /// # use thindx::*;
     /// // TODO
     /// ```
     pub fn get_variable_by_name(&self, name: impl TryIntoAsCStr) -> Option<ShaderReflectionVariable> {
@@ -303,7 +303,7 @@ impl ShaderReflection {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*;
+    /// # use thindx::*;
     /// // TODO
     /// ```
     pub fn is_sample_frequency_shader(&self) -> bool {

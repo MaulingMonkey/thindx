@@ -22,7 +22,7 @@ impl LibraryReflection {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*;
+    /// # use thindx::*;
     /// // TODO
     /// ```
     pub fn get_desc_raw(&self) -> Result<D3D11_LIBRARY_DESC, Error> {
@@ -39,7 +39,7 @@ impl LibraryReflection {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*;
+    /// # use thindx::*;
     /// // TODO
     /// ```
     pub fn get_function_by_index(&self, function_index: i32) -> Option<FunctionReflection> {

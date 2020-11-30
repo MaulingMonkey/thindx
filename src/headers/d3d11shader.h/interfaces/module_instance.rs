@@ -40,7 +40,7 @@ impl ModuleInstance {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*;
+    /// # use thindx::*;
     /// // TODO
     /// ```
     pub fn bind_constant_buffer(&self, src_slot: u32, dst_slot: u32, dst_offset: u32) -> Result<bool, Error> {
@@ -65,7 +65,7 @@ impl ModuleInstance {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*;
+    /// # use thindx::*;
     /// // TODO
     /// ```
     pub fn bind_constant_buffer_by_name(&self, name: impl TryIntoAsCStr, dst_slot: u32, dst_offset: u32) -> Result<bool, Error> {
@@ -91,7 +91,7 @@ impl ModuleInstance {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*;
+    /// # use thindx::*;
     /// // TODO
     /// ```
     pub fn bind_resource(&self, src_slot: u32, dst_slot: u32, count: u32) -> Result<bool, Error> {
@@ -116,7 +116,7 @@ impl ModuleInstance {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*;
+    /// # use thindx::*;
     /// // TODO
     /// ```
     pub fn bind_resource_as_unordered_access_view(&self, src_srv_slot: u32, dst_uav_slot: u32, count: u32) -> Result<bool, Error> {
@@ -141,7 +141,7 @@ impl ModuleInstance {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*;
+    /// # use thindx::*;
     /// // TODO
     /// ```
     pub fn bind_resource_as_unordered_access_view_by_name(&self, srv_name: impl TryIntoAsCStr, dst_uav_slot: u32, count: u32) -> Result<bool, Error> {
@@ -167,7 +167,7 @@ impl ModuleInstance {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*;
+    /// # use thindx::*;
     /// // TODO
     /// ```
     pub fn bind_resource_by_name(&self, name: impl TryIntoAsCStr, dst_slot: u32, count: u32) -> Result<bool, Error> {
@@ -193,7 +193,7 @@ impl ModuleInstance {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*;
+    /// # use thindx::*;
     /// // TODO
     /// ```
     pub fn bind_sampler(&self, src_slot: u32, dst_slot: u32, count: u32) -> Result<bool, Error> {
@@ -218,7 +218,7 @@ impl ModuleInstance {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*;
+    /// # use thindx::*;
     /// // TODO
     /// ```
     pub fn bind_sampler_by_name(&self, name: impl TryIntoAsCStr, dst_slot: u32, count: u32) -> Result<bool, Error> {
@@ -244,7 +244,7 @@ impl ModuleInstance {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*;
+    /// # use thindx::*;
     /// // TODO
     /// ```
     pub fn bind_unordered_access_view(&self, src_slot: u32, dst_slot: u32, count: u32) -> Result<bool, Error> {
@@ -269,7 +269,7 @@ impl ModuleInstance {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*;
+    /// # use thindx::*;
     /// // TODO
     /// ```
     pub fn bind_unordered_access_view_by_name(&self, name: impl TryIntoAsCStr, dst_slot: u32, count: u32) -> Result<bool, Error> {

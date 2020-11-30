@@ -11,7 +11,7 @@ convert!(unsafe Unknown, winapi::um::unknwnbase::IUnknown);
 
 
 
-/// Auto trait implemented for anything that can chain-[Deref] to [thin3dcompiler::Unknown](crate::Unknown).
+/// Auto trait implemented for anything that can chain-[Deref] to [thindx::Unknown](crate::Unknown).
 pub trait AsUnknown {
     fn as_unk(&self) -> &Unknown;
 }

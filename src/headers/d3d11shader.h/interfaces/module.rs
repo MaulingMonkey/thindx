@@ -24,7 +24,7 @@ impl Module {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*;
+    /// # use thindx::*;
     /// // TODO
     /// ```
     pub fn create_instance(&self, namespace: impl TryIntoAsOptCStr) -> Result<ModuleInstance, Error> {

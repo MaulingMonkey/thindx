@@ -1,13 +1,13 @@
-# thin3dcompiler - **Thin** D**3DCompiler** wrappers
+# thindx - **Thin** **D**irect**X** wrappers
 
-[![GitHub](https://img.shields.io/github/stars/MaulingMonkey/thin3dcompiler.svg?label=GitHub&style=social)](https://github.com/MaulingMonkey/thin3dcompiler)
-[![crates.io](https://img.shields.io/crates/v/thin3dcompiler.svg)](https://crates.io/crates/thin3dcompiler)
-[![docs.rs](https://docs.rs/thin3dcompiler/badge.svg)](https://docs.rs/thin3dcompiler)
-[![License](https://img.shields.io/crates/l/thin3dcompiler.svg)](https://github.com/MaulingMonkey/thin3dcompiler)
-[![Build Status](https://github.com/MaulingMonkey/thin3dcompiler/workflows/Rust/badge.svg)](https://github.com/MaulingMonkey/thin3dcompiler/actions?query=workflow%3Arust)
-<!-- [![dependency status](https://deps.rs/repo/github/MaulingMonkey/thin3dcompiler/status.svg)](https://deps.rs/repo/github/MaulingMonkey/thin3dcompiler) -->
+[![GitHub](https://img.shields.io/github/stars/MaulingMonkey/thindx.svg?label=GitHub&style=social)](https://github.com/MaulingMonkey/thindx)
+[![crates.io](https://img.shields.io/crates/v/thindx.svg)](https://crates.io/crates/thindx)
+[![docs.rs](https://docs.rs/thindx/badge.svg)](https://docs.rs/thindx)
+[![License](https://img.shields.io/crates/l/thindx.svg)](https://github.com/MaulingMonkey/thindx)
+[![Build Status](https://github.com/MaulingMonkey/thindx/workflows/Rust/badge.svg)](https://github.com/MaulingMonkey/thindx/actions?query=workflow%3Arust)
+<!-- [![dependency status](https://deps.rs/repo/github/MaulingMonkey/thindx/status.svg)](https://deps.rs/repo/github/MaulingMonkey/thindx) -->
 
-Thin [D3DCompiler] wrappers for Rust.
+Thin DirectX wrappers for Rust.
 
 ### Why not [winapi] directly?
 
@@ -42,5 +42,4 @@ dual licensed as above, without any additional terms or conditions.
 
 
 <!-- references -->
-[D3DCompiler]:              https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/
 [winapi]:                   http://docs.rs/winapi/0.3/

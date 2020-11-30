@@ -35,7 +35,7 @@ impl FunctionLinkingGraph {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*; use d3d11::*;
+    /// # use thindx::*; use d3d11::*;
     /// # let compiler = D3DCompiler::new(47).unwrap();
     /// # let flg : FunctionLinkingGraph = compiler.create_function_linking_graph(None).unwrap();
     /// // TODO
@@ -67,7 +67,7 @@ impl FunctionLinkingGraph {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*; use d3d11::*;
+    /// # use thindx::*; use d3d11::*;
     /// # let compiler = D3DCompiler::new(47).unwrap();
     /// # let flg : FunctionLinkingGraph = compiler.create_function_linking_graph(None).unwrap();
     /// // Nothing created yet
@@ -104,7 +104,7 @@ impl FunctionLinkingGraph {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*; use d3d11::*;
+    /// # use thindx::*; use d3d11::*;
     /// # let compiler = D3DCompiler::new(47).unwrap();
     /// # let flg : FunctionLinkingGraph = compiler.create_function_linking_graph(None).unwrap();
     /// let hlsl = flg.generate_hlsl(()).unwrap();
@@ -130,7 +130,7 @@ impl FunctionLinkingGraph {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*; use d3d11::*;
+    /// # use thindx::*; use d3d11::*;
     /// # let compiler = D3DCompiler::new(47).unwrap();
     /// # let flg : FunctionLinkingGraph = compiler.create_function_linking_graph(None).unwrap();
     /// let errors : Option<ReadOnlyBlob> = flg.get_last_error().unwrap();
@@ -150,7 +150,7 @@ impl FunctionLinkingGraph {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*; use d3d11::*;
+    /// # use thindx::*; use d3d11::*;
     /// # let compiler = D3DCompiler::new(47).unwrap();
     /// # let flg : FunctionLinkingGraph = compiler.create_function_linking_graph(None).unwrap();
     /// // TODO
@@ -168,7 +168,7 @@ impl FunctionLinkingGraph {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*; use d3d11::*;
+    /// # use thindx::*; use d3d11::*;
     /// # let compiler = D3DCompiler::new(47).unwrap();
     /// # let flg : FunctionLinkingGraph = compiler.create_function_linking_graph(None).unwrap();
     /// // TODO
@@ -188,7 +188,7 @@ impl FunctionLinkingGraph {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*; use d3d11::*;
+    /// # use thindx::*; use d3d11::*;
     /// # let compiler = D3DCompiler::new(47).unwrap();
     /// # let flg : FunctionLinkingGraph = compiler.create_function_linking_graph(None).unwrap();
     /// // TODO
@@ -210,7 +210,7 @@ impl FunctionLinkingGraph {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*; use d3d11::*;
+    /// # use thindx::*; use d3d11::*;
     /// # let compiler = D3DCompiler::new(47).unwrap();
     /// # let flg : FunctionLinkingGraph = compiler.create_function_linking_graph(None).unwrap();
     /// // TODO

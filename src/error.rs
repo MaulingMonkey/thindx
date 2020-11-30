@@ -83,7 +83,7 @@ impl Debug for Error {
 
 impl Display for Error {
     fn fmt(&self, fmt: &mut Formatter) -> fmt::Result {
-        let method = self.method.unwrap_or("thin3dcompiler method");
+        let method = self.method.unwrap_or("thindx method");
         write!(fmt, "{} failed ({:?})", method, self.kind)?;
         if let Some(errors) = self.errors_utf8_lossy() {
             write!(fmt, "\n{}\n", errors)?;

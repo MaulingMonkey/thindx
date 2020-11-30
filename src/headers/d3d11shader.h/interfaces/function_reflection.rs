@@ -38,7 +38,7 @@ impl<'r> FunctionReflection<'r> {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*;
+    /// # use thindx::*;
     /// // TODO
     /// ```
     pub fn get_constant_buffer_by_index(&self, buffer_index: u32) -> Option<ShaderReflectionConstantBuffer<'r>> {
@@ -53,7 +53,7 @@ impl<'r> FunctionReflection<'r> {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*;
+    /// # use thindx::*;
     /// // TODO
     /// ```
     pub fn get_constant_buffer_by_name(&self, name: impl TryIntoAsCStr) -> Option<ShaderReflectionConstantBuffer<'r>> {
@@ -69,7 +69,7 @@ impl<'r> FunctionReflection<'r> {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*;
+    /// # use thindx::*;
     /// // TODO
     /// ```
     pub fn get_desc(&self) -> Result<FunctionDesc<'r>, Error> {
@@ -86,7 +86,7 @@ impl<'r> FunctionReflection<'r> {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*;
+    /// # use thindx::*;
     /// // TODO
     /// ```
     pub fn get_function_parameter(&self, parameter_index: i32) -> Option<FunctionParameterReflection<'r>> {
@@ -101,7 +101,7 @@ impl<'r> FunctionReflection<'r> {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*;
+    /// # use thindx::*;
     /// // TODO
     /// ```
     pub fn get_resource_binding_desc_raw(&self, resource_index: u32) -> Result<D3D11_SHADER_INPUT_BIND_DESC, Error> {
@@ -118,7 +118,7 @@ impl<'r> FunctionReflection<'r> {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*;
+    /// # use thindx::*;
     /// // TODO
     /// ```
     pub fn get_resource_binding_desc_by_name_raw(&self, name: impl TryIntoAsCStr) -> Result<D3D11_SHADER_INPUT_BIND_DESC, Error> {
@@ -136,7 +136,7 @@ impl<'r> FunctionReflection<'r> {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*;
+    /// # use thindx::*;
     /// // TODO
     /// ```
     pub fn get_variable_by_name(&self, name: impl TryIntoAsCStr) -> Option<ShaderReflectionVariable> {

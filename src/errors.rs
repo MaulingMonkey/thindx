@@ -14,7 +14,7 @@ use winapi::shared::winerror::*;
     pub const MISSING_DLL_EXPORT : ErrorKind = ErrorKind(0xA73DC001);
 
     /// `0xA73DC002`    Slice length exceeded some kind of length limit (typically a conversion to a 32-bit length, or
-    ///                 an extra cap introduced by thin3dcompiler to avoid undefined behavior from allocation size overflows.)
+    ///                 an extra cap introduced by thindx to avoid undefined behavior from allocation size overflows.)
     pub const SLICE_TOO_LARGE : ErrorKind = ErrorKind(0xA73DC002);
 
     /// `0xA73DC003`    String contains unexpected internal `\0`s when being passed to a function taking C-style `\0`-*terminated* strings.

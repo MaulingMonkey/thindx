@@ -39,7 +39,7 @@ impl<'r> ShaderReflectionConstantBuffer<'r> {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*;
+    /// # use thindx::*;
     /// // TODO
     /// ```
     pub fn get_desc_raw(&self) -> Result<D3D11_SHADER_BUFFER_DESC, Error> {
@@ -56,7 +56,7 @@ impl<'r> ShaderReflectionConstantBuffer<'r> {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*;
+    /// # use thindx::*;
     /// // TODO
     /// ```
     pub fn get_variable_by_index(&self, index: u32) -> Option<ShaderReflectionVariable<'r>> {
@@ -71,7 +71,7 @@ impl<'r> ShaderReflectionConstantBuffer<'r> {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*;
+    /// # use thindx::*;
     /// // TODO
     /// ```
     pub fn get_variable_by_name(&self, name: impl TryIntoAsCStr) -> Option<ShaderReflectionVariable<'r>> {

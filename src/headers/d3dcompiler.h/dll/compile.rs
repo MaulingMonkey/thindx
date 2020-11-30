@@ -98,7 +98,7 @@ impl D3DCompiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*; let compiler = D3DCompiler::new(47).unwrap();
+    /// # use thindx::*; let compiler = D3DCompiler::new(47).unwrap();
     /// let pixel_shader = compiler.compile_from_file(
     ///     r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0",
     ///     Compile::Debug, CompileEffect::None,
@@ -184,7 +184,7 @@ impl D3DCompiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*; let compiler = D3DCompiler::new(47).unwrap();
+    /// # use thindx::*; let compiler = D3DCompiler::new(47).unwrap();
     /// let basic_hlsl = std::fs::read(r"test\data\basic.hlsl").unwrap();
     ///
     /// let pixel_shader = compiler.compile(
@@ -276,7 +276,7 @@ impl D3DCompiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*; let compiler = D3DCompiler::new(47).unwrap();
+    /// # use thindx::*; let compiler = D3DCompiler::new(47).unwrap();
     /// let basic_hlsl = std::fs::read(r"test\data\basic.hlsl").unwrap();
     ///
     /// let pixel_shader = compiler.compile2(
@@ -371,7 +371,7 @@ impl D3DCompiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*; let compiler = D3DCompiler::new(47).unwrap();
+    /// # use thindx::*; let compiler = D3DCompiler::new(47).unwrap();
     /// let basic_hlsl = std::fs::read(r"test\data\basic.hlsl").unwrap();
     /// let ps = compiler.preprocess(&basic_hlsl, r"test\data\basic.hlsl", (), None).unwrap();
     /// println!("{}", String::from_utf8_lossy(ps.shader.get_buffer()));
@@ -379,7 +379,7 @@ impl D3DCompiler {
     ///
     /// ### Output
     /// ```hlsl
-    /// #line 1 "C:\\local\\thin3dcompiler\\test\\data\\basic.hlsl"
+    /// #line 1 "C:\\local\\thindx\\test\\data\\basic.hlsl"
     ///
     ///
     /// struct Vertex {

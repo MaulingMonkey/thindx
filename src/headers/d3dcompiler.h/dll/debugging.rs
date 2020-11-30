@@ -31,7 +31,7 @@ impl D3DCompiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*; let compiler = D3DCompiler::new(47).unwrap();
+    /// # use thindx::*; let compiler = D3DCompiler::new(47).unwrap();
     /// # let shader = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap().shader;
     /// # let shader = shader.get_buffer();
     /// let dis = compiler.disassemble(shader, Disasm::None, "// example comment\n").unwrap();
@@ -69,7 +69,7 @@ impl D3DCompiler {
     /// //   v1.x <- i.position.x; v1.y <- i.position.y; v1.z <- i.position.z; v1.w <- i.position.w;
     /// //   o0.x <- <ps_main return value>.color.x; o0.y <- <ps_main return value>.color.y; o0.z <- <ps_main return value>.color.z; o0.w <- <ps_main return value>.color.w    
     /// //
-    /// #line 27 "C:\local\thin3dcompiler\test\data\basic.hlsl"
+    /// #line 27 "C:\local\thindx\test\data\basic.hlsl"
     /// mov o0.xyzw, v0.xyzw
     /// ret
     /// // Approximately 2 instruction slots used
@@ -112,7 +112,7 @@ impl D3DCompiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*; let compiler = D3DCompiler::new(47).unwrap();
+    /// # use thindx::*; let compiler = D3DCompiler::new(47).unwrap();
     /// # let shader = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap().shader;
     /// # let shader = shader.get_buffer();
     /// let dr = compiler.disassemble_region(
@@ -154,7 +154,7 @@ impl D3DCompiler {
     /// //   v1.x <- i.position.x; v1.y <- i.position.y; v1.z <- i.position.z; v1.w <- i.position.w;
     /// //   o0.x <- <ps_main return value>.color.x; o0.y <- <ps_main return value>.color.y; o0.z <- <ps_main return value>.color.z; o0.w <- <ps_main return value>.color.w    
     /// //
-    /// #line 27 "C:\local\thin3dcompiler\test\data\basic.hlsl"
+    /// #line 27 "C:\local\thindx\test\data\basic.hlsl"
     /// mov o0.xyzw, v0.xyzw
     /// ret
     /// // Approximately 2 instruction slots used
@@ -196,7 +196,7 @@ impl D3DCompiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*; let compiler = D3DCompiler::new(47).unwrap();
+    /// # use thindx::*; let compiler = D3DCompiler::new(47).unwrap();
     /// # let shader = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap().shader;
     /// println!("{}", compiler.get_trace_instruction_offsets_count(
     ///     shader.get_buffer(), GetInstOffsets::None, 0, std::usize::MAX
@@ -236,7 +236,7 @@ impl D3DCompiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*; let compiler = D3DCompiler::new(47).unwrap();
+    /// # use thindx::*; let compiler = D3DCompiler::new(47).unwrap();
     /// # let shader = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap().shader;
     /// let mut offsets = [0; 128];
     /// let offsets : &[usize] = compiler.get_trace_instruction_offsets_inplace(
@@ -278,7 +278,7 @@ impl D3DCompiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*; let compiler = D3DCompiler::new(47).unwrap();
+    /// # use thindx::*; let compiler = D3DCompiler::new(47).unwrap();
     /// # let shader = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap().shader;
     /// let offsets : Vec<usize> = compiler.get_trace_instruction_offsets(
     ///     shader.get_buffer(), GetInstOffsets::None, 0, std::usize::MAX

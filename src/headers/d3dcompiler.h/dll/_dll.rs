@@ -75,17 +75,17 @@ pub struct D3DCompiler {
     // https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/
 
 
-    // https://github.com/MaulingMonkey/thin3dcompiler/issues/2
+    // https://github.com/MaulingMonkey/thindx/issues/2
     // D3D10 APIs not exposed:
     // D3DDisassemble10Effect
 
 
-    // https://github.com/MaulingMonkey/thin3dcompiler/issues/3
+    // https://github.com/MaulingMonkey/thindx/issues/3
     // Undocumented APIs not exposed:
     // D3DAssemble
 
 
-    // https://github.com/MaulingMonkey/thin3dcompiler/issues/4
+    // https://github.com/MaulingMonkey/thindx/issues/4
     // Legacy APIs not (yet?) exposed:
     // D3DCompileFromMemory
     // D3DDisassembleCode
@@ -93,7 +93,7 @@ pub struct D3DCompiler {
     // D3DGetCodeDebugInfo
     // D3DPreprocessFromMemory
 
-    // https://github.com/MaulingMonkey/thin3dcompiler/issues/6
+    // https://github.com/MaulingMonkey/thindx/issues/6
     // d3d11shadertracing.h not (yet?) exposed:
     // D3DDisassemble11Trace
 

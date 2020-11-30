@@ -12,7 +12,7 @@ impl D3DCompiler {
     ///
     /// ### Example
     /// ```rust
-    /// use thin3dcompiler::*;
+    /// use thindx::*;
     /// let compiler = D3DCompiler::new(47).unwrap();
     /// ```
     pub fn new(version: u32) -> Result<Self, std::io::Error> {

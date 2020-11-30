@@ -36,7 +36,7 @@ impl<'r> FunctionParameterReflection<'r> {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*;
+    /// # use thindx::*;
     /// // TODO
     /// ```
     pub fn get_desc(&self) -> Result<ParameterDesc<'r>, Error> {

@@ -24,7 +24,7 @@ impl D3DCompiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*; let compiler = D3DCompiler::new(47).unwrap();
+    /// # use thindx::*; let compiler = D3DCompiler::new(47).unwrap();
     /// let shader = compiler.compile_from_file(
     ///     r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0",
     ///     Compile::Debug, CompileEffect::None
@@ -72,7 +72,7 @@ impl D3DCompiler {
     ///
     /// ### Example
     /// ```rust,no_run
-    /// # use thin3dcompiler::*; let compiler = D3DCompiler::new(47).unwrap();
+    /// # use thindx::*; let compiler = D3DCompiler::new(47).unwrap();
     /// // TODO: figure out what reflect_library actually takes and demo that.
     ///
     /// // Invalid `src_data`:

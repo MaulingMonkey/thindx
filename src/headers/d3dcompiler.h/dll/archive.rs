@@ -22,7 +22,7 @@ impl D3DCompiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*; let compiler = D3DCompiler::new(47).unwrap();
+    /// # use thindx::*; let compiler = D3DCompiler::new(47).unwrap();
     /// let basic_hlsl  = std::fs::read(r"test\data\basic.hlsl").unwrap();
     /// let plain_txt   = std::fs::read(r"test\data\plain.txt").unwrap();
     /// let tocompress = [
@@ -72,7 +72,7 @@ impl D3DCompiler {
     //  * if `indices` is null:
     //      * treated as if indicies == (start_index .. start_index + num_shaders).collect()
     //
-    // https://github.com/MaulingMonkey/thin3dcompiler/issues/5
+    // https://github.com/MaulingMonkey/thindx/issues/5
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3ddecompressshaders)\]
     /// D3DDecompressShaders
@@ -88,7 +88,7 @@ impl D3DCompiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*; let compiler = D3DCompiler::new(47).unwrap();
+    /// # use thindx::*; let compiler = D3DCompiler::new(47).unwrap();
     /// # let basic_hlsl  = std::fs::read(r"test\data\basic.hlsl").unwrap();
     /// # let plain_txt   = std::fs::read(r"test\data\plain.txt").unwrap();
     /// # let tocompress = [
@@ -128,7 +128,7 @@ impl D3DCompiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*; let compiler = D3DCompiler::new(47).unwrap();
+    /// # use thindx::*; let compiler = D3DCompiler::new(47).unwrap();
     /// # let basic_hlsl  = std::fs::read(r"test\data\basic.hlsl").unwrap();
     /// # let plain_txt   = std::fs::read(r"test\data\plain.txt").unwrap();
     /// # let tocompress = [
@@ -188,7 +188,7 @@ impl D3DCompiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*; let compiler = D3DCompiler::new(47).unwrap();
+    /// # use thindx::*; let compiler = D3DCompiler::new(47).unwrap();
     /// # let basic_hlsl  = std::fs::read(r"test\data\basic.hlsl").unwrap();
     /// # let plain_txt   = std::fs::read(r"test\data\plain.txt").unwrap();
     /// # let tocompress = [

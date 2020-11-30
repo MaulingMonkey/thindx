@@ -42,7 +42,7 @@ impl<'r> ShaderReflectionType<'r> {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*;
+    /// # use thindx::*;
     /// // TODO
     /// ```
     pub fn get_base_class(&self) -> Option<ShaderReflectionType<'r>> {
@@ -57,7 +57,7 @@ impl<'r> ShaderReflectionType<'r> {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*;
+    /// # use thindx::*;
     /// // TODO
     /// ```
     pub fn get_desc_raw(&self) -> Result<D3D11_SHADER_TYPE_DESC, Error> {
@@ -74,7 +74,7 @@ impl<'r> ShaderReflectionType<'r> {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*;
+    /// # use thindx::*;
     /// // TODO
     /// ```
     pub fn get_interface_by_index(&self, index: u32) -> Option<ShaderReflectionType<'r>> {
@@ -89,7 +89,7 @@ impl<'r> ShaderReflectionType<'r> {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*;
+    /// # use thindx::*;
     /// // TODO
     /// ```
     pub fn get_member_type_by_index(&self, index: u32) -> Option<ShaderReflectionType<'r>> {
@@ -104,7 +104,7 @@ impl<'r> ShaderReflectionType<'r> {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*;
+    /// # use thindx::*;
     /// // TODO
     /// ```
     pub fn get_member_type_by_name(&self, name: impl TryIntoAsCStr) -> Option<ShaderReflectionType<'r>> {
@@ -120,7 +120,7 @@ impl<'r> ShaderReflectionType<'r> {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*;
+    /// # use thindx::*;
     /// // TODO
     /// ```
     pub fn get_member_type_name(&self, index: u32) -> Option<&'r CStr> {
@@ -139,7 +139,7 @@ impl<'r> ShaderReflectionType<'r> {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*;
+    /// # use thindx::*;
     /// // TODO
     /// ```
     pub fn get_num_interfaces(&self) -> u32 {
@@ -153,7 +153,7 @@ impl<'r> ShaderReflectionType<'r> {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*;
+    /// # use thindx::*;
     /// // TODO
     /// ```
     pub fn get_sub_type(&self) -> Option<ShaderReflectionType<'r>> {
@@ -173,7 +173,7 @@ impl<'r> ShaderReflectionType<'r> {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*;
+    /// # use thindx::*;
     /// // TODO
     /// ```
     pub fn implements_interface(&self, base: &ShaderReflectionType) -> Result<bool, Error> {
@@ -198,7 +198,7 @@ impl<'r> ShaderReflectionType<'r> {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*;
+    /// # use thindx::*;
     /// // TODO
     /// ```
     pub fn is_equal(&self, type_: &ShaderReflectionType) -> Result<bool, Error> {
@@ -223,7 +223,7 @@ impl<'r> ShaderReflectionType<'r> {
     ///
     /// ### Example
     /// ```rust
-    /// # use thin3dcompiler::*;
+    /// # use thindx::*;
     /// // TODO
     /// ```
     pub fn is_of_type(&self, type_: &ShaderReflectionType) -> Result<bool, Error> {

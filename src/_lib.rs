@@ -26,7 +26,7 @@
 //! ### Quickstart
 //!
 //! ```rust
-//! use thin3dcompiler::*;
+//! use thindx::*;
 //!
 //! let compiler = D3DCompiler::new(47).unwrap(); // Loads d3dcompiler_47.dll
 //!
@@ -59,14 +59,14 @@
 //!
 //! ### Factories
 //!
-//! | thin3dcompiler                                | docs.microsoft.com    | Desc |
+//! | thindx                                        | docs.microsoft.com    | Desc |
 //! | --------------------------------------------- | --------------------- | ---- |
 //! | [D3DCompiler]                                 | `d3dcompiler_##.dll`  | The main factory for FXC bytecode (shader model 5 and earlier)
 //! | <span class="inaccurate">DXCompiler</span>    | `dxcompiler.dll`      | The main factory for DXC bytecode (shader model 6+)
 //!
 //! ### Enumerations
 //!
-//! | thin3dcompiler        | docs.microsoft.com    | Desc |
+//! | thindx                | docs.microsoft.com    | Desc |
 //! | --------------------- | --------------------- | ---- |
 //! | [BlobPart]            | [D3D_BLOB_PART]       | Identifies a subsection of a bytecode blob
 //! | [ErrorKind]           | HRESULT               | Error kind, used throughout the API
@@ -75,7 +75,7 @@
 //!
 //! ### Flags
 //!
-//! | thin3dcompiler        | docs.microsoft.com    | Desc |
+//! | thindx                | docs.microsoft.com    | Desc |
 //! | --------------------- | --------------------- | ---- |
 //! | [Compile]             | [D3DCOMPILE_\*]           | Flags controlling how HLSL is compiled to bytecode
 //! | [CompileEffect]       | [D3DCOMPILE_EFFECT_\*]    | Flags controlling how HLSL **effects** shaders are compiled
@@ -95,7 +95,7 @@
 //!
 //! ### Structures
 //!
-//! | thin3dcompiler        | docs.microsoft.com    | Desc |
+//! | thindx                | docs.microsoft.com    | Desc |
 //! | --------------------- | --------------------- | ---- |
 //! | [ShaderData]          | [D3D_SHADER_DATA]     | &amp;\[[u8]\] equivalent that's ABI-compatible with some D3D APIs
 //! | [Error]               | <span style="opacity: 33%">N/A</span>
@@ -104,7 +104,7 @@
 //!
 //! ### Traits
 //!
-//! | thin3dcompiler        | docs.microsoft.com    | Desc |
+//! | thindx                | docs.microsoft.com    | Desc |
 //! | --------------------- | --------------------- | ---- |
 //! | [AsID3DInclude]       | [ID3DInclude]         | Conversion trait for resolving `#include`s
 //! | [AsShaderMacros]      | [D3D_SHADER_MACRO]\[\]| Conversion trait for resolving `#define`s
