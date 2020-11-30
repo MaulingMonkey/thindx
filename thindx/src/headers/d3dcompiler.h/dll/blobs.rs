@@ -100,8 +100,8 @@ impl D3DCompiler {
     /// ```rust
     /// # use thindx::*; let compiler = D3DCompiler::new(47).unwrap();
     /// let blob = compiler.create_read_only_blob(&[1,2,3,4]).unwrap();
-    /// compiler.write_blob_to_file(&blob, r"target\1234.bin", true).unwrap();
-    /// compiler.write_blob_to_file(&blob, r"target\1234.bin", false).unwrap_err();
+    /// compiler.write_blob_to_file(&blob, r"..\target\1234.bin", true).unwrap();
+    /// compiler.write_blob_to_file(&blob, r"..\target\1234.bin", false).unwrap_err();
     /// ```
     ///
     /// <div class="note"><b>Note:</b>  The D3dcompiler_44.dll or later version of the file contains the D3DWriteBlobToFile compiler function.</div>
