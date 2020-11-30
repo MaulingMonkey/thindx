@@ -2,6 +2,7 @@ mod blob_part;                          pub use blob_part::*;
 mod cbuffer_type;                       pub use cbuffer_type::*;
 mod driver_type;                        pub use driver_type::*;
 mod feature_level;                      pub use feature_level::*;
+mod include_type;                       pub use include_type::*;
 mod interpolation_mode;                 pub use interpolation_mode::*;
 mod min_precision;                      pub use min_precision::*;
 mod name;                               pub use name::*;
