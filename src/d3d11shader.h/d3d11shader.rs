@@ -1,12 +1,9 @@
 pub use enumerations::*;
-pub use flags::*;
 pub use interfaces::*;
 pub use structures::*;
 
 mod enumerations {
-}
-
-mod flags {
+    mod shader_version_type;                pub use shader_version_type::*;
 }
 
 mod interfaces {
