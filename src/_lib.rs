@@ -131,8 +131,8 @@ pub mod d3d11 {
 #[path="headers/d3d11shader.h/d3d11shader.rs"]  mod d3d11shader_h;  // d3d11 mod
 #[path="headers/d3dcommon.h/d3dcommon.rs"]      mod d3dcommon_h;    pub use d3dcommon_h::*;
 #[path="headers/d3dcompiler.h/d3dcompiler.rs"]  mod d3dcompiler_h;  pub use d3dcompiler_h::*;
+#[path="headers/unknwn.h/unknwn.rs"]            mod unknwn_h;       pub use unknwn_h::*;
 
-#[path="interfaces/_interfaces.rs"]     mod interfaces;     pub use interfaces::*;
 #[path="traits/_traits.rs"]             mod traits;         pub use traits::*;
 
 mod abi_cstr;                   pub use abi_cstr::*;
