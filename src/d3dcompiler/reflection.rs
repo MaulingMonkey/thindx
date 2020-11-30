@@ -35,7 +35,7 @@ impl D3DCompiler {
     ///
     /// // Invalid interface:
     /// let r = compiler.reflect::<Unknown>(shader.get_buffer());
-    /// assert_eq!(Some(D3DERR::INVALIDARG), r.err().map(|e| e.kind()));
+    /// assert_eq!(Some(E::INVALIDARG), r.err().map(|e| e.kind()));
     ///
     /// // Invalid `src_data`:
     /// let r = compiler.reflect::<d3d11::ShaderReflection>(&[]);

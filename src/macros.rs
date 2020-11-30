@@ -29,6 +29,20 @@
 }
 
 macro_rules! enumish {
+    ( $enumish:ty => $d3d:ty; FQN; $($($ident:ident)::+),* $(,)? ) => {
+        impl std::fmt::Debug for $enumish {
+            fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
+                match *self {
+                    $(
+                        $($ident)::+    => write!(f, concat!(stringify!($enumish), "::", stringify!($($ident)::+))),
+                    )*
+                    other               => write!(f, "{}({})", stringify!($enumish), other.0),
+                }
+            }
+        }
+
+        enumish!( $enumish => $d3d );
+    };
     ( $enumish:ty => $d3d:ty; $($ident:ident),* $(,)? ) => {
         impl std::fmt::Debug for $enumish {
             fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
@@ -41,6 +55,9 @@ macro_rules! enumish {
             }
         }
 
+        enumish!( $enumish => $d3d );
+    };
+    ( $enumish:ty => $d3d:ty ) => {
         impl From<$enumish> for $d3d {
             fn from(value: $enumish) -> Self { value.0.into() }
         }
@@ -58,7 +75,7 @@ macro_rules! enumish {
             /// Convert back into an underlying [winapi] `D3D...` type.
             pub const fn into(self) -> $d3d { self.0 as _ }
         }
-    }
+    };
 }
 
 macro_rules! flags {
