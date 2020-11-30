@@ -6,7 +6,7 @@ type D3DCOMPILE = u32; // there's no actual type
 
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3dhlsl/d3dcompile-constants)\]
-/// DWORD / D3DCOMPILE_*
+/// UINT / D3DCOMPILE_*
 ///
 /// Flags controlling how HLSL shaders are compiled to bytecode.
 ///

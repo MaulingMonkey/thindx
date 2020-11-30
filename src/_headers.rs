@@ -89,8 +89,8 @@
 //!
 //!
 //! # d3dcompiler.h
-//!
-//! \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/)\] HLSL compilation, linking, disassembly, reflection, archival, and utility APIs
+//! \[[D3DCompiler Reference](https://docs.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-d3dcompiler-reference), [d3dcompiler.h header](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/)\]
+//! HLSL compilation, linking, disassembly, reflection, archival, and utility APIs
 //!
 //! | function                                              | d3dcompiler.h                                                                                                                                                 | description   |
 //! | ----------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
@@ -129,9 +129,17 @@
 //! | --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
 //! | [BlobPart]                        | [D3D_BLOB_PART](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/ne-d3dcompiler-d3d_blob_part)                                                  | Values that identify parts of the content of an arbitrary length data buffer.
 //!
-//! | flag                              | d3dcompiler.h                                                                                                                                                 | description   |
-//! | --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-//! | [CompilerStripFlags]              | [D3DCOMPILER_STRIP_FLAGS](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/ne-d3dcompiler-d3dcompiler_strip_flags)                              | Strip flag options.
+//! | flag                              | d3dcompiler.h                                                                                                                                                         | description   |
+//! | --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+//! | [CompilerStripFlags]              | [D3DCOMPILER_STRIP_FLAGS](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/ne-d3dcompiler-d3dcompiler_strip_flags)                                      | Strip flag options.
+//! | **flag constants**                |                                                                                                                                                                       |
+//! | [CompileEffect]                   | UINT / [D3DCOMPILE_EFFECT_*](https://docs.microsoft.com/en-us/windows/win32/direct3dhlsl/d3dcompile-effect-constants)                                                 |
+//! | [CompileSecdata]                  | UINT / [D3DCOMPILE_SECDATA_*](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dcompile2#parameters)                                   |
+//! | [Compile]                         | UINT / [D3DCOMPILE_*](https://docs.microsoft.com/en-us/windows/win32/direct3dhlsl/d3dcompile-constants)                                                               |
+//! | [CompressShader]                  | UINT / [D3D_COMPRESS_SHADER_*](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dcompressshaders#parameters)                           |
+//! | [Disasm]                          | UINT / [D3D_DISASM_*](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3ddisassembleregion#parameters)                                  |
+//! | [GetInstOffsets]                  | UINT / [D3D_GET_INST_OFFSETS_*](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dgettraceinstructionoffsets#parameters)               |
+//! | [ShaderRequires]                  | UINT64 / [D3D_SHADER_REQUIRES_*](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getrequiresflags#return-value)  |
 
 use crate::*;
 use crate::d3d11::*;

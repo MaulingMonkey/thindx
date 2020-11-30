@@ -6,7 +6,7 @@ use winapi::um::d3dcompiler::*;
 
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3dhlsl/d3dcompile-effect-constants)\]
-/// DWORD / D3DCOMPILE_EFFECT_*
+/// UINT / D3DCOMPILE_EFFECT_*
 ///
 /// Flags controlling how HLSL **effects** shaders are compiled.
 ///
