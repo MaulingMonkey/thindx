@@ -19,7 +19,7 @@ impl D3DCompiler {
     /// ### Returns
     /// *   Ok([ReadOnlyBlob])                  - on success
     /// *   Err([Error]) with `error.kind()` ==
-    ///     *   [ErrorKind::MISSING_DLL_EXPORT] - on `d3dcompiler_42.dll` and earlier
+    ///     *   [THINERR::MISSING_DLL_EXPORT] - on `d3dcompiler_42.dll` and earlier
     ///     *   [D3DERR::INVALIDCALL]           - on data that wasn't compiled shader code.
     ///
     /// ### Example
@@ -38,7 +38,7 @@ impl D3DCompiler {
     /// <div class="note"><b>Note:</b> This fn was introduced by d3dcompiler_43.dll, and is unavailable in earlier versions.</div>
     #[cfg_attr(not(d3dcompiler="43"), deprecated(note = "D3DCompiler::compile wasn't added until d3dcompiler_43.dll"))]
     pub fn get_blob_part(&self, src_data: &[u8], part: impl Into<BlobPart>, flags: Option<void::Void>) -> Result<ReadOnlyBlob, Error> {
-        let f = self.D3DGetBlobPart.ok_or(Error::new("D3DGetBlobPart", ErrorKind::MISSING_DLL_EXPORT))?;
+        let f = self.D3DGetBlobPart.ok_or(Error::new("D3DGetBlobPart", THINERR::MISSING_DLL_EXPORT))?;
         let part = part.into().into();
         let _ = flags; let flags = 0;
         let mut blob = null_mut();
@@ -58,7 +58,7 @@ impl D3DCompiler {
     /// *   `src_data`  Either uncompiled or compiled HLSL code.
     ///
     /// ### Returns
-    /// *   Err([ErrorKind::MISSING_DLL_EXPORT])    - `d3dcompiler_39.dll` and earlier
+    /// *   Err([THINERR::MISSING_DLL_EXPORT])    - `d3dcompiler_39.dll` and earlier
     /// *   Ok([ReadOnlyBlob])
     ///
     /// ### Example
@@ -78,7 +78,7 @@ impl D3DCompiler {
     /// <div class="note"><b>Note:</b> This fn was introduced by d3dcompiler_40.dll, and is unavailable in earlier versions.</div>
     #[cfg_attr(not(d3dcompiler="40"), deprecated(note = "D3DCompiler::compile wasn't added until d3dcompiler_40.dll"))]
     pub fn get_debug_info(&self, src_data: &[u8]) -> Result<ReadOnlyBlob, Error> {
-        let f = self.D3DGetDebugInfo.ok_or(Error::new("D3DGetDebugInfo", ErrorKind::MISSING_DLL_EXPORT))?;
+        let f = self.D3DGetDebugInfo.ok_or(Error::new("D3DGetDebugInfo", THINERR::MISSING_DLL_EXPORT))?;
 
         let mut blob = null_mut();
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), &mut blob) };
@@ -111,7 +111,7 @@ impl D3DCompiler {
     /// [68, 88, 66, 67, 97, ...
     /// ```
     pub fn get_input_and_output_signature_blob(&self, src_data: &[u8]) -> Result<ReadOnlyBlob, Error> {
-        let f = self.D3DGetInputAndOutputSignatureBlob.ok_or(Error::new("D3DGetInputAndOutputSignatureBlob", ErrorKind::MISSING_DLL_EXPORT))?;
+        let f = self.D3DGetInputAndOutputSignatureBlob.ok_or(Error::new("D3DGetInputAndOutputSignatureBlob", THINERR::MISSING_DLL_EXPORT))?;
 
         let mut blob = null_mut();
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), &mut blob) };
@@ -144,7 +144,7 @@ impl D3DCompiler {
     /// [68, 88, 66, 67, 53, ...
     /// ```
     pub fn get_input_signature_blob(&self, src_data: &[u8]) -> Result<ReadOnlyBlob, Error> {
-        let f = self.D3DGetInputSignatureBlob.ok_or(Error::new("D3DGetInputSignatureBlob", ErrorKind::MISSING_DLL_EXPORT))?;
+        let f = self.D3DGetInputSignatureBlob.ok_or(Error::new("D3DGetInputSignatureBlob", THINERR::MISSING_DLL_EXPORT))?;
 
         let mut blob = null_mut();
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), &mut blob) };
@@ -177,7 +177,7 @@ impl D3DCompiler {
     /// [68, 88, 66, 67, 210, ...
     /// ```
     pub fn get_output_signature_blob(&self, src_data: &[u8]) -> Result<ReadOnlyBlob, Error> {
-        let f = self.D3DGetOutputSignatureBlob.ok_or(Error::new("D3DGetOutputSignatureBlob", ErrorKind::MISSING_DLL_EXPORT))?;
+        let f = self.D3DGetOutputSignatureBlob.ok_or(Error::new("D3DGetOutputSignatureBlob", THINERR::MISSING_DLL_EXPORT))?;
 
         let mut blob = null_mut();
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), &mut blob) };
@@ -197,7 +197,7 @@ impl D3DCompiler {
     /// *   `part_data` - The part data to set.
     ///
     /// ### Returns
-    /// *   Err(`e`) where `e.kind()` == [ErrorKind::MISSING_DLL_EXPORT]    - `d3dcompiler_43.dll` and earlier
+    /// *   Err(`e`) where `e.kind()` == [THINERR::MISSING_DLL_EXPORT]    - `d3dcompiler_43.dll` and earlier
     /// *   Ok(`()`)
     ///
     /// ### Example
@@ -222,7 +222,7 @@ impl D3DCompiler {
         flags:              (),
         part_data:          &[u8],
     ) -> Result<ReadOnlyBlob, Error> {
-        let f = self.D3DSetBlobPart.ok_or(Error::new("D3DSetBlobPart", ErrorKind::MISSING_DLL_EXPORT))?;
+        let f = self.D3DSetBlobPart.ok_or(Error::new("D3DSetBlobPart", THINERR::MISSING_DLL_EXPORT))?;
 
         let _ = flags; let flags = 0;
         let mut blob = null_mut();
@@ -241,7 +241,7 @@ impl D3DCompiler {
     /// *   `strip_flags`       - The [CompilerStripFlags] to use.
     ///
     /// ### Returns
-    /// *   Err(`e`) where `e.kind()` == [ErrorKind::MISSING_DLL_EXPORT]    - `d3dcompiler_39.dll` and earlier
+    /// *   Err(`e`) where `e.kind()` == [THINERR::MISSING_DLL_EXPORT]    - `d3dcompiler_39.dll` and earlier
     /// *   Ok(`()`)
     ///
     /// ### Example
@@ -264,7 +264,7 @@ impl D3DCompiler {
         shader_bytecode:    &[u8],
         strip_flags:        impl Into<CompilerStripFlags>,
     ) -> Result<ReadOnlyBlob, Error> {
-        let f = self.D3DStripShader.ok_or(Error::new("D3DStripShader", ErrorKind::MISSING_DLL_EXPORT))?;
+        let f = self.D3DStripShader.ok_or(Error::new("D3DStripShader", THINERR::MISSING_DLL_EXPORT))?;
         let mut blob = null_mut();
         let hr = unsafe { f(shader_bytecode.as_ptr().cast(), shader_bytecode.len(), strip_flags.into().into(), &mut blob) };
         Error::check("D3DStripShader", hr)?;

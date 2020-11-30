@@ -92,7 +92,7 @@ impl D3DCompiler {
     /// ### Returns
     /// *   Ok([CompileResult] { code: [ReadOnlyBlob], errors: [Option]&lt;[ReadOnlyBlob]&gt; })
     /// *   Err([CompileError]) where `error.kind` ==
-    ///     *   [ErrorKind::MISSING_DLL_EXPORT]     - `d3dcompiler_4?.dll` and earlier
+    ///     *   [THINERR::MISSING_DLL_EXPORT]     - `d3dcompiler_4?.dll` and earlier
     ///     *   [D3DERR::INVALIDCALL]               - on invalid parameters such as nonexistant `target`s
     ///     *   [E::FAIL]                           - if the shader failed to compile
     ///
@@ -124,7 +124,7 @@ impl D3DCompiler {
         flags2:         impl Into<CompileEffect>,
     ) -> Result<CompileResult, CompileError> {
         // Early outs
-        let f           = self.D3DCompileFromFile.ok_or(Error::new("D3DCompileFromFile", ErrorKind::MISSING_DLL_EXPORT))?;
+        let f           = self.D3DCompileFromFile.ok_or(Error::new("D3DCompileFromFile", THINERR::MISSING_DLL_EXPORT))?;
         let defines     = defines.as_shader_macros().map_err(|e| Error::new("D3DCompileFromFile", e))?;
 
         let file_name = file_name.as_ref().as_os_str().encode_wide().chain(Some(0)).collect::<Vec<_>>();
@@ -178,7 +178,7 @@ impl D3DCompiler {
     /// ### Returns
     /// *   Ok([CompileResult] { code: [ReadOnlyBlob], errors: [Option]&lt;[ReadOnlyBlob]&gt; })
     /// *   Err([CompileError]) where `error.kind` ==
-    ///     *   [ErrorKind::MISSING_DLL_EXPORT]     - `d3dcompiler_39.dll` and earlier
+    ///     *   [THINERR::MISSING_DLL_EXPORT]     - `d3dcompiler_39.dll` and earlier
     ///     *   [D3DERR::INVALIDCALL]               - on invalid parameters such as nonexistant `target`s
     ///     *   [E::FAIL]                           - if the shader failed to compile
     ///
@@ -212,7 +212,7 @@ impl D3DCompiler {
         flags2:         impl Into<CompileEffect>,
     ) -> Result<CompileResult, CompileError> {
         // Early outs
-        let f           = self.D3DCompile.ok_or(Error::new("D3DCompile", ErrorKind::MISSING_DLL_EXPORT))?;
+        let f           = self.D3DCompile.ok_or(Error::new("D3DCompile", THINERR::MISSING_DLL_EXPORT))?;
         let defines     = defines.as_shader_macros().map_err(|e| Error::new("D3DCompile", e))?;
 
         // Note: No error checking occurs for internal `\0`s - they will simply terminate the string earlier than expected.
@@ -270,7 +270,7 @@ impl D3DCompiler {
     /// ### Returns
     /// *   Ok([CompileResult] { code: [ReadOnlyBlob], errors: [Option]&lt;[ReadOnlyBlob]&gt; })
     /// *   Err([CompileError]) where `error.kind` ==
-    ///     *   [ErrorKind::MISSING_DLL_EXPORT]     - `d3dcompiler_4?.dll` and earlier
+    ///     *   [THINERR::MISSING_DLL_EXPORT]     - `d3dcompiler_4?.dll` and earlier
     ///     *   [D3DERR::INVALIDCALL]               - on invalid parameters such as nonexistant `target`s
     ///     *   [E::FAIL]                           - if the shader failed to compile
     ///
@@ -310,7 +310,7 @@ impl D3DCompiler {
         secondary_data:         impl Into<Option<&'s [u8]>>,
     ) -> Result<CompileResult, CompileError> {
         // Early outs
-        let f           = self.D3DCompile2.ok_or(Error::new("D3DCompile2", ErrorKind::MISSING_DLL_EXPORT))?;
+        let f           = self.D3DCompile2.ok_or(Error::new("D3DCompile2", THINERR::MISSING_DLL_EXPORT))?;
         let defines     = defines.as_shader_macros().map_err(|e| Error::new("D3DCompile2", e))?;
 
         // Note: No error checking occurs for internal `\0`s - they will simply terminate the string earlier than expected.
@@ -366,7 +366,7 @@ impl D3DCompiler {
     ///                       Use [StandardFileInclude] if you want to resolve `#include`s relative to `source_name`.
     ///
     /// ### Returns
-    /// *   Err([ErrorKind::MISSING_DLL_EXPORT])    - `d3dcompiler_39.dll` and earlier
+    /// *   Err([THINERR::MISSING_DLL_EXPORT])    - `d3dcompiler_39.dll` and earlier
     /// *   Ok([CompileResult] { code, errors })
     ///
     /// ### Example
@@ -401,7 +401,7 @@ impl D3DCompiler {
         include:        impl AsID3DInclude,
     ) -> Result<CompileResult, CompileError> {
         // Early outs
-        let f           = self.D3DPreprocess.ok_or(Error::new("D3DPreprocess", ErrorKind::MISSING_DLL_EXPORT))?;
+        let f           = self.D3DPreprocess.ok_or(Error::new("D3DPreprocess", THINERR::MISSING_DLL_EXPORT))?;
         let defines     = defines.as_shader_macros().map_err(|e| Error::new("D3DPreprocess", e))?;
 
         // Note: No error checking occurs for internal `\0`s - they will simply terminate the string earlier than expected.

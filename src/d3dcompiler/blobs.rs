@@ -15,7 +15,7 @@ impl D3DCompiler {
     /// *   `data`          - The data to create a [ReadOnlyBlob] out of.
     ///
     /// ### Returns
-    /// *   Err([ErrorKind::MISSING_DLL_EXPORT])    - `d3dcompiler_42.dll` and earlier
+    /// *   Err([THINERR::MISSING_DLL_EXPORT])    - `d3dcompiler_42.dll` and earlier
     /// *   Ok([ReadOnlyBlob])
     ///
     /// ### Example
@@ -29,7 +29,7 @@ impl D3DCompiler {
     /// <div class="note"><b>Note:</b> This fn was introduced by d3dcompiler_43.dll, and is unavailable in earlier versions.</div>
     #[cfg_attr(not(d3dcompiler="43"), deprecated(note = "D3DCompiler::compile wasn't added until d3dcompiler_43.dll"))]
     pub fn create_read_only_blob(&self, data: &[u8]) -> Result<ReadOnlyBlob, Error> {
-        let f = self.D3DCreateBlob.ok_or(Error::new("D3DCreateBlob", ErrorKind::MISSING_DLL_EXPORT))?;
+        let f = self.D3DCreateBlob.ok_or(Error::new("D3DCreateBlob", THINERR::MISSING_DLL_EXPORT))?;
 
         let mut blob = null_mut();
         let hr = unsafe { f(data.len(), &mut blob) };
@@ -54,7 +54,7 @@ impl D3DCompiler {
     /// *   `file_name`         - The path to read the blob from.
     ///
     /// ### Returns
-    /// *   Err(`e`) where `e.kind()` == [ErrorKind::MISSING_DLL_EXPORT]    - `d3dcompiler_43.dll` and earlier
+    /// *   Err(`e`) where `e.kind()` == [THINERR::MISSING_DLL_EXPORT]    - `d3dcompiler_43.dll` and earlier
     /// *   Err(`e`)                                                        - if the file doesn't exist, can't be read, etc.
     /// *   Ok([ReadOnlyBlob])
     ///
@@ -70,7 +70,7 @@ impl D3DCompiler {
     /// <div class="note"><b>Note:</b>  The D3dcompiler_44.dll or later version of the file contains the D3DReadFileToBlob compiler function.</div>
     #[cfg_attr(not(d3dcompiler="44"), deprecated(note = "D3DCompiler::read_file_to_blob wasn't added until d3dcompiler_44.dll"))]
     pub fn read_file_to_blob<'s>(&self, file_name: impl AsRef<Path>) -> Result<ReadOnlyBlob, Error> {
-        let f = self.D3DReadFileToBlob.ok_or(Error::new("D3DReadFileToBlob", ErrorKind::MISSING_DLL_EXPORT))?;
+        let f = self.D3DReadFileToBlob.ok_or(Error::new("D3DReadFileToBlob", THINERR::MISSING_DLL_EXPORT))?;
         let file_name = file_name.as_ref().as_os_str().encode_wide().chain(Some(0)).collect::<Vec<_>>();
 
         let mut blob = null_mut();
@@ -92,7 +92,7 @@ impl D3DCompiler {
     /// *   `overwrite`     - Overwrite any existing file.
     ///
     /// ### Returns
-    /// *   Err(`e`) where `e.kind()` == [ErrorKind::MISSING_DLL_EXPORT]    - `d3dcompiler_43.dll` and earlier
+    /// *   Err(`e`) where `e.kind()` == [THINERR::MISSING_DLL_EXPORT]    - `d3dcompiler_43.dll` and earlier
     /// *   Err(`e`) where `e.kind()` == ???                                - file exists, cannot be written, etc.
     /// *   Ok(`()`)
     ///
@@ -112,7 +112,7 @@ impl D3DCompiler {
         file_name:  impl AsRef<Path>,
         overwrite:  bool,
     ) -> Result<(), Error> {
-        let f = self.D3DWriteBlobToFile.ok_or(Error::new("D3DWriteBlobToFile", ErrorKind::MISSING_DLL_EXPORT))?;
+        let f = self.D3DWriteBlobToFile.ok_or(Error::new("D3DWriteBlobToFile", THINERR::MISSING_DLL_EXPORT))?;
         let file_name = file_name.as_ref().as_os_str().encode_wide().chain(Some(0)).collect::<Vec<_>>();
         let hr = unsafe { f(blob.as_raw(), file_name.as_ptr(), overwrite.into()) };
         Error::check("D3DWriteBlobToFile", hr)

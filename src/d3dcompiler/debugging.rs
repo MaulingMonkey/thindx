@@ -27,7 +27,7 @@ impl D3DCompiler {
     /// ### Returns
     /// *   Ok([ReadOnlyBlob])      - the disassembly
     /// *   Err([Error]) with `error.kind()` ==
-    ///     *   [ErrorKind::MISSING_DLL_EXPORT] - on `d3dcompiler_39.dll` and earlier
+    ///     *   [THINERR::MISSING_DLL_EXPORT] - on `d3dcompiler_39.dll` and earlier
     ///
     /// ### Example
     /// ```rust
@@ -83,7 +83,7 @@ impl D3DCompiler {
         flags:              impl Into<Disasm>,
         comments:           impl TryIntoAsOptCStr,
     ) -> Result<ReadOnlyBlob, Error> {
-        let f = self.D3DDisassemble.ok_or(Error::new("D3DDisassemble", ErrorKind::MISSING_DLL_EXPORT))?;
+        let f = self.D3DDisassemble.ok_or(Error::new("D3DDisassemble", THINERR::MISSING_DLL_EXPORT))?;
         let flags = flags.into().into();
         let comments = comments.try_into().map_err(|e| Error::new("D3DDisassemble", e))?;
         let comments = comments.as_opt_cstr();
@@ -108,7 +108,7 @@ impl D3DCompiler {
     /// ### Returns
     /// *   Ok([DisassembledRegion] { disassembly: [ReadOnlyBlob], finish_byte_offset: [usize] })  - the disassembly
     /// *   Err([Error]) with `error.kind()` ==
-    ///     *   [ErrorKind::MISSING_DLL_EXPORT] - on `d3dcompiler_43.dll` and earlier
+    ///     *   [THINERR::MISSING_DLL_EXPORT] - on `d3dcompiler_43.dll` and earlier
     ///
     /// ### Example
     /// ```rust
@@ -170,7 +170,7 @@ impl D3DCompiler {
         start_byte_offset:  usize,
         num_insts:          usize,
     ) -> Result<DisassembledRegion, Error> {
-        let f = self.D3DDisassembleRegion.ok_or(Error::new("D3DDisassembleRegion", ErrorKind::MISSING_DLL_EXPORT))?;
+        let f = self.D3DDisassembleRegion.ok_or(Error::new("D3DDisassembleRegion", THINERR::MISSING_DLL_EXPORT))?;
         let flags = flags.into().into();
         let comments = comments.try_into().map_err(|e| Error::new("D3DDisassembleRegion", e))?;
         let comments = comments.as_opt_cstr();
@@ -192,7 +192,7 @@ impl D3DCompiler {
     /// ### Returns
     /// *   Ok([usize])                             - the number of available trace instruction offsets in that range
     /// *   Err([Error]) where `error.kind()` ==
-    ///     *   [ErrorKind::MISSING_DLL_EXPORT]    - `d3dcompiler_43.dll` and earlier
+    ///     *   [THINERR::MISSING_DLL_EXPORT]    - `d3dcompiler_43.dll` and earlier
     ///
     /// ### Example
     /// ```rust
@@ -217,7 +217,7 @@ impl D3DCompiler {
         start_inst_index:   usize,
         num_insts:          usize,
     ) -> Result<usize, Error> {
-        let f = self.D3DGetTraceInstructionOffsets.ok_or(Error::new("D3DGetTraceInstructionOffsets", ErrorKind::MISSING_DLL_EXPORT))?;
+        let f = self.D3DGetTraceInstructionOffsets.ok_or(Error::new("D3DGetTraceInstructionOffsets", THINERR::MISSING_DLL_EXPORT))?;
         let mut n = 0;
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), flags.into().into(), start_inst_index, num_insts, null_mut(), &mut n) };
         Error::check("D3DGetTraceInstructionOffsets", hr)?;
@@ -232,7 +232,7 @@ impl D3DCompiler {
     /// ### Returns
     /// *   Ok(&amp;\[[usize]\])                    - the trace instruction offsets in `offsets` that were read
     /// *   Err([Error]) where `error.kind()` ==
-    ///     *   [ErrorKind::MISSING_DLL_EXPORT]     - `d3dcompiler_43.dll` and earlier
+    ///     *   [THINERR::MISSING_DLL_EXPORT]     - `d3dcompiler_43.dll` and earlier
     ///
     /// ### Example
     /// ```rust
@@ -259,7 +259,7 @@ impl D3DCompiler {
         start_inst_index:   usize,
         offsets:            &'o mut [usize],
     ) -> Result<&'o [usize], Error> {
-        let f = self.D3DGetTraceInstructionOffsets.ok_or(Error::new("D3DGetTraceInstructionOffsets", ErrorKind::MISSING_DLL_EXPORT))?;
+        let f = self.D3DGetTraceInstructionOffsets.ok_or(Error::new("D3DGetTraceInstructionOffsets", THINERR::MISSING_DLL_EXPORT))?;
         let mut n = 0;
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), flags.into().into(), start_inst_index, offsets.len(), offsets.as_mut_ptr(), &mut n) };
         Error::check("D3DGetTraceInstructionOffsets", hr)?;
@@ -274,7 +274,7 @@ impl D3DCompiler {
     /// ### Returns
     /// *   Ok([Vec]&lt;[usize]&gt;)                    - trace instruction offsets
     /// *   Err([Error]) where `error.kind()` ==
-    ///     *   [ErrorKind::MISSING_DLL_EXPORT]         - `d3dcompiler_43.dll` and earlier
+    ///     *   [THINERR::MISSING_DLL_EXPORT]         - `d3dcompiler_43.dll` and earlier
     ///
     /// ### Example
     /// ```rust
@@ -300,7 +300,7 @@ impl D3DCompiler {
         start_inst_index:   usize,
         num_insts:          usize,
     ) -> Result<Vec<usize>, Error> {
-        let f = self.D3DGetTraceInstructionOffsets.ok_or(Error::new("D3DGetTraceInstructionOffsets", ErrorKind::MISSING_DLL_EXPORT))?;
+        let f = self.D3DGetTraceInstructionOffsets.ok_or(Error::new("D3DGetTraceInstructionOffsets", THINERR::MISSING_DLL_EXPORT))?;
         let flags = flags.into().into();
 
         let mut n = 0;

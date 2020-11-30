@@ -80,7 +80,7 @@ impl FunctionLinkingGraph {
     ///
     /// ### Outputs
     /// ```text
-    /// ID3D11FunctionLinkingGraph::CreateModuleInstance failed (ErrorKind::FAIL)
+    /// ID3D11FunctionLinkingGraph::CreateModuleInstance failed (THINERR::FAIL)
     /// error X9021: ID3D11FunctionLinkingGraph::CreateModuleInstance: FLG has no nodes
     /// ```
     pub fn create_module_instance(&self) -> Result<(ModuleInstance, Option<ReadOnlyBlob>), Error> {
@@ -195,7 +195,7 @@ impl FunctionLinkingGraph {
     /// // flg.set_input_signature().unwrap();
     /// ```
     pub fn set_input_signature(&self, input_parameters: &[ParameterDesc]) -> Result<LinkingNode, Error> {
-        let n = input_parameters.len().try_into().map_err(|_| Error::new("ID3D11FunctionLinkingGraph::SetInputSignature", ErrorKind::SLICE_TOO_LARGE))?;
+        let n = input_parameters.len().try_into().map_err(|_| Error::new("ID3D11FunctionLinkingGraph::SetInputSignature", THINERR::SLICE_TOO_LARGE))?;
 
         let mut node = null_mut();
         let hr = unsafe { self.0.SetInputSignature(input_parameters.as_ptr().cast(), n, &mut node) };
@@ -217,7 +217,7 @@ impl FunctionLinkingGraph {
     /// // flg.set_output_signature().unwrap();
     /// ```
     pub fn set_output_signature(&self, output_parameters: &[ParameterDesc]) -> Result<LinkingNode, Error> {
-        let n = output_parameters.len().try_into().map_err(|_| Error::new("ID3D11FunctionLinkingGraph::SetOutputSignature", ErrorKind::SLICE_TOO_LARGE))?;
+        let n = output_parameters.len().try_into().map_err(|_| Error::new("ID3D11FunctionLinkingGraph::SetOutputSignature", THINERR::SLICE_TOO_LARGE))?;
 
         let mut node = null_mut();
         let hr = unsafe { self.0.SetOutputSignature(output_parameters.as_ptr().cast(), n, &mut node) };

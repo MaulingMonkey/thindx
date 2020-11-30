@@ -11,9 +11,9 @@ use winapi::shared::winerror::*;
 enumish! {
     ErrorKind => HRESULT; FQN;
 
-    ErrorKind::MISSING_DLL_EXPORT,
-    ErrorKind::SLICE_TOO_LARGE,
-    ErrorKind::STRING_CONTAINS_NULS,
+    THINERR::MISSING_DLL_EXPORT,
+    THINERR::SLICE_TOO_LARGE,
+    THINERR::STRING_CONTAINS_NULS,
 
     D3D11_ERROR::FILE_NOT_FOUND,
     D3D11_ERROR::TOO_MANY_UNIQUE_STATE_OBJECTS,
@@ -50,22 +50,23 @@ impl ErrorKind {
     }
 }
 
-// TODO: moduleify these too? THINERR?
-#[allow(overflowing_literals)] impl ErrorKind {
-    /// `0xA73DC001`    This version of `d3dcompiler_##.dll` doesn't support this fn
-    pub const MISSING_DLL_EXPORT : ErrorKind = ErrorKind(0xA73DC001);
-
-    /// `0xA73DC002`    Slice length exceeded some kind of length limit (typically a conversion to a 32-bit length, or
-    ///                 an extra cap introduced by thin3dcompiler to avoid undefined behavior from allocation size overflows.)
-    pub const SLICE_TOO_LARGE : ErrorKind = ErrorKind(0xA73DC002);
-
-    /// `0xA73DC003`    String contains unexpected internal `\0`s when being passed to a function taking C-style `\0`-*terminated* strings.
-    pub const STRING_CONTAINS_NULS : ErrorKind = ErrorKind(0xA73DC003);
-}
-
 /// [ErrorKind] values
 pub mod errors {
     use super::*;
+
+    /// Thin* errors
+    #[allow(non_camel_case_types)] pub struct THINERR(());
+    #[allow(overflowing_literals)] impl THINERR {
+        /// `0xA73DC001`    This version of `d3dcompiler_##.dll` doesn't support this fn
+        pub const MISSING_DLL_EXPORT : ErrorKind = ErrorKind(0xA73DC001);
+    
+        /// `0xA73DC002`    Slice length exceeded some kind of length limit (typically a conversion to a 32-bit length, or
+        ///                 an extra cap introduced by thin3dcompiler to avoid undefined behavior from allocation size overflows.)
+        pub const SLICE_TOO_LARGE : ErrorKind = ErrorKind(0xA73DC002);
+    
+        /// `0xA73DC003`    String contains unexpected internal `\0`s when being passed to a function taking C-style `\0`-*terminated* strings.
+        pub const STRING_CONTAINS_NULS : ErrorKind = ErrorKind(0xA73DC003);
+    }
 
     /// Direct3D 11 errors
     #[allow(non_camel_case_types)] pub struct D3D11_ERROR(()); impl D3D11_ERROR {

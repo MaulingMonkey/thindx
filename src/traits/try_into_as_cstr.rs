@@ -23,7 +23,7 @@ impl<'s> TryIntoAsCStr for &'s str {
     type Target = ImplCStr<'s>;
     fn try_into(self) -> Result<Self::Target, ErrorKind> {
         if self.contains('\0') {
-            Err(ErrorKind::STRING_CONTAINS_NULS)
+            Err(THINERR::STRING_CONTAINS_NULS)
         } else {
             Ok(ImplCStr(Cow::Owned(self.bytes().chain(Some(0)).collect())))
         }
@@ -34,7 +34,7 @@ impl TryIntoAsCStr for String {
     type Target = ImplCStr<'static>;
     fn try_into(mut self) -> Result<Self::Target, ErrorKind> {
         if self.contains('\0') {
-            Err(ErrorKind::STRING_CONTAINS_NULS)
+            Err(THINERR::STRING_CONTAINS_NULS)
         } else {
             self.push('\0');
             Ok(ImplCStr(Cow::Owned(self.into_bytes())))

@@ -17,7 +17,7 @@ impl D3DCompiler {
     /// *   `flags`         - [CompressShader] flags controlling compression.
     ///
     /// ### Returns
-    /// *   Err([ErrorKind::MISSING_DLL_EXPORT])    - `d3dcompiler_42.dll` and earlier
+    /// *   Err([THINERR::MISSING_DLL_EXPORT])    - `d3dcompiler_42.dll` and earlier
     /// *   Ok([ReadOnlyBlob])
     ///
     /// ### Example
@@ -50,8 +50,8 @@ impl D3DCompiler {
         flags:                  impl Into<CompressShader>,
     ) -> Result<ReadOnlyBlob, Error> {
         // Early outs
-        let f           = self.D3DCompressShaders.ok_or(Error::new("D3DCompressShaders", ErrorKind::MISSING_DLL_EXPORT))?;
-        let num_shaders = shaders.len().try_into().map_err(|_| Error::new("D3DCompressShaders", ErrorKind::MISSING_DLL_EXPORT))?;
+        let f           = self.D3DCompressShaders.ok_or(Error::new("D3DCompressShaders", THINERR::MISSING_DLL_EXPORT))?;
+        let num_shaders = shaders.len().try_into().map_err(|_| Error::new("D3DCompressShaders", THINERR::MISSING_DLL_EXPORT))?;
 
         let shader_data = shaders.as_ptr() as *mut _; // TODO: Is the `mut` sane?
         let flags       = flags.into().into();
@@ -83,7 +83,7 @@ impl D3DCompiler {
     /// *   `src_data`      - The compressed shaders.
     ///
     /// ### Returns
-    /// *   Err([ErrorKind::MISSING_DLL_EXPORT])    - `d3dcompiler_42.dll` and earlier
+    /// *   Err([THINERR::MISSING_DLL_EXPORT])    - `d3dcompiler_42.dll` and earlier
     /// *   Ok([u32])                               - the number of compressed shaders contained within `src_data`
     ///
     /// ### Example
@@ -104,7 +104,7 @@ impl D3DCompiler {
     /// <div class="note"><b>Note:</b> This fn was introduced by d3dcompiler_43.dll, and is unavailable in earlier versions.</div>
     #[cfg_attr(not(d3dcompiler="43"), deprecated(note = "D3DCompiler::compile wasn't added until d3dcompiler_43.dll"))]
     pub fn decompress_shaders_count(&self, src_data: &[u8]) -> Result<u32, Error> {
-        let f = self.D3DDecompressShaders.ok_or(Error::new("D3DDecompressShaders", ErrorKind::MISSING_DLL_EXPORT))?;
+        let f = self.D3DDecompressShaders.ok_or(Error::new("D3DDecompressShaders", THINERR::MISSING_DLL_EXPORT))?;
         let mut shader = null_mut(); // D3DDecompressShaders will fail with E_FAIL if ppShaders is null, even if it doesn't use it
         let mut total_shaders = 0;
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), 0, 0, null_mut(), 0, &mut shader, &mut total_shaders) };
@@ -123,7 +123,7 @@ impl D3DCompiler {
     /// *   `flags`         - Reserved (pass [None]).
     ///
     /// ### Returns
-    /// *   Err([ErrorKind::MISSING_DLL_EXPORT])            - `d3dcompiler_42.dll` and earlier
+    /// *   Err([THINERR::MISSING_DLL_EXPORT])            - `d3dcompiler_42.dll` and earlier
     /// *   Ok(&amp;'s \[[Option]&lt;[ReadOnlyBlob]&gt;\])  - the shader(s) that were decompressed
     ///
     /// ### Example
@@ -161,8 +161,8 @@ impl D3DCompiler {
         start_index:            u32,
         out_shaders:            &'s mut [Option<ReadOnlyBlob>],
     ) -> Result<&'s [Option<ReadOnlyBlob>], Error> {
-        let f = self.D3DDecompressShaders.ok_or(Error::new("D3DDecompressShaders", ErrorKind::MISSING_DLL_EXPORT))?;
-        let n : u32 = out_shaders.len().try_into().map_err(|_| Error::new("D3DDecompressShaders", ErrorKind::SLICE_TOO_LARGE))?;
+        let f = self.D3DDecompressShaders.ok_or(Error::new("D3DDecompressShaders", THINERR::MISSING_DLL_EXPORT))?;
+        let n : u32 = out_shaders.len().try_into().map_err(|_| Error::new("D3DDecompressShaders", THINERR::SLICE_TOO_LARGE))?;
         let _ = flags;
 
         for shader in out_shaders.iter_mut() { *shader = None; } // D3DCompressShaders will overwrite
@@ -183,7 +183,7 @@ impl D3DCompiler {
     /// *   `flags`         - Reserved (pass [None]).
     ///
     /// ### Returns
-    /// *   Err([ErrorKind::MISSING_DLL_EXPORT])        - `d3dcompiler_42.dll` and earlier
+    /// *   Err([THINERR::MISSING_DLL_EXPORT])        - `d3dcompiler_42.dll` and earlier
     /// *   Ok(Vec&lt;[Option]&lt;[ReadOnlyBlob]&gt;)   - the shader(s) that were decompressed
     ///
     /// ### Example
