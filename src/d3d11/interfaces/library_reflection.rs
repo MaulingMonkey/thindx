@@ -12,6 +12,8 @@ use winapi::um::d3d11shader::*;
 #[derive(Clone)] #[repr(transparent)]
 pub struct LibraryReflection(pub(crate) mcom::Rc<winapi::um::d3d11shader::ID3D11LibraryReflection>);
 
+convert!(unsafe LibraryReflection => Unknown, winapi::um::d3d11shader::ID3D11LibraryReflection);
+
 impl LibraryReflection {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11libraryreflection-getdesc)\]
     /// ID3D11LibraryReflection::GetDesc

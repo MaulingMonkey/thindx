@@ -1,3 +1,5 @@
+use crate::*;
+
 use winapi::um::d3dcommon::ID3DBlob;
 
 
@@ -14,6 +16,8 @@ use winapi::um::d3dcommon::ID3DBlob;
 /// This is your one warning!
 #[derive(Clone)] #[repr(transparent)]
 pub struct ReadOnlyBlob(pub(crate) mcom::Rc<ID3DBlob>);
+
+convert!(unsafe ReadOnlyBlob => Unknown, winapi::um::d3dcommon::ID3DBlob);
 
 impl ReadOnlyBlob {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/previous-versions/windows/desktop/legacy/ff728745(v=vs.85))\]

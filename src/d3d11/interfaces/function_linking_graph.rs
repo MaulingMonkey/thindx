@@ -20,6 +20,8 @@ use std::ptr::*;
 #[derive(Clone)] #[repr(transparent)]
 pub struct FunctionLinkingGraph(pub(crate) mcom::Rc<winapi::um::d3d11shader::ID3D11FunctionLinkingGraph>);
 
+convert!(unsafe FunctionLinkingGraph => Unknown, winapi::um::d3d11shader::ID3D11FunctionLinkingGraph);
+
 impl FunctionLinkingGraph {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionlinkinggraph-callfunction)\]
     /// ID3D11FunctionLinkingGraph::CallFunction

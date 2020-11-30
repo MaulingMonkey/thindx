@@ -11,6 +11,8 @@ use winapi::shared::winerror::*;
 #[derive(Clone)] #[repr(transparent)]
 pub struct ModuleInstance(pub(crate) mcom::Rc<winapi::um::d3d11shader::ID3D11ModuleInstance>);
 
+convert!(unsafe ModuleInstance => Unknown, winapi::um::d3d11shader::ID3D11ModuleInstance);
+
 fn check(method: &'static str, hr: HRESULT) -> Result<bool, Error> {
     if hr == S_FALSE {
         Ok(false)

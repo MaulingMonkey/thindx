@@ -7,6 +7,8 @@ use std::ops::Deref;
 #[derive(Clone)] #[repr(transparent)]
 pub struct Unknown(pub(crate) mcom::Rc<winapi::um::unknwnbase::IUnknown>);
 
+convert!(unsafe Unknown, winapi::um::unknwnbase::IUnknown);
+
 
 
 /// Auto trait implemented for anything that can chain-[Deref] to [thin3dcompiler::Unknown](crate::Unknown).
