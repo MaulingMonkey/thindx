@@ -7,8 +7,6 @@ use winapi::um::d3dcommon::*;
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_shader_variable_flags)\]
 /// UINT / D3D_SHADER_VARIABLE_FLAGS_\*
-///
-/// Flags controlling how [D3DCompiler::disassemble_region] disassembles the compiled shader data.
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)] pub struct ShaderVariableFlags(UINT);
 #[doc(hidden)] pub use ShaderVariableFlags as SVF;
