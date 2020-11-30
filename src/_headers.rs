@@ -1,5 +1,10 @@
 //! Documentation of d3d headers and what types they map to
 //!
+//! <style>
+//! td:nth-child(3) { display: none !important; }
+//! th:nth-child(3) { display: none !important; }
+//! </style>
+//!
 //! # d3d11shader.h
 //!
 //! \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/)\] Direct3D11 APIs for shader reflection, linking, etc.
