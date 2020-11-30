@@ -1,6 +1,8 @@
 //! Documentation of d3d headers and what types they map to
 //!
-//! # [d3dcommon.h](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/)
+//! # d3dcommon.h
+//!
+//! \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/)\] Common Direct3D types shared between Direct3D11, D3DCompiler, etc.
 //!
 //! | enumeration                   | d3dcommon.h           |
 //! | ----------------------------- | --------------------- |
