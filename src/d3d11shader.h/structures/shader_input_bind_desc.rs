@@ -7,7 +7,7 @@ use winapi::um::d3d11shader::*;
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/ns-d3d11shader-d3d11_shader_input_bind_desc)\]
 /// D3D11_SHADER_INPUT_BIND_DESC
 #[derive(Clone, Copy, Default)]
-#[repr(C)] pub struct ShaderDesc<'s> {
+#[repr(C)] pub struct ShaderInputBindDesc<'s> {
     name:           Option<&'s AbiCStr>,
     r#type:         ShaderInputType,
     bind_point:     u32,
@@ -18,7 +18,7 @@ use winapi::um::d3d11shader::*;
     num_samples:    u32,
 }
 
-test_layout! { ShaderDesc => unsafe D3D11_SHADER_INPUT_BIND_DESC {
+test_layout! { ShaderInputBindDesc => unsafe D3D11_SHADER_INPUT_BIND_DESC {
     name            => Name,
     r#type          => Type,
     bind_point      => BindPoint,
