@@ -130,11 +130,10 @@ pub mod d3d11 {
 
 #[path="d3d11shader.h/d3d11shader.rs"]  mod d3d11shader_h;  // d3d11 mod
 #[path="d3dcommon.h/d3dcommon.rs"]      mod d3dcommon_h;    pub use d3dcommon_h::*;
-#[path="d3dcompiler/_d3dcompiler.rs"]   mod d3dcompiler;    pub use d3dcompiler::*;
-#[path="enumerations/_enumerations.rs"] mod enumerations;   pub use enumerations::*;
+#[path="d3dcompiler.h/d3dcompiler.rs"]  mod d3dcompiler_h;  pub use d3dcompiler_h::*;
+
 #[path="flags/_flags.rs"]               mod flags;          pub use flags::*;
 #[path="interfaces/_interfaces.rs"]     mod interfaces;     pub use interfaces::*;
-#[path="structures/_structures.rs"]     mod structures;     pub use structures::*;
 #[path="traits/_traits.rs"]             mod traits;         pub use traits::*;
 
 mod abi_cstr;                   pub use abi_cstr::*;
