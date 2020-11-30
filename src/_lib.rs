@@ -135,5 +135,6 @@ pub use abibool::bool32;
 mod abi_cstr;                   pub use abi_cstr::*;
 mod error_kind;                 pub use error_kind::*;
 mod error;                      pub use error::*;
+pub mod errors;                 #[doc(no_inline)] pub use errors::*;
 
 #[cfg(doc)] pub mod _headers;
