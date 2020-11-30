@@ -1,5 +1,4 @@
 use crate::*;
-use crate::d3d11::*;
 
 use winapi::um::d3d11shader::*;
 
@@ -10,7 +9,7 @@ use winapi::um::d3d11shader::*;
 #[derive(Clone, Copy, Default)]
 #[repr(C)] pub struct ShaderBufferDesc<'s> {
     name:                           Option<&'s AbiCStr>,
-    r#type:                         CbufferType,
+    r#type:                         CBufferType,
     variables:                      u32,
     size:                           u32,
     flags:                          ShaderCbufferFlags,

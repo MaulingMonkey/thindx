@@ -122,9 +122,13 @@
 
 pub use abibool::bool32;
 
+pub mod d3d11 {
+    pub use crate::d3d11shader_h::*;
+}
 
 
-#[path="d3d11/_d3d11.rs"]               pub mod d3d11;
+
+#[path="d3d11shader.h/d3d11shader.rs"]  mod d3d11shader_h;  // d3d11 mod
 #[path="d3dcommon.h/d3dcommon.rs"]      mod d3dcommon_h;    pub use d3dcommon_h::*;
 #[path="d3dcompiler/_d3dcompiler.rs"]   mod d3dcompiler;    pub use d3dcompiler::*;
 #[path="enumerations/_enumerations.rs"] mod enumerations;   pub use enumerations::*;
