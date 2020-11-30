@@ -1,4 +1,4 @@
-//! Thin [D3DCompiler](https://docs.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-d3dcompiler-reference) wrappers for Rust.
+//! Thin DirectX wrappers for Rust.
 //! 
 //! ### Why not `winapi` directly?
 //! 
