@@ -4,7 +4,7 @@ use winapi::um::d3d11shader::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d11_shader_version_type)\]
+/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/ne-d3d11shader-d3d11_shader_version_type)\]
 /// D3D11_SHADER_VERSION_TYPE / D3D11_SHVER_\*
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)] pub struct ShaderVersionType(D3D11_SHADER_VERSION_TYPE);
@@ -13,7 +13,7 @@ use winapi::um::d3d11shader::*;
 enumish! { ShVer => D3D11_SHADER_VERSION_TYPE; PixelShader, VertexShader, GeometryShader, HullShader, DomainShader, ComputeShader, Reserved0 }
 
 #[allow(non_upper_case_globals)] impl ShVer { // These are enum-like
-    pub const PixelShader       : ShVer = ShVer(D3D11_SHVER_PIXEL_SHADER);
+    pub const PixelShader       : ShVer = ShVer(D3D11_SHVER_PIXEL_SHADER); // 0
     pub const VertexShader      : ShVer = ShVer(D3D11_SHVER_VERTEX_SHADER);
     pub const GeometryShader    : ShVer = ShVer(D3D11_SHVER_GEOMETRY_SHADER);
     pub const HullShader        : ShVer = ShVer(D3D11_SHVER_HULL_SHADER);
@@ -23,7 +23,7 @@ enumish! { ShVer => D3D11_SHADER_VERSION_TYPE; PixelShader, VertexShader, Geomet
 }
 
 #[doc(hidden)] impl ShVer { // Ctrl+C Ctrl+V support
-    pub const PIXEL_SHADER      : ShVer = ShVer(D3D11_SHVER_PIXEL_SHADER);
+    pub const PIXEL_SHADER      : ShVer = ShVer(D3D11_SHVER_PIXEL_SHADER); // 0
     pub const VERTEX_SHADER     : ShVer = ShVer(D3D11_SHVER_VERTEX_SHADER);
     pub const GEOMETRY_SHADER   : ShVer = ShVer(D3D11_SHVER_GEOMETRY_SHADER);
     pub const HULL_SHADER       : ShVer = ShVer(D3D11_SHVER_HULL_SHADER);
