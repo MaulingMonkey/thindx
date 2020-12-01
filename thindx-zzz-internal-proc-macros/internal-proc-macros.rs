@@ -48,7 +48,7 @@ pub fn requires(condition: TokenStream, item: TokenStream) -> TokenStream {
 
 fn compile_error_at(message: impl std::fmt::Debug, at: Span, item: TokenStream) -> TokenStream {
     let mut out = TokenStream::new();
-    let err : TokenStream = format!("compile_error!({:?})", message).parse().unwrap();
+    let err : TokenStream = format!("compile_error!({:?});", message).parse().unwrap();
     out.extend(err.into_iter().map(|mut t| { t.set_span(at); t }));
     out.extend(item);
     out
