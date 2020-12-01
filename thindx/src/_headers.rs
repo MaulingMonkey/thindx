@@ -1,3 +1,5 @@
+#![cfg_attr(stable, allow(private_intra_doc_links))]
+
 //! Documentation of d3d headers and what types they map to
 //!
 //! <style>

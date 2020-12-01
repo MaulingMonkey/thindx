@@ -1,6 +1,6 @@
 extern crate proc_macro;
 
-use proc_macro::{Span, TokenStream, TokenTree};
+use proc_macro::{Ident, Span, TokenStream, TokenTree};
 
 
 
@@ -46,6 +46,68 @@ pub fn requires(condition: TokenStream, item: TokenStream) -> TokenStream {
     }
 }
 
+#[proc_macro_attribute]
+pub fn if_stable(condition: TokenStream, item: TokenStream) -> TokenStream {
+    let mut condition = condition.into_iter();
+    let key = condition.next().expect("expected `key` in e.g. `#[stable(key)]`");
+
+    let unstable = std::env::var_os("CARGO_PKG_VERSION_PRE").map_or(false, |v| !v.is_empty());
+
+    match key.to_string().as_str() {
+        "unsafe" => {
+            if !unstable {
+                let mut item = item.into_iter().peekable();
+                let mut out = TokenStream::new();
+                let mut n = 0;
+                while let Some(tt) = item.next() {
+                    if tt.is_ident_str("fn") {
+                        out.extend(Some(TokenTree::Ident(Ident::new("unsafe", tt.span()))));
+                        n += 1;
+                    }
+                    out.extend(Some(tt));
+                }
+                if n == 0 {
+                    compile_error_at("failed to mark any fns unsafe", key.span(), out)
+                } else {
+                    out
+                }
+            } else {
+                item
+            }
+        },
+        "!" => {
+            let key = condition.next().expect("expected `key` in e.g. `#[stable(!key)]`");
+            match key.to_string().as_str() {
+                "pub" => {
+                    let mut item = item.into_iter().peekable();
+                    let mut out = TokenStream::new();
+                    let mut n = 0;
+                    while let Some(tt) = item.next() {
+                        let is_pub = tt.is_ident_str("pub");
+                        out.extend(Some(tt));
+
+                        if is_pub {
+                            let tt2 = item.next();
+                            if !tt2.as_ref().map_or(false, |tt2| tt2.is_group()) {
+                                out.extend(Some("(crate)".parse::<TokenStream>().unwrap()));
+                                n += 1;
+                            }
+                            out.extend(tt2);
+                        }
+                    }
+                    if n == 0 {
+                        compile_error_at("failed to convert any `pub`s to `pub(crate)`", key.span(), out)
+                    } else {
+                        out
+                    }
+                },
+                other   => compile_error_at(format!("expected `!pub` or another known key, got {:?}", other), key.span(), item),
+            }
+        },
+        other => compile_error_at(format!("expected `unsafe` or another known key, got {:?}", other), key.span(), item),
+    }
+}
+
 fn compile_error_at(message: impl std::fmt::Debug, at: Span, item: TokenStream) -> TokenStream {
     let mut out = TokenStream::new();
     let err : TokenStream = format!("compile_error!({:?});", message).parse().unwrap();
@@ -76,6 +138,7 @@ trait TokenTreeExt {
     fn is_punct(&self)      -> bool;
     fn is_literal(&self)    -> bool;
 
+    fn is_ident_str(&self, s: &str) -> bool;
     fn is_punct_str(&self, s: &str) -> bool;
 }
 
@@ -85,5 +148,6 @@ impl TokenTreeExt for TokenTree {
     fn is_punct(&self)      -> bool { match self { TokenTree::Punct(_) => true, _ => false } }
     fn is_literal(&self)    -> bool { match self { TokenTree::Literal(_) => true, _ => false } }
 
+    fn is_ident_str(&self, s: &str) -> bool { self.is_ident() && self.to_string() == s }
     fn is_punct_str(&self, s: &str) -> bool { self.is_punct() && self.to_string() == s }
 }
