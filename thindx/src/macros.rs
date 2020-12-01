@@ -29,12 +29,26 @@
 }
 
 macro_rules! enumish {
+    ( $enumish:ty => $d3d:ty; FQN; $($a:ident :: $b:ident),* $(,)? ) => {
+        impl std::fmt::Debug for $enumish {
+            fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
+                match *self {
+                    $(
+                        $a::$b          => write!(f, "{}", concat!(stringify!($a), "::", stringify!($b))),
+                    )*
+                    other               => write!(f, "{}({})", stringify!($enumish), other.0),
+                }
+            }
+        }
+
+        enumish!( $enumish => $d3d );
+    };
     ( $enumish:ty => $d3d:ty; FQN; $($($ident:ident)::+),* $(,)? ) => {
         impl std::fmt::Debug for $enumish {
             fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
                 match *self {
                     $(
-                        $($ident)::+    => write!(f, concat!(stringify!($enumish), "::", stringify!($($ident)::+))),
+                        $($ident)::+    => write!(f, "{}", concat!(stringify!($($ident)::+))),
                     )*
                     other               => write!(f, "{}({})", stringify!($enumish), other.0),
                 }
