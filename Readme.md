@@ -1,10 +1,12 @@
 # thindx - **Thin** **D**irect**X** wrappers
 
 [![GitHub](https://img.shields.io/github/stars/MaulingMonkey/thindx.svg?label=GitHub&style=social)](https://github.com/MaulingMonkey/thindx)
-[![crates.io](https://img.shields.io/crates/v/thindx.svg)](https://crates.io/crates/thindx)
-[![docs.rs](https://docs.rs/thindx/badge.svg)](https://docs.rs/thindx)
 [![License](https://img.shields.io/crates/l/thindx.svg)](https://github.com/MaulingMonkey/thindx)
 [![Build Status](https://github.com/MaulingMonkey/thindx/workflows/Rust/badge.svg)](https://github.com/MaulingMonkey/thindx/actions?query=workflow%3Arust)
+<!--
+[![crates.io](https://img.shields.io/crates/v/thindx.svg)](https://crates.io/crates/thindx)
+[![docs.rs](https://docs.rs/thindx/badge.svg)](https://docs.rs/thindx)
+-->
 <!-- [![dependency status](https://deps.rs/repo/github/MaulingMonkey/thindx/status.svg)](https://deps.rs/repo/github/MaulingMonkey/thindx) -->
 
 Thin DirectX wrappers for Rust.
