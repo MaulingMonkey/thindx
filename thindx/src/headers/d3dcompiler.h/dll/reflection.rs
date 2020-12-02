@@ -22,6 +22,9 @@ impl D3DCompiler {
     /// *   Err(`e`) where `e.kind()` == [D3DERR::INVALIDCALL]              - On invalid `src_data`
     /// *   Ok(`()`)
     ///
+    /// ### See Also
+    /// *   [d3d11::ShaderReflection] for a more complete example
+    ///
     /// ### Example
     /// ```rust
     /// # use thindx::*; let compiler = D3DCompiler::new(47).unwrap();
@@ -68,10 +71,23 @@ impl D3DCompiler {
     /// *   Err(`e`) where `e.kind()` == [D3DERR::INVALIDCALL]              - On invalid `src_data`
     /// *   Ok(`()`)
     ///
+    /// ### See Also
+    /// *   [d3d11::LibraryReflection] for a more complete example
+    ///
     /// ### Example
-    /// ```rust,no_run
+    /// ```rust
     /// # use thindx::*; let compiler = D3DCompiler::new(47).unwrap();
-    /// // TODO: figure out what reflect_library actually takes and demo that.
+    /// let shader = compiler.compile_from_file(
+    ///     r"test\data\library.hlsl", None, None, (), "lib_5_0",
+    ///     Compile::Debug, CompileEffect::None
+    /// ).unwrap().shader;
+    ///
+    /// // Should succeed:
+    /// let r = compiler.reflect_library::<d3d11::LibraryReflection>(shader.get_buffer()).unwrap();
+    ///
+    /// // Invalid interface:
+    /// let r = compiler.reflect_library::<Unknown>(shader.get_buffer());
+    /// assert_eq!(Some(E::INVALIDARG), r.err().map(|e| e.kind()));
     ///
     /// // Invalid `src_data`:
     /// let r = compiler.reflect_library::<d3d11::LibraryReflection>(&[]);
@@ -86,4 +102,67 @@ impl D3DCompiler {
         Error::check("D3DReflectLibrary", hr)?;
         Ok(unsafe { C::from_raw(reflector.cast()) })
     }
+}
+
+#[test] fn library_reflection() {
+    let d3dc = D3DCompiler::new(47).unwrap();
+
+    let shader = d3dc.compile_from_file(
+        r"test\data\library.hlsl", None, None, (), "lib_5_0",
+        Compile::Debug, CompileEffect::None
+    ).unwrap().shader;
+
+    let r : d3d11::LibraryReflection = d3dc.reflect_library(shader.get_buffer()).unwrap();
+    let desc = r.get_desc().unwrap();
+    assert!(desc.function_count > 0);
+
+    let mut found_xyz1 = false;
+    for i in 0..desc.function_count {
+        let f : d3d11::FunctionReflection = r.get_function_by_index(i);
+        let desc = f.get_desc().unwrap();
+        if desc.name.map_or(false, |n| n.to_bytes() == b"xyz1") {
+            found_xyz1 = true;
+            assert_eq!(desc.function_parameter_count,   1   );
+            assert_eq!(desc.has_return,                 true);
+        }
+    }
+    assert!(found_xyz1);
+
+    // Reflection likes to use the null object pattern for functions returning interface pointers.
+    // Most out-of-bounds accesses result in a reused "null" object that E::FAIL on most calls.
+
+    let invalid1 = r.get_function_by_index(desc.function_count);
+    let invalid2 = r.get_function_by_index(!0);
+    assert_eq!(invalid1.as_raw(), invalid2.as_raw()); // same object
+
+    let valid = r.get_function_by_index(0);
+    assert_ne!(valid.as_raw(), invalid1.as_raw()); // valid is a different object
+    assert_ne!(valid.as_raw(), invalid2.as_raw()); // valid is a different object
+
+    for invalid_index in [
+        1000, 10000,
+        !0/2-100, !0/2-10, !0/2-4, !0/2, !0/2+1, !0/2+4, !0/2+100,
+        !0-100, !0-10, !0-4, !0-1, !0,
+    ].iter().copied() {
+        println!("testing get_function_by_index({})", invalid_index);
+        let f = r.get_function_by_index(invalid_index);
+        assert_eq!(Some(E::FAIL), f.get_desc().err().map(|e| e.kind()));
+
+        let cb = f.get_constant_buffer_by_name("SomeNonexistantCBuffer");
+        assert_eq!(Some(E::FAIL), cb.get_desc().err().map(|e| e.kind()));
+
+        for invalid_index in [
+            0, 1, 4, 10, 100, 1000, 100000,  100000,
+            !0/2-100, !0/2-10, !0/2-4, !0/2, !0/2+1, !0/2+4, !0/2+100,
+            !0-100, !0-10, !0-4, !0-1, !0,
+        ].iter().copied() {
+            let cb = f.get_constant_buffer_by_index(invalid_index);
+            assert_eq!(Some(E::FAIL), cb.get_desc().err().map(|e| e.kind()));
+
+            let param = f.get_function_parameter(invalid_index as _);
+            assert_eq!(Some(E::FAIL), param.get_desc().err().map(|e| e.kind()));
+        }
+    }
+
+    // TODO: full test coverage of all methods
 }

@@ -8,14 +8,20 @@ use winapi::um::d3d11shader::*;
 /// D3D11_SHADER_TYPE_DESC
 #[derive(Clone, Copy, Default)]
 #[repr(C)] pub struct ShaderTypeDesc<'s> {
-    class:      ShaderVariableClass,
-    r#type:     ShaderVariableType,
-    rows:       u32,
-    columns:    u32,
-    elements:   u32,
-    members:    u32,
-    offset:     u32,
-    name:       Option<&'s AbiCStr>,
+    pub class:      ShaderVariableClass,
+    pub r#type:     ShaderVariableType,
+    pub rows:       u32,
+    pub columns:    u32,
+    pub elements:   u32,
+    pub members:    u32,
+    pub offset:     u32,
+    pub name:       Option<&'s AbiCStr>,
+}
+
+impl ShaderTypeDesc<'_> {
+    pub(crate) fn as_mut_ptr(&mut self) -> *mut D3D11_SHADER_TYPE_DESC {
+        self as *const Self as *mut Self as *mut _
+    }
 }
 
 test_layout! { ShaderTypeDesc => unsafe D3D11_SHADER_TYPE_DESC {

@@ -6,16 +6,22 @@ use winapi::um::d3d11shader::*;
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/ns-d3d11shader-d3d11_shader_input_bind_desc)\]
 /// D3D11_SHADER_INPUT_BIND_DESC
-#[derive(Clone, Copy, Default)]
+#[derive(Clone, Copy, Debug, Default)]
 #[repr(C)] pub struct ShaderInputBindDesc<'s> {
-    name:           Option<&'s AbiCStr>,
-    r#type:         ShaderInputType,
-    bind_point:     u32,
-    bind_count:     u32,
-    flags:          ShaderInputFlags,
-    return_type:    ResourceReturnType,
-    dimension:      SrvDimension,
-    num_samples:    u32,
+    pub name:           Option<&'s AbiCStr>,
+    pub r#type:         ShaderInputType,
+    pub bind_point:     u32,
+    pub bind_count:     u32,
+    pub flags:          ShaderInputFlags,
+    pub return_type:    ResourceReturnType,
+    pub dimension:      SrvDimension,
+    pub num_samples:    u32,
+}
+
+impl ShaderInputBindDesc<'_> {
+    pub(crate) fn as_mut_ptr(&mut self) -> *mut D3D11_SHADER_INPUT_BIND_DESC {
+        self as *const Self as *mut Self as *mut _
+    }
 }
 
 test_layout! { ShaderInputBindDesc => unsafe D3D11_SHADER_INPUT_BIND_DESC {

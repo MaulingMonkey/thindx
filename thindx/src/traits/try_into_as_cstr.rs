@@ -81,6 +81,10 @@ pub unsafe trait AsCStr {
     fn as_cstr(&self) -> *const c_char;
 }
 
+unsafe impl AsCStr for &'_ AbiCStr {
+    fn as_cstr(&self) -> *const c_char { self.as_ptr() }
+}
+
 unsafe impl AsCStr for &'_ CStr {
     fn as_cstr(&self) -> *const c_char { self.as_ptr() }
 }

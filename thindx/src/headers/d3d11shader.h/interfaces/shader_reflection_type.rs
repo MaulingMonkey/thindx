@@ -24,11 +24,11 @@ pub struct ShaderReflectionType<'r> {
 }
 
 impl<'r> ShaderReflectionType<'r> {
-    pub(crate) unsafe fn from_raw(_: impl ParentOrPhantom<'r>, fpr: *mut ID3D11ShaderReflectionType) -> Option<Self> {
-        Some(Self {
-            ptr:        NonNull::new(fpr)?,
+    pub(crate) unsafe fn from_raw(_: impl ParentOrPhantom<'r>, ptr: *mut ID3D11ShaderReflectionType) -> Self {
+        Self {
+            ptr:        NonNull::new(ptr).expect("ShaderReflectionType should never be null"),
             phantom:    PhantomData,
-        })
+        }
     }
 
     pub(crate) fn as_raw(&self) -> *mut ID3D11ShaderReflectionType { self.ptr.as_ptr() }
@@ -45,7 +45,7 @@ impl<'r> ShaderReflectionType<'r> {
     /// # use thindx::*;
     /// // TODO
     /// ```
-    pub fn get_base_class(&self) -> Option<ShaderReflectionType<'r>> {
+    pub fn get_base_class(&self) -> ShaderReflectionType<'r> {
         let ptr = unsafe { self.ptr.as_ref().GetBaseClass() };
         unsafe { ShaderReflectionType::from_raw(self.phantom, ptr) }
     }
@@ -60,9 +60,9 @@ impl<'r> ShaderReflectionType<'r> {
     /// # use thindx::*;
     /// // TODO
     /// ```
-    pub fn get_desc_raw(&self) -> Result<D3D11_SHADER_TYPE_DESC, Error> {
-        let mut desc = unsafe { std::mem::zeroed::<D3D11_SHADER_TYPE_DESC>() };
-        let hr = unsafe { self.ptr.as_ref().GetDesc(&mut desc) };
+    pub fn get_desc(&self) -> Result<ShaderTypeDesc<'r>, Error> {
+        let mut desc = ShaderTypeDesc::default();
+        let hr = unsafe { self.ptr.as_ref().GetDesc(desc.as_mut_ptr()) };
         Error::check("ID3D11ShaderReflectionType::GetDesc", hr)?;
         Ok(desc)
     }
@@ -77,7 +77,7 @@ impl<'r> ShaderReflectionType<'r> {
     /// # use thindx::*;
     /// // TODO
     /// ```
-    pub fn get_interface_by_index(&self, index: u32) -> Option<ShaderReflectionType<'r>> {
+    pub fn get_interface_by_index(&self, index: u32) -> ShaderReflectionType<'r> {
         let ptr = unsafe { self.ptr.as_ref().GetInterfaceByIndex(index) };
         unsafe { ShaderReflectionType::from_raw(self.phantom, ptr) }
     }
@@ -92,7 +92,7 @@ impl<'r> ShaderReflectionType<'r> {
     /// # use thindx::*;
     /// // TODO
     /// ```
-    pub fn get_member_type_by_index(&self, index: u32) -> Option<ShaderReflectionType<'r>> {
+    pub fn get_member_type_by_index(&self, index: u32) -> ShaderReflectionType<'r> {
         let ptr = unsafe { self.ptr.as_ref().GetMemberTypeByIndex(index) };
         unsafe { ShaderReflectionType::from_raw(self.phantom, ptr) }
     }
@@ -107,9 +107,10 @@ impl<'r> ShaderReflectionType<'r> {
     /// # use thindx::*;
     /// // TODO
     /// ```
-    pub fn get_member_type_by_name(&self, name: impl TryIntoAsCStr) -> Option<ShaderReflectionType<'r>> {
-        let name = name.try_into().ok()?;
-        let ptr = unsafe { self.ptr.as_ref().GetMemberTypeByName(name.as_cstr()) };
+    pub fn get_member_type_by_name(&self, name: impl TryIntoAsCStr) -> ShaderReflectionType<'r> {
+        let name = name.try_into().ok();
+        let name = name.map_or(cstr!("").as_cstr(), |n| n.as_cstr());
+        let ptr = unsafe { self.ptr.as_ref().GetMemberTypeByName(name) };
         unsafe { ShaderReflectionType::from_raw(self.phantom, ptr) }
     }
 
@@ -156,7 +157,7 @@ impl<'r> ShaderReflectionType<'r> {
     /// # use thindx::*;
     /// // TODO
     /// ```
-    pub fn get_sub_type(&self) -> Option<ShaderReflectionType<'r>> {
+    pub fn get_sub_type(&self) -> ShaderReflectionType<'r> {
         let ptr = unsafe { self.ptr.as_ref().GetSubType() };
         unsafe { ShaderReflectionType::from_raw(self.phantom, ptr) }
     }

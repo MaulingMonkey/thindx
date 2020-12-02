@@ -4,7 +4,7 @@ use crate::d3d11::*;
 use winapi::um::d3d11shader::*;
 
 use std::marker::PhantomData;
-use std::ptr::NonNull;
+use std::ptr::*;
 
 
 
@@ -22,11 +22,15 @@ pub struct FunctionReflection<'r> {
 }
 
 impl<'r> FunctionReflection<'r> {
-    pub(crate) unsafe fn from_raw(_: impl ParentOrPhantom<'r>, fr: *mut ID3D11FunctionReflection) -> Option<Self> {
-        Some(Self {
-            ptr:        NonNull::new(fr)?,
+    pub(crate) unsafe fn from_raw(_: impl ParentOrPhantom<'r>, ptr: *mut ID3D11FunctionReflection) -> Self {
+        Self {
+            ptr:        NonNull::new(ptr).expect("FunctionReflection should never be null"),
             phantom:    PhantomData,
-        })
+        }
+    }
+
+    pub fn as_raw(&self) -> *mut ID3D11FunctionReflection {
+        self.ptr.as_ptr()
     }
 }
 
@@ -41,7 +45,7 @@ impl<'r> FunctionReflection<'r> {
     /// # use thindx::*;
     /// // TODO
     /// ```
-    pub fn get_constant_buffer_by_index(&self, buffer_index: u32) -> Option<ShaderReflectionConstantBuffer<'r>> {
+    pub fn get_constant_buffer_by_index(&self, buffer_index: u32) -> ShaderReflectionConstantBuffer<'r> {
         let ptr = unsafe { self.ptr.as_ref().GetConstantBufferByIndex(buffer_index) };
         unsafe { ShaderReflectionConstantBuffer::from_raw(self.phantom, ptr) }
     }
@@ -56,9 +60,10 @@ impl<'r> FunctionReflection<'r> {
     /// # use thindx::*;
     /// // TODO
     /// ```
-    pub fn get_constant_buffer_by_name(&self, name: impl TryIntoAsCStr) -> Option<ShaderReflectionConstantBuffer<'r>> {
-        let name = name.try_into().ok()?;
-        let ptr = unsafe { self.ptr.as_ref().GetConstantBufferByName(name.as_cstr()) };
+    pub fn get_constant_buffer_by_name(&self, name: impl TryIntoAsCStr) -> ShaderReflectionConstantBuffer<'r> {
+        let name = name.try_into().ok();
+        let name = name.map_or(cstr!("").as_cstr(), |n| n.as_cstr());
+        let ptr = unsafe { self.ptr.as_ref().GetConstantBufferByName(name) };
         unsafe { ShaderReflectionConstantBuffer::from_raw(self.phantom, ptr) }
     }
 
@@ -89,7 +94,7 @@ impl<'r> FunctionReflection<'r> {
     /// # use thindx::*;
     /// // TODO
     /// ```
-    pub fn get_function_parameter(&self, parameter_index: i32) -> Option<FunctionParameterReflection<'r>> {
+    pub fn get_function_parameter(&self, parameter_index: i32) -> FunctionParameterReflection<'r> {
         let ptr = unsafe { self.ptr.as_ref().GetFunctionParameter(parameter_index) };
         unsafe { FunctionParameterReflection::from_raw(self.phantom, ptr) }
     }
@@ -104,9 +109,9 @@ impl<'r> FunctionReflection<'r> {
     /// # use thindx::*;
     /// // TODO
     /// ```
-    pub fn get_resource_binding_desc_raw(&self, resource_index: u32) -> Result<D3D11_SHADER_INPUT_BIND_DESC, Error> {
-        let mut desc = unsafe { std::mem::zeroed::<D3D11_SHADER_INPUT_BIND_DESC>() };
-        let hr = unsafe { self.ptr.as_ref().GetResourceBindingDesc(resource_index, &mut desc) };
+    pub fn get_resource_binding_desc(&self, resource_index: u32) -> Result<ShaderInputBindDesc<'r>, Error> {
+        let mut desc = ShaderInputBindDesc::default();
+        let hr = unsafe { self.ptr.as_ref().GetResourceBindingDesc(resource_index, desc.as_mut_ptr()) };
         Error::check("ID3D11FunctionReflection::GetResourceBindingDesc", hr)?;
         Ok(desc)
     }
@@ -121,10 +126,10 @@ impl<'r> FunctionReflection<'r> {
     /// # use thindx::*;
     /// // TODO
     /// ```
-    pub fn get_resource_binding_desc_by_name_raw(&self, name: impl TryIntoAsCStr) -> Result<D3D11_SHADER_INPUT_BIND_DESC, Error> {
+    pub fn get_resource_binding_desc_by_name(&self, name: impl TryIntoAsCStr) -> Result<ShaderInputBindDesc<'r>, Error> {
         let name = name.try_into().map_err(|e| Error::new("ID3D11FunctionReflection::GetResourceBindingDescByName", e))?;
-        let mut desc = unsafe { std::mem::zeroed::<D3D11_SHADER_INPUT_BIND_DESC>() };
-        let hr = unsafe { self.ptr.as_ref().GetResourceBindingDescByName(name.as_cstr(), &mut desc) };
+        let mut desc = ShaderInputBindDesc::default();
+        let hr = unsafe { self.ptr.as_ref().GetResourceBindingDescByName(name.as_cstr(), desc.as_mut_ptr()) };
         Error::check("ID3D11FunctionReflection::GetResourceBindingDescByName", hr)?;
         Ok(desc)
     }
@@ -139,9 +144,10 @@ impl<'r> FunctionReflection<'r> {
     /// # use thindx::*;
     /// // TODO
     /// ```
-    pub fn get_variable_by_name(&self, name: impl TryIntoAsCStr) -> Option<ShaderReflectionVariable> {
-        let name = name.try_into().ok()?;
-        let ptr = unsafe { self.ptr.as_ref().GetVariableByName(name.as_cstr()) };
+    pub fn get_variable_by_name(&self, name: impl TryIntoAsCStr) -> ShaderReflectionVariable<'r> {
+        let name = name.try_into().ok();
+        let name = name.map_or(cstr!("").as_cstr(), |n| n.as_cstr());
+        let ptr = unsafe { self.ptr.as_ref().GetVariableByName(name) };
         unsafe { ShaderReflectionVariable::from_raw(self.phantom, ptr) }
     }
 }

@@ -22,11 +22,11 @@ pub struct FunctionParameterReflection<'r> {
 }
 
 impl<'r> FunctionParameterReflection<'r> {
-    pub(crate) unsafe fn from_raw(_: impl ParentOrPhantom<'r>, fpr: *mut ID3D11FunctionParameterReflection) -> Option<Self> {
-        Some(Self {
-            ptr:        NonNull::new(fpr)?,
+    pub(crate) unsafe fn from_raw(_: impl ParentOrPhantom<'r>, ptr: *mut ID3D11FunctionParameterReflection) -> Self {
+        Self {
+            ptr:        NonNull::new(ptr).expect("FunctionParameterReflection should never be null"),
             phantom:    PhantomData,
-        })
+        }
     }
 }
 

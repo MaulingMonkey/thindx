@@ -11,15 +11,15 @@ use std::ptr::*;
 /// D3D11_SHADER_VARIABLE_DESC
 #[derive(Clone, Copy)]
 #[repr(C)] pub struct ShaderVariableDesc<'s> {
-    name:           Option<&'s AbiCStr>,
-    start_offset:   u32,
-    size:           u32,
-    flags:          ShaderVariableFlags,
-    default_value:  LPVOID, // TODO: hmm... this is OKish for read, but not for write
-    start_texture:  u32,
-    texture_size:   u32,
-    start_sampler:  u32,
-    sampler_size:   u32,
+    pub name:           Option<&'s AbiCStr>,
+    pub start_offset:   u32,
+    pub size:           u32,
+    pub flags:          ShaderVariableFlags,
+    pub default_value:  LPVOID, // TODO: hmm... this is OKish for read, but not for write
+    pub start_texture:  u32,
+    pub texture_size:   u32,
+    pub start_sampler:  u32,
+    pub sampler_size:   u32,
 }
 
 impl Default for ShaderVariableDesc<'static> {
@@ -35,6 +35,12 @@ impl Default for ShaderVariableDesc<'static> {
             start_sampler:  0,
             sampler_size:   0,
         }
+    }
+}
+
+impl ShaderVariableDesc<'_> {
+    pub(crate) fn as_mut_ptr(&mut self) -> *mut D3D11_SHADER_VARIABLE_DESC {
+        self as *const Self as *mut Self as *mut _
     }
 }
 

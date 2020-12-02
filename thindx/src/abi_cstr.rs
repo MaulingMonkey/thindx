@@ -1,5 +1,8 @@
+use std::borrow::Cow;
 use std::ffi::*;
+use std::fmt::{self, Debug, Formatter};
 use std::os::raw::c_char;
+use std::str::Utf8Error;
 
 
 
@@ -21,6 +24,11 @@ impl AbiCStr {
     pub unsafe fn from_bytes_with_nul_unchecked(bytes: &[u8]) -> &AbiCStr {
         AbiCStr::from_ptr_unbounded(bytes.as_ptr() as *const _)
     }
+
+    pub fn to_bytes(&self) -> &[u8]                 { <&CStr>::from(self).to_bytes() }
+    pub fn to_bytes_with_nul(&self) -> &[u8]        { <&CStr>::from(self).to_bytes_with_nul() }
+    pub fn to_str(&self) -> Result<&str, Utf8Error> { <&CStr>::from(self).to_str() }
+    pub fn to_string_lossy(&self) -> Cow<'_, str>   { <&CStr>::from(self).to_string_lossy() }
 }
 
 #[doc(hidden)] impl AbiCStr {
@@ -43,6 +51,12 @@ impl AbiCStr {
     ($literal:literal) => {
         $crate::AbiCStr::_xxx_unsafe_unsound_xxx__do_not_call_this_directly__use_from_bytes_with_nul_unchecked_instead(concat!($literal, "\0").as_bytes())
     };
+}
+
+impl Debug for AbiCStr {
+    fn fmt(&self, f: &mut Formatter) -> fmt::Result {
+        Debug::fmt(<&CStr>::from(self), f)
+    }
 }
 
 impl<'s> From<&'s AbiCStr> for &'s CStr {

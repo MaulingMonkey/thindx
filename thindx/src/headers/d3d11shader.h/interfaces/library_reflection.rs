@@ -1,14 +1,15 @@
 use crate::*;
 use crate::d3d11::*;
 
-use winapi::um::d3d11shader::*;
-
 
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11libraryreflection)\]
 /// ID3D11LibraryReflection
 ///
 /// A library-reflection interface accesses library info.
+///
+/// ### See Also
+/// *   [D3DCompiler::reflect_library]
 #[derive(Clone)] #[repr(transparent)]
 pub struct LibraryReflection(pub(crate) mcom::Rc<winapi::um::d3d11shader::ID3D11LibraryReflection>);
 
@@ -22,12 +23,31 @@ impl LibraryReflection {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::*;
-    /// // TODO
+    /// # use thindx::*; let d3dc = D3DCompiler::new(47).unwrap();
+    /// let shader = d3dc.compile_from_file(
+    ///     r"test\data\library.hlsl", None, None, (), "lib_5_0",
+    ///     Compile::Debug, CompileEffect::None
+    /// ).unwrap().shader;
+    ///
+    /// let r : d3d11::LibraryReflection = d3dc.reflect_library(shader.get_buffer()).unwrap();
+    /// let desc : d3d11::LibraryDesc = r.get_desc().unwrap();
+    /// println!("{:#?}", desc);
+    /// assert!(desc.function_count > 0);
     /// ```
-    pub fn get_desc_raw(&self) -> Result<D3D11_LIBRARY_DESC, Error> {
-        let mut desc = unsafe { std::mem::zeroed::<D3D11_LIBRARY_DESC>() }; // TODO: structify?
-        let hr = unsafe { self.0.GetDesc(&mut desc) };
+    ///
+    /// ### Output
+    /// ```text
+    /// LibraryDesc {
+    ///     creator: Some(
+    ///         "Microsoft (R) HLSL Shader Compiler 10.1",
+    ///     ),
+    ///     flags: Compile::None,
+    ///     function_count: 1,
+    /// }
+    /// ```
+    pub fn get_desc(&self) -> Result<LibraryDesc, Error> {
+        let mut desc = LibraryDesc::default();
+        let hr = unsafe { self.0.GetDesc(desc.as_mut_ptr()) };
         Error::check("ID3D11LibraryReflection::GetDesc", hr)?;
         Ok(desc)
     }
@@ -39,11 +59,44 @@ impl LibraryReflection {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::*;
-    /// // TODO
+    /// # use thindx::*; let d3dc = D3DCompiler::new(47).unwrap();
+    /// let shader = d3dc.compile_from_file(
+    ///     r"test\data\library.hlsl", None, None, (), "lib_5_0",
+    ///     Compile::Debug, CompileEffect::None
+    /// ).unwrap().shader;
+    ///
+    /// let r : d3d11::LibraryReflection = d3dc.reflect_library(shader.get_buffer()).unwrap();
+    ///
+    /// for i in 0..r.get_desc().unwrap().function_count {
+    ///     let f : d3d11::FunctionReflection = r.get_function_by_index(i);
+    ///     let desc = f.get_desc().unwrap();
+    ///     println!("{:#?}", desc);
+    /// }
     /// ```
-    pub fn get_function_by_index(&self, function_index: i32) -> Option<FunctionReflection> {
-        let ptr = unsafe { self.0.GetFunctionByIndex(function_index) };
+    ///
+    /// ### Output
+    /// ```text
+    /// FunctionDesc {
+    ///     version: 4293918800,
+    ///     creator: Some(
+    ///         "Microsoft (R) HLSL Shader Compiler 10.1",
+    ///     ),
+    ///     flags: Compile::{Debug|NoPreshader},
+    ///     constant_buffers: 0,
+    ///     bound_resources: 0,
+    ///     instruction_count: 3,
+    ///     ...,
+    ///     name: Some(
+    ///         "xyz1",
+    ///     ),
+    ///     function_parameter_count: 1,
+    ///     has_return: true,
+    ///     has_10_level_9_vertex_shader: false,
+    ///     has_10_level_9_pixel_shader: false,
+    /// }
+    /// ```
+    pub fn get_function_by_index(&self, function_index: u32) -> FunctionReflection {
+        let ptr = unsafe { self.0.GetFunctionByIndex(function_index as i32) };
         unsafe { FunctionReflection::from_raw(self, ptr) }
     }
 }

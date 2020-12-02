@@ -1,9 +1,6 @@
 use crate::*;
 use crate::d3d11::*;
 
-use winapi::um::d3dcommon::*;
-use winapi::um::d3d11shader::*;
-
 
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11shaderreflection)\]
@@ -40,7 +37,7 @@ impl ShaderReflection {
     /// # use thindx::*;
     /// // TODO
     /// ```
-    pub fn get_constant_buffer_by_index(&self, index: u32) -> Option<ShaderReflectionConstantBuffer> {
+    pub fn get_constant_buffer_by_index(&self, index: u32) -> ShaderReflectionConstantBuffer {
         let ptr = unsafe { self.0.GetConstantBufferByIndex(index) };
         unsafe { ShaderReflectionConstantBuffer::from_raw(self, ptr) }
     }
@@ -55,8 +52,10 @@ impl ShaderReflection {
     /// # use thindx::*;
     /// // TODO
     /// ```
-    pub fn get_constant_buffer_by_name(&self, name: impl TryIntoAsCStr) -> Option<ShaderReflectionConstantBuffer> {
-        let ptr = unsafe { self.0.GetConstantBufferByName(name.try_into().ok()?.as_cstr()) };
+    pub fn get_constant_buffer_by_name(&self, name: impl TryIntoAsCStr) -> ShaderReflectionConstantBuffer {
+        let name = name.try_into().ok();
+        let name = name.map_or(cstr!("").as_cstr(), |n| n.as_cstr());
+        let ptr = unsafe { self.0.GetConstantBufferByName(name) };
         unsafe { ShaderReflectionConstantBuffer::from_raw(self, ptr) }
     }
 
@@ -84,9 +83,9 @@ impl ShaderReflection {
     /// # use thindx::*;
     /// // TODO
     /// ```
-    pub fn get_desc_raw(&self) -> Result<D3D11_SHADER_DESC, Error> {
-        let mut desc = unsafe { std::mem::zeroed::<D3D11_SHADER_DESC>() }; // TODO: structify?
-        let hr = unsafe { self.0.GetDesc(&mut desc) };
+    pub fn get_desc(&self) -> Result<ShaderDesc, Error> {
+        let mut desc = ShaderDesc::default();
+        let hr = unsafe { self.0.GetDesc(desc.as_mut_ptr()) };
         Error::check("ID3D11ShaderReflection::GetDesc", hr)?;
         Ok(desc)
     }
@@ -101,8 +100,8 @@ impl ShaderReflection {
     /// # use thindx::*;
     /// // TODO
     /// ```
-    pub fn get_gs_input_primitive(&self) -> D3D_PRIMITIVE {
-        unsafe { self.0.GetGSInputPrimitive() }
+    pub fn get_gs_input_primitive(&self) -> Primitive {
+        Primitive::from_unchecked(unsafe { self.0.GetGSInputPrimitive() })
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getinputparameterdesc)\]
@@ -115,9 +114,9 @@ impl ShaderReflection {
     /// # use thindx::*;
     /// // TODO
     /// ```
-    pub fn get_input_parameter_desc_raw(&self, parameter_index: u32) -> Result<D3D11_SIGNATURE_PARAMETER_DESC, Error> {
-        let mut desc = unsafe { std::mem::zeroed::<D3D11_SIGNATURE_PARAMETER_DESC>() };
-        let hr = unsafe { self.0.GetInputParameterDesc(parameter_index, &mut desc) };
+    pub fn get_input_parameter_desc(&self, parameter_index: u32) -> Result<SignatureParameterDesc, Error> {
+        let mut desc = SignatureParameterDesc::default();
+        let hr = unsafe { self.0.GetInputParameterDesc(parameter_index, desc.as_mut_ptr()) };
         Error::check("ID3D11ShaderReflection::GetInputParameterDesc", hr)?;
         Ok(desc)
     }
@@ -132,11 +131,11 @@ impl ShaderReflection {
     /// # use thindx::*;
     /// // TODO
     /// ```
-    pub fn get_min_feature_level(&self) -> Result<D3D_FEATURE_LEVEL, Error> {
+    pub fn get_min_feature_level(&self) -> Result<FeatureLevel, Error> {
         let mut fl = 0;
         let hr = unsafe { self.0.GetMinFeatureLevel(&mut fl) };
         Error::check("ID3D11ShaderReflection::GetMinFeatureLevel", hr)?;
-        Ok(fl)
+        Ok(FeatureLevel::from_unchecked(fl))
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getmovcinstructioncount)\]
@@ -191,9 +190,9 @@ impl ShaderReflection {
     /// # use thindx::*;
     /// // TODO
     /// ```
-    pub fn get_output_parameter_desc_raw(&self, parameter_index: u32) -> Result<D3D11_SIGNATURE_PARAMETER_DESC, Error> {
-        let mut desc = unsafe { std::mem::zeroed::<D3D11_SIGNATURE_PARAMETER_DESC>() };
-        let hr = unsafe { self.0.GetOutputParameterDesc(parameter_index, &mut desc) };
+    pub fn get_output_parameter_desc(&self, parameter_index: u32) -> Result<SignatureParameterDesc, Error> {
+        let mut desc = SignatureParameterDesc::default();
+        let hr = unsafe { self.0.GetOutputParameterDesc(parameter_index, desc.as_mut_ptr()) };
         Error::check("ID3D11ShaderReflection::GetOutputParameterDesc", hr)?;
         Ok(desc)
     }
@@ -208,9 +207,9 @@ impl ShaderReflection {
     /// # use thindx::*;
     /// // TODO
     /// ```
-    pub fn get_patch_constant_parameter_desc_raw(&self, parameter_index: u32) -> Result<D3D11_SIGNATURE_PARAMETER_DESC, Error> {
-        let mut desc = unsafe { std::mem::zeroed::<D3D11_SIGNATURE_PARAMETER_DESC>() };
-        let hr = unsafe { self.0.GetPatchConstantParameterDesc(parameter_index, &mut desc) };
+    pub fn get_patch_constant_parameter_desc(&self, parameter_index: u32) -> Result<SignatureParameterDesc, Error> {
+        let mut desc = SignatureParameterDesc::default();
+        let hr = unsafe { self.0.GetPatchConstantParameterDesc(parameter_index, desc.as_mut_ptr()) };
         Error::check("ID3D11ShaderReflection::GetPatchConstantParameterDesc", hr)?;
         Ok(desc)
     }
@@ -239,9 +238,9 @@ impl ShaderReflection {
     /// # use thindx::*;
     /// // TODO
     /// ```
-    pub fn get_resource_binding_desc_raw(&self, resource_index: u32) -> Result<D3D11_SHADER_INPUT_BIND_DESC, Error> {
-        let mut desc = unsafe { std::mem::zeroed::<D3D11_SHADER_INPUT_BIND_DESC>() };
-        let hr = unsafe { self.0.GetResourceBindingDesc(resource_index, &mut desc) };
+    pub fn get_resource_binding_desc(&self, resource_index: u32) -> Result<ShaderInputBindDesc, Error> {
+        let mut desc = ShaderInputBindDesc::default();
+        let hr = unsafe { self.0.GetResourceBindingDesc(resource_index, desc.as_mut_ptr()) };
         Error::check("ID3D11ShaderReflection::GetResourceBindingDesc", hr)?;
         Ok(desc)
     }
@@ -256,10 +255,10 @@ impl ShaderReflection {
     /// # use thindx::*;
     /// // TODO
     /// ```
-    pub fn get_resource_binding_desc_by_name_raw(&self, name: impl TryIntoAsCStr) -> Result<D3D11_SHADER_INPUT_BIND_DESC, Error> {
+    pub fn get_resource_binding_desc_by_name(&self, name: impl TryIntoAsCStr) -> Result<ShaderInputBindDesc, Error> {
         let name = name.try_into().map_err(|e| Error::new("ID3D11ShaderReflection::GetResourceBindingDescByName", e))?;
-        let mut desc = unsafe { std::mem::zeroed::<D3D11_SHADER_INPUT_BIND_DESC>() };
-        let hr = unsafe { self.0.GetResourceBindingDescByName(name.as_cstr(), &mut desc) };
+        let mut desc = ShaderInputBindDesc::default();
+        let hr = unsafe { self.0.GetResourceBindingDescByName(name.as_cstr(), desc.as_mut_ptr()) };
         Error::check("ID3D11ShaderReflection::GetResourceBindingDescByName", hr)?;
         Ok(desc)
     }
@@ -291,8 +290,10 @@ impl ShaderReflection {
     /// # use thindx::*;
     /// // TODO
     /// ```
-    pub fn get_variable_by_name(&self, name: impl TryIntoAsCStr) -> Option<ShaderReflectionVariable> {
-        let ptr = unsafe { self.0.GetVariableByName(name.try_into().ok()?.as_cstr()) };
+    pub fn get_variable_by_name(&self, name: impl TryIntoAsCStr) -> ShaderReflectionVariable {
+        let name = name.try_into().ok();
+        let name = name.map_or(cstr!("").as_cstr(), |n| n.as_cstr());
+        let ptr = unsafe { self.0.GetVariableByName(name) };
         unsafe { ShaderReflectionVariable::from_raw(self, ptr) }
     }
 

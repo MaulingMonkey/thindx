@@ -8,15 +8,21 @@ use winapi::um::d3d11shader::*;
 /// D3D11_SIGNATURE_PARAMETER_DESC
 #[derive(Clone, Copy, Default)]
 #[repr(C)] pub struct SignatureParameterDesc<'s> {
-    semantic_name:      Option<&'s AbiCStr>,
-    semantic_index:     u32,
-    register:           u32,
-    system_value_type:  Name,
-    component_type:     RegisterComponentType,
-    mask:               u8,
-    read_write_mask:    u8,
-    stream:             u32,
-    min_precision:      MinPrecision,
+    pub semantic_name:      Option<&'s AbiCStr>,
+    pub semantic_index:     u32,
+    pub register:           u32,
+    pub system_value_type:  Name,
+    pub component_type:     RegisterComponentType,
+    pub mask:               u8,
+    pub read_write_mask:    u8,
+    pub stream:             u32,
+    pub min_precision:      MinPrecision,
+}
+
+impl SignatureParameterDesc<'_> {
+    pub(crate) fn as_mut_ptr(&mut self) -> *mut D3D11_SIGNATURE_PARAMETER_DESC {
+        self as *const Self as *mut Self as *mut _
+    }
 }
 
 test_layout! { SignatureParameterDesc => unsafe D3D11_SIGNATURE_PARAMETER_DESC {

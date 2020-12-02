@@ -22,11 +22,11 @@ pub struct ShaderReflectionVariable<'r> {
 }
 
 impl<'r> ShaderReflectionVariable<'r> {
-    pub(crate) unsafe fn from_raw(_: impl ParentOrPhantom<'r>, fpr: *mut ID3D11ShaderReflectionVariable) -> Option<Self> {
-        Some(Self {
-            ptr:        NonNull::new(fpr)?,
+    pub(crate) unsafe fn from_raw(_: impl ParentOrPhantom<'r>, ptr: *mut ID3D11ShaderReflectionVariable) -> Self {
+        Self {
+            ptr:        NonNull::new(ptr).expect("ShaderReflectionVariable should never be null"),
             phantom:    PhantomData,
-        })
+        }
     }
 }
 
@@ -41,7 +41,7 @@ impl<'r> ShaderReflectionVariable<'r> {
     /// # use thindx::*;
     /// // TODO
     /// ```
-    pub fn get_buffer(&self) -> Option<ShaderReflectionConstantBuffer> {
+    pub fn get_buffer(&self) -> ShaderReflectionConstantBuffer<'r> {
         let ptr = unsafe { self.ptr.as_ref().GetBuffer() };
         unsafe { ShaderReflectionConstantBuffer::from_raw(self.phantom, ptr) }
     }
@@ -56,9 +56,9 @@ impl<'r> ShaderReflectionVariable<'r> {
     /// # use thindx::*;
     /// // TODO
     /// ```
-    pub fn get_desc_raw(&self) -> Result<D3D11_SHADER_VARIABLE_DESC, Error> {
-        let mut desc = unsafe { std::mem::zeroed::<D3D11_SHADER_VARIABLE_DESC>() };
-        let hr = unsafe { self.ptr.as_ref().GetDesc(&mut desc) };
+    pub fn get_desc(&self) -> Result<ShaderVariableDesc<'r>, Error> {
+        let mut desc = ShaderVariableDesc::default();
+        let hr = unsafe { self.ptr.as_ref().GetDesc(desc.as_mut_ptr()) };
         Error::check("ID3D11ShaderReflectionVariable::GetDesc", hr)?;
         Ok(desc)
     }
@@ -87,7 +87,7 @@ impl<'r> ShaderReflectionVariable<'r> {
     /// # use thindx::*;
     /// // TODO
     /// ```
-    pub fn get_type(&self) -> Option<ShaderReflectionType> {
+    pub fn get_type(&self) -> ShaderReflectionType<'r> {
         let ptr = unsafe { self.ptr.as_ref().GetType() };
         unsafe { ShaderReflectionType::from_raw(self.phantom, ptr) }
     }
