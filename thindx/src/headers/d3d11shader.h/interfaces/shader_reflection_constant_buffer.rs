@@ -47,7 +47,7 @@ impl<'r> ShaderReflectionConstantBuffer<'r> {
     ///
     /// let r : d3d11::LibraryReflection = d3dc.reflect_library(shader.get_buffer()).unwrap();
     ///
-    /// let scale4 = (0..r.get_desc().unwrap().function_count).map(|i| r.get_function_by_index(i)).find(|f| {
+    /// let scale4 = r.functions().unwrap().find(|f| {
     ///     f.get_desc().ok().and_then(|d| d.name).map_or(false, |n| n.to_bytes() == b"scale4")
     /// }).unwrap();
     ///
@@ -93,7 +93,7 @@ impl<'r> ShaderReflectionConstantBuffer<'r> {
     ///
     /// let r : d3d11::LibraryReflection = d3dc.reflect_library(shader.get_buffer()).unwrap();
     ///
-    /// let scale4 = (0..r.get_desc().unwrap().function_count).map(|i| r.get_function_by_index(i)).find(|f| {
+    /// let scale4 = r.functions().unwrap().find(|f| {
     ///     f.get_desc().ok().and_then(|d| d.name).map_or(false, |n| n.to_bytes() == b"scale4")
     /// }).unwrap();
     ///
@@ -142,7 +142,7 @@ impl<'r> ShaderReflectionConstantBuffer<'r> {
     ///
     /// let r : d3d11::LibraryReflection = d3dc.reflect_library(shader.get_buffer()).unwrap();
     ///
-    /// let scale4 = (0..r.get_desc().unwrap().function_count).map(|i| r.get_function_by_index(i)).find(|f| {
+    /// let scale4 = r.functions().unwrap().find(|f| {
     ///     f.get_desc().ok().and_then(|d| d.name).map_or(false, |n| n.to_bytes() == b"scale4")
     /// }).unwrap();
     ///

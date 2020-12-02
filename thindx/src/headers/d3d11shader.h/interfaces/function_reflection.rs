@@ -15,6 +15,7 @@ use std::ptr::*;
 ///
 /// ### See Also
 /// *   [LibraryReflection::get_function_by_index]
+/// *   [LibraryReflection::functions]
 #[derive(Clone)] #[repr(transparent)]
 pub struct FunctionReflection<'r> {
     ptr:        NonNull<ID3D11FunctionReflection>,
@@ -50,7 +51,7 @@ impl<'r> FunctionReflection<'r> {
     ///
     /// let r : d3d11::LibraryReflection = d3dc.reflect_library(shader.get_buffer()).unwrap();
     ///
-    /// let scale4 = (0..r.get_desc().unwrap().function_count).map(|i| r.get_function_by_index(i)).find(|f| {
+    /// let scale4 = r.functions().unwrap().find(|f| {
     ///     f.get_desc().ok().and_then(|d| d.name).map_or(false, |n| n.to_bytes() == b"scale4")
     /// }).unwrap();
     ///
@@ -94,7 +95,7 @@ impl<'r> FunctionReflection<'r> {
     ///
     /// let r : d3d11::LibraryReflection = d3dc.reflect_library(shader.get_buffer()).unwrap();
     ///
-    /// let scale4 = (0..r.get_desc().unwrap().function_count).map(|i| r.get_function_by_index(i)).find(|f| {
+    /// let scale4 = r.functions().unwrap().find(|f| {
     ///     f.get_desc().ok().and_then(|d| d.name).map_or(false, |n| n.to_bytes() == b"scale4")
     /// }).unwrap();
     ///
@@ -140,8 +141,7 @@ impl<'r> FunctionReflection<'r> {
     ///
     /// let r : d3d11::LibraryReflection = d3dc.reflect_library(shader.get_buffer()).unwrap();
     ///
-    /// for i in 0..r.get_desc().unwrap().function_count {
-    ///     let f : d3d11::FunctionReflection = r.get_function_by_index(i);
+    /// for f in r.functions().unwrap() {
     ///     let desc = f.get_desc().unwrap();
     ///     println!("{:#?}", desc);
     /// }
