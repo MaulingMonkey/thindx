@@ -2,7 +2,19 @@ use crate::*;
 use crate::d3d11::*;
 
 use std::convert::TryInto;
+use std::os::raw::c_char;
 use std::ptr::*;
+
+// TODO REFACTOR:
+//  - [ ] Structify Ok result of create_module_instance ?
+//  - [ ] Unstructify Ok result of other fns?
+//  - [ ] Explicit index types, with a less magic value for return than -1 ?
+
+// TODO TESTING:
+//  - [ ] Test bad indicies
+//  - [ ] Test bad swizzles
+//  - [ ] Test bad fn names containing interior nuls and the like
+//  - [ ] See if 'static requirements can be relaxed
 
 
 
@@ -17,6 +29,85 @@ use std::ptr::*;
 ///
 /// ### See Also
 /// * [D3DCompiler::create_function_linking_graph]
+///
+/// ### Example
+/// ```rust
+/// use thindx::{*, d3d11::*};
+/// let compiler = D3DCompiler::new(47).unwrap();
+///
+///
+/// // 1. Create a library of shader functions
+///
+/// let lib_source = br##"
+///     export float4 xyz1(float3 v) { return float4(v, 1.0); }
+/// "##;
+///
+/// let lib_bytecode = compiler.compile(
+///     lib_source, "example.hlsl", None, None, (), "lib_5_0",
+///     Compile::OptimizationLevel3, CompileEffect::None
+/// ).unwrap();
+///
+/// let lib = compiler.load_module(lib_bytecode.shader.get_buffer()).unwrap();
+///
+///
+/// // 2. Use FunctionLinkingGraph to create a shader.  Note that the fn call order
+/// // here is brittle, reordering many of the calls here will cause E::FAIL errors.
+///
+/// let graph : FunctionLinkingGraph = compiler.create_function_linking_graph(None).unwrap();
+///
+/// let input = graph.set_input_signature(&[
+///     ParameterDesc::new(cstr!("inputPos"),  cstr!("POSITION0"), SVT::Float, SVC::Vector, 1, 3, Interpolation::Linear, PF::In, 0, 0, 0, 0),
+///     ParameterDesc::new(cstr!("inputTex"),  cstr!("TEXCOORD0"), SVT::Float, SVC::Vector, 1, 2, Interpolation::Linear, PF::In, 0, 0, 0, 0),
+///     ParameterDesc::new(cstr!("inputNorm"), cstr!("NORMAL0"),   SVT::Float, SVC::Vector, 1, 3, Interpolation::Linear, PF::In, 0, 0, 0, 0),
+/// ]).unwrap();
+///
+/// let xyz1 = graph.call_function("", &lib, "xyz1").unwrap();
+///
+/// let output = graph.set_output_signature(&[
+///     ParameterDesc::new(cstr!("outputTex"),  cstr!("TEXCOORD0"),   SVT::Float, SVC::Vector, 1, 2, Interpolation::Undefined, PF::Out, 0, 0, 0, 0),
+///     ParameterDesc::new(cstr!("outputNorm"), cstr!("NORMAL0"),     SVT::Float, SVC::Vector, 1, 3, Interpolation::Undefined, PF::Out, 0, 0, 0, 0),
+///     ParameterDesc::new(None,                cstr!("SV_POSITION"), SVT::Float, SVC::Vector, 1, 4, Interpolation::Undefined, PF::Out, 0, 0, 0, 0),
+/// ]).unwrap();
+///
+/// // pass input[0] ("inputPos")   to "xyz1"s args[0] ("v")
+/// // pass xyz1[-1] (return)       to output[2] ("outputPos")
+/// // pass input[1] ("inputTex")   to output[0] ("outputTex")
+/// // pass input[2].yx ("inputNorm.yx")  to output[1].xy ("outputNorm.xy")
+/// graph.pass_value(&input, 0, &xyz1, 0).unwrap();
+/// graph.pass_value(&xyz1, -1, &output, 2).unwrap();
+/// graph.pass_value(&input, 1, &output, 0).unwrap();
+/// graph.pass_value_with_swizzle(&input, 2, "yx", &output, 1, "xy").unwrap();
+///
+///
+///
+/// // 3.  Option A:  Generate HLSL
+/// println!("{}", String::from_utf8_lossy(graph.generate_hlsl(()).unwrap().get_buffer()));
+///
+///
+/// // 3.  Option B:  Link HLSL
+/// let (graph_inst, _warnings) = graph.create_module_instance().unwrap();
+///
+/// let lib_inst = lib.create_instance("").unwrap();
+/// let linker = compiler.create_linker().unwrap();
+/// linker.use_library(&lib_inst).unwrap();
+/// linker.link(&graph_inst, "main", "vs_5_0", None).unwrap();
+/// ```
+///
+/// ### Outputs
+/// ```hlsl
+/// float4 xyz1(in float3 v);
+///
+/// void main(in float3 inputPos : POSITION0, in float2 inputTex : TEXCOORD0, in float3 inputNorm : NORMAL0, out float2 outputTex : TEXCOORD0, out float3 outputNorm : NORMAL0, out float4 __Output_n2_2 : SV_POSITION)
+/// {
+///     float4 xyz1_n1_0;
+///     float3 xyz1_n1_1;
+///     xyz1_n1_1 = inputPos;
+///     xyz1_n1_0 = ::xyz1(xyz1_n1_1);
+///     outputTex = inputTex;
+///     outputNorm.xy = inputNorm.yx;
+///     __Output_n2_2 = xyz1_n1_0;
+/// }
+/// ```
 #[derive(Clone)] #[repr(transparent)]
 pub struct FunctionLinkingGraph(pub(crate) mcom::Rc<winapi::um::d3d11shader::ID3D11FunctionLinkingGraph>);
 
@@ -33,13 +124,23 @@ impl FunctionLinkingGraph {
     /// *   `module_with_function_prototype`    - A [Module] interface for the library module that contains the function prototype.
     /// *   `function_name`                     - The name of the function.
     ///
+    /// ### Errors
+    /// *   [E::FAIL]               - if called after [set_output_signature](#fn.set_output_signature)
+    /// *   [E::FAIL]               - if `function_name` doesn't exist within `module_with_function_prototype`
+    ///
     /// ### Example
     /// ```rust
-    /// # use thindx::*; use d3d11::*;
+    /// # use thindx::{*, d3d11::*};
     /// # let compiler = D3DCompiler::new(47).unwrap();
-    /// # let flg : FunctionLinkingGraph = compiler.create_function_linking_graph(None).unwrap();
-    /// // TODO
-    /// // flg.call_function().unwrap();
+    /// # let lib_bytecode = compiler.compile(b"export float4 xyz1(float3 v) { return float4(v, 1.0); }", "example.hlsl", None, None, (), "lib_5_0", Compile::OptimizationLevel3, CompileEffect::None).unwrap();
+    /// # let lib = compiler.load_module(lib_bytecode.shader.get_buffer()).unwrap();
+    /// # let graph : FunctionLinkingGraph = compiler.create_function_linking_graph(None).unwrap();
+    /// # let input  = graph.set_input_signature(&[]).unwrap();
+    /// let xyz1 = graph.call_function("example_namespace", &lib, "xyz1").unwrap();
+    /// let xyz1 = graph.call_function("",   &lib, "xyz1").unwrap();
+    /// let xyz1 = graph.call_function(None, &lib, "xyz1").unwrap();
+    ///
+    /// assert_eq!(E::FAIL, graph.call_function("", &lib, "nonexistant").err().unwrap().kind());
     /// ```
     pub fn call_function<'s>(
         &self,
@@ -65,24 +166,9 @@ impl FunctionLinkingGraph {
     ///
     /// Initializes a shader module from the function-linking-graph object.
     ///
-    /// ### Example
-    /// ```rust
-    /// # use thindx::*; use d3d11::*;
-    /// # let compiler = D3DCompiler::new(47).unwrap();
-    /// # let flg : FunctionLinkingGraph = compiler.create_function_linking_graph(None).unwrap();
-    /// // Nothing created yet
-    /// let error : Error = flg.create_module_instance().err().unwrap();
-    /// assert_eq!(E::FAIL, error.kind());
-    /// println!("{}", error);
-    ///
-    /// // TODO: successful example
-    /// ```
-    ///
-    /// ### Outputs
-    /// ```text
-    /// ID3D11FunctionLinkingGraph::CreateModuleInstance failed (THINERR::FAIL)
-    /// error X9021: ID3D11FunctionLinkingGraph::CreateModuleInstance: FLG has no nodes
-    /// ```
+    /// ### Errors
+    /// *   [E::FAIL]   - if called before set_output_signature
+    /// *   [E::FAIL]   - if the FLG has no nodes
     pub fn create_module_instance(&self) -> Result<(ModuleInstance, Option<ReadOnlyBlob>), Error> {
         // TODO: named tuple return?  better error type that can carry the blob?
         let mut module = null_mut();
@@ -108,6 +194,14 @@ impl FunctionLinkingGraph {
     /// # let compiler = D3DCompiler::new(47).unwrap();
     /// # let flg : FunctionLinkingGraph = compiler.create_function_linking_graph(None).unwrap();
     /// let hlsl = flg.generate_hlsl(()).unwrap();
+    /// println!("{}", String::from_utf8_lossy(hlsl.get_buffer()));
+    /// ```
+    ///
+    /// ### Outputs
+    /// ```hlsl
+    /// void main()
+    /// {
+    /// }
     /// ```
     pub fn generate_hlsl(&self, flags: ()) -> Result<ReadOnlyBlob, Error> {
         let _ = flags; let flags = 0;
@@ -148,13 +242,19 @@ impl FunctionLinkingGraph {
     ///
     /// Passes a value from a source linking node to a destination linking node.
     ///
+    /// ### Errors
+    /// -   [E::FAIL]           - if multiple values are passed to the same destination
+    ///
     /// ### Example
     /// ```rust
-    /// # use thindx::*; use d3d11::*;
+    /// # use thindx::{*, d3d11::*};
     /// # let compiler = D3DCompiler::new(47).unwrap();
-    /// # let flg : FunctionLinkingGraph = compiler.create_function_linking_graph(None).unwrap();
-    /// // TODO
-    /// // flg.pass_value().unwrap();
+    /// # let lib_bytecode = compiler.compile(b"export float4 xyz1(float3 v) { return float4(v, 1.0); }", "example.hlsl", None, None, (), "lib_5_0", Compile::OptimizationLevel3, CompileEffect::None).unwrap();
+    /// # let lib = compiler.load_module(lib_bytecode.shader.get_buffer()).unwrap();
+    /// # let graph : FunctionLinkingGraph = compiler.create_function_linking_graph(None).unwrap();
+    /// # let input  = graph.set_input_signature(&[ParameterDesc::new(cstr!("inPos"),  cstr!("POSITION0"),   SVT::Float, SVC::Vector, 1, 4, Interpolation::Linear,    PF::In,  0, 0, 0, 0)]).unwrap();
+    /// # let output = graph.set_output_signature(&[ParameterDesc::new(cstr!("outPos"), cstr!("SV_POSITION"), SVT::Float, SVC::Vector, 1, 4, Interpolation::Undefined, PF::Out, 0, 0, 0, 0)]).unwrap();
+    /// graph.pass_value(&input, 0, &output, 0).unwrap();
     /// ```
     pub fn pass_value(&self, src_node: &LinkingNode, src_parameter_index: i32, dst_node: &LinkingNode, dst_parameter_index: i32) -> Result<(), Error> {
         let hr = unsafe { self.0.PassValue(src_node.as_raw(), src_parameter_index, dst_node.as_raw(), dst_parameter_index) };
@@ -168,16 +268,19 @@ impl FunctionLinkingGraph {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::*; use d3d11::*;
+    /// # use thindx::{*, d3d11::*};
     /// # let compiler = D3DCompiler::new(47).unwrap();
-    /// # let flg : FunctionLinkingGraph = compiler.create_function_linking_graph(None).unwrap();
-    /// // TODO
-    /// // flg.pass_value_with_swizzle().unwrap();
+    /// # let lib_bytecode = compiler.compile(b"export float4 xyz1(float3 v) { return float4(v, 1.0); }", "example.hlsl", None, None, (), "lib_5_0", Compile::OptimizationLevel3, CompileEffect::None).unwrap();
+    /// # let lib = compiler.load_module(lib_bytecode.shader.get_buffer()).unwrap();
+    /// # let graph : FunctionLinkingGraph = compiler.create_function_linking_graph(None).unwrap();
+    /// # let input  = graph.set_input_signature(&[ParameterDesc::new(cstr!("inPos"),  cstr!("POSITION0"),   SVT::Float, SVC::Vector, 1, 4, Interpolation::Linear,    PF::In,  0, 0, 0, 0)]).unwrap();
+    /// # let output = graph.set_output_signature(&[ParameterDesc::new(cstr!("outPos"), cstr!("SV_POSITION"), SVT::Float, SVC::Vector, 1, 4, Interpolation::Undefined, PF::Out, 0, 0, 0, 0)]).unwrap();
+    /// graph.pass_value_with_swizzle(&input, 0, "xyzw", &output, 0, "zyxw").unwrap();
     /// ```
     pub fn pass_value_with_swizzle(&self, src_node: &LinkingNode, src_parameter_index: i32, src_swizzle: &str, dst_node: &LinkingNode, dst_parameter_index: i32, dst_swizzle: &str) -> Result<(), Error> {
-        let src_swizzle = src_swizzle.bytes().chain(Some(0)).collect::<Vec<_>>();
-        let dst_swizzle = dst_swizzle.bytes().chain(Some(0)).collect::<Vec<_>>();
-        let hr = unsafe { self.0.PassValueWithSwizzle(src_node.as_raw(), src_parameter_index, src_swizzle.as_ptr().cast(), dst_node.as_raw(), dst_parameter_index, dst_swizzle.as_ptr().cast()) };
+        let src_swizzle = src_swizzle.bytes().map(|b| b as c_char).chain(Some(0)).collect::<Vec<_>>();
+        let dst_swizzle = dst_swizzle.bytes().map(|b| b as c_char).chain(Some(0)).collect::<Vec<_>>();
+        let hr = unsafe { self.0.PassValueWithSwizzle(src_node.as_raw(), src_parameter_index, src_swizzle.as_ptr(), dst_node.as_raw(), dst_parameter_index, dst_swizzle.as_ptr()) };
         Error::check("ID3D11FunctionLinkingGraph::PassValueWithSwizzle", hr)
     }
 
@@ -186,15 +289,24 @@ impl FunctionLinkingGraph {
     ///
     /// Sets the input signature of the function-linking-graph.
     ///
+    /// ### Errors
+    /// *   [E::FAIL]   - if called after `call_function`
+    /// *   [E::FAIL]   - if called after `set_output_signature` ?
+    /// *   [E::FAIL]   - if called a second time on the same FLG
+    ///
     /// ### Example
     /// ```rust
-    /// # use thindx::*; use d3d11::*;
+    /// # use thindx::{*, d3d11::*};
     /// # let compiler = D3DCompiler::new(47).unwrap();
     /// # let flg : FunctionLinkingGraph = compiler.create_function_linking_graph(None).unwrap();
-    /// // TODO
-    /// // flg.set_input_signature().unwrap();
+    /// flg.set_input_signature(&[
+    ///     ParameterDesc::new(cstr!("inputPos"),  cstr!("POSITION0"), SVT::Float, SVC::Vector, 1, 3, Interpolation::Linear, PF::In, 0, 0, 0, 0),
+    ///     ParameterDesc::new(cstr!("inputTex"),  cstr!("TEXCOORD0"), SVT::Float, SVC::Vector, 1, 2, Interpolation::Linear, PF::In, 0, 0, 0, 0),
+    ///     ParameterDesc::new(cstr!("inputNorm"), cstr!("NORMAL0"),   SVT::Float, SVC::Vector, 1, 3, Interpolation::Linear, PF::In, 0, 0, 0, 0),
+    /// ]).unwrap();
+    /// # assert_eq!(E::FAIL, flg.set_input_signature(&[]).err().unwrap().kind());
     /// ```
-    pub fn set_input_signature(&self, input_parameters: &[ParameterDesc]) -> Result<LinkingNode, Error> {
+    pub fn set_input_signature(&self, input_parameters: &[ParameterDesc<'static>]) -> Result<LinkingNode, Error> {
         let n = input_parameters.len().try_into().map_err(|_| Error::new("ID3D11FunctionLinkingGraph::SetInputSignature", THINERR::SLICE_TOO_LARGE))?;
 
         let mut node = null_mut();
@@ -208,15 +320,24 @@ impl FunctionLinkingGraph {
     ///
     /// Sets the output signature of the function-linking-graph.
     ///
+    /// ### Errors
+    /// *   [E::FAIL]           if called before set_input_signature
+    /// *   [E::FAIL]           if called a second time on the same FLG
+    ///
     /// ### Example
     /// ```rust
     /// # use thindx::*; use d3d11::*;
     /// # let compiler = D3DCompiler::new(47).unwrap();
     /// # let flg : FunctionLinkingGraph = compiler.create_function_linking_graph(None).unwrap();
-    /// // TODO
-    /// // flg.set_output_signature().unwrap();
+    /// # flg.set_input_signature(&[]).unwrap();
+    /// flg.set_output_signature(&[
+    ///     ParameterDesc::new(cstr!("outputPos"),  cstr!("POSITION0"),   SVT::Float, SVC::Vector, 1, 2, Interpolation::Undefined, PF::Out, 0, 0, 0, 0),
+    ///     ParameterDesc::new(cstr!("outputNorm"), cstr!("NORMAL0"),     SVT::Float, SVC::Vector, 1, 3, Interpolation::Undefined, PF::Out, 0, 0, 0, 0),
+    ///     ParameterDesc::new(cstr!("outputTex"),  cstr!("SV_POSITION"), SVT::Float, SVC::Vector, 1, 4, Interpolation::Undefined, PF::Out, 0, 0, 0, 0),
+    /// ]).unwrap();
+    /// # assert_eq!(E::FAIL, flg.set_output_signature(&[]).err().unwrap().kind());
     /// ```
-    pub fn set_output_signature(&self, output_parameters: &[ParameterDesc]) -> Result<LinkingNode, Error> {
+    pub fn set_output_signature(&self, output_parameters: &[ParameterDesc<'static>]) -> Result<LinkingNode, Error> {
         let n = output_parameters.len().try_into().map_err(|_| Error::new("ID3D11FunctionLinkingGraph::SetOutputSignature", THINERR::SLICE_TOO_LARGE))?;
 
         let mut node = null_mut();
@@ -224,6 +345,4 @@ impl FunctionLinkingGraph {
         Error::check("ID3D11FunctionLinkingGraph::SetOutputSignature", hr)?;
         Ok(unsafe { LinkingNode::from_raw(node) })
     }
-
-    // TODO: safe alternatives to set_{input,output}_signature
 }

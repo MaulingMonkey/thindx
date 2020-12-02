@@ -11,7 +11,8 @@ use std::ptr::*;
 /// A linker interface is used to link a shader module.
 ///
 /// ### See Also
-/// *   [D3DCompiler::create_linker]
+/// *   [D3DCompiler::create_linker] to create [Linker]s
+/// *   [FunctionLinkingGraph] for examples
 #[derive(Clone)] #[repr(transparent)]
 pub struct Linker(pub(crate) mcom::Rc<winapi::um::d3d11shader::ID3D11Linker>);
 
@@ -46,7 +47,7 @@ impl Linker {
     /// # use thindx::*;
     /// // TODO
     /// ```
-    pub fn link(&self, entry: &ModuleInstance, entry_name: impl TryIntoAsCStr, target_name: impl TryIntoAsCStr, flags: ()) -> Result<CompileResult, Error> {
+    pub fn link(&self, entry: &ModuleInstance, entry_name: impl TryIntoAsCStr, target_name: impl TryIntoAsCStr, flags: Option<void::Void>) -> Result<CompileResult, Error> {
         let entry_name  = entry_name .try_into().map_err(|e| Error::new("ID3D11Linker::Link", e))?;
         let target_name = target_name.try_into().map_err(|e| Error::new("ID3D11Linker::Link", e))?;
         let entry_name  = entry_name .as_cstr();
