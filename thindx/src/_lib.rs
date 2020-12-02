@@ -122,6 +122,7 @@
 use thindx_zzz_internal_proc_macros::*;
 
 pub use abibool::bool32;
+mod abi_cstr; pub use abi_cstr::*;
 
 pub mod d3d11 {
     pub use crate::d3d11shader_h::*;
@@ -136,7 +137,6 @@ pub mod d3d11 {
 
 #[path=r"traits\_traits.rs"]            mod traits;         pub use traits::*;
 
-mod abi_cstr;                   pub use abi_cstr::*;
 mod error_kind;                 pub use error_kind::*;
 mod error;                      pub use error::*;
 pub mod errors;                 #[doc(no_inline)] pub use errors::*;
