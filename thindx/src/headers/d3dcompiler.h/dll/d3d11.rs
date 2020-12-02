@@ -81,7 +81,13 @@ impl D3DCompiler {
     /// ### Example
     /// ```rust
     /// # use thindx::*; let compiler = D3DCompiler::new(47).unwrap();
-    /// // TODO
+    /// let source = "export float4 example(float4 i) { return 2*i; }";
+    /// let CompileResult { shader: code_blob, errors: error_blob } = compiler.compile(
+    ///     source.as_bytes(), "example.hlsl",
+    ///     None, None, (), "lib_5_0",
+    ///     Compile::OptimizationLevel3, CompileEffect::None,
+    /// ).unwrap();
+    /// let shader_library = compiler.load_module(code_blob.get_buffer()).unwrap();
     /// ```
     #[requires(d3dcompiler=47)]
     pub fn load_module(&self, data: &[u8]) -> Result<d3d11::Module, Error> {
