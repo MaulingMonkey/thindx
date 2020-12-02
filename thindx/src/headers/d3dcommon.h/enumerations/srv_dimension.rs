@@ -1,3 +1,5 @@
+// AUDIT: verified-ms-docs-links
+
 #[allow(unused_imports)] use crate::*;
 
 use winapi::um::d3dcommon::*;
