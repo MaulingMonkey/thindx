@@ -122,6 +122,8 @@ macro_rules! flags {
                             write!(f, "{}(0x{:08x})", stringify!($flagish), bits)?;
                         } else if bits != 0 {
                             write!(f, "|0x{:08x}}}", bits)?;
+                        } else {
+                            write!(f, "}}")?;
                         }
                         Ok(())
                     },
