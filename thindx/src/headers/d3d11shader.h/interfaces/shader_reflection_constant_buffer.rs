@@ -39,8 +39,37 @@ impl<'r> ShaderReflectionConstantBuffer<'r> {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::*;
-    /// // TODO
+    /// # use thindx::*; let d3dc = D3DCompiler::new(47).unwrap();
+    /// let shader = d3dc.compile_from_file(
+    ///     r"test\data\library.hlsl", None, None, (), "lib_5_0",
+    ///     Compile::Debug, CompileEffect::None
+    /// ).unwrap().shader;
+    ///
+    /// let r : d3d11::LibraryReflection = d3dc.reflect_library(shader.get_buffer()).unwrap();
+    ///
+    /// let scale4 = (0..r.get_desc().unwrap().function_count).map(|i| r.get_function_by_index(i)).find(|f| {
+    ///     f.get_desc().ok().and_then(|d| d.name).map_or(false, |n| n.to_bytes() == b"scale4")
+    /// }).unwrap();
+    ///
+    /// let valid = scale4.get_constant_buffer_by_name("ExampleCBuffer");
+    /// let desc = valid.get_desc().unwrap();
+    /// println!("{:#?}", desc);
+    ///
+    /// let invalid = scale4.get_constant_buffer_by_name("Nonexistant");
+    /// assert_eq!(Some(E::FAIL), invalid.get_desc().err().map(|e| e.kind()));
+    /// ```
+    ///
+    /// ### Output
+    /// ```text
+    /// ShaderBufferDesc {
+    ///     name: Some(
+    ///         "ExampleCBuffer",
+    ///     ),
+    ///     type: CT::CBuffer,
+    ///     variables: 1,
+    ///     size: 16,
+    ///     flags: CBF::None,
+    /// }
     /// ```
     pub fn get_desc(&self) -> Result<ShaderBufferDesc<'r>, Error> {
         let mut desc = ShaderBufferDesc::default();
@@ -56,8 +85,42 @@ impl<'r> ShaderReflectionConstantBuffer<'r> {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::*;
-    /// // TODO
+    /// # use thindx::*; let d3dc = D3DCompiler::new(47).unwrap();
+    /// let shader = d3dc.compile_from_file(
+    ///     r"test\data\library.hlsl", None, None, (), "lib_5_0",
+    ///     Compile::Debug, CompileEffect::None
+    /// ).unwrap().shader;
+    ///
+    /// let r : d3d11::LibraryReflection = d3dc.reflect_library(shader.get_buffer()).unwrap();
+    ///
+    /// let scale4 = (0..r.get_desc().unwrap().function_count).map(|i| r.get_function_by_index(i)).find(|f| {
+    ///     f.get_desc().ok().and_then(|d| d.name).map_or(false, |n| n.to_bytes() == b"scale4")
+    /// }).unwrap();
+    ///
+    /// let valid = scale4.get_constant_buffer_by_name("ExampleCBuffer");
+    /// println!("{:#?}",         valid.get_variable_by_index(0).get_desc().unwrap());
+    /// assert_eq!(Some(E::FAIL), valid.get_variable_by_index(1).get_desc().err().map(|e| e.kind()));
+    ///
+    /// let invalid = scale4.get_constant_buffer_by_name("Nonexistant");
+    /// assert_eq!(Some(E::FAIL), invalid.get_variable_by_index(0).get_desc().err().map(|e| e.kind()));
+    /// assert_eq!(Some(E::FAIL), invalid.get_variable_by_index(1).get_desc().err().map(|e| e.kind()));
+    /// ```
+    ///
+    /// ### Output
+    /// ```text
+    /// ShaderVariableDesc {
+    ///     name: Some(
+    ///         "scale",
+    ///     ),
+    ///     start_offset: 0,
+    ///     size: 4,
+    ///     flags: SVF::Used,
+    ///     default_value: 0x0000000000000000,
+    ///     start_texture: 4294967295,
+    ///     texture_size: 0,
+    ///     start_sampler: 4294967295,
+    ///     sampler_size: 0,
+    /// }
     /// ```
     pub fn get_variable_by_index(&self, index: u32) -> ShaderReflectionVariable<'r> {
         let ptr = unsafe { self.ptr.as_ref().GetVariableByIndex(index) };
@@ -71,8 +134,42 @@ impl<'r> ShaderReflectionConstantBuffer<'r> {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::*;
-    /// // TODO
+    /// # use thindx::*; let d3dc = D3DCompiler::new(47).unwrap();
+    /// let shader = d3dc.compile_from_file(
+    ///     r"test\data\library.hlsl", None, None, (), "lib_5_0",
+    ///     Compile::Debug, CompileEffect::None
+    /// ).unwrap().shader;
+    ///
+    /// let r : d3d11::LibraryReflection = d3dc.reflect_library(shader.get_buffer()).unwrap();
+    ///
+    /// let scale4 = (0..r.get_desc().unwrap().function_count).map(|i| r.get_function_by_index(i)).find(|f| {
+    ///     f.get_desc().ok().and_then(|d| d.name).map_or(false, |n| n.to_bytes() == b"scale4")
+    /// }).unwrap();
+    ///
+    /// let valid = scale4.get_constant_buffer_by_name("ExampleCBuffer");
+    /// println!("{:#?}",         valid.get_variable_by_name("scale").get_desc().unwrap());
+    /// assert_eq!(Some(E::FAIL), valid.get_variable_by_name("nope" ).get_desc().err().map(|e| e.kind()));
+    ///
+    /// let invalid = scale4.get_constant_buffer_by_name("Nonexistant");
+    /// assert_eq!(Some(E::FAIL), invalid.get_variable_by_name("scale").get_desc().err().map(|e| e.kind()));
+    /// assert_eq!(Some(E::FAIL), invalid.get_variable_by_name("nope" ).get_desc().err().map(|e| e.kind()));
+    /// ```
+    ///
+    /// ### Output
+    /// ```text
+    /// ShaderVariableDesc {
+    ///     name: Some(
+    ///         "scale",
+    ///     ),
+    ///     start_offset: 0,
+    ///     size: 4,
+    ///     flags: SVF::Used,
+    ///     default_value: 0x0000000000000000,
+    ///     start_texture: 4294967295,
+    ///     texture_size: 0,
+    ///     start_sampler: 4294967295,
+    ///     sampler_size: 0,
+    /// }
     /// ```
     pub fn get_variable_by_name(&self, name: impl TryIntoAsCStr) -> ShaderReflectionVariable<'r> {
         let name = name.try_into().ok();
