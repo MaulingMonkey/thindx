@@ -1,0 +1,17 @@
+# https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[package]
+name            = "thindx"
+version         = "0.0.0-reserved"
+authors         = ["MaulingMonkey <git@maulingmonkey.com>"]
+edition         = "2018"
+repository      = "https://github.com/MaulingMonkey/thindx"
+documentation   = "https://docs.rs/thindx"
+license         = "Apache-2.0 OR MIT"
+readme          = "Readme.md"
+description     = "Thin DirectX wrappers (WIP, use directly from git for now)"
+
+[package.metadata.docs.rs]
+default-target  = "x86_64-pc-windows-msvc"
+targets         = ["x86_64-pc-windows-msvc", "i686-pc-windows-msvc"]
+all-features    = true
