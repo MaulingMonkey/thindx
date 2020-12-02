@@ -6,7 +6,7 @@ use winapi::um::d3d11shader::*;
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/ns-d3d11shader-d3d11_signature_parameter_desc)\]
 /// D3D11_SIGNATURE_PARAMETER_DESC
-#[derive(Clone, Copy, Default)]
+#[derive(Clone, Copy, Debug, Default)]
 #[repr(C)] pub struct SignatureParameterDesc<'s> {
     pub semantic_name:      Option<&'s AbiCStr>,
     pub semantic_index:     u32,

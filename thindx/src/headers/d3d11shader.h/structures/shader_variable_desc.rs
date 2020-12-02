@@ -9,7 +9,7 @@ use std::ptr::*;
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/ns-d3d11shader-d3d11_shader_variable_desc)\]
 /// D3D11_SHADER_VARIABLE_DESC
-#[derive(Clone, Copy)]
+#[derive(Clone, Copy, Debug)]
 #[repr(C)] pub struct ShaderVariableDesc<'s> {
     pub name:           Option<&'s AbiCStr>,
     pub start_offset:   u32,

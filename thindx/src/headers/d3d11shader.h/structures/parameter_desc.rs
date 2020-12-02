@@ -11,7 +11,7 @@ use winapi::um::d3d11shader::*;
 /// * [d3d11::FunctionLinkingGraph] for examples
 /// * [d3d11::FunctionLinkingGraph::set_input_signature]
 /// * [d3d11::FunctionLinkingGraph::set_output_signature]
-#[derive(Clone, Copy, Default)]
+#[derive(Clone, Copy, Debug, Default)]
 #[repr(C)] pub struct ParameterDesc<'s> {
     pub name:                   Option<&'s AbiCStr>,
     /// An input semantic name such as "POSITION0", "TEXCOORD0", "TEXCOORD1", etc.

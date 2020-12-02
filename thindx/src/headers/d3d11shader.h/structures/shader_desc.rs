@@ -6,7 +6,7 @@ use winapi::um::d3d11shader::*;
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/ns-d3d11shader-d3d11_shader_desc)\]
 /// D3D11_SHADER_DESC
-#[derive(Clone, Copy, Default)]
+#[derive(Clone, Copy, Debug, Default)]
 #[repr(C)] pub struct ShaderDesc<'s> {
     pub version:                        u32,
     pub creator:                        Option<&'s AbiCStr>,
