@@ -20,10 +20,10 @@ fn build(_args: std::env::Args) {
     std::env::set_var("RUSTDOCFLAGS", format!(r"--extend-css {css}", css = css.display()));
 
     run("cargo        fetch"                                );
-    run("cargo        check --frozen --workspace"           );
+    run("cargo        check --frozen --workspace --all-targets" );
     run("cargo +nightly doc --frozen --workspace --no-deps" );
     run("cargo         test --frozen --workspace"           );
-    run("cargo        build --frozen --workspace"           );
+    run("cargo        build --frozen --workspace --all-targets --exclude xtask");
 }
 
 fn check(mut args: std::env::Args) {
