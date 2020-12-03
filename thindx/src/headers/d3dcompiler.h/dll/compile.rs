@@ -96,7 +96,7 @@ impl D3DCompiler {
     ///     *   [D3DERR::INVALIDCALL]               - on invalid parameters such as nonexistant `target`s
     ///     *   [E::FAIL]                           - if the shader failed to compile
     ///
-    /// ### Example
+    /// ### Examples
     /// ```rust
     /// # use thindx::*; let compiler = D3DCompiler::new(47).unwrap();
     /// let pixel_shader = compiler.compile_from_file(
@@ -111,6 +111,7 @@ impl D3DCompiler {
     ///
     /// // TODO: defines/includes examples
     /// ```
+    /// [_examples::d3dcompiler_02_compile]<br>
     #[requires(!store)]
     // #[requires(d3dcompiler=47)] // ?
     pub fn compile_from_file<'s>(
@@ -182,7 +183,7 @@ impl D3DCompiler {
     ///     *   [D3DERR::INVALIDCALL]               - on invalid parameters such as nonexistant `target`s
     ///     *   [E::FAIL]                           - if the shader failed to compile
     ///
-    /// ### Example
+    /// ### Examples
     /// ```rust
     /// # use thindx::*; let compiler = D3DCompiler::new(47).unwrap();
     /// let basic_hlsl = std::fs::read(r"test\data\basic.hlsl").unwrap();
@@ -197,6 +198,7 @@ impl D3DCompiler {
     ///     Compile::Debug, CompileEffect::None,
     /// ).unwrap();
     /// ```
+    /// [_examples::d3dcompiler_02_compile]<br>
     #[requires(d3dcompiler=40)]
     pub fn compile<'s>(
         &self,
@@ -272,7 +274,7 @@ impl D3DCompiler {
     ///     *   [D3DERR::INVALIDCALL]               - on invalid parameters such as nonexistant `target`s
     ///     *   [E::FAIL]                           - if the shader failed to compile
     ///
-    /// ### Example
+    /// ### Examples
     /// ```rust
     /// # use thindx::*; let compiler = D3DCompiler::new(47).unwrap();
     /// let basic_hlsl = std::fs::read(r"test\data\basic.hlsl").unwrap();
@@ -287,6 +289,7 @@ impl D3DCompiler {
     ///     Compile::Debug, CompileEffect::None, CompileSecData::None, None,
     /// ).unwrap();
     /// ```
+    /// [_examples::d3dcompiler_02_compile]<br>
     ///
     /// ### Remarks
     /// The difference between [compile2](Self::compile2) and [compile](Self::compile) is that [compile2](Self::compile2)

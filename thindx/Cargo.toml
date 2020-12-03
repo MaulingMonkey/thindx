@@ -45,3 +45,6 @@ features = [
     "unknwnbase",
     "windef",
 ]
+
+[dev-dependencies]
+lazy_static     = "1.4"
