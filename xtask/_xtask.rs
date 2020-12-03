@@ -14,7 +14,11 @@ fn main() {
     }
 }
 
-fn build(_args: std::env::Args)        {
+fn build(_args: std::env::Args) {
+    // for some reason we need an abs path here, despite not requiring one when invoking `cargo doc` directly from the CLI
+    let css = std::env::current_dir().unwrap().join("thindx/doc/style.css");
+    std::env::set_var("RUSTDOCFLAGS", format!(r"--extend-css {css}", css = css.display()));
+
     run("cargo        fetch"                                );
     run("cargo        check --frozen --workspace"           );
     run("cargo +nightly doc --frozen --workspace --no-deps" );
