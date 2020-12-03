@@ -12,3 +12,6 @@ license         = "Apache-2.0 OR MIT"
 [[bin]]
 name            = "xtask"
 path            = "_xtask.rs"
+
+[dependencies]
+mmrbi           = "0.0.11"
