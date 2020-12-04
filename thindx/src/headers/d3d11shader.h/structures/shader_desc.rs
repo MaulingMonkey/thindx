@@ -12,7 +12,7 @@ use winapi::um::d3d11shader::*;
 /// *   [d3d11::ShaderReflection::get_desc]
 #[derive(Clone, Copy, Debug, Default)]
 #[repr(C)] pub struct ShaderDesc<'s> {
-    pub version:                        u32,
+    pub version:                        d3d11::ShaderVersion,
     pub creator:                        ConstCStrPtrNullIsEmpty<'s>,
     pub flags:                          Compile, // docs aren't super clear, but in testing this appears to be the right flag type
     pub constant_buffers:               u32,
