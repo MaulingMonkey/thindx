@@ -229,8 +229,8 @@ impl ShaderReflection {
     /// # use thindx::*;
     /// // TODO
     /// ```
-    pub fn get_requires_flags(&self) -> u64 { // TODO: flagify
-        unsafe { self.0.GetRequiresFlags() }
+    pub fn get_requires_flags(&self) -> ShaderRequires {
+        ShaderRequires::from_unchecked(unsafe { self.0.GetRequiresFlags() })
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getresourcebindingdesc)\]
