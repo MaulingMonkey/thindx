@@ -14,9 +14,11 @@
             let d3d  = unsafe { zeroed::<$d3d>() };
             assert_eq!( size_of_val(&thin),  size_of_val(&d3d),  "size_of {} != {}", stringify!($thin), stringify!($d3d));
             assert_eq!(align_of_val(&thin), align_of_val(&d3d), "align_of {} != {}", stringify!($thin), stringify!($d3d));
+            assert!(stringify!($d3d).to_lowercase().replace("_","").contains(stringify!($thin).to_lowercase().as_str()), "{} not included in {}'s name", stringify!($thin), stringify!($d3d));
             $(
                 assert_eq!(size_of_val(&thin.$thin_field),      size_of_val(&d3d.$d3d_field),       "size_of {}::{} != {}::{}", stringify!($thin), stringify!($thin_field), stringify!($d3d), stringify!($d3d_field));
                 assert_eq!(offset_of(&thin, &thin.$thin_field), offset_of(&d3d, &d3d.$d3d_field), "offset_of {}::{} != {}::{}", stringify!($thin), stringify!($thin_field), stringify!($d3d), stringify!($d3d_field));
+                assert!(stringify!($d3d_field).to_lowercase().replace("_","").contains(stringify!($thin_field).strip_prefix("r#").unwrap_or(stringify!($thin_field)).to_lowercase().replace("_","").as_str()), "{} not included in {}'s name", stringify!($thin_field), stringify!($d3d_field));
             )*
         }
     };
