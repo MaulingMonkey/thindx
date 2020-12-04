@@ -43,7 +43,13 @@ impl ReadOnlyBlob {
         unsafe { std::slice::from_raw_parts(ptr, size) }
     }
 
-    // as_bytes? bytes? to_bytes? iter?
+    pub fn as_bytes(&self) -> &[u8] {
+        self.get_buffer()
+    }
+
+    pub fn bytes<'s>(&'s self) -> impl Iterator<Item = u8> + 's {
+        self.get_buffer().iter().copied()
+    }
 }
 
 impl AsRef <[u8]> for ReadOnlyBlob { fn as_ref(&self) -> &[u8] { self.get_buffer() } }
