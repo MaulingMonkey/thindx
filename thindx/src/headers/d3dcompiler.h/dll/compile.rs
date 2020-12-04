@@ -202,7 +202,7 @@ impl D3DCompiler {
     #[requires(d3dcompiler=40)]
     pub fn compile<'s>(
         &self,
-        src_data:       &[u8],
+        src_data:       impl AsRef<[u8]>,
         source_name:    impl TryIntoAsOptCStr,
         defines:        impl AsShaderMacros,
         include:        impl AsID3DInclude,
@@ -215,6 +215,7 @@ impl D3DCompiler {
         let f           = self.D3DCompile.ok_or(Error::new("D3DCompile", THINERR::MISSING_DLL_EXPORT))?;
         let defines     = defines.as_shader_macros().map_err(|e| Error::new("D3DCompile", e))?;
 
+        let src_data    = src_data.as_ref();
         // Note: No error checking occurs for internal `\0`s - they will simply terminate the string earlier than expected.
         // Note: We should perhaps reject non-ASCII values instead of allowing UTF8
         let source_name = source_name   .try_into().map_err(|e| CompileError { kind: e, method: Some("D3DCompile"), shader: None, errors: None })?;
@@ -300,7 +301,7 @@ impl D3DCompiler {
     //#[requires(d3dcompiler=47)] // ?
     pub fn compile2<'s>(
         &self,
-        src_data:               &[u8],
+        src_data:               impl AsRef<[u8]>,
         source_name:            impl TryIntoAsOptCStr,
         defines:                impl AsShaderMacros,
         include:                impl AsID3DInclude,
@@ -315,6 +316,7 @@ impl D3DCompiler {
         let f           = self.D3DCompile2.ok_or(Error::new("D3DCompile2", THINERR::MISSING_DLL_EXPORT))?;
         let defines     = defines.as_shader_macros().map_err(|e| Error::new("D3DCompile2", e))?;
 
+        let src_data    = src_data.as_ref();
         // Note: No error checking occurs for internal `\0`s - they will simply terminate the string earlier than expected.
         // Note: We should perhaps reject non-ASCII values instead of allowing UTF8
         let source_name = source_name   .try_into().map_err(|e| CompileError { kind: e, method: Some("D3DCompile2"), shader: None, errors: None })?;
@@ -395,7 +397,7 @@ impl D3DCompiler {
     #[requires(d3dcompiler=40)]
     pub fn preprocess<'s>(
         &self,
-        src_data:       &[u8],
+        src_data:       impl AsRef<[u8]>,
         source_name:    impl TryIntoAsOptCStr,
         defines:        impl AsShaderMacros,
         include:        impl AsID3DInclude,
@@ -404,6 +406,7 @@ impl D3DCompiler {
         let f           = self.D3DPreprocess.ok_or(Error::new("D3DPreprocess", THINERR::MISSING_DLL_EXPORT))?;
         let defines     = defines.as_shader_macros().map_err(|e| Error::new("D3DPreprocess", e))?;
 
+        let src_data    = src_data.as_ref();
         // Note: No error checking occurs for internal `\0`s - they will simply terminate the string earlier than expected.
         // Note: We should perhaps reject non-ASCII values instead of allowing UTF8
         let source_name = source_name.try_into().map_err(|e| CompileError { kind: e, method: Some("D3DPreprocess"), shader: None, errors: None })?;
