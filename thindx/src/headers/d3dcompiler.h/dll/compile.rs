@@ -1,4 +1,5 @@
 use crate::*;
+use crate::d3d::*;
 
 use std::borrow::Cow;
 use std::fmt::{self, Debug, Display, Formatter};
@@ -8,7 +9,7 @@ use std::ptr::*;
 
 
 
-/// { code: [ReadOnlyBlob], errors: Option&lt;[ReadOnlyBlob]&gt; } returned by [D3DCompiler::compile]/[compile2](D3DCompiler::compile2)
+/// { code: [ReadOnlyBlob], errors: Option&lt;[ReadOnlyBlob]&gt; } returned by [Compiler::compile]/[compile2](Compiler::compile2)
 pub struct CompileResult {
     pub shader:     ReadOnlyBlob,
     pub errors:     Option<ReadOnlyBlob>,
@@ -69,7 +70,7 @@ impl Display for CompileError {
 
 
 /// <h1 id="compile" class="section-header"><a href="#compile">Compile & Preprocess HLSL to Bytecode</a></h1>
-impl D3DCompiler {
+impl Compiler {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dcompilefromfile)\]
     /// D3DCompileFromFile
     ///
@@ -98,7 +99,7 @@ impl D3DCompiler {
     ///
     /// ### Examples
     /// ```rust
-    /// # use thindx::*; let compiler = D3DCompiler::new(47).unwrap();
+    /// # use thindx::d3d::*; let compiler = Compiler::new(47).unwrap();
     /// let pixel_shader = compiler.compile_from_file(
     ///     r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0",
     ///     Compile::Debug, CompileEffect::None,
@@ -185,7 +186,7 @@ impl D3DCompiler {
     ///
     /// ### Examples
     /// ```rust
-    /// # use thindx::*; let compiler = D3DCompiler::new(47).unwrap();
+    /// # use thindx::d3d::*; let compiler = Compiler::new(47).unwrap();
     /// let basic_hlsl = std::fs::read(r"test\data\basic.hlsl").unwrap();
     ///
     /// let pixel_shader = compiler.compile(
@@ -277,7 +278,7 @@ impl D3DCompiler {
     ///
     /// ### Examples
     /// ```rust
-    /// # use thindx::*; let compiler = D3DCompiler::new(47).unwrap();
+    /// # use thindx::d3d::*; let compiler = Compiler::new(47).unwrap();
     /// let basic_hlsl = std::fs::read(r"test\data\basic.hlsl").unwrap();
     ///
     /// let pixel_shader = compiler.compile2(
@@ -375,7 +376,7 @@ impl D3DCompiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::*; let compiler = D3DCompiler::new(47).unwrap();
+    /// # use thindx::d3d::*; let compiler = Compiler::new(47).unwrap();
     /// let basic_hlsl = std::fs::read(r"test\data\basic.hlsl").unwrap();
     /// let ps = compiler.preprocess(&basic_hlsl, r"test\data\basic.hlsl", (), None).unwrap();
     /// println!("{}", String::from_utf8_lossy(ps.shader.get_buffer()));

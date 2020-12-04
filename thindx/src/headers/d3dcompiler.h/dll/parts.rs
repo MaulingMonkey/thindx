@@ -1,11 +1,12 @@
 use crate::*;
+use crate::d3d::*;
 
 use std::ptr::*;
 
 
 
 /// <h1 id="parts" class="section-header"><a href="#parts">Manipulate Bytecode by BlobPart</a></h1>
-impl D3DCompiler {
+impl Compiler {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dgetblobpart)\]
     /// D3DGetBlobPart
     ///
@@ -24,7 +25,7 @@ impl D3DCompiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::*; let compiler = D3DCompiler::new(47).unwrap();
+    /// # use thindx::d3d::*; let compiler = Compiler::new(47).unwrap();
     /// # let shader : ReadOnlyBlob = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap().shader;
     /// let shader2 = compiler.set_blob_part(
     ///     shader.get_buffer(), Blob::PrivateData, (), b"testing 123"
@@ -61,7 +62,7 @@ impl D3DCompiler {
     ///
     /// ### Example
     /// ```rust,no_run
-    /// # use thindx::*; let compiler = D3DCompiler::new(47).unwrap();
+    /// # use thindx::d3d::*; let compiler = Compiler::new(47).unwrap();
     /// # let shader_src = std::fs::read(r"test\data\basic.hlsl").unwrap();
     /// # let compiled_shader = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap().shader;
     /// // TODO: This doesn't seem to work?
@@ -96,7 +97,7 @@ impl D3DCompiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::*; let compiler = D3DCompiler::new(47).unwrap();
+    /// # use thindx::d3d::*; let compiler = Compiler::new(47).unwrap();
     /// # let shader = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap().shader;
     /// let signature = compiler.get_input_and_output_signature_blob(shader.get_buffer()).unwrap();
     /// println!("{:?}", signature.get_buffer());
@@ -130,7 +131,7 @@ impl D3DCompiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::*; let compiler = D3DCompiler::new(47).unwrap();
+    /// # use thindx::d3d::*; let compiler = Compiler::new(47).unwrap();
     /// # let shader = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap().shader;
     /// let signature = compiler.get_input_signature_blob(shader.get_buffer()).unwrap();
     /// println!("{:?}", signature.get_buffer());
@@ -164,7 +165,7 @@ impl D3DCompiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::*; let compiler = D3DCompiler::new(47).unwrap();
+    /// # use thindx::d3d::*; let compiler = Compiler::new(47).unwrap();
     /// # let shader = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap().shader;
     /// let signature = compiler.get_output_signature_blob(shader.get_buffer()).unwrap();
     /// println!("{:?}", signature.get_buffer());
@@ -201,7 +202,7 @@ impl D3DCompiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::*; let compiler = D3DCompiler::new(47).unwrap();
+    /// # use thindx::d3d::*; let compiler = Compiler::new(47).unwrap();
     /// # let shader : ReadOnlyBlob = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap().shader;
     /// let shader2 = compiler.set_blob_part(
     ///     shader.get_buffer(), Blob::PrivateData, (), b"testing 123"
@@ -243,7 +244,7 @@ impl D3DCompiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::*; let compiler = D3DCompiler::new(47).unwrap();
+    /// # use thindx::d3d::*; let compiler = Compiler::new(47).unwrap();
     /// let shader : ReadOnlyBlob = compiler.compile_from_file(
     ///     r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0",
     ///     Compile::Debug, CompileEffect::None

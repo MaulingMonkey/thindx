@@ -1,4 +1,5 @@
 use crate::*;
+use crate::d3d::*;
 
 use winapi::um::d3d11shader::*;
 
@@ -6,6 +7,9 @@ use winapi::um::d3d11shader::*;
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/ns-d3d11shader-d3d11_shader_desc)\]
 /// D3D11_SHADER_DESC
+///
+/// ### See Also
+/// *   [d3d11::ShaderReflection::get_desc]
 #[derive(Clone, Copy, Debug, Default)]
 #[repr(C)] pub struct ShaderDesc<'s> {
     pub version:                        u32,

@@ -3,9 +3,7 @@
 //! ### Why not `winapi` directly?
 //! 
 //! *   This crate aims to make fns safe/sound/slightly rusty when possible
-//! *   Attempts to verify API soundness through unit tests, even if this will mostly test
-//!     [D3DCompiler](https://docs.microsoft.com/en-us/windows/win32/direct3dhlsl/dx-graphics-d3dcompiler-reference)'s
-//!     behavior.
+//! *   Attempts to verify API soundness through unit tests, even if this will mostly test DirectX's behavior.
 //! *   Doc comments for one-stop intellisense, safety documentation, etc.
 //!
 //! ### Why not `<other graphics crate>`?
@@ -33,7 +31,7 @@
 //! older versions unless you've tested yourself.
 
 
-#![allow(broken_intra_doc_links)] // temporary
+#![deny(broken_intra_doc_links)]
 #![deny(unreachable_patterns)]
 
 #[macro_use] mod macros; #[cfg(test)] use macros::*;
@@ -48,7 +46,8 @@ pub mod ctypes {
 
 /// Direct3D related types and APIs used across multiple Direct3D versions.
 pub mod d3d {
-    // todo
+    pub use crate::d3dcommon_h::*;
+    pub use crate::d3dcompiler_h::*;
 }
 
 /// Direct3D 11 related types and APIs (including shader reflection APIs)
@@ -59,8 +58,8 @@ pub mod d3d11 {
 
 
 #[path=r"headers\d3d11shader.h\d3d11shader.rs"] mod d3d11shader_h;  // d3d11 mod
-#[path=r"headers\d3dcommon.h\d3dcommon.rs"]     mod d3dcommon_h;    pub use d3dcommon_h::*;
-#[path=r"headers\d3dcompiler.h\d3dcompiler.rs"] mod d3dcompiler_h;  pub use d3dcompiler_h::*;
+#[path=r"headers\d3dcommon.h\d3dcommon.rs"]     mod d3dcommon_h;    // d3d mod
+#[path=r"headers\d3dcompiler.h\d3dcompiler.rs"] mod d3dcompiler_h;  // d3d mod
 #[path=r"headers\unknwn.h\unknwn.rs"]           mod unknwn_h;       pub use unknwn_h::*;
 
 #[path=r"traits\_traits.rs"]            mod traits;         pub use traits::*;

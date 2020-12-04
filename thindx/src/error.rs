@@ -1,4 +1,5 @@
 use crate::*;
+use crate::d3d::*;
 
 use winapi::shared::winerror::*;
 use winapi::um::d3dcommon::ID3DBlob;
@@ -13,7 +14,7 @@ use std::fmt::{self, Debug, Display, Formatter};
 pub struct Error {
     pub(crate) kind:       ErrorKind,
     pub(crate) method:     Option<&'static str>,
-    pub(crate) errors:     Option<ReadOnlyBlob>,
+    pub(crate) errors:     Option<d3d::ReadOnlyBlob>,
 }
 
 impl Error {

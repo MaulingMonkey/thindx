@@ -16,7 +16,7 @@ use std::ptr::NonNull;
 /// This shader-reflection interface provides access to variable type.
 ///
 /// ### See Also
-/// *   [ShaderReflection::]
+/// *   [d3d11::ShaderReflectionVariable::get_type]
 #[derive(Clone)] #[repr(transparent)]
 pub struct ShaderReflectionType<'r> {
     ptr:        NonNull<ID3D11ShaderReflectionType>,

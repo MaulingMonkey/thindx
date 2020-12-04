@@ -14,7 +14,7 @@ Thin DirectX wrappers for Rust.
 ### Why not [winapi] directly?
 
 *   This crate aims to make fns safe/sound/slightly rusty when possible
-*   Attempts to verify API soundness through mass unit tests, even if they mostly test D3DCompiler's behavior.
+*   Attempts to verify API soundness through mass unit tests, even if they mostly test DirectX's behavior.
 *   Doc comments for one-stop intellisense, safety documentation, etc.
 
 ### Why not `<other graphics crate>`?

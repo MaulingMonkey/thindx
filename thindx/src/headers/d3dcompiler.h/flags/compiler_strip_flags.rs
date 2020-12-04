@@ -7,7 +7,7 @@ use winapi::um::d3dcompiler::*;
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/ne-d3dcompiler-d3dcompiler_strip_flags)\]
 /// DWORD / D3DCOMPILER_STRIP_FLAGS / D3DCOMPILER_STRIP_*
 ///
-/// Flags controlling what data is stripped by [D3DCompiler::strip_shader]
+/// Flags controlling what data is stripped by [d3d::Compiler::strip_shader]
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)] pub struct CompilerStripFlags(D3DCOMPILER_STRIP_FLAGS);
 #[doc(hidden)] pub use CompilerStripFlags as CompilerStrip;

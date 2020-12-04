@@ -14,8 +14,8 @@ use std::ptr::NonNull;
 /// This shader-reflection interface provides access to a constant buffer.
 ///
 /// ### See Also
-/// *   [ShaderReflection::get_constant_buffer_by_index]
-/// *   [ShaderReflection::get_constant_buffer_by_name]
+/// *   [d3d11::ShaderReflection::get_constant_buffer_by_index]
+/// *   [d3d11::ShaderReflection::get_constant_buffer_by_name]
 #[derive(Clone)] #[repr(transparent)]
 pub struct ShaderReflectionConstantBuffer<'r> {
     ptr:        NonNull<ID3D11ShaderReflectionConstantBuffer>,
@@ -39,7 +39,7 @@ impl<'r> ShaderReflectionConstantBuffer<'r> {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::*; let d3dc = D3DCompiler::new(47).unwrap();
+    /// # use thindx::{*, d3d::*}; let d3dc = Compiler::new(47).unwrap();
     /// let shader = d3dc.compile_from_file(
     ///     r"test\data\library.hlsl", None, None, (), "lib_5_0",
     ///     Compile::Debug, CompileEffect::None
@@ -85,7 +85,7 @@ impl<'r> ShaderReflectionConstantBuffer<'r> {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::*; let d3dc = D3DCompiler::new(47).unwrap();
+    /// # use thindx::{*, d3d::*}; let d3dc = Compiler::new(47).unwrap();
     /// let shader = d3dc.compile_from_file(
     ///     r"test\data\library.hlsl", None, None, (), "lib_5_0",
     ///     Compile::Debug, CompileEffect::None
@@ -134,7 +134,7 @@ impl<'r> ShaderReflectionConstantBuffer<'r> {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::*; let d3dc = D3DCompiler::new(47).unwrap();
+    /// # use thindx::{*, d3d::*}; let d3dc = Compiler::new(47).unwrap();
     /// let shader = d3dc.compile_from_file(
     ///     r"test\data\library.hlsl", None, None, (), "lib_5_0",
     ///     Compile::Debug, CompileEffect::None

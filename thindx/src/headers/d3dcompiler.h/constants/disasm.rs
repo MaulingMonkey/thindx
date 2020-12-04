@@ -8,7 +8,7 @@ use winapi::um::d3dcompiler::*;
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3ddisassembleregion#parameters)\]
 /// UINT / D3D_DISASM_\*
 ///
-/// Flags controlling how [D3DCompiler::disassemble_region] disassembles the compiled shader data.
+/// Flags controlling how [d3d::Compiler::disassemble_region] disassembles the compiled shader data.
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)] pub struct Disasm(UINT);
 
@@ -39,7 +39,7 @@ flags! {
     /// Enable the output of instruction offsets.
     pub const EnableInstructionOffset           : Disasm = Disasm(D3D_DISASM_ENABLE_INSTRUCTION_OFFSET);
 
-    /// This flag has no effect in [D3DCompiler::disassemble_region].
+    /// This flag has no effect in [d3d::Compiler::disassemble_region].
     /// Cycle information comes from the trace; therefore, cycle information is available only in [D3DDisassemble11Trace]'s trace disassembly.
     ///
     /// [D3DDisassemble11Trace]:    https://docs.microsoft.com/en-us/windows/win32/api/d3d11shadertracing/nf-d3d11shadertracing-d3ddisassemble11trace
@@ -67,7 +67,7 @@ flags! {
     /// Enable the output of instruction offsets.
     pub const ENABLE_INSTRUCTION_OFFSET         : Disasm = Disasm(D3D_DISASM_ENABLE_INSTRUCTION_OFFSET);
 
-    /// This flag has no effect in [D3DCompiler::disassemble_region].
+    /// This flag has no effect in [Compiler::disassemble_region].
     /// Cycle information comes from the trace; therefore, cycle information is available only in [D3DDisassemble11Trace]'s trace disassembly.
     ///
     /// [D3DDisassemble11Trace]:    https://docs.microsoft.com/en-us/windows/win32/api/d3d11shadertracing/nf-d3d11shadertracing-d3ddisassemble11trace

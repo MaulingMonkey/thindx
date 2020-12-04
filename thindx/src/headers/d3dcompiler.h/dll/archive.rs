@@ -1,4 +1,5 @@
 use crate::*;
+use crate::d3d::*;
 
 use std::convert::TryInto;
 use std::ptr::*;
@@ -6,7 +7,7 @@ use std::ptr::*;
 
 
 /// <h1 id="archive" class="section-header"><a href="#archive">Manipulate Bytecode Archives</a></h1>
-impl D3DCompiler {
+impl Compiler {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dcompressshaders)\]
     /// D3DCompressShaders
     ///
@@ -22,7 +23,7 @@ impl D3DCompiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::*; let compiler = D3DCompiler::new(47).unwrap();
+    /// # use thindx::d3d::*; let compiler = Compiler::new(47).unwrap();
     /// let basic_hlsl  = std::fs::read(r"test\data\basic.hlsl").unwrap();
     /// let plain_txt   = std::fs::read(r"test\data\plain.txt").unwrap();
     /// let tocompress = [
@@ -86,7 +87,7 @@ impl D3DCompiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::*; let compiler = D3DCompiler::new(47).unwrap();
+    /// # use thindx::d3d::*; let compiler = Compiler::new(47).unwrap();
     /// # let basic_hlsl  = std::fs::read(r"test\data\basic.hlsl").unwrap();
     /// # let plain_txt   = std::fs::read(r"test\data\plain.txt").unwrap();
     /// # let tocompress = [
@@ -124,7 +125,7 @@ impl D3DCompiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::*; let compiler = D3DCompiler::new(47).unwrap();
+    /// # use thindx::d3d::*; let compiler = Compiler::new(47).unwrap();
     /// # let basic_hlsl  = std::fs::read(r"test\data\basic.hlsl").unwrap();
     /// # let plain_txt   = std::fs::read(r"test\data\plain.txt").unwrap();
     /// # let tocompress = [
@@ -182,7 +183,7 @@ impl D3DCompiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::*; let compiler = D3DCompiler::new(47).unwrap();
+    /// # use thindx::d3d::*; let compiler = Compiler::new(47).unwrap();
     /// # let basic_hlsl  = std::fs::read(r"test\data\basic.hlsl").unwrap();
     /// # let plain_txt   = std::fs::read(r"test\data\plain.txt").unwrap();
     /// # let tocompress = [

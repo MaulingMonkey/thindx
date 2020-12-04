@@ -1,4 +1,5 @@
 use crate::*;
+use crate::d3d::*;
 
 use winapi::shared::minwindef::LPVOID;
 use winapi::um::d3d11shader::*;
@@ -9,6 +10,9 @@ use std::ptr::*;
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/ns-d3d11shader-d3d11_shader_variable_desc)\]
 /// D3D11_SHADER_VARIABLE_DESC
+///
+/// ### See Also
+/// *   [d3d11::ShaderReflectionVariable::get_desc]
 #[derive(Clone, Copy, Debug)]
 #[repr(C)] pub struct ShaderVariableDesc<'s> {
     pub name:           ConstCStrPtrNullIsEmpty<'s>, // maybe never null?

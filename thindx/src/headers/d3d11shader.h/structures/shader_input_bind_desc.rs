@@ -1,4 +1,5 @@
 use crate::*;
+use crate::d3d::*;
 
 use winapi::um::d3d11shader::*;
 
@@ -6,6 +7,12 @@ use winapi::um::d3d11shader::*;
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/ns-d3d11shader-d3d11_shader_input_bind_desc)\]
 /// D3D11_SHADER_INPUT_BIND_DESC
+///
+/// ### See Also
+/// *   [d3d11::FunctionReflection::get_resource_binding_desc]
+/// *   [d3d11::FunctionReflection::get_resource_binding_desc_by_name]
+/// *   [d3d11::ShaderReflection::get_resource_binding_desc]
+/// *   [d3d11::ShaderReflection::get_resource_binding_desc_by_name]
 #[derive(Clone, Copy, Debug, Default)]
 #[repr(C)] pub struct ShaderInputBindDesc<'s> {
     pub name:           ConstCStrPtrNullIsEmpty<'s>, // maybe never null?

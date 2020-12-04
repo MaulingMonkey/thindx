@@ -1,6 +1,5 @@
 use crate::*;
-
-use winapi::um::d3d11shader::*;
+use crate::d3d::*;
 
 
 
@@ -33,7 +32,7 @@ impl<'s> ParameterDesc<'s> {
     ///
     /// ### Example
     /// ```rust
-    /// use thindx::{cstr, SVT, SVC, Interpolation, PF, d3d11::ParameterDesc};
+    /// use thindx::{cstr, d3d::{SVT, SVC, Interpolation, PF}, d3d11::ParameterDesc};
     /// let parameters = [
     ///     ParameterDesc::new(cstr!("inputPos"),  cstr!("POSITION0"), SVT::Float, SVC::Vector, 1, 3, Interpolation::Linear, PF::In, 0, 0, 0, 0),
     ///     ParameterDesc::new(cstr!("inputTex"),  cstr!("TEXCOORD0"), SVT::Float, SVC::Vector, 1, 2, Interpolation::Linear, PF::In, 0, 0, 0, 0),
@@ -63,7 +62,7 @@ impl<'s> ParameterDesc<'s> {
     }
 }
 
-test_layout! { ParameterDesc => unsafe D3D11_PARAMETER_DESC {
+test_layout! { ParameterDesc => unsafe winapi::um::d3d11shader::D3D11_PARAMETER_DESC {
     name                    => Name,
     semantic_name           => SemanticName,
     type_                   => Type,

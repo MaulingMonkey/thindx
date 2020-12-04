@@ -1,10 +1,11 @@
-use crate::*;
+use crate::d3d::*;
+
 use std::path::*;
 
 
 
 /// <h1 id="constructors" class="section-header"><a href="#constructors">Constructors</a></h1>
-impl D3DCompiler {
+impl Compiler {
     /// Attempt to load d3dcompiler.dll
     ///
     /// ### Arguments
@@ -14,15 +15,15 @@ impl D3DCompiler {
     ///
     /// ### Returns
     /// *   Err([std::io::Error])   - if `d3dcompiler_{version}.dll` could not be loaded
-    /// *   Ok([D3DCompiler])       - `d3dcompiler_{version}.dll` was found
+    /// *   Ok([Compiler])       - `d3dcompiler_{version}.dll` was found
     ///
     /// ### Example
     /// ```rust
-    /// use thindx::*;
-    /// let compiler = D3DCompiler::new(47).unwrap();
-    /// let compiler = D3DCompiler::new("d3dcompiler_47.dll").unwrap();
+    /// use thindx::d3d;
+    /// let compiler = d3d::Compiler::new(47).unwrap();
+    /// let compiler = d3d::Compiler::new("d3dcompiler_47.dll").unwrap();
     /// ```
-    pub fn new(version: impl D3DCompilerNewVersion) -> Result<Self, std::io::Error> {
+    pub fn new(version: impl CompilerNewVersion) -> Result<Self, std::io::Error> {
         let lib = version.try_load()?;
         unsafe{Ok(Self{
             D3DCompile:                         lib.sym_opt("D3DCompile\0"),
@@ -53,18 +54,18 @@ impl D3DCompiler {
     }
 }
 
-#[doc(hidden)] pub trait D3DCompilerNewVersion : sealed::D3DCompilerNewVersion {}
-impl<T: sealed::D3DCompilerNewVersion> D3DCompilerNewVersion for T {}
+#[doc(hidden)] pub trait CompilerNewVersion : sealed::CompilerNewVersion {}
+impl<T: sealed::CompilerNewVersion> CompilerNewVersion for T {}
 
 mod sealed {
     use super::*;
-    pub trait D3DCompilerNewVersion             { fn try_load(self) -> minidl::Result<minidl::Library>; }
-    impl D3DCompilerNewVersion for i32          { fn try_load(self) -> minidl::Result<minidl::Library> { minidl::Library::load(format!("d3dcompiler_{}.dll", self)) } }
-    impl D3DCompilerNewVersion for u32          { fn try_load(self) -> minidl::Result<minidl::Library> { minidl::Library::load(format!("d3dcompiler_{}.dll", self)) } }
-    impl D3DCompilerNewVersion for usize        { fn try_load(self) -> minidl::Result<minidl::Library> { minidl::Library::load(format!("d3dcompiler_{}.dll", self)) } }
-    impl D3DCompilerNewVersion for u64          { fn try_load(self) -> minidl::Result<minidl::Library> { minidl::Library::load(format!("d3dcompiler_{}.dll", self)) } }
-    impl D3DCompilerNewVersion for &'_ Path     { fn try_load(self) -> minidl::Result<minidl::Library> { minidl::Library::load(self) } }
-    impl D3DCompilerNewVersion for &'_ PathBuf  { fn try_load(self) -> minidl::Result<minidl::Library> { minidl::Library::load(self) } }
-    impl D3DCompilerNewVersion for &'_ str      { fn try_load(self) -> minidl::Result<minidl::Library> { minidl::Library::load(self) } }
-    impl D3DCompilerNewVersion for &'_ String   { fn try_load(self) -> minidl::Result<minidl::Library> { minidl::Library::load(self) } }
+    pub trait CompilerNewVersion             { fn try_load(self) -> minidl::Result<minidl::Library>; }
+    impl CompilerNewVersion for i32          { fn try_load(self) -> minidl::Result<minidl::Library> { minidl::Library::load(format!("d3dcompiler_{}.dll", self)) } }
+    impl CompilerNewVersion for u32          { fn try_load(self) -> minidl::Result<minidl::Library> { minidl::Library::load(format!("d3dcompiler_{}.dll", self)) } }
+    impl CompilerNewVersion for usize        { fn try_load(self) -> minidl::Result<minidl::Library> { minidl::Library::load(format!("d3dcompiler_{}.dll", self)) } }
+    impl CompilerNewVersion for u64          { fn try_load(self) -> minidl::Result<minidl::Library> { minidl::Library::load(format!("d3dcompiler_{}.dll", self)) } }
+    impl CompilerNewVersion for &'_ Path     { fn try_load(self) -> minidl::Result<minidl::Library> { minidl::Library::load(self) } }
+    impl CompilerNewVersion for &'_ PathBuf  { fn try_load(self) -> minidl::Result<minidl::Library> { minidl::Library::load(self) } }
+    impl CompilerNewVersion for &'_ str      { fn try_load(self) -> minidl::Result<minidl::Library> { minidl::Library::load(self) } }
+    impl CompilerNewVersion for &'_ String   { fn try_load(self) -> minidl::Result<minidl::Library> { minidl::Library::load(self) } }
 }

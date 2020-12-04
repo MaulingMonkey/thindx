@@ -1,4 +1,5 @@
 use crate::*;
+use crate::d3d::*;
 use crate::d3d11::*;
 
 use std::ptr::*;
@@ -11,8 +12,8 @@ use std::ptr::*;
 /// A linker interface is used to link a shader module.
 ///
 /// ### See Also
-/// *   [D3DCompiler::create_linker] to create [Linker]s
-/// *   [FunctionLinkingGraph] for examples
+/// *   [d3d::Compiler::create_linker] to create [Linker]s
+/// *   [d3d11::FunctionLinkingGraph] for examples
 #[derive(Clone)] #[repr(transparent)]
 pub struct Linker(pub(crate) mcom::Rc<winapi::um::d3d11shader::ID3D11Linker>);
 

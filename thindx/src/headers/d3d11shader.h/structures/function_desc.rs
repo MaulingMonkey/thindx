@@ -1,5 +1,6 @@
 use crate::*;
 use crate::ctypes::*;
+use crate::d3d::*;
 
 use winapi::um::d3d11shader::*;
 

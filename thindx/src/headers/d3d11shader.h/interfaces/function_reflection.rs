@@ -14,8 +14,8 @@ use std::ptr::*;
 /// A function-reflection interface accesses function info.
 ///
 /// ### See Also
-/// *   [LibraryReflection::get_function_by_index]
-/// *   [LibraryReflection::functions]
+/// *   [d3d11::LibraryReflection::get_function_by_index]
+/// *   [d3d11::LibraryReflection::functions]
 #[derive(Clone)] #[repr(transparent)]
 pub struct FunctionReflection<'r> {
     ptr:        NonNull<ID3D11FunctionReflection>,
@@ -43,7 +43,7 @@ impl<'r> FunctionReflection<'r> {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::*; let d3dc = D3DCompiler::new(47).unwrap();
+    /// # use thindx::{*, d3d::*}; let d3dc = Compiler::new(47).unwrap();
     /// let shader = d3dc.compile_from_file(
     ///     r"test\data\library.hlsl", None, None, (), "lib_5_0",
     ///     Compile::Debug, CompileEffect::None
@@ -87,7 +87,7 @@ impl<'r> FunctionReflection<'r> {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::*; let d3dc = D3DCompiler::new(47).unwrap();
+    /// # use thindx::{*, d3d::*}; let d3dc = Compiler::new(47).unwrap();
     /// let shader = d3dc.compile_from_file(
     ///     r"test\data\library.hlsl", None, None, (), "lib_5_0",
     ///     Compile::Debug, CompileEffect::None
@@ -133,7 +133,7 @@ impl<'r> FunctionReflection<'r> {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::*; let d3dc = D3DCompiler::new(47).unwrap();
+    /// # use thindx::{*, d3d::*}; let d3dc = Compiler::new(47).unwrap();
     /// let shader = d3dc.compile_from_file(
     ///     r"test\data\library.hlsl", None, None, (), "lib_5_0",
     ///     Compile::Debug, CompileEffect::None

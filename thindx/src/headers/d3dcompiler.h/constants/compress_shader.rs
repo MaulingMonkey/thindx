@@ -8,7 +8,7 @@ const D3D_COMPRESS_SHADER_KEEP_ALL_PARTS : UINT = 0x00000001; // not part of win
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dcompressshaders#parameters)\]
 /// UINT / D3D_COMPRESS_SHADER_*
 ///
-/// Flags controlling the behavior of [D3DCompiler::compress_shaders]
+/// Flags controlling the behavior of [d3d::Compiler::compress_shaders]
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)] pub struct CompressShader(UINT);
 

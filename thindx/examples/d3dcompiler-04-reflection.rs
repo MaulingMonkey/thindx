@@ -1,9 +1,10 @@
-//! Use [D3DCompiler] to inspect shader bytecode
+//! Use [d3d::Compiler] to inspect shader bytecode
 use thindx::*;
+use thindx::d3d::*;
 //use thindx::d3d11::*;
 
 fn dump_library() {
-    let compiler = D3DCompiler::new(47).unwrap();
+    let compiler = d3d::Compiler::new(47).unwrap();
     let library = compiler.compile_from_file(r"test\data\library.hlsl", None, None, (), "lib_5_0", Compile::Debug, CompileEffect::None).unwrap();
     let _library = compiler.reflect_library::<d3d11::LibraryReflection>(library.shader.as_bytes()).unwrap();
     let library  = compiler.reflect_library_11(&library.shader).unwrap(); // equivalent shorthand
@@ -19,7 +20,7 @@ fn dump_library() {
 }
 
 fn dump_shader() {
-    let compiler = D3DCompiler::new(47).unwrap();
+    let compiler = d3d::Compiler::new(47).unwrap();
     let shader  = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "vs_main", "vs_4_0", Compile::Debug, CompileEffect::None).unwrap();
     let _shader = compiler.reflect::<d3d11::ShaderReflection>(shader.shader.as_bytes()).unwrap();
     let shader  = compiler.reflect11(&shader.shader).unwrap(); // equivalent shorthand

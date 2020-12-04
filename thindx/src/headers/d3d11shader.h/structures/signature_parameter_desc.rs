@@ -1,4 +1,5 @@
 use crate::*;
+use crate::d3d::*;
 
 use winapi::um::d3d11shader::*;
 
@@ -6,6 +7,11 @@ use winapi::um::d3d11shader::*;
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/ns-d3d11shader-d3d11_signature_parameter_desc)\]
 /// D3D11_SIGNATURE_PARAMETER_DESC
+///
+/// ### See Also
+/// *   [d3d11::ShaderReflection::get_input_parameter_desc]
+/// *   [d3d11::ShaderReflection::get_output_parameter_desc]
+/// *   [d3d11::ShaderReflection::get_patch_constant_parameter_desc]
 #[derive(Clone, Copy, Debug, Default)]
 #[repr(C)] pub struct SignatureParameterDesc<'s> {
     pub semantic_name:      ConstCStrPtrNullIsEmpty<'s>, // maybe never null?

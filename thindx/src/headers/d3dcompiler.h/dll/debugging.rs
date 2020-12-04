@@ -1,4 +1,5 @@
 use crate::*;
+use crate::d3d::*;
 
 use std::ptr::*;
 
@@ -13,7 +14,7 @@ pub struct DisassembledRegion {
 
 
 /// <h1 id="debugging" class="section-header"><a href="#debugging">Bytecode Debugging</a></h1>
-impl D3DCompiler {
+impl Compiler {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3ddisassemble)\]
     /// D3DDisassemble
     ///
@@ -31,7 +32,7 @@ impl D3DCompiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::*; let compiler = D3DCompiler::new(47).unwrap();
+    /// # use thindx::d3d::*; let compiler = Compiler::new(47).unwrap();
     /// # let shader = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap().shader;
     /// # let shader = shader.get_buffer();
     /// let dis = compiler.disassemble(shader, Disasm::None, "// example comment\n").unwrap();
@@ -110,7 +111,7 @@ impl D3DCompiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::*; let compiler = D3DCompiler::new(47).unwrap();
+    /// # use thindx::d3d::*; let compiler = Compiler::new(47).unwrap();
     /// # let shader = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap().shader;
     /// # let shader = shader.get_buffer();
     /// let dr = compiler.disassemble_region(
@@ -192,7 +193,7 @@ impl D3DCompiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::*; let compiler = D3DCompiler::new(47).unwrap();
+    /// # use thindx::d3d::*; let compiler = Compiler::new(47).unwrap();
     /// # let shader = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap().shader;
     /// println!("{}", compiler.get_trace_instruction_offsets_count(
     ///     shader.get_buffer(), GetInstOffsets::None, 0, std::usize::MAX
@@ -230,7 +231,7 @@ impl D3DCompiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::*; let compiler = D3DCompiler::new(47).unwrap();
+    /// # use thindx::d3d::*; let compiler = Compiler::new(47).unwrap();
     /// # let shader = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap().shader;
     /// let mut offsets = [0; 128];
     /// let offsets : &[usize] = compiler.get_trace_instruction_offsets_inplace(
@@ -270,7 +271,7 @@ impl D3DCompiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::*; let compiler = D3DCompiler::new(47).unwrap();
+    /// # use thindx::d3d::*; let compiler = Compiler::new(47).unwrap();
     /// # let shader = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap().shader;
     /// let offsets : Vec<usize> = compiler.get_trace_instruction_offsets(
     ///     shader.get_buffer(), GetInstOffsets::None, 0, std::usize::MAX

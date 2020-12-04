@@ -8,7 +8,7 @@ use winapi::um::d3dcompiler::*;
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dgettraceinstructionoffsets#parameters)\]
 /// UINT / D3D_GET_INST_OFFSETS_*
 ///
-/// [D3DCompiler::get_trace_instruction_offsets] `flags`
+/// [d3d::Compiler::get_trace_instruction_offsets] `flags`
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)] pub struct GetInstOffsets(UINT);
 

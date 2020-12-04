@@ -1,4 +1,5 @@
 use crate::*;
+use crate::d3d::*;
 
 use winapi::Interface;
 
@@ -7,7 +8,7 @@ use std::ptr::*;
 
 
 /// <h1 id="reflection" class="section-header"><a href="#reflection">Bytecode Reflection</a></h1>
-impl D3DCompiler {
+impl Compiler {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dreflect)\]
     /// D3DReflect
     ///
@@ -27,7 +28,7 @@ impl D3DCompiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::*; let compiler = D3DCompiler::new(47).unwrap();
+    /// # use thindx::{*, d3d::*}; let compiler = Compiler::new(47).unwrap();
     /// let shader = compiler.compile_from_file(
     ///     r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0",
     ///     Compile::Debug, CompileEffect::None
@@ -73,7 +74,7 @@ impl D3DCompiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::*; let compiler = D3DCompiler::new(47).unwrap();
+    /// # use thindx::{*, d3d::*}; let compiler = Compiler::new(47).unwrap();
     /// let shader = compiler.compile_from_file(
     ///     r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0",
     ///     Compile::Debug, CompileEffect::None
@@ -113,7 +114,7 @@ impl D3DCompiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::*; let compiler = D3DCompiler::new(47).unwrap();
+    /// # use thindx::{*, d3d::*}; let compiler = Compiler::new(47).unwrap();
     /// let shader = compiler.compile_from_file(
     ///     r"test\data\library.hlsl", None, None, (), "lib_5_0",
     ///     Compile::Debug, CompileEffect::None
@@ -162,7 +163,7 @@ impl D3DCompiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::*; let compiler = D3DCompiler::new(47).unwrap();
+    /// # use thindx::{*, d3d::*}; let compiler = Compiler::new(47).unwrap();
     /// let shader = compiler.compile_from_file(
     ///     r"test\data\library.hlsl", None, None, (), "lib_5_0",
     ///     Compile::Debug, CompileEffect::None
@@ -182,7 +183,7 @@ impl D3DCompiler {
 }
 
 #[test] fn library_reflection() {
-    let d3dc = D3DCompiler::new(47).unwrap();
+    let d3dc = Compiler::new(47).unwrap();
 
     let shader = d3dc.compile_from_file(
         r"test\data\library.hlsl", None, None, (), "lib_5_0",

@@ -1,4 +1,5 @@
 use crate::*;
+use crate::d3d::*;
 use crate::d3d11::*;
 
 
@@ -7,6 +8,10 @@ use crate::d3d11::*;
 /// ID3D11ShaderReflection
 ///
 /// A shader-reflection interface accesses shader information.
+///
+/// ### See Also
+/// *   [d3d::Compiler::reflect]
+/// *   [d3d::Compiler::reflect11]
 #[derive(Clone)] #[repr(transparent)]
 pub struct ShaderReflection(pub(crate) mcom::Rc<winapi::um::d3d11shader::ID3D11ShaderReflection>);
 

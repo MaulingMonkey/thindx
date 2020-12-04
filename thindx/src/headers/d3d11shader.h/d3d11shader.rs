@@ -22,8 +22,6 @@ mod interfaces {
 }
 
 mod structures {
-    #![cfg_attr(not(test), allow(unused_imports))] // TODO: temporary
-
     mod function_desc;                      pub use function_desc::*;
     mod library_desc;                       pub use library_desc::*;
     mod parameter_desc;                     pub use parameter_desc::*;

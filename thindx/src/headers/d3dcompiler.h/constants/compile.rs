@@ -11,9 +11,9 @@ type D3DCOMPILE = u32; // there's no actual type
 /// Flags controlling how HLSL shaders are compiled to bytecode.
 ///
 /// ### See Also
-/// *   [D3DCompiler::compile_from_file]
-/// *   [D3DCompiler::compile]
-/// *   [D3DCompiler::compile2]
+/// *   [d3d::Compiler::compile_from_file]
+/// *   [d3d::Compiler::compile]
+/// *   [d3d::Compiler::compile2]
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)] pub struct Compile(D3DCOMPILE);
 

@@ -11,7 +11,8 @@ use std::iter::Iterator;
 /// A library-reflection interface accesses library info.
 ///
 /// ### See Also
-/// *   [D3DCompiler::reflect_library]
+/// *   [d3d::Compiler::reflect_library]
+/// *   [d3d::Compiler::reflect_library_11]
 #[derive(Clone)] #[repr(transparent)]
 pub struct LibraryReflection(pub(crate) mcom::Rc<winapi::um::d3d11shader::ID3D11LibraryReflection>);
 
@@ -26,7 +27,7 @@ impl LibraryReflection {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::*; let d3dc = D3DCompiler::new(47).unwrap();
+    /// # use thindx::{*, d3d::*}; let d3dc = Compiler::new(47).unwrap();
     /// let shader = d3dc.compile_from_file(
     ///     r"test\data\library.hlsl", None, None, (), "lib_5_0",
     ///     Compile::Debug, CompileEffect::None
@@ -62,7 +63,7 @@ impl LibraryReflection {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::*; let d3dc = D3DCompiler::new(47).unwrap();
+    /// # use thindx::{*, d3d::*}; let d3dc = Compiler::new(47).unwrap();
     /// let shader = d3dc.compile_from_file(
     ///     r"test\data\library.hlsl", None, None, (), "lib_5_0",
     ///     Compile::Debug, CompileEffect::None
@@ -110,7 +111,7 @@ impl LibraryReflection {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::*; let d3dc = D3DCompiler::new(47).unwrap();
+    /// # use thindx::{*, d3d::*}; let d3dc = Compiler::new(47).unwrap();
     /// let shader = d3dc.compile_from_file(
     ///     r"test\data\library.hlsl", None, None, (), "lib_5_0",
     ///     Compile::Debug, CompileEffect::None

@@ -1,4 +1,5 @@
 use crate::*;
+use crate::d3d::*;
 
 use winapi::um::d3d11shader::*;
 
@@ -12,7 +13,7 @@ use winapi::um::d3d11shader::*;
 ///
 /// ### Example
 /// ```rust
-/// # use thindx::*; let d3dc = D3DCompiler::new(47).unwrap();
+/// # use thindx::{*, d3d::*}; let d3dc = Compiler::new(47).unwrap();
 /// let shader = d3dc.compile_from_file(
 ///     r"test\data\library.hlsl", None, None, (), "lib_5_0",
 ///     Compile::Debug, CompileEffect::None

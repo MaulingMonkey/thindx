@@ -1,8 +1,10 @@
-//! Use [D3DCompiler] to create a [d3d11::FunctionLinkingGraph] and create shaders
-use thindx::{*, d3d11::*};
+//! Use [d3d::Compiler] to create a [d3d11::FunctionLinkingGraph] and create shaders
+use thindx::*;
+use thindx::d3d::*;
+use thindx::d3d11::*;
 
 fn main() {
-    let compiler = D3DCompiler::new(47).unwrap();
+    let compiler = d3d::Compiler::new(47).unwrap();
     let lib_source = b"export float4 xyz1(float3 v) { return float4(v, 1.0); }";
     let lib_bytecode = compiler.compile(lib_source, "example.hlsl", None, None, (), "lib_5_0", Compile::OptimizationLevel3, CompileEffect::None).unwrap();
     let lib = compiler.load_module(lib_bytecode.shader.get_buffer()).unwrap();

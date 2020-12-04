@@ -1,9 +1,9 @@
-//! Use [D3DCompiler::compile] and friends to compile HLSL to bytecode
+//! Use [d3d::Compiler::compile] and friends to compile HLSL to bytecode
 #![allow(unused_variables)]
-use thindx::*;
+use thindx::d3d::{self, *};
 
 fn main() {
-    let compiler = D3DCompiler::new(47).unwrap();
+    let compiler = d3d::Compiler::new(47).unwrap();
     let basic_hlsl   : &[u8] = include_bytes!(r"..\test\data\basic.hlsl");
     let library_hlsl : &[u8] = include_bytes!(r"..\test\data\library.hlsl");
 

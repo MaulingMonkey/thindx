@@ -1,9 +1,10 @@
 use crate::*;
+use crate::d3d::*;
 
 use std::ptr::*;
 
 /// <h1 id="d3d11" class="section-header"><a href="#d3d11">D3D11 Factories & APIs</a></h1>
-impl D3DCompiler {
+impl Compiler {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dcreatefunctionlinkinggraph)\]
     /// D3DCreateFunctionLinkingGraph
     ///
@@ -21,7 +22,7 @@ impl D3DCompiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::*; let compiler = D3DCompiler::new(47).unwrap();
+    /// # use thindx::*; let compiler = d3d::Compiler::new(47).unwrap();
     /// let flg: d3d11::FunctionLinkingGraph = compiler.create_function_linking_graph(None).unwrap();
     /// ```
     #[requires(d3dcompiler=47)]
@@ -49,7 +50,7 @@ impl D3DCompiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::*; let compiler = D3DCompiler::new(47).unwrap();
+    /// # use thindx::*; let compiler = d3d::Compiler::new(47).unwrap();
     /// let linker : d3d11::Linker = compiler.create_linker().unwrap();
     /// ```
     #[requires(d3dcompiler=47)]
@@ -80,7 +81,7 @@ impl D3DCompiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::*; let compiler = D3DCompiler::new(47).unwrap();
+    /// # use thindx::d3d::*; let compiler = Compiler::new(47).unwrap();
     /// let source = "export float4 example(float4 i) { return 2*i; }";
     /// let CompileResult { shader: code_blob, errors: error_blob } = compiler.compile(
     ///     source.as_bytes(), "example.hlsl",

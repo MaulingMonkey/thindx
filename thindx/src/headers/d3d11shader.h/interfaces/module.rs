@@ -10,8 +10,8 @@ use std::ptr::*;
 /// A module interface creates an instance of a module that is used for resource rebinding.
 ///
 /// ### See Also
-/// *   [D3DCompiler::load_module] to create [Module]s
-/// *   [FunctionLinkingGraph] for examples
+/// *   [d3d::Compiler::load_module] to create [Module]s
+/// *   [d3d11::FunctionLinkingGraph] for examples
 #[derive(Clone)] #[repr(transparent)]
 pub struct Module(pub(crate) mcom::Rc<winapi::um::d3d11shader::ID3D11Module>);
 
