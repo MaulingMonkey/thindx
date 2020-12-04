@@ -78,11 +78,12 @@ impl Compiler {
     #[requires(d3dcompiler=40)]
     pub fn disassemble<'s>(
         &self,
-        src_data:           &[u8],
+        src_data:           impl AsRef<[u8]>,
         flags:              impl Into<Disasm>,
         comments:           impl TryIntoAsOptCStr,
     ) -> Result<ReadOnlyBlob, Error> {
         let f = self.D3DDisassemble.ok_or(Error::new("D3DDisassemble", THINERR::MISSING_DLL_EXPORT))?;
+        let src_data = src_data.as_ref();
         let flags = flags.into().into();
         let comments = comments.try_into().map_err(|e| Error::new("D3DDisassemble", e))?;
         let comments = comments.as_opt_cstr();
@@ -161,13 +162,14 @@ impl Compiler {
     #[requires(d3dcompiler=44)]
     pub fn disassemble_region<'s>(
         &self,
-        src_data:           &[u8],
+        src_data:           impl AsRef<[u8]>,
         flags:              impl Into<Disasm>,
         comments:           impl TryIntoAsOptCStr,
         start_byte_offset:  usize,
         num_insts:          usize,
     ) -> Result<DisassembledRegion, Error> {
         let f = self.D3DDisassembleRegion.ok_or(Error::new("D3DDisassembleRegion", THINERR::MISSING_DLL_EXPORT))?;
+        let src_data = src_data.as_ref();
         let flags = flags.into().into();
         let comments = comments.try_into().map_err(|e| Error::new("D3DDisassembleRegion", e))?;
         let comments = comments.as_opt_cstr();
@@ -207,12 +209,13 @@ impl Compiler {
     #[requires(d3dcompiler=44)]
     pub fn get_trace_instruction_offsets_count(
         &self,
-        src_data:           &[u8],
+        src_data:           impl AsRef<[u8]>,
         flags:              impl Into<GetInstOffsets>,
         start_inst_index:   usize,
         num_insts:          usize,
     ) -> Result<usize, Error> {
         let f = self.D3DGetTraceInstructionOffsets.ok_or(Error::new("D3DGetTraceInstructionOffsets", THINERR::MISSING_DLL_EXPORT))?;
+        let src_data = src_data.as_ref();
         let mut n = 0;
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), flags.into().into(), start_inst_index, num_insts, null_mut(), &mut n) };
         Error::check("D3DGetTraceInstructionOffsets", hr)?;
@@ -247,12 +250,13 @@ impl Compiler {
     #[requires(d3dcompiler=44)]
     pub fn get_trace_instruction_offsets_inplace<'o>(
         &self,
-        src_data:           &[u8],
+        src_data:           impl AsRef<[u8]>,
         flags:              impl Into<GetInstOffsets>,
         start_inst_index:   usize,
         offsets:            &'o mut [usize],
     ) -> Result<&'o [usize], Error> {
         let f = self.D3DGetTraceInstructionOffsets.ok_or(Error::new("D3DGetTraceInstructionOffsets", THINERR::MISSING_DLL_EXPORT))?;
+        let src_data = src_data.as_ref();
         let mut n = 0;
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), flags.into().into(), start_inst_index, offsets.len(), offsets.as_mut_ptr(), &mut n) };
         Error::check("D3DGetTraceInstructionOffsets", hr)?;
@@ -286,12 +290,13 @@ impl Compiler {
     #[requires(d3dcompiler=44)]
     pub fn get_trace_instruction_offsets(
         &self,
-        src_data:           &[u8],
+        src_data:           impl AsRef<[u8]>,
         flags:              impl Into<GetInstOffsets>,
         start_inst_index:   usize,
         num_insts:          usize,
     ) -> Result<Vec<usize>, Error> {
         let f = self.D3DGetTraceInstructionOffsets.ok_or(Error::new("D3DGetTraceInstructionOffsets", THINERR::MISSING_DLL_EXPORT))?;
+        let src_data = src_data.as_ref();
         let flags = flags.into().into();
 
         let mut n = 0;
