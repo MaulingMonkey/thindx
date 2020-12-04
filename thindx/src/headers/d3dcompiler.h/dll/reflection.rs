@@ -54,6 +54,43 @@ impl D3DCompiler {
         Ok(unsafe { I::from_raw(reflector.cast()) })
     }
 
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dreflect)\]
+    /// D3DReflect
+    ///
+    /// Gets a pointer to a reflection interface.
+    ///
+    /// ### Arguments
+    /// *   `src_data`  - A compiled HLSL shader.
+    ///
+    /// ### Returns
+    /// *   Err(`e`) where `e.kind()` == [THINERR::MISSING_DLL_EXPORT]    - `d3dcompiler_4?.dll` and earlier
+    /// *   Err(`e`) where `e.kind()` == [D3DERR::INVALIDARG]               - On invalid `I`
+    /// *   Err(`e`) where `e.kind()` == [D3DERR::INVALIDCALL]              - On invalid `src_data`
+    /// *   Ok(`()`)
+    ///
+    /// ### See Also
+    /// *   [d3d11::ShaderReflection] for a more complete example
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use thindx::*; let compiler = D3DCompiler::new(47).unwrap();
+    /// let shader = compiler.compile_from_file(
+    ///     r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0",
+    ///     Compile::Debug, CompileEffect::None
+    /// ).unwrap().shader;
+    ///
+    /// // Should succeed:
+    /// let r = compiler.reflect11(&shader).unwrap();
+    ///
+    /// // Invalid `src_data`:
+    /// let r = compiler.reflect11(&[]);
+    /// assert_eq!(Some(D3DERR::INVALIDCALL), r.err().map(|e| e.kind()));
+    /// ```
+    #[requires(d3dcompiler=40)]
+    pub fn reflect11(&self, src_data: impl AsRef<[u8]>) -> Result<d3d11::ShaderReflection, Error> {
+        self.reflect(src_data.as_ref())
+    }
+
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dreflectlibrary)\]
     /// D3DReflectLibrary
     ///
@@ -101,6 +138,46 @@ impl D3DCompiler {
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), &C::Raw::uuidof(), &mut reflector) };
         Error::check("D3DReflectLibrary", hr)?;
         Ok(unsafe { C::from_raw(reflector.cast()) })
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dreflectlibrary)\]
+    /// D3DReflectLibrary
+    ///
+    /// Creates a library-reflection interface from source data that contains an HLSL library of functions.
+    ///
+    /// > **Note:** This function is part of the HLSL shader linking technology that you can use on all Direct3D 11
+    /// > platforms to create precompiled HLSL functions, package them into libraries, and link them into full shaders
+    /// > at run time.
+    ///
+    /// ### Arguments
+    /// *   `src_data`  - An HLSL library of functions.
+    ///
+    /// ### Returns
+    /// *   Err(`e`) where `e.kind()` == [THINERR::MISSING_DLL_EXPORT]    - `d3dcompiler_4?.dll` and earlier
+    /// *   Err(`e`) where `e.kind()` == [D3DERR::INVALIDCALL]              - On invalid `src_data`
+    /// *   Ok(`()`)
+    ///
+    /// ### See Also
+    /// *   [d3d11::LibraryReflection] for a more complete example
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use thindx::*; let compiler = D3DCompiler::new(47).unwrap();
+    /// let shader = compiler.compile_from_file(
+    ///     r"test\data\library.hlsl", None, None, (), "lib_5_0",
+    ///     Compile::Debug, CompileEffect::None
+    /// ).unwrap().shader;
+    ///
+    /// // Should succeed:
+    /// let r = compiler.reflect_library_11(&shader).unwrap();
+    ///
+    /// // Invalid `src_data`:
+    /// let r = compiler.reflect_library_11(&[]);
+    /// assert_eq!(Some(D3DERR::INVALIDCALL), r.err().map(|e| e.kind()));
+    /// ```
+    //#[requires(d3dcompiler=47)] // ?
+    pub fn reflect_library_11(&self, src_data: impl AsRef<[u8]>) -> Result<d3d11::LibraryReflection, Error> {
+        self.reflect_library(src_data.as_ref())
     }
 }
 
