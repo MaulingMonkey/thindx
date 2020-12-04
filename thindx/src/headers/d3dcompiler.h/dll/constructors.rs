@@ -1,10 +1,16 @@
 use crate::*;
+use std::path::*;
 
 
 
 /// <h1 id="constructors" class="section-header"><a href="#constructors">Constructors</a></h1>
 impl D3DCompiler {
-    /// Attempt to load `d3dcompiler_{version}.dll` from system paths.
+    /// Attempt to load d3dcompiler.dll
+    ///
+    /// ### Arguments
+    /// *   `version` - the d3dcompiler.dll version to load
+    ///     * [i32], [u32], [usize], [u64] - load `d3dcompiler_{version}.dll`
+    ///     * &[str], &[String], &[Path], or &[PathBuf] - load `{version}`
     ///
     /// ### Returns
     /// *   Err([std::io::Error])   - if `d3dcompiler_{version}.dll` could not be loaded
@@ -14,10 +20,10 @@ impl D3DCompiler {
     /// ```rust
     /// use thindx::*;
     /// let compiler = D3DCompiler::new(47).unwrap();
+    /// let compiler = D3DCompiler::new("d3dcompiler_47.dll").unwrap();
     /// ```
-    pub fn new(version: u32) -> Result<Self, std::io::Error> {
-        let name = format!("d3dcompiler_{}.dll", version);
-        let lib = minidl::Library::load(name)?;
+    pub fn new(version: impl D3DCompilerNewVersion) -> Result<Self, std::io::Error> {
+        let lib = version.try_load()?;
         unsafe{Ok(Self{
             D3DCompile:                         lib.sym_opt("D3DCompile\0"),
             D3DCompile2:                        lib.sym_opt("D3DCompile2\0"),
@@ -45,4 +51,20 @@ impl D3DCompiler {
             D3DWriteBlobToFile:                 lib.sym_opt("D3DWriteBlobToFile\0"),
         })}
     }
+}
+
+#[doc(hidden)] pub trait D3DCompilerNewVersion : sealed::D3DCompilerNewVersion {}
+impl<T: sealed::D3DCompilerNewVersion> D3DCompilerNewVersion for T {}
+
+mod sealed {
+    use super::*;
+    pub trait D3DCompilerNewVersion             { fn try_load(self) -> minidl::Result<minidl::Library>; }
+    impl D3DCompilerNewVersion for i32          { fn try_load(self) -> minidl::Result<minidl::Library> { minidl::Library::load(format!("d3dcompiler_{}.dll", self)) } }
+    impl D3DCompilerNewVersion for u32          { fn try_load(self) -> minidl::Result<minidl::Library> { minidl::Library::load(format!("d3dcompiler_{}.dll", self)) } }
+    impl D3DCompilerNewVersion for usize        { fn try_load(self) -> minidl::Result<minidl::Library> { minidl::Library::load(format!("d3dcompiler_{}.dll", self)) } }
+    impl D3DCompilerNewVersion for u64          { fn try_load(self) -> minidl::Result<minidl::Library> { minidl::Library::load(format!("d3dcompiler_{}.dll", self)) } }
+    impl D3DCompilerNewVersion for &'_ Path     { fn try_load(self) -> minidl::Result<minidl::Library> { minidl::Library::load(self) } }
+    impl D3DCompilerNewVersion for &'_ PathBuf  { fn try_load(self) -> minidl::Result<minidl::Library> { minidl::Library::load(self) } }
+    impl D3DCompilerNewVersion for &'_ str      { fn try_load(self) -> minidl::Result<minidl::Library> { minidl::Library::load(self) } }
+    impl D3DCompilerNewVersion for &'_ String   { fn try_load(self) -> minidl::Result<minidl::Library> { minidl::Library::load(self) } }
 }
