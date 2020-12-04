@@ -8,7 +8,7 @@ use winapi::um::d3d11shader::*;
 /// D3D11_SHADER_BUFFER_DESC
 #[derive(Clone, Copy, Debug, Default)]
 #[repr(C)] pub struct ShaderBufferDesc<'s> {
-    pub name:                           Option<&'s AbiCStr>,
+    pub name:                           ConstCStrPtrNullIsEmpty<'s>, // maybe never null?
     pub r#type:                         CBufferType,
     pub variables:                      u32,
     pub size:                           u32,

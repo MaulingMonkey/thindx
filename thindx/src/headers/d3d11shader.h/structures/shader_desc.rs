@@ -9,7 +9,7 @@ use winapi::um::d3d11shader::*;
 #[derive(Clone, Copy, Debug, Default)]
 #[repr(C)] pub struct ShaderDesc<'s> {
     pub version:                        u32,
-    pub creator:                        Option<&'s AbiCStr>,
+    pub creator:                        ConstCStrPtrNullIsEmpty<'s>,
     pub flags:                          Compile, // docs aren't super clear, but in testing this appears to be the right flag type
     pub constant_buffers:               u32,
     pub bound_resources:                u32,

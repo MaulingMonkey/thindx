@@ -36,7 +36,7 @@ use winapi::um::d3d11shader::*;
 /// ```
 #[derive(Clone, Copy, Debug, Default)]
 #[repr(C)] pub struct LibraryDesc<'s> {
-    pub creator:        Option<&'s AbiCStr>,
+    pub creator:        ConstCStrPtrNullIsEmpty<'s>, // maybe never null?
     pub flags:          Compile,
     pub function_count: u32,
 }

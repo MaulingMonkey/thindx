@@ -120,7 +120,7 @@ impl D3DCompiler {
     for i in 0..desc.function_count {
         let f : d3d11::FunctionReflection = r.get_function_by_index(i);
         let desc = f.get_desc().unwrap();
-        if desc.name.map_or(false, |n| n.to_bytes() == b"xyz1") {
+        if desc.name.to_bytes() == b"xyz1" {
             found_xyz1 = true;
             assert_eq!(desc.function_parameter_count,   1   );
             assert_eq!(desc.has_return,                 true);

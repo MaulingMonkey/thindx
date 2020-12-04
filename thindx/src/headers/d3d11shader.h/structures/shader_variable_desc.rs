@@ -11,7 +11,7 @@ use std::ptr::*;
 /// D3D11_SHADER_VARIABLE_DESC
 #[derive(Clone, Copy, Debug)]
 #[repr(C)] pub struct ShaderVariableDesc<'s> {
-    pub name:           Option<&'s AbiCStr>,
+    pub name:           ConstCStrPtrNullIsEmpty<'s>, // maybe never null?
     pub start_offset:   u32,
     pub size:           u32,
     pub flags:          ShaderVariableFlags,
@@ -25,7 +25,7 @@ use std::ptr::*;
 impl Default for ShaderVariableDesc<'static> {
     fn default() -> Self {
         Self {
-            name:           None,
+            name:           Default::default(),
             start_offset:   0,
             size:           0,
             flags:          ShaderVariableFlags::None,

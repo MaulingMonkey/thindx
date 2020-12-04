@@ -51,9 +51,9 @@ impl<'r> FunctionReflection<'r> {
     ///
     /// let r : d3d11::LibraryReflection = d3dc.reflect_library(shader.get_buffer()).unwrap();
     ///
-    /// let scale4 = r.functions().unwrap().find(|f| {
-    ///     f.get_desc().ok().and_then(|d| d.name).map_or(false, |n| n.to_bytes() == b"scale4")
-    /// }).unwrap();
+    /// let scale4 = r.functions().unwrap().find(|f|
+    ///     f.get_desc().unwrap().name.to_bytes() == b"scale4"
+    /// ).unwrap();
     ///
     /// let valid = scale4.get_constant_buffer_by_index(0);
     /// let desc = valid.get_desc().unwrap();
@@ -95,9 +95,9 @@ impl<'r> FunctionReflection<'r> {
     ///
     /// let r : d3d11::LibraryReflection = d3dc.reflect_library(shader.get_buffer()).unwrap();
     ///
-    /// let scale4 = r.functions().unwrap().find(|f| {
-    ///     f.get_desc().ok().and_then(|d| d.name).map_or(false, |n| n.to_bytes() == b"scale4")
-    /// }).unwrap();
+    /// let scale4 = r.functions().unwrap().find(|f|
+    ///     f.get_desc().unwrap().name.to_bytes() == b"scale4"
+    /// ).unwrap();
     ///
     /// let valid = scale4.get_constant_buffer_by_name("ExampleCBuffer");
     /// let desc = valid.get_desc().unwrap();
