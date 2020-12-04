@@ -15,4 +15,9 @@ fn main() {
 
     // And lazy_static! should be too
     lazy_static::lazy_static! { static ref D3DC2 : D3DCompiler = D3DCompiler::new(47).unwrap(); }
+
+    // Init failures are simple std::io::Error s:
+    let err : std::io::Error = D3DCompiler::new(9001).map(|_d3dc|()).unwrap_err();
+    assert_eq!(err.kind(), std::io::ErrorKind::NotFound);
+    println!("{}", err);
 }
