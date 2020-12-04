@@ -39,8 +39,12 @@
 #[macro_use] mod macros; #[cfg(test)] use macros::*;
 use thindx_zzz_internal_proc_macros::*;
 
-pub use abibool::bool32;
 mod abi_cstr; pub use abi_cstr::*;
+
+pub mod ctypes {
+    pub use ::abibool::bool32 as BOOL;
+    pub use ::abibool::bool8 as BOOLEAN;
+}
 
 /// Direct3D related types and APIs used across multiple Direct3D versions.
 pub mod d3d {

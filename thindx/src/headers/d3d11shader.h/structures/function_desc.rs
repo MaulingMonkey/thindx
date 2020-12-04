@@ -1,4 +1,5 @@
 use crate::*;
+use crate::ctypes::*;
 
 use winapi::um::d3d11shader::*;
 
@@ -80,9 +81,9 @@ use winapi::um::d3d11shader::*;
     pub required_feature_flags:         ShaderRequires,
     pub name:                           ConstCStrPtrNullIsEmpty<'s>, // maybe never null?
     pub function_parameter_count:       i32,
-    pub has_return:                     bool32,
-    pub has_10_level_9_vertex_shader:   bool32,
-    pub has_10_level_9_pixel_shader:    bool32,
+    pub has_return:                     BOOL,
+    pub has_10_level_9_vertex_shader:   BOOL,
+    pub has_10_level_9_pixel_shader:    BOOL,
 }
 
 impl FunctionDesc<'_> {

@@ -1,4 +1,5 @@
 #[allow(unused_imports)] use crate::*;
+use crate::ctypes::BOOL;
 
 use winapi::shared::basetsd::*;
 use winapi::shared::guiddef::*;
