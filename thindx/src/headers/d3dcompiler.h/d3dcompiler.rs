@@ -27,5 +27,6 @@ mod flags {
 }
 
 mod structures {
+    mod compiler_diagnostics;           pub use compiler_diagnostics::*;
     mod shader_data;                    pub use shader_data::*;
 }
