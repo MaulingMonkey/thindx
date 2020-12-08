@@ -15,13 +15,14 @@ convert!(unsafe Unknown, winapi::um::unknwnbase::IUnknown);
 
 /// Auto trait implemented for anything that can chain-[Deref] to [thindx::Unknown](crate::Unknown).
 pub trait AsUnknown {
-    fn as_unk(&self) -> &Unknown;
+    /// Chain-deref all the way down to [Unknown].
+    fn as_unknown(&self) -> &Unknown;
 }
 
 impl AsUnknown for Unknown {
-    fn as_unk(&self) -> &Unknown { self }
+    fn as_unknown(&self) -> &Unknown { self }
 }
 
 impl<T: Deref> AsUnknown for T where T::Target : AsUnknown {
-    fn as_unk(&self) -> &Unknown { (**self).as_unk() }
+    fn as_unknown(&self) -> &Unknown { (**self).as_unknown() }
 }
