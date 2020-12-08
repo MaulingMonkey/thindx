@@ -18,17 +18,17 @@ use std::ptr::*;
 }
 
 impl<'d> ShaderData<'d> {
-    pub fn bytes(&self) -> &'d [u8] {
+    pub fn as_bytes(&self) -> &'d [u8] {
         unsafe { std::slice::from_raw_parts(self.data.pBytecode.cast(), self.data.BytecodeLength) }
     }
 }
 
 impl AsRef<[u8]> for ShaderData<'_> {
-    fn as_ref(&self) -> &[u8] { self.bytes() }
+    fn as_ref(&self) -> &[u8] { self.as_bytes() }
 }
 
 impl Borrow<[u8]> for ShaderData<'_> {
-    fn borrow(&self) -> &[u8] { self.bytes() }
+    fn borrow(&self) -> &[u8] { self.as_bytes() }
 }
 
 impl<'d> From<&'d [u8]> for ShaderData<'d> {
@@ -57,7 +57,7 @@ impl Default for ShaderData<'_> {
 
 impl Deref for ShaderData<'_> {
     type Target = [u8];
-    fn deref(&self) -> &Self::Target { self.bytes() }
+    fn deref(&self) -> &Self::Target { self.as_bytes() }
 }
 
 #[test] fn layout() {
