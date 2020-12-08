@@ -219,8 +219,7 @@ impl FunctionLinkingGraph {
     /// Gets the error from the last function call of the function-linking-graph.
     ///
     /// ### Returns
-    /// *   Ok(Some([ReadOnlyBlob]))    - The errors in question
-    /// *   Ok(None)                    - There were no errors
+    /// *   Ok([TextBlob])              - The errors in question.  If there were no previous errors, the text blob will be empty.
     /// *   Err([ErrorKind])            - Ironically, there was an error in attempting to acquire the errors.
     ///
     /// ### Example
@@ -228,14 +227,14 @@ impl FunctionLinkingGraph {
     /// # use thindx::{*, d3d::*, d3d11::*};
     /// # let compiler = Compiler::new(47).unwrap();
     /// # let flg : FunctionLinkingGraph = compiler.create_function_linking_graph(None).unwrap();
-    /// let errors : Option<ReadOnlyBlob> = flg.get_last_error().unwrap();
-    /// assert!(errors.is_none(), "No errors were reported by flg");
+    /// let errors : TextBlob = flg.get_last_error().unwrap();
+    /// assert!(errors.is_empty(), "No errors were reported by flg");
     /// ```
-    pub fn get_last_error(&self) -> Result<Option<ReadOnlyBlob>, Error> {
+    pub fn get_last_error(&self) -> Result<TextBlob, Error> {
         let mut errors = null_mut();
         let hr = unsafe { self.0.GetLastError(&mut errors) };
         Error::check("ID3D11FunctionLinkingGraph::GetLastError", hr)?;
-        Ok(unsafe { ReadOnlyBlob::from_raw_opt(errors) })
+        Ok(TextBlob::new(unsafe { ReadOnlyBlob::from_raw_opt(errors) }))
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionlinkinggraph-passvalue)\]
