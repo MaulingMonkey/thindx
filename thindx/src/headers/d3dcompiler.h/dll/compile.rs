@@ -157,7 +157,7 @@ impl Compiler {
     ///
     /// // TODO: defines/includes examples
     /// ```
-    /// [_examples::d3dcompiler_02_compile]<br>
+    /// [examples::d3dcompiler_02_compile]<br>
     #[requires(!store)]
     // #[requires(d3dcompiler=47)] // ?
     pub fn compile_from_file<'s>(
@@ -244,7 +244,7 @@ impl Compiler {
     ///     Compile::Debug, CompileEffect::None,
     /// ).unwrap();
     /// ```
-    /// [_examples::d3dcompiler_02_compile]<br>
+    /// [examples::d3dcompiler_02_compile]<br>
     #[requires(d3dcompiler=40)]
     pub fn compile<'s>(
         &self,
@@ -336,7 +336,7 @@ impl Compiler {
     ///     Compile::Debug, CompileEffect::None, CompileSecData::None, None,
     /// ).unwrap();
     /// ```
-    /// [_examples::d3dcompiler_02_compile]<br>
+    /// [examples::d3dcompiler_02_compile]<br>
     ///
     /// ### Remarks
     /// The difference between [compile2](Self::compile2) and [compile](Self::compile) is that [compile2](Self::compile2)

@@ -69,4 +69,5 @@ mod error;                      pub use error::*;
 pub mod errors;                 #[doc(no_inline)] pub use errors::*;
 
 #[cfg(doc)] #[path="_examples.rs"] pub mod _examples;
+#[cfg(doc)] #[doc(hidden)] pub use _examples as examples;
 #[cfg(doc)] pub mod _headers;
