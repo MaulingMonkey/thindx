@@ -11,26 +11,48 @@ use std::str::Utf8Error;
 pub struct AbiCStr(());
 
 impl AbiCStr {
+    /// Convert a raw C-string into an &[AbiCStr].  Note that the lifetime of the returned reference is unbounded!
+    ///
+    /// ### Safety
+    /// *   `ptr` cannot be null
+    /// *   `ptr` must point to a `\0`-terminated C string
+    /// *   The underlying C-string cannot change for the duration of the &[AbiCStr]'s lifetime.
+    /// *   It is very very very easy to accidentally extend &[AbiCStr]'s lifetime too far - be careful!
     pub unsafe fn from_ptr_unbounded<'unbounded>(ptr: *const c_char) -> &'unbounded AbiCStr {
         &*(ptr as *const Self)
     }
 
+    /// Treat `self` as a `\0`-terminated C string.
     pub fn as_ptr(&self) -> *const c_char {
         (self as *const Self) as *const c_char
     }
 
+    /// Convert a raw slice of bytes to a &[AbiCStr].  `bytes` should end with `\0` but contain no interior `\0`s otherwise.
     pub fn from_bytes_with_nul(bytes: &[u8]) -> Result<&AbiCStr, FromBytesWithNulError> {
         CStr::from_bytes_with_nul(bytes).map(<&AbiCStr>::from)
     }
 
+    /// Convert a raw slice of bytes to a &[AbiCStr].  The resulting string will be terminated at the first `\0` in `bytes`.
+    ///
+    /// ### Safety
+    /// *   `bytes` must contain at least one `\0`.
     pub unsafe fn from_bytes_with_nul_unchecked(bytes: &[u8]) -> &AbiCStr {
         AbiCStr::from_ptr_unbounded(bytes.as_ptr() as *const _)
     }
 
+    /// Convert self to a [std::ffi::CStr].  O(n) to find the terminal `\0`.
     pub fn to_cstr(&self) -> &CStr                  { unsafe { CStr::from_ptr(self.as_ptr()) } }
+
+    /// Convert self to a &\[[u8]\] slice, **excluding** the terminal `\0`.  O(n) to find the terminal `\0`.
     pub fn to_bytes(&self) -> &[u8]                 { self.to_cstr().to_bytes() }
+
+    /// Convert self to a &\[[u8]\] slice, including the terminal `\0`.  O(n) to find the terminal `\0`.
     pub fn to_bytes_with_nul(&self) -> &[u8]        { self.to_cstr().to_bytes_with_nul() }
+
+    /// Convert self to a &[str].  O(n) to find the terminal `\0` and validate UTF8.
     pub fn to_str(&self) -> Result<&str, Utf8Error> { self.to_cstr().to_str() }
+
+    /// Convert self to a [Cow]\<[str]\>.  O(n) to find the terminal `\0` and validate, and to convert UTF8ish data to UTF8 if necesssary.
     pub fn to_string_lossy(&self) -> Cow<'_, str>   { self.to_cstr().to_string_lossy() }
 }
 
@@ -89,10 +111,12 @@ pub struct ConstCStrPtrNullIsEmpty<'s> {
 }
 
 impl<'s> ConstCStrPtrNullIsEmpty<'s> {
+    /// Treat `self` as a raw C string
     pub fn as_ptr(&self) -> *const c_char {
         self.ptr
     }
 
+    /// Treat `self` as a [std::ffi::CStr].  O(n) to find the terminal `\0`.
     pub fn to_cstr(&self) -> &'s CStr {
         if self.ptr.is_null() {
             unsafe { CStr::from_bytes_with_nul_unchecked(b"\0") }
@@ -101,9 +125,16 @@ impl<'s> ConstCStrPtrNullIsEmpty<'s> {
         }
     }
 
+    /// Convert self to a &\[[u8]\] slice, **excluding** the terminal `\0`.  O(n) to find the terminal `\0`.
     pub fn to_bytes(&self) -> &[u8]                 { self.to_cstr().to_bytes() }
+
+    /// Convert self to a &\[[u8]\] slice, including the terminal `\0`.  O(n) to find the terminal `\0`.
     pub fn to_bytes_with_nul(&self) -> &[u8]        { self.to_cstr().to_bytes_with_nul() }
+
+    /// Convert self to a &[str].  O(n) to find the terminal `\0` and validate UTF8.
     pub fn to_str(&self) -> Result<&str, Utf8Error> { self.to_cstr().to_str() }
+
+    /// Convert self to a [Cow]\<[str]\>.  O(n) to find the terminal `\0` and validate, and to convert UTF8ish data to UTF8 if necesssary.
     pub fn to_string_lossy(&self) -> Cow<'_, str>   { self.to_cstr().to_string_lossy() }
 }
 

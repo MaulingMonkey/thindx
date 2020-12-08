@@ -16,6 +16,7 @@ use std::ptr::*;
 /// *   A valid, well behaved [ID3D11Include](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nn-d3dcommon-id3dinclude)
 ///     instance, that lives for at least as long as `self` remains untouched / undropped.
 pub unsafe trait AsID3DInclude {
+    /// Treat this as a raw winapi [ID3DInclude].
     fn as_id3dinclude(&self) -> *mut ID3DInclude;
 }
 

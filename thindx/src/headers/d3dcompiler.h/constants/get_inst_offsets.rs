@@ -15,6 +15,7 @@ use winapi::um::d3dcompiler::*;
 flags! { GetInstOffsets => UINT; None, IncludeNonExecutable }
 
 #[allow(non_upper_case_globals)] impl GetInstOffsets { // These are enum-like
+    #[doc=""]
     pub const None                      : GetInstOffsets = GetInstOffsets(0);
 
     /// Include non-executable code in the retrieved information.

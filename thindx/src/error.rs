@@ -17,6 +17,7 @@ pub struct Error {
 }
 
 impl Error {
+    /// Returns the corresponding [ErrorKind] for this error.
     pub fn kind(&self) -> ErrorKind { self.kind }
 
     pub(crate) fn new(method: &'static str, kind: ErrorKind) -> Self { Self { kind, method: Some(method), errors: Default::default() } }

@@ -13,7 +13,10 @@ use winapi::um::d3dcommon::*;
 enumish! { Include => D3D_INCLUDE_TYPE; Local, System }
 
 #[allow(non_upper_case_globals)] impl Include { // These are enum-like
+    /// A "local" `#include "..."` style include
     pub const Local     : Include = Include(D3D_INCLUDE_LOCAL);
+
+    /// A "system" `#include <...>` style include
     pub const System    : Include = Include(D3D_INCLUDE_SYSTEM);
 }
 

@@ -24,8 +24,20 @@ flags! {
 }
 
 #[allow(non_upper_case_globals)] impl CompileEffect { // These are enum-like
+    #[doc=""]
     pub const None                                  : CompileEffect = CompileEffect(0);
+
+    /// Compile the effects (.fx) file to a child effect. Child effects have no initializers for any shared values because these child effects are initialized in the master effect (the effect pool).
+    ///
+    /// > **Note:** Effect pools are supported by Effects 10 (FX10) but not by Effects 11 (FX11).
+    /// > For more info about differences between effect pools in Direct3D 10 and effect groups in Direct3D 11, see [Effect Pools and Groups].
+    ///
+    /// [Effect Pools and Groups]:      https://docs.microsoft.com/en-us/windows/desktop/direct3d11/d3d11-graphics-programming-guide-effects-differences
     pub const ChildEffect                           : CompileEffect = CompileEffect(D3DCOMPILE_EFFECT_CHILD_EFFECT);
+
+    /// Disables performance mode and allows for mutable state objects.
+    ///
+    /// By default, performance mode is enabled. Performance mode disallows mutable state objects by preventing non-literal expressions from appearing in state object definitions.
     pub const AllowSlowOps                          : CompileEffect = CompileEffect(D3DCOMPILE_EFFECT_ALLOW_SLOW_OPS);
 }
 

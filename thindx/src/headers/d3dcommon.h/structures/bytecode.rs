@@ -69,7 +69,10 @@ impl Bytecode {
     /// [Bytecode::from_unchecked] performs no validation.  Prefer [Bytecode::from] which at least performs some.
     pub unsafe fn from_unchecked(bytecode: &[u8]) -> &Self { std::mem::transmute(bytecode) }
 
+    /// Get the bytecode as a slice of bytes.
     pub fn as_bytes(&self) -> &[u8] { self.0.as_ref() }
+
+    /// Get the bytecode as an iterator of bytes.
     pub fn bytes<'s>(&'s self) -> impl Iterator<Item = u8> + 's { self.0.as_ref().iter().copied() }
 }
 

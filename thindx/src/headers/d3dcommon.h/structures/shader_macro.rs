@@ -19,6 +19,7 @@ use std::ptr::*;
 ///
 /// [D3D_SHADER_MACRO]: https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ns-d3dcommon-d3d_shader_macro
 pub unsafe trait AsShaderMacros {
+    /// Returns a pointer to a `std::mem::zeroed::<D3D_SHADER_MACRO>()`-terminated array of shader macros.
     fn as_shader_macros(&self) -> Result<*const D3D_SHADER_MACRO, ErrorKind>;
 }
 

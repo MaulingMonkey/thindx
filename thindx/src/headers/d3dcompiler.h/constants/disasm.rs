@@ -19,6 +19,7 @@ flags! {
 }
 
 #[allow(non_upper_case_globals)] impl Disasm { // These are enum-like
+    #[doc=""]
     pub const None                              : Disasm = Disasm(0);
 
     /// Enable the output of color codes.

@@ -10,7 +10,10 @@ use std::ptr::*;
 
 /// Converts `self` into something that implements [AsCStr]
 pub trait TryIntoAsCStr {
+    /// The temporary type that can be treated as a C-string.
     type Target : AsCStr;
+
+    /// Attempt to convert to [Self::Target].  May fail if `self` contains `\0`s.
     fn try_into(self) -> Result<Self::Target, ErrorKind>;
 }
 
@@ -46,7 +49,10 @@ impl TryIntoAsCStr for String {
 
 /// Converts `self` into something that implements [AsOptCStr]
 pub trait TryIntoAsOptCStr {
+    /// The temporary type that can be treated as an [Option]al C-string.
     type Target : AsOptCStr;
+
+    /// Attempt to convert to [Self::Target].  May fail if `self` contains `\0`s.
     fn try_into(self) -> Result<Self::Target, ErrorKind>;
 }
 
@@ -78,6 +84,7 @@ impl<T: TryIntoAsCStr> TryIntoAsOptCStr for Option<T> {
 ///
 /// *   You promise the returned pointer is valid and points to a `\0`-terminated string
 pub unsafe trait AsCStr {
+    /// Returns a `\0`-terminated C string
     fn as_cstr(&self) -> *const c_char;
 }
 
@@ -101,6 +108,7 @@ unsafe impl AsCStr for CString {
 ///
 /// *   You promise the returned pointer is null, or points to a valid `\0`-terminated string
 pub unsafe trait AsOptCStr {
+    /// Returns a `\0`-terminated C string, or [null]\(\).
     fn as_opt_cstr(&self) -> *const c_char;
 }
 

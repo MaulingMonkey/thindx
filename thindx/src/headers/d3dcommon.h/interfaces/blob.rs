@@ -45,10 +45,13 @@ impl ReadOnlyBlob {
         unsafe { std::slice::from_raw_parts(ptr, size) }
     }
 
+    /// Gets the data of the buffer as a readonly slice of bytes.
     pub fn as_bytes(&self) -> &[u8] {
         self.get_buffer()
     }
 
+
+    /// Gets the data of the buffer as an iterator over the bytes.
     pub fn bytes<'s>(&'s self) -> impl Iterator<Item = u8> + 's {
         self.get_buffer().iter().copied()
     }
@@ -81,10 +84,18 @@ impl<I> Index<I>  for ReadOnlyBlob where I: SliceIndex<[u8]> { fn index(&self, i
 pub struct TextBlob(Option<ReadOnlyBlob>);
 
 impl TextBlob {
+    /// Wraps a `\0`-terminated [ReadOnlyBlob] or [Option]\<[ReadOnlyBlob]\> in a more [std::ffi::CString]-esque interface.
     pub fn new(value: impl Into<Self>) -> Self { value.into() }
+
+    /// Check if the string is empty
     pub fn is_empty(&self) -> bool { self.0.as_ref().map_or(true, |blob| blob.get_buffer_size() == 0) }
+
+    /// Treat the blob as a UTF8 string, converting lossily if necessary.
     pub fn to_utf8_lossy(&self) -> Cow<str> { String::from_utf8_lossy(self.as_bytes()) }
+
+    /// Treat the blob as a UTF8 string, returning a [std::str::Utf8Error] if it's not valid UTF8.
     pub fn to_utf8(&self) -> Result<&str, Utf8Error> { std::str::from_utf8(self.as_bytes()) }
+
     // TODO: parsing diagnostics iterator?
 }
 
@@ -127,9 +138,13 @@ impl CodeBlob {
     /// If there's not a single path to undefined behavior between all of those, I'll eat my hat!
     pub(crate) unsafe fn from_unchecked(value: ReadOnlyBlob) -> Self { Self(value) }
 
+    /// Get the length of the bytecode, in bytes.
     pub fn len(&self)      -> usize { self.0.get_buffer_size() }
-    pub fn is_empty(&self) -> bool  { self.0.get_buffer_size() == 0 }
+
+    /// Interpret the bytecode as a byte array.
     pub fn as_bytes(&self) -> &[u8] { self.0.get_buffer() }
+
+    /// Interpret the bytecode as a [d3d::Bytecode].
     pub fn as_bytecode(&self) -> &d3d::Bytecode { unsafe { d3d::Bytecode::from_unchecked(self.as_bytes()) } }
 }
 
@@ -154,10 +169,16 @@ impl Deref for CodeBlob { fn deref(&self) -> &d3d::Bytecode { self.as_bytecode()
 pub struct BytesBlob(Option<ReadOnlyBlob>);
 
 impl BytesBlob {
+    /// Wraps a [ReadOnlyBlob] or [Option]\<[ReadOnlyBlob]\> in a more &\[[u8]\]-esque interface.
     pub fn new(value: impl Into<Self>) -> Self { value.into() }
 
+    /// Get the length of the binary data, in bytes.
     pub fn len(&self)      -> usize   { self.0.as_ref().map_or(0,    |blob| blob.get_buffer_size()) }
+
+    /// Check if there is any data.
     pub fn is_empty(&self) -> bool    { self.0.as_ref().map_or(true, |blob| blob.get_buffer_size() == 0) }
+
+    /// Interpret the data as a slice of bytes.
     pub fn as_bytes(&self)   -> &[u8] { self.0.as_ref().map_or(&[],  |blob| blob.get_buffer()) }
 }
 

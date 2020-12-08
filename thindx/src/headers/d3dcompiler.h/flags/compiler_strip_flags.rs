@@ -15,11 +15,24 @@ use winapi::um::d3dcompiler::*;
 flags! { CompilerStrip => D3DCOMPILER_STRIP_FLAGS; None, ReflectionData, DebugInfo, TestBlobs, PrivateData, RootSignature }
 
 #[allow(non_upper_case_globals)] impl CompilerStrip { // These are enum-like
+    /// Strip nothing
     pub const None              : CompilerStrip = CompilerStrip(0);
+
+    /// Strip reflection data (presumably disables [d3d::Compiler::reflect11] and friends?)
     pub const ReflectionData    : CompilerStrip = CompilerStrip(D3DCOMPILER_STRIP_REFLECTION_DATA);
+
+    /// Strip debug information (file/line/name info? [d3d::Blob::DebugInfo]?  Possibly [d3d::Blob::PDB] sections as well?)
     pub const DebugInfo         : CompilerStrip = CompilerStrip(D3DCOMPILER_STRIP_DEBUG_INFO);
+
+    /// Strip test blobs (e.g. [Blob::Test*](d3d::Blob::TestAlternateShader))
     pub const TestBlobs         : CompilerStrip = CompilerStrip(D3DCOMPILER_STRIP_TEST_BLOBS);
+
+    /// Strip [d3d::Blob::PrivateData] sections
     pub const PrivateData       : CompilerStrip = CompilerStrip(D3DCOMPILER_STRIP_PRIVATE_DATA);
+
+    /// Strip the root signature ([d3d::Blob::RootSignature]). Refer to [Specifying Root Signatures in HLSL] for more information on using Direct3D12 with HLSL.
+    ///
+    /// [Specifying Root Signatures in HLSL]:   https://docs.microsoft.com/en-us/windows/desktop/direct3d12/specifying-root-signatures-in-hlsl
     pub const RootSignature     : CompilerStrip = CompilerStrip(D3DCOMPILER_STRIP_ROOT_SIGNATURE);
 }
 

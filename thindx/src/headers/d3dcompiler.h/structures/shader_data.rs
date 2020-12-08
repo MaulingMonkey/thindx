@@ -18,6 +18,7 @@ use std::ptr::*;
 }
 
 impl<'d> ShaderData<'d> {
+    /// Get the data in question as a slice of bytes
     pub fn as_bytes(&self) -> &'d [u8] {
         unsafe { std::slice::from_raw_parts(self.data.pBytecode.cast(), self.data.BytecodeLength) }
     }

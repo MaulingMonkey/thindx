@@ -19,6 +19,7 @@ use winapi::um::d3dcompiler::*;
 flags! { CompileSecData => UINT; None, MergeUavSlots, PreserveTemplateSlots, RequireTemplateMatch }
 
 #[allow(non_upper_case_globals)] impl CompileSecData { // These are enum-like
+    #[doc=""]
     pub const None                      : CompileSecData = CompileSecData(0);
 
     /// Merge unordered access view (UAV) slots in the secondary data that the pSecondaryData parameter points to.

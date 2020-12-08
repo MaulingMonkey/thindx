@@ -10,10 +10,13 @@ use std::ptr::*;
 
 
 
-/// { code: [ReadOnlyBlob], errors: [TextBlob] } returned by [Compiler::compile]/[compile2](Compiler::compile2)
+/// { code: [ReadOnlyBlob], errors: [TextBlob] } returned by [Compiler::compile] & friends.
 #[derive(Clone, Debug)]
 pub struct CompileResult {
+    /// The shader bytecode
     pub shader:     CodeBlob,
+
+    /// Any diagnostics, warnings, or non-fatal errors generated while compiling the shader.
     pub errors:     TextBlob,
 }
 
@@ -28,7 +31,10 @@ impl Deref for CompileResult { fn deref(&self) -> &Bytecode { self.shader.as_byt
 /// { code: [TextBlob], errors: [TextBlob] } returned by [Compiler::preprocess]
 #[derive(Clone, Debug)]
 pub struct PreprocessResult {
+    /// The preprocessed HLSL
     pub shader:     TextBlob,
+
+    /// Any diagnostics, warnings, or non-fatal errors generated while preprocessing the shader.
     pub errors:     TextBlob,
 }
 
@@ -37,10 +43,21 @@ pub struct PreprocessResult {
 /// { kind: [ErrorKind], shader: Option&lt;[ReadOnlyBlob]&gt;, errors: [TextBlob] }
 #[derive(Clone)]
 pub struct CompileError {
+    /// The [ErrorKind] / HRESULT generated when compiling the shader.
     pub kind:       ErrorKind,
+
+    /// The method that generated the error in question.
     pub method:     Option<&'static str>,
-    pub shader:     Option<CodeBlob>, // may or may not have generated a shader blob despite errors
-    pub errors:     TextBlob, // may or may not have generated error messages depending on the error kind
+
+    /// Any shader bytecode that may have resulted despite compilation failing.
+    ///
+    /// This might be always [None]?
+    pub shader:     Option<CodeBlob>,
+
+    /// More detailed errors/diagnostics beyond the basic error code.
+    ///
+    /// May be blank for basic API parameter errors, but should be populated for errors in the HLSL code that was being compiled.
+    pub errors:     TextBlob,
 }
 
 impl From<Error> for CompileError {
@@ -77,10 +94,21 @@ impl Display for CompileError {
 /// { kind: [ErrorKind], shader: Option&lt;[ReadOnlyBlob]&gt;, errors: [TextBlob] }
 #[derive(Clone)]
 pub struct PreprocessError {
+    /// The [ErrorKind] / HRESULT generated when preprocessing the shader.
     pub kind:       ErrorKind,
+
+    /// The method that generated the error in question.
     pub method:     Option<&'static str>,
-    pub shader:     TextBlob, // may or may not have generated a shader blob despite errors
-    pub errors:     TextBlob, // may or may not have generated error messages depending on the error kind
+
+    /// Any preprocessed HLSL that may have been generated.
+    ///
+    /// This might be always empty?
+    pub shader:     TextBlob,
+
+    /// More detailed errors/diagnostics beyond the basic error code.
+    ///
+    /// May be blank for basic API parameter errors, but should be populated for errors in the HLSL code that was being preprocessed.
+    pub errors:     TextBlob,
 }
 
 impl From<Error> for PreprocessError {

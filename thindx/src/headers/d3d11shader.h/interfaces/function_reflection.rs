@@ -30,6 +30,7 @@ impl<'r> FunctionReflection<'r> {
         }
     }
 
+    /// Allow access as a raw winapi pointer type.
     pub fn as_raw(&self) -> *mut ID3D11FunctionReflection {
         self.ptr.as_ptr()
     }

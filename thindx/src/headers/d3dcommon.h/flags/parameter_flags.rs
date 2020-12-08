@@ -13,8 +13,13 @@ use winapi::um::d3dcommon::*;
 flags! { PF => D3D_PARAMETER_FLAGS; None, In, Out }
 
 #[allow(non_upper_case_globals)] impl PF { // These are enum-like
+    /// The parameter has no semantic flags.
     pub const None  : PF = PF(D3D_PF_NONE);
+
+    /// The parameter is an input parameter (e.g. marked `in`)
     pub const In    : PF = PF(D3D_PF_IN);
+
+    /// The parameter is an output parameter (e.g. marked `out`)
     pub const Out   : PF = PF(D3D_PF_OUT);
 }
 

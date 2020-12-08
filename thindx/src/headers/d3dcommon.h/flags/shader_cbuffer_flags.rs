@@ -14,6 +14,7 @@ use winapi::um::d3dcommon::*;
 flags! { CBF => UINT; None, UserPacked }
 
 #[allow(non_upper_case_globals)] impl CBF { // These are enum-like
+    #[allow(missing_docs)]
     pub const None          : CBF = CBF(0);
 
     /// Bind the constant buffer to an input slot defined in HLSL code (instead of letting the compiler choose the input slot).

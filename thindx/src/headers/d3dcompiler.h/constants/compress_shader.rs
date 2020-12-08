@@ -15,7 +15,10 @@ const D3D_COMPRESS_SHADER_KEEP_ALL_PARTS : UINT = 0x00000001; // not part of win
 flags! { CompressShader => UINT; None, KeepAllParts }
 
 #[allow(non_upper_case_globals)] impl CompressShader { // These are enum-like
+    #[doc=""]
     pub const None              : CompressShader = CompressShader(0);
+
+    /// Don't strip sections when using [d3d::Compiler::compress_shaders]?
     pub const KeepAllParts      : CompressShader = CompressShader(D3D_COMPRESS_SHADER_KEEP_ALL_PARTS);
 }
 
