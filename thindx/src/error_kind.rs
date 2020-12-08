@@ -5,7 +5,8 @@ use winapi::shared::winerror::*;
 
 // https://docs.microsoft.com/en-us/windows/win32/com/structure-of-com-error-codes
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/desktop/direct3d11/d3d11-graphics-reference-returnvalues)\] HRESULT
+/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/desktop/direct3d11/d3d11-graphics-reference-returnvalues)\]
+/// HRESULT
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)] pub struct ErrorKind(pub(crate) HRESULT);
 

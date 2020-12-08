@@ -28,9 +28,6 @@ use std::ptr::*;
 /// > **Note:** This interface is part of the HLSL shader linking technology that you can use on all Direct3D 11 platforms
 /// > to create precompiled HLSL functions, package them into libraries, and link them into full shaders at run time.
 ///
-/// ### See Also
-/// * [d3d::Compiler::create_function_linking_graph]
-///
 /// ### Example
 /// ```rust
 /// use thindx::{*, d3d::*, d3d11::*};
@@ -109,6 +106,9 @@ use std::ptr::*;
 ///     __Output_n2_2 = xyz1_n1_0;
 /// }
 /// ```
+///
+/// ### See Also
+/// * [d3d::Compiler::create_function_linking_graph]
 #[derive(Clone)] #[repr(transparent)]
 pub struct FunctionLinkingGraph(pub(crate) mcom::Rc<winapi::um::d3d11shader::ID3D11FunctionLinkingGraph>);
 

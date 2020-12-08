@@ -9,9 +9,6 @@ use winapi::um::d3d11shader::*;
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/ns-d3d11shader-d3d11_function_desc)\]
 /// D3D11_FUNCTION_DESC
 ///
-/// ### See Also
-/// *   [d3d11::FunctionReflection::get_desc]
-///
 /// ### Example
 /// ```text
 /// FunctionDesc {
@@ -50,6 +47,9 @@ use winapi::um::d3d11shader::*;
 ///     has_10_level_9_pixel_shader: false,
 /// }
 /// ```
+///
+/// ### See Also
+/// *   [d3d11::FunctionReflection::get_desc]
 #[derive(Clone, Copy, Debug, Default)]
 #[repr(C)] pub struct FunctionDesc<'s> {
     pub version:                        u32,

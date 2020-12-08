@@ -8,9 +8,6 @@ use winapi::um::d3d11shader::*;
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/ns-d3d11shader-d3d11_library_desc)\]
 /// D3D11_LIBRARY_DESC
 ///
-/// ### See Also
-/// *   [d3d11::LibraryReflection::get_desc]
-///
 /// ### Example
 /// ```rust
 /// # use thindx::{*, d3d::*}; let d3dc = Compiler::new(47).unwrap();
@@ -35,6 +32,9 @@ use winapi::um::d3d11shader::*;
 ///     function_count: 1,
 /// }
 /// ```
+///
+/// ### See Also
+/// *   [d3d11::LibraryReflection::get_desc]
 #[derive(Clone, Copy, Debug, Default)]
 #[repr(C)] pub struct LibraryDesc<'s> {
     pub creator:        ConstCStrPtrNullIsEmpty<'s>, // maybe never null?

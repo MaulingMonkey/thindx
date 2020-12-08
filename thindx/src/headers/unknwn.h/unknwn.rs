@@ -3,7 +3,9 @@ use std::ops::Deref;
 
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/unknwn/nn-unknwn-iunknown)\]
-/// Base COM interface all D3D9 types eventually derive from.
+/// IUnknown
+///
+/// Base COM interface most (but not all!) DirectX interfaces eventually derive from.
 #[derive(Clone)] #[repr(transparent)]
 pub struct Unknown(pub(crate) mcom::Rc<winapi::um::unknwnbase::IUnknown>);
 

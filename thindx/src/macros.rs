@@ -164,15 +164,15 @@ macro_rules! flags {
 
 /// COM conversion boilerplate
 ///
-/// ### Usage
-///
-/// *   `convert!(unsafe $outer => $inner, $winapi);`
-/// *   `convert!(unsafe $outer,           $winapi);`
-///
 /// ### Safety
 ///
 /// * Assumes `$outer` and `$inner` are `#[repr(transparent)]` wrappers around [mcom::Rc] and ABI compatible
 /// * Typechecked via some `From` impls, but sufficiently malicious `Deref` impls might be able to defeat that.
+///
+/// ### Usage
+///
+/// *   `convert!(unsafe $outer => $inner, $winapi);`
+/// *   `convert!(unsafe $outer,           $winapi);`
 macro_rules! convert {
     ( unsafe $outer:ty => $deref:ty, $winapi:ty ) => {
         convert!(unsafe $outer, $winapi);
