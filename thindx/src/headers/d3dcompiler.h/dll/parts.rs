@@ -262,11 +262,11 @@ impl Compiler {
         &self,
         shader_bytecode:    &[u8],
         strip_flags:        impl Into<CompilerStripFlags>,
-    ) -> Result<BytesBlob, Error> {
+    ) -> Result<CodeBlob, Error> {
         let f = self.D3DStripShader.ok_or(Error::new("D3DStripShader", THINERR::MISSING_DLL_EXPORT))?;
         let mut blob = null_mut();
         let hr = unsafe { f(shader_bytecode.as_ptr().cast(), shader_bytecode.len(), strip_flags.into().into(), &mut blob) };
         Error::check("D3DStripShader", hr)?;
-        Ok(BytesBlob::new(unsafe { ReadOnlyBlob::from_raw(blob) }))
+        Ok(unsafe { CodeBlob::from_unchecked(ReadOnlyBlob::from_raw(blob)) })
     }
 }
