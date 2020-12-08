@@ -20,8 +20,8 @@ impl Compiler {
     /// ### Example
     /// ```rust
     /// use thindx::d3d;
-    /// let compiler = d3d::Compiler::new(47).unwrap();
-    /// let compiler = d3d::Compiler::new("d3dcompiler_47.dll").unwrap();
+    /// let d3dc = d3d::Compiler::new(47).unwrap();
+    /// let d3dc = d3d::Compiler::new("d3dcompiler_47.dll").unwrap();
     /// ```
     pub fn new(version: impl CompilerNewVersion) -> Result<Self, std::io::Error> {
         let lib = version.try_load()?;

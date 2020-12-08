@@ -4,10 +4,10 @@ use thindx::d3d::*;
 //use thindx::d3d11::*;
 
 fn dump_library() {
-    let compiler = d3d::Compiler::new(47).unwrap();
-    let library = compiler.compile_from_file(r"test\data\library.hlsl", None, None, (), "lib_5_0", Compile::Debug, CompileEffect::None).unwrap();
-    let _library = compiler.reflect_library::<d3d11::LibraryReflection>(&library).unwrap();
-    let library  = compiler.reflect_library_11(&library).unwrap(); // equivalent shorthand
+    let d3dc = d3d::Compiler::new(47).unwrap();
+    let library = d3dc.compile_from_file(r"test\data\library.hlsl", None, None, (), "lib_5_0", Compile::Debug, CompileEffect::None).unwrap();
+    let _library = d3dc.reflect_library::<d3d11::LibraryReflection>(&library).unwrap();
+    let library  = d3dc.reflect_library_11(&library).unwrap(); // equivalent shorthand
 
     println!("library");
     println!("=======");
@@ -20,10 +20,10 @@ fn dump_library() {
 }
 
 fn dump_shader() {
-    let compiler = d3d::Compiler::new(47).unwrap();
-    let shader  = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "vs_main", "vs_4_0", Compile::Debug, CompileEffect::None).unwrap();
-    let _shader = compiler.reflect::<d3d11::ShaderReflection>(&shader).unwrap();
-    let shader  = compiler.reflect11(&shader).unwrap(); // equivalent shorthand
+    let d3dc = d3d::Compiler::new(47).unwrap();
+    let shader  = d3dc.compile_from_file(r"test\data\basic.hlsl", None, None, "vs_main", "vs_4_0", Compile::Debug, CompileEffect::None).unwrap();
+    let _shader = d3dc.reflect::<d3d11::ShaderReflection>(&shader).unwrap();
+    let shader  = d3dc.reflect11(&shader).unwrap(); // equivalent shorthand
 
     let desc = shader.get_desc().unwrap();
     println!("shader");

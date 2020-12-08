@@ -142,13 +142,13 @@ impl Compiler {
     ///
     /// ### Examples
     /// ```rust
-    /// # use thindx::d3d::*; let compiler = Compiler::new(47).unwrap();
-    /// let pixel_shader = compiler.compile_from_file(
+    /// # use thindx::d3d::*; let d3dc = Compiler::new(47).unwrap();
+    /// let pixel_shader = d3dc.compile_from_file(
     ///     r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0",
     ///     Compile::Debug, CompileEffect::None,
     /// ).unwrap();
     ///
-    /// let vertex_shader = compiler.compile_from_file(
+    /// let vertex_shader = d3dc.compile_from_file(
     ///     r"test\data\basic.hlsl", None, StandardFileInclude, "vs_main", "vs_4_0",
     ///     Compile::Debug, CompileEffect::None,
     /// ).unwrap();
@@ -229,15 +229,15 @@ impl Compiler {
     ///
     /// ### Examples
     /// ```rust
-    /// # use thindx::d3d::*; let compiler = Compiler::new(47).unwrap();
+    /// # use thindx::d3d::*; let d3dc = Compiler::new(47).unwrap();
     /// let basic_hlsl = std::fs::read(r"test\data\basic.hlsl").unwrap();
     ///
-    /// let pixel_shader = compiler.compile(
+    /// let pixel_shader = d3dc.compile(
     ///     &basic_hlsl, r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0",
     ///     Compile::Debug, CompileEffect::None,
     /// ).unwrap();
     ///
-    /// let vertex_shader = compiler.compile(
+    /// let vertex_shader = d3dc.compile(
     ///     &basic_hlsl, r"test\data\basic.hlsl", None, None, "vs_main", "vs_4_0",
     ///     Compile::Debug, CompileEffect::None,
     /// ).unwrap();
@@ -321,15 +321,15 @@ impl Compiler {
     ///
     /// ### Examples
     /// ```rust
-    /// # use thindx::d3d::*; let compiler = Compiler::new(47).unwrap();
+    /// # use thindx::d3d::*; let d3dc = Compiler::new(47).unwrap();
     /// let basic_hlsl = std::fs::read(r"test\data\basic.hlsl").unwrap();
     ///
-    /// let pixel_shader = compiler.compile2(
+    /// let pixel_shader = d3dc.compile2(
     ///     &basic_hlsl, r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0",
     ///     Compile::Debug, CompileEffect::None, CompileSecData::None, None,
     /// ).unwrap();
     ///
-    /// let vertex_shader = compiler.compile2(
+    /// let vertex_shader = d3dc.compile2(
     ///     &basic_hlsl, r"test\data\basic.hlsl", None, None, "vs_main", "vs_4_0",
     ///     Compile::Debug, CompileEffect::None, CompileSecData::None, None,
     /// ).unwrap();
@@ -421,9 +421,9 @@ impl Compiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::d3d::*; let compiler = Compiler::new(47).unwrap();
+    /// # use thindx::d3d::*; let d3dc = Compiler::new(47).unwrap();
     /// let basic_hlsl = std::fs::read(r"test\data\basic.hlsl").unwrap();
-    /// let ps = compiler.preprocess(&basic_hlsl, r"test\data\basic.hlsl", (), None).unwrap();
+    /// let ps = d3dc.preprocess(&basic_hlsl, r"test\data\basic.hlsl", (), None).unwrap();
     /// println!("{}", ps.shader.to_utf8_lossy());
     /// ```
     ///

@@ -24,21 +24,21 @@ impl Compiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::{*, d3d::*}; let compiler = Compiler::new(47).unwrap();
-    /// let shader = compiler.compile_from_file(
+    /// # use thindx::{*, d3d::*}; let d3dc = Compiler::new(47).unwrap();
+    /// let shader = d3dc.compile_from_file(
     ///     r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0",
     ///     Compile::Debug, CompileEffect::None
     /// ).unwrap();
     ///
     /// // Should succeed:
-    /// let r = compiler.reflect::<d3d11::ShaderReflection>(&shader).unwrap();
+    /// let r = d3dc.reflect::<d3d11::ShaderReflection>(&shader).unwrap();
     ///
     /// // Invalid interface:
-    /// let r = compiler.reflect::<Unknown>(&shader);
+    /// let r = d3dc.reflect::<Unknown>(&shader);
     /// assert_eq!(Some(E::INVALIDARG), r.err().map(|e| e.kind()));
     ///
     /// // Invalid `src_data`:
-    /// let r = compiler.reflect::<d3d11::ShaderReflection>(unsafe { Bytecode::from_unchecked(&[]) });
+    /// let r = d3dc.reflect::<d3d11::ShaderReflection>(unsafe { Bytecode::from_unchecked(&[]) });
     /// assert_eq!(Some(D3DERR::INVALIDCALL), r.err().map(|e| e.kind()));
     /// ```
     ///
@@ -70,17 +70,17 @@ impl Compiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::{*, d3d::*}; let compiler = Compiler::new(47).unwrap();
-    /// let shader = compiler.compile_from_file(
+    /// # use thindx::{*, d3d::*}; let d3dc = Compiler::new(47).unwrap();
+    /// let shader = d3dc.compile_from_file(
     ///     r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0",
     ///     Compile::Debug, CompileEffect::None
     /// ).unwrap();
     ///
     /// // Should succeed:
-    /// let r = compiler.reflect11(&shader).unwrap();
+    /// let r = d3dc.reflect11(&shader).unwrap();
     ///
     /// // Invalid `src_data`:
-    /// let r = compiler.reflect11(unsafe { Bytecode::from_unchecked(&[]) });
+    /// let r = d3dc.reflect11(unsafe { Bytecode::from_unchecked(&[]) });
     /// assert_eq!(Some(D3DERR::INVALIDCALL), r.err().map(|e| e.kind()));
     /// ```
     ///
@@ -109,21 +109,21 @@ impl Compiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::{*, d3d::*}; let compiler = Compiler::new(47).unwrap();
-    /// let shader = compiler.compile_from_file(
+    /// # use thindx::{*, d3d::*}; let d3dc = Compiler::new(47).unwrap();
+    /// let shader = d3dc.compile_from_file(
     ///     r"test\data\library.hlsl", None, None, (), "lib_5_0",
     ///     Compile::Debug, CompileEffect::None
     /// ).unwrap();
     ///
     /// // Should succeed:
-    /// let r = compiler.reflect_library::<d3d11::LibraryReflection>(&shader).unwrap();
+    /// let r = d3dc.reflect_library::<d3d11::LibraryReflection>(&shader).unwrap();
     ///
     /// // Invalid interface:
-    /// let r = compiler.reflect_library::<Unknown>(&shader);
+    /// let r = d3dc.reflect_library::<Unknown>(&shader);
     /// assert_eq!(Some(E::INVALIDARG), r.err().map(|e| e.kind()));
     ///
     /// // Invalid `src_data`:
-    /// let r = compiler.reflect_library::<d3d11::LibraryReflection>(unsafe { Bytecode::from_unchecked(&[]) });
+    /// let r = d3dc.reflect_library::<d3d11::LibraryReflection>(unsafe { Bytecode::from_unchecked(&[]) });
     /// assert_eq!(Some(D3DERR::INVALIDCALL), r.err().map(|e| e.kind()));
     /// ```
     ///
@@ -158,17 +158,17 @@ impl Compiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::{*, d3d::*}; let compiler = Compiler::new(47).unwrap();
-    /// let shader = compiler.compile_from_file(
+    /// # use thindx::{*, d3d::*}; let d3dc = Compiler::new(47).unwrap();
+    /// let shader = d3dc.compile_from_file(
     ///     r"test\data\library.hlsl", None, None, (), "lib_5_0",
     ///     Compile::Debug, CompileEffect::None
     /// ).unwrap();
     ///
     /// // Should succeed:
-    /// let r = compiler.reflect_library_11(&shader).unwrap();
+    /// let r = d3dc.reflect_library_11(&shader).unwrap();
     ///
     /// // Invalid `src_data`:
-    /// let r = compiler.reflect_library_11(unsafe { Bytecode::from_unchecked(&[]) });
+    /// let r = d3dc.reflect_library_11(unsafe { Bytecode::from_unchecked(&[]) });
     /// assert_eq!(Some(D3DERR::INVALIDCALL), r.err().map(|e| e.kind()));
     /// ```
     ///

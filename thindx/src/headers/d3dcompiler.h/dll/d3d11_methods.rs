@@ -21,8 +21,8 @@ impl Compiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::*; let compiler = d3d::Compiler::new(47).unwrap();
-    /// let flg: d3d11::FunctionLinkingGraph = compiler.create_function_linking_graph(None).unwrap();
+    /// # use thindx::*; let d3dc = d3d::Compiler::new(47).unwrap();
+    /// let flg: d3d11::FunctionLinkingGraph = d3dc.create_function_linking_graph(None).unwrap();
     /// ```
     #[requires(d3dcompiler=47)]
     pub fn create_function_linking_graph(&self, flags: Option<void::Void>) -> Result<d3d11::FunctionLinkingGraph, Error> {
@@ -48,8 +48,8 @@ impl Compiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::*; let compiler = d3d::Compiler::new(47).unwrap();
-    /// let linker : d3d11::Linker = compiler.create_linker().unwrap();
+    /// # use thindx::*; let d3dc = d3d::Compiler::new(47).unwrap();
+    /// let linker : d3d11::Linker = d3dc.create_linker().unwrap();
     /// ```
     #[requires(d3dcompiler=47)]
     pub fn create_linker(&self) -> Result<d3d11::Linker, Error> {
@@ -78,14 +78,14 @@ impl Compiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::d3d::*; let compiler = Compiler::new(47).unwrap();
+    /// # use thindx::d3d::*; let d3dc = Compiler::new(47).unwrap();
     /// let source = "export float4 example(float4 i) { return 2*i; }";
-    /// let CompileResult { shader: code_blob, errors: error_blob } = compiler.compile(
+    /// let CompileResult { shader: code_blob, errors: error_blob } = d3dc.compile(
     ///     source.as_bytes(), "example.hlsl",
     ///     None, None, (), "lib_5_0",
     ///     Compile::OptimizationLevel3, CompileEffect::None,
     /// ).unwrap();
-    /// let shader_library = compiler.load_module(&code_blob).unwrap();
+    /// let shader_library = d3dc.load_module(&code_blob).unwrap();
     /// ```
     #[requires(d3dcompiler=47)]
     pub fn load_module(&self, data: &Bytecode) -> Result<d3d11::Module, Error> {

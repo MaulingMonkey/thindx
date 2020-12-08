@@ -22,7 +22,7 @@ impl Compiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::d3d::*; let compiler = Compiler::new(47).unwrap();
+    /// # use thindx::d3d::*; let d3dc = Compiler::new(47).unwrap();
     /// let basic_hlsl  = std::fs::read(r"test\data\basic.hlsl").unwrap();
     /// let plain_txt   = std::fs::read(r"test\data\plain.txt").unwrap();
     /// let tocompress = [
@@ -31,7 +31,7 @@ impl Compiler {
     /// ];
     /// println!("tocompress: [{} bytes, {} bytes]", basic_hlsl.len(), plain_txt.len());
     ///
-    /// let compress = compiler.compress_shaders(&tocompress, CompressShader::default()).unwrap();
+    /// let compress = d3dc.compress_shaders(&tocompress, CompressShader::default()).unwrap();
     /// println!("compressed:  {} bytes", compress.len());
     /// ```
     ///
@@ -85,7 +85,7 @@ impl Compiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::d3d::*; let compiler = Compiler::new(47).unwrap();
+    /// # use thindx::d3d::*; let d3dc = Compiler::new(47).unwrap();
     /// # let basic_hlsl  = std::fs::read(r"test\data\basic.hlsl").unwrap();
     /// # let plain_txt   = std::fs::read(r"test\data\plain.txt").unwrap();
     /// # let tocompress = [
@@ -93,8 +93,8 @@ impl Compiler {
     /// #     ShaderData::from(&plain_txt[..]),
     /// # ];
     /// #
-    /// # let compress = compiler.compress_shaders(&tocompress, CompressShader::default()).unwrap();
-    /// assert_eq!(2, compiler.decompress_shaders_count(&compress).unwrap());
+    /// # let compress = d3dc.compress_shaders(&tocompress, CompressShader::default()).unwrap();
+    /// assert_eq!(2, d3dc.decompress_shaders_count(&compress).unwrap());
     /// ```
     #[requires(!store)]
     #[requires(d3dcompiler=43)]
@@ -122,7 +122,7 @@ impl Compiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::d3d::*; let compiler = Compiler::new(47).unwrap();
+    /// # use thindx::d3d::*; let d3dc = Compiler::new(47).unwrap();
     /// # let basic_hlsl  = std::fs::read(r"test\data\basic.hlsl").unwrap();
     /// # let plain_txt   = std::fs::read(r"test\data\plain.txt").unwrap();
     /// # let tocompress = [
@@ -130,9 +130,9 @@ impl Compiler {
     /// #     ShaderData::from(&plain_txt[..]),
     /// # ];
     /// #
-    /// # let compress = compiler.compress_shaders(&tocompress, CompressShader::default()).unwrap();
+    /// # let compress = d3dc.compress_shaders(&tocompress, CompressShader::default()).unwrap();
     /// let mut decompressed = [None, None, None];
-    /// let decompressed2 = compiler.decompress_shaders_inplace(
+    /// let decompressed2 = d3dc.decompress_shaders_inplace(
     ///     &compress, None, 0, &mut decompressed[..]
     /// ).unwrap();
     ///
@@ -179,7 +179,7 @@ impl Compiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::d3d::*; let compiler = Compiler::new(47).unwrap();
+    /// # use thindx::d3d::*; let d3dc = Compiler::new(47).unwrap();
     /// # let basic_hlsl  = std::fs::read(r"test\data\basic.hlsl").unwrap();
     /// # let plain_txt   = std::fs::read(r"test\data\plain.txt").unwrap();
     /// # let tocompress = [
@@ -187,8 +187,8 @@ impl Compiler {
     /// #     ShaderData::from(&plain_txt[..]),
     /// # ];
     /// #
-    /// # let compress = compiler.compress_shaders(&tocompress, CompressShader::default()).unwrap();
-    /// let decompressed = compiler.decompress_shaders(&compress, None, ..).unwrap();
+    /// # let compress = d3dc.compress_shaders(&tocompress, CompressShader::default()).unwrap();
+    /// let decompressed = d3dc.decompress_shaders(&compress, None, ..).unwrap();
     ///
     /// assert_eq!(2, decompressed.len());
     /// assert_eq!(basic_hlsl, decompressed[0].as_ref().unwrap().get_buffer());

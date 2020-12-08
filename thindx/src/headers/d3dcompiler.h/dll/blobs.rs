@@ -20,8 +20,8 @@ impl Compiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::d3d::*; let compiler = Compiler::new(47).unwrap();
-    /// let blob = compiler.create_read_only_blob(&[1,2,3,4]).unwrap();
+    /// # use thindx::d3d::*; let d3dc = Compiler::new(47).unwrap();
+    /// let blob = d3dc.create_read_only_blob(&[1,2,3,4]).unwrap();
     /// assert_eq!(blob.get_buffer_size(),  4           );
     /// assert_eq!(blob.get_buffer(),       &[1,2,3,4]  );
     /// ```
@@ -60,13 +60,13 @@ impl Compiler {
     /// ```rust
     /// # use thindx::{*, d3d::*};
     /// # use winapi::shared::winerror::*;
-    /// # let compiler = Compiler::new(47).unwrap();
-    /// let blob : ReadOnlyBlob = compiler.read_file_to_blob(r"test\data\basic.hlsl").unwrap();
+    /// # let d3dc = Compiler::new(47).unwrap();
+    /// let blob : ReadOnlyBlob = d3dc.read_file_to_blob(r"test\data\basic.hlsl").unwrap();
     ///
-    /// let err = compiler.read_file_to_blob(r"test\data\nonexistant").err().unwrap();
+    /// let err = d3dc.read_file_to_blob(r"test\data\nonexistant").err().unwrap();
     /// assert_eq!(err.kind(), ErrorKind::from_win32(ERROR_FILE_NOT_FOUND));
     ///
-    /// let err = compiler.read_file_to_blob(r"test\data").err().unwrap();
+    /// let err = d3dc.read_file_to_blob(r"test\data").err().unwrap();
     /// assert_eq!(err.kind(), ErrorKind::from_win32(ERROR_ACCESS_DENIED));
     /// ```
     #[requires(d3dcompiler=44)]
@@ -103,17 +103,17 @@ impl Compiler {
     /// ```rust
     /// # use thindx::{*, d3d::*};
     /// # use winapi::shared::winerror::*;
-    /// # let compiler = Compiler::new(47).unwrap();
-    /// let blob = compiler.create_read_only_blob(&[1,2,3,4]).unwrap();
-    /// compiler.write_blob_to_file(&blob, r"..\target\1234.bin", true).unwrap();
+    /// # let d3dc = Compiler::new(47).unwrap();
+    /// let blob = d3dc.create_read_only_blob(&[1,2,3,4]).unwrap();
+    /// d3dc.write_blob_to_file(&blob, r"..\target\1234.bin", true).unwrap();
     ///
-    /// let err = compiler.write_blob_to_file(&blob, r"..\target\1234.bin", false).unwrap_err();
+    /// let err = d3dc.write_blob_to_file(&blob, r"..\target\1234.bin", false).unwrap_err();
     /// assert_eq!(err.kind(), ErrorKind::from_win32(ERROR_FILE_EXISTS));
     ///
-    /// let err = compiler.write_blob_to_file(&blob, r"..\target\", false).unwrap_err();
+    /// let err = d3dc.write_blob_to_file(&blob, r"..\target\", false).unwrap_err();
     /// assert_eq!(err.kind(), ErrorKind::from_win32(ERROR_PATH_NOT_FOUND));
     ///
-    /// let err = compiler.write_blob_to_file(&blob, r"..\target", false).unwrap_err();
+    /// let err = d3dc.write_blob_to_file(&blob, r"..\target", false).unwrap_err();
     /// assert_eq!(err.kind(), ErrorKind::from_win32(ERROR_ACCESS_DENIED));
     /// ```
     #[requires(d3dcompiler=44)]

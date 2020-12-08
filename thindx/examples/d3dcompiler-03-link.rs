@@ -4,17 +4,17 @@ use thindx::d3d::*;
 use thindx::d3d11::*;
 
 fn main() {
-    let compiler = d3d::Compiler::new(47).unwrap();
+    let d3dc = d3d::Compiler::new(47).unwrap();
     let lib_source = b"export float4 xyz1(float3 v) { return float4(v, 1.0); }";
-    let lib_bytecode = compiler.compile(lib_source, "example.hlsl", None, None, (), "lib_5_0", Compile::OptimizationLevel3, CompileEffect::None).unwrap();
-    let lib = compiler.load_module(&lib_bytecode.shader).unwrap();
+    let lib_bytecode = d3dc.compile(lib_source, "example.hlsl", None, None, (), "lib_5_0", Compile::OptimizationLevel3, CompileEffect::None).unwrap();
+    let lib = d3dc.load_module(&lib_bytecode.shader).unwrap();
 
 
 
     // Use FunctionLinkingGraph to create a shader.  Note that the fn call order
     // here is brittle, reordering many of the calls here will cause E::FAIL errors.
 
-    let graph : FunctionLinkingGraph = compiler.create_function_linking_graph(None).unwrap();
+    let graph : FunctionLinkingGraph = d3dc.create_function_linking_graph(None).unwrap();
 
     let input = graph.set_input_signature(&[
         ParameterDesc::new(cstr!("inputPos"),  cstr!("POSITION0"), SVT::Float, SVC::Vector, 1, 3, Interpolation::Linear, PF::In, 0, 0, 0, 0),
@@ -47,7 +47,7 @@ fn main() {
     // Option B:  Link HLSL
     let (graph_inst, _warnings) = graph.create_module_instance().unwrap();
     let lib_inst = lib.create_instance("").unwrap();
-    let linker = compiler.create_linker().unwrap();
+    let linker = d3dc.create_linker().unwrap();
     linker.use_library(&lib_inst).unwrap();
     linker.link(&graph_inst, "main", "vs_5_0", None).unwrap();
 }

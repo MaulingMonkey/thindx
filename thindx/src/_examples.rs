@@ -60,34 +60,34 @@ pub const d3dcompiler_01_construction : () = ();
 /// use thindx::d3d::{self, *};
 /// 
 /// fn main() {
-///     let compiler = d3d::Compiler::new(47).unwrap();
+///     let d3dc = d3d::Compiler::new(47).unwrap();
 ///     let basic_hlsl   : &[u8] = include_bytes!(r"..\test\data\basic.hlsl");
 ///     let library_hlsl : &[u8] = include_bytes!(r"..\test\data\library.hlsl");
 /// 
 ///     // Option A:  just preprocess instead of fully compiling
-///     let pixel_shader  = compiler.preprocess(basic_hlsl,   (),                      None, None,                  ).unwrap();
-///     let vertex_shader = compiler.preprocess(basic_hlsl,   r"test\data\basic.hlsl", None, StandardFileInclude    ).unwrap();
-///     let library       = compiler.preprocess(library_hlsl, r"library.hlsl",         None, None,                  ).unwrap();
+///     let pixel_shader  = d3dc.preprocess(basic_hlsl,   (),                      None, None,                  ).unwrap();
+///     let vertex_shader = d3dc.preprocess(basic_hlsl,   r"test\data\basic.hlsl", None, StandardFileInclude    ).unwrap();
+///     let library       = d3dc.preprocess(library_hlsl, r"library.hlsl",         None, None,                  ).unwrap();
 ///     println!("pixel_shader\n============\n{}\n",    pixel_shader .shader);
 ///     println!("vertex_shader\n=============\n{}\n",  vertex_shader.shader);
 ///     println!("library\n=======\n{}\n",              library      .shader);
 /// 
 ///     // Option B:  compile_from_file
-///     let pixel_shader  = compiler.compile_from_file(r"test\data\basic.hlsl",   None, None,                "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap();
-///     let vertex_shader = compiler.compile_from_file(r"test\data\basic.hlsl",   None, StandardFileInclude, "vs_main", "vs_4_0", Compile::Debug, CompileEffect::None).unwrap();
-///     let library       = compiler.compile_from_file(r"test\data\library.hlsl", None, None,                (),       "lib_5_0", Compile::Debug, CompileEffect::None).unwrap();
+///     let pixel_shader  = d3dc.compile_from_file(r"test\data\basic.hlsl",   None, None,                "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap();
+///     let vertex_shader = d3dc.compile_from_file(r"test\data\basic.hlsl",   None, StandardFileInclude, "vs_main", "vs_4_0", Compile::Debug, CompileEffect::None).unwrap();
+///     let library       = d3dc.compile_from_file(r"test\data\library.hlsl", None, None,                (),       "lib_5_0", Compile::Debug, CompileEffect::None).unwrap();
 ///     // resulting blobs are binary data
 /// 
 ///     // Option C:  compile
-///     let pixel_shader  = compiler.compile(basic_hlsl,   (),                      None, None,                "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap();
-///     let vertex_shader = compiler.compile(basic_hlsl,   r"test\data\basic.hlsl", None, StandardFileInclude, "vs_main", "vs_4_0", Compile::Debug, CompileEffect::None).unwrap();
-///     let library       = compiler.compile(library_hlsl, r"library.hlsl",         None, None,                (),       "lib_5_0", Compile::Debug, CompileEffect::None).unwrap();
+///     let pixel_shader  = d3dc.compile(basic_hlsl,   (),                      None, None,                "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap();
+///     let vertex_shader = d3dc.compile(basic_hlsl,   r"test\data\basic.hlsl", None, StandardFileInclude, "vs_main", "vs_4_0", Compile::Debug, CompileEffect::None).unwrap();
+///     let library       = d3dc.compile(library_hlsl, r"library.hlsl",         None, None,                (),       "lib_5_0", Compile::Debug, CompileEffect::None).unwrap();
 ///     // resulting blobs are binary data
 /// 
 ///     // Option D:  compile2
-///     let pixel_shader  = compiler.compile2(basic_hlsl,   (), None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None, CompileSecdata::None, None).unwrap();
-///     let vertex_shader = compiler.compile2(basic_hlsl,   (), None, None, "vs_main", "vs_4_0", Compile::Debug, CompileEffect::None, CompileSecdata::None, None).unwrap();
-///     let library       = compiler.compile2(library_hlsl, (), None, None, (),       "lib_5_0", Compile::Debug, CompileEffect::None, CompileSecdata::None, None).unwrap();
+///     let pixel_shader  = d3dc.compile2(basic_hlsl,   (), None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None, CompileSecdata::None, None).unwrap();
+///     let vertex_shader = d3dc.compile2(basic_hlsl,   (), None, None, "vs_main", "vs_4_0", Compile::Debug, CompileEffect::None, CompileSecdata::None, None).unwrap();
+///     let library       = d3dc.compile2(library_hlsl, (), None, None, (),       "lib_5_0", Compile::Debug, CompileEffect::None, CompileSecdata::None, None).unwrap();
 ///     // resulting blobs are binary data
 /// 
 ///     // TODO: show ID3DInclude usage
@@ -203,17 +203,17 @@ pub const d3dcompiler_02_compile : () = ();
 /// use thindx::d3d11::*;
 /// 
 /// fn main() {
-///     let compiler = d3d::Compiler::new(47).unwrap();
+///     let d3dc = d3d::Compiler::new(47).unwrap();
 ///     let lib_source = b"export float4 xyz1(float3 v) { return float4(v, 1.0); }";
-///     let lib_bytecode = compiler.compile(lib_source, "example.hlsl", None, None, (), "lib_5_0", Compile::OptimizationLevel3, CompileEffect::None).unwrap();
-///     let lib = compiler.load_module(&lib_bytecode.shader).unwrap();
+///     let lib_bytecode = d3dc.compile(lib_source, "example.hlsl", None, None, (), "lib_5_0", Compile::OptimizationLevel3, CompileEffect::None).unwrap();
+///     let lib = d3dc.load_module(&lib_bytecode.shader).unwrap();
 /// 
 /// 
 /// 
 ///     // Use FunctionLinkingGraph to create a shader.  Note that the fn call order
 ///     // here is brittle, reordering many of the calls here will cause E::FAIL errors.
 /// 
-///     let graph : FunctionLinkingGraph = compiler.create_function_linking_graph(None).unwrap();
+///     let graph : FunctionLinkingGraph = d3dc.create_function_linking_graph(None).unwrap();
 /// 
 ///     let input = graph.set_input_signature(&[
 ///         ParameterDesc::new(cstr!("inputPos"),  cstr!("POSITION0"), SVT::Float, SVC::Vector, 1, 3, Interpolation::Linear, PF::In, 0, 0, 0, 0),
@@ -246,7 +246,7 @@ pub const d3dcompiler_02_compile : () = ();
 ///     // Option B:  Link HLSL
 ///     let (graph_inst, _warnings) = graph.create_module_instance().unwrap();
 ///     let lib_inst = lib.create_instance("").unwrap();
-///     let linker = compiler.create_linker().unwrap();
+///     let linker = d3dc.create_linker().unwrap();
 ///     linker.use_library(&lib_inst).unwrap();
 ///     linker.link(&graph_inst, "main", "vs_5_0", None).unwrap();
 /// }
@@ -290,10 +290,10 @@ pub const d3dcompiler_03_link : () = ();
 /// //use thindx::d3d11::*;
 /// 
 /// fn dump_library() {
-///     let compiler = d3d::Compiler::new(47).unwrap();
-///     let library = compiler.compile_from_file(r"test\data\library.hlsl", None, None, (), "lib_5_0", Compile::Debug, CompileEffect::None).unwrap();
-///     let _library = compiler.reflect_library::<d3d11::LibraryReflection>(&library).unwrap();
-///     let library  = compiler.reflect_library_11(&library).unwrap(); // equivalent shorthand
+///     let d3dc = d3d::Compiler::new(47).unwrap();
+///     let library = d3dc.compile_from_file(r"test\data\library.hlsl", None, None, (), "lib_5_0", Compile::Debug, CompileEffect::None).unwrap();
+///     let _library = d3dc.reflect_library::<d3d11::LibraryReflection>(&library).unwrap();
+///     let library  = d3dc.reflect_library_11(&library).unwrap(); // equivalent shorthand
 /// 
 ///     println!("library");
 ///     println!("=======");
@@ -306,10 +306,10 @@ pub const d3dcompiler_03_link : () = ();
 /// }
 /// 
 /// fn dump_shader() {
-///     let compiler = d3d::Compiler::new(47).unwrap();
-///     let shader  = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "vs_main", "vs_4_0", Compile::Debug, CompileEffect::None).unwrap();
-///     let _shader = compiler.reflect::<d3d11::ShaderReflection>(&shader).unwrap();
-///     let shader  = compiler.reflect11(&shader).unwrap(); // equivalent shorthand
+///     let d3dc = d3d::Compiler::new(47).unwrap();
+///     let shader  = d3dc.compile_from_file(r"test\data\basic.hlsl", None, None, "vs_main", "vs_4_0", Compile::Debug, CompileEffect::None).unwrap();
+///     let _shader = d3dc.reflect::<d3d11::ShaderReflection>(&shader).unwrap();
+///     let shader  = d3dc.reflect11(&shader).unwrap(); // equivalent shorthand
 /// 
 ///     let desc = shader.get_desc().unwrap();
 ///     println!("shader");

@@ -34,7 +34,7 @@ Function doc comments should generally follow the following style, skipping irre
 /// ### Examples
 /// ```rust
 /// # use thindx::{*, d3d::*, d3d11::*};
-/// # let compiler = Compiler::new(47).unwrap();
+/// # let d3dc = Compiler::new(47).unwrap();
 /// println!("Hi!");
 /// ```
 ///
