@@ -34,7 +34,7 @@ impl<'r> ShaderReflectionVariable<'r> {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectionvariable-getbuffer)\]
     /// ID3D11ShaderReflectionVariable::GetBuffer
     ///
-    /// This method returns the buffer of the current ID3D11ShaderReflectionVariable.
+    /// This method returns the buffer of the current [d3d11::ShaderReflectionVariable].
     ///
     /// ### Example
     /// ```rust

@@ -38,7 +38,7 @@ impl<'r> ShaderReflectionType<'r> {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectiontype-getbaseclass)\]
     /// ID3D11ShaderReflectionType::GetBaseClass
     ///
-    /// Gets an ID3D11ShaderReflectionType Interface interface containing the variable base class type.
+    /// Gets an [d3d11::ShaderReflectionType] Interface interface containing the variable base class type.
     ///
     /// ### Example
     /// ```rust
