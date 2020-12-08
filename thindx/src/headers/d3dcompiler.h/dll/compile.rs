@@ -10,7 +10,7 @@ use std::ptr::*;
 
 /// { code: [ReadOnlyBlob], errors: [TextBlob] } returned by [Compiler::compile]/[compile2](Compiler::compile2)
 pub struct CompileResult {
-    pub shader:     ReadOnlyBlob,
+    pub shader:     CodeBlob,
     pub errors:     TextBlob,
 }
 
@@ -26,7 +26,7 @@ pub struct PreprocessResult {
 pub struct CompileError {
     pub kind:       ErrorKind,
     pub method:     Option<&'static str>,
-    pub shader:     Option<ReadOnlyBlob>, // may or may not have generated a shader blob despite errors
+    pub shader:     Option<CodeBlob>, // may or may not have generated a shader blob despite errors
     pub errors:     TextBlob, // may or may not have generated error messages depending on the error kind
 }
 
@@ -52,6 +52,45 @@ impl Debug for CompileError {
 impl Display for CompileError {
     fn fmt(&self, fmt: &mut Formatter) -> fmt::Result {
         write!(fmt, "Error compiling shader: {:?}", self.kind)?;
+        if !self.errors.is_empty() {
+            writeln!(fmt, "\n{}", self.errors.to_utf8_lossy())?;
+        }
+        Ok(())
+    }
+}
+
+
+
+/// { kind: [ErrorKind], shader: Option&lt;[ReadOnlyBlob]&gt;, errors: [TextBlob] }
+pub struct PreprocessError {
+    pub kind:       ErrorKind,
+    pub method:     Option<&'static str>,
+    pub shader:     TextBlob, // may or may not have generated a shader blob despite errors
+    pub errors:     TextBlob, // may or may not have generated error messages depending on the error kind
+}
+
+impl From<Error> for PreprocessError {
+    fn from(e: Error) -> Self {
+        let Error { kind, method, errors } = e;
+        Self { kind, method, errors, shader: Default::default() }
+    }
+}
+
+impl std::error::Error for PreprocessError {}
+
+impl Debug for PreprocessError {
+    fn fmt(&self, fmt: &mut Formatter) -> fmt::Result {
+        fmt.debug_struct("PreprocessError")
+            .field("kind", &self.kind)
+            .field("shader", &self.shader.to_utf8_lossy())
+            .field("errors", &self.errors.to_utf8_lossy())
+            .finish()
+    }
+}
+
+impl Display for PreprocessError {
+    fn fmt(&self, fmt: &mut Formatter) -> fmt::Result {
+        write!(fmt, "Error preprocessing shader: {:?}", self.kind)?;
         if !self.errors.is_empty() {
             writeln!(fmt, "\n{}", self.errors.to_utf8_lossy())?;
         }
@@ -142,12 +181,12 @@ impl Compiler {
         ErrorKind::check(hr).map_err(|kind| CompileError {
             kind,
             method: Some("D3DCompileFromFile"),
-            shader: unsafe { ReadOnlyBlob::from_raw_opt(shader as *mut _) },
+            shader: unsafe { ReadOnlyBlob::from_raw_opt(shader as *mut _).map(|blob| CodeBlob::from_unchecked(blob)) },
             errors: TextBlob::new(unsafe { ReadOnlyBlob::from_raw_opt(errors as *mut _) }),
         })?;
 
         Ok(CompileResult {
-            shader: unsafe { ReadOnlyBlob::from_raw(shader as *mut _) },
+            shader: unsafe { CodeBlob::from_unchecked(ReadOnlyBlob::from_raw(shader as *mut _)) },
             errors: TextBlob::new(unsafe { ReadOnlyBlob::from_raw_opt(errors as *mut _) }),
         })
     }
@@ -232,12 +271,12 @@ impl Compiler {
         ErrorKind::check(hr).map_err(|kind| CompileError {
             kind,
             method: Some("D3DCompile"),
-            shader: unsafe { ReadOnlyBlob::from_raw_opt(shader as *mut _) },
+            shader: unsafe { ReadOnlyBlob::from_raw_opt(shader as *mut _).map(|blob| CodeBlob::from_unchecked(blob)) },
             errors: TextBlob::new(unsafe { ReadOnlyBlob::from_raw_opt(errors as *mut _) }),
         })?;
 
         Ok(CompileResult {
-            shader: unsafe { ReadOnlyBlob::from_raw(shader as *mut _) },
+            shader: unsafe { CodeBlob::from_unchecked(ReadOnlyBlob::from_raw(shader as *mut _)) },
             errors: TextBlob::new(unsafe { ReadOnlyBlob::from_raw_opt(errors as *mut _) }),
         })
     }
@@ -339,12 +378,12 @@ impl Compiler {
         ErrorKind::check(hr).map_err(|kind| CompileError {
             kind,
             method: Some("D3DCompile2"),
-            shader: unsafe { ReadOnlyBlob::from_raw_opt(shader as *mut _) },
+            shader: unsafe { ReadOnlyBlob::from_raw_opt(shader as *mut _).map(|blob| CodeBlob::from_unchecked(blob)) },
             errors: TextBlob::new(unsafe { ReadOnlyBlob::from_raw_opt(errors as *mut _) }),
         })?;
 
         Ok(CompileResult {
-            shader: unsafe { ReadOnlyBlob::from_raw(shader as *mut _) },
+            shader: unsafe { CodeBlob::from_unchecked(ReadOnlyBlob::from_raw(shader as *mut _)) },
             errors: TextBlob::new(unsafe { ReadOnlyBlob::from_raw_opt(errors as *mut _) }),
         })
     }
@@ -394,7 +433,7 @@ impl Compiler {
         source_name:    impl TryIntoAsOptCStr,
         defines:        impl AsShaderMacros,
         include:        impl AsID3DInclude,
-    ) -> Result<PreprocessResult, CompileError> {
+    ) -> Result<PreprocessResult, PreprocessError> {
         // Early outs
         let f           = self.D3DPreprocess.ok_or(Error::new("D3DPreprocess", THINERR::MISSING_DLL_EXPORT))?;
         let defines     = defines.as_shader_macros().map_err(|e| Error::new("D3DPreprocess", e))?;
@@ -402,17 +441,17 @@ impl Compiler {
         let src_data    = src_data.as_ref();
         // Note: No error checking occurs for internal `\0`s - they will simply terminate the string earlier than expected.
         // Note: We should perhaps reject non-ASCII values instead of allowing UTF8
-        let source_name = source_name.try_into().map_err(|e| CompileError { kind: e, method: Some("D3DPreprocess"), shader: None, errors: Default::default() })?;
+        let source_name = source_name.try_into().map_err(|e| PreprocessError { kind: e, method: Some("D3DPreprocess"), shader: Default::default(), errors: Default::default() })?;
         let source_name = source_name.as_opt_cstr();
         let include     = include.as_id3dinclude();
 
         let mut shader = null_mut();
         let mut errors = null_mut();
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), source_name, defines, include, &mut shader, &mut errors)};
-        ErrorKind::check(hr).map_err(|kind| CompileError {
+        ErrorKind::check(hr).map_err(|kind| PreprocessError {
             kind,
             method: Some("D3DPreprocess"),
-            shader: unsafe { ReadOnlyBlob::from_raw_opt(shader as *mut _) },
+            shader: TextBlob::new(unsafe { ReadOnlyBlob::from_raw_opt(shader as *mut _) }),
             errors: TextBlob::new(unsafe { ReadOnlyBlob::from_raw_opt(errors as *mut _) }),
         })?;
 

@@ -190,7 +190,7 @@ impl Compiler {
         Compile::Debug, CompileEffect::None
     ).unwrap().shader;
 
-    let r : d3d11::LibraryReflection = d3dc.reflect_library(shader.get_buffer()).unwrap();
+    let r : d3d11::LibraryReflection = d3dc.reflect_library(&shader).unwrap();
     let desc = r.get_desc().unwrap();
     assert!(desc.function_count > 0);
 

@@ -82,7 +82,7 @@ use std::ptr::*;
 ///
 ///
 /// // 3.  Option A:  Generate HLSL
-/// println!("{}", String::from_utf8_lossy(graph.generate_hlsl(()).unwrap().get_buffer()));
+/// println!("{}", graph.generate_hlsl(()).unwrap().to_utf8_lossy());
 ///
 ///
 /// // 3.  Option B:  Link HLSL
@@ -195,7 +195,7 @@ impl FunctionLinkingGraph {
     /// # let compiler = Compiler::new(47).unwrap();
     /// # let flg : FunctionLinkingGraph = compiler.create_function_linking_graph(None).unwrap();
     /// let hlsl = flg.generate_hlsl(()).unwrap();
-    /// println!("{}", String::from_utf8_lossy(hlsl.get_buffer()));
+    /// println!("{}", hlsl.to_utf8_lossy());
     /// ```
     ///
     /// ### Outputs
@@ -204,13 +204,13 @@ impl FunctionLinkingGraph {
     /// {
     /// }
     /// ```
-    pub fn generate_hlsl(&self, flags: ()) -> Result<ReadOnlyBlob, Error> {
+    pub fn generate_hlsl(&self, flags: ()) -> Result<TextBlob, Error> {
         let _ = flags; let flags = 0;
 
         let mut blob = null_mut();
         let hr = unsafe { self.0.GenerateHlsl(flags, &mut blob) };
         Error::check("ID3D11FunctionLinkingGraph::GenerateHlsl", hr)?;
-        Ok(unsafe { ReadOnlyBlob::from_raw(blob) })
+        Ok(TextBlob::new(unsafe { ReadOnlyBlob::from_raw(blob) }))
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionlinkinggraph-getlasterror)\]

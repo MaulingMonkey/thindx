@@ -61,7 +61,7 @@ impl Linker {
         let hr = unsafe { self.0.Link(entry.as_raw(), entry_name, target_name, flags, &mut blob, &mut errors) };
         unsafe { Error::check_blob("ID3D11Linker::Link", hr, errors) }?;
         Ok(CompileResult { // TODO: rename CompileResult to something more general?  BlobWithWarnings?  BlobWithNonFatalErrors?
-            shader: unsafe { ReadOnlyBlob::from_raw(blob) },
+            shader: unsafe { CodeBlob::from_unchecked(ReadOnlyBlob::from_raw(blob)) },
             errors: TextBlob::new(unsafe { ReadOnlyBlob::from_raw_opt(errors) }),
         })
     }

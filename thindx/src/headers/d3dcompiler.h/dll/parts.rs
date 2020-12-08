@@ -26,7 +26,7 @@ impl Compiler {
     /// ### Example
     /// ```rust
     /// # use thindx::d3d::*; let compiler = Compiler::new(47).unwrap();
-    /// # let shader : ReadOnlyBlob = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap().shader;
+    /// # let shader = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap().shader;
     /// let shader2 = compiler.set_blob_part(
     ///     shader.get_buffer(), Blob::PrivateData, (), b"testing 123"
     /// ).unwrap();
@@ -203,7 +203,7 @@ impl Compiler {
     /// ### Example
     /// ```rust
     /// # use thindx::d3d::*; let compiler = Compiler::new(47).unwrap();
-    /// # let shader : ReadOnlyBlob = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap().shader;
+    /// # let shader = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap().shader;
     /// let shader2 = compiler.set_blob_part(
     ///     shader.get_buffer(), Blob::PrivateData, (), b"testing 123"
     /// ).unwrap();
@@ -245,12 +245,12 @@ impl Compiler {
     /// ### Example
     /// ```rust
     /// # use thindx::d3d::*; let compiler = Compiler::new(47).unwrap();
-    /// let shader : ReadOnlyBlob = compiler.compile_from_file(
+    /// let shader = compiler.compile_from_file(
     ///     r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0",
     ///     Compile::Debug, CompileEffect::None
     /// ).unwrap().shader;
     ///
-    /// let shader : ReadOnlyBlob = compiler.strip_shader(
+    /// let shader = compiler.strip_shader(
     ///     shader.get_buffer(), CompilerStripFlags::DebugInfo
     /// ).unwrap();
     /// ```

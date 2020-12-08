@@ -19,6 +19,9 @@ use winapi::shared::winerror::*;
 
     /// `0xA73DC003`    String contains unexpected internal `\0`s when being passed to a function taking C-style `\0`-*terminated* strings.
     pub const STRING_CONTAINS_NULS : ErrorKind = ErrorKind(0xA73DC003);
+
+    /// `0xA73DC004`    Bytecode is invalid (bad header, invalid checksum, wrong length, etc.)
+    pub const INVALID_BYTECODE : ErrorKind = ErrorKind(0xA73DC004);
 }
 
 /// Direct3D 11 errors
