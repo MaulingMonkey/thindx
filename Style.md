@@ -1,3 +1,5 @@
+### Doc Comments
+
 Function doc comments should generally follow the following style, skipping irrelevant sections
 (e.g. if the fn takes no arguments, remove the entire "### Arguments" header and section.)
 
@@ -55,3 +57,20 @@ Function doc comments should generally follow the following style, skipping irre
 /// [cite2]:            link2
 /// [cite3]:            link3
 ```
+
+### Naming Things
+
+| Win32                     | thindx                    |
+| ------------------------- | ------------------------- |
+| **interfaces**            |
+| `ID3DSomeInterface`       | `d3d::SomeInterface`
+| `IDirect3DSomeInterface9` | `d3d9::SomeInterface`
+| `ID3D11SomeInterface`     | `d3d11::SomeInterface`
+| **structures**            |
+| `D3D_SOME_STRUCT`         | `d3d::SomeStruct`
+| `D3D11_SOME_STRUCT`       | `d3d11::SomeStruct`
+| **flags/enums**           |
+| `D3D_FLAG_VALUE`          | `d3d::Flag::Value`
+| `D3D11_FLAG_VALUE`        | `d3d11::Flag::Value`
+| **identifiers**           |
+| `Type`                    | `ty` (not `r#type` nor `type_`)
