@@ -32,8 +32,8 @@ impl Compiler {
     /// ).unwrap();
     ///
     /// assert_eq!(b"testing 123", compiler.get_blob_part(
-    ///     shader2.get_buffer(), Blob::PrivateData, None
-    /// ).unwrap().get_buffer());
+    ///     &shader2, Blob::PrivateData, None
+    /// ).unwrap().as_bytes());
     /// ```
     #[requires(d3dcompiler=43)]
     pub fn get_blob_part(&self, src_data: &[u8], part: impl Into<BlobPart>, flags: Option<void::Void>) -> Result<BytesBlob, Error> {
@@ -209,8 +209,8 @@ impl Compiler {
     /// ).unwrap();
     ///
     /// assert_eq!(b"testing 123", compiler.get_blob_part(
-    ///     shader2.get_buffer(), Blob::PrivateData, None
-    /// ).unwrap().get_buffer());
+    ///     &shader2, Blob::PrivateData, None
+    /// ).unwrap().as_bytes());
     /// ```
     #[requires(d3dcompiler=44)]
     pub fn set_blob_part<'s>(

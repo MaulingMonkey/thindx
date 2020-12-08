@@ -159,7 +159,6 @@ impl BytesBlob {
 
     pub fn len(&self)      -> usize   { self.0.as_ref().map_or(0,    |blob| blob.get_buffer_size()) }
     pub fn is_empty(&self) -> bool    { self.0.as_ref().map_or(true, |blob| blob.get_buffer_size() == 0) }
-    pub fn get_buffer(&self) -> &[u8] { self.0.as_ref().map_or(&[],  |blob| blob.get_buffer()) } // TODO: remove
     pub fn as_bytes(&self)   -> &[u8] { self.0.as_ref().map_or(&[],  |blob| blob.get_buffer()) }
 }
 
