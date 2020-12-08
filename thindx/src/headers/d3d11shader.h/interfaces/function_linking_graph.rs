@@ -3,7 +3,6 @@ use crate::d3d::*;
 use crate::d3d11::*;
 
 use std::convert::TryInto;
-use std::os::raw::c_char;
 use std::ptr::*;
 
 // TODO REFACTOR:
@@ -138,26 +137,23 @@ impl FunctionLinkingGraph {
     /// # let graph : FunctionLinkingGraph = d3dc.create_function_linking_graph(None).unwrap();
     /// # let input  = graph.set_input_signature(&[]).unwrap();
     /// let xyz1 = graph.call_function("example_namespace", &lib, "xyz1").unwrap();
-    /// let xyz1 = graph.call_function("",   &lib, "xyz1").unwrap();
-    /// let xyz1 = graph.call_function(None, &lib, "xyz1").unwrap();
+    /// let xyz1 = graph.call_function("", &lib, "xyz1").unwrap();
+    /// let xyz1 = graph.call_function((), &lib, "xyz1").unwrap();
     ///
     /// assert_eq!(E::FAIL, graph.call_function("", &lib, "nonexistant").err().unwrap().kind());
     /// ```
     pub fn call_function<'s>(
         &self,
-        module_instance_namespace:      impl Into<Option<&'s str>>,
+        module_instance_namespace:      impl TryIntoAsOptCStr + 's,
         module_with_function_prototype: &Module,
-        function_name:                  &'s str,
+        function_name:                  impl TryIntoAsCStr + 's,
     ) -> Result<LinkingNode, Error> {
-        let ns      = module_instance_namespace.into().map(|s| s.bytes().chain(Some(0)).collect::<Vec<_>>());
-        let name    = function_name.bytes().chain(Some(0)).collect::<Vec<_>>();
+        let ns      = module_instance_namespace.try_into()  .map_err(|e| Error::new("FunctionLinkingGraph::call_function", e))?;
+        let name    = function_name.try_into()              .map_err(|e| Error::new("FunctionLinkingGraph::call_function", e))?;
         let module  = module_with_function_prototype.as_raw();
 
-        let ns = ns.as_ref().map_or(null(), |s| s.as_ptr().cast());
-        let name = name.as_ptr().cast();
-
         let mut node = null_mut();
-        let hr = unsafe { self.0.CallFunction(ns, module, name, &mut node) };
+        let hr = unsafe { self.0.CallFunction(ns.as_opt_cstr(), module, name.as_cstr(), &mut node) };
         Error::check("ID3D11FunctionLinkingGraph::CallFunction", hr)?;
         Ok(unsafe { LinkingNode::from_raw(node) })
     }
@@ -277,10 +273,10 @@ impl FunctionLinkingGraph {
     /// # let output = graph.set_output_signature(&[ParameterDesc::new(cstr!("outPos"), cstr!("SV_POSITION"), SVT::Float, SVC::Vector, 1, 4, Interpolation::Undefined, PF::Out, 0, 0, 0, 0)]).unwrap();
     /// graph.pass_value_with_swizzle(&input, 0, "xyzw", &output, 0, "zyxw").unwrap();
     /// ```
-    pub fn pass_value_with_swizzle(&self, src_node: &LinkingNode, src_parameter_index: i32, src_swizzle: &str, dst_node: &LinkingNode, dst_parameter_index: i32, dst_swizzle: &str) -> Result<(), Error> {
-        let src_swizzle = src_swizzle.bytes().map(|b| b as c_char).chain(Some(0)).collect::<Vec<_>>();
-        let dst_swizzle = dst_swizzle.bytes().map(|b| b as c_char).chain(Some(0)).collect::<Vec<_>>();
-        let hr = unsafe { self.0.PassValueWithSwizzle(src_node.as_raw(), src_parameter_index, src_swizzle.as_ptr(), dst_node.as_raw(), dst_parameter_index, dst_swizzle.as_ptr()) };
+    pub fn pass_value_with_swizzle(&self, src_node: &LinkingNode, src_parameter_index: i32, src_swizzle: impl TryIntoAsCStr, dst_node: &LinkingNode, dst_parameter_index: i32, dst_swizzle: impl TryIntoAsCStr) -> Result<(), Error> {
+        let src_swizzle = src_swizzle.try_into().map_err(|e| Error::new("FunctionLinkingGraph::pass_value_with_swizzle", e))?;
+        let dst_swizzle = dst_swizzle.try_into().map_err(|e| Error::new("FunctionLinkingGraph::pass_value_with_swizzle", e))?;
+        let hr = unsafe { self.0.PassValueWithSwizzle(src_node.as_raw(), src_parameter_index, src_swizzle.as_cstr(), dst_node.as_raw(), dst_parameter_index, dst_swizzle.as_cstr()) };
         Error::check("ID3D11FunctionLinkingGraph::PassValueWithSwizzle", hr)
     }
 
