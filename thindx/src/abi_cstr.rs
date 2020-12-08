@@ -37,6 +37,7 @@ impl AbiCStr {
     /// ### Safety
     /// *   `bytes` must contain at least one `\0`.
     pub unsafe fn from_bytes_with_nul_unchecked(bytes: &[u8]) -> &AbiCStr {
+        debug_assert!(bytes.contains(&0));
         AbiCStr::from_ptr_unbounded(bytes.as_ptr() as *const _)
     }
 
