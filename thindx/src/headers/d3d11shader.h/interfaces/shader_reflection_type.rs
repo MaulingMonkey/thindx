@@ -206,8 +206,8 @@ impl<'r> ShaderReflectionType<'r> {
     /// # use thindx::*;
     /// // TODO
     /// ```
-    pub fn is_equal(&self, type_: &ShaderReflectionType) -> Result<bool, Error> {
-        let hr = unsafe { self.ptr.as_ref().IsEqual(type_.as_raw()) };
+    pub fn is_equal(&self, ty: &ShaderReflectionType) -> Result<bool, Error> {
+        let hr = unsafe { self.ptr.as_ref().IsEqual(ty.as_raw()) };
         if hr == S_FALSE {
             Ok(false)
         } else {
@@ -233,8 +233,8 @@ impl<'r> ShaderReflectionType<'r> {
     /// # use thindx::*;
     /// // TODO
     /// ```
-    pub fn is_of_type(&self, type_: &ShaderReflectionType) -> Result<bool, Error> {
-        let hr = unsafe { self.ptr.as_ref().IsOfType(type_.as_raw()) };
+    pub fn is_of_type(&self, ty: &ShaderReflectionType) -> Result<bool, Error> {
+        let hr = unsafe { self.ptr.as_ref().IsOfType(ty.as_raw()) };
         if hr == S_FALSE {
             Ok(false)
         } else {

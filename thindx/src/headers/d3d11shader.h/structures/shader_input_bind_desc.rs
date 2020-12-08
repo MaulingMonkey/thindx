@@ -17,7 +17,7 @@ use winapi::um::d3d11shader::*;
 #[derive(Clone, Copy, Debug, Default)]
 #[repr(C)] pub struct ShaderInputBindDesc<'s> {
     pub name:           ConstCStrPtrNullIsEmpty<'s>, // maybe never null?
-    pub r#type:         ShaderInputType,
+    pub ty:             ShaderInputType,
     pub bind_point:     u32,
     pub bind_count:     u32,
     pub flags:          ShaderInputFlags,
@@ -34,7 +34,7 @@ impl ShaderInputBindDesc<'_> {
 
 test_layout! { ShaderInputBindDesc => unsafe D3D11_SHADER_INPUT_BIND_DESC {
     name            => Name,
-    r#type          => Type,
+    ty              => Type,
     bind_point      => BindPoint,
     bind_count      => BindCount,
     flags           => uFlags,

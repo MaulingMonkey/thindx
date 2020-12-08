@@ -16,7 +16,7 @@ use crate::d3d::*;
     pub name:                   Option<&'s AbiCStr>,
     /// An input semantic name + index such as "POSITION0", "TEXCOORD0", "TEXCOORD1", etc.
     pub semantic_name:          Option<&'s AbiCStr>,
-    pub type_:                  ShaderVariableType,
+    pub ty:                     ShaderVariableType,
     pub class:                  ShaderVariableClass,
     pub rows:                   u32,
     pub columns:                u32,
@@ -43,7 +43,7 @@ impl<'s> ParameterDesc<'s> {
     pub fn new(
         name:                   impl Into<Option<&'s AbiCStr>>,
         semantic_name:          impl Into<&'s AbiCStr>, // Seems fairly mandatory in testing
-        type_:                  ShaderVariableType,
+        ty:                     ShaderVariableType,
         class:                  ShaderVariableClass,
         rows:                   u32,
         columns:                u32,
@@ -57,7 +57,7 @@ impl<'s> ParameterDesc<'s> {
         Self {
             name:           name.into(),
             semantic_name:  Some(semantic_name.into()),
-            type_, class, rows, columns, interpolation_mode, flags,
+            ty, class, rows, columns, interpolation_mode, flags,
             first_in_register, first_in_component, first_out_register, first_out_component,
         }
     }
@@ -66,7 +66,7 @@ impl<'s> ParameterDesc<'s> {
 test_layout! { ParameterDesc => unsafe winapi::um::d3d11shader::D3D11_PARAMETER_DESC {
     name                    => Name,
     semantic_name           => SemanticName,
-    type_                   => Type,
+    ty                      => Type,
     class                   => Class,
     rows                    => Rows,
     columns                 => Columns,

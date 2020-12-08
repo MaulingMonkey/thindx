@@ -14,7 +14,7 @@ use winapi::um::d3d11shader::*;
 #[derive(Clone, Copy, Debug, Default)]
 #[repr(C)] pub struct ShaderTypeDesc<'s> {
     pub class:      ShaderVariableClass,
-    pub r#type:     ShaderVariableType,
+    pub ty:         ShaderVariableType,
     pub rows:       u32,
     pub columns:    u32,
     pub elements:   u32,
@@ -31,7 +31,7 @@ impl ShaderTypeDesc<'_> {
 
 test_layout! { ShaderTypeDesc => unsafe D3D11_SHADER_TYPE_DESC {
     class       => Class,
-    r#type      => Type,
+    ty          => Type,
     rows        => Rows,
     columns     => Columns,
     elements    => Elements,

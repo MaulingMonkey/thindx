@@ -14,7 +14,7 @@ use winapi::um::d3d11shader::*;
 #[derive(Clone, Copy, Debug, Default)]
 #[repr(C)] pub struct ShaderBufferDesc<'s> {
     pub name:                           ConstCStrPtrNullIsEmpty<'s>, // maybe never null?
-    pub r#type:                         CBufferType,
+    pub ty:                             CBufferType,
     pub variables:                      u32,
     pub size:                           u32,
     pub flags:                          ShaderCbufferFlags,
@@ -28,7 +28,7 @@ impl ShaderBufferDesc<'_> {
 
 test_layout! { ShaderBufferDesc => unsafe D3D11_SHADER_BUFFER_DESC {
     name                            => Name,
-    r#type                          => Type,
+    ty                              => Type,
     variables                       => Variables,
     size                            => Size,
     flags                           => uFlags,
