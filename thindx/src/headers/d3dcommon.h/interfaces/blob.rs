@@ -129,7 +129,6 @@ impl CodeBlob {
 
     pub fn len(&self)      -> usize { self.0.get_buffer_size() }
     pub fn is_empty(&self) -> bool  { self.0.get_buffer_size() == 0 }
-    pub fn get_buffer(&self) -> &[u8] { self.0.get_buffer() } // TODO: remove
     pub fn as_bytes(&self) -> &[u8] { self.0.get_buffer() }
     pub fn as_bytecode(&self) -> &d3d::Bytecode { unsafe { d3d::Bytecode::from_unchecked(self.as_bytes()) } }
 }
