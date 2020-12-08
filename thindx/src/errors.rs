@@ -5,7 +5,22 @@ use winapi::shared::winerror::*;
 
 // https://docs.microsoft.com/en-us/windows/win32/direct3d11/d3d11-graphics-reference-returnvalues
 
-
+// https://docs.microsoft.com/en-us/windows/win32/com/structure-of-com-error-codes
+// #        Facility            Desc
+// 0        FACILITY_NULL       For broadly applicable common status codes such as S_OK.
+// 1        FACILITY_RPC        For status codes returned from remote procedure calls.
+// 2        FACILITY_DISPATCH   For late-binding IDispatch interface errors.
+// 3        FACILITY_STORAGE    For status codes returned from IStorage or IStream method calls relating to structured storage. Status codes whose code (lower 16 bits) value is in the range of MS-DOS error codes (that is, less than 256) have the same meaning as the corresponding MS-DOS error.
+// 4        FACILITY_ITF        For most status codes returned from interface methods. The actual meaning of the error is defined by the interface. That is, two HRESULTs with exactly the same 32-bit value returned from two different interfaces might have different meanings.
+// 7        FACILITY_WIN32      Used to provide a means of handling error codes from functions in the Windows API as an HRESULT. Error codes in 16-bit OLE that duplicated system error codes have also been changed to FACILITY_WIN32.
+// 8        FACILITY_WINDOWS    Used for additional error codes from Microsoft-defined interfaces.
+// 0x876    _FACD3D             Direct3D
+// 0x879                        Direct3D 10
+// 0x87A                        DXGI
+// 0x87B                        DXGI DDI
+// 0x87C                        Direct3D 11
+// 0x898                        DirectWrite
+// 0x899                        Direct2D
 
 /// Thin* errors
 #[allow(non_camel_case_types)] pub struct THINERR(());
