@@ -1,20 +1,32 @@
 use crate::*;
 use crate::d3d::*;
 
+use std::borrow::Borrow;
 use std::fmt::{self, Debug, Display, Formatter};
 use std::os::windows::ffi::*;
+use std::ops::Deref;
 use std::path::*;
 use std::ptr::*;
 
 
 
 /// { code: [ReadOnlyBlob], errors: [TextBlob] } returned by [Compiler::compile]/[compile2](Compiler::compile2)
+#[derive(Clone, Debug)]
 pub struct CompileResult {
     pub shader:     CodeBlob,
     pub errors:     TextBlob,
 }
 
+impl AsRef <[u8]> for CompileResult { fn as_ref(&self) -> &[u8] { self.shader.as_bytes() } }
+impl Borrow<[u8]> for CompileResult { fn borrow(&self) -> &[u8] { self.shader.as_bytes() } }
+impl AsRef <Bytecode> for CompileResult { fn as_ref(&self) -> &Bytecode { self.shader.as_bytecode() } }
+impl Borrow<Bytecode> for CompileResult { fn borrow(&self) -> &Bytecode { self.shader.as_bytecode() } }
+impl Deref for CompileResult { fn deref(&self) -> &Bytecode { self.shader.as_bytecode() } type Target = Bytecode; }
+
+
+
 /// { code: [TextBlob], errors: [TextBlob] } returned by [Compiler::preprocess]
+#[derive(Clone, Debug)]
 pub struct PreprocessResult {
     pub shader:     TextBlob,
     pub errors:     TextBlob,
@@ -23,6 +35,7 @@ pub struct PreprocessResult {
 
 
 /// { kind: [ErrorKind], shader: Option&lt;[ReadOnlyBlob]&gt;, errors: [TextBlob] }
+#[derive(Clone)]
 pub struct CompileError {
     pub kind:       ErrorKind,
     pub method:     Option<&'static str>,
@@ -62,6 +75,7 @@ impl Display for CompileError {
 
 
 /// { kind: [ErrorKind], shader: Option&lt;[ReadOnlyBlob]&gt;, errors: [TextBlob] }
+#[derive(Clone)]
 pub struct PreprocessError {
     pub kind:       ErrorKind,
     pub method:     Option<&'static str>,
