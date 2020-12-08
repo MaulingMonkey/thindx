@@ -62,7 +62,7 @@ impl Linker {
         unsafe { Error::check_blob("ID3D11Linker::Link", hr, errors) }?;
         Ok(CompileResult { // TODO: rename CompileResult to something more general?  BlobWithWarnings?  BlobWithNonFatalErrors?
             shader: unsafe { ReadOnlyBlob::from_raw(blob) },
-            errors: unsafe { ReadOnlyBlob::from_raw_opt(errors) },
+            errors: TextBlob::new(unsafe { ReadOnlyBlob::from_raw_opt(errors) }),
         })
     }
 
