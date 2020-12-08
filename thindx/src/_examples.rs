@@ -292,8 +292,8 @@ pub const d3dcompiler_03_link : () = ();
 /// fn dump_library() {
 ///     let compiler = d3d::Compiler::new(47).unwrap();
 ///     let library = compiler.compile_from_file(r"test\data\library.hlsl", None, None, (), "lib_5_0", Compile::Debug, CompileEffect::None).unwrap();
-///     let _library = compiler.reflect_library::<d3d11::LibraryReflection>(library.shader.as_bytes()).unwrap();
-///     let library  = compiler.reflect_library_11(&library.shader).unwrap(); // equivalent shorthand
+///     let _library = compiler.reflect_library::<d3d11::LibraryReflection>(&library).unwrap();
+///     let library  = compiler.reflect_library_11(&library).unwrap(); // equivalent shorthand
 /// 
 ///     println!("library");
 ///     println!("=======");
@@ -308,8 +308,8 @@ pub const d3dcompiler_03_link : () = ();
 /// fn dump_shader() {
 ///     let compiler = d3d::Compiler::new(47).unwrap();
 ///     let shader  = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "vs_main", "vs_4_0", Compile::Debug, CompileEffect::None).unwrap();
-///     let _shader = compiler.reflect::<d3d11::ShaderReflection>(shader.shader.as_bytes()).unwrap();
-///     let shader  = compiler.reflect11(&shader.shader).unwrap(); // equivalent shorthand
+///     let _shader = compiler.reflect::<d3d11::ShaderReflection>(&shader).unwrap();
+///     let shader  = compiler.reflect11(&shader).unwrap(); // equivalent shorthand
 /// 
 ///     let desc = shader.get_desc().unwrap();
 ///     println!("shader");

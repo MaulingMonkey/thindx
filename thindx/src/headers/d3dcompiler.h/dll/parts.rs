@@ -36,8 +36,9 @@ impl Compiler {
     /// ).unwrap().as_bytes());
     /// ```
     #[requires(d3dcompiler=43)]
-    pub fn get_blob_part(&self, src_data: &[u8], part: impl Into<BlobPart>, flags: Option<void::Void>) -> Result<BytesBlob, Error> {
+    pub fn get_blob_part(&self, src_data: &Bytecode, part: impl Into<BlobPart>, flags: Option<void::Void>) -> Result<BytesBlob, Error> {
         let f = self.D3DGetBlobPart.ok_or(Error::new("D3DGetBlobPart", THINERR::MISSING_DLL_EXPORT))?;
+        let src_data = src_data.as_bytes();
         let part = part.into().into();
         let _ = flags; let flags = 0;
         let mut blob = null_mut();
@@ -67,15 +68,13 @@ impl Compiler {
     /// # let compiled_shader = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap();
     /// // TODO: This doesn't seem to work?
     ///
-    /// let debug_info = compiler.get_debug_info(&shader_src).unwrap();
-    /// println!("{:?}", &debug_info);
-    ///
     /// let debug_info = compiler.get_debug_info(&compiled_shader).unwrap();
     /// println!("{:?}", &debug_info);
     /// ```
     #[requires(d3dcompiler=40)]
-    pub fn get_debug_info(&self, src_data: &[u8]) -> Result<BytesBlob, Error> {
+    pub fn get_debug_info(&self, src_data: &Bytecode) -> Result<BytesBlob, Error> {
         let f = self.D3DGetDebugInfo.ok_or(Error::new("D3DGetDebugInfo", THINERR::MISSING_DLL_EXPORT))?;
+        let src_data = src_data.as_bytes();
 
         let mut blob = null_mut();
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), &mut blob) };
@@ -108,8 +107,9 @@ impl Compiler {
     /// [68, 88, 66, 67, 97, ...
     /// ```
     // #[requires(d3dcompiler=33)] // or earlier?
-    pub fn get_input_and_output_signature_blob(&self, src_data: &[u8]) -> Result<BytesBlob, Error> {
+    pub fn get_input_and_output_signature_blob(&self, src_data: &Bytecode) -> Result<BytesBlob, Error> {
         let f = self.D3DGetInputAndOutputSignatureBlob.ok_or(Error::new("D3DGetInputAndOutputSignatureBlob", THINERR::MISSING_DLL_EXPORT))?;
+        let src_data = src_data.as_bytes();
 
         let mut blob = null_mut();
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), &mut blob) };
@@ -142,8 +142,9 @@ impl Compiler {
     /// [68, 88, 66, 67, 53, ...
     /// ```
     // #[requires(d3dcompiler=33)] // or earlier?
-    pub fn get_input_signature_blob(&self, src_data: &[u8]) -> Result<BytesBlob, Error> {
+    pub fn get_input_signature_blob(&self, src_data: &Bytecode) -> Result<BytesBlob, Error> {
         let f = self.D3DGetInputSignatureBlob.ok_or(Error::new("D3DGetInputSignatureBlob", THINERR::MISSING_DLL_EXPORT))?;
+        let src_data = src_data.as_bytes();
 
         let mut blob = null_mut();
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), &mut blob) };
@@ -176,8 +177,9 @@ impl Compiler {
     /// [68, 88, 66, 67, 210, ...
     /// ```
     // #[requires(d3dcompiler=33)] // or earlier?
-    pub fn get_output_signature_blob(&self, src_data: &[u8]) -> Result<BytesBlob, Error> {
+    pub fn get_output_signature_blob(&self, src_data: &Bytecode) -> Result<BytesBlob, Error> {
         let f = self.D3DGetOutputSignatureBlob.ok_or(Error::new("D3DGetOutputSignatureBlob", THINERR::MISSING_DLL_EXPORT))?;
+        let src_data = src_data.as_bytes();
 
         let mut blob = null_mut();
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), &mut blob) };
@@ -215,18 +217,19 @@ impl Compiler {
     #[requires(d3dcompiler=44)]
     pub fn set_blob_part<'s>(
         &self,
-        src_data:           &[u8],
+        src_data:           &Bytecode,
         part:               impl Into<BlobPart>,
         flags:              (),
         part_data:          &[u8],
-    ) -> Result<BytesBlob, Error> {
+    ) -> Result<CodeBlob, Error> {
         let f = self.D3DSetBlobPart.ok_or(Error::new("D3DSetBlobPart", THINERR::MISSING_DLL_EXPORT))?;
+        let src_data = src_data.as_bytes();
 
         let _ = flags; let flags = 0;
         let mut blob = null_mut();
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), part.into().into(), flags, part_data.as_ptr().cast(), part_data.len(), &mut blob) };
         Error::check("D3DSetBlobPart", hr)?;
-        Ok(BytesBlob::new(unsafe { ReadOnlyBlob::from_raw(blob) }))
+        Ok(unsafe { CodeBlob::from_unchecked(ReadOnlyBlob::from_raw(blob)) })
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dstripshader)\]

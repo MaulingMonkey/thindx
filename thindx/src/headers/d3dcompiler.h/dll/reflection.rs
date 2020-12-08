@@ -42,12 +42,13 @@ impl Compiler {
     /// assert_eq!(Some(E::INVALIDARG), r.err().map(|e| e.kind()));
     ///
     /// // Invalid `src_data`:
-    /// let r = compiler.reflect::<d3d11::ShaderReflection>(&[]);
+    /// let r = compiler.reflect::<d3d11::ShaderReflection>(unsafe { Bytecode::from_unchecked(&[]) });
     /// assert_eq!(Some(D3DERR::INVALIDCALL), r.err().map(|e| e.kind()));
     /// ```
     #[requires(d3dcompiler=40)]
-    pub fn reflect<I: Raw>(&self, src_data: &[u8]) -> Result<I, Error> where I::Raw : Interface {
+    pub fn reflect<I: Raw>(&self, src_data: &Bytecode) -> Result<I, Error> where I::Raw : Interface {
         let f = self.D3DReflect.ok_or(Error::new("D3DReflect", THINERR::MISSING_DLL_EXPORT))?;
+        let src_data = src_data.as_bytes();
 
         let mut reflector = null_mut();
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), &I::Raw::uuidof(), &mut reflector) };
@@ -64,7 +65,7 @@ impl Compiler {
     /// *   `src_data`  - A compiled HLSL shader.
     ///
     /// ### Returns
-    /// *   Err(`e`) where `e.kind()` == [THINERR::MISSING_DLL_EXPORT]    - `d3dcompiler_4?.dll` and earlier
+    /// *   Err(`e`) where `e.kind()` == [THINERR::MISSING_DLL_EXPORT]      - `d3dcompiler_4?.dll` and earlier
     /// *   Err(`e`) where `e.kind()` == [D3DERR::INVALIDARG]               - On invalid `I`
     /// *   Err(`e`) where `e.kind()` == [D3DERR::INVALIDCALL]              - On invalid `src_data`
     /// *   Ok(`()`)
@@ -84,12 +85,12 @@ impl Compiler {
     /// let r = compiler.reflect11(&shader).unwrap();
     ///
     /// // Invalid `src_data`:
-    /// let r = compiler.reflect11(&[]);
+    /// let r = compiler.reflect11(unsafe { Bytecode::from_unchecked(&[]) });
     /// assert_eq!(Some(D3DERR::INVALIDCALL), r.err().map(|e| e.kind()));
     /// ```
     #[requires(d3dcompiler=40)]
-    pub fn reflect11(&self, src_data: impl AsRef<[u8]>) -> Result<d3d11::ShaderReflection, Error> {
-        self.reflect(src_data.as_ref())
+    pub fn reflect11(&self, src_data: &Bytecode) -> Result<d3d11::ShaderReflection, Error> {
+        self.reflect(src_data)
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dreflectlibrary)\]
@@ -105,7 +106,7 @@ impl Compiler {
     /// *   `src_data`  - An HLSL library of functions.
     ///
     /// ### Returns
-    /// *   Err(`e`) where `e.kind()` == [THINERR::MISSING_DLL_EXPORT]    - `d3dcompiler_4?.dll` and earlier
+    /// *   Err(`e`) where `e.kind()` == [THINERR::MISSING_DLL_EXPORT]      - `d3dcompiler_4?.dll` and earlier
     /// *   Err(`e`) where `e.kind()` == [D3DERR::INVALIDCALL]              - On invalid `src_data`
     /// *   Ok(`()`)
     ///
@@ -128,12 +129,13 @@ impl Compiler {
     /// assert_eq!(Some(E::INVALIDARG), r.err().map(|e| e.kind()));
     ///
     /// // Invalid `src_data`:
-    /// let r = compiler.reflect_library::<d3d11::LibraryReflection>(&[]);
+    /// let r = compiler.reflect_library::<d3d11::LibraryReflection>(unsafe { Bytecode::from_unchecked(&[]) });
     /// assert_eq!(Some(D3DERR::INVALIDCALL), r.err().map(|e| e.kind()));
     /// ```
     //#[requires(d3dcompiler=47)] // ?
-    pub fn reflect_library<C: Raw>(&self, src_data: &[u8]) -> Result<C, Error> where C::Raw : Interface {
+    pub fn reflect_library<C: Raw>(&self, src_data: &Bytecode) -> Result<C, Error> where C::Raw : Interface {
         let f = self.D3DReflectLibrary.ok_or(Error::new("D3DReflectLibrary", THINERR::MISSING_DLL_EXPORT))?;
+        let src_data = src_data.as_bytes();
 
         let mut reflector = null_mut();
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), &C::Raw::uuidof(), &mut reflector) };
@@ -154,7 +156,7 @@ impl Compiler {
     /// *   `src_data`  - An HLSL library of functions.
     ///
     /// ### Returns
-    /// *   Err(`e`) where `e.kind()` == [THINERR::MISSING_DLL_EXPORT]    - `d3dcompiler_4?.dll` and earlier
+    /// *   Err(`e`) where `e.kind()` == [THINERR::MISSING_DLL_EXPORT]      - `d3dcompiler_4?.dll` and earlier
     /// *   Err(`e`) where `e.kind()` == [D3DERR::INVALIDCALL]              - On invalid `src_data`
     /// *   Ok(`()`)
     ///
@@ -173,12 +175,12 @@ impl Compiler {
     /// let r = compiler.reflect_library_11(&shader).unwrap();
     ///
     /// // Invalid `src_data`:
-    /// let r = compiler.reflect_library_11(&[]);
+    /// let r = compiler.reflect_library_11(unsafe { Bytecode::from_unchecked(&[]) });
     /// assert_eq!(Some(D3DERR::INVALIDCALL), r.err().map(|e| e.kind()));
     /// ```
     //#[requires(d3dcompiler=47)] // ?
-    pub fn reflect_library_11(&self, src_data: impl AsRef<[u8]>) -> Result<d3d11::LibraryReflection, Error> {
-        self.reflect_library(src_data.as_ref())
+    pub fn reflect_library_11(&self, src_data: &Bytecode) -> Result<d3d11::LibraryReflection, Error> {
+        self.reflect_library(src_data)
     }
 }
 
