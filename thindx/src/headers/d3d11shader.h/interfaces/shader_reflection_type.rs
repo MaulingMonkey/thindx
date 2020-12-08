@@ -109,7 +109,7 @@ impl<'r> ShaderReflectionType<'r> {
     /// ```
     pub fn get_member_type_by_name(&self, name: impl TryIntoAsCStr) -> ShaderReflectionType<'r> {
         let name = name.try_into().ok();
-        let name = name.map_or(cstr!("").as_cstr(), |n| n.as_cstr());
+        let name = name.as_ref().map_or(cstr!("").as_cstr(), |n| n.as_cstr());
         let ptr = unsafe { self.ptr.as_ref().GetMemberTypeByName(name) };
         unsafe { ShaderReflectionType::from_raw(self.phantom, ptr) }
     }

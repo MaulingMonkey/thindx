@@ -173,7 +173,7 @@ impl<'r> ShaderReflectionConstantBuffer<'r> {
     /// ```
     pub fn get_variable_by_name(&self, name: impl TryIntoAsCStr) -> ShaderReflectionVariable<'r> {
         let name = name.try_into().ok();
-        let name = name.map_or(cstr!("").as_cstr(), |n| n.as_cstr());
+        let name = name.as_ref().map_or(cstr!("").as_cstr(), |n| n.as_cstr());
         let ptr = unsafe { self.ptr.as_ref().GetVariableByName(name) };
         unsafe { ShaderReflectionVariable::from_raw(self.phantom, ptr) }
     }
