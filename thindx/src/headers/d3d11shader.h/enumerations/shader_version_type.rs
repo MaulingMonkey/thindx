@@ -44,7 +44,7 @@ impl Default for ShVer {
 
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/ne-d3d11shader-d3d11_shader_version_type)\]
-/// UINT mask containing [ShaderVersionType]
+/// UINT mask of ([ShaderVersionType] << 16) | (major << 4) | (minor << 0)
 ///
 /// ### See Also
 /// *   [d3d11::ShaderDesc::version]
