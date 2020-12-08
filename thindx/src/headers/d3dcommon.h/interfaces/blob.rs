@@ -87,8 +87,11 @@ impl TextBlob {
     /// Wraps a `\0`-terminated [ReadOnlyBlob] or [Option]\<[ReadOnlyBlob]\> in a more [std::ffi::CString]-esque interface.
     pub fn new(value: impl Into<Self>) -> Self { value.into() }
 
-    /// Check if the string is empty
-    pub fn is_empty(&self) -> bool { self.0.as_ref().map_or(true, |blob| blob.get_buffer_size() == 0) }
+    /// Check if the string is empty ("\0" counts as empty)
+    pub fn is_empty(&self) -> bool { self.0.as_ref().map_or(true, |blob| {
+        let b = blob.get_buffer();
+        b.is_empty() || b == &[0]
+    })}
 
     /// Treat the blob as a UTF8 string, converting lossily if necessary.
     pub fn to_utf8_lossy(&self) -> Cow<str> { String::from_utf8_lossy(self.as_bytes()) }
