@@ -14,6 +14,7 @@ use winapi::um::d3dcommon::*;
 
 enumish! { TessellatorOutput => D3D_TESSELLATOR_OUTPUT_PRIMITIVE; Undefined, Point, Line, TriangleCW, TriangleCCW }
 
+#[allow(missing_docs)]
 #[allow(non_upper_case_globals)] impl TessellatorOutput { // These are enum-like
     pub const Undefined     : TessellatorOutput = TessellatorOutput(D3D_TESSELLATOR_OUTPUT_UNDEFINED);
     pub const Point         : TessellatorOutput = TessellatorOutput(D3D_TESSELLATOR_OUTPUT_POINT);

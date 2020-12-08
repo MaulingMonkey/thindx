@@ -24,6 +24,7 @@ enumish! {
     ConsumeStructuredBuffer, Min8Float, Min10Float, Min16Float, Min12Int, Min16Int, Min16UInt,
 }
 
+#[allow(missing_docs)]
 #[allow(non_upper_case_globals)] impl SVT { // These are enum-like
     pub const Void                      : SVT = SVT(D3D_SVT_VOID);
     pub const Bool                      : SVT = SVT(D3D_SVT_BOOL);

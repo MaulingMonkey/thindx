@@ -10,6 +10,7 @@ use winapi::um::d3d11shader::*;
 ///
 /// ### See Also
 /// *   [d3d11::ShaderReflectionConstantBuffer::get_desc]
+#[allow(missing_docs)]
 #[derive(Clone, Copy, Debug, Default)]
 #[repr(C)] pub struct ShaderBufferDesc<'s> {
     pub name:                           ConstCStrPtrNullIsEmpty<'s>, // maybe never null?

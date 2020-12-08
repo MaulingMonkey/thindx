@@ -13,6 +13,7 @@ use winapi::um::d3dcommon::*;
 
 enumish! { TessellatorDomain => D3D_TESSELLATOR_DOMAIN; Undefined, IsoLine, Tri, Quad }
 
+#[allow(missing_docs)]
 #[allow(non_upper_case_globals)] impl TessellatorDomain { // These are enum-like
     pub const Undefined : TessellatorDomain = TessellatorDomain(D3D_TESSELLATOR_DOMAIN_UNDEFINED);
     pub const IsoLine   : TessellatorDomain = TessellatorDomain(D3D_TESSELLATOR_DOMAIN_ISOLINE);

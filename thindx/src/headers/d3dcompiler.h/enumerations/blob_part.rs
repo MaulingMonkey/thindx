@@ -24,6 +24,7 @@ enumish! {
     TestAlternateShader, TestCompileDetails, TestCompilePerf, TestCompileReport,
 }
 
+#[allow(missing_docs)]
 #[allow(non_upper_case_globals)] impl Blob { // These are enum-like
     pub const InputSignatureBlob               : Blob = Blob(D3D_BLOB_INPUT_SIGNATURE_BLOB);
     pub const OutputSignatureBlob              : Blob = Blob(D3D_BLOB_OUTPUT_SIGNATURE_BLOB);

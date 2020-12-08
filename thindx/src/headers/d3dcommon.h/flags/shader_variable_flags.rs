@@ -13,6 +13,7 @@ use winapi::um::d3dcommon::*;
 
 flags! { SVF => UINT; None, UserPacked, Used, InterfacePointer, InterfaceParameter }
 
+#[allow(missing_docs)]
 #[allow(non_upper_case_globals)] impl SVF { // These are enum-like
     pub const None                  : SVF = SVF(0);
     pub const UserPacked            : SVF = SVF(D3D_SVF_USERPACKED);

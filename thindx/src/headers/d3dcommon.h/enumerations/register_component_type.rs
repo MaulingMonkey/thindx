@@ -14,6 +14,7 @@ use winapi::um::d3dcommon::*;
 
 enumish! { RegisterComponent => D3D_REGISTER_COMPONENT_TYPE; Unknown, UInt32, SInt32, Float32 }
 
+#[allow(missing_docs)]
 #[allow(non_upper_case_globals)] impl RegisterComponent { // These are enum-like
     pub const Unknown   : RegisterComponent = RegisterComponent(D3D_REGISTER_COMPONENT_UNKNOWN);
     pub const UInt32    : RegisterComponent = RegisterComponent(D3D_REGISTER_COMPONENT_UINT32);

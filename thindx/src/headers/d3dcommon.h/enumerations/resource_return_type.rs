@@ -15,6 +15,7 @@ use winapi::um::d3dcommon::*;
 
 enumish! { ReturnType => D3D_RESOURCE_RETURN_TYPE; UNorm, SNorm, SInt, UInt, Float, Mixed, Double, Continued }
 
+#[allow(missing_docs)]
 #[allow(non_upper_case_globals)] impl ReturnType { // These are enum-like
     pub const UNorm     : ReturnType = ReturnType(D3D_RETURN_TYPE_UNORM); // 1
     pub const SNorm     : ReturnType = ReturnType(D3D_RETURN_TYPE_SNORM);

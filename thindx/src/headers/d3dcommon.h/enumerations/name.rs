@@ -28,6 +28,7 @@ enumish! {
     CullPrimitive, Target, Depth, Coverage, DepthGreaterEqual, DepthLessEqual, StencilRef, InnerCoverage,
 }
 
+#[allow(missing_docs)]
 #[allow(non_upper_case_globals)] impl Name { // These are enum-like
     pub const Undefined                        : Name = Name(D3D_NAME_UNDEFINED); // 0
     pub const Position                         : Name = Name(D3D_NAME_POSITION);

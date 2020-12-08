@@ -19,6 +19,7 @@ enumish! {
     TextureCube, TextureCubeArray, BufferEx,
 }
 
+#[allow(missing_docs)]
 #[allow(non_upper_case_globals)] impl SrvDimension { // These are enum-like
     pub const Unknown           : SrvDimension = SrvDimension(D3D_SRV_DIMENSION_UNKNOWN);
     pub const Buffer            : SrvDimension = SrvDimension(D3D_SRV_DIMENSION_BUFFER);

@@ -13,6 +13,7 @@ const D3D_FEATURE_LEVEL_1_0_CORE : D3D_FEATURE_LEVEL = 0x1000; // Not in winapi 
 
 enumish! { FeatureLevel => D3D_FEATURE_LEVEL; _1_0_Core, _9_1, _9_2, _9_3, _10_0, _10_1, _11_0, _11_1, _12_0, _12_1 }
 
+#[allow(missing_docs)]
 #[allow(non_upper_case_globals)] impl FeatureLevel { // These are enum-like
     pub const _1_0_Core : FeatureLevel = FeatureLevel(D3D_FEATURE_LEVEL_1_0_CORE);
     pub const _9_1      : FeatureLevel = FeatureLevel(D3D_FEATURE_LEVEL_9_1);

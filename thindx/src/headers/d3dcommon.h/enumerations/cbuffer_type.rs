@@ -15,6 +15,7 @@ use winapi::um::d3dcommon::*;
 
 enumish! { CT => D3D_CBUFFER_TYPE; CBuffer, TBuffer, InterfacePointers, ResourceBindInfo }
 
+#[allow(missing_docs)]
 #[allow(non_upper_case_globals)] impl CT { // These are enum-like
     pub const CBuffer               : CT = CT(D3D_CT_CBUFFER);
     pub const TBuffer               : CT = CT(D3D_CT_TBUFFER);

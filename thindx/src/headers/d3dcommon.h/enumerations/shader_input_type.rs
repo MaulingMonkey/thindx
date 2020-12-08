@@ -24,6 +24,7 @@ enumish! {
     UavRWStructuredWithCounter, RTAccelerationStructure, UavFeedbackTexture,
 }
 
+#[allow(missing_docs)]
 #[allow(non_upper_case_globals)] impl SIT { // These are enum-like
     pub const CBuffer                       : SIT = SIT(D3D_SIT_CBUFFER);
     pub const TBuffer                       : SIT = SIT(D3D_SIT_TBUFFER);

@@ -12,6 +12,7 @@ use winapi::um::d3dcommon::*;
 
 enumish! { Interpolation => D3D_INTERPOLATION_MODE; Undefined, Constant, Linear, LinearCentroid, LinearNoPerspective, LinearNoPerspectiveCentroid, LinearSample, LinearNoPerspectiveSample }
 
+#[allow(missing_docs)]
 #[allow(non_upper_case_globals)] impl Interpolation { // These are enum-like
     pub const Undefined                     : Interpolation = Interpolation(D3D_INTERPOLATION_UNDEFINED);
     pub const Constant                      : Interpolation = Interpolation(D3D_INTERPOLATION_CONSTANT);

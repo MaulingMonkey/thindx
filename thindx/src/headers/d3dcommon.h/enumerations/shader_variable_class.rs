@@ -15,6 +15,7 @@ use winapi::um::d3dcommon::*;
 
 enumish! { SVC => D3D_SHADER_VARIABLE_CLASS; Scalar, Vector, MatrixRows, MatrixColumns, Object, Struct, InterfaceClass, InterfacePointer }
 
+#[allow(missing_docs)]
 #[allow(non_upper_case_globals)] impl SVC { // These are enum-like
     pub const Scalar            : SVC = SVC(D3D_SVC_SCALAR);
     pub const Vector            : SVC = SVC(D3D_SVC_VECTOR);

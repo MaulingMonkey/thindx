@@ -12,6 +12,7 @@ use winapi::um::d3dcommon::*;
 
 flags! { SIF => D3D_SHADER_INPUT_FLAGS; None, UserPacked, ComparisonSampler, TextureComponent0, TextureComponent1, TextureComponents, Unused }
 
+#[allow(missing_docs)]
 #[allow(non_upper_case_globals)] impl SIF { // These are enum-like
     pub const None                  : SIF = SIF(0);
     pub const UserPacked            : SIF = SIF(D3D_SIF_USERPACKED);

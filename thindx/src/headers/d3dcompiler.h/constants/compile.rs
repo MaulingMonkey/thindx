@@ -29,7 +29,9 @@ flags! {
     WarningsAreErrors, ResourcesMayAlias, EnableUnboundedDescriptorTables, AllResourcesBound,
 }
 
+#[allow(missing_docs)]
 #[allow(non_upper_case_globals)] impl Compile { // These are enum-like
+    #[doc=""]
     pub const None                                  : Compile = Compile(0);
     pub const Debug                                 : Compile = Compile(D3DCOMPILE_DEBUG);
     pub const SkipValidation                        : Compile = Compile(D3DCOMPILE_SKIP_VALIDATION);

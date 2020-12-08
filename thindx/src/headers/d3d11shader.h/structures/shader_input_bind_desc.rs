@@ -13,6 +13,7 @@ use winapi::um::d3d11shader::*;
 /// *   [d3d11::FunctionReflection::get_resource_binding_desc_by_name]
 /// *   [d3d11::ShaderReflection::get_resource_binding_desc]
 /// *   [d3d11::ShaderReflection::get_resource_binding_desc_by_name]
+#[allow(missing_docs)]
 #[derive(Clone, Copy, Debug, Default)]
 #[repr(C)] pub struct ShaderInputBindDesc<'s> {
     pub name:           ConstCStrPtrNullIsEmpty<'s>, // maybe never null?

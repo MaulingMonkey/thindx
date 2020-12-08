@@ -19,7 +19,9 @@ flags! {
     _11_1_ShaderExtensions, Level9ComparisonFiltering
 }
 
+#[allow(missing_docs)]
 #[allow(non_upper_case_globals)] impl ShaderRequires { // These are enum-like
+    #[doc=""]
     pub const None                          : ShaderRequires = ShaderRequires(0);
     pub const Doubles                       : ShaderRequires = ShaderRequires(D3D_SHADER_REQUIRES_DOUBLES);
     pub const EarlyDepthStencil             : ShaderRequires = ShaderRequires(D3D_SHADER_REQUIRES_EARLY_DEPTH_STENCIL);

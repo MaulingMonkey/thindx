@@ -13,6 +13,7 @@ use std::ptr::*;
 ///
 /// ### See Also
 /// *   [d3d11::ShaderReflectionVariable::get_desc]
+#[allow(missing_docs)]
 #[derive(Clone, Copy, Debug)]
 #[repr(C)] pub struct ShaderVariableDesc<'s> {
     pub name:           ConstCStrPtrNullIsEmpty<'s>, // maybe never null?

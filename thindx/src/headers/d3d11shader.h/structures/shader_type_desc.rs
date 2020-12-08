@@ -10,6 +10,7 @@ use winapi::um::d3d11shader::*;
 ///
 /// ### See Also
 /// *   [d3d11::ShaderReflectionType::get_desc]
+#[allow(missing_docs)]
 #[derive(Clone, Copy, Debug, Default)]
 #[repr(C)] pub struct ShaderTypeDesc<'s> {
     pub class:      ShaderVariableClass,

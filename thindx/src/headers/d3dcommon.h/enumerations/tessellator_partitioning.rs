@@ -11,6 +11,7 @@ use winapi::um::d3dcommon::*;
 
 enumish! { TessellatorPartitioning => D3D_TESSELLATOR_PARTITIONING; Undefined, Integer, Pow2, FractionalOdd, FractionalEven }
 
+#[allow(missing_docs)]
 #[allow(non_upper_case_globals)] impl TessellatorPartitioning { // These are enum-like
     pub const Undefined         : TessellatorPartitioning = TessellatorPartitioning(D3D_TESSELLATOR_PARTITIONING_UNDEFINED);
     pub const Integer           : TessellatorPartitioning = TessellatorPartitioning(D3D_TESSELLATOR_PARTITIONING_INTEGER);
