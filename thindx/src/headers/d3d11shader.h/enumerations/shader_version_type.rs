@@ -2,10 +2,15 @@
 
 use winapi::um::d3d11shader::*;
 
+use std::fmt::{self, Debug, Formatter};
+
 
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/ne-d3d11shader-d3d11_shader_version_type)\]
 /// D3D11_SHADER_VERSION_TYPE / D3D11_SHVER_\*
+///
+/// ### See Also
+/// *   [ShaderVersion]
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)] pub struct ShaderVersionType(D3D11_SHADER_VERSION_TYPE);
 #[doc(hidden)] pub use ShaderVersionType as ShVer;
@@ -34,4 +39,40 @@ enumish! { ShVer => D3D11_SHADER_VERSION_TYPE; PixelShader, VertexShader, Geomet
 
 impl Default for ShVer {
     fn default() -> Self { ShVer(0) }
+}
+
+
+
+/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/ne-d3d11shader-d3d11_shader_version_type)\]
+/// UINT mask containing [ShaderVersionType]
+///
+/// ### See Also
+/// *   [d3d11::ShaderDesc::version]
+#[derive(Clone, Copy, Default, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[repr(transparent)] pub struct ShaderVersion(u32);
+
+impl ShaderVersion {
+    /// D3D11_SHVER_GET_TYPE
+    pub fn shver(&self) -> ShaderVersionType { ShaderVersionType((self.0 >> 16) & 0xFFFF) }
+
+    /// D3D11_SHVER_GET_MAJOR
+    pub fn major(&self) -> u32 { (self.0 >> 4) & 0xF }
+
+    /// D3D11_SHVER_GET_MINOR
+    pub fn minor(&self) -> u32 { (self.0 >> 0) & 0xF }
+}
+
+impl Debug for ShaderVersion {
+    fn fmt(&self, fmt: &mut Formatter) -> fmt::Result {
+        let (ty, maj, min) = (self.shver(), self.major(), self.minor());
+        match ty {
+            ShVer::PixelShader      => write!(fmt, "ps_{}_{}", maj, min),
+            ShVer::VertexShader     => write!(fmt, "vs_{}_{}", maj, min),
+            ShVer::GeometryShader   => write!(fmt, "gs_{}_{}", maj, min),
+            ShVer::HullShader       => write!(fmt, "hs_{}_{}", maj, min),
+            ShVer::DomainShader     => write!(fmt, "ds_{}_{}", maj, min),
+            ShVer::ComputeShader    => write!(fmt, "cs_{}_{}", maj, min),
+            _other                  => fmt.debug_struct("ShaderVersion").field("shver", &ty).field("major", &maj).field("minor", &min).finish()
+        }
+    }
 }
