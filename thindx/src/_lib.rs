@@ -32,6 +32,7 @@
 
 
 #![deny(broken_intra_doc_links)]
+#![deny(missing_docs)]
 #![deny(unreachable_patterns)]
 
 #[macro_use] mod macros; #[cfg(test)] use macros::*;
@@ -39,6 +40,7 @@ use thindx_zzz_internal_proc_macros::*;
 
 mod abi_cstr; pub use abi_cstr::*;
 
+/// C ABI interop types
 pub mod ctypes {
     pub use ::abibool::bool32 as BOOL;
     pub use ::abibool::bool8 as BOOLEAN;
