@@ -33,7 +33,7 @@ impl Compiler {
     /// println!("tocompress: [{} bytes, {} bytes]", basic_hlsl.len(), plain_txt.len());
     ///
     /// let compress = compiler.compress_shaders(&tocompress, CompressShader::default()).unwrap();
-    /// println!("compressed:  {} bytes", compress.get_buffer().len());
+    /// println!("compressed:  {} bytes", compress.len());
     /// ```
     ///
     /// ### Output
@@ -47,7 +47,7 @@ impl Compiler {
         &self,
         shaders:                &[ShaderData],
         flags:                  impl Into<CompressShader>,
-    ) -> Result<ReadOnlyBlob, Error> {
+    ) -> Result<BytesBlob, Error> {
         // Early outs
         let f           = self.D3DCompressShaders.ok_or(Error::new("D3DCompressShaders", THINERR::MISSING_DLL_EXPORT))?;
         let num_shaders = shaders.len().try_into().map_err(|_| Error::new("D3DCompressShaders", THINERR::MISSING_DLL_EXPORT))?;
@@ -58,7 +58,7 @@ impl Compiler {
         let mut compressed_data = null_mut();
         let hr = unsafe { f(num_shaders, shader_data, flags, &mut compressed_data) };
         Error::check("D3DCompressShaders", hr)?;
-        Ok(unsafe { ReadOnlyBlob::from_raw(compressed_data) })
+        Ok(BytesBlob::new(unsafe { ReadOnlyBlob::from_raw(compressed_data) }))
         // TODO: Wait, this takes multiple shaders.  Does this also *return* an array of blobs, perhaps?
     }
 
@@ -96,7 +96,7 @@ impl Compiler {
     /// # ];
     /// #
     /// # let compress = compiler.compress_shaders(&tocompress, CompressShader::default()).unwrap();
-    /// assert_eq!(2, compiler.decompress_shaders_count(compress.get_buffer()).unwrap());
+    /// assert_eq!(2, compiler.decompress_shaders_count(&compress).unwrap());
     /// ```
     #[requires(!store)]
     #[requires(d3dcompiler=43)]
@@ -136,7 +136,7 @@ impl Compiler {
     /// # let compress = compiler.compress_shaders(&tocompress, CompressShader::default()).unwrap();
     /// let mut decompressed = [None, None, None];
     /// let decompressed2 = compiler.decompress_shaders_inplace(
-    ///     compress.get_buffer(), None, 0, &mut decompressed[..]
+    ///     &compress, None, 0, &mut decompressed[..]
     /// ).unwrap();
     ///
     /// assert_eq!(2, decompressed2.len());
@@ -192,7 +192,7 @@ impl Compiler {
     /// # ];
     /// #
     /// # let compress = compiler.compress_shaders(&tocompress, CompressShader::default()).unwrap();
-    /// let decompressed = compiler.decompress_shaders(compress.get_buffer(), None, ..).unwrap();
+    /// let decompressed = compiler.decompress_shaders(&compress, None, ..).unwrap();
     ///
     /// assert_eq!(2, decompressed.len());
     /// assert_eq!(basic_hlsl, decompressed[0].as_ref().unwrap().get_buffer());

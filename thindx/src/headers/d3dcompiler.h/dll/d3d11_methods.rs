@@ -88,7 +88,7 @@ impl Compiler {
     ///     None, None, (), "lib_5_0",
     ///     Compile::OptimizationLevel3, CompileEffect::None,
     /// ).unwrap();
-    /// let shader_library = compiler.load_module(code_blob.get_buffer()).unwrap();
+    /// let shader_library = compiler.load_module(&code_blob).unwrap();
     /// ```
     #[requires(d3dcompiler=47)]
     pub fn load_module(&self, data: &[u8]) -> Result<d3d11::Module, Error> {

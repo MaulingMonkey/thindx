@@ -5,9 +5,10 @@ use std::ptr::*;
 
 
 
-/// { disassembly: [ReadOnlyBlob], finish_byte_offset: [usize] }
+/// { disassembly: [TextBlob], finish_byte_offset: [usize] }
+#[derive(Clone, Debug)]
 pub struct DisassembledRegion {
-    pub disassembly:        ReadOnlyBlob,
+    pub disassembly:        TextBlob,
     pub finish_byte_offset: usize,
 }
 
@@ -33,10 +34,9 @@ impl Compiler {
     /// ### Example
     /// ```rust
     /// # use thindx::d3d::*; let compiler = Compiler::new(47).unwrap();
-    /// # let shader = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap().shader;
-    /// # let shader = shader.get_buffer();
-    /// let dis = compiler.disassemble(shader, Disasm::None, "// example comment\n").unwrap();
-    /// println!("{}", String::from_utf8_lossy(dis.get_buffer()));
+    /// # let shader = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap();
+    /// let dis = compiler.disassemble(&shader, Disasm::None, "// example comment\n").unwrap();
+    /// println!("{}", dis.to_utf8_lossy());
     /// ```
     ///
     /// ### Output
@@ -81,7 +81,7 @@ impl Compiler {
         src_data:           &[u8],
         flags:              impl Into<Disasm>,
         comments:           impl TryIntoAsOptCStr,
-    ) -> Result<ReadOnlyBlob, Error> {
+    ) -> Result<TextBlob, Error> {
         let f = self.D3DDisassemble.ok_or(Error::new("D3DDisassemble", THINERR::MISSING_DLL_EXPORT))?;
         let flags = flags.into().into();
         let comments = comments.try_into().map_err(|e| Error::new("D3DDisassemble", e))?;
@@ -89,7 +89,7 @@ impl Compiler {
         let mut disassembly = null_mut();
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), flags, comments, &mut disassembly) };
         Error::check("D3DDisassemble", hr)?;
-        Ok(unsafe { ReadOnlyBlob::from_raw(disassembly) })
+        Ok(TextBlob::new(unsafe { ReadOnlyBlob::from_raw(disassembly) }))
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3ddisassembleregion)\]
@@ -112,13 +112,12 @@ impl Compiler {
     /// ### Example
     /// ```rust
     /// # use thindx::d3d::*; let compiler = Compiler::new(47).unwrap();
-    /// # let shader = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap().shader;
-    /// # let shader = shader.get_buffer();
+    /// # let shader = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap();
     /// let dr = compiler.disassemble_region(
-    ///     shader, Disasm::None, "// example comment\n", 0, std::usize::MAX
+    ///     &shader, Disasm::None, "// example comment\n", 0, std::usize::MAX
     /// ).unwrap();
     /// println!("finish_byte_offset: {}", dr.finish_byte_offset);
-    /// println!("{}", String::from_utf8_lossy(dr.disassembly.get_buffer()));
+    /// println!("{}", dr.disassembly.to_utf8_lossy());
     /// ```
     ///
     /// ### Output
@@ -176,7 +175,7 @@ impl Compiler {
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), flags, comments, start_byte_offset, num_insts, &mut finish_byte_offset, &mut disassembly) };
         Error::check("D3DDisassembleRegion", hr)?;
         Ok(DisassembledRegion {
-            disassembly: unsafe { ReadOnlyBlob::from_raw(disassembly) },
+            disassembly: TextBlob::new(unsafe { ReadOnlyBlob::from_raw(disassembly) }),
             finish_byte_offset,
         })
     }
@@ -194,9 +193,9 @@ impl Compiler {
     /// ### Example
     /// ```rust
     /// # use thindx::d3d::*; let compiler = Compiler::new(47).unwrap();
-    /// # let shader = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap().shader;
+    /// # let shader = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap();
     /// println!("{}", compiler.get_trace_instruction_offsets_count(
-    ///     shader.get_buffer(), GetInstOffsets::None, 0, std::usize::MAX
+    ///     &shader, GetInstOffsets::None, 0, std::usize::MAX
     /// ).unwrap());
     /// ```
     ///
@@ -232,10 +231,10 @@ impl Compiler {
     /// ### Example
     /// ```rust
     /// # use thindx::d3d::*; let compiler = Compiler::new(47).unwrap();
-    /// # let shader = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap().shader;
+    /// # let shader = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap();
     /// let mut offsets = [0; 128];
     /// let offsets : &[usize] = compiler.get_trace_instruction_offsets_inplace(
-    ///     shader.get_buffer(), GetInstOffsets::None, 0, &mut offsets
+    ///     &shader, GetInstOffsets::None, 0, &mut offsets
     /// ).unwrap();
     /// println!("{:?}", offsets);
     /// ```
@@ -272,9 +271,9 @@ impl Compiler {
     /// ### Example
     /// ```rust
     /// # use thindx::d3d::*; let compiler = Compiler::new(47).unwrap();
-    /// # let shader = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap().shader;
+    /// # let shader = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap();
     /// let offsets : Vec<usize> = compiler.get_trace_instruction_offsets(
-    ///     shader.get_buffer(), GetInstOffsets::None, 0, std::usize::MAX
+    ///     &shader, GetInstOffsets::None, 0, std::usize::MAX
     /// ).unwrap();
     /// println!("{:?}", offsets);
     /// ```

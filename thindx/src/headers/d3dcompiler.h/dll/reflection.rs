@@ -32,13 +32,13 @@ impl Compiler {
     /// let shader = compiler.compile_from_file(
     ///     r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0",
     ///     Compile::Debug, CompileEffect::None
-    /// ).unwrap().shader;
+    /// ).unwrap();
     ///
     /// // Should succeed:
-    /// let r = compiler.reflect::<d3d11::ShaderReflection>(shader.get_buffer()).unwrap();
+    /// let r = compiler.reflect::<d3d11::ShaderReflection>(&shader).unwrap();
     ///
     /// // Invalid interface:
-    /// let r = compiler.reflect::<Unknown>(shader.get_buffer());
+    /// let r = compiler.reflect::<Unknown>(&shader);
     /// assert_eq!(Some(E::INVALIDARG), r.err().map(|e| e.kind()));
     ///
     /// // Invalid `src_data`:
@@ -78,7 +78,7 @@ impl Compiler {
     /// let shader = compiler.compile_from_file(
     ///     r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0",
     ///     Compile::Debug, CompileEffect::None
-    /// ).unwrap().shader;
+    /// ).unwrap();
     ///
     /// // Should succeed:
     /// let r = compiler.reflect11(&shader).unwrap();
@@ -118,13 +118,13 @@ impl Compiler {
     /// let shader = compiler.compile_from_file(
     ///     r"test\data\library.hlsl", None, None, (), "lib_5_0",
     ///     Compile::Debug, CompileEffect::None
-    /// ).unwrap().shader;
+    /// ).unwrap();
     ///
     /// // Should succeed:
-    /// let r = compiler.reflect_library::<d3d11::LibraryReflection>(shader.get_buffer()).unwrap();
+    /// let r = compiler.reflect_library::<d3d11::LibraryReflection>(&shader).unwrap();
     ///
     /// // Invalid interface:
-    /// let r = compiler.reflect_library::<Unknown>(shader.get_buffer());
+    /// let r = compiler.reflect_library::<Unknown>(&shader);
     /// assert_eq!(Some(E::INVALIDARG), r.err().map(|e| e.kind()));
     ///
     /// // Invalid `src_data`:
@@ -167,7 +167,7 @@ impl Compiler {
     /// let shader = compiler.compile_from_file(
     ///     r"test\data\library.hlsl", None, None, (), "lib_5_0",
     ///     Compile::Debug, CompileEffect::None
-    /// ).unwrap().shader;
+    /// ).unwrap();
     ///
     /// // Should succeed:
     /// let r = compiler.reflect_library_11(&shader).unwrap();
@@ -188,7 +188,7 @@ impl Compiler {
     let shader = d3dc.compile_from_file(
         r"test\data\library.hlsl", None, None, (), "lib_5_0",
         Compile::Debug, CompileEffect::None
-    ).unwrap().shader;
+    ).unwrap();
 
     let r : d3d11::LibraryReflection = d3dc.reflect_library(&shader).unwrap();
     let desc = r.get_desc().unwrap();

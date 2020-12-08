@@ -47,9 +47,9 @@ impl<'r> FunctionReflection<'r> {
     /// let shader = d3dc.compile_from_file(
     ///     r"test\data\library.hlsl", None, None, (), "lib_5_0",
     ///     Compile::Debug, CompileEffect::None
-    /// ).unwrap().shader;
+    /// ).unwrap();
     ///
-    /// let r : d3d11::LibraryReflection = d3dc.reflect_library(shader.get_buffer()).unwrap();
+    /// let r : d3d11::LibraryReflection = d3dc.reflect_library(&shader).unwrap();
     ///
     /// let scale4 = r.functions().unwrap().find(|f|
     ///     f.get_desc().unwrap().name.to_bytes() == b"scale4"
@@ -91,9 +91,9 @@ impl<'r> FunctionReflection<'r> {
     /// let shader = d3dc.compile_from_file(
     ///     r"test\data\library.hlsl", None, None, (), "lib_5_0",
     ///     Compile::Debug, CompileEffect::None
-    /// ).unwrap().shader;
+    /// ).unwrap();
     ///
-    /// let r : d3d11::LibraryReflection = d3dc.reflect_library(shader.get_buffer()).unwrap();
+    /// let r : d3d11::LibraryReflection = d3dc.reflect_library(&shader).unwrap();
     ///
     /// let scale4 = r.functions().unwrap().find(|f|
     ///     f.get_desc().unwrap().name.to_bytes() == b"scale4"
@@ -137,9 +137,9 @@ impl<'r> FunctionReflection<'r> {
     /// let shader = d3dc.compile_from_file(
     ///     r"test\data\library.hlsl", None, None, (), "lib_5_0",
     ///     Compile::Debug, CompileEffect::None
-    /// ).unwrap().shader;
+    /// ).unwrap();
     ///
-    /// let r : d3d11::LibraryReflection = d3dc.reflect_library(shader.get_buffer()).unwrap();
+    /// let r : d3d11::LibraryReflection = d3dc.reflect_library(&shader).unwrap();
     ///
     /// for f in r.functions().unwrap() {
     ///     let desc = f.get_desc().unwrap();

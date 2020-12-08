@@ -145,3 +145,27 @@ impl Deref for CodeBlob { fn deref(&self) -> &d3d::Bytecode { self.as_bytecode()
 // From<Option<ReadOnlyBlob>> for TextBlob - "safe" bypass of bytecode validation
 // From<       ReadOnlyBlob > for TextBlob - "safe" bypass of bytecode validation
 // From<&[u8]>                for TextBlob - "safe" bypass of bytecode validation
+
+
+
+
+/// [ReadOnlyBlob] wrapper for other binary data
+#[derive(Clone)]
+#[repr(transparent)]
+pub struct BytesBlob(Option<ReadOnlyBlob>);
+
+impl BytesBlob {
+    pub fn new(value: impl Into<Self>) -> Self { value.into() }
+
+    pub fn len(&self)      -> usize   { self.0.as_ref().map_or(0,    |blob| blob.get_buffer_size()) }
+    pub fn is_empty(&self) -> bool    { self.0.as_ref().map_or(true, |blob| blob.get_buffer_size() == 0) }
+    pub fn get_buffer(&self) -> &[u8] { self.0.as_ref().map_or(&[],  |blob| blob.get_buffer()) } // TODO: remove
+    pub fn as_bytes(&self)   -> &[u8] { self.0.as_ref().map_or(&[],  |blob| blob.get_buffer()) }
+}
+
+impl AsRef <[u8]> for BytesBlob { fn as_ref(&self) -> &[u8] { self.as_bytes() } }
+impl Borrow<[u8]> for BytesBlob { fn borrow(&self) -> &[u8] { self.as_bytes() } }
+impl Debug for BytesBlob { fn fmt(&self, fmt: &mut Formatter) -> fmt::Result { write!(fmt, "BytesBlob({} bytes)", self.len()) } }
+impl Deref for BytesBlob { fn deref(&self) -> &[u8] { self.as_bytes() } type Target = [u8]; }
+impl From<Option<ReadOnlyBlob>> for BytesBlob { fn from(value: Option<ReadOnlyBlob>) -> Self { Self(     value ) } }
+impl From<       ReadOnlyBlob > for BytesBlob { fn from(value:        ReadOnlyBlob ) -> Self { Self(Some(value)) } }
