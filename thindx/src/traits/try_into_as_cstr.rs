@@ -2,7 +2,6 @@ use crate::*;
 
 use winapi::ctypes::c_char;
 
-use std::borrow::Cow;
 use std::ffi::*;
 use std::ptr::*;
 
@@ -23,25 +22,16 @@ impl<T: AsCStr> TryIntoAsCStr for T {
 }
 
 impl<'s> TryIntoAsCStr for &'s str {
-    type Target = ImplCStr<'s>;
+    type Target = CString;
     fn try_into(self) -> Result<Self::Target, ErrorKind> {
-        if self.contains('\0') {
-            Err(THINERR::STRING_CONTAINS_NULS)
-        } else {
-            Ok(ImplCStr(Cow::Owned(self.bytes().chain(Some(0)).collect())))
-        }
+        CString::new(self).map_err(|_| THINERR::STRING_CONTAINS_NULS)
     }
 }
 
 impl TryIntoAsCStr for String {
-    type Target = ImplCStr<'static>;
-    fn try_into(mut self) -> Result<Self::Target, ErrorKind> {
-        if self.contains('\0') {
-            Err(THINERR::STRING_CONTAINS_NULS)
-        } else {
-            self.push('\0');
-            Ok(ImplCStr(Cow::Owned(self.into_bytes())))
-        }
+    type Target = CString;
+    fn try_into(self) -> Result<Self::Target, ErrorKind> {
+        CString::new(self).map_err(|_| THINERR::STRING_CONTAINS_NULS)
     }
 }
 
@@ -122,13 +112,4 @@ unsafe impl<T: AsCStr> AsOptCStr for T {
 
 unsafe impl<T: AsCStr> AsOptCStr for Option<T> {
     fn as_opt_cstr(&self) -> *const c_char { self.as_ref().map_or(null(), |s| s.as_cstr()) }
-}
-
-
-
-#[doc(hidden)] pub struct ImplCStr<'c>(Cow<'c, [u8]>);
-// Invariants: self.0 must be \0 terminated
-
-unsafe impl AsCStr for ImplCStr<'_> {
-    fn as_cstr(&self) -> *const c_char { self.0.as_ptr().cast() }
 }
