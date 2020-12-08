@@ -9,8 +9,21 @@ use std::fmt::{self, Debug, Formatter};
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/ne-d3d11shader-d3d11_shader_version_type)\]
 /// D3D11_SHADER_VERSION_TYPE / D3D11_SHVER_\*
 ///
+/// ### Example
+/// ```rust
+/// # use thindx::{d3d::*, d3d11::*};
+/// # let d3dc = Compiler::new(47).unwrap();
+/// # let shader = d3dc.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap();
+/// let shader = d3dc.reflect11(&shader).unwrap();
+/// let shver : ShaderVersionType = shader.get_desc().unwrap().version.shver();
+/// assert_eq!(ShVer::PixelShader, shver);
+/// ```
+///
 /// ### See Also
-/// *   [ShaderVersion]
+/// *   [d3d11::ShaderDesc::version]
+/// *   [d3d11::ShaderReflection::get_desc]
+/// *   [d3d11::ShaderVersion::shver]
+/// *   [examples::d3dcompiler_04_reflection]
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)] pub struct ShaderVersionType(D3D11_SHADER_VERSION_TYPE);
 #[doc(hidden)] pub use ShaderVersionType as ShVer;
@@ -46,8 +59,23 @@ impl Default for ShVer {
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/ne-d3d11shader-d3d11_shader_version_type)\]
 /// UINT mask of ([ShaderVersionType] << 16) | (major << 4) | (minor << 0)
 ///
+/// ### Example
+/// ```rust
+/// # use thindx::{d3d::*, d3d11::*};
+/// # let d3dc = Compiler::new(47).unwrap();
+/// # let shader = d3dc.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap();
+/// let shader = d3dc.reflect11(&shader).unwrap();
+/// let version : ShaderVersion = shader.get_desc().unwrap().version;
+/// assert_eq!(version.shver(), ShVer::PixelShader);
+/// assert_eq!(version.major(), 4);
+/// assert_eq!(version.minor(), 0);
+/// assert_eq!(format!("{:?}", version), "ps_4_0");
+/// ```
+///
 /// ### See Also
 /// *   [d3d11::ShaderDesc::version]
+/// *   [d3d11::ShaderReflection::get_desc]
+/// *   [examples::d3dcompiler_04_reflection]
 #[derive(Clone, Copy, Default, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)] pub struct ShaderVersion(u32);
 
