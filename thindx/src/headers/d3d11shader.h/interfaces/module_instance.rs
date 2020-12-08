@@ -33,10 +33,14 @@ impl ModuleInstance {
     /// *   `dst_slot`      - The destination slot number for rebinding.
     /// *   `dst_offset`    - The offset in bytes of the destination slot for rebinding. The offset must have 16-byte alignment.
     ///
+    /// ### Errors
+    /// *   [E::FAIL]       - the rebinding is out-of-bounds
+    /// *   [E::FAIL]       - `dst_slot` was already bound?
+    /// *   [E::FAIL]       - an otherwise invalid rebinding
+    ///
     /// ### Returns
-    /// *   Ok(`true`)                          - for a valid rebinding
-    /// *   Ok(`false`)                         - for rebinding a nonexistent slot; that is, for which the shader reflection doesn’t have any data
-    /// *   Err(`e`) if `e.kind()` == [E::FAIL] - for an invalid rebinding, for example, the rebinding is out-of-bounds
+    /// *   Ok(`true`)      - for a valid rebinding
+    /// *   Ok(`false`)     - for rebinding a nonexistent slot; that is, for which the shader reflection doesn’t have any data
     ///
     /// ### Example
     /// ```rust
@@ -58,10 +62,14 @@ impl ModuleInstance {
     /// *   `dst_slot`      - The destination slot number for rebinding.
     /// *   `dst_offset`    - The offset in bytes of the destination slot for rebinding. The offset must have 16-byte alignment.
     ///
+    /// ### Errors
+    /// *   [E::FAIL]       - the rebinding is out-of-bounds
+    /// *   [E::FAIL]       - `dst_slot` was already bound?
+    /// *   [E::FAIL]       - an otherwise invalid rebinding
+    ///
     /// ### Returns
-    /// *   Ok(`true`)                          - for a valid rebinding
-    /// *   Ok(`false`)                         - for rebinding a nonexistent slot; that is, for which the shader reflection doesn’t have any data
-    /// *   Err(`e`) if `e.kind()` == [E::FAIL] - for an invalid rebinding, for example, the rebinding is out-of-bounds
+    /// *   `true`          - for a valid rebinding
+    /// *   `false`         - for rebinding a nonexistent slot; that is, for which the shader reflection doesn’t have any data
     ///
     /// ### Example
     /// ```rust
@@ -84,10 +92,14 @@ impl ModuleInstance {
     /// *   `dst_slot`      - The first destination slot number for rebinding.
     /// *   `count`         - The number of slots for rebinding.
     ///
+    /// ### Errors
+    /// *   [E::FAIL]       - the rebinding is out-of-bounds
+    /// *   [E::FAIL]       - A slot between `dst_slot .. dst_slot + count` was already bound?
+    /// *   [E::FAIL]       - an otherwise invalid rebinding
+    ///
     /// ### Returns
-    /// *   Ok(`true`)                          - for a valid rebinding
-    /// *   Ok(`false`)                         - for rebinding a nonexistent slot; that is, for which the shader reflection doesn’t have any data
-    /// *   Err(`e`) if `e.kind()` == [E::FAIL] - for an invalid rebinding, for example, the rebinding is out-of-bounds
+    /// *   `true`          - for a valid rebinding
+    /// *   `false`         - for rebinding a nonexistent slot; that is, for which the shader reflection doesn’t have any data
     ///
     /// ### Example
     /// ```rust
@@ -109,10 +121,14 @@ impl ModuleInstance {
     /// *   `dst_uav_slot`  - The first destination slot number for rebinding.
     /// *   `count`         - The number of slots for rebinding.
     ///
+    /// ### Errors
+    /// *   [E::FAIL]       - the rebinding is out-of-bounds
+    /// *   [E::FAIL]       - A slot between `dst_uav_slot .. dst_uav_slot + count` was already bound?
+    /// *   [E::FAIL]       - an otherwise invalid rebinding
+    ///
     /// ### Returns
-    /// *   Ok(`true`)                          - for a valid rebinding
-    /// *   Ok(`false`)                         - for rebinding a nonexistent slot; that is, for which the shader reflection doesn’t have any data
-    /// *   Err(`e`) if `e.kind()` == [E::FAIL] - for an invalid rebinding, for example, the rebinding is out-of-bounds
+    /// *   `true`          - for a valid rebinding
+    /// *   `false`         - for rebinding a nonexistent slot; that is, for which the shader reflection doesn’t have any data
     ///
     /// ### Example
     /// ```rust
@@ -134,10 +150,14 @@ impl ModuleInstance {
     /// *   `dst_uav_slot`  - The first destination slot number for rebinding.
     /// *   `count`         - The number of slots for rebinding.
     ///
+    /// ### Errors
+    /// *   [E::FAIL]       - the rebinding is out-of-bounds
+    /// *   [E::FAIL]       - A slot between `dst_uav_slot .. dst_uav_slot + count` was already bound?
+    /// *   [E::FAIL]       - an otherwise invalid rebinding
+    ///
     /// ### Returns
-    /// *   Ok(`true`)                          - for a valid rebinding
-    /// *   Ok(`false`)                         - for rebinding a nonexistent slot; that is, for which the shader reflection doesn’t have any data
-    /// *   Err(`e`) if `e.kind()` == [E::FAIL] - for an invalid rebinding, for example, the rebinding is out-of-bounds
+    /// *   `true`          - for a valid rebinding
+    /// *   `false`         - for rebinding a nonexistent slot; that is, for which the shader reflection doesn’t have any data
     ///
     /// ### Example
     /// ```rust
@@ -156,14 +176,18 @@ impl ModuleInstance {
     /// Rebinds a texture or buffer by name to destination slots.
     ///
     /// ### Arguments
-    /// *   `name`      - The name of the texture or buffer for rebinding.
-    /// *   `dst_slot`  - The first destination slot number for rebinding.
-    /// *   `count`     - The number of slots for rebinding.
+    /// *   `name`          - The name of the texture or buffer for rebinding.
+    /// *   `dst_slot`      - The first destination slot number for rebinding.
+    /// *   `count`         - The number of slots for rebinding.
+    ///
+    /// ### Errors
+    /// *   [E::FAIL]       - the rebinding is out-of-bounds
+    /// *   [E::FAIL]       - A slot between `dst_slot .. dst_slot + count` was already bound?
+    /// *   [E::FAIL]       - an otherwise invalid rebinding
     ///
     /// ### Returns
-    /// *   Ok(`true`)                          - for a valid rebinding
-    /// *   Ok(`false`)                         - for rebinding a nonexistent slot; that is, for which the shader reflection doesn’t have any data
-    /// *   Err(`e`) if `e.kind()` == [E::FAIL] - for an invalid rebinding, for example, the rebinding is out-of-bounds
+    /// *   `true`          - for a valid rebinding
+    /// *   `false`         - for rebinding a nonexistent slot; that is, for which the shader reflection doesn’t have any data
     ///
     /// ### Example
     /// ```rust
@@ -182,14 +206,18 @@ impl ModuleInstance {
     /// Rebinds a sampler from source slot to destination slot.
     ///
     /// ### Arguments
-    /// *   `src_slot`  - The first source slot number for rebinding.
-    /// *   `dst_slot`  - The first destination slot number for rebinding.
-    /// *   `count`     - The number of slots for rebinding.
+    /// *   `src_slot`      - The first source slot number for rebinding.
+    /// *   `dst_slot`      - The first destination slot number for rebinding.
+    /// *   `count`         - The number of slots for rebinding.
+    ///
+    /// ### Errors
+    /// *   [E::FAIL]       - the rebinding is out-of-bounds
+    /// *   [E::FAIL]       - A slot between `dst_slot .. dst_slot + count` was already bound?
+    /// *   [E::FAIL]       - an otherwise invalid rebinding
     ///
     /// ### Returns
-    /// *   Ok(`true`)                          - for a valid rebinding
-    /// *   Ok(`false`)                         - for rebinding a nonexistent slot; that is, for which the shader reflection doesn’t have any data
-    /// *   Err(`e`) if `e.kind()` == [E::FAIL] - for an invalid rebinding, for example, the rebinding is out-of-bounds
+    /// *   `true`          - for a valid rebinding
+    /// *   `false`         - for rebinding a nonexistent slot; that is, for which the shader reflection doesn’t have any data
     ///
     /// ### Example
     /// ```rust
@@ -207,14 +235,18 @@ impl ModuleInstance {
     /// Rebinds a sampler by name to destination slots.
     ///
     /// ### Arguments
-    /// *   `name`      - The name of the sampler for rebinding.
-    /// *   `dst_slot`  - The first destination slot number for rebinding.
-    /// *   `count`     - The number of slots for rebinding.
+    /// *   `name`          - The name of the sampler for rebinding.
+    /// *   `dst_slot`      - The first destination slot number for rebinding.
+    /// *   `count`         - The number of slots for rebinding.
+    ///
+    /// ### Errors
+    /// *   [E::FAIL]       - the rebinding is out-of-bounds
+    /// *   [E::FAIL]       - A slot between `dst_slot .. dst_slot + count` was already bound?
+    /// *   [E::FAIL]       - an otherwise invalid rebinding
     ///
     /// ### Returns
-    /// *   Ok(`true`)                          - for a valid rebinding
-    /// *   Ok(`false`)                         - for rebinding a nonexistent slot; that is, for which the shader reflection doesn’t have any data
-    /// *   Err(`e`) if `e.kind()` == [E::FAIL] - for an invalid rebinding, for example, the rebinding is out-of-bounds
+    /// *   `true`          - for a valid rebinding
+    /// *   `false`         - for rebinding a nonexistent slot; that is, for which the shader reflection doesn’t have any data
     ///
     /// ### Example
     /// ```rust
@@ -233,14 +265,18 @@ impl ModuleInstance {
     /// Rebinds an unordered access view (UAV) from source slot to destination slot.
     ///
     /// ### Arguments
-    /// *   `src_slot`  - The first source slot number for rebinding.
-    /// *   `dst_slot`  - The first destination slot number for rebinding.
-    /// *   `count`     - The number of slots for rebinding.
+    /// *   `src_slot`      - The first source slot number for rebinding.
+    /// *   `dst_slot`      - The first destination slot number for rebinding.
+    /// *   `count`         - The number of slots for rebinding.
+    ///
+    /// ### Errors
+    /// *   [E::FAIL]       - the rebinding is out-of-bounds
+    /// *   [E::FAIL]       - A slot between `dst_slot .. dst_slot + count` was already bound?
+    /// *   [E::FAIL]       - an otherwise invalid rebinding
     ///
     /// ### Returns
-    /// *   Ok(`true`)                          - for a valid rebinding
-    /// *   Ok(`false`)                         - for rebinding a nonexistent slot; that is, for which the shader reflection doesn’t have any data
-    /// *   Err(`e`) if `e.kind()` == [E::FAIL] - for an invalid rebinding, for example, the rebinding is out-of-bounds
+    /// *   `true`          - for a valid rebinding
+    /// *   `false`         - for rebinding a nonexistent slot; that is, for which the shader reflection doesn’t have any data
     ///
     /// ### Example
     /// ```rust
@@ -258,14 +294,18 @@ impl ModuleInstance {
     /// Rebinds an unordered access view (UAV) by name to destination slots.
     ///
     /// ### Arguments
-    /// *   `name`      - The name of the UAV for rebinding.
-    /// *   `dst_slot`  - The first destination slot number for rebinding.
-    /// *   `count`     - The number of slots for rebinding.
+    /// *   `name`          - The name of the UAV for rebinding.
+    /// *   `dst_slot`      - The first destination slot number for rebinding.
+    /// *   `count`         - The number of slots for rebinding.
+    ///
+    /// ### Errors
+    /// *   [E::FAIL]       - the rebinding is out-of-bounds
+    /// *   [E::FAIL]       - A slot between `dst_slot .. dst_slot + count` was already bound?
+    /// *   [E::FAIL]       - an otherwise invalid rebinding
     ///
     /// ### Returns
-    /// *   Ok(`true`)                          - for a valid rebinding
-    /// *   Ok(`false`)                         - for rebinding a nonexistent slot; that is, for which the shader reflection doesn’t have any data
-    /// *   Err(`e`) if `e.kind()` == [E::FAIL] - for an invalid rebinding, for example, the rebinding is out-of-bounds
+    /// *   `true`          - for a valid rebinding
+    /// *   `false`         - for rebinding a nonexistent slot; that is, for which the shader reflection doesn’t have any data
     ///
     /// ### Example
     /// ```rust

@@ -16,9 +16,8 @@ impl Compiler {
     /// ### Arguments
     /// *   `flags`         - Reserved, initialize with `None`
     ///
-    /// ### Returns
-    /// *   Err([THINERR::MISSING_DLL_EXPORT])    - `d3dcompiler_4?.dll` and earlier
-    /// *   Ok([d3d11::FunctionLinkingGraph])
+    /// ### Errors
+    /// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_4?.dll` and earlier
     ///
     /// ### Example
     /// ```rust
@@ -44,9 +43,8 @@ impl Compiler {
     /// > platforms to create precompiled HLSL functions, package them into libraries, and link them into full shaders
     /// > at run time.
     ///
-    /// ### Returns
-    /// *   Err([THINERR::MISSING_DLL_EXPORT])    - `d3dcompiler_4?.dll` and earlier
-    /// *   Ok([d3d11::Linker])
+    /// ### Errors
+    /// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_4?.dll` and earlier
     ///
     /// ### Example
     /// ```rust
@@ -75,9 +73,8 @@ impl Compiler {
     /// ### Arguments
     /// *   `src_data`          - The data to load a [d3d11::Module] from.
     ///
-    /// ### Returns
-    /// *   Err([THINERR::MISSING_DLL_EXPORT])    - `d3dcompiler_4?.dll` and earlier
-    /// *   Ok([d3d11::Module])
+    /// ### Errors
+    /// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_4?.dll` and earlier
     ///
     /// ### Example
     /// ```rust

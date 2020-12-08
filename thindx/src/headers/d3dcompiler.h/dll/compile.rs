@@ -135,12 +135,10 @@ impl Compiler {
     /// *   `flags1`        - [Compile]::\* constants.
     /// *   `flags2`        - [CompileEffect]::\* constants.
     ///
-    /// ### Returns
-    /// *   Ok([CompileResult] { code: [ReadOnlyBlob], errors: [Option]&lt;[ReadOnlyBlob]&gt; })
-    /// *   Err([CompileError]) where `error.kind` ==
-    ///     *   [THINERR::MISSING_DLL_EXPORT]     - `d3dcompiler_4?.dll` and earlier
-    ///     *   [D3DERR::INVALIDCALL]               - on invalid parameters such as nonexistant `target`s
-    ///     *   [E::FAIL]                           - if the shader failed to compile
+    /// ### Errors
+    /// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_4?.dll` and earlier
+    /// *   [D3DERR::INVALIDCALL]           - on invalid parameters such as nonexistant `target`s
+    /// *   [E::FAIL]                       - if the shader failed to compile
     ///
     /// ### Examples
     /// ```rust
@@ -222,12 +220,10 @@ impl Compiler {
     /// *   `flags1`        - [Compile]::\* constants.
     /// *   `flags2`        - [CompileEffect]::\* constants.
     ///
-    /// ### Returns
-    /// *   Ok([CompileResult] { code: [ReadOnlyBlob], errors: [Option]&lt;[ReadOnlyBlob]&gt; })
-    /// *   Err([CompileError]) where `error.kind` ==
-    ///     *   [THINERR::MISSING_DLL_EXPORT]     - `d3dcompiler_39.dll` and earlier
-    ///     *   [D3DERR::INVALIDCALL]               - on invalid parameters such as nonexistant `target`s
-    ///     *   [E::FAIL]                           - if the shader failed to compile
+    /// ### Errors
+    /// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_39.dll` and earlier
+    /// *   [D3DERR::INVALIDCALL]           - on invalid parameters such as nonexistant `target`s
+    /// *   [E::FAIL]                       - if the shader failed to compile
     ///
     /// ### Examples
     /// ```rust
@@ -314,12 +310,10 @@ impl Compiler {
     /// *   `secondary_data_flags`  - [CompileSecData]::\* constants.
     /// *   `secondary_data`    - A pointer to secondary data. If you don't pass secondary data, set to [None].
     ///
-    /// ### Returns
-    /// *   Ok([CompileResult] { code: [ReadOnlyBlob], errors: [Option]&lt;[ReadOnlyBlob]&gt; })
-    /// *   Err([CompileError]) where `error.kind` ==
-    ///     *   [THINERR::MISSING_DLL_EXPORT]     - `d3dcompiler_4?.dll` and earlier
-    ///     *   [D3DERR::INVALIDCALL]               - on invalid parameters such as nonexistant `target`s
-    ///     *   [E::FAIL]                           - if the shader failed to compile
+    /// ### Errors
+    /// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_4?.dll` and earlier
+    /// *   [D3DERR::INVALIDCALL]           - on invalid parameters such as nonexistant `target`s
+    /// *   [E::FAIL]                       - if the shader failed to compile
     ///
     /// ### Examples
     /// ```rust
@@ -415,9 +409,9 @@ impl Compiler {
     ///                       Use `()` if `#include`s should not be supported.
     ///                       Use [StandardFileInclude] if you want to resolve `#include`s relative to `source_name`.
     ///
-    /// ### Returns
-    /// *   Err([THINERR::MISSING_DLL_EXPORT])    - `d3dcompiler_39.dll` and earlier
-    /// *   Ok([CompileResult] { code, errors })
+    /// ### Errors
+    /// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_39.dll` and earlier
+    /// *   [E::FAIL]                       - if the shader failed to preprocess
     ///
     /// ### Example
     /// ```rust

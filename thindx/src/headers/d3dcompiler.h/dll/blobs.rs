@@ -15,9 +15,8 @@ impl Compiler {
     /// ### Arguments
     /// *   `data`          - The data to create a [ReadOnlyBlob] out of.
     ///
-    /// ### Returns
-    /// *   Err([THINERR::MISSING_DLL_EXPORT])    - `d3dcompiler_42.dll` and earlier
-    /// *   Ok([ReadOnlyBlob])
+    /// ### Errors
+    /// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_42.dll` and earlier
     ///
     /// ### Example
     /// ```rust
@@ -52,18 +51,23 @@ impl Compiler {
     /// ### Arguments
     /// *   `file_name`         - The path to read the blob from.
     ///
-    /// ### Returns
-    /// *   Err(`e`) where `e.kind()` == [THINERR::MISSING_DLL_EXPORT]    - `d3dcompiler_43.dll` and earlier
-    /// *   Err(`e`)                                                        - if the file doesn't exist, can't be read, etc.
-    /// *   Ok([ReadOnlyBlob])
+    /// ### Errors
+    /// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_43.dll` and earlier
+    /// *   0x80070002                      - `file_name` not found
+    /// *   0x80070005                      - Access denied (`file_name` not a file? bad perms? ...?)
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::d3d::*; let compiler = Compiler::new(47).unwrap();
+    /// # use thindx::{*, d3d::*};
+    /// # use winapi::shared::winerror::*;
+    /// # let compiler = Compiler::new(47).unwrap();
     /// let blob : ReadOnlyBlob = compiler.read_file_to_blob(r"test\data\basic.hlsl").unwrap();
     ///
-    /// assert!(compiler.read_file_to_blob(r"test\data\nonexistant").is_err(), "shouldn't exist");
-    /// assert!(compiler.read_file_to_blob(r"test\data").is_err(), "can't read folder");
+    /// let err = compiler.read_file_to_blob(r"test\data\nonexistant").err().unwrap();
+    /// assert_eq!(err.kind(), ErrorKind::from_win32(ERROR_FILE_NOT_FOUND));
+    ///
+    /// let err = compiler.read_file_to_blob(r"test\data").err().unwrap();
+    /// assert_eq!(err.kind(), ErrorKind::from_win32(ERROR_ACCESS_DENIED));
     /// ```
     #[requires(d3dcompiler=44)]
     pub fn read_file_to_blob<'s>(&self, file_name: impl AsRef<Path>) -> Result<ReadOnlyBlob, Error> {
@@ -88,17 +92,29 @@ impl Compiler {
     /// *   `file_name`     - The path to write it to.
     /// *   `overwrite`     - Overwrite any existing file.
     ///
-    /// ### Returns
-    /// *   Err(`e`) where `e.kind()` == [THINERR::MISSING_DLL_EXPORT]    - `d3dcompiler_43.dll` and earlier
-    /// *   Err(`e`) where `e.kind()` == ???                                - file exists, cannot be written, etc.
-    /// *   Ok(`()`)
+    ///
+    /// ### Errors
+    /// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_43.dll` and earlier
+    /// *   0x80070003                      - Path not found (missing filename in `file_name`)
+    /// *   0x80070005                      - Access denied (target `file_name` is a directory?)
+    /// *   0x80070050                      - `file_name` already exists (if `!overwrite`)
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::d3d::*; let compiler = Compiler::new(47).unwrap();
+    /// # use thindx::{*, d3d::*};
+    /// # use winapi::shared::winerror::*;
+    /// # let compiler = Compiler::new(47).unwrap();
     /// let blob = compiler.create_read_only_blob(&[1,2,3,4]).unwrap();
     /// compiler.write_blob_to_file(&blob, r"..\target\1234.bin", true).unwrap();
-    /// compiler.write_blob_to_file(&blob, r"..\target\1234.bin", false).unwrap_err();
+    ///
+    /// let err = compiler.write_blob_to_file(&blob, r"..\target\1234.bin", false).unwrap_err();
+    /// assert_eq!(err.kind(), ErrorKind::from_win32(ERROR_FILE_EXISTS));
+    ///
+    /// let err = compiler.write_blob_to_file(&blob, r"..\target\", false).unwrap_err();
+    /// assert_eq!(err.kind(), ErrorKind::from_win32(ERROR_PATH_NOT_FOUND));
+    ///
+    /// let err = compiler.write_blob_to_file(&blob, r"..\target", false).unwrap_err();
+    /// assert_eq!(err.kind(), ErrorKind::from_win32(ERROR_ACCESS_DENIED));
     /// ```
     #[requires(d3dcompiler=44)]
     pub fn write_blob_to_file<'s>(

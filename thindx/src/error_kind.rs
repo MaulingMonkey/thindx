@@ -38,6 +38,16 @@ enumish! {
 }
 
 impl ErrorKind {
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/dmerror/nf-dmerror-make_hresult)\]
+    /// MAKE_HRESULT
+    pub fn make_hresult(sev: u32, fac: u32, code: u32) -> Self {
+        Self(((sev << 31) | (fac << 16) | (code << 0)) as _)
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/dmerror/nf-dmerror-make_hresult)\]
+    /// MAKE_HRESULT(1, FACILITY_WIN32, code)
+    pub fn from_win32(code: u32) -> Self { Self::make_hresult(1, 7, code) }
+
     pub(crate) fn check(hr: HRESULT) -> Result<(), Self> {
         if !SUCCEEDED(hr) {
             Err(Self(hr))

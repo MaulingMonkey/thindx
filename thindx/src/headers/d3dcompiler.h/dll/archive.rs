@@ -17,9 +17,8 @@ impl Compiler {
     /// *   `shaders`       - The compiled shader(s) to compress.
     /// *   `flags`         - [CompressShader] flags controlling compression.
     ///
-    /// ### Returns
-    /// *   Err([THINERR::MISSING_DLL_EXPORT])    - `d3dcompiler_42.dll` and earlier
-    /// *   Ok([ReadOnlyBlob])
+    /// ### Errors
+    /// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_42.dll` and earlier
     ///
     /// ### Example
     /// ```rust
@@ -81,9 +80,8 @@ impl Compiler {
     /// ### Arguments
     /// *   `src_data`      - The compressed shaders.
     ///
-    /// ### Returns
-    /// *   Err([THINERR::MISSING_DLL_EXPORT])    - `d3dcompiler_42.dll` and earlier
-    /// *   Ok([u32])                               - the number of compressed shaders contained within `src_data`
+    /// ### Errors
+    /// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_42.dll` and earlier
     ///
     /// ### Example
     /// ```rust
@@ -119,9 +117,8 @@ impl Compiler {
     /// *   `src_data`      - The compressed shaders to decompress.
     /// *   `flags`         - Reserved (pass [None]).
     ///
-    /// ### Returns
-    /// *   Err([THINERR::MISSING_DLL_EXPORT])            - `d3dcompiler_42.dll` and earlier
-    /// *   Ok(&amp;'s \[[Option]&lt;[ReadOnlyBlob]&gt;\])  - the shader(s) that were decompressed
+    /// ### Errors
+    /// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_42.dll` and earlier
     ///
     /// ### Example
     /// ```rust
@@ -177,9 +174,8 @@ impl Compiler {
     /// *   `src_data`      - The compressed shaders to decompress.
     /// *   `flags`         - Reserved (pass [None]).
     ///
-    /// ### Returns
-    /// *   Err([THINERR::MISSING_DLL_EXPORT])        - `d3dcompiler_42.dll` and earlier
-    /// *   Ok(Vec&lt;[Option]&lt;[ReadOnlyBlob]&gt;)   - the shader(s) that were decompressed
+    /// ### Errors
+    /// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_42.dll` and earlier
     ///
     /// ### Example
     /// ```rust

@@ -17,11 +17,9 @@ impl Compiler {
     /// *   `part`          - The [BlobPart] to retrieve
     /// *   `flags`         - Reserved (pass [None])
     ///
-    /// ### Returns
-    /// *   Ok([ReadOnlyBlob])                  - on success
-    /// *   Err([Error]) with `error.kind()` ==
-    ///     *   [THINERR::MISSING_DLL_EXPORT] - on `d3dcompiler_42.dll` and earlier
-    ///     *   [D3DERR::INVALIDCALL]           - on data that wasn't compiled shader code.
+    /// ### Errors
+    /// *   [THINERR::MISSING_DLL_EXPORT]   - on `d3dcompiler_42.dll` and earlier
+    /// *   [D3DERR::INVALIDCALL]           - on data that wasn't compiled shader code.
     ///
     /// ### Example
     /// ```rust
@@ -57,9 +55,8 @@ impl Compiler {
     /// ### Arguments
     /// *   `src_data`  Either uncompiled or compiled HLSL code.
     ///
-    /// ### Returns
-    /// *   Err([THINERR::MISSING_DLL_EXPORT])    - `d3dcompiler_39.dll` and earlier
-    /// *   Ok([ReadOnlyBlob])
+    /// ### Errors
+    /// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_39.dll` and earlier
     ///
     /// ### Example
     /// ```rust,no_run
@@ -90,9 +87,6 @@ impl Compiler {
     /// > [Blob::InputAndOutputSignatureBlob] value.
     ///
     /// Gets the input and output signatures from a compilation result.
-    ///
-    /// ### Returns
-    /// *   Ok([ReadOnlyBlob])
     ///
     /// ### Example
     /// ```rust
@@ -126,9 +120,6 @@ impl Compiler {
     ///
     /// Gets the input signature from a compilation result.
     ///
-    /// ### Returns
-    /// *   Ok([ReadOnlyBlob])
-    ///
     /// ### Example
     /// ```rust
     /// # use thindx::d3d::*; let compiler = Compiler::new(47).unwrap();
@@ -160,9 +151,6 @@ impl Compiler {
     /// > [Blob::OutputSignatureBlob] value.
     ///
     /// Gets the output signature from a compilation result.
-    ///
-    /// ### Returns
-    /// *   Ok([ReadOnlyBlob])
     ///
     /// ### Example
     /// ```rust
@@ -198,9 +186,8 @@ impl Compiler {
     /// *   `flags`     - Resereved.  Pass `()`.
     /// *   `part_data` - The part data to set.
     ///
-    /// ### Returns
-    /// *   Err(`e`) where `e.kind()` == [THINERR::MISSING_DLL_EXPORT]    - `d3dcompiler_43.dll` and earlier
-    /// *   Ok(`()`)
+    /// ### Errors
+    /// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_43.dll` and earlier
     ///
     /// ### Example
     /// ```rust
@@ -241,9 +228,8 @@ impl Compiler {
     /// *   `shader_bytecode`   - The original shader bytecode.
     /// *   `strip_flags`       - The [CompilerStripFlags] to use.
     ///
-    /// ### Returns
-    /// *   Err(`e`) where `e.kind()` == [THINERR::MISSING_DLL_EXPORT]    - `d3dcompiler_39.dll` and earlier
-    /// *   Ok(`()`)
+    /// ### Errors
+    /// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_39.dll` and earlier
     ///
     /// ### Example
     /// ```rust

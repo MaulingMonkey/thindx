@@ -15,7 +15,7 @@ impl Compiler {
     ///
     /// ### Returns
     /// *   Err([std::io::Error])   - if `d3dcompiler_{version}.dll` could not be loaded
-    /// *   Ok([Compiler])       - `d3dcompiler_{version}.dll` was found
+    /// *   Ok([Compiler])          - `d3dcompiler_{version}.dll` was found
     ///
     /// ### Example
     /// ```rust

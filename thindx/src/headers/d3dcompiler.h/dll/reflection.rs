@@ -17,11 +17,10 @@ impl Compiler {
     /// ### Arguments
     /// *   `src_data`  - A compiled HLSL shader.
     ///
-    /// ### Returns
-    /// *   Err(`e`) where `e.kind()` == [THINERR::MISSING_DLL_EXPORT]    - `d3dcompiler_4?.dll` and earlier
-    /// *   Err(`e`) where `e.kind()` == [D3DERR::INVALIDARG]               - On invalid `I`
-    /// *   Err(`e`) where `e.kind()` == [D3DERR::INVALIDCALL]              - On invalid `src_data`
-    /// *   Ok(`()`)
+    /// ### Errors
+    /// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_4?.dll` and earlier
+    /// *   [D3DERR::INVALIDARG]            - On invalid `I`
+    /// *   [D3DERR::INVALIDCALL]           - On invalid `src_data`
     ///
     /// ### See Also
     /// *   [d3d11::ShaderReflection] for a more complete example
@@ -64,11 +63,10 @@ impl Compiler {
     /// ### Arguments
     /// *   `src_data`  - A compiled HLSL shader.
     ///
-    /// ### Returns
-    /// *   Err(`e`) where `e.kind()` == [THINERR::MISSING_DLL_EXPORT]      - `d3dcompiler_4?.dll` and earlier
-    /// *   Err(`e`) where `e.kind()` == [D3DERR::INVALIDARG]               - On invalid `I`
-    /// *   Err(`e`) where `e.kind()` == [D3DERR::INVALIDCALL]              - On invalid `src_data`
-    /// *   Ok(`()`)
+    /// ### Errors
+    /// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_4?.dll` and earlier
+    /// *   [D3DERR::INVALIDARG]            - On invalid `I`
+    /// *   [D3DERR::INVALIDCALL]           - On invalid `src_data`
     ///
     /// ### See Also
     /// *   [d3d11::ShaderReflection] for a more complete example
@@ -105,10 +103,9 @@ impl Compiler {
     /// ### Arguments
     /// *   `src_data`  - An HLSL library of functions.
     ///
-    /// ### Returns
-    /// *   Err(`e`) where `e.kind()` == [THINERR::MISSING_DLL_EXPORT]      - `d3dcompiler_4?.dll` and earlier
-    /// *   Err(`e`) where `e.kind()` == [D3DERR::INVALIDCALL]              - On invalid `src_data`
-    /// *   Ok(`()`)
+    /// ### Errors
+    /// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_4?.dll` and earlier
+    /// *   [D3DERR::INVALIDCALL]           - On invalid `src_data`
     ///
     /// ### See Also
     /// *   [d3d11::LibraryReflection] for a more complete example
@@ -155,10 +152,9 @@ impl Compiler {
     /// ### Arguments
     /// *   `src_data`  - An HLSL library of functions.
     ///
-    /// ### Returns
-    /// *   Err(`e`) where `e.kind()` == [THINERR::MISSING_DLL_EXPORT]      - `d3dcompiler_4?.dll` and earlier
-    /// *   Err(`e`) where `e.kind()` == [D3DERR::INVALIDCALL]              - On invalid `src_data`
-    /// *   Ok(`()`)
+    /// ### Errors
+    /// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_4?.dll` and earlier
+    /// *   [D3DERR::INVALIDCALL]           - On invalid `src_data`
     ///
     /// ### See Also
     /// *   [d3d11::LibraryReflection] for a more complete example

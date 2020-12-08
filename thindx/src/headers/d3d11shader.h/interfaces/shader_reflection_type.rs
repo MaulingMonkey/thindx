@@ -167,10 +167,12 @@ impl<'r> ShaderReflectionType<'r> {
     ///
     /// Indicates whether a class type implements an interface.
     ///
+    /// ### Errors
+    /// *   Never?
+    ///
     /// ### Returns
-    /// *   Ok(`true`)      - The interface is implemented
-    /// *   Ok(`false`)     - The interface isn't implemented
-    /// *   Err([Error])    - Invalid type or something?  What the heck are you doing?
+    /// *   `true`          - The interface is implemented
+    /// *   `false`         - The interface isn't implemented
     ///
     /// ### Example
     /// ```rust
@@ -192,10 +194,12 @@ impl<'r> ShaderReflectionType<'r> {
     ///
     /// Indicates whether two [ShaderReflectionType] pointers have the same underlying type.
     ///
+    /// ### Errors
+    /// *   Never?
+    ///
     /// ### Returns
-    /// *   Ok(`true`)      - The interface is implemented
-    /// *   Ok(`false`)     - The interface isn't implemented
-    /// *   Err([Error])    - Invalid type or something?  What the heck are you doing?
+    /// *   `true`          - The interface is implemented
+    /// *   `false`         - The interface isn't implemented
     ///
     /// ### Example
     /// ```rust
@@ -217,10 +221,12 @@ impl<'r> ShaderReflectionType<'r> {
     ///
     /// Indicates whether a variable is of the specified type.
     ///
+    /// ### Errors
+    /// *   Never?
+    ///
     /// ### Returns
-    /// *   Ok(`true`)      - The interface is implemented
-    /// *   Ok(`false`)     - The interface isn't implemented
-    /// *   Err([Error])    - Invalid type or something?  What the heck are you doing?
+    /// *   `true`          - The interface is implemented
+    /// *   `false`         - The interface isn't implemented
     ///
     /// ### Example
     /// ```rust

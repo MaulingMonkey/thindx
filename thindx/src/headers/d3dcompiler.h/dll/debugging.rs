@@ -26,10 +26,8 @@ impl Compiler {
     /// *   `flags`             - [Disasm] flags controlling how the compiled shader data is disassembled.
     /// *   `comments`          - Optional string at the top of the shader that identifies the shader constants and variables.
     ///
-    /// ### Returns
-    /// *   Ok([ReadOnlyBlob])      - the disassembly
-    /// *   Err([Error]) with `error.kind()` ==
-    ///     *   [THINERR::MISSING_DLL_EXPORT] - on `d3dcompiler_39.dll` and earlier
+    /// ### Errors
+    /// *   [THINERR::MISSING_DLL_EXPORT]   - on `d3dcompiler_39.dll` and earlier
     ///
     /// ### Example
     /// ```rust
@@ -105,10 +103,8 @@ impl Compiler {
     /// *   `start_byte_offset` - The number of bytes offset into the compiled shader data where [disassemble_region](Self::disassemble_region) starts the disassembly.
     /// *   `num_insts`         - The number of instructions to disassemble.
     ///
-    /// ### Returns
-    /// *   Ok([DisassembledRegion] { disassembly: [ReadOnlyBlob], finish_byte_offset: [usize] })  - the disassembly
-    /// *   Err([Error]) with `error.kind()` ==
-    ///     *   [THINERR::MISSING_DLL_EXPORT] - on `d3dcompiler_43.dll` and earlier
+    /// ### Errors
+    /// *   [THINERR::MISSING_DLL_EXPORT]   - on `d3dcompiler_43.dll` and earlier
     ///
     /// ### Example
     /// ```rust
@@ -187,10 +183,8 @@ impl Compiler {
     ///
     /// Retrieves the number of byte offsets for instructions within a section of shader code.
     ///
-    /// ### Returns
-    /// *   Ok([usize])                             - the number of available trace instruction offsets in that range
-    /// *   Err([Error]) where `error.kind()` ==
-    ///     *   [THINERR::MISSING_DLL_EXPORT]    - `d3dcompiler_43.dll` and earlier
+    /// ### Errors
+    /// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_43.dll` and earlier
     ///
     /// ### Example
     /// ```rust
@@ -226,10 +220,8 @@ impl Compiler {
     ///
     /// Retrieves the byte offsets for instructions within a section of shader code.
     ///
-    /// ### Returns
-    /// *   Ok(&amp;\[[usize]\])                    - the trace instruction offsets in `offsets` that were read
-    /// *   Err([Error]) where `error.kind()` ==
-    ///     *   [THINERR::MISSING_DLL_EXPORT]     - `d3dcompiler_43.dll` and earlier
+    /// ### Errors
+    /// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_43.dll` and earlier
     ///
     /// ### Example
     /// ```rust
@@ -267,10 +259,8 @@ impl Compiler {
     ///
     /// Retrieves the byte offsets for instructions within a section of shader code.
     ///
-    /// ### Returns
-    /// *   Ok([Vec]&lt;[usize]&gt;)                    - trace instruction offsets
-    /// *   Err([Error]) where `error.kind()` ==
-    ///     *   [THINERR::MISSING_DLL_EXPORT]         - `d3dcompiler_43.dll` and earlier
+    /// ### Errors
+    /// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_43.dll` and earlier
     ///
     /// ### Example
     /// ```rust
