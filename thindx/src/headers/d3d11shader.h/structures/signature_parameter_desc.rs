@@ -12,8 +12,10 @@ use winapi::um::d3d11shader::*;
 /// *   [d3d11::ShaderReflection::get_input_parameter_desc]
 /// *   [d3d11::ShaderReflection::get_output_parameter_desc]
 /// *   [d3d11::ShaderReflection::get_patch_constant_parameter_desc]
+#[allow(missing_docs)]
 #[derive(Clone, Copy, Debug, Default)]
 #[repr(C)] pub struct SignatureParameterDesc<'s> {
+    /// An input semantic name such as "POSITION", "TEXCOORD", etc.
     pub semantic_name:      ConstCStrPtrNullIsEmpty<'s>, // maybe never null?
     pub semantic_index:     u32,
     pub register:           u32,

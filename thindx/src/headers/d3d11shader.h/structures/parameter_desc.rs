@@ -10,10 +10,11 @@ use crate::d3d::*;
 /// * [d3d11::FunctionLinkingGraph] for examples
 /// * [d3d11::FunctionLinkingGraph::set_input_signature]
 /// * [d3d11::FunctionLinkingGraph::set_output_signature]
+#[allow(missing_docs)]
 #[derive(Clone, Copy, Debug, Default)]
 #[repr(C)] pub struct ParameterDesc<'s> {
     pub name:                   Option<&'s AbiCStr>,
-    /// An input semantic name such as "POSITION0", "TEXCOORD0", "TEXCOORD1", etc.
+    /// An input semantic name + index such as "POSITION0", "TEXCOORD0", "TEXCOORD1", etc.
     pub semantic_name:          Option<&'s AbiCStr>,
     pub type_:                  ShaderVariableType,
     pub class:                  ShaderVariableClass,

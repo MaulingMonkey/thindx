@@ -6,6 +6,10 @@ use winapi::um::d3dcommon::*;
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_primitive)\]
 /// D3D_PRIMITIVE
+///
+/// ### See Also
+/// *   [d3d::PrimitiveTopology]
+/// *   [Primitive Topologies](https://docs.microsoft.com/en-us/windows/win32/direct3d11/d3d10-graphics-programming-guide-primitive-topologies)
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)] pub struct Primitive(D3D_PRIMITIVE);
 
@@ -25,6 +29,7 @@ enumish! {
     _29ControlPointPatch, _30ControlPointPatch, _31ControlPointPatch, _32ControlPointPatch,
 }
 
+#[allow(missing_docs)]
 #[allow(non_upper_case_globals)] impl Primitive { // These are enum-like
     pub const Undefined                 : Primitive = Primitive(D3D_PRIMITIVE_UNDEFINED);
     pub const Point                     : Primitive = Primitive(D3D_PRIMITIVE_POINT);

@@ -30,6 +30,7 @@ use std::fmt::{self, Debug, Formatter};
 
 enumish! { ShVer => D3D11_SHADER_VERSION_TYPE; PixelShader, VertexShader, GeometryShader, HullShader, DomainShader, ComputeShader, Reserved0 }
 
+#[allow(missing_docs)]
 #[allow(non_upper_case_globals)] impl ShVer { // These are enum-like
     pub const PixelShader       : ShVer = ShVer(D3D11_SHVER_PIXEL_SHADER); // 0
     pub const VertexShader      : ShVer = ShVer(D3D11_SHVER_VERTEX_SHADER);
@@ -37,6 +38,7 @@ enumish! { ShVer => D3D11_SHADER_VERSION_TYPE; PixelShader, VertexShader, Geomet
     pub const HullShader        : ShVer = ShVer(D3D11_SHVER_HULL_SHADER);
     pub const DomainShader      : ShVer = ShVer(D3D11_SHVER_DOMAIN_SHADER);
     pub const ComputeShader     : ShVer = ShVer(D3D11_SHVER_COMPUTE_SHADER);
+    #[doc=""]
     pub const Reserved0         : ShVer = ShVer(D3D11_SHVER_RESERVED0);
 }
 
