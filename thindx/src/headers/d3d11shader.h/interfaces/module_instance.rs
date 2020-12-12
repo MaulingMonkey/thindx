@@ -1,4 +1,5 @@
 use crate::*;
+use crate::ctypes::*;
 
 use winapi::shared::winerror::*;
 

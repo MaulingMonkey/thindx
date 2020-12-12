@@ -30,7 +30,6 @@
 //! happy to investigate, accept pull requests, expand test coverage, etc. it's worth assuming this crate is unsound on
 //! older versions unless you've tested yourself.
 
-
 #![deny(broken_intra_doc_links)]
 #![deny(missing_docs)]
 #![deny(unreachable_patterns)]
@@ -38,13 +37,8 @@
 #[macro_use] mod macros; #[cfg(test)] use macros::*;
 use thindx_zzz_internal_proc_macros::*;
 
-mod abi_cstr; pub use abi_cstr::*;
-
 /// C ABI interop types
-pub mod ctypes {
-    pub use ::abibool::bool32 as BOOL;
-    pub use ::abibool::bool8 as BOOLEAN;
-}
+#[path=r"ctypes\_ctypes.rs"] pub mod ctypes;
 
 /// Direct3D related types and APIs used across multiple Direct3D versions.
 pub mod d3d {

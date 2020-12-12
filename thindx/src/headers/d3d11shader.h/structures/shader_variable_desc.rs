@@ -1,4 +1,5 @@
-use crate::*;
+#[allow(unused_imports)] use crate::*;
+use crate::ctypes::*;
 use crate::d3d::*;
 
 use winapi::shared::minwindef::LPVOID;

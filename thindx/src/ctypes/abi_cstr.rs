@@ -75,7 +75,7 @@ impl AbiCStr {
 /// Eventually, they are likely to generate at least a warning, or even a hard error.
 #[macro_export] macro_rules! cstr {
     ($literal:literal) => {
-        $crate::AbiCStr::_xxx_unsafe_unsound_xxx__do_not_call_this_directly__use_from_bytes_with_nul_unchecked_instead(concat!($literal, "\0").as_bytes())
+        $crate::ctypes::AbiCStr::_xxx_unsafe_unsound_xxx__do_not_call_this_directly__use_from_bytes_with_nul_unchecked_instead(concat!($literal, "\0").as_bytes())
     };
 }
 

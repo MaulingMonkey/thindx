@@ -10,6 +10,7 @@
     ) => {
         #[test] fn layout() {
             use std::mem::*;
+            use $crate::offset_of;
             let thin = <$thin>::default();
             let d3d  = unsafe { zeroed::<$d3d>() };
             assert_eq!( size_of_val(&thin),  size_of_val(&d3d),  "size_of {} != {}", stringify!($thin), stringify!($d3d));
