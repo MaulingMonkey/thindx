@@ -34,6 +34,13 @@
 #![deny(missing_docs)]
 #![deny(unreachable_patterns)]
 
+pub extern crate abibool;
+pub extern crate abistr;
+
+#[doc(hidden)] pub use abistr::cstr;
+
+
+
 #[macro_use] mod macros; #[cfg(test)] use macros::*;
 use thindx_zzz_internal_proc_macros::*;
 

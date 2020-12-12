@@ -57,3 +57,7 @@ impl ErrorKind {
         }
     }
 }
+
+impl From<std::ffi::NulError> for ErrorKind {
+    fn from(_: std::ffi::NulError) -> ErrorKind { THINERR::STRING_CONTAINS_NULS }
+}

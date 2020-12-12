@@ -17,7 +17,7 @@ use winapi::um::d3d11shader::*;
 #[allow(missing_docs)]
 #[derive(Clone, Copy, Debug, Default)]
 #[repr(C)] pub struct ShaderInputBindDesc<'s> {
-    pub name:           ConstCStrPtrNullIsEmpty<'s>, // maybe never null?
+    pub name:           CStrPtr<'s>, // maybe never null?
     pub ty:             ShaderInputType,
     pub bind_point:     u32,
     pub bind_count:     u32,

@@ -55,7 +55,7 @@ use winapi::um::d3d11shader::*;
 #[repr(C)] pub struct FunctionDesc<'s> {
     pub version:                        u32,
     /// e.g. "Microsoft (R) HLSL Shader Compiler 10.1"
-    pub creator:                        ConstCStrPtrNullIsEmpty<'s>, // maybe never null?
+    pub creator:                        CStrPtr<'s>, // maybe never null?
     pub flags:                          Compile,
     pub constant_buffers:               u32,
     pub bound_resources:                u32,
@@ -82,7 +82,7 @@ use winapi::um::d3d11shader::*;
     pub bitwise_instruction_count:      u32,
     pub min_feature_level:              FeatureLevel,
     pub required_feature_flags:         ShaderRequires,
-    pub name:                           ConstCStrPtrNullIsEmpty<'s>, // maybe never null?
+    pub name:                           CStrPtr<'s>, // maybe never null?
     pub function_parameter_count:       i32, // TODO: treat as unsigned?
     pub has_return:                     BOOL,
     pub has_10_level_9_vertex_shader:   BOOL,

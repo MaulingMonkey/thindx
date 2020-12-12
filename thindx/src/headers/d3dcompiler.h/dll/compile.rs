@@ -205,8 +205,8 @@ impl Compiler {
 
         let file_name = file_name.as_ref().as_os_str().encode_wide().chain(Some(0)).collect::<Vec<_>>();
 
-        let entrypoint  = entrypoint.try_into().map_err(|e| CompileError { kind: e, method: Some("D3DCompileFromFile"), shader: None, errors: Default::default() })?;
-        let target      = target    .try_into().map_err(|e| CompileError { kind: e, method: Some("D3DCompileFromFile"), shader: None, errors: Default::default() })?;
+        let entrypoint  = entrypoint.try_into().map_err(|e| CompileError { kind: e.into(), method: Some("D3DCompileFromFile"), shader: None, errors: Default::default() })?;
+        let target      = target    .try_into().map_err(|e| CompileError { kind: e.into(), method: Some("D3DCompileFromFile"), shader: None, errors: Default::default() })?;
         let entrypoint  = entrypoint.as_opt_cstr();
         let target      = target    .as_cstr();
 
@@ -293,9 +293,9 @@ impl Compiler {
         let src_data    = src_data.as_ref();
         // Note: No error checking occurs for internal `\0`s - they will simply terminate the string earlier than expected.
         // Note: We should perhaps reject non-ASCII values instead of allowing UTF8
-        let source_name = source_name   .try_into().map_err(|e| CompileError { kind: e, method: Some("D3DCompile"), shader: None, errors: Default::default() })?;
-        let entrypoint  = entrypoint    .try_into().map_err(|e| CompileError { kind: e, method: Some("D3DCompile"), shader: None, errors: Default::default() })?;
-        let target      = target        .try_into().map_err(|e| CompileError { kind: e, method: Some("D3DCompile"), shader: None, errors: Default::default() })?;
+        let source_name = source_name   .try_into().map_err(|e| CompileError { kind: e.into(), method: Some("D3DCompile"), shader: None, errors: Default::default() })?;
+        let entrypoint  = entrypoint    .try_into().map_err(|e| CompileError { kind: e.into(), method: Some("D3DCompile"), shader: None, errors: Default::default() })?;
+        let target      = target        .try_into().map_err(|e| CompileError { kind: e.into(), method: Some("D3DCompile"), shader: None, errors: Default::default() })?;
         let source_name = source_name   .as_opt_cstr();
         let entrypoint  = entrypoint    .as_opt_cstr();
         let target      = target        .as_cstr();
@@ -394,9 +394,9 @@ impl Compiler {
         let src_data    = src_data.as_ref();
         // Note: No error checking occurs for internal `\0`s - they will simply terminate the string earlier than expected.
         // Note: We should perhaps reject non-ASCII values instead of allowing UTF8
-        let source_name = source_name   .try_into().map_err(|e| CompileError { kind: e, method: Some("D3DCompile2"), shader: None, errors: Default::default() })?;
-        let entrypoint  = entrypoint    .try_into().map_err(|e| CompileError { kind: e, method: Some("D3DCompile2"), shader: None, errors: Default::default() })?;
-        let target      = target        .try_into().map_err(|e| CompileError { kind: e, method: Some("D3DCompile2"), shader: None, errors: Default::default() })?;
+        let source_name = source_name   .try_into().map_err(|e| CompileError { kind: e.into(), method: Some("D3DCompile2"), shader: None, errors: Default::default() })?;
+        let entrypoint  = entrypoint    .try_into().map_err(|e| CompileError { kind: e.into(), method: Some("D3DCompile2"), shader: None, errors: Default::default() })?;
+        let target      = target        .try_into().map_err(|e| CompileError { kind: e.into(), method: Some("D3DCompile2"), shader: None, errors: Default::default() })?;
         let source_name = source_name   .as_opt_cstr();
         let entrypoint  = entrypoint    .as_opt_cstr();
         let target      = target        .as_cstr();
@@ -487,7 +487,7 @@ impl Compiler {
         let src_data    = src_data.as_ref();
         // Note: No error checking occurs for internal `\0`s - they will simply terminate the string earlier than expected.
         // Note: We should perhaps reject non-ASCII values instead of allowing UTF8
-        let source_name = source_name.try_into().map_err(|e| PreprocessError { kind: e, method: Some("D3DPreprocess"), shader: Default::default(), errors: Default::default() })?;
+        let source_name = source_name.try_into().map_err(|e| PreprocessError { kind: e.into(), method: Some("D3DPreprocess"), shader: Default::default(), errors: Default::default() })?;
         let source_name = source_name.as_opt_cstr();
         let include     = include.as_id3dinclude();
 

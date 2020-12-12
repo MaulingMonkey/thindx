@@ -21,7 +21,7 @@ use winapi::um::d3d11shader::*;
     pub elements:   u32,
     pub members:    u32,
     pub offset:     u32,
-    pub name:       ConstCStrPtrNullIsEmpty<'s>, // maybe never null?
+    pub name:       CStrPtr<'s>, // maybe never null?
 }
 
 impl ShaderTypeDesc<'_> {

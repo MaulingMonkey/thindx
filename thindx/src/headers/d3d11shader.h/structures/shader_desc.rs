@@ -16,7 +16,7 @@ use winapi::um::d3d11shader::*;
 #[repr(C)] pub struct ShaderDesc<'s> {
     pub version:                        d3d11::ShaderVersion,
     /// e.g. "Microsoft (R) HLSL Shader Compiler 10.1"
-    pub creator:                        ConstCStrPtrNullIsEmpty<'s>,
+    pub creator:                        CStrPtr<'s>,
     pub flags:                          Compile, // docs aren't super clear, but in testing this appears to be the right flag type
     pub constant_buffers:               u32,
     pub bound_resources:                u32,

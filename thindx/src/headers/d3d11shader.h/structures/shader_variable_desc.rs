@@ -17,7 +17,7 @@ use std::ptr::*;
 #[allow(missing_docs)]
 #[derive(Clone, Copy, Debug)]
 #[repr(C)] pub struct ShaderVariableDesc<'s> {
-    pub name:           ConstCStrPtrNullIsEmpty<'s>, // maybe never null?
+    pub name:           CStrPtr<'s>, // maybe never null?
     pub start_offset:   u32,
     pub size:           u32,
     pub flags:          ShaderVariableFlags,

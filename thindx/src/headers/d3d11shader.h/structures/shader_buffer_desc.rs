@@ -14,7 +14,7 @@ use winapi::um::d3d11shader::*;
 #[allow(missing_docs)]
 #[derive(Clone, Copy, Debug, Default)]
 #[repr(C)] pub struct ShaderBufferDesc<'s> {
-    pub name:                           ConstCStrPtrNullIsEmpty<'s>, // maybe never null?
+    pub name:                           CStrPtr<'s>, // maybe never null?
     pub ty:                             CBufferType,
     pub variables:                      u32,
     pub size:                           u32,

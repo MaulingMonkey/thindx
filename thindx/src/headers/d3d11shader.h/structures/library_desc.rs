@@ -40,7 +40,7 @@ use winapi::um::d3d11shader::*;
 #[derive(Clone, Copy, Debug, Default)]
 #[repr(C)] pub struct LibraryDesc<'s> {
     /// e.g. "Microsoft (R) HLSL Shader Compiler 10.1"
-    pub creator:        ConstCStrPtrNullIsEmpty<'s>, // maybe never null?
+    pub creator:        CStrPtr<'s>, // maybe never null?
     pub flags:          Compile,
     pub function_count: u32,
 }

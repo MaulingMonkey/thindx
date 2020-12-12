@@ -17,7 +17,7 @@ use winapi::um::d3d11shader::*;
 #[derive(Clone, Copy, Debug, Default)]
 #[repr(C)] pub struct SignatureParameterDesc<'s> {
     /// An input semantic name such as "POSITION", "TEXCOORD", etc.
-    pub semantic_name:      ConstCStrPtrNullIsEmpty<'s>, // maybe never null?
+    pub semantic_name:      CStrPtr<'s>, // maybe never null?
     pub semantic_index:     u32,
     pub register:           u32,
     pub system_value_type:  Name,

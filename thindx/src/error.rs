@@ -20,7 +20,7 @@ impl Error {
     /// Returns the corresponding [ErrorKind] for this error.
     pub fn kind(&self) -> ErrorKind { self.kind }
 
-    pub(crate) fn new(method: &'static str, kind: ErrorKind) -> Self { Self { kind, method: Some(method), errors: Default::default() } }
+    pub(crate) fn new(method: &'static str, kind: impl Into<ErrorKind>) -> Self { Self { kind: kind.into(), method: Some(method), errors: Default::default() } }
 
     pub(crate) fn check(method: &'static str, hr: HRESULT) -> Result<(), Self> {
         if !SUCCEEDED(hr) {

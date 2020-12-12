@@ -14,9 +14,9 @@ use crate::d3d::*;
 #[allow(missing_docs)]
 #[derive(Clone, Copy, Debug, Default)]
 #[repr(C)] pub struct ParameterDesc<'s> {
-    pub name:                   Option<&'s AbiCStr>,
+    pub name:                   Option<CStrNonNull<'s>>,
     /// An input semantic name + index such as "POSITION0", "TEXCOORD0", "TEXCOORD1", etc.
-    pub semantic_name:          Option<&'s AbiCStr>,
+    pub semantic_name:          Option<CStrNonNull<'s>>,
     pub ty:                     ShaderVariableType,
     pub class:                  ShaderVariableClass,
     pub rows:                   u32,
@@ -42,8 +42,8 @@ impl<'s> ParameterDesc<'s> {
     /// ];
     /// ```
     pub fn new(
-        name:                   impl Into<Option<&'s AbiCStr>>,
-        semantic_name:          impl Into<&'s AbiCStr>, // Seems fairly mandatory in testing
+        name:                   impl Into<Option<CStrNonNull<'s>>>,
+        semantic_name:          impl Into<CStrNonNull<'s>>, // Seems fairly mandatory in testing
         ty:                     ShaderVariableType,
         class:                  ShaderVariableClass,
         rows:                   u32,
