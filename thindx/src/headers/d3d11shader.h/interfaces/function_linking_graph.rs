@@ -91,7 +91,7 @@ use std::ptr::*;
 /// linker.link(&graph_inst, "main", "vs_5_0", None).unwrap();
 /// ```
 ///
-/// ### Outputs
+/// ### Output
 /// ```hlsl
 /// float4 xyz1(in float3 v);
 ///
@@ -195,7 +195,7 @@ impl FunctionLinkingGraph {
     /// println!("{}", hlsl.to_utf8_lossy());
     /// ```
     ///
-    /// ### Outputs
+    /// ### Output
     /// ```hlsl
     /// void main()
     /// {

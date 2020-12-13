@@ -96,7 +96,7 @@ impl Compiler {
     /// println!("{:?}", &signature);
     /// ```
     ///
-    /// ### Outputs
+    /// ### Output
     /// ```text
     /// [68, 88, 66, 67, 97, ...
     /// ```
@@ -128,7 +128,7 @@ impl Compiler {
     /// println!("{:?}", &signature);
     /// ```
     ///
-    /// ### Outputs
+    /// ### Output
     /// ```text
     /// [68, 88, 66, 67, 53, ...
     /// ```
@@ -160,7 +160,7 @@ impl Compiler {
     /// println!("{:?}", &signature);
     /// ```
     ///
-    /// ### Outputs
+    /// ### Output
     /// ```text
     /// [68, 88, 66, 67, 210, ...
     /// ```
