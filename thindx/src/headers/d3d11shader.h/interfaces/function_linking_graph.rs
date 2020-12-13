@@ -143,11 +143,11 @@ impl FunctionLinkingGraph {
     ///
     /// assert_eq!(E::FAIL, graph.call_function("", &lib, "nonexistant").err().unwrap().kind());
     /// ```
-    pub fn call_function<'s>(
+    pub fn call_function(
         &self,
-        module_instance_namespace:      impl TryIntoAsOptCStr + 's,
+        module_instance_namespace:      impl TryIntoAsOptCStr,
         module_with_function_prototype: &Module,
-        function_name:                  impl TryIntoAsCStr + 's,
+        function_name:                  impl TryIntoAsCStr,
     ) -> Result<LinkingNode, Error> {
         let ns      = module_instance_namespace.try_into()  .map_err(|e| Error::new("FunctionLinkingGraph::call_function", e))?;
         let name    = function_name.try_into()              .map_err(|e| Error::new("FunctionLinkingGraph::call_function", e))?;
