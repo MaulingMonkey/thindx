@@ -15,4 +15,4 @@ path            = "_xtask.rs"
 
 [dependencies]
 #mmrbi           = "0.0.11"
-mmrbi           = { git = "https://github.com/MaulingMonkey/mmrbi" }
+mmrbi           = { git = "https://github.com/MaulingMonkey/mmrbi", rev = "fab504f3ee446348341431e78bdc0bf63303fc2c" }
