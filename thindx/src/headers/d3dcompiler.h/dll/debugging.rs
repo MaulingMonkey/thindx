@@ -245,6 +245,7 @@ impl Compiler {
     /// 2
     /// ```
     #[requires(d3dcompiler=44)]
+    #[xallow(missing_argument_docs)]
     pub fn get_trace_instruction_offsets_count(
         &self,
         src_data:           &Bytecode,
@@ -284,6 +285,7 @@ impl Compiler {
     /// [32, 52]
     /// ```
     #[requires(d3dcompiler=44)]
+    #[xallow(missing_argument_docs)]
     pub fn get_trace_instruction_offsets_inplace<'o>(
         &self,
         src_data:           &Bytecode,
@@ -322,6 +324,7 @@ impl Compiler {
     /// [32, 52]
     /// ```
     #[requires(d3dcompiler=44)]
+    #[xallow(missing_argument_docs)]
     pub fn get_trace_instruction_offsets(
         &self,
         src_data:           &Bytecode,

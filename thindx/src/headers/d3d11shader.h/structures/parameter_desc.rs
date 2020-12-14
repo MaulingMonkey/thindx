@@ -32,6 +32,20 @@ use crate::d3d::*;
 impl<'s> ParameterDesc<'s> {
     /// Shorthand construction for ParamterDesc structs.
     ///
+    /// ### Arguments
+    /// *   `name`                  - The name of the parameter (optional - for debugging / readable codegen.)
+    /// *   `semantic_name`         - A semantic name + index such as `"POSITION0"`, `"TEXCOORD3"`, etc.
+    /// *   `ty`                    - The type of individual components of the parameter (ex: [`SVT::Float`].)
+    /// *   `class`                 - The class of the parameter (ex: [`SVC::Scalar`], [`SVC::Vector`], [`SVC::MatrixRows`], ...)
+    /// *   `rows`                  - The number of rows for a matrix (otherwise typically `1`.)
+    /// *   `columns`               - The number of columns for a matrix (or vector components, or `1` for a scalar.)
+    /// *   `interpolation_mode`    - How the parameter is interpolated during rasterization.
+    /// *   `flags`                 - Parameter flags (ex: <code>[PF::In] | [PF::Out]</code>.)
+    /// *   `first_in_register`     - The first register to read this parameter from (or `0` if auto-assigning.)
+    /// *   `first_in_component`    - The first component of the register to read this parameter from (`0`=`x`=`r`, `1`=`y`=`g`, ...? - or `0` if auto-assigning.)
+    /// *   `first_out_register`    - The first register to write this parameter to (or `0` if auto-assigning.)
+    /// *   `first_out_component`   - The first component of the register to write this parameter to (`0`=`x`=`r`, `1`=`y`=`g`, ...? - or `0` if auto-assigning.)
+    ///
     /// ### Example
     /// ```rust
     /// use thindx::{cstr, d3d::{SVT, SVC, Interpolation, PF}, d3d11::ParameterDesc};

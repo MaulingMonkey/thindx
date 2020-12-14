@@ -116,6 +116,8 @@ impl Compiler {
     /// ### Arguments
     /// *   `src_data`      - The compressed shaders to decompress.
     /// *   `flags`         - Reserved (pass [None]).
+    /// *   `start_index`   - The first shader to read, by archive index order.
+    /// *   `out_shaders`   - An output buffer of shaders to read.  The size of the buffer dictates how many shaders will be read.
     ///
     /// ### Errors
     /// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_42.dll` and earlier
@@ -173,6 +175,7 @@ impl Compiler {
     /// ### Arguments
     /// *   `src_data`      - The compressed shaders to decompress.
     /// *   `flags`         - Reserved (pass [None]).
+    /// *   `_range`        - The archive index range to read (pass `..` - other options may be supported in the future.)
     ///
     /// ### Errors
     /// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_42.dll` and earlier

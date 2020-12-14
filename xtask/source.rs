@@ -348,6 +348,66 @@ fn scan_file_doc_comments(path: &Path, text: &str) -> Result<(), ()> {
 
                     if rest.is_empty() {
                         // multi-line argument list
+                        let lines = lines.clone();
+                        let mut arguments = s.arguments.iter().enumerate();
+                        let mut first_arg = false;
+                        for (idx, line) in lines {
+                            let no = idx+1;
+                            let trimmed = line.trim();
+
+                            if trimmed.starts_with(")") { break }
+                            if !first_arg {
+                                first_arg = true;
+                                if trimmed.starts_with("self,") || trimmed.starts_with("&self,") || trimmed.starts_with("&mut self,") { continue }
+                            }
+
+                            let mut rest = trimmed;
+                            let arg_name = strip_prefix_ident_inplace(&mut rest);
+                            if arg_name == "" {
+                                error!(at: path, line: no, "error parsing argument name (rest == {:?})", rest);
+                                s.errors = true;
+                                while arguments.next().is_some() {}
+                                break
+                            }
+                            if !strip_prefix_inplace(&mut rest, ":") {
+                                error!(at: path, line: no, "expected type after argument `{}`", arg_name);
+                                s.errors = true;
+                                while arguments.next().is_some() {}
+                                break
+                            }
+                            trim_start_inplace(&mut rest);
+                            let arg_ty = strip_prefix_arg_ty_inplace(&mut rest);
+                            trim_start_inplace(&mut rest);
+
+                            match arguments.next() {
+                                Some((arg_idx, (doc_name, doc_line))) if *doc_name != arg_name => {
+                                    error!(at: path, line: *doc_line,   "argument {}: documented as `{}` but actually named `{}`", arg_idx+1, doc_name, arg_name);
+                                    error!(at: path, line: no,          "argument {}: documented as `{}` but actually named `{}`", arg_idx+1, doc_name, arg_name);
+                                    s.errors = true;
+                                },
+                                Some(_doc) => {},
+                                None => {
+                                    error!(at: path, line: no, "argument `{}` is undocumented in `### Arguments` section", arg_name);
+                                    s.errors = true;
+                                },
+                            }
+
+                            if !strip_prefix_inplace(&mut rest, ",") {
+                                error!(at: path, line: no, "expected `,` after argument type `{}`", arg_ty);
+                                s.errors = true;
+                            } else {
+                                trim_start_inplace(&mut rest);
+                                if !rest.is_empty() && !rest.starts_with("//") {
+                                    error!(at: path, line: no, "unexpected tokens after `,` in multi-line argument list");
+                                    s.errors = true;
+                                }
+                            }
+                        }
+                        if let Some((i, _)) = arguments.next() {
+                            s.arguments.splice(..i, None);
+                        } else {
+                            s.arguments.clear();
+                        }
                         s.arguments.clear(); // XXX
                     } else {
                         // single line argument list
@@ -365,13 +425,13 @@ fn scan_file_doc_comments(path: &Path, text: &str) -> Result<(), ()> {
                         loop {
                             let arg_name = strip_prefix_ident_inplace(&mut rest);
                             if arg_name == "" {
-                                error!(at: path, line: idx, "error parsing argument name (rest == {:?})", rest);
+                                error!(at: path, line: no, "error parsing argument name (rest == {:?})", rest);
                                 s.errors = true;
                                 while arguments.next().is_some() {}
                                 break
                             }
                             if !strip_prefix_inplace(&mut rest, ":") {
-                                error!(at: path, line: idx, "expected type after argument `{}`", arg_name);
+                                error!(at: path, line: no, "expected type after argument `{}`", arg_name);
                                 s.errors = true;
                                 while arguments.next().is_some() {}
                                 break
