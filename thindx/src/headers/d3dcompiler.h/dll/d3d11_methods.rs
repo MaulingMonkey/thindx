@@ -88,11 +88,11 @@ impl Compiler {
     /// let shader_library = d3dc.load_module(&code_blob).unwrap();
     /// ```
     #[requires(d3dcompiler=47)]
-    pub fn load_module(&self, data: &Bytecode) -> Result<d3d11::Module, Error> {
+    pub fn load_module(&self, src_data: &Bytecode) -> Result<d3d11::Module, Error> {
         let f = self.D3DLoadModule.ok_or(Error::new("D3DLoadModule", THINERR::MISSING_DLL_EXPORT))?;
-        let data = data.as_bytes();
+        let src_data = src_data.as_bytes();
         let mut module = null_mut();
-        let hr = unsafe { f(data.as_ptr().cast(), data.len(), &mut module) };
+        let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), &mut module) };
         Error::check("D3DLoadModule", hr)?;
         Ok(unsafe { d3d11::Module::from_raw(module) })
     }

@@ -43,6 +43,7 @@ impl ShaderReflection {
     /// # use thindx::*;
     /// // TODO
     /// ```
+    #[xallow(missing_argument_docs)]
     pub fn get_constant_buffer_by_index(&self, index: u32) -> ShaderReflectionConstantBuffer {
         let ptr = unsafe { self.0.GetConstantBufferByIndex(index) };
         unsafe { ShaderReflectionConstantBuffer::from_raw(self, ptr) }
@@ -58,6 +59,7 @@ impl ShaderReflection {
     /// # use thindx::*;
     /// // TODO
     /// ```
+    #[xallow(missing_argument_docs)]
     pub fn get_constant_buffer_by_name(&self, name: impl TryIntoAsCStr) -> ShaderReflectionConstantBuffer {
         let name = name.try_into().ok();
         let name = name.as_ref().map_or(cstr!("").as_cstr(), |n| n.as_cstr());
@@ -120,6 +122,7 @@ impl ShaderReflection {
     /// # use thindx::*;
     /// // TODO
     /// ```
+    #[xallow(missing_argument_docs)]
     pub fn get_input_parameter_desc(&self, parameter_index: u32) -> Result<SignatureParameterDesc, Error> {
         let mut desc = SignatureParameterDesc::default();
         let hr = unsafe { self.0.GetInputParameterDesc(parameter_index, desc.as_mut_ptr()) };
@@ -196,6 +199,7 @@ impl ShaderReflection {
     /// # use thindx::*;
     /// // TODO
     /// ```
+    #[xallow(missing_argument_docs)]
     pub fn get_output_parameter_desc(&self, parameter_index: u32) -> Result<SignatureParameterDesc, Error> {
         let mut desc = SignatureParameterDesc::default();
         let hr = unsafe { self.0.GetOutputParameterDesc(parameter_index, desc.as_mut_ptr()) };
@@ -213,6 +217,7 @@ impl ShaderReflection {
     /// # use thindx::*;
     /// // TODO
     /// ```
+    #[xallow(missing_argument_docs)]
     pub fn get_patch_constant_parameter_desc(&self, parameter_index: u32) -> Result<SignatureParameterDesc, Error> {
         let mut desc = SignatureParameterDesc::default();
         let hr = unsafe { self.0.GetPatchConstantParameterDesc(parameter_index, desc.as_mut_ptr()) };
@@ -244,6 +249,7 @@ impl ShaderReflection {
     /// # use thindx::*;
     /// // TODO
     /// ```
+    #[xallow(missing_argument_docs)]
     pub fn get_resource_binding_desc(&self, resource_index: u32) -> Result<ShaderInputBindDesc, Error> {
         let mut desc = ShaderInputBindDesc::default();
         let hr = unsafe { self.0.GetResourceBindingDesc(resource_index, desc.as_mut_ptr()) };
@@ -261,6 +267,7 @@ impl ShaderReflection {
     /// # use thindx::*;
     /// // TODO
     /// ```
+    #[xallow(missing_argument_docs)]
     pub fn get_resource_binding_desc_by_name(&self, name: impl TryIntoAsCStr) -> Result<ShaderInputBindDesc, Error> {
         let name = name.try_into().map_err(|e| Error::new("ID3D11ShaderReflection::GetResourceBindingDescByName", e))?;
         let mut desc = ShaderInputBindDesc::default();
@@ -296,6 +303,7 @@ impl ShaderReflection {
     /// # use thindx::*;
     /// // TODO
     /// ```
+    #[xallow(missing_argument_docs)]
     pub fn get_variable_by_name(&self, name: impl TryIntoAsCStr) -> ShaderReflectionVariable {
         let name = name.try_into().ok();
         let name = name.as_ref().map_or(cstr!("").as_cstr(), |n| n.as_cstr());

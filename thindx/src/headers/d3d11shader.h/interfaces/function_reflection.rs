@@ -77,6 +77,7 @@ impl<'r> FunctionReflection<'r> {
     ///     flags: CBF::None,
     /// }
     /// ```
+    #[xallow(missing_argument_docs)]
     pub fn get_constant_buffer_by_index(&self, buffer_index: u32) -> ShaderReflectionConstantBuffer<'r> {
         let ptr = unsafe { self.ptr.as_ref().GetConstantBufferByIndex(buffer_index) };
         unsafe { ShaderReflectionConstantBuffer::from_raw(self.phantom, ptr) }
@@ -121,6 +122,7 @@ impl<'r> FunctionReflection<'r> {
     ///     flags: CBF::None,
     /// }
     /// ```
+    #[xallow(missing_argument_docs)]
     pub fn get_constant_buffer_by_name(&self, name: impl TryIntoAsCStr) -> ShaderReflectionConstantBuffer<'r> {
         let name = name.try_into().ok();
         let name = name.as_ref().map_or(cstr!("").as_cstr(), |n| n.as_cstr());
@@ -187,6 +189,7 @@ impl<'r> FunctionReflection<'r> {
     /// # use thindx::*;
     /// // TODO
     /// ```
+    #[xallow(missing_argument_docs)]
     pub fn get_function_parameter(&self, parameter_index: i32) -> FunctionParameterReflection<'r> {
         let ptr = unsafe { self.ptr.as_ref().GetFunctionParameter(parameter_index) };
         unsafe { FunctionParameterReflection::from_raw(self.phantom, ptr) }
@@ -202,6 +205,7 @@ impl<'r> FunctionReflection<'r> {
     /// # use thindx::*;
     /// // TODO
     /// ```
+    #[xallow(missing_argument_docs)]
     pub fn get_resource_binding_desc(&self, resource_index: u32) -> Result<ShaderInputBindDesc<'r>, Error> {
         let mut desc = ShaderInputBindDesc::default();
         let hr = unsafe { self.ptr.as_ref().GetResourceBindingDesc(resource_index, desc.as_mut_ptr()) };
@@ -219,6 +223,7 @@ impl<'r> FunctionReflection<'r> {
     /// # use thindx::*;
     /// // TODO
     /// ```
+    #[xallow(missing_argument_docs)]
     pub fn get_resource_binding_desc_by_name(&self, name: impl TryIntoAsCStr) -> Result<ShaderInputBindDesc<'r>, Error> {
         let name = name.try_into().map_err(|e| Error::new("ID3D11FunctionReflection::GetResourceBindingDescByName", e))?;
         let mut desc = ShaderInputBindDesc::default();
@@ -237,6 +242,7 @@ impl<'r> FunctionReflection<'r> {
     /// # use thindx::*;
     /// // TODO
     /// ```
+    #[xallow(missing_argument_docs)]
     pub fn get_variable_by_name(&self, name: impl TryIntoAsCStr) -> ShaderReflectionVariable<'r> {
         let name = name.try_into().ok();
         let name = name.as_ref().map_or(cstr!("").as_cstr(), |n| n.as_cstr());

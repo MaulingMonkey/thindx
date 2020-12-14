@@ -29,11 +29,18 @@ impl Linker {
     /// [clip plane]:       https://docs.microsoft.com/en-us/windows/desktop/direct3dhlsl/user-clip-planes-on-10level9
     /// [cbuffer]:          https://docs.microsoft.com/en-us/windows/desktop/direct3dhlsl/dx-graphics-hlsl-constants
     ///
+    /// ### Arguments
+    /// *   `cbuffer_slot`      - The cbuffer slot (is this the same as the `cb#` register?)
+    /// *   `cbuffer_entry`     - The cbuffer entry (is this the offset within the cbuffer in `float4` registers?)
+    ///
     /// ### Example
     /// ```rust
     /// # use thindx::*;
     /// // TODO
     /// ```
+    ///
+    /// ### See Also
+    /// *   [User clip planes on feature level 9 hardware](https://docs.microsoft.com/en-us/windows/win32/direct3dhlsl/user-clip-planes-on-10level9)
     pub fn add_clip_plane_from_cbuffer(&self, cbuffer_slot: u32, cbuffer_entry: u32) -> Result<(), Error> {
         let hr = unsafe { self.0.AddClipPlaneFromCBuffer(cbuffer_slot, cbuffer_entry) };
         Error::check("ID3D11Linker::AddClipPlaneFromCBuffer", hr)
@@ -44,11 +51,20 @@ impl Linker {
     ///
     /// Links the shader and produces a shader blob that the Direct3D runtime can use.
     ///
+    /// ### Arguments
+    /// *   `entry`         - A [`ModuleInstance`] created by e.g. [FunctionLinkingGraph::create_module_instance]
+    /// *   `entry_name`    - The name to give the generated entry point when linking the shader (mostly for debug purpouses.)
+    /// *   `target_name`   - What kind of shader to generate (e.g. `"vs_5_0"` etc.)
+    /// *   `flags`         - Reserved.  Initialize with [`None`].
+    ///
     /// ### Example
     /// ```rust
     /// # use thindx::*;
     /// // TODO
     /// ```
+    ///
+    /// ### See Also
+    /// *   [examples::d3dcompiler_03_link]
     pub fn link(&self, entry: &ModuleInstance, entry_name: impl TryIntoAsCStr, target_name: impl TryIntoAsCStr, flags: Option<void::Void>) -> Result<CompileResult, Error> {
         let entry_name  = entry_name .try_into().map_err(|e| Error::new("ID3D11Linker::Link", e))?;
         let target_name = target_name.try_into().map_err(|e| Error::new("ID3D11Linker::Link", e))?;
@@ -77,6 +93,7 @@ impl Linker {
     /// # use thindx::*;
     /// // TODO
     /// ```
+    #[xallow(missing_argument_docs)]
     pub fn use_library(&self, library_mi: &ModuleInstance) -> Result<(), Error> {
         let hr = unsafe { self.0.UseLibrary(library_mi.as_raw()) };
         Error::check("ID3D11Linker::UseLibrary", hr)

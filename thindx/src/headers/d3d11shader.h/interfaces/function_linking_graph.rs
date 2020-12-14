@@ -239,6 +239,12 @@ impl FunctionLinkingGraph {
     ///
     /// Passes a value from a source linking node to a destination linking node.
     ///
+    /// ### Arguments
+    /// *   `src_node`              - The [`LinkingNode`] that the value will be read from
+    /// *   `src_parameter_index`   - The `src_node` index that the value will be read from
+    /// *   `dst_node`              - The [`LinkingNode`] that the value will be written to
+    /// *   `dst_parameter_index`   - The `src_node` index that the value will be written to
+    ///
     /// ### Errors
     /// -   [E::FAIL]           - if multiple values are passed to the same destination
     ///
@@ -263,6 +269,14 @@ impl FunctionLinkingGraph {
     ///
     /// Passes a value with swizzle from a source linking node to a destination linking node.
     ///
+    /// ### Arguments
+    /// *   `src_node`              - The [`LinkingNode`] that the value will be read from
+    /// *   `src_parameter_index`   - The `src_node` index that the value will be read from
+    /// *   `src_swizzle`           - How the read value will be swizzled (e.g. "xyxy")
+    /// *   `dst_node`              - The [`LinkingNode`] that the value will be written to
+    /// *   `dst_parameter_index`   - The `src_node` index that the value will be written to
+    /// *   `dst_swizzle`           - How the written value will be swizzled (e.g. "xyxy")
+    ///
     /// ### Example
     /// ```rust
     /// # use thindx::{*, d3d::*, d3d11::*};
@@ -285,6 +299,9 @@ impl FunctionLinkingGraph {
     /// ID3D11FunctionLinkingGraph::SetInputSignature
     ///
     /// Sets the input signature of the function-linking-graph.
+    ///
+    /// ### Arguments
+    /// *   `input_parameters`      - An array or slice of [`ParameterDesc`]s describing the input argument(s) of the entire [`FunctionLinkingGraph`]
     ///
     /// ### Errors
     /// *   [E::FAIL]   - if called after `call_function`
@@ -316,6 +333,9 @@ impl FunctionLinkingGraph {
     /// ID3D11FunctionLinkingGraph::SetOutputSignature
     ///
     /// Sets the output signature of the function-linking-graph.
+    ///
+    /// ### Arguments
+    /// *   `output_parameters`     - An array or slice of [`ParameterDesc`]s describing the output argument(s) of the entire [`FunctionLinkingGraph`]
     ///
     /// ### Errors
     /// *   [E::FAIL]           if called before set_input_signature

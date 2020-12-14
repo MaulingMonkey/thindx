@@ -41,12 +41,20 @@ enumish! {
 impl ErrorKind {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/dmerror/nf-dmerror-make_hresult)\]
     /// MAKE_HRESULT
+    ///
+    /// ### Arguments
+    /// *   `sev`   - the severity of the errors (e.g. `0` for succcess, `1` for failure.)
+    /// *   `fac`   - the `FACILITY_*` category of the error (e.g. `FACILITY_WIN32`.)
+    /// *   `code`  - the `ERROR_*` code/value (e.g. `ERROR_FILE_NOT_FOUND`)
     pub fn make_hresult(sev: u32, fac: u32, code: u32) -> Self {
         Self(((sev << 31) | (fac << 16) | (code << 0)) as _)
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/dmerror/nf-dmerror-make_hresult)\]
     /// MAKE_HRESULT(1, FACILITY_WIN32, code)
+    ///
+    /// ### Arguments
+    /// *   `code`  - the `ERROR_*` code/value (e.g. `ERROR_FILE_NOT_FOUND`)
     pub fn from_win32(code: u32) -> Self { Self::make_hresult(1, 7, code) }
 
     pub(crate) fn check(hr: HRESULT) -> Result<(), Self> {

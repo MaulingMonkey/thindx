@@ -108,6 +108,31 @@ pub fn if_stable(condition: TokenStream, item: TokenStream) -> TokenStream {
     }
 }
 
+#[proc_macro_attribute]
+pub fn xallow(condition: TokenStream, mut item: TokenStream) -> TokenStream {
+    let mut condition = condition.into_iter();
+    while let Some(ident) = condition.next() {
+        if !ident.is_ident() {
+            return compile_error_at(format!("expected ident, got {:?}", ident), ident.span(), item);
+        }
+
+        match ident.to_string().as_str() {
+            "missing_argument_docs" => {},
+            other => {
+                item = compile_error_at(format!("unknown xallow identifier {:?}", other), ident.span(), item);
+            },
+        }
+
+        if let Some(comma) = condition.next() {
+            if !comma.is_punct_str(",") {
+                return compile_error_at(format!("expected `,` to separate allowed conditions, got {:?}", comma), comma.span(), item);
+            }
+        }
+    }
+    item
+}
+
+
 fn compile_error_at(message: impl std::fmt::Debug, at: Span, item: TokenStream) -> TokenStream {
     let mut out = TokenStream::new();
     let err : TokenStream = format!("compile_error!({:?});", message).parse().unwrap();
