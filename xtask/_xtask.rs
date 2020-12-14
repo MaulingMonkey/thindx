@@ -1,5 +1,5 @@
 mod examples;
-mod source;
+mod scan;
 
 use mmrbi::*;
 
@@ -22,7 +22,7 @@ fn build(_args: std::env::Args) {
     let css = std::env::current_dir().unwrap().join("thindx/doc/style.css");
     std::env::set_var("RUSTDOCFLAGS", format!(r"--extend-css {css}", css = css.display()));
 
-    source::scan().unwrap_or_else(|()| std::process::exit(1));
+    scan::src().unwrap_or_else(|()| std::process::exit(1));
     run("cargo        fetch"                                );
     run("cargo        check --frozen --workspace --all-targets" );
     run("cargo        build --frozen --workspace --all-targets --exclude xtask");

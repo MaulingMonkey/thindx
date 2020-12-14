@@ -5,24 +5,24 @@ use std::str::FromStr;
 
 
 
-pub fn scan() -> Result<(), ()> {
-    scan_dir(Path::new("thindx/src"))
+pub fn src() -> Result<(), ()> {
+    dir(Path::new("thindx/src"))
 }
 
-fn scan_dir(path: &Path) -> Result<(), ()> {
+fn dir(path: &Path) -> Result<(), ()> {
     let mut errors = false;
     for e in fs::DirPathType::read_by_alphanumeric(path).unwrap() {
-        if e.is_dir() { errors |= scan_dir(&e.path).is_err(); }
-        if e.is_file() { errors |= scan_file(&e.path).is_err(); }
+        if e.is_dir() { errors |= dir(&e.path).is_err(); }
+        if e.is_file() { errors |= file(&e.path).is_err(); }
     }
     if errors { Err(()) } else { Ok(()) }
 }
 
-fn scan_file(path: &Path) -> Result<(), ()> {
+fn file(path: &Path) -> Result<(), ()> {
     let file = std::fs::read_to_string(path).unwrap_or_else(|err| fatal!("failed to read {}: {}", path.display(), err));
 
     let errors =
-        scan_file_doc_comments(path, &file).is_err() |
+        file_doc_comments(path, &file).is_err() |
         false;
 
     if errors { Err(()) } else { Ok(()) }
@@ -30,7 +30,7 @@ fn scan_file(path: &Path) -> Result<(), ()> {
 
 
 
-fn scan_file_doc_comments(path: &Path, text: &str) -> Result<(), ()> {
+fn file_doc_comments(path: &Path, text: &str) -> Result<(), ()> {
     // skip validating comments of these free-form / generated files
     let skip = ["_examples.rs", "_headers.rs", "_lib.rs"];
     let skip = path.file_name().map_or(false, |file_name| skip.iter().copied().any(|n| file_name == n));
