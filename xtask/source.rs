@@ -511,6 +511,7 @@ fn scan_file_doc_comments(path: &Path, text: &str) -> Result<(), ()> {
                         }
                     }
                     s.current_h3 = Some(h3);
+                    s.mode = Mode::ExpectNonBlankLine;
                 } else if let Some(_) = comment.strip_prefix("#") {
                     error!(at: path, line: no, "Unexpected header `{}`: expected h3 comments only", comment);
                     s.errors = true;

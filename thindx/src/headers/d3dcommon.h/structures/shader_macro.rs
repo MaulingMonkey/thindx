@@ -10,7 +10,6 @@ use std::ptr::*;
 /// D3D_SHADER_MACRO\[\] compatible types
 ///
 /// ### Safety
-///
 /// By implementing this trait, you promise that any returned [D3D_SHADER_MACRO] pointers are either [null], or:
 /// *   Points to a valid array of [D3D_SHADER_MACRO]s.
 /// *   The array is terminated by a "null" (zeroed/default) [D3D_SHADER_MACRO].

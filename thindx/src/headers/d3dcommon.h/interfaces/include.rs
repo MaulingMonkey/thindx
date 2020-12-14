@@ -9,7 +9,6 @@ use std::ptr::*;
 /// ID3DInclude compatible types
 ///
 /// ### Safety
-///
 /// By implementing this trait, you promise to return one of:
 /// *   [null_mut]\(\)
 /// *   [D3D_COMPILE_STANDARD_FILE_INCLUDE]

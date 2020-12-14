@@ -35,12 +35,10 @@ impl Error {
     }
 
     /// ### Safety
-    ///
     /// *   If `!SUCCEEDED(hr)`, this accesses and takes over ownership of `errors` and returns `Err(...)`.
     /// *   Otherwise, `errors` is left untouched.
     ///
     /// ### Arguments
-    ///
     /// *   `method`    - The method that failed
     /// *   `hr`        - A possibly successful win32 error code
     /// *   `errors`    - A `\0`-terminated blob of errors to be owned by <code>[Err]\([Error]\)</code> if `!SUCCEEDED(hr)`
