@@ -36,8 +36,8 @@ impl Error {
 
     /// ### Safety
     ///
-    /// * If `!SUCCEEDED(hr)`, this accesses and takes over ownership of `errors` and returns `Err(...)`.
-    /// * Otherwise, `errors` is left untouched.
+    /// *   If `!SUCCEEDED(hr)`, this accesses and takes over ownership of `errors` and returns `Err(...)`.
+    /// *   Otherwise, `errors` is left untouched.
     pub(crate) unsafe fn check_blob(method: &'static str, hr: HRESULT, errors: *mut ID3DBlob) -> Result<(), Self> {
         if !SUCCEEDED(hr) {
             let errors = TextBlob::new(ReadOnlyBlob::from_raw_opt(errors));

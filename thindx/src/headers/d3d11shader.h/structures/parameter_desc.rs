@@ -8,9 +8,9 @@ use crate::d3d::*;
 /// D3D11_PARAMETER_DESC
 ///
 /// ### See Also
-/// * [d3d11::FunctionLinkingGraph] for examples
-/// * [d3d11::FunctionLinkingGraph::set_input_signature]
-/// * [d3d11::FunctionLinkingGraph::set_output_signature]
+/// *   [d3d11::FunctionLinkingGraph] for examples
+/// *   [d3d11::FunctionLinkingGraph::set_input_signature]
+/// *   [d3d11::FunctionLinkingGraph::set_output_signature]
 #[allow(missing_docs)]
 #[derive(Clone, Copy, Debug, Default)]
 #[repr(C)] pub struct ParameterDesc<'s> {
