@@ -16,10 +16,19 @@ pub unsafe trait Raw : Sized {
     /// The raw underlying winapi type
     type Raw : Sized;
 
-    /// Take ownership from a raw winapi type, panicing if `raw` is [null_mut].
+    /// Take ownership from a raw winapi type, panicing if `raw` is <code>[null_mut]\(\)</code>.
+    ///
+    /// ### Safety
+    /// *   `raw` must either be <code>[null_mut]\(\)</code> or a sane/valid instance of the type in question.
+    ///
+    /// ### Panics
+    /// *   If `raw` is <code>[null_mut]\(\)</code>
     unsafe fn from_raw(raw: *mut Self::Raw) -> Self;
 
     /// Take ownership from a raw winapi type, returning [None] if `raw` is [null_mut].
+    ///
+    /// ### Safety
+    /// *   `raw` must either be <code>[null_mut]\(\)</code> or a sane/valid instance of the type in question.
     unsafe fn from_raw_opt(raw: *mut Self::Raw) -> Option<Self>;
 
     /// Give up / leak ownership into a raw winapi pointer type.
