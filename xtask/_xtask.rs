@@ -35,10 +35,10 @@ fn check(mut args: std::env::Args) {
     let orig_path = args.next().expect("path");
     let mut path = orig_path.split(|ch| "/\\".contains(ch)).collect::<Vec<_>>();
 
-    let (package, mut path) = match path.get_mut(0..3) {
-        Some(["thindx", "src", "headers"])  => ("thindx", &mut path[3..]),
-        Some([package, "src", ..])          => (*package, &mut path[2..]),
-        _other                              => fatal!("unable to check `{}`: not an expected package src folder", orig_path),
+    let (package, mut path) = match &mut path[..] {
+        ["thindx", "src", "headers", rest @ ..] => ("thindx", rest),
+        [package, "src", rest @ ..]             => (*package, rest),
+        _other                                  => fatal!("unable to check `{}`: not an expected package src folder", orig_path),
     };
 
     if let Some(last) = path.last_mut() {
