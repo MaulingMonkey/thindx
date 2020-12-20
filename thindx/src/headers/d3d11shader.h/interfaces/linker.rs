@@ -30,13 +30,39 @@ impl Linker {
     /// [cbuffer]:          https://docs.microsoft.com/en-us/windows/desktop/direct3dhlsl/dx-graphics-hlsl-constants
     ///
     /// ### Arguments
-    /// *   `cbuffer_slot`      - The cbuffer slot (is this the same as the `cb#` register?)
-    /// *   `cbuffer_entry`     - The cbuffer entry (is this the offset within the cbuffer in `float4` registers?)
+    /// *   `cbuffer_slot`      - The cbuffer slot (e.g. which `cb#` register to read)
+    /// *   `cbuffer_entry`     - The cbuffer entry (e.g. which `float4` element of the cbuffer to read the plane coefficients from)
+    ///
+    /// ### Errors
+    /// *   [E::INVALIDARG]     - If `cbuffer_slot` >= the maximum number of cbuffer slots (`15` on my machine)
+    /// *   [E::INVALIDARG]     - If `cbuffer_entry` >= the maximum number of cbuffer entries (`4096` on my machine)
     ///
     /// ### Example
     /// ```rust
     /// # use thindx::*;
-    /// // TODO
+    /// let d3dc = d3d::Compiler::new(47).unwrap();
+    /// let linker : d3d11::Linker = d3dc.create_linker().unwrap();
+    ///
+    /// // https://docs.microsoft.com/en-us/windows/win32/direct3d11/overviews-direct3d-11-resources-buffers-intro#constant-buffer
+    /// // "Each shader stage allows up to 15 shader-constant buffers; each buffer can hold up to 4096 constants."
+    ///
+    /// assert_eq!(linker.add_clip_plane_from_cbuffer(14, 0).err().map(|err| err.kind()), None); // OK
+    /// assert_eq!(linker.add_clip_plane_from_cbuffer(15, 0).err().map(|err| err.kind()), Some(E::INVALIDARG));
+    ///
+    /// assert_eq!(linker.add_clip_plane_from_cbuffer(0, 4095).err().map(|err| err.kind()), None); // OK
+    /// assert_eq!(linker.add_clip_plane_from_cbuffer(0, 4096).err().map(|err| err.kind()), Some(E::INVALIDARG));
+    /// #
+    /// # assert_eq!(Some(E::INVALIDARG), linker.add_clip_plane_from_cbuffer(!0, 0).err().map(|err| err.kind()));
+    /// # assert_eq!(Some(E::INVALIDARG), linker.add_clip_plane_from_cbuffer(0, !0).err().map(|err| err.kind()));
+    /// # assert_eq!(Some(E::INVALIDARG), linker.add_clip_plane_from_cbuffer(0, !0-1).err().map(|err| err.kind()));
+    /// # assert_eq!(Some(E::INVALIDARG), linker.add_clip_plane_from_cbuffer(0, !0-4).err().map(|err| err.kind()));
+    /// # assert_eq!(Some(E::INVALIDARG), linker.add_clip_plane_from_cbuffer(0, !0-10).err().map(|err| err.kind()));
+    /// # assert_eq!(Some(E::INVALIDARG), linker.add_clip_plane_from_cbuffer(0, !0-100).err().map(|err| err.kind()));
+    /// # assert_eq!(Some(E::INVALIDARG), linker.add_clip_plane_from_cbuffer(!0-1, 0).err().map(|err| err.kind()));
+    /// # assert_eq!(Some(E::INVALIDARG), linker.add_clip_plane_from_cbuffer(!0-4, 0).err().map(|err| err.kind()));
+    /// # assert_eq!(Some(E::INVALIDARG), linker.add_clip_plane_from_cbuffer(!0-10, 0).err().map(|err| err.kind()));
+    /// # assert_eq!(Some(E::INVALIDARG), linker.add_clip_plane_from_cbuffer(!0-100, 0).err().map(|err| err.kind()));
+    /// # assert_eq!(Some(E::INVALIDARG), linker.add_clip_plane_from_cbuffer(!0, !0).err().map(|err| err.kind()));
     /// ```
     ///
     /// ### See Also
