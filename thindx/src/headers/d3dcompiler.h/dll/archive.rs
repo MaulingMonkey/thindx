@@ -51,7 +51,13 @@ impl Compiler {
         let f           = self.D3DCompressShaders.ok_or(Error::new("D3DCompressShaders", THINERR::MISSING_DLL_EXPORT))?;
         let num_shaders = shaders.len().try_into().map_err(|_| Error::new("D3DCompressShaders", THINERR::MISSING_DLL_EXPORT))?;
 
-        let shader_data = shaders.as_ptr() as *mut _; // TODO: Is the `mut` sane?
+        // This sketchy mut cast *should* be sane (famous last words.)
+        // We're only casting away the immutability of the D3D_SHADER_DATA elements, not the bytecode those elements point to.
+        // The array is far too small to reuse as an in-place compression buffer or anything like that.
+        // Additionally, in manual testing, I see no mutation of the underlying array.
+        // Finally, `pShaderData` is marked `_In_reads_(uNumShaders)` - if this was actually written to, it should be `_Inout_count_` instead.
+        let shader_data = shaders.as_ptr() as *mut _;
+
         let flags       = flags.into().into();
 
         let mut compressed_data = null_mut();
