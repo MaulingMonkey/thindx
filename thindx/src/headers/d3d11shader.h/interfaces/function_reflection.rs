@@ -225,9 +225,10 @@ impl<'r> FunctionReflection<'r> {
     /// ```
     #[xallow(missing_argument_docs)]
     pub fn get_resource_binding_desc_by_name(&self, name: impl TryIntoAsCStr) -> Result<ShaderInputBindDesc<'r>, Error> {
-        let name = name.try_into().map_err(|e| Error::new("ID3D11FunctionReflection::GetResourceBindingDescByName", e))?;
+        let name = name.try_into().ok();
+        let name = name.as_ref().map_or(cstr!("").as_cstr(), |n| n.as_cstr());
         let mut desc = ShaderInputBindDesc::default();
-        let hr = unsafe { self.ptr.as_ref().GetResourceBindingDescByName(name.as_cstr(), desc.as_mut_ptr()) };
+        let hr = unsafe { self.ptr.as_ref().GetResourceBindingDescByName(name, desc.as_mut_ptr()) };
         Error::check("ID3D11FunctionReflection::GetResourceBindingDescByName", hr)?;
         Ok(desc)
     }
