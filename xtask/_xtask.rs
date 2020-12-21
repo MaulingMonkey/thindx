@@ -36,6 +36,17 @@ fn check(mut args: std::env::Args) {
     let mut path = orig_path.split(|ch| "/\\".contains(ch)).collect::<Vec<_>>();
 
     let (package, mut path) = match &mut path[..] {
+        ["thindx", "examples", example_rs] => {
+            if let Some(example) = example_rs.strip_suffix(".rs") {
+                let mut cmd = Command::parse("cargo check --example").unwrap();
+                cmd.arg(example);
+                status!("Executing", "{}", cmd);
+                cmd.status0().unwrap_or_else(|err| fatal!("{}", err));
+                return;
+            } else {
+                fatal!("unable to check `{}`: not an expected package src folder", orig_path);
+            }
+        },
         ["thindx", "src", "headers", rest @ ..] => ("thindx", rest),
         [package, "src", rest @ ..]             => (*package, rest),
         _other                                  => fatal!("unable to check `{}`: not an expected package src folder", orig_path),
@@ -57,6 +68,7 @@ fn check(mut args: std::env::Args) {
     cmd.arg("test");
     cmd.arg("-p").arg(package);
     cmd.arg("--").arg(pattern);
+    status!("Executing", "{}", cmd);
     cmd.status0().unwrap_or_else(|err| fatal!("{}", err));
 }
 
