@@ -53,20 +53,36 @@ impl Compiler {
     /// Gets shader debug information.
     ///
     /// ### Arguments
-    /// *   `src_data`  Either uncompiled or compiled HLSL code.
+    /// *   `src_data`  - Shader bytecode
     ///
     /// ### Errors
     /// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_39.dll` and earlier
+    /// *   [E::FAIL]                       - `src_data` wasn't compiled with [d3d::Compile::Debug]
+    /// *   [E::FAIL]                       - `src_data`'s debug info is too modern? (cannot load debug info for shaders compiled with `d3dcompiler_47.dll`)
     ///
     /// ### Example
-    /// ```rust,no_run
-    /// # use thindx::d3d::*; let d3dc = Compiler::new(47).unwrap();
+    /// ```rust
+    /// # use thindx::*;
+    /// let d3dc = d3d::Compiler::new(43).unwrap();
     /// # let shader_src = std::fs::read(r"test\data\basic.hlsl").unwrap();
-    /// # let compiled_shader = d3dc.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap();
-    /// // TODO: This doesn't seem to work?
+    /// # let shader = d3dc.compile(&shader_src, cstr!(r"test\data\basic.hlsl"), None, None, "ps_main", "ps_4_0", d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
+    /// let debug_info : d3d::BytesBlob = d3dc.get_debug_info(&shader).unwrap();
+    /// assert!(debug_info.len() > 0);
+    /// #
+    /// # // This is not legal, despite MSDN suggesting that src_data can contain "either uncompiled or compiled HLSL code" (didn't sound right)
+    /// # assert_eq!(d3dc.get_debug_info(unsafe { d3d::Bytecode::from_unchecked(&shader_src) }).err().map(|err| err.kind()), Some(E::FAIL), "uncompiled shader code isn't actually legal");
+    /// #
+    /// # let shader = d3dc.compile(&shader_src, cstr!(r"test\data\basic.hlsl"), None, None, "ps_main", "ps_4_0", d3d::Compile::None, d3d::CompileEffect::None).unwrap();
+    /// # assert_eq!(d3dc.get_debug_info(&shader).err().map(|err| err.kind()), Some(E::FAIL), "shader was compiled without debug info");
+    /// #
+    /// # let d3dc = d3d::Compiler::new(47).unwrap();
+    /// # let shader = d3dc.compile(&shader_src, cstr!(r"test\data\basic.hlsl"), None, None, "ps_main", "ps_4_0", d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
+    /// # assert_eq!(d3dc.get_debug_info(&shader).err().map(|err| err.kind()), Some(E::FAIL), "shader was compiled with d3dcompiler_47.dll");
+    /// ```
     ///
-    /// let debug_info = d3dc.get_debug_info(&compiled_shader).unwrap();
-    /// println!("{:?}", &debug_info);
+    /// ### Outputs
+    /// ```text
+    /// BytesBlob(2625 bytes)
     /// ```
     #[requires(d3dcompiler=40)]
     pub fn get_debug_info(&self, src_data: &Bytecode) -> Result<BytesBlob, Error> {
