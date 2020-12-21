@@ -206,7 +206,7 @@ pub const d3dcompiler_02_compile : () = ();
 ///     let d3dc = d3d::Compiler::new(47).unwrap();
 ///     let lib_source = b"export float4 xyz1(float3 v) { return float4(v, 1.0); }";
 ///     let lib_bytecode = d3dc.compile(lib_source, "example.hlsl", None, None, (), "lib_5_0", Compile::OptimizationLevel3, CompileEffect::None).unwrap();
-///     let lib = d3dc.load_module(&lib_bytecode.shader).unwrap();
+///     let lib = d3dc.load_module(&lib_bytecode).unwrap();
 /// 
 /// 
 /// 
