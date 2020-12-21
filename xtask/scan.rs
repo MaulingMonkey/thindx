@@ -408,7 +408,6 @@ fn file_doc_comments(path: &Path, text: &str) -> Result<(), ()> {
                         } else {
                             s.arguments.clear();
                         }
-                        s.arguments.clear(); // XXX
                     } else {
                         // single line argument list
 
