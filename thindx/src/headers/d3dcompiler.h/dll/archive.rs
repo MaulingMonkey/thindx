@@ -58,7 +58,6 @@ impl Compiler {
         let hr = unsafe { f(num_shaders, shader_data, flags, &mut compressed_data) };
         Error::check("D3DCompressShaders", hr)?;
         Ok(BytesBlob::new(unsafe { ReadOnlyBlob::from_raw(compressed_data) }))
-        // TODO: Wait, this takes multiple shaders.  Does this also *return* an array of blobs, perhaps?
     }
 
     // D3DDecompressShaders behavior:
