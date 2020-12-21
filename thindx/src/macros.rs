@@ -1,5 +1,3 @@
-#![allow(unused_macros)] // XXX: temporary
-
 #[cfg(not(test))] macro_rules! test_layout { ( $($tt:tt)* ) => {} }
 #[cfg(    test )] macro_rules! test_layout {
     (
