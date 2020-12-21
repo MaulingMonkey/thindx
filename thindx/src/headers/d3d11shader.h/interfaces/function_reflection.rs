@@ -247,7 +247,6 @@ impl<'r> FunctionReflection<'r> {
     ///     first_out_component: 4294967295,
     /// }
     /// ```
-    #[xallow(missing_argument_docs)]
     pub fn get_function_parameter(&self, parameter_index: i32) -> FunctionParameterReflection<'r> {
         let ptr = unsafe { self.ptr.as_ref().GetFunctionParameter(parameter_index) };
         unsafe { FunctionParameterReflection::from_raw(self.phantom, ptr) }
