@@ -42,11 +42,31 @@ fn dump_shader() {
     println!(".get_output_parameter_desc(..) = {:#?}", (0..desc.output_parameters           ).map(|i| shader.get_output_parameter_desc(i)           ).collect::<Vec<_>>());
     println!(".get_patch_parameter_desc(..) = {:#?}",  (0..desc.patch_constant_parameters   ).map(|i| shader.get_patch_constant_parameter_desc(i)   ).collect::<Vec<_>>());
     println!(".get_desc() == {:#?}", desc);
-    // TODO: get_constant_buffer_by_index
-    // TODO: get_constant_buffer_by_name
-    // TODO: get_resource_binding_desc
-    // TODO: get_resource_binding_desc_by_name
-    // TODO: get_variable_by_name
+
+    println!();
+    for i in 0..=desc.constant_buffers {
+        println!(".get_constant_buffer_by_index({}).get_desc() = {:?}", i, shader.get_constant_buffer_by_index(i).get_desc());
+    }
+
+    println!();
+    for name in ["ExampleCBuffer", "ExampleCBuffer\0", "NonExistant", ""].iter().copied() {
+        println!(".get_constant_buffer_by_name({:?}).get_desc() = {:?}", name, shader.get_constant_buffer_by_name(name).get_desc());
+    }
+
+    println!();
+    for i in 0..=desc.bound_resources {
+        println!(".get_resource_binding_desc({}) = {:?}", i, shader.get_resource_binding_desc(i));
+    }
+
+    println!();
+    for name in ["ExampleCBuffer", "ExampleCBuffer\0", "NonExistant", ""].iter().copied() {
+        println!(".get_resource_binding_desc_by_name({:?}) = {:?}", name, shader.get_resource_binding_desc_by_name(name));
+    }
+
+    println!();
+    for name in ["tint", "v", "i", "o", "color"].iter().copied() {
+        println!(".get_variable_by_name({:?}) = {:?}", name, shader.get_variable_by_name(name).get_desc());
+    }
 }
 
 fn main() {

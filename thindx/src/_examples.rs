@@ -105,6 +105,10 @@ pub const d3dcompiler_01_construction : () = ();
 /// #line 1 "C:\\local\\thindx\\thindx\\<memory>"
 /// 
 /// 
+/// cbuffer ExampleCBuffer {
+///     float4 tint ;
+/// } ;
+/// 
 /// struct Vertex {
 ///     float4 position : POSITION0 ;
 ///     float4 color : COLOR0 ;
@@ -121,7 +125,7 @@ pub const d3dcompiler_01_construction : () = ();
 /// 
 /// VsToPs vs_main ( Vertex v ) {
 ///     VsToPs o ;
-///     o . color = v . color ;
+///     o . color = v . color * tint ;
 ///     o . position = v . position ;
 ///     return o ;
 /// }
@@ -138,6 +142,10 @@ pub const d3dcompiler_01_construction : () = ();
 /// #line 1 "C:\\local\\thindx\\thindx\\test\\data\\basic.hlsl"
 /// 
 /// 
+/// cbuffer ExampleCBuffer {
+///     float4 tint ;
+/// } ;
+/// 
 /// struct Vertex {
 ///     float4 position : POSITION0 ;
 ///     float4 color : COLOR0 ;
@@ -154,7 +162,7 @@ pub const d3dcompiler_01_construction : () = ();
 /// 
 /// VsToPs vs_main ( Vertex v ) {
 ///     VsToPs o ;
-///     o . color = v . color ;
+///     o . color = v . color * tint ;
 ///     o . position = v . position ;
 ///     return o ;
 /// }
@@ -329,11 +337,31 @@ pub const d3dcompiler_03_link : () = ();
 ///     println!(".get_output_parameter_desc(..) = {:#?}", (0..desc.output_parameters           ).map(|i| shader.get_output_parameter_desc(i)           ).collect::<Vec<_>>());
 ///     println!(".get_patch_parameter_desc(..) = {:#?}",  (0..desc.patch_constant_parameters   ).map(|i| shader.get_patch_constant_parameter_desc(i)   ).collect::<Vec<_>>());
 ///     println!(".get_desc() == {:#?}", desc);
-///     // TODO: get_constant_buffer_by_index
-///     // TODO: get_constant_buffer_by_name
-///     // TODO: get_resource_binding_desc
-///     // TODO: get_resource_binding_desc_by_name
-///     // TODO: get_variable_by_name
+/// 
+///     println!();
+///     for i in 0..=desc.constant_buffers {
+///         println!(".get_constant_buffer_by_index({}).get_desc() = {:?}", i, shader.get_constant_buffer_by_index(i).get_desc());
+///     }
+/// 
+///     println!();
+///     for name in ["ExampleCBuffer", "ExampleCBuffer\0", "NonExistant", ""].iter().copied() {
+///         println!(".get_constant_buffer_by_name({:?}).get_desc() = {:?}", name, shader.get_constant_buffer_by_name(name).get_desc());
+///     }
+/// 
+///     println!();
+///     for i in 0..=desc.bound_resources {
+///         println!(".get_resource_binding_desc({}) = {:?}", i, shader.get_resource_binding_desc(i));
+///     }
+/// 
+///     println!();
+///     for name in ["ExampleCBuffer", "ExampleCBuffer\0", "NonExistant", ""].iter().copied() {
+///         println!(".get_resource_binding_desc_by_name({:?}) = {:?}", name, shader.get_resource_binding_desc_by_name(name));
+///     }
+/// 
+///     println!();
+///     for name in ["tint", "v", "i", "o", "color"].iter().copied() {
+///         println!(".get_variable_by_name({:?}) = {:?}", name, shader.get_variable_by_name(name).get_desc());
+///     }
 /// }
 /// 
 /// fn main() {
@@ -429,7 +457,7 @@ pub const d3dcompiler_03_link : () = ();
 /// .get_bitwise_instruction_count()      == 0
 /// .get_conversion_instruction_count()   == 0
 /// .get_movc_instruction_count()         == 0
-/// .get_mov_instruction_count()          == 2
+/// .get_mov_instruction_count()          == 1
 /// .get_gs_input_primitive()             == Primitive::Undefined
 /// .get_min_feature_level()              == Ok(FeatureLevel::_10_0)
 /// .get_num_interface_slots()            == 0
@@ -497,8 +525,8 @@ pub const d3dcompiler_03_link : () = ();
 ///     version: vs_4_0,
 ///     creator: "Microsoft (R) HLSL Shader Compiler 10.1",
 ///     flags: Compile::{Debug|NoPreshader},
-///     constant_buffers: 0,
-///     bound_resources: 0,
+///     constant_buffers: 1,
+///     bound_resources: 1,
 ///     input_parameters: 2,
 ///     output_parameters: 2,
 ///     instruction_count: 3,
@@ -511,7 +539,7 @@ pub const d3dcompiler_03_link : () = ();
 ///     texture_comp_instructions: 0,
 ///     texture_bias_instructions: 0,
 ///     texture_gradient_instructions: 0,
-///     float_instruction_count: 0,
+///     float_instruction_count: 1,
 ///     int_instruction_count: 0,
 ///     uint_instruction_count: 0,
 ///     static_flow_control_count: 1,
@@ -533,6 +561,28 @@ pub const d3dcompiler_03_link : () = ();
 ///     interlocked_instructions: 0,
 ///     texture_store_instructions: 0,
 /// }
+/// 
+/// .get_constant_buffer_by_index(0).get_desc() = Ok(ShaderBufferDesc { name: "ExampleCBuffer", ty: CT::CBuffer, variables: 1, size: 16, flags: CBF::None })
+/// .get_constant_buffer_by_index(1).get_desc() = Err(Error { kind: E::FAIL, method: "ID3D11ShaderReflectionConstantBuffer::GetDesc" })
+/// 
+/// .get_constant_buffer_by_name("ExampleCBuffer").get_desc() = Ok(ShaderBufferDesc { name: "ExampleCBuffer", ty: CT::CBuffer, variables: 1, size: 16, flags: CBF::None })
+/// .get_constant_buffer_by_name("ExampleCBuffer\u{0}").get_desc() = Err(Error { kind: E::FAIL, method: "ID3D11ShaderReflectionConstantBuffer::GetDesc" })
+/// .get_constant_buffer_by_name("NonExistant").get_desc() = Err(Error { kind: E::FAIL, method: "ID3D11ShaderReflectionConstantBuffer::GetDesc" })
+/// .get_constant_buffer_by_name("").get_desc() = Err(Error { kind: E::FAIL, method: "ID3D11ShaderReflectionConstantBuffer::GetDesc" })
+/// 
+/// .get_resource_binding_desc(0) = Ok(ShaderInputBindDesc { name: "ExampleCBuffer", ty: SIT::CBuffer, bind_point: 0, bind_count: 1, flags: SIF::None, return_type: ReturnType(0), dimension: SrvDimension::Unknown, num_samples: 0 })
+/// .get_resource_binding_desc(1) = Err(Error { kind: E::INVALIDARG, method: "ID3D11ShaderReflection::GetResourceBindingDesc" })
+/// 
+/// .get_resource_binding_desc_by_name("ExampleCBuffer") = Ok(ShaderInputBindDesc { name: "ExampleCBuffer", ty: SIT::CBuffer, bind_point: 0, bind_count: 1, flags: SIF::None, return_type: ReturnType(0), dimension: SrvDimension::Unknown, num_samples: 0 })
+/// .get_resource_binding_desc_by_name("ExampleCBuffer\u{0}") = Err(Error { kind: THINERR::STRING_CONTAINS_NULS, method: "ID3D11ShaderReflection::GetResourceBindingDescByName" })
+/// .get_resource_binding_desc_by_name("NonExistant") = Err(Error { kind: E::INVALIDARG, method: "ID3D11ShaderReflection::GetResourceBindingDescByName" })
+/// .get_resource_binding_desc_by_name("") = Err(Error { kind: E::INVALIDARG, method: "ID3D11ShaderReflection::GetResourceBindingDescByName" })
+/// 
+/// .get_variable_by_name("tint") = Ok(ShaderVariableDesc { name: "tint", start_offset: 0, size: 16, flags: SVF::Used, default_value: 0x0, start_texture: 4294967295, texture_size: 0, start_sampler: 4294967295, sampler_size: 0 })
+/// .get_variable_by_name("v") = Err(Error { kind: E::FAIL, method: "ID3D11ShaderReflectionVariable::GetDesc" })
+/// .get_variable_by_name("i") = Err(Error { kind: E::FAIL, method: "ID3D11ShaderReflectionVariable::GetDesc" })
+/// .get_variable_by_name("o") = Err(Error { kind: E::FAIL, method: "ID3D11ShaderReflectionVariable::GetDesc" })
+/// .get_variable_by_name("color") = Err(Error { kind: E::FAIL, method: "ID3D11ShaderReflectionVariable::GetDesc" })
 /// ```
 ///
 /// ### To run this example yourself

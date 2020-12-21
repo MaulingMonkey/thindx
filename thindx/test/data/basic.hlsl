@@ -1,5 +1,9 @@
 // An example super basic shader set
 
+cbuffer ExampleCBuffer {
+    float4 tint;
+};
+
 struct Vertex {
     float4 position : POSITION0;
     float4 color    : COLOR0;
@@ -16,7 +20,7 @@ struct Fragment {
 
 VsToPs vs_main(Vertex v) {
     VsToPs o;
-    o.color     = v.color;
+    o.color     = v.color * tint;
     o.position  = v.position;
     return o;
 }
