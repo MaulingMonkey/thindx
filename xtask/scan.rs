@@ -480,7 +480,7 @@ fn file_doc_comments(path: &Path, text: &str) -> Result<(), ()> {
                         }
                     }
                 },
-                DocItemKind::Macro  => s.arguments.clear(), // XXX
+                DocItemKind::Macro  => s.arguments.clear(), // TODO: Verify arguments are part of macro token stream?
                 _                   => {},
             }
 
