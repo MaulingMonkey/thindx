@@ -63,6 +63,7 @@ impl Compiler {
     /// ### Example
     /// ```rust
     /// # use thindx::*;
+    /// # if d3d::Compiler::new(43).is_err() { return; }
     /// let d3dc = d3d::Compiler::new(43).unwrap();
     /// # let shader_src = std::fs::read(r"test\data\basic.hlsl").unwrap();
     /// # let shader = d3dc.compile(&shader_src, cstr!(r"test\data\basic.hlsl"), None, None, "ps_main", "ps_4_0", d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
