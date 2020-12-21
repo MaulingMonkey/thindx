@@ -27,6 +27,8 @@ impl AsRef <Bytecode> for CompileResult { fn as_ref(&self) -> &Bytecode { self.s
 impl Borrow<Bytecode> for CompileResult { fn borrow(&self) -> &Bytecode { self.shader.as_bytecode() } }
 impl Deref for CompileResult { fn deref(&self) -> &Bytecode { self.shader.as_bytecode() } type Target = Bytecode; }
 
+pub use CompileResult as LinkResult;
+
 
 
 /// { code: [TextBlob], errors: [TextBlob] } returned by [Compiler::preprocess]

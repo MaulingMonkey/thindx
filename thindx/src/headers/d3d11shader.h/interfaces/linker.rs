@@ -15,6 +15,7 @@ use std::ptr::*;
 /// ### See Also
 /// *   [d3d::Compiler::create_linker] to create [Linker]s
 /// *   [d3d11::FunctionLinkingGraph] for examples
+/// *   [examples::d3dcompiler_03_link]
 #[derive(Clone)] #[repr(transparent)]
 pub struct Linker(pub(crate) mcom::Rc<winapi::um::d3d11shader::ID3D11Linker>);
 
@@ -102,12 +103,25 @@ impl Linker {
     /// ### Example
     /// ```rust
     /// # use thindx::*;
-    /// // TODO
+    /// let d3dc = d3d::Compiler::new(47).unwrap();
+    /// # let lib = d3dc.compile_from_file(r"test\data\library.hlsl", None, None, (), "lib_5_0", d3d::Compile::OptimizationLevel3, d3d::CompileEffect::None).unwrap();
+    /// # let lib = d3dc.load_module(&lib).unwrap();
+    /// # let lib = lib.create_instance(()).unwrap();
+    /// #
+    /// # let graph : d3d11::FunctionLinkingGraph = d3dc.create_function_linking_graph(None).unwrap();
+    /// # let input  = graph.set_input_signature( &[d3d11::ParameterDesc::new(None, cstr!("POSITION0"),   d3d::SVT::Float, d3d::SVC::Vector, 1, 4, d3d::Interpolation::Linear,    d3d::PF::In,  0, 0, 0, 0)]).unwrap();
+    /// # let output = graph.set_output_signature(&[d3d11::ParameterDesc::new(None, cstr!("SV_POSITION"), d3d::SVT::Float, d3d::SVC::Vector, 1, 4, d3d::Interpolation::Undefined, d3d::PF::Out, 0, 0, 0, 0)]).unwrap();
+    /// # graph.pass_value(&input, 0, &output, 0).unwrap();
+    /// # let (graph, _warnings) = graph.create_module_instance().unwrap();
+    /// #
+    /// let linker = d3dc.create_linker().unwrap();
+    /// linker.use_library(&lib).unwrap();
+    /// let shader = linker.link(&graph, "main", "vs_5_0", None).unwrap();
     /// ```
     ///
     /// ### See Also
     /// *   [examples::d3dcompiler_03_link]
-    pub fn link(&self, entry: &ModuleInstance, entry_name: impl TryIntoAsCStr, target_name: impl TryIntoAsCStr, flags: Option<void::Void>) -> Result<CompileResult, Error> {
+    pub fn link(&self, entry: &ModuleInstance, entry_name: impl TryIntoAsCStr, target_name: impl TryIntoAsCStr, flags: Option<void::Void>) -> Result<LinkResult, Error> {
         let entry_name  = entry_name .try_into().map_err(|e| Error::new("ID3D11Linker::Link", e))?;
         let target_name = target_name.try_into().map_err(|e| Error::new("ID3D11Linker::Link", e))?;
         let entry_name  = entry_name .as_cstr();
@@ -119,7 +133,7 @@ impl Linker {
         let mut errors = null_mut();
         let hr = unsafe { self.0.Link(entry.as_raw(), entry_name, target_name, flags, &mut blob, &mut errors) };
         unsafe { Error::check_blob("ID3D11Linker::Link", hr, errors) }?;
-        Ok(CompileResult { // TODO: rename CompileResult to something more general?  BlobWithWarnings?  BlobWithNonFatalErrors?
+        Ok(LinkResult {
             shader: unsafe { CodeBlob::from_unchecked(ReadOnlyBlob::from_raw(blob)) },
             errors: TextBlob::new(unsafe { ReadOnlyBlob::from_raw_opt(errors) }),
         })
@@ -133,8 +147,21 @@ impl Linker {
     /// ### Example
     /// ```rust
     /// # use thindx::*;
-    /// // TODO
+    /// let d3dc = d3d::Compiler::new(47).unwrap();
+    ///
+    /// let lib = d3dc.compile_from_file(
+    ///     r"test\data\library.hlsl", None, None, (), "lib_5_0",
+    ///     d3d::Compile::OptimizationLevel3, d3d::CompileEffect::None
+    /// ).unwrap();
+    /// let lib = d3dc.load_module(&lib).unwrap().create_instance(()).unwrap();
+    ///
+    /// let linker = d3dc.create_linker().unwrap();
+    /// linker.use_library(&lib).unwrap();
+    /// // linker.link(...), etc.
     /// ```
+    ///
+    /// ### See Also
+    /// *   [examples::d3dcompiler_03_link]
     #[xallow(missing_argument_docs)]
     pub fn use_library(&self, library_mi: &ModuleInstance) -> Result<(), Error> {
         let hr = unsafe { self.0.UseLibrary(library_mi.as_raw()) };
