@@ -1,6 +1,7 @@
 //! Use [d3d::Compiler::compile] and friends to compile HLSL to bytecode
 #![allow(unused_variables)]
-use thindx::d3d::{self, *};
+use thindx::*;
+use thindx::d3d::*;
 
 fn main() {
     let d3dc = d3d::Compiler::new(47).unwrap();

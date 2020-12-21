@@ -1,7 +1,6 @@
 //! Use [d3d::Compiler] to inspect shader bytecode
 use thindx::*;
 use thindx::d3d::*;
-//use thindx::d3d11::*;
 
 fn dump_library() {
     let d3dc = d3d::Compiler::new(47).unwrap();
