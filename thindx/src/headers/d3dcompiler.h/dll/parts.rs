@@ -80,7 +80,7 @@ impl Compiler {
     /// # assert_eq!(d3dc.get_debug_info(&shader).err().map(|err| err.kind()), Some(E::FAIL), "shader was compiled with d3dcompiler_47.dll");
     /// ```
     ///
-    /// ### Outputs
+    /// ### Output
     /// ```text
     /// BytesBlob(2625 bytes)
     /// ```
