@@ -23,7 +23,7 @@ use std::fmt::{self, Debug, Formatter};
 /// *   [d3d11::ShaderDesc::version]
 /// *   [d3d11::ShaderReflection::get_desc]
 /// *   [d3d11::ShaderVersion::shver]
-/// *   [examples::d3dcompiler_04_reflection]
+/// *   [examples::d3dcompiler_04_reflect_shader]
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)] pub struct ShaderVersionType(D3D11_SHADER_VERSION_TYPE);
 #[doc(hidden)] pub use ShaderVersionType as ShVer;
@@ -77,7 +77,7 @@ impl Default for ShVer {
 /// ### See Also
 /// *   [d3d11::ShaderDesc::version]
 /// *   [d3d11::ShaderReflection::get_desc]
-/// *   [examples::d3dcompiler_04_reflection]
+/// *   [examples::d3dcompiler_04_reflect_shader]
 #[derive(Clone, Copy, Default, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)] pub struct ShaderVersion(u32);
 

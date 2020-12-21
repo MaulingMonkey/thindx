@@ -2,23 +2,7 @@
 use thindx::*;
 use thindx::d3d::*;
 
-fn dump_library() {
-    let d3dc = d3d::Compiler::new(47).unwrap();
-    let library = d3dc.compile_from_file(r"test\data\library.hlsl", None, None, (), "lib_5_0", Compile::Debug, CompileEffect::None).unwrap();
-    let _library = d3dc.reflect_library::<d3d11::LibraryReflection>(&library).unwrap();
-    let library  = d3dc.reflect_library_11(&library).unwrap(); // equivalent shorthand
-
-    println!("library");
-    println!("=======");
-    println!("{:?}\n", library.get_desc().unwrap());
-    for function in library.functions().unwrap() {
-        let desc = function.get_desc().unwrap();
-        println!("{:#?}\n", desc);
-        // TODO: plenty
-    }
-}
-
-fn dump_shader() {
+fn main() {
     let d3dc = d3d::Compiler::new(47).unwrap();
     let shader  = d3dc.compile_from_file(r"test\data\basic.hlsl", None, None, "vs_main", "vs_4_0", Compile::Debug, CompileEffect::None).unwrap();
     let _shader = d3dc.reflect::<d3d11::ShaderReflection>(&shader).unwrap();
@@ -66,10 +50,4 @@ fn dump_shader() {
     for name in ["tint", "v", "i", "o", "color"].iter().copied() {
         println!(".get_variable_by_name({:?}) = {:?}", name, shader.get_variable_by_name(name).get_desc());
     }
-}
-
-fn main() {
-    dump_library();
-    print!("\n\n\n");
-    dump_shader();
 }

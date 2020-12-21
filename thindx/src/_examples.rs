@@ -298,23 +298,7 @@ pub const d3dcompiler_03_link : () = ();
 /// use thindx::*;
 /// use thindx::d3d::*;
 /// 
-/// fn dump_library() {
-///     let d3dc = d3d::Compiler::new(47).unwrap();
-///     let library = d3dc.compile_from_file(r"test\data\library.hlsl", None, None, (), "lib_5_0", Compile::Debug, CompileEffect::None).unwrap();
-///     let _library = d3dc.reflect_library::<d3d11::LibraryReflection>(&library).unwrap();
-///     let library  = d3dc.reflect_library_11(&library).unwrap(); // equivalent shorthand
-/// 
-///     println!("library");
-///     println!("=======");
-///     println!("{:?}\n", library.get_desc().unwrap());
-///     for function in library.functions().unwrap() {
-///         let desc = function.get_desc().unwrap();
-///         println!("{:#?}\n", desc);
-///         // TODO: plenty
-///     }
-/// }
-/// 
-/// fn dump_shader() {
+/// fn main() {
 ///     let d3dc = d3d::Compiler::new(47).unwrap();
 ///     let shader  = d3dc.compile_from_file(r"test\data\basic.hlsl", None, None, "vs_main", "vs_4_0", Compile::Debug, CompileEffect::None).unwrap();
 ///     let _shader = d3dc.reflect::<d3d11::ShaderReflection>(&shader).unwrap();
@@ -363,95 +347,10 @@ pub const d3dcompiler_03_link : () = ();
 ///         println!(".get_variable_by_name({:?}) = {:?}", name, shader.get_variable_by_name(name).get_desc());
 ///     }
 /// }
-/// 
-/// fn main() {
-///     dump_library();
-///     print!("\n\n\n");
-///     dump_shader();
-/// }
 /// ```
 ///
 /// ### Output
 /// ```text
-/// library
-/// =======
-/// LibraryDesc { creator: "Microsoft (R) HLSL Shader Compiler 10.1", flags: Compile::None, function_count: 2 }
-/// 
-/// FunctionDesc {
-///     version: 4293918800,
-///     creator: "Microsoft (R) HLSL Shader Compiler 10.1",
-///     flags: Compile::{Debug|NoPreshader},
-///     constant_buffers: 1,
-///     bound_resources: 1,
-///     instruction_count: 2,
-///     temp_register_count: 0,
-///     temp_array_count: 0,
-///     def_count: 0,
-///     dcl_count: 2,
-///     texture_normal_instructions: 0,
-///     texture_load_instructions: 0,
-///     texture_comp_instructions: 0,
-///     texture_bias_instructions: 0,
-///     texture_gradient_instructions: 0,
-///     float_instruction_count: 1,
-///     int_instruction_count: 0,
-///     uint_instruction_count: 0,
-///     static_flow_control_count: 1,
-///     dynamic_flow_control_count: 0,
-///     macro_instruction_count: 0,
-///     array_instruction_count: 0,
-///     mov_instruction_count: 0,
-///     movc_instruction_count: 0,
-///     conversion_instruction_count: 0,
-///     bitwise_instruction_count: 0,
-///     min_feature_level: FeatureLevel::_11_0,
-///     required_feature_flags: ShaderRequires::None,
-///     name: "scale4",
-///     function_parameter_count: 1,
-///     has_return: true,
-///     has_10_level_9_vertex_shader: false,
-///     has_10_level_9_pixel_shader: false,
-/// }
-/// 
-/// FunctionDesc {
-///     version: 4293918800,
-///     creator: "Microsoft (R) HLSL Shader Compiler 10.1",
-///     flags: Compile::{Debug|NoPreshader},
-///     constant_buffers: 0,
-///     bound_resources: 0,
-///     instruction_count: 3,
-///     temp_register_count: 0,
-///     temp_array_count: 0,
-///     def_count: 0,
-///     dcl_count: 2,
-///     texture_normal_instructions: 0,
-///     texture_load_instructions: 0,
-///     texture_comp_instructions: 0,
-///     texture_bias_instructions: 0,
-///     texture_gradient_instructions: 0,
-///     float_instruction_count: 0,
-///     int_instruction_count: 0,
-///     uint_instruction_count: 0,
-///     static_flow_control_count: 1,
-///     dynamic_flow_control_count: 0,
-///     macro_instruction_count: 0,
-///     array_instruction_count: 0,
-///     mov_instruction_count: 2,
-///     movc_instruction_count: 0,
-///     conversion_instruction_count: 0,
-///     bitwise_instruction_count: 0,
-///     min_feature_level: FeatureLevel::_11_0,
-///     required_feature_flags: ShaderRequires::None,
-///     name: "xyz1",
-///     function_parameter_count: 1,
-///     has_return: true,
-///     has_10_level_9_vertex_shader: false,
-///     has_10_level_9_pixel_shader: false,
-/// }
-/// 
-/// 
-/// 
-/// 
 /// shader
 /// ======
 /// .get_bitwise_instruction_count()      == 0
@@ -589,6 +488,122 @@ pub const d3dcompiler_03_link : () = ();
 /// ```cmd
 /// git clone https://github.com/MaulingMonkey/thindx
 /// cd thindx/thindx
-/// cargo run --example d3dcompiler-04-reflection
+/// cargo run --example d3dcompiler-04-reflect-shader
 /// ```
-pub const d3dcompiler_04_reflection : () = ();
+pub const d3dcompiler_04_reflect_shader : () = ();
+
+/// Use [d3d::Compiler] to inspect shader bytecode
+///
+/// <style>
+/// #main { max-width: none; }
+/// </style>
+///
+/// ### Source
+/// ```no_run
+/// use thindx::*;
+/// use thindx::d3d::*;
+/// 
+/// fn main() {
+///     let d3dc = d3d::Compiler::new(47).unwrap();
+///     let library = d3dc.compile_from_file(r"test\data\library.hlsl", None, None, (), "lib_5_0", Compile::Debug, CompileEffect::None).unwrap();
+///     let _library = d3dc.reflect_library::<d3d11::LibraryReflection>(&library).unwrap();
+///     let library  = d3dc.reflect_library_11(&library).unwrap(); // equivalent shorthand
+/// 
+///     println!("library");
+///     println!("=======");
+///     println!("{:?}\n", library.get_desc().unwrap());
+///     for function in library.functions().unwrap() {
+///         let desc = function.get_desc().unwrap();
+///         println!("{:#?}\n", desc);
+///         // TODO: plenty
+///     }
+/// }
+/// ```
+///
+/// ### Output
+/// ```text
+/// library
+/// =======
+/// LibraryDesc { creator: "Microsoft (R) HLSL Shader Compiler 10.1", flags: Compile::None, function_count: 2 }
+/// 
+/// FunctionDesc {
+///     version: 4293918800,
+///     creator: "Microsoft (R) HLSL Shader Compiler 10.1",
+///     flags: Compile::{Debug|NoPreshader},
+///     constant_buffers: 1,
+///     bound_resources: 1,
+///     instruction_count: 2,
+///     temp_register_count: 0,
+///     temp_array_count: 0,
+///     def_count: 0,
+///     dcl_count: 2,
+///     texture_normal_instructions: 0,
+///     texture_load_instructions: 0,
+///     texture_comp_instructions: 0,
+///     texture_bias_instructions: 0,
+///     texture_gradient_instructions: 0,
+///     float_instruction_count: 1,
+///     int_instruction_count: 0,
+///     uint_instruction_count: 0,
+///     static_flow_control_count: 1,
+///     dynamic_flow_control_count: 0,
+///     macro_instruction_count: 0,
+///     array_instruction_count: 0,
+///     mov_instruction_count: 0,
+///     movc_instruction_count: 0,
+///     conversion_instruction_count: 0,
+///     bitwise_instruction_count: 0,
+///     min_feature_level: FeatureLevel::_11_0,
+///     required_feature_flags: ShaderRequires::None,
+///     name: "scale4",
+///     function_parameter_count: 1,
+///     has_return: true,
+///     has_10_level_9_vertex_shader: false,
+///     has_10_level_9_pixel_shader: false,
+/// }
+/// 
+/// FunctionDesc {
+///     version: 4293918800,
+///     creator: "Microsoft (R) HLSL Shader Compiler 10.1",
+///     flags: Compile::{Debug|NoPreshader},
+///     constant_buffers: 0,
+///     bound_resources: 0,
+///     instruction_count: 3,
+///     temp_register_count: 0,
+///     temp_array_count: 0,
+///     def_count: 0,
+///     dcl_count: 2,
+///     texture_normal_instructions: 0,
+///     texture_load_instructions: 0,
+///     texture_comp_instructions: 0,
+///     texture_bias_instructions: 0,
+///     texture_gradient_instructions: 0,
+///     float_instruction_count: 0,
+///     int_instruction_count: 0,
+///     uint_instruction_count: 0,
+///     static_flow_control_count: 1,
+///     dynamic_flow_control_count: 0,
+///     macro_instruction_count: 0,
+///     array_instruction_count: 0,
+///     mov_instruction_count: 2,
+///     movc_instruction_count: 0,
+///     conversion_instruction_count: 0,
+///     bitwise_instruction_count: 0,
+///     min_feature_level: FeatureLevel::_11_0,
+///     required_feature_flags: ShaderRequires::None,
+///     name: "xyz1",
+///     function_parameter_count: 1,
+///     has_return: true,
+///     has_10_level_9_vertex_shader: false,
+///     has_10_level_9_pixel_shader: false,
+/// }
+/// 
+/// ```
+///
+/// ### To run this example yourself
+/// ```cmd
+/// git clone https://github.com/MaulingMonkey/thindx
+/// cd thindx/thindx
+/// cargo run --example d3dcompiler-05-reflect-library
+/// ```
+pub const d3dcompiler_05_reflect_library : () = ();
