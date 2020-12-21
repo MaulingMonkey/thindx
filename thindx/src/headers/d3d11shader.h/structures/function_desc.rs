@@ -83,7 +83,7 @@ use winapi::um::d3d11shader::*;
     pub min_feature_level:              FeatureLevel,
     pub required_feature_flags:         ShaderRequires,
     pub name:                           CStrPtr<'s>, // maybe never null?
-    pub function_parameter_count:       i32, // TODO: treat as unsigned?
+    pub function_parameter_count:       i32,
     pub has_return:                     BOOL,
     pub has_10_level_9_vertex_shader:   BOOL,
     pub has_10_level_9_pixel_shader:    BOOL,
