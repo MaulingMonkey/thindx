@@ -113,12 +113,24 @@ fn file_doc_comments(path: &Path, text: &str) -> Result<(), ()> {
         let trimmed = line.trim();
 
         let comment = if let Some(comment) = trimmed.strip_prefix("//!") {
-            let comment = comment.strip_prefix(" ").unwrap_or(comment); // XXX: Warn if no space?
+            let comment = comment.strip_prefix(" ").unwrap_or_else(|| {
+                if !comment.is_empty() {
+                    error!(at: path, line: no, "Expected space after `//!`");
+                    s.errors = true;
+                }
+                comment
+            });
             if s.current_comment_is_mod != Some(true) { s.on_comment_end(path, idx, None); }
             s.current_comment_is_mod = Some(true);
             comment
         } else if let Some(comment) = trimmed.strip_prefix("///") {
-            let comment = comment.strip_prefix(" ").unwrap_or(comment); // XXX: Warn if no space?
+            let comment = comment.strip_prefix(" ").unwrap_or_else(|| {
+                if !comment.is_empty() {
+                    error!(at: path, line: no, "Expected space after `///`");
+                    s.errors = true;
+                }
+                comment
+            });
             if s.current_comment_is_mod != Some(false) { s.on_comment_end(path, idx, None); }
             s.current_comment_is_mod = Some(false);
             comment
