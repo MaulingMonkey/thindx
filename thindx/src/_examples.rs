@@ -248,7 +248,8 @@ pub const d3dcompiler_02_compile : () = ();
 ///     let lib_inst = lib.create_instance("").unwrap();
 ///     let linker = d3dc.create_linker().unwrap();
 ///     linker.use_library(&lib_inst).unwrap();
-///     linker.link(&graph_inst, "main", "vs_5_0", None).unwrap();
+///     let shader = linker.link(&graph_inst, "main", "vs_5_0", None).unwrap();
+///     let _shader : &[u8] = shader.as_bytes();
 /// }
 /// ```
 ///
