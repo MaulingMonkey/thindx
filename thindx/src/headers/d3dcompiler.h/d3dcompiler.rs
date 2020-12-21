@@ -1,12 +1,12 @@
 pub use constants::*;
-pub use functions::*;
+pub use dll::*;
 pub use enumerations::*;
 pub use flags::*;
 pub use structures::*;
 
 
 
-#[path=r"dll\_dll.rs"] mod functions;
+#[path=r"dll\_dll.rs"] mod dll;
 
 mod constants {
     mod compile;                        pub use compile::*;
