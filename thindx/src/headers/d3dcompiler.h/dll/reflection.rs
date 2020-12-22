@@ -19,8 +19,9 @@ impl Compiler {
     ///
     /// ### Errors
     /// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_4?.dll` and earlier
-    /// *   [D3DERR::INVALIDARG]            - On invalid `I`
+    /// *   [E::INVALIDARG]                 - On invalid `I`
     /// *   [D3DERR::INVALIDCALL]           - On invalid `src_data`
+    /// *   [D3DERR::INVALIDCALL]           - On shaders not compatible with `I` (e.g. Shader Model 3 shaders with <code>I: [d3d11::ShaderReflection]</code>
     ///
     /// ### Example
     /// ```rust
@@ -65,8 +66,8 @@ impl Compiler {
     ///
     /// ### Errors
     /// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_4?.dll` and earlier
-    /// *   [D3DERR::INVALIDARG]            - On invalid `I`
     /// *   [D3DERR::INVALIDCALL]           - On invalid `src_data`
+    /// *   [D3DERR::INVALIDCALL]           - On shaders not compatible with [`d3d11::ShaderReflection`] (e.g. Shader Model 3.0 and earlier)
     ///
     /// ### Example
     /// ```rust
@@ -105,7 +106,9 @@ impl Compiler {
     ///
     /// ### Errors
     /// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_4?.dll` and earlier
+    /// *   [E::INVALIDARG]                 - On invalid `I`
     /// *   [D3DERR::INVALIDCALL]           - On invalid `src_data`
+    /// *   [D3DERR::INVALIDCALL]           - On shaders not compatible with `I` (e.g. Shader Model 3 shaders with <code>I: [d3d11::ShaderReflection]</code>
     ///
     /// ### Example
     /// ```rust
@@ -130,14 +133,14 @@ impl Compiler {
     /// ### See Also
     /// *   [d3d11::LibraryReflection] for a more complete example
     //#[requires(d3dcompiler=47)] // ?
-    pub fn reflect_library<C: Raw>(&self, src_data: &Bytecode) -> Result<C, Error> where C::Raw : Interface {
+    pub fn reflect_library<I: Raw>(&self, src_data: &Bytecode) -> Result<I, Error> where I::Raw : Interface {
         let f = self.D3DReflectLibrary.ok_or(Error::new("D3DReflectLibrary", THINERR::MISSING_DLL_EXPORT))?;
         let src_data = src_data.as_bytes();
 
         let mut reflector = null_mut();
-        let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), &C::Raw::uuidof(), &mut reflector) };
+        let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), &I::Raw::uuidof(), &mut reflector) };
         Error::check("D3DReflectLibrary", hr)?;
-        Ok(unsafe { C::from_raw(reflector.cast()) })
+        Ok(unsafe { I::from_raw(reflector.cast()) })
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dreflectlibrary)\]
@@ -155,6 +158,7 @@ impl Compiler {
     /// ### Errors
     /// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_4?.dll` and earlier
     /// *   [D3DERR::INVALIDCALL]           - On invalid `src_data`
+    /// *   [D3DERR::INVALIDCALL]           - On shaders not compatible with [`d3d11::LibraryReflection`] (e.g. Shader Model 3.0 and earlier)
     ///
     /// ### Example
     /// ```rust
