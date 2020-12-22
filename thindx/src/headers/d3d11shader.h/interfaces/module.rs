@@ -10,9 +10,21 @@ use std::ptr::*;
 ///
 /// A module interface creates an instance of a module that is used for resource rebinding.
 ///
+/// ### Example
+/// ```rust
+/// # use thindx::*;
+/// let d3dc = d3d::Compiler::new(47).unwrap();
+/// let lib = d3dc.compile_from_file(
+///     "test/data/library.hlsl", None, None, (), "lib_5_0",
+///     d3d::Compile::OptimizationLevel3, d3d::CompileEffect::None
+/// ).unwrap();
+/// let module : d3d11::Module = d3dc.load_module(&lib).unwrap();
+/// ```
+///
 /// ### See Also
 /// *   [d3d::Compiler::load_module] to create [Module]s
 /// *   [d3d11::FunctionLinkingGraph] for examples
+/// *   [examples::d3dcompiler_03_link]
 #[derive(Clone)] #[repr(transparent)]
 pub struct Module(pub(crate) mcom::Rc<winapi::um::d3d11shader::ID3D11Module>);
 
@@ -30,7 +42,22 @@ impl Module {
     /// ### Example
     /// ```rust
     /// # use thindx::*;
-    /// // TODO
+    /// # let d3dc = d3d::Compiler::new(47).unwrap();
+    /// # let lib = d3dc.compile_from_file("test/data/library.hlsl", None, None, (), "lib_5_0", d3d::Compile::OptimizationLevel3, d3d::CompileEffect::None).unwrap();
+    /// # let module : d3d11::Module = d3dc.load_module(&lib).unwrap();
+    /// #
+    /// // no namespace
+    /// let ns : Option<&str> = None;
+    /// let _ : d3d11::ModuleInstance = module.create_instance(()).unwrap();
+    /// let _ : d3d11::ModuleInstance = module.create_instance(ns).unwrap();
+    ///
+    /// // global namespace
+    /// let _ : d3d11::ModuleInstance = module.create_instance("").unwrap();
+    /// let _ : d3d11::ModuleInstance = module.create_instance(cstr!("")).unwrap();
+    ///
+    /// // specific namespace
+    /// let _ : d3d11::ModuleInstance = module.create_instance("namespace").unwrap();
+    /// let _ : d3d11::ModuleInstance = module.create_instance(cstr!("namespace")).unwrap();
     /// ```
     pub fn create_instance(&self, namespace: impl TryIntoAsOptCStr) -> Result<ModuleInstance, Error> {
         let namespace = namespace.try_into().map_err(|e| Error::new("ID3D11Module::CreateInstance", e))?;
