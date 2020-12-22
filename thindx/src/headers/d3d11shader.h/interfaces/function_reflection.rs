@@ -180,7 +180,10 @@ impl<'r> FunctionReflection<'r> {
     /// Gets the function parameter reflector.
     ///
     /// ### Arguments
-    /// *   `parameter_index`   - A 0-based parameter index, or `-1` to get the return value "parameter".
+    /// *   `parameter_index`   - A 0-based parameter index less than `self.get_desc().unwrap().function_parameter_count`, or `-1` to get the return value "parameter".
+    ///
+    /// ### Returns
+    /// *   A stub object that returns [E::FAIL] from [`FunctionParameterReflection::get_desc`] if `parameter_index` is invalid
     ///
     /// ### Example
     /// ```rust
@@ -190,17 +193,29 @@ impl<'r> FunctionReflection<'r> {
     /// # let lib : d3d11::LibraryReflection = d3dc.reflect_library(&shader).unwrap();
     /// # let scale4 = lib.functions().unwrap().find(|f| f.get_desc().unwrap().name.to_bytes() == b"scale4").unwrap();
     /// #
-    /// // -1 == return value
-    /// for i in -1..scale4.get_desc().unwrap().function_parameter_count {
-    ///     println!("{:#?}", scale4.get_function_parameter(-1).get_desc().unwrap());
-    /// }
+    /// let ret = scale4.get_function_parameter(-1).get_desc().unwrap();
+    /// assert_eq!(ret.name.as_ref().unwrap().to_bytes(),   b"scale4");
+    /// assert_eq!(ret.ty,      d3d::SVT::Float);
+    /// assert_eq!(ret.class,   d3d::SVC::Vector);
+    /// assert_eq!(ret.rows,    1);
+    /// assert_eq!(ret.columns, 4);
+    /// println!("{:#?}", ret);
     ///
-    /// // out of bounds indicies returns a "valid" stub object which E::FAIL s on most calls
-    /// for i in [-2, 100].iter().copied() {
-    ///     let desc = scale4.get_function_parameter(i).get_desc().err().map(|err| err.kind());
-    ///     assert_eq!(desc, Some(E::FAIL), "get_function_parameter({}) stub should E::FAIL", i);
-    /// }
+    /// let v = scale4.get_function_parameter( 0).get_desc().unwrap();
+    /// assert_eq!(v.name.as_ref().unwrap().to_bytes(),   b"v");
+    /// assert_eq!(v.ty,        d3d::SVT::Float);
+    /// assert_eq!(v.class,     d3d::SVC::Vector);
+    /// assert_eq!(v.rows,      1);
+    /// assert_eq!(v.columns,   4);
+    /// println!("{:#?}", v);
+    ///
+    /// assert_eq!(E::FAIL, scale4.get_function_parameter(-2).get_desc().unwrap_err().kind());
+    /// assert_eq!(E::FAIL, scale4.get_function_parameter( 1).get_desc().unwrap_err().kind());
     /// #
+    /// # assert_eq!(scale4.get_function_parameter(std::i32::MIN).get_desc().err().map(|err| err.kind()), Some(E::FAIL));
+    /// # assert_eq!(scale4.get_function_parameter(-1000000).get_desc().err().map(|err| err.kind()), Some(E::FAIL));
+    /// # assert_eq!(scale4.get_function_parameter(-10000).get_desc().err().map(|err| err.kind()), Some(E::FAIL));
+    /// # assert_eq!(scale4.get_function_parameter(-100).get_desc().err().map(|err| err.kind()), Some(E::FAIL));
     /// # assert_eq!(scale4.get_function_parameter(100).get_desc().err().map(|err| err.kind()), Some(E::FAIL));
     /// # assert_eq!(scale4.get_function_parameter(10000).get_desc().err().map(|err| err.kind()), Some(E::FAIL));
     /// # assert_eq!(scale4.get_function_parameter(1000000).get_desc().err().map(|err| err.kind()), Some(E::FAIL));
