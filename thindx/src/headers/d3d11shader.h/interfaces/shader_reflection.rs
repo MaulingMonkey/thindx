@@ -12,9 +12,22 @@ use std::ptr::*;
 ///
 /// A shader-reflection interface accesses shader information.
 ///
+/// ### Example
+/// ```rust
+/// # use thindx::*;
+/// let d3dc = d3d::Compiler::new(47).unwrap();
+/// let vs = d3dc.compile_from_file(
+///     r"test\data\basic.hlsl", None, None, "vs_main", "vs_4_0",
+///     d3d::Compile::Debug, d3d::CompileEffect::None
+/// ).unwrap();
+/// let _vs : d3d11::ShaderReflection = d3dc.reflect(&vs).unwrap();
+/// let vs = d3dc.reflect11(&vs).unwrap();
+/// ```
+///
 /// ### See Also
 /// *   [d3d::Compiler::reflect]
 /// *   [d3d::Compiler::reflect11]
+/// *   [examples::d3dcompiler_04_reflect_shader]
 #[derive(Clone)] #[repr(transparent)]
 pub struct ShaderReflection(pub(crate) mcom::Rc<winapi::um::d3d11shader::ID3D11ShaderReflection>);
 
@@ -29,7 +42,10 @@ impl ShaderReflection {
     /// ### Example
     /// ```rust
     /// # use thindx::*;
-    /// // TODO
+    /// # let d3dc = d3d::Compiler::new(47).unwrap();
+    /// # let vs = d3dc.compile_from_file(r"test\data\basic.hlsl", None, None, "vs_main", "vs_4_0", d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
+    /// # let vs = d3dc.reflect11(&vs).unwrap();
+    /// let count = vs.get_bitwise_instruction_count();
     /// ```
     pub fn get_bitwise_instruction_count(&self) -> u32 {
         unsafe { self.0.GetBitwiseInstructionCount() }
@@ -40,10 +56,30 @@ impl ShaderReflection {
     ///
     /// Get a constant buffer by index.
     ///
+    /// ### Returns
+    /// *   If the index is out of bounds, a stub object will still be returned.  The stub object will return [E::FAIL] from most methods.
+    ///
     /// ### Example
     /// ```rust
     /// # use thindx::*;
-    /// // TODO
+    /// # let d3dc = d3d::Compiler::new(47).unwrap();
+    /// # let vs = d3dc.compile_from_file(r"test\data\basic.hlsl", None, None, "vs_main", "vs_4_0", d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
+    /// # let vs = d3dc.reflect11(&vs).unwrap();
+    /// let cb0 = vs.get_constant_buffer_by_index(0);
+    /// let _ = cb0.get_desc().unwrap();
+    ///
+    /// let cb1 = vs.get_constant_buffer_by_index(1);
+    /// assert_eq!(Some(E::FAIL), cb1.get_desc().err().map(|err| err.kind()));
+    /// #
+    /// # assert_eq!(Some(E::FAIL), vs.get_constant_buffer_by_index(100).get_desc().err().map(|err| err.kind()));
+    /// # assert_eq!(Some(E::FAIL), vs.get_constant_buffer_by_index(10000).get_desc().err().map(|err| err.kind()));
+    /// # assert_eq!(Some(E::FAIL), vs.get_constant_buffer_by_index(1000000).get_desc().err().map(|err| err.kind()));
+    /// # assert_eq!(Some(E::FAIL), vs.get_constant_buffer_by_index(!0-100).get_desc().err().map(|err| err.kind()));
+    /// # assert_eq!(Some(E::FAIL), vs.get_constant_buffer_by_index(!0-16).get_desc().err().map(|err| err.kind()));
+    /// # assert_eq!(Some(E::FAIL), vs.get_constant_buffer_by_index(!0-10).get_desc().err().map(|err| err.kind()));
+    /// # assert_eq!(Some(E::FAIL), vs.get_constant_buffer_by_index(!0-4).get_desc().err().map(|err| err.kind()));
+    /// # assert_eq!(Some(E::FAIL), vs.get_constant_buffer_by_index(!0-1).get_desc().err().map(|err| err.kind()));
+    /// # assert_eq!(Some(E::FAIL), vs.get_constant_buffer_by_index(!0).get_desc().err().map(|err| err.kind()));
     /// ```
     #[xallow(missing_argument_docs)]
     pub fn get_constant_buffer_by_index(&self, index: u32) -> ShaderReflectionConstantBuffer {
@@ -56,10 +92,23 @@ impl ShaderReflection {
     ///
     /// Get a constant buffer by name.
     ///
+    /// ### Returns
+    /// *   If the name doesn't match a valid constant buffer, a stub object will still be returned.  The stub object will return [E::FAIL] from most methods.
+    ///
     /// ### Example
     /// ```rust
     /// # use thindx::*;
-    /// // TODO
+    /// # let d3dc = d3d::Compiler::new(47).unwrap();
+    /// # let vs = d3dc.compile_from_file(r"test\data\basic.hlsl", None, None, "vs_main", "vs_4_0", d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
+    /// # let vs = d3dc.reflect11(&vs).unwrap();
+    /// let cb0 = vs.get_constant_buffer_by_name("ExampleCBuffer");
+    /// let _ = cb0.get_desc().unwrap();
+    ///
+    /// let cb1 = vs.get_constant_buffer_by_name("Invalid");
+    /// assert_eq!(Some(E::FAIL), cb1.get_desc().err().map(|err| err.kind()));
+    /// #
+    /// # assert_eq!(Some(E::FAIL), vs.get_constant_buffer_by_name("").get_desc().err().map(|err| err.kind()));
+    /// # assert_eq!(Some(E::FAIL), vs.get_constant_buffer_by_name("ExampleCBuffer\0").get_desc().err().map(|err| err.kind()));
     /// ```
     #[xallow(missing_argument_docs)]
     pub fn get_constant_buffer_by_name(&self, name: impl TryIntoAsCStr) -> ShaderReflectionConstantBuffer {
@@ -77,7 +126,10 @@ impl ShaderReflection {
     /// ### Example
     /// ```rust
     /// # use thindx::*;
-    /// // TODO
+    /// # let d3dc = d3d::Compiler::new(47).unwrap();
+    /// # let vs = d3dc.compile_from_file(r"test\data\basic.hlsl", None, None, "vs_main", "vs_4_0", d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
+    /// # let vs = d3dc.reflect11(&vs).unwrap();
+    /// let count : u32 = vs.get_conversion_instruction_count();
     /// ```
     pub fn get_conversion_instruction_count(&self) -> u32 {
         unsafe { self.0.GetConversionInstructionCount() }
@@ -88,10 +140,19 @@ impl ShaderReflection {
     ///
     /// Get a shader description.
     ///
+    /// ### Errors
+    /// *   ...perhaps [`E::FAIL`] if reflection was called on invalid or incompatible bytecode?
+    ///
     /// ### Example
     /// ```rust
     /// # use thindx::*;
-    /// // TODO
+    /// # let d3dc = d3d::Compiler::new(47).unwrap();
+    /// # let vs = d3dc.compile_from_file(r"test\data\basic.hlsl", None, None, "vs_main", "vs_4_0", d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
+    /// # let vs = d3dc.reflect11(&vs).unwrap();
+    /// let desc = vs.get_desc().unwrap();
+    /// assert_eq!(desc.version.shver(), d3d11::ShVer::VertexShader);
+    /// assert_eq!(desc.version.major(), 4);
+    /// assert_eq!(desc.version.minor(), 0);
     /// ```
     pub fn get_desc(&self) -> Result<ShaderDesc, Error> {
         let mut desc = ShaderDesc::default();
@@ -105,10 +166,16 @@ impl ShaderReflection {
     ///
     /// Gets the geometry-shader input-primitive description.
     ///
+    /// ### Returns
+    /// *   [`d3d::Primitive::Undefined`] if `self` is not a geometry shader
+    ///
     /// ### Example
     /// ```rust
     /// # use thindx::*;
-    /// // TODO
+    /// # let d3dc = d3d::Compiler::new(47).unwrap();
+    /// # let vs = d3dc.compile_from_file(r"test\data\basic.hlsl", None, None, "vs_main", "vs_4_0", d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
+    /// # let vs = d3dc.reflect11(&vs).unwrap();
+    /// assert_eq!(vs.get_gs_input_primitive(), d3d::Primitive::Undefined);
     /// ```
     pub fn get_gs_input_primitive(&self) -> Primitive {
         Primitive::from_unchecked(unsafe { self.0.GetGSInputPrimitive() })
@@ -119,10 +186,27 @@ impl ShaderReflection {
     ///
     /// Get an input-parameter description for a shader.
     ///
+    /// ### Errors
+    /// *   [E::INVALIDARG]     - if `parameter_index` >= `self.get_desc().unwrap().input_parameters`
+    ///
     /// ### Example
     /// ```rust
     /// # use thindx::*;
-    /// // TODO
+    /// # let d3dc = d3d::Compiler::new(47).unwrap();
+    /// # let vs = d3dc.compile_from_file(r"test\data\basic.hlsl", None, None, "vs_main", "vs_4_0", d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
+    /// # let vs = d3dc.reflect11(&vs).unwrap();
+    /// assert_eq!(0,               vs.get_input_parameter_desc(0).unwrap().semantic_index);
+    /// assert_eq!(0,               vs.get_input_parameter_desc(1).unwrap().semantic_index);
+    /// assert_eq!(E::INVALIDARG,   vs.get_input_parameter_desc(2).unwrap_err().kind());
+    /// # assert_eq!(E::INVALIDARG, vs.get_input_parameter_desc(100).unwrap_err().kind());
+    /// # assert_eq!(E::INVALIDARG, vs.get_input_parameter_desc(10000).unwrap_err().kind());
+    /// # assert_eq!(E::INVALIDARG, vs.get_input_parameter_desc(1000000).unwrap_err().kind());
+    /// # assert_eq!(E::INVALIDARG, vs.get_input_parameter_desc(!0-100).unwrap_err().kind());
+    /// # assert_eq!(E::INVALIDARG, vs.get_input_parameter_desc(!0-16).unwrap_err().kind());
+    /// # assert_eq!(E::INVALIDARG, vs.get_input_parameter_desc(!0-8).unwrap_err().kind());
+    /// # assert_eq!(E::INVALIDARG, vs.get_input_parameter_desc(!0-4).unwrap_err().kind());
+    /// # assert_eq!(E::INVALIDARG, vs.get_input_parameter_desc(!0-1).unwrap_err().kind());
+    /// # assert_eq!(E::INVALIDARG, vs.get_input_parameter_desc(!0).unwrap_err().kind());
     /// ```
     #[xallow(missing_argument_docs)]
     pub fn get_input_parameter_desc(&self, parameter_index: u32) -> Result<SignatureParameterDesc, Error> {
@@ -137,10 +221,16 @@ impl ShaderReflection {
     ///
     /// Gets the minimum feature level.
     ///
+    /// ### Errors
+    /// *   ...?
+    ///
     /// ### Example
     /// ```rust
     /// # use thindx::*;
-    /// // TODO
+    /// # let d3dc = d3d::Compiler::new(47).unwrap();
+    /// # let vs = d3dc.compile_from_file(r"test\data\basic.hlsl", None, None, "vs_main", "vs_4_0", d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
+    /// # let vs = d3dc.reflect11(&vs).unwrap();
+    /// assert_eq!(vs.get_min_feature_level().unwrap(), d3d::FeatureLevel::_10_0);
     /// ```
     pub fn get_min_feature_level(&self) -> Result<FeatureLevel, Error> {
         let mut fl = 0;
@@ -157,7 +247,10 @@ impl ShaderReflection {
     /// ### Example
     /// ```rust
     /// # use thindx::*;
-    /// // TODO
+    /// # let d3dc = d3d::Compiler::new(47).unwrap();
+    /// # let vs = d3dc.compile_from_file(r"test\data\basic.hlsl", None, None, "vs_main", "vs_4_0", d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
+    /// # let vs = d3dc.reflect11(&vs).unwrap();
+    /// let count = vs.get_movc_instruction_count();
     /// ```
     pub fn get_movc_instruction_count(&self) -> u32 {
         unsafe { self.0.GetMovcInstructionCount() }
@@ -171,7 +264,10 @@ impl ShaderReflection {
     /// ### Example
     /// ```rust
     /// # use thindx::*;
-    /// // TODO
+    /// # let d3dc = d3d::Compiler::new(47).unwrap();
+    /// # let vs = d3dc.compile_from_file(r"test\data\basic.hlsl", None, None, "vs_main", "vs_4_0", d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
+    /// # let vs = d3dc.reflect11(&vs).unwrap();
+    /// let count : u32 = vs.get_mov_instruction_count();
     /// ```
     pub fn get_mov_instruction_count(&self) -> u32 {
         unsafe { self.0.GetMovInstructionCount() }
@@ -185,7 +281,10 @@ impl ShaderReflection {
     /// ### Example
     /// ```rust
     /// # use thindx::*;
-    /// // TODO
+    /// # let d3dc = d3d::Compiler::new(47).unwrap();
+    /// # let vs = d3dc.compile_from_file(r"test\data\basic.hlsl", None, None, "vs_main", "vs_4_0", d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
+    /// # let vs = d3dc.reflect11(&vs).unwrap();
+    /// let slots : u32 = vs.get_num_interface_slots();
     /// ```
     pub fn get_num_interface_slots(&self) -> u32 {
         unsafe { self.0.GetNumInterfaceSlots() }
@@ -196,10 +295,27 @@ impl ShaderReflection {
     ///
     /// Get an output-parameter description for a shader.
     ///
+    /// ### Errors
+    /// *   [E::INVALIDARG]     - if `parameter_index` >= `self.get_desc().unwrap().output_parameters`
+    ///
     /// ### Example
     /// ```rust
     /// # use thindx::*;
-    /// // TODO
+    /// # let d3dc = d3d::Compiler::new(47).unwrap();
+    /// # let vs = d3dc.compile_from_file(r"test\data\basic.hlsl", None, None, "vs_main", "vs_4_0", d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
+    /// # let vs = d3dc.reflect11(&vs).unwrap();
+    /// assert_eq!(0,               vs.get_output_parameter_desc(0).unwrap().semantic_index);
+    /// assert_eq!(0,               vs.get_output_parameter_desc(1).unwrap().semantic_index);
+    /// assert_eq!(E::INVALIDARG,   vs.get_output_parameter_desc(2).unwrap_err().kind());
+    /// # assert_eq!(E::INVALIDARG, vs.get_output_parameter_desc(100).unwrap_err().kind());
+    /// # assert_eq!(E::INVALIDARG, vs.get_output_parameter_desc(10000).unwrap_err().kind());
+    /// # assert_eq!(E::INVALIDARG, vs.get_output_parameter_desc(1000000).unwrap_err().kind());
+    /// # assert_eq!(E::INVALIDARG, vs.get_output_parameter_desc(!0-100).unwrap_err().kind());
+    /// # assert_eq!(E::INVALIDARG, vs.get_output_parameter_desc(!0-16).unwrap_err().kind());
+    /// # assert_eq!(E::INVALIDARG, vs.get_output_parameter_desc(!0-8).unwrap_err().kind());
+    /// # assert_eq!(E::INVALIDARG, vs.get_output_parameter_desc(!0-4).unwrap_err().kind());
+    /// # assert_eq!(E::INVALIDARG, vs.get_output_parameter_desc(!0-1).unwrap_err().kind());
+    /// # assert_eq!(E::INVALIDARG, vs.get_output_parameter_desc(!0).unwrap_err().kind());
     /// ```
     #[xallow(missing_argument_docs)]
     pub fn get_output_parameter_desc(&self, parameter_index: u32) -> Result<SignatureParameterDesc, Error> {
@@ -214,10 +330,26 @@ impl ShaderReflection {
     ///
     /// Get a patch-constant parameter description for a shader.
     ///
+    /// ### Errors
+    /// *   [E::INVALIDARG]     - if `parameter_index` >= `self.get_desc().unwrap().patch_constant_parameters`
+    ///
     /// ### Example
     /// ```rust
     /// # use thindx::*;
-    /// // TODO
+    /// # let d3dc = d3d::Compiler::new(47).unwrap();
+    /// # let vs = d3dc.compile_from_file(r"test\data\basic.hlsl", None, None, "vs_main", "vs_4_0", d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
+    /// # let vs = d3dc.reflect11(&vs).unwrap();
+    /// // TODO: proper examples
+    /// assert_eq!(E::INVALIDARG,   vs.get_patch_constant_parameter_desc(2).unwrap_err().kind());
+    /// # assert_eq!(E::INVALIDARG, vs.get_patch_constant_parameter_desc(100).unwrap_err().kind());
+    /// # assert_eq!(E::INVALIDARG, vs.get_patch_constant_parameter_desc(10000).unwrap_err().kind());
+    /// # assert_eq!(E::INVALIDARG, vs.get_patch_constant_parameter_desc(1000000).unwrap_err().kind());
+    /// # assert_eq!(E::INVALIDARG, vs.get_patch_constant_parameter_desc(!0-100).unwrap_err().kind());
+    /// # assert_eq!(E::INVALIDARG, vs.get_patch_constant_parameter_desc(!0-16).unwrap_err().kind());
+    /// # assert_eq!(E::INVALIDARG, vs.get_patch_constant_parameter_desc(!0-8).unwrap_err().kind());
+    /// # assert_eq!(E::INVALIDARG, vs.get_patch_constant_parameter_desc(!0-4).unwrap_err().kind());
+    /// # assert_eq!(E::INVALIDARG, vs.get_patch_constant_parameter_desc(!0-1).unwrap_err().kind());
+    /// # assert_eq!(E::INVALIDARG, vs.get_patch_constant_parameter_desc(!0).unwrap_err().kind());
     /// ```
     #[xallow(missing_argument_docs)]
     pub fn get_patch_constant_parameter_desc(&self, parameter_index: u32) -> Result<SignatureParameterDesc, Error> {
@@ -235,7 +367,10 @@ impl ShaderReflection {
     /// ### Example
     /// ```rust
     /// # use thindx::*;
-    /// // TODO
+    /// # let d3dc = d3d::Compiler::new(47).unwrap();
+    /// # let vs = d3dc.compile_from_file(r"test\data\basic.hlsl", None, None, "vs_main", "vs_4_0", d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
+    /// # let vs = d3dc.reflect11(&vs).unwrap();
+    /// assert_eq!(vs.get_requires_flags(), d3d::ShaderRequires::None);
     /// ```
     pub fn get_requires_flags(&self) -> ShaderRequires {
         ShaderRequires::from_unchecked(unsafe { self.0.GetRequiresFlags() })
@@ -246,10 +381,31 @@ impl ShaderReflection {
     ///
     /// Get a description of how a resource is bound to a shader.
     ///
+    /// ### Errors
+    /// *   [E::INVALIDARG]     - if `resource_index` >= `self.get_desc().unwrap().bound_resources`
+    ///
     /// ### Example
     /// ```rust
     /// # use thindx::*;
-    /// // TODO
+    /// # let d3dc = d3d::Compiler::new(47).unwrap();
+    /// # let vs = d3dc.compile_from_file(r"test\data\basic.hlsl", None, None, "vs_main", "vs_4_0", d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
+    /// # let vs = d3dc.reflect11(&vs).unwrap();
+    /// let ex = vs.get_resource_binding_desc(0).unwrap();
+    /// assert_eq!(ex.ty, d3d::SIT::CBuffer);
+    ///
+    /// let err = vs.get_resource_binding_desc(1).err().unwrap().kind();
+    /// assert_eq!(err, E::INVALIDARG);
+    /// #
+    /// # assert_eq!(vs.get_resource_binding_desc(100).err().unwrap().kind(), E::INVALIDARG);
+    /// # assert_eq!(vs.get_resource_binding_desc(10000).err().unwrap().kind(), E::INVALIDARG);
+    /// # assert_eq!(vs.get_resource_binding_desc(1000000).err().unwrap().kind(), E::INVALIDARG);
+    /// # assert_eq!(vs.get_resource_binding_desc(!0-100).err().unwrap().kind(), E::INVALIDARG);
+    /// # assert_eq!(vs.get_resource_binding_desc(!0-16).err().unwrap().kind(), E::INVALIDARG);
+    /// # assert_eq!(vs.get_resource_binding_desc(!0-10).err().unwrap().kind(), E::INVALIDARG);
+    /// # assert_eq!(vs.get_resource_binding_desc(!0-8).err().unwrap().kind(), E::INVALIDARG);
+    /// # assert_eq!(vs.get_resource_binding_desc(!0-4).err().unwrap().kind(), E::INVALIDARG);
+    /// # assert_eq!(vs.get_resource_binding_desc(!0-1).err().unwrap().kind(), E::INVALIDARG);
+    /// # assert_eq!(vs.get_resource_binding_desc(!0).err().unwrap().kind(), E::INVALIDARG);
     /// ```
     #[xallow(missing_argument_docs)]
     pub fn get_resource_binding_desc(&self, resource_index: u32) -> Result<ShaderInputBindDesc, Error> {
@@ -264,10 +420,23 @@ impl ShaderReflection {
     ///
     /// Get a description of how a resource is bound to a shader.
     ///
+    /// ### Errors
+    /// *   [E::INVALIDARG]         - If `name` doesn't name a valid resource binding for the shader
+    ///
     /// ### Example
     /// ```rust
     /// # use thindx::*;
-    /// // TODO
+    /// # let d3dc = d3d::Compiler::new(47).unwrap();
+    /// # let vs = d3dc.compile_from_file(r"test\data\basic.hlsl", None, None, "vs_main", "vs_4_0", d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
+    /// # let vs = d3dc.reflect11(&vs).unwrap();
+    /// let ex = vs.get_resource_binding_desc_by_name("ExampleCBuffer").unwrap();
+    /// assert_eq!(ex.ty, d3d::SIT::CBuffer);
+    ///
+    /// let err = vs.get_resource_binding_desc_by_name("Invalid").err().unwrap().kind();
+    /// assert_eq!(err, E::INVALIDARG);
+    /// #
+    /// # assert_eq!(vs.get_resource_binding_desc_by_name("ExampleCBuffer\0").err().unwrap().kind(), E::INVALIDARG);
+    /// # assert_eq!(vs.get_resource_binding_desc_by_name("").err().unwrap().kind(), E::INVALIDARG);
     /// ```
     #[xallow(missing_argument_docs)]
     pub fn get_resource_binding_desc_by_name(&self, name: impl TryIntoAsCStr) -> Result<ShaderInputBindDesc, Error> {
@@ -284,10 +453,16 @@ impl ShaderReflection {
     ///
     /// Retrieves the sizes, in units of threads, of the X, Y, and Z dimensions of the shader's thread-group grid.
     ///
+    /// ### Returns
+    /// *   `(0, 0, 0)` if not specified
+    ///
     /// ### Example
     /// ```rust
     /// # use thindx::*;
-    /// // TODO
+    /// # let d3dc = d3d::Compiler::new(47).unwrap();
+    /// # let vs = d3dc.compile_from_file(r"test\data\basic.hlsl", None, None, "vs_main", "vs_4_0", d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
+    /// # let vs = d3dc.reflect11(&vs).unwrap();
+    /// assert_eq!(vs.get_thread_group_size(), (0, 0, 0));
     /// ```
     pub fn get_thread_group_size(&self) -> (u32, u32, u32) {
         let (mut x, mut y, mut z) = (0, 0, 0);
@@ -301,10 +476,24 @@ impl ShaderReflection {
     ///
     /// Gets a variable by name.
     ///
+    /// ### Returns
+    /// *   If `name` doesn't name a valid cbuffer variable, a stub object will still be returned.  The stub object will return [E::FAIL] from most methods.
+    ///
     /// ### Example
     /// ```rust
     /// # use thindx::*;
-    /// // TODO
+    /// # let d3dc = d3d::Compiler::new(47).unwrap();
+    /// # let vs = d3dc.compile_from_file(r"test\data\basic.hlsl", None, None, "vs_main", "vs_4_0", d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
+    /// # let vs = d3dc.reflect11(&vs).unwrap();
+    /// let tint = vs.get_variable_by_name("tint").get_desc().unwrap();
+    /// assert_eq!(tint.start_offset, 0, "unexpected tint.start_offset");
+    /// assert_eq!(tint.size,        16, "unexpected tint.size");
+    ///
+    /// let invalid = vs.get_variable_by_name("invalid").get_desc().unwrap_err();
+    /// assert_eq!(invalid.kind(), E::FAIL);
+    /// #
+    /// # assert_eq!(vs.get_variable_by_name("tint\0").get_desc().unwrap_err().kind(), E::FAIL);
+    /// # assert_eq!(vs.get_variable_by_name("").get_desc().unwrap_err().kind(), E::FAIL);
     /// ```
     #[xallow(missing_argument_docs)]
     pub fn get_variable_by_name(&self, name: impl TryIntoAsCStr) -> ShaderReflectionVariable {
@@ -322,7 +511,10 @@ impl ShaderReflection {
     /// ### Example
     /// ```rust
     /// # use thindx::*;
-    /// // TODO
+    /// # let d3dc = d3d::Compiler::new(47).unwrap();
+    /// # let vs = d3dc.compile_from_file(r"test\data\basic.hlsl", None, None, "vs_main", "vs_4_0", d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
+    /// # let vs = d3dc.reflect11(&vs).unwrap();
+    /// assert_eq!(vs.is_sample_frequency_shader(), false);
     /// ```
     pub fn is_sample_frequency_shader(&self) -> bool {
         0 != unsafe { self.0.IsSampleFrequencyShader() }
