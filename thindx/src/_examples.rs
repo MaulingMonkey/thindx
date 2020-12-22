@@ -473,7 +473,7 @@ pub const d3dcompiler_03_link : () = ();
 /// .get_resource_binding_desc(1) = Err(Error { kind: E::INVALIDARG, method: "ID3D11ShaderReflection::GetResourceBindingDesc" })
 /// 
 /// .get_resource_binding_desc_by_name("ExampleCBuffer") = Ok(ShaderInputBindDesc { name: "ExampleCBuffer", ty: SIT::CBuffer, bind_point: 0, bind_count: 1, flags: SIF::None, return_type: ReturnType(0), dimension: SrvDimension::Unknown, num_samples: 0 })
-/// .get_resource_binding_desc_by_name("ExampleCBuffer\u{0}") = Err(Error { kind: THINERR::STRING_CONTAINS_NULS, method: "ID3D11ShaderReflection::GetResourceBindingDescByName" })
+/// .get_resource_binding_desc_by_name("ExampleCBuffer\u{0}") = Err(Error { kind: E::INVALIDARG, method: "ID3D11ShaderReflection::GetResourceBindingDescByName" })
 /// .get_resource_binding_desc_by_name("NonExistant") = Err(Error { kind: E::INVALIDARG, method: "ID3D11ShaderReflection::GetResourceBindingDescByName" })
 /// .get_resource_binding_desc_by_name("") = Err(Error { kind: E::INVALIDARG, method: "ID3D11ShaderReflection::GetResourceBindingDescByName" })
 /// 

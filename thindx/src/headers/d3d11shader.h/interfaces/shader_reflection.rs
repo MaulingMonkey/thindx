@@ -3,6 +3,8 @@ use crate::ctypes::*;
 use crate::d3d::*;
 use crate::d3d11::*;
 
+use std::ptr::*;
+
 
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11shaderreflection)\]
@@ -269,9 +271,10 @@ impl ShaderReflection {
     /// ```
     #[xallow(missing_argument_docs)]
     pub fn get_resource_binding_desc_by_name(&self, name: impl TryIntoAsCStr) -> Result<ShaderInputBindDesc, Error> {
-        let name = name.try_into().map_err(|e| Error::new("ID3D11ShaderReflection::GetResourceBindingDescByName", e))?;
+        let name = name.try_into();
+        let name = name.as_ref().map_or(null(), |name| name.as_cstr());
         let mut desc = ShaderInputBindDesc::default();
-        let hr = unsafe { self.0.GetResourceBindingDescByName(name.as_cstr(), desc.as_mut_ptr()) };
+        let hr = unsafe { self.0.GetResourceBindingDescByName(name, desc.as_mut_ptr()) };
         Error::check("ID3D11ShaderReflection::GetResourceBindingDescByName", hr)?;
         Ok(desc)
     }
