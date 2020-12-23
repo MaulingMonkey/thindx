@@ -195,7 +195,7 @@ impl Compiler {
         &self,
         file_name:      impl AsRef<Path>,
         defines:        impl AsShaderMacros,
-        include:        impl AsID3DInclude,
+        include:        impl AsInclude,
         entrypoint:     impl TryIntoAsOptCStr,
         target:         impl TryIntoAsCStr,
         flags1:         impl Into<Compile>,
@@ -282,7 +282,7 @@ impl Compiler {
         src_data:       impl AsRef<[u8]>,
         source_name:    impl TryIntoAsOptCStr,
         defines:        impl AsShaderMacros,
-        include:        impl AsID3DInclude,
+        include:        impl AsInclude,
         entrypoint:     impl TryIntoAsOptCStr,
         target:         impl TryIntoAsCStr,
         flags1:         impl Into<Compile>,
@@ -381,7 +381,7 @@ impl Compiler {
         src_data:               impl AsRef<[u8]>,
         source_name:            impl TryIntoAsOptCStr,
         defines:                impl AsShaderMacros,
-        include:                impl AsID3DInclude,
+        include:                impl AsInclude,
         entrypoint:             impl TryIntoAsOptCStr,
         target:                 impl TryIntoAsCStr,
         flags1:                 impl Into<Compile>,
@@ -480,7 +480,7 @@ impl Compiler {
         src_data:       impl AsRef<[u8]>,
         source_name:    impl TryIntoAsOptCStr,
         defines:        impl AsShaderMacros,
-        include:        impl AsID3DInclude,
+        include:        impl AsInclude,
     ) -> Result<PreprocessResult, PreprocessError> {
         // Early outs
         let f           = self.D3DPreprocess.ok_or(Error::new("D3DPreprocess", THINERR::MISSING_DLL_EXPORT))?;

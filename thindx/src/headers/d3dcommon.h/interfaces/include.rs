@@ -14,16 +14,16 @@ use std::ptr::*;
 /// *   [D3D_COMPILE_STANDARD_FILE_INCLUDE]
 /// *   A valid, well behaved [ID3D11Include](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nn-d3dcommon-id3dinclude)
 ///     instance, that lives for at least as long as `self` remains untouched / undropped.
-pub unsafe trait AsID3DInclude {
+pub unsafe trait AsInclude {
     /// Treat this as a raw winapi [ID3DInclude].
     fn as_id3dinclude(&self) -> *mut ID3DInclude;
 }
 
-unsafe impl AsID3DInclude for () {
+unsafe impl AsInclude for () {
     fn as_id3dinclude(&self) -> *mut ID3DInclude { null_mut() }
 }
 
-unsafe impl AsID3DInclude for Option<void::Void> {
+unsafe impl AsInclude for Option<void::Void> {
     fn as_id3dinclude(&self) -> *mut ID3DInclude { null_mut() }
 }
 
@@ -34,6 +34,6 @@ unsafe impl AsID3DInclude for Option<void::Void> {
 /// the directory of the initial source file. When you use [StandardFileInclude], you must specify the source file name
 /// in the `source_name` parameter; the compiler will derive the initial relative directory from `source_name`.
 pub struct StandardFileInclude;
-unsafe impl AsID3DInclude for StandardFileInclude {
+unsafe impl AsInclude for StandardFileInclude {
     fn as_id3dinclude(&self) -> *mut ID3DInclude { D3D_COMPILE_STANDARD_FILE_INCLUDE }
 }
