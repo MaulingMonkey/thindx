@@ -1,3 +1,38 @@
+macro_rules! enumish {
+    ( $enumish:ty => $d3d:ty; $($ident:ident),* $(,)? ) => {
+        impl std::fmt::Debug for $enumish {
+            fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
+                match *self {
+                    $(
+                        < $enumish > :: $ident =>  write!(f, concat!(stringify!($enumish), "::", stringify!($ident))),
+                    )*
+                    other                   => write!(f, "{}({})", stringify!($enumish), other.0),
+                }
+            }
+        }
+
+        impl From<$enumish> for $d3d {
+            fn from(value: $enumish) -> Self { value.0.into() }
+        }
+
+        #[cfg(feature = "impl-from-unchecked")]
+        impl From<$d3d> for $enumish {
+            fn from(value: $d3d) -> Self { Self(value as _) }
+        }
+
+        impl $enumish {
+            /// Convert from an underlying [winapi] `D3D...` type.
+            /// This is *probably* safe... probably...
+            pub const fn from_unchecked(d3d: $d3d) -> Self { Self(d3d as _) }
+
+            /// Convert back into an underlying [winapi] `D3D...` type.
+            pub const fn into(self) -> $d3d { self.0 as _ }
+        }
+    }
+}
+
+
+
 mod back_buffer_type;           pub use back_buffer_type::*;
 mod basis_type;                 pub use basis_type::*;
 mod blend_op;                   pub use blend_op::*;

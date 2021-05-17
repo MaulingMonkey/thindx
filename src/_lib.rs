@@ -10,20 +10,20 @@
 //! Thin [Direct3D9] wrappers for Rust, designed to be suitable for:
 //! *   Greenfield projects targeting ancient APIs for some reason
 //! *   Graphics middleware looking to integrate into existing D3D9 codebases
-//! 
+//!
 //! [Direct3D9]:                https://docs.microsoft.com/en-us/windows/win32/api/d3d9/
 //!
 //! ### Why not `winapi` directly?
-//! 
+//!
 //! *   This crate aims to make fns safe/sound/slightly rusty when possible
 //! *   Attempts to verify API soundness through mass unit tests, even if they mostly test Direct3D9's behavior.
 //! *   Doc comments for one-stop intellisense, safety documentation, etc.
-//! 
+//!
 //! ### Why not `<other graphics crate>`?
-//! 
+//!
 //! *   Most other graphics crates focus on **hiding** the underlying graphics API as much as possible, improving application portability.
 //! *   This crate **surfaces** the underlying graphics API as much as possible, improving the potential for interoperability with other graphics code / use in middleware applications.
-//! 
+//!
 //! ### Interfaces
 //!
 //! These are all refcounting COM smart pointers convertable to/from [mcom::Rc].
@@ -317,9 +317,6 @@
 #![deny(unreachable_patterns)]
 
 #[cfg(test)] fn testfast() -> bool { std::env::var_os("TESTFAST").is_some() }
-
-#[macro_use] mod macros;
-#[allow(unused_imports)] use macros::*;
 
 pub use abibool::bool32;
 use mcom::Rc;
