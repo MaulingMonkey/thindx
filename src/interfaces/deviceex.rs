@@ -14,6 +14,47 @@ use std::ptr::*;
 #[derive(Clone)] #[repr(transparent)]
 pub struct DeviceEx(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DDevice9Ex>);
 
+/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3ddevice9ex)\]
+/// IDirect3DDevice9Ex extension methods
+///
+/// ### Methods
+///
+/// | thin3d9                                                                       | docs.microsoft.com                | Description |
+/// | ----------------------------------------------------------------------------- | --------------------------------- | ----------- |
+/// | [check_device_state](Self::check_device_state)                                | [CheckDeviceState]                | Reports the current cooperative-level status of the Direct3D device for a windowed or full-screen application.
+/// | [check_resource_residency](Self::check_resource_residency)                    | [CheckResourceResidency]          | Checks an array of resources to determine if it is likely that they will cause a large stall at Draw time because the system must make the resources GPU-accessible.
+/// | [compose_rects](Self::compose_rects)                                          | [ComposeRects]                    | Copy a text string to one surface using an alphabet of glyphs on another surface. Composition is done by the GPU using bitwise operations.
+/// | [create_depth_stencil_surface_ex](Self::create_depth_stencil_surface_ex)      | [CreateDepthStencilSurfaceEx]     | Creates a depth-stencil surface.
+/// | [create_offscreen_plain_surface_ex](Self::create_offscreen_plain_surface_ex)  | [CreateOffscreenPlainSurfaceEx]   | Create an off-screen surface.
+/// | [create_render_target_ex](Self::create_render_target_ex)                      | [CreateRenderTargetEx]            | Creates a render-target surface.
+/// | [get_display_mode_ex](Self::get_display_mode_ex)                              | [GetDisplayModeEx]                | Retrieves the display mode's spatial resolution, color resolution, refresh frequency, and rotation settings.
+/// | [get_gpu_thread_priority](Self::get_gpu_thread_priority)                      | [GetGPUThreadPriority]            | Get the priority of the GPU thread.
+/// | [get_maximum_frame_latency](Self::get_maximum_frame_latency)                  | [GetMaximumFrameLatency]          | Retrieves the number of frames of data that the system is allowed to queue.
+/// | [present_ex](Self::present_ex)                                                | [PresentEx]                       | Swap the swapchain's next buffer with the front buffer.
+/// | [reset_ex](Self::reset_ex)                                                    | [ResetEx]                         | Resets the type, size, and format of the swap chain with all other surfaces persistent.
+/// | [set_convolution_mono_kernel](Self::set_convolution_mono_kernel)              | [SetConvolutionMonoKernel]        | Prepare the texture sampler for monochrome convolution filtering on a single-color texture.
+/// | [set_gpu_thread_priority](Self::set_gpu_thread_priority)                      | [SetGPUThreadPriority]            | Set the priority on the GPU thread.
+/// | [set_maximum_frame_latency](Self::set_maximum_frame_latency)                  | [SetMaximumFrameLatency]          | Set the number of frames that the system is allowed to queue for rendering.
+/// | [test_cooperative_level](Self::test_cooperative_level)                        | [TestCooperativeLevel]            | Reports the current cooperative-level status of the Direct3D device for a windowed or full-screen application.
+/// | [wait_for_vblank](Self::wait_for_vblank)                                      | [WaitForVBlank]                   | Suspend execution of the calling thread until the next vertical blank signal.
+///
+/// [CheckDeviceState]:                 https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-checkdevicestate
+/// [CheckResourceResidency]:           https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-checkresourceresidency
+/// [ComposeRects]:                     https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-composerects
+/// [CreateDepthStencilSurfaceEx]:      https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-createdepthstencilsurfaceex
+/// [CreateOffscreenPlainSurfaceEx]:    https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-createoffscreenplainsurfaceex
+/// [CreateRenderTargetEx]:             https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-createrendertargetex
+/// [GetDisplayModeEx]:                 https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-getdisplaymodeex
+/// [GetGPUThreadPriority]:             https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-getgputhreadpriority
+/// [GetMaximumFrameLatency]:           https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-getmaximumframelatency
+/// [PresentEx]:                        https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-presentex
+/// [ResetEx]:                          https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-resetex
+/// [SetConvolutionMonoKernel]:         https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-setconvolutionmonokernel
+/// [SetGPUThreadPriority]:             https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-setgputhreadpriority
+/// [SetMaximumFrameLatency]:           https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-setmaximumframelatency
+/// [TestCooperativeLevel]:             https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-testcooperativelevel
+/// [WaitForVBlank]:                    https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-waitforvblank
+///
 pub trait IDirect3DDevice9ExExt : private::Sealed {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-checkdevicestate)\]
     /// IDirect3DDevice9Ex::CheckDeviceState
