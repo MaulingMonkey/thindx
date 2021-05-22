@@ -17,9 +17,34 @@ use std::ptr::*;
 #[derive(Clone)] #[repr(transparent)]
 pub struct Direct3DEx(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3D9Ex>);
 
+/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3d9ex)\]
+/// IDirect3D9Ex extension methods
+///
+/// ### Methods
+///
+/// | thin3d9                                                           | docs.microsoft.com        | Description |
+/// | ----------------------------------------------------------------- | ------------------------- | ----------- |
+/// | [create](Self::create)                                            | [Direct3DCreate9Ex]       | Creates an [IDirect3D9Ex] object and returns an interface to it.
+/// | [create_device_ex](Self::create_device_ex)                        | [CreateDeviceEx]          | Creates a device to represent the display adapter.
+/// | [enum_adapter_modes_ex](Self::enum_adapter_modes_ex)              | [EnumAdapterModesEx]      | Enumerate actual display mode info based on the given mode index.
+/// | [get_adapter_display_mode_ex](Self::get_adapter_display_mode_ex)  | [GetAdapterDisplayModeEx] | Retrieves the current display mode and rotation settings of the adapter.
+/// | [get_adapter_luid](Self::get_adapter_luid)                        | [GetAdapterLUID]          | This method returns a [LUID] for the adapter that is specific to the adapter hardware.
+/// | [get_adapter_mode_count_ex](Self::get_adapter_mode_count_ex)      | [GetAdapterModeCountEx]   | Returns the number of display modes available.
+///
+/// [Direct3DCreate9Ex]:    https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-direct3dcreate9ex
+/// [IDirect3D9Ex]:         https://docs.microsoft.com/en-us/windows/desktop/api/d3d9/nn-d3d9-idirect3d9ex
+///
+/// [CreateDeviceEx]:           https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9ex-createdeviceex
+/// [EnumAdapterModesEx]:       https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9ex-enumadaptermodesex
+/// [GetAdapterDisplayModeEx]:  https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9ex-getadapterdisplaymodeex
+/// [GetAdapterLUID]:           https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9ex-getadapterluid
+/// [GetAdapterModeCountEx]:    https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9ex-getadaptermodecountex
+///
 pub trait IDirect3D9ExExt : private::Sealed {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-direct3dcreate9ex)\]
     /// Direct3DCreate9Ex
+    ///
+    /// Creates an [IDirect3D9Ex] object and returns an interface to it.
     ///
     /// ### Safety
     ///
@@ -42,6 +67,8 @@ pub trait IDirect3D9ExExt : private::Sealed {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9ex-createdeviceex)\]
     /// IDirect3D9Ex::CreateDeviceEx
     ///
+    /// Creates a device to represent the display adapter.
+    ///
     /// ### Safety
     ///
     /// *   The caller's codebase is responsible for ensuring any [HWND]s (`hwnd`, `presentation_parameters.hDeviceWindow`) outlive the [Device].
@@ -62,6 +89,8 @@ pub trait IDirect3D9ExExt : private::Sealed {
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9ex-enumadaptermodesex)\]
     /// IDirect3D9Ex::EnumAdapterModesEx
+    ///
+    /// Enumerate actual display mode info based on the given mode index.
     fn enum_adapter_modes_ex(&self, adapter: u32, filter: impl Into<D3DDISPLAYMODEFILTER>, mode: u32) -> Result<D3DDISPLAYMODEEX, MethodError> {
         let mut filter = filter.into();
         filter.Size = std::mem::size_of_val(&filter).try_into().unwrap();
@@ -73,6 +102,8 @@ pub trait IDirect3D9ExExt : private::Sealed {
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9ex-getadapterdisplaymodeex)\]
     /// IDirect3D9Ex::GetAdapterDisplayModeEx
+    ///
+    /// Retrieves the current display mode and rotation settings of the adapter.
     fn get_adapter_display_mode_ex(&self, adapter: u32) -> Result<(D3DDISPLAYMODEEX, D3DDISPLAYROTATION), MethodError> {
         let mut mode = unsafe { std::mem::zeroed::<D3DDISPLAYMODEEX>() };
         mode.Size = std::mem::size_of_val(&mode).try_into().unwrap();
