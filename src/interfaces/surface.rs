@@ -209,6 +209,27 @@ impl Device {
 
 
 
+/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dsurface9)\]
+/// IDirect3DSurface9 extension method list
+///
+/// ### Methods
+///
+/// | thin3d9                                                       | docs.microsoft.com    | Description |
+/// | ------------------------------------------------------------- | --------------------- | ----------- |
+/// | [get_container](Self::get_container)                          | [GetContainer]        | Provides access to the parent cube texture or texture (mipmap) object, if this surface is a child level of a cube texture or a mipmap. This method can also provide access to the parent swap chain if the surface is a back-buffer child.
+/// | [get_dc](Self::get_dc)                                        | [GetDC]               | Retrieves a device context.
+/// | [get_desc](Self::get_desc)                                    | [GetDesc]             | Retrieves a description of the surface.
+/// | [lock_rect_unchecked](Self::lock_rect_unchecked)              | [LockRect]            | Locks a rectangle on a surface.
+/// | [release_dc](Self::release_dc)                                | [ReleaseDC]           | Release a device context handle.
+/// | [unlock_rect](Self::unlock_rect)                              | [UnlockRect]          | Unlocks a rectangle on a surface.
+///
+/// [GetContainer]: https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dsurface9-getcontainer
+/// [GetDC]:        https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dsurface9-getdc
+/// [GetDesc]:      https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dsurface9-getdesc
+/// [LockRect]:     https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dsurface9-lockrect
+/// [ReleaseDC]:    https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dsurface9-releasedc
+/// [UnlockRect]:   https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dsurface9-unlockrect
+///
 pub trait IDirect3DSurface9Ext : private::Sealed {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3dsurface9-getcontainer)\]
     /// IDirect3DSurface9::GetContainer
