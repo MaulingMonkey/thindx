@@ -336,6 +336,21 @@ impl Device {
 
 
 
+/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dpixelshader9)\]
+/// IDirect3DPixelShader9 extension methods
+///
+/// ### Methods
+///
+/// | thin3d9                                                       | docs.microsoft.com    | Description |
+/// | ------------------------------------------------------------- | --------------------- | ----------- |
+/// | [get_device](Self::get_device)                                | [GetDevice]           | Gets the device.
+/// | [get_function_size](Self::get_function_size)                  | [GetFunction]         | Gets the size of the shader function data.
+/// | [get_function_inplace](Self::get_function_inplace)            | [GetFunction]         | Gets the shader function data.
+/// | [get_function](Self::get_function)                            | [GetFunction]         | Gets the shader function data.
+///
+/// [GetDevice]:    https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dpixelshader9-getdevice
+/// [GetFunction]:  https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dpixelshader9-getfunction
+///
 pub trait IDirect3DPixelShader9Ext : pixel_shader::Sealed {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dpixelshader9-getdevice)\]
     /// IDirect3DPixelShader9::GetDevice
@@ -416,6 +431,21 @@ mod pixel_shader {
 
 
 
+/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dvertexshader9)\]
+/// IDirect3DVertexShader9 extension methods
+///
+/// ### Methods
+///
+/// | thin3d9                                                       | docs.microsoft.com    | Description |
+/// | ------------------------------------------------------------- | --------------------- | ----------- |
+/// | [get_device](Self::get_device)                                | [GetDevice]           | Gets the device.
+/// | [get_function_size](Self::get_function_size)                  | [GetFunction]         | Gets the size of the shader function data.
+/// | [get_function_inplace](Self::get_function_inplace)            | [GetFunction]         | Gets the shader function data.
+/// | [get_function](Self::get_function)                            | [GetFunction]         | Gets the shader function data.
+///
+/// [GetDevice]:    https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexshader9-getdevice
+/// [GetFunction]:  https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexshader9-getfunction
+///
 pub trait IDirect3DVertexShader9Ext : vertex_shader::Sealed {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexshader9-getdevice)\]
     /// IDirect3DVertexShader9::GetDevice
