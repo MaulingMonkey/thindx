@@ -328,6 +328,21 @@ impl Device {
 
 
 
+/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dindexbuffer9)\]
+/// IDirect3DIndexBuffer9 extension methods
+///
+/// ### Methods
+///
+/// | thin3d9                                   | docs.microsoft.com    | Description |
+/// | ----------------------------------------- | --------------------- | ----------- |
+/// | [get_desc](Self::get_desc)                | [GetDesc]             | Retrieves a description of the index buffer.
+/// | [lock_unchecked](Self::lock_unchecked)    | [Lock]                | Locks a range of index data, and obtains a pointer to the index buffer memory.
+/// | [unlock](Self::unlock)                    | [Unlock]              | Unlocks index data.
+///
+/// [GetDesc]:  https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dindexbuffer9-getdesc
+/// [Lock]:     https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dindexbuffer9-lock
+/// [Unlock]:   https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dindexbuffer9-unlock
+///
 pub trait IDirect3DIndexBuffer9Ext : index_buffer::Sealed {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dindexbuffer9-getdesc)\]
     /// IDirect3DIndexBuffer9::GetDesc
@@ -360,6 +375,8 @@ pub trait IDirect3DIndexBuffer9Ext : index_buffer::Sealed {
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dindexbuffer9-lock)\]
     /// IDirect3DIndexBuffer9::Lock
+    ///
+    /// Locks a range of index data, and obtains a pointer to the index buffer memory.
     ///
     /// ### Safety
     ///
@@ -397,6 +414,8 @@ pub trait IDirect3DIndexBuffer9Ext : index_buffer::Sealed {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dindexbuffer9-unlock)\]
     /// IDirect3DIndexBuffer9::Unlock
     ///
+    /// Unlocks index data.
+    ///
     /// ### Example
     ///
     /// ```rust
@@ -426,6 +445,21 @@ mod index_buffer {
 
 
 
+/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dvertexbuffer9)\]
+/// IDirect3DVertexBuffer9 extension methods
+///
+/// ### Methods
+///
+/// | thin3d9                                   | docs.microsoft.com    | Description |
+/// | ----------------------------------------- | --------------------- | ----------- |
+/// | [get_desc](Self::get_desc)                | [GetDesc]             | Retrieves a description of the vertex buffer.
+/// | [lock_unchecked](Self::lock_unchecked)    | [Lock]                | Locks a range of vertex data, and obtains a pointer to the vertex buffer memory.
+/// | [unlock](Self::unlock)                    | [Unlock]              | Unlocks vertex data.
+///
+/// [GetDesc]:  https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexbuffer9-getdesc
+/// [Lock]:     https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexbuffer9-lock
+/// [Unlock]:   https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexbuffer9-unlock
+///
 pub trait IDirect3DVertexBuffer9Ext : vertex_buffer::Sealed {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexbuffer9-getdesc)\]
     /// IDirect3DVertexBuffer9::GetDesc
@@ -459,6 +493,8 @@ pub trait IDirect3DVertexBuffer9Ext : vertex_buffer::Sealed {
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexbuffer9-lock)\]
     /// IDirect3DVertexBuffer9::Lock
+    ///
+    /// Locks a range of vertex data, and obtains a pointer to the vertex buffer memory.
     ///
     /// ### Safety
     ///
@@ -499,6 +535,8 @@ pub trait IDirect3DVertexBuffer9Ext : vertex_buffer::Sealed {
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexbuffer9-unlock)\]
     /// IDirect3DVertexBuffer9::Unlock
+    ///
+    /// Unlocks vertex data.
     ///
     /// ### Example
     ///
