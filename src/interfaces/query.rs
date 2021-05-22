@@ -39,6 +39,27 @@ impl Device {
 
 
 
+/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dquery9)\]
+///IDirect3DQuery9 extension methods
+///
+/// ### Methods
+///
+/// | thin3d9                                   | docs.microsoft.com    | Description |
+/// | ----------------------------------------- | --------------------- | ----------- |
+/// | [get_data](Self::get_data_inplace)        | [GetData]             | Polls a queried resource to get the query state or a query result. For more information about queries, see [Queries (Direct3D 9)].
+/// | [get_data_size](Self::get_data_size)      | [GetDataSize]         | Gets the number of bytes in the query data.
+/// | [get_device](Self::get_device)            | [GetDevice]           | Gets the device that is being queried.
+/// | [get_type](Self::get_type)                | [GetType]             | Gets the query type.
+/// | [issue](Self::issue)                      | [Issue]               | Issue a query.
+///
+/// [GetData]:              https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dquery9-getdata
+/// [GetDataSize]:          https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dquery9-getdatasize
+/// [GetDevice]:            https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dquery9-getdevice
+/// [GetType]:              https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dquery9-gettype
+/// [Issue]:                https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dquery9-issue
+///
+/// [Queries (Direct3D 9)]: https://docs.microsoft.com/en-us/windows/win32/direct3d9/queries
+///
 pub trait IDirect3DQuery9Ext : private::Sealed {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dquery9-getdata)\]
     /// IDirect3DQuery9::GetData
