@@ -274,6 +274,27 @@ impl SafeDevice {
 
 
 
+/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dbasetexture9)\]
+/// IDirect3DBaseTexture9 extension methods
+///
+/// ### Methods
+///
+/// | thin3d9                                                       | docs.microsoft.com        | Description |
+/// | ------------------------------------------------------------- | ------------------------- | ----------- |
+/// | [generate_mip_sub_levels](Self::generate_mip_sub_levels)      | [GenerateMipSubLevels]    | Generate mipmap sublevels.
+/// | [get_auto_gen_filter_type](Self::get_auto_gen_filter_type)    | [GetAutoGenFilterType]    | Get the filter type that is used for automatically generated mipmap sublevels.
+/// | [get_level_count](Self::get_level_count)                      | [GetLevelCount]           | Returns the number of texture levels in a multilevel texture.
+/// | [get_lod](Self::get_lod)                                      | [GetLOD]                  | Returns a value clamped to the maximum level-of-detail set for a managed texture (this method is not supported for an unmanaged texture).
+/// | [set_auto_gen_filter_type](Self::set_auto_gen_filter_type)    | [SetAutoGenFilterType]    | Set the filter type that is used for automatically generated mipmap sublevels.
+/// | [set_lod](Self::set_lod)                                      | [SetLOD]                  | Sets the most detailed level-of-detail for a managed texture.
+///
+/// [GenerateMipSubLevels]: https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-generatemipsublevels
+/// [GetAutoGenFilterType]: https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-getautogenfiltertype
+/// [GetLevelCount]:        https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-getlevelcount
+/// [GetLOD]:               https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-getlod
+/// [SetAutoGenFilterType]: https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-setautogenfiltertype
+/// [SetLOD]:               https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-setlod
+///
 pub trait IDirect3DBaseTexture9Ext : base_texture::Sealed {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-generatemipsublevels)\]
     /// IDirect3DBaseTexture9::GenerateMipSubLevels
@@ -456,6 +477,40 @@ mod base_texture {
 
 
 
+/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dcubetexture9)\]
+/// IDirect3DCubeTexture9 extension methods
+///
+/// ### Methods
+///
+/// | thin3d9                                                                           | docs.microsoft.com        | Description |
+/// | --------------------------------------------------------------------------------- | ------------------------- | ----------- |
+/// | [add_dirty_rect](Self::add_dirty_rect)                                            | [AddDirtyRect]            | Adds a dirty region to a cube texture resource.
+/// | [get_cube_map_surface](Self::get_cube_map_surface)                                | [GetCubeMapSurface]       | Retrieves a cube texture map surface.
+/// | [get_level_desc](Self::get_level_desc)                                            | [GetLevelDesc]            | Retrieves a description of one face of the specified cube texture level.
+/// | [lock_rect_unchecked](Self::lock_rect_unchecked)                                  | [LockRect]                | Locks a rectangle on a cube texture resource.
+/// | [unlock_rect](Self::unlock_rect)                                                  | [UnlockRect]              | Unlocks a rectangle on a cube texture resource.
+/// | **[IDirect3DBaseTexture9Ext]::\***                                                | **[IDirect3DBaseTexture9]::\***   |
+/// | [generate_mip_sub_levels](IDirect3DBaseTexture9Ext::generate_mip_sub_levels)      | [GenerateMipSubLevels]    | Generate mipmap sublevels.
+/// | [get_auto_gen_filter_type](IDirect3DBaseTexture9Ext::get_auto_gen_filter_type)    | [GetAutoGenFilterType]    | Get the filter type that is used for automatically generated mipmap sublevels.
+/// | [get_level_count](IDirect3DBaseTexture9Ext::get_level_count)                      | [GetLevelCount]           | Returns the number of texture levels in a multilevel texture.
+/// | [get_lod](IDirect3DBaseTexture9Ext::get_lod)                                      | [GetLOD]                  | Returns a value clamped to the maximum level-of-detail set for a managed texture (this method is not supported for an unmanaged texture).
+/// | [set_auto_gen_filter_type](IDirect3DBaseTexture9Ext::set_auto_gen_filter_type)    | [SetAutoGenFilterType]    | Set the filter type that is used for automatically generated mipmap sublevels.
+/// | [set_lod](IDirect3DBaseTexture9Ext::set_lod)                                      | [SetLOD]                  | Sets the most detailed level-of-detail for a managed texture.
+///
+/// [AddDirtyRect]:             https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcubetexture9-adddirtyrect
+/// [GetCubeMapSurface]:        https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcubetexture9-getcubemapsurface
+/// [GetLevelDesc]:             https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcubetexture9-getleveldesc
+/// [LockRect]:                 https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcubetexture9-lockrect
+/// [UnlockRect]:               https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcubetexture9-unlockrect
+///
+/// [IDirect3DBaseTexture9]:    https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dbasetexture9
+/// [GenerateMipSubLevels]:     https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-generatemipsublevels
+/// [GetAutoGenFilterType]:     https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-getautogenfiltertype
+/// [GetLevelCount]:            https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-getlevelcount
+/// [GetLOD]:                   https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-getlod
+/// [SetAutoGenFilterType]:     https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-setautogenfiltertype
+/// [SetLOD]:                   https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-setlod
+///
 pub trait IDirect3DCubeTexture9Ext : cube_texture::Sealed {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcubetexture9-adddirtyrect)\]
     /// IDirect3DCubeTexture9::AddDirtyRect
@@ -629,6 +684,40 @@ mod cube_texture {
 
 
 
+/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dtexture9)\]
+/// IDirect3DTexture9 extension methods
+///
+/// ### Methods
+///
+/// | thin3d9                                                                           | docs.microsoft.com        | Description |
+/// | --------------------------------------------------------------------------------- | ------------------------- | ----------- |
+/// | [add_dirty_rect](Self::add_dirty_rect)                                            | [AddDirtyRect]            | Adds a dirty region to a texture resource.
+/// | [get_level_desc](Self::get_level_desc)                                            | [GetLevelDesc]            | Retrieves a level description of a texture resource.
+/// | [get_surface_level](Self::get_surface_level)                                      | [GetSurfaceLevel]         | Retrieves the specified texture surface level.
+/// | [lock_rect_unchecked](Self::lock_rect_unchecked)                                  | [LockRect]                | Locks a rectangle on a texture resource.
+/// | [unlock_rect](Self::unlock_rect)                                                  | [UnlockRect]              | Unlocks a rectangle on a texture resource.
+/// | **[IDirect3DBaseTexture9Ext]::\***                                                | **[IDirect3DBaseTexture9]::\***   |
+/// | [generate_mip_sub_levels](IDirect3DBaseTexture9Ext::generate_mip_sub_levels)      | [GenerateMipSubLevels]    | Generate mipmap sublevels.
+/// | [get_auto_gen_filter_type](IDirect3DBaseTexture9Ext::get_auto_gen_filter_type)    | [GetAutoGenFilterType]    | Get the filter type that is used for automatically generated mipmap sublevels.
+/// | [get_level_count](IDirect3DBaseTexture9Ext::get_level_count)                      | [GetLevelCount]           | Returns the number of texture levels in a multilevel texture.
+/// | [get_lod](IDirect3DBaseTexture9Ext::get_lod)                                      | [GetLOD]                  | Returns a value clamped to the maximum level-of-detail set for a managed texture (this method is not supported for an unmanaged texture).
+/// | [set_auto_gen_filter_type](IDirect3DBaseTexture9Ext::set_auto_gen_filter_type)    | [SetAutoGenFilterType]    | Set the filter type that is used for automatically generated mipmap sublevels.
+/// | [set_lod](IDirect3DBaseTexture9Ext::set_lod)                                      | [SetLOD]                  | Sets the most detailed level-of-detail for a managed texture.
+///
+/// [AddDirtyRect]:             https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dtexture9-adddirtyrect
+/// [GetLevelDesc]:             https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dtexture9-getleveldesc
+/// [GetSurfaceLevel]:          https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dtexture9-getsurfacelevel
+/// [LockRect]:                 https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dtexture9-lockrect
+/// [UnlockRect]:               https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dtexture9-unlockrect
+///
+/// [IDirect3DBaseTexture9]:    https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dbasetexture9
+/// [GenerateMipSubLevels]:     https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-generatemipsublevels
+/// [GetAutoGenFilterType]:     https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-getautogenfiltertype
+/// [GetLevelCount]:            https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-getlevelcount
+/// [GetLOD]:                   https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-getlod
+/// [SetAutoGenFilterType]:     https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-setautogenfiltertype
+/// [SetLOD]:                   https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-setlod
+///
 pub trait IDirect3DTexture9Ext : texture::Sealed {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dtexture9-adddirtyrect)\]
     /// IDirect3DTexture9::AddDirtyRect
@@ -797,6 +886,40 @@ mod texture {
 
 
 
+/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dvolumetexture9)\]
+/// IDirect3DVolumeTexture9 extension methods
+///
+/// ### Methods
+///
+/// | thin3d9                                                                           | docs.microsoft.com        | Description |
+/// | --------------------------------------------------------------------------------- | ------------------------- | ----------- |
+/// | [add_dirty_box](Self::add_dirty_box)                                              | [AddDirtyBox]             | Adds a dirty region to a volume texture resource.
+/// | [get_level_desc](Self::get_level_desc)                                            | [GetLevelDesc]            | Retrieves a level description of a volume texture resource.
+/// | [get_volume_level](Self::get_volume_level)                                        | [GetVolumeLevel]          | Retrieves the specified volume texture level.
+/// | [lock_box_unchecked](Self::lock_box_unchecked)                                    | [LockBox]                 | Locks a box on a volume texture resource.
+/// | [unlock_box](Self::unlock_box)                                                    | [UnlockBox]               | Unlocks a box on a volume texture resource.
+/// | **[IDirect3DBaseTexture9Ext]::\***                                                | **[IDirect3DBaseTexture9]::\***   |
+/// | [generate_mip_sub_levels](IDirect3DBaseTexture9Ext::generate_mip_sub_levels)      | [GenerateMipSubLevels]    | Generate mipmap sublevels.
+/// | [get_auto_gen_filter_type](IDirect3DBaseTexture9Ext::get_auto_gen_filter_type)    | [GetAutoGenFilterType]    | Get the filter type that is used for automatically generated mipmap sublevels.
+/// | [get_level_count](IDirect3DBaseTexture9Ext::get_level_count)                      | [GetLevelCount]           | Returns the number of texture levels in a multilevel texture.
+/// | [get_lod](IDirect3DBaseTexture9Ext::get_lod)                                      | [GetLOD]                  | Returns a value clamped to the maximum level-of-detail set for a managed texture (this method is not supported for an unmanaged texture).
+/// | [set_auto_gen_filter_type](IDirect3DBaseTexture9Ext::set_auto_gen_filter_type)    | [SetAutoGenFilterType]    | Set the filter type that is used for automatically generated mipmap sublevels.
+/// | [set_lod](IDirect3DBaseTexture9Ext::set_lod)                                      | [SetLOD]                  | Sets the most detailed level-of-detail for a managed texture.
+///
+/// [AddDirtyBox]:              https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolumetexture9-adddirtybox
+/// [GetLevelDesc]:             https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolumetexture9-getleveldesc
+/// [GetVolumeLevel]:           https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolumetexture9-getvolumelevel
+/// [LockBox]:                  https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolumetexture9-lockbox
+/// [UnlockBox]:                https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolumetexture9-unlockbox
+///
+/// [IDirect3DBaseTexture9]:    https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dbasetexture9
+/// [GenerateMipSubLevels]:     https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-generatemipsublevels
+/// [GetAutoGenFilterType]:     https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-getautogenfiltertype
+/// [GetLevelCount]:            https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-getlevelcount
+/// [GetLOD]:                   https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-getlod
+/// [SetAutoGenFilterType]:     https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-setautogenfiltertype
+/// [SetLOD]:                   https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-setlod
+///
 pub trait IDirect3DVolumeTexture9Ext : volume_texture::Sealed {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolumetexture9-adddirtybox)\]
     /// IDirect3DVolumeTexture9::AddDirtyBox
