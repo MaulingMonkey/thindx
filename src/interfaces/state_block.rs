@@ -93,7 +93,7 @@ impl Device {
 
 
 
-impl StateBlock {
+pub trait IDirect3DStateBlock9Ext : private::Sealed {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dstateblock9-apply)\]
     /// IDirect3DStateBlock9::Apply
     ///
@@ -103,8 +103,8 @@ impl StateBlock {
     ///
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok(`()`)
-    pub fn apply(&self) -> Result<(), MethodError> {
-        let hr = unsafe { self.0.Apply() };
+    fn apply(&self) -> Result<(), MethodError> {
+        let hr = unsafe { self.as_winapi().Apply() };
         MethodError::check("IDirect3DStateBlock9::Apply", hr)
     }
 
@@ -117,8 +117,8 @@ impl StateBlock {
     ///
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok(`()`)
-    pub fn capture(&self) -> Result<(), MethodError> {
-        let hr = unsafe { self.0.Capture() };
+    fn capture(&self) -> Result<(), MethodError> {
+        let hr = unsafe { self.as_winapi().Capture() };
         MethodError::check("IDirect3DStateBlock9::Capture", hr)
     }
 
@@ -131,10 +131,19 @@ impl StateBlock {
     ///
     /// *   [D3DERR::INVALIDCALL]   (Pure device?)
     /// *   Ok([Device])
-    pub fn get_device(&self) -> Result<Device, MethodError> {
+    fn get_device(&self) -> Result<Device, MethodError> {
         let mut device = null_mut();
-        let hr = unsafe { self.0.GetDevice(&mut device) };
+        let hr = unsafe { self.as_winapi().GetDevice(&mut device) };
         MethodError::check("IDirect3DStateBlock9::GetDevice", hr)?;
         Ok(unsafe { Device::from_raw(device) })
     }
+}
+
+impl<T: private::Sealed> IDirect3DStateBlock9Ext for T {}
+
+mod private {
+    use winapi::shared::d3d9::IDirect3DStateBlock9;
+    pub unsafe trait Sealed { fn as_winapi(&self) -> &IDirect3DStateBlock9; }
+    unsafe impl Sealed for mcom::Rc<IDirect3DStateBlock9>   { fn as_winapi(&self) -> &IDirect3DStateBlock9 { &**self } }
+    unsafe impl Sealed for super::StateBlock                { fn as_winapi(&self) -> &IDirect3DStateBlock9 { &*self.0 } }
 }

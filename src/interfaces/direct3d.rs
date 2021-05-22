@@ -22,7 +22,7 @@ pub struct Direct3D(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3D9>);
 
 
 
-impl Direct3D {
+pub trait IDirect3D9Ext : private::Sealed {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-direct3dcreate9)\]
     /// Direct3DCreate9
     ///
@@ -51,10 +51,19 @@ impl Direct3D {
     /// let d3d = unsafe { Direct3D::create(SdkVersion::default()) }.unwrap();
     /// drop_final(d3d);
     /// ```
-    pub unsafe fn create(sdk_version: SdkVersion) -> Result<Self, ()> {
+    unsafe fn create(sdk_version: SdkVersion) -> Result<Self, ()> {
         let d3d9 = Direct3DCreate9(sdk_version.into());
-        Rc::from_raw_opt(d3d9).ok_or(()).map(Self)
+        Rc::from_raw_opt(d3d9).ok_or(()).map(Self::from)
     }
+}
+
+impl<T: private::Sealed> IDirect3D9Ext for T {}
+
+mod private {
+    use winapi::shared::d3d9::IDirect3D9;
+    pub unsafe trait Sealed : From<mcom::Rc<IDirect3D9>>    { fn as_winapi(&self) -> &IDirect3D9; }
+    unsafe impl Sealed for mcom::Rc<IDirect3D9>             { fn as_winapi(&self) -> &IDirect3D9 { &**self } }
+    unsafe impl Sealed for super::Direct3D                  { fn as_winapi(&self) -> &IDirect3D9 { &*self.0 } }
 }
 
 #[test] fn create() {

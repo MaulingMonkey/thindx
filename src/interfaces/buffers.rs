@@ -328,7 +328,7 @@ impl Device {
 
 
 
-impl IndexBuffer {
+pub trait IDirect3DIndexBuffer9Ext : index_buffer::Sealed {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dindexbuffer9-getdesc)\]
     /// IDirect3DIndexBuffer9::GetDesc
     ///
@@ -351,9 +351,9 @@ impl IndexBuffer {
     ///
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok([IndexBufferDesc])
-    pub fn get_desc(&self) -> Result<IndexBufferDesc, MethodError> {
+    fn get_desc(&self) -> Result<IndexBufferDesc, MethodError> {
         let mut desc = IndexBufferDesc::default();
-        let hr = unsafe { self.0.GetDesc(&mut *desc) };
+        let hr = unsafe { self.as_winapi().GetDesc(&mut *desc) };
         MethodError::check("IDirect3DIndexBuffer9::GetDesc", hr)?;
         Ok(desc)
     }
@@ -387,9 +387,9 @@ impl IndexBuffer {
     ///
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok(data)
-    pub unsafe fn lock_unchecked(&self, offset: u32, size: u32, flags: impl Into<Lock>) -> Result<*mut c_void, MethodError> {
+    unsafe fn lock_unchecked(&self, offset: u32, size: u32, flags: impl Into<Lock>) -> Result<*mut c_void, MethodError> {
         let mut data = null_mut();
-        let hr = self.0.Lock(offset, size, &mut data, flags.into().into());
+        let hr = self.as_winapi().Lock(offset, size, &mut data, flags.into().into());
         MethodError::check("IDirect3DIndexBuffer9::Lock", hr)?;
         Ok(data)
     }
@@ -409,15 +409,24 @@ impl IndexBuffer {
     ///
     /// *   [D3DERR::INVALIDCALL]   The index buffer wasn't locked?
     /// *   Ok(`()`)
-    pub fn unlock(&self) -> Result<(), MethodError> {
-        let hr = unsafe { self.0.Unlock() };
+    fn unlock(&self) -> Result<(), MethodError> {
+        let hr = unsafe { self.as_winapi().Unlock() };
         MethodError::check("IDirect3DIndexBuffer9::Unlock", hr)
     }
 }
 
+impl<T: index_buffer::Sealed> IDirect3DIndexBuffer9Ext for T {}
+
+mod index_buffer {
+    use winapi::shared::d3d9::IDirect3DIndexBuffer9;
+    pub unsafe trait Sealed                                 { fn as_winapi(&self) -> &IDirect3DIndexBuffer9; }
+    unsafe impl Sealed for mcom::Rc<IDirect3DIndexBuffer9>  { fn as_winapi(&self) -> &IDirect3DIndexBuffer9 { &**self } }
+    unsafe impl Sealed for super::IndexBuffer               { fn as_winapi(&self) -> &IDirect3DIndexBuffer9 { &*self.0 } }
+}
 
 
-impl VertexBuffer {
+
+pub trait IDirect3DVertexBuffer9Ext : vertex_buffer::Sealed {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexbuffer9-getdesc)\]
     /// IDirect3DVertexBuffer9::GetDesc
     ///
@@ -441,9 +450,9 @@ impl VertexBuffer {
     ///
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok([VertexBufferDesc])
-    pub fn get_desc(&self) -> Result<VertexBufferDesc, MethodError> {
+    fn get_desc(&self) -> Result<VertexBufferDesc, MethodError> {
         let mut desc = VertexBufferDesc::default();
-        let hr = unsafe { self.0.GetDesc(&mut *desc) };
+        let hr = unsafe { self.as_winapi().GetDesc(&mut *desc) };
         MethodError::check("IDirect3DVertexBuffer9::GetDesc", hr)?;
         Ok(desc)
     }
@@ -481,9 +490,9 @@ impl VertexBuffer {
     ///
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok(data)
-    pub unsafe fn lock_unchecked(&self, offset: u32, size: u32, flags: impl Into<Lock>) -> Result<*mut c_void, MethodError> {
+    unsafe fn lock_unchecked(&self, offset: u32, size: u32, flags: impl Into<Lock>) -> Result<*mut c_void, MethodError> {
         let mut data = null_mut();
-        let hr = self.0.Lock(offset, size, &mut data, flags.into().into());
+        let hr = self.as_winapi().Lock(offset, size, &mut data, flags.into().into());
         MethodError::check("IDirect3DVertexBuffer9::Lock", hr)?;
         Ok(data)
     }
@@ -503,10 +512,19 @@ impl VertexBuffer {
     ///
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok(`()`)
-    pub fn unlock(&self) -> Result<(), MethodError> {
-        let hr = unsafe { self.0.Unlock() };
+    fn unlock(&self) -> Result<(), MethodError> {
+        let hr = unsafe { self.as_winapi().Unlock() };
         MethodError::check("IDirect3DVertexBuffer9::Unlock", hr)
     }
+}
+
+impl<T: vertex_buffer::Sealed> IDirect3DVertexBuffer9Ext for T {}
+
+mod vertex_buffer {
+    use winapi::shared::d3d9::IDirect3DVertexBuffer9;
+    pub unsafe trait Sealed                                 { fn as_winapi(&self) -> &IDirect3DVertexBuffer9; }
+    unsafe impl Sealed for mcom::Rc<IDirect3DVertexBuffer9> { fn as_winapi(&self) -> &IDirect3DVertexBuffer9 { &**self } }
+    unsafe impl Sealed for super::VertexBuffer              { fn as_winapi(&self) -> &IDirect3DVertexBuffer9 { &*self.0 } }
 }
 
 

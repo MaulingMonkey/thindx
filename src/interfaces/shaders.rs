@@ -336,7 +336,7 @@ impl Device {
 
 
 
-impl PixelShader {
+pub trait IDirect3DPixelShader9Ext : pixel_shader::Sealed {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dpixelshader9-getdevice)\]
     /// IDirect3DPixelShader9::GetDevice
     ///
@@ -346,9 +346,9 @@ impl PixelShader {
     ///
     /// *   [D3DERR::INVALIDCALL]   The device was pure?
     /// *   Ok([Device])
-    pub fn get_device(&self) -> Result<Device, MethodError> {
+    fn get_device(&self) -> Result<Device, MethodError> {
         let mut device = null_mut();
-        let hr = unsafe { self.0.GetDevice(&mut device) };
+        let hr = unsafe { self.as_winapi().GetDevice(&mut device) };
         MethodError::check("IDirect3DPixelShader9::GetDevice", hr)?;
         Ok(unsafe { Device::from_raw(device) })
     }
@@ -362,9 +362,9 @@ impl PixelShader {
     ///
     /// *   [D3DERR::INVALIDCALL]   The device was pure?
     /// *   Ok(`size`)
-    pub fn get_function_size(&self) -> Result<u32, MethodError> {
+    fn get_function_size(&self) -> Result<u32, MethodError> {
         let mut size = 0;
-        let hr = unsafe { self.0.GetFunction(null_mut(), &mut size) };
+        let hr = unsafe { self.as_winapi().GetFunction(null_mut(), &mut size) };
         MethodError::check("IDirect3DPixelShader9::GetFunction", hr)?;
         Ok(size)
     }
@@ -378,10 +378,10 @@ impl PixelShader {
     ///
     /// *   [D3DERR::INVALIDCALL]   The device was pure?
     /// *   Ok(`&data[???]`)        Function data was read
-    pub fn get_function_inplace<'d>(&self, data: &'d mut [u8]) -> Result<&'d [u8], MethodError> {
+    fn get_function_inplace<'d>(&self, data: &'d mut [u8]) -> Result<&'d [u8], MethodError> {
         let mut size = data.len().try_into().map_err(|_| MethodError("PixelShader::get_function_inplace", D3DERR::INVALIDCALL))?;
         // XXX: Do I need a get_function_size check in here too?
-        let hr = unsafe { self.0.GetFunction(data.as_mut_ptr().cast(), &mut size) };
+        let hr = unsafe { self.as_winapi().GetFunction(data.as_mut_ptr().cast(), &mut size) };
         MethodError::check("IDirect3DPixelShader9::GetFunction", hr)?;
         Ok(&data[0..(size as usize)])
     }
@@ -395,19 +395,28 @@ impl PixelShader {
     ///
     /// *   [D3DERR::INVALIDCALL]   The device was pure?
     /// *   Ok([Vec]&lt;[u8]&gt;)    Function data was read
-    pub fn get_function(&self) -> Result<Vec<u8>, MethodError> {
+    fn get_function(&self) -> Result<Vec<u8>, MethodError> {
         let mut size = self.get_function_size()?;
         let mut data = vec![0u8; size as usize];
-        let hr = unsafe { self.0.GetFunction(data.as_mut_ptr().cast(), &mut size) };
+        let hr = unsafe { self.as_winapi().GetFunction(data.as_mut_ptr().cast(), &mut size) };
         MethodError::check("IDirect3DPixelShader9::GetFunction", hr)?;
         debug_assert_eq!(data.len(), size as usize);
         Ok(data)
     }
 }
 
+impl<T: pixel_shader::Sealed> IDirect3DPixelShader9Ext for T {}
+
+mod pixel_shader {
+    use winapi::shared::d3d9::IDirect3DPixelShader9;
+    pub unsafe trait Sealed                                 { fn as_winapi(&self) -> &IDirect3DPixelShader9; }
+    unsafe impl Sealed for mcom::Rc<IDirect3DPixelShader9>  { fn as_winapi(&self) -> &IDirect3DPixelShader9 { &**self } }
+    unsafe impl Sealed for super::PixelShader               { fn as_winapi(&self) -> &IDirect3DPixelShader9 { &*self.0 } }
+}
 
 
-impl VertexShader {
+
+pub trait IDirect3DVertexShader9Ext : vertex_shader::Sealed {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexshader9-getdevice)\]
     /// IDirect3DVertexShader9::GetDevice
     ///
@@ -417,9 +426,9 @@ impl VertexShader {
     ///
     /// *   [D3DERR::INVALIDCALL]   The device was pure?
     /// *   Ok([Device])
-    pub fn get_device(&self) -> Result<Device, MethodError> {
+    fn get_device(&self) -> Result<Device, MethodError> {
         let mut device = null_mut();
-        let hr = unsafe { self.0.GetDevice(&mut device) };
+        let hr = unsafe { self.as_winapi().GetDevice(&mut device) };
         MethodError::check("IDirect3DVertexShader9::GetDevice", hr)?;
         Ok(unsafe { Device::from_raw(device) })
     }
@@ -433,9 +442,9 @@ impl VertexShader {
     ///
     /// *   [D3DERR::INVALIDCALL]   The device was pure?
     /// *   Ok(`size`)
-    pub fn get_function_size(&self) -> Result<u32, MethodError> {
+    fn get_function_size(&self) -> Result<u32, MethodError> {
         let mut size = 0;
-        let hr = unsafe { self.0.GetFunction(null_mut(), &mut size) };
+        let hr = unsafe { self.as_winapi().GetFunction(null_mut(), &mut size) };
         MethodError::check("IDirect3DVertexShader9::GetFunction", hr)?;
         Ok(size)
     }
@@ -449,10 +458,10 @@ impl VertexShader {
     ///
     /// *   [D3DERR::INVALIDCALL]   The device was pure?
     /// *   Ok(`&data[???]`)        Function data was read
-    pub fn get_function_inplace<'d>(&self, data: &'d mut [u8]) -> Result<&'d [u8], MethodError> {
+    fn get_function_inplace<'d>(&self, data: &'d mut [u8]) -> Result<&'d [u8], MethodError> {
         let mut size = data.len().try_into().map_err(|_| MethodError("VertexShader::get_function_inplace", D3DERR::INVALIDCALL))?;
         // XXX: Do I need a get_function_size check in here too?
-        let hr = unsafe { self.0.GetFunction(data.as_mut_ptr().cast(), &mut size) };
+        let hr = unsafe { self.as_winapi().GetFunction(data.as_mut_ptr().cast(), &mut size) };
         MethodError::check("IDirect3DVertexShader9::GetFunction", hr)?;
         Ok(&data[0..(size as usize)])
     }
@@ -466,14 +475,23 @@ impl VertexShader {
     ///
     /// *   [D3DERR::INVALIDCALL]   The device was pure?
     /// *   Ok([Vec]&lt;[u8]&gt;)    Function data was read
-    pub fn get_function(&self) -> Result<Vec<u8>, MethodError> {
+    fn get_function(&self) -> Result<Vec<u8>, MethodError> {
         let mut size = self.get_function_size()?;
         let mut data = vec![0u8; size as usize];
-        let hr = unsafe { self.0.GetFunction(data.as_mut_ptr().cast(), &mut size) };
+        let hr = unsafe { self.as_winapi().GetFunction(data.as_mut_ptr().cast(), &mut size) };
         MethodError::check("IDirect3DVertexShader9::GetFunction", hr)?;
         debug_assert_eq!(data.len(), size as usize);
         Ok(data)
     }
+}
+
+impl<T: vertex_shader::Sealed> IDirect3DVertexShader9Ext for T {}
+
+mod vertex_shader {
+    use winapi::shared::d3d9::IDirect3DVertexShader9;
+    pub unsafe trait Sealed                                 { fn as_winapi(&self) -> &IDirect3DVertexShader9; }
+    unsafe impl Sealed for mcom::Rc<IDirect3DVertexShader9> { fn as_winapi(&self) -> &IDirect3DVertexShader9 { &**self } }
+    unsafe impl Sealed for super::VertexShader              { fn as_winapi(&self) -> &IDirect3DVertexShader9 { &*self.0 } }
 }
 
 // TODO: testing, glorious testing

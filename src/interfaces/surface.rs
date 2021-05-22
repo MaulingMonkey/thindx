@@ -209,7 +209,7 @@ impl Device {
 
 
 
-impl Surface {
+pub trait IDirect3DSurface9Ext : private::Sealed {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3dsurface9-getcontainer)\]
     /// IDirect3DSurface9::GetContainer
     ///
@@ -229,9 +229,9 @@ impl Surface {
     /// let texture = surface.get_container::<Texture>().unwrap();
     /// assert_eq!(D3DERR::NOINTERFACE, surface.get_container::<Device>().err());
     /// ```
-    pub fn get_container<C: Raw>(&self) -> Result<C, MethodError> where C::Raw : Interface {
+    fn get_container<C: Raw>(&self) -> Result<C, MethodError> where C::Raw : Interface {
         let mut container = null_mut();
-        let hr = unsafe { self.0.GetContainer(&C::Raw::uuidof(), &mut container) };
+        let hr = unsafe { self.as_winapi().GetContainer(&C::Raw::uuidof(), &mut container) };
         MethodError::check("IDirect3DVolume9::GetContainer", hr)?;
         Ok(unsafe { C::from_raw(container.cast()) })
     }
@@ -256,9 +256,9 @@ impl Surface {
     ///
     /// assert_eq!(D3DERR::INVALIDCALL, surface.get_dc().err(), "HDC already acquired");
     /// ```
-    pub fn get_dc(&self) -> Result<HDC, MethodError> {
+    fn get_dc(&self) -> Result<HDC, MethodError> {
         let mut hdc = null_mut();
-        let hr = unsafe { self.0.GetDC(&mut hdc) };
+        let hr = unsafe { self.as_winapi().GetDC(&mut hdc) };
         MethodError::check("IDirect3DSurface9::GetDC", hr)?;
         Ok(hdc)
     }
@@ -283,9 +283,9 @@ impl Surface {
     /// assert_eq!(desc.height, 128);
     /// // ...
     /// ```
-    pub fn get_desc(&self) -> Result<SurfaceDesc, MethodError> {
+    fn get_desc(&self) -> Result<SurfaceDesc, MethodError> {
         let mut desc = SurfaceDesc::default();
-        let hr = unsafe { self.0.GetDesc(&mut *desc) };
+        let hr = unsafe { self.as_winapi().GetDesc(&mut *desc) };
         MethodError::check("IDirect3DSurface9::GetDesc", hr)?;
         Ok(desc)
     }
@@ -316,11 +316,11 @@ impl Surface {
     ///     surface.unlock_rect();
     /// }
     /// ```
-    pub unsafe fn lock_rect_unchecked(&self, rect: impl IntoRectOrFull, flags: impl Into<Lock>) -> Result<D3DLOCKED_RECT, MethodError> {
+    unsafe fn lock_rect_unchecked(&self, rect: impl IntoRectOrFull, flags: impl Into<Lock>) -> Result<D3DLOCKED_RECT, MethodError> {
         let rect = rect.into_rect();
         let rect = rect.as_ref().map_or(null(), |b| &**b);
         let mut locked = std::mem::zeroed::<D3DLOCKED_RECT>();
-        let hr = self.0.LockRect(&mut locked, rect.cast(), flags.into().into());
+        let hr = self.as_winapi().LockRect(&mut locked, rect.cast(), flags.into().into());
         MethodError::check("IDirect3DSurface9::LockRect", hr)?;
         Ok(locked)
     }
@@ -350,8 +350,8 @@ impl Surface {
     /// let dc = surface.get_dc().unwrap();
     /// surface.release_dc(dc).unwrap();
     /// ```
-    pub fn release_dc(&self, hdc: HDC) -> Result<(), MethodError> {
-        let hr = unsafe { self.0.ReleaseDC(hdc) };
+    fn release_dc(&self, hdc: HDC) -> Result<(), MethodError> {
+        let hr = unsafe { self.as_winapi().ReleaseDC(hdc) };
         MethodError::check("IDirect3DSurface9::ReleaseDC", hr)
     }
 
@@ -381,10 +381,19 @@ impl Surface {
     ///     surface.unlock_rect();
     /// }
     /// ```
-    pub fn unlock_rect(&self) -> Result<(), MethodError> {
-        let hr = unsafe { self.0.UnlockRect() };
+    fn unlock_rect(&self) -> Result<(), MethodError> {
+        let hr = unsafe { self.as_winapi().UnlockRect() };
         MethodError::check("IDirect3DSurface9::UnlockRect", hr)
     }
+}
+
+impl<T: private::Sealed> IDirect3DSurface9Ext for T {}
+
+mod private {
+    use winapi::shared::d3d9::IDirect3DSurface9;
+    pub unsafe trait Sealed                             { fn as_winapi(&self) -> &IDirect3DSurface9; }
+    unsafe impl Sealed for mcom::Rc<IDirect3DSurface9>  { fn as_winapi(&self) -> &IDirect3DSurface9 { &**self } }
+    unsafe impl Sealed for super::Surface               { fn as_winapi(&self) -> &IDirect3DSurface9 { &*self.0 } }
 }
 
 

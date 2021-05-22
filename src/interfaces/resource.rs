@@ -32,7 +32,7 @@ impl Resource {
     }
 }
 
-impl Resource {
+pub trait IDirect3DResource9Ext : private::Sealed {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-freeprivatedata)\]
     /// IDirect3DResource9::FreePrivateData
     ///
@@ -43,8 +43,8 @@ impl Resource {
     /// *   [D3DERR::INVALIDCALL]
     /// *   [D3DERR::NOTFOUND]
     /// *   Ok(`()`)
-    pub fn free_private_data(&self, guid: &GUID) -> Result<(), MethodError> {
-        let hr = unsafe { self.0.FreePrivateData(guid) };
+    fn free_private_data(&self, guid: &GUID) -> Result<(), MethodError> {
+        let hr = unsafe { self.as_winapi().FreePrivateData(guid) };
         MethodError::check("IDirect3DResource9::FreePrivateData", hr)
     }
 
@@ -57,9 +57,9 @@ impl Resource {
     ///
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok([Device])
-    pub fn get_device(&self) -> Result<Device, MethodError> {
+    fn get_device(&self) -> Result<Device, MethodError> {
         let mut device = null_mut();
-        let hr = unsafe { self.0.GetDevice(&mut device) };
+        let hr = unsafe { self.as_winapi().GetDevice(&mut device) };
         MethodError::check("IDirect3DResource9::GetDevice", hr)?;
         Ok(unsafe { Device::from_raw(device) })
     }
@@ -75,8 +75,8 @@ impl Resource {
     /// A resource assigned a low priority is removed before a resource with a high priority.
     /// If two resources have the same priority, the resource that was used more recently is kept in memory; the other resource is removed.
     /// Managed resources have a default priority of `0`.
-    pub fn get_priority(&self) -> u32 {
-        unsafe { self.0.GetPriority() }
+    fn get_priority(&self) -> u32 {
+        unsafe { self.as_winapi().GetPriority() }
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-getprivatedata)\]
@@ -90,9 +90,9 @@ impl Resource {
     /// *   [D3DERR::MOREDATA]
     /// *   [D3DERR::NOTFOUND]
     /// *   Ok(`read_slice`)
-    pub fn get_private_data_inplace<'s>(&self, guid: &GUID, data: &'s mut [u8]) -> Result<&'s [u8], MethodError> {
+    fn get_private_data_inplace<'s>(&self, guid: &GUID, data: &'s mut [u8]) -> Result<&'s [u8], MethodError> {
         let mut n : u32 = data.len().try_into().map_err(|_| MethodError("Resource::get_private_data_inplace", D3DERR::SLICE_OVERFLOW))?;
-        let hr = unsafe { self.0.GetPrivateData(guid, data.as_mut_ptr().cast(), &mut n) };
+        let hr = unsafe { self.as_winapi().GetPrivateData(guid, data.as_mut_ptr().cast(), &mut n) };
         MethodError::check("IDirect3DResource9::GetPrivateData", hr)?;
         Ok(&data[..(n as usize)])
     }
@@ -101,16 +101,16 @@ impl Resource {
     /// IDirect3DResource9::GetType
     ///
     /// Returns the type of the resource.
-    pub fn get_type(&self) -> ResourceType {
-        ResourceType::from_unchecked(unsafe { self.0.GetType() })
+    fn get_type(&self) -> ResourceType {
+        ResourceType::from_unchecked(unsafe { self.as_winapi().GetType() })
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-preload)\]
     /// IDirect3DResource9::PreLoad
     ///
     /// Preloads a managed resource.
-    pub fn preload(&self) {
-        unsafe { self.0.PreLoad() }
+    fn preload(&self) {
+        unsafe { self.as_winapi().PreLoad() }
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-setpriority)\]
@@ -119,9 +119,9 @@ impl Resource {
     /// ### Returns
     ///
     /// The previous priority
-    pub fn set_priority(&self, priority: u32) -> u32 {
+    fn set_priority(&self, priority: u32) -> u32 {
         // see also https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9-resource-priority
-        unsafe { self.0.SetPriority(priority) }
+        unsafe { self.as_winapi().SetPriority(priority) }
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-setprivatedata)\]
@@ -132,15 +132,38 @@ impl Resource {
     /// *   [D3DERR::INVALIDCALL]
     /// *   [D3DERR::OUTOFMEMORY]
     /// *   Ok(())
-    pub fn set_private_data(&self, guid: &GUID, data: &[u8]) -> Result<(), MethodError> {
+    fn set_private_data(&self, guid: &GUID, data: &[u8]) -> Result<(), MethodError> {
         let n : u32 = data.len().try_into().map_err(|_| MethodError("Resource::set_private_data", D3DERR::SLICE_OVERFLOW))?;
-        let hr = unsafe { self.0.SetPrivateData(guid, data.as_ptr().cast(), n, 0) };
+        let hr = unsafe { self.as_winapi().SetPrivateData(guid, data.as_ptr().cast(), n, 0) };
         MethodError::check("IDirect3DResource9::SetPrivateData", hr)
     }
 
     // TODO: set_private_data_unk
     // TODO: get_private_data_unk ?
     // figure out where unsoundness should lie - both of those fns?  set_private_data too, as it can invalidate unknown ptrs?
+}
+
+impl<T: private::Sealed> IDirect3DResource9Ext for T {}
+
+mod private {
+    use winapi::shared::d3d9::*;
+    pub unsafe trait Sealed                                     { fn as_winapi(&self) -> &IDirect3DResource9; }
+    unsafe impl Sealed for mcom::Rc<IDirect3DResource9>         { fn as_winapi(&self) -> &IDirect3DResource9 { &**self } }
+    unsafe impl Sealed for mcom::Rc<IDirect3DBaseTexture9>      { fn as_winapi(&self) -> &IDirect3DResource9 { &***self } }
+    unsafe impl Sealed for mcom::Rc<IDirect3DCubeTexture9>      { fn as_winapi(&self) -> &IDirect3DResource9 { &****self } }
+    unsafe impl Sealed for mcom::Rc<IDirect3DVolumeTexture9>    { fn as_winapi(&self) -> &IDirect3DResource9 { &****self } }
+    unsafe impl Sealed for mcom::Rc<IDirect3DTexture9>          { fn as_winapi(&self) -> &IDirect3DResource9 { &****self } }
+    unsafe impl Sealed for mcom::Rc<IDirect3DSurface9>          { fn as_winapi(&self) -> &IDirect3DResource9 { &***self } }
+    unsafe impl Sealed for mcom::Rc<IDirect3DIndexBuffer9>      { fn as_winapi(&self) -> &IDirect3DResource9 { &***self } }
+    unsafe impl Sealed for mcom::Rc<IDirect3DVertexBuffer9>     { fn as_winapi(&self) -> &IDirect3DResource9 { &***self } }
+    unsafe impl Sealed for super::Resource                      { fn as_winapi(&self) -> &IDirect3DResource9 { &*self.0 } }
+    unsafe impl Sealed for super::BaseTexture                   { fn as_winapi(&self) -> &IDirect3DResource9 { &**self.0 } }
+    unsafe impl Sealed for super::CubeTexture                   { fn as_winapi(&self) -> &IDirect3DResource9 { &***self.0 } }
+    unsafe impl Sealed for super::VolumeTexture                 { fn as_winapi(&self) -> &IDirect3DResource9 { &***self.0 } }
+    unsafe impl Sealed for super::Texture                       { fn as_winapi(&self) -> &IDirect3DResource9 { &***self.0 } }
+    unsafe impl Sealed for super::Surface                       { fn as_winapi(&self) -> &IDirect3DResource9 { &**self.0 } }
+    unsafe impl Sealed for super::IndexBuffer                   { fn as_winapi(&self) -> &IDirect3DResource9 { &**self.0 } }
+    unsafe impl Sealed for super::VertexBuffer                  { fn as_winapi(&self) -> &IDirect3DResource9 { &**self.0 } }
 }
 
 // TODO: examples

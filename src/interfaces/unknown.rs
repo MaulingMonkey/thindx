@@ -9,18 +9,27 @@ use std::ops::Deref;
 #[derive(Clone)] #[repr(transparent)]
 pub struct Unknown(pub(crate) mcom::Rc<winapi::um::unknwnbase::IUnknown>);
 
-impl Unknown {
+pub trait IUnknownExt : private::Sealed {
     /// [AddRef] + [Release] to determine refcount.
     ///
     /// [AddRef]:   https://docs.microsoft.com/en-us/windows/win32/api/unknwn/nf-unknwn-iunknown-addref
     /// [Release]:  https://docs.microsoft.com/en-us/windows/win32/api/unknwn/nf-unknwn-iunknown-release
-    pub fn approx_refcount(&self) -> u32 {
+    fn approx_refcount(&self) -> u32 {
         unsafe {
-            let unk = &*self.0;
+            let unk = self.as_winapi();
             unk.AddRef();
             unk.Release()
         }
     }
+}
+
+impl<T: private::Sealed> IUnknownExt for T {}
+
+mod private {
+    use winapi::um::unknwnbase::IUnknown;
+    pub unsafe trait Sealed                     { fn as_winapi(&self) -> &IUnknown; }
+    unsafe impl Sealed for mcom::Rc<IUnknown>   { fn as_winapi(&self) -> &IUnknown { &**self } }
+    unsafe impl Sealed for super::Unknown       { fn as_winapi(&self) -> &IUnknown { &*self.0 } }
 }
 
 /// Like [std::mem::drop], but use `debug_assert_eq!` to verify the refcount is

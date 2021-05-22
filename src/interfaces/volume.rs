@@ -14,7 +14,7 @@ use std::ptr::*;
 #[derive(Clone)] #[repr(transparent)]
 pub struct Volume(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DVolume9>);
 
-impl Volume {
+pub trait IDirect3DVolume9Ext : private::Sealed {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-freeprivatedata)\]
     /// IDirect3DResource9::FreePrivateData
     ///
@@ -25,8 +25,8 @@ impl Volume {
     /// *   [D3DERR::INVALIDCALL]
     /// *   [D3DERR::NOTFOUND]
     /// *   Ok(`()`)
-    pub fn free_private_data(&self, guid: &GUID) -> Result<(), MethodError> {
-        let hr = unsafe { self.0.FreePrivateData(guid) };
+    fn free_private_data(&self, guid: &GUID) -> Result<(), MethodError> {
+        let hr = unsafe { self.as_winapi().FreePrivateData(guid) };
         MethodError::check("IDirect3DResource9::FreePrivateData", hr)
     }
 
@@ -39,9 +39,9 @@ impl Volume {
     ///
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok(`C`)
-    pub fn get_container<C: Raw>(&self) -> Result<C, MethodError> where C::Raw : Interface {
+    fn get_container<C: Raw>(&self) -> Result<C, MethodError> where C::Raw : Interface {
         let mut container = null_mut();
-        let hr = unsafe { self.0.GetContainer(&C::Raw::uuidof(), &mut container) };
+        let hr = unsafe { self.as_winapi().GetContainer(&C::Raw::uuidof(), &mut container) };
         MethodError::check("IDirect3DVolume9::GetContainer", hr)?;
         Ok(unsafe { C::from_raw(container.cast()) })
     }
@@ -55,9 +55,9 @@ impl Volume {
     ///
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok([VolumeDesc])
-    pub fn get_desc(&self) -> Result<VolumeDesc, MethodError> {
+    fn get_desc(&self) -> Result<VolumeDesc, MethodError> {
         let mut desc = VolumeDesc::default();
-        let hr = unsafe { self.0.GetDesc(&mut *desc) };
+        let hr = unsafe { self.as_winapi().GetDesc(&mut *desc) };
         MethodError::check("IDirect3DVolume9::GetDesc", hr)?;
         Ok(desc)
     }
@@ -71,9 +71,9 @@ impl Volume {
     ///
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok([Device])
-    pub fn get_device(&self) -> Result<Device, MethodError> {
+    fn get_device(&self) -> Result<Device, MethodError> {
         let mut device = null_mut();
-        let hr = unsafe { self.0.GetDevice(&mut device) };
+        let hr = unsafe { self.as_winapi().GetDevice(&mut device) };
         MethodError::check("IDirect3DResource9::GetDevice", hr)?;
         Ok(unsafe { Device::from_raw(device) })
     }
@@ -89,9 +89,9 @@ impl Volume {
     /// *   [D3DERR::MOREDATA]
     /// *   [D3DERR::NOTFOUND]
     /// *   Ok(`read_slice`)
-    pub fn get_private_data_inplace<'s>(&self, guid: &GUID, data: &'s mut [u8]) -> Result<&'s [u8], MethodError> {
+    fn get_private_data_inplace<'s>(&self, guid: &GUID, data: &'s mut [u8]) -> Result<&'s [u8], MethodError> {
         let mut n : u32 = data.len().try_into().map_err(|_| MethodError("Resource::get_private_data_inplace", D3DERR::SLICE_OVERFLOW))?;
-        let hr = unsafe { self.0.GetPrivateData(guid, data.as_mut_ptr().cast(), &mut n) };
+        let hr = unsafe { self.as_winapi().GetPrivateData(guid, data.as_mut_ptr().cast(), &mut n) };
         MethodError::check("IDirect3DResource9::GetPrivateData", hr)?;
         Ok(&data[..(n as usize)])
     }
@@ -104,9 +104,9 @@ impl Volume {
     /// *   [D3DERR::INVALIDCALL]
     /// *   [D3DERR::OUTOFMEMORY]
     /// *   Ok(`()`)
-    pub fn set_private_data(&self, guid: &GUID, data: &[u8]) -> Result<(), MethodError> {
+    fn set_private_data(&self, guid: &GUID, data: &[u8]) -> Result<(), MethodError> {
         let n : u32 = data.len().try_into().map_err(|_| MethodError("Resource::set_private_data", D3DERR::SLICE_OVERFLOW))?;
-        let hr = unsafe { self.0.SetPrivateData(guid, data.as_ptr().cast(), n, 0) };
+        let hr = unsafe { self.as_winapi().SetPrivateData(guid, data.as_ptr().cast(), n, 0) };
         MethodError::check("IDirect3DResource9::SetPrivateData", hr)
     }
 
@@ -121,11 +121,11 @@ impl Volume {
     ///
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok([D3DLOCKED_BOX])
-    pub unsafe fn lock_box_unchecked(&self, box_: impl IntoBoxOrFull, flags: impl Into<Lock>) -> Result<D3DLOCKED_BOX, MethodError> {
+    unsafe fn lock_box_unchecked(&self, box_: impl IntoBoxOrFull, flags: impl Into<Lock>) -> Result<D3DLOCKED_BOX, MethodError> {
         let mut locked = std::mem::zeroed::<D3DLOCKED_BOX>();
         let box_ = box_.into_box();
         let box_ = box_.as_ref().map_or(null(), |b| &**b);
-        let hr = self.0.LockBox(&mut locked, box_, flags.into().into());
+        let hr = self.as_winapi().LockBox(&mut locked, box_, flags.into().into());
         MethodError::check("IDirect3DVolume9::LockBox", hr)?;
         Ok(locked)
     }
@@ -139,10 +139,19 @@ impl Volume {
     ///
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok(`()`)
-    pub fn unlock_box(&self) -> Result<(), MethodError> {
-        let hr = unsafe { self.0.UnlockBox() };
+    fn unlock_box(&self) -> Result<(), MethodError> {
+        let hr = unsafe { self.as_winapi().UnlockBox() };
         MethodError::check("IDirect3DVolume9::UnlockBox", hr)
     }
+}
+
+impl<T: private::Sealed> IDirect3DVolume9Ext for T {}
+
+mod private {
+    use winapi::shared::d3d9::IDirect3DVolume9;
+    pub unsafe trait Sealed                             { fn as_winapi(&self) -> &IDirect3DVolume9; }
+    unsafe impl Sealed for mcom::Rc<IDirect3DVolume9>   { fn as_winapi(&self) -> &IDirect3DVolume9 { &**self } }
+    unsafe impl Sealed for super::Volume                { fn as_winapi(&self) -> &IDirect3DVolume9 { &*self.0 } }
 }
 
 // TODO: examples

@@ -258,7 +258,7 @@ impl SafeDevice {
     /// # use doc::*; let device = SafeDevice::pure();
     /// let texture = device.create_texture(128, 128, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
     /// device.set_texture(1, &texture).unwrap();
-    /// 
+    ///
     /// assert!(device.get_texture(0).unwrap().is_none());
     /// assert_eq!(device.get_texture(1).unwrap().unwrap().as_raw(), (*texture).as_raw());
     /// ```
@@ -274,7 +274,7 @@ impl SafeDevice {
 
 
 
-impl BaseTexture {
+pub trait IDirect3DBaseTexture9Ext : base_texture::Sealed {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-generatemipsublevels)\]
     /// IDirect3DBaseTexture9::GenerateMipSubLevels
     ///
@@ -287,8 +287,8 @@ impl BaseTexture {
     /// # let texture = device.create_texture(128, 128, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
     /// texture.generate_mip_sub_levels();
     /// ```
-    pub fn generate_mip_sub_levels(&self) {
-        unsafe { self.0.GenerateMipSubLevels() }
+    fn generate_mip_sub_levels(&self) {
+        unsafe { self.as_winapi().GenerateMipSubLevels() }
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-getautogenfiltertype)\]
@@ -303,8 +303,8 @@ impl BaseTexture {
     /// # let texture = device.create_texture(128, 128, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
     /// assert_eq!(TextureFilterType::Linear, texture.get_auto_gen_filter_type());
     /// ```
-    pub fn get_auto_gen_filter_type(&self) -> TextureFilterType {
-        TextureFilterType::from_unchecked(unsafe { self.0.GetAutoGenFilterType() })
+    fn get_auto_gen_filter_type(&self) -> TextureFilterType {
+        TextureFilterType::from_unchecked(unsafe { self.as_winapi().GetAutoGenFilterType() })
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-getlevelcount)\]
@@ -332,8 +332,8 @@ impl BaseTexture {
     /// let texture = device.create_texture(128, 128, 3, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
     /// assert_eq!(3, texture.get_level_count());
     /// ```
-    pub fn get_level_count(&self) -> u32 {
-        unsafe { self.0.GetLevelCount() }
+    fn get_level_count(&self) -> u32 {
+        unsafe { self.as_winapi().GetLevelCount() }
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-getlod)\]
@@ -361,8 +361,8 @@ impl BaseTexture {
     /// assert_eq!(0, texture.set_lod(5));
     /// assert_eq!(0, texture.get_lod());
     /// ```
-    pub fn get_lod(&self) -> u32 {
-        unsafe { self.0.GetLOD() }
+    fn get_lod(&self) -> u32 {
+        unsafe { self.as_winapi().GetLOD() }
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-setautogenfiltertype)\]
@@ -403,8 +403,8 @@ impl BaseTexture {
     /// assert_eq!(D3DERR::INVALIDCALL, texture.set_auto_gen_filter_type(TextureFilterType::from_unchecked(!0-4)).err());
     /// assert_eq!(D3DERR::INVALIDCALL, texture.set_auto_gen_filter_type(TextureFilterType::from_unchecked(!0-100)).err());
     /// ```
-    pub fn set_auto_gen_filter_type(&self, filter_type: impl Into<TextureFilterType>) -> Result<(), MethodError> {
-        let hr = unsafe { self.0.SetAutoGenFilterType(filter_type.into().into()) };
+    fn set_auto_gen_filter_type(&self, filter_type: impl Into<TextureFilterType>) -> Result<(), MethodError> {
+        let hr = unsafe { self.as_winapi().SetAutoGenFilterType(filter_type.into().into()) };
         MethodError::check("IDirect3DBaseTexture9::SetAutoGenFilterType", hr)
     }
 
@@ -434,14 +434,29 @@ impl BaseTexture {
     /// assert_eq!(0, texture.set_lod(5));
     /// assert_eq!(0, texture.get_lod());
     /// ```
-    pub fn set_lod(&self, new_lod: u32) -> u32 {
-        unsafe { self.0.SetLOD(new_lod) }
+    fn set_lod(&self, new_lod: u32) -> u32 {
+        unsafe { self.as_winapi().SetLOD(new_lod) }
     }
+}
+
+impl<T: base_texture::Sealed> IDirect3DBaseTexture9Ext for T {}
+
+mod base_texture {
+    use winapi::shared::d3d9::*;
+    pub unsafe trait Sealed                                 { fn as_winapi(&self) -> &IDirect3DBaseTexture9; }
+    unsafe impl Sealed for mcom::Rc<IDirect3DBaseTexture9>  { fn as_winapi(&self) -> &IDirect3DBaseTexture9 { &**self } }
+    unsafe impl Sealed for mcom::Rc<IDirect3DTexture9>      { fn as_winapi(&self) -> &IDirect3DBaseTexture9 { &***self } }
+    unsafe impl Sealed for mcom::Rc<IDirect3DCubeTexture9>  { fn as_winapi(&self) -> &IDirect3DBaseTexture9 { &***self } }
+    unsafe impl Sealed for mcom::Rc<IDirect3DVolumeTexture9>{ fn as_winapi(&self) -> &IDirect3DBaseTexture9 { &***self } }
+    unsafe impl Sealed for super::BaseTexture               { fn as_winapi(&self) -> &IDirect3DBaseTexture9 { &*self.0 } }
+    unsafe impl Sealed for super::Texture                   { fn as_winapi(&self) -> &IDirect3DBaseTexture9 { &**self.0 } }
+    unsafe impl Sealed for super::CubeTexture               { fn as_winapi(&self) -> &IDirect3DBaseTexture9 { &**self.0 } }
+    unsafe impl Sealed for super::VolumeTexture             { fn as_winapi(&self) -> &IDirect3DBaseTexture9 { &**self.0 } }
 }
 
 
 
-impl CubeTexture {
+pub trait IDirect3DCubeTexture9Ext : cube_texture::Sealed {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcubetexture9-adddirtyrect)\]
     /// IDirect3DCubeTexture9::AddDirtyRect
     ///
@@ -467,11 +482,11 @@ impl CubeTexture {
     /// assert_eq!(D3DERR::INVALIDCALL, texture.add_dirty_rect(CubeMapFace::PositiveY, (i32::MIN, i32::MIN) .. (i32::MAX, i32::MAX)).err(), "out of bounds");
     /// assert_eq!(D3DERR::INVALIDCALL, texture.add_dirty_rect(CubeMapFace::from_unchecked(6), ..).err(), "invalid face");
     /// ```
-    pub fn add_dirty_rect(&self, face: impl Into<CubeMapFace>, dirty_rect: impl IntoRectOrFull) -> Result<(), MethodError> {
+    fn add_dirty_rect(&self, face: impl Into<CubeMapFace>, dirty_rect: impl IntoRectOrFull) -> Result<(), MethodError> {
         let face = face.into().into();
         let dirty_rect = dirty_rect.into_rect();
         let dirty_rect = dirty_rect.as_ref().map_or(null(), |dr| &**dr);
-        let hr = unsafe { self.0.AddDirtyRect(face, dirty_rect.cast()) };
+        let hr = unsafe { self.as_winapi().AddDirtyRect(face, dirty_rect.cast()) };
         MethodError::check("IDirect3DCubeTexture9::AddDirtyRect", hr)
     }
 
@@ -495,10 +510,10 @@ impl CubeTexture {
     /// # assert_eq!(D3DERR::INVALIDCALL, texture.get_cube_map_surface(CubeMapFace::PositiveX, !0).err(), "level !0");
     /// # assert_eq!(D3DERR::INVALIDCALL, texture.get_cube_map_surface(CubeMapFace::from_unchecked(!0), 0).err(), "invalid face");
     /// ```
-    pub fn get_cube_map_surface(&self, face: impl Into<CubeMapFace>, level: u32) -> Result<Surface, MethodError> {
+    fn get_cube_map_surface(&self, face: impl Into<CubeMapFace>, level: u32) -> Result<Surface, MethodError> {
         let face = face.into().into();
         let mut surface = null_mut();
-        let hr = unsafe { self.0.GetCubeMapSurface(face, level, &mut surface) };
+        let hr = unsafe { self.as_winapi().GetCubeMapSurface(face, level, &mut surface) };
         MethodError::check("IDirect3DCubeTexture9::GetCubeMapSurface", hr)?;
         Ok(unsafe { Surface::from_raw(surface) })
     }
@@ -524,9 +539,9 @@ impl CubeTexture {
     /// # assert_eq!(D3DERR::INVALIDCALL, texture.get_level_desc(!0-4).err(), "!0-4");
     /// # assert_eq!(D3DERR::INVALIDCALL, texture.get_level_desc(!0-100).err(), "!0-100");
     /// ```
-    pub fn get_level_desc(&self, level: u32) -> Result<SurfaceDesc, MethodError> {
+    fn get_level_desc(&self, level: u32) -> Result<SurfaceDesc, MethodError> {
         let mut desc = SurfaceDesc::default();
-        let hr = unsafe { self.0.GetLevelDesc(level, &mut *desc) };
+        let hr = unsafe { self.as_winapi().GetLevelDesc(level, &mut *desc) };
         MethodError::check("IDirect3DCubeTexture9::GetLevelDesc", hr)?;
         Ok(desc)
     }
@@ -558,13 +573,13 @@ impl CubeTexture {
     ///     texture.unlock_rect(CubeMapFace::PositiveX, 0).unwrap();
     /// }
     /// ```
-    pub unsafe fn lock_rect_unchecked(&self, face: impl Into<CubeMapFace>, level: u32, rect: impl IntoRectOrFull, flags: impl Into<Lock>) -> Result<D3DLOCKED_RECT, MethodError> {
+    unsafe fn lock_rect_unchecked(&self, face: impl Into<CubeMapFace>, level: u32, rect: impl IntoRectOrFull, flags: impl Into<Lock>) -> Result<D3DLOCKED_RECT, MethodError> {
         let face = face.into().into();
         let rect = rect.into_rect();
         let rect = rect.as_ref().map_or(null(), |r| &**r);
         let flags = flags.into().into();
         let mut locked = std::mem::zeroed::<D3DLOCKED_RECT>();
-        let hr = self.0.LockRect(face, level, &mut locked, rect.cast(), flags);
+        let hr = self.as_winapi().LockRect(face, level, &mut locked, rect.cast(), flags);
         MethodError::check("IDirect3DCubeTexture9::LockRect", hr)?;
         Ok(locked)
     }
@@ -597,15 +612,24 @@ impl CubeTexture {
     /// }
     /// // TODO
     /// ```
-    pub fn unlock_rect(&self, face: impl Into<CubeMapFace>, level: u32) -> Result<(), MethodError> {
-        let hr = unsafe { self.0.UnlockRect(face.into().into(), level) };
+    fn unlock_rect(&self, face: impl Into<CubeMapFace>, level: u32) -> Result<(), MethodError> {
+        let hr = unsafe { self.as_winapi().UnlockRect(face.into().into(), level) };
         MethodError::check("IDirect3DCubeTexture9::UnlockRect", hr)
     }
 }
 
+impl<T: cube_texture::Sealed> IDirect3DCubeTexture9Ext for T {}
+
+mod cube_texture {
+    use winapi::shared::d3d9::IDirect3DCubeTexture9;
+    pub unsafe trait Sealed                                 { fn as_winapi(&self) -> &IDirect3DCubeTexture9; }
+    unsafe impl Sealed for mcom::Rc<IDirect3DCubeTexture9>  { fn as_winapi(&self) -> &IDirect3DCubeTexture9 { &**self } }
+    unsafe impl Sealed for super::CubeTexture               { fn as_winapi(&self) -> &IDirect3DCubeTexture9 { &*self.0 } }
+}
 
 
-impl Texture {
+
+pub trait IDirect3DTexture9Ext : texture::Sealed {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dtexture9-adddirtyrect)\]
     /// IDirect3DTexture9::AddDirtyRect
     ///
@@ -629,10 +653,10 @@ impl Texture {
     /// assert_eq!(D3DERR::INVALIDCALL, texture.add_dirty_rect((128, 128) .. (0, 0)).err(), "inverted bounds");
     /// assert_eq!(D3DERR::INVALIDCALL, texture.add_dirty_rect((i32::MIN, i32::MIN) .. (i32::MAX, i32::MAX)).err(), "out of bounds");
     /// ```
-    pub fn add_dirty_rect(&self, dirty_rect: impl IntoRectOrFull) -> Result<(), MethodError> {
+    fn add_dirty_rect(&self, dirty_rect: impl IntoRectOrFull) -> Result<(), MethodError> {
         let dirty_rect = dirty_rect.into_rect();
         let dirty_rect = dirty_rect.as_ref().map_or(null(), |dr| &**dr);
-        let hr = unsafe { self.0.AddDirtyRect(dirty_rect.cast()) };
+        let hr = unsafe { self.as_winapi().AddDirtyRect(dirty_rect.cast()) };
         MethodError::check("IDirect3DTexture9::AddDirtyRect", hr)
     }
 
@@ -655,9 +679,9 @@ impl Texture {
     /// assert_eq!(D3DERR::INVALIDCALL, texture.get_surface_level(8).err(), "only levels 0 .. 7 are valid");
     /// # assert_eq!(D3DERR::INVALIDCALL, texture.get_surface_level(!0).err(), "level !0");
     /// ```
-    pub fn get_surface_level(&self, level: u32) -> Result<Surface, MethodError> {
+    fn get_surface_level(&self, level: u32) -> Result<Surface, MethodError> {
         let mut surface = null_mut();
-        let hr = unsafe { self.0.GetSurfaceLevel(level, &mut surface) };
+        let hr = unsafe { self.as_winapi().GetSurfaceLevel(level, &mut surface) };
         MethodError::check("IDirect3DTexture9::GetSurfaceLevel", hr)?;
         Ok(unsafe { Surface::from_raw(surface) })
     }
@@ -683,9 +707,9 @@ impl Texture {
     /// # assert_eq!(D3DERR::INVALIDCALL, texture.get_level_desc(!0-4).err(), "!0-4");
     /// # assert_eq!(D3DERR::INVALIDCALL, texture.get_level_desc(!0-100).err(), "!0-100");
     /// ```
-    pub fn get_level_desc(&self, level: u32) -> Result<SurfaceDesc, MethodError> {
+    fn get_level_desc(&self, level: u32) -> Result<SurfaceDesc, MethodError> {
         let mut desc = SurfaceDesc::default();
-        let hr = unsafe { self.0.GetLevelDesc(level, &mut *desc) };
+        let hr = unsafe { self.as_winapi().GetLevelDesc(level, &mut *desc) };
         MethodError::check("IDirect3DTexture9::GetLevelDesc", hr)?;
         Ok(desc)
     }
@@ -718,12 +742,12 @@ impl Texture {
     ///     texture.unlock_rect(0).unwrap();
     /// }
     /// ```
-    pub unsafe fn lock_rect_unchecked(&self, level: u32, rect: impl IntoRectOrFull, flags: impl Into<Lock>) -> Result<D3DLOCKED_RECT, MethodError> {
+    unsafe fn lock_rect_unchecked(&self, level: u32, rect: impl IntoRectOrFull, flags: impl Into<Lock>) -> Result<D3DLOCKED_RECT, MethodError> {
         let rect = rect.into_rect();
         let rect = rect.as_ref().map_or(null(), |r| &**r);
         let flags = flags.into().into();
         let mut locked = std::mem::zeroed::<D3DLOCKED_RECT>();
-        let hr = self.0.LockRect(level, &mut locked, rect.cast(), flags);
+        let hr = self.as_winapi().LockRect(level, &mut locked, rect.cast(), flags);
         MethodError::check("IDirect3DTexture9::LockRect", hr)?;
         Ok(locked)
     }
@@ -756,15 +780,24 @@ impl Texture {
     ///     texture.unlock_rect(0).unwrap();
     /// }
     /// ```
-    pub fn unlock_rect(&self, level: u32) -> Result<(), MethodError> {
-        let hr = unsafe { self.0.UnlockRect(level) };
+    fn unlock_rect(&self, level: u32) -> Result<(), MethodError> {
+        let hr = unsafe { self.as_winapi().UnlockRect(level) };
         MethodError::check("IDirect3DTexture9::UnlockRect", hr)
     }
 }
 
+impl<T: texture::Sealed> IDirect3DTexture9Ext for T {}
+
+mod texture {
+    use winapi::shared::d3d9::IDirect3DTexture9;
+    pub unsafe trait Sealed                             { fn as_winapi(&self) -> &IDirect3DTexture9; }
+    unsafe impl Sealed for mcom::Rc<IDirect3DTexture9>  { fn as_winapi(&self) -> &IDirect3DTexture9 { &**self } }
+    unsafe impl Sealed for super::Texture               { fn as_winapi(&self) -> &IDirect3DTexture9 { &*self.0 } }
+}
 
 
-impl VolumeTexture {
+
+pub trait IDirect3DVolumeTexture9Ext : volume_texture::Sealed {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolumetexture9-adddirtybox)\]
     /// IDirect3DVolumeTexture9::AddDirtyBox
     ///
@@ -784,10 +817,10 @@ impl VolumeTexture {
     ///
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok(`()`)
-    pub fn add_dirty_box(&self, dirty_box: impl IntoBoxOrFull) -> Result<(), MethodError> {
+    fn add_dirty_box(&self, dirty_box: impl IntoBoxOrFull) -> Result<(), MethodError> {
         let dirty_box   = dirty_box.into_box();
         let dirty_box   = dirty_box.as_ref().map_or(null(), |b| &**b);
-        let hr = unsafe { self.0.AddDirtyBox(dirty_box) };
+        let hr = unsafe { self.as_winapi().AddDirtyBox(dirty_box) };
         MethodError::check("IDirect3DVolumeTexture9::AddDirtyBox", hr)
     }
 
@@ -813,9 +846,9 @@ impl VolumeTexture {
     ///
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok([VolumeDesc])
-    pub fn get_level_desc(&self, level: u32) -> Result<VolumeDesc, MethodError> {
+    fn get_level_desc(&self, level: u32) -> Result<VolumeDesc, MethodError> {
         let mut desc = VolumeDesc::default();
-        let hr = unsafe { self.0.GetLevelDesc(level, &mut *desc) };
+        let hr = unsafe { self.as_winapi().GetLevelDesc(level, &mut *desc) };
         MethodError::check("IDirect3DVolumeTexture9::GetLevelDesc", hr)?;
         Ok(desc)
     }
@@ -844,9 +877,9 @@ impl VolumeTexture {
     ///
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok([Volume])
-    pub fn get_volume_level(&self, level: u32) -> Result<Volume, MethodError> {
+    fn get_volume_level(&self, level: u32) -> Result<Volume, MethodError> {
         let mut volume = null_mut();
-        let hr = unsafe { self.0.GetVolumeLevel(level, &mut volume) };
+        let hr = unsafe { self.as_winapi().GetVolumeLevel(level, &mut volume) };
         MethodError::check("IDirect3DVolumeTexture9::GetVolumeLevel", hr)?;
         Ok(unsafe { Volume::from_raw(volume) })
     }
@@ -880,12 +913,12 @@ impl VolumeTexture {
     ///
     /// *   [D3DERR::INVALIDCALL]   If the texture belongs to [Pool::Default]
     /// *   Ok([D3DLOCKED_BOX])
-    pub unsafe fn lock_box_unchecked(&self, level: u32, box_: impl IntoBoxOrFull, lock: impl Into<Lock>) -> Result<D3DLOCKED_BOX, MethodError> {
+    unsafe fn lock_box_unchecked(&self, level: u32, box_: impl IntoBoxOrFull, lock: impl Into<Lock>) -> Result<D3DLOCKED_BOX, MethodError> {
         let box_    = box_.into_box();
         let box_    = box_.as_ref().map_or(null(), |b| &**b);
         let lock    = lock.into().into();
         let mut lockedbox = std::mem::zeroed::<D3DLOCKED_BOX>();
-        let hr = self.0.LockBox(level, &mut lockedbox, box_, lock);
+        let hr = self.as_winapi().LockBox(level, &mut lockedbox, box_, lock);
         MethodError::check("IDirect3DVolumeTexture9::LockBox", hr)?;
         Ok(lockedbox)
     }
@@ -912,12 +945,21 @@ impl VolumeTexture {
     ///
     /// *   [D3DERR::INVALIDCALL]   If the texture wasn't locked
     /// *   Ok(`()`)
-    pub fn unlock_box(&self, level: u32) -> Result<(), MethodError> {
-        let hr = unsafe { self.0.UnlockBox(level) };
+    fn unlock_box(&self, level: u32) -> Result<(), MethodError> {
+        let hr = unsafe { self.as_winapi().UnlockBox(level) };
         MethodError::check("IDirect3DVolumeTexture9::UnlockBox", hr)
     }
 
     // TODO: Saner texture init/update methods
+}
+
+impl<T: volume_texture::Sealed> IDirect3DVolumeTexture9Ext for T {}
+
+mod volume_texture {
+    use winapi::shared::d3d9::IDirect3DVolumeTexture9;
+    pub unsafe trait Sealed                                     { fn as_winapi(&self) -> &IDirect3DVolumeTexture9; }
+    unsafe impl Sealed for mcom::Rc<IDirect3DVolumeTexture9>    { fn as_winapi(&self) -> &IDirect3DVolumeTexture9 { &**self } }
+    unsafe impl Sealed for super::VolumeTexture                 { fn as_winapi(&self) -> &IDirect3DVolumeTexture9 { &*self.0 } }
 }
 
 
