@@ -49,7 +49,7 @@
 //!
 //! [Unknown] - The root type from which all sane COM types derive
 //! &nbsp;  ├─ [Direct3D]\[[Ex](crate::Direct3DEx)\] - Core factories for creating [Device]\[[Ex](crate::Direct3DEx)\]s and [SwapChain]\[[Ex](crate::SwapChainEx)\]s<span style="opacity: 25%">
-//! &nbsp;  ├─ [Device]\[[Ex](crate::DeviceEx)\] - Create resources associated with an individual GPU
+//! &nbsp;  ├─ [Device]\[[Ex](crate::DeviceEx)\] - Create resources & dispatches rendering for an individual GPU
 //! &nbsp;  ├─ [SwapChain]\[[Ex](crate::SwapChainEx)\] - Manages swapping buffers for individual "views" (monitors/windows)</span>
 //! &nbsp;  ├─ [Resource]
 //! &nbsp;  │      ├─ [Surface] - 2D buffer of pixels
@@ -66,6 +66,52 @@
 //! &nbsp;  ├─ [Query] - An asyncronous GPU query for [occlusion or other information](https://docs.microsoft.com/en-us/windows/win32/direct3d9/queries).
 //! &nbsp;  ├─ [StateBlock] - Used to [capture/save and restore](https://docs.microsoft.com/en-us/windows/win32/direct3d9/state-blocks-save-and-restore-state) changes to [Device] state.
 //! &nbsp;  └─ [VertexDeclaration] - Describes the layout of the contents of a [VertexBuffer]</div>
+//!
+//! | thin3d9 struct        | docs.microsoft.com \[Ext\]                                                | description   |
+//! | --------------------- | ------------------------------------------------------------------------- | ------------- |
+//! | [Unknown]             | [IUnknown]\[[Ext](IUnknownExt)\]                                          | The root type from which all sane COM types derive
+//! | [Direct3D]            | [IDirect3D9]\[[Ext](IDirect3D9Ext)\]                                      | Core factory for creating [Device]s
+//! | [Direct3DEx]          | [IDirect3D9Ex]\[[Ext](IDirect3D9ExExt)\]                                  | Core factory for creating [DeviceEx]s
+//! | [Device]              | [IDirect3DDevice9]\[[Ext](IDirect3DDevice9Ext)\]                          | Create resources & dispatches rendering for an individual GPU
+//! | [DeviceEx]            | [IDirect3DDevice9Ex]\[[Ext](IDirect3DDevice9ExExt)\]                      | Create resources & dispatches rendering for an individual GPU
+//! | [SwapChain]           | [IDirect3DSwapChain9]\[[Ext](IDirect3DSwapChain9Ext)\]                    | Manages swapping buffers for individual "views" (monitors/windows)
+//! | [SwapChainEx]         | [IDirect3DSwapChain9Ex]\[[Ext](IDirect3DSwapChain9ExExt)\]                | Manages swapping buffers for individual "views" (monitors/windows)
+//! | [Resource]            | [IDirect3DResource9]\[[Ext](IDirect3DResource9Ext)\]                      |
+//! | [Surface]             | [IDirect3DSurface9]\[[Ext](IDirect3DSurface9Ext)\]                        | 2D buffer of pixels
+//! | [BaseTexture]         | [IDirect3DBaseTexture9]\[[Ext](IDirect3DBaseTexture9Ext)\]                | A GPU-friendly collection of pixels
+//! | [CubeTexture]         | [IDirect3DCubeTexture9]\[[Ext](IDirect3DCubeTexture9Ext)\]                | 6-sided 2D texture
+//! | [Texture]             | [IDirect3DTexture9]\[[Ext](IDirect3DTexture9Ext)\]                        | 2D texture
+//! | [VolumeTexture]       | [IDirect3DVolumeTexture9]\[[Ext](IDirect3DVolumeTexture9Ext)\]            | Dense 3D texture
+//! | [IndexBuffer]         | [IDirect3DIndexBuffer9]\[[Ext](IDirect3DIndexBuffer9Ext)\]                | An [index buffer](https://docs.microsoft.com/en-us/windows/win32/direct3d9/rendering-from-vertex-and-index-buffers#scenario-2-drawing-two-triangles-with-indexing) indexes verticies in a [VertexBuffer] when rendering.
+//! | [VertexBuffer]        | [IDirect3DVertexBuffer9]\[[Ext](IDirect3DVertexBuffer9Ext)\]              | A [vertex buffer](https://docs.microsoft.com/en-us/windows/win32/direct3d9/rendering-from-vertex-and-index-buffers#scenario-2-drawing-two-triangles-with-indexing) typically contains points of a mesh to be rendered.
+//! | [Volume]              | [IDirect3DVolume9]\[[Ext](IDirect3DVolume9Ext)\]                          | 3D buffer of pixels
+//! | [PixelShader]         | [IDirect3DPixelShader9]\[[Ext](IDirect3DPixelShader9Ext)\]                | per-fragment GPU program
+//! | [VertexShader]        | [IDirect3DVertexShader9]\[[Ext](IDirect3DVertexShader9Ext)\]              | per-vertex GPU program
+//! | [Query]               | [IDirect3DQuery9]\[[Ext](IDirect3DQuery9Ext)\]                            | An asyncronous GPU query for [occlusion or other information](https://docs.microsoft.com/en-us/windows/win32/direct3d9/queries).
+//! | [StateBlock]          | [IDirect3DStateBlock9]\[[Ext](IDirect3DStateBlock9Ext)\]                  | Used to [capture/save and restore](https://docs.microsoft.com/en-us/windows/win32/direct3d9/state-blocks-save-and-restore-state) changes to [Device] state.
+//! | [VertexDeclaration]   | [IDirect3DVertexDeclaration9]\[[Ext](IDirect3DVertexDeclaration9Ext)\]    | Describes the layout of the contents of a [VertexBuffer]
+//!
+//! [IUnknown]:                     https://docs.microsoft.com/en-us/windows/win32/api/unknwn/nn-unknwn-iunknown
+//! [IDirect3D9]:                   https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3d9
+//! [IDirect3D9Ex]:                 https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3d9ex
+//! [IDirect3DDevice9]:             https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3ddevice9
+//! [IDirect3DDevice9Ex]:           https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3ddevice9ex
+//! [IDirect3DSwapChain9]:          https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dswapchain9
+//! [IDirect3DSwapChain9Ex]:        https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dswapchain9ex
+//! [IDirect3DResource9]:           https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dresource9
+//! [IDirect3DSurface9]:            https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dsurface9
+//! [IDirect3DBaseTexture9]:        https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dbasetexture9
+//! [IDirect3DCubeTexture9]:        https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dcubetexture9
+//! [IDirect3DTexture9]:            https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dtexture9
+//! [IDirect3DVolumeTexture9]:      https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dvolumetexture9
+//! [IDirect3DIndexBuffer9]:        https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dindexbuffer9
+//! [IDirect3DVertexBuffer9]:       https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dvertexbuffer9
+//! [IDirect3DVolume9]:             https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dvolume9
+//! [IDirect3DPixelShader9]:        https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dpixelshader9
+//! [IDirect3DVertexShader9]:       https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dvertexshader9
+//! [IDirect3DQuery9]:              https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dquery9
+//! [IDirect3DStateBlock9]:         https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dstateblock9
+//! [IDirect3DVertexDeclaration9]:  https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dvertexdeclaration9
 //!
 //! ### Enums
 //!
