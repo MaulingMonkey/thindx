@@ -9,6 +9,22 @@ use std::ops::Deref;
 #[derive(Clone)] #[repr(transparent)]
 pub struct Unknown(pub(crate) mcom::Rc<winapi::um::unknwnbase::IUnknown>);
 
+/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/unknwn/nn-unknwn-iunknown)\]
+/// IUnknown extension methods
+///
+/// ### Methods
+///
+/// | thin3d9                                                       | docs.microsoft.com    | Description |
+/// | ------------------------------------------------------------- | --------------------- | ----------- |
+/// | <span style="opacity: 25%">N/A</span>                         | [AddRef]              | Increments the reference count for an interface pointer to a COM object.
+/// | <span style="opacity: 25%">N/A</span>                         | [QueryInterface]      | Retrieves pointers to the supported interfaces on an object.
+/// | <span style="opacity: 25%">N/A</span>                         | [Release]             | Decrements the reference count for an interface on a COM object.
+/// | [approx_refcount](Self::approx_refcount)                      | [AddRef], [Release]   | Get the (strong) reference count.  This value is intended to be used only for test purposes.
+///
+/// [AddRef]:           https://docs.microsoft.com/en-us/windows/win32/api/unknwn/nf-unknwn-iunknown-addref
+/// [QueryInterface]:   https://docs.microsoft.com/en-us/windows/win32/api/unknwn/nf-unknwn-iunknown-queryinterface(refiid_void)
+/// [Release]:          https://docs.microsoft.com/en-us/windows/win32/api/unknwn/nf-unknwn-iunknown-release
+///
 pub trait IUnknownExt : private::Sealed {
     /// [AddRef] + [Release] to determine refcount.
     ///
