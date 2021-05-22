@@ -32,6 +32,34 @@ impl Resource {
     }
 }
 
+/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dresource9)\]
+/// IDirect3DResource9 extension methods
+///
+/// ### Methods
+///
+/// | thin3d9                                                       | docs.microsoft.com    | Description |
+/// | ------------------------------------------------------------- | --------------------- | ----------- |
+/// | [free_private_data](Self::free_private_data)                  | [FreePrivateData]     | Frees the specified private data associated with this resource.
+/// | [get_device](Self::get_device)                                | [GetDevice]           | Retrieves the device associated with a resource.
+/// | [get_priority](Self::get_priority)                            | [GetPriority]         | Retrieves the priority for this resource.
+/// | [get_private_data_inplace](Self::get_private_data_inplace)    | [GetPrivateData]      | Copies the private data associated with the resource to a provided buffer.
+/// | <span style="opacity: 25%">get_private_data_com</span>        | [GetPrivateData]      | Retrieves a COM object associated with the resource.
+/// | [get_type](Self::get_type)                                    | [GetType]             | Returns the type of the resource.
+/// | [preload](Self::preload)                                      | [PreLoad]             | Preloads a managed resource.
+/// | [set_priority](Self::set_priority)                            | [SetPriority]         | Assigns the priority of a resource for scheduling purposes.
+/// | [set_private_data](Self::set_private_data)                    | [SetPrivateData]      | Associates data with the resource for use by the application.
+/// | <span style="opacity: 25%">set_debug_name</span>              | [SetPrivateData]      | Associates a debug name for graphics debuggers.
+/// | <span style="opacity: 25%">set_private_data_com</span>        | [SetPrivateData]      | Associates a COM object with the resource for use by the application.
+///
+/// [FreePrivateData]:  https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-freeprivatedata
+/// [GetDevice]:        https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-getdevice
+/// [GetPriority]:      https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-getpriority
+/// [GetPrivateData]:   https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-getprivatedata
+/// [GetType]:          https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-gettype
+/// [PreLoad]:          https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-preload
+/// [SetPriority]:      https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-setpriority
+/// [SetPrivateData]:   https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-setprivatedata
+///
 pub trait IDirect3DResource9Ext : private::Sealed {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-freeprivatedata)\]
     /// IDirect3DResource9::FreePrivateData
