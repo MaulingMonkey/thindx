@@ -93,6 +93,21 @@ impl Device {
 
 
 
+/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dstateblock9)\]
+/// IDirect3DStateBlock9 extension methods
+///
+/// ### Methods
+///
+/// | thin3d9                                                       | docs.microsoft.com    | Description |
+/// | ------------------------------------------------------------- | --------------------- | ----------- |
+/// | [apply](Self::apply)                                          | [Apply]               | Apply the state block to the current device state.
+/// | [capture](Self::capture)                                      | [Capture]             | Capture the current value of states that are included in a stateblock.
+/// | [get_device](Self::get_device)                                | [GetDevice]           | Gets the device.
+///
+/// [Apply]:        https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dstateblock9-apply
+/// [Capture]:      https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dstateblock9-capture
+/// [GetDevice]:    https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dstateblock9-getdevice
+///
 pub trait IDirect3DStateBlock9Ext : private::Sealed {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dstateblock9-apply)\]
     /// IDirect3DStateBlock9::Apply
