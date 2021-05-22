@@ -14,6 +14,31 @@ use std::ptr::*;
 #[derive(Clone)] #[repr(transparent)]
 pub struct Volume(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DVolume9>);
 
+/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dvolume9)\]
+/// IDirect3DVolume9 extension methods
+///
+/// ### Methods
+///
+/// | thin3d9                                                       | docs.microsoft.com    | Description |
+/// | ------------------------------------------------------------- | --------------------- | ----------- |
+/// | [free_private_data](Self::free_private_data)                  | [FreePrivateData]     | Frees the specified private data associated with this volume.
+/// | [get_container](Self::get_container)                          | [GetContainer]        | Provides access to the parent volume texture object, if this surface is a child level of a volume texture.
+/// | [get_desc](Self::get_desc)                                    | [GetDesc]             | Retrieves a description of the volume.
+/// | [get_device](Self::get_device)                                | [GetDevice]           | Retrieves the device associated with a volume.
+/// | [get_private_data](Self::get_private_data)                    | [GetPrivateData]      | Copies the private data associated with the volume to a provided buffer.
+/// | [lock_box_unchecked](Self::lock_box_unchecked)                | [LockBox]             | Locks a box on a volume resource.
+/// | [set_private_data](Self::set_private_data)                    | [SetPrivateData]      | Associates data with the volume that is intended for use by the application, not by Direct3D.
+/// | [unlock_box](Self::unlock_box)                                | [UnlockBox]           | Unlocks a box on a volume resource.
+///
+/// [FreePrivateData]:  https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-freeprivatedata
+/// [GetContainer]:     https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-getcontainer
+/// [GetDesc]:          https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-getdesc
+/// [GetDevice]:        https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-getdevice
+/// [GetPrivateData]:   https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-getprivatedata
+/// [LockBox]:          https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-lockbox
+/// [SetPrivateData]:   https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-setprivatedata
+/// [UnlockBox]:        https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-unlockbox
+///
 pub trait IDirect3DVolume9Ext : private::Sealed {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-freeprivatedata)\]
     /// IDirect3DResource9::FreePrivateData
