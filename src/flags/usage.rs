@@ -93,7 +93,7 @@ flags! {
     /// If it can, the texture must be created in [Pool::Scratch].
     pub const SoftwareProcessing            : Usage = Usage(D3DUSAGE_SOFTWAREPROCESSING);
 
-    /// This usage flag must be specified for vertex buffers and source surfaces, used in calls to [DeviceEx::compose_rects].
+    /// This usage flag must be specified for vertex buffers and source surfaces, used in calls to [IDirect3DDevice9ExExt::compose_rects].
     /// Textures created with this usage flag cannot be used for texture filtering.
     /// Vertex buffers, created with this usage flag, cannot be used as input stream sources.
     ///

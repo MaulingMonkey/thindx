@@ -255,7 +255,7 @@ pub trait IDirect3DDevice9ExExt : private::Sealed {
     ///
     /// ### Returns
     ///
-    /// *   [D3DERR::D3DERR_DEVICEREMOVED]
+    /// *   [D3DERR::DEVICEREMOVED]
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok(`priority`) where `-7` <= `priority` <= `7`
     ///

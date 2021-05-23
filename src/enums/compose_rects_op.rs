@@ -7,7 +7,7 @@ use winapi::shared::d3d9types::*;
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dcomposerectsop)\]
 /// D3DCOMPOSERECTSOP
 ///
-/// Specifies how to combine the glyph data from the source and destination surfaces in a call to [DeviceEx::compose_rects]
+/// Specifies how to combine the glyph data from the source and destination surfaces in a call to [IDirect3DDevice9ExExt::compose_rects]
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)] pub struct ComposeRectsOp(D3DCOMPOSERECTSOP);
 pub use ComposeRectsOp as ComposeRects;

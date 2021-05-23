@@ -25,9 +25,12 @@ pub struct Volume(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DVolume9>);
 /// | [get_container](Self::get_container)                          | [GetContainer]        | Provides access to the parent volume texture object, if this surface is a child level of a volume texture.
 /// | [get_desc](Self::get_desc)                                    | [GetDesc]             | Retrieves a description of the volume.
 /// | [get_device](Self::get_device)                                | [GetDevice]           | Retrieves the device associated with a volume.
-/// | [get_private_data](Self::get_private_data)                    | [GetPrivateData]      | Copies the private data associated with the volume to a provided buffer.
+/// | [get_private_data_inplace](Self::get_private_data_inplace)    | [GetPrivateData]      | Copies the private data associated with the volume to a provided buffer.
+/// | <span style="opacity: 25%">get_private_data_com</span>        | [GetPrivateData]      | Retrieves a COM object associated with the volume.
 /// | [lock_box_unchecked](Self::lock_box_unchecked)                | [LockBox]             | Locks a box on a volume resource.
 /// | [set_private_data](Self::set_private_data)                    | [SetPrivateData]      | Associates data with the volume that is intended for use by the application, not by Direct3D.
+/// | <span style="opacity: 25%">set_debug_name</span>              | [SetPrivateData]      | Associates a debug name with the volume for graphics debuggers.
+/// | <span style="opacity: 25%">set_private_data_com</span>        | [SetPrivateData]      | Associates a COM object with the resource for use by the application.
 /// | [unlock_box](Self::unlock_box)                                | [UnlockBox]           | Unlocks a box on a volume resource.
 ///
 /// [FreePrivateData]:  https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-freeprivatedata

@@ -8,7 +8,7 @@ type D3DGETDATA = u32; // there's no actual type
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dgetdata-flush)\]
 /// DWORD / D3DGETDATA_*
 ///
-/// Controls how [Query::get_data_inplace] behaves.
+/// Controls how [IDirect3DQuery9Ext::get_data_inplace] behaves.
 #[derive(Clone, Copy, Default, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)] pub struct GetData(D3DGETDATA);
 

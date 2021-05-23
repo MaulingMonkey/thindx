@@ -8,7 +8,7 @@ type D3DISSUE = u32; // there's no actual type
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dlock)\]
 /// DWORD / D3DISSUE_*
 ///
-/// Controls how [Query::issue] behaves.
+/// Controls how [IDirect3DQuery9Ext::issue] behaves.
 #[derive(Clone, Copy, Default, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)] pub struct Issue(D3DISSUE);
 

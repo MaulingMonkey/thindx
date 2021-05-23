@@ -26,11 +26,11 @@ pub struct IndexBuffer(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DIndexB
 ///
 /// ### See Also
 ///
-/// *   [IDirect3DDevice9::create_vertex_buffer]
-/// *   [IDirect3DDevice9::set_stream_source]
-/// *   [IDirect3DDevice9::set_stream_source_freq]
-/// *   [IDirect3DDevice9::get_stream_source]
-/// *   [IDirect3DDevice9::get_stream_source_freq]
+/// *   [IDirect3DDevice9Ext::create_vertex_buffer]
+/// *   [IDirect3DDevice9Ext::set_stream_source]
+/// *   [IDirect3DDevice9Ext::set_stream_source_freq]
+/// *   [IDirect3DDevice9Ext::get_stream_source]
+/// *   [IDirect3DDevice9Ext::get_stream_source_freq]
 #[derive(Clone)] #[repr(transparent)]
 pub struct VertexBuffer(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DVertexBuffer9>);
 

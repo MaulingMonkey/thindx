@@ -28,7 +28,7 @@ pub struct Direct3DEx(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3D9Ex>);
 /// | [create_device_ex](Self::create_device_ex)                        | [CreateDeviceEx]          | Creates a device to represent the display adapter.
 /// | [enum_adapter_modes_ex](Self::enum_adapter_modes_ex)              | [EnumAdapterModesEx]      | Enumerate actual display mode info based on the given mode index.
 /// | [get_adapter_display_mode_ex](Self::get_adapter_display_mode_ex)  | [GetAdapterDisplayModeEx] | Retrieves the current display mode and rotation settings of the adapter.
-/// | [get_adapter_luid](Self::get_adapter_luid)                        | [GetAdapterLUID]          | This method returns a [LUID] for the adapter that is specific to the adapter hardware.
+/// | [get_adapter_luid](Self::get_adapter_luid)                        | [GetAdapterLUID]          | This method returns a [Luid] for the adapter that is specific to the adapter hardware.
 /// | [get_adapter_mode_count_ex](Self::get_adapter_mode_count_ex)      | [GetAdapterModeCountEx]   | Returns the number of display modes available.
 ///
 /// [Direct3DCreate9Ex]:    https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-direct3dcreate9ex
@@ -44,7 +44,7 @@ pub trait IDirect3D9ExExt : private::Sealed {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-direct3dcreate9ex)\]
     /// Direct3DCreate9Ex
     ///
-    /// Creates an [IDirect3D9Ex] object and returns an interface to it.
+    /// Creates an [IDirect3D9Ex](IDirect3D9ExExt) object and returns an interface to it.
     ///
     /// ### Safety
     ///

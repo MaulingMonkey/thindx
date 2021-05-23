@@ -53,7 +53,7 @@ enumish! { SwapEffect => D3DSWAPEFFECT; Discard, Flip, Copy, Overlay, FlipEx }
     /// Flip mode does not affect full-screen behavior.
     ///
     /// Note: If you create a swap chain with [SwapEffect::FlipEx], you can't override the `hDeviceWindow` member of the `D3DPRESENT_PARAMETERS` structure when you present a new frame for display.
-    /// That is, you must pass `null_mut()` to the `hDestWindowOverride` parameter of [Device9Ex::present_ex] to instruct the runtime to use the `hDeviceWindow` member of `D3DPRESENT_PARAMETERS` for the presentation.
+    /// That is, you must pass `null_mut()` to the `hDestWindowOverride` parameter of [IDirect3DDevice9ExExt::present_ex] to instruct the runtime to use the `hDeviceWindow` member of `D3DPRESENT_PARAMETERS` for the presentation.
     ///
     /// Differences between Direct3D 9 and Direct3D 9Ex: D3DSWAPEFFECT_FLIPEX is only available in Direct3D9Ex running on Windows 7 (or more current operating system).
     pub const FlipEx        : SwapEffect = SwapEffect(D3DSWAPEFFECT_FLIPEX);

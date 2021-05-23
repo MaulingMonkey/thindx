@@ -48,7 +48,7 @@ impl Resource {
 /// | [preload](Self::preload)                                      | [PreLoad]             | Preloads a managed resource.
 /// | [set_priority](Self::set_priority)                            | [SetPriority]         | Assigns the priority of a resource for scheduling purposes.
 /// | [set_private_data](Self::set_private_data)                    | [SetPrivateData]      | Associates data with the resource for use by the application.
-/// | <span style="opacity: 25%">set_debug_name</span>              | [SetPrivateData]      | Associates a debug name for graphics debuggers.
+/// | <span style="opacity: 25%">set_debug_name</span>              | [SetPrivateData]      | Associates a debug name with the resource for graphics debuggers.
 /// | <span style="opacity: 25%">set_private_data_com</span>        | [SetPrivateData]      | Associates a COM object with the resource for use by the application.
 ///
 /// [FreePrivateData]:  https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-freeprivatedata
@@ -97,7 +97,7 @@ pub trait IDirect3DResource9Ext : private::Sealed {
     ///
     /// Retrieves the priority for this resource.
     ///
-    /// [Resource::get_priority] is used for priority control of managed resources. This method returns `0` on nonmanaged resources.
+    /// [get_priority](Self::get_priority) is used for priority control of managed resources. This method returns `0` on nonmanaged resources.
     ///
     /// Priorities are used to determine when managed resources are to be removed from memory.
     /// A resource assigned a low priority is removed before a resource with a high priority.

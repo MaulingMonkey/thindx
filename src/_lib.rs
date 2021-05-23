@@ -289,8 +289,8 @@
 //! | ----------------------------------------- | ------------------------- | ------------- |
 //! | [Create]                                  | [D3DCREATE_*]             | A combination of one or more flags that controls [Direct3D::create_device] behavior.
 //! | [FVF]                                     | [D3DFVF_*]                | Describes the contents of vertices interleaved in a single data stream.
-//! | [GetData]                                 | [D3DGETDATA_*]            | Controls how [Query::get_data_inplace] behaves
-//! | [Issue]                                   | [D3DISSUE_*]              | Controls how [Query::issue] behaves
+//! | [GetData]                                 | [D3DGETDATA_*]            | Controls how [IDirect3DQuery9Ext::get_data_inplace] behaves
+//! | [Issue]                                   | [D3DISSUE_*]              | Controls how [IDirect3DQuery9Ext::issue] behaves
 //! | [Lock]                                    | [D3DLOCK_*]               | A combination of zero or more locking options that describe the type of lock to perform.
 //! | [Usage]                                   | [D3DUSAGE_*]              | Usage options that identify how resources are to be used.
 //!
