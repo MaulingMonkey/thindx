@@ -4,8 +4,6 @@ use winapi::ctypes::c_void;
 
 use std::ptr::null_mut;
 
-const MAX_ALLOC : u32 = 0xFFFF_0000;
-
 
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dindexbuffer9)\]
@@ -15,9 +13,9 @@ const MAX_ALLOC : u32 = 0xFFFF_0000;
 ///
 /// ### See Also
 ///
-/// *   [Device::create_index_buffer]
-/// *   [Device::set_indices]
-/// *   [Device::get_indices]
+/// *   [IDirect3DDevice9Ext::create_index_buffer]
+/// *   [IDirect3DDevice9Ext::set_indices]
+/// *   [IDirect3DDevice9Ext::get_indices]
 #[derive(Clone)] #[repr(transparent)]
 pub struct IndexBuffer(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DIndexBuffer9>);
 
@@ -28,303 +26,13 @@ pub struct IndexBuffer(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DIndexB
 ///
 /// ### See Also
 ///
-/// *   [Device::create_vertex_buffer]
-/// *   [Device::set_stream_source]
-/// *   [Device::set_stream_source_freq]
-/// *   [Device::get_stream_source]
-/// *   [Device::get_stream_source_freq]
+/// *   [IDirect3DDevice9::create_vertex_buffer]
+/// *   [IDirect3DDevice9::set_stream_source]
+/// *   [IDirect3DDevice9::set_stream_source_freq]
+/// *   [IDirect3DDevice9::get_stream_source]
+/// *   [IDirect3DDevice9::get_stream_source_freq]
 #[derive(Clone)] #[repr(transparent)]
 pub struct VertexBuffer(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DVertexBuffer9>);
-
-
-
-/// # Buffers
-/// Bind/Create/Update [IndexBuffer]s and [VertexBuffer]s
-impl Device {
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createindexbuffer)\]
-    /// IDirect3DDevice9::CreateIndexBuffer
-    ///
-    /// Creates an index buffer.
-    ///
-    /// ### Parameters
-    ///
-    /// *   `length`            Size of the index buffer, **in bytes**.
-    /// *   `usage`             Typically [Usage::None] or [Usage::Dynamic]
-    /// *   `format`            Typically [Format::Index16] or [Format::Index32] (type of index buffer)
-    /// *   `pool`              Memory class into which to place the [IndexBuffer].
-    /// *   `shared_handle`     Used in Direct3D 9 for Windows Vista to [share resources](https://docs.microsoft.com/en-us/windows/desktop/direct3d9/dx9lh); set it to `()` to not share a resource.
-    ///
-    /// ### Example
-    ///
-    /// ```rust
-    /// # use doc::*; let device = Device::pure();
-    /// let tri = device.create_index_buffer(3 * 2, Usage::None, Format::Index16, Pool::Managed, ()).unwrap();
-    /// ```
-    ///
-    /// ### Returns
-    ///
-    /// *   [D3DERR::INVALIDCALL]       if `length` cannot hold at least one index (2 for [Format::Index16], 4 for [Format::Index32])
-    /// *   [D3DERR::INVALIDCALL]       if `usage`, `format`, or `pool` is invalid
-    /// *   [D3DERR::OUTOFVIDEOMEMORY]
-    /// *   [D3DERR::INVALIDDATA]
-    /// *   [D3DERR::OUTOFMEMORY]
-    /// *   Ok([IndexBuffer])
-    pub fn create_index_buffer(&self, length: u32, usage: impl Into<Usage>, format: impl Into<Format>, pool: impl Into<Pool>, shared_handle: impl SharedHandleParam) -> Result<IndexBuffer, MethodError> {
-        // !0 will fail OUTOFMEMORY
-        // !0/2 spammed will fail OUTOFVIDEOMEMORY
-        // !0-4 spammed will "succeed", hinting at an arithmetic overflow within d3d or the driver
-        if length > MAX_ALLOC { return Err(MethodError("Device::create_index_buffer", D3DERR::ALLOC_OVERFLOW)); }
-
-        let _ = shared_handle;
-        let mut buffer = null_mut();
-        let hr = unsafe { self.0.CreateIndexBuffer(length, usage.into().into(), format.into().into(), pool.into().into(), &mut buffer, null_mut()) };
-        MethodError::check("IDirect3DDevice9::CreateIndexBuffer", hr)?;
-        Ok(unsafe { IndexBuffer::from_raw(buffer) })
-    }
-
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createvertexbuffer)\]
-    /// IDirect3DDevice9::CreateVertexBuffer
-    ///
-    /// Creates an vertex buffer.
-    ///
-    /// ### Parameters
-    ///
-    /// *   `length`            Size of the index buffer, **in bytes**.
-    ///                         For FVF vertex buffers, Length must be large enough to contain at least one vertex, but it need not be a multiple of the vertex size.
-    ///                         Length is not validated for non-FVF buffers.
-    /// *   `usage`             Typically [Usage::None] or [Usage::Dynamic]
-    /// *   `fvf`               Combination of [FVF], a usage specifier that describes the vertex format of the verticies in this buffer.
-    /// *   `pool`              Memory class into which to place the [IndexBuffer].
-    /// *   `shared_handle`     Used in Direct3D 9 for Windows Vista to [share resources](https://docs.microsoft.com/en-us/windows/desktop/direct3d9/dx9lh); set it to `()` to not share a resource.
-    ///
-    /// ### Example
-    ///
-    /// ```rust
-    /// # use doc::*; let device = Device::pure();
-    /// let vert_size = 3 * 4; // XYZ * floats
-    /// let length = 3 * vert_size; // 3 verts
-    /// let tri = device.create_vertex_buffer(length, Usage::None, FVF::XYZ, Pool::Managed, ()).unwrap();
-    /// ```
-    ///
-    /// ### Returns
-    ///
-    /// *   [D3DERR::INVALIDCALL]       if `length` cannot hold at least one [FVF]-sized vertex (1 if [FVF::None])
-    /// *   [D3DERR::INVALIDCALL]       if `usage` or `pool` is invalid
-    /// *   [D3DERR::OUTOFVIDEOMEMORY]  if allocation failed (driver or gpu memory)
-    /// *   [D3DERR::OUTOFMEMORY]       if allocation failed (driver or d3d runtime)
-    /// *   [D3DERR::ALLOC_OVERFLOW]    if allocation rejected by thin3d9 to avoid possible UB
-    /// *   Ok([VertexBuffer])
-    pub fn create_vertex_buffer(&self, length: u32, usage: impl Into<Usage>, fvf: impl Into<FVF>, pool: impl Into<Pool>, _shared_handle: impl SharedHandleParam) -> Result<VertexBuffer, MethodError> {
-        // !0 will fail OUTOFMEMORY
-        // !0/2 spammed will fail OUTOFVIDEOMEMORY
-        // !0-4 spammed will "succeed", hinting at an arithmetic overflow within d3d or the driver
-        if length > MAX_ALLOC { return Err(MethodError("Device::create_vertex_buffer", D3DERR::ALLOC_OVERFLOW)); }
-
-        let mut buffer = null_mut();
-        let hr = unsafe { self.0.CreateVertexBuffer(length, usage.into().into(), fvf.into().into(), pool.into().into(), &mut buffer, null_mut()) };
-        MethodError::check("IDirect3DDevice9::CreateVertexBuffer", hr)?;
-        Ok(unsafe { VertexBuffer::from_raw(buffer) })
-    }
-
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setindices)\]
-    /// IDirect3DDevice9::SetIndices
-    ///
-    /// Sets index data.
-    ///
-    /// ### Example
-    ///
-    /// ```rust
-    /// # use doc::*; let [device, device2] = Device::pure2();
-    /// let tri = device.create_index_buffer(3*2, Usage::None, Format::Index16, Pool::Default, ()).unwrap();
-    /// // ...initialize tri...
-    ///
-    /// device.set_indices(&tri).unwrap();          // bind the index buffer
-    /// device.set_indices(Some(&tri)).unwrap();    // bind the index buffer
-    /// device.set_indices(None).unwrap();          // unbind the index buffer
-    ///
-    /// assert_eq!(device2.set_indices(&tri), D3DERR::DEVICE_MISMATCH);
-    /// ```
-    ///
-    /// ### Returns
-    ///
-    /// *   [D3DERR::INVALIDCALL]       (perhaps only on an invalid [IndexBuffer] that thin3d9's API prevents?)
-    /// *   [D3DERR::DEVICE_MISMATCH]   If the [IndexBuffer] was created with a different [Device].
-    /// *   Ok(())
-    pub fn set_indices<'ib>(&self, index_data: impl Into<Option<&'ib IndexBuffer>>) -> Result<(), MethodError> {
-        let ptr = match index_data.into() {
-            None => null_mut(),
-            Some(ib) => { ib.check_compatible_with(self, "Device::set_indices")?; ib.as_raw() }
-            // Mixing index buffers between devices crashes on my computer, compatability check 100% necessary!
-        };
-        let hr = unsafe { self.0.SetIndices(ptr) };
-        MethodError::check("IDirect3DDevice9::SetIndices", hr)
-    }
-
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getindices)\]
-    /// IDirect3DDevice9::GetIndices
-    ///
-    /// Retrieves index data.
-    ///
-    /// ### Example
-    ///
-    /// ```rust
-    /// # use doc::*; let device = Device::pure();
-    /// # let tri = device.create_index_buffer(3*2, Usage::None, Format::Index16, Pool::Default, ()).unwrap();
-    /// let ib : Option<IndexBuffer> = device.get_indices().unwrap();
-    /// assert!(ib.is_none(), "device has no index buffer by default");
-    ///
-    /// device.set_indices(Some(&tri));
-    /// assert_eq!(tri.as_raw(), device.get_indices().unwrap().unwrap().as_raw());
-    /// ```
-    ///
-    /// ### Returns
-    ///
-    /// *   [D3DERR::INVALIDCALL]
-    /// *   Ok(Some([IndexBuffer]))     if an index buffer was bound
-    /// *   Ok(None)                    if no index buffer was bound
-    pub fn get_indices(&self) -> Result<Option<IndexBuffer>, MethodError> {
-        let mut buffer = null_mut();
-        let hr = unsafe { self.0.GetIndices(&mut buffer) };
-        MethodError::check("IDirect3DDevice9::GetIndices", hr)?;
-        Ok(unsafe { IndexBuffer::from_raw_opt(buffer) })
-    }
-
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setstreamsource)\]
-    /// IDirect3DDevice9::SetStreamSource
-    ///
-    /// Binds a vertex buffer to a device data stream. For more information, see [Setting the Stream Source (Direct3D 9)].
-    ///
-    /// [Setting the Stream Source (Direct3D 9)]:       https://docs.microsoft.com/en-us/windows/desktop/direct3d9/setting-the-stream-source
-    ///
-    /// ### Example
-    ///
-    /// ```rust
-    /// # use doc::*; let [device, device2] = Device::pure2();
-    /// let tri = device.create_vertex_buffer(3*4*3, Usage::None, FVF::XYZ, Pool::Default, ()).unwrap();
-    /// // ...initialize tri...
-    /// device.set_stream_source(0, &tri,       0, 4*3).unwrap(); // bind the vertex buffer
-    /// device.set_stream_source(0, Some(&tri), 0, 4*3).unwrap(); // bind the vertex buffer
-    /// device.set_stream_source(0, None,       0, 0  ).unwrap(); // unbind the vertex buffer
-    ///
-    /// assert_eq!(device2.set_stream_source(0, &tri, 0, 4*3), D3DERR::DEVICE_MISMATCH);
-    /// ```
-    ///
-    /// ### Returns
-    ///
-    /// *   [D3DERR::INVALIDCALL]       if the [VertexBuffer] belongs to another device?
-    /// *   [D3DERR::DEVICE_MISMATCH]   If the [IndexBuffer] was created with a different [Device].
-    /// *   Ok(`()`)
-    pub fn set_stream_source<'b>(&self, stream_number: u32, stream_data: impl Into<Option<&'b VertexBuffer>>, offset_in_bytes: u32, stride: u32) -> Result<(), MethodError> {
-        let stream_data = match stream_data.into() {
-            None => null_mut(),
-            Some(sd) => { sd.check_compatible_with(self, "Device::set_stream_source")?; sd.as_raw() },
-            // XXX: Might be able to skip check_compatible_with with software vertex buffers?  Those might be safe?
-            // They don't seem to crash for me, but I'm erring on the side of caution for now.
-        };
-        let hr = unsafe { self.0.SetStreamSource(stream_number, stream_data, offset_in_bytes, stride) };
-        MethodError::check("IDirect3DDevice9::SetStreamSource", hr)
-    }
-
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setstreamsourcefreq)\]
-    /// IDirect3DDevice9::SetStreamSourceFreq
-    ///
-    /// Sets the stream source frequency divider value. This may be used to draw several instances of geometry.
-    ///
-    /// ### Example
-    ///
-    /// ```rust
-    /// # use doc::*; let device = Device::pure();
-    /// // Setup instanced rendering, 100 instances, with:
-    /// // shared geometry in stream 0, repeated 100 times:
-    /// device.set_stream_source_freq(0, StreamSource::indexed_data(100)).unwrap();
-    /// // per-instance data in stream 1:
-    /// device.set_stream_source_freq(1, StreamSource::instance_data(1)).unwrap();
-    ///
-    /// // Restore non-instanced rendering
-    /// device.set_stream_source_freq(0, StreamSource::regular()).unwrap();
-    /// device.set_stream_source_freq(1, StreamSource::regular()).unwrap();
-    /// ```
-    ///
-    /// ### Returns
-    ///
-    /// *   [D3DERR::INVALIDCALL]
-    /// *   Ok(`()`)
-    pub fn set_stream_source_freq(&self, stream_number: u32, setting: impl Into<StreamSource>) -> Result<(), MethodError> {
-        let setting = setting.into().into();
-        let hr = unsafe { self.0.SetStreamSourceFreq(stream_number, setting) };
-        MethodError::check("IDirect3DDevice9::SetStreamSourceFreq", hr)
-    }
-
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getstreamsource)\]
-    /// IDirect3DDevice9::GetStreamSource
-    ///
-    /// Retrieves a vertex buffer bound to the specified data stream.
-    ///
-    /// ### Example
-    ///
-    /// ```rust
-    /// # use doc::*; let device = Device::pure();
-    /// // No stream bound to start
-    /// let (vb, offset, stride) = device.get_stream_source(0).unwrap();
-    /// assert!(vb.is_none());
-    /// assert_eq!(offset, 0);
-    /// assert_eq!(stride, 0);
-    ///
-    /// let tri = device.create_vertex_buffer(3*4*3, Usage::None, FVF::XYZ, Pool::Default, ()).unwrap();
-    /// device.set_stream_source(0, &tri, 0, 4*3).unwrap(); // bind the vertex buffer
-    ///
-    /// // No stream bound to start
-    /// let (vb, offset, stride) = device.get_stream_source(0).unwrap();
-    /// assert_eq!(vb.map(|vb| vb.as_raw()), Some(tri.as_raw()));
-    /// assert_eq!(offset, 0);
-    /// assert_eq!(stride, 4*3);
-    /// ```
-    ///
-    /// ### Returns
-    ///
-    /// *   [D3DERR::INVALIDCALL]
-    /// *   Ok(Some([VertexBuffer]), `offset_in_bytes`, `stride`)
-    /// *   Ok(`(None, 0, 0)`)
-    pub fn get_stream_source(&self, stream_number: u32) -> Result<(Option<VertexBuffer>, u32, u32), MethodError> {
-        let mut buffer = null_mut();
-        let mut offset = 0;
-        let mut stride = 0;
-        let hr = unsafe { self.0.GetStreamSource(stream_number, &mut buffer, &mut offset, &mut stride) };
-        MethodError::check("IDirect3DDevice9::GetStreamSource", hr)?;
-        let buffer = unsafe { VertexBuffer::from_raw_opt(buffer) };
-        Ok((buffer, offset, stride))
-    }
-
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getstreamsourcefreq)\]
-    /// IDirect3DDevice9::GetStreamSourceFreq
-    ///
-    /// Gets the stream source frequency divider value.
-    ///
-    /// ### Example
-    ///
-    /// ```rust
-    /// # use doc::*; let device = Device::pure();
-    /// assert_eq!(device.get_stream_source_freq(0).unwrap(), StreamSource::regular());
-    /// assert_eq!(device.get_stream_source_freq(1).unwrap(), StreamSource::regular());
-    ///
-    /// device.set_stream_source_freq(0, StreamSource::indexed_data(100)).unwrap();
-    /// device.set_stream_source_freq(1, StreamSource::instance_data(1)).unwrap();
-    ///
-    /// assert_eq!(device.get_stream_source_freq(0).unwrap(), StreamSource::indexed_data(100));
-    /// assert_eq!(device.get_stream_source_freq(1).unwrap(), StreamSource::instance_data(1));
-    /// ```
-    ///
-    /// ### Returns
-    ///
-    /// *   [D3DERR::INVALIDCALL]
-    /// *   Ok([StreamSource])
-    pub fn get_stream_source_freq(&self, stream_number: u32) -> Result<StreamSource, MethodError> {
-        let mut freq = 0;
-        let hr = unsafe { self.0.GetStreamSourceFreq(stream_number, &mut freq) };
-        MethodError::check("IDirect3DDevice9::GetStreamSourceFreq", hr)?;
-        Ok(StreamSource::from_unchecked(freq))
-    }
-}
 
 
 
@@ -642,7 +350,7 @@ mod vertex_buffer {
         !0,
         !0-4,
         !0-100,
-        MAX_ALLOC,
+        MAX_BUFFER_ALLOC,
         0xF000_0000,
         !0/2,
         !0/8,

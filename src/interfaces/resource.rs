@@ -12,19 +12,19 @@ use std::ptr::null_mut;
 ///
 /// ### See Also
 ///
-/// *   [Device::create_cube_texture]
-/// *   [Device::create_texture]
-/// *   [Device::create_volume_texture]
-/// *   [Device::create_index_buffer]
-/// *   [Device::create_vertex_buffer]
+/// *   [IDirect3DDevice9Ext::create_cube_texture]
+/// *   [IDirect3DDevice9Ext::create_texture]
+/// *   [IDirect3DDevice9Ext::create_volume_texture]
+/// *   [IDirect3DDevice9Ext::create_index_buffer]
+/// *   [IDirect3DDevice9Ext::create_vertex_buffer]
 #[derive(Clone)] #[repr(transparent)]
 pub struct Resource(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DResource9>);
 
 impl Resource {
     /// Check if `self` is compatible with `device`, returning an `Err(...)` if it isn't.
-    pub fn check_compatible_with(&self, device: &Device, method: &'static str) -> Result<(), MethodError> {
+    pub fn check_compatible_with(&self, device: &impl IDirect3DDevice9Ext, method: &'static str) -> Result<(), MethodError> {
         let my_device = self.get_device()?;
-        if my_device.as_raw() == device.as_raw() {
+        if my_device.as_raw() == device.as_winapi() as *const _ as *mut _ {
             Ok(())
         } else {
             Err(MethodError(method, D3DERR::DEVICE_MISMATCH))

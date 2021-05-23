@@ -12,68 +12,11 @@ use std::ptr::null_mut;
 ///
 /// ### See Also
 ///
-/// *   [Device::begin_state_block]
-/// *   [Device::create_state_block]
-/// *   [Device::end_state_block]
+/// *   [IDirect3DDevice9Ext::begin_state_block]
+/// *   [IDirect3DDevice9Ext::create_state_block]
+/// *   [IDirect3DDevice9Ext::end_state_block]
 #[derive(Clone)] #[repr(transparent)]
 pub struct StateBlock(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DStateBlock9>);
-
-
-
-/// # StateBlocks
-/// Create/Capture/Replay Direct3D states via [StateBlock]s
-impl Device {
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-beginstateblock)\]
-    /// IDirect3DDevice9::BeginStateBlock
-    ///
-    /// ### Returns
-    ///
-    /// *   [D3DERR::INVALIDCALL]   if the device was already within a state block
-    /// *   `Ok(())`                otherwise
-    pub fn begin_state_block(&self) -> Result<(), MethodError> {
-        let hr = unsafe { self.0.BeginStateBlock() };
-        MethodError::check("IDirect3DDevice9::BeginStateBlock", hr)
-    }
-
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createstateblock)\]
-    /// IDirect3DDevice9::CreateStateBlock
-    ///
-    /// Creates a new state block that contains the values for all device states, vertex-related states, or pixel-related states.
-    ///
-    /// Vertex-related device states typically refer to those states that affect how the system processes vertices.
-    /// Pixel-related states generally refer to device states that affect how the system processes pixel or depth-buffer data during rasterization.
-    /// Some states are contained in both groups.
-    ///
-    /// ### Returns
-    ///
-    /// *   [D3DERR::INVALIDCALL]
-    /// *   [D3DERR::OUTOFVIDEOMEMORY]
-    /// *   [D3DERR::OUTOFMEMORY]
-    /// *   Ok([StateBlock])
-    pub fn create_state_block(&self, type_: StateBlockType) -> Result<StateBlock, MethodError> {
-        let mut sb = null_mut();
-        let hr = unsafe { self.0.CreateStateBlock(type_.into(), &mut sb) };
-        MethodError::check("IDirect3DDevice9::CreateStateBlock", hr)?;
-        Ok(unsafe { StateBlock::from_raw(sb) })
-    }
-
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-endstateblock)\]
-    /// IDirect3DDevice9::EndStateBlock
-    ///
-    /// ### Returns
-    ///
-    /// *   [D3DERR::INVALIDCALL]   if the device wasn't within a state block
-    /// *   `Ok(state_block)`       if a state block was successfully captured
-    pub fn end_state_block(&self) -> Result<StateBlock, MethodError> {
-        let mut sb = null_mut();
-        let hr = unsafe { self.0.EndStateBlock(&mut sb) };
-        MethodError::check("IDirect3DDevice9::EndStateBlock", hr)?;
-        Ok(unsafe { StateBlock::from_raw(sb) })
-    }
-
-    // TODO: fn state_block_scope(&self) with sane drop behavior?
-    // TODO: examples
-}
 
 #[test] fn begin_end_state_block() {
     let device = Device::test();

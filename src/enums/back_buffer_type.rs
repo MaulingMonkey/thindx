@@ -13,7 +13,7 @@ use winapi::shared::d3d9types::*;
 ///
 /// ### See Also
 ///
-/// *   [Device::get_back_buffer]
+/// *   [IDirect3DDevice9Ext::get_back_buffer]
 /// *   [SwapChain::get_back_buffer]
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)] pub struct BackBufferType(D3DBACKBUFFER_TYPE);

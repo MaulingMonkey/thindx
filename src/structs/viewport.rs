@@ -13,8 +13,8 @@ use std::ops::{Deref, DerefMut};
 ///
 /// ### See Also
 ///
-/// *   [Device::set_viewport]
-/// *   [Device::get_viewport]
+/// *   [IDirect3DDevice9Ext::set_viewport]
+/// *   [IDirect3DDevice9Ext::get_viewport]
 #[derive(Clone, Copy, Debug, Default)]
 #[repr(C)] pub struct Viewport {
     /// Pixel coordinate of the upper-left corner of the viewport on the render-target surface.
@@ -53,51 +53,3 @@ impl From<D3DVIEWPORT9> for Viewport { fn from(value: D3DVIEWPORT9) -> Self { un
 impl From<Viewport> for D3DVIEWPORT9 { fn from(value: Viewport    ) -> Self { unsafe { std::mem::transmute(value) } } }
 
 test_layout! { Viewport => unsafe D3DVIEWPORT9 { x => X, y => Y, width => Width, height => Height, min_z => MinZ, max_z => MaxZ } }
-
-
-
-/// # Viewports
-/// Configure (and query) the [Viewport]
-impl Device {
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setviewport)\]
-    /// IDirect3DDevice9::SetViewport
-    ///
-    /// ### Returns
-    ///
-    /// *   [D3DERR::INVALIDCALL]   If the viewport is invalid / describes a region that cannot exist within the render target surface.
-    /// *   Ok(`()`)
-    ///
-    /// ### Example
-    ///
-    /// ```rust
-    /// # use doc::*; let device = Device::test();
-    /// device.set_viewport(Viewport{ x: 0, y: 0, width: 100, height: 100, min_z: 0.0, max_z: 1.0 }).unwrap();
-    /// ```
-    pub fn set_viewport(&self, viewport: impl Into<Viewport>) -> Result<(), MethodError> {
-        let viewport = viewport.into();
-        let hr = unsafe { self.0.SetViewport(&*viewport) };
-        MethodError::check("IDirect3DDevice9::SetViewport", hr)
-    }
-
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getviewport)\]
-    /// IDirect3DDevice9::GetViewport
-    ///
-    /// ### Returns
-    ///
-    /// *   [D3DERR::INVALIDCALL]   If this is a pure device?
-    /// *   [D3DERR::INVALIDCALL]   If the viewport is invalid
-    /// *   Ok(`()`)
-    ///
-    /// ### Example
-    ///
-    /// ```rust
-    /// # use doc::*; let device = Device::test();
-    /// let viewport : Viewport = device.get_viewport().unwrap();
-    /// ```
-    pub fn get_viewport(&self) -> Result<Viewport, MethodError> {
-        let mut viewport = Viewport::default();
-        let hr = unsafe { self.0.GetViewport(&mut *viewport) };
-        MethodError::check("IDirect3DDevice9::GetViewport", hr)?;
-        Ok(viewport)
-    }
-}

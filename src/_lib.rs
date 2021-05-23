@@ -159,7 +159,7 @@
 //! | [SBT]::\*                                 | [D3DSBT]_\*               | Predefined sets of pipeline state used by state blocks
 //! | [StencilOp]::\*                           | [D3DSTENCILOP]_\*         |
 //! | [StreamSource]::\*                        | [D3DSTREAMSOURCE]_\*      |
-//! | [SwapEffect]::\*                          | [D3DSWAPEFFECT]_\*        | Defines [Device::present] swap effects.
+//! | [SwapEffect]::\*                          | [D3DSWAPEFFECT]_\*        | Defines [IDirect3DDevice9Ext::present] swap effects.
 //! | [TAddress]::\*                            | [D3DTADDRESS]_\*          |
 //! | [TexF]::\*                                | [D3DTEXF]_\*              |
 //! | [TOP]::\*                                 | [D3DTOP]_\*               |
@@ -206,7 +206,7 @@
 //! | [StateBlockType]                          | [D3DSTATEBLOCKTYPE]       | Predefined sets of pipeline state used by state blocks
 //! | [StencilOp]                               | [D3DSTENCILOP]            |
 //! | [StreamSource]                            | [D3DSTREAMSOURCE]         |
-//! | [SwapEffect]                              | [D3DSWAPEFFECT]           | Defines [Device::present] swap effects.
+//! | [SwapEffect]                              | [D3DSWAPEFFECT]           | Defines [IDirect3DDevice9Ext::present] swap effects.
 //! | [TextureAddress]                          | [D3DTEXTUREADDRESS]       |
 //! | [TextureFilterType]                       | [D3DTEXTUREFILTERTYPE]    |
 //! | [TextureOp]                               | [D3DTEXTUREOP]            |

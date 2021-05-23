@@ -13,37 +13,6 @@ pub struct VertexDeclaration(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3D
 
 
 
-/// # VertexDeclarations
-/// Bind/Create [VertexDeclaration]s for describing [VertexBuffer] layouts
-impl Device {
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createvertexdeclaration)\]
-    /// IDirect3DDevice9::CreateVertexDeclaration
-    ///
-    /// Create a vertex shader declaration from the device and the vertex elements.
-    ///
-    /// See the [Vertex Declaration (Direct3D 9)] page for a detailed description of how to map vertex declarations between different versions of DirectX.
-    ///
-    /// ### Returns
-    ///
-    /// *   [D3DERR::INVALIDCALL]   if `elements.last()` != `Some(D3DDECL_END)`
-    /// *   [D3DERR::INVALIDCALL]
-    /// *   Ok([VertexDeclaration])
-    ///
-    /// [Vertex Declaration (Direct3D 9)]:          https://docs.microsoft.com/en-us/windows/desktop/direct3d9/vertex-declaration
-    pub fn create_vertex_declaration(&self, elements: &[VertexElement]) -> Result<VertexDeclaration, MethodError> {
-        let end = elements.last().ok_or(MethodError("Device::create_vertex_declaration", D3DERR::INVALIDCALL))?;
-        // This check is required for CreateVertexDeclaration to be sound!
-        if *end != VertexElement::END { return Err(MethodError("Device::create_vertex_declaration", D3DERR::INVALIDCALL)); }
-
-        let mut vd = null_mut();
-        let hr = unsafe { self.0.CreateVertexDeclaration(elements.as_ptr().cast(), &mut vd) };
-        MethodError::check("IDirect3DDevice9::CreateVertexDeclaration", hr)?;
-        Ok(unsafe { VertexDeclaration::from_raw(vd) })
-    }
-}
-
-
-
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dvertexdeclaration9)\]
 /// IDirect3DVertexDeclaration9 extension methods
 ///

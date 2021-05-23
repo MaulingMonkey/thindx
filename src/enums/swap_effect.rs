@@ -14,12 +14,12 @@ use winapi::shared::d3d9types::*;
 enumish! { SwapEffect => D3DSWAPEFFECT; Discard, Flip, Copy, Overlay, FlipEx }
 
 #[allow(non_upper_case_globals)] impl SwapEffect { // These are enum-like
-    /// When a swap chain is created with a swap effect of [SwapEffect::Flip] or [SwapEffect::Copy], the runtime will guarantee that an [Device::present] operation will not affect the content of any of the back buffers.
+    /// When a swap chain is created with a swap effect of [SwapEffect::Flip] or [SwapEffect::Copy], the runtime will guarantee that an [IDirect3DDevice9Ext::present] operation will not affect the content of any of the back buffers.
     /// Unfortunately, meeting this guarantee can involve substantial video memory or processing overheads, especially when implementing flip semantics for a windowed swap chain or copy semantics for a full-screen swap chain.
     /// An application may use the [SwapEffect::Discard] swap effect to avoid these overheads and to enable the display driver to select the most efficient presentation technique for the swap chain.
     /// This is also the only swap effect that may be used when specifying a value other than [MultiSample::None] for the MultiSampleType member of D3DPRESENT_PARAMETERS.
     ///
-    /// Like a swap chain that uses [SwapEffect::Flip], a swap chain that uses [SwapEffect::Discard] might include more than one back buffer, any of which may be accessed using [Device::get_back_buffer] or [SwapChain::get_back_buffer].
+    /// Like a swap chain that uses [SwapEffect::Flip], a swap chain that uses [SwapEffect::Discard] might include more than one back buffer, any of which may be accessed using [IDirect3DDevice9Ext::get_back_buffer] or [SwapChain::get_back_buffer].
     /// The swap chain is best envisaged as a queue in which 0 always indexes the back buffer that will be displayed by the next present operation and from which buffers are discarded when they have been displayed.
     ///
     /// An application that uses this swap effect cannot make any assumptions about the contents of a discarded back buffer and should therefore update an entire back buffer before invoking a Present operation that would display it.

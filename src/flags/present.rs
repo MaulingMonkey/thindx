@@ -23,7 +23,7 @@ const D3DPRESENT_FORCEIMMEDIATE             : D3DPRESENT = 0x00000100;
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dpresent)\]
 /// DWORD / D3DPRESENT_*
 ///
-/// Describes the relationship between the adapter refresh rate and the rate at which [Device::present] or [SwapChain::present] operations are completed.
+/// Describes the relationship between the adapter refresh rate and the rate at which [IDirect3DDevice9Ext::present] or [SwapChain::present] operations are completed.
 /// These values also serve as flag values for the PresentationIntervals field of [Caps].
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)] pub struct Present(D3DPRESENT);
