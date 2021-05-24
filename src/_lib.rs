@@ -321,7 +321,8 @@
 //! | [IndexBufferDesc]                         | [D3DINDEXBUFFER_DESC]     | Describes an [IndexBuffer]
 //! | [Light]                                   | [D3DLIGHT9]               | Describes lighting information
 //! | [Material]                                | [D3DMATERIAL9]            | Describes a material that responds to lighting
-//! | [RasterStatus]                            | [D3DRASTER_STATUS]        |
+//! | [PresentStats]                            | [D3DPRESENTSTATS]         | Describes swapchain statistics relating to PresentEx calls.
+//! | [RasterStatus]                            | [D3DRASTER_STATUS]        | `{ in_vblank, scan_line }`
 //! | [Rect]                                    | [D3DRECT] / [RECT]        | `[0i32 .. 1i32, 2i32 .. 3i32]` signed x/y range structure
 //! | [Vector]                                  | [D3DVECTOR]               | A `{ x, y, z }` 3-dimensional floating point position
 //! | [VertexBufferDesc]                        | [D3DVERTEXBUFFER_DESC]    | Describes an [VertexBuffer]
@@ -337,6 +338,7 @@
 //! [D3DINDEXBUFFER_DESC]:      https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dindexbuffer-desc
 //! [D3DLIGHT9]:                https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dlight9
 //! [D3DMATERIAL9]:             https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dmaterial9
+//! [D3DPRESENTSTATS]:          https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dpresentstats
 //! [D3DRASTER_STATUS]:         https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3draster-status
 //! [D3DRECT]:                  https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3drect
 //! [D3DVECTOR]:                https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dvector
