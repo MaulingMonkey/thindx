@@ -37,6 +37,7 @@ mod display_mode;           pub use display_mode::*;
 mod index_buffer_desc;      pub use index_buffer_desc::*;
 mod light;                  pub use light::*;
 mod material;               pub use material::*;
+mod raster_status;          pub use raster_status::*;
 mod rect;                   pub use rect::*;
 mod surface_desc;           pub use surface_desc::*;
 mod vector;                 pub use vector::*;
