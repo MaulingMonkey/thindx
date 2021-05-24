@@ -33,6 +33,7 @@ mod r#box;                  pub use r#box::*;
 mod caps;                   pub use caps::*;
 mod clip_status;            pub use clip_status::*;
 mod color_value;            pub use color_value::*;
+mod display_mode_ex;        pub use display_mode_ex::*;
 mod display_mode;           pub use display_mode::*;
 mod index_buffer_desc;      pub use index_buffer_desc::*;
 mod light;                  pub use light::*;
