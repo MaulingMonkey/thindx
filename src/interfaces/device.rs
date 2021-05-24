@@ -1690,10 +1690,10 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
         let dirty_region    = match dirty_region {
             None => null::<RGNDATA>(),
             Some(dr) => {
-                if dr.rdh.dwSize as usize   != std::mem::size_of::<RGNDATAHEADER>() { return Err(MethodError("Device::present", D3DERR::INVALID_STRUCT_FIELD)); }
-                if dr.rdh.iType             != RDH_RECTANGLES                       { return Err(MethodError("Device::present", D3DERR::INVALID_STRUCT_FIELD)); }
-                if dr.rdh.nCount as usize   > dr.buffer.len()                       { return Err(MethodError("Device::present", D3DERR::INVALID_STRUCT_FIELD)); }
-                if dr.rdh.nRgnSize as usize > std::mem::size_of_val(dr)             { return Err(MethodError("Device::present", D3DERR::INVALID_STRUCT_FIELD)); }
+                if dr.rdh.dwSize as usize   != std::mem::size_of::<RGNDATAHEADER>() { return Err(MethodError("IDirect3DDevice9Ext::present", D3DERR::INVALID_STRUCT_FIELD)); }
+                if dr.rdh.iType             != RDH_RECTANGLES                       { return Err(MethodError("IDirect3DDevice9Ext::present", D3DERR::INVALID_STRUCT_FIELD)); }
+                if dr.rdh.nCount as usize   > dr.buffer.len()                       { return Err(MethodError("IDirect3DDevice9Ext::present", D3DERR::INVALID_STRUCT_FIELD)); }
+                if dr.rdh.nRgnSize as usize > std::mem::size_of_val(dr)             { return Err(MethodError("IDirect3DDevice9Ext::present", D3DERR::INVALID_STRUCT_FIELD)); }
                 let dr : *const RgnData = dr;
                 dr.cast()
             },
