@@ -317,9 +317,11 @@
 //! | [ClipStatus]                              | [D3DCLIPSTATUS9]          | Describes the current clip status.
 //! | [ColorValue]                              | [D3DCOLORVALUE]           | A <code>{ <span style="color: red">r</span>, <span style="color: green">g</span>, <span style="color: blue">b</span>, a }</code> floating-point color
 //! | [DisplayMode]                             | [D3DDISPLAYMODE]          | A `{ width, height, refresh_rate, format }` display mode
+//! | [DisplayModeEx]                           | [D3DDISPLAYMODEEX]        | A `{ width, height, refresh_rate, format, scanline_ordering }` display mode
 //! | [IndexBufferDesc]                         | [D3DINDEXBUFFER_DESC]     | Describes an [IndexBuffer]
 //! | [Light]                                   | [D3DLIGHT9]               | Describes lighting information
 //! | [Material]                                | [D3DMATERIAL9]            | Describes a material that responds to lighting
+//! | [RasterStatus]                            | [D3DRASTER_STATUS]        |
 //! | [Rect]                                    | [D3DRECT] / [RECT]        | `[0i32 .. 1i32, 2i32 .. 3i32]` signed x/y range structure
 //! | [Vector]                                  | [D3DVECTOR]               | A `{ x, y, z }` 3-dimensional floating point position
 //! | [VertexBufferDesc]                        | [D3DVERTEXBUFFER_DESC]    | Describes an [VertexBuffer]
@@ -331,9 +333,11 @@
 //! [D3DCLIPSTATUS9]:           https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dclipstatus9
 //! [D3DCOLORVALUE]:            https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dcolorvalue
 //! [D3DDISPLAYMODE]:           https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddisplaymode
+//! [D3DDISPLAYMODEEX]:         https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddisplaymodeex
 //! [D3DINDEXBUFFER_DESC]:      https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dindexbuffer-desc
 //! [D3DLIGHT9]:                https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dlight9
 //! [D3DMATERIAL9]:             https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dmaterial9
+//! [D3DRASTER_STATUS]:         https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3draster-status
 //! [D3DRECT]:                  https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3drect
 //! [D3DVECTOR]:                https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dvector
 //! [D3DVERTEXBUFFER_DESC]:     https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dvertexbuffer-desc
