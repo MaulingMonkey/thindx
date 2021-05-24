@@ -12,6 +12,7 @@ mod shaders;        pub use shaders::*;
 mod state_block;    pub use state_block::*;
 mod surface;        pub use surface::*;
 mod swap_chain;     pub use swap_chain::*;
+mod swap_chain_ex;  pub use swap_chain_ex::*;
 mod texture;        pub use texture::*;
 mod unknown;        pub use unknown::*;
 mod vertex_declaration; pub use vertex_declaration::*;
