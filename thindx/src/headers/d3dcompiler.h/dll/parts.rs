@@ -18,7 +18,7 @@ impl Compiler {
     /// *   `flags`         - Reserved (pass [None])
     ///
     /// ### Returns
-    /// *   Ok([ReadOnlyBlob])                  - on success
+    /// *   Ok([Blob])                  - on success
     /// *   Err([Error]) with `error.kind()` ==
     ///     *   [THINERR::MISSING_DLL_EXPORT] - on `d3dcompiler_42.dll` and earlier
     ///     *   [D3DERR::INVALIDCALL]           - on data that wasn't compiled shader code.
@@ -26,7 +26,7 @@ impl Compiler {
     /// ### Example
     /// ```rust
     /// # use thindx::d3d::*; let compiler = Compiler::new(47).unwrap();
-    /// # let shader : ReadOnlyBlob = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap().shader;
+    /// # let shader : Blob = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap().shader;
     /// let shader2 = compiler.set_blob_part(
     ///     shader.get_buffer(), Blob::PrivateData, (), b"testing 123"
     /// ).unwrap();
@@ -36,14 +36,14 @@ impl Compiler {
     /// ).unwrap().get_buffer());
     /// ```
     #[requires(d3dcompiler=43)]
-    pub fn get_blob_part(&self, src_data: &[u8], part: impl Into<BlobPart>, flags: Option<void::Void>) -> Result<ReadOnlyBlob, Error> {
+    pub fn get_blob_part(&self, src_data: &[u8], part: impl Into<BlobPart>, flags: Option<void::Void>) -> Result<Blob, Error> {
         let f = self.D3DGetBlobPart.ok_or(Error::new("D3DGetBlobPart", THINERR::MISSING_DLL_EXPORT))?;
         let part = part.into().into();
         let _ = flags; let flags = 0;
         let mut blob = null_mut();
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), part, flags, &mut blob) };
         Error::check("D3DGetBlobPart", hr)?;
-        Ok(unsafe { ReadOnlyBlob::from_raw(blob) })
+        Ok(unsafe { Blob::from_raw(blob) })
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dgetdebuginfo)\]
@@ -58,7 +58,7 @@ impl Compiler {
     ///
     /// ### Returns
     /// *   Err([THINERR::MISSING_DLL_EXPORT])    - `d3dcompiler_39.dll` and earlier
-    /// *   Ok([ReadOnlyBlob])
+    /// *   Ok([Blob])
     ///
     /// ### Example
     /// ```rust,no_run
@@ -74,13 +74,13 @@ impl Compiler {
     /// println!("{:?}", debug_info.get_buffer());
     /// ```
     #[requires(d3dcompiler=40)]
-    pub fn get_debug_info(&self, src_data: &[u8]) -> Result<ReadOnlyBlob, Error> {
+    pub fn get_debug_info(&self, src_data: &[u8]) -> Result<Blob, Error> {
         let f = self.D3DGetDebugInfo.ok_or(Error::new("D3DGetDebugInfo", THINERR::MISSING_DLL_EXPORT))?;
 
         let mut blob = null_mut();
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), &mut blob) };
         Error::check("D3DGetDebugInfo", hr)?;
-        Ok(unsafe { ReadOnlyBlob::from_raw(blob) })
+        Ok(unsafe { Blob::from_raw(blob) })
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dgetinputandoutputsignatureblob)\]
@@ -88,12 +88,12 @@ impl Compiler {
     ///
     /// > **Note:** [get_input_and_output_signature_blob](Self::get_input_and_output_signature_blob) may be altered or
     /// > unavailable for releases after Windows 8.1. Instead use [get_glob_part](Self::get_blob_part) with the
-    /// > [Blob::InputAndOutputSignatureBlob] value.
+    /// > [BlobPart::InputAndOutputSignatureBlob] value.
     ///
     /// Gets the input and output signatures from a compilation result.
     ///
     /// ### Returns
-    /// *   Ok([ReadOnlyBlob])
+    /// *   Ok([Blob])
     ///
     /// ### Example
     /// ```rust
@@ -108,13 +108,13 @@ impl Compiler {
     /// [68, 88, 66, 67, 97, ...
     /// ```
     // #[requires(d3dcompiler=33)] // or earlier?
-    pub fn get_input_and_output_signature_blob(&self, src_data: &[u8]) -> Result<ReadOnlyBlob, Error> {
+    pub fn get_input_and_output_signature_blob(&self, src_data: &[u8]) -> Result<Blob, Error> {
         let f = self.D3DGetInputAndOutputSignatureBlob.ok_or(Error::new("D3DGetInputAndOutputSignatureBlob", THINERR::MISSING_DLL_EXPORT))?;
 
         let mut blob = null_mut();
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), &mut blob) };
         Error::check("D3DGetInputAndOutputSignatureBlob", hr)?;
-        Ok(unsafe { ReadOnlyBlob::from_raw(blob) })
+        Ok(unsafe { Blob::from_raw(blob) })
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dgetinputsignatureblob)\]
@@ -122,12 +122,12 @@ impl Compiler {
     ///
     /// > **Note:** [get_input_signature_blob](Self::get_input_signature_blob) may be altered or
     /// > unavailable for releases after Windows 8.1. Instead use [get_glob_part](Self::get_blob_part) with the
-    /// > [Blob::InputSignatureBlob] value.
+    /// > [BlobPart::InputSignatureBlob] value.
     ///
     /// Gets the input signature from a compilation result.
     ///
     /// ### Returns
-    /// *   Ok([ReadOnlyBlob])
+    /// *   Ok([Blob])
     ///
     /// ### Example
     /// ```rust
@@ -142,13 +142,13 @@ impl Compiler {
     /// [68, 88, 66, 67, 53, ...
     /// ```
     // #[requires(d3dcompiler=33)] // or earlier?
-    pub fn get_input_signature_blob(&self, src_data: &[u8]) -> Result<ReadOnlyBlob, Error> {
+    pub fn get_input_signature_blob(&self, src_data: &[u8]) -> Result<Blob, Error> {
         let f = self.D3DGetInputSignatureBlob.ok_or(Error::new("D3DGetInputSignatureBlob", THINERR::MISSING_DLL_EXPORT))?;
 
         let mut blob = null_mut();
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), &mut blob) };
         Error::check("D3DGetInputSignatureBlob", hr)?;
-        Ok(unsafe { ReadOnlyBlob::from_raw(blob) })
+        Ok(unsafe { Blob::from_raw(blob) })
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dgetoutputsignatureblob)\]
@@ -156,12 +156,12 @@ impl Compiler {
     ///
     /// > **Note:** [get_output_signature_blob](Self::get_output_signature_blob) may be altered or
     /// > unavailable for releases after Windows 8.1. Instead use [get_glob_part](Self::get_blob_part) with the
-    /// > [Blob::OutputSignatureBlob] value.
+    /// > [BlobPart::OutputSignatureBlob] value.
     ///
     /// Gets the output signature from a compilation result.
     ///
     /// ### Returns
-    /// *   Ok([ReadOnlyBlob])
+    /// *   Ok([Blob])
     ///
     /// ### Example
     /// ```rust
@@ -176,13 +176,13 @@ impl Compiler {
     /// [68, 88, 66, 67, 210, ...
     /// ```
     // #[requires(d3dcompiler=33)] // or earlier?
-    pub fn get_output_signature_blob(&self, src_data: &[u8]) -> Result<ReadOnlyBlob, Error> {
+    pub fn get_output_signature_blob(&self, src_data: &[u8]) -> Result<Blob, Error> {
         let f = self.D3DGetOutputSignatureBlob.ok_or(Error::new("D3DGetOutputSignatureBlob", THINERR::MISSING_DLL_EXPORT))?;
 
         let mut blob = null_mut();
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), &mut blob) };
         Error::check("D3DGetOutputSignatureBlob", hr)?;
-        Ok(unsafe { ReadOnlyBlob::from_raw(blob) })
+        Ok(unsafe { Blob::from_raw(blob) })
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dsetblobpart)\]
@@ -203,7 +203,7 @@ impl Compiler {
     /// ### Example
     /// ```rust
     /// # use thindx::d3d::*; let compiler = Compiler::new(47).unwrap();
-    /// # let shader : ReadOnlyBlob = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap().shader;
+    /// # let shader : Blob = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap().shader;
     /// let shader2 = compiler.set_blob_part(
     ///     shader.get_buffer(), Blob::PrivateData, (), b"testing 123"
     /// ).unwrap();
@@ -219,14 +219,14 @@ impl Compiler {
         part:               impl Into<BlobPart>,
         flags:              (),
         part_data:          &[u8],
-    ) -> Result<ReadOnlyBlob, Error> {
+    ) -> Result<Blob, Error> {
         let f = self.D3DSetBlobPart.ok_or(Error::new("D3DSetBlobPart", THINERR::MISSING_DLL_EXPORT))?;
 
         let _ = flags; let flags = 0;
         let mut blob = null_mut();
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), part.into().into(), flags, part_data.as_ptr().cast(), part_data.len(), &mut blob) };
         Error::check("D3DSetBlobPart", hr)?;
-        Ok(unsafe { ReadOnlyBlob::from_raw(blob) })
+        Ok(unsafe { Blob::from_raw(blob) })
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dstripshader)\]
@@ -245,12 +245,12 @@ impl Compiler {
     /// ### Example
     /// ```rust
     /// # use thindx::d3d::*; let compiler = Compiler::new(47).unwrap();
-    /// let shader : ReadOnlyBlob = compiler.compile_from_file(
+    /// let shader : Blob = compiler.compile_from_file(
     ///     r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0",
     ///     Compile::Debug, CompileEffect::None
     /// ).unwrap().shader;
     ///
-    /// let shader : ReadOnlyBlob = compiler.strip_shader(
+    /// let shader : Blob = compiler.strip_shader(
     ///     shader.get_buffer(), CompilerStripFlags::DebugInfo
     /// ).unwrap();
     /// ```
@@ -259,11 +259,11 @@ impl Compiler {
         &self,
         shader_bytecode:    &[u8],
         strip_flags:        impl Into<CompilerStripFlags>,
-    ) -> Result<ReadOnlyBlob, Error> {
+    ) -> Result<Blob, Error> {
         let f = self.D3DStripShader.ok_or(Error::new("D3DStripShader", THINERR::MISSING_DLL_EXPORT))?;
         let mut blob = null_mut();
         let hr = unsafe { f(shader_bytecode.as_ptr().cast(), shader_bytecode.len(), strip_flags.into().into(), &mut blob) };
         Error::check("D3DStripShader", hr)?;
-        Ok(unsafe { ReadOnlyBlob::from_raw(blob) })
+        Ok(unsafe { Blob::from_raw(blob) })
     }
 }

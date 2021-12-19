@@ -7,7 +7,7 @@ fn main() {
     let compiler = d3d::Compiler::new(47).unwrap();
     let lib_source = b"export float4 xyz1(float3 v) { return float4(v, 1.0); }";
     let lib_bytecode = compiler.compile(lib_source, "example.hlsl", None, None, (), "lib_5_0", Compile::OptimizationLevel3, CompileEffect::None).unwrap();
-    let lib = compiler.load_module(lib_bytecode.shader.get_buffer()).unwrap();
+    let lib = compiler.load_module(lib_bytecode.shader.as_bytes()).unwrap();
 
 
 
@@ -41,7 +41,7 @@ fn main() {
 
 
     // Option A:  Generate HLSL to process further manually
-    println!("{}", String::from_utf8_lossy(graph.generate_hlsl(()).unwrap().get_buffer()));
+    println!("{}", graph.generate_hlsl(()).unwrap().to_utf8_lossy());
 
 
     // Option B:  Link HLSL

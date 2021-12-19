@@ -5,9 +5,9 @@ use std::ptr::*;
 
 
 
-/// { disassembly: [ReadOnlyBlob], finish_byte_offset: [usize] }
+/// { disassembly: [Blob], finish_byte_offset: [usize] }
 pub struct DisassembledRegion {
-    pub disassembly:        ReadOnlyBlob,
+    pub disassembly:        Blob,
     pub finish_byte_offset: usize,
 }
 
@@ -26,7 +26,7 @@ impl Compiler {
     /// *   `comments`          - Optional string at the top of the shader that identifies the shader constants and variables.
     ///
     /// ### Returns
-    /// *   Ok([ReadOnlyBlob])      - the disassembly
+    /// *   Ok([Blob])      - the disassembly
     /// *   Err([Error]) with `error.kind()` ==
     ///     *   [THINERR::MISSING_DLL_EXPORT] - on `d3dcompiler_39.dll` and earlier
     ///
@@ -81,7 +81,7 @@ impl Compiler {
         src_data:           impl AsRef<[u8]>,
         flags:              impl Into<Disasm>,
         comments:           impl TryIntoAsOptCStr,
-    ) -> Result<ReadOnlyBlob, Error> {
+    ) -> Result<Blob, Error> {
         let f = self.D3DDisassemble.ok_or(Error::new("D3DDisassemble", THINERR::MISSING_DLL_EXPORT))?;
         let src_data = src_data.as_ref();
         let flags = flags.into().into();
@@ -90,7 +90,7 @@ impl Compiler {
         let mut disassembly = null_mut();
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), flags, comments, &mut disassembly) };
         Error::check("D3DDisassemble", hr)?;
-        Ok(unsafe { ReadOnlyBlob::from_raw(disassembly) })
+        Ok(unsafe { Blob::from_raw(disassembly) })
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3ddisassembleregion)\]
@@ -106,7 +106,7 @@ impl Compiler {
     /// *   `num_insts`         - The number of instructions to disassemble.
     ///
     /// ### Returns
-    /// *   Ok([DisassembledRegion] { disassembly: [ReadOnlyBlob], finish_byte_offset: [usize] })  - the disassembly
+    /// *   Ok([DisassembledRegion] { disassembly: [Blob], finish_byte_offset: [usize] })  - the disassembly
     /// *   Err([Error]) with `error.kind()` ==
     ///     *   [THINERR::MISSING_DLL_EXPORT] - on `d3dcompiler_43.dll` and earlier
     ///
@@ -178,7 +178,7 @@ impl Compiler {
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), flags, comments, start_byte_offset, num_insts, &mut finish_byte_offset, &mut disassembly) };
         Error::check("D3DDisassembleRegion", hr)?;
         Ok(DisassembledRegion {
-            disassembly: unsafe { ReadOnlyBlob::from_raw(disassembly) },
+            disassembly: unsafe { Blob::from_raw(disassembly) },
             finish_byte_offset,
         })
     }

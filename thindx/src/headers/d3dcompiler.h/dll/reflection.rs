@@ -46,7 +46,7 @@ impl Compiler {
     /// assert_eq!(Some(D3DERR::INVALIDCALL), r.err().map(|e| e.kind()));
     /// ```
     #[requires(d3dcompiler=40)]
-    pub fn reflect<I: Raw>(&self, src_data: &[u8]) -> Result<I, Error> where I::Raw : Interface {
+    pub fn reflect<I: Raw>(&self, src_data: Bytecode<&[u8]>) -> Result<I, Error> where I::Raw : Interface {
         let f = self.D3DReflect.ok_or(Error::new("D3DReflect", THINERR::MISSING_DLL_EXPORT))?;
 
         let mut reflector = null_mut();
@@ -88,7 +88,7 @@ impl Compiler {
     /// assert_eq!(Some(D3DERR::INVALIDCALL), r.err().map(|e| e.kind()));
     /// ```
     #[requires(d3dcompiler=40)]
-    pub fn reflect11(&self, src_data: impl AsRef<[u8]>) -> Result<d3d11::ShaderReflection, Error> {
+    pub fn reflect11<D: AsRef<[u8]>>(&self, src_data: Bytecode<D>) -> Result<d3d11::ShaderReflection, Error> {
         self.reflect(src_data.as_ref())
     }
 
@@ -132,7 +132,7 @@ impl Compiler {
     /// assert_eq!(Some(D3DERR::INVALIDCALL), r.err().map(|e| e.kind()));
     /// ```
     //#[requires(d3dcompiler=47)] // ?
-    pub fn reflect_library<C: Raw>(&self, src_data: &[u8]) -> Result<C, Error> where C::Raw : Interface {
+    pub fn reflect_library<C: Raw>(&self, src_data: Bytecode<&[u8]>) -> Result<C, Error> where C::Raw : Interface {
         let f = self.D3DReflectLibrary.ok_or(Error::new("D3DReflectLibrary", THINERR::MISSING_DLL_EXPORT))?;
 
         let mut reflector = null_mut();
@@ -177,7 +177,7 @@ impl Compiler {
     /// assert_eq!(Some(D3DERR::INVALIDCALL), r.err().map(|e| e.kind()));
     /// ```
     //#[requires(d3dcompiler=47)] // ?
-    pub fn reflect_library_11(&self, src_data: impl AsRef<[u8]>) -> Result<d3d11::LibraryReflection, Error> {
+    pub fn reflect_library_11<D: AsRef<[u8]>>(&self, src_data: Bytecode<D>) -> Result<d3d11::LibraryReflection, Error> {
         self.reflect_library(src_data.as_ref())
     }
 }
@@ -190,7 +190,7 @@ impl Compiler {
         Compile::Debug, CompileEffect::None
     ).unwrap().shader;
 
-    let r : d3d11::LibraryReflection = d3dc.reflect_library(shader.get_buffer()).unwrap();
+    let r : d3d11::LibraryReflection = d3dc.reflect_library_11(shader).unwrap();
     let desc = r.get_desc().unwrap();
     assert!(desc.function_count > 0);
 

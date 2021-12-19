@@ -1,71 +1,9 @@
 use crate::*;
 use crate::d3d::*;
 
-use std::borrow::Cow;
-use std::fmt::{self, Debug, Display, Formatter};
 use std::os::windows::ffi::*;
 use std::path::*;
 use std::ptr::*;
-
-
-
-/// { code: [ReadOnlyBlob], errors: Option&lt;[ReadOnlyBlob]&gt; } returned by [Compiler::compile]/[compile2](Compiler::compile2)
-pub struct CompileResult {
-    pub shader:     ReadOnlyBlob,
-    pub errors:     Option<ReadOnlyBlob>,
-}
-
-
-
-/// { kind: [ErrorKind], shader: Option&lt;[ReadOnlyBlob]&gt;, errors: Option&lt;[ReadOnlyBlob]&gt; }
-pub struct CompileError {
-    pub kind:       ErrorKind,
-    pub method:     Option<&'static str>,
-    pub shader:     Option<ReadOnlyBlob>, // may or may not have generated a shader blob despite errors
-    pub errors:     Option<ReadOnlyBlob>, // may or may not have generated error messages depending on the error kind
-}
-
-impl CompileError {
-    pub fn errors_utf8_lossy(&self) -> Option<Cow<str>> {
-        let errors = self.errors.as_ref()?.get_buffer();
-        Some(match String::from_utf8_lossy(errors) {
-            Cow::Borrowed(s) => Cow::Borrowed(s.trim_end_matches("\0")),
-            Cow::Owned(mut s) => {
-                while s.ends_with("\0") { s.pop(); }
-                Cow::Owned(s)
-            },
-        })
-    }
-}
-
-impl From<Error> for CompileError {
-    fn from(e: Error) -> Self {
-        let Error { kind, method, errors } = e;
-        Self { kind, method, errors, shader: None }
-    }
-}
-
-impl std::error::Error for CompileError {}
-
-impl Debug for CompileError {
-    fn fmt(&self, fmt: &mut Formatter) -> fmt::Result {
-        fmt.debug_struct("CompileError")
-            .field("kind", &self.kind)
-            .field("shader", &self.shader.as_ref().map(|_| ..))
-            .field("errors", &self.errors_utf8_lossy())
-            .finish()
-    }
-}
-
-impl Display for CompileError {
-    fn fmt(&self, fmt: &mut Formatter) -> fmt::Result {
-        write!(fmt, "Error compiling shader: {:?}", self.kind)?;
-        if let Some(errors) = self.errors_utf8_lossy() {
-            writeln!(fmt, "\n{}", errors)?;
-        }
-        Ok(())
-    }
-}
 
 
 
@@ -91,7 +29,7 @@ impl Compiler {
     /// *   `flags2`        - [CompileEffect]::\* constants.
     ///
     /// ### Returns
-    /// *   Ok([CompileResult] { code: [ReadOnlyBlob], errors: [Option]&lt;[ReadOnlyBlob]&gt; })
+    /// *   Ok([Compiled] { shader: [Bytecode]\<[Blob]\>, errors: [Option]&lt;[TextBlob]&gt; })
     /// *   Err([CompileError]) where `error.kind` ==
     ///     *   [THINERR::MISSING_DLL_EXPORT]     - `d3dcompiler_4?.dll` and earlier
     ///     *   [D3DERR::INVALIDCALL]               - on invalid parameters such as nonexistant `target`s
@@ -124,7 +62,7 @@ impl Compiler {
         target:         impl TryIntoAsCStr,
         flags1:         impl Into<Compile>,
         flags2:         impl Into<CompileEffect>,
-    ) -> Result<CompileResult, CompileError> {
+    ) -> Result<Compiled, CompileError> {
         // Early outs
         let f           = self.D3DCompileFromFile.ok_or(Error::new("D3DCompileFromFile", THINERR::MISSING_DLL_EXPORT))?;
         let defines     = defines.as_shader_macros().map_err(|e| Error::new("D3DCompileFromFile", e))?;
@@ -150,13 +88,13 @@ impl Compiler {
         ErrorKind::check(hr).map_err(|kind| CompileError {
             kind,
             method: Some("D3DCompileFromFile"),
-            shader: unsafe { ReadOnlyBlob::from_raw_opt(shader as *mut _) },
-            errors: unsafe { ReadOnlyBlob::from_raw_opt(errors as *mut _) },
+            shader: unsafe { Blob::from_raw_opt(shader as *mut _).map(|b| Bytecode::trust(b)) },
+            errors: unsafe { TextBlob::from_raw_opt(errors as *mut _) },
         })?;
 
-        Ok(CompileResult {
-            shader: unsafe { ReadOnlyBlob::from_raw(shader as *mut _) },
-            errors: unsafe { ReadOnlyBlob::from_raw_opt(errors as *mut _) },
+        Ok(Compiled {
+            shader: unsafe { Bytecode::trust(Blob::from_raw(shader as *mut _)) },
+            errors: unsafe { TextBlob::from_raw_opt(errors as *mut _) },
         })
     }
 
@@ -178,7 +116,7 @@ impl Compiler {
     /// *   `flags2`        - [CompileEffect]::\* constants.
     ///
     /// ### Returns
-    /// *   Ok([CompileResult] { code: [ReadOnlyBlob], errors: [Option]&lt;[ReadOnlyBlob]&gt; })
+    /// *   Ok([Compiled] { shader: [Bytecode]\<[Blob]\>, errors: [Option]&lt;[TextBlob]&gt; })
     /// *   Err([CompileError]) where `error.kind` ==
     ///     *   [THINERR::MISSING_DLL_EXPORT]     - `d3dcompiler_39.dll` and earlier
     ///     *   [D3DERR::INVALIDCALL]               - on invalid parameters such as nonexistant `target`s
@@ -211,7 +149,7 @@ impl Compiler {
         target:         impl TryIntoAsCStr,
         flags1:         impl Into<Compile>,
         flags2:         impl Into<CompileEffect>,
-    ) -> Result<CompileResult, CompileError> {
+    ) -> Result<Compiled, CompileError> {
         // Early outs
         let f           = self.D3DCompile.ok_or(Error::new("D3DCompile", THINERR::MISSING_DLL_EXPORT))?;
         let defines     = defines.as_shader_macros().map_err(|e| Error::new("D3DCompile", e))?;
@@ -240,13 +178,13 @@ impl Compiler {
         ErrorKind::check(hr).map_err(|kind| CompileError {
             kind,
             method: Some("D3DCompile"),
-            shader: unsafe { ReadOnlyBlob::from_raw_opt(shader as *mut _) },
-            errors: unsafe { ReadOnlyBlob::from_raw_opt(errors as *mut _) },
+            shader: unsafe { Blob::from_raw_opt(shader as *mut _).map(|b| Bytecode::trust(b)) },
+            errors: unsafe { TextBlob::from_raw_opt(errors as *mut _) },
         })?;
 
-        Ok(CompileResult {
-            shader: unsafe { ReadOnlyBlob::from_raw(shader as *mut _) },
-            errors: unsafe { ReadOnlyBlob::from_raw_opt(errors as *mut _) },
+        Ok(Compiled {
+            shader: unsafe { Bytecode::trust(Blob::from_raw(shader as *mut _)) },
+            errors: unsafe { TextBlob::from_raw_opt(errors as *mut _) },
         })
     }
 
@@ -270,7 +208,7 @@ impl Compiler {
     /// *   `secondary_data`    - A pointer to secondary data. If you don't pass secondary data, set to [None].
     ///
     /// ### Returns
-    /// *   Ok([CompileResult] { code: [ReadOnlyBlob], errors: [Option]&lt;[ReadOnlyBlob]&gt; })
+    /// *   Ok([Compiled] { shader: [Bytecode]\<[Blob]\>, errors: [Option]&lt;[TextBlob]&gt; })
     /// *   Err([CompileError]) where `error.kind` ==
     ///     *   [THINERR::MISSING_DLL_EXPORT]     - `d3dcompiler_4?.dll` and earlier
     ///     *   [D3DERR::INVALIDCALL]               - on invalid parameters such as nonexistant `target`s
@@ -312,7 +250,7 @@ impl Compiler {
         flags2:                 impl Into<CompileEffect>,
         secondary_data_flags:   impl Into<CompileSecData>,
         secondary_data:         impl Into<Option<&'s [u8]>>,
-    ) -> Result<CompileResult, CompileError> {
+    ) -> Result<Compiled, CompileError> {
         // Early outs
         let f           = self.D3DCompile2.ok_or(Error::new("D3DCompile2", THINERR::MISSING_DLL_EXPORT))?;
         let defines     = defines.as_shader_macros().map_err(|e| Error::new("D3DCompile2", e))?;
@@ -347,13 +285,13 @@ impl Compiler {
         ErrorKind::check(hr).map_err(|kind| CompileError {
             kind,
             method: Some("D3DCompile2"),
-            shader: unsafe { ReadOnlyBlob::from_raw_opt(shader as *mut _) },
-            errors: unsafe { ReadOnlyBlob::from_raw_opt(errors as *mut _) },
+            shader: unsafe { Blob::from_raw_opt(shader as *mut _).map(|b| Bytecode::trust(b)) },
+            errors: unsafe { TextBlob::from_raw_opt(errors as *mut _) },
         })?;
 
-        Ok(CompileResult {
-            shader: unsafe { ReadOnlyBlob::from_raw(shader as *mut _) },
-            errors: unsafe { ReadOnlyBlob::from_raw_opt(errors as *mut _) },
+        Ok(Compiled {
+            shader: unsafe { Bytecode::trust(Blob::from_raw(shader as *mut _)) },
+            errors: unsafe { TextBlob::from_raw_opt(errors as *mut _) },
         })
     }
 
@@ -371,8 +309,11 @@ impl Compiler {
     ///                       Use [StandardFileInclude] if you want to resolve `#include`s relative to `source_name`.
     ///
     /// ### Returns
-    /// *   Err([THINERR::MISSING_DLL_EXPORT])    - `d3dcompiler_39.dll` and earlier
-    /// *   Ok([CompileResult] { code, errors })
+    /// *   Ok([Preprocessed] { shader: [TextBlob], errors: [Option]&lt;[TextBlob]&gt; })
+    /// *   Err([CompileError]) where `error.kind` ==
+    ///     *   [THINERR::MISSING_DLL_EXPORT]     - `d3dcompiler_39.dll` and earlier
+    ///     *   [D3DERR::INVALIDCALL]               - on invalid parameters
+    ///     *   [E::FAIL]                           - if the shader failed to preprocess
     ///
     /// ### Example
     /// ```rust
@@ -402,7 +343,7 @@ impl Compiler {
         source_name:    impl TryIntoAsOptCStr,
         defines:        impl AsShaderMacros,
         include:        impl AsID3DInclude,
-    ) -> Result<CompileResult, CompileError> {
+    ) -> Result<Preprocessed, PreprocessError> {
         // Early outs
         let f           = self.D3DPreprocess.ok_or(Error::new("D3DPreprocess", THINERR::MISSING_DLL_EXPORT))?;
         let defines     = defines.as_shader_macros().map_err(|e| Error::new("D3DPreprocess", e))?;
@@ -410,23 +351,23 @@ impl Compiler {
         let src_data    = src_data.as_ref();
         // Note: No error checking occurs for internal `\0`s - they will simply terminate the string earlier than expected.
         // Note: We should perhaps reject non-ASCII values instead of allowing UTF8
-        let source_name = source_name.try_into().map_err(|e| CompileError { kind: e, method: Some("D3DPreprocess"), shader: None, errors: None })?;
+        let source_name = source_name.try_into().map_err(|e| PreprocessError { kind: e, method: Some("D3DPreprocess"), shader: None, errors: None })?;
         let source_name = source_name.as_opt_cstr();
         let include     = include.as_id3dinclude();
 
         let mut shader = null_mut();
         let mut errors = null_mut();
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), source_name, defines, include, &mut shader, &mut errors)};
-        ErrorKind::check(hr).map_err(|kind| CompileError {
+        ErrorKind::check(hr).map_err(|kind| PreprocessError {
             kind,
             method: Some("D3DPreprocess"),
-            shader: unsafe { ReadOnlyBlob::from_raw_opt(shader as *mut _) },
-            errors: unsafe { ReadOnlyBlob::from_raw_opt(errors as *mut _) },
+            shader: unsafe { TextBlob::from_raw_opt(shader as *mut _) },
+            errors: unsafe { TextBlob::from_raw_opt(errors as *mut _) },
         })?;
 
-        Ok(CompileResult {
-            shader: unsafe { ReadOnlyBlob::from_raw(shader as *mut _) },
-            errors: unsafe { ReadOnlyBlob::from_raw_opt(errors as *mut _) },
+        Ok(Preprocessed {
+            shader: unsafe { TextBlob::from_raw(shader as *mut _) },
+            errors: unsafe { TextBlob::from_raw_opt(errors as *mut _) },
         })
     }
 }

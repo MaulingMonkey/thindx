@@ -11,9 +11,9 @@ fn main() {
     let pixel_shader  = compiler.preprocess(basic_hlsl,   (),                      None, None,                  ).unwrap();
     let vertex_shader = compiler.preprocess(basic_hlsl,   r"test\data\basic.hlsl", None, StandardFileInclude    ).unwrap();
     let library       = compiler.preprocess(library_hlsl, r"library.hlsl",         None, None,                  ).unwrap();
-    println!("pixel_shader\n============\n{}\n",    String::from_utf8_lossy(pixel_shader .shader.as_bytes()));
-    println!("vertex_shader\n=============\n{}\n",  String::from_utf8_lossy(vertex_shader.shader.as_bytes()));
-    println!("library\n=======\n{}\n",              String::from_utf8_lossy(library      .shader.as_bytes()));
+    println!("pixel_shader\n============\n{}\n",    pixel_shader .shader.to_utf8_lossy());
+    println!("vertex_shader\n=============\n{}\n",  vertex_shader.shader.to_utf8_lossy());
+    println!("library\n=======\n{}\n",              library      .shader.to_utf8_lossy());
 
     // Option B:  compile_from_file
     let pixel_shader  = compiler.compile_from_file(r"test\data\basic.hlsl",   None, None,                "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap();
