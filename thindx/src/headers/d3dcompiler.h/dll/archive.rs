@@ -19,7 +19,7 @@ impl Compiler {
     ///
     /// ### Returns
     /// *   Err([THINERR::MISSING_DLL_EXPORT])    - `d3dcompiler_42.dll` and earlier
-    /// *   Ok([ReadOnlyBlob])
+    /// *   Ok([Blob])
     ///
     /// ### Example
     /// ```rust
@@ -47,7 +47,7 @@ impl Compiler {
         &self,
         shaders:                &[ShaderData],
         flags:                  impl Into<CompressShader>,
-    ) -> Result<ReadOnlyBlob, Error> {
+    ) -> Result<Blob, Error> {
         // Early outs
         let f           = self.D3DCompressShaders.ok_or(Error::new("D3DCompressShaders", THINERR::MISSING_DLL_EXPORT))?;
         let num_shaders = shaders.len().try_into().map_err(|_| Error::new("D3DCompressShaders", THINERR::MISSING_DLL_EXPORT))?;
@@ -58,7 +58,7 @@ impl Compiler {
         let mut compressed_data = null_mut();
         let hr = unsafe { f(num_shaders, shader_data, flags, &mut compressed_data) };
         Error::check("D3DCompressShaders", hr)?;
-        Ok(unsafe { ReadOnlyBlob::from_raw(compressed_data) })
+        Ok(unsafe { Blob::from_raw(compressed_data) })
         // TODO: Wait, this takes multiple shaders.  Does this also *return* an array of blobs, perhaps?
     }
 
@@ -121,7 +121,7 @@ impl Compiler {
     ///
     /// ### Returns
     /// *   Err([THINERR::MISSING_DLL_EXPORT])            - `d3dcompiler_42.dll` and earlier
-    /// *   Ok(&amp;'s \[[Option]&lt;[ReadOnlyBlob]&gt;\])  - the shader(s) that were decompressed
+    /// *   Ok(&amp;'s \[[Option]&lt;[Blob]&gt;\])  - the shader(s) that were decompressed
     ///
     /// ### Example
     /// ```rust
@@ -154,8 +154,8 @@ impl Compiler {
         src_data:               &[u8],
         flags:                  impl Into<Option<void::Void>>,
         start_index:            u32,
-        out_shaders:            &'s mut [Option<ReadOnlyBlob>],
-    ) -> Result<&'s [Option<ReadOnlyBlob>], Error> {
+        out_shaders:            &'s mut [Option<Blob>],
+    ) -> Result<&'s [Option<Blob>], Error> {
         let f = self.D3DDecompressShaders.ok_or(Error::new("D3DDecompressShaders", THINERR::MISSING_DLL_EXPORT))?;
         let n : u32 = out_shaders.len().try_into().map_err(|_| Error::new("D3DDecompressShaders", THINERR::SLICE_TOO_LARGE))?;
         let _ = flags;
@@ -179,7 +179,7 @@ impl Compiler {
     ///
     /// ### Returns
     /// *   Err([THINERR::MISSING_DLL_EXPORT])        - `d3dcompiler_42.dll` and earlier
-    /// *   Ok(Vec&lt;[Option]&lt;[ReadOnlyBlob]&gt;)   - the shader(s) that were decompressed
+    /// *   Ok(Vec&lt;[Option]&lt;[Blob]&gt;)   - the shader(s) that were decompressed
     ///
     /// ### Example
     /// ```rust
@@ -205,7 +205,7 @@ impl Compiler {
         src_data:               &[u8],
         flags:                  impl Into<Option<void::Void>>,
         _range:                 std::ops::RangeFull,
-    ) -> Result<Vec<Option<ReadOnlyBlob>>, Error> {
+    ) -> Result<Vec<Option<Blob>>, Error> {
         let n = self.decompress_shaders_count(src_data)? as usize;
         let mut v = Vec::new();
         v.resize_with(n, || None);

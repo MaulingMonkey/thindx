@@ -170,14 +170,14 @@ impl FunctionLinkingGraph {
     /// ### Errors
     /// *   [E::FAIL]   - if called before set_output_signature
     /// *   [E::FAIL]   - if the FLG has no nodes
-    pub fn create_module_instance(&self) -> Result<(ModuleInstance, Option<ReadOnlyBlob>), Error> {
+    pub fn create_module_instance(&self) -> Result<(ModuleInstance, Option<Blob>), Error> {
         // TODO: named tuple return?  better error type that can carry the blob?
         let mut module = null_mut();
         let mut errors = null_mut();
         let hr = unsafe { self.0.CreateModuleInstance(&mut module, &mut errors) };
         unsafe { Error::check_blob("ID3D11FunctionLinkingGraph::CreateModuleInstance", hr, errors)? };
         let module = unsafe { ModuleInstance::from_raw(module) };
-        let errors = unsafe { ReadOnlyBlob::from_raw_opt(errors) };
+        let errors = unsafe { Blob::from_raw_opt(errors) };
         Ok((module, errors))
     }
 
@@ -204,13 +204,13 @@ impl FunctionLinkingGraph {
     /// {
     /// }
     /// ```
-    pub fn generate_hlsl(&self, flags: ()) -> Result<ReadOnlyBlob, Error> {
+    pub fn generate_hlsl(&self, flags: ()) -> Result<TextBlob, Error> {
         let _ = flags; let flags = 0;
 
         let mut blob = null_mut();
         let hr = unsafe { self.0.GenerateHlsl(flags, &mut blob) };
         Error::check("ID3D11FunctionLinkingGraph::GenerateHlsl", hr)?;
-        Ok(unsafe { ReadOnlyBlob::from_raw(blob) })
+        Ok(unsafe { TextBlob::from_raw(blob) })
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionlinkinggraph-getlasterror)\]
@@ -219,7 +219,7 @@ impl FunctionLinkingGraph {
     /// Gets the error from the last function call of the function-linking-graph.
     ///
     /// ### Returns
-    /// *   Ok(Some([ReadOnlyBlob]))    - The errors in question
+    /// *   Ok(Some([Blob]))    - The errors in question
     /// *   Ok(None)                    - There were no errors
     /// *   Err([ErrorKind])            - Ironically, there was an error in attempting to acquire the errors.
     ///
@@ -228,14 +228,14 @@ impl FunctionLinkingGraph {
     /// # use thindx::{*, d3d::*, d3d11::*};
     /// # let compiler = Compiler::new(47).unwrap();
     /// # let flg : FunctionLinkingGraph = compiler.create_function_linking_graph(None).unwrap();
-    /// let errors : Option<ReadOnlyBlob> = flg.get_last_error().unwrap();
+    /// let errors : Option<Blob> = flg.get_last_error().unwrap();
     /// assert!(errors.is_none(), "No errors were reported by flg");
     /// ```
-    pub fn get_last_error(&self) -> Result<Option<ReadOnlyBlob>, Error> {
+    pub fn get_last_error(&self) -> Result<Option<TextBlob>, Error> {
         let mut errors = null_mut();
         let hr = unsafe { self.0.GetLastError(&mut errors) };
         Error::check("ID3D11FunctionLinkingGraph::GetLastError", hr)?;
-        Ok(unsafe { ReadOnlyBlob::from_raw_opt(errors) })
+        Ok(unsafe { TextBlob::from_raw_opt(errors) })
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionlinkinggraph-passvalue)\]

@@ -63,10 +63,10 @@ mod d3d11_methods;                  pub use d3d11_methods::*;
 /// [get_trace_instruction_offsets_inplace](Compiler::get_trace_instruction_offsets_inplace)(...) - read trace instruction byte offsets
 /// [get_trace_instruction_offsets](Compiler::get_trace_instruction_offsets)(...) - read trace instruction byte offsets
 ///
-/// &nbsp;   **[ReadOnlyBlob Utilities](#blobs)**
-/// [create_read_only_blob](Compiler::create_read_only_blob)(...) - create a [ReadOnlyBlob] from memory
-/// [read_file_to_blob](Compiler::read_file_to_blob)(...) - read a [ReadOnlyBlob] from disk
-/// [write_blob_to_file](Compiler::write_blob_to_file)(...) - write a [ReadOnlyBlob] to disk
+/// &nbsp;   **[Blob Utilities](#blobs)**
+/// [create_read_only_blob](Compiler::create_read_only_blob)(...) - create a [Blob] from memory
+/// [read_file_to_blob](Compiler::read_file_to_blob)(...) - read a [Blob] from disk
+/// [write_blob_to_file](Compiler::write_blob_to_file)(...) - write a [Blob] to disk
 ///
 /// &nbsp;   **[D3D11 Factories & APIs](#d3d11)**
 /// [create_function_linking_graph](Compiler::create_function_linking_graph)(...) - create a [d3d11::FunctionLinkingGraph]

@@ -14,7 +14,7 @@ use std::fmt::{self, Debug, Display, Formatter};
 pub struct Error {
     pub(crate) kind:       ErrorKind,
     pub(crate) method:     Option<&'static str>,
-    pub(crate) errors:     Option<d3d::ReadOnlyBlob>,
+    pub(crate) errors:     Option<d3d::TextBlob>,
 }
 
 impl Error {
@@ -40,7 +40,7 @@ impl Error {
     /// * Otherwise, `errors` is left untouched.
     pub(crate) unsafe fn check_blob(method: &'static str, hr: HRESULT, errors: *mut ID3DBlob) -> Result<(), Self> {
         if !SUCCEEDED(hr) {
-            let errors = ReadOnlyBlob::from_raw_opt(errors);
+            let errors = TextBlob::from_raw_opt(errors);
             Err(Self {
                 kind:   ErrorKind(hr),
                 method: Some(method),
@@ -52,14 +52,7 @@ impl Error {
     }
 
     fn errors_utf8_lossy(&self) -> Option<Cow<str>> {
-        let errors = self.errors.as_ref()?.get_buffer();
-        Some(match String::from_utf8_lossy(errors) {
-            Cow::Borrowed(s) => Cow::Borrowed(s.trim_end_matches("\0")),
-            Cow::Owned(mut s) => {
-                while s.ends_with("\0") { s.pop(); }
-                Cow::Owned(s)
-            },
-        })
+        Some(self.errors.as_ref()?.to_utf8_lossy())
     }
 }
 

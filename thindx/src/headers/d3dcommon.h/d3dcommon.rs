@@ -37,5 +37,6 @@ mod interfaces {
 }
 
 mod structures {
+    mod bytecode;                       pub use bytecode::*;
     mod shader_macro;                   pub use shader_macro::*;
 }

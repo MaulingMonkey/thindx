@@ -48,7 +48,7 @@ impl Linker {
     /// # use thindx::*;
     /// // TODO
     /// ```
-    pub fn link(&self, entry: &ModuleInstance, entry_name: impl TryIntoAsCStr, target_name: impl TryIntoAsCStr, flags: Option<void::Void>) -> Result<CompileResult, Error> {
+    pub fn link(&self, entry: &ModuleInstance, entry_name: impl TryIntoAsCStr, target_name: impl TryIntoAsCStr, flags: Option<void::Void>) -> Result<Linked, LinkError> {
         let entry_name  = entry_name .try_into().map_err(|e| Error::new("ID3D11Linker::Link", e))?;
         let target_name = target_name.try_into().map_err(|e| Error::new("ID3D11Linker::Link", e))?;
         let entry_name  = entry_name .as_cstr();
@@ -60,9 +60,9 @@ impl Linker {
         let mut errors = null_mut();
         let hr = unsafe { self.0.Link(entry.as_raw(), entry_name, target_name, flags, &mut blob, &mut errors) };
         unsafe { Error::check_blob("ID3D11Linker::Link", hr, errors) }?;
-        Ok(CompileResult { // TODO: rename CompileResult to something more general?  BlobWithWarnings?  BlobWithNonFatalErrors?
-            shader: unsafe { ReadOnlyBlob::from_raw(blob) },
-            errors: unsafe { ReadOnlyBlob::from_raw_opt(errors) },
+        Ok(Linked { // TODO: rename CompileResult to something more general?  BlobWithWarnings?  BlobWithNonFatalErrors?
+            shader: unsafe { Bytecode::trust(Blob::from_raw(blob)) },
+            errors: unsafe { TextBlob::from_raw_opt(errors) },
         })
     }
 
