@@ -48,7 +48,7 @@ use std::ptr::*;
 ///     Compile::OptimizationLevel3, CompileEffect::None
 /// ).unwrap();
 ///
-/// let lib = compiler.load_module(lib_bytecode.shader.get_buffer()).unwrap();
+/// let lib = compiler.load_module(&lib_bytecode).unwrap();
 ///
 ///
 /// // 2. Use FunctionLinkingGraph to create a shader.  Note that the fn call order
@@ -134,7 +134,7 @@ impl FunctionLinkingGraph {
     /// # use thindx::{*, d3d::*, d3d11::*};
     /// # let compiler = Compiler::new(47).unwrap();
     /// # let lib_bytecode = compiler.compile(b"export float4 xyz1(float3 v) { return float4(v, 1.0); }", "example.hlsl", None, None, (), "lib_5_0", Compile::OptimizationLevel3, CompileEffect::None).unwrap();
-    /// # let lib = compiler.load_module(lib_bytecode.shader.get_buffer()).unwrap();
+    /// # let lib = compiler.load_module(&lib_bytecode).unwrap();
     /// # let graph : FunctionLinkingGraph = compiler.create_function_linking_graph(None).unwrap();
     /// # let input  = graph.set_input_signature(&[]).unwrap();
     /// let xyz1 = graph.call_function("example_namespace", &lib, "xyz1").unwrap();
@@ -251,7 +251,7 @@ impl FunctionLinkingGraph {
     /// # use thindx::{*, d3d::*, d3d11::*};
     /// # let compiler = Compiler::new(47).unwrap();
     /// # let lib_bytecode = compiler.compile(b"export float4 xyz1(float3 v) { return float4(v, 1.0); }", "example.hlsl", None, None, (), "lib_5_0", Compile::OptimizationLevel3, CompileEffect::None).unwrap();
-    /// # let lib = compiler.load_module(lib_bytecode.shader.get_buffer()).unwrap();
+    /// # let lib = compiler.load_module(&lib_bytecode).unwrap();
     /// # let graph : FunctionLinkingGraph = compiler.create_function_linking_graph(None).unwrap();
     /// # let input  = graph.set_input_signature(&[ParameterDesc::new(cstr!("inPos"),  cstr!("POSITION0"),   SVT::Float, SVC::Vector, 1, 4, Interpolation::Linear,    PF::In,  0, 0, 0, 0)]).unwrap();
     /// # let output = graph.set_output_signature(&[ParameterDesc::new(cstr!("outPos"), cstr!("SV_POSITION"), SVT::Float, SVC::Vector, 1, 4, Interpolation::Undefined, PF::Out, 0, 0, 0, 0)]).unwrap();
@@ -272,7 +272,7 @@ impl FunctionLinkingGraph {
     /// # use thindx::{*, d3d::*, d3d11::*};
     /// # let compiler = Compiler::new(47).unwrap();
     /// # let lib_bytecode = compiler.compile(b"export float4 xyz1(float3 v) { return float4(v, 1.0); }", "example.hlsl", None, None, (), "lib_5_0", Compile::OptimizationLevel3, CompileEffect::None).unwrap();
-    /// # let lib = compiler.load_module(lib_bytecode.shader.get_buffer()).unwrap();
+    /// # let lib = compiler.load_module(&lib_bytecode).unwrap();
     /// # let graph : FunctionLinkingGraph = compiler.create_function_linking_graph(None).unwrap();
     /// # let input  = graph.set_input_signature(&[ParameterDesc::new(cstr!("inPos"),  cstr!("POSITION0"),   SVT::Float, SVC::Vector, 1, 4, Interpolation::Linear,    PF::In,  0, 0, 0, 0)]).unwrap();
     /// # let output = graph.set_output_signature(&[ParameterDesc::new(cstr!("outPos"), cstr!("SV_POSITION"), SVT::Float, SVC::Vector, 1, 4, Interpolation::Undefined, PF::Out, 0, 0, 0, 0)]).unwrap();

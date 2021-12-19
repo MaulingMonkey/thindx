@@ -110,7 +110,7 @@ impl Compiler {
         target:         impl TryIntoAsCStr,
         flags1:         impl Into<Compile>,
         flags2:         impl Into<CompileEffect>,
-    ) -> Result<CompileResult, CompileError> {
+    ) -> Result<ShaderWithDiagnostics, CompileError> {
         // Early outs
         let f           = self.D3DCompileFromFile.ok_or(Error::new("D3DCompileFromFile", THINERR::MISSING_DLL_EXPORT))?;
         let defines     = defines.as_shader_macros().map_err(|e| Error::new("D3DCompileFromFile", e))?;
@@ -140,10 +140,10 @@ impl Compiler {
             errors: CompilerDiagnostics::new(unsafe { ReadOnlyBlob::from_raw_opt(errors as *mut _) }),
         })?;
 
-        Ok(CompileResult {
-            shader: unsafe { ReadOnlyBlob::from_raw(shader as *mut _) },
-            errors: CompilerDiagnostics::new(unsafe { ReadOnlyBlob::from_raw_opt(errors as *mut _) }),
-        })
+        Ok(ShaderWithDiagnostics::new(
+            unsafe { Bytecode::trust_unchecked(ReadOnlyBlob::from_raw(shader as *mut _)) },
+            CompilerDiagnostics::new(unsafe { ReadOnlyBlob::from_raw_opt(errors as *mut _) }),
+        ))
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dcompile)\]
@@ -197,7 +197,7 @@ impl Compiler {
         target:         impl TryIntoAsCStr,
         flags1:         impl Into<Compile>,
         flags2:         impl Into<CompileEffect>,
-    ) -> Result<CompileResult, CompileError> {
+    ) -> Result<ShaderWithDiagnostics, CompileError> {
         // Early outs
         let f           = self.D3DCompile.ok_or(Error::new("D3DCompile", THINERR::MISSING_DLL_EXPORT))?;
         let defines     = defines.as_shader_macros().map_err(|e| Error::new("D3DCompile", e))?;
@@ -230,10 +230,10 @@ impl Compiler {
             errors: CompilerDiagnostics::new(unsafe { ReadOnlyBlob::from_raw_opt(errors as *mut _) }),
         })?;
 
-        Ok(CompileResult {
-            shader: unsafe { ReadOnlyBlob::from_raw(shader as *mut _) },
-            errors: CompilerDiagnostics::new(unsafe { ReadOnlyBlob::from_raw_opt(errors as *mut _) }),
-        })
+        Ok(ShaderWithDiagnostics::new(
+            unsafe { Bytecode::trust_unchecked(ReadOnlyBlob::from_raw(shader as *mut _)) },
+            CompilerDiagnostics::new(unsafe { ReadOnlyBlob::from_raw_opt(errors as *mut _) }),
+        ))
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dcompile2)\]
@@ -298,7 +298,7 @@ impl Compiler {
         flags2:                 impl Into<CompileEffect>,
         secondary_data_flags:   impl Into<CompileSecData>,
         secondary_data:         impl Into<Option<&'s [u8]>>,
-    ) -> Result<CompileResult, CompileError> {
+    ) -> Result<ShaderWithDiagnostics, CompileError> {
         // Early outs
         let f           = self.D3DCompile2.ok_or(Error::new("D3DCompile2", THINERR::MISSING_DLL_EXPORT))?;
         let defines     = defines.as_shader_macros().map_err(|e| Error::new("D3DCompile2", e))?;
@@ -337,10 +337,10 @@ impl Compiler {
             errors: CompilerDiagnostics::new(unsafe { ReadOnlyBlob::from_raw_opt(errors as *mut _) }),
         })?;
 
-        Ok(CompileResult {
-            shader: unsafe { ReadOnlyBlob::from_raw(shader as *mut _) },
-            errors: CompilerDiagnostics::new(unsafe { ReadOnlyBlob::from_raw_opt(errors as *mut _) }),
-        })
+        Ok(ShaderWithDiagnostics::new(
+            unsafe { Bytecode::trust_unchecked(ReadOnlyBlob::from_raw(shader as *mut _)) },
+            CompilerDiagnostics::new(unsafe { ReadOnlyBlob::from_raw_opt(errors as *mut _) }),
+        ))
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dpreprocess)\]
@@ -364,8 +364,8 @@ impl Compiler {
     /// ```rust
     /// # use thindx::d3d::*; let compiler = Compiler::new(47).unwrap();
     /// let basic_hlsl = std::fs::read(r"test\data\basic.hlsl").unwrap();
-    /// let ps = compiler.preprocess(&basic_hlsl, r"test\data\basic.hlsl", (), None).unwrap();
-    /// println!("{}", String::from_utf8_lossy(ps.shader.get_buffer()));
+    /// let preprocessed = compiler.preprocess(&basic_hlsl, r"test\data\basic.hlsl", (), None).unwrap();
+    /// println!("{}", preprocessed.to_utf8_lossy());
     /// ```
     ///
     /// ### Output
@@ -388,7 +388,7 @@ impl Compiler {
         source_name:    impl TryIntoAsOptCStr,
         defines:        impl AsShaderMacros,
         include:        impl AsID3DInclude,
-    ) -> Result<CompileResult, CompileError> {
+    ) -> Result<WithCompilerDiagnostics<OptTextBlob>, CompileError> {
         // Early outs
         let f           = self.D3DPreprocess.ok_or(Error::new("D3DPreprocess", THINERR::MISSING_DLL_EXPORT))?;
         let defines     = defines.as_shader_macros().map_err(|e| Error::new("D3DPreprocess", e))?;
@@ -410,9 +410,9 @@ impl Compiler {
             errors: CompilerDiagnostics::new(unsafe { ReadOnlyBlob::from_raw_opt(errors as *mut _) }),
         })?;
 
-        Ok(CompileResult {
-            shader: unsafe { ReadOnlyBlob::from_raw(shader as *mut _) },
-            errors: CompilerDiagnostics::new(unsafe { ReadOnlyBlob::from_raw_opt(errors as *mut _) }),
-        })
+        Ok(WithCompilerDiagnostics::new(
+            OptTextBlob::new(unsafe { ReadOnlyBlob::from_raw(shader as *mut _) }),
+            CompilerDiagnostics::new(unsafe { ReadOnlyBlob::from_raw_opt(errors as *mut _) }),
+        ))
     }
 }

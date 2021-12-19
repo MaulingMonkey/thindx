@@ -31,9 +31,9 @@ impl LibraryReflection {
     /// let shader = d3dc.compile_from_file(
     ///     r"test\data\library.hlsl", None, None, (), "lib_5_0",
     ///     Compile::Debug, CompileEffect::None
-    /// ).unwrap().shader;
+    /// ).unwrap();
     ///
-    /// let r : d3d11::LibraryReflection = d3dc.reflect_library(shader.get_buffer()).unwrap();
+    /// let r : d3d11::LibraryReflection = d3dc.reflect_library(&shader).unwrap();
     /// let desc : d3d11::LibraryDesc = r.get_desc().unwrap();
     /// println!("{:#?}", desc);
     /// assert!(desc.function_count > 0);
@@ -67,9 +67,9 @@ impl LibraryReflection {
     /// let shader = d3dc.compile_from_file(
     ///     r"test\data\library.hlsl", None, None, (), "lib_5_0",
     ///     Compile::Debug, CompileEffect::None
-    /// ).unwrap().shader;
+    /// ).unwrap();
     ///
-    /// let r : d3d11::LibraryReflection = d3dc.reflect_library(shader.get_buffer()).unwrap();
+    /// let r : d3d11::LibraryReflection = d3dc.reflect_library(&shader).unwrap();
     ///
     /// for i in 0..r.get_desc().unwrap().function_count {
     ///     let f : d3d11::FunctionReflection = r.get_function_by_index(i);
@@ -115,9 +115,9 @@ impl LibraryReflection {
     /// let shader = d3dc.compile_from_file(
     ///     r"test\data\library.hlsl", None, None, (), "lib_5_0",
     ///     Compile::Debug, CompileEffect::None
-    /// ).unwrap().shader;
+    /// ).unwrap();
     ///
-    /// let r : d3d11::LibraryReflection = d3dc.reflect_library(shader.get_buffer()).unwrap();
+    /// let r : d3d11::LibraryReflection = d3dc.reflect_library(&shader).unwrap();
     ///
     /// for f in r.functions().unwrap() {
     ///     let desc = f.get_desc().unwrap();

@@ -17,9 +17,9 @@ use winapi::um::d3d11shader::*;
 /// let shader = d3dc.compile_from_file(
 ///     r"test\data\library.hlsl", None, None, (), "lib_5_0",
 ///     Compile::Debug, CompileEffect::None
-/// ).unwrap().shader;
+/// ).unwrap();
 ///
-/// let r : d3d11::LibraryReflection = d3dc.reflect_library(shader.get_buffer()).unwrap();
+/// let r : d3d11::LibraryReflection = d3dc.reflect_library(&shader).unwrap();
 /// let desc : d3d11::LibraryDesc = r.get_desc().unwrap();
 /// println!("{:#?}", desc);
 /// assert!(desc.function_count > 0);

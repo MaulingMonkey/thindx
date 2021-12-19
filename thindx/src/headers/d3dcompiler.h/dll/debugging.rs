@@ -33,9 +33,8 @@ impl Compiler {
     /// ### Example
     /// ```rust
     /// # use thindx::d3d::*; let compiler = Compiler::new(47).unwrap();
-    /// # let shader = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap().shader;
-    /// # let shader = shader.get_buffer();
-    /// let dis = compiler.disassemble(shader, Disasm::None, "// example comment\n").unwrap();
+    /// # let shader = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap();
+    /// let dis = compiler.disassemble(&shader, Disasm::None, "// example comment\n").unwrap();
     /// println!("{}", String::from_utf8_lossy(dis.get_buffer()));
     /// ```
     ///
@@ -112,10 +111,9 @@ impl Compiler {
     /// ### Example
     /// ```rust
     /// # use thindx::d3d::*; let compiler = Compiler::new(47).unwrap();
-    /// # let shader = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap().shader;
-    /// # let shader = shader.get_buffer();
+    /// # let shader = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap();
     /// let dr = compiler.disassemble_region(
-    ///     shader, Disasm::None, "// example comment\n", 0, std::usize::MAX
+    ///     &shader, Disasm::None, "// example comment\n", 0, std::usize::MAX
     /// ).unwrap();
     /// println!("finish_byte_offset: {}", dr.finish_byte_offset);
     /// println!("{}", String::from_utf8_lossy(dr.disassembly.get_buffer()));
@@ -194,9 +192,9 @@ impl Compiler {
     /// ### Example
     /// ```rust
     /// # use thindx::d3d::*; let compiler = Compiler::new(47).unwrap();
-    /// # let shader = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap().shader;
+    /// # let shader = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap();
     /// println!("{}", compiler.get_trace_instruction_offsets_count(
-    ///     shader.get_buffer(), GetInstOffsets::None, 0, std::usize::MAX
+    ///     &shader, GetInstOffsets::None, 0, std::usize::MAX
     /// ).unwrap());
     /// ```
     ///
@@ -232,10 +230,10 @@ impl Compiler {
     /// ### Example
     /// ```rust
     /// # use thindx::d3d::*; let compiler = Compiler::new(47).unwrap();
-    /// # let shader = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap().shader;
+    /// # let shader = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap();
     /// let mut offsets = [0; 128];
     /// let offsets : &[usize] = compiler.get_trace_instruction_offsets_inplace(
-    ///     shader.get_buffer(), GetInstOffsets::None, 0, &mut offsets
+    ///     &shader, GetInstOffsets::None, 0, &mut offsets
     /// ).unwrap();
     /// println!("{:?}", offsets);
     /// ```
@@ -272,9 +270,9 @@ impl Compiler {
     /// ### Example
     /// ```rust
     /// # use thindx::d3d::*; let compiler = Compiler::new(47).unwrap();
-    /// # let shader = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap().shader;
+    /// # let shader = compiler.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap();
     /// let offsets : Vec<usize> = compiler.get_trace_instruction_offsets(
-    ///     shader.get_buffer(), GetInstOffsets::None, 0, std::usize::MAX
+    ///     &shader, GetInstOffsets::None, 0, std::usize::MAX
     /// ).unwrap();
     /// println!("{:?}", offsets);
     /// ```
