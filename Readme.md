@@ -22,9 +22,9 @@ Thin DirectX wrappers for Rust.
 *   Most other graphics crates focus on **hiding** the underlying graphics API as much as possible, improving application portability.
 *   This crate **surfaces** the underlying graphics API as much as possible, improving the potential for interoperability with other graphics code / use in middleware applications.
 
-### Is this crate sound?
+### ❌ This crate is probably unsound! ❌
 
-Probably not.  I'm exposing a huge legacy C++ API to Rust.  Mistakes will happen.
+I'm exposing a huge legacy C++ API to Rust.  Mistakes will happen.
 
 That said, soundness *is* a **very high priority** goal.  `thindx` will add things like extra bounds checks, parameter
 validation, extra init, etc. if need be in order to ensure soundness in safe fns whenever possible.  When it's not
@@ -86,8 +86,8 @@ older versions unless you've tested yourself.
 
 Licensed under either of
 
-* Apache License, Version 2.0 ([LICENSE-APACHE](LICENSE-APACHE) or http://www.apache.org/licenses/LICENSE-2.0)
-* MIT license ([LICENSE-MIT](LICENSE-MIT) or http://opensource.org/licenses/MIT)
+* Apache License, Version 2.0 ([LICENSE-APACHE](LICENSE-APACHE) or <http://www.apache.org/licenses/LICENSE-2.0>)
+* MIT license ([LICENSE-MIT](LICENSE-MIT) or <http://opensource.org/licenses/MIT>)
 
 at your option.
 

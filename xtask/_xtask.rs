@@ -1,6 +1,7 @@
 mod examples;
 mod scan;
 
+use std::path::*;
 use mmrbi::*;
 
 
@@ -18,6 +19,16 @@ fn main() {
 }
 
 fn build(_args: std::env::Args) {
+    for file in "LICENSE-APACHE LICENSE-MIT LICENSE.md Readme.md".split(' ') {
+        let from = Path::new(file);
+        let to = Path::new("thindx").join(file);
+        if from.metadata().and_then(|m| m.modified()).ok() > to.metadata().and_then(|m| m.modified()).ok() {
+            if let Err(err) = std::fs::copy(&from, &to) {
+                error!("unable to copy {} to thindx/{}: {}", from.display(), to.display(), err);
+            }
+        }
+    }
+
     // for some reason we need an abs path here, despite not requiring one when invoking `cargo doc` directly from the CLI
     let css = std::env::current_dir().unwrap().join("thindx/doc/style.css");
     std::env::set_var("RUSTDOCFLAGS", format!(r"--extend-css {css}", css = css.display()));

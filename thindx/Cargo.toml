@@ -27,9 +27,10 @@ path            = "src/_lib.rs"
 [target.'cfg(windows)'.dependencies]
 thindx-zzz-internal-proc-macros = { version = "0.0.0-git", path = "../thindx-zzz-internal-proc-macros" }
 abibool         = "0.5"
-abistr          = { git = "https://github.com/MaulingMonkey/abistr", rev = "1f4d6e40c7d430d586fe81eca46f9e64d569aaca" }
+abistr          = "0.2.0-rc1"
+#abistr          = { git = "https://github.com/MaulingMonkey/abistr", rev = "1f4d6e40c7d430d586fe81eca46f9e64d569aaca" }
 void            = "=1.0.2"
-minidl          = "0.1.0"
+minidl          = "0.1.2"
 winstr          = "0.0.2"
 mcom            = "0.1.1"
 #mcom            = { git = "https://github.com/MaulingMonkey/mcom" }

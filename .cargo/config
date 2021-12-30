@@ -1,3 +1,3 @@
 [alias]
-xtask   = "run -p xtask -q --"
-b       = "run -p xtask -q -- build"
+xtask   = "run --manifest-path=xtask/Cargo.toml -p xtask --"
+b       = "run --manifest-path=xtask/Cargo.toml -p xtask -- build"

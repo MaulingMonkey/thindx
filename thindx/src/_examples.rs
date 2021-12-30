@@ -103,7 +103,7 @@ pub const d3dcompiler_01_construction : () = ();
 /// ```text
 /// pixel_shader
 /// ============
-/// #line 1 "C:\\local\\thindx\\thindx\\<memory>"
+/// #line 1 "C:\\local\\thindx0\\thindx\\<memory>"
 /// 
 /// 
 /// cbuffer ExampleCBuffer {
@@ -140,7 +140,7 @@ pub const d3dcompiler_01_construction : () = ();
 /// 
 /// vertex_shader
 /// =============
-/// #line 1 "C:\\local\\thindx\\thindx\\test\\data\\basic.hlsl"
+/// #line 1 "C:\\local\\thindx0\\thindx\\test\\data\\basic.hlsl"
 /// 
 /// 
 /// cbuffer ExampleCBuffer {
@@ -177,7 +177,7 @@ pub const d3dcompiler_01_construction : () = ();
 /// 
 /// library
 /// =======
-/// #line 1 "C:\\local\\thindx\\thindx\\library.hlsl"
+/// #line 1 "C:\\local\\thindx0\\thindx\\library.hlsl"
 /// 
 /// 
 /// cbuffer ExampleCBuffer {

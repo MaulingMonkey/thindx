@@ -69,3 +69,7 @@ impl ErrorKind {
 impl From<std::ffi::NulError> for ErrorKind {
     fn from(_: std::ffi::NulError) -> ErrorKind { THINERR::STRING_CONTAINS_NULS }
 }
+
+impl From<abistr::InteriorNulError> for ErrorKind {
+    fn from(_: abistr::InteriorNulError) -> ErrorKind { THINERR::STRING_CONTAINS_NULS }
+}

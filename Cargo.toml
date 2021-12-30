@@ -3,5 +3,4 @@
 [workspace]
 members = [
     "thin*",
-    "xtask",
 ]
