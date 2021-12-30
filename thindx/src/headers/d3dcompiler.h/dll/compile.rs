@@ -189,8 +189,8 @@ impl Compiler {
     ///
     /// ### See Also
     /// *   [examples::d3dcompiler_02_compile]
-    #[requires(!store)]
-    // #[requires(d3dcompiler=47)] // ?
+    // //#[requires(!store)] // ?
+    // //#[requires(d3dcompiler=47)] // ?
     pub fn compile_from_file<'s>(
         &self,
         file_name:      impl AsRef<Path>,
@@ -276,7 +276,7 @@ impl Compiler {
     ///
     /// ### See Also
     /// *   [examples::d3dcompiler_02_compile]
-    #[requires(d3dcompiler=40)]
+    //#[requires(d3dcompiler=40)]
     pub fn compile<'s>(
         &self,
         src_data:       impl AsRef<[u8]>,
@@ -375,7 +375,7 @@ impl Compiler {
     /// aspects of how bytecode is generated.  Refer to the descriptions of these parameters for more details. There is
     /// no difference otherwise to the efficiency of the bytecode generated between [compile2](Self::compile2) and
     /// [compile](Self::compile).
-    //#[requires(d3dcompiler=47)] // ?
+    // //#[requires(d3dcompiler=47)] // ?
     pub fn compile2<'s>(
         &self,
         src_data:               impl AsRef<[u8]>,
@@ -474,7 +474,7 @@ impl Compiler {
     ///
     /// ### See Also
     /// *   [examples::d3dcompiler_02_compile]
-    #[requires(d3dcompiler=40)]
+    //#[requires(d3dcompiler=40)]
     pub fn preprocess<'s>(
         &self,
         src_data:       impl AsRef<[u8]>,

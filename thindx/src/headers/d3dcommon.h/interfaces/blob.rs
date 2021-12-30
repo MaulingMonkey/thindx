@@ -84,7 +84,7 @@ pub struct TextBlob(Option<ReadOnlyBlob>);
 
 impl TextBlob {
     /// Wraps a `\0`-terminated [ReadOnlyBlob] or [Option]\<[ReadOnlyBlob]\> in a more [std::ffi::CString]-esque interface.
-    #[xallow(missing_argument_docs)]
+    //#[xallow(missing_argument_docs)]
     pub fn new(value: impl Into<Self>) -> Self { value.into() }
 
     /// Check if the string is empty ("\0" counts as empty)
@@ -138,7 +138,7 @@ impl CodeBlob {
     /// Parsing and deserialization APIs are prone to undefined behavior and CVEs, and executable bytecode formats are no exception.
     /// Possible consumers of this bytecode include d3dcompiler, d3d9, d3d11, d3d12, GPU drivers, various third party shader translators, etc.
     /// If there's not a single path to undefined behavior between all of those, I'll eat my hat!
-    #[xallow(missing_argument_docs)]
+    //#[xallow(missing_argument_docs)]
     pub(crate) unsafe fn from_unchecked(value: ReadOnlyBlob) -> Self { Self(value) }
 
     /// Get the length of the bytecode, in bytes.
@@ -173,7 +173,7 @@ pub struct BytesBlob(Option<ReadOnlyBlob>);
 
 impl BytesBlob {
     /// Wraps a [ReadOnlyBlob] or [Option]\<[ReadOnlyBlob]\> in a more &\[[u8]\]-esque interface.
-    #[xallow(missing_argument_docs)]
+    //#[xallow(missing_argument_docs)]
     pub fn new(value: impl Into<Self>) -> Self { value.into() }
 
     /// Get the length of the binary data, in bytes.

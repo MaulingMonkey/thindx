@@ -78,7 +78,7 @@ impl<'r> ShaderReflectionType<'r> {
     /// # use thindx::*;
     /// // TODO
     /// ```
-    #[xallow(missing_argument_docs)]
+    //#[xallow(missing_argument_docs)]
     pub fn get_interface_by_index(&self, index: u32) -> ShaderReflectionType<'r> {
         let ptr = unsafe { self.ptr.as_ref().GetInterfaceByIndex(index) };
         unsafe { ShaderReflectionType::from_raw(self.phantom, ptr) }
@@ -94,7 +94,7 @@ impl<'r> ShaderReflectionType<'r> {
     /// # use thindx::*;
     /// // TODO
     /// ```
-    #[xallow(missing_argument_docs)]
+    //#[xallow(missing_argument_docs)]
     pub fn get_member_type_by_index(&self, index: u32) -> ShaderReflectionType<'r> {
         let ptr = unsafe { self.ptr.as_ref().GetMemberTypeByIndex(index) };
         unsafe { ShaderReflectionType::from_raw(self.phantom, ptr) }
@@ -110,7 +110,7 @@ impl<'r> ShaderReflectionType<'r> {
     /// # use thindx::*;
     /// // TODO
     /// ```
-    #[xallow(missing_argument_docs)]
+    //#[xallow(missing_argument_docs)]
     pub fn get_member_type_by_name(&self, name: impl TryIntoAsCStr) -> ShaderReflectionType<'r> {
         let name = name.try_into().ok();
         let name = name.as_ref().map_or(cstr!("").as_cstr(), |n| n.as_cstr());
@@ -128,7 +128,7 @@ impl<'r> ShaderReflectionType<'r> {
     /// # use thindx::*;
     /// // TODO
     /// ```
-    #[xallow(missing_argument_docs)]
+    //#[xallow(missing_argument_docs)]
     pub fn get_member_type_name(&self, index: u32) -> Option<&'r CStr> {
         let cstr = unsafe { self.ptr.as_ref().GetMemberTypeName(index) };
         if cstr.is_null() {
@@ -184,7 +184,7 @@ impl<'r> ShaderReflectionType<'r> {
     /// # use thindx::*;
     /// // TODO
     /// ```
-    #[xallow(missing_argument_docs)]
+    //#[xallow(missing_argument_docs)]
     pub fn implements_interface(&self, base: &ShaderReflectionType) -> Result<bool, Error> {
         let hr = unsafe { self.ptr.as_ref().ImplementsInterface(base.as_raw()) };
         if hr == S_FALSE {
@@ -212,7 +212,7 @@ impl<'r> ShaderReflectionType<'r> {
     /// # use thindx::*;
     /// // TODO
     /// ```
-    #[xallow(missing_argument_docs)]
+    //#[xallow(missing_argument_docs)]
     pub fn is_equal(&self, ty: &ShaderReflectionType) -> Result<bool, Error> {
         let hr = unsafe { self.ptr.as_ref().IsEqual(ty.as_raw()) };
         if hr == S_FALSE {
@@ -240,7 +240,7 @@ impl<'r> ShaderReflectionType<'r> {
     /// # use thindx::*;
     /// // TODO
     /// ```
-    #[xallow(missing_argument_docs)]
+    //#[xallow(missing_argument_docs)]
     pub fn is_of_type(&self, ty: &ShaderReflectionType) -> Result<bool, Error> {
         let hr = unsafe { self.ptr.as_ref().IsOfType(ty.as_raw()) };
         if hr == S_FALSE {

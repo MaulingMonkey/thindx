@@ -33,7 +33,7 @@ impl Compiler {
     ///     &shader2, Blob::PrivateData, None
     /// ).unwrap().as_bytes());
     /// ```
-    #[requires(d3dcompiler=43)]
+    //#[requires(d3dcompiler=43)]
     pub fn get_blob_part(&self, src_data: &Bytecode, part: impl Into<BlobPart>, flags: Option<void::Void>) -> Result<BytesBlob, Error> {
         let f = self.D3DGetBlobPart.ok_or(Error::new("D3DGetBlobPart", THINERR::MISSING_DLL_EXPORT))?;
         let src_data = src_data.as_bytes();
@@ -85,7 +85,7 @@ impl Compiler {
     /// ```text
     /// BytesBlob(2625 bytes)
     /// ```
-    #[requires(d3dcompiler=40)]
+    //#[requires(d3dcompiler=40)]
     pub fn get_debug_info(&self, src_data: &Bytecode) -> Result<BytesBlob, Error> {
         let f = self.D3DGetDebugInfo.ok_or(Error::new("D3DGetDebugInfo", THINERR::MISSING_DLL_EXPORT))?;
         let src_data = src_data.as_bytes();
@@ -117,8 +117,8 @@ impl Compiler {
     /// ```text
     /// [68, 88, 66, 67, 97, ...
     /// ```
-    // #[requires(d3dcompiler=33)] // or earlier?
-    #[xallow(missing_argument_docs)]
+    // //#[requires(d3dcompiler=33)] // or earlier?
+    //#[xallow(missing_argument_docs)]
     pub fn get_input_and_output_signature_blob(&self, src_data: &Bytecode) -> Result<BytesBlob, Error> {
         let f = self.D3DGetInputAndOutputSignatureBlob.ok_or(Error::new("D3DGetInputAndOutputSignatureBlob", THINERR::MISSING_DLL_EXPORT))?;
         let src_data = src_data.as_bytes();
@@ -150,8 +150,8 @@ impl Compiler {
     /// ```text
     /// [68, 88, 66, 67, 53, ...
     /// ```
-    // #[requires(d3dcompiler=33)] // or earlier?
-    #[xallow(missing_argument_docs)]
+    // //#[requires(d3dcompiler=33)] // or earlier?
+    //#[xallow(missing_argument_docs)]
     pub fn get_input_signature_blob(&self, src_data: &Bytecode) -> Result<BytesBlob, Error> {
         let f = self.D3DGetInputSignatureBlob.ok_or(Error::new("D3DGetInputSignatureBlob", THINERR::MISSING_DLL_EXPORT))?;
         let src_data = src_data.as_bytes();
@@ -183,8 +183,8 @@ impl Compiler {
     /// ```text
     /// [68, 88, 66, 67, 210, ...
     /// ```
-    // #[requires(d3dcompiler=33)] // or earlier?
-    #[xallow(missing_argument_docs)]
+    // //#[requires(d3dcompiler=33)] // or earlier?
+    //#[xallow(missing_argument_docs)]
     pub fn get_output_signature_blob(&self, src_data: &Bytecode) -> Result<BytesBlob, Error> {
         let f = self.D3DGetOutputSignatureBlob.ok_or(Error::new("D3DGetOutputSignatureBlob", THINERR::MISSING_DLL_EXPORT))?;
         let src_data = src_data.as_bytes();
@@ -221,7 +221,7 @@ impl Compiler {
     ///     &shader2, Blob::PrivateData, None
     /// ).unwrap().as_bytes());
     /// ```
-    #[requires(d3dcompiler=44)]
+    //#[requires(d3dcompiler=44)]
     pub fn set_blob_part<'s>(
         &self,
         src_data:           &Bytecode,
@@ -263,7 +263,7 @@ impl Compiler {
     ///     &shader, CompilerStripFlags::DebugInfo
     /// ).unwrap();
     /// ```
-    #[requires(d3dcompiler=40)]
+    //#[requires(d3dcompiler=40)]
     pub fn strip_shader<'s>(
         &self,
         shader_bytecode:    &[u8],

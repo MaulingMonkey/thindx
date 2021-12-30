@@ -134,8 +134,8 @@ fn file_doc_comments(path: &Path, text: &str) -> Result<(), ()> {
             if s.current_comment_is_mod != Some(false) { s.on_comment_end(path, idx, None); }
             s.current_comment_is_mod = Some(false);
             comment
-        } else if trimmed.starts_with("//") {
-            continue // ignore regular comment lines
+        //} else if trimmed.starts_with("//") && !trimmed.starts_with("//#") {
+        //    continue // ignore regular comment lines
         } else if s.current_comment_is_mod == Some(true) {
             s.on_comment_end(path, idx, None);
             continue
@@ -175,34 +175,39 @@ fn file_doc_comments(path: &Path, text: &str) -> Result<(), ()> {
                         },
                     };
                     rest = r[end+2..].trim_start();
-                } else if let Some(r) = rest.strip_prefix("#[requires(") {
-                    let end = match r.find(")]") {
-                        Some(n) => n,
-                        None => {
-                            error!(at: path, line: no, "#[requires(...)] expected to be a single line");
-                            s.errors = true;
-                            continue;
-                        },
-                    };
-                    rest = r[end+2..].trim_start();
-                } else if let Some(r) = rest.strip_prefix("#[xallow(") {
-                    let end = match r.find(")]") {
-                        Some(n) => n,
-                        None => {
-                            error!(at: path, line: no, "#[xallow(...)] expected to be a single line");
-                            s.errors = true;
-                            continue;
-                        },
-                    };
-                    for allow in r[..end].split(',') {
-                        let allow = allow.trim();
-                        match allow {
-                            "missing_argument_docs" => s.allow_missing_argument_docs = true,
-                            _ => {},
+                } else if rest.starts_with("//#[") {
+                    if let Some(r) = rest.strip_prefix("//#[requires(") {
+                        let end = match r.find(")]") {
+                            Some(n) => n,
+                            None => {
+                                error!(at: path, line: no, "//#[requires(...)] expected to be a single line");
+                                s.errors = true;
+                                continue;
+                            },
+                        };
+                        rest = r[end+2..].trim_start();
+                    } else if let Some(r) = rest.strip_prefix("//#[xallow(") {
+                        let end = match r.find(")]") {
+                            Some(n) => n,
+                            None => {
+                                error!(at: path, line: no, "//#[xallow(...)] expected to be a single line");
+                                s.errors = true;
+                                continue;
+                            },
+                        };
+                        for allow in r[..end].split(',') {
+                            let allow = allow.trim();
+                            match allow {
+                                "missing_argument_docs" => s.allow_missing_argument_docs = true,
+                                _ => {},
+                            }
                         }
+                        rest = r[end+2..].trim_start();
+                    } else {
+                        error!(at: path, line: no, "//#[...] expected `requires(...)` or `xallow(...)`");
+                        continue;
                     }
-                    rest = r[end+2..].trim_start();
-                } else if rest.starts_with("//") {
+                } else if rest.starts_with("// ") {
                     rest = "";
                 } else {
                     break;

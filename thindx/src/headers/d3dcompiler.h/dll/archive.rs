@@ -40,8 +40,8 @@ impl Compiler {
     /// to_compress: [493 bytes, 58 bytes]
     /// compressed:   432 bytes
     /// ```
-    #[requires(!store)]
-    #[requires(d3dcompiler=43)]
+    //#[requires(!store)]
+    //#[requires(d3dcompiler=43)]
     pub fn compress_shaders(
         &self,
         shaders:                &[ShaderData],
@@ -101,8 +101,8 @@ impl Compiler {
     /// # let compress = d3dc.compress_shaders(&tocompress, CompressShader::default()).unwrap();
     /// assert_eq!(2, d3dc.decompress_shaders_count(&compress).unwrap());
     /// ```
-    #[requires(!store)]
-    #[requires(d3dcompiler=43)]
+    //#[requires(!store)]
+    //#[requires(d3dcompiler=43)]
     pub fn decompress_shaders_count(&self, src_data: &[u8]) -> Result<u32, Error> {
         let f = self.D3DDecompressShaders.ok_or(Error::new("D3DDecompressShaders", THINERR::MISSING_DLL_EXPORT))?;
         let mut shader = null_mut(); // D3DDecompressShaders will fail with E_FAIL if ppShaders is null, even if it doesn't use it
@@ -151,8 +151,8 @@ impl Compiler {
     /// assert_eq!(&plain_txt[..],  decompressed[1].as_ref().unwrap().get_buffer());
     /// assert!(decompressed[2].is_none());
     /// ```
-    #[requires(!store)]
-    #[requires(d3dcompiler=43)]
+    //#[requires(!store)]
+    //#[requires(d3dcompiler=43)]
     pub fn decompress_shaders_inplace<'s>(
         &self,
         src_data:               &[u8],
@@ -202,8 +202,8 @@ impl Compiler {
     /// assert_eq!(basic_hlsl, decompressed[0].as_ref().unwrap().get_buffer());
     /// assert_eq!(plain_txt,  decompressed[1].as_ref().unwrap().get_buffer());
     /// ```
-    #[requires(!store)]
-    #[requires(d3dcompiler=43)]
+    //#[requires(!store)]
+    //#[requires(d3dcompiler=43)]
     pub fn decompress_shaders<'s>(
         &self,
         src_data:               &[u8],

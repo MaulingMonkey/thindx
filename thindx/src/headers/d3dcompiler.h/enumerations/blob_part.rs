@@ -37,34 +37,34 @@ enumish! {
     pub const XnaShader                        : Blob = Blob(D3D_BLOB_XNA_SHADER);
 
     /// The blob part is program database (PDB) information.
-    #[requires(d3dcompiler=44)]
+    //#[requires(d3dcompiler=44)]
     pub const Pdb                              : Blob = Blob(D3D_BLOB_PDB);
 
     /// The blob part is private data.
-    #[requires(d3dcompiler=44)]
+    //#[requires(d3dcompiler=44)]
     pub const PrivateData                      : Blob = Blob(D3D_BLOB_PRIVATE_DATA);
 
     /// The blob part is a root signature. Refer to [Specifying Root Signatures in HLSL] for more information on using Direct3D12 with HLSL.
     ///
     /// [Specifying Root Signatures in HLSL]:   https://docs.microsoft.com/en-us/windows/desktop/direct3d12/specifying-root-signatures-in-hlsl
-    #[requires(d3dcompiler=47)]
+    //#[requires(d3dcompiler=47)]
     pub const RootSignature                    : Blob = Blob(D3D_BLOB_ROOT_SIGNATURE);
 
     /// The blob part is the debug name of the shader. If the application does not specify the debug name itself,
     /// an auto-generated name matching the PDB file of the shader is provided instead.
-    #[requires(d3dcompiler=47)]
+    //#[requires(d3dcompiler=47)]
     pub const DebugName                        : Blob = Blob(D3D_BLOB_DEBUG_NAME);
 
-    #[requires(d3dcompiler=0)]
+    //#[requires(d3dcompiler=0)]
     pub const TestAlternateShader              : Blob = Blob(D3D_BLOB_TEST_ALTERNATE_SHADER);
 
-    #[requires(d3dcompiler=0)]
+    //#[requires(d3dcompiler=0)]
     pub const TestCompileDetails               : Blob = Blob(D3D_BLOB_TEST_COMPILE_DETAILS);
 
-    #[requires(d3dcompiler=0)]
+    //#[requires(d3dcompiler=0)]
     pub const TestCompilePerf                  : Blob = Blob(D3D_BLOB_TEST_COMPILE_PERF);
 
-    #[requires(d3dcompiler=0)]
+    //#[requires(d3dcompiler=0)]
     pub const TestCompileReport                : Blob = Blob(D3D_BLOB_TEST_COMPILE_REPORT);
 }
 
@@ -80,33 +80,33 @@ enumish! {
     pub const XNA_SHADER                       : Blob = Blob(D3D_BLOB_XNA_SHADER);
 
     /// The blob part is program database (PDB) information.
-    #[requires(d3dcompiler=44)]
+    //#[requires(d3dcompiler=44)]
     pub const PDB                              : Blob = Blob(D3D_BLOB_PDB);
 
-    #[requires(d3dcompiler=44)]
+    //#[requires(d3dcompiler=44)]
     pub const PRIVATE_DATA                     : Blob = Blob(D3D_BLOB_PRIVATE_DATA);
 
     /// The blob part is a root signature. Refer to [Specifying Root Signatures in HLSL] for more information on using Direct3D12 with HLSL.
     ///
     /// [Specifying Root Signatures in HLSL]:   https://docs.microsoft.com/en-us/windows/desktop/direct3d12/specifying-root-signatures-in-hlsl
-    #[requires(d3dcompiler=47)]
+    //#[requires(d3dcompiler=47)]
     pub const ROOT_SIGNATURE                   : Blob = Blob(D3D_BLOB_ROOT_SIGNATURE);
 
     /// The blob part is the debug name of the shader. If the application does not specify the debug name itself,
     /// an auto-generated name matching the PDB file of the shader is provided instead.
-    #[requires(d3dcompiler=47)]
+    //#[requires(d3dcompiler=47)]
     pub const DEBUG_NAME                       : Blob = Blob(D3D_BLOB_DEBUG_NAME);
 
-    #[requires(d3dcompiler=0)]
+    //#[requires(d3dcompiler=0)]
     pub const TEST_ALTERNATE_SHADER            : Blob = Blob(D3D_BLOB_TEST_ALTERNATE_SHADER);
 
-    #[requires(d3dcompiler=0)]
+    //#[requires(d3dcompiler=0)]
     pub const TEST_COMPILE_DETAILS             : Blob = Blob(D3D_BLOB_TEST_COMPILE_DETAILS);
 
-    #[requires(d3dcompiler=0)]
+    //#[requires(d3dcompiler=0)]
     pub const TEST_COMPILE_PERF                : Blob = Blob(D3D_BLOB_TEST_COMPILE_PERF);
 
-    #[requires(d3dcompiler=0)]
+    //#[requires(d3dcompiler=0)]
     pub const TEST_COMPILE_REPORT              : Blob = Blob(D3D_BLOB_TEST_COMPILE_REPORT);
 }
 

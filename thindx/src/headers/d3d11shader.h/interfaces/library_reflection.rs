@@ -99,7 +99,7 @@ impl LibraryReflection {
     ///     has_10_level_9_pixel_shader: false,
     /// }
     /// ```
-    #[xallow(missing_argument_docs)]
+    //#[xallow(missing_argument_docs)]
     pub fn get_function_by_index(&self, function_index: u32) -> FunctionReflection {
         let ptr = unsafe { self.0.GetFunctionByIndex(function_index as i32) };
         unsafe { FunctionReflection::from_raw(self, ptr) }

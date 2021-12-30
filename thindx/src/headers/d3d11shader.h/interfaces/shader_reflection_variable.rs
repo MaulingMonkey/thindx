@@ -73,7 +73,7 @@ impl<'r> ShaderReflectionVariable<'r> {
     /// # use thindx::*;
     /// // TODO
     /// ```
-    #[xallow(missing_argument_docs)]
+    //#[xallow(missing_argument_docs)]
     pub fn get_interface_slot(&self, array_index: u32) -> u32 {
         unsafe { self.ptr.as_ref().GetInterfaceSlot(array_index) }
     }

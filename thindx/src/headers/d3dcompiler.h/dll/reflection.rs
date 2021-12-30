@@ -45,7 +45,7 @@ impl Compiler {
     ///
     /// ### See Also
     /// *   [d3d11::ShaderReflection] for a more complete example
-    #[requires(d3dcompiler=40)]
+    //#[requires(d3dcompiler=40)]
     pub fn reflect<I: Raw>(&self, src_data: &Bytecode) -> Result<I, Error> where I::Raw : Interface {
         let f = self.D3DReflect.ok_or(Error::new("D3DReflect", THINERR::MISSING_DLL_EXPORT))?;
         let src_data = src_data.as_bytes();
@@ -87,7 +87,7 @@ impl Compiler {
     ///
     /// ### See Also
     /// *   [d3d11::ShaderReflection] for a more complete example
-    #[requires(d3dcompiler=40)]
+    //#[requires(d3dcompiler=40)]
     pub fn reflect11(&self, src_data: &Bytecode) -> Result<d3d11::ShaderReflection, Error> {
         self.reflect(src_data)
     }
@@ -132,7 +132,7 @@ impl Compiler {
     ///
     /// ### See Also
     /// *   [d3d11::LibraryReflection] for a more complete example
-    //#[requires(d3dcompiler=47)] // ?
+    // //#[requires(d3dcompiler=47)] // ?
     pub fn reflect_library<I: Raw>(&self, src_data: &Bytecode) -> Result<I, Error> where I::Raw : Interface {
         let f = self.D3DReflectLibrary.ok_or(Error::new("D3DReflectLibrary", THINERR::MISSING_DLL_EXPORT))?;
         let src_data = src_data.as_bytes();
@@ -178,7 +178,7 @@ impl Compiler {
     ///
     /// ### See Also
     /// *   [d3d11::LibraryReflection] for a more complete example
-    //#[requires(d3dcompiler=47)] // ?
+    // //#[requires(d3dcompiler=47)] // ?
     pub fn reflect_library_11(&self, src_data: &Bytecode) -> Result<d3d11::LibraryReflection, Error> {
         self.reflect_library(src_data)
     }

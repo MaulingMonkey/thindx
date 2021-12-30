@@ -25,7 +25,7 @@ impl Compiler {
     /// assert_eq!(blob.get_buffer_size(),  4           );
     /// assert_eq!(blob.get_buffer(),       &[1,2,3,4]  );
     /// ```
-    #[requires(d3dcompiler=43)]
+    //#[requires(d3dcompiler=43)]
     pub fn create_read_only_blob(&self, data: &[u8]) -> Result<ReadOnlyBlob, Error> {
         let f = self.D3DCreateBlob.ok_or(Error::new("D3DCreateBlob", THINERR::MISSING_DLL_EXPORT))?;
 
@@ -69,7 +69,7 @@ impl Compiler {
     /// let err = d3dc.read_file_to_blob(r"test\data").err().unwrap();
     /// assert_eq!(err.kind(), ErrorKind::from_win32(ERROR_ACCESS_DENIED));
     /// ```
-    #[requires(d3dcompiler=44)]
+    //#[requires(d3dcompiler=44)]
     pub fn read_file_to_blob<'s>(&self, file_name: impl AsRef<Path>) -> Result<ReadOnlyBlob, Error> {
         let f = self.D3DReadFileToBlob.ok_or(Error::new("D3DReadFileToBlob", THINERR::MISSING_DLL_EXPORT))?;
         let file_name = file_name.as_ref().as_os_str().encode_wide().chain(Some(0)).collect::<Vec<_>>();
@@ -116,7 +116,7 @@ impl Compiler {
     /// let err = d3dc.write_blob_to_file(&blob, r"..\target", false).unwrap_err();
     /// assert_eq!(err.kind(), ErrorKind::from_win32(ERROR_ACCESS_DENIED));
     /// ```
-    #[requires(d3dcompiler=44)]
+    //#[requires(d3dcompiler=44)]
     pub fn write_blob_to_file<'s>(
         &self,
         blob:       &ReadOnlyBlob,

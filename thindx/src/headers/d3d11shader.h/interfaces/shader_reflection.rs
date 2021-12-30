@@ -81,7 +81,7 @@ impl ShaderReflection {
     /// # assert_eq!(Some(E::FAIL), vs.get_constant_buffer_by_index(!0-1).get_desc().err().map(|err| err.kind()));
     /// # assert_eq!(Some(E::FAIL), vs.get_constant_buffer_by_index(!0).get_desc().err().map(|err| err.kind()));
     /// ```
-    #[xallow(missing_argument_docs)]
+    //#[xallow(missing_argument_docs)]
     pub fn get_constant_buffer_by_index(&self, index: u32) -> ShaderReflectionConstantBuffer {
         let ptr = unsafe { self.0.GetConstantBufferByIndex(index) };
         unsafe { ShaderReflectionConstantBuffer::from_raw(self, ptr) }
@@ -110,7 +110,7 @@ impl ShaderReflection {
     /// # assert_eq!(Some(E::FAIL), vs.get_constant_buffer_by_name("").get_desc().err().map(|err| err.kind()));
     /// # assert_eq!(Some(E::FAIL), vs.get_constant_buffer_by_name("ExampleCBuffer\0").get_desc().err().map(|err| err.kind()));
     /// ```
-    #[xallow(missing_argument_docs)]
+    //#[xallow(missing_argument_docs)]
     pub fn get_constant_buffer_by_name(&self, name: impl TryIntoAsCStr) -> ShaderReflectionConstantBuffer {
         let name = name.try_into().ok();
         let name = name.as_ref().map_or(cstr!("").as_cstr(), |n| n.as_cstr());
@@ -208,7 +208,7 @@ impl ShaderReflection {
     /// # assert_eq!(E::INVALIDARG, vs.get_input_parameter_desc(!0-1).unwrap_err().kind());
     /// # assert_eq!(E::INVALIDARG, vs.get_input_parameter_desc(!0).unwrap_err().kind());
     /// ```
-    #[xallow(missing_argument_docs)]
+    //#[xallow(missing_argument_docs)]
     pub fn get_input_parameter_desc(&self, parameter_index: u32) -> Result<SignatureParameterDesc, Error> {
         let mut desc = SignatureParameterDesc::default();
         let hr = unsafe { self.0.GetInputParameterDesc(parameter_index, desc.as_mut_ptr()) };
@@ -317,7 +317,7 @@ impl ShaderReflection {
     /// # assert_eq!(E::INVALIDARG, vs.get_output_parameter_desc(!0-1).unwrap_err().kind());
     /// # assert_eq!(E::INVALIDARG, vs.get_output_parameter_desc(!0).unwrap_err().kind());
     /// ```
-    #[xallow(missing_argument_docs)]
+    //#[xallow(missing_argument_docs)]
     pub fn get_output_parameter_desc(&self, parameter_index: u32) -> Result<SignatureParameterDesc, Error> {
         let mut desc = SignatureParameterDesc::default();
         let hr = unsafe { self.0.GetOutputParameterDesc(parameter_index, desc.as_mut_ptr()) };
@@ -351,7 +351,7 @@ impl ShaderReflection {
     /// # assert_eq!(E::INVALIDARG, vs.get_patch_constant_parameter_desc(!0-1).unwrap_err().kind());
     /// # assert_eq!(E::INVALIDARG, vs.get_patch_constant_parameter_desc(!0).unwrap_err().kind());
     /// ```
-    #[xallow(missing_argument_docs)]
+    //#[xallow(missing_argument_docs)]
     pub fn get_patch_constant_parameter_desc(&self, parameter_index: u32) -> Result<SignatureParameterDesc, Error> {
         let mut desc = SignatureParameterDesc::default();
         let hr = unsafe { self.0.GetPatchConstantParameterDesc(parameter_index, desc.as_mut_ptr()) };
@@ -407,7 +407,7 @@ impl ShaderReflection {
     /// # assert_eq!(vs.get_resource_binding_desc(!0-1).err().unwrap().kind(), E::INVALIDARG);
     /// # assert_eq!(vs.get_resource_binding_desc(!0).err().unwrap().kind(), E::INVALIDARG);
     /// ```
-    #[xallow(missing_argument_docs)]
+    //#[xallow(missing_argument_docs)]
     pub fn get_resource_binding_desc(&self, resource_index: u32) -> Result<ShaderInputBindDesc, Error> {
         let mut desc = ShaderInputBindDesc::default();
         let hr = unsafe { self.0.GetResourceBindingDesc(resource_index, desc.as_mut_ptr()) };
@@ -438,7 +438,7 @@ impl ShaderReflection {
     /// # assert_eq!(vs.get_resource_binding_desc_by_name("ExampleCBuffer\0").err().unwrap().kind(), E::INVALIDARG);
     /// # assert_eq!(vs.get_resource_binding_desc_by_name("").err().unwrap().kind(), E::INVALIDARG);
     /// ```
-    #[xallow(missing_argument_docs)]
+    //#[xallow(missing_argument_docs)]
     pub fn get_resource_binding_desc_by_name(&self, name: impl TryIntoAsCStr) -> Result<ShaderInputBindDesc, Error> {
         let name = name.try_into();
         let name = name.as_ref().map_or(null(), |name| name.as_cstr());
@@ -495,7 +495,7 @@ impl ShaderReflection {
     /// # assert_eq!(vs.get_variable_by_name("tint\0").get_desc().unwrap_err().kind(), E::FAIL);
     /// # assert_eq!(vs.get_variable_by_name("").get_desc().unwrap_err().kind(), E::FAIL);
     /// ```
-    #[xallow(missing_argument_docs)]
+    //#[xallow(missing_argument_docs)]
     pub fn get_variable_by_name(&self, name: impl TryIntoAsCStr) -> ShaderReflectionVariable {
         let name = name.try_into().ok();
         let name = name.as_ref().map_or(cstr!("").as_cstr(), |n| n.as_cstr());
