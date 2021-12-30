@@ -21,4 +21,4 @@ jobs:
         cargo -V
         cmd /C ver
     - name: Test
-      run: cargo test --all-features
+      run: cargo b
