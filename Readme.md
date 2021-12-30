@@ -66,20 +66,20 @@ Additionally, individual extension traits / functions / methods will likely neve
 | d3d12             | ❌    | ❌    | ❌    | ❌    |
 | dxgi              | ❌    | ❌    | ❌    | ❌    |
 | dinput            | ❌    | ❌    | ❌    | ❌    |
-| dsound            | ❌    | ❌    | ❌    | ❌    |
 | xinput            | ❌    | ❌    | ❌    | ❌    |
-| xaudio2           |
+| xaudio2           | ❌    | ❌    | ❌    | ❌    |
 | **Low Priority**  |
-| d2d               |
-| dcompute          |
-| dwrite            |
-| dxr               |
-| xact3             |
-| **Not Planned**   |       |       |       |       | feel free to express interest though!
-| d3d10             |
-| ddraw             |
-| dplay             |
-| xaudio1           |
+| d2d               | | | | | I prefer d3d wrappers?
+| dcompute          | | | | |
+| dsound            | | | | | prefer xaudio2? (might be needed for gamepad headset audio?)
+| dwrite            | | | | | consider uniscribe?
+| dxr               | | | | |
+| xact3             | | | | |
+| **Not Planned**   | | | | | feel free to express interest though!
+| d3d10             | | | | | d3d11 is the same but saner, and just as portable?
+| ddraw             | | | | | prefer d2d, gdi, or other less ancient api?
+| dplay             | | | | | prefer steamworks, raw sockets, etc.?
+| xaudio1           | | | | | does this even exist? prefer xaudio2
 
 | Legend    | Description   |
 | --------- | ------------- |
