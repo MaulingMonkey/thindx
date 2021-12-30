@@ -1,0 +1,122 @@
+# headers
+d3d11shader.h                           = https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/
+d3dcommon.h                             = https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/
+d3dcompiler.h                           = https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/
+
+
+
+# unknwn.h interfaces
+IUnknown                                = https://docs.microsoft.com/en-us/windows/win32/api/unknwn/nn-unknwn-iunknown
+
+
+
+# d3d11shader.h interfaces
+ID3D11FunctionLinkingGraph              = https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11functionlinkinggraph
+ID3D11FunctionParameterReflection       = https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11functionparameterreflection
+ID3D11FunctionReflection                = https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11functionreflection
+ID3D11LibraryReflection                 = https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11libraryreflection
+ID3D11Linker                            = https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11linker
+ID3D11LinkingNode                       = https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11linkingnode
+ID3D11Module                            = https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11module
+ID3D11ModuleInstance                    = https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11moduleinstance
+ID3D11ShaderReflection                  = https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11shaderreflection
+ID3D11ShaderReflectionConstantBuffer    = https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11shaderreflectionconstantbuffer
+ID3D11ShaderReflectionType              = https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11shaderreflectiontype
+ID3D11ShaderReflectionVariable          = https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11shaderreflectionvariable
+
+# d3d11shader.h structures
+D3D11_FUNCTION_DESC                     = https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/ns-d3d11shader-d3d11_function_desc
+D3D11_LIBRARY_DESC                      = https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/ns-d3d11shader-d3d11_library_desc
+D3D11_PARAMETER_DESC                    = https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/ns-d3d11shader-d3d11_parameter_desc
+D3D11_SHADER_BUFFER_DESC                = https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/ns-d3d11shader-d3d11_shader_buffer_desc
+D3D11_SHADER_DESC                       = https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/ns-d3d11shader-d3d11_shader_desc
+D3D11_SHADER_INPUT_BIND_DESC            = https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/ns-d3d11shader-d3d11_shader_input_bind_desc
+D3D11_SHADER_TYPE_DESC                  = https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/ns-d3d11shader-d3d11_shader_type_desc
+D3D11_SHADER_VARIABLE_DESC              = https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/ns-d3d11shader-d3d11_shader_variable_desc
+D3D11_SIGNATURE_PARAMETER_DESC          = https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/ns-d3d11shader-d3d11_signature_parameter_desc
+
+# d3d11shader.h enumerations
+D3D11_SHADER_VERSION_TYPE               = https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/ne-d3d11shader-d3d11_shader_version_type
+
+
+
+# d3dcommon.h enumerations
+D3D_CBUFFER_TYPE                        = https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_cbuffer_type
+D3D_DRIVER_TYPE                         = https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_driver_type
+D3D_FEATURE_LEVEL                       = https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_feature_level
+D3D_INCLUDE_TYPE                        = https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_include_type
+D3D_INTERPOLATION_MODE                  = https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_interpolation_mode
+D3D_MIN_PRECISION                       = https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_min_precision
+D3D_NAME                                = https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_name
+D3D_PRIMITIVE                           = https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_primitive
+D3D_PRIMITIVE_TOPOLOGY                  = https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_primitive_topology
+D3D_REGISTER_COMPONENT_TYPE             = https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_register_component_type
+D3D_RESOURCE_RETURN_TYPE                = https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_resource_return_type
+D3D_SHADER_INPUT_TYPE                   = https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_shader_input_type
+D3D_SHADER_VARIABLE_CLASS               = https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_shader_variable_class
+D3D_SHADER_VARIABLE_TYPE                = https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_shader_variable_type
+D3D_SRV_DIMENSION                       = https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_srv_dimension
+D3D_TESSELLATOR_DOMAIN                  = https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_tessellator_domain
+D3D_TESSELLATOR_OUTPUT_PRIMITIVE        = https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_tessellator_output_primitive
+D3D_TESSELLATOR_PARTITIONING            = https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_tessellator_partitioning
+
+# d3dcommon.h flags
+D3D_PARAMETER_FLAGS                     = https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_parameter_flags
+D3D_SHADER_CBUFFER_FLAGS                = https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_shader_cbuffer_flags
+D3D_SHADER_INPUT_FLAGS                  = https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_shader_input_flags
+D3D_SHADER_VARIABLE_FLAGS               = https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_shader_variable_flags
+
+# d3dcommon.h interfaces
+ID3D10Blob                              = https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nn-d3dcommon-id3d10blob
+ID3DBlob                                = https://docs.microsoft.com/en-us/previous-versions/windows/desktop/legacy/ff728743(v=vs.85)
+ID3DInclude                             = https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nn-d3dcommon-id3dinclude
+
+# d3dcommon.h structures
+D3D_SHADER_MACRO                        = https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ns-d3dcommon-d3d_shader_macro
+
+
+
+# d3dcompiler.h functions
+D3DCompile                              = https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-D3DCompile
+D3DCompile2                             = https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-D3DCompile2
+D3DCompileFromFile                      = https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-D3DCompileFromFile
+D3DCompressShaders                      = https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-D3DCompressShaders
+D3DCreateBlob                           = https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-D3DCreateBlob
+D3DCreateBlob                           = https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-D3DCreateBlob
+D3DCreateFunctionLinkingGraph           = https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-D3DCreateFunctionLinkingGraph
+D3DCreateLinker                         = https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-D3DCreateLinker
+D3DDecompressShaders                    = https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-D3DDecompressShaders
+D3DDisassemble                          = https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-D3DDisassemble
+D3DDisassemble10Effect                  = https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-D3DDisassemble10Effect
+D3DDisassembleRegion                    = https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-D3DDisassembleRegion
+D3DGetBlobPart                          = https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-D3DGetBlobPart
+D3DGetDebugInfo                         = https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-D3DGetDebugInfo
+D3DGetInputAndOutputSignatureBlob       = https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-D3DGetInputAndOutputSignatureBlob
+D3DGetInputSignatureBlob                = https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-D3DGetInputSignatureBlob
+D3DGetOutputSignatureBlob               = https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-D3DGetOutputSignatureBlob
+D3DGetTraceInstructionOffsets           = https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-D3DGetTraceInstructionOffsets
+D3DLoadModule                           = https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-D3DLoadModule
+D3DPreprocess                           = https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-D3DPreprocess
+D3DReadFileToBlob                       = https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-D3DReadFileToBlob
+D3DReflect                              = https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-D3DReflect
+D3DReflectLibrary                       = https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-D3DReflectLibrary
+D3DSetBlobPart                          = https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-D3DSetBlobPart
+D3DStripShader                          = https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-D3DStripShader
+D3DWriteBlobToFile                      = https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-D3DWriteBlobToFile
+
+# d3dcompiler.h structures
+D3D_SHADER_DATA                         = https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/ns-d3dcompiler-d3d_shader_data
+
+# d3dcompiler.h enumerations
+D3D_BLOB_PART                           = https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/ne-d3dcompiler-d3d_blob_part
+
+# d3dcompiler.h flags
+D3DCOMPILER_STRIP_FLAGS                 = https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/ne-d3dcompiler-d3dcompiler_strip_flags
+# constants
+# D3DCOMPILE_EFFECT_*                   = https://docs.microsoft.com/en-us/windows/win32/direct3dhlsl/d3dcompile-effect-constants / UINT
+# D3DCOMPILE_SECDATA_*                  = https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dcompile2#parameters / UINT
+# D3DCOMPILE_*                          = https://docs.microsoft.com/en-us/windows/win32/direct3dhlsl/d3dcompile-constants / UINT
+# D3D_COMPRESS_SHADER_*                 = https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dcompressshaders#parameters / UINT
+# D3D_DISASM_*                          = https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3ddisassembleregion#parameters / UINT
+# D3D_GET_INST_OFFSETS_*                = https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dgettraceinstructionoffsets#parameters / UINT
+# D3D_SHADER_REQUIRES_*                 = https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getrequiresflags#return-value / UINT64

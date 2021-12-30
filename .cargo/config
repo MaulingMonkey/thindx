@@ -1,3 +1,6 @@
 [alias]
 xtask   = "run --manifest-path=xtask/Cargo.toml -p xtask --"
 b       = "run --manifest-path=xtask/Cargo.toml -p xtask -- build"
+c       = "run --manifest-path=xtask/Cargo.toml -p xtask -- check"
+d       = "run --manifest-path=xtask/Cargo.toml -p xtask -- doc"
+h       = "run --manifest-path=xtask/Cargo.toml -p xtask -- help"

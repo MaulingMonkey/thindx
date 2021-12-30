@@ -8,7 +8,7 @@ name            = "xtask"
 description     = "build utilities"
 version         = "0.0.0-git"
 authors         = ["MaulingMonkey <git@maulingmonkey.com>"]
-edition         = "2018"
+edition         = "2021"
 publish         = false
 license         = "Apache-2.0 OR MIT"
 
@@ -17,5 +17,7 @@ name            = "xtask"
 path            = "_xtask.rs"
 
 [dependencies]
-#mmrbi           = "0.0.11"
-mmrbi           = { git = "https://github.com/MaulingMonkey/mmrbi", rev = "1e27c41be24a4cb5ae31dd6388dba08a2af9e02b" }
+lazy_static     = "1"
+maulingmonkey-windows-sdk-scanner.git = "https://github.com/MaulingMonkey/windows-sdk-scanner"
+mmrbi           = "0.0.17"
+# mmrbi           = { git = "https://github.com/MaulingMonkey/mmrbi", rev = "1e27c41be24a4cb5ae31dd6388dba08a2af9e02b" }

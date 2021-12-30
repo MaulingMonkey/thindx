@@ -1,4 +1,5 @@
 mod examples;
+mod headers;
 mod scan;
 
 use std::path::*;
@@ -10,36 +11,31 @@ fn main() {
     let mut args = std::env::args();
     let _exe = args.next();
 
+    // for some reason we need an abs path here, despite not requiring one when invoking `cargo doc` directly from the CLI
+    // set even for non-doc builds for consistentcy
+    let css = std::env::current_dir().unwrap().join("thindx/doc/style.css");
+    std::env::set_var("RUSTDOCFLAGS", format!(r"--extend-css {css}", css = css.display()));
+
     let cmd = args.next().expect("command");
     match cmd.as_str() {
         "b" | "build"   => build(args),
         "c" | "check"   => check(args),
+        "d" | "doc"     => doc(args, false),
+        "h" | "help"    => doc(args, true),
         other           => fatal!("unknown command {:?}", other),
     }
 }
 
 fn build(_args: std::env::Args) {
-    for file in "LICENSE-APACHE LICENSE-MIT LICENSE.md Readme.md".split(' ') {
-        let from = Path::new(file);
-        let to = Path::new("thindx").join(file);
-        if from.metadata().and_then(|m| m.modified()).ok() > to.metadata().and_then(|m| m.modified()).ok() {
-            if let Err(err) = std::fs::copy(&from, &to) {
-                error!("unable to copy {} to thindx/{}: {}", from.display(), to.display(), err);
-            }
-        }
-    }
-
-    // for some reason we need an abs path here, despite not requiring one when invoking `cargo doc` directly from the CLI
-    let css = std::env::current_dir().unwrap().join("thindx/doc/style.css");
-    std::env::set_var("RUSTDOCFLAGS", format!(r"--extend-css {css}", css = css.display()));
-
+    copy_thindx_files();
     scan::src().unwrap_or_else(|()| std::process::exit(1));
-    run("cargo fetch"                                );
-    run("cargo check --frozen --workspace --all-targets" );
-    run("cargo build --frozen --workspace --all-targets --exclude xtask");
+    run("cargo fetch");
+    run("cargo check --frozen --workspace --all-targets");
+    run("cargo build --frozen --workspace --all-targets");
     examples::update();
-    run("cargo   doc --frozen --workspace --no-deps" );
-    run("cargo  test --frozen --workspace"           );
+    headers::update();
+    run("cargo   doc --frozen --workspace");
+    run("cargo  test --frozen --workspace");
 }
 
 fn check(mut args: std::env::Args) {
@@ -83,6 +79,17 @@ fn check(mut args: std::env::Args) {
     cmd.status0().unwrap_or_else(|err| fatal!("{}", err));
 }
 
+fn doc(_args: std::env::Args, help: bool) {
+    copy_thindx_files();
+    examples::update();
+    headers::update();
+    if help {
+        run("cargo doc -p thindx --open");
+    } else {
+        run("cargo doc -p thindx");
+    }
+}
+
 
 
 fn run(command: &str) {
@@ -92,3 +99,15 @@ fn run(command: &str) {
 }
 
 fn cmd(original: &str) -> Command { Command::parse(original).unwrap_or_else(|err| fatal!("{}", err)) }
+
+fn copy_thindx_files() {
+    for file in "LICENSE-APACHE LICENSE-MIT LICENSE.md Readme.md".split(' ') {
+        let from = Path::new(file);
+        let to = Path::new("thindx").join(file);
+        if from.metadata().and_then(|m| m.modified()).ok() > to.metadata().and_then(|m| m.modified()).ok() {
+            if let Err(err) = std::fs::copy(&from, &to) {
+                error!("unable to copy {} to thindx/{}: {}", from.display(), to.display(), err);
+            }
+        }
+    }
+}
