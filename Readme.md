@@ -40,6 +40,14 @@ more bugs / unchecked parameters / ??? that I'll fail to mitigate due to being u
 happy to investigate, accept pull requests, expand test coverage, etc. it's worth assuming this crate is unsound on
 older versions unless you've tested yourself.
 
+### ⚠️ API major version churn ⚠️
+
+Individual `fn`s are likely to gain/lose `unsafe`, traits, etc. in a neverending attempt to make DirectX access sound.
+As such, `thindx` itself will likely always suffer from major version churn.
+This isn't too much of a problem until two crates wish to share / pass `thindx` types between themselves.
+It might be possible to somewhat stabilize some types by exiling them into subcrates, but this has not yet been done.
+Additionally, individual extension traits / functions / methods will likely never get the same treatment (no need?)
+
 
 
 ### Project Status
