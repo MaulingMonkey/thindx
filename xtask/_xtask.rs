@@ -12,9 +12,9 @@ fn main() {
 
     let cmd = args.next().expect("command");
     match cmd.as_str() {
-        "build"     => build(args),
-        "check"     => check(args),
-        other       => fatal!("unknown command {:?}", other),
+        "b" | "build"   => build(args),
+        "c" | "check"   => check(args),
+        other           => fatal!("unknown command {:?}", other),
     }
 }
 
