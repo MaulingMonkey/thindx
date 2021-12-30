@@ -34,12 +34,12 @@ fn build(_args: std::env::Args) {
     std::env::set_var("RUSTDOCFLAGS", format!(r"--extend-css {css}", css = css.display()));
 
     scan::src().unwrap_or_else(|()| std::process::exit(1));
-    run("cargo        fetch"                                );
-    run("cargo        check --frozen --workspace --all-targets" );
-    run("cargo        build --frozen --workspace --all-targets --exclude xtask");
+    run("cargo fetch"                                );
+    run("cargo check --frozen --workspace --all-targets" );
+    run("cargo build --frozen --workspace --all-targets --exclude xtask");
     examples::update();
-    run("cargo +nightly doc --frozen --workspace --no-deps" );
-    run("cargo         test --frozen --workspace"           );
+    run("cargo   doc --frozen --workspace --no-deps" );
+    run("cargo  test --frozen --workspace"           );
 }
 
 fn check(mut args: std::env::Args) {
