@@ -20,7 +20,7 @@ use crate::*;
 ///     let d3dc = d3d::Compiler::new("d3dcompiler_47.dll").unwrap();
 /// 
 ///     // However, you can potentially allow a range of versions as well
-///     let d3dc = (33..47).rev().find_map(|ver| d3d::Compiler::new(ver).ok()).unwrap();
+///     let d3dc = (33..=47).rev().find_map(|ver| d3d::Compiler::new(ver).ok()).unwrap();
 /// 
 ///     // TLS is also an option
 ///     thread_local! { static D3DC : d3d::Compiler = d3d::Compiler::new(47).unwrap(); }
