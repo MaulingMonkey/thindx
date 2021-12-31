@@ -109,25 +109,24 @@ pub mod E {
 
     /// Access is denied.
     pub const ACCESSDENIED              : ErrorKind = ErrorKind(E_ACCESSDENIED);
-
-    /// The system cannot find the path specified.
-    pub const E_PATH_NOT_FOUND          : ErrorKind = ErrorKind(E_PATH_NOT_FOUND);
 }
 
 /// `0x8000....` • General [ErrorKind]s<br>
 /// `0x8007....`
 pub mod ERROR {
+    use super::*;
+
     /// A file was not found
-    pub const FILE_NOT_FOUND            : ErrorKind = ErrorKind(ERROR_FILE_NOT_FOUND);
+    pub const FILE_NOT_FOUND            : ErrorKind = ErrorKind(ERROR_FILE_NOT_FOUND as _);
 
     /// Access is denied.
-    pub const ACCESS_DENIED             : ErrorKind = ErrorKind(ERROR_ACCESS_DENIED);
+    pub const ACCESS_DENIED             : ErrorKind = ErrorKind(ERROR_ACCESS_DENIED as _);
 
     /// The system cannot find the path specified.
-    pub const PATH_NOT_FOUND            : ErrorKind = ErrorKind(ERROR_PATH_NOT_FOUND);
+    pub const PATH_NOT_FOUND            : ErrorKind = ErrorKind(ERROR_PATH_NOT_FOUND as _);
 
     /// The file exists.
-    pub const FILE_EXISTS               : ErrorKind = ErrorKind(ERROR_FILE_EXISTS);
+    pub const FILE_EXISTS               : ErrorKind = ErrorKind(ERROR_FILE_EXISTS as _);
 }
 
 /// `0x0000....` • Success "[ErrorKind]"s
