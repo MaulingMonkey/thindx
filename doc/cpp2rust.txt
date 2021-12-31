@@ -147,14 +147,37 @@ D3D_SHADER_INPUT_FLAGS                  = d3d::ShaderInputFlags
 D3D_SHADER_VARIABLE_FLAGS               = d3d::ShaderVariableFlags
 
 # d3dcommon.h interfaces
+ID3D10Blob                              = d3d::BytesBlob
+ID3D10Blob                              = d3d::CodeBlob
 ID3D10Blob                              = d3d::ReadOnlyBlob
+ID3D10Blob                              = d3d::TextBlob
+
+ID3DBlob                                = d3d::BytesBlob
+ID3DBlob                                = d3d::CodeBlob
 ID3DBlob                                = d3d::ReadOnlyBlob
+ID3DBlob                                = d3d::TextBlob
+
 ID3DInclude                             = d3d::AsInclude
 
 # d3dcommon.h methods
+ID3D10Blob::GetBufferPointer            = d3d::BytesBlob::as_bytes
+ID3DBlob::GetBufferPointer              = d3d::BytesBlob::as_bytes
+ID3D10Blob::GetBufferPointer            = d3d::CodeBlob::as_bytes
+ID3DBlob::GetBufferPointer              = d3d::CodeBlob::as_bytes
+ID3D10Blob::GetBufferPointer            = d3d::CodeBlob::as_bytecode
+ID3DBlob::GetBufferPointer              = d3d::CodeBlob::as_bytecode
 ID3D10Blob::GetBufferPointer            = d3d::ReadOnlyBlob::get_buffer
-ID3D10Blob::GetBufferSize               = d3d::ReadOnlyBlob::get_buffer_size
 ID3DBlob::GetBufferPointer              = d3d::ReadOnlyBlob::get_buffer
+ID3D10Blob::GetBufferPointer            = d3d::TextBlob::to_utf8
+ID3DBlob::GetBufferPointer              = d3d::TextBlob::to_utf8
+ID3D10Blob::GetBufferPointer            = d3d::TextBlob::to_utf8_lossy
+ID3DBlob::GetBufferPointer              = d3d::TextBlob::to_utf8_lossy
+
+ID3D10Blob::GetBufferSize               = d3d::BytesBlob::len
+ID3DBlob::GetBufferSize                 = d3d::BytesBlob::len
+ID3D10Blob::GetBufferSize               = d3d::CodeBlob::len
+ID3DBlob::GetBufferSize                 = d3d::CodeBlob::len
+ID3D10Blob::GetBufferSize               = d3d::ReadOnlyBlob::get_buffer_size
 ID3DBlob::GetBufferSize                 = d3d::ReadOnlyBlob::get_buffer_size
 
 # d3dcommon.h structures

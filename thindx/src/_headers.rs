@@ -151,7 +151,7 @@
 //!
 //! |  ?  | C++ Interface | Rust Type | Methods |
 //! | --- | ------------- | --------- | ------- |
-//! | ✔️ | [`ID3D10Blob`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nn-d3dcommon-id3d10blob) | [`d3d::ReadOnlyBlob`]<br> | ✔️ 2 of 2 |
+//! | ✔️ | [`ID3D10Blob`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nn-d3dcommon-id3d10blob) | [`d3d::BytesBlob`]<br> [`d3d::CodeBlob`]<br> [`d3d::ReadOnlyBlob`]<br> [`d3d::TextBlob`]<br> | ✔️ 2 of 2 |
 //! | ❌ | `ID3DDestructionNotifier` | | ❌ 0 of 2 |
 //! | ✔️ | [`ID3DInclude`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nn-d3dcommon-id3dinclude) | [`d3d::AsInclude`]<br> | ❌ 0 of 2 |
 //!
@@ -186,8 +186,8 @@
 //!
 //! |  ?  | C++ Method    | Rust Method |
 //! | --- | ------------- | ----------- |
-//! | ✔️ | `ID3D10Blob::GetBufferPointer` | [`d3d::ReadOnlyBlob::get_buffer`]<br> |
-//! | ✔️ | `ID3D10Blob::GetBufferSize` | [`d3d::ReadOnlyBlob::get_buffer_size`]<br> |
+//! | ✔️ | `ID3D10Blob::GetBufferPointer` | [`d3d::BytesBlob::as_bytes`]<br> [`d3d::CodeBlob::as_bytes`]<br> [`d3d::CodeBlob::as_bytecode`]<br> [`d3d::ReadOnlyBlob::get_buffer`]<br> [`d3d::TextBlob::to_utf8`]<br> [`d3d::TextBlob::to_utf8_lossy`]<br> |
+//! | ✔️ | `ID3D10Blob::GetBufferSize` | [`d3d::BytesBlob::len`]<br> [`d3d::CodeBlob::len`]<br> [`d3d::ReadOnlyBlob::get_buffer_size`]<br> |
 //! | ❌ | `ID3DDestructionNotifier::RegisterDestructionCallback` | |
 //! | ❌ | `ID3DDestructionNotifier::UnregisterDestructionCallback` | |
 //! | ❌ | `ID3DInclude::Close` | |
