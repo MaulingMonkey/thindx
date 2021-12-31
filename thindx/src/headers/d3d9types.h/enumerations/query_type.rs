@@ -61,7 +61,7 @@ enumish! {
     /// Percent of time processing pixel shader data.
     pub const PixelTimings      : QueryType = QueryType(D3DQUERYTYPE_PIXELTIMINGS);
 
-    ///Throughput measurement comparisons for help in understanding the performance of an application.
+    /// Throughput measurement comparisons for help in understanding the performance of an application.
     pub const BandwidthTimings  : QueryType = QueryType(D3DQUERYTYPE_BANDWIDTHTIMINGS);
 
     /// Measure the cache hit-rate performance for textures and indexed vertices.

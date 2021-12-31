@@ -64,7 +64,7 @@ pub trait IDirect3DIndexBuffer9Ext : index_buffer::Sealed {
     /// let tri = device.create_index_buffer(3 * 2, Usage::None, Format::Index16, Pool::Managed, ()).unwrap();
     /// let desc : IndexBufferDesc = tri.get_desc().unwrap();
     /// assert_eq!(desc.format, Format::Index16);
-    /// assert_eq!(desc.r#type, ResourceType::IndexBuffer);
+    /// assert_eq!(desc.ty,     ResourceType::IndexBuffer);
     /// assert_eq!(desc.usage,  Usage::None);
     /// assert_eq!(desc.pool,   Pool::Managed);
     /// assert_eq!(desc.size,   6);
@@ -181,7 +181,7 @@ pub trait IDirect3DVertexBuffer9Ext : vertex_buffer::Sealed {
     /// let tri = device.create_vertex_buffer(3*4*3, Usage::None, FVF::XYZ, Pool::Managed, ()).unwrap();
     /// let desc : VertexBufferDesc = dbg!(tri.get_desc().unwrap());
     /// assert_eq!(desc.format, Format::VertexData);
-    /// assert_eq!(desc.r#type, ResourceType::VertexBuffer);
+    /// assert_eq!(desc.ty,     ResourceType::VertexBuffer);
     /// assert_eq!(desc.usage,  Usage::None);
     /// assert_eq!(desc.pool,   Pool::Managed);
     /// assert_eq!(desc.size,   36);

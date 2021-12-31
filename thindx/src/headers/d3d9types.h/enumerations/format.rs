@@ -6,12 +6,12 @@ use std::fmt::{self, Debug, Formatter};
 
 
 
+//#allow_freeform_headers
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dformat)\] D3DFORMAT
 ///
 /// Enumeration cases are labeled in native endian.
 ///
 /// ### RGBA Color Formats
-///
 /// | Format                    | Bits/Pixel  | Back Buffer | Display | Native Endian Bits  |
 /// | ------------------------- | ----------- | ----------- | ------- | ------------------- |
 /// | [`Format::UNKNOWN`]       | <span style="opacity: 25%">N/A</span> | <span style="opacity: 25%">N/A</span> | <span style="opacity: 25%">N/A</span> | <span style="opacity: 25%">N/A</span>
@@ -45,7 +45,6 @@ use std::fmt::{self, Debug, Formatter};
 /// | <code style="font-weight: bold; opacity:  33%">xxxx</code>    | Unused channel bits
 ///
 /// ### Non-RGBA Color Formats
-///
 /// | Format                    | Bits/Pixel | Native Endian Bits   |
 /// | ------------------------- | ----- | ------------------------- |
 /// | [`Format::A8P8`]          | 16    | <code style="font-weight: bold"><span style="opacity: 100%">aaaaaaaa</span><span style="color: purple">pppppppp</span></code>
@@ -62,7 +61,6 @@ use std::fmt::{self, Debug, Formatter};
 /// | <code style="font-weight: bold; color: orange">llll</code>    | Luminance bits (red+green+blue?)
 ///
 /// ### Compressed Color Formats
-///
 /// | [X3TC] Formats            | Bits/Block | Block  | BC# | Alpha |
 /// | ------------------------- | ---- | ------ | --- | ----- |
 /// | [`Format::DXT1`]          |  64  | 4x4    | BC1 | 1-bit
@@ -74,7 +72,6 @@ use std::fmt::{self, Debug, Formatter};
 /// [X3TC]:             https://en.wikipedia.org/wiki/X3_Texture_Compression
 ///
 /// ### Depth/Stencil Formats
-///
 /// | Format                    | Bits/Pixel    | Native Endian Bits |
 /// | ------------------------- | ------------- | ------------------ |
 /// | [`Format::D16_LOCKABLE`]  | 16            | <code style="font-weight: bold">dddddddddddddddd</code>
@@ -91,7 +88,6 @@ use std::fmt::{self, Debug, Formatter};
 /// | [`Format::X8_LOCKABLE`]   | 8             | <code style="font-weight: bold; color: red">ssssssss</code>
 ///
 /// ### Data Formats
-///
 /// | Format                    | Bits/Element  |
 /// | ------------------------- | ------------- |
 /// | [`Format::BINARYBUFFER`]  | <span style="opacity: 25%">N/A</span> |
@@ -100,7 +96,6 @@ use std::fmt::{self, Debug, Formatter};
 /// | [`Format::INDEX32`]       | 32            |
 ///
 /// ### Uncategorized Formats
-///
 /// | Format                    |
 /// | ------------------------- |
 /// | [`Format::UYVY`]          |
@@ -329,7 +324,7 @@ impl Debug for Format {
     }
 }
 
-#[cfg(feature = "impl-poor-defaults")]
+// #[cfg(feature = "impl-poor-defaults")]
 impl Default for Format {
     fn default() -> Self { Format::UNKNOWN }
 }

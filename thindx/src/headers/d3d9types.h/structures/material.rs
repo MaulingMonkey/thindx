@@ -1,4 +1,4 @@
-use crate::*;
+use crate::d3d9::*;
 
 use winapi::shared::d3d9types::*;
 
@@ -12,7 +12,6 @@ use std::ops::{Deref, DerefMut};
 /// Defines material properties.
 ///
 /// ### See Also
-///
 /// *   [IDirect3DDevice9Ext::set_material]
 /// *   [IDirect3DDevice9Ext::get_material]
 #[derive(Clone, Copy, Debug, Default)]

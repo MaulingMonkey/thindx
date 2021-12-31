@@ -1,5 +1,3 @@
-use crate::*;
-
 use winapi::shared::d3d9types::*;
 
 use std::ops::{Deref, DerefMut};

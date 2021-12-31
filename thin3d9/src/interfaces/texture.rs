@@ -792,7 +792,7 @@ pub trait IDirect3DVolumeTexture9Ext : volume_texture::Sealed {
     /// # let texture = device.create_volume_texture(32, 32, 32, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
     /// let level0 : VolumeDesc = texture.get_level_desc(0).unwrap();
     /// assert_eq!(level0.format, Format::A8R8G8B8);
-    /// assert_eq!(level0.r#type, ResourceType::Volume);
+    /// assert_eq!(level0.ty,     ResourceType::Volume);
     /// assert_eq!(level0.usage,  Usage::None);
     /// assert_eq!(level0.pool,   Pool::Default);
     /// assert_eq!(level0.width,  32);
@@ -823,7 +823,7 @@ pub trait IDirect3DVolumeTexture9Ext : volume_texture::Sealed {
     /// // get_container, get_desc, get_device, lock_box, ...
     /// let desc : VolumeDesc = level0.get_desc().unwrap();
     /// assert_eq!(desc.format, Format::A8R8G8B8);
-    /// assert_eq!(desc.r#type, ResourceType::Volume);
+    /// assert_eq!(desc.ty,     ResourceType::Volume);
     /// assert_eq!(desc.usage,  Usage::None);
     /// assert_eq!(desc.pool,   Pool::Default);
     /// assert_eq!(desc.width,  32);

@@ -12,7 +12,6 @@ use winapi::shared::d3d9types::*;
 /// Direct3D 9 does not support stereo view, so Direct3D does not use the [BackBufferType::Left] and [BackBufferType::Right] values of this enumerated type.
 ///
 /// ### See Also
-///
 /// *   [IDirect3DDevice9Ext::get_back_buffer]
 /// *   [SwapChain::get_back_buffer]
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]

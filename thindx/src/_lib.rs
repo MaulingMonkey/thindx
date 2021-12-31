@@ -19,6 +19,12 @@ pub extern crate abistr;
 pub mod d3d {
     pub use crate::d3dcommon_h::*;
     pub use crate::d3dcompiler_h::*;
+    pub use crate::d3d9types_h::*;
+}
+
+/// Direct3D 9 related types and APIs
+pub mod d3d9 {
+    pub use crate::d3d9types_h::*;
 }
 
 /// Direct3D 11 related types and APIs (including shader reflection APIs)
@@ -28,6 +34,7 @@ pub mod d3d11 {
 
 
 
+#[path=r"headers\d3d9types.h\d3d9types.rs"]     mod d3d9types_h;    // d3d9 mod
 #[path=r"headers\d3d11shader.h\d3d11shader.rs"] mod d3d11shader_h;  // d3d11 mod
 #[path=r"headers\d3dcommon.h\d3dcommon.rs"]     mod d3dcommon_h;    // d3d mod
 #[path=r"headers\d3dcompiler.h\d3dcompiler.rs"] mod d3dcompiler_h;  // d3d mod

@@ -60,7 +60,7 @@ enumish! { ResourceType => D3DRESOURCETYPE; Surface, Volume, Texture, VolumeText
     pub const INDEXBUFFER   : ResourceType = ResourceType(D3DRTYPE_INDEXBUFFER);
 }
 
-#[cfg(feature = "impl-poor-defaults")]
+// #[cfg(feature = "impl-poor-defaults")] // XXX
 impl Default for ResourceType {
     fn default() -> Self { ResourceType(0) }
 }

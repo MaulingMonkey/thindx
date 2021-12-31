@@ -10,10 +10,10 @@ use winapi::shared::d3d9::{D3D_SDK_VERSION, D3D9b_SDK_VERSION};
 
 impl SdkVersion {
     /// ### Safety
-    ///
     /// The SDK version here corresponds to breaking changes in `d3d9.h` resulting in changes to built applications.
     /// By using `SdkVersion::default()`, you use the `D3D_SDK_VERSION` winapi - and by extension this crate - was built with.
     /// By using `SdkVersion::from(...)`, you can use `D3D_SDK_VERSION` from another version of the header, that may not be compatible.
+    //#allow_missing_argument_docs
     pub unsafe fn from(dword: u32) -> Self { Self(dword) }
 
     // See #ifdef D3D_DEBUG_INFO nonsense in `d3d9.h`

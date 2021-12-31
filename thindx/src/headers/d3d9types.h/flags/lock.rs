@@ -24,7 +24,7 @@ flags! { Lock => D3DLOCK; None, Discard, DoNotWait, NoDirtyUpdate, NoOverwrite, 
     pub const Discard           : Lock = Lock(D3DLOCK_DISCARD);
 
     /// Allows an application to gain back CPU cycles if the driver cannot lock the surface immediately.
-    ///If this flag is set and the driver cannot lock the surface immediately, the lock call will return [D3DERR::WASSTILLDRAWING].
+    /// If this flag is set and the driver cannot lock the surface immediately, the lock call will return [D3DERR::WASSTILLDRAWING].
     /// This flag can only be used when locking a surface created using [IDirect3DDevice9Ext::create_offscreen_plain_surface], [IDirect3DDevice9Ext::create_render_target], or [IDirect3DDevice9Ext::create_depth_stencil_surface].
     /// This flag can also be used with a back buffer.
     pub const DoNotWait         : Lock = Lock(D3DLOCK_DONOTWAIT);

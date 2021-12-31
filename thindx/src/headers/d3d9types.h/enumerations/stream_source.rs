@@ -32,6 +32,7 @@ impl StreamSource {
     /// `D3DSTREAMSOURCE_INDEXEDDATA | instances_to_draw`
     ///
     /// Only valid on stream 0.  Indicates that this stream contains the base geometry to (re)use between instances, and the number of instances to draw.
+    //#allow_missing_argument_docs
     pub fn indexed_data(instances_to_draw: u32) -> Self {
         assert!(instances_to_draw & 0xC000_0000 == 0, "instances_to_draw infringing on D3DSTREAMSOURCE_* flags");
         Self(D3DSTREAMSOURCE_INDEXEDDATA | instances_to_draw)
@@ -41,6 +42,7 @@ impl StreamSource {
     ///
     /// This stream contains data that varies per-instance.
     /// The only known valid combination, currently, is `StreamSource::instance_data(1)`.
+    //#allow_missing_argument_docs
     pub fn instance_data(unknown: u32) -> Self {
         assert_eq!(unknown, 1);
         Self(D3DSTREAMSOURCE_INSTANCEDATA | unknown)

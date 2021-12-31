@@ -1,4 +1,4 @@
-use crate::*;
+use crate::d3d9::*;
 
 use winapi::shared::d3d9types::*;
 
@@ -7,13 +7,13 @@ use std::ops::{Deref, DerefMut};
 
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dsurface-desc)\]
-/// D3DSURFACE_DESC 
+/// D3DSURFACE_DESC
 ///
 /// Describes a [Surface].
 #[derive(Clone, Copy, Debug, Default)]
 #[repr(C)] pub struct SurfaceDesc {
     pub format:                 Format,
-    pub r#type:                 ResourceType,
+    pub ty:                     ResourceType,
     pub usage:                  Usage,
     pub pool:                   Pool,
     pub multi_sample_type:      MultiSampleType,
@@ -27,4 +27,4 @@ impl DerefMut for SurfaceDesc { fn deref_mut(&mut self) -> &mut Self::Target { u
 impl From<D3DSURFACE_DESC > for SurfaceDesc { fn from(value: D3DSURFACE_DESC ) -> Self { unsafe { std::mem::transmute(value) } } }
 impl From<SurfaceDesc> for D3DSURFACE_DESC  { fn from(value: SurfaceDesc     ) -> Self { unsafe { std::mem::transmute(value) } } }
 
-test_layout! { SurfaceDesc => unsafe D3DSURFACE_DESC  { format => Format, r#type => Type, usage => Usage, pool => Pool, multi_sample_type => MultiSampleType, multi_sample_quality => MultiSampleQuality, width => Width, height => Height } }
+test_layout! { SurfaceDesc => unsafe D3DSURFACE_DESC  { format => Format, ty => Type, usage => Usage, pool => Pool, multi_sample_type => MultiSampleType, multi_sample_quality => MultiSampleQuality, width => Width, height => Height } }

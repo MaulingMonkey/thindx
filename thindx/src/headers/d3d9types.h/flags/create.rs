@@ -3,7 +3,7 @@
 use winapi::shared::d3d9::*;
 type D3DCREATE = u32; // there's no actual type
 
-const D3DCREATE_DISABLE_PRINTSCREEN : D3DCREATE = 0x8000; // missing from winapi
+#[cfg(feature = "9ex")] const D3DCREATE_DISABLE_PRINTSCREEN : D3DCREATE = 0x8000; // missing from winapi
 
 use std::fmt::{self, Debug, Formatter};
 use std::ops::*;

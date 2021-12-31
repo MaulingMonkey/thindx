@@ -1,4 +1,4 @@
-use crate::*;
+use crate::ctypes::*;
 
 use winapi::shared::d3d9types::*;
 use winapi::shared::minwindef::UINT;
@@ -15,7 +15,7 @@ use std::ops::{Deref, DerefMut};
 #[repr(C)] pub struct RasterStatus {
     /// `true` if the raster is in the vertical blank period.
     /// `false` if the raster is not in the vertical blank period.
-    pub in_vblank:  bool32,
+    pub in_vblank:  BOOL,
 
     /// If [in_vblank](Self::in_vblank) is `false`, then this value is an integer roughly corresponding to the current scan line painted by the raster.
     /// Scan lines are numbered in the same way as Direct3D surface coordinates: `0` is the top of the primary surface, extending to the value (`height of the surface - 1`) at the bottom of the display.

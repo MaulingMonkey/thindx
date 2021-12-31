@@ -1,4 +1,4 @@
-use crate::*;
+use crate::d3d9::*;
 
 use winapi::shared::d3d9types::*;
 
@@ -12,7 +12,6 @@ use std::ops::{Deref, DerefMut};
 /// Describes the display mode.
 ///
 /// ### See Also
-///
 /// *   [IDirect3DDevice9Ext::get_display_mode]
 #[derive(Clone, Copy, Default, Debug)]
 #[repr(C)] pub struct DisplayMode {

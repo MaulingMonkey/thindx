@@ -15,10 +15,12 @@ use std::fmt::{self, Debug, Formatter};
 #[repr(transparent)] pub struct Color(D3DCOLOR);
 
 impl Color {
-    /// ### Examples
+    /// ### Arguments
+    /// *   `color` - `0xAARRGGBB`, `[0xAA, 0xRR, 0xGG, 0xBB]`, or `(0xAA, 0xRR, 0xGG, 0xBB)`
     ///
+    /// ### Examples
     /// ```rust
-    /// # use thin3d9::*;
+    /// # use thindx::d3d9::*;
     /// let colors = [
     ///     Color::argb(0xFF224466),                // native endian
     ///     Color::argb([0xFF, 0x22, 0x44, 0x66]),  // big endian!

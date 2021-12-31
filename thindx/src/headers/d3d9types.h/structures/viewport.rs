@@ -1,5 +1,3 @@
-use crate::*;
-
 use winapi::shared::d3d9types::*;
 
 use std::ops::{Deref, DerefMut};
@@ -12,7 +10,6 @@ use std::ops::{Deref, DerefMut};
 /// Defines Viewport properties.
 ///
 /// ### See Also
-///
 /// *   [IDirect3DDevice9Ext::set_viewport]
 /// *   [IDirect3DDevice9Ext::get_viewport]
 #[derive(Clone, Copy, Debug, Default)]

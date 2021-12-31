@@ -49,6 +49,7 @@ fn file_doc_comments(path: &Path, text: &str) -> Result<(), ()> {
 
     #[derive(Debug, Default)] struct State {
         allow_missing_argument_docs:    bool,
+        allow_freeform_headers:         bool,
         current_comment_is_mod: Option<bool>,
         current_h3:             Option<H3>,
         errors:                 bool,
@@ -93,6 +94,7 @@ fn file_doc_comments(path: &Path, text: &str) -> Result<(), ()> {
             }
 
             self.allow_missing_argument_docs    = false;
+            self.allow_freeform_headers         = false;
             self.current_comment_is_mod = None;
             self.current_h3             = None;
             self.mode                   = Mode::Default;
@@ -134,6 +136,9 @@ fn file_doc_comments(path: &Path, text: &str) -> Result<(), ()> {
             if s.current_comment_is_mod != Some(false) { s.on_comment_end(path, idx, None); }
             s.current_comment_is_mod = Some(false);
             comment
+        } else if trimmed == "//#allow_freeform_headers" {
+            s.allow_freeform_headers = true;
+            continue
         } else if trimmed.starts_with("//") && !trimmed.starts_with("//#") {
             continue // ignore regular comment lines
         } else if s.current_comment_is_mod == Some(true) {
@@ -170,6 +175,16 @@ fn file_doc_comments(path: &Path, text: &str) -> Result<(), ()> {
                         Some(n) => n,
                         None => {
                             error!(at: path, line: no, "#[derive(...)] expected to be a single line");
+                            s.errors = true;
+                            continue;
+                        },
+                    };
+                    rest = r[end+2..].trim_start();
+                } else if let Some(r) = rest.strip_prefix("#[cfg(") {
+                    let end = match r.find(")]") {
+                        Some(n) => n,
+                        None => {
+                            error!(at: path, line: no, "#[cfg(...)] expected to be a single line");
                             s.errors = true;
                             continue;
                         },
@@ -482,6 +497,10 @@ fn file_doc_comments(path: &Path, text: &str) -> Result<(), ()> {
                     }
                     let h3 = match H3::from_str(h3) {
                         Ok(h3) => h3,
+                        Err(_) if s.allow_freeform_headers => {
+                            s.current_h3 = None;
+                            continue;
+                        },
                         Err(err) => {
                             error!(at: path, line: no, "{}", err);
                             s.errors = true;

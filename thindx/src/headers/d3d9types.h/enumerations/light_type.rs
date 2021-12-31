@@ -1,4 +1,4 @@
-#[allow(unused_imports)] use crate::*;
+use crate::d3d9::*;
 
 use winapi::shared::d3d9types::*;
 

@@ -1,4 +1,4 @@
-use crate::*;
+use crate::d3d9::*;
 
 use winapi::shared::d3d9types::*;
 
@@ -12,7 +12,6 @@ use std::ops::{Deref, DerefMut};
 /// Defines a set of lighting properties.
 ///
 /// ### See Also
-///
 /// *   [IDirect3DDevice9Ext::set_light]
 /// *   [IDirect3DDevice9Ext::light_enable]
 /// *   [IDirect3DDevice9Ext::get_light]
@@ -25,7 +24,7 @@ use std::ops::{Deref, DerefMut};
 #[derive(Clone, Copy, Debug, Default)]
 #[repr(C)] pub struct Light {
     /// Type of the light source.
-    pub light_type:     LightType,
+    pub ty:             LightType,
 
     /// [Diffuse](https://docs.microsoft.com/en-us/windows/uwp/graphics-concepts/diffuse-lighting) color emitted by the light.
     pub diffuse:        ColorValue,
@@ -113,7 +112,7 @@ impl From<Light> for D3DLIGHT9 { fn from(value: Light    ) -> Self { unsafe { st
 
 test_layout! {
     Light => unsafe D3DLIGHT9 {
-        light_type      => Type,
+        ty              => Type,
         diffuse         => Diffuse,
         specular        => Specular,
         ambient         => Ambient,
