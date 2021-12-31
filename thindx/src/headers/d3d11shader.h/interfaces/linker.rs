@@ -162,7 +162,7 @@ impl Linker {
     ///
     /// ### See Also
     /// *   [examples::d3dcompiler_03_link]
-    #[xallow(missing_argument_docs)]
+    //#allow_missing_argument_docs
     pub fn use_library(&self, library_mi: &ModuleInstance) -> Result<(), Error> {
         let hr = unsafe { self.0.UseLibrary(library_mi.as_raw()) };
         Error::check("ID3D11Linker::UseLibrary", hr)

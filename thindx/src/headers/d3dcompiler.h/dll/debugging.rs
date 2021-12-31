@@ -250,7 +250,7 @@ impl Compiler {
     ///
     /// ### Remarks
     /// *   This was introduced by d3dcompiler_44.dll, and is unavailable in earlier versions.
-    #[xallow(missing_argument_docs)]
+    //#allow_missing_argument_docs
     pub fn get_trace_instruction_offsets_count(
         &self,
         src_data:           &Bytecode,
@@ -292,7 +292,7 @@ impl Compiler {
     ///
     /// ### Remarks
     /// *   This was introduced by d3dcompiler_44.dll, and is unavailable in earlier versions.
-    #[xallow(missing_argument_docs)]
+    //#allow_missing_argument_docs
     pub fn get_trace_instruction_offsets_inplace<'o>(
         &self,
         src_data:           &Bytecode,
@@ -333,7 +333,7 @@ impl Compiler {
     ///
     /// ### Remarks
     /// *   This was introduced by d3dcompiler_44.dll, and is unavailable in earlier versions.
-    #[xallow(missing_argument_docs)]
+    //#allow_missing_argument_docs
     pub fn get_trace_instruction_offsets(
         &self,
         src_data:           &Bytecode,

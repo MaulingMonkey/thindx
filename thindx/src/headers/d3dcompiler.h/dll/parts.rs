@@ -122,7 +122,7 @@ impl Compiler {
     /// [68, 88, 66, 67, 97, ...
     /// ```
     // #[requires(d3dcompiler=33)] // or earlier?
-    #[xallow(missing_argument_docs)]
+    //#allow_missing_argument_docs
     pub fn get_input_and_output_signature_blob(&self, src_data: &Bytecode) -> Result<BytesBlob, Error> {
         let f = self.D3DGetInputAndOutputSignatureBlob.ok_or(Error::new("D3DGetInputAndOutputSignatureBlob", THINERR::MISSING_DLL_EXPORT))?;
         let src_data = src_data.as_bytes();
@@ -155,7 +155,7 @@ impl Compiler {
     /// [68, 88, 66, 67, 53, ...
     /// ```
     // #[requires(d3dcompiler=33)] // or earlier?
-    #[xallow(missing_argument_docs)]
+    //#allow_missing_argument_docs
     pub fn get_input_signature_blob(&self, src_data: &Bytecode) -> Result<BytesBlob, Error> {
         let f = self.D3DGetInputSignatureBlob.ok_or(Error::new("D3DGetInputSignatureBlob", THINERR::MISSING_DLL_EXPORT))?;
         let src_data = src_data.as_bytes();
@@ -188,7 +188,7 @@ impl Compiler {
     /// [68, 88, 66, 67, 210, ...
     /// ```
     // #[requires(d3dcompiler=33)] // or earlier?
-    #[xallow(missing_argument_docs)]
+    //#allow_missing_argument_docs
     pub fn get_output_signature_blob(&self, src_data: &Bytecode) -> Result<BytesBlob, Error> {
         let f = self.D3DGetOutputSignatureBlob.ok_or(Error::new("D3DGetOutputSignatureBlob", THINERR::MISSING_DLL_EXPORT))?;
         let src_data = src_data.as_bytes();

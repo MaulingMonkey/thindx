@@ -11,7 +11,6 @@ pub extern crate abistr;
 
 
 #[macro_use] mod macros; #[cfg(test)] use macros::*;
-use thindx_zzz_internal_proc_macros::*;
 
 /// C ABI interop types
 #[path=r"ctypes\_ctypes.rs"] pub mod ctypes;

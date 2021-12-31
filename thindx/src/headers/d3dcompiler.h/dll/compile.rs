@@ -379,7 +379,7 @@ impl Compiler {
     /// aspects of how bytecode is generated.  Refer to the descriptions of these parameters for more details. There is
     /// no difference otherwise to the efficiency of the bytecode generated between [compile2](Self::compile2) and
     /// [compile](Self::compile).
-    //#[requires(d3dcompiler=47)] // ?
+    // #[requires(d3dcompiler=47)] // ?
     pub fn compile2<'s>(
         &self,
         src_data:               impl AsRef<[u8]>,

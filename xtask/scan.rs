@@ -134,7 +134,7 @@ fn file_doc_comments(path: &Path, text: &str) -> Result<(), ()> {
             if s.current_comment_is_mod != Some(false) { s.on_comment_end(path, idx, None); }
             s.current_comment_is_mod = Some(false);
             comment
-        } else if trimmed.starts_with("//") {
+        } else if trimmed.starts_with("//") && !trimmed.starts_with("//#") {
             continue // ignore regular comment lines
         } else if s.current_comment_is_mod == Some(true) {
             s.on_comment_end(path, idx, None);
@@ -175,23 +175,13 @@ fn file_doc_comments(path: &Path, text: &str) -> Result<(), ()> {
                         },
                     };
                     rest = r[end+2..].trim_start();
-                } else if let Some(r) = rest.strip_prefix("#[xallow(") {
-                    let end = match r.find(")]") {
-                        Some(n) => n,
-                        None => {
-                            error!(at: path, line: no, "#[xallow(...)] expected to be a single line");
-                            s.errors = true;
-                            continue;
-                        },
-                    };
-                    for allow in r[..end].split(',') {
-                        let allow = allow.trim();
-                        match allow {
-                            "missing_argument_docs" => s.allow_missing_argument_docs = true,
-                            _ => {},
-                        }
-                    }
-                    rest = r[end+2..].trim_start();
+                } else if rest == "//#allow_missing_argument_docs" {
+                    s.allow_missing_argument_docs = true;
+                    rest = "";
+                } else if rest.starts_with("//#") {
+                    error!(at: path, line: no, "unexpected directive");
+                    s.errors = true;
+                    rest = "";
                 } else if rest.starts_with("//") {
                     rest = "";
                 } else {
@@ -328,7 +318,7 @@ fn file_doc_comments(path: &Path, text: &str) -> Result<(), ()> {
                 DocItemKind::Fn if s.allow_missing_argument_docs && s.arguments.is_empty() => {}, // don't validate nonexistant `### Arguments` sections
                 DocItemKind::Fn => {
                     if s.allow_missing_argument_docs {
-                        error!(at: path, line: no, "#[xallow(missing_argument_docs)] used but argument docs provided");
+                        error!(at: path, line: no, "//#allow_missing_argument_docs used but argument docs provided");
                         s.errors = true;
                     }
 
