@@ -7,9 +7,15 @@ use mmrbi::*;
 
 const HEADERS : &'static [&'static str] = &[
     r"um\unknwn.h", //r"um\unknwnbase.h",
-    r"um\d3d11shader.h",
+
     r"um\d3dcommon.h",
     r"um\d3dcompiler.h",
+
+    r"shared\d3d9.h",
+    r"shared\d3d9caps.h",
+    r"shared\d3d9types.h",
+
+    r"um\d3d11shader.h",
     r"um\d3d11shadertracing.h",
 ];
 
@@ -41,8 +47,8 @@ pub fn update() {
 
         writeln!(rs, "//! # Headers")?;
         writeln!(rs, "//!")?;
-        writeln!(rs, "//! | C++ Header | Interfaces | Structs | Enums |")?;
-        writeln!(rs, "//! | ---------- | ---------- | ------- | ----- |")?;
+        writeln!(rs, "//! | C++ Header | Interfaces | Structs | Enums | Functions |")?;
+        writeln!(rs, "//! | ---------- | ---------- | ------- | ----- | --------- |")?;
         for header in headers.iter() {
             write!(rs, "//! |")?;
             write!(rs, " [{name}](#{id}) |", name = header.name_h, id = header.name)?;
@@ -50,7 +56,7 @@ pub fn update() {
                 (header.interfaces .iter().filter(|t| cpp2rust.get(t.id.as_str()).is_some()).count(),   header.interfaces   .len()),
                 (header.structs    .iter().filter(|t| cpp2rust.get(t.id.as_str()).is_some()).count(),   header.structs      .len()),
                 (header.enums      .iter().filter(|t| cpp2rust.get(t.id.as_str()).is_some()).count(),   header.enums        .len()),
-                // (header.functions  .iter().filter(|t| cpp2rust.get(t.id.as_str()).is_some()).count(),   header.functions    .len()),
+                (header.functions  .iter().filter(|t| cpp2rust.get(t.id.as_str()).is_some()).count(),   header.functions    .len()),
                 // (header.classes    .iter().filter(|t| cpp2rust.get(t.id.as_str()).is_some()).count(),   header.classes      .len()),
                 // (header.unions     .iter().filter(|t| cpp2rust.get(t.id.as_str()).is_some()).count(),   header.unions       .len()),
             ].into_iter() {
@@ -66,7 +72,7 @@ pub fn update() {
             let interfaces  = header.interfaces .iter().map(|t| (t, cpp2rust.get(t.id.as_str())));
             let structs     = header.structs    .iter().map(|t| (t, cpp2rust.get(t.id.as_str())));
             let enums       = header.enums      .iter().map(|t| (t, cpp2rust.get(t.id.as_str())));
-            // let functions   = header.functions  .iter().map(|t| (t, cpp2rust.get(t.id.as_str())));
+            let functions   = header.functions  .iter().map(|t| (t, cpp2rust.get(t.id.as_str())));
             // let classes     = header.classes    .iter().map(|t| (t, cpp2rust.get(t.id.as_str())));
             // let unions      = header.unions     .iter().map(|t| (t, cpp2rust.get(t.id.as_str())));
 
@@ -113,7 +119,18 @@ pub fn update() {
                 writeln!(rs)?;
             }
 
-            // functions, classes, unions
+            for (idx, (cpp, rust)) in functions.enumerate() {
+                if idx == 0 {
+                    writeln!(rs, "//!")?;
+                    writeln!(rs, "//! |  ?  | C++ Function  | Rust Function |")?;
+                    writeln!(rs, "//! | --- | ------------- | ------------- |")?;
+                }
+                write!(rs, "//! | {} | {} |", ok_if(rust.is_some()), CppLink(&cpp.id))?;
+                for rust in rust.into_iter().flat_map(|p| p.iter()) { write!(rs, " [`{}`]<br>", rust)?; }
+                writeln!(rs, " |")?;
+            }
+
+            // classes, unions
 
             for (idx, icpp) in header.interfaces.iter().enumerate() {
                 if idx == 0 {
@@ -144,7 +161,7 @@ struct Header<'cpp> {
     interfaces: Vec<&'cpp cpp::Interface>,
     structs:    Vec<&'cpp cpp::Struct>,
     enums:      Vec<&'cpp cpp::Enum>,
-    // functions:  Vec<&'cpp cpp::Function>,
+    functions:  Vec<&'cpp cpp::Function>,
     // classes:    Vec<&'cpp cpp::Class>,
     // unions:     Vec<&'cpp cpp::Union>,
 }
@@ -157,7 +174,7 @@ impl<'cpp> Header<'cpp> {
             interfaces: cpp.interfaces  .values_by_key().filter(move |t| t.defined_at.iter().any(move |at| at.path.ends_with(rel_path))).collect(),
             structs:    cpp.structs     .values_by_key().filter(move |t| t.defined_at.iter().any(move |at| at.path.ends_with(rel_path))).collect(),
             enums:      cpp.enums       .values_by_key().filter(move |t| t.defined_at.iter().any(move |at| at.path.ends_with(rel_path))).collect(),
-            // functions:  cpp.functions   .values_by_key().filter(move |t| t.defined_at.iter().any(move |at| at.path.ends_with(rel_path))).collect(),
+            functions:  cpp.functions   .values_by_key().filter(move |t| t.defined_at.iter().any(move |at| at.path.ends_with(rel_path))).collect(),
             // classes:    cpp.classes     .values_by_key().filter(move |t| t.defined_at.iter().any(move |at| at.path.ends_with(rel_path))).collect(),
             // unions:     cpp.unions      .values_by_key().filter(move |t| t.defined_at.iter().any(move |at| at.path.ends_with(rel_path))).collect(),
         }
