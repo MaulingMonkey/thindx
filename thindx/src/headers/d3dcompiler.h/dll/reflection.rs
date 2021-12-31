@@ -45,7 +45,9 @@ impl Compiler {
     ///
     /// ### See Also
     /// *   [d3d11::ShaderReflection] for a more complete example
-    #[requires(d3dcompiler=40)]
+    ///
+    /// ### Remarks
+    /// *   This was introduced by d3dcompiler_40.dll, and is unavailable in earlier versions.
     pub fn reflect<I: Raw>(&self, src_data: &Bytecode) -> Result<I, Error> where I::Raw : Interface {
         let f = self.D3DReflect.ok_or(Error::new("D3DReflect", THINERR::MISSING_DLL_EXPORT))?;
         let src_data = src_data.as_bytes();
@@ -87,7 +89,9 @@ impl Compiler {
     ///
     /// ### See Also
     /// *   [d3d11::ShaderReflection] for a more complete example
-    #[requires(d3dcompiler=40)]
+    ///
+    /// ### Remarks
+    /// *   This was introduced by d3dcompiler_40.dll, and is unavailable in earlier versions.
     pub fn reflect11(&self, src_data: &Bytecode) -> Result<d3d11::ShaderReflection, Error> {
         self.reflect(src_data)
     }

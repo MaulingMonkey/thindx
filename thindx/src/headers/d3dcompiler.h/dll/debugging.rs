@@ -43,7 +43,7 @@ pub struct DisassembledRegion {
     /// // Initial variable locations:
     /// //   v0.x <- i.color.x; v0.y <- i.color.y; v0.z <- i.color.z; v0.w <- i.color.w;
     /// //   v1.x <- i.position.x; v1.y <- i.position.y; v1.z <- i.position.z; v1.w <- i.position.w;
-    /// //   o0.x <- <ps_main return value>.color.x; o0.y <- <ps_main return value>.color.y; o0.z <- <ps_main return value>.color.z; o0.w <- <ps_main return value>.color.w    
+    /// //   o0.x <- <ps_main return value>.color.x; o0.y <- <ps_main return value>.color.y; o0.z <- <ps_main return value>.color.z; o0.w <- <ps_main return value>.color.w
     /// //
     /// #line 27 "C:\local\thindx\test\data\basic.hlsl"
     /// mov o0.xyzw, v0.xyzw
@@ -110,14 +110,16 @@ impl Compiler {
     /// // Initial variable locations:
     /// //   v0.x <- i.color.x; v0.y <- i.color.y; v0.z <- i.color.z; v0.w <- i.color.w;
     /// //   v1.x <- i.position.x; v1.y <- i.position.y; v1.z <- i.position.z; v1.w <- i.position.w;
-    /// //   o0.x <- <ps_main return value>.color.x; o0.y <- <ps_main return value>.color.y; o0.z <- <ps_main return value>.color.z; o0.w <- <ps_main return value>.color.w    
+    /// //   o0.x <- <ps_main return value>.color.x; o0.y <- <ps_main return value>.color.y; o0.z <- <ps_main return value>.color.z; o0.w <- <ps_main return value>.color.w
     /// //
     /// #line 27 "C:\local\thindx\test\data\basic.hlsl"
     /// mov o0.xyzw, v0.xyzw
     /// ret
     /// // Approximately 2 instruction slots used
     /// ```
-    #[requires(d3dcompiler=40)]
+    ///
+    /// ### Remarks
+    /// *   This was introduced by d3dcompiler_40.dll, and is unavailable in earlier versions.
     pub fn disassemble<'s>(
         &self,
         src_data:           &Bytecode,
@@ -191,14 +193,16 @@ impl Compiler {
     /// // Initial variable locations:
     /// //   v0.x <- i.color.x; v0.y <- i.color.y; v0.z <- i.color.z; v0.w <- i.color.w;
     /// //   v1.x <- i.position.x; v1.y <- i.position.y; v1.z <- i.position.z; v1.w <- i.position.w;
-    /// //   o0.x <- <ps_main return value>.color.x; o0.y <- <ps_main return value>.color.y; o0.z <- <ps_main return value>.color.z; o0.w <- <ps_main return value>.color.w    
+    /// //   o0.x <- <ps_main return value>.color.x; o0.y <- <ps_main return value>.color.y; o0.z <- <ps_main return value>.color.z; o0.w <- <ps_main return value>.color.w
     /// //
     /// #line 27 "C:\local\thindx\test\data\basic.hlsl"
     /// mov o0.xyzw, v0.xyzw
     /// ret
     /// // Approximately 2 instruction slots used
     /// ```
-    #[requires(d3dcompiler=44)]
+    ///
+    /// ### Remarks
+    /// *   This was introduced by d3dcompiler_44.dll, and is unavailable in earlier versions.
     pub fn disassemble_region<'s>(
         &self,
         src_data:           &Bytecode,
@@ -243,7 +247,9 @@ impl Compiler {
     /// ```text
     /// 2
     /// ```
-    #[requires(d3dcompiler=44)]
+    ///
+    /// ### Remarks
+    /// *   This was introduced by d3dcompiler_44.dll, and is unavailable in earlier versions.
     #[xallow(missing_argument_docs)]
     pub fn get_trace_instruction_offsets_count(
         &self,
@@ -283,7 +289,9 @@ impl Compiler {
     /// ```text
     /// [32, 52]
     /// ```
-    #[requires(d3dcompiler=44)]
+    ///
+    /// ### Remarks
+    /// *   This was introduced by d3dcompiler_44.dll, and is unavailable in earlier versions.
     #[xallow(missing_argument_docs)]
     pub fn get_trace_instruction_offsets_inplace<'o>(
         &self,
@@ -322,7 +330,9 @@ impl Compiler {
     /// ```text
     /// [32, 52]
     /// ```
-    #[requires(d3dcompiler=44)]
+    ///
+    /// ### Remarks
+    /// *   This was introduced by d3dcompiler_44.dll, and is unavailable in earlier versions.
     #[xallow(missing_argument_docs)]
     pub fn get_trace_instruction_offsets(
         &self,

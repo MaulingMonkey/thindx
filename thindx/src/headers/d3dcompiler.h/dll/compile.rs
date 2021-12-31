@@ -189,8 +189,10 @@ impl Compiler {
     ///
     /// ### See Also
     /// *   [examples::d3dcompiler_02_compile]
-    #[requires(!store)]
-    // #[requires(d3dcompiler=47)] // ?
+    ///
+    /// ### Remarks
+    /// *   You can use this API to develop your Windows Store apps, but you can't use it in apps that you submit to the Windows Store.
+    // /// *   This was introduced by d3dcompiler_47.dll, and is unavailable in earlier versions. // ?
     pub fn compile_from_file<'s>(
         &self,
         file_name:      impl AsRef<Path>,
@@ -276,7 +278,9 @@ impl Compiler {
     ///
     /// ### See Also
     /// *   [examples::d3dcompiler_02_compile]
-    #[requires(d3dcompiler=40)]
+    ///
+    /// ### Remarks
+    /// *   This was introduced by d3dcompiler_40.dll, and is unavailable in earlier versions.
     pub fn compile<'s>(
         &self,
         src_data:       impl AsRef<[u8]>,
@@ -474,7 +478,9 @@ impl Compiler {
     ///
     /// ### See Also
     /// *   [examples::d3dcompiler_02_compile]
-    #[requires(d3dcompiler=40)]
+    ///
+    /// ### Remarks
+    /// *   This was introduced by d3dcompiler_40.dll, and is unavailable in earlier versions.
     pub fn preprocess<'s>(
         &self,
         src_data:       impl AsRef<[u8]>,
