@@ -1,5 +1,8 @@
 //! [ErrorKind] values
 
+#![allow(overflowing_literals)] // ErrorKind is signed for some reason
+#![allow(non_snake_case)]
+
 use crate::*;
 use winapi::shared::winerror::*;
 
@@ -14,17 +17,19 @@ use winapi::shared::winerror::*;
 // 4        FACILITY_ITF        For most status codes returned from interface methods. The actual meaning of the error is defined by the interface. That is, two HRESULTs with exactly the same 32-bit value returned from two different interfaces might have different meanings.
 // 7        FACILITY_WIN32      Used to provide a means of handling error codes from functions in the Windows API as an HRESULT. Error codes in 16-bit OLE that duplicated system error codes have also been changed to FACILITY_WIN32.
 // 8        FACILITY_WINDOWS    Used for additional error codes from Microsoft-defined interfaces.
-// 0x876    _FACD3D             Direct3D
-// 0x879                        Direct3D 10
-// 0x87A                        DXGI
-// 0x87B                        DXGI DDI
-// 0x87C                        Direct3D 11
-// 0x898                        DirectWrite
-// 0x899                        Direct2D
+//  0x876   _FACD3D             Direct3D
+//  0x879                       Direct3D 10
+//  0x87A                       DXGI
+//  0x87B                       DXGI DDI
+//  0x87C                       Direct3D 11
+//  0x898                       DirectWrite
+//  0x899                       Direct2D
+// 0xA73D                       Thin3D
 
-/// Thin* errors
-#[allow(non_camel_case_types)] pub struct THINERR(());
-#[allow(overflowing_literals)] impl THINERR {
+/// `0xA73D....` • ThinDX [ErrorKind]s
+pub mod THINERR {
+    use super::*;
+
     /// `0xA73DC001`    This version of `d3dcompiler_##.dll` doesn't support this fn
     pub const MISSING_DLL_EXPORT : ErrorKind = ErrorKind(0xA73DC001);
 
@@ -39,8 +44,10 @@ use winapi::shared::winerror::*;
     pub const INVALID_BYTECODE : ErrorKind = ErrorKind(0xA73DC004);
 }
 
-/// Direct3D 11 errors
-#[allow(non_camel_case_types)] pub struct D3D11_ERROR(()); impl D3D11_ERROR {
+/// `0x887C....` • Direct3D 11 [ErrorKind]s
+pub mod D3D11_ERROR {
+    use super::*;
+
     /// The file was not found.
     pub const FILE_NOT_FOUND                                : ErrorKind = ErrorKind(D3D11_ERROR_FILE_NOT_FOUND);
 
@@ -61,8 +68,10 @@ use winapi::shared::winerror::*;
 const D3DERR_INVALIDCALL        : HRESULT = MAKE_D3DHRESULT(2156);
 const D3DERR_WASSTILLDRAWING    : HRESULT = MAKE_D3DHRESULT(540);
 
-/// Direct3D / Direct3D9 errors
-#[allow(non_camel_case_types)] pub struct D3DERR(()); impl D3DERR {
+/// `0x8876....` • Direct3D / Direct3D9 [ErrorKind]s
+pub mod D3DERR {
+    use super::*;
+
     /// The method call is invalid. For example, a method's parameter may not be a valid pointer.
     pub const INVALIDCALL               : ErrorKind = ErrorKind(D3DERR_INVALIDCALL);
 
@@ -70,17 +79,22 @@ const D3DERR_WASSTILLDRAWING    : HRESULT = MAKE_D3DHRESULT(540);
     pub const WASSTILLDRAWING           : ErrorKind = ErrorKind(D3DERR_WASSTILLDRAWING);
 }
 
-/// DXGI errors
-#[allow(non_camel_case_types)] pub struct DXGI_ERROR(()); impl DXGI_ERROR {
+/// `0x887A....` • DXGI [ErrorKind]s
+pub mod DXGI_ERROR {
+    use super::*;
+
     /// The method call is invalid. For example, a method's parameter may not be a valid pointer.
-    pub const INVALID_CALL               : ErrorKind = ErrorKind(DXGI_ERROR_INVALID_CALL);
+    pub const INVALID_CALL              : ErrorKind = ErrorKind(DXGI_ERROR_INVALID_CALL);
 
     /// The previous blit operation that is transferring information to or from this surface is incomplete.
     pub const WAS_STILL_DRAWING         : ErrorKind = ErrorKind(DXGI_ERROR_WAS_STILL_DRAWING);
 }
 
-/// General errors
-#[allow(non_camel_case_types)] pub struct E(()); impl E {
+/// `0x8000....` • General [ErrorKind]s<br>
+/// `0x8007....`
+pub mod E {
+    use super::*;
+
     /// Attempted to create a device with the debug layer enabled and the layer is not installed.
     pub const FAIL                      : ErrorKind = ErrorKind(E_FAIL);
 
@@ -94,8 +108,10 @@ const D3DERR_WASSTILLDRAWING    : HRESULT = MAKE_D3DHRESULT(540);
     pub const NOTIMPL                   : ErrorKind = ErrorKind(E_NOTIMPL);
 }
 
-/// "Success" values
-#[allow(non_camel_case_types)] pub struct S(()); impl S {
+/// `0x0000....` • Success "[ErrorKind]"s
+pub mod S {
+    use super::*;
+
     /// No error occurred.
     pub const OK                        : ErrorKind = ErrorKind(S_OK);
 
@@ -107,7 +123,7 @@ const D3DERR_WASSTILLDRAWING    : HRESULT = MAKE_D3DHRESULT(540);
 
 // d3d9helper.h
 const _FACD3D : u32 = 0x876;
-#[allow(non_snake_case)] const fn MAKE_D3DHRESULT(code: u32) -> HRESULT { MAKE_HRESULT(1, _FACD3D, code) }
-//#[allow(non_snake_case)] const fn MAKE_DDHRESULT(code: u32)  -> HRESULT { MAKE_HRESULT(1, _FACD3D, code) } // Yes, _FACD3D is the same
-//#[allow(non_snake_case)] const fn MAKE_D3DSTATUS (code: u32) -> HRESULT { MAKE_HRESULT(0, _FACD3D, code) }
-#[allow(non_snake_case)] const fn MAKE_HRESULT(sev: u32, fac: u32, code: u32) -> HRESULT { (sev << 31 | fac << 16 | code) as HRESULT }
+const fn MAKE_D3DHRESULT(code: u32) -> HRESULT { MAKE_HRESULT(1, _FACD3D, code) }
+//const fn MAKE_DDHRESULT(code: u32)  -> HRESULT { MAKE_HRESULT(1, _FACD3D, code) } // Yes, _FACD3D is the same
+//const fn MAKE_D3DSTATUS (code: u32) -> HRESULT { MAKE_HRESULT(0, _FACD3D, code) }
+const fn MAKE_HRESULT(sev: u32, fac: u32, code: u32) -> HRESULT { (sev << 31 | fac << 16 | code) as HRESULT }

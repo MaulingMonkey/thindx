@@ -7,6 +7,8 @@ use winapi::shared::winerror::*;
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/desktop/direct3d11/d3d11-graphics-reference-returnvalues)\]
 /// HRESULT
+///
+/// See [thindx::errors](crate::errors) for a list of constants
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)] pub struct ErrorKind(pub(crate) HRESULT);
 
