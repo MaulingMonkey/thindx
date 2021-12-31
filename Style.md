@@ -41,7 +41,7 @@ Function doc comments should generally follow the following style, skipping irre
 /// ```
 ///
 /// ### Output
-/// ```
+/// ```text
 /// Hi!
 /// ```
 ///
