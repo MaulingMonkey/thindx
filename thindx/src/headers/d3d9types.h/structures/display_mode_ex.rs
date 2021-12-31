@@ -7,7 +7,7 @@ use std::ops::{Deref, DerefMut};
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddisplaymode)\]
+/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddisplaymodeex)\]
 /// D3DDISPLAYMODEEX
 ///
 /// Describes the display mode.
