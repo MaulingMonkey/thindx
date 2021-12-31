@@ -1,0 +1,88 @@
+# https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[workspace]
+members = [
+    ".",
+    "doc",
+    "xtask",
+]
+
+[package]
+name            = "thin3d9"
+version         = "0.0.0-git"
+authors         = ["MaulingMonkey <git@maulingmonkey.com>"]
+edition         = "2018"
+repository      = "https://github.com/MaulingMonkey/thin3d9"
+documentation   = "https://docs.rs/thin3d9"
+license         = "Apache-2.0 OR MIT"
+readme          = "Readme.md"
+description     = "Thin Direct3D9 wrappers"
+keywords        = ["directx", "direct3d", "direct3d9", "d3d9"]
+categories      = ["api-bindings", "graphics", "os::windows-apis", "rendering::graphics-api"]
+exclude         = [".vscode"]
+
+[package.metadata.docs.rs]
+default-target  = "x86_64-pc-windows-msvc"
+targets         = ["x86_64-pc-windows-msvc", "i686-pc-windows-msvc"]
+all-features    = true
+rustdoc-args    = ["--extend-css", "doc/style.css"]
+
+[lib]
+path            = "src/_lib.rs"
+
+[features]
+default             = [
+    "9ex",
+    "impl-poor-defaults",
+    # "impl-from-unchecked",
+]
+9ex                 = []
+extra               = []
+impl-poor-defaults  = []
+impl-from-unchecked = []
+
+
+
+[dev-dependencies]
+doc                 = { path = "doc" }
+
+[target.'cfg(windows)'.dependencies]
+abibool             = "0.5"
+winstr              = "0.0.2"
+mcom                = "0.1.1"
+#mcom                = { git = "https://github.com/MaulingMonkey/mcom" }
+
+[target.'cfg(windows)'.dependencies.winapi]
+version         = "0.3.9"
+features = [
+    # shared
+    "d3d9",
+    "d3d9caps",
+    "d3d9types",
+    "guiddef",
+    "winerror",
+
+    # um
+    "unknwnbase",
+    "windef",
+]
+
+
+
+[target.'cfg(windows)'.dev-dependencies]
+raw-window-handle   = "0.3"
+winstr              = "0.0.2"
+winit               = "0.23"
+
+[target.'cfg(windows)'.dev-dependencies.winapi]
+version         = "0.3.9"
+features = [
+    # shared
+    "minwindef",
+    "windef",
+
+    # um
+    "debugapi",
+    "libloaderapi",
+    "winuser",
+]
