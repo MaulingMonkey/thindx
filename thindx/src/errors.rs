@@ -106,6 +106,28 @@ pub mod E {
 
     /// The method call isn't implemented with the passed parameter combination.
     pub const NOTIMPL                   : ErrorKind = ErrorKind(E_NOTIMPL);
+
+    /// Access is denied.
+    pub const ACCESSDENIED              : ErrorKind = ErrorKind(E_ACCESSDENIED);
+
+    /// The system cannot find the path specified.
+    pub const E_PATH_NOT_FOUND          : ErrorKind = ErrorKind(E_PATH_NOT_FOUND);
+}
+
+/// `0x8000....` • General [ErrorKind]s<br>
+/// `0x8007....`
+pub mod ERROR {
+    /// A file was not found
+    pub const FILE_NOT_FOUND            : ErrorKind = ErrorKind(ERROR_FILE_NOT_FOUND);
+
+    /// Access is denied.
+    pub const ACCESS_DENIED             : ErrorKind = ErrorKind(ERROR_ACCESS_DENIED);
+
+    /// The system cannot find the path specified.
+    pub const PATH_NOT_FOUND            : ErrorKind = ErrorKind(ERROR_PATH_NOT_FOUND);
+
+    /// The file exists.
+    pub const FILE_EXISTS               : ErrorKind = ErrorKind(ERROR_FILE_EXISTS);
 }
 
 /// `0x0000....` • Success "[ErrorKind]"s

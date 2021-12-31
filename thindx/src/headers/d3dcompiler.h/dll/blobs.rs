@@ -55,8 +55,8 @@ impl Compiler {
     ///
     /// ### Errors
     /// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_43.dll` and earlier
-    /// *   0x80070002                      - `file_name` not found
-    /// *   0x80070005                      - Access denied (`file_name` not a file? bad perms? ...?)
+    /// *   [ERROR::FILE_NOT_FOUND]         - `file_name` not found
+    /// *   [ERROR::ACCESS_DENIED]          - Access denied (`file_name` not a file? bad perms? ...?)
     ///
     /// ### Example
     /// ```rust
@@ -99,9 +99,9 @@ impl Compiler {
     ///
     /// ### Errors
     /// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_43.dll` and earlier
-    /// *   0x80070003                      - Path not found (missing filename in `file_name`)
-    /// *   0x80070005                      - Access denied (target `file_name` is a directory?)
-    /// *   0x80070050                      - `file_name` already exists (if `!overwrite`)
+    /// *   [ERROR::PATH_NOT_FOUND]         - Path not found (missing filename in `file_name`)
+    /// *   [ERROR::ACCESS_DENIED]          - Access denied (target `file_name` is a directory?)
+    /// *   [ERROR::FILE_EXISTS]            - `file_name` already exists (if `!overwrite`)
     ///
     /// ### Example
     /// ```rust
