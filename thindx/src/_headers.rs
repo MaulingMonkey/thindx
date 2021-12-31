@@ -38,9 +38,9 @@
 //! | ❌ | `AsyncIUnknown::Finish_Release` | |
 //! | ❌ | `IClassFactory::CreateInstance` | |
 //! | ❌ | `IClassFactory::LockServer` | |
-//! | ✔️ | `IUnknown::AddRef` | [`mcom::Rc::clone`]<br> |
-//! | ✔️ | `IUnknown::QueryInterface` | [`mcom::Rc::try_cast`]<br> |
-//! | ✔️ | `IUnknown::Release` | [`mcom::Rc::drop`]<br> |
+//! | ✔️ | [`IUnknown::AddRef`](https://docs.microsoft.com/en-us/windows/win32/api/unknwn/nf-unknwn-iunknown-addref) | [`mcom::Rc::clone`]<br> |
+//! | ✔️ | [`IUnknown::QueryInterface`](https://docs.microsoft.com/en-us/windows/win32/api/unknwn/nf-unknwn-iunknown-queryinterface(q)) | [`mcom::Rc::try_cast`]<br> |
+//! | ✔️ | [`IUnknown::Release`](https://docs.microsoft.com/en-us/windows/win32/api/unknwn/nf-unknwn-iunknown-release) | [`mcom::Rc::drop`]<br> |
 //! <h3 id="d3d11shader">d3d11shader.h</h3>
 //!
 //!
@@ -77,75 +77,75 @@
 //!
 //! |  ?  | C++ Method    | Rust Method |
 //! | --- | ------------- | ----------- |
-//! | ✔️ | `ID3D11FunctionLinkingGraph::CallFunction` | [`d3d11::FunctionLinkingGraph::call_function`]<br> |
-//! | ✔️ | `ID3D11FunctionLinkingGraph::CreateModuleInstance` | [`d3d11::FunctionLinkingGraph::create_module_instance`]<br> |
-//! | ✔️ | `ID3D11FunctionLinkingGraph::GenerateHlsl` | [`d3d11::FunctionLinkingGraph::generate_hlsl`]<br> |
-//! | ✔️ | `ID3D11FunctionLinkingGraph::GetLastError` | [`d3d11::FunctionLinkingGraph::get_last_error`]<br> |
-//! | ✔️ | `ID3D11FunctionLinkingGraph::PassValue` | [`d3d11::FunctionLinkingGraph::pass_value`]<br> |
-//! | ✔️ | `ID3D11FunctionLinkingGraph::PassValueWithSwizzle` | [`d3d11::FunctionLinkingGraph::pass_value_with_swizzle`]<br> |
-//! | ✔️ | `ID3D11FunctionLinkingGraph::SetInputSignature` | [`d3d11::FunctionLinkingGraph::set_input_signature`]<br> |
-//! | ✔️ | `ID3D11FunctionLinkingGraph::SetOutputSignature` | [`d3d11::FunctionLinkingGraph::set_output_signature`]<br> |
-//! | ✔️ | `ID3D11FunctionParameterReflection::GetDesc` | [`d3d11::FunctionParameterReflection::get_desc`]<br> |
-//! | ✔️ | `ID3D11FunctionReflection::GetConstantBufferByIndex` | [`d3d11::FunctionReflection::get_constant_buffer_by_index`]<br> |
-//! | ✔️ | `ID3D11FunctionReflection::GetConstantBufferByName` | [`d3d11::FunctionReflection::get_constant_buffer_by_name`]<br> |
-//! | ✔️ | `ID3D11FunctionReflection::GetDesc` | [`d3d11::FunctionReflection::get_desc`]<br> |
-//! | ✔️ | `ID3D11FunctionReflection::GetFunctionParameter` | [`d3d11::FunctionReflection::get_function_parameter`]<br> |
-//! | ✔️ | `ID3D11FunctionReflection::GetResourceBindingDesc` | [`d3d11::FunctionReflection::get_resource_binding_desc`]<br> |
-//! | ✔️ | `ID3D11FunctionReflection::GetResourceBindingDescByName` | [`d3d11::FunctionReflection::get_resource_binding_desc_by_name`]<br> |
-//! | ✔️ | `ID3D11FunctionReflection::GetVariableByName` | [`d3d11::FunctionReflection::get_variable_by_name`]<br> |
-//! | ✔️ | `ID3D11LibraryReflection::GetDesc` | [`d3d11::LibraryReflection::get_desc`]<br> |
-//! | ✔️ | `ID3D11LibraryReflection::GetFunctionByIndex` | [`d3d11::LibraryReflection::get_function_by_index`]<br> |
-//! | ✔️ | `ID3D11Linker::AddClipPlaneFromCBuffer` | [`d3d11::Linker::add_clip_plane_from_cbuffer`]<br> |
-//! | ✔️ | `ID3D11Linker::Link` | [`d3d11::Linker::link`]<br> |
-//! | ✔️ | `ID3D11Linker::UseLibrary` | [`d3d11::Linker::use_library`]<br> |
-//! | ✔️ | `ID3D11Module::CreateInstance` | [`d3d11::Module::create_instance`]<br> |
-//! | ✔️ | `ID3D11ModuleInstance::BindConstantBuffer` | [`d3d11::ModuleInstance::bind_constant_buffer`]<br> |
-//! | ✔️ | `ID3D11ModuleInstance::BindConstantBufferByName` | [`d3d11::ModuleInstance::bind_constant_buffer_by_name`]<br> |
-//! | ✔️ | `ID3D11ModuleInstance::BindResource` | [`d3d11::ModuleInstance::bind_resource`]<br> |
-//! | ✔️ | `ID3D11ModuleInstance::BindResourceAsUnorderedAccessView` | [`d3d11::ModuleInstance::bind_resource_as_unordered_access_view`]<br> |
-//! | ✔️ | `ID3D11ModuleInstance::BindResourceAsUnorderedAccessViewByName` | [`d3d11::ModuleInstance::bind_resource_as_unordered_access_view_by_name`]<br> |
-//! | ✔️ | `ID3D11ModuleInstance::BindResourceByName` | [`d3d11::ModuleInstance::bind_resource_by_name`]<br> |
-//! | ✔️ | `ID3D11ModuleInstance::BindSampler` | [`d3d11::ModuleInstance::bind_sampler`]<br> |
-//! | ✔️ | `ID3D11ModuleInstance::BindSamplerByName` | [`d3d11::ModuleInstance::bind_sampler_by_name`]<br> |
-//! | ✔️ | `ID3D11ModuleInstance::BindUnorderedAccessView` | [`d3d11::ModuleInstance::bind_unordered_access_view`]<br> |
-//! | ✔️ | `ID3D11ModuleInstance::BindUnorderedAccessViewByName` | [`d3d11::ModuleInstance::bind_unordered_access_view_by_name`]<br> |
-//! | ✔️ | `ID3D11ShaderReflection::GetBitwiseInstructionCount` | [`d3d11::ShaderReflection::get_bitwise_instruction_count`]<br> |
-//! | ✔️ | `ID3D11ShaderReflection::GetConstantBufferByIndex` | [`d3d11::ShaderReflection::get_constant_buffer_by_index`]<br> |
-//! | ✔️ | `ID3D11ShaderReflection::GetConstantBufferByName` | [`d3d11::ShaderReflection::get_constant_buffer_by_name`]<br> |
-//! | ✔️ | `ID3D11ShaderReflection::GetConversionInstructionCount` | [`d3d11::ShaderReflection::get_conversion_instruction_count`]<br> |
-//! | ✔️ | `ID3D11ShaderReflection::GetDesc` | [`d3d11::ShaderReflection::get_desc`]<br> |
-//! | ✔️ | `ID3D11ShaderReflection::GetGSInputPrimitive` | [`d3d11::ShaderReflection::get_gs_input_primitive`]<br> |
-//! | ✔️ | `ID3D11ShaderReflection::GetInputParameterDesc` | [`d3d11::ShaderReflection::get_input_parameter_desc`]<br> |
-//! | ✔️ | `ID3D11ShaderReflection::GetMinFeatureLevel` | [`d3d11::ShaderReflection::get_min_feature_level`]<br> |
-//! | ✔️ | `ID3D11ShaderReflection::GetMovInstructionCount` | [`d3d11::ShaderReflection::get_mov_instruction_count`]<br> |
-//! | ✔️ | `ID3D11ShaderReflection::GetMovcInstructionCount` | [`d3d11::ShaderReflection::get_movc_instruction_count`]<br> |
-//! | ✔️ | `ID3D11ShaderReflection::GetNumInterfaceSlots` | [`d3d11::ShaderReflection::get_num_interface_slots`]<br> |
-//! | ✔️ | `ID3D11ShaderReflection::GetOutputParameterDesc` | [`d3d11::ShaderReflection::get_output_parameter_desc`]<br> |
-//! | ✔️ | `ID3D11ShaderReflection::GetPatchConstantParameterDesc` | [`d3d11::ShaderReflection::get_patch_constant_parameter_desc`]<br> |
-//! | ✔️ | `ID3D11ShaderReflection::GetRequiresFlags` | [`d3d11::ShaderReflection::get_requires_flags`]<br> |
-//! | ✔️ | `ID3D11ShaderReflection::GetResourceBindingDesc` | [`d3d11::ShaderReflection::get_resource_binding_desc`]<br> |
-//! | ✔️ | `ID3D11ShaderReflection::GetResourceBindingDescByName` | [`d3d11::ShaderReflection::get_resource_binding_desc_by_name`]<br> |
-//! | ✔️ | `ID3D11ShaderReflection::GetThreadGroupSize` | [`d3d11::ShaderReflection::get_thread_group_size`]<br> |
-//! | ✔️ | `ID3D11ShaderReflection::GetVariableByName` | [`d3d11::ShaderReflection::get_variable_by_name`]<br> |
-//! | ✔️ | `ID3D11ShaderReflection::IsSampleFrequencyShader` | [`d3d11::ShaderReflection::is_sample_frequency_shader`]<br> |
-//! | ✔️ | `ID3D11ShaderReflectionConstantBuffer::GetDesc` | [`d3d11::ShaderReflectionConstantBuffer::get_desc`]<br> |
-//! | ✔️ | `ID3D11ShaderReflectionConstantBuffer::GetVariableByIndex` | [`d3d11::ShaderReflectionConstantBuffer::get_variable_by_index`]<br> |
-//! | ✔️ | `ID3D11ShaderReflectionConstantBuffer::GetVariableByName` | [`d3d11::ShaderReflectionConstantBuffer::get_variable_by_name`]<br> |
-//! | ✔️ | `ID3D11ShaderReflectionType::GetBaseClass` | [`d3d11::ShaderReflectionType::get_base_class`]<br> |
-//! | ✔️ | `ID3D11ShaderReflectionType::GetDesc` | [`d3d11::ShaderReflectionType::get_desc`]<br> |
-//! | ✔️ | `ID3D11ShaderReflectionType::GetInterfaceByIndex` | [`d3d11::ShaderReflectionType::get_interface_by_index`]<br> |
-//! | ✔️ | `ID3D11ShaderReflectionType::GetMemberTypeByIndex` | [`d3d11::ShaderReflectionType::get_member_type_by_index`]<br> |
-//! | ✔️ | `ID3D11ShaderReflectionType::GetMemberTypeByName` | [`d3d11::ShaderReflectionType::get_member_type_by_name`]<br> |
-//! | ✔️ | `ID3D11ShaderReflectionType::GetMemberTypeName` | [`d3d11::ShaderReflectionType::get_member_type_name`]<br> |
-//! | ✔️ | `ID3D11ShaderReflectionType::GetNumInterfaces` | [`d3d11::ShaderReflectionType::get_num_interfaces`]<br> |
-//! | ✔️ | `ID3D11ShaderReflectionType::GetSubType` | [`d3d11::ShaderReflectionType::get_sub_type`]<br> |
-//! | ✔️ | `ID3D11ShaderReflectionType::ImplementsInterface` | [`d3d11::ShaderReflectionType::implements_interface`]<br> |
-//! | ✔️ | `ID3D11ShaderReflectionType::IsEqual` | [`d3d11::ShaderReflectionType::is_equal`]<br> |
-//! | ✔️ | `ID3D11ShaderReflectionType::IsOfType` | [`d3d11::ShaderReflectionType::is_of_type`]<br> |
-//! | ✔️ | `ID3D11ShaderReflectionVariable::GetBuffer` | [`d3d11::ShaderReflectionVariable::get_buffer`]<br> |
-//! | ✔️ | `ID3D11ShaderReflectionVariable::GetDesc` | [`d3d11::ShaderReflectionVariable::get_desc`]<br> |
-//! | ✔️ | `ID3D11ShaderReflectionVariable::GetInterfaceSlot` | [`d3d11::ShaderReflectionVariable::get_interface_slot`]<br> |
-//! | ✔️ | `ID3D11ShaderReflectionVariable::GetType` | [`d3d11::ShaderReflectionVariable::get_type`]<br> |
+//! | ✔️ | [`ID3D11FunctionLinkingGraph::CallFunction`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionlinkinggraph-callfunction) | [`d3d11::FunctionLinkingGraph::call_function`]<br> |
+//! | ✔️ | [`ID3D11FunctionLinkingGraph::CreateModuleInstance`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionlinkinggraph-createmoduleinstance) | [`d3d11::FunctionLinkingGraph::create_module_instance`]<br> |
+//! | ✔️ | [`ID3D11FunctionLinkingGraph::GenerateHlsl`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionlinkinggraph-generatehlsl) | [`d3d11::FunctionLinkingGraph::generate_hlsl`]<br> |
+//! | ✔️ | [`ID3D11FunctionLinkingGraph::GetLastError`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionlinkinggraph-getlasterror) | [`d3d11::FunctionLinkingGraph::get_last_error`]<br> |
+//! | ✔️ | [`ID3D11FunctionLinkingGraph::PassValue`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionlinkinggraph-passvalue) | [`d3d11::FunctionLinkingGraph::pass_value`]<br> |
+//! | ✔️ | [`ID3D11FunctionLinkingGraph::PassValueWithSwizzle`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionlinkinggraph-passvaluewithswizzle) | [`d3d11::FunctionLinkingGraph::pass_value_with_swizzle`]<br> |
+//! | ✔️ | [`ID3D11FunctionLinkingGraph::SetInputSignature`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionlinkinggraph-setinputsignature) | [`d3d11::FunctionLinkingGraph::set_input_signature`]<br> |
+//! | ✔️ | [`ID3D11FunctionLinkingGraph::SetOutputSignature`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionlinkinggraph-setoutputsignature) | [`d3d11::FunctionLinkingGraph::set_output_signature`]<br> |
+//! | ✔️ | [`ID3D11FunctionParameterReflection::GetDesc`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionparameterreflection-getdesc) | [`d3d11::FunctionParameterReflection::get_desc`]<br> |
+//! | ✔️ | [`ID3D11FunctionReflection::GetConstantBufferByIndex`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionreflection-getconstantbufferbyindex) | [`d3d11::FunctionReflection::get_constant_buffer_by_index`]<br> |
+//! | ✔️ | [`ID3D11FunctionReflection::GetConstantBufferByName`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionreflection-getconstantbufferbyname) | [`d3d11::FunctionReflection::get_constant_buffer_by_name`]<br> |
+//! | ✔️ | [`ID3D11FunctionReflection::GetDesc`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionreflection-getdesc) | [`d3d11::FunctionReflection::get_desc`]<br> |
+//! | ✔️ | [`ID3D11FunctionReflection::GetFunctionParameter`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionreflection-getfunctionparameter) | [`d3d11::FunctionReflection::get_function_parameter`]<br> |
+//! | ✔️ | [`ID3D11FunctionReflection::GetResourceBindingDesc`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionreflection-getresourcebindingdesc) | [`d3d11::FunctionReflection::get_resource_binding_desc`]<br> |
+//! | ✔️ | [`ID3D11FunctionReflection::GetResourceBindingDescByName`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionreflection-getresourcebindingdescbyname) | [`d3d11::FunctionReflection::get_resource_binding_desc_by_name`]<br> |
+//! | ✔️ | [`ID3D11FunctionReflection::GetVariableByName`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionreflection-getvariablebyname) | [`d3d11::FunctionReflection::get_variable_by_name`]<br> |
+//! | ✔️ | [`ID3D11LibraryReflection::GetDesc`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11libraryreflection-getdesc) | [`d3d11::LibraryReflection::get_desc`]<br> |
+//! | ✔️ | [`ID3D11LibraryReflection::GetFunctionByIndex`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11libraryreflection-getfunctionbyindex) | [`d3d11::LibraryReflection::get_function_by_index`]<br> |
+//! | ✔️ | [`ID3D11Linker::AddClipPlaneFromCBuffer`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11linker-addclipplanefromcbuffer) | [`d3d11::Linker::add_clip_plane_from_cbuffer`]<br> |
+//! | ✔️ | [`ID3D11Linker::Link`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11linker-link) | [`d3d11::Linker::link`]<br> |
+//! | ✔️ | [`ID3D11Linker::UseLibrary`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11linker-uselibrary) | [`d3d11::Linker::use_library`]<br> |
+//! | ✔️ | [`ID3D11Module::CreateInstance`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11module-createinstance) | [`d3d11::Module::create_instance`]<br> |
+//! | ✔️ | [`ID3D11ModuleInstance::BindConstantBuffer`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindconstantbuffer) | [`d3d11::ModuleInstance::bind_constant_buffer`]<br> |
+//! | ✔️ | [`ID3D11ModuleInstance::BindConstantBufferByName`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindconstantbufferbyname) | [`d3d11::ModuleInstance::bind_constant_buffer_by_name`]<br> |
+//! | ✔️ | [`ID3D11ModuleInstance::BindResource`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindresource) | [`d3d11::ModuleInstance::bind_resource`]<br> |
+//! | ✔️ | [`ID3D11ModuleInstance::BindResourceAsUnorderedAccessView`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindresourceasunorderedaccessview) | [`d3d11::ModuleInstance::bind_resource_as_unordered_access_view`]<br> |
+//! | ✔️ | [`ID3D11ModuleInstance::BindResourceAsUnorderedAccessViewByName`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindresourceasunorderedaccessviewbyname) | [`d3d11::ModuleInstance::bind_resource_as_unordered_access_view_by_name`]<br> |
+//! | ✔️ | [`ID3D11ModuleInstance::BindResourceByName`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindresourcebyname) | [`d3d11::ModuleInstance::bind_resource_by_name`]<br> |
+//! | ✔️ | [`ID3D11ModuleInstance::BindSampler`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindsampler) | [`d3d11::ModuleInstance::bind_sampler`]<br> |
+//! | ✔️ | [`ID3D11ModuleInstance::BindSamplerByName`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindsamplerbyname) | [`d3d11::ModuleInstance::bind_sampler_by_name`]<br> |
+//! | ✔️ | [`ID3D11ModuleInstance::BindUnorderedAccessView`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindunorderedaccessview) | [`d3d11::ModuleInstance::bind_unordered_access_view`]<br> |
+//! | ✔️ | [`ID3D11ModuleInstance::BindUnorderedAccessViewByName`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindunorderedaccessviewbyname) | [`d3d11::ModuleInstance::bind_unordered_access_view_by_name`]<br> |
+//! | ✔️ | [`ID3D11ShaderReflection::GetBitwiseInstructionCount`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getbitwiseinstructioncount) | [`d3d11::ShaderReflection::get_bitwise_instruction_count`]<br> |
+//! | ✔️ | [`ID3D11ShaderReflection::GetConstantBufferByIndex`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getconstantbufferbyindex) | [`d3d11::ShaderReflection::get_constant_buffer_by_index`]<br> |
+//! | ✔️ | [`ID3D11ShaderReflection::GetConstantBufferByName`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getconstantbufferbyname) | [`d3d11::ShaderReflection::get_constant_buffer_by_name`]<br> |
+//! | ✔️ | [`ID3D11ShaderReflection::GetConversionInstructionCount`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getconversioninstructioncount) | [`d3d11::ShaderReflection::get_conversion_instruction_count`]<br> |
+//! | ✔️ | [`ID3D11ShaderReflection::GetDesc`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getdesc) | [`d3d11::ShaderReflection::get_desc`]<br> |
+//! | ✔️ | [`ID3D11ShaderReflection::GetGSInputPrimitive`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getgsinputprimitive) | [`d3d11::ShaderReflection::get_gs_input_primitive`]<br> |
+//! | ✔️ | [`ID3D11ShaderReflection::GetInputParameterDesc`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getinputparameterdesc) | [`d3d11::ShaderReflection::get_input_parameter_desc`]<br> |
+//! | ✔️ | [`ID3D11ShaderReflection::GetMinFeatureLevel`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getminfeaturelevel) | [`d3d11::ShaderReflection::get_min_feature_level`]<br> |
+//! | ✔️ | [`ID3D11ShaderReflection::GetMovInstructionCount`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getmovinstructioncount) | [`d3d11::ShaderReflection::get_mov_instruction_count`]<br> |
+//! | ✔️ | [`ID3D11ShaderReflection::GetMovcInstructionCount`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getmovcinstructioncount) | [`d3d11::ShaderReflection::get_movc_instruction_count`]<br> |
+//! | ✔️ | [`ID3D11ShaderReflection::GetNumInterfaceSlots`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getnuminterfaceslots) | [`d3d11::ShaderReflection::get_num_interface_slots`]<br> |
+//! | ✔️ | [`ID3D11ShaderReflection::GetOutputParameterDesc`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getoutputparameterdesc) | [`d3d11::ShaderReflection::get_output_parameter_desc`]<br> |
+//! | ✔️ | [`ID3D11ShaderReflection::GetPatchConstantParameterDesc`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getpatchconstantparameterdesc) | [`d3d11::ShaderReflection::get_patch_constant_parameter_desc`]<br> |
+//! | ✔️ | [`ID3D11ShaderReflection::GetRequiresFlags`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getrequiresflags) | [`d3d11::ShaderReflection::get_requires_flags`]<br> |
+//! | ✔️ | [`ID3D11ShaderReflection::GetResourceBindingDesc`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getresourcebindingdesc) | [`d3d11::ShaderReflection::get_resource_binding_desc`]<br> |
+//! | ✔️ | [`ID3D11ShaderReflection::GetResourceBindingDescByName`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getresourcebindingdescbyname) | [`d3d11::ShaderReflection::get_resource_binding_desc_by_name`]<br> |
+//! | ✔️ | [`ID3D11ShaderReflection::GetThreadGroupSize`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getthreadgroupsize) | [`d3d11::ShaderReflection::get_thread_group_size`]<br> |
+//! | ✔️ | [`ID3D11ShaderReflection::GetVariableByName`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getvariablebyname) | [`d3d11::ShaderReflection::get_variable_by_name`]<br> |
+//! | ✔️ | [`ID3D11ShaderReflection::IsSampleFrequencyShader`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-issamplefrequencyshader) | [`d3d11::ShaderReflection::is_sample_frequency_shader`]<br> |
+//! | ✔️ | [`ID3D11ShaderReflectionConstantBuffer::GetDesc`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectionconstantbuffer-getdesc) | [`d3d11::ShaderReflectionConstantBuffer::get_desc`]<br> |
+//! | ✔️ | [`ID3D11ShaderReflectionConstantBuffer::GetVariableByIndex`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectionconstantbuffer-getvariablebyindex) | [`d3d11::ShaderReflectionConstantBuffer::get_variable_by_index`]<br> |
+//! | ✔️ | [`ID3D11ShaderReflectionConstantBuffer::GetVariableByName`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectionconstantbuffer-getvariablebyname) | [`d3d11::ShaderReflectionConstantBuffer::get_variable_by_name`]<br> |
+//! | ✔️ | [`ID3D11ShaderReflectionType::GetBaseClass`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectiontype-getbaseclass) | [`d3d11::ShaderReflectionType::get_base_class`]<br> |
+//! | ✔️ | [`ID3D11ShaderReflectionType::GetDesc`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectiontype-getdesc) | [`d3d11::ShaderReflectionType::get_desc`]<br> |
+//! | ✔️ | [`ID3D11ShaderReflectionType::GetInterfaceByIndex`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectiontype-getinterfacebyindex) | [`d3d11::ShaderReflectionType::get_interface_by_index`]<br> |
+//! | ✔️ | [`ID3D11ShaderReflectionType::GetMemberTypeByIndex`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectiontype-getmembertypebyindex) | [`d3d11::ShaderReflectionType::get_member_type_by_index`]<br> |
+//! | ✔️ | [`ID3D11ShaderReflectionType::GetMemberTypeByName`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectiontype-getmembertypebyname) | [`d3d11::ShaderReflectionType::get_member_type_by_name`]<br> |
+//! | ✔️ | [`ID3D11ShaderReflectionType::GetMemberTypeName`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectiontype-getmembertypename) | [`d3d11::ShaderReflectionType::get_member_type_name`]<br> |
+//! | ✔️ | [`ID3D11ShaderReflectionType::GetNumInterfaces`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectiontype-getnuminterfaces) | [`d3d11::ShaderReflectionType::get_num_interfaces`]<br> |
+//! | ✔️ | [`ID3D11ShaderReflectionType::GetSubType`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectiontype-getsubtype) | [`d3d11::ShaderReflectionType::get_sub_type`]<br> |
+//! | ✔️ | [`ID3D11ShaderReflectionType::ImplementsInterface`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectiontype-implementsinterface) | [`d3d11::ShaderReflectionType::implements_interface`]<br> |
+//! | ✔️ | [`ID3D11ShaderReflectionType::IsEqual`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectiontype-isequal) | [`d3d11::ShaderReflectionType::is_equal`]<br> |
+//! | ✔️ | [`ID3D11ShaderReflectionType::IsOfType`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectiontype-isoftype) | [`d3d11::ShaderReflectionType::is_of_type`]<br> |
+//! | ✔️ | [`ID3D11ShaderReflectionVariable::GetBuffer`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectionvariable-getbuffer) | [`d3d11::ShaderReflectionVariable::get_buffer`]<br> |
+//! | ✔️ | [`ID3D11ShaderReflectionVariable::GetDesc`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectionvariable-getdesc) | [`d3d11::ShaderReflectionVariable::get_desc`]<br> |
+//! | ✔️ | [`ID3D11ShaderReflectionVariable::GetInterfaceSlot`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectionvariable-getinterfaceslot) | [`d3d11::ShaderReflectionVariable::get_interface_slot`]<br> |
+//! | ✔️ | [`ID3D11ShaderReflectionVariable::GetType`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectionvariable-gettype) | [`d3d11::ShaderReflectionVariable::get_type`]<br> |
 //! <h3 id="d3dcommon">d3dcommon.h</h3>
 //!
 //!
@@ -186,8 +186,8 @@
 //!
 //! |  ?  | C++ Method    | Rust Method |
 //! | --- | ------------- | ----------- |
-//! | ✔️ | `ID3D10Blob::GetBufferPointer` | [`d3d::BytesBlob::as_bytes`]<br> [`d3d::CodeBlob::as_bytes`]<br> [`d3d::CodeBlob::as_bytecode`]<br> [`d3d::ReadOnlyBlob::get_buffer`]<br> [`d3d::TextBlob::to_utf8`]<br> [`d3d::TextBlob::to_utf8_lossy`]<br> |
-//! | ✔️ | `ID3D10Blob::GetBufferSize` | [`d3d::BytesBlob::len`]<br> [`d3d::CodeBlob::len`]<br> [`d3d::ReadOnlyBlob::get_buffer_size`]<br> |
+//! | ✔️ | [`ID3D10Blob::GetBufferPointer`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nf-d3dcommon-id3d10blob-getbufferpointer) | [`d3d::BytesBlob::as_bytes`]<br> [`d3d::CodeBlob::as_bytes`]<br> [`d3d::CodeBlob::as_bytecode`]<br> [`d3d::ReadOnlyBlob::get_buffer`]<br> [`d3d::TextBlob::to_utf8`]<br> [`d3d::TextBlob::to_utf8_lossy`]<br> |
+//! | ✔️ | [`ID3D10Blob::GetBufferSize`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nf-d3dcommon-id3d10blob-getbuffersize) | [`d3d::BytesBlob::len`]<br> [`d3d::CodeBlob::len`]<br> [`d3d::ReadOnlyBlob::get_buffer_size`]<br> |
 //! | ❌ | `ID3DDestructionNotifier::RegisterDestructionCallback` | |
 //! | ❌ | `ID3DDestructionNotifier::UnregisterDestructionCallback` | |
 //! | ❌ | `ID3DInclude::Close` | |
