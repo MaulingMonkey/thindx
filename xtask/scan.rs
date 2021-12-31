@@ -175,16 +175,6 @@ fn file_doc_comments(path: &Path, text: &str) -> Result<(), ()> {
                         },
                     };
                     rest = r[end+2..].trim_start();
-                } else if let Some(r) = rest.strip_prefix("#[requires(") {
-                    let end = match r.find(")]") {
-                        Some(n) => n,
-                        None => {
-                            error!(at: path, line: no, "#[requires(...)] expected to be a single line");
-                            s.errors = true;
-                            continue;
-                        },
-                    };
-                    rest = r[end+2..].trim_start();
                 } else if let Some(r) = rest.strip_prefix("#[xallow(") {
                     let end = match r.find(")]") {
                         Some(n) => n,
