@@ -1,6 +1,6 @@
 extern crate proc_macro;
 
-use proc_macro::{Ident, Span, TokenStream, TokenTree};
+use proc_macro::{Span, TokenStream, TokenTree};
 
 
 
@@ -43,68 +43,6 @@ pub fn requires(condition: TokenStream, item: TokenStream) -> TokenStream {
             }
         },
         other => compile_error_at(format!("expected `d3dcompiler` or another known key, got {:?}", other), key.span(), item),
-    }
-}
-
-#[proc_macro_attribute]
-pub fn if_stable(condition: TokenStream, item: TokenStream) -> TokenStream {
-    let mut condition = condition.into_iter();
-    let key = condition.next().expect("expected `key` in e.g. `#[stable(key)]`");
-
-    let unstable = std::env::var_os("CARGO_PKG_VERSION_PRE").map_or(false, |v| !v.is_empty());
-
-    match key.to_string().as_str() {
-        "unsafe" => {
-            if !unstable {
-                let mut item = item.into_iter().peekable();
-                let mut out = TokenStream::new();
-                let mut n = 0;
-                while let Some(tt) = item.next() {
-                    if tt.is_ident_str("fn") {
-                        out.extend(Some(TokenTree::Ident(Ident::new("unsafe", tt.span()))));
-                        n += 1;
-                    }
-                    out.extend(Some(tt));
-                }
-                if n == 0 {
-                    compile_error_at("failed to mark any fns unsafe", key.span(), out)
-                } else {
-                    out
-                }
-            } else {
-                item
-            }
-        },
-        "!" => {
-            let key = condition.next().expect("expected `key` in e.g. `#[stable(!key)]`");
-            match key.to_string().as_str() {
-                "pub" => {
-                    let mut item = item.into_iter().peekable();
-                    let mut out = TokenStream::new();
-                    let mut n = 0;
-                    while let Some(tt) = item.next() {
-                        let is_pub = tt.is_ident_str("pub");
-                        out.extend(Some(tt));
-
-                        if is_pub {
-                            let tt2 = item.next();
-                            if !tt2.as_ref().map_or(false, |tt2| tt2.is_group()) {
-                                out.extend(Some("(crate)".parse::<TokenStream>().unwrap()));
-                                n += 1;
-                            }
-                            out.extend(tt2);
-                        }
-                    }
-                    if n == 0 {
-                        compile_error_at("failed to convert any `pub`s to `pub(crate)`", key.span(), out)
-                    } else {
-                        out
-                    }
-                },
-                other   => compile_error_at(format!("expected `!pub` or another known key, got {:?}", other), key.span(), item),
-            }
-        },
-        other => compile_error_at(format!("expected `unsafe` or another known key, got {:?}", other), key.span(), item),
     }
 }
 
