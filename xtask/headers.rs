@@ -165,8 +165,8 @@ impl<'cpp> Header<'cpp> {
 }
 
 lazy_static::lazy_static! {
-    static ref CPP2RUST : BTreeMap<String, Vec<String>> = map_file("doc/cpp2rust.txt", include_str!("../doc/cpp2rust.txt"));
-    static ref CPP2URL  : BTreeMap<String, Vec<String>> = map_file("doc/cpp2url.txt", include_str!("../doc/cpp2url.txt"));
+    static ref CPP2RUST : BTreeMap<String, Vec<String>> = map_file("thindx/doc/cpp2rust.txt", include_str!("../thindx/doc/cpp2rust.txt"));
+    static ref CPP2URL  : BTreeMap<String, Vec<String>> = map_file("thindx/doc/cpp2url.txt", include_str!("../thindx/doc/cpp2url.txt"));
 }
 
 fn map_file(path: &str, text: &str) -> BTreeMap<String, Vec<String>> {
