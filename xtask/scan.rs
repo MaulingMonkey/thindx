@@ -394,7 +394,7 @@ fn file_doc_comments(path: &Path, text: &str) -> Result<(), ()> {
                                 },
                                 Some(_doc) => {},
                                 None => {
-                                    error!(at: path, line: no, "argument `{}` is undocumented in `### Arguments` section", arg_name);
+                                    error!(at: path, line: no, "argument `{}` is undocumented in `### Arguments` section (`//#allow_missing_argument_docs` to suppress)", arg_name);
                                     s.errors = true;
                                 },
                             }
@@ -454,7 +454,7 @@ fn file_doc_comments(path: &Path, text: &str) -> Result<(), ()> {
                                 },
                                 Some(_doc) => {},
                                 None => {
-                                    error!(at: path, line: no, "argument `{}` is undocumented in `### Arguments` section", arg_name);
+                                    error!(at: path, line: no, "argument `{}` is undocumented in `### Arguments` section (`//#allow_missing_argument_docs` to suppress)", arg_name);
                                     s.errors = true;
                                 },
                             }
