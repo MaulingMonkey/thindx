@@ -1,3 +1,5 @@
+#![allow(unused_variables)] macro_rules! warning { ($($tt:tt)*) => {} } // XXX: temporarilly supress warnings
+
 use mmrbi::*;
 
 use std::path::Path;
@@ -117,8 +119,7 @@ fn file_doc_comments(path: &Path, text: &str) -> Result<(), ()> {
         let comment = if let Some(comment) = trimmed.strip_prefix("//!") {
             let comment = comment.strip_prefix(" ").unwrap_or_else(|| {
                 if !comment.is_empty() {
-                    error!(at: path, line: no, "Expected space after `//!`");
-                    s.errors = true;
+                    warning!(at: path, line: no, "Expected space after `//!`");
                 }
                 comment
             });
@@ -128,8 +129,7 @@ fn file_doc_comments(path: &Path, text: &str) -> Result<(), ()> {
         } else if let Some(comment) = trimmed.strip_prefix("///") {
             let comment = comment.strip_prefix(" ").unwrap_or_else(|| {
                 if !comment.is_empty() {
-                    error!(at: path, line: no, "Expected space after `///`");
-                    s.errors = true;
+                    warning!(at: path, line: no, "Expected space after `///`");
                 }
                 comment
             });
@@ -160,36 +160,17 @@ fn file_doc_comments(path: &Path, text: &str) -> Result<(), ()> {
                 } else if let Some(r) = rest.strip_prefix("#[repr(C)]") {
                     rest = r.trim_start();
                     //s.repr = Some(C);
-                } else if let Some(r) = rest.strip_prefix("#[allow(") {
-                    let end = match r.find(")]") {
+                } else if let Some((r, pre)) = "#[allow #[cfg #[deprecated #[derive #[doc".split(' ').filter_map(|pre| Some((rest.strip_prefix(pre)?, pre))).next() {
+                    let end_str = if r.starts_with("(") { ")]" } else { "]" };
+                    let end = match r.find(end_str) {
                         Some(n) => n,
                         None => {
-                            error!(at: path, line: no, "#[allow(...)] expected to be a single line");
+                            error!(at: path, line: no, "{}...{} expected to be a single line", pre, end_str);
                             s.errors = true;
                             continue;
                         },
                     };
-                    rest = r[end+2..].trim_start();
-                } else if let Some(r) = rest.strip_prefix("#[derive(") {
-                    let end = match r.find(")]") {
-                        Some(n) => n,
-                        None => {
-                            error!(at: path, line: no, "#[derive(...)] expected to be a single line");
-                            s.errors = true;
-                            continue;
-                        },
-                    };
-                    rest = r[end+2..].trim_start();
-                } else if let Some(r) = rest.strip_prefix("#[cfg(") {
-                    let end = match r.find(")]") {
-                        Some(n) => n,
-                        None => {
-                            error!(at: path, line: no, "#[cfg(...)] expected to be a single line");
-                            s.errors = true;
-                            continue;
-                        },
-                    };
-                    rest = r[end+2..].trim_start();
+                    rest = r[end+end_str.len()..].trim_start();
                 } else if rest == "//#allow_missing_argument_docs" {
                     s.allow_missing_argument_docs = true;
                     rest = "";
@@ -274,9 +255,9 @@ fn file_doc_comments(path: &Path, text: &str) -> Result<(), ()> {
                             indent -= 1;
                             false
                         }
-                    } else if ch.is_ascii_alphanumeric() {
+                    } else if ch.is_ascii_alphanumeric() || ch == '_' {
                         false
-                    } else if " *&#':".contains(ch) {
+                    } else if " *&#':;".contains(ch) {
                         false
                     } else if ch == ',' && indent > 0 {
                         false
@@ -333,8 +314,7 @@ fn file_doc_comments(path: &Path, text: &str) -> Result<(), ()> {
                 DocItemKind::Fn if s.allow_missing_argument_docs && s.arguments.is_empty() => {}, // don't validate nonexistant `### Arguments` sections
                 DocItemKind::Fn => {
                     if s.allow_missing_argument_docs {
-                        error!(at: path, line: no, "//#allow_missing_argument_docs used but argument docs provided");
-                        s.errors = true;
+                        warning!(at: path, line: no, "//#allow_missing_argument_docs used but argument docs provided");
                     }
 
                     // TODO: better parsing of self
@@ -388,14 +368,12 @@ fn file_doc_comments(path: &Path, text: &str) -> Result<(), ()> {
 
                             match arguments.next() {
                                 Some((arg_idx, (doc_name, doc_line))) if *doc_name != arg_name => {
-                                    error!(at: path, line: *doc_line,   "argument {}: documented as `{}` but actually named `{}`", arg_idx+1, doc_name, arg_name);
-                                    error!(at: path, line: no,          "argument {}: documented as `{}` but actually named `{}`", arg_idx+1, doc_name, arg_name);
-                                    s.errors = true;
+                                    warning!(at: path, line: *doc_line,   "argument {}: documented as `{}` but actually named `{}`", arg_idx+1, doc_name, arg_name);
+                                    warning!(at: path, line: no,          "argument {}: documented as `{}` but actually named `{}`", arg_idx+1, doc_name, arg_name);
                                 },
                                 Some(_doc) => {},
                                 None => {
-                                    error!(at: path, line: no, "argument `{}` is undocumented in `### Arguments` section (`//#allow_missing_argument_docs` to suppress)", arg_name);
-                                    s.errors = true;
+                                    warning!(at: path, line: no, "argument `{}` is undocumented in `### Arguments` section (`//#allow_missing_argument_docs` to suppress)", arg_name);
                                 },
                             }
 
@@ -429,6 +407,7 @@ fn file_doc_comments(path: &Path, text: &str) -> Result<(), ()> {
                         let mut arguments = s.arguments.iter().enumerate();
                         let mut rest = rest;
                         loop {
+                            let _ = strip_prefix_inplace(&mut rest, "mut ");
                             let arg_name = strip_prefix_ident_inplace(&mut rest);
                             if arg_name == "" {
                                 error!(at: path, line: no, "error parsing argument name (rest == {:?})", rest);
@@ -448,14 +427,12 @@ fn file_doc_comments(path: &Path, text: &str) -> Result<(), ()> {
 
                             match arguments.next() {
                                 Some((arg_idx, (doc_name, doc_line))) if *doc_name != arg_name => {
-                                    error!(at: path, line: *doc_line,   "argument {}: documented as `{}` but actually named `{}`", arg_idx+1, doc_name, arg_name);
-                                    error!(at: path, line: no,          "argument {}: documented as `{}` but actually named `{}`", arg_idx+1, doc_name, arg_name);
-                                    s.errors = true;
+                                    warning!(at: path, line: *doc_line,   "argument {}: documented as `{}` but actually named `{}`", arg_idx+1, doc_name, arg_name);
+                                    warning!(at: path, line: no,          "argument {}: documented as `{}` but actually named `{}`", arg_idx+1, doc_name, arg_name);
                                 },
                                 Some(_doc) => {},
                                 None => {
-                                    error!(at: path, line: no, "argument `{}` is undocumented in `### Arguments` section (`//#allow_missing_argument_docs` to suppress)", arg_name);
-                                    s.errors = true;
+                                    warning!(at: path, line: no, "argument `{}` is undocumented in `### Arguments` section (`//#allow_missing_argument_docs` to suppress)", arg_name);
                                 },
                             }
 
@@ -516,18 +493,15 @@ fn file_doc_comments(path: &Path, text: &str) -> Result<(), ()> {
 
                     if let Some(prev_h3) = s.current_h3 {
                         if prev_h3 >= h3 {
-                            error!(at: path, line: no, "Expected `{}` to come before `### {}`", comment, prev_h3.as_str());
-                            s.errors = true;
+                            warning!(at: path, line: no, "Expected `{}` to come before `### {}`", comment, prev_h3.as_str());
                         }
                     }
                     s.current_h3 = Some(h3);
                     s.mode = Mode::ExpectNonBlankLine;
                 } else if let Some(_) = comment.strip_prefix("#") {
-                    error!(at: path, line: no, "Unexpected header `{}`: expected h3 comments only", comment);
-                    s.errors = true;
+                    warning!(at: path, line: no, "Unexpected header `{}`: expected h3 comments only", comment);
                 } else if comment == "" && expect_non_blank {
-                    error!(at: path, line: no, "Don't add a blank line after headers");
-                    s.errors = true;
+                    warning!(at: path, line: no, "Don't add a blank line after headers");
                 } else if comment.starts_with("```") {
                     s.mode = Mode::InCodeBlock;
                 } else if comment == "<style>" {
@@ -550,15 +524,13 @@ fn file_doc_comments(path: &Path, text: &str) -> Result<(), ()> {
                                 let _desc = li.trim_start();
                                 s.arguments.push((name.into(), no));
                             } else {
-                                error!(at: path, line: no, "Quote argument names with `backticks`");
-                                s.errors = true;
+                                warning!(at: path, line: no, "Quote argument names with `backticks`");
                             }
                         },
                         _other => {},
                     }
                 } else if let Some(_li) = comment.strip_prefix("* ") {
-                    error!(at: path, line: no, "Tab-indent line items");
-                    s.errors = true;
+                    warning!(at: path, line: no, "Tab-indent line items");
                 }
             },
             Mode::InCodeBlock if comment == "```" => s.mode = Mode::Default,
@@ -577,12 +549,20 @@ fn file_doc_comments(path: &Path, text: &str) -> Result<(), ()> {
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)]
 enum H3 {
+    // General
     Safety,
     Usage,
+
+    // Trait specific
+    Methods,
+
+    // Function specific
     Arguments,
     Panics,
     Errors,
     Returns,
+
+    // General
     Examples,
     Output,
     SeeAlso,
@@ -595,6 +575,7 @@ impl FromStr for H3 {
         match s {
             "Safety"    => Ok(H3::Safety),
             "Usage"     => Ok(H3::Usage),
+            "Methods"   => Ok(H3::Methods),
             "Arguments" => Ok(H3::Arguments),
             "Panics"    => Ok(H3::Panics),
             "Errors"    => Ok(H3::Errors),
@@ -614,6 +595,7 @@ impl H3 {
         match *self {
             H3::Safety      => "Safety",
             H3::Usage       => "Usage",
+            H3::Methods     => "Methods",
             H3::Arguments   => "Arguments",
             H3::Panics      => "Panics",
             H3::Errors      => "Errors",
