@@ -10,7 +10,7 @@ pub extern crate abistr;
 
 
 
-#[macro_use] mod macros; #[cfg(test)] use macros::*;
+#[macro_use] mod macros;
 
 /// C ABI interop types
 #[path=r"ctypes\_ctypes.rs"] pub mod ctypes;
@@ -34,17 +34,20 @@ pub mod d3d11 {
 
 
 
-#[path=r"headers\d3d9types.h\d3d9types.rs"]     mod d3d9types_h;    // d3d9 mod
-#[path=r"headers\d3d11shader.h\d3d11shader.rs"] mod d3d11shader_h;  // d3d11 mod
-#[path=r"headers\d3dcommon.h\d3dcommon.rs"]     mod d3dcommon_h;    // d3d mod
-#[path=r"headers\d3dcompiler.h\d3dcompiler.rs"] mod d3dcompiler_h;  // d3d mod
-#[path=r"headers\unknwn.h\unknwn.rs"]           mod unknwn_h;       pub use unknwn_h::*;
+mods! {
+    #[path=r"headers\d3d9types.h\d3d9types.rs"]     mod d3d9types_h;    // d3d9 mod
+    #[path=r"headers\d3d11shader.h\d3d11shader.rs"] mod d3d11shader_h;  // d3d11 mod
+    #[path=r"headers\d3dcommon.h\d3dcommon.rs"]     mod d3dcommon_h;    // d3d mod
+    #[path=r"headers\d3dcompiler.h\d3dcompiler.rs"] mod d3dcompiler_h;  // d3d mod
+    #[path=r"headers\unknwn.h\unknwn.rs"]           inl mod unknwn_h;
 
-#[path=r"traits\_traits.rs"]            mod traits;         pub use traits::*;
+    #[path=r"traits\_traits.rs"] inl mod traits;
 
-mod error_kind;                 pub use error_kind::*;
-mod error;                      pub use error::*;
-pub mod errors;                 #[doc(no_inline)] pub use errors::*;
+    inl mod error_kind;
+    inl mod error;
+    pub mod errors;
+}
+#[doc(no_inline)] pub use errors::*;
 
 #[cfg(doc)] pub mod _examples;
 #[cfg(doc)] pub mod _headers;

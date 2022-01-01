@@ -8,7 +8,7 @@
     ) => {
         #[test] fn layout() {
             use std::mem::*;
-            use $crate::offset_of;
+            use $crate::macros::offset_of;
             let thin = <$thin>::default();
             let d3d  = unsafe { zeroed::<$d3d>() };
             assert_eq!( size_of_val(&thin),  size_of_val(&d3d),  "size_of {} != {}", stringify!($thin), stringify!($d3d));
@@ -32,7 +32,7 @@
     ) => {
         #[test] fn layout() {
             use std::mem::*;
-            use $crate::offset_of;
+            use $crate::macros::offset_of;
             let thin = <$thin>::default();
             let d3d  = unsafe { zeroed::<$d3d>() };
             assert_eq!( size_of_val(&thin),  size_of_val(&d3d),  "size_of {} != {}", stringify!($thin), stringify!($d3d));
@@ -219,4 +219,12 @@ macro_rules! convert {
             fn as_raw(&self) -> *mut Self::Raw { self.0.as_ptr() }
         }
     };
+}
+
+macro_rules! mods {
+    ( $( #[$attr:meta] )* inl      mod $mod:ident ;                $($tt:tt)* ) => { $(#[$attr])*      mod $mod;                       #[allow(unused_imports)] pub use $mod::*; mods!{ $($tt)* } };
+    ( $( #[$attr:meta] )* inl      mod $mod:ident { $($body:tt)* } $($tt:tt)* ) => { $(#[$attr])*      mod $mod { mods!{ $($body)* } } #[allow(unused_imports)] pub use $mod::*; mods!{ $($tt)* } };
+    ( $( #[$attr:meta] )* $vis:vis mod $mod:ident ;                $($tt:tt)* ) => { $(#[$attr])* $vis mod $mod;                                                                 mods!{ $($tt)* } };
+    ( $( #[$attr:meta] )* $vis:vis mod $mod:ident { $($body:tt)* } $($tt:tt)* ) => { $(#[$attr])* $vis mod $mod { mods!{ $($body)* } }                                           mods!{ $($tt)* } };
+    () => {};
 }

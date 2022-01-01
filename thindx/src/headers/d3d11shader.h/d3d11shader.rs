@@ -1,34 +1,32 @@
-pub use enumerations::*;
-pub use interfaces::*;
-pub use structures::*;
+mods! {
+    inl mod enumerations {
+        inl mod shader_version_type;
+    }
 
-mod enumerations {
-    mod shader_version_type;                pub use shader_version_type::*;
-}
+    inl mod interfaces {
+        inl mod function_linking_graph;
+        inl mod function_parameter_reflection;
+        inl mod function_reflection;
+        inl mod library_reflection;
+        inl mod linker;
+        inl mod linking_node;
+        inl mod module_instance;
+        inl mod module;
+        inl mod shader_reflection;
+        inl mod shader_reflection_constant_buffer;
+        inl mod shader_reflection_type;
+        inl mod shader_reflection_variable;
+    }
 
-mod interfaces {
-    mod function_linking_graph;             pub use function_linking_graph::*;
-    mod function_parameter_reflection;      pub use function_parameter_reflection::*;
-    mod function_reflection;                pub use function_reflection::*;
-    mod library_reflection;                 pub use library_reflection::*;
-    mod linker;                             pub use linker::*;
-    mod linking_node;                       pub use linking_node::*;
-    mod module_instance;                    pub use module_instance::*;
-    mod module;                             pub use module::*;
-    mod shader_reflection;                  pub use shader_reflection::*;
-    mod shader_reflection_constant_buffer;  pub use shader_reflection_constant_buffer::*;
-    mod shader_reflection_type;             pub use shader_reflection_type::*;
-    mod shader_reflection_variable;         pub use shader_reflection_variable::*;
-}
-
-mod structures {
-    mod function_desc;                      pub use function_desc::*;
-    mod library_desc;                       pub use library_desc::*;
-    mod parameter_desc;                     pub use parameter_desc::*;
-    mod shader_buffer_desc;                 pub use shader_buffer_desc::*;
-    mod shader_desc;                        pub use shader_desc::*;
-    mod shader_input_bind_desc;             pub use shader_input_bind_desc::*;
-    mod shader_type_desc;                   pub use shader_type_desc::*;
-    mod shader_variable_desc;               pub use shader_variable_desc::*;
-    mod signature_parameter_desc;           pub use signature_parameter_desc::*;
+    inl mod structures {
+        inl mod function_desc;
+        inl mod library_desc;
+        inl mod parameter_desc;
+        inl mod shader_buffer_desc;
+        inl mod shader_desc;
+        inl mod shader_input_bind_desc;
+        inl mod shader_type_desc;
+        inl mod shader_variable_desc;
+        inl mod signature_parameter_desc;
+    }
 }
