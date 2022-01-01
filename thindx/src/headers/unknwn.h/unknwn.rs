@@ -26,3 +26,20 @@ impl AsUnknown for Unknown {
 impl<T: Deref> AsUnknown for T where T::Target : AsUnknown {
     fn as_unknown(&self) -> &Unknown { (**self).as_unknown() }
 }
+
+/// Like [std::mem::drop], but use `debug_assert_eq!` to verify the refcount is one for e.g. device lost handling purpouses.
+///
+/// This assumption may be violated by:
+/// *   Middleware acquiring refcounts
+/// *   Graphics debuggers acquiring refcounts
+/// *   ???
+//#allow_missing_argument_docs
+#[allow(dead_code)] // XXX
+pub(crate) fn drop_final(unk: impl AsUnknown) {
+    let rc = unsafe {
+        let p = unk.as_unknown().0.as_ptr();
+        (*p).AddRef();
+        (*p).Release()
+    };
+    debug_assert_eq!(1, rc, "this wasn't the final object");
+}
