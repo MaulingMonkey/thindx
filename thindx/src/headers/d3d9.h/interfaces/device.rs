@@ -729,6 +729,12 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-drawindexedprimitive)\]
     /// IDirect3DDevice9::DrawIndexedPrimitive
     ///
+    /// ### Safety
+    ///
+    /// Draw calls are unsafe as heck.  Not just the parameters, but the [`Device`]'s current state must be valid for the draw call.
+    /// Unbound resources that a shader depends on, missing index buffers for indexed draw calls... the possibilities for undefined behavior are endless.
+    /// Safe-yet-performant wrappers around these calls will likely be fed entire scenegraphs or the like, alongside validated or trusted shaders and meshes.
+    ///
     /// ### Returns
     ///
     /// *   [D3DERR::INVALIDCALL]
@@ -740,6 +746,12 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-drawindexedprimitive)\]
     /// IDirect3DDevice9::DrawIndexedPrimitive
+    ///
+    /// ### Safety
+    ///
+    /// Draw calls are unsafe as heck.  Not just the parameters, but the [`Device`]'s current state must be valid for the draw call.
+    /// Unbound resources that a shader depends on, missing index buffers for indexed draw calls... the possibilities for undefined behavior are endless.
+    /// Safe-yet-performant wrappers around these calls will likely be fed entire scenegraphs or the like, alongside validated or trusted shaders and meshes.
     ///
     /// ### Returns
     ///
@@ -753,6 +765,12 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-drawprimitive)\]
     /// IDirect3DDevice9::DrawPrimitive
     ///
+    /// ### Safety
+    ///
+    /// Draw calls are unsafe as heck.  Not just the parameters, but the [`Device`]'s current state must be valid for the draw call.
+    /// Unbound resources that a shader depends on, missing index buffers for indexed draw calls... the possibilities for undefined behavior are endless.
+    /// Safe-yet-performant wrappers around these calls will likely be fed entire scenegraphs or the like, alongside validated or trusted shaders and meshes.
+    ///
     /// ### Returns
     ///
     /// *   [D3DERR::INVALIDCALL]
@@ -764,6 +782,12 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-drawprimitiveup)\]
     /// IDirect3DDevice9::DrawPrimitiveUP
+    ///
+    /// ### Safety
+    ///
+    /// Draw calls are unsafe as heck.  Not just the parameters, but the [`Device`]'s current state must be valid for the draw call.
+    /// Unbound resources that a shader depends on, missing index buffers for indexed draw calls... the possibilities for undefined behavior are endless.
+    /// Safe-yet-performant wrappers around these calls will likely be fed entire scenegraphs or the like, alongside validated or trusted shaders and meshes.
     ///
     /// ### Returns
     ///
@@ -1707,6 +1731,11 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// IDirect3DDevice9::Reset
     ///
     /// Resets the type, size, and format of the swap chain.
+    ///
+    /// ### Safety
+    ///
+    /// *   `presentation_parameters.hDeviceWindow` must be null or a valid window
+    /// *   `presentation_parameters.*` in general probably needs certain "valid" values
     ///
     /// ### Returns
     ///

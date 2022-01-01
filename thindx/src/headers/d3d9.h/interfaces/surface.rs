@@ -125,6 +125,11 @@ pub trait IDirect3DSurface9Ext : private::Sealed {
     ///
     /// Locks a rectangle on a surface.
     ///
+    /// ### Safety
+    /// *   `rect` must be `..` or a valid subregion of the surface in question
+    /// *   `self` should be lockable in the style specified by `flags`... and not already locked?
+    /// *   `self` may need to be unlocked again before being bound, drawn, or released
+    ///
     /// ### Returns
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok([D3DLOCKED_RECT])

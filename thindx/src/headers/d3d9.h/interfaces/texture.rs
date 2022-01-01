@@ -441,6 +441,14 @@ pub trait IDirect3DCubeTexture9Ext : cube_texture::Sealed {
     ///
     /// Locks a rectangle on a cube texture resource.
     ///
+    /// ### Safety
+    ///
+    /// *   `face` must be a valid cubemap face
+    /// *   `level` must be a valid mipmap level
+    /// *   `rect` must be `..` or a valid subregion of the surface in question
+    /// *   `self` should be lockable in the style specified by `flags`... and not already locked?
+    /// *   `self` may need to be unlocked again before being bound, drawn, or released
+    ///
     /// ### Returns
     ///
     /// *   [D3DERR::INVALIDCALL]
@@ -642,6 +650,13 @@ pub trait IDirect3DTexture9Ext : texture::Sealed {
     /// IDirect3DTexture9::LockRect
     ///
     /// Locks a rectangle on a cube texture resource.
+    ///
+    /// ### Safety
+    ///
+    /// *   `level` must be a valid mipmap level
+    /// *   `rect` must be `..` or a valid subregion of the surface in question
+    /// *   `self` should be lockable in the style specified by `flags`... and not already locked?
+    /// *   `self` may need to be unlocked again before being bound, drawn, or released
     ///
     /// ### Returns
     ///
@@ -845,6 +860,13 @@ pub trait IDirect3DVolumeTexture9Ext : volume_texture::Sealed {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolumetexture9-lockbox)\]
     /// IDirect3DVolumeTexture9::LockBox
     ///
+    /// ### Safety
+    ///
+    /// *   `level` must be a valid mipmap level
+    /// *   `box_` must be `..` or a valid subregion of the volume in question
+    /// *   `self` should be lockable in the style specified by `flags`... and not already locked?
+    /// *   `self` may need to be unlocked again before being bound, drawn, or released
+    ///
     /// ### Example
     ///
     /// ```rust
@@ -871,12 +893,12 @@ pub trait IDirect3DVolumeTexture9Ext : volume_texture::Sealed {
     ///
     /// *   [D3DERR::INVALIDCALL]   If the texture belongs to [Pool::Default]
     /// *   Ok([D3DLOCKED_BOX])
-    unsafe fn lock_box_unchecked(&self, level: u32, box_: impl IntoBoxOrFull, lock: impl Into<Lock>) -> Result<D3DLOCKED_BOX, MethodError> {
+    unsafe fn lock_box_unchecked(&self, level: u32, box_: impl IntoBoxOrFull, flags: impl Into<Lock>) -> Result<D3DLOCKED_BOX, MethodError> {
         let box_    = box_.into_box();
         let box_    = box_.as_ref().map_or(null(), |b| &**b);
-        let lock    = lock.into().into();
+        let flags   = flags.into().into();
         let mut lockedbox = std::mem::zeroed::<D3DLOCKED_BOX>();
-        let hr = self.as_winapi().LockBox(level, &mut lockedbox, box_, lock);
+        let hr = self.as_winapi().LockBox(level, &mut lockedbox, box_, flags);
         MethodError::check("IDirect3DVolumeTexture9::LockBox", hr)?;
         Ok(lockedbox)
     }
