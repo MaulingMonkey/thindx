@@ -462,7 +462,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     ///
     /// Creates an index buffer.
     ///
-    /// ### Parameters
+    /// ### Arguments
     ///
     /// *   `length`            Size of the index buffer, **in bytes**.
     /// *   `usage`             Typically [Usage::None] or [Usage::Dynamic]
@@ -610,7 +610,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     ///
     /// Creates an vertex buffer.
     ///
-    /// ### Parameters
+    /// ### Arguments
     ///
     /// *   `length`            Size of the index buffer, **in bytes**.
     ///                         For FVF vertex buffers, Length must be large enough to contain at least one vertex, but it need not be a multiple of the vertex size.
@@ -1068,7 +1068,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// assert_eq!(mode.format, Format::X8R8G8B8);
     /// ```
     ///
-    /// ### Outputs
+    /// ### Output
     ///
     /// ```text
     /// DisplayMode {
