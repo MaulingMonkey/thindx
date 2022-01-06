@@ -1,7 +1,10 @@
 #![allow(dead_code)] // TODO: remove
 
 use crate::*;
-use crate::interfaces::device_draw::{IndexData, VertexStreamData};
+use crate::d3d9::*;
+use crate::d3d9_h::interfaces::device_draw::{IndexData, VertexStreamData};
+
+use abibool::bool32;
 
 use winapi::shared::d3d9types::*;
 use winapi::shared::windef::RECT;
@@ -300,7 +303,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = Device::pure();
+    /// # use thindx::doc9::*; let device = Device::pure();
     /// device.begin_scene().unwrap();
     /// // ...issue draw calls and stuff...
     /// device.end_scene().unwrap();
@@ -404,7 +407,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// * [D3DERR::DEVICELOST]
     /// * [D3DERR::INVALIDCALL]
     /// * [D3DERR::OUTOFVIDEOMEMORY]
-    /// * [D3DERR::OUTOFMEMORY]
+    /// * [E::OUTOFMEMORY]
     /// * Ok([SwapChain])
     ///
     /// ### See Also
@@ -428,13 +431,13 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     ///
     /// *   [D3DERR::INVALIDCALL]       On various invalid parameters, including the texture size being beyond the device's capabilities
     /// *   [D3DERR::OUTOFVIDEOMEMORY]
-    /// *   [D3DERR::OUTOFMEMORY]
+    /// *   [E::OUTOFMEMORY]
     /// *   Ok([CubeTexture])
     ///
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = Device::pure();
+    /// # use thindx::doc9::*; let device = Device::pure();
     /// // Create a 6 x 128x128 ARGB cubemap with no mipmaps
     /// let texture = device.create_cube_texture(128, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
     /// assert_eq!(D3DERR::INVALIDCALL, device.create_cube_texture(1 << 15, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).err());
@@ -473,7 +476,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = Device::pure();
+    /// # use thindx::doc9::*; let device = Device::pure();
     /// let tri = device.create_index_buffer(3 * 2, Usage::None, Format::Index16, Pool::Managed, ()).unwrap();
     /// ```
     ///
@@ -483,13 +486,13 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// *   [D3DERR::INVALIDCALL]       if `usage`, `format`, or `pool` is invalid
     /// *   [D3DERR::OUTOFVIDEOMEMORY]
     /// *   [D3DERR::INVALIDDATA]
-    /// *   [D3DERR::OUTOFMEMORY]
+    /// *   [E::OUTOFMEMORY]
     /// *   Ok([IndexBuffer])
     fn create_index_buffer(&self, length: u32, usage: impl Into<Usage>, format: impl Into<Format>, pool: impl Into<Pool>, shared_handle: impl SharedHandleParam) -> Result<IndexBuffer, MethodError> {
         // !0 will fail OUTOFMEMORY
         // !0/2 spammed will fail OUTOFVIDEOMEMORY
         // !0-4 spammed will "succeed", hinting at an arithmetic overflow within d3d or the driver
-        if length > MAX_BUFFER_ALLOC { return Err(MethodError("Device::create_index_buffer", D3DERR::ALLOC_OVERFLOW)); }
+        if length > MAX_BUFFER_ALLOC { return Err(MethodError("Device::create_index_buffer", THIN3D9ERR::ALLOC_OVERFLOW)); }
 
         let _ = shared_handle;
         let mut buffer = null_mut();
@@ -525,7 +528,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     ///
     /// *   [D3DERR::INVALIDCALL]
     /// *   [D3DERR::OUTOFVIDEOMEMORY]
-    /// *   [D3DERR::OUTOFMEMORY]
+    /// *   [E::OUTOFMEMORY]
     /// *   Ok([PixelShader])
     unsafe fn create_pixel_shader(&self, function: &[u32]) -> Result<PixelShader, MethodError> {
         let mut shader = null_mut();
@@ -569,7 +572,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     ///
     /// *   [D3DERR::INVALIDCALL]
     /// *   [D3DERR::OUTOFVIDEOMEMORY]
-    /// *   [D3DERR::OUTOFMEMORY]
+    /// *   [E::OUTOFMEMORY]
     /// *   Ok([StateBlock])
     fn create_state_block(&self, type_: StateBlockType) -> Result<StateBlock, MethodError> {
         let mut sb = null_mut();
@@ -587,13 +590,13 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     ///
     /// *   [D3DERR::INVALIDCALL]       On various invalid parameters, including the texture size being beyond the device's capabilities
     /// *   [D3DERR::OUTOFVIDEOMEMORY]
-    /// *   [D3DERR::OUTOFMEMORY]
+    /// *   [E::OUTOFMEMORY]
     /// *   Ok([Texture])
     ///
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = Device::pure();
+    /// # use thindx::doc9::*; let device = Device::pure();
     /// // Create a 128x128 ARGB texture with no mipmaps
     /// let texture = device.create_texture(128, 128, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
     /// assert_eq!(D3DERR::INVALIDCALL, device.create_texture(1 << 15, 1 << 15, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).err());
@@ -623,7 +626,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = Device::pure();
+    /// # use thindx::doc9::*; let device = Device::pure();
     /// let vert_size = 3 * 4; // XYZ * floats
     /// let length = 3 * vert_size; // 3 verts
     /// let tri = device.create_vertex_buffer(length, Usage::None, FVF::XYZ, Pool::Managed, ()).unwrap();
@@ -634,14 +637,14 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// *   [D3DERR::INVALIDCALL]       if `length` cannot hold at least one [FVF]-sized vertex (1 if [FVF::None])
     /// *   [D3DERR::INVALIDCALL]       if `usage` or `pool` is invalid
     /// *   [D3DERR::OUTOFVIDEOMEMORY]  if allocation failed (driver or gpu memory)
-    /// *   [D3DERR::OUTOFMEMORY]       if allocation failed (driver or d3d runtime)
-    /// *   [D3DERR::ALLOC_OVERFLOW]    if allocation rejected by thin3d9 to avoid possible UB
+    /// *   [E::OUTOFMEMORY]       if allocation failed (driver or d3d runtime)
+    /// *   [THIN3D9ERR::ALLOC_OVERFLOW]    if allocation rejected by thin3d9 to avoid possible UB
     /// *   Ok([VertexBuffer])
     fn create_vertex_buffer(&self, length: u32, usage: impl Into<Usage>, fvf: impl Into<FVF>, pool: impl Into<Pool>, _shared_handle: impl SharedHandleParam) -> Result<VertexBuffer, MethodError> {
         // !0 will fail OUTOFMEMORY
         // !0/2 spammed will fail OUTOFVIDEOMEMORY
         // !0-4 spammed will "succeed", hinting at an arithmetic overflow within d3d or the driver
-        if length > MAX_BUFFER_ALLOC { return Err(MethodError("Device::create_vertex_buffer", D3DERR::ALLOC_OVERFLOW)); }
+        if length > MAX_BUFFER_ALLOC { return Err(MethodError("Device::create_vertex_buffer", THIN3D9ERR::ALLOC_OVERFLOW)); }
 
         let mut buffer = null_mut();
         let hr = unsafe { self.as_winapi().CreateVertexBuffer(length, usage.into().into(), fvf.into().into(), pool.into().into(), &mut buffer, null_mut()) };
@@ -690,7 +693,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     ///
     /// *   [D3DERR::INVALIDCALL]
     /// *   [D3DERR::OUTOFVIDEOMEMORY]
-    /// *   [D3DERR::OUTOFMEMORY]
+    /// *   [E::OUTOFMEMORY]
     /// *   Ok([VertexShader])
     unsafe fn create_vertex_shader(&self, function: &[u32]) -> Result<VertexShader, MethodError> {
         let mut shader = null_mut();
@@ -708,13 +711,13 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     ///
     /// *   [D3DERR::INVALIDCALL]       On various invalid parameters, including the texture size being beyond the device's capabilities
     /// *   [D3DERR::OUTOFVIDEOMEMORY]
-    /// *   [D3DERR::OUTOFMEMORY]
+    /// *   [E::OUTOFMEMORY]
     /// *   Ok([VolumeTexture])
     ///
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = Device::pure();
+    /// # use thindx::doc9::*; let device = Device::pure();
     /// // Create a 32x32x32 volumetric ARGB texture with no mipmaps
     /// let texture = device.create_volume_texture(32, 32, 32, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
     /// assert_eq!(D3DERR::INVALIDCALL, device.create_volume_texture(1 << 10, 1 << 10, 1 << 10, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).err());
@@ -810,7 +813,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = Device::pure();
+    /// # use thindx::doc9::*; let device = Device::pure();
     /// device.begin_scene().unwrap();
     /// // ...issue draw calls and stuff...
     /// device.end_scene().unwrap();
@@ -879,7 +882,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = Device::test();
+    /// # use thindx::doc9::*; let device = Device::test();
     /// let available = device.get_available_texture_mem();
     /// if available >= 0xFFE0_0000 {
     ///     println!("> 4 GiB available");
@@ -926,7 +929,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = Device::test();
+    /// # use thindx::doc9::*; let device = Device::test();
     /// println!("{:?}", device.get_clip_plane(0).unwrap());
     /// ```
     ///
@@ -955,7 +958,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = Device::test();
+    /// # use thindx::doc9::*; let device = Device::test();
     /// println!("{:?}", device.get_clip_status().unwrap());
     /// ```
     ///
@@ -1038,7 +1041,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = Device::test();
+    /// # use thindx::doc9::*; let device = Device::test();
     /// let caps : Caps = device.get_device_caps().unwrap();
     /// assert_eq!(caps.DeviceType,     DevType::HAL.into());
     /// assert_eq!(caps.AdapterOrdinal, 0);
@@ -1064,7 +1067,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = Device::test();
+    /// # use thindx::doc9::*; let device = Device::test();
     /// let d3d : Direct3D = device.get_direct3d().unwrap();
     /// ```
     fn get_direct3d(&self) -> Result<Direct3D, MethodError> {
@@ -1085,7 +1088,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = Device::test();
+    /// # use thindx::doc9::*; let device = Device::test();
     /// let mode : DisplayMode = device.get_display_mode(0).unwrap();
     /// println!("{:#?}", mode);
     /// assert!(mode.width > 0);
@@ -1128,7 +1131,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = Device::test();
+    /// # use thindx::doc9::*; let device = Device::test();
     /// assert_eq!(device.get_fvf().unwrap(), FVF::None);
     /// ```
     fn get_fvf(&self) -> Result<FVF, MethodError> {
@@ -1148,7 +1151,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = Device::test();
+    /// # use thindx::doc9::*; let device = Device::test();
     /// let ramp = device.get_gamma_ramp(0);
     /// ```
     fn get_gamma_ramp(&self, swap_chain: u32) -> D3DGAMMARAMP {
@@ -1165,7 +1168,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = Device::pure();
+    /// # use thindx::doc9::*; let device = Device::pure();
     /// # let tri = device.create_index_buffer(3*2, Usage::None, Format::Index16, Pool::Default, ()).unwrap();
     /// let ib : Option<IndexBuffer> = device.get_indices().unwrap();
     /// assert!(ib.is_none(), "device has no index buffer by default");
@@ -1201,7 +1204,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = Device::test();
+    /// # use thindx::doc9::*; let device = Device::test();
     /// // Since there's no real way to clear previously set lights,
     /// // I recommend not treating untouched lights special:
     /// let light = device.get_light( 0).unwrap_or(Light::default());
@@ -1234,7 +1237,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = Device::test();
+    /// # use thindx::doc9::*; let device = Device::test();
     /// for light in [0, 1, 100, 10000, 1000000, !0].iter().copied() {
     ///     assert_eq!(D3DERR::INVALIDCALL, device.get_light_32(light));
     /// }
@@ -1273,7 +1276,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = Device::test();
+    /// # use thindx::doc9::*; let device = Device::test();
     /// // Since there's no real way to invalidate previously enabled/disabled lights,
     /// // I recommend not treating untouched lights special:
     /// let enabled = device.get_light_enable( 0).unwrap_or(false);
@@ -1308,7 +1311,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = Device::test();
+    /// # use thindx::doc9::*; let device = Device::test();
     /// for light in [0, 1, 100, 10000, 1000000, !0].iter().copied() {
     ///     assert_eq!(D3DERR::INVALIDCALL, device.get_light_enable_32(light));
     /// }
@@ -1339,7 +1342,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = Device::test();
+    /// # use thindx::doc9::*; let device = Device::test();
     /// let material = device.get_material().unwrap();
     /// ```
     fn get_material(&self) -> Result<Material, MethodError> {
@@ -1361,7 +1364,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = Device::test();
+    /// # use thindx::doc9::*; let device = Device::test();
     /// assert_eq!(device.get_npatch_mode(), 0.0);
     /// ```
     fn get_npatch_mode(&self) -> f32 {
@@ -1390,7 +1393,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = Device::test();
+    /// # use thindx::doc9::*; let device = Device::test();
     /// // XXX: No palette set, this may crash!!!
     /// // let pal = unsafe { device.get_palette_entries(0) }.unwrap();
     ///
@@ -1459,7 +1462,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = Device::pure();
+    /// # use thindx::doc9::*; let device = Device::pure();
     /// // No stream bound to start
     /// let (vb, offset, stride) = device.get_stream_source(0).unwrap();
     /// assert!(vb.is_none());
@@ -1499,7 +1502,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = Device::pure();
+    /// # use thindx::doc9::*; let device = Device::pure();
     /// assert_eq!(device.get_stream_source_freq(0).unwrap(), StreamSource::regular());
     /// assert_eq!(device.get_stream_source_freq(1).unwrap(), StreamSource::regular());
     ///
@@ -1539,7 +1542,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = Device::pure();
+    /// # use thindx::doc9::*; let device = Device::pure();
     /// // XXX: No texture set for stage 0, this may crash!!!
     /// // let texture = unsafe { device.get_texture(0) }.unwrap();
     ///
@@ -1590,7 +1593,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = Device::test();
+    /// # use thindx::doc9::*; let device = Device::test();
     /// let viewport : Viewport = device.get_viewport().unwrap();
     /// ```
     fn get_viewport(&self) -> Result<Viewport, MethodError> {
@@ -1615,7 +1618,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = Device::test();
+    /// # use thindx::doc9::*; let device = Device::test();
     /// device.light_enable(0,  true).unwrap(); // Ok
     /// device.light_enable(1,  true).unwrap(); // Ok
     /// device.light_enable(!0, true).unwrap(); // Ok (16-bit)
@@ -1646,7 +1649,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = Device::test();
+    /// # use thindx::doc9::*; let device = Device::test();
     /// unsafe {
     ///     device.light_enable_32_unchecked(0, true).unwrap();
     ///     device.light_enable_32_unchecked(0, false).unwrap();
@@ -1688,14 +1691,14 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     ///
     /// ```rust
     /// # use std::ptr::null_mut;   let hwnd = null_mut();
-    /// # use doc::*;               let device = Device::test();
+    /// # use thindx::doc9::*;               let device = Device::test();
     /// // Present the entire back buffer (should work with all swap chains, probably:)
     /// device.present(.., .., (), None).unwrap();
     /// // TODO: Handle D3DERR::DEVICEREMOVED
     ///
     /// // Or, with a SwapEffect::Copy swap chain, this should succeed (might succeed by simply ignoring the args, even for other SwapEffect s:)
     /// let hwnd = unsafe { SafeHWND::assert(&hwnd) };
-    /// match device.present((0,0)..(100,100), Rect::from((0,0)..(100,100)), hwnd, None).map_err(|e| e.d3derr()) {
+    /// match device.present((0,0)..(100,100), Rect::from((0,0)..(100,100)), hwnd, None).map_err(|e| e.kind()) {
     ///     Ok(()) => {}, // Huzzah!
     ///     Err(D3DERR::DEVICEREMOVED   ) => { /* oooh, a removable GPU?  Nifty!  Might switch to the laptop's built-in Device (might have different caps!) */ },
     ///     Err(D3DERR::DEVICELOST      ) => { /* switching fullscreen modes? GPU driver crashed? might prompt the user before recreating the device to avoid hang loops */ },
@@ -1714,10 +1717,10 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
         let dirty_region    = match dirty_region {
             None => null::<RGNDATA>(),
             Some(dr) => {
-                if dr.rdh.dwSize as usize   != std::mem::size_of::<RGNDATAHEADER>() { return Err(MethodError("IDirect3DDevice9Ext::present", D3DERR::INVALID_STRUCT_FIELD)); }
-                if dr.rdh.iType             != RDH_RECTANGLES                       { return Err(MethodError("IDirect3DDevice9Ext::present", D3DERR::INVALID_STRUCT_FIELD)); }
-                if dr.rdh.nCount as usize   > dr.buffer.len()                       { return Err(MethodError("IDirect3DDevice9Ext::present", D3DERR::INVALID_STRUCT_FIELD)); }
-                if dr.rdh.nRgnSize as usize > std::mem::size_of_val(dr)             { return Err(MethodError("IDirect3DDevice9Ext::present", D3DERR::INVALID_STRUCT_FIELD)); }
+                if dr.rdh.dwSize as usize   != std::mem::size_of::<RGNDATAHEADER>() { return Err(MethodError("IDirect3DDevice9Ext::present", THIN3D9ERR::INVALID_STRUCT_FIELD)); }
+                if dr.rdh.iType             != RDH_RECTANGLES                       { return Err(MethodError("IDirect3DDevice9Ext::present", THIN3D9ERR::INVALID_STRUCT_FIELD)); }
+                if dr.rdh.nCount as usize   > dr.buffer.len()                       { return Err(MethodError("IDirect3DDevice9Ext::present", THIN3D9ERR::INVALID_STRUCT_FIELD)); }
+                if dr.rdh.nRgnSize as usize > std::mem::size_of_val(dr)             { return Err(MethodError("IDirect3DDevice9Ext::present", THIN3D9ERR::INVALID_STRUCT_FIELD)); }
                 let dr : *const RgnData = dr;
                 dr.cast()
             },
@@ -1773,7 +1776,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = Device::test();
+    /// # use thindx::doc9::*; let device = Device::test();
     /// device.set_fvf(FVF::None).unwrap();
     /// device.set_fvf(FVF::XYZ).unwrap();
     /// ```
@@ -1801,7 +1804,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust,no_run
-    /// # use doc::*; let device = Device::test();
+    /// # use thindx::doc9::*; let device = Device::test();
     /// let ramp = device.get_gamma_ramp(0);
     /// // ...modify ramp?..
     /// device.set_gamma_ramp(0, SGR::NoCalibration, &ramp);
@@ -1820,7 +1823,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let [device, device2] = Device::pure2();
+    /// # use thindx::doc9::*; let [device, device2] = Device::pure2();
     /// let tri = device.create_index_buffer(3*2, Usage::None, Format::Index16, Pool::Default, ()).unwrap();
     /// // ...initialize tri...
     ///
@@ -1828,13 +1831,13 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// device.set_indices(Some(&tri)).unwrap();    // bind the index buffer
     /// device.set_indices(None).unwrap();          // unbind the index buffer
     ///
-    /// assert_eq!(device2.set_indices(&tri), D3DERR::DEVICE_MISMATCH);
+    /// assert_eq!(device2.set_indices(&tri), THIN3D9ERR::DEVICE_MISMATCH);
     /// ```
     ///
     /// ### Returns
     ///
     /// *   [D3DERR::INVALIDCALL]       (perhaps only on an invalid [IndexBuffer] that thin3d9's API prevents?)
-    /// *   [D3DERR::DEVICE_MISMATCH]   If the [IndexBuffer] was created with a different [Device].
+    /// *   [THIN3D9ERR::DEVICE_MISMATCH]   If the [IndexBuffer] was created with a different [Device].
     /// *   Ok(())
     fn set_indices<'ib>(&self, index_data: impl Into<Option<&'ib IndexBuffer>>) -> Result<(), MethodError> {
         let ptr = match index_data.into() {
@@ -1861,7 +1864,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = Device::test();
+    /// # use thindx::doc9::*; let device = Device::test();
     /// let mut light = Light::default();
     /// light.Type = LightType::Point.into();
     /// // ...
@@ -1912,7 +1915,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = Device::test();
+    /// # use thindx::doc9::*; let device = Device::test();
     /// let mut light = Light::default();
     /// light.Type = LightType::Point.into();
     /// // ...
@@ -1940,7 +1943,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = Device::test();
+    /// # use thindx::doc9::*; let device = Device::test();
     /// let material = Material {
     ///     diffuse: ColorValue::default(),
     ///     .. Material::default()
@@ -1962,7 +1965,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = Device::test();
+    /// # use thindx::doc9::*; let device = Device::test();
     /// device.set_npatch_mode(0.0).unwrap();
     /// device.set_npatch_mode(1.0).unwrap();
     /// device.set_npatch_mode(9001.0).unwrap();
@@ -1985,7 +1988,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = Device::test();
+    /// # use thindx::doc9::*; let device = Device::test();
     /// let pal = [Color::argb(0xFF112233); 256];
     /// device.set_palette_entries(0, &pal).unwrap();
     /// ```
@@ -2121,20 +2124,20 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let [device, device2] = Device::pure2();
+    /// # use thindx::doc9::*; let [device, device2] = Device::pure2();
     /// let tri = device.create_vertex_buffer(3*4*3, Usage::None, FVF::XYZ, Pool::Default, ()).unwrap();
     /// // ...initialize tri...
     /// device.set_stream_source(0, &tri,       0, 4*3).unwrap(); // bind the vertex buffer
     /// device.set_stream_source(0, Some(&tri), 0, 4*3).unwrap(); // bind the vertex buffer
     /// device.set_stream_source(0, None,       0, 0  ).unwrap(); // unbind the vertex buffer
     ///
-    /// assert_eq!(device2.set_stream_source(0, &tri, 0, 4*3), D3DERR::DEVICE_MISMATCH);
+    /// assert_eq!(device2.set_stream_source(0, &tri, 0, 4*3), THIN3D9ERR::DEVICE_MISMATCH);
     /// ```
     ///
     /// ### Returns
     ///
     /// *   [D3DERR::INVALIDCALL]       if the [VertexBuffer] belongs to another device?
-    /// *   [D3DERR::DEVICE_MISMATCH]   If the [IndexBuffer] was created with a different [Device].
+    /// *   [THIN3D9ERR::DEVICE_MISMATCH]   If the [IndexBuffer] was created with a different [Device].
     /// *   Ok(`()`)
     fn set_stream_source<'b>(&self, stream_number: u32, stream_data: impl Into<Option<&'b VertexBuffer>>, offset_in_bytes: u32, stride: u32) -> Result<(), MethodError> {
         let stream_data = match stream_data.into() {
@@ -2155,7 +2158,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = Device::pure();
+    /// # use thindx::doc9::*; let device = Device::pure();
     /// // Setup instanced rendering, 100 instances, with:
     /// // shared geometry in stream 0, repeated 100 times:
     /// device.set_stream_source_freq(0, StreamSource::indexed_data(100)).unwrap();
@@ -2194,7 +2197,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = Device::pure();
+    /// # use thindx::doc9::*; let device = Device::pure();
     /// let texture = device.create_texture(128, 128, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
     ///
     /// unsafe{device.set_texture(0,      &texture  )}.unwrap();
@@ -2328,7 +2331,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = Device::test();
+    /// # use thindx::doc9::*; let device = Device::test();
     /// device.set_viewport(Viewport{ x: 0, y: 0, width: 100, height: 100, min_z: 0.0, max_z: 1.0 }).unwrap();
     /// ```
     fn set_viewport(&self, viewport: impl Into<Viewport>) -> Result<(), MethodError> {

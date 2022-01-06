@@ -1,9 +1,15 @@
 //! [ErrorKind] values
+//!
+//! ### See Also
+//! *   [D3DERR](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3derr)
+//! *   <https://www.hresult.info/>
 
 #![allow(overflowing_literals)] // ErrorKind is signed for some reason
 #![allow(non_snake_case)]
+// TODO: Cleanup formatting etc.
 
 use crate::*;
+#[allow(unused_imports)] use crate::d3d9::*;
 use winapi::shared::winerror::*;
 
 // https://docs.microsoft.com/en-us/windows/win32/direct3d11/d3d11-graphics-reference-returnvalues
@@ -26,8 +32,33 @@ use winapi::shared::winerror::*;
 //  0x899                       Direct2D
 // 0xA73D                       Thin3D
 
-/// `0xA73D....` • ThinDX [ErrorKind]s
-pub mod THINERR {
+/// `0xA73D9...` • **T**hinDX **D**irect**3D9** [ErrorKind]s
+///
+/// * `0xA.......`  - **S**everity and **C**ustomer bits for [HRESULT](https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-erref/0642cb2f-2075-4469-918c-4441e69c548a)s
+/// * `0x.73D....`  - **T**hin **3D** error codes
+/// * `0x....9001`  - D3D**9** error codes
+pub mod THIN3D9ERR {
+    use super::*;
+
+    /// `0xA73D9001`    Large slice passed to D3D API that only accepts a 32-bit length.
+    pub const SLICE_OVERFLOW    : ErrorKind = ErrorKind(0xA73D9001);
+
+    /// `0xA73D9002`    Resource belonging to one [Device] was passed to a different [Device].  To avoid undefined behavior, Direct3D was not called.
+    pub const DEVICE_MISMATCH   : ErrorKind = ErrorKind(0xA73D9002);
+
+    /// `0xA73D9003`    Large allocation was requested.  thin3d9 prevented the request to avoid arithmetic overflows inside of Direct3D / drivers which could lead to undefined behavior.
+    pub const ALLOC_OVERFLOW    : ErrorKind = ErrorKind(0xA73D9003);
+
+    /// `0xA73D9004`    A structure contained some kind of field such as `dwSize` or `iType` that was invalid.
+    pub const INVALID_STRUCT_FIELD : ErrorKind = ErrorKind(0xA73D9004);
+}
+
+/// `0xA73DC...` • **T**hinDX **D**irect**3D** **C**ompiler [ErrorKind]s
+///
+/// * `0xA.......`  - **S**everity and **C**ustomer bits for [HRESULT](https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-erref/0642cb2f-2075-4469-918c-4441e69c548a)s
+/// * `0x.73D....`  - **T**hin **3D** error codes
+/// * `0x....C001`  - **C**ompiler error codes
+pub mod THINERR { // TODO: rename to THIN3DERR
     use super::*;
 
     /// `0xA73DC001`    This version of `d3dcompiler_##.dll` doesn't support this fn
@@ -65,18 +96,172 @@ pub mod D3D11_ERROR {
     pub const DEFERRED_CONTEXT_MAP_WITHOUT_INITIAL_DISCARD  : ErrorKind = ErrorKind(D3D11_ERROR_DEFERRED_CONTEXT_MAP_WITHOUT_INITIAL_DISCARD);
 }
 
-const D3DERR_INVALIDCALL        : HRESULT = MAKE_D3DHRESULT(2156);
-const D3DERR_WASSTILLDRAWING    : HRESULT = MAKE_D3DHRESULT(540);
-
 /// `0x8876....` • Direct3D / Direct3D9 [ErrorKind]s
 pub mod D3DERR {
     use super::*;
 
-    /// The method call is invalid. For example, a method's parameter may not be a valid pointer.
-    pub const INVALIDCALL               : ErrorKind = ErrorKind(D3DERR_INVALIDCALL);
-
     /// The previous blit operation that is transferring information to or from this surface is incomplete.
-    pub const WASSTILLDRAWING           : ErrorKind = ErrorKind(D3DERR_WASSTILLDRAWING);
+    pub const WASSTILLDRAWING           : ErrorKind = MAKE_D3DHRESULT(540);
+
+    /// The pixel format of the texture surface is not valid.
+    pub const WRONGTEXTUREFORMAT        : ErrorKind = MAKE_D3DHRESULT(2072);
+
+    /// The device does not support a specified texture-blending operation for color values.
+    pub const UNSUPPORTEDCOLOROPERATION : ErrorKind = MAKE_D3DHRESULT(2073);
+
+    /// The device does not support a specified texture-blending argument for color values.
+    pub const UNSUPPORTEDCOLORARG       : ErrorKind = MAKE_D3DHRESULT(2074);
+
+    /// The device does not support a specified texture-blending operation for the alpha channel.
+    pub const UNSUPPORTEDALPHAOPERATION : ErrorKind = MAKE_D3DHRESULT(2075);
+
+    /// The device does not support a specified texture-blending argument for the alpha channel.
+    pub const UNSUPPORTEDALPHAARG       : ErrorKind = MAKE_D3DHRESULT(2076);
+
+    /// The application is requesting more texture-filtering operations than the device supports.
+    pub const TOOMANYOPERATIONS         : ErrorKind = MAKE_D3DHRESULT(2077);
+
+    /// The current texture filters cannot be used together.
+    pub const CONFLICTINGTEXTUREFILTER  : ErrorKind = MAKE_D3DHRESULT(2078);
+
+    /// The device does not support the specified texture factor value. Not used; provided only to support older drivers.
+    pub const UNSUPPORTEDFACTORVALUE    : ErrorKind = MAKE_D3DHRESULT(2079);
+
+    /// The currently set render states cannot be used together.
+    pub const CONFLICTINGRENDERSTATE    : ErrorKind = MAKE_D3DHRESULT(2081);
+
+    /// The device does not support the specified texture filter.
+    pub const UNSUPPORTEDTEXTUREFILTER  : ErrorKind = MAKE_D3DHRESULT(2082);
+
+    /// The current textures cannot be used simultaneously.
+    pub const CONFLICTINGTEXTUREPALETTE : ErrorKind = MAKE_D3DHRESULT(2086);
+
+    /// Internal driver error. Applications should destroy and recreate the device when receiving this error.
+    /// For hints on debugging this error, see [Driver Internal Errors (Direct3D 9)](https://docs.microsoft.com/en-us/windows/win32/direct3d9/driver-internal-errors).
+    pub const DRIVERINTERNALERROR       : ErrorKind = MAKE_D3DHRESULT(2087);
+
+    /// The requested item was not found.
+    pub const NOTFOUND                  : ErrorKind = MAKE_D3DHRESULT(2150);
+
+    /// There is more data available than the specified buffer size can hold.
+    pub const MOREDATA                  : ErrorKind = MAKE_D3DHRESULT(2151);
+
+    /// The device has been lost but cannot be reset at this time. Therefore, rendering is not possible.
+    /// A Direct3D device object other than the one that returned this code caused the hardware adapter to be reset by the OS.
+    /// Delete all video memory objects (surfaces, textures, state blocks) and call Reset() to return the device to a default state.
+    /// If the application continues rendering without a reset, the rendering calls will succeed.
+    pub const DEVICELOST                : ErrorKind = MAKE_D3DHRESULT(2152);
+
+    /// The device has been lost but can be reset at this time.
+    pub const DEVICENOTRESET            : ErrorKind = MAKE_D3DHRESULT(2153);
+
+    /// This device does not support the queried technique.
+    pub const NOTAVAILABLE              : ErrorKind = MAKE_D3DHRESULT(2154);
+
+    /// Direct3D does not have enough display memory to perform the operation.
+    /// The device is using more resources in a single scene than can fit simultaneously into video memory.
+    /// [Present], [PresentEx], or [CheckDeviceState] can return this error.
+    /// Recovery is similar to D3DERR_DEVICEHUNG, though the application may want to reduce its per-frame memory usage as well to avoid having the error recur.
+    ///
+    /// [Present]:          https://docs.microsoft.com/en-us/windows/desktop/api/d3d9/nf-d3d9-idirect3ddevice9-present
+    /// [PresentEx]:        https://docs.microsoft.com/en-us/windows/desktop/api/d3d9/nf-d3d9-idirect3ddevice9ex-presentex
+    /// [CheckDeviceState]: https://docs.microsoft.com/en-us/windows/desktop/api/d3d9/nf-d3d9-idirect3ddevice9ex-checkdevicestate
+    pub const OUTOFVIDEOMEMORY          : ErrorKind = MAKE_D3DHRESULT(380);
+
+    /// The requested device type is not valid.
+    pub const INVALIDDEVICE             : ErrorKind = MAKE_D3DHRESULT(2155);
+
+    /// The method call is invalid. For example, a method's parameter may not be a valid pointer.
+    pub const INVALIDCALL               : ErrorKind = MAKE_D3DHRESULT(2156);
+
+    /// Not used.
+    pub const DRIVERINVALIDCALL         : ErrorKind = MAKE_D3DHRESULT(2157);
+
+
+
+    // Direct3D 9Ex
+
+    /// The hardware adapter has been removed.
+    /// Application must destroy the device, do enumeration of adapters and create another Direct3D device.
+    /// If application continues rendering without calling Reset, the rendering calls will succeed.
+    ///
+    /// Applies to Direct3D 9Ex only.
+    pub const DEVICEREMOVED                 : ErrorKind = MAKE_D3DHRESULT(2160);
+
+    /// The device that returned this code caused the hardware adapter to be reset by the OS.
+    /// Most applications should destroy the device and quit.
+    /// Applications that must continue should destroy all video memory objects (surfaces, textures, state blocks etc) and call Reset() to put the device in a default state.
+    /// If the application then continues rendering in the same way, the device will return to this state.
+    ///
+    /// Applies to Direct3D 9Ex only.
+    pub const DEVICEHUNG                    : ErrorKind = MAKE_D3DHRESULT(2164);
+
+    /// The device does not support overlay for the specified size or display mode.
+    ///
+    /// Direct3D 9Ex under Windows 7 only.
+    pub const UNSUPPORTEDOVERLAY            : ErrorKind = MAKE_D3DHRESULT(2171);
+
+    /// The device does not support overlay for the specified surface format.
+    ///
+    /// Direct3D 9Ex under Windows 7 only.
+    pub const UNSUPPORTEDOVERLAYFORMAT      : ErrorKind = MAKE_D3DHRESULT(2172);
+
+    /// The specified content cannot be protected.
+    ///
+    /// Direct3D 9Ex under Windows 7 only.
+    pub const CANNOTPROTECTCONTENT          : ErrorKind = MAKE_D3DHRESULT(2173);
+
+    /// The specified cryptographic algorithm is not supported.
+    ///
+    /// Direct3D 9Ex under Windows 7 only.
+    pub const UNSUPPORTEDCRYPTO             : ErrorKind = MAKE_D3DHRESULT(2174);
+
+    /// The present statistics have no orderly sequence.
+    ///
+    /// Direct3D 9Ex under Windows 7 only.
+    pub const PRESENT_STATISTICS_DISJOINT   : ErrorKind = MAKE_D3DHRESULT(2180);
+
+
+
+    // Undocumented / poorly documented semi-internal errors
+
+    /// The command was unparsed.
+    pub const COMMAND_UNPARSED          : ErrorKind = ErrorKind(0x88760BB8);
+}
+
+/// [D3DXERR_*](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxerr) constants associated with the D3DX utility library (that D3D itself might sometimes use)
+pub mod D3DXERR {
+    use super::*;
+
+    // https://github.com/apitrace/dxsdk/blob/master/Include/d3dx9.h
+
+    /// The index buffer cannot be modified.
+    pub const CANNOTMODIFYINDEXBUFFER   : ErrorKind = MAKE_DDHRESULT(2900);
+
+    /// The mesh is invalid.
+    pub const INVALIDMESH               : ErrorKind = MAKE_DDHRESULT(2901);
+
+    /// Attribute sort (D3DXMESHOPT_ATTRSORT) is not supported as an optimization technique.
+    pub const CANNOTATTRSORT            : ErrorKind = MAKE_DDHRESULT(2902);
+
+    /// Skinning is not supported.
+    pub const SKINNINGNOTSUPPORTED      : ErrorKind = MAKE_DDHRESULT(2903);
+
+    /// Too many influences specified.
+    pub const TOOMANYINFLUENCES         : ErrorKind = MAKE_DDHRESULT(2904);
+
+    /// The data is invalid.
+    pub const INVALIDDATA               : ErrorKind = MAKE_DDHRESULT(2905);
+
+    /// The mesh has no data.
+    pub const LOADEDMESHASNODATA        : ErrorKind = MAKE_DDHRESULT(2906);
+
+    /// A fragment with that name already exists.
+    pub const DUPLICATENAMEDFRAGMENT    : ErrorKind = MAKE_DDHRESULT(2907);
+
+    /// The last item cannot be deleted.
+    pub const CANNOTREMOVELASTITEM      : ErrorKind = MAKE_DDHRESULT(2908);
+
 }
 
 /// `0x887A....` • DXGI [ErrorKind]s
@@ -92,6 +277,8 @@ pub mod DXGI_ERROR {
 
 /// `0x8000....` • General [ErrorKind]s<br>
 /// `0x8007....`
+///
+/// Errors that aren't part of the D3DERR_\* family, but might still be returned by DirectX API calls.
 pub mod E {
     use super::*;
 
@@ -109,10 +296,12 @@ pub mod E {
 
     /// Access is denied.
     pub const ACCESSDENIED              : ErrorKind = ErrorKind(E_ACCESSDENIED);
+
+    /// No such interface supported.
+    pub const NOINTERFACE               : ErrorKind = ErrorKind(E_NOINTERFACE);
 }
 
-/// `0x8000....` • General [ErrorKind]s<br>
-/// `0x8007....`
+/// `0x0000....` • Non-hresult [ErrorKind]s
 pub mod ERROR {
     use super::*;
 
@@ -129,7 +318,8 @@ pub mod ERROR {
     pub const FILE_EXISTS               : ErrorKind = ErrorKind(ERROR_FILE_EXISTS as _);
 }
 
-/// `0x0000....` • Success "[ErrorKind]"s
+/// `0x0000....` • Success "[ErrorKind]"s<br>
+/// `0x0876....`
 pub mod S {
     use super::*;
 
@@ -138,13 +328,53 @@ pub mod S {
 
     /// Alternate success value, indicating a successful but nonstandard completion (the precise meaning depends on context).
     pub const FALSE                     : ErrorKind = ErrorKind(S_FALSE);
+
+    /// At least one allocation that comprises the resources is on disk.
+    ///
+    /// Direct3D 9Ex only.
+    pub const NOT_RESIDENT                : ErrorKind = MAKE_D3DSTATUS(2165);
+
+    /// No allocations that comprise the resources are on disk. However, at least one allocation is not in GPU-accessible memory.
+    ///
+    /// Direct3D 9Ex only.
+    pub const RESIDENT_IN_SHARED_MEMORY   : ErrorKind = MAKE_D3DSTATUS(2166);
+
+    /// The desktop display mode has been changed.
+    /// The application can continue rendering, but there might be color conversion/stretching.
+    /// Pick a back buffer format similar to the current display mode, and call Reset to recreate the swap chains.
+    /// The device will leave this state after a Reset is called.
+    ///
+    /// Direct3D 9Ex only.
+    pub const PRESENT_MODE_CHANGED        : ErrorKind = MAKE_D3DSTATUS(2167);
+
+    /// The presentation area is occluded.
+    /// Occlusion means that the presentation window is minimized or another device entered the fullscreen mode on the same monitor as the presentation window and the presentation window is completely on that monitor.
+    /// Occlusion will not occur if the client area is covered by another Window.
+    ///
+    /// Occluded applications can continue rendering and all calls will succeed, but the occluded presentation window will not be updated.
+    /// Preferably the application should stop rendering to the presentation window using the device and keep calling CheckDeviceState until S_OK or S_PRESENT_MODE_CHANGED returns.
+    ///
+    /// Direct3D 9Ex only.
+    pub const PRESENT_OCCLUDED            : ErrorKind = MAKE_D3DSTATUS(2168);
 }
 
+/// `0x0876....` • Success "[ErrorKind]"s
+pub mod D3D {
+    use super::*;
+
+    /// No error occurred.
+    pub const OK            : ErrorKind = ErrorKind(0);
+
+    /// This is a success code.
+    /// However, the autogeneration of mipmaps is not supported for this format.
+    /// This means that resource creation will succeed but the mipmap levels will not be automatically generated.
+    pub const OK_NOAUTOGEN  : ErrorKind = MAKE_D3DSTATUS(2159);
+}
 
 
 // d3d9helper.h
 const _FACD3D : u32 = 0x876;
-const fn MAKE_D3DHRESULT(code: u32) -> HRESULT { MAKE_HRESULT(1, _FACD3D, code) }
-//const fn MAKE_DDHRESULT(code: u32)  -> HRESULT { MAKE_HRESULT(1, _FACD3D, code) } // Yes, _FACD3D is the same
-//const fn MAKE_D3DSTATUS (code: u32) -> HRESULT { MAKE_HRESULT(0, _FACD3D, code) }
-const fn MAKE_HRESULT(sev: u32, fac: u32, code: u32) -> HRESULT { (sev << 31 | fac << 16 | code) as HRESULT }
+const fn MAKE_D3DHRESULT(code: u32) -> ErrorKind { MAKE_HRESULT(1, _FACD3D, code) }
+const fn MAKE_DDHRESULT(code: u32)  -> ErrorKind { MAKE_HRESULT(1, _FACD3D, code) } // Yes, _FACD3D is the same
+const fn MAKE_D3DSTATUS (code: u32) -> ErrorKind { MAKE_HRESULT(0, _FACD3D, code) }
+const fn MAKE_HRESULT(sev: u32, fac: u32, code: u32) -> ErrorKind { ErrorKind((sev << 31 | fac << 16 | code) as _) }

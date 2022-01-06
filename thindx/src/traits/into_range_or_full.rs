@@ -1,9 +1,10 @@
-use crate::*;
+use crate::d3d::{Box, Rect};
 
 use std::ops::{Range, RangeFull};
 
 
 
+/// [`Range`] or [`..`](RangeFull)
 pub trait IntoRangeOrFull<T> {
     /// ### Returns
     ///
@@ -12,6 +13,7 @@ pub trait IntoRangeOrFull<T> {
     fn into_range(self) -> Option<Range<T>>;
 }
 
+/// [`Rect`] or [`..`](RangeFull)
 pub trait IntoRectOrFull {
     /// ### Returns
     ///
@@ -20,6 +22,7 @@ pub trait IntoRectOrFull {
     fn into_rect(self) -> Option<Rect>;
 }
 
+/// [`Box`] or [`..`](RangeFull)
 pub trait IntoBoxOrFull {
     /// ### Returns
     ///

@@ -1,9 +1,11 @@
-#![cfg(feature = "9ex")]
+#![cfg_attr(not(feature = "9ex"), allow(unused_imports))]
 
 use crate::*;
+use crate::d3d9::*;
 
 use winapi::shared::d3d9::Direct3DCreate9Ex;
 use winapi::shared::d3d9types::*;
+use winapi::shared::windef::HWND;
 
 use std::convert::TryInto;
 use std::ptr::*;
@@ -40,6 +42,7 @@ pub struct Direct3DEx(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3D9Ex>);
 /// [GetAdapterLUID]:           https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9ex-getadapterluid
 /// [GetAdapterModeCountEx]:    https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9ex-getadaptermodecountex
 ///
+#[cfg(feature = "9ex")]
 pub trait IDirect3D9ExExt : private::Sealed {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-direct3dcreate9ex)\]
     /// Direct3DCreate9Ex
@@ -61,7 +64,7 @@ pub trait IDirect3D9ExExt : private::Sealed {
         let mut d3d9ex = null_mut();
         let hr = Direct3DCreate9Ex(sdk_version.into(), &mut d3d9ex);
         MethodError::check("Direct3DCreate9Ex", hr)?;
-        Ok(Self::from(Rc::from_raw(d3d9ex)))
+        Ok(Self::from(mcom::Rc::from_raw(d3d9ex)))
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9ex-createdeviceex)\]
@@ -136,16 +139,16 @@ pub trait IDirect3D9ExExt : private::Sealed {
     }
 }
 
-impl<T: private::Sealed> IDirect3D9ExExt for T {}
+#[cfg(feature = "9ex")] impl<T: private::Sealed> IDirect3D9ExExt for T {}
 
-mod private {
+#[cfg(feature = "9ex")] mod private {
     use winapi::shared::d3d9::IDirect3D9Ex;
     pub unsafe trait Sealed : From<mcom::Rc<IDirect3D9Ex>>  { fn as_winapi(&self) -> &IDirect3D9Ex; }
     unsafe impl Sealed for mcom::Rc<IDirect3D9Ex>           { fn as_winapi(&self) -> &IDirect3D9Ex { &**self } }
     unsafe impl Sealed for super::Direct3DEx                { fn as_winapi(&self) -> &IDirect3D9Ex { &*self.0 } }
 }
 
-#[test] fn create() {
+#[cfg(feature = "9ex")] #[test] fn create() {
     use winapi::shared::d3d9::D3D_SDK_VERSION;
     unsafe {
         let _ = Direct3DEx::create(SdkVersion::default().with_debug_disabled()).unwrap();

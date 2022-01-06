@@ -1,6 +1,6 @@
 #![windows_subsystem = "windows"]
 
-use thin3d9::*;
+use thindx::d3d9::*;
 
 use raw_window_handle::*;
 use raw_window_handle::windows::*;
@@ -47,7 +47,7 @@ fn main() {
     };
 
     let behavior =
-        Create::DisablePrintScreen |
+        // Create::DisablePrintScreen | // d3d9ex
         Create::FpuPreserve |
         Create::HardwareVertexProcessing |
         Create::NoWindowChanges;

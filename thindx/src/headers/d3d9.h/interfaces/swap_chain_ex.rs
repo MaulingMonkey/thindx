@@ -1,6 +1,7 @@
-#![cfg(feature = "9ex")]
+#![cfg_attr(not(feature = "9ex"), allow(unused_imports))]
 
-use super::*;
+use crate::*;
+use crate::d3d9::*;
 
 use winapi::shared::d3d9::*;
 use winapi::shared::minwindef::UINT;
@@ -10,6 +11,7 @@ use winapi::shared::minwindef::UINT;
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dswapchain9ex)\]
 /// (extends [SwapChain])
 /// Adds more querying options.
+#[cfg(feature = "9ex")]
 #[derive(Clone)] #[repr(transparent)]
 pub struct SwapChainEx(pub(crate) mcom::Rc<IDirect3DSwapChain9Ex>);
 
@@ -28,6 +30,7 @@ pub struct SwapChainEx(pub(crate) mcom::Rc<IDirect3DSwapChain9Ex>);
 /// [GetLastPresentCount]:  https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9ex-getlastpresentcount
 /// [GetPresentStatistics]: https://docs.microsoft.com/en-us/previous-versions/windows/desktop/legacy/bb205901(v=vs.85)
 ///
+#[cfg(feature = "9ex")]
 pub trait IDirect3DSwapChain9ExExt : private::Sealed {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9ex-getdisplaymodeex)\]
     /// IDirect3DSwapChain9Ex::GetDisplayModeEx
@@ -64,10 +67,10 @@ pub trait IDirect3DSwapChain9ExExt : private::Sealed {
     }
 }
 
-impl IDirect3DSwapChain9ExExt for mcom::Rc<IDirect3DSwapChain9Ex>   {}
-impl IDirect3DSwapChain9ExExt for super::SwapChainEx                {}
+#[cfg(feature = "9ex")] impl IDirect3DSwapChain9ExExt for mcom::Rc<IDirect3DSwapChain9Ex>   {}
+#[cfg(feature = "9ex")] impl IDirect3DSwapChain9ExExt for super::SwapChainEx                {}
 
-mod private {
+#[cfg(feature = "9ex")] mod private {
     use winapi::shared::d3d9::IDirect3DSwapChain9Ex;
     pub unsafe trait Sealed                                 { fn as_winapi(&self) -> &IDirect3DSwapChain9Ex; }
     unsafe impl Sealed for mcom::Rc<IDirect3DSwapChain9Ex>  { fn as_winapi(&self) -> &IDirect3DSwapChain9Ex { &**self } }

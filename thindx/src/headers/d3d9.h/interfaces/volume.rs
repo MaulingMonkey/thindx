@@ -1,4 +1,5 @@
 use crate::*;
+use crate::d3d9::*;
 
 use winapi::Interface;
 use winapi::shared::d3d9types::*;
@@ -118,7 +119,7 @@ pub trait IDirect3DVolume9Ext : private::Sealed {
     /// *   [D3DERR::NOTFOUND]
     /// *   Ok(`read_slice`)
     fn get_private_data_inplace<'s>(&self, guid: &GUID, data: &'s mut [u8]) -> Result<&'s [u8], MethodError> {
-        let mut n : u32 = data.len().try_into().map_err(|_| MethodError("Resource::get_private_data_inplace", D3DERR::SLICE_OVERFLOW))?;
+        let mut n : u32 = data.len().try_into().map_err(|_| MethodError("Resource::get_private_data_inplace", THIN3D9ERR::SLICE_OVERFLOW))?;
         let hr = unsafe { self.as_winapi().GetPrivateData(guid, data.as_mut_ptr().cast(), &mut n) };
         MethodError::check("IDirect3DResource9::GetPrivateData", hr)?;
         Ok(&data[..(n as usize)])
@@ -130,10 +131,10 @@ pub trait IDirect3DVolume9Ext : private::Sealed {
     /// ### Returns
     ///
     /// *   [D3DERR::INVALIDCALL]
-    /// *   [D3DERR::OUTOFMEMORY]
+    /// *   [E::OUTOFMEMORY]
     /// *   Ok(`()`)
     fn set_private_data(&self, guid: &GUID, data: &[u8]) -> Result<(), MethodError> {
-        let n : u32 = data.len().try_into().map_err(|_| MethodError("Resource::set_private_data", D3DERR::SLICE_OVERFLOW))?;
+        let n : u32 = data.len().try_into().map_err(|_| MethodError("Resource::set_private_data", THIN3D9ERR::SLICE_OVERFLOW))?;
         let hr = unsafe { self.as_winapi().SetPrivateData(guid, data.as_ptr().cast(), n, 0) };
         MethodError::check("IDirect3DResource9::SetPrivateData", hr)
     }

@@ -1,4 +1,5 @@
-use crate::*;
+use crate::MethodError;
+use crate::d3d9::*;
 
 use std::ops::*;
 

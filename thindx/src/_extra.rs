@@ -1,6 +1,7 @@
 use crate::*;
+use crate::d3d9::*;
 
-use winstr::bstr;
+use abistr::cstr16 as wcstr;
 
 use winapi::shared::d3d9caps::*;
 use winapi::shared::d3d9types::*;
@@ -24,14 +25,14 @@ pub fn create_window(title: &str) -> HWND {
             lpfnWndProc:    Some(DefWindowProcW),
             hInstance:      hinstance,
             hCursor:        hcursor,
-            lpszClassName:  bstr!("Thin3D9Extra").as_lpcwstr(),
+            lpszClassName:  wcstr!("Thin3D9Extra").as_ptr(),
             .. std::mem::zeroed()
         };
         RegisterClassW(&wc); // might fail if previously registered
-    
+
         let hwnd = CreateWindowExW(
             0,
-            bstr!("Thin3D9Extra").as_lpcwstr(),
+            wcstr!("Thin3D9Extra").as_ptr(),
             title.encode_utf16().chain(Some(0)).collect::<Vec<_>>().as_ptr(),
             0, //WS_OVERLAPPEDWINDOW,
             CW_USEDEFAULT,
@@ -65,6 +66,7 @@ thread_local! {
 
 
 #[doc(hidden)] impl Direct3D   { pub fn test() -> Self { unsafe { Direct3D  ::create(SdkVersion::default()).unwrap() } } }
+#[cfg(feature = "9ex")]
 #[doc(hidden)] impl Direct3DEx { pub fn test() -> Self { unsafe { Direct3DEx::create(SdkVersion::default()).unwrap() } } }
 
 #[doc(hidden)] impl SafeDevice {
@@ -86,7 +88,7 @@ thread_local! {
     ]}
 
     pub fn test_pp(two: bool, ppf: impl FnOnce(&mut D3DPRESENT_PARAMETERS, &mut Create)) -> Result<Self, MethodError> {
-        let mut behavior = Create::DisablePrintScreen | Create::FpuPreserve | Create::HardwareVertexProcessing | Create::NoWindowChanges;
+        let mut behavior = /* Create::DisablePrintScreen | */ Create::FpuPreserve | Create::HardwareVertexProcessing | Create::NoWindowChanges;
         let mut pp = D3DPRESENT_PARAMETERS {
             Windowed:               true.into(),
             hDeviceWindow:          test_window(two),
@@ -101,6 +103,7 @@ thread_local! {
     }
 }
 
+#[cfg(feature = "9ex")]
 #[doc(hidden)] impl DeviceEx {
     pub fn test() -> Self { Self::test_pp(false, |_, _|{}).unwrap() }
     pub fn pure() -> Self { Self::test_pp(false, |_,c| *c |= Create::PureDevice).unwrap() }

@@ -1,6 +1,7 @@
 #![allow(dead_code)] // TODO: remove
 
 use crate::*;
+use crate::d3d9::*;
 
 use winapi::shared::d3d9types::*;
 
@@ -50,7 +51,7 @@ impl SafeDevice {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = SafeDevice::pure();
+    /// # use thindx::doc9::*; let device = SafeDevice::pure();
     /// let texture = device.create_texture(128, 128, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
     ///
     /// device.set_texture(0, &texture).unwrap();
@@ -90,7 +91,7 @@ impl SafeDevice {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = SafeDevice::pure();
+    /// # use thindx::doc9::*; let device = SafeDevice::pure();
     /// let texture = device.create_texture(128, 128, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
     /// device.set_texture(1, &texture).unwrap();
     ///
@@ -139,7 +140,7 @@ pub trait IDirect3DBaseTexture9Ext : base_texture::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = SafeDevice::pure();
+    /// # use thindx::doc9::*; let device = SafeDevice::pure();
     /// # let texture = device.create_texture(128, 128, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
     /// texture.generate_mip_sub_levels();
     /// ```
@@ -155,7 +156,7 @@ pub trait IDirect3DBaseTexture9Ext : base_texture::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = SafeDevice::pure();
+    /// # use thindx::doc9::*; let device = SafeDevice::pure();
     /// # let texture = device.create_texture(128, 128, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
     /// assert_eq!(TextureFilterType::Linear, texture.get_auto_gen_filter_type());
     /// ```
@@ -179,7 +180,7 @@ pub trait IDirect3DBaseTexture9Ext : base_texture::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = SafeDevice::pure();
+    /// # use thindx::doc9::*; let device = SafeDevice::pure();
     /// // Automatic level count
     /// let texture = device.create_texture(128, 128, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
     /// assert_eq!(8, texture.get_level_count()); // [128, 64, 32, 16, 8, 4, 2, 1].len() == 8
@@ -205,7 +206,7 @@ pub trait IDirect3DBaseTexture9Ext : base_texture::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = SafeDevice::pure();
+    /// # use thindx::doc9::*; let device = SafeDevice::pure();
     /// let texture = device.create_texture(128, 128, 0, Usage::None, Format::A8R8G8B8, Pool::Managed, ()).unwrap();
     /// assert_eq!(0, texture.get_lod());
     /// assert_eq!(0, texture.set_lod(5));
@@ -246,7 +247,7 @@ pub trait IDirect3DBaseTexture9Ext : base_texture::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = SafeDevice::pure();
+    /// # use thindx::doc9::*; let device = SafeDevice::pure();
     /// # let texture = device.create_texture(128, 128, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
     /// texture.set_auto_gen_filter_type(TextureFilterType::Point).unwrap();
     /// texture.set_auto_gen_filter_type(TextureFilterType::Linear).unwrap();
@@ -277,7 +278,7 @@ pub trait IDirect3DBaseTexture9Ext : base_texture::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = SafeDevice::pure();
+    /// # use thindx::doc9::*; let device = SafeDevice::pure();
     /// let texture = device.create_texture(128, 128, 0, Usage::None, Format::A8R8G8B8, Pool::Managed, ()).unwrap();
     /// assert_eq!(0, texture.set_lod(5));
     /// assert_eq!(5, texture.set_lod(6));
@@ -361,7 +362,7 @@ pub trait IDirect3DCubeTexture9Ext : cube_texture::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = SafeDevice::pure();
+    /// # use thindx::doc9::*; let device = SafeDevice::pure();
     /// let texture = device.create_cube_texture(128, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
     /// texture.add_dirty_rect(CubeMapFace::PositiveX, ..).unwrap();
     /// texture.add_dirty_rect(CubeMapFace::PositiveY, (0,0) .. (128,128)).unwrap();
@@ -393,7 +394,7 @@ pub trait IDirect3DCubeTexture9Ext : cube_texture::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = SafeDevice::pure();
+    /// # use thindx::doc9::*; let device = SafeDevice::pure();
     /// let texture = device.create_cube_texture(128, 8, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
     /// let surface0px : Surface = texture.get_cube_map_surface(CubeMapFace::PositiveX, 0).unwrap();
     /// assert_eq!(D3DERR::INVALIDCALL, texture.get_cube_map_surface(CubeMapFace::PositiveX, 8).err(), "only levels 0 .. 7 are valid");
@@ -421,7 +422,7 @@ pub trait IDirect3DCubeTexture9Ext : cube_texture::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = SafeDevice::pure();
+    /// # use thindx::doc9::*; let device = SafeDevice::pure();
     /// let texture = device.create_cube_texture(128, 8, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
     /// let desc : SurfaceDesc = texture.get_level_desc(0).unwrap();
     /// assert_eq!(D3DERR::INVALIDCALL, texture.get_level_desc(8).err(), "only levels 0..7 are valid");
@@ -457,7 +458,7 @@ pub trait IDirect3DCubeTexture9Ext : cube_texture::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = SafeDevice::pure();
+    /// # use thindx::doc9::*; let device = SafeDevice::pure();
     /// const S : usize = 128;
     /// let texture = device.create_cube_texture(S as u32, 8, Usage::None, Format::A8R8G8B8, Pool::Managed, ()).unwrap();
     /// let data = [[Color::argb(0xFF112233); S]; S];
@@ -495,7 +496,7 @@ pub trait IDirect3DCubeTexture9Ext : cube_texture::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = SafeDevice::pure();
+    /// # use thindx::doc9::*; let device = SafeDevice::pure();
     /// const S : usize = 128;
     /// let texture = device.create_cube_texture(S as u32, 8, Usage::None, Format::A8R8G8B8, Pool::Managed, ()).unwrap();
     /// let data = [[Color::argb(0xFF112233); S]; S];
@@ -575,7 +576,7 @@ pub trait IDirect3DTexture9Ext : texture::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = SafeDevice::pure();
+    /// # use thindx::doc9::*; let device = SafeDevice::pure();
     /// let texture = device.create_texture(128, 128, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
     /// texture.add_dirty_rect(..).unwrap();
     /// texture.add_dirty_rect((0,0) .. (128,128)).unwrap();
@@ -605,7 +606,7 @@ pub trait IDirect3DTexture9Ext : texture::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = SafeDevice::pure();
+    /// # use thindx::doc9::*; let device = SafeDevice::pure();
     /// let texture = device.create_texture(128, 128, 8, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
     /// let surface0px : Surface = texture.get_surface_level(0).unwrap();
     /// assert_eq!(D3DERR::INVALIDCALL, texture.get_surface_level(8).err(), "only levels 0 .. 7 are valid");
@@ -631,7 +632,7 @@ pub trait IDirect3DTexture9Ext : texture::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = SafeDevice::pure();
+    /// # use thindx::doc9::*; let device = SafeDevice::pure();
     /// let texture = device.create_texture(128, 128, 8, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
     /// let desc : SurfaceDesc = texture.get_level_desc(0).unwrap();
     /// assert_eq!(D3DERR::INVALIDCALL, texture.get_level_desc(8).err(), "only levels 0..7 are valid");
@@ -666,7 +667,7 @@ pub trait IDirect3DTexture9Ext : texture::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = SafeDevice::pure();
+    /// # use thindx::doc9::*; let device = SafeDevice::pure();
     /// const W : usize = 128;
     /// const H : usize = 128;
     /// let texture = device.create_texture(W as u32, H as u32, 8, Usage::None, Format::A8R8G8B8, Pool::Managed, ()).unwrap();
@@ -704,7 +705,7 @@ pub trait IDirect3DTexture9Ext : texture::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = SafeDevice::pure();
+    /// # use thindx::doc9::*; let device = SafeDevice::pure();
     /// const W : usize = 128;
     /// const H : usize = 128;
     /// let texture = device.create_texture(W as u32, H as u32, 8, Usage::None, Format::A8R8G8B8, Pool::Managed, ()).unwrap();
@@ -779,7 +780,7 @@ pub trait IDirect3DVolumeTexture9Ext : volume_texture::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = Device::pure();
+    /// # use thindx::doc9::*; let device = Device::pure();
     /// # let texture = device.create_volume_texture(32, 32, 32, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
     /// texture.add_dirty_box(..).unwrap();
     /// texture.add_dirty_box((0,0,0) .. (32,32,32)).unwrap();
@@ -803,7 +804,7 @@ pub trait IDirect3DVolumeTexture9Ext : volume_texture::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = Device::pure();
+    /// # use thindx::doc9::*; let device = Device::pure();
     /// # let texture = device.create_volume_texture(32, 32, 32, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
     /// let level0 : VolumeDesc = texture.get_level_desc(0).unwrap();
     /// assert_eq!(level0.format, Format::A8R8G8B8);
@@ -832,7 +833,7 @@ pub trait IDirect3DVolumeTexture9Ext : volume_texture::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = Device::pure();
+    /// # use thindx::doc9::*; let device = Device::pure();
     /// # let texture = device.create_volume_texture(32, 32, 32, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
     /// let level0 : Volume = texture.get_volume_level(0).unwrap();
     /// // get_container, get_desc, get_device, lock_box, ...
@@ -870,7 +871,7 @@ pub trait IDirect3DVolumeTexture9Ext : volume_texture::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = Device::pure();
+    /// # use thindx::doc9::*; let device = Device::pure();
     /// // Pool::Default textures cannot be locked
     /// let texture = device.create_volume_texture(32, 32, 32, 1, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
     /// assert_eq!(D3DERR::INVALIDCALL, unsafe { texture.lock_box_unchecked(0, .., Lock::None) }.err());
@@ -909,7 +910,7 @@ pub trait IDirect3DVolumeTexture9Ext : volume_texture::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = Device::pure();
+    /// # use thindx::doc9::*; let device = Device::pure();
     /// # let texture = device.create_volume_texture(32, 32, 32, 0, Usage::None, Format::A8R8G8B8, Pool::Managed, ()).unwrap();
     /// assert_eq!(D3DERR::INVALIDCALL, texture.unlock_box(0));
     ///

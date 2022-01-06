@@ -10,7 +10,7 @@ documentation   = "https://docs.rs/thindx"
 license         = "Apache-2.0 OR MIT"
 readme          = "Readme.md"
 description     = "Thin DirectX wrappers"
-keywords        = ["directx", "direct3d", "d3dcompiler", "hlsl"]
+keywords        = ["directx", "direct3d", "d3d", "d3dcompiler", "hlsl"]
 categories      = ["api-bindings", "graphics", "os::windows-apis", "rendering::graphics-api"]
 exclude         = [".vscode"]
 
@@ -18,9 +18,17 @@ exclude         = [".vscode"]
 default-target  = "x86_64-pc-windows-msvc"
 targets         = ["x86_64-pc-windows-msvc", "i686-pc-windows-msvc"]
 all-features    = true
+# rustdoc-args    = ["--extend-css", "doc/style.css"]
 
 [lib]
 path            = "src/_lib.rs"
+
+[features]
+default         = []
+9ex             = []
+# extra               = []
+# impl-poor-defaults  = []
+# impl-from-unchecked = []
 
 
 
@@ -33,22 +41,37 @@ minidl          = "0.1.2"
 winstr          = "0.0.2"
 mcom            = "0.1.1"
 #mcom            = { git = "https://github.com/MaulingMonkey/mcom" }
-
-[target.'cfg(windows)'.dependencies.winapi]
-version         = "0.3.9"
-features = [
+winapi.version  = "0.3.9"
+winapi.features = [
     # shared
     "d3d9",
     "d3d9caps",
     "d3d9types",
     "d3dcompiler",
     "guiddef",
+    "ntdef",
+    "windef",
     "winerror",
 
     # um
+    "libloaderapi",
     "unknwnbase",
     "windef",
+    "winuser",
 ]
 
-[dev-dependencies]
-lazy_static     = "1.4"
+[target.'cfg(windows)'.dev-dependencies]
+lazy_static         = "1.4"
+raw-window-handle   = "0.3"
+winit               = "0.23"
+winapi.version      = "0.3.9"
+winapi.features = [
+    # shared
+    "minwindef",
+    "windef",
+
+    # um
+    "debugapi",
+    "libloaderapi",
+    "winuser",
+]

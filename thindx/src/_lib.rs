@@ -1,7 +1,7 @@
 #![doc = include_str!("../Readme.md")]
-#![deny(rustdoc::broken_intra_doc_links)]
-#![deny(missing_docs)]
-#![deny(unreachable_patterns)]
+#![warn(rustdoc::broken_intra_doc_links)]
+#![warn(missing_docs)]
+#![deny(unreachable_patterns)] // probably improperly `match { ... }`ed constants
 
 pub extern crate abibool;
 pub extern crate abistr;
@@ -24,6 +24,7 @@ pub mod d3d {
 
 /// Direct3D 9 related types and APIs
 pub mod d3d9 {
+    pub use crate::d3d9_h::*;
     pub use crate::d3d9types_h::*;
 }
 
@@ -32,9 +33,34 @@ pub mod d3d11 {
     pub use crate::d3d11shader_h::*;
 }
 
+// #[cfg(any(doc, test))] // XXX
+#[doc(hidden)] pub mod doc9 {
+    pub use crate::*;
+    pub use crate::d3d::*;
+    pub use crate::d3d9::*;
+
+    // XXX: temporary?
+
+    pub use winapi::shared::d3d9caps::{
+        D3DCAPS9,
+    };
+    pub use winapi::shared::d3d9types::{
+        D3DDISPLAYMODE,
+        D3DDISPLAYMODEEX,
+        D3DPRESENT_PARAMETERS,
+    };
+    pub use winapi::shared::windef::{
+        HWND,
+        HMONITOR,
+    };
+    pub type AdapterIndex = u32;
+    pub const D3DADAPTER_DEFAULT : AdapterIndex = 0;
+}
+
 
 
 mods! {
+    #[path=r"headers\d3d9.h\d3d9.rs"]               mod d3d9_h;         // d3d9 mod
     #[path=r"headers\d3d9types.h\d3d9types.rs"]     mod d3d9types_h;    // d3d9 mod
     #[path=r"headers\d3d11shader.h\d3d11shader.rs"] mod d3d11shader_h;  // d3d11 mod
     #[path=r"headers\d3dcommon.h\d3dcommon.rs"]     mod d3dcommon_h;    // d3d mod
@@ -46,9 +72,13 @@ mods! {
     inl mod error_kind;
     inl mod error;
     pub mod errors;
+    inl mod method_error;
 }
 #[doc(no_inline)] pub use errors::*;
 
 #[cfg(doc)] pub mod _examples;
 #[cfg(doc)] pub mod _headers;
 #[cfg(doc)] #[doc(hidden)] pub use _examples as examples;
+#[path="_extra.rs"] #[cfg(        feature = "extra"  )] pub mod extra;
+#[path="_extra.rs"] #[cfg(all(not(feature = "extra")))] mod extra;
+#[cfg(test)] fn testfast() -> bool { std::env::var_os("TESTFAST").is_some() }

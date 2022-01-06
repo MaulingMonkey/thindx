@@ -1,5 +1,9 @@
-use crate::*;
+#![cfg_attr(not(feature = "9ex"), allow(unused_imports))]
 
+use crate::*;
+use crate::d3d9::*;
+
+use winapi::shared::d3d9types::*;
 use winapi::um::wingdi::*;
 
 use std::convert::TryInto;
@@ -55,6 +59,7 @@ pub struct DeviceEx(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DDevice9Ex
 /// [TestCooperativeLevel]:             https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-testcooperativelevel
 /// [WaitForVBlank]:                    https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-waitforvblank
 ///
+#[cfg(feature = "9ex")]
 pub trait IDirect3DDevice9ExExt : private::Sealed {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-checkdevicestate)\]
     /// IDirect3DDevice9Ex::CheckDeviceState
@@ -74,11 +79,11 @@ pub trait IDirect3DDevice9ExExt : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = DeviceEx::test();
+    /// # use thindx::doc9::*; let device = DeviceEx::test();
     /// // TODO
     /// ```
-    fn check_device_state(&self, destination_window: impl AsHWND) -> D3DERR {
-        D3DERR(unsafe { self.as_winapi().CheckDeviceState(destination_window.as_hwnd()) })
+    fn check_device_state(&self, destination_window: impl AsHWND) -> ErrorKind {
+        ErrorKind(unsafe { self.as_winapi().CheckDeviceState(destination_window.as_hwnd()) })
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-checkresourceresidency )\]
@@ -88,29 +93,29 @@ pub trait IDirect3DDevice9ExExt : private::Sealed {
     ///
     /// ### Returns
     ///
-    /// *   [D3DERR::SLICE_OVERFLOW]    if `resources.len()` > `65535`
+    /// *   [THIN3D9ERR::SLICE_OVERFLOW]    if `resources.len()` > `65535`
     /// *   [D3DERR::INVALIDCALL]       ???
     /// *   Ok(
     ///
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = DeviceEx::test();
+    /// # use thindx::doc9::*; let device = DeviceEx::test();
     /// // TODO
     /// ```
     #[doc(hidden)]
-    fn _xxx_check_resource_residency(&self, resources: &mut [Resource]) -> D3DERR {
+    fn _xxx_check_resource_residency(&self, resources: &mut [Resource]) -> ErrorKind {
         // FIXME: Taking resources as a value slice is bloody annoying, but we can't cast `&[&Resource]` sanely.
         // FIXME: mut casts bellow are sketch as heck
 
         // "... up to a maximum of 65535."
         let len : u16 = match resources.len().try_into() {
             Ok(len) => len,
-            Err(_) => return D3DERR::SLICE_OVERFLOW,
+            Err(_) => return THIN3D9ERR::SLICE_OVERFLOW,
         };
         let len = u32::from(len);
         let resources = resources.as_mut_ptr().cast(); // XXX
-        D3DERR(unsafe { self.as_winapi().CheckResourceResidency(resources, len) })
+        ErrorKind(unsafe { self.as_winapi().CheckResourceResidency(resources, len) })
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-composerects)\]
@@ -127,7 +132,7 @@ pub trait IDirect3DDevice9ExExt : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = DeviceEx::test();
+    /// # use thindx::doc9::*; let device = DeviceEx::test();
     /// // TODO
     /// ```
     fn compose_rects(&self, src: &Surface, dst: &Surface, src_rect_descs: &VertexBuffer, num_rects: u32, dst_rect_descs: &VertexBuffer, operation: impl Into<ComposeRectsOp>, xoffset: i32, yoffset: i32) -> Result<(), MethodError> {
@@ -151,7 +156,7 @@ pub trait IDirect3DDevice9ExExt : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = DeviceEx::test();
+    /// # use thindx::doc9::*; let device = DeviceEx::test();
     /// // TODO
     /// ```
     fn create_depth_stencil_surface_ex(&self, width: u32, height: u32, format: impl Into<Format>, multi_sample: impl Into<MultiSampleType>, multi_sample_quality: u32, discard: bool, _shared_handle: impl SharedHandleParam, usage: impl Into<Usage>) -> Result<Surface, MethodError> {
@@ -180,7 +185,7 @@ pub trait IDirect3DDevice9ExExt : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = DeviceEx::test();
+    /// # use thindx::doc9::*; let device = DeviceEx::test();
     /// // TODO
     /// ```
     fn create_offscreen_plain_surface_ex(&self, width: u32, height: u32, format: impl Into<Format>, pool: impl Into<Pool>, _shared_handle: impl SharedHandleParam, usage: impl Into<Usage>) -> Result<Surface, MethodError> {
@@ -208,7 +213,7 @@ pub trait IDirect3DDevice9ExExt : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = DeviceEx::test();
+    /// # use thindx::doc9::*; let device = DeviceEx::test();
     /// // TODO
     /// ```
     fn create_render_target_ex(&self, width: u32, height: u32, format: impl Into<Format>, multi_sample: impl Into<MultiSampleType>, multi_sample_quality: u32, lockable: bool, _shared_handle: impl SharedHandleParam, usage: impl Into<Usage>) -> Result<Surface, MethodError> {
@@ -237,7 +242,7 @@ pub trait IDirect3DDevice9ExExt : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = DeviceEx::test();
+    /// # use thindx::doc9::*; let device = DeviceEx::test();
     /// // TODO
     /// ```
     fn get_display_mode_ex(&self, swap_chain: u32) -> Result<(D3DDISPLAYMODEEX, DisplayRotation), MethodError> {
@@ -262,7 +267,7 @@ pub trait IDirect3DDevice9ExExt : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = DeviceEx::test();
+    /// # use thindx::doc9::*; let device = DeviceEx::test();
     /// // TODO
     /// ```
     fn get_gpu_thread_priority(&self) -> Result<i32, MethodError> {
@@ -289,7 +294,7 @@ pub trait IDirect3DDevice9ExExt : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = DeviceEx::test();
+    /// # use thindx::doc9::*; let device = DeviceEx::test();
     /// // TODO
     /// ```
     fn get_maximum_frame_latency(&self) -> Result<u32, MethodError> {
@@ -315,7 +320,7 @@ pub trait IDirect3DDevice9ExExt : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = DeviceEx::test();
+    /// # use thindx::doc9::*; let device = DeviceEx::test();
     /// // TODO
     /// ```
     fn present_ex<'r>(&self, source_rect: impl IntoRectOrFull, dest_rect: impl IntoRectOrFull, dest_window_override: impl AsHWND, dirty_region: impl Into<Option<&'r RgnData>>, flags: impl Into<Present>) -> Result<(), MethodError> {
@@ -329,10 +334,10 @@ pub trait IDirect3DDevice9ExExt : private::Sealed {
         let dirty_region = match dirty_region {
             None => null::<RGNDATA>(),
             Some(dr) => {
-                if dr.rdh.dwSize as usize   != std::mem::size_of::<RGNDATAHEADER>() { return Err(MethodError("Device::present", D3DERR::INVALID_STRUCT_FIELD)); }
-                if dr.rdh.iType             != RDH_RECTANGLES                       { return Err(MethodError("Device::present", D3DERR::INVALID_STRUCT_FIELD)); }
-                if dr.rdh.nCount as usize   > dr.buffer.len()                       { return Err(MethodError("Device::present", D3DERR::INVALID_STRUCT_FIELD)); }
-                if dr.rdh.nRgnSize as usize > std::mem::size_of_val(dr)             { return Err(MethodError("Device::present", D3DERR::INVALID_STRUCT_FIELD)); }
+                if dr.rdh.dwSize as usize   != std::mem::size_of::<RGNDATAHEADER>() { return Err(MethodError("Device::present", THIN3D9ERR::INVALID_STRUCT_FIELD)); }
+                if dr.rdh.iType             != RDH_RECTANGLES                       { return Err(MethodError("Device::present", THIN3D9ERR::INVALID_STRUCT_FIELD)); }
+                if dr.rdh.nCount as usize   > dr.buffer.len()                       { return Err(MethodError("Device::present", THIN3D9ERR::INVALID_STRUCT_FIELD)); }
+                if dr.rdh.nRgnSize as usize > std::mem::size_of_val(dr)             { return Err(MethodError("Device::present", THIN3D9ERR::INVALID_STRUCT_FIELD)); }
                 let dr : *const RgnData = dr;
                 dr.cast()
             },
@@ -357,7 +362,7 @@ pub trait IDirect3DDevice9ExExt : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = DeviceEx::test();
+    /// # use thindx::doc9::*; let device = DeviceEx::test();
     /// // TODO
     /// ```
     fn reset_ex<'mode>(&self, presentation_parameters: &mut D3DPRESENT_PARAMETERS, fullscreen_display_mode: impl Into<Option<&'mode mut D3DDISPLAYMODEEX>>) -> Result<(), MethodError> {
@@ -379,7 +384,7 @@ pub trait IDirect3DDevice9ExExt : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = DeviceEx::test();
+    /// # use thindx::doc9::*; let device = DeviceEx::test();
     /// // TODO
     /// ```
     fn set_convolution_mono_kernel_unweighted(&self, width: u32, height: u32) -> Result<(), MethodError> {
@@ -400,13 +405,13 @@ pub trait IDirect3DDevice9ExExt : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = DeviceEx::test();
+    /// # use thindx::doc9::*; let device = DeviceEx::test();
     /// // TODO
     /// ```
     fn set_convolution_mono_kernel(&self, rows: &mut [f32], cols: &mut [f32]) -> Result<(), MethodError> {
         // XXX: should rows/cols be non-mut?  Not sure if d3d *actually* writes those values or not...
-        let width  : u32 = rows.len().try_into().map_err(|_| MethodError("DeviceEx::set_convolution_mono_kernel", D3DERR::SLICE_OVERFLOW))?;
-        let height : u32 = cols.len().try_into().map_err(|_| MethodError("DeviceEx::set_convolution_mono_kernel", D3DERR::SLICE_OVERFLOW))?;
+        let width  : u32 = rows.len().try_into().map_err(|_| MethodError("DeviceEx::set_convolution_mono_kernel", THIN3D9ERR::SLICE_OVERFLOW))?;
+        let height : u32 = cols.len().try_into().map_err(|_| MethodError("DeviceEx::set_convolution_mono_kernel", THIN3D9ERR::SLICE_OVERFLOW))?;
         let hr = unsafe { self.as_winapi().SetConvolutionMonoKernel(width, height, rows.as_mut_ptr(), cols.as_mut_ptr()) };
         MethodError::check("IDirect3DDevice9Ex::SetConvolutionMonoKernel", hr)
     }
@@ -425,7 +430,7 @@ pub trait IDirect3DDevice9ExExt : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = DeviceEx::test();
+    /// # use thindx::doc9::*; let device = DeviceEx::test();
     /// // TODO
     /// ```
     fn set_gpu_thread_priority(&self, priority: i32) -> Result<(), MethodError> {
@@ -446,7 +451,7 @@ pub trait IDirect3DDevice9ExExt : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = DeviceEx::test();
+    /// # use thindx::doc9::*; let device = DeviceEx::test();
     /// // TODO
     /// ```
     fn set_maximum_frame_latency(&self, max_latency: u32) -> Result<(), MethodError> {
@@ -467,7 +472,7 @@ pub trait IDirect3DDevice9ExExt : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = DeviceEx::test();
+    /// # use thindx::doc9::*; let device = DeviceEx::test();
     /// // TODO
     /// ```
     #[deprecated = "docs claim test_cooperative_level is no longer available for use - instead, use check_device_state"]
@@ -489,7 +494,7 @@ pub trait IDirect3DDevice9ExExt : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::*; let device = DeviceEx::test();
+    /// # use thindx::doc9::*; let device = DeviceEx::test();
     /// // TODO
     /// ```
     fn wait_for_vblank(&self, swap_chain: u32) -> Result<(), MethodError> {
@@ -498,8 +503,10 @@ pub trait IDirect3DDevice9ExExt : private::Sealed {
     }
 }
 
+#[cfg(feature = "9ex")]
 impl<T: private::Sealed> IDirect3DDevice9ExExt for T {}
 
+#[cfg(feature = "9ex")]
 mod private {
     use winapi::shared::d3d9::IDirect3DDevice9Ex;
     pub unsafe trait Sealed                             { fn as_winapi(&self) -> &IDirect3DDevice9Ex; }

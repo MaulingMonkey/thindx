@@ -199,8 +199,11 @@ impl Format {
     pub const D32F_LOCKABLE         : Format = Format(D3DFMT_D32F_LOCKABLE);
     pub const D24FS8                : Format = Format(D3DFMT_D24FS8);
 
-    #[cfg(feature = "9ex")] pub const D32_LOCKABLE          : Format = Format(D3DFMT_D32_LOCKABLE);
-    #[cfg(feature = "9ex")] pub const X8_LOCKABLE           : Format = Format(D3DFMT_S8_LOCKABLE);
+    /// Direct3D 9Ex Only
+    pub const D32_LOCKABLE          : Format = Format(D3DFMT_D32_LOCKABLE);
+
+    /// Direct3D 9Ex Only
+    pub const X8_LOCKABLE           : Format = Format(D3DFMT_S8_LOCKABLE);
 
     pub const L16                   : Format = Format(D3DFMT_L16);
 
@@ -227,14 +230,24 @@ impl Format {
     pub const CxV8U8                : Format = Format(D3DFMT_CxV8U8);
 
     /// 1-bit monochrome.
-    #[cfg(feature = "9ex")] pub const A1                    : Format = Format(D3DFMT_A1);
+    ///
+    /// Direct3D 9Ex Only
+    pub const A1                    : Format = Format(D3DFMT_A1);
 
     /// 2.8-biased fixed point.
-    #[cfg(feature = "9ex")] pub const A2B10G10R10_XR_BIAS   : Format = Format(D3DFMT_A2B10G10R10_XR_BIAS);
+    ///
+    /// Direct3D 9Ex Only
+    pub const A2B10G10R10_XR_BIAS   : Format = Format(D3DFMT_A2B10G10R10_XR_BIAS);
 
     /// Binary format indicating that the data has no inherent type.
-    #[cfg(feature = "9ex")] pub const BINARYBUFFER          : Format = Format(D3DFMT_BINARYBUFFER);
-    #[cfg(feature = "9ex")] pub const BinaryBuffer          : Format = Format::BINARYBUFFER;
+    ///
+    /// Direct3D 9Ex Only
+    pub const BINARYBUFFER          : Format = Format(D3DFMT_BINARYBUFFER);
+
+    /// Binary format indicating that the data has no inherent type.
+    ///
+    /// Direct3D 9Ex Only
+    pub const BinaryBuffer          : Format = Format::BINARYBUFFER;
 }
 
 impl Format {
@@ -289,8 +302,8 @@ impl Format {
             Format::D32F_LOCKABLE                               => "D3DFMT_D32F_LOCKABLE",
             Format::D24FS8                                      => "D3DFMT_D24FS8",
 
-            #[cfg(feature = "9ex")] Format::D32_LOCKABLE        => "D3DFMT_D32_LOCKABLE",
-            #[cfg(feature = "9ex")] Format::X8_LOCKABLE         => "D3DFMT_S8_LOCKABLE",
+            Format::D32_LOCKABLE                                => "D3DFMT_D32_LOCKABLE",
+            Format::X8_LOCKABLE                                 => "D3DFMT_S8_LOCKABLE",
 
             Format::L16                                         => "D3DFMT_L16",
             Format::VERTEXDATA                                  => "D3DFMT_VERTEXDATA",
@@ -306,9 +319,9 @@ impl Format {
             Format::A32B32G32R32F                               => "D3DFMT_A32B32G32R32F",
             Format::CxV8U8                                      => "D3DFMT_CxV8U8",
 
-            #[cfg(feature = "9ex")] Format::A1                  => "D3DFMT_A1",
-            #[cfg(feature = "9ex")] Format::A2B10G10R10_XR_BIAS => "D3DFMT_A2B10G10R10_XR_BIAS",
-            #[cfg(feature = "9ex")] Format::BINARYBUFFER        => "D3DFMT_BINARYBUFFER",
+            Format::A1                                          => "D3DFMT_A1",
+            Format::A2B10G10R10_XR_BIAS                         => "D3DFMT_A2B10G10R10_XR_BIAS",
+            Format::BINARYBUFFER                                => "D3DFMT_BINARYBUFFER",
 
             _other                                              => "D3DFMT_???",
         }

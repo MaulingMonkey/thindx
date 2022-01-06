@@ -1,5 +1,4 @@
-use crate::*;
-
+use winapi::shared::windef::*;
 use winapi::um::winuser::*;
 
 use std::marker::PhantomData;
@@ -17,6 +16,7 @@ use std::marker::PhantomData;
 /// least until a `&mut self` method is called, or the type is dropped, or
 /// perhaps even longer.
 pub unsafe trait AsHWND {
+    #[allow(missing_docs)]
     fn as_hwnd(&self) -> HWND;
 }
 
@@ -26,6 +26,7 @@ unsafe impl AsHWND for () {
 
 
 
+/// A safer/sounder alternative to [`HWND`]
 pub struct SafeHWND<'w> {
     hwnd:       HWND,
     phantom:    PhantomData<&'w HWND>,
@@ -35,6 +36,11 @@ impl<'w> SafeHWND<'w> {
     /// Assert that `hwnd` is safe for the duration of the resulting `SafeHWND`'s lifetime.
     ///
     /// To encourage limited lifetimes, this takes `hwnd` by reference.
+    ///
+    /// ### Safety
+    ///
+    /// By using this method, you assert that `hwnd` will be valid for the entire duration of `Self`.
+    /// This is enforced by `assert!(...)` upon construction and drop, but that's potentially *after* undefined behavior has been invoked.
     pub unsafe fn assert(hwnd: &'w HWND) -> Self {
         let hwnd = *hwnd;
         assert!(hwnd.is_null() || IsWindow(hwnd) != 0);
@@ -59,7 +65,7 @@ unsafe impl AsHWND for SafeHWND<'_> {
 }
 
 #[test] #[should_panic] fn should_panic_on_drop() {
-    let window = extra::create_window("destroyed before dropped");
+    let window = crate::extra::create_window("destroyed before dropped");
     let safe = unsafe { SafeHWND::assert(&(42 as HWND)) };
     unsafe { CloseWindow(window) };
     std::mem::drop(safe);
@@ -71,7 +77,7 @@ unsafe impl AsHWND for SafeHWND<'_> {
 }
 
 #[test] fn should_not_panic_outlived() {
-    let window = extra::create_window("destroyed before dropped");
+    let window = crate::extra::create_window("destroyed before dropped");
     let safe = unsafe { SafeHWND::assert(&window) };
     std::mem::drop(safe);
     unsafe { CloseWindow(window) };

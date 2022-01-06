@@ -1,4 +1,5 @@
 use crate::*;
+use crate::d3d9::*;
 
 use std::convert::*;
 use std::ptr::null_mut;

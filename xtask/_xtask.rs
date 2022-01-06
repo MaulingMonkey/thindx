@@ -32,10 +32,11 @@ fn build(_args: std::env::Args) {
     run("cargo fetch");
     run("cargo check --frozen --workspace --all-targets");
     run("cargo build --frozen --workspace --all-targets");
+    run("cargo build --frozen --workspace --all-targets --all-features");
     examples::update();
     headers::update();
-    run("cargo   doc --frozen --workspace");
-    run("cargo  test --frozen --workspace");
+    run("cargo   doc --frozen --workspace --all-features");
+    run("cargo  test --frozen --workspace --all-features");
 }
 
 fn check(mut args: std::env::Args) {

@@ -1,8 +1,8 @@
 #![windows_subsystem = "windows"]
 
-use thin3d9::*;
+use thindx::d3d9::*;
 
-use winstr::bstr;
+use abistr::cstr16 as wcstr;
 
 use winapi::shared::d3d9caps::*;
 use winapi::shared::d3d9types::*;
@@ -51,15 +51,15 @@ fn main() {
         lpfnWndProc:    Some(window_proc),
         hInstance:      hinstance,
         hCursor:        hcursor,
-        lpszClassName:  bstr!("SampleWndClass").as_lpcwstr(),
+        lpszClassName:  wcstr!("SampleWndClass").as_ptr(),
         .. unsafe { std::mem::zeroed() }
     };
     assert_ne!(0, unsafe { RegisterClassW(&wc) });
 
     let hwnd = unsafe { CreateWindowExW(
         0,
-        bstr!("SampleWndClass").as_lpcwstr(),
-        bstr!("01-clear-winapi - thin3d9 example").as_lpcwstr(),
+        wcstr!("SampleWndClass").as_ptr(),
+        wcstr!("01-clear-winapi - thin3d9 example").as_ptr(),
         WS_OVERLAPPEDWINDOW,
         CW_USEDEFAULT,
         CW_USEDEFAULT,
@@ -82,7 +82,7 @@ fn main() {
     };
 
     let behavior =
-        Create::DisablePrintScreen |
+        // Create::DisablePrintScreen | // d3d9ex
         Create::FpuPreserve |
         Create::HardwareVertexProcessing |
         Create::NoWindowChanges;

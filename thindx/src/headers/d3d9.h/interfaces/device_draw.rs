@@ -1,4 +1,4 @@
-use crate::*;
+use crate::d3d9::*;
 
 use winapi::ctypes::c_void;
 

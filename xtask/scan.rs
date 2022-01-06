@@ -204,6 +204,7 @@ fn file_doc_comments(path: &Path, text: &str) -> Result<(), ()> {
             };
 
             let (dik, rest) = if let Some(rest) = rest.strip_prefix("fn ")  { (DocItemKind::Fn,     rest.trim_start()) }
+            else if let Some(rest) = rest.strip_prefix("const fn ")         { (DocItemKind::Fn,     rest.trim_start()) }
             else if let Some(rest) = rest.strip_prefix("const ")            { (DocItemKind::Const,  rest.trim_start()) }
             else if let Some(rest) = rest.strip_prefix("impl ")             { (DocItemKind::Impl,   rest.trim_start()) }
             else if let Some(rest) = rest.strip_prefix("macro_rules! ")     { (DocItemKind::Macro,  rest.trim_start()) }
@@ -255,7 +256,7 @@ fn file_doc_comments(path: &Path, text: &str) -> Result<(), ()> {
                             indent -= 1;
                             false
                         }
-                    } else if ch.is_ascii_alphanumeric() || ch == '_' {
+                    } else if ch.is_ascii_alphanumeric() || ch == '_' || ch == '$' {
                         false
                     } else if " *&#':;".contains(ch) {
                         false

@@ -1,2 +1,7 @@
-mod parent_or_phantom;                  pub(crate) use parent_or_phantom::*;
-mod raw;                                pub use raw::*;
+mods! {
+    inl mod as_hwnd;
+    inl mod into_range_or_full;
+    inl mod parent_or_phantom;
+    inl mod raw;
+    inl mod shared_handle;
+}

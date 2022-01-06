@@ -1,6 +1,7 @@
 #![allow(dead_code)] // TODO: remove
 
 use crate::*;
+use crate::d3d9::*;
 
 use winapi::shared::winerror::*;
 

@@ -16,6 +16,8 @@ pub fn update() {
             let name = e.path.file_name().unwrap_or_else(|| fatal!("expected file_name for {}", e.path.display()));
             let name = name.to_string_lossy();
             let name = match name.strip_suffix(".rs") { Some(n) => n, None => continue };
+            if name.starts_with("d3d9-") { continue } // d3d9-* are blocking gui apps
+            if name.starts_with("d3d11-") { continue } // d3d11-* will be blocking gui apps
 
             let exe = format!("target/{config}/examples/{name}.exe", config="debug", name=name);
             status!("Running", "{}", exe);

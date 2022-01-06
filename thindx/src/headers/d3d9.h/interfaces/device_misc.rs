@@ -1,6 +1,6 @@
 #![allow(dead_code)] // TODO: remove
 
-#[cfg(test)] use crate::*;
+#[cfg(test)] use crate::d3d9::*;
 
 
 
