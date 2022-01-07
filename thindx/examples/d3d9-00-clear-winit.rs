@@ -9,7 +9,7 @@ use raw_window_handle::windows::*;
 use winapi::shared::d3d9types::*;
 
 use winit::dpi::*;
-use winit::event::*;
+use winit::event::{Event::*, WindowEvent::*};
 use winit::event_loop::*;
 use winit::window::*;
 
@@ -52,10 +52,10 @@ fn main() {
         *control_flow = ControlFlow::Poll;
 
         match event {
-            Event::WindowEvent { event: WindowEvent::CloseRequested, window_id } if window_id == window.id() => {
-                std::process::exit(0); // device must outlast HWND which is about to be destroyed - kill the process instead
+            WindowEvent { event: CloseRequested, window_id } if window_id == window.id() => {
+                std::process::exit(0); // Ensure Device outlasts closing HWND!
             },
-            Event::MainEventsCleared => {
+            MainEventsCleared => {
                 device.clear(None, Some(Color::argb(0xFF224466)), None, None).unwrap();
                 device.present(.., .., (), None).unwrap(); // TODO: Handle D3DERR::DEVICELOST
                 dev::d3d9::screenshot_rt0_for_docs_gen(&device);
