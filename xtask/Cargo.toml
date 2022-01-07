@@ -6,7 +6,7 @@ members = ["."] # problems arise w/ xtasks belonging to the workspace they're bu
 [package]
 name            = "xtask"
 description     = "build utilities"
-version         = "0.0.0-git"
+version         = "0.0.0"
 authors         = ["MaulingMonkey <git@maulingmonkey.com>"]
 edition         = "2021"
 publish         = false
