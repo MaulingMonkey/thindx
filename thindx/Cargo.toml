@@ -12,6 +12,11 @@ readme          = "Readme.md"
 description     = "Thin DirectX wrappers"
 keywords        = ["directx", "direct3d", "d3d", "d3dcompiler", "hlsl"]
 categories      = ["api-bindings", "graphics", "os::windows-apis", "rendering::graphics-api"]
+include         = [
+    # excluded from git (copied/modified) but should be part of package
+    "Readme.md",
+    "LICENSE*",
+]
 exclude         = [
     "doc/*.txt",
     "examples/screenshots/*.png",   # inlined by base64 into src/_examples.rs
