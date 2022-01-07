@@ -38,7 +38,6 @@ abistr          = "0.2.0-rc1"
 #abistr          = { git = "https://github.com/MaulingMonkey/abistr", rev = "1f4d6e40c7d430d586fe81eca46f9e64d569aaca" }
 void            = "=1.0.2"
 minidl          = "0.1.2"
-winstr          = "0.0.2"
 mcom            = "0.1.1"
 #mcom            = { git = "https://github.com/MaulingMonkey/mcom" }
 winapi.version  = "0.3.9"
