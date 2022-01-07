@@ -66,10 +66,6 @@ pub fn update() {
             if !any {
                 writeln!(o, "/// {}", name)?;
             }
-            writeln!(o, "///")?;
-            writeln!(o, "/// <style>")?;
-            writeln!(o, "/// #main {{ max-width: none; }}")?;
-            writeln!(o, "/// </style>")?;
 
             while src.peek().map_or(false, |l| l.trim().is_empty()) { let _ = src.next(); }
 

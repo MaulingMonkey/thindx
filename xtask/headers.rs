@@ -31,8 +31,6 @@ pub fn update() {
         writeln!(rs, "//! ⚠️ Scanned C++ definitions are not yet complete.")?;
         writeln!(rs, "//! Based on [MaulingMonkey/windows-sdk-scanner](https://github.com/MaulingMonkey/windows-sdk-scanner).")?;
         writeln!(rs, "//!")?;
-        writeln!(rs, "//! <style>#main {{ max-width: 1500px; }}</style>")?;
-        writeln!(rs, "//!")?;
 
 
 

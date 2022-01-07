@@ -14,7 +14,6 @@ keywords        = ["directx", "direct3d", "d3d", "d3dcompiler", "hlsl"]
 categories      = ["api-bindings", "graphics", "os::windows-apis", "rendering::graphics-api"]
 
 include         = [
-    "doc/*.css",
     # "examples/*.rs",  # broken without dev
     "src/**",
     # "test/data/*",    # broken without dev
@@ -27,7 +26,6 @@ include         = [
 default-target  = "x86_64-pc-windows-msvc"
 targets         = ["x86_64-pc-windows-msvc", "i686-pc-windows-msvc"]
 all-features    = true
-rustdoc-args    = ["--extend-css", "doc/style.css"]
 
 [lib]
 path            = "src/_lib.rs"

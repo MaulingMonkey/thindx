@@ -11,11 +11,6 @@ fn main() {
     let mut args = std::env::args();
     let _exe = args.next();
 
-    // for some reason we need an abs path here, despite not requiring one when invoking `cargo doc` directly from the CLI
-    // set even for non-doc builds for consistentcy
-    let css = std::env::current_dir().unwrap().join(r"thindx\doc\style.css");
-    std::env::set_var("RUSTDOCFLAGS", format!(r"--extend-css {css}", css = css.display()));
-
     let cmd = args.next().expect("command");
     match cmd.as_str() {
         "b" | "build"   => build(args),

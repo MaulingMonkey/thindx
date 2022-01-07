@@ -1,12 +1,3 @@
-//! <!-- style specific to the root page -->
-//! <style>
-//!     #main > h2      { display: none; }
-//!     #main > table   { display: none !important; }
-//!     #main   code    { white-space: nowrap !important; }
-//!     /*
-//!     */
-//! </style>
-//!
 //! Thin [Direct3D9] wrappers for Rust, designed to be suitable for:
 //! *   Greenfield projects targeting ancient APIs for some reason
 //! *   Graphics middleware looking to integrate into existing D3D9 codebases

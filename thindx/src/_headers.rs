@@ -7,8 +7,6 @@
 //! ⚠️ Scanned C++ definitions are not yet complete.
 //! Based on [MaulingMonkey/windows-sdk-scanner](https://github.com/MaulingMonkey/windows-sdk-scanner).
 //!
-//! <style>#main { max-width: 1500px; }</style>
-//!
 //! # Headers
 //!
 //! | C++ Header | Interfaces | Structs | Enums | Functions |
