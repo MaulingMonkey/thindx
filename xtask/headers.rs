@@ -91,8 +91,8 @@ pub fn update() {
 
                 let mapped = cpp.methods().filter(|m| cpp2rust.contains_key(&format!("{}::{}", cpp.id, m.f.id))).count();
                 let total = cpp.methods().count();
-                write!(rs, " {} {} of {}", ok_if(mapped == total), mapped, total)?;
-                writeln!(rs, " |")?;
+                write!(rs, " {} |", ProgressBadge(mapped, total))?;
+                writeln!(rs)?;
             }
 
             for (idx, (cpp, rust)) in structs.enumerate() {
@@ -115,6 +115,7 @@ pub fn update() {
                 write!(rs, "//! | {} | {} |", ok_if(rust.is_some()), CppLink(&cpp.id))?;
                 for rust in rust.into_iter().flat_map(|p| p.iter()) { write!(rs, " [`{}`]<br>", rust)?; }
                 write!(rs, " |")?;
+                //write!(rs, " {} |", ProgressBadge(mapped, total))?;
                 write!(rs, " ??? of ??? |")?;
                 writeln!(rs)?;
             }

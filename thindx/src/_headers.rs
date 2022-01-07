@@ -539,7 +539,7 @@
 //! | ✔️ | [`ID3D11FunctionReflection`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11functionreflection) | [`d3d11::FunctionReflection`]<br> | ✔️ 7 of 7 |
 //! | ✔️ | [`ID3D11LibraryReflection`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11libraryreflection) | [`d3d11::LibraryReflection`]<br> | ✔️ 2 of 2 |
 //! | ✔️ | [`ID3D11Linker`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11linker) | [`d3d11::Linker`]<br> | ✔️ 3 of 3 |
-//! | ✔️ | [`ID3D11LinkingNode`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11linkingnode) | [`d3d11::LinkingNode`]<br> | ✔️ 0 of 0 |
+//! | ✔️ | [`ID3D11LinkingNode`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11linkingnode) | [`d3d11::LinkingNode`]<br> |   |
 //! | ✔️ | [`ID3D11Module`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11module) | [`d3d11::Module`]<br> | ✔️ 1 of 1 |
 //! | ✔️ | [`ID3D11ModuleInstance`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11moduleinstance) | [`d3d11::ModuleInstance`]<br> | ✔️ 10 of 10 |
 //! | ✔️ | [`ID3D11ShaderReflection`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11shaderreflection) | [`d3d11::ShaderReflection`]<br> | ✔️ 19 of 19 |
