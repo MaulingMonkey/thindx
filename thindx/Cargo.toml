@@ -25,7 +25,7 @@ path            = "src/_lib.rs"
 
 [features]
 default         = []
-9ex             = []
+9ex             = ["dev/9ex"]
 # extra               = []
 # impl-poor-defaults  = []
 # impl-from-unchecked = []
@@ -60,7 +60,7 @@ winapi.features = [
 ]
 
 [target.'cfg(windows)'.dev-dependencies]
-doc.path            = "../doc"
+dev.path            = "../dev"
 lazy_static         = "1.4"
 raw-window-handle   = "0.3"
 winit               = "0.23"

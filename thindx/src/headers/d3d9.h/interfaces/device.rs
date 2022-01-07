@@ -303,7 +303,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::d3d9::*; let device = Device::pure();
+    /// # use dev::d3d9::*; let device = device_pure();
     /// device.begin_scene().unwrap();
     /// // ...issue draw calls and stuff...
     /// device.end_scene().unwrap();
@@ -437,7 +437,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::d3d9::*; let device = Device::pure();
+    /// # use dev::d3d9::*; let device = device_pure();
     /// // Create a 6 x 128x128 ARGB cubemap with no mipmaps
     /// let texture = device.create_cube_texture(128, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
     /// assert_eq!(D3DERR::INVALIDCALL, device.create_cube_texture(1 << 15, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).err());
@@ -476,7 +476,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::d3d9::*; let device = Device::pure();
+    /// # use dev::d3d9::*; let device = device_pure();
     /// let tri = device.create_index_buffer(3 * 2, Usage::None, Format::Index16, Pool::Managed, ()).unwrap();
     /// ```
     ///
@@ -596,7 +596,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::d3d9::*; let device = Device::pure();
+    /// # use dev::d3d9::*; let device = device_pure();
     /// // Create a 128x128 ARGB texture with no mipmaps
     /// let texture = device.create_texture(128, 128, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
     /// assert_eq!(D3DERR::INVALIDCALL, device.create_texture(1 << 15, 1 << 15, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).err());
@@ -626,7 +626,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::d3d9::*; let device = Device::pure();
+    /// # use dev::d3d9::*; let device = device_pure();
     /// let vert_size = 3 * 4; // XYZ * floats
     /// let length = 3 * vert_size; // 3 verts
     /// let tri = device.create_vertex_buffer(length, Usage::None, FVF::XYZ, Pool::Managed, ()).unwrap();
@@ -717,7 +717,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::d3d9::*; let device = Device::pure();
+    /// # use dev::d3d9::*; let device = device_pure();
     /// // Create a 32x32x32 volumetric ARGB texture with no mipmaps
     /// let texture = device.create_volume_texture(32, 32, 32, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
     /// assert_eq!(D3DERR::INVALIDCALL, device.create_volume_texture(1 << 10, 1 << 10, 1 << 10, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).err());
@@ -813,7 +813,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::d3d9::*; let device = Device::pure();
+    /// # use dev::d3d9::*; let device = device_pure();
     /// device.begin_scene().unwrap();
     /// // ...issue draw calls and stuff...
     /// device.end_scene().unwrap();
@@ -882,7 +882,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::d3d9::*; let device = Device::test();
+    /// # use dev::d3d9::*; let device = device_test();
     /// let available = device.get_available_texture_mem();
     /// if available >= 0xFFE0_0000 {
     ///     println!("> 4 GiB available");
@@ -929,7 +929,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::d3d9::*; let device = Device::test();
+    /// # use dev::d3d9::*; let device = device_test();
     /// println!("{:?}", device.get_clip_plane(0).unwrap());
     /// ```
     ///
@@ -958,7 +958,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::d3d9::*; let device = Device::test();
+    /// # use dev::d3d9::*; let device = device_test();
     /// println!("{:?}", device.get_clip_status().unwrap());
     /// ```
     ///
@@ -1041,7 +1041,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::d3d9::*; let device = Device::test();
+    /// # use dev::d3d9::*; let device = device_test();
     /// let caps : Caps = device.get_device_caps().unwrap();
     /// assert_eq!(caps.DeviceType,     DevType::HAL.into());
     /// assert_eq!(caps.AdapterOrdinal, 0);
@@ -1067,7 +1067,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::d3d9::*; let device = Device::test();
+    /// # use dev::d3d9::*; let device = device_test();
     /// let d3d : Direct3D = device.get_direct3d().unwrap();
     /// ```
     fn get_direct3d(&self) -> Result<Direct3D, MethodError> {
@@ -1088,7 +1088,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::d3d9::*; let device = Device::test();
+    /// # use dev::d3d9::*; let device = device_test();
     /// let mode : DisplayMode = device.get_display_mode(0).unwrap();
     /// println!("{:#?}", mode);
     /// assert!(mode.width > 0);
@@ -1131,7 +1131,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::d3d9::*; let device = Device::test();
+    /// # use dev::d3d9::*; let device = device_test();
     /// assert_eq!(device.get_fvf().unwrap(), FVF::None);
     /// ```
     fn get_fvf(&self) -> Result<FVF, MethodError> {
@@ -1151,7 +1151,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::d3d9::*; let device = Device::test();
+    /// # use dev::d3d9::*; let device = device_test();
     /// let ramp = device.get_gamma_ramp(0);
     /// ```
     fn get_gamma_ramp(&self, swap_chain: u32) -> D3DGAMMARAMP {
@@ -1168,7 +1168,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::d3d9::*; let device = Device::pure();
+    /// # use dev::d3d9::*; let device = device_pure();
     /// # let tri = device.create_index_buffer(3*2, Usage::None, Format::Index16, Pool::Default, ()).unwrap();
     /// let ib : Option<IndexBuffer> = device.get_indices().unwrap();
     /// assert!(ib.is_none(), "device has no index buffer by default");
@@ -1204,7 +1204,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::d3d9::*; let device = Device::test();
+    /// # use dev::d3d9::*; let device = device_test();
     /// // Since there's no real way to clear previously set lights,
     /// // I recommend not treating untouched lights special:
     /// let light = device.get_light( 0).unwrap_or(Light::default());
@@ -1237,7 +1237,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::d3d9::*; let device = Device::test();
+    /// # use dev::d3d9::*; let device = device_test();
     /// for light in [0, 1, 100, 10000, 1000000, !0].iter().copied() {
     ///     assert_eq!(D3DERR::INVALIDCALL, device.get_light_32(light));
     /// }
@@ -1276,7 +1276,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::d3d9::*; let device = Device::test();
+    /// # use dev::d3d9::*; let device = device_test();
     /// // Since there's no real way to invalidate previously enabled/disabled lights,
     /// // I recommend not treating untouched lights special:
     /// let enabled = device.get_light_enable( 0).unwrap_or(false);
@@ -1311,7 +1311,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::d3d9::*; let device = Device::test();
+    /// # use dev::d3d9::*; let device = device_test();
     /// for light in [0, 1, 100, 10000, 1000000, !0].iter().copied() {
     ///     assert_eq!(D3DERR::INVALIDCALL, device.get_light_enable_32(light));
     /// }
@@ -1342,7 +1342,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::d3d9::*; let device = Device::test();
+    /// # use dev::d3d9::*; let device = device_test();
     /// let material = device.get_material().unwrap();
     /// ```
     fn get_material(&self) -> Result<Material, MethodError> {
@@ -1364,7 +1364,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::d3d9::*; let device = Device::test();
+    /// # use dev::d3d9::*; let device = device_test();
     /// assert_eq!(device.get_npatch_mode(), 0.0);
     /// ```
     fn get_npatch_mode(&self) -> f32 {
@@ -1393,7 +1393,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::d3d9::*; let device = Device::test();
+    /// # use dev::d3d9::*; let device = device_test();
     /// // XXX: No palette set, this may crash!!!
     /// // let pal = unsafe { device.get_palette_entries(0) }.unwrap();
     ///
@@ -1462,7 +1462,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::d3d9::*; let device = Device::pure();
+    /// # use dev::d3d9::*; let device = device_pure();
     /// // No stream bound to start
     /// let (vb, offset, stride) = device.get_stream_source(0).unwrap();
     /// assert!(vb.is_none());
@@ -1502,7 +1502,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::d3d9::*; let device = Device::pure();
+    /// # use dev::d3d9::*; let device = device_pure();
     /// assert_eq!(device.get_stream_source_freq(0).unwrap(), StreamSource::regular());
     /// assert_eq!(device.get_stream_source_freq(1).unwrap(), StreamSource::regular());
     ///
@@ -1542,7 +1542,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::d3d9::*; let device = Device::pure();
+    /// # use dev::d3d9::*; let device = device_pure();
     /// // XXX: No texture set for stage 0, this may crash!!!
     /// // let texture = unsafe { device.get_texture(0) }.unwrap();
     ///
@@ -1593,7 +1593,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::d3d9::*; let device = Device::test();
+    /// # use dev::d3d9::*; let device = device_test();
     /// let viewport : Viewport = device.get_viewport().unwrap();
     /// ```
     fn get_viewport(&self) -> Result<Viewport, MethodError> {
@@ -1618,7 +1618,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::d3d9::*; let device = Device::test();
+    /// # use dev::d3d9::*; let device = device_test();
     /// device.light_enable(0,  true).unwrap(); // Ok
     /// device.light_enable(1,  true).unwrap(); // Ok
     /// device.light_enable(!0, true).unwrap(); // Ok (16-bit)
@@ -1649,7 +1649,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::d3d9::*; let device = Device::test();
+    /// # use dev::d3d9::*; let device = device_test();
     /// unsafe {
     ///     device.light_enable_32_unchecked(0, true).unwrap();
     ///     device.light_enable_32_unchecked(0, false).unwrap();
@@ -1691,7 +1691,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     ///
     /// ```rust
     /// # use std::ptr::null_mut;   let hwnd = null_mut();
-    /// # use doc::d3d9::*;               let device = Device::test();
+    /// # use dev::d3d9::*;               let device = device_test();
     /// // Present the entire back buffer (should work with all swap chains, probably:)
     /// device.present(.., .., (), None).unwrap();
     /// // TODO: Handle D3DERR::DEVICEREMOVED
@@ -1776,7 +1776,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::d3d9::*; let device = Device::test();
+    /// # use dev::d3d9::*; let device = device_test();
     /// device.set_fvf(FVF::None).unwrap();
     /// device.set_fvf(FVF::XYZ).unwrap();
     /// ```
@@ -1804,7 +1804,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust,no_run
-    /// # use doc::d3d9::*; let device = Device::test();
+    /// # use dev::d3d9::*; let device = device_test();
     /// let ramp = device.get_gamma_ramp(0);
     /// // ...modify ramp?..
     /// device.set_gamma_ramp(0, SGR::NoCalibration, &ramp);
@@ -1823,7 +1823,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::d3d9::*; let [device, device2] = Device::pure2();
+    /// # use dev::d3d9::*; let [device, device2] = device_pure2();
     /// let tri = device.create_index_buffer(3*2, Usage::None, Format::Index16, Pool::Default, ()).unwrap();
     /// // ...initialize tri...
     ///
@@ -1864,7 +1864,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::d3d9::*; let device = Device::test();
+    /// # use dev::d3d9::*; let device = device_test();
     /// let mut light = Light::default();
     /// light.Type = LightType::Point.into();
     /// // ...
@@ -1915,7 +1915,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::d3d9::*; let device = Device::test();
+    /// # use dev::d3d9::*; let device = device_test();
     /// let mut light = Light::default();
     /// light.Type = LightType::Point.into();
     /// // ...
@@ -1943,7 +1943,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::d3d9::*; let device = Device::test();
+    /// # use dev::d3d9::*; let device = device_test();
     /// let material = Material {
     ///     diffuse: ColorValue::default(),
     ///     .. Material::default()
@@ -1965,7 +1965,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::d3d9::*; let device = Device::test();
+    /// # use dev::d3d9::*; let device = device_test();
     /// device.set_npatch_mode(0.0).unwrap();
     /// device.set_npatch_mode(1.0).unwrap();
     /// device.set_npatch_mode(9001.0).unwrap();
@@ -1988,7 +1988,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::d3d9::*; let device = Device::test();
+    /// # use dev::d3d9::*; let device = device_test();
     /// let pal = [Color::argb(0xFF112233); 256];
     /// device.set_palette_entries(0, &pal).unwrap();
     /// ```
@@ -2124,7 +2124,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::d3d9::*; let [device, device2] = Device::pure2();
+    /// # use dev::d3d9::*; let [device, device2] = device_pure2();
     /// let tri = device.create_vertex_buffer(3*4*3, Usage::None, FVF::XYZ, Pool::Default, ()).unwrap();
     /// // ...initialize tri...
     /// device.set_stream_source(0, &tri,       0, 4*3).unwrap(); // bind the vertex buffer
@@ -2158,7 +2158,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::d3d9::*; let device = Device::pure();
+    /// # use dev::d3d9::*; let device = device_pure();
     /// // Setup instanced rendering, 100 instances, with:
     /// // shared geometry in stream 0, repeated 100 times:
     /// device.set_stream_source_freq(0, StreamSource::indexed_data(100)).unwrap();
@@ -2197,7 +2197,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::d3d9::*; let device = Device::pure();
+    /// # use dev::d3d9::*; let device = device_pure();
     /// let texture = device.create_texture(128, 128, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
     ///
     /// unsafe{device.set_texture(0,      &texture  )}.unwrap();
@@ -2331,7 +2331,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::d3d9::*; let device = Device::test();
+    /// # use dev::d3d9::*; let device = device_test();
     /// device.set_viewport(Viewport{ x: 0, y: 0, width: 100, height: 100, min_z: 0.0, max_z: 1.0 }).unwrap();
     /// ```
     fn set_viewport(&self, viewport: impl Into<Viewport>) -> Result<(), MethodError> {
@@ -2362,42 +2362,48 @@ pub struct RgnData {
     pub(crate) buffer: [Rect],
 }
 
-#[test] fn begin_end_scene() {
-    let device = Device::test();
-    assert_eq!(D3DERR::INVALIDCALL, device.end_scene());
 
-    device.begin_scene().unwrap();
-    device.end_scene().unwrap();
-    assert_eq!(D3DERR::INVALIDCALL, device.end_scene());
 
-    device.begin_scene().unwrap();
-    assert_eq!(D3DERR::INVALIDCALL, device.begin_scene());
-    device.end_scene().unwrap();
-    assert_eq!(D3DERR::INVALIDCALL, device.end_scene());
+#[cfg(test)] mod tests {
+    use dev::d3d9::*;
 
-    device.begin_scene().unwrap();
-    for _ in 0..1000 { assert_eq!(D3DERR::INVALIDCALL, device.begin_scene()); }
-    device.end_scene().unwrap();
-    for _ in 0..1000 { assert_eq!(D3DERR::INVALIDCALL, device.end_scene()); }
-}
+    #[test] fn begin_end_scene() {
+        let device = device_test();
+        assert_eq!(D3DERR::INVALIDCALL, device.end_scene());
 
-#[test] fn present() {
-    let device = Device::test_pp(false, |pp, _| pp.SwapEffect = SwapEffect::Copy.into()).unwrap();
-    device.present(.., .., (), None).unwrap();
+        device.begin_scene().unwrap();
+        device.end_scene().unwrap();
+        assert_eq!(D3DERR::INVALIDCALL, device.end_scene());
 
-    for rect in [
-        (0, 0) .. (1, 1),
-        (-100, -100) .. (100, 100),
-        (100, 100) .. (-100, -100),
-        (-1000, -1000) .. (1000, 1000),
-        (1000, 1000) .. (-1000, -1000),
-        (-100000, -100000) .. (100000, 100000),
-        (0, 0) .. (100000, 100000),
-        (0, 0) .. (i32::MAX, i32::MAX),
-        (i32::MIN, i32::MIN) .. (i32::MAX, i32::MAX),
-        (i32::MAX, i32::MAX) .. (i32::MIN, i32::MIN),
-    ].iter().cloned() {
-        let rect = Rect::from(rect);
-        device.present(rect, rect, (), None).unwrap();
+        device.begin_scene().unwrap();
+        assert_eq!(D3DERR::INVALIDCALL, device.begin_scene());
+        device.end_scene().unwrap();
+        assert_eq!(D3DERR::INVALIDCALL, device.end_scene());
+
+        device.begin_scene().unwrap();
+        for _ in 0..1000 { assert_eq!(D3DERR::INVALIDCALL, device.begin_scene()); }
+        device.end_scene().unwrap();
+        for _ in 0..1000 { assert_eq!(D3DERR::INVALIDCALL, device.end_scene()); }
+    }
+
+    #[test] fn present() {
+        let device = device_test_pp(false, |pp, _| pp.SwapEffect = SwapEffect::Copy.into()).unwrap();
+        device.present(.., .., (), None).unwrap();
+
+        for rect in [
+            (0, 0) .. (1, 1),
+            (-100, -100) .. (100, 100),
+            (100, 100) .. (-100, -100),
+            (-1000, -1000) .. (1000, 1000),
+            (1000, 1000) .. (-1000, -1000),
+            (-100000, -100000) .. (100000, 100000),
+            (0, 0) .. (100000, 100000),
+            (0, 0) .. (i32::MAX, i32::MAX),
+            (i32::MIN, i32::MIN) .. (i32::MAX, i32::MAX),
+            (i32::MAX, i32::MAX) .. (i32::MIN, i32::MIN),
+        ].iter().cloned() {
+            let rect = Rect::from(rect);
+            device.present(rect, rect, (), None).unwrap();
+        }
     }
 }

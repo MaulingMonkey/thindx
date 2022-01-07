@@ -20,7 +20,9 @@ use std::ptr::null_mut;
 pub struct StateBlock(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DStateBlock9>);
 
 #[test] fn begin_end_state_block() {
-    let device = Device::test();
+    use dev::d3d9::*;
+
+    let device = device_test();
     assert_eq!(D3DERR::INVALIDCALL, device.end_state_block().err()); // not in a state block
 
     device.begin_state_block().unwrap();

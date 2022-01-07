@@ -118,8 +118,8 @@ pub trait IDirect3D9Ext : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::d3d9::*;
-    /// # let d3d = Direct3D::test();
+    /// # use dev::d3d9::*;
+    /// # let d3d = d3d_test();
     /// assert!([Format::D24S8, Format::D24X8, Format::D16, Format::D32].iter().copied().any(|fmt|
     ///     d3d.check_depth_stencil_match(
     ///         D3DADAPTER_DEFAULT,
@@ -151,7 +151,7 @@ pub trait IDirect3D9Ext : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::d3d9::*; let d3d = Direct3D::test();
+    /// # use dev::d3d9::*; let d3d = d3d_test();
     /// assert!(d3d.check_device_format(
     ///     D3DADAPTER_DEFAULT,
     ///     DevType::HAL,
@@ -184,7 +184,7 @@ pub trait IDirect3D9Ext : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::d3d9::*; let d3d = Direct3D::test();
+    /// # use dev::d3d9::*; let d3d = d3d_test();
     /// assert!(d3d.check_device_format_conversion(
     ///     D3DADAPTER_DEFAULT,
     ///     DevType::HAL,
@@ -212,7 +212,7 @@ pub trait IDirect3D9Ext : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::d3d9::*; let d3d = Direct3D::test();
+    /// # use dev::d3d9::*; let d3d = d3d_test();
     /// assert!(d3d.check_device_multi_sample_type(
     ///     D3DADAPTER_DEFAULT,
     ///     DevType::HAL,
@@ -243,7 +243,7 @@ pub trait IDirect3D9Ext : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::d3d9::*; let d3d = Direct3D::test();
+    /// # use dev::d3d9::*; let d3d = d3d_test();
     /// assert!(d3d.check_device_type(
     ///     D3DADAPTER_DEFAULT, // adapter
     ///     DevType::HAL,       // device_type
@@ -287,7 +287,7 @@ pub trait IDirect3D9Ext : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::d3d9::*; let d3d = Direct3D::test();
+    /// # use dev::d3d9::*; let d3d = d3d_test();
     /// let device = unsafe { d3d.create_device(
     ///     D3DADAPTER_DEFAULT,     // adapter
     ///     DevType::HAL,           // device_type
@@ -342,7 +342,7 @@ pub trait IDirect3D9Ext : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::d3d9::*; let d3d = Direct3D::test();
+    /// # use dev::d3d9::*; let d3d = d3d_test();
     /// let adapter = 0;
     /// let fmt = Format::X8R8G8B8;
     /// for mode in 0..d3d.get_adapter_mode_count(adapter, fmt) {
@@ -378,7 +378,7 @@ pub trait IDirect3D9Ext : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::d3d9::*; let d3d = Direct3D::test();
+    /// # use dev::d3d9::*; let d3d = d3d_test();
     /// println!("{} adapters", d3d.get_adapter_count());
     /// ```
     ///
@@ -398,7 +398,7 @@ pub trait IDirect3D9Ext : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::d3d9::*; let d3d = Direct3D::test();
+    /// # use dev::d3d9::*; let d3d = d3d_test();
     /// for adapter in 0..d3d.get_adapter_count() {
     ///     let mode = d3d.get_adapter_display_mode(adapter).unwrap();
     ///     let D3DDISPLAYMODE { Width: w, Height: h, RefreshRate: hz, Format: fmt } = mode;
@@ -434,7 +434,7 @@ pub trait IDirect3D9Ext : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::d3d9::*; let d3d = Direct3D::test();
+    /// # use dev::d3d9::*; let d3d = d3d_test();
     /// eprintln!("{:#?}", d3d.get_adapter_identifier(0, 0).unwrap());
     /// ```
     ///
@@ -480,7 +480,7 @@ pub trait IDirect3D9Ext : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::d3d9::*; let d3d = Direct3D::test();
+    /// # use dev::d3d9::*; let d3d = d3d_test();
     /// for fmt in [Format::X8R8G8B8, Format::A8R8G8B8].iter().copied() {
     ///     let modes = d3d.get_adapter_mode_count(0, fmt);
     ///     println!("adapter 1: {:?}: {} mode(s)", fmt, modes);
@@ -513,7 +513,7 @@ pub trait IDirect3D9Ext : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::d3d9::*; let d3d = Direct3D::test();
+    /// # use dev::d3d9::*; let d3d = d3d_test();
     /// let monitor : HMONITOR = d3d.get_adapter_monitor(   0).unwrap();
     /// let error   : ()       = d3d.get_adapter_monitor(9001).unwrap_err();
     /// ```
@@ -533,7 +533,7 @@ pub trait IDirect3D9Ext : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::d3d9::*; let d3d = Direct3D::test();
+    /// # use dev::d3d9::*; let d3d = d3d_test();
     /// let caps : Caps = d3d.get_device_caps(0, DevType::HAL).unwrap();
     /// assert_eq!(caps.DeviceType,     DevType::HAL.into());
     /// assert_eq!(caps.AdapterOrdinal, 0);
@@ -563,7 +563,8 @@ mod private {
 }
 
 #[cfg(test)] mod tests {
-    use super::*;
+    use dev::d3d9::*;
+    use std::ptr::null_mut;
 
     #[test] fn create() {
         use winapi::shared::d3d9::D3D_SDK_VERSION;
@@ -584,7 +585,7 @@ mod private {
     }
 
     #[test] fn check_depth_stencil_match() {
-        let d3d = Direct3D::test();
+        let d3d = d3d_test();
         assert!(                        d3d.check_depth_stencil_match(0,    DevType::HAL, Format::X8R8G8B8, Format::A8R8G8B8, Format::D24S8  ).is_ok()); // valid
         assert_eq!(D3DERR::INVALIDCALL, d3d.check_depth_stencil_match(9001, DevType::HAL, Format::X8R8G8B8, Format::A8R8G8B8, Format::D24S8  )); // invalid adapter
         assert_eq!(D3DERR::INVALIDCALL, d3d.check_depth_stencil_match(0,    Invalid,      Format::X8R8G8B8, Format::A8R8G8B8, Format::D24S8  )); // invalid devtype
@@ -594,7 +595,7 @@ mod private {
     }
 
     #[test] fn check_device_format() {
-        let d3d = Direct3D::test();
+        let d3d = d3d_test();
         assert!(                        d3d.check_device_format(0,    DevType::HAL, Format::X8R8G8B8,  0, ResourceType::Texture, Format::A8R8G8B8).is_ok()); // valid
         assert_eq!(D3DERR::INVALIDCALL, d3d.check_device_format(9001, DevType::HAL, Format::X8R8G8B8,  0, ResourceType::Texture, Format::A8R8G8B8)); // invalid adapter
         assert_eq!(D3DERR::INVALIDCALL, d3d.check_device_format(0,    Invalid,      Format::X8R8G8B8,  0, ResourceType::Texture, Format::A8R8G8B8)); // invalid devtype
@@ -605,7 +606,7 @@ mod private {
     }
 
     #[test] fn check_device_format_conversion() {
-        let d3d = Direct3D::test();
+        let d3d = d3d_test();
         assert!(                            d3d.check_device_format_conversion(0,    DevType::HAL, Format::A8R8G8B8, Format::A8R8G8B8).is_ok()); // valid
         assert!(                            d3d.check_device_format_conversion(0,    DevType::HAL, Format::D24S8,    Format::D24S8   ).is_ok()); // valid
         assert_eq!(D3DERR::INVALIDCALL,     d3d.check_device_format_conversion(9001, DevType::HAL, Format::A8R8G8B8, Format::A8R8G8B8)); // invalid adapter
@@ -617,7 +618,7 @@ mod private {
     }
 
     #[test] fn check_device_multi_sample_type() {
-        let d3d = Direct3D::test();
+        let d3d = d3d_test();
         assert!(                            d3d.check_device_multi_sample_type(0,    DevType::HAL, Format::A8R8G8B8, true, MultiSample::None    ).is_ok()); // valid
         assert!(                            d3d.check_device_multi_sample_type(0,    DevType::HAL, Format::A8R8G8B8, true, MultiSample::X2      ).is_ok()); // valid
         assert_eq!(D3DERR::INVALIDCALL,     d3d.check_device_multi_sample_type(9001, DevType::HAL, Format::A8R8G8B8, true, MultiSample::X2      )); // invalid adapter
@@ -628,7 +629,7 @@ mod private {
     }
 
     #[test] fn check_device_type() {
-        let d3d = Direct3D::test();
+        let d3d = d3d_test();
         assert!(                            d3d.check_device_type(0,    DevType::HAL, Format::X8R8G8B8, Format::A8R8G8B8, true).is_ok()); // valid
         assert_eq!(D3DERR::INVALIDCALL,     d3d.check_device_type(9001, DevType::HAL, Format::X8R8G8B8, Format::A8R8G8B8, true)); // invalid adapter
         assert_eq!(D3DERR::INVALIDCALL,     d3d.check_device_type(0,    Invalid,      Format::X8R8G8B8, Format::A8R8G8B8, true)); // invalid devtype
@@ -639,7 +640,7 @@ mod private {
     // #[test] fn create_device() {} // TODO
 
     #[test] fn enum_adapter_modes() {
-        let d3d = Direct3D::test();
+        let d3d = d3d_test();
         let adapters = d3d.get_adapter_count();
 
         // all adapters should be valid
@@ -669,12 +670,12 @@ mod private {
     }
 
     #[test] fn get_adapter_count() {
-        let d3d = Direct3D::test();
+        let d3d = d3d_test();
         assert!(d3d.get_adapter_count() > 0);
     }
 
     #[test] fn get_adapter_display_mode() {
-        let d3d = Direct3D::test();
+        let d3d = d3d_test();
         let adapters = d3d.get_adapter_count();
         for adapter in 0..adapters {
             d3d.get_adapter_display_mode(adapter).unwrap_or_else(|err| panic!("unable to query display mode of adapter {} of {}: {}", adapter+1, adapters, err));
@@ -685,7 +686,7 @@ mod private {
     }
 
     #[test] fn get_adapter_identifier() {
-        let d3d = Direct3D::test();
+        let d3d = d3d_test();
 
         /// The D3DENUM_WHQL_LEVEL value has been retired for 9Ex and future versions
         ///
@@ -705,7 +706,7 @@ mod private {
     }
 
     #[test] fn get_adapter_mode_count() {
-        let d3d = Direct3D::test();
+        let d3d = d3d_test();
         let adapters = d3d.get_adapter_count();
         for valid in 0..adapters {
             for (fmt,                           expect) in [
@@ -732,14 +733,14 @@ mod private {
     }
 
     #[test] fn get_adapter_monitor() {
-        let d3d = Direct3D::test();
+        let d3d = d3d_test();
         let adapters = d3d.get_adapter_count();
         for valid in 0..adapters                { assert!(!d3d.get_adapter_monitor(  valid).unwrap_or(null_mut()).is_null(), "adapter {} of {} has a null HMONITOR", valid+1, adapters); }
         for invalid in adapters..adapters+100   { assert!( d3d.get_adapter_monitor(invalid).is_err(),                        "adapter {} of {} returned an HMONITOR despite being out-of-bounds!", invalid+1, adapters); }
     }
 
     #[test] fn get_device_caps() {
-        let d3d = Direct3D::test();
+        let d3d = d3d_test();
 
         let adapter = 0; // valid
         d3d.get_device_caps(adapter, DevType::HAL).unwrap();
@@ -760,14 +761,3 @@ mod private {
         assert_eq!(D3DERR::INVALIDCALL,     d3d.get_device_caps(adapter, DevType::from_unchecked(100000000)).map(|_| ()));
     }
 }
-
-
-
-#[cfg(test)] pub(crate) struct Invalid;
-#[cfg(test)] impl From<Invalid> for DevType         { fn from(_: Invalid) -> Self { Self::from_unchecked(!0) } }
-#[cfg(test)] impl From<Invalid> for Format          { fn from(_: Invalid) -> Self { Self::from_unchecked(!0) } }
-#[cfg(test)] impl From<Invalid> for FVF             { fn from(_: Invalid) -> Self { Self::from_unchecked(!0) } }
-#[cfg(test)] impl From<Invalid> for MultiSample     { fn from(_: Invalid) -> Self { Self::from_unchecked(!0) } }
-#[cfg(test)] impl From<Invalid> for Pool            { fn from(_: Invalid) -> Self { Self::from_unchecked(!0) } }
-#[cfg(test)] impl From<Invalid> for ResourceType    { fn from(_: Invalid) -> Self { Self::from_unchecked(!0) } }
-#[cfg(test)] impl From<Invalid> for Usage           { fn from(_: Invalid) -> Self { Self::from_unchecked(!0) } }

@@ -60,25 +60,30 @@ unsafe impl AsHWND for SafeHWND<'_> {
 
 
 
-#[test] #[should_panic] fn should_panic_on_create() {
-    let _safe = unsafe { SafeHWND::assert(&(42 as HWND)) };
-}
+#[cfg(test)] mod tests {
+    use super::*;
+    use dev::win32::*;
 
-#[test] #[should_panic] fn should_panic_on_drop() {
-    let window = crate::extra::create_window("destroyed before dropped");
-    let safe = unsafe { SafeHWND::assert(&(42 as HWND)) };
-    unsafe { CloseWindow(window) };
-    std::mem::drop(safe);
-}
+    #[test] #[should_panic] fn should_panic_on_create() {
+        let _safe = unsafe { SafeHWND::assert(&(42 as HWND)) };
+    }
 
-#[test] fn should_not_panic_null() {
-    let safe = unsafe { SafeHWND::assert(&std::ptr::null_mut()) };
-    std::mem::drop(safe);
-}
+    #[test] #[should_panic] fn should_panic_on_drop() {
+        let window = create_window("destroyed before dropped");
+        let safe = unsafe { SafeHWND::assert(&(42 as HWND)) };
+        unsafe { CloseWindow(window) };
+        std::mem::drop(safe);
+    }
 
-#[test] fn should_not_panic_outlived() {
-    let window = crate::extra::create_window("destroyed before dropped");
-    let safe = unsafe { SafeHWND::assert(&window) };
-    std::mem::drop(safe);
-    unsafe { CloseWindow(window) };
+    #[test] fn should_not_panic_null() {
+        let safe = unsafe { SafeHWND::assert(&std::ptr::null_mut()) };
+        std::mem::drop(safe);
+    }
+
+    #[test] fn should_not_panic_outlived() {
+        let window = create_window("destroyed before dropped");
+        let safe = unsafe { SafeHWND::assert(&window) };
+        std::mem::drop(safe);
+        unsafe { CloseWindow(window) };
+    }
 }

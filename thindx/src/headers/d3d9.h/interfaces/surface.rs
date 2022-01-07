@@ -54,7 +54,7 @@ pub trait IDirect3DSurface9Ext : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::d3d9::*; let device = Device::test();
+    /// # use dev::d3d9::*; let device = device_test();
     /// # let texture = device.create_texture(128, 128, 8, Usage::None, Format::A8R8G8B8, Pool::Managed, ()).unwrap();
     /// # let surface = texture.get_surface_level(0).unwrap();
     /// let texture = surface.get_container::<Texture>().unwrap();
@@ -79,7 +79,7 @@ pub trait IDirect3DSurface9Ext : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::d3d9::*; let device = Device::test();
+    /// # use dev::d3d9::*; let device = device_test();
     /// # let texture = device.create_texture(128, 128, 8, Usage::None, Format::A8R8G8B8, Pool::Managed, ()).unwrap();
     /// # let surface = texture.get_surface_level(0).unwrap();
     /// let dc = surface.get_dc().unwrap();
@@ -106,7 +106,7 @@ pub trait IDirect3DSurface9Ext : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::d3d9::*; let device = Device::test();
+    /// # use dev::d3d9::*; let device = device_test();
     /// let texture = device.create_texture(128, 128, 8, Usage::None, Format::A8R8G8B8, Pool::Managed, ()).unwrap();
     /// let surface = texture.get_surface_level(0).unwrap();
     /// let desc : SurfaceDesc = surface.get_desc().unwrap();
@@ -138,7 +138,7 @@ pub trait IDirect3DSurface9Ext : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::d3d9::*; let device = Device::test();
+    /// # use dev::d3d9::*; let device = device_test();
     /// let texture = device.create_texture(128, 128, 8, Usage::None, Format::A8R8G8B8, Pool::Managed, ()).unwrap();
     /// let surface = texture.get_surface_level(0).unwrap();
     /// let data = [[Color::argb(0xFF112233); 128]; 128];
@@ -173,7 +173,7 @@ pub trait IDirect3DSurface9Ext : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::d3d9::*; let device = Device::test();
+    /// # use dev::d3d9::*; let device = device_test();
     /// # let texture = device.create_texture(128, 128, 8, Usage::None, Format::A8R8G8B8, Pool::Managed, ()).unwrap();
     /// # let surface = texture.get_surface_level(0).unwrap();
     /// let dc = surface.get_dc().unwrap();
@@ -203,7 +203,7 @@ pub trait IDirect3DSurface9Ext : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::d3d9::*; let device = Device::test();
+    /// # use dev::d3d9::*; let device = device_test();
     /// let texture = device.create_texture(128, 128, 8, Usage::None, Format::A8R8G8B8, Pool::Managed, ()).unwrap();
     /// let surface = texture.get_surface_level(0).unwrap();
     /// let data = [[Color::argb(0xFF112233); 128]; 128];
@@ -234,163 +234,167 @@ mod private {
 
 
 
-// #[test] fn create_depth_stencil_surface() {} // TODO
-// #[test] fn create_offscreen_plain_surface() {} // TODO
-// #[test] fn create_render_target() {} // TODO
+#[cfg(test)] mod tests {
+    use dev::d3d9::*;
 
-// #[test] fn get_back_buffer() {} // TODO
+    // #[test] fn create_depth_stencil_surface() {} // TODO
+    // #[test] fn create_offscreen_plain_surface() {} // TODO
+    // #[test] fn create_render_target() {} // TODO
 
-#[test] fn get_set_depth_stencil_surface() {
-    let device = Device::test_pp(false, |pp, _| {
-        pp.EnableAutoDepthStencil = true.into();
-        pp.AutoDepthStencilFormat = Format::D24S8.into();
-    }).unwrap();
+    // #[test] fn get_back_buffer() {} // TODO
 
-    let ds = device.get_depth_stencil_surface().unwrap().unwrap();
-    assert_eq!(ds.as_raw(), device.get_depth_stencil_surface().unwrap().unwrap().as_raw());
-    device.set_depth_stencil_surface(Some(&ds)).unwrap();
-    assert_eq!(ds.as_raw(), device.get_depth_stencil_surface().unwrap().unwrap().as_raw());
-    device.set_depth_stencil_surface(None).unwrap();
-    assert!(device.get_depth_stencil_surface().unwrap().is_none());
+    #[test] fn get_set_depth_stencil_surface() {
+        let device = device_test_pp(false, |pp, _| {
+            pp.EnableAutoDepthStencil = true.into();
+            pp.AutoDepthStencilFormat = Format::D24S8.into();
+        }).unwrap();
 
-    // TODO: What happens with pure devices?
-    // TODO: What happens with setting surfaces with poor formats?
-    // TODO: What happens with setting surfaces with mismatched resolutions?
-}
+        let ds = device.get_depth_stencil_surface().unwrap().unwrap();
+        assert_eq!(ds.as_raw(), device.get_depth_stencil_surface().unwrap().unwrap().as_raw());
+        device.set_depth_stencil_surface(Some(&ds)).unwrap();
+        assert_eq!(ds.as_raw(), device.get_depth_stencil_surface().unwrap().unwrap().as_raw());
+        device.set_depth_stencil_surface(None).unwrap();
+        assert!(device.get_depth_stencil_surface().unwrap().is_none());
 
-#[test] fn get_set_render_target() {
-    let device = Device::test();
-    //let caps = device...
-    let max_rts = 4; // TODO: caps
-
-    // attempt to muck with RT0
-    let rt0 = device.get_render_target(0).expect("RT0 inaccessable").expect("RT0 null");
-    device.set_render_target(0, Some(&rt0)).unwrap();
-    assert_eq!(rt0.as_raw(), device.get_render_target(0).expect("RT0 inaccessable").expect("RT0 null").as_raw());
-    assert_eq!(D3DERR::INVALIDCALL, device.set_render_target(0, None));
-    assert_eq!(rt0.as_raw(), device.get_render_target(0).expect("RT0 inaccessable").expect("RT0 null").as_raw());
-    device.set_render_target(0, Some(&rt0)).unwrap();
-    assert_eq!(rt0.as_raw(), device.get_render_target(0).expect("RT0 inaccessable").expect("RT0 null").as_raw());
-
-    // muck with probably-in-bounds RTs
-    for _i in 1..max_rts {
-        // TODO: create real textures to bind
-        // println!("rt[{}]", i);
-        // device.set_render_target(i, Some(&rt0)).unwrap();
+        // TODO: What happens with pure devices?
+        // TODO: What happens with setting surfaces with poor formats?
+        // TODO: What happens with setting surfaces with mismatched resolutions?
     }
 
-    // TODO: What happens with setting surfaces with poor formats?
-    // TODO: What happens with setting surfaces with mismatched resolutions?
+    #[test] fn get_set_render_target() {
+        let device = device_test();
+        //let caps = device...
+        let max_rts = 4; // TODO: caps
 
-    // muck with probably-out-of-bounds RTs
-    for i in [100, 1000, 100000, !0].iter().copied() {
-        // TODO: create real textures to bind
-        assert_eq!(D3DERR::INVALIDCALL, device.set_render_target(i, Some(&rt0)));
-    }
-}
+        // attempt to muck with RT0
+        let rt0 = device.get_render_target(0).expect("RT0 inaccessable").expect("RT0 null");
+        device.set_render_target(0, Some(&rt0)).unwrap();
+        assert_eq!(rt0.as_raw(), device.get_render_target(0).expect("RT0 inaccessable").expect("RT0 null").as_raw());
+        assert_eq!(D3DERR::INVALIDCALL, device.set_render_target(0, None));
+        assert_eq!(rt0.as_raw(), device.get_render_target(0).expect("RT0 inaccessable").expect("RT0 null").as_raw());
+        device.set_render_target(0, Some(&rt0)).unwrap();
+        assert_eq!(rt0.as_raw(), device.get_render_target(0).expect("RT0 inaccessable").expect("RT0 null").as_raw());
 
-// #[test] fn get_front_buffer_data() {} // TODO
+        // muck with probably-in-bounds RTs
+        for _i in 1..max_rts {
+            // TODO: create real textures to bind
+            // println!("rt[{}]", i);
+            // device.set_render_target(i, Some(&rt0)).unwrap();
+        }
 
-#[test] fn clear() {
-    // TODO: fuzz rects harder
+        // TODO: What happens with setting surfaces with poor formats?
+        // TODO: What happens with setting surfaces with mismatched resolutions?
 
-    for (ds_fmt,                        has_depth,  has_sten,   require ) in [
-        (None,                          false,      false,      true    ),
-        (Some(Format::D24S8),           true,       true,       true    ),
-        (Some(Format::D24X8),           true,       false,      true    ),
-        (Some(Format::D16),             true,       false,      true    ),
-        (Some(Format::D15S1),           true,       true,       false   ),
-        (Some(Format::D24X4S4),         true,       true,       false   ),
-        (Some(Format::D16_LOCKABLE),    true,       false,      true    ),
-        (Some(Format::D24FS8),          true,       true,       false   ),
-        (Some(Format::D32),             true,       false,      false   ),
-        (Some(Format::D32_LOCKABLE),    true,       false,      false   ),
-        (Some(Format::D32F_LOCKABLE),   true,       false,      true    ),
-        (Some(Format::X8_LOCKABLE),     false,      false,      false   ),
-    ].iter().copied() {
-        let device = Device::test_pp(false, |pp, _| {
-            if let Some(ds_fmt) = ds_fmt {
-                pp.EnableAutoDepthStencil = true.into();
-                pp.AutoDepthStencilFormat = ds_fmt.into();
-            }
-        });
-        if device.is_err() && !require { continue }
-        let device = device.unwrap_or_else(|err| panic!("bad depth-stencil: {:?} {:?}", ds_fmt, err));
-
-        for remove_ds in [false, true].iter().copied() {
-            let autods = device.get_depth_stencil_surface().unwrap();
-            if remove_ds {
-                if autods.is_none() { continue }
-                device.set_depth_stencil_surface(None).unwrap();
-            }
-
-            let has_depth = has_depth && !remove_ds;
-            let has_sten  = has_sten  && !remove_ds;
-
-            for (target,                        depth,                      stencil     ) in [
-                (None,                          None,                       None        ), // none
-                (Some(Color::argb(0xFF112233)), Some(0.5),                  Some(0xFFFF)), // all
-                // color
-                (Some(Color::argb(0xFF112233)), None,                       None        ),
-                // depth
-                (None,                          Some(-1.0),                 None        ),
-                (None,                          Some(-0.5),                 None        ),
-                (None,                          Some( 0.0),                 None        ),
-                (None,                          Some( 0.5),                 None        ),
-                (None,                          Some( 1.0),                 None        ),
-                (None,                          Some( 1.5),                 None        ),
-                (None,                          Some( 2.0),                 None        ),
-                (None,                          Some( 2.0),                 None        ),
-                (None,                          Some(f32::MIN),             None        ),
-                (None,                          Some(f32::MIN_POSITIVE),    None        ),
-                (None,                          Some(f32::NAN),             None        ),
-                (None,                          Some(f32::INFINITY),        None        ),
-                // stencil
-                (None,                          None,                       Some(0)     ),
-                (None,                          None,                       Some(0xFF)  ),
-                (None,                          None,                       Some(!0)    ),
-            ].iter().copied() {
-                println!("ds_fmt={:?} target={:?} depth={:?} stencil={:?}", ds_fmt, target, depth, stencil);
-                for rects in [
-                    None,
-                    Some(&[][..]),
-                    Some(&[Rect::from([0..0,   0..0])][..]),                                    // empty rect
-                    Some(&[Rect::from([0..100, 0..100])][..]),                                  // small rect
-                    Some(&[Rect::from([100..10000, 100..10000])][..]),                          // out of bounds rect
-                    Some(&[Rect::from([-10000..10000, -10000..10000])][..]),                    // positive dims huge rect
-                    Some(&[Rect::from([10000..-10000, 10000..-10000])][..]),                    // negative dims huge rect
-                    Some(&[Rect::from([0..100, 0..100]), Rect::from([0..100, 0..100])][..]),    // overlapping rects
-                ].iter().copied() {
-                    let result = device.clear(rects, target, depth, stencil);
-                    println!("  rects: {: <70} == {:?}", format!("{:?}", rects), result);
-
-                    if target.is_none() && depth.is_none() && stencil.is_none() {
-                        assert_eq!(D3DERR::INVALIDCALL, result, "expected failure - target=depth=stencil=None - nothing to clear");
-                    } else if depth.is_some() && !has_depth {
-                        assert_eq!(D3DERR::INVALIDCALL, result, "expected failure - depth={:?} was specified but no depth buffer was bound", depth);
-                    } else if stencil.is_some() && !has_sten {
-                        assert_eq!(D3DERR::INVALIDCALL, result, "expected failure - stencil={:?} was specified but no stencil buffer was bound", stencil);
-                    } else {
-                        result.expect("expected success, got");
-                    }
-                }
-            }
-
-            device.set_depth_stencil_surface(autods.as_ref()).unwrap();
+        // muck with probably-out-of-bounds RTs
+        for i in [100, 1000, 100000, !0].iter().copied() {
+            // TODO: create real textures to bind
+            assert_eq!(D3DERR::INVALIDCALL, device.set_render_target(i, Some(&rt0)));
         }
     }
-}
 
-#[test] fn color_fill() {
-    let device = Device::test();
-    let rt0 = device.get_render_target(0).unwrap().unwrap();
-    device.color_fill(&rt0, None, Color::argb(0xFF112233)).unwrap();
-    device.color_fill(&rt0, Some(Rect::from([0..1, 0..1])), Color::argb(0xFF112233)).unwrap();
-    assert_eq!(D3DERR::INVALIDCALL, device.color_fill(&rt0, Some( Rect::from([-1..1, -1..1])                 ), Color::argb(0xFF112233)));
-    assert_eq!(D3DERR::INVALIDCALL, device.color_fill(&rt0, Some( Rect::from([0..100000, 0..100000])         ), Color::argb(0xFF112233)));
-    assert_eq!(D3DERR::INVALIDCALL, device.color_fill(&rt0, Some( Rect::from([10000..-10000, 10000..-10000]) ), Color::argb(0xFF112233)));
-    assert_eq!(D3DERR::INVALIDCALL, device.color_fill(&rt0, Some( Rect::from([-10000..10000, -10000..10000]) ), Color::argb(0xFF112233)));
+    // #[test] fn get_front_buffer_data() {} // TODO
 
-    // TODO: test unsupported pools
-    // TODO: test unsupported formats
+    #[test] fn clear() {
+        // TODO: fuzz rects harder
+
+        for (ds_fmt,                        has_depth,  has_sten,   require ) in [
+            (None,                          false,      false,      true    ),
+            (Some(Format::D24S8),           true,       true,       true    ),
+            (Some(Format::D24X8),           true,       false,      true    ),
+            (Some(Format::D16),             true,       false,      true    ),
+            (Some(Format::D15S1),           true,       true,       false   ),
+            (Some(Format::D24X4S4),         true,       true,       false   ),
+            (Some(Format::D16_LOCKABLE),    true,       false,      true    ),
+            (Some(Format::D24FS8),          true,       true,       false   ),
+            (Some(Format::D32),             true,       false,      false   ),
+            (Some(Format::D32_LOCKABLE),    true,       false,      false   ),
+            (Some(Format::D32F_LOCKABLE),   true,       false,      true    ),
+            (Some(Format::X8_LOCKABLE),     false,      false,      false   ),
+        ].iter().copied() {
+            let device = device_test_pp(false, |pp, _| {
+                if let Some(ds_fmt) = ds_fmt {
+                    pp.EnableAutoDepthStencil = true.into();
+                    pp.AutoDepthStencilFormat = ds_fmt.into();
+                }
+            });
+            if device.is_err() && !require { continue }
+            let device = device.unwrap_or_else(|err| panic!("bad depth-stencil: {:?} {:?}", ds_fmt, err));
+
+            for remove_ds in [false, true].iter().copied() {
+                let autods = device.get_depth_stencil_surface().unwrap();
+                if remove_ds {
+                    if autods.is_none() { continue }
+                    device.set_depth_stencil_surface(None).unwrap();
+                }
+
+                let has_depth = has_depth && !remove_ds;
+                let has_sten  = has_sten  && !remove_ds;
+
+                for (target,                        depth,                      stencil     ) in [
+                    (None,                          None,                       None        ), // none
+                    (Some(Color::argb(0xFF112233)), Some(0.5),                  Some(0xFFFF)), // all
+                    // color
+                    (Some(Color::argb(0xFF112233)), None,                       None        ),
+                    // depth
+                    (None,                          Some(-1.0),                 None        ),
+                    (None,                          Some(-0.5),                 None        ),
+                    (None,                          Some( 0.0),                 None        ),
+                    (None,                          Some( 0.5),                 None        ),
+                    (None,                          Some( 1.0),                 None        ),
+                    (None,                          Some( 1.5),                 None        ),
+                    (None,                          Some( 2.0),                 None        ),
+                    (None,                          Some( 2.0),                 None        ),
+                    (None,                          Some(f32::MIN),             None        ),
+                    (None,                          Some(f32::MIN_POSITIVE),    None        ),
+                    (None,                          Some(f32::NAN),             None        ),
+                    (None,                          Some(f32::INFINITY),        None        ),
+                    // stencil
+                    (None,                          None,                       Some(0)     ),
+                    (None,                          None,                       Some(0xFF)  ),
+                    (None,                          None,                       Some(!0)    ),
+                ].iter().copied() {
+                    println!("ds_fmt={:?} target={:?} depth={:?} stencil={:?}", ds_fmt, target, depth, stencil);
+                    for rects in [
+                        None,
+                        Some(&[][..]),
+                        Some(&[Rect::from([0..0,   0..0])][..]),                                    // empty rect
+                        Some(&[Rect::from([0..100, 0..100])][..]),                                  // small rect
+                        Some(&[Rect::from([100..10000, 100..10000])][..]),                          // out of bounds rect
+                        Some(&[Rect::from([-10000..10000, -10000..10000])][..]),                    // positive dims huge rect
+                        Some(&[Rect::from([10000..-10000, 10000..-10000])][..]),                    // negative dims huge rect
+                        Some(&[Rect::from([0..100, 0..100]), Rect::from([0..100, 0..100])][..]),    // overlapping rects
+                    ].iter().copied() {
+                        let result = device.clear(rects, target, depth, stencil);
+                        println!("  rects: {: <70} == {:?}", format!("{:?}", rects), result);
+
+                        if target.is_none() && depth.is_none() && stencil.is_none() {
+                            assert_eq!(D3DERR::INVALIDCALL, result, "expected failure - target=depth=stencil=None - nothing to clear");
+                        } else if depth.is_some() && !has_depth {
+                            assert_eq!(D3DERR::INVALIDCALL, result, "expected failure - depth={:?} was specified but no depth buffer was bound", depth);
+                        } else if stencil.is_some() && !has_sten {
+                            assert_eq!(D3DERR::INVALIDCALL, result, "expected failure - stencil={:?} was specified but no stencil buffer was bound", stencil);
+                        } else {
+                            result.expect("expected success, got");
+                        }
+                    }
+                }
+
+                device.set_depth_stencil_surface(autods.as_ref()).unwrap();
+            }
+        }
+    }
+
+    #[test] fn color_fill() {
+        let device = device_test();
+        let rt0 = device.get_render_target(0).unwrap().unwrap();
+        device.color_fill(&rt0, None, Color::argb(0xFF112233)).unwrap();
+        device.color_fill(&rt0, Some(Rect::from([0..1, 0..1])), Color::argb(0xFF112233)).unwrap();
+        assert_eq!(D3DERR::INVALIDCALL, device.color_fill(&rt0, Some( Rect::from([-1..1, -1..1])                 ), Color::argb(0xFF112233)));
+        assert_eq!(D3DERR::INVALIDCALL, device.color_fill(&rt0, Some( Rect::from([0..100000, 0..100000])         ), Color::argb(0xFF112233)));
+        assert_eq!(D3DERR::INVALIDCALL, device.color_fill(&rt0, Some( Rect::from([10000..-10000, 10000..-10000]) ), Color::argb(0xFF112233)));
+        assert_eq!(D3DERR::INVALIDCALL, device.color_fill(&rt0, Some( Rect::from([-10000..10000, -10000..10000]) ), Color::argb(0xFF112233)));
+
+        // TODO: test unsupported pools
+        // TODO: test unsupported formats
+    }
 }

@@ -61,7 +61,7 @@ pub trait IDirect3DIndexBuffer9Ext : index_buffer::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::d3d9::*; let device = Device::pure();
+    /// # use dev::d3d9::*; let device = device_pure();
     /// let tri = device.create_index_buffer(3 * 2, Usage::None, Format::Index16, Pool::Managed, ()).unwrap();
     /// let desc : IndexBufferDesc = tri.get_desc().unwrap();
     /// assert_eq!(desc.format, Format::Index16);
@@ -99,7 +99,7 @@ pub trait IDirect3DIndexBuffer9Ext : index_buffer::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::d3d9::*; let device = Device::pure();
+    /// # use dev::d3d9::*; let device = device_pure();
     /// let tri = device.create_index_buffer(3 * 2, Usage::None, Format::Index16, Pool::Managed, ()).unwrap();
     /// let data : &[u16] = &[0, 1, 2];
     /// unsafe {
@@ -128,7 +128,7 @@ pub trait IDirect3DIndexBuffer9Ext : index_buffer::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::d3d9::*; let device = Device::pure();
+    /// # use dev::d3d9::*; let device = device_pure();
     /// let tri = device.create_index_buffer(3*4*3, Usage::None, Format::Index16, Pool::Managed, ()).unwrap();
     /// tri.unlock().unwrap(); // may succeed, even if the buffer wasn't locked <_<;;
     /// ```
@@ -178,7 +178,7 @@ pub trait IDirect3DVertexBuffer9Ext : vertex_buffer::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::d3d9::*; let device = Device::pure();
+    /// # use dev::d3d9::*; let device = device_pure();
     /// let tri = device.create_vertex_buffer(3*4*3, Usage::None, FVF::XYZ, Pool::Managed, ()).unwrap();
     /// let desc : VertexBufferDesc = dbg!(tri.get_desc().unwrap());
     /// assert_eq!(desc.format, Format::VertexData);
@@ -217,7 +217,7 @@ pub trait IDirect3DVertexBuffer9Ext : vertex_buffer::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::d3d9::*; let device = Device::pure();
+    /// # use dev::d3d9::*; let device = device_pure();
     /// let tri = device.create_vertex_buffer(3*4*3, Usage::None, FVF::XYZ, Pool::Managed, ()).unwrap();
     /// let data : &[[f32; 3]] = &[
     ///     [0.0, 1.0, 0.0],
@@ -250,7 +250,7 @@ pub trait IDirect3DVertexBuffer9Ext : vertex_buffer::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use doc::d3d9::*; let device = Device::pure();
+    /// # use dev::d3d9::*; let device = device_pure();
     /// let tri = device.create_vertex_buffer(3*4*3, Usage::None, FVF::XYZ, Pool::Managed, ()).unwrap();
     /// tri.unlock().unwrap(); // may succeed, even if the buffer wasn't locked <_<;;
     /// ```
@@ -276,98 +276,102 @@ mod vertex_buffer {
 
 
 
-#[test] fn index_buffer() {
-    let device = Device::pure();
+#[cfg(test)] mod tests {
+    use dev::d3d9::*;
 
-    let tri16 = device.create_index_buffer(3*2, Usage::None, Format::Index16, Pool::Default, ()).unwrap(); // simple triangle IB
-    let odd16 = device.create_index_buffer(3*3, Usage::None, Format::Index16, Pool::Default, ()).unwrap(); // weird size (9)
-    let tri32 = device.create_index_buffer(3*4, Usage::None, Format::Index32, Pool::Default, ()).unwrap(); // simple triangle IB
+    #[test] fn index_buffer() {
+        let device = device_pure();
 
-    assert_eq!(D3DERR::INVALIDCALL, device.create_index_buffer(0,    Usage::None, Format::Index16,  Pool::Default, ()).err(), "empty");
-    assert_eq!(D3DERR::INVALIDCALL, device.create_index_buffer(1,    Usage::None, Format::Index16,  Pool::Default, ()).err(), "too small for 16-bit IndexBuffer");
-    assert_eq!(D3DERR::INVALIDCALL, device.create_index_buffer(3,    Usage::None, Format::Index32,  Pool::Default, ()).err(), "too small for 32-bit IndexBuffer");
-    assert_eq!(D3DERR::INVALIDCALL, device.create_index_buffer(1000, Invalid,     Format::Index16,  Pool::Default, ()).err(), "invalid usage");
-    assert_eq!(D3DERR::INVALIDCALL, device.create_index_buffer(1000, Usage::None, Format::Unknown,  Pool::Default, ()).err(), "bad format");
-    assert_eq!(D3DERR::INVALIDCALL, device.create_index_buffer(1000, Usage::None, Format::X8B8G8R8, Pool::Default, ()).err(), "bad format");
-    assert_eq!(D3DERR::INVALIDCALL, device.create_index_buffer(1000, Usage::None, Invalid,          Pool::Default, ()).err(), "bad format");
-    assert_eq!(D3DERR::INVALIDCALL, device.create_index_buffer(1000, Usage::None, Format::Index16,  Invalid,       ()).err(), "bad pool");
+        let tri16 = device.create_index_buffer(3*2, Usage::None, Format::Index16, Pool::Default, ()).unwrap(); // simple triangle IB
+        let odd16 = device.create_index_buffer(3*3, Usage::None, Format::Index16, Pool::Default, ()).unwrap(); // weird size (9)
+        let tri32 = device.create_index_buffer(3*4, Usage::None, Format::Index32, Pool::Default, ()).unwrap(); // simple triangle IB
 
-    assert!(device.get_indices().unwrap().is_none());
+        assert_eq!(D3DERR::INVALIDCALL, device.create_index_buffer(0,    Usage::None, Format::Index16,  Pool::Default, ()).err(), "empty");
+        assert_eq!(D3DERR::INVALIDCALL, device.create_index_buffer(1,    Usage::None, Format::Index16,  Pool::Default, ()).err(), "too small for 16-bit IndexBuffer");
+        assert_eq!(D3DERR::INVALIDCALL, device.create_index_buffer(3,    Usage::None, Format::Index32,  Pool::Default, ()).err(), "too small for 32-bit IndexBuffer");
+        assert_eq!(D3DERR::INVALIDCALL, device.create_index_buffer(1000, Invalid,     Format::Index16,  Pool::Default, ()).err(), "invalid usage");
+        assert_eq!(D3DERR::INVALIDCALL, device.create_index_buffer(1000, Usage::None, Format::Unknown,  Pool::Default, ()).err(), "bad format");
+        assert_eq!(D3DERR::INVALIDCALL, device.create_index_buffer(1000, Usage::None, Format::X8B8G8R8, Pool::Default, ()).err(), "bad format");
+        assert_eq!(D3DERR::INVALIDCALL, device.create_index_buffer(1000, Usage::None, Invalid,          Pool::Default, ()).err(), "bad format");
+        assert_eq!(D3DERR::INVALIDCALL, device.create_index_buffer(1000, Usage::None, Format::Index16,  Invalid,       ()).err(), "bad pool");
 
-    device.set_indices(&tri16).unwrap();
-    assert_eq!(device.get_indices().unwrap().unwrap().as_raw(), tri16.as_raw());
-    device.set_indices(Some(&tri16)).unwrap();
-    assert_eq!(device.get_indices().unwrap().unwrap().as_raw(), tri16.as_raw());
+        assert!(device.get_indices().unwrap().is_none());
 
-    device.set_indices(&odd16).unwrap();
-    assert_eq!(device.get_indices().unwrap().unwrap().as_raw(), odd16.as_raw());
-    device.set_indices(Some(&odd16)).unwrap();
-    assert_eq!(device.get_indices().unwrap().unwrap().as_raw(), odd16.as_raw());
+        device.set_indices(&tri16).unwrap();
+        assert_eq!(device.get_indices().unwrap().unwrap().as_raw(), tri16.as_raw());
+        device.set_indices(Some(&tri16)).unwrap();
+        assert_eq!(device.get_indices().unwrap().unwrap().as_raw(), tri16.as_raw());
 
-    device.set_indices(&tri32).unwrap();
-    assert_eq!(device.get_indices().unwrap().unwrap().as_raw(), tri32.as_raw());
-    device.set_indices(Some(&tri32)).unwrap();
-    assert_eq!(device.get_indices().unwrap().unwrap().as_raw(), tri32.as_raw());
+        device.set_indices(&odd16).unwrap();
+        assert_eq!(device.get_indices().unwrap().unwrap().as_raw(), odd16.as_raw());
+        device.set_indices(Some(&odd16)).unwrap();
+        assert_eq!(device.get_indices().unwrap().unwrap().as_raw(), odd16.as_raw());
 
-    device.set_indices(None).unwrap();
-    assert!(device.get_indices().unwrap().is_none());
-}
+        device.set_indices(&tri32).unwrap();
+        assert_eq!(device.get_indices().unwrap().unwrap().as_raw(), tri32.as_raw());
+        device.set_indices(Some(&tri32)).unwrap();
+        assert_eq!(device.get_indices().unwrap().unwrap().as_raw(), tri32.as_raw());
 
-#[test] fn create_vertex_buffer() {
-    let device = Device::pure();
-
-    let _trixyz = device.create_vertex_buffer(3*4*3, Usage::None, FVF::None, Pool::Default, ()).unwrap(); // simple triangle VB (no FVF)
-    let _quadxyz= device.create_vertex_buffer(4*4*3, Usage::None, FVF::None, Pool::Default, ()).unwrap(); // simple quad     VB (no FVF)
-    let _trixyz = device.create_vertex_buffer(3*4*3, Usage::None, FVF::XYZ,  Pool::Default, ()).unwrap(); // simple triangle VB (FVF)
-    let _quadxyz= device.create_vertex_buffer(4*4*3, Usage::None, FVF::XYZ,  Pool::Default, ()).unwrap(); // simple quad     VB (FVF)
-
-    let _one =                      device.create_vertex_buffer(1, Usage::None, FVF::None, Pool::Default, ()).unwrap();
-    assert_eq!(D3DERR::INVALIDCALL, device.create_vertex_buffer(1, Usage::None, FVF::XYZ,  Pool::Default, ()).err()); // 1 byte is too small for FVF::XYZ
-
-    assert_eq!(D3DERR::INVALIDCALL, device.create_vertex_buffer(0,    Usage::None, FVF::XYZ, Pool::Default, ()).err(), "empty");
-    assert_eq!(D3DERR::INVALIDCALL, device.create_vertex_buffer(1000, Invalid,     FVF::XYZ, Pool::Default, ()).err(), "invalid usage");
-    let _badfmt =                   device.create_vertex_buffer(1000, Usage::None, Invalid,  Pool::Default, ()).unwrap(); // apparently no such thing as a bad FVF?
-    assert_eq!(D3DERR::INVALIDCALL, device.create_vertex_buffer(1000, Usage::None, FVF::XYZ, Invalid,       ()).err(), "bad pool");
-}
-
-#[test] fn overflow_allocs() {
-    if testfast() { return; }
-
-    fn index_loop_alloc_size(alloc: u32) -> Result<(), MethodError> {
-        let device = Device::pure();
-        let mut ibs = Vec::new();
-        for _n in 0..1000 { ibs.push(device.create_index_buffer(alloc, Usage::None, Format::Index16, Pool::Default, ())?); }
-        panic!("expected overflow_allocs::index_loop_alloc_size(0x{:08x}) to fail before collecting 1000 allocs", alloc);
+        device.set_indices(None).unwrap();
+        assert!(device.get_indices().unwrap().is_none());
     }
 
-    fn vertex_loop_alloc_size(alloc: u32) -> Result<(), MethodError> {
-        let device = Device::pure();
-        let mut vbs = Vec::new();
-        for _n in 0..1000 { vbs.push(device.create_vertex_buffer(alloc, Usage::None, FVF::None, Pool::Default, ())?); }
-        panic!("expected overflow_allocs::vertex_loop_alloc_size(0x{:08x}) to fail before collecting 1000 allocs", alloc);
+    #[test] fn create_vertex_buffer() {
+        let device = device_pure();
+
+        let _trixyz = device.create_vertex_buffer(3*4*3, Usage::None, FVF::None, Pool::Default, ()).unwrap(); // simple triangle VB (no FVF)
+        let _quadxyz= device.create_vertex_buffer(4*4*3, Usage::None, FVF::None, Pool::Default, ()).unwrap(); // simple quad     VB (no FVF)
+        let _trixyz = device.create_vertex_buffer(3*4*3, Usage::None, FVF::XYZ,  Pool::Default, ()).unwrap(); // simple triangle VB (FVF)
+        let _quadxyz= device.create_vertex_buffer(4*4*3, Usage::None, FVF::XYZ,  Pool::Default, ()).unwrap(); // simple quad     VB (FVF)
+
+        let _one =                      device.create_vertex_buffer(1, Usage::None, FVF::None, Pool::Default, ()).unwrap();
+        assert_eq!(D3DERR::INVALIDCALL, device.create_vertex_buffer(1, Usage::None, FVF::XYZ,  Pool::Default, ()).err()); // 1 byte is too small for FVF::XYZ
+
+        assert_eq!(D3DERR::INVALIDCALL, device.create_vertex_buffer(0,    Usage::None, FVF::XYZ, Pool::Default, ()).err(), "empty");
+        assert_eq!(D3DERR::INVALIDCALL, device.create_vertex_buffer(1000, Invalid,     FVF::XYZ, Pool::Default, ()).err(), "invalid usage");
+        let _badfmt =                   device.create_vertex_buffer(1000, Usage::None, Invalid,  Pool::Default, ()).unwrap(); // apparently no such thing as a bad FVF?
+        assert_eq!(D3DERR::INVALIDCALL, device.create_vertex_buffer(1000, Usage::None, FVF::XYZ, Invalid,       ()).err(), "bad pool");
     }
 
-    for n in [
-        !0,
-        !0-4,
-        !0-100,
-        MAX_BUFFER_ALLOC,
-        0xF000_0000,
-        !0/2,
-        !0/8,
-    ].iter().copied() {
-        match index_loop_alloc_size(n).unwrap_err().kind() {
-            E::OUTOFMEMORY              => {}, // expected
-            D3DERR::OUTOFVIDEOMEMORY    => {}, // expected
-            THIN3D9ERR::ALLOC_OVERFLOW  => {}, // expected
-            other => panic!("index_loop_alloc_size(0x{:08x}), expected a different kind of error, got: {}", n, other),
+    #[test] fn overflow_allocs() {
+        if testfast() { return; }
+
+        fn index_loop_alloc_size(alloc: u32) -> Result<(), MethodError> {
+            let device = device_pure();
+            let mut ibs = Vec::new();
+            for _n in 0..1000 { ibs.push(device.create_index_buffer(alloc, Usage::None, Format::Index16, Pool::Default, ())?); }
+            panic!("expected overflow_allocs::index_loop_alloc_size(0x{:08x}) to fail before collecting 1000 allocs", alloc);
         }
 
-        match vertex_loop_alloc_size(n).unwrap_err().kind() {
-            E::OUTOFMEMORY              => {}, // expected
-            D3DERR::OUTOFVIDEOMEMORY    => {}, // expected
-            THIN3D9ERR::ALLOC_OVERFLOW  => {}, // expected
-            other => panic!("vertex_loop_alloc_size(0x{:08x}), expected a different kind of error, got: {}", n, other),
+        fn vertex_loop_alloc_size(alloc: u32) -> Result<(), MethodError> {
+            let device = device_pure();
+            let mut vbs = Vec::new();
+            for _n in 0..1000 { vbs.push(device.create_vertex_buffer(alloc, Usage::None, FVF::None, Pool::Default, ())?); }
+            panic!("expected overflow_allocs::vertex_loop_alloc_size(0x{:08x}) to fail before collecting 1000 allocs", alloc);
+        }
+
+        for n in [
+            !0,
+            !0-4,
+            !0-100,
+            super::MAX_BUFFER_ALLOC,
+            0xF000_0000,
+            !0/2,
+            !0/8,
+        ].iter().copied() {
+            match index_loop_alloc_size(n).unwrap_err().kind() {
+                E::OUTOFMEMORY              => {}, // expected
+                D3DERR::OUTOFVIDEOMEMORY    => {}, // expected
+                THIN3D9ERR::ALLOC_OVERFLOW  => {}, // expected
+                other => panic!("index_loop_alloc_size(0x{:08x}), expected a different kind of error, got: {}", n, other),
+            }
+
+            match vertex_loop_alloc_size(n).unwrap_err().kind() {
+                E::OUTOFMEMORY              => {}, // expected
+                D3DERR::OUTOFVIDEOMEMORY    => {}, // expected
+                THIN3D9ERR::ALLOC_OVERFLOW  => {}, // expected
+                other => panic!("vertex_loop_alloc_size(0x{:08x}), expected a different kind of error, got: {}", n, other),
+            }
         }
     }
 }

@@ -46,7 +46,6 @@ mods! {
     inl mod error_kind;
     inl mod error;
     pub mod errors;
-    mod extra;
     inl mod method_error;
 }
 #[doc(no_inline)] pub use errors::*;
@@ -54,4 +53,3 @@ mods! {
 #[cfg(doc)] pub mod _examples;
 #[cfg(doc)] pub mod _headers;
 #[cfg(doc)] #[doc(hidden)] pub use _examples as examples;
-#[cfg(test)] fn testfast() -> bool { std::env::var_os("TESTFAST").is_some() }

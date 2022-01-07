@@ -1,14 +1,17 @@
 # https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [package]
-name            = "doc"
+name            = "dev"
 version         = "0.0.0"
 publish         = false
 edition         = "2018"
-description     = "Internal utility crate for thindx doc comments"
+description     = "Internal utility crate for thindx doc comments and unit tests"
 
 [lib]
-path            = "_doc.rs"
+path            = "_dev.rs"
+
+[features]
+9ex             = []
 
 [target.'cfg(windows)'.dependencies]
 thindx.path     = "../thindx"
