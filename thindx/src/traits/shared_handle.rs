@@ -7,7 +7,7 @@ use winapi::shared::ntdef::HANDLE;
 /// This would generally be an in/out parameter.
 /// Currently, the only type that implements this is `()`, which represents not using resource sharing.
 ///
-/// ### Safety
+/// ### ⚠️ Safety ⚠️
 ///
 /// Don't implement this trait yet.  Just use `()`.
 pub unsafe trait SharedHandleParam {

@@ -442,7 +442,7 @@ pub trait IDirect3DCubeTexture9Ext : cube_texture::Sealed {
     ///
     /// Locks a rectangle on a cube texture resource.
     ///
-    /// ### Safety
+    /// ### ⚠️ Safety ⚠️
     ///
     /// *   `face` must be a valid cubemap face
     /// *   `level` must be a valid mipmap level
@@ -652,7 +652,7 @@ pub trait IDirect3DTexture9Ext : texture::Sealed {
     ///
     /// Locks a rectangle on a cube texture resource.
     ///
-    /// ### Safety
+    /// ### ⚠️ Safety ⚠️
     ///
     /// *   `level` must be a valid mipmap level
     /// *   `rect` must be `..` or a valid subregion of the surface in question
@@ -861,7 +861,7 @@ pub trait IDirect3DVolumeTexture9Ext : volume_texture::Sealed {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolumetexture9-lockbox)\]
     /// IDirect3DVolumeTexture9::LockBox
     ///
-    /// ### Safety
+    /// ### ⚠️ Safety ⚠️
     ///
     /// *   `level` must be a valid mipmap level
     /// *   `box_` must be `..` or a valid subregion of the volume in question

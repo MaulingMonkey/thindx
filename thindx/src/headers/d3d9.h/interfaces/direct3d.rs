@@ -71,7 +71,7 @@ pub trait IDirect3D9Ext : private::Sealed {
     ///
     /// Creates an [IDirect3D9] object and returns it.
     ///
-    /// ### Safety
+    /// ### ⚠️ Safety ⚠️
     ///
     /// While this individual call should be 100% safe/sound, there is a bunch of general
     /// soundness holes that Rust can't always sanely guard against.  These include:
@@ -263,7 +263,7 @@ pub trait IDirect3D9Ext : private::Sealed {
     ///
     /// Creates a [Device].
     ///
-    /// ### Safety
+    /// ### ⚠️ Safety ⚠️
     ///
     /// *   The caller's codebase is responsible for ensuring any [HWND]s outlive the [Device].
     ///     This is effectively impossible to enforce at compile time.

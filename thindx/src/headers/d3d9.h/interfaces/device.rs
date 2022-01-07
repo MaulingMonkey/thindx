@@ -396,7 +396,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// This means the application does not have to query the current desktop format before calling [create_device] for windowed mode.
     /// For full-screen mode, the back buffer format must be specified.
     ///
-    /// ### Safety
+    /// ### ⚠️ Safety ⚠️
     ///
     /// *   The caller's codebase is responsible for ensuring any [HWND]s inside [D3DPRESENT_PARAMETERS] outlive the resulting [SwapChain]s that depend on them.
     ///     See [Direct3D::create_device] for details and guidance about dealing with this lifetime issue.
@@ -517,7 +517,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     ///
     /// Creates a pixel shader.
     ///
-    /// ### Safety
+    /// ### ⚠️ Safety ⚠️
     ///
     /// The caller must pass a valid shader blob.
     /// The underlying Direct3D API is unsound - it doesn't even take a length for the DWORD array.
@@ -682,7 +682,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     ///
     /// Creates a vertex shader.
     ///
-    /// ### Safety
+    /// ### ⚠️ Safety ⚠️
     ///
     /// The caller must pass a valid shader blob.
     /// The underlying Direct3D API is unsound - it doesn't even take a length for the DWORD array.
@@ -732,7 +732,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-drawindexedprimitive)\]
     /// IDirect3DDevice9::DrawIndexedPrimitive
     ///
-    /// ### Safety
+    /// ### ⚠️ Safety ⚠️
     ///
     /// Draw calls are unsafe as heck.  Not just the parameters, but the [`Device`]'s current state must be valid for the draw call.
     /// Unbound resources that a shader depends on, missing index buffers for indexed draw calls... the possibilities for undefined behavior are endless.
@@ -750,7 +750,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-drawindexedprimitive)\]
     /// IDirect3DDevice9::DrawIndexedPrimitive
     ///
-    /// ### Safety
+    /// ### ⚠️ Safety ⚠️
     ///
     /// Draw calls are unsafe as heck.  Not just the parameters, but the [`Device`]'s current state must be valid for the draw call.
     /// Unbound resources that a shader depends on, missing index buffers for indexed draw calls... the possibilities for undefined behavior are endless.
@@ -768,7 +768,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-drawprimitive)\]
     /// IDirect3DDevice9::DrawPrimitive
     ///
-    /// ### Safety
+    /// ### ⚠️ Safety ⚠️
     ///
     /// Draw calls are unsafe as heck.  Not just the parameters, but the [`Device`]'s current state must be valid for the draw call.
     /// Unbound resources that a shader depends on, missing index buffers for indexed draw calls... the possibilities for undefined behavior are endless.
@@ -786,7 +786,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-drawprimitiveup)\]
     /// IDirect3DDevice9::DrawPrimitiveUP
     ///
-    /// ### Safety
+    /// ### ⚠️ Safety ⚠️
     ///
     /// Draw calls are unsafe as heck.  Not just the parameters, but the [`Device`]'s current state must be valid for the draw call.
     /// Unbound resources that a shader depends on, missing index buffers for indexed draw calls... the possibilities for undefined behavior are endless.
@@ -1376,7 +1376,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     ///
     /// Retrieves palette entries.
     ///
-    /// ### Safety
+    /// ### ⚠️ Safety ⚠️
     ///
     /// This function may crash if no palette was previously set!
     ///
@@ -1547,7 +1547,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     ///
     /// Retrieves a texture assigned to a stage for a device.
     ///
-    /// ### Safety
+    /// ### ⚠️ Safety ⚠️
     ///
     /// *   This function will crash (or worse!) if `set_texture` was never called for `stage`!
     ///
@@ -1651,7 +1651,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     ///
     /// Enables or disables a set of lighting parameters within a device.
     ///
-    /// ### Safety
+    /// ### ⚠️ Safety ⚠️
     ///
     /// *   This will buffer overflow and crash (or worse!) if `index` >= `0x1000_0000 - 8` on some systems!
     /// *   Other, smaller sizes may also crash on other system I haven't tested.
@@ -1685,7 +1685,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     ///
     /// Presents the contents of the next buffer in the sequence of back buffers owned by the device.
     ///
-    /// ### Safety
+    /// ### ⚠️ Safety ⚠️
     ///
     /// *   It's likely unsound to use an invalid, non-null `hwnd`
     /// *   It's likely unsound to use a null `hwnd` if the original `presentation_parameters.hDeviceWindow` is an invalid, non-null HWND
@@ -1753,7 +1753,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     ///
     /// Resets the type, size, and format of the swap chain.
     ///
-    /// ### Safety
+    /// ### ⚠️ Safety ⚠️
     ///
     /// *   `presentation_parameters.hDeviceWindow` must be null or a valid window
     /// *   `presentation_parameters.*` in general probably needs certain "valid" values
@@ -1900,7 +1900,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     ///
     /// Assigns a set of lighting properties for this device.
     ///
-    /// ### Safety
+    /// ### ⚠️ Safety ⚠️
     ///
     /// *   This will buffer overflow and crash (or worse!) if `index` >= `0x1000_0000 - 8` on some systems!
     /// *   Other, smaller sizes may also crash on other system I haven't tested.
@@ -2203,7 +2203,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     ///
     /// Assigns a texture to a stage for a device.
     ///
-    /// ### Safety
+    /// ### ⚠️ Safety ⚠️
     ///
     /// *   This function will crash (or worse!) if `stage` is too large (> `MaxSimultaneousTextures`?)
     ///

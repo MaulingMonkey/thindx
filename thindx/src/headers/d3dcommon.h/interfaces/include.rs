@@ -8,7 +8,7 @@ use std::ptr::*;
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nn-d3dcommon-id3dinclude)\]
 /// ID3DInclude compatible types
 ///
-/// ### Safety
+/// ### ⚠️ Safety ⚠️
 /// By implementing this trait, you promise to return one of:
 /// *   [null_mut]\(\)
 /// *   [D3D_COMPILE_STANDARD_FILE_INCLUDE]

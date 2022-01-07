@@ -34,7 +34,7 @@ impl Error {
         }
     }
 
-    /// ### Safety
+    /// ### ⚠️ Safety ⚠️
     /// *   If `!SUCCEEDED(hr)`, this accesses and takes over ownership of `errors` and returns `Err(...)`.
     /// *   Otherwise, `errors` is left untouched.
     ///

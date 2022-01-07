@@ -311,7 +311,7 @@ fn file_doc_comments(path: &Path, text: &str) -> Result<(), ()> {
             }
 
             if is_unsafe && !s.safety_line_no.is_some() {
-                error!(at: path, line: no, "doc comment for `{}` missing `### Safety` section", name);
+                error!(at: path, line: no, "doc comment for `{}` missing `### ⚠️ Safety ⚠️` section", name);
                 s.errors = true;
             }
 
@@ -578,7 +578,7 @@ impl FromStr for H3 {
     type Err = String;
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s {
-            "Safety"    => Ok(H3::Safety),
+            "⚠️ Safety ⚠️" => Ok(H3::Safety),
             "Usage"     => Ok(H3::Usage),
             "Methods"   => Ok(H3::Methods),
             "Arguments" => Ok(H3::Arguments),

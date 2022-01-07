@@ -9,7 +9,7 @@ Function doc comments should generally follow the following style, skipping irre
 ///
 /// Short description of the function and it's behavior
 ///
-/// ### Safety
+/// ### ⚠️ Safety ⚠️
 /// Any safety invariants to be aware of for this fn or structure.  Required on all unsafe fns.
 /// Occasionally appropriate on "safe" fns or structures.
 ///

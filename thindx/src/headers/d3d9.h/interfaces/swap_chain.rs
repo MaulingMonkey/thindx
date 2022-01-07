@@ -90,7 +90,7 @@ pub trait IDirect3DSwapChain9Ext : private::Sealed {
     ///
     /// Retrieves a copy of the swapchain's front buffer
     ///
-    /// ### Safety
+    /// ### ⚠️ Safety ⚠️
     ///
     /// *   `dest_surface` may need to belong to the same [`Device`] as `self`
     /// *   `dest_surface` may need to be the size of the entire desktop if the [`Device`] is in windowed mode
@@ -126,7 +126,7 @@ pub trait IDirect3DSwapChain9Ext : private::Sealed {
     ///
     /// Presents the contents of the next buffer in the sequence of back buffers owned by the swap chain.
     ///
-    /// ### Safety
+    /// ### ⚠️ Safety ⚠️
     ///
     /// *   It's likely unsound to use an invalid, non-null `hwnd`
     /// *   It's likely unsound to use a null `hwnd` if the original `presentation_parameters.hDeviceWindow` is an invalid, non-null HWND

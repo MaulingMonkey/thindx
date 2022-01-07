@@ -9,7 +9,7 @@ use std::ops::Deref;
 
 /// Guaranteed to contain valid DXBC or DXIL bytecode.
 ///
-/// ### Safety
+/// ### ⚠️ Safety ⚠️
 /// Parsing and deserialization APIs are prone to undefined behavior and CVEs, and executable bytecode formats are no exception.
 /// Possible consumers of this bytecode include d3dcompiler, d3d9, d3d11, d3d12, GPU drivers, various third party shader translators, etc.
 /// If there's not a single path to undefined behavior between all of those, I'll eat my hat!
@@ -28,7 +28,7 @@ pub struct Bytecode([u8]);
 impl Bytecode {
     /// Trust that `bytecode` contains valid DXBC or DXIL bytecode.
     ///
-    /// ### Safety
+    /// ### ⚠️ Safety ⚠️
     /// Parsing and deserialization APIs are prone to undefined behavior and CVEs, and executable bytecode formats are no exception.
     /// Possible consumers of this bytecode include d3dcompiler, d3d9, d3d11, d3d12, GPU drivers, various third party shader translators, etc.
     /// If there's not a single path to undefined behavior between all of those, I'll eat my hat!
@@ -56,7 +56,7 @@ impl Bytecode {
 
     /// Trust that `bytecode` contains valid DXBC or DXIL bytecode.
     ///
-    /// ### Safety
+    /// ### ⚠️ Safety ⚠️
     /// Parsing and deserialization APIs are prone to undefined behavior and CVEs, and executable bytecode formats are no exception.
     /// Possible consumers of this bytecode include d3dcompiler, d3d9, d3d11, d3d12, GPU drivers, various third party shader translators, etc.
     /// If there's not a single path to undefined behavior between all of those, I'll eat my hat!

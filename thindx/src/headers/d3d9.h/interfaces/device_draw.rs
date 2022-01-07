@@ -15,7 +15,7 @@ use winapi::ctypes::c_void;
 
 /// [IDirect3DDevice9Ext::draw_indexed_primitive_up] index data
 ///
-/// ### Safety
+/// ### ⚠️ Safety ⚠️
 /// *   [`count`] is the number of **indicies**, not bytes!
 /// *   [`count`] should be "reasonable" (OOMs/overflows may result in undefined behavior)
 /// *   [`ptr`] must point to valid memory, appropriated aligned based on format.
@@ -42,7 +42,7 @@ unsafe impl IndexData for &[u32] {
 
 /// [IDirect3DDevice9Ext::draw_indexed_primitive_up] vertex data
 ///
-/// ### Safety
+/// ### ⚠️ Safety ⚠️
 /// *   [`count`] is the number of **elements**, not bytes!
 /// *   [`count`] and [`stride`] should be "reasonable" (OOMs/overflows may result in undefined behavior)
 /// *   [`ptr`] must point to valid memory, appropriated aligned, of at least [`count`] * [`stride`] bytes

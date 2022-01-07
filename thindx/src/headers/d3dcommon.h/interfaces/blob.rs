@@ -15,7 +15,7 @@ use std::str::Utf8Error;
 ///
 /// This interface is used to return arbitrary-length data.
 ///
-/// ### Safety
+/// ### ⚠️ Safety ⚠️
 /// This assumes `ReadOnlyBlob`s are read-only once created.
 /// While enforced by the safe interface here, raw `unsafe` winapi can totally let you write to the buffer.
 /// This is your one warning!
@@ -131,7 +131,7 @@ pub struct CodeBlob(ReadOnlyBlob);
 impl CodeBlob {
     /// Create a new [CodeBlob] from `value`, assuming it contains valid DXBC or DXIL bytecode.
     ///
-    /// ### Safety
+    /// ### ⚠️ Safety ⚠️
     /// By calling this fn, you assert that `value` contains valid DXBC or DXIL bytecode.
     /// While it doesn't result in instant undefined behavior to violate this constraint, many "safe" fns rely on this constraint, and will exhibit undefined behavior if passed an invalid blob.
     ///

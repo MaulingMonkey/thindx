@@ -49,7 +49,7 @@ pub trait IDirect3D9ExExt : private::Sealed {
     ///
     /// Creates an [IDirect3D9Ex](IDirect3D9ExExt) object and returns an interface to it.
     ///
-    /// ### Safety
+    /// ### ⚠️ Safety ⚠️
     ///
     /// While this individual call should be 100% safe/sound, there is a bunch of general
     /// soundness holes that Rust can't always sanely guard against.  These include:
@@ -72,7 +72,7 @@ pub trait IDirect3D9ExExt : private::Sealed {
     ///
     /// Creates a device to represent the display adapter.
     ///
-    /// ### Safety
+    /// ### ⚠️ Safety ⚠️
     ///
     /// *   The caller's codebase is responsible for ensuring any [HWND]s (`hwnd`, `presentation_parameters.hDeviceWindow`) outlive the [Device].
     ///      See [Direct3D::create_device] for guidance and details.

@@ -87,7 +87,7 @@ pub trait IDirect3DIndexBuffer9Ext : index_buffer::Sealed {
     ///
     /// Locks a range of index data, and obtains a pointer to the index buffer memory.
     ///
-    /// ### Safety
+    /// ### ⚠️ Safety ⚠️
     ///
     /// *   Invalid, out-of-bounds `offset` / `size`s might be unsound
     /// *   Violating the constraints imposed by `flags` is definitely unsound
@@ -205,7 +205,7 @@ pub trait IDirect3DVertexBuffer9Ext : vertex_buffer::Sealed {
     ///
     /// Locks a range of vertex data, and obtains a pointer to the vertex buffer memory.
     ///
-    /// ### Safety
+    /// ### ⚠️ Safety ⚠️
     ///
     /// *   Invalid, out-of-bounds `offset` / `size`s might be unsound
     /// *   Violating the constraints imposed by `flags` is definitely unsound

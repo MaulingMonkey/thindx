@@ -146,7 +146,7 @@ pub trait IDirect3DVolume9Ext : private::Sealed {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-lockbox)\]
     /// IDirect3DVolume9::LockBox
     ///
-    /// ### Safety
+    /// ### ⚠️ Safety ⚠️
     ///
     /// *   `box_` must be `..` or a valid subregion of the volume in question
     /// *   `self` should be lockable in the style specified by `flags`... and not already locked?

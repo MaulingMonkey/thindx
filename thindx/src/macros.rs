@@ -187,7 +187,7 @@ macro_rules! flags {
 
 /// COM conversion boilerplate
 ///
-/// ### Safety
+/// ### ⚠️ Safety ⚠️
 /// *   Assumes `$outer` and `$inner` are `#[repr(transparent)]` wrappers around [mcom::Rc] and ABI compatible
 /// *   Typechecked via some `From` impls, but sufficiently malicious `Deref` impls might be able to defeat that.
 ///
