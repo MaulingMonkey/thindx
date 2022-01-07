@@ -23,7 +23,6 @@ use crate::*;
 /// use raw_window_handle::*;
 /// use raw_window_handle::windows::*;
 /// 
-/// use winapi::shared::d3d9caps::*;
 /// use winapi::shared::d3d9types::*;
 /// 
 /// use winapi::um::debugapi::*;
@@ -59,8 +58,8 @@ use crate::*;
 ///     let mut pp = D3DPRESENT_PARAMETERS {
 ///         Windowed:               true.into(),
 ///         hDeviceWindow:          hwnd,
-///         SwapEffect:             D3DSWAPEFFECT_DISCARD,
-///         PresentationInterval:   D3DPRESENT_INTERVAL_ONE,
+///         SwapEffect:             SwapEffect::Discard.into(),
+///         PresentationInterval:   Present::IntervalOne.into(),
 ///         .. unsafe { std::mem::zeroed() }
 ///     };
 /// 
@@ -118,7 +117,6 @@ pub const d3d9_00_clear_winit : () = ();
 /// 
 /// use abistr::cstr16 as wcstr;
 /// 
-/// use winapi::shared::d3d9caps::*;
 /// use winapi::shared::d3d9types::*;
 /// use winapi::shared::minwindef::*;
 /// use winapi::shared::windef::*;
@@ -193,8 +191,8 @@ pub const d3d9_00_clear_winit : () = ();
 ///     let mut pp = D3DPRESENT_PARAMETERS {
 ///         Windowed:               true.into(),
 ///         hDeviceWindow:          hwnd,
-///         SwapEffect:             D3DSWAPEFFECT_DISCARD,
-///         PresentationInterval:   D3DPRESENT_INTERVAL_ONE,
+///         SwapEffect:             SwapEffect::Discard.into(),
+///         PresentationInterval:   Present::IntervalOne.into(),
 ///         .. unsafe { std::mem::zeroed() }
 ///     };
 /// 
