@@ -20,7 +20,7 @@ use std::ptr::null_mut;
 pub struct Query(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DQuery9>);
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dquery9)\]
-///IDirect3DQuery9 extension methods
+/// IDirect3DQuery9 extension methods
 ///
 /// ### Methods
 ///
