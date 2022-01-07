@@ -13,7 +13,7 @@ pub extern crate abistr;
 #[macro_use] mod macros;
 
 /// C ABI interop types
-#[path=r"ctypes\_ctypes.rs"] pub mod ctypes;
+#[path="ctypes/_ctypes.rs"] pub mod ctypes;
 
 /// Direct3D related types and APIs used across multiple Direct3D versions.
 pub mod d3d {
@@ -34,14 +34,14 @@ pub mod d3d11 {
 }
 
 mods! {
-    #[path=r"headers\d3d9.h\d3d9.rs"]               mod d3d9_h;         // d3d9 mod
-    #[path=r"headers\d3d9types.h\d3d9types.rs"]     mod d3d9types_h;    // d3d9 mod
-    #[path=r"headers\d3d11shader.h\d3d11shader.rs"] mod d3d11shader_h;  // d3d11 mod
-    #[path=r"headers\d3dcommon.h\d3dcommon.rs"]     mod d3dcommon_h;    // d3d mod
-    #[path=r"headers\d3dcompiler.h\d3dcompiler.rs"] mod d3dcompiler_h;  // d3d mod
-    #[path=r"headers\unknwn.h\unknwn.rs"]           inl mod unknwn_h;
+    #[path="headers/d3d9.h/d3d9.rs"]               mod d3d9_h;         // d3d9 mod
+    #[path="headers/d3d9types.h/d3d9types.rs"]     mod d3d9types_h;    // d3d9 mod
+    #[path="headers/d3d11shader.h/d3d11shader.rs"] mod d3d11shader_h;  // d3d11 mod
+    #[path="headers/d3dcommon.h/d3dcommon.rs"]     mod d3dcommon_h;    // d3d mod
+    #[path="headers/d3dcompiler.h/d3dcompiler.rs"] mod d3dcompiler_h;  // d3d mod
+    #[path="headers/unknwn.h/unknwn.rs"]           inl mod unknwn_h;
 
-    #[path=r"traits\_traits.rs"] inl mod traits;
+    #[path="traits/_traits.rs"] inl mod traits;
 
     inl mod error_kind;
     inl mod error;

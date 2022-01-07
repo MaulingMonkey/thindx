@@ -1,5 +1,5 @@
 mods! {
-    #[path=r"dll\_dll.rs"] inl mod dll;
+    #[path="dll/_dll.rs"] inl mod dll;
 
     inl mod constants {
         inl mod compile;

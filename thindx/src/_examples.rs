@@ -285,8 +285,8 @@ pub const d3dcompiler_01_construction : () = ();
 /// 
 /// fn main() {
 ///     let d3dc = d3d::Compiler::new(47).unwrap();
-///     let basic_hlsl   : &[u8] = include_bytes!(r"..\test\data\basic.hlsl");
-///     let library_hlsl : &[u8] = include_bytes!(r"..\test\data\library.hlsl");
+///     let basic_hlsl   : &[u8] = include_bytes!("../test/data/basic.hlsl");
+///     let library_hlsl : &[u8] = include_bytes!("../test/data/library.hlsl");
 /// 
 ///     // Option A:  just preprocess instead of fully compiling
 ///     let pixel_shader  = d3dc.preprocess(basic_hlsl,   (),                      None, None,                  ).unwrap();
