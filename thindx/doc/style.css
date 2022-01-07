@@ -15,14 +15,14 @@
 
 
 /* Highlight ### Safety sections */
-h3[id^="safety"] {
+*[id^="safety"] {
     background:     rgb(255, 207, 118);
     color:          black;
     padding:        6px;
     border:         none;
 }
 
-h3[id^="safety"] > a {
+*[id^="safety"] > a {
     color:          black !important;
 }
 
