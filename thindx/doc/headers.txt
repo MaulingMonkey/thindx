@@ -1,0 +1,11 @@
+um\unknwn.h # um\unknwnbase.h
+
+um\d3dcommon.h
+um\d3dcompiler.h
+
+shared\d3d9.h
+shared\d3d9caps.h
+shared\d3d9types.h
+
+um\d3d11shader.h
+um\d3d11shadertracing.h
