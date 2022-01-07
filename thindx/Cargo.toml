@@ -18,7 +18,7 @@ exclude         = [".vscode"]
 default-target  = "x86_64-pc-windows-msvc"
 targets         = ["x86_64-pc-windows-msvc", "i686-pc-windows-msvc"]
 all-features    = true
-# rustdoc-args    = ["--extend-css", "doc/style.css"]
+rustdoc-args    = ["--extend-css", "doc/style.css"]
 
 [lib]
 path            = "src/_lib.rs"
