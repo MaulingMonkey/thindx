@@ -51,15 +51,20 @@ fn main() {
     };
     assert_ne!(0, unsafe { RegisterClassW(&wc) });
 
+    let ex_style = 0;
+    let style = WS_OVERLAPPEDWINDOW;
+    let mut size = RECT { left: 0, right: 800, top: 0, bottom: 600 };
+    assert_ne!(0, unsafe { AdjustWindowRectEx(&mut size, style, false.into(), ex_style) });
+
     let hwnd = unsafe { CreateWindowExW(
-        0,
+        ex_style,
         wcstr!("SampleWndClass").as_ptr(),
         wcstr!("01-clear-winapi - thin3d9 example").as_ptr(),
-        WS_OVERLAPPEDWINDOW,
+        style,
         CW_USEDEFAULT,
         CW_USEDEFAULT,
-        800,
-        600,
+        size.right - size.left,
+        size.bottom - size.top,
         null_mut(),
         null_mut(),
         hinstance,
