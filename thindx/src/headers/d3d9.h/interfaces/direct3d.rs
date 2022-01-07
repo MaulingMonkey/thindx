@@ -24,6 +24,45 @@ pub struct Direct3D(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3D9>);
 
 
 
+/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3d9)\]
+/// IDirect3D9 extension methods
+///
+/// ### Methods
+///
+/// | thin3d9                                                                   | docs.microsoft.com            | Description |
+/// | ------------------------------------------------------------------------- | ----------------------------- | ----------- |
+/// | [create](Self::create)                                                    | [Direct3DCreate9]             | Creates an [IDirect3D9Ex] object and returns an interface to it.
+/// | [check_depth_stencil_match](Self::check_depth_stencil_match)              | [CheckDepthStencilMatch]      | Determines whether a depth-stencil format is compatible with a render-target format in a particular display mode.
+/// | [check_device_format](Self::check_device_format)                          | [CheckDeviceFormat]           | Determines whether a surface format is available as a specified resource type and can be used as a texture, depth-stencil buffer, or render target, or any combination of the three, on a device representing this adapter.
+/// | [check_device_format_conversion](Self::check_device_format_conversion)    | [CheckDeviceFormatConversion] | Tests the device to see if it supports conversion from one display format to another.
+/// | [check_device_multi_sample_type](Self::check_device_multi_sample_type)    | [CheckDeviceMultiSampleType]  | Determines if a multisampling technique is available on this device.
+/// | [check_device_type](Self::check_device_type)                              | [CheckDeviceType]             | Verifies whether a hardware accelerated device type can be used on this adapter.
+/// | [create_device](Self::create_device)                                      | [CreateDevice]                | Creates a [Device].
+/// | [enum_adapter_modes](Self::enum_adapter_modes)                            | [EnumAdapterModes]            | Queries the possible display modes of an adapter (~ connected monitor)
+/// | [get_adapter_count](Self::get_adapter_count)                              | [GetAdapterCount]             | Gets the number of adapters (~ connected monitors) available to this device.
+/// | [get_adapter_display_mode](Self::get_adapter_display_mode)                | [GetAdapterDisplayMode]       | Gets the current display mode of an adapter (~ connected monitor)
+/// | [get_adapter_identifier](Self::get_adapter_identifier)                    | [GetAdapterIdentifier]        | Gets metadata about an adapter (~ connected monitor), including driver name/version/guids/...
+/// | [get_adapter_mode_count](Self::get_adapter_mode_count)                    | [GetAdapterModeCount]         | Get the number of display modes this adapter/monitor supports.
+/// | [get_adapter_monitor](Self::get_adapter_monitor)                          | [GetAdapterMonitor]           | Get the [HMONITOR] associated with this adapter.
+/// | [get_device_caps](Self::get_device_caps)                                  | [GetDeviceCaps]               | Get the [Caps] of this device.
+/// | ~~register_software_device~~ (N/A)                                        | [RegisterSoftwareDevice]      | Registers a pluggable software device.
+///
+/// [Direct3DCreate9]:              https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-direct3dcreate9
+/// [CheckDepthStencilMatch]:       https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdepthstencilmatch
+/// [CheckDeviceFormat]:            https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdeviceformat
+/// [CheckDeviceFormatConversion]:  https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdeviceformatconversion
+/// [CheckDeviceMultiSampleType]:   https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdevicemultisampletype
+/// [CheckDeviceType]:              https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdevicetype
+/// [CreateDevice]:                 https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-createdevice
+/// [EnumAdapterModes]:             https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-enumadaptermodes
+/// [GetAdapterCount]:              https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadaptercount
+/// [GetAdapterDisplayMode]:        https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadapterdisplaymode
+/// [GetAdapterIdentifier]:         https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadapteridentifier
+/// [GetAdapterModeCount]:          https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadaptermodecount
+/// [GetAdapterMonitor]:            https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadaptermonitor
+/// [GetDeviceCaps]:                https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getdevicecaps
+/// [RegisterSoftwareDevice]:       https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-registersoftwaredevice
+///
 pub trait IDirect3D9Ext : private::Sealed {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-direct3dcreate9)\]
     /// Direct3DCreate9
@@ -56,38 +95,7 @@ pub trait IDirect3D9Ext : private::Sealed {
         let d3d9 = Direct3DCreate9(sdk_version.into());
         mcom::Rc::from_raw_opt(d3d9).ok_or(()).map(Self::from)
     }
-}
 
-impl<T: private::Sealed> IDirect3D9Ext for T {}
-
-mod private {
-    use winapi::shared::d3d9::IDirect3D9;
-    pub unsafe trait Sealed : From<mcom::Rc<IDirect3D9>>    { fn as_winapi(&self) -> &IDirect3D9; }
-    unsafe impl Sealed for mcom::Rc<IDirect3D9>             { fn as_winapi(&self) -> &IDirect3D9 { &**self } }
-    unsafe impl Sealed for super::Direct3D                  { fn as_winapi(&self) -> &IDirect3D9 { &*self.0 } }
-}
-
-#[test] fn create() {
-    use winapi::shared::d3d9::D3D_SDK_VERSION;
-    unsafe {
-        Direct3D::create(SdkVersion::default()).unwrap();
-        Direct3D::create(SdkVersion::default().with_debug_disabled()).unwrap();
-        Direct3D::create(SdkVersion::default().with_debug_enabled()).unwrap();
-        Direct3D::create(SdkVersion::DEFAULT.with_debug_disabled()).unwrap();
-        Direct3D::create(SdkVersion::DEFAULT.with_debug_enabled()).unwrap();
-        Direct3D::create(SdkVersion::DEFAULT9B.with_debug_disabled()).unwrap();
-        Direct3D::create(SdkVersion::DEFAULT9B.with_debug_enabled()).unwrap();
-        Direct3D::create(SdkVersion::from(D3D_SDK_VERSION).with_debug_disabled()).unwrap();
-        Direct3D::create(SdkVersion::from(D3D_SDK_VERSION).with_debug_enabled()).unwrap();
-        assert_eq!((), Direct3D::create(SdkVersion::from(0)).err().unwrap());
-        assert_eq!((), Direct3D::create(SdkVersion::from(0).with_debug_disabled()).err().unwrap());
-        assert_eq!((), Direct3D::create(SdkVersion::from(0).with_debug_enabled()).err().unwrap());
-    }
-}
-
-
-
-impl Direct3D {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdepthstencilmatch)\]
     /// IDirect3D9::CheckDepthStencilMatch
     ///
@@ -115,26 +123,12 @@ impl Direct3D {
     ///     ).is_ok()
     /// ));
     /// ```
-    pub fn check_depth_stencil_match(&self, adapter: AdapterIndex, device_type: impl Into<DevType>, adapter_format: impl Into<Format>, render_target_format: impl Into<Format>, depth_stencil_format: impl Into<Format>) -> Result<(), MethodError> {
-        let hr = unsafe { self.0.CheckDepthStencilMatch(adapter, device_type.into().into(), adapter_format.into().into(), render_target_format.into().into(), depth_stencil_format.into().into()) };
+    fn check_depth_stencil_match(&self, adapter: AdapterIndex, device_type: impl Into<DevType>, adapter_format: impl Into<Format>, render_target_format: impl Into<Format>, depth_stencil_format: impl Into<Format>) -> Result<(), MethodError> {
+        let hr = unsafe { self.as_winapi().CheckDepthStencilMatch(adapter, device_type.into().into(), adapter_format.into().into(), render_target_format.into().into(), depth_stencil_format.into().into()) };
         MethodError::check("IDirect3D9::CheckDepthStencilMatch", hr)?;
         Ok(())
     }
-}
 
-#[test] fn check_depth_stencil_match() {
-    let d3d = Direct3D::test();
-    assert!(                        d3d.check_depth_stencil_match(0,    DevType::HAL, Format::X8R8G8B8, Format::A8R8G8B8, Format::D24S8  ).is_ok()); // valid
-    assert_eq!(D3DERR::INVALIDCALL, d3d.check_depth_stencil_match(9001, DevType::HAL, Format::X8R8G8B8, Format::A8R8G8B8, Format::D24S8  )); // invalid adapter
-    assert_eq!(D3DERR::INVALIDCALL, d3d.check_depth_stencil_match(0,    Invalid,      Format::X8R8G8B8, Format::A8R8G8B8, Format::D24S8  )); // invalid devtype
-    assert_eq!(D3DERR::INVALIDCALL, d3d.check_depth_stencil_match(0,    DevType::HAL, Format::UNKNOWN,  Format::A8R8G8B8, Format::D24S8  )); // invalid adapter format
-    assert_eq!(D3DERR::INVALIDCALL, d3d.check_depth_stencil_match(0,    DevType::HAL, Format::X8R8G8B8, Format::UNKNOWN,  Format::D24S8  )); // invalid render target format
-    assert_eq!(D3DERR::INVALIDCALL, d3d.check_depth_stencil_match(0,    DevType::HAL, Format::X8R8G8B8, Format::A8R8G8B8, Format::UNKNOWN)); // invalid depth stencil format
-}
-
-
-
-impl Direct3D {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdeviceformat)\]
     /// IDirect3D9::CheckDeviceFormat
     ///
@@ -160,27 +154,12 @@ impl Direct3D {
     ///     Format::A8R8G8B8        // texture format
     /// ).is_ok());
     /// ```
-    pub fn check_device_format(&self, adapter: AdapterIndex, device_type: impl Into<DevType>, adapter_format: impl Into<Format>, usage: u32, rtype: impl Into<ResourceType>, check_format: impl Into<Format>) -> Result<(), MethodError> {
-        let hr = unsafe { self.0.CheckDeviceFormat(adapter, device_type.into().into(), adapter_format.into().into(), usage, rtype.into().into(), check_format.into().into()) };
+    fn check_device_format(&self, adapter: AdapterIndex, device_type: impl Into<DevType>, adapter_format: impl Into<Format>, usage: u32, rtype: impl Into<ResourceType>, check_format: impl Into<Format>) -> Result<(), MethodError> {
+        let hr = unsafe { self.as_winapi().CheckDeviceFormat(adapter, device_type.into().into(), adapter_format.into().into(), usage, rtype.into().into(), check_format.into().into()) };
         MethodError::check("IDirect3D9::CheckDeviceFormat", hr)?;
         Ok(())
     }
-}
 
-#[test] fn check_device_format() {
-    let d3d = Direct3D::test();
-    assert!(                        d3d.check_device_format(0,    DevType::HAL, Format::X8R8G8B8,  0, ResourceType::Texture, Format::A8R8G8B8).is_ok()); // valid
-    assert_eq!(D3DERR::INVALIDCALL, d3d.check_device_format(9001, DevType::HAL, Format::X8R8G8B8,  0, ResourceType::Texture, Format::A8R8G8B8)); // invalid adapter
-    assert_eq!(D3DERR::INVALIDCALL, d3d.check_device_format(0,    Invalid,      Format::X8R8G8B8,  0, ResourceType::Texture, Format::A8R8G8B8)); // invalid devtype
-    assert_eq!(D3DERR::INVALIDCALL, d3d.check_device_format(0,    DevType::HAL, Format::UNKNOWN,   0, ResourceType::Texture, Format::A8R8G8B8)); // invalid adapter format
-    assert_eq!(D3DERR::INVALIDCALL, d3d.check_device_format(0,    DevType::HAL, Format::X8R8G8B8, !0, ResourceType::Texture, Format::A8R8G8B8)); // invalid usage
-    assert_eq!(D3DERR::INVALIDCALL, d3d.check_device_format(0,    DevType::HAL, Format::X8R8G8B8,  0, Invalid,               Format::A8R8G8B8)); // invalid resource type
-    assert_eq!(D3DERR::INVALIDCALL, d3d.check_device_format(0,    DevType::HAL, Format::X8R8G8B8,  0, ResourceType::Texture, Format::UNKNOWN )); // invalid check format
-}
-
-
-
-impl Direct3D {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdeviceformatconversion)\]
     /// IDirect3D9::CheckDeviceFormatConversion
     ///
@@ -206,32 +185,16 @@ impl Direct3D {
     ///     Format::A8R8G8B8
     /// ).is_ok());
     /// ```
-    pub fn check_device_format_conversion(&self, adapter: AdapterIndex, device_type: impl Into<DevType>, source_format: impl Into<Format>, target_format: impl Into<Format>) -> Result<(), MethodError> {
-        let hr = unsafe { self.0.CheckDeviceFormatConversion(adapter, device_type.into().into(), source_format.into().into(), target_format.into().into()) };
+    fn check_device_format_conversion(&self, adapter: AdapterIndex, device_type: impl Into<DevType>, source_format: impl Into<Format>, target_format: impl Into<Format>) -> Result<(), MethodError> {
+        let hr = unsafe { self.as_winapi().CheckDeviceFormatConversion(adapter, device_type.into().into(), source_format.into().into(), target_format.into().into()) };
         MethodError::check("IDirect3D9::CheckDeviceFormatConversion", hr)?;
         Ok(())
     }
-}
 
-#[test] fn check_device_format_conversion() {
-    let d3d = Direct3D::test();
-    assert!(                            d3d.check_device_format_conversion(0,    DevType::HAL, Format::A8R8G8B8, Format::A8R8G8B8).is_ok()); // valid
-    assert!(                            d3d.check_device_format_conversion(0,    DevType::HAL, Format::D24S8,    Format::D24S8   ).is_ok()); // valid
-    assert_eq!(D3DERR::INVALIDCALL,     d3d.check_device_format_conversion(9001, DevType::HAL, Format::A8R8G8B8, Format::A8R8G8B8)); // invalid adapter
-    assert_eq!(D3DERR::INVALIDDEVICE,   d3d.check_device_format_conversion(0,    Invalid,      Format::A8R8G8B8, Format::A8R8G8B8)); // invalid devtype
-    assert_eq!(D3DERR::NOTAVAILABLE,    d3d.check_device_format_conversion(0,    DevType::HAL, Invalid,          Format::A8R8G8B8)); // invalid source format
-    assert_eq!(D3DERR::NOTAVAILABLE,    d3d.check_device_format_conversion(0,    DevType::HAL, Format::A8R8G8B8, Invalid         )); // invalid target format
-    assert_eq!(D3DERR::NOTAVAILABLE,    d3d.check_device_format_conversion(0,    DevType::HAL, Format::D24S8,    Format::A8R8G8B8)); // invalid conversion
-    assert_eq!(D3DERR::NOTAVAILABLE,    d3d.check_device_format_conversion(0,    DevType::HAL, Format::A8R8G8B8, Format::D24S8   )); // invalid conversion
-}
-
-
-
-impl Direct3D {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdevicemultisampletype)\]
     /// IDirect3D9::CheckDeviceMultiSampleType
     ///
-    /// Tests the device to see if it supports conversion from one display format to another.
+    /// Determines if a multisampling technique is available on this device.
     ///
     /// ### Returns
     ///
@@ -251,32 +214,17 @@ impl Direct3D {
     ///     MultiSample::None,
     /// ).is_ok());
     /// ```
-    pub fn check_device_multi_sample_type(&self, adapter: AdapterIndex, device_type: impl Into<DevType>, surface_format: impl Into<Format>, windowed: bool, multi_sample_type: impl Into<MultiSample>) -> Result<u32, MethodError> {
+    fn check_device_multi_sample_type(&self, adapter: AdapterIndex, device_type: impl Into<DevType>, surface_format: impl Into<Format>, windowed: bool, multi_sample_type: impl Into<MultiSample>) -> Result<u32, MethodError> {
         let mut quality_levels = 0;
-        let hr = unsafe { self.0.CheckDeviceMultiSampleType(adapter, device_type.into().into(), surface_format.into().into(), windowed.into(), multi_sample_type.into().into(), &mut quality_levels) };
+        let hr = unsafe { self.as_winapi().CheckDeviceMultiSampleType(adapter, device_type.into().into(), surface_format.into().into(), windowed.into(), multi_sample_type.into().into(), &mut quality_levels) };
         MethodError::check("IDirect3D9::CheckDeviceMultiSampleType", hr)?;
         Ok(quality_levels)
     }
-}
 
-#[test] fn check_device_multi_sample_type() {
-    let d3d = Direct3D::test();
-    assert!(                            d3d.check_device_multi_sample_type(0,    DevType::HAL, Format::A8R8G8B8, true, MultiSample::None    ).is_ok()); // valid
-    assert!(                            d3d.check_device_multi_sample_type(0,    DevType::HAL, Format::A8R8G8B8, true, MultiSample::X2      ).is_ok()); // valid
-    assert_eq!(D3DERR::INVALIDCALL,     d3d.check_device_multi_sample_type(9001, DevType::HAL, Format::A8R8G8B8, true, MultiSample::X2      )); // invalid adapter
-    assert_eq!(D3DERR::INVALIDCALL,     d3d.check_device_multi_sample_type(0,    Invalid,      Format::A8R8G8B8, true, MultiSample::X2      )); // invalid devtype
-    assert_eq!(D3DERR::NOTAVAILABLE,    d3d.check_device_multi_sample_type(0,    DevType::HAL, Invalid,          true, MultiSample::X2      )); // invalid surface format
-    let _ =                             d3d.check_device_multi_sample_type(0,    DevType::HAL, Invalid,          true, MultiSample::None     ); // can succeed despite invalid format when we use D3DMULTISAMPLE_NONE
-    assert_eq!(D3DERR::INVALIDCALL,     d3d.check_device_multi_sample_type(0,    DevType::HAL, Format::A8R8G8B8, true, Invalid              )); // invalid multisampling
-}
-
-
-
-impl Direct3D {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdevicetype)\]
     /// IDirect3D9::CheckDeviceType
     ///
-    /// Tests the device to see if it supports conversion from one display format to another.
+    /// Verifies whether a hardware accelerated device type can be used on this adapter.
     ///
     /// ### Returns
     ///
@@ -297,25 +245,12 @@ impl Direct3D {
     ///     true,               // windowed
     /// ).is_ok());
     /// ```
-    pub fn check_device_type(&self, adapter: AdapterIndex, device_type: impl Into<DevType>, adapter_format: impl Into<Format>, back_buffer_format: impl Into<Format>, windowed: bool) -> Result<(), MethodError> {
-        let hr = unsafe { self.0.CheckDeviceType(adapter, device_type.into().into(), adapter_format.into().into(), back_buffer_format.into().into(), windowed.into()) };
+    fn check_device_type(&self, adapter: AdapterIndex, device_type: impl Into<DevType>, adapter_format: impl Into<Format>, back_buffer_format: impl Into<Format>, windowed: bool) -> Result<(), MethodError> {
+        let hr = unsafe { self.as_winapi().CheckDeviceType(adapter, device_type.into().into(), adapter_format.into().into(), back_buffer_format.into().into(), windowed.into()) };
         MethodError::check("IDirect3D9::CheckDeviceType", hr)?;
         Ok(())
     }
-}
 
-#[test] fn check_device_type() {
-    let d3d = Direct3D::test();
-    assert!(                            d3d.check_device_type(0,    DevType::HAL, Format::X8R8G8B8, Format::A8R8G8B8, true).is_ok()); // valid
-    assert_eq!(D3DERR::INVALIDCALL,     d3d.check_device_type(9001, DevType::HAL, Format::X8R8G8B8, Format::A8R8G8B8, true)); // invalid adapter
-    assert_eq!(D3DERR::INVALIDCALL,     d3d.check_device_type(0,    Invalid,      Format::X8R8G8B8, Format::A8R8G8B8, true)); // invalid devtype
-    assert_eq!(D3DERR::NOTAVAILABLE,    d3d.check_device_type(0,    DevType::HAL, Invalid,          Format::A8R8G8B8, true)); // invalid adapter format
-    assert_eq!(D3DERR::NOTAVAILABLE,    d3d.check_device_type(0,    DevType::HAL, Format::X8R8G8B8, Invalid,          true)); // invalid back buffer format
-}
-
-
-
-impl Direct3D {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-createdevice)\]
     /// IDirect3D9::CreateDevice
     ///
@@ -379,20 +314,14 @@ impl Direct3D {
     /// ```
     ///
     /// [WM_DESTROY]:           https://docs.microsoft.com/en-us/windows/win32/winmsg/wm-destroy
-    pub unsafe fn create_device(&self, adapter: AdapterIndex, device_type: impl Into<DevType>, focus_window: HWND, behavior_flags: impl Into<Create>, present_parameters: &mut D3DPRESENT_PARAMETERS) -> Result<Device, MethodError> {
+    unsafe fn create_device(&self, adapter: AdapterIndex, device_type: impl Into<DevType>, focus_window: HWND, behavior_flags: impl Into<Create>, present_parameters: &mut D3DPRESENT_PARAMETERS) -> Result<Device, MethodError> {
         // TODO: better doc comments
         let mut device = null_mut();
-        let hr = self.0.CreateDevice(adapter, device_type.into().into(), focus_window, behavior_flags.into().into(), present_parameters, &mut device);
+        let hr = self.as_winapi().CreateDevice(adapter, device_type.into().into(), focus_window, behavior_flags.into().into(), present_parameters, &mut device);
         MethodError::check("IDirect3D9::CreateDevice", hr)?;
         Ok(Device::from_raw(device))
     }
-}
 
-// #[test] fn create_device() {} // TODO
-
-
-
-impl Direct3D {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-enumadaptermodes)\] IDirect3D9::EnumAdapterModes
     ///
     /// Queries the possible display modes of an adapter (~ connected monitor)
@@ -428,47 +357,13 @@ impl Direct3D {
     /// 2160x3840 @ 30hz Format(D3DFMT_X8R8G8B8)
     /// 2160x3840 @ 60hz Format(D3DFMT_X8R8G8B8)
     /// ```
-    pub fn enum_adapter_modes(&self, adapter: AdapterIndex, format: impl Into<Format>, mode: ModeIndex) -> Result<D3DDISPLAYMODE, MethodError> {
+    fn enum_adapter_modes(&self, adapter: AdapterIndex, format: impl Into<Format>, mode: ModeIndex) -> Result<D3DDISPLAYMODE, MethodError> {
         let mut dm = unsafe { std::mem::zeroed::<D3DDISPLAYMODE>() };
-        let hr = unsafe { self.0.EnumAdapterModes(adapter, format.into().into(), mode, &mut dm) };
+        let hr = unsafe { self.as_winapi().EnumAdapterModes(adapter, format.into().into(), mode, &mut dm) };
         MethodError::check("IDirect3D9::EnumAdapterModes", hr)?;
         Ok(dm)
     }
-}
 
-#[test] fn enum_adapter_modes() {
-    let d3d = Direct3D::test();
-    let adapters = d3d.get_adapter_count();
-
-    // all adapters should be valid
-    for adapter in 0..adapters {
-        eprintln!("checking adapter {} of {}", adapter+1, adapters);
-        for fmt in [
-            Format::UNKNOWN, Format::R8G8B8, Format::A8R8G8B8, Format::X8R8G8B8, Format::A8B8G8R8, Format::X8B8G8R8,
-            Format::from_unchecked(1), Format::from_unchecked(10000), Format::from_unchecked(!0),
-        ].iter().copied() {
-            let modes = d3d.get_adapter_mode_count(adapter, fmt);
-            for mode in 0..modes {
-                d3d.enum_adapter_modes(adapter, fmt, mode).unwrap_or_else(|err| panic!("enum_adapter_modes({}, {:?}, {}) failed: {}", adapter, fmt, mode, err));
-            }
-            for mode in modes..modes+100 {
-                assert_eq!(D3DERR::INVALIDCALL, d3d.enum_adapter_modes(adapter, fmt, mode).map(|_| ()));
-            }
-        }
-    }
-
-    // doublecheck that d3d doesn't segfault for out-of-bounds adapters or anything
-    for adapter in [adapters+0, adapters+100, adapters+100000, adapters+10000000].iter().copied() {
-        eprintln!("checking invalid adapter {} of {}", adapter+1, adapters);
-        assert_eq!(D3DERR::INVALIDCALL, d3d.enum_adapter_modes(adapter, Format::X8R8G8B8, 0).map(|_| ()));
-        assert_eq!(D3DERR::INVALIDCALL, d3d.enum_adapter_modes(adapter, Format::X8R8G8B8, 100).map(|_| ()));
-        assert_eq!(D3DERR::INVALIDCALL, d3d.enum_adapter_modes(adapter, Format::X8R8G8B8, 10000).map(|_| ()));
-    }
-}
-
-
-
-impl Direct3D {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadaptercount)\] IDirect3D9::GetAdapterCount
     ///
     /// Gets the number of adapters (~ connected monitors) available to this device.
@@ -485,19 +380,10 @@ impl Direct3D {
     /// ```text
     /// 4 adapters
     /// ```
-    pub fn get_adapter_count(&self) -> AdapterIndex {
-        unsafe { self.0.GetAdapterCount() } // Safety:  Seems 100% safe per unit testing bellow
+    fn get_adapter_count(&self) -> AdapterIndex {
+        unsafe { self.as_winapi().GetAdapterCount() } // Safety:  Seems 100% safe per unit testing bellow
     }
-}
 
-#[test] fn get_adapter_count() {
-    let d3d = Direct3D::test();
-    assert!(d3d.get_adapter_count() > 0);
-}
-
-
-
-impl Direct3D {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadapterdisplaymode)\] IDirect3D9::GetAdapterDisplayMode
     ///
     /// Gets the current display mode of an adapter (~ connected monitor)
@@ -521,28 +407,13 @@ impl Direct3D {
     /// 2160x3840 @ 29hz Format(D3DFMT_X8R8G8B8)
     /// 2160x3840 @ 29hz Format(D3DFMT_X8R8G8B8)
     /// ```
-    pub fn get_adapter_display_mode(&self, adapter: AdapterIndex) -> Result<D3DDISPLAYMODE, MethodError> {
+    fn get_adapter_display_mode(&self, adapter: AdapterIndex) -> Result<D3DDISPLAYMODE, MethodError> {
         let mut dm = unsafe { std::mem::zeroed::<D3DDISPLAYMODE>() };
-        let hr = unsafe { self.0.GetAdapterDisplayMode(adapter, &mut dm) };
+        let hr = unsafe { self.as_winapi().GetAdapterDisplayMode(adapter, &mut dm) };
         MethodError::check("IDirect3D9::GetAdapterDisplayMode", hr)?;
         Ok(dm)
     }
-}
 
-#[test] fn get_adapter_display_mode() {
-    let d3d = Direct3D::test();
-    let adapters = d3d.get_adapter_count();
-    for adapter in 0..adapters {
-        d3d.get_adapter_display_mode(adapter).unwrap_or_else(|err| panic!("unable to query display mode of adapter {} of {}: {}", adapter+1, adapters, err));
-    }
-    for adapter in adapters..(100+adapters) {
-        assert_eq!(D3DERR::INVALIDCALL, d3d.get_adapter_display_mode(adapter).err());
-    }
-}
-
-
-
-impl Direct3D {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadapteridentifier)\] IDirect3D9::GetAdapterIdentifier
     ///
     /// Gets metadata about an adapter (~ connected monitor), including driver name/version/guids/whql info/vendor/device ids/blood type/birthplace/???
@@ -576,38 +447,16 @@ impl Direct3D {
     ///     WHQLLevel: 0,
     /// }
     /// ```
-    pub fn get_adapter_identifier(&self, adapter: AdapterIndex, flags: u32) -> Result<AdapterIdentifier, MethodError> {
+    fn get_adapter_identifier(&self, adapter: AdapterIndex, flags: u32) -> Result<AdapterIdentifier, MethodError> {
         let mut ident = AdapterIdentifier::default();
-        let hr = unsafe { self.0.GetAdapterIdentifier(adapter, flags, &mut *ident) };
+        let hr = unsafe { self.as_winapi().GetAdapterIdentifier(adapter, flags, &mut *ident) };
         MethodError::check("IDirect3D9::GetAdapterIdentifier", hr)?;
         Ok(ident)
     }
-}
 
-#[test] fn get_adapter_identifier() {
-    let d3d = Direct3D::test();
-
-    /// The D3DENUM_WHQL_LEVEL value has been retired for 9Ex and future versions
-    ///
-    /// Ref: `d3d9.h`
-    const D3DENUM_WHQL_LEVEL : u32 = 2;
-
-    let valid = 0;
-    d3d.get_adapter_identifier(valid, 0                 ).unwrap();
-    d3d.get_adapter_identifier(valid, D3DENUM_WHQL_LEVEL).unwrap();
-    assert_eq!(D3DERR::INVALIDCALL, d3d.get_adapter_identifier(valid, D3DENUM_WHQL_LEVEL+1).map(|_| ()));
-    assert_eq!(D3DERR::INVALIDCALL, d3d.get_adapter_identifier(valid, D3DENUM_WHQL_LEVEL+1000).map(|_| ()));
-    assert_eq!(D3DERR::INVALIDCALL, d3d.get_adapter_identifier(valid, D3DENUM_WHQL_LEVEL+1000000).map(|_| ()));
-
-    let invalid = 9001;
-    assert_eq!(D3DERR::INVALIDCALL, d3d.get_adapter_identifier(invalid, 0                   ).map(|_| ()));
-    assert_eq!(D3DERR::INVALIDCALL, d3d.get_adapter_identifier(invalid, D3DENUM_WHQL_LEVEL  ).map(|_| ()));
-}
-
-
-
-impl Direct3D {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadaptermodecount)\] IDirect3D9::GetAdapterModeCount
+    ///
+    /// Get the number of display modes this adapter/monitor supports.
     ///
     /// ### Arguments
     ///
@@ -643,41 +492,10 @@ impl Direct3D {
     /// * [enum_adapter_modes]
     ///
     /// [enum_adapter_modes]:       #method.enum_adapter_modes
-    pub fn get_adapter_mode_count(&self, adapter: AdapterIndex, format: impl Into<Format>) -> ModeIndex {
-        unsafe { self.0.GetAdapterModeCount(adapter, format.into().into()) }
+    fn get_adapter_mode_count(&self, adapter: AdapterIndex, format: impl Into<Format>) -> ModeIndex {
+        unsafe { self.as_winapi().GetAdapterModeCount(adapter, format.into().into()) }
     }
-}
 
-#[test] fn get_adapter_mode_count() {
-    let d3d = Direct3D::test();
-    let adapters = d3d.get_adapter_count();
-    for valid in 0..adapters {
-        for (fmt,                           expect) in [
-            (Format::UNKNOWN,               Some(false)),
-            (Format::from_unchecked(1),     Some(false)),
-            (Format::R8G8B8,                None),
-            (Format::A8R8G8B8,              None),
-            (Format::X8R8G8B8,              Some(true)),
-            (Format::A8B8G8R8,              None),
-            (Format::X8B8G8R8,              None),
-            (Format::from_unchecked(10000), Some(false)),
-            (Format::from_unchecked(!0),    Some(false)),
-        ].iter().copied() {
-            let modes = d3d.get_adapter_mode_count(valid, fmt);
-            assert!(expect.unwrap_or(true)   || modes == 0, "adapter {} of {}: {:?} has {} modes, none expected", valid+1, adapters, fmt, modes);
-            assert!(!expect.unwrap_or(false) || modes >  0, "adapter {} of {}: {:?} has {} modes, some expected", valid+1, adapters, fmt, modes);
-        }
-    }
-    for invalid in [adapters+0, adapters+100, adapters+100000, adapters+10000000].iter().copied() {
-        for fmt in [Format::UNKNOWN, Format::X8R8G8B8].iter() {
-            assert_eq!(0, d3d.get_adapter_mode_count(invalid, Format::UNKNOWN ), "adapter {} of {} has modes for format {:?} despite being out-of-bounds", invalid+1, adapters, fmt);
-        }
-    }
-}
-
-
-
-impl Direct3D {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadaptermonitor)\] IDirect3D9::GetAdapterMonitor
     ///
     /// ### Returns
@@ -692,21 +510,11 @@ impl Direct3D {
     /// let monitor : HMONITOR = d3d.get_adapter_monitor(   0).unwrap();
     /// let error   : ()       = d3d.get_adapter_monitor(9001).unwrap_err();
     /// ```
-    pub fn get_adapter_monitor(&self, adapter: AdapterIndex) -> Result<HMONITOR, ()> {
-        let hm = unsafe { self.0.GetAdapterMonitor(adapter) }; // Safety: Seems to be safe even when `adapter` >= `self.get_adapter_count()` per unit test bellow
+    fn get_adapter_monitor(&self, adapter: AdapterIndex) -> Result<HMONITOR, ()> {
+        let hm = unsafe { self.as_winapi().GetAdapterMonitor(adapter) }; // Safety: Seems to be safe even when `adapter` >= `self.get_adapter_count()` per unit test bellow
         if hm.is_null() { Err(()) } else { Ok(hm) }
     }
-}
-#[test] fn get_adapter_monitor() {
-    let d3d = Direct3D::test();
-    let adapters = d3d.get_adapter_count();
-    for valid in 0..adapters                { assert!(!d3d.get_adapter_monitor(  valid).unwrap_or(null_mut()).is_null(), "adapter {} of {} has a null HMONITOR", valid+1, adapters); }
-    for invalid in adapters..adapters+100   { assert!( d3d.get_adapter_monitor(invalid).is_err(),                        "adapter {} of {} returned an HMONITOR despite being out-of-bounds!", invalid+1, adapters); }
-}
 
-
-
-impl Direct3D {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getdevicecaps)\] IDirect3D9::GetDeviceCaps
     ///
     /// ### Returns
@@ -726,42 +534,224 @@ impl Direct3D {
     /// assert!(caps.MaxTextureHeight > 0);
     /// // ...
     /// ```
-    pub fn get_device_caps(&self, adapter: AdapterIndex, device_type: DevType) -> Result<Caps, MethodError> {
+    fn get_device_caps(&self, adapter: AdapterIndex, device_type: DevType) -> Result<Caps, MethodError> {
         let mut caps = Caps::default();
-        let hr = unsafe { self.0.GetDeviceCaps(adapter, device_type.into().into(), &mut *caps) }; // Safety: Appears sound on all invalid parameters per unit testing
+        let hr = unsafe { self.as_winapi().GetDeviceCaps(adapter, device_type.into().into(), &mut *caps) }; // Safety: Appears sound on all invalid parameters per unit testing
         MethodError::check("IDirect3D9::GetDeviceCaps", hr)?;
         Ok(caps)
     }
-}
 
-#[test] fn get_device_caps() {
-    let d3d = Direct3D::test();
-
-    let adapter = 0; // valid
-    d3d.get_device_caps(adapter, DevType::HAL).unwrap();
-    d3d.get_device_caps(adapter, DevType::Ref).unwrap();
-    d3d.get_device_caps(adapter, DevType::NullRef).unwrap();
-    assert_eq!(D3DERR::INVALIDDEVICE,   d3d.get_device_caps(adapter, DevType::from_unchecked(100)).map(|_| ()));
-    assert_eq!(D3DERR::INVALIDDEVICE,   d3d.get_device_caps(adapter, DevType::from_unchecked(10000)).map(|_| ()));
-    assert_eq!(D3DERR::INVALIDDEVICE,   d3d.get_device_caps(adapter, DevType::from_unchecked(1000000)).map(|_| ()));
-    assert_eq!(D3DERR::INVALIDDEVICE,   d3d.get_device_caps(adapter, DevType::from_unchecked(100000000)).map(|_| ()));
-
-    let adapter = 9001; // invalid
-    assert_eq!(D3DERR::INVALIDCALL,     d3d.get_device_caps(adapter, DevType::HAL).map(|_| ()));
-    assert_eq!(D3DERR::INVALIDCALL,     d3d.get_device_caps(adapter, DevType::Ref).map(|_| ()));
-    assert_eq!(D3DERR::INVALIDCALL,     d3d.get_device_caps(adapter, DevType::NullRef).map(|_| ()));
-    assert_eq!(D3DERR::INVALIDCALL,     d3d.get_device_caps(adapter, DevType::from_unchecked(100)).map(|_| ()));
-    assert_eq!(D3DERR::INVALIDCALL,     d3d.get_device_caps(adapter, DevType::from_unchecked(10000)).map(|_| ()));
-    assert_eq!(D3DERR::INVALIDCALL,     d3d.get_device_caps(adapter, DevType::from_unchecked(1000000)).map(|_| ()));
-    assert_eq!(D3DERR::INVALIDCALL,     d3d.get_device_caps(adapter, DevType::from_unchecked(100000000)).map(|_| ()));
-}
-
-
-
-impl Direct3D {
-    // XXX: register_software_device
+    // XXX: fn register_software_device
     // I can't easily find proper documentation demonstrating usage.  Supposedly it's buried in a DDK somewhere.
     // Pull requests welcome w/ unit testing coverage!
+}
+
+impl<T: private::Sealed> IDirect3D9Ext for T {}
+
+mod private {
+    use winapi::shared::d3d9::IDirect3D9;
+    pub unsafe trait Sealed : From<mcom::Rc<IDirect3D9>>    { fn as_winapi(&self) -> &IDirect3D9; }
+    unsafe impl Sealed for mcom::Rc<IDirect3D9>             { fn as_winapi(&self) -> &IDirect3D9 { &**self } }
+    unsafe impl Sealed for super::Direct3D                  { fn as_winapi(&self) -> &IDirect3D9 { &*self.0 } }
+}
+
+#[cfg(test)] mod tests {
+    use super::*;
+
+    #[test] fn create() {
+        use winapi::shared::d3d9::D3D_SDK_VERSION;
+        unsafe {
+            Direct3D::create(SdkVersion::default()).unwrap();
+            Direct3D::create(SdkVersion::default().with_debug_disabled()).unwrap();
+            Direct3D::create(SdkVersion::default().with_debug_enabled()).unwrap();
+            Direct3D::create(SdkVersion::DEFAULT.with_debug_disabled()).unwrap();
+            Direct3D::create(SdkVersion::DEFAULT.with_debug_enabled()).unwrap();
+            Direct3D::create(SdkVersion::DEFAULT9B.with_debug_disabled()).unwrap();
+            Direct3D::create(SdkVersion::DEFAULT9B.with_debug_enabled()).unwrap();
+            Direct3D::create(SdkVersion::from(D3D_SDK_VERSION).with_debug_disabled()).unwrap();
+            Direct3D::create(SdkVersion::from(D3D_SDK_VERSION).with_debug_enabled()).unwrap();
+            assert_eq!((), Direct3D::create(SdkVersion::from(0)).err().unwrap());
+            assert_eq!((), Direct3D::create(SdkVersion::from(0).with_debug_disabled()).err().unwrap());
+            assert_eq!((), Direct3D::create(SdkVersion::from(0).with_debug_enabled()).err().unwrap());
+        }
+    }
+
+    #[test] fn check_depth_stencil_match() {
+        let d3d = Direct3D::test();
+        assert!(                        d3d.check_depth_stencil_match(0,    DevType::HAL, Format::X8R8G8B8, Format::A8R8G8B8, Format::D24S8  ).is_ok()); // valid
+        assert_eq!(D3DERR::INVALIDCALL, d3d.check_depth_stencil_match(9001, DevType::HAL, Format::X8R8G8B8, Format::A8R8G8B8, Format::D24S8  )); // invalid adapter
+        assert_eq!(D3DERR::INVALIDCALL, d3d.check_depth_stencil_match(0,    Invalid,      Format::X8R8G8B8, Format::A8R8G8B8, Format::D24S8  )); // invalid devtype
+        assert_eq!(D3DERR::INVALIDCALL, d3d.check_depth_stencil_match(0,    DevType::HAL, Format::UNKNOWN,  Format::A8R8G8B8, Format::D24S8  )); // invalid adapter format
+        assert_eq!(D3DERR::INVALIDCALL, d3d.check_depth_stencil_match(0,    DevType::HAL, Format::X8R8G8B8, Format::UNKNOWN,  Format::D24S8  )); // invalid render target format
+        assert_eq!(D3DERR::INVALIDCALL, d3d.check_depth_stencil_match(0,    DevType::HAL, Format::X8R8G8B8, Format::A8R8G8B8, Format::UNKNOWN)); // invalid depth stencil format
+    }
+
+    #[test] fn check_device_format() {
+        let d3d = Direct3D::test();
+        assert!(                        d3d.check_device_format(0,    DevType::HAL, Format::X8R8G8B8,  0, ResourceType::Texture, Format::A8R8G8B8).is_ok()); // valid
+        assert_eq!(D3DERR::INVALIDCALL, d3d.check_device_format(9001, DevType::HAL, Format::X8R8G8B8,  0, ResourceType::Texture, Format::A8R8G8B8)); // invalid adapter
+        assert_eq!(D3DERR::INVALIDCALL, d3d.check_device_format(0,    Invalid,      Format::X8R8G8B8,  0, ResourceType::Texture, Format::A8R8G8B8)); // invalid devtype
+        assert_eq!(D3DERR::INVALIDCALL, d3d.check_device_format(0,    DevType::HAL, Format::UNKNOWN,   0, ResourceType::Texture, Format::A8R8G8B8)); // invalid adapter format
+        assert_eq!(D3DERR::INVALIDCALL, d3d.check_device_format(0,    DevType::HAL, Format::X8R8G8B8, !0, ResourceType::Texture, Format::A8R8G8B8)); // invalid usage
+        assert_eq!(D3DERR::INVALIDCALL, d3d.check_device_format(0,    DevType::HAL, Format::X8R8G8B8,  0, Invalid,               Format::A8R8G8B8)); // invalid resource type
+        assert_eq!(D3DERR::INVALIDCALL, d3d.check_device_format(0,    DevType::HAL, Format::X8R8G8B8,  0, ResourceType::Texture, Format::UNKNOWN )); // invalid check format
+    }
+
+    #[test] fn check_device_format_conversion() {
+        let d3d = Direct3D::test();
+        assert!(                            d3d.check_device_format_conversion(0,    DevType::HAL, Format::A8R8G8B8, Format::A8R8G8B8).is_ok()); // valid
+        assert!(                            d3d.check_device_format_conversion(0,    DevType::HAL, Format::D24S8,    Format::D24S8   ).is_ok()); // valid
+        assert_eq!(D3DERR::INVALIDCALL,     d3d.check_device_format_conversion(9001, DevType::HAL, Format::A8R8G8B8, Format::A8R8G8B8)); // invalid adapter
+        assert_eq!(D3DERR::INVALIDDEVICE,   d3d.check_device_format_conversion(0,    Invalid,      Format::A8R8G8B8, Format::A8R8G8B8)); // invalid devtype
+        assert_eq!(D3DERR::NOTAVAILABLE,    d3d.check_device_format_conversion(0,    DevType::HAL, Invalid,          Format::A8R8G8B8)); // invalid source format
+        assert_eq!(D3DERR::NOTAVAILABLE,    d3d.check_device_format_conversion(0,    DevType::HAL, Format::A8R8G8B8, Invalid         )); // invalid target format
+        assert_eq!(D3DERR::NOTAVAILABLE,    d3d.check_device_format_conversion(0,    DevType::HAL, Format::D24S8,    Format::A8R8G8B8)); // invalid conversion
+        assert_eq!(D3DERR::NOTAVAILABLE,    d3d.check_device_format_conversion(0,    DevType::HAL, Format::A8R8G8B8, Format::D24S8   )); // invalid conversion
+    }
+
+    #[test] fn check_device_multi_sample_type() {
+        let d3d = Direct3D::test();
+        assert!(                            d3d.check_device_multi_sample_type(0,    DevType::HAL, Format::A8R8G8B8, true, MultiSample::None    ).is_ok()); // valid
+        assert!(                            d3d.check_device_multi_sample_type(0,    DevType::HAL, Format::A8R8G8B8, true, MultiSample::X2      ).is_ok()); // valid
+        assert_eq!(D3DERR::INVALIDCALL,     d3d.check_device_multi_sample_type(9001, DevType::HAL, Format::A8R8G8B8, true, MultiSample::X2      )); // invalid adapter
+        assert_eq!(D3DERR::INVALIDCALL,     d3d.check_device_multi_sample_type(0,    Invalid,      Format::A8R8G8B8, true, MultiSample::X2      )); // invalid devtype
+        assert_eq!(D3DERR::NOTAVAILABLE,    d3d.check_device_multi_sample_type(0,    DevType::HAL, Invalid,          true, MultiSample::X2      )); // invalid surface format
+        let _ =                             d3d.check_device_multi_sample_type(0,    DevType::HAL, Invalid,          true, MultiSample::None     ); // can succeed despite invalid format when we use D3DMULTISAMPLE_NONE
+        assert_eq!(D3DERR::INVALIDCALL,     d3d.check_device_multi_sample_type(0,    DevType::HAL, Format::A8R8G8B8, true, Invalid              )); // invalid multisampling
+    }
+
+    #[test] fn check_device_type() {
+        let d3d = Direct3D::test();
+        assert!(                            d3d.check_device_type(0,    DevType::HAL, Format::X8R8G8B8, Format::A8R8G8B8, true).is_ok()); // valid
+        assert_eq!(D3DERR::INVALIDCALL,     d3d.check_device_type(9001, DevType::HAL, Format::X8R8G8B8, Format::A8R8G8B8, true)); // invalid adapter
+        assert_eq!(D3DERR::INVALIDCALL,     d3d.check_device_type(0,    Invalid,      Format::X8R8G8B8, Format::A8R8G8B8, true)); // invalid devtype
+        assert_eq!(D3DERR::NOTAVAILABLE,    d3d.check_device_type(0,    DevType::HAL, Invalid,          Format::A8R8G8B8, true)); // invalid adapter format
+        assert_eq!(D3DERR::NOTAVAILABLE,    d3d.check_device_type(0,    DevType::HAL, Format::X8R8G8B8, Invalid,          true)); // invalid back buffer format
+    }
+
+    // #[test] fn create_device() {} // TODO
+
+    #[test] fn enum_adapter_modes() {
+        let d3d = Direct3D::test();
+        let adapters = d3d.get_adapter_count();
+
+        // all adapters should be valid
+        for adapter in 0..adapters {
+            eprintln!("checking adapter {} of {}", adapter+1, adapters);
+            for fmt in [
+                Format::UNKNOWN, Format::R8G8B8, Format::A8R8G8B8, Format::X8R8G8B8, Format::A8B8G8R8, Format::X8B8G8R8,
+                Format::from_unchecked(1), Format::from_unchecked(10000), Format::from_unchecked(!0),
+            ].iter().copied() {
+                let modes = d3d.get_adapter_mode_count(adapter, fmt);
+                for mode in 0..modes {
+                    d3d.enum_adapter_modes(adapter, fmt, mode).unwrap_or_else(|err| panic!("enum_adapter_modes({}, {:?}, {}) failed: {}", adapter, fmt, mode, err));
+                }
+                for mode in modes..modes+100 {
+                    assert_eq!(D3DERR::INVALIDCALL, d3d.enum_adapter_modes(adapter, fmt, mode).map(|_| ()));
+                }
+            }
+        }
+
+        // doublecheck that d3d doesn't segfault for out-of-bounds adapters or anything
+        for adapter in [adapters+0, adapters+100, adapters+100000, adapters+10000000].iter().copied() {
+            eprintln!("checking invalid adapter {} of {}", adapter+1, adapters);
+            assert_eq!(D3DERR::INVALIDCALL, d3d.enum_adapter_modes(adapter, Format::X8R8G8B8, 0).map(|_| ()));
+            assert_eq!(D3DERR::INVALIDCALL, d3d.enum_adapter_modes(adapter, Format::X8R8G8B8, 100).map(|_| ()));
+            assert_eq!(D3DERR::INVALIDCALL, d3d.enum_adapter_modes(adapter, Format::X8R8G8B8, 10000).map(|_| ()));
+        }
+    }
+
+    #[test] fn get_adapter_count() {
+        let d3d = Direct3D::test();
+        assert!(d3d.get_adapter_count() > 0);
+    }
+
+    #[test] fn get_adapter_display_mode() {
+        let d3d = Direct3D::test();
+        let adapters = d3d.get_adapter_count();
+        for adapter in 0..adapters {
+            d3d.get_adapter_display_mode(adapter).unwrap_or_else(|err| panic!("unable to query display mode of adapter {} of {}: {}", adapter+1, adapters, err));
+        }
+        for adapter in adapters..(100+adapters) {
+            assert_eq!(D3DERR::INVALIDCALL, d3d.get_adapter_display_mode(adapter).err());
+        }
+    }
+
+    #[test] fn get_adapter_identifier() {
+        let d3d = Direct3D::test();
+
+        /// The D3DENUM_WHQL_LEVEL value has been retired for 9Ex and future versions
+        ///
+        /// Ref: `d3d9.h`
+        const D3DENUM_WHQL_LEVEL : u32 = 2;
+
+        let valid = 0;
+        d3d.get_adapter_identifier(valid, 0                 ).unwrap();
+        d3d.get_adapter_identifier(valid, D3DENUM_WHQL_LEVEL).unwrap();
+        assert_eq!(D3DERR::INVALIDCALL, d3d.get_adapter_identifier(valid, D3DENUM_WHQL_LEVEL+1).map(|_| ()));
+        assert_eq!(D3DERR::INVALIDCALL, d3d.get_adapter_identifier(valid, D3DENUM_WHQL_LEVEL+1000).map(|_| ()));
+        assert_eq!(D3DERR::INVALIDCALL, d3d.get_adapter_identifier(valid, D3DENUM_WHQL_LEVEL+1000000).map(|_| ()));
+
+        let invalid = 9001;
+        assert_eq!(D3DERR::INVALIDCALL, d3d.get_adapter_identifier(invalid, 0                   ).map(|_| ()));
+        assert_eq!(D3DERR::INVALIDCALL, d3d.get_adapter_identifier(invalid, D3DENUM_WHQL_LEVEL  ).map(|_| ()));
+    }
+
+    #[test] fn get_adapter_mode_count() {
+        let d3d = Direct3D::test();
+        let adapters = d3d.get_adapter_count();
+        for valid in 0..adapters {
+            for (fmt,                           expect) in [
+                (Format::UNKNOWN,               Some(false)),
+                (Format::from_unchecked(1),     Some(false)),
+                (Format::R8G8B8,                None),
+                (Format::A8R8G8B8,              None),
+                (Format::X8R8G8B8,              Some(true)),
+                (Format::A8B8G8R8,              None),
+                (Format::X8B8G8R8,              None),
+                (Format::from_unchecked(10000), Some(false)),
+                (Format::from_unchecked(!0),    Some(false)),
+            ].iter().copied() {
+                let modes = d3d.get_adapter_mode_count(valid, fmt);
+                assert!(expect.unwrap_or(true)   || modes == 0, "adapter {} of {}: {:?} has {} modes, none expected", valid+1, adapters, fmt, modes);
+                assert!(!expect.unwrap_or(false) || modes >  0, "adapter {} of {}: {:?} has {} modes, some expected", valid+1, adapters, fmt, modes);
+            }
+        }
+        for invalid in [adapters+0, adapters+100, adapters+100000, adapters+10000000].iter().copied() {
+            for fmt in [Format::UNKNOWN, Format::X8R8G8B8].iter() {
+                assert_eq!(0, d3d.get_adapter_mode_count(invalid, Format::UNKNOWN ), "adapter {} of {} has modes for format {:?} despite being out-of-bounds", invalid+1, adapters, fmt);
+            }
+        }
+    }
+
+    #[test] fn get_adapter_monitor() {
+        let d3d = Direct3D::test();
+        let adapters = d3d.get_adapter_count();
+        for valid in 0..adapters                { assert!(!d3d.get_adapter_monitor(  valid).unwrap_or(null_mut()).is_null(), "adapter {} of {} has a null HMONITOR", valid+1, adapters); }
+        for invalid in adapters..adapters+100   { assert!( d3d.get_adapter_monitor(invalid).is_err(),                        "adapter {} of {} returned an HMONITOR despite being out-of-bounds!", invalid+1, adapters); }
+    }
+
+    #[test] fn get_device_caps() {
+        let d3d = Direct3D::test();
+
+        let adapter = 0; // valid
+        d3d.get_device_caps(adapter, DevType::HAL).unwrap();
+        d3d.get_device_caps(adapter, DevType::Ref).unwrap();
+        d3d.get_device_caps(adapter, DevType::NullRef).unwrap();
+        assert_eq!(D3DERR::INVALIDDEVICE,   d3d.get_device_caps(adapter, DevType::from_unchecked(100)).map(|_| ()));
+        assert_eq!(D3DERR::INVALIDDEVICE,   d3d.get_device_caps(adapter, DevType::from_unchecked(10000)).map(|_| ()));
+        assert_eq!(D3DERR::INVALIDDEVICE,   d3d.get_device_caps(adapter, DevType::from_unchecked(1000000)).map(|_| ()));
+        assert_eq!(D3DERR::INVALIDDEVICE,   d3d.get_device_caps(adapter, DevType::from_unchecked(100000000)).map(|_| ()));
+
+        let adapter = 9001; // invalid
+        assert_eq!(D3DERR::INVALIDCALL,     d3d.get_device_caps(adapter, DevType::HAL).map(|_| ()));
+        assert_eq!(D3DERR::INVALIDCALL,     d3d.get_device_caps(adapter, DevType::Ref).map(|_| ()));
+        assert_eq!(D3DERR::INVALIDCALL,     d3d.get_device_caps(adapter, DevType::NullRef).map(|_| ()));
+        assert_eq!(D3DERR::INVALIDCALL,     d3d.get_device_caps(adapter, DevType::from_unchecked(100)).map(|_| ()));
+        assert_eq!(D3DERR::INVALIDCALL,     d3d.get_device_caps(adapter, DevType::from_unchecked(10000)).map(|_| ()));
+        assert_eq!(D3DERR::INVALIDCALL,     d3d.get_device_caps(adapter, DevType::from_unchecked(1000000)).map(|_| ()));
+        assert_eq!(D3DERR::INVALIDCALL,     d3d.get_device_caps(adapter, DevType::from_unchecked(100000000)).map(|_| ()));
+    }
 }
 
 
