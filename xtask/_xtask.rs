@@ -82,6 +82,7 @@ fn check(mut args: std::env::Args) {
 
 fn doc(_args: std::env::Args, help: bool) {
     copy_thindx_files();
+    run("cargo build --examples");
     examples::update();
     headers::update();
     if help {
