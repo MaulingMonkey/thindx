@@ -16,7 +16,7 @@
 //! | [unknwn.h](#unknwn) | ⚠️ 1 of 3 |   |   |   |
 //! | [d3dcommon.h](#d3dcommon) | ⚠️ 2 of 3 | ✔️ 1 of 1 | ✔️ 22 of 22 |   |
 //! | [d3dcompiler.h](#d3dcompiler) |   | ✔️ 1 of 1 | ✔️ 2 of 2 |   |
-//! | [d3d9.h](#d3d9) | ❌ 0 of 24 |   |   | ❌ 0 of 9 |
+//! | [d3d9.h](#d3d9) | ⚠️ 20 of 24 |   |   | ⚠️ 2 of 9 |
 //! | [d3d9caps.h](#d3d9caps) |   | ⚠️ 1 of 5 |   |   |
 //! | [d3d9types.h](#d3d9types) |   | ⚠️ 17 of 71 | ⚠️ 39 of 54 |   |
 //! | [d3d11shader.h](#d3d11shader) | ✔️ 12 of 12 | ✔️ 9 of 9 | ✔️ 1 of 1 |   |
@@ -106,30 +106,30 @@
 //!
 //! |  ?  | C++ Interface | Rust Type | Methods |
 //! | --- | ------------- | --------- | ------- |
-//! | ❌ | `IDirect3D9` | | ❌ 0 of 14 |
-//! | ❌ | `IDirect3D9Ex` | | ❌ 0 of 5 |
+//! | ✔️ | `IDirect3D9` | [`d3d9::Direct3D`]<br> [`d3d9::IDirect3D9Ext`]<br> | ⚠️ 13 of 14 |
+//! | ✔️ | `IDirect3D9Ex` | [`d3d9::Direct3DEx`]<br> [`d3d9::IDirect3D9ExExt`]<br> | ✔️ 5 of 5 |
 //! | ❌ | `IDirect3D9ExOverlayExtension` | | ❌ 0 of 1 |
 //! | ❌ | `IDirect3DAuthenticatedChannel9` | | ❌ 0 of 5 |
-//! | ❌ | `IDirect3DBaseTexture9` | | ❌ 0 of 6 |
+//! | ✔️ | `IDirect3DBaseTexture9` | [`d3d9::BaseTexture`]<br> [`d3d9::IDirect3DBaseTexture9Ext`]<br> | ✔️ 6 of 6 |
 //! | ❌ | `IDirect3DCryptoSession9` | | ❌ 0 of 9 |
-//! | ❌ | `IDirect3DCubeTexture9` | | ❌ 0 of 5 |
-//! | ❌ | `IDirect3DDevice9` | | ❌ 0 of 116 |
-//! | ❌ | `IDirect3DDevice9Ex` | | ❌ 0 of 15 |
+//! | ✔️ | `IDirect3DCubeTexture9` | [`d3d9::CubeTexture`]<br> [`d3d9::IDirect3DCubeTexture9Ext`]<br> | ✔️ 5 of 5 |
+//! | ✔️ | `IDirect3DDevice9` | [`d3d9::Device`]<br> [`d3d9::IDirect3DDevice9Ext`]<br> | ⚠️ 74 of 116 |
+//! | ✔️ | `IDirect3DDevice9Ex` | [`d3d9::DeviceEx`]<br> [`d3d9::IDirect3DDevice9ExExt`]<br> | ⚠️ 14 of 15 |
 //! | ❌ | `IDirect3DDevice9Video` | | ❌ 0 of 3 |
-//! | ❌ | `IDirect3DIndexBuffer9` | | ❌ 0 of 3 |
-//! | ❌ | `IDirect3DPixelShader9` | | ❌ 0 of 2 |
-//! | ❌ | `IDirect3DQuery9` | | ❌ 0 of 5 |
-//! | ❌ | `IDirect3DResource9` | | ❌ 0 of 8 |
-//! | ❌ | `IDirect3DStateBlock9` | | ❌ 0 of 3 |
-//! | ❌ | `IDirect3DSurface9` | | ❌ 0 of 6 |
-//! | ❌ | `IDirect3DSwapChain9` | | ❌ 0 of 7 |
-//! | ❌ | `IDirect3DSwapChain9Ex` | | ❌ 0 of 3 |
-//! | ❌ | `IDirect3DTexture9` | | ❌ 0 of 5 |
-//! | ❌ | `IDirect3DVertexBuffer9` | | ❌ 0 of 3 |
-//! | ❌ | `IDirect3DVertexDeclaration9` | | ❌ 0 of 2 |
-//! | ❌ | `IDirect3DVertexShader9` | | ❌ 0 of 2 |
-//! | ❌ | `IDirect3DVolume9` | | ❌ 0 of 8 |
-//! | ❌ | `IDirect3DVolumeTexture9` | | ❌ 0 of 5 |
+//! | ✔️ | `IDirect3DIndexBuffer9` | [`d3d9::IndexBuffer`]<br> [`d3d9::IDirect3DIndexBuffer9Ext`]<br> | ✔️ 3 of 3 |
+//! | ✔️ | `IDirect3DPixelShader9` | [`d3d9::PixelShader`]<br> [`d3d9::IDirect3DPixelShader9Ext`]<br> | ✔️ 2 of 2 |
+//! | ✔️ | `IDirect3DQuery9` | [`d3d9::Query`]<br> [`d3d9::IDirect3DQuery9Ext`]<br> | ⚠️ 4 of 5 |
+//! | ✔️ | `IDirect3DResource9` | [`d3d9::Resource`]<br> [`d3d9::IDirect3DResource9Ext`]<br> | ✔️ 8 of 8 |
+//! | ✔️ | `IDirect3DStateBlock9` | [`d3d9::StateBlock`]<br> [`d3d9::IDirect3DStateBlock9Ext`]<br> | ✔️ 3 of 3 |
+//! | ✔️ | `IDirect3DSurface9` | [`d3d9::Surface`]<br> [`d3d9::IDirect3DSurface9Ext`]<br> | ✔️ 6 of 6 |
+//! | ✔️ | `IDirect3DSwapChain9` | [`d3d9::SwapChain`]<br> [`d3d9::IDirect3DSwapChain9Ext`]<br> | ✔️ 7 of 7 |
+//! | ✔️ | `IDirect3DSwapChain9Ex` | [`d3d9::SwapChainEx`]<br> [`d3d9::IDirect3DSwapChain9ExExt`]<br> | ⚠️ 2 of 3 |
+//! | ✔️ | `IDirect3DTexture9` | [`d3d9::Texture`]<br> [`d3d9::IDirect3DTexture9Ext`]<br> | ✔️ 5 of 5 |
+//! | ✔️ | `IDirect3DVertexBuffer9` | [`d3d9::VertexBuffer`]<br> [`d3d9::IDirect3DVertexBuffer9Ext`]<br> | ✔️ 3 of 3 |
+//! | ✔️ | `IDirect3DVertexDeclaration9` | [`d3d9::VertexDeclaration`]<br> [`d3d9::IDirect3DVertexDeclaration9Ext`]<br> | ✔️ 2 of 2 |
+//! | ✔️ | `IDirect3DVertexShader9` | [`d3d9::VertexShader`]<br> [`d3d9::IDirect3DVertexShader9Ext`]<br> | ✔️ 2 of 2 |
+//! | ✔️ | `IDirect3DVolume9` | [`d3d9::Volume`]<br> [`d3d9::IDirect3DVolume9Ext`]<br> | ✔️ 8 of 8 |
+//! | ✔️ | `IDirect3DVolumeTexture9` | [`d3d9::VolumeTexture`]<br> [`d3d9::IDirect3DVolumeTexture9Ext`]<br> | ✔️ 5 of 5 |
 //!
 //! |  ?  | C++ Function  | Rust Function |
 //! | --- | ------------- | ------------- |
@@ -140,42 +140,42 @@
 //! | ❌ | `D3DPERF_SetMarker` | |
 //! | ❌ | `D3DPERF_SetOptions` | |
 //! | ❌ | `D3DPERF_SetRegion` | |
-//! | ❌ | `Direct3DCreate9` | |
-//! | ❌ | `Direct3DCreate9Ex` | |
+//! | ✔️ | `Direct3DCreate9` | [`d3d9::IDirect3D9Ext::create`]<br> |
+//! | ✔️ | `Direct3DCreate9Ex` | [`d3d9::IDirect3D9ExExt::create`]<br> |
 //!
 //! |  ?  | C++ Method    | Rust Method |
 //! | --- | ------------- | ----------- |
-//! | ❌ | `IDirect3D9::CheckDepthStencilMatch` | |
-//! | ❌ | `IDirect3D9::CheckDeviceFormat` | |
-//! | ❌ | `IDirect3D9::CheckDeviceFormatConversion` | |
-//! | ❌ | `IDirect3D9::CheckDeviceMultiSampleType` | |
-//! | ❌ | `IDirect3D9::CheckDeviceType` | |
-//! | ❌ | `IDirect3D9::CreateDevice` | |
-//! | ❌ | `IDirect3D9::EnumAdapterModes` | |
-//! | ❌ | `IDirect3D9::GetAdapterCount` | |
-//! | ❌ | `IDirect3D9::GetAdapterDisplayMode` | |
-//! | ❌ | `IDirect3D9::GetAdapterIdentifier` | |
-//! | ❌ | `IDirect3D9::GetAdapterModeCount` | |
-//! | ❌ | `IDirect3D9::GetAdapterMonitor` | |
-//! | ❌ | `IDirect3D9::GetDeviceCaps` | |
+//! | ✔️ | `IDirect3D9::CheckDepthStencilMatch` | [`d3d9::IDirect3D9Ext::check_depth_stencil_match`]<br> |
+//! | ✔️ | `IDirect3D9::CheckDeviceFormat` | [`d3d9::IDirect3D9Ext::check_device_format`]<br> |
+//! | ✔️ | `IDirect3D9::CheckDeviceFormatConversion` | [`d3d9::IDirect3D9Ext::check_device_format_conversion`]<br> |
+//! | ✔️ | `IDirect3D9::CheckDeviceMultiSampleType` | [`d3d9::IDirect3D9Ext::check_device_multi_sample_type`]<br> |
+//! | ✔️ | `IDirect3D9::CheckDeviceType` | [`d3d9::IDirect3D9Ext::check_device_type`]<br> |
+//! | ✔️ | `IDirect3D9::CreateDevice` | [`d3d9::IDirect3D9Ext::create_device`]<br> |
+//! | ✔️ | `IDirect3D9::EnumAdapterModes` | [`d3d9::IDirect3D9Ext::enum_adapter_modes`]<br> |
+//! | ✔️ | `IDirect3D9::GetAdapterCount` | [`d3d9::IDirect3D9Ext::get_adapter_count`]<br> |
+//! | ✔️ | `IDirect3D9::GetAdapterDisplayMode` | [`d3d9::IDirect3D9Ext::get_adapter_display_mode`]<br> |
+//! | ✔️ | `IDirect3D9::GetAdapterIdentifier` | [`d3d9::IDirect3D9Ext::get_adapter_identifier`]<br> |
+//! | ✔️ | `IDirect3D9::GetAdapterModeCount` | [`d3d9::IDirect3D9Ext::get_adapter_mode_count`]<br> |
+//! | ✔️ | `IDirect3D9::GetAdapterMonitor` | [`d3d9::IDirect3D9Ext::get_adapter_monitor`]<br> |
+//! | ✔️ | `IDirect3D9::GetDeviceCaps` | [`d3d9::IDirect3D9Ext::get_device_caps`]<br> |
 //! | ❌ | `IDirect3D9::RegisterSoftwareDevice` | |
-//! | ❌ | `IDirect3D9Ex::CreateDeviceEx` | |
-//! | ❌ | `IDirect3D9Ex::EnumAdapterModesEx` | |
-//! | ❌ | `IDirect3D9Ex::GetAdapterDisplayModeEx` | |
-//! | ❌ | `IDirect3D9Ex::GetAdapterLUID` | |
-//! | ❌ | `IDirect3D9Ex::GetAdapterModeCountEx` | |
+//! | ✔️ | `IDirect3D9Ex::CreateDeviceEx` | [`d3d9::IDirect3D9ExExt::create_device_ex`]<br> |
+//! | ✔️ | `IDirect3D9Ex::EnumAdapterModesEx` | [`d3d9::IDirect3D9ExExt::enum_adapter_modes_ex`]<br> |
+//! | ✔️ | `IDirect3D9Ex::GetAdapterDisplayModeEx` | [`d3d9::IDirect3D9ExExt::get_adapter_display_mode_ex`]<br> |
+//! | ✔️ | `IDirect3D9Ex::GetAdapterLUID` | [`d3d9::IDirect3D9ExExt::get_adapter_luid`]<br> |
+//! | ✔️ | `IDirect3D9Ex::GetAdapterModeCountEx` | [`d3d9::IDirect3D9ExExt::get_adapter_mode_count_ex`]<br> |
 //! | ❌ | `IDirect3D9ExOverlayExtension::CheckDeviceOverlayType` | |
 //! | ❌ | `IDirect3DAuthenticatedChannel9::Configure` | |
 //! | ❌ | `IDirect3DAuthenticatedChannel9::GetCertificate` | |
 //! | ❌ | `IDirect3DAuthenticatedChannel9::GetCertificateSize` | |
 //! | ❌ | `IDirect3DAuthenticatedChannel9::NegotiateKeyExchange` | |
 //! | ❌ | `IDirect3DAuthenticatedChannel9::Query` | |
-//! | ❌ | `IDirect3DBaseTexture9::GenerateMipSubLevels` | |
-//! | ❌ | `IDirect3DBaseTexture9::GetAutoGenFilterType` | |
-//! | ❌ | `IDirect3DBaseTexture9::GetLOD` | |
-//! | ❌ | `IDirect3DBaseTexture9::GetLevelCount` | |
-//! | ❌ | `IDirect3DBaseTexture9::SetAutoGenFilterType` | |
-//! | ❌ | `IDirect3DBaseTexture9::SetLOD` | |
+//! | ✔️ | `IDirect3DBaseTexture9::GenerateMipSubLevels` | [`d3d9::IDirect3DBaseTexture9Ext::generate_mip_sub_levels`]<br> |
+//! | ✔️ | `IDirect3DBaseTexture9::GetAutoGenFilterType` | [`d3d9::IDirect3DBaseTexture9Ext::get_auto_gen_filter_type`]<br> |
+//! | ✔️ | `IDirect3DBaseTexture9::GetLOD` | [`d3d9::IDirect3DBaseTexture9Ext::get_lod`]<br> |
+//! | ✔️ | `IDirect3DBaseTexture9::GetLevelCount` | [`d3d9::IDirect3DBaseTexture9Ext::get_level_count`]<br> |
+//! | ✔️ | `IDirect3DBaseTexture9::SetAutoGenFilterType` | [`d3d9::IDirect3DBaseTexture9Ext::set_auto_gen_filter_type`]<br> |
+//! | ✔️ | `IDirect3DBaseTexture9::SetLOD` | [`d3d9::IDirect3DBaseTexture9Ext::set_lod`]<br> |
 //! | ❌ | `IDirect3DCryptoSession9::DecryptionBlt` | |
 //! | ❌ | `IDirect3DCryptoSession9::EncryptionBlt` | |
 //! | ❌ | `IDirect3DCryptoSession9::FinishSessionKeyRefresh` | |
@@ -185,60 +185,60 @@
 //! | ❌ | `IDirect3DCryptoSession9::GetSurfacePitch` | |
 //! | ❌ | `IDirect3DCryptoSession9::NegotiateKeyExchange` | |
 //! | ❌ | `IDirect3DCryptoSession9::StartSessionKeyRefresh` | |
-//! | ❌ | `IDirect3DCubeTexture9::AddDirtyRect` | |
-//! | ❌ | `IDirect3DCubeTexture9::GetCubeMapSurface` | |
-//! | ❌ | `IDirect3DCubeTexture9::GetLevelDesc` | |
-//! | ❌ | `IDirect3DCubeTexture9::LockRect` | |
-//! | ❌ | `IDirect3DCubeTexture9::UnlockRect` | |
-//! | ❌ | `IDirect3DDevice9::BeginScene` | |
-//! | ❌ | `IDirect3DDevice9::BeginStateBlock` | |
-//! | ❌ | `IDirect3DDevice9::Clear` | |
-//! | ❌ | `IDirect3DDevice9::ColorFill` | |
-//! | ❌ | `IDirect3DDevice9::CreateAdditionalSwapChain` | |
-//! | ❌ | `IDirect3DDevice9::CreateCubeTexture` | |
-//! | ❌ | `IDirect3DDevice9::CreateDepthStencilSurface` | |
-//! | ❌ | `IDirect3DDevice9::CreateIndexBuffer` | |
-//! | ❌ | `IDirect3DDevice9::CreateOffscreenPlainSurface` | |
-//! | ❌ | `IDirect3DDevice9::CreatePixelShader` | |
-//! | ❌ | `IDirect3DDevice9::CreateQuery` | |
-//! | ❌ | `IDirect3DDevice9::CreateRenderTarget` | |
-//! | ❌ | `IDirect3DDevice9::CreateStateBlock` | |
-//! | ❌ | `IDirect3DDevice9::CreateTexture` | |
-//! | ❌ | `IDirect3DDevice9::CreateVertexBuffer` | |
-//! | ❌ | `IDirect3DDevice9::CreateVertexDeclaration` | |
-//! | ❌ | `IDirect3DDevice9::CreateVertexShader` | |
-//! | ❌ | `IDirect3DDevice9::CreateVolumeTexture` | |
+//! | ✔️ | `IDirect3DCubeTexture9::AddDirtyRect` | [`d3d9::IDirect3DCubeTexture9Ext::add_dirty_rect`]<br> |
+//! | ✔️ | `IDirect3DCubeTexture9::GetCubeMapSurface` | [`d3d9::IDirect3DCubeTexture9Ext::get_cube_map_surface`]<br> |
+//! | ✔️ | `IDirect3DCubeTexture9::GetLevelDesc` | [`d3d9::IDirect3DCubeTexture9Ext::get_level_desc`]<br> |
+//! | ✔️ | `IDirect3DCubeTexture9::LockRect` | [`d3d9::IDirect3DCubeTexture9Ext::lock_rect_unchecked`]<br> |
+//! | ✔️ | `IDirect3DCubeTexture9::UnlockRect` | [`d3d9::IDirect3DCubeTexture9Ext::unlock_rect`]<br> |
+//! | ✔️ | `IDirect3DDevice9::BeginScene` | [`d3d9::IDirect3DDevice9Ext::begin_scene`]<br> |
+//! | ✔️ | `IDirect3DDevice9::BeginStateBlock` | [`d3d9::IDirect3DDevice9Ext::begin_state_block`]<br> |
+//! | ✔️ | `IDirect3DDevice9::Clear` | [`d3d9::IDirect3DDevice9Ext::clear`]<br> |
+//! | ✔️ | `IDirect3DDevice9::ColorFill` | [`d3d9::IDirect3DDevice9Ext::color_fill`]<br> |
+//! | ✔️ | `IDirect3DDevice9::CreateAdditionalSwapChain` | [`d3d9::IDirect3DDevice9Ext::create_additional_swap_chain`]<br> |
+//! | ✔️ | `IDirect3DDevice9::CreateCubeTexture` | [`d3d9::IDirect3DDevice9Ext::create_cube_texture`]<br> |
+//! | ✔️ | `IDirect3DDevice9::CreateDepthStencilSurface` | [`d3d9::IDirect3DDevice9Ext::create_depth_stencil_surface`]<br> |
+//! | ✔️ | `IDirect3DDevice9::CreateIndexBuffer` | [`d3d9::IDirect3DDevice9Ext::create_index_buffer`]<br> |
+//! | ✔️ | `IDirect3DDevice9::CreateOffscreenPlainSurface` | [`d3d9::IDirect3DDevice9Ext::create_offscreen_plain_surface`]<br> |
+//! | ✔️ | `IDirect3DDevice9::CreatePixelShader` | [`d3d9::IDirect3DDevice9Ext::create_pixel_shader`]<br> |
+//! | ✔️ | `IDirect3DDevice9::CreateQuery` | [`d3d9::IDirect3DDevice9Ext::create_query`]<br> |
+//! | ✔️ | `IDirect3DDevice9::CreateRenderTarget` | [`d3d9::IDirect3DDevice9Ext::create_render_target`]<br> |
+//! | ✔️ | `IDirect3DDevice9::CreateStateBlock` | [`d3d9::IDirect3DDevice9Ext::create_state_block`]<br> |
+//! | ✔️ | `IDirect3DDevice9::CreateTexture` | [`d3d9::IDirect3DDevice9Ext::create_texture`]<br> |
+//! | ✔️ | `IDirect3DDevice9::CreateVertexBuffer` | [`d3d9::IDirect3DDevice9Ext::create_vertex_buffer`]<br> |
+//! | ✔️ | `IDirect3DDevice9::CreateVertexDeclaration` | [`d3d9::IDirect3DDevice9Ext::create_vertex_declaration`]<br> |
+//! | ✔️ | `IDirect3DDevice9::CreateVertexShader` | [`d3d9::IDirect3DDevice9Ext::create_vertex_shader`]<br> |
+//! | ✔️ | `IDirect3DDevice9::CreateVolumeTexture` | [`d3d9::IDirect3DDevice9Ext::create_volume_texture`]<br> |
 //! | ❌ | `IDirect3DDevice9::DeletePatch` | |
-//! | ❌ | `IDirect3DDevice9::DrawIndexedPrimitive` | |
-//! | ❌ | `IDirect3DDevice9::DrawIndexedPrimitiveUP` | |
-//! | ❌ | `IDirect3DDevice9::DrawPrimitive` | |
-//! | ❌ | `IDirect3DDevice9::DrawPrimitiveUP` | |
+//! | ✔️ | `IDirect3DDevice9::DrawIndexedPrimitive` | [`d3d9::IDirect3DDevice9Ext::draw_indexed_primitive`]<br> |
+//! | ✔️ | `IDirect3DDevice9::DrawIndexedPrimitiveUP` | [`d3d9::IDirect3DDevice9Ext::draw_indexed_primitive_up`]<br> |
+//! | ✔️ | `IDirect3DDevice9::DrawPrimitive` | [`d3d9::IDirect3DDevice9Ext::draw_primitive`]<br> |
+//! | ✔️ | `IDirect3DDevice9::DrawPrimitiveUP` | [`d3d9::IDirect3DDevice9Ext::draw_primitive_up`]<br> |
 //! | ❌ | `IDirect3DDevice9::DrawRectPatch` | |
 //! | ❌ | `IDirect3DDevice9::DrawTriPatch` | |
-//! | ❌ | `IDirect3DDevice9::EndScene` | |
-//! | ❌ | `IDirect3DDevice9::EndStateBlock` | |
-//! | ❌ | `IDirect3DDevice9::EvictManagedResources` | |
-//! | ❌ | `IDirect3DDevice9::GetAvailableTextureMem` | |
-//! | ❌ | `IDirect3DDevice9::GetBackBuffer` | |
-//! | ❌ | `IDirect3DDevice9::GetClipPlane` | |
-//! | ❌ | `IDirect3DDevice9::GetClipStatus` | |
-//! | ❌ | `IDirect3DDevice9::GetCreationParameters` | |
-//! | ❌ | `IDirect3DDevice9::GetCurrentTexturePalette` | |
-//! | ❌ | `IDirect3DDevice9::GetDepthStencilSurface` | |
-//! | ❌ | `IDirect3DDevice9::GetDeviceCaps` | |
-//! | ❌ | `IDirect3DDevice9::GetDirect3D` | |
-//! | ❌ | `IDirect3DDevice9::GetDisplayMode` | |
-//! | ❌ | `IDirect3DDevice9::GetFVF` | |
-//! | ❌ | `IDirect3DDevice9::GetFrontBufferData` | |
-//! | ❌ | `IDirect3DDevice9::GetGammaRamp` | |
-//! | ❌ | `IDirect3DDevice9::GetIndices` | |
-//! | ❌ | `IDirect3DDevice9::GetLight` | |
-//! | ❌ | `IDirect3DDevice9::GetLightEnable` | |
-//! | ❌ | `IDirect3DDevice9::GetMaterial` | |
-//! | ❌ | `IDirect3DDevice9::GetNPatchMode` | |
+//! | ✔️ | `IDirect3DDevice9::EndScene` | [`d3d9::IDirect3DDevice9Ext::end_scene`]<br> |
+//! | ✔️ | `IDirect3DDevice9::EndStateBlock` | [`d3d9::IDirect3DDevice9Ext::end_state_block`]<br> |
+//! | ✔️ | `IDirect3DDevice9::EvictManagedResources` | [`d3d9::IDirect3DDevice9Ext::evict_managed_resources`]<br> |
+//! | ✔️ | `IDirect3DDevice9::GetAvailableTextureMem` | [`d3d9::IDirect3DDevice9Ext::get_available_texture_mem`]<br> |
+//! | ✔️ | `IDirect3DDevice9::GetBackBuffer` | [`d3d9::IDirect3DDevice9Ext::get_back_buffer`]<br> |
+//! | ✔️ | `IDirect3DDevice9::GetClipPlane` | [`d3d9::IDirect3DDevice9Ext::get_clip_plane`]<br> |
+//! | ✔️ | `IDirect3DDevice9::GetClipStatus` | [`d3d9::IDirect3DDevice9Ext::get_clip_status`]<br> |
+//! | ✔️ | `IDirect3DDevice9::GetCreationParameters` | [`d3d9::IDirect3DDevice9Ext::get_creation_parameters`]<br> |
+//! | ✔️ | `IDirect3DDevice9::GetCurrentTexturePalette` | [`d3d9::IDirect3DDevice9Ext::get_current_texture_palette`]<br> |
+//! | ✔️ | `IDirect3DDevice9::GetDepthStencilSurface` | [`d3d9::IDirect3DDevice9Ext::get_depth_stencil_surface`]<br> |
+//! | ✔️ | `IDirect3DDevice9::GetDeviceCaps` | [`d3d9::IDirect3DDevice9Ext::get_device_caps`]<br> |
+//! | ✔️ | `IDirect3DDevice9::GetDirect3D` | [`d3d9::IDirect3DDevice9Ext::get_direct3d`]<br> |
+//! | ✔️ | `IDirect3DDevice9::GetDisplayMode` | [`d3d9::IDirect3DDevice9Ext::get_display_mode`]<br> |
+//! | ✔️ | `IDirect3DDevice9::GetFVF` | [`d3d9::IDirect3DDevice9Ext::get_fvf`]<br> |
+//! | ✔️ | `IDirect3DDevice9::GetFrontBufferData` | [`d3d9::IDirect3DDevice9Ext::get_front_buffer_data`]<br> |
+//! | ✔️ | `IDirect3DDevice9::GetGammaRamp` | [`d3d9::IDirect3DDevice9Ext::get_gamma_ramp`]<br> |
+//! | ✔️ | `IDirect3DDevice9::GetIndices` | [`d3d9::IDirect3DDevice9Ext::get_indices`]<br> |
+//! | ✔️ | `IDirect3DDevice9::GetLight` | [`d3d9::IDirect3DDevice9Ext::get_light`]<br> [`d3d9::IDirect3DDevice9Ext::get_light_32`]<br> |
+//! | ✔️ | `IDirect3DDevice9::GetLightEnable` | [`d3d9::IDirect3DDevice9Ext::get_light_enable`]<br> [`d3d9::IDirect3DDevice9Ext::get_light_enable_32`]<br> |
+//! | ✔️ | `IDirect3DDevice9::GetMaterial` | [`d3d9::IDirect3DDevice9Ext::get_material`]<br> |
+//! | ✔️ | `IDirect3DDevice9::GetNPatchMode` | [`d3d9::IDirect3DDevice9Ext::get_npatch_mode`]<br> |
 //! | ❌ | `IDirect3DDevice9::GetNumberOfSwapChains` | |
-//! | ❌ | `IDirect3DDevice9::GetPaletteEntries` | |
-//! | ❌ | `IDirect3DDevice9::GetPixelShader` | |
+//! | ✔️ | `IDirect3DDevice9::GetPaletteEntries` | [`d3d9::IDirect3DDevice9Ext::get_palette_entries`]<br> |
+//! | ✔️ | `IDirect3DDevice9::GetPixelShader` | [`d3d9::IDirect3DDevice9Ext::get_pixel_shader`]<br> |
 //! | ❌ | `IDirect3DDevice9::GetPixelShaderConstantB` | |
 //! | ❌ | `IDirect3DDevice9::GetPixelShaderConstantF` | |
 //! | ❌ | `IDirect3DDevice9::GetPixelShaderConstantI` | |
@@ -249,143 +249,143 @@
 //! | ❌ | `IDirect3DDevice9::GetSamplerState` | |
 //! | ❌ | `IDirect3DDevice9::GetScissorRect` | |
 //! | ❌ | `IDirect3DDevice9::GetSoftwareVertexProcessing` | |
-//! | ❌ | `IDirect3DDevice9::GetStreamSource` | |
-//! | ❌ | `IDirect3DDevice9::GetStreamSourceFreq` | |
+//! | ✔️ | `IDirect3DDevice9::GetStreamSource` | [`d3d9::IDirect3DDevice9Ext::get_stream_source`]<br> |
+//! | ✔️ | `IDirect3DDevice9::GetStreamSourceFreq` | [`d3d9::IDirect3DDevice9Ext::get_stream_source_freq`]<br> |
 //! | ❌ | `IDirect3DDevice9::GetSwapChain` | |
-//! | ❌ | `IDirect3DDevice9::GetTexture` | |
+//! | ✔️ | `IDirect3DDevice9::GetTexture` | [`d3d9::IDirect3DDevice9Ext::get_texture`]<br> |
 //! | ❌ | `IDirect3DDevice9::GetTextureStageState` | |
 //! | ❌ | `IDirect3DDevice9::GetTransform` | |
 //! | ❌ | `IDirect3DDevice9::GetVertexDeclaration` | |
-//! | ❌ | `IDirect3DDevice9::GetVertexShader` | |
+//! | ✔️ | `IDirect3DDevice9::GetVertexShader` | [`d3d9::IDirect3DDevice9Ext::get_vertex_shader`]<br> |
 //! | ❌ | `IDirect3DDevice9::GetVertexShaderConstantB` | |
 //! | ❌ | `IDirect3DDevice9::GetVertexShaderConstantF` | |
 //! | ❌ | `IDirect3DDevice9::GetVertexShaderConstantI` | |
-//! | ❌ | `IDirect3DDevice9::GetViewport` | |
-//! | ❌ | `IDirect3DDevice9::LightEnable` | |
+//! | ✔️ | `IDirect3DDevice9::GetViewport` | [`d3d9::IDirect3DDevice9Ext::get_viewport`]<br> |
+//! | ✔️ | `IDirect3DDevice9::LightEnable` | [`d3d9::IDirect3DDevice9Ext::light_enable`]<br> |
 //! | ❌ | `IDirect3DDevice9::MultiplyTransform` | |
-//! | ❌ | `IDirect3DDevice9::Present` | |
+//! | ✔️ | `IDirect3DDevice9::Present` | [`d3d9::IDirect3DDevice9Ext::present`]<br> |
 //! | ❌ | `IDirect3DDevice9::ProcessVertices` | |
-//! | ❌ | `IDirect3DDevice9::Reset` | |
+//! | ✔️ | `IDirect3DDevice9::Reset` | [`d3d9::IDirect3DDevice9Ext::reset`]<br> |
 //! | ❌ | `IDirect3DDevice9::SetClipPlane` | |
 //! | ❌ | `IDirect3DDevice9::SetClipStatus` | |
 //! | ❌ | `IDirect3DDevice9::SetCurrentTexturePalette` | |
 //! | ❌ | `IDirect3DDevice9::SetCursorPosition` | |
 //! | ❌ | `IDirect3DDevice9::SetCursorProperties` | |
-//! | ❌ | `IDirect3DDevice9::SetDepthStencilSurface` | |
+//! | ✔️ | `IDirect3DDevice9::SetDepthStencilSurface` | [`d3d9::IDirect3DDevice9Ext::set_depth_stencil_surface`]<br> |
 //! | ❌ | `IDirect3DDevice9::SetDialogBoxMode` | |
-//! | ❌ | `IDirect3DDevice9::SetFVF` | |
-//! | ❌ | `IDirect3DDevice9::SetGammaRamp` | |
-//! | ❌ | `IDirect3DDevice9::SetIndices` | |
-//! | ❌ | `IDirect3DDevice9::SetLight` | |
-//! | ❌ | `IDirect3DDevice9::SetMaterial` | |
-//! | ❌ | `IDirect3DDevice9::SetNPatchMode` | |
-//! | ❌ | `IDirect3DDevice9::SetPaletteEntries` | |
-//! | ❌ | `IDirect3DDevice9::SetPixelShader` | |
-//! | ❌ | `IDirect3DDevice9::SetPixelShaderConstantB` | |
-//! | ❌ | `IDirect3DDevice9::SetPixelShaderConstantF` | |
-//! | ❌ | `IDirect3DDevice9::SetPixelShaderConstantI` | |
+//! | ✔️ | `IDirect3DDevice9::SetFVF` | [`d3d9::IDirect3DDevice9Ext::set_fvf`]<br> |
+//! | ✔️ | `IDirect3DDevice9::SetGammaRamp` | [`d3d9::IDirect3DDevice9Ext::set_gamma_ramp`]<br> |
+//! | ✔️ | `IDirect3DDevice9::SetIndices` | [`d3d9::IDirect3DDevice9Ext::set_indices`]<br> |
+//! | ✔️ | `IDirect3DDevice9::SetLight` | [`d3d9::IDirect3DDevice9Ext::set_light`]<br> [`d3d9::IDirect3DDevice9Ext::set_light_32_unchecked`]<br> |
+//! | ✔️ | `IDirect3DDevice9::SetMaterial` | [`d3d9::IDirect3DDevice9Ext::set_material`]<br> |
+//! | ✔️ | `IDirect3DDevice9::SetNPatchMode` | [`d3d9::IDirect3DDevice9Ext::set_npatch_mode`]<br> |
+//! | ✔️ | `IDirect3DDevice9::SetPaletteEntries` | [`d3d9::IDirect3DDevice9Ext::set_palette_entries`]<br> |
+//! | ✔️ | `IDirect3DDevice9::SetPixelShader` | [`d3d9::IDirect3DDevice9Ext::set_pixel_shader`]<br> |
+//! | ✔️ | `IDirect3DDevice9::SetPixelShaderConstantB` | [`d3d9::IDirect3DDevice9Ext::set_pixel_shader_constant_b`]<br> |
+//! | ✔️ | `IDirect3DDevice9::SetPixelShaderConstantF` | [`d3d9::IDirect3DDevice9Ext::set_pixel_shader_constant_f`]<br> [`d3d9::IDirect3DDevice9Ext::set_pixel_shader_constant_fv`]<br> |
+//! | ✔️ | `IDirect3DDevice9::SetPixelShaderConstantI` | [`d3d9::IDirect3DDevice9Ext::set_pixel_shader_constant_i`]<br> [`d3d9::IDirect3DDevice9Ext::set_pixel_shader_constant_iv`]<br> |
 //! | ❌ | `IDirect3DDevice9::SetRenderState` | |
-//! | ❌ | `IDirect3DDevice9::SetRenderTarget` | |
+//! | ✔️ | `IDirect3DDevice9::SetRenderTarget` | [`d3d9::IDirect3DDevice9Ext::set_render_target`]<br> |
 //! | ❌ | `IDirect3DDevice9::SetSamplerState` | |
 //! | ❌ | `IDirect3DDevice9::SetScissorRect` | |
 //! | ❌ | `IDirect3DDevice9::SetSoftwareVertexProcessing` | |
-//! | ❌ | `IDirect3DDevice9::SetStreamSource` | |
-//! | ❌ | `IDirect3DDevice9::SetStreamSourceFreq` | |
-//! | ❌ | `IDirect3DDevice9::SetTexture` | |
+//! | ✔️ | `IDirect3DDevice9::SetStreamSource` | [`d3d9::IDirect3DDevice9Ext::set_stream_source`]<br> |
+//! | ✔️ | `IDirect3DDevice9::SetStreamSourceFreq` | [`d3d9::IDirect3DDevice9Ext::set_stream_source_freq`]<br> |
+//! | ✔️ | `IDirect3DDevice9::SetTexture` | [`d3d9::IDirect3DDevice9Ext::set_texture`]<br> |
 //! | ❌ | `IDirect3DDevice9::SetTextureStageState` | |
 //! | ❌ | `IDirect3DDevice9::SetTransform` | |
 //! | ❌ | `IDirect3DDevice9::SetVertexDeclaration` | |
-//! | ❌ | `IDirect3DDevice9::SetVertexShader` | |
-//! | ❌ | `IDirect3DDevice9::SetVertexShaderConstantB` | |
-//! | ❌ | `IDirect3DDevice9::SetVertexShaderConstantF` | |
-//! | ❌ | `IDirect3DDevice9::SetVertexShaderConstantI` | |
-//! | ❌ | `IDirect3DDevice9::SetViewport` | |
+//! | ✔️ | `IDirect3DDevice9::SetVertexShader` | [`d3d9::IDirect3DDevice9Ext::set_vertex_shader`]<br> |
+//! | ✔️ | `IDirect3DDevice9::SetVertexShaderConstantB` | [`d3d9::IDirect3DDevice9Ext::set_vertex_shader_constant_b`]<br> |
+//! | ✔️ | `IDirect3DDevice9::SetVertexShaderConstantF` | [`d3d9::IDirect3DDevice9Ext::set_vertex_shader_constant_f`]<br> [`d3d9::IDirect3DDevice9Ext::set_vertex_shader_constant_fv`]<br> |
+//! | ✔️ | `IDirect3DDevice9::SetVertexShaderConstantI` | [`d3d9::IDirect3DDevice9Ext::set_vertex_shader_constant_i`]<br> [`d3d9::IDirect3DDevice9Ext::set_vertex_shader_constant_iv`]<br> |
+//! | ✔️ | `IDirect3DDevice9::SetViewport` | [`d3d9::IDirect3DDevice9Ext::set_viewport`]<br> |
 //! | ❌ | `IDirect3DDevice9::ShowCursor` | |
 //! | ❌ | `IDirect3DDevice9::StretchRect` | |
 //! | ❌ | `IDirect3DDevice9::TestCooperativeLevel` | |
 //! | ❌ | `IDirect3DDevice9::UpdateSurface` | |
 //! | ❌ | `IDirect3DDevice9::UpdateTexture` | |
 //! | ❌ | `IDirect3DDevice9::ValidateDevice` | |
-//! | ❌ | `IDirect3DDevice9Ex::CheckDeviceState` | |
+//! | ✔️ | `IDirect3DDevice9Ex::CheckDeviceState` | [`d3d9::IDirect3DDevice9ExExt::check_device_state`]<br> |
 //! | ❌ | `IDirect3DDevice9Ex::CheckResourceResidency` | |
-//! | ❌ | `IDirect3DDevice9Ex::ComposeRects` | |
-//! | ❌ | `IDirect3DDevice9Ex::CreateDepthStencilSurfaceEx` | |
-//! | ❌ | `IDirect3DDevice9Ex::CreateOffscreenPlainSurfaceEx` | |
-//! | ❌ | `IDirect3DDevice9Ex::CreateRenderTargetEx` | |
-//! | ❌ | `IDirect3DDevice9Ex::GetDisplayModeEx` | |
-//! | ❌ | `IDirect3DDevice9Ex::GetGPUThreadPriority` | |
-//! | ❌ | `IDirect3DDevice9Ex::GetMaximumFrameLatency` | |
-//! | ❌ | `IDirect3DDevice9Ex::PresentEx` | |
-//! | ❌ | `IDirect3DDevice9Ex::ResetEx` | |
-//! | ❌ | `IDirect3DDevice9Ex::SetConvolutionMonoKernel` | |
-//! | ❌ | `IDirect3DDevice9Ex::SetGPUThreadPriority` | |
-//! | ❌ | `IDirect3DDevice9Ex::SetMaximumFrameLatency` | |
-//! | ❌ | `IDirect3DDevice9Ex::WaitForVBlank` | |
+//! | ✔️ | `IDirect3DDevice9Ex::ComposeRects` | [`d3d9::IDirect3DDevice9ExExt::compose_rects`]<br> |
+//! | ✔️ | `IDirect3DDevice9Ex::CreateDepthStencilSurfaceEx` | [`d3d9::IDirect3DDevice9ExExt::create_depth_stencil_surface_ex`]<br> |
+//! | ✔️ | `IDirect3DDevice9Ex::CreateOffscreenPlainSurfaceEx` | [`d3d9::IDirect3DDevice9ExExt::create_offscreen_plain_surface_ex`]<br> |
+//! | ✔️ | `IDirect3DDevice9Ex::CreateRenderTargetEx` | [`d3d9::IDirect3DDevice9ExExt::create_render_target_ex`]<br> |
+//! | ✔️ | `IDirect3DDevice9Ex::GetDisplayModeEx` | [`d3d9::IDirect3DDevice9ExExt::get_display_mode_ex`]<br> |
+//! | ✔️ | `IDirect3DDevice9Ex::GetGPUThreadPriority` | [`d3d9::IDirect3DDevice9ExExt::get_gpu_thread_priority`]<br> |
+//! | ✔️ | `IDirect3DDevice9Ex::GetMaximumFrameLatency` | [`d3d9::IDirect3DDevice9ExExt::get_maximum_frame_latency`]<br> |
+//! | ✔️ | `IDirect3DDevice9Ex::PresentEx` | [`d3d9::IDirect3DDevice9ExExt::present_ex`]<br> |
+//! | ✔️ | `IDirect3DDevice9Ex::ResetEx` | [`d3d9::IDirect3DDevice9ExExt::reset_ex`]<br> |
+//! | ✔️ | `IDirect3DDevice9Ex::SetConvolutionMonoKernel` | [`d3d9::IDirect3DDevice9ExExt::set_convolution_mono_kernel`]<br> |
+//! | ✔️ | `IDirect3DDevice9Ex::SetGPUThreadPriority` | [`d3d9::IDirect3DDevice9ExExt::set_gpu_thread_priority`]<br> |
+//! | ✔️ | `IDirect3DDevice9Ex::SetMaximumFrameLatency` | [`d3d9::IDirect3DDevice9ExExt::set_maximum_frame_latency`]<br> |
+//! | ✔️ | `IDirect3DDevice9Ex::WaitForVBlank` | [`d3d9::IDirect3DDevice9ExExt::wait_for_vblank`]<br> |
 //! | ❌ | `IDirect3DDevice9Video::CreateAuthenticatedChannel` | |
 //! | ❌ | `IDirect3DDevice9Video::CreateCryptoSession` | |
 //! | ❌ | `IDirect3DDevice9Video::GetContentProtectionCaps` | |
-//! | ❌ | `IDirect3DIndexBuffer9::GetDesc` | |
-//! | ❌ | `IDirect3DIndexBuffer9::Lock` | |
-//! | ❌ | `IDirect3DIndexBuffer9::Unlock` | |
-//! | ❌ | `IDirect3DPixelShader9::GetDevice` | |
-//! | ❌ | `IDirect3DPixelShader9::GetFunction` | |
+//! | ✔️ | `IDirect3DIndexBuffer9::GetDesc` | [`d3d9::IDirect3DIndexBuffer9Ext::get_desc`]<br> |
+//! | ✔️ | `IDirect3DIndexBuffer9::Lock` | [`d3d9::IDirect3DIndexBuffer9Ext::lock_unchecked`]<br> |
+//! | ✔️ | `IDirect3DIndexBuffer9::Unlock` | [`d3d9::IDirect3DIndexBuffer9Ext::unlock`]<br> |
+//! | ✔️ | `IDirect3DPixelShader9::GetDevice` | [`d3d9::IDirect3DPixelShader9Ext::get_device`]<br> |
+//! | ✔️ | `IDirect3DPixelShader9::GetFunction` | [`d3d9::IDirect3DPixelShader9Ext::get_function_size`]<br> [`d3d9::IDirect3DPixelShader9Ext::get_function_inplace`]<br> [`d3d9::IDirect3DPixelShader9Ext::get_function`]<br> |
 //! | ❌ | `IDirect3DQuery9::GetData` | |
-//! | ❌ | `IDirect3DQuery9::GetDataSize` | |
-//! | ❌ | `IDirect3DQuery9::GetDevice` | |
-//! | ❌ | `IDirect3DQuery9::GetType` | |
-//! | ❌ | `IDirect3DQuery9::Issue` | |
-//! | ❌ | `IDirect3DResource9::FreePrivateData` | |
-//! | ❌ | `IDirect3DResource9::GetDevice` | |
-//! | ❌ | `IDirect3DResource9::GetPriority` | |
-//! | ❌ | `IDirect3DResource9::GetPrivateData` | |
-//! | ❌ | `IDirect3DResource9::GetType` | |
-//! | ❌ | `IDirect3DResource9::PreLoad` | |
-//! | ❌ | `IDirect3DResource9::SetPriority` | |
-//! | ❌ | `IDirect3DResource9::SetPrivateData` | |
-//! | ❌ | `IDirect3DStateBlock9::Apply` | |
-//! | ❌ | `IDirect3DStateBlock9::Capture` | |
-//! | ❌ | `IDirect3DStateBlock9::GetDevice` | |
-//! | ❌ | `IDirect3DSurface9::GetContainer` | |
-//! | ❌ | `IDirect3DSurface9::GetDC` | |
-//! | ❌ | `IDirect3DSurface9::GetDesc` | |
-//! | ❌ | `IDirect3DSurface9::LockRect` | |
-//! | ❌ | `IDirect3DSurface9::ReleaseDC` | |
-//! | ❌ | `IDirect3DSurface9::UnlockRect` | |
-//! | ❌ | `IDirect3DSwapChain9::GetBackBuffer` | |
-//! | ❌ | `IDirect3DSwapChain9::GetDevice` | |
-//! | ❌ | `IDirect3DSwapChain9::GetDisplayMode` | |
-//! | ❌ | `IDirect3DSwapChain9::GetFrontBufferData` | |
-//! | ❌ | `IDirect3DSwapChain9::GetPresentParameters` | |
-//! | ❌ | `IDirect3DSwapChain9::GetRasterStatus` | |
-//! | ❌ | `IDirect3DSwapChain9::Present` | |
-//! | ❌ | `IDirect3DSwapChain9Ex::GetDisplayModeEx` | |
-//! | ❌ | `IDirect3DSwapChain9Ex::GetLastPresentCount` | |
+//! | ✔️ | `IDirect3DQuery9::GetDataSize` | [`d3d9::IDirect3DQuery9Ext::get_data_size`]<br> |
+//! | ✔️ | `IDirect3DQuery9::GetDevice` | [`d3d9::IDirect3DQuery9Ext::get_device`]<br> |
+//! | ✔️ | `IDirect3DQuery9::GetType` | [`d3d9::IDirect3DQuery9Ext::get_type`]<br> |
+//! | ✔️ | `IDirect3DQuery9::Issue` | [`d3d9::IDirect3DQuery9Ext::issue`]<br> |
+//! | ✔️ | `IDirect3DResource9::FreePrivateData` | [`d3d9::IDirect3DResource9Ext::free_private_data`]<br> |
+//! | ✔️ | `IDirect3DResource9::GetDevice` | [`d3d9::IDirect3DResource9Ext::get_device`]<br> |
+//! | ✔️ | `IDirect3DResource9::GetPriority` | [`d3d9::IDirect3DResource9Ext::get_priority`]<br> |
+//! | ✔️ | `IDirect3DResource9::GetPrivateData` | [`d3d9::IDirect3DResource9Ext::get_private_data_inplace`]<br> |
+//! | ✔️ | `IDirect3DResource9::GetType` | [`d3d9::IDirect3DResource9Ext::get_type`]<br> |
+//! | ✔️ | `IDirect3DResource9::PreLoad` | [`d3d9::IDirect3DResource9Ext::preload`]<br> |
+//! | ✔️ | `IDirect3DResource9::SetPriority` | [`d3d9::IDirect3DResource9Ext::set_priority`]<br> |
+//! | ✔️ | `IDirect3DResource9::SetPrivateData` | [`d3d9::IDirect3DResource9Ext::set_private_data`]<br> |
+//! | ✔️ | `IDirect3DStateBlock9::Apply` | [`d3d9::IDirect3DStateBlock9Ext::apply`]<br> |
+//! | ✔️ | `IDirect3DStateBlock9::Capture` | [`d3d9::IDirect3DStateBlock9Ext::capture`]<br> |
+//! | ✔️ | `IDirect3DStateBlock9::GetDevice` | [`d3d9::IDirect3DStateBlock9Ext::get_device`]<br> |
+//! | ✔️ | `IDirect3DSurface9::GetContainer` | [`d3d9::IDirect3DSurface9Ext::get_container`]<br> |
+//! | ✔️ | `IDirect3DSurface9::GetDC` | [`d3d9::IDirect3DSurface9Ext::get_dc`]<br> |
+//! | ✔️ | `IDirect3DSurface9::GetDesc` | [`d3d9::IDirect3DSurface9Ext::get_desc`]<br> |
+//! | ✔️ | `IDirect3DSurface9::LockRect` | [`d3d9::IDirect3DSurface9Ext::lock_rect_unchecked`]<br> |
+//! | ✔️ | `IDirect3DSurface9::ReleaseDC` | [`d3d9::IDirect3DSurface9Ext::release_dc`]<br> |
+//! | ✔️ | `IDirect3DSurface9::UnlockRect` | [`d3d9::IDirect3DSurface9Ext::unlock_rect`]<br> |
+//! | ✔️ | `IDirect3DSwapChain9::GetBackBuffer` | [`d3d9::IDirect3DSwapChain9Ext::get_back_buffer`]<br> |
+//! | ✔️ | `IDirect3DSwapChain9::GetDevice` | [`d3d9::IDirect3DSwapChain9Ext::get_device`]<br> |
+//! | ✔️ | `IDirect3DSwapChain9::GetDisplayMode` | [`d3d9::IDirect3DSwapChain9Ext::get_display_mode`]<br> |
+//! | ✔️ | `IDirect3DSwapChain9::GetFrontBufferData` | [`d3d9::IDirect3DSwapChain9Ext::get_front_buffer_data`]<br> |
+//! | ✔️ | `IDirect3DSwapChain9::GetPresentParameters` | [`d3d9::IDirect3DSwapChain9Ext::get_present_parameters`]<br> |
+//! | ✔️ | `IDirect3DSwapChain9::GetRasterStatus` | [`d3d9::IDirect3DSwapChain9Ext::get_raster_status`]<br> |
+//! | ✔️ | `IDirect3DSwapChain9::Present` | [`d3d9::IDirect3DSwapChain9Ext::present`]<br> |
+//! | ✔️ | `IDirect3DSwapChain9Ex::GetDisplayModeEx` | [`d3d9::IDirect3DSwapChain9ExExt::get_display_mode_ex`]<br> |
+//! | ✔️ | `IDirect3DSwapChain9Ex::GetLastPresentCount` | [`d3d9::IDirect3DSwapChain9ExExt::get_last_present_count`]<br> |
 //! | ❌ | `IDirect3DSwapChain9Ex::GetPresentStats` | |
-//! | ❌ | `IDirect3DTexture9::AddDirtyRect` | |
-//! | ❌ | `IDirect3DTexture9::GetLevelDesc` | |
-//! | ❌ | `IDirect3DTexture9::GetSurfaceLevel` | |
-//! | ❌ | `IDirect3DTexture9::LockRect` | |
-//! | ❌ | `IDirect3DTexture9::UnlockRect` | |
-//! | ❌ | `IDirect3DVertexBuffer9::GetDesc` | |
-//! | ❌ | `IDirect3DVertexBuffer9::Lock` | |
-//! | ❌ | `IDirect3DVertexBuffer9::Unlock` | |
-//! | ❌ | `IDirect3DVertexDeclaration9::GetDeclaration` | |
-//! | ❌ | `IDirect3DVertexDeclaration9::GetDevice` | |
-//! | ❌ | `IDirect3DVertexShader9::GetDevice` | |
-//! | ❌ | `IDirect3DVertexShader9::GetFunction` | |
-//! | ❌ | `IDirect3DVolume9::FreePrivateData` | |
-//! | ❌ | `IDirect3DVolume9::GetContainer` | |
-//! | ❌ | `IDirect3DVolume9::GetDesc` | |
-//! | ❌ | `IDirect3DVolume9::GetDevice` | |
-//! | ❌ | `IDirect3DVolume9::GetPrivateData` | |
-//! | ❌ | `IDirect3DVolume9::LockBox` | |
-//! | ❌ | `IDirect3DVolume9::SetPrivateData` | |
-//! | ❌ | `IDirect3DVolume9::UnlockBox` | |
-//! | ❌ | `IDirect3DVolumeTexture9::AddDirtyBox` | |
-//! | ❌ | `IDirect3DVolumeTexture9::GetLevelDesc` | |
-//! | ❌ | `IDirect3DVolumeTexture9::GetVolumeLevel` | |
-//! | ❌ | `IDirect3DVolumeTexture9::LockBox` | |
-//! | ❌ | `IDirect3DVolumeTexture9::UnlockBox` | |
+//! | ✔️ | `IDirect3DTexture9::AddDirtyRect` | [`d3d9::IDirect3DTexture9Ext::add_dirty_rect`]<br> |
+//! | ✔️ | `IDirect3DTexture9::GetLevelDesc` | [`d3d9::IDirect3DTexture9Ext::get_level_desc`]<br> |
+//! | ✔️ | `IDirect3DTexture9::GetSurfaceLevel` | [`d3d9::IDirect3DTexture9Ext::get_surface_level`]<br> |
+//! | ✔️ | `IDirect3DTexture9::LockRect` | [`d3d9::IDirect3DTexture9Ext::lock_rect_unchecked`]<br> |
+//! | ✔️ | `IDirect3DTexture9::UnlockRect` | [`d3d9::IDirect3DTexture9Ext::unlock_rect`]<br> |
+//! | ✔️ | `IDirect3DVertexBuffer9::GetDesc` | [`d3d9::IDirect3DVertexBuffer9Ext::get_desc`]<br> |
+//! | ✔️ | `IDirect3DVertexBuffer9::Lock` | [`d3d9::IDirect3DVertexBuffer9Ext::lock_unchecked`]<br> |
+//! | ✔️ | `IDirect3DVertexBuffer9::Unlock` | [`d3d9::IDirect3DVertexBuffer9Ext::unlock`]<br> |
+//! | ✔️ | `IDirect3DVertexDeclaration9::GetDeclaration` | [`d3d9::IDirect3DVertexDeclaration9Ext::get_declaration_size`]<br> [`d3d9::IDirect3DVertexDeclaration9Ext::get_declaration_inplace`]<br> [`d3d9::IDirect3DVertexDeclaration9Ext::get_declaration`]<br> |
+//! | ✔️ | `IDirect3DVertexDeclaration9::GetDevice` | [`d3d9::IDirect3DVertexDeclaration9Ext::get_device`]<br> |
+//! | ✔️ | `IDirect3DVertexShader9::GetDevice` | [`d3d9::IDirect3DVertexShader9Ext::get_device`]<br> |
+//! | ✔️ | `IDirect3DVertexShader9::GetFunction` | [`d3d9::IDirect3DVertexShader9Ext::get_function_size`]<br> [`d3d9::IDirect3DVertexShader9Ext::get_function_inplace`]<br> [`d3d9::IDirect3DVertexShader9Ext::get_function`]<br> |
+//! | ✔️ | `IDirect3DVolume9::FreePrivateData` | [`d3d9::IDirect3DVolume9Ext::free_private_data`]<br> |
+//! | ✔️ | `IDirect3DVolume9::GetContainer` | [`d3d9::IDirect3DVolume9Ext::get_container`]<br> |
+//! | ✔️ | `IDirect3DVolume9::GetDesc` | [`d3d9::IDirect3DVolume9Ext::get_desc`]<br> |
+//! | ✔️ | `IDirect3DVolume9::GetDevice` | [`d3d9::IDirect3DVolume9Ext::get_device`]<br> |
+//! | ✔️ | `IDirect3DVolume9::GetPrivateData` | [`d3d9::IDirect3DVolume9Ext::get_private_data_inplace`]<br> |
+//! | ✔️ | `IDirect3DVolume9::LockBox` | [`d3d9::IDirect3DVolume9Ext::lock_box_unchecked`]<br> |
+//! | ✔️ | `IDirect3DVolume9::SetPrivateData` | [`d3d9::IDirect3DVolume9Ext::set_private_data`]<br> |
+//! | ✔️ | `IDirect3DVolume9::UnlockBox` | [`d3d9::IDirect3DVolume9Ext::unlock_box`]<br> |
+//! | ✔️ | `IDirect3DVolumeTexture9::AddDirtyBox` | [`d3d9::IDirect3DVolumeTexture9Ext::add_dirty_box`]<br> |
+//! | ✔️ | `IDirect3DVolumeTexture9::GetLevelDesc` | [`d3d9::IDirect3DVolumeTexture9Ext::get_level_desc`]<br> |
+//! | ✔️ | `IDirect3DVolumeTexture9::GetVolumeLevel` | [`d3d9::IDirect3DVolumeTexture9Ext::get_volume_level`]<br> |
+//! | ✔️ | `IDirect3DVolumeTexture9::LockBox` | [`d3d9::IDirect3DVolumeTexture9Ext::lock_box_unchecked`]<br> |
+//! | ✔️ | `IDirect3DVolumeTexture9::UnlockBox` | [`d3d9::IDirect3DVolumeTexture9Ext::unlock_box`]<br> |
 //! <h3 id="d3d9caps">d3d9caps.h</h3>
 //!
 //!
