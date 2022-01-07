@@ -85,9 +85,9 @@ fn doc(_args: std::env::Args, help: bool) {
     examples::update();
     headers::update();
     if help {
-        run("cargo doc -p thindx --open");
+        run("cargo doc -p thindx --all-features --open");
     } else {
-        run("cargo doc -p thindx");
+        run("cargo doc -p thindx --all-features");
     }
 }
 
