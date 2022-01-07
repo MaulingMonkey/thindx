@@ -31,7 +31,7 @@ pub struct Direct3D(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3D9>);
 ///
 /// | thin3d9                                                                   | docs.microsoft.com            | Description |
 /// | ------------------------------------------------------------------------- | ----------------------------- | ----------- |
-/// | [create](Self::create)                                                    | [Direct3DCreate9]             | Creates an [IDirect3D9Ex] object and returns an interface to it.
+/// | [create](Self::create)                                                    | [Direct3DCreate9]             | Creates an [IDirect3D9] object and returns it.
 /// | [check_depth_stencil_match](Self::check_depth_stencil_match)              | [CheckDepthStencilMatch]      | Determines whether a depth-stencil format is compatible with a render-target format in a particular display mode.
 /// | [check_device_format](Self::check_device_format)                          | [CheckDeviceFormat]           | Determines whether a surface format is available as a specified resource type and can be used as a texture, depth-stencil buffer, or render target, or any combination of the three, on a device representing this adapter.
 /// | [check_device_format_conversion](Self::check_device_format_conversion)    | [CheckDeviceFormatConversion] | Tests the device to see if it supports conversion from one display format to another.
@@ -48,6 +48,8 @@ pub struct Direct3D(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3D9>);
 /// | ~~register_software_device~~ (N/A)                                        | [RegisterSoftwareDevice]      | Registers a pluggable software device.
 ///
 /// [Direct3DCreate9]:              https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-direct3dcreate9
+/// [IDirect3D9]:                   https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3d9
+///
 /// [CheckDepthStencilMatch]:       https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdepthstencilmatch
 /// [CheckDeviceFormat]:            https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdeviceformat
 /// [CheckDeviceFormatConversion]:  https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdeviceformatconversion
@@ -66,6 +68,8 @@ pub struct Direct3D(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3D9>);
 pub trait IDirect3D9Ext : private::Sealed {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-direct3dcreate9)\]
     /// Direct3DCreate9
+    ///
+    /// Creates an [IDirect3D9] object and returns it.
     ///
     /// ### Safety
     ///
@@ -91,6 +95,9 @@ pub trait IDirect3D9Ext : private::Sealed {
     /// use thindx::d3d9::*;
     /// let d3d = unsafe { Direct3D::create(SdkVersion::default()) }.unwrap();
     /// ```
+    ///
+    /// [IDirect3D9]:                   https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3d9
+    ///
     unsafe fn create(sdk_version: SdkVersion) -> Result<Self, ()> {
         let d3d9 = Direct3DCreate9(sdk_version.into());
         mcom::Rc::from_raw_opt(d3d9).ok_or(()).map(Self::from)
