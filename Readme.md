@@ -1,13 +1,12 @@
 # thindx - **Thin** **D**irect**X** wrappers
 
 [![GitHub](https://img.shields.io/github/stars/MaulingMonkey/thindx.svg?label=GitHub&style=social)](https://github.com/MaulingMonkey/thindx)
-[![License](https://img.shields.io/crates/l/thindx.svg)](https://github.com/MaulingMonkey/thindx)
 [![Build Status](https://github.com/MaulingMonkey/thindx/workflows/Rust/badge.svg)](https://github.com/MaulingMonkey/thindx/actions?query=workflow%3Arust)
-<!--
+[![dependency status](https://deps.rs/repo/github/MaulingMonkey/thindx/status.svg)](https://deps.rs/repo/github/MaulingMonkey/thindx)
+
 [![crates.io](https://img.shields.io/crates/v/thindx.svg)](https://crates.io/crates/thindx)
 [![docs.rs](https://docs.rs/thindx/badge.svg)](https://docs.rs/thindx)
--->
-<!-- [![dependency status](https://deps.rs/repo/github/MaulingMonkey/thindx/status.svg)](https://deps.rs/repo/github/MaulingMonkey/thindx) -->
+[![License](https://img.shields.io/crates/l/thindx.svg)](https://github.com/MaulingMonkey/thindx)
 
 Thin DirectX wrappers for Rust.
 
@@ -52,16 +51,11 @@ Additionally, individual extension traits / functions / methods will likely neve
 
 ### Project Status
 
-| Overall       | Done  |
-| ------------- | ----- |
-| crates.io     | ❌    |
-| docs.rs       | ❌    |
-
 | DirectX           | API   | Tests | Sound | Stable| Notes |
 | ----------------- | ----- | ----- | ----- | ----- | ----- |
 | `d3dcompiler.dll` | ✔️    | ⚠️    | ⚠️    | ❌    | first goal to stabilize
 | `dxcompiler.dll`  | ❌    | ❌    | ❌    | ❌    |
-| d3d9              | ⚠️    | ❌    | ❌    | ❌    | separate, private branch to be merged
+| d3d9              | ⚠️    | ❌    | ❌    | ❌    | merging
 | d3d11             | ❌    | ❌    | ❌    | ❌    |
 | d3d12             | ❌    | ❌    | ❌    | ❌    |
 | dxgi              | ❌    | ❌    | ❌    | ❌    |
