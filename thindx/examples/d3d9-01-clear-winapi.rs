@@ -1,3 +1,4 @@
+//! Basic [d3d9::Device] setup with [winapi](https://docs.rs/winapi/)
 #![windows_subsystem = "windows"]
 
 use thindx::d3d9::*;

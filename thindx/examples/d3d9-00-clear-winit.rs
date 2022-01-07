@@ -1,3 +1,4 @@
+//! Basic [d3d9::Device] setup with [winit](https://docs.rs/winit/)
 #![windows_subsystem = "windows"]
 
 use thindx::d3d9::*;

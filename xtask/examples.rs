@@ -16,12 +16,26 @@ pub fn update() {
             let name = e.path.file_name().unwrap_or_else(|| fatal!("expected file_name for {}", e.path.display()));
             let name = name.to_string_lossy();
             let name = match name.strip_suffix(".rs") { Some(n) => n, None => continue };
-            if name.starts_with("d3d9-") { continue } // d3d9-* are blocking gui apps
-            if name.starts_with("d3d11-") { continue } // d3d11-* will be blocking gui apps
+
+            let output_text : bool;
+            // TODO: output_screenshot
+            if name.starts_with("d3d9-") || name.starts_with("d3d11-") {
+                output_text = false;
+            } else if name.starts_with("d3dcompiler-") {
+                output_text = true;
+            } else {
+                warning!("unknown prefix for example: {}", name);
+                output_text = false;
+            }
 
             let exe = format!("target/{config}/examples/{name}.exe", config="debug", name=name);
-            status!("Running", "{}", exe);
-            let out = Command::new(exe).current_dir("thindx").stdout0().unwrap_or_else(|err| fatal!("failed: {}", err));
+
+            let output_text = if output_text {
+                status!("Running", "{}", exe);
+                Some(Command::new(exe).current_dir("thindx").stdout0().unwrap_or_else(|err| fatal!("failed: {}", err)))
+            } else {
+                None
+            };
 
             let src = std::fs::read_to_string(&e.path).unwrap_or_else(|err| fatal!("unable to read `{}`: {}", e.path.display(), err));
             let mut src = src.lines().peekable();
@@ -51,7 +65,8 @@ pub fn update() {
                 writeln!(o, "/// {}", line.trim_end())?;
             }
             writeln!(o, "/// ```")?;
-            if !out.is_empty() {
+
+            if let Some(out) = output_text {
                 writeln!(o, "///")?;
                 writeln!(o, "/// ### Output")?;
                 writeln!(o, "/// ```text")?;
@@ -65,7 +80,7 @@ pub fn update() {
             writeln!(o, "/// ### To run this example yourself")?;
             writeln!(o, "/// ```cmd")?;
             writeln!(o, "/// git clone https://github.com/MaulingMonkey/thindx")?;
-            writeln!(o, "/// cd thindx/thindx")?;
+            writeln!(o, "/// cd thindx")?;
             writeln!(o, "/// cargo run --example {}", name)?;
             writeln!(o, "/// ```")?;
             writeln!(o, "pub const {} : () = ();", name.replace("-", "_"))?;

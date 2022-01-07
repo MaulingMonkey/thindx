@@ -3,6 +3,222 @@
 //! # Examples
 use crate::*;
 
+/// Basic [d3d9::Device] setup with [winit](https://docs.rs/winit/)
+///
+/// <style>
+/// #main { max-width: none; }
+/// </style>
+///
+/// ### Source
+/// ```no_run
+/// #![windows_subsystem = "windows"]
+/// 
+/// use thindx::d3d9::*;
+/// 
+/// use raw_window_handle::*;
+/// use raw_window_handle::windows::*;
+/// 
+/// use winapi::shared::d3d9caps::*;
+/// use winapi::shared::d3d9types::*;
+/// 
+/// use winapi::um::debugapi::*;
+/// 
+/// use winit::dpi::*;
+/// use winit::event::*;
+/// use winit::event_loop::*;
+/// use winit::window::*;
+/// 
+/// use std::ptr::*;
+/// 
+/// 
+/// 
+/// fn main() {
+///     std::panic::set_hook(std::boxed::Box::new(|pi| unsafe {
+///         eprintln!("{}", pi);
+///         if IsDebuggerPresent() != 0 { DebugBreak(); }
+///         std::process::exit(1);
+///     }));
+/// 
+///     let event_loop  = EventLoop::new();
+///     let window      = WindowBuilder::new()
+///         .with_title("00-clear-winit - thin3d9 example")
+///         .with_inner_size(Size::Physical(PhysicalSize { width: 800, height: 600 }))
+///         .build(&event_loop).unwrap();
+///     let d3d         = unsafe { Direct3D::create(SdkVersion::default()) }.unwrap();
+/// 
+///     let hwnd = match window.raw_window_handle() {
+///         RawWindowHandle::Windows(WindowsHandle { hwnd, .. }) => hwnd.cast(),
+///         other => panic!("Expected RawWindowHandle::Windows(...), got {:?} instead", other),
+///     };
+/// 
+///     let mut pp = D3DPRESENT_PARAMETERS {
+///         Windowed:               true.into(),
+///         hDeviceWindow:          hwnd,
+///         SwapEffect:             D3DSWAPEFFECT_DISCARD,
+///         PresentationInterval:   D3DPRESENT_INTERVAL_ONE,
+///         .. unsafe { std::mem::zeroed() }
+///     };
+/// 
+///     let behavior =
+///         // Create::DisablePrintScreen | // d3d9ex
+///         Create::FpuPreserve |
+///         Create::HardwareVertexProcessing |
+///         Create::NoWindowChanges;
+/// 
+///     let device = unsafe { d3d.create_device(0, DevType::HAL, null_mut(), behavior, &mut pp) }.unwrap();
+/// 
+///     event_loop.run(move |event, _, control_flow|{
+///         *control_flow = ControlFlow::Poll;
+/// 
+///         match event {
+///             Event::WindowEvent { event: WindowEvent::CloseRequested, window_id } if window_id == window.id() => {
+///                 std::process::exit(0); // device must outlast HWND which is about to be destroyed - kill the process instead
+///             },
+///             Event::MainEventsCleared => {
+///                 device.clear(None, Some(Color::argb(0xFF224466)), None, None).unwrap();
+///                 device.present(.., .., (), None).unwrap(); // TODO: Handle D3DERR::DEVICELOST
+///             },
+///             _ => {},
+///         }
+///     });
+/// }
+/// ```
+///
+/// ### To run this example yourself
+/// ```cmd
+/// git clone https://github.com/MaulingMonkey/thindx
+/// cd thindx
+/// cargo run --example d3d9-00-clear-winit
+/// ```
+pub const d3d9_00_clear_winit : () = ();
+
+/// Basic [d3d9::Device] setup with [winapi](https://docs.rs/winapi/)
+///
+/// <style>
+/// #main { max-width: none; }
+/// </style>
+///
+/// ### Source
+/// ```no_run
+/// #![windows_subsystem = "windows"]
+/// 
+/// use thindx::d3d9::*;
+/// 
+/// use abistr::cstr16 as wcstr;
+/// 
+/// use winapi::shared::d3d9caps::*;
+/// use winapi::shared::d3d9types::*;
+/// use winapi::shared::minwindef::*;
+/// use winapi::shared::windef::*;
+/// 
+/// use winapi::um::debugapi::*;
+/// use winapi::um::libloaderapi::*;
+/// use winapi::um::winuser::*;
+/// 
+/// use std::cell::RefCell;
+/// use std::ptr::*;
+/// 
+/// 
+/// 
+/// thread_local! {
+///     static D3D      : Direct3D = unsafe { Direct3D::create(SdkVersion::default()) }.unwrap();
+///     static DEVICE   : RefCell<Option<Device>> = RefCell::new(None);
+/// }
+/// 
+/// unsafe extern "system" fn window_proc(hwnd: HWND, umsg: u32, wparam: WPARAM, lparam: LPARAM) -> LRESULT {
+///     match umsg {
+///         WM_DESTROY => {
+///             DEVICE.with(|d| *d.borrow_mut() = None);
+///             PostQuitMessage(0);
+///             0
+///         },
+///         _ => DefWindowProcW(hwnd, umsg, wparam, lparam),
+///     }
+/// }
+/// 
+/// fn main() {
+///     std::panic::set_hook(std::boxed::Box::new(|pi| unsafe {
+///         eprintln!("{}", pi);
+///         if IsDebuggerPresent() != 0 { DebugBreak(); }
+///         std::process::exit(1);
+///     }));
+/// 
+///     let hinstance = unsafe { GetModuleHandleW(null()) };
+///     assert!(!hinstance.is_null());
+/// 
+///     let hcursor = unsafe { LoadCursorW(null_mut(), IDC_ARROW) };
+///     assert!(!hcursor.is_null());
+/// 
+///     let wc = WNDCLASSW {
+///         lpfnWndProc:    Some(window_proc),
+///         hInstance:      hinstance,
+///         hCursor:        hcursor,
+///         lpszClassName:  wcstr!("SampleWndClass").as_ptr(),
+///         .. unsafe { std::mem::zeroed() }
+///     };
+///     assert_ne!(0, unsafe { RegisterClassW(&wc) });
+/// 
+///     let hwnd = unsafe { CreateWindowExW(
+///         0,
+///         wcstr!("SampleWndClass").as_ptr(),
+///         wcstr!("01-clear-winapi - thin3d9 example").as_ptr(),
+///         WS_OVERLAPPEDWINDOW,
+///         CW_USEDEFAULT,
+///         CW_USEDEFAULT,
+///         800,
+///         600,
+///         null_mut(),
+///         null_mut(),
+///         hinstance,
+///         null_mut(),
+///     )};
+///     assert!(!hwnd.is_null());
+///     assert_eq!(0, unsafe { ShowWindow(hwnd, SW_SHOW) });
+/// 
+///     let mut pp = D3DPRESENT_PARAMETERS {
+///         Windowed:               true.into(),
+///         hDeviceWindow:          hwnd,
+///         SwapEffect:             D3DSWAPEFFECT_DISCARD,
+///         PresentationInterval:   D3DPRESENT_INTERVAL_ONE,
+///         .. unsafe { std::mem::zeroed() }
+///     };
+/// 
+///     let behavior =
+///         // Create::DisablePrintScreen | // d3d9ex
+///         Create::FpuPreserve |
+///         Create::HardwareVertexProcessing |
+///         Create::NoWindowChanges;
+/// 
+///     let device = D3D.with(|d3d| unsafe { d3d.create_device(0, DevType::HAL, null_mut(), behavior, &mut pp) }).unwrap();
+///     DEVICE.with(|d| *d.borrow_mut() = Some(device));
+/// 
+///     loop {
+///         let mut msg = MSG { message: 0, hwnd: null_mut(), time: 0, pt: POINT { x: 0, y: 0 }, lParam: 0, wParam: 0 };
+///         while unsafe { PeekMessageW(&mut msg, null_mut(), 0, 0, PM_REMOVE) } != 0 {
+///             if msg.message == WM_QUIT { return; }
+///             unsafe { TranslateMessage(&msg) };
+///             unsafe { DispatchMessageW(&msg) };
+///         }
+/// 
+///         DEVICE.with(|d| {
+///             let device = d.borrow();
+///             if let Some(device) = device.as_ref() {
+///                 device.clear(None, Some(Color::argb(0xFF664422)), None, None).unwrap();
+///                 device.present(.., .., (), None).unwrap(); // TODO: Handle D3DERR::DEVICELOST
+///             }
+///         });
+///     }
+/// }
+/// ```
+///
+/// ### To run this example yourself
+/// ```cmd
+/// git clone https://github.com/MaulingMonkey/thindx
+/// cd thindx
+/// cargo run --example d3d9-01-clear-winapi
+/// ```
+pub const d3d9_01_clear_winapi : () = ();
+
 /// [d3d::Compiler] construction / storage
 ///
 /// <style>
@@ -43,7 +259,7 @@ use crate::*;
 /// ### To run this example yourself
 /// ```cmd
 /// git clone https://github.com/MaulingMonkey/thindx
-/// cd thindx/thindx
+/// cd thindx
 /// cargo run --example d3dcompiler-01-construction
 /// ```
 pub const d3dcompiler_01_construction : () = ();
@@ -194,7 +410,7 @@ pub const d3dcompiler_01_construction : () = ();
 /// ### To run this example yourself
 /// ```cmd
 /// git clone https://github.com/MaulingMonkey/thindx
-/// cd thindx/thindx
+/// cd thindx
 /// cargo run --example d3dcompiler-02-compile
 /// ```
 pub const d3dcompiler_02_compile : () = ();
@@ -282,7 +498,7 @@ pub const d3dcompiler_02_compile : () = ();
 /// ### To run this example yourself
 /// ```cmd
 /// git clone https://github.com/MaulingMonkey/thindx
-/// cd thindx/thindx
+/// cd thindx
 /// cargo run --example d3dcompiler-03-link
 /// ```
 pub const d3dcompiler_03_link : () = ();
@@ -487,7 +703,7 @@ pub const d3dcompiler_03_link : () = ();
 /// ### To run this example yourself
 /// ```cmd
 /// git clone https://github.com/MaulingMonkey/thindx
-/// cd thindx/thindx
+/// cd thindx
 /// cargo run --example d3dcompiler-04-reflect-shader
 /// ```
 pub const d3dcompiler_04_reflect_shader : () = ();
@@ -603,7 +819,7 @@ pub const d3dcompiler_04_reflect_shader : () = ();
 /// ### To run this example yourself
 /// ```cmd
 /// git clone https://github.com/MaulingMonkey/thindx
-/// cd thindx/thindx
+/// cd thindx
 /// cargo run --example d3dcompiler-05-reflect-library
 /// ```
 pub const d3dcompiler_05_reflect_library : () = ();
