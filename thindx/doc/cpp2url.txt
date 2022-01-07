@@ -160,6 +160,7 @@ D3D_SHADER_VARIABLE_FLAGS               = https://docs.microsoft.com/en-us/windo
 # d3dcommon.h interfaces
 ID3D10Blob                              = https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nn-d3dcommon-id3d10blob
 ID3DBlob                                = https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nn-d3dcommon-id3d10blob
+ID3DDestructionNotifier                 = https://microsoft.github.io/windows-docs-rs/doc/windows/Win32/Graphics/Direct3D/struct.ID3DDestructionNotifier.html   # docs.microsoft.com links are all broken?
 ID3DInclude                             = https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nn-d3dcommon-id3dinclude
 
 # d3dcommon.h methods
@@ -167,6 +168,10 @@ ID3D10Blob::GetBufferPointer            = https://docs.microsoft.com/en-us/windo
 ID3D10Blob::GetBufferSize               = https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nf-d3dcommon-id3d10blob-getbuffersize
 ID3DBlob::GetBufferPointer              = https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nf-d3dcommon-id3d10blob-getbufferpointer
 ID3DBlob::GetBufferSize                 = https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nf-d3dcommon-id3d10blob-getbuffersize
+ID3DDestructionNotifier::RegisterDestructionCallback    = https://microsoft.github.io/windows-docs-rs/doc/windows/Win32/Graphics/Direct3D/struct.ID3DDestructionNotifier.html#method.RegisterDestructionCallback
+ID3DDestructionNotifier::UnregisterDestructionCallback  = https://microsoft.github.io/windows-docs-rs/doc/windows/Win32/Graphics/Direct3D/struct.ID3DDestructionNotifier.html#method.UnregisterDestructionCallback
+ID3DInclude::Close                      = https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nf-d3dcommon-id3dinclude-close
+ID3DInclude::Open                       = https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nf-d3dcommon-id3dinclude-open
 
 # d3dcommon.h structures
 D3D_SHADER_MACRO                        = https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ns-d3dcommon-d3d_shader_macro
@@ -234,8 +239,12 @@ Direct3DCreate9Ex                                   = https://docs.microsoft.com
 # d3d9.h interfaces
 IDirect3D9                                          = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3d9
 IDirect3D9Ex                                        = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3d9ex
+IDirect3D9ExOverlayExtension                        = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3d9exoverlayextension
+IDirect3DAuthenticatedChannel9                      = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dauthenticatedchannel9
+IDirect3DCryptoSession9                             = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dcryptosession9
 IDirect3DDevice9                                    = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3ddevice9
 IDirect3DDevice9Ex                                  = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3ddevice9ex
+IDirect3DDevice9Video                               = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3ddevice9video
 IDirect3DSwapChain9                                 = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dswapchain9
 IDirect3DSwapChain9Ex                               = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dswapchain9ex
 IDirect3DResource9                                  = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dresource9
@@ -275,12 +284,30 @@ IDirect3D9Ex::GetAdapterDisplayModeEx               = https://docs.microsoft.com
 IDirect3D9Ex::GetAdapterLUID                        = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9ex-getadapterluid
 IDirect3D9Ex::GetAdapterModeCountEx                 = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9ex-getadaptermodecountex
 
+IDirect3D9ExOverlayExtension::CheckDeviceOverlayType= https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3d9exoverlayextension
+
+IDirect3DAuthenticatedChannel9::Configure           = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dauthenticatedchannel9-configure
+IDirect3DAuthenticatedChannel9::GetCertificate      = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dauthenticatedchannel9-getcertificate
+IDirect3DAuthenticatedChannel9::GetCertificateSize  = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dauthenticatedchannel9-getcertificatesize
+IDirect3DAuthenticatedChannel9::NegotiateKeyExchange= https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dauthenticatedchannel9-negotiatekeyexchange
+IDirect3DAuthenticatedChannel9::Query               = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dauthenticatedchannel9-query
+
 IDirect3DBaseTexture9::GenerateMipSubLevels         = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-generatemipsublevels
 IDirect3DBaseTexture9::GetAutoGenFilterType         = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-getautogenfiltertype
 IDirect3DBaseTexture9::GetLevelCount                = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-getlevelcount
 IDirect3DBaseTexture9::GetLOD                       = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-getlod
 IDirect3DBaseTexture9::SetAutoGenFilterType         = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-setautogenfiltertype
 IDirect3DBaseTexture9::SetLOD                       = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-setlod
+
+IDirect3DCryptoSession9::DecryptionBlt              = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcryptosession9-decryptionblt
+IDirect3DCryptoSession9::EncryptionBlt              = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcryptosession9-encryptionblt
+IDirect3DCryptoSession9::FinishSessionKeyRefresh    = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcryptosession9-finishsessionkeyrefresh
+IDirect3DCryptoSession9::GetCertificate             = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcryptosession9-getcertificate
+IDirect3DCryptoSession9::GetCertificateSize         = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcryptosession9-getcertificatesize
+IDirect3DCryptoSession9::GetEncryptionBltKey        = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcryptosession9-getencryptionbltkey
+IDirect3DCryptoSession9::GetSurfacePitch            = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcryptosession9-getsurfacepitch
+IDirect3DCryptoSession9::NegotiateKeyExchange       = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcryptosession9-negotiatekeyexchange
+IDirect3DCryptoSession9::StartSessionKeyRefresh     = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcryptosession9-startsessionkeyrefresh
 
 IDirect3DCubeTexture9::AddDirtyRect                 = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcubetexture9-adddirtyrect
 IDirect3DCubeTexture9::GetCubeMapSurface            = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcubetexture9-getcubemapsurface
@@ -421,6 +448,10 @@ IDirect3DDevice9Ex::SetGPUThreadPriority            = https://docs.microsoft.com
 IDirect3DDevice9Ex::SetMaximumFrameLatency          = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-setmaximumframelatency
 IDirect3DDevice9Ex::TestCooperativeLevel            = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-testcooperativelevel
 IDirect3DDevice9Ex::WaitForVBlank                   = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-waitforvblank
+
+IDirect3DDevice9Video::CreateAuthenticatedChannel   = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9video-createauthenticatedchannel
+IDirect3DDevice9Video::CreateCryptoSession          = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9video-createcryptosession
+IDirect3DDevice9Video::GetContentProtectionCaps     = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9video-getcontentprotectioncaps
 
 IDirect3DIndexBuffer9::GetDesc                      = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dindexbuffer9-getdesc
 IDirect3DIndexBuffer9::Lock                         = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dindexbuffer9-lock

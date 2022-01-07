@@ -43,13 +43,13 @@
 //! * [`ID3D10Blob::GetBufferPointer`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nf-d3dcommon-id3d10blob-getbufferpointer)&nbsp;→ [`d3d::BytesBlob::as_bytes`], [`d3d::CodeBlob::as_bytes`], [`d3d::CodeBlob::as_bytecode`], [`d3d::ReadOnlyBlob::get_buffer`], [`d3d::TextBlob::to_utf8`], [`d3d::TextBlob::to_utf8_lossy`] <br>
 //! * [`ID3D10Blob::GetBufferSize`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nf-d3dcommon-id3d10blob-getbuffersize)&nbsp;→ [`d3d::BytesBlob::len`], [`d3d::CodeBlob::len`], [`d3d::ReadOnlyBlob::get_buffer_size`] <br>
 //!
-//! `ID3DDestructionNotifier` →&nbsp;❌ <br>
-//! * `ID3DDestructionNotifier::RegisterDestructionCallback` →&nbsp;❌ <br>
-//! * `ID3DDestructionNotifier::UnregisterDestructionCallback` →&nbsp;❌ <br>
+//! [`ID3DDestructionNotifier`](https://microsoft.github.io/windows-docs-rs/doc/windows/Win32/Graphics/Direct3D/struct.ID3DDestructionNotifier.html) →&nbsp;❌ <br>
+//! * [`ID3DDestructionNotifier::RegisterDestructionCallback`](https://microsoft.github.io/windows-docs-rs/doc/windows/Win32/Graphics/Direct3D/struct.ID3DDestructionNotifier.html) →&nbsp;❌ <br>
+//! * [`ID3DDestructionNotifier::UnregisterDestructionCallback`](https://microsoft.github.io/windows-docs-rs/doc/windows/Win32/Graphics/Direct3D/struct.ID3DDestructionNotifier.html) →&nbsp;❌ <br>
 //!
 //! [`ID3DInclude`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nn-d3dcommon-id3dinclude)&nbsp;→ [`d3d::AsInclude`] <br>
-//! * `ID3DInclude::Close` →&nbsp;❌ <br>
-//! * `ID3DInclude::Open` →&nbsp;❌ <br>
+//! * [`ID3DInclude::Close`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nf-d3dcommon-id3dinclude-close) →&nbsp;❌ <br>
+//! * [`ID3DInclude::Open`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nf-d3dcommon-id3dinclude-open) →&nbsp;❌ <br>
 //!
 //! ### C++ Structs -> Rust Structs
 //!
@@ -120,15 +120,15 @@
 //! * [`IDirect3D9Ex::GetAdapterLUID`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9ex-getadapterluid)&nbsp;→ [`d3d9::IDirect3D9ExExt::get_adapter_luid`] <br>
 //! * [`IDirect3D9Ex::GetAdapterModeCountEx`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9ex-getadaptermodecountex)&nbsp;→ [`d3d9::IDirect3D9ExExt::get_adapter_mode_count_ex`] <br>
 //!
-//! `IDirect3D9ExOverlayExtension` →&nbsp;❌ <br>
-//! * `IDirect3D9ExOverlayExtension::CheckDeviceOverlayType` →&nbsp;❌ <br>
+//! [`IDirect3D9ExOverlayExtension`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3d9exoverlayextension) →&nbsp;❌ <br>
+//! * [`IDirect3D9ExOverlayExtension::CheckDeviceOverlayType`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3d9exoverlayextension) →&nbsp;❌ <br>
 //!
-//! `IDirect3DAuthenticatedChannel9` →&nbsp;❌ <br>
-//! * `IDirect3DAuthenticatedChannel9::Configure` →&nbsp;❌ <br>
-//! * `IDirect3DAuthenticatedChannel9::GetCertificate` →&nbsp;❌ <br>
-//! * `IDirect3DAuthenticatedChannel9::GetCertificateSize` →&nbsp;❌ <br>
-//! * `IDirect3DAuthenticatedChannel9::NegotiateKeyExchange` →&nbsp;❌ <br>
-//! * `IDirect3DAuthenticatedChannel9::Query` →&nbsp;❌ <br>
+//! [`IDirect3DAuthenticatedChannel9`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dauthenticatedchannel9) →&nbsp;❌ <br>
+//! * [`IDirect3DAuthenticatedChannel9::Configure`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dauthenticatedchannel9-configure) →&nbsp;❌ <br>
+//! * [`IDirect3DAuthenticatedChannel9::GetCertificate`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dauthenticatedchannel9-getcertificate) →&nbsp;❌ <br>
+//! * [`IDirect3DAuthenticatedChannel9::GetCertificateSize`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dauthenticatedchannel9-getcertificatesize) →&nbsp;❌ <br>
+//! * [`IDirect3DAuthenticatedChannel9::NegotiateKeyExchange`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dauthenticatedchannel9-negotiatekeyexchange) →&nbsp;❌ <br>
+//! * [`IDirect3DAuthenticatedChannel9::Query`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dauthenticatedchannel9-query) →&nbsp;❌ <br>
 //!
 //! [`IDirect3DBaseTexture9`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dbasetexture9)&nbsp;→ [`d3d9::BaseTexture`], [`d3d9::IDirect3DBaseTexture9Ext`] <br>
 //! * [`IDirect3DBaseTexture9::GenerateMipSubLevels`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-generatemipsublevels)&nbsp;→ [`d3d9::IDirect3DBaseTexture9Ext::generate_mip_sub_levels`] <br>
@@ -138,16 +138,16 @@
 //! * [`IDirect3DBaseTexture9::SetAutoGenFilterType`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-setautogenfiltertype)&nbsp;→ [`d3d9::IDirect3DBaseTexture9Ext::set_auto_gen_filter_type`] <br>
 //! * [`IDirect3DBaseTexture9::SetLOD`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-setlod)&nbsp;→ [`d3d9::IDirect3DBaseTexture9Ext::set_lod`] <br>
 //!
-//! `IDirect3DCryptoSession9` →&nbsp;❌ <br>
-//! * `IDirect3DCryptoSession9::DecryptionBlt` →&nbsp;❌ <br>
-//! * `IDirect3DCryptoSession9::EncryptionBlt` →&nbsp;❌ <br>
-//! * `IDirect3DCryptoSession9::FinishSessionKeyRefresh` →&nbsp;❌ <br>
-//! * `IDirect3DCryptoSession9::GetCertificate` →&nbsp;❌ <br>
-//! * `IDirect3DCryptoSession9::GetCertificateSize` →&nbsp;❌ <br>
-//! * `IDirect3DCryptoSession9::GetEncryptionBltKey` →&nbsp;❌ <br>
-//! * `IDirect3DCryptoSession9::GetSurfacePitch` →&nbsp;❌ <br>
-//! * `IDirect3DCryptoSession9::NegotiateKeyExchange` →&nbsp;❌ <br>
-//! * `IDirect3DCryptoSession9::StartSessionKeyRefresh` →&nbsp;❌ <br>
+//! [`IDirect3DCryptoSession9`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dcryptosession9) →&nbsp;❌ <br>
+//! * [`IDirect3DCryptoSession9::DecryptionBlt`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcryptosession9-decryptionblt) →&nbsp;❌ <br>
+//! * [`IDirect3DCryptoSession9::EncryptionBlt`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcryptosession9-encryptionblt) →&nbsp;❌ <br>
+//! * [`IDirect3DCryptoSession9::FinishSessionKeyRefresh`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcryptosession9-finishsessionkeyrefresh) →&nbsp;❌ <br>
+//! * [`IDirect3DCryptoSession9::GetCertificate`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcryptosession9-getcertificate) →&nbsp;❌ <br>
+//! * [`IDirect3DCryptoSession9::GetCertificateSize`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcryptosession9-getcertificatesize) →&nbsp;❌ <br>
+//! * [`IDirect3DCryptoSession9::GetEncryptionBltKey`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcryptosession9-getencryptionbltkey) →&nbsp;❌ <br>
+//! * [`IDirect3DCryptoSession9::GetSurfacePitch`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcryptosession9-getsurfacepitch) →&nbsp;❌ <br>
+//! * [`IDirect3DCryptoSession9::NegotiateKeyExchange`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcryptosession9-negotiatekeyexchange) →&nbsp;❌ <br>
+//! * [`IDirect3DCryptoSession9::StartSessionKeyRefresh`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcryptosession9-startsessionkeyrefresh) →&nbsp;❌ <br>
 //!
 //! [`IDirect3DCubeTexture9`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dcubetexture9)&nbsp;→ [`d3d9::CubeTexture`], [`d3d9::IDirect3DCubeTexture9Ext`] <br>
 //! * [`IDirect3DCubeTexture9::AddDirtyRect`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcubetexture9-adddirtyrect)&nbsp;→ [`d3d9::IDirect3DCubeTexture9Ext::add_dirty_rect`] <br>
@@ -291,10 +291,10 @@
 //! * [`IDirect3DDevice9Ex::SetMaximumFrameLatency`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-setmaximumframelatency)&nbsp;→ [`d3d9::IDirect3DDevice9ExExt::set_maximum_frame_latency`] <br>
 //! * [`IDirect3DDevice9Ex::WaitForVBlank`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-waitforvblank)&nbsp;→ [`d3d9::IDirect3DDevice9ExExt::wait_for_vblank`] <br>
 //!
-//! `IDirect3DDevice9Video` →&nbsp;❌ <br>
-//! * `IDirect3DDevice9Video::CreateAuthenticatedChannel` →&nbsp;❌ <br>
-//! * `IDirect3DDevice9Video::CreateCryptoSession` →&nbsp;❌ <br>
-//! * `IDirect3DDevice9Video::GetContentProtectionCaps` →&nbsp;❌ <br>
+//! [`IDirect3DDevice9Video`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3ddevice9video) →&nbsp;❌ <br>
+//! * [`IDirect3DDevice9Video::CreateAuthenticatedChannel`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9video-createauthenticatedchannel) →&nbsp;❌ <br>
+//! * [`IDirect3DDevice9Video::CreateCryptoSession`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9video-createcryptosession) →&nbsp;❌ <br>
+//! * [`IDirect3DDevice9Video::GetContentProtectionCaps`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9video-getcontentprotectioncaps) →&nbsp;❌ <br>
 //!
 //! [`IDirect3DIndexBuffer9`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dindexbuffer9)&nbsp;→ [`d3d9::IndexBuffer`], [`d3d9::IDirect3DIndexBuffer9Ext`] <br>
 //! * [`IDirect3DIndexBuffer9::GetDesc`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dindexbuffer9-getdesc)&nbsp;→ [`d3d9::IDirect3DIndexBuffer9Ext::get_desc`] <br>
