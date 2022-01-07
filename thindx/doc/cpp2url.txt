@@ -220,6 +220,287 @@ D3DCOMPILER_STRIP_FLAGS                 = https://docs.microsoft.com/en-us/windo
 
 
 
+# d3d9.h functions
+D3DPERF_BeginEvent                                  = https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_beginevent
+D3DPERF_EndEvent                                    = https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_endevent
+D3DPERF_GetStatus                                   = https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_getstatus
+D3DPERF_QueryRepeatFrame                            = https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_queryrepeatframe
+D3DPERF_SetMarker                                   = https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_setmarker
+D3DPERF_SetOptions                                  = https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_setoptions
+D3DPERF_SetRegion                                   = https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_setregion
+Direct3DCreate9                                     = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-direct3dcreate9
+Direct3DCreate9Ex                                   = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-direct3dcreate9ex
+
+# d3d9.h interfaces
+IDirect3D9                                          = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3d9
+IDirect3D9Ex                                        = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3d9ex
+IDirect3DDevice9                                    = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3ddevice9
+IDirect3DDevice9Ex                                  = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3ddevice9ex
+IDirect3DSwapChain9                                 = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dswapchain9
+IDirect3DSwapChain9Ex                               = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dswapchain9ex
+IDirect3DResource9                                  = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dresource9
+IDirect3DSurface9                                   = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dsurface9
+IDirect3DBaseTexture9                               = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dbasetexture9
+IDirect3DCubeTexture9                               = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dcubetexture9
+IDirect3DTexture9                                   = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dtexture9
+IDirect3DVolumeTexture9                             = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dvolumetexture9
+IDirect3DIndexBuffer9                               = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dindexbuffer9
+IDirect3DVertexBuffer9                              = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dvertexbuffer9
+IDirect3DVolume9                                    = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dvolume9
+IDirect3DPixelShader9                               = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dpixelshader9
+IDirect3DVertexShader9                              = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dvertexshader9
+IDirect3DQuery9                                     = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dquery9
+IDirect3DStateBlock9                                = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dstateblock9
+IDirect3DVertexDeclaration9                         = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dvertexdeclaration9
+
+# d3d9.h methods
+IDirect3D9::CheckDepthStencilMatch                  = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdepthstencilmatch
+IDirect3D9::CheckDeviceFormat                       = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdeviceformat
+IDirect3D9::CheckDeviceFormatConversion             = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdeviceformatconversion
+IDirect3D9::CheckDeviceMultiSampleType              = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdevicemultisampletype
+IDirect3D9::CheckDeviceType                         = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdevicetype
+IDirect3D9::CreateDevice                            = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-createdevice
+IDirect3D9::EnumAdapterModes                        = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-enumadaptermodes
+IDirect3D9::GetAdapterCount                         = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadaptercount
+IDirect3D9::GetAdapterDisplayMode                   = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadapterdisplaymode
+IDirect3D9::GetAdapterIdentifier                    = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadapteridentifier
+IDirect3D9::GetAdapterModeCount                     = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadaptermodecount
+IDirect3D9::GetAdapterMonitor                       = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadaptermonitor
+IDirect3D9::GetDeviceCaps                           = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getdevicecaps
+IDirect3D9::RegisterSoftwareDevice                  = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-registersoftwaredevice
+
+IDirect3D9Ex::CreateDeviceEx                        = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9ex-createdeviceex
+IDirect3D9Ex::EnumAdapterModesEx                    = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9ex-enumadaptermodesex
+IDirect3D9Ex::GetAdapterDisplayModeEx               = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9ex-getadapterdisplaymodeex
+IDirect3D9Ex::GetAdapterLUID                        = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9ex-getadapterluid
+IDirect3D9Ex::GetAdapterModeCountEx                 = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9ex-getadaptermodecountex
+
+IDirect3DBaseTexture9::GenerateMipSubLevels         = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-generatemipsublevels
+IDirect3DBaseTexture9::GetAutoGenFilterType         = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-getautogenfiltertype
+IDirect3DBaseTexture9::GetLevelCount                = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-getlevelcount
+IDirect3DBaseTexture9::GetLOD                       = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-getlod
+IDirect3DBaseTexture9::SetAutoGenFilterType         = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-setautogenfiltertype
+IDirect3DBaseTexture9::SetLOD                       = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-setlod
+
+IDirect3DCubeTexture9::AddDirtyRect                 = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcubetexture9-adddirtyrect
+IDirect3DCubeTexture9::GetCubeMapSurface            = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcubetexture9-getcubemapsurface
+IDirect3DCubeTexture9::GetLevelDesc                 = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcubetexture9-getleveldesc
+IDirect3DCubeTexture9::LockRect                     = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcubetexture9-lockrect
+IDirect3DCubeTexture9::UnlockRect                   = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcubetexture9-unlockrect
+
+IDirect3DDevice9::BeginScene                        = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-beginscene
+IDirect3DDevice9::BeginStateBlock                   = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-beginstateblock
+IDirect3DDevice9::Clear                             = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-clear
+IDirect3DDevice9::ColorFill                         = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-colorfill
+IDirect3DDevice9::CreateAdditionalSwapChain         = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createadditionalswapchain
+IDirect3DDevice9::CreateCubeTexture                 = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createcubetexture
+IDirect3DDevice9::CreateDepthStencilSurface         = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createdepthstencilsurface
+IDirect3DDevice9::CreateIndexBuffer                 = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createindexbuffer
+IDirect3DDevice9::CreateOffscreenPlainSurface       = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createoffscreenplainsurface
+IDirect3DDevice9::CreatePixelShader                 = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createpixelshader
+IDirect3DDevice9::CreateQuery                       = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createquery
+IDirect3DDevice9::CreateRenderTarget                = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createrendertarget
+IDirect3DDevice9::CreateStateBlock                  = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createstateblock
+IDirect3DDevice9::CreateTexture                     = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createtexture
+IDirect3DDevice9::CreateVertexBuffer                = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createvertexbuffer
+IDirect3DDevice9::CreateVertexDeclaration           = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createvertexdeclaration
+IDirect3DDevice9::CreateVertexShader                = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createvertexshader
+IDirect3DDevice9::CreateVolumeTexture               = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createvolumetexture
+IDirect3DDevice9::DeletePatch                       = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-deletepatch
+IDirect3DDevice9::DrawIndexedPrimitive              = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-drawindexedprimitive
+IDirect3DDevice9::DrawIndexedPrimitiveUP            = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-drawindexedprimitiveup
+IDirect3DDevice9::DrawPrimitive                     = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-drawprimitive
+IDirect3DDevice9::DrawPrimitiveUP                   = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-drawprimitiveup
+IDirect3DDevice9::DrawRectPatch                     = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-drawrectpatch
+IDirect3DDevice9::DrawTriPatch                      = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-drawtripatch
+IDirect3DDevice9::EndScene                          = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-endscene
+IDirect3DDevice9::EndStateBlock                     = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-endstateblock
+IDirect3DDevice9::EvictManagedResources             = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-evictmanagedresources
+IDirect3DDevice9::GetAvailableTextureMem            = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getavailabletexturemem
+IDirect3DDevice9::GetBackBuffer                     = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getbackbuffer
+IDirect3DDevice9::GetClipPlane                      = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getclipplane
+IDirect3DDevice9::GetClipStatus                     = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getclipstatus
+IDirect3DDevice9::GetCreationParameters             = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getcreationparameters
+IDirect3DDevice9::GetCurrentTexturePalette          = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getcurrenttexturepalette
+IDirect3DDevice9::GetDepthStencilSurface            = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getdepthstencilsurface
+IDirect3DDevice9::GetDeviceCaps                     = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getdevicecaps
+IDirect3DDevice9::GetDirect3D                       = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getdirect3d
+IDirect3DDevice9::GetDisplayMode                    = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getdisplaymode
+IDirect3DDevice9::GetFrontBufferData                = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getfrontbufferdata
+IDirect3DDevice9::GetFVF                            = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getfvf
+IDirect3DDevice9::GetGammaRamp                      = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getgammaramp
+IDirect3DDevice9::GetIndices                        = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getindices
+IDirect3DDevice9::GetLight                          = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getlight
+IDirect3DDevice9::GetLightEnable                    = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getlightenable
+IDirect3DDevice9::GetMaterial                       = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getmaterial
+IDirect3DDevice9::GetNPatchMode                     = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getnpatchmode
+IDirect3DDevice9::GetNumberOfSwapChains             = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getnumberofswapchains
+IDirect3DDevice9::GetPaletteEntries                 = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getpaletteentries
+IDirect3DDevice9::GetPixelShader                    = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getpixelshader
+IDirect3DDevice9::GetPixelShaderConstantB           = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getpixelshaderconstantb
+IDirect3DDevice9::GetPixelShaderConstantF           = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getpixelshaderconstantf
+IDirect3DDevice9::GetPixelShaderConstantI           = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getpixelshaderconstanti
+IDirect3DDevice9::GetRasterStatus                   = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getrasterstatus
+IDirect3DDevice9::GetRenderState                    = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getrenderstate
+IDirect3DDevice9::GetRenderTarget                   = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getrendertarget
+IDirect3DDevice9::GetRenderTargetData               = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getrendertargetdata
+IDirect3DDevice9::GetSamplerState                   = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getsamplerstate
+IDirect3DDevice9::GetScissorRect                    = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getscissorrect
+IDirect3DDevice9::GetSoftwareVertexProcessing       = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getsoftwarevertexprocessing
+IDirect3DDevice9::GetStreamSource                   = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getstreamsource
+IDirect3DDevice9::GetStreamSourceFreq               = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getstreamsourcefreq
+IDirect3DDevice9::GetSwapChain                      = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getswapchain
+IDirect3DDevice9::GetTexture                        = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-gettexture
+IDirect3DDevice9::GetTextureStageState              = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-gettexturestagestate
+IDirect3DDevice9::GetTransform                      = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-gettransform
+IDirect3DDevice9::GetVertexDeclaration              = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getvertexdeclaration
+IDirect3DDevice9::GetVertexShader                   = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getvertexshader
+IDirect3DDevice9::GetVertexShaderConstantB          = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getvertexshaderconstantb
+IDirect3DDevice9::GetVertexShaderConstantF          = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getvertexshaderconstantf
+IDirect3DDevice9::GetVertexShaderConstantI          = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getvertexshaderconstanti
+IDirect3DDevice9::GetViewport                       = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getviewport
+IDirect3DDevice9::LightEnable                       = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-lightenable
+IDirect3DDevice9::MultiplyTransform                 = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-multiplytransform
+IDirect3DDevice9::Present                           = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-present
+IDirect3DDevice9::ProcessVertices                   = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-processvertices
+IDirect3DDevice9::Reset                             = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-reset
+IDirect3DDevice9::SetClipPlane                      = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setclipplane
+IDirect3DDevice9::SetClipStatus                     = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setclipstatus
+IDirect3DDevice9::SetCurrentTexturePalette          = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setcurrenttexturepalette
+IDirect3DDevice9::SetCursorPosition                 = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setcursorposition
+IDirect3DDevice9::SetCursorProperties               = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setcursorproperties
+IDirect3DDevice9::SetDepthStencilSurface            = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setdepthstencilsurface
+IDirect3DDevice9::SetDialogBoxMode                  = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setdialogboxmode
+IDirect3DDevice9::SetFVF                            = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setfvf
+IDirect3DDevice9::SetGammaRamp                      = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setgammaramp
+IDirect3DDevice9::SetIndices                        = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setindices
+IDirect3DDevice9::SetLight                          = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setlight
+IDirect3DDevice9::SetMaterial                       = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setmaterial
+IDirect3DDevice9::SetNPatchMode                     = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setnpatchmode
+IDirect3DDevice9::SetPaletteEntries                 = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setpaletteentries
+IDirect3DDevice9::SetPixelShader                    = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setpixelshader
+IDirect3DDevice9::SetPixelShaderConstantB           = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setpixelshaderconstantb
+IDirect3DDevice9::SetPixelShaderConstantF           = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setpixelshaderconstantf
+IDirect3DDevice9::SetPixelShaderConstantI           = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setpixelshaderconstanti
+IDirect3DDevice9::SetRenderState                    = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setrenderstate
+IDirect3DDevice9::SetRenderTarget                   = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setrendertarget
+IDirect3DDevice9::SetSamplerState                   = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setsamplerstate
+IDirect3DDevice9::SetScissorRect                    = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setscissorrect
+IDirect3DDevice9::SetSoftwareVertexProcessing       = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setsoftwarevertexprocessing
+IDirect3DDevice9::SetStreamSource                   = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setstreamsource
+IDirect3DDevice9::SetStreamSourceFreq               = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setstreamsourcefreq
+IDirect3DDevice9::SetTexture                        = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-settexture
+IDirect3DDevice9::SetTextureStageState              = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-settexturestagestate
+IDirect3DDevice9::SetTransform                      = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-settransform
+IDirect3DDevice9::SetVertexDeclaration              = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setvertexdeclaration
+IDirect3DDevice9::SetVertexShader                   = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setvertexshader
+IDirect3DDevice9::SetVertexShaderConstantB          = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setvertexshaderconstantb
+IDirect3DDevice9::SetVertexShaderConstantF          = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setvertexshaderconstantf
+IDirect3DDevice9::SetVertexShaderConstantI          = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setvertexshaderconstanti
+IDirect3DDevice9::SetViewport                       = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setviewport
+IDirect3DDevice9::ShowCursor                        = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-showcursor
+IDirect3DDevice9::StretchRect                       = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-stretchrect
+IDirect3DDevice9::TestCooperativeLevel              = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-testcooperativelevel
+IDirect3DDevice9::UpdateSurface                     = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-updatesurface
+IDirect3DDevice9::UpdateTexture                     = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-updatetexture
+IDirect3DDevice9::ValidateDevice                    = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-validatedevice
+
+IDirect3DDevice9Ex::CheckDeviceState                = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-checkdevicestate
+IDirect3DDevice9Ex::CheckResourceResidency          = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-checkresourceresidency
+IDirect3DDevice9Ex::ComposeRects                    = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-composerects
+IDirect3DDevice9Ex::CreateDepthStencilSurfaceEx     = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-createdepthstencilsurfaceex
+IDirect3DDevice9Ex::CreateOffscreenPlainSurfaceEx   = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-createoffscreenplainsurfaceex
+IDirect3DDevice9Ex::CreateRenderTargetEx            = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-createrendertargetex
+IDirect3DDevice9Ex::GetDisplayModeEx                = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-getdisplaymodeex
+IDirect3DDevice9Ex::GetGPUThreadPriority            = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-getgputhreadpriority
+IDirect3DDevice9Ex::GetMaximumFrameLatency          = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-getmaximumframelatency
+IDirect3DDevice9Ex::PresentEx                       = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-presentex
+IDirect3DDevice9Ex::ResetEx                         = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-resetex
+IDirect3DDevice9Ex::SetConvolutionMonoKernel        = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-setconvolutionmonokernel
+IDirect3DDevice9Ex::SetGPUThreadPriority            = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-setgputhreadpriority
+IDirect3DDevice9Ex::SetMaximumFrameLatency          = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-setmaximumframelatency
+IDirect3DDevice9Ex::TestCooperativeLevel            = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-testcooperativelevel
+IDirect3DDevice9Ex::WaitForVBlank                   = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-waitforvblank
+
+IDirect3DIndexBuffer9::GetDesc                      = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dindexbuffer9-getdesc
+IDirect3DIndexBuffer9::Lock                         = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dindexbuffer9-lock
+IDirect3DIndexBuffer9::Unlock                       = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dindexbuffer9-unlock
+
+IDirect3DPixelShader9::GetDevice                    = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dpixelshader9-getdevice
+IDirect3DPixelShader9::GetFunction                  = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dpixelshader9-getfunction
+
+IDirect3DQuery9::GetData                            = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dquery9-getdata
+IDirect3DQuery9::GetDataSize                        = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dquery9-getdatasize
+IDirect3DQuery9::GetDevice                          = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dquery9-getdevice
+IDirect3DQuery9::GetType                            = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dquery9-gettype
+IDirect3DQuery9::Issue                              = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dquery9-issue
+
+IDirect3DResource9::FreePrivateData                 = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-freeprivatedata
+IDirect3DResource9::GetDevice                       = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-getdevice
+IDirect3DResource9::GetPriority                     = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-getpriority
+IDirect3DResource9::GetPrivateData                  = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-getprivatedata
+IDirect3DResource9::GetType                         = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-gettype
+IDirect3DResource9::PreLoad                         = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-preload
+IDirect3DResource9::SetPriority                     = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-setpriority
+IDirect3DResource9::SetPrivateData                  = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-setprivatedata
+
+IDirect3DStateBlock9::Apply                         = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dstateblock9-apply
+IDirect3DStateBlock9::Capture                       = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dstateblock9-capture
+IDirect3DStateBlock9::GetDevice                     = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dstateblock9-getdevice
+
+IDirect3DSurface9::GetContainer                     = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dsurface9-getcontainer
+IDirect3DSurface9::GetDC                            = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dsurface9-getdc
+IDirect3DSurface9::GetDesc                          = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dsurface9-getdesc
+IDirect3DSurface9::LockRect                         = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dsurface9-lockrect
+IDirect3DSurface9::ReleaseDC                        = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dsurface9-releasedc
+IDirect3DSurface9::UnlockRect                       = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dsurface9-unlockrect
+
+IDirect3DSwapChain9::GetBackBuffer                  = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getbackbuffer
+IDirect3DSwapChain9::GetDevice                      = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getdevice
+IDirect3DSwapChain9::GetDisplayMode                 = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getdisplaymode
+IDirect3DSwapChain9::GetFrontBufferData             = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getfrontbufferdata
+IDirect3DSwapChain9::GetPresentParameters           = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getpresentparameters
+IDirect3DSwapChain9::GetRasterStatus                = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getrasterstatus
+IDirect3DSwapChain9::Present                        = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-present
+
+IDirect3DSwapChain9Ex::GetDisplayModeEx             = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9ex-getdisplaymodeex
+IDirect3DSwapChain9Ex::GetLastPresentCount          = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9ex-getlastpresentcount
+IDirect3DSwapChain9Ex::GetPresentStats              = https://docs.microsoft.com/en-us/previous-versions/windows/desktop/legacy/bb205901(v=vs.85)
+IDirect3DSwapChain9Ex::GetPresentStatistics         = https://docs.microsoft.com/en-us/previous-versions/windows/desktop/legacy/bb205901(v=vs.85)
+
+IDirect3DTexture9::AddDirtyRect                     = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dtexture9-adddirtyrect
+IDirect3DTexture9::GetLevelDesc                     = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dtexture9-getleveldesc
+IDirect3DTexture9::GetSurfaceLevel                  = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dtexture9-getsurfacelevel
+IDirect3DTexture9::LockRect                         = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dtexture9-lockrect
+IDirect3DTexture9::UnlockRect                       = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dtexture9-unlockrect
+
+IDirect3DVertexBuffer9::GetDesc                     = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexbuffer9-getdesc
+IDirect3DVertexBuffer9::Lock                        = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexbuffer9-lock
+IDirect3DVertexBuffer9::Unlock                      = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexbuffer9-unlock
+
+IDirect3DVertexDeclaration9::GetDeclaration         = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexdeclaration9-getdeclaration
+IDirect3DVertexDeclaration9::GetDevice              = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexdeclaration9-getdevice
+
+IDirect3DVertexShader9::GetDevice                   = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexshader9-getdevice
+IDirect3DVertexShader9::GetFunction                 = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexshader9-getfunction
+
+IDirect3DVolume9::FreePrivateData                   = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-freeprivatedata
+IDirect3DVolume9::GetContainer                      = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-getcontainer
+IDirect3DVolume9::GetDesc                           = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-getdesc
+IDirect3DVolume9::GetDevice                         = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-getdevice
+IDirect3DVolume9::GetPrivateData                    = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-getprivatedata
+IDirect3DVolume9::LockBox                           = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-lockbox
+IDirect3DVolume9::SetPrivateData                    = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-setprivatedata
+IDirect3DVolume9::UnlockBox                         = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-unlockbox
+
+IDirect3DVolumeTexture9::AddDirtyBox                = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolumetexture9-adddirtybox
+IDirect3DVolumeTexture9::GetLevelDesc               = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolumetexture9-getleveldesc
+IDirect3DVolumeTexture9::GetVolumeLevel             = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolumetexture9-getvolumelevel
+IDirect3DVolumeTexture9::LockBox                    = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolumetexture9-lockbox
+IDirect3DVolumeTexture9::UnlockBox                  = https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolumetexture9-unlockbox
+
+
+
 # d3d9caps.h structures
 D3DCAPS9                                = https://docs.microsoft.com/en-us/windows/win32/api/d3d9caps/ns-d3d9caps-d3dcaps9
 # D3DCONTENTPROTECTIONCAPS                =
@@ -301,7 +582,7 @@ D3DRENDERSTATETYPE                      = https://docs.microsoft.com/en-us/windo
 D3DRESOURCETYPE                         = https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dresourcetype
 D3DSAMPLERSTATETYPE                     = https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype
 D3DSAMPLER_TEXTURE_TYPE                 = https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dsampler-texture-type
-# D3DSCANLINEORDERING                     =
+D3DSCANLINEORDERING                     = https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dscanlineordering
 D3DSHADEMODE                            = https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dshademode
 # D3DSHADER_ADDRESSMODE_TYPE              =
 # D3DSHADER_COMPARISON                    =
