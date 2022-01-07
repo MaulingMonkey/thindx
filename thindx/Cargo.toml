@@ -12,7 +12,12 @@ readme          = "Readme.md"
 description     = "Thin DirectX wrappers"
 keywords        = ["directx", "direct3d", "d3d", "d3dcompiler", "hlsl"]
 categories      = ["api-bindings", "graphics", "os::windows-apis", "rendering::graphics-api"]
-exclude         = [".vscode"]
+exclude         = [
+    "doc/*.txt",
+    "examples/screenshots/*.png",   # inlined by base64 into src/_examples.rs
+    "examples/*",                   # broken without `dev`, inlined into src/_examples.rs
+    "test/*",                       # broken without `dev`
+]
 
 [package.metadata.docs.rs]
 default-target  = "x86_64-pc-windows-msvc"
@@ -25,7 +30,7 @@ path            = "src/_lib.rs"
 
 [features]
 default         = []
-9ex             = ["dev/9ex"]
+9ex             = []
 # extra               = []
 # impl-poor-defaults  = []
 # impl-from-unchecked = []
