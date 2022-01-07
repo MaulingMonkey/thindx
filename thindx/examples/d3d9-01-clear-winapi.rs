@@ -9,7 +9,6 @@ use winapi::shared::d3d9types::*;
 use winapi::shared::minwindef::*;
 use winapi::shared::windef::*;
 
-use winapi::um::debugapi::*;
 use winapi::um::libloaderapi::*;
 use winapi::um::winuser::*;
 
@@ -35,11 +34,7 @@ unsafe extern "system" fn window_proc(hwnd: HWND, umsg: u32, wparam: WPARAM, lpa
 }
 
 fn main() {
-    std::panic::set_hook(std::boxed::Box::new(|pi| unsafe {
-        eprintln!("{}", pi);
-        if IsDebuggerPresent() != 0 { DebugBreak(); }
-        std::process::exit(1);
-    }));
+    dev::win32::optional_dev_init();
 
     let hinstance = unsafe { GetModuleHandleW(null()) };
     assert!(!hinstance.is_null());

@@ -2,7 +2,9 @@ use thindx::abistr::cstr16 as wcstr;
 
 use winapi::shared::windef::*;
 
+use winapi::um::debugapi::*;
 use winapi::um::libloaderapi::*;
+use winapi::um::wincon::*;
 use winapi::um::winuser::*;
 
 use std::ptr::*;
@@ -55,4 +57,20 @@ pub fn create_window(title: &str) -> HWND {
 thread_local! {
     pub static HWND1 : HWND = create_window("thin3d9 test window #1");
     pub static HWND2 : HWND = create_window("thin3d9 test window #2");
+}
+
+pub fn optional_dev_init() {
+    if std::env::var_os("CARGO").is_some() {
+        // reattach for panic logs/spam
+        let _ = unsafe { AttachConsole(ATTACH_PARENT_PROCESS) };
+        // might fail if somehow already attached, or triggered despite not having a parent console
+    }
+
+    if unsafe { IsDebuggerPresent() } != 0 {
+        std::panic::set_hook(std::boxed::Box::new(|pi| unsafe {
+            eprintln!("example paniced: {}", pi);
+            DebugBreak();
+            std::process::exit(1);
+        }));
+    }
 }

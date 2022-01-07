@@ -25,8 +25,6 @@ use crate::*;
 /// 
 /// use winapi::shared::d3d9types::*;
 /// 
-/// use winapi::um::debugapi::*;
-/// 
 /// use winit::dpi::*;
 /// use winit::event::*;
 /// use winit::event_loop::*;
@@ -37,12 +35,7 @@ use crate::*;
 /// 
 /// 
 /// fn main() {
-///     std::panic::set_hook(std::boxed::Box::new(|pi| unsafe {
-///         eprintln!("{}", pi);
-///         if IsDebuggerPresent() != 0 { DebugBreak(); }
-///         std::process::exit(1);
-///     }));
-/// 
+///     dev::win32::optional_dev_init();
 ///     let event_loop  = EventLoop::new();
 ///     let window      = WindowBuilder::new()
 ///         .with_title("00-clear-winit - thin3d9 example")
@@ -121,7 +114,6 @@ pub const d3d9_00_clear_winit : () = ();
 /// use winapi::shared::minwindef::*;
 /// use winapi::shared::windef::*;
 /// 
-/// use winapi::um::debugapi::*;
 /// use winapi::um::libloaderapi::*;
 /// use winapi::um::winuser::*;
 /// 
@@ -147,11 +139,7 @@ pub const d3d9_00_clear_winit : () = ();
 /// }
 /// 
 /// fn main() {
-///     std::panic::set_hook(std::boxed::Box::new(|pi| unsafe {
-///         eprintln!("{}", pi);
-///         if IsDebuggerPresent() != 0 { DebugBreak(); }
-///         std::process::exit(1);
-///     }));
+///     dev::win32::optional_dev_init();
 /// 
 ///     let hinstance = unsafe { GetModuleHandleW(null()) };
 ///     assert!(!hinstance.is_null());
