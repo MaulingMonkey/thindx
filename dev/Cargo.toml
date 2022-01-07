@@ -14,6 +14,7 @@ path            = "_dev.rs"
 9ex             = []
 
 [target.'cfg(windows)'.dependencies]
+png             = "0.17"
 thindx.path     = "../thindx"
 winapi.version  = "0.3"
 winapi.features = [

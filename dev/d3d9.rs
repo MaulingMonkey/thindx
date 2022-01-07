@@ -8,6 +8,13 @@
 use winapi::shared::d3d9caps::*;
 use winapi::shared::d3d9types::*;
 
+use std::fs::*;
+use std::io::*;
+use std::path::*;
+use std::result::Result;
+
+
+
 // XXX: temporary?
 
 #[doc(no_inline)] pub use winapi::shared::d3d9caps::{
@@ -113,3 +120,47 @@ impl From<Invalid> for MultiSample     { fn from(_: Invalid) -> Self { Self::fro
 impl From<Invalid> for Pool            { fn from(_: Invalid) -> Self { Self::from_unchecked(!0) } }
 impl From<Invalid> for ResourceType    { fn from(_: Invalid) -> Self { Self::from_unchecked(!0) } }
 impl From<Invalid> for Usage           { fn from(_: Invalid) -> Self { Self::from_unchecked(!0) } }
+
+
+
+pub fn hide_for_docs_gen() -> bool { std::env::var_os("THINDX_DOCS_EXAMPLE_SCREENSHOT_PATH").is_some() }
+
+pub fn screenshot_rt0_for_docs_gen(device: &Device) {
+    if let Some(screenshot_path) = std::env::var_os("THINDX_DOCS_EXAMPLE_SCREENSHOT_PATH").map(PathBuf::from) {
+        let rt      = device.get_render_target(0).unwrap().unwrap();
+
+        let desc    = rt.get_desc().unwrap();
+        let width   = desc.Width as usize;
+        let height  = desc.Height as usize;
+        let surface = device.create_offscreen_plain_surface(desc.Width, desc.Height, Format::X8R8G8B8, Pool::SystemMem, ()).unwrap();
+        let bpp     = 4;
+
+        device.get_render_target_data(&rt, &surface).unwrap();
+
+        let mut data = Vec::new();
+        data.resize(bpp * width * height, 0);
+        unsafe {
+            let lock = surface.lock_rect_unchecked(.., Lock::None).unwrap();
+            for y in 0..height {
+                let src = (lock.pBits as *mut u8).add(y * lock.Pitch as usize);
+                let dst = data[y * width * bpp ..].as_mut_ptr();
+                std::ptr::copy(src, dst.cast(), bpp * width);
+            }
+            surface.unlock_rect().unwrap();
+        }
+
+        // make screenshot opaque regardless of back buffer alpha/x channel
+        for i in 0 .. width*height { data[4*i + 3] = !0; }
+
+        let file = BufWriter::new(File::create(screenshot_path).unwrap());
+        let mut encoder = png::Encoder::new(file, desc.Width, desc.Height);
+        encoder.set_color(png::ColorType::Rgba);
+        encoder.set_depth(png::BitDepth::Eight);
+        // set_trns ?
+        // set_source_gamma ?
+        let mut writer = encoder.write_header().unwrap();
+        writer.write_image_data(&data[..]).unwrap();
+        drop(writer);
+        std::process::exit(0);
+    }
+}

@@ -72,7 +72,10 @@ fn main() {
         null_mut(),
     )};
     assert!(!hwnd.is_null());
-    assert_eq!(0, unsafe { ShowWindow(hwnd, SW_SHOW) });
+
+    if !dev::d3d9::hide_for_docs_gen() {
+        assert_eq!(0, unsafe { ShowWindow(hwnd, SW_SHOW) });
+    }
 
     let mut pp = D3DPRESENT_PARAMETERS {
         Windowed:               true.into(),
@@ -104,6 +107,7 @@ fn main() {
             if let Some(device) = device.as_ref() {
                 device.clear(None, Some(Color::argb(0xFF664422)), None, None).unwrap();
                 device.present(.., .., (), None).unwrap(); // TODO: Handle D3DERR::DEVICELOST
+                dev::d3d9::screenshot_rt0_for_docs_gen(&device);
             }
         });
     }

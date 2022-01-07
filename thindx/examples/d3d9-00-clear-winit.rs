@@ -31,8 +31,8 @@ fn main() {
     let window      = WindowBuilder::new()
         .with_title("00-clear-winit - thin3d9 example")
         .with_inner_size(Size::Physical(PhysicalSize { width: 800, height: 600 }))
+        .with_visible(!dev::d3d9::hide_for_docs_gen())
         .build(&event_loop).unwrap();
-    let d3d         = unsafe { Direct3D::create(SdkVersion::default()) }.unwrap();
 
     let hwnd = match window.raw_window_handle() {
         RawWindowHandle::Windows(WindowsHandle { hwnd, .. }) => hwnd.cast(),
@@ -53,7 +53,8 @@ fn main() {
         Create::HardwareVertexProcessing |
         Create::NoWindowChanges;
 
-    let device = unsafe { d3d.create_device(0, DevType::HAL, null_mut(), behavior, &mut pp) }.unwrap();
+    let d3d     = unsafe { Direct3D::create(SdkVersion::default()) }.unwrap();
+    let device  = unsafe { d3d.create_device(0, DevType::HAL, null_mut(), behavior, &mut pp) }.unwrap();
 
     event_loop.run(move |event, _, control_flow|{
         *control_flow = ControlFlow::Poll;
@@ -65,6 +66,7 @@ fn main() {
             Event::MainEventsCleared => {
                 device.clear(None, Some(Color::argb(0xFF224466)), None, None).unwrap();
                 device.present(.., .., (), None).unwrap(); // TODO: Handle D3DERR::DEVICELOST
+                dev::d3d9::screenshot_rt0_for_docs_gen(&device);
             },
             _ => {},
         }

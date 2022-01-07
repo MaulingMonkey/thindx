@@ -17,6 +17,7 @@ name            = "xtask"
 path            = "_xtask.rs"
 
 [dependencies]
+base64          = "0.13"
 lazy_static     = "1"
 maulingmonkey-windows-sdk-scanner.git = "https://github.com/MaulingMonkey/windows-sdk-scanner"
 mmrbi           = "0.0.17"
