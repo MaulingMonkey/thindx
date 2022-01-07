@@ -212,7 +212,11 @@ fn file_doc_comments(path: &Path, text: &str) -> Result<(), ()> {
             else if let Some(rest) = rest.strip_prefix("struct ")           { (DocItemKind::Struct, rest.trim_start()) }
             else if let Some(rest) = rest.strip_prefix("trait ")            { (DocItemKind::Trait,  rest.trim_start()) }
             else if let Some(rest) = rest.strip_prefix("type ")             { (DocItemKind::Type,   rest.trim_start()) }
-            else if rest.contains(":") && rest.contains(",") {
+            else if rest.starts_with("use ") {
+                // use statement
+                s.on_comment_end(path, idx, Some(no));
+                continue;
+            } else if rest.contains(":") && rest.contains(",") {
                 // struct item
                 s.on_comment_end(path, idx, Some(no));
                 continue;
