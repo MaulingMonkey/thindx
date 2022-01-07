@@ -127,7 +127,7 @@ impl<'r> FunctionReflection<'r> {
     /// }
     /// ```
     //#allow_missing_argument_docs
-    pub fn get_constant_buffer_by_name(&self, name: impl TryIntoAsCStr) -> ShaderReflectionConstantBuffer<'r> {
+    pub fn get_constant_buffer_by_name(&self, name: impl PCSTR) -> ShaderReflectionConstantBuffer<'r> {
         let name = name.try_into().ok();
         let name = name.as_ref().map_or(cstr!("").as_cstr(), |n| n.as_cstr());
         let ptr = unsafe { self.ptr.as_ref().GetConstantBufferByName(name) };
@@ -367,7 +367,7 @@ impl<'r> FunctionReflection<'r> {
     /// }
     /// ```
     //#allow_missing_argument_docs
-    pub fn get_resource_binding_desc_by_name(&self, name: impl TryIntoAsCStr) -> Result<ShaderInputBindDesc<'r>, Error> {
+    pub fn get_resource_binding_desc_by_name(&self, name: impl PCSTR) -> Result<ShaderInputBindDesc<'r>, Error> {
         let name = name.try_into().ok();
         let name = name.as_ref().map_or(cstr!("").as_cstr(), |n| n.as_cstr());
         let mut desc = ShaderInputBindDesc::default();
@@ -417,7 +417,7 @@ impl<'r> FunctionReflection<'r> {
     /// }
     /// ```
     //#allow_missing_argument_docs
-    pub fn get_variable_by_name(&self, name: impl TryIntoAsCStr) -> ShaderReflectionVariable<'r> {
+    pub fn get_variable_by_name(&self, name: impl PCSTR) -> ShaderReflectionVariable<'r> {
         let name = name.try_into().ok();
         let name = name.as_ref().map_or(cstr!("").as_cstr(), |n| n.as_cstr());
         let ptr = unsafe { self.ptr.as_ref().GetVariableByName(name) };

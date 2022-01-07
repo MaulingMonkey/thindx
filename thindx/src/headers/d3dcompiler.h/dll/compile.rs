@@ -198,8 +198,8 @@ impl Compiler {
         file_name:      impl AsRef<Path>,
         defines:        impl AsShaderMacros,
         include:        impl AsInclude,
-        entrypoint:     impl TryIntoAsOptCStr,
-        target:         impl TryIntoAsCStr,
+        entrypoint:     impl OptPCSTR,
+        target:         impl PCSTR,
         flags1:         impl Into<Compile>,
         flags2:         impl Into<CompileEffect>,
     ) -> Result<CompileResult, CompileError> {
@@ -284,11 +284,11 @@ impl Compiler {
     pub fn compile<'s>(
         &self,
         src_data:       impl AsRef<[u8]>,
-        source_name:    impl TryIntoAsOptCStr,
+        source_name:    impl OptPCSTR,
         defines:        impl AsShaderMacros,
         include:        impl AsInclude,
-        entrypoint:     impl TryIntoAsOptCStr,
-        target:         impl TryIntoAsCStr,
+        entrypoint:     impl OptPCSTR,
+        target:         impl PCSTR,
         flags1:         impl Into<Compile>,
         flags2:         impl Into<CompileEffect>,
     ) -> Result<CompileResult, CompileError> {
@@ -383,11 +383,11 @@ impl Compiler {
     pub fn compile2<'s>(
         &self,
         src_data:               impl AsRef<[u8]>,
-        source_name:            impl TryIntoAsOptCStr,
+        source_name:            impl OptPCSTR,
         defines:                impl AsShaderMacros,
         include:                impl AsInclude,
-        entrypoint:             impl TryIntoAsOptCStr,
-        target:                 impl TryIntoAsCStr,
+        entrypoint:             impl OptPCSTR,
+        target:                 impl PCSTR,
         flags1:                 impl Into<Compile>,
         flags2:                 impl Into<CompileEffect>,
         secondary_data_flags:   impl Into<CompileSecData>,
@@ -484,7 +484,7 @@ impl Compiler {
     pub fn preprocess<'s>(
         &self,
         src_data:       impl AsRef<[u8]>,
-        source_name:    impl TryIntoAsOptCStr,
+        source_name:    impl OptPCSTR,
         defines:        impl AsShaderMacros,
         include:        impl AsInclude,
     ) -> Result<PreprocessResult, PreprocessError> {

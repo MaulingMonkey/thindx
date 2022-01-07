@@ -121,7 +121,7 @@ impl Linker {
     ///
     /// ### See Also
     /// *   [examples::d3dcompiler_03_link]
-    pub fn link(&self, entry: &ModuleInstance, entry_name: impl TryIntoAsCStr, target_name: impl TryIntoAsCStr, flags: Option<void::Void>) -> Result<LinkResult, Error> {
+    pub fn link(&self, entry: &ModuleInstance, entry_name: impl PCSTR, target_name: impl PCSTR, flags: Option<void::Void>) -> Result<LinkResult, Error> {
         let entry_name  = entry_name .try_into().map_err(|e| Error::new("ID3D11Linker::Link", e))?;
         let target_name = target_name.try_into().map_err(|e| Error::new("ID3D11Linker::Link", e))?;
         let entry_name  = entry_name .as_cstr();

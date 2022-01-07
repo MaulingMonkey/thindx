@@ -59,7 +59,7 @@ impl Module {
     /// let _ : d3d11::ModuleInstance = module.create_instance("namespace").unwrap();
     /// let _ : d3d11::ModuleInstance = module.create_instance(cstr!("namespace")).unwrap();
     /// ```
-    pub fn create_instance(&self, namespace: impl TryIntoAsOptCStr) -> Result<ModuleInstance, Error> {
+    pub fn create_instance(&self, namespace: impl OptPCSTR) -> Result<ModuleInstance, Error> {
         let namespace = namespace.try_into().map_err(|e| Error::new("ID3D11Module::CreateInstance", e))?;
         let namespace = namespace.as_opt_cstr();
 

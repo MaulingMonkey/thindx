@@ -145,9 +145,9 @@ impl FunctionLinkingGraph {
     /// ```
     pub fn call_function(
         &self,
-        module_instance_namespace:      impl TryIntoAsOptCStr,
+        module_instance_namespace:      impl OptPCSTR,
         module_with_function_prototype: &Module,
-        function_name:                  impl TryIntoAsCStr,
+        function_name:                  impl PCSTR,
     ) -> Result<LinkingNode, Error> {
         let ns      = module_instance_namespace.try_into()  .map_err(|e| Error::new("FunctionLinkingGraph::call_function", e))?;
         let name    = function_name.try_into()              .map_err(|e| Error::new("FunctionLinkingGraph::call_function", e))?;
@@ -288,7 +288,7 @@ impl FunctionLinkingGraph {
     /// # let output = graph.set_output_signature(&[ParameterDesc::new(cstr!("outPos"), cstr!("SV_POSITION"), SVT::Float, SVC::Vector, 1, 4, Interpolation::Undefined, PF::Out, 0, 0, 0, 0)]).unwrap();
     /// graph.pass_value_with_swizzle(&input, 0, "xyzw", &output, 0, "zyxw").unwrap();
     /// ```
-    pub fn pass_value_with_swizzle(&self, src_node: &LinkingNode, src_parameter_index: i32, src_swizzle: impl TryIntoAsCStr, dst_node: &LinkingNode, dst_parameter_index: i32, dst_swizzle: impl TryIntoAsCStr) -> Result<(), Error> {
+    pub fn pass_value_with_swizzle(&self, src_node: &LinkingNode, src_parameter_index: i32, src_swizzle: impl PCSTR, dst_node: &LinkingNode, dst_parameter_index: i32, dst_swizzle: impl PCSTR) -> Result<(), Error> {
         let src_swizzle = src_swizzle.try_into().map_err(|e| Error::new("FunctionLinkingGraph::pass_value_with_swizzle", e))?;
         let dst_swizzle = dst_swizzle.try_into().map_err(|e| Error::new("FunctionLinkingGraph::pass_value_with_swizzle", e))?;
         let hr = unsafe { self.0.PassValueWithSwizzle(src_node.as_raw(), src_parameter_index, src_swizzle.as_cstr(), dst_node.as_raw(), dst_parameter_index, dst_swizzle.as_cstr()) };

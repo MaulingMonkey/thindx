@@ -124,7 +124,7 @@ impl Compiler {
         &self,
         src_data:           &Bytecode,
         flags:              impl Into<Disasm>,
-        comments:           impl TryIntoAsOptCStr,
+        comments:           impl OptPCSTR,
     ) -> Result<TextBlob, Error> {
         let f = self.D3DDisassemble.ok_or(Error::new("D3DDisassemble", THINERR::MISSING_DLL_EXPORT))?;
         let src_data = src_data.as_bytes();
@@ -207,7 +207,7 @@ impl Compiler {
         &self,
         src_data:           &Bytecode,
         flags:              impl Into<Disasm>,
-        comments:           impl TryIntoAsOptCStr,
+        comments:           impl OptPCSTR,
         start_byte_offset:  usize,
         num_insts:          usize,
     ) -> Result<DisassembledRegion, Error> {
