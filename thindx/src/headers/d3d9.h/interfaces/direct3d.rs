@@ -118,7 +118,7 @@ pub trait IDirect3D9Ext : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use thindx::doc9::*;
+    /// # use doc::d3d9::*;
     /// # let d3d = Direct3D::test();
     /// assert!([Format::D24S8, Format::D24X8, Format::D16, Format::D32].iter().copied().any(|fmt|
     ///     d3d.check_depth_stencil_match(
@@ -151,7 +151,7 @@ pub trait IDirect3D9Ext : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use thindx::doc9::*; let d3d = Direct3D::test();
+    /// # use doc::d3d9::*; let d3d = Direct3D::test();
     /// assert!(d3d.check_device_format(
     ///     D3DADAPTER_DEFAULT,
     ///     DevType::HAL,
@@ -184,7 +184,7 @@ pub trait IDirect3D9Ext : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use thindx::doc9::*; let d3d = Direct3D::test();
+    /// # use doc::d3d9::*; let d3d = Direct3D::test();
     /// assert!(d3d.check_device_format_conversion(
     ///     D3DADAPTER_DEFAULT,
     ///     DevType::HAL,
@@ -212,7 +212,7 @@ pub trait IDirect3D9Ext : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use thindx::doc9::*; let d3d = Direct3D::test();
+    /// # use doc::d3d9::*; let d3d = Direct3D::test();
     /// assert!(d3d.check_device_multi_sample_type(
     ///     D3DADAPTER_DEFAULT,
     ///     DevType::HAL,
@@ -243,7 +243,7 @@ pub trait IDirect3D9Ext : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use thindx::doc9::*; let d3d = Direct3D::test();
+    /// # use doc::d3d9::*; let d3d = Direct3D::test();
     /// assert!(d3d.check_device_type(
     ///     D3DADAPTER_DEFAULT, // adapter
     ///     DevType::HAL,       // device_type
@@ -287,7 +287,7 @@ pub trait IDirect3D9Ext : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use thindx::doc9::*; let d3d = Direct3D::test();
+    /// # use doc::d3d9::*; let d3d = Direct3D::test();
     /// let device = unsafe { d3d.create_device(
     ///     D3DADAPTER_DEFAULT,     // adapter
     ///     DevType::HAL,           // device_type
@@ -342,7 +342,7 @@ pub trait IDirect3D9Ext : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use thindx::doc9::*; let d3d = Direct3D::test();
+    /// # use doc::d3d9::*; let d3d = Direct3D::test();
     /// let adapter = 0;
     /// let fmt = Format::X8R8G8B8;
     /// for mode in 0..d3d.get_adapter_mode_count(adapter, fmt) {
@@ -378,7 +378,7 @@ pub trait IDirect3D9Ext : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use thindx::doc9::*; let d3d = Direct3D::test();
+    /// # use doc::d3d9::*; let d3d = Direct3D::test();
     /// println!("{} adapters", d3d.get_adapter_count());
     /// ```
     ///
@@ -398,7 +398,7 @@ pub trait IDirect3D9Ext : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use thindx::doc9::*; let d3d = Direct3D::test();
+    /// # use doc::d3d9::*; let d3d = Direct3D::test();
     /// for adapter in 0..d3d.get_adapter_count() {
     ///     let mode = d3d.get_adapter_display_mode(adapter).unwrap();
     ///     let D3DDISPLAYMODE { Width: w, Height: h, RefreshRate: hz, Format: fmt } = mode;
@@ -434,7 +434,7 @@ pub trait IDirect3D9Ext : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use thindx::doc9::*; let d3d = Direct3D::test();
+    /// # use doc::d3d9::*; let d3d = Direct3D::test();
     /// eprintln!("{:#?}", d3d.get_adapter_identifier(0, 0).unwrap());
     /// ```
     ///
@@ -480,7 +480,7 @@ pub trait IDirect3D9Ext : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use thindx::doc9::*; let d3d = Direct3D::test();
+    /// # use doc::d3d9::*; let d3d = Direct3D::test();
     /// for fmt in [Format::X8R8G8B8, Format::A8R8G8B8].iter().copied() {
     ///     let modes = d3d.get_adapter_mode_count(0, fmt);
     ///     println!("adapter 1: {:?}: {} mode(s)", fmt, modes);
@@ -513,7 +513,7 @@ pub trait IDirect3D9Ext : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use thindx::doc9::*; let d3d = Direct3D::test();
+    /// # use doc::d3d9::*; let d3d = Direct3D::test();
     /// let monitor : HMONITOR = d3d.get_adapter_monitor(   0).unwrap();
     /// let error   : ()       = d3d.get_adapter_monitor(9001).unwrap_err();
     /// ```
@@ -533,7 +533,7 @@ pub trait IDirect3D9Ext : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use thindx::doc9::*; let d3d = Direct3D::test();
+    /// # use doc::d3d9::*; let d3d = Direct3D::test();
     /// let caps : Caps = d3d.get_device_caps(0, DevType::HAL).unwrap();
     /// assert_eq!(caps.DeviceType,     DevType::HAL.into());
     /// assert_eq!(caps.AdapterOrdinal, 0);

@@ -61,7 +61,7 @@ pub trait IDirect3DIndexBuffer9Ext : index_buffer::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use thindx::doc9::*; let device = Device::pure();
+    /// # use doc::d3d9::*; let device = Device::pure();
     /// let tri = device.create_index_buffer(3 * 2, Usage::None, Format::Index16, Pool::Managed, ()).unwrap();
     /// let desc : IndexBufferDesc = tri.get_desc().unwrap();
     /// assert_eq!(desc.format, Format::Index16);
@@ -99,7 +99,7 @@ pub trait IDirect3DIndexBuffer9Ext : index_buffer::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use thindx::doc9::*; let device = Device::pure();
+    /// # use doc::d3d9::*; let device = Device::pure();
     /// let tri = device.create_index_buffer(3 * 2, Usage::None, Format::Index16, Pool::Managed, ()).unwrap();
     /// let data : &[u16] = &[0, 1, 2];
     /// unsafe {
@@ -128,7 +128,7 @@ pub trait IDirect3DIndexBuffer9Ext : index_buffer::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use thindx::doc9::*; let device = Device::pure();
+    /// # use doc::d3d9::*; let device = Device::pure();
     /// let tri = device.create_index_buffer(3*4*3, Usage::None, Format::Index16, Pool::Managed, ()).unwrap();
     /// tri.unlock().unwrap(); // may succeed, even if the buffer wasn't locked <_<;;
     /// ```
@@ -178,7 +178,7 @@ pub trait IDirect3DVertexBuffer9Ext : vertex_buffer::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use thindx::doc9::*; let device = Device::pure();
+    /// # use doc::d3d9::*; let device = Device::pure();
     /// let tri = device.create_vertex_buffer(3*4*3, Usage::None, FVF::XYZ, Pool::Managed, ()).unwrap();
     /// let desc : VertexBufferDesc = dbg!(tri.get_desc().unwrap());
     /// assert_eq!(desc.format, Format::VertexData);
@@ -217,7 +217,7 @@ pub trait IDirect3DVertexBuffer9Ext : vertex_buffer::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use thindx::doc9::*; let device = Device::pure();
+    /// # use doc::d3d9::*; let device = Device::pure();
     /// let tri = device.create_vertex_buffer(3*4*3, Usage::None, FVF::XYZ, Pool::Managed, ()).unwrap();
     /// let data : &[[f32; 3]] = &[
     ///     [0.0, 1.0, 0.0],
@@ -250,7 +250,7 @@ pub trait IDirect3DVertexBuffer9Ext : vertex_buffer::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use thindx::doc9::*; let device = Device::pure();
+    /// # use doc::d3d9::*; let device = Device::pure();
     /// let tri = device.create_vertex_buffer(3*4*3, Usage::None, FVF::XYZ, Pool::Managed, ()).unwrap();
     /// tri.unlock().unwrap(); // may succeed, even if the buffer wasn't locked <_<;;
     /// ```

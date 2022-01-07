@@ -33,32 +33,6 @@ pub mod d3d11 {
     pub use crate::d3d11shader_h::*;
 }
 
-// #[cfg(any(doc, test))] // XXX
-#[doc(hidden)] pub mod doc9 {
-    pub use crate::*;
-    pub use crate::d3d::*;
-    pub use crate::d3d9::*;
-
-    // XXX: temporary?
-
-    pub use winapi::shared::d3d9caps::{
-        D3DCAPS9,
-    };
-    pub use winapi::shared::d3d9types::{
-        D3DDISPLAYMODE,
-        D3DDISPLAYMODEEX,
-        D3DPRESENT_PARAMETERS,
-    };
-    pub use winapi::shared::windef::{
-        HWND,
-        HMONITOR,
-    };
-    pub type AdapterIndex = u32;
-    pub const D3DADAPTER_DEFAULT : AdapterIndex = 0;
-}
-
-
-
 mods! {
     #[path=r"headers\d3d9.h\d3d9.rs"]               mod d3d9_h;         // d3d9 mod
     #[path=r"headers\d3d9types.h\d3d9types.rs"]     mod d3d9types_h;    // d3d9 mod

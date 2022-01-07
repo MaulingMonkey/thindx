@@ -79,7 +79,7 @@ pub trait IDirect3DDevice9ExExt : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use thindx::doc9::*; let device = DeviceEx::test();
+    /// # use doc::d3d9::*; let device = DeviceEx::test();
     /// // TODO
     /// ```
     fn check_device_state(&self, destination_window: impl AsHWND) -> ErrorKind {
@@ -100,7 +100,7 @@ pub trait IDirect3DDevice9ExExt : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use thindx::doc9::*; let device = DeviceEx::test();
+    /// # use doc::d3d9::*; let device = DeviceEx::test();
     /// // TODO
     /// ```
     #[doc(hidden)]
@@ -132,7 +132,7 @@ pub trait IDirect3DDevice9ExExt : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use thindx::doc9::*; let device = DeviceEx::test();
+    /// # use doc::d3d9::*; let device = DeviceEx::test();
     /// // TODO
     /// ```
     fn compose_rects(&self, src: &Surface, dst: &Surface, src_rect_descs: &VertexBuffer, num_rects: u32, dst_rect_descs: &VertexBuffer, operation: impl Into<ComposeRectsOp>, xoffset: i32, yoffset: i32) -> Result<(), MethodError> {
@@ -156,7 +156,7 @@ pub trait IDirect3DDevice9ExExt : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use thindx::doc9::*; let device = DeviceEx::test();
+    /// # use doc::d3d9::*; let device = DeviceEx::test();
     /// // TODO
     /// ```
     fn create_depth_stencil_surface_ex(&self, width: u32, height: u32, format: impl Into<Format>, multi_sample: impl Into<MultiSampleType>, multi_sample_quality: u32, discard: bool, _shared_handle: impl SharedHandleParam, usage: impl Into<Usage>) -> Result<Surface, MethodError> {
@@ -185,7 +185,7 @@ pub trait IDirect3DDevice9ExExt : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use thindx::doc9::*; let device = DeviceEx::test();
+    /// # use doc::d3d9::*; let device = DeviceEx::test();
     /// // TODO
     /// ```
     fn create_offscreen_plain_surface_ex(&self, width: u32, height: u32, format: impl Into<Format>, pool: impl Into<Pool>, _shared_handle: impl SharedHandleParam, usage: impl Into<Usage>) -> Result<Surface, MethodError> {
@@ -213,7 +213,7 @@ pub trait IDirect3DDevice9ExExt : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use thindx::doc9::*; let device = DeviceEx::test();
+    /// # use doc::d3d9::*; let device = DeviceEx::test();
     /// // TODO
     /// ```
     fn create_render_target_ex(&self, width: u32, height: u32, format: impl Into<Format>, multi_sample: impl Into<MultiSampleType>, multi_sample_quality: u32, lockable: bool, _shared_handle: impl SharedHandleParam, usage: impl Into<Usage>) -> Result<Surface, MethodError> {
@@ -242,7 +242,7 @@ pub trait IDirect3DDevice9ExExt : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use thindx::doc9::*; let device = DeviceEx::test();
+    /// # use doc::d3d9::*; let device = DeviceEx::test();
     /// // TODO
     /// ```
     fn get_display_mode_ex(&self, swap_chain: u32) -> Result<(D3DDISPLAYMODEEX, DisplayRotation), MethodError> {
@@ -267,7 +267,7 @@ pub trait IDirect3DDevice9ExExt : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use thindx::doc9::*; let device = DeviceEx::test();
+    /// # use doc::d3d9::*; let device = DeviceEx::test();
     /// // TODO
     /// ```
     fn get_gpu_thread_priority(&self) -> Result<i32, MethodError> {
@@ -294,7 +294,7 @@ pub trait IDirect3DDevice9ExExt : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use thindx::doc9::*; let device = DeviceEx::test();
+    /// # use doc::d3d9::*; let device = DeviceEx::test();
     /// // TODO
     /// ```
     fn get_maximum_frame_latency(&self) -> Result<u32, MethodError> {
@@ -320,7 +320,7 @@ pub trait IDirect3DDevice9ExExt : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use thindx::doc9::*; let device = DeviceEx::test();
+    /// # use doc::d3d9::*; let device = DeviceEx::test();
     /// // TODO
     /// ```
     fn present_ex<'r>(&self, source_rect: impl IntoRectOrFull, dest_rect: impl IntoRectOrFull, dest_window_override: impl AsHWND, dirty_region: impl Into<Option<&'r RgnData>>, flags: impl Into<Present>) -> Result<(), MethodError> {
@@ -362,7 +362,7 @@ pub trait IDirect3DDevice9ExExt : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use thindx::doc9::*; let device = DeviceEx::test();
+    /// # use doc::d3d9::*; let device = DeviceEx::test();
     /// // TODO
     /// ```
     fn reset_ex<'mode>(&self, presentation_parameters: &mut D3DPRESENT_PARAMETERS, fullscreen_display_mode: impl Into<Option<&'mode mut D3DDISPLAYMODEEX>>) -> Result<(), MethodError> {
@@ -384,7 +384,7 @@ pub trait IDirect3DDevice9ExExt : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use thindx::doc9::*; let device = DeviceEx::test();
+    /// # use doc::d3d9::*; let device = DeviceEx::test();
     /// // TODO
     /// ```
     fn set_convolution_mono_kernel_unweighted(&self, width: u32, height: u32) -> Result<(), MethodError> {
@@ -405,7 +405,7 @@ pub trait IDirect3DDevice9ExExt : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use thindx::doc9::*; let device = DeviceEx::test();
+    /// # use doc::d3d9::*; let device = DeviceEx::test();
     /// // TODO
     /// ```
     fn set_convolution_mono_kernel(&self, rows: &mut [f32], cols: &mut [f32]) -> Result<(), MethodError> {
@@ -430,7 +430,7 @@ pub trait IDirect3DDevice9ExExt : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use thindx::doc9::*; let device = DeviceEx::test();
+    /// # use doc::d3d9::*; let device = DeviceEx::test();
     /// // TODO
     /// ```
     fn set_gpu_thread_priority(&self, priority: i32) -> Result<(), MethodError> {
@@ -451,7 +451,7 @@ pub trait IDirect3DDevice9ExExt : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use thindx::doc9::*; let device = DeviceEx::test();
+    /// # use doc::d3d9::*; let device = DeviceEx::test();
     /// // TODO
     /// ```
     fn set_maximum_frame_latency(&self, max_latency: u32) -> Result<(), MethodError> {
@@ -472,7 +472,7 @@ pub trait IDirect3DDevice9ExExt : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use thindx::doc9::*; let device = DeviceEx::test();
+    /// # use doc::d3d9::*; let device = DeviceEx::test();
     /// // TODO
     /// ```
     #[deprecated = "docs claim test_cooperative_level is no longer available for use - instead, use check_device_state"]
@@ -494,7 +494,7 @@ pub trait IDirect3DDevice9ExExt : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use thindx::doc9::*; let device = DeviceEx::test();
+    /// # use doc::d3d9::*; let device = DeviceEx::test();
     /// // TODO
     /// ```
     fn wait_for_vblank(&self, swap_chain: u32) -> Result<(), MethodError> {

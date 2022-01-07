@@ -1,0 +1,21 @@
+# https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[package]
+name            = "doc"
+version         = "0.0.0"
+publish         = false
+edition         = "2018"
+description     = "Internal utility crate for thindx doc comments"
+
+[lib]
+path            = "_doc.rs"
+
+[target.'cfg(windows)'.dependencies]
+thindx.path     = "../thindx"
+winapi.version  = "0.3"
+winapi.features = [
+    # shared
+    "d3d9caps",
+    "d3d9types",
+    "windef",
+]

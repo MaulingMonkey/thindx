@@ -54,7 +54,7 @@ pub trait IDirect3DSurface9Ext : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use thindx::doc9::*; let device = Device::test();
+    /// # use doc::d3d9::*; let device = Device::test();
     /// # let texture = device.create_texture(128, 128, 8, Usage::None, Format::A8R8G8B8, Pool::Managed, ()).unwrap();
     /// # let surface = texture.get_surface_level(0).unwrap();
     /// let texture = surface.get_container::<Texture>().unwrap();
@@ -79,7 +79,7 @@ pub trait IDirect3DSurface9Ext : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use thindx::doc9::*; let device = Device::test();
+    /// # use doc::d3d9::*; let device = Device::test();
     /// # let texture = device.create_texture(128, 128, 8, Usage::None, Format::A8R8G8B8, Pool::Managed, ()).unwrap();
     /// # let surface = texture.get_surface_level(0).unwrap();
     /// let dc = surface.get_dc().unwrap();
@@ -106,7 +106,7 @@ pub trait IDirect3DSurface9Ext : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use thindx::doc9::*; let device = Device::test();
+    /// # use doc::d3d9::*; let device = Device::test();
     /// let texture = device.create_texture(128, 128, 8, Usage::None, Format::A8R8G8B8, Pool::Managed, ()).unwrap();
     /// let surface = texture.get_surface_level(0).unwrap();
     /// let desc : SurfaceDesc = surface.get_desc().unwrap();
@@ -138,7 +138,7 @@ pub trait IDirect3DSurface9Ext : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use thindx::doc9::*; let device = Device::test();
+    /// # use doc::d3d9::*; let device = Device::test();
     /// let texture = device.create_texture(128, 128, 8, Usage::None, Format::A8R8G8B8, Pool::Managed, ()).unwrap();
     /// let surface = texture.get_surface_level(0).unwrap();
     /// let data = [[Color::argb(0xFF112233); 128]; 128];
@@ -173,7 +173,7 @@ pub trait IDirect3DSurface9Ext : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use thindx::doc9::*; let device = Device::test();
+    /// # use doc::d3d9::*; let device = Device::test();
     /// # let texture = device.create_texture(128, 128, 8, Usage::None, Format::A8R8G8B8, Pool::Managed, ()).unwrap();
     /// # let surface = texture.get_surface_level(0).unwrap();
     /// let dc = surface.get_dc().unwrap();
@@ -203,7 +203,7 @@ pub trait IDirect3DSurface9Ext : private::Sealed {
     /// ### Example
     ///
     /// ```rust
-    /// # use thindx::doc9::*; let device = Device::test();
+    /// # use doc::d3d9::*; let device = Device::test();
     /// let texture = device.create_texture(128, 128, 8, Usage::None, Format::A8R8G8B8, Pool::Managed, ()).unwrap();
     /// let surface = texture.get_surface_level(0).unwrap();
     /// let data = [[Color::argb(0xFF112233); 128]; 128];

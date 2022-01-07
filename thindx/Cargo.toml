@@ -60,6 +60,7 @@ winapi.features = [
 ]
 
 [target.'cfg(windows)'.dev-dependencies]
+doc.path            = "../doc"
 lazy_static         = "1.4"
 raw-window-handle   = "0.3"
 winit               = "0.23"
