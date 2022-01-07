@@ -89,7 +89,7 @@ pub fn update() {
                 for rust in rust.into_iter().flat_map(|p| p.iter()) { write!(rs, " [`{}`]<br>", rust)?; }
                 write!(rs, " |")?;
 
-                let mapped = cpp.methods().filter(|m| cpp2rust.contains_key(&format!("{}::{}", cpp.id, m.f.id))).count();
+                let mapped = cpp.methods().filter(|m| cpp2rust.contains_key(&*format!("{}::{}", cpp.id, m.f.id))).count();
                 let total = cpp.methods().count();
                 write!(rs, " {} |", ProgressBadge(mapped, total))?;
                 writeln!(rs)?;
@@ -141,7 +141,7 @@ pub fn update() {
                 }
                 for method in icpp.methods() {
                     let cpp     = format!("{}::{}", method.ty, method.f.id);
-                    let rust    = cpp2rust.get(&cpp);
+                    let rust    = cpp2rust.get(&*cpp);
                     write!(rs, "//! | {} | {} |", ok_if(rust.is_some()), CppLink(&cpp))?;
                     for rust in rust.into_iter().flat_map(|p| p.iter()) { write!(rs, " [`{}`]<br>", rust)?; }
                     writeln!(rs, " |")?;
@@ -168,34 +168,47 @@ struct Header<'cpp> {
 }
 impl<'cpp> Header<'cpp> {
     fn new(rel_path: &'static str, cpp: &'cpp Root) -> Self {
+        let ignore = &*CPP2IGNORE;
         let name_h = rel_path.rfind('\\').map_or(rel_path, |s| &rel_path[s+1..]);
         let name   = name_h.strip_suffix(".h").unwrap_or(name_h);
         Self {
             name_h, name,
-            interfaces: cpp.interfaces  .values_by_key().filter(move |t| t.defined_at.iter().any(move |at| at.path.ends_with(rel_path))).collect(),
-            structs:    cpp.structs     .values_by_key().filter(move |t| t.defined_at.iter().any(move |at| at.path.ends_with(rel_path))).collect(),
-            enums:      cpp.enums       .values_by_key().filter(move |t| t.defined_at.iter().any(move |at| at.path.ends_with(rel_path))).collect(),
-            functions:  cpp.functions   .values_by_key().filter(move |t| t.defined_at.iter().any(move |at| at.path.ends_with(rel_path))).collect(),
-            // classes:    cpp.classes     .values_by_key().filter(move |t| t.defined_at.iter().any(move |at| at.path.ends_with(rel_path))).collect(),
-            // unions:     cpp.unions      .values_by_key().filter(move |t| t.defined_at.iter().any(move |at| at.path.ends_with(rel_path))).collect(),
+            interfaces: cpp.interfaces  .values_by_key().filter(move |t| !ignore.contains(t.id.as_str()) && t.defined_at.iter().any(move |at| at.path.ends_with(rel_path))).collect(),
+            structs:    cpp.structs     .values_by_key().filter(move |t| !ignore.contains(t.id.as_str()) && t.defined_at.iter().any(move |at| at.path.ends_with(rel_path))).collect(),
+            enums:      cpp.enums       .values_by_key().filter(move |t| !ignore.contains(t.id.as_str()) && t.defined_at.iter().any(move |at| at.path.ends_with(rel_path))).collect(),
+            functions:  cpp.functions   .values_by_key().filter(move |t| !ignore.contains(t.id.as_str()) && t.defined_at.iter().any(move |at| at.path.ends_with(rel_path))).collect(),
+            // classes:    cpp.classes     .values_by_key().filter(move |t| !ignore.contains(t.id.as_str()) && t.defined_at.iter().any(move |at| at.path.ends_with(rel_path))).collect(),
+            // unions:     cpp.unions      .values_by_key().filter(move |t| !ignore.contains(t.id.as_str()) && t.defined_at.iter().any(move |at| at.path.ends_with(rel_path))).collect(),
         }
     }
 }
 
 lazy_static::lazy_static! {
-    static ref CPP2RUST : BTreeMap<String, Vec<String>> = map_file("thindx/doc/cpp2rust.txt", include_str!("../thindx/doc/cpp2rust.txt"));
-    static ref CPP2URL  : BTreeMap<String, Vec<String>> = map_file("thindx/doc/cpp2url.txt", include_str!("../thindx/doc/cpp2url.txt"));
+    static ref CPP2IGNORE   : BTreeSet<&'static str>                    = set_file("thindx/doc/cpp2ignore.txt", include_str!("../thindx/doc/cpp2ignore.txt"));
+    static ref CPP2RUST     : BTreeMap<&'static str, Vec<&'static str>> = map_file("thindx/doc/cpp2rust.txt", include_str!("../thindx/doc/cpp2rust.txt"));
+    static ref CPP2URL      : BTreeMap<&'static str, Vec<&'static str>> = map_file("thindx/doc/cpp2url.txt", include_str!("../thindx/doc/cpp2url.txt"));
 }
 
-fn map_file(path: &str, text: &str) -> BTreeMap<String, Vec<String>> {
-    let mut r = BTreeMap::<String, Vec<String>>::new();
+fn set_file<'s>(_path: &str, text: &'s str) -> BTreeSet<&'s str> {
+    let mut r = BTreeSet::<&str>::new();
+    for line in text.lines() {
+        let line = line.split_once('#').map_or(line, |s| s.0).trim();
+        if line.is_empty() { continue }
+
+        r.insert(line.trim());
+    }
+    r
+}
+
+fn map_file<'s>(path: &str, text: &'s str) -> BTreeMap<&'s str, Vec<&'s str>> {
+    let mut r = BTreeMap::<&'s str, Vec<&'s str>>::new();
     for (line_idx, line) in text.lines().enumerate() {
         let line_no = line_idx + 1;
         let line = line.split_once('#').map_or(line, |s| s.0).trim();
         if line.is_empty() { continue }
 
         if let Some((k, v)) = line.split_once('=') {
-            r.entry(k.trim().to_string()).or_default().push(v.trim().to_string());
+            r.entry(k.trim()).or_default().push(v.trim());
         } else {
             error!(at: path, line: line_no, "expected `key = value` pair");
         }

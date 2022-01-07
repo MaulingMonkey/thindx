@@ -13,7 +13,7 @@
 //!
 //! | C++ Header | Interfaces | Structs | Enums | Functions |
 //! | ---------- | ---------- | ------- | ----- | --------- |
-//! | [unknwn.h](#unknwn) | ⚠️ 1 of 3 |   |   |   |
+//! | [unknwn.h](#unknwn) | ✔️ 1 of 1 |   |   |   |
 //! | [d3dcommon.h](#d3dcommon) | ⚠️ 2 of 3 | ✔️ 1 of 1 | ✔️ 22 of 22 |   |
 //! | [d3dcompiler.h](#d3dcompiler) |   | ✔️ 1 of 1 | ✔️ 2 of 2 |   |
 //! | [d3d9.h](#d3d9) | ⚠️ 20 of 24 |   |   | ⚠️ 2 of 9 |
@@ -27,20 +27,10 @@
 //!
 //! |  ?  | C++ Interface | Rust Type | Methods |
 //! | --- | ------------- | --------- | ------- |
-//! | ❌ | `AsyncIUnknown` | | ❌ 0 of 6 |
-//! | ❌ | `IClassFactory` | | ❌ 0 of 2 |
 //! | ✔️ | [`IUnknown`](https://docs.microsoft.com/en-us/windows/win32/api/unknwn/nn-unknwn-iunknown) | [`Unknown`]<br> | ✔️ 3 of 3 |
 //!
 //! |  ?  | C++ Method    | Rust Method |
 //! | --- | ------------- | ----------- |
-//! | ❌ | `AsyncIUnknown::Begin_AddRef` | |
-//! | ❌ | `AsyncIUnknown::Begin_QueryInterface` | |
-//! | ❌ | `AsyncIUnknown::Begin_Release` | |
-//! | ❌ | `AsyncIUnknown::Finish_AddRef` | |
-//! | ❌ | `AsyncIUnknown::Finish_QueryInterface` | |
-//! | ❌ | `AsyncIUnknown::Finish_Release` | |
-//! | ❌ | `IClassFactory::CreateInstance` | |
-//! | ❌ | `IClassFactory::LockServer` | |
 //! | ✔️ | [`IUnknown::AddRef`](https://docs.microsoft.com/en-us/windows/win32/api/unknwn/nf-unknwn-iunknown-addref) | [`mcom::Rc::clone`]<br> |
 //! | ✔️ | [`IUnknown::QueryInterface`](https://docs.microsoft.com/en-us/windows/win32/api/unknwn/nf-unknwn-iunknown-queryinterface(q)) | [`mcom::Rc::try_cast`]<br> |
 //! | ✔️ | [`IUnknown::Release`](https://docs.microsoft.com/en-us/windows/win32/api/unknwn/nf-unknwn-iunknown-release) | [`mcom::Rc::drop`]<br> |
