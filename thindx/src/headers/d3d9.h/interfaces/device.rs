@@ -1454,6 +1454,24 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
         }
     }
 
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getrendertargetdata)\]
+    /// IDirect3DDevice9::GetRenderTargetData
+    ///
+    /// Copies the render-target data from device memory to system memory.
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]   If the source and destination formats do not match
+    /// *   [D3DERR]::???           If the source and destination sizes do not match
+    /// *   [D3DERR]::???           If the source is multisampled
+    /// *   [D3DERR]::???           If the source is not a regular render target, or level thereof, created with [Pool::Default]
+    /// *   [D3DERR]::???           If the destination is not an off-screen plain surface, or level of a texture created with [Pool::SystemMem]
+    ///
+    fn get_render_target_data(&self, render_target: &Surface, dest_surface: &Surface) -> Result<(), MethodError> {
+        let hr = unsafe { self.as_winapi().GetRenderTargetData(render_target.as_raw(), dest_surface.as_raw()) };
+        MethodError::check("IDirect3DDevice9::GetRenderTargetData", hr)
+    }
+
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getstreamsource)\]
     /// IDirect3DDevice9::GetStreamSource
     ///

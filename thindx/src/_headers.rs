@@ -113,7 +113,7 @@
 //! | ✔️ | `IDirect3DBaseTexture9` | [`d3d9::BaseTexture`]<br> [`d3d9::IDirect3DBaseTexture9Ext`]<br> | ✔️ 6 of 6 |
 //! | ❌ | `IDirect3DCryptoSession9` | | ❌ 0 of 9 |
 //! | ✔️ | `IDirect3DCubeTexture9` | [`d3d9::CubeTexture`]<br> [`d3d9::IDirect3DCubeTexture9Ext`]<br> | ✔️ 5 of 5 |
-//! | ✔️ | `IDirect3DDevice9` | [`d3d9::Device`]<br> [`d3d9::IDirect3DDevice9Ext`]<br> | ⚠️ 74 of 116 |
+//! | ✔️ | `IDirect3DDevice9` | [`d3d9::Device`]<br> [`d3d9::IDirect3DDevice9Ext`]<br> | ⚠️ 76 of 116 |
 //! | ✔️ | `IDirect3DDevice9Ex` | [`d3d9::DeviceEx`]<br> [`d3d9::IDirect3DDevice9ExExt`]<br> | ⚠️ 14 of 15 |
 //! | ❌ | `IDirect3DDevice9Video` | | ❌ 0 of 3 |
 //! | ✔️ | `IDirect3DIndexBuffer9` | [`d3d9::IndexBuffer`]<br> [`d3d9::IDirect3DIndexBuffer9Ext`]<br> | ✔️ 3 of 3 |
@@ -244,8 +244,8 @@
 //! | ❌ | `IDirect3DDevice9::GetPixelShaderConstantI` | |
 //! | ❌ | `IDirect3DDevice9::GetRasterStatus` | |
 //! | ❌ | `IDirect3DDevice9::GetRenderState` | |
-//! | ❌ | `IDirect3DDevice9::GetRenderTarget` | |
-//! | ❌ | `IDirect3DDevice9::GetRenderTargetData` | |
+//! | ✔️ | `IDirect3DDevice9::GetRenderTarget` | [`d3d9::IDirect3DDevice9Ext::get_render_target`]<br> |
+//! | ✔️ | `IDirect3DDevice9::GetRenderTargetData` | [`d3d9::IDirect3DDevice9Ext::get_render_target_data`]<br> |
 //! | ❌ | `IDirect3DDevice9::GetSamplerState` | |
 //! | ❌ | `IDirect3DDevice9::GetScissorRect` | |
 //! | ❌ | `IDirect3DDevice9::GetSoftwareVertexProcessing` | |
