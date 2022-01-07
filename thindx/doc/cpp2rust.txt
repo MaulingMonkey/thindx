@@ -506,7 +506,9 @@ IDirect3DSwapChain9::Present                        = d3d9::IDirect3DSwapChain9E
 
 IDirect3DSwapChain9Ex::GetDisplayModeEx             = d3d9::IDirect3DSwapChain9ExExt::get_display_mode_ex
 IDirect3DSwapChain9Ex::GetLastPresentCount          = d3d9::IDirect3DSwapChain9ExExt::get_last_present_count
+# XXX: documentation uses "GetPresentStatistics", but some C++ headers/vtables use "GetPresentStats"
 IDirect3DSwapChain9Ex::GetPresentStatistics         = d3d9::IDirect3DSwapChain9ExExt::get_present_statistics
+IDirect3DSwapChain9Ex::GetPresentStats              = d3d9::IDirect3DSwapChain9ExExt::get_present_statistics
 
 IDirect3DTexture9::AddDirtyRect                     = d3d9::IDirect3DTexture9Ext::add_dirty_rect
 IDirect3DTexture9::GetLevelDesc                     = d3d9::IDirect3DTexture9Ext::get_level_desc

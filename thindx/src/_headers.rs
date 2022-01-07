@@ -123,7 +123,7 @@
 //! | ✔️ | `IDirect3DStateBlock9` | [`d3d9::StateBlock`]<br> [`d3d9::IDirect3DStateBlock9Ext`]<br> | ✔️ 3 of 3 |
 //! | ✔️ | `IDirect3DSurface9` | [`d3d9::Surface`]<br> [`d3d9::IDirect3DSurface9Ext`]<br> | ✔️ 6 of 6 |
 //! | ✔️ | `IDirect3DSwapChain9` | [`d3d9::SwapChain`]<br> [`d3d9::IDirect3DSwapChain9Ext`]<br> | ✔️ 7 of 7 |
-//! | ✔️ | `IDirect3DSwapChain9Ex` | [`d3d9::SwapChainEx`]<br> [`d3d9::IDirect3DSwapChain9ExExt`]<br> | ⚠️ 2 of 3 |
+//! | ✔️ | `IDirect3DSwapChain9Ex` | [`d3d9::SwapChainEx`]<br> [`d3d9::IDirect3DSwapChain9ExExt`]<br> | ✔️ 3 of 3 |
 //! | ✔️ | `IDirect3DTexture9` | [`d3d9::Texture`]<br> [`d3d9::IDirect3DTexture9Ext`]<br> | ✔️ 5 of 5 |
 //! | ✔️ | `IDirect3DVertexBuffer9` | [`d3d9::VertexBuffer`]<br> [`d3d9::IDirect3DVertexBuffer9Ext`]<br> | ✔️ 3 of 3 |
 //! | ✔️ | `IDirect3DVertexDeclaration9` | [`d3d9::VertexDeclaration`]<br> [`d3d9::IDirect3DVertexDeclaration9Ext`]<br> | ✔️ 2 of 2 |
@@ -360,7 +360,7 @@
 //! | ✔️ | `IDirect3DSwapChain9::Present` | [`d3d9::IDirect3DSwapChain9Ext::present`]<br> |
 //! | ✔️ | `IDirect3DSwapChain9Ex::GetDisplayModeEx` | [`d3d9::IDirect3DSwapChain9ExExt::get_display_mode_ex`]<br> |
 //! | ✔️ | `IDirect3DSwapChain9Ex::GetLastPresentCount` | [`d3d9::IDirect3DSwapChain9ExExt::get_last_present_count`]<br> |
-//! | ❌ | `IDirect3DSwapChain9Ex::GetPresentStats` | |
+//! | ✔️ | `IDirect3DSwapChain9Ex::GetPresentStats` | [`d3d9::IDirect3DSwapChain9ExExt::get_present_statistics`]<br> |
 //! | ✔️ | `IDirect3DTexture9::AddDirtyRect` | [`d3d9::IDirect3DTexture9Ext::add_dirty_rect`]<br> |
 //! | ✔️ | `IDirect3DTexture9::GetLevelDesc` | [`d3d9::IDirect3DTexture9Ext::get_level_desc`]<br> |
 //! | ✔️ | `IDirect3DTexture9::GetSurfaceLevel` | [`d3d9::IDirect3DTexture9Ext::get_surface_level`]<br> |
