@@ -36,14 +36,14 @@ impl Compiler {
     ///
     /// ### Remarks
     /// *   This was introduced by d3dcompiler_43.dll, and is unavailable in earlier versions.
-    pub fn get_blob_part(&self, src_data: &Bytecode, part: impl Into<BlobPart>, flags: Option<void::Void>) -> Result<BytesBlob, MethodErrorBlob> {
-        let f = self.D3DGetBlobPart.ok_or(MethodErrorBlob::new("D3DGetBlobPart", THINERR::MISSING_DLL_EXPORT))?;
+    pub fn get_blob_part(&self, src_data: &Bytecode, part: impl Into<BlobPart>, flags: Option<void::Void>) -> Result<BytesBlob, MethodError> {
+        let f = self.D3DGetBlobPart.ok_or(MethodError::new("D3DGetBlobPart", THINERR::MISSING_DLL_EXPORT))?;
         let src_data = src_data.as_bytes();
         let part = part.into().into();
         let _ = flags; let flags = 0;
         let mut blob = null_mut();
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), part, flags, &mut blob) };
-        MethodErrorBlob::check("D3DGetBlobPart", hr)?;
+        MethodError::check("D3DGetBlobPart", hr)?;
         Ok(BytesBlob::new(unsafe { ReadOnlyBlob::from_raw(blob) }))
     }
 
@@ -90,13 +90,13 @@ impl Compiler {
     ///
     /// ### Remarks
     /// *   This was introduced by d3dcompiler_40.dll, and is unavailable in earlier versions.
-    pub fn get_debug_info(&self, src_data: &Bytecode) -> Result<BytesBlob, MethodErrorBlob> {
-        let f = self.D3DGetDebugInfo.ok_or(MethodErrorBlob::new("D3DGetDebugInfo", THINERR::MISSING_DLL_EXPORT))?;
+    pub fn get_debug_info(&self, src_data: &Bytecode) -> Result<BytesBlob, MethodError> {
+        let f = self.D3DGetDebugInfo.ok_or(MethodError::new("D3DGetDebugInfo", THINERR::MISSING_DLL_EXPORT))?;
         let src_data = src_data.as_bytes();
 
         let mut blob = null_mut();
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), &mut blob) };
-        MethodErrorBlob::check("D3DGetDebugInfo", hr)?;
+        MethodError::check("D3DGetDebugInfo", hr)?;
         Ok(BytesBlob::new(unsafe { ReadOnlyBlob::from_raw(blob) }))
     }
 
@@ -123,13 +123,13 @@ impl Compiler {
     /// ```
     // #[requires(d3dcompiler=33)] // or earlier?
     //#allow_missing_argument_docs
-    pub fn get_input_and_output_signature_blob(&self, src_data: &Bytecode) -> Result<BytesBlob, MethodErrorBlob> {
-        let f = self.D3DGetInputAndOutputSignatureBlob.ok_or(MethodErrorBlob::new("D3DGetInputAndOutputSignatureBlob", THINERR::MISSING_DLL_EXPORT))?;
+    pub fn get_input_and_output_signature_blob(&self, src_data: &Bytecode) -> Result<BytesBlob, MethodError> {
+        let f = self.D3DGetInputAndOutputSignatureBlob.ok_or(MethodError::new("D3DGetInputAndOutputSignatureBlob", THINERR::MISSING_DLL_EXPORT))?;
         let src_data = src_data.as_bytes();
 
         let mut blob = null_mut();
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), &mut blob) };
-        MethodErrorBlob::check("D3DGetInputAndOutputSignatureBlob", hr)?;
+        MethodError::check("D3DGetInputAndOutputSignatureBlob", hr)?;
         Ok(BytesBlob::new(unsafe { ReadOnlyBlob::from_raw(blob) }))
     }
 
@@ -156,13 +156,13 @@ impl Compiler {
     /// ```
     // #[requires(d3dcompiler=33)] // or earlier?
     //#allow_missing_argument_docs
-    pub fn get_input_signature_blob(&self, src_data: &Bytecode) -> Result<BytesBlob, MethodErrorBlob> {
-        let f = self.D3DGetInputSignatureBlob.ok_or(MethodErrorBlob::new("D3DGetInputSignatureBlob", THINERR::MISSING_DLL_EXPORT))?;
+    pub fn get_input_signature_blob(&self, src_data: &Bytecode) -> Result<BytesBlob, MethodError> {
+        let f = self.D3DGetInputSignatureBlob.ok_or(MethodError::new("D3DGetInputSignatureBlob", THINERR::MISSING_DLL_EXPORT))?;
         let src_data = src_data.as_bytes();
 
         let mut blob = null_mut();
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), &mut blob) };
-        MethodErrorBlob::check("D3DGetInputSignatureBlob", hr)?;
+        MethodError::check("D3DGetInputSignatureBlob", hr)?;
         Ok(BytesBlob::new(unsafe { ReadOnlyBlob::from_raw(blob) }))
     }
 
@@ -189,13 +189,13 @@ impl Compiler {
     /// ```
     // #[requires(d3dcompiler=33)] // or earlier?
     //#allow_missing_argument_docs
-    pub fn get_output_signature_blob(&self, src_data: &Bytecode) -> Result<BytesBlob, MethodErrorBlob> {
-        let f = self.D3DGetOutputSignatureBlob.ok_or(MethodErrorBlob::new("D3DGetOutputSignatureBlob", THINERR::MISSING_DLL_EXPORT))?;
+    pub fn get_output_signature_blob(&self, src_data: &Bytecode) -> Result<BytesBlob, MethodError> {
+        let f = self.D3DGetOutputSignatureBlob.ok_or(MethodError::new("D3DGetOutputSignatureBlob", THINERR::MISSING_DLL_EXPORT))?;
         let src_data = src_data.as_bytes();
 
         let mut blob = null_mut();
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), &mut blob) };
-        MethodErrorBlob::check("D3DGetOutputSignatureBlob", hr)?;
+        MethodError::check("D3DGetOutputSignatureBlob", hr)?;
         Ok(BytesBlob::new(unsafe { ReadOnlyBlob::from_raw(blob) }))
     }
 
@@ -234,14 +234,14 @@ impl Compiler {
         part:               impl Into<BlobPart>,
         flags:              (),
         part_data:          &[u8],
-    ) -> Result<CodeBlob, MethodErrorBlob> {
-        let f = self.D3DSetBlobPart.ok_or(MethodErrorBlob::new("D3DSetBlobPart", THINERR::MISSING_DLL_EXPORT))?;
+    ) -> Result<CodeBlob, MethodError> {
+        let f = self.D3DSetBlobPart.ok_or(MethodError::new("D3DSetBlobPart", THINERR::MISSING_DLL_EXPORT))?;
         let src_data = src_data.as_bytes();
 
         let _ = flags; let flags = 0;
         let mut blob = null_mut();
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), part.into().into(), flags, part_data.as_ptr().cast(), part_data.len(), &mut blob) };
-        MethodErrorBlob::check("D3DSetBlobPart", hr)?;
+        MethodError::check("D3DSetBlobPart", hr)?;
         Ok(unsafe { CodeBlob::from_unchecked(ReadOnlyBlob::from_raw(blob)) })
     }
 
@@ -276,11 +276,11 @@ impl Compiler {
         &self,
         shader_bytecode:    &[u8],
         strip_flags:        impl Into<CompilerStripFlags>,
-    ) -> Result<CodeBlob, MethodErrorBlob> {
-        let f = self.D3DStripShader.ok_or(MethodErrorBlob::new("D3DStripShader", THINERR::MISSING_DLL_EXPORT))?;
+    ) -> Result<CodeBlob, MethodError> {
+        let f = self.D3DStripShader.ok_or(MethodError::new("D3DStripShader", THINERR::MISSING_DLL_EXPORT))?;
         let mut blob = null_mut();
         let hr = unsafe { f(shader_bytecode.as_ptr().cast(), shader_bytecode.len(), strip_flags.into().into(), &mut blob) };
-        MethodErrorBlob::check("D3DStripShader", hr)?;
+        MethodError::check("D3DStripShader", hr)?;
         Ok(unsafe { CodeBlob::from_unchecked(ReadOnlyBlob::from_raw(blob)) })
     }
 }

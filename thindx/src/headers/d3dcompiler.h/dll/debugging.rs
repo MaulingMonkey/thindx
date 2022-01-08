@@ -125,15 +125,15 @@ impl Compiler {
         src_data:           &Bytecode,
         flags:              impl Into<Disasm>,
         comments:           impl TryIntoAsOptCStr,
-    ) -> Result<TextBlob, MethodErrorBlob> {
-        let f = self.D3DDisassemble.ok_or(MethodErrorBlob::new("D3DDisassemble", THINERR::MISSING_DLL_EXPORT))?;
+    ) -> Result<TextBlob, MethodError> {
+        let f = self.D3DDisassemble.ok_or(MethodError::new("D3DDisassemble", THINERR::MISSING_DLL_EXPORT))?;
         let src_data = src_data.as_bytes();
         let flags = flags.into().into();
-        let comments = comments.try_into().map_err(|e| MethodErrorBlob::new("D3DDisassemble", e))?;
+        let comments = comments.try_into().map_err(|e| MethodError::new("D3DDisassemble", e))?;
         let comments = comments.as_opt_cstr();
         let mut disassembly = null_mut();
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), flags, comments, &mut disassembly) };
-        MethodErrorBlob::check("D3DDisassemble", hr)?;
+        MethodError::check("D3DDisassemble", hr)?;
         Ok(TextBlob::new(unsafe { ReadOnlyBlob::from_raw(disassembly) }))
     }
 
@@ -210,16 +210,16 @@ impl Compiler {
         comments:           impl TryIntoAsOptCStr,
         start_byte_offset:  usize,
         num_insts:          usize,
-    ) -> Result<DisassembledRegion, MethodErrorBlob> {
-        let f = self.D3DDisassembleRegion.ok_or(MethodErrorBlob::new("D3DDisassembleRegion", THINERR::MISSING_DLL_EXPORT))?;
+    ) -> Result<DisassembledRegion, MethodError> {
+        let f = self.D3DDisassembleRegion.ok_or(MethodError::new("D3DDisassembleRegion", THINERR::MISSING_DLL_EXPORT))?;
         let src_data = src_data.as_bytes();
         let flags = flags.into().into();
-        let comments = comments.try_into().map_err(|e| MethodErrorBlob::new("D3DDisassembleRegion", e))?;
+        let comments = comments.try_into().map_err(|e| MethodError::new("D3DDisassembleRegion", e))?;
         let comments = comments.as_opt_cstr();
         let mut disassembly = null_mut();
         let mut finish_byte_offset = 0;
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), flags, comments, start_byte_offset, num_insts, &mut finish_byte_offset, &mut disassembly) };
-        MethodErrorBlob::check("D3DDisassembleRegion", hr)?;
+        MethodError::check("D3DDisassembleRegion", hr)?;
         Ok(DisassembledRegion {
             disassembly: TextBlob::new(unsafe { ReadOnlyBlob::from_raw(disassembly) }),
             finish_byte_offset,
@@ -257,12 +257,12 @@ impl Compiler {
         flags:              impl Into<GetInstOffsets>,
         start_inst_index:   usize,
         num_insts:          usize,
-    ) -> Result<usize, MethodErrorBlob> {
-        let f = self.D3DGetTraceInstructionOffsets.ok_or(MethodErrorBlob::new("D3DGetTraceInstructionOffsets", THINERR::MISSING_DLL_EXPORT))?;
+    ) -> Result<usize, MethodError> {
+        let f = self.D3DGetTraceInstructionOffsets.ok_or(MethodError::new("D3DGetTraceInstructionOffsets", THINERR::MISSING_DLL_EXPORT))?;
         let src_data = src_data.as_bytes();
         let mut n = 0;
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), flags.into().into(), start_inst_index, num_insts, null_mut(), &mut n) };
-        MethodErrorBlob::check("D3DGetTraceInstructionOffsets", hr)?;
+        MethodError::check("D3DGetTraceInstructionOffsets", hr)?;
         Ok(n)
     }
 
@@ -299,12 +299,12 @@ impl Compiler {
         flags:              impl Into<GetInstOffsets>,
         start_inst_index:   usize,
         offsets:            &'o mut [usize],
-    ) -> Result<&'o [usize], MethodErrorBlob> {
-        let f = self.D3DGetTraceInstructionOffsets.ok_or(MethodErrorBlob::new("D3DGetTraceInstructionOffsets", THINERR::MISSING_DLL_EXPORT))?;
+    ) -> Result<&'o [usize], MethodError> {
+        let f = self.D3DGetTraceInstructionOffsets.ok_or(MethodError::new("D3DGetTraceInstructionOffsets", THINERR::MISSING_DLL_EXPORT))?;
         let src_data = src_data.as_bytes();
         let mut n = 0;
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), flags.into().into(), start_inst_index, offsets.len(), offsets.as_mut_ptr(), &mut n) };
-        MethodErrorBlob::check("D3DGetTraceInstructionOffsets", hr)?;
+        MethodError::check("D3DGetTraceInstructionOffsets", hr)?;
         Ok(&offsets[..n])
     }
 
@@ -340,19 +340,19 @@ impl Compiler {
         flags:              impl Into<GetInstOffsets>,
         start_inst_index:   usize,
         num_insts:          usize,
-    ) -> Result<Vec<usize>, MethodErrorBlob> {
-        let f = self.D3DGetTraceInstructionOffsets.ok_or(MethodErrorBlob::new("D3DGetTraceInstructionOffsets", THINERR::MISSING_DLL_EXPORT))?;
+    ) -> Result<Vec<usize>, MethodError> {
+        let f = self.D3DGetTraceInstructionOffsets.ok_or(MethodError::new("D3DGetTraceInstructionOffsets", THINERR::MISSING_DLL_EXPORT))?;
         let src_data = src_data.as_bytes();
         let flags = flags.into().into();
 
         let mut n = 0;
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), flags, start_inst_index, num_insts, null_mut(), &mut n) };
-        MethodErrorBlob::check("D3DGetTraceInstructionOffsets", hr)?;
+        MethodError::check("D3DGetTraceInstructionOffsets", hr)?;
 
         let mut buffer = Vec::new();
         buffer.resize(n, 0usize);
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), flags, start_inst_index, buffer.len(), buffer.as_mut_ptr(), &mut n) };
-        MethodErrorBlob::check("D3DGetTraceInstructionOffsets", hr)?;
+        MethodError::check("D3DGetTraceInstructionOffsets", hr)?;
         debug_assert_eq!(n, buffer.len(), "number of instructions shouldn't have changed between calls");
 
         Ok(buffer)

@@ -59,13 +59,13 @@ impl Module {
     /// let _ : d3d11::ModuleInstance = module.create_instance("namespace").unwrap();
     /// let _ : d3d11::ModuleInstance = module.create_instance(cstr!("namespace")).unwrap();
     /// ```
-    pub fn create_instance(&self, namespace: impl TryIntoAsOptCStr) -> Result<ModuleInstance, MethodErrorBlob> {
-        let namespace = namespace.try_into().map_err(|e| MethodErrorBlob::new("ID3D11Module::CreateInstance", e))?;
+    pub fn create_instance(&self, namespace: impl TryIntoAsOptCStr) -> Result<ModuleInstance, MethodError> {
+        let namespace = namespace.try_into().map_err(|e| MethodError::new("ID3D11Module::CreateInstance", e))?;
         let namespace = namespace.as_opt_cstr();
 
         let mut instance = null_mut();
         let hr = unsafe { self.0.CreateInstance(namespace, &mut instance) };
-        MethodErrorBlob::check("ID3D11Module::CreateInstance", hr)?;
+        MethodError::check("ID3D11Module::CreateInstance", hr)?;
         Ok(unsafe { ModuleInstance::from_raw(instance) })
     }
 }

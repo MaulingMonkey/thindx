@@ -20,6 +20,8 @@ impl MethodError {
         }
     }
 
+    pub(crate) fn new(method: &'static str, kind: impl Into<ErrorKind>) -> Self { Self(method, kind.into()) }
+
     pub(crate) fn method(&self) -> &'static str { self.0 }
 
     /// Returns the [ErrorKind] of the error

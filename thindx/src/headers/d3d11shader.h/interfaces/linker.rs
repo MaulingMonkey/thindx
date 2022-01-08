@@ -84,9 +84,9 @@ impl Linker {
     /// ### See Also
     /// *   [User clip planes on feature level 9 hardware](https://docs.microsoft.com/en-us/windows/win32/direct3dhlsl/user-clip-planes-on-10level9) (clip plane limit)
     /// *   [Introduction to Buffers in Direct3D 11:  Constant Buffer](https://docs.microsoft.com/en-us/windows/win32/direct3d11/overviews-direct3d-11-resources-buffers-intro#constant-buffer) (cbuffer limits quoted in example)
-    pub fn add_clip_plane_from_cbuffer(&self, cbuffer_slot: u32, cbuffer_entry: u32) -> Result<(), MethodErrorBlob> {
+    pub fn add_clip_plane_from_cbuffer(&self, cbuffer_slot: u32, cbuffer_entry: u32) -> Result<(), MethodError> {
         let hr = unsafe { self.0.AddClipPlaneFromCBuffer(cbuffer_slot, cbuffer_entry) };
-        MethodErrorBlob::check("ID3D11Linker::AddClipPlaneFromCBuffer", hr)
+        MethodError::check("ID3D11Linker::AddClipPlaneFromCBuffer", hr)
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11linker-link)\]
@@ -163,8 +163,8 @@ impl Linker {
     /// ### See Also
     /// *   [examples::d3dcompiler_03_link]
     //#allow_missing_argument_docs
-    pub fn use_library(&self, library_mi: &ModuleInstance) -> Result<(), MethodErrorBlob> {
+    pub fn use_library(&self, library_mi: &ModuleInstance) -> Result<(), MethodError> {
         let hr = unsafe { self.0.UseLibrary(library_mi.as_raw()) };
-        MethodErrorBlob::check("ID3D11Linker::UseLibrary", hr)
+        MethodError::check("ID3D11Linker::UseLibrary", hr)
     }
 }

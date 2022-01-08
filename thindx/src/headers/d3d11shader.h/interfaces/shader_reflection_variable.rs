@@ -56,10 +56,10 @@ impl<'r> ShaderReflectionVariable<'r> {
     /// # use thindx::*;
     /// // TODO
     /// ```
-    pub fn get_desc(&self) -> Result<ShaderVariableDesc<'r>, MethodErrorBlob> {
+    pub fn get_desc(&self) -> Result<ShaderVariableDesc<'r>, MethodError> {
         let mut desc = ShaderVariableDesc::default();
         let hr = unsafe { self.ptr.as_ref().GetDesc(desc.as_mut_ptr()) };
-        MethodErrorBlob::check("ID3D11ShaderReflectionVariable::GetDesc", hr)?;
+        MethodError::check("ID3D11ShaderReflectionVariable::GetDesc", hr)?;
         Ok(desc)
     }
 

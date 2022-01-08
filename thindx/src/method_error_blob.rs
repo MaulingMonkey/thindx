@@ -22,18 +22,6 @@ impl MethodErrorBlob {
 
     pub(crate) fn new(method: &'static str, kind: impl Into<ErrorKind>) -> Self { Self { kind: kind.into(), method: Some(method), errors: Default::default() } }
 
-    pub(crate) fn check(method: &'static str, hr: HRESULT) -> Result<(), Self> {
-        if !SUCCEEDED(hr) {
-            Err(Self {
-                kind:   ErrorKind(hr),
-                method: Some(method),
-                errors: Default::default(),
-            })
-        } else {
-            Ok(())
-        }
-    }
-
     /// ### ⚠️ Safety ⚠️
     /// *   If `!SUCCEEDED(hr)`, this accesses and takes over ownership of `errors` and returns `Err(...)`.
     /// *   Otherwise, `errors` is left untouched.

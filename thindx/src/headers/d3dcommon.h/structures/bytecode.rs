@@ -39,15 +39,15 @@ impl Bytecode {
     /// [Bytecode::from] performs some validation (currently the length field of DXBC bytecode headers) and may perform more in the future without semver changes.
     /// This guards against some accidental UB, but maliciously crafted bytecode - or even filesystem corruption - can probably bypass validation.
     //#allow_missing_argument_docs
-    pub unsafe fn from(bytecode: &[u8]) -> Result<&Self, MethodErrorBlob> {
+    pub unsafe fn from(bytecode: &[u8]) -> Result<&Self, MethodError> {
         // http://timjones.io/blog/archive/2015/09/02/parsing-direct3d-shader-bytecode
         if bytecode.get(0..=3) == Some(b"DXBC") {
             let total_size = match bytecode.get(24..=27) {
                 Some(&[a,b,c,d]) => u32::from_le_bytes([a,b,c,d]),
-                _other           => return Err(MethodErrorBlob::new("Bytecode::from", THINERR::INVALID_BYTECODE)),
+                _other           => return Err(MethodError::new("Bytecode::from", THINERR::INVALID_BYTECODE)),
             };
-            if bytecode.len() != total_size.try_into().map_err(|_| MethodErrorBlob::new("Bytecode::from", THINERR::INVALID_BYTECODE))? {
-                return Err(MethodErrorBlob::new("Bytecode::from", THINERR::INVALID_BYTECODE));
+            if bytecode.len() != total_size.try_into().map_err(|_| MethodError::new("Bytecode::from", THINERR::INVALID_BYTECODE))? {
+                return Err(MethodError::new("Bytecode::from", THINERR::INVALID_BYTECODE));
             }
         }
 
