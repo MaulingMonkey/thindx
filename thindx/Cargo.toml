@@ -2,7 +2,7 @@
 
 [package]
 name            = "thindx"
-version         = "0.0.0-git"
+version         = "0.0.0-unsound.3"
 authors         = ["MaulingMonkey <git@maulingmonkey.com>"]
 edition         = "2018"
 repository      = "https://github.com/MaulingMonkey/thindx"
