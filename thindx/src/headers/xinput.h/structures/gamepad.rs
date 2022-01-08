@@ -80,18 +80,14 @@ use bytemuck::{Pod, Zeroable};
 // TODO: deadzone fns?
 // TODO: pairing fns?
 
-#[cfg(test)] mod tests {
-    use super::*;
-
-    test_layout_only! {
-        Gamepad => unsafe winapi::um::xinput::XINPUT_GAMEPAD {
-            buttons         => wButtons,
-            left_trigger    => bLeftTrigger,
-            right_trigger   => bRightTrigger,
-            left_thumb_x    => sThumbLX,
-            left_thumb_y    => sThumbLY,
-            right_thumb_x   => sThumbRX,
-            right_thumb_y   => sThumbRY,
-        }
+test_layout_only! {
+    Gamepad => unsafe winapi::um::xinput::XINPUT_GAMEPAD {
+        buttons         => wButtons,
+        left_trigger    => bLeftTrigger,
+        right_trigger   => bRightTrigger,
+        left_thumb_x    => sThumbLX,
+        left_thumb_y    => sThumbLY,
+        right_thumb_x   => sThumbRX,
+        right_thumb_y   => sThumbRY,
     }
 }

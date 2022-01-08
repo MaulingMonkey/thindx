@@ -26,16 +26,12 @@ use bytemuck::{Pod, Zeroable};
     pub hid_code:       u8,
 }
 
-#[cfg(test)] mod tests {
-    use super::*;
-    impl Default for Keystroke { fn default() -> Self { Zeroable::zeroed() } }
-    test_layout_only! {
-        Keystroke => unsafe winapi::um::xinput::XINPUT_KEYSTROKE {
-            virtual_key     => VirtualKey,
-            unicode         => Unicode,
-            flags           => Flags,
-            user_index      => UserIndex,
-            hid_code        => HidCode,
-        }
+test_layout! {
+    Keystroke => unsafe winapi::um::xinput::XINPUT_KEYSTROKE {
+        virtual_key     => VirtualKey,
+        unicode         => Unicode,
+        flags           => Flags,
+        user_index      => UserIndex,
+        hid_code        => HidCode,
     }
 }

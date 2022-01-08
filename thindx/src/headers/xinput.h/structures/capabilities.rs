@@ -28,16 +28,12 @@ use bytemuck::{Pod, Zeroable};
     pub vibration:  Vibration,
 }
 
-#[cfg(test)] mod tests {
-    use super::*;
-    impl Default for Capabilities { fn default() -> Self { Zeroable::zeroed() } }
-    test_layout! {
-        Capabilities => unsafe winapi::um::xinput::XINPUT_CAPABILITIES {
-            ty          => Type,
-            sub_type    => SubType,
-            flags       => Flags,
-            gamepad     => Gamepad,
-            vibration   => Vibration,
-        }
+test_layout! {
+    Capabilities => unsafe winapi::um::xinput::XINPUT_CAPABILITIES {
+        ty          => Type,
+        sub_type    => SubType,
+        flags       => Flags,
+        gamepad     => Gamepad,
+        vibration   => Vibration,
     }
 }
