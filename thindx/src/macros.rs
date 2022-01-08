@@ -22,7 +22,28 @@
     };
 }
 
+/// ### Usage
+///
+/// ```no_run
+/// test_layout! {
+///     RustyStruct => unsafe D3D_STRUCT {
+///         rusty_field_a => CppFieldA,
+///         rusty_field_b => CppFieldB,
+///     }
+/// }
+/// ```
 #[cfg(not(test))] macro_rules! test_layout { ( $($tt:tt)* ) => {} }
+
+/// ### Usage
+///
+/// ```no_run
+/// test_layout! {
+///     RustyStruct => unsafe D3D_STRUCT {
+///         rusty_field_a => CppFieldA,
+///         rusty_field_b => CppFieldB,
+///     }
+/// }
+/// ```
 #[cfg(    test )] macro_rules! test_layout {
     (
         $thin:ty => unsafe $d3d:ty {
@@ -53,6 +74,13 @@
     (f as usize) - (s as usize)
 }
 
+/// ### Usage
+///
+/// ```no_run
+/// enumish! { RustyEnum => D3D_ENUM; FQN; RustyEnum::A, RustyEnum::B, RustyEnum::C }
+/// enumish! { RustyEnum => D3D_ENUM;      A, B, C }
+/// enumish! { RustyEnum => D3D_ENUM }
+/// ```
 macro_rules! enumish {
     ( $enumish:ty => $d3d:ty; FQN; $($a:ident :: $b:ident),* $(,)? ) => {
         impl std::fmt::Debug for $enumish {
@@ -117,6 +145,11 @@ macro_rules! enumish {
     };
 }
 
+/// ### Usage
+///
+/// ```no_run
+/// flags! { RustyFlags => D3D_FLAGS; A, B, C }
+/// ```
 macro_rules! flags {
     ( $flagish:ty => $d3d:ty; $($ident:ident),* $(,)? ) => {
         impl std::fmt::Debug for $flagish {
