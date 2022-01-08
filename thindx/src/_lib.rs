@@ -44,8 +44,8 @@ mods! {
     #[path="traits/_traits.rs"] inl mod traits;
 
     inl mod error_kind;
-    inl mod error;
     pub mod errors;
+    inl mod method_error_blob;
     inl mod method_error;
 }
 #[doc(no_inline)] pub use errors::*;
