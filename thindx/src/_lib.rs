@@ -41,6 +41,7 @@ mods! {
     #[path="headers/d3dcompiler.h/d3dcompiler.rs"]  mod d3dcompiler_h;  // d3d mod
     #[path="headers/guiddef.h/guiddef.rs"]          inl mod guiddef_h;
     #[path="headers/unknwn.h/unknwn.rs"]            inl mod unknwn_h;
+    #[path="headers/xinput.h/xinput.rs"]            pub mod xinput;
 
     #[path="traits/_traits.rs"] inl mod traits;
 

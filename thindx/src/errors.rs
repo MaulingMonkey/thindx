@@ -297,6 +297,9 @@ pub mod E {
 pub mod ERROR {
     use super::*;
 
+    /// No error occured
+    pub const SUCCESS                   : ErrorKind = ErrorKind(ERROR_SUCCESS as _);
+
     /// A file was not found
     pub const FILE_NOT_FOUND            : ErrorKind = ErrorKind(ERROR_FILE_NOT_FOUND as _);
 
@@ -308,6 +311,9 @@ pub mod ERROR {
 
     /// The file exists.
     pub const FILE_EXISTS               : ErrorKind = ErrorKind(ERROR_FILE_EXISTS as _);
+
+    /// The device is not connected.
+    pub const DEVICE_NOT_CONNECTED      : ErrorKind = ErrorKind(ERROR_DEVICE_NOT_CONNECTED as _);
 }
 
 /// `0x0000....` • Success "[ErrorKind]"s<br>

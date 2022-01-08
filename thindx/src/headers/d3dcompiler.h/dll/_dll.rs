@@ -14,7 +14,7 @@ use winapi::um::d3d11shader::*;
 
 
 mod constructors;                   pub use constructors::*;
-mod compile;                        pub use compile::*;
+mod compile_;                       pub use compile_::*;
 mod archive;                        pub use archive::*;
 mod parts;                          pub use parts::*;
 mod reflection;                     pub use reflection::*;
@@ -30,7 +30,7 @@ mod d3d11_methods;                  pub use d3d11_methods::*;
 ///
 /// &nbsp;   **[Constructors](#constructors)**
 /// [new](Compiler::new)(version: [u32]) -> Result&lt;[Compiler]&gt;
-/// 
+///
 /// &nbsp;   **[Compile & Preprocess HLSL to Bytecode](#compile)**
 /// [compile_from_file](Compiler::compile_from_file)(...) - compile hlsl to bytecode
 /// [compile](Compiler::compile)(...) - compile hlsl to bytecode

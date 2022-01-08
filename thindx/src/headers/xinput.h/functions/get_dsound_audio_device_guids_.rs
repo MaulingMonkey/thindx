@@ -1,0 +1,30 @@
+use crate::*;
+use crate::xinput::*;
+
+use bytemuck::Zeroable;
+
+
+
+/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetdsoundaudiodeviceguids)\]
+/// XInputGetDSoundAudioDeviceGuids
+///
+/// Get DirectSound Audio Device GUIDs (N/A for Windows Store apps, isn't supported by Windows 8.)
+///
+/// | XInput | State    |
+/// | ------ | -------- |
+/// | 1.4   | N/A       |
+/// | 1.3   | Available |
+/// | 9.1.0 | Available |
+///
+/// ### Errors
+/// *   [ERROR::DEVICE_NOT_CONNECTED]
+/// *   [THINERR::MISSING_DLL_EXPORT]
+#[deprecated = "Deprecated in favor of xinput::get_audio_device_ids.  Unavailable for Windows Store apps, may fail on Windows 8."]
+pub fn get_dsound_audio_device_guids(user_index: impl Into<User>) -> Result<DSoundAudioDeviceGuids, MethodError> {
+    #[allow(non_snake_case)] let XInputGetDSoundAudioDeviceGuids = Imports::get().XInputGetDSoundAudioDeviceGuids.ok_or(MethodError::new("XInputGetDSoundAudioDeviceGuids", THINERR::MISSING_DLL_EXPORT))?;
+
+    let mut guids = DSoundAudioDeviceGuids::zeroed();
+    let code = unsafe { XInputGetDSoundAudioDeviceGuids(user_index.into().into(), &mut guids.dsound_render_guid as *mut _ as *mut _, &mut guids.dsound_capture_guid as *mut _ as *mut _) };
+    check_error_success("XInputGetDSoundAudioDeviceGuids", code)?;
+    Ok(guids)
+}
