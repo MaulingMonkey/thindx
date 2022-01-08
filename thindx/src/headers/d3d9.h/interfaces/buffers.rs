@@ -362,14 +362,14 @@ mod vertex_buffer {
             match index_loop_alloc_size(n).unwrap_err().kind() {
                 E::OUTOFMEMORY              => {}, // expected
                 D3DERR::OUTOFVIDEOMEMORY    => {}, // expected
-                THIN3D9ERR::ALLOC_OVERFLOW  => {}, // expected
+                THINERR::ALLOC_OVERFLOW     => {}, // expected
                 other => panic!("index_loop_alloc_size(0x{:08x}), expected a different kind of error, got: {}", n, other),
             }
 
             match vertex_loop_alloc_size(n).unwrap_err().kind() {
                 E::OUTOFMEMORY              => {}, // expected
                 D3DERR::OUTOFVIDEOMEMORY    => {}, // expected
-                THIN3D9ERR::ALLOC_OVERFLOW  => {}, // expected
+                THINERR::ALLOC_OVERFLOW     => {}, // expected
                 other => panic!("vertex_loop_alloc_size(0x{:08x}), expected a different kind of error, got: {}", n, other),
             }
         }

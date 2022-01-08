@@ -117,12 +117,11 @@ impl ErrorKind {
             ERROR::PATH_NOT_FOUND               => Some(("ERROR_PATH_NOT_FOUND",                "The system cannot find the path specified.")),
             ERROR::FILE_EXISTS                  => Some(("ERROR_FILE_EXISTS",                   "The file exists.")),
 
-            THIN3D9ERR::SLICE_OVERFLOW          => Some(("THIN3DERR_SLICE_OVERFLOW",        "Large slice passed to D3D API that only accepts a 32-bit length")),
-            THIN3D9ERR::DEVICE_MISMATCH         => Some(("THIN3DERR_DEVICE_MISMATCH",       "Resource belonging to one Device was passed to a different Device.  To avoid undefined behavior, Direct3D was not called.")),
-            THIN3D9ERR::ALLOC_OVERFLOW          => Some(("THIN3DERR_ALLOC_OVERFLOW",        "Large allocation size passed to Device.  To avoid undefined behavior from arithmetic overflows, Direct3D was not called.")),
-            THIN3D9ERR::INVALID_STRUCT_FIELD    => Some(("THIN3DERR_INVALID_STRUCT_FIELD",  "A structure contained some kind of field such as `dwSize` or `iType` that was invalid.")),
-
-            THINERR::MISSING_DLL_EXPORT         => Some(("THINERR_MISSING_DLL_EXPORT",      "This version of `d3dcompiler_##.dll` doesn't support this fn.")),
+            THINERR::SLICE_OVERFLOW             => Some(("THINERR_SLICE_OVERFLOW",          "Large slice passed to a DirectX API that only accepts a 32-bit length")),
+            THINERR::DEVICE_MISMATCH            => Some(("THINERR_DEVICE_MISMATCH",         "Resource belonging to one Device was passed to a different Device.  To avoid undefined behavior, DirectX was not called.")),
+            THINERR::ALLOC_OVERFLOW             => Some(("THINERR_ALLOC_OVERFLOW",          "Large allocation size was requested.  To avoid undefined behavior from arithmetic overflows, DirectX was not called.")),
+            THINERR::INVALID_STRUCT_FIELD       => Some(("THINERR_INVALID_STRUCT_FIELD",    "A structure contained some kind of field such as `dwSize` or `iType` that was invalid.")),
+            THINERR::MISSING_DLL_EXPORT         => Some(("THINERR_MISSING_DLL_EXPORT",      "This version of the DLL doesn't support this fn.")),
             THINERR::SLICE_TOO_LARGE            => Some(("THINERR_SLICE_TOO_LARGE",         "Slice length exceeded some kind of length limit.")),
             THINERR::STRING_CONTAINS_NULS       => Some(("THINERR_STRING_CONTAINS_NULS",    "String contains unexpected internal `\\0`s when being passed to a function taking C-style `\\0`-*terminated* strings.")),
             THINERR::INVALID_BYTECODE           => Some(("THINERR_INVALID_BYTECODE",        "Bytecode is invalid (bad header, invalid checksum, wrong length, etc.)")),

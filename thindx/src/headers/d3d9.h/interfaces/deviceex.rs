@@ -93,7 +93,7 @@ pub trait IDirect3DDevice9ExExt : private::Sealed {
     ///
     /// ### Returns
     ///
-    /// *   [THIN3D9ERR::SLICE_OVERFLOW]    if `resources.len()` > `65535`
+    /// *   [THINERR::SLICE_OVERFLOW]    if `resources.len()` > `65535`
     /// *   [D3DERR::INVALIDCALL]       ???
     /// *   Ok(
     ///
@@ -111,7 +111,7 @@ pub trait IDirect3DDevice9ExExt : private::Sealed {
         // "... up to a maximum of 65535."
         let len : u16 = match resources.len().try_into() {
             Ok(len) => len,
-            Err(_) => return THIN3D9ERR::SLICE_OVERFLOW,
+            Err(_) => return THINERR::SLICE_OVERFLOW,
         };
         let len = u32::from(len);
         let resources = resources.as_mut_ptr().cast(); // XXX
@@ -334,10 +334,10 @@ pub trait IDirect3DDevice9ExExt : private::Sealed {
         let dirty_region = match dirty_region {
             None => null::<RGNDATA>(),
             Some(dr) => {
-                if dr.rdh.dwSize as usize   != std::mem::size_of::<RGNDATAHEADER>() { return Err(MethodError("Device::present", THIN3D9ERR::INVALID_STRUCT_FIELD)); }
-                if dr.rdh.iType             != RDH_RECTANGLES                       { return Err(MethodError("Device::present", THIN3D9ERR::INVALID_STRUCT_FIELD)); }
-                if dr.rdh.nCount as usize   > dr.buffer.len()                       { return Err(MethodError("Device::present", THIN3D9ERR::INVALID_STRUCT_FIELD)); }
-                if dr.rdh.nRgnSize as usize > std::mem::size_of_val(dr)             { return Err(MethodError("Device::present", THIN3D9ERR::INVALID_STRUCT_FIELD)); }
+                if dr.rdh.dwSize as usize   != std::mem::size_of::<RGNDATAHEADER>() { return Err(MethodError("Device::present", THINERR::INVALID_STRUCT_FIELD)); }
+                if dr.rdh.iType             != RDH_RECTANGLES                       { return Err(MethodError("Device::present", THINERR::INVALID_STRUCT_FIELD)); }
+                if dr.rdh.nCount as usize   > dr.buffer.len()                       { return Err(MethodError("Device::present", THINERR::INVALID_STRUCT_FIELD)); }
+                if dr.rdh.nRgnSize as usize > std::mem::size_of_val(dr)             { return Err(MethodError("Device::present", THINERR::INVALID_STRUCT_FIELD)); }
                 let dr : *const RgnData = dr;
                 dr.cast()
             },
@@ -410,8 +410,8 @@ pub trait IDirect3DDevice9ExExt : private::Sealed {
     /// ```
     fn set_convolution_mono_kernel(&self, rows: &mut [f32], cols: &mut [f32]) -> Result<(), MethodError> {
         // XXX: should rows/cols be non-mut?  Not sure if d3d *actually* writes those values or not...
-        let width  : u32 = rows.len().try_into().map_err(|_| MethodError("DeviceEx::set_convolution_mono_kernel", THIN3D9ERR::SLICE_OVERFLOW))?;
-        let height : u32 = cols.len().try_into().map_err(|_| MethodError("DeviceEx::set_convolution_mono_kernel", THIN3D9ERR::SLICE_OVERFLOW))?;
+        let width  : u32 = rows.len().try_into().map_err(|_| MethodError("DeviceEx::set_convolution_mono_kernel", THINERR::SLICE_OVERFLOW))?;
+        let height : u32 = cols.len().try_into().map_err(|_| MethodError("DeviceEx::set_convolution_mono_kernel", THINERR::SLICE_OVERFLOW))?;
         let hr = unsafe { self.as_winapi().SetConvolutionMonoKernel(width, height, rows.as_mut_ptr(), cols.as_mut_ptr()) };
         MethodError::check("IDirect3DDevice9Ex::SetConvolutionMonoKernel", hr)
     }

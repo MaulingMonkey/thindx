@@ -55,7 +55,7 @@ pub trait IDirect3DSwapChain9Ext : private::Sealed {
     ///
     /// Retrieves a back buffer from the swap chain of the device.
     fn get_back_buffer(&self, i_back_buffer: impl TryInto<UINT>, ty: impl Into<BackBufferType>) -> Result<Self::Surface, MethodError> {
-        let i_back_buffer = i_back_buffer.try_into().map_err(|_| MethodError("IDirect3DSwapChain9::GetBackBuffer", THIN3D9ERR::SLICE_OVERFLOW))?;
+        let i_back_buffer = i_back_buffer.try_into().map_err(|_| MethodError("IDirect3DSwapChain9::GetBackBuffer", THINERR::SLICE_OVERFLOW))?;
         let ty = ty.into().into();
         let mut back_buffer = null_mut();
         let hr = unsafe { self.as_winapi().GetBackBuffer(i_back_buffer, ty, &mut back_buffer) };
@@ -159,10 +159,10 @@ pub trait IDirect3DSwapChain9Ext : private::Sealed {
         let dirty_region    = match dirty_region {
             None => null::<RGNDATA>(),
             Some(dr) => {
-                if dr.rdh.dwSize as usize   != std::mem::size_of::<RGNDATAHEADER>() { return Err(MethodError("IDirect3DSwapChain9Ext::present", THIN3D9ERR::INVALID_STRUCT_FIELD)); }
-                if dr.rdh.iType             != RDH_RECTANGLES                       { return Err(MethodError("IDirect3DSwapChain9Ext::present", THIN3D9ERR::INVALID_STRUCT_FIELD)); }
-                if dr.rdh.nCount as usize   > dr.buffer.len()                       { return Err(MethodError("IDirect3DSwapChain9Ext::present", THIN3D9ERR::INVALID_STRUCT_FIELD)); }
-                if dr.rdh.nRgnSize as usize > std::mem::size_of_val(dr)             { return Err(MethodError("IDirect3DSwapChain9Ext::present", THIN3D9ERR::INVALID_STRUCT_FIELD)); }
+                if dr.rdh.dwSize as usize   != std::mem::size_of::<RGNDATAHEADER>() { return Err(MethodError("IDirect3DSwapChain9Ext::present", THINERR::INVALID_STRUCT_FIELD)); }
+                if dr.rdh.iType             != RDH_RECTANGLES                       { return Err(MethodError("IDirect3DSwapChain9Ext::present", THINERR::INVALID_STRUCT_FIELD)); }
+                if dr.rdh.nCount as usize   > dr.buffer.len()                       { return Err(MethodError("IDirect3DSwapChain9Ext::present", THINERR::INVALID_STRUCT_FIELD)); }
+                if dr.rdh.nRgnSize as usize > std::mem::size_of_val(dr)             { return Err(MethodError("IDirect3DSwapChain9Ext::present", THINERR::INVALID_STRUCT_FIELD)); }
                 let dr : *const RgnData = dr;
                 dr.cast()
             },

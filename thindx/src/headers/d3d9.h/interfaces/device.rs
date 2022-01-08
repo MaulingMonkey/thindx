@@ -492,7 +492,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
         // !0 will fail OUTOFMEMORY
         // !0/2 spammed will fail OUTOFVIDEOMEMORY
         // !0-4 spammed will "succeed", hinting at an arithmetic overflow within d3d or the driver
-        if length > MAX_BUFFER_ALLOC { return Err(MethodError("Device::create_index_buffer", THIN3D9ERR::ALLOC_OVERFLOW)); }
+        if length > MAX_BUFFER_ALLOC { return Err(MethodError("Device::create_index_buffer", THINERR::ALLOC_OVERFLOW)); }
 
         let _ = shared_handle;
         let mut buffer = null_mut();
@@ -638,13 +638,13 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// *   [D3DERR::INVALIDCALL]       if `usage` or `pool` is invalid
     /// *   [D3DERR::OUTOFVIDEOMEMORY]  if allocation failed (driver or gpu memory)
     /// *   [E::OUTOFMEMORY]       if allocation failed (driver or d3d runtime)
-    /// *   [THIN3D9ERR::ALLOC_OVERFLOW]    if allocation rejected by thin3d9 to avoid possible UB
+    /// *   [THINERR::ALLOC_OVERFLOW]    if allocation rejected by thin3d9 to avoid possible UB
     /// *   Ok([VertexBuffer])
     fn create_vertex_buffer(&self, length: u32, usage: impl Into<Usage>, fvf: impl Into<FVF>, pool: impl Into<Pool>, _shared_handle: impl SharedHandleParam) -> Result<VertexBuffer, MethodError> {
         // !0 will fail OUTOFMEMORY
         // !0/2 spammed will fail OUTOFVIDEOMEMORY
         // !0-4 spammed will "succeed", hinting at an arithmetic overflow within d3d or the driver
-        if length > MAX_BUFFER_ALLOC { return Err(MethodError("Device::create_vertex_buffer", THIN3D9ERR::ALLOC_OVERFLOW)); }
+        if length > MAX_BUFFER_ALLOC { return Err(MethodError("Device::create_vertex_buffer", THINERR::ALLOC_OVERFLOW)); }
 
         let mut buffer = null_mut();
         let hr = unsafe { self.as_winapi().CreateVertexBuffer(length, usage.into().into(), fvf.into().into(), pool.into().into(), &mut buffer, null_mut()) };
@@ -1735,10 +1735,10 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
         let dirty_region    = match dirty_region {
             None => null::<RGNDATA>(),
             Some(dr) => {
-                if dr.rdh.dwSize as usize   != std::mem::size_of::<RGNDATAHEADER>() { return Err(MethodError("IDirect3DDevice9Ext::present", THIN3D9ERR::INVALID_STRUCT_FIELD)); }
-                if dr.rdh.iType             != RDH_RECTANGLES                       { return Err(MethodError("IDirect3DDevice9Ext::present", THIN3D9ERR::INVALID_STRUCT_FIELD)); }
-                if dr.rdh.nCount as usize   > dr.buffer.len()                       { return Err(MethodError("IDirect3DDevice9Ext::present", THIN3D9ERR::INVALID_STRUCT_FIELD)); }
-                if dr.rdh.nRgnSize as usize > std::mem::size_of_val(dr)             { return Err(MethodError("IDirect3DDevice9Ext::present", THIN3D9ERR::INVALID_STRUCT_FIELD)); }
+                if dr.rdh.dwSize as usize   != std::mem::size_of::<RGNDATAHEADER>() { return Err(MethodError("IDirect3DDevice9Ext::present", THINERR::INVALID_STRUCT_FIELD)); }
+                if dr.rdh.iType             != RDH_RECTANGLES                       { return Err(MethodError("IDirect3DDevice9Ext::present", THINERR::INVALID_STRUCT_FIELD)); }
+                if dr.rdh.nCount as usize   > dr.buffer.len()                       { return Err(MethodError("IDirect3DDevice9Ext::present", THINERR::INVALID_STRUCT_FIELD)); }
+                if dr.rdh.nRgnSize as usize > std::mem::size_of_val(dr)             { return Err(MethodError("IDirect3DDevice9Ext::present", THINERR::INVALID_STRUCT_FIELD)); }
                 let dr : *const RgnData = dr;
                 dr.cast()
             },
@@ -1849,13 +1849,13 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// device.set_indices(Some(&tri)).unwrap();    // bind the index buffer
     /// device.set_indices(None).unwrap();          // unbind the index buffer
     ///
-    /// assert_eq!(device2.set_indices(&tri), THIN3D9ERR::DEVICE_MISMATCH);
+    /// assert_eq!(device2.set_indices(&tri), THINERR::DEVICE_MISMATCH);
     /// ```
     ///
     /// ### Returns
     ///
     /// *   [D3DERR::INVALIDCALL]       (perhaps only on an invalid [IndexBuffer] that thin3d9's API prevents?)
-    /// *   [THIN3D9ERR::DEVICE_MISMATCH]   If the [IndexBuffer] was created with a different [Device].
+    /// *   [THINERR::DEVICE_MISMATCH]   If the [IndexBuffer] was created with a different [Device].
     /// *   Ok(())
     fn set_indices<'ib>(&self, index_data: impl Into<Option<&'ib IndexBuffer>>) -> Result<(), MethodError> {
         let ptr = match index_data.into() {
@@ -2149,13 +2149,13 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// device.set_stream_source(0, Some(&tri), 0, 4*3).unwrap(); // bind the vertex buffer
     /// device.set_stream_source(0, None,       0, 0  ).unwrap(); // unbind the vertex buffer
     ///
-    /// assert_eq!(device2.set_stream_source(0, &tri, 0, 4*3), THIN3D9ERR::DEVICE_MISMATCH);
+    /// assert_eq!(device2.set_stream_source(0, &tri, 0, 4*3), THINERR::DEVICE_MISMATCH);
     /// ```
     ///
     /// ### Returns
     ///
     /// *   [D3DERR::INVALIDCALL]       if the [VertexBuffer] belongs to another device?
-    /// *   [THIN3D9ERR::DEVICE_MISMATCH]   If the [IndexBuffer] was created with a different [Device].
+    /// *   [THINERR::DEVICE_MISMATCH]   If the [IndexBuffer] was created with a different [Device].
     /// *   Ok(`()`)
     fn set_stream_source<'b>(&self, stream_number: u32, stream_data: impl Into<Option<&'b VertexBuffer>>, offset_in_bytes: u32, stride: u32) -> Result<(), MethodError> {
         let stream_data = match stream_data.into() {

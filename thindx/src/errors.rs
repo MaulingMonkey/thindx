@@ -30,49 +30,41 @@ use winapi::shared::winerror::*;
 //  0x87C                       Direct3D 11
 //  0x898                       DirectWrite
 //  0x899                       Direct2D
-// 0xA73D                       Thin3D
+// 0xA7D8                       7D8 = 7DX = **T**hin**DX**
 
-/// `0xA73D9...` • **T**hinDX **D**irect**3D9** [ErrorKind]s
+/// `0xA7D8....` • **T**hin**DX** [ErrorKind]s
 ///
 /// * `0xA.......`  - **S**everity and **C**ustomer bits for [HRESULT](https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-erref/0642cb2f-2075-4469-918c-4441e69c548a)s
-/// * `0x.73D....`  - **T**hin **3D** error codes
-/// * `0x....9001`  - D3D**9** error codes
-pub mod THIN3D9ERR {
+/// * `0x.7D8....`  - **T**hin **DX** error codes
+pub mod THINERR {
     use super::*;
 
-    /// `0xA73D9001`    Large slice passed to D3D API that only accepts a 32-bit length.
-    pub const SLICE_OVERFLOW    : ErrorKind = ErrorKind(0xA73D9001);
+    // General errors
 
-    /// `0xA73D9002`    Resource belonging to one [Device] was passed to a different [Device].  To avoid undefined behavior, Direct3D was not called.
-    pub const DEVICE_MISMATCH   : ErrorKind = ErrorKind(0xA73D9002);
+    /// `0xA7D80001`    Large slice passed to a DirectX API that only accepts a 32-bit length.
+    pub const SLICE_OVERFLOW    : ErrorKind = ErrorKind(0xA7D80001);
 
-    /// `0xA73D9003`    Large allocation was requested.  thin3d9 prevented the request to avoid arithmetic overflows inside of Direct3D / drivers which could lead to undefined behavior.
-    pub const ALLOC_OVERFLOW    : ErrorKind = ErrorKind(0xA73D9003);
+    /// `0xA7D80002`    Resource belonging to one [Device] was passed to a different [Device].  To avoid undefined behavior, DirectX was not called.
+    pub const DEVICE_MISMATCH   : ErrorKind = ErrorKind(0xA7D80002);
 
-    /// `0xA73D9004`    A structure contained some kind of field such as `dwSize` or `iType` that was invalid.
-    pub const INVALID_STRUCT_FIELD : ErrorKind = ErrorKind(0xA73D9004);
-}
+    /// `0xA7D80003`    Large allocation size was requested.  To avoid undefined behavior from arithmetic overflows, DirectX was not called.
+    pub const ALLOC_OVERFLOW    : ErrorKind = ErrorKind(0xA7D80003);
 
-/// `0xA73DC...` • **T**hinDX **D**irect**3D** **C**ompiler [ErrorKind]s
-///
-/// * `0xA.......`  - **S**everity and **C**ustomer bits for [HRESULT](https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-erref/0642cb2f-2075-4469-918c-4441e69c548a)s
-/// * `0x.73D....`  - **T**hin **3D** error codes
-/// * `0x....C001`  - **C**ompiler error codes
-pub mod THINERR { // TODO: rename to THIN3DERR
-    use super::*;
+    /// `0xA7D80004`    A structure contained some kind of field such as `dwSize` or `iType` that was invalid.
+    pub const INVALID_STRUCT_FIELD : ErrorKind = ErrorKind(0xA7D80004);
 
-    /// `0xA73DC001`    This version of `d3dcompiler_##.dll` doesn't support this fn
-    pub const MISSING_DLL_EXPORT : ErrorKind = ErrorKind(0xA73DC001);
+    /// `0xA7D80005`    This version of the DLL doesn't support this fn
+    pub const MISSING_DLL_EXPORT : ErrorKind = ErrorKind(0xA7D80005);
 
-    /// `0xA73DC002`    Slice length exceeded some kind of length limit (typically a conversion to a 32-bit length, or
+    /// `0xA7D80006`    Slice length exceeded some kind of length limit (typically a conversion to a 32-bit length, or
     ///                 an extra cap introduced by thindx to avoid undefined behavior from allocation size overflows.)
-    pub const SLICE_TOO_LARGE : ErrorKind = ErrorKind(0xA73DC002);
+    pub const SLICE_TOO_LARGE : ErrorKind = ErrorKind(0xA7D80006);
 
-    /// `0xA73DC003`    String contains unexpected internal `\0`s when being passed to a function taking C-style `\0`-*terminated* strings.
-    pub const STRING_CONTAINS_NULS : ErrorKind = ErrorKind(0xA73DC003);
+    /// `0xA7D80007`    String contains unexpected internal `\0`s when being passed to a function taking C-style `\0`-*terminated* strings.
+    pub const STRING_CONTAINS_NULS : ErrorKind = ErrorKind(0xA7D80007);
 
-    /// `0xA73DC004`    Bytecode is invalid (bad header, invalid checksum, wrong length, etc.)
-    pub const INVALID_BYTECODE : ErrorKind = ErrorKind(0xA73DC004);
+    /// `0xA7D80008`    Bytecode is invalid (bad header, invalid checksum, wrong length, etc.)
+    pub const INVALID_BYTECODE : ErrorKind = ErrorKind(0xA7D80008);
 }
 
 /// `0x887C....` • Direct3D 11 [ErrorKind]s
