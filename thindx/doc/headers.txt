@@ -9,3 +9,5 @@ shared\d3d9types.h
 
 um\d3d11shader.h
 um\d3d11shadertracing.h
+
+um\xinput.h

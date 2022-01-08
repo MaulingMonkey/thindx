@@ -19,6 +19,7 @@
 //! | [d3d9types.h](#d3d9typesh) |   | ⚠️ 17 of 71 | ⚠️ 39 of 54 |   |
 //! | [d3d11shader.h](#d3d11shaderh) | ✔️ 12 of 12 | ✔️ 9 of 9 | ✔️ 1 of 1 |   |
 //! | [d3d11shadertracing.h](#d3d11shadertracingh) | ❌ 0 of 2 | ❌ 0 of 11 | ❌ 0 of 3 |   |
+//! | [xinput.h](#xinputh) |   | ❌ 0 of 6 |   | ❌ 0 of 8 |
 //!
 //!
 //! <br>
@@ -695,4 +696,27 @@
 //! `D3D11_SHADER_TYPE` →&nbsp;❌ <br>
 //! `D3D11_TRACE_GS_INPUT_PRIMITIVE` →&nbsp;❌ <br>
 //! `D3D11_TRACE_REGISTER_TYPE` →&nbsp;❌ <br>
+//!
+//! <br>
+//!
+//! # xinput.h
+//!
+//! ### C++ Structs -> Rust Structs
+//!
+//! `XINPUT_BATTERY_INFORMATION` →&nbsp;❌ <br>
+//! `XINPUT_CAPABILITIES` →&nbsp;❌ <br>
+//! `XINPUT_GAMEPAD` →&nbsp;❌ <br>
+//! `XINPUT_KEYSTROKE` →&nbsp;❌ <br>
+//! `XINPUT_STATE` →&nbsp;❌ <br>
+//! `XINPUT_VIBRATION` →&nbsp;❌ <br>
+//! ### C++ Functions → Rust Fns
+//!
+//! `XInputEnable` →&nbsp;❌ <br>
+//! `XInputGetAudioDeviceIds` →&nbsp;❌ <br>
+//! `XInputGetBatteryInformation` →&nbsp;❌ <br>
+//! `XInputGetCapabilities` →&nbsp;❌ <br>
+//! `XInputGetDSoundAudioDeviceGuids` →&nbsp;❌ <br>
+//! `XInputGetKeystroke` →&nbsp;❌ <br>
+//! `XInputGetState` →&nbsp;❌ <br>
+//! `XInputSetState` →&nbsp;❌ <br>
 use crate::*;
