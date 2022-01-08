@@ -39,6 +39,9 @@ fn check(mut args: std::env::Args) {
     let mut path = orig_path.split(|ch| "/\\".contains(ch)).collect::<Vec<_>>();
 
     let (package, mut path) = match &mut path[..] {
+        ["xtask", ..]               => return, // already tested by building xtask
+        ["thindx", "Cargo.toml"]    => return run("cargo check -p thindx"),
+
         ["thindx", "examples", example_rs] => {
             if let Some(example) = example_rs.strip_suffix(".rs") {
                 let mut cmd = Command::parse("cargo check --example").unwrap();
