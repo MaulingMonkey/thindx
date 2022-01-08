@@ -51,11 +51,21 @@ Additionally, individual extension traits / functions / methods will likely neve
 
 ### Project Status
 
+[examples](https://docs.rs/thindx/*/thindx/_examples/)
+•
+[header coverage](https://docs.rs/thindx/*/thindx/_headers/)
+•
+[docs.rs](https://docs.rs/thindx)
+•
+[lib.rs](https://lib.rs/crates/thindx)
+•
+[crates.io](https://crates.io/crates/thindx)
+
 | DirectX           | API   | Tests | Sound | Stable| Notes |
 | ----------------- | ----- | ----- | ----- | ----- | ----- |
 | `d3dcompiler.dll` | ✔️    | ⚠️    | ⚠️    | ❌    | first goal to stabilize
 | `dxcompiler.dll`  | ❌    | ❌    | ❌    | ❌    |
-| d3d9              | ⚠️    | ❌    | ❌    | ❌    | merging
+| d3d9              | ⚠️    | ⚠️    | ❌    | ❌    |
 | d3d11             | ❌    | ❌    | ❌    | ❌    |
 | d3d12             | ❌    | ❌    | ❌    | ❌    |
 | dxgi              | ❌    | ❌    | ❌    | ❌    |
