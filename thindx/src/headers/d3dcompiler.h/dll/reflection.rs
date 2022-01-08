@@ -48,13 +48,13 @@ impl Compiler {
     ///
     /// ### Remarks
     /// *   This was introduced by d3dcompiler_40.dll, and is unavailable in earlier versions.
-    pub fn reflect<I: Raw>(&self, src_data: &Bytecode) -> Result<I, Error> where I::Raw : Interface {
-        let f = self.D3DReflect.ok_or(Error::new("D3DReflect", THINERR::MISSING_DLL_EXPORT))?;
+    pub fn reflect<I: Raw>(&self, src_data: &Bytecode) -> Result<I, MethodErrorBlob> where I::Raw : Interface {
+        let f = self.D3DReflect.ok_or(MethodErrorBlob::new("D3DReflect", THINERR::MISSING_DLL_EXPORT))?;
         let src_data = src_data.as_bytes();
 
         let mut reflector = null_mut();
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), &I::Raw::uuidof(), &mut reflector) };
-        Error::check("D3DReflect", hr)?;
+        MethodErrorBlob::check("D3DReflect", hr)?;
         Ok(unsafe { I::from_raw(reflector.cast()) })
     }
 
@@ -92,7 +92,7 @@ impl Compiler {
     ///
     /// ### Remarks
     /// *   This was introduced by d3dcompiler_40.dll, and is unavailable in earlier versions.
-    pub fn reflect11(&self, src_data: &Bytecode) -> Result<d3d11::ShaderReflection, Error> {
+    pub fn reflect11(&self, src_data: &Bytecode) -> Result<d3d11::ShaderReflection, MethodErrorBlob> {
         self.reflect(src_data)
     }
 
@@ -137,13 +137,13 @@ impl Compiler {
     /// ### See Also
     /// *   [d3d11::LibraryReflection] for a more complete example
     // #[requires(d3dcompiler=47)] // ?
-    pub fn reflect_library<I: Raw>(&self, src_data: &Bytecode) -> Result<I, Error> where I::Raw : Interface {
-        let f = self.D3DReflectLibrary.ok_or(Error::new("D3DReflectLibrary", THINERR::MISSING_DLL_EXPORT))?;
+    pub fn reflect_library<I: Raw>(&self, src_data: &Bytecode) -> Result<I, MethodErrorBlob> where I::Raw : Interface {
+        let f = self.D3DReflectLibrary.ok_or(MethodErrorBlob::new("D3DReflectLibrary", THINERR::MISSING_DLL_EXPORT))?;
         let src_data = src_data.as_bytes();
 
         let mut reflector = null_mut();
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), &I::Raw::uuidof(), &mut reflector) };
-        Error::check("D3DReflectLibrary", hr)?;
+        MethodErrorBlob::check("D3DReflectLibrary", hr)?;
         Ok(unsafe { I::from_raw(reflector.cast()) })
     }
 
@@ -183,7 +183,7 @@ impl Compiler {
     /// ### See Also
     /// *   [d3d11::LibraryReflection] for a more complete example
     // #[requires(d3dcompiler=47)] // ?
-    pub fn reflect_library_11(&self, src_data: &Bytecode) -> Result<d3d11::LibraryReflection, Error> {
+    pub fn reflect_library_11(&self, src_data: &Bytecode) -> Result<d3d11::LibraryReflection, MethodErrorBlob> {
         self.reflect_library(src_data)
     }
 }

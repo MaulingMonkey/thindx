@@ -114,10 +114,10 @@ impl<'r> FunctionParameterReflection<'r> {
     ///     first_out_component: 4294967295,
     /// }
     /// ```
-    pub fn get_desc(&self) -> Result<ParameterDesc<'r>, Error> {
+    pub fn get_desc(&self) -> Result<ParameterDesc<'r>, MethodErrorBlob> {
         let mut desc = ParameterDesc::default();
         let hr = unsafe { self.ptr.as_ref().GetDesc(&mut desc as *mut _ as *mut _) };
-        Error::check("ID3D11FunctionParameterReflection::GetDesc", hr)?;
+        MethodErrorBlob::check("ID3D11FunctionParameterReflection::GetDesc", hr)?;
         Ok(desc)
     }
 }

@@ -61,10 +61,10 @@ impl<'r> ShaderReflectionType<'r> {
     /// # use thindx::*;
     /// // TODO
     /// ```
-    pub fn get_desc(&self) -> Result<ShaderTypeDesc<'r>, Error> {
+    pub fn get_desc(&self) -> Result<ShaderTypeDesc<'r>, MethodErrorBlob> {
         let mut desc = ShaderTypeDesc::default();
         let hr = unsafe { self.ptr.as_ref().GetDesc(desc.as_mut_ptr()) };
-        Error::check("ID3D11ShaderReflectionType::GetDesc", hr)?;
+        MethodErrorBlob::check("ID3D11ShaderReflectionType::GetDesc", hr)?;
         Ok(desc)
     }
 
@@ -185,12 +185,12 @@ impl<'r> ShaderReflectionType<'r> {
     /// // TODO
     /// ```
     //#allow_missing_argument_docs
-    pub fn implements_interface(&self, base: &ShaderReflectionType) -> Result<bool, Error> {
+    pub fn implements_interface(&self, base: &ShaderReflectionType) -> Result<bool, MethodErrorBlob> {
         let hr = unsafe { self.ptr.as_ref().ImplementsInterface(base.as_raw()) };
         if hr == S_FALSE {
             Ok(false)
         } else {
-            Error::check("ID3D11ShaderReflectionType::ImplementsInterface", hr)?;
+            MethodErrorBlob::check("ID3D11ShaderReflectionType::ImplementsInterface", hr)?;
             Ok(true)
         }
     }
@@ -213,12 +213,12 @@ impl<'r> ShaderReflectionType<'r> {
     /// // TODO
     /// ```
     //#allow_missing_argument_docs
-    pub fn is_equal(&self, ty: &ShaderReflectionType) -> Result<bool, Error> {
+    pub fn is_equal(&self, ty: &ShaderReflectionType) -> Result<bool, MethodErrorBlob> {
         let hr = unsafe { self.ptr.as_ref().IsEqual(ty.as_raw()) };
         if hr == S_FALSE {
             Ok(false)
         } else {
-            Error::check("ID3D11ShaderReflectionType::IsEqual", hr)?;
+            MethodErrorBlob::check("ID3D11ShaderReflectionType::IsEqual", hr)?;
             Ok(true)
         }
     }
@@ -241,12 +241,12 @@ impl<'r> ShaderReflectionType<'r> {
     /// // TODO
     /// ```
     //#allow_missing_argument_docs
-    pub fn is_of_type(&self, ty: &ShaderReflectionType) -> Result<bool, Error> {
+    pub fn is_of_type(&self, ty: &ShaderReflectionType) -> Result<bool, MethodErrorBlob> {
         let hr = unsafe { self.ptr.as_ref().IsOfType(ty.as_raw()) };
         if hr == S_FALSE {
             Ok(false)
         } else {
-            Error::check("ID3D11ShaderReflectionType::IsOfType", hr)?;
+            MethodErrorBlob::check("ID3D11ShaderReflectionType::IsOfType", hr)?;
             Ok(true)
         }
     }

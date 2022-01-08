@@ -27,12 +27,12 @@ impl Compiler {
     ///
     /// ### Remarks
     /// *   This was introduced by d3dcompiler_47.dll, and is unavailable in earlier versions.
-    pub fn create_function_linking_graph(&self, flags: Option<void::Void>) -> Result<d3d11::FunctionLinkingGraph, Error> {
-        let f = self.D3DCreateFunctionLinkingGraph.ok_or(Error::new("D3DCreateFunctionLinkingGraph", THINERR::MISSING_DLL_EXPORT))?;
+    pub fn create_function_linking_graph(&self, flags: Option<void::Void>) -> Result<d3d11::FunctionLinkingGraph, MethodErrorBlob> {
+        let f = self.D3DCreateFunctionLinkingGraph.ok_or(MethodErrorBlob::new("D3DCreateFunctionLinkingGraph", THINERR::MISSING_DLL_EXPORT))?;
         let _ = flags; let flags = 0;
         let mut flg = null_mut();
         let hr = unsafe { f(flags, &mut flg) };
-        Error::check("D3DCreateFunctionLinkingGraph", hr)?;
+        MethodErrorBlob::check("D3DCreateFunctionLinkingGraph", hr)?;
         Ok(unsafe { d3d11::FunctionLinkingGraph::from_raw(flg) })
     }
 
@@ -56,11 +56,11 @@ impl Compiler {
     ///
     /// ### Remarks
     /// *   This was introduced by d3dcompiler_47.dll, and is unavailable in earlier versions.
-    pub fn create_linker(&self) -> Result<d3d11::Linker, Error> {
-        let f = self.D3DCreateLinker.ok_or(Error::new("D3DCreateFunctionLinkingGraph", THINERR::MISSING_DLL_EXPORT))?;
+    pub fn create_linker(&self) -> Result<d3d11::Linker, MethodErrorBlob> {
+        let f = self.D3DCreateLinker.ok_or(MethodErrorBlob::new("D3DCreateFunctionLinkingGraph", THINERR::MISSING_DLL_EXPORT))?;
         let mut linker = null_mut();
         let hr = unsafe { f(&mut linker) };
-        Error::check("D3DCreateFunctionLinkingGraph", hr)?;
+        MethodErrorBlob::check("D3DCreateFunctionLinkingGraph", hr)?;
 
         Ok(unsafe { d3d11::Linker::from_raw(linker) })
     }
@@ -94,12 +94,12 @@ impl Compiler {
     ///
     /// ### Remarks
     /// *   This was introduced by d3dcompiler_47.dll, and is unavailable in earlier versions.
-    pub fn load_module(&self, src_data: &Bytecode) -> Result<d3d11::Module, Error> {
-        let f = self.D3DLoadModule.ok_or(Error::new("D3DLoadModule", THINERR::MISSING_DLL_EXPORT))?;
+    pub fn load_module(&self, src_data: &Bytecode) -> Result<d3d11::Module, MethodErrorBlob> {
+        let f = self.D3DLoadModule.ok_or(MethodErrorBlob::new("D3DLoadModule", THINERR::MISSING_DLL_EXPORT))?;
         let src_data = src_data.as_bytes();
         let mut module = null_mut();
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), &mut module) };
-        Error::check("D3DLoadModule", hr)?;
+        MethodErrorBlob::check("D3DLoadModule", hr)?;
         Ok(unsafe { d3d11::Module::from_raw(module) })
     }
 }

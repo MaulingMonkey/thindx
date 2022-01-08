@@ -10,13 +10,13 @@ use std::fmt::{self, Debug, Display, Formatter};
 
 /// { kind: [ErrorKind], method, errors }
 #[derive(Clone)]
-pub struct Error {
+pub struct MethodErrorBlob {
     pub(crate) kind:       ErrorKind,
     pub(crate) method:     Option<&'static str>,
     pub(crate) errors:     TextBlob,
 }
 
-impl Error {
+impl MethodErrorBlob {
     /// Returns the corresponding [ErrorKind] for this error.
     pub fn kind(&self) -> ErrorKind { self.kind }
 
@@ -41,7 +41,7 @@ impl Error {
     /// ### Arguments
     /// *   `method`    - The method that failed
     /// *   `hr`        - A possibly successful win32 error code
-    /// *   `errors`    - A `\0`-terminated blob of errors to be owned by <code>[Err]\([Error]\)</code> if `!SUCCEEDED(hr)`
+    /// *   `errors`    - A `\0`-terminated blob of errors to be owned by <code>[Err]\([MethodErrorBlob]\)</code> if `!SUCCEEDED(hr)`
     pub(crate) unsafe fn check_blob(method: &'static str, hr: HRESULT, errors: *mut ID3DBlob) -> Result<(), Self> {
         if !SUCCEEDED(hr) {
             let errors = TextBlob::new(ReadOnlyBlob::from_raw_opt(errors));
@@ -56,14 +56,14 @@ impl Error {
     }
 }
 
-impl From<Error> for ErrorKind { fn from(error: Error       ) -> ErrorKind { error.kind } }
-//impl From<ErrorKind> for Error { fn from(error: ErrorKind   ) -> Error { Error { kind: error, method: None, errors: Default::default() } } }
+impl From<MethodErrorBlob> for ErrorKind { fn from(error: MethodErrorBlob       ) -> ErrorKind { error.kind } }
+//impl From<ErrorKind> for MethodErrorBlob { fn from(error: ErrorKind   ) -> MethodErrorBlob { MethodErrorBlob { kind: error, method: None, errors: Default::default() } } }
 
-impl std::error::Error for Error {}
+impl std::error::Error for MethodErrorBlob {}
 
-impl Debug for Error {
+impl Debug for MethodErrorBlob {
     fn fmt(&self, fmt: &mut Formatter) -> fmt::Result {
-        let mut ds = fmt.debug_struct("Error");
+        let mut ds = fmt.debug_struct("MethodErrorBlob");
         ds.field("kind", &self.kind);
         if let Some(method) = self.method.as_ref() {
             ds.field("method", method);
@@ -75,7 +75,7 @@ impl Debug for Error {
     }
 }
 
-impl Display for Error {
+impl Display for MethodErrorBlob {
     fn fmt(&self, fmt: &mut Formatter) -> fmt::Result {
         let method = self.method.unwrap_or("thindx method");
         write!(fmt, "{} failed ({:?})", method, self.kind)?;

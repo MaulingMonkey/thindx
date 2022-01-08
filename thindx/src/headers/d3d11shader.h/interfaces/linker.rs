@@ -84,9 +84,9 @@ impl Linker {
     /// ### See Also
     /// *   [User clip planes on feature level 9 hardware](https://docs.microsoft.com/en-us/windows/win32/direct3dhlsl/user-clip-planes-on-10level9) (clip plane limit)
     /// *   [Introduction to Buffers in Direct3D 11:  Constant Buffer](https://docs.microsoft.com/en-us/windows/win32/direct3d11/overviews-direct3d-11-resources-buffers-intro#constant-buffer) (cbuffer limits quoted in example)
-    pub fn add_clip_plane_from_cbuffer(&self, cbuffer_slot: u32, cbuffer_entry: u32) -> Result<(), Error> {
+    pub fn add_clip_plane_from_cbuffer(&self, cbuffer_slot: u32, cbuffer_entry: u32) -> Result<(), MethodErrorBlob> {
         let hr = unsafe { self.0.AddClipPlaneFromCBuffer(cbuffer_slot, cbuffer_entry) };
-        Error::check("ID3D11Linker::AddClipPlaneFromCBuffer", hr)
+        MethodErrorBlob::check("ID3D11Linker::AddClipPlaneFromCBuffer", hr)
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11linker-link)\]
@@ -121,9 +121,9 @@ impl Linker {
     ///
     /// ### See Also
     /// *   [examples::d3dcompiler_03_link]
-    pub fn link(&self, entry: &ModuleInstance, entry_name: impl TryIntoAsCStr, target_name: impl TryIntoAsCStr, flags: Option<void::Void>) -> Result<LinkResult, Error> {
-        let entry_name  = entry_name .try_into().map_err(|e| Error::new("ID3D11Linker::Link", e))?;
-        let target_name = target_name.try_into().map_err(|e| Error::new("ID3D11Linker::Link", e))?;
+    pub fn link(&self, entry: &ModuleInstance, entry_name: impl TryIntoAsCStr, target_name: impl TryIntoAsCStr, flags: Option<void::Void>) -> Result<LinkResult, MethodErrorBlob> {
+        let entry_name  = entry_name .try_into().map_err(|e| MethodErrorBlob::new("ID3D11Linker::Link", e))?;
+        let target_name = target_name.try_into().map_err(|e| MethodErrorBlob::new("ID3D11Linker::Link", e))?;
         let entry_name  = entry_name .as_cstr();
         let target_name = target_name.as_cstr();
 
@@ -132,7 +132,7 @@ impl Linker {
         let mut blob = null_mut();
         let mut errors = null_mut();
         let hr = unsafe { self.0.Link(entry.as_raw(), entry_name, target_name, flags, &mut blob, &mut errors) };
-        unsafe { Error::check_blob("ID3D11Linker::Link", hr, errors) }?;
+        unsafe { MethodErrorBlob::check_blob("ID3D11Linker::Link", hr, errors) }?;
         Ok(LinkResult {
             shader: unsafe { CodeBlob::from_unchecked(ReadOnlyBlob::from_raw(blob)) },
             errors: TextBlob::new(unsafe { ReadOnlyBlob::from_raw_opt(errors) }),
@@ -163,8 +163,8 @@ impl Linker {
     /// ### See Also
     /// *   [examples::d3dcompiler_03_link]
     //#allow_missing_argument_docs
-    pub fn use_library(&self, library_mi: &ModuleInstance) -> Result<(), Error> {
+    pub fn use_library(&self, library_mi: &ModuleInstance) -> Result<(), MethodErrorBlob> {
         let hr = unsafe { self.0.UseLibrary(library_mi.as_raw()) };
-        Error::check("ID3D11Linker::UseLibrary", hr)
+        MethodErrorBlob::check("ID3D11Linker::UseLibrary", hr)
     }
 }

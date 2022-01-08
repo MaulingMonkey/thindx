@@ -28,12 +28,12 @@ impl Compiler {
     ///
     /// ### Remarks
     /// *   This was introduced by d3dcompiler_43.dll, and is unavailable in earlier versions.
-    pub fn create_read_only_blob(&self, data: &[u8]) -> Result<ReadOnlyBlob, Error> {
-        let f = self.D3DCreateBlob.ok_or(Error::new("D3DCreateBlob", THINERR::MISSING_DLL_EXPORT))?;
+    pub fn create_read_only_blob(&self, data: &[u8]) -> Result<ReadOnlyBlob, MethodErrorBlob> {
+        let f = self.D3DCreateBlob.ok_or(MethodErrorBlob::new("D3DCreateBlob", THINERR::MISSING_DLL_EXPORT))?;
 
         let mut blob = null_mut();
         let hr = unsafe { f(data.len(), &mut blob) };
-        Error::check("D3DCreateBlob", hr)?;
+        MethodErrorBlob::check("D3DCreateBlob", hr)?;
 
         if !blob.is_null() {
             let dst = unsafe { (*blob).GetBufferPointer() };
@@ -74,13 +74,13 @@ impl Compiler {
     ///
     /// ### Remarks
     /// *   This was introduced by d3dcompiler_44.dll, and is unavailable in earlier versions.
-    pub fn read_file_to_blob<'s>(&self, file_name: impl AsRef<Path>) -> Result<ReadOnlyBlob, Error> {
-        let f = self.D3DReadFileToBlob.ok_or(Error::new("D3DReadFileToBlob", THINERR::MISSING_DLL_EXPORT))?;
+    pub fn read_file_to_blob<'s>(&self, file_name: impl AsRef<Path>) -> Result<ReadOnlyBlob, MethodErrorBlob> {
+        let f = self.D3DReadFileToBlob.ok_or(MethodErrorBlob::new("D3DReadFileToBlob", THINERR::MISSING_DLL_EXPORT))?;
         let file_name = file_name.as_ref().as_os_str().encode_wide().chain(Some(0)).collect::<Vec<_>>();
 
         let mut blob = null_mut();
         let hr = unsafe { f(file_name.as_ptr(), &mut blob) };
-        Error::check("D3DReadFileToBlob", hr)?;
+        MethodErrorBlob::check("D3DReadFileToBlob", hr)?;
         Ok(unsafe { ReadOnlyBlob::from_raw(blob) })
     }
 
@@ -128,10 +128,10 @@ impl Compiler {
         blob:       &ReadOnlyBlob,
         file_name:  impl AsRef<Path>,
         overwrite:  bool,
-    ) -> Result<(), Error> {
-        let f = self.D3DWriteBlobToFile.ok_or(Error::new("D3DWriteBlobToFile", THINERR::MISSING_DLL_EXPORT))?;
+    ) -> Result<(), MethodErrorBlob> {
+        let f = self.D3DWriteBlobToFile.ok_or(MethodErrorBlob::new("D3DWriteBlobToFile", THINERR::MISSING_DLL_EXPORT))?;
         let file_name = file_name.as_ref().as_os_str().encode_wide().chain(Some(0)).collect::<Vec<_>>();
         let hr = unsafe { f(blob.as_raw(), file_name.as_ptr(), overwrite.into()) };
-        Error::check("D3DWriteBlobToFile", hr)
+        MethodErrorBlob::check("D3DWriteBlobToFile", hr)
     }
 }

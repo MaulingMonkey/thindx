@@ -63,9 +63,9 @@ pub struct CompileError {
     pub errors:     TextBlob,
 }
 
-impl From<Error> for CompileError {
-    fn from(e: Error) -> Self {
-        let Error { kind, method, errors } = e;
+impl From<MethodErrorBlob> for CompileError {
+    fn from(e: MethodErrorBlob) -> Self {
+        let MethodErrorBlob { kind, method, errors } = e;
         Self { kind, method, errors, shader: None }
     }
 }
@@ -114,9 +114,9 @@ pub struct PreprocessError {
     pub errors:     TextBlob,
 }
 
-impl From<Error> for PreprocessError {
-    fn from(e: Error) -> Self {
-        let Error { kind, method, errors } = e;
+impl From<MethodErrorBlob> for PreprocessError {
+    fn from(e: MethodErrorBlob) -> Self {
+        let MethodErrorBlob { kind, method, errors } = e;
         Self { kind, method, errors, shader: Default::default() }
     }
 }
@@ -204,8 +204,8 @@ impl Compiler {
         flags2:         impl Into<CompileEffect>,
     ) -> Result<CompileResult, CompileError> {
         // Early outs
-        let f           = self.D3DCompileFromFile.ok_or(Error::new("D3DCompileFromFile", THINERR::MISSING_DLL_EXPORT))?;
-        let defines     = defines.as_shader_macros().map_err(|e| Error::new("D3DCompileFromFile", e))?;
+        let f           = self.D3DCompileFromFile.ok_or(MethodErrorBlob::new("D3DCompileFromFile", THINERR::MISSING_DLL_EXPORT))?;
+        let defines     = defines.as_shader_macros().map_err(|e| MethodErrorBlob::new("D3DCompileFromFile", e))?;
 
         let file_name = file_name.as_ref().as_os_str().encode_wide().chain(Some(0)).collect::<Vec<_>>();
 
@@ -293,8 +293,8 @@ impl Compiler {
         flags2:         impl Into<CompileEffect>,
     ) -> Result<CompileResult, CompileError> {
         // Early outs
-        let f           = self.D3DCompile.ok_or(Error::new("D3DCompile", THINERR::MISSING_DLL_EXPORT))?;
-        let defines     = defines.as_shader_macros().map_err(|e| Error::new("D3DCompile", e))?;
+        let f           = self.D3DCompile.ok_or(MethodErrorBlob::new("D3DCompile", THINERR::MISSING_DLL_EXPORT))?;
+        let defines     = defines.as_shader_macros().map_err(|e| MethodErrorBlob::new("D3DCompile", e))?;
 
         let src_data    = src_data.as_ref();
         // Note: No error checking occurs for internal `\0`s - they will simply terminate the string earlier than expected.
@@ -394,8 +394,8 @@ impl Compiler {
         secondary_data:         impl Into<Option<&'s [u8]>>,
     ) -> Result<CompileResult, CompileError> {
         // Early outs
-        let f           = self.D3DCompile2.ok_or(Error::new("D3DCompile2", THINERR::MISSING_DLL_EXPORT))?;
-        let defines     = defines.as_shader_macros().map_err(|e| Error::new("D3DCompile2", e))?;
+        let f           = self.D3DCompile2.ok_or(MethodErrorBlob::new("D3DCompile2", THINERR::MISSING_DLL_EXPORT))?;
+        let defines     = defines.as_shader_macros().map_err(|e| MethodErrorBlob::new("D3DCompile2", e))?;
 
         let src_data    = src_data.as_ref();
         // Note: No error checking occurs for internal `\0`s - they will simply terminate the string earlier than expected.
@@ -489,8 +489,8 @@ impl Compiler {
         include:        impl AsInclude,
     ) -> Result<PreprocessResult, PreprocessError> {
         // Early outs
-        let f           = self.D3DPreprocess.ok_or(Error::new("D3DPreprocess", THINERR::MISSING_DLL_EXPORT))?;
-        let defines     = defines.as_shader_macros().map_err(|e| Error::new("D3DPreprocess", e))?;
+        let f           = self.D3DPreprocess.ok_or(MethodErrorBlob::new("D3DPreprocess", THINERR::MISSING_DLL_EXPORT))?;
+        let defines     = defines.as_shader_macros().map_err(|e| MethodErrorBlob::new("D3DPreprocess", e))?;
 
         let src_data    = src_data.as_ref();
         // Note: No error checking occurs for internal `\0`s - they will simply terminate the string earlier than expected.

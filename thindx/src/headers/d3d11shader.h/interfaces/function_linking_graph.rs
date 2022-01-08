@@ -148,14 +148,14 @@ impl FunctionLinkingGraph {
         module_instance_namespace:      impl TryIntoAsOptCStr,
         module_with_function_prototype: &Module,
         function_name:                  impl TryIntoAsCStr,
-    ) -> Result<LinkingNode, Error> {
-        let ns      = module_instance_namespace.try_into()  .map_err(|e| Error::new("FunctionLinkingGraph::call_function", e))?;
-        let name    = function_name.try_into()              .map_err(|e| Error::new("FunctionLinkingGraph::call_function", e))?;
+    ) -> Result<LinkingNode, MethodErrorBlob> {
+        let ns      = module_instance_namespace.try_into()  .map_err(|e| MethodErrorBlob::new("FunctionLinkingGraph::call_function", e))?;
+        let name    = function_name.try_into()              .map_err(|e| MethodErrorBlob::new("FunctionLinkingGraph::call_function", e))?;
         let module  = module_with_function_prototype.as_raw();
 
         let mut node = null_mut();
         let hr = unsafe { self.0.CallFunction(ns.as_opt_cstr(), module, name.as_cstr(), &mut node) };
-        Error::check("ID3D11FunctionLinkingGraph::CallFunction", hr)?;
+        MethodErrorBlob::check("ID3D11FunctionLinkingGraph::CallFunction", hr)?;
         Ok(unsafe { LinkingNode::from_raw(node) })
     }
 
@@ -167,12 +167,12 @@ impl FunctionLinkingGraph {
     /// ### Errors
     /// *   [E::FAIL]   - if called before set_output_signature
     /// *   [E::FAIL]   - if the FLG has no nodes
-    pub fn create_module_instance(&self) -> Result<(ModuleInstance, Option<ReadOnlyBlob>), Error> {
+    pub fn create_module_instance(&self) -> Result<(ModuleInstance, Option<ReadOnlyBlob>), MethodErrorBlob> {
         // TODO: named tuple return?  better error type that can carry the blob?
         let mut module = null_mut();
         let mut errors = null_mut();
         let hr = unsafe { self.0.CreateModuleInstance(&mut module, &mut errors) };
-        unsafe { Error::check_blob("ID3D11FunctionLinkingGraph::CreateModuleInstance", hr, errors)? };
+        unsafe { MethodErrorBlob::check_blob("ID3D11FunctionLinkingGraph::CreateModuleInstance", hr, errors)? };
         let module = unsafe { ModuleInstance::from_raw(module) };
         let errors = unsafe { ReadOnlyBlob::from_raw_opt(errors) };
         Ok((module, errors))
@@ -201,12 +201,12 @@ impl FunctionLinkingGraph {
     /// {
     /// }
     /// ```
-    pub fn generate_hlsl(&self, flags: ()) -> Result<TextBlob, Error> {
+    pub fn generate_hlsl(&self, flags: ()) -> Result<TextBlob, MethodErrorBlob> {
         let _ = flags; let flags = 0;
 
         let mut blob = null_mut();
         let hr = unsafe { self.0.GenerateHlsl(flags, &mut blob) };
-        Error::check("ID3D11FunctionLinkingGraph::GenerateHlsl", hr)?;
+        MethodErrorBlob::check("ID3D11FunctionLinkingGraph::GenerateHlsl", hr)?;
         Ok(TextBlob::new(unsafe { ReadOnlyBlob::from_raw(blob) }))
     }
 
@@ -227,10 +227,10 @@ impl FunctionLinkingGraph {
     /// let errors : TextBlob = flg.get_last_error().unwrap();
     /// assert!(errors.is_empty(), "No errors were reported by flg");
     /// ```
-    pub fn get_last_error(&self) -> Result<TextBlob, Error> {
+    pub fn get_last_error(&self) -> Result<TextBlob, MethodErrorBlob> {
         let mut errors = null_mut();
         let hr = unsafe { self.0.GetLastError(&mut errors) };
-        Error::check("ID3D11FunctionLinkingGraph::GetLastError", hr)?;
+        MethodErrorBlob::check("ID3D11FunctionLinkingGraph::GetLastError", hr)?;
         Ok(TextBlob::new(unsafe { ReadOnlyBlob::from_raw_opt(errors) }))
     }
 
@@ -259,9 +259,9 @@ impl FunctionLinkingGraph {
     /// # let output = graph.set_output_signature(&[ParameterDesc::new(cstr!("outPos"), cstr!("SV_POSITION"), SVT::Float, SVC::Vector, 1, 4, Interpolation::Undefined, PF::Out, 0, 0, 0, 0)]).unwrap();
     /// graph.pass_value(&input, 0, &output, 0).unwrap();
     /// ```
-    pub fn pass_value(&self, src_node: &LinkingNode, src_parameter_index: i32, dst_node: &LinkingNode, dst_parameter_index: i32) -> Result<(), Error> {
+    pub fn pass_value(&self, src_node: &LinkingNode, src_parameter_index: i32, dst_node: &LinkingNode, dst_parameter_index: i32) -> Result<(), MethodErrorBlob> {
         let hr = unsafe { self.0.PassValue(src_node.as_raw(), src_parameter_index, dst_node.as_raw(), dst_parameter_index) };
-        Error::check("ID3D11FunctionLinkingGraph::PassValue", hr)
+        MethodErrorBlob::check("ID3D11FunctionLinkingGraph::PassValue", hr)
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionlinkinggraph-passvaluewithswizzle)\]
@@ -288,11 +288,11 @@ impl FunctionLinkingGraph {
     /// # let output = graph.set_output_signature(&[ParameterDesc::new(cstr!("outPos"), cstr!("SV_POSITION"), SVT::Float, SVC::Vector, 1, 4, Interpolation::Undefined, PF::Out, 0, 0, 0, 0)]).unwrap();
     /// graph.pass_value_with_swizzle(&input, 0, "xyzw", &output, 0, "zyxw").unwrap();
     /// ```
-    pub fn pass_value_with_swizzle(&self, src_node: &LinkingNode, src_parameter_index: i32, src_swizzle: impl TryIntoAsCStr, dst_node: &LinkingNode, dst_parameter_index: i32, dst_swizzle: impl TryIntoAsCStr) -> Result<(), Error> {
-        let src_swizzle = src_swizzle.try_into().map_err(|e| Error::new("FunctionLinkingGraph::pass_value_with_swizzle", e))?;
-        let dst_swizzle = dst_swizzle.try_into().map_err(|e| Error::new("FunctionLinkingGraph::pass_value_with_swizzle", e))?;
+    pub fn pass_value_with_swizzle(&self, src_node: &LinkingNode, src_parameter_index: i32, src_swizzle: impl TryIntoAsCStr, dst_node: &LinkingNode, dst_parameter_index: i32, dst_swizzle: impl TryIntoAsCStr) -> Result<(), MethodErrorBlob> {
+        let src_swizzle = src_swizzle.try_into().map_err(|e| MethodErrorBlob::new("FunctionLinkingGraph::pass_value_with_swizzle", e))?;
+        let dst_swizzle = dst_swizzle.try_into().map_err(|e| MethodErrorBlob::new("FunctionLinkingGraph::pass_value_with_swizzle", e))?;
         let hr = unsafe { self.0.PassValueWithSwizzle(src_node.as_raw(), src_parameter_index, src_swizzle.as_cstr(), dst_node.as_raw(), dst_parameter_index, dst_swizzle.as_cstr()) };
-        Error::check("ID3D11FunctionLinkingGraph::PassValueWithSwizzle", hr)
+        MethodErrorBlob::check("ID3D11FunctionLinkingGraph::PassValueWithSwizzle", hr)
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionlinkinggraph-setinputsignature)\]
@@ -320,12 +320,12 @@ impl FunctionLinkingGraph {
     /// ]).unwrap();
     /// # assert_eq!(E::FAIL, flg.set_input_signature(&[]).err().unwrap().kind());
     /// ```
-    pub fn set_input_signature(&self, input_parameters: &[ParameterDesc<'static>]) -> Result<LinkingNode, Error> {
-        let n = input_parameters.len().try_into().map_err(|_| Error::new("ID3D11FunctionLinkingGraph::SetInputSignature", THINERR::SLICE_TOO_LARGE))?;
+    pub fn set_input_signature(&self, input_parameters: &[ParameterDesc<'static>]) -> Result<LinkingNode, MethodErrorBlob> {
+        let n = input_parameters.len().try_into().map_err(|_| MethodErrorBlob::new("ID3D11FunctionLinkingGraph::SetInputSignature", THINERR::SLICE_TOO_LARGE))?;
 
         let mut node = null_mut();
         let hr = unsafe { self.0.SetInputSignature(input_parameters.as_ptr().cast(), n, &mut node) };
-        Error::check("ID3D11FunctionLinkingGraph::SetInputSignature", hr)?;
+        MethodErrorBlob::check("ID3D11FunctionLinkingGraph::SetInputSignature", hr)?;
         Ok(unsafe { LinkingNode::from_raw(node) })
     }
 
@@ -354,12 +354,12 @@ impl FunctionLinkingGraph {
     /// ]).unwrap();
     /// # assert_eq!(E::FAIL, flg.set_output_signature(&[]).err().unwrap().kind());
     /// ```
-    pub fn set_output_signature(&self, output_parameters: &[ParameterDesc<'static>]) -> Result<LinkingNode, Error> {
-        let n = output_parameters.len().try_into().map_err(|_| Error::new("ID3D11FunctionLinkingGraph::SetOutputSignature", THINERR::SLICE_TOO_LARGE))?;
+    pub fn set_output_signature(&self, output_parameters: &[ParameterDesc<'static>]) -> Result<LinkingNode, MethodErrorBlob> {
+        let n = output_parameters.len().try_into().map_err(|_| MethodErrorBlob::new("ID3D11FunctionLinkingGraph::SetOutputSignature", THINERR::SLICE_TOO_LARGE))?;
 
         let mut node = null_mut();
         let hr = unsafe { self.0.SetOutputSignature(output_parameters.as_ptr().cast(), n, &mut node) };
-        Error::check("ID3D11FunctionLinkingGraph::SetOutputSignature", hr)?;
+        MethodErrorBlob::check("ID3D11FunctionLinkingGraph::SetOutputSignature", hr)?;
         Ok(unsafe { LinkingNode::from_raw(node) })
     }
 }
