@@ -57,7 +57,8 @@ impl MethodErrorBlob {
 }
 
 impl From<MethodErrorBlob> for ErrorKind { fn from(error: MethodErrorBlob       ) -> ErrorKind { error.kind } }
-//impl From<ErrorKind> for MethodErrorBlob { fn from(error: ErrorKind   ) -> MethodErrorBlob { MethodErrorBlob { kind: error, method: None, errors: Default::default() } } }
+//impl From<ErrorKind> for MethodErrorBlob { fn from(error: ErrorKind   ) -> Self { Self { kind: error, method: None, errors: Default::default() } } }
+impl From<MethodError> for MethodErrorBlob { fn from(error: MethodError) -> Self { Self { kind: error.kind(), method: Some(error.method()), errors: Default::default() } } }
 
 impl std::error::Error for MethodErrorBlob {}
 
