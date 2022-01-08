@@ -11,6 +11,7 @@
 //!
 //! | C++ Header | Interfaces | Structs | Enums | Functions |
 //! | ---------- | ---------- | ------- | ----- | --------- |
+//! | [guiddef.h](#guiddefh) |   | ✔️ 1 of 1 |   |   |
 //! | [unknwn.h](#unknwnh) | ✔️ 1 of 1 |   |   |   |
 //! | [d3dcommon.h](#d3dcommonh) | ⚠️ 2 of 3 | ✔️ 1 of 1 | ✔️ 22 of 22 |   |
 //! | [d3dcompiler.h](#d3dcompilerh) |   | ✔️ 1 of 1 | ✔️ 2 of 2 |   |
@@ -21,6 +22,14 @@
 //! | [d3d11shadertracing.h](#d3d11shadertracingh) | ❌ 0 of 2 | ❌ 0 of 11 | ❌ 0 of 3 |   |
 //! | [xinput.h](#xinputh) |   | ❌ 0 of 6 |   | ❌ 0 of 8 |
 //!
+//!
+//! <br>
+//!
+//! # guiddef.h
+//!
+//! ### C++ Structs -> Rust Structs
+//!
+//! [`GUID`](https://docs.microsoft.com/en-us/windows/win32/api/guiddef/ns-guiddef-guid)&nbsp;→ [`Guid`] <br>
 //!
 //! <br>
 //!

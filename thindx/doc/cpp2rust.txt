@@ -1,3 +1,6 @@
+# guiddef.h structures
+GUID                                    = Guid
+
 # unknwn.h interfaces
 IUnknown                                = Unknown
 

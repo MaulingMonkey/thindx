@@ -1,3 +1,5 @@
+shared\guiddef.h
+
 um\unknwn.h # um\unknwnbase.h
 
 um\d3dcommon.h

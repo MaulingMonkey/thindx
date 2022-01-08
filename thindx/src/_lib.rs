@@ -34,12 +34,13 @@ pub mod d3d11 {
 }
 
 mods! {
-    #[path="headers/d3d9.h/d3d9.rs"]               mod d3d9_h;         // d3d9 mod
-    #[path="headers/d3d9types.h/d3d9types.rs"]     mod d3d9types_h;    // d3d9 mod
-    #[path="headers/d3d11shader.h/d3d11shader.rs"] mod d3d11shader_h;  // d3d11 mod
-    #[path="headers/d3dcommon.h/d3dcommon.rs"]     mod d3dcommon_h;    // d3d mod
-    #[path="headers/d3dcompiler.h/d3dcompiler.rs"] mod d3dcompiler_h;  // d3d mod
-    #[path="headers/unknwn.h/unknwn.rs"]           inl mod unknwn_h;
+    #[path="headers/d3d9.h/d3d9.rs"]                mod d3d9_h;         // d3d9 mod
+    #[path="headers/d3d9types.h/d3d9types.rs"]      mod d3d9types_h;    // d3d9 mod
+    #[path="headers/d3d11shader.h/d3d11shader.rs"]  mod d3d11shader_h;  // d3d11 mod
+    #[path="headers/d3dcommon.h/d3dcommon.rs"]      mod d3dcommon_h;    // d3d mod
+    #[path="headers/d3dcompiler.h/d3dcompiler.rs"]  mod d3dcompiler_h;  // d3d mod
+    #[path="headers/guiddef.h/guiddef.rs"]          inl mod guiddef_h;
+    #[path="headers/unknwn.h/unknwn.rs"]            inl mod unknwn_h;
 
     #[path="traits/_traits.rs"] inl mod traits;
 
