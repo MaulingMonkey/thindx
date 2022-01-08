@@ -23,7 +23,7 @@ pub struct DeviceEx(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DDevice9Ex
 ///
 /// ### Methods
 ///
-/// | thin3d9                                                                       | docs.microsoft.com                | Description |
+/// | thindx                                                                        | docs.microsoft.com                | Description |
 /// | ----------------------------------------------------------------------------- | --------------------------------- | ----------- |
 /// | [check_device_state](Self::check_device_state)                                | [CheckDeviceState]                | Reports the current cooperative-level status of the Direct3D device for a windowed or full-screen application.
 /// | [check_resource_residency](Self::check_resource_residency)                    | [CheckResourceResidency]          | Checks an array of resources to determine if it is likely that they will cause a large stall at Draw time because the system must make the resources GPU-accessible.

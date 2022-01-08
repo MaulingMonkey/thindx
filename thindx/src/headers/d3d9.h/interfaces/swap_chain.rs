@@ -24,7 +24,7 @@ pub struct SwapChain(pub(crate) mcom::Rc<IDirect3DSwapChain9>);
 ///
 /// ### Methods
 ///
-/// | thin3d9                                                   | docs.microsoft.com        | description   |
+/// | thindx                                                    | docs.microsoft.com        | description   |
 /// | --------------------------------------------------------- | ------------------------- | ------------- |
 /// | [get_back_buffer](Self::get_back_buffer)                  | [GetBackBuffer]           | Retrieves a back buffer from the swap chain of the device.
 /// | [get_device](Self::get_device)                            | [GetDevice]               | Retrieves the device associated with the swap chain.

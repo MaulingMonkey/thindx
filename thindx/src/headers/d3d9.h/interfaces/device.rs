@@ -48,7 +48,7 @@ pub struct Device(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DDevice9>);
 ///
 /// ### Methods
 ///
-/// | thin3d9                                                                   | docs.microsoft.com            | Description |
+/// | thindx                                                                    | docs.microsoft.com            | Description |
 /// | ------------------------------------------------------------------------- | ----------------------------- | ----------- |
 /// | [begin_scene](Self::begin_scene)                                          | [BeginScene]                  | Begins a scene.
 /// | [begin_state_block](Self::begin_state_block)                              | [BeginStateBlock]             | Signals Direct3D to begin recording a device-state block.
@@ -637,8 +637,8 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// *   [D3DERR::INVALIDCALL]       if `length` cannot hold at least one [FVF]-sized vertex (1 if [FVF::None])
     /// *   [D3DERR::INVALIDCALL]       if `usage` or `pool` is invalid
     /// *   [D3DERR::OUTOFVIDEOMEMORY]  if allocation failed (driver or gpu memory)
-    /// *   [E::OUTOFMEMORY]       if allocation failed (driver or d3d runtime)
-    /// *   [THINERR::ALLOC_OVERFLOW]    if allocation rejected by thin3d9 to avoid possible UB
+    /// *   [E::OUTOFMEMORY]            if allocation failed (driver or d3d runtime)
+    /// *   [THINERR::ALLOC_OVERFLOW]   if allocation rejected by thindx to avoid possible UB
     /// *   Ok([VertexBuffer])
     fn create_vertex_buffer(&self, length: u32, usage: impl Into<Usage>, fvf: impl Into<FVF>, pool: impl Into<Pool>, _shared_handle: impl SharedHandleParam) -> Result<VertexBuffer, MethodError> {
         // !0 will fail OUTOFMEMORY
@@ -981,7 +981,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     ///
     /// ### Returns
     ///
-    /// *   [D3DERR::INVALIDCALL]   "If the returned argument is invalid" (impossible via thin3d9?)
+    /// *   [D3DERR::INVALIDCALL]   "If the returned argument is invalid" (impossible via thindx?)
     /// *   Ok(())
     fn get_creation_parameters(&self) -> Result<D3DDEVICE_CREATION_PARAMETERS, MethodError> {
         let mut dcp = unsafe { std::mem::zeroed::<D3DDEVICE_CREATION_PARAMETERS>() };
@@ -997,7 +997,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     ///
     /// ### Returns
     ///
-    /// *   [D3DERR::INVALIDCALL]   "If the method fails" (impossible via thin3d9?)
+    /// *   [D3DERR::INVALIDCALL]   "If the method fails" (impossible via thindx?)
     /// *   Ok(`texture_palette_index`)
     fn get_current_texture_palette(&self) -> Result<u32, MethodError> {
         let mut pal = 0;
@@ -1035,7 +1035,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     ///
     /// ### Returns
     ///
-    /// *   [D3DERR::INVALIDCALL]       "If the method fails" (impossible via thin3d9?)
+    /// *   [D3DERR::INVALIDCALL]       "If the method fails" (impossible via thindx?)
     /// *   Ok([Caps])                  otherwise
     ///
     /// ### Example
@@ -1061,7 +1061,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     ///
     /// ### Returns
     ///
-    /// *   [D3DERR::INVALIDCALL]       "If the method fails" (impossible via thin3d9?)
+    /// *   [D3DERR::INVALIDCALL]       "If the method fails" (impossible via thindx?)
     /// *   Ok([Direct3D])              otherwise
     ///
     /// ### Example
@@ -1082,7 +1082,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     ///
     /// ### Returns
     ///
-    /// *   [D3DERR::INVALIDCALL]       "If the method fails" (impossible via thin3d9?)
+    /// *   [D3DERR::INVALIDCALL]       "If the method fails" (impossible via thindx?)
     /// *   Ok([DisplayMode])
     ///
     /// ### Example
@@ -1125,7 +1125,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     ///
     /// ### Returns
     ///
-    /// *   [D3DERR::INVALIDCALL]       "If the method fails" (impossible via thin3d9?)
+    /// *   [D3DERR::INVALIDCALL]       "If the method fails" (impossible via thindx?)
     /// *   Ok([FVF])
     ///
     /// ### Example
@@ -1788,7 +1788,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     ///
     /// ### Returns
     ///
-    /// *   [D3DERR::INVALIDCALL]       "If the method fails (impossible via thin3d9?)
+    /// *   [D3DERR::INVALIDCALL]       "If the method fails (impossible via thindx?)
     /// *   Ok(())
     ///
     /// ### Example
@@ -1854,7 +1854,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     ///
     /// ### Returns
     ///
-    /// *   [D3DERR::INVALIDCALL]       (perhaps only on an invalid [IndexBuffer] that thin3d9's API prevents?)
+    /// *   [D3DERR::INVALIDCALL]       (perhaps only on an invalid [IndexBuffer] that thindx's API prevents?)
     /// *   [THINERR::DEVICE_MISMATCH]   If the [IndexBuffer] was created with a different [Device].
     /// *   Ok(())
     fn set_indices<'ib>(&self, index_data: impl Into<Option<&'ib IndexBuffer>>) -> Result<(), MethodError> {

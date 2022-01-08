@@ -24,7 +24,7 @@ pub struct Surface(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DSurface9>)
 ///
 /// ### Methods
 ///
-/// | thin3d9                                                       | docs.microsoft.com    | Description |
+/// | thindx                                                        | docs.microsoft.com    | Description |
 /// | ------------------------------------------------------------- | --------------------- | ----------- |
 /// | [get_container](Self::get_container)                          | [GetContainer]        | Provides access to the parent cube texture or texture (mipmap) object, if this surface is a child level of a cube texture or a mipmap. This method can also provide access to the parent swap chain if the surface is a back-buffer child.
 /// | [get_dc](Self::get_dc)                                        | [GetDC]               | Retrieves a device context.

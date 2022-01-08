@@ -42,7 +42,7 @@ pub struct VertexBuffer(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DVerte
 ///
 /// ### Methods
 ///
-/// | thin3d9                                   | docs.microsoft.com    | Description |
+/// | thindx                                    | docs.microsoft.com    | Description |
 /// | ----------------------------------------- | --------------------- | ----------- |
 /// | [get_desc](Self::get_desc)                | [GetDesc]             | Retrieves a description of the index buffer.
 /// | [lock_unchecked](Self::lock_unchecked)    | [Lock]                | Locks a range of index data, and obtains a pointer to the index buffer memory.
@@ -159,7 +159,7 @@ mod index_buffer {
 ///
 /// ### Methods
 ///
-/// | thin3d9                                   | docs.microsoft.com    | Description |
+/// | thindx                                    | docs.microsoft.com    | Description |
 /// | ----------------------------------------- | --------------------- | ----------- |
 /// | [get_desc](Self::get_desc)                | [GetDesc]             | Retrieves a description of the vertex buffer.
 /// | [lock_unchecked](Self::lock_unchecked)    | [Lock]                | Locks a range of vertex data, and obtains a pointer to the vertex buffer memory.

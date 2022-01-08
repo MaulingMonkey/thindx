@@ -20,7 +20,7 @@ pub struct SwapChainEx(pub(crate) mcom::Rc<IDirect3DSwapChain9Ex>);
 ///
 /// ### Methods
 ///
-/// | thin3d9                                                   | docs.microsoft.com        | description   |
+/// | thindx                                                    | docs.microsoft.com        | description   |
 /// | --------------------------------------------------------- | ------------------------- | ------------- |
 /// | [get_display_mode_ex](Self::get_display_mode_ex)          | [GetDisplayModeEx]        | Retrieves the display mode's spatial resolution, color resolution, refresh frequency, and rotation settings.
 /// | [get_last_present_count](Self::get_last_present_count)    | [GetLastPresentCount]     | Returns the number of times the swapchain has been processed.

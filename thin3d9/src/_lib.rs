@@ -29,7 +29,7 @@
 //! &nbsp;  ├─ [StateBlock] - Used to [capture/save and restore](https://docs.microsoft.com/en-us/windows/win32/direct3d9/state-blocks-save-and-restore-state) changes to [Device] state.
 //! &nbsp;  └─ [VertexDeclaration] - Describes the layout of the contents of a [VertexBuffer]</div>
 //!
-//! | thin3d9 struct        | docs.microsoft.com \[Ext\]                                                | description   |
+//! | thindx struct         | docs.microsoft.com \[Ext\]                                                | description   |
 //! | --------------------- | ------------------------------------------------------------------------- | ------------- |
 //! | [Unknown]             | [IUnknown]\[[Ext](IUnknownExt)\]                                          | The root type from which all sane COM types derive
 //! | [Direct3D]            | [IDirect3D9]\[[Ext](IDirect3D9Ext)\]                                      | Core factory for creating [Device]s
@@ -61,7 +61,7 @@
 //! &nbsp; &nbsp; &nbsp; &nbsp; ❌ This makes them unsuitable for raw function FFI, due to ABI mismatches.<br>
 //! &nbsp; &nbsp; &nbsp; &nbsp; ✔️ This makes them suitable for [VertexElement] FFI, as [D3DVERTEXELEMENT9]::{Method,Type,and Usage} are all `BYTE`s.<br>
 //!
-//! | `thin3d9` value                           | docs.microsoft.com        | description   |
+//! | `thindx` value                            | docs.microsoft.com        | description   |
 //! | ----------------------------------------- | ------------------------- | ------------- |
 //! | [D3D](crate::D3D)\[[ERR](crate::D3DERR)\]::\* | [D3DERR]_\*           | Windows HRESULTs optimized for displaying Direct3D errors
 //! | [BackBufferType]::\*                      | [D3DBACKBUFFER_TYPE]_\*   | [Mono](crate::BackBufferType::Mono), [Left](crate::BackBufferType::Left), or [Right](crate::BackBufferType::Right) for [stereo](https://en.wikipedia.org/wiki/Stereoscopy) rendering
@@ -107,7 +107,7 @@
 //! | [TS]::\*                                  | [D3DTS]_\*                |
 //! | [ZB]::\*                                  | [D3DZB]_\*                |
 //!
-//! | `thin3d9` type                            | docs.microsoft.com        | description   |
+//! | `thindx` type                             | docs.microsoft.com        | description   |
 //! | ----------------------------------------- | ------------------------- | ------------- |
 //! | [D3D](crate::D3D)\[[ERR](crate::D3DERR)\] | [D3DERR]                  | Windows HRESULTs optimized for displaying Direct3D errors
 //! | [BackBufferType]                          | [D3DBACKBUFFER_TYPE]      | [Mono](crate::BackBufferType::Mono), [Left](crate::BackBufferType::Left), or [Right](crate::BackBufferType::Right) for [stereo](https://en.wikipedia.org/wiki/Stereoscopy) rendering
@@ -156,7 +156,7 @@
 //!
 //! ### Flags
 //!
-//! | `thin3d9` type                            | docs.microsoft.com        | description   |
+//! | `thindx` type                             | docs.microsoft.com        | description   |
 //! | ----------------------------------------- | ------------------------- | ------------- |
 //! | [Create]                                  | [D3DCREATE_*]             | A combination of one or more flags that controls [Direct3D::create_device] behavior.
 //! | [FVF]                                     | [D3DFVF_*]                | Describes the contents of vertices interleaved in a single data stream.
@@ -174,14 +174,14 @@
 //!
 //! ### Traits
 //!
-//! | `thin3d9` type                            | docs.microsoft.com        | description   |
+//! | `thindx` type                             | docs.microsoft.com        | description   |
 //! | ----------------------------------------- | ------------------------- | ------------- |
-//! | unsafe [Raw]                              |                           | Conversion trait for converting between [thin3d9](crate) ⇄ [winapi]
+//! | unsafe [Raw]                              |                           | Conversion trait for converting between [thindx](crate) ⇄ [winapi]
 //! | unsafe [SharedHandleParam]                | \*mut HANDLE              | Placeholder for [Sharing Resources](https://docs.microsoft.com/en-us/windows/win32/direct3d9/dx9lh#sharing-resources) `*mut HANDLE`s
 //!
 //! ### Structures
 //!
-//! | `thin3d9` type                            | docs.microsoft.com        | description   |
+//! | `thindx` type                             | docs.microsoft.com        | description   |
 //! | ----------------------------------------- | ------------------------- | ------------- |
 //! | [AdapterIdentifier]                       | [D3DADAPTER_IDENTIFIER9]  | Adapter metadata (driver, description, driver version, vendor/device ids, ...)
 //! | [Caps]                                    | [D3DCAPS9]                | Adapter/device capabilities and limitations
@@ -204,7 +204,7 @@
 //!
 //! ### Values
 //!
-//! | `thin3d9` type                            | docs.microsoft.com        | description   |
+//! | `thindx` type                             | docs.microsoft.com        | description   |
 //! | ----------------------------------------- | ------------------------- | ------------- |
 //! | [bool32]                                  | [BOOL]                    | 32-bit boolean type that's ABI-compatible with Win32's [BOOL]
 //! | [Color]                                   | [D3DCOLOR]                | 0xAA<span style="color: red">RR</span><span style="color: green">GG</span><span style="color: blue">BB</span> style 32-bit color

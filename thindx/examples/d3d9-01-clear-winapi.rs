@@ -59,7 +59,7 @@ fn main() {
     let hwnd = unsafe { CreateWindowExW(
         ex_style,
         wcstr!("SampleWndClass").as_ptr(),
-        wcstr!("01-clear-winapi - thin3d9 example").as_ptr(),
+        wcstr!("01-clear-winapi - thindx example").as_ptr(),
         style,
         CW_USEDEFAULT,
         CW_USEDEFAULT,

@@ -34,7 +34,7 @@ use crate::*;
 ///     dev::win32::optional_dev_init();
 ///     let event_loop  = EventLoop::new();
 ///     let window      = WindowBuilder::new()
-///         .with_title("00-clear-winit - thin3d9 example")
+///         .with_title("00-clear-winit - thindx example")
 ///         .with_inner_size(Size::Physical(PhysicalSize { width: 800, height: 600 }))
 ///         .with_visible(!dev::d3d9::hide_for_docs_gen())
 ///         .build(&event_loop).unwrap();
@@ -156,7 +156,7 @@ pub const d3d9_00_clear_winit : () = ();
 ///     let hwnd = unsafe { CreateWindowExW(
 ///         ex_style,
 ///         wcstr!("SampleWndClass").as_ptr(),
-///         wcstr!("01-clear-winapi - thin3d9 example").as_ptr(),
+///         wcstr!("01-clear-winapi - thindx example").as_ptr(),
 ///         style,
 ///         CW_USEDEFAULT,
 ///         CW_USEDEFAULT,

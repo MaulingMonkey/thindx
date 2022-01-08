@@ -115,7 +115,7 @@ impl SafeDevice {
 ///
 /// ### Methods
 ///
-/// | thin3d9                                                       | docs.microsoft.com        | Description |
+/// | thindx                                                        | docs.microsoft.com        | Description |
 /// | ------------------------------------------------------------- | ------------------------- | ----------- |
 /// | [generate_mip_sub_levels](Self::generate_mip_sub_levels)      | [GenerateMipSubLevels]    | Generate mipmap sublevels.
 /// | [get_auto_gen_filter_type](Self::get_auto_gen_filter_type)    | [GetAutoGenFilterType]    | Get the filter type that is used for automatically generated mipmap sublevels.
@@ -318,7 +318,7 @@ mod base_texture {
 ///
 /// ### Methods
 ///
-/// | thin3d9                                                                           | docs.microsoft.com        | Description |
+/// | thindx                                                                            | docs.microsoft.com        | Description |
 /// | --------------------------------------------------------------------------------- | ------------------------- | ----------- |
 /// | [add_dirty_rect](Self::add_dirty_rect)                                            | [AddDirtyRect]            | Adds a dirty region to a cube texture resource.
 /// | [get_cube_map_surface](Self::get_cube_map_surface)                                | [GetCubeMapSurface]       | Retrieves a cube texture map surface.
@@ -533,7 +533,7 @@ mod cube_texture {
 ///
 /// ### Methods
 ///
-/// | thin3d9                                                                           | docs.microsoft.com        | Description |
+/// | thindx                                                                            | docs.microsoft.com        | Description |
 /// | --------------------------------------------------------------------------------- | ------------------------- | ----------- |
 /// | [add_dirty_rect](Self::add_dirty_rect)                                            | [AddDirtyRect]            | Adds a dirty region to a texture resource.
 /// | [get_level_desc](Self::get_level_desc)                                            | [GetLevelDesc]            | Retrieves a level description of a texture resource.
@@ -742,7 +742,7 @@ mod texture {
 ///
 /// ### Methods
 ///
-/// | thin3d9                                                                           | docs.microsoft.com        | Description |
+/// | thindx                                                                            | docs.microsoft.com        | Description |
 /// | --------------------------------------------------------------------------------- | ------------------------- | ----------- |
 /// | [add_dirty_box](Self::add_dirty_box)                                              | [AddDirtyBox]             | Adds a dirty region to a volume texture resource.
 /// | [get_level_desc](Self::get_level_desc)                                            | [GetLevelDesc]            | Retrieves a level description of a volume texture resource.

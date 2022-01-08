@@ -29,7 +29,7 @@ pub struct Direct3D(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3D9>);
 ///
 /// ### Methods
 ///
-/// | thin3d9                                                                   | docs.microsoft.com            | Description |
+/// | thindx                                                                    | docs.microsoft.com            | Description |
 /// | ------------------------------------------------------------------------- | ----------------------------- | ----------- |
 /// | [create](Self::create)                                                    | [Direct3DCreate9]             | Creates an [IDirect3D9] object and returns it.
 /// | [check_depth_stencil_match](Self::check_depth_stencil_match)              | [CheckDepthStencilMatch]      | Determines whether a depth-stencil format is compatible with a render-target format in a particular display mode.

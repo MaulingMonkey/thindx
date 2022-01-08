@@ -20,7 +20,7 @@ pub struct Volume(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DVolume9>);
 ///
 /// ### Methods
 ///
-/// | thin3d9                                                       | docs.microsoft.com    | Description |
+/// | thindx                                                        | docs.microsoft.com    | Description |
 /// | ------------------------------------------------------------- | --------------------- | ----------- |
 /// | [free_private_data](Self::free_private_data)                  | [FreePrivateData]     | Frees the specified private data associated with this volume.
 /// | [get_container](Self::get_container)                          | [GetContainer]        | Provides access to the parent volume texture object, if this surface is a child level of a volume texture.

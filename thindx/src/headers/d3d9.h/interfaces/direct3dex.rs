@@ -24,7 +24,7 @@ pub struct Direct3DEx(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3D9Ex>);
 ///
 /// ### Methods
 ///
-/// | thin3d9                                                           | docs.microsoft.com        | Description |
+/// | thindx                                                            | docs.microsoft.com        | Description |
 /// | ----------------------------------------------------------------- | ------------------------- | ----------- |
 /// | [create](Self::create)                                            | [Direct3DCreate9Ex]       | Creates an [IDirect3D9Ex] object and returns an interface to it.
 /// | [create_device_ex](Self::create_device_ex)                        | [CreateDeviceEx]          | Creates a device to represent the display adapter.

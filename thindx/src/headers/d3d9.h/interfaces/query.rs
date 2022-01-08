@@ -24,7 +24,7 @@ pub struct Query(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DQuery9>);
 ///
 /// ### Methods
 ///
-/// | thin3d9                                   | docs.microsoft.com    | Description |
+/// | thindx                                    | docs.microsoft.com    | Description |
 /// | ----------------------------------------- | --------------------- | ----------- |
 /// | [get_data](Self::get_data_inplace)        | [GetData]             | Polls a queried resource to get the query state or a query result. For more information about queries, see [Queries (Direct3D 9)].
 /// | [get_data_size](Self::get_data_size)      | [GetDataSize]         | Gets the number of bytes in the query data.

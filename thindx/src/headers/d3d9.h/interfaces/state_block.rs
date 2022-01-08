@@ -44,7 +44,7 @@ pub struct StateBlock(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DStateBl
 ///
 /// ### Methods
 ///
-/// | thin3d9                                                       | docs.microsoft.com    | Description |
+/// | thindx                                                        | docs.microsoft.com    | Description |
 /// | ------------------------------------------------------------- | --------------------- | ----------- |
 /// | [apply](Self::apply)                                          | [Apply]               | Apply the state block to the current device state.
 /// | [capture](Self::capture)                                      | [Capture]             | Capture the current value of states that are included in a stateblock.

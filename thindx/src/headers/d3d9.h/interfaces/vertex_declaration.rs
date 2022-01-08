@@ -19,7 +19,7 @@ pub struct VertexDeclaration(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3D
 ///
 /// ### Methods
 ///
-/// | thin3d9                                                       | docs.microsoft.com    | Description |
+/// | thindx                                                        | docs.microsoft.com    | Description |
 /// | ------------------------------------------------------------- | --------------------- | ----------- |
 /// | [get_declaration_size](Self::get_declaration_size)            | [GetDeclaration]      | Get the number of elements in this vertex declaration, including the [VertexElement::END]
 /// | [get_declaration_inplace](Self::get_declaration_inplace)      | [GetDeclaration]      | Gets the elements in this vertex declaration, including the [VertexElement::END]

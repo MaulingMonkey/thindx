@@ -55,8 +55,8 @@ pub fn create_window(title: &str) -> HWND {
 }
 
 thread_local! {
-    pub static HWND1 : HWND = create_window("thin3d9 test window #1");
-    pub static HWND2 : HWND = create_window("thin3d9 test window #2");
+    pub static HWND1 : HWND = create_window("thindx test window #1");
+    pub static HWND2 : HWND = create_window("thindx test window #2");
 }
 
 pub fn optional_dev_init() {

@@ -45,7 +45,7 @@ pub struct VertexShader(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DVerte
 ///
 /// ### Methods
 ///
-/// | thin3d9                                                       | docs.microsoft.com    | Description |
+/// | thindx                                                        | docs.microsoft.com    | Description |
 /// | ------------------------------------------------------------- | --------------------- | ----------- |
 /// | [get_device](Self::get_device)                                | [GetDevice]           | Gets the device.
 /// | [get_function_size](Self::get_function_size)                  | [GetFunction]         | Gets the size of the shader function data.
@@ -140,7 +140,7 @@ mod pixel_shader {
 ///
 /// ### Methods
 ///
-/// | thin3d9                                                       | docs.microsoft.com    | Description |
+/// | thindx                                                        | docs.microsoft.com    | Description |
 /// | ------------------------------------------------------------- | --------------------- | ----------- |
 /// | [get_device](Self::get_device)                                | [GetDevice]           | Gets the device.
 /// | [get_function_size](Self::get_function_size)                  | [GetFunction]         | Gets the size of the shader function data.
