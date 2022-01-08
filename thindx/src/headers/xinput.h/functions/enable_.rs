@@ -21,6 +21,7 @@ use winapi::um::xinput::*;
 /// # use thindx::xinput;
 /// # use winapi::shared::minwindef::*;
 /// # use winapi::shared::windef::*;
+/// # use winapi::um::winuser::*;
 /// unsafe extern "system"
 /// fn wndproc(hwnd: HWND, msg: u32, wparam: WPARAM, lparam: LPARAM) -> LRESULT {
 ///     match msg {

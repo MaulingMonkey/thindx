@@ -13,7 +13,7 @@ use winapi::um::xinput::*;
 ///
 /// ### Errors
 /// *   [ERROR::DEVICE_NOT_CONNECTED]
-#[deprecated = "This undocumented function is reserved for system software to access [Buttons::Guide]."]
+#[deprecated = "This undocumented function is reserved for system software to access Buttons::Guide."]
 pub fn get_state_ex(user_index: impl Into<User>) -> Result<State, MethodError> {
     let user_index = user_index.into().into();
     let mut state = State::zeroed();
