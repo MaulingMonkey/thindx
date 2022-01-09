@@ -103,6 +103,14 @@
             "command": "cargo build --package thindx --example d3dcompiler-05-reflect-library --release",
         },
         {
+            "label":   "cargo build --package thindx --example xinput-exercise-all",
+            "command": "cargo build --package thindx --example xinput-exercise-all",
+        },
+        {
+            "label":   "cargo build --package thindx --example xinput-exercise-all --release",
+            "command": "cargo build --package thindx --example xinput-exercise-all --release",
+        },
+        {
             "label":        "open repository",
             "windows":      { "command": "start \"\"    \"https://github.com/MaulingMonkey/thindx\"" },
             "linux":        { "command": "xdg-open      \"https://github.com/MaulingMonkey/thindx\"" },

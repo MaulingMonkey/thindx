@@ -212,5 +212,35 @@
                 "enableDebugHeap":          false,
             }
         },
+        {
+            "name":                     "xinput-exercise-all • debug",
+            "type":                     "cppdbg",
+            "request":                  "launch",
+            "externalConsole":          true,
+            "preLaunchTask":            "cargo build --package thindx --example xinput-exercise-all",
+            "program":                  "${workspaceFolder}/target/debug/examples/xinput-exercise-all",
+            "cwd":                      "${workspaceFolder}",
+            "environment":              [ { "name": "RUST_BACKTRACE", "value": "1" } ],
+            "windows": {
+                "type":                     "cppvsdbg",
+                "program":                  "${workspaceFolder}/target/debug/examples/xinput-exercise-all.exe",
+                "enableDebugHeap":          true,
+            }
+        },
+        {
+            "name":                     "xinput-exercise-all • release",
+            "type":                     "cppdbg",
+            "request":                  "launch",
+            "externalConsole":          true,
+            "preLaunchTask":            "cargo build --package thindx --example xinput-exercise-all --release",
+            "program":                  "${workspaceFolder}/target/release/examples/xinput-exercise-all",
+            "cwd":                      "${workspaceFolder}",
+            "environment":              [ { "name": "RUST_BACKTRACE", "value": "1" } ],
+            "windows": {
+                "type":                     "cppvsdbg",
+                "program":                  "${workspaceFolder}/target/release/examples/xinput-exercise-all.exe",
+                "enableDebugHeap":          false,
+            }
+        },
     ]
 }

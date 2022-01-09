@@ -29,6 +29,7 @@ fn launch_json(mut j: impl Write) -> io::Result<()> {
     writeln!(j, "    \"version\": \"0.2.0\",")?;
     writeln!(j, "    \"configurations\": [")?;
     for example in thindx_examples() {
+        let external_console = external_console(&example);
         for (config, extra) in [
             ("debug",   ""),
             ("release", " --release"),
@@ -39,7 +40,11 @@ fn launch_json(mut j: impl Write) -> io::Result<()> {
             writeln!(j, "            \"name\":                     {:?},", name)?;
             writeln!(j, "            \"type\":                     \"cppdbg\",")?;
             writeln!(j, "            \"request\":                  \"launch\",")?;
-            writeln!(j, "            \"internalConsoleOptions\":   \"openOnSessionStart\",")?;
+            if external_console {
+                writeln!(j, "            \"externalConsole\":          true,")?;
+            } else {
+                writeln!(j, "            \"internalConsoleOptions\":   \"openOnSessionStart\",")?;
+            }
             writeln!(j, "            \"preLaunchTask\":            {:?},", task)?;
             writeln!(j, "            \"program\":                  {:?},", format!("${{workspaceFolder}}/target/{}/examples/{}", config, example))?;
             writeln!(j, "            \"cwd\":                      \"${{workspaceFolder}}\",")?;
@@ -113,4 +118,8 @@ fn thindx_examples() -> impl Iterator<Item = String> {
     thindx_examples.retain(|f| f.file_type.is_file());
     thindx_examples.sort_by(|a, b| a.file_name.cmp(&b.file_name));
     thindx_examples.into_iter().filter_map(|e| Some(e.file_name.to_str()?.strip_suffix(".rs")?.to_string()))
+}
+
+fn external_console(example: &str) -> bool {
+    example.starts_with("xinput-")
 }
