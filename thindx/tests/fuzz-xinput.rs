@@ -46,7 +46,7 @@ macro_rules! fuzz {
                 fuzz!(
                     #[allow(deprecated)] |u| xinput::get_audio_device_ids(u),
                     ERROR::BAD_ARGUMENTS,
-                    // ERROR::DEVICE_NOT_CONNECTED, // get_audio_device_ids succeeds even when `u` isn't connected
+                    ERROR::DEVICE_NOT_CONNECTED,    // only on some systems
                     THINERR::MISSING_DLL_EXPORT,    // untested
                 );
 

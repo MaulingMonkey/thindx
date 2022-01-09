@@ -21,7 +21,13 @@ use std::os::windows::ffi::*;
 ///
 /// ### Errors
 /// *   [ERROR::BAD_ARGUMENTS]          - Invalid [`User`] or [`User::Any`]
-/// *   [THINERR::MISSING_DLL_EXPORT]?  - XAudio2 / Windows Core Audio Device Names unavailable: XInput 1.3 or earlier
+/// *   [ERROR::DEVICE_NOT_CONNECTED]   - **Unreliably.**
+/// *   [THINERR::MISSING_DLL_EXPORT]   - XAudio2 / Windows Core Audio Device Names unavailable: XInput 1.3 or earlier
+///
+/// | System            | Windows `ver`     | Windows SKU           | Behavior |
+/// | ----------------- | ----------------- | --------------------- | -------- |
+/// | Github Actions    | 10.0.17763.2366   | Windows 2019 Server   | [ERROR::DEVICE_NOT_CONNECTED] observed.
+/// | "SACRILEGE"       | 10.0.19041.1415   | Windows 10 Pro        | Succeeds when called on missing gamepads
 ///
 /// ### See Also
 /// *   [Getting Audio Device Identifiers](https://docs.microsoft.com/en-us/windows/win32/xinput/getting-started-with-xinput#getting-audio-device-identifiers)
@@ -47,11 +53,11 @@ pub fn get_audio_device_ids(user_index: impl Into<User>) -> Result<AudioDeviceId
 #[test] fn test_returns() {
     if get_audio_device_ids(User::Zero) == THINERR::MISSING_DLL_EXPORT { return }
 
-    // Succeeds even if gamepad not connected
-    get_audio_device_ids(User::Zero ).unwrap();
-    get_audio_device_ids(User::One  ).unwrap();
-    get_audio_device_ids(User::Two  ).unwrap();
-    get_audio_device_ids(User::Three).unwrap();
+    // May or may not succeed, even if gamepad not connected
+    if let Err(err) = get_audio_device_ids(User::Zero ) { assert_eq!(ERROR::DEVICE_NOT_CONNECTED, err.kind()); }
+    if let Err(err) = get_audio_device_ids(User::One  ) { assert_eq!(ERROR::DEVICE_NOT_CONNECTED, err.kind()); }
+    if let Err(err) = get_audio_device_ids(User::Two  ) { assert_eq!(ERROR::DEVICE_NOT_CONNECTED, err.kind()); }
+    if let Err(err) = get_audio_device_ids(User::Three) { assert_eq!(ERROR::DEVICE_NOT_CONNECTED, err.kind()); }
 
     // Invalid User s
     assert_eq!(ERROR::BAD_ARGUMENTS, get_audio_device_ids(User::from_unchecked(4))  );
