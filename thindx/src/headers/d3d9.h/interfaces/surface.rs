@@ -304,11 +304,11 @@ mod private {
             (Some(Format::D16),             true,       false,      true    ),
             (Some(Format::D15S1),           true,       true,       false   ),
             (Some(Format::D24X4S4),         true,       true,       false   ),
-            (Some(Format::D16_LOCKABLE),    true,       false,      true    ),
+            (Some(Format::D16_LOCKABLE),    true,       false,      false   ), // Not supported on "necromancy"
             (Some(Format::D24FS8),          true,       true,       false   ),
             (Some(Format::D32),             true,       false,      false   ),
             (Some(Format::D32_LOCKABLE),    true,       false,      false   ),
-            (Some(Format::D32F_LOCKABLE),   true,       false,      true    ),
+            (Some(Format::D32F_LOCKABLE),   true,       false,      false   ), // Not supported on "necromancy"
             (Some(Format::X8_LOCKABLE),     false,      false,      false   ),
         ].iter().copied() {
             let device = device_test_pp(false, |pp, _| {
