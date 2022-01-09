@@ -84,11 +84,9 @@ fn doc(_args: std::env::Args, help: bool) {
     run("cargo build --examples");
     examples::update();
     headers::update();
-    if help {
-        run(r"cargo doc -p thindx --all-features --target-dir=target\all-features --open");
-    } else {
-        run(r"cargo doc -p thindx --all-features --target-dir=target\all-features");
-    }
+    run(r"cargo doc --no-deps --workspace --all-features --target-dir=target\all-features");
+    if !help { return }
+    run(r"cargo doc --no-deps -p thindx   --all-features --target-dir=target\all-features --open");
 }
 
 
