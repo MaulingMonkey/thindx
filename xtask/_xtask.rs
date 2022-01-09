@@ -27,7 +27,6 @@ fn build(_args: std::env::Args) {
     copy_thindx_files();
     scan::src().unwrap_or_else(|()| std::process::exit(1));
     run("cargo fetch");
-    run("cargo check --frozen --workspace --all-targets");
     run("cargo build --frozen --workspace --all-targets");
     run("cargo build --frozen --workspace --all-targets --all-features");
     examples::update();
