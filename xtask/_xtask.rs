@@ -28,11 +28,11 @@ fn build(_args: std::env::Args) {
     scan::src().unwrap_or_else(|()| std::process::exit(1));
     run("cargo fetch");
     run("cargo build --frozen --workspace --all-targets");
-    run("cargo build --frozen --workspace --all-targets --all-features");
+    run(r"cargo build --frozen --workspace --all-targets --all-features --target-dir=target\all-features");
     examples::update();
     headers::update();
-    run("cargo   doc --frozen --workspace --all-features");
-    run("cargo  test --frozen --workspace --all-features");
+    run(r"cargo   doc --frozen --workspace --all-features --target-dir=target\all-features");
+    run(r"cargo  test --frozen --workspace --all-features --target-dir=target\all-features");
 }
 
 fn check(mut args: std::env::Args) {
@@ -85,9 +85,9 @@ fn doc(_args: std::env::Args, help: bool) {
     examples::update();
     headers::update();
     if help {
-        run("cargo doc -p thindx --all-features --open");
+        run(r"cargo doc -p thindx --all-features --target-dir=target\all-features --open");
     } else {
-        run("cargo doc -p thindx --all-features");
+        run(r"cargo doc -p thindx --all-features --target-dir=target\all-features");
     }
 }
 
