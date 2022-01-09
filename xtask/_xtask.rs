@@ -1,6 +1,7 @@
 mod examples;
 mod headers;
 mod scan;
+mod vsc;
 
 use std::path::*;
 use mmrbi::*;
@@ -17,6 +18,7 @@ fn main() {
         "c" | "check"   => check(args),
         "d" | "doc"     => doc(args, false),
         "h" | "help"    => doc(args, true),
+        "vsc"           => vsc::vsc(args),
         other           => fatal!("unknown command {:?}", other),
     }
 }

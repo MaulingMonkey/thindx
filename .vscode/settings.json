@@ -1,0 +1,17 @@
+{
+    "files.exclude": {
+        "**/.git": true,
+        "target/*/*/*": true,
+
+        "thindx/examples/screenshots/*": true,
+        "thindx/LICENSE*": true,
+        "thindx/Readme.md": true,
+
+        "xtask/target/*": true,
+    },
+    "terminal.integrated.cwd": "${workspaceFolder}",
+    "terminal.integrated.env.windows": {
+        "RUSTC_LOG":    "rustc_metadata=error",
+        "TESTFAST":     "1",
+    },
+}
