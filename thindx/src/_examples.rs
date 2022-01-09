@@ -855,7 +855,7 @@ pub const d3dcompiler_05_reflect_library : () = ();
 ///         Buttons::RightShoulder, Buttons::LeftShoulder,
 ///         Buttons::DPadUp, Buttons::DPadDown, Buttons::DPadLeft, Buttons::DPadRight,
 ///         Buttons::Start,
-///         // #[allow(deprecated)] Buttons::Guide, // TODO: GetModuleHandleExW use seems busted
+///         #[allow(deprecated)] Buttons::Guide,
 ///         Buttons::Back,
 ///         Buttons::RightThumb, Buttons::LeftThumb,
 ///     ].iter().copied() {

@@ -3,13 +3,15 @@ use abistr::*;
 use winapi::shared::guiddef::GUID;
 use winapi::shared::minwindef::*;
 use winapi::um::libloaderapi::*;
+use winapi::um::processthreadsapi::*;
+use winapi::um::psapi::*;
 use winapi::um::winnt::*;
-use winapi::um::xinput::XINPUT_STATE;
-use winapi::um::xinput::XInputGetState;
+use winapi::um::xinput::*;
 
+use std::convert::*;
 use std::ffi::c_void;
 use std::io;
-use std::mem::transmute;
+use std::mem::*;
 use std::ptr::null_mut;
 
 
@@ -68,14 +70,7 @@ impl Imports {
             // By design, we'll never FreeLibrary.  Even if we guard all calls into XInput with a mutex, that won't
             // prevent any threads XInput has started from being in the middle of executing XInput code.  And after
             // calling into XInput, there's at least two new threads - one from InputHost.dll, one from ntdll.dll.
-            let mut hmodule = null_mut();
-            let succeeded = GetModuleHandleExW(
-                GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS | GET_MODULE_HANDLE_EX_FLAG_PIN,
-                (XInputGetState as unsafe extern "system" fn(_, _) -> _) as *mut _,
-                &mut hmodule,
-            );
-            if succeeded == 0 { return Err(io::Error::last_os_error()) }
-            if hmodule.is_null() { return Err(io::Error::last_os_error()); }
+            let mut hmodule = try_find_loaded_xinput().unwrap_or(null_mut());
 
             Ok(Self {
                 XInputGetDSoundAudioDeviceGuids:    load_proc_by_name(hmodule, cstr!("XInputGetDSoundAudioDeviceGuids") ).map(|p| transmute(p)),
@@ -113,4 +108,47 @@ unsafe fn load_proc_by_name(hmodule: HMODULE, name: CStrNonNull) -> Option<FARPR
 unsafe fn load_proc_by_ordinal(hmodule: HMODULE, ordinal: WORD) -> Option<FARPROC> {
     let a = GetProcAddress(hmodule, ordinal as usize as *const _);
     if a.is_null() { None } else { Some(a) }
+}
+
+/// ### ⚠️ Safety ⚠️
+///
+/// Assumes that any DLL containing an export `XInputGetState` is a usable XInput DLL... which is probably a bad assumption, but eh.
+unsafe fn try_find_loaded_xinput() -> Option<HMODULE> {
+    let proc = GetCurrentProcess();
+    let mut modules = Vec::<HMODULE>::new();
+
+    // "The EnumProcessModulesEx function is primarily designed for use by debuggers and similar applications that must
+    // extract module information from another process. If the module list in the target process is corrupted or not
+    // yet initialized, or if the module list changes during the function call as a result of DLLs being loaded or
+    // unloaded, EnumProcessModulesEx may fail or return incorrect information."
+    //
+    // https://docs.microsoft.com/en-us/windows/win32/api/psapi/nf-psapi-enumprocessmodulesex
+    //
+    let mut max_retries = 64;
+
+    loop {
+        let available_bytes = u32::try_from(std::mem::size_of_val(&modules[..])).unwrap_or(!0);
+        let mut needed_bytes : u32 = 0;
+        let ok = EnumProcessModulesEx(proc, modules.as_mut_ptr(), available_bytes, &mut needed_bytes, LIST_MODULES_DEFAULT);
+        if ok == FALSE {
+            if max_retries == 0 { return None; }
+            max_retries -= 1;
+            continue; // temporary failure? retry!
+        }
+        let needed_elements = usize::try_from(needed_bytes).unwrap_or(!0usize) / size_of::<HMODULE>();
+        if needed_bytes <= available_bytes {
+            modules.shrink_to(needed_elements);
+            break // success!
+        } else {
+            modules.resize(needed_elements, null_mut());
+            continue // not enough modules
+        }
+    }
+
+    for module in modules.iter().copied() {
+        if load_proc_by_name(module, cstr!("XInputGetState")).is_none() { continue }
+        // TODO: validate module name?
+        return Some(module);
+    }
+    None
 }

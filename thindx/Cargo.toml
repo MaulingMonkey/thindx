@@ -82,6 +82,7 @@ winapi.features = [
     # um
     "debugapi",
     "libloaderapi",
+    "psapi",
     "winuser",
     "xinput",
 ]

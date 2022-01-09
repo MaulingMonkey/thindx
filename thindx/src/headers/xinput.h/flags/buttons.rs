@@ -1,3 +1,5 @@
+#![allow(deprecated)] // Guide button flags! impl
+
 use bytemuck::{Pod, Zeroable};
 use winapi::um::xinput::*;
 
@@ -14,7 +16,7 @@ use winapi::um::xinput::*;
 #[derive(Default, Pod, Zeroable)] // 0 = No buttons
 #[repr(transparent)] pub struct Buttons(u16);
 
-flags! { Buttons => u16; None, DPadUp, DPadDown, DPadLeft, DPadRight, Start, Back, LeftThumb, RightThumb, LeftShoulder, RightShoulder, A, B, X, Y }
+flags! { Buttons => u16; None, DPadUp, DPadDown, DPadLeft, DPadRight, Start, Guide, Back, LeftThumb, RightThumb, LeftShoulder, RightShoulder, A, B, X, Y }
 
 #[allow(non_upper_case_globals)] impl Buttons {
     /// No buttons are held.
