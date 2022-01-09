@@ -43,7 +43,7 @@ checksum = "e2abad23fbc42b3700f2f279844dc832adb2b2eb069b2df918f455c4e18cc646"
 
 [[package]]
 name = "maulingmonkey-windows-sdk-scanner"
-version = "0.0.0-git"
+version = "0.0.0-unsound.4"
 source = "git+https://github.com/MaulingMonkey/windows-sdk-scanner#9687a8b305a259b8217d264e1760607bdb4bd6f0"
 dependencies = [
  "abibool",
