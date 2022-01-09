@@ -3,7 +3,6 @@
         "**/.git": true,
         "target/*/*/*": true,
 
-        "thindx/examples/screenshots/*": true,
         "thindx/LICENSE*": true,
         "thindx/Readme.md": true,
 
