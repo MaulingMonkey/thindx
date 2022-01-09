@@ -142,10 +142,22 @@ unsafe fn try_find_loaded_xinput() -> Option<HMODULE> {
         }
     }
 
-    for module in modules.iter().copied() {
-        if load_proc_by_name(module, cstr!("XInputGetState")).is_none() { continue }
-        // TODO: validate module name?
-        return Some(module);
+    modules.retain(|&m| load_proc_by_name(m, cstr!("XInputGetState")).is_some());
+
+    match modules[..] {
+        [] => None,
+        [module] => Some(module),
+        ref mut multiple => {
+            let mut name = [0u8; 4096];
+            multiple.sort_by_cached_key(|&m|{
+                let len = GetModuleBaseNameA(proc, m, name.as_mut_ptr().cast(), name.len() as _) as usize;
+                let name = &mut name[..len];
+                name.make_ascii_lowercase();
+                let prefix = b"xinput_";
+                let matching = prefix.iter().copied().zip(name.iter().copied()).position(|(x,y)| x != y).unwrap_or(prefix.len());
+                (matching * 1000 + 1000).saturating_sub(name.len()) // prioritize prefix matching "xinput_", then secondarilly prioritize shorter names.
+            });
+            multiple.last().copied()
+        },
     }
-    None
 }

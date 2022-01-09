@@ -70,7 +70,7 @@ Additionally, individual extension traits / functions / methods will likely neve
 | d3d12             | ❌    | ❌    | ❌    | ❌    |
 | dxgi              | ❌    | ❌    | ❌    | ❌    |
 | dinput            | ❌    | ❌    | ❌    | ❌    |
-| xinput            | ✔️    | ✔️    | ⚠️    | ⚠️    |
+| xinput            | ✔️    | ✔️    | ✔️\*  | ⚠️    | \* Could use more testing on older Windows
 | xaudio2           | ❌    | ❌    | ❌    | ❌    |
 | **Low Priority**  |
 | d2d               | | | | | I prefer d3d wrappers?
