@@ -67,10 +67,7 @@ impl Imports {
 
     fn load_from_linked_xinput() -> Result<Self, io::Error> {
         unsafe {
-            // By design, we'll never FreeLibrary.  Even if we guard all calls into XInput with a mutex, that won't
-            // prevent any threads XInput has started from being in the middle of executing XInput code.  And after
-            // calling into XInput, there's at least two new threads - one from InputHost.dll, one from ntdll.dll.
-            let mut hmodule = try_find_loaded_xinput().unwrap_or(null_mut());
+            let hmodule = try_find_loaded_xinput().unwrap_or(null_mut());
 
             Ok(Self {
                 XInputGetDSoundAudioDeviceGuids:    load_proc_by_name(hmodule, cstr!("XInputGetDSoundAudioDeviceGuids") ).map(|p| transmute(p)),
