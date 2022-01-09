@@ -42,6 +42,7 @@ fn check(mut args: std::env::Args) {
     let (package, mut path) = match &mut path[..] {
         ["xtask", ..]               => return, // already tested by building xtask
         ["thindx", "Cargo.toml"]    => return run("cargo check -p thindx"),
+        ["thindx", "tests", test]   => return run(&format!("cargo test -p thindx --test {}", test.strip_suffix(".rs").unwrap_or(test))),
 
         ["thindx", "examples", example_rs] => {
             if let Some(example) = example_rs.strip_suffix(".rs") {

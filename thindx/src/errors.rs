@@ -312,6 +312,9 @@ pub mod ERROR {
     /// The file exists.
     pub const FILE_EXISTS               : ErrorKind = ErrorKind(ERROR_FILE_EXISTS as _);
 
+    /// One or more arguments are not correct.
+    pub const BAD_ARGUMENTS             : ErrorKind = ErrorKind(ERROR_BAD_ARGUMENTS as _);
+
     /// The device is not connected.
     pub const DEVICE_NOT_CONNECTED      : ErrorKind = ErrorKind(ERROR_DEVICE_NOT_CONNECTED as _);
 }

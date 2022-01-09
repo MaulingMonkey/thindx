@@ -116,6 +116,8 @@ impl ErrorKind {
             ERROR::ACCESS_DENIED                => Some(("ERROR_ACCESS_DENIED",                 "Access is denied.")),
             ERROR::PATH_NOT_FOUND               => Some(("ERROR_PATH_NOT_FOUND",                "The system cannot find the path specified.")),
             ERROR::FILE_EXISTS                  => Some(("ERROR_FILE_EXISTS",                   "The file exists.")),
+            ERROR::BAD_ARGUMENTS                => Some(("ERROR_BAD_ARGUMENTS",                 "One or more arguments are not correct.")),
+            ERROR::DEVICE_NOT_CONNECTED         => Some(("ERROR_DEVICE_NOT_CONNECTED",          "The device is not connected.")),
 
             THINERR::SLICE_OVERFLOW             => Some(("THINERR_SLICE_OVERFLOW",          "Large slice passed to a DirectX API that only accepts a 32-bit length")),
             THINERR::DEVICE_MISMATCH            => Some(("THINERR_DEVICE_MISMATCH",         "Resource belonging to one Device was passed to a different Device.  To avoid undefined behavior, DirectX was not called.")),

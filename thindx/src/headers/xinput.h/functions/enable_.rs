@@ -51,4 +51,5 @@ pub fn enable(enable: bool) {
     enable(false);
     enable(true);
     enable(false);
+    enable(true);
 }
