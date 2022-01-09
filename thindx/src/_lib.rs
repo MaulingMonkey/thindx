@@ -52,6 +52,7 @@ mods! {
 }
 #[doc(no_inline)] pub use errors::*;
 
+#[cfg(doc)] #[doc = include_str!("../doc/changelog.md")] pub mod _changelog {}
 #[cfg(doc)] pub mod _examples;
 #[cfg(doc)] pub mod _headers;
 #[cfg(doc)] #[doc(hidden)] pub use _examples as examples;

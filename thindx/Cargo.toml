@@ -14,6 +14,7 @@ keywords        = ["directx", "direct3d", "d3d", "d3dcompiler", "hlsl"]
 categories      = ["api-bindings", "graphics", "os::windows-apis", "rendering::graphics-api"]
 
 include         = [
+    "doc/changelog.md",
     # "examples/*.rs",  # broken without dev
     "src/**",
     # "test/data/*",    # broken without dev
