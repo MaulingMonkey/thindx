@@ -92,6 +92,27 @@ flags! { Buttons => u16; None, DPadUp, DPadDown, DPadLeft, DPadRight, Start, Gui
     /// | ------------- | --------- | ----- |
     /// | Xbox 360      | Guide     | Center of the middle face cluster.
     /// | Xbox One      | Xbox      | Center of the middle face cluster.
+    ///
+    /// #### Conflicting Software: Xbox Game Bar (Windows 8+)
+    ///
+    /// To disable:
+    /// *   Launch `Xbox Game Bar` from the start menu
+    /// *   Open `Settings` (Gear icon on the right of the top menu bar)
+    /// *   Under `Shortcuts` > `Controller`,
+    /// *   Unselect `Open Xbox Game Bar using (X) button on a controller`
+    ///
+    /// #### Conflicting Software: Steam
+    ///
+    /// To disable, close Steam, or:
+    /// *   Open Steam's Settings
+    ///     *   `Settings` after right clicking the Steam system tray icon, or
+    ///     *   `Steam` > `Settings` in Steam's menu bar
+    /// *   Under `Controller` > `Guide Button Chord Configuration`:
+    ///     *   Choose `Browse Configs`
+    ///     *   Select `Templates` > `Gamepad` (inert/do-nothing template)
+    /// *   Under `Controller` > `General Controller Settings`:
+    ///     *   Disable `Guide Button Focuses Steam`
+    ///
     #[deprecated = "This undocumented button is not returned by most APIs, being reserved for system software.  See thindx's docs for details."]
     pub const Guide : Buttons = Buttons(1 << 10);
 
