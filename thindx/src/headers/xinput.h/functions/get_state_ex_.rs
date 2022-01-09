@@ -1,3 +1,4 @@
+use crate::*;
 use crate::xinput::*;
 use bytemuck::Zeroable;
 use winapi::um::xinput::*;
