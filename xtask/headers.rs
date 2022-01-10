@@ -178,7 +178,17 @@ impl<'cpp> Header<'cpp> {
 lazy_static::lazy_static! {
     static ref CPP2IGNORE   : BTreeSet<&'static str>                    = set_file("thindx/doc/cpp2ignore.txt", include_str!("../thindx/doc/cpp2ignore.txt"));
     static ref CPP2RUST     : BTreeMap<&'static str, Vec<&'static str>> = map_file("thindx/doc/cpp2rust.txt", include_str!("../thindx/doc/cpp2rust.txt"));
-    static ref CPP2URL      : BTreeMap<&'static str, Vec<&'static str>> = map_file("thindx/doc/cpp2url.txt", include_str!("../thindx/doc/cpp2url.txt"));
+    static ref CPP2URL      : BTreeMap<&'static str, Vec<&'static str>> = map_link_files(&[
+        ("thindx/src/headers/_misc/cpp2url.md",                 include_str!("../thindx/src/headers/_misc/cpp2url.md")),
+        ("thindx/src/headers/d3d9.h/cpp2url.md",                include_str!("../thindx/src/headers/d3d9.h/cpp2url.md")),
+        ("thindx/src/headers/d3d9caps.h/cpp2url.md",            include_str!("../thindx/src/headers/d3d9caps.h/cpp2url.md")),
+        ("thindx/src/headers/d3d9types.h/cpp2url.md",           include_str!("../thindx/src/headers/d3d9types.h/cpp2url.md")),
+        ("thindx/src/headers/d3d11shader.h/cpp2url.md",         include_str!("../thindx/src/headers/d3d11shader.h/cpp2url.md")),
+        ("thindx/src/headers/d3dcommon.h/cpp2url.md",           include_str!("../thindx/src/headers/d3dcommon.h/cpp2url.md")),
+        ("thindx/src/headers/d3dcompiler.h/cpp2url.md",         include_str!("../thindx/src/headers/d3dcompiler.h/cpp2url.md")),
+        ("thindx/src/headers/unknwn.h/cpp2url.md",              include_str!("../thindx/src/headers/unknwn.h/cpp2url.md")),
+        ("thindx/src/headers/xinput.h/cpp2url.md",              include_str!("../thindx/src/headers/xinput.h/cpp2url.md")),
+    ]);
 }
 
 fn set_file<'s>(_path: &str, text: &'s str) -> BTreeSet<&'s str> {
@@ -203,6 +213,40 @@ fn map_file<'s>(path: &str, text: &'s str) -> BTreeMap<&'s str, Vec<&'s str>> {
             r.entry(k.trim()).or_default().push(v.trim());
         } else {
             error!(at: path, line: line_no, "expected `key = value` pair");
+        }
+    }
+    r
+}
+
+fn map_link_files<'s>(path_text_pairs: &[(&str, &'s str)]) -> BTreeMap<&'s str, Vec<&'s str>> {
+    let mut r = BTreeMap::<&'s str, Vec<&'s str>>::new();
+    for (path, text) in path_text_pairs.iter().copied() {
+        for (line_idx, line) in text.lines().enumerate() {
+            let line_no = line_idx + 1;
+            let line = line.trim();
+
+            let line = if let Some((before_comment, comment)) = line.split_once("<!--") {
+                if let Some(comment) = comment.strip_suffix("-->") {
+                    if comment.contains("--") {
+                        error!(at: path, line: line_no, "expected only one <!-- ... --> comment per line");
+                        continue;
+                    } else {
+                        before_comment.trim_end()
+                    }
+                } else {
+                    error!(at: path, line: line_no, "expected only single line comments");
+                    continue;
+                }
+            } else {
+                line
+            };
+            if line.is_empty() { continue }
+
+            if let Some((k, v)) = line.split_once("]:").and_then(|(k,v)| Some((k.strip_prefix("[")?.trim(), v.trim()))) {
+                r.entry(k.trim()).or_default().push(v.trim());
+            } else {
+                error!(at: path, line: line_no, "expected `[id]: url` pair");
+            }
         }
     }
     r

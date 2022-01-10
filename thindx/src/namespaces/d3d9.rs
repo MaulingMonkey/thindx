@@ -211,6 +211,10 @@
 //! | --------------------- | --------------------- |
 // |                       | Default: **enabled** by default|
 //! | `9ex`                 | `!defined(D3D_DISABLE_9EX)` - Enables [Direct3DEx], [DeviceEx], [SwapChainEx], etc.
+//!
+#![doc = include_str!("../headers/d3d9.h/cpp2url.md")]
+#![doc = include_str!("../headers/d3d9caps.h/cpp2url.md")]
+#![doc = include_str!("../headers/d3d9types.h/cpp2url.md")]
 
 #![allow(unused_imports)]
 

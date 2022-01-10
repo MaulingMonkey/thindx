@@ -55,8 +55,8 @@
 //! * [`ID3D10Blob::GetBufferSize`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nf-d3dcommon-id3d10blob-getbuffersize)&nbsp;→ [`d3d::BytesBlob::len`], [`d3d::CodeBlob::len`], [`d3d::ReadOnlyBlob::get_buffer_size`] <br>
 //!
 //! [`ID3DDestructionNotifier`](https://microsoft.github.io/windows-docs-rs/doc/windows/Win32/Graphics/Direct3D/struct.ID3DDestructionNotifier.html) →&nbsp;❌ <br>
-//! * [`ID3DDestructionNotifier::RegisterDestructionCallback`](https://microsoft.github.io/windows-docs-rs/doc/windows/Win32/Graphics/Direct3D/struct.ID3DDestructionNotifier.html) →&nbsp;❌ <br>
-//! * [`ID3DDestructionNotifier::UnregisterDestructionCallback`](https://microsoft.github.io/windows-docs-rs/doc/windows/Win32/Graphics/Direct3D/struct.ID3DDestructionNotifier.html) →&nbsp;❌ <br>
+//! * [`ID3DDestructionNotifier::RegisterDestructionCallback`](https://microsoft.github.io/windows-docs-rs/doc/windows/Win32/Graphics/Direct3D/struct.ID3DDestructionNotifier.html#method.RegisterDestructionCallback) →&nbsp;❌ <br>
+//! * [`ID3DDestructionNotifier::UnregisterDestructionCallback`](https://microsoft.github.io/windows-docs-rs/doc/windows/Win32/Graphics/Direct3D/struct.ID3DDestructionNotifier.html#method.UnregisterDestructionCallback) →&nbsp;❌ <br>
 //!
 //! [`ID3DInclude`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nn-d3dcommon-id3dinclude)&nbsp;→ [`d3d::AsInclude`] <br>
 //! * [`ID3DInclude::Close`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nf-d3dcommon-id3dinclude-close) →&nbsp;❌ <br>
