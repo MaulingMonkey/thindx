@@ -8,7 +8,7 @@ use winapi::um::xinput::*;
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetstate)\]
 /// XInputGetStateEx
 ///
-/// **⚠️ NOTE ⚠️:** This undocumented function is reserved for system software to access [Buttons::Guide].
+/// ⚠️ **NOTE** ⚠️ This undocumented function is reserved for system software to access [Buttons::Guide].
 ///
 /// Silently falls back on `XInputGetState` if `XInputGetStateEx` is unavailable.
 ///
