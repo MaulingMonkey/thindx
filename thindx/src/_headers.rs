@@ -21,6 +21,7 @@
 //! | [d3d11shader.h](#d3d11shaderh) | ✔️ 12 of 12 | ✔️ 9 of 9 | ✔️ 1 of 1 |   | ❌ 0 of 7 |
 //! | [d3d11shadertracing.h](#d3d11shadertracingh) | ❌ 0 of 2 | ❌ 0 of 11 | ❌ 0 of 3 |   | ❌ 0 of 48 |
 //! | [xinput.h](#xinputh) |   | ✔️ 6 of 6 |   | ✔️ 8 of 8 |   |
+//! | [xaudio2.h](#xaudio2h) | ❌ 0 of 8 | ❌ 0 of 11 | ❌ 0 of 1 |   | ❌ 0 of 6 |
 //!
 //!
 //! <br>
@@ -2104,4 +2105,102 @@
 //! [`XInputGetKeystroke`](https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetkeystroke)&nbsp;→ [`xinput::get_keystroke`] <br>
 //! [`XInputGetState`](https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetstate)&nbsp;→ [`xinput::get_state`] <br>
 //! [`XInputSetState`](https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputsetstate)&nbsp;→ [`xinput::set_state`] <br>
+//!
+//! <br>
+//!
+//! # xaudio2.h
+//!
+//! ### C++ Interfaces → Rust Types
+//!
+//! `IXAudio2` →&nbsp;❌ <br>
+//! * `IXAudio2::CommitChanges` →&nbsp;❌ <br>
+//! * `IXAudio2::CreateMasteringVoice` →&nbsp;❌ <br>
+//! * `IXAudio2::CreateSourceVoice` →&nbsp;❌ <br>
+//! * `IXAudio2::CreateSubmixVoice` →&nbsp;❌ <br>
+//! * `IXAudio2::GetPerformanceData` →&nbsp;❌ <br>
+//! * `IXAudio2::RegisterForCallbacks` →&nbsp;❌ <br>
+//! * `IXAudio2::SetDebugConfiguration` →&nbsp;❌ <br>
+//! * `IXAudio2::StartEngine` →&nbsp;❌ <br>
+//! * `IXAudio2::StopEngine` →&nbsp;❌ <br>
+//! * `IXAudio2::UnregisterForCallbacks` →&nbsp;❌ <br>
+//!
+//! `IXAudio2EngineCallback` →&nbsp;❌ <br>
+//! * `IXAudio2EngineCallback::OnCriticalError` →&nbsp;❌ <br>
+//! * `IXAudio2EngineCallback::OnProcessingPassEnd` →&nbsp;❌ <br>
+//! * `IXAudio2EngineCallback::OnProcessingPassStart` →&nbsp;❌ <br>
+//!
+//! `IXAudio2Extension` →&nbsp;❌ <br>
+//! * `IXAudio2Extension::GetProcessingQuantum` →&nbsp;❌ <br>
+//! * `IXAudio2Extension::GetProcessor` →&nbsp;❌ <br>
+//!
+//! `IXAudio2MasteringVoice` →&nbsp;❌ <br>
+//! * `IXAudio2MasteringVoice::GetChannelMask` →&nbsp;❌ <br>
+//!
+//! `IXAudio2SourceVoice` →&nbsp;❌ <br>
+//! * `IXAudio2SourceVoice::Discontinuity` →&nbsp;❌ <br>
+//! * `IXAudio2SourceVoice::ExitLoop` →&nbsp;❌ <br>
+//! * `IXAudio2SourceVoice::FlushSourceBuffers` →&nbsp;❌ <br>
+//! * `IXAudio2SourceVoice::GetFrequencyRatio` →&nbsp;❌ <br>
+//! * `IXAudio2SourceVoice::GetState` →&nbsp;❌ <br>
+//! * `IXAudio2SourceVoice::SetFrequencyRatio` →&nbsp;❌ <br>
+//! * `IXAudio2SourceVoice::SetSourceSampleRate` →&nbsp;❌ <br>
+//! * `IXAudio2SourceVoice::Start` →&nbsp;❌ <br>
+//! * `IXAudio2SourceVoice::Stop` →&nbsp;❌ <br>
+//! * `IXAudio2SourceVoice::SubmitSourceBuffer` →&nbsp;❌ <br>
+//!
+//! `IXAudio2SubmixVoice` →&nbsp;❌ <br>
+//!
+//! `IXAudio2Voice` →&nbsp;❌ <br>
+//! * `IXAudio2Voice::DestroyVoice` →&nbsp;❌ <br>
+//! * `IXAudio2Voice::DisableEffect` →&nbsp;❌ <br>
+//! * `IXAudio2Voice::EnableEffect` →&nbsp;❌ <br>
+//! * `IXAudio2Voice::GetChannelVolumes` →&nbsp;❌ <br>
+//! * `IXAudio2Voice::GetEffectParameters` →&nbsp;❌ <br>
+//! * `IXAudio2Voice::GetEffectState` →&nbsp;❌ <br>
+//! * `IXAudio2Voice::GetFilterParameters` →&nbsp;❌ <br>
+//! * `IXAudio2Voice::GetOutputFilterParameters` →&nbsp;❌ <br>
+//! * `IXAudio2Voice::GetOutputMatrix` →&nbsp;❌ <br>
+//! * `IXAudio2Voice::GetVoiceDetails` →&nbsp;❌ <br>
+//! * `IXAudio2Voice::GetVolume` →&nbsp;❌ <br>
+//! * `IXAudio2Voice::SetChannelVolumes` →&nbsp;❌ <br>
+//! * `IXAudio2Voice::SetEffectChain` →&nbsp;❌ <br>
+//! * `IXAudio2Voice::SetEffectParameters` →&nbsp;❌ <br>
+//! * `IXAudio2Voice::SetFilterParameters` →&nbsp;❌ <br>
+//! * `IXAudio2Voice::SetOutputFilterParameters` →&nbsp;❌ <br>
+//! * `IXAudio2Voice::SetOutputMatrix` →&nbsp;❌ <br>
+//! * `IXAudio2Voice::SetOutputVoices` →&nbsp;❌ <br>
+//! * `IXAudio2Voice::SetVolume` →&nbsp;❌ <br>
+//!
+//! `IXAudio2VoiceCallback` →&nbsp;❌ <br>
+//! * `IXAudio2VoiceCallback::OnBufferEnd` →&nbsp;❌ <br>
+//! * `IXAudio2VoiceCallback::OnBufferStart` →&nbsp;❌ <br>
+//! * `IXAudio2VoiceCallback::OnLoopEnd` →&nbsp;❌ <br>
+//! * `IXAudio2VoiceCallback::OnStreamEnd` →&nbsp;❌ <br>
+//! * `IXAudio2VoiceCallback::OnVoiceError` →&nbsp;❌ <br>
+//! * `IXAudio2VoiceCallback::OnVoiceProcessingPassEnd` →&nbsp;❌ <br>
+//! * `IXAudio2VoiceCallback::OnVoiceProcessingPassStart` →&nbsp;❌ <br>
+//!
+//! ### C++ Structs -> Rust Structs
+//!
+//! `XAUDIO2_BUFFER` →&nbsp;❌ <br>
+//! `XAUDIO2_BUFFER_WMA` →&nbsp;❌ <br>
+//! `XAUDIO2_DEBUG_CONFIGURATION` →&nbsp;❌ <br>
+//! `XAUDIO2_EFFECT_CHAIN` →&nbsp;❌ <br>
+//! `XAUDIO2_EFFECT_DESCRIPTOR` →&nbsp;❌ <br>
+//! `XAUDIO2_FILTER_PARAMETERS` →&nbsp;❌ <br>
+//! `XAUDIO2_PERFORMANCE_DATA` →&nbsp;❌ <br>
+//! `XAUDIO2_SEND_DESCRIPTOR` →&nbsp;❌ <br>
+//! `XAUDIO2_VOICE_DETAILS` →&nbsp;❌ <br>
+//! `XAUDIO2_VOICE_SENDS` →&nbsp;❌ <br>
+//! `XAUDIO2_VOICE_STATE` →&nbsp;❌ <br>
+//! ### C++ Enums → Rust Structs
+//!
+//! `XAUDIO2_FILTER_TYPE` →&nbsp;❌ <br>
+//! * `BandPassFilter` →&nbsp;❌ <br>
+//! * `HighPassFilter` →&nbsp;❌ <br>
+//! * `HighPassOnePoleFilter` →&nbsp;❌ <br>
+//! * `LowPassFilter` →&nbsp;❌ <br>
+//! * `LowPassOnePoleFilter` →&nbsp;❌ <br>
+//! * `NotchFilter` →&nbsp;❌ <br>
+//!
 use crate::*;

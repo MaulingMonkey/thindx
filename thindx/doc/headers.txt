@@ -13,3 +13,4 @@ um\d3d11shader.h
 um\d3d11shadertracing.h
 
 um\xinput.h
+um\xaudio2.h
