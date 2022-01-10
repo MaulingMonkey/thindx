@@ -58,31 +58,49 @@ flags! { Buttons => u16; None, DPadUp, DPadDown, DPadLeft, DPadRight, Start, Gui
     /// | Xbox One      | View `⧉` | Left button of the middle face cluster
     pub const Back : Buttons = Buttons(XINPUT_GAMEPAD_BACK as _);
 
-    /// | Controller    | When  |
-    /// | ------------- | ----- |
-    /// | Xbox 360      | Pressing the left thumbstick into the controller
-    /// | Xbox One      | Pressing the left thumbstick into the controller
+    /// | Controller    | Legend    | When  |
+    /// | ------------- | --------- | ----- |
+    /// | Xbox 360      | `L`       | Pressing the left thumbstick into the controller
+    /// | Xbox One      | `L`       | Pressing the left thumbstick into the controller
     pub const LeftThumb : Buttons = Buttons(XINPUT_GAMEPAD_LEFT_THUMB as _);
 
-    /// | Controller    | When  |
-    /// | ------------- | ----- |
-    /// | Xbox 360      | Pressing the right thumbstick into the controller
-    /// | Xbox One      | Pressing the right thumbstick into the controller
+    /// | Controller    | Legend    | When  |
+    /// | ------------- | --------- | ----- |
+    /// | Xbox 360      | `R`       | Pressing the right thumbstick into the controller
+    /// | Xbox One      | `R`       | Pressing the right thumbstick into the controller
     pub const RightThumb : Buttons = Buttons(XINPUT_GAMEPAD_RIGHT_THUMB as _);
 
-    /// | Controller    | Where |
-    /// | ------------- | ----- |
-    /// | Xbox 360      | Top left on the controller
-    /// | Xbox One      | Top left on the controller
+    /// | Controller    | Legend    | Where |
+    /// | ------------- | --------- | ----- |
+    /// | Xbox 360      | `LB`      | Top left on the controller
+    /// | Xbox One      | `LB`      | Top left on the controller
     pub const LeftShoulder : Buttons = Buttons(XINPUT_GAMEPAD_LEFT_SHOULDER as _);
 
-    /// | Controller    | Where |
-    /// | ------------- | ----- |
-    /// | Xbox 360      | Top right on the controller
-    /// | Xbox One      | Top right on the controller
+    /// | Controller    | Legend    | Where |
+    /// | ------------- | --------- | ----- |
+    /// | Xbox 360      | `RB`      | Top right on the controller
+    /// | Xbox One      | `RB`      | Top right on the controller
     pub const RightShoulder : Buttons = Buttons(XINPUT_GAMEPAD_RIGHT_SHOULDER as _);
 
-    /// **⚠️ NOTE ⚠️:** This undocumented button is not returned by most APIs, being reserved for system software.
+    #[cfg(doc)]
+    /// ❌ **NOTE** ❌ Not actually exposed by XInput as [`Buttons`], see [`Gamepad::left_trigger`](crate::xinput::Gamepad::left_trigger) instead.
+    ///
+    /// | Controller    | Legend    | Where |
+    /// | ------------- | --------- | ----- |
+    /// | Xbox 360      | `LT`      | Under the top left of the controller
+    /// | Xbox One      | `LT`      | Under the top left of the controller
+    pub const LeftTrigger : () = ();
+
+    #[cfg(doc)]
+    /// ❌ **NOTE** ❌ Not actually available as part of [`Buttons`], see [`Gamepad::right_trigger`](crate::xinput::Gamepad::right_trigger) instead.
+    ///
+    /// | Controller    | Legend    | Where |
+    /// | ------------- | --------- | ----- |
+    /// | Xbox 360      | `RT`      | Under the top right on the controller
+    /// | Xbox One      | `RT`      | Under the top right on the controller
+    pub const RightTrigger : () = ();
+
+    /// ⚠️ **NOTE** ⚠️ This undocumented button is not returned by most APIs, being reserved for system software.
     ///
     /// Specifically, you must use the undocumented `XInputGetStateEx` function (same API as [`XInputGetState`](https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetstate)?) to ever retrieve this value.
     /// Additionally, this is generally meant to be reserved by the system software.
