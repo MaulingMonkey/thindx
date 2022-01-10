@@ -72,6 +72,9 @@ impl From<Color> for D3DCOLOR {
 
 
 
+/// 0xAA<span style="color: red">RR</span><span style="color: green">GG</span><span style="color: blue">BB</span>,
+/// [0xAA, <span style="color: red">0xRR</span>, <span style="color: green">0xGG</span>, <span style="color: blue">0xBB</span>], or
+/// (0xAA, <span style="color: red">0xRR</span>, <span style="color: green">0xGG</span>, <span style="color: blue">0xBB</span>)
 pub trait AsARGB                    { fn as_argb(self) -> Color; }
 impl AsARGB for u32                 { fn as_argb(self) -> Color { Color(self) } }
 impl AsARGB for [u8; 4]             { fn as_argb(self) -> Color { Color(u32::from_be_bytes(self)) } }

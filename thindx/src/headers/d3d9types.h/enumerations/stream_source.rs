@@ -7,6 +7,7 @@ use std::fmt::{self, Debug, Formatter};
 
 
 
+/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/efficiently-drawing-multiple-instances-of-geometry)\]
 /// D3DSTREAMSOURCE
 ///
 /// Used for specifying which streams should use instanced rendering.
