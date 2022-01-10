@@ -1,8 +1,51 @@
-//! [ErrorKind] values
+//! [S],
+//! [D3D],
+//! [E],
+//! [ERROR],
+//! [D3DERR],
+//! [D3DXERR],
+//! [D3D11_ERROR],
+//! [DXGI_ERROR],
+//! and [THINERR]
+//! [ErrorKind] values<br>
+//! **NOTE:** Imported into crate root, no need to prefix `errors::`...
+//!
+//! DirectX APIs return a mixture of:
+//! *   Non-[HRESULT] S_\* and ERROR_\* codes
+//! *   MAKE_HRESULT(1, FACILITY_WIN32, ...)ified ERROR_\* codes
+//! *   Other [HRESULT]s with proper names
+//!
+//! Sometimes from the same individual function!
+//! Sanitizing this muddle for the general case is beyond the scope of thindx.<br>
+//! As such, [ErrorKind] awkwardly muddles these all together too.
+//!
+//! | [HRESULT]    | Facility           | Desc  |
+//! | ------------:| ------------------ | ----- |
+//! | `0x...0....` | FACILITY_NULL      | For broadly applicable common status codes such as S_OK.
+//! | `0x...1....` | FACILITY_RPC       | For status codes returned from remote procedure calls.
+//! | `0x...2....` | FACILITY_DISPATCH  | For late-binding IDispatch interface errors.
+//! | `0x...3....` | FACILITY_STORAGE   | Returned from IStorage or IStream method calls relating to structured storage.
+//! | `0x...4....` | FACILITY_ITF       | For most status codes returned from interface methods.
+//! | `0x...7....` | FACILITY_WIN32     | Windows ERROR_\* codes packaged as an HRESULT.
+//! | `0x...8....` | FACILITY_WINDOWS   | Used for additional error codes from Microsoft-defined interfaces.
+// | `0x27D8....` |                    | ThinDX Success Codes (2=Customer Bit, 7D8 = TDX)
+//! | `0xA7D8....` |                    | ThinDX Error Codes (A=2\|8=Customer\|Error Bits, 7D8 = TDX = ThinDX)
+//! | `0x.876....` | _FACD3D            | Direct3D (9) / DirectDraw
+//! | `0x.879....` |                    | Direct3D 10
+//! | `0x.87A....` |                    | DXGI
+//! | `0x.87B....` |                    | DXGI DDI
+//! | `0x.87C....` |                    | Direct3D 11
+//! | `0x.898....` |                    | DirectWrite
+//! | `0x.899....` |                    | Direct2D
 //!
 //! ### See Also
-//! *   [D3DERR](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3derr)
+//!
 //! *   <https://www.hresult.info/>
+//! *   <https://docs.microsoft.com/en-us/windows/win32/debug/system-error-codes#system-error-codes>
+//! *   <https://docs.microsoft.com/en-us/windows/win32/direct3d11/d3d11-graphics-reference-returnvalues>
+//! *   <https://docs.microsoft.com/en-us/windows/win32/com/structure-of-com-error-codes>
+//!
+//! [HRESULT]:  https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-erref/0642cb2f-2075-4469-918c-4441e69c548a
 
 #![allow(overflowing_literals)] // ErrorKind is signed for some reason
 #![allow(non_snake_case)]
@@ -12,25 +55,6 @@ use crate::*;
 #[allow(unused_imports)] use crate::d3d9::*;
 use winapi::shared::winerror::*;
 
-// https://docs.microsoft.com/en-us/windows/win32/direct3d11/d3d11-graphics-reference-returnvalues
-
-// https://docs.microsoft.com/en-us/windows/win32/com/structure-of-com-error-codes
-// #        Facility            Desc
-// 0        FACILITY_NULL       For broadly applicable common status codes such as S_OK.
-// 1        FACILITY_RPC        For status codes returned from remote procedure calls.
-// 2        FACILITY_DISPATCH   For late-binding IDispatch interface errors.
-// 3        FACILITY_STORAGE    For status codes returned from IStorage or IStream method calls relating to structured storage. Status codes whose code (lower 16 bits) value is in the range of MS-DOS error codes (that is, less than 256) have the same meaning as the corresponding MS-DOS error.
-// 4        FACILITY_ITF        For most status codes returned from interface methods. The actual meaning of the error is defined by the interface. That is, two HRESULTs with exactly the same 32-bit value returned from two different interfaces might have different meanings.
-// 7        FACILITY_WIN32      Used to provide a means of handling error codes from functions in the Windows API as an HRESULT. Error codes in 16-bit OLE that duplicated system error codes have also been changed to FACILITY_WIN32.
-// 8        FACILITY_WINDOWS    Used for additional error codes from Microsoft-defined interfaces.
-//  0x876   _FACD3D             Direct3D
-//  0x879                       Direct3D 10
-//  0x87A                       DXGI
-//  0x87B                       DXGI DDI
-//  0x87C                       Direct3D 11
-//  0x898                       DirectWrite
-//  0x899                       Direct2D
-// 0xA7D8                       7D8 = 7DX = **T**hin**DX**
 
 /// `0xA7D8....` • **T**hin**DX** [ErrorKind]s
 ///
@@ -67,7 +91,7 @@ pub mod THINERR {
     pub const INVALID_BYTECODE : ErrorKind = ErrorKind(0xA7D80008);
 }
 
-/// `0x887C....` • Direct3D 11 [ErrorKind]s
+/// `0x887C....` • \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d11/d3d11-graphics-reference-returnvalues)\] • Direct3D 11 [ErrorKind]s
 pub mod D3D11_ERROR {
     use super::*;
 
@@ -88,7 +112,7 @@ pub mod D3D11_ERROR {
     pub const DEFERRED_CONTEXT_MAP_WITHOUT_INITIAL_DISCARD  : ErrorKind = ErrorKind(D3D11_ERROR_DEFERRED_CONTEXT_MAP_WITHOUT_INITIAL_DISCARD);
 }
 
-/// `0x8876....` • Direct3D / Direct3D9 [ErrorKind]s
+/// `0x8876....` • \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3derr)\] • Direct3D / Direct3D9 [ErrorKind]s
 pub mod D3DERR {
     use super::*;
 
@@ -221,7 +245,9 @@ pub mod D3DERR {
     pub const COMMAND_UNPARSED          : ErrorKind = ErrorKind(0x88760BB8);
 }
 
-/// [D3DXERR_*](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxerr) constants associated with the D3DX utility library (that D3D itself might sometimes use)
+/// `0x8876....` • \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxerr)\] • D3DX [ErrorKind]s
+///
+/// Some of these can be returned by Direct3D itself
 pub mod D3DXERR {
     use super::*;
 
@@ -256,7 +282,7 @@ pub mod D3DXERR {
 
 }
 
-/// `0x887A....` • DXGI [ErrorKind]s
+/// `0x887A....` • \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3ddxgi/dxgi-error)\] • DXGI [ErrorKind]s
 pub mod DXGI_ERROR {
     use super::*;
 
@@ -267,8 +293,8 @@ pub mod DXGI_ERROR {
     pub const WAS_STILL_DRAWING         : ErrorKind = ErrorKind(DXGI_ERROR_WAS_STILL_DRAWING);
 }
 
-/// `0x8000....` • General [ErrorKind]s<br>
-/// `0x8007....`
+/// `0x8000....` • \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/learnwin32/error-handling-in-com)\] • General [ErrorKind]s<br>
+/// `0x8007....` • \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/learnwin32/error-handling-in-com)\] • Win32/COM [ErrorKind]s
 ///
 /// Errors that aren't part of the D3DERR_\* family, but might still be returned by DirectX API calls.
 pub mod E {
@@ -293,7 +319,7 @@ pub mod E {
     pub const NOINTERFACE               : ErrorKind = ErrorKind(E_NOINTERFACE);
 }
 
-/// `0x0000....` • Non-hresult [ErrorKind]s
+/// `0x0000....` • \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/debug/system-error-codes--0-499-)\] • Non-hresult [ErrorKind]s
 pub mod ERROR {
     use super::*;
 
@@ -319,8 +345,8 @@ pub mod ERROR {
     pub const DEVICE_NOT_CONNECTED      : ErrorKind = ErrorKind(ERROR_DEVICE_NOT_CONNECTED as _);
 }
 
-/// `0x0000....` • Success "[ErrorKind]"s<br>
-/// `0x0876....`
+/// `0x0000....` • \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/learnwin32/error-handling-in-com)\] • Win32/COM success "[ErrorKind]"s<br>
+/// `0x0876....` • \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3derr)\] • Success "[ErrorKind]"s
 pub mod S {
     use super::*;
 
@@ -359,7 +385,7 @@ pub mod S {
     pub const PRESENT_OCCLUDED            : ErrorKind = MAKE_D3DSTATUS(2168);
 }
 
-/// `0x0876....` • Success "[ErrorKind]"s
+/// `0x0876....` • \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3derr)\] • Success "[ErrorKind]"s
 pub mod D3D {
     use super::*;
 
