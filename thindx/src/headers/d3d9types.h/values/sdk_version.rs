@@ -1,11 +1,11 @@
-#[allow(unused_imports)] use crate::*;
+#[allow(unused_imports)] use crate::d3d9::*;
 
 use winapi::shared::d3d9::{D3D_SDK_VERSION, D3D9b_SDK_VERSION};
 
 
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-direct3dcreate9)\]
-/// A D3D(9b)_SDK_VERSION identifier for use with [Direct3D::create] or [Direct3DEx::create]
+/// A D3D(9b)_SDK_VERSION for use with {[IDirect3D9Ext](IDirect3D9Ext::create), [IDirect3D9ExExt](IDirect3D9ExExt::create)}::[create](IDirect3D9ExExt::create)
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)] pub struct SdkVersion(u32);
 
