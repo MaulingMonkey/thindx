@@ -36,7 +36,7 @@ impl Compiler {
     ///
     /// ### Remarks
     /// *   This was introduced by d3dcompiler_43.dll, and is unavailable in earlier versions.
-    pub fn get_blob_part(&self, src_data: &Bytecode, part: impl Into<BlobPart>, flags: Option<void::Void>) -> Result<BytesBlob, MethodError> {
+    pub fn get_blob_part(&self, src_data: &Bytecode, part: impl Into<BlobPart>, flags: Option<std::convert::Infallible>) -> Result<BytesBlob, MethodError> {
         let f = self.D3DGetBlobPart.ok_or(MethodError::new("D3DGetBlobPart", THINERR::MISSING_DLL_EXPORT))?;
         let src_data = src_data.as_bytes();
         let part = part.into().into();

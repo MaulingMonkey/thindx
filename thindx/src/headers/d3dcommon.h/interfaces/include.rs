@@ -23,7 +23,7 @@ unsafe impl AsInclude for () {
     fn as_id3dinclude(&self) -> *mut ID3DInclude { null_mut() }
 }
 
-unsafe impl AsInclude for Option<void::Void> {
+unsafe impl AsInclude for Option<std::convert::Infallible> {
     fn as_id3dinclude(&self) -> *mut ID3DInclude { null_mut() }
 }
 

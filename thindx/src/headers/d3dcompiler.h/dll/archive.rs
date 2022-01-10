@@ -162,7 +162,7 @@ impl Compiler {
     pub fn decompress_shaders_inplace<'s>(
         &self,
         src_data:               &[u8],
-        flags:                  impl Into<Option<void::Void>>,
+        flags:                  impl Into<Option<std::convert::Infallible>>,
         start_index:            u32,
         out_shaders:            &'s mut [Option<ReadOnlyBlob>],
     ) -> Result<&'s [Option<ReadOnlyBlob>], MethodError> {
@@ -215,7 +215,7 @@ impl Compiler {
     pub fn decompress_shaders<'s>(
         &self,
         src_data:               &[u8],
-        flags:                  impl Into<Option<void::Void>>,
+        flags:                  impl Into<Option<std::convert::Infallible>>,
         _range:                 std::ops::RangeFull,
     ) -> Result<Vec<Option<ReadOnlyBlob>>, MethodError> {
         let n = self.decompress_shaders_count(src_data)? as usize;

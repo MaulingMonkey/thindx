@@ -27,7 +27,7 @@ impl Compiler {
     ///
     /// ### Remarks
     /// *   This was introduced by d3dcompiler_47.dll, and is unavailable in earlier versions.
-    pub fn create_function_linking_graph(&self, flags: Option<void::Void>) -> Result<d3d11::FunctionLinkingGraph, MethodError> {
+    pub fn create_function_linking_graph(&self, flags: Option<std::convert::Infallible>) -> Result<d3d11::FunctionLinkingGraph, MethodError> {
         let f = self.D3DCreateFunctionLinkingGraph.ok_or(MethodError::new("D3DCreateFunctionLinkingGraph", THINERR::MISSING_DLL_EXPORT))?;
         let _ = flags; let flags = 0;
         let mut flg = null_mut();
