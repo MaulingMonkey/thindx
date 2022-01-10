@@ -1,5 +1,8 @@
+use crate::*;
 use crate::xinput::*;
+
 use bytemuck::Zeroable;
+
 use winapi::shared::winerror::ERROR_EMPTY;
 use winapi::um::xinput::*;
 

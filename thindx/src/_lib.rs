@@ -15,27 +15,14 @@ pub extern crate abistr;
 /// C ABI interop types
 #[path="ctypes/_ctypes.rs"] pub mod ctypes;
 
-/// Direct3D related types and APIs used across multiple Direct3D versions.
-pub mod d3d {
-    pub use crate::d3dcommon_h::*;
-    pub use crate::d3dcompiler_h::*;
-    pub use crate::d3d9types_h::*;
-}
-
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/dx9-graphics)\]
-/// Direct3D 9 related types and APIs
-pub mod d3d9 {
-    pub use crate::d3d9_h::*;
-    pub use crate::d3d9types_h::*;
-}
-
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d11/atoc-dx-graphics-direct3d-11)\]
-/// Direct3D 11 related types and APIs (including shader reflection APIs)
-pub mod d3d11 {
-    pub use crate::d3d11shader_h::*;
-}
-
 mods! {
+    inl mod namespaces {
+        pub mod d3d;
+        pub mod d3d9;
+        pub mod d3d11;
+        pub mod xinput;
+    }
+
     #[path="headers/d3d9.h/d3d9.rs"]                mod d3d9_h;         // d3d9 mod
     #[path="headers/d3d9types.h/d3d9types.rs"]      mod d3d9types_h;    // d3d9 mod
     #[path="headers/d3d11shader.h/d3d11shader.rs"]  mod d3d11shader_h;  // d3d11 mod
@@ -43,7 +30,7 @@ mods! {
     #[path="headers/d3dcompiler.h/d3dcompiler.rs"]  mod d3dcompiler_h;  // d3d mod
     #[path="headers/guiddef.h/guiddef.rs"]          inl mod guiddef_h;
     #[path="headers/unknwn.h/unknwn.rs"]            inl mod unknwn_h;
-    #[path="headers/xinput.h/xinput.rs"]            pub mod xinput;
+    #[path="headers/xinput.h/xinput.rs"]            mod xinput_h;
 
     #[path="traits/_traits.rs"] inl mod traits;
 

@@ -1,4 +1,4 @@
-use crate::THINERR;
+use crate::*;
 use crate::xinput::*;
 
 use std::ffi::OsString;

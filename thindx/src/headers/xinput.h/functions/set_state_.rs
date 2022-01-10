@@ -1,4 +1,6 @@
+use crate::*;
 use crate::xinput::*;
+
 use winapi::um::xinput::*;
 
 
