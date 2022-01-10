@@ -550,106 +550,62 @@ fn file_doc_comments(path: &Path, text: &str) -> Result<(), ()> {
     if s.errors { Err(()) } else { Ok(()) }
 }
 
+macro_rules! h3 {
+    ( $($label:literal => $ident:ident),* $(,)? ) => {
+        #[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)]
+        enum H3 { $($ident),* }
 
+        impl FromStr for H3 {
+            type Err = String;
+            fn from_str(s: &str) -> Result<Self, Self::Err> {
+                #[allow(unreachable_patterns)] // A few overrides before $label => $ident
+                match s {
+                    "⚠️ Safety ⚠️"     => Ok(H3::Safety),
+                    "Safety"            => Err(format!("`### {}` should be marked `### ⚠️ Safety ⚠️`", s)),
+                    "Example"           => Ok(H3::Examples),
+                $(  $label              => Ok(H3::$ident),                                                      )*
+                    other               => Err(format!("`### {}` not an expected h3 header", other))
+                }
+            }
+        }
 
-#[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)]
-enum H3 {
+        impl H3 {
+            pub fn as_str(&self) -> &'static str { match *self { $(H3::$ident => $label),* } }
+        }
+    }
+}
+
+h3! {
     // General
-    Safety,
-    Usage,
+    "⚠️ Safety ⚠️" => Safety,
+    "Usage"         => Usage,
 
     // Trait specific
-    Methods,
+    "Methods"       => Methods,
 
     // Function specific
-    Arguments,
-    Panics,
-    Errors,
-    Returns,
+    "Arguments"     => Arguments,
+    "Panics"        => Panics,
+    "Errors"        => Errors,
+    "Returns"       => Returns,
 
     // Module specific
-    Enumerations,
-    Functions,
-    Flags,
-    Interfaces,
-    Structures,
+    "Enumerations"  => Enumerations,
+    "Functions"     => Functions,
+    "Flags"         => Flags,
+    "Interfaces"    => Interfaces,
+    "Structures"    => Structures,
+    "Values"        => Values,
+    "Traits"        => Traits,
+    "Features"      => Features,
+    "Wrappers"      => Wrappers, // XXX
 
     // General
-    Examples,
-    Output,
-    SeeAlso,
-    Remarks,
+    "Examples"      => Examples,
+    "Output"        => Output,
+    "See Also"      => SeeAlso,
+    "Remarks"       => Remarks,
 }
-
-impl FromStr for H3 {
-    type Err = String;
-    fn from_str(s: &str) -> Result<Self, Self::Err> {
-        match s {
-            // General
-            "⚠️ Safety ⚠️" => Ok(H3::Safety),
-            "Usage"     => Ok(H3::Usage),
-
-            // Trait specific
-            "Methods"   => Ok(H3::Methods),
-
-            // Function specific
-            "Arguments" => Ok(H3::Arguments),
-            "Panics"    => Ok(H3::Panics),
-            "Errors"    => Ok(H3::Errors),
-            "Returns"   => Ok(H3::Returns),
-
-            // Module specific
-            "Enumerations"  => Ok(H3::Enumerations),
-            "Functions"     => Ok(H3::Functions),
-            "Flags"         => Ok(H3::Flags),
-            "Interfaces"    => Ok(H3::Interfaces),
-            "Structures"    => Ok(H3::Structures),
-
-            // General
-            "Example"   => Ok(H3::Examples),
-            "Examples"  => Ok(H3::Examples),
-            "Output"    => Ok(H3::Output),
-            "See Also"  => Ok(H3::SeeAlso),
-            "Remarks"   => Ok(H3::Remarks),
-
-            other       => Err(format!("`### {}` not an expected h3 header", other)),
-        }
-    }
-}
-
-impl H3 {
-    pub fn as_str(&self) -> &'static str {
-        match *self {
-            // General
-            H3::Safety      => "Safety",
-            H3::Usage       => "Usage",
-
-            // Trait specific
-            H3::Methods     => "Methods",
-
-            // Function specific
-            H3::Arguments   => "Arguments",
-            H3::Panics      => "Panics",
-            H3::Errors      => "Errors",
-            H3::Returns     => "Returns",
-
-            // Module specific
-            H3::Enumerations    => "Enumerations",
-            H3::Functions       => "Functions",
-            H3::Flags           => "Flags",
-            H3::Interfaces      => "Interfaces",
-            H3::Structures      => "Structures",
-
-            // General
-            H3::Examples    => "Examples",
-            H3::Output      => "Output",
-            H3::SeeAlso     => "See Also",
-            H3::Remarks     => "Remarks",
-        }
-    }
-}
-
-
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)]
 enum Visibility {
