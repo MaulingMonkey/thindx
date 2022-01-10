@@ -6,7 +6,7 @@ use std::ops::{Deref, DerefMut};
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/D3DINDEXBUFFER_DESC)\]
+/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dindexbuffer-desc)\]
 /// D3DINDEXBUFFER_DESC
 ///
 /// Describes an index buffer

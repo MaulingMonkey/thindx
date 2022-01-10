@@ -1069,9 +1069,9 @@
 //! [`D3DBOX`](https://docs.microsoft.com/en-us/windows/win32/dibox3d9/d3dbox)&nbsp;→ [`d3d::Box`] <br>
 //! [`D3DCLIPSTATUS9`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dclipstatus9)&nbsp;→ [`d3d9::ClipStatus`] <br>
 //! [`D3DCOLORVALUE`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dcolorvalue)&nbsp;→ [`d3d::ColorValue`] <br>
-//! `D3DCOMPOSERECTDESC` →&nbsp;❌ <br>
-//! `D3DCOMPOSERECTDESTINATION` →&nbsp;❌ <br>
-//! `D3DDEVICE_CREATION_PARAMETERS` →&nbsp;❌ <br>
+//! [`D3DCOMPOSERECTDESC`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dcomposerectdesc) →&nbsp;❌ <br>
+//! [`D3DCOMPOSERECTDESTINATION`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dcomposerectdestination) →&nbsp;❌ <br>
+//! [`D3DDEVICE_CREATION_PARAMETERS`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddevice-creation-parameters) →&nbsp;❌ <br>
 //! `D3DDEVINFO_D3D9BANDWIDTHTIMINGS` →&nbsp;❌ <br>
 //! `D3DDEVINFO_D3D9CACHEUTILIZATION` →&nbsp;❌ <br>
 //! `D3DDEVINFO_D3D9INTERFACETIMINGS` →&nbsp;❌ <br>
@@ -1082,25 +1082,25 @@
 //! `D3DDEVINFO_VCACHE` →&nbsp;❌ <br>
 //! [`D3DDISPLAYMODE`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddisplaymode)&nbsp;→ [`d3d::DisplayMode`] <br>
 //! [`D3DDISPLAYMODEEX`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddisplaymodeex)&nbsp;→ [`d3d::DisplayModeEx`] <br>
-//! `D3DDISPLAYMODEFILTER` →&nbsp;❌ <br>
+//! [`D3DDISPLAYMODEFILTER`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddisplaymodefilter) →&nbsp;❌ <br>
 //! `D3DENCRYPTED_BLOCK_INFO` →&nbsp;❌ <br>
-//! `D3DGAMMARAMP` →&nbsp;❌ <br>
-//! `D3DINDEXBUFFER_DESC` →&nbsp;❌ <br>
+//! [`D3DGAMMARAMP`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dgammaramp) →&nbsp;❌ <br>
+//! [`D3DINDEXBUFFER_DESC`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dindexbuffer-desc) →&nbsp;❌ <br>
 //! [`D3DLIGHT9`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dlight9)&nbsp;→ [`d3d9::Light`] <br>
-//! `D3DLOCKED_BOX` →&nbsp;❌ <br>
-//! `D3DLOCKED_RECT` →&nbsp;❌ <br>
+//! [`D3DLOCKED_BOX`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dlocked-box) →&nbsp;❌ <br>
+//! [`D3DLOCKED_RECT`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dlocked-rect) →&nbsp;❌ <br>
 //! [`D3DMATERIAL9`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dmaterial9)&nbsp;→ [`d3d9::Material`] <br>
-//! `D3DMATRIX` →&nbsp;❌ <br>
-//! `D3DMEMORYPRESSURE` →&nbsp;❌ <br>
+//! [`D3DMATRIX`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dmatrix) →&nbsp;❌ <br>
+//! [`D3DMEMORYPRESSURE`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dmemorypressure) →&nbsp;❌ <br>
 //! [`D3DPRESENTSTATS`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dpresentstats)&nbsp;→ [`d3d::PresentStats`] <br>
-//! `D3DPRESENT_PARAMETERS` →&nbsp;❌ <br>
-//! `D3DRANGE` →&nbsp;❌ <br>
+//! [`D3DPRESENT_PARAMETERS`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dpresent-parameters) →&nbsp;❌ <br>
+//! [`D3DRANGE`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3drange) →&nbsp;❌ <br>
 //! [`D3DRASTER_STATUS`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3draster-status)&nbsp;→ [`d3d::RasterStatus`] <br>
 //! [`D3DRECT`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3drect)&nbsp;→ [`d3d::Rect`] <br>
-//! `D3DRECTPATCH_INFO` →&nbsp;❌ <br>
-//! `D3DRESOURCESTATS` →&nbsp;❌ <br>
+//! [`D3DRECTPATCH_INFO`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3drectpatch-info) →&nbsp;❌ <br>
+//! [`D3DRESOURCESTATS`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dresourcestats) →&nbsp;❌ <br>
 //! [`D3DSURFACE_DESC`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dsurface-desc)&nbsp;→ [`d3d::SurfaceDesc`] <br>
-//! `D3DTRIPATCH_INFO` →&nbsp;❌ <br>
+//! [`D3DTRIPATCH_INFO`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dtripatch-info) →&nbsp;❌ <br>
 //! [`D3DVECTOR`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dvector)&nbsp;→ [`d3d::Vector`] <br>
 //! [`D3DVERTEXBUFFER_DESC`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/D3DVERTEXBUFFER_DESC)&nbsp;→ [`d3d::VertexBufferDesc`] <br>
 //! [`D3DVERTEXELEMENT9`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dvertexelement9)&nbsp;→ [`d3d9::VertexElement`] <br>
@@ -1845,7 +1845,7 @@
 //! * `D3DTS_TEXTURE7` →&nbsp;❌ <br>
 //! * `D3DTS_VIEW` →&nbsp;❌ <br>
 //!
-//! `D3DVERTEXBLENDFLAGS` →&nbsp;❌ <br>
+//! [`D3DVERTEXBLENDFLAGS`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dvertexblendflags) →&nbsp;❌ <br>
 //! * `D3DVBF_0WEIGHTS` →&nbsp;❌ <br>
 //! * `D3DVBF_1WEIGHTS` →&nbsp;❌ <br>
 //! * `D3DVBF_2WEIGHTS` →&nbsp;❌ <br>

@@ -47,9 +47,9 @@
 //!
 //! | Rust                                      | C++                       | Description   |
 //! | ----------------------------------------- | ------------------------- | ------------- |
-//! | [D3D](crate::D3D)\[[ERR](crate::D3DERR)\]         <br> [D3D](crate::D3D)\[[ERR](crate::D3DERR)\]::\*  | [D3DERR]                      <br> [D3DERR_*]                 | Windows HRESULTs optimized for displaying Direct3D errors
+//! | [ErrorKind]                                       <br> [D3D](crate::D3D)\[[ERR](crate::D3DERR)\]::\*  | [HRESULT]                     <br> [D3DERR_*]                 | Windows HRESULTs optimized for displaying Direct3D errors
 //! | [BackBufferType]                                  <br> [BackBufferType]::\*                           | [D3DBACKBUFFER_TYPE]          <br> [D3DBACKBUFFER_TYPE_*]     | [Mono](crate::BackBufferType::Mono), [Left](crate::BackBufferType::Left), or [Right](crate::BackBufferType::Right) for [stereo](https://en.wikipedia.org/wiki/Stereoscopy) rendering
-//! | [BasisType]                                       <br> [Basis]::\*                                    | [D3DBASISTYPE]                <br> [D3DBASISTYPE_*]           | Tesselation basis
+//! | [BasisType]                                       <br> [Basis]::\*                                    | [D3DBASISTYPE]                <br> [D3DBASIS_*]               | Tesselation basis
 //! | [Blend]                                           <br> [Blend]::\*                                    | [D3DBLEND]                    <br> [D3DBLEND_*]               | Target/output alpha/color blending factors
 //! | [BlendOp]                                         <br> [BlendOp]::\*                                  | [D3DBLENDOP]                  <br> [D3DBLENDOP_*]             | Target/output alpha/color blending operation
 //! | [CmpFunc]                                         <br> [Cmp]::\*                                      | [D3DCMPFUNC]                  <br> [D3DCMP_*]                 | ZBuffer/depth comparison operation
@@ -156,6 +156,7 @@
 #![doc = include_str!("../headers/d3d9.h/cpp2url.md")]
 #![doc = include_str!("../headers/d3d9caps.h/cpp2url.md")]
 #![doc = include_str!("../headers/d3d9types.h/cpp2url.md")]
+#![doc = include_str!("../headers/unknwn.h/cpp2url.md")]
 
 #![allow(unused_imports)]
 
