@@ -47,6 +47,10 @@
             "command": "cargo h",
         },
         {
+            "label":   "push github master",
+            "command": "git push github master",
+        },
+        {
             "label":   "cargo build --package thindx --example d3d9-00-clear-winit",
             "command": "cargo build --package thindx --example d3d9-00-clear-winit",
         },

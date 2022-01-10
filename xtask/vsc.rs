@@ -14,6 +14,7 @@ const COMMANDS : &'static [(&'static str, &'static str)] = &[
     ("build",               "cargo b"),
     ("doc",                 "cargo d"),
     ("help",                "cargo h"),
+    ("push github master",  "git push github master"),
 ];
 
 pub fn vsc(_args: std::env::Args) {
