@@ -214,9 +214,12 @@
 
 #![allow(unused_imports)]
 
+mod shared_handle;
+
 use crate::Unknown;
 use abibool::bool32;
 use u32 as DWORD;
 
 pub use crate::d3d9_h::*;
 pub use crate::d3d9types_h::*;
+pub use shared_handle::SharedHandleParam;
