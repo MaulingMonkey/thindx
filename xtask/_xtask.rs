@@ -48,7 +48,7 @@ fn check(mut args: std::env::Args) {
             if let Some(example) = example_rs.strip_suffix(".rs") {
                 let mut cmd = Command::parse("cargo check --example").unwrap();
                 cmd.arg(example);
-                status!("Executing", "{}", cmd);
+                status!("Running", "{:?}", cmd);
                 cmd.status0().unwrap_or_else(|err| fatal!("{}", err));
                 return;
             } else {
@@ -70,13 +70,14 @@ fn check(mut args: std::env::Args) {
             path = &mut path[..n-1]; // "foo\_foo.rs" => "foo"
         }
     }
-    let pattern = path.join("::").replace(".", "_"); // "d3d11shader.h" => "d3d11shader_h"
+    let pattern1 = path.join("::").replace(".h::", "::");   // "d3d11shader.h" => "d3d11shader"
+    let pattern2 = path.join("::").replace(".h::", "_h::"); // "d3d11shader.h" => "d3d11shader_h"
 
     let mut cmd = Command::new("cargo");
     cmd.arg("test");
     cmd.arg("-p").arg(package);
-    cmd.arg("--").arg(pattern);
-    status!("Executing", "{}", cmd);
+    cmd.arg("--").arg(pattern1).arg(pattern2);
+    status!("Running", "{:?}", cmd);
     cmd.status0().unwrap_or_else(|err| fatal!("{}", err));
 }
 
