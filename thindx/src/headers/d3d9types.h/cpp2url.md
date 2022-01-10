@@ -42,38 +42,69 @@
 <!-- d3d9types.h enumerations -->
 <!-- D3DAUTHENTICATEDCHANNELTYPE                                    -->
 <!-- D3DAUTHENTICATEDCHANNEL_PROCESSIDENTIFIERTYPE                  -->
-[D3DBACKBUFFER_TYPE]:	                                            https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dbackbuffer-type
+[D3DBACKBUFFER_TYPE]:                                               https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dbackbuffer-type
+[D3DBACKBUFFER_TYPE_*]:                                             https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dbackbuffer-type
 [D3DBASISTYPE]:                                                     https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dbasistype
+[D3DBASISTYPE_*]:                                                   https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dbasistype
 [D3DBLEND]:                                                         https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dblend
+[D3DBLEND_*]:                                                       https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dblend
 [D3DBLENDOP]:                                                       https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dblendop
+[D3DBLENDOP_*]:                                                     https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dblendop
 <!-- D3DBUSTYPE                                                     -->
 [D3DCMPFUNC]:                                                       https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dcmpfunc
+[D3DCMP_*]:                                                         https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dcmpfunc
 [D3DCOMPOSERECTSOP]:                                                https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dcomposerectsop
+[D3DCOMPOSERECTS_*]:                                                https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dcomposerectsop
 [D3DCUBEMAP_FACES]:                                                 https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dcubemap-faces
+[D3DCUBEMAP_FACE_*]:                                                https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dcubemap-faces
 [D3DCULL]:                                                          https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dcull
+[D3DCULL_*]:                                                        https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dcull
 [D3DDEBUGMONITORTOKENS]:                                            https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddebugmonitortokens
+[D3DDMT_*]:                                                         https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddebugmonitortokens
 [D3DDECLMETHOD]:                                                    https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddeclmethod
+[D3DDECLMETHOD_*]:                                                  https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddeclmethod
 [D3DDECLTYPE]:                                                      https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddecltype
+[D3DDECLTYPE_*]:                                                    https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddecltype
 [D3DDECLUSAGE]:                                                     https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddeclusage
+[D3DDECLUSAGE_*]:                                                   https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddeclusage
 [D3DDEGREETYPE]:                                                    https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddegreetype
+[D3DDEGREE_*]:                                                      https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddegreetype
 [D3DDEVTYPE]:                                                       https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddevtype
+[D3DDEVTYPE_*]:                                                     https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddevtype
 [D3DDISPLAYROTATION]:                                               https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddisplayrotation
+[D3DDISPLAYROTATION_*]:                                             https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddisplayrotation
 [D3DFILLMODE]:                                                      https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dfillmode
+[D3DFILL_*]:                                                        https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dfillmode
 [D3DFOGMODE]:                                                       https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dfogmode
+[D3DFOG_*]:                                                         https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dfogmode
 [D3DFORMAT]:                                                        https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dformat
+[D3DFMT_*]:                                                         https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dformat
 [D3DLIGHTTYPE]:                                                     https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dlighttype
+[D3DLIGHT_*]:                                                       https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dlighttype
 [D3DMATERIALCOLORSOURCE]:                                           https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dmaterialcolorsource
+[D3DMCS_*]:                                                         https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dmaterialcolorsource
 [D3DMULTISAMPLE_TYPE]:                                              https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dmultisample-type
+[D3DMULTISAMPLE_*]:                                                 https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dmultisample-type
 [D3DPATCHEDGESTYLE]:                                                https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dpatchedgestyle
+[D3DPATCHEDGE_*]:                                                   https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dpatchedgestyle
 [D3DPOOL]:                                                          https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dpool
+[D3DPOOL_*]:                                                        https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dpool
 [D3DPRIMITIVETYPE]:                                                 https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dprimitivetype
+[D3DPT_*]:                                                          https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dprimitivetype
 [D3DQUERYTYPE]:                                                     https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dquerytype
+[D3DQUERYTYPE_*]:                                                   https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dquerytype
 [D3DRENDERSTATETYPE]:                                               https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype
+[D3DRS_*]:                                                          https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype
 [D3DRESOURCETYPE]:                                                  https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dresourcetype
+[D3DRTYPE_*]:                                                       https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dresourcetype
 [D3DSAMPLERSTATETYPE]:                                              https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype
+[D3DSAMP_*]:                                                        https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype
 [D3DSAMPLER_TEXTURE_TYPE]:                                          https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dsampler-texture-type
+[D3DSTT_*]:                                                         https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dsampler-texture-type
 [D3DSCANLINEORDERING]:                                              https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dscanlineordering
+[D3DSCANLINEORDERING_*]:                                            https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dscanlineordering
 [D3DSHADEMODE]:                                                     https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dshademode
+[D3DSHADE_*]:                                                       https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dshademode
 <!-- D3DSHADER_ADDRESSMODE_TYPE                                     -->
 <!-- D3DSHADER_COMPARISON                                           -->
 <!-- D3DSHADER_INSTRUCTION_OPCODE_TYPE                              -->
@@ -82,18 +113,27 @@
 <!-- D3DSHADER_PARAM_REGISTER_TYPE                                  -->
 <!-- D3DSHADER_PARAM_SRCMOD_TYPE                                    -->
 [D3DSTATEBLOCKTYPE]:                                                https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dstateblocktype
+[D3DSBT_*]:                                                         https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dstateblocktype
 [D3DSTENCILOP]:                                                     https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dstencilop
+[D3DSTENCILOP_*]:                                                   https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dstencilop
 [D3DSWAPEFFECT]:                                                    https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dswapeffect
+[D3DSWAPEFFECT_*]:                                                  https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dswapeffect
 [D3DTEXTUREADDRESS]:                                                https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dtextureaddress
+[D3DTADDRESS_*]:                                                    https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dtextureaddress
 [D3DTEXTUREFILTERTYPE]:                                             https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dtexturefiltertype
+[D3DTEXF_*]:                                                        https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dtexturefiltertype
 [D3DTEXTUREOP]:                                                     https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dtextureop
+[D3DTOP_*]:                                                         https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dtextureop
 [D3DTEXTURESTAGESTATETYPE]:                                         https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dtexturestagestatetype
+[D3DTSS_*]:                                                         https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dtexturestagestatetype
 <!-- D3DTEXTURETRANSFORMFLAGS                                       -->
 [D3DTRANSFORMSTATETYPE]:                                            https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dtransformstatetype
+[D3DTS_*]:                                                          https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dtransformstatetype
 <!-- D3DVERTEXBLENDFLAGS                                            -->
 <!-- D3DVS_ADDRESSMODE_TYPE                                         -->
 <!-- D3DVS_RASTOUT_OFFSETS                                          -->
 [D3DZBUFFERTYPE]:                                                   https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dzbuffertype
+[D3DZB_*]:                                                          https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dzbuffertype
 
 
 
