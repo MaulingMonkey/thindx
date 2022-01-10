@@ -73,8 +73,8 @@ winapi.features = [
 [target.'cfg(windows)'.dev-dependencies]
 dev.path            = "../dev"
 mmrbi               = "0.0.17"
-raw-window-handle   = "0.3"
-winit               = "0.23"
+raw-window-handle   = "0.4"
+winit               = "0.26"
 winapi.version      = "0.3.9"
 winapi.features = [
     # shared

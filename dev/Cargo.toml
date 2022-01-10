@@ -22,4 +22,10 @@ winapi.features = [
     "d3d9caps",
     "d3d9types",
     "windef",
+
+    # um
+    "debugapi",
+    "libloaderapi",
+    "wincon",
+    "winuser",
 ]

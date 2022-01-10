@@ -17,7 +17,6 @@ use crate::*;
 /// use thindx::d3d9::*;
 /// 
 /// use raw_window_handle::*;
-/// use raw_window_handle::windows::*;
 /// 
 /// use winapi::shared::d3d9types::*;
 /// 
@@ -40,7 +39,7 @@ use crate::*;
 ///         .build(&event_loop).unwrap();
 /// 
 ///     let hwnd = match window.raw_window_handle() {
-///         RawWindowHandle::Windows(WindowsHandle { hwnd, .. }) => hwnd.cast(),
+///         RawWindowHandle::Win32(Win32Handle { hwnd, .. }) => hwnd.cast(),
 ///         other => panic!("Expected RawWindowHandle::Windows(...), got {:?} instead", other),
 ///     };
 /// 
