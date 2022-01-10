@@ -31,8 +31,8 @@ fn build(_args: std::env::Args) {
     run(r"cargo build --frozen --workspace --all-targets --all-features --target-dir=target\all-features");
     examples::update();
     headers::update();
-    run(r"cargo   doc --frozen --workspace --all-features --target-dir=target\all-features");
-    run(r"cargo  test --frozen --workspace --all-features --target-dir=target\all-features");
+    run(r"cargo doc --no-deps --frozen --workspace --all-features --target-dir=target\all-features");
+    run(r"cargo test          --frozen --workspace --all-features --target-dir=target\all-features");
 }
 
 fn check(mut args: std::env::Args) {
