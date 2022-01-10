@@ -22,12 +22,14 @@ pub mod d3d {
     pub use crate::d3d9types_h::*;
 }
 
+/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/dx9-graphics)\]
 /// Direct3D 9 related types and APIs
 pub mod d3d9 {
     pub use crate::d3d9_h::*;
     pub use crate::d3d9types_h::*;
 }
 
+/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d11/atoc-dx-graphics-direct3d-11)\]
 /// Direct3D 11 related types and APIs (including shader reflection APIs)
 pub mod d3d11 {
     pub use crate::d3d11shader_h::*;
