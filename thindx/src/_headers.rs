@@ -9,18 +9,18 @@
 //!
 //! # Headers
 //!
-//! | C++ Header | Interfaces | Structs | Enums | Functions |
-//! | ---------- | ---------- | ------- | ----- | --------- |
-//! | [guiddef.h](#guiddefh) |   | ✔️ 1 of 1 |   |   |
-//! | [unknwn.h](#unknwnh) | ✔️ 1 of 1 |   |   |   |
-//! | [d3dcommon.h](#d3dcommonh) | ⚠️ 2 of 3 | ✔️ 1 of 1 | ✔️ 22 of 22 |   |
-//! | [d3dcompiler.h](#d3dcompilerh) |   | ✔️ 1 of 1 | ✔️ 2 of 2 |   |
-//! | [d3d9.h](#d3d9h) | ⚠️ 20 of 24 |   |   | ⚠️ 2 of 9 |
-//! | [d3d9caps.h](#d3d9capsh) |   | ⚠️ 1 of 5 |   |   |
-//! | [d3d9types.h](#d3d9typesh) |   | ⚠️ 17 of 71 | ⚠️ 39 of 54 |   |
-//! | [d3d11shader.h](#d3d11shaderh) | ✔️ 12 of 12 | ✔️ 9 of 9 | ✔️ 1 of 1 |   |
-//! | [d3d11shadertracing.h](#d3d11shadertracingh) | ❌ 0 of 2 | ❌ 0 of 11 | ❌ 0 of 3 |   |
-//! | [xinput.h](#xinputh) |   | ✔️ 6 of 6 |   | ✔️ 8 of 8 |
+//! | C++ Header | Interfaces | Structs | Enums | Functions | Constants |
+//! | ---------- | ---------- | ------- | ----- | --------- | --------- |
+//! | [guiddef.h](#guiddefh) |   | ✔️ 1 of 1 |   |   |   |
+//! | [unknwn.h](#unknwnh) | ✔️ 1 of 1 |   |   |   |   |
+//! | [d3dcommon.h](#d3dcommonh) | ⚠️ 2 of 3 | ✔️ 1 of 1 | ✔️ 22 of 22 |   | ❌ 0 of 562 |
+//! | [d3dcompiler.h](#d3dcompilerh) |   | ✔️ 1 of 1 | ✔️ 2 of 2 |   | ❌ 0 of 23 |
+//! | [d3d9.h](#d3d9h) | ⚠️ 20 of 24 |   |   | ⚠️ 2 of 9 |   |
+//! | [d3d9caps.h](#d3d9capsh) |   | ⚠️ 1 of 5 |   |   |   |
+//! | [d3d9types.h](#d3d9typesh) |   | ⚠️ 17 of 71 | ⚠️ 39 of 54 |   | ❌ 0 of 654 |
+//! | [d3d11shader.h](#d3d11shaderh) | ✔️ 12 of 12 | ✔️ 9 of 9 | ✔️ 1 of 1 |   | ❌ 0 of 7 |
+//! | [d3d11shadertracing.h](#d3d11shadertracingh) | ❌ 0 of 2 | ❌ 0 of 11 | ❌ 0 of 3 |   | ❌ 0 of 48 |
+//! | [xinput.h](#xinputh) |   | ✔️ 6 of 6 |   | ✔️ 8 of 8 |   |
 //!
 //!
 //! <br>
@@ -67,27 +67,611 @@
 //! ### C++ Enums → Rust Structs
 //!
 //! [`D3D_CBUFFER_TYPE`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_cbuffer_type)&nbsp;→ [`d3d::CBufferType`] <br>
+//! * `D3D10_CT_CBUFFER` →&nbsp;❌ <br>
+//! * `D3D10_CT_TBUFFER` →&nbsp;❌ <br>
+//! * `D3D11_CT_CBUFFER` →&nbsp;❌ <br>
+//! * `D3D11_CT_INTERFACE_POINTERS` →&nbsp;❌ <br>
+//! * `D3D11_CT_RESOURCE_BIND_INFO` →&nbsp;❌ <br>
+//! * `D3D11_CT_TBUFFER` →&nbsp;❌ <br>
+//! * `D3D_CT_CBUFFER` →&nbsp;❌ <br>
+//! * `D3D_CT_INTERFACE_POINTERS` →&nbsp;❌ <br>
+//! * `D3D_CT_RESOURCE_BIND_INFO` →&nbsp;❌ <br>
+//! * `D3D_CT_TBUFFER` →&nbsp;❌ <br>
+//!
 //! [`D3D_DRIVER_TYPE`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_driver_type)&nbsp;→ [`d3d::DriverType`] <br>
+//! * `D3D_DRIVER_TYPE_HARDWARE` →&nbsp;❌ <br>
+//! * `D3D_DRIVER_TYPE_NULL` →&nbsp;❌ <br>
+//! * `D3D_DRIVER_TYPE_REFERENCE` →&nbsp;❌ <br>
+//! * `D3D_DRIVER_TYPE_SOFTWARE` →&nbsp;❌ <br>
+//! * `D3D_DRIVER_TYPE_UNKNOWN` →&nbsp;❌ <br>
+//! * `D3D_DRIVER_TYPE_WARP` →&nbsp;❌ <br>
+//!
 //! [`D3D_FEATURE_LEVEL`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_feature_level)&nbsp;→ [`d3d::FeatureLevel`] <br>
+//! * `D3D_FEATURE_LEVEL_10_0` →&nbsp;❌ <br>
+//! * `D3D_FEATURE_LEVEL_10_1` →&nbsp;❌ <br>
+//! * `D3D_FEATURE_LEVEL_11_0` →&nbsp;❌ <br>
+//! * `D3D_FEATURE_LEVEL_11_1` →&nbsp;❌ <br>
+//! * `D3D_FEATURE_LEVEL_12_0` →&nbsp;❌ <br>
+//! * `D3D_FEATURE_LEVEL_12_1` →&nbsp;❌ <br>
+//! * `D3D_FEATURE_LEVEL_1_0_CORE` →&nbsp;❌ <br>
+//! * `D3D_FEATURE_LEVEL_9_1` →&nbsp;❌ <br>
+//! * `D3D_FEATURE_LEVEL_9_2` →&nbsp;❌ <br>
+//! * `D3D_FEATURE_LEVEL_9_3` →&nbsp;❌ <br>
+//!
 //! [`D3D_INCLUDE_TYPE`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_include_type)&nbsp;→ [`d3d::IncludeType`] <br>
+//! * `D3D10_INCLUDE_LOCAL` →&nbsp;❌ <br>
+//! * `D3D10_INCLUDE_SYSTEM` →&nbsp;❌ <br>
+//! * `D3D_INCLUDE_FORCE_DWORD` →&nbsp;❌ <br>
+//! * `D3D_INCLUDE_LOCAL` →&nbsp;❌ <br>
+//! * `D3D_INCLUDE_SYSTEM` →&nbsp;❌ <br>
+//!
 //! [`D3D_INTERPOLATION_MODE`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_interpolation_mode)&nbsp;→ [`d3d::InterpolationMode`] <br>
+//! * `D3D_INTERPOLATION_CONSTANT` →&nbsp;❌ <br>
+//! * `D3D_INTERPOLATION_LINEAR` →&nbsp;❌ <br>
+//! * `D3D_INTERPOLATION_LINEAR_CENTROID` →&nbsp;❌ <br>
+//! * `D3D_INTERPOLATION_LINEAR_NOPERSPECTIVE` →&nbsp;❌ <br>
+//! * `D3D_INTERPOLATION_LINEAR_NOPERSPECTIVE_CENTROID` →&nbsp;❌ <br>
+//! * `D3D_INTERPOLATION_LINEAR_NOPERSPECTIVE_SAMPLE` →&nbsp;❌ <br>
+//! * `D3D_INTERPOLATION_LINEAR_SAMPLE` →&nbsp;❌ <br>
+//! * `D3D_INTERPOLATION_UNDEFINED` →&nbsp;❌ <br>
+//!
 //! [`D3D_MIN_PRECISION`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_min_precision)&nbsp;→ [`d3d::MinPrecision`] <br>
+//! * `D3D_MIN_PRECISION_ANY_10` →&nbsp;❌ <br>
+//! * `D3D_MIN_PRECISION_ANY_16` →&nbsp;❌ <br>
+//! * `D3D_MIN_PRECISION_DEFAULT` →&nbsp;❌ <br>
+//! * `D3D_MIN_PRECISION_FLOAT_16` →&nbsp;❌ <br>
+//! * `D3D_MIN_PRECISION_FLOAT_2_8` →&nbsp;❌ <br>
+//! * `D3D_MIN_PRECISION_RESERVED` →&nbsp;❌ <br>
+//! * `D3D_MIN_PRECISION_SINT_16` →&nbsp;❌ <br>
+//! * `D3D_MIN_PRECISION_UINT_16` →&nbsp;❌ <br>
+//!
 //! [`D3D_NAME`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_name)&nbsp;→ [`d3d::Name`] <br>
+//! * `D3D10_NAME_CLIP_DISTANCE` →&nbsp;❌ <br>
+//! * `D3D10_NAME_COVERAGE` →&nbsp;❌ <br>
+//! * `D3D10_NAME_CULL_DISTANCE` →&nbsp;❌ <br>
+//! * `D3D10_NAME_DEPTH` →&nbsp;❌ <br>
+//! * `D3D10_NAME_INSTANCE_ID` →&nbsp;❌ <br>
+//! * `D3D10_NAME_IS_FRONT_FACE` →&nbsp;❌ <br>
+//! * `D3D10_NAME_POSITION` →&nbsp;❌ <br>
+//! * `D3D10_NAME_PRIMITIVE_ID` →&nbsp;❌ <br>
+//! * `D3D10_NAME_RENDER_TARGET_ARRAY_INDEX` →&nbsp;❌ <br>
+//! * `D3D10_NAME_SAMPLE_INDEX` →&nbsp;❌ <br>
+//! * `D3D10_NAME_TARGET` →&nbsp;❌ <br>
+//! * `D3D10_NAME_UNDEFINED` →&nbsp;❌ <br>
+//! * `D3D10_NAME_VERTEX_ID` →&nbsp;❌ <br>
+//! * `D3D10_NAME_VIEWPORT_ARRAY_INDEX` →&nbsp;❌ <br>
+//! * `D3D11_NAME_DEPTH_GREATER_EQUAL` →&nbsp;❌ <br>
+//! * `D3D11_NAME_DEPTH_LESS_EQUAL` →&nbsp;❌ <br>
+//! * `D3D11_NAME_FINAL_LINE_DENSITY_TESSFACTOR` →&nbsp;❌ <br>
+//! * `D3D11_NAME_FINAL_LINE_DETAIL_TESSFACTOR` →&nbsp;❌ <br>
+//! * `D3D11_NAME_FINAL_QUAD_EDGE_TESSFACTOR` →&nbsp;❌ <br>
+//! * `D3D11_NAME_FINAL_QUAD_INSIDE_TESSFACTOR` →&nbsp;❌ <br>
+//! * `D3D11_NAME_FINAL_TRI_EDGE_TESSFACTOR` →&nbsp;❌ <br>
+//! * `D3D11_NAME_FINAL_TRI_INSIDE_TESSFACTOR` →&nbsp;❌ <br>
+//! * `D3D11_NAME_INNER_COVERAGE` →&nbsp;❌ <br>
+//! * `D3D11_NAME_STENCIL_REF` →&nbsp;❌ <br>
+//! * `D3D12_NAME_BARYCENTRICS` →&nbsp;❌ <br>
+//! * `D3D12_NAME_CULLPRIMITIVE` →&nbsp;❌ <br>
+//! * `D3D12_NAME_SHADINGRATE` →&nbsp;❌ <br>
+//! * `D3D_NAME_BARYCENTRICS` →&nbsp;❌ <br>
+//! * `D3D_NAME_CLIP_DISTANCE` →&nbsp;❌ <br>
+//! * `D3D_NAME_COVERAGE` →&nbsp;❌ <br>
+//! * `D3D_NAME_CULLPRIMITIVE` →&nbsp;❌ <br>
+//! * `D3D_NAME_CULL_DISTANCE` →&nbsp;❌ <br>
+//! * `D3D_NAME_DEPTH` →&nbsp;❌ <br>
+//! * `D3D_NAME_DEPTH_GREATER_EQUAL` →&nbsp;❌ <br>
+//! * `D3D_NAME_DEPTH_LESS_EQUAL` →&nbsp;❌ <br>
+//! * `D3D_NAME_FINAL_LINE_DENSITY_TESSFACTOR` →&nbsp;❌ <br>
+//! * `D3D_NAME_FINAL_LINE_DETAIL_TESSFACTOR` →&nbsp;❌ <br>
+//! * `D3D_NAME_FINAL_QUAD_EDGE_TESSFACTOR` →&nbsp;❌ <br>
+//! * `D3D_NAME_FINAL_QUAD_INSIDE_TESSFACTOR` →&nbsp;❌ <br>
+//! * `D3D_NAME_FINAL_TRI_EDGE_TESSFACTOR` →&nbsp;❌ <br>
+//! * `D3D_NAME_FINAL_TRI_INSIDE_TESSFACTOR` →&nbsp;❌ <br>
+//! * `D3D_NAME_INNER_COVERAGE` →&nbsp;❌ <br>
+//! * `D3D_NAME_INSTANCE_ID` →&nbsp;❌ <br>
+//! * `D3D_NAME_IS_FRONT_FACE` →&nbsp;❌ <br>
+//! * `D3D_NAME_POSITION` →&nbsp;❌ <br>
+//! * `D3D_NAME_PRIMITIVE_ID` →&nbsp;❌ <br>
+//! * `D3D_NAME_RENDER_TARGET_ARRAY_INDEX` →&nbsp;❌ <br>
+//! * `D3D_NAME_SAMPLE_INDEX` →&nbsp;❌ <br>
+//! * `D3D_NAME_SHADINGRATE` →&nbsp;❌ <br>
+//! * `D3D_NAME_STENCIL_REF` →&nbsp;❌ <br>
+//! * `D3D_NAME_TARGET` →&nbsp;❌ <br>
+//! * `D3D_NAME_UNDEFINED` →&nbsp;❌ <br>
+//! * `D3D_NAME_VERTEX_ID` →&nbsp;❌ <br>
+//! * `D3D_NAME_VIEWPORT_ARRAY_INDEX` →&nbsp;❌ <br>
+//!
 //! [`D3D_PARAMETER_FLAGS`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_parameter_flags)&nbsp;→ [`d3d::ParameterFlags`] <br>
+//! * `D3D_PF_FORCE_DWORD` →&nbsp;❌ <br>
+//! * `D3D_PF_IN` →&nbsp;❌ <br>
+//! * `D3D_PF_NONE` →&nbsp;❌ <br>
+//! * `D3D_PF_OUT` →&nbsp;❌ <br>
+//!
 //! [`D3D_PRIMITIVE`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_primitive)&nbsp;→ [`d3d::Primitive`] <br>
+//! * `D3D10_PRIMITIVE_LINE` →&nbsp;❌ <br>
+//! * `D3D10_PRIMITIVE_LINE_ADJ` →&nbsp;❌ <br>
+//! * `D3D10_PRIMITIVE_POINT` →&nbsp;❌ <br>
+//! * `D3D10_PRIMITIVE_TRIANGLE` →&nbsp;❌ <br>
+//! * `D3D10_PRIMITIVE_TRIANGLE_ADJ` →&nbsp;❌ <br>
+//! * `D3D10_PRIMITIVE_UNDEFINED` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_10_CONTROL_POINT_PATCH` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_11_CONTROL_POINT_PATCH` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_12_CONTROL_POINT_PATCH` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_13_CONTROL_POINT_PATCH` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_14_CONTROL_POINT_PATCH` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_15_CONTROL_POINT_PATCH` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_16_CONTROL_POINT_PATCH` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_17_CONTROL_POINT_PATCH` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_18_CONTROL_POINT_PATCH` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_19_CONTROL_POINT_PATCH` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_1_CONTROL_POINT_PATCH` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_20_CONTROL_POINT_PATCH` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_21_CONTROL_POINT_PATCH` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_22_CONTROL_POINT_PATCH` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_23_CONTROL_POINT_PATCH` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_24_CONTROL_POINT_PATCH` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_25_CONTROL_POINT_PATCH` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_26_CONTROL_POINT_PATCH` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_27_CONTROL_POINT_PATCH` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_28_CONTROL_POINT_PATCH` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_29_CONTROL_POINT_PATCH` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_2_CONTROL_POINT_PATCH` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_30_CONTROL_POINT_PATCH` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_31_CONTROL_POINT_PATCH` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_32_CONTROL_POINT_PATCH` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_3_CONTROL_POINT_PATCH` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_4_CONTROL_POINT_PATCH` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_5_CONTROL_POINT_PATCH` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_6_CONTROL_POINT_PATCH` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_7_CONTROL_POINT_PATCH` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_8_CONTROL_POINT_PATCH` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_9_CONTROL_POINT_PATCH` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_LINE` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_LINE_ADJ` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_POINT` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_TRIANGLE` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_TRIANGLE_ADJ` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_UNDEFINED` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_10_CONTROL_POINT_PATCH` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_11_CONTROL_POINT_PATCH` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_12_CONTROL_POINT_PATCH` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_13_CONTROL_POINT_PATCH` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_14_CONTROL_POINT_PATCH` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_15_CONTROL_POINT_PATCH` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_16_CONTROL_POINT_PATCH` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_17_CONTROL_POINT_PATCH` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_18_CONTROL_POINT_PATCH` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_19_CONTROL_POINT_PATCH` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_1_CONTROL_POINT_PATCH` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_20_CONTROL_POINT_PATCH` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_21_CONTROL_POINT_PATCH` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_22_CONTROL_POINT_PATCH` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_23_CONTROL_POINT_PATCH` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_24_CONTROL_POINT_PATCH` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_25_CONTROL_POINT_PATCH` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_26_CONTROL_POINT_PATCH` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_27_CONTROL_POINT_PATCH` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_28_CONTROL_POINT_PATCH` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_29_CONTROL_POINT_PATCH` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_2_CONTROL_POINT_PATCH` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_30_CONTROL_POINT_PATCH` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_31_CONTROL_POINT_PATCH` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_32_CONTROL_POINT_PATCH` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_3_CONTROL_POINT_PATCH` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_4_CONTROL_POINT_PATCH` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_5_CONTROL_POINT_PATCH` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_6_CONTROL_POINT_PATCH` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_7_CONTROL_POINT_PATCH` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_8_CONTROL_POINT_PATCH` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_9_CONTROL_POINT_PATCH` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_LINE` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_LINE_ADJ` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_POINT` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_TRIANGLE` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_TRIANGLE_ADJ` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_UNDEFINED` →&nbsp;❌ <br>
+//!
 //! [`D3D_PRIMITIVE_TOPOLOGY`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_primitive_topology)&nbsp;→ [`d3d::PrimitiveTopology`] <br>
+//! * `D3D10_PRIMITIVE_TOPOLOGY_LINELIST` →&nbsp;❌ <br>
+//! * `D3D10_PRIMITIVE_TOPOLOGY_LINELIST_ADJ` →&nbsp;❌ <br>
+//! * `D3D10_PRIMITIVE_TOPOLOGY_LINESTRIP` →&nbsp;❌ <br>
+//! * `D3D10_PRIMITIVE_TOPOLOGY_LINESTRIP_ADJ` →&nbsp;❌ <br>
+//! * `D3D10_PRIMITIVE_TOPOLOGY_POINTLIST` →&nbsp;❌ <br>
+//! * `D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST` →&nbsp;❌ <br>
+//! * `D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST_ADJ` →&nbsp;❌ <br>
+//! * `D3D10_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP` →&nbsp;❌ <br>
+//! * `D3D10_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP_ADJ` →&nbsp;❌ <br>
+//! * `D3D10_PRIMITIVE_TOPOLOGY_UNDEFINED` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_TOPOLOGY_10_CONTROL_POINT_PATCHLIST` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_TOPOLOGY_11_CONTROL_POINT_PATCHLIST` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_TOPOLOGY_12_CONTROL_POINT_PATCHLIST` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_TOPOLOGY_13_CONTROL_POINT_PATCHLIST` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_TOPOLOGY_14_CONTROL_POINT_PATCHLIST` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_TOPOLOGY_15_CONTROL_POINT_PATCHLIST` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_TOPOLOGY_16_CONTROL_POINT_PATCHLIST` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_TOPOLOGY_17_CONTROL_POINT_PATCHLIST` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_TOPOLOGY_18_CONTROL_POINT_PATCHLIST` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_TOPOLOGY_19_CONTROL_POINT_PATCHLIST` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_TOPOLOGY_1_CONTROL_POINT_PATCHLIST` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_TOPOLOGY_20_CONTROL_POINT_PATCHLIST` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_TOPOLOGY_21_CONTROL_POINT_PATCHLIST` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_TOPOLOGY_22_CONTROL_POINT_PATCHLIST` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_TOPOLOGY_23_CONTROL_POINT_PATCHLIST` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_TOPOLOGY_24_CONTROL_POINT_PATCHLIST` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_TOPOLOGY_25_CONTROL_POINT_PATCHLIST` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_TOPOLOGY_26_CONTROL_POINT_PATCHLIST` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_TOPOLOGY_27_CONTROL_POINT_PATCHLIST` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_TOPOLOGY_28_CONTROL_POINT_PATCHLIST` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_TOPOLOGY_29_CONTROL_POINT_PATCHLIST` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_TOPOLOGY_2_CONTROL_POINT_PATCHLIST` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_TOPOLOGY_30_CONTROL_POINT_PATCHLIST` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_TOPOLOGY_31_CONTROL_POINT_PATCHLIST` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_TOPOLOGY_32_CONTROL_POINT_PATCHLIST` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_TOPOLOGY_3_CONTROL_POINT_PATCHLIST` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_TOPOLOGY_4_CONTROL_POINT_PATCHLIST` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_TOPOLOGY_5_CONTROL_POINT_PATCHLIST` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_TOPOLOGY_6_CONTROL_POINT_PATCHLIST` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_TOPOLOGY_7_CONTROL_POINT_PATCHLIST` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_TOPOLOGY_8_CONTROL_POINT_PATCHLIST` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_TOPOLOGY_9_CONTROL_POINT_PATCHLIST` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_TOPOLOGY_LINELIST` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_TOPOLOGY_LINELIST_ADJ` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP_ADJ` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_TOPOLOGY_POINTLIST` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST_ADJ` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP_ADJ` →&nbsp;❌ <br>
+//! * `D3D11_PRIMITIVE_TOPOLOGY_UNDEFINED` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_TOPOLOGY_10_CONTROL_POINT_PATCHLIST` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_TOPOLOGY_11_CONTROL_POINT_PATCHLIST` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_TOPOLOGY_12_CONTROL_POINT_PATCHLIST` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_TOPOLOGY_13_CONTROL_POINT_PATCHLIST` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_TOPOLOGY_14_CONTROL_POINT_PATCHLIST` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_TOPOLOGY_15_CONTROL_POINT_PATCHLIST` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_TOPOLOGY_16_CONTROL_POINT_PATCHLIST` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_TOPOLOGY_17_CONTROL_POINT_PATCHLIST` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_TOPOLOGY_18_CONTROL_POINT_PATCHLIST` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_TOPOLOGY_19_CONTROL_POINT_PATCHLIST` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_TOPOLOGY_1_CONTROL_POINT_PATCHLIST` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_TOPOLOGY_20_CONTROL_POINT_PATCHLIST` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_TOPOLOGY_21_CONTROL_POINT_PATCHLIST` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_TOPOLOGY_22_CONTROL_POINT_PATCHLIST` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_TOPOLOGY_23_CONTROL_POINT_PATCHLIST` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_TOPOLOGY_24_CONTROL_POINT_PATCHLIST` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_TOPOLOGY_25_CONTROL_POINT_PATCHLIST` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_TOPOLOGY_26_CONTROL_POINT_PATCHLIST` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_TOPOLOGY_27_CONTROL_POINT_PATCHLIST` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_TOPOLOGY_28_CONTROL_POINT_PATCHLIST` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_TOPOLOGY_29_CONTROL_POINT_PATCHLIST` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_TOPOLOGY_2_CONTROL_POINT_PATCHLIST` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_TOPOLOGY_30_CONTROL_POINT_PATCHLIST` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_TOPOLOGY_31_CONTROL_POINT_PATCHLIST` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_TOPOLOGY_32_CONTROL_POINT_PATCHLIST` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_TOPOLOGY_3_CONTROL_POINT_PATCHLIST` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_TOPOLOGY_4_CONTROL_POINT_PATCHLIST` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_TOPOLOGY_5_CONTROL_POINT_PATCHLIST` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_TOPOLOGY_6_CONTROL_POINT_PATCHLIST` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_TOPOLOGY_7_CONTROL_POINT_PATCHLIST` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_TOPOLOGY_8_CONTROL_POINT_PATCHLIST` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_TOPOLOGY_9_CONTROL_POINT_PATCHLIST` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_TOPOLOGY_LINELIST` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_TOPOLOGY_LINELIST_ADJ` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_TOPOLOGY_LINESTRIP` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_TOPOLOGY_LINESTRIP_ADJ` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_TOPOLOGY_POINTLIST` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST_ADJ` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP_ADJ` →&nbsp;❌ <br>
+//! * `D3D_PRIMITIVE_TOPOLOGY_UNDEFINED` →&nbsp;❌ <br>
+//!
 //! [`D3D_REGISTER_COMPONENT_TYPE`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_register_component_type)&nbsp;→ [`d3d::RegisterComponentType`] <br>
+//! * `D3D10_REGISTER_COMPONENT_FLOAT32` →&nbsp;❌ <br>
+//! * `D3D10_REGISTER_COMPONENT_SINT32` →&nbsp;❌ <br>
+//! * `D3D10_REGISTER_COMPONENT_UINT32` →&nbsp;❌ <br>
+//! * `D3D10_REGISTER_COMPONENT_UNKNOWN` →&nbsp;❌ <br>
+//! * `D3D_REGISTER_COMPONENT_FLOAT32` →&nbsp;❌ <br>
+//! * `D3D_REGISTER_COMPONENT_SINT32` →&nbsp;❌ <br>
+//! * `D3D_REGISTER_COMPONENT_UINT32` →&nbsp;❌ <br>
+//! * `D3D_REGISTER_COMPONENT_UNKNOWN` →&nbsp;❌ <br>
+//!
 //! [`D3D_RESOURCE_RETURN_TYPE`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_resource_return_type)&nbsp;→ [`d3d::ResourceReturnType`] <br>
+//! * `D3D10_RETURN_TYPE_FLOAT` →&nbsp;❌ <br>
+//! * `D3D10_RETURN_TYPE_MIXED` →&nbsp;❌ <br>
+//! * `D3D10_RETURN_TYPE_SINT` →&nbsp;❌ <br>
+//! * `D3D10_RETURN_TYPE_SNORM` →&nbsp;❌ <br>
+//! * `D3D10_RETURN_TYPE_UINT` →&nbsp;❌ <br>
+//! * `D3D10_RETURN_TYPE_UNORM` →&nbsp;❌ <br>
+//! * `D3D11_RETURN_TYPE_CONTINUED` →&nbsp;❌ <br>
+//! * `D3D11_RETURN_TYPE_DOUBLE` →&nbsp;❌ <br>
+//! * `D3D11_RETURN_TYPE_FLOAT` →&nbsp;❌ <br>
+//! * `D3D11_RETURN_TYPE_MIXED` →&nbsp;❌ <br>
+//! * `D3D11_RETURN_TYPE_SINT` →&nbsp;❌ <br>
+//! * `D3D11_RETURN_TYPE_SNORM` →&nbsp;❌ <br>
+//! * `D3D11_RETURN_TYPE_UINT` →&nbsp;❌ <br>
+//! * `D3D11_RETURN_TYPE_UNORM` →&nbsp;❌ <br>
+//! * `D3D_RETURN_TYPE_CONTINUED` →&nbsp;❌ <br>
+//! * `D3D_RETURN_TYPE_DOUBLE` →&nbsp;❌ <br>
+//! * `D3D_RETURN_TYPE_FLOAT` →&nbsp;❌ <br>
+//! * `D3D_RETURN_TYPE_MIXED` →&nbsp;❌ <br>
+//! * `D3D_RETURN_TYPE_SINT` →&nbsp;❌ <br>
+//! * `D3D_RETURN_TYPE_SNORM` →&nbsp;❌ <br>
+//! * `D3D_RETURN_TYPE_UINT` →&nbsp;❌ <br>
+//! * `D3D_RETURN_TYPE_UNORM` →&nbsp;❌ <br>
+//!
 //! [`D3D_SHADER_CBUFFER_FLAGS`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_shader_cbuffer_flags)&nbsp;→ [`d3d::ShaderCbufferFlags`] <br>
+//! * `D3D10_CBF_USERPACKED` →&nbsp;❌ <br>
+//! * `D3D_CBF_FORCE_DWORD` →&nbsp;❌ <br>
+//! * `D3D_CBF_USERPACKED` →&nbsp;❌ <br>
+//!
 //! [`D3D_SHADER_INPUT_FLAGS`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_shader_input_flags)&nbsp;→ [`d3d::ShaderInputFlags`] <br>
+//! * `D3D10_SIF_COMPARISON_SAMPLER` →&nbsp;❌ <br>
+//! * `D3D10_SIF_TEXTURE_COMPONENTS` →&nbsp;❌ <br>
+//! * `D3D10_SIF_TEXTURE_COMPONENT_0` →&nbsp;❌ <br>
+//! * `D3D10_SIF_TEXTURE_COMPONENT_1` →&nbsp;❌ <br>
+//! * `D3D10_SIF_USERPACKED` →&nbsp;❌ <br>
+//! * `D3D_SIF_COMPARISON_SAMPLER` →&nbsp;❌ <br>
+//! * `D3D_SIF_FORCE_DWORD` →&nbsp;❌ <br>
+//! * `D3D_SIF_TEXTURE_COMPONENTS` →&nbsp;❌ <br>
+//! * `D3D_SIF_TEXTURE_COMPONENT_0` →&nbsp;❌ <br>
+//! * `D3D_SIF_TEXTURE_COMPONENT_1` →&nbsp;❌ <br>
+//! * `D3D_SIF_UNUSED` →&nbsp;❌ <br>
+//! * `D3D_SIF_USERPACKED` →&nbsp;❌ <br>
+//!
 //! [`D3D_SHADER_INPUT_TYPE`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_shader_input_type)&nbsp;→ [`d3d::ShaderInputType`] <br>
+//! * `D3D10_SIT_CBUFFER` →&nbsp;❌ <br>
+//! * `D3D10_SIT_SAMPLER` →&nbsp;❌ <br>
+//! * `D3D10_SIT_TBUFFER` →&nbsp;❌ <br>
+//! * `D3D10_SIT_TEXTURE` →&nbsp;❌ <br>
+//! * `D3D11_SIT_BYTEADDRESS` →&nbsp;❌ <br>
+//! * `D3D11_SIT_STRUCTURED` →&nbsp;❌ <br>
+//! * `D3D11_SIT_UAV_APPEND_STRUCTURED` →&nbsp;❌ <br>
+//! * `D3D11_SIT_UAV_CONSUME_STRUCTURED` →&nbsp;❌ <br>
+//! * `D3D11_SIT_UAV_RWBYTEADDRESS` →&nbsp;❌ <br>
+//! * `D3D11_SIT_UAV_RWSTRUCTURED` →&nbsp;❌ <br>
+//! * `D3D11_SIT_UAV_RWSTRUCTURED_WITH_COUNTER` →&nbsp;❌ <br>
+//! * `D3D11_SIT_UAV_RWTYPED` →&nbsp;❌ <br>
+//! * `D3D_SIT_BYTEADDRESS` →&nbsp;❌ <br>
+//! * `D3D_SIT_CBUFFER` →&nbsp;❌ <br>
+//! * `D3D_SIT_RTACCELERATIONSTRUCTURE` →&nbsp;❌ <br>
+//! * `D3D_SIT_SAMPLER` →&nbsp;❌ <br>
+//! * `D3D_SIT_STRUCTURED` →&nbsp;❌ <br>
+//! * `D3D_SIT_TBUFFER` →&nbsp;❌ <br>
+//! * `D3D_SIT_TEXTURE` →&nbsp;❌ <br>
+//! * `D3D_SIT_UAV_APPEND_STRUCTURED` →&nbsp;❌ <br>
+//! * `D3D_SIT_UAV_CONSUME_STRUCTURED` →&nbsp;❌ <br>
+//! * `D3D_SIT_UAV_FEEDBACKTEXTURE` →&nbsp;❌ <br>
+//! * `D3D_SIT_UAV_RWBYTEADDRESS` →&nbsp;❌ <br>
+//! * `D3D_SIT_UAV_RWSTRUCTURED` →&nbsp;❌ <br>
+//! * `D3D_SIT_UAV_RWSTRUCTURED_WITH_COUNTER` →&nbsp;❌ <br>
+//! * `D3D_SIT_UAV_RWTYPED` →&nbsp;❌ <br>
+//!
 //! [`D3D_SHADER_VARIABLE_CLASS`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_shader_variable_class)&nbsp;→ [`d3d::ShaderVariableClass`] <br>
+//! * `D3D10_SVC_MATRIX_COLUMNS` →&nbsp;❌ <br>
+//! * `D3D10_SVC_MATRIX_ROWS` →&nbsp;❌ <br>
+//! * `D3D10_SVC_OBJECT` →&nbsp;❌ <br>
+//! * `D3D10_SVC_SCALAR` →&nbsp;❌ <br>
+//! * `D3D10_SVC_STRUCT` →&nbsp;❌ <br>
+//! * `D3D10_SVC_VECTOR` →&nbsp;❌ <br>
+//! * `D3D11_SVC_INTERFACE_CLASS` →&nbsp;❌ <br>
+//! * `D3D11_SVC_INTERFACE_POINTER` →&nbsp;❌ <br>
+//! * `D3D_SVC_FORCE_DWORD` →&nbsp;❌ <br>
+//! * `D3D_SVC_INTERFACE_CLASS` →&nbsp;❌ <br>
+//! * `D3D_SVC_INTERFACE_POINTER` →&nbsp;❌ <br>
+//! * `D3D_SVC_MATRIX_COLUMNS` →&nbsp;❌ <br>
+//! * `D3D_SVC_MATRIX_ROWS` →&nbsp;❌ <br>
+//! * `D3D_SVC_OBJECT` →&nbsp;❌ <br>
+//! * `D3D_SVC_SCALAR` →&nbsp;❌ <br>
+//! * `D3D_SVC_STRUCT` →&nbsp;❌ <br>
+//! * `D3D_SVC_VECTOR` →&nbsp;❌ <br>
+//!
 //! [`D3D_SHADER_VARIABLE_FLAGS`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_shader_variable_flags)&nbsp;→ [`d3d::ShaderVariableFlags`] <br>
+//! * `D3D10_SVF_USED` →&nbsp;❌ <br>
+//! * `D3D10_SVF_USERPACKED` →&nbsp;❌ <br>
+//! * `D3D11_SVF_INTERFACE_PARAMETER` →&nbsp;❌ <br>
+//! * `D3D11_SVF_INTERFACE_POINTER` →&nbsp;❌ <br>
+//! * `D3D_SVF_FORCE_DWORD` →&nbsp;❌ <br>
+//! * `D3D_SVF_INTERFACE_PARAMETER` →&nbsp;❌ <br>
+//! * `D3D_SVF_INTERFACE_POINTER` →&nbsp;❌ <br>
+//! * `D3D_SVF_USED` →&nbsp;❌ <br>
+//! * `D3D_SVF_USERPACKED` →&nbsp;❌ <br>
+//!
 //! [`D3D_SHADER_VARIABLE_TYPE`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_shader_variable_type)&nbsp;→ [`d3d::ShaderVariableType`] <br>
+//! * `D3D10_SVT_BLEND` →&nbsp;❌ <br>
+//! * `D3D10_SVT_BOOL` →&nbsp;❌ <br>
+//! * `D3D10_SVT_BUFFER` →&nbsp;❌ <br>
+//! * `D3D10_SVT_CBUFFER` →&nbsp;❌ <br>
+//! * `D3D10_SVT_DEPTHSTENCIL` →&nbsp;❌ <br>
+//! * `D3D10_SVT_DEPTHSTENCILVIEW` →&nbsp;❌ <br>
+//! * `D3D10_SVT_FLOAT` →&nbsp;❌ <br>
+//! * `D3D10_SVT_GEOMETRYSHADER` →&nbsp;❌ <br>
+//! * `D3D10_SVT_INT` →&nbsp;❌ <br>
+//! * `D3D10_SVT_PIXELFRAGMENT` →&nbsp;❌ <br>
+//! * `D3D10_SVT_PIXELSHADER` →&nbsp;❌ <br>
+//! * `D3D10_SVT_RASTERIZER` →&nbsp;❌ <br>
+//! * `D3D10_SVT_RENDERTARGETVIEW` →&nbsp;❌ <br>
+//! * `D3D10_SVT_SAMPLER` →&nbsp;❌ <br>
+//! * `D3D10_SVT_SAMPLER1D` →&nbsp;❌ <br>
+//! * `D3D10_SVT_SAMPLER2D` →&nbsp;❌ <br>
+//! * `D3D10_SVT_SAMPLER3D` →&nbsp;❌ <br>
+//! * `D3D10_SVT_SAMPLERCUBE` →&nbsp;❌ <br>
+//! * `D3D10_SVT_STRING` →&nbsp;❌ <br>
+//! * `D3D10_SVT_TBUFFER` →&nbsp;❌ <br>
+//! * `D3D10_SVT_TEXTURE` →&nbsp;❌ <br>
+//! * `D3D10_SVT_TEXTURE1D` →&nbsp;❌ <br>
+//! * `D3D10_SVT_TEXTURE1DARRAY` →&nbsp;❌ <br>
+//! * `D3D10_SVT_TEXTURE2D` →&nbsp;❌ <br>
+//! * `D3D10_SVT_TEXTURE2DARRAY` →&nbsp;❌ <br>
+//! * `D3D10_SVT_TEXTURE2DMS` →&nbsp;❌ <br>
+//! * `D3D10_SVT_TEXTURE2DMSARRAY` →&nbsp;❌ <br>
+//! * `D3D10_SVT_TEXTURE3D` →&nbsp;❌ <br>
+//! * `D3D10_SVT_TEXTURECUBE` →&nbsp;❌ <br>
+//! * `D3D10_SVT_TEXTURECUBEARRAY` →&nbsp;❌ <br>
+//! * `D3D10_SVT_UINT` →&nbsp;❌ <br>
+//! * `D3D10_SVT_UINT8` →&nbsp;❌ <br>
+//! * `D3D10_SVT_VERTEXFRAGMENT` →&nbsp;❌ <br>
+//! * `D3D10_SVT_VERTEXSHADER` →&nbsp;❌ <br>
+//! * `D3D10_SVT_VOID` →&nbsp;❌ <br>
+//! * `D3D11_SVT_APPEND_STRUCTURED_BUFFER` →&nbsp;❌ <br>
+//! * `D3D11_SVT_BYTEADDRESS_BUFFER` →&nbsp;❌ <br>
+//! * `D3D11_SVT_COMPUTESHADER` →&nbsp;❌ <br>
+//! * `D3D11_SVT_CONSUME_STRUCTURED_BUFFER` →&nbsp;❌ <br>
+//! * `D3D11_SVT_DOMAINSHADER` →&nbsp;❌ <br>
+//! * `D3D11_SVT_DOUBLE` →&nbsp;❌ <br>
+//! * `D3D11_SVT_HULLSHADER` →&nbsp;❌ <br>
+//! * `D3D11_SVT_INTERFACE_POINTER` →&nbsp;❌ <br>
+//! * `D3D11_SVT_RWBUFFER` →&nbsp;❌ <br>
+//! * `D3D11_SVT_RWBYTEADDRESS_BUFFER` →&nbsp;❌ <br>
+//! * `D3D11_SVT_RWSTRUCTURED_BUFFER` →&nbsp;❌ <br>
+//! * `D3D11_SVT_RWTEXTURE1D` →&nbsp;❌ <br>
+//! * `D3D11_SVT_RWTEXTURE1DARRAY` →&nbsp;❌ <br>
+//! * `D3D11_SVT_RWTEXTURE2D` →&nbsp;❌ <br>
+//! * `D3D11_SVT_RWTEXTURE2DARRAY` →&nbsp;❌ <br>
+//! * `D3D11_SVT_RWTEXTURE3D` →&nbsp;❌ <br>
+//! * `D3D11_SVT_STRUCTURED_BUFFER` →&nbsp;❌ <br>
+//! * `D3D_SVT_APPEND_STRUCTURED_BUFFER` →&nbsp;❌ <br>
+//! * `D3D_SVT_BLEND` →&nbsp;❌ <br>
+//! * `D3D_SVT_BOOL` →&nbsp;❌ <br>
+//! * `D3D_SVT_BUFFER` →&nbsp;❌ <br>
+//! * `D3D_SVT_BYTEADDRESS_BUFFER` →&nbsp;❌ <br>
+//! * `D3D_SVT_CBUFFER` →&nbsp;❌ <br>
+//! * `D3D_SVT_COMPUTESHADER` →&nbsp;❌ <br>
+//! * `D3D_SVT_CONSUME_STRUCTURED_BUFFER` →&nbsp;❌ <br>
+//! * `D3D_SVT_DEPTHSTENCIL` →&nbsp;❌ <br>
+//! * `D3D_SVT_DEPTHSTENCILVIEW` →&nbsp;❌ <br>
+//! * `D3D_SVT_DOMAINSHADER` →&nbsp;❌ <br>
+//! * `D3D_SVT_DOUBLE` →&nbsp;❌ <br>
+//! * `D3D_SVT_FLOAT` →&nbsp;❌ <br>
+//! * `D3D_SVT_FORCE_DWORD` →&nbsp;❌ <br>
+//! * `D3D_SVT_GEOMETRYSHADER` →&nbsp;❌ <br>
+//! * `D3D_SVT_HULLSHADER` →&nbsp;❌ <br>
+//! * `D3D_SVT_INT` →&nbsp;❌ <br>
+//! * `D3D_SVT_INTERFACE_POINTER` →&nbsp;❌ <br>
+//! * `D3D_SVT_MIN10FLOAT` →&nbsp;❌ <br>
+//! * `D3D_SVT_MIN12INT` →&nbsp;❌ <br>
+//! * `D3D_SVT_MIN16FLOAT` →&nbsp;❌ <br>
+//! * `D3D_SVT_MIN16INT` →&nbsp;❌ <br>
+//! * `D3D_SVT_MIN16UINT` →&nbsp;❌ <br>
+//! * `D3D_SVT_MIN8FLOAT` →&nbsp;❌ <br>
+//! * `D3D_SVT_PIXELFRAGMENT` →&nbsp;❌ <br>
+//! * `D3D_SVT_PIXELSHADER` →&nbsp;❌ <br>
+//! * `D3D_SVT_RASTERIZER` →&nbsp;❌ <br>
+//! * `D3D_SVT_RENDERTARGETVIEW` →&nbsp;❌ <br>
+//! * `D3D_SVT_RWBUFFER` →&nbsp;❌ <br>
+//! * `D3D_SVT_RWBYTEADDRESS_BUFFER` →&nbsp;❌ <br>
+//! * `D3D_SVT_RWSTRUCTURED_BUFFER` →&nbsp;❌ <br>
+//! * `D3D_SVT_RWTEXTURE1D` →&nbsp;❌ <br>
+//! * `D3D_SVT_RWTEXTURE1DARRAY` →&nbsp;❌ <br>
+//! * `D3D_SVT_RWTEXTURE2D` →&nbsp;❌ <br>
+//! * `D3D_SVT_RWTEXTURE2DARRAY` →&nbsp;❌ <br>
+//! * `D3D_SVT_RWTEXTURE3D` →&nbsp;❌ <br>
+//! * `D3D_SVT_SAMPLER` →&nbsp;❌ <br>
+//! * `D3D_SVT_SAMPLER1D` →&nbsp;❌ <br>
+//! * `D3D_SVT_SAMPLER2D` →&nbsp;❌ <br>
+//! * `D3D_SVT_SAMPLER3D` →&nbsp;❌ <br>
+//! * `D3D_SVT_SAMPLERCUBE` →&nbsp;❌ <br>
+//! * `D3D_SVT_STRING` →&nbsp;❌ <br>
+//! * `D3D_SVT_STRUCTURED_BUFFER` →&nbsp;❌ <br>
+//! * `D3D_SVT_TBUFFER` →&nbsp;❌ <br>
+//! * `D3D_SVT_TEXTURE` →&nbsp;❌ <br>
+//! * `D3D_SVT_TEXTURE1D` →&nbsp;❌ <br>
+//! * `D3D_SVT_TEXTURE1DARRAY` →&nbsp;❌ <br>
+//! * `D3D_SVT_TEXTURE2D` →&nbsp;❌ <br>
+//! * `D3D_SVT_TEXTURE2DARRAY` →&nbsp;❌ <br>
+//! * `D3D_SVT_TEXTURE2DMS` →&nbsp;❌ <br>
+//! * `D3D_SVT_TEXTURE2DMSARRAY` →&nbsp;❌ <br>
+//! * `D3D_SVT_TEXTURE3D` →&nbsp;❌ <br>
+//! * `D3D_SVT_TEXTURECUBE` →&nbsp;❌ <br>
+//! * `D3D_SVT_TEXTURECUBEARRAY` →&nbsp;❌ <br>
+//! * `D3D_SVT_UINT` →&nbsp;❌ <br>
+//! * `D3D_SVT_UINT8` →&nbsp;❌ <br>
+//! * `D3D_SVT_VERTEXFRAGMENT` →&nbsp;❌ <br>
+//! * `D3D_SVT_VERTEXSHADER` →&nbsp;❌ <br>
+//! * `D3D_SVT_VOID` →&nbsp;❌ <br>
+//!
 //! [`D3D_SRV_DIMENSION`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_srv_dimension)&nbsp;→ [`d3d::SrvDimension`] <br>
+//! * `D3D10_1_SRV_DIMENSION_BUFFER` →&nbsp;❌ <br>
+//! * `D3D10_1_SRV_DIMENSION_TEXTURE1D` →&nbsp;❌ <br>
+//! * `D3D10_1_SRV_DIMENSION_TEXTURE1DARRAY` →&nbsp;❌ <br>
+//! * `D3D10_1_SRV_DIMENSION_TEXTURE2D` →&nbsp;❌ <br>
+//! * `D3D10_1_SRV_DIMENSION_TEXTURE2DARRAY` →&nbsp;❌ <br>
+//! * `D3D10_1_SRV_DIMENSION_TEXTURE2DMS` →&nbsp;❌ <br>
+//! * `D3D10_1_SRV_DIMENSION_TEXTURE2DMSARRAY` →&nbsp;❌ <br>
+//! * `D3D10_1_SRV_DIMENSION_TEXTURE3D` →&nbsp;❌ <br>
+//! * `D3D10_1_SRV_DIMENSION_TEXTURECUBE` →&nbsp;❌ <br>
+//! * `D3D10_1_SRV_DIMENSION_TEXTURECUBEARRAY` →&nbsp;❌ <br>
+//! * `D3D10_1_SRV_DIMENSION_UNKNOWN` →&nbsp;❌ <br>
+//! * `D3D10_SRV_DIMENSION_BUFFER` →&nbsp;❌ <br>
+//! * `D3D10_SRV_DIMENSION_TEXTURE1D` →&nbsp;❌ <br>
+//! * `D3D10_SRV_DIMENSION_TEXTURE1DARRAY` →&nbsp;❌ <br>
+//! * `D3D10_SRV_DIMENSION_TEXTURE2D` →&nbsp;❌ <br>
+//! * `D3D10_SRV_DIMENSION_TEXTURE2DARRAY` →&nbsp;❌ <br>
+//! * `D3D10_SRV_DIMENSION_TEXTURE2DMS` →&nbsp;❌ <br>
+//! * `D3D10_SRV_DIMENSION_TEXTURE2DMSARRAY` →&nbsp;❌ <br>
+//! * `D3D10_SRV_DIMENSION_TEXTURE3D` →&nbsp;❌ <br>
+//! * `D3D10_SRV_DIMENSION_TEXTURECUBE` →&nbsp;❌ <br>
+//! * `D3D10_SRV_DIMENSION_UNKNOWN` →&nbsp;❌ <br>
+//! * `D3D11_SRV_DIMENSION_BUFFER` →&nbsp;❌ <br>
+//! * `D3D11_SRV_DIMENSION_BUFFEREX` →&nbsp;❌ <br>
+//! * `D3D11_SRV_DIMENSION_TEXTURE1D` →&nbsp;❌ <br>
+//! * `D3D11_SRV_DIMENSION_TEXTURE1DARRAY` →&nbsp;❌ <br>
+//! * `D3D11_SRV_DIMENSION_TEXTURE2D` →&nbsp;❌ <br>
+//! * `D3D11_SRV_DIMENSION_TEXTURE2DARRAY` →&nbsp;❌ <br>
+//! * `D3D11_SRV_DIMENSION_TEXTURE2DMS` →&nbsp;❌ <br>
+//! * `D3D11_SRV_DIMENSION_TEXTURE2DMSARRAY` →&nbsp;❌ <br>
+//! * `D3D11_SRV_DIMENSION_TEXTURE3D` →&nbsp;❌ <br>
+//! * `D3D11_SRV_DIMENSION_TEXTURECUBE` →&nbsp;❌ <br>
+//! * `D3D11_SRV_DIMENSION_TEXTURECUBEARRAY` →&nbsp;❌ <br>
+//! * `D3D11_SRV_DIMENSION_UNKNOWN` →&nbsp;❌ <br>
+//! * `D3D_SRV_DIMENSION_BUFFER` →&nbsp;❌ <br>
+//! * `D3D_SRV_DIMENSION_BUFFEREX` →&nbsp;❌ <br>
+//! * `D3D_SRV_DIMENSION_TEXTURE1D` →&nbsp;❌ <br>
+//! * `D3D_SRV_DIMENSION_TEXTURE1DARRAY` →&nbsp;❌ <br>
+//! * `D3D_SRV_DIMENSION_TEXTURE2D` →&nbsp;❌ <br>
+//! * `D3D_SRV_DIMENSION_TEXTURE2DARRAY` →&nbsp;❌ <br>
+//! * `D3D_SRV_DIMENSION_TEXTURE2DMS` →&nbsp;❌ <br>
+//! * `D3D_SRV_DIMENSION_TEXTURE2DMSARRAY` →&nbsp;❌ <br>
+//! * `D3D_SRV_DIMENSION_TEXTURE3D` →&nbsp;❌ <br>
+//! * `D3D_SRV_DIMENSION_TEXTURECUBE` →&nbsp;❌ <br>
+//! * `D3D_SRV_DIMENSION_TEXTURECUBEARRAY` →&nbsp;❌ <br>
+//! * `D3D_SRV_DIMENSION_UNKNOWN` →&nbsp;❌ <br>
+//!
 //! [`D3D_TESSELLATOR_DOMAIN`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_tessellator_domain)&nbsp;→ [`d3d::TessellatorDomain`] <br>
+//! * `D3D11_TESSELLATOR_DOMAIN_ISOLINE` →&nbsp;❌ <br>
+//! * `D3D11_TESSELLATOR_DOMAIN_QUAD` →&nbsp;❌ <br>
+//! * `D3D11_TESSELLATOR_DOMAIN_TRI` →&nbsp;❌ <br>
+//! * `D3D11_TESSELLATOR_DOMAIN_UNDEFINED` →&nbsp;❌ <br>
+//! * `D3D_TESSELLATOR_DOMAIN_ISOLINE` →&nbsp;❌ <br>
+//! * `D3D_TESSELLATOR_DOMAIN_QUAD` →&nbsp;❌ <br>
+//! * `D3D_TESSELLATOR_DOMAIN_TRI` →&nbsp;❌ <br>
+//! * `D3D_TESSELLATOR_DOMAIN_UNDEFINED` →&nbsp;❌ <br>
+//!
 //! [`D3D_TESSELLATOR_OUTPUT_PRIMITIVE`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_tessellator_output_primitive)&nbsp;→ [`d3d::TessellatorOutputPrimitive`] <br>
+//! * `D3D11_TESSELLATOR_OUTPUT_LINE` →&nbsp;❌ <br>
+//! * `D3D11_TESSELLATOR_OUTPUT_POINT` →&nbsp;❌ <br>
+//! * `D3D11_TESSELLATOR_OUTPUT_TRIANGLE_CCW` →&nbsp;❌ <br>
+//! * `D3D11_TESSELLATOR_OUTPUT_TRIANGLE_CW` →&nbsp;❌ <br>
+//! * `D3D11_TESSELLATOR_OUTPUT_UNDEFINED` →&nbsp;❌ <br>
+//! * `D3D_TESSELLATOR_OUTPUT_LINE` →&nbsp;❌ <br>
+//! * `D3D_TESSELLATOR_OUTPUT_POINT` →&nbsp;❌ <br>
+//! * `D3D_TESSELLATOR_OUTPUT_TRIANGLE_CCW` →&nbsp;❌ <br>
+//! * `D3D_TESSELLATOR_OUTPUT_TRIANGLE_CW` →&nbsp;❌ <br>
+//! * `D3D_TESSELLATOR_OUTPUT_UNDEFINED` →&nbsp;❌ <br>
+//!
 //! [`D3D_TESSELLATOR_PARTITIONING`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_tessellator_partitioning)&nbsp;→ [`d3d::TessellatorPartitioning`] <br>
+//! * `D3D11_TESSELLATOR_PARTITIONING_FRACTIONAL_EVEN` →&nbsp;❌ <br>
+//! * `D3D11_TESSELLATOR_PARTITIONING_FRACTIONAL_ODD` →&nbsp;❌ <br>
+//! * `D3D11_TESSELLATOR_PARTITIONING_INTEGER` →&nbsp;❌ <br>
+//! * `D3D11_TESSELLATOR_PARTITIONING_POW2` →&nbsp;❌ <br>
+//! * `D3D11_TESSELLATOR_PARTITIONING_UNDEFINED` →&nbsp;❌ <br>
+//! * `D3D_TESSELLATOR_PARTITIONING_FRACTIONAL_EVEN` →&nbsp;❌ <br>
+//! * `D3D_TESSELLATOR_PARTITIONING_FRACTIONAL_ODD` →&nbsp;❌ <br>
+//! * `D3D_TESSELLATOR_PARTITIONING_INTEGER` →&nbsp;❌ <br>
+//! * `D3D_TESSELLATOR_PARTITIONING_POW2` →&nbsp;❌ <br>
+//! * `D3D_TESSELLATOR_PARTITIONING_UNDEFINED` →&nbsp;❌ <br>
+//!
 //!
 //! <br>
 //!
@@ -99,7 +683,32 @@
 //! ### C++ Enums → Rust Structs
 //!
 //! [`D3DCOMPILER_STRIP_FLAGS`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/ne-d3dcompiler-d3dcompiler_strip_flags)&nbsp;→ [`d3d::CompilerStripFlags`] <br>
+//! * `D3DCOMPILER_STRIP_DEBUG_INFO` →&nbsp;❌ <br>
+//! * `D3DCOMPILER_STRIP_FORCE_DWORD` →&nbsp;❌ <br>
+//! * `D3DCOMPILER_STRIP_PRIVATE_DATA` →&nbsp;❌ <br>
+//! * `D3DCOMPILER_STRIP_REFLECTION_DATA` →&nbsp;❌ <br>
+//! * `D3DCOMPILER_STRIP_ROOT_SIGNATURE` →&nbsp;❌ <br>
+//! * `D3DCOMPILER_STRIP_TEST_BLOBS` →&nbsp;❌ <br>
+//!
 //! [`D3D_BLOB_PART`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/ne-d3dcompiler-d3d_blob_part)&nbsp;→ [`d3d::BlobPart`] <br>
+//! * `D3D_BLOB_ALL_SIGNATURE_BLOB` →&nbsp;❌ <br>
+//! * `D3D_BLOB_DEBUG_INFO` →&nbsp;❌ <br>
+//! * `D3D_BLOB_DEBUG_NAME` →&nbsp;❌ <br>
+//! * `D3D_BLOB_INPUT_AND_OUTPUT_SIGNATURE_BLOB` →&nbsp;❌ <br>
+//! * `D3D_BLOB_INPUT_SIGNATURE_BLOB` →&nbsp;❌ <br>
+//! * `D3D_BLOB_LEGACY_SHADER` →&nbsp;❌ <br>
+//! * `D3D_BLOB_OUTPUT_SIGNATURE_BLOB` →&nbsp;❌ <br>
+//! * `D3D_BLOB_PATCH_CONSTANT_SIGNATURE_BLOB` →&nbsp;❌ <br>
+//! * `D3D_BLOB_PDB` →&nbsp;❌ <br>
+//! * `D3D_BLOB_PRIVATE_DATA` →&nbsp;❌ <br>
+//! * `D3D_BLOB_ROOT_SIGNATURE` →&nbsp;❌ <br>
+//! * `D3D_BLOB_TEST_ALTERNATE_SHADER` →&nbsp;❌ <br>
+//! * `D3D_BLOB_TEST_COMPILE_DETAILS` →&nbsp;❌ <br>
+//! * `D3D_BLOB_TEST_COMPILE_PERF` →&nbsp;❌ <br>
+//! * `D3D_BLOB_TEST_COMPILE_REPORT` →&nbsp;❌ <br>
+//! * `D3D_BLOB_XNA_PREPASS_SHADER` →&nbsp;❌ <br>
+//! * `D3D_BLOB_XNA_SHADER` →&nbsp;❌ <br>
+//!
 //!
 //! <br>
 //!
@@ -500,59 +1109,767 @@
 //! ### C++ Enums → Rust Structs
 //!
 //! `D3DAUTHENTICATEDCHANNELTYPE` →&nbsp;❌ <br>
+//! * `D3DAUTHENTICATEDCHANNEL_D3D9` →&nbsp;❌ <br>
+//! * `D3DAUTHENTICATEDCHANNEL_DRIVER_HARDWARE` →&nbsp;❌ <br>
+//! * `D3DAUTHENTICATEDCHANNEL_DRIVER_SOFTWARE` →&nbsp;❌ <br>
+//!
 //! `D3DAUTHENTICATEDCHANNEL_PROCESSIDENTIFIERTYPE` →&nbsp;❌ <br>
+//! * `PROCESSIDTYPE_DWM` →&nbsp;❌ <br>
+//! * `PROCESSIDTYPE_HANDLE` →&nbsp;❌ <br>
+//! * `PROCESSIDTYPE_UNKNOWN` →&nbsp;❌ <br>
+//!
 //! [`D3DBACKBUFFER_TYPE`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dbackbuffer-type)&nbsp;→ [`d3d::BackBufferType`] <br>
+//! * `D3DBACKBUFFER_TYPE_FORCE_DWORD` →&nbsp;❌ <br>
+//! * `D3DBACKBUFFER_TYPE_LEFT` →&nbsp;❌ <br>
+//! * `D3DBACKBUFFER_TYPE_MONO` →&nbsp;❌ <br>
+//! * `D3DBACKBUFFER_TYPE_RIGHT` →&nbsp;❌ <br>
+//!
 //! [`D3DBASISTYPE`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dbasistype)&nbsp;→ [`d3d::BasisType`] <br>
+//! * `D3DBASIS_BEZIER` →&nbsp;❌ <br>
+//! * `D3DBASIS_BSPLINE` →&nbsp;❌ <br>
+//! * `D3DBASIS_CATMULL_ROM` →&nbsp;❌ <br>
+//! * `D3DBASIS_FORCE_DWORD` →&nbsp;❌ <br>
+//!
 //! [`D3DBLEND`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dblend)&nbsp;→ [`d3d::Blend`] <br>
+//! * `D3DBLEND_BLENDFACTOR` →&nbsp;❌ <br>
+//! * `D3DBLEND_BOTHINVSRCALPHA` →&nbsp;❌ <br>
+//! * `D3DBLEND_BOTHSRCALPHA` →&nbsp;❌ <br>
+//! * `D3DBLEND_DESTALPHA` →&nbsp;❌ <br>
+//! * `D3DBLEND_DESTCOLOR` →&nbsp;❌ <br>
+//! * `D3DBLEND_FORCE_DWORD` →&nbsp;❌ <br>
+//! * `D3DBLEND_INVBLENDFACTOR` →&nbsp;❌ <br>
+//! * `D3DBLEND_INVDESTALPHA` →&nbsp;❌ <br>
+//! * `D3DBLEND_INVDESTCOLOR` →&nbsp;❌ <br>
+//! * `D3DBLEND_INVSRCALPHA` →&nbsp;❌ <br>
+//! * `D3DBLEND_INVSRCCOLOR` →&nbsp;❌ <br>
+//! * `D3DBLEND_INVSRCCOLOR2` →&nbsp;❌ <br>
+//! * `D3DBLEND_ONE` →&nbsp;❌ <br>
+//! * `D3DBLEND_SRCALPHA` →&nbsp;❌ <br>
+//! * `D3DBLEND_SRCALPHASAT` →&nbsp;❌ <br>
+//! * `D3DBLEND_SRCCOLOR` →&nbsp;❌ <br>
+//! * `D3DBLEND_SRCCOLOR2` →&nbsp;❌ <br>
+//! * `D3DBLEND_ZERO` →&nbsp;❌ <br>
+//!
 //! [`D3DBLENDOP`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dblendop)&nbsp;→ [`d3d::BlendOp`] <br>
+//! * `D3DBLENDOP_ADD` →&nbsp;❌ <br>
+//! * `D3DBLENDOP_FORCE_DWORD` →&nbsp;❌ <br>
+//! * `D3DBLENDOP_MAX` →&nbsp;❌ <br>
+//! * `D3DBLENDOP_MIN` →&nbsp;❌ <br>
+//! * `D3DBLENDOP_REVSUBTRACT` →&nbsp;❌ <br>
+//! * `D3DBLENDOP_SUBTRACT` →&nbsp;❌ <br>
+//!
 //! `D3DBUSTYPE` →&nbsp;❌ <br>
+//! * `D3DBUSIMPL_MODIFIER_DAUGHTER_BOARD_CONNECTOR` →&nbsp;❌ <br>
+//! * `D3DBUSIMPL_MODIFIER_DAUGHTER_BOARD_CONNECTOR_INSIDE_OF_NUAE` →&nbsp;❌ <br>
+//! * `D3DBUSIMPL_MODIFIER_INSIDE_OF_CHIPSET` →&nbsp;❌ <br>
+//! * `D3DBUSIMPL_MODIFIER_NON_STANDARD` →&nbsp;❌ <br>
+//! * `D3DBUSIMPL_MODIFIER_TRACKS_ON_MOTHER_BOARD_TO_CHIP` →&nbsp;❌ <br>
+//! * `D3DBUSIMPL_MODIFIER_TRACKS_ON_MOTHER_BOARD_TO_SOCKET` →&nbsp;❌ <br>
+//! * `D3DBUSTYPE_AGP` →&nbsp;❌ <br>
+//! * `D3DBUSTYPE_OTHER` →&nbsp;❌ <br>
+//! * `D3DBUSTYPE_PCI` →&nbsp;❌ <br>
+//! * `D3DBUSTYPE_PCIEXPRESS` →&nbsp;❌ <br>
+//! * `D3DBUSTYPE_PCIX` →&nbsp;❌ <br>
+//!
 //! [`D3DCMPFUNC`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dcmpfunc)&nbsp;→ [`d3d::CmpFunc`] <br>
+//! * `D3DCMP_ALWAYS` →&nbsp;❌ <br>
+//! * `D3DCMP_EQUAL` →&nbsp;❌ <br>
+//! * `D3DCMP_FORCE_DWORD` →&nbsp;❌ <br>
+//! * `D3DCMP_GREATER` →&nbsp;❌ <br>
+//! * `D3DCMP_GREATEREQUAL` →&nbsp;❌ <br>
+//! * `D3DCMP_LESS` →&nbsp;❌ <br>
+//! * `D3DCMP_LESSEQUAL` →&nbsp;❌ <br>
+//! * `D3DCMP_NEVER` →&nbsp;❌ <br>
+//! * `D3DCMP_NOTEQUAL` →&nbsp;❌ <br>
+//!
 //! [`D3DCOMPOSERECTSOP`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dcomposerectsop)&nbsp;→ [`d3d::ComposeRectsOp`] <br>
+//! * `D3DCOMPOSERECTS_AND` →&nbsp;❌ <br>
+//! * `D3DCOMPOSERECTS_COPY` →&nbsp;❌ <br>
+//! * `D3DCOMPOSERECTS_FORCE_DWORD` →&nbsp;❌ <br>
+//! * `D3DCOMPOSERECTS_NEG` →&nbsp;❌ <br>
+//! * `D3DCOMPOSERECTS_OR` →&nbsp;❌ <br>
+//!
 //! [`D3DCUBEMAP_FACES`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dcubemap-faces)&nbsp;→ [`d3d::CubeMapFaces`] <br>
+//! * `D3DCUBEMAP_FACE_FORCE_DWORD` →&nbsp;❌ <br>
+//! * `D3DCUBEMAP_FACE_NEGATIVE_X` →&nbsp;❌ <br>
+//! * `D3DCUBEMAP_FACE_NEGATIVE_Y` →&nbsp;❌ <br>
+//! * `D3DCUBEMAP_FACE_NEGATIVE_Z` →&nbsp;❌ <br>
+//! * `D3DCUBEMAP_FACE_POSITIVE_X` →&nbsp;❌ <br>
+//! * `D3DCUBEMAP_FACE_POSITIVE_Y` →&nbsp;❌ <br>
+//! * `D3DCUBEMAP_FACE_POSITIVE_Z` →&nbsp;❌ <br>
+//!
 //! [`D3DCULL`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dcull)&nbsp;→ [`d3d::Cull`] <br>
+//! * `D3DCULL_CCW` →&nbsp;❌ <br>
+//! * `D3DCULL_CW` →&nbsp;❌ <br>
+//! * `D3DCULL_FORCE_DWORD` →&nbsp;❌ <br>
+//! * `D3DCULL_NONE` →&nbsp;❌ <br>
+//!
 //! [`D3DDEBUGMONITORTOKENS`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddebugmonitortokens)&nbsp;→ [`d3d::DebugMonitorTokens`] <br>
+//! * `D3DDMT_DISABLE` →&nbsp;❌ <br>
+//! * `D3DDMT_ENABLE` →&nbsp;❌ <br>
+//! * `D3DDMT_FORCE_DWORD` →&nbsp;❌ <br>
+//!
 //! [`D3DDECLMETHOD`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddeclmethod)&nbsp;→ [`d3d::DeclMethod8`] <br>
+//! * `D3DDECLMETHOD_CROSSUV` →&nbsp;❌ <br>
+//! * `D3DDECLMETHOD_DEFAULT` →&nbsp;❌ <br>
+//! * `D3DDECLMETHOD_LOOKUP` →&nbsp;❌ <br>
+//! * `D3DDECLMETHOD_LOOKUPPRESAMPLED` →&nbsp;❌ <br>
+//! * `D3DDECLMETHOD_PARTIALU` →&nbsp;❌ <br>
+//! * `D3DDECLMETHOD_PARTIALV` →&nbsp;❌ <br>
+//! * `D3DDECLMETHOD_UV` →&nbsp;❌ <br>
+//!
 //! [`D3DDECLTYPE`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddecltype)&nbsp;→ [`d3d::DeclType8`] <br>
+//! * `D3DDECLTYPE_D3DCOLOR` →&nbsp;❌ <br>
+//! * `D3DDECLTYPE_DEC3N` →&nbsp;❌ <br>
+//! * `D3DDECLTYPE_FLOAT1` →&nbsp;❌ <br>
+//! * `D3DDECLTYPE_FLOAT16_2` →&nbsp;❌ <br>
+//! * `D3DDECLTYPE_FLOAT16_4` →&nbsp;❌ <br>
+//! * `D3DDECLTYPE_FLOAT2` →&nbsp;❌ <br>
+//! * `D3DDECLTYPE_FLOAT3` →&nbsp;❌ <br>
+//! * `D3DDECLTYPE_FLOAT4` →&nbsp;❌ <br>
+//! * `D3DDECLTYPE_SHORT2` →&nbsp;❌ <br>
+//! * `D3DDECLTYPE_SHORT2N` →&nbsp;❌ <br>
+//! * `D3DDECLTYPE_SHORT4` →&nbsp;❌ <br>
+//! * `D3DDECLTYPE_SHORT4N` →&nbsp;❌ <br>
+//! * `D3DDECLTYPE_UBYTE4` →&nbsp;❌ <br>
+//! * `D3DDECLTYPE_UBYTE4N` →&nbsp;❌ <br>
+//! * `D3DDECLTYPE_UDEC3` →&nbsp;❌ <br>
+//! * `D3DDECLTYPE_UNUSED` →&nbsp;❌ <br>
+//! * `D3DDECLTYPE_USHORT2N` →&nbsp;❌ <br>
+//! * `D3DDECLTYPE_USHORT4N` →&nbsp;❌ <br>
+//!
 //! [`D3DDECLUSAGE`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddeclusage)&nbsp;→ [`d3d::DeclUsage8`] <br>
+//! * `D3DDECLUSAGE_BINORMAL` →&nbsp;❌ <br>
+//! * `D3DDECLUSAGE_BLENDINDICES` →&nbsp;❌ <br>
+//! * `D3DDECLUSAGE_BLENDWEIGHT` →&nbsp;❌ <br>
+//! * `D3DDECLUSAGE_COLOR` →&nbsp;❌ <br>
+//! * `D3DDECLUSAGE_DEPTH` →&nbsp;❌ <br>
+//! * `D3DDECLUSAGE_FOG` →&nbsp;❌ <br>
+//! * `D3DDECLUSAGE_NORMAL` →&nbsp;❌ <br>
+//! * `D3DDECLUSAGE_POSITION` →&nbsp;❌ <br>
+//! * `D3DDECLUSAGE_POSITIONT` →&nbsp;❌ <br>
+//! * `D3DDECLUSAGE_PSIZE` →&nbsp;❌ <br>
+//! * `D3DDECLUSAGE_SAMPLE` →&nbsp;❌ <br>
+//! * `D3DDECLUSAGE_TANGENT` →&nbsp;❌ <br>
+//! * `D3DDECLUSAGE_TESSFACTOR` →&nbsp;❌ <br>
+//! * `D3DDECLUSAGE_TEXCOORD` →&nbsp;❌ <br>
+//!
 //! [`D3DDEGREETYPE`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddegreetype)&nbsp;→ [`d3d::DegreeType`] <br>
+//! * `D3DDEGREE_CUBIC` →&nbsp;❌ <br>
+//! * `D3DDEGREE_FORCE_DWORD` →&nbsp;❌ <br>
+//! * `D3DDEGREE_LINEAR` →&nbsp;❌ <br>
+//! * `D3DDEGREE_QUADRATIC` →&nbsp;❌ <br>
+//! * `D3DDEGREE_QUINTIC` →&nbsp;❌ <br>
+//!
 //! [`D3DDEVTYPE`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddevtype)&nbsp;→ [`d3d::DevType`] <br>
+//! * `D3DDEVTYPE_FORCE_DWORD` →&nbsp;❌ <br>
+//! * `D3DDEVTYPE_HAL` →&nbsp;❌ <br>
+//! * `D3DDEVTYPE_NULLREF` →&nbsp;❌ <br>
+//! * `D3DDEVTYPE_REF` →&nbsp;❌ <br>
+//! * `D3DDEVTYPE_SW` →&nbsp;❌ <br>
+//!
 //! [`D3DDISPLAYROTATION`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddisplayrotation)&nbsp;→ [`d3d::DisplayRotation`] <br>
+//! * `D3DDISPLAYROTATION_180` →&nbsp;❌ <br>
+//! * `D3DDISPLAYROTATION_270` →&nbsp;❌ <br>
+//! * `D3DDISPLAYROTATION_90` →&nbsp;❌ <br>
+//! * `D3DDISPLAYROTATION_IDENTITY` →&nbsp;❌ <br>
+//!
 //! [`D3DFILLMODE`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dfillmode)&nbsp;→ [`d3d::FillMode`] <br>
+//! * `D3DFILL_FORCE_DWORD` →&nbsp;❌ <br>
+//! * `D3DFILL_POINT` →&nbsp;❌ <br>
+//! * `D3DFILL_SOLID` →&nbsp;❌ <br>
+//! * `D3DFILL_WIREFRAME` →&nbsp;❌ <br>
+//!
 //! [`D3DFOGMODE`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dfogmode)&nbsp;→ [`d3d::FogMode`] <br>
+//! * `D3DFOG_EXP` →&nbsp;❌ <br>
+//! * `D3DFOG_EXP2` →&nbsp;❌ <br>
+//! * `D3DFOG_FORCE_DWORD` →&nbsp;❌ <br>
+//! * `D3DFOG_LINEAR` →&nbsp;❌ <br>
+//! * `D3DFOG_NONE` →&nbsp;❌ <br>
+//!
 //! [`D3DFORMAT`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dformat)&nbsp;→ [`d3d::Format`] <br>
+//! * `D3DFMT_A1` →&nbsp;❌ <br>
+//! * `D3DFMT_A16B16G16R16` →&nbsp;❌ <br>
+//! * `D3DFMT_A16B16G16R16F` →&nbsp;❌ <br>
+//! * `D3DFMT_A1R5G5B5` →&nbsp;❌ <br>
+//! * `D3DFMT_A2B10G10R10` →&nbsp;❌ <br>
+//! * `D3DFMT_A2B10G10R10_XR_BIAS` →&nbsp;❌ <br>
+//! * `D3DFMT_A2R10G10B10` →&nbsp;❌ <br>
+//! * `D3DFMT_A2W10V10U10` →&nbsp;❌ <br>
+//! * `D3DFMT_A32B32G32R32F` →&nbsp;❌ <br>
+//! * `D3DFMT_A4L4` →&nbsp;❌ <br>
+//! * `D3DFMT_A4R4G4B4` →&nbsp;❌ <br>
+//! * `D3DFMT_A8` →&nbsp;❌ <br>
+//! * `D3DFMT_A8B8G8R8` →&nbsp;❌ <br>
+//! * `D3DFMT_A8L8` →&nbsp;❌ <br>
+//! * `D3DFMT_A8P8` →&nbsp;❌ <br>
+//! * `D3DFMT_A8R3G3B2` →&nbsp;❌ <br>
+//! * `D3DFMT_A8R8G8B8` →&nbsp;❌ <br>
+//! * `D3DFMT_BINARYBUFFER` →&nbsp;❌ <br>
+//! * `D3DFMT_CxV8U8` →&nbsp;❌ <br>
+//! * `D3DFMT_D15S1` →&nbsp;❌ <br>
+//! * `D3DFMT_D16` →&nbsp;❌ <br>
+//! * `D3DFMT_D16_LOCKABLE` →&nbsp;❌ <br>
+//! * `D3DFMT_D24FS8` →&nbsp;❌ <br>
+//! * `D3DFMT_D24S8` →&nbsp;❌ <br>
+//! * `D3DFMT_D24X4S4` →&nbsp;❌ <br>
+//! * `D3DFMT_D24X8` →&nbsp;❌ <br>
+//! * `D3DFMT_D32` →&nbsp;❌ <br>
+//! * `D3DFMT_D32F_LOCKABLE` →&nbsp;❌ <br>
+//! * `D3DFMT_D32_LOCKABLE` →&nbsp;❌ <br>
+//! * `D3DFMT_DXT1` →&nbsp;❌ <br>
+//! * `D3DFMT_DXT2` →&nbsp;❌ <br>
+//! * `D3DFMT_DXT3` →&nbsp;❌ <br>
+//! * `D3DFMT_DXT4` →&nbsp;❌ <br>
+//! * `D3DFMT_DXT5` →&nbsp;❌ <br>
+//! * `D3DFMT_FORCE_DWORD` →&nbsp;❌ <br>
+//! * `D3DFMT_G16R16` →&nbsp;❌ <br>
+//! * `D3DFMT_G16R16F` →&nbsp;❌ <br>
+//! * `D3DFMT_G32R32F` →&nbsp;❌ <br>
+//! * `D3DFMT_G8R8_G8B8` →&nbsp;❌ <br>
+//! * `D3DFMT_INDEX16` →&nbsp;❌ <br>
+//! * `D3DFMT_INDEX32` →&nbsp;❌ <br>
+//! * `D3DFMT_L16` →&nbsp;❌ <br>
+//! * `D3DFMT_L6V5U5` →&nbsp;❌ <br>
+//! * `D3DFMT_L8` →&nbsp;❌ <br>
+//! * `D3DFMT_MULTI2_ARGB8` →&nbsp;❌ <br>
+//! * `D3DFMT_P8` →&nbsp;❌ <br>
+//! * `D3DFMT_Q16W16V16U16` →&nbsp;❌ <br>
+//! * `D3DFMT_Q8W8V8U8` →&nbsp;❌ <br>
+//! * `D3DFMT_R16F` →&nbsp;❌ <br>
+//! * `D3DFMT_R32F` →&nbsp;❌ <br>
+//! * `D3DFMT_R3G3B2` →&nbsp;❌ <br>
+//! * `D3DFMT_R5G6B5` →&nbsp;❌ <br>
+//! * `D3DFMT_R8G8B8` →&nbsp;❌ <br>
+//! * `D3DFMT_R8G8_B8G8` →&nbsp;❌ <br>
+//! * `D3DFMT_S8_LOCKABLE` →&nbsp;❌ <br>
+//! * `D3DFMT_UNKNOWN` →&nbsp;❌ <br>
+//! * `D3DFMT_UYVY` →&nbsp;❌ <br>
+//! * `D3DFMT_V16U16` →&nbsp;❌ <br>
+//! * `D3DFMT_V8U8` →&nbsp;❌ <br>
+//! * `D3DFMT_VERTEXDATA` →&nbsp;❌ <br>
+//! * `D3DFMT_X1R5G5B5` →&nbsp;❌ <br>
+//! * `D3DFMT_X4R4G4B4` →&nbsp;❌ <br>
+//! * `D3DFMT_X8B8G8R8` →&nbsp;❌ <br>
+//! * `D3DFMT_X8L8V8U8` →&nbsp;❌ <br>
+//! * `D3DFMT_X8R8G8B8` →&nbsp;❌ <br>
+//! * `D3DFMT_YUY2` →&nbsp;❌ <br>
+//!
 //! [`D3DLIGHTTYPE`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dlighttype)&nbsp;→ [`d3d::LightType`] <br>
+//! * `D3DLIGHT_DIRECTIONAL` →&nbsp;❌ <br>
+//! * `D3DLIGHT_FORCE_DWORD` →&nbsp;❌ <br>
+//! * `D3DLIGHT_POINT` →&nbsp;❌ <br>
+//! * `D3DLIGHT_SPOT` →&nbsp;❌ <br>
+//!
 //! [`D3DMATERIALCOLORSOURCE`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dmaterialcolorsource)&nbsp;→ [`d3d::MaterialColorSource`] <br>
+//! * `D3DMCS_COLOR1` →&nbsp;❌ <br>
+//! * `D3DMCS_COLOR2` →&nbsp;❌ <br>
+//! * `D3DMCS_FORCE_DWORD` →&nbsp;❌ <br>
+//! * `D3DMCS_MATERIAL` →&nbsp;❌ <br>
+//!
 //! [`D3DMULTISAMPLE_TYPE`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dmultisample-type)&nbsp;→ [`d3d::MultiSampleType`] <br>
+//! * `D3DMULTISAMPLE_10_SAMPLES` →&nbsp;❌ <br>
+//! * `D3DMULTISAMPLE_11_SAMPLES` →&nbsp;❌ <br>
+//! * `D3DMULTISAMPLE_12_SAMPLES` →&nbsp;❌ <br>
+//! * `D3DMULTISAMPLE_13_SAMPLES` →&nbsp;❌ <br>
+//! * `D3DMULTISAMPLE_14_SAMPLES` →&nbsp;❌ <br>
+//! * `D3DMULTISAMPLE_15_SAMPLES` →&nbsp;❌ <br>
+//! * `D3DMULTISAMPLE_16_SAMPLES` →&nbsp;❌ <br>
+//! * `D3DMULTISAMPLE_2_SAMPLES` →&nbsp;❌ <br>
+//! * `D3DMULTISAMPLE_3_SAMPLES` →&nbsp;❌ <br>
+//! * `D3DMULTISAMPLE_4_SAMPLES` →&nbsp;❌ <br>
+//! * `D3DMULTISAMPLE_5_SAMPLES` →&nbsp;❌ <br>
+//! * `D3DMULTISAMPLE_6_SAMPLES` →&nbsp;❌ <br>
+//! * `D3DMULTISAMPLE_7_SAMPLES` →&nbsp;❌ <br>
+//! * `D3DMULTISAMPLE_8_SAMPLES` →&nbsp;❌ <br>
+//! * `D3DMULTISAMPLE_9_SAMPLES` →&nbsp;❌ <br>
+//! * `D3DMULTISAMPLE_FORCE_DWORD` →&nbsp;❌ <br>
+//! * `D3DMULTISAMPLE_NONE` →&nbsp;❌ <br>
+//! * `D3DMULTISAMPLE_NONMASKABLE` →&nbsp;❌ <br>
+//!
 //! [`D3DPATCHEDGESTYLE`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dpatchedgestyle)&nbsp;→ [`d3d::PatchEdgeStyle`] <br>
+//! * `D3DPATCHEDGE_CONTINUOUS` →&nbsp;❌ <br>
+//! * `D3DPATCHEDGE_DISCRETE` →&nbsp;❌ <br>
+//! * `D3DPATCHEDGE_FORCE_DWORD` →&nbsp;❌ <br>
+//!
 //! [`D3DPOOL`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dpool)&nbsp;→ [`d3d::Pool`] <br>
+//! * `D3DPOOL_DEFAULT` →&nbsp;❌ <br>
+//! * `D3DPOOL_FORCE_DWORD` →&nbsp;❌ <br>
+//! * `D3DPOOL_MANAGED` →&nbsp;❌ <br>
+//! * `D3DPOOL_SCRATCH` →&nbsp;❌ <br>
+//! * `D3DPOOL_SYSTEMMEM` →&nbsp;❌ <br>
+//!
 //! [`D3DPRIMITIVETYPE`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dprimitivetype)&nbsp;→ [`d3d::PrimitiveType`] <br>
+//! * `D3DPT_FORCE_DWORD` →&nbsp;❌ <br>
+//! * `D3DPT_LINELIST` →&nbsp;❌ <br>
+//! * `D3DPT_LINESTRIP` →&nbsp;❌ <br>
+//! * `D3DPT_POINTLIST` →&nbsp;❌ <br>
+//! * `D3DPT_TRIANGLEFAN` →&nbsp;❌ <br>
+//! * `D3DPT_TRIANGLELIST` →&nbsp;❌ <br>
+//! * `D3DPT_TRIANGLESTRIP` →&nbsp;❌ <br>
+//!
 //! [`D3DQUERYTYPE`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dquerytype)&nbsp;→ [`d3d::QueryType`] <br>
+//! * `D3DQUERYTYPE_BANDWIDTHTIMINGS` →&nbsp;❌ <br>
+//! * `D3DQUERYTYPE_CACHEUTILIZATION` →&nbsp;❌ <br>
+//! * `D3DQUERYTYPE_EVENT` →&nbsp;❌ <br>
+//! * `D3DQUERYTYPE_INTERFACETIMINGS` →&nbsp;❌ <br>
+//! * `D3DQUERYTYPE_MEMORYPRESSURE` →&nbsp;❌ <br>
+//! * `D3DQUERYTYPE_OCCLUSION` →&nbsp;❌ <br>
+//! * `D3DQUERYTYPE_PIPELINETIMINGS` →&nbsp;❌ <br>
+//! * `D3DQUERYTYPE_PIXELTIMINGS` →&nbsp;❌ <br>
+//! * `D3DQUERYTYPE_RESOURCEMANAGER` →&nbsp;❌ <br>
+//! * `D3DQUERYTYPE_TIMESTAMP` →&nbsp;❌ <br>
+//! * `D3DQUERYTYPE_TIMESTAMPDISJOINT` →&nbsp;❌ <br>
+//! * `D3DQUERYTYPE_TIMESTAMPFREQ` →&nbsp;❌ <br>
+//! * `D3DQUERYTYPE_VCACHE` →&nbsp;❌ <br>
+//! * `D3DQUERYTYPE_VERTEXSTATS` →&nbsp;❌ <br>
+//! * `D3DQUERYTYPE_VERTEXTIMINGS` →&nbsp;❌ <br>
+//!
 //! [`D3DRENDERSTATETYPE`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)&nbsp;→ [`d3d::RenderStateType`] <br>
+//! * `D3DRS_ADAPTIVETESS_W` →&nbsp;❌ <br>
+//! * `D3DRS_ADAPTIVETESS_X` →&nbsp;❌ <br>
+//! * `D3DRS_ADAPTIVETESS_Y` →&nbsp;❌ <br>
+//! * `D3DRS_ADAPTIVETESS_Z` →&nbsp;❌ <br>
+//! * `D3DRS_ALPHABLENDENABLE` →&nbsp;❌ <br>
+//! * `D3DRS_ALPHAFUNC` →&nbsp;❌ <br>
+//! * `D3DRS_ALPHAREF` →&nbsp;❌ <br>
+//! * `D3DRS_ALPHATESTENABLE` →&nbsp;❌ <br>
+//! * `D3DRS_AMBIENT` →&nbsp;❌ <br>
+//! * `D3DRS_AMBIENTMATERIALSOURCE` →&nbsp;❌ <br>
+//! * `D3DRS_ANTIALIASEDLINEENABLE` →&nbsp;❌ <br>
+//! * `D3DRS_BLENDFACTOR` →&nbsp;❌ <br>
+//! * `D3DRS_BLENDOP` →&nbsp;❌ <br>
+//! * `D3DRS_BLENDOPALPHA` →&nbsp;❌ <br>
+//! * `D3DRS_CCW_STENCILFAIL` →&nbsp;❌ <br>
+//! * `D3DRS_CCW_STENCILFUNC` →&nbsp;❌ <br>
+//! * `D3DRS_CCW_STENCILPASS` →&nbsp;❌ <br>
+//! * `D3DRS_CCW_STENCILZFAIL` →&nbsp;❌ <br>
+//! * `D3DRS_CLIPPING` →&nbsp;❌ <br>
+//! * `D3DRS_CLIPPLANEENABLE` →&nbsp;❌ <br>
+//! * `D3DRS_COLORVERTEX` →&nbsp;❌ <br>
+//! * `D3DRS_COLORWRITEENABLE` →&nbsp;❌ <br>
+//! * `D3DRS_COLORWRITEENABLE1` →&nbsp;❌ <br>
+//! * `D3DRS_COLORWRITEENABLE2` →&nbsp;❌ <br>
+//! * `D3DRS_COLORWRITEENABLE3` →&nbsp;❌ <br>
+//! * `D3DRS_CULLMODE` →&nbsp;❌ <br>
+//! * `D3DRS_DEBUGMONITORTOKEN` →&nbsp;❌ <br>
+//! * `D3DRS_DEPTHBIAS` →&nbsp;❌ <br>
+//! * `D3DRS_DESTBLEND` →&nbsp;❌ <br>
+//! * `D3DRS_DESTBLENDALPHA` →&nbsp;❌ <br>
+//! * `D3DRS_DIFFUSEMATERIALSOURCE` →&nbsp;❌ <br>
+//! * `D3DRS_DITHERENABLE` →&nbsp;❌ <br>
+//! * `D3DRS_EMISSIVEMATERIALSOURCE` →&nbsp;❌ <br>
+//! * `D3DRS_ENABLEADAPTIVETESSELLATION` →&nbsp;❌ <br>
+//! * `D3DRS_FILLMODE` →&nbsp;❌ <br>
+//! * `D3DRS_FOGCOLOR` →&nbsp;❌ <br>
+//! * `D3DRS_FOGDENSITY` →&nbsp;❌ <br>
+//! * `D3DRS_FOGENABLE` →&nbsp;❌ <br>
+//! * `D3DRS_FOGEND` →&nbsp;❌ <br>
+//! * `D3DRS_FOGSTART` →&nbsp;❌ <br>
+//! * `D3DRS_FOGTABLEMODE` →&nbsp;❌ <br>
+//! * `D3DRS_FOGVERTEXMODE` →&nbsp;❌ <br>
+//! * `D3DRS_FORCE_DWORD` →&nbsp;❌ <br>
+//! * `D3DRS_INDEXEDVERTEXBLENDENABLE` →&nbsp;❌ <br>
+//! * `D3DRS_LASTPIXEL` →&nbsp;❌ <br>
+//! * `D3DRS_LIGHTING` →&nbsp;❌ <br>
+//! * `D3DRS_LOCALVIEWER` →&nbsp;❌ <br>
+//! * `D3DRS_MAXTESSELLATIONLEVEL` →&nbsp;❌ <br>
+//! * `D3DRS_MINTESSELLATIONLEVEL` →&nbsp;❌ <br>
+//! * `D3DRS_MULTISAMPLEANTIALIAS` →&nbsp;❌ <br>
+//! * `D3DRS_MULTISAMPLEMASK` →&nbsp;❌ <br>
+//! * `D3DRS_NORMALDEGREE` →&nbsp;❌ <br>
+//! * `D3DRS_NORMALIZENORMALS` →&nbsp;❌ <br>
+//! * `D3DRS_PATCHEDGESTYLE` →&nbsp;❌ <br>
+//! * `D3DRS_POINTSCALEENABLE` →&nbsp;❌ <br>
+//! * `D3DRS_POINTSCALE_A` →&nbsp;❌ <br>
+//! * `D3DRS_POINTSCALE_B` →&nbsp;❌ <br>
+//! * `D3DRS_POINTSCALE_C` →&nbsp;❌ <br>
+//! * `D3DRS_POINTSIZE` →&nbsp;❌ <br>
+//! * `D3DRS_POINTSIZE_MAX` →&nbsp;❌ <br>
+//! * `D3DRS_POINTSIZE_MIN` →&nbsp;❌ <br>
+//! * `D3DRS_POINTSPRITEENABLE` →&nbsp;❌ <br>
+//! * `D3DRS_POSITIONDEGREE` →&nbsp;❌ <br>
+//! * `D3DRS_RANGEFOGENABLE` →&nbsp;❌ <br>
+//! * `D3DRS_SCISSORTESTENABLE` →&nbsp;❌ <br>
+//! * `D3DRS_SEPARATEALPHABLENDENABLE` →&nbsp;❌ <br>
+//! * `D3DRS_SHADEMODE` →&nbsp;❌ <br>
+//! * `D3DRS_SLOPESCALEDEPTHBIAS` →&nbsp;❌ <br>
+//! * `D3DRS_SPECULARENABLE` →&nbsp;❌ <br>
+//! * `D3DRS_SPECULARMATERIALSOURCE` →&nbsp;❌ <br>
+//! * `D3DRS_SRCBLEND` →&nbsp;❌ <br>
+//! * `D3DRS_SRCBLENDALPHA` →&nbsp;❌ <br>
+//! * `D3DRS_SRGBWRITEENABLE` →&nbsp;❌ <br>
+//! * `D3DRS_STENCILENABLE` →&nbsp;❌ <br>
+//! * `D3DRS_STENCILFAIL` →&nbsp;❌ <br>
+//! * `D3DRS_STENCILFUNC` →&nbsp;❌ <br>
+//! * `D3DRS_STENCILMASK` →&nbsp;❌ <br>
+//! * `D3DRS_STENCILPASS` →&nbsp;❌ <br>
+//! * `D3DRS_STENCILREF` →&nbsp;❌ <br>
+//! * `D3DRS_STENCILWRITEMASK` →&nbsp;❌ <br>
+//! * `D3DRS_STENCILZFAIL` →&nbsp;❌ <br>
+//! * `D3DRS_TEXTUREFACTOR` →&nbsp;❌ <br>
+//! * `D3DRS_TWEENFACTOR` →&nbsp;❌ <br>
+//! * `D3DRS_TWOSIDEDSTENCILMODE` →&nbsp;❌ <br>
+//! * `D3DRS_VERTEXBLEND` →&nbsp;❌ <br>
+//! * `D3DRS_WRAP0` →&nbsp;❌ <br>
+//! * `D3DRS_WRAP1` →&nbsp;❌ <br>
+//! * `D3DRS_WRAP10` →&nbsp;❌ <br>
+//! * `D3DRS_WRAP11` →&nbsp;❌ <br>
+//! * `D3DRS_WRAP12` →&nbsp;❌ <br>
+//! * `D3DRS_WRAP13` →&nbsp;❌ <br>
+//! * `D3DRS_WRAP14` →&nbsp;❌ <br>
+//! * `D3DRS_WRAP15` →&nbsp;❌ <br>
+//! * `D3DRS_WRAP2` →&nbsp;❌ <br>
+//! * `D3DRS_WRAP3` →&nbsp;❌ <br>
+//! * `D3DRS_WRAP4` →&nbsp;❌ <br>
+//! * `D3DRS_WRAP5` →&nbsp;❌ <br>
+//! * `D3DRS_WRAP6` →&nbsp;❌ <br>
+//! * `D3DRS_WRAP7` →&nbsp;❌ <br>
+//! * `D3DRS_WRAP8` →&nbsp;❌ <br>
+//! * `D3DRS_WRAP9` →&nbsp;❌ <br>
+//! * `D3DRS_ZENABLE` →&nbsp;❌ <br>
+//! * `D3DRS_ZFUNC` →&nbsp;❌ <br>
+//! * `D3DRS_ZWRITEENABLE` →&nbsp;❌ <br>
+//!
 //! [`D3DRESOURCETYPE`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dresourcetype)&nbsp;→ [`d3d::ResourceType`] <br>
+//! * `D3DRTYPE_CUBETEXTURE` →&nbsp;❌ <br>
+//! * `D3DRTYPE_FORCE_DWORD` →&nbsp;❌ <br>
+//! * `D3DRTYPE_INDEXBUFFER` →&nbsp;❌ <br>
+//! * `D3DRTYPE_SURFACE` →&nbsp;❌ <br>
+//! * `D3DRTYPE_TEXTURE` →&nbsp;❌ <br>
+//! * `D3DRTYPE_VERTEXBUFFER` →&nbsp;❌ <br>
+//! * `D3DRTYPE_VOLUME` →&nbsp;❌ <br>
+//! * `D3DRTYPE_VOLUMETEXTURE` →&nbsp;❌ <br>
+//!
 //! [`D3DSAMPLERSTATETYPE`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)&nbsp;→ [`d3d::SamplerStateType`] <br>
+//! * `D3DSAMP_ADDRESSU` →&nbsp;❌ <br>
+//! * `D3DSAMP_ADDRESSV` →&nbsp;❌ <br>
+//! * `D3DSAMP_ADDRESSW` →&nbsp;❌ <br>
+//! * `D3DSAMP_BORDERCOLOR` →&nbsp;❌ <br>
+//! * `D3DSAMP_DMAPOFFSET` →&nbsp;❌ <br>
+//! * `D3DSAMP_ELEMENTINDEX` →&nbsp;❌ <br>
+//! * `D3DSAMP_FORCE_DWORD` →&nbsp;❌ <br>
+//! * `D3DSAMP_MAGFILTER` →&nbsp;❌ <br>
+//! * `D3DSAMP_MAXANISOTROPY` →&nbsp;❌ <br>
+//! * `D3DSAMP_MAXMIPLEVEL` →&nbsp;❌ <br>
+//! * `D3DSAMP_MINFILTER` →&nbsp;❌ <br>
+//! * `D3DSAMP_MIPFILTER` →&nbsp;❌ <br>
+//! * `D3DSAMP_MIPMAPLODBIAS` →&nbsp;❌ <br>
+//! * `D3DSAMP_SRGBTEXTURE` →&nbsp;❌ <br>
+//!
 //! [`D3DSAMPLER_TEXTURE_TYPE`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dsampler-texture-type)&nbsp;→ [`d3d::SamplerTextureType`] <br>
+//! * `D3DSTT_2D` →&nbsp;❌ <br>
+//! * `D3DSTT_CUBE` →&nbsp;❌ <br>
+//! * `D3DSTT_FORCE_DWORD` →&nbsp;❌ <br>
+//! * `D3DSTT_UNKNOWN` →&nbsp;❌ <br>
+//! * `D3DSTT_VOLUME` →&nbsp;❌ <br>
+//!
 //! [`D3DSCANLINEORDERING`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dscanlineordering) →&nbsp;❌ <br>
+//! * `D3DSCANLINEORDERING_INTERLACED` →&nbsp;❌ <br>
+//! * `D3DSCANLINEORDERING_PROGRESSIVE` →&nbsp;❌ <br>
+//! * `D3DSCANLINEORDERING_UNKNOWN` →&nbsp;❌ <br>
+//!
 //! [`D3DSHADEMODE`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dshademode)&nbsp;→ [`d3d::ShadeMode`] <br>
+//! * `D3DSHADE_FLAT` →&nbsp;❌ <br>
+//! * `D3DSHADE_FORCE_DWORD` →&nbsp;❌ <br>
+//! * `D3DSHADE_GOURAUD` →&nbsp;❌ <br>
+//! * `D3DSHADE_PHONG` →&nbsp;❌ <br>
+//!
 //! `D3DSHADER_ADDRESSMODE_TYPE` →&nbsp;❌ <br>
+//! * `D3DSHADER_ADDRMODE_ABSOLUTE` →&nbsp;❌ <br>
+//! * `D3DSHADER_ADDRMODE_FORCE_DWORD` →&nbsp;❌ <br>
+//! * `D3DSHADER_ADDRMODE_RELATIVE` →&nbsp;❌ <br>
+//!
 //! `D3DSHADER_COMPARISON` →&nbsp;❌ <br>
+//! * `D3DSPC_EQ` →&nbsp;❌ <br>
+//! * `D3DSPC_GE` →&nbsp;❌ <br>
+//! * `D3DSPC_GT` →&nbsp;❌ <br>
+//! * `D3DSPC_LE` →&nbsp;❌ <br>
+//! * `D3DSPC_LT` →&nbsp;❌ <br>
+//! * `D3DSPC_NE` →&nbsp;❌ <br>
+//! * `D3DSPC_RESERVED0` →&nbsp;❌ <br>
+//! * `D3DSPC_RESERVED1` →&nbsp;❌ <br>
+//!
 //! `D3DSHADER_INSTRUCTION_OPCODE_TYPE` →&nbsp;❌ <br>
+//! * `D3DSIO_ABS` →&nbsp;❌ <br>
+//! * `D3DSIO_ADD` →&nbsp;❌ <br>
+//! * `D3DSIO_BEM` →&nbsp;❌ <br>
+//! * `D3DSIO_BREAK` →&nbsp;❌ <br>
+//! * `D3DSIO_BREAKC` →&nbsp;❌ <br>
+//! * `D3DSIO_BREAKP` →&nbsp;❌ <br>
+//! * `D3DSIO_CALL` →&nbsp;❌ <br>
+//! * `D3DSIO_CALLNZ` →&nbsp;❌ <br>
+//! * `D3DSIO_CMP` →&nbsp;❌ <br>
+//! * `D3DSIO_CND` →&nbsp;❌ <br>
+//! * `D3DSIO_COMMENT` →&nbsp;❌ <br>
+//! * `D3DSIO_CRS` →&nbsp;❌ <br>
+//! * `D3DSIO_DCL` →&nbsp;❌ <br>
+//! * `D3DSIO_DEF` →&nbsp;❌ <br>
+//! * `D3DSIO_DEFB` →&nbsp;❌ <br>
+//! * `D3DSIO_DEFI` →&nbsp;❌ <br>
+//! * `D3DSIO_DP2ADD` →&nbsp;❌ <br>
+//! * `D3DSIO_DP3` →&nbsp;❌ <br>
+//! * `D3DSIO_DP4` →&nbsp;❌ <br>
+//! * `D3DSIO_DST` →&nbsp;❌ <br>
+//! * `D3DSIO_DSX` →&nbsp;❌ <br>
+//! * `D3DSIO_DSY` →&nbsp;❌ <br>
+//! * `D3DSIO_ELSE` →&nbsp;❌ <br>
+//! * `D3DSIO_END` →&nbsp;❌ <br>
+//! * `D3DSIO_ENDIF` →&nbsp;❌ <br>
+//! * `D3DSIO_ENDLOOP` →&nbsp;❌ <br>
+//! * `D3DSIO_ENDREP` →&nbsp;❌ <br>
+//! * `D3DSIO_EXP` →&nbsp;❌ <br>
+//! * `D3DSIO_EXPP` →&nbsp;❌ <br>
+//! * `D3DSIO_FORCE_DWORD` →&nbsp;❌ <br>
+//! * `D3DSIO_FRC` →&nbsp;❌ <br>
+//! * `D3DSIO_IF` →&nbsp;❌ <br>
+//! * `D3DSIO_IFC` →&nbsp;❌ <br>
+//! * `D3DSIO_LABEL` →&nbsp;❌ <br>
+//! * `D3DSIO_LIT` →&nbsp;❌ <br>
+//! * `D3DSIO_LOG` →&nbsp;❌ <br>
+//! * `D3DSIO_LOGP` →&nbsp;❌ <br>
+//! * `D3DSIO_LOOP` →&nbsp;❌ <br>
+//! * `D3DSIO_LRP` →&nbsp;❌ <br>
+//! * `D3DSIO_M3x2` →&nbsp;❌ <br>
+//! * `D3DSIO_M3x3` →&nbsp;❌ <br>
+//! * `D3DSIO_M3x4` →&nbsp;❌ <br>
+//! * `D3DSIO_M4x3` →&nbsp;❌ <br>
+//! * `D3DSIO_M4x4` →&nbsp;❌ <br>
+//! * `D3DSIO_MAD` →&nbsp;❌ <br>
+//! * `D3DSIO_MAX` →&nbsp;❌ <br>
+//! * `D3DSIO_MIN` →&nbsp;❌ <br>
+//! * `D3DSIO_MOV` →&nbsp;❌ <br>
+//! * `D3DSIO_MOVA` →&nbsp;❌ <br>
+//! * `D3DSIO_MUL` →&nbsp;❌ <br>
+//! * `D3DSIO_NOP` →&nbsp;❌ <br>
+//! * `D3DSIO_NRM` →&nbsp;❌ <br>
+//! * `D3DSIO_PHASE` →&nbsp;❌ <br>
+//! * `D3DSIO_POW` →&nbsp;❌ <br>
+//! * `D3DSIO_RCP` →&nbsp;❌ <br>
+//! * `D3DSIO_REP` →&nbsp;❌ <br>
+//! * `D3DSIO_RESERVED0` →&nbsp;❌ <br>
+//! * `D3DSIO_RET` →&nbsp;❌ <br>
+//! * `D3DSIO_RSQ` →&nbsp;❌ <br>
+//! * `D3DSIO_SETP` →&nbsp;❌ <br>
+//! * `D3DSIO_SGE` →&nbsp;❌ <br>
+//! * `D3DSIO_SGN` →&nbsp;❌ <br>
+//! * `D3DSIO_SINCOS` →&nbsp;❌ <br>
+//! * `D3DSIO_SLT` →&nbsp;❌ <br>
+//! * `D3DSIO_SUB` →&nbsp;❌ <br>
+//! * `D3DSIO_TEX` →&nbsp;❌ <br>
+//! * `D3DSIO_TEXBEM` →&nbsp;❌ <br>
+//! * `D3DSIO_TEXBEML` →&nbsp;❌ <br>
+//! * `D3DSIO_TEXCOORD` →&nbsp;❌ <br>
+//! * `D3DSIO_TEXDEPTH` →&nbsp;❌ <br>
+//! * `D3DSIO_TEXDP3` →&nbsp;❌ <br>
+//! * `D3DSIO_TEXDP3TEX` →&nbsp;❌ <br>
+//! * `D3DSIO_TEXKILL` →&nbsp;❌ <br>
+//! * `D3DSIO_TEXLDD` →&nbsp;❌ <br>
+//! * `D3DSIO_TEXLDL` →&nbsp;❌ <br>
+//! * `D3DSIO_TEXM3x2DEPTH` →&nbsp;❌ <br>
+//! * `D3DSIO_TEXM3x2PAD` →&nbsp;❌ <br>
+//! * `D3DSIO_TEXM3x2TEX` →&nbsp;❌ <br>
+//! * `D3DSIO_TEXM3x3` →&nbsp;❌ <br>
+//! * `D3DSIO_TEXM3x3PAD` →&nbsp;❌ <br>
+//! * `D3DSIO_TEXM3x3SPEC` →&nbsp;❌ <br>
+//! * `D3DSIO_TEXM3x3TEX` →&nbsp;❌ <br>
+//! * `D3DSIO_TEXM3x3VSPEC` →&nbsp;❌ <br>
+//! * `D3DSIO_TEXREG2AR` →&nbsp;❌ <br>
+//! * `D3DSIO_TEXREG2GB` →&nbsp;❌ <br>
+//! * `D3DSIO_TEXREG2RGB` →&nbsp;❌ <br>
+//!
 //! `D3DSHADER_MIN_PRECISION` →&nbsp;❌ <br>
+//! * `D3DMP_16` →&nbsp;❌ <br>
+//! * `D3DMP_2_8` →&nbsp;❌ <br>
+//! * `D3DMP_DEFAULT` →&nbsp;❌ <br>
+//!
 //! `D3DSHADER_MISCTYPE_OFFSETS` →&nbsp;❌ <br>
+//! * `D3DSMO_FACE` →&nbsp;❌ <br>
+//! * `D3DSMO_POSITION` →&nbsp;❌ <br>
+//!
 //! `D3DSHADER_PARAM_REGISTER_TYPE` →&nbsp;❌ <br>
+//! * `D3DSPR_ADDR` →&nbsp;❌ <br>
+//! * `D3DSPR_ATTROUT` →&nbsp;❌ <br>
+//! * `D3DSPR_COLOROUT` →&nbsp;❌ <br>
+//! * `D3DSPR_CONST` →&nbsp;❌ <br>
+//! * `D3DSPR_CONST2` →&nbsp;❌ <br>
+//! * `D3DSPR_CONST3` →&nbsp;❌ <br>
+//! * `D3DSPR_CONST4` →&nbsp;❌ <br>
+//! * `D3DSPR_CONSTBOOL` →&nbsp;❌ <br>
+//! * `D3DSPR_CONSTINT` →&nbsp;❌ <br>
+//! * `D3DSPR_DEPTHOUT` →&nbsp;❌ <br>
+//! * `D3DSPR_FORCE_DWORD` →&nbsp;❌ <br>
+//! * `D3DSPR_INPUT` →&nbsp;❌ <br>
+//! * `D3DSPR_LABEL` →&nbsp;❌ <br>
+//! * `D3DSPR_LOOP` →&nbsp;❌ <br>
+//! * `D3DSPR_MISCTYPE` →&nbsp;❌ <br>
+//! * `D3DSPR_OUTPUT` →&nbsp;❌ <br>
+//! * `D3DSPR_PREDICATE` →&nbsp;❌ <br>
+//! * `D3DSPR_RASTOUT` →&nbsp;❌ <br>
+//! * `D3DSPR_SAMPLER` →&nbsp;❌ <br>
+//! * `D3DSPR_TEMP` →&nbsp;❌ <br>
+//! * `D3DSPR_TEMPFLOAT16` →&nbsp;❌ <br>
+//! * `D3DSPR_TEXCRDOUT` →&nbsp;❌ <br>
+//! * `D3DSPR_TEXTURE` →&nbsp;❌ <br>
+//!
 //! `D3DSHADER_PARAM_SRCMOD_TYPE` →&nbsp;❌ <br>
+//! * `D3DSPSM_ABS` →&nbsp;❌ <br>
+//! * `D3DSPSM_ABSNEG` →&nbsp;❌ <br>
+//! * `D3DSPSM_BIAS` →&nbsp;❌ <br>
+//! * `D3DSPSM_BIASNEG` →&nbsp;❌ <br>
+//! * `D3DSPSM_COMP` →&nbsp;❌ <br>
+//! * `D3DSPSM_DW` →&nbsp;❌ <br>
+//! * `D3DSPSM_DZ` →&nbsp;❌ <br>
+//! * `D3DSPSM_FORCE_DWORD` →&nbsp;❌ <br>
+//! * `D3DSPSM_NEG` →&nbsp;❌ <br>
+//! * `D3DSPSM_NONE` →&nbsp;❌ <br>
+//! * `D3DSPSM_NOT` →&nbsp;❌ <br>
+//! * `D3DSPSM_SIGN` →&nbsp;❌ <br>
+//! * `D3DSPSM_SIGNNEG` →&nbsp;❌ <br>
+//! * `D3DSPSM_X2` →&nbsp;❌ <br>
+//! * `D3DSPSM_X2NEG` →&nbsp;❌ <br>
+//!
 //! [`D3DSTATEBLOCKTYPE`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dstateblocktype)&nbsp;→ [`d3d::StateBlockType`] <br>
+//! * `D3DSBT_ALL` →&nbsp;❌ <br>
+//! * `D3DSBT_FORCE_DWORD` →&nbsp;❌ <br>
+//! * `D3DSBT_PIXELSTATE` →&nbsp;❌ <br>
+//! * `D3DSBT_VERTEXSTATE` →&nbsp;❌ <br>
+//!
 //! [`D3DSTENCILOP`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dstencilop)&nbsp;→ [`d3d::StencilOp`] <br>
+//! * `D3DSTENCILOP_DECR` →&nbsp;❌ <br>
+//! * `D3DSTENCILOP_DECRSAT` →&nbsp;❌ <br>
+//! * `D3DSTENCILOP_FORCE_DWORD` →&nbsp;❌ <br>
+//! * `D3DSTENCILOP_INCR` →&nbsp;❌ <br>
+//! * `D3DSTENCILOP_INCRSAT` →&nbsp;❌ <br>
+//! * `D3DSTENCILOP_INVERT` →&nbsp;❌ <br>
+//! * `D3DSTENCILOP_KEEP` →&nbsp;❌ <br>
+//! * `D3DSTENCILOP_REPLACE` →&nbsp;❌ <br>
+//! * `D3DSTENCILOP_ZERO` →&nbsp;❌ <br>
+//!
 //! [`D3DSWAPEFFECT`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dswapeffect)&nbsp;→ [`d3d::SwapEffect`] <br>
+//! * `D3DSWAPEFFECT_COPY` →&nbsp;❌ <br>
+//! * `D3DSWAPEFFECT_DISCARD` →&nbsp;❌ <br>
+//! * `D3DSWAPEFFECT_FLIP` →&nbsp;❌ <br>
+//! * `D3DSWAPEFFECT_FLIPEX` →&nbsp;❌ <br>
+//! * `D3DSWAPEFFECT_FORCE_DWORD` →&nbsp;❌ <br>
+//! * `D3DSWAPEFFECT_OVERLAY` →&nbsp;❌ <br>
+//!
 //! [`D3DTEXTUREADDRESS`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dtextureaddress)&nbsp;→ [`d3d::TextureAddress`] <br>
+//! * `D3DTADDRESS_BORDER` →&nbsp;❌ <br>
+//! * `D3DTADDRESS_CLAMP` →&nbsp;❌ <br>
+//! * `D3DTADDRESS_FORCE_DWORD` →&nbsp;❌ <br>
+//! * `D3DTADDRESS_MIRROR` →&nbsp;❌ <br>
+//! * `D3DTADDRESS_MIRRORONCE` →&nbsp;❌ <br>
+//! * `D3DTADDRESS_WRAP` →&nbsp;❌ <br>
+//!
 //! [`D3DTEXTUREFILTERTYPE`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dtexturefiltertype)&nbsp;→ [`d3d::TextureFilterType`] <br>
+//! * `D3DTEXF_ANISOTROPIC` →&nbsp;❌ <br>
+//! * `D3DTEXF_CONVOLUTIONMONO` →&nbsp;❌ <br>
+//! * `D3DTEXF_FORCE_DWORD` →&nbsp;❌ <br>
+//! * `D3DTEXF_GAUSSIANQUAD` →&nbsp;❌ <br>
+//! * `D3DTEXF_LINEAR` →&nbsp;❌ <br>
+//! * `D3DTEXF_NONE` →&nbsp;❌ <br>
+//! * `D3DTEXF_POINT` →&nbsp;❌ <br>
+//! * `D3DTEXF_PYRAMIDALQUAD` →&nbsp;❌ <br>
+//!
 //! [`D3DTEXTUREOP`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dtextureop)&nbsp;→ [`d3d::TextureOp`] <br>
+//! * `D3DTOP_ADD` →&nbsp;❌ <br>
+//! * `D3DTOP_ADDSIGNED` →&nbsp;❌ <br>
+//! * `D3DTOP_ADDSIGNED2X` →&nbsp;❌ <br>
+//! * `D3DTOP_ADDSMOOTH` →&nbsp;❌ <br>
+//! * `D3DTOP_BLENDCURRENTALPHA` →&nbsp;❌ <br>
+//! * `D3DTOP_BLENDDIFFUSEALPHA` →&nbsp;❌ <br>
+//! * `D3DTOP_BLENDFACTORALPHA` →&nbsp;❌ <br>
+//! * `D3DTOP_BLENDTEXTUREALPHA` →&nbsp;❌ <br>
+//! * `D3DTOP_BLENDTEXTUREALPHAPM` →&nbsp;❌ <br>
+//! * `D3DTOP_BUMPENVMAP` →&nbsp;❌ <br>
+//! * `D3DTOP_BUMPENVMAPLUMINANCE` →&nbsp;❌ <br>
+//! * `D3DTOP_DISABLE` →&nbsp;❌ <br>
+//! * `D3DTOP_DOTPRODUCT3` →&nbsp;❌ <br>
+//! * `D3DTOP_FORCE_DWORD` →&nbsp;❌ <br>
+//! * `D3DTOP_LERP` →&nbsp;❌ <br>
+//! * `D3DTOP_MODULATE` →&nbsp;❌ <br>
+//! * `D3DTOP_MODULATE2X` →&nbsp;❌ <br>
+//! * `D3DTOP_MODULATE4X` →&nbsp;❌ <br>
+//! * `D3DTOP_MODULATEALPHA_ADDCOLOR` →&nbsp;❌ <br>
+//! * `D3DTOP_MODULATECOLOR_ADDALPHA` →&nbsp;❌ <br>
+//! * `D3DTOP_MODULATEINVALPHA_ADDCOLOR` →&nbsp;❌ <br>
+//! * `D3DTOP_MODULATEINVCOLOR_ADDALPHA` →&nbsp;❌ <br>
+//! * `D3DTOP_MULTIPLYADD` →&nbsp;❌ <br>
+//! * `D3DTOP_PREMODULATE` →&nbsp;❌ <br>
+//! * `D3DTOP_SELECTARG1` →&nbsp;❌ <br>
+//! * `D3DTOP_SELECTARG2` →&nbsp;❌ <br>
+//! * `D3DTOP_SUBTRACT` →&nbsp;❌ <br>
+//!
 //! [`D3DTEXTURESTAGESTATETYPE`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dtexturestagestatetype)&nbsp;→ [`d3d::TextureStageStateType`] <br>
+//! * `D3DTSS_ALPHAARG0` →&nbsp;❌ <br>
+//! * `D3DTSS_ALPHAARG1` →&nbsp;❌ <br>
+//! * `D3DTSS_ALPHAARG2` →&nbsp;❌ <br>
+//! * `D3DTSS_ALPHAOP` →&nbsp;❌ <br>
+//! * `D3DTSS_BUMPENVLOFFSET` →&nbsp;❌ <br>
+//! * `D3DTSS_BUMPENVLSCALE` →&nbsp;❌ <br>
+//! * `D3DTSS_BUMPENVMAT00` →&nbsp;❌ <br>
+//! * `D3DTSS_BUMPENVMAT01` →&nbsp;❌ <br>
+//! * `D3DTSS_BUMPENVMAT10` →&nbsp;❌ <br>
+//! * `D3DTSS_BUMPENVMAT11` →&nbsp;❌ <br>
+//! * `D3DTSS_COLORARG0` →&nbsp;❌ <br>
+//! * `D3DTSS_COLORARG1` →&nbsp;❌ <br>
+//! * `D3DTSS_COLORARG2` →&nbsp;❌ <br>
+//! * `D3DTSS_COLOROP` →&nbsp;❌ <br>
+//! * `D3DTSS_CONSTANT` →&nbsp;❌ <br>
+//! * `D3DTSS_FORCE_DWORD` →&nbsp;❌ <br>
+//! * `D3DTSS_RESULTARG` →&nbsp;❌ <br>
+//! * `D3DTSS_TEXCOORDINDEX` →&nbsp;❌ <br>
+//! * `D3DTSS_TEXTURETRANSFORMFLAGS` →&nbsp;❌ <br>
+//!
 //! `D3DTEXTURETRANSFORMFLAGS` →&nbsp;❌ <br>
+//! * `D3DTTFF_COUNT1` →&nbsp;❌ <br>
+//! * `D3DTTFF_COUNT2` →&nbsp;❌ <br>
+//! * `D3DTTFF_COUNT3` →&nbsp;❌ <br>
+//! * `D3DTTFF_COUNT4` →&nbsp;❌ <br>
+//! * `D3DTTFF_DISABLE` →&nbsp;❌ <br>
+//! * `D3DTTFF_FORCE_DWORD` →&nbsp;❌ <br>
+//! * `D3DTTFF_PROJECTED` →&nbsp;❌ <br>
+//!
 //! [`D3DTRANSFORMSTATETYPE`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dtransformstatetype)&nbsp;→ [`d3d::TransformStateType`] <br>
+//! * `D3DTS_FORCE_DWORD` →&nbsp;❌ <br>
+//! * `D3DTS_PROJECTION` →&nbsp;❌ <br>
+//! * `D3DTS_TEXTURE0` →&nbsp;❌ <br>
+//! * `D3DTS_TEXTURE1` →&nbsp;❌ <br>
+//! * `D3DTS_TEXTURE2` →&nbsp;❌ <br>
+//! * `D3DTS_TEXTURE3` →&nbsp;❌ <br>
+//! * `D3DTS_TEXTURE4` →&nbsp;❌ <br>
+//! * `D3DTS_TEXTURE5` →&nbsp;❌ <br>
+//! * `D3DTS_TEXTURE6` →&nbsp;❌ <br>
+//! * `D3DTS_TEXTURE7` →&nbsp;❌ <br>
+//! * `D3DTS_VIEW` →&nbsp;❌ <br>
+//!
 //! `D3DVERTEXBLENDFLAGS` →&nbsp;❌ <br>
+//! * `D3DVBF_0WEIGHTS` →&nbsp;❌ <br>
+//! * `D3DVBF_1WEIGHTS` →&nbsp;❌ <br>
+//! * `D3DVBF_2WEIGHTS` →&nbsp;❌ <br>
+//! * `D3DVBF_3WEIGHTS` →&nbsp;❌ <br>
+//! * `D3DVBF_DISABLE` →&nbsp;❌ <br>
+//! * `D3DVBF_FORCE_DWORD` →&nbsp;❌ <br>
+//! * `D3DVBF_TWEENING` →&nbsp;❌ <br>
+//!
 //! `D3DVS_ADDRESSMODE_TYPE` →&nbsp;❌ <br>
+//! * `D3DVS_ADDRMODE_ABSOLUTE` →&nbsp;❌ <br>
+//! * `D3DVS_ADDRMODE_FORCE_DWORD` →&nbsp;❌ <br>
+//! * `D3DVS_ADDRMODE_RELATIVE` →&nbsp;❌ <br>
+//!
 //! `D3DVS_RASTOUT_OFFSETS` →&nbsp;❌ <br>
+//! * `D3DSRO_FOG` →&nbsp;❌ <br>
+//! * `D3DSRO_FORCE_DWORD` →&nbsp;❌ <br>
+//! * `D3DSRO_POINT_SIZE` →&nbsp;❌ <br>
+//! * `D3DSRO_POSITION` →&nbsp;❌ <br>
+//!
 //! [`D3DZBUFFERTYPE`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dzbuffertype)&nbsp;→ [`d3d::ZBufferType`] <br>
+//! * `D3DZB_FALSE` →&nbsp;❌ <br>
+//! * `D3DZB_FORCE_DWORD` →&nbsp;❌ <br>
+//! * `D3DZB_TRUE` →&nbsp;❌ <br>
+//! * `D3DZB_USEW` →&nbsp;❌ <br>
+//!
 //!
 //! <br>
 //!
@@ -667,6 +1984,14 @@
 //! ### C++ Enums → Rust Structs
 //!
 //! [`D3D11_SHADER_VERSION_TYPE`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/ne-d3d11shader-d3d11_shader_version_type)&nbsp;→ [`d3d11::ShaderVersionType`] <br>
+//! * `D3D11_SHVER_COMPUTE_SHADER` →&nbsp;❌ <br>
+//! * `D3D11_SHVER_DOMAIN_SHADER` →&nbsp;❌ <br>
+//! * `D3D11_SHVER_GEOMETRY_SHADER` →&nbsp;❌ <br>
+//! * `D3D11_SHVER_HULL_SHADER` →&nbsp;❌ <br>
+//! * `D3D11_SHVER_PIXEL_SHADER` →&nbsp;❌ <br>
+//! * `D3D11_SHVER_RESERVED0` →&nbsp;❌ <br>
+//! * `D3D11_SHVER_VERTEX_SHADER` →&nbsp;❌ <br>
+//!
 //!
 //! <br>
 //!
@@ -703,8 +2028,59 @@
 //! ### C++ Enums → Rust Structs
 //!
 //! `D3D11_SHADER_TYPE` →&nbsp;❌ <br>
+//! * `D3D11_COMPUTE_SHADER` →&nbsp;❌ <br>
+//! * `D3D11_DOMAIN_SHADER` →&nbsp;❌ <br>
+//! * `D3D11_GEOMETRY_SHADER` →&nbsp;❌ <br>
+//! * `D3D11_HULL_SHADER` →&nbsp;❌ <br>
+//! * `D3D11_PIXEL_SHADER` →&nbsp;❌ <br>
+//! * `D3D11_VERTEX_SHADER` →&nbsp;❌ <br>
+//!
 //! `D3D11_TRACE_GS_INPUT_PRIMITIVE` →&nbsp;❌ <br>
+//! * `D3D11_TRACE_GS_INPUT_PRIMITIVE_LINE` →&nbsp;❌ <br>
+//! * `D3D11_TRACE_GS_INPUT_PRIMITIVE_LINE_ADJ` →&nbsp;❌ <br>
+//! * `D3D11_TRACE_GS_INPUT_PRIMITIVE_POINT` →&nbsp;❌ <br>
+//! * `D3D11_TRACE_GS_INPUT_PRIMITIVE_TRIANGLE` →&nbsp;❌ <br>
+//! * `D3D11_TRACE_GS_INPUT_PRIMITIVE_TRIANGLE_ADJ` →&nbsp;❌ <br>
+//! * `D3D11_TRACE_GS_INPUT_PRIMITIVE_UNDEFINED` →&nbsp;❌ <br>
+//!
 //! `D3D11_TRACE_REGISTER_TYPE` →&nbsp;❌ <br>
+//! * `D3D11_TRACE_CONSTANT_BUFFER` →&nbsp;❌ <br>
+//! * `D3D11_TRACE_IMMEDIATE32` →&nbsp;❌ <br>
+//! * `D3D11_TRACE_IMMEDIATE64` →&nbsp;❌ <br>
+//! * `D3D11_TRACE_IMMEDIATE_CONSTANT_BUFFER` →&nbsp;❌ <br>
+//! * `D3D11_TRACE_INDEXABLE_TEMP_REGISTER` →&nbsp;❌ <br>
+//! * `D3D11_TRACE_INPUT_CONTROL_POINT_REGISTER` →&nbsp;❌ <br>
+//! * `D3D11_TRACE_INPUT_COVERAGE_MASK_REGISTER` →&nbsp;❌ <br>
+//! * `D3D11_TRACE_INPUT_CYCLE_COUNTER_REGISTER` →&nbsp;❌ <br>
+//! * `D3D11_TRACE_INPUT_DOMAIN_POINT_REGISTER` →&nbsp;❌ <br>
+//! * `D3D11_TRACE_INPUT_FORK_INSTANCE_ID_REGISTER` →&nbsp;❌ <br>
+//! * `D3D11_TRACE_INPUT_GS_INSTANCE_ID_REGISTER` →&nbsp;❌ <br>
+//! * `D3D11_TRACE_INPUT_JOIN_INSTANCE_ID_REGISTER` →&nbsp;❌ <br>
+//! * `D3D11_TRACE_INPUT_PATCH_CONSTANT_REGISTER` →&nbsp;❌ <br>
+//! * `D3D11_TRACE_INPUT_PRIMITIVE_ID_REGISTER` →&nbsp;❌ <br>
+//! * `D3D11_TRACE_INPUT_REGISTER` →&nbsp;❌ <br>
+//! * `D3D11_TRACE_INPUT_THREAD_GROUP_ID_REGISTER` →&nbsp;❌ <br>
+//! * `D3D11_TRACE_INPUT_THREAD_ID_IN_GROUP_FLATTENED_REGISTER` →&nbsp;❌ <br>
+//! * `D3D11_TRACE_INPUT_THREAD_ID_IN_GROUP_REGISTER` →&nbsp;❌ <br>
+//! * `D3D11_TRACE_INPUT_THREAD_ID_REGISTER` →&nbsp;❌ <br>
+//! * `D3D11_TRACE_INTERFACE_POINTER` →&nbsp;❌ <br>
+//! * `D3D11_TRACE_OUTPUT_CONTROL_POINT_ID_REGISTER` →&nbsp;❌ <br>
+//! * `D3D11_TRACE_OUTPUT_CONTROL_POINT_REGISTER` →&nbsp;❌ <br>
+//! * `D3D11_TRACE_OUTPUT_COVERAGE_MASK` →&nbsp;❌ <br>
+//! * `D3D11_TRACE_OUTPUT_DEPTH_GREATER_EQUAL_REGISTER` →&nbsp;❌ <br>
+//! * `D3D11_TRACE_OUTPUT_DEPTH_LESS_EQUAL_REGISTER` →&nbsp;❌ <br>
+//! * `D3D11_TRACE_OUTPUT_DEPTH_REGISTER` →&nbsp;❌ <br>
+//! * `D3D11_TRACE_OUTPUT_NULL_REGISTER` →&nbsp;❌ <br>
+//! * `D3D11_TRACE_OUTPUT_REGISTER` →&nbsp;❌ <br>
+//! * `D3D11_TRACE_RASTERIZER` →&nbsp;❌ <br>
+//! * `D3D11_TRACE_RESOURCE` →&nbsp;❌ <br>
+//! * `D3D11_TRACE_SAMPLER` →&nbsp;❌ <br>
+//! * `D3D11_TRACE_STREAM` →&nbsp;❌ <br>
+//! * `D3D11_TRACE_TEMP_REGISTER` →&nbsp;❌ <br>
+//! * `D3D11_TRACE_THIS_POINTER` →&nbsp;❌ <br>
+//! * `D3D11_TRACE_THREAD_GROUP_SHARED_MEMORY` →&nbsp;❌ <br>
+//! * `D3D11_TRACE_UNORDERED_ACCESS_VIEW` →&nbsp;❌ <br>
+//!
 //!
 //! <br>
 //!

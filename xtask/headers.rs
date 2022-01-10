@@ -36,8 +36,8 @@ pub fn update() {
 
         writeln!(rs, "//! # Headers")?;
         writeln!(rs, "//!")?;
-        writeln!(rs, "//! | C++ Header | Interfaces | Structs | Enums | Functions |")?;
-        writeln!(rs, "//! | ---------- | ---------- | ------- | ----- | --------- |")?;
+        writeln!(rs, "//! | C++ Header | Interfaces | Structs | Enums | Functions | Constants |")?;
+        writeln!(rs, "//! | ---------- | ---------- | ------- | ----- | --------- | --------- |")?;
         for header in headers.iter() {
             write!(rs, "//! |")?;
             write!(rs, " [{name}](#{id}h) |", name = header.name_h, id = header.name)?;
@@ -46,6 +46,7 @@ pub fn update() {
                 (header.structs    .iter().filter(|t| cpp2rust.get(t.id.as_str()).is_some()).count(),   header.structs      .len()),
                 (header.enums      .iter().filter(|t| cpp2rust.get(t.id.as_str()).is_some()).count(),   header.enums        .len()),
                 (header.functions  .iter().filter(|t| cpp2rust.get(t.id.as_str()).is_some()).count(),   header.functions    .len()),
+                (header.constants  .iter().filter(|t| cpp2rust.get(t.   as_str()).is_some()).count(),   header.constants    .len()),
                 // (header.classes    .iter().filter(|t| cpp2rust.get(t.id.as_str()).is_some()).count(),   header.classes      .len()),
                 // (header.unions     .iter().filter(|t| cpp2rust.get(t.id.as_str()).is_some()).count(),   header.unions       .len()),
             ].into_iter() {
@@ -111,7 +112,16 @@ pub fn update() {
                 for (idx, rust) in rust.into_iter().flat_map(|p| p.iter()).enumerate() { write!(rs, "{}[`{}`]", if idx == 0 { "&nbsp;→ " } else { ", " }, rust)?; }
                 if rust.is_none() { write!(rs, " →&nbsp;❌")?; }
                 writeln!(rs, " <br>")?;
-                // TODO: constants
+                for constant in cpp.values.keys() {
+                    let cpp     = if cpp.class { format!("{}::{}", cpp.id, constant) } else { format!("{}", constant) };
+                    if CPP2IGNORE.contains(cpp.as_str()) { continue }
+                    let rust    = cpp2rust.get(&*cpp);
+                    write!(rs, "//! * {}", CppLink(&cpp))?;
+                    for (idx, rust) in rust.into_iter().flat_map(|p| p.iter()).enumerate() { write!(rs, "{}[`{}`]", if idx == 0 { "&nbsp;→ " } else { ", " }, rust)?; }
+                    if rust.is_none() { write!(rs, " →&nbsp;❌")?; }
+                    writeln!(rs, " <br>")?;
+                }
+                writeln!(rs, "//!")?;
             }
 
             for (idx, (cpp, rust)) in functions.enumerate() {
@@ -142,6 +152,7 @@ struct Header<'cpp> {
     structs:    Vec<&'cpp cpp::Struct>,
     enums:      Vec<&'cpp cpp::Enum>,
     functions:  Vec<&'cpp cpp::Function>,
+    constants:  Vec<String>,
     // classes:    Vec<&'cpp cpp::Class>,
     // unions:     Vec<&'cpp cpp::Union>,
 }
@@ -156,6 +167,8 @@ impl<'cpp> Header<'cpp> {
             structs:    cpp.structs     .values_by_key().filter(move |t| !ignore.contains(t.id.as_str()) && t.defined_at.iter().any(move |at| at.path.ends_with(rel_path))).collect(),
             enums:      cpp.enums       .values_by_key().filter(move |t| !ignore.contains(t.id.as_str()) && t.defined_at.iter().any(move |at| at.path.ends_with(rel_path))).collect(),
             functions:  cpp.functions   .values_by_key().filter(move |t| !ignore.contains(t.id.as_str()) && t.defined_at.iter().any(move |at| at.path.ends_with(rel_path))).collect(),
+            constants:  cpp.enums       .values_by_key().filter(move |t| !ignore.contains(t.id.as_str()) && t.defined_at.iter().any(move |at| at.path.ends_with(rel_path)))
+                .flat_map(|e| e.values.keys().map(|c| if e.class { format!("{}::{}", e.id, c) } else { format!("{}", c) })).collect()
             // classes:    cpp.classes     .values_by_key().filter(move |t| !ignore.contains(t.id.as_str()) && t.defined_at.iter().any(move |at| at.path.ends_with(rel_path))).collect(),
             // unions:     cpp.unions      .values_by_key().filter(move |t| !ignore.contains(t.id.as_str()) && t.defined_at.iter().any(move |at| at.path.ends_with(rel_path))).collect(),
         }
