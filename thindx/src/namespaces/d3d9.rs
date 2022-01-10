@@ -47,96 +47,49 @@
 //!
 //! | Rust                                      | C++                       | Description   |
 //! | ----------------------------------------- | ------------------------- | ------------- |
-//! | [D3D](crate::D3D)\[[ERR](crate::D3DERR)\]::\* | [D3DERR]_\*           | Windows HRESULTs optimized for displaying Direct3D errors
-//! | [BackBufferType]::\*                      | [D3DBACKBUFFER_TYPE]_\*   | [Mono](crate::BackBufferType::Mono), [Left](crate::BackBufferType::Left), or [Right](crate::BackBufferType::Right) for [stereo](https://en.wikipedia.org/wiki/Stereoscopy) rendering
-//! | [Basis]::\*                               | [D3DBASISTYPE]_\*         | Tesselation basis
-//! | [Blend]::\*                               | [D3DBLEND]_\*             | Target/output alpha/color blending factors
-//! | [BlendOp]::\*                             | [D3DBLENDOP]_\*           | Target/output alpha/color blending operation
-//! | [Cmp]::\*                                 | [D3DCMP]_\*               | ZBuffer/depth comparison operation
-//! | [ComposeRects]::\*                        | [D3DCOMPOSERECTS]_\*      |
-//! | [CubeMapFace]::\*                         | [D3DCUBEMAP_FACE]_\*      | Which face of a cubemap to lock/update/acquire/???
-//! | [Cull]::\*                                | [D3DCULL]_\*              | [None](crate::Cull::None), [CW](crate::Cull::CW), [CCW](crate::Cull::CCW)
-//! | [DMT]::\*                                 | [D3DDMT]_\*               | Debug monitor tokens.
-//! | [DeclMethod8]::\*                         | [D3DDECLMETHOD]_\*        | Tesselation method.
-//! | [DeclType8]::\*                           | [D3DDECLTYPE]_\*          | [Float1](crate::DeclType8::Float1), [Float2](crate::DeclType8::Float2), ... - Defines a vertex declaration data type.
-//! | [DeclUsage8]::\*                          | [D3DDECLUSAGE]_\*         | [Position](crate::DeclUsage8::Position), [TexCoord](crate::DeclUsage8::TexCoord), ... - Defines the intended use of vertex data.
-//! | [Degree]::\*                              | [D3DDEGREE]_\*            | Curve [polynomial degree](https://en.wikipedia.org/wiki/Degree_of_a_polynomial)
-//! | [DevType]::\*                             | [D3DDEVTYPE]_\*           | Specifies what kind of [Device] should be created
-//! | [DisplayRotation]::\*                     | [D3DDISPLAYROTATION]_\*   | Orientation of the monitor/display
-//! | [Fill]::\*                                | [D3DFILL]_\*              | [Point](crate::Fill::Point), [Wireframe](crate::Fill::Wireframe), or [Solid](crate::Fill::Solid) polygon rendering
-//! | [Fog]::\*                                 | [D3DFOG]_\*               | [None](crate::Fog::None), [Exp](crate::Fog::Exp), [Exp2](crate::Fog::Exp2), or [Linear](crate::Fog::Linear) fog falloff
-//! | [Fmt]::\*                                 | [D3DFMT]_\*               | Texture and vertex element formats
-//! | [LightType]::\*                           | [D3DLIGHTTYPE]_\*         | Defines the type of a light ([Point](crate::LightType::Point), [Spot](crate::LightType::Spot), or [Directional](crate::LightType::Directional))
-//! | [MCS]::\*                                 | [D3DMCS]_\*               | Lighting material source
-//! | [MultiSample]::\*                         | [D3DMULTISAMPLE]_\*       | Defines the levels of full-scene multisampling to apply
-//! | [PatchEdge]::\*                           | [D3DPATCHEDGE]_\*         | [Discrete](crate::PatchEdge::Discrete) or [Continuous](crate::PatchEdge::Continuous) tesselation.
-//! | [Pool]::\*                                | [D3DPOOL]_\*              | Specifies what memory pool [Resource]s should be stored in
-//! | [PT]::\*                                  | [D3DPT]_\*                | Defines the primitives supported by Direct3D.
-//! | [QueryType]::\*                           | [D3DQUERYTYPE]_\*         | Identifies the query type.
-//! | [RS]::\*                                  | [D3DRS]_\*                |
-//! | [RType]::\*                               | [D3DRTYPE]_\*             | Specifies the type of a [Resource]/[Volume]
-//! | [Samp]::\*                                | [D3DSAMP]_\*              |
-//! | [STT]::\*                                 | [D3DSTT]_\*               |
-//! | [ScanlineOrdering]::\*                    | [D3DSCANLINEORDERING]_\*  |
-//! | [SGR]::\*                                 | [D3DSGR]_\*               | Indicates whether gamma correction should be applied.
-//! | [Shade]::\*                               | [D3DSHADE]_\*             |
-//! | [SBT]::\*                                 | [D3DSBT]_\*               | Predefined sets of pipeline state used by state blocks
-//! | [StencilOp]::\*                           | [D3DSTENCILOP]_\*         |
-//! | [StreamSource]::\*                        | [D3DSTREAMSOURCE]_\*      |
-//! | [SwapEffect]::\*                          | [D3DSWAPEFFECT]_\*        | Defines [IDirect3DDevice9Ext::present] swap effects.
-//! | [TAddress]::\*                            | [D3DTADDRESS]_\*          |
-//! | [TexF]::\*                                | [D3DTEXF]_\*              |
-//! | [TOP]::\*                                 | [D3DTOP]_\*               |
-//! | [TSS]::\*                                 | [D3DTSS]_\*               |
-//! | [TS]::\*                                  | [D3DTS]_\*                |
-//! | [ZB]::\*                                  | [D3DZB]_\*                |
-//!
-//! | Rust                                      | C++                       | Description   |
-//! | ----------------------------------------- | ------------------------- | ------------- |
-//! | [D3D](crate::D3D)\[[ERR](crate::D3DERR)\] | [D3DERR]                  | Windows HRESULTs optimized for displaying Direct3D errors
-//! | [BackBufferType]                          | [D3DBACKBUFFER_TYPE]      | [Mono](crate::BackBufferType::Mono), [Left](crate::BackBufferType::Left), or [Right](crate::BackBufferType::Right) for [stereo](https://en.wikipedia.org/wiki/Stereoscopy) rendering
-//! | [BasisType]                               | [D3DBASISTYPE]            | Tesselation basis
-//! | [Blend]                                   | [D3DBLEND]                | Target/output alpha/color blending factors
-//! | [BlendOp]                                 | [D3DBLENDOP]              | Target/output alpha/color blending operation
-//! | [CmpFunc]                                 | [D3DCMPFUNC]              | ZBuffer/depth comparison operation
-//! | [ComposeRectsOp]                          | [D3DCOMPOSERECTSOP]       |
-//! | [CubeMapFace]                             | [D3DCUBEMAP_FACES]        | Which face of a cubemap to lock/update/acquire/???
-//! | <span class="inaccurate">[CubeMapFaces]   | [D3DCUBEMAP_FACES]        | This isn't a mask, [CubeMapFace] reads way better in all contexts!
-//! | [Cull]                                    | [D3DCULL]                 | [None](crate::Cull::None), [CW](crate::Cull::CW)], [CCW](crate::Cull::CCW)
-//! | [DebugMonitorTokens]                      | [D3DDEBUGMONITORTOKENS]   | Debug monitor tokens.
-//! | [DeclMethod8]                             | [D3DDECLMETHOD]           | Tesselation method.
-//! | [DeclType8]                               | [D3DDECLTYPE]             | [Float1](crate::DeclType8::Float1), [Float2](crate::DeclType8::Float2), ... - Defines a vertex declaration data type.
-//! | [DeclUsage8]                              | [D3DDECLUSAGE]            | [Position](crate::DeclUsage8::Position), [TexCoord](crate::DeclUsage8::TexCoord), ... - Defines the intended use of vertex data.
-//! | [DegreeType]                              | [D3DDEGREETYPE]           | Curve [polynomial degree](https://en.wikipedia.org/wiki/Degree_of_a_polynomial)
-//! | [DevType]                                 | [D3DDEVTYPE]              | Specifies what kind of [Device] should be created
-//! | [DisplayRotation]                         | [D3DDISPLAYROTATION]      | Orientation of the monitor/display
-//! | [FillMode]                                | [D3DFILLMODE]             | [Point](crate::Fill::Point), [Wireframe](crate::Fill::Wireframe), or [Solid](crate::Fill::Solid) polygon rendering
-//! | [FogMode]                                 | [D3DFOGMODE]              | [None](crate::Fog::None), [Exp](crate::Fog::Exp), [Exp2](crate::Fog::Exp2), or [Linear](crate::Fog::Linear) fog falloff
-//! | [Format]                                  | [D3DFORMAT]               | Texture and vertex element formats
-//! | [LightType]                               | [D3DLIGHTTYPE]            | Defines the type of a light ([Point](crate::LightType::Point), [Spot](crate::LightType::Spot), or [Directional](crate::LightType::Directional))
-//! | [MaterialColorSource]                     | [D3DMATERIALCOLORSOURCE]  | Lighting material source
-//! | [MultiSampleType]                         | [D3DMULTISAMPLE_TYPE]     | Defines the levels of full-scene multisampling to apply
-//! | [PatchEdgeStyle]                          | [D3DPATCHEDGESTYLE]       | [Discrete](crate::PatchEdge::Discrete) or [Continuous](crate::PatchEdge::Continuous) tesselation.
-//! | [Pool]                                    | [D3DPOOL]                 | Specifies what memory pool [Resource]s should be stored in
-//! | [PrimitiveType]                           | [D3DPRIMITIVETYPE]        | Defines the primitives supported by Direct3D.
-//! | [QueryType]                               | [D3DQUERYTYPE]            | Identifies the query type.
-//! | [RenderStateType]                         | [D3DRENDERSTATETYPE]      |
-//! | [ResourceType]                            | [D3DRESOURCETYPE]         | Specifies the type of a [Resource]/[Volume]
-//! | [SamplerStateType]                        | [D3DSAMPLERSTATETYPE]     |
-//! | [SamplerTextureType]                      | [D3DSAMPLER_TEXTURE_TYPE] |
-//! | [ScanlineOrdering]                        | [D3DSCANLINEORDERING]     |
-//! | [SGR]                                     | [D3DSGR]                  | Indicates whether gamma correction should be applied.
-//! | [ShadeMode]                               | [D3DSHADEMODE]            |
-//! | [StateBlockType]                          | [D3DSTATEBLOCKTYPE]       | Predefined sets of pipeline state used by state blocks
-//! | [StencilOp]                               | [D3DSTENCILOP]            |
-//! | [StreamSource]                            | [D3DSTREAMSOURCE]         |
-//! | [SwapEffect]                              | [D3DSWAPEFFECT]           | Defines [IDirect3DDevice9Ext::present] swap effects.
-//! | [TextureAddress]                          | [D3DTEXTUREADDRESS]       |
-//! | [TextureFilterType]                       | [D3DTEXTUREFILTERTYPE]    |
-//! | [TextureOp]                               | [D3DTEXTUREOP]            |
-//! | [TextureStageStateType]                   | [D3DTEXTURESTAGESTATETYPE]|
-//! | [TransformStateType]                      | [D3DTRANSFORMSTATETYPE]   |
-//! | [ZBufferType]                             | [D3DZBUFFERTYPE]          |
+//! | [D3D](crate::D3D)\[[ERR](crate::D3DERR)\]         <br> [D3D](crate::D3D)\[[ERR](crate::D3DERR)\]::\*  | [D3DERR]                      <br> [D3DERR]_\*                | Windows HRESULTs optimized for displaying Direct3D errors
+//! | [BackBufferType]                                  <br> [BackBufferType]::\*                           | [D3DBACKBUFFER_TYPE]          <br> [D3DBACKBUFFER_TYPE]_\*    | [Mono](crate::BackBufferType::Mono), [Left](crate::BackBufferType::Left), or [Right](crate::BackBufferType::Right) for [stereo](https://en.wikipedia.org/wiki/Stereoscopy) rendering
+//! | [BasisType]                                       <br> [Basis]::\*                                    | [D3DBASISTYPE]                <br> [D3DBASISTYPE]_\*          | Tesselation basis
+//! | [Blend]                                           <br> [Blend]::\*                                    | [D3DBLEND]                    <br> [D3DBLEND]_\*              | Target/output alpha/color blending factors
+//! | [BlendOp]                                         <br> [BlendOp]::\*                                  | [D3DBLENDOP]                  <br> [D3DBLENDOP]_\*            | Target/output alpha/color blending operation
+//! | [CmpFunc]                                         <br> [Cmp]::\*                                      | [D3DCMPFUNC]                  <br> [D3DCMP]_\*                | ZBuffer/depth comparison operation
+//! | [ComposeRectsOp]                                  <br> [ComposeRects]::\*                             | [D3DCOMPOSERECTSOP]           <br> [D3DCOMPOSERECTS]_\*       |
+//! | ~~CubeMapFaces~~                                  <br> [CubeMapFace]::\*                              | [D3DCUBEMAP_FACES]            <br> [D3DCUBEMAP_FACE]_\*       | Which face of a cubemap to lock/update/acquire/??? <br> This isn't a mask, [CubeMapFace] reads way better in all contexts!
+//! | [Cull]                                            <br> [Cull]::\*                                     | [D3DCULL]                     <br> [D3DCULL]_\*               | [None](crate::Cull::None), [CW](crate::Cull::CW), [CCW](crate::Cull::CCW)
+//! | [DebugMonitorTokens]                              <br> [DMT]::\*                                      | [D3DDEBUGMONITORTOKENS]       <br> [D3DDMT]_\*                | Debug monitor tokens.
+//! | [DeclMethod8]                                     <br> [DeclMethod8]::\*                              | [D3DDECLMETHOD]               <br> [D3DDECLMETHOD]_\*         | Tesselation method.
+//! | [DeclType8]                                       <br> [DeclType8]::\*                                | [D3DDECLTYPE]                 <br> [D3DDECLTYPE]_\*           | [Float1](crate::DeclType8::Float1), [Float2](crate::DeclType8::Float2), ... - Defines a vertex declaration data type.
+//! | [DeclUsage8]                                      <br> [DeclUsage8]::\*                               | [D3DDECLUSAGE]                <br> [D3DDECLUSAGE]_\*          | [Position](crate::DeclUsage8::Position), [TexCoord](crate::DeclUsage8::TexCoord), ... - Defines the intended use of vertex data.
+//! | [DegreeType]                                      <br> [Degree]::\*                                   | [D3DDEGREETYPE]               <br> [D3DDEGREE]_\*             | Curve [polynomial degree](https://en.wikipedia.org/wiki/Degree_of_a_polynomial)
+//! | [DevType]                                         <br> [DevType]::\*                                  | [D3DDEVTYPE]                  <br> [D3DDEVTYPE]_\*            | Specifies what kind of [Device] should be created
+//! | [DisplayRotation]                                 <br> [DisplayRotation]::\*                          | [D3DDISPLAYROTATION]          <br> [D3DDISPLAYROTATION]_\*    | Orientation of the monitor/display
+//! | [FillMode]                                        <br> [Fill]::\*                                     | [D3DFILLMODE]                 <br> [D3DFILL]_\*               | [Point](crate::Fill::Point), [Wireframe](crate::Fill::Wireframe), or [Solid](crate::Fill::Solid) polygon rendering
+//! | [FogMode]                                         <br> [Fog]::\*                                      | [D3DFOGMODE]                  <br> [D3DFOG]_\*                | [None](crate::Fog::None), [Exp](crate::Fog::Exp), [Exp2](crate::Fog::Exp2), or [Linear](crate::Fog::Linear) fog falloff
+//! | [Format]                                          <br> [Fmt]::\*                                      | [D3DFORMAT]                   <br> [D3DFMT]_\*                | Texture and vertex element formats
+//! | [LightType]                                       <br> [LightType]::\*                                | [D3DLIGHTTYPE]                <br> [D3DLIGHTTYPE]_\*          | Defines the type of a light ([Point](crate::LightType::Point), [Spot](crate::LightType::Spot), or [Directional](crate::LightType::Directional))
+//! | [MaterialColorSource]                             <br> [MCS]::\*                                      | [D3DMATERIALCOLORSOURCE]      <br> [D3DMCS]_\*                | Lighting material source
+//! | [MultiSampleType]                                 <br> [MultiSample]::\*                              | [D3DMULTISAMPLE_TYPE]         <br> [D3DMULTISAMPLE]_\*        | Defines the levels of full-scene multisampling to apply
+//! | [PatchEdgeStyle]                                  <br> [PatchEdge]::\*                                | [D3DPATCHEDGESTYLE]           <br> [D3DPATCHEDGE]_\*          | [Discrete](crate::PatchEdge::Discrete) or [Continuous](crate::PatchEdge::Continuous) tesselation.
+//! | [Pool]                                            <br> [Pool]::\*                                     | [D3DPOOL]                     <br> [D3DPOOL]_\*               | Specifies what memory pool [Resource]s should be stored in
+//! | [PrimitiveType]                                   <br> [PT]::\*                                       | [D3DPRIMITIVETYPE]            <br> [D3DPT]_\*                 | Defines the primitives supported by Direct3D.
+//! | [QueryType]                                       <br> [QueryType]::\*                                | [D3DQUERYTYPE]                <br> [D3DQUERYTYPE]_\*          | Identifies the query type.
+//! | [RenderStateType]                                 <br> [RS]::\*                                       | [D3DRENDERSTATETYPE]          <br> [D3DRS]_\*                 |
+//! | [ResourceType]                                    <br> [RType]::\*                                    | [D3DRESOURCETYPE]             <br> [D3DRTYPE]_\*              | Specifies the type of a [Resource]/[Volume]
+//! | [SamplerStateType]                                <br> [Samp]::\*                                     | [D3DSAMPLERSTATETYPE]         <br> [D3DSAMP]_\*               |
+//! | [SamplerTextureType]                              <br> [STT]::\*                                      | [D3DSAMPLER_TEXTURE_TYPE]     <br> [D3DSTT]_\*                |
+//! | [ScanlineOrdering]                                <br> [ScanlineOrdering]::\*                         | [D3DSCANLINEORDERING]         <br> [D3DSCANLINEORDERING]_\*   |
+//! | [SGR]                                             <br> [SGR]::\*                                      | [D3DSGR]                      <br> [D3DSGR]_\*                | Indicates whether gamma correction should be applied.
+//! | [ShadeMode]                                       <br> [Shade]::\*                                    | [D3DSHADEMODE]                <br> [D3DSHADE]_\*              |
+//! | [StateBlockType]                                  <br> [SBT]::\*                                      | [D3DSTATEBLOCKTYPE]           <br> [D3DSBT]_\*                | Predefined sets of pipeline state used by state blocks
+//! | [StencilOp]                                       <br> [StencilOp]::\*                                | [D3DSTENCILOP]                <br> [D3DSTENCILOP]_\*          |
+//! | [StreamSource]                                    <br> [StreamSource]::\*                             | [D3DSTREAMSOURCE]             <br> [D3DSTREAMSOURCE]_\*       |
+//! | [SwapEffect]                                      <br> [SwapEffect]::*                                | [D3DSWAPEFFECT]               <br> [D3DSWAPEFFECT]_\*         | Defines [IDirect3DDevice9Ext::present] swap effects.
+//! | [TextureAddress]                                  <br> [TAddress]::\*                                 | [D3DTEXTUREADDRESS]           <br> [D3DTADDRESS]_\*           |
+//! | [TextureFilterType]                               <br> [TexF]::\*                                     | [D3DTEXTUREFILTERTYPE]        <br> [D3DTEXF]_\*               |
+//! | [TextureOp]                                       <br> [TOP]::\*                                      | [D3DTEXTUREOP]                <br> [D3DTOP]_\*                |
+//! | [TextureStageStateType]                           <br> [TSS]::\*                                      | [D3DTEXTURESTAGESTATETYPE]    <br> [D3DTSS]_\*                |
+//! | [TransformStateType]                              <br> [TS]::\*                                       | [D3DTRANSFORMSTATETYPE]       <br> [D3DTS]_\*                 |
+//! | [ZBufferType]                                     <br> [ZB]::\*                                       | [D3DZBUFFERTYPE]              <br> [D3DZB]_\*                 |
 //!
 //! ### Flags
 //!
