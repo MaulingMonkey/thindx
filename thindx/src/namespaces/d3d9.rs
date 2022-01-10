@@ -149,13 +149,6 @@
 //! | [Lock]                                    | [D3DLOCK_*]               | A combination of zero or more locking options that describe the type of lock to perform.
 //! | [Usage]                                   | [D3DUSAGE_*]              | Usage options that identify how resources are to be used.
 //!
-//! [D3DCREATE_*]:              https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dcreate
-//! [D3DFVF_*]:                 https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dfvf
-//! [D3DGETDATA_*]:             https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3dquery9-getdata
-//! [D3DISSUE_*]:               https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3dquery9-issue
-//! [D3DLOCK_*]:                https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dlock
-//! [D3DUSAGE_*]:               https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dusage
-//!
 //! ### Traits
 //!
 //! | Rust                                      | C++                       | Description   |
@@ -184,8 +177,6 @@
 //! | [VertexElement]                           | [D3DVERTEXELEMENT9]       | An element of a [VertexDeclaration]
 //! | [Viewport]                                | [D3DVIEWPORT9]            | A `{ x, y, width, height, min_z, max_z }` area to render into
 //!
-//! [RECT]:                     https://docs.microsoft.com/en-us/windows/win32/api/windef/ns-windef-rect
-//!
 //! ### Values
 //!
 //! | Rust                                      | C++                       | Description   |
@@ -194,10 +185,6 @@
 //! | [Color]                                   | [D3DCOLOR]                | 0xAA<span style="color: red">RR</span><span style="color: green">GG</span><span style="color: blue">BB</span> style 32-bit color
 //! | [Luid]                                    | [LUID]                    | A 64-bit locally unique identifier
 //! | [SdkVersion]                              | DWORD                     | Specify what Direct3D SDK to use ([Direct3D](crate::Direct3D)\[[Ex](crate::Direct3DEx)\]::[create](crate::Direct3D::create)'s only parameter)
-//!
-//! [BOOL]:                     https://docs.microsoft.com/en-us/windows/win32/winprog/windows-data-types#BOOL
-//! [D3DCOLOR]:                 https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dcolor
-//! [LUID]:                     https://docs.microsoft.com/en-us/previous-versions/windows/hardware/drivers/ff549708(v=vs.85)
 //!
 //! ### Wrappers
 //!
@@ -212,6 +199,7 @@
 // |                       | Default: **enabled** by default|
 //! | `9ex`                 | `!defined(D3D_DISABLE_9EX)` - Enables [Direct3DEx], [DeviceEx], [SwapChainEx], etc.
 //!
+#![doc = include_str!("../headers/_misc/cpp2url.md")]
 #![doc = include_str!("../headers/d3d9.h/cpp2url.md")]
 #![doc = include_str!("../headers/d3d9caps.h/cpp2url.md")]
 #![doc = include_str!("../headers/d3d9types.h/cpp2url.md")]

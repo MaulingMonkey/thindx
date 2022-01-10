@@ -37,6 +37,15 @@
 [IDirect3DStateBlock9]:                                             https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dstateblock9
 [IDirect3DVertexDeclaration9]:                                      https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dvertexdeclaration9
 
+<!-- d3d9.h flags -->
+
+[D3DCREATE_*]:                                                      https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dcreate
+[D3DFVF_*]:                                                         https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dfvf
+[D3DGETDATA_*]:                                                     https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3dquery9-getdata
+[D3DISSUE_*]:                                                       https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3dquery9-issue
+[D3DLOCK_*]:                                                        https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dlock
+[D3DUSAGE_*]:                                                       https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dusage
+
 <!-- d3d9.h methods -->
 
 [IDirect3D9::CheckDepthStencilMatch]:                               https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdepthstencilmatch

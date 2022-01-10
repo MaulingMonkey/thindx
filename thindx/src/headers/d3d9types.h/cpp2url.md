@@ -37,6 +37,8 @@
 [D3DVOLUME_DESC]:                                                   https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dvolume-desc
 <!-- D3D_OMAC                                                       -->
 
+
+
 <!-- d3d9types.h enumerations -->
 <!-- D3DAUTHENTICATEDCHANNELTYPE                                    -->
 <!-- D3DAUTHENTICATEDCHANNEL_PROCESSIDENTIFIERTYPE                  -->
@@ -92,3 +94,8 @@
 <!-- D3DVS_ADDRESSMODE_TYPE                                         -->
 <!-- D3DVS_RASTOUT_OFFSETS                                          -->
 [D3DZBUFFERTYPE]:                                                   https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dzbuffertype
+
+
+
+<!-- typedefs -->
+[D3DCOLOR]:                                                         https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dcolor
