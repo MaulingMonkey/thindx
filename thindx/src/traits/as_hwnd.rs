@@ -26,7 +26,9 @@ unsafe impl AsHWND for () {
 
 
 
-/// A safer/sounder alternative to [`HWND`]
+/// A safer/sounder alternative to [HWND]
+///
+/// [HWND]: https://docs.microsoft.com/en-us/windows/win32/learnwin32/what-is-a-window-
 pub struct SafeHWND<'w> {
     hwnd:       HWND,
     phantom:    PhantomData<&'w HWND>,
