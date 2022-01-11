@@ -13,7 +13,7 @@ use std::ops::*;
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dcreate)\]
 /// DWORD / D3DCREATE_*
 ///
-/// Controls how [Direct3D::create_device] behaves.
+/// Controls how [IDirect3D9Ext::create_device] behaves.
 #[derive(Clone, Copy, Default, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)] pub struct Create(D3DCREATE);
 
@@ -29,7 +29,7 @@ impl Create {
 
     /// Application asks the device to drive all the heads that this master adapter owns.
     /// The flag is illegal on nonmaster adapters.
-    /// If this flag is set, the presentation parameters passed to [Direct3D::create_device] should point to an array of D3DPRESENT_PARAMETERS.
+    /// If this flag is set, the presentation parameters passed to [IDirect3D9Ext::create_device] should point to an array of D3DPRESENT_PARAMETERS.
     /// The number of elements in D3DPRESENT_PARAMETERS should equal the number of adapters defined by the NumberOfAdaptersInGroup member of the D3DCAPS9 structure.
     /// The DirectX runtime will assign each element to each head in the numerical order specified by the AdapterOrdinalInGroup member of [Caps].
     pub const AdapterGroupDevice        : Create = Create(D3DCREATE_ADAPTERGROUP_DEVICE);

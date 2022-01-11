@@ -75,7 +75,7 @@ pub trait IDirect3D9ExExt : private::Sealed {
     /// ### ⚠️ Safety ⚠️
     ///
     /// *   The caller's codebase is responsible for ensuring any [HWND]s (`hwnd`, `presentation_parameters.hDeviceWindow`) outlive the [Device].
-    ///      See [Direct3D::create_device] for guidance and details.
+    ///      See [IDirect3D9Ext::create_device] for guidance and details.
     /// *   `fullscreen_display_modes` is assumed to contain an entry for every adapter if `behavior_flags & D3DCREATE_ADAPTERGROUP_DEVICE` (TODO: enforce this via checks?)
     unsafe fn create_device_ex(&self, adapter: u32, device_type: impl Into<DevType>, hwnd: HWND, behavior_flags: impl Into<Create>, presentation_parameters: &mut D3DPRESENT_PARAMETERS, fullscreen_display_modes: &mut [D3DDISPLAYMODEEX]) -> Result<DeviceEx, MethodError> {
         for fdm in fullscreen_display_modes.iter_mut() {

@@ -1,9 +1,9 @@
 <!-- Breaks horribly in rust-analyzer's intellisense -->
 
 [Unknown] - The root type from which all sane COM types derive<br>
-&nbsp;  ├─ [Direct3D]\[[Ex](crate::Direct3DEx)\] - Core factories for creating [Device]\[[Ex](crate::Direct3DEx)\]s and [SwapChain]\[[Ex](crate::SwapChainEx)\]s<span style="opacity: 25%"><br>
-&nbsp;  ├─ [Device]\[[Ex](crate::DeviceEx)\] - Create resources & dispatches rendering for an individual GPU<br>
-&nbsp;  ├─ [SwapChain]\[[Ex](crate::SwapChainEx)\] - Manages swapping buffers for individual "views" (monitors/windows)</span><br>
+&nbsp;  ├─ [Direct3D]\[[Ex](Direct3DEx)\] - Core factories for creating [Device]\[[Ex](Direct3DEx)\]s and [SwapChain]\[[Ex](SwapChainEx)\]s<span style="opacity: 25%"><br>
+&nbsp;  ├─ [Device]\[[Ex](DeviceEx)\] - Create resources & dispatches rendering for an individual GPU<br>
+&nbsp;  ├─ [SwapChain]\[[Ex](SwapChainEx)\] - Manages swapping buffers for individual "views" (monitors/windows)</span><br>
 &nbsp;  ├─ [Resource]<br>
 &nbsp;  │      ├─ [Surface] - 2D buffer of pixels<br>
 &nbsp;  │      ├─ [BaseTexture] - A GPU-friendly collection of pixels<br>

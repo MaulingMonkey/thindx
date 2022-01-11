@@ -1,5 +1,3 @@
-#![allow(rustdoc::broken_intra_doc_links)] // temporary
-
 //! \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/dx9-graphics)\]
 //! Direct3D 9 related types and APIs
 //!
@@ -15,7 +13,7 @@
 //!
 //! | Rust COM Pointer      | C+++ \[Rust Ext Trait\]                                                   | Description   |
 //! | --------------------- | ------------------------------------------------------------------------- | ------------- |
-//! | [Unknown]             | [IUnknown]\[[Ext](IUnknownExt)\]                                          | The root type from which all sane COM types derive
+//! | [Unknown]             | [IUnknown]\[~~Ext~~\]                                                     | The root type from which all sane COM types derive
 //! | [Direct3D]            | [IDirect3D9]\[[Ext](IDirect3D9Ext)\]                                      | Core factory for creating [Device]s
 //! | [Direct3DEx]          | [IDirect3D9Ex]\[[Ext](IDirect3D9ExExt)\]                                  | Core factory for creating [DeviceEx]s
 //! | [Device]              | [IDirect3DDevice9]\[[Ext](IDirect3DDevice9Ext)\]                          | Create resources & dispatches rendering for an individual GPU
@@ -48,28 +46,28 @@
 //! | Rust                                      | C++                       | Description   |
 //! | ----------------------------------------- | ------------------------- | ------------- |
 //! | [ErrorKind]                                       <br> [D3D](crate::D3D)\[[ERR](crate::D3DERR)\]::\*  | [HRESULT]                     <br> [D3DERR_*]                 | Windows HRESULTs optimized for displaying Direct3D errors
-//! | [BackBufferType]                                  <br> [BackBufferType]::\*                           | [D3DBACKBUFFER_TYPE]          <br> [D3DBACKBUFFER_TYPE_*]     | [Mono](crate::BackBufferType::Mono), [Left](crate::BackBufferType::Left), or [Right](crate::BackBufferType::Right) for [stereo](https://en.wikipedia.org/wiki/Stereoscopy) rendering
+//! | [BackBufferType]                                  <br> [BackBufferType]::\*                           | [D3DBACKBUFFER_TYPE]          <br> [D3DBACKBUFFER_TYPE_*]     | [Mono](BackBufferType::Mono), [Left](BackBufferType::Left), or [Right](BackBufferType::Right) for [stereo](https://en.wikipedia.org/wiki/Stereoscopy) rendering
 //! | [BasisType]                                       <br> [Basis]::\*                                    | [D3DBASISTYPE]                <br> [D3DBASIS_*]               | Tesselation basis
 //! | [Blend]                                           <br> [Blend]::\*                                    | [D3DBLEND]                    <br> [D3DBLEND_*]               | Target/output alpha/color blending factors
 //! | [BlendOp]                                         <br> [BlendOp]::\*                                  | [D3DBLENDOP]                  <br> [D3DBLENDOP_*]             | Target/output alpha/color blending operation
 //! | [CmpFunc]                                         <br> [Cmp]::\*                                      | [D3DCMPFUNC]                  <br> [D3DCMP_*]                 | ZBuffer/depth comparison operation
 //! | [ComposeRectsOp]                                  <br> [ComposeRects]::\*                             | [D3DCOMPOSERECTSOP]           <br> [D3DCOMPOSERECTS_*]        |
 //! | ~~CubeMapFaces~~                                  <br> [CubeMapFace]::\*                              | [D3DCUBEMAP_FACES]            <br> [D3DCUBEMAP_FACE_*]        | Which face of a cubemap to lock/update/acquire/??? <br> This isn't a mask, [CubeMapFace] reads way better in all contexts!
-//! | [Cull]                                            <br> [Cull]::\*                                     | [D3DCULL]                     <br> [D3DCULL_*]                | [None](crate::Cull::None), [CW](crate::Cull::CW), [CCW](crate::Cull::CCW)
+//! | [Cull]                                            <br> [Cull]::\*                                     | [D3DCULL]                     <br> [D3DCULL_*]                | [None](Cull::None), [CW](Cull::CW), [CCW](Cull::CCW)
 //! | [DebugMonitorTokens]                              <br> [DMT]::\*                                      | [D3DDEBUGMONITORTOKENS]       <br> [D3DDMT_*]                 | Debug monitor tokens.
 //! | [DeclMethod8]                                     <br> [DeclMethod8]::\*                              | [D3DDECLMETHOD]               <br> [D3DDECLMETHOD_*]          | Tesselation method.
-//! | [DeclType8]                                       <br> [DeclType8]::\*                                | [D3DDECLTYPE]                 <br> [D3DDECLTYPE_*]            | [Float1](crate::DeclType8::Float1), [Float2](crate::DeclType8::Float2), ... - Defines a vertex declaration data type.
-//! | [DeclUsage8]                                      <br> [DeclUsage8]::\*                               | [D3DDECLUSAGE]                <br> [D3DDECLUSAGE_*]           | [Position](crate::DeclUsage8::Position), [TexCoord](crate::DeclUsage8::TexCoord), ... - Defines the intended use of vertex data.
+//! | [DeclType8]                                       <br> [DeclType8]::\*                                | [D3DDECLTYPE]                 <br> [D3DDECLTYPE_*]            | [Float1](DeclType8::Float1), [Float2](DeclType8::Float2), ... - Defines a vertex declaration data type.
+//! | [DeclUsage8]                                      <br> [DeclUsage8]::\*                               | [D3DDECLUSAGE]                <br> [D3DDECLUSAGE_*]           | [Position](DeclUsage8::Position), [TexCoord](DeclUsage8::TexCoord), ... - Defines the intended use of vertex data.
 //! | [DegreeType]                                      <br> [Degree]::\*                                   | [D3DDEGREETYPE]               <br> [D3DDEGREE_*]              | Curve [polynomial degree](https://en.wikipedia.org/wiki/Degree_of_a_polynomial)
 //! | [DevType]                                         <br> [DevType]::\*                                  | [D3DDEVTYPE]                  <br> [D3DDEVTYPE_*]             | Specifies what kind of [Device] should be created
 //! | [DisplayRotation]                                 <br> [DisplayRotation]::\*                          | [D3DDISPLAYROTATION]          <br> [D3DDISPLAYROTATION_*]     | Orientation of the monitor/display
-//! | [FillMode]                                        <br> [Fill]::\*                                     | [D3DFILLMODE]                 <br> [D3DFILL_*]                | [Point](crate::Fill::Point), [Wireframe](crate::Fill::Wireframe), or [Solid](crate::Fill::Solid) polygon rendering
-//! | [FogMode]                                         <br> [Fog]::\*                                      | [D3DFOGMODE]                  <br> [D3DFOG_*]                 | [None](crate::Fog::None), [Exp](crate::Fog::Exp), [Exp2](crate::Fog::Exp2), or [Linear](crate::Fog::Linear) fog falloff
+//! | [FillMode]                                        <br> [Fill]::\*                                     | [D3DFILLMODE]                 <br> [D3DFILL_*]                | [Point](Fill::Point), [Wireframe](Fill::Wireframe), or [Solid](Fill::Solid) polygon rendering
+//! | [FogMode]                                         <br> [Fog]::\*                                      | [D3DFOGMODE]                  <br> [D3DFOG_*]                 | [None](Fog::None), [Exp](Fog::Exp), [Exp2](Fog::Exp2), or [Linear](Fog::Linear) fog falloff
 //! | [Format]                                          <br> [Fmt]::\*                                      | [D3DFORMAT]                   <br> [D3DFMT_*]                 | Texture and vertex element formats
-//! | [LightType]                                       <br> [LightType]::\*                                | [D3DLIGHTTYPE]                <br> [D3DLIGHT_*]               | Defines the type of a light ([Point](crate::LightType::Point), [Spot](crate::LightType::Spot), or [Directional](crate::LightType::Directional))
+//! | [LightType]                                       <br> [LightType]::\*                                | [D3DLIGHTTYPE]                <br> [D3DLIGHT_*]               | Defines the type of a light ([Point](LightType::Point), [Spot](LightType::Spot), or [Directional](LightType::Directional))
 //! | [MaterialColorSource]                             <br> [MCS]::\*                                      | [D3DMATERIALCOLORSOURCE]      <br> [D3DMCS_*]                 | Lighting material source
 //! | [MultiSampleType]                                 <br> [MultiSample]::\*                              | [D3DMULTISAMPLE_TYPE]         <br> [D3DMULTISAMPLE_*]         | Defines the levels of full-scene multisampling to apply
-//! | [PatchEdgeStyle]                                  <br> [PatchEdge]::\*                                | [D3DPATCHEDGESTYLE]           <br> [D3DPATCHEDGE_*]           | [Discrete](crate::PatchEdge::Discrete) or [Continuous](crate::PatchEdge::Continuous) tesselation.
+//! | [PatchEdgeStyle]                                  <br> [PatchEdge]::\*                                | [D3DPATCHEDGESTYLE]           <br> [D3DPATCHEDGE_*]           | [Discrete](PatchEdge::Discrete) or [Continuous](PatchEdge::Continuous) tesselation.
 //! | [Pool]                                            <br> [Pool]::\*                                     | [D3DPOOL]                     <br> [D3DPOOL_*]                | Specifies what memory pool [Resource]s should be stored in
 //! | [PrimitiveType]                                   <br> [PT]::\*                                       | [D3DPRIMITIVETYPE]            <br> [D3DPT_*]                  | Defines the primitives supported by Direct3D.
 //! | [QueryType]                                       <br> [QueryType]::\*                                | [D3DQUERYTYPE]                <br> [D3DQUERYTYPE_*]           | Identifies the query type.
@@ -95,7 +93,7 @@
 //!
 //! | Rust                                      | C++                       | Description   |
 //! | ----------------------------------------- | ------------------------- | ------------- |
-//! | [Create]                                  | [D3DCREATE_*]             | A combination of one or more flags that controls [Direct3D::create_device] behavior.
+//! | [Create]                                  | [D3DCREATE_*]             | A combination of one or more flags that controls [IDirect3D9Ext::create_device] behavior.
 //! | [FVF]                                     | [D3DFVF_*]                | Describes the contents of vertices interleaved in a single data stream.
 //! | [GetData]                                 | [D3DGETDATA_*]            | Controls how [IDirect3DQuery9Ext::get_data_inplace] behaves
 //! | [Issue]                                   | [D3DISSUE_*]              | Controls how [IDirect3DQuery9Ext::issue] behaves
@@ -106,7 +104,7 @@
 //!
 //! | Rust                                      | C++                       | Description   |
 //! | ----------------------------------------- | ------------------------- | ------------- |
-//! | unsafe [Raw]                              |                           | Conversion trait for converting between [thindx](crate) ⇄ [winapi]
+//! | unsafe [Raw]                              |                           | Conversion trait for converting between [thindx] ⇄ [winapi]
 //! | unsafe [SharedHandleParam]                | \*mut HANDLE              | Placeholder for [Sharing Resources](https://docs.microsoft.com/en-us/windows/win32/direct3d9/dx9lh#sharing-resources) `*mut HANDLE`s
 //!
 //! ### Structures
@@ -137,7 +135,7 @@
 //! | [bool32]                                  | [BOOL]                    | 32-bit boolean type that's ABI-compatible with Win32's [BOOL]
 //! | [Color]                                   | [D3DCOLOR]                | 0xAA<span style="color: red">RR</span><span style="color: green">GG</span><span style="color: blue">BB</span> style 32-bit color
 //! | [Luid]                                    | [LUID]                    | A 64-bit locally unique identifier
-//! | [SdkVersion]                              | DWORD                     | Specify what Direct3D SDK to use ([Direct3D](crate::Direct3D)\[[Ex](crate::Direct3DEx)\]::[create](crate::Direct3D::create)'s only parameter)
+//! | [SdkVersion]                              | [DWORD]                   | Specify what Direct3D SDK to use ([Direct3D]\[[Ex](Direct3DEx)\]::[create](IDirect3D9Ext::create)'s only parameter)
 //!
 //! ### Wrappers
 //!
@@ -162,9 +160,11 @@
 
 mod shared_handle;
 
-use crate::Unknown;
+use crate as thindx;
+use crate::{ErrorKind, Raw, Unknown};
 use abibool::bool32;
 use u32 as DWORD;
+use winapi;
 
 pub use crate::d3d9_h::*;
 pub use crate::d3d9types_h::*;

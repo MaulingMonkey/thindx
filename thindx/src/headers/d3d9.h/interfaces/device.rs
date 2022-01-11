@@ -392,14 +392,14 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     ///
     /// there is always at least one swap chain (the implicit swap chain) for each device because Direct3D 9 has one swap chain as a property of the device.
     /// Note that any given device can support only one full-screen swap chain.
-    /// [Format::UNKNOWN] can be specified for the windowed mode back buffer format when calling [Direct3D::create_device], [IDirect3DDevice9Ext::reset] and [IDirect3DDevice9Ext::create_additional_swap_chain].
+    /// [Format::UNKNOWN] can be specified for the windowed mode back buffer format when calling [IDirect3D9Ext::create_device], [IDirect3DDevice9Ext::reset] and [IDirect3DDevice9Ext::create_additional_swap_chain].
     /// This means the application does not have to query the current desktop format before calling [create_device] for windowed mode.
     /// For full-screen mode, the back buffer format must be specified.
     ///
     /// ### ⚠️ Safety ⚠️
     ///
     /// *   The caller's codebase is responsible for ensuring any [HWND]s inside [D3DPRESENT_PARAMETERS] outlive the resulting [SwapChain]s that depend on them.
-    ///     See [Direct3D::create_device] for details and guidance about dealing with this lifetime issue.
+    ///     See [IDirect3D9Ext::create_device] for details and guidance about dealing with this lifetime issue.
     ///
     /// ### Returns
     ///
