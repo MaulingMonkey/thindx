@@ -23,16 +23,42 @@ fn main() {
     }
 }
 
-fn build(_args: std::env::Args) {
-    copy_thindx_files();
-    scan::src().unwrap_or_else(|()| std::process::exit(1));
-    run("cargo fetch");
-    run("cargo build --frozen --workspace --all-targets");
-    run(r"cargo build --frozen --workspace --all-targets --all-features --target-dir=target\all-features");
-    examples::update();
-    headers::update();
-    run(r"cargo doc --no-deps --frozen --workspace --all-features --target-dir=target\all-features");
-    run(r"cargo test          --frozen --workspace --all-features --target-dir=target\all-features");
+fn build(args: std::env::Args) {
+    let mut args = args.peekable();
+    if args.peek().is_none() {
+        copy_thindx_files();
+        scan::src().unwrap_or_else(|()| std::process::exit(1));
+        run("cargo fetch");
+        run("cargo build --frozen --workspace --all-targets");
+        run(r"cargo build --frozen --workspace --all-targets --all-features --target-dir=target\all-features");
+        examples::update();
+        headers::update();
+        run(r"cargo doc --no-deps --frozen --workspace --all-features --target-dir=target\all-features");
+        run(r"cargo test          --frozen --workspace --all-features --target-dir=target\all-features");
+    } else {
+        let mut cmd = Command::new("cargo");
+        cmd.arg("build");
+
+        let mut examples = false;
+        for arg in args {
+            match &*arg {
+                "--example"     => examples = true,
+                "--examples"    => examples = true,
+                "--all"         => examples = true,
+                "--all-targets" => examples = true,
+                "--workspace"   => examples = true,
+                _               => {},
+            }
+            cmd.arg(arg);
+        }
+
+        if examples {
+            examples::download_extract_assets();
+        }
+
+        status!("Running", "{:?}", cmd);
+        cmd.status0().unwrap_or_else(|err| fatal!("{}", err));
+    }
 }
 
 fn check(mut args: std::env::Args) {
@@ -93,13 +119,20 @@ fn doc(_args: std::env::Args, help: bool) {
 
 
 
-fn run(command: &str) {
+fn run(command: impl AsRef<str>) {
     let mut c = cmd(command);
     status!("Running", "{:?}", c);
     c.status0().unwrap_or_else(|err| fatal!("{}", err));
 }
 
-fn cmd(original: &str) -> Command { Command::parse(original).unwrap_or_else(|err| fatal!("{}", err)) }
+fn run_in(dir: &Path, command: impl AsRef<str>) {
+    let mut c = cmd(command);
+    c.current_dir(dir);
+    status!("Running", "{:?}", c);
+    c.status0().unwrap_or_else(|err| fatal!("{}", err));
+}
+
+fn cmd(original: impl AsRef<str>) -> Command { Command::parse(original).unwrap_or_else(|err| fatal!("{}", err)) }
 
 fn copy_thindx_files() {
     for file in "LICENSE-APACHE LICENSE-MIT LICENSE.md Readme.md".split(' ') {

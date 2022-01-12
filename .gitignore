@@ -1,8 +1,14 @@
+# downloaded on demand
+/thindx/examples/assets
+
+# build output
 /target
 /*.log
 /Cargo.lock
 
+# build output (copied from workspace root)
 /thindx/LICENSE*
 /thindx/Readme.md
 
+# build output
 /xtask/target

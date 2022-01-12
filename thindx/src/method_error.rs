@@ -38,6 +38,7 @@ impl Debug   for MethodError { fn fmt(&self, fmt: &mut Formatter) -> fmt::Result
 impl Display for MethodError { fn fmt(&self, fmt: &mut Formatter) -> fmt::Result { write!(fmt, "{} failed with HRESULT == {}", self.0, self.1) } }
 
 impl std::error::Error for MethodError {}
+impl From<MethodError> for std::io::Error { fn from(err: MethodError) -> Self { std::io::Error::new(std::io::ErrorKind::Other, err) } }
 
 impl PartialEq<Option<MethodError>> for ErrorKind { fn eq(&self, other: &Option<MethodError>) -> bool { Some(*self) == other.as_ref().map(|e| e.kind()) } }
 impl PartialEq<ErrorKind> for Option<MethodError> { fn eq(&self, other: &ErrorKind)           -> bool { Some(*other) == self.as_ref().map(|e| e.kind()) } }

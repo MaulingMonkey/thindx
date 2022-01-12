@@ -14,6 +14,7 @@ const COMMANDS : &'static [(&'static str, &'static str)] = &[
     ("build",               "cargo b"),
     ("doc",                 "cargo d"),
     ("help",                "cargo h"),
+    ("vsc",                 "cargo vsc"),
     ("push github master",  "git push github master"),
 ];
 
@@ -36,7 +37,7 @@ fn launch_json(mut j: impl Write) -> io::Result<()> {
             ("release", " --release"),
         ].iter().copied() {
             let name = format!("{} • {}", example, config);
-            let task = format!("cargo build --package thindx --example {}{}", example, extra);
+            let task = format!("cargo b --package thindx --example {}{}", example, extra);
             writeln!(j, "        {{")?;
             writeln!(j, "            \"name\":                     {:?},", name)?;
             writeln!(j, "            \"type\":                     \"cppdbg\",")?;
@@ -92,7 +93,7 @@ fn tasks_json(mut j: impl Write) -> io::Result<()> {
     }
     for example in thindx_examples() {
         for extra in ["", " --release"].iter().copied() {
-            let cmd = format!("cargo build --package thindx --example {}{}", example, extra);
+            let cmd = format!("cargo b --package thindx --example {}{}", example, extra);
             writeln!(j, "        {{")?;
             writeln!(j, "            \"label\":   {:?},", cmd)?;
             writeln!(j, "            \"command\": {:?},", cmd)?;

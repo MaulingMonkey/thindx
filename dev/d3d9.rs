@@ -10,6 +10,7 @@ use winapi::shared::d3d9types::*;
 
 use std::fs::*;
 use std::io::*;
+use std::mem::swap;
 use std::path::*;
 use std::result::Result;
 
@@ -149,7 +150,12 @@ pub fn screenshot_rt0_for_docs_gen(device: &Device) {
             surface.unlock_rect().unwrap();
         }
 
-        // make screenshot opaque regardless of back buffer alpha/x channel
+        let mut pending = &mut data[..];
+        while let [r, _g, b, x, rest @ ..] = pending {
+            swap(r, b); // BGR. => RGB. (fix d3d9 format => png format)
+            *x = !0;    // ...X => ...A (make screenshot opaque regardless of back buffer alpha/x channel)
+            pending = rest;
+        }
         for i in 0 .. width*height { data[4*i + 3] = !0; }
 
         let file = BufWriter::new(File::create(screenshot_path).unwrap());

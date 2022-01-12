@@ -4,7 +4,7 @@ use thindx::d3d::*;
 
 fn main() {
     let d3dc = d3d::Compiler::new(47).unwrap();
-    let library = d3dc.compile_from_file(r"test\data\library.hlsl", None, None, (), "lib_5_0", Compile::Debug, CompileEffect::None).unwrap();
+    let library = d3dc.compile_from_file(r"thindx\test\data\library.hlsl", None, None, (), "lib_5_0", Compile::Debug, CompileEffect::None).unwrap();
     let _library = d3dc.reflect_library::<d3d11::LibraryReflection>(&library).unwrap();
     let library  = d3dc.reflect_library_11(&library).unwrap(); // equivalent shorthand
 

@@ -4,7 +4,7 @@ use thindx::d3d::*;
 
 fn main() {
     let d3dc = d3d::Compiler::new(47).unwrap();
-    let shader  = d3dc.compile_from_file(r"test\data\basic.hlsl", None, None, "vs_main", "vs_4_0", Compile::Debug, CompileEffect::None).unwrap();
+    let shader  = d3dc.compile_from_file(r"thindx\test\data\basic.hlsl", None, None, "vs_main", "vs_4_0", Compile::Debug, CompileEffect::None).unwrap();
     let _shader = d3dc.reflect::<d3d11::ShaderReflection>(&shader).unwrap();
     let shader  = d3dc.reflect11(&shader).unwrap(); // equivalent shorthand
 

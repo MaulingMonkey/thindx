@@ -2236,6 +2236,22 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
         MethodError::check("IDirect3DDevice9::SetTexture", hr)
     }
 
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setvertexdeclaration)\]
+    /// IDirect3DDevice9::SetVertexDeclaration
+    ///
+    /// Describes the layout of vertexes for rendering.
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]   If `decl` was created by another device?
+    /// *   Ok(())
+    fn set_vertex_declaration<'d>(&self, decl: impl Into<Option<&'d VertexDeclaration>>) -> Result<(), MethodError> {
+        let decl = decl.into();
+        let decl = decl.map_or(null_mut(), |d| d.as_raw());
+        let hr = unsafe { self.as_winapi().SetVertexDeclaration(decl) };
+        MethodError::check("IDirect3DDevice9::SetVertexDeclaration", hr)
+    }
+
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setvertexshader)\]
     /// IDirect3DDevice9::SetVertexShader
     ///

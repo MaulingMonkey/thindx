@@ -18,6 +18,14 @@ use winapi::um::xinput::*;
 
 flags! { Buttons => u16; None, DPadUp, DPadDown, DPadLeft, DPadRight, Start, Guide, Back, LeftThumb, RightThumb, LeftShoulder, RightShoulder, A, B, X, Y }
 
+impl Buttons {
+    /// Returns `true` if any button from `buttons` is set in `self`
+    pub fn any_held(&self, buttons: Buttons) -> bool { self.0 & buttons.0 != 0 }
+
+    /// Returns `true` if **all** buttons from `buttons` are set in `self`
+    pub fn all_held(&self, buttons: Buttons) -> bool { self.0 & buttons.0 == buttons.0 }
+}
+
 #[allow(non_upper_case_globals)] impl Buttons {
     /// No buttons are held.
     pub const None          : Buttons = Buttons(0);

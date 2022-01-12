@@ -9,23 +9,23 @@ fn main() {
     let library_hlsl : &[u8] = include_bytes!("../test/data/library.hlsl");
 
     // Option A:  just preprocess instead of fully compiling
-    let pixel_shader  = d3dc.preprocess(basic_hlsl,   (),                      None, None,                  ).unwrap();
-    let vertex_shader = d3dc.preprocess(basic_hlsl,   r"test\data\basic.hlsl", None, StandardFileInclude    ).unwrap();
-    let library       = d3dc.preprocess(library_hlsl, r"library.hlsl",         None, None,                  ).unwrap();
+    let pixel_shader  = d3dc.preprocess(basic_hlsl,   (),                               None, None,                  ).unwrap();
+    let vertex_shader = d3dc.preprocess(basic_hlsl,   r"thindx\test\data\basic.hlsl",   None, StandardFileInclude    ).unwrap();
+    let library       = d3dc.preprocess(library_hlsl, r"thindx\test\data\library.hlsl", None, None,                  ).unwrap();
     println!("pixel_shader\n============\n{}\n",    pixel_shader .shader);
     println!("vertex_shader\n=============\n{}\n",  vertex_shader.shader);
     println!("library\n=======\n{}\n",              library      .shader);
 
     // Option B:  compile_from_file
-    let pixel_shader  = d3dc.compile_from_file(r"test\data\basic.hlsl",   None, None,                "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap();
-    let vertex_shader = d3dc.compile_from_file(r"test\data\basic.hlsl",   None, StandardFileInclude, "vs_main", "vs_4_0", Compile::Debug, CompileEffect::None).unwrap();
-    let library       = d3dc.compile_from_file(r"test\data\library.hlsl", None, None,                (),       "lib_5_0", Compile::Debug, CompileEffect::None).unwrap();
+    let pixel_shader  = d3dc.compile_from_file(r"thindx\test\data\basic.hlsl",   None, None,                "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap();
+    let vertex_shader = d3dc.compile_from_file(r"thindx\test\data\basic.hlsl",   None, StandardFileInclude, "vs_main", "vs_4_0", Compile::Debug, CompileEffect::None).unwrap();
+    let library       = d3dc.compile_from_file(r"thindx\test\data\library.hlsl", None, None,                (),       "lib_5_0", Compile::Debug, CompileEffect::None).unwrap();
     // resulting blobs are binary data
 
     // Option C:  compile
-    let pixel_shader  = d3dc.compile(basic_hlsl,   (),                      None, None,                "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap();
-    let vertex_shader = d3dc.compile(basic_hlsl,   r"test\data\basic.hlsl", None, StandardFileInclude, "vs_main", "vs_4_0", Compile::Debug, CompileEffect::None).unwrap();
-    let library       = d3dc.compile(library_hlsl, r"library.hlsl",         None, None,                (),       "lib_5_0", Compile::Debug, CompileEffect::None).unwrap();
+    let pixel_shader  = d3dc.compile(basic_hlsl,   (),                                  None, None,                "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap();
+    let vertex_shader = d3dc.compile(basic_hlsl,   r"thindx\test\data\basic.hlsl",      None, StandardFileInclude, "vs_main", "vs_4_0", Compile::Debug, CompileEffect::None).unwrap();
+    let library       = d3dc.compile(library_hlsl, r"thindx\test\data\library.hlsl",    None, None,                (),       "lib_5_0", Compile::Debug, CompileEffect::None).unwrap();
     // resulting blobs are binary data
 
     // Option D:  compile2
