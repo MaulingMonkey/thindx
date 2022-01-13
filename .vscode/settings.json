@@ -13,4 +13,8 @@
         "RUSTC_LOG":    "rustc_metadata=error",
         "TESTFAST":     "1",
     },
+    "coverage-gutters.lcovname":            "${workspaceFolder}/target/coverage/lcov.info",
+    "coverage-gutters.showGutterCoverage":  false,  // interferes with breakpoints
+    "coverage-gutters.showLineCoverage":    true,   // really in your face, but I like it
+    "coverage-gutters.showRulerCoverage":   true,   // scrollbar
 }

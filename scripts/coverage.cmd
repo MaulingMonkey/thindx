@@ -1,0 +1,83 @@
+@setlocal && pushd "%~dp0.."
+
+:: Configuration
+@set CHANNEL=nightly
+@set OPEN=0
+@set SKIP_TEST=0
+
+:: Arguments
+:next-arg
+@if "%~1" == "--open"      shift /1 && set "OPEN=1"      && goto :next-arg
+@if "%~1" == "--skip-test" shift /1 && set "SKIP_TEST=1" && goto :next-arg
+@if "%~1" == "" goto :end-of-args
+@echo Unrecognized argument: %~1 (did you mean --open or --skip-test?)
+@endlocal && popd && exit /b 1
+:end-of-args
+
+:: Display configuration
+@set CHANNEL
+@set OPEN
+@set SKIP_TEST
+
+:: Inferred
+@set RUSTUP_TOOLCHAIN=%CHANNEL%
+@set RUSTUP_TOOLCHAIN_DIR=
+@set CARGO_TARGET_DIR=%~dp0..\target\coverage
+
+
+
+:: Dependencies
+
+@if EXIST "%USERPROFILE%\.rustup\toolchains\%CHANNEL%-x86_64-pc-windows-msvc" goto :skip-install-toolchain
+    rustup toolchain install %RUSTUP_TOOLCHAIN%
+    @if ERRORLEVEL 1 goto :cleanup
+:skip-install-toolchain
+
+@if EXIST "%USERPROFILE%\.rustup\toolchains\%CHANNEL%-x86_64-pc-windows-msvc" goto :skip-install-tools-preview
+    rustup component add llvm-tools-preview
+    @if ERRORLEVEL 1 goto :cleanup
+:skip-install-tools-preview
+
+@grcov --version >NUL 2>NUL && goto :skip-install-grcov
+    cargo install grcov
+    @if ERRORLEVEL 1 goto :cleanup
+:skip-install-grcov
+
+
+
+:: Run tests for coverage
+
+@set RUSTFLAGS=-Zinstrument-coverage
+@set LLVM_PROFILE_FILE=%CARGO_TARGET_DIR%\profraw\thindx-%%p-%%m.profraw
+@if "%SKIP_TEST%" == "1" goto :skip-test
+    rmdir "%CARGO_TARGET_DIR%\profraw" /S /Q 2>NUL
+    :: ✔️ inline #[test]s
+    :: ✔️ integration tests/
+    :: ❌ doc tests
+    cargo test --tests
+:skip-test
+@if ERRORLEVEL 1 goto :cleanup
+
+
+
+:: Process coverage information
+
+@set PATH=%USERPROFILE%\.rustup\toolchains\%CHANNEL%-x86_64-pc-windows-msvc\lib\rustlib\x86_64-pc-windows-msvc\bin;%PATH%
+llvm-profdata merge -sparse "%CARGO_TARGET_DIR%\profraw\thindx-*.profraw" -o "%CARGO_TARGET_DIR%\tests.profdata"
+
+:: For "Coverage Gutters" vscode extension
+llvm-cov export "--instr-profile=%CARGO_TARGET_DIR%\tests.profdata" --format=lcov "%CARGO_TARGET_DIR%\debug\deps\thindx-*.exe" > "%CARGO_TARGET_DIR%\lcov.info"
+
+:: For summaries in your browser of choice
+grcov . -s . --binary-path target\coverage\debug -t html --branch --ignore-not-existing -o "%CARGO_TARGET_DIR%\grcov"
+@if "%OPEN%" == "1" start "" "%CARGO_TARGET_DIR%\grcov\index.html"
+
+
+:cleanup
+@endlocal && popd
+
+
+
+:: References
+:: https://doc.rust-lang.org/cargo/reference/config.html
+:: https://doc.rust-lang.org/nightly/unstable-book/compiler-flags/instrument-coverage.html

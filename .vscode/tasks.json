@@ -55,6 +55,18 @@
             "command": "cargo vsc",
         },
         {
+            "label":   "clean",
+            "command": "scripts\\clean.cmd",
+        },
+        {
+            "label":   "coverage update",
+            "command": "scripts\\coverage.cmd",
+        },
+        {
+            "label":   "coverage open",
+            "command": "scripts\\coverage.cmd --open",
+        },
+        {
             "label":   "push github master",
             "command": "git push github master",
         },
