@@ -243,8 +243,16 @@ macro_rules! convert {
         impl From<mcom::Rc<$winapi>> for $outer { fn from(value: mcom::Rc<$winapi>) -> Self { Self(value) } }
         impl From<$outer> for mcom::Rc<$winapi> { fn from(value: $outer) -> Self { value.0 } }
 
-        impl From<&mcom::Rc<$winapi>> for &$outer { fn from(value: &mcom::Rc<$winapi>) -> Self { unsafe { std::mem::transmute(value) } } }
-        impl From<&$outer> for &mcom::Rc<$winapi> { fn from(value: &$outer) -> Self { unsafe { std::mem::transmute(value) } } }
+        impl From<&mcom::Rc<$winapi>> for &$outer { fn from(value: &mcom::Rc<$winapi>) -> Self {
+            #[allow(clippy::undocumented_unsafe_blocks)]
+            // SAFETY: ✔️ sound per documented `#[repr(transparent)]` safety precondition of this `unsafe`-marked macro
+            unsafe { std::mem::transmute(value) }
+        }}
+        impl From<&$outer> for &mcom::Rc<$winapi> { fn from(value: &$outer) -> Self {
+            #[allow(clippy::undocumented_unsafe_blocks)]
+            // SAFETY: ✔️ sound per documented `#[repr(transparent)]` safety precondition of this `unsafe`-marked macro
+            unsafe { std::mem::transmute(value) }
+        }}
 
         unsafe impl $crate::Raw for $outer {
             type Raw = $winapi;
