@@ -3,7 +3,9 @@
 use crate::*;
 use crate::d3d9::*;
 
+use winapi::shared::d3d9::IDirect3DQuery9;
 use winapi::shared::winerror::*;
+use winapi::um::unknwnbase::IUnknown;
 
 use std::convert::TryInto;
 use std::ptr::null_mut;
@@ -17,7 +19,12 @@ use std::ptr::null_mut;
 ///
 /// *   [IDirect3DDevice9Ext::create_query]
 #[derive(Clone)] #[repr(transparent)]
-pub struct Query(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DQuery9>);
+pub struct Query(pub(crate) mcom::Rc<IDirect3DQuery9>);
+
+unsafe impl AsSafe<IUnknown         > for Query { fn as_safe(&self) -> &IUnknown        { &**self.0 } }
+unsafe impl AsSafe<IDirect3DQuery9  > for Query { fn as_safe(&self) -> &IDirect3DQuery9 { &*self.0 } }
+
+
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dquery9)\]
 /// IDirect3DQuery9 extension methods
@@ -40,7 +47,7 @@ pub struct Query(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DQuery9>);
 ///
 /// [Queries (Direct3D 9)]: https://docs.microsoft.com/en-us/windows/win32/direct3d9/queries
 ///
-pub trait IDirect3DQuery9Ext : private::Sealed {
+pub trait IDirect3DQuery9Ext : AsSafe<IDirect3DQuery9> {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dquery9-getdata)\]
     /// IDirect3DQuery9::GetData
     ///
@@ -102,11 +109,4 @@ pub trait IDirect3DQuery9Ext : private::Sealed {
     }
 }
 
-impl<T: private::Sealed> IDirect3DQuery9Ext for T {}
-
-mod private {
-    use winapi::shared::d3d9::IDirect3DQuery9;
-    pub unsafe trait Sealed                             { fn as_winapi(&self) -> &IDirect3DQuery9; }
-    unsafe impl Sealed for mcom::Rc<IDirect3DQuery9>    { fn as_winapi(&self) -> &IDirect3DQuery9 { &**self } }
-    unsafe impl Sealed for super::Query                 { fn as_winapi(&self) -> &IDirect3DQuery9 { &*self.0 } }
-}
+impl<T: AsSafe<IDirect3DQuery9>> IDirect3DQuery9Ext for T {}

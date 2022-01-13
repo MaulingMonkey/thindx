@@ -1,9 +1,10 @@
 use crate::*;
 use crate::d3d9::*;
 
-use winapi::shared::d3d9::Direct3DCreate9;
+use winapi::shared::d3d9::{Direct3DCreate9, IDirect3D9};
 use winapi::shared::d3d9types::{D3DDISPLAYMODE, D3DPRESENT_PARAMETERS};
 use winapi::shared::windef::{HMONITOR, HWND};
+use winapi::um::unknwnbase::IUnknown;
 
 use std::ptr::null_mut;
 
@@ -20,7 +21,10 @@ type ModeIndex      = u32;
 /// Microsoft's documentation claims that several APIs return [D3DERR::NOTAVAILABLE] when, in my testing, they return [D3DERR::INVALIDCALL] instead.
 /// Do not trust the greyed out, crossed out, air quoted documentation <span class="inaccurate">like this</span>!
 #[derive(Clone)] #[repr(transparent)]
-pub struct Direct3D(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3D9>);
+pub struct Direct3D(pub(crate) mcom::Rc<IDirect3D9>);
+
+unsafe impl AsSafe<IUnknown     > for Direct3D { fn as_safe(&self) -> &IUnknown     { &**self.0 } }
+unsafe impl AsSafe<IDirect3D9   > for Direct3D { fn as_safe(&self) -> &IDirect3D9   { &*self.0 } }
 
 
 
@@ -65,7 +69,7 @@ pub struct Direct3D(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3D9>);
 /// [GetDeviceCaps]:                https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getdevicecaps
 /// [RegisterSoftwareDevice]:       https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-registersoftwaredevice
 ///
-pub trait IDirect3D9Ext : private::Sealed {
+pub trait IDirect3D9Ext : AsSafe<IDirect3D9> + Sized {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-direct3dcreate9)\]
     /// Direct3DCreate9
     ///
@@ -89,7 +93,7 @@ pub trait IDirect3D9Ext : private::Sealed {
     /// *   [THINERR::NONSPECIFIC]  if d3d access is forbidden? (services?)
     /// *   Ok([Direct3D])          otherwise
     ///
-    /// Consider calling [Direct3DEx::create] instead if you want a meaningful error code than [THINERR::NONSPECIFIC].
+    /// Consider calling [Direct3DEx::create_ex] instead if you want a meaningful error code than [THINERR::NONSPECIFIC].
     ///
     /// ### Example
     ///
@@ -100,7 +104,7 @@ pub trait IDirect3D9Ext : private::Sealed {
     ///
     /// [IDirect3D9]:                   https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3d9
     ///
-    unsafe fn create(sdk_version: SdkVersion) -> Result<Self, MethodError> {
+    unsafe fn create(sdk_version: SdkVersion) -> Result<Self, MethodError> where Self : From<mcom::Rc<IDirect3D9>> {
         let d3d9 = Direct3DCreate9(sdk_version.into());
         mcom::Rc::from_raw_opt(d3d9).ok_or(MethodError("Direct3DCreate9", THINERR::NONSPECIFIC)).map(Self::from)
     }
@@ -556,14 +560,9 @@ pub trait IDirect3D9Ext : private::Sealed {
     // Pull requests welcome w/ unit testing coverage!
 }
 
-impl<T: private::Sealed> IDirect3D9Ext for T {}
+impl<T: AsSafe<IDirect3D9> + Sized> IDirect3D9Ext for T {}
 
-mod private {
-    use winapi::shared::d3d9::IDirect3D9;
-    pub unsafe trait Sealed : From<mcom::Rc<IDirect3D9>>    { fn as_winapi(&self) -> &IDirect3D9; }
-    unsafe impl Sealed for mcom::Rc<IDirect3D9>             { fn as_winapi(&self) -> &IDirect3D9 { &**self } }
-    unsafe impl Sealed for super::Direct3D                  { fn as_winapi(&self) -> &IDirect3D9 { &*self.0 } }
-}
+
 
 #[cfg(test)] mod tests {
     use dev::d3d9::*;

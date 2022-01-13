@@ -6,8 +6,10 @@ use crate::d3d9_h::interfaces::device_draw::{IndexData, VertexStreamData};
 
 use abibool::bool32;
 
+use winapi::shared::d3d9::IDirect3DDevice9;
 use winapi::shared::d3d9types::*;
 use winapi::shared::windef::RECT;
+use winapi::um::unknwnbase::IUnknown;
 use winapi::um::wingdi::*;
 
 use std::convert::TryInto;
@@ -39,7 +41,10 @@ pub(crate) const MAX_BUFFER_ALLOC : u32 = 0xFFFF_0000;
 /// | [Lighting](#lighting-16-bit)                  | Configure (and query) [Light]ing
 /// | [Viewports](#viewports)                       | Configure (and query) the [Viewport]
 #[derive(Clone)] #[repr(transparent)]
-pub struct Device(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DDevice9>);
+pub struct Device(pub(crate) mcom::Rc<IDirect3DDevice9>);
+
+unsafe impl AsSafe<IUnknown         > for Device { fn as_safe(&self) -> &IUnknown           { &**self.0 } }
+unsafe impl AsSafe<IDirect3DDevice9 > for Device { fn as_safe(&self) -> &IDirect3DDevice9   { &*self.0 } }
 
 
 
@@ -294,7 +299,7 @@ pub struct Device(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DDevice9>);
 /// [UpdateTexture]:                https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-updatetexture
 /// [ValidateDevice]:               https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-validatedevice
 ///
-pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
+pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     // TODO: fn scene(&self) with sane error handling / drop behavior?
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-beginscene)\]
@@ -2375,14 +2380,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     }
 }
 
-impl<T: private::Sealed> IDirect3DDevice9Ext for T {}
-
-mod private {
-    use winapi::shared::d3d9::IDirect3DDevice9;
-    pub unsafe trait Sealed                             { fn as_winapi(&self) -> &IDirect3DDevice9; }
-    unsafe impl Sealed for mcom::Rc<IDirect3DDevice9>   { fn as_winapi(&self) -> &IDirect3DDevice9 { &**self } }
-    unsafe impl Sealed for super::Device                { fn as_winapi(&self) -> &IDirect3DDevice9 { &*self.0 } }
-}
+impl<T: AsSafe<IDirect3DDevice9>> IDirect3DDevice9Ext for T {}
 
 
 

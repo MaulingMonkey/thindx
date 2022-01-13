@@ -1,5 +1,8 @@
 #![allow(dead_code)] // TODO: remove
 
+use winapi::shared::d3d9::IDirect3DStateBlock9;
+use winapi::um::unknwnbase::IUnknown;
+
 use crate::*;
 use crate::d3d9::*;
 
@@ -17,25 +20,10 @@ use std::ptr::null_mut;
 /// *   [IDirect3DDevice9Ext::create_state_block]
 /// *   [IDirect3DDevice9Ext::end_state_block]
 #[derive(Clone)] #[repr(transparent)]
-pub struct StateBlock(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DStateBlock9>);
+pub struct StateBlock(pub(crate) mcom::Rc<IDirect3DStateBlock9>);
 
-#[test] fn begin_end_state_block() {
-    use dev::d3d9::*;
-
-    let device = device_test();
-    assert_eq!(D3DERR::INVALIDCALL, device.end_state_block().err()); // not in a state block
-
-    device.begin_state_block().unwrap();
-    device.end_state_block().unwrap();
-    assert_eq!(D3DERR::INVALIDCALL, device.end_state_block().err()); // not in a state block
-
-    device.begin_state_block().unwrap();
-    assert_eq!(D3DERR::INVALIDCALL, device.begin_state_block().err()); // cannot nest state blocks
-    device.end_state_block().unwrap();
-    assert_eq!(D3DERR::INVALIDCALL, device.end_state_block().err());
-}
-
-// TODO: test explicit state capturing
+unsafe impl AsSafe<IUnknown             > for StateBlock { fn as_safe(&self) -> &IUnknown               { &**self.0 } }
+unsafe impl AsSafe<IDirect3DStateBlock9 > for StateBlock { fn as_safe(&self) -> &IDirect3DStateBlock9   { &*self.0 } }
 
 
 
@@ -54,7 +42,7 @@ pub struct StateBlock(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DStateBl
 /// [Capture]:      https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dstateblock9-capture
 /// [GetDevice]:    https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dstateblock9-getdevice
 ///
-pub trait IDirect3DStateBlock9Ext : private::Sealed {
+pub trait IDirect3DStateBlock9Ext : AsSafe<IDirect3DStateBlock9> {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dstateblock9-apply)\]
     /// IDirect3DStateBlock9::Apply
     ///
@@ -100,11 +88,24 @@ pub trait IDirect3DStateBlock9Ext : private::Sealed {
     }
 }
 
-impl<T: private::Sealed> IDirect3DStateBlock9Ext for T {}
+impl<T: AsSafe<IDirect3DStateBlock9>> IDirect3DStateBlock9Ext for T {}
 
-mod private {
-    use winapi::shared::d3d9::IDirect3DStateBlock9;
-    pub unsafe trait Sealed { fn as_winapi(&self) -> &IDirect3DStateBlock9; }
-    unsafe impl Sealed for mcom::Rc<IDirect3DStateBlock9>   { fn as_winapi(&self) -> &IDirect3DStateBlock9 { &**self } }
-    unsafe impl Sealed for super::StateBlock                { fn as_winapi(&self) -> &IDirect3DStateBlock9 { &*self.0 } }
+
+
+#[test] fn begin_end_state_block() {
+    use dev::d3d9::*;
+
+    let device = device_test();
+    assert_eq!(D3DERR::INVALIDCALL, device.end_state_block().err()); // not in a state block
+
+    device.begin_state_block().unwrap();
+    device.end_state_block().unwrap();
+    assert_eq!(D3DERR::INVALIDCALL, device.end_state_block().err()); // not in a state block
+
+    device.begin_state_block().unwrap();
+    assert_eq!(D3DERR::INVALIDCALL, device.begin_state_block().err()); // cannot nest state blocks
+    device.end_state_block().unwrap();
+    assert_eq!(D3DERR::INVALIDCALL, device.end_state_block().err());
 }
+
+// TODO: test explicit state capturing

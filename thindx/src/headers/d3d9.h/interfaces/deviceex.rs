@@ -3,7 +3,9 @@
 use crate::*;
 use crate::d3d9::*;
 
+use winapi::shared::d3d9::{IDirect3DDevice9Ex, IDirect3DDevice9};
 use winapi::shared::d3d9types::*;
+use winapi::um::unknwnbase::IUnknown;
 use winapi::um::wingdi::*;
 
 use std::convert::TryInto;
@@ -16,7 +18,13 @@ use std::ptr::*;
 /// Core interface used for general rendering, resource creation, etc.
 #[cfg(feature = "9ex")]
 #[derive(Clone)] #[repr(transparent)]
-pub struct DeviceEx(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DDevice9Ex>);
+pub struct DeviceEx(pub(crate) mcom::Rc<IDirect3DDevice9Ex>);
+
+#[cfg(feature = "9ex")] unsafe impl AsSafe<IUnknown             > for DeviceEx { fn as_safe(&self) -> &IUnknown            { &***self.0 } }
+#[cfg(feature = "9ex")] unsafe impl AsSafe<IDirect3DDevice9     > for DeviceEx { fn as_safe(&self) -> &IDirect3DDevice9    { &**self.0 } }
+#[cfg(feature = "9ex")] unsafe impl AsSafe<IDirect3DDevice9Ex   > for DeviceEx { fn as_safe(&self) -> &IDirect3DDevice9Ex  { &*self.0 } }
+
+
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3ddevice9ex)\]
 /// IDirect3DDevice9Ex extension methods
@@ -60,7 +68,7 @@ pub struct DeviceEx(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DDevice9Ex
 /// [WaitForVBlank]:                    https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-waitforvblank
 ///
 #[cfg(feature = "9ex")]
-pub trait IDirect3DDevice9ExExt : private::Sealed {
+pub trait IDirect3DDevice9ExExt : AsSafe<IDirect3DDevice9Ex> {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-checkdevicestate)\]
     /// IDirect3DDevice9Ex::CheckDeviceState
     ///
@@ -504,12 +512,4 @@ pub trait IDirect3DDevice9ExExt : private::Sealed {
 }
 
 #[cfg(feature = "9ex")]
-impl<T: private::Sealed> IDirect3DDevice9ExExt for T {}
-
-#[cfg(feature = "9ex")]
-mod private {
-    use winapi::shared::d3d9::IDirect3DDevice9Ex;
-    pub unsafe trait Sealed                             { fn as_winapi(&self) -> &IDirect3DDevice9Ex; }
-    unsafe impl Sealed for mcom::Rc<IDirect3DDevice9Ex> { fn as_winapi(&self) -> &IDirect3DDevice9Ex { &**self } }
-    unsafe impl Sealed for super::DeviceEx              { fn as_winapi(&self) -> &IDirect3DDevice9Ex { &*self.0 } }
-}
+impl<T: AsSafe<IDirect3DDevice9Ex>> IDirect3DDevice9ExExt for T {}

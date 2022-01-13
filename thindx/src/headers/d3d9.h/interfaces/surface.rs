@@ -4,8 +4,10 @@ use crate::*;
 use crate::d3d9::*;
 
 use winapi::Interface;
+use winapi::shared::d3d9::{IDirect3DSurface9, IDirect3DResource9};
 use winapi::shared::d3d9types::*;
 use winapi::shared::windef::HDC;
+use winapi::um::unknwnbase::IUnknown;
 
 use std::ptr::{null, null_mut};
 
@@ -15,7 +17,11 @@ use std::ptr::{null, null_mut};
 /// (extends [Resource])
 /// A dense 2-dimensional region of data, often belonging to a [Texture]
 #[derive(Clone)] #[repr(transparent)]
-pub struct Surface(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DSurface9>);
+pub struct Surface(pub(crate) mcom::Rc<IDirect3DSurface9>);
+
+unsafe impl AsSafe<IUnknown             > for Surface { fn as_safe(&self) -> &IUnknown           { &***self.0 } }
+unsafe impl AsSafe<IDirect3DResource9   > for Surface { fn as_safe(&self) -> &IDirect3DResource9 { &**self.0 } }
+unsafe impl AsSafe<IDirect3DSurface9    > for Surface { fn as_safe(&self) -> &IDirect3DSurface9  { &*self.0 } }
 
 
 
@@ -40,7 +46,7 @@ pub struct Surface(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DSurface9>)
 /// [ReleaseDC]:    https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dsurface9-releasedc
 /// [UnlockRect]:   https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dsurface9-unlockrect
 ///
-pub trait IDirect3DSurface9Ext : private::Sealed {
+pub trait IDirect3DSurface9Ext : AsSafe<IDirect3DSurface9> {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3dsurface9-getcontainer)\]
     /// IDirect3DSurface9::GetContainer
     ///
@@ -223,14 +229,7 @@ pub trait IDirect3DSurface9Ext : private::Sealed {
     }
 }
 
-impl<T: private::Sealed> IDirect3DSurface9Ext for T {}
-
-mod private {
-    use winapi::shared::d3d9::IDirect3DSurface9;
-    pub unsafe trait Sealed                             { fn as_winapi(&self) -> &IDirect3DSurface9; }
-    unsafe impl Sealed for mcom::Rc<IDirect3DSurface9>  { fn as_winapi(&self) -> &IDirect3DSurface9 { &**self } }
-    unsafe impl Sealed for super::Surface               { fn as_winapi(&self) -> &IDirect3DSurface9 { &*self.0 } }
-}
+impl<T: AsSafe<IDirect3DSurface9>> IDirect3DSurface9Ext for T {}
 
 
 

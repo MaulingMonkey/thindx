@@ -2,6 +2,8 @@ use crate::*;
 use crate::d3d9::*;
 
 use winapi::ctypes::c_void;
+use winapi::shared::d3d9::{IDirect3DIndexBuffer9, IDirect3DVertexBuffer9, IDirect3DResource9};
+use winapi::um::unknwnbase::IUnknown;
 
 use std::ptr::null_mut;
 
@@ -18,7 +20,7 @@ use std::ptr::null_mut;
 /// *   [IDirect3DDevice9Ext::set_indices]
 /// *   [IDirect3DDevice9Ext::get_indices]
 #[derive(Clone)] #[repr(transparent)]
-pub struct IndexBuffer(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DIndexBuffer9>);
+pub struct IndexBuffer(pub(crate) mcom::Rc<IDirect3DIndexBuffer9>);
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dvertexbuffer9)\]
 /// (extends [Resource])
@@ -33,7 +35,17 @@ pub struct IndexBuffer(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DIndexB
 /// *   [IDirect3DDevice9Ext::get_stream_source]
 /// *   [IDirect3DDevice9Ext::get_stream_source_freq]
 #[derive(Clone)] #[repr(transparent)]
-pub struct VertexBuffer(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DVertexBuffer9>);
+pub struct VertexBuffer(pub(crate) mcom::Rc<IDirect3DVertexBuffer9>);
+
+
+
+unsafe impl AsSafe<IUnknown                 > for IndexBuffer { fn as_safe(&self) -> &IUnknown               { &***self.0 } }
+unsafe impl AsSafe<IDirect3DResource9       > for IndexBuffer { fn as_safe(&self) -> &IDirect3DResource9     { &**self.0 } }
+unsafe impl AsSafe<IDirect3DIndexBuffer9    > for IndexBuffer { fn as_safe(&self) -> &IDirect3DIndexBuffer9  { &*self.0 } }
+
+unsafe impl AsSafe<IUnknown                 > for VertexBuffer { fn as_safe(&self) -> &IUnknown                  { &***self.0 } }
+unsafe impl AsSafe<IDirect3DResource9       > for VertexBuffer { fn as_safe(&self) -> &IDirect3DResource9        { &**self.0 } }
+unsafe impl AsSafe<IDirect3DVertexBuffer9   > for VertexBuffer { fn as_safe(&self) -> &IDirect3DVertexBuffer9    { &*self.0 } }
 
 
 
@@ -52,7 +64,7 @@ pub struct VertexBuffer(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DVerte
 /// [Lock]:     https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dindexbuffer9-lock
 /// [Unlock]:   https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dindexbuffer9-unlock
 ///
-pub trait IDirect3DIndexBuffer9Ext : index_buffer::Sealed {
+pub trait IDirect3DIndexBuffer9Ext : AsSafe<IDirect3DIndexBuffer9> {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dindexbuffer9-getdesc)\]
     /// IDirect3DIndexBuffer9::GetDesc
     ///
@@ -143,14 +155,7 @@ pub trait IDirect3DIndexBuffer9Ext : index_buffer::Sealed {
     }
 }
 
-impl<T: index_buffer::Sealed> IDirect3DIndexBuffer9Ext for T {}
-
-mod index_buffer {
-    use winapi::shared::d3d9::IDirect3DIndexBuffer9;
-    pub unsafe trait Sealed                                 { fn as_winapi(&self) -> &IDirect3DIndexBuffer9; }
-    unsafe impl Sealed for mcom::Rc<IDirect3DIndexBuffer9>  { fn as_winapi(&self) -> &IDirect3DIndexBuffer9 { &**self } }
-    unsafe impl Sealed for super::IndexBuffer               { fn as_winapi(&self) -> &IDirect3DIndexBuffer9 { &*self.0 } }
-}
+impl<T: AsSafe<IDirect3DIndexBuffer9>> IDirect3DIndexBuffer9Ext for T {}
 
 
 
@@ -169,7 +174,7 @@ mod index_buffer {
 /// [Lock]:     https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexbuffer9-lock
 /// [Unlock]:   https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexbuffer9-unlock
 ///
-pub trait IDirect3DVertexBuffer9Ext : vertex_buffer::Sealed {
+pub trait IDirect3DVertexBuffer9Ext : AsSafe<IDirect3DVertexBuffer9> {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexbuffer9-getdesc)\]
     /// IDirect3DVertexBuffer9::GetDesc
     ///
@@ -265,14 +270,7 @@ pub trait IDirect3DVertexBuffer9Ext : vertex_buffer::Sealed {
     }
 }
 
-impl<T: vertex_buffer::Sealed> IDirect3DVertexBuffer9Ext for T {}
-
-mod vertex_buffer {
-    use winapi::shared::d3d9::IDirect3DVertexBuffer9;
-    pub unsafe trait Sealed                                 { fn as_winapi(&self) -> &IDirect3DVertexBuffer9; }
-    unsafe impl Sealed for mcom::Rc<IDirect3DVertexBuffer9> { fn as_winapi(&self) -> &IDirect3DVertexBuffer9 { &**self } }
-    unsafe impl Sealed for super::VertexBuffer              { fn as_winapi(&self) -> &IDirect3DVertexBuffer9 { &*self.0 } }
-}
+impl<T: AsSafe<IDirect3DVertexBuffer9>> IDirect3DVertexBuffer9Ext for T {}
 
 
 

@@ -1,3 +1,6 @@
+use winapi::shared::d3d9::{IDirect3DPixelShader9, IDirect3DVertexShader9};
+use winapi::um::unknwnbase::IUnknown;
+
 use crate::*;
 use crate::d3d9::*;
 
@@ -20,7 +23,7 @@ use std::ptr::null_mut;
 /// *   [IDirect3DDevice9Ext::set_pixel_shader_constant_i]
 /// *   [IDirect3DDevice9Ext::set_pixel_shader_constant_iv]
 #[derive(Clone)] #[repr(transparent)]
-pub struct PixelShader(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DPixelShader9>);
+pub struct PixelShader(pub(crate) mcom::Rc<IDirect3DPixelShader9>);
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dvertexshader9)\]
 /// A [vertex shader](https://en.wikipedia.org/wiki/Shader#Vertex_shaders) transforms mesh verticies when rendering.
@@ -36,7 +39,15 @@ pub struct PixelShader(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DPixelS
 /// *   [IDirect3DDevice9Ext::set_vertex_shader_constant_i]
 /// *   [IDirect3DDevice9Ext::set_vertex_shader_constant_iv]
 #[derive(Clone)] #[repr(transparent)]
-pub struct VertexShader(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DVertexShader9>);
+pub struct VertexShader(pub(crate) mcom::Rc<IDirect3DVertexShader9>);
+
+
+
+unsafe impl AsSafe<IUnknown> for PixelShader  { fn as_safe(&self) -> &IUnknown { &**self.0 } }
+unsafe impl AsSafe<IUnknown> for VertexShader { fn as_safe(&self) -> &IUnknown { &**self.0 } }
+
+unsafe impl AsSafe<IDirect3DPixelShader9 > for PixelShader  { fn as_safe(&self) -> &IDirect3DPixelShader9  { &*self.0 } }
+unsafe impl AsSafe<IDirect3DVertexShader9> for VertexShader { fn as_safe(&self) -> &IDirect3DVertexShader9 { &*self.0 } }
 
 
 
@@ -55,7 +66,7 @@ pub struct VertexShader(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DVerte
 /// [GetDevice]:    https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dpixelshader9-getdevice
 /// [GetFunction]:  https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dpixelshader9-getfunction
 ///
-pub trait IDirect3DPixelShader9Ext : pixel_shader::Sealed {
+pub trait IDirect3DPixelShader9Ext : AsSafe<IDirect3DPixelShader9> {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dpixelshader9-getdevice)\]
     /// IDirect3DPixelShader9::GetDevice
     ///
@@ -124,14 +135,7 @@ pub trait IDirect3DPixelShader9Ext : pixel_shader::Sealed {
     }
 }
 
-impl<T: pixel_shader::Sealed> IDirect3DPixelShader9Ext for T {}
-
-mod pixel_shader {
-    use winapi::shared::d3d9::IDirect3DPixelShader9;
-    pub unsafe trait Sealed                                 { fn as_winapi(&self) -> &IDirect3DPixelShader9; }
-    unsafe impl Sealed for mcom::Rc<IDirect3DPixelShader9>  { fn as_winapi(&self) -> &IDirect3DPixelShader9 { &**self } }
-    unsafe impl Sealed for super::PixelShader               { fn as_winapi(&self) -> &IDirect3DPixelShader9 { &*self.0 } }
-}
+impl<T: AsSafe<IDirect3DPixelShader9>> IDirect3DPixelShader9Ext for T {}
 
 
 
@@ -150,7 +154,7 @@ mod pixel_shader {
 /// [GetDevice]:    https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexshader9-getdevice
 /// [GetFunction]:  https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexshader9-getfunction
 ///
-pub trait IDirect3DVertexShader9Ext : vertex_shader::Sealed {
+pub trait IDirect3DVertexShader9Ext : AsSafe<IDirect3DVertexShader9> {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexshader9-getdevice)\]
     /// IDirect3DVertexShader9::GetDevice
     ///
@@ -219,14 +223,9 @@ pub trait IDirect3DVertexShader9Ext : vertex_shader::Sealed {
     }
 }
 
-impl<T: vertex_shader::Sealed> IDirect3DVertexShader9Ext for T {}
+impl<T: AsSafe<IDirect3DVertexShader9>> IDirect3DVertexShader9Ext for T {}
 
-mod vertex_shader {
-    use winapi::shared::d3d9::IDirect3DVertexShader9;
-    pub unsafe trait Sealed                                 { fn as_winapi(&self) -> &IDirect3DVertexShader9; }
-    unsafe impl Sealed for mcom::Rc<IDirect3DVertexShader9> { fn as_winapi(&self) -> &IDirect3DVertexShader9 { &**self } }
-    unsafe impl Sealed for super::VertexShader              { fn as_winapi(&self) -> &IDirect3DVertexShader9 { &*self.0 } }
-}
+
 
 // TODO: testing, glorious testing
 // TODO: examples

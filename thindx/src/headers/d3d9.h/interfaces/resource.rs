@@ -1,7 +1,9 @@
 use crate::*;
 use crate::d3d9::*;
 
+use winapi::shared::d3d9::IDirect3DResource9;
 use winapi::shared::guiddef::GUID;
+use winapi::um::unknwnbase::IUnknown;
 
 use std::convert::TryInto;
 use std::ptr::null_mut;
@@ -19,7 +21,10 @@ use std::ptr::null_mut;
 /// *   [IDirect3DDevice9Ext::create_index_buffer]
 /// *   [IDirect3DDevice9Ext::create_vertex_buffer]
 #[derive(Clone)] #[repr(transparent)]
-pub struct Resource(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DResource9>);
+pub struct Resource(pub(crate) mcom::Rc<IDirect3DResource9>);
+
+unsafe impl AsSafe<IUnknown             > for Resource { fn as_safe(&self) -> &IUnknown             { &**self.0 } }
+unsafe impl AsSafe<IDirect3DResource9   > for Resource { fn as_safe(&self) -> &IDirect3DResource9   { &*self.0 } }
 
 impl Resource {
     /// Check if `self` is compatible with `device`, returning an `Err(...)` if it isn't.
@@ -32,6 +37,8 @@ impl Resource {
         }
     }
 }
+
+
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dresource9)\]
 /// IDirect3DResource9 extension methods
@@ -61,7 +68,7 @@ impl Resource {
 /// [SetPriority]:      https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-setpriority
 /// [SetPrivateData]:   https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-setprivatedata
 ///
-pub trait IDirect3DResource9Ext : private::Sealed {
+pub trait IDirect3DResource9Ext : AsSafe<IDirect3DResource9> {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-freeprivatedata)\]
     /// IDirect3DResource9::FreePrivateData
     ///
@@ -172,28 +179,9 @@ pub trait IDirect3DResource9Ext : private::Sealed {
     // figure out where unsoundness should lie - both of those fns?  set_private_data too, as it can invalidate unknown ptrs?
 }
 
-impl<T: private::Sealed> IDirect3DResource9Ext for T {}
+impl<T: AsSafe<IDirect3DResource9>> IDirect3DResource9Ext for T {}
 
-mod private {
-    use winapi::shared::d3d9::*;
-    pub unsafe trait Sealed                                     { fn as_winapi(&self) -> &IDirect3DResource9; }
-    unsafe impl Sealed for mcom::Rc<IDirect3DResource9>         { fn as_winapi(&self) -> &IDirect3DResource9 { &**self } }
-    unsafe impl Sealed for mcom::Rc<IDirect3DBaseTexture9>      { fn as_winapi(&self) -> &IDirect3DResource9 { &***self } }
-    unsafe impl Sealed for mcom::Rc<IDirect3DCubeTexture9>      { fn as_winapi(&self) -> &IDirect3DResource9 { &****self } }
-    unsafe impl Sealed for mcom::Rc<IDirect3DVolumeTexture9>    { fn as_winapi(&self) -> &IDirect3DResource9 { &****self } }
-    unsafe impl Sealed for mcom::Rc<IDirect3DTexture9>          { fn as_winapi(&self) -> &IDirect3DResource9 { &****self } }
-    unsafe impl Sealed for mcom::Rc<IDirect3DSurface9>          { fn as_winapi(&self) -> &IDirect3DResource9 { &***self } }
-    unsafe impl Sealed for mcom::Rc<IDirect3DIndexBuffer9>      { fn as_winapi(&self) -> &IDirect3DResource9 { &***self } }
-    unsafe impl Sealed for mcom::Rc<IDirect3DVertexBuffer9>     { fn as_winapi(&self) -> &IDirect3DResource9 { &***self } }
-    unsafe impl Sealed for super::Resource                      { fn as_winapi(&self) -> &IDirect3DResource9 { &*self.0 } }
-    unsafe impl Sealed for super::BaseTexture                   { fn as_winapi(&self) -> &IDirect3DResource9 { &**self.0 } }
-    unsafe impl Sealed for super::CubeTexture                   { fn as_winapi(&self) -> &IDirect3DResource9 { &***self.0 } }
-    unsafe impl Sealed for super::VolumeTexture                 { fn as_winapi(&self) -> &IDirect3DResource9 { &***self.0 } }
-    unsafe impl Sealed for super::Texture                       { fn as_winapi(&self) -> &IDirect3DResource9 { &***self.0 } }
-    unsafe impl Sealed for super::Surface                       { fn as_winapi(&self) -> &IDirect3DResource9 { &**self.0 } }
-    unsafe impl Sealed for super::IndexBuffer                   { fn as_winapi(&self) -> &IDirect3DResource9 { &**self.0 } }
-    unsafe impl Sealed for super::VertexBuffer                  { fn as_winapi(&self) -> &IDirect3DResource9 { &**self.0 } }
-}
+
 
 // TODO: examples
 // TODO: integration tests

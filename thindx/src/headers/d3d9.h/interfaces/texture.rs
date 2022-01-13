@@ -3,7 +3,9 @@
 use crate::*;
 use crate::d3d9::*;
 
+use winapi::shared::d3d9::*;
 use winapi::shared::d3d9types::*;
+use winapi::um::unknwnbase::IUnknown;
 
 use std::ptr::*;
 
@@ -13,25 +15,44 @@ use std::ptr::*;
 /// (extends [Resource])
 /// [Texture], [CubeTexture], or [VolumeTexture]
 #[derive(Clone)] #[repr(transparent)]
-pub struct BaseTexture(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DBaseTexture9>);
+pub struct BaseTexture(pub(crate) mcom::Rc<IDirect3DBaseTexture9>);
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dcubetexture9)\]
 /// (extends [BaseTexture])
 /// 6-faced 2D texture for use with [cube mapping](https://en.wikipedia.org/wiki/Cube_mapping)
 #[derive(Clone)] #[repr(transparent)]
-pub struct CubeTexture(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DCubeTexture9>);
+pub struct CubeTexture(pub(crate) mcom::Rc<IDirect3DCubeTexture9>);
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dtexture9)\]
 /// (extends [BaseTexture])
 /// A dense 2-dimensional set of "pixels"
 #[derive(Clone)] #[repr(transparent)]
-pub struct Texture(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DTexture9>);
+pub struct Texture(pub(crate) mcom::Rc<IDirect3DTexture9>);
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dvolumetexture9)\]
 /// (extends [BaseTexture])
 /// A dense 3-dimensional set of "pixels"
 #[derive(Clone)] #[repr(transparent)]
-pub struct VolumeTexture(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DVolumeTexture9>);
+pub struct VolumeTexture(pub(crate) mcom::Rc<IDirect3DVolumeTexture9>);
+
+unsafe impl AsSafe<IUnknown                 > for BaseTexture   { fn as_safe(&self) -> &IUnknown { &***self.0 } }
+unsafe impl AsSafe<IUnknown                 > for CubeTexture   { fn as_safe(&self) -> &IUnknown { &****self.0 } }
+unsafe impl AsSafe<IUnknown                 > for Texture       { fn as_safe(&self) -> &IUnknown { &****self.0 } }
+unsafe impl AsSafe<IUnknown                 > for VolumeTexture { fn as_safe(&self) -> &IUnknown { &****self.0 } }
+
+unsafe impl AsSafe<IDirect3DResource9       > for BaseTexture   { fn as_safe(&self) -> &IDirect3DResource9 { &**self.0 } }
+unsafe impl AsSafe<IDirect3DResource9       > for CubeTexture   { fn as_safe(&self) -> &IDirect3DResource9 { &***self.0 } }
+unsafe impl AsSafe<IDirect3DResource9       > for Texture       { fn as_safe(&self) -> &IDirect3DResource9 { &***self.0 } }
+unsafe impl AsSafe<IDirect3DResource9       > for VolumeTexture { fn as_safe(&self) -> &IDirect3DResource9 { &***self.0 } }
+
+unsafe impl AsSafe<IDirect3DBaseTexture9    > for BaseTexture   { fn as_safe(&self) -> &IDirect3DBaseTexture9 { &*self.0 } }
+unsafe impl AsSafe<IDirect3DBaseTexture9    > for CubeTexture   { fn as_safe(&self) -> &IDirect3DBaseTexture9 { &**self.0 } }
+unsafe impl AsSafe<IDirect3DBaseTexture9    > for Texture       { fn as_safe(&self) -> &IDirect3DBaseTexture9 { &**self.0 } }
+unsafe impl AsSafe<IDirect3DBaseTexture9    > for VolumeTexture { fn as_safe(&self) -> &IDirect3DBaseTexture9 { &**self.0 } }
+
+unsafe impl AsSafe<IDirect3DCubeTexture9    > for CubeTexture   { fn as_safe(&self) -> &IDirect3DCubeTexture9    { &*self.0 } }
+unsafe impl AsSafe<IDirect3DTexture9        > for Texture       { fn as_safe(&self) -> &IDirect3DTexture9        { &*self.0 } }
+unsafe impl AsSafe<IDirect3DVolumeTexture9  > for VolumeTexture { fn as_safe(&self) -> &IDirect3DVolumeTexture9  { &*self.0 } }
 
 
 
@@ -131,7 +152,7 @@ impl SafeDevice {
 /// [SetAutoGenFilterType]: https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-setautogenfiltertype
 /// [SetLOD]:               https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-setlod
 ///
-pub trait IDirect3DBaseTexture9Ext : base_texture::Sealed {
+pub trait IDirect3DBaseTexture9Ext : AsSafe<IDirect3DBaseTexture9> {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-generatemipsublevels)\]
     /// IDirect3DBaseTexture9::GenerateMipSubLevels
     ///
@@ -296,20 +317,7 @@ pub trait IDirect3DBaseTexture9Ext : base_texture::Sealed {
     }
 }
 
-impl<T: base_texture::Sealed> IDirect3DBaseTexture9Ext for T {}
-
-mod base_texture {
-    use winapi::shared::d3d9::*;
-    pub unsafe trait Sealed                                 { fn as_winapi(&self) -> &IDirect3DBaseTexture9; }
-    unsafe impl Sealed for mcom::Rc<IDirect3DBaseTexture9>  { fn as_winapi(&self) -> &IDirect3DBaseTexture9 { &**self } }
-    unsafe impl Sealed for mcom::Rc<IDirect3DTexture9>      { fn as_winapi(&self) -> &IDirect3DBaseTexture9 { &***self } }
-    unsafe impl Sealed for mcom::Rc<IDirect3DCubeTexture9>  { fn as_winapi(&self) -> &IDirect3DBaseTexture9 { &***self } }
-    unsafe impl Sealed for mcom::Rc<IDirect3DVolumeTexture9>{ fn as_winapi(&self) -> &IDirect3DBaseTexture9 { &***self } }
-    unsafe impl Sealed for super::BaseTexture               { fn as_winapi(&self) -> &IDirect3DBaseTexture9 { &*self.0 } }
-    unsafe impl Sealed for super::Texture                   { fn as_winapi(&self) -> &IDirect3DBaseTexture9 { &**self.0 } }
-    unsafe impl Sealed for super::CubeTexture               { fn as_winapi(&self) -> &IDirect3DBaseTexture9 { &**self.0 } }
-    unsafe impl Sealed for super::VolumeTexture             { fn as_winapi(&self) -> &IDirect3DBaseTexture9 { &**self.0 } }
-}
+impl<T: AsSafe<IDirect3DBaseTexture9>> IDirect3DBaseTexture9Ext for T {}
 
 
 
@@ -347,7 +355,7 @@ mod base_texture {
 /// [SetAutoGenFilterType]:     https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-setautogenfiltertype
 /// [SetLOD]:                   https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-setlod
 ///
-pub trait IDirect3DCubeTexture9Ext : cube_texture::Sealed {
+pub trait IDirect3DCubeTexture9Ext : AsSafe<IDirect3DCubeTexture9> {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcubetexture9-adddirtyrect)\]
     /// IDirect3DCubeTexture9::AddDirtyRect
     ///
@@ -517,14 +525,7 @@ pub trait IDirect3DCubeTexture9Ext : cube_texture::Sealed {
     }
 }
 
-impl<T: cube_texture::Sealed> IDirect3DCubeTexture9Ext for T {}
-
-mod cube_texture {
-    use winapi::shared::d3d9::IDirect3DCubeTexture9;
-    pub unsafe trait Sealed                                 { fn as_winapi(&self) -> &IDirect3DCubeTexture9; }
-    unsafe impl Sealed for mcom::Rc<IDirect3DCubeTexture9>  { fn as_winapi(&self) -> &IDirect3DCubeTexture9 { &**self } }
-    unsafe impl Sealed for super::CubeTexture               { fn as_winapi(&self) -> &IDirect3DCubeTexture9 { &*self.0 } }
-}
+impl<T: AsSafe<IDirect3DCubeTexture9>> IDirect3DCubeTexture9Ext for T {}
 
 
 
@@ -562,7 +563,7 @@ mod cube_texture {
 /// [SetAutoGenFilterType]:     https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-setautogenfiltertype
 /// [SetLOD]:                   https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-setlod
 ///
-pub trait IDirect3DTexture9Ext : texture::Sealed {
+pub trait IDirect3DTexture9Ext : AsSafe<IDirect3DTexture9> {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dtexture9-adddirtyrect)\]
     /// IDirect3DTexture9::AddDirtyRect
     ///
@@ -726,15 +727,7 @@ pub trait IDirect3DTexture9Ext : texture::Sealed {
     }
 }
 
-impl<T: texture::Sealed> IDirect3DTexture9Ext for T {}
-
-#[allow(clippy::module_inception)] // temporary internal junk anyways
-mod texture {
-    use winapi::shared::d3d9::IDirect3DTexture9;
-    pub unsafe trait Sealed                             { fn as_winapi(&self) -> &IDirect3DTexture9; }
-    unsafe impl Sealed for mcom::Rc<IDirect3DTexture9>  { fn as_winapi(&self) -> &IDirect3DTexture9 { &**self } }
-    unsafe impl Sealed for super::Texture               { fn as_winapi(&self) -> &IDirect3DTexture9 { &*self.0 } }
-}
+impl<T: AsSafe<IDirect3DTexture9>> IDirect3DTexture9Ext for T {}
 
 
 
@@ -772,7 +765,7 @@ mod texture {
 /// [SetAutoGenFilterType]:     https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-setautogenfiltertype
 /// [SetLOD]:                   https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-setlod
 ///
-pub trait IDirect3DVolumeTexture9Ext : volume_texture::Sealed {
+pub trait IDirect3DVolumeTexture9Ext : AsSafe<IDirect3DVolumeTexture9> {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolumetexture9-adddirtybox)\]
     /// IDirect3DVolumeTexture9::AddDirtyBox
     ///
@@ -935,15 +928,8 @@ pub trait IDirect3DVolumeTexture9Ext : volume_texture::Sealed {
     // TODO: Saner texture init/update methods
 }
 
-impl<T: volume_texture::Sealed> IDirect3DVolumeTexture9Ext for T {}
+impl<T: AsSafe<IDirect3DVolumeTexture9>> IDirect3DVolumeTexture9Ext for T {}
 
-mod volume_texture {
-    use winapi::shared::d3d9::IDirect3DVolumeTexture9;
-    pub unsafe trait Sealed                                     { fn as_winapi(&self) -> &IDirect3DVolumeTexture9; }
-    unsafe impl Sealed for mcom::Rc<IDirect3DVolumeTexture9>    { fn as_winapi(&self) -> &IDirect3DVolumeTexture9 { &**self } }
-    unsafe impl Sealed for super::VolumeTexture                 { fn as_winapi(&self) -> &IDirect3DVolumeTexture9 { &*self.0 } }
-}
-
-
-
-impl<'t> From<&'t Texture> for Option<&'t BaseTexture> { fn from(t: &'t Texture) -> Self { Some(&*t) } }
+impl<'t> From<&'t CubeTexture   > for Option<&'t BaseTexture> { fn from(t: &'t CubeTexture      ) -> Self { Some(&*t) } }
+impl<'t> From<&'t Texture       > for Option<&'t BaseTexture> { fn from(t: &'t Texture          ) -> Self { Some(&*t) } }
+impl<'t> From<&'t VolumeTexture > for Option<&'t BaseTexture> { fn from(t: &'t VolumeTexture    ) -> Self { Some(&*t) } }

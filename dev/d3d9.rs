@@ -38,7 +38,7 @@ pub const D3DADAPTER_DEFAULT : AdapterIndex = 0;
 // Direct3D{,Ex}
 
 #[cfg(feature = "9ex")]
-pub fn d3dex_test() -> Direct3DEx { unsafe { Direct3DEx::create(SdkVersion::default()).unwrap() } }
+pub fn d3dex_test() -> Direct3DEx { unsafe { Direct3DEx::create_ex(SdkVersion::default()).unwrap() } }
 pub fn d3d_test()   -> Direct3D   { unsafe { Direct3D  ::create(SdkVersion::default()).unwrap() } }
 
 

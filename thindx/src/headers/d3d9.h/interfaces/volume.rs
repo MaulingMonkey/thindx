@@ -2,8 +2,10 @@ use crate::*;
 use crate::d3d9::*;
 
 use winapi::Interface;
+use winapi::shared::d3d9::IDirect3DVolume9;
 use winapi::shared::d3d9types::*;
 use winapi::shared::guiddef::GUID;
+use winapi::um::unknwnbase::IUnknown;
 
 use std::convert::TryInto;
 use std::ptr::*;
@@ -13,7 +15,10 @@ use std::ptr::*;
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dvolume9)\]
 /// A dense 3-dimensional region of data, often belonging to a [VolumeTexture]
 #[derive(Clone)] #[repr(transparent)]
-pub struct Volume(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DVolume9>);
+pub struct Volume(pub(crate) mcom::Rc<IDirect3DVolume9>);
+
+unsafe impl AsSafe<IUnknown         > for Volume { fn as_safe(&self) -> &IUnknown         { &*self.0 } }
+unsafe impl AsSafe<IDirect3DVolume9 > for Volume { fn as_safe(&self) -> &IDirect3DVolume9 { &*self.0 } }
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dvolume9)\]
 /// IDirect3DVolume9 extension methods
@@ -43,7 +48,7 @@ pub struct Volume(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DVolume9>);
 /// [SetPrivateData]:   https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-setprivatedata
 /// [UnlockBox]:        https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-unlockbox
 ///
-pub trait IDirect3DVolume9Ext : private::Sealed {
+pub trait IDirect3DVolume9Ext : AsSafe<IDirect3DVolume9> {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-freeprivatedata)\]
     /// IDirect3DResource9::FreePrivateData
     ///
@@ -180,14 +185,9 @@ pub trait IDirect3DVolume9Ext : private::Sealed {
     }
 }
 
-impl<T: private::Sealed> IDirect3DVolume9Ext for T {}
+impl<T: AsSafe<IDirect3DVolume9>> IDirect3DVolume9Ext for T {}
 
-mod private {
-    use winapi::shared::d3d9::IDirect3DVolume9;
-    pub unsafe trait Sealed                             { fn as_winapi(&self) -> &IDirect3DVolume9; }
-    unsafe impl Sealed for mcom::Rc<IDirect3DVolume9>   { fn as_winapi(&self) -> &IDirect3DVolume9 { &**self } }
-    unsafe impl Sealed for super::Volume                { fn as_winapi(&self) -> &IDirect3DVolume9 { &*self.0 } }
-}
+
 
 // TODO: examples
 // TODO: integration tests

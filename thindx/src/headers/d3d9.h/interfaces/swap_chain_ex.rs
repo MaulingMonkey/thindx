@@ -5,6 +5,7 @@ use crate::d3d9::*;
 
 use winapi::shared::d3d9::*;
 use winapi::shared::minwindef::UINT;
+use winapi::um::unknwnbase::IUnknown;
 
 
 
@@ -14,6 +15,12 @@ use winapi::shared::minwindef::UINT;
 #[cfg(feature = "9ex")]
 #[derive(Clone)] #[repr(transparent)]
 pub struct SwapChainEx(pub(crate) mcom::Rc<IDirect3DSwapChain9Ex>);
+
+#[cfg(feature = "9ex")] unsafe impl AsSafe<IUnknown             > for SwapChainEx { fn as_safe(&self) -> &IUnknown               { &***self.0 } }
+#[cfg(feature = "9ex")] unsafe impl AsSafe<IDirect3DSwapChain9  > for SwapChainEx { fn as_safe(&self) -> &IDirect3DSwapChain9    { &**self.0 } }
+#[cfg(feature = "9ex")] unsafe impl AsSafe<IDirect3DSwapChain9Ex> for SwapChainEx { fn as_safe(&self) -> &IDirect3DSwapChain9Ex  { &*self.0 } }
+
+
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dswapchain9ex)\]
 /// IDirect3DSwapChain9Ex extension methods
@@ -31,7 +38,7 @@ pub struct SwapChainEx(pub(crate) mcom::Rc<IDirect3DSwapChain9Ex>);
 /// [GetPresentStatistics]: https://docs.microsoft.com/en-us/previous-versions/windows/desktop/legacy/bb205901(v=vs.85)
 ///
 #[cfg(feature = "9ex")]
-pub trait IDirect3DSwapChain9ExExt : private::Sealed {
+pub trait IDirect3DSwapChain9ExExt : AsSafe<IDirect3DSwapChain9Ex> {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9ex-getdisplaymodeex)\]
     /// IDirect3DSwapChain9Ex::GetDisplayModeEx
     ///
@@ -69,10 +76,3 @@ pub trait IDirect3DSwapChain9ExExt : private::Sealed {
 
 #[cfg(feature = "9ex")] impl IDirect3DSwapChain9ExExt for mcom::Rc<IDirect3DSwapChain9Ex>   {}
 #[cfg(feature = "9ex")] impl IDirect3DSwapChain9ExExt for super::SwapChainEx                {}
-
-#[cfg(feature = "9ex")] mod private {
-    use winapi::shared::d3d9::IDirect3DSwapChain9Ex;
-    pub unsafe trait Sealed                                 { fn as_winapi(&self) -> &IDirect3DSwapChain9Ex; }
-    unsafe impl Sealed for mcom::Rc<IDirect3DSwapChain9Ex>  { fn as_winapi(&self) -> &IDirect3DSwapChain9Ex { &**self } }
-    unsafe impl Sealed for super::SwapChainEx               { fn as_winapi(&self) -> &IDirect3DSwapChain9Ex { &*self.0 } }
-}

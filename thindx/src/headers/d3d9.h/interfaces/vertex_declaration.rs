@@ -1,5 +1,8 @@
 #![allow(dead_code)] // TODO: remove
 
+use winapi::shared::d3d9::IDirect3DVertexDeclaration9;
+use winapi::um::unknwnbase::IUnknown;
+
 use crate::*;
 use crate::d3d9::*;
 
@@ -10,7 +13,10 @@ use std::ptr::null_mut;
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dvertexdeclaration9)\]
 /// Describes the layout of the contents of a [VertexBuffer]
 #[derive(Clone)] #[repr(transparent)]
-pub struct VertexDeclaration(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3DVertexDeclaration9>);
+pub struct VertexDeclaration(pub(crate) mcom::Rc<IDirect3DVertexDeclaration9>);
+
+unsafe impl AsSafe<IUnknown                     > for VertexDeclaration { fn as_safe(&self) -> &IUnknown                     { &**self.0 } }
+unsafe impl AsSafe<IDirect3DVertexDeclaration9  > for VertexDeclaration { fn as_safe(&self) -> &IDirect3DVertexDeclaration9  { &*self.0 } }
 
 
 
@@ -29,7 +35,7 @@ pub struct VertexDeclaration(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3D
 /// [GetDeclaration]:   https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexdeclaration9-getdeclaration
 /// [GetDevice]:        https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexdeclaration9-getdevice
 ///
-pub trait IDirect3DVertexDeclaration9Ext : private::Sealed {
+pub trait IDirect3DVertexDeclaration9Ext : AsSafe<IDirect3DVertexDeclaration9> {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexdeclaration9-getdeclaration)\]
     /// IDirect3DVertexDeclaration9::GetDeclaration
     ///
@@ -99,14 +105,9 @@ pub trait IDirect3DVertexDeclaration9Ext : private::Sealed {
     }
 }
 
-impl<T: private::Sealed> IDirect3DVertexDeclaration9Ext for T {}
+impl<T: AsSafe<IDirect3DVertexDeclaration9>> IDirect3DVertexDeclaration9Ext for T {}
 
-mod private {
-    use winapi::shared::d3d9::IDirect3DVertexDeclaration9;
-    pub unsafe trait Sealed                                         { fn as_winapi(&self) -> &IDirect3DVertexDeclaration9; }
-    unsafe impl Sealed for mcom::Rc<IDirect3DVertexDeclaration9>    { fn as_winapi(&self) -> &IDirect3DVertexDeclaration9 { &**self } }
-    unsafe impl Sealed for super::VertexDeclaration                 { fn as_winapi(&self) -> &IDirect3DVertexDeclaration9 { &*self.0 } }
-}
+
 
 // #[test] fn create_vertex_declaration() {} // TODO
 

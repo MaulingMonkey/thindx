@@ -3,9 +3,10 @@
 use crate::*;
 use crate::d3d9::*;
 
-use winapi::shared::d3d9::Direct3DCreate9Ex;
+use winapi::shared::d3d9::{Direct3DCreate9Ex, IDirect3D9Ex, IDirect3D9};
 use winapi::shared::d3d9types::*;
 use winapi::shared::windef::HWND;
+use winapi::um::unknwnbase::IUnknown;
 
 use std::convert::TryInto;
 use std::ptr::*;
@@ -17,7 +18,13 @@ use std::ptr::*;
 /// Factory for use in creating your initial [DeviceEx].
 #[cfg(feature = "9ex")]
 #[derive(Clone)] #[repr(transparent)]
-pub struct Direct3DEx(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3D9Ex>);
+pub struct Direct3DEx(pub(crate) mcom::Rc<IDirect3D9Ex>);
+
+#[cfg(feature = "9ex")] unsafe impl AsSafe<IUnknown     > for Direct3DEx { fn as_safe(&self) -> &IUnknown       { &***self.0 } }
+#[cfg(feature = "9ex")] unsafe impl AsSafe<IDirect3D9   > for Direct3DEx { fn as_safe(&self) -> &IDirect3D9     { &**self.0 } }
+#[cfg(feature = "9ex")] unsafe impl AsSafe<IDirect3D9Ex > for Direct3DEx { fn as_safe(&self) -> &IDirect3D9Ex   { &*self.0 } }
+
+
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3d9ex)\]
 /// IDirect3D9Ex extension methods
@@ -43,7 +50,7 @@ pub struct Direct3DEx(pub(crate) mcom::Rc<winapi::shared::d3d9::IDirect3D9Ex>);
 /// [GetAdapterModeCountEx]:    https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9ex-getadaptermodecountex
 ///
 #[cfg(feature = "9ex")]
-pub trait IDirect3D9ExExt : private::Sealed {
+pub trait IDirect3D9ExExt : AsSafe<IDirect3D9Ex> {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-direct3dcreate9ex)\]
     /// Direct3DCreate9Ex
     ///
@@ -60,7 +67,7 @@ pub trait IDirect3D9ExExt : private::Sealed {
     /// *   Driver bugs (e.g. gpus may hang/reset/???)
     ///
     /// The `unsafe` of this fn is the token acknowledgement of those errors.
-    unsafe fn create(sdk_version: SdkVersion) -> Result<Self, MethodError> {
+    unsafe fn create_ex(sdk_version: SdkVersion) -> Result<Self, MethodError> where Self : From<mcom::Rc<IDirect3D9Ex>> {
         let mut d3d9ex = null_mut();
         let hr = Direct3DCreate9Ex(sdk_version.into(), &mut d3d9ex);
         MethodError::check("Direct3DCreate9Ex", hr)?;
@@ -139,26 +146,21 @@ pub trait IDirect3D9ExExt : private::Sealed {
     }
 }
 
-#[cfg(feature = "9ex")] impl<T: private::Sealed> IDirect3D9ExExt for T {}
+#[cfg(feature = "9ex")] impl<T: AsSafe<IDirect3D9Ex>> IDirect3D9ExExt for T {}
 
-#[cfg(feature = "9ex")] mod private {
-    use winapi::shared::d3d9::IDirect3D9Ex;
-    pub unsafe trait Sealed : From<mcom::Rc<IDirect3D9Ex>>  { fn as_winapi(&self) -> &IDirect3D9Ex; }
-    unsafe impl Sealed for mcom::Rc<IDirect3D9Ex>           { fn as_winapi(&self) -> &IDirect3D9Ex { &**self } }
-    unsafe impl Sealed for super::Direct3DEx                { fn as_winapi(&self) -> &IDirect3D9Ex { &*self.0 } }
-}
+
 
 #[cfg(feature = "9ex")] #[test] fn create() {
     use winapi::shared::d3d9::D3D_SDK_VERSION;
     unsafe {
-        let _ = Direct3DEx::create(SdkVersion::default().with_debug_disabled()).unwrap();
-        let _ = Direct3DEx::create(SdkVersion::default().with_debug_enabled()).unwrap();
-        let _ = Direct3DEx::create(SdkVersion::DEFAULT.with_debug_disabled()).unwrap();
-        let _ = Direct3DEx::create(SdkVersion::DEFAULT.with_debug_enabled()).unwrap();
-        let _ = Direct3DEx::create(SdkVersion::DEFAULT9B.with_debug_disabled()).unwrap();
-        let _ = Direct3DEx::create(SdkVersion::DEFAULT9B.with_debug_enabled()).unwrap();
-        let _ = Direct3DEx::create(SdkVersion::from(D3D_SDK_VERSION).with_debug_disabled()).unwrap();
-        let _ = Direct3DEx::create(SdkVersion::from(D3D_SDK_VERSION).with_debug_enabled()).unwrap();
+        let _ = Direct3DEx::create_ex(SdkVersion::default().with_debug_disabled()).unwrap();
+        let _ = Direct3DEx::create_ex(SdkVersion::default().with_debug_enabled()).unwrap();
+        let _ = Direct3DEx::create_ex(SdkVersion::DEFAULT.with_debug_disabled()).unwrap();
+        let _ = Direct3DEx::create_ex(SdkVersion::DEFAULT.with_debug_enabled()).unwrap();
+        let _ = Direct3DEx::create_ex(SdkVersion::DEFAULT9B.with_debug_disabled()).unwrap();
+        let _ = Direct3DEx::create_ex(SdkVersion::DEFAULT9B.with_debug_enabled()).unwrap();
+        let _ = Direct3DEx::create_ex(SdkVersion::from(D3D_SDK_VERSION).with_debug_disabled()).unwrap();
+        let _ = Direct3DEx::create_ex(SdkVersion::from(D3D_SDK_VERSION).with_debug_enabled()).unwrap();
     }
 }
 
