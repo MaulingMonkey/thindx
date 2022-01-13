@@ -44,11 +44,22 @@
 //! | [`XInputGetAudioDeviceIds`]           | [`get_audio_device_ids`]
 //! | [`XInputGetBatteryInformation`]       | [`get_battery_information`]
 //! | [`XInputGetCapabilities`]             | [`get_capabilities`]
-//! | [`XInputGetDSoundAudioDeviceGuids`]   | [`get_dsound_audio_device_guids`]
+//! | [`XInputGetDSoundAudioDeviceGuids`] ❌ | [`get_dsound_audio_device_guids`]
 //! | [`XInputGetKeystroke`]                | [`get_keystroke`]
 //! | [`XInputGetState`]                    | [`get_state`]
-//! | `XInputGetStateEx`                    | [`get_state_ex`]
+//! | `XInputGetStateEx` ⚠️ 1.3             | [`get_state_ex`]
 //! | [`XInputSetState`]                    | [`set_state`]
+//! | `XInputWaitForGuideButton`    ⚠️ 1.3  | <span style="opacity: 25%">TODO?</span>
+//! | `XInputCancelGuideButtonWait` ⚠️ 1.3  | <span style="opacity: 25%">TODO?</span>
+//! | `XInputPowerOffController`    ⚠️ 1.3  | <span style="opacity: 25%">TODO?</span>
+//! | `XInputGetBaseBusInformation` ⚠️ 1.4  | <span style="opacity: 25%">TODO?</span>
+//! | `XInputGetCapabilitiesEx`     ⚠️ 1.4  | <span style="opacity: 25%">TODO?</span>
+//!
+//! | Legend | Desc |
+//! | ------ | ---- |
+//! | ❌     | Deprecated
+//! | ⚠️ 1.3 | Undocumented XInput 1.3+ function exported by ordinal only
+//! | ⚠️ 1.4 | Undocumented XInput 1.4+ function exported by ordinal only
 //!
 //! [`XInputEnable`]:                       https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputenable
 //! [`XInputGetAudioDeviceIds`]:            https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetaudiodeviceids
