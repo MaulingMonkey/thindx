@@ -31,6 +31,10 @@
             "command": "cargo c ${relativeFile}",
         },
         {
+            "label":   "clippy",
+            "command": "cargo clippy --no-deps",
+        },
+        {
             "label":   "test",
             "command": "cargo t",
         },

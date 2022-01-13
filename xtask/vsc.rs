@@ -10,6 +10,7 @@ const COMMANDS : &'static [(&'static str, &'static str)] = &[
     ("fetch",               "cargo fetch"),
     ("check",               "cargo c"),
     ("check-file",          "cargo c ${relativeFile}"),
+    ("clippy",              "cargo clippy --no-deps"),
     ("test",                "cargo t"),
     ("build",               "cargo b"),
     ("doc",                 "cargo d"),
