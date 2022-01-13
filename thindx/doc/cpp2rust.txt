@@ -238,7 +238,7 @@ D3DCOMPILER_STRIP_FLAGS                 = d3d::CompilerStripFlags
 # d3d9.h functions
 
 Direct3DCreate9                         = d3d9::IDirect3D9Ext::create
-Direct3DCreate9Ex                       = d3d9::IDirect3D9ExExt::create
+Direct3DCreate9Ex                       = d3d9::IDirect3D9ExExt::create_ex
 # TODO: D3DPERF_*
 
 # d3d9.h interfaces

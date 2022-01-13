@@ -1016,7 +1016,7 @@
 //! [`D3DPERF_SetOptions`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_setoptions) →&nbsp;❌ <br>
 //! [`D3DPERF_SetRegion`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_setregion) →&nbsp;❌ <br>
 //! [`Direct3DCreate9`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-direct3dcreate9)&nbsp;→ [`d3d9::IDirect3D9Ext::create`] <br>
-//! [`Direct3DCreate9Ex`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-direct3dcreate9ex)&nbsp;→ [`d3d9::IDirect3D9ExExt::create`] <br>
+//! [`Direct3DCreate9Ex`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-direct3dcreate9ex)&nbsp;→ [`d3d9::IDirect3D9ExExt::create_ex`] <br>
 //!
 //! <br>
 //!
