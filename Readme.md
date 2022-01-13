@@ -79,8 +79,11 @@ Additionally, individual extension traits / functions / methods will likely neve
 | dwrite            | | | | | consider uniscribe?
 | dxr               | | | | |
 | xact3             | | | | |
-| **Not Planned**   | | | | | feel free to express interest though!
+| **Not Planned**   | | | | | Feel free to change my mind though!  Maybe with $?
 | d3d10             | | | | | d3d11 is the same but saner, and just as portable?
+| d3d**x**10        | | | | | deprecated, saner to use less d3d specific stuff
+| d3d**x**11        | | | | | deprecated, saner to use less d3d specific stuff
+| d3d**x**9         | | | | | deprecated, saner to use less d3d specific stuff
 | ddraw             | | | | | prefer d2d, gdi, or other less ancient api?
 | dplay             | | | | | prefer steamworks, raw sockets, etc.?
 | xaudio1           | | | | | does this even exist? prefer xaudio2
