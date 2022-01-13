@@ -1,4 +1,7 @@
-use std::ops::Deref;
+#![warn(clippy::undocumented_unsafe_blocks)]
+
+use crate::AsSafe;
+use winapi::um::unknwnbase::IUnknown;
 
 
 
@@ -7,39 +10,30 @@ use std::ops::Deref;
 ///
 /// Base COM interface most (but not all!) DirectX interfaces eventually derive from.
 #[derive(Clone)] #[repr(transparent)]
-pub struct Unknown(pub(crate) mcom::Rc<winapi::um::unknwnbase::IUnknown>);
+pub struct Unknown(pub(crate) mcom::Rc<IUnknown>);
 
-convert!(unsafe Unknown, winapi::um::unknwnbase::IUnknown);
+// SAFETY: yep, safe
+convert!(unsafe Unknown, IUnknown);
+
+unsafe impl AsSafe<IUnknown> for Unknown { fn as_safe(&self) -> &IUnknown { &*self.0 } }
 
 
 
-/// Auto trait implemented for anything that can chain-[Deref] to [thindx::Unknown](crate::Unknown).
-pub trait AsUnknown {
-    /// Chain-deref all the way down to [Unknown].
-    fn as_unknown(&self) -> &Unknown;
-}
-
-impl AsUnknown for Unknown {
-    fn as_unknown(&self) -> &Unknown { self }
-}
-
-impl<T: Deref> AsUnknown for T where T::Target : AsUnknown {
-    fn as_unknown(&self) -> &Unknown { (**self).as_unknown() }
-}
-
-/// Like [std::mem::drop], but use `debug_assert_eq!` to verify the refcount is one for e.g. device lost handling purpouses.
+/// Like [std::mem::drop], but use `debug_assert_eq!` to verify the refcount of a COM object is `1` for e.g. device lost handling purpouses.
 ///
 /// This assumption may be violated by:
 /// *   Middleware acquiring refcounts
 /// *   Graphics debuggers acquiring refcounts
+/// *   Release() not returning an accurate refcount
 /// *   ???
 //#allow_missing_argument_docs
 #[allow(dead_code)] // XXX
-pub(crate) fn drop_final(unk: impl AsUnknown) {
+pub(crate) fn drop_final(unk: impl AsSafe<IUnknown>) {
+    let unk = unk.as_safe();
+    // SAFETY: ✔️ initial refcount implied to be >= 1 by AsSafe bound, final refcount should be equivalent to initial refcount
     let rc = unsafe {
-        let p = unk.as_unknown().0.as_ptr();
-        (*p).AddRef();
-        (*p).Release()
+        unk.AddRef();
+        unk.Release()
     };
     debug_assert_eq!(1, rc, "this wasn't the final object");
 }
