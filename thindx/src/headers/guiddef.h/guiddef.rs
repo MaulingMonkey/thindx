@@ -1,3 +1,5 @@
+#![warn(clippy::undocumented_unsafe_blocks)]
+
 use bytemuck::{Pod, Zeroable};
 
 use winapi::shared::guiddef::GUID;
