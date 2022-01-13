@@ -85,9 +85,11 @@ pub trait IDirect3D9Ext : private::Sealed {
     ///
     /// ### Returns
     ///
-    /// *   `Err(())`       on an invalid SDK version
-    /// *   `Err(())`       if d3d access is forbidden? (services?)
-    /// *   Ok([Direct3D])  otherwise
+    /// *   [THINERR::NONSPECIFIC]  on an invalid SDK version
+    /// *   [THINERR::NONSPECIFIC]  if d3d access is forbidden? (services?)
+    /// *   Ok([Direct3D])          otherwise
+    ///
+    /// Consider calling [Direct3DEx::create] instead if you want a meaningful error code than [THINERR::NONSPECIFIC].
     ///
     /// ### Example
     ///
@@ -98,9 +100,9 @@ pub trait IDirect3D9Ext : private::Sealed {
     ///
     /// [IDirect3D9]:                   https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3d9
     ///
-    unsafe fn create(sdk_version: SdkVersion) -> Result<Self, ()> {
+    unsafe fn create(sdk_version: SdkVersion) -> Result<Self, MethodError> {
         let d3d9 = Direct3DCreate9(sdk_version.into());
-        mcom::Rc::from_raw_opt(d3d9).ok_or(()).map(Self::from)
+        mcom::Rc::from_raw_opt(d3d9).ok_or(MethodError("Direct3DCreate9", THINERR::NONSPECIFIC)).map(Self::from)
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdepthstencilmatch)\]
@@ -507,19 +509,20 @@ pub trait IDirect3D9Ext : private::Sealed {
     ///
     /// ### Returns
     ///
-    /// *   `Err(())`               on an invalid `adapter`
+    /// *   [THINERR::NONSPECIFIC]  on an invalid `adapter`
+    /// *   [THINERR::NONSPECIFIC]  if no monitor is connected to `adapter`?
     /// *   Ok([HMONITOR])          otherwise
     ///
     /// ### Example
     ///
     /// ```rust
     /// # use dev::d3d9::*; let d3d = d3d_test();
-    /// let monitor : HMONITOR = d3d.get_adapter_monitor(   0).unwrap();
-    /// let error   : ()       = d3d.get_adapter_monitor(9001).unwrap_err();
+    /// let monitor : HMONITOR  = d3d.get_adapter_monitor(   0).unwrap();
+    /// let error               = d3d.get_adapter_monitor(9001).unwrap_err();
     /// ```
-    fn get_adapter_monitor(&self, adapter: AdapterIndex) -> Result<HMONITOR, ()> {
+    fn get_adapter_monitor(&self, adapter: AdapterIndex) -> Result<HMONITOR, MethodError> {
         let hm = unsafe { self.as_winapi().GetAdapterMonitor(adapter) }; // Safety: Seems to be safe even when `adapter` >= `self.get_adapter_count()` per unit test bellow
-        if hm.is_null() { Err(()) } else { Ok(hm) }
+        if hm.is_null() { Err(MethodError("IDirect3D9::GetAdapterMonitor", THINERR::NONSPECIFIC)) } else { Ok(hm) }
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getdevicecaps)\] IDirect3D9::GetDeviceCaps
@@ -578,9 +581,9 @@ mod private {
             Direct3D::create(SdkVersion::DEFAULT9B.with_debug_enabled()).unwrap();
             Direct3D::create(SdkVersion::from(D3D_SDK_VERSION).with_debug_disabled()).unwrap();
             Direct3D::create(SdkVersion::from(D3D_SDK_VERSION).with_debug_enabled()).unwrap();
-            assert_eq!((), Direct3D::create(SdkVersion::from(0)).err().unwrap());
-            assert_eq!((), Direct3D::create(SdkVersion::from(0).with_debug_disabled()).err().unwrap());
-            assert_eq!((), Direct3D::create(SdkVersion::from(0).with_debug_enabled()).err().unwrap());
+            assert_eq!(THINERR::NONSPECIFIC, Direct3D::create(SdkVersion::from(0)                       ).err());
+            assert_eq!(THINERR::NONSPECIFIC, Direct3D::create(SdkVersion::from(0).with_debug_disabled() ).err());
+            assert_eq!(THINERR::NONSPECIFIC, Direct3D::create(SdkVersion::from(0).with_debug_enabled()  ).err());
         }
     }
 

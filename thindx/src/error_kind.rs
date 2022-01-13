@@ -119,6 +119,7 @@ impl ErrorKind {
             ERROR::BAD_ARGUMENTS                => Some(("ERROR_BAD_ARGUMENTS",                 "One or more arguments are not correct.")),
             ERROR::DEVICE_NOT_CONNECTED         => Some(("ERROR_DEVICE_NOT_CONNECTED",          "The device is not connected.")),
 
+            THINERR::NONSPECIFIC                => Some(("THINERR_NONSPECIFIC",             "A nonspecific error of some sort occured.")),
             THINERR::SLICE_OVERFLOW             => Some(("THINERR_SLICE_OVERFLOW",          "Large slice passed to a DirectX API that only accepts a 32-bit length")),
             THINERR::DEVICE_MISMATCH            => Some(("THINERR_DEVICE_MISMATCH",         "Resource belonging to one Device was passed to a different Device.  To avoid undefined behavior, DirectX was not called.")),
             THINERR::ALLOC_OVERFLOW             => Some(("THINERR_ALLOC_OVERFLOW",          "Large allocation size was requested.  To avoid undefined behavior from arithmetic overflows, DirectX was not called.")),

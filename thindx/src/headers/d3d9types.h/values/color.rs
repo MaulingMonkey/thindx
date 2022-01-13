@@ -33,7 +33,7 @@ impl Color {
     ///     assert_eq!(0x66, color.blue());
     /// }
     /// ```
-    pub fn argb(color: impl AsARGB) -> Self { color.as_argb() }
+    pub fn argb(color: impl IntoARGB) -> Self { color.into_argb() }
 
     pub fn a(self) -> u8 { (self.0 >> 24) as u8 }
     pub fn r(self) -> u8 { (self.0 >> 16) as u8 }
@@ -75,7 +75,7 @@ impl From<Color> for D3DCOLOR {
 /// 0xAA<span style="color: red">RR</span><span style="color: green">GG</span><span style="color: blue">BB</span>,
 /// [0xAA, <span style="color: red">0xRR</span>, <span style="color: green">0xGG</span>, <span style="color: blue">0xBB</span>], or
 /// (0xAA, <span style="color: red">0xRR</span>, <span style="color: green">0xGG</span>, <span style="color: blue">0xBB</span>)
-pub trait AsARGB                    { fn as_argb(self) -> Color; }
-impl AsARGB for u32                 { fn as_argb(self) -> Color { Color(self) } }
-impl AsARGB for [u8; 4]             { fn as_argb(self) -> Color { Color(u32::from_be_bytes(self)) } }
-impl AsARGB for (u8, u8, u8, u8)    { fn as_argb(self) -> Color { let (a,r,g,b) = self; Color(u32::from_be_bytes([a,r,g,b])) } }
+pub trait IntoARGB                  { fn into_argb(self) -> Color; }
+impl IntoARGB for u32               { fn into_argb(self) -> Color { Color(self) } }
+impl IntoARGB for [u8; 4]           { fn into_argb(self) -> Color { Color(u32::from_be_bytes(self)) } }
+impl IntoARGB for (u8, u8, u8, u8)  { fn into_argb(self) -> Color { let (a,r,g,b) = self; Color(u32::from_be_bytes([a,r,g,b])) } }
