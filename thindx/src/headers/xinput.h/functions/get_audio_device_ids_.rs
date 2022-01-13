@@ -23,6 +23,7 @@ use std::os::windows::ffi::*;
 /// *   [ERROR::BAD_ARGUMENTS]          - Invalid [`User`] or [`User::Any`]
 /// *   [ERROR::DEVICE_NOT_CONNECTED]   - **Unreliably.**
 /// *   [THINERR::MISSING_DLL_EXPORT]   - XAudio2 / Windows Core Audio Device Names unavailable: XInput 1.3 or earlier
+/// *   [THINERR::SLICE_TOO_LARGE]      - Audio device paths exceedingly large
 ///
 /// | System            | Windows `ver`     | Windows SKU           | Behavior |
 /// | ----------------- | ----------------- | --------------------- | -------- |
@@ -39,11 +40,16 @@ pub fn get_audio_device_ids(user_index: impl Into<User>) -> Result<AudioDeviceId
     let mut render_len  = 4096;
     let mut capture_len = 4096;
 
+    // SAFETY: ⚠️ Needs testing with real audio devices
+    //  * fuzzed        in `tests/fuzz-xinput.rs`
+    //  * `user_index`  is well tested from 0 ..= 255 (but retest if the type of `user_index` expands to allow `u32`!)
+    //  * `*_ptr`       is never null, should only be accessed during XInputGetAudioDeviceIds's scope
+    //  * `*_len`       are in/out, properly initialized.
     let code = unsafe { XInputGetAudioDeviceIds(user_index.into().into(), render_id.as_mut_ptr(), &mut render_len, capture_id.as_mut_ptr(), &mut capture_len) };
-    // a dynamic alloc fallback might be appropriate...? what error is returned? experiment, as it's not documented?
+    // a dynamic alloc fallback might be appropriate...? what error is returned? experiment, as it's not documented? D3D's own docs show only 256 byte buffers, surely 16x that (4096) is enough?
     check_error_success("XInputGetAudioDeviceIds", code)?;
-    let render_device_id    = OsString::from_wide(render_id [..render_len  as usize].split(|c| *c==0).next().unwrap_or(&[]));
-    let capture_device_id   = OsString::from_wide(capture_id[..capture_len as usize].split(|c| *c==0).next().unwrap_or(&[]));
+    let render_device_id    = OsString::from_wide(render_id .get(..render_len  as usize).ok_or(MethodError("XInputGetAudioDeviceIds (render_device_id conversion)",  THINERR::SLICE_TOO_LARGE))?.split(|c| *c==0).next().unwrap_or(&[]));
+    let capture_device_id   = OsString::from_wide(capture_id.get(..capture_len as usize).ok_or(MethodError("XInputGetAudioDeviceIds (capture_device_id conversion)", THINERR::SLICE_TOO_LARGE))?.split(|c| *c==0).next().unwrap_or(&[]));
     Ok(AudioDeviceIds {
         render_device_id:   if render_device_id .is_empty() { None } else { Some(render_device_id ) },
         capture_device_id:  if capture_device_id.is_empty() { None } else { Some(capture_device_id) },

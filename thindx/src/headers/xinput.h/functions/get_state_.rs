@@ -17,6 +17,11 @@ use winapi::um::xinput::*;
 /// *   [ERROR::DEVICE_NOT_CONNECTED]   - [`User`] gamepad not connected
 pub fn get_state(user_index: impl Into<User>) -> Result<State, MethodError> {
     let mut state = State::zeroed();
+    // SAFETY: ✔️
+    //  * fuzzed        in `tests/fuzz-xinput.rs`
+    //  * tested        in `examples/d3d9-02-xinput.rs`
+    //  * `user_index`  is well tested from 0 ..= 255 (but retest if the type of `user_index` expands to allow `u32`!)
+    //  * `state`       is out-only, fixed size, no `cbSize` field, never null, all bit patterns sane
     let code = unsafe { XInputGetState(user_index.into().into(), &mut state as *mut _ as *mut _) };
     check_error_success("XInputGetState", code)?;
     Ok(state)

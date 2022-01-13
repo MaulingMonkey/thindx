@@ -35,6 +35,9 @@ use winapi::um::xinput::*;
 /// }
 /// ```
 pub fn enable(enable: bool) {
+    // SAFETY: ✔️
+    //  * fuzzed        in `tests/fuzz-xinput.rs`
+    //  * `enable`      can be true or false.  Pretty easy to have exhaustive test coverage.
     unsafe { XInputEnable(enable.into()) }
 }
 

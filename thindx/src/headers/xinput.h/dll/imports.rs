@@ -66,8 +66,11 @@ impl Imports {
     pub fn get() -> &'static Self { &*IMPORTS }
 
     fn load_from_linked_xinput() -> Result<Self, io::Error> {
+        // SAFETY: ⚠️ Technically unsound
+        //  * We assume `hmodule`, if retrieved, is a valid xinput DLL.
+        //  * We assume specific magic ordinals always map to specific un-named functions.
         unsafe {
-            let hmodule = try_find_loaded_xinput().unwrap_or(null_mut());
+            let hmodule = try_find_loaded_xinput().ok_or(io::ErrorKind::NotFound)?;
 
             Ok(Self {
                 XInputGetDSoundAudioDeviceGuids:    load_proc_by_name(hmodule, cstr!("XInputGetDSoundAudioDeviceGuids") ).map(|p| transmute(p)),
@@ -107,20 +110,34 @@ unsafe fn load_proc_by_ordinal(hmodule: HMODULE, ordinal: WORD) -> Option<FARPRO
     if a.is_null() { None } else { Some(a) }
 }
 
+/// Tries to find the most XInput-y looking, already loaded, DLL:
+/// *   DLLs that don't export `XInputGetState` will be straight up ignored.
+/// *   DLLs with more characters matching the `xinput_` prefix will be prefered.
+/// *   DLLs with shorter filenames will be prefered (e.g. `XInput1_4.dll` wins out over `xinput_9_0_3.dll`)
+///
 /// ### ⚠️ Safety ⚠️
 ///
-/// Assumes that any DLL containing an export `XInputGetState` is a usable XInput DLL... which is probably a bad assumption, but eh.
+/// Microsoft's PSAPI documentation makes it clear that some of the stuff this relies on for e.g. process module enumeration
+/// are best effort debug functionality, not battle tested production quality tooling:
+///
+/// > "The EnumProcessModulesEx function is primarily designed for use by debuggers and similar applications that must
+/// > extract module information from another process. If the module list in the target process is corrupted or not
+/// > yet initialized, or if the module list changes during the function call as a result of DLLs being loaded or
+/// > unloaded, EnumProcessModulesEx may fail or return incorrect information."
+/// >
+/// > <https://docs.microsoft.com/en-us/windows/win32/api/psapi/nf-psapi-enumprocessmodulesex>
+///
+/// Additionally, there's technically nothing stopping you from loading an evil `xinput_.dll`, that takes priority over
+/// the real xinput DLLs, that defines XInputGetState and exposes unsound functions, which immediately invokes undefined
+/// behavior if you call into it.  Which means relying on the returned HMODULE to do just about anything is, *technically*,
+/// unsound.
+///
+/// Well, perhaps eventually I'll verify xinput.dll is code-signed by Microsoft, which would fix that well enough for my
+/// tastes, but for now this is good enough for me ;)
 unsafe fn try_find_loaded_xinput() -> Option<HMODULE> {
     let proc = GetCurrentProcess();
     let mut modules = Vec::<HMODULE>::new();
 
-    // "The EnumProcessModulesEx function is primarily designed for use by debuggers and similar applications that must
-    // extract module information from another process. If the module list in the target process is corrupted or not
-    // yet initialized, or if the module list changes during the function call as a result of DLLs being loaded or
-    // unloaded, EnumProcessModulesEx may fail or return incorrect information."
-    //
-    // https://docs.microsoft.com/en-us/windows/win32/api/psapi/nf-psapi-enumprocessmodulesex
-    //
     let mut max_retries = 64;
 
     loop {

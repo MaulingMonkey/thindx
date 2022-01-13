@@ -1,3 +1,5 @@
+#![warn(clippy::undocumented_unsafe_blocks)]
+
 use crate::{MethodError, ErrorKind, errors::ERROR};
 
 mods! {

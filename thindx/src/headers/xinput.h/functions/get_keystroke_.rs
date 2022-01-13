@@ -18,6 +18,10 @@ use winapi::um::xinput::*;
 /// *   [ERROR::DEVICE_NOT_CONNECTED]   - Disconnected [`User`]
 pub fn get_keystroke(user_index: impl Into<User>, _reserved: ()) -> Result<Option<Keystroke>, MethodError> {
     let mut keystroke = Keystroke::zeroed();
+    // SAFETY: ✔️
+    //  * fuzzed        in `tests/fuzz-xinput.rs`
+    //  * tested        in `examples/xinput-exercise-all.rs`
+    //  * `user_index`  is well tested from 0 ..= 255 (but retest if the type of `user_index` expands to allow `u32`!)
     let code = unsafe { XInputGetKeystroke(user_index.into().into(), 0, &mut keystroke as *mut _ as *mut _) };
     if code == ERROR_EMPTY { return Ok(None) }
     check_error_success("XInputGetKeystroke", code)?;

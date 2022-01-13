@@ -126,6 +126,10 @@ macro_rules! fuzz {
         })
     });
 
+    // SAFETY: ⚠️ test coverage of no COM init has several caveats
+    //  * It's possible that some XInput functions init COM for us, but not others
+    //  * It's possible that rust's testing framework inits COM for us
+    // Fully fixing this would probably involve multi process shenannigans... I'm fairly satisfied with this being "good enough"
     status!("Testing", "without COM initialized ({:?})", BEFORE_COM);
     sleep(BEFORE_COM);
 
@@ -139,11 +143,13 @@ macro_rules! fuzz {
 }
 
 fn initialize_com_for_the_first_time_on_this_thread(mta: bool) {
+    // SAFETY: ✔️ reserved is null, flags are always documented
     match unsafe { CoInitializeEx(null_mut(), if mta { COINIT_MULTITHREADED } else { COINIT_APARTMENTTHREADED }) } {
         S_OK    => {},
         S_FALSE => fatal!("CoInitializeEx(nullptr, ...) returned S_FALSE: COM was already initialized on this thread!  Tests were trying to ensure xinput is sound to use pre-COM..."),
         err     => fatal!("CoInitializeEx(nullptr, ...) returned 0x{:08X} (unexpected {})", err, if SUCCEEDED(err) { "success code" } else { "error" }),
     }
+    // We don't ever try to pair this with uninitializing COM
 }
 
 fn fuzz<T>(title: &str, file: &str, line: u32, codes: &[ErrorKind], f: impl Fn(xinput::User) -> Result<T, MethodError>) {

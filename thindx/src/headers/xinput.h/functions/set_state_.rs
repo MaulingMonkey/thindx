@@ -14,6 +14,11 @@ use winapi::um::xinput::*;
 /// *   [ERROR::BAD_ARGUMENTS]          - Invalid [`User`] or [`User::Any`]
 /// *   [ERROR::DEVICE_NOT_CONNECTED]   - [`User`] is not connected
 pub fn set_state(user_index: impl Into<User>, mut vibration: Vibration) -> Result<(), MethodError> {
+    // SAFETY: ✔️
+    //  * fuzzed        in `fuzz-xinput.rs`
+    //  * tested        in `d3d9-02-xinput.rs`
+    //  * `user_index`  is well tested from 0 ..= 255 (but retest if the type of `user_index` expands to allow `u32`!)
+    //  * `vibration`   is never null, fixed size, no `cbSize` field, all bit patterns are valid and reasonable
     let code = unsafe { XInputSetState(user_index.into().into(), &mut vibration as *mut _ as *mut _) };
     check_error_success("XInputSetState", code)
 }

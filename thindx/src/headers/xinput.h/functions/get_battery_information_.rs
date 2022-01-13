@@ -20,6 +20,11 @@ use winapi::um::xinput::XInputGetBatteryInformation;
 /// *   [ERROR::DEVICE_NOT_CONNECTED]   - Invalid [`BatteryDevType`]
 pub fn get_battery_information(user_index: impl Into<User>, dev_type: impl Into<BatteryDevType>) -> Result<BatteryInformation, MethodError> {
     let mut info = BatteryInformation::zeroed();
+    // SAFETY: ✔️
+    //  * fuzzed        in `tests/fuzz-xinput.rs`
+    //  * `user_index`  is well tested from 0 ..= 255 (but retest if the type of `user_index` expands to allow `u32`!)
+    //  * `dev_type`    is decently tested (0, 1, 2 (OOB), 42, 255 all result in defined behavior)
+    //  * `info`        is out-only, no cbSize field, fixed size, sane
     let code = unsafe { XInputGetBatteryInformation(user_index.into().into(), dev_type.into().into(), &mut info as *mut _ as *mut _) };
     check_error_success("XInputGetBatteryInformation", code)?;
     Ok(info)

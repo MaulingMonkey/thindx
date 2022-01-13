@@ -17,6 +17,11 @@ use winapi::um::xinput::*;
 /// *   [ERROR::DEVICE_NOT_CONNECTED]   - [`User`] in bounds, but without a gamepad
 pub fn get_capabilities(user_index: impl Into<User>, flags: Flag) -> Result<Capabilities, MethodError> {
     let mut caps = Capabilities::zeroed();
+    // SAFETY: ✔️
+    //  * fuzzed        in `tests/fuzz-xinput.rs`
+    //  * `user_index`  is well tested from 0 ..= 255 (but retest if the type of `user_index` expands to allow `u32`!)
+    //  * `flags`       is decently tested (0, 1, 2 (OOB), 4, 8, 16, 32, 64, 128, 0xFFFFFFFF)
+    //  * `caps`        is out-only, no cbSize field, fixed size, sane
     let code = unsafe { XInputGetCapabilities(user_index.into().into(), flags.into(), &mut caps as *mut _ as *mut _) };
     check_error_success("XInputGetCapabilities", code)?;
     Ok(caps)
