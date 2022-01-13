@@ -228,7 +228,7 @@ impl Compiler {
     ///
     /// ### Remarks
     /// *   This was introduced by d3dcompiler_44.dll, and is unavailable in earlier versions.
-    pub fn set_blob_part<'s>(
+    pub fn set_blob_part(
         &self,
         src_data:           &Bytecode,
         part:               impl Into<BlobPart>,
@@ -272,7 +272,7 @@ impl Compiler {
     ///
     /// ### Remarks
     /// *   This was introduced by d3dcompiler_40.dll, and is unavailable in earlier versions.
-    pub fn strip_shader<'s>(
+    pub fn strip_shader(
         &self,
         shader_bytecode:    &[u8],
         strip_flags:        impl Into<CompilerStripFlags>,

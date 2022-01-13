@@ -212,7 +212,7 @@ impl Compiler {
     /// ### Remarks
     /// *   You can use this API to develop your Windows Store apps, but you can't use it in apps that you submit to the Windows Store.
     /// *   This was introduced by d3dcompiler_43.dll, and is unavailable in earlier versions.
-    pub fn decompress_shaders<'s>(
+    pub fn decompress_shaders(
         &self,
         src_data:               &[u8],
         flags:                  impl Into<Option<std::convert::Infallible>>,

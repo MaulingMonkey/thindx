@@ -147,7 +147,7 @@ impl LibraryReflection {
     ///     has_10_level_9_pixel_shader: false,
     /// }
     /// ```
-    pub fn functions<'lr>(&'lr self) -> Result<impl 'lr + Iterator<Item = FunctionReflection<'lr>>, MethodError> {
+    pub fn functions(&self) -> Result<impl Iterator<Item = FunctionReflection> + '_, MethodError> {
         Ok(LibraryReflectionFunctionsIter {
             desc:               self.get_desc()?,
             library_reflection: self,

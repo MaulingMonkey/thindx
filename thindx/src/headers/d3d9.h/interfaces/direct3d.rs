@@ -543,7 +543,7 @@ pub trait IDirect3D9Ext : private::Sealed {
     /// ```
     fn get_device_caps(&self, adapter: AdapterIndex, device_type: DevType) -> Result<Caps, MethodError> {
         let mut caps = Caps::default();
-        let hr = unsafe { self.as_winapi().GetDeviceCaps(adapter, device_type.into().into(), &mut *caps) }; // Safety: Appears sound on all invalid parameters per unit testing
+        let hr = unsafe { self.as_winapi().GetDeviceCaps(adapter, device_type.into(), &mut *caps) }; // Safety: Appears sound on all invalid parameters per unit testing
         MethodError::check("IDirect3D9::GetDeviceCaps", hr)?;
         Ok(caps)
     }

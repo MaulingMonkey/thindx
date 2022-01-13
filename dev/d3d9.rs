@@ -47,7 +47,7 @@ pub fn d3d_test()   -> Direct3D   { unsafe { Direct3D  ::create(SdkVersion::defa
 
 pub fn safe_device_test() -> SafeDevice { SafeDevice::new(device_test()).unwrap() }
 pub fn safe_device_pure() -> SafeDevice { SafeDevice::new(device_pure()).unwrap() }
-pub fn safe_device_test_pp(two: bool, ppf: impl FnOnce(&mut D3DPRESENT_PARAMETERS, &mut Create)) -> Result<SafeDevice, MethodError> { Ok(SafeDevice::new(device_test_pp(two, ppf)?)?) }
+pub fn safe_device_test_pp(two: bool, ppf: impl FnOnce(&mut D3DPRESENT_PARAMETERS, &mut Create)) -> Result<SafeDevice, MethodError> { SafeDevice::new(device_test_pp(two, ppf)?) }
 
 
 

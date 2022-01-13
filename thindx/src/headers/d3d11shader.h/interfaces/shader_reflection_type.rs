@@ -46,7 +46,7 @@ impl<'r> ShaderReflectionType<'r> {
     /// # use thindx::*;
     /// // TODO
     /// ```
-    pub fn get_base_class(&self) -> ShaderReflectionType<'r> {
+    #[must_use] pub fn get_base_class(&self) -> ShaderReflectionType<'r> {
         let ptr = unsafe { self.ptr.as_ref().GetBaseClass() };
         unsafe { ShaderReflectionType::from_raw(self.phantom, ptr) }
     }
@@ -79,7 +79,7 @@ impl<'r> ShaderReflectionType<'r> {
     /// // TODO
     /// ```
     //#allow_missing_argument_docs
-    pub fn get_interface_by_index(&self, index: u32) -> ShaderReflectionType<'r> {
+    #[must_use] pub fn get_interface_by_index(&self, index: u32) -> ShaderReflectionType<'r> {
         let ptr = unsafe { self.ptr.as_ref().GetInterfaceByIndex(index) };
         unsafe { ShaderReflectionType::from_raw(self.phantom, ptr) }
     }
@@ -95,7 +95,7 @@ impl<'r> ShaderReflectionType<'r> {
     /// // TODO
     /// ```
     //#allow_missing_argument_docs
-    pub fn get_member_type_by_index(&self, index: u32) -> ShaderReflectionType<'r> {
+    #[must_use] pub fn get_member_type_by_index(&self, index: u32) -> ShaderReflectionType<'r> {
         let ptr = unsafe { self.ptr.as_ref().GetMemberTypeByIndex(index) };
         unsafe { ShaderReflectionType::from_raw(self.phantom, ptr) }
     }
@@ -111,7 +111,7 @@ impl<'r> ShaderReflectionType<'r> {
     /// // TODO
     /// ```
     //#allow_missing_argument_docs
-    pub fn get_member_type_by_name(&self, name: impl TryIntoAsCStr) -> ShaderReflectionType<'r> {
+    #[must_use] pub fn get_member_type_by_name(&self, name: impl TryIntoAsCStr) -> ShaderReflectionType<'r> {
         let name = name.try_into().ok();
         let name = name.as_ref().map_or(cstr!("").as_cstr(), |n| n.as_cstr());
         let ptr = unsafe { self.ptr.as_ref().GetMemberTypeByName(name) };
@@ -162,7 +162,7 @@ impl<'r> ShaderReflectionType<'r> {
     /// # use thindx::*;
     /// // TODO
     /// ```
-    pub fn get_sub_type(&self) -> ShaderReflectionType<'r> {
+    #[must_use] pub fn get_sub_type(&self) -> ShaderReflectionType<'r> {
         let ptr = unsafe { self.ptr.as_ref().GetSubType() };
         unsafe { ShaderReflectionType::from_raw(self.phantom, ptr) }
     }

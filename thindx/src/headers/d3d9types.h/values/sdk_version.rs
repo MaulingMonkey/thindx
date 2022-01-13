@@ -18,9 +18,9 @@ impl SdkVersion {
     pub unsafe fn from(dword: u32) -> Self { Self(dword) }
 
     // See #ifdef D3D_DEBUG_INFO nonsense in `d3d9.h`
-    pub const fn with_debug_enabled(self)  -> Self { Self(self.0 |  0x80000000) }
-    pub const fn with_debug_disabled(self) -> Self { Self(self.0 & !0x80000000) }
-    pub const fn with_debug(self, enabled: bool) -> Self {
+    #[must_use] pub const fn with_debug_enabled(self)  -> Self { Self(self.0 |  0x80000000) }
+    #[must_use] pub const fn with_debug_disabled(self) -> Self { Self(self.0 & !0x80000000) }
+    #[must_use] pub const fn with_debug(self, enabled: bool) -> Self {
         if enabled {
             self.with_debug_enabled()
         } else {

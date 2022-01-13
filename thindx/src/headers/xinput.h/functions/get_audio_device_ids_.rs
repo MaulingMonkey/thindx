@@ -42,8 +42,8 @@ pub fn get_audio_device_ids(user_index: impl Into<User>) -> Result<AudioDeviceId
     let code = unsafe { XInputGetAudioDeviceIds(user_index.into().into(), render_id.as_mut_ptr(), &mut render_len, capture_id.as_mut_ptr(), &mut capture_len) };
     // a dynamic alloc fallback might be appropriate...? what error is returned? experiment, as it's not documented?
     check_error_success("XInputGetAudioDeviceIds", code)?;
-    let render_device_id    = OsString::from_wide(&render_id [..render_len  as usize].split(|c| *c==0).next().unwrap_or(&[]));
-    let capture_device_id   = OsString::from_wide(&capture_id[..capture_len as usize].split(|c| *c==0).next().unwrap_or(&[]));
+    let render_device_id    = OsString::from_wide(render_id [..render_len  as usize].split(|c| *c==0).next().unwrap_or(&[]));
+    let capture_device_id   = OsString::from_wide(capture_id[..capture_len as usize].split(|c| *c==0).next().unwrap_or(&[]));
     Ok(AudioDeviceIds {
         render_device_id:   if render_device_id .is_empty() { None } else { Some(render_device_id ) },
         capture_device_id:  if capture_device_id.is_empty() { None } else { Some(capture_device_id) },

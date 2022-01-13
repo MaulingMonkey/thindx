@@ -72,7 +72,7 @@ impl Bytecode {
     pub fn as_bytes(&self) -> &[u8] { self.0.as_ref() }
 
     /// Get the bytecode as an iterator of bytes.
-    pub fn bytes<'s>(&'s self) -> impl Iterator<Item = u8> + 's { self.0.as_ref().iter().copied() }
+    pub fn bytes(&self) -> impl Iterator<Item = u8> + '_ { self.0.as_ref().iter().copied() }
 }
 
 impl AsRef <[u8]> for Bytecode { fn as_ref(&self) -> &[u8] { self.0.as_ref() } }

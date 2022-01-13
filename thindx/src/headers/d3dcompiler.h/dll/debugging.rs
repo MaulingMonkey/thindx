@@ -120,7 +120,7 @@ impl Compiler {
     ///
     /// ### Remarks
     /// *   This was introduced by d3dcompiler_40.dll, and is unavailable in earlier versions.
-    pub fn disassemble<'s>(
+    pub fn disassemble(
         &self,
         src_data:           &Bytecode,
         flags:              impl Into<Disasm>,
@@ -203,7 +203,7 @@ impl Compiler {
     ///
     /// ### Remarks
     /// *   This was introduced by d3dcompiler_44.dll, and is unavailable in earlier versions.
-    pub fn disassemble_region<'s>(
+    pub fn disassemble_region(
         &self,
         src_data:           &Bytecode,
         flags:              impl Into<Disasm>,

@@ -18,7 +18,7 @@ pub struct User(u8);
 // in lieu of enumish! { ... }
 impl User { #[allow(missing_docs)] pub const fn from_unchecked(index: u8) -> Self { Self(index) } }
 impl Debug for User     { fn fmt(&self, fmt: &mut Formatter) -> fmt::Result { if *self == User::Any { Debug::fmt("User::Any", fmt) } else { write!(fmt, "User({})", self.0) } } }
-impl From<User> for  u8 { fn from(user: User) -> Self { user.0.into() } } // XInputGet* requires DWORDs
+impl From<User> for  u8 { fn from(user: User) -> Self { user.0        } } // XInputGet* requires DWORDs
 impl From<User> for u32 { fn from(user: User) -> Self { user.0.into() } } // XInputGet* requires DWORDs
 
 #[allow(non_upper_case_globals)] impl User {

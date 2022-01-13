@@ -191,7 +191,7 @@ impl Compiler {
     /// ### Remarks
     /// *   You can use this API to develop your Windows Store apps, but you can't use it in apps that you submit to the Windows Store.
     // /// *   This was introduced by d3dcompiler_47.dll, and is unavailable in earlier versions. // ?
-    pub fn compile_from_file<'s>(
+    pub fn compile_from_file(
         &self,
         file_name:      impl AsRef<Path>,
         defines:        impl AsShaderMacros,
@@ -279,7 +279,7 @@ impl Compiler {
     ///
     /// ### Remarks
     /// *   This was introduced by d3dcompiler_40.dll, and is unavailable in earlier versions.
-    pub fn compile<'s>(
+    pub fn compile(
         &self,
         src_data:       impl AsRef<[u8]>,
         source_name:    impl TryIntoAsOptCStr,
@@ -479,7 +479,7 @@ impl Compiler {
     ///
     /// ### Remarks
     /// *   This was introduced by d3dcompiler_40.dll, and is unavailable in earlier versions.
-    pub fn preprocess<'s>(
+    pub fn preprocess(
         &self,
         src_data:       impl AsRef<[u8]>,
         source_name:    impl TryIntoAsOptCStr,

@@ -73,6 +73,7 @@ mod d3d11_methods;                  pub use d3d11_methods::*;
 /// [create_linker](Compiler::create_linker)(...) - create a [d3d11::Linker]
 /// [load_module](Compiler::load_module)(...) - load a [d3d11::Module]</div>
 #[allow(non_snake_case)] // fn ptrs
+#[allow(clippy::type_complexity)] // no point extracting `type`s with these single use types... would just increase the chances of editing shrapnel
 pub struct Compiler {
     // https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/
 

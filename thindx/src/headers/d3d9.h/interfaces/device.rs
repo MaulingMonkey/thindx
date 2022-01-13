@@ -1254,7 +1254,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
     /// ```
     fn get_light_32(&self, index: u32) -> Result<Light, MethodError> {
         let mut light = Light::default();
-        let hr = unsafe { self.as_winapi().GetLight(index.into(), &mut *light) };
+        let hr = unsafe { self.as_winapi().GetLight(index, &mut *light) };
         MethodError::check("IDirect3DDevice9::GetLight", hr)?;
         Ok(light)
     }

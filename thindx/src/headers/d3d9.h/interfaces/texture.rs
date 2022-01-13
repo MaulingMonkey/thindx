@@ -728,6 +728,7 @@ pub trait IDirect3DTexture9Ext : texture::Sealed {
 
 impl<T: texture::Sealed> IDirect3DTexture9Ext for T {}
 
+#[allow(clippy::module_inception)] // temporary internal junk anyways
 mod texture {
     use winapi::shared::d3d9::IDirect3DTexture9;
     pub unsafe trait Sealed                             { fn as_winapi(&self) -> &IDirect3DTexture9; }

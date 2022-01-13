@@ -51,7 +51,7 @@ impl ReadOnlyBlob {
 
 
     /// Gets the data of the buffer as an iterator over the bytes.
-    pub fn bytes<'s>(&'s self) -> impl Iterator<Item = u8> + 's {
+    pub fn bytes(&self) -> impl Iterator<Item = u8> + '_ {
         self.get_buffer().iter().copied()
     }
 }
@@ -90,7 +90,7 @@ impl TextBlob {
     /// Check if the string is empty ("\0" counts as empty)
     pub fn is_empty(&self) -> bool { self.0.as_ref().map_or(true, |blob| {
         let b = blob.get_buffer();
-        b.is_empty() || b == &[0]
+        b.is_empty() || b == [0]
     })}
 
     /// Treat the blob as a UTF8 string, converting lossily if necessary.
@@ -142,6 +142,7 @@ impl CodeBlob {
     pub(crate) unsafe fn from_unchecked(value: ReadOnlyBlob) -> Self { Self(value) }
 
     /// Get the length of the bytecode, in bytes.
+    #[allow(clippy::len_without_is_empty)] // An empty buffer is **not** valid DXBC or DXIL bytecode, and would thus be an invalid construction of this type!
     pub fn len(&self)      -> usize { self.0.get_buffer_size() }
 
     /// Interpret the bytecode as a byte array.
