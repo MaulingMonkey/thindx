@@ -17,7 +17,7 @@ use std::ptr::null_mut;
 
 
 lazy_static::lazy_static! {
-    static ref IMPORTS : Imports = Imports::load_from_linked_xinput().unwrap_or(Default::default());
+    static ref IMPORTS : Imports = Imports::load_from_linked_xinput().unwrap_or_default();
 }
 
 #[allow(non_snake_case)]

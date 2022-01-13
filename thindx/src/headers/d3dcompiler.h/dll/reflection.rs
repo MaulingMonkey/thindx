@@ -49,7 +49,7 @@ impl Compiler {
     /// ### Remarks
     /// *   This was introduced by d3dcompiler_40.dll, and is unavailable in earlier versions.
     pub fn reflect<I: Raw>(&self, src_data: &Bytecode) -> Result<I, MethodError> where I::Raw : Interface {
-        let f = self.D3DReflect.ok_or(MethodError::new("D3DReflect", THINERR::MISSING_DLL_EXPORT))?;
+        let f = self.D3DReflect.ok_or(MethodError("D3DReflect", THINERR::MISSING_DLL_EXPORT))?;
         let src_data = src_data.as_bytes();
 
         let mut reflector = null_mut();
@@ -138,7 +138,7 @@ impl Compiler {
     /// *   [d3d11::LibraryReflection] for a more complete example
     // #[requires(d3dcompiler=47)] // ?
     pub fn reflect_library<I: Raw>(&self, src_data: &Bytecode) -> Result<I, MethodError> where I::Raw : Interface {
-        let f = self.D3DReflectLibrary.ok_or(MethodError::new("D3DReflectLibrary", THINERR::MISSING_DLL_EXPORT))?;
+        let f = self.D3DReflectLibrary.ok_or(MethodError("D3DReflectLibrary", THINERR::MISSING_DLL_EXPORT))?;
         let src_data = src_data.as_bytes();
 
         let mut reflector = null_mut();

@@ -359,7 +359,7 @@ pub trait IDirect3DDevice9Ext : private::Sealed + Sized {
             ((depth  .is_some() as u32) * D3DCLEAR_ZBUFFER) |
             ((stencil.is_some() as u32) * D3DCLEAR_STENCIL);
 
-        let color   = color.unwrap_or(Color::argb(0)).into();
+        let color   = color.unwrap_or_default().into();
         let depth   = depth.unwrap_or(0.0);
         let stencil = stencil.unwrap_or(0);
 

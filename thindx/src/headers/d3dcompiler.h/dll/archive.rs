@@ -50,7 +50,7 @@ impl Compiler {
         flags:                  impl Into<CompressShader>,
     ) -> Result<BytesBlob, MethodError> {
         // Early outs
-        let f           = self.D3DCompressShaders.ok_or(MethodError::new("D3DCompressShaders", THINERR::MISSING_DLL_EXPORT))?;
+        let f           = self.D3DCompressShaders.ok_or(MethodError("D3DCompressShaders", THINERR::MISSING_DLL_EXPORT))?;
         let num_shaders = shaders.len().try_into().map_err(|_| MethodError::new("D3DCompressShaders", THINERR::MISSING_DLL_EXPORT))?;
 
         // This sketchy mut cast *should* be sane (famous last words.)
@@ -108,7 +108,7 @@ impl Compiler {
     /// *   You can use this API to develop your Windows Store apps, but you can't use it in apps that you submit to the Windows Store.
     /// *   This was introduced by d3dcompiler_43.dll, and is unavailable in earlier versions.
     pub fn decompress_shaders_count(&self, src_data: &[u8]) -> Result<u32, MethodError> {
-        let f = self.D3DDecompressShaders.ok_or(MethodError::new("D3DDecompressShaders", THINERR::MISSING_DLL_EXPORT))?;
+        let f = self.D3DDecompressShaders.ok_or(MethodError("D3DDecompressShaders", THINERR::MISSING_DLL_EXPORT))?;
         let mut shader = null_mut(); // D3DDecompressShaders will fail with E_FAIL if ppShaders is null, even if it doesn't use it
         let mut total_shaders = 0;
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), 0, 0, null_mut(), 0, &mut shader, &mut total_shaders) };
@@ -166,7 +166,7 @@ impl Compiler {
         start_index:            u32,
         out_shaders:            &'s mut [Option<ReadOnlyBlob>],
     ) -> Result<&'s [Option<ReadOnlyBlob>], MethodError> {
-        let f = self.D3DDecompressShaders.ok_or(MethodError::new("D3DDecompressShaders", THINERR::MISSING_DLL_EXPORT))?;
+        let f = self.D3DDecompressShaders.ok_or(MethodError("D3DDecompressShaders", THINERR::MISSING_DLL_EXPORT))?;
         let n : u32 = out_shaders.len().try_into().map_err(|_| MethodError::new("D3DDecompressShaders", THINERR::SLICE_TOO_LARGE))?;
         let _ = flags;
 

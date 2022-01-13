@@ -22,7 +22,7 @@ use bytemuck::Zeroable;
 /// *   [ERROR::DEVICE_NOT_CONNECTED]?  - [`User`] in bounds, but without a gamepad?
 #[deprecated = "Deprecated in favor of xinput::get_audio_device_ids.  Unavailable for Windows Store apps, may fail on Windows 8."]
 pub fn get_dsound_audio_device_guids(user_index: impl Into<User>) -> Result<DSoundAudioDeviceGuids, MethodError> {
-    #[allow(non_snake_case)] let XInputGetDSoundAudioDeviceGuids = Imports::get().XInputGetDSoundAudioDeviceGuids.ok_or(MethodError::new("XInputGetDSoundAudioDeviceGuids", THINERR::MISSING_DLL_EXPORT))?;
+    #[allow(non_snake_case)] let XInputGetDSoundAudioDeviceGuids = Imports::get().XInputGetDSoundAudioDeviceGuids.ok_or(MethodError("XInputGetDSoundAudioDeviceGuids", THINERR::MISSING_DLL_EXPORT))?;
 
     let mut guids = DSoundAudioDeviceGuids::zeroed();
     let code = unsafe { XInputGetDSoundAudioDeviceGuids(user_index.into().into(), &mut guids.dsound_render_guid as *mut _ as *mut _, &mut guids.dsound_capture_guid as *mut _ as *mut _) };

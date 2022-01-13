@@ -5,7 +5,6 @@
 
 #![allow(clippy::identity_op)]                  // I like to `<< 0`, `+ 0`, etc. for consistency
 #![allow(clippy::missing_safety_doc)]           // I prefer ⚠️ Safety ⚠️ docs
-#![allow(clippy::or_fun_call)]                  // I do this with trivial stuff like `.ok_or(MethodError::new(...))`
 #![allow(clippy::derivable_impls)]              // I do this a lot for explicitness with d3d enums
 #![allow(clippy::too_many_arguments)]           // 1:1 mapping to D3D... I don't have much of a choice!
 

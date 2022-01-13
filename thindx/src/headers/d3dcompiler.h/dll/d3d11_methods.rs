@@ -28,7 +28,7 @@ impl Compiler {
     /// ### Remarks
     /// *   This was introduced by d3dcompiler_47.dll, and is unavailable in earlier versions.
     pub fn create_function_linking_graph(&self, flags: Option<std::convert::Infallible>) -> Result<d3d11::FunctionLinkingGraph, MethodError> {
-        let f = self.D3DCreateFunctionLinkingGraph.ok_or(MethodError::new("D3DCreateFunctionLinkingGraph", THINERR::MISSING_DLL_EXPORT))?;
+        let f = self.D3DCreateFunctionLinkingGraph.ok_or(MethodError("D3DCreateFunctionLinkingGraph", THINERR::MISSING_DLL_EXPORT))?;
         let _ = flags; let flags = 0;
         let mut flg = null_mut();
         let hr = unsafe { f(flags, &mut flg) };
@@ -57,7 +57,7 @@ impl Compiler {
     /// ### Remarks
     /// *   This was introduced by d3dcompiler_47.dll, and is unavailable in earlier versions.
     pub fn create_linker(&self) -> Result<d3d11::Linker, MethodError> {
-        let f = self.D3DCreateLinker.ok_or(MethodError::new("D3DCreateFunctionLinkingGraph", THINERR::MISSING_DLL_EXPORT))?;
+        let f = self.D3DCreateLinker.ok_or(MethodError("D3DCreateFunctionLinkingGraph", THINERR::MISSING_DLL_EXPORT))?;
         let mut linker = null_mut();
         let hr = unsafe { f(&mut linker) };
         MethodError::check("D3DCreateFunctionLinkingGraph", hr)?;
@@ -95,7 +95,7 @@ impl Compiler {
     /// ### Remarks
     /// *   This was introduced by d3dcompiler_47.dll, and is unavailable in earlier versions.
     pub fn load_module(&self, src_data: &Bytecode) -> Result<d3d11::Module, MethodError> {
-        let f = self.D3DLoadModule.ok_or(MethodError::new("D3DLoadModule", THINERR::MISSING_DLL_EXPORT))?;
+        let f = self.D3DLoadModule.ok_or(MethodError("D3DLoadModule", THINERR::MISSING_DLL_EXPORT))?;
         let src_data = src_data.as_bytes();
         let mut module = null_mut();
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), &mut module) };

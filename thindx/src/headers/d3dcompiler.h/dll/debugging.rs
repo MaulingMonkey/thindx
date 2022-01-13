@@ -126,7 +126,7 @@ impl Compiler {
         flags:              impl Into<Disasm>,
         comments:           impl TryIntoAsOptCStr,
     ) -> Result<TextBlob, MethodError> {
-        let f = self.D3DDisassemble.ok_or(MethodError::new("D3DDisassemble", THINERR::MISSING_DLL_EXPORT))?;
+        let f = self.D3DDisassemble.ok_or(MethodError("D3DDisassemble", THINERR::MISSING_DLL_EXPORT))?;
         let src_data = src_data.as_bytes();
         let flags = flags.into().into();
         let comments = comments.try_into().map_err(|e| MethodError::new("D3DDisassemble", e))?;
@@ -211,7 +211,7 @@ impl Compiler {
         start_byte_offset:  usize,
         num_insts:          usize,
     ) -> Result<DisassembledRegion, MethodError> {
-        let f = self.D3DDisassembleRegion.ok_or(MethodError::new("D3DDisassembleRegion", THINERR::MISSING_DLL_EXPORT))?;
+        let f = self.D3DDisassembleRegion.ok_or(MethodError("D3DDisassembleRegion", THINERR::MISSING_DLL_EXPORT))?;
         let src_data = src_data.as_bytes();
         let flags = flags.into().into();
         let comments = comments.try_into().map_err(|e| MethodError::new("D3DDisassembleRegion", e))?;
@@ -258,7 +258,7 @@ impl Compiler {
         start_inst_index:   usize,
         num_insts:          usize,
     ) -> Result<usize, MethodError> {
-        let f = self.D3DGetTraceInstructionOffsets.ok_or(MethodError::new("D3DGetTraceInstructionOffsets", THINERR::MISSING_DLL_EXPORT))?;
+        let f = self.D3DGetTraceInstructionOffsets.ok_or(MethodError("D3DGetTraceInstructionOffsets", THINERR::MISSING_DLL_EXPORT))?;
         let src_data = src_data.as_bytes();
         let mut n = 0;
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), flags.into().into(), start_inst_index, num_insts, null_mut(), &mut n) };
@@ -300,7 +300,7 @@ impl Compiler {
         start_inst_index:   usize,
         offsets:            &'o mut [usize],
     ) -> Result<&'o [usize], MethodError> {
-        let f = self.D3DGetTraceInstructionOffsets.ok_or(MethodError::new("D3DGetTraceInstructionOffsets", THINERR::MISSING_DLL_EXPORT))?;
+        let f = self.D3DGetTraceInstructionOffsets.ok_or(MethodError("D3DGetTraceInstructionOffsets", THINERR::MISSING_DLL_EXPORT))?;
         let src_data = src_data.as_bytes();
         let mut n = 0;
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), flags.into().into(), start_inst_index, offsets.len(), offsets.as_mut_ptr(), &mut n) };
@@ -341,7 +341,7 @@ impl Compiler {
         start_inst_index:   usize,
         num_insts:          usize,
     ) -> Result<Vec<usize>, MethodError> {
-        let f = self.D3DGetTraceInstructionOffsets.ok_or(MethodError::new("D3DGetTraceInstructionOffsets", THINERR::MISSING_DLL_EXPORT))?;
+        let f = self.D3DGetTraceInstructionOffsets.ok_or(MethodError("D3DGetTraceInstructionOffsets", THINERR::MISSING_DLL_EXPORT))?;
         let src_data = src_data.as_bytes();
         let flags = flags.into().into();
 

@@ -29,7 +29,7 @@ impl Compiler {
     /// ### Remarks
     /// *   This was introduced by d3dcompiler_43.dll, and is unavailable in earlier versions.
     pub fn create_read_only_blob(&self, data: &[u8]) -> Result<ReadOnlyBlob, MethodError> {
-        let f = self.D3DCreateBlob.ok_or(MethodError::new("D3DCreateBlob", THINERR::MISSING_DLL_EXPORT))?;
+        let f = self.D3DCreateBlob.ok_or(MethodError("D3DCreateBlob", THINERR::MISSING_DLL_EXPORT))?;
 
         let mut blob = null_mut();
         let hr = unsafe { f(data.len(), &mut blob) };
@@ -75,7 +75,7 @@ impl Compiler {
     /// ### Remarks
     /// *   This was introduced by d3dcompiler_44.dll, and is unavailable in earlier versions.
     pub fn read_file_to_blob(&self, file_name: impl AsRef<Path>) -> Result<ReadOnlyBlob, MethodError> {
-        let f = self.D3DReadFileToBlob.ok_or(MethodError::new("D3DReadFileToBlob", THINERR::MISSING_DLL_EXPORT))?;
+        let f = self.D3DReadFileToBlob.ok_or(MethodError("D3DReadFileToBlob", THINERR::MISSING_DLL_EXPORT))?;
         let file_name = file_name.as_ref().as_os_str().encode_wide().chain(Some(0)).collect::<Vec<_>>();
 
         let mut blob = null_mut();
@@ -129,7 +129,7 @@ impl Compiler {
         file_name:  impl AsRef<Path>,
         overwrite:  bool,
     ) -> Result<(), MethodError> {
-        let f = self.D3DWriteBlobToFile.ok_or(MethodError::new("D3DWriteBlobToFile", THINERR::MISSING_DLL_EXPORT))?;
+        let f = self.D3DWriteBlobToFile.ok_or(MethodError("D3DWriteBlobToFile", THINERR::MISSING_DLL_EXPORT))?;
         let file_name = file_name.as_ref().as_os_str().encode_wide().chain(Some(0)).collect::<Vec<_>>();
         let hr = unsafe { f(blob.as_raw(), file_name.as_ptr(), overwrite.into()) };
         MethodError::check("D3DWriteBlobToFile", hr)
