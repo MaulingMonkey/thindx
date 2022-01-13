@@ -51,7 +51,7 @@ impl LibraryDesc<'_> {
     }
 }
 
-test_layout! { LibraryDesc => unsafe D3D11_LIBRARY_DESC {
+test_layout! { LibraryDesc => D3D11_LIBRARY_DESC {
     creator         => Creator,
     flags           => Flags,
     function_count  => FunctionCount,

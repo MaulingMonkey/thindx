@@ -111,7 +111,7 @@ impl From<D3DLIGHT9> for Light { fn from(value: D3DLIGHT9) -> Self { unsafe { st
 impl From<Light> for D3DLIGHT9 { fn from(value: Light    ) -> Self { unsafe { std::mem::transmute(value) } } }
 
 test_layout! {
-    Light => unsafe D3DLIGHT9 {
+    Light => D3DLIGHT9 {
         ty              => Type,
         diffuse         => Diffuse,
         specular        => Specular,

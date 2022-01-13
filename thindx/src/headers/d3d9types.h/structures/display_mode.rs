@@ -29,7 +29,7 @@ use std::ops::{Deref, DerefMut};
     pub format:         Format,
 }
 
-test_layout! { DisplayMode => unsafe D3DDISPLAYMODE { width => Width, height => Height, refresh_rate => RefreshRate, format => Format } }
+test_layout! { DisplayMode => D3DDISPLAYMODE { width => Width, height => Height, refresh_rate => RefreshRate, format => Format } }
 
 impl Deref    for DisplayMode { fn deref    (&    self) -> &    Self::Target { unsafe { std::mem::transmute(self) } } type Target = D3DDISPLAYMODE; }
 impl DerefMut for DisplayMode { fn deref_mut(&mut self) -> &mut Self::Target { unsafe { std::mem::transmute(self) } } }

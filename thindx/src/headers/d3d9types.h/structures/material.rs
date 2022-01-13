@@ -37,4 +37,4 @@ impl DerefMut for Material { fn deref_mut(&mut self) -> &mut Self::Target { unsa
 impl From<D3DMATERIAL9> for Material { fn from(value: D3DMATERIAL9) -> Self { unsafe { std::mem::transmute(value) } } }
 impl From<Material> for D3DMATERIAL9 { fn from(value: Material    ) -> Self { unsafe { std::mem::transmute(value) } } }
 
-test_layout! { Material => unsafe D3DMATERIAL9 { diffuse => Diffuse, ambient => Ambient, specular => Specular, emissive => Emissive, power => Power } }
+test_layout! { Material => D3DMATERIAL9 { diffuse => Diffuse, ambient => Ambient, specular => Specular, emissive => Emissive, power => Power } }

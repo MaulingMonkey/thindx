@@ -81,7 +81,7 @@ use bytemuck::{Pod, Zeroable};
 // TODO: pairing fns?
 
 test_layout_only! {
-    Gamepad => unsafe winapi::um::xinput::XINPUT_GAMEPAD {
+    Gamepad => winapi::um::xinput::XINPUT_GAMEPAD {
         buttons         => wButtons,
         left_trigger    => bLeftTrigger,
         right_trigger   => bRightTrigger,

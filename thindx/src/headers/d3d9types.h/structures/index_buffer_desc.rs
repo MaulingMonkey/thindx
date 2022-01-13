@@ -24,4 +24,4 @@ impl DerefMut for IndexBufferDesc { fn deref_mut(&mut self) -> &mut Self::Target
 impl From<D3DINDEXBUFFER_DESC> for IndexBufferDesc { fn from(value: D3DINDEXBUFFER_DESC) -> Self { unsafe { std::mem::transmute(value) } } }
 impl From<IndexBufferDesc> for D3DINDEXBUFFER_DESC { fn from(value: IndexBufferDesc    ) -> Self { unsafe { std::mem::transmute(value) } } }
 
-test_layout! { IndexBufferDesc => unsafe D3DINDEXBUFFER_DESC { format => Format, ty => Type, usage => Usage, pool => Pool, size => Size } }
+test_layout! { IndexBufferDesc => D3DINDEXBUFFER_DESC { format => Format, ty => Type, usage => Usage, pool => Pool, size => Size } }

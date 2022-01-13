@@ -38,4 +38,4 @@ impl DerefMut for VertexElement { fn deref_mut(&mut self) -> &mut Self::Target {
 impl From<D3DVERTEXELEMENT9> for VertexElement { fn from(value: D3DVERTEXELEMENT9) -> Self { unsafe { std::mem::transmute(value) } } }
 impl From<VertexElement> for D3DVERTEXELEMENT9 { fn from(value: VertexElement    ) -> Self { unsafe { std::mem::transmute(value) } } }
 
-test_layout! { VertexElement => unsafe D3DVERTEXELEMENT9 { stream => Stream, offset => Offset, ty => Type, method => Method, usage_index => UsageIndex } }
+test_layout! { VertexElement => D3DVERTEXELEMENT9 { stream => Stream, offset => Offset, ty => Type, method => Method, usage_index => UsageIndex } }

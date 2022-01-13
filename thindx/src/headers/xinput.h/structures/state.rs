@@ -32,7 +32,7 @@ impl std::ops::DerefMut for State {
 }
 
 test_layout! {
-    State => unsafe winapi::um::xinput::XINPUT_STATE {
+    State => winapi::um::xinput::XINPUT_STATE {
         packet_number   => dwPacketNumber,
         gamepad         => Gamepad,
     }

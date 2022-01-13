@@ -26,4 +26,4 @@ impl DerefMut for VolumeDesc { fn deref_mut(&mut self) -> &mut Self::Target { un
 impl From<D3DVOLUME_DESC > for VolumeDesc { fn from(value: D3DVOLUME_DESC ) -> Self { unsafe { std::mem::transmute(value) } } }
 impl From<VolumeDesc> for D3DVOLUME_DESC  { fn from(value: VolumeDesc     ) -> Self { unsafe { std::mem::transmute(value) } } }
 
-test_layout! { VolumeDesc => unsafe D3DVOLUME_DESC  { format => Format, ty => Type, usage => Usage, pool => Pool, width => Width, height => Height, depth => Depth } }
+test_layout! { VolumeDesc => D3DVOLUME_DESC  { format => Format, ty => Type, usage => Usage, pool => Pool, width => Width, height => Height, depth => Depth } }

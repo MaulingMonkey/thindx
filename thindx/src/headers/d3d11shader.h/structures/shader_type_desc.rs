@@ -30,7 +30,7 @@ impl ShaderTypeDesc<'_> {
     }
 }
 
-test_layout! { ShaderTypeDesc => unsafe D3D11_SHADER_TYPE_DESC {
+test_layout! { ShaderTypeDesc => D3D11_SHADER_TYPE_DESC {
     class       => Class,
     ty          => Type,
     rows        => Rows,

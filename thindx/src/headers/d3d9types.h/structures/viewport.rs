@@ -49,4 +49,4 @@ impl DerefMut for Viewport { fn deref_mut(&mut self) -> &mut Self::Target { unsa
 impl From<D3DVIEWPORT9> for Viewport { fn from(value: D3DVIEWPORT9) -> Self { unsafe { std::mem::transmute(value) } } }
 impl From<Viewport> for D3DVIEWPORT9 { fn from(value: Viewport    ) -> Self { unsafe { std::mem::transmute(value) } } }
 
-test_layout! { Viewport => unsafe D3DVIEWPORT9 { x => X, y => Y, width => Width, height => Height, min_z => MinZ, max_z => MaxZ } }
+test_layout! { Viewport => D3DVIEWPORT9 { x => X, y => Y, width => Width, height => Height, min_z => MinZ, max_z => MaxZ } }

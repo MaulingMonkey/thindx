@@ -20,4 +20,4 @@ impl DerefMut for Vector { fn deref_mut(&mut self) -> &mut Self::Target { unsafe
 impl From<D3DVECTOR> for Vector { fn from(value: D3DVECTOR) -> Self { unsafe { std::mem::transmute(value) } } }
 impl From<Vector> for D3DVECTOR { fn from(value: Vector   ) -> Self { unsafe { std::mem::transmute(value) } } }
 
-test_layout! { Vector => unsafe D3DVECTOR { x => x, y => y, z => z } }
+test_layout! { Vector => D3DVECTOR { x => x, y => y, z => z } }

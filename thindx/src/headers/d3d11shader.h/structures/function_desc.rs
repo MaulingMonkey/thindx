@@ -95,7 +95,7 @@ impl FunctionDesc<'_> {
     }
 }
 
-test_layout! { FunctionDesc => unsafe D3D11_FUNCTION_DESC {
+test_layout! { FunctionDesc => D3D11_FUNCTION_DESC {
     version                         => Version,
     creator                         => Creator,
     flags                           => Flags,

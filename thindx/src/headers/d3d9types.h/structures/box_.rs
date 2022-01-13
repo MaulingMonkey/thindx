@@ -21,7 +21,7 @@ use std::fmt::{self, Debug, Formatter};
     pub back:   u32,
 }
 
-test_layout! { Box => unsafe D3DBOX { left => Left, top => Top, right => Right, bottom => Bottom, front => Front, back => Back } }
+test_layout! { Box => D3DBOX { left => Left, top => Top, right => Right, bottom => Bottom, front => Front, back => Back } }
 
 impl Deref    for Box { fn deref    (&    self) -> &    Self::Target { unsafe { std::mem::transmute(self) } } type Target = D3DBOX; }
 impl DerefMut for Box { fn deref_mut(&mut self) -> &mut Self::Target { unsafe { std::mem::transmute(self) } } }

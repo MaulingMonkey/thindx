@@ -27,7 +27,7 @@ impl ShaderBufferDesc<'_> {
     }
 }
 
-test_layout! { ShaderBufferDesc => unsafe D3D11_SHADER_BUFFER_DESC {
+test_layout! { ShaderBufferDesc => D3D11_SHADER_BUFFER_DESC {
     name                            => Name,
     ty                              => Type,
     variables                       => Variables,

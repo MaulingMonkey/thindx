@@ -29,4 +29,4 @@ impl DerefMut for RasterStatus { fn deref_mut(&mut self) -> &mut Self::Target { 
 impl From<D3DRASTER_STATUS> for RasterStatus { fn from(value: D3DRASTER_STATUS) -> Self { unsafe { std::mem::transmute(value) } } }
 impl From<RasterStatus> for D3DRASTER_STATUS { fn from(value: RasterStatus   ) -> Self { unsafe { std::mem::transmute(value) } } }
 
-test_layout! { RasterStatus => unsafe D3DRASTER_STATUS { in_vblank => InVBlank, scan_line => ScanLine } }
+test_layout! { RasterStatus => D3DRASTER_STATUS { in_vblank => InVBlank, scan_line => ScanLine } }

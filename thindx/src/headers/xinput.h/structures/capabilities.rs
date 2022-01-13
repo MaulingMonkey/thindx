@@ -29,7 +29,7 @@ use bytemuck::{Pod, Zeroable};
 }
 
 test_layout! {
-    Capabilities => unsafe winapi::um::xinput::XINPUT_CAPABILITIES {
+    Capabilities => winapi::um::xinput::XINPUT_CAPABILITIES {
         ty          => Type,
         sub_type    => SubType,
         flags       => Flags,

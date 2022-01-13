@@ -47,4 +47,4 @@ impl DerefMut for ColorValue { fn deref_mut(&mut self) -> &mut Self::Target { un
 impl From<D3DCOLORVALUE> for ColorValue { fn from(value: D3DCOLORVALUE) -> Self { unsafe { std::mem::transmute(value) } } }
 impl From<ColorValue> for D3DCOLORVALUE { fn from(value: ColorValue   ) -> Self { unsafe { std::mem::transmute(value) } } }
 
-test_layout! { ColorValue => unsafe D3DCOLORVALUE { r => r, g => g, b => b, a => a } }
+test_layout! { ColorValue => D3DCOLORVALUE { r => r, g => g, b => b, a => a } }

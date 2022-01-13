@@ -78,7 +78,7 @@ impl<'s> ParameterDesc<'s> {
     }
 }
 
-test_layout! { ParameterDesc => unsafe winapi::um::d3d11shader::D3D11_PARAMETER_DESC {
+test_layout! { ParameterDesc => winapi::um::d3d11shader::D3D11_PARAMETER_DESC {
     name                    => Name,
     semantic_name           => SemanticName,
     ty                      => Type,

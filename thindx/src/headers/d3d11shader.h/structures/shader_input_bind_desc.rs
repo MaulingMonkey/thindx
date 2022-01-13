@@ -33,7 +33,7 @@ impl ShaderInputBindDesc<'_> {
     }
 }
 
-test_layout! { ShaderInputBindDesc => unsafe D3D11_SHADER_INPUT_BIND_DESC {
+test_layout! { ShaderInputBindDesc => D3D11_SHADER_INPUT_BIND_DESC {
     name            => Name,
     ty              => Type,
     bind_point      => BindPoint,

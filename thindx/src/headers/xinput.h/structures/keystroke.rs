@@ -27,7 +27,7 @@ use bytemuck::{Pod, Zeroable};
 }
 
 test_layout! {
-    Keystroke => unsafe winapi::um::xinput::XINPUT_KEYSTROKE {
+    Keystroke => winapi::um::xinput::XINPUT_KEYSTROKE {
         virtual_key     => VirtualKey,
         unicode         => Unicode,
         flags           => Flags,

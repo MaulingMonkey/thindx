@@ -34,7 +34,7 @@ impl SignatureParameterDesc<'_> {
     }
 }
 
-test_layout! { SignatureParameterDesc => unsafe D3D11_SIGNATURE_PARAMETER_DESC {
+test_layout! { SignatureParameterDesc => D3D11_SIGNATURE_PARAMETER_DESC {
     semantic_name       => SemanticName,
     semantic_index      => SemanticIndex,
     register            => Register,

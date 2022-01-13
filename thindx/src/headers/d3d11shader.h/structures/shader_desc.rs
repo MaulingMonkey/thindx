@@ -61,7 +61,7 @@ impl ShaderDesc<'_> {
     }
 }
 
-test_layout! { ShaderDesc => unsafe D3D11_SHADER_DESC {
+test_layout! { ShaderDesc => D3D11_SHADER_DESC {
     version                         => Version,
     creator                         => Creator,
     flags                           => Flags,

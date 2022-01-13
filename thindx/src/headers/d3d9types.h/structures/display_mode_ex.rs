@@ -49,7 +49,7 @@ impl Default for DisplayModeEx {
     }
 }
 
-test_layout! { DisplayModeEx => unsafe D3DDISPLAYMODEEX { size => Size, width => Width, height => Height, refresh_rate => RefreshRate, format => Format, scanline_ordering => ScanLineOrdering } }
+test_layout! { DisplayModeEx => D3DDISPLAYMODEEX { size => Size, width => Width, height => Height, refresh_rate => RefreshRate, format => Format, scanline_ordering => ScanLineOrdering } }
 
 impl Deref    for DisplayModeEx { fn deref    (&    self) -> &    Self::Target { unsafe { std::mem::transmute(self) } } type Target = D3DDISPLAYMODEEX; }
 impl DerefMut for DisplayModeEx { fn deref_mut(&mut self) -> &mut Self::Target { unsafe { std::mem::transmute(self) } } }

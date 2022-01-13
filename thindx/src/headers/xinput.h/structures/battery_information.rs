@@ -19,7 +19,7 @@ use bytemuck::{Pod, Zeroable};
 }
 
 test_layout! {
-    BatteryInformation => unsafe winapi::um::xinput::XINPUT_BATTERY_INFORMATION {
+    BatteryInformation => winapi::um::xinput::XINPUT_BATTERY_INFORMATION {
         battery_type    => BatteryType,
         battery_level   => BatteryLevel,
     }

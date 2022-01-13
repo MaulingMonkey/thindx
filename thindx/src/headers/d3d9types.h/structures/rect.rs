@@ -35,8 +35,8 @@ use std::fmt::{self, Debug, Formatter};
     pub y2: i32,
 }
 
-#[cfg(test)] mod vs_d3drect { use super::*; test_layout_only! { Rect => unsafe D3DRECT { x1 => x1,   y1 => y1,  x2 => x2,    y2 => y2     } } }
-#[cfg(test)] mod vs_rect    { use super::*; test_layout_only! { Rect => unsafe    RECT { x1 => left, y1 => top, x2 => right, y2 => bottom } } }
+#[cfg(test)] mod vs_d3drect { use super::*; test_layout_only! { Rect => D3DRECT { x1 => x1,   y1 => y1,  x2 => x2,    y2 => y2     } } }
+#[cfg(test)] mod vs_rect    { use super::*; test_layout_only! { Rect =>    RECT { x1 => left, y1 => top, x2 => right, y2 => bottom } } }
 
 impl Deref    for Rect { fn deref    (&    self) -> &    Self::Target { unsafe { std::mem::transmute(self) } } type Target = D3DRECT; }
 impl DerefMut for Rect { fn deref_mut(&mut self) -> &mut Self::Target { unsafe { std::mem::transmute(self) } } }

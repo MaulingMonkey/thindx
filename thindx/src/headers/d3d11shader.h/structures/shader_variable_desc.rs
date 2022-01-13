@@ -50,7 +50,7 @@ impl ShaderVariableDesc<'_> {
     }
 }
 
-test_layout! { ShaderVariableDesc => unsafe D3D11_SHADER_VARIABLE_DESC {
+test_layout! { ShaderVariableDesc => D3D11_SHADER_VARIABLE_DESC {
     name            => Name,
     start_offset    => StartOffset,
     size            => Size,

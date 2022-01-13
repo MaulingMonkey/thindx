@@ -3,7 +3,7 @@
 ///
 /// ```no_run
 /// test_layout_only! {
-///     RustyStruct => unsafe D3D_STRUCT {
+///     RustyStruct => D3D_STRUCT {
 ///         rusty_field_a => CppFieldA,
 ///         rusty_field_b => CppFieldB,
 ///     }
@@ -11,7 +11,7 @@
 /// ```
 #[cfg(    test )] macro_rules! test_layout_only {
     (
-        $thin:ty => unsafe $d3d:ty {
+        $thin:ty => $d3d:ty {
             $( $thin_field:ident => $d3d_field:ident ),*
             $(,)?
         }
@@ -40,7 +40,7 @@
 ///
 /// ```no_run
 /// test_layout! {
-///     RustyStruct => unsafe D3D_STRUCT {
+///     RustyStruct => D3D_STRUCT {
 ///         rusty_field_a => CppFieldA,
 ///         rusty_field_b => CppFieldB,
 ///     }
@@ -48,7 +48,7 @@
 /// ```
 #[cfg(    test )] macro_rules! test_layout {
     (
-        $thin:ty => unsafe $d3d:ty {
+        $thin:ty => $d3d:ty {
             $( $thin_field:ident => $d3d_field:ident ),*
             $(,)?
         }

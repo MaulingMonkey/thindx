@@ -27,7 +27,7 @@ use bytemuck::{Pod, Zeroable};
 }
 
 test_layout! {
-    Vibration => unsafe winapi::um::xinput::XINPUT_VIBRATION {
+    Vibration => winapi::um::xinput::XINPUT_VIBRATION {
         left_motor_speed    => wLeftMotorSpeed,
         right_motor_speed   => wRightMotorSpeed,
     }
