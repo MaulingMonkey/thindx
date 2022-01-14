@@ -29,10 +29,17 @@ impl Compiler {
     /// *   This was introduced by d3dcompiler_47.dll, and is unavailable in earlier versions.
     pub fn create_function_linking_graph(&self, flags: Option<std::convert::Infallible>) -> Result<d3d11::FunctionLinkingGraph, MethodError> {
         let f = self.D3DCreateFunctionLinkingGraph.ok_or(MethodError("D3DCreateFunctionLinkingGraph", THINERR::MISSING_DLL_EXPORT))?;
-        let _ = flags; let flags = 0;
+        let _ = flags;
+
+        // SAFETY: ✔️
+        //  * `f` should be a valid/sound fn, like all of `self.*`
+        //  * `0` for reserved flags of `D3DCreateFunctionLinkingGraph` is expected
+        //  * `flg` is just an output `**ID3D11FunctionLinkingGraph`
         let mut flg = null_mut();
-        let hr = unsafe { f(flags, &mut flg) };
+        let hr = unsafe { f(0, &mut flg) };
         MethodError::check("D3DCreateFunctionLinkingGraph", hr)?;
+
+        // SAFETY: ✔️ `flg` is null (from_raw panics) or valid
         Ok(unsafe { d3d11::FunctionLinkingGraph::from_raw(flg) })
     }
 
@@ -58,10 +65,15 @@ impl Compiler {
     /// *   This was introduced by d3dcompiler_47.dll, and is unavailable in earlier versions.
     pub fn create_linker(&self) -> Result<d3d11::Linker, MethodError> {
         let f = self.D3DCreateLinker.ok_or(MethodError("D3DCreateFunctionLinkingGraph", THINERR::MISSING_DLL_EXPORT))?;
+
+        // SAFETY: ✔️
+        //  * `f` should be a valid/sound fn, like all of `self.*`
+        //  * `linker` is just an output `**ID3D11Linker`
         let mut linker = null_mut();
         let hr = unsafe { f(&mut linker) };
         MethodError::check("D3DCreateFunctionLinkingGraph", hr)?;
 
+        // SAFETY: ✔️ `linker` is null (from_raw panics) or valid
         Ok(unsafe { d3d11::Linker::from_raw(linker) })
     }
 
@@ -97,9 +109,16 @@ impl Compiler {
     pub fn load_module(&self, src_data: &Bytecode) -> Result<d3d11::Module, MethodError> {
         let f = self.D3DLoadModule.ok_or(MethodError("D3DLoadModule", THINERR::MISSING_DLL_EXPORT))?;
         let src_data = src_data.as_bytes();
+
+        // SAFETY: ✔️
+        //  * `f` should be a valid/sound fn, like all of `self.*`
+        //  * `D3DLoadModule` may require `src_data` be valid bytecode, but this is implied by `Bytecode`
+        //  * `module` is just an output `**ID3D11Module`
         let mut module = null_mut();
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), &mut module) };
         MethodError::check("D3DLoadModule", hr)?;
+
+        // SAFETY: ✔️ `module` is null (from_raw panics) or valid
         Ok(unsafe { d3d11::Module::from_raw(module) })
     }
 }
