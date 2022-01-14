@@ -4,7 +4,6 @@ use crate::d3d::*;
 
 use std::borrow::Borrow;
 use std::fmt::{self, Debug, Display, Formatter};
-use std::os::windows::ffi::*;
 use std::ops::Deref;
 use std::path::*;
 use std::ptr::*;
@@ -204,8 +203,7 @@ impl Compiler {
         // Early outs
         let f           = self.D3DCompileFromFile.ok_or(MethodError("D3DCompileFromFile", THINERR::MISSING_DLL_EXPORT))?;
         let defines     = defines.as_shader_macros().map_err(|e| MethodError::new("D3DCompileFromFile", e))?;
-
-        let file_name = file_name.as_ref().as_os_str().encode_wide().chain(Some(0)).collect::<Vec<_>>();
+        let file_name   = file_name.to_wcstr("D3DCompileFromFile")?;
 
         let entrypoint  = entrypoint.try_into().map_err(|e| MethodError::new("D3DCompileFromFile", e))?;
         let target      = target    .try_into().map_err(|e| MethodError::new("D3DCompileFromFile", e))?;

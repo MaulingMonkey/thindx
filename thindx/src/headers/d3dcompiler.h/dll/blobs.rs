@@ -1,7 +1,6 @@
 use crate::*;
 use crate::d3d::*;
 
-use std::os::windows::ffi::*;
 use std::path::*;
 use std::ptr::*;
 
@@ -76,7 +75,7 @@ impl Compiler {
     /// *   This was introduced by d3dcompiler_44.dll, and is unavailable in earlier versions.
     pub fn read_file_to_blob(&self, file_name: impl AsRef<Path>) -> Result<ReadOnlyBlob, MethodError> {
         let f = self.D3DReadFileToBlob.ok_or(MethodError("D3DReadFileToBlob", THINERR::MISSING_DLL_EXPORT))?;
-        let file_name = file_name.as_ref().as_os_str().encode_wide().chain(Some(0)).collect::<Vec<_>>();
+        let file_name = file_name.to_wcstr("D3DReadFileToBlob")?;
 
         let mut blob = null_mut();
         let hr = unsafe { f(file_name.as_ptr(), &mut blob) };
@@ -130,7 +129,7 @@ impl Compiler {
         overwrite:  bool,
     ) -> Result<(), MethodError> {
         let f = self.D3DWriteBlobToFile.ok_or(MethodError("D3DWriteBlobToFile", THINERR::MISSING_DLL_EXPORT))?;
-        let file_name = file_name.as_ref().as_os_str().encode_wide().chain(Some(0)).collect::<Vec<_>>();
+        let file_name = file_name.to_wcstr("D3DWriteBlobToFile")?;
         let hr = unsafe { f(blob.as_raw(), file_name.as_ptr(), overwrite.into()) };
         MethodError::check("D3DWriteBlobToFile", hr)
     }
