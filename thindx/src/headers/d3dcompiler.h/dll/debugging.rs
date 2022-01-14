@@ -132,8 +132,20 @@ impl Compiler {
         let comments = comments.try_into().map_err(|e| MethodError::new("D3DDisassemble", e))?;
         let comments = comments.as_opt_cstr();
         let mut disassembly = null_mut();
+
+        // SAFETY: ❌ alloc not fuzzed for overflow, flags unfuzzed
+        //  * `f`               ✔️ should be valid, like all of `self.*`
+        //  * `src_data`        ❌ could cause alloc for `disassembly` to overflow
+        //  * `src_data`        ✔️ should be valid bytecode, as implied by it's type, `Bytecode`
+        //  * `flags`           ⚠️ could be invalid?
+        //  * `comments`        ❌ could cause alloc for `disassembly` to overflow
+        //  * `comments`        ✔️ should be a valid `\0` terminated C-string without interior `\0`s
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), flags, comments, &mut disassembly) };
         MethodError::check("D3DDisassemble", hr)?;
+
+        // SAFETY: ✔️
+        //  * `disassembly`     should be null (panics) or a non-dangling, valid ID3DBlob
+        //  * `ReadOnlyBlob`    imposes no restrictions on the contents of `disassembly`
         Ok(TextBlob::new(unsafe { ReadOnlyBlob::from_raw(disassembly) }))
     }
 
@@ -218,9 +230,24 @@ impl Compiler {
         let comments = comments.as_opt_cstr();
         let mut disassembly = null_mut();
         let mut finish_byte_offset = 0;
+
+        // SAFETY: ❌ alloc not fuzzed for overflow, flags unfuzzed
+        //  * `f`                   ✔️ should be valid, like all of `self.*`
+        //  * `src_data`            ❌ could cause alloc for `disassembly` to overflow
+        //  * `src_data`            ✔️ should be valid bytecode, as implied by it's type, `Bytecode`
+        //  * `flags`               ⚠️ could be invalid?
+        //  * `comments`            ❌ could cause alloc for `disassembly` to overflow
+        //  * `comments`            ✔️ should be a valid `\0` terminated C-string without interior `\0`s
+        //  * `start_byte_offset`   ❌ could be out-of-bounds
+        //  * `num_insts`           ❌ could be out-of-bounds
+        //  * `finish_byte_offset`  ✔️ is a trivial out param
+        //  * `disassembly`         ✔️ is a trivial out param
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), flags, comments, start_byte_offset, num_insts, &mut finish_byte_offset, &mut disassembly) };
         MethodError::check("D3DDisassembleRegion", hr)?;
         Ok(DisassembledRegion {
+            // SAFETY: ✔️
+            //  * `disassembly`     should be null (panics) or a non-dangling, valid ID3DBlob
+            //  * `ReadOnlyBlob`    imposes no restrictions on the contents of `disassembly`
             disassembly: TextBlob::new(unsafe { ReadOnlyBlob::from_raw(disassembly) }),
             finish_byte_offset,
         })
@@ -261,6 +288,15 @@ impl Compiler {
         let f = self.D3DGetTraceInstructionOffsets.ok_or(MethodError("D3DGetTraceInstructionOffsets", THINERR::MISSING_DLL_EXPORT))?;
         let src_data = src_data.as_bytes();
         let mut n = 0;
+
+        // SAFETY: ❌ indicies could be out of bounds, flags unfuzzed
+        //  * `f`                   ✔️ should be valid, like all of `self.*`
+        //  * `src_data`            ✔️ should be valid bytecode, as implied by it's type, `Bytecode`
+        //  * `flags`               ⚠️ could be invalid?
+        //  * `start_inst_index`    ❌ could be out-of-bounds
+        //  * `num_insts`           ❌ could be out-of-bounds
+        //  * `pOffsets`            ✔️ null is valid (we're just getting the count)
+        //  * `pTotalInsts`         ✔️ is a trivial out param
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), flags.into().into(), start_inst_index, num_insts, null_mut(), &mut n) };
         MethodError::check("D3DGetTraceInstructionOffsets", hr)?;
         Ok(n)
@@ -303,6 +339,15 @@ impl Compiler {
         let f = self.D3DGetTraceInstructionOffsets.ok_or(MethodError("D3DGetTraceInstructionOffsets", THINERR::MISSING_DLL_EXPORT))?;
         let src_data = src_data.as_bytes();
         let mut n = 0;
+
+        // SAFETY: ❌ indicies could be out of bounds, flags unfuzzed
+        //  * `f`                   ✔️ should be valid, like all of `self.*`
+        //  * `src_data`            ✔️ should be valid bytecode, as implied by it's type, `Bytecode`
+        //  * `flags`               ⚠️ could be invalid?
+        //  * `start_inst_index`    ❌ could be out-of-bounds
+        //  * `NumInsts`            ✔️ should be valid.  Even if `D3DGetTraceInstructionOffsets` truncates, offsets is initialized, so a short read should be harmless.
+        //  * `pOffsets`            ✔️ is valid for offsets.len() elements.
+        //  * `pTotalInsts`         ✔️ is a trivial out param
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), flags.into().into(), start_inst_index, offsets.len(), offsets.as_mut_ptr(), &mut n) };
         MethodError::check("D3DGetTraceInstructionOffsets", hr)?;
         Ok(&offsets[..n])
@@ -341,20 +386,12 @@ impl Compiler {
         start_inst_index:   usize,
         num_insts:          usize,
     ) -> Result<Vec<usize>, MethodError> {
-        let f = self.D3DGetTraceInstructionOffsets.ok_or(MethodError("D3DGetTraceInstructionOffsets", THINERR::MISSING_DLL_EXPORT))?;
-        let src_data = src_data.as_bytes();
-        let flags = flags.into().into();
-
-        let mut n = 0;
-        let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), flags, start_inst_index, num_insts, null_mut(), &mut n) };
-        MethodError::check("D3DGetTraceInstructionOffsets", hr)?;
-
-        let mut buffer = Vec::new();
-        buffer.resize(n, 0usize);
-        let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), flags, start_inst_index, buffer.len(), buffer.as_mut_ptr(), &mut n) };
-        MethodError::check("D3DGetTraceInstructionOffsets", hr)?;
-        debug_assert_eq!(n, buffer.len(), "number of instructions shouldn't have changed between calls");
-
+        let flags = flags.into();
+        let n = self.get_trace_instruction_offsets_count(src_data, flags, start_inst_index, num_insts)?;
+        let mut buffer = vec![0usize; n];
+        let n2 = self.get_trace_instruction_offsets_inplace(src_data, flags, start_inst_index, &mut buffer)?.len();
+        debug_assert_eq!(n, n2, "number of instructions shouldn't have changed between calls");
+        buffer.shrink_to(n2);
         Ok(buffer)
     }
 }
