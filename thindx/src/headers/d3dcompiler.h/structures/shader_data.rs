@@ -20,6 +20,8 @@ use std::ptr::*;
 impl<'d> ShaderData<'d> {
     /// Get the data in question as a slice of bytes
     pub fn as_bytes(&self) -> &'d [u8] {
+        // SAFETY: ✔️ pBytecode / ByteCodeLength were initially constructed from a `&'d [u8]`
+        //  In the case of ABI transmutation, d3d is generally reading - not writing - this type, and u8s impose no alignment requirements.
         unsafe { std::slice::from_raw_parts(self.data.pBytecode.cast(), self.data.BytecodeLength) }
     }
 }
