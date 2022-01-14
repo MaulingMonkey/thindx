@@ -50,6 +50,12 @@
 @set RUSTFLAGS=-Zinstrument-coverage
 @set LLVM_PROFILE_FILE=%CARGO_TARGET_DIR%\profraw\thindx-%%p-%%m.profraw
 @if "%SKIP_TEST%" == "1" goto :skip-test
+    :: ⚠️ some of these files cache coverage information from expanded proc macros, and
+    :: don't pick up changes to `#[no_coverage]`, even if we set CARGO_INCREMENTAL=0
+    del "%CARGO_TARGET_DIR%\debug\deps\*thindx-*"
+    del "%CARGO_TARGET_DIR%\debug\deps\*fuzz_*"
+    del "%CARGO_TARGET_DIR%\debug\deps\*dev-*"
+    :: don't include coverage from previous test runs
     rmdir "%CARGO_TARGET_DIR%\profraw" /S /Q 2>NUL
     :: ✔️ inline #[test]s
     :: ✔️ integration tests/
@@ -69,7 +75,7 @@ llvm-profdata merge -sparse "%CARGO_TARGET_DIR%\profraw\thindx-*.profraw" -o "%C
 llvm-cov export "--instr-profile=%CARGO_TARGET_DIR%\tests.profdata" --format=lcov "%CARGO_TARGET_DIR%\debug\deps\thindx-*.exe" > "%CARGO_TARGET_DIR%\lcov.info"
 
 :: For summaries in your browser of choice
-grcov . -s . --binary-path target\coverage\debug -t html --branch --ignore-not-existing -o "%CARGO_TARGET_DIR%\grcov"
+grcov . -s . --binary-path "%CARGO_TARGET_DIR%\debug" -t html --branch --ignore-not-existing -o "%CARGO_TARGET_DIR%\grcov"
 @if "%OPEN%" == "1" start "" "%CARGO_TARGET_DIR%\grcov\index.html"
 
 
