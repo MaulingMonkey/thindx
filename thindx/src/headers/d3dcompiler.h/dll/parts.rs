@@ -40,10 +40,20 @@ impl Compiler {
         let f = self.D3DGetBlobPart.ok_or(MethodError("D3DGetBlobPart", THINERR::MISSING_DLL_EXPORT))?;
         let src_data = src_data.as_bytes();
         let part = part.into().into();
-        let _ = flags; let flags = 0;
+        let _ = flags;
         let mut blob = null_mut();
-        let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), part, flags, &mut blob) };
+
+        // SAFETY: ❌ needs fuzz testing against ~4GB `data` to attempt to induce alloc overflow bugs
+        //  * `f`           ✔️ should be valid/sound like all `self.*`
+        //  * `src_data`    ❌ needs fuzz testing against ~4GB data to attempt to induce alloc overflow bugs
+        //  * `src_data`    ✔️ should be valid bytecode as implied by [`Bytecode`]
+        //  * `part`        ⚠️ could be invalid
+        //  * `flags`       ✔️ are reserved/0
+        //  * `blob`        ✔️ is a simple out-param
+        let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), part, 0, &mut blob) };
         MethodError::check("D3DGetBlobPart", hr)?;
+
+        // SAFETY: ✔️ `blob` is null (from_raw panics) or a valid non-dangling pointer (from_raw takes ownership).  ReadOnlyBlob imposes no content requirements.
         Ok(BytesBlob::new(unsafe { ReadOnlyBlob::from_raw(blob) }))
     }
 
@@ -94,9 +104,16 @@ impl Compiler {
         let f = self.D3DGetDebugInfo.ok_or(MethodError("D3DGetDebugInfo", THINERR::MISSING_DLL_EXPORT))?;
         let src_data = src_data.as_bytes();
 
+        // SAFETY: ❌ needs fuzz testing against ~4GB `data` to attempt to induce alloc overflow bugs
+        //  * `f`           ✔️ should be valid/sound like all `self.*`
+        //  * `src_data`    ❌ needs fuzz testing against ~4GB data to attempt to induce alloc overflow bugs
+        //  * `src_data`    ✔️ should be valid bytecode as implied by [`Bytecode`]
+        //  * `blob`        ✔️ is a simple out-param
         let mut blob = null_mut();
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), &mut blob) };
         MethodError::check("D3DGetDebugInfo", hr)?;
+
+        // SAFETY: ✔️ `blob` is null (from_raw panics) or a valid non-dangling pointer (from_raw takes ownership).  ReadOnlyBlob imposes no content requirements.
         Ok(BytesBlob::new(unsafe { ReadOnlyBlob::from_raw(blob) }))
     }
 
@@ -127,9 +144,16 @@ impl Compiler {
         let f = self.D3DGetInputAndOutputSignatureBlob.ok_or(MethodError("D3DGetInputAndOutputSignatureBlob", THINERR::MISSING_DLL_EXPORT))?;
         let src_data = src_data.as_bytes();
 
+        // SAFETY: ❌ needs fuzz testing against ~4GB `data` to attempt to induce alloc overflow bugs
+        //  * `f`           ✔️ should be valid/sound like all `self.*`
+        //  * `src_data`    ❌ needs fuzz testing against ~4GB data to attempt to induce alloc overflow bugs
+        //  * `src_data`    ✔️ should be valid bytecode as implied by [`Bytecode`]
+        //  * `blob`        ✔️ is a simple out-param
         let mut blob = null_mut();
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), &mut blob) };
         MethodError::check("D3DGetInputAndOutputSignatureBlob", hr)?;
+
+        // SAFETY: ✔️ `blob` is null (from_raw panics) or a valid non-dangling pointer (from_raw takes ownership).  ReadOnlyBlob imposes no content requirements.
         Ok(BytesBlob::new(unsafe { ReadOnlyBlob::from_raw(blob) }))
     }
 
@@ -160,9 +184,16 @@ impl Compiler {
         let f = self.D3DGetInputSignatureBlob.ok_or(MethodError("D3DGetInputSignatureBlob", THINERR::MISSING_DLL_EXPORT))?;
         let src_data = src_data.as_bytes();
 
+        // SAFETY: ❌ needs fuzz testing against ~4GB `data` to attempt to induce alloc overflow bugs
+        //  * `f`           ✔️ should be valid/sound like all `self.*`
+        //  * `src_data`    ❌ needs fuzz testing against ~4GB data to attempt to induce alloc overflow bugs
+        //  * `src_data`    ✔️ should be valid bytecode as implied by [`Bytecode`]
+        //  * `blob`        ✔️ is a simple out-param
         let mut blob = null_mut();
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), &mut blob) };
         MethodError::check("D3DGetInputSignatureBlob", hr)?;
+
+        // SAFETY: ✔️ `blob` is null (from_raw panics) or a valid non-dangling pointer (from_raw takes ownership).  ReadOnlyBlob imposes no content requirements.
         Ok(BytesBlob::new(unsafe { ReadOnlyBlob::from_raw(blob) }))
     }
 
@@ -193,9 +224,16 @@ impl Compiler {
         let f = self.D3DGetOutputSignatureBlob.ok_or(MethodError("D3DGetOutputSignatureBlob", THINERR::MISSING_DLL_EXPORT))?;
         let src_data = src_data.as_bytes();
 
+        // SAFETY: ❌ needs fuzz testing against ~4GB `data` to attempt to induce alloc overflow bugs
+        //  * `f`           ✔️ should be valid/sound like all `self.*`
+        //  * `src_data`    ❌ needs fuzz testing against ~4GB data to attempt to induce alloc overflow bugs
+        //  * `src_data`    ✔️ should be valid bytecode as implied by [`Bytecode`]
+        //  * `blob`        ✔️ is a simple out-param
         let mut blob = null_mut();
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), &mut blob) };
         MethodError::check("D3DGetOutputSignatureBlob", hr)?;
+
+        // SAFETY: ✔️ `blob` is null (from_raw panics) or a valid non-dangling pointer (from_raw takes ownership).  ReadOnlyBlob imposes no content requirements.
         Ok(BytesBlob::new(unsafe { ReadOnlyBlob::from_raw(blob) }))
     }
 
@@ -237,11 +275,22 @@ impl Compiler {
     ) -> Result<CodeBlob, MethodError> {
         let f = self.D3DSetBlobPart.ok_or(MethodError("D3DSetBlobPart", THINERR::MISSING_DLL_EXPORT))?;
         let src_data = src_data.as_bytes();
+        let _ = flags;
 
-        let _ = flags; let flags = 0;
+        // SAFETY: ❌ needs fuzz testing against ~4GB `data` to attempt to induce alloc overflow bugs
+        //  * `f`           ✔️ should be valid/sound like all `self.*`
+        //  * `src_data`    ❌ needs fuzz testing against ~4GB data to attempt to induce alloc overflow bugs
+        //  * `src_data`    ✔️ should be valid bytecode as implied by [`Bytecode`]
+        //  * `blob`        ✔️ is a simple out-param
+        //  * `part`        ⚠️ could be invalid
+        //  * `part_data`   ❌ could be invalid for `part`
         let mut blob = null_mut();
-        let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), part.into().into(), flags, part_data.as_ptr().cast(), part_data.len(), &mut blob) };
+        let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), part.into().into(), 0, part_data.as_ptr().cast(), part_data.len(), &mut blob) };
         MethodError::check("D3DSetBlobPart", hr)?;
+
+        // SAFETY: ⚠️
+        //  * `blob`        ✔️ should be null (from_raw panics) or a valid non-dangling blob (from_raw takes ownership)
+        //  * `blob`        ⚠️ should be a shader blob, but invalid params above could violate CodeBlob's precondition (of the blob being valid DXBC or DXIL bytecode)
         Ok(unsafe { CodeBlob::from_unchecked(ReadOnlyBlob::from_raw(blob)) })
     }
 
@@ -279,8 +328,19 @@ impl Compiler {
     ) -> Result<CodeBlob, MethodError> {
         let f = self.D3DStripShader.ok_or(MethodError("D3DStripShader", THINERR::MISSING_DLL_EXPORT))?;
         let mut blob = null_mut();
+
+        // SAFETY: ❌ needs fuzz testing against ~4GB `data` to attempt to induce alloc overflow bugs
+        //  * `f`           ✔️ should be valid/sound like all `self.*`
+        //  * `src_data`    ❌ needs fuzz testing against ~4GB data to attempt to induce alloc overflow bugs
+        //  * `src_data`    ✔️ should be valid bytecode as implied by [`Bytecode`]
+        //  * `strip_flags` ⚠️ could be invalid
+        //  * `blob`        ✔️ is a simple out-param
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), strip_flags.into().into(), &mut blob) };
         MethodError::check("D3DStripShader", hr)?;
+
+        // SAFETY: ⚠️
+        //  * `blob`        ✔️ should be null (from_raw panics) or a valid non-dangling blob (from_raw takes ownership)
+        //  * `blob`        ⚠️ should be a shader blob, but invalid params above could violate CodeBlob's precondition (of the blob being valid DXBC or DXIL bytecode)
         Ok(unsafe { CodeBlob::from_unchecked(ReadOnlyBlob::from_raw(blob)) })
     }
 }
