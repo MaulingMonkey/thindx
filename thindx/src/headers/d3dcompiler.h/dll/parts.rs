@@ -251,7 +251,7 @@ impl Compiler {
     /// Removes unwanted blobs from a compilation result.
     ///
     /// ### Arguments
-    /// *   `shader_bytecode`   - The original shader bytecode.
+    /// *   `src_data`          - The original shader bytecode.
     /// *   `strip_flags`       - The [CompilerStripFlags] to use.
     ///
     /// ### Errors
@@ -274,12 +274,12 @@ impl Compiler {
     /// *   This was introduced by d3dcompiler_40.dll, and is unavailable in earlier versions.
     pub fn strip_shader(
         &self,
-        shader_bytecode:    &[u8],
+        src_data:           &Bytecode,
         strip_flags:        impl Into<CompilerStripFlags>,
     ) -> Result<CodeBlob, MethodError> {
         let f = self.D3DStripShader.ok_or(MethodError("D3DStripShader", THINERR::MISSING_DLL_EXPORT))?;
         let mut blob = null_mut();
-        let hr = unsafe { f(shader_bytecode.as_ptr().cast(), shader_bytecode.len(), strip_flags.into().into(), &mut blob) };
+        let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), strip_flags.into().into(), &mut blob) };
         MethodError::check("D3DStripShader", hr)?;
         Ok(unsafe { CodeBlob::from_unchecked(ReadOnlyBlob::from_raw(blob)) })
     }
