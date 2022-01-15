@@ -52,9 +52,17 @@ impl Compiler {
         let f = self.D3DReflect.ok_or(MethodError("D3DReflect", THINERR::MISSING_DLL_EXPORT))?;
         let src_data = src_data.as_bytes();
 
+        // SAFETY: ❌ needs fuzz testing against ~4GB `data` to attempt to induce alloc overflow bugs
+        //  * `f`           ✔️ should be valid/sound like all `self.*`
+        //  * `src_data`    ❌ needs fuzz testing against ~4GB data to attempt to induce alloc overflow bugs
+        //  * `src_data`    ✔️ should be valid bytecode as implied by [`Bytecode`]
+        //  * `uuid`        ✔️ is a simple GUID input
+        //  * `reflector`   ✔️ is a simple out-param
         let mut reflector = null_mut();
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), &I::Raw::uuidof(), &mut reflector) };
         MethodError::check("D3DReflect", hr)?;
+
+        // SAFETY: ✔️ `reflector` should be null (from_raw panics) or a valid non-dangling I::Raw (from_raw takes ownership)
         Ok(unsafe { I::from_raw(reflector.cast()) })
     }
 
@@ -141,9 +149,17 @@ impl Compiler {
         let f = self.D3DReflectLibrary.ok_or(MethodError("D3DReflectLibrary", THINERR::MISSING_DLL_EXPORT))?;
         let src_data = src_data.as_bytes();
 
+        // SAFETY: ❌ needs fuzz testing against ~4GB `data` to attempt to induce alloc overflow bugs
+        //  * `f`           ✔️ should be valid/sound like all `self.*`
+        //  * `src_data`    ❌ needs fuzz testing against ~4GB data to attempt to induce alloc overflow bugs
+        //  * `src_data`    ✔️ should be valid bytecode as implied by [`Bytecode`]
+        //  * `uuid`        ✔️ is a simple GUID input
+        //  * `reflector`   ✔️ is a simple out-param
         let mut reflector = null_mut();
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), &I::Raw::uuidof(), &mut reflector) };
         MethodError::check("D3DReflectLibrary", hr)?;
+
+        // SAFETY: ✔️ `reflector` should be null (from_raw panics) or a valid non-dangling I::Raw (from_raw takes ownership)
         Ok(unsafe { I::from_raw(reflector.cast()) })
     }
 
