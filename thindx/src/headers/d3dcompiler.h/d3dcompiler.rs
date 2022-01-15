@@ -1,3 +1,5 @@
+#![warn(clippy::undocumented_unsafe_blocks)]
+
 mods! {
     #[path="dll/_dll.rs"] inl mod dll;
 
