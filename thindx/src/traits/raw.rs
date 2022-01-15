@@ -1,5 +1,4 @@
 use std::marker::Sized;
-#[allow(unused_imports)] use std::ptr::*;
 
 
 
@@ -14,20 +13,20 @@ pub unsafe trait Raw : Sized {
     /// The raw underlying winapi type
     type Raw : Sized;
 
-    /// Take ownership from a raw winapi type, panicing if `raw` is <code>[null_mut]\(\)</code>.
+    /// Take ownership from a raw winapi type, panicing if `raw` is null.
     ///
     /// ### ⚠️ Safety ⚠️
-    /// *   `raw` must either be <code>[null_mut]\(\)</code> or a sane/valid instance of the type in question.
+    /// *   `raw` must either be null or a sane/valid instance of the type in question.
     ///
     /// ### Panics
-    /// *   If `raw` is <code>[null_mut]\(\)</code>
+    /// *   If `raw` is null
     //#allow_missing_argument_docs
     unsafe fn from_raw(raw: *mut Self::Raw) -> Self;
 
-    /// Take ownership from a raw winapi type, returning [None] if `raw` is [null_mut].
+    /// Take ownership from a raw winapi type, returning [None] if `raw` is null.
     ///
     /// ### ⚠️ Safety ⚠️
-    /// *   `raw` must either be <code>[null_mut]\(\)</code> or a sane/valid instance of the type in question.
+    /// *   `raw` must either be null or a sane/valid instance of the type in question.
     //#allow_missing_argument_docs
     unsafe fn from_raw_opt(raw: *mut Self::Raw) -> Option<Self>;
 
