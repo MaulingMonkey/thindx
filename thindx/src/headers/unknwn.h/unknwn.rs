@@ -12,7 +12,7 @@ use winapi::um::unknwnbase::IUnknown;
 #[derive(Clone)] #[repr(transparent)]
 pub struct Unknown(pub(crate) mcom::Rc<IUnknown>);
 
-// SAFETY: yep, safe
+// SAFETY: ✔️ yep, safe
 convert!(unsafe Unknown, IUnknown);
 
 unsafe impl AsSafe<IUnknown> for Unknown { fn as_safe(&self) -> &IUnknown { &*self.0 } }
