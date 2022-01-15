@@ -216,13 +216,32 @@ impl Compiler {
 
         let mut shader = null_mut();
         let mut errors = null_mut();
+
+        // SAFETY: ❌ needs fuzz testing for alloc overflows
+        //  * `f`           ✔️ should be a valid/sound fn, like all of `self.*`
+        //  * `file_name`   ⚠️ huge name could cause alloc overflows... but probably causes file not found errors first?
+        //  * `defines`     ❌ huge defines could forkbomb and cause alloc overflows?
+        //  * `include`     ✔️ D3DPreprocess is documented to accept D3D_COMPILE_STANDARD_FILE_INCLUDE, which isn't really a ID3DInclude, as allowed by AsInclude
+        //  * `include`     ❌ huge source files could cause alloc overflows in final shader text blob?
+        //  * `entrypoint`  ❌ huge name could cause alloc overflows
+        //  * `target`      ⚠️ could be invalid... probably won't cause alloc overflows?
+        //  * `flags1`      ⚠️ could be invalid
+        //  * `flags2`      ⚠️ could be invalid
+        //  * `shader`      ✔️ is a trivial out parameter
+        //  * `errors`      ✔️ is a trivial out parameter
         let hr = unsafe { f(
             file_name.as_ptr(),
             defines, include, entrypoint, target,
             flags1, flags2, &mut shader, &mut errors,
         )};
-        let shader = unsafe { ReadOnlyBlob::from_raw_opt(shader as *mut _).map(|blob| CodeBlob::from_unchecked(blob)) };
-        let errors = TextBlob::new(unsafe { ReadOnlyBlob::from_raw_opt(errors as *mut _) });
+
+        // SAFETY: ✔️
+        //  * `shader` & `errors`   ✔️ are either null (from_raw_opt returns None), or valid, non-dangling, unowned, ID3DBlob s (from_raw_opt takes ownership)
+        //  * `ReadOnlyBlob`        ✔️ imposes no restrictions on the contents of the blob
+        //  * `CodeBlob`            ⚠️ requires the contents of `shader` to be valid bytecode.  It should be...
+        let shader = unsafe { ReadOnlyBlob::from_raw_opt(shader).map(|shader| CodeBlob::from_unchecked(shader)) };
+        let errors = TextBlob::new(unsafe { ReadOnlyBlob::from_raw_opt(errors) });
+
         match ErrorKind::check(hr) {
             Ok(())      => Ok(CompileResult { shader: shader.unwrap(), errors }),
             Err(kind)   => Err(CompileError { kind, method: Some("D3DCompileFromFile"), shader, errors }),
@@ -303,13 +322,33 @@ impl Compiler {
 
         let mut shader = null_mut();
         let mut errors = null_mut();
+
+        // SAFETY: ❌ needs fuzz testing for alloc overflows
+        //  * `f`           ✔️ should be a valid/sound fn, like all of `self.*`
+        //  * `src_data`    ⚠️ should be HLSL to preprocess... but D3DCompile2 should probably be fairly tolerant of invalid as heck data?
+        //  * `source_name` ❌ huge name could cause alloc overflows
+        //  * `defines`     ❌ huge defines could forkbomb and cause alloc overflows?
+        //  * `include`     ✔️ D3DPreprocess is documented to accept D3D_COMPILE_STANDARD_FILE_INCLUDE, which isn't really a ID3DInclude, as allowed by AsInclude
+        //  * `include`     ❌ huge source files could cause alloc overflows in final shader text blob?
+        //  * `entrypoint`  ❌ huge name could cause alloc overflows
+        //  * `target`      ⚠️ could be invalid... probably won't cause alloc overflows?
+        //  * `flags1`      ⚠️ could be invalid
+        //  * `flags2`      ⚠️ could be invalid
+        //  * `shader`      ✔️ is a trivial out parameter
+        //  * `errors`      ✔️ is a trivial out parameter
         let hr = unsafe { f(
             src_data.as_ptr().cast(), src_data.len(),
             source_name, defines, include, entrypoint, target,
             flags1, flags2, &mut shader, &mut errors,
         )};
-        let shader = unsafe { ReadOnlyBlob::from_raw_opt(shader as *mut _).map(|blob| CodeBlob::from_unchecked(blob)) };
-        let errors = TextBlob::new(unsafe { ReadOnlyBlob::from_raw_opt(errors as *mut _) });
+
+        // SAFETY: ✔️
+        //  * `shader` & `errors`   ✔️ are either null (from_raw_opt returns None), or valid, non-dangling, unowned, ID3DBlob s (from_raw_opt takes ownership)
+        //  * `ReadOnlyBlob`        ✔️ imposes no restrictions on the contents of the blob
+        //  * `CodeBlob`            ⚠️ requires the contents of `shader` to be valid bytecode.  It should be...
+        let shader = unsafe { ReadOnlyBlob::from_raw_opt(shader).map(|shader| CodeBlob::from_unchecked(shader)) };
+        let errors = TextBlob::new(unsafe { ReadOnlyBlob::from_raw_opt(errors) });
+
         match ErrorKind::check(hr) {
             Ok(())      => Ok(CompileResult { shader: shader.unwrap(), errors }),
             Err(kind)   => Err(CompileError { kind, method: Some("D3DCompile"), shader, errors }),
@@ -404,14 +443,36 @@ impl Compiler {
 
         let mut shader = null_mut();
         let mut errors = null_mut();
+
+        // SAFETY: ❌ needs fuzz testing for alloc overflows
+        //  * `f`                       ✔️ should be a valid/sound fn, like all of `self.*`
+        //  * `src_data`                ⚠️ should be HLSL to preprocess... but D3DCompile2 should probably be fairly tolerant of invalid as heck data?
+        //  * `source_name`             ❌ huge name could cause alloc overflows
+        //  * `defines`                 ❌ huge defines could forkbomb and cause alloc overflows?
+        //  * `include`                 ✔️ D3DPreprocess is documented to accept D3D_COMPILE_STANDARD_FILE_INCLUDE, which isn't really a ID3DInclude, as allowed by AsInclude
+        //  * `include`                 ❌ huge source files could cause alloc overflows in final shader text blob?
+        //  * `entrypoint`              ❌ huge name could cause alloc overflows
+        //  * `target`                  ⚠️ could be invalid... probably won't cause alloc overflows?
+        //  * `flags1`                  ⚠️ could be invalid
+        //  * `flags2`                  ⚠️ could be invalid
+        //  * `secondary_data_flags`    ⚠️ could be invalid
+        //  * `secondary_data`          ❌ could be invalid or cause alloc overflow?
+        //  * `shader`                  ✔️ is a trivial out parameter
+        //  * `errors`                  ✔️ is a trivial out parameter
         let hr = unsafe { f(
             src_data.as_ptr().cast(), src_data.len(),
             source_name, defines, include, entrypoint, target,
             flags1, flags2, secondary_data_flags, secondary_data, secondary_data_len,
             &mut shader, &mut errors,
         )};
-        let shader = unsafe { ReadOnlyBlob::from_raw_opt(shader as *mut _).map(|blob| CodeBlob::from_unchecked(blob)) };
-        let errors = TextBlob::new(unsafe { ReadOnlyBlob::from_raw_opt(errors as *mut _) });
+
+        // SAFETY: ✔️
+        //  * `shader` & `errors`   ✔️ are either null (from_raw_opt returns None), or valid, non-dangling, unowned, ID3DBlob s (from_raw_opt takes ownership)
+        //  * `ReadOnlyBlob`        ✔️ imposes no restrictions on the contents of the blob
+        //  * `CodeBlob`            ⚠️ requires the contents of `shader` to be valid bytecode.  It should be...
+        let shader = unsafe { ReadOnlyBlob::from_raw_opt(shader).map(|shader| CodeBlob::from_unchecked(shader)) };
+        let errors = TextBlob::new(unsafe { ReadOnlyBlob::from_raw_opt(errors) });
+
         match ErrorKind::check(hr) {
             Ok(())      => Ok(CompileResult { shader: shader.unwrap(), errors }),
             Err(kind)   => Err(CompileError { kind, method: Some("D3DCompile2"), shader, errors }),
@@ -482,9 +543,24 @@ impl Compiler {
 
         let mut shader = null_mut();
         let mut errors = null_mut();
+
+        // SAFETY: ❌ needs fuzz testing for alloc overflows
+        //  * `f`           ✔️ should be a valid/sound fn, like all of `self.*`
+        //  * `src_data`    ⚠️ should be HLSL to preprocess... but D3DPreprocess should probably be fairly tolerant of invalid as heck data?
+        //  * `source_name` ❌ huge name could cause alloc overflows
+        //  * `defines`     ❌ huge defines could forkbomb and cause alloc overflows?
+        //  * `include`     ✔️ D3DPreprocess is documented to accept D3D_COMPILE_STANDARD_FILE_INCLUDE, which isn't really a ID3DInclude, as allowed by AsInclude
+        //  * `include`     ❌ huge source files could cause alloc overflows in final shader text blob?
+        //  * `shader`      ✔️ is a trivial out parameter
+        //  * `errors`      ✔️ is a trivial out parameter
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), source_name, defines, include, &mut shader, &mut errors)};
-        let shader = TextBlob::new(unsafe { ReadOnlyBlob::from_raw_opt(shader as *mut _) });
-        let errors = TextBlob::new(unsafe { ReadOnlyBlob::from_raw_opt(errors as *mut _) });
+
+        // SAFETY: ✔️
+        //  * `shader` & `errors`   ✔️ are either null (from_raw_opt returns None), or valid, non-dangling, unowned, ID3DBlob s (from_raw_opt takes ownership)
+        //  * `ReadOnlyBlob`        ✔️ imposes no restrictions on the contents of the blob
+        let shader = TextBlob::new(unsafe { ReadOnlyBlob::from_raw_opt(shader) });
+        let errors = TextBlob::new(unsafe { ReadOnlyBlob::from_raw_opt(errors) });
+
         match ErrorKind::check(hr) {
             Ok(())      => Ok(PreprocessResult { shader, errors }),
             Err(kind)   => Err(PreprocessError { kind, method: Some("D3DPreprocess"), shader, errors }),
