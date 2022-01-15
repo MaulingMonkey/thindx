@@ -17,7 +17,7 @@ use std::ptr::*;
 /// ### Example
 /// ```rust
 /// # use thindx::*;
-/// let d3dc = d3d::Compiler::new(47).unwrap();
+/// let d3dc = d3d::Compiler::load_system(47).unwrap();
 /// let shader = d3dc.compile_from_file(
 ///     r"test\data\library.hlsl", None, None, (), "lib_5_0",
 ///     d3d::Compile::Debug, d3d::CompileEffect::None
@@ -61,7 +61,7 @@ impl<'r> FunctionReflection<'r> {
     /// ### Example
     /// ```rust
     /// # use thindx::*;
-    /// # let d3dc = d3d::Compiler::new(47).unwrap();
+    /// # let d3dc = d3d::Compiler::load_system(47).unwrap();
     /// # let shader = d3dc.compile_from_file(r"test\data\library.hlsl", None, None, (), "lib_5_0", d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
     /// # let lib : d3d11::LibraryReflection = d3dc.reflect_library(&shader).unwrap();
     /// # let scale4 = lib.functions().unwrap().find(|f| f.get_desc().unwrap().name.to_bytes() == b"scale4").unwrap();
@@ -99,7 +99,7 @@ impl<'r> FunctionReflection<'r> {
     /// ### Example
     /// ```rust
     /// # use thindx::*;
-    /// # let d3dc = d3d::Compiler::new(47).unwrap();
+    /// # let d3dc = d3d::Compiler::load_system(47).unwrap();
     /// # let shader = d3dc.compile_from_file(r"test\data\library.hlsl", None, None, (), "lib_5_0", d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
     /// # let lib : d3d11::LibraryReflection = d3dc.reflect_library(&shader).unwrap();
     /// # let scale4 = lib.functions().unwrap().find(|f| f.get_desc().unwrap().name.to_bytes() == b"scale4").unwrap();
@@ -142,7 +142,7 @@ impl<'r> FunctionReflection<'r> {
     /// ### Example
     /// ```rust
     /// # use thindx::*;
-    /// # let d3dc = d3d::Compiler::new(47).unwrap();
+    /// # let d3dc = d3d::Compiler::load_system(47).unwrap();
     /// # let shader = d3dc.compile_from_file(r"test\data\library.hlsl", None, None, (), "lib_5_0", d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
     /// # let lib : d3d11::LibraryReflection = d3dc.reflect_library(&shader).unwrap();
     /// # let scale4 = lib.functions().unwrap().find(|f| f.get_desc().unwrap().name.to_bytes() == b"scale4").unwrap();
@@ -188,7 +188,7 @@ impl<'r> FunctionReflection<'r> {
     /// ### Example
     /// ```rust
     /// # use thindx::*;
-    /// # let d3dc = d3d::Compiler::new(47).unwrap();
+    /// # let d3dc = d3d::Compiler::load_system(47).unwrap();
     /// # let shader = d3dc.compile_from_file(r"test\data\library.hlsl", None, None, (), "lib_5_0", d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
     /// # let lib : d3d11::LibraryReflection = d3dc.reflect_library(&shader).unwrap();
     /// # let scale4 = lib.functions().unwrap().find(|f| f.get_desc().unwrap().name.to_bytes() == b"scale4").unwrap();
@@ -278,7 +278,7 @@ impl<'r> FunctionReflection<'r> {
     /// ### Example
     /// ```rust
     /// # use thindx::*;
-    /// # let d3dc = d3d::Compiler::new(47).unwrap();
+    /// # let d3dc = d3d::Compiler::load_system(47).unwrap();
     /// # let shader = d3dc.compile_from_file(r"test\data\library.hlsl", None, None, (), "lib_5_0", d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
     /// # let lib : d3d11::LibraryReflection = d3dc.reflect_library(&shader).unwrap();
     /// # let scale4 = lib.functions().unwrap().find(|f| f.get_desc().unwrap().name.to_bytes() == b"scale4").unwrap();
@@ -335,7 +335,7 @@ impl<'r> FunctionReflection<'r> {
     /// ### Example
     /// ```rust
     /// # use thindx::*;
-    /// # let d3dc = d3d::Compiler::new(47).unwrap();
+    /// # let d3dc = d3d::Compiler::load_system(47).unwrap();
     /// # let shader = d3dc.compile_from_file(r"test\data\library.hlsl", None, None, (), "lib_5_0", d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
     /// # let lib : d3d11::LibraryReflection = d3dc.reflect_library(&shader).unwrap();
     /// # let scale4 = lib.functions().unwrap().find(|f| f.get_desc().unwrap().name.to_bytes() == b"scale4").unwrap();
@@ -384,7 +384,7 @@ impl<'r> FunctionReflection<'r> {
     /// ### Example
     /// ```rust
     /// # use thindx::*;
-    /// # let d3dc = d3d::Compiler::new(47).unwrap();
+    /// # let d3dc = d3d::Compiler::load_system(47).unwrap();
     /// # let shader = d3dc.compile_from_file(r"test\data\library.hlsl", None, None, (), "lib_5_0", d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
     /// # let lib : d3d11::LibraryReflection = d3dc.reflect_library(&shader).unwrap();
     /// # let scale4 = lib.functions().unwrap().find(|f| f.get_desc().unwrap().name.to_bytes() == b"scale4").unwrap();

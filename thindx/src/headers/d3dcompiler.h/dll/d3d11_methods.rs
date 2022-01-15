@@ -21,7 +21,7 @@ impl Compiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::*; let d3dc = d3d::Compiler::new(47).unwrap();
+    /// # use thindx::*; let d3dc = d3d::Compiler::load_system(47).unwrap();
     /// let flg: d3d11::FunctionLinkingGraph = d3dc.create_function_linking_graph(None).unwrap();
     /// ```
     ///
@@ -57,7 +57,7 @@ impl Compiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::*; let d3dc = d3d::Compiler::new(47).unwrap();
+    /// # use thindx::*; let d3dc = d3d::Compiler::load_system(47).unwrap();
     /// let linker : d3d11::Linker = d3dc.create_linker().unwrap();
     /// ```
     ///
@@ -94,7 +94,7 @@ impl Compiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::d3d::*; let d3dc = Compiler::new(47).unwrap();
+    /// # use thindx::d3d::*; let d3dc = Compiler::load_system(47).unwrap();
     /// let source = "export float4 example(float4 i) { return 2*i; }";
     /// let CompileResult { shader: code_blob, errors: error_blob } = d3dc.compile(
     ///     source.as_bytes(), "example.hlsl",

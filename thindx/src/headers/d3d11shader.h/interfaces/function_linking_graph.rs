@@ -31,7 +31,7 @@ use std::ptr::*;
 /// ### Example
 /// ```rust
 /// use thindx::{*, d3d::*, d3d11::*};
-/// let d3dc = Compiler::new(47).unwrap();
+/// let d3dc = Compiler::load_system(47).unwrap();
 ///
 ///
 /// // 1. Create a library of shader functions
@@ -132,7 +132,7 @@ impl FunctionLinkingGraph {
     /// ### Example
     /// ```rust
     /// # use thindx::{*, d3d::*, d3d11::*};
-    /// # let d3dc = Compiler::new(47).unwrap();
+    /// # let d3dc = Compiler::load_system(47).unwrap();
     /// # let lib_bytecode = d3dc.compile(b"export float4 xyz1(float3 v) { return float4(v, 1.0); }", "example.hlsl", None, None, (), "lib_5_0", Compile::OptimizationLevel3, CompileEffect::None).unwrap();
     /// # let lib = d3dc.load_module(&lib_bytecode).unwrap();
     /// # let graph : FunctionLinkingGraph = d3dc.create_function_linking_graph(None).unwrap();
@@ -189,7 +189,7 @@ impl FunctionLinkingGraph {
     /// ### Example
     /// ```rust
     /// # use thindx::{*, d3d::*, d3d11::*};
-    /// # let d3dc = Compiler::new(47).unwrap();
+    /// # let d3dc = Compiler::load_system(47).unwrap();
     /// # let flg : FunctionLinkingGraph = d3dc.create_function_linking_graph(None).unwrap();
     /// let hlsl = flg.generate_hlsl(()).unwrap();
     /// println!("{}", hlsl.to_utf8_lossy());
@@ -222,7 +222,7 @@ impl FunctionLinkingGraph {
     /// ### Example
     /// ```rust
     /// # use thindx::{*, d3d::*, d3d11::*};
-    /// # let d3dc = Compiler::new(47).unwrap();
+    /// # let d3dc = Compiler::load_system(47).unwrap();
     /// # let flg : FunctionLinkingGraph = d3dc.create_function_linking_graph(None).unwrap();
     /// let errors : TextBlob = flg.get_last_error().unwrap();
     /// assert!(errors.is_empty(), "No errors were reported by flg");
@@ -251,7 +251,7 @@ impl FunctionLinkingGraph {
     /// ### Example
     /// ```rust
     /// # use thindx::{*, d3d::*, d3d11::*};
-    /// # let d3dc = Compiler::new(47).unwrap();
+    /// # let d3dc = Compiler::load_system(47).unwrap();
     /// # let lib_bytecode = d3dc.compile(b"export float4 xyz1(float3 v) { return float4(v, 1.0); }", "example.hlsl", None, None, (), "lib_5_0", Compile::OptimizationLevel3, CompileEffect::None).unwrap();
     /// # let lib = d3dc.load_module(&lib_bytecode).unwrap();
     /// # let graph : FunctionLinkingGraph = d3dc.create_function_linking_graph(None).unwrap();
@@ -280,7 +280,7 @@ impl FunctionLinkingGraph {
     /// ### Example
     /// ```rust
     /// # use thindx::{*, d3d::*, d3d11::*};
-    /// # let d3dc = Compiler::new(47).unwrap();
+    /// # let d3dc = Compiler::load_system(47).unwrap();
     /// # let lib_bytecode = d3dc.compile(b"export float4 xyz1(float3 v) { return float4(v, 1.0); }", "example.hlsl", None, None, (), "lib_5_0", Compile::OptimizationLevel3, CompileEffect::None).unwrap();
     /// # let lib = d3dc.load_module(&lib_bytecode).unwrap();
     /// # let graph : FunctionLinkingGraph = d3dc.create_function_linking_graph(None).unwrap();
@@ -311,7 +311,7 @@ impl FunctionLinkingGraph {
     /// ### Example
     /// ```rust
     /// # use thindx::{*, d3d::*, d3d11::*};
-    /// # let d3dc = Compiler::new(47).unwrap();
+    /// # let d3dc = Compiler::load_system(47).unwrap();
     /// # let flg : FunctionLinkingGraph = d3dc.create_function_linking_graph(None).unwrap();
     /// flg.set_input_signature(&[
     ///     ParameterDesc::new(cstr!("inputPos"),  cstr!("POSITION0"), SVT::Float, SVC::Vector, 1, 3, Interpolation::Linear, PF::In, 0, 0, 0, 0),
@@ -344,7 +344,7 @@ impl FunctionLinkingGraph {
     /// ### Example
     /// ```rust
     /// # use thindx::{*, d3d::*, d3d11::*};
-    /// # let d3dc = Compiler::new(47).unwrap();
+    /// # let d3dc = Compiler::load_system(47).unwrap();
     /// # let flg : FunctionLinkingGraph = d3dc.create_function_linking_graph(None).unwrap();
     /// # flg.set_input_signature(&[]).unwrap();
     /// flg.set_output_signature(&[

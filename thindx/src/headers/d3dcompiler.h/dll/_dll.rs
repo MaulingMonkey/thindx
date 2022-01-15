@@ -1,6 +1,5 @@
 #[allow(unused_imports)] use crate::*;
 #[allow(unused_imports)] use crate::d3d::*;
-use crate::ctypes::BOOL;
 
 use winapi::shared::basetsd::*;
 use winapi::shared::guiddef::*;
@@ -29,7 +28,7 @@ mod d3d11_methods;                  pub use d3d11_methods::*;
 /// <div class="interface-tree">
 ///
 /// &nbsp;   **[Constructors](#constructors)**
-/// [new](Compiler::new)(version: [u32]) -> Result&lt;[Compiler]&gt;
+/// [new](Compiler::load_system)(version: [u32]) -> Result&lt;[Compiler]&gt;
 ///
 /// &nbsp;   **[Compile & Preprocess HLSL to Bytecode](#compile)**
 /// [compile_from_file](Compiler::compile_from_file)(...) - compile hlsl to bytecode
@@ -310,14 +309,14 @@ pub struct Compiler {
         33, 34, 35, 36, 37, 38, 38, 40, 41, 42, 43, 47,
         // Build servers have less installed, so I've neutered this test :(
     ].iter().copied() {
-        println!("d3dcompiler_{}.dll: {}", nn, Compiler::new(nn).is_ok());
+        println!("d3dcompiler_{}.dll: {}", nn, Compiler::load_system(nn).is_ok());
     }
 }
 
 #[test] fn d3dcompiler_47() {
-    let _d3dc47 = Compiler::new(47).unwrap();
+    let _d3dc47 = Compiler::load_system(47).unwrap();
 }
 
 #[should_panic] #[test] fn d3dcompiler_48() {
-    let _d3dc48 = Compiler::new(48).unwrap();
+    let _d3dc48 = Compiler::load_system(48).unwrap();
 }

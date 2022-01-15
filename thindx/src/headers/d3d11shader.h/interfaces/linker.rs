@@ -43,7 +43,7 @@ impl Linker {
     /// ### Example
     /// ```rust
     /// # use thindx::*;
-    /// let d3dc = d3d::Compiler::new(47).unwrap();
+    /// let d3dc = d3d::Compiler::load_system(47).unwrap();
     /// let linker : d3d11::Linker = d3dc.create_linker().unwrap();
     ///
     /// let add_clip_plane = |slot, entry| linker
@@ -103,7 +103,7 @@ impl Linker {
     /// ### Example
     /// ```rust
     /// # use thindx::*;
-    /// let d3dc = d3d::Compiler::new(47).unwrap();
+    /// let d3dc = d3d::Compiler::load_system(47).unwrap();
     /// # let lib = d3dc.compile_from_file(r"test\data\library.hlsl", None, None, (), "lib_5_0", d3d::Compile::OptimizationLevel3, d3d::CompileEffect::None).unwrap();
     /// # let lib = d3dc.load_module(&lib).unwrap();
     /// # let lib = lib.create_instance(()).unwrap();
@@ -147,7 +147,7 @@ impl Linker {
     /// ### Example
     /// ```rust
     /// # use thindx::*;
-    /// let d3dc = d3d::Compiler::new(47).unwrap();
+    /// let d3dc = d3d::Compiler::load_system(47).unwrap();
     ///
     /// let lib = d3dc.compile_from_file(
     ///     r"test\data\library.hlsl", None, None, (), "lib_5_0",

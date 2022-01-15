@@ -1,12 +1,44 @@
 use crate::d3d::*;
 
+use winapi::um::libloaderapi::*;
+
+use std::io;
 use std::path::*;
+use std::ptr::*;
 
 
 
 /// <h1 id="constructors" class="section-header"><a href="#constructors">Constructors</a></h1>
 impl Compiler {
-    /// Attempt to load d3dcompiler.dll
+    /// Attempt to load d3dcompiler_NN.dll
+    ///
+    /// ### ⚠️ Safety ⚠️
+    ///
+    /// **Prefer [Compiler::load_system].**
+    ///
+    /// The possibility of DLL preloading attacks makes this function insecure.
+    /// To be fair, the security of using d3dcompiler at all is questionable.
+    /// If your data is untrusted, should you really be using this API at all?
+    /// This is a developer focused, unfuzzed, native C++ parser and deserializer, with all the edge cases that entails.
+    ///
+    /// Recommended reading, to secure more than just this call:
+    ///
+    /// *   Dynamic-Link Library Security<br>
+    ///     <https://docs.microsoft.com/en-us/windows/win32/dlls/dynamic-link-library-security>
+    /// *   Secure loading of libraries to prevent DLL preloading attacks<br>
+    ///     <https://support.microsoft.com/en-us/topic/secure-loading-of-libraries-to-prevent-dll-preloading-attacks-d41303ec-0748-9211-f317-2edc819682e1>
+    ///
+    /// Additionally, one can argue about if it's sound to consider this function memory safe (e.g. missing the `unsafe` keyword.)
+    /// A user-provided custom `d3dcompiler_NN.dll` could relax soundness guarantees vs a Microsoft version.
+    /// However, taking that argument to the extreme, one could argue a user-provided custom kernel32.dll breaks rust's entire stdlib.
+    /// While Windows attempts to guard against that somewhat, the interpid *could* be running this executable on redox.  Or on linux with wine.  Or...
+    ///
+    /// So, instead, I assert the following:
+    /// *   Functions named `D3DCompile`, `D3DCreateBlob`, etc. have an implicit - if incredibly ill defined - contract.
+    /// *   It should be "sound" to rely on that contract.  Violations of the contract are bugs in the DLLs, not the consuming Rust code.
+    /// *   That contract is narrowed by bugs in known/common d3dcompiler versions (including 3rd party ones), so please [file issues](https://github.com/MaulingMonkey/thindx/issues/new) if you can crash it!
+    /// *   Working around *intentional* undefined behavior - by e.g. defining D3DCompiler with an incorrect function signature, or to immediately dereference null with any/all args just to prove a point, is not.
+    /// *   If in doubt, file an issue!  I can simply close it if I disagree.
     ///
     /// ### Arguments
     /// *   `version` - the d3dcompiler.dll version to load
@@ -20,52 +52,167 @@ impl Compiler {
     /// ### Example
     /// ```rust
     /// use thindx::d3d;
-    /// let d3dc = d3d::Compiler::new(47).unwrap();
-    /// let d3dc = d3d::Compiler::new("d3dcompiler_47.dll").unwrap();
+    /// let d3dc = d3d::Compiler::load_insecure(47).unwrap();
+    /// let d3dc = d3d::Compiler::load_insecure("d3dcompiler_47.dll").unwrap();
     /// ```
-    pub fn new(version: impl CompilerNewVersion) -> Result<Self, std::io::Error> {
-        let lib = version.try_load()?;
-        unsafe{Ok(Self{
-            D3DCompile:                         lib.sym_opt("D3DCompile\0"),
-            D3DCompile2:                        lib.sym_opt("D3DCompile2\0"),
-            D3DCompileFromFile:                 lib.sym_opt("D3DCompileFromFile\0"),
-            D3DCompressShaders:                 lib.sym_opt("D3DCompressShaders\0"),
-            D3DCreateBlob:                      lib.sym_opt("D3DCreateBlob\0"),
-            D3DCreateFunctionLinkingGraph:      lib.sym_opt("D3DCreateFunctionLinkingGraph\0"),
-            D3DCreateLinker:                    lib.sym_opt("D3DCreateLinker\0"),
-            D3DDecompressShaders:               lib.sym_opt("D3DDecompressShaders\0"),
-            D3DDisassemble:                     lib.sym_opt("D3DDisassemble\0"),
-            D3DDisassembleRegion:               lib.sym_opt("D3DDisassembleRegion\0"),
-            D3DGetBlobPart:                     lib.sym_opt("D3DGetBlobPart\0"),
-            D3DGetDebugInfo:                    lib.sym_opt("D3DGetDebugInfo\0"),
-            D3DGetInputAndOutputSignatureBlob:  lib.sym_opt("D3DGetInputAndOutputSignatureBlob\0"),
-            D3DGetInputSignatureBlob:           lib.sym_opt("D3DGetInputSignatureBlob\0"),
-            D3DGetOutputSignatureBlob:          lib.sym_opt("D3DGetOutputSignatureBlob\0"),
-            D3DGetTraceInstructionOffsets:      lib.sym_opt("D3DGetTraceInstructionOffsets\0"),
-            D3DLoadModule:                      lib.sym_opt("D3DLoadModule\0"),
-            D3DPreprocess:                      lib.sym_opt("D3DPreprocess\0"),
-            D3DReadFileToBlob:                  lib.sym_opt("D3DReadFileToBlob\0"),
-            D3DReflect:                         lib.sym_opt("D3DReflect\0"),
-            D3DReflectLibrary:                  lib.sym_opt("D3DReflectLibrary\0"),
-            D3DSetBlobPart:                     lib.sym_opt("D3DSetBlobPart\0"),
-            D3DStripShader:                     lib.sym_opt("D3DStripShader\0"),
-            D3DWriteBlobToFile:                 lib.sym_opt("D3DWriteBlobToFile\0"),
-        })}
+    pub fn load_insecure(version: impl CompilerLoadInsecure) -> Result<Self, std::io::Error> {
+        Self::load_impl(version.try_load()?)
+    }
+
+    /// Attempt to load d3dcompiler_NN.dll via LOAD_LIBRARY_SEARCH_SYSTEM32 (e.g. `%WINDOWS%\System32`)
+    ///
+    /// ### ⚠️ Safety ⚠️
+    ///
+    /// The use of LOAD_LIBRARY_SEARCH_SYSTEM32 should guard somewhat against DLL preloading attacks.
+    ///
+    /// However, using d3dcompiler at all on untrusted data is questionable.
+    /// If your data is untrusted, should you really be using this API at all?
+    /// This is a developer focused, unfuzzed, native C++ parser and deserializer, with all the edge cases that entails.
+    ///
+    /// ### Arguments
+    /// *   `version` - the d3dcompiler.dll version to load
+    ///     * [i32], [u32], [usize], [u64] - load `d3dcompiler_{version}.dll`
+    ///
+    /// ### Returns
+    /// *   Err([std::io::Error])   - if `d3dcompiler_{version}.dll` could not be loaded
+    /// *   Ok([Compiler])          - `d3dcompiler_{version}.dll` was found
+    ///
+    /// ### Example
+    /// ```rust
+    /// use thindx::d3d;
+    /// let d3dc = d3d::Compiler::load_system(47).unwrap();
+    /// ```
+    ///
+    /// ### Remarks
+    /// | Platform                  | Support   |
+    /// | ------------------------- | --------- |
+    /// | Windows 8+                | ✔️ Supported
+    /// | Windows 7                 | ⚠️ Requires [KB2533623](https://support.microsoft.com/kb/2533623)
+    /// | Windows Vista             | ⚠️ Requires [KB2533623](https://support.microsoft.com/kb/2533623)
+    /// | Windows XP                | ❌ Not supported
+    /// | Windows Server 2012+      | ✔️ Supported
+    /// | Windows Server 2008 R2    | ⚠️ Requires [KB2533623](https://support.microsoft.com/kb/2533623)
+    /// | Windows Server 2008       | ⚠️ Requires [KB2533623](https://support.microsoft.com/kb/2533623)
+    /// | Windows Server 2003       | ❌ Not supported
+    pub fn load_system(verison: impl CompilerLoadSysemVersion) -> Result<Self, std::io::Error> {
+        Self::load_impl(verison.try_load()?)
+    }
+
+    fn load_impl(lib: minidl::Library) -> Result<Self, std::io::Error> {
+        macro_rules! compiler { ( $($ident:ident),* $(,)? ) => {{
+            #[allow(dead_code, unused_assignments, non_snake_case)]
+            #[cfg(not(coverage))]
+            fn static_assert_correct_types(compiler: &Compiler) {
+                $(
+                    let mut $ident = compiler.$ident.unwrap();
+                    $ident = winapi::um::d3dcompiler::$ident;
+                    let _ = $ident;
+                )*
+            }
+
+            // SAFETY: ✔️
+            //  * `sym_opt` ✔️ asserts that `$ident` is nul terminated and has no interior nuls
+            //  * `sym_opt` ✔️ is a fairly vanilla ASCII identifier thanks to the `:ident` bound
+            //  * `$ident`  ✔️ fn symbols are type-checked against winapi above in static_assert_correct_types
+            //  * `lib`     ✔️ is permanently loaded library (per fundamental design of `minidl`)
+            //  * `lib`     ⚠️ could be malicious, but it's too late to do anything about it by the time we have a `Library`.
+            //              See more detailed safety section ramblings in `load_*` for details / mitigation.
+            let compiler = unsafe { Self { $(
+                $ident : lib.sym_opt(concat!(stringify!($ident), "\0")),
+            )* } };
+
+            compiler
+        }}}
+
+        #[allow(clippy::undocumented_unsafe_blocks)] // there is a safety doc inside the macro... clippy is blind!
+        Ok(compiler! {
+            D3DCompile,
+            D3DCompile2,
+            D3DCompileFromFile,
+            D3DCompressShaders,
+            D3DCreateBlob,
+            D3DCreateFunctionLinkingGraph,
+            D3DCreateLinker,
+            D3DDecompressShaders,
+            D3DDisassemble,
+            D3DDisassembleRegion,
+            D3DGetBlobPart,
+            D3DGetDebugInfo,
+            D3DGetInputAndOutputSignatureBlob,
+            D3DGetInputSignatureBlob,
+            D3DGetOutputSignatureBlob,
+            D3DGetTraceInstructionOffsets,
+            D3DLoadModule,
+            D3DPreprocess,
+            D3DReadFileToBlob,
+            D3DReflect,
+            D3DReflectLibrary,
+            D3DSetBlobPart,
+            D3DStripShader,
+            D3DWriteBlobToFile,
+            //UncommentToVerifyStaticAssertCatchesEverything,
+        })
     }
 }
 
-#[doc(hidden)] pub trait CompilerNewVersion : sealed::CompilerNewVersion {}
-impl<T: sealed::CompilerNewVersion> CompilerNewVersion for T {}
+#[doc(hidden)] pub trait CompilerLoadInsecure       : sealed::CompilerLoadInsecure      {}
+#[doc(hidden)] pub trait CompilerLoadSysemVersion   : sealed::CompilerLoadSysemVersion  {}
+
+impl<T: sealed::CompilerLoadInsecure    > CompilerLoadInsecure      for T {}
+impl<T: sealed::CompilerLoadSysemVersion> CompilerLoadSysemVersion  for T {}
 
 mod sealed {
     use super::*;
-    pub trait CompilerNewVersion             { fn try_load(self) -> minidl::Result<minidl::Library>; }
-    impl CompilerNewVersion for i32          { fn try_load(self) -> minidl::Result<minidl::Library> { minidl::Library::load(format!("d3dcompiler_{}.dll", self)) } }
-    impl CompilerNewVersion for u32          { fn try_load(self) -> minidl::Result<minidl::Library> { minidl::Library::load(format!("d3dcompiler_{}.dll", self)) } }
-    impl CompilerNewVersion for usize        { fn try_load(self) -> minidl::Result<minidl::Library> { minidl::Library::load(format!("d3dcompiler_{}.dll", self)) } }
-    impl CompilerNewVersion for u64          { fn try_load(self) -> minidl::Result<minidl::Library> { minidl::Library::load(format!("d3dcompiler_{}.dll", self)) } }
-    impl CompilerNewVersion for &'_ Path     { fn try_load(self) -> minidl::Result<minidl::Library> { minidl::Library::load(self) } }
-    impl CompilerNewVersion for &'_ PathBuf  { fn try_load(self) -> minidl::Result<minidl::Library> { minidl::Library::load(self) } }
-    impl CompilerNewVersion for &'_ str      { fn try_load(self) -> minidl::Result<minidl::Library> { minidl::Library::load(self) } }
-    impl CompilerNewVersion for &'_ String   { fn try_load(self) -> minidl::Result<minidl::Library> { minidl::Library::load(self) } }
+
+    pub trait CompilerLoadInsecure              { fn try_load(self) -> minidl::Result<minidl::Library>; }
+    impl CompilerLoadInsecure for i32           { fn try_load(self) -> minidl::Result<minidl::Library> { minidl::Library::load(format!("d3dcompiler_{}.dll", self)) } }
+    impl CompilerLoadInsecure for u32           { fn try_load(self) -> minidl::Result<minidl::Library> { minidl::Library::load(format!("d3dcompiler_{}.dll", self)) } }
+    impl CompilerLoadInsecure for usize         { fn try_load(self) -> minidl::Result<minidl::Library> { minidl::Library::load(format!("d3dcompiler_{}.dll", self)) } }
+    impl CompilerLoadInsecure for u64           { fn try_load(self) -> minidl::Result<minidl::Library> { minidl::Library::load(format!("d3dcompiler_{}.dll", self)) } }
+    impl CompilerLoadInsecure for &'_ Path      { fn try_load(self) -> minidl::Result<minidl::Library> { minidl::Library::load(self) } }
+    impl CompilerLoadInsecure for &'_ PathBuf   { fn try_load(self) -> minidl::Result<minidl::Library> { minidl::Library::load(self) } }
+    impl CompilerLoadInsecure for &'_ str       { fn try_load(self) -> minidl::Result<minidl::Library> { minidl::Library::load(self) } }
+    impl CompilerLoadInsecure for &'_ String    { fn try_load(self) -> minidl::Result<minidl::Library> { minidl::Library::load(self) } }
+
+    pub trait CompilerLoadSysemVersion          { fn try_load(self) -> minidl::Result<minidl::Library>; }
+    impl CompilerLoadSysemVersion for i32       { fn try_load(self) -> minidl::Result<minidl::Library> { load_system(&format!("d3dcompiler_{}.dll\0", self)) } }
+    impl CompilerLoadSysemVersion for u32       { fn try_load(self) -> minidl::Result<minidl::Library> { load_system(&format!("d3dcompiler_{}.dll\0", self)) } }
+    impl CompilerLoadSysemVersion for usize     { fn try_load(self) -> minidl::Result<minidl::Library> { load_system(&format!("d3dcompiler_{}.dll\0", self)) } }
+    impl CompilerLoadSysemVersion for u64       { fn try_load(self) -> minidl::Result<minidl::Library> { load_system(&format!("d3dcompiler_{}.dll\0", self)) } }
+
+    fn load_system(name0: &str) -> minidl::Result<minidl::Library> {
+        let path = name0.strip_suffix('\0').expect("name0 must end in `\\0`");
+        assert!(!path.contains('\0'));
+
+        // SAFETY: ⚠️ could use testing on older/unsupported windows
+        //  * `name0`   ✔️ is `\0` terminated as verified in expect above
+        //  * `name0`   ✔️ contains no interior `\0`s as verified in assert above
+        //  * null      ✔️ is the expected reserved value for the second param
+        //  * flags     ✔️ are hardcoded, well documented
+        //  * flags     ⚠️ are untested on older/unsupported windows
+        let hmodule = unsafe { LoadLibraryExA(name0.as_ptr().cast(), null_mut(), LOAD_LIBRARY_SEARCH_SYSTEM32) };
+
+        if !hmodule.is_null() {
+            // SAFETY: ⚠️ `minidl::Library` is a `#[repr(transparent)]` wrapper around a basic pointer type as of minidl.rev = "e1e86cb7a6e48a3ed1aff4a1e927311d90039e82"
+            return Ok(unsafe { std::mem::transmute(hmodule) });
+        }
+
+        let err = io::Error::last_os_error();
+        match err.raw_os_error() {
+            Some(ERROR_BAD_EXE_FORMAT) => {
+                Err(io::Error::new(io::ErrorKind::Other, format!(
+                    "Unable to load {path}: ERROR_BAD_EXE_FORMAT (likely tried to load a {that}-bit DLL into this {this}-bit process)",
+                    this = if cfg!(target_arch = "x86_64") { "64" } else { "32" },
+                    that = if cfg!(target_arch = "x86_64") { "32" } else { "64" },
+                )))
+            },
+            Some(ERROR_MOD_NOT_FOUND) => {
+                Err(io::Error::new(io::ErrorKind::NotFound, format!("Unable to load {path}: NotFound")))
+            },
+            _ => Err(err)
+        }
+    }
+
+    const ERROR_BAD_EXE_FORMAT : i32 = 0x00C1;
+    const ERROR_MOD_NOT_FOUND  : i32 = 0x007E;
 }

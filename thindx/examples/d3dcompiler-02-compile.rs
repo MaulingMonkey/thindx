@@ -4,7 +4,7 @@ use thindx::*;
 use thindx::d3d::*;
 
 fn main() {
-    let d3dc = d3d::Compiler::new(47).unwrap();
+    let d3dc = d3d::Compiler::load_system(47).unwrap();
     let basic_hlsl   : &[u8] = include_bytes!("../test/data/basic.hlsl");
     let library_hlsl : &[u8] = include_bytes!("../test/data/library.hlsl");
 

@@ -15,7 +15,7 @@ use std::ptr::*;
 /// ### Example
 /// ```rust
 /// # use thindx::*;
-/// let d3dc = d3d::Compiler::new(47).unwrap();
+/// let d3dc = d3d::Compiler::load_system(47).unwrap();
 /// let vs = d3dc.compile_from_file(
 ///     r"test\data\basic.hlsl", None, None, "vs_main", "vs_4_0",
 ///     d3d::Compile::Debug, d3d::CompileEffect::None
@@ -42,7 +42,7 @@ impl ShaderReflection {
     /// ### Example
     /// ```rust
     /// # use thindx::*;
-    /// # let d3dc = d3d::Compiler::new(47).unwrap();
+    /// # let d3dc = d3d::Compiler::load_system(47).unwrap();
     /// # let vs = d3dc.compile_from_file(r"test\data\basic.hlsl", None, None, "vs_main", "vs_4_0", d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
     /// # let vs = d3dc.reflect11(&vs).unwrap();
     /// let count = vs.get_bitwise_instruction_count();
@@ -62,7 +62,7 @@ impl ShaderReflection {
     /// ### Example
     /// ```rust
     /// # use thindx::*;
-    /// # let d3dc = d3d::Compiler::new(47).unwrap();
+    /// # let d3dc = d3d::Compiler::load_system(47).unwrap();
     /// # let vs = d3dc.compile_from_file(r"test\data\basic.hlsl", None, None, "vs_main", "vs_4_0", d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
     /// # let vs = d3dc.reflect11(&vs).unwrap();
     /// let cb0 = vs.get_constant_buffer_by_index(0);
@@ -98,7 +98,7 @@ impl ShaderReflection {
     /// ### Example
     /// ```rust
     /// # use thindx::*;
-    /// # let d3dc = d3d::Compiler::new(47).unwrap();
+    /// # let d3dc = d3d::Compiler::load_system(47).unwrap();
     /// # let vs = d3dc.compile_from_file(r"test\data\basic.hlsl", None, None, "vs_main", "vs_4_0", d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
     /// # let vs = d3dc.reflect11(&vs).unwrap();
     /// let cb0 = vs.get_constant_buffer_by_name("ExampleCBuffer");
@@ -126,7 +126,7 @@ impl ShaderReflection {
     /// ### Example
     /// ```rust
     /// # use thindx::*;
-    /// # let d3dc = d3d::Compiler::new(47).unwrap();
+    /// # let d3dc = d3d::Compiler::load_system(47).unwrap();
     /// # let vs = d3dc.compile_from_file(r"test\data\basic.hlsl", None, None, "vs_main", "vs_4_0", d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
     /// # let vs = d3dc.reflect11(&vs).unwrap();
     /// let count : u32 = vs.get_conversion_instruction_count();
@@ -146,7 +146,7 @@ impl ShaderReflection {
     /// ### Example
     /// ```rust
     /// # use thindx::*;
-    /// # let d3dc = d3d::Compiler::new(47).unwrap();
+    /// # let d3dc = d3d::Compiler::load_system(47).unwrap();
     /// # let vs = d3dc.compile_from_file(r"test\data\basic.hlsl", None, None, "vs_main", "vs_4_0", d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
     /// # let vs = d3dc.reflect11(&vs).unwrap();
     /// let desc = vs.get_desc().unwrap();
@@ -172,7 +172,7 @@ impl ShaderReflection {
     /// ### Example
     /// ```rust
     /// # use thindx::*;
-    /// # let d3dc = d3d::Compiler::new(47).unwrap();
+    /// # let d3dc = d3d::Compiler::load_system(47).unwrap();
     /// # let vs = d3dc.compile_from_file(r"test\data\basic.hlsl", None, None, "vs_main", "vs_4_0", d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
     /// # let vs = d3dc.reflect11(&vs).unwrap();
     /// assert_eq!(vs.get_gs_input_primitive(), d3d::Primitive::Undefined);
@@ -192,7 +192,7 @@ impl ShaderReflection {
     /// ### Example
     /// ```rust
     /// # use thindx::*;
-    /// # let d3dc = d3d::Compiler::new(47).unwrap();
+    /// # let d3dc = d3d::Compiler::load_system(47).unwrap();
     /// # let vs = d3dc.compile_from_file(r"test\data\basic.hlsl", None, None, "vs_main", "vs_4_0", d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
     /// # let vs = d3dc.reflect11(&vs).unwrap();
     /// assert_eq!(0,               vs.get_input_parameter_desc(0).unwrap().semantic_index);
@@ -227,7 +227,7 @@ impl ShaderReflection {
     /// ### Example
     /// ```rust
     /// # use thindx::*;
-    /// # let d3dc = d3d::Compiler::new(47).unwrap();
+    /// # let d3dc = d3d::Compiler::load_system(47).unwrap();
     /// # let vs = d3dc.compile_from_file(r"test\data\basic.hlsl", None, None, "vs_main", "vs_4_0", d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
     /// # let vs = d3dc.reflect11(&vs).unwrap();
     /// assert_eq!(vs.get_min_feature_level().unwrap(), d3d::FeatureLevel::_10_0);
@@ -247,7 +247,7 @@ impl ShaderReflection {
     /// ### Example
     /// ```rust
     /// # use thindx::*;
-    /// # let d3dc = d3d::Compiler::new(47).unwrap();
+    /// # let d3dc = d3d::Compiler::load_system(47).unwrap();
     /// # let vs = d3dc.compile_from_file(r"test\data\basic.hlsl", None, None, "vs_main", "vs_4_0", d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
     /// # let vs = d3dc.reflect11(&vs).unwrap();
     /// let count = vs.get_movc_instruction_count();
@@ -264,7 +264,7 @@ impl ShaderReflection {
     /// ### Example
     /// ```rust
     /// # use thindx::*;
-    /// # let d3dc = d3d::Compiler::new(47).unwrap();
+    /// # let d3dc = d3d::Compiler::load_system(47).unwrap();
     /// # let vs = d3dc.compile_from_file(r"test\data\basic.hlsl", None, None, "vs_main", "vs_4_0", d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
     /// # let vs = d3dc.reflect11(&vs).unwrap();
     /// let count : u32 = vs.get_mov_instruction_count();
@@ -281,7 +281,7 @@ impl ShaderReflection {
     /// ### Example
     /// ```rust
     /// # use thindx::*;
-    /// # let d3dc = d3d::Compiler::new(47).unwrap();
+    /// # let d3dc = d3d::Compiler::load_system(47).unwrap();
     /// # let vs = d3dc.compile_from_file(r"test\data\basic.hlsl", None, None, "vs_main", "vs_4_0", d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
     /// # let vs = d3dc.reflect11(&vs).unwrap();
     /// let slots : u32 = vs.get_num_interface_slots();
@@ -301,7 +301,7 @@ impl ShaderReflection {
     /// ### Example
     /// ```rust
     /// # use thindx::*;
-    /// # let d3dc = d3d::Compiler::new(47).unwrap();
+    /// # let d3dc = d3d::Compiler::load_system(47).unwrap();
     /// # let vs = d3dc.compile_from_file(r"test\data\basic.hlsl", None, None, "vs_main", "vs_4_0", d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
     /// # let vs = d3dc.reflect11(&vs).unwrap();
     /// assert_eq!(0,               vs.get_output_parameter_desc(0).unwrap().semantic_index);
@@ -336,7 +336,7 @@ impl ShaderReflection {
     /// ### Example
     /// ```rust
     /// # use thindx::*;
-    /// # let d3dc = d3d::Compiler::new(47).unwrap();
+    /// # let d3dc = d3d::Compiler::load_system(47).unwrap();
     /// # let vs = d3dc.compile_from_file(r"test\data\basic.hlsl", None, None, "vs_main", "vs_4_0", d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
     /// # let vs = d3dc.reflect11(&vs).unwrap();
     /// // TODO: proper examples
@@ -367,7 +367,7 @@ impl ShaderReflection {
     /// ### Example
     /// ```rust
     /// # use thindx::*;
-    /// # let d3dc = d3d::Compiler::new(47).unwrap();
+    /// # let d3dc = d3d::Compiler::load_system(47).unwrap();
     /// # let vs = d3dc.compile_from_file(r"test\data\basic.hlsl", None, None, "vs_main", "vs_4_0", d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
     /// # let vs = d3dc.reflect11(&vs).unwrap();
     /// assert_eq!(vs.get_requires_flags(), d3d::ShaderRequires::None);
@@ -387,7 +387,7 @@ impl ShaderReflection {
     /// ### Example
     /// ```rust
     /// # use thindx::*;
-    /// # let d3dc = d3d::Compiler::new(47).unwrap();
+    /// # let d3dc = d3d::Compiler::load_system(47).unwrap();
     /// # let vs = d3dc.compile_from_file(r"test\data\basic.hlsl", None, None, "vs_main", "vs_4_0", d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
     /// # let vs = d3dc.reflect11(&vs).unwrap();
     /// let ex = vs.get_resource_binding_desc(0).unwrap();
@@ -426,7 +426,7 @@ impl ShaderReflection {
     /// ### Example
     /// ```rust
     /// # use thindx::*;
-    /// # let d3dc = d3d::Compiler::new(47).unwrap();
+    /// # let d3dc = d3d::Compiler::load_system(47).unwrap();
     /// # let vs = d3dc.compile_from_file(r"test\data\basic.hlsl", None, None, "vs_main", "vs_4_0", d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
     /// # let vs = d3dc.reflect11(&vs).unwrap();
     /// let ex = vs.get_resource_binding_desc_by_name("ExampleCBuffer").unwrap();
@@ -459,7 +459,7 @@ impl ShaderReflection {
     /// ### Example
     /// ```rust
     /// # use thindx::*;
-    /// # let d3dc = d3d::Compiler::new(47).unwrap();
+    /// # let d3dc = d3d::Compiler::load_system(47).unwrap();
     /// # let vs = d3dc.compile_from_file(r"test\data\basic.hlsl", None, None, "vs_main", "vs_4_0", d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
     /// # let vs = d3dc.reflect11(&vs).unwrap();
     /// assert_eq!(vs.get_thread_group_size(), (0, 0, 0));
@@ -482,7 +482,7 @@ impl ShaderReflection {
     /// ### Example
     /// ```rust
     /// # use thindx::*;
-    /// # let d3dc = d3d::Compiler::new(47).unwrap();
+    /// # let d3dc = d3d::Compiler::load_system(47).unwrap();
     /// # let vs = d3dc.compile_from_file(r"test\data\basic.hlsl", None, None, "vs_main", "vs_4_0", d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
     /// # let vs = d3dc.reflect11(&vs).unwrap();
     /// let tint = vs.get_variable_by_name("tint").get_desc().unwrap();
@@ -511,7 +511,7 @@ impl ShaderReflection {
     /// ### Example
     /// ```rust
     /// # use thindx::*;
-    /// # let d3dc = d3d::Compiler::new(47).unwrap();
+    /// # let d3dc = d3d::Compiler::load_system(47).unwrap();
     /// # let vs = d3dc.compile_from_file(r"test\data\basic.hlsl", None, None, "vs_main", "vs_4_0", d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
     /// # let vs = d3dc.reflect11(&vs).unwrap();
     /// assert_eq!(vs.is_sample_frequency_shader(), false);

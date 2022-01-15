@@ -23,7 +23,7 @@ impl Compiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::d3d::*; let d3dc = Compiler::new(47).unwrap();
+    /// # use thindx::d3d::*; let d3dc = Compiler::load_system(47).unwrap();
     /// # let shader = d3dc.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap();
     /// let shader2 = d3dc.set_blob_part(
     ///     &shader, Blob::PrivateData, (), b"testing 123"
@@ -65,8 +65,8 @@ impl Compiler {
     /// ### Example
     /// ```rust
     /// # use thindx::*;
-    /// # if d3d::Compiler::new(43).is_err() { return; }
-    /// let d3dc = d3d::Compiler::new(43).unwrap();
+    /// # if d3d::Compiler::load_system(43).is_err() { return; }
+    /// let d3dc = d3d::Compiler::load_system(43).unwrap();
     /// # let shader_src = std::fs::read(r"test\data\basic.hlsl").unwrap();
     /// # let shader = d3dc.compile(&shader_src, cstr!(r"test\data\basic.hlsl"), None, None, "ps_main", "ps_4_0", d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
     /// let debug_info : d3d::BytesBlob = d3dc.get_debug_info(&shader).unwrap();
@@ -78,7 +78,7 @@ impl Compiler {
     /// # let shader = d3dc.compile(&shader_src, cstr!(r"test\data\basic.hlsl"), None, None, "ps_main", "ps_4_0", d3d::Compile::None, d3d::CompileEffect::None).unwrap();
     /// # assert_eq!(d3dc.get_debug_info(&shader).err().map(|err| err.kind()), Some(E::FAIL), "shader was compiled without debug info");
     /// #
-    /// # let d3dc = d3d::Compiler::new(47).unwrap();
+    /// # let d3dc = d3d::Compiler::load_system(47).unwrap();
     /// # let shader = d3dc.compile(&shader_src, cstr!(r"test\data\basic.hlsl"), None, None, "ps_main", "ps_4_0", d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
     /// # assert_eq!(d3dc.get_debug_info(&shader).err().map(|err| err.kind()), Some(E::FAIL), "shader was compiled with d3dcompiler_47.dll");
     /// ```
@@ -111,7 +111,7 @@ impl Compiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::d3d::*; let d3dc = Compiler::new(47).unwrap();
+    /// # use thindx::d3d::*; let d3dc = Compiler::load_system(47).unwrap();
     /// # let shader = d3dc.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap();
     /// let signature = d3dc.get_input_and_output_signature_blob(&shader).unwrap();
     /// println!("{:?}", &signature);
@@ -144,7 +144,7 @@ impl Compiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::d3d::*; let d3dc = Compiler::new(47).unwrap();
+    /// # use thindx::d3d::*; let d3dc = Compiler::load_system(47).unwrap();
     /// # let shader = d3dc.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap();
     /// let signature = d3dc.get_input_signature_blob(&shader).unwrap();
     /// println!("{:?}", &signature);
@@ -177,7 +177,7 @@ impl Compiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::d3d::*; let d3dc = Compiler::new(47).unwrap();
+    /// # use thindx::d3d::*; let d3dc = Compiler::load_system(47).unwrap();
     /// # let shader = d3dc.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap();
     /// let signature = d3dc.get_output_signature_blob(&shader).unwrap();
     /// println!("{:?}", &signature);
@@ -215,7 +215,7 @@ impl Compiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::d3d::*; let d3dc = Compiler::new(47).unwrap();
+    /// # use thindx::d3d::*; let d3dc = Compiler::load_system(47).unwrap();
     /// # let shader = d3dc.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap();
     /// let shader2 = d3dc.set_blob_part(
     ///     &shader, Blob::PrivateData, (), b"testing 123"
@@ -259,7 +259,7 @@ impl Compiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::d3d::*; let d3dc = Compiler::new(47).unwrap();
+    /// # use thindx::d3d::*; let d3dc = Compiler::load_system(47).unwrap();
     /// let shader = d3dc.compile_from_file(
     ///     r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0",
     ///     Compile::Debug, CompileEffect::None

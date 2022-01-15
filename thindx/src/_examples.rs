@@ -586,20 +586,20 @@ pub const d3d9_02_xinput : () = ();
 /// 
 /// fn main() {
 ///     // The simplest option is to simply hardcode a specific version
-///     let d3dc = d3d::Compiler::new(47).unwrap();
-///     let d3dc = d3d::Compiler::new("d3dcompiler_47.dll").unwrap();
+///     let d3dc = d3d::Compiler::load_system(47).unwrap();
+///     let d3dc = d3d::Compiler::load_insecure("d3dcompiler_47.dll").unwrap();
 /// 
 ///     // However, you can potentially allow a range of versions as well
-///     let d3dc = (33..=47).rev().find_map(|ver| d3d::Compiler::new(ver).ok()).unwrap();
+///     let d3dc = (33..=47).rev().find_map(|ver| d3d::Compiler::load_system(ver).ok()).unwrap();
 /// 
 ///     // TLS is also an option
-///     thread_local! { static D3DC : d3d::Compiler = d3d::Compiler::new(47).unwrap(); }
+///     thread_local! { static D3DC : d3d::Compiler = d3d::Compiler::load_system(47).unwrap(); }
 /// 
 ///     // And lazy_static! should be too
-///     lazy_static::lazy_static! { static ref D3DC2 : d3d::Compiler = d3d::Compiler::new(47).unwrap(); }
+///     lazy_static::lazy_static! { static ref D3DC2 : d3d::Compiler = d3d::Compiler::load_system(47).unwrap(); }
 /// 
 ///     // Init failures are simple std::io::Error s:
-///     let err : std::io::Error = d3d::Compiler::new(9001).map(|_d3dc|()).unwrap_err();
+///     let err : std::io::Error = d3d::Compiler::load_system(9001).map(|_d3dc|()).unwrap_err();
 ///     assert_eq!(err.kind(), std::io::ErrorKind::NotFound);
 ///     println!("{}", err);
 /// }
@@ -627,7 +627,7 @@ pub const d3dcompiler_01_construction : () = ();
 /// use thindx::d3d::*;
 /// 
 /// fn main() {
-///     let d3dc = d3d::Compiler::new(47).unwrap();
+///     let d3dc = d3d::Compiler::load_system(47).unwrap();
 ///     let basic_hlsl   : &[u8] = include_bytes!("../test/data/basic.hlsl");
 ///     let library_hlsl : &[u8] = include_bytes!("../test/data/library.hlsl");
 /// 
@@ -774,7 +774,7 @@ pub const d3dcompiler_02_compile : () = ();
 /// use thindx::d3d11::*;
 /// 
 /// fn main() {
-///     let d3dc = d3d::Compiler::new(47).unwrap();
+///     let d3dc = d3d::Compiler::load_system(47).unwrap();
 ///     let lib_source = b"export float4 xyz1(float3 v) { return float4(v, 1.0); }";
 ///     let lib_bytecode = d3dc.compile(lib_source, "example.hlsl", None, None, (), "lib_5_0", Compile::OptimizationLevel3, CompileEffect::None).unwrap();
 ///     let lib = d3dc.load_module(&lib_bytecode).unwrap();
@@ -857,7 +857,7 @@ pub const d3dcompiler_03_link : () = ();
 /// use thindx::d3d::*;
 /// 
 /// fn main() {
-///     let d3dc = d3d::Compiler::new(47).unwrap();
+///     let d3dc = d3d::Compiler::load_system(47).unwrap();
 ///     let shader  = d3dc.compile_from_file(r"thindx\test\data\basic.hlsl", None, None, "vs_main", "vs_4_0", Compile::Debug, CompileEffect::None).unwrap();
 ///     let _shader = d3dc.reflect::<d3d11::ShaderReflection>(&shader).unwrap();
 ///     let shader  = d3dc.reflect11(&shader).unwrap(); // equivalent shorthand
@@ -1058,7 +1058,7 @@ pub const d3dcompiler_04_reflect_shader : () = ();
 /// use thindx::d3d::*;
 /// 
 /// fn main() {
-///     let d3dc = d3d::Compiler::new(47).unwrap();
+///     let d3dc = d3d::Compiler::load_system(47).unwrap();
 ///     let library = d3dc.compile_from_file(r"thindx\test\data\library.hlsl", None, None, (), "lib_5_0", Compile::Debug, CompileEffect::None).unwrap();
 ///     let _library = d3dc.reflect_library::<d3d11::LibraryReflection>(&library).unwrap();
 ///     let library  = d3dc.reflect_library_11(&library).unwrap(); // equivalent shorthand

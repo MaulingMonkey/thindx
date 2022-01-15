@@ -22,7 +22,7 @@ impl Compiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::d3d::*; let d3dc = Compiler::new(47).unwrap();
+    /// # use thindx::d3d::*; let d3dc = Compiler::load_system(47).unwrap();
     /// let basic_hlsl  = std::fs::read(r"test\data\basic.hlsl").unwrap();
     /// let plain_txt   = std::fs::read(r"test\data\plain.txt").unwrap();
     /// let tocompress = [
@@ -92,7 +92,7 @@ impl Compiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::d3d::*; let d3dc = Compiler::new(47).unwrap();
+    /// # use thindx::d3d::*; let d3dc = Compiler::load_system(47).unwrap();
     /// # let basic_hlsl  = std::fs::read(r"test\data\basic.hlsl").unwrap();
     /// # let plain_txt   = std::fs::read(r"test\data\plain.txt").unwrap();
     /// # let tocompress = [
@@ -133,7 +133,7 @@ impl Compiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::d3d::*; let d3dc = Compiler::new(47).unwrap();
+    /// # use thindx::d3d::*; let d3dc = Compiler::load_system(47).unwrap();
     /// # let basic_hlsl  = std::fs::read(r"test\data\basic.hlsl").unwrap();
     /// # let plain_txt   = std::fs::read(r"test\data\plain.txt").unwrap();
     /// # let tocompress = [
@@ -193,7 +193,7 @@ impl Compiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::d3d::*; let d3dc = Compiler::new(47).unwrap();
+    /// # use thindx::d3d::*; let d3dc = Compiler::load_system(47).unwrap();
     /// # let basic_hlsl  = std::fs::read(r"test\data\basic.hlsl").unwrap();
     /// # let plain_txt   = std::fs::read(r"test\data\plain.txt").unwrap();
     /// # let tocompress = [

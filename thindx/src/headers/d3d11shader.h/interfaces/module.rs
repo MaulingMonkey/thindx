@@ -13,7 +13,7 @@ use std::ptr::*;
 /// ### Example
 /// ```rust
 /// # use thindx::*;
-/// let d3dc = d3d::Compiler::new(47).unwrap();
+/// let d3dc = d3d::Compiler::load_system(47).unwrap();
 /// let lib = d3dc.compile_from_file(
 ///     "test/data/library.hlsl", None, None, (), "lib_5_0",
 ///     d3d::Compile::OptimizationLevel3, d3d::CompileEffect::None
@@ -42,7 +42,7 @@ impl Module {
     /// ### Example
     /// ```rust
     /// # use thindx::*;
-    /// # let d3dc = d3d::Compiler::new(47).unwrap();
+    /// # let d3dc = d3d::Compiler::load_system(47).unwrap();
     /// # let lib = d3dc.compile_from_file("test/data/library.hlsl", None, None, (), "lib_5_0", d3d::Compile::OptimizationLevel3, d3d::CompileEffect::None).unwrap();
     /// # let module : d3d11::Module = d3dc.load_module(&lib).unwrap();
     /// #

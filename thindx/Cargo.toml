@@ -47,7 +47,9 @@ abistr          = "0.2.0-rc1"
 bytemuck.version    = "1"
 bytemuck.features   = ["derive"]
 lazy_static     = "1.4"
-minidl          = "0.1.2"
+#minidl          = "0.1.2"
+minidl.git      = "https://github.com/MaulingMonkey/minidl"
+minidl.rev      = "e1e86cb7a6e48a3ed1aff4a1e927311d90039e82"
 mcom            = "0.1.1"
 #mcom            = { git = "https://github.com/MaulingMonkey/mcom" }
 winapi.version  = "0.3.9"

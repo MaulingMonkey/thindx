@@ -170,7 +170,7 @@ impl Compiler {
     ///
     /// ### Examples
     /// ```rust
-    /// # use thindx::d3d::*; let d3dc = Compiler::new(47).unwrap();
+    /// # use thindx::d3d::*; let d3dc = Compiler::load_system(47).unwrap();
     /// let pixel_shader = d3dc.compile_from_file(
     ///     r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0",
     ///     Compile::Debug, CompileEffect::None,
@@ -258,7 +258,7 @@ impl Compiler {
     ///
     /// ### Examples
     /// ```rust
-    /// # use thindx::d3d::*; let d3dc = Compiler::new(47).unwrap();
+    /// # use thindx::d3d::*; let d3dc = Compiler::load_system(47).unwrap();
     /// let basic_hlsl = std::fs::read(r"test\data\basic.hlsl").unwrap();
     ///
     /// let pixel_shader = d3dc.compile(
@@ -352,7 +352,7 @@ impl Compiler {
     ///
     /// ### Examples
     /// ```rust
-    /// # use thindx::d3d::*; let d3dc = Compiler::new(47).unwrap();
+    /// # use thindx::d3d::*; let d3dc = Compiler::load_system(47).unwrap();
     /// let basic_hlsl = std::fs::read(r"test\data\basic.hlsl").unwrap();
     ///
     /// let pixel_shader = d3dc.compile2(
@@ -452,7 +452,7 @@ impl Compiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::d3d::*; let d3dc = Compiler::new(47).unwrap();
+    /// # use thindx::d3d::*; let d3dc = Compiler::load_system(47).unwrap();
     /// let basic_hlsl = std::fs::read(r"test\data\basic.hlsl").unwrap();
     /// let ps = d3dc.preprocess(&basic_hlsl, r"test\data\basic.hlsl", (), None).unwrap();
     /// println!("{}", ps.shader.to_utf8_lossy());

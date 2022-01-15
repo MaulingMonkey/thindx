@@ -11,7 +11,7 @@ use winapi::um::d3d11shader::*;
 ///
 /// ### Example
 /// ```rust
-/// # use thindx::{*, d3d::*}; let d3dc = Compiler::new(47).unwrap();
+/// # use thindx::{*, d3d::*}; let d3dc = Compiler::load_system(47).unwrap();
 /// let shader = d3dc.compile_from_file(
 ///     r"test\data\library.hlsl", None, None, (), "lib_5_0",
 ///     Compile::Debug, CompileEffect::None

@@ -75,7 +75,7 @@ impl Compiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::d3d::*; let d3dc = Compiler::new(47).unwrap();
+    /// # use thindx::d3d::*; let d3dc = Compiler::load_system(47).unwrap();
     /// # let shader = d3dc.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap();
     /// let dis = d3dc.disassemble(&shader, Disasm::None, "// example comment\n").unwrap();
     /// println!("{}", dis.to_utf8_lossy());
@@ -166,7 +166,7 @@ impl Compiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::d3d::*; let d3dc = Compiler::new(47).unwrap();
+    /// # use thindx::d3d::*; let d3dc = Compiler::load_system(47).unwrap();
     /// # let shader = d3dc.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap();
     /// let dr = d3dc.disassemble_region(
     ///     &shader, Disasm::None, "// example comment\n", 0, std::usize::MAX
@@ -263,7 +263,7 @@ impl Compiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::d3d::*; let d3dc = Compiler::new(47).unwrap();
+    /// # use thindx::d3d::*; let d3dc = Compiler::load_system(47).unwrap();
     /// # let shader = d3dc.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap();
     /// println!("{}", d3dc.get_trace_instruction_offsets_count(
     ///     &shader, GetInstOffsets::None, 0, std::usize::MAX
@@ -312,7 +312,7 @@ impl Compiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::d3d::*; let d3dc = Compiler::new(47).unwrap();
+    /// # use thindx::d3d::*; let d3dc = Compiler::load_system(47).unwrap();
     /// # let shader = d3dc.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap();
     /// let mut offsets = [0; 128];
     /// let offsets : &[usize] = d3dc.get_trace_instruction_offsets_inplace(
@@ -363,7 +363,7 @@ impl Compiler {
     ///
     /// ### Example
     /// ```rust
-    /// # use thindx::d3d::*; let d3dc = Compiler::new(47).unwrap();
+    /// # use thindx::d3d::*; let d3dc = Compiler::load_system(47).unwrap();
     /// # let shader = d3dc.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap();
     /// let offsets : Vec<usize> = d3dc.get_trace_instruction_offsets(
     ///     &shader, GetInstOffsets::None, 0, std::usize::MAX

@@ -12,7 +12,7 @@ use std::fmt::{self, Debug, Formatter};
 /// ### Example
 /// ```rust
 /// # use thindx::{d3d::*, d3d11::*};
-/// # let d3dc = Compiler::new(47).unwrap();
+/// # let d3dc = Compiler::load_system(47).unwrap();
 /// # let shader = d3dc.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap();
 /// let shader = d3dc.reflect11(&shader).unwrap();
 /// let shver : ShaderVersionType = shader.get_desc().unwrap().version.shver();
@@ -64,7 +64,7 @@ impl Default for ShVer {
 /// ### Example
 /// ```rust
 /// # use thindx::{d3d::*, d3d11::*};
-/// # let d3dc = Compiler::new(47).unwrap();
+/// # let d3dc = Compiler::load_system(47).unwrap();
 /// # let shader = d3dc.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap();
 /// let shader = d3dc.reflect11(&shader).unwrap();
 /// let version : ShaderVersion = shader.get_desc().unwrap().version;
