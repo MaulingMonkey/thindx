@@ -221,17 +221,12 @@ impl Compiler {
             defines, include, entrypoint, target,
             flags1, flags2, &mut shader, &mut errors,
         )};
-        ErrorKind::check(hr).map_err(|kind| CompileError {
-            kind,
-            method: Some("D3DCompileFromFile"),
-            shader: unsafe { ReadOnlyBlob::from_raw_opt(shader as *mut _).map(|blob| CodeBlob::from_unchecked(blob)) },
-            errors: TextBlob::new(unsafe { ReadOnlyBlob::from_raw_opt(errors as *mut _) }),
-        })?;
-
-        Ok(CompileResult {
-            shader: unsafe { CodeBlob::from_unchecked(ReadOnlyBlob::from_raw(shader as *mut _)) },
-            errors: TextBlob::new(unsafe { ReadOnlyBlob::from_raw_opt(errors as *mut _) }),
-        })
+        let shader = unsafe { ReadOnlyBlob::from_raw_opt(shader as *mut _).map(|blob| CodeBlob::from_unchecked(blob)) };
+        let errors = TextBlob::new(unsafe { ReadOnlyBlob::from_raw_opt(errors as *mut _) });
+        match ErrorKind::check(hr) {
+            Ok(())      => Ok(CompileResult { shader: shader.unwrap(), errors }),
+            Err(kind)   => Err(CompileError { kind, method: Some("D3DCompileFromFile"), shader, errors }),
+        }
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dcompile)\]
@@ -313,17 +308,12 @@ impl Compiler {
             source_name, defines, include, entrypoint, target,
             flags1, flags2, &mut shader, &mut errors,
         )};
-        ErrorKind::check(hr).map_err(|kind| CompileError {
-            kind,
-            method: Some("D3DCompile"),
-            shader: unsafe { ReadOnlyBlob::from_raw_opt(shader as *mut _).map(|blob| CodeBlob::from_unchecked(blob)) },
-            errors: TextBlob::new(unsafe { ReadOnlyBlob::from_raw_opt(errors as *mut _) }),
-        })?;
-
-        Ok(CompileResult {
-            shader: unsafe { CodeBlob::from_unchecked(ReadOnlyBlob::from_raw(shader as *mut _)) },
-            errors: TextBlob::new(unsafe { ReadOnlyBlob::from_raw_opt(errors as *mut _) }),
-        })
+        let shader = unsafe { ReadOnlyBlob::from_raw_opt(shader as *mut _).map(|blob| CodeBlob::from_unchecked(blob)) };
+        let errors = TextBlob::new(unsafe { ReadOnlyBlob::from_raw_opt(errors as *mut _) });
+        match ErrorKind::check(hr) {
+            Ok(())      => Ok(CompileResult { shader: shader.unwrap(), errors }),
+            Err(kind)   => Err(CompileError { kind, method: Some("D3DCompile"), shader, errors }),
+        }
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dcompile2)\]
@@ -420,17 +410,12 @@ impl Compiler {
             flags1, flags2, secondary_data_flags, secondary_data, secondary_data_len,
             &mut shader, &mut errors,
         )};
-        ErrorKind::check(hr).map_err(|kind| CompileError {
-            kind,
-            method: Some("D3DCompile2"),
-            shader: unsafe { ReadOnlyBlob::from_raw_opt(shader as *mut _).map(|blob| CodeBlob::from_unchecked(blob)) },
-            errors: TextBlob::new(unsafe { ReadOnlyBlob::from_raw_opt(errors as *mut _) }),
-        })?;
-
-        Ok(CompileResult {
-            shader: unsafe { CodeBlob::from_unchecked(ReadOnlyBlob::from_raw(shader as *mut _)) },
-            errors: TextBlob::new(unsafe { ReadOnlyBlob::from_raw_opt(errors as *mut _) }),
-        })
+        let shader = unsafe { ReadOnlyBlob::from_raw_opt(shader as *mut _).map(|blob| CodeBlob::from_unchecked(blob)) };
+        let errors = TextBlob::new(unsafe { ReadOnlyBlob::from_raw_opt(errors as *mut _) });
+        match ErrorKind::check(hr) {
+            Ok(())      => Ok(CompileResult { shader: shader.unwrap(), errors }),
+            Err(kind)   => Err(CompileError { kind, method: Some("D3DCompile2"), shader, errors }),
+        }
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dpreprocess)\]
@@ -498,16 +483,11 @@ impl Compiler {
         let mut shader = null_mut();
         let mut errors = null_mut();
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), source_name, defines, include, &mut shader, &mut errors)};
-        ErrorKind::check(hr).map_err(|kind| PreprocessError {
-            kind,
-            method: Some("D3DPreprocess"),
-            shader: TextBlob::new(unsafe { ReadOnlyBlob::from_raw_opt(shader as *mut _) }),
-            errors: TextBlob::new(unsafe { ReadOnlyBlob::from_raw_opt(errors as *mut _) }),
-        })?;
-
-        Ok(PreprocessResult {
-            shader: TextBlob::new(unsafe { ReadOnlyBlob::from_raw(shader as *mut _) }),
-            errors: TextBlob::new(unsafe { ReadOnlyBlob::from_raw_opt(errors as *mut _) }),
-        })
+        let shader = TextBlob::new(unsafe { ReadOnlyBlob::from_raw_opt(shader as *mut _) });
+        let errors = TextBlob::new(unsafe { ReadOnlyBlob::from_raw_opt(errors as *mut _) });
+        match ErrorKind::check(hr) {
+            Ok(())      => Ok(PreprocessResult { shader, errors }),
+            Err(kind)   => Err(PreprocessError { kind, method: Some("D3DPreprocess"), shader, errors }),
+        }
     }
 }
