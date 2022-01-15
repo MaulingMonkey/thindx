@@ -53,7 +53,7 @@ impl Compiler {
         let f           = self.D3DCompressShaders.ok_or(MethodError("D3DCompressShaders", THINERR::MISSING_DLL_EXPORT))?;
         let num_shaders = shaders.len().try_into().map_err(|_| MethodError::new("D3DCompressShaders", THINERR::MISSING_DLL_EXPORT))?;
 
-        // This sketchy mut cast *should* be sane (famous last words.)
+        // SAFETY: ⚠️ This sketchy mut cast *should* be sane (famous last words.)
         // We're only casting away the immutability of the D3D_SHADER_DATA elements, not the bytecode those elements point to.
         // The array is far too small to reuse as an in-place compression buffer or anything like that.
         // Additionally, in manual testing, I see no mutation of the underlying array.
@@ -62,9 +62,20 @@ impl Compiler {
 
         let flags       = flags.into().into();
 
+        // SAFETY: ❌ needs fuzz testing for alloc overflow bugs
+        //  * `f`               ✔️ should be valid/sound like all `self.*`
+        //  * `num_shaders`     ⚠️ could truncate within `D3DCompressShaders` (harmless?)
+        //  * `shader_data`     ❌ could overflow an alloc within `D3DCompressShaders`
+        //  * `shader_data`     ✔️ may contain arbitrary non-shader data
+        //  * `flags`           ⚠️ could be invalid
+        //  * `compressed_data` ✔️ is a trivial out-param
         let mut compressed_data = null_mut();
         let hr = unsafe { f(num_shaders, shader_data, flags, &mut compressed_data) };
         MethodError::check("D3DCompressShaders", hr)?;
+
+        // SAFETY: ✔️
+        //  * `compressed_data` ✔️ is either null (from_raw panics) or a valid, owned, non-dangling ID3DBlob (ownership transfers)
+        //  * `ReadOnlyBlob`    ✔️ imposes no restrictions on `compressed_data`'s contents.
         Ok(BytesBlob::new(unsafe { ReadOnlyBlob::from_raw(compressed_data) }))
     }
 
@@ -111,6 +122,13 @@ impl Compiler {
         let f = self.D3DDecompressShaders.ok_or(MethodError("D3DDecompressShaders", THINERR::MISSING_DLL_EXPORT))?;
         let mut shader = null_mut(); // D3DDecompressShaders will fail with E_FAIL if ppShaders is null, even if it doesn't use it
         let mut total_shaders = 0;
+
+        // SAFETY: ❌ needs fuzz testing for alloc overflow and corruption bugs
+        //  * `f`               ✔️ should be valid/sound like all `self.*`
+        //  * `src_data`        ⚠️ probably won't overflow an alloc within `D3DDecompressShaders` with these params?
+        //  * `src_data`        ❌ could contain corrupt decompression data
+        //  * `shader`          ✔️ is unused except for a null ptr check
+        //  * `total_shaders`   ⚠️ could be truncated at the 4 GB mark
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), 0, 0, null_mut(), 0, &mut shader, &mut total_shaders) };
         debug_assert!(shader.is_null(), "BUG: shader shouldn't have been touched!?!?");
         MethodError::check("D3DDecompressShaders", hr)?;
@@ -172,6 +190,17 @@ impl Compiler {
 
         for shader in out_shaders.iter_mut() { *shader = None; } // D3DCompressShaders will overwrite
         let mut total_shaders = 0;
+
+        // SAFETY: ❌ needs fuzz testing for alloc overflow and corruption bugs
+        //  * `f`               ✔️ should be valid/sound like all `self.*`
+        //  * `src_data`        ❌ could overflow an alloc within `D3DDecompressShaders`
+        //  * `src_data`        ❌ could contain corrupt decompression data
+        //  * `n`               ⚠️ "shouldn't" (famous last words) cause cause alloc overflow issues inside `D3DDecompressShaders` ?
+        //  * `flags`           ✔️ are reserved / 0
+        //  * `start_index`     ❌ could be out-of-bounds
+        //  * `out_shaders`     ✔️ should be ABI compatible thanks to the #[repr(transparent)] conversion chain: Option<ReadOnlyBlob> -> Option<mcom::Rc<ID3DBlob>> -> Option<NonNull<ID3DBlob>> -> `*mut ID3DBlob`
+        //  * `out_shaders`     ✔️ should not leak (explicitly `None`ed out earlier)
+        //  * `out_shaders`     ✔️ should contain sufficient elements to avoid overflow (`n` inferred from `.len`)
         let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), n, start_index, null_mut(), 0, out_shaders.as_mut_ptr().cast(), &mut total_shaders) };
         MethodError::check("D3DDecompressShaders", hr)?;
         let read = n.min(total_shaders) as usize;
