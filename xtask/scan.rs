@@ -405,6 +405,8 @@ fn file_doc_comments(path: &Path, text: &str) -> Result<(), ()> {
                             (true, rest.trim_start())
                         } else if let Some(rest) = rest.strip_prefix("&self,") {
                             (true, rest.trim_start())
+                        } else if let Some(rest) = rest.strip_prefix("self,") {
+                            (true, rest.trim_start())
                         } else {
                             (false, rest)
                         };

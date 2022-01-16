@@ -67,7 +67,7 @@ pub(crate) trait LibraryExt : Sized + From<Library> + Into<Library> {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/libloaderapi/nf-libloaderapi-getprocaddress)\]
     /// Load a symbol from the library by ordinal.
     ///
-    /// # ⚠️ Safety ⚠️
+    /// ### ⚠️ Safety ⚠️
     ///
     /// *   This function implicitly transmutes `FARPROC` to `FnPtr` without type checking!
     ///     Use extreme caution, and consider following [d3d::Compiler::load_impl]'s example in using a proc macro to verify function type signatures against winapi if possible.
@@ -102,7 +102,7 @@ pub(crate) trait LibraryExt : Sized + From<Library> + Into<Library> {
         unsafe { std::mem::transmute::<Library, HMODULE>(self.into()) }
     }
 
-    /// # ⚠️ Safety ⚠️
+    /// ### ⚠️ Safety ⚠️
     ///
     /// * `hmodule` should be a permanently loaded, valid module
     unsafe fn from_hmodule(hmodule: HMODULE) -> Option<Self> {
