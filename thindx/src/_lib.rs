@@ -41,6 +41,7 @@ mods! {
 
     #[path="traits/_traits.rs"] inl mod traits;
 
+    pub(crate) mod dll;
     inl mod error_kind;
     pub mod errors;
     inl mod method_error_blob;

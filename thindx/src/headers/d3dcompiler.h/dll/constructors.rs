@@ -1,10 +1,6 @@
 use crate::d3d::*;
 
-use winapi::um::libloaderapi::*;
-
-use std::io;
 use std::path::*;
-use std::ptr::*;
 
 
 
@@ -162,6 +158,7 @@ impl<T: sealed::CompilerLoadInsecure    > CompilerLoadInsecure      for T {}
 impl<T: sealed::CompilerLoadSysemVersion> CompilerLoadSysemVersion  for T {}
 
 mod sealed {
+    use crate::dll;
     use super::*;
 
     pub trait CompilerLoadInsecure              { fn try_load(self) -> minidl::Result<minidl::Library>; }
@@ -175,44 +172,8 @@ mod sealed {
     impl CompilerLoadInsecure for &'_ String    { fn try_load(self) -> minidl::Result<minidl::Library> { minidl::Library::load(self) } }
 
     pub trait CompilerLoadSysemVersion          { fn try_load(self) -> minidl::Result<minidl::Library>; }
-    impl CompilerLoadSysemVersion for i32       { fn try_load(self) -> minidl::Result<minidl::Library> { load_system(&format!("d3dcompiler_{}.dll\0", self)) } }
-    impl CompilerLoadSysemVersion for u32       { fn try_load(self) -> minidl::Result<minidl::Library> { load_system(&format!("d3dcompiler_{}.dll\0", self)) } }
-    impl CompilerLoadSysemVersion for usize     { fn try_load(self) -> minidl::Result<minidl::Library> { load_system(&format!("d3dcompiler_{}.dll\0", self)) } }
-    impl CompilerLoadSysemVersion for u64       { fn try_load(self) -> minidl::Result<minidl::Library> { load_system(&format!("d3dcompiler_{}.dll\0", self)) } }
-
-    fn load_system(name0: &str) -> minidl::Result<minidl::Library> {
-        let path = name0.strip_suffix('\0').expect("name0 must end in `\\0`");
-        assert!(!path.contains('\0'));
-
-        // SAFETY: ⚠️ could use testing on older/unsupported windows
-        //  * `name0`   ✔️ is `\0` terminated as verified in expect above
-        //  * `name0`   ✔️ contains no interior `\0`s as verified in assert above
-        //  * null      ✔️ is the expected reserved value for the second param
-        //  * flags     ✔️ are hardcoded, well documented
-        //  * flags     ⚠️ are untested on older/unsupported windows
-        let hmodule = unsafe { LoadLibraryExA(name0.as_ptr().cast(), null_mut(), LOAD_LIBRARY_SEARCH_SYSTEM32) };
-
-        if !hmodule.is_null() {
-            // SAFETY: ⚠️ `minidl::Library` is a `#[repr(transparent)]` wrapper around a basic pointer type as of minidl.rev = "e1e86cb7a6e48a3ed1aff4a1e927311d90039e82"
-            return Ok(unsafe { std::mem::transmute(hmodule) });
-        }
-
-        let err = io::Error::last_os_error();
-        match err.raw_os_error() {
-            Some(ERROR_BAD_EXE_FORMAT) => {
-                Err(io::Error::new(io::ErrorKind::Other, format!(
-                    "Unable to load {path}: ERROR_BAD_EXE_FORMAT (likely tried to load a {that}-bit DLL into this {this}-bit process)",
-                    this = if cfg!(target_arch = "x86_64") { "64" } else { "32" },
-                    that = if cfg!(target_arch = "x86_64") { "32" } else { "64" },
-                )))
-            },
-            Some(ERROR_MOD_NOT_FOUND) => {
-                Err(io::Error::new(io::ErrorKind::NotFound, format!("Unable to load {path}: NotFound")))
-            },
-            _ => Err(err)
-        }
-    }
-
-    const ERROR_BAD_EXE_FORMAT : i32 = 0x00C1;
-    const ERROR_MOD_NOT_FOUND  : i32 = 0x007E;
+    impl CompilerLoadSysemVersion for i32       { fn try_load(self) -> minidl::Result<minidl::Library> { dll::load_system_0(&format!("d3dcompiler_{}.dll\0", self)) } }
+    impl CompilerLoadSysemVersion for u32       { fn try_load(self) -> minidl::Result<minidl::Library> { dll::load_system_0(&format!("d3dcompiler_{}.dll\0", self)) } }
+    impl CompilerLoadSysemVersion for usize     { fn try_load(self) -> minidl::Result<minidl::Library> { dll::load_system_0(&format!("d3dcompiler_{}.dll\0", self)) } }
+    impl CompilerLoadSysemVersion for u64       { fn try_load(self) -> minidl::Result<minidl::Library> { dll::load_system_0(&format!("d3dcompiler_{}.dll\0", self)) } }
 }
