@@ -9,7 +9,7 @@ const URLS : &'static [(&'static str, &'static str)] = &[
 const COMMANDS : &'static [(&'static str, &'static str)] = &[
     ("fetch",               "cargo fetch"),
     ("check",               "cargo c"),
-    ("check-file",          "cargo c ${relativeFile}"),
+    ("check-file",          r"scripts\check.cmd ${relativeFile}"),
     ("clippy",              "cargo +nightly clippy --no-deps"),
     ("test",                "cargo t"),
     ("build",               "cargo b"),

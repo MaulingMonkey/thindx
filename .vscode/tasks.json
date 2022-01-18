@@ -28,7 +28,7 @@
         },
         {
             "label":   "check-file",
-            "command": "cargo c ${relativeFile}",
+            "command": "scripts\\check.cmd ${relativeFile}",
         },
         {
             "label":   "clippy",
