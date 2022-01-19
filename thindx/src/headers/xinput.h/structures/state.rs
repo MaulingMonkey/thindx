@@ -19,9 +19,6 @@ use bytemuck::{Pod, Zeroable};
     pub gamepad:        Gamepad,
 }
 
-// TODO: deadzone fns?
-// TODO: pairing fns?
-
 impl std::ops::Deref for State {
     type Target = Gamepad;
     fn deref(&self) -> &Gamepad { &self.gamepad }
