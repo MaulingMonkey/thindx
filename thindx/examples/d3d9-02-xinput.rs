@@ -102,7 +102,7 @@ fn main() {
                     let sy = 2.0 / 600.0;
 
                     let user = xinput::User::Zero;
-                    let state = xinput::get_state(user).unwrap_or(xinput::State::default());
+                    let state = xinput::get_state(user).ok().filter(|_| !dev::d3d9::hide_for_docs_gen()).unwrap_or(xinput::State::default());
 
                     let _ = xinput::set_state(user, xinput::Vibration {
                         left_motor_speed:  0x101 * (state.left_trigger  as u16),
@@ -117,11 +117,19 @@ fn main() {
                     else if state.buttons.any_held(Buttons::DPadLeft)   { asset_dpad = &assets.Dpad_Left; }
                     else                                                { asset_dpad = &assets.Dpad; }
 
+                    // I intentionally apply no deadzone to these values
+                    let lx = state.left_thumb_x  as f32 * 50.0 / (i16::MAX as f32);
+                    let ly = state.left_thumb_y  as f32 * 50.0 / (i16::MAX as f32);
+                    let rx = state.right_thumb_x as f32 * 50.0 / (i16::MAX as f32);
+                    let ry = state.right_thumb_y as f32 * 50.0 / (i16::MAX as f32);
+                    let lt = state.left_trigger  as f32 * 50.0 / (u8::MAX as f32);
+                    let rt = state.right_trigger as f32 * 50.0 / (u8::MAX as f32);
+
                     for (    dx       ,    dy       , texture,           scale, bri) in [
-                        (-330.0       , 200.0 - 30.0, &assets.LT,          1.0, 128 + state.left_trigger /2),
-                        ( 330.0       , 200.0 - 30.0, &assets.RT,          1.0, 128 + state.right_trigger/2),
-                        (-250.0       , 200.0 + 30.0, &assets.LB,          1.0, if state.buttons.any_held(Buttons::LeftShoulder ) { 255 } else { 128 }),
-                        ( 250.0       , 200.0 + 30.0, &assets.RB,          1.0, if state.buttons.any_held(Buttons::RightShoulder) { 255 } else { 128 }),
+                        (-330.0       , 190.0 - lt  , &assets.LT,          1.0, 128 + state.left_trigger /2),
+                        ( 330.0       , 190.0 - rt  , &assets.RT,          1.0, 128 + state.right_trigger/2),
+                        (-220.0       , 230.0       , &assets.LB,          1.0, if state.buttons.any_held(Buttons::LeftShoulder ) { 255 } else { 128 }),
+                        ( 220.0       , 230.0       , &assets.RB,          1.0, if state.buttons.any_held(Buttons::RightShoulder) { 255 } else { 128 }),
 
                         ( 300.0       ,  30.0 - 60.0, &assets.A,           0.7, if state.buttons.any_held(Buttons::A) { 255 } else { 128 }),
                         ( 300.0 + 60.0,  30.0       , &assets.B,           0.7, if state.buttons.any_held(Buttons::B) { 255 } else { 128 }),
@@ -132,9 +140,9 @@ fn main() {
                         // Guide Button?
                         (-100.0       ,  30.0       , &assets.Back,        0.7, if state.buttons.any_held(Buttons::Back) { 255 } else { 128 }),
 
-                        (-300.0       ,  30.0       , &assets.Left_Stick,  1.5, if state.buttons.any_held(Buttons::LeftThumb) { 255 } else { 128 }),
+                        (-300.0 + lx  ,  30.0 + ly  , &assets.Left_Stick,  1.5, if state.buttons.any_held(Buttons::LeftThumb) { 255 } else { 128 }),
                         (-150.0       ,-130.0       , asset_dpad,          1.5, if state.buttons.any_held(Buttons::DPadDown | Buttons::DPadRight | Buttons::DPadLeft | Buttons::DPadUp) { 255 } else { 128 }),
-                        ( 150.0       ,-130.0       , &assets.Right_Stick, 1.5, if state.buttons.any_held(Buttons::RightThumb) { 255 } else { 128 }),
+                        ( 150.0 + rx  ,-130.0 + ry  , &assets.Right_Stick, 1.5, if state.buttons.any_held(Buttons::RightThumb) { 255 } else { 128 }),
                     ].iter().copied() {
                         // half texel fixups
                         let dx = dx + 0.5;
