@@ -24,3 +24,10 @@ test_layout! {
         battery_level   => BatteryLevel,
     }
 }
+
+#[test] fn test_traits_for_coverage() {
+    let _info = BatteryInformation::default();
+    let _info = BatteryInformation::zeroed();
+    let _info = _info.clone();
+    dbg!(_info);
+}

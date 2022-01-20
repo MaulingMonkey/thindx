@@ -35,3 +35,9 @@ test_layout! {
         hid_code        => HidCode,
     }
 }
+
+#[test] fn test_traits_for_coverage() {
+    let _keystroke = Keystroke::zeroed();
+    let _keystroke = _keystroke.clone();
+    dbg!(_keystroke);
+}

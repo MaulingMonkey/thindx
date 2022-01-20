@@ -37,3 +37,9 @@ test_layout! {
         vibration   => Vibration,
     }
 }
+
+#[test] fn test_traits_for_coverage() {
+    let _caps = Capabilities::zeroed();
+    let _caps = _caps.clone();
+    dbg!(_caps);
+}

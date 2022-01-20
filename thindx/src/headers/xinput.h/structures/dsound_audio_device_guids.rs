@@ -14,3 +14,10 @@ use bytemuck::*;
     /// GUID of the headset sound capture device.
     pub dsound_capture_guid:    Guid,
 }
+
+#[test] fn test_traits_for_coverage() {
+    let _audio = DSoundAudioDeviceGuids::default();
+    let _audio = DSoundAudioDeviceGuids::zeroed();
+    let _audio = _audio.clone();
+    dbg!(_audio);
+}

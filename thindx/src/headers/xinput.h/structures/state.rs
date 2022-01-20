@@ -34,3 +34,12 @@ test_layout! {
         gamepad         => Gamepad,
     }
 }
+
+#[test] fn test_traits_for_coverage() {
+    let _state = State::default();
+    let _state = State::zeroed();
+    let mut _state = _state.clone();
+    let _ = _state.left_trigger;
+    _state.left_trigger = 42;
+    dbg!(_state);
+}

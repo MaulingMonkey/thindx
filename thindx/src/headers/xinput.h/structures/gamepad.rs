@@ -122,3 +122,10 @@ test_layout_only! {
         right_thumb_y   => sThumbRY,
     }
 }
+
+#[test] fn test_traits_for_coverage() {
+    let _gamepad = Gamepad::default();
+    let _gamepad = Gamepad::zeroed();
+    let _gamepad = _gamepad.clone();
+    dbg!(_gamepad);
+}

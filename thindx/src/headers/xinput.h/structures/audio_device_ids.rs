@@ -13,3 +13,9 @@ pub struct AudioDeviceIds {
     /// Windows Core Audio device ID string for capture (microphone).
     pub capture_device_id:  Option<OsString>,
 }
+
+#[test] fn test_traits_for_coverage() {
+    let _audio = AudioDeviceIds::default();
+    let _audio = _audio.clone();
+    dbg!(_audio);
+}

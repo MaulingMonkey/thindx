@@ -32,3 +32,10 @@ test_layout! {
         right_motor_speed   => wRightMotorSpeed,
     }
 }
+
+#[test] fn test_traits_for_coverage() {
+    let _vibration = Vibration::default();
+    let _vibration = Vibration::zeroed();
+    let _vibration = _vibration.clone();
+    dbg!(_vibration);
+}
