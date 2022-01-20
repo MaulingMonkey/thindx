@@ -1,3 +1,4 @@
+mod coverage;
 mod examples;
 mod headers;
 mod scan;
@@ -18,6 +19,7 @@ fn main() {
         "c" | "check"   => check(args),
         "d" | "doc"     => doc(args, false),
         "h" | "help"    => doc(args, true),
+        "coverage"      => coverage::coverage(args),
         "vsc"           => vsc::vsc(args),
         other           => fatal!("unknown command {:?}", other),
     }

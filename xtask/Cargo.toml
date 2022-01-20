@@ -22,3 +22,4 @@ lazy_static     = "1"
 maulingmonkey-windows-sdk-scanner.git = "https://github.com/MaulingMonkey/windows-sdk-scanner"
 mmrbi           = "0.0.17"
 # mmrbi           = { git = "https://github.com/MaulingMonkey/mmrbi", rev = "1e27c41be24a4cb5ae31dd6388dba08a2af9e02b" }
+rustc-demangle  = "0.1"

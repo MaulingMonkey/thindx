@@ -60,11 +60,11 @@
         },
         {
             "label":   "coverage update",
-            "command": "scripts\\coverage.cmd",
+            "command": "cargo xtask coverage",
         },
         {
             "label":   "coverage open",
-            "command": "scripts\\coverage.cmd --open",
+            "command": "cargo xtask coverage --open",
         },
         {
             "label":   "push github master",
