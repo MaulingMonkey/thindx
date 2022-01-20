@@ -19,22 +19,17 @@
 @set OPEN
 @set SKIP_TEST
 
-:: Inferred
-@set RUSTUP_TOOLCHAIN=%CHANNEL%
-@set RUSTUP_TOOLCHAIN_DIR=
-@set CARGO_TARGET_DIR=%~dp0..\target\coverage
-
 
 
 :: Dependencies
 
 @if EXIST "%USERPROFILE%\.rustup\toolchains\%CHANNEL%-x86_64-pc-windows-msvc" goto :skip-install-toolchain
-    rustup toolchain install %RUSTUP_TOOLCHAIN%
+    rustup toolchain install %CHANNEL%
     @if ERRORLEVEL 1 goto :cleanup
 :skip-install-toolchain
 
 @if EXIST "%USERPROFILE%\.rustup\toolchains\%CHANNEL%-x86_64-pc-windows-msvc" goto :skip-install-tools-preview
-    rustup component add llvm-tools-preview
+    rustup component add --toolchain=%CHANNEL% llvm-tools-preview
     @if ERRORLEVEL 1 goto :cleanup
 :skip-install-tools-preview
 
@@ -42,6 +37,12 @@
     cargo install grcov
     @if ERRORLEVEL 1 goto :cleanup
 :skip-install-grcov
+
+
+
+:: Inferred
+@set RUSTUP_TOOLCHAIN=%CHANNEL%
+@set CARGO_TARGET_DIR=%~dp0..\target\coverage
 
 
 
