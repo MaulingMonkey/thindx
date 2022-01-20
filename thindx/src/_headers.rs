@@ -16,7 +16,7 @@
 //! | [d3dcommon.h](#d3dcommonh) | ⚠️ 2 of 3 | ✔️ 1 of 1 | ✔️ 22 of 22 |   | ❌ 0 of 562 |
 //! | [d3dcompiler.h](#d3dcompilerh) |   | ✔️ 1 of 1 | ✔️ 2 of 2 |   | ❌ 0 of 23 |
 //! | [d3d9.h](#d3d9h) | ⚠️ 20 of 24 |   |   | ⚠️ 2 of 9 |   |
-//! | [d3d9caps.h](#d3d9capsh) |   | ⚠️ 1 of 5 |   |   |   |
+//! | [d3d9caps.h](#d3d9capsh) |   | ⚠️ 3 of 5 |   |   |   |
 //! | [d3d9types.h](#d3d9typesh) |   | ⚠️ 17 of 71 | ⚠️ 39 of 54 |   | ❌ 0 of 654 |
 //! | [d3d11shader.h](#d3d11shaderh) | ✔️ 12 of 12 | ✔️ 9 of 9 | ✔️ 1 of 1 |   | ❌ 0 of 7 |
 //! | [d3d11shadertracing.h](#d3d11shadertracingh) | ❌ 0 of 2 | ❌ 0 of 11 | ❌ 0 of 3 |   | ❌ 0 of 48 |
@@ -1027,8 +1027,8 @@
 //! [`D3DCAPS9`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9caps/ns-d3d9caps-d3dcaps9)&nbsp;→ [`d3d9::Caps`] <br>
 //! `D3DCONTENTPROTECTIONCAPS` →&nbsp;❌ <br>
 //! `D3DOVERLAYCAPS` →&nbsp;❌ <br>
-//! `D3DPSHADERCAPS2_0` →&nbsp;❌ <br>
-//! `D3DVSHADERCAPS2_0` →&nbsp;❌ <br>
+//! [`D3DPSHADERCAPS2_0`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9caps/ns-d3d9caps-d3dpshadercaps2_0)&nbsp;→ [`d3d::PShaderCaps20`] <br>
+//! [`D3DVSHADERCAPS2_0`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9caps/ns-d3d9caps-d3dvshadercaps2_0)&nbsp;→ [`d3d::VShaderCaps20`] <br>
 //!
 //! <br>
 //!

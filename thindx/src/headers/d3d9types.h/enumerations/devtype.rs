@@ -1,5 +1,5 @@
 #[allow(unused_imports)] use crate::*;
-
+use bytemuck::{Pod, Zeroable};
 use winapi::shared::d3d9types::*;
 
 
@@ -12,7 +12,7 @@ use winapi::shared::d3d9types::*;
 /// A [DevType::Ref] device should be created in [Pool::Scratch] memory, unless vertex and index buffers are required. To support vertex and index buffers, create the device in [Pool::SystemMem] memory.
 ///
 /// If D3dref9.dll is installed, Direct3D will use the reference rasterizer to create a [DevType::Ref] device type, even if [DevType::NullRef] is specified. If D3dref9.dll is not available and [DevType::NullRef] is specified, Direct3D will neither render nor present the scene.
-#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Pod, Zeroable)]
 #[repr(transparent)] pub struct DevType(D3DDEVTYPE);
 
 enumish! { DevType => D3DDEVTYPE; HAL, NullRef, Ref, SW }

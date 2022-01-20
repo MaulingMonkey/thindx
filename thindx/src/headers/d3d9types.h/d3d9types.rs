@@ -61,7 +61,6 @@ mods! {
     inl mod structures {
         inl mod adapter_identifier;
         inl mod box_;
-        inl mod caps;
         inl mod clip_status;
         inl mod color_value;
         inl mod display_mode_ex;

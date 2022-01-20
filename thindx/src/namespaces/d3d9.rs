@@ -167,5 +167,6 @@ use u32 as DWORD;
 use winapi;
 
 pub use crate::d3d9_h::*;
+pub use crate::d3d9caps_h::*;
 pub use crate::d3d9types_h::*;
 pub use shared_handle::SharedHandleParam;

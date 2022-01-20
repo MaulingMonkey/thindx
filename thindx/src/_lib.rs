@@ -31,6 +31,7 @@ mods! {
     }
 
     #[path="headers/d3d9.h/d3d9.rs"]                mod d3d9_h;         // d3d9 mod
+    #[path="headers/d3d9caps.h/d3d9caps.rs"]        mod d3d9caps_h;     // d3d9 mod
     #[path="headers/d3d9types.h/d3d9types.rs"]      mod d3d9types_h;    // d3d9 mod
     #[path="headers/d3d11shader.h/d3d11shader.rs"]  mod d3d11shader_h;  // d3d11 mod
     #[path="headers/d3dcommon.h/d3dcommon.rs"]      mod d3dcommon_h;    // d3d mod

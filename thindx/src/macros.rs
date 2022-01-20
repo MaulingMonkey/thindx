@@ -47,28 +47,31 @@
 /// }
 /// ```
 #[cfg(    test )] macro_rules! test_layout {
-    (
+    ($(
         $thin:ty => $d3d:ty {
             $( $thin_field:ident => $d3d_field:ident ),*
             $(,)?
         }
-    ) => {
+    )*) => {
         #[test] fn layout() {
             use std::mem::*;
             use std::ptr::addr_of;
             use $crate::macros::*;
-            let thin = MaybeUninit::<$thin>::uninit();
-            let d3d  = MaybeUninit::<$d3d >::uninit();
-            let thin = thin.as_ptr();
-            let d3d  = d3d .as_ptr();
-            assert_eq!( size_of::<$thin>(),  size_of::<$d3d>(),  "size_of {} != {}", stringify!($thin), stringify!($d3d));
-            assert_eq!(align_of::<$thin>(), align_of::<$d3d>(), "align_of {} != {}", stringify!($thin), stringify!($d3d));
-            assert!(stringify!($d3d).to_lowercase().replace("_","").contains(stringify!($thin).to_lowercase().as_str()), "{} not included in {}'s name", stringify!($thin), stringify!($d3d));
-            $(unsafe {
-                assert_eq!(size_of_val_raw_sized(addr_of!((*thin).$thin_field)), size_of_val_raw_sized(addr_of!((*d3d).$d3d_field)),   "size_of {}::{} != {}::{}", stringify!($thin), stringify!($thin_field), stringify!($d3d), stringify!($d3d_field));
-                assert_eq!(      offset_of(thin, addr_of!((*thin).$thin_field)),        offset_of(d3d, addr_of!((*d3d).$d3d_field)), "offset_of {}::{} != {}::{}", stringify!($thin), stringify!($thin_field), stringify!($d3d), stringify!($d3d_field));
-                assert!(stringify!($d3d_field).to_lowercase().replace("_","").contains(stringify!($thin_field).strip_prefix("r#").unwrap_or(stringify!($thin_field)).to_lowercase().replace("_","").as_str()), "{} not included in {}'s name", stringify!($thin_field), stringify!($d3d_field));
-            })*
+
+            $(
+                let thin = MaybeUninit::<$thin>::uninit();
+                let d3d  = MaybeUninit::<$d3d >::uninit();
+                let thin = thin.as_ptr();
+                let d3d  = d3d .as_ptr();
+                assert_eq!( size_of::<$thin>(),  size_of::<$d3d>(),  "size_of {} != {}", stringify!($thin), stringify!($d3d));
+                assert_eq!(align_of::<$thin>(), align_of::<$d3d>(), "align_of {} != {}", stringify!($thin), stringify!($d3d));
+                assert!(stringify!($d3d).to_lowercase().replace("_","").contains(stringify!($thin).to_lowercase().as_str()), "{} not included in {}'s name", stringify!($thin), stringify!($d3d));
+                $(unsafe {
+                    assert_eq!(size_of_val_raw_sized(addr_of!((*thin).$thin_field)), size_of_val_raw_sized(addr_of!((*d3d).$d3d_field)),   "size_of {}::{} != {}::{}", stringify!($thin), stringify!($thin_field), stringify!($d3d), stringify!($d3d_field));
+                    assert_eq!(      offset_of(thin, addr_of!((*thin).$thin_field)),        offset_of(d3d, addr_of!((*d3d).$d3d_field)), "offset_of {}::{} != {}::{}", stringify!($thin), stringify!($thin_field), stringify!($d3d), stringify!($d3d_field));
+                    assert!(stringify!($d3d_field).to_lowercase().replace("_","").contains(stringify!($thin_field).strip_prefix("r#").unwrap_or(stringify!($thin_field)).to_lowercase().replace("_","").as_str()), "{} not included in {}'s name", stringify!($thin_field), stringify!($d3d_field));
+                })*
+            )*
         }
     };
 }

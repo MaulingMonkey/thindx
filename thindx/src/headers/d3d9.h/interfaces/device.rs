@@ -6,6 +6,8 @@ use crate::d3d9_h::interfaces::device_draw::{IndexData, VertexStreamData};
 
 use abibool::bool32;
 
+use bytemuck::Zeroable;
+
 use winapi::shared::d3d9::IDirect3DDevice9;
 use winapi::shared::d3d9types::*;
 use winapi::shared::windef::RECT;
@@ -1048,14 +1050,104 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// ```rust
     /// # use dev::d3d9::*; let device = device_test();
     /// let caps : Caps = device.get_device_caps().unwrap();
-    /// assert_eq!(caps.DeviceType,     DevType::HAL.into());
-    /// assert_eq!(caps.AdapterOrdinal, 0);
-    /// assert!(caps.MaxTextureWidth  > 0);
-    /// assert!(caps.MaxTextureHeight > 0);
+    /// assert_eq!(caps.device_type,     DevType::HAL);
+    /// assert_eq!(caps.adapter_ordinal, 0);
+    /// assert!(caps.max_texture_width  > 0);
+    /// assert!(caps.max_texture_height > 0);
+    /// dbg!(caps);
     /// // ...
     /// ```
+    ///
+    /// ### Output
+    ///
+    /// ```text
+    /// Caps {
+    ///     device_type: DevType::HAL,
+    ///     adapter_ordinal: 0,
+    ///     caps: Caps1::ReadScanline,
+    ///     caps2: Caps2::{CanAutoGenMipMap|CanShareResource|DynamicTextures|FullScreenGamma},
+    ///     caps3: Caps3::{AlphaFullscreenFlipOrDiscard|CopyToVidMem|CopyToSystemMem|LinearToSrgbPresentation},
+    ///     presentation_intervals: Present::{IntervalOne|IntervalTwo|IntervalThree|IntervalFour|IntervalImmediate},
+    ///     cursor_caps: CursorCaps::Color,
+    ///     dev_caps: DevCaps::{CanBltSysToNonLocal|CanRenderAfterFlip|DrawPrimitives2|DrawPrimitives2Ex|DrawPrimTlVertex|ExecuteSystemMemory|ExecuteVideoMemory|HwRasterization|HwTransformAndLight|PureDevice|TextureNonLocalVidMem|TextureVideoMemory|TlVertexSystemMemory|TlVertexVideoMemory},
+    ///     primitive_misc_caps: PMiscCaps::{MaskZ|CullNone|CullCW|CullCCW|ColorWriteEnable|TssArgTemp|BlendOp|IndependentWriteMasks|PerStageConstant|PostBlendSrgbConvert|FogAndSpecularAlpha|SeparateAlphaBlend|MrtIndependentBitDepths|MrtPostPixelShaderBlending|FogVertexClamped},
+    ///     raster_caps: PRasterCaps::{Anisotropy|ColorPerspective|Dither|DepthBias|FogRange|FogTable|FogVertex|MipMapLodBias|MultisampleToggle|ScissorTest|SlopeScaleDepthBias|WFog|ZFog|ZTest|ZBias},
+    ///     z_cmp_caps: PCmpCaps::{Always|Equal|Greater|GreaterEqual|Less|LessEqual|Never|NotEqual},
+    ///     src_blend_caps: PBlendCaps::{BlendFactor|BothInvSrcAlpha|BothSrcAlpha|DestAlpha|DestColor|InvDestAlpha|InvDestColor|InvSrcAlpha|InvSrcColor|One|SrcAlpha|SrcAlphaSat|SrcColor|Zero},
+    ///     dest_blend_caps: PBlendCaps::{BlendFactor|BothInvSrcAlpha|BothSrcAlpha|DestAlpha|DestColor|InvDestAlpha|InvDestColor|InvSrcAlpha|InvSrcColor|One|SrcAlpha|SrcAlphaSat|SrcColor|Zero},
+    ///     alpha_cmp_caps: PCmpCaps::{Always|Equal|Greater|GreaterEqual|Less|LessEqual|Never|NotEqual},
+    ///     shade_caps: PShadeCaps::{AlphaGouraudBlend|ColorGouraudRgb|FogGouraud|SpecularGouraudRgb},
+    ///     texture_caps: PTextureCaps::{Alpha|CubeMap|MipCubeMap|MipMap|MipVolumeMap|Perspective|Projected|TexRepeatNotScaledBySize|VolumeMap},
+    ///     texture_filter_caps: PTFilterCaps::{MagFPoint|MagFLinear|MagFAnisotropic|MinFPoint|MinFLinear|MinFAnisotropic|MipFPoint|MipFLinear},
+    ///     cube_texture_filter_caps: PTFilterCaps::{MagFPoint|MagFLinear|MinFPoint|MinFLinear|MipFPoint|MipFLinear},
+    ///     volume_texture_filter_caps: PTFilterCaps::{MagFPoint|MagFLinear|MagFAnisotropic|MinFPoint|MinFLinear|MinFAnisotropic|MipFPoint|MipFLinear},
+    ///     texture_address_caps: PTAddressCaps::{Border|Clamp|IndependentUV|Mirror|MirrorOnce|Wrap},
+    ///     volume_texture_address_caps: PTAddressCaps::{Border|Clamp|IndependentUV|Mirror|MirrorOnce|Wrap},
+    ///     line_caps: LineCaps::{AlphaCmp|Blend|Fog|Texture|ZTest},
+    ///     max_texture_width: 16384,
+    ///     max_texture_height: 16384,
+    ///     max_volume_extent: 8192,
+    ///     max_texture_repeat: 8192,
+    ///     max_texture_aspect_ratio: 8192,
+    ///     max_anisotropy: 16,
+    ///     max_vertex_w: 10000000000.0,
+    ///     guard_band_left: -32768.0,
+    ///     guard_band_top: -32768.0,
+    ///     guard_band_right: 32768.0,
+    ///     guard_band_bottom: 32768.0,
+    ///     extents_adjust: 0.0,
+    ///     stencil_caps: StencilCaps::{Keep|Zero|Replace|IncrSat|DecrSat|Invert|Incr|Decr|TwoSided},
+    ///     fvf_caps: FvfCaps::{PSize|0x00000008},
+    ///     texture_op_caps: TexOpCaps::{Add|AddSigned|AddSigned2x|AddSmooth|BlendCurrentAlpha|BlendDiffuseAlpha|BlendFactorAlpha|BlendTextureAlpha|BlendTextureAlphaPM|BumpEnvMap|BumpEnvMapLuminance|Disable|DotProduct3|Lerp|Modulate|Modulate2x|Modulate4x|ModulateAlphaAddColor|ModulateColorAddAlpha|ModulateInvAlphaAddColor|ModulateInvColorAddAlpha|MultiplyAdd|Premodulate|SelectArg1|SelectArg2|Subtract},
+    ///     max_texture_blend_stages: 8,
+    ///     max_simultaneous_textures: 8,
+    ///     vertex_processing_caps: VtxPCaps::{DirectionalLights|LocalViewer|MaterialSource7|PositionalLights|TexGen|TexGenSphereMap|Tweening},
+    ///     max_active_lights: 10,
+    ///     max_user_clip_planes: 6,
+    ///     max_vertex_blend_matrices: 4,
+    ///     max_vertex_blend_matrix_index: 8,
+    ///     max_point_size: 256.0,
+    ///     max_primitive_count: 5592405,
+    ///     max_vertex_index: 16777215,
+    ///     max_streams: 16,
+    ///     max_stream_stride: 508,
+    ///     vertex_shader_version: 4294836992,
+    ///     max_vertex_shader_const: 256,
+    ///     pixel_shader_version: 4294902528,
+    ///     pixel_shader_1x_max_value: 3.4028235e38,
+    ///     dev_caps2: DevCaps2::{CanStretchRectFromTextures|PresampledDMapNPatch|StreamOffset|VertexElementsCanShareStreamOffset},
+    ///     max_npatch_tessellation_level: 1.0,
+    ///     reserved5: Reserved5(
+    ///         0,
+    ///     ),
+    ///     master_adapter_ordinal: 0,
+    ///     adapter_ordinal_in_group: 0,
+    ///     number_of_adapters_in_group: 4,
+    ///     decl_types: DtCaps::{UByte4|UByte4N|Short2N|Short4N|UShort2N|UShort4N|UDec3|Dec3N|Float16_2|Float16_4},
+    ///     num_simultaneous_rts: 4,
+    ///     stretch_rect_filter_caps: PTFilterCaps::{MagFPoint|MagFLinear|MinFPoint|MinFLinear},
+    ///     vs_20_caps: VShaderCaps20 {
+    ///         caps: Vs20Caps::Predication,
+    ///         dynamic_flow_control_depth: 24,
+    ///         num_temps: 32,
+    ///         static_flow_control_depth: 4,
+    ///     },
+    ///     ps_20_caps: PShaderCaps20 {
+    ///         caps: Ps20Caps::{ArbitrarySwizzle|GradientInstructions|Predication|NoDependentReadLimit|NoTexInstructionLimit},
+    ///         dynamic_flow_control_depth: 24,
+    ///         num_temps: 32,
+    ///         static_flow_control_depth: 4,
+    ///         num_instruction_slots: 512,
+    ///     },
+    ///     vertex_texture_filter_caps: PTFilterCaps::{MagFPoint|MagFLinear|MinFPoint|MinFLinear},
+    ///     max_vshader_instructions_executed: 4294967295,
+    ///     max_pshader_instructions_executed: 4294967295,
+    ///     max_vertex_shader_30_instruction_slots: 32768,
+    ///     max_pixel_shader_30_instruction_slots: 32768,
+    /// }
+    /// ```
     fn get_device_caps(&self) -> Result<Caps, MethodError> {
-        let mut caps = Caps::default();
+        let mut caps = Caps::zeroed();
         let hr = unsafe { self.as_winapi().GetDeviceCaps(&mut *caps) };
         MethodError::check("IDirect3DDevice9::GetDeviceCaps", hr)?;
         Ok(caps)

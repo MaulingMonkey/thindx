@@ -1,6 +1,8 @@
 use crate::*;
 use crate::d3d9::*;
 
+use bytemuck::Zeroable;
+
 use winapi::shared::d3d9::{Direct3DCreate9, IDirect3D9};
 use winapi::shared::d3d9types::{D3DDISPLAYMODE, D3DPRESENT_PARAMETERS};
 use winapi::shared::windef::{HMONITOR, HWND};
@@ -549,7 +551,7 @@ pub trait IDirect3D9Ext : AsSafe<IDirect3D9> + Sized {
     /// // ...
     /// ```
     fn get_device_caps(&self, adapter: AdapterIndex, device_type: DevType) -> Result<Caps, MethodError> {
-        let mut caps = Caps::default();
+        let mut caps = Caps::zeroed();
         let hr = unsafe { self.as_winapi().GetDeviceCaps(adapter, device_type.into(), &mut *caps) }; // Safety: Appears sound on all invalid parameters per unit testing
         MethodError::check("IDirect3D9::GetDeviceCaps", hr)?;
         Ok(caps)

@@ -2,4 +2,5 @@
 
 pub use crate::d3dcommon_h::*;
 pub use crate::d3dcompiler_h::*;
+pub use crate::d3d9caps_h::*;
 pub use crate::d3d9types_h::*;
