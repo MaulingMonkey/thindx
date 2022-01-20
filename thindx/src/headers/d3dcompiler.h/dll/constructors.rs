@@ -97,7 +97,7 @@ impl Compiler {
     fn load_impl(lib: minidl::Library) -> Result<Self, std::io::Error> {
         macro_rules! compiler { ( $($ident:ident),* $(,)? ) => {{
             #[allow(dead_code, unused_assignments, non_snake_case)]
-            #[cfg(not(coverage))]
+            #[cfg(not(unsafe_unsound_unstable_remove_static_asserts_for_coverage))]
             fn static_assert_correct_types(compiler: &Compiler) {
                 $(
                     let mut $ident = compiler.$ident.unwrap();

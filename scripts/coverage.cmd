@@ -47,7 +47,7 @@
 
 :: Run tests for coverage
 
-@set RUSTFLAGS=-Zinstrument-coverage
+@set RUSTFLAGS=-Zinstrument-coverage --cfg unsafe_unsound_unstable_remove_static_asserts_for_coverage
 @set LLVM_PROFILE_FILE=%CARGO_TARGET_DIR%\profraw\thindx-%%p-%%m.profraw
 @if "%SKIP_TEST%" == "1" goto :skip-test
     :: ⚠️ some of these files cache coverage information from expanded proc macros, and
@@ -75,7 +75,23 @@ llvm-profdata merge -sparse "%CARGO_TARGET_DIR%\profraw\thindx-*.profraw" -o "%C
 llvm-cov export "--instr-profile=%CARGO_TARGET_DIR%\tests.profdata" --format=lcov "%CARGO_TARGET_DIR%\debug\deps\thindx-*.exe" > "%CARGO_TARGET_DIR%\lcov.info"
 
 :: For summaries in your browser of choice
-grcov . -s . --binary-path "%CARGO_TARGET_DIR%\debug" -t html --branch --ignore-not-existing -o "%CARGO_TARGET_DIR%\grcov"
+grcov ^
+    "%CARGO_TARGET_DIR%\lcov.info" ^
+    --source-dir . ^
+    --binary-path "%CARGO_TARGET_DIR%\debug" ^
+    -t html --branch ^
+    --ignore-not-existing ^
+    --ignore dev/* ^
+    --ignore thindx/build.rs ^
+    --ignore thindx/tests/* ^
+    --ignore thindx/src/headers/xinput.h/enumerations/* ^
+    --ignore thindx/src/headers/xinput.h/flags/* ^
+    --excl-line "^\s*#\[derive\(" ^
+    -o "%CARGO_TARGET_DIR%\grcov"
+:: XXX: we can't specify --excl-line multiple times currently... boo!
+:: --excl-line "^\s*unsafe impl AsSafe" ^
+
+:: Open said summary in your browser of choice
 @if "%OPEN%" == "1" start "" "%CARGO_TARGET_DIR%\grcov\index.html"
 
 
