@@ -23,8 +23,13 @@ type AdapterOrdinal = uint; // FIXME: ???
 #[derive(Clone, Copy, Debug, Pod, Zeroable)]
 #[repr(C)]
 pub struct Caps {
+    // Device Info
+
     pub device_type:                                    DevType,
     pub adapter_ordinal:                                AdapterOrdinal, // UINT
+
+    // Caps from DX7 Draw
+
     pub caps:                                           Caps1,
     pub caps2:                                          Caps2,
     pub caps3:                                          Caps3,
@@ -33,7 +38,13 @@ pub struct Caps {
     ///
     /// Intervals documented by caps include: [Present::IntervalImmediate], [Present::IntervalOne], ..., [Present::IntervalFour]
     pub presentation_intervals:                         Present,
+
+    // Cursor Caps
+
     pub cursor_caps:                                    CursorCaps,
+
+    // 3D Device Caps
+
     pub dev_caps:                                       DevCaps,
     pub primitive_misc_caps:                            PMiscCaps,
     pub raster_caps:                                    PRasterCaps,
@@ -80,10 +91,13 @@ pub struct Caps {
     pub max_vertex_index:                               dword,
     pub max_streams:                                    dword,
     pub max_stream_stride:                              dword,
-    pub vertex_shader_version:                          dword, // FIXME: probably ~[u16; 2]
+    pub vertex_shader_version:                          ShaderVersion,
     pub max_vertex_shader_const:                        dword,
-    pub pixel_shader_version:                           dword, // FIXME: probably ~[u16; 2]
+    pub pixel_shader_version:                           ShaderVersion,
     pub pixel_shader_1x_max_value:                      float,
+
+    // DX9 specific
+
     pub dev_caps2:                                      DevCaps2,
     pub max_npatch_tessellation_level:                  float,
     #[doc(hidden)]

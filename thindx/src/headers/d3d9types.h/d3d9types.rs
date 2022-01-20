@@ -83,5 +83,6 @@ mods! {
         inl mod color;
         inl mod luid;
         inl mod sdk_version;
+        inl mod shader_version;
     }
 }
