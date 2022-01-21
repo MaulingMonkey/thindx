@@ -153,12 +153,12 @@ fn main() {
                         let texw = texture_mip0_desc.width  as f32 * scale;
                         let texh = texture_mip0_desc.height as f32 * scale;
                         unsafe { (*device.as_raw()).SetRenderState(D3DRS_AMBIENT, (bri as u32) * 0x01010101) };
-                        unsafe { (*device.as_raw()).SetTransform(D3DTS_WORLD, &D3DMATRIX { m: [ // TODO: set_transform
+                        let _ = device.set_transform(d3d::TS::World, d3d::Matrix { m: [
                             [texw * sx,       0.0, 0.0, 0.0],
                             [      0.0, texh * sy, 0.0, 0.0],
                             [      0.0,       0.0, 1.0, 0.0],
                             [  dx * sx,   dy * sy, 0.0, 1.0],
-                        ]})};
+                        ]});
                         let _ = unsafe { device.set_texture(0, texture) };
                         let _ = unsafe { device.draw_indexed_primitive(PT::TriangleList, 0, 0, 4, 0, 2) };
                     }

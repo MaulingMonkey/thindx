@@ -25,6 +25,18 @@ enumish! { TS => D3DTRANSFORMSTATETYPE; View, Projection, Texture0, Texture1, Te
     pub const Texture5      : TransformStateType = TransformStateType(D3DTS_TEXTURE5);
     pub const Texture6      : TransformStateType = TransformStateType(D3DTS_TEXTURE6);
     pub const Texture7      : TransformStateType = TransformStateType(D3DTS_TEXTURE7);
+
+    // https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dts-worldn
+    pub const World         : TransformStateType = TransformStateType::world_matrix(0);
+    pub const World1        : TransformStateType = TransformStateType::world_matrix(1);
+    pub const World2        : TransformStateType = TransformStateType::world_matrix(2);
+    pub const World3        : TransformStateType = TransformStateType::world_matrix(3);
+}
+
+impl TransformStateType {
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dts-worldmatrix)\]
+    /// D3DTS_WORLDMATRIX
+    pub const fn world_matrix(index: u8) -> TransformStateType { TransformStateType(index as u32 + 256) }
 }
 
 #[cfg(feature = "impl-poor-defaults")]

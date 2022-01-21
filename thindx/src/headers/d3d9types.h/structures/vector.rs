@@ -1,3 +1,5 @@
+use bytemuck::*;
+
 use winapi::shared::d3d9types::*;
 
 use std::ops::{Deref, DerefMut};
@@ -8,7 +10,8 @@ use std::ops::{Deref, DerefMut};
 /// D3DVECTOR
 ///
 /// Defines a 3-component [f32] vector.
-#[derive(Clone, Copy, Debug, Default)]
+#[derive(Clone, Copy, Debug)]
+#[derive(Default, Pod, Zeroable)]
 #[repr(C)] pub struct Vector {
     pub x: f32,
     pub y: f32,

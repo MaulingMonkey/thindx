@@ -68,6 +68,7 @@ mods! {
         inl mod index_buffer_desc;
         inl mod light;
         inl mod material;
+        inl mod matrix;
         inl mod present_stats;
         inl mod raster_status;
         inl mod rect;

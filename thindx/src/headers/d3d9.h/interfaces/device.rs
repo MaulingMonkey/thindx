@@ -2361,6 +2361,32 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         MethodError::check("IDirect3DDevice9::SetTexture", hr)
     }
 
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-settransform)\]
+    /// IDirect3DDevice9::SetTransform
+    ///
+    /// Sets a single device transform
+    ///
+    /// ### Examples
+    ///
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_pure();
+    /// device.set_transform(d3d::TS::World, d3d::Matrix::identity()).unwrap();
+    /// # device.set_transform(d3d::TS::from_unchecked(0x0FFFF00), d3d::Matrix::identity()).unwrap();
+    /// # device.set_transform(d3d::TS::from_unchecked(0x1000000), d3d::Matrix::identity()).unwrap();
+    /// # device.set_transform(d3d::TS::from_unchecked(0x10000FF), d3d::Matrix::identity()).unwrap();
+    ///
+    /// // no errors generated no matter what?
+    /// device.set_transform(d3d::TS::from_unchecked(0xFFFFFFF), d3d::Matrix::identity()).unwrap();
+    /// ```
+    ///
+    /// ### Returns
+    ///
+    /// *   Ok(())
+    fn set_transform(&self, ts: impl Into<TransformStateType>, matrix: impl Into<Matrix>) -> Result<(), MethodError> {
+        let hr = unsafe { self.as_winapi().SetTransform(ts.into().into(), &matrix.into().into()) };
+        MethodError::check("IDirect3DDevice9::SetTransform", hr)
+    }
+
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setvertexdeclaration)\]
     /// IDirect3DDevice9::SetVertexDeclaration
     ///
