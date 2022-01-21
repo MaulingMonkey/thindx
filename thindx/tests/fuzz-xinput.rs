@@ -1,5 +1,5 @@
-const BEFORE_COM    : Duration = Duration::from_secs(20);
-const WITH_COM      : Duration = Duration::from_secs(20);
+const BEFORE_COM    : Duration = Duration::from_secs(if std::option_env!("TESTFAST").is_some() { 1 } else { 20 });
+const WITH_COM      : Duration = Duration::from_secs(if std::option_env!("TESTFAST").is_some() { 1 } else { 20 });
 
 
 
