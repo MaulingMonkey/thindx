@@ -2261,12 +2261,16 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setsamplerstate)\]
     /// IDirect3DDevice9::SetSamplerState
     ///
+    /// Prefer [set_sampler_state](Self::set_sampler_state)
+    ///
     /// ### ⚠️ Safety ⚠️
     ///
+    /// Known undefined behavior:
+    /// *   This function may crash with out-of-bounds sampler state types! (possibly only if fed nonzero values?)
+    ///
+    /// Possible undefined behavior on older Runtimes/Drivers?
     /// *   This function may crash with out-of-bounds samplers?
-    /// *   This function may crash with out-of-bounds sampler state types
-    /// *   This function may crash with out-of-bounds sampler state type values
-    /// *   This function may crash with the right combination of invalid values
+    /// *   This function may crash with out-of-bounds sampler state type values?
     ///
     /// ### Example
     ///
@@ -2298,6 +2302,50 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     unsafe fn set_sampler_state_unchecked(&self, sampler: u32, ty: SamplerStateType, value: impl Into<u32>) -> Result<(), MethodError> {
         let hr = self.as_winapi().SetSamplerState(sampler, ty.into(), value.into());
         MethodError::check("IDirect3DDevice9::SetSamplerState", hr)
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setsamplerstate)\]
+    /// IDirect3DDevice9::SetSamplerState
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_pure();
+    /// device.set_sampler_state(0, d3d::SampV::MinFilter(d3d::TexF::Linear)).unwrap();
+    /// device.set_sampler_state(0, d3d::SampV::MagFilter(d3d::TexF::Linear)).unwrap();
+    /// device.set_sampler_state(0, d3d::SampV::MipFilter(d3d::TexF::Linear)).unwrap();
+    /// # // fuzz testing:
+    /// # for s in [0, 1, 2, 4, 8, 16, 32, 64, 128, 1000, 100000, 1000000, !0u32].iter().copied() { dbg!(s);
+    /// #   for taddr in (0..16).into_iter().chain([60, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000, !0u32].iter().copied()).map(|i| d3d::TAddress::from_unchecked(i)) { dbg!(taddr);
+    /// #       device.set_sampler_state(s, d3d::SampV::AddressU(taddr)).unwrap();
+    /// #       device.set_sampler_state(s, d3d::SampV::AddressV(taddr)).unwrap();
+    /// #       device.set_sampler_state(s, d3d::SampV::AddressW(taddr)).unwrap();
+    /// #   }
+    /// #   for color in (0u32..=0xFF).into_iter().map(|i| d3d::Color::argb(i * 0x01010101)) { dbg!(color);
+    /// #       device.set_sampler_state(s, d3d::SampV::BorderColor(color)).unwrap();
+    /// #   }
+    /// #   for texf in (0..16).into_iter().chain([60, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000, !0u32].iter().copied()).map(|i| d3d::TexF::from_unchecked(i)) { dbg!(texf);
+    /// #       device.set_sampler_state(s, d3d::SampV::MinFilter(texf)).unwrap();
+    /// #       device.set_sampler_state(s, d3d::SampV::MagFilter(texf)).unwrap();
+    /// #       device.set_sampler_state(s, d3d::SampV::MipFilter(texf)).unwrap();
+    /// #   }
+    /// #   for i in (0..256).into_iter().chain([60, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000, !0u32].iter().copied()) { dbg!(i);
+    /// #       device.set_sampler_state(s, d3d::SampV::MipMapLODBias(i)).unwrap();
+    /// #       device.set_sampler_state(s, d3d::SampV::MaxMipLevel(i)).unwrap();
+    /// #       device.set_sampler_state(s, d3d::SampV::MaxAnisotropy(i)).unwrap();
+    /// #       device.set_sampler_state(s, d3d::SampV::SRGBTexture(i&1 != 0)).unwrap();
+    /// #       device.set_sampler_state(s, d3d::SampV::ElementIndex(i)).unwrap();
+    /// #       device.set_sampler_state(s, d3d::SampV::DMapOffset(i)).unwrap();
+    /// #   }
+    /// # }
+    /// ```
+    ///
+    /// ### Returns
+    ///
+    /// *   Ok(())              no matter what invalid parameters are used?
+    fn set_sampler_state(&self, sampler: u32, ssv: impl Into<SamplerStateValue>) -> Result<(), MethodError> {
+        let (ty, value) = ssv.into().ty_value();
+        unsafe { self.set_sampler_state_unchecked(sampler, ty, value) }
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setstreamsource)\]

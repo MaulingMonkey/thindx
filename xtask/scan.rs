@@ -160,7 +160,7 @@ fn file_doc_comments(path: &Path, text: &str) -> Result<(), ()> {
                 } else if let Some(r) = rest.strip_prefix("#[repr(C)]") {
                     rest = r.trim_start();
                     //s.repr = Some(C);
-                } else if let Some((r, pre)) = "#[allow #[cfg #[deprecated #[derive #[doc #[inline #[must_use".split(' ').filter_map(|pre| Some((rest.strip_prefix(pre)?, pre))).next() {
+                } else if let Some((r, pre)) = "#[allow #[cfg #[deprecated #[derive #[doc #[inline #[must_use #[non_exhaustive".split(' ').filter_map(|pre| Some((rest.strip_prefix(pre)?, pre))).next() {
                     let end_str = if r.starts_with("(") { ")]" } else { "]" };
                     let end = match r.find(end_str) {
                         Some(n) => n,
@@ -210,6 +210,7 @@ fn file_doc_comments(path: &Path, text: &str) -> Result<(), ()> {
             else if let Some(rest) = rest.strip_prefix("macro_rules! ")     { (DocItemKind::Macro,  rest.trim_start()) }
             else if let Some(rest) = rest.strip_prefix("mod ")              { (DocItemKind::Mod,    rest.trim_start()) }
             else if let Some(rest) = rest.strip_prefix("struct ")           { (DocItemKind::Struct, rest.trim_start()) }
+            else if let Some(rest) = rest.strip_prefix("enum ")             { (DocItemKind::Enum,   rest.trim_start()) }
             else if let Some(rest) = rest.strip_prefix("trait ")            { (DocItemKind::Trait,  rest.trim_start()) }
             else if let Some(rest) = rest.strip_prefix("type ")             { (DocItemKind::Type,   rest.trim_start()) }
             else if rest.starts_with("use ") {
@@ -626,6 +627,7 @@ enum DocItemKind {
     Macro,
     Mod,
     Struct,
+    Enum,
     Trait,
     Type, // possibly an associated type, possibly a free type
 }

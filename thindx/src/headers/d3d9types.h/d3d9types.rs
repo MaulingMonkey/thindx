@@ -32,6 +32,7 @@ mods! {
         inl mod render_state_type;
         inl mod resource_type;
         inl mod sampler_state_type;
+        inl mod sampler_state_value;
         inl mod sampler_texture_type;
         inl mod scanline_ordering;
         inl mod sgr;
