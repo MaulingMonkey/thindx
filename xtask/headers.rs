@@ -178,20 +178,9 @@ impl<'cpp> Header<'cpp> {
 
 lazy_static::lazy_static! {
     static ref TEXTFILES    : BTreeMap<&'static str, String>            = collect_text_files();
-    static ref CPP2IGNORE   : BTreeSet<&'static str>                    = set_file("thindx/doc/cpp2ignore.txt", include_str!("../thindx/doc/cpp2ignore.txt"));
+    static ref CPP2IGNORE   : BTreeSet<&'static str>                    = collect_cpp2ignore();
     static ref CPP2RUST     : BTreeMap<&'static str, Vec<&'static str>> = collect_cpp2rust();
     static ref CPP2URL      : BTreeMap<&'static str, Vec<&'static str>> = collect_cpp2url();
-}
-
-fn set_file<'s>(_path: &str, text: &'s str) -> BTreeSet<&'s str> {
-    let mut r = BTreeSet::<&str>::new();
-    for line in text.lines() {
-        let line = line.split_once('#').map_or(line, |s| s.0).trim();
-        if line.is_empty() { continue }
-
-        r.insert(line.trim());
-    }
-    r
 }
 
 
@@ -255,6 +244,28 @@ fn collect_text_files() -> BTreeMap<&'static str, String> {
     }
 }
 
+fn collect_cpp2ignore() -> BTreeSet<&'static str> {
+    let mut r = BTreeSet::<&'static str>::new();
+    for (&path, text) in TEXTFILES.iter() {
+        let name = path.rsplit_once(&['/', '\\']).map_or(path, |p| p.1);
+        if name == "cpp2ignore.txt" {
+            for line in text.lines() {
+                let line = line.split_once('#').map_or(line, |s| s.0).trim();
+                if line.is_empty() { continue }
+
+                r.insert(line.trim());
+            }
+        } else if path.ends_with(".rs") {
+            for line in text.lines() {
+                if let Some(cpp) = line.trim().strip_prefix("//#cpp2ignore ") {
+                    r.insert(cpp.trim_start());
+                } // else not a directive, ignore
+            }
+        }
+    }
+    r
+}
+
 fn collect_cpp2rust() -> BTreeMap<&'static str, Vec<&'static str>> {
     let mut r = BTreeMap::<&'static str, Vec<&'static str>>::new();
     for (&path, text) in TEXTFILES.iter() {
@@ -272,7 +283,6 @@ fn collect_cpp2rust() -> BTreeMap<&'static str, Vec<&'static str>> {
             }
         } else if path.ends_with(".rs") {
             for (line_idx, line) in text.lines().enumerate() {
-                let line = line.trim();
                 if let Some(cpp_rs) = line.trim().strip_prefix("//#cpp2rust ") {
                     let cpp_rs = cpp_rs.trim_start();
                     if let Some((cpp, rs)) = cpp_rs.split_once('=') {
