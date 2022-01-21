@@ -48,3 +48,10 @@ flags! { CompilerStrip => D3DCOMPILER_STRIP_FLAGS; None, ReflectionData, DebugIn
 impl Default for CompilerStripFlags {
     fn default() -> Self { CompilerStrip::None }
 }
+
+//#cpp2rust D3DCOMPILER_STRIP_FLAGS             = d3d::CompilerStripFlags
+//#cpp2rust D3DCOMPILER_STRIP_REFLECTION_DATA   = d3d::CompilerStrip::ReflectionData
+//#cpp2rust D3DCOMPILER_STRIP_DEBUG_INFO        = d3d::CompilerStrip::DebugInfo
+//#cpp2rust D3DCOMPILER_STRIP_TEST_BLOBS        = d3d::CompilerStrip::TestBlobs
+//#cpp2rust D3DCOMPILER_STRIP_PRIVATE_DATA      = d3d::CompilerStrip::PrivateData
+//#cpp2rust D3DCOMPILER_STRIP_ROOT_SIGNATURE    = d3d::CompilerStrip::RootSignature

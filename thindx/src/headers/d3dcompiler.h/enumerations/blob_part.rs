@@ -138,3 +138,22 @@ enumish! {
 impl Default for Blob {
     fn default() -> Self { Blob(0) }
 }
+
+//#cpp2rust D3D_BLOB_PART                               = d3d::BlobPart
+//#cpp2rust D3D_BLOB_INPUT_SIGNATURE_BLOB               = d3d::Blob::InputSignatureBlob
+//#cpp2rust D3D_BLOB_OUTPUT_SIGNATURE_BLOB              = d3d::Blob::OutputSignatureBlob
+//#cpp2rust D3D_BLOB_INPUT_AND_OUTPUT_SIGNATURE_BLOB    = d3d::Blob::InputAndOutputSignatureBlob
+//#cpp2rust D3D_BLOB_PATCH_CONSTANT_SIGNATURE_BLOB      = d3d::Blob::PatchConstantSignatureBlob
+//#cpp2rust D3D_BLOB_ALL_SIGNATURE_BLOB                 = d3d::Blob::AllSignatureBlob
+//#cpp2rust D3D_BLOB_DEBUG_INFO                         = d3d::Blob::DebugInfo
+//#cpp2rust D3D_BLOB_LEGACY_SHADER                      = d3d::Blob::LegacyShader
+//#cpp2rust D3D_BLOB_XNA_PREPASS_SHADER                 = d3d::Blob::XnaPrepassShader
+//#cpp2rust D3D_BLOB_XNA_SHADER                         = d3d::Blob::XnaShader
+//#cpp2rust D3D_BLOB_PDB                                = d3d::Blob::Pdb
+//#cpp2rust D3D_BLOB_PRIVATE_DATA                       = d3d::Blob::PrivateData
+//#cpp2rust D3D_BLOB_ROOT_SIGNATURE                     = d3d::Blob::RootSignature
+//#cpp2rust D3D_BLOB_DEBUG_NAME                         = d3d::Blob::DebugName
+//#cpp2rust D3D_BLOB_TEST_ALTERNATE_SHADER              = d3d::Blob::TestAlternateShader
+//#cpp2rust D3D_BLOB_TEST_COMPILE_DETAILS               = d3d::Blob::TestCompileDetails
+//#cpp2rust D3D_BLOB_TEST_COMPILE_PERF                  = d3d::Blob::TestCompilePerf
+//#cpp2rust D3D_BLOB_TEST_COMPILE_REPORT                = d3d::Blob::TestCompileReport

@@ -14,7 +14,7 @@
 //! | [guiddef.h](#guiddefh) |   | ✔️ 1 of 1 |   |   |   |
 //! | [unknwn.h](#unknwnh) | ✔️ 1 of 1 |   |   |   |   |
 //! | [d3dcommon.h](#d3dcommonh) | ⚠️ 2 of 3 | ✔️ 1 of 1 | ✔️ 22 of 22 |   | ❌ 0 of 555 |
-//! | [d3dcompiler.h](#d3dcompilerh) |   | ✔️ 1 of 1 | ✔️ 2 of 2 |   | ❌ 0 of 22 |
+//! | [d3dcompiler.h](#d3dcompilerh) |   | ✔️ 1 of 1 | ✔️ 2 of 2 |   | ✔️ 22 of 22 |
 //! | [d3d9.h](#d3d9h) | ⚠️ 20 of 24 |   |   | ⚠️ 2 of 9 |   |
 //! | [d3d9caps.h](#d3d9capsh) |   | ⚠️ 3 of 5 |   |   |   |
 //! | [d3d9types.h](#d3d9typesh) |   | ⚠️ 19 of 71 | ⚠️ 40 of 54 |   | ⚠️ 442 of 612 |
@@ -677,30 +677,30 @@
 //! ### C++ Enums → Rust Structs
 //!
 //! [`D3DCOMPILER_STRIP_FLAGS`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/ne-d3dcompiler-d3dcompiler_strip_flags)&nbsp;→ [`d3d::CompilerStripFlags`] <br>
-//! * `D3DCOMPILER_STRIP_DEBUG_INFO` →&nbsp;❌ <br>
-//! * `D3DCOMPILER_STRIP_PRIVATE_DATA` →&nbsp;❌ <br>
-//! * `D3DCOMPILER_STRIP_REFLECTION_DATA` →&nbsp;❌ <br>
-//! * `D3DCOMPILER_STRIP_ROOT_SIGNATURE` →&nbsp;❌ <br>
-//! * `D3DCOMPILER_STRIP_TEST_BLOBS` →&nbsp;❌ <br>
+//! * `D3DCOMPILER_STRIP_DEBUG_INFO`&nbsp;→ [`d3d::CompilerStrip::DebugInfo`] <br>
+//! * `D3DCOMPILER_STRIP_PRIVATE_DATA`&nbsp;→ [`d3d::CompilerStrip::PrivateData`] <br>
+//! * `D3DCOMPILER_STRIP_REFLECTION_DATA`&nbsp;→ [`d3d::CompilerStrip::ReflectionData`] <br>
+//! * `D3DCOMPILER_STRIP_ROOT_SIGNATURE`&nbsp;→ [`d3d::CompilerStrip::RootSignature`] <br>
+//! * `D3DCOMPILER_STRIP_TEST_BLOBS`&nbsp;→ [`d3d::CompilerStrip::TestBlobs`] <br>
 //!
 //! [`D3D_BLOB_PART`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/ne-d3dcompiler-d3d_blob_part)&nbsp;→ [`d3d::BlobPart`] <br>
-//! * `D3D_BLOB_ALL_SIGNATURE_BLOB` →&nbsp;❌ <br>
-//! * `D3D_BLOB_DEBUG_INFO` →&nbsp;❌ <br>
-//! * `D3D_BLOB_DEBUG_NAME` →&nbsp;❌ <br>
-//! * `D3D_BLOB_INPUT_AND_OUTPUT_SIGNATURE_BLOB` →&nbsp;❌ <br>
-//! * `D3D_BLOB_INPUT_SIGNATURE_BLOB` →&nbsp;❌ <br>
-//! * `D3D_BLOB_LEGACY_SHADER` →&nbsp;❌ <br>
-//! * `D3D_BLOB_OUTPUT_SIGNATURE_BLOB` →&nbsp;❌ <br>
-//! * `D3D_BLOB_PATCH_CONSTANT_SIGNATURE_BLOB` →&nbsp;❌ <br>
-//! * `D3D_BLOB_PDB` →&nbsp;❌ <br>
-//! * `D3D_BLOB_PRIVATE_DATA` →&nbsp;❌ <br>
-//! * `D3D_BLOB_ROOT_SIGNATURE` →&nbsp;❌ <br>
-//! * `D3D_BLOB_TEST_ALTERNATE_SHADER` →&nbsp;❌ <br>
-//! * `D3D_BLOB_TEST_COMPILE_DETAILS` →&nbsp;❌ <br>
-//! * `D3D_BLOB_TEST_COMPILE_PERF` →&nbsp;❌ <br>
-//! * `D3D_BLOB_TEST_COMPILE_REPORT` →&nbsp;❌ <br>
-//! * `D3D_BLOB_XNA_PREPASS_SHADER` →&nbsp;❌ <br>
-//! * `D3D_BLOB_XNA_SHADER` →&nbsp;❌ <br>
+//! * `D3D_BLOB_ALL_SIGNATURE_BLOB`&nbsp;→ [`d3d::Blob::AllSignatureBlob`] <br>
+//! * `D3D_BLOB_DEBUG_INFO`&nbsp;→ [`d3d::Blob::DebugInfo`] <br>
+//! * `D3D_BLOB_DEBUG_NAME`&nbsp;→ [`d3d::Blob::DebugName`] <br>
+//! * `D3D_BLOB_INPUT_AND_OUTPUT_SIGNATURE_BLOB`&nbsp;→ [`d3d::Blob::InputAndOutputSignatureBlob`] <br>
+//! * `D3D_BLOB_INPUT_SIGNATURE_BLOB`&nbsp;→ [`d3d::Blob::InputSignatureBlob`] <br>
+//! * `D3D_BLOB_LEGACY_SHADER`&nbsp;→ [`d3d::Blob::LegacyShader`] <br>
+//! * `D3D_BLOB_OUTPUT_SIGNATURE_BLOB`&nbsp;→ [`d3d::Blob::OutputSignatureBlob`] <br>
+//! * `D3D_BLOB_PATCH_CONSTANT_SIGNATURE_BLOB`&nbsp;→ [`d3d::Blob::PatchConstantSignatureBlob`] <br>
+//! * `D3D_BLOB_PDB`&nbsp;→ [`d3d::Blob::Pdb`] <br>
+//! * `D3D_BLOB_PRIVATE_DATA`&nbsp;→ [`d3d::Blob::PrivateData`] <br>
+//! * `D3D_BLOB_ROOT_SIGNATURE`&nbsp;→ [`d3d::Blob::RootSignature`] <br>
+//! * `D3D_BLOB_TEST_ALTERNATE_SHADER`&nbsp;→ [`d3d::Blob::TestAlternateShader`] <br>
+//! * `D3D_BLOB_TEST_COMPILE_DETAILS`&nbsp;→ [`d3d::Blob::TestCompileDetails`] <br>
+//! * `D3D_BLOB_TEST_COMPILE_PERF`&nbsp;→ [`d3d::Blob::TestCompilePerf`] <br>
+//! * `D3D_BLOB_TEST_COMPILE_REPORT`&nbsp;→ [`d3d::Blob::TestCompileReport`] <br>
+//! * `D3D_BLOB_XNA_PREPASS_SHADER`&nbsp;→ [`d3d::Blob::XnaPrepassShader`] <br>
+//! * `D3D_BLOB_XNA_SHADER`&nbsp;→ [`d3d::Blob::XnaShader`] <br>
 //!
 //!
 //! <br>
