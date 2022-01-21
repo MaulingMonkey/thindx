@@ -25,6 +25,8 @@ fn work_in_pub(version: &str, version_no_v: &str) -> io::Result<()> {
     let cargo_toml = std::fs::read_to_string(cargo_toml_path)?;
     let cargo_toml = cargo_toml.replace("0.0.0-git", &version_no_v);
     std::fs::write(cargo_toml_path, cargo_toml)?;
+    run_in_nonfatal(r"target\pub", "git add thindx/Cargo.toml")?;
+    run_in_nonfatal(r"target\pub", format!("git commit -m {:?}", version))?;
     run_in_nonfatal(r"target\pub", "cargo b")?;
     run_in_nonfatal(r"target\pub", "cargo publish --allow-dirty -p thindx")?;
     run_in_nonfatal(r"target\pub", format!("git tag {version}"))?;
