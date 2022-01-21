@@ -238,3 +238,9 @@ test_layout! {
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9caps/ns-d3d9caps-d3dcaps9)\]
 #[doc(hidden)]
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq, PartialOrd, Ord, Hash, Pod, Zeroable)] #[repr(transparent)] pub struct Reserved5(DWORD);
+
+//#cpp2rust D3DCAPS9                    = d3d9::Caps
+//#cpp2rus_ D3DCONTENTPROTECTIONCAPS    = d3d::
+//#cpp2rus_ D3DOVERLAYCAPS              = d3d::
+//#cpp2rust D3DPSHADERCAPS2_0           = d3d::PShaderCaps20
+//#cpp2rust D3DVSHADERCAPS2_0           = d3d::VShaderCaps20

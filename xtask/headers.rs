@@ -179,7 +179,7 @@ impl<'cpp> Header<'cpp> {
 lazy_static::lazy_static! {
     static ref TEXTFILES    : BTreeMap<&'static str, String>            = collect_text_files();
     static ref CPP2IGNORE   : BTreeSet<&'static str>                    = set_file("thindx/doc/cpp2ignore.txt", include_str!("../thindx/doc/cpp2ignore.txt"));
-    static ref CPP2RUST     : BTreeMap<&'static str, Vec<&'static str>> = map_file("thindx/doc/cpp2rust.txt", include_str!("../thindx/doc/cpp2rust.txt"));
+    static ref CPP2RUST     : BTreeMap<&'static str, Vec<&'static str>> = collect_cpp2rust();
     static ref CPP2URL      : BTreeMap<&'static str, Vec<&'static str>> = collect_cpp2url();
 }
 
@@ -190,22 +190,6 @@ fn set_file<'s>(_path: &str, text: &'s str) -> BTreeSet<&'s str> {
         if line.is_empty() { continue }
 
         r.insert(line.trim());
-    }
-    r
-}
-
-fn map_file<'s>(path: &str, text: &'s str) -> BTreeMap<&'s str, Vec<&'s str>> {
-    let mut r = BTreeMap::<&'s str, Vec<&'s str>>::new();
-    for (line_idx, line) in text.lines().enumerate() {
-        let line_no = line_idx + 1;
-        let line = line.split_once('#').map_or(line, |s| s.0).trim();
-        if line.is_empty() { continue }
-
-        if let Some((k, v)) = line.split_once('=') {
-            r.entry(k.trim()).or_default().push(v.trim());
-        } else {
-            error!(at: path, line: line_no, "expected `key = value` pair");
-        }
     }
     r
 }
@@ -269,6 +253,41 @@ fn collect_text_files() -> BTreeMap<&'static str, String> {
             }
         }
     }
+}
+
+fn collect_cpp2rust() -> BTreeMap<&'static str, Vec<&'static str>> {
+    let mut r = BTreeMap::<&'static str, Vec<&'static str>>::new();
+    for (&path, text) in TEXTFILES.iter() {
+        let name = path.rsplit_once(&['/', '\\']).map_or(path, |p| p.1);
+        if name == "cpp2rust.txt" {
+            for (line_idx, line) in text.lines().enumerate() {
+                let line = line.split_once('#').map_or(line, |s| s.0).trim();
+                if line.is_empty() { continue }
+
+                if let Some((k, v)) = line.split_once('=') {
+                    r.entry(k.trim()).or_default().push(v.trim());
+                } else {
+                    error!(at: path, line: line_idx+1, code: "cpp2rust", "expected `key = value` pair");
+                }
+            }
+        } else if path.ends_with(".rs") {
+            for (line_idx, line) in text.lines().enumerate() {
+                let line = line.trim();
+                if let Some(cpp_rs) = line.trim().strip_prefix("//#cpp2rust ") {
+                    let cpp_rs = cpp_rs.trim_start();
+                    if let Some((cpp, rs)) = cpp_rs.split_once('=') {
+                        let cpp = cpp.trim_end();   // before `=`
+                        let rs  = rs .trim_start(); // after `=`
+                        let rusts = r.entry(cpp).or_default();
+                        if !rusts.contains(&rs) { rusts.push(rs); } // O(NN) but N should always be tiny
+                    } else {
+                        error!(at: path, line: line_idx+1, code: "cpp2rust", "expected `//#cpp2rust cpp=rs` but missing `=`");
+                    }
+                } // else not a directive, ignore
+            }
+        } // else ignore
+    }
+    r
 }
 
 fn collect_cpp2url() -> BTreeMap<&'static str, Vec<&'static str>> {

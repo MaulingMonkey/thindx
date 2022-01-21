@@ -553,15 +553,6 @@ IDirect3DVolumeTexture9::UnlockBox                  = d3d9::IDirect3DVolumeTextu
 
 
 
-# d3d9caps.h structures
-D3DCAPS9                                = d3d9::Caps
-# D3DCONTENTPROTECTIONCAPS                = d3d::
-# D3DOVERLAYCAPS                          = d3d::
-D3DPSHADERCAPS2_0                       = d3d::PShaderCaps20
-D3DVSHADERCAPS2_0                       = d3d::VShaderCaps20
-
-
-
 # d3d9types.h structures
 D3DADAPTER_IDENTIFIER9                  = d3d9::AdapterIdentifier
 # D3DAES_CTR_IV                           = d3d::AesCtrIv
