@@ -14,7 +14,13 @@
         "TESTFAST":     "1",
     },
     "coverage-gutters.lcovname":            "${workspaceFolder}/target/coverage/lcov.info",
+    "coverage-gutters.manualCoverageFilePaths": ["${workspaceFolder}/target/coverage/lcov.info"],
     "coverage-gutters.showGutterCoverage":  false,  // interferes with breakpoints
     "coverage-gutters.showLineCoverage":    true,   // really in your face, but I like it
     "coverage-gutters.showRulerCoverage":   true,   // scrollbar
+    "editor.rulers": [
+        94,     // docs limit (before scrollbar, without line numbers enabled)
+        120,    // author preference
+        160,    // author preference
+    ],
 }

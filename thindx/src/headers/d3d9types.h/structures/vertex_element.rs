@@ -31,6 +31,17 @@ impl VertexElement {
         usage:          DeclUsage8::Position,   // 0
         usage_index:    0,
     };
+
+    pub const fn new(
+        stream:         u16,
+        offset:         u16,
+        ty:             DeclType8,
+        method:         DeclMethod8,
+        usage:          DeclUsage8,
+        usage_index:    u8,
+    ) -> Self {
+        Self { stream, offset, ty, method, usage, usage_index }
+    }
 }
 
 impl Deref    for VertexElement { fn deref    (&    self) -> &    Self::Target { unsafe { std::mem::transmute(self) } } type Target = D3DVERTEXELEMENT9; }
