@@ -50,7 +50,7 @@ unsafe impl AsSafe<IDirect3DVolume9 > for Volume { fn as_safe(&self) -> &IDirect
 ///
 pub trait IDirect3DVolume9Ext : AsSafe<IDirect3DVolume9> {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-freeprivatedata)\]
-    /// IDirect3DResource9::FreePrivateData
+    /// IDirect3DVolume9::FreePrivateData
     ///
     /// Frees the specified private data associated with this resource.
     ///
@@ -61,7 +61,7 @@ pub trait IDirect3DVolume9Ext : AsSafe<IDirect3DVolume9> {
     /// *   Ok(`()`)
     fn free_private_data(&self, guid: &GUID) -> Result<(), MethodError> {
         let hr = unsafe { self.as_winapi().FreePrivateData(guid) };
-        MethodError::check("IDirect3DResource9::FreePrivateData", hr)
+        MethodError::check("IDirect3DVolume9::FreePrivateData", hr)
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-getcontainer)\]
@@ -97,7 +97,7 @@ pub trait IDirect3DVolume9Ext : AsSafe<IDirect3DVolume9> {
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-getdevice)\]
-    /// IDirect3DResource9::GetDevice
+    /// IDirect3DVolume9::GetDevice
     ///
     /// Retrieves the device associated with a resource.
     ///
@@ -108,12 +108,12 @@ pub trait IDirect3DVolume9Ext : AsSafe<IDirect3DVolume9> {
     fn get_device(&self) -> Result<Device, MethodError> {
         let mut device = null_mut();
         let hr = unsafe { self.as_winapi().GetDevice(&mut device) };
-        MethodError::check("IDirect3DResource9::GetDevice", hr)?;
+        MethodError::check("IDirect3DVolume9::GetDevice", hr)?;
         Ok(unsafe { Device::from_raw(device) })
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-getprivatedata)\]
-    /// IDirect3DResource9::GetPrivateData
+    /// IDirect3DVolume9::GetPrivateData
     ///
     /// Copies the private data associated with the resource to a provided buffer.
     ///
@@ -126,12 +126,12 @@ pub trait IDirect3DVolume9Ext : AsSafe<IDirect3DVolume9> {
     fn get_private_data_inplace<'s>(&self, guid: &GUID, data: &'s mut [u8]) -> Result<&'s [u8], MethodError> {
         let mut n : u32 = data.len().try_into().map_err(|_| MethodError("Resource::get_private_data_inplace", THINERR::SLICE_OVERFLOW))?;
         let hr = unsafe { self.as_winapi().GetPrivateData(guid, data.as_mut_ptr().cast(), &mut n) };
-        MethodError::check("IDirect3DResource9::GetPrivateData", hr)?;
+        MethodError::check("IDirect3DVolume9::GetPrivateData", hr)?;
         Ok(&data[..(n as usize)])
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-setprivatedata)\]
-    /// IDirect3DResource9::SetPrivateData
+    /// IDirect3DVolume9::SetPrivateData
     ///
     /// ### Returns
     ///
@@ -141,7 +141,7 @@ pub trait IDirect3DVolume9Ext : AsSafe<IDirect3DVolume9> {
     fn set_private_data(&self, guid: &GUID, data: &[u8]) -> Result<(), MethodError> {
         let n : u32 = data.len().try_into().map_err(|_| MethodError("Resource::set_private_data", THINERR::SLICE_OVERFLOW))?;
         let hr = unsafe { self.as_winapi().SetPrivateData(guid, data.as_ptr().cast(), n, 0) };
-        MethodError::check("IDirect3DResource9::SetPrivateData", hr)
+        MethodError::check("IDirect3DVolume9::SetPrivateData", hr)
     }
 
     // TODO: set_private_data_unk
