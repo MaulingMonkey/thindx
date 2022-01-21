@@ -1,9 +1,10 @@
+use maulingmonkey_windows_sdk_scanner::*;
+use mmrbi::*;
+
 use std::collections::*;
 use std::fmt::{self, Display, Formatter};
 use std::io::Write;
-
-use maulingmonkey_windows_sdk_scanner::*;
-use mmrbi::*;
+use std::path::*;
 
 
 
@@ -176,19 +177,10 @@ impl<'cpp> Header<'cpp> {
 }
 
 lazy_static::lazy_static! {
+    static ref TEXTFILES    : BTreeMap<&'static str, String>            = collect_text_files();
     static ref CPP2IGNORE   : BTreeSet<&'static str>                    = set_file("thindx/doc/cpp2ignore.txt", include_str!("../thindx/doc/cpp2ignore.txt"));
     static ref CPP2RUST     : BTreeMap<&'static str, Vec<&'static str>> = map_file("thindx/doc/cpp2rust.txt", include_str!("../thindx/doc/cpp2rust.txt"));
-    static ref CPP2URL      : BTreeMap<&'static str, Vec<&'static str>> = map_link_files(&[
-        ("thindx/src/headers/_misc/cpp2url.md",                 include_str!("../thindx/src/headers/_misc/cpp2url.md")),
-        ("thindx/src/headers/d3d9.h/cpp2url.md",                include_str!("../thindx/src/headers/d3d9.h/cpp2url.md")),
-        ("thindx/src/headers/d3d9caps.h/cpp2url.md",            include_str!("../thindx/src/headers/d3d9caps.h/cpp2url.md")),
-        ("thindx/src/headers/d3d9types.h/cpp2url.md",           include_str!("../thindx/src/headers/d3d9types.h/cpp2url.md")),
-        ("thindx/src/headers/d3d11shader.h/cpp2url.md",         include_str!("../thindx/src/headers/d3d11shader.h/cpp2url.md")),
-        ("thindx/src/headers/d3dcommon.h/cpp2url.md",           include_str!("../thindx/src/headers/d3dcommon.h/cpp2url.md")),
-        ("thindx/src/headers/d3dcompiler.h/cpp2url.md",         include_str!("../thindx/src/headers/d3dcompiler.h/cpp2url.md")),
-        ("thindx/src/headers/unknwn.h/cpp2url.md",              include_str!("../thindx/src/headers/unknwn.h/cpp2url.md")),
-        ("thindx/src/headers/xinput.h/cpp2url.md",              include_str!("../thindx/src/headers/xinput.h/cpp2url.md")),
-    ]);
+    static ref CPP2URL      : BTreeMap<&'static str, Vec<&'static str>> = collect_cpp2url();
 }
 
 fn set_file<'s>(_path: &str, text: &'s str) -> BTreeSet<&'s str> {
@@ -213,40 +205,6 @@ fn map_file<'s>(path: &str, text: &'s str) -> BTreeMap<&'s str, Vec<&'s str>> {
             r.entry(k.trim()).or_default().push(v.trim());
         } else {
             error!(at: path, line: line_no, "expected `key = value` pair");
-        }
-    }
-    r
-}
-
-fn map_link_files<'s>(path_text_pairs: &[(&str, &'s str)]) -> BTreeMap<&'s str, Vec<&'s str>> {
-    let mut r = BTreeMap::<&'s str, Vec<&'s str>>::new();
-    for (path, text) in path_text_pairs.iter().copied() {
-        for (line_idx, line) in text.lines().enumerate() {
-            let line_no = line_idx + 1;
-            let line = line.trim();
-
-            let line = if let Some((before_comment, comment)) = line.split_once("<!--") {
-                if let Some(comment) = comment.strip_suffix("-->") {
-                    if comment.contains("--") {
-                        error!(at: path, line: line_no, "expected only one <!-- ... --> comment per line");
-                        continue;
-                    } else {
-                        before_comment.trim_end()
-                    }
-                } else {
-                    error!(at: path, line: line_no, "expected only single line comments");
-                    continue;
-                }
-            } else {
-                line
-            };
-            if line.is_empty() { continue }
-
-            if let Some((k, v)) = line.split_once("]:").and_then(|(k,v)| Some((k.strip_prefix("[")?.trim(), v.trim()))) {
-                r.entry(k.trim()).or_default().push(v.trim());
-            } else {
-                error!(at: path, line: line_no, "expected `[id]: url` pair");
-            }
         }
     }
     r
@@ -284,4 +242,83 @@ impl Display for CppLink<'_> {
             None        => write!(fmt, "`{}`", self.0),
         }
     }
+}
+
+
+
+fn collect_text_files() -> BTreeMap<&'static str, String> {
+    let cwd = std::env::current_dir().expect("unable to get CWD");
+    let mut files = BTreeMap::<&'static str, String>::new();
+    imp(&mut files, &cwd, &cwd);
+    return files;
+
+    fn imp(files: &mut BTreeMap<&'static str, String>, root: &Path, path: &Path) {
+        if path.is_dir() {
+            for e in std::fs::read_dir(path).expect("collect_text_files: failed to enumerate directory") {
+                let e = e.expect("collect_text_files: error enumerating directory");
+                imp(files, root, &e.path());
+            }
+        }
+        if path.is_file() {
+            let name = path.file_name().expect("collect_text_files: file_name()");
+            let name = name.to_string_lossy();
+            if ".rs .md .txt".split(' ').any(|ext| name.ends_with(ext)) {
+                let text = std::fs::read_to_string(&path).expect("collect_text_files: error reading text file");
+                let rel = path.strip_prefix(root).expect("collect_text_files: determining rel path");
+                files.insert(Box::leak(Box::<str>::from(rel.to_string_lossy())), text);
+            }
+        }
+    }
+}
+
+fn collect_cpp2url() -> BTreeMap<&'static str, Vec<&'static str>> {
+    let mut r = BTreeMap::<&'static str, Vec<&'static str>>::new();
+    for (&path, text) in TEXTFILES.iter() {
+        let name = path.rsplit_once(&['/', '\\']).map_or(path, |p| p.1);
+        if name == "cpp2url.md" {
+            for (line_idx, line) in text.lines().enumerate() {
+                let line_no = line_idx + 1;
+                let line = line.trim();
+
+                let line = if let Some((before_comment, comment)) = line.split_once("<!--") {
+                    if let Some(comment) = comment.strip_suffix("-->") {
+                        if comment.contains("--") {
+                            error!(at: path, line: line_no, "expected only one <!-- ... --> comment per line");
+                            continue;
+                        } else {
+                            before_comment.trim_end()
+                        }
+                    } else {
+                        error!(at: path, line: line_no, "expected only single line comments");
+                        continue;
+                    }
+                } else {
+                    line
+                };
+                if line.is_empty() { continue }
+
+                if let Some((k, v)) = line.split_once("]:").and_then(|(k,v)| Some((k.strip_prefix("[")?.trim(), v.trim()))) {
+                    r.entry(k.trim()).or_default().push(v.trim());
+                } else {
+                    error!(at: path, line: line_no, "expected `[id]: url` pair");
+                }
+            }
+        } else if path.ends_with(".rs") {
+            for (line_idx, line) in text.lines().enumerate() {
+                let line = line.trim();
+                if let Some(cpp_url) = line.trim().strip_prefix("//#cpp2url ") {
+                    let cpp_url = cpp_url.trim_start();
+                    if let Some((cpp, url)) = cpp_url.split_once('=') {
+                        let cpp = cpp.trim_end();   // before `=`
+                        let url = url.trim_start(); // after `=`
+                        let urls = r.entry(cpp).or_default();
+                        if !urls.contains(&url) { urls.push(url); } // O(NN) but N should always be tiny
+                    } else {
+                        error!(at: path, line: line_idx+1, code: "cpp2url", "expected `//#cpp2url cpp=url` but missing `=`");
+                    }
+                } // else not a directive, ignore
+            }
+        } // else not a cpp2url-bearing file, ignore
+    }
+    r
 }
