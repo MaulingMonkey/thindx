@@ -3,6 +3,8 @@
 use crate::*;
 use crate::d3d9::*;
 
+use bytemuck::*;
+
 use winapi::shared::d3d9::{Direct3DCreate9Ex, IDirect3D9Ex, IDirect3D9};
 use winapi::shared::d3d9types::*;
 use winapi::shared::windef::HWND;
@@ -84,14 +86,14 @@ pub trait IDirect3D9ExExt : AsSafe<IDirect3D9Ex> {
     /// *   The caller's codebase is responsible for ensuring any [HWND]s (`hwnd`, `presentation_parameters.hDeviceWindow`) outlive the [Device].
     ///      See [IDirect3D9Ext::create_device] for guidance and details.
     /// *   `fullscreen_display_modes` is assumed to contain an entry for every adapter if `behavior_flags & D3DCREATE_ADAPTERGROUP_DEVICE` (TODO: enforce this via checks?)
-    unsafe fn create_device_ex(&self, adapter: u32, device_type: impl Into<DevType>, hwnd: HWND, behavior_flags: impl Into<Create>, presentation_parameters: &mut D3DPRESENT_PARAMETERS, fullscreen_display_modes: &mut [D3DDISPLAYMODEEX]) -> Result<DeviceEx, MethodError> {
+    unsafe fn create_device_ex(&self, adapter: u32, device_type: impl Into<DevType>, hwnd: HWND, behavior_flags: impl Into<Create>, presentation_parameters: &mut D3DPRESENT_PARAMETERS, fullscreen_display_modes: &mut [DisplayModeEx]) -> Result<DeviceEx, MethodError> {
         for fdm in fullscreen_display_modes.iter_mut() {
-            fdm.Size = std::mem::size_of_val(fdm).try_into().unwrap();
+            fdm.size = std::mem::size_of_val(fdm).try_into().unwrap();
         }
 
         // TODO: examples, returns, etc.
         let mut device = null_mut();
-        let modes = if fullscreen_display_modes.is_empty() { null_mut() } else { fullscreen_display_modes.as_mut_ptr() };
+        let modes = if fullscreen_display_modes.is_empty() { null_mut() } else { fullscreen_display_modes.as_mut_ptr().cast() };
         let hr = self.as_winapi().CreateDeviceEx(adapter, device_type.into().into(), hwnd, behavior_flags.into().into(), presentation_parameters, modes, &mut device);
         MethodError::check("IDirect3D9Ex::CreateDeviceEx", hr)?;
         Ok(DeviceEx::from_raw(device))
@@ -101,11 +103,12 @@ pub trait IDirect3D9ExExt : AsSafe<IDirect3D9Ex> {
     /// IDirect3D9Ex::EnumAdapterModesEx
     ///
     /// Enumerate actual display mode info based on the given mode index.
-    fn enum_adapter_modes_ex(&self, adapter: u32, filter: impl Into<D3DDISPLAYMODEFILTER>, mode: u32) -> Result<D3DDISPLAYMODEEX, MethodError> {
+    fn enum_adapter_modes_ex(&self, adapter: u32, filter: impl Into<D3DDISPLAYMODEFILTER>, mode: u32) -> Result<DisplayModeEx, MethodError> {
         let mut filter = filter.into();
         filter.Size = std::mem::size_of_val(&filter).try_into().unwrap();
-        let mut dmex = unsafe { std::mem::zeroed::<D3DDISPLAYMODEEX>() };
-        let hr = unsafe { self.as_winapi().EnumAdapterModesEx(adapter, &filter, mode, &mut dmex) };
+        let mut dmex = DisplayModeEx::zeroed();
+        dmex.size = std::mem::size_of_val(&dmex).try_into().unwrap();
+        let hr = unsafe { self.as_winapi().EnumAdapterModesEx(adapter, &filter, mode, &mut *dmex) };
         MethodError::check("IDirect3D9Ex::EnumAdapterModesEx", hr)?;
         Ok(dmex)
     }
@@ -114,13 +117,13 @@ pub trait IDirect3D9ExExt : AsSafe<IDirect3D9Ex> {
     /// IDirect3D9Ex::GetAdapterDisplayModeEx
     ///
     /// Retrieves the current display mode and rotation settings of the adapter.
-    fn get_adapter_display_mode_ex(&self, adapter: u32) -> Result<(D3DDISPLAYMODEEX, D3DDISPLAYROTATION), MethodError> {
-        let mut mode = unsafe { std::mem::zeroed::<D3DDISPLAYMODEEX>() };
-        mode.Size = std::mem::size_of_val(&mode).try_into().unwrap();
+    fn get_adapter_display_mode_ex(&self, adapter: u32) -> Result<(DisplayModeEx, DisplayRotation), MethodError> {
+        let mut mode = DisplayModeEx::zeroed();
+        mode.size = std::mem::size_of_val(&mode).try_into().unwrap();
         let mut rot = D3DDISPLAYROTATION_IDENTITY;
-        let hr = unsafe { self.as_winapi().GetAdapterDisplayModeEx(adapter, &mut mode, &mut rot) };
+        let hr = unsafe { self.as_winapi().GetAdapterDisplayModeEx(adapter, &mut *mode, &mut rot) };
         MethodError::check("IDirect3D9Ex::GetAdapterDisplayModeEx", hr)?;
-        Ok((mode, rot))
+        Ok((mode, DisplayRotation::from_unchecked(rot)))
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9ex-getadapterluid)\]

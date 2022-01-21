@@ -3,6 +3,8 @@
 use crate::*;
 use crate::d3d9::*;
 
+use bytemuck::*;
+
 use winapi::shared::d3d9::{IDirect3DDevice9Ex, IDirect3DDevice9};
 use winapi::shared::d3d9types::*;
 use winapi::um::unknwnbase::IUnknown;
@@ -245,7 +247,7 @@ pub trait IDirect3DDevice9ExExt : AsSafe<IDirect3DDevice9Ex> {
     /// ### Returns
     ///
     /// *   [D3DERR::INVALIDCALL]
-    /// *   Ok([D3DDISPLAYMODEEX])
+    /// *   Ok([DisplayModeEx])
     ///
     /// ### Example
     ///
@@ -253,10 +255,11 @@ pub trait IDirect3DDevice9ExExt : AsSafe<IDirect3DDevice9Ex> {
     /// # use dev::d3d9::*; let device = device_ex_test();
     /// // TODO
     /// ```
-    fn get_display_mode_ex(&self, swap_chain: u32) -> Result<(D3DDISPLAYMODEEX, DisplayRotation), MethodError> {
-        let mut display_mode_ex = unsafe { std::mem::zeroed::<D3DDISPLAYMODEEX>() };
+    fn get_display_mode_ex(&self, swap_chain: u32) -> Result<(DisplayModeEx, DisplayRotation), MethodError> {
+        let mut display_mode_ex = DisplayModeEx::zeroed();
+        display_mode_ex.size = std::mem::size_of_val(&display_mode_ex).try_into().unwrap();
         let mut rotation = 0;
-        let hr = unsafe { self.as_winapi().GetDisplayModeEx(swap_chain, &mut display_mode_ex, &mut rotation) };
+        let hr = unsafe { self.as_winapi().GetDisplayModeEx(swap_chain, &mut *display_mode_ex, &mut rotation) };
         MethodError::check("IDirect3DDevice9Ex::GetDisplayModeEx", hr)?;
         Ok((display_mode_ex, DisplayRotation::from_unchecked(rotation)))
     }
@@ -373,9 +376,9 @@ pub trait IDirect3DDevice9ExExt : AsSafe<IDirect3DDevice9Ex> {
     /// # use dev::d3d9::*; let device = device_ex_test();
     /// // TODO
     /// ```
-    fn reset_ex<'mode>(&self, presentation_parameters: &mut D3DPRESENT_PARAMETERS, fullscreen_display_mode: impl Into<Option<&'mode mut D3DDISPLAYMODEEX>>) -> Result<(), MethodError> {
+    fn reset_ex<'mode>(&self, presentation_parameters: &mut D3DPRESENT_PARAMETERS, fullscreen_display_mode: impl Into<Option<&'mode mut DisplayModeEx>>) -> Result<(), MethodError> {
         let fullscreen_display_mode = fullscreen_display_mode.into().map_or(null_mut(), |dm| dm);
-        let hr = unsafe { self.as_winapi().ResetEx(presentation_parameters, fullscreen_display_mode) };
+        let hr = unsafe { self.as_winapi().ResetEx(presentation_parameters, fullscreen_display_mode.cast()) };
         MethodError::check("IDirect3DDevice9Ex::ResetEx", hr)
     }
 

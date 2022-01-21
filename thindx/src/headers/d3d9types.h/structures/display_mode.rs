@@ -1,5 +1,7 @@
 use crate::d3d9::*;
 
+use bytemuck::*;
+
 use winapi::shared::d3d9types::*;
 
 use std::ops::{Deref, DerefMut};
@@ -13,7 +15,8 @@ use std::ops::{Deref, DerefMut};
 ///
 /// ### See Also
 /// *   [IDirect3DDevice9Ext::get_display_mode]
-#[derive(Clone, Copy, Default, Debug)]
+#[derive(Clone, Copy, Debug)]
+#[derive(Pod, Zeroable)]
 #[repr(C)] pub struct DisplayMode {
     /// Screen width, in pixels.
     pub width:          u32,

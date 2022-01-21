@@ -1,5 +1,7 @@
 #[allow(unused_imports)] use crate::*;
 
+use bytemuck::*;
+
 use winapi::shared::d3d9types::*;
 
 use std::fmt::{self, Debug, Formatter};
@@ -122,6 +124,7 @@ use std::fmt::{self, Debug, Formatter};
 /// | |
 /// | [`Format::CxV8U8`]        |
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct Format(u32);
 pub use Format as Fmt;
 

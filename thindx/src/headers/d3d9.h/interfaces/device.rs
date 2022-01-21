@@ -1203,7 +1203,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// }
     /// ```
     fn get_display_mode(&self, swap_chain: u32) -> Result<DisplayMode, MethodError> {
-        let mut dm = DisplayMode::default();
+        let mut dm = DisplayMode::zeroed();
         let hr = unsafe { self.as_winapi().GetDisplayMode(swap_chain, &mut *dm) };
         MethodError::check("IDirect3DDevice9::GetDisplayMode", hr)?;
         Ok(dm)
@@ -1906,7 +1906,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// Sets the gamma correction ramp for the implicit swap chain. This method will affect the entire screen (not just the active window if you are running in windowed mode).
     ///
     /// If the device does not support gamma ramps in the swap chain's current presentation mode (full-screen or windowed), no error return is given.
-    /// Applications can check the D3DCAPS2_FULLSCREENGAMMA and D3DCAPS2_CANCALIBRATEGAMMA capability bits in the Caps2 member of the D3DCAPS9 structure to determine the capabilities of the device and whether a calibrator is installed.
+    /// Applications can check the D3DCAPS2_FULLSCREENGAMMA and D3DCAPS2_CANCALIBRATEGAMMA capability bits in the Caps2 member of the [d3d9::Caps] structure to determine the capabilities of the device and whether a calibrator is installed.
     ///
     /// For windowed gamma correction presentation, use [SwapChain::present] if the hardware supports the feature.
     /// In DirectX 8, SetGammaRamp will set the gamma ramp only on a full-screen mode application.

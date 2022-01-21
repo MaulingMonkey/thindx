@@ -18,12 +18,7 @@ use std::result::Result;
 
 // XXX: temporary?
 
-#[doc(no_inline)] pub use winapi::shared::d3d9caps::{
-    D3DCAPS9,
-};
 #[doc(no_inline)] pub use winapi::shared::d3d9types::{
-    D3DDISPLAYMODE,
-    D3DDISPLAYMODEEX,
     D3DPRESENT_PARAMETERS,
 };
 #[doc(no_inline)] pub use winapi::shared::windef::{
@@ -131,9 +126,9 @@ pub fn screenshot_rt0_for_docs_gen(device: &Device) {
         let rt      = device.get_render_target(0).unwrap().unwrap();
 
         let desc    = rt.get_desc().unwrap();
-        let width   = desc.Width as usize;
-        let height  = desc.Height as usize;
-        let surface = device.create_offscreen_plain_surface(desc.Width, desc.Height, Format::X8R8G8B8, Pool::SystemMem, ()).unwrap();
+        let width   = desc.width as usize;
+        let height  = desc.height as usize;
+        let surface = device.create_offscreen_plain_surface(desc.width, desc.height, Format::X8R8G8B8, Pool::SystemMem, ()).unwrap();
         let bpp     = 4;
 
         device.get_render_target_data(&rt, &surface).unwrap();
@@ -159,7 +154,7 @@ pub fn screenshot_rt0_for_docs_gen(device: &Device) {
         for i in 0 .. width*height { data[4*i + 3] = !0; }
 
         let file = BufWriter::new(File::create(screenshot_path).unwrap());
-        let mut encoder = png::Encoder::new(file, desc.Width, desc.Height);
+        let mut encoder = png::Encoder::new(file, desc.width, desc.height);
         encoder.set_color(png::ColorType::Rgba);
         encoder.set_depth(png::BitDepth::Eight);
         // set_trns ?

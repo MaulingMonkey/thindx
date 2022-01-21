@@ -1,5 +1,7 @@
 #[allow(unused_imports)] use crate::*;
 
+use bytemuck::*;
+
 use winapi::shared::d3d9types::*;
 
 
@@ -9,6 +11,7 @@ use winapi::shared::d3d9types::*;
 ///
 /// Flags indicating the method the rasterizer uses to create an image on a surface.
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct ScanlineOrdering(D3DSCANLINEORDERING);
 
 enumish! { ScanlineOrdering => D3DSCANLINEORDERING; Progressive, Interlaced }

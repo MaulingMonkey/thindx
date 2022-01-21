@@ -1,5 +1,7 @@
 use crate::d3d9::*;
 
+use bytemuck::*;
+
 use winapi::shared::d3d9types::*;
 
 use std::mem::size_of;
@@ -15,6 +17,7 @@ use std::ops::{Deref, DerefMut};
 /// ### See Also
 /// *   [IDirect3DDevice9Ext::get_display_mode]
 #[derive(Clone, Copy, Debug)]
+#[derive(Pod, Zeroable)]
 #[repr(C)] pub struct DisplayModeEx {
     /// The size of this structure. This should always be set to `size_of::<DisplayModeEx>()`.
     pub size:               u32,

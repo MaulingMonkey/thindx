@@ -4,7 +4,7 @@ use crate::d3d9::*;
 use bytemuck::Zeroable;
 
 use winapi::shared::d3d9::{Direct3DCreate9, IDirect3D9};
-use winapi::shared::d3d9types::{D3DDISPLAYMODE, D3DPRESENT_PARAMETERS};
+use winapi::shared::d3d9types::{D3DPRESENT_PARAMETERS};
 use winapi::shared::windef::{HMONITOR, HWND};
 use winapi::um::unknwnbase::IUnknown;
 
@@ -345,7 +345,7 @@ pub trait IDirect3D9Ext : AsSafe<IDirect3D9> + Sized {
     ///
     /// *   [D3DERR::INVALIDCALL]       if `adapter` >= `self.get_adapter_count()`
     /// *   [D3DERR::INVALIDCALL]       if `mode` >= `self.get_adapter_mode_count(adapter, format)`
-    /// *   Ok([D3DDISPLAYMODE])        otherwise
+    /// *   Ok([DisplayMode])           otherwise
     ///
     /// ### Example
     ///
@@ -355,8 +355,8 @@ pub trait IDirect3D9Ext : AsSafe<IDirect3D9> + Sized {
     /// let fmt = Format::X8R8G8B8;
     /// for mode in 0..d3d.get_adapter_mode_count(adapter, fmt) {
     ///     let mode = d3d.enum_adapter_modes(adapter, fmt, mode).unwrap();
-    ///     let D3DDISPLAYMODE { Width: w, Height: h, RefreshRate: hz, Format: fmt2 } = mode;
-    ///     println!("{}x{} @ {}hz {:?}", w, h, hz, Format::from_unchecked(fmt2));
+    ///     let DisplayMode { width, height, refresh_rate, format } = mode;
+    ///     println!("{}x{} @ {}hz {:?}", width, height, refresh_rate, format);
     /// }
     /// ```
     ///
@@ -372,9 +372,9 @@ pub trait IDirect3D9Ext : AsSafe<IDirect3D9> + Sized {
     /// 2160x3840 @ 30hz Format(D3DFMT_X8R8G8B8)
     /// 2160x3840 @ 60hz Format(D3DFMT_X8R8G8B8)
     /// ```
-    fn enum_adapter_modes(&self, adapter: AdapterIndex, format: impl Into<Format>, mode: ModeIndex) -> Result<D3DDISPLAYMODE, MethodError> {
-        let mut dm = unsafe { std::mem::zeroed::<D3DDISPLAYMODE>() };
-        let hr = unsafe { self.as_winapi().EnumAdapterModes(adapter, format.into().into(), mode, &mut dm) };
+    fn enum_adapter_modes(&self, adapter: AdapterIndex, format: impl Into<Format>, mode: ModeIndex) -> Result<DisplayMode, MethodError> {
+        let mut dm = DisplayMode::zeroed();
+        let hr = unsafe { self.as_winapi().EnumAdapterModes(adapter, format.into().into(), mode, &mut *dm) };
         MethodError::check("IDirect3D9::EnumAdapterModes", hr)?;
         Ok(dm)
     }
@@ -409,8 +409,8 @@ pub trait IDirect3D9Ext : AsSafe<IDirect3D9> + Sized {
     /// # use dev::d3d9::*; let d3d = d3d_test();
     /// for adapter in 0..d3d.get_adapter_count() {
     ///     let mode = d3d.get_adapter_display_mode(adapter).unwrap();
-    ///     let D3DDISPLAYMODE { Width: w, Height: h, RefreshRate: hz, Format: fmt } = mode;
-    ///     println!("{}x{} @ {}hz {:?}", w, h, hz, Format::from_unchecked(fmt));
+    ///     let DisplayMode { width, height, refresh_rate, format } = mode;
+    ///     println!("{}x{} @ {}hz {:?}", width, height, refresh_rate, format);
     /// }
     /// ```
     ///
@@ -422,9 +422,9 @@ pub trait IDirect3D9Ext : AsSafe<IDirect3D9> + Sized {
     /// 2160x3840 @ 29hz Format(D3DFMT_X8R8G8B8)
     /// 2160x3840 @ 29hz Format(D3DFMT_X8R8G8B8)
     /// ```
-    fn get_adapter_display_mode(&self, adapter: AdapterIndex) -> Result<D3DDISPLAYMODE, MethodError> {
-        let mut dm = unsafe { std::mem::zeroed::<D3DDISPLAYMODE>() };
-        let hr = unsafe { self.as_winapi().GetAdapterDisplayMode(adapter, &mut dm) };
+    fn get_adapter_display_mode(&self, adapter: AdapterIndex) -> Result<DisplayMode, MethodError> {
+        let mut dm = DisplayMode::zeroed();
+        let hr = unsafe { self.as_winapi().GetAdapterDisplayMode(adapter, &mut *dm) };
         MethodError::check("IDirect3D9::GetAdapterDisplayMode", hr)?;
         Ok(dm)
     }
