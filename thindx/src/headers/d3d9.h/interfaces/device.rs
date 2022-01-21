@@ -2215,6 +2215,35 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         MethodError::check("IDirect3DDevice9::SetPixelShaderConstantI", hr)
     }
 
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setrenderstate)\]
+    /// IDirect3DDevice9::SetRenderState
+    ///
+    /// Sets a single device render-state parameter
+    ///
+    /// ### Examples
+    ///
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_pure();
+    /// device.set_render_state_untyped(d3d::RS::Lighting,          true as u32             ).unwrap();
+    /// device.set_render_state_untyped(d3d::RS::AlphaBlendEnable,  true as u32             ).unwrap();
+    /// device.set_render_state_untyped(d3d::RS::DestBlend,         d3d::Blend::InvSrcAlpha ).unwrap();
+    /// device.set_render_state_untyped(d3d::RS::Ambient,           0xFFFFFFFFu32           ).unwrap();
+    /// # for rs in [1000, 10000, 100000, 1000000, !0u32].iter().copied() {
+    /// #     for value in [0, 1, 100, 10000, 1000000, !0u32].iter().copied() {
+    /// #         // bad inputs silently ignored?
+    /// #         device.set_render_state_untyped(d3d::RS::from_unchecked(rs), value).unwrap();
+    /// #     }
+    /// # }
+    /// ```
+    ///
+    /// ### Returns
+    ///
+    /// *   Ok(())              no matter what invalid parameters are used?
+    fn set_render_state_untyped(&self, state: impl Into<d3d9::RenderStateType>, value: impl Into<u32>) -> Result<(), MethodError> {
+        let hr = unsafe { self.as_winapi().SetRenderState(state.into().into(), value.into()) };
+        MethodError::check("IDirect3DDevice9::SetRenderState", hr)
+    }
+
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setrendertarget)\]
     /// IDirect3DDevice9::SetRenderTarget
     ///

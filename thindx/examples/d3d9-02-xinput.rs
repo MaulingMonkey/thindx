@@ -83,15 +83,10 @@ fn main() {
                     let _ = device.set_indices(&assets.QuadIB);
                     let _ = device.set_vertex_declaration(&assets.VertDecl);
                     let _ = device.set_material(Material { ambient: ColorValue { r: 1.0, g: 1.0, b: 1.0, a: 0.0 }, ..Default::default() });
-                    unsafe {
-                        let device = &*device.as_raw();
-
-                        // TODO: device.set_render_state[_unchecked]
-                        device.SetRenderState(D3DRS_LIGHTING,           1                   );
-                        device.SetRenderState(D3DRS_ALPHABLENDENABLE,   1                   );
-                        device.SetRenderState(D3DRS_DESTBLEND,          D3DBLEND_INVSRCALPHA);
-                        device.SetRenderState(D3DRS_AMBIENT,            0xFFFFFFFF          );
-                    }
+                    let _ = device.set_render_state_untyped(d3d::RS::Lighting,          true as u32             );
+                    let _ = device.set_render_state_untyped(d3d::RS::AlphaBlendEnable,  true as u32             );
+                    let _ = device.set_render_state_untyped(d3d::RS::DestBlend,         d3d::Blend::InvSrcAlpha );
+                    let _ = device.set_render_state_untyped(d3d::RS::Ambient,           0xFFFFFFFFu32           );
                     unsafe {
                         // TODO: make these safe? can't seem to crash
                         let _ = device.set_sampler_state_unchecked(0, d3d::Samp::MinFilter, d3d::TexF::Linear);
@@ -152,7 +147,7 @@ fn main() {
                         let texture_mip0_desc = texture.get_level_desc(0).unwrap();
                         let texw = texture_mip0_desc.width  as f32 * scale;
                         let texh = texture_mip0_desc.height as f32 * scale;
-                        unsafe { (*device.as_raw()).SetRenderState(D3DRS_AMBIENT, (bri as u32) * 0x01010101) };
+                        let _ = device.set_render_state_untyped(d3d::RS::Ambient, (bri as u32) * 0x01010101);
                         let _ = device.set_transform(d3d::TS::World, d3d::Matrix { m: [
                             [texw * sx,       0.0, 0.0, 0.0],
                             [      0.0, texh * sy, 0.0, 0.0],
