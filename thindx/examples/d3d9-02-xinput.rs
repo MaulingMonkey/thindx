@@ -175,7 +175,7 @@ fn main() {
                     match err.kind() {
                         D3DERR::DEVICELOST => {
                             assets = None;
-                            #[allow(unused_assignments)] { device = None; } // explicitly release COM device before creating a new one
+                            drop(device.take()); // explicitly release COM device before creating a new one
                             device = Some(unsafe { d3d.create_device(0, DevType::HAL, null_mut(), behavior, &mut pp) }.unwrap());
                         },
                         _other => {},
