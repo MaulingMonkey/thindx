@@ -26,3 +26,12 @@ enumish! { DeclMethod8 => D3DDECLMETHOD; Default, PartialU, PartialV, CrossUV, U
 impl Default for DeclMethod8 {
     fn default() -> Self { DeclMethod8::Default } // 0
 }
+
+//#cpp2rust D3DDECLMETHOD                   = d3d::DeclMethod8
+//#cpp2rust D3DDECLMETHOD_DEFAULT           = d3d::DeclMethod8::Default
+//#cpp2rust D3DDECLMETHOD_PARTIALU          = d3d::DeclMethod8::PartialU
+//#cpp2rust D3DDECLMETHOD_PARTIALV          = d3d::DeclMethod8::PartialV
+//#cpp2rust D3DDECLMETHOD_CROSSUV           = d3d::DeclMethod8::CrossUV
+//#cpp2rust D3DDECLMETHOD_UV                = d3d::DeclMethod8::UV
+//#cpp2rust D3DDECLMETHOD_LOOKUP            = d3d::DeclMethod8::Lookup
+//#cpp2rust D3DDECLMETHOD_LOOKUPPRESAMPLED  = d3d::DeclMethod8::LookupPresampled

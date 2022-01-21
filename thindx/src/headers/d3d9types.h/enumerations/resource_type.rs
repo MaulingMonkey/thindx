@@ -64,3 +64,12 @@ enumish! { ResourceType => D3DRESOURCETYPE; Surface, Volume, Texture, VolumeText
 impl Default for ResourceType {
     fn default() -> Self { ResourceType(0) }
 }
+
+//#cpp2rust D3DRESOURCETYPE         = d3d::ResourceType
+//#cpp2rust D3DRTYPE_SURFACE        = d3d::RType::Surface
+//#cpp2rust D3DRTYPE_VOLUME         = d3d::RType::Volume
+//#cpp2rust D3DRTYPE_TEXTURE        = d3d::RType::Texture
+//#cpp2rust D3DRTYPE_VOLUMETEXTURE  = d3d::RType::VolumeTexture
+//#cpp2rust D3DRTYPE_CUBETEXTURE    = d3d::RType::CubeTexture
+//#cpp2rust D3DRTYPE_VERTEXBUFFER   = d3d::RType::VertexBuffer
+//#cpp2rust D3DRTYPE_INDEXBUFFER    = d3d::RType::IndexBuffer

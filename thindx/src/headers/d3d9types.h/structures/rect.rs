@@ -110,3 +110,6 @@ impl From<Range<[i32; 2]>> for Rect {
         }
     }
 }
+
+//#cpp2rust D3DRECT = d3d::Rect
+//#cpp2rust RECT    = d3d::Rect

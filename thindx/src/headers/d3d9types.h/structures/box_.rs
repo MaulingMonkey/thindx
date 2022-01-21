@@ -98,3 +98,6 @@ impl From<Range<[u32; 3]>> for Box {
         }
     }
 }
+
+//#cpp2rust D3DBOX  = d3d::Box
+//#cpp2rust BOX     = d3d::Box

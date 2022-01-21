@@ -59,3 +59,8 @@ enumish! { LightType => D3DLIGHTTYPE; Point, Spot, Directional }
 impl Default for LightType {
     fn default() -> Self { LightType(0) }
 }
+
+//#cpp2rust D3DLIGHTTYPE            = d3d::LightType
+//#cpp2rust D3DLIGHT_POINT          = d3d::Light::Point
+//#cpp2rust D3DLIGHT_SPOT           = d3d::Light::Spot
+//#cpp2rust D3DLIGHT_DIRECTIONAL    = d3d::Light::Directional

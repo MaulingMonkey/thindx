@@ -25,3 +25,10 @@ enumish! { TAddress => D3DTEXTUREADDRESS; Wrap, Mirror, Clamp, Border, MirrorOnc
 impl Default for TextureAddress {
     fn default() -> Self { TextureAddress::Wrap } // 1
 }
+
+//#cpp2rust D3DTEXTUREADDRESS       = d3d::TextureAddress
+//#cpp2rust D3DTADDRESS_WRAP        = d3d::TAddress::Wrap
+//#cpp2rust D3DTADDRESS_MIRROR      = d3d::TAddress::Mirror
+//#cpp2rust D3DTADDRESS_CLAMP       = d3d::TAddress::Clamp
+//#cpp2rust D3DTADDRESS_BORDER      = d3d::TAddress::Border
+//#cpp2rust D3DTADDRESS_MIRRORONCE  = d3d::TAddress::MirrorOnce

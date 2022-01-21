@@ -50,3 +50,22 @@ enumish! { MultiSample => D3DMULTISAMPLE_TYPE; None, NonMaskable, X2, X3, X4, X5
 impl Default for MultiSample {
     fn default() -> Self { MultiSample::None } // 0
 }
+
+//#cpp2rust D3DMULTISAMPLE_TYPE         = d3d::MultiSampleType
+//#cpp2rust D3DMULTISAMPLE_NONE         = d3d::MultiSample::None
+//#cpp2rust D3DMULTISAMPLE_NONMASKABLE  = d3d::MultiSample::NonMaskable
+//#cpp2rust D3DMULTISAMPLE_2_SAMPLES    = d3d::MultiSample::X2
+//#cpp2rust D3DMULTISAMPLE_3_SAMPLES    = d3d::MultiSample::X3
+//#cpp2rust D3DMULTISAMPLE_4_SAMPLES    = d3d::MultiSample::X4
+//#cpp2rust D3DMULTISAMPLE_5_SAMPLES    = d3d::MultiSample::X5
+//#cpp2rust D3DMULTISAMPLE_6_SAMPLES    = d3d::MultiSample::X6
+//#cpp2rust D3DMULTISAMPLE_7_SAMPLES    = d3d::MultiSample::X7
+//#cpp2rust D3DMULTISAMPLE_8_SAMPLES    = d3d::MultiSample::X8
+//#cpp2rust D3DMULTISAMPLE_9_SAMPLES    = d3d::MultiSample::X9
+//#cpp2rust D3DMULTISAMPLE_10_SAMPLES   = d3d::MultiSample::X10
+//#cpp2rust D3DMULTISAMPLE_11_SAMPLES   = d3d::MultiSample::X11
+//#cpp2rust D3DMULTISAMPLE_12_SAMPLES   = d3d::MultiSample::X12
+//#cpp2rust D3DMULTISAMPLE_13_SAMPLES   = d3d::MultiSample::X13
+//#cpp2rust D3DMULTISAMPLE_14_SAMPLES   = d3d::MultiSample::X14
+//#cpp2rust D3DMULTISAMPLE_15_SAMPLES   = d3d::MultiSample::X15
+//#cpp2rust D3DMULTISAMPLE_16_SAMPLES   = d3d::MultiSample::X16

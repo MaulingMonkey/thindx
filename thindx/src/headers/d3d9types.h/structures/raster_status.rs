@@ -30,3 +30,5 @@ impl From<D3DRASTER_STATUS> for RasterStatus { fn from(value: D3DRASTER_STATUS) 
 impl From<RasterStatus> for D3DRASTER_STATUS { fn from(value: RasterStatus   ) -> Self { unsafe { std::mem::transmute(value) } } }
 
 test_layout! { RasterStatus => D3DRASTER_STATUS { in_vblank => InVBlank, scan_line => ScanLine } }
+
+//#cpp2rust D3DRASTER_STATUS = d3d::RasterStatus

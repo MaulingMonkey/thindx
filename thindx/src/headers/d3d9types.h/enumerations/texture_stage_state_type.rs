@@ -48,3 +48,23 @@ enumish! {
 impl Default for TextureStageStateType {
     fn default() -> Self { TextureStageStateType(0) }
 }
+
+//#cpp2rust D3DTEXTURESTAGESTATETYPE        = d3d::TextureStageStateType
+//#cpp2rust D3DTSS_COLOROP                  = d3d::TSS::ColorOp
+//#cpp2rust D3DTSS_COLORARG1                = d3d::TSS::ColorArg1
+//#cpp2rust D3DTSS_COLORARG2                = d3d::TSS::ColorArg2
+//#cpp2rust D3DTSS_ALPHAOP                  = d3d::TSS::AlphaOp
+//#cpp2rust D3DTSS_ALPHAARG1                = d3d::TSS::AlphaArg1
+//#cpp2rust D3DTSS_ALPHAARG2                = d3d::TSS::AlphaArg2
+//#cpp2rust D3DTSS_BUMPENVMAT00             = d3d::TSS::BumpEnvMat00
+//#cpp2rust D3DTSS_BUMPENVMAT01             = d3d::TSS::BumpEnvMat01
+//#cpp2rust D3DTSS_BUMPENVMAT10             = d3d::TSS::BumpEnvMat10
+//#cpp2rust D3DTSS_BUMPENVMAT11             = d3d::TSS::BumpEnvMat11
+//#cpp2rust D3DTSS_TEXCOORDINDEX            = d3d::TSS::TexCoordIndex
+//#cpp2rust D3DTSS_BUMPENVLSCALE            = d3d::TSS::BumpEnvlScale
+//#cpp2rust D3DTSS_BUMPENVLOFFSET           = d3d::TSS::BumpEnvlOffset
+//#cpp2rust D3DTSS_TEXTURETRANSFORMFLAGS    = d3d::TSS::TextureTransformFlags
+//#cpp2rust D3DTSS_COLORARG0                = d3d::TSS::ColorArg0
+//#cpp2rust D3DTSS_ALPHAARG0                = d3d::TSS::AlphaArg0
+//#cpp2rust D3DTSS_RESULTARG                = d3d::TSS::ResultArg
+//#cpp2rust D3DTSS_CONSTANT                 = d3d::TSS::Constant

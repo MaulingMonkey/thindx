@@ -47,3 +47,9 @@ enumish! { DevType => D3DDEVTYPE; HAL, NullRef, Ref, SW }
 impl Default for DevType {
     fn default() -> Self { DevType::HAL } // 1
 }
+
+//#cpp2rust D3DDEVTYPE          = d3d::DevType
+//#cpp2rust D3DDEVTYPE_HAL      = d3d::DevType::HAL
+//#cpp2rust D3DDEVTYPE_NULLREF  = d3d::DevType::NullRef
+//#cpp2rust D3DDEVTYPE_REF      = d3d::DevType::Ref
+//#cpp2rust D3DDEVTYPE_SW       = d3d::DevType::SW

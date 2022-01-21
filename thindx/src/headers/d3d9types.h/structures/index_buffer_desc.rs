@@ -25,3 +25,5 @@ impl From<D3DINDEXBUFFER_DESC> for IndexBufferDesc { fn from(value: D3DINDEXBUFF
 impl From<IndexBufferDesc> for D3DINDEXBUFFER_DESC { fn from(value: IndexBufferDesc    ) -> Self { unsafe { std::mem::transmute(value) } } }
 
 test_layout! { IndexBufferDesc => D3DINDEXBUFFER_DESC { format => Format, ty => Type, usage => Usage, pool => Pool, size => Size } }
+
+//#cpp2rust D3DINDEXBUFFER_DESC = d3d::IndexBufferDesc

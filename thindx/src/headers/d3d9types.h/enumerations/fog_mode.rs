@@ -24,3 +24,9 @@ enumish! { Fog => D3DFOGMODE; None, Exp, Exp2, Linear }
 impl Default for Fog {
     fn default() -> Self { Fog::None } // 0
 }
+
+//#cpp2rust D3DFOGMODE      = d3d::FogMode
+//#cpp2rust D3DFOG_NONE     = d3d::Fog::None
+//#cpp2rust D3DFOG_EXP      = d3d::Fog::Exp
+//#cpp2rust D3DFOG_EXP2     = d3d::Fog::Exp2
+//#cpp2rust D3DFOG_LINEAR   = d3d::Fog::Linear

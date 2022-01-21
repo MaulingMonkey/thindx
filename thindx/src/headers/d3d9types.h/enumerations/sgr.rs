@@ -30,3 +30,6 @@ enumish! { SGR => D3DSGR; Calibrate, NoCalibration }
 impl Default for SGR {
     fn default() -> Self { SGR::Calibrate } // 0
 }
+
+//#cpp2rust D3DSGR_CALIBRATE        = d3d::SGR::Calibrate
+//#cpp2rust D3DSGR_NOCALIBRATION    = d3d::SGR::NoCalibration

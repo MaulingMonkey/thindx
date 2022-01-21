@@ -28,3 +28,13 @@ enumish! { StencilOp => D3DSTENCILOP; Keep, Zero, Replace, IncrSat, DecrSat, Inv
 impl Default for StencilOp {
     fn default() -> Self { StencilOp(0) }
 }
+
+//#cpp2rust D3DSTENCILOP            = d3d::StencilOp
+//#cpp2rust D3DSTENCILOP_KEEP       = d3d::StencilOp::Keep
+//#cpp2rust D3DSTENCILOP_ZERO       = d3d::StencilOp::Zero
+//#cpp2rust D3DSTENCILOP_REPLACE    = d3d::StencilOp::Replace
+//#cpp2rust D3DSTENCILOP_INCRSAT    = d3d::StencilOp::IncrSat
+//#cpp2rust D3DSTENCILOP_DECRSAT    = d3d::StencilOp::DecrSat
+//#cpp2rust D3DSTENCILOP_INVERT     = d3d::StencilOp::Invert
+//#cpp2rust D3DSTENCILOP_INCR       = d3d::StencilOp::Incr
+//#cpp2rust D3DSTENCILOP_DECR       = d3d::StencilOp::Decr

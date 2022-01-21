@@ -54,3 +54,31 @@ enumish! {
 impl Default for TextureOp {
     fn default() -> Self { TextureOp(0) }
 }
+
+//#cpp2rust D3DTEXTUREOP                        = d3d::TextureOp
+//#cpp2rust D3DTOP_DISABLE                      = d3d::TOP::Disable
+//#cpp2rust D3DTOP_SELECTARG1                   = d3d::TOP::SelectArg1
+//#cpp2rust D3DTOP_SELECTARG2                   = d3d::TOP::SelectArg2
+//#cpp2rust D3DTOP_MODULATE                     = d3d::TOP::Modulate
+//#cpp2rust D3DTOP_MODULATE2X                   = d3d::TOP::Modulate2x
+//#cpp2rust D3DTOP_MODULATE4X                   = d3d::TOP::Modulate4x
+//#cpp2rust D3DTOP_ADD                          = d3d::TOP::Add
+//#cpp2rust D3DTOP_ADDSIGNED                    = d3d::TOP::AddSigned
+//#cpp2rust D3DTOP_ADDSIGNED2X                  = d3d::TOP::AddSigned2x
+//#cpp2rust D3DTOP_SUBTRACT                     = d3d::TOP::Subtract
+//#cpp2rust D3DTOP_ADDSMOOTH                    = d3d::TOP::AddSmooth
+//#cpp2rust D3DTOP_BLENDDIFFUSEALPHA            = d3d::TOP::BlendDiffuseAlpha
+//#cpp2rust D3DTOP_BLENDTEXTUREALPHA            = d3d::TOP::BlendTextureAlpha
+//#cpp2rust D3DTOP_BLENDFACTORALPHA             = d3d::TOP::BlendFactorAlpha
+//#cpp2rust D3DTOP_BLENDTEXTUREALPHAPM          = d3d::TOP::BlendTextureAlphaPM
+//#cpp2rust D3DTOP_BLENDCURRENTALPHA            = d3d::TOP::BlendCurrentAlpha
+//#cpp2rust D3DTOP_PREMODULATE                  = d3d::TOP::PreModulate
+//#cpp2rust D3DTOP_MODULATEALPHA_ADDCOLOR       = d3d::TOP::ModulateAlphaAddColor
+//#cpp2rust D3DTOP_MODULATECOLOR_ADDALPHA       = d3d::TOP::ModulateColorAddAlpha
+//#cpp2rust D3DTOP_MODULATEINVALPHA_ADDCOLOR    = d3d::TOP::ModulateInvAlphaAddColor
+//#cpp2rust D3DTOP_MODULATEINVCOLOR_ADDALPHA    = d3d::TOP::ModulateInvColorAddAlpha
+//#cpp2rust D3DTOP_BUMPENVMAP                   = d3d::TOP::BumpEnvMap
+//#cpp2rust D3DTOP_BUMPENVMAPLUMINANCE          = d3d::TOP::BumpEnvMapLuminance
+//#cpp2rust D3DTOP_DOTPRODUCT3                  = d3d::TOP::DotProduct3
+//#cpp2rust D3DTOP_MULTIPLYADD                  = d3d::TOP::MultiplyAdd
+//#cpp2rust D3DTOP_LERP                         = d3d::TOP::Lerp

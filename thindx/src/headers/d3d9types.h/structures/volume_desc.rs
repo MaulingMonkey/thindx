@@ -27,3 +27,5 @@ impl From<D3DVOLUME_DESC > for VolumeDesc { fn from(value: D3DVOLUME_DESC ) -> S
 impl From<VolumeDesc> for D3DVOLUME_DESC  { fn from(value: VolumeDesc     ) -> Self { unsafe { std::mem::transmute(value) } } }
 
 test_layout! { VolumeDesc => D3DVOLUME_DESC  { format => Format, ty => Type, usage => Usage, pool => Pool, width => Width, height => Height, depth => Depth } }
+
+//#cpp2rust D3DVOLUME_DESC = d3d::VolumeDesc

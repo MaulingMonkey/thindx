@@ -80,3 +80,33 @@ impl Deref for FVF {
 impl DerefMut for FVF {
     fn deref_mut(&mut self) -> &mut Self::Target { &mut self.0 }
 }
+
+//#cpp2rust D3DFVF                      = d3d::FVF
+//#cpp2rust D3DFVF_DIFFUSE              = d3d::FVF::Diffuse
+//#cpp2rust D3DFVF_NORMAL               = d3d::FVF::Normal
+//#cpp2rust D3DFVF_PSIZE                = d3d::FVF::PSize
+//#cpp2rust D3DFVF_SPECULAR             = d3d::FVF::Specular
+//#cpp2rust D3DFVF_XYZ                  = d3d::FVF::XYZ
+//#cpp2rust D3DFVF_XYZRHW               = d3d::FVF::XYZRHW
+//#cpp2rust D3DFVF_XYZB1                = d3d::FVF::XYZB1
+//#cpp2rust D3DFVF_XYZB2                = d3d::FVF::XYZB2
+//#cpp2rust D3DFVF_XYZB3                = d3d::FVF::XYZB3
+//#cpp2rust D3DFVF_XYZB4                = d3d::FVF::XYZB4
+//#cpp2rust D3DFVF_XYZB5                = d3d::FVF::XYZB5
+//#cpp2rust D3DFVF_XYZW                 = d3d::FVF::XYZW
+//#cpp2rust D3DFVF_TEX0                 = d3d::FVF::Tex0
+//#cpp2rust D3DFVF_TEX1                 = d3d::FVF::Tex1
+//#cpp2rust D3DFVF_TEX2                 = d3d::FVF::Tex2
+//#cpp2rust D3DFVF_TEX3                 = d3d::FVF::Tex3
+//#cpp2rust D3DFVF_TEX4                 = d3d::FVF::Tex4
+//#cpp2rust D3DFVF_TEX5                 = d3d::FVF::Tex5
+//#cpp2rust D3DFVF_TEX6                 = d3d::FVF::Tex6
+//#cpp2rust D3DFVF_TEX7                 = d3d::FVF::Tex7
+//#cpp2rust D3DFVF_TEX8                 = d3d::FVF::Tex8
+//#cpp2rust D3DFVF_POSITION_MASK        = d3d::FVF::PositionMask
+//#cpp2rust D3DFVF_RESERVED0            = d3d::FVF::Reserved0
+//#cpp2rust D3DFVF_RESERVED2            = d3d::FVF::Reserved2
+//#cpp2rust D3DFVF_TEXCOUNT_MASK        = d3d::FVF::TexCountMask
+//#cpp2rust D3DFVF_LASTBETA_D3DCOLOR    = d3d::FVF::LastBetaD3DColor
+//#cpp2rust D3DFVF_LASTBETA_UBYTE4      = d3d::FVF::LastBetaUByte4
+//#cpp2rust D3DFVF_TEXCOUNT_SHIFT       = d3d::FVF::TexCountShift

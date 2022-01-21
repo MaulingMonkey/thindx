@@ -23,3 +23,8 @@ enumish! { Fill => D3DFILLMODE; Point, Wireframe, Solid }
 impl Default for Fill {
     fn default() -> Self { Fill::Solid } // 3
 }
+
+//#cpp2rust D3DFILLMODE         = d3d::FillMode
+//#cpp2rust D3DFILL_POINT       = d3d::Fill::Point
+//#cpp2rust D3DFILL_WIREFRAME   = d3d::Fill::Wireframe
+//#cpp2rust D3DFILL_SOLID       = d3d::Fill::Solid

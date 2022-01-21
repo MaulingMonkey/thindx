@@ -44,3 +44,8 @@ enumish! { BackBufferType => D3DBACKBUFFER_TYPE; Mono, Left, Right }
 impl Default for BackBufferType {
     fn default() -> Self { BackBufferType::Mono } // 0
 }
+
+//#cpp2rust D3DBACKBUFFER_TYPE          = d3d::BackBufferType
+//#cpp2rust D3DBACKBUFFER_TYPE_MONO     = d3d::BackBufferType::Mono
+//#cpp2rust D3DBACKBUFFER_TYPE_LEFT     = d3d::BackBufferType::Left
+//#cpp2rust D3DBACKBUFFER_TYPE_RIGHT    = d3d::BackBufferType::Right

@@ -26,3 +26,11 @@ enumish! { CubeMapFace => D3DCUBEMAP_FACES; PositiveX, NegativeX, PositiveY, Neg
 impl Default for CubeMapFace {
     fn default() -> Self { CubeMapFace::PositiveX } // 0
 }
+
+//#cpp2rust D3DCUBEMAP_FACES            = d3d::CubeMapFace
+//#cpp2rust D3DCUBEMAP_FACE_POSITIVE_X  = d3d::CubeMapFace::PositiveX
+//#cpp2rust D3DCUBEMAP_FACE_NEGATIVE_X  = d3d::CubeMapFace::NegativeX
+//#cpp2rust D3DCUBEMAP_FACE_POSITIVE_Y  = d3d::CubeMapFace::PositiveY
+//#cpp2rust D3DCUBEMAP_FACE_NEGATIVE_Y  = d3d::CubeMapFace::NegativeY
+//#cpp2rust D3DCUBEMAP_FACE_POSITIVE_Z  = d3d::CubeMapFace::PositiveZ
+//#cpp2rust D3DCUBEMAP_FACE_NEGATIVE_Z  = d3d::CubeMapFace::NegativeZ

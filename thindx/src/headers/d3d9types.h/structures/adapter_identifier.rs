@@ -106,3 +106,5 @@ impl<T: UpperHex> Debug for Hexify<T> {
         write!(f, "0x{:0>1$X}", self.1, self.0)
     }
 }
+
+//#cpp2rust D3DADAPTER_IDENTIFIER9 = d3d::AdapterIdentifier

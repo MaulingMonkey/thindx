@@ -23,3 +23,8 @@ enumish! { MCS => D3DMATERIALCOLORSOURCE; Material, Color1, Color2 }
 impl Default for MaterialColorSource {
     fn default() -> Self { MaterialColorSource::Material } // 0
 }
+
+//#cpp2rust D3DMATERIALCOLORSOURCE  = d3d::MaterialColorSource
+//#cpp2rust D3DMCS_MATERIAL         = d3d::MCS::Material
+//#cpp2rust D3DMCS_COLOR1           = d3d::MCS::Color1
+//#cpp2rust D3DMCS_COLOR2           = d3d::MCS::Color2

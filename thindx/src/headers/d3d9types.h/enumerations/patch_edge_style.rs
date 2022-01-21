@@ -22,3 +22,7 @@ enumish! { PatchEdge => D3DPATCHEDGESTYLE; Discrete, Continuous }
 impl Default for PatchEdgeStyle {
     fn default() -> Self { PatchEdgeStyle::Discrete } // 0
 }
+
+//#cpp2rust D3DPATCHEDGESTYLE           = d3d::PatchEdgeStyle
+//#cpp2rust D3DPATCHEDGE_DISCRETE       = d3d::PatchEdge::Discrete
+//#cpp2rust D3DPATCHEDGE_CONTINUOUS     = d3d::PatchEdge::Continuous

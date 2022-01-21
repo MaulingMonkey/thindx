@@ -33,3 +33,5 @@ impl Matrix {
         ]}
     }
 }
+
+//#cpp2rust D3DMATRIX = d3d::Matrix

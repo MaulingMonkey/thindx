@@ -41,3 +41,22 @@ enumish! {
 impl Default for Blend {
     fn default() -> Self { Blend(0) }
 }
+
+//#cpp2rust D3DBLEND                    = d3d::Blend
+//#cpp2rust D3DBLEND_ZERO               = d3d::Blend::Zero
+//#cpp2rust D3DBLEND_ONE                = d3d::Blend::One
+//#cpp2rust D3DBLEND_SRCCOLOR           = d3d::Blend::SrcColor
+//#cpp2rust D3DBLEND_INVSRCCOLOR        = d3d::Blend::InvSrcColor
+//#cpp2rust D3DBLEND_SRCALPHA           = d3d::Blend::SrcAlpha
+//#cpp2rust D3DBLEND_INVSRCALPHA        = d3d::Blend::InvSrcAlpha
+//#cpp2rust D3DBLEND_DESTALPHA          = d3d::Blend::DestAlpha
+//#cpp2rust D3DBLEND_INVDESTALPHA       = d3d::Blend::InvDestAlpha
+//#cpp2rust D3DBLEND_DESTCOLOR          = d3d::Blend::DestColor
+//#cpp2rust D3DBLEND_INVDESTCOLOR       = d3d::Blend::InvDestColor
+//#cpp2rust D3DBLEND_SRCALPHASAT        = d3d::Blend::SrcAlphaSat
+//#cpp2rust D3DBLEND_BOTHSRCALPHA       = d3d::Blend::BothSrcAlpha
+//#cpp2rust D3DBLEND_BOTHINVSRCALPHA    = d3d::Blend::BothInvSrcAlpha
+//#cpp2rust D3DBLEND_BLENDFACTOR        = d3d::Blend::BlendFactor
+//#cpp2rust D3DBLEND_INVBLENDFACTOR     = d3d::Blend::InvBlendFactor
+//#cpp2rust D3DBLEND_SRCCOLOR2          = d3d::Blend::SrcColor2
+//#cpp2rust D3DBLEND_INVSRCCOLOR2       = d3d::Blend::InvSrcColor2

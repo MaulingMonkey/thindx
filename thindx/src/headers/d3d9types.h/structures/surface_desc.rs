@@ -28,3 +28,5 @@ impl From<D3DSURFACE_DESC > for SurfaceDesc { fn from(value: D3DSURFACE_DESC ) -
 impl From<SurfaceDesc> for D3DSURFACE_DESC  { fn from(value: SurfaceDesc     ) -> Self { unsafe { std::mem::transmute(value) } } }
 
 test_layout! { SurfaceDesc => D3DSURFACE_DESC  { format => Format, ty => Type, usage => Usage, pool => Pool, multi_sample_type => MultiSampleType, multi_sample_quality => MultiSampleQuality, width => Width, height => Height } }
+
+//#cpp2rust D3DSURFACE_DESC = d3d::SurfaceDesc

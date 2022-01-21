@@ -116,6 +116,7 @@ pub fn update() {
                 for constant in cpp.values.keys() {
                     let cpp     = if cpp.class { format!("{}::{}", cpp.id, constant) } else { format!("{}", constant) };
                     if CPP2IGNORE.contains(cpp.as_str()) { continue }
+                    if cpp.ends_with("_FORCE_DWORD") { continue }
                     let rust    = cpp2rust.get(&*cpp);
                     write!(rs, "//! * {}", CppLink(&cpp))?;
                     for (idx, rust) in rust.into_iter().flat_map(|p| p.iter()).enumerate() { write!(rs, "{}[`{}`]", if idx == 0 { "&nbsp;→ " } else { ", " }, rust)?; }
@@ -169,7 +170,7 @@ impl<'cpp> Header<'cpp> {
             enums:      cpp.enums       .values_by_key().filter(move |t| !ignore.contains(t.id.as_str()) && t.defined_at.iter().any(move |at| at.path.ends_with(rel_path))).collect(),
             functions:  cpp.functions   .values_by_key().filter(move |t| !ignore.contains(t.id.as_str()) && t.defined_at.iter().any(move |at| at.path.ends_with(rel_path))).collect(),
             constants:  cpp.enums       .values_by_key().filter(move |t| !ignore.contains(t.id.as_str()) && t.defined_at.iter().any(move |at| at.path.ends_with(rel_path)))
-                .flat_map(|e| e.values.keys().map(|c| if e.class { format!("{}::{}", e.id, c) } else { format!("{}", c) })).collect()
+                .flat_map(|e| e.values.keys().filter(|c| !c.ends_with("_FORCE_DWORD")).map(|c| if e.class { format!("{}::{}", e.id, c) } else { format!("{}", c) })).collect()
             // classes:    cpp.classes     .values_by_key().filter(move |t| !ignore.contains(t.id.as_str()) && t.defined_at.iter().any(move |at| at.path.ends_with(rel_path))).collect(),
             // unions:     cpp.unions      .values_by_key().filter(move |t| !ignore.contains(t.id.as_str()) && t.defined_at.iter().any(move |at| at.path.ends_with(rel_path))).collect(),
         }

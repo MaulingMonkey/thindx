@@ -140,3 +140,27 @@ flags! {
 impl Default for Usage {
     fn default() -> Self { Usage::None }
 }
+
+//#cpp2rust D3DUSAGE_RENDERTARGET                       = d3d::Usage::RenderTarget
+//#cpp2rust D3DUSAGE_DEPTHSTENCIL                       = d3d::Usage::DepthStencil
+//#cpp2rust D3DUSAGE_DYNAMIC                            = d3d::Usage::Dynamic
+//#cpp2rust D3DUSAGE_NONSECURE                          = d3d::Usage::NonSecure
+//#cpp2rust D3DUSAGE_AUTOGENMIPMAP                      = d3d::Usage::AutoGenMipMap
+//#cpp2rust D3DUSAGE_DMAP                               = d3d::Usage::DMap
+//#cpp2rust D3DUSAGE_QUERY_LEGACYBUMPMAP                = d3d::Usage::QueryLegacyBumpMap
+//#cpp2rust D3DUSAGE_QUERY_SRGBREAD                     = d3d::Usage::QuerySRGBRead
+//#cpp2rust D3DUSAGE_QUERY_FILTER                       = d3d::Usage::QueryFilter
+//#cpp2rust D3DUSAGE_QUERY_SRGBWRITE                    = d3d::Usage::QuerySRGBWrite
+//#cpp2rust D3DUSAGE_QUERY_POSTPIXELSHADER_BLENDING     = d3d::Usage::QueryPostPixelShaderBlending
+//#cpp2rust D3DUSAGE_QUERY_VERTEXTEXTURE                = d3d::Usage::QueryVertexTexture
+//#cpp2rust D3DUSAGE_QUERY_WRAPANDMIP                   = d3d::Usage::QueryWrapAndMip
+//#cpp2rust D3DUSAGE_WRITEONLY                          = d3d::Usage::WriteOnly
+//#cpp2rust D3DUSAGE_SOFTWAREPROCESSING                 = d3d::Usage::SoftwareProcessing
+//#cpp2rust D3DUSAGE_DONOTCLIP                          = d3d::Usage::DoNotClip
+//#cpp2rust D3DUSAGE_POINTS                             = d3d::Usage::Points
+//#cpp2rust D3DUSAGE_RTPATCHES                          = d3d::Usage::RTPatches
+//#cpp2rust D3DUSAGE_NPATCHES                           = d3d::Usage::NPatches
+//#cpp2rust D3DUSAGE_TEXTAPI                            = d3d::Usage::TextAPI
+//#cpp2rust D3DUSAGE_RESTRICTED_CONTENT                 = d3d::Usage::RestrictedContent
+//#cpp2rust D3DUSAGE_RESTRICT_SHARED_RESOURCE           = d3d::Usage::RestrictSharedResource
+//#cpp2rust D3DUSAGE_RESTRICT_SHARED_RESOURCE_DRIVER    = d3d::Usage::RestrictSharedResourceDriver

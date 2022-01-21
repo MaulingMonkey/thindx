@@ -21,3 +21,5 @@ flags! { GetData => D3DGETDATA; None, Flush }
     /// [D3DGETDATA_FLUSH](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dgetdata-flush)
     pub const Flush     : GetData = GetData(D3DGETDATA_FLUSH);
 }
+
+//#cpp2rust D3DGETDATA_FLUSH    = d3d::GetData::Flush

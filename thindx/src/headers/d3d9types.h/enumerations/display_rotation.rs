@@ -23,3 +23,9 @@ enumish! { DisplayRotation => D3DDISPLAYROTATION; Identity, _90, _180, _270 }
 impl Default for DisplayRotation {
     fn default() -> Self { DisplayRotation::Identity } // 1
 }
+
+//#cpp2rust D3DDISPLAYROTATION              = d3d::DisplayRotation
+//#cpp2rust D3DDISPLAYROTATION_IDENTITY     = d3d::DisplayRotation::Identity
+//#cpp2rust D3DDISPLAYROTATION_90           = d3d::DisplayRotation::_90
+//#cpp2rust D3DDISPLAYROTATION_180          = d3d::DisplayRotation::_180
+//#cpp2rust D3DDISPLAYROTATION_270          = d3d::DisplayRotation::_270

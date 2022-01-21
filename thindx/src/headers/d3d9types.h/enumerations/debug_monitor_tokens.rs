@@ -23,3 +23,7 @@ enumish! { DMT => D3DDEBUGMONITORTOKENS; Enable, Disable }
 impl Default for DMT {
     fn default() -> Self { DMT::Disable } // 1
 }
+
+//#cpp2rust D3DDEBUGMONITORTOKENS   = d3d::DebugMonitorTokens
+//#cpp2rust D3DDMT_ENABLE           = d3d::DMT::Enable
+//#cpp2rust D3DDMT_DISABLE          = d3d::DMT::Disable

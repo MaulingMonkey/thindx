@@ -59,3 +59,8 @@ impl Debug for ShaderVersion {
         write!(fmt, "ShaderVersion::{}_{}_{}", pre, self.version_major(), self.version_minor())
     }
 }
+
+//#cpp2rust D3DPS_VERSION           = d3d9::ShaderVersion::ps
+//#cpp2rust D3DVS_VERSION           = d3d9::ShaderVersion::vs
+//#cpp2rust D3DSHADER_VERSION_MAJOR = d3d9::ShaderVersion::version_major
+//#cpp2rust D3DSHADER_VERSION_MINOR = d3d9::ShaderVersion::version_minor

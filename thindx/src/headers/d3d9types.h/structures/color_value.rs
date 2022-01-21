@@ -48,3 +48,5 @@ impl From<D3DCOLORVALUE> for ColorValue { fn from(value: D3DCOLORVALUE) -> Self 
 impl From<ColorValue> for D3DCOLORVALUE { fn from(value: ColorValue   ) -> Self { unsafe { std::mem::transmute(value) } } }
 
 test_layout! { ColorValue => D3DCOLORVALUE { r => r, g => g, b => b, a => a } }
+
+//#cpp2rust D3DCOLORVALUE = d3d::ColorValue

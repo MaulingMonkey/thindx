@@ -23,3 +23,8 @@ enumish! { Cull => D3DCULL; None, CW, CCW }
 impl Default for Cull {
     fn default() -> Self { Cull::None } // 1
 }
+
+//#cpp2rust D3DCULL         = d3d::Cull
+//#cpp2rust D3DCULL_NONE    = d3d::Cull::None
+//#cpp2rust D3DCULL_CW      = d3d::Cull::CW
+//#cpp2rust D3DCULL_CCW     = d3d::Cull::CCW

@@ -45,3 +45,11 @@ enumish! { PT => D3DPRIMITIVETYPE; PointList, LineList, LineStrip, TriangleList,
 impl Default for PrimitiveType {
     fn default() -> Self { PrimitiveType(0) }
 }
+
+//#cpp2rust D3DPRIMITIVETYPE    = d3d::PrimitiveType
+//#cpp2rust D3DPT_POINTLIST     = d3d::PT::PointList
+//#cpp2rust D3DPT_LINELIST      = d3d::PT::LineList
+//#cpp2rust D3DPT_LINESTRIP     = d3d::PT::LineStrip
+//#cpp2rust D3DPT_TRIANGLELIST  = d3d::PT::TriangleList
+//#cpp2rust D3DPT_TRIANGLESTRIP = d3d::PT::TriangleStrip
+//#cpp2rust D3DPT_TRIANGLEFAN   = d3d::PT::TriangleFan

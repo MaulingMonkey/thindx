@@ -43,3 +43,20 @@ impl TransformStateType {
 impl Default for TransformStateType {
     fn default() -> Self { TransformStateType(0) }
 }
+
+//#cpp2rust D3DTRANSFORMSTATETYPE   = d3d::TransformStateType
+//#cpp2rust D3DTS_VIEW              = d3d::TS::View
+//#cpp2rust D3DTS_PROJECTION        = d3d::TS::Projection
+//#cpp2rust D3DTS_TEXTURE0          = d3d::TS::Texture0
+//#cpp2rust D3DTS_TEXTURE1          = d3d::TS::Texture1
+//#cpp2rust D3DTS_TEXTURE2          = d3d::TS::Texture2
+//#cpp2rust D3DTS_TEXTURE3          = d3d::TS::Texture3
+//#cpp2rust D3DTS_TEXTURE4          = d3d::TS::Texture4
+//#cpp2rust D3DTS_TEXTURE5          = d3d::TS::Texture5
+//#cpp2rust D3DTS_TEXTURE6          = d3d::TS::Texture6
+//#cpp2rust D3DTS_TEXTURE7          = d3d::TS::Texture7
+//#cpp2rust D3DTS_WORLD             = d3d::TS::World
+//#cpp2rust D3DTS_WORLD1            = d3d::TS::World1
+//#cpp2rust D3DTS_WORLD2            = d3d::TS::World2
+//#cpp2rust D3DTS_WORLD3            = d3d::TS::World3
+//#cpp2rust D3DTS_WORLDMATRIX       = d3d::TS::world_matrix

@@ -127,3 +127,5 @@ test_layout! {
         phi             => Phi,
     }
 }
+
+//#cpp2rust D3DLIGHT9 = d3d9::Light

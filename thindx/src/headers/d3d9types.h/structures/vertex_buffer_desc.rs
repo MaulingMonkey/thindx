@@ -26,3 +26,5 @@ impl From<D3DVERTEXBUFFER_DESC> for VertexBufferDesc { fn from(value: D3DVERTEXB
 impl From<VertexBufferDesc> for D3DVERTEXBUFFER_DESC { fn from(value: VertexBufferDesc    ) -> Self { unsafe { std::mem::transmute(value) } } }
 
 test_layout! { VertexBufferDesc => D3DVERTEXBUFFER_DESC { format => Format, ty => Type, usage => Usage, pool => Pool, size => Size, fvf => FVF } }
+
+//#cpp2rust D3DVERTEXBUFFER_DESC = d3d::VertexBufferDesc

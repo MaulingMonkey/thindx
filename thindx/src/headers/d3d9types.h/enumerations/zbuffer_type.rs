@@ -21,3 +21,8 @@ enumish! { ZB => D3DZBUFFERTYPE; False, True, UseW }
 impl Default for ZBufferType {
     fn default() -> Self { ZBufferType::False } // 0
 }
+
+//#cpp2rust D3DZBUFFERTYPE  = d3d::ZBufferType
+//#cpp2rust D3DZB_FALSE     = d3d::ZB::False
+//#cpp2rust D3DZB_TRUE      = d3d::ZB::True
+//#cpp2rust D3DZB_USEW      = d3d::ZB::UseW

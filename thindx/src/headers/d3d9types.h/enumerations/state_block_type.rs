@@ -31,3 +31,8 @@ enumish! { SBT => D3DSTATEBLOCKTYPE; All, PixelState, VertexState }
 impl Default for StateBlockType {
     fn default() -> Self { StateBlockType::All } // 1
 }
+
+//#cpp2rust D3DSTATEBLOCKTYPE       = d3d::StateBlockType
+//#cpp2rust D3DSBT_ALL              = d3d::SBT::All
+//#cpp2rust D3DSBT_PIXELSTATE       = d3d::SBT::PixelState
+//#cpp2rust D3DSBT_VERTEXSTATE      = d3d::SBT::VertexState

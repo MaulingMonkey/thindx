@@ -37,3 +37,19 @@ enumish! {
 impl Default for DeclUsage8 {
     fn default() -> Self { DeclUsage8::Position } // 0
 }
+
+//#cpp2rust D3DDECLUSAGE                = d3d::DeclUsage8
+//#cpp2rust D3DDECLUSAGE_POSITION       = d3d::DeclUsage8::Position
+//#cpp2rust D3DDECLUSAGE_BLENDWEIGHT    = d3d::DeclUsage8::BlendWeight
+//#cpp2rust D3DDECLUSAGE_BLENDINDICES   = d3d::DeclUsage8::BlendIndices
+//#cpp2rust D3DDECLUSAGE_NORMAL         = d3d::DeclUsage8::Normal
+//#cpp2rust D3DDECLUSAGE_PSIZE          = d3d::DeclUsage8::PSize
+//#cpp2rust D3DDECLUSAGE_TEXCOORD       = d3d::DeclUsage8::TexCoord
+//#cpp2rust D3DDECLUSAGE_TANGENT        = d3d::DeclUsage8::Tangent
+//#cpp2rust D3DDECLUSAGE_BINORMAL       = d3d::DeclUsage8::Binormal
+//#cpp2rust D3DDECLUSAGE_TESSFACTOR     = d3d::DeclUsage8::TessFactor
+//#cpp2rust D3DDECLUSAGE_POSITIONT      = d3d::DeclUsage8::PositionT
+//#cpp2rust D3DDECLUSAGE_COLOR          = d3d::DeclUsage8::Color
+//#cpp2rust D3DDECLUSAGE_FOG            = d3d::DeclUsage8::Fog
+//#cpp2rust D3DDECLUSAGE_DEPTH          = d3d::DeclUsage8::Depth
+//#cpp2rust D3DDECLUSAGE_SAMPLE         = d3d::DeclUsage8::Sample

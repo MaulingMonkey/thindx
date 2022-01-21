@@ -38,3 +38,5 @@ impl From<D3DMATERIAL9> for Material { fn from(value: D3DMATERIAL9) -> Self { un
 impl From<Material> for D3DMATERIAL9 { fn from(value: Material    ) -> Self { unsafe { std::mem::transmute(value) } } }
 
 test_layout! { Material => D3DMATERIAL9 { diffuse => Diffuse, ambient => Ambient, specular => Specular, emissive => Emissive, power => Power } }
+
+//#cpp2rust D3DMATERIAL9 = d3d9::Material

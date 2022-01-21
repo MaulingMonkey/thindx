@@ -26,3 +26,10 @@ enumish! { STT => D3DSAMPLER_TEXTURE_TYPE; Unknown, _2D, Cube, Volume }
 impl Default for SamplerTextureType {
     fn default() -> Self { SamplerTextureType::Unknown }
 }
+
+//#cpp2rust D3DSAMPLER_TEXTURE_TYPE = d3d::SamplerTextureType
+//#cpp2rust D3DSTT_UNKNOWN          = d3d::STT::Unknown
+//#cpp2rust D3DSTT_2D               = d3d::STT::_2D
+//#cpp2rust D3DSTT_2D               = d3d::STT::Regular
+//#cpp2rust D3DSTT_CUBE             = d3d::STT::Cube
+//#cpp2rust D3DSTT_VOLUME           = d3d::STT::Volume

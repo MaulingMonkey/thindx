@@ -37,3 +37,6 @@ impl SdkVersion {
 
 impl Default for SdkVersion { fn default() -> Self { Self::DEFAULT } }
 impl From<SdkVersion> for u32 { fn from(sdk: SdkVersion) -> Self { sdk.0 } }
+
+//#cpp2rust D3D_SDK_VERSION     = d3d::SdkVersion::DEFAULT
+//#cpp2rust D3D9b_SDK_VERSION   = d3d::SdkVersion::DEFAULT9B

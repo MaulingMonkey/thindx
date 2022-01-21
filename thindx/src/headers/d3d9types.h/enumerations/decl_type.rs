@@ -41,3 +41,23 @@ enumish! {
 impl Default for DeclType8 {
     fn default() -> Self { DeclType8::Unused } // 17 - and Float1==0 is unused!
 }
+
+//#cpp2rust D3DDECLTYPE             = d3d::DeclType8
+//#cpp2rust D3DDECLTYPE_FLOAT1      = d3d::DeclType8::Float1
+//#cpp2rust D3DDECLTYPE_FLOAT2      = d3d::DeclType8::Float2
+//#cpp2rust D3DDECLTYPE_FLOAT3      = d3d::DeclType8::Float3
+//#cpp2rust D3DDECLTYPE_FLOAT4      = d3d::DeclType8::Float4
+//#cpp2rust D3DDECLTYPE_D3DCOLOR    = d3d::DeclType8::Color
+//#cpp2rust D3DDECLTYPE_UBYTE4      = d3d::DeclType8::UByte4
+//#cpp2rust D3DDECLTYPE_SHORT2      = d3d::DeclType8::Short2
+//#cpp2rust D3DDECLTYPE_SHORT4      = d3d::DeclType8::Short4
+//#cpp2rust D3DDECLTYPE_UBYTE4N     = d3d::DeclType8::UByte4N
+//#cpp2rust D3DDECLTYPE_SHORT2N     = d3d::DeclType8::Short2N
+//#cpp2rust D3DDECLTYPE_SHORT4N     = d3d::DeclType8::Short4N
+//#cpp2rust D3DDECLTYPE_USHORT2N    = d3d::DeclType8::UShort2N
+//#cpp2rust D3DDECLTYPE_USHORT4N    = d3d::DeclType8::UShort4N
+//#cpp2rust D3DDECLTYPE_UDEC3       = d3d::DeclType8::UDec3
+//#cpp2rust D3DDECLTYPE_DEC3N       = d3d::DeclType8::Dec3N
+//#cpp2rust D3DDECLTYPE_FLOAT16_2   = d3d::DeclType8::Float16_2
+//#cpp2rust D3DDECLTYPE_FLOAT16_4   = d3d::DeclType8::Float16_4
+//#cpp2rust D3DDECLTYPE_UNUSED      = d3d::DeclType8::Unused

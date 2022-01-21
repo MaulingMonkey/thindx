@@ -81,3 +81,20 @@ enumish! {
 impl Default for QueryType {
     fn default() -> Self { QueryType(0) }
 }
+
+//#cpp2rust D3DQUERYTYPE                    = d3d::QueryType
+//#cpp2rust D3DQUERYTYPE_VCACHE             = d3d::QueryType::VCache
+//#cpp2rust D3DQUERYTYPE_RESOURCEMANAGER    = d3d::QueryType::ResourceManager
+//#cpp2rust D3DQUERYTYPE_VERTEXSTATS        = d3d::QueryType::VertexStats
+//#cpp2rust D3DQUERYTYPE_EVENT              = d3d::QueryType::Event
+//#cpp2rust D3DQUERYTYPE_OCCLUSION          = d3d::QueryType::Occlusion
+//#cpp2rust D3DQUERYTYPE_TIMESTAMP          = d3d::QueryType::TimeStamp
+//#cpp2rust D3DQUERYTYPE_TIMESTAMPDISJOINT  = d3d::QueryType::TimeStampDisjoint
+//#cpp2rust D3DQUERYTYPE_TIMESTAMPFREQ      = d3d::QueryType::TimeStampFreq
+//#cpp2rust D3DQUERYTYPE_PIPELINETIMINGS    = d3d::QueryType::PipelineTimings
+//#cpp2rust D3DQUERYTYPE_INTERFACETIMINGS   = d3d::QueryType::InterfaceTimings
+//#cpp2rust D3DQUERYTYPE_VERTEXTIMINGS      = d3d::QueryType::VertexTimings
+//#cpp2rust D3DQUERYTYPE_PIXELTIMINGS       = d3d::QueryType::PixelTimings
+//#cpp2rust D3DQUERYTYPE_BANDWIDTHTIMINGS   = d3d::QueryType::BandwidthTimings
+//#cpp2rust D3DQUERYTYPE_CACHEUTILIZATION   = d3d::QueryType::CacheUtilization
+//#cpp2rust D3DQUERYTYPE_MEMORYPRESSURE     = d3d::QueryType::MemoryPressure

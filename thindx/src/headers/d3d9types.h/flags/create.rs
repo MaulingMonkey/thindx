@@ -169,3 +169,19 @@ impl From<Create> for D3DCREATE {
 impl From<D3DCREATE> for Create {
     fn from(value: D3DCREATE) -> Self { Self(value) }
 }
+
+//#cpp2rust D3DCREATE                               = d3d::Create
+//#cpp2rust D3DCREATE_FPU_PRESERVE                  = d3d::Create::FpuPreserve
+//#cpp2rust D3DCREATE_MULTITHREADED                 = d3d::Create::MultiThreaded
+//#cpp2rust D3DCREATE_PUREDEVICE                    = d3d::Create::PureDevice
+//#cpp2rust D3DCREATE_SOFTWARE_VERTEXPROCESSING     = d3d::Create::SoftwareVertexProcessing
+//#cpp2rust D3DCREATE_HARDWARE_VERTEXPROCESSING     = d3d::Create::HardwareVertexProcessing
+//#cpp2rust D3DCREATE_MIXED_VERTEXPROCESSING        = d3d::Create::MixedVertexProcessing
+//#cpp2rust D3DCREATE_DISABLE_DRIVER_MANAGEMENT     = d3d::Create::DisableDriverManagement
+//#cpp2rust D3DCREATE_ADAPTERGROUP_DEVICE           = d3d::Create::AdapterGroupDevice
+//#cpp2rust D3DCREATE_DISABLE_DRIVER_MANAGEMENT_EX  = d3d::Create::DisableDriverManagementEx
+//#cpp2rust D3DCREATE_NOWINDOWCHANGES               = d3d::Create::NoWindowChanges
+//#cpp2rust D3DCREATE_DISABLE_PSGP_THREADING        = d3d::Create::DisablePSGPThreading
+//#cpp2rust D3DCREATE_ENABLE_PRESENTSTATS           = d3d::Create::EnablePresentStats
+//#cpp2rust D3DCREATE_DISABLE_PRINTSCREEN           = d3d::Create::DisablePrintScreen
+//#cpp2rust D3DCREATE_SCREENSAVER                   = d3d::Create::ScreenSaver

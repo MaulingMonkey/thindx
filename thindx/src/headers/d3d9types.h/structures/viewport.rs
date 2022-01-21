@@ -50,3 +50,5 @@ impl From<D3DVIEWPORT9> for Viewport { fn from(value: D3DVIEWPORT9) -> Self { un
 impl From<Viewport> for D3DVIEWPORT9 { fn from(value: Viewport    ) -> Self { unsafe { std::mem::transmute(value) } } }
 
 test_layout! { Viewport => D3DVIEWPORT9 { x => X, y => Y, width => Width, height => Height, min_z => MinZ, max_z => MaxZ } }
+
+//#cpp2rust D3DVIEWPORT9 = d3d9::Viewport

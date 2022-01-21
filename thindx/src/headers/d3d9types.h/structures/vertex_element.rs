@@ -50,3 +50,6 @@ impl From<D3DVERTEXELEMENT9> for VertexElement { fn from(value: D3DVERTEXELEMENT
 impl From<VertexElement> for D3DVERTEXELEMENT9 { fn from(value: VertexElement    ) -> Self { unsafe { std::mem::transmute(value) } } }
 
 test_layout! { VertexElement => D3DVERTEXELEMENT9 { stream => Stream, offset => Offset, ty => Type, method => Method, usage_index => UsageIndex } }
+
+//#cpp2rust D3DVERTEXELEMENT9   = d3d9::VertexElement
+//#cpp2rust D3DDECL_END         = d3d9::VertexElement::END

@@ -30,3 +30,6 @@ flags! { Issue => D3DISSUE; None, Begin, End }
     /// [Issue::End] is valid for [QueryType::VCache], [QueryType::ResourceManager], [QueryType::VertexStats], [QueryType::Event], and [QueryType::Occlusion]
     pub const End           : Issue = Issue(D3DISSUE_END);
 }
+
+//#cpp2rust D3DISSUE_BEGIN  = d3d::Issue::Begin
+//#cpp2rust D3DISSUE_END    = d3d::Issue::End

@@ -72,3 +72,7 @@ impl From<StreamSource> for D3DSTREAMSOURCE {
 impl From<D3DSTREAMSOURCE> for StreamSource {
     fn from(value: D3DSTREAMSOURCE) -> Self { Self(value) }
 }
+
+//#cpp2rust D3DSTREAMSOURCE                 = d3d::StreamSource
+//#cpp2rust D3DSTREAMSOURCE_INDEXEDDATA     = d3d::StreamSource::indexed_data
+//#cpp2rust D3DSTREAMSOURCE_INSTANCEDATA    = d3d::StreamSource::instance_data

@@ -38,3 +38,5 @@ impl Deref    for DisplayMode { fn deref    (&    self) -> &    Self::Target { u
 impl DerefMut for DisplayMode { fn deref_mut(&mut self) -> &mut Self::Target { unsafe { std::mem::transmute(self) } } }
 impl From<D3DDISPLAYMODE> for DisplayMode { fn from(value: D3DDISPLAYMODE) -> Self { unsafe { std::mem::transmute(value) } } }
 impl From<DisplayMode> for D3DDISPLAYMODE { fn from(value: DisplayMode   ) -> Self { unsafe { std::mem::transmute(value) } } }
+
+//#cpp2rust D3DDISPLAYMODE = d3d::DisplayMode

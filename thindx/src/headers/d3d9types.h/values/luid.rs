@@ -30,3 +30,5 @@ impl Eq         for Luid {}
 impl PartialOrd for Luid { fn partial_cmp(&self, other: &Luid) -> Option<Ordering> { u64::from(*self).partial_cmp(&u64::from(*other)) } }
 impl Ord        for Luid { fn cmp(&self, other: &Self) -> Ordering { u64::from(*self).cmp(&u64::from(*other)) } }
 impl Hash       for Luid { fn hash<H: Hasher>(&self, state: &mut H) { u64::from(*self).hash(state) } }
+
+//#cpp2rust LUID = Luid

@@ -54,3 +54,10 @@ flags! { Lock => D3DLOCK; None, Discard, DoNotWait, NoDirtyUpdate, NoOverwrite, 
 impl Default for Lock {
     fn default() -> Self { Lock::None }
 }
+
+//#cpp2rust D3DLOCK_DISCARD         = d3d::Lock::Discard
+//#cpp2rust D3DLOCK_DONOTWAIT       = d3d::Lock::DoNotWait
+//#cpp2rust D3DLOCK_NODIRTYUPDATE   = d3d::Lock::NoDirtyUpdate
+//#cpp2rust D3DLOCK_NOOVERWRITE     = d3d::Lock::NoOverwrite
+//#cpp2rust D3DLOCK_NOSYSLOCK       = d3d::Lock::NoSysLock
+//#cpp2rust D3DLOCK_READONLY        = d3d::Lock::ReadOnly

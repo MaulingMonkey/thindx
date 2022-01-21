@@ -56,3 +56,5 @@ impl From<ClipStatus> for D3DCLIPSTATUS9 {
 impl From<D3DCLIPSTATUS9> for ClipStatus {
     fn from(value: D3DCLIPSTATUS9) -> Self { Self(value) }
 }
+
+//#cpp2rust D3DCLIPSTATUS9 = d3d9::ClipStatus

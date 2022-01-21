@@ -63,3 +63,19 @@ flags! {
 impl Default for Present {
     fn default() -> Self { Present::None }
 }
+
+//#cpp2rust D3DPRESENT_DONOTFLIP                    = d3d::Present::DoNotFlip
+//#cpp2rust D3DPRESENT_DONOTWAIT                    = d3d::Present::DoNotWait
+//#cpp2rust D3DPRESENT_FLIPRESTART                  = d3d::Present::FlipRestart
+//#cpp2rust D3DPRESENT_FORCEIMMEDIATE               = d3d::Present::ForceImmediate
+//#cpp2rust D3DPRESENT_INTERVAL_DEFAULT             = d3d::Present::IntervalDefault
+//#cpp2rust D3DPRESENT_INTERVAL_ONE                 = d3d::Present::IntervalOne
+//#cpp2rust D3DPRESENT_INTERVAL_TWO                 = d3d::Present::IntervalTwo
+//#cpp2rust D3DPRESENT_INTERVAL_THREE               = d3d::Present::IntervalThree
+//#cpp2rust D3DPRESENT_INTERVAL_FOUR                = d3d::Present::IntervalFour
+//#cpp2rust D3DPRESENT_INTERVAL_IMMEDIATE           = d3d::Present::IntervalImmediate
+//#cpp2rust D3DPRESENT_LINEAR_CONTENT               = d3d::Present::LinearContent
+//#cpp2rust D3DPRESENT_VIDEO_RESTRICT_TO_MONITOR    = d3d::Present::VideoRestrictToMonitor
+//#cpp2rust D3DPRESENT_UPDATEOVERLAYONLY            = d3d::Present::UpdateOverlayOnly
+//#cpp2rust D3DPRESENT_HIDEOVERLAY                  = d3d::Present::HideOverlay
+//#cpp2rust D3DPRESENT_UPDATECOLORKEY               = d3d::Present::UpdateColorKey

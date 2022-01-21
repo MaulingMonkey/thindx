@@ -24,3 +24,8 @@ enumish! { Shade => D3DSHADEMODE; Flat, Gouraud, Phong }
 impl Default for ShadeMode {
     fn default() -> Self { ShadeMode::Flat } // 1
 }
+
+//#cpp2rust D3DSHADEMODE        = d3d::ShadeMode
+//#cpp2rust D3DSHADE_FLAT       = d3d::Shade::Flat
+//#cpp2rust D3DSHADE_GOURAUD    = d3d::Shade::Gouraud
+//#cpp2rust D3DSHADE_PHONG      = d3d::Shade::Phong

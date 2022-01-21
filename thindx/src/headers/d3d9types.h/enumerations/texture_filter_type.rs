@@ -27,3 +27,12 @@ enumish! { TexF => D3DTEXTUREFILTERTYPE; None, Point, Linear, Anisotropic, Pyram
 impl Default for TextureFilterType {
     fn default() -> Self { TextureFilterType::None } // 0
 }
+
+//#cpp2rust D3DTEXTUREFILTERTYPE    = d3d::TextureFilterType
+//#cpp2rust D3DTEXF_NONE            = d3d::TexF::None
+//#cpp2rust D3DTEXF_POINT           = d3d::TexF::Point
+//#cpp2rust D3DTEXF_LINEAR          = d3d::TexF::Linear
+//#cpp2rust D3DTEXF_ANISOTROPIC     = d3d::TexF::Anisotropic
+//#cpp2rust D3DTEXF_PYRAMIDALQUAD   = d3d::TexF::PyramidalQuad
+//#cpp2rust D3DTEXF_GAUSSIANQUAD    = d3d::TexF::GaussianQuad
+//#cpp2rust D3DTEXF_CONVOLUTIONMONO = d3d::TexF::ConvolutionMono

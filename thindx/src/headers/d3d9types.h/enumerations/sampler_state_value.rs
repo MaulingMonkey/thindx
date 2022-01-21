@@ -52,3 +52,18 @@ impl SamplerStateValue {
         }
     }
 }
+
+//#cpp2rust D3DSAMPLERSTATETYPE     = d3d::SamplerStateValue
+//#cpp2rust D3DSAMP_ADDRESSU        = d3d::SampV::AddressU
+//#cpp2rust D3DSAMP_ADDRESSV        = d3d::SampV::AddressV
+//#cpp2rust D3DSAMP_ADDRESSW        = d3d::SampV::AddressW
+//#cpp2rust D3DSAMP_BORDERCOLOR     = d3d::SampV::BorderColor
+//#cpp2rust D3DSAMP_MAGFILTER       = d3d::SampV::MagFilter
+//#cpp2rust D3DSAMP_MINFILTER       = d3d::SampV::MinFilter
+//#cpp2rust D3DSAMP_MIPFILTER       = d3d::SampV::MipFilter
+//#cpp2rust D3DSAMP_MIPMAPLODBIAS   = d3d::SampV::MipMapLODBias
+//#cpp2rust D3DSAMP_MAXMIPLEVEL     = d3d::SampV::MaxMipLevel
+//#cpp2rust D3DSAMP_MAXANISOTROPY   = d3d::SampV::MaxAnisotropy
+//#cpp2rust D3DSAMP_SRGBTEXTURE     = d3d::SampV::SRGBTexture
+//#cpp2rust D3DSAMP_ELEMENTINDEX    = d3d::SampV::ElementIndex
+//#cpp2rust D3DSAMP_DMAPOFFSET      = d3d::SampV::DMapOffset

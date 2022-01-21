@@ -25,3 +25,9 @@ enumish! { Degree => D3DDEGREETYPE; Linear, Quadratic, Cubic, Quintic }
 impl Default for Degree {
     fn default() -> Self { Degree(0) }
 }
+
+//#cpp2rust D3DDEGREETYPE       = d3d::DegreeType
+//#cpp2rust D3DDEGREE_LINEAR    = d3d::Degree::Linear
+//#cpp2rust D3DDEGREE_QUADRATIC = d3d::Degree::Quadratic
+//#cpp2rust D3DDEGREE_CUBIC     = d3d::Degree::Cubic
+//#cpp2rust D3DDEGREE_QUINTIC   = d3d::Degree::Quintic

@@ -24,3 +24,5 @@ impl From<D3DVECTOR> for Vector { fn from(value: D3DVECTOR) -> Self { unsafe { s
 impl From<Vector> for D3DVECTOR { fn from(value: Vector   ) -> Self { unsafe { std::mem::transmute(value) } } }
 
 test_layout! { Vector => D3DVECTOR { x => x, y => y, z => z } }
+
+//#cpp2rust D3DVECTOR = d3d::Vector

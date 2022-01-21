@@ -29,3 +29,8 @@ enumish! { Basis => D3DBASISTYPE; Bezier, BSpline, CatmullRom }
 impl Default for Basis {
     fn default() -> Self { Basis::Bezier } // 0
 }
+
+//#cpp2rust D3DBASISTYPE            = d3d::BasisType
+//#cpp2rust D3DBASIS_BEZIER         = d3d::Basis::Bezier
+//#cpp2rust D3DBASIS_BSPLINE        = d3d::Basis::BSpline
+//#cpp2rust D3DBASIS_CATMULL_ROM    = d3d::Basis::CatmullRom

@@ -42,3 +42,18 @@ enumish! {
 impl Default for SamplerStateType {
     fn default() -> Self { SamplerStateType(0) }
 }
+
+//#cpp2rust D3DSAMPLERSTATETYPE     = d3d::SamplerStateType
+//#cpp2rust D3DSAMP_ADDRESSU        = d3d::Samp::AddressU
+//#cpp2rust D3DSAMP_ADDRESSV        = d3d::Samp::AddressV
+//#cpp2rust D3DSAMP_ADDRESSW        = d3d::Samp::AddressW
+//#cpp2rust D3DSAMP_BORDERCOLOR     = d3d::Samp::BorderColor
+//#cpp2rust D3DSAMP_MAGFILTER       = d3d::Samp::MagFilter
+//#cpp2rust D3DSAMP_MINFILTER       = d3d::Samp::MinFilter
+//#cpp2rust D3DSAMP_MIPFILTER       = d3d::Samp::MipFilter
+//#cpp2rust D3DSAMP_MIPMAPLODBIAS   = d3d::Samp::MipMapLODBias
+//#cpp2rust D3DSAMP_MAXMIPLEVEL     = d3d::Samp::MaxMipLevel
+//#cpp2rust D3DSAMP_MAXANISOTROPY   = d3d::Samp::MaxAnisotropy
+//#cpp2rust D3DSAMP_SRGBTEXTURE     = d3d::Samp::SRGBTexture
+//#cpp2rust D3DSAMP_ELEMENTINDEX    = d3d::Samp::ElementIndex
+//#cpp2rust D3DSAMP_DMAPOFFSET      = d3d::Samp::DMapOffset

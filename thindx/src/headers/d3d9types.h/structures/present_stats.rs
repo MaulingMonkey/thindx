@@ -37,3 +37,5 @@ impl From<D3DPRESENTSTATS> for PresentStats { fn from(value: D3DPRESENTSTATS) ->
 impl From<PresentStats> for D3DPRESENTSTATS { fn from(value: PresentStats   ) -> Self { unsafe { std::mem::transmute(value) } } }
 
 test_layout! { PresentStats => D3DPRESENTSTATS { present_count => PresentCount, present_refresh_count => PresentRefreshCount, sync_refresh_count => SyncRefreshCount, sync_qpc_time => SyncQPCTime, sync_gpu_time => SyncGPUTime } }
+
+//#cpp2rust D3DPRESENTSTATS = d3d::PresentStats

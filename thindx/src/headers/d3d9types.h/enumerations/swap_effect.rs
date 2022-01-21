@@ -63,3 +63,10 @@ enumish! { SwapEffect => D3DSWAPEFFECT; Discard, Flip, Copy, Overlay, FlipEx }
 impl Default for SwapEffect {
     fn default() -> Self { SwapEffect(0) }
 }
+
+//#cpp2rust D3DSWAPEFFECT           = d3d::SwapEffect
+//#cpp2rust D3DSWAPEFFECT_DISCARD   = d3d::SwapEffect::Discard
+//#cpp2rust D3DSWAPEFFECT_FLIP      = d3d::SwapEffect::Flip
+//#cpp2rust D3DSWAPEFFECT_COPY      = d3d::SwapEffect::Copy
+//#cpp2rust D3DSWAPEFFECT_OVERLAY   = d3d::SwapEffect::Overlay
+//#cpp2rust D3DSWAPEFFECT_FLIPEX    = d3d::SwapEffect::FlipEx

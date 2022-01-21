@@ -108,3 +108,9 @@ enumish! { Pool => D3DPOOL; Default, Managed, SystemMem, Scratch }
 impl Default for Pool {
     fn default() -> Self { Pool::Default } // 0
 }
+
+//#cpp2rust D3DPOOL             = d3d::Pool
+//#cpp2rust D3DPOOL_DEFAULT     = d3d::Pool::Default
+//#cpp2rust D3DPOOL_MANAGED     = d3d::Pool::Managed
+//#cpp2rust D3DPOOL_SYSTEMMEM   = d3d::Pool::SystemMem
+//#cpp2rust D3DPOOL_SCRATCH     = d3d::Pool::Scratch

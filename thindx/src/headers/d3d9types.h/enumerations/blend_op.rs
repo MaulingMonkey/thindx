@@ -25,3 +25,10 @@ enumish! { BlendOp => D3DBLENDOP; Add, Subtract, RevSubtract, Min, Max }
 impl Default for BlendOp {
     fn default() -> Self { BlendOp::Add } // 1
 }
+
+//#cpp2rust D3DBLENDOP              = d3d::BlendOp
+//#cpp2rust D3DBLENDOP_ADD          = d3d::BlendOp::Add
+//#cpp2rust D3DBLENDOP_SUBTRACT     = d3d::BlendOp::Subtract
+//#cpp2rust D3DBLENDOP_REVSUBTRACT  = d3d::BlendOp::RevSubtract
+//#cpp2rust D3DBLENDOP_MIN          = d3d::BlendOp::Min
+//#cpp2rust D3DBLENDOP_MAX          = d3d::BlendOp::Max
