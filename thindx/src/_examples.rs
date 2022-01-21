@@ -310,19 +310,14 @@ pub const d3d9_01_clear_winapi : () = ();
 ///                     let _ = device.set_indices(&assets.QuadIB);
 ///                     let _ = device.set_vertex_declaration(&assets.VertDecl);
 ///                     let _ = device.set_material(Material { ambient: ColorValue { r: 1.0, g: 1.0, b: 1.0, a: 0.0 }, ..Default::default() });
+///                     let _ = device.set_render_state_untyped(d3d::RS::Lighting,          true as u32             );
+///                     let _ = device.set_render_state_untyped(d3d::RS::AlphaBlendEnable,  true as u32             );
+///                     let _ = device.set_render_state_untyped(d3d::RS::DestBlend,         d3d::Blend::InvSrcAlpha );
+///                     let _ = device.set_render_state_untyped(d3d::RS::Ambient,           0xFFFFFFFFu32           );
 ///                     unsafe {
-///                         let device = &*device.as_raw();
-/// 
-///                         // TODO: device.set_render_state[_unchecked]
-///                         device.SetRenderState(D3DRS_LIGHTING,           1                   );
-///                         device.SetRenderState(D3DRS_ALPHABLENDENABLE,   1                   );
-///                         device.SetRenderState(D3DRS_DESTBLEND,          D3DBLEND_INVSRCALPHA);
-///                         device.SetRenderState(D3DRS_AMBIENT,            0xFFFFFFFF          );
-/// 
-///                         // TODO: device.set_sampler_state[_unchecked]
-///                         device.SetSamplerState(0, D3DSAMP_MINFILTER, D3DTEXF_LINEAR);
-///                         device.SetSamplerState(0, D3DSAMP_MAGFILTER, D3DTEXF_LINEAR);
-///                         device.SetSamplerState(0, D3DSAMP_MIPFILTER, D3DTEXF_LINEAR);
+///                         let _ = device.set_sampler_state_unchecked(0, d3d::Samp::MinFilter, d3d::TexF::Linear);
+///                         let _ = device.set_sampler_state_unchecked(0, d3d::Samp::MagFilter, d3d::TexF::Linear);
+///                         let _ = device.set_sampler_state_unchecked(0, d3d::Samp::MipFilter, d3d::TexF::Linear);
 ///                     }
 /// 
 ///                     let sx = 2.0 / 800.0;
@@ -378,13 +373,13 @@ pub const d3d9_01_clear_winapi : () = ();
 ///                         let texture_mip0_desc = texture.get_level_desc(0).unwrap();
 ///                         let texw = texture_mip0_desc.width  as f32 * scale;
 ///                         let texh = texture_mip0_desc.height as f32 * scale;
-///                         unsafe { (*device.as_raw()).SetRenderState(D3DRS_AMBIENT, (bri as u32) * 0x01010101) };
-///                         unsafe { (*device.as_raw()).SetTransform(D3DTS_WORLD, &D3DMATRIX { m: [ // TODO: set_transform
+///                         let _ = device.set_render_state_untyped(d3d::RS::Ambient, (bri as u32) * 0x01010101);
+///                         let _ = device.set_transform(d3d::TS::World, d3d::Matrix { m: [
 ///                             [texw * sx,       0.0, 0.0, 0.0],
 ///                             [      0.0, texh * sy, 0.0, 0.0],
 ///                             [      0.0,       0.0, 1.0, 0.0],
 ///                             [  dx * sx,   dy * sy, 0.0, 1.0],
-///                         ]})};
+///                         ]});
 ///                         let _ = unsafe { device.set_texture(0, texture) };
 ///                         let _ = unsafe { device.draw_indexed_primitive(PT::TriangleList, 0, 0, 4, 0, 2) };
 ///                     }
@@ -401,7 +396,7 @@ pub const d3d9_01_clear_winapi : () = ();
 ///                     match err.kind() {
 ///                         D3DERR::DEVICELOST => {
 ///                             assets = None;
-///                             #[allow(unused_assignments)] { device = None; } // explicitly release COM device before creating a new one
+///                             drop(device.take()); // explicitly release COM device before creating a new one
 ///                             device = Some(unsafe { d3d.create_device(0, DevType::HAL, null_mut(), behavior, &mut pp) }.unwrap());
 ///                         },
 ///                         _other => {},
