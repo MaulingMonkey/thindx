@@ -88,7 +88,6 @@ fn main() {
                     let _ = device.set_render_state_untyped(d3d::RS::DestBlend,         d3d::Blend::InvSrcAlpha );
                     let _ = device.set_render_state_untyped(d3d::RS::Ambient,           0xFFFFFFFFu32           );
                     unsafe {
-                        // TODO: make these safe? can't seem to crash
                         let _ = device.set_sampler_state_unchecked(0, d3d::Samp::MinFilter, d3d::TexF::Linear);
                         let _ = device.set_sampler_state_unchecked(0, d3d::Samp::MagFilter, d3d::TexF::Linear);
                         let _ = device.set_sampler_state_unchecked(0, d3d::Samp::MipFilter, d3d::TexF::Linear);

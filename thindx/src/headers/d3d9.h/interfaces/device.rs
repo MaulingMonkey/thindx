@@ -2261,20 +2261,34 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setsamplerstate)\]
     /// IDirect3DDevice9::SetSamplerState
     ///
+    /// ### ⚠️ Safety ⚠️
+    ///
+    /// *   This function may crash with out-of-bounds samplers?
+    /// *   This function may crash with out-of-bounds sampler state types
+    /// *   This function may crash with out-of-bounds sampler state type values
+    /// *   This function may crash with the right combination of invalid values
+    ///
     /// ### Example
     ///
     /// ```rust
     /// # use dev::d3d9::*; let device = device_pure();
     /// unsafe {
-    ///     device.set_sampler_state_unchecked(0,       Samp::AddressU, TAddress::Mirror).unwrap();
-    ///     device.set_sampler_state_unchecked(10000,   Samp::AddressU, TAddress::Mirror).unwrap();
-    ///     device.set_sampler_state_unchecked(!0,      Samp::AddressU, TAddress::Mirror).unwrap();
-    ///     device.set_sampler_state_unchecked(0,       Samp::AddressU, !0u32).unwrap();
-    ///     device.set_sampler_state_unchecked(10000,   Samp::AddressU, !0u32).unwrap();
-    ///     device.set_sampler_state_unchecked(!0,      Samp::AddressU, !0u32).unwrap();
-    ///     device.set_sampler_state_unchecked(0,       SamplerStateType::from_unchecked(0),        0u32).unwrap();
-    ///     device.set_sampler_state_unchecked(0,       SamplerStateType::from_unchecked(10000),    0u32).unwrap();
-    ///     device.set_sampler_state_unchecked(0,       SamplerStateType::from_unchecked(!0),       0u32).unwrap();
+    ///     device.set_sampler_state_unchecked(0, d3d::Samp::MinFilter, d3d::TexF::Linear).unwrap();
+    ///     device.set_sampler_state_unchecked(0, d3d::Samp::MagFilter, d3d::TexF::Linear).unwrap();
+    ///     device.set_sampler_state_unchecked(0, d3d::Samp::MipFilter, d3d::TexF::Linear).unwrap();
+    ///
+    ///     if false { // undefined behavior:
+    ///         device.set_sampler_state_unchecked(0, d3d::Samp::from_unchecked(1000000), 1u32).unwrap();
+    /// #       // fuzz testing:
+    /// #       for i in [0, 1, 2, 4, 8, 16, 32, 64, 128, 1000, 100000, 1000000, !0u32].iter().copied() { dbg!(i);
+    /// #           for ss in [1000, 10000, 100000, 1000000, !0u32].iter().copied() { dbg!(ss);
+    /// #               for value in [0, 1, 100, 10000, 1000000, !0u32].iter().copied() { dbg!(value);
+    /// #                   // bad inputs silently ignored?
+    /// #                   device.set_sampler_state_unchecked(i, d3d::Samp::from_unchecked(ss), value).unwrap();
+    /// #               }
+    /// #           }
+    /// #       }
+    ///     }
     /// }
     /// ```
     ///
