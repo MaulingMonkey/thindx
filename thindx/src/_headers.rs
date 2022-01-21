@@ -18,7 +18,7 @@
 //! | [d3d9.h](#d3d9h) | ⚠️ 20 of 24 |   |   | ⚠️ 2 of 9 |   |
 //! | [d3d9caps.h](#d3d9capsh) |   | ⚠️ 3 of 5 |   |   |   |
 //! | [d3d9types.h](#d3d9typesh) |   | ⚠️ 19 of 71 | ⚠️ 40 of 54 |   | ⚠️ 442 of 612 |
-//! | [d3d11shader.h](#d3d11shaderh) | ✔️ 12 of 12 | ✔️ 9 of 9 | ✔️ 1 of 1 |   | ❌ 0 of 7 |
+//! | [d3d11shader.h](#d3d11shaderh) | ✔️ 12 of 12 | ✔️ 9 of 9 | ✔️ 1 of 1 |   | ✔️ 7 of 7 |
 //! | [d3d11shadertracing.h](#d3d11shadertracingh) | ❌ 0 of 2 | ❌ 0 of 11 | ❌ 0 of 3 |   | ❌ 0 of 48 |
 //! | [xinput.h](#xinputh) |   | ✔️ 6 of 6 |   | ✔️ 8 of 8 |   |
 //! | [xaudio2.h](#xaudio2h) | ❌ 0 of 8 | ❌ 0 of 11 | ❌ 0 of 1 |   | ❌ 0 of 6 |
@@ -1935,13 +1935,13 @@
 //! ### C++ Enums → Rust Structs
 //!
 //! [`D3D11_SHADER_VERSION_TYPE`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/ne-d3d11shader-d3d11_shader_version_type)&nbsp;→ [`d3d11::ShaderVersionType`] <br>
-//! * `D3D11_SHVER_COMPUTE_SHADER` →&nbsp;❌ <br>
-//! * `D3D11_SHVER_DOMAIN_SHADER` →&nbsp;❌ <br>
-//! * `D3D11_SHVER_GEOMETRY_SHADER` →&nbsp;❌ <br>
-//! * `D3D11_SHVER_HULL_SHADER` →&nbsp;❌ <br>
-//! * `D3D11_SHVER_PIXEL_SHADER` →&nbsp;❌ <br>
-//! * `D3D11_SHVER_RESERVED0` →&nbsp;❌ <br>
-//! * `D3D11_SHVER_VERTEX_SHADER` →&nbsp;❌ <br>
+//! * `D3D11_SHVER_COMPUTE_SHADER`&nbsp;→ [`d3d11::ShVer::ComputeShader`] <br>
+//! * `D3D11_SHVER_DOMAIN_SHADER`&nbsp;→ [`d3d11::ShVer::DomainShader`] <br>
+//! * `D3D11_SHVER_GEOMETRY_SHADER`&nbsp;→ [`d3d11::ShVer::GeometryShader`] <br>
+//! * `D3D11_SHVER_HULL_SHADER`&nbsp;→ [`d3d11::ShVer::HullShader`] <br>
+//! * `D3D11_SHVER_PIXEL_SHADER`&nbsp;→ [`d3d11::ShVer::PixelShader`] <br>
+//! * `D3D11_SHVER_RESERVED0`&nbsp;→ [`d3d11::ShVer::Reserved0`] <br>
+//! * `D3D11_SHVER_VERTEX_SHADER`&nbsp;→ [`d3d11::ShVer::VertexShader`] <br>
 //!
 //!
 //! <br>
