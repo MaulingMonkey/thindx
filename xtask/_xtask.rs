@@ -1,6 +1,7 @@
 mod coverage;
 mod examples;
 mod headers;
+mod publish;
 mod scan;
 mod vsc;
 
@@ -20,6 +21,7 @@ fn main() {
         "d" | "doc"     => doc(args, false),
         "h" | "help"    => doc(args, true),
         "coverage"      => coverage::coverage(args),
+        "publish"       => publish::publish(args),
         "vsc"           => vsc::vsc(args),
         other           => fatal!("unknown command {:?}", other),
     }
