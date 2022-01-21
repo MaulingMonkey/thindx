@@ -2229,6 +2229,34 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         MethodError::check("IDirect3DDevice9::SetRenderTarget", hr)
     }
 
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setsamplerstate)\]
+    /// IDirect3DDevice9::SetSamplerState
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_pure();
+    /// unsafe {
+    ///     device.set_sampler_state_unchecked(0,       Samp::AddressU, TAddress::Mirror).unwrap();
+    ///     device.set_sampler_state_unchecked(10000,   Samp::AddressU, TAddress::Mirror).unwrap();
+    ///     device.set_sampler_state_unchecked(!0,      Samp::AddressU, TAddress::Mirror).unwrap();
+    ///     device.set_sampler_state_unchecked(0,       Samp::AddressU, !0u32).unwrap();
+    ///     device.set_sampler_state_unchecked(10000,   Samp::AddressU, !0u32).unwrap();
+    ///     device.set_sampler_state_unchecked(!0,      Samp::AddressU, !0u32).unwrap();
+    ///     device.set_sampler_state_unchecked(0,       SamplerStateType::from_unchecked(0),        0u32).unwrap();
+    ///     device.set_sampler_state_unchecked(0,       SamplerStateType::from_unchecked(10000),    0u32).unwrap();
+    ///     device.set_sampler_state_unchecked(0,       SamplerStateType::from_unchecked(!0),       0u32).unwrap();
+    /// }
+    /// ```
+    ///
+    /// ### Returns
+    ///
+    /// *   Ok(())              no matter what invalid parameters are used?
+    unsafe fn set_sampler_state_unchecked(&self, sampler: u32, ty: SamplerStateType, value: impl Into<u32>) -> Result<(), MethodError> {
+        let hr = self.as_winapi().SetSamplerState(sampler, ty.into(), value.into());
+        MethodError::check("IDirect3DDevice9::SetSamplerState", hr)
+    }
+
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setstreamsource)\]
     /// IDirect3DDevice9::SetStreamSource
     ///

@@ -91,11 +91,12 @@ fn main() {
                         device.SetRenderState(D3DRS_ALPHABLENDENABLE,   1                   );
                         device.SetRenderState(D3DRS_DESTBLEND,          D3DBLEND_INVSRCALPHA);
                         device.SetRenderState(D3DRS_AMBIENT,            0xFFFFFFFF          );
-
-                        // TODO: device.set_sampler_state[_unchecked]
-                        device.SetSamplerState(0, D3DSAMP_MINFILTER, D3DTEXF_LINEAR);
-                        device.SetSamplerState(0, D3DSAMP_MAGFILTER, D3DTEXF_LINEAR);
-                        device.SetSamplerState(0, D3DSAMP_MIPFILTER, D3DTEXF_LINEAR);
+                    }
+                    unsafe {
+                        // TODO: make these safe? can't seem to crash
+                        let _ = device.set_sampler_state_unchecked(0, d3d::Samp::MinFilter, d3d::TexF::Linear);
+                        let _ = device.set_sampler_state_unchecked(0, d3d::Samp::MagFilter, d3d::TexF::Linear);
+                        let _ = device.set_sampler_state_unchecked(0, d3d::Samp::MipFilter, d3d::TexF::Linear);
                     }
 
                     let sx = 2.0 / 800.0;
