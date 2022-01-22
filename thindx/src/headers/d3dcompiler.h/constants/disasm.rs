@@ -78,3 +78,11 @@ flags! {
 impl Default for Disasm {
     fn default() -> Self { Disasm::None }
 }
+
+//#cpp2rust D3D_DISASM_ENABLE_COLOR_CODE            = d3d::Disasm::EnableColorCode
+//#cpp2rust D3D_DISASM_ENABLE_DEFAULT_VALUE_PRINTS  = d3d::Disasm::EnableDefaultValuePrints
+//#cpp2rust D3D_DISASM_ENABLE_INSTRUCTION_NUMBERING = d3d::Disasm::EnableInstructionNumbering
+//#cpp2rust D3D_DISASM_ENABLE_INSTRUCTION_CYCLE     = d3d::Disasm::EnableInstructionCycle
+//#cpp2rust D3D_DISASM_DISABLE_DEBUG_INFO           = d3d::Disasm::DisableDebugInfo
+//#cpp2rust D3D_DISASM_ENABLE_INSTRUCTION_OFFSET    = d3d::Disasm::EnableInstructionOffset
+//#cpp2rust D3D_DISASM_INSTRUCTION_ONLY             = d3d::Disasm::InstructionOnly

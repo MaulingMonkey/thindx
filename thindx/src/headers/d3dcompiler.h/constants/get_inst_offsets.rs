@@ -32,3 +32,5 @@ flags! { GetInstOffsets => UINT; None, IncludeNonExecutable }
 impl Default for GetInstOffsets {
     fn default() -> Self { GetInstOffsets::None }
 }
+
+//#cpp2rust D3D_GET_INST_OFFSETS_INCLUDE_NON_EXECUTABLE     = d3d::GetInstOffsets::IncludeNonExecutable

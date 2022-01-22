@@ -30,3 +30,5 @@ flags! { CompressShader => UINT; None, KeepAllParts }
 impl Default for CompressShader {
     fn default() -> Self { CompressShader::None }
 }
+
+//#cpp2rust D3D_COMPRESS_SHADER_KEEP_ALL_PARTS = d3d::CompressShader::KeepAllParts

@@ -14,7 +14,7 @@
 //! | [guiddef.h](#guiddefh) |   | ✔️ 1 of 1 |   |   | ✔️ 7 of 7 | ⚠️ 5 of 7 |
 //! | [unknwn.h](#unknwnh) | ✔️ 1 of 1 |   |   |   |   |   |
 //! | [d3dcommon.h](#d3dcommonh) | ⚠️ 2 of 3 | ✔️ 1 of 1 | ✔️ 22 of 22 |   | ⚠️ 555 of 576 | ❌ 0 of 4 |
-//! | [d3dcompiler.h](#d3dcompilerh) |   | ✔️ 1 of 1 | ✔️ 2 of 2 |   | ⚠️ 23 of 71 |   |
+//! | [d3dcompiler.h](#d3dcompilerh) |   | ✔️ 1 of 1 | ✔️ 2 of 2 |   | ⚠️ 59 of 71 |   |
 //! | [d3d9.h](#d3d9h) | ⚠️ 20 of 24 |   |   | ⚠️ 2 of 9 | ⚠️ 26 of 73 | ❌ 0 of 3 |
 //! | [d3d9caps.h](#d3d9capsh) |   | ⚠️ 3 of 5 |   |   | ⚠️ 6 of 251 |   |
 //! | [d3d9types.h](#d3d9typesh) |   | ⚠️ 19 of 71 | ⚠️ 40 of 54 |   | ⚠️ 507 of 844 | ⚠️ 6 of 20 |
@@ -754,52 +754,52 @@
 //! `D3DCOMPILER_DLL` →&nbsp;❌ <br>
 //! `D3DCOMPILER_DLL_A` →&nbsp;❌ <br>
 //! `D3DCOMPILER_DLL_W` →&nbsp;❌ <br>
-//! `D3DCOMPILE_ALL_RESOURCES_BOUND` →&nbsp;❌ <br>
-//! `D3DCOMPILE_AVOID_FLOW_CONTROL` →&nbsp;❌ <br>
-//! `D3DCOMPILE_DEBUG` →&nbsp;❌ <br>
+//! `D3DCOMPILE_ALL_RESOURCES_BOUND`&nbsp;→ [`d3d::Compile::AllResourcesBound`] <br>
+//! `D3DCOMPILE_AVOID_FLOW_CONTROL`&nbsp;→ [`d3d::Compile::AvoidFlowControl`] <br>
+//! `D3DCOMPILE_DEBUG`&nbsp;→ [`d3d::Compile::Debug`] <br>
 //! `D3DCOMPILE_DEBUG_NAME_FOR_BINARY` →&nbsp;❌ <br>
 //! `D3DCOMPILE_DEBUG_NAME_FOR_SOURCE` →&nbsp;❌ <br>
-//! `D3DCOMPILE_EFFECT_ALLOW_SLOW_OPS` →&nbsp;❌ <br>
-//! `D3DCOMPILE_EFFECT_CHILD_EFFECT` →&nbsp;❌ <br>
-//! `D3DCOMPILE_ENABLE_BACKWARDS_COMPATIBILITY` →&nbsp;❌ <br>
-//! `D3DCOMPILE_ENABLE_STRICTNESS` →&nbsp;❌ <br>
-//! `D3DCOMPILE_ENABLE_UNBOUNDED_DESCRIPTOR_TABLES` →&nbsp;❌ <br>
+//! `D3DCOMPILE_EFFECT_ALLOW_SLOW_OPS`&nbsp;→ [`d3d::CompileEffect::AllowSlowOps`] <br>
+//! `D3DCOMPILE_EFFECT_CHILD_EFFECT`&nbsp;→ [`d3d::CompileEffect::ChildEffect`] <br>
+//! `D3DCOMPILE_ENABLE_BACKWARDS_COMPATIBILITY`&nbsp;→ [`d3d::Compile::EnableBackwardsCompatibility`] <br>
+//! `D3DCOMPILE_ENABLE_STRICTNESS`&nbsp;→ [`d3d::Compile::EnableStrictness`] <br>
+//! `D3DCOMPILE_ENABLE_UNBOUNDED_DESCRIPTOR_TABLES`&nbsp;→ [`d3d::Compile::EnableUnboundedDescriptorTables`] <br>
 //! `D3DCOMPILE_FLAGS2_FORCE_ROOT_SIGNATURE_1_0` →&nbsp;❌ <br>
 //! `D3DCOMPILE_FLAGS2_FORCE_ROOT_SIGNATURE_1_1` →&nbsp;❌ <br>
 //! `D3DCOMPILE_FLAGS2_FORCE_ROOT_SIGNATURE_LATEST` →&nbsp;❌ <br>
-//! `D3DCOMPILE_FORCE_PS_SOFTWARE_NO_OPT` →&nbsp;❌ <br>
-//! `D3DCOMPILE_FORCE_VS_SOFTWARE_NO_OPT` →&nbsp;❌ <br>
-//! `D3DCOMPILE_IEEE_STRICTNESS` →&nbsp;❌ <br>
-//! `D3DCOMPILE_NO_PRESHADER` →&nbsp;❌ <br>
-//! `D3DCOMPILE_OPTIMIZATION_LEVEL0` →&nbsp;❌ <br>
-//! `D3DCOMPILE_OPTIMIZATION_LEVEL1` →&nbsp;❌ <br>
-//! `D3DCOMPILE_OPTIMIZATION_LEVEL2` →&nbsp;❌ <br>
-//! `D3DCOMPILE_OPTIMIZATION_LEVEL3` →&nbsp;❌ <br>
-//! `D3DCOMPILE_PACK_MATRIX_COLUMN_MAJOR` →&nbsp;❌ <br>
-//! `D3DCOMPILE_PACK_MATRIX_ROW_MAJOR` →&nbsp;❌ <br>
-//! `D3DCOMPILE_PARTIAL_PRECISION` →&nbsp;❌ <br>
-//! `D3DCOMPILE_PREFER_FLOW_CONTROL` →&nbsp;❌ <br>
+//! `D3DCOMPILE_FORCE_PS_SOFTWARE_NO_OPT`&nbsp;→ [`d3d::Compile::ForcePsSoftwareNoOpt`] <br>
+//! `D3DCOMPILE_FORCE_VS_SOFTWARE_NO_OPT`&nbsp;→ [`d3d::Compile::ForceVsSoftwareNoOpt`] <br>
+//! `D3DCOMPILE_IEEE_STRICTNESS`&nbsp;→ [`d3d::Compile::IeeeStrictness`] <br>
+//! `D3DCOMPILE_NO_PRESHADER`&nbsp;→ [`d3d::Compile::NoPreshader`] <br>
+//! `D3DCOMPILE_OPTIMIZATION_LEVEL0`&nbsp;→ [`d3d::Compile::OptimizationLevel0`] <br>
+//! `D3DCOMPILE_OPTIMIZATION_LEVEL1`&nbsp;→ [`d3d::Compile::OptimizationLevel1`] <br>
+//! `D3DCOMPILE_OPTIMIZATION_LEVEL2`&nbsp;→ [`d3d::Compile::OptimizationLevel2`] <br>
+//! `D3DCOMPILE_OPTIMIZATION_LEVEL3`&nbsp;→ [`d3d::Compile::OptimizationLevel3`] <br>
+//! `D3DCOMPILE_PACK_MATRIX_COLUMN_MAJOR`&nbsp;→ [`d3d::Compile::PackMatrixColumnMajor`] <br>
+//! `D3DCOMPILE_PACK_MATRIX_ROW_MAJOR`&nbsp;→ [`d3d::Compile::PackMatrixRowMajor`] <br>
+//! `D3DCOMPILE_PARTIAL_PRECISION`&nbsp;→ [`d3d::Compile::PartialPrecision`] <br>
+//! `D3DCOMPILE_PREFER_FLOW_CONTROL`&nbsp;→ [`d3d::Compile::PreferFlowControl`] <br>
 //! `D3DCOMPILE_RESERVED16` →&nbsp;❌ <br>
 //! `D3DCOMPILE_RESERVED17` →&nbsp;❌ <br>
-//! `D3DCOMPILE_RESOURCES_MAY_ALIAS` →&nbsp;❌ <br>
-//! `D3DCOMPILE_SECDATA_MERGE_UAV_SLOTS` →&nbsp;❌ <br>
-//! `D3DCOMPILE_SECDATA_PRESERVE_TEMPLATE_SLOTS` →&nbsp;❌ <br>
-//! `D3DCOMPILE_SECDATA_REQUIRE_TEMPLATE_MATCH` →&nbsp;❌ <br>
-//! `D3DCOMPILE_SKIP_OPTIMIZATION` →&nbsp;❌ <br>
-//! `D3DCOMPILE_SKIP_VALIDATION` →&nbsp;❌ <br>
-//! `D3DCOMPILE_WARNINGS_ARE_ERRORS` →&nbsp;❌ <br>
+//! `D3DCOMPILE_RESOURCES_MAY_ALIAS`&nbsp;→ [`d3d::Compile::ResourcesMayAlias`] <br>
+//! `D3DCOMPILE_SECDATA_MERGE_UAV_SLOTS`&nbsp;→ [`d3d::CompileSecData::MergeUavSlots`] <br>
+//! `D3DCOMPILE_SECDATA_PRESERVE_TEMPLATE_SLOTS`&nbsp;→ [`d3d::CompileSecData::PreserveTemplateSlots`] <br>
+//! `D3DCOMPILE_SECDATA_REQUIRE_TEMPLATE_MATCH`&nbsp;→ [`d3d::CompileSecData::RequireTemplateMatch`] <br>
+//! `D3DCOMPILE_SKIP_OPTIMIZATION`&nbsp;→ [`d3d::Compile::SkipOptimization`] <br>
+//! `D3DCOMPILE_SKIP_VALIDATION`&nbsp;→ [`d3d::Compile::SkipValidation`] <br>
+//! `D3DCOMPILE_WARNINGS_ARE_ERRORS`&nbsp;→ [`d3d::Compile::WarningsAreErrors`] <br>
 //! `D3D_COMPILER_VERSION` →&nbsp;❌ <br>
 //! `D3D_COMPILE_STANDARD_FILE_INCLUDE`&nbsp;→ [`d3d::StandardFileInclude`] <br>
-//! `D3D_COMPRESS_SHADER_KEEP_ALL_PARTS` →&nbsp;❌ <br>
-//! `D3D_DISASM_DISABLE_DEBUG_INFO` →&nbsp;❌ <br>
-//! `D3D_DISASM_ENABLE_COLOR_CODE` →&nbsp;❌ <br>
-//! `D3D_DISASM_ENABLE_DEFAULT_VALUE_PRINTS` →&nbsp;❌ <br>
-//! `D3D_DISASM_ENABLE_INSTRUCTION_CYCLE` →&nbsp;❌ <br>
-//! `D3D_DISASM_ENABLE_INSTRUCTION_NUMBERING` →&nbsp;❌ <br>
-//! `D3D_DISASM_ENABLE_INSTRUCTION_OFFSET` →&nbsp;❌ <br>
-//! `D3D_DISASM_INSTRUCTION_ONLY` →&nbsp;❌ <br>
+//! `D3D_COMPRESS_SHADER_KEEP_ALL_PARTS`&nbsp;→ [`d3d::CompressShader::KeepAllParts`] <br>
+//! `D3D_DISASM_DISABLE_DEBUG_INFO`&nbsp;→ [`d3d::Disasm::DisableDebugInfo`] <br>
+//! `D3D_DISASM_ENABLE_COLOR_CODE`&nbsp;→ [`d3d::Disasm::EnableColorCode`] <br>
+//! `D3D_DISASM_ENABLE_DEFAULT_VALUE_PRINTS`&nbsp;→ [`d3d::Disasm::EnableDefaultValuePrints`] <br>
+//! `D3D_DISASM_ENABLE_INSTRUCTION_CYCLE`&nbsp;→ [`d3d::Disasm::EnableInstructionCycle`] <br>
+//! `D3D_DISASM_ENABLE_INSTRUCTION_NUMBERING`&nbsp;→ [`d3d::Disasm::EnableInstructionNumbering`] <br>
+//! `D3D_DISASM_ENABLE_INSTRUCTION_OFFSET`&nbsp;→ [`d3d::Disasm::EnableInstructionOffset`] <br>
+//! `D3D_DISASM_INSTRUCTION_ONLY`&nbsp;→ [`d3d::Disasm::InstructionOnly`] <br>
 //! `D3D_DISASM_PRINT_HEX_LITERALS` →&nbsp;❌ <br>
-//! `D3D_GET_INST_OFFSETS_INCLUDE_NON_EXECUTABLE` →&nbsp;❌ <br>
+//! `D3D_GET_INST_OFFSETS_INCLUDE_NON_EXECUTABLE`&nbsp;→ [`d3d::GetInstOffsets::IncludeNonExecutable`] <br>
 //!
 //! <br>
 //!

@@ -48,3 +48,7 @@ flags! { CompileSecData => UINT; None, MergeUavSlots, PreserveTemplateSlots, Req
 impl Default for CompileSecData {
     fn default() -> Self { CompileSecData::None }
 }
+
+//#cpp2rust D3DCOMPILE_SECDATA_MERGE_UAV_SLOTS          = d3d::CompileSecData::MergeUavSlots
+//#cpp2rust D3DCOMPILE_SECDATA_PRESERVE_TEMPLATE_SLOTS  = d3d::CompileSecData::PreserveTemplateSlots
+//#cpp2rust D3DCOMPILE_SECDATA_REQUIRE_TEMPLATE_MATCH   = d3d::CompileSecData::RequireTemplateMatch

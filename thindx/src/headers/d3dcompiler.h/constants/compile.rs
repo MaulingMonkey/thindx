@@ -86,3 +86,27 @@ flags! {
 impl Default for Compile {
     fn default() -> Self { Compile::None }
 }
+
+//#cpp2rust D3DCOMPILE                                      = d3d::Compile
+//#cpp2rust D3DCOMPILE_DEBUG                                = d3d::Compile::Debug
+//#cpp2rust D3DCOMPILE_SKIP_VALIDATION                      = d3d::Compile::SkipValidation
+//#cpp2rust D3DCOMPILE_SKIP_OPTIMIZATION                    = d3d::Compile::SkipOptimization
+//#cpp2rust D3DCOMPILE_PACK_MATRIX_ROW_MAJOR                = d3d::Compile::PackMatrixRowMajor
+//#cpp2rust D3DCOMPILE_PACK_MATRIX_COLUMN_MAJOR             = d3d::Compile::PackMatrixColumnMajor
+//#cpp2rust D3DCOMPILE_PARTIAL_PRECISION                    = d3d::Compile::PartialPrecision
+//#cpp2rust D3DCOMPILE_FORCE_VS_SOFTWARE_NO_OPT             = d3d::Compile::ForceVsSoftwareNoOpt
+//#cpp2rust D3DCOMPILE_FORCE_PS_SOFTWARE_NO_OPT             = d3d::Compile::ForcePsSoftwareNoOpt
+//#cpp2rust D3DCOMPILE_NO_PRESHADER                         = d3d::Compile::NoPreshader
+//#cpp2rust D3DCOMPILE_AVOID_FLOW_CONTROL                   = d3d::Compile::AvoidFlowControl
+//#cpp2rust D3DCOMPILE_PREFER_FLOW_CONTROL                  = d3d::Compile::PreferFlowControl
+//#cpp2rust D3DCOMPILE_ENABLE_STRICTNESS                    = d3d::Compile::EnableStrictness
+//#cpp2rust D3DCOMPILE_ENABLE_BACKWARDS_COMPATIBILITY       = d3d::Compile::EnableBackwardsCompatibility
+//#cpp2rust D3DCOMPILE_IEEE_STRICTNESS                      = d3d::Compile::IeeeStrictness
+//#cpp2rust D3DCOMPILE_OPTIMIZATION_LEVEL0                  = d3d::Compile::OptimizationLevel0
+//#cpp2rust D3DCOMPILE_OPTIMIZATION_LEVEL1                  = d3d::Compile::OptimizationLevel1
+//#cpp2rust D3DCOMPILE_OPTIMIZATION_LEVEL2                  = d3d::Compile::OptimizationLevel2
+//#cpp2rust D3DCOMPILE_OPTIMIZATION_LEVEL3                  = d3d::Compile::OptimizationLevel3
+//#cpp2rust D3DCOMPILE_WARNINGS_ARE_ERRORS                  = d3d::Compile::WarningsAreErrors
+//#cpp2rust D3DCOMPILE_RESOURCES_MAY_ALIAS                  = d3d::Compile::ResourcesMayAlias
+//#cpp2rust D3DCOMPILE_ENABLE_UNBOUNDED_DESCRIPTOR_TABLES   = d3d::Compile::EnableUnboundedDescriptorTables
+//#cpp2rust D3DCOMPILE_ALL_RESOURCES_BOUND                  = d3d::Compile::AllResourcesBound

@@ -50,3 +50,7 @@ flags! {
 impl Default for CompileEffect {
     fn default() -> Self { CompileEffect::None }
 }
+
+//#cpp2rust D3DCOMPILE_EFFECT                   = d3d::CompileEffect
+//#cpp2rust D3DCOMPILE_EFFECT_CHILD_EFFECT      = d3d::CompileEffect::ChildEffect
+//#cpp2rust D3DCOMPILE_EFFECT_ALLOW_SLOW_OPS    = d3d::CompileEffect::AllowSlowOps
