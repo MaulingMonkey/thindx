@@ -487,38 +487,3 @@ IDirect3DVolumeTexture9::GetLevelDesc               = d3d9::IDirect3DVolumeTextu
 IDirect3DVolumeTexture9::GetVolumeLevel             = d3d9::IDirect3DVolumeTexture9Ext::get_volume_level
 IDirect3DVolumeTexture9::LockBox                    = d3d9::IDirect3DVolumeTexture9Ext::lock_box_unchecked
 IDirect3DVolumeTexture9::UnlockBox                  = d3d9::IDirect3DVolumeTexture9Ext::unlock_box
-
-
-
-# xinput.h enumerations
-# BATTERY_DEVTYPE_*                       = xinput::BatteryDevType::*
-# BATTERY_LEVEL_*                         = xinput::BatteryLevel::*
-# BATTERY_TYPE_*                          = xinput::BatteryType::*
-# XINPUT_DEVSUBTYPE_*                     = xinput::DevSubType::*
-# XINPUT_DEVTYPE_*                        = xinput::DevType::*
-# XUSER_*                                 = xinput::User::*
-# VK_*                                    = xinput::VK::*
-
-# xinput.h flags
-# XINPUT_GAMEPAD_*                        = xinput::Buttons:*
-# XINPUT_CAPS_*                           = xinput::Caps:*
-# XINPUT_FLAG_*                           = xinput::Flag:*
-
-# xinput.h functions
-XInputEnable                            = xinput::enable
-XInputGetAudioDeviceIds                 = xinput::get_audio_device_ids
-XInputGetBatteryInformation             = xinput::get_battery_information
-XInputGetCapabilities                   = xinput::get_capabilities
-XInputGetDSoundAudioDeviceGuids         = xinput::get_dsound_audio_device_guids
-XInputGetKeystroke                      = xinput::get_keystroke
-XInputGetState                          = xinput::get_state
-XInputGetStateEx                        = xinput::get_state_ex
-XInputSetState                          = xinput::set_state
-
-# xinput.h structures
-XINPUT_BATTERY_INFORMATION              = xinput::BatteryInformation
-XINPUT_CAPABILITIES                     = xinput::Capabilities
-XINPUT_GAMEPAD                          = xinput::Gamepad
-XINPUT_KEYSTROKE                        = xinput::Keystroke
-XINPUT_STATE                            = xinput::State
-XINPUT_VIBRATION                        = xinput::Vibration

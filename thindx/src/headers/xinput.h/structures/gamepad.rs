@@ -129,3 +129,8 @@ test_layout_only! {
     let _gamepad = _gamepad.clone();
     dbg!(_gamepad);
 }
+
+//#cpp2rust XINPUT_GAMEPAD                      = xinput::Gamepad
+//#cpp2rust XINPUT_GAMEPAD_TRIGGER_THRESHOLD    = xinput::Gamepad::TRIGGER_THRESHOLD
+//#cpp2rust XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE  = xinput::Gamepad::LEFT_THUMB_DEADZONE
+//#cpp2rust XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE = xinput::Gamepad::RIGHT_THUMB_DEADZONE

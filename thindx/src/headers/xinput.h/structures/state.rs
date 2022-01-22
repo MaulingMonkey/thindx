@@ -43,3 +43,5 @@ test_layout! {
     _state.left_trigger = 42;
     dbg!(_state);
 }
+
+//#cpp2rust XINPUT_STATE                = xinput::State

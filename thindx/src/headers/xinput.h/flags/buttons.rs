@@ -187,3 +187,18 @@ impl Buttons {
     pub const GUIDE             : Buttons = Buttons(1 << 10);
     // A, B, X, Y are already canon
 }
+
+//#cpp2rust XINPUT_GAMEPAD_DPAD_UP          = xinput::Buttons::DPadUp
+//#cpp2rust XINPUT_GAMEPAD_DPAD_DOWN        = xinput::Buttons::DPadDown
+//#cpp2rust XINPUT_GAMEPAD_DPAD_LEFT        = xinput::Buttons::DPadLeft
+//#cpp2rust XINPUT_GAMEPAD_DPAD_RIGHT       = xinput::Buttons::DPadRight
+//#cpp2rust XINPUT_GAMEPAD_START            = xinput::Buttons::Start
+//#cpp2rust XINPUT_GAMEPAD_BACK             = xinput::Buttons::Back
+//#cpp2rust XINPUT_GAMEPAD_LEFT_THUMB       = xinput::Buttons::LeftThumb
+//#cpp2rust XINPUT_GAMEPAD_RIGHT_THUMB      = xinput::Buttons::RightThumb
+//#cpp2rust XINPUT_GAMEPAD_LEFT_SHOULDER    = xinput::Buttons::LeftShoulder
+//#cpp2rust XINPUT_GAMEPAD_RIGHT_SHOULDER   = xinput::Buttons::RightShoulder
+//#cpp2rust XINPUT_GAMEPAD_A                = xinput::Buttons::A
+//#cpp2rust XINPUT_GAMEPAD_B                = xinput::Buttons::B
+//#cpp2rust XINPUT_GAMEPAD_X                = xinput::Buttons::X
+//#cpp2rust XINPUT_GAMEPAD_Y                = xinput::Buttons::Y

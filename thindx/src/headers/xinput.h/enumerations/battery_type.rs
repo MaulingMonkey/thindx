@@ -47,3 +47,9 @@ enumish! { BatteryType => u8; Disconnected, Wired, Alkaline, NiMH, Unknown }
     #[deprecated = "Are you sure you want to use this?  New BATTERY_TYPE_* enumerations may be added at a later date..."]
     pub const UNKNOWN : BatteryType = BatteryType(BATTERY_TYPE_UNKNOWN as _);
 }
+
+//#cpp2rust BATTERY_TYPE_DISCONNECTED   = xinput::BatteryType::Disconnected
+//#cpp2rust BATTERY_TYPE_WIRED          = xinput::BatteryType::Wired
+//#cpp2rust BATTERY_TYPE_ALKALINE       = xinput::BatteryType::Alkaline
+//#cpp2rust BATTERY_TYPE_NIMH           = xinput::BatteryType::NiMH
+//#cpp2rust BATTERY_TYPE_UNKNOWN        = xinput::BatteryType::Unknown

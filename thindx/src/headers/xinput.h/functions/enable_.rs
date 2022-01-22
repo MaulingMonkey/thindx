@@ -56,3 +56,5 @@ pub fn enable(enable: bool) {
     enable(false);
     enable(true);
 }
+
+//#cpp2rust XInputEnable    = xinput::enable

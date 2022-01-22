@@ -53,3 +53,7 @@ flags! { Keystroke => u16; None, KeyDown, KeyUp, Repeat }
     /// This was a repeated key event.
     pub const REPEAT : Keystroke = Keystroke(XINPUT_KEYSTROKE_REPEAT);
 }
+
+//#cpp2rust XINPUT_KEYSTROKE_KEYDOWN    = xinput::Keystroke::KeyDown
+//#cpp2rust XINPUT_KEYSTROKE_KEYUP      = xinput::Keystroke::KeyUp
+//#cpp2rust XINPUT_KEYSTROKE_REPEAT     = xinput::Keystroke::Repeat

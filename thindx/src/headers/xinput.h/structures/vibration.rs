@@ -39,3 +39,5 @@ test_layout! {
     let _vibration = _vibration.clone();
     dbg!(_vibration);
 }
+
+//#cpp2rust XINPUT_VIBRATION            = xinput::Vibration

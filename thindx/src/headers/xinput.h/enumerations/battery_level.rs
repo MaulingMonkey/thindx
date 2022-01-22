@@ -24,3 +24,8 @@ enumish! { BatteryLevel => u8; Empty, Low, Medium, Full }
     pub const MEDIUM    : BatteryLevel = BatteryLevel(BATTERY_LEVEL_MEDIUM as _);
     pub const FULL      : BatteryLevel = BatteryLevel(BATTERY_LEVEL_FULL as _);
 }
+
+//#cpp2rust BATTERY_LEVEL_EMPTY     = xinput::BatteryLevel::Empty
+//#cpp2rust BATTERY_LEVEL_LOW       = xinput::BatteryLevel::Low
+//#cpp2rust BATTERY_LEVEL_MEDIUM    = xinput::BatteryLevel::Medium
+//#cpp2rust BATTERY_LEVEL_FULL      = xinput::BatteryLevel::Full

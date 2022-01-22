@@ -43,3 +43,5 @@ pub fn get_dsound_audio_device_guids(user_index: impl Into<User>) -> Result<DSou
         );
     }
 }
+
+//#cpp2rust XInputGetDSoundAudioDeviceGuids     = xinput::get_dsound_audio_device_guids

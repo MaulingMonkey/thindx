@@ -54,3 +54,15 @@ enumish! { DevSubType => u8; Unknown }
 
 #[doc(hidden)] impl DevSubType {
 }
+
+//#cpp2rust XINPUT_DEVSUBTYPE_UNKNOWN           = xinput::DevSubType::Unknown
+//#cpp2rust XINPUT_DEVSUBTYPE_GAMEPAD           = xinput::DevSubType::Gamepad
+//#cpp2rust XINPUT_DEVSUBTYPE_WHEEL             = xinput::DevSubType::Wheel
+//#cpp2rust XINPUT_DEVSUBTYPE_ARCADE_STICK      = xinput::DevSubType::ArcadeStick
+//#cpp2rust XINPUT_DEVSUBTYPE_FLIGHT_STICK      = xinput::DevSubType::FlightStick
+//#cpp2rust XINPUT_DEVSUBTYPE_DANCE_PAD         = xinput::DevSubType::DancePad
+//#cpp2rust XINPUT_DEVSUBTYPE_GUITAR            = xinput::DevSubType::Guitar
+//#cpp2rust XINPUT_DEVSUBTYPE_GUITAR_ALTERNATE  = xinput::DevSubType::GuitarAlternate
+//#cpp2rust XINPUT_DEVSUBTYPE_DRUM_KIT          = xinput::DevSubType::DrumKit
+//#cpp2rust XINPUT_DEVSUBTYPE_GUITAR_BASS       = xinput::DevSubType::GuitarBass
+//#cpp2rust XINPUT_DEVSUBTYPE_ARCADE_PAD        = xinput::DevSubType::ArcadePad

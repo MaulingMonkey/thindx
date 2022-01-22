@@ -40,3 +40,5 @@ pub fn get_capabilities(user_index: impl Into<User>, flags: Flag) -> Result<Capa
     assert_eq!(ERROR::BAD_ARGUMENTS,        get_capabilities(User::Zero,                Flag::from_unchecked(42))); // Bad Flag (obb)
     assert_eq!(ERROR::BAD_ARGUMENTS,        get_capabilities(User::Zero,                Flag::from_unchecked(!0))); // Bad Flag (obb)
 }
+
+//#cpp2rust XInputGetCapabilities   = xinput::get_capabilities

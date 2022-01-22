@@ -29,3 +29,6 @@ enumish! { BatteryDevType => u8; Gamepad, Headset }
     /// Get the battery information for a headset
     pub const HEADSET : BatteryDevType = BatteryDevType(BATTERY_DEVTYPE_HEADSET);
 }
+
+//#cpp2rust BATTERY_DEVTYPE_GAMEPAD = xinput::BatteryDevType::Gamepad
+//#cpp2rust BATTERY_DEVTYPE_HEADSET = xinput::BatteryDevType::Headset

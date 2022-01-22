@@ -36,3 +36,5 @@ pub fn set_state(user_index: impl Into<User>, mut vibration: Vibration) -> Resul
     assert_eq!(ERROR::BAD_ARGUMENTS, set_state(User::Any,               v));
     assert_eq!(ERROR::BAD_ARGUMENTS, set_state(User::from_unchecked(4), v));
 }
+
+//#cpp2rust XInputSetState      = xinput::set_state

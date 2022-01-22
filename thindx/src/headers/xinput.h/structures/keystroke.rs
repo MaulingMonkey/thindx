@@ -41,3 +41,5 @@ test_layout! {
     let _keystroke = _keystroke.clone();
     dbg!(_keystroke);
 }
+
+//#cpp2rust XINPUT_KEYSTROKE            = xinput::Keystroke

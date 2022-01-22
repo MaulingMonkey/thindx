@@ -37,3 +37,6 @@ impl From<User> for u32 { fn from(user: User) -> Self { user.0.into() } } // XIn
     /// Iterator over valid user indicies [User]\(0\) .. [User]\(4\)
     pub fn iter_valid() -> impl Iterator<Item = User> { [User::Zero, User::One, User::Two, User::Three].iter().copied() }
 }
+
+//#cpp2rust XUSER_INDEX_ANY     = xinput::User::Any
+//#cpp2rust XUSER_MAX_COUNT     = xinput::User::MAX_COUNT

@@ -41,3 +41,5 @@ pub fn get_keystroke(user_index: impl Into<User>, _reserved: ()) -> Result<Optio
     assert_eq!(ERROR::BAD_ARGUMENTS, get_keystroke(User::from_unchecked(99), ()));
     assert_eq!(ERROR::BAD_ARGUMENTS, get_keystroke(User::from_unchecked(254), ()));
 }
+
+//#cpp2rust XInputGetKeystroke  = xinput::get_keystroke

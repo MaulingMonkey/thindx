@@ -31,3 +31,5 @@ test_layout! {
     let _info = _info.clone();
     dbg!(_info);
 }
+
+//#cpp2rust XINPUT_BATTERY_INFORMATION  = xinput::BatteryInformation

@@ -27,3 +27,5 @@ flags! { Flag => u32; None, Gamepad }
     /// Limit [xinput::get_capabilities](crate::xinput::get_capabilities) to Xbox 360 controllers.
     pub const GAMEPAD : Flag = Flag(XINPUT_FLAG_GAMEPAD);
 }
+
+//#cpp2rust XINPUT_FLAG_GAMEPAD     = xinput::Flag::Gamepad

@@ -163,3 +163,39 @@ enumish! {
     /// Moved the right thumbstick down and left.
     pub const PadRThumbDownLeft : VK = VK(VK_PAD_RTHUMB_DOWNLEFT);
 }
+
+//#cpp2rust VK_PAD_A                    = xinput::VK::PadA
+//#cpp2rust VK_PAD_B                    = xinput::VK::PadB
+//#cpp2rust VK_PAD_X                    = xinput::VK::PadX
+//#cpp2rust VK_PAD_Y                    = xinput::VK::PadY
+//#cpp2rust VK_PAD_RSHOULDER            = xinput::VK::PadRShoulder
+//#cpp2rust VK_PAD_LSHOULDER            = xinput::VK::PadLShoulder
+//#cpp2rust VK_PAD_LTRIGGER             = xinput::VK::PadLTrigger
+//#cpp2rust VK_PAD_RTRIGGER             = xinput::VK::PadRTrigger
+
+//#cpp2rust VK_PAD_DPAD_UP              = xinput::VK::PadDPadUp
+//#cpp2rust VK_PAD_DPAD_DOWN            = xinput::VK::PadDPadDown
+//#cpp2rust VK_PAD_DPAD_LEFT            = xinput::VK::PadDPadLeft
+//#cpp2rust VK_PAD_DPAD_RIGHT           = xinput::VK::PadDPadRight
+//#cpp2rust VK_PAD_START                = xinput::VK::PadStart
+//#cpp2rust VK_PAD_BACK                 = xinput::VK::PadBack
+//#cpp2rust VK_PAD_LTHUMB_PRESS         = xinput::VK::PadLThumbPress
+//#cpp2rust VK_PAD_RTHUMB_PRESS         = xinput::VK::PadRThumbPress
+
+//#cpp2rust VK_PAD_LTHUMB_UP            = xinput::VK::PadLThumbUp
+//#cpp2rust VK_PAD_LTHUMB_DOWN          = xinput::VK::PadLThumbDown
+//#cpp2rust VK_PAD_LTHUMB_RIGHT         = xinput::VK::PadLThumbRight
+//#cpp2rust VK_PAD_LTHUMB_LEFT          = xinput::VK::PadLThumbLeft
+//#cpp2rust VK_PAD_LTHUMB_UPLEFT        = xinput::VK::PadLThumbUpLeft
+//#cpp2rust VK_PAD_LTHUMB_UPRIGHT       = xinput::VK::PadLThumbUpRight
+//#cpp2rust VK_PAD_LTHUMB_DOWNRIGHT     = xinput::VK::PadLThumbDownRight
+//#cpp2rust VK_PAD_LTHUMB_DOWNLEFT      = xinput::VK::PadLThumbDownLeft
+
+//#cpp2rust VK_PAD_RTHUMB_UP            = xinput::VK::PadRThumbUp
+//#cpp2rust VK_PAD_RTHUMB_DOWN          = xinput::VK::PadRThumbDown
+//#cpp2rust VK_PAD_RTHUMB_RIGHT         = xinput::VK::PadRThumbRight
+//#cpp2rust VK_PAD_RTHUMB_LEFT          = xinput::VK::PadRThumbLeft
+//#cpp2rust VK_PAD_RTHUMB_UPLEFT        = xinput::VK::PadRThumbUpLeft
+//#cpp2rust VK_PAD_RTHUMB_UPRIGHT       = xinput::VK::PadRThumbUpRight
+//#cpp2rust VK_PAD_RTHUMB_DOWNRIGHT     = xinput::VK::PadRThumbDownRight
+//#cpp2rust VK_PAD_RTHUMB_DOWNLEFT      = xinput::VK::PadRThumbDownLeft

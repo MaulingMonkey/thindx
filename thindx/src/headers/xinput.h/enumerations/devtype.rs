@@ -20,3 +20,5 @@ enumish! { DevType => u8; Gamepad }
     /// The device is a game controller.
     pub const GAMEPAD : DevType = DevType(XINPUT_DEVTYPE_GAMEPAD as _);
 }
+
+//#cpp2rust XINPUT_DEVTYPE_GAMEPAD = xinput::DevType::Gamepad

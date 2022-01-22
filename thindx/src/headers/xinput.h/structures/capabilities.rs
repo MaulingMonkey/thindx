@@ -43,3 +43,5 @@ test_layout! {
     let _caps = _caps.clone();
     dbg!(_caps);
 }
+
+//#cpp2rust XINPUT_CAPABILITIES         = xinput::Capabilities

@@ -59,3 +59,10 @@ flags! { Caps => u16; None, VoiceSupported, FfbSupported, Wireless, PmdSupported
     /// Device lacks menu navigation buttons (START, BACK, DPAD).
     pub const NO_NAVIGATION     : Caps = Caps(XINPUT_CAPS_NO_NAVIGATION);
 }
+
+
+//#cpp2rust XINPUT_CAPS_VOICE_SUPPORTED     = xinput::Caps::VoiceSupported
+//#cpp2rust XINPUT_CAPS_FFB_SUPPORTED       = xinput::Caps::FfbSupported
+//#cpp2rust XINPUT_CAPS_WIRELESS            = xinput::Caps::Wireless
+//#cpp2rust XINPUT_CAPS_PMD_SUPPORTED       = xinput::Caps::PmdSupported
+//#cpp2rust XINPUT_CAPS_NO_NAVIGATION       = xinput::Caps::NoNavigation

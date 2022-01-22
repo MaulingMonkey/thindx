@@ -37,3 +37,5 @@ pub fn get_state(user_index: impl Into<User>) -> Result<State, MethodError> {
     assert_eq!(ERROR::BAD_ARGUMENTS, get_state(User::from_unchecked(4)));
     assert_eq!(ERROR::BAD_ARGUMENTS, get_state(User::from_unchecked(254)));
 }
+
+//#cpp2rust XInputGetState      = xinput::get_state

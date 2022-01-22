@@ -42,3 +42,5 @@ pub fn get_battery_information(user_index: impl Into<User>, dev_type: impl Into<
     assert_eq!(ERROR::BAD_ARGUMENTS,        get_battery_information(User::from_unchecked(4),    BatteryDevType::Gamepad));
     assert_eq!(ERROR::DEVICE_NOT_CONNECTED, get_battery_information(User::Zero,                 BatteryDevType::from_unchecked(42)));
 }
+
+//#cpp2rust XInputGetBatteryInformation     = xinput::get_battery_information

@@ -69,3 +69,5 @@ pub fn get_audio_device_ids(user_index: impl Into<User>) -> Result<AudioDeviceId
     assert_eq!(ERROR::BAD_ARGUMENTS, get_audio_device_ids(User::from_unchecked(4))  );
     assert_eq!(ERROR::BAD_ARGUMENTS, get_audio_device_ids(User::Any)                );
 }
+
+//#cpp2rust XInputGetAudioDeviceIds     = xinput::get_audio_device_ids
