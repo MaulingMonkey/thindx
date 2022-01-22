@@ -44,7 +44,7 @@ checksum = "e2abad23fbc42b3700f2f279844dc832adb2b2eb069b2df918f455c4e18cc646"
 [[package]]
 name = "maulingmonkey-windows-sdk-scanner"
 version = "0.0.0-git"
-source = "git+https://github.com/MaulingMonkey/windows-sdk-scanner#9687a8b305a259b8217d264e1760607bdb4bd6f0"
+source = "git+https://github.com/MaulingMonkey/windows-sdk-scanner#d81e08e9df6a7fc7de2fea3a2a020717f1bddd68"
 dependencies = [
  "abibool",
  "abistr",

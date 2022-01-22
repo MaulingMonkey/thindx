@@ -37,8 +37,8 @@ pub fn update() {
 
         writeln!(rs, "//! # Headers")?;
         writeln!(rs, "//!")?;
-        writeln!(rs, "//! | C++ Header | Interfaces | Structs | Enums | Functions | Constants |")?;
-        writeln!(rs, "//! | ---------- | ---------- | ------- | ----- | --------- | --------- |")?;
+        writeln!(rs, "//! | C++ Header | Interfaces | Structs | Enums | Functions | Constants | Macros |")?;
+        writeln!(rs, "//! | ---------- | ---------- | ------- | ----- | --------- | --------- | ------ |")?;
         for header in headers.iter() {
             write!(rs, "//! |")?;
             write!(rs, " [{name}](#{id}h) |", name = header.name_h, id = header.name)?;
@@ -47,7 +47,8 @@ pub fn update() {
                 (header.structs    .iter().filter(|t| cpp2rust.get(t.id.as_str()).is_some()).count(),   header.structs      .len()),
                 (header.enums      .iter().filter(|t| cpp2rust.get(t.id.as_str()).is_some()).count(),   header.enums        .len()),
                 (header.functions  .iter().filter(|t| cpp2rust.get(t.id.as_str()).is_some()).count(),   header.functions    .len()),
-                (header.constants  .iter().filter(|t| cpp2rust.get(t.   as_str()).is_some()).count(),   header.constants    .len()),
+                (header.allconst   .iter().filter(|t| cpp2rust.get(t.   as_str()).is_some()).count(),   header.allconst     .len()),
+                (header.macros     .iter().filter(|t| cpp2rust.get(t.   as_str()).is_some()).count(),   header.macros       .len()),
                 // (header.classes    .iter().filter(|t| cpp2rust.get(t.id.as_str()).is_some()).count(),   header.classes      .len()),
                 // (header.unions     .iter().filter(|t| cpp2rust.get(t.id.as_str()).is_some()).count(),   header.unions       .len()),
             ].into_iter() {
@@ -64,6 +65,8 @@ pub fn update() {
             let structs     = header.structs    .iter().map(|t| (t, cpp2rust.get(t.id.as_str())));
             let enums       = header.enums      .iter().map(|t| (t, cpp2rust.get(t.id.as_str())));
             let functions   = header.functions  .iter().map(|t| (t, cpp2rust.get(t.id.as_str())));
+            let constants   = header.constants  .iter().map(|t| (t, cpp2rust.get(t.as_str())));
+            let macros      = header.macros     .iter().map(|t| (t, cpp2rust.get(t.as_str())));
             // let classes     = header.classes    .iter().map(|t| (t, cpp2rust.get(t.id.as_str())));
             // let unions      = header.unions     .iter().map(|t| (t, cpp2rust.get(t.id.as_str())));
 
@@ -137,6 +140,28 @@ pub fn update() {
                 writeln!(rs, " <br>")?;
             }
 
+            for (idx, (cpp, rust)) in constants.enumerate() {
+                if idx == 0 {
+                    writeln!(rs, "//! ### C++ Constants → Rust Constants")?;
+                    writeln!(rs, "//!")?;
+                }
+                write!(rs, "//! {}", CppLink(&cpp))?;
+                for (idx, rust) in rust.into_iter().flat_map(|p| p.iter()).enumerate() { write!(rs, "{}[`{}`]", if idx == 0 { "&nbsp;→ " } else { ", " }, rust)?; }
+                if rust.is_none() { write!(rs, " →&nbsp;❌")?; }
+                writeln!(rs, " <br>")?;
+            }
+
+            for (idx, (cpp, rust)) in macros.enumerate() {
+                if idx == 0 {
+                    writeln!(rs, "//! ### C++ Macros → Rust fns/macros")?;
+                    writeln!(rs, "//!")?;
+                }
+                write!(rs, "//! {}", CppLink(&cpp))?;
+                for (idx, rust) in rust.into_iter().flat_map(|p| p.iter()).enumerate() { write!(rs, "{}[`{}`]", if idx == 0 { "&nbsp;→ " } else { ", " }, rust)?; }
+                if rust.is_none() { write!(rs, " →&nbsp;❌")?; }
+                writeln!(rs, " <br>")?;
+            }
+
             // classes, unions
         }
 
@@ -154,7 +179,9 @@ struct Header<'cpp> {
     structs:    Vec<&'cpp cpp::Struct>,
     enums:      Vec<&'cpp cpp::Enum>,
     functions:  Vec<&'cpp cpp::Function>,
+    allconst:   Vec<String>,
     constants:  Vec<String>,
+    macros:     Vec<String>,
     // classes:    Vec<&'cpp cpp::Class>,
     // unions:     Vec<&'cpp cpp::Union>,
 }
@@ -163,14 +190,28 @@ impl<'cpp> Header<'cpp> {
         let ignore = &*CPP2IGNORE;
         let name_h = rel_path.rfind('\\').map_or(rel_path, |s| &rel_path[s+1..]);
         let name   = name_h.strip_suffix(".h").unwrap_or(name_h);
+
+        let enum_constants = cpp.enums
+            .values_by_key().filter(move |t| !ignore.contains(t.id.as_str()) && t.defined_at.iter().any(move |at| at.path.ends_with(rel_path)))
+            .flat_map(|e| e.values.keys().filter(|c| !c.ends_with("_FORCE_DWORD")).map(|c| if e.class { format!("{}::{}", e.id, c) } else { format!("{}", c) }));
+
+        let constants = cpp.constants
+            .values_by_key().filter(move |t| !ignore.contains(t.id.as_str()) && t.defined_at.iter().any(move |at| at.path.ends_with(rel_path)))
+            .map(|c| String::from(c.id.as_str()))
+            .filter(|c| !(c.starts_with("__") || c.ends_with("__"))) // header guards or other internal junk
+            .collect::<Vec<_>>();
+
+        let allconst = enum_constants.chain(constants.iter().cloned()).collect();
+
         Self {
             name_h, name,
             interfaces: cpp.interfaces  .values_by_key().filter(move |t| !ignore.contains(t.id.as_str()) && t.defined_at.iter().any(move |at| at.path.ends_with(rel_path))).collect(),
             structs:    cpp.structs     .values_by_key().filter(move |t| !ignore.contains(t.id.as_str()) && t.defined_at.iter().any(move |at| at.path.ends_with(rel_path))).collect(),
             enums:      cpp.enums       .values_by_key().filter(move |t| !ignore.contains(t.id.as_str()) && t.defined_at.iter().any(move |at| at.path.ends_with(rel_path))).collect(),
             functions:  cpp.functions   .values_by_key().filter(move |t| !ignore.contains(t.id.as_str()) && t.defined_at.iter().any(move |at| at.path.ends_with(rel_path))).collect(),
-            constants:  cpp.enums       .values_by_key().filter(move |t| !ignore.contains(t.id.as_str()) && t.defined_at.iter().any(move |at| at.path.ends_with(rel_path)))
-                .flat_map(|e| e.values.keys().filter(|c| !c.ends_with("_FORCE_DWORD")).map(|c| if e.class { format!("{}::{}", e.id, c) } else { format!("{}", c) })).collect()
+            macros:     cpp.macros      .values_by_key().filter(move |t| !ignore.contains(t.id.as_str()) && t.defined_at.iter().any(move |at| at.path.ends_with(rel_path))).map(|m| m.id.as_str().into()).collect(),
+            allconst,
+            constants,
             // classes:    cpp.classes     .values_by_key().filter(move |t| !ignore.contains(t.id.as_str()) && t.defined_at.iter().any(move |at| at.path.ends_with(rel_path))).collect(),
             // unions:     cpp.unions      .values_by_key().filter(move |t| !ignore.contains(t.id.as_str()) && t.defined_at.iter().any(move |at| at.path.ends_with(rel_path))).collect(),
         }
