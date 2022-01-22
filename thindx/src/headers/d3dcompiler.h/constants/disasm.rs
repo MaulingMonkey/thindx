@@ -5,7 +5,7 @@ use winapi::um::d3dcompiler::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3ddisassembleregion#parameters)\]
+/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3ddisassemble#parameters)\]
 /// UINT / D3D_DISASM_\*
 ///
 /// Flags controlling how [d3d::Compiler::disassemble_region] disassembles the compiled shader data.
@@ -45,6 +45,9 @@ flags! {
     ///
     /// [D3DDisassemble11Trace]:    https://docs.microsoft.com/en-us/windows/win32/api/d3d11shadertracing/nf-d3d11shadertracing-d3ddisassemble11trace
     pub const InstructionOnly                   : Disasm = Disasm(D3D_DISASM_INSTRUCTION_ONLY);
+
+    /// Use hex symbols in disassemblies.
+    pub const PrintHexLiterals                  : Disasm = Disasm(D3D_DISASM_PRINT_HEX_LITERALS);
 }
 
 #[doc(hidden)] impl Disasm { // Ctrl+C Ctrl+V support
@@ -73,6 +76,9 @@ flags! {
     ///
     /// [D3DDisassemble11Trace]:    https://docs.microsoft.com/en-us/windows/win32/api/d3d11shadertracing/nf-d3d11shadertracing-d3ddisassemble11trace
     pub const INSTRUCTION_ONLY                  : Disasm = Disasm(D3D_DISASM_INSTRUCTION_ONLY);
+
+    /// Use hex symbols in disassemblies.
+    pub const PRINT_HEX_LITERALS                : Disasm = Disasm(D3D_DISASM_PRINT_HEX_LITERALS);
 }
 
 impl Default for Disasm {
@@ -86,3 +92,4 @@ impl Default for Disasm {
 //#cpp2rust D3D_DISASM_DISABLE_DEBUG_INFO           = d3d::Disasm::DisableDebugInfo
 //#cpp2rust D3D_DISASM_ENABLE_INSTRUCTION_OFFSET    = d3d::Disasm::EnableInstructionOffset
 //#cpp2rust D3D_DISASM_INSTRUCTION_ONLY             = d3d::Disasm::InstructionOnly
+//#cpp2rust D3D_DISASM_PRINT_HEX_LITERALS           = d3d::Disasm::PrintHexLiterals

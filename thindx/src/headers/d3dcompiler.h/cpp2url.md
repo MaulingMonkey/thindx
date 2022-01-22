@@ -43,6 +43,6 @@
 [D3DCOMPILE_SECDATA_*]:                                             https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dcompile2#parameters                                <!-- UINT -->
 [D3DCOMPILE_*]:                                                     https://docs.microsoft.com/en-us/windows/win32/direct3dhlsl/d3dcompile-constants                                                    <!-- UINT -->
 [D3D_COMPRESS_SHADER_*]:                                            https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dcompressshaders#parameters                         <!-- UINT -->
-[D3D_DISASM_*]:                                                     https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3ddisassembleregion#parameters                       <!-- UINT -->
+[D3D_DISASM_*]:                                                     https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3ddisassemble#parameters                             <!-- UINT -->
 [D3D_GET_INST_OFFSETS_*]:                                           https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dgettraceinstructionoffsets#parameters              <!-- UINT -->
 [D3D_SHADER_REQUIRES_*]:                                            https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getrequiresflags#return-value  <!-- UINT64 -->

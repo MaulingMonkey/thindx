@@ -14,7 +14,7 @@
 //! | [guiddef.h](#guiddefh) |   | ✔️ 1 of 1 |   |   | ✔️ 7 of 7 | ⚠️ 5 of 7 |
 //! | [unknwn.h](#unknwnh) | ✔️ 1 of 1 |   |   |   |   |   |
 //! | [d3dcommon.h](#d3dcommonh) | ⚠️ 2 of 3 | ✔️ 1 of 1 | ✔️ 22 of 22 |   | ⚠️ 555 of 576 | ❌ 0 of 4 |
-//! | [d3dcompiler.h](#d3dcompilerh) |   | ✔️ 1 of 1 | ✔️ 2 of 2 |   | ⚠️ 59 of 71 |   |
+//! | [d3dcompiler.h](#d3dcompilerh) |   | ✔️ 1 of 1 | ✔️ 2 of 2 |   | ⚠️ 60 of 71 |   |
 //! | [d3d9.h](#d3d9h) | ⚠️ 20 of 24 |   |   | ⚠️ 2 of 9 | ⚠️ 26 of 73 | ❌ 0 of 3 |
 //! | [d3d9caps.h](#d3d9capsh) |   | ⚠️ 3 of 5 |   |   | ⚠️ 6 of 251 |   |
 //! | [d3d9types.h](#d3d9typesh) |   | ⚠️ 19 of 71 | ⚠️ 40 of 54 |   | ⚠️ 507 of 844 | ⚠️ 6 of 20 |
@@ -798,7 +798,7 @@
 //! `D3D_DISASM_ENABLE_INSTRUCTION_NUMBERING`&nbsp;→ [`d3d::Disasm::EnableInstructionNumbering`] <br>
 //! `D3D_DISASM_ENABLE_INSTRUCTION_OFFSET`&nbsp;→ [`d3d::Disasm::EnableInstructionOffset`] <br>
 //! `D3D_DISASM_INSTRUCTION_ONLY`&nbsp;→ [`d3d::Disasm::InstructionOnly`] <br>
-//! `D3D_DISASM_PRINT_HEX_LITERALS` →&nbsp;❌ <br>
+//! `D3D_DISASM_PRINT_HEX_LITERALS`&nbsp;→ [`d3d::Disasm::PrintHexLiterals`] <br>
 //! `D3D_GET_INST_OFFSETS_INCLUDE_NON_EXECUTABLE`&nbsp;→ [`d3d::GetInstOffsets::IncludeNonExecutable`] <br>
 //!
 //! <br>
