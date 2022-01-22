@@ -20,3 +20,10 @@ flags! { Caps3 => DWORD; None, AlphaFullscreenFlipOrDiscard, CopyToVidMem, CopyT
     #[doc(hidden)]
     pub const Reserved                      : Caps3 = Caps3(D3DCAPS3_RESERVED);
 }
+
+//#cpp2rust D3DCAPS3_ALPHA_FULLSCREEN_FLIP_OR_DISCARD   = d3d::Caps3::AlphaFullscreenFlipOrDiscard
+//#cpp2rust D3DCAPS3_COPY_TO_VIDMEM                     = d3d::Caps3::CopyToVidMem
+//#cpp2rust D3DCAPS3_COPY_TO_SYSTEMMEM                  = d3d::Caps3::CopyToSystemMem
+//#cpp2rust D3DCAPS3_DXVAHD                             = d3d::Caps3::DxvaHD
+//#cpp2rust D3DCAPS3_LINEAR_TO_SRGB_PRESENTATION        = d3d::Caps3::LinearToSrgbPresentation
+//#cpp2ignore D3DCAPS3_RESERVED

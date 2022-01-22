@@ -15,3 +15,6 @@ flags! { CursorCaps => DWORD; None, Color, LowRes }
     pub const Color                         : CursorCaps = CursorCaps(D3DCURSORCAPS_COLOR);
     pub const LowRes                        : CursorCaps = CursorCaps(D3DCURSORCAPS_LOWRES);
 }
+
+//#cpp2rust D3DCURSORCAPS_COLOR     = d3d::CursorCaps::Color
+//#cpp2rust D3DCURSORCAPS_LOWRES    = d3d::CursorCaps::LowRes

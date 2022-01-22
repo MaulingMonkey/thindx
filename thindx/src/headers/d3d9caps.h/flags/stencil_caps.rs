@@ -25,3 +25,13 @@ flags! {
     pub const Decr                          : StencilCaps = StencilCaps(D3DSTENCILCAPS_DECR);
     pub const TwoSided                      : StencilCaps = StencilCaps(D3DSTENCILCAPS_TWOSIDED);
 }
+
+//#cpp2rust D3DSTENCILCAPS_KEEP         = d3d::StencilCaps::Keep
+//#cpp2rust D3DSTENCILCAPS_ZERO         = d3d::StencilCaps::Zero
+//#cpp2rust D3DSTENCILCAPS_REPLACE      = d3d::StencilCaps::Replace
+//#cpp2rust D3DSTENCILCAPS_INCRSAT      = d3d::StencilCaps::IncrSat
+//#cpp2rust D3DSTENCILCAPS_DECRSAT      = d3d::StencilCaps::DecrSat
+//#cpp2rust D3DSTENCILCAPS_INVERT       = d3d::StencilCaps::Invert
+//#cpp2rust D3DSTENCILCAPS_INCR         = d3d::StencilCaps::Incr
+//#cpp2rust D3DSTENCILCAPS_DECR         = d3d::StencilCaps::Decr
+//#cpp2rust D3DSTENCILCAPS_TWOSIDED     = d3d::StencilCaps::TwoSided

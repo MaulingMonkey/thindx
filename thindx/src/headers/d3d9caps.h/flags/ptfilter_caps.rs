@@ -34,3 +34,17 @@ flags! {
     pub const MipFPoint                     : PTFilterCaps = PTFilterCaps(D3DPTFILTERCAPS_MIPFPOINT);
     pub const MipFLinear                    : PTFilterCaps = PTFilterCaps(D3DPTFILTERCAPS_MIPFLINEAR);
 }
+
+//#cpp2rust D3DPTFILTERCAPS_CONVOLUTIONMONO     = d3d::PTFilterCaps::ConvolutionMono
+//#cpp2rust D3DPTFILTERCAPS_MAGFPOINT           = d3d::PTFilterCaps::MagFPoint
+//#cpp2rust D3DPTFILTERCAPS_MAGFLINEAR          = d3d::PTFilterCaps::MagFLinear
+//#cpp2rust D3DPTFILTERCAPS_MAGFANISOTROPIC     = d3d::PTFilterCaps::MagFAnisotropic
+//#cpp2rust D3DPTFILTERCAPS_MAGFPYRAMIDALQUAD   = d3d::PTFilterCaps::MagFPyramidalQuad
+//#cpp2rust D3DPTFILTERCAPS_MAGFGAUSSIANQUAD    = d3d::PTFilterCaps::MagFGaussianQuad
+//#cpp2rust D3DPTFILTERCAPS_MINFPOINT           = d3d::PTFilterCaps::MinFPoint
+//#cpp2rust D3DPTFILTERCAPS_MINFLINEAR          = d3d::PTFilterCaps::MinFLinear
+//#cpp2rust D3DPTFILTERCAPS_MINFANISOTROPIC     = d3d::PTFilterCaps::MinFAnisotropic
+//#cpp2rust D3DPTFILTERCAPS_MINFPYRAMIDALQUAD   = d3d::PTFilterCaps::MinFPyramidalQuad
+//#cpp2rust D3DPTFILTERCAPS_MINFGAUSSIANQUAD    = d3d::PTFilterCaps::MinFGaussianQuad
+//#cpp2rust D3DPTFILTERCAPS_MIPFPOINT           = d3d::PTFilterCaps::MipFPoint
+//#cpp2rust D3DPTFILTERCAPS_MIPFLINEAR          = d3d::PTFilterCaps::MipFLinear

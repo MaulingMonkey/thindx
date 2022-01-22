@@ -19,3 +19,7 @@ flags! {
     pub const PSize                         : FvfCaps = FvfCaps(D3DFVFCAPS_PSIZE);
     pub const TexCoordCountMask             : FvfCaps = FvfCaps(D3DFVFCAPS_TEXCOORDCOUNTMASK);
 }
+
+//#cpp2rust D3DFVFCAPS_DONOTSTRIPELEMENTS       = d3d::FvfCaps::DoNotStripElements
+//#cpp2rust D3DFVFCAPS_PSIZE                    = d3d::FvfCaps::PSize
+//#cpp2rust D3DFVFCAPS_TEXCOORDCOUNTMASK        = d3d::FvfCaps::TexCoordCountMask

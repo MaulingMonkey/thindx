@@ -14,3 +14,5 @@ flags! { Vs20Caps => DWORD; None, Predication }
     pub const None                          : Vs20Caps = Vs20Caps(0);
     pub const Predication                   : Vs20Caps = Vs20Caps(D3DVS20CAPS_PREDICATION);
 }
+
+//#cpp2rust D3DVS20CAPS_PREDICATION = d3d::Vs20Caps::Predication

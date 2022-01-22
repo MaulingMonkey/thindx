@@ -29,3 +29,8 @@ flags! {
     pub const FogGouraud                    : PShadeCaps = PShadeCaps(D3DPSHADECAPS_FOGGOURAUD);
     pub const SpecularGouraudRgb            : PShadeCaps = PShadeCaps(D3DPSHADECAPS_SPECULARGOURAUDRGB);
 }
+
+//#cpp2rust D3DPSHADECAPS_ALPHAGOURAUDBLEND     = d3d::PShadeCaps::AlphaGouraudBlend
+//#cpp2rust D3DPSHADECAPS_COLORGOURAUDRGB       = d3d::PShadeCaps::ColorGouraudRgb
+//#cpp2rust D3DPSHADECAPS_FOGGOURAUD            = d3d::PShadeCaps::FogGouraud
+//#cpp2rust D3DPSHADECAPS_SPECULARGOURAUDRGB    = d3d::PShadeCaps::SpecularGouraudRgb

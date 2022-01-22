@@ -45,3 +45,30 @@ flags! {
     pub const SelectArg2                    : TexOpCaps = TexOpCaps(D3DTEXOPCAPS_SELECTARG2);
     pub const Subtract                      : TexOpCaps = TexOpCaps(D3DTEXOPCAPS_SUBTRACT);
 }
+
+//#cpp2rust D3DTEXOPCAPS_ADD                        = d3d::TexOpCaps::Add
+//#cpp2rust D3DTEXOPCAPS_ADDSIGNED                  = d3d::TexOpCaps::AddSigned
+//#cpp2rust D3DTEXOPCAPS_ADDSIGNED2X                = d3d::TexOpCaps::AddSigned2x
+//#cpp2rust D3DTEXOPCAPS_ADDSMOOTH                  = d3d::TexOpCaps::AddSmooth
+//#cpp2rust D3DTEXOPCAPS_BLENDCURRENTALPHA          = d3d::TexOpCaps::BlendCurrentAlpha
+//#cpp2rust D3DTEXOPCAPS_BLENDDIFFUSEALPHA          = d3d::TexOpCaps::BlendDiffuseAlpha
+//#cpp2rust D3DTEXOPCAPS_BLENDFACTORALPHA           = d3d::TexOpCaps::BlendFactorAlpha
+//#cpp2rust D3DTEXOPCAPS_BLENDTEXTUREALPHA          = d3d::TexOpCaps::BlendTextureAlpha
+//#cpp2rust D3DTEXOPCAPS_BLENDTEXTUREALPHAPM        = d3d::TexOpCaps::BlendTextureAlphaPM
+//#cpp2rust D3DTEXOPCAPS_BUMPENVMAP                 = d3d::TexOpCaps::BumpEnvMap
+//#cpp2rust D3DTEXOPCAPS_BUMPENVMAPLUMINANCE        = d3d::TexOpCaps::BumpEnvMapLuminance
+//#cpp2rust D3DTEXOPCAPS_DISABLE                    = d3d::TexOpCaps::Disable
+//#cpp2rust D3DTEXOPCAPS_DOTPRODUCT3                = d3d::TexOpCaps::DotProduct3
+//#cpp2rust D3DTEXOPCAPS_LERP                       = d3d::TexOpCaps::Lerp
+//#cpp2rust D3DTEXOPCAPS_MODULATE                   = d3d::TexOpCaps::Modulate
+//#cpp2rust D3DTEXOPCAPS_MODULATE2X                 = d3d::TexOpCaps::Modulate2x
+//#cpp2rust D3DTEXOPCAPS_MODULATE4X                 = d3d::TexOpCaps::Modulate4x
+//#cpp2rust D3DTEXOPCAPS_MODULATEALPHA_ADDCOLOR     = d3d::TexOpCaps::ModulateAlphaAddColor
+//#cpp2rust D3DTEXOPCAPS_MODULATECOLOR_ADDALPHA     = d3d::TexOpCaps::ModulateColorAddAlpha
+//#cpp2rust D3DTEXOPCAPS_MODULATEINVALPHA_ADDCOLOR  = d3d::TexOpCaps::ModulateInvAlphaAddColor
+//#cpp2rust D3DTEXOPCAPS_MODULATEINVCOLOR_ADDALPHA  = d3d::TexOpCaps::ModulateInvColorAddAlpha
+//#cpp2rust D3DTEXOPCAPS_MULTIPLYADD                = d3d::TexOpCaps::MultiplyAdd
+//#cpp2rust D3DTEXOPCAPS_PREMODULATE                = d3d::TexOpCaps::Premodulate
+//#cpp2rust D3DTEXOPCAPS_SELECTARG1                 = d3d::TexOpCaps::SelectArg1
+//#cpp2rust D3DTEXOPCAPS_SELECTARG2                 = d3d::TexOpCaps::SelectArg2
+//#cpp2rust D3DTEXOPCAPS_SUBTRACT                   = d3d::TexOpCaps::Subtract

@@ -33,3 +33,20 @@ flags! {
     pub const SrcColor2                     : PBlendCaps = PBlendCaps(D3DPBLENDCAPS_SRCCOLOR2);
     pub const Zero                          : PBlendCaps = PBlendCaps(D3DPBLENDCAPS_ZERO);
 }
+
+//#cpp2rust D3DPBLENDCAPS_BLENDFACTOR       = d3d::PBlendCaps::BlendFactor
+//#cpp2rust D3DPBLENDCAPS_BOTHINVSRCALPHA   = d3d::PBlendCaps::BothInvSrcAlpha
+//#cpp2rust D3DPBLENDCAPS_BOTHSRCALPHA      = d3d::PBlendCaps::BothSrcAlpha
+//#cpp2rust D3DPBLENDCAPS_DESTALPHA         = d3d::PBlendCaps::DestAlpha
+//#cpp2rust D3DPBLENDCAPS_DESTCOLOR         = d3d::PBlendCaps::DestColor
+//#cpp2rust D3DPBLENDCAPS_INVDESTALPHA      = d3d::PBlendCaps::InvDestAlpha
+//#cpp2rust D3DPBLENDCAPS_INVDESTCOLOR      = d3d::PBlendCaps::InvDestColor
+//#cpp2rust D3DPBLENDCAPS_INVSRCALPHA       = d3d::PBlendCaps::InvSrcAlpha
+//#cpp2rust D3DPBLENDCAPS_INVSRCCOLOR       = d3d::PBlendCaps::InvSrcColor
+//#cpp2rust D3DPBLENDCAPS_INVSRCCOLOR2      = d3d::PBlendCaps::InvSrcColor2
+//#cpp2rust D3DPBLENDCAPS_ONE               = d3d::PBlendCaps::One
+//#cpp2rust D3DPBLENDCAPS_SRCALPHA          = d3d::PBlendCaps::SrcAlpha
+//#cpp2rust D3DPBLENDCAPS_SRCALPHASAT       = d3d::PBlendCaps::SrcAlphaSat
+//#cpp2rust D3DPBLENDCAPS_SRCCOLOR          = d3d::PBlendCaps::SrcColor
+//#cpp2rust D3DPBLENDCAPS_SRCCOLOR2         = d3d::PBlendCaps::SrcColor2
+//#cpp2rust D3DPBLENDCAPS_ZERO              = d3d::PBlendCaps::Zero

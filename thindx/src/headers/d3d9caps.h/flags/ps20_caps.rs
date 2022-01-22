@@ -23,3 +23,9 @@ flags! { Ps20Caps => DWORD; None, ArbitrarySwizzle, GradientInstructions, Predic
     pub const NoDependentReadLimit          : Ps20Caps = Ps20Caps(D3DPS20CAPS_NODEPENDENTREADLIMIT);
     pub const NoTexInstructionLimit         : Ps20Caps = Ps20Caps(D3DPS20CAPS_NOTEXINSTRUCTIONLIMIT);
 }
+
+//#cpp2rust D3DPS20CAPS_ARBITRARYSWIZZLE        = d3d::Ps20Caps::ArbitrarySwizzle
+//#cpp2rust D3DPS20CAPS_GRADIENTINSTRUCTIONS    = d3d::Ps20Caps::GradientInstructions
+//#cpp2rust D3DPS20CAPS_PREDICATION             = d3d::Ps20Caps::Predication
+//#cpp2rust D3DPS20CAPS_NODEPENDENTREADLIMIT    = d3d::Ps20Caps::NoDependentReadLimit
+//#cpp2rust D3DPS20CAPS_NOTEXINSTRUCTIONLIMIT   = d3d::Ps20Caps::NoTexInstructionLimit

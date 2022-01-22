@@ -23,3 +23,10 @@ flags! {
     pub const MirrorOnce                    : PTAddressCaps = PTAddressCaps(D3DPTADDRESSCAPS_MIRRORONCE);
     pub const Wrap                          : PTAddressCaps = PTAddressCaps(D3DPTADDRESSCAPS_WRAP);
 }
+
+//#cpp2rust D3DPTADDRESSCAPS_BORDER         = d3d::PTAddressCaps::Border
+//#cpp2rust D3DPTADDRESSCAPS_CLAMP          = d3d::PTAddressCaps::Clamp
+//#cpp2rust D3DPTADDRESSCAPS_INDEPENDENTUV  = d3d::PTAddressCaps::IndependentUV
+//#cpp2rust D3DPTADDRESSCAPS_MIRROR         = d3d::PTAddressCaps::Mirror
+//#cpp2rust D3DPTADDRESSCAPS_MIRRORONCE     = d3d::PTAddressCaps::MirrorOnce
+//#cpp2rust D3DPTADDRESSCAPS_WRAP           = d3d::PTAddressCaps::Wrap

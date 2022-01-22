@@ -39,3 +39,24 @@ flags! {
     pub const TlVertexSystemMemory          : DevCaps = DevCaps(D3DDEVCAPS_TLVERTEXSYSTEMMEMORY);
     pub const TlVertexVideoMemory           : DevCaps = DevCaps(D3DDEVCAPS_TLVERTEXVIDEOMEMORY);
 }
+
+//#cpp2rust D3DDEVCAPS_CANBLTSYSTONONLOCAL      = d3d::DevCaps::CanBltSysToNonLocal
+//#cpp2rust D3DDEVCAPS_CANRENDERAFTERFLIP       = d3d::DevCaps::CanRenderAfterFlip
+//#cpp2rust D3DDEVCAPS_DRAWPRIMITIVES2          = d3d::DevCaps::DrawPrimitives2
+//#cpp2rust D3DDEVCAPS_DRAWPRIMITIVES2EX        = d3d::DevCaps::DrawPrimitives2Ex
+//#cpp2rust D3DDEVCAPS_DRAWPRIMTLVERTEX         = d3d::DevCaps::DrawPrimTlVertex
+//#cpp2rust D3DDEVCAPS_EXECUTESYSTEMMEMORY      = d3d::DevCaps::ExecuteSystemMemory
+//#cpp2rust D3DDEVCAPS_EXECUTEVIDEOMEMORY       = d3d::DevCaps::ExecuteVideoMemory
+//#cpp2rust D3DDEVCAPS_HWRASTERIZATION          = d3d::DevCaps::HwRasterization
+//#cpp2rust D3DDEVCAPS_HWTRANSFORMANDLIGHT      = d3d::DevCaps::HwTransformAndLight
+//#cpp2rust D3DDEVCAPS_NPATCHES                 = d3d::DevCaps::NPatches
+//#cpp2rust D3DDEVCAPS_PUREDEVICE               = d3d::DevCaps::PureDevice
+//#cpp2rust D3DDEVCAPS_QUINTICRTPATCHES         = d3d::DevCaps::QuinticRtPatches
+//#cpp2rust D3DDEVCAPS_RTPATCHES                = d3d::DevCaps::RtPatches
+//#cpp2rust D3DDEVCAPS_RTPATCHHANDLEZERO        = d3d::DevCaps::RtPatchHandleZero
+//#cpp2rust D3DDEVCAPS_SEPARATETEXTUREMEMORIES  = d3d::DevCaps::SeparateTextureMemories
+//#cpp2rust D3DDEVCAPS_TEXTURENONLOCALVIDMEM    = d3d::DevCaps::TextureNonLocalVidMem
+//#cpp2rust D3DDEVCAPS_TEXTURESYSTEMMEMORY      = d3d::DevCaps::TextureSystemMemory
+//#cpp2rust D3DDEVCAPS_TEXTUREVIDEOMEMORY       = d3d::DevCaps::TextureVideoMemory
+//#cpp2rust D3DDEVCAPS_TLVERTEXSYSTEMMEMORY     = d3d::DevCaps::TlVertexSystemMemory
+//#cpp2rust D3DDEVCAPS_TLVERTEXVIDEOMEMORY      = d3d::DevCaps::TlVertexVideoMemory

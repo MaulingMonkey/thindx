@@ -22,3 +22,10 @@ flags! {
     pub const Texture                       : LineCaps = LineCaps(D3DLINECAPS_TEXTURE);
     pub const ZTest                         : LineCaps = LineCaps(D3DLINECAPS_ZTEST);
 }
+
+//#cpp2rust D3DLINECAPS_ALPHACMP    = d3d::LineCaps::AlphaCmp
+//#cpp2rust D3DLINECAPS_ANTIALIAS   = d3d::LineCaps::AntiAlias
+//#cpp2rust D3DLINECAPS_BLEND       = d3d::LineCaps::Blend
+//#cpp2rust D3DLINECAPS_FOG         = d3d::LineCaps::Fog
+//#cpp2rust D3DLINECAPS_TEXTURE     = d3d::LineCaps::Texture
+//#cpp2rust D3DLINECAPS_ZTEST       = d3d::LineCaps::ZTest

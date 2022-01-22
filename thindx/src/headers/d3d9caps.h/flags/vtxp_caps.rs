@@ -24,3 +24,12 @@ flags! {
     pub const TexGenSphereMap               : VtxPCaps = VtxPCaps(D3DVTXPCAPS_TEXGEN_SPHEREMAP);
     pub const Tweening                      : VtxPCaps = VtxPCaps(D3DVTXPCAPS_TWEENING);
 }
+
+//#cpp2rust D3DVTXPCAPS_DIRECTIONALLIGHTS           = d3d::VtxPCaps::DirectionalLights
+//#cpp2rust D3DVTXPCAPS_LOCALVIEWER                 = d3d::VtxPCaps::LocalViewer
+//#cpp2rust D3DVTXPCAPS_MATERIALSOURCE7             = d3d::VtxPCaps::MaterialSource7
+//#cpp2rust D3DVTXPCAPS_NO_TEXGEN_NONLOCALVIEWER    = d3d::VtxPCaps::NoTexGenNonLocalViewer
+//#cpp2rust D3DVTXPCAPS_POSITIONALLIGHTS            = d3d::VtxPCaps::PositionalLights
+//#cpp2rust D3DVTXPCAPS_TEXGEN                      = d3d::VtxPCaps::TexGen
+//#cpp2rust D3DVTXPCAPS_TEXGEN_SPHEREMAP            = d3d::VtxPCaps::TexGenSphereMap
+//#cpp2rust D3DVTXPCAPS_TWEENING                    = d3d::VtxPCaps::Tweening

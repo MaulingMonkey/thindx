@@ -23,3 +23,11 @@ flags! {
     pub const StreamOffset                          : DevCaps2 = DevCaps2(D3DDEVCAPS2_STREAMOFFSET);
     pub const VertexElementsCanShareStreamOffset    : DevCaps2 = DevCaps2(D3DDEVCAPS2_VERTEXELEMENTSCANSHARESTREAMOFFSET);
 }
+
+//#cpp2rust D3DDEVCAPS2_ADAPTIVETESSRTPATCH                 = d3d::DevCaps2::AdaptiveTessRtPatch
+//#cpp2rust D3DDEVCAPS2_ADAPTIVETESSNPATCH                  = d3d::DevCaps2::AdaptiveTessNPatch
+//#cpp2rust D3DDEVCAPS2_CAN_STRETCHRECT_FROM_TEXTURES       = d3d::DevCaps2::CanStretchRectFromTextures
+//#cpp2rust D3DDEVCAPS2_DMAPNPATCH                          = d3d::DevCaps2::DMapNPatch
+//#cpp2rust D3DDEVCAPS2_PRESAMPLEDDMAPNPATCH                = d3d::DevCaps2::PresampledDMapNPatch
+//#cpp2rust D3DDEVCAPS2_STREAMOFFSET                        = d3d::DevCaps2::StreamOffset
+//#cpp2rust D3DDEVCAPS2_VERTEXELEMENTSCANSHARESTREAMOFFSET  = d3d::DevCaps2::VertexElementsCanShareStreamOffset

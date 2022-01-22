@@ -22,3 +22,7 @@ flags! { Caps1 => DWORD; None, ReadScanline, Overlay }
     pub const ReadScanline  : Caps1 = Caps1(D3DCAPS_READ_SCANLINE);
     pub const Overlay       : Caps1 = Caps1(D3DCAPS_OVERLAY);
 }
+
+//#cpp2rust D3DCAPS_READ_SCANLINE   = d3d::Caps::ReadScanline
+//#cpp2rust D3DCAPS_OVERLAY         = d3d::Caps::Overlay
+

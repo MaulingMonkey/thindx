@@ -36,3 +36,22 @@ flags! {
     pub const MrtPostPixelShaderBlending        : PMiscCaps = PMiscCaps(D3DPMISCCAPS_MRTPOSTPIXELSHADERBLENDING);
     pub const FogVertexClamped                  : PMiscCaps = PMiscCaps(D3DPMISCCAPS_FOGVERTEXCLAMPED);
 }
+
+//#cpp2rust D3DPMISCCAPS_MASKZ                              = d3d::PMiscCaps::MaskZ
+//#cpp2rust D3DPMISCCAPS_CULLNONE                           = d3d::PMiscCaps::CullNone
+//#cpp2rust D3DPMISCCAPS_CULLCW                             = d3d::PMiscCaps::CullCW
+//#cpp2rust D3DPMISCCAPS_CULLCCW                            = d3d::PMiscCaps::CullCCW
+//#cpp2rust D3DPMISCCAPS_COLORWRITEENABLE                   = d3d::PMiscCaps::ColorWriteEnable
+//#cpp2rust D3DPMISCCAPS_CLIPPLANESCALEDPOINTS              = d3d::PMiscCaps::ClipPlaneScaledPoints
+//#cpp2rust D3DPMISCCAPS_CLIPTLVERTS                        = d3d::PMiscCaps::ClipTlVerts
+//#cpp2rust D3DPMISCCAPS_TSSARGTEMP                         = d3d::PMiscCaps::TssArgTemp
+//#cpp2rust D3DPMISCCAPS_BLENDOP                            = d3d::PMiscCaps::BlendOp
+//#cpp2rust D3DPMISCCAPS_NULLREFERENCE                      = d3d::PMiscCaps::NullReference
+//#cpp2rust D3DPMISCCAPS_INDEPENDENTWRITEMASKS              = d3d::PMiscCaps::IndependentWriteMasks
+//#cpp2rust D3DPMISCCAPS_PERSTAGECONSTANT                   = d3d::PMiscCaps::PerStageConstant
+//#cpp2rust D3DPMISCCAPS_POSTBLENDSRGBCONVERT               = d3d::PMiscCaps::PostBlendSrgbConvert
+//#cpp2rust D3DPMISCCAPS_FOGANDSPECULARALPHA                = d3d::PMiscCaps::FogAndSpecularAlpha
+//#cpp2rust D3DPMISCCAPS_SEPARATEALPHABLEND                 = d3d::PMiscCaps::SeparateAlphaBlend
+//#cpp2rust D3DPMISCCAPS_MRTINDEPENDENTBITDEPTHS            = d3d::PMiscCaps::MrtIndependentBitDepths
+//#cpp2rust D3DPMISCCAPS_MRTPOSTPIXELSHADERBLENDING         = d3d::PMiscCaps::MrtPostPixelShaderBlending
+//#cpp2rust D3DPMISCCAPS_FOGVERTEXCLAMPED                   = d3d::PMiscCaps::FogVertexClamped

@@ -84,3 +84,34 @@ const D3DPRASTERCAPS_TRANSLUCENTSORTINDEPENDENT     : u32 = 0x00080000;
 //const D3DPRASTERCAPS_WFOG                         : u32 = 0x00100000;
 //const D3DPRASTERCAPS_ZFOG                         : u32 = 0x00200000;
 //#endif /* DIRECT3D_VERSION >= 0x0600 */
+
+
+
+//#cpp2rust D3DPRASTERCAPS_ANISOTROPY                   = d3d::PRasterCaps::Anisotropy
+//#cpp2rust D3DPRASTERCAPS_COLORPERSPECTIVE             = d3d::PRasterCaps::ColorPerspective
+//#cpp2rust D3DPRASTERCAPS_DITHER                       = d3d::PRasterCaps::Dither
+//#cpp2rust D3DPRASTERCAPS_DEPTHBIAS                    = d3d::PRasterCaps::DepthBias
+//#cpp2rust D3DPRASTERCAPS_FOGRANGE                     = d3d::PRasterCaps::FogRange
+//#cpp2rust D3DPRASTERCAPS_FOGTABLE                     = d3d::PRasterCaps::FogTable
+//#cpp2rust D3DPRASTERCAPS_FOGVERTEX                    = d3d::PRasterCaps::FogVertex
+//#cpp2rust D3DPRASTERCAPS_MIPMAPLODBIAS                = d3d::PRasterCaps::MipMapLodBias
+//#cpp2rust D3DPRASTERCAPS_MULTISAMPLE_TOGGLE           = d3d::PRasterCaps::MultisampleToggle
+//#cpp2rust D3DPRASTERCAPS_SCISSORTEST                  = d3d::PRasterCaps::ScissorTest
+//#cpp2rust D3DPRASTERCAPS_SLOPESCALEDEPTHBIAS          = d3d::PRasterCaps::SlopeScaleDepthBias
+//#cpp2rust D3DPRASTERCAPS_WBUFFER                      = d3d::PRasterCaps::WBuffer
+//#cpp2rust D3DPRASTERCAPS_WFOG                         = d3d::PRasterCaps::WFog
+//#cpp2rust D3DPRASTERCAPS_ZBUFFERLESSHSR               = d3d::PRasterCaps::ZBufferLessHSR
+//#cpp2rust D3DPRASTERCAPS_ZFOG                         = d3d::PRasterCaps::ZFog
+//#cpp2rust D3DPRASTERCAPS_ZTEST                        = d3d::PRasterCaps::ZTest
+
+//#cpp2rust D3DPRASTERCAPS_ROP2                         = d3d::PRasterCaps::Rop2
+//#cpp2rust D3DPRASTERCAPS_XOR                          = d3d::PRasterCaps::Xor
+//#cpp2rust D3DPRASTERCAPS_PAT                          = d3d::PRasterCaps::Pat
+//#cpp2rust D3DPRASTERCAPS_SUBPIXEL                     = d3d::PRasterCaps::SubPixel
+//#cpp2rust D3DPRASTERCAPS_SUBPIXELX                    = d3d::PRasterCaps::SubPixelX
+//#cpp2rust D3DPRASTERCAPS_STIPPLE                      = d3d::PRasterCaps::Stipple
+//#cpp2rust D3DPRASTERCAPS_ANTIALIASSORTDEPENDENT       = d3d::PRasterCaps::AntiAliasSortDependent
+//#cpp2rust D3DPRASTERCAPS_ANTIALIASSORTINDEPENDENT     = d3d::PRasterCaps::AntiAliasSortIndependent
+//#cpp2rust D3DPRASTERCAPS_ANTIALIASEDGES               = d3d::PRasterCaps::AntiAliasEdges
+//#cpp2rust D3DPRASTERCAPS_ZBIAS                        = d3d::PRasterCaps::ZBias
+//#cpp2rust D3DPRASTERCAPS_TRANSLUCENTSORTINDEPENDENT   = d3d::PRasterCaps::TranslucentSortIndependent

@@ -21,3 +21,12 @@ flags! { Caps2 => DWORD; None, CanAutoGenMipMap, CanCalibrateGamma, CanShareReso
     #[doc(hidden)]
     pub const Reserved          : Caps2 = Caps2(D3DCAPS2_RESERVED);
 }
+
+//#cpp2rust D3DCAPS2_CANAUTOGENMIPMAP       = d3d::Caps2::CanAutoGenMipMap
+//#cpp2rust D3DCAPS2_CANCALIBRATEGAMMA      = d3d::Caps2::CanCalibrateGamma
+//#cpp2rust D3DCAPS2_CANSHARERESOURCE       = d3d::Caps2::CanShareResource
+//#cpp2rust D3DCAPS2_CANMANAGERESOURCE      = d3d::Caps2::CanManageResource
+//#cpp2rust D3DCAPS2_DYNAMICTEXTURES        = d3d::Caps2::DynamicTextures
+//#cpp2rust D3DCAPS2_FULLSCREENGAMMA        = d3d::Caps2::FullScreenGamma
+//#cpp2ignore D3DCAPS2_RESERVED
+
