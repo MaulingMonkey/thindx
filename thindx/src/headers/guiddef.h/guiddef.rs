@@ -15,6 +15,23 @@ use std::hash::*;
 #[derive(Clone, Copy)]
 #[repr(transparent)] pub struct Guid(GUID);
 
+/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/wmformat/interface-identifiers)\]
+/// **I**interface **Id**entifier - used for uniquely identifiying COM interfaces
+pub type IID    = Guid;
+
+/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/com/com-class-objects-and-clsids)\]
+/// **Cl**as**s** **Id**entifier - used for uniquely identifying COM classes
+pub type ClsID  = Guid;
+
+/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/stg/format-identifiers)\]
+/// **F**or**m**a**t** **Id**entifier - used for tagging sections in e.g. structured storage property sets
+pub type FmtID  = Guid;
+
+impl Guid {
+    /// `{00000000-0000-0000-0000-000000000000}` - the "null" guid
+    pub const NULL : Self = Self(GUID { Data1: 0, Data2: 0, Data3: 0, Data4: [0, 0, 0, 0, 0, 0, 0, 0] });
+}
+
 unsafe impl Pod         for Guid {}
 unsafe impl Zeroable    for Guid {}
 impl Default            for Guid { fn default() -> Self { Self::zeroed() } }
@@ -52,3 +69,31 @@ impl Guid {
 #[test] fn test_display() {
     assert_eq!("{6B29FC40-CA47-1067-B31D-00DD010662DA}", Guid(GUID { Data1: 0x6B29FC40, Data2: 0xCA47, Data3: 0x1067, Data4: *b"\xB3\x1D\x00\xDD\x01\x06\x62\xDA" }).to_string());
 }
+
+//#cpp2rust GUID                = Guid
+//#cpp2rust IID                 = IID
+//#cpp2rust CLSID               = ClsID
+//#cpp2rust FMTID               = FmtID
+
+//#cpp2rust REFGUID             = &Guid
+//#cpp2rust REFIID              = &IID
+//#cpp2rust REFCLSID            = &ClsID
+//#cpp2rust REFFMTID            = &FmtID
+
+//#cpp2rust GUID_NULL           = Guid::NULL
+//#cpp2rust IID_NULL            = IID::NULL
+//#cpp2rust CLSID_NULL          = ClsID::NULL
+//#cpp2rust FMTID_NULL          = FmtID::NULL
+
+//#cpp2rust InlineIsEqualGUID   = Guid::eq
+//#cpp2rust IsEqualCLSID        = ClsID::eq
+//#cpp2rust IsEqualFMTID        = FmtID::eq
+//#cpp2rust IsEqualGUID         = Guid::eq
+//#cpp2rust IsEqualIID          = IID::eq
+
+// ABI/linker cruft
+//#cpp2ignore EXTERN_C
+//#cpp2ignore DECLSPEC_SELECTANY
+
+// 16-bit Windows cruft
+//#cpp2ignore FAR

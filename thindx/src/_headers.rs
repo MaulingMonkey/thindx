@@ -11,7 +11,7 @@
 //!
 //! | C++ Header | Interfaces | Structs | Enums | Functions | Constants | Macros |
 //! | ---------- | ---------- | ------- | ----- | --------- | --------- | ------ |
-//! | [guiddef.h](#guiddefh) |   | ✔️ 1 of 1 |   |   | ❌ 0 of 10 | ❌ 0 of 7 |
+//! | [guiddef.h](#guiddefh) |   | ✔️ 1 of 1 |   |   | ✔️ 7 of 7 | ⚠️ 5 of 7 |
 //! | [unknwn.h](#unknwnh) | ✔️ 1 of 1 |   |   |   |   |   |
 //! | [d3dcommon.h](#d3dcommonh) | ⚠️ 2 of 3 | ✔️ 1 of 1 | ✔️ 22 of 22 |   | ⚠️ 555 of 576 | ❌ 0 of 4 |
 //! | [d3dcompiler.h](#d3dcompilerh) |   | ✔️ 1 of 1 | ✔️ 2 of 2 |   | ⚠️ 23 of 71 |   |
@@ -33,25 +33,22 @@
 //! [`GUID`](https://docs.microsoft.com/en-us/windows/win32/api/guiddef/ns-guiddef-guid)&nbsp;→ [`Guid`] <br>
 //! ### C++ Constants → Rust Constants
 //!
-//! `CLSID_NULL` →&nbsp;❌ <br>
-//! `DECLSPEC_SELECTANY` →&nbsp;❌ <br>
-//! `EXTERN_C` →&nbsp;❌ <br>
-//! `FAR` →&nbsp;❌ <br>
-//! `FMTID_NULL` →&nbsp;❌ <br>
-//! `IID_NULL` →&nbsp;❌ <br>
-//! `REFCLSID` →&nbsp;❌ <br>
-//! `REFFMTID` →&nbsp;❌ <br>
-//! `REFGUID` →&nbsp;❌ <br>
-//! `REFIID` →&nbsp;❌ <br>
+//! `CLSID_NULL`&nbsp;→ [`ClsID::NULL`] <br>
+//! `FMTID_NULL`&nbsp;→ [`FmtID::NULL`] <br>
+//! `IID_NULL`&nbsp;→ [`IID::NULL`] <br>
+//! `REFCLSID`&nbsp;→ <code>&[ClsID](ClsID)</code> <br>
+//! `REFFMTID`&nbsp;→ <code>&[FmtID](FmtID)</code> <br>
+//! `REFGUID`&nbsp;→ <code>&[Guid](Guid)</code> <br>
+//! `REFIID`&nbsp;→ <code>&[IID](IID)</code> <br>
 //! ### C++ Macros → Rust fns/macros
 //!
 //! `DEFINE_GUID` →&nbsp;❌ <br>
 //! `DEFINE_OLEGUID` →&nbsp;❌ <br>
-//! `InlineIsEqualGUID` →&nbsp;❌ <br>
-//! `IsEqualCLSID` →&nbsp;❌ <br>
-//! `IsEqualFMTID` →&nbsp;❌ <br>
-//! `IsEqualGUID` →&nbsp;❌ <br>
-//! `IsEqualIID` →&nbsp;❌ <br>
+//! `InlineIsEqualGUID`&nbsp;→ [`Guid::eq`] <br>
+//! `IsEqualCLSID`&nbsp;→ [`ClsID::eq`] <br>
+//! `IsEqualFMTID`&nbsp;→ [`FmtID::eq`] <br>
+//! `IsEqualGUID`&nbsp;→ [`Guid::eq`] <br>
+//! `IsEqualIID`&nbsp;→ [`IID::eq`] <br>
 //!
 //! <br>
 //!

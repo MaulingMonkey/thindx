@@ -82,14 +82,14 @@ pub fn update() {
                     writeln!(rs, "//!")?;
                 }
                 write!(rs, "//! {}", CppLink(&cpp.id))?;
-                for (idx, rust) in rust.into_iter().flat_map(|p| p.iter()).enumerate() { write!(rs, "{}[`{}`]", if idx == 0 { "&nbsp;→ " } else { ", " }, rust)?; }
+                for (idx, rust) in rust.into_iter().flat_map(|p| p.iter()).enumerate() { write!(rs, "{}{}", if idx == 0 { "&nbsp;→ " } else { ", " }, RustLink(rust))?; }
                 if rust.is_none() { write!(rs, " →&nbsp;❌")?; }
                 writeln!(rs, " <br>")?;
                 for method in cpp.methods() {
                     let cpp     = format!("{}::{}", method.ty, method.f.id);
                     let rust    = cpp2rust.get(&*cpp);
                     write!(rs, "//! * {}", CppLink(&cpp))?;
-                    for (idx, rust) in rust.into_iter().flat_map(|p| p.iter()).enumerate() { write!(rs, "{}[`{}`]", if idx == 0 { "&nbsp;→ " } else { ", " }, rust)?; }
+                    for (idx, rust) in rust.into_iter().flat_map(|p| p.iter()).enumerate() { write!(rs, "{}{}", if idx == 0 { "&nbsp;→ " } else { ", " }, RustLink(rust))?; }
                     if rust.is_none() { write!(rs, " →&nbsp;❌")?; }
                     writeln!(rs, " <br>")?;
                 }
@@ -102,7 +102,7 @@ pub fn update() {
                     writeln!(rs, "//!")?;
                 }
                 write!(rs, "//! {}", CppLink(&cpp.id))?;
-                for (idx, rust) in rust.into_iter().flat_map(|p| p.iter()).enumerate() { write!(rs, "{}[`{}`]", if idx == 0 { "&nbsp;→ " } else { ", " }, rust)?; }
+                for (idx, rust) in rust.into_iter().flat_map(|p| p.iter()).enumerate() { write!(rs, "{}{}", if idx == 0 { "&nbsp;→ " } else { ", " }, RustLink(rust))?; }
                 if rust.is_none() { write!(rs, " →&nbsp;❌")?; }
                 writeln!(rs, " <br>")?;
             }
@@ -113,7 +113,7 @@ pub fn update() {
                     writeln!(rs, "//!")?;
                 }
                 write!(rs, "//! {}", CppLink(&cpp.id))?;
-                for (idx, rust) in rust.into_iter().flat_map(|p| p.iter()).enumerate() { write!(rs, "{}[`{}`]", if idx == 0 { "&nbsp;→ " } else { ", " }, rust)?; }
+                for (idx, rust) in rust.into_iter().flat_map(|p| p.iter()).enumerate() { write!(rs, "{}{}", if idx == 0 { "&nbsp;→ " } else { ", " }, RustLink(rust))?; }
                 if rust.is_none() { write!(rs, " →&nbsp;❌")?; }
                 writeln!(rs, " <br>")?;
                 for constant in cpp.values.keys() {
@@ -122,7 +122,7 @@ pub fn update() {
                     if cpp.ends_with("_FORCE_DWORD") { continue }
                     let rust    = cpp2rust.get(&*cpp);
                     write!(rs, "//! * {}", CppLink(&cpp))?;
-                    for (idx, rust) in rust.into_iter().flat_map(|p| p.iter()).enumerate() { write!(rs, "{}[`{}`]", if idx == 0 { "&nbsp;→ " } else { ", " }, rust)?; }
+                    for (idx, rust) in rust.into_iter().flat_map(|p| p.iter()).enumerate() { write!(rs, "{}{}", if idx == 0 { "&nbsp;→ " } else { ", " }, RustLink(rust))?; }
                     if rust.is_none() { write!(rs, " →&nbsp;❌")?; }
                     writeln!(rs, " <br>")?;
                 }
@@ -135,7 +135,7 @@ pub fn update() {
                     writeln!(rs, "//!")?;
                 }
                 write!(rs, "//! {}", CppLink(&cpp.id))?;
-                for (idx, rust) in rust.into_iter().flat_map(|p| p.iter()).enumerate() { write!(rs, "{}[`{}`]", if idx == 0 { "&nbsp;→ " } else { ", " }, rust)?; }
+                for (idx, rust) in rust.into_iter().flat_map(|p| p.iter()).enumerate() { write!(rs, "{}{}", if idx == 0 { "&nbsp;→ " } else { ", " }, RustLink(rust))?; }
                 if rust.is_none() { write!(rs, " →&nbsp;❌")?; }
                 writeln!(rs, " <br>")?;
             }
@@ -146,7 +146,7 @@ pub fn update() {
                     writeln!(rs, "//!")?;
                 }
                 write!(rs, "//! {}", CppLink(&cpp))?;
-                for (idx, rust) in rust.into_iter().flat_map(|p| p.iter()).enumerate() { write!(rs, "{}[`{}`]", if idx == 0 { "&nbsp;→ " } else { ", " }, rust)?; }
+                for (idx, rust) in rust.into_iter().flat_map(|p| p.iter()).enumerate() { write!(rs, "{}{}", if idx == 0 { "&nbsp;→ " } else { ", " }, RustLink(rust))?; }
                 if rust.is_none() { write!(rs, " →&nbsp;❌")?; }
                 writeln!(rs, " <br>")?;
             }
@@ -157,7 +157,7 @@ pub fn update() {
                     writeln!(rs, "//!")?;
                 }
                 write!(rs, "//! {}", CppLink(&cpp))?;
-                for (idx, rust) in rust.into_iter().flat_map(|p| p.iter()).enumerate() { write!(rs, "{}[`{}`]", if idx == 0 { "&nbsp;→ " } else { ", " }, rust)?; }
+                for (idx, rust) in rust.into_iter().flat_map(|p| p.iter()).enumerate() { write!(rs, "{}{}", if idx == 0 { "&nbsp;→ " } else { ", " }, RustLink(rust))?; }
                 if rust.is_none() { write!(rs, " →&nbsp;❌")?; }
                 writeln!(rs, " <br>")?;
             }
@@ -255,6 +255,29 @@ impl Display for CppLink<'_> {
         match CPP2URL.get(self.0) {
             Some(url)   => write!(fmt, "[`{}`]({})", self.0, url[0]),
             None        => write!(fmt, "`{}`", self.0),
+        }
+    }
+}
+
+
+
+/// Markdownify a Rust identifier into a (possibly hyperlinked) code block
+struct RustLink<'s>(&'s str);
+
+impl Display for RustLink<'_> {
+    fn fmt(&self, fmt: &mut Formatter) -> fmt::Result {
+        let link = self.0;
+        let link = link.strip_prefix("&mut ").unwrap_or(link).trim_start();
+        let link = link.strip_prefix("&").unwrap_or(link);
+        if link.len() < self.0.len() {
+            let start = link.as_bytes().as_ptr() as usize - self.0.as_bytes().as_ptr() as usize;
+            let end = start + link.len();
+            let pre  = &self.0[..start];
+            let mid  = &self.0[start..end];
+            let post = &self.0[end..];
+            write!(fmt, "<code>{pre}[{mid}]{post}({link})</code>")
+        } else {
+            write!(fmt, "[`{}`]", self.0)
         }
     }
 }
