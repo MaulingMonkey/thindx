@@ -41,3 +41,30 @@ enumish! { ReturnType => D3D_RESOURCE_RETURN_TYPE; UNorm, SNorm, SInt, UInt, Flo
 impl Default for ReturnType {
     fn default() -> Self { ReturnType(0) }
 }
+
+//#cpp2rust D3D_RESOURCE_RETURN_TYPE    = d3d::ResourceReturnType
+
+//#cpp2rust D3D_RETURN_TYPE_UNORM       = d3d::ReturnType::UNorm
+//#cpp2rust D3D_RETURN_TYPE_SNORM       = d3d::ReturnType::SNorm
+//#cpp2rust D3D_RETURN_TYPE_SINT        = d3d::ReturnType::SInt
+//#cpp2rust D3D_RETURN_TYPE_UINT        = d3d::ReturnType::UInt
+//#cpp2rust D3D_RETURN_TYPE_FLOAT       = d3d::ReturnType::Float
+//#cpp2rust D3D_RETURN_TYPE_MIXED       = d3d::ReturnType::Mixed
+//#cpp2rust D3D_RETURN_TYPE_DOUBLE      = d3d::ReturnType::Double
+//#cpp2rust D3D_RETURN_TYPE_CONTINUED   = d3d::ReturnType::Continued
+
+//#cpp2rust D3D10_RETURN_TYPE_UNORM     = d3d::ReturnType::UNorm
+//#cpp2rust D3D10_RETURN_TYPE_SNORM     = d3d::ReturnType::SNorm
+//#cpp2rust D3D10_RETURN_TYPE_SINT      = d3d::ReturnType::SInt
+//#cpp2rust D3D10_RETURN_TYPE_UINT      = d3d::ReturnType::UInt
+//#cpp2rust D3D10_RETURN_TYPE_FLOAT     = d3d::ReturnType::Float
+//#cpp2rust D3D10_RETURN_TYPE_MIXED     = d3d::ReturnType::Mixed
+
+//#cpp2rust D3D11_RETURN_TYPE_UNORM     = d3d::ReturnType::UNorm
+//#cpp2rust D3D11_RETURN_TYPE_SNORM     = d3d::ReturnType::SNorm
+//#cpp2rust D3D11_RETURN_TYPE_SINT      = d3d::ReturnType::SInt
+//#cpp2rust D3D11_RETURN_TYPE_UINT      = d3d::ReturnType::UInt
+//#cpp2rust D3D11_RETURN_TYPE_FLOAT     = d3d::ReturnType::Float
+//#cpp2rust D3D11_RETURN_TYPE_MIXED     = d3d::ReturnType::Mixed
+//#cpp2rust D3D11_RETURN_TYPE_DOUBLE    = d3d::ReturnType::Double
+//#cpp2rust D3D11_RETURN_TYPE_CONTINUED = d3d::ReturnType::Continued

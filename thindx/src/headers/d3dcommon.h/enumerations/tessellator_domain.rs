@@ -31,3 +31,15 @@ enumish! { TessellatorDomain => D3D_TESSELLATOR_DOMAIN; Undefined, IsoLine, Tri,
 impl Default for TessellatorDomain {
     fn default() -> Self { TessellatorDomain(0) }
 }
+
+//#cpp2rust D3D_TESSELLATOR_DOMAIN              = d3d::TessellatorDomain
+
+//#cpp2rust D3D_TESSELLATOR_DOMAIN_UNDEFINED    = d3d::TessellatorDomain::Undefined
+//#cpp2rust D3D_TESSELLATOR_DOMAIN_ISOLINE      = d3d::TessellatorDomain::IsoLine
+//#cpp2rust D3D_TESSELLATOR_DOMAIN_TRI          = d3d::TessellatorDomain::Tri
+//#cpp2rust D3D_TESSELLATOR_DOMAIN_QUAD         = d3d::TessellatorDomain::Quad
+
+//#cpp2rust D3D11_TESSELLATOR_DOMAIN_UNDEFINED  = d3d::TessellatorDomain::Undefined
+//#cpp2rust D3D11_TESSELLATOR_DOMAIN_ISOLINE    = d3d::TessellatorDomain::IsoLine
+//#cpp2rust D3D11_TESSELLATOR_DOMAIN_TRI        = d3d::TessellatorDomain::Tri
+//#cpp2rust D3D11_TESSELLATOR_DOMAIN_QUAD       = d3d::TessellatorDomain::Quad

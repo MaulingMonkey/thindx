@@ -193,3 +193,35 @@ impl Debug for BytesBlob { fn fmt(&self, fmt: &mut Formatter) -> fmt::Result { w
 impl Deref for BytesBlob { fn deref(&self) -> &[u8] { self.as_bytes() } type Target = [u8]; }
 impl From<Option<ReadOnlyBlob>> for BytesBlob { fn from(value: Option<ReadOnlyBlob>) -> Self { Self(     value ) } }
 impl From<       ReadOnlyBlob > for BytesBlob { fn from(value:        ReadOnlyBlob ) -> Self { Self(Some(value)) } }
+
+
+
+//#cpp2rust ID3D10Blob  = d3d::BytesBlob
+//#cpp2rust ID3D10Blob  = d3d::CodeBlob
+//#cpp2rust ID3D10Blob  = d3d::ReadOnlyBlob
+//#cpp2rust ID3D10Blob  = d3d::TextBlob
+
+//#cpp2rust ID3DBlob    = d3d::BytesBlob
+//#cpp2rust ID3DBlob    = d3d::CodeBlob
+//#cpp2rust ID3DBlob    = d3d::ReadOnlyBlob
+//#cpp2rust ID3DBlob    = d3d::TextBlob
+
+//#cpp2rust ID3D10Blob::GetBufferPointer            = d3d::BytesBlob::as_bytes
+//#cpp2rust ID3DBlob::GetBufferPointer              = d3d::BytesBlob::as_bytes
+//#cpp2rust ID3D10Blob::GetBufferPointer            = d3d::CodeBlob::as_bytes
+//#cpp2rust ID3DBlob::GetBufferPointer              = d3d::CodeBlob::as_bytes
+//#cpp2rust ID3D10Blob::GetBufferPointer            = d3d::CodeBlob::as_bytecode
+//#cpp2rust ID3DBlob::GetBufferPointer              = d3d::CodeBlob::as_bytecode
+//#cpp2rust ID3D10Blob::GetBufferPointer            = d3d::ReadOnlyBlob::get_buffer
+//#cpp2rust ID3DBlob::GetBufferPointer              = d3d::ReadOnlyBlob::get_buffer
+//#cpp2rust ID3D10Blob::GetBufferPointer            = d3d::TextBlob::to_utf8
+//#cpp2rust ID3DBlob::GetBufferPointer              = d3d::TextBlob::to_utf8
+//#cpp2rust ID3D10Blob::GetBufferPointer            = d3d::TextBlob::to_utf8_lossy
+//#cpp2rust ID3DBlob::GetBufferPointer              = d3d::TextBlob::to_utf8_lossy
+
+//#cpp2rust ID3D10Blob::GetBufferSize               = d3d::BytesBlob::len
+//#cpp2rust ID3DBlob::GetBufferSize                 = d3d::BytesBlob::len
+//#cpp2rust ID3D10Blob::GetBufferSize               = d3d::CodeBlob::len
+//#cpp2rust ID3DBlob::GetBufferSize                 = d3d::CodeBlob::len
+//#cpp2rust ID3D10Blob::GetBufferSize               = d3d::ReadOnlyBlob::get_buffer_size
+//#cpp2rust ID3DBlob::GetBufferSize                 = d3d::ReadOnlyBlob::get_buffer_size

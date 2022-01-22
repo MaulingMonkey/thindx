@@ -34,3 +34,17 @@ enumish! { TessellatorOutput => D3D_TESSELLATOR_OUTPUT_PRIMITIVE; Undefined, Poi
 impl Default for TessellatorOutput {
     fn default() -> Self { TessellatorOutput(0) }
 }
+
+//#cpp2rust D3D_TESSELLATOR_OUTPUT_PRIMITIVE        = d3d::TessellatorOutputPrimitive
+
+//#cpp2rust D3D_TESSELLATOR_OUTPUT_UNDEFINED        = d3d::TessellatorOutput::Undefined
+//#cpp2rust D3D_TESSELLATOR_OUTPUT_POINT            = d3d::TessellatorOutput::Point
+//#cpp2rust D3D_TESSELLATOR_OUTPUT_LINE             = d3d::TessellatorOutput::Line
+//#cpp2rust D3D_TESSELLATOR_OUTPUT_TRIANGLE_CW      = d3d::TessellatorOutput::TriangleCW
+//#cpp2rust D3D_TESSELLATOR_OUTPUT_TRIANGLE_CCW     = d3d::TessellatorOutput::TriangleCCW
+
+//#cpp2rust D3D11_TESSELLATOR_OUTPUT_UNDEFINED      = d3d::TessellatorOutput::Undefined
+//#cpp2rust D3D11_TESSELLATOR_OUTPUT_POINT          = d3d::TessellatorOutput::Point
+//#cpp2rust D3D11_TESSELLATOR_OUTPUT_LINE           = d3d::TessellatorOutput::Line
+//#cpp2rust D3D11_TESSELLATOR_OUTPUT_TRIANGLE_CW    = d3d::TessellatorOutput::TriangleCW
+//#cpp2rust D3D11_TESSELLATOR_OUTPUT_TRIANGLE_CCW   = d3d::TessellatorOutput::TriangleCCW

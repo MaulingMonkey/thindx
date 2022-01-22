@@ -37,3 +37,6 @@ pub struct StandardFileInclude;
 unsafe impl AsInclude for StandardFileInclude {
     fn as_id3dinclude(&self) -> *mut ID3DInclude { D3D_COMPILE_STANDARD_FILE_INCLUDE }
 }
+
+//#cpp2rust ID3DInclude                         = d3d::AsInclude
+//#cpp2rust D3D_COMPILE_STANDARD_FILE_INCLUDE   = d3d::StandardFileInclude

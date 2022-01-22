@@ -32,3 +32,15 @@ enumish! { RegisterComponent => D3D_REGISTER_COMPONENT_TYPE; Unknown, UInt32, SI
 impl Default for RegisterComponent {
     fn default() -> Self { RegisterComponent(0) }
 }
+
+//#cpp2rust D3D_REGISTER_COMPONENT_TYPE         = d3d::RegisterComponentType
+
+//#cpp2rust D3D_REGISTER_COMPONENT_UNKNOWN      = d3d::RegisterComponent::Unknown
+//#cpp2rust D3D_REGISTER_COMPONENT_UINT32       = d3d::RegisterComponent::UInt32
+//#cpp2rust D3D_REGISTER_COMPONENT_SINT32       = d3d::RegisterComponent::SInt32
+//#cpp2rust D3D_REGISTER_COMPONENT_FLOAT32      = d3d::RegisterComponent::Float32
+
+//#cpp2rust D3D10_REGISTER_COMPONENT_UNKNOWN    = d3d::RegisterComponent::Unknown
+//#cpp2rust D3D10_REGISTER_COMPONENT_UINT32     = d3d::RegisterComponent::UInt32
+//#cpp2rust D3D10_REGISTER_COMPONENT_SINT32     = d3d::RegisterComponent::SInt32
+//#cpp2rust D3D10_REGISTER_COMPONENT_FLOAT32    = d3d::RegisterComponent::Float32

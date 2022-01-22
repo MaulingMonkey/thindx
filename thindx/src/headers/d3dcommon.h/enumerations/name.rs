@@ -93,3 +93,63 @@ enumish! {
 impl Default for Name {
     fn default() -> Self { Name::Undefined }
 }
+
+//#cpp2rust D3D_NAME                                    = d3d::Name
+//#cpp2rust D3D_NAME_UNDEFINED                          = d3d::Name::Undefined
+//#cpp2rust D3D_NAME_POSITION                           = d3d::Name::Position
+//#cpp2rust D3D_NAME_CLIP_DISTANCE                      = d3d::Name::ClipDistance
+//#cpp2rust D3D_NAME_CULL_DISTANCE                      = d3d::Name::CullDistance
+//#cpp2rust D3D_NAME_RENDER_TARGET_ARRAY_INDEX          = d3d::Name::RenderTargetArrayIndex
+//#cpp2rust D3D_NAME_VIEWPORT_ARRAY_INDEX               = d3d::Name::ViewportArrayIndex
+//#cpp2rust D3D_NAME_VERTEX_ID                          = d3d::Name::VertexId
+//#cpp2rust D3D_NAME_PRIMITIVE_ID                       = d3d::Name::PrimitiveId
+//#cpp2rust D3D_NAME_INSTANCE_ID                        = d3d::Name::InstanceId
+//#cpp2rust D3D_NAME_IS_FRONT_FACE                      = d3d::Name::IsFrontFace
+//#cpp2rust D3D_NAME_SAMPLE_INDEX                       = d3d::Name::SampleIndex
+//#cpp2rust D3D_NAME_FINAL_QUAD_EDGE_TESSFACTOR         = d3d::Name::FinalQuadEdgeTessFactor
+//#cpp2rust D3D_NAME_FINAL_QUAD_INSIDE_TESSFACTOR       = d3d::Name::FinalQuadInsideTessFactor
+//#cpp2rust D3D_NAME_FINAL_TRI_EDGE_TESSFACTOR          = d3d::Name::FinalTriEdgeTessFactor
+//#cpp2rust D3D_NAME_FINAL_TRI_INSIDE_TESSFACTOR        = d3d::Name::FinalTriInsideTessFactor
+//#cpp2rust D3D_NAME_FINAL_LINE_DETAIL_TESSFACTOR       = d3d::Name::FinalLineDetailTessFactor
+//#cpp2rust D3D_NAME_FINAL_LINE_DENSITY_TESSFACTOR      = d3d::Name::FinalLineDensityTessFactor
+//#cpp2rust D3D_NAME_BARYCENTRICS                       = d3d::Name::Barycentrics
+//#cpp2rust D3D_NAME_SHADINGRATE                        = d3d::Name::ShadingRate
+//#cpp2rust D3D_NAME_CULLPRIMITIVE                      = d3d::Name::CullPrimitive
+//#cpp2rust D3D_NAME_TARGET                             = d3d::Name::Target
+//#cpp2rust D3D_NAME_DEPTH                              = d3d::Name::Depth
+//#cpp2rust D3D_NAME_COVERAGE                           = d3d::Name::Coverage
+//#cpp2rust D3D_NAME_DEPTH_GREATER_EQUAL                = d3d::Name::DepthGreaterEqual
+//#cpp2rust D3D_NAME_DEPTH_LESS_EQUAL                   = d3d::Name::DepthLessEqual
+//#cpp2rust D3D_NAME_STENCIL_REF                        = d3d::Name::StencilRef
+//#cpp2rust D3D_NAME_INNER_COVERAGE                     = d3d::Name::InnerCoverage
+
+//#cpp2rust D3D10_NAME_UNDEFINED                        = d3d::Name::Undefined
+//#cpp2rust D3D10_NAME_POSITION                         = d3d::Name::Position
+//#cpp2rust D3D10_NAME_CLIP_DISTANCE                    = d3d::Name::ClipDistance
+//#cpp2rust D3D10_NAME_CULL_DISTANCE                    = d3d::Name::CullDistance
+//#cpp2rust D3D10_NAME_RENDER_TARGET_ARRAY_INDEX        = d3d::Name::RenderTargetArrayIndex
+//#cpp2rust D3D10_NAME_VIEWPORT_ARRAY_INDEX             = d3d::Name::ViewportArrayIndex
+//#cpp2rust D3D10_NAME_VERTEX_ID                        = d3d::Name::VertexId
+//#cpp2rust D3D10_NAME_PRIMITIVE_ID                     = d3d::Name::PrimitiveId
+//#cpp2rust D3D10_NAME_INSTANCE_ID                      = d3d::Name::InstanceId
+//#cpp2rust D3D10_NAME_IS_FRONT_FACE                    = d3d::Name::IsFrontFace
+//#cpp2rust D3D10_NAME_SAMPLE_INDEX                     = d3d::Name::SampleIndex
+//#cpp2rust D3D10_NAME_TARGET                           = d3d::Name::Target
+//#cpp2rust D3D10_NAME_DEPTH                            = d3d::Name::Depth
+//#cpp2rust D3D10_NAME_COVERAGE                         = d3d::Name::Coverage
+
+//#cpp2rust D3D11_NAME_FINAL_QUAD_EDGE_TESSFACTOR       = d3d::Name::FinalQuadEdgeTessFactor
+//#cpp2rust D3D11_NAME_FINAL_QUAD_INSIDE_TESSFACTOR     = d3d::Name::FinalQuadInsideTessFactor
+//#cpp2rust D3D11_NAME_FINAL_TRI_EDGE_TESSFACTOR        = d3d::Name::FinalTriEdgeTessFactor
+//#cpp2rust D3D11_NAME_FINAL_TRI_INSIDE_TESSFACTOR      = d3d::Name::FinalTriInsideTessFactor
+//#cpp2rust D3D11_NAME_FINAL_LINE_DETAIL_TESSFACTOR     = d3d::Name::FinalLineDetailTessFactor
+//#cpp2rust D3D11_NAME_FINAL_LINE_DENSITY_TESSFACTOR    = d3d::Name::FinalLineDensityTessFactor
+//#cpp2rust D3D11_NAME_DEPTH_GREATER_EQUAL              = d3d::Name::DepthGreaterEqual
+//#cpp2rust D3D11_NAME_DEPTH_LESS_EQUAL                 = d3d::Name::DepthLessEqual
+//#cpp2rust D3D11_NAME_STENCIL_REF                      = d3d::Name::StencilRef
+//#cpp2rust D3D11_NAME_INNER_COVERAGE                   = d3d::Name::InnerCoverage
+
+//#cpp2rust D3D12_NAME_BARYCENTRICS                     = d3d::Name::Barycentrics
+//#cpp2rust D3D12_NAME_SHADINGRATE                      = d3d::Name::ShadingRate
+//#cpp2rust D3D12_NAME_CULLPRIMITIVE                    = d3d::Name::CullPrimitive
+//#cpp2rust D3D12_NAME_INNER_COVERAGE                   = d3d::Name::InnerCoverage

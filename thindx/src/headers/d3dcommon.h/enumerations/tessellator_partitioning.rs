@@ -31,3 +31,17 @@ enumish! { TessellatorPartitioning => D3D_TESSELLATOR_PARTITIONING; Undefined, I
 impl Default for TessellatorPartitioning {
     fn default() -> Self { TessellatorPartitioning(0) }
 }
+
+//#cpp2rust D3D_TESSELLATOR_PARTITIONING                    = d3d::TessellatorPartitioning
+
+//#cpp2rust D3D_TESSELLATOR_PARTITIONING_UNDEFINED          = d3d::TessellatorPartitioning::Undefined
+//#cpp2rust D3D_TESSELLATOR_PARTITIONING_INTEGER            = d3d::TessellatorPartitioning::Integer
+//#cpp2rust D3D_TESSELLATOR_PARTITIONING_POW2               = d3d::TessellatorPartitioning::Pow2
+//#cpp2rust D3D_TESSELLATOR_PARTITIONING_FRACTIONAL_ODD     = d3d::TessellatorPartitioning::FractionalOdd
+//#cpp2rust D3D_TESSELLATOR_PARTITIONING_FRACTIONAL_EVEN    = d3d::TessellatorPartitioning::FractionalEven
+
+//#cpp2rust D3D11_TESSELLATOR_PARTITIONING_UNDEFINED        = d3d::TessellatorPartitioning::Undefined
+//#cpp2rust D3D11_TESSELLATOR_PARTITIONING_INTEGER          = d3d::TessellatorPartitioning::Integer
+//#cpp2rust D3D11_TESSELLATOR_PARTITIONING_POW2             = d3d::TessellatorPartitioning::Pow2
+//#cpp2rust D3D11_TESSELLATOR_PARTITIONING_FRACTIONAL_ODD   = d3d::TessellatorPartitioning::FractionalOdd
+//#cpp2rust D3D11_TESSELLATOR_PARTITIONING_FRACTIONAL_EVEN  = d3d::TessellatorPartitioning::FractionalEven

@@ -41,3 +41,24 @@ enumish! { SVC => D3D_SHADER_VARIABLE_CLASS; Scalar, Vector, MatrixRows, MatrixC
 impl Default for SVC {
     fn default() -> Self { SVC(0) }
 }
+
+//#cpp2rust D3D_SHADER_VARIABLE_CLASS   = d3d::ShaderVariableClass
+
+//#cpp2rust D3D_SVC_SCALAR              = d3d::SVC::Scalar
+//#cpp2rust D3D_SVC_VECTOR              = d3d::SVC::Vector
+//#cpp2rust D3D_SVC_MATRIX_ROWS         = d3d::SVC::MatrixRows
+//#cpp2rust D3D_SVC_MATRIX_COLUMNS      = d3d::SVC::MatrixColumns
+//#cpp2rust D3D_SVC_OBJECT              = d3d::SVC::Object
+//#cpp2rust D3D_SVC_STRUCT              = d3d::SVC::Struct
+//#cpp2rust D3D_SVC_INTERFACE_CLASS     = d3d::SVC::InterfaceClass
+//#cpp2rust D3D_SVC_INTERFACE_POINTER   = d3d::SVC::InterfacePointer
+
+//#cpp2rust D3D10_SVC_SCALAR            = d3d::SVC::Scalar
+//#cpp2rust D3D10_SVC_VECTOR            = d3d::SVC::Vector
+//#cpp2rust D3D10_SVC_MATRIX_ROWS       = d3d::SVC::MatrixRows
+//#cpp2rust D3D10_SVC_MATRIX_COLUMNS    = d3d::SVC::MatrixColumns
+//#cpp2rust D3D10_SVC_OBJECT            = d3d::SVC::Object
+//#cpp2rust D3D10_SVC_STRUCT            = d3d::SVC::Struct
+
+//#cpp2rust D3D11_SVC_INTERFACE_CLASS   = d3d::SVC::InterfaceClass
+//#cpp2rust D3D11_SVC_INTERFACE_POINTER = d3d::SVC::InterfacePointer

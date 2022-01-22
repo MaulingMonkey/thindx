@@ -29,3 +29,7 @@ flags! { CBF => UINT; None, UserPacked }
 impl Default for CBF {
     fn default() -> Self { CBF::None }
 }
+
+//#cpp2rust D3D_SHADER_CBUFFER_FLAGS    = d3d::ShaderCbufferFlags
+//#cpp2rust D3D_CBF_USERPACKED          = d3d::CBF::UserPacked
+//#cpp2rust D3D10_CBF_USERPACKED        = d3d::CBF::UserPacked

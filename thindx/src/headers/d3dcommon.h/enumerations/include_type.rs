@@ -28,3 +28,10 @@ enumish! { Include => D3D_INCLUDE_TYPE; Local, System }
 impl Default for Include {
     fn default() -> Self { Include(0) }
 }
+
+//#cpp2rust D3D_INCLUDE_TYPE        = d3d::IncludeType
+//#cpp2rust D3D_INCLUDE_LOCAL       = d3d::Include::Local
+//#cpp2rust D3D_INCLUDE_SYSTEM      = d3d::Include::System
+
+//#cpp2rust D3D10_INCLUDE_LOCAL     = d3d::Include::Local
+//#cpp2rust D3D10_INCLUDE_SYSTEM    = d3d::Include::System

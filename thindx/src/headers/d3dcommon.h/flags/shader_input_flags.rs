@@ -35,3 +35,18 @@ flags! { SIF => D3D_SHADER_INPUT_FLAGS; None, UserPacked, ComparisonSampler, Tex
 impl Default for SIF {
     fn default() -> Self { SIF::None }
 }
+
+//#cpp2rust D3D_SHADER_INPUT_FLAGS          = d3d::ShaderInputFlags
+
+//#cpp2rust D3D_SIF_USERPACKED              = d3d::SIF::UserPacked
+//#cpp2rust D3D_SIF_COMPARISON_SAMPLER      = d3d::SIF::ComparisonSampler
+//#cpp2rust D3D_SIF_TEXTURE_COMPONENT_0     = d3d::SIF::TextureComponent0
+//#cpp2rust D3D_SIF_TEXTURE_COMPONENT_1     = d3d::SIF::TextureComponent1
+//#cpp2rust D3D_SIF_TEXTURE_COMPONENTS      = d3d::SIF::TextureComponents
+//#cpp2rust D3D_SIF_UNUSED                  = d3d::SIF::Unused
+
+//#cpp2rust D3D10_SIF_USERPACKED            = d3d::SIF::UserPacked
+//#cpp2rust D3D10_SIF_COMPARISON_SAMPLER    = d3d::SIF::ComparisonSampler
+//#cpp2rust D3D10_SIF_TEXTURE_COMPONENT_0   = d3d::SIF::TextureComponent0
+//#cpp2rust D3D10_SIF_TEXTURE_COMPONENT_1   = d3d::SIF::TextureComponent1
+//#cpp2rust D3D10_SIF_TEXTURE_COMPONENTS    = d3d::SIF::TextureComponents

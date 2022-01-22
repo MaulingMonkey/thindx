@@ -32,3 +32,8 @@ flags! { PF => D3D_PARAMETER_FLAGS; None, In, Out }
 impl Default for PF {
     fn default() -> Self { PF::None }
 }
+
+//#cpp2rust D3D_PARAMETER_FLAGS = d3d::ParameterFlags
+//#cpp2rust D3D_PF_NONE         = d3d::PF::None
+//#cpp2rust D3D_PF_IN           = d3d::PF::In
+//#cpp2rust D3D_PF_OUT          = d3d::PF::Out

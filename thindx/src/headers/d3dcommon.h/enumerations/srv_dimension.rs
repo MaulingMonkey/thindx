@@ -53,3 +53,55 @@ enumish! {
 impl Default for SrvDimension {
     fn default() -> Self { SrvDimension(0) }
 }
+
+//#cpp2rust D3D_SRV_DIMENSION                       = d3d::SrvDimension
+
+//#cpp2rust D3D_SRV_DIMENSION_UNKNOWN               = d3d::SrvDimension::Unknown
+//#cpp2rust D3D_SRV_DIMENSION_BUFFER                = d3d::SrvDimension::Buffer
+//#cpp2rust D3D_SRV_DIMENSION_TEXTURE1D             = d3d::SrvDimension::Texture1D
+//#cpp2rust D3D_SRV_DIMENSION_TEXTURE1DARRAY        = d3d::SrvDimension::Texture1DArray
+//#cpp2rust D3D_SRV_DIMENSION_TEXTURE2D             = d3d::SrvDimension::Texture2D
+//#cpp2rust D3D_SRV_DIMENSION_TEXTURE2DARRAY        = d3d::SrvDimension::Texture2DArray
+//#cpp2rust D3D_SRV_DIMENSION_TEXTURE2DMS           = d3d::SrvDimension::Texture2DMS
+//#cpp2rust D3D_SRV_DIMENSION_TEXTURE2DMSARRAY      = d3d::SrvDimension::Texture2DMSArray
+//#cpp2rust D3D_SRV_DIMENSION_TEXTURE3D             = d3d::SrvDimension::Texture3D
+//#cpp2rust D3D_SRV_DIMENSION_TEXTURECUBE           = d3d::SrvDimension::TextureCube
+//#cpp2rust D3D_SRV_DIMENSION_TEXTURECUBEARRAY      = d3d::SrvDimension::TextureCubeArray
+//#cpp2rust D3D_SRV_DIMENSION_BUFFEREX              = d3d::SrvDimension::BufferEx
+
+//#cpp2rust D3D10_1_SRV_DIMENSION_UNKNOWN           = d3d::SrvDimension::Unknown
+//#cpp2rust D3D10_1_SRV_DIMENSION_BUFFER            = d3d::SrvDimension::Buffer
+//#cpp2rust D3D10_1_SRV_DIMENSION_TEXTURE1D         = d3d::SrvDimension::Texture1D
+//#cpp2rust D3D10_1_SRV_DIMENSION_TEXTURE1DARRAY    = d3d::SrvDimension::Texture1DArray
+//#cpp2rust D3D10_1_SRV_DIMENSION_TEXTURE2D         = d3d::SrvDimension::Texture2D
+//#cpp2rust D3D10_1_SRV_DIMENSION_TEXTURE2DARRAY    = d3d::SrvDimension::Texture2DArray
+//#cpp2rust D3D10_1_SRV_DIMENSION_TEXTURE2DMS       = d3d::SrvDimension::Texture2DMS
+//#cpp2rust D3D10_1_SRV_DIMENSION_TEXTURE2DMSARRAY  = d3d::SrvDimension::Texture2DMSArray
+//#cpp2rust D3D10_1_SRV_DIMENSION_TEXTURE3D         = d3d::SrvDimension::Texture3D
+//#cpp2rust D3D10_1_SRV_DIMENSION_TEXTURECUBE       = d3d::SrvDimension::TextureCube
+//#cpp2rust D3D10_1_SRV_DIMENSION_TEXTURECUBEARRAY  = d3d::SrvDimension::TextureCubeArray
+
+//#cpp2rust D3D10_SRV_DIMENSION_UNKNOWN             = d3d::SrvDimension::Unknown
+//#cpp2rust D3D10_SRV_DIMENSION_BUFFER              = d3d::SrvDimension::Buffer
+//#cpp2rust D3D10_SRV_DIMENSION_TEXTURE1D           = d3d::SrvDimension::Texture1D
+//#cpp2rust D3D10_SRV_DIMENSION_TEXTURE1DARRAY      = d3d::SrvDimension::Texture1DArray
+//#cpp2rust D3D10_SRV_DIMENSION_TEXTURE2D           = d3d::SrvDimension::Texture2D
+//#cpp2rust D3D10_SRV_DIMENSION_TEXTURE2DARRAY      = d3d::SrvDimension::Texture2DArray
+//#cpp2rust D3D10_SRV_DIMENSION_TEXTURE2DMS         = d3d::SrvDimension::Texture2DMS
+//#cpp2rust D3D10_SRV_DIMENSION_TEXTURE2DMSARRAY    = d3d::SrvDimension::Texture2DMSArray
+//#cpp2rust D3D10_SRV_DIMENSION_TEXTURE3D           = d3d::SrvDimension::Texture3D
+//#cpp2rust D3D10_SRV_DIMENSION_TEXTURECUBE         = d3d::SrvDimension::TextureCube
+//#cpp2rust D3D10_SRV_DIMENSION_TEXTURECUBEARRAY    = d3d::SrvDimension::TextureCubeArray
+
+//#cpp2rust D3D11_SRV_DIMENSION_UNKNOWN             = d3d::SrvDimension::Unknown
+//#cpp2rust D3D11_SRV_DIMENSION_BUFFER              = d3d::SrvDimension::Buffer
+//#cpp2rust D3D11_SRV_DIMENSION_TEXTURE1D           = d3d::SrvDimension::Texture1D
+//#cpp2rust D3D11_SRV_DIMENSION_TEXTURE1DARRAY      = d3d::SrvDimension::Texture1DArray
+//#cpp2rust D3D11_SRV_DIMENSION_TEXTURE2D           = d3d::SrvDimension::Texture2D
+//#cpp2rust D3D11_SRV_DIMENSION_TEXTURE2DARRAY      = d3d::SrvDimension::Texture2DArray
+//#cpp2rust D3D11_SRV_DIMENSION_TEXTURE2DMS         = d3d::SrvDimension::Texture2DMS
+//#cpp2rust D3D11_SRV_DIMENSION_TEXTURE2DMSARRAY    = d3d::SrvDimension::Texture2DMSArray
+//#cpp2rust D3D11_SRV_DIMENSION_TEXTURE3D           = d3d::SrvDimension::Texture3D
+//#cpp2rust D3D11_SRV_DIMENSION_TEXTURECUBE         = d3d::SrvDimension::TextureCube
+//#cpp2rust D3D11_SRV_DIMENSION_TEXTURECUBEARRAY    = d3d::SrvDimension::TextureCubeArray
+//#cpp2rust D3D11_SRV_DIMENSION_BUFFEREX            = d3d::SrvDimension::BufferEx

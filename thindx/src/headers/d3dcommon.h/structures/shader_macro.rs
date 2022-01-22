@@ -29,3 +29,5 @@ unsafe impl AsShaderMacros for () {
 unsafe impl AsShaderMacros for Option<std::convert::Infallible> {
     fn as_shader_macros(&self) -> Result<*const D3D_SHADER_MACRO, ErrorKind> { Ok(null()) }
 }
+
+//#cpp2rust D3D_SHADER_MACRO = d3d::AsShaderMacros

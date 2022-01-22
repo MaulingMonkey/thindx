@@ -58,3 +58,11 @@ enumish! { DriverType => D3D_DRIVER_TYPE; Unknown, Hardware, Reference, Null, So
 impl Default for DriverType {
     fn default() -> Self { DriverType(0) }
 }
+
+//#cpp2rust D3D_DRIVER_TYPE             = d3d::DriverType
+//#cpp2rust D3D_DRIVER_TYPE_UNKNOWN     = d3d::DriverType::Unknown
+//#cpp2rust D3D_DRIVER_TYPE_HARDWARE    = d3d::DriverType::Hardware
+//#cpp2rust D3D_DRIVER_TYPE_REFERENCE   = d3d::DriverType::Reference
+//#cpp2rust D3D_DRIVER_TYPE_NULL        = d3d::DriverType::Null
+//#cpp2rust D3D_DRIVER_TYPE_SOFTWARE    = d3d::DriverType::Software
+//#cpp2rust D3D_DRIVER_TYPE_WARP        = d3d::DriverType::WARP

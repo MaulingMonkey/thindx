@@ -38,3 +38,13 @@ enumish! { Interpolation => D3D_INTERPOLATION_MODE; Undefined, Constant, Linear,
 impl Default for Interpolation {
     fn default() -> Self { Interpolation(0) }
 }
+
+//#cpp2rust D3D_INTERPOLATION_MODE                          = d3d::InterpolationMode
+//#cpp2rust D3D_INTERPOLATION_UNDEFINED                     = d3d::Interpolation::Undefined
+//#cpp2rust D3D_INTERPOLATION_CONSTANT                      = d3d::Interpolation::Constant
+//#cpp2rust D3D_INTERPOLATION_LINEAR                        = d3d::Interpolation::Linear
+//#cpp2rust D3D_INTERPOLATION_LINEAR_CENTROID               = d3d::Interpolation::LinearCentroid
+//#cpp2rust D3D_INTERPOLATION_LINEAR_NOPERSPECTIVE          = d3d::Interpolation::LinearNoPerspective
+//#cpp2rust D3D_INTERPOLATION_LINEAR_NOPERSPECTIVE_CENTROID = d3d::Interpolation::LinearNoPerspectiveCentroid
+//#cpp2rust D3D_INTERPOLATION_LINEAR_SAMPLE                 = d3d::Interpolation::LinearSample
+//#cpp2rust D3D_INTERPOLATION_LINEAR_NOPERSPECTIVE_SAMPLE   = d3d::Interpolation::LinearNoPerspectiveSample

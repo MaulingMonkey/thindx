@@ -34,3 +34,15 @@ enumish! { FeatureLevel => D3D_FEATURE_LEVEL; _1_0_Core, _9_1, _9_2, _9_3, _10_0
 impl Default for FeatureLevel {
     fn default() -> Self { FeatureLevel(0) }
 }
+
+//#cpp2rust D3D_FEATURE_LEVEL           = d3d::FeatureLevel
+//#cpp2rust D3D_FEATURE_LEVEL_1_0_CORE  = d3d::FeatureLevel::_1_0_Core
+//#cpp2rust D3D_FEATURE_LEVEL_9_1       = d3d::FeatureLevel::_9_1
+//#cpp2rust D3D_FEATURE_LEVEL_9_2       = d3d::FeatureLevel::_9_2
+//#cpp2rust D3D_FEATURE_LEVEL_9_3       = d3d::FeatureLevel::_9_3
+//#cpp2rust D3D_FEATURE_LEVEL_10_0      = d3d::FeatureLevel::_10_0
+//#cpp2rust D3D_FEATURE_LEVEL_10_1      = d3d::FeatureLevel::_10_1
+//#cpp2rust D3D_FEATURE_LEVEL_11_0      = d3d::FeatureLevel::_11_0
+//#cpp2rust D3D_FEATURE_LEVEL_11_1      = d3d::FeatureLevel::_11_1
+//#cpp2rust D3D_FEATURE_LEVEL_12_0      = d3d::FeatureLevel::_12_0
+//#cpp2rust D3D_FEATURE_LEVEL_12_1      = d3d::FeatureLevel::_12_1

@@ -66,3 +66,13 @@ enumish! { MinPrecision => D3D_MIN_PRECISION; Default, Float16, Float2_8, Reserv
 impl Default for MinPrecision {
     fn default() -> Self { MinPrecision(0) }
 }
+
+//#cpp2rust D3D_MIN_PRECISION           = d3d::MinPrecision
+//#cpp2rust D3D_MIN_PRECISION_DEFAULT   = d3d::MinPrecision::Default
+//#cpp2rust D3D_MIN_PRECISION_FLOAT_16  = d3d::MinPrecision::Float16
+//#cpp2rust D3D_MIN_PRECISION_FLOAT_2_8 = d3d::MinPrecision::Float2_8
+//#cpp2rust D3D_MIN_PRECISION_RESERVED  = d3d::MinPrecision::Reserved
+//#cpp2rust D3D_MIN_PRECISION_SINT_16   = d3d::MinPrecision::SInt16
+//#cpp2rust D3D_MIN_PRECISION_UINT_16   = d3d::MinPrecision::UInt16
+//#cpp2rust D3D_MIN_PRECISION_ANY_16    = d3d::MinPrecision::Any16
+//#cpp2rust D3D_MIN_PRECISION_ANY_10    = d3d::MinPrecision::Any10

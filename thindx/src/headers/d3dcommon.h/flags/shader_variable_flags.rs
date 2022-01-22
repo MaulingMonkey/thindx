@@ -32,3 +32,16 @@ flags! { SVF => UINT; None, UserPacked, Used, InterfacePointer, InterfaceParamet
 impl Default for SVF {
     fn default() -> Self { SVF::None }
 }
+
+//#cpp2rust D3D_SHADER_VARIABLE_FLAGS       = d3d::ShaderVariableFlags
+
+//#cpp2rust D3D_SVF_USERPACKED              = d3d::SVF::UserPacked
+//#cpp2rust D3D_SVF_USED                    = d3d::SVF::Used
+//#cpp2rust D3D_SVF_INTERFACE_POINTER       = d3d::SVF::InterfacePointer
+//#cpp2rust D3D_SVF_INTERFACE_PARAMETER     = d3d::SVF::InterfaceParameter
+
+//#cpp2rust D3D10_SVF_USERPACKED            = d3d::SVF::UserPacked
+//#cpp2rust D3D10_SVF_USED                  = d3d::SVF::Used
+
+//#cpp2rust D3D11_SVF_INTERFACE_POINTER     = d3d::SVF::InterfacePointer
+//#cpp2rust D3D11_SVF_INTERFACE_PARAMETER   = d3d::SVF::InterfaceParameter

@@ -33,3 +33,20 @@ enumish! { CT => D3D_CBUFFER_TYPE; CBuffer, TBuffer, InterfacePointers, Resource
 impl Default for CT {
     fn default() -> Self { CT(0) }
 }
+
+//#cpp2rust D3D_CBUFFER_TYPE            = d3d::CBufferType
+
+//#cpp2rust D3D_CT_CBUFFER              = d3d::CT::CBuffer
+//#cpp2rust D3D_CT_TBUFFER              = d3d::CT::TBuffer
+//#cpp2rust D3D_CT_INTERFACE_POINTERS   = d3d::CT::InterfacePointers
+//#cpp2rust D3D_CT_RESOURCE_BIND_INFO   = d3d::CT::ResourceBindInfo
+
+//#cpp2rust D3D10_CT_CBUFFER            = d3d::CT::CBuffer
+//#cpp2rust D3D10_CT_TBUFFER            = d3d::CT::TBuffer
+//#cpp2rust D3D10_CT_INTERFACE_POINTERS = d3d::CT::InterfacePointers
+//#cpp2rust D3D10_CT_RESOURCE_BIND_INFO = d3d::CT::ResourceBindInfo
+
+//#cpp2rust D3D11_CT_CBUFFER            = d3d::CT::CBuffer
+//#cpp2rust D3D11_CT_TBUFFER            = d3d::CT::TBuffer
+//#cpp2rust D3D11_CT_INTERFACE_POINTERS = d3d::CT::InterfacePointers
+//#cpp2rust D3D11_CT_RESOURCE_BIND_INFO = d3d::CT::ResourceBindInfo

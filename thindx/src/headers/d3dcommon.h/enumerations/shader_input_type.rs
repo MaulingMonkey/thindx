@@ -62,3 +62,34 @@ enumish! {
 impl Default for SIT {
     fn default() -> Self { SIT(0) }
 }
+
+//#cpp2rust D3D_SHADER_INPUT_TYPE                   = d3d::ShaderInputType
+
+//#cpp2rust D3D_SIT_CBUFFER                         = d3d::SIT::CBuffer
+//#cpp2rust D3D_SIT_TBUFFER                         = d3d::SIT::TBuffer
+//#cpp2rust D3D_SIT_TEXTURE                         = d3d::SIT::Texture
+//#cpp2rust D3D_SIT_SAMPLER                         = d3d::SIT::Sampler
+//#cpp2rust D3D_SIT_UAV_RWTYPED                     = d3d::SIT::UavRWTyped
+//#cpp2rust D3D_SIT_STRUCTURED                      = d3d::SIT::Structured
+//#cpp2rust D3D_SIT_UAV_RWSTRUCTURED                = d3d::SIT::UavRWStructured
+//#cpp2rust D3D_SIT_BYTEADDRESS                     = d3d::SIT::ByteAddress
+//#cpp2rust D3D_SIT_UAV_RWBYTEADDRESS               = d3d::SIT::UavRWByteAddress
+//#cpp2rust D3D_SIT_UAV_APPEND_STRUCTURED           = d3d::SIT::UavAppendStructured
+//#cpp2rust D3D_SIT_UAV_CONSUME_STRUCTURED          = d3d::SIT::UavConsumeStructured
+//#cpp2rust D3D_SIT_UAV_RWSTRUCTURED_WITH_COUNTER   = d3d::SIT::UavRWStructuredWithCounter
+//#cpp2rust D3D_SIT_RTACCELERATIONSTRUCTURE         = d3d::SIT::RTAccelerationStructure
+//#cpp2rust D3D_SIT_UAV_FEEDBACKTEXTURE             = d3d::SIT::UavFeedbackTexture
+
+//#cpp2rust D3D10_SIT_CBUFFER                       = d3d::SIT::CBuffer
+//#cpp2rust D3D10_SIT_TBUFFER                       = d3d::SIT::TBuffer
+//#cpp2rust D3D10_SIT_TEXTURE                       = d3d::SIT::Texture
+//#cpp2rust D3D10_SIT_SAMPLER                       = d3d::SIT::Sampler
+
+//#cpp2rust D3D11_SIT_UAV_RWTYPED                   = d3d::SIT::UavRWTyped
+//#cpp2rust D3D11_SIT_STRUCTURED                    = d3d::SIT::Structured
+//#cpp2rust D3D11_SIT_UAV_RWSTRUCTURED              = d3d::SIT::UavRWStructured
+//#cpp2rust D3D11_SIT_BYTEADDRESS                   = d3d::SIT::ByteAddress
+//#cpp2rust D3D11_SIT_UAV_RWBYTEADDRESS             = d3d::SIT::UavRWByteAddress
+//#cpp2rust D3D11_SIT_UAV_APPEND_STRUCTURED         = d3d::SIT::UavAppendStructured
+//#cpp2rust D3D11_SIT_UAV_CONSUME_STRUCTURED        = d3d::SIT::UavConsumeStructured
+//#cpp2rust D3D11_SIT_UAV_RWSTRUCTURED_WITH_COUNTER = d3d::SIT::UavRWStructuredWithCounter
