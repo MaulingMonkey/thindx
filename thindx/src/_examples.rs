@@ -243,10 +243,8 @@ pub const d3d9_01_clear_winapi : () = ();
 /// use winit::event_loop::*;
 /// use winit::window::*;
 /// 
-/// use std::convert::TryInto;
 /// use std::fs::File;
 /// use std::io;
-/// use std::mem::size_of_val;
 /// use std::ptr::null_mut;
 /// 
 /// 
@@ -498,13 +496,17 @@ pub const d3d9_01_clear_winapi : () = ();
 ///             Left_Stick:         xelu!(r"Others\Xbox 360\360_Left_Stick.png"),
 ///             Right_Stick_Click:  xelu!(r"Others\Xbox 360\360_Right_Stick_Click.png"),
 ///             Right_Stick:        xelu!(r"Others\Xbox 360\360_Right_Stick.png"),
-///             QuadIB:             index16(device, &[0, 1, 2, 0, 2, 3]).expect("QuadIB"),
-///             QuadVB:             vert2vb(device, &[
+/// 
+///             QuadIB: device.create_index_buffer_from(
+///                 &[0u16, 1, 2, 0, 2, 3][..], Usage::None, Pool::Managed, (),
+///             ).expect("QuadIB"),
+/// 
+///             QuadVB: device.create_vertex_buffer_from(&[
 ///                 Vertex { position: [ 0.5, -0.5, 0.5, 0.0], texcoord: [1.0, 1.0] },
 ///                 Vertex { position: [-0.5, -0.5, 0.5, 0.0], texcoord: [0.0, 1.0] },
 ///                 Vertex { position: [-0.5,  0.5, 0.5, 0.0], texcoord: [0.0, 0.0] },
 ///                 Vertex { position: [ 0.5,  0.5, 0.5, 0.0], texcoord: [1.0, 0.0] },
-///             ]).expect("QuadVB"),
+///             ][..], Usage::None, FVF::None, Pool::Managed, ()).expect("QuadVB"),
 /// 
 ///             VertDecl: device.create_vertex_declaration(Vertex::ELEMENTS).unwrap()
 ///         }
@@ -581,34 +583,7 @@ pub const d3d9_01_clear_winapi : () = ();
 ///     }
 /// }
 /// 
-/// fn index16(device: &Device, src: &[u16]) -> Result<IndexBuffer, MethodError> {
-///     // TODO: improve safety (explicit `Bytes(...)` tuple?) - previously passed src.len()
-///     // instead of byte count, resulting in an undersized buffer
-///     let ib = device.create_index_buffer(
-///         size_of_val(src).try_into().unwrap(),
-///         Usage::None, Format::Index16, Pool::Managed, (),
-///     )?;
-///     unsafe { // TODO: replace with safe(r) logic
-///         let dst = ib.lock_unchecked(0, 0, Lock::None)?;
-///         std::ptr::copy_nonoverlapping(src.as_ptr(), dst.cast(), src.len());
-///         ib.unlock()?;
-///     }
-///     Ok(ib)
-/// }
-/// 
-/// fn vert2vb(device: &Device, src: &[Vertex]) -> Result<VertexBuffer, MethodError> {
-///     let vb = device.create_vertex_buffer(
-///         size_of_val(src).try_into().unwrap(),
-///         Usage::None, FVF::None, Pool::Managed, (),
-///     )?;
-///     unsafe { // TODO: replace with safe(r) logic
-///         let dst = vb.lock_unchecked(0, 0, Lock::None)?;
-///         std::ptr::copy_nonoverlapping(src.as_ptr(), dst.cast(), src.len());
-///         vb.unlock()?;
-///     }
-///     Ok(vb)
-/// }
-/// 
+/// #[derive(Clone, Copy)]
 /// #[repr(C)] struct Vertex {
 ///     pub position:   [f32; 4],
 ///     pub texcoord:   [f32; 2],

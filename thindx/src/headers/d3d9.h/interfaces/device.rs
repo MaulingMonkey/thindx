@@ -494,18 +494,63 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// *   [D3DERR::OUTOFVIDEOMEMORY]
     /// *   [D3DERR::INVALIDDATA]
     /// *   [E::OUTOFMEMORY]
+    /// *   [THINERR::ALLOC_OVERFLOW]   if allocation rejected by thindx to avoid possible UB
     /// *   Ok([IndexBuffer])
     fn create_index_buffer(&self, length: u32, usage: impl Into<Usage>, format: impl Into<Format>, pool: impl Into<Pool>, shared_handle: impl SharedHandleParam) -> Result<IndexBuffer, MethodError> {
         // !0 will fail OUTOFMEMORY
         // !0/2 spammed will fail OUTOFVIDEOMEMORY
         // !0-4 spammed will "succeed", hinting at an arithmetic overflow within d3d or the driver
-        if length > MAX_BUFFER_ALLOC { return Err(MethodError("Device::create_index_buffer", THINERR::ALLOC_OVERFLOW)); }
+        if length > MAX_BUFFER_ALLOC { return Err(MethodError("IDirect3DDevice9Ext::create_index_buffer", THINERR::ALLOC_OVERFLOW)); }
 
         let _ = shared_handle;
         let mut buffer = null_mut();
         let hr = unsafe { self.as_winapi().CreateIndexBuffer(length, usage.into().into(), format.into().into(), pool.into().into(), &mut buffer, null_mut()) };
         MethodError::check("IDirect3DDevice9::CreateIndexBuffer", hr)?;
         Ok(unsafe { IndexBuffer::from_raw(buffer) })
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createindexbuffer)\]
+    /// IDirect3DDevice9::CreateIndexBuffer
+    ///
+    /// Creates an index buffer.
+    ///
+    /// ### Arguments
+    ///
+    /// *   `data`              &\[u16\] or &\[u32\]
+    /// *   `usage`             Typically [Usage::None] or [Usage::Dynamic]
+    /// *   `pool`              Memory class into which to place the [IndexBuffer].
+    /// *   `shared_handle`     Used in Direct3D 9 for Windows Vista to [share resources](https://docs.microsoft.com/en-us/windows/desktop/direct3d9/dx9lh); set it to `()` to not share a resource.
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_pure();
+    /// let inds : &[u16] = &[0, 1, 2, 0, 2, 3];
+    /// let tri = device.create_index_buffer_from(inds, Usage::None, Pool::Managed, ()).unwrap();
+    /// ```
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]       if `length` cannot hold at least one index (2 for [Format::Index16], 4 for [Format::Index32])
+    /// *   [D3DERR::INVALIDCALL]       if `usage`, `format`, or `pool` is invalid
+    /// *   [D3DERR::OUTOFVIDEOMEMORY]
+    /// *   [D3DERR::INVALIDDATA]
+    /// *   [E::OUTOFMEMORY]
+    /// *   [THINERR::ALLOC_OVERFLOW]   if allocation rejected by thindx to avoid possible UB
+    /// *   Ok([IndexBuffer])
+    fn create_index_buffer_from(&self, data: impl IndexData, usage: impl Into<Usage>, pool: impl Into<Pool>, shared_handle: impl SharedHandleParam) -> Result<IndexBuffer, MethodError> {
+        let bytes = data.bytes();
+        let bytes32 : u32 = bytes.try_into().map_err(|_| MethodError("IDirect3DDevice9Ext::create_index_buffer_from", THINERR::ALLOC_OVERFLOW))?;
+        let format = data.format();
+        let usage = usage.into();
+        let lock = if usage.into() & Usage::Dynamic.into() != 0 { Lock::NoOverwrite } else { Lock::None };
+        let ib = self.create_index_buffer(bytes32, usage, format, pool, shared_handle)?;
+        unsafe {
+            let dst = ib.lock_unchecked(0, 0, lock)?;
+            std::ptr::copy_nonoverlapping(data.as_ptr() as *const u8, dst.cast(), bytes);
+            ib.unlock()?;
+        }
+        Ok(ib)
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createoffscreenplainsurface)\]
@@ -651,12 +696,58 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         // !0 will fail OUTOFMEMORY
         // !0/2 spammed will fail OUTOFVIDEOMEMORY
         // !0-4 spammed will "succeed", hinting at an arithmetic overflow within d3d or the driver
-        if length > MAX_BUFFER_ALLOC { return Err(MethodError("Device::create_vertex_buffer", THINERR::ALLOC_OVERFLOW)); }
+        if length > MAX_BUFFER_ALLOC { return Err(MethodError("IDirect3DDevice9Ext::create_vertex_buffer", THINERR::ALLOC_OVERFLOW)); }
 
         let mut buffer = null_mut();
         let hr = unsafe { self.as_winapi().CreateVertexBuffer(length, usage.into().into(), fvf.into().into(), pool.into().into(), &mut buffer, null_mut()) };
         MethodError::check("IDirect3DDevice9::CreateVertexBuffer", hr)?;
         Ok(unsafe { VertexBuffer::from_raw(buffer) })
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createvertexbuffer)\]
+    /// IDirect3DDevice9::CreateVertexBuffer
+    ///
+    /// Creates an vertex buffer.
+    ///
+    /// ### Arguments
+    ///
+    /// *   `data`              Data to initialize the vertex buffer with.
+    /// *   `usage`             Typically [Usage::None] or [Usage::Dynamic]
+    /// *   `fvf`               Combination of [FVF], a usage specifier that describes the vertex format of the verticies in this buffer.
+    /// *   `pool`              Memory class into which to place the [IndexBuffer].
+    /// *   `shared_handle`     Used in Direct3D 9 for Windows Vista to [share resources](https://docs.microsoft.com/en-us/windows/desktop/direct3d9/dx9lh); set it to `()` to not share a resource.
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_pure();
+    /// let tri = device.create_vertex_buffer_from(&[
+    ///     [0.0_f32, 1.0, 0.0],
+    ///     [1.0_f32, 0.0, 0.0],
+    ///     [0.0_f32, 0.0, 1.0],
+    /// ][..], Usage::None, FVF::XYZ, Pool::Managed, ()).unwrap();
+    /// ```
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]       if `length` cannot hold at least one [FVF]-sized vertex (1 if [FVF::None])
+    /// *   [D3DERR::INVALIDCALL]       if `usage` or `pool` is invalid
+    /// *   [D3DERR::OUTOFVIDEOMEMORY]  if allocation failed (driver or gpu memory)
+    /// *   [E::OUTOFMEMORY]            if allocation failed (driver or d3d runtime)
+    /// *   [THINERR::ALLOC_OVERFLOW]   if allocation rejected by thindx to avoid possible UB
+    /// *   Ok([VertexBuffer])
+    fn create_vertex_buffer_from(&self, data: impl VertexStreamData, usage: impl Into<Usage>, fvf: impl Into<FVF>, pool: impl Into<Pool>, _shared_handle: impl SharedHandleParam) -> Result<VertexBuffer, MethodError> {
+        let bytes = data.bytes();
+        let bytes32 : u32 = bytes.try_into().map_err(|_| MethodError("IDirect3DDevice9Ext::create_vertex_buffer_from", THINERR::ALLOC_OVERFLOW))?;
+        let usage = usage.into();
+        let lock = if usage.into() & Usage::Dynamic.into() != 0 { Lock::NoOverwrite } else { Lock::None };
+        let vb = self.create_vertex_buffer(bytes32, usage, fvf, pool, _shared_handle)?;
+        unsafe {
+            let dst = vb.lock_unchecked(0, 0, lock)?;
+            std::ptr::copy_nonoverlapping(data.as_ptr() as *const u8, dst.cast(), bytes);
+            vb.unlock()?;
+        }
+        Ok(vb)
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createvertexdeclaration)\]
@@ -768,7 +859,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok(())
     unsafe fn draw_indexed_primitive_up(&self, primitive_type: PrimitiveType, min_vertex_index: u32, num_verticies: u32, primitive_count: u32, index_data: impl IndexData, vertex_stream_zero: impl VertexStreamData) -> Result<(), MethodError> {
-        let hr = self.as_winapi().DrawIndexedPrimitiveUP(primitive_type.into(), min_vertex_index, num_verticies, primitive_count, index_data.ptr(), index_data.format().into(), vertex_stream_zero.ptr(), vertex_stream_zero.stride());
+        let hr = self.as_winapi().DrawIndexedPrimitiveUP(primitive_type.into(), min_vertex_index, num_verticies, primitive_count, index_data.as_ptr(), index_data.format().into(), vertex_stream_zero.as_ptr(), vertex_stream_zero.stride());
         MethodError::check("IDirect3DDevice9::DrawIndexedPrimitiveUP", hr)
     }
 
@@ -804,7 +895,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok(())
     unsafe fn draw_primitive_up(&self, primitive_type: PrimitiveType, primitive_count: u32, vertex_stream_zero: impl VertexStreamData) -> Result<(), MethodError> {
-        let hr = self.as_winapi().DrawPrimitiveUP(primitive_type.into(), primitive_count, vertex_stream_zero.ptr(), vertex_stream_zero.stride());
+        let hr = self.as_winapi().DrawPrimitiveUP(primitive_type.into(), primitive_count, vertex_stream_zero.as_ptr(), vertex_stream_zero.stride());
         MethodError::check("IDirect3DDevice9::DrawPrimitiveUP", hr)
     }
 
