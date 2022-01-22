@@ -89,7 +89,7 @@ flags! {
     /// However, setting [Usage::SoftwareProcessing] is the only option when a single buffer is used with both hardware and software vertex processing.
     /// [Usage::SoftwareProcessing] is allowed for mixed and software devices.
     ///
-    /// [Usage::SoftwareProcessing] is used with CheckDeviceFormat to find out if a particular texture format can be used as a vertex texture during software vertex processing.
+    /// [Usage::SoftwareProcessing] is used with [check_device_format](d3d9::IDirect3DDevice9Ext::check_device_format) to find out if a particular texture format can be used as a vertex texture during software vertex processing.
     /// If it can, the texture must be created in [Pool::Scratch].
     pub const SoftwareProcessing            : Usage = Usage(D3DUSAGE_SOFTWAREPROCESSING);
 
@@ -135,6 +135,45 @@ flags! {
     pub const RestrictSharedResourceDriver  : Usage = Usage(D3DUSAGE_RESTRICT_SHARED_RESOURCE_DRIVER);
     #[cfg(not(feature = "9ex"))]
     pub(crate) const RestrictSharedResourceDriver : Usage = Usage(D3DUSAGE_RESTRICT_SHARED_RESOURCE_DRIVER);
+
+
+
+    /// Query the resource format to see if it supports texture filter types other than [d3d::TexF::Point] (which is always supported).
+    ///
+    /// Valid for use with [check_device_format](d3d9::IDirect3DDevice9Ext::check_device_format) only.
+    pub const QueryFilter                   : Usage = Usage(D3DUSAGE_QUERY_FILTER);
+
+    /// Query the resource about a legacy bump map.
+    ///
+    /// Valid for use with [check_device_format](d3d9::IDirect3DDevice9Ext::check_device_format) only.
+    pub const QueryLegacyBumpMap            : Usage = Usage(D3DUSAGE_QUERY_LEGACYBUMPMAP);
+
+    /// Query the resource to verify support for post pixel shader blending support.
+    /// If [check_device_format](d3d9::IDirect3DDevice9Ext::check_device_format) fails with [d3d::Usage::QueryPostPixelShaderBlending], post pixel blending operations are not supported.
+    /// These include alpha test, pixel fog, render-target blending, color write enable, and dithering.
+    ///
+    /// Valid for use with [check_device_format](d3d9::IDirect3DDevice9Ext::check_device_format) only.
+    pub const QueryPostPixelShaderBlending  : Usage = Usage(D3DUSAGE_QUERY_POSTPIXELSHADER_BLENDING);
+
+    /// Query the resource to verify if a texture supports gamma correction during a read operation.
+    ///
+    /// Valid for use with [check_device_format](d3d9::IDirect3DDevice9Ext::check_device_format) only.
+    pub const QuerySRGBRead                 : Usage = Usage(D3DUSAGE_QUERY_SRGBREAD);
+
+    /// Query the resource to verify if a texture supports gamma correction during a write operation.
+    ///
+    /// Valid for use with [check_device_format](d3d9::IDirect3DDevice9Ext::check_device_format) only.
+    pub const QuerySRGBWrite                : Usage = Usage(D3DUSAGE_QUERY_SRGBWRITE);
+
+    /// Query the resource to verify support for vertex shader texture sampling.
+    ///
+    /// Valid for use with [check_device_format](d3d9::IDirect3DDevice9Ext::check_device_format) only.
+    pub const QueryVertexTexture            : Usage = Usage(D3DUSAGE_QUERY_VERTEXTEXTURE);
+
+    /// Query the resource to verify support for texture wrapping and mip-mapping.
+    ///
+    /// Valid for use with [check_device_format](d3d9::IDirect3DDevice9Ext::check_device_format) only.
+    pub const QueryWrapAndMip               : Usage = Usage(D3DUSAGE_QUERY_WRAPANDMIP);
 }
 
 impl Default for Usage {
