@@ -12,6 +12,7 @@ pub fn src() -> Result<(), ()> {
 }
 
 fn dir(path: &Path) -> Result<(), ()> {
+    if ".git target vs".split(' ').any(|dir| path.ends_with(dir)) { return Ok(()) } // skip
     let mut errors = false;
     for e in fs::DirPathType::read_by_alphanumeric(path).unwrap() {
         if e.is_dir() { errors |= dir(&e.path).is_err(); }
