@@ -15,7 +15,7 @@
                 "type":                     "cppvsdbg",
                 "program":                  "${workspaceFolder}/target/debug/examples/d3d9-00-clear-winit.exe",
                 "enableDebugHeap":          true,
-                "visualizerFile":           "${workspaceFolder}/thindx/thindx.natvis"
+                "visualizerFile":           "${workspaceFolder}/.vscode/merged.natvis"
             }
         },
         {
@@ -31,7 +31,7 @@
                 "type":                     "cppvsdbg",
                 "program":                  "${workspaceFolder}/target/release/examples/d3d9-00-clear-winit.exe",
                 "enableDebugHeap":          false,
-                "visualizerFile":           "${workspaceFolder}/thindx/thindx.natvis"
+                "visualizerFile":           "${workspaceFolder}/.vscode/merged.natvis"
             }
         },
         {
@@ -47,7 +47,7 @@
                 "type":                     "cppvsdbg",
                 "program":                  "${workspaceFolder}/target/debug/examples/d3d9-01-clear-winapi.exe",
                 "enableDebugHeap":          true,
-                "visualizerFile":           "${workspaceFolder}/thindx/thindx.natvis"
+                "visualizerFile":           "${workspaceFolder}/.vscode/merged.natvis"
             }
         },
         {
@@ -63,7 +63,7 @@
                 "type":                     "cppvsdbg",
                 "program":                  "${workspaceFolder}/target/release/examples/d3d9-01-clear-winapi.exe",
                 "enableDebugHeap":          false,
-                "visualizerFile":           "${workspaceFolder}/thindx/thindx.natvis"
+                "visualizerFile":           "${workspaceFolder}/.vscode/merged.natvis"
             }
         },
         {
@@ -79,7 +79,7 @@
                 "type":                     "cppvsdbg",
                 "program":                  "${workspaceFolder}/target/debug/examples/d3d9-02-xinput.exe",
                 "enableDebugHeap":          true,
-                "visualizerFile":           "${workspaceFolder}/thindx/thindx.natvis"
+                "visualizerFile":           "${workspaceFolder}/.vscode/merged.natvis"
             }
         },
         {
@@ -95,7 +95,7 @@
                 "type":                     "cppvsdbg",
                 "program":                  "${workspaceFolder}/target/release/examples/d3d9-02-xinput.exe",
                 "enableDebugHeap":          false,
-                "visualizerFile":           "${workspaceFolder}/thindx/thindx.natvis"
+                "visualizerFile":           "${workspaceFolder}/.vscode/merged.natvis"
             }
         },
         {
@@ -111,7 +111,7 @@
                 "type":                     "cppvsdbg",
                 "program":                  "${workspaceFolder}/target/debug/examples/d3dcompiler-01-construction.exe",
                 "enableDebugHeap":          true,
-                "visualizerFile":           "${workspaceFolder}/thindx/thindx.natvis"
+                "visualizerFile":           "${workspaceFolder}/.vscode/merged.natvis"
             }
         },
         {
@@ -127,7 +127,7 @@
                 "type":                     "cppvsdbg",
                 "program":                  "${workspaceFolder}/target/release/examples/d3dcompiler-01-construction.exe",
                 "enableDebugHeap":          false,
-                "visualizerFile":           "${workspaceFolder}/thindx/thindx.natvis"
+                "visualizerFile":           "${workspaceFolder}/.vscode/merged.natvis"
             }
         },
         {
@@ -143,7 +143,7 @@
                 "type":                     "cppvsdbg",
                 "program":                  "${workspaceFolder}/target/debug/examples/d3dcompiler-02-compile.exe",
                 "enableDebugHeap":          true,
-                "visualizerFile":           "${workspaceFolder}/thindx/thindx.natvis"
+                "visualizerFile":           "${workspaceFolder}/.vscode/merged.natvis"
             }
         },
         {
@@ -159,7 +159,7 @@
                 "type":                     "cppvsdbg",
                 "program":                  "${workspaceFolder}/target/release/examples/d3dcompiler-02-compile.exe",
                 "enableDebugHeap":          false,
-                "visualizerFile":           "${workspaceFolder}/thindx/thindx.natvis"
+                "visualizerFile":           "${workspaceFolder}/.vscode/merged.natvis"
             }
         },
         {
@@ -175,7 +175,7 @@
                 "type":                     "cppvsdbg",
                 "program":                  "${workspaceFolder}/target/debug/examples/d3dcompiler-03-link.exe",
                 "enableDebugHeap":          true,
-                "visualizerFile":           "${workspaceFolder}/thindx/thindx.natvis"
+                "visualizerFile":           "${workspaceFolder}/.vscode/merged.natvis"
             }
         },
         {
@@ -191,7 +191,7 @@
                 "type":                     "cppvsdbg",
                 "program":                  "${workspaceFolder}/target/release/examples/d3dcompiler-03-link.exe",
                 "enableDebugHeap":          false,
-                "visualizerFile":           "${workspaceFolder}/thindx/thindx.natvis"
+                "visualizerFile":           "${workspaceFolder}/.vscode/merged.natvis"
             }
         },
         {
@@ -207,7 +207,7 @@
                 "type":                     "cppvsdbg",
                 "program":                  "${workspaceFolder}/target/debug/examples/d3dcompiler-04-reflect-shader.exe",
                 "enableDebugHeap":          true,
-                "visualizerFile":           "${workspaceFolder}/thindx/thindx.natvis"
+                "visualizerFile":           "${workspaceFolder}/.vscode/merged.natvis"
             }
         },
         {
@@ -223,7 +223,7 @@
                 "type":                     "cppvsdbg",
                 "program":                  "${workspaceFolder}/target/release/examples/d3dcompiler-04-reflect-shader.exe",
                 "enableDebugHeap":          false,
-                "visualizerFile":           "${workspaceFolder}/thindx/thindx.natvis"
+                "visualizerFile":           "${workspaceFolder}/.vscode/merged.natvis"
             }
         },
         {
@@ -239,7 +239,7 @@
                 "type":                     "cppvsdbg",
                 "program":                  "${workspaceFolder}/target/debug/examples/d3dcompiler-05-reflect-library.exe",
                 "enableDebugHeap":          true,
-                "visualizerFile":           "${workspaceFolder}/thindx/thindx.natvis"
+                "visualizerFile":           "${workspaceFolder}/.vscode/merged.natvis"
             }
         },
         {
@@ -255,7 +255,7 @@
                 "type":                     "cppvsdbg",
                 "program":                  "${workspaceFolder}/target/release/examples/d3dcompiler-05-reflect-library.exe",
                 "enableDebugHeap":          false,
-                "visualizerFile":           "${workspaceFolder}/thindx/thindx.natvis"
+                "visualizerFile":           "${workspaceFolder}/.vscode/merged.natvis"
             }
         },
         {
@@ -271,7 +271,7 @@
                 "type":                     "cppvsdbg",
                 "program":                  "${workspaceFolder}/target/debug/examples/xinput-exercise-all.exe",
                 "enableDebugHeap":          true,
-                "visualizerFile":           "${workspaceFolder}/thindx/thindx.natvis"
+                "visualizerFile":           "${workspaceFolder}/.vscode/merged.natvis"
             }
         },
         {
@@ -287,7 +287,7 @@
                 "type":                     "cppvsdbg",
                 "program":                  "${workspaceFolder}/target/release/examples/xinput-exercise-all.exe",
                 "enableDebugHeap":          false,
-                "visualizerFile":           "${workspaceFolder}/thindx/thindx.natvis"
+                "visualizerFile":           "${workspaceFolder}/.vscode/merged.natvis"
             }
         },
     ]

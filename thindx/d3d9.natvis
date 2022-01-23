@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AutoVisualizer xmlns="http://schemas.microsoft.com/vstudio/debugger/natvis/2010">
+
+    <Type Name="thindx::d3d9_h::interfaces::device::Device">
+        <Expand>
+            <Item Name="[vtable]"       ExcludeView="simple">__0.__0.pointer->lpVtbl</Item>
+            <Item Name="[refcount]"     ExcludeView="simple">*(unsigned int*)((char*)__0.__0.pointer + 2*sizeof(void*) + 72)</Item>
+            <!--
+            <Item Name="(data)"                         >(void**)__0.__0.pointer,[100]x</Item>
+            <ExpandedItem>__0.__0.pointer</ExpandedItem>
+            -->
+        </Expand>
+    </Type>
+
+    <Type Name="thindx::d3d9_h::interfaces::buffers::IndexBuffer">
+        <Expand>
+            <Item Name="[vtable0]"      ExcludeView="simple">((void**)__0.__0.pointer)[0]</Item>
+            <Item Name="[vtable1]"      ExcludeView="simple">((void**)__0.__0.pointer)[1]</Item>
+            <Item Name="[external rc]"  ExcludeView="simple">*(unsigned int*)((char*)__0.__0.pointer + 2*sizeof(void*) + 0)</Item>
+            <Item Name="[internal rc]"  ExcludeView="simple">*(unsigned int*)((char*)__0.__0.pointer + 2*sizeof(void*) + 4)</Item>
+            <Item Name="(data)"                         >(void**)__0.__0.pointer,[20]x</Item>
+        </Expand>
+    </Type>
+
+    <Type Name="thindx::d3d9_h::interfaces::buffers::VertexBuffer">
+        <Expand>
+            <Item Name="[vtable0]"      ExcludeView="simple">((void**)__0.__0.pointer)[0]</Item>
+            <Item Name="[vtable1]"      ExcludeView="simple">((void**)__0.__0.pointer)[1]</Item>
+            <Item Name="[external rc]"  ExcludeView="simple">*(unsigned int*)((char*)__0.__0.pointer + 2*sizeof(void*) + 0)</Item>
+            <Item Name="[internal rc]"  ExcludeView="simple">*(unsigned int*)((char*)__0.__0.pointer + 2*sizeof(void*) + 4)</Item>
+            <Item Name="(data)"                         >(void**)__0.__0.pointer,[20]x</Item>
+        </Expand>
+    </Type>
+
+    <Type Name="thindx::d3d9_h::interfaces::vertex_declaration::VertexDeclaration">
+        <Expand>
+            <Item Name="[vtable0]"      ExcludeView="simple">((void**)__0.__0.pointer)[0]</Item>
+            <Item Name="[vtable1]"      ExcludeView="simple">((void**)__0.__0.pointer)[1]</Item>
+            <Item Name="[external rc]"  ExcludeView="simple">*(unsigned int*)((char*)__0.__0.pointer + 2*sizeof(void*) + 0)</Item>
+            <Item Name="[internal rc]"  ExcludeView="simple">*(unsigned int*)((char*)__0.__0.pointer + 2*sizeof(void*) + 4)</Item>
+            <ExpandedItem>*(thindx::d3d9types_h::structures::vertex_element::VertexElement**)((char*)__0.__0.pointer + 4*sizeof(void*) + 56),[*(unsigned int*)((char*)__0.__0.pointer + 4*sizeof(void*) + 48)]na</ExpandedItem>
+            <!--
+            <Item Name="Elements">*(thindx::d3d9types_h::structures::vertex_element::VertexElement**)((char*)__0.__0.pointer + 4*sizeof(void*) + 56),[*(unsigned int*)((char*)__0.__0.pointer + 4*sizeof(void*) + 48)]na</Item>
+            <Item Name="(data)"                         >(void**)__0.__0.pointer,[20]x</Item>
+            <Item Name="ptr1">*(void***)((char*)__0.__0.pointer + 2*sizeof(void*) +  8),[20]</Item>
+            <Item Name="ptr2">*(void***)((char*)__0.__0.pointer + 3*sizeof(void*) + 48),[20]</Item>
+            <Item Name="ptr3">*(void***)((char*)__0.__0.pointer + 4*sizeof(void*) + 56),[20]</Item>
+            -->
+        </Expand>
+    </Type>
+
+    <Type Name="thindx::d3d9_h::interfaces::texture::Texture">
+        <Expand>
+            <Item Name="[vtable]"       ExcludeView="simple">__0.__0.pointer->lpVtbl</Item>
+
+            <!-- based on memory inspection -->
+            <!-- doesn't have a typical initial refcount pair -->
+            <Item Name="[external rc]"  ExcludeView="simple">*(unsigned int *)(((void *****)__0.__0.pointer)[1][0][2]+2)</Item>
+            <!--
+            <Item Name="(data)"                         >(void**)__0.__0.pointer,[21]x</Item>
+            <Item Name="(data[1])"                      >((void***)__0.__0.pointer)[1],[1]x</Item>
+            <Item Name="(data[1][0])"                   >((void****)__0.__0.pointer)[1][0],[5]x</Item>
+            <Item Name="(data[1][0][2])"                >((void*****)__0.__0.pointer)[1][0][2],[0x28]x</Item>
+            <Item Name="(data[1][0][4])"                >((void*****)__0.__0.pointer)[1][0][4],[100]x</Item>
+            <Item Name="(data[0x13])"                   >((void***)__0.__0.pointer)[0x13],[100]x</Item>
+            -->
+
+            <Item Name="Format"                     >*(thindx::d3d9types_h::enumerations::format::Format    *)((char*)__0.__0.pointer + 2*sizeof(void*) +  0)</Item>
+            <Item Name="Width"                      >*(unsigned int                                         *)((char*)__0.__0.pointer + 2*sizeof(void*) + 24)</Item>
+            <Item Name="Height"                     >*(unsigned int                                         *)((char*)__0.__0.pointer + 2*sizeof(void*) + 28)</Item>
+            <!--
+            <Item Name="(address)"                  >(void*)__0.__0.pointer</Item>
+            <Item Name="(data)"                     >(unsigned*)__0.__0.pointer,[20]x</Item>
+            <Item Name="Unknown_00"                 >*(void *           *)((char*)__0.__0.pointer + 1*sizeof(void*) +  0)</Item>
+            <Item Name="Unknown_04"                 >*(unsigned int     *)((char*)__0.__0.pointer + 2*sizeof(void*) +  4)</Item>
+            <Item Name="Unknown_08"                 >*(unsigned int     *)((char*)__0.__0.pointer + 2*sizeof(void*) +  8),x</Item>
+            <Item Name="Unknown_12"                 >*(unsigned int     *)((char*)__0.__0.pointer + 2*sizeof(void*) + 12)</Item>
+            <Item Name="Unknown_16"                 >*(unsigned int     *)((char*)__0.__0.pointer + 2*sizeof(void*) + 16)</Item>
+            <Item Name="Unknown_20"                 >*(unsigned int     *)((char*)__0.__0.pointer + 2*sizeof(void*) + 20)</Item>
+            -->
+
+            <!-- based on d3d9.h, doesn't seem to actually work -->
+            <!--
+            <Item Name="Name"                       >*(const wchar_t**)((char*)__0.__0.pointer + 1*sizeof(void*) +  0)</Item>
+            <Item Name="Width"                      >*(unsigned int  *)((char*)__0.__0.pointer + 2*sizeof(void*) +  0)</Item>
+            <Item Name="Height"                     >*(unsigned int  *)((char*)__0.__0.pointer + 2*sizeof(void*) +  4)</Item>
+            <Item Name="Levels"                     >*(unsigned int  *)((char*)__0.__0.pointer + 2*sizeof(void*) +  8)</Item>
+            <Item Name="Usage"                      >*(unsigned int  *)((char*)__0.__0.pointer + 2*sizeof(void*) + 12)</Item>
+            <Item Name="Format"                     >*(unsigned int  *)((char*)__0.__0.pointer + 2*sizeof(void*) + 16)</Item>
+            <Item Name="Pool"                       >*(unsigned int  *)((char*)__0.__0.pointer + 2*sizeof(void*) + 20)</Item>
+            <Item Name="Priority"                   >*(unsigned int  *)((char*)__0.__0.pointer + 2*sizeof(void*) + 24)</Item>
+            <Item Name="LOD"                        >*(unsigned int  *)((char*)__0.__0.pointer + 2*sizeof(void*) + 28)</Item>
+            <Item Name="FilterType"                 >*(unsigned int  *)((char*)__0.__0.pointer + 2*sizeof(void*) + 32)</Item>
+            <Item Name="LockCount"                  >*(unsigned int  *)((char*)__0.__0.pointer + 2*sizeof(void*) + 36)</Item>
+            <Item Name="CreationCallStack"          >*(const wchar_t**)((char*)__0.__0.pointer + 2*sizeof(void*) + 40)</Item>
+            -->
+        </Expand>
+    </Type>
+
+    <Type Name="thindx::d3d9types_h::enumerations::decl_method::DeclMethod8">
+        <DisplayString Condition="__0 ==  0">d3d::DeclMethod8::Default</DisplayString>
+        <DisplayString Condition="__0 ==  1">d3d::DeclMethod8::PartialU</DisplayString>
+        <DisplayString Condition="__0 ==  2">d3d::DeclMethod8::PartialV</DisplayString>
+        <DisplayString Condition="__0 ==  3">d3d::DeclMethod8::CrossUV</DisplayString>
+        <DisplayString Condition="__0 ==  4">d3d::DeclMethod8::UV</DisplayString>
+        <DisplayString Condition="__0 ==  5">d3d::DeclMethod8::Lookup</DisplayString>
+        <DisplayString Condition="__0 ==  6">d3d::DeclMethod8::LookupPresampled</DisplayString>
+        <DisplayString>d3d::DeclMethod8({__0,x})</DisplayString>
+    </Type>
+
+    <Type Name="thindx::d3d9types_h::enumerations::decl_type::DeclType8">
+        <DisplayString Condition="__0 ==  0">d3d::DeclType8::Float1</DisplayString>
+        <DisplayString Condition="__0 ==  1">d3d::DeclType8::Float2</DisplayString>
+        <DisplayString Condition="__0 ==  2">d3d::DeclType8::Float3</DisplayString>
+        <DisplayString Condition="__0 ==  3">d3d::DeclType8::Float4</DisplayString>
+        <DisplayString Condition="__0 ==  4">d3d::DeclType8::D3dColor</DisplayString>
+        <DisplayString Condition="__0 ==  5">d3d::DeclType8::UByte4</DisplayString>
+        <DisplayString Condition="__0 ==  6">d3d::DeclType8::Short2</DisplayString>
+        <DisplayString Condition="__0 ==  7">d3d::DeclType8::Short4</DisplayString>
+        <DisplayString Condition="__0 ==  8">d3d::DeclType8::UByte4N</DisplayString>
+        <DisplayString Condition="__0 ==  9">d3d::DeclType8::Short2N</DisplayString>
+        <DisplayString Condition="__0 == 10">d3d::DeclType8::Short4N</DisplayString>
+        <DisplayString Condition="__0 == 11">d3d::DeclType8::UShort2N</DisplayString>
+        <DisplayString Condition="__0 == 12">d3d::DeclType8::UShort4N</DisplayString>
+        <DisplayString Condition="__0 == 13">d3d::DeclType8::UDec3</DisplayString>
+        <DisplayString Condition="__0 == 14">d3d::DeclType8::Dec3N</DisplayString>
+        <DisplayString Condition="__0 == 15">d3d::DeclType8::Float16_2</DisplayString>
+        <DisplayString Condition="__0 == 16">d3d::DeclType8::Float16_4</DisplayString>
+        <DisplayString Condition="__0 == 17">d3d::DeclType8::Unused</DisplayString>
+        <DisplayString>d3d::DeclType8({__0,x})</DisplayString>
+    </Type>
+
+    <Type Name="thindx::d3d9types_h::enumerations::decl_usage::DeclUsage8">
+        <DisplayString Condition="__0 ==  0">d3d::DeclUsage8::Position</DisplayString>
+        <DisplayString Condition="__0 ==  1">d3d::DeclUsage8::BlendWeight</DisplayString>
+        <DisplayString Condition="__0 ==  2">d3d::DeclUsage8::BlendIndices</DisplayString>
+        <DisplayString Condition="__0 ==  3">d3d::DeclUsage8::Normal</DisplayString>
+        <DisplayString Condition="__0 ==  4">d3d::DeclUsage8::PSize</DisplayString>
+        <DisplayString Condition="__0 ==  5">d3d::DeclUsage8::TexCoord</DisplayString>
+        <DisplayString Condition="__0 ==  6">d3d::DeclUsage8::Tangent</DisplayString>
+        <DisplayString Condition="__0 ==  7">d3d::DeclUsage8::Binormal</DisplayString>
+        <DisplayString Condition="__0 ==  8">d3d::DeclUsage8::TessFactor</DisplayString>
+        <DisplayString Condition="__0 ==  9">d3d::DeclUsage8::PositionT</DisplayString>
+        <DisplayString Condition="__0 == 10">d3d::DeclUsage8::Color</DisplayString>
+        <DisplayString Condition="__0 == 11">d3d::DeclUsage8::Fog</DisplayString>
+        <DisplayString Condition="__0 == 12">d3d::DeclUsage8::Depth</DisplayString>
+        <DisplayString Condition="__0 == 13">d3d::DeclUsage8::Sample</DisplayString>
+        <DisplayString>d3d::DeclUsage8({__0,x})</DisplayString>
+    </Type>
+
+    <Type Name="thindx::d3d9types_h::enumerations::format::Format">
+        <DisplayString Condition="__0 ==  0">d3d::Format::Unknown</DisplayString>
+        <DisplayString Condition="__0 == 20">d3d::Format::R8G8B8</DisplayString>
+        <DisplayString Condition="__0 == 21">d3d::Format::A8R8G8B8</DisplayString>
+        <DisplayString Condition="__0 == 22">d3d::Format::X8R8G8B8</DisplayString>
+        <DisplayString Condition="__0 == 23">d3d::Format::R5G6B5</DisplayString>
+        <DisplayString Condition="__0 == 24">d3d::Format::X1R5G5B5</DisplayString>
+        <DisplayString Condition="__0 == 25">d3d::Format::A1R5G5B5</DisplayString>
+        <DisplayString Condition="__0 == 26">d3d::Format::A4R4G4B4</DisplayString>
+        <DisplayString Condition="__0 == 27">d3d::Format::R3G3B2</DisplayString>
+        <DisplayString Condition="__0 == 28">d3d::Format::A8</DisplayString>
+        <DisplayString Condition="__0 == 29">d3d::Format::A8R3G3B2</DisplayString>
+        <DisplayString Condition="__0 == 30">d3d::Format::X4R4G4B4</DisplayString>
+        <DisplayString Condition="__0 == 31">d3d::Format::A2B10G10R10</DisplayString>
+        <DisplayString Condition="__0 == 32">d3d::Format::A8B8G8R8</DisplayString>
+        <DisplayString Condition="__0 == 33">d3d::Format::X8B8G8R8</DisplayString>
+        <DisplayString Condition="__0 == 34">d3d::Format::G16R16</DisplayString>
+        <DisplayString Condition="__0 == 35">d3d::Format::A2R10G10B10</DisplayString>
+        <DisplayString Condition="__0 == 36">d3d::Format::A16B16G16R16</DisplayString>
+
+        <DisplayString Condition="__0 == 40">d3d::Format::A8P8</DisplayString>
+        <DisplayString Condition="__0 == 41">d3d::Format::P8</DisplayString>
+
+        <DisplayString Condition="__0 == 50">d3d::Format::L8</DisplayString>
+        <DisplayString Condition="__0 == 51">d3d::Format::A8L8</DisplayString>
+        <DisplayString Condition="__0 == 52">d3d::Format::A4L4</DisplayString>
+
+        <DisplayString Condition="__0 == 60">d3d::Format::V8U8</DisplayString>
+        <DisplayString Condition="__0 == 61">d3d::Format::L6V5U5</DisplayString>
+        <DisplayString Condition="__0 == 62">d3d::Format::X8L8V8U8</DisplayString>
+        <DisplayString Condition="__0 == 63">d3d::Format::Q8W8V8U8</DisplayString>
+        <DisplayString Condition="__0 == 64">d3d::Format::V16U16</DisplayString>
+        <DisplayString Condition="__0 == 67">d3d::Format::A2W10V10U10</DisplayString>
+
+        <!-- MAKEFOURCC codes -->
+
+        <DisplayString Condition="__0 == 70">d3d::Format::D16Lockable</DisplayString>
+        <DisplayString Condition="__0 == 71">d3d::Format::D32</DisplayString>
+        <DisplayString Condition="__0 == 73">d3d::Format::D15S1</DisplayString>
+        <DisplayString Condition="__0 == 75">d3d::Format::D24S8</DisplayString>
+        <DisplayString Condition="__0 == 77">d3d::Format::D24X8</DisplayString>
+        <DisplayString Condition="__0 == 79">d3d::Format::D24X4S4</DisplayString>
+        <DisplayString Condition="__0 == 80">d3d::Format::D16</DisplayString>
+
+        <DisplayString Condition="__0 == 82">d3d::Format::D32FLockable</DisplayString>
+        <DisplayString Condition="__0 == 83">d3d::Format::D24FS8</DisplayString>
+
+        <DisplayString Condition="__0 == 84">d3d::Format::D32Lockable</DisplayString>
+        <DisplayString Condition="__0 == 85">d3d::Format::S8Lockable</DisplayString>
+
+        <DisplayString Condition="__0 == 81">d3d::Format::L16</DisplayString>
+
+        <DisplayString Condition="__0 == 100">d3d::Format::VertexData</DisplayString>
+        <DisplayString Condition="__0 == 101">d3d::Format::Index16</DisplayString>
+        <DisplayString Condition="__0 == 102">d3d::Format::Index32</DisplayString>
+
+        <DisplayString Condition="__0 == 110">d3d::Format::Q16W16V16U16</DisplayString>
+
+        <!-- MAKEFOURCC code -->
+
+        <DisplayString Condition="__0 == 111">d3d::Format::R16F</DisplayString>
+        <DisplayString Condition="__0 == 112">d3d::Format::G16R16F</DisplayString>
+        <DisplayString Condition="__0 == 113">d3d::Format::A16B16G16R16F</DisplayString>
+
+        <DisplayString Condition="__0 == 114">d3d::Format::R32F</DisplayString>
+        <DisplayString Condition="__0 == 115">d3d::Format::G32R32F</DisplayString>
+        <DisplayString Condition="__0 == 116">d3d::Format::A32B32G32R32F</DisplayString>
+
+        <DisplayString Condition="__0 == 117">d3d::Format::CxV8U8</DisplayString>
+
+        <DisplayString Condition="__0 == 118">d3d::Format::A1</DisplayString>
+
+        <DisplayString Condition="__0 == 119">d3d::Format::A2B10G10R10XrBias</DisplayString>
+
+        <DisplayString Condition="__0 == 199">d3d::Format::BinaryBuffer</DisplayString>
+
+        <DisplayString>d3d::Format({__0})</DisplayString>
+    </Type>
+
+    <Type Name="thindx::d3d9types_h::enumerations::pool::Pool">
+        <DisplayString Condition="__0 == 0">d3d::Pool::Default</DisplayString>
+        <DisplayString Condition="__0 == 1">d3d::Pool::Managed</DisplayString>
+        <DisplayString Condition="__0 == 2">d3d::Pool::SystemMem</DisplayString>
+        <DisplayString Condition="__0 == 3">d3d::Pool::Scratch</DisplayString>
+        <DisplayString>d3d::Pool({__0,x})</DisplayString>
+    </Type>
+</AutoVisualizer>

@@ -1,6 +1,7 @@
 mod coverage;
 mod examples;
 mod headers;
+mod natvis;
 mod publish;
 mod scan;
 mod vsc;
@@ -40,6 +41,7 @@ fn build(args: std::env::Args) {
         run(r"cargo doc --no-deps --frozen --workspace --all-features --target-dir=target\all-features");
         run(r"cargo test          --frozen --workspace --all-features --target-dir=target\all-features");
     } else {
+        copy_thindx_files();
         let mut cmd = Command::new("cargo");
         cmd.arg("build");
 
@@ -139,6 +141,7 @@ fn run_in(dir: &Path, command: impl AsRef<str>) {
 fn cmd(original: impl AsRef<str>) -> Command { Command::parse(original).unwrap_or_else(|err| fatal!("{}", err)) }
 
 fn copy_thindx_files() {
+    natvis::generate_and_merge();
     for file in "LICENSE-APACHE LICENSE-MIT LICENSE.md Readme.md".split(' ') {
         let from = Path::new(file);
         let to = Path::new("thindx").join(file);

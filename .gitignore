@@ -5,6 +5,7 @@
 /target
 /*.log
 /Cargo.lock
+/.vscode/merged.natvis
 
 # build output (copied from workspace root)
 /thindx/LICENSE*

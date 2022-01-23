@@ -59,7 +59,7 @@ fn launch_json(mut j: impl Write) -> io::Result<()> {
             writeln!(j, "                \"type\":                     \"cppvsdbg\",")?;
             writeln!(j, "                \"program\":                  \"${{workspaceFolder}}/target/{}/examples/{}.exe\",", config, example)?;
             writeln!(j, "                \"enableDebugHeap\":          {},", config == "debug")?;
-            writeln!(j, "                \"visualizerFile\":           {:?}", "${workspaceFolder}/thindx/thindx.natvis")?;
+            writeln!(j, "                \"visualizerFile\":           {:?}", "${workspaceFolder}/.vscode/merged.natvis")?;
             writeln!(j, "            }}")?;
             writeln!(j, "        }},")?;
         }
