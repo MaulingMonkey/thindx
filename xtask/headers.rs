@@ -41,7 +41,7 @@ pub fn update() {
         writeln!(rs, "//! | ---------- | ---------- | ------- | ----- | --------- | --------- | ------ |")?;
         for header in headers.iter() {
             write!(rs, "//! |")?;
-            write!(rs, " [{name}](#{id}h) |", name = header.name_h, id = header.name)?;
+            write!(rs, " [{name}](const@{id}_h) |", name = header.name_h, id = header.name)?;
             for (mapped, total) in [
                 (header.interfaces .iter().filter(|t| cpp2rust.get(t.id.as_str()).is_some()).count(),   header.interfaces   .len()),
                 (header.structs    .iter().filter(|t| cpp2rust.get(t.id.as_str()).is_some()).count(),   header.structs      .len()),
@@ -56,7 +56,6 @@ pub fn update() {
             }
             writeln!(rs)?;
         }
-        writeln!(rs, "//!")?;
 
 
 
@@ -70,38 +69,39 @@ pub fn update() {
             // let classes     = header.classes    .iter().map(|t| (t, cpp2rust.get(t.id.as_str())));
             // let unions      = header.unions     .iter().map(|t| (t, cpp2rust.get(t.id.as_str())));
 
-            writeln!(rs, "//!")?;
-            writeln!(rs, "//! <br>")?;
-            writeln!(rs, "//!")?;
-            writeln!(rs, "//! # {}", header.name_h)?;
-            writeln!(rs, "//!")?;
+
+            writeln!(rs)?;
+            writeln!(rs)?;
+            writeln!(rs)?;
+            writeln!(rs, "/// # {}", header.name_h)?;
+            writeln!(rs, "///")?;
 
             for (idx, (cpp, rust)) in interfaces.enumerate() {
                 if idx == 0 {
-                    writeln!(rs, "//! ### C++ Interfaces → Rust Types")?;
-                    writeln!(rs, "//!")?;
+                    writeln!(rs, "/// ### C++ Interfaces → Rust Types")?;
+                    writeln!(rs, "///")?;
                 }
-                write!(rs, "//! {}", CppLink(&cpp.id))?;
+                write!(rs, "/// {}", CppLink(&cpp.id))?;
                 for (idx, rust) in rust.into_iter().flat_map(|p| p.iter()).enumerate() { write!(rs, "{}{}", if idx == 0 { "&nbsp;→ " } else { ", " }, RustLink(rust))?; }
                 if rust.is_none() { write!(rs, " →&nbsp;❌")?; }
                 writeln!(rs, " <br>")?;
                 for method in cpp.methods() {
                     let cpp     = format!("{}::{}", method.ty, method.f.id);
                     let rust    = cpp2rust.get(&*cpp);
-                    write!(rs, "//! * {}", CppLink(&cpp))?;
+                    write!(rs, "/// * {}", CppLink(&cpp))?;
                     for (idx, rust) in rust.into_iter().flat_map(|p| p.iter()).enumerate() { write!(rs, "{}{}", if idx == 0 { "&nbsp;→ " } else { ", " }, RustLink(rust))?; }
                     if rust.is_none() { write!(rs, " →&nbsp;❌")?; }
                     writeln!(rs, " <br>")?;
                 }
-                writeln!(rs, "//!")?;
+                writeln!(rs, "///")?;
             }
 
             for (idx, (cpp, rust)) in structs.enumerate() {
                 if idx == 0 {
-                    writeln!(rs, "//! ### C++ Structs -> Rust Structs")?;
-                    writeln!(rs, "//!")?;
+                    writeln!(rs, "/// ### C++ Structs -> Rust Structs")?;
+                    writeln!(rs, "///")?;
                 }
-                write!(rs, "//! {}", CppLink(&cpp.id))?;
+                write!(rs, "/// {}", CppLink(&cpp.id))?;
                 for (idx, rust) in rust.into_iter().flat_map(|p| p.iter()).enumerate() { write!(rs, "{}{}", if idx == 0 { "&nbsp;→ " } else { ", " }, RustLink(rust))?; }
                 if rust.is_none() { write!(rs, " →&nbsp;❌")?; }
                 writeln!(rs, " <br>")?;
@@ -109,10 +109,10 @@ pub fn update() {
 
             for (idx, (cpp, rust)) in enums.enumerate() {
                 if idx == 0 {
-                    writeln!(rs, "//! ### C++ Enums → Rust Structs")?;
-                    writeln!(rs, "//!")?;
+                    writeln!(rs, "/// ### C++ Enums → Rust Structs")?;
+                    writeln!(rs, "///")?;
                 }
-                write!(rs, "//! {}", CppLink(&cpp.id))?;
+                write!(rs, "/// {}", CppLink(&cpp.id))?;
                 for (idx, rust) in rust.into_iter().flat_map(|p| p.iter()).enumerate() { write!(rs, "{}{}", if idx == 0 { "&nbsp;→ " } else { ", " }, RustLink(rust))?; }
                 if rust.is_none() { write!(rs, " →&nbsp;❌")?; }
                 writeln!(rs, " <br>")?;
@@ -121,20 +121,20 @@ pub fn update() {
                     if CPP2IGNORE.contains(cpp.as_str()) { continue }
                     if cpp.ends_with("_FORCE_DWORD") { continue }
                     let rust    = cpp2rust.get(&*cpp);
-                    write!(rs, "//! * {}", CppLink(&cpp))?;
+                    write!(rs, "/// * {}", CppLink(&cpp))?;
                     for (idx, rust) in rust.into_iter().flat_map(|p| p.iter()).enumerate() { write!(rs, "{}{}", if idx == 0 { "&nbsp;→ " } else { ", " }, RustLink(rust))?; }
                     if rust.is_none() { write!(rs, " →&nbsp;❌")?; }
                     writeln!(rs, " <br>")?;
                 }
-                writeln!(rs, "//!")?;
+                writeln!(rs, "///")?;
             }
 
             for (idx, (cpp, rust)) in functions.enumerate() {
                 if idx == 0 {
-                    writeln!(rs, "//! ### C++ Functions → Rust Fns")?;
-                    writeln!(rs, "//!")?;
+                    writeln!(rs, "/// ### C++ Functions → Rust Fns")?;
+                    writeln!(rs, "///")?;
                 }
-                write!(rs, "//! {}", CppLink(&cpp.id))?;
+                write!(rs, "/// {}", CppLink(&cpp.id))?;
                 for (idx, rust) in rust.into_iter().flat_map(|p| p.iter()).enumerate() { write!(rs, "{}{}", if idx == 0 { "&nbsp;→ " } else { ", " }, RustLink(rust))?; }
                 if rust.is_none() { write!(rs, " →&nbsp;❌")?; }
                 writeln!(rs, " <br>")?;
@@ -142,10 +142,10 @@ pub fn update() {
 
             for (idx, (cpp, rust)) in constants.enumerate() {
                 if idx == 0 {
-                    writeln!(rs, "//! ### C++ Constants → Rust Constants")?;
-                    writeln!(rs, "//!")?;
+                    writeln!(rs, "/// ### C++ Constants → Rust Constants")?;
+                    writeln!(rs, "///")?;
                 }
-                write!(rs, "//! {}", CppLink(&cpp))?;
+                write!(rs, "/// {}", CppLink(&cpp))?;
                 for (idx, rust) in rust.into_iter().flat_map(|p| p.iter()).enumerate() { write!(rs, "{}{}", if idx == 0 { "&nbsp;→ " } else { ", " }, RustLink(rust))?; }
                 if rust.is_none() { write!(rs, " →&nbsp;❌")?; }
                 writeln!(rs, " <br>")?;
@@ -153,20 +153,26 @@ pub fn update() {
 
             for (idx, (cpp, rust)) in macros.enumerate() {
                 if idx == 0 {
-                    writeln!(rs, "//! ### C++ Macros → Rust fns/macros")?;
-                    writeln!(rs, "//!")?;
+                    writeln!(rs, "/// ### C++ Macros → Rust fns/macros")?;
+                    writeln!(rs, "///")?;
                 }
-                write!(rs, "//! {}", CppLink(&cpp))?;
+                write!(rs, "/// {}", CppLink(&cpp))?;
                 for (idx, rust) in rust.into_iter().flat_map(|p| p.iter()).enumerate() { write!(rs, "{}{}", if idx == 0 { "&nbsp;→ " } else { ", " }, RustLink(rust))?; }
                 if rust.is_none() { write!(rs, " →&nbsp;❌")?; }
                 writeln!(rs, " <br>")?;
             }
 
             // classes, unions
+
+            writeln!(rs, "pub const {}_h : cxx_header = cxx_header;", header.name)?;
         }
 
 
 
+        writeln!(rs)?;
+        writeln!(rs)?;
+        writeln!(rs)?;
+        writeln!(rs, "#[allow(non_camel_case_types)] #[doc(hidden)] pub struct cxx_header;")?;
         writeln!(rs, "use crate::*;")?;
         Ok(())
     }).unwrap_or_else(|err| fatal!("unable to create `thindx/src/_headers.rs`: {}", err));
