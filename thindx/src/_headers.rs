@@ -17,7 +17,7 @@
 //! | [d3dcompiler.h](#d3dcompilerh) |   | ✔️ 1 of 1 | ✔️ 2 of 2 |   | ⚠️ 60 of 71 |   |
 //! | [d3d9.h](#d3d9h) | ⚠️ 20 of 24 |   |   | ⚠️ 2 of 9 | ⚠️ 26 of 73 | ❌ 0 of 3 |
 //! | [d3d9caps.h](#d3d9capsh) |   | ⚠️ 3 of 5 |   |   | ⚠️ 213 of 249 |   |
-//! | [d3d9types.h](#d3d9typesh) |   | ⚠️ 19 of 71 | ⚠️ 40 of 54 |   | ⚠️ 508 of 844 | ⚠️ 6 of 20 |
+//! | [d3d9types.h](#d3d9typesh) |   | ⚠️ 19 of 71 | ⚠️ 40 of 54 |   | ⚠️ 508 of 844 | ⚠️ 8 of 20 |
 //! | [d3d11shader.h](#d3d11shaderh) | ✔️ 12 of 12 | ✔️ 9 of 9 | ✔️ 1 of 1 |   | ⚠️ 7 of 18 | ❌ 0 of 3 |
 //! | [d3d11shadertracing.h](#d3d11shadertracingh) | ❌ 0 of 2 | ❌ 0 of 11 | ❌ 0 of 3 |   | ❌ 0 of 62 |   |
 //! | [xinput.h](#xinputh) |   | ✔️ 6 of 6 |   | ✔️ 8 of 8 | ⚠️ 83 of 86 |   |
@@ -2486,7 +2486,7 @@
 //! `MAX_DEVICE_IDENTIFIER_STRING` →&nbsp;❌ <br>
 //! ### C++ Macros → Rust fns/macros
 //!
-//! `D3DCOLOR_ARGB` →&nbsp;❌ <br>
+//! `D3DCOLOR_ARGB`&nbsp;→ [`d3d::Color::argb`] <br>
 //! `D3DCOLOR_AYUV` →&nbsp;❌ <br>
 //! `D3DCOLOR_COLORVALUE` →&nbsp;❌ <br>
 //! `D3DCOLOR_RGBA` →&nbsp;❌ <br>
@@ -2505,7 +2505,7 @@
 //! `D3DTS_WORLDMATRIX`&nbsp;→ [`d3d::TS::world_matrix`] <br>
 //! `D3DVS_END` →&nbsp;❌ <br>
 //! `D3DVS_VERSION`&nbsp;→ [`d3d9::ShaderVersion::vs`] <br>
-//! `MAKEFOURCC` →&nbsp;❌ <br>
+//! `MAKEFOURCC`&nbsp;→ [`d3d::make_four_cc`] <br>
 //!
 //! <br>
 //!

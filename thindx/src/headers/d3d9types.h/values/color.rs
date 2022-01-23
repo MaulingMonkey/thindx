@@ -80,4 +80,5 @@ impl IntoARGB for u32               { fn into_argb(self) -> Color { Color(self) 
 impl IntoARGB for [u8; 4]           { fn into_argb(self) -> Color { Color(u32::from_be_bytes(self)) } }
 impl IntoARGB for (u8, u8, u8, u8)  { fn into_argb(self) -> Color { let (a,r,g,b) = self; Color(u32::from_be_bytes([a,r,g,b])) } }
 
-//#cpp2rust D3DCOLOR = d3d::Color
+//#cpp2rust D3DCOLOR        = d3d::Color
+//#cpp2rust D3DCOLOR_ARGB   = d3d::Color::argb

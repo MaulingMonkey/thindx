@@ -59,6 +59,10 @@ mods! {
         inl mod usage;
     }
 
+    inl mod macros {
+        inl mod makefourcc;
+    }
+
     inl mod structures {
         inl mod adapter_identifier;
         inl mod box_;
