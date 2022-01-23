@@ -178,3 +178,6 @@ impl PartialEq<ErrorKind> for Option<ErrorKind> { fn eq(&self, other: &ErrorKind
 
 impl<O> PartialEq<Result<O, ErrorKind>> for ErrorKind { fn eq(&self, other: &Result<O, ErrorKind>) -> bool { Some(self) == other.as_ref().err() } }
 impl<O> PartialEq<ErrorKind> for Result<O, ErrorKind> { fn eq(&self, other: &ErrorKind)            -> bool { Some(other) == self.as_ref().err() } }
+
+//#cpp2rust HRESULT         = ErrorKind
+//#cpp2rust MAKE_HRESULT    = ErrorKind::make_hresult

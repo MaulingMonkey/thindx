@@ -2505,7 +2505,7 @@
 //! `D3DTS_WORLDMATRIX`&nbsp;→ [`d3d::TS::world_matrix`] <br>
 //! `D3DVS_END` →&nbsp;❌ <br>
 //! `D3DVS_VERSION`&nbsp;→ [`d3d9::ShaderVersion::vs`] <br>
-//! `MAKEFOURCC`&nbsp;→ [`d3d::make_four_cc`] <br>
+//! `MAKEFOURCC`&nbsp;→ [`make_four_cc`] <br>
 //!
 //! <br>
 //!

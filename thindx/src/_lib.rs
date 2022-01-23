@@ -24,6 +24,7 @@ pub extern crate abistr;
 
 mods! {
     inl mod namespaces {
+        inl mod _root;
         pub mod d3d;
         pub mod d3d9;
         pub mod d3d11;
@@ -36,19 +37,18 @@ mods! {
     #[path="headers/d3d11shader.h/d3d11shader.rs"]  mod d3d11shader_h;  // d3d11 mod
     #[path="headers/d3dcommon.h/d3dcommon.rs"]      mod d3dcommon_h;    // d3d mod
     #[path="headers/d3dcompiler.h/d3dcompiler.rs"]  mod d3dcompiler_h;  // d3d mod
-    #[path="headers/guiddef.h/guiddef.rs"]          inl mod guiddef_h;
-    #[path="headers/unknwn.h/unknwn.rs"]            inl mod unknwn_h;
+    #[path="headers/guiddef.h/guiddef.rs"]          mod guiddef_h;
+    #[path="headers/unknwn.h/unknwn.rs"]            mod unknwn_h;
     #[path="headers/xinput.h/xinput.rs"]            mod xinput_h;
 
-    #[path="traits/_traits.rs"] inl mod traits;
+    #[path="traits/_traits.rs"]                     mod traits;
 
     pub(crate) mod dll;
-    inl mod error_kind;
+    mod error_kind;
     pub mod errors;
-    inl mod method_error_blob;
-    inl mod method_error;
+    mod method_error_blob;
+    mod method_error;
 }
-#[doc(no_inline)] pub use errors::*;
 
 #[cfg(doc)] #[doc = include_str!("../doc/changelog.md")] pub mod _changelog {}
 #[cfg(doc)] pub mod _examples;

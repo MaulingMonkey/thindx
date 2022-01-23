@@ -15,14 +15,17 @@ use std::hash::*;
 #[derive(Clone, Copy)]
 #[repr(transparent)] pub struct Guid(GUID);
 
+/// = [Guid]
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/wmformat/interface-identifiers)\]
 /// **I**interface **Id**entifier - used for uniquely identifiying COM interfaces
 pub type IID    = Guid;
 
+/// = [Guid]
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/com/com-class-objects-and-clsids)\]
 /// **Cl**as**s** **Id**entifier - used for uniquely identifying COM classes
 pub type ClsID  = Guid;
 
+/// = [Guid]
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/stg/format-identifiers)\]
 /// **F**or**m**a**t** **Id**entifier - used for tagging sections in e.g. structured storage property sets
 pub type FmtID  = Guid;
