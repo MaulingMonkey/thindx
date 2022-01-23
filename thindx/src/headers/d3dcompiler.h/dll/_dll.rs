@@ -76,28 +76,20 @@ mod d3d11_methods;                  pub use d3d11_methods::*;
 pub struct Compiler {
     // https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/
 
+    // TODO: D3DDisassemble10Effect
 
-    // https://github.com/MaulingMonkey/thindx/issues/2
-    // D3D10 APIs not exposed:
-    // D3DDisassemble10Effect
-
-
-    // https://github.com/MaulingMonkey/thindx/issues/3
     // Undocumented APIs not exposed:
-    // D3DAssemble
+    // TODO: D3DAssemble
 
-
-    // https://github.com/MaulingMonkey/thindx/issues/4
     // Legacy APIs not (yet?) exposed:
-    // D3DCompileFromMemory
-    // D3DDisassembleCode
-    // D3DDisassembleEffect
-    // D3DGetCodeDebugInfo
-    // D3DPreprocessFromMemory
+    // TODO: D3DCompileFromMemory
+    // TODO: D3DDisassembleCode
+    // TODO: D3DDisassembleEffect
+    // TODO: D3DGetCodeDebugInfo
+    // TODO: D3DPreprocessFromMemory
 
-    // https://github.com/MaulingMonkey/thindx/issues/6
     // d3d11shadertracing.h not (yet?) exposed:
-    // D3DDisassemble11Trace
+    // TODO: D3DDisassemble11Trace
 
     /// D3DCompiler_40.dll ..=
     D3DCompile: Option<unsafe extern "system" fn (
