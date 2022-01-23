@@ -1,4 +1,5 @@
 mod coverage;
+mod doc;
 mod examples;
 mod headers;
 mod natvis;
@@ -19,8 +20,8 @@ fn main() {
     match cmd.as_str() {
         "b" | "build"   => build(args),
         "c" | "check"   => check(args),
-        "d" | "doc"     => doc(args, false),
-        "h" | "help"    => doc(args, true),
+        "d" | "doc"     => doc::build(args, false),
+        "h" | "help"    => doc::build(args, true),
         "coverage"      => coverage::coverage(args),
         "publish"       => publish::publish(args),
         "vsc"           => vsc::vsc(args),
@@ -112,18 +113,6 @@ fn check(mut args: std::env::Args) {
     status!("Running", "{:?}", cmd);
     cmd.status0().unwrap_or_else(|err| fatal!("{}", err));
 }
-
-fn doc(_args: std::env::Args, help: bool) {
-    copy_thindx_files();
-    run("cargo build --examples");
-    examples::update();
-    headers::update();
-    run(r"cargo doc --no-deps --workspace --all-features --target-dir=target\all-features");
-    if !help { return }
-    run(r"cargo doc --no-deps -p thindx   --all-features --target-dir=target\all-features --open");
-}
-
-
 
 fn run(command: impl AsRef<str>) {
     let mut c = cmd(command);
