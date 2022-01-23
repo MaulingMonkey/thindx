@@ -254,4 +254,8 @@ impl Compiler {
         debug_assert_eq!(n, n2);
         Ok(v)
     }
+
+    // TODO: D3DDecompressShaders accepting RangeBounds ?
+    // TODO: D3DDecompressShaders accepting array of indicies ?
+    // TODO: D3DDecompressShaders eliding Option s?
 }
