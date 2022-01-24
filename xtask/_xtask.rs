@@ -38,9 +38,7 @@ fn build(args: std::env::Args) {
         run("cargo fetch");
         run("cargo build --frozen --workspace --all-targets");
         run(r"cargo build --frozen --workspace --all-targets --all-features --target-dir=target\all-features");
-        examples::update();
-        headers::update();
-        run(r"cargo doc --no-deps --frozen --workspace --all-features --target-dir=target\all-features");
+        doc::update();
         run(r"cargo test          --frozen --workspace --all-features --target-dir=target\all-features");
     } else {
         copy_thindx_files();

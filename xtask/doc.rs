@@ -4,15 +4,20 @@ use std::io;
 
 
 
+/// `cargo doc` subcommand entry point
 pub fn build(_args: std::env::Args, help: bool) {
     copy_thindx_files();
     run("cargo build --examples");
+    update();
+    if !help { return }
+    insecure_open_url(r#"target/all-features/doc/thindx/index.html"#);
+}
+
+pub fn update() {
     examples::update();
     headers::update();
-    run(r"cargo doc --no-deps --workspace --all-features --target-dir=target\all-features");
+    run(r"cargo doc --no-deps --frozen --workspace --all-features --target-dir=target\all-features");
     fixup();
-    if !help { return }
-    run(r"cargo doc --no-deps -p thindx   --all-features --target-dir=target\all-features --open");
 }
 
 fn fixup() {
@@ -57,4 +62,23 @@ fn rewrite_file(path: &Path, f: impl FnOnce(String) -> String) -> io::Result<()>
     let text = f(text);
     std::fs::write(&path, text)?;
     Ok(())
+}
+
+/// ### Security
+///
+/// *   Does not guard against shell escapes
+fn insecure_open_url(url: &str) {
+    status!("Opening", "{}", url);
+    let mut cmd = if cfg!(windows) {
+        Command::parse("cmd /C start \"\"").unwrap()
+    } else if cfg!(target_os = "linux") {
+        Command::new("xdg-open")
+    } else if cfg!(target_os = "macos") {
+        Command::new("open")
+    } else {
+        error!("doc::insecure_open_url not implemented on this platform");
+        return;
+    };
+    cmd.arg(url);
+    let _ = cmd.status0().map_err(|err| error!("{}", err));
 }
