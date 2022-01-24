@@ -59,11 +59,11 @@
             "command": "scripts\\clean.cmd",
         },
         {
-            "label":   "coverage update",
+            "label":   "update coverage",
             "command": "cargo xtask coverage",
         },
         {
-            "label":   "coverage open",
+            "label":   "open coverage",
             "command": "cargo xtask coverage --open",
         },
         {
