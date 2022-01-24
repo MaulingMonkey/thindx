@@ -1,0 +1,78 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Test basic [xinput] APIs"><meta name="keywords" content="rust, rustlang, rust-lang, xinput_exercise_all"><title>xinput_exercise_all in thindx::_examples - Rust</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><script defer src="../../main.js"></script>
+    <noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc constant"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../thindx/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a><div class="sidebar-elems"><h2 class="location">Other items in<br><a href="../index.html">thindx</a>::<wbr><a href="index.html">_examples</a></h2><div id="sidebar-vars" data-name="xinput_exercise_all" data-ty="constant" data-relpath=""></div><script defer src="sidebar-items.js"></script></div></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../wheel.svg"></a></div></form></nav><section id="main" class="content"><h1 class="fqn"><span class="in-band">Constant <a href="../index.html">thindx</a>::<wbr><a href="index.html">_examples</a>::<wbr><a class="constant" href="#">xinput_exercise_all</a><button id="copy-path" onclick="copy_path(this)" title="Copy item path to clipboard"><img src="../../clipboard.svg" width="19" height="18" alt="Copy item path"></button></span><span class="out-of-band"><span id="render-detail"><a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span><a class="srclink" href="../../src/thindx/_examples.rs.html#1279" title="goto source code">[src]</a></span></h1><div class="docblock item-decl"><pre class="rust const"><code>pub const xinput_exercise_all: <a class="primitive" href="https://doc.rust-lang.org/1.58.1/std/primitive.unit.html">()</a>;</code></pre></div><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Test basic <a href="../xinput/index.html" title="xinput">xinput</a> APIs</p>
+<h4 id="source" class="section-header"><a href="#source">Source</a></h4>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use</span> <span class="ident">std::io</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">std::ptr::null_mut</span>;
+<span class="kw">use</span> <span class="ident">std::time</span>::<span class="kw-2">*</span>;
+ 
+<span class="kw">use</span> <span class="ident">thindx::xinput</span>::{<span class="self">self</span>, <span class="kw-2">*</span>};
+<span class="kw">use</span> <span class="ident">winapi::um::objbase::CoInitialize</span>;
+ 
+<span class="kw">fn</span> <span class="ident">main</span>() {
+    <span class="kw unsafe">unsafe</span> { <span class="ident">CoInitialize</span>(<span class="ident">null_mut</span>()) };
+ 
+    <span class="lifetime">&#39;vks</span>: <span class="kw">for</span> <span class="ident">vk</span> <span class="kw">in</span> [
+        <span class="ident">VK::PadA</span>, <span class="ident">VK::PadB</span>, <span class="ident">VK::PadX</span>, <span class="ident">VK::PadY</span>, <span class="ident">VK::PadRShoulder</span>, <span class="ident">VK::PadLShoulder</span>,
+        <span class="ident">VK::PadRTrigger</span>, <span class="ident">VK::PadLTrigger</span>, <span class="ident">VK::PadDPadUp</span>, <span class="ident">VK::PadDPadDown</span>, <span class="ident">VK::PadDPadLeft</span>,
+        <span class="ident">VK::PadDPadRight</span>, <span class="ident">VK::PadStart</span>, <span class="ident">VK::PadBack</span>, <span class="ident">VK::PadLThumbPress</span>, <span class="ident">VK::PadRThumbPress</span>,
+        <span class="ident">VK::PadLThumbUp</span>, <span class="ident">VK::PadLThumbDown</span>, <span class="ident">VK::PadLThumbRight</span>, <span class="ident">VK::PadLThumbLeft</span>,
+        <span class="ident">VK::PadLThumbUpLeft</span>, <span class="ident">VK::PadLThumbUpRight</span>, <span class="ident">VK::PadLThumbDownRight</span>,
+        <span class="ident">VK::PadLThumbDownLeft</span>, <span class="ident">VK::PadRThumbUp</span>, <span class="ident">VK::PadRThumbDown</span>, <span class="ident">VK::PadRThumbRight</span>,
+        <span class="ident">VK::PadRThumbLeft</span>, <span class="ident">VK::PadRThumbUpLeft</span>, <span class="ident">VK::PadRThumbUpRight</span>, <span class="ident">VK::PadRThumbDownRight</span>,
+        <span class="ident">VK::PadRThumbDownLeft</span>,
+    ].<span class="ident">iter</span>().<span class="ident">copied</span>() {
+        <span class="macro">print!</span>(<span class="string">&quot;    press {:?}... &quot;</span>, <span class="ident">vk</span>);
+        <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">stdout</span>().<span class="ident">flush</span>();
+ 
+        <span class="kw">let</span> <span class="ident">timeout</span> <span class="op">=</span> <span class="ident">Instant::now</span>() <span class="op">+</span> <span class="ident">Duration::from_secs</span>(<span class="number">10</span>);
+        <span class="kw">while</span> <span class="ident">Instant::now</span>() <span class="op">&lt;</span> <span class="ident">timeout</span> {
+            <span class="kw">match</span> <span class="ident">xinput::get_keystroke</span>(<span class="ident">User::Any</span>, ()) {
+                <span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(<span class="ident">e</span>)) <span class="kw">if</span> <span class="ident">vk</span> <span class="op">==</span> <span class="ident">e</span>.<span class="ident">virtual_key</span> =&gt; {
+                    <span class="macro">println!</span>(<span class="string">&quot;✔️ pressed&quot;</span>);
+                    <span class="kw">continue</span> <span class="lifetime">&#39;vks</span>
+                },
+                <span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(<span class="ident">_other</span>)) =&gt; {},
+                <span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>) =&gt; <span class="ident">std::thread::yield_now</span>(),
+                <span class="prelude-val">Err</span>(<span class="ident">e</span>) =&gt; {
+                    <span class="macro">println!</span>(<span class="string">&quot;❌ {:?}&quot;</span>, <span class="ident">e</span>);
+                    <span class="kw">continue</span> <span class="lifetime">&#39;vks</span>
+                },
+            }
+        }
+        <span class="macro">println!</span>(<span class="string">&quot;⚠️ timeout&quot;</span>);
+    }
+ 
+    <span class="lifetime">&#39;buttons</span>: <span class="kw">for</span> <span class="ident">buttons</span> <span class="kw">in</span> [
+        <span class="ident">Buttons::None</span>,
+        <span class="ident">Buttons::A</span>, <span class="ident">Buttons::B</span>, <span class="ident">Buttons::A</span> <span class="op">|</span> <span class="ident">Buttons::B</span>,
+        <span class="ident">Buttons::X</span>, <span class="ident">Buttons::Y</span>, <span class="ident">Buttons::X</span> <span class="op">|</span> <span class="ident">Buttons::Y</span>,
+        <span class="ident">Buttons::RightShoulder</span>, <span class="ident">Buttons::LeftShoulder</span>,
+        <span class="ident">Buttons::DPadUp</span>, <span class="ident">Buttons::DPadDown</span>, <span class="ident">Buttons::DPadLeft</span>, <span class="ident">Buttons::DPadRight</span>,
+        <span class="ident">Buttons::Start</span>,
+        <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">deprecated</span>)]</span> <span class="ident">Buttons::Guide</span>,
+        <span class="ident">Buttons::Back</span>,
+        <span class="ident">Buttons::RightThumb</span>, <span class="ident">Buttons::LeftThumb</span>,
+    ].<span class="ident">iter</span>().<span class="ident">copied</span>() {
+        <span class="macro">print!</span>(<span class="string">&quot;    press {:?}... &quot;</span>, <span class="ident">buttons</span>);
+        <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">stdout</span>().<span class="ident">flush</span>();
+ 
+        <span class="kw">let</span> <span class="ident">timeout</span> <span class="op">=</span> <span class="ident">Instant::now</span>() <span class="op">+</span> <span class="ident">Duration::from_secs</span>(<span class="number">10</span>);
+        <span class="kw">while</span> <span class="ident">Instant::now</span>() <span class="op">&lt;</span> <span class="ident">timeout</span> {
+            <span class="kw">for</span> <span class="ident">user</span> <span class="kw">in</span> <span class="ident">xinput::User::iter_valid</span>() {
+                <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">deprecated</span>)]</span> <span class="kw">match</span> <span class="ident">xinput::get_state_ex</span>(<span class="ident">user</span>) {
+                    <span class="prelude-val">Ok</span>(<span class="ident">e</span>) <span class="kw">if</span> <span class="ident">buttons</span> <span class="op">==</span> <span class="ident">e</span>.<span class="ident">buttons</span> =&gt; {
+                        <span class="macro">println!</span>(<span class="string">&quot;✔️ pressed&quot;</span>);
+                        <span class="kw">continue</span> <span class="lifetime">&#39;buttons</span>
+                    },
+                    <span class="prelude-val">Ok</span>(<span class="ident">_other</span>) =&gt; {},
+                    <span class="prelude-val">Err</span>(<span class="ident">_err</span>) =&gt; {},
+                }
+            }
+        }
+        <span class="macro">println!</span>(<span class="string">&quot;⚠️ timeout&quot;</span>);
+    }
+}</code></pre></div>
+<h4 id="to-run-this-example-yourself" class="section-header"><a href="#to-run-this-example-yourself">To run this example yourself</a></h4><div class="example-wrap"><pre class="language-cmd"><code>git clone https://github.com/MaulingMonkey/thindx
+cd thindx
+cargo run --example xinput-exercise-all</code></pre></div></div></details></section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="thindx" data-search-index-js="../../search-index.js" data-search-js="../../search.js"></div>
+</body></html>

@@ -1,0 +1,1 @@
+initSidebarItems({"constant":[["ACCESS_DENIED","Access is denied."],["BAD_ARGUMENTS","One or more arguments are not correct."],["DEVICE_NOT_CONNECTED","The device is not connected."],["FILE_EXISTS","The file exists."],["FILE_NOT_FOUND","A file was not found"],["PATH_NOT_FOUND","The system cannot find the path specified."],["SUCCESS","No error occured"]]});

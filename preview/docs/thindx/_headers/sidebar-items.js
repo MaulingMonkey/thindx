@@ -1,0 +1,1 @@
+initSidebarItems({"constant":[["d3d11shader_h","d3d11shader.h"],["d3d11shadertracing_h","d3d11shadertracing.h"],["d3d9_h","d3d9.h"],["d3d9caps_h","d3d9caps.h"],["d3d9types_h","d3d9types.h"],["d3dcommon_h","d3dcommon.h"],["d3dcompiler_h","d3dcompiler.h"],["guiddef_h","guiddef.h"],["unknwn_h","unknwn.h"],["xaudio2_h","xaudio2.h"],["xinput_h","xinput.h"]]});

@@ -1,0 +1,124 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="[docs.microsoft.com] APIs for Xbox 360 style controllers"><meta name="keywords" content="rust, rustlang, rust-lang, xinput"><title>thindx::xinput - Rust</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><script defer src="../../main.js"></script>
+    <noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc mod"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../thindx/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a><h2 class="location">Module xinput</h2><div class="sidebar-elems"><div class="block items"><ul><li><a href="#structs">Structs</a></li><li><a href="#functions">Functions</a></li></ul></div><div id="sidebar-vars" data-name="xinput" data-ty="mod" data-relpath="./"></div><script defer src="./sidebar-items.js"></script></div></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../wheel.svg"></a></div></form></nav><section id="main" class="content"><h1 class="fqn"><span class="in-band">Module <a href="../index.html">thindx</a>::<wbr><a class="mod" href="#">xinput</a><button id="copy-path" onclick="copy_path(this)" title="Copy item path to clipboard"><img src="../../clipboard.svg" width="19" height="18" alt="Copy item path"></button></span><span class="out-of-band"><span id="render-detail"><a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span><a class="srclink" href="../../src/thindx/namespaces/xinput.rs.html#1-113" title="goto source code">[src]</a></span></h1><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>[<a href="https://docs.microsoft.com/en-us/windows/win32/xinput/xinput-game-controller-apis-portal">docs.microsoft.com</a>]
+APIs for Xbox 360 style controllers</p>
+<h4 id="enumerations" class="section-header"><a href="#enumerations">Enumerations</a></h4><div><table><thead><tr><th>C++</th><th>Rust</th></tr></thead><tbody>
+<tr><td><a href="https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetbatteryinformation"><code>BATTERY_DEVTYPE_*</code></a></td><td><a href="struct.BatteryDevType.html" title="BatteryDevType"><code>BatteryDevType</code></a>::*</td></tr>
+<tr><td><a href="https://docs.microsoft.com/en-us/windows/win32/api/XInput/ns-xinput-xinput_battery_information"><code>BATTERY_LEVEL_*</code></a></td><td><a href="struct.BatteryLevel.html" title="BatteryLevel"><code>BatteryLevel</code></a>::*</td></tr>
+<tr><td><a href="https://docs.microsoft.com/en-us/windows/win32/api/XInput/ns-xinput-xinput_battery_information"><code>BATTERY_TYPE_*</code></a></td><td><a href="struct.BatteryType.html" title="BatteryType"><code>BatteryType</code></a>::*</td></tr>
+<tr><td><a href="https://docs.microsoft.com/en-us/windows/win32/xinput/xinput-and-controller-subtypes"><code>XINPUT_DEVSUBTYPE_*</code></a></td><td><a href="struct.DevSubType.html" title="DevSubType"><code>DevSubType</code></a>::*</td></tr>
+<tr><td><a href="https://docs.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_capabilities"><code>XINPUT_DEVTYPE_*</code></a></td><td><a href="struct.DevType.html" title="DevType"><code>DevType</code></a>::*</td></tr>
+<tr><td><code>XUSER_*</code></td><td><a href="struct.User.html" title="User"><code>User</code></a>::*</td></tr>
+<tr><td><a href="https://docs.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_keystroke#remarks"><code>VK_*</code></a></td><td><a href="struct.VK.html" title="VK"><code>VK</code></a>::*</td></tr>
+</tbody></table>
+</div><h4 id="flags" class="section-header"><a href="#flags">Flags</a></h4><div><table><thead><tr><th>C++</th><th>Rust</th></tr></thead><tbody>
+<tr><td><a href="https://docs.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_gamepad#members"><code>XINPUT_GAMEPAD_*</code></a></td><td><a href="struct.Buttons.html" title="Buttons"><code>Buttons</code></a>::*</td></tr>
+<tr><td><a href="https://docs.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_capabilities#members"><code>XINPUT_CAPS_*</code></a></td><td><a href="struct.Caps.html" title="Caps"><code>Caps</code></a>::*</td></tr>
+<tr><td><a href="https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetcapabilities#parameters"><code>XINPUT_FLAG_*</code></a></td><td><a href="struct.Flag.html" title="Flag"><code>Flag</code></a>::*</td></tr>
+</tbody></table>
+</div><h4 id="functions" class="section-header"><a href="#functions">Functions</a></h4><div><table><thead><tr><th>C++</th><th>Rust</th></tr></thead><tbody>
+<tr><td><a href="https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputenable"><code>XInputEnable</code></a></td><td><a href="fn.enable.html" title="enable"><code>enable</code></a></td></tr>
+<tr><td><a href="https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetaudiodeviceids"><code>XInputGetAudioDeviceIds</code></a></td><td><a href="fn.get_audio_device_ids.html" title="get_audio_device_ids"><code>get_audio_device_ids</code></a></td></tr>
+<tr><td><a href="https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetbatteryinformation"><code>XInputGetBatteryInformation</code></a></td><td><a href="fn.get_battery_information.html" title="get_battery_information"><code>get_battery_information</code></a></td></tr>
+<tr><td><a href="https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetcapabilities"><code>XInputGetCapabilities</code></a></td><td><a href="fn.get_capabilities.html" title="get_capabilities"><code>get_capabilities</code></a></td></tr>
+<tr><td><a href="https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetdsoundaudiodeviceguids"><code>XInputGetDSoundAudioDeviceGuids</code></a> ❌</td><td><a href="fn.get_dsound_audio_device_guids.html" title="get_dsound_audio_device_guids"><code>get_dsound_audio_device_guids</code></a></td></tr>
+<tr><td><a href="https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetkeystroke"><code>XInputGetKeystroke</code></a></td><td><a href="fn.get_keystroke.html" title="get_keystroke"><code>get_keystroke</code></a></td></tr>
+<tr><td><a href="https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetstate"><code>XInputGetState</code></a></td><td><a href="fn.get_state.html" title="get_state"><code>get_state</code></a></td></tr>
+<tr><td><code>XInputGetStateEx</code> ⚠️ 1.3</td><td><a href="fn.get_state_ex.html" title="get_state_ex"><code>get_state_ex</code></a></td></tr>
+<tr><td><a href="https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputsetstate"><code>XInputSetState</code></a></td><td><a href="fn.set_state.html" title="set_state"><code>set_state</code></a></td></tr>
+<tr><td><code>XInputWaitForGuideButton</code>    ⚠️ 1.3</td><td><span style="opacity: 25%">TODO?</span></td></tr>
+<tr><td><code>XInputCancelGuideButtonWait</code> ⚠️ 1.3</td><td><span style="opacity: 25%">TODO?</span></td></tr>
+<tr><td><code>XInputPowerOffController</code>    ⚠️ 1.3</td><td><span style="opacity: 25%">TODO?</span></td></tr>
+<tr><td><code>XInputGetBaseBusInformation</code> ⚠️ 1.4</td><td><span style="opacity: 25%">TODO?</span></td></tr>
+<tr><td><code>XInputGetCapabilitiesEx</code>     ⚠️ 1.4</td><td><span style="opacity: 25%">TODO?</span></td></tr>
+</tbody></table>
+</div><div><table><thead><tr><th>Legend</th><th>Desc</th></tr></thead><tbody>
+<tr><td>❌</td><td>Deprecated</td></tr>
+<tr><td>⚠️ 1.3</td><td>Undocumented XInput 1.3+ function exported by ordinal only</td></tr>
+<tr><td>⚠️ 1.4</td><td>Undocumented XInput 1.4+ function exported by ordinal only</td></tr>
+</tbody></table>
+</div><h4 id="structures" class="section-header"><a href="#structures">Structures</a></h4><div><table><thead><tr><th>C++</th><th>Rust</th></tr></thead><tbody>
+<tr><td><a href="https://docs.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_battery_information"><code>XINPUT_BATTERY_INFORMATION</code></a></td><td><a href="struct.BatteryInformation.html" title="BatteryInformation"><code>BatteryInformation</code></a></td></tr>
+<tr><td><a href="https://docs.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_capabilities"><code>XINPUT_CAPABILITIES</code></a></td><td><a href="struct.Capabilities.html" title="Capabilities"><code>Capabilities</code></a></td></tr>
+<tr><td><a href="https://docs.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_gamepad"><code>XINPUT_GAMEPAD</code></a></td><td><a href="struct.Gamepad.html" title="Gamepad"><code>Gamepad</code></a></td></tr>
+<tr><td><a href="https://docs.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_keystroke"><code>XINPUT_KEYSTROKE</code></a></td><td><a href="struct.Keystroke.html" title="Keystroke"><code>Keystroke</code></a></td></tr>
+<tr><td><a href="https://docs.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_state"><code>XINPUT_STATE</code></a></td><td><a href="struct.State.html" title="State"><code>State</code></a></td></tr>
+<tr><td><a href="https://docs.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_vibration"><code>XINPUT_VIBRATION</code></a></td><td><a href="struct.Vibration.html" title="Vibration"><code>Vibration</code></a></td></tr>
+<tr><td><code>std::array&lt;<a href="https://docs.microsoft.com/en-us/cpp/standard-library/string-typedefs?view=msvc-170#wstring">std::wstring</a>, 2&gt;</code></td><td><a href="struct.AudioDeviceIds.html" title="AudioDeviceIds"><code>AudioDeviceIds</code></a></td></tr>
+<tr><td><code>std::array&lt;<a href="https://docs.microsoft.com/en-us/windows/win32/api/guiddef/ns-guiddef-guid">GUID</a>, 2&gt;</code></td><td><a href="struct.DSoundAudioDeviceGuids.html" title="DSoundAudioDeviceGuids"><code>DSoundAudioDeviceGuids</code></a></td></tr>
+</tbody></table>
+</div><h2 id="alternatives" class="section-header"><a href="#alternatives">Alternatives</a></h2>
+<p>[<a href="https://docs.microsoft.com/en-us/previous-versions/windows/desktop/ee416842(v=vs.85)">docs.microsoft.com</a>] <strong>DirectInput</strong></p>
+<ul>
+<li>✔️ Supports joysticks with many more buttons and axises than XInput.</li>
+<li>✔️ Leverages Windows’s built in support for configuring idle positions, deadzones.</li>
+<li>⚠️ Older, “deprecated” in favor of XInput.</li>
+<li>❌ Xbox 360 controllers map both triggers to a single axis in DirectInput.</li>
+<li><a href="https://docs.microsoft.com/en-us/windows/win32/xinput/xinput-and-directinput">Comparison of XInput and DirectInput features</a>
+discusses how to use a hybrid approach of XInput for 360 controllers and DirectInput for non-XInput devices</li>
+</ul>
+<p>[<a href="https://docs.microsoft.com/en-us/windows/uwp/gaming/input-for-games">docs.microsoft.com</a>] <strong>UWP</strong></p>
+<ul>
+<li>✔️ Supports Xbox One trigger rumble (XInput only supports base controller rumble)</li>
+<li>⚠️ Can’t recieve input through UWP when the app/window is not active (useful for dev cruft.)</li>
+<li>⚠️ No Windows 7 support?</li>
+</ul>
+</div></details><h2 id="structs" class="small-section-header"><a href="#structs">Structs</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.AudioDeviceIds.html" title="thindx::xinput::AudioDeviceIds struct">AudioDeviceIds</a></div><div class="item-right docblock-short"><p>[<a href="https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetaudiodeviceids">docs.microsoft.com</a>]
+Audio device ids retrieved with <a href="fn.get_audio_device_ids.html">get_audio_device_ids</a></p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.BatteryDevType.html" title="thindx::xinput::BatteryDevType struct">BatteryDevType</a></div><div class="item-right docblock-short"><p>[<a href="https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetbatteryinformation">docs.microsoft.com</a>]
+BATTERY_DEVTYPE_*</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.BatteryInformation.html" title="thindx::xinput::BatteryInformation struct">BatteryInformation</a></div><div class="item-right docblock-short"><p>[<a href="https://docs.microsoft.com/en-us/windows/win32/api/XInput/ns-xinput-xinput_battery_information">docs.microsoft.com</a>]
+XINPUT_BATTERY_INFORMATION</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.BatteryLevel.html" title="thindx::xinput::BatteryLevel struct">BatteryLevel</a></div><div class="item-right docblock-short"><p>[<a href="https://docs.microsoft.com/en-us/windows/win32/api/XInput/ns-xinput-xinput_battery_information">docs.microsoft.com</a>]
+BATTERY_LEVEL_*</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.BatteryType.html" title="thindx::xinput::BatteryType struct">BatteryType</a></div><div class="item-right docblock-short"><p>[<a href="https://docs.microsoft.com/en-us/windows/win32/api/XInput/ns-xinput-xinput_battery_information">docs.microsoft.com</a>]
+BATTERY_TYPE_*</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.Buttons.html" title="thindx::xinput::Buttons struct">Buttons</a></div><div class="item-right docblock-short"><p>[<a href="https://docs.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_gamepad#members">docs.microsoft.com</a>]
+XINPUT_GAMEPAD_*</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.Capabilities.html" title="thindx::xinput::Capabilities struct">Capabilities</a></div><div class="item-right docblock-short"><p>[<a href="https://docs.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_capabilities">docs.microsoft.com</a>]
+XINPUT_CAPABILITIES</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.Caps.html" title="thindx::xinput::Caps struct">Caps</a></div><div class="item-right docblock-short"><p>[<a href="https://docs.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_capabilities#members">docs.microsoft.com</a>]
+XINPUT_CAPS_*</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.DSoundAudioDeviceGuids.html" title="thindx::xinput::DSoundAudioDeviceGuids struct">DSoundAudioDeviceGuids</a></div><div class="item-right docblock-short"><p>[<a href="https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetdsoundaudiodeviceguids">docs.microsoft.com</a>]
+DirectSound audio device <a href="../struct.Guid.html" title="Guid">Guid</a>s retrieved with <a href="fn.get_dsound_audio_device_guids.html">get_dsound_audio_device_guids</a></p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.DevSubType.html" title="thindx::xinput::DevSubType struct">DevSubType</a></div><div class="item-right docblock-short"><p>[<a href="https://docs.microsoft.com/en-us/windows/win32/xinput/xinput-and-controller-subtypes">docs.microsoft.com</a>]
+XINPUT_DEVSUBTYPE_*</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.DevType.html" title="thindx::xinput::DevType struct">DevType</a></div><div class="item-right docblock-short"><p>[<a href="https://docs.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_capabilities">docs.microsoft.com</a>]
+XINPUT_DEVTYPE_*</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.Flag.html" title="thindx::xinput::Flag struct">Flag</a></div><div class="item-right docblock-short"><p>[<a href="https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetcapabilities#parameters">docs.microsoft.com</a>]
+XINPUT_FLAG_*</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.Gamepad.html" title="thindx::xinput::Gamepad struct">Gamepad</a></div><div class="item-right docblock-short"><p>[<a href="https://docs.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_gamepad">docs.microsoft.com</a>]
+XINPUT_GAMEPAD</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.Keystroke.html" title="thindx::xinput::Keystroke struct">Keystroke</a></div><div class="item-right docblock-short"><p>[<a href="https://docs.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_keystroke">docs.microsoft.com</a>]
+XINPUT_KEYSTROKE</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.KeystrokeFlags.html" title="thindx::xinput::KeystrokeFlags struct">KeystrokeFlags</a></div><div class="item-right docblock-short"><p>[<a href="https://docs.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_keystroke#members">docs.microsoft.com</a>]
+XINPUT_KEYSTROKE_*</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.State.html" title="thindx::xinput::State struct">State</a></div><div class="item-right docblock-short"><p>[<a href="https://docs.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_state">docs.microsoft.com</a>]
+XINPUT_STATE</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.User.html" title="thindx::xinput::User struct">User</a></div><div class="item-right docblock-short"><p>[<strike>docs.microsoft.com</strike>]
+XUSER_*</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.VK.html" title="thindx::xinput::VK struct">VK</a></div><div class="item-right docblock-short"><p>[<a href="https://docs.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_keystroke#remarks">docs.microsoft.com</a>]
+VK_* values specific to Xbox 360 controllers</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.Vibration.html" title="thindx::xinput::Vibration struct">Vibration</a></div><div class="item-right docblock-short"><p>[<a href="https://docs.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_vibration">docs.microsoft.com</a>]
+XINPUT_VIBRATION</p>
+</div></div></div><h2 id="functions-1" class="small-section-header"><a href="#functions-1">Functions</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.enable.html" title="thindx::xinput::enable fn">enable</a></div><div class="item-right docblock-short"><p>[<a href="https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputenable">docs.microsoft.com</a>]
+XInputEnable</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.get_audio_device_ids.html" title="thindx::xinput::get_audio_device_ids fn">get_audio_device_ids</a></div><div class="item-right docblock-short"><p>[<a href="https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetaudiodeviceids">docs.microsoft.com</a>]
+XInputGetAudioDeviceIds</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.get_battery_information.html" title="thindx::xinput::get_battery_information fn">get_battery_information</a></div><div class="item-right docblock-short"><p>[<a href="https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetbatteryinformation">docs.microsoft.com</a>]
+XInputGetBatteryInformation</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.get_capabilities.html" title="thindx::xinput::get_capabilities fn">get_capabilities</a></div><div class="item-right docblock-short"><p>[<a href="https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetcapabilities">docs.microsoft.com</a>]
+XInputGetCapabilities</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.get_dsound_audio_device_guids.html" title="thindx::xinput::get_dsound_audio_device_guids fn">get_dsound_audio_device_guids</a><span class="stab deprecated" title="">Deprecated</span></div><div class="item-right docblock-short"><p>[<a href="https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetdsoundaudiodeviceguids">docs.microsoft.com</a>]
+XInputGetDSoundAudioDeviceGuids</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.get_keystroke.html" title="thindx::xinput::get_keystroke fn">get_keystroke</a></div><div class="item-right docblock-short"><p>[<a href="https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetkeystroke">docs.microsoft.com</a>]
+XInputGetKeystroke</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.get_state.html" title="thindx::xinput::get_state fn">get_state</a></div><div class="item-right docblock-short"><p>[<a href="https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetstate">docs.microsoft.com</a>]
+XInputGetState</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.get_state_ex.html" title="thindx::xinput::get_state_ex fn">get_state_ex</a><span class="stab deprecated" title="">Deprecated</span></div><div class="item-right docblock-short"><p>[<a href="https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetstate">docs.microsoft.com</a>]
+XInputGetStateEx</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.set_state.html" title="thindx::xinput::set_state fn">set_state</a></div><div class="item-right docblock-short"><p>[<a href="https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputsetstate">docs.microsoft.com</a>]
+XInputSetState</p>
+</div></div></div></section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="thindx" data-search-index-js="../../search-index.js" data-search-js="../../search.js"></div>
+</body></html>

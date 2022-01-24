@@ -1,0 +1,148 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3d9types.h\enumerations\swap_effect.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>swap_effect.rs - source</title><link rel="stylesheet" type="text/css" href="../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script src="../../../../../crates.js"></script><script defer src="../../../../../main.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script>
+    <noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"><style type="text/css">#crate-search{background-image:url("../../../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../../../../thindx/index.html'><div class='logo-container rust-logo'><img src='../../../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../../../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../../../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../../../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1"> 1</span>
+<span id="2"> 2</span>
+<span id="3"> 3</span>
+<span id="4"> 4</span>
+<span id="5"> 5</span>
+<span id="6"> 6</span>
+<span id="7"> 7</span>
+<span id="8"> 8</span>
+<span id="9"> 9</span>
+<span id="10">10</span>
+<span id="11">11</span>
+<span id="12">12</span>
+<span id="13">13</span>
+<span id="14">14</span>
+<span id="15">15</span>
+<span id="16">16</span>
+<span id="17">17</span>
+<span id="18">18</span>
+<span id="19">19</span>
+<span id="20">20</span>
+<span id="21">21</span>
+<span id="22">22</span>
+<span id="23">23</span>
+<span id="24">24</span>
+<span id="25">25</span>
+<span id="26">26</span>
+<span id="27">27</span>
+<span id="28">28</span>
+<span id="29">29</span>
+<span id="30">30</span>
+<span id="31">31</span>
+<span id="32">32</span>
+<span id="33">33</span>
+<span id="34">34</span>
+<span id="35">35</span>
+<span id="36">36</span>
+<span id="37">37</span>
+<span id="38">38</span>
+<span id="39">39</span>
+<span id="40">40</span>
+<span id="41">41</span>
+<span id="42">42</span>
+<span id="43">43</span>
+<span id="44">44</span>
+<span id="45">45</span>
+<span id="46">46</span>
+<span id="47">47</span>
+<span id="48">48</span>
+<span id="49">49</span>
+<span id="50">50</span>
+<span id="51">51</span>
+<span id="52">52</span>
+<span id="53">53</span>
+<span id="54">54</span>
+<span id="55">55</span>
+<span id="56">56</span>
+<span id="57">57</span>
+<span id="58">58</span>
+<span id="59">59</span>
+<span id="60">60</span>
+<span id="61">61</span>
+<span id="62">62</span>
+<span id="63">63</span>
+<span id="64">64</span>
+<span id="65">65</span>
+<span id="66">66</span>
+<span id="67">67</span>
+<span id="68">68</span>
+<span id="69">69</span>
+<span id="70">70</span>
+<span id="71">71</span>
+<span id="72">72</span>
+</pre><pre class="rust"><code><span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span> <span class="kw">use</span> <span class="kw">crate</span>::<span class="kw-2">*</span>;
+
+<span class="kw">use</span> <span class="ident">winapi::shared::d3d9types</span>::<span class="kw-2">*</span>;
+
+
+
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dswapeffect)\]</span>
+<span class="doccomment">/// D3DSWAPEFFECT</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Defines swap effects.</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">PartialOrd</span>, <span class="ident">Ord</span>, <span class="ident">Hash</span>)]</span>
+<span class="attribute">#[<span class="ident">repr</span>(<span class="ident">transparent</span>)]</span> <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SwapEffect</span>(<span class="ident">D3DSWAPEFFECT</span>);
+
+<span class="macro">enumish!</span> { <span class="ident">SwapEffect</span> =&gt; <span class="ident">D3DSWAPEFFECT</span>; <span class="ident">Discard</span>, <span class="ident">Flip</span>, <span class="ident">Copy</span>, <span class="ident">Overlay</span>, <span class="ident">FlipEx</span> }
+
+<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">non_upper_case_globals</span>)]</span> <span class="kw">impl</span> <span class="ident">SwapEffect</span> { <span class="comment">// These are enum-like</span>
+    <span class="doccomment">/// When a swap chain is created with a swap effect of [SwapEffect::Flip] or [SwapEffect::Copy], the runtime will guarantee that an [IDirect3DDevice9Ext::present] operation will not affect the content of any of the back buffers.</span>
+    <span class="doccomment">/// Unfortunately, meeting this guarantee can involve substantial video memory or processing overheads, especially when implementing flip semantics for a windowed swap chain or copy semantics for a full-screen swap chain.</span>
+    <span class="doccomment">/// An application may use the [SwapEffect::Discard] swap effect to avoid these overheads and to enable the display driver to select the most efficient presentation technique for the swap chain.</span>
+    <span class="doccomment">/// This is also the only swap effect that may be used when specifying a value other than [MultiSample::None] for the MultiSampleType member of D3DPRESENT_PARAMETERS.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Like a swap chain that uses [SwapEffect::Flip], a swap chain that uses [SwapEffect::Discard] might include more than one back buffer, any of which may be accessed using [IDirect3DDevice9Ext::get_back_buffer] or [SwapChain::get_back_buffer].</span>
+    <span class="doccomment">/// The swap chain is best envisaged as a queue in which 0 always indexes the back buffer that will be displayed by the next present operation and from which buffers are discarded when they have been displayed.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// An application that uses this swap effect cannot make any assumptions about the contents of a discarded back buffer and should therefore update an entire back buffer before invoking a Present operation that would display it.</span>
+    <span class="doccomment">/// Although this is not enforced, the debug version of the runtime will overwrite the contents of discarded back buffers with random data to enable developers to verify that their applications are updating the entire back buffer surfaces correctly.</span>
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Discard</span>       : <span class="ident">SwapEffect</span> <span class="op">=</span> <span class="ident">SwapEffect</span>(<span class="ident">D3DSWAPEFFECT_DISCARD</span>);
+
+    <span class="doccomment">/// The swap chain might include multiple back buffers and is best envisaged as a circular queue that includes the front buffer.</span>
+    <span class="doccomment">/// Within this queue, the back buffers are always numbered sequentially from 0 to (n - 1), where n is the number of back buffers, so that 0 denotes the least recently presented buffer.</span>
+    <span class="doccomment">/// When present is invoked, the queue is &quot;rotated&quot; so that the front buffer becomes back buffer (n - 1), while the back buffer 0 becomes the new front buffer.</span>
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Flip</span>          : <span class="ident">SwapEffect</span> <span class="op">=</span> <span class="ident">SwapEffect</span>(<span class="ident">D3DSWAPEFFECT_FLIP</span>);
+
+    <span class="doccomment">/// This swap effect may be specified only for a swap chain comprising a single back buffer.</span>
+    <span class="doccomment">/// Whether the swap chain is windowed or full-screen, the runtime will guarantee the semantics implied by a copy-based present operation, namely that the operation leaves the content of the back buffer unchanged, instead of replacing it with the content of the front buffer as a flip-based present operation would.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// For a full-screen swap chain, the runtime uses a combination of flip operations and copy operations, supported if necessary by hidden back buffers, to accomplish the present operation.</span>
+    <span class="doccomment">/// Accordingly, the presentation is synchronized with the display adapter&#39;s vertical retrace and its rate is constrained by the chosen presentation interval.</span>
+    <span class="doccomment">/// A swap chain specified with the [Present::IntervalImmediate] flag is the only exception.</span>
+    <span class="doccomment">/// (Refer to the description of the PresentationIntervals member of the D3DPRESENT_PARAMETERS structure.)</span>
+    <span class="doccomment">/// In this case, a Present operation copies the back buffer content directly to the front buffer without waiting for the vertical retrace.</span>
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Copy</span>          : <span class="ident">SwapEffect</span> <span class="op">=</span> <span class="ident">SwapEffect</span>(<span class="ident">D3DSWAPEFFECT_COPY</span>);
+
+    <span class="doccomment">/// Use a dedicated area of video memory that can be overlayed on the primary surface.</span>
+    <span class="doccomment">/// No copy is performed when the overlay is displayed.</span>
+    <span class="doccomment">/// The overlay operation is performed in hardware, without modifying the data in the primary surface.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Differences between Direct3D 9 and Direct3D 9Ex: [SwapEffect::Overlay] is only available in Direct3D9Ex running on Windows 7 (or more current operating system).</span>
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Overlay</span>       : <span class="ident">SwapEffect</span> <span class="op">=</span> <span class="ident">SwapEffect</span>(<span class="ident">D3DSWAPEFFECT_OVERLAY</span>);
+
+    <span class="doccomment">/// Designates when an application is adopting flip mode, during which time an application&#39;s frame is passed instead of copied to the Desktop Window Manager(DWM) for composition when the application is presenting in windowed mode.</span>
+    <span class="doccomment">/// Flip mode allows an application to more efficiently use memory bandwidth as well as enabling an application to take advantage of full-screen-present statistics.</span>
+    <span class="doccomment">/// Flip mode does not affect full-screen behavior.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Note: If you create a swap chain with [SwapEffect::FlipEx], you can&#39;t override the `hDeviceWindow` member of the `D3DPRESENT_PARAMETERS` structure when you present a new frame for display.</span>
+    <span class="doccomment">/// That is, you must pass `null_mut()` to the `hDestWindowOverride` parameter of [IDirect3DDevice9ExExt::present_ex] to instruct the runtime to use the `hDeviceWindow` member of `D3DPRESENT_PARAMETERS` for the presentation.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Differences between Direct3D 9 and Direct3D 9Ex: D3DSWAPEFFECT_FLIPEX is only available in Direct3D9Ex running on Windows 7 (or more current operating system).</span>
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">FlipEx</span>        : <span class="ident">SwapEffect</span> <span class="op">=</span> <span class="ident">SwapEffect</span>(<span class="ident">D3DSWAPEFFECT_FLIPEX</span>);
+}
+
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;impl-poor-defaults&quot;</span>)]</span>
+<span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">SwapEffect</span> {
+    <span class="kw">fn</span> <span class="ident">default</span>() -&gt; <span class="self">Self</span> { <span class="ident">SwapEffect</span>(<span class="number">0</span>) }
+}
+
+<span class="comment">//#cpp2rust D3DSWAPEFFECT           = d3d::SwapEffect</span>
+<span class="comment">//#cpp2rust D3DSWAPEFFECT_DISCARD   = d3d::SwapEffect::Discard</span>
+<span class="comment">//#cpp2rust D3DSWAPEFFECT_FLIP      = d3d::SwapEffect::Flip</span>
+<span class="comment">//#cpp2rust D3DSWAPEFFECT_COPY      = d3d::SwapEffect::Copy</span>
+<span class="comment">//#cpp2rust D3DSWAPEFFECT_OVERLAY   = d3d::SwapEffect::Overlay</span>
+<span class="comment">//#cpp2rust D3DSWAPEFFECT_FLIPEX    = d3d::SwapEffect::FlipEx</span>
+</code></pre></div>
+</section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-search-index-js="../../../../../search-index.js" data-search-js="../../../../../search.js"></div>
+</body></html>

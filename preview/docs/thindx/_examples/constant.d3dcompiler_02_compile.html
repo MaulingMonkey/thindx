@@ -1,0 +1,135 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Use [d3d::Compiler::compile] and friends to compile HLSL to bytecode"><meta name="keywords" content="rust, rustlang, rust-lang, d3dcompiler_02_compile"><title>d3dcompiler_02_compile in thindx::_examples - Rust</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><script defer src="../../main.js"></script>
+    <noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc constant"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../thindx/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a><div class="sidebar-elems"><h2 class="location">Other items in<br><a href="../index.html">thindx</a>::<wbr><a href="index.html">_examples</a></h2><div id="sidebar-vars" data-name="d3dcompiler_02_compile" data-ty="constant" data-relpath=""></div><script defer src="sidebar-items.js"></script></div></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../wheel.svg"></a></div></form></nav><section id="main" class="content"><h1 class="fqn"><span class="in-band">Constant <a href="../index.html">thindx</a>::<wbr><a href="index.html">_examples</a>::<wbr><a class="constant" href="#">d3dcompiler_02_compile</a><button id="copy-path" onclick="copy_path(this)" title="Copy item path to clipboard"><img src="../../clipboard.svg" width="19" height="18" alt="Copy item path"></button></span><span class="out-of-band"><span id="render-detail"><a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span><a class="srclink" href="../../src/thindx/_examples.rs.html#797" title="goto source code">[src]</a></span></h1><div class="docblock item-decl"><pre class="rust const"><code>pub const d3dcompiler_02_compile: <a class="primitive" href="https://doc.rust-lang.org/1.58.1/std/primitive.unit.html">()</a>;</code></pre></div><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Use <a href="../d3d/struct.Compiler.html#method.compile" title="d3d::Compiler::compile">d3d::Compiler::compile</a> and friends to compile HLSL to bytecode</p>
+<h4 id="source" class="section-header"><a href="#source">Source</a></h4>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attribute">#![<span class="ident">allow</span>(<span class="ident">unused_variables</span>)]</span>
+<span class="kw">use</span> <span class="ident">thindx</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">thindx::d3d</span>::<span class="kw-2">*</span>;
+ 
+<span class="kw">fn</span> <span class="ident">main</span>() {
+    <span class="kw">let</span> <span class="ident">d3dc</span> <span class="op">=</span> <span class="ident">d3d::Compiler::load_system</span>(<span class="number">47</span>).<span class="ident">unwrap</span>();
+    <span class="kw">let</span> <span class="ident">basic_hlsl</span>   : <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] <span class="op">=</span> <span class="macro">include_bytes!</span>(<span class="string">&quot;../test/data/basic.hlsl&quot;</span>);
+    <span class="kw">let</span> <span class="ident">library_hlsl</span> : <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] <span class="op">=</span> <span class="macro">include_bytes!</span>(<span class="string">&quot;../test/data/library.hlsl&quot;</span>);
+ 
+    <span class="comment">// Option A:  just preprocess instead of fully compiling</span>
+    <span class="kw">let</span> <span class="ident">pixel_shader</span>  <span class="op">=</span> <span class="ident">d3dc</span>.<span class="ident">preprocess</span>(<span class="ident">basic_hlsl</span>,   (),                               <span class="prelude-val">None</span>, <span class="prelude-val">None</span>,                  ).<span class="ident">unwrap</span>();
+    <span class="kw">let</span> <span class="ident">vertex_shader</span> <span class="op">=</span> <span class="ident">d3dc</span>.<span class="ident">preprocess</span>(<span class="ident">basic_hlsl</span>,   <span class="string">r&quot;thindx\test\data\basic.hlsl&quot;</span>,   <span class="prelude-val">None</span>, <span class="ident">StandardFileInclude</span>    ).<span class="ident">unwrap</span>();
+    <span class="kw">let</span> <span class="ident">library</span>       <span class="op">=</span> <span class="ident">d3dc</span>.<span class="ident">preprocess</span>(<span class="ident">library_hlsl</span>, <span class="string">r&quot;thindx\test\data\library.hlsl&quot;</span>, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>,                  ).<span class="ident">unwrap</span>();
+    <span class="macro">println!</span>(<span class="string">&quot;pixel_shader\n============\n{}\n&quot;</span>,    <span class="ident">pixel_shader</span> .<span class="ident">shader</span>);
+    <span class="macro">println!</span>(<span class="string">&quot;vertex_shader\n=============\n{}\n&quot;</span>,  <span class="ident">vertex_shader</span>.<span class="ident">shader</span>);
+    <span class="macro">println!</span>(<span class="string">&quot;library\n=======\n{}\n&quot;</span>,              <span class="ident">library</span>      .<span class="ident">shader</span>);
+ 
+    <span class="comment">// Option B:  compile_from_file</span>
+    <span class="kw">let</span> <span class="ident">pixel_shader</span>  <span class="op">=</span> <span class="ident">d3dc</span>.<span class="ident">compile_from_file</span>(<span class="string">r&quot;thindx\test\data\basic.hlsl&quot;</span>,   <span class="prelude-val">None</span>, <span class="prelude-val">None</span>,                <span class="string">&quot;ps_main&quot;</span>, <span class="string">&quot;ps_4_0&quot;</span>, <span class="ident">Compile::Debug</span>, <span class="ident">CompileEffect::None</span>).<span class="ident">unwrap</span>();
+    <span class="kw">let</span> <span class="ident">vertex_shader</span> <span class="op">=</span> <span class="ident">d3dc</span>.<span class="ident">compile_from_file</span>(<span class="string">r&quot;thindx\test\data\basic.hlsl&quot;</span>,   <span class="prelude-val">None</span>, <span class="ident">StandardFileInclude</span>, <span class="string">&quot;vs_main&quot;</span>, <span class="string">&quot;vs_4_0&quot;</span>, <span class="ident">Compile::Debug</span>, <span class="ident">CompileEffect::None</span>).<span class="ident">unwrap</span>();
+    <span class="kw">let</span> <span class="ident">library</span>       <span class="op">=</span> <span class="ident">d3dc</span>.<span class="ident">compile_from_file</span>(<span class="string">r&quot;thindx\test\data\library.hlsl&quot;</span>, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>,                (),       <span class="string">&quot;lib_5_0&quot;</span>, <span class="ident">Compile::Debug</span>, <span class="ident">CompileEffect::None</span>).<span class="ident">unwrap</span>();
+    <span class="comment">// resulting blobs are binary data</span>
+ 
+    <span class="comment">// Option C:  compile</span>
+    <span class="kw">let</span> <span class="ident">pixel_shader</span>  <span class="op">=</span> <span class="ident">d3dc</span>.<span class="ident">compile</span>(<span class="ident">basic_hlsl</span>,   (),                                  <span class="prelude-val">None</span>, <span class="prelude-val">None</span>,                <span class="string">&quot;ps_main&quot;</span>, <span class="string">&quot;ps_4_0&quot;</span>, <span class="ident">Compile::Debug</span>, <span class="ident">CompileEffect::None</span>).<span class="ident">unwrap</span>();
+    <span class="kw">let</span> <span class="ident">vertex_shader</span> <span class="op">=</span> <span class="ident">d3dc</span>.<span class="ident">compile</span>(<span class="ident">basic_hlsl</span>,   <span class="string">r&quot;thindx\test\data\basic.hlsl&quot;</span>,      <span class="prelude-val">None</span>, <span class="ident">StandardFileInclude</span>, <span class="string">&quot;vs_main&quot;</span>, <span class="string">&quot;vs_4_0&quot;</span>, <span class="ident">Compile::Debug</span>, <span class="ident">CompileEffect::None</span>).<span class="ident">unwrap</span>();
+    <span class="kw">let</span> <span class="ident">library</span>       <span class="op">=</span> <span class="ident">d3dc</span>.<span class="ident">compile</span>(<span class="ident">library_hlsl</span>, <span class="string">r&quot;thindx\test\data\library.hlsl&quot;</span>,    <span class="prelude-val">None</span>, <span class="prelude-val">None</span>,                (),       <span class="string">&quot;lib_5_0&quot;</span>, <span class="ident">Compile::Debug</span>, <span class="ident">CompileEffect::None</span>).<span class="ident">unwrap</span>();
+    <span class="comment">// resulting blobs are binary data</span>
+ 
+    <span class="comment">// Option D:  compile2</span>
+    <span class="kw">let</span> <span class="ident">pixel_shader</span>  <span class="op">=</span> <span class="ident">d3dc</span>.<span class="ident">compile2</span>(<span class="ident">basic_hlsl</span>,   (), <span class="prelude-val">None</span>, <span class="prelude-val">None</span>, <span class="string">&quot;ps_main&quot;</span>, <span class="string">&quot;ps_4_0&quot;</span>, <span class="ident">Compile::Debug</span>, <span class="ident">CompileEffect::None</span>, <span class="ident">CompileSecdata::None</span>, <span class="prelude-val">None</span>).<span class="ident">unwrap</span>();
+    <span class="kw">let</span> <span class="ident">vertex_shader</span> <span class="op">=</span> <span class="ident">d3dc</span>.<span class="ident">compile2</span>(<span class="ident">basic_hlsl</span>,   (), <span class="prelude-val">None</span>, <span class="prelude-val">None</span>, <span class="string">&quot;vs_main&quot;</span>, <span class="string">&quot;vs_4_0&quot;</span>, <span class="ident">Compile::Debug</span>, <span class="ident">CompileEffect::None</span>, <span class="ident">CompileSecdata::None</span>, <span class="prelude-val">None</span>).<span class="ident">unwrap</span>();
+    <span class="kw">let</span> <span class="ident">library</span>       <span class="op">=</span> <span class="ident">d3dc</span>.<span class="ident">compile2</span>(<span class="ident">library_hlsl</span>, (), <span class="prelude-val">None</span>, <span class="prelude-val">None</span>, (),       <span class="string">&quot;lib_5_0&quot;</span>, <span class="ident">Compile::Debug</span>, <span class="ident">CompileEffect::None</span>, <span class="ident">CompileSecdata::None</span>, <span class="prelude-val">None</span>).<span class="ident">unwrap</span>();
+    <span class="comment">// resulting blobs are binary data</span>
+ 
+    <span class="comment">// TODO: show ID3DInclude usage</span>
+    <span class="comment">// TODO: show defines usage</span>
+    <span class="comment">// TODO: show effects usage?</span>
+}
+ 
+<span class="comment">// TODO: include hlsl in docs (add an xtask directive?)</span></code></pre></div>
+<h4 id="output" class="section-header"><a href="#output">Output</a></h4><div class="example-wrap"><pre class="language-text"><code>pixel_shader
+============
+#line 1 &quot;C:\\local\\thindx0\\&lt;memory&gt;&quot;
+ 
+ 
+cbuffer ExampleCBuffer {
+    float4 tint ;
+} ;
+ 
+struct Vertex {
+    float4 position : POSITION0 ;
+    float4 color : COLOR0 ;
+} ;
+ 
+struct VsToPs {
+    float4 color : COLOR0 ;
+    float4 position : SV_POSITION ;
+} ;
+ 
+struct Fragment {
+    float4 color : SV_TARGET0 ;
+} ;
+ 
+VsToPs vs_main ( Vertex v ) {
+    VsToPs o ;
+    o . color = v . color * tint ;
+    o . position = v . position ;
+    return o ;
+}
+ 
+Fragment ps_main ( VsToPs i ) {
+    Fragment o ;
+    o . color = i . color ;
+    return o ;
+}
+ 
+ 
+vertex_shader
+=============
+#line 1 &quot;C:\\local\\thindx0\\thindx\\test\\data\\basic.hlsl&quot;
+ 
+ 
+cbuffer ExampleCBuffer {
+    float4 tint ;
+} ;
+ 
+struct Vertex {
+    float4 position : POSITION0 ;
+    float4 color : COLOR0 ;
+} ;
+ 
+struct VsToPs {
+    float4 color : COLOR0 ;
+    float4 position : SV_POSITION ;
+} ;
+ 
+struct Fragment {
+    float4 color : SV_TARGET0 ;
+} ;
+ 
+VsToPs vs_main ( Vertex v ) {
+    VsToPs o ;
+    o . color = v . color * tint ;
+    o . position = v . position ;
+    return o ;
+}
+ 
+Fragment ps_main ( VsToPs i ) {
+    Fragment o ;
+    o . color = i . color ;
+    return o ;
+}
+ 
+ 
+library
+=======
+#line 1 &quot;C:\\local\\thindx0\\thindx\\test\\data\\library.hlsl&quot;
+ 
+ 
+cbuffer ExampleCBuffer {
+    float1 scale ;
+}
+ 
+export float4 scale4 ( float4 v ) { return v * scale ; }
+ 
+export float4 xyz1 ( float3 v ) { return float4 ( v , 1.0 ) ; }
+ 
+ </code></pre></div><h4 id="to-run-this-example-yourself" class="section-header"><a href="#to-run-this-example-yourself">To run this example yourself</a></h4><div class="example-wrap"><pre class="language-cmd"><code>git clone https://github.com/MaulingMonkey/thindx
+cd thindx
+cargo run --example d3dcompiler-02-compile</code></pre></div></div></details></section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="thindx" data-search-index-js="../../search-index.js" data-search-js="../../search.js"></div>
+</body></html>

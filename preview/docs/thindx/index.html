@@ -1,0 +1,148 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="thindx - Thin DirectX wrappers"><meta name="keywords" content="rust, rustlang, rust-lang, thindx"><title>thindx - Rust</title><link rel="stylesheet" type="text/css" href="../normalize.css"><link rel="stylesheet" type="text/css" href="../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../ayu.css" disabled ><script id="default-settings" ></script><script src="../storage.js"></script><script src="../crates.js"></script><script defer src="../main.js"></script>
+    <noscript><link rel="stylesheet" href="../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../favicon.svg"><style type="text/css">#crate-search{background-image:url("../down-arrow.svg");}</style></head><body class="rustdoc mod crate"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../thindx/index.html'><div class='logo-container rust-logo'><img src='../rust-logo.png' alt='logo'></div></a><h2 class="location">Crate thindx</h2><div class="block version"><div class="narrow-helper"></div><p>Version 0.0.0-git</p></div><div class="sidebar-elems"><a id="all-types" href="all.html"><p>See all thindx's items</p></a><div class="block items"><ul><li><a href="#reexports">Re-exports</a></li><li><a href="#modules">Modules</a></li><li><a href="#structs">Structs</a></li><li><a href="#traits">Traits</a></li><li><a href="#functions">Functions</a></li><li><a href="#types">Type Definitions</a></li></ul></div><div id="sidebar-vars" data-name="thindx" data-ty="mod" data-relpath=""></div><script defer src="sidebar-items.js"></script></div></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../wheel.svg"></a></div></form></nav><section id="main" class="content"><h1 class="fqn"><span class="in-band">Crate <a class="mod" href="#">thindx</a><button id="copy-path" onclick="copy_path(this)" title="Copy item path to clipboard"><img src="../clipboard.svg" width="19" height="18" alt="Copy item path"></button></span><span class="out-of-band"><span id="render-detail"><a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span><a class="srclink" href="../src/thindx/_lib.rs.html#1-56" title="goto source code">[src]</a></span></h1><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><h2 id="thindx---thin-directx-wrappers" class="section-header"><a href="#thindx---thin-directx-wrappers">thindx - <strong>Thin</strong> <strong>D</strong>irect<strong>X</strong> wrappers</a></h2>
+<p><a href="https://github.com/MaulingMonkey/thindx"><img src="https://img.shields.io/github/stars/MaulingMonkey/thindx.svg?label=GitHub&amp;style=social" alt="GitHub" /></a>
+<a href="https://github.com/MaulingMonkey/thindx/actions?query=workflow%3Arust"><img src="https://github.com/MaulingMonkey/thindx/workflows/Rust/badge.svg" alt="Build Status" /></a>
+<a href="https://deps.rs/repo/github/MaulingMonkey/thindx"><img src="https://deps.rs/repo/github/MaulingMonkey/thindx/status.svg" alt="dependency status" /></a></p>
+<p><a href="https://crates.io/crates/thindx"><img src="https://img.shields.io/crates/v/thindx.svg" alt="crates.io" /></a>
+<a href="https://docs.rs/thindx"><img src="https://docs.rs/thindx/badge.svg" alt="docs.rs" /></a>
+<a href="https://github.com/MaulingMonkey/thindx"><img src="https://img.shields.io/crates/l/thindx.svg" alt="License" /></a></p>
+<p>Thin DirectX wrappers for Rust.</p>
+<h4 id="why-not-winapi-directly" class="section-header"><a href="#why-not-winapi-directly">Why not winapi directly?</a></h4>
+<ul>
+<li>This crate aims to make fns safe/sound/slightly rusty when possible</li>
+<li>Attempts to verify API soundness through mass unit tests, even if they mostly test DirectX’s behavior.</li>
+<li>Doc comments for one-stop intellisense, safety documentation, etc.</li>
+</ul>
+<h4 id="why-not-other-graphics-crate" class="section-header"><a href="#why-not-other-graphics-crate">Why not <code>&lt;other graphics crate&gt;</code>?</a></h4>
+<ul>
+<li>Most other graphics crates focus on <strong>hiding</strong> the underlying graphics API as much as possible, improving application portability.</li>
+<li>This crate <strong>surfaces</strong> the underlying graphics API as much as possible, improving the potential for interoperability with other graphics code / use in middleware applications.</li>
+</ul>
+<h4 id="-this-crate-is-probably-unsound-" class="section-header"><a href="#-this-crate-is-probably-unsound-">❌ This crate is probably unsound! ❌</a></h4>
+<p>I’m exposing a huge legacy C++ API to Rust.  Mistakes will happen.</p>
+<p>That said, soundness <em>is</em> a <strong>very high priority</strong> goal.  <code>thindx</code> will add things like extra bounds checks, parameter
+validation, extra init, etc. if need be in order to ensure soundness in safe fns whenever possible.  When it’s not
+possible to validate unsoundness away, the fns in question should be marked <code>unsafe</code>.  This crate strives to be sounder
+than whatever manual FFI you’d write yourself would be, and that’s a <strong>high</strong> bar.</p>
+<p>But there are some practical limits to this.  If a background driver thread invokes UB if it fails to allocate memory,
+without any direct correlation to specific API misuse like a large integer overflowing, that’s a bug I can’t sanely
+mitigate via safe fns.  I mean, theoretically I could write a pure-software clone of the entire DirectX runtime… but no.</p>
+<p>Additionally, while I’m seeking to validate my APIs via testing, older implementations of the APIs in question may have
+more bugs / unchecked parameters / ??? that I’ll fail to mitigate due to being unable to trigger them myself.  While I’m
+happy to investigate, accept pull requests, expand test coverage, etc. it’s worth assuming this crate is unsound on
+older versions unless you’ve tested yourself.</p>
+<h4 id="-api-major-version-churn-" class="section-header"><a href="#-api-major-version-churn-">⚠️ API major version churn ⚠️</a></h4>
+<p>Individual <code>fn</code>s are likely to gain/lose <code>unsafe</code>, traits, etc. in a neverending attempt to make DirectX access sound.
+As such, <code>thindx</code> itself will likely always suffer from major version churn.
+This isn’t too much of a problem until two crates wish to share / pass <code>thindx</code> types between themselves.
+It might be possible to somewhat stabilize some types by exiling them into subcrates, but this has not yet been done.
+Additionally, individual extension traits / functions / methods will likely never get the same treatment (no need?)</p>
+<h4 id="project-status" class="section-header"><a href="#project-status">Project Status</a></h4>
+<p><a href="https://docs.rs/thindx/*/thindx/_examples/">examples</a>
+•
+<a href="https://docs.rs/thindx/*/thindx/_headers/">header coverage</a>
+•
+<a href="https://docs.rs/thindx">docs.rs</a>
+•
+<a href="https://lib.rs/crates/thindx">lib.rs</a>
+•
+<a href="https://crates.io/crates/thindx">crates.io</a></p>
+<div><table><thead><tr><th>DirectX</th><th>API</th><th>Tests</th><th>Sound</th><th>Stable</th><th>Notes</th></tr></thead><tbody>
+<tr><td><code>d3dcompiler.dll</code></td><td>✔️</td><td>⚠️</td><td>⚠️</td><td>❌</td><td>first goal to stabilize</td></tr>
+<tr><td><code>dxcompiler.dll</code></td><td>❌</td><td>❌</td><td>❌</td><td>❌</td><td></td></tr>
+<tr><td>d3d9</td><td>⚠️</td><td>⚠️</td><td>❌</td><td>❌</td><td></td></tr>
+<tr><td>d3d11</td><td>❌</td><td>❌</td><td>❌</td><td>❌</td><td></td></tr>
+<tr><td>d3d12</td><td>❌</td><td>❌</td><td>❌</td><td>❌</td><td></td></tr>
+<tr><td>dxgi</td><td>❌</td><td>❌</td><td>❌</td><td>❌</td><td></td></tr>
+<tr><td>dinput</td><td>❌</td><td>❌</td><td>❌</td><td>❌</td><td></td></tr>
+<tr><td>xinput</td><td>✔️</td><td>✔️</td><td>✔️*</td><td>⚠️</td><td>* Could use more testing on older Windows</td></tr>
+<tr><td>xaudio2</td><td>❌</td><td>❌</td><td>❌</td><td>❌</td><td></td></tr>
+<tr><td><strong>Low Priority</strong></td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>d2d</td><td></td><td></td><td></td><td></td><td>I prefer d3d wrappers?</td></tr>
+<tr><td>dcompute</td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>dsound</td><td></td><td></td><td></td><td></td><td>prefer xaudio2? (might be needed for gamepad headset audio?)</td></tr>
+<tr><td>dwrite</td><td></td><td></td><td></td><td></td><td>consider uniscribe?</td></tr>
+<tr><td>dxr</td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td>xact3</td><td></td><td></td><td></td><td></td><td></td></tr>
+<tr><td><strong>Not Planned</strong></td><td></td><td></td><td></td><td></td><td>Feel free to change my mind though!  Maybe with $?</td></tr>
+<tr><td>d3d10</td><td></td><td></td><td></td><td></td><td>d3d11 is the same but saner, and just as portable?</td></tr>
+<tr><td>d3d<strong>x</strong>10</td><td></td><td></td><td></td><td></td><td>deprecated, saner to use less d3d specific stuff</td></tr>
+<tr><td>d3d<strong>x</strong>11</td><td></td><td></td><td></td><td></td><td>deprecated, saner to use less d3d specific stuff</td></tr>
+<tr><td>d3d<strong>x</strong>9</td><td></td><td></td><td></td><td></td><td>deprecated, saner to use less d3d specific stuff</td></tr>
+<tr><td>ddraw</td><td></td><td></td><td></td><td></td><td>prefer d2d, gdi, or other less ancient api?</td></tr>
+<tr><td>dplay</td><td></td><td></td><td></td><td></td><td>prefer steamworks, raw sockets, etc.?</td></tr>
+<tr><td>xaudio1</td><td></td><td></td><td></td><td></td><td>does this even exist? prefer xaudio2</td></tr>
+</tbody></table>
+</div><div><table><thead><tr><th>Legend</th><th>Description</th></tr></thead><tbody>
+<tr><td>API</td><td>API coverage seems mostly complete</td></tr>
+<tr><td>Tests</td><td>API has basic tests</td></tr>
+<tr><td>Sound</td><td>API has enough tests to convince me of it’s soundness</td></tr>
+<tr><td>Stable</td><td>API seems stable enough to start giving semver treatment</td></tr>
+</tbody></table>
+</div><h2 name="license">License</h2>
+<p>Licensed under either of</p>
+<ul>
+<li>Apache License, Version 2.0 (<a href="LICENSE-APACHE">LICENSE-APACHE</a> or <a href="http://www.apache.org/licenses/LICENSE-2.0">http://www.apache.org/licenses/LICENSE-2.0</a>)</li>
+<li>MIT license (<a href="LICENSE-MIT">LICENSE-MIT</a> or <a href="http://opensource.org/licenses/MIT">http://opensource.org/licenses/MIT</a>)</li>
+</ul>
+<p>at your option.</p>
+<h2 name="contribution">Contribution</h2>
+<p>Unless you explicitly state otherwise, any contribution intentionally submitted
+for inclusion in the work by you, as defined in the Apache-2.0 license, shall be
+dual licensed as above, without any additional terms or conditions.</p>
+<!-- references -->
+</div></details><h2 id="reexports" class="small-section-header"><a href="#reexports">Re-exports</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left"><code>pub extern crate abibool;</code></div></div><div class="item-row"><div class="item-left"><code>pub extern crate abistr;</code></div></div><div class="item-row"><div class="item-left import-item"><code>pub use crate::<a class="mod" href="errors/index.html" title="mod thindx::errors">errors</a>::*;</code></div><div class="item-right docblock-short"></div></div></div><h2 id="modules" class="small-section-header"><a href="#modules">Modules</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="mod" href="_changelog/index.html" title="thindx::_changelog mod">_changelog</a></div><div class="item-right docblock-short"><p>Revision history</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="_examples/index.html" title="thindx::_examples mod">_examples</a></div><div class="item-right docblock-short"><p>Examples</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="_headers/index.html" title="thindx::_headers mod">_headers</a></div><div class="item-right docblock-short"><p>Rust ⮀ C++ coverage information based on Windows SDK 10.0.19041.0</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="ctypes/index.html" title="thindx::ctypes mod">ctypes</a></div><div class="item-right docblock-short"><p>C ABI interop types</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="d3d/index.html" title="thindx::d3d mod">d3d</a></div><div class="item-right docblock-short"><p>Direct3D related types and APIs used across multiple Direct3D versions.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="d3d9/index.html" title="thindx::d3d9 mod">d3d9</a></div><div class="item-right docblock-short"><p>[<a href="https://docs.microsoft.com/en-us/windows/win32/direct3d9/dx9-graphics">docs.microsoft.com</a>]
+Direct3D 9 related types and APIs</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="d3d11/index.html" title="thindx::d3d11 mod">d3d11</a></div><div class="item-right docblock-short"><p>[<a href="https://docs.microsoft.com/en-us/windows/win32/direct3d11/atoc-dx-graphics-direct3d-11">docs.microsoft.com</a>]
+Direct3D 11 related types and APIs (including shader reflection APIs)</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="errors/index.html" title="thindx::errors mod">errors</a></div><div class="item-right docblock-short"><p><a href="errors/S/index.html" title="S">S</a>,
+<a href="errors/D3D/index.html" title="D3D">D3D</a>,
+<a href="errors/E/index.html" title="E">E</a>,
+<a href="errors/ERROR/index.html" title="ERROR">ERROR</a>,
+<a href="errors/D3DERR/index.html" title="D3DERR">D3DERR</a>,
+<a href="errors/D3DXERR/index.html" title="D3DXERR">D3DXERR</a>,
+<a href="errors/D3D11_ERROR/index.html" title="D3D11_ERROR">D3D11_ERROR</a>,
+<a href="errors/DXGI_ERROR/index.html" title="DXGI_ERROR">DXGI_ERROR</a>,
+and <a href="errors/THINERR/index.html" title="THINERR">THINERR</a>
+<a href="struct.ErrorKind.html" title="ErrorKind">ErrorKind</a> values<br>
+<strong>NOTE:</strong> Imported into crate root, no need to prefix <code>errors::</code>…</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="mod" href="xinput/index.html" title="thindx::xinput mod">xinput</a></div><div class="item-right docblock-short"><p>[<a href="https://docs.microsoft.com/en-us/windows/win32/xinput/xinput-game-controller-apis-portal">docs.microsoft.com</a>]
+APIs for Xbox 360 style controllers</p>
+</div></div></div><h2 id="structs" class="small-section-header"><a href="#structs">Structs</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.ErrorKind.html" title="thindx::ErrorKind struct">ErrorKind</a></div><div class="item-right docblock-short"><p>[<a href="https://docs.microsoft.com/en-us/windows/desktop/direct3d11/d3d11-graphics-reference-returnvalues">docs.microsoft.com</a>]
+HRESULT</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.Guid.html" title="thindx::Guid struct">Guid</a></div><div class="item-right docblock-short"><p>[<a href="https://docs.microsoft.com/en-us/windows/win32/api/guiddef/ns-guiddef-guid">docs.microsoft.com</a>]
+A 128-bit identifier used for COM interfaces, COM class objects, and various other purpouses.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.MethodError.html" title="thindx::MethodError struct">MethodError</a></div><div class="item-right docblock-short"><p>An error about some specific method returning an <a href="https://www.hresult.info/">HRESULT</a></p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.MethodErrorBlob.html" title="thindx::MethodErrorBlob struct">MethodErrorBlob</a></div><div class="item-right docblock-short"><p>{ kind: <a href="struct.ErrorKind.html" title="ErrorKind">ErrorKind</a>, method, errors }</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.SafeHWND.html" title="thindx::SafeHWND struct">SafeHWND</a></div><div class="item-right docblock-short"><p>A safer/sounder alternative to <a href="https://docs.microsoft.com/en-us/windows/win32/learnwin32/what-is-a-window-">HWND</a></p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="struct" href="struct.Unknown.html" title="thindx::Unknown struct">Unknown</a></div><div class="item-right docblock-short"><p>[<a href="https://docs.microsoft.com/en-us/windows/win32/api/unknwn/nn-unknwn-iunknown">docs.microsoft.com</a>]
+IUnknown</p>
+</div></div></div><h2 id="traits" class="small-section-header"><a href="#traits">Traits</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.AsHWND.html" title="thindx::AsHWND trait">AsHWND</a></div><div class="item-right docblock-short"><p>Indicates this type can be treated as an HWND.</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.IntoBoxOrFull.html" title="thindx::IntoBoxOrFull trait">IntoBoxOrFull</a></div><div class="item-right docblock-short"><p><a href="d3d/struct.Box.html" title="Box"><code>Box</code></a> or <a href="https://doc.rust-lang.org/1.58.1/core/ops/range/struct.RangeFull.html"><code>..</code></a></p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.IntoRangeOrFull.html" title="thindx::IntoRangeOrFull trait">IntoRangeOrFull</a></div><div class="item-right docblock-short"><p><a href="https://doc.rust-lang.org/1.58.1/core/ops/range/struct.Range.html" title="Range"><code>Range</code></a> or <a href="https://doc.rust-lang.org/1.58.1/core/ops/range/struct.RangeFull.html"><code>..</code></a></p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.IntoRectOrFull.html" title="thindx::IntoRectOrFull trait">IntoRectOrFull</a></div><div class="item-right docblock-short"><p><a href="d3d/struct.Rect.html" title="Rect"><code>Rect</code></a> or <a href="https://doc.rust-lang.org/1.58.1/core/ops/range/struct.RangeFull.html"><code>..</code></a></p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="trait" href="trait.Raw.html" title="thindx::Raw trait">Raw</a></div><div class="item-right docblock-short"><p>Allow conversion to/from raw (winapi) pointer types.</p>
+</div></div></div><h2 id="functions" class="small-section-header"><a href="#functions">Functions</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.make_four_cc.html" title="thindx::make_four_cc fn">make_four_cc</a></div><div class="item-right docblock-short"><p>[<a href="https://docs.microsoft.com/en-us/windows-hardware/drivers/ddi/d3dukmdt/nf-d3dukmdt-makefourcc">docs.microsoft.com</a>]
+MAKEFOURCC</p>
+</div></div></div><h2 id="types" class="small-section-header"><a href="#types">Type Definitions</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="type" href="type.ClsID.html" title="thindx::ClsID type">ClsID</a></div><div class="item-right docblock-short"><p>= <a href="struct.Guid.html" title="Guid">Guid</a>
+[<a href="https://docs.microsoft.com/en-us/windows/win32/com/com-class-objects-and-clsids">docs.microsoft.com</a>]
+<strong>Cl</strong>as<strong>s</strong> <strong>Id</strong>entifier - used for uniquely identifying COM classes</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="type" href="type.FmtID.html" title="thindx::FmtID type">FmtID</a></div><div class="item-right docblock-short"><p>= <a href="struct.Guid.html" title="Guid">Guid</a>
+[<a href="https://docs.microsoft.com/en-us/windows/win32/stg/format-identifiers">docs.microsoft.com</a>]
+<strong>F</strong>or<strong>m</strong>a<strong>t</strong> <strong>Id</strong>entifier - used for tagging sections in e.g. structured storage property sets</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="type" href="type.IID.html" title="thindx::IID type">IID</a></div><div class="item-right docblock-short"><p>= <a href="struct.Guid.html" title="Guid">Guid</a>
+[<a href="https://docs.microsoft.com/en-us/windows/win32/wmformat/interface-identifiers">docs.microsoft.com</a>]
+<strong>I</strong>interface <strong>Id</strong>entifier - used for uniquely identifiying COM interfaces</p>
+</div></div></div></section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../" data-current-crate="thindx" data-search-index-js="../search-index.js" data-search-js="../search.js"></div>
+</body></html>

@@ -1,0 +1,512 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3d9types.h\enumerations\render_state_type.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>render_state_type.rs - source</title><link rel="stylesheet" type="text/css" href="../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script src="../../../../../crates.js"></script><script defer src="../../../../../main.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script>
+    <noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"><style type="text/css">#crate-search{background-image:url("../../../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../../../../thindx/index.html'><div class='logo-container rust-logo'><img src='../../../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../../../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../../../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../../../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
+<span id="2">  2</span>
+<span id="3">  3</span>
+<span id="4">  4</span>
+<span id="5">  5</span>
+<span id="6">  6</span>
+<span id="7">  7</span>
+<span id="8">  8</span>
+<span id="9">  9</span>
+<span id="10"> 10</span>
+<span id="11"> 11</span>
+<span id="12"> 12</span>
+<span id="13"> 13</span>
+<span id="14"> 14</span>
+<span id="15"> 15</span>
+<span id="16"> 16</span>
+<span id="17"> 17</span>
+<span id="18"> 18</span>
+<span id="19"> 19</span>
+<span id="20"> 20</span>
+<span id="21"> 21</span>
+<span id="22"> 22</span>
+<span id="23"> 23</span>
+<span id="24"> 24</span>
+<span id="25"> 25</span>
+<span id="26"> 26</span>
+<span id="27"> 27</span>
+<span id="28"> 28</span>
+<span id="29"> 29</span>
+<span id="30"> 30</span>
+<span id="31"> 31</span>
+<span id="32"> 32</span>
+<span id="33"> 33</span>
+<span id="34"> 34</span>
+<span id="35"> 35</span>
+<span id="36"> 36</span>
+<span id="37"> 37</span>
+<span id="38"> 38</span>
+<span id="39"> 39</span>
+<span id="40"> 40</span>
+<span id="41"> 41</span>
+<span id="42"> 42</span>
+<span id="43"> 43</span>
+<span id="44"> 44</span>
+<span id="45"> 45</span>
+<span id="46"> 46</span>
+<span id="47"> 47</span>
+<span id="48"> 48</span>
+<span id="49"> 49</span>
+<span id="50"> 50</span>
+<span id="51"> 51</span>
+<span id="52"> 52</span>
+<span id="53"> 53</span>
+<span id="54"> 54</span>
+<span id="55"> 55</span>
+<span id="56"> 56</span>
+<span id="57"> 57</span>
+<span id="58"> 58</span>
+<span id="59"> 59</span>
+<span id="60"> 60</span>
+<span id="61"> 61</span>
+<span id="62"> 62</span>
+<span id="63"> 63</span>
+<span id="64"> 64</span>
+<span id="65"> 65</span>
+<span id="66"> 66</span>
+<span id="67"> 67</span>
+<span id="68"> 68</span>
+<span id="69"> 69</span>
+<span id="70"> 70</span>
+<span id="71"> 71</span>
+<span id="72"> 72</span>
+<span id="73"> 73</span>
+<span id="74"> 74</span>
+<span id="75"> 75</span>
+<span id="76"> 76</span>
+<span id="77"> 77</span>
+<span id="78"> 78</span>
+<span id="79"> 79</span>
+<span id="80"> 80</span>
+<span id="81"> 81</span>
+<span id="82"> 82</span>
+<span id="83"> 83</span>
+<span id="84"> 84</span>
+<span id="85"> 85</span>
+<span id="86"> 86</span>
+<span id="87"> 87</span>
+<span id="88"> 88</span>
+<span id="89"> 89</span>
+<span id="90"> 90</span>
+<span id="91"> 91</span>
+<span id="92"> 92</span>
+<span id="93"> 93</span>
+<span id="94"> 94</span>
+<span id="95"> 95</span>
+<span id="96"> 96</span>
+<span id="97"> 97</span>
+<span id="98"> 98</span>
+<span id="99"> 99</span>
+<span id="100">100</span>
+<span id="101">101</span>
+<span id="102">102</span>
+<span id="103">103</span>
+<span id="104">104</span>
+<span id="105">105</span>
+<span id="106">106</span>
+<span id="107">107</span>
+<span id="108">108</span>
+<span id="109">109</span>
+<span id="110">110</span>
+<span id="111">111</span>
+<span id="112">112</span>
+<span id="113">113</span>
+<span id="114">114</span>
+<span id="115">115</span>
+<span id="116">116</span>
+<span id="117">117</span>
+<span id="118">118</span>
+<span id="119">119</span>
+<span id="120">120</span>
+<span id="121">121</span>
+<span id="122">122</span>
+<span id="123">123</span>
+<span id="124">124</span>
+<span id="125">125</span>
+<span id="126">126</span>
+<span id="127">127</span>
+<span id="128">128</span>
+<span id="129">129</span>
+<span id="130">130</span>
+<span id="131">131</span>
+<span id="132">132</span>
+<span id="133">133</span>
+<span id="134">134</span>
+<span id="135">135</span>
+<span id="136">136</span>
+<span id="137">137</span>
+<span id="138">138</span>
+<span id="139">139</span>
+<span id="140">140</span>
+<span id="141">141</span>
+<span id="142">142</span>
+<span id="143">143</span>
+<span id="144">144</span>
+<span id="145">145</span>
+<span id="146">146</span>
+<span id="147">147</span>
+<span id="148">148</span>
+<span id="149">149</span>
+<span id="150">150</span>
+<span id="151">151</span>
+<span id="152">152</span>
+<span id="153">153</span>
+<span id="154">154</span>
+<span id="155">155</span>
+<span id="156">156</span>
+<span id="157">157</span>
+<span id="158">158</span>
+<span id="159">159</span>
+<span id="160">160</span>
+<span id="161">161</span>
+<span id="162">162</span>
+<span id="163">163</span>
+<span id="164">164</span>
+<span id="165">165</span>
+<span id="166">166</span>
+<span id="167">167</span>
+<span id="168">168</span>
+<span id="169">169</span>
+<span id="170">170</span>
+<span id="171">171</span>
+<span id="172">172</span>
+<span id="173">173</span>
+<span id="174">174</span>
+<span id="175">175</span>
+<span id="176">176</span>
+<span id="177">177</span>
+<span id="178">178</span>
+<span id="179">179</span>
+<span id="180">180</span>
+<span id="181">181</span>
+<span id="182">182</span>
+<span id="183">183</span>
+<span id="184">184</span>
+<span id="185">185</span>
+<span id="186">186</span>
+<span id="187">187</span>
+<span id="188">188</span>
+<span id="189">189</span>
+<span id="190">190</span>
+<span id="191">191</span>
+<span id="192">192</span>
+<span id="193">193</span>
+<span id="194">194</span>
+<span id="195">195</span>
+<span id="196">196</span>
+<span id="197">197</span>
+<span id="198">198</span>
+<span id="199">199</span>
+<span id="200">200</span>
+<span id="201">201</span>
+<span id="202">202</span>
+<span id="203">203</span>
+<span id="204">204</span>
+<span id="205">205</span>
+<span id="206">206</span>
+<span id="207">207</span>
+<span id="208">208</span>
+<span id="209">209</span>
+<span id="210">210</span>
+<span id="211">211</span>
+<span id="212">212</span>
+<span id="213">213</span>
+<span id="214">214</span>
+<span id="215">215</span>
+<span id="216">216</span>
+<span id="217">217</span>
+<span id="218">218</span>
+<span id="219">219</span>
+<span id="220">220</span>
+<span id="221">221</span>
+<span id="222">222</span>
+<span id="223">223</span>
+<span id="224">224</span>
+<span id="225">225</span>
+<span id="226">226</span>
+<span id="227">227</span>
+<span id="228">228</span>
+<span id="229">229</span>
+<span id="230">230</span>
+<span id="231">231</span>
+<span id="232">232</span>
+<span id="233">233</span>
+<span id="234">234</span>
+<span id="235">235</span>
+<span id="236">236</span>
+<span id="237">237</span>
+<span id="238">238</span>
+<span id="239">239</span>
+<span id="240">240</span>
+<span id="241">241</span>
+<span id="242">242</span>
+<span id="243">243</span>
+<span id="244">244</span>
+<span id="245">245</span>
+<span id="246">246</span>
+<span id="247">247</span>
+<span id="248">248</span>
+<span id="249">249</span>
+<span id="250">250</span>
+<span id="251">251</span>
+<span id="252">252</span>
+<span id="253">253</span>
+<span id="254">254</span>
+</pre><pre class="rust"><code><span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span> <span class="kw">use</span> <span class="kw">crate</span>::<span class="kw-2">*</span>;
+
+<span class="kw">use</span> <span class="ident">winapi::shared::d3d9types</span>::<span class="kw-2">*</span>;
+
+
+
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)\]</span>
+<span class="doccomment">/// D3DRENDERSTATETYPE</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Render states define set-up states for all kinds of vertex and pixel processing.</span>
+<span class="doccomment">/// Some render states set up vertex processing, and some set up pixel processing (see [Render States (Direct3D 9)]).</span>
+<span class="doccomment">/// Render states can be saved and restored using stateblocks (see [State Blocks Save and Restore State (Direct3D 9)]).</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// [Render States (Direct3D 9)]:                       https://docs.microsoft.com/en-us/windows/win32/direct3d9/render-states</span>
+<span class="doccomment">/// [State Blocks Save and Restore State (Direct3D 9)]: https://docs.microsoft.com/en-us/windows/win32/direct3d9/state-blocks-save-and-restore-state</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">PartialOrd</span>, <span class="ident">Ord</span>, <span class="ident">Hash</span>)]</span>
+<span class="attribute">#[<span class="ident">repr</span>(<span class="ident">transparent</span>)]</span> <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRENDERSTATETYPE</span>);
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">RenderStateType</span> <span class="kw">as</span> <span class="ident">RS</span>;
+
+<span class="macro">enumish!</span> {
+    <span class="ident">RS</span> =&gt; <span class="ident">D3DRENDERSTATETYPE</span>;
+    <span class="ident">ZEnable</span>, <span class="ident">FillMode</span>, <span class="ident">ShadeMode</span>, <span class="ident">ZWriteEnable</span>, <span class="ident">AlphaTestEnable</span>, <span class="ident">LastPixel</span>, <span class="ident">SrcBlend</span>, <span class="ident">DestBlend</span>,
+    <span class="ident">CullMode</span>, <span class="ident">ZFunc</span>, <span class="ident">AlphaRef</span>, <span class="ident">AlphaFunc</span>, <span class="ident">DitherEnable</span>, <span class="ident">AlphaBlendEnable</span>, <span class="ident">FogEnable</span>, <span class="ident">SpecularEnable</span>,
+    <span class="ident">FogColor</span>, <span class="ident">FogTableMode</span>, <span class="ident">FogStart</span>, <span class="ident">FogEnd</span>, <span class="ident">FogDensity</span>, <span class="ident">RangeFogEnable</span>,
+    <span class="ident">StencilEnable</span>, <span class="ident">StencilFail</span>, <span class="ident">StencilZFail</span>, <span class="ident">StencilPass</span>, <span class="ident">StencilFunc</span>, <span class="ident">StencilRef</span>, <span class="ident">StencilMask</span>, <span class="ident">StencilWriteMask</span>, <span class="ident">TextureFactor</span>,
+    <span class="ident">Wrap0</span>, <span class="ident">Wrap1</span>, <span class="ident">Wrap2</span>, <span class="ident">Wrap3</span>, <span class="ident">Wrap4</span>, <span class="ident">Wrap5</span>, <span class="ident">Wrap6</span>, <span class="ident">Wrap7</span>,
+    <span class="ident">Clipping</span>, <span class="ident">Lighting</span>, <span class="ident">Ambient</span>, <span class="ident">FogVertexMode</span>, <span class="ident">ColorVertex</span>, <span class="ident">LocalViewer</span>, <span class="ident">NormalizeNormals</span>,
+    <span class="ident">DiffuseMaterialSource</span>, <span class="ident">SpecularMaterialSource</span>, <span class="ident">AmbientMaterialSource</span>, <span class="ident">EmissiveMaterialSource</span>, <span class="ident">VertexBlend</span>, <span class="ident">ClipPlaneEnable</span>,
+    <span class="ident">PointSize</span>, <span class="ident">PointSizeMin</span>, <span class="ident">PointSpriteEnable</span>, <span class="ident">PointScaleEnable</span>, <span class="ident">PointScaleA</span>, <span class="ident">PointScaleB</span>, <span class="ident">PointScaleC</span>,
+    <span class="ident">MultiSampleAntiAlias</span>, <span class="ident">MultiSampleMask</span>, <span class="ident">PatchEdgeStyle</span>, <span class="ident">DebugMonitorToken</span>, <span class="ident">PointSizeMax</span>, <span class="ident">IndexedVertexBlendEnable</span>,
+    <span class="ident">ColorWriteEnable</span>, <span class="ident">TweenFactor</span>, <span class="ident">BlendOp</span>, <span class="ident">PositionDegree</span>, <span class="ident">NormalDegree</span>, <span class="ident">ScissorTestEnable</span>, <span class="ident">SlopeScaleDepthBias</span>,
+    <span class="ident">AntiAliasedLineEnable</span>, <span class="ident">MinTessellationLevel</span>, <span class="ident">MaxTessellationLevel</span>, <span class="ident">AdaptiveTessX</span>, <span class="ident">AdaptiveTessY</span>, <span class="ident">AdaptiveTessZ</span>, <span class="ident">AdaptiveTessW</span>,
+    <span class="ident">EnableAdaptiveTessellation</span>, <span class="ident">TwoSidedStencilMode</span>, <span class="ident">CcwStencilFail</span>, <span class="ident">CcwStencilZFail</span>, <span class="ident">CcwStencilPass</span>, <span class="ident">CcwStencilFunc</span>,
+    <span class="ident">ColorWriteEnable1</span>, <span class="ident">ColorWriteEnable2</span>, <span class="ident">ColorWriteEnable3</span>, <span class="ident">BlendFactor</span>, <span class="ident">SRGBWriteEnable</span>, <span class="ident">DepthBias</span>,
+    <span class="ident">Wrap8</span>, <span class="ident">Wrap9</span>, <span class="ident">Wrap10</span>, <span class="ident">Wrap11</span>, <span class="ident">Wrap12</span>, <span class="ident">Wrap13</span>, <span class="ident">Wrap14</span>, <span class="ident">Wrap15</span>,
+    <span class="ident">SeparateAlphaBlendEnable</span>, <span class="ident">SrcBlendAlpha</span>, <span class="ident">DestBlendAlpha</span>, <span class="ident">BlendOpAlpha</span>,
+}
+
+<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">non_upper_case_globals</span>)]</span> <span class="comment">// These are enum-like</span>
+<span class="kw">impl</span> <span class="ident">RenderStateType</span> {
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">ZEnable</span>                       : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_ZENABLE</span>); <span class="comment">// 7</span>
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">FillMode</span>                      : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_FILLMODE</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">ShadeMode</span>                     : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_SHADEMODE</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">ZWriteEnable</span>                  : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_ZWRITEENABLE</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">AlphaTestEnable</span>               : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_ALPHATESTENABLE</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">LastPixel</span>                     : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_LASTPIXEL</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SrcBlend</span>                      : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_SRCBLEND</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">DestBlend</span>                     : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_DESTBLEND</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CullMode</span>                      : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_CULLMODE</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">ZFunc</span>                         : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_ZFUNC</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">AlphaRef</span>                      : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_ALPHAREF</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">AlphaFunc</span>                     : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_ALPHAFUNC</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">DitherEnable</span>                  : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_DITHERENABLE</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">AlphaBlendEnable</span>              : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_ALPHABLENDENABLE</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">FogEnable</span>                     : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_FOGENABLE</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SpecularEnable</span>                : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_SPECULARENABLE</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">FogColor</span>                      : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_FOGCOLOR</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">FogTableMode</span>                  : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_FOGTABLEMODE</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">FogStart</span>                      : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_FOGSTART</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">FogEnd</span>                        : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_FOGEND</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">FogDensity</span>                    : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_FOGDENSITY</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">RangeFogEnable</span>                : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_RANGEFOGENABLE</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">StencilEnable</span>                 : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_STENCILENABLE</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">StencilFail</span>                   : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_STENCILFAIL</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">StencilZFail</span>                  : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_STENCILZFAIL</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">StencilPass</span>                   : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_STENCILPASS</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">StencilFunc</span>                   : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_STENCILFUNC</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">StencilRef</span>                    : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_STENCILREF</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">StencilMask</span>                   : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_STENCILMASK</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">StencilWriteMask</span>              : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_STENCILWRITEMASK</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">TextureFactor</span>                 : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_TEXTUREFACTOR</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Wrap0</span>                         : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_WRAP0</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Wrap1</span>                         : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_WRAP1</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Wrap2</span>                         : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_WRAP2</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Wrap3</span>                         : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_WRAP3</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Wrap4</span>                         : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_WRAP4</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Wrap5</span>                         : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_WRAP5</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Wrap6</span>                         : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_WRAP6</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Wrap7</span>                         : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_WRAP7</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Clipping</span>                      : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_CLIPPING</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Lighting</span>                      : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_LIGHTING</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Ambient</span>                       : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_AMBIENT</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">FogVertexMode</span>                 : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_FOGVERTEXMODE</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">ColorVertex</span>                   : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_COLORVERTEX</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">LocalViewer</span>                   : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_LOCALVIEWER</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">NormalizeNormals</span>              : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_NORMALIZENORMALS</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">DiffuseMaterialSource</span>         : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_DIFFUSEMATERIALSOURCE</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SpecularMaterialSource</span>        : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_SPECULARMATERIALSOURCE</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">AmbientMaterialSource</span>         : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_AMBIENTMATERIALSOURCE</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">EmissiveMaterialSource</span>        : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_EMISSIVEMATERIALSOURCE</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">VertexBlend</span>                   : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_VERTEXBLEND</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">ClipPlaneEnable</span>               : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_CLIPPLANEENABLE</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">PointSize</span>                     : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_POINTSIZE</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">PointSizeMin</span>                  : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_POINTSIZE_MIN</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">PointSpriteEnable</span>             : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_POINTSPRITEENABLE</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">PointScaleEnable</span>              : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_POINTSCALEENABLE</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">PointScaleA</span>                   : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_POINTSCALE_A</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">PointScaleB</span>                   : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_POINTSCALE_B</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">PointScaleC</span>                   : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_POINTSCALE_C</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">MultiSampleAntiAlias</span>          : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_MULTISAMPLEANTIALIAS</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">MultiSampleMask</span>               : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_MULTISAMPLEMASK</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">PatchEdgeStyle</span>                : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_PATCHEDGESTYLE</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">DebugMonitorToken</span>             : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_DEBUGMONITORTOKEN</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">PointSizeMax</span>                  : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_POINTSIZE_MAX</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">IndexedVertexBlendEnable</span>      : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_INDEXEDVERTEXBLENDENABLE</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">ColorWriteEnable</span>              : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_COLORWRITEENABLE</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">TweenFactor</span>                   : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_TWEENFACTOR</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">BlendOp</span>                       : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_BLENDOP</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">PositionDegree</span>                : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_POSITIONDEGREE</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">NormalDegree</span>                  : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_NORMALDEGREE</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">ScissorTestEnable</span>             : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_SCISSORTESTENABLE</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SlopeScaleDepthBias</span>           : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_SLOPESCALEDEPTHBIAS</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">AntiAliasedLineEnable</span>         : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_ANTIALIASEDLINEENABLE</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">MinTessellationLevel</span>          : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_MINTESSELLATIONLEVEL</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">MaxTessellationLevel</span>          : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_MAXTESSELLATIONLEVEL</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">AdaptiveTessX</span>                 : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_ADAPTIVETESS_X</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">AdaptiveTessY</span>                 : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_ADAPTIVETESS_Y</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">AdaptiveTessZ</span>                 : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_ADAPTIVETESS_Z</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">AdaptiveTessW</span>                 : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_ADAPTIVETESS_W</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">EnableAdaptiveTessellation</span>    : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_ENABLEADAPTIVETESSELLATION</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">TwoSidedStencilMode</span>           : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_TWOSIDEDSTENCILMODE</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CcwStencilFail</span>                : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_CCW_STENCILFAIL</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CcwStencilZFail</span>               : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_CCW_STENCILZFAIL</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CcwStencilPass</span>                : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_CCW_STENCILPASS</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CcwStencilFunc</span>                : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_CCW_STENCILFUNC</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">ColorWriteEnable1</span>             : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_COLORWRITEENABLE1</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">ColorWriteEnable2</span>             : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_COLORWRITEENABLE2</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">ColorWriteEnable3</span>             : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_COLORWRITEENABLE3</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">BlendFactor</span>                   : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_BLENDFACTOR</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SRGBWriteEnable</span>               : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_SRGBWRITEENABLE</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">DepthBias</span>                     : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_DEPTHBIAS</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Wrap8</span>                         : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_WRAP8</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Wrap9</span>                         : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_WRAP9</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Wrap10</span>                        : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_WRAP10</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Wrap11</span>                        : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_WRAP11</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Wrap12</span>                        : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_WRAP12</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Wrap13</span>                        : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_WRAP13</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Wrap14</span>                        : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_WRAP14</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Wrap15</span>                        : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_WRAP15</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SeparateAlphaBlendEnable</span>      : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_SEPARATEALPHABLENDENABLE</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SrcBlendAlpha</span>                 : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_SRCBLENDALPHA</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">DestBlendAlpha</span>                : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_DESTBLENDALPHA</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">BlendOpAlpha</span>                  : <span class="ident">RenderStateType</span> <span class="op">=</span> <span class="ident">RenderStateType</span>(<span class="ident">D3DRS_BLENDOPALPHA</span>);
+}
+
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;impl-poor-defaults&quot;</span>)]</span>
+<span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">RenderStateType</span> {
+    <span class="kw">fn</span> <span class="ident">default</span>() -&gt; <span class="self">Self</span> { <span class="ident">RenderStateType</span>(<span class="number">0</span>) }
+}
+
+<span class="comment">//#cpp2rust D3DRENDERSTATETYPE                  = d3d::RenderStateType</span>
+<span class="comment">//#cpp2rust D3DRS_ZENABLE                       = d3d::RS::ZEnable</span>
+<span class="comment">//#cpp2rust D3DRS_FILLMODE                      = d3d::RS::FillMode</span>
+<span class="comment">//#cpp2rust D3DRS_SHADEMODE                     = d3d::RS::ShadeMode</span>
+<span class="comment">//#cpp2rust D3DRS_ZWRITEENABLE                  = d3d::RS::ZWriteEnable</span>
+<span class="comment">//#cpp2rust D3DRS_ALPHATESTENABLE               = d3d::RS::AlphaTestEnable</span>
+<span class="comment">//#cpp2rust D3DRS_LASTPIXEL                     = d3d::RS::LastPixel</span>
+<span class="comment">//#cpp2rust D3DRS_SRCBLEND                      = d3d::RS::SrcBlend</span>
+<span class="comment">//#cpp2rust D3DRS_DESTBLEND                     = d3d::RS::DestBlend</span>
+<span class="comment">//#cpp2rust D3DRS_CULLMODE                      = d3d::RS::CullMode</span>
+<span class="comment">//#cpp2rust D3DRS_ZFUNC                         = d3d::RS::ZFunc</span>
+<span class="comment">//#cpp2rust D3DRS_ALPHAREF                      = d3d::RS::AlphaRef</span>
+<span class="comment">//#cpp2rust D3DRS_ALPHAFUNC                     = d3d::RS::AlphaFunc</span>
+<span class="comment">//#cpp2rust D3DRS_DITHERENABLE                  = d3d::RS::DitherEnable</span>
+<span class="comment">//#cpp2rust D3DRS_ALPHABLENDENABLE              = d3d::RS::AlphaBlendEnable</span>
+<span class="comment">//#cpp2rust D3DRS_FOGENABLE                     = d3d::RS::FogEnable</span>
+<span class="comment">//#cpp2rust D3DRS_SPECULARENABLE                = d3d::RS::SpecularEnable</span>
+<span class="comment">//#cpp2rust D3DRS_FOGCOLOR                      = d3d::RS::FogColor</span>
+<span class="comment">//#cpp2rust D3DRS_FOGTABLEMODE                  = d3d::RS::FogTableMode</span>
+<span class="comment">//#cpp2rust D3DRS_FOGSTART                      = d3d::RS::FogStart</span>
+<span class="comment">//#cpp2rust D3DRS_FOGEND                        = d3d::RS::FogEnd</span>
+<span class="comment">//#cpp2rust D3DRS_FOGDENSITY                    = d3d::RS::FogDensity</span>
+<span class="comment">//#cpp2rust D3DRS_RANGEFOGENABLE                = d3d::RS::RangeFogEnable</span>
+<span class="comment">//#cpp2rust D3DRS_STENCILENABLE                 = d3d::RS::StencilEnable</span>
+<span class="comment">//#cpp2rust D3DRS_STENCILFAIL                   = d3d::RS::StencilFail</span>
+<span class="comment">//#cpp2rust D3DRS_STENCILZFAIL                  = d3d::RS::StencilZFail</span>
+<span class="comment">//#cpp2rust D3DRS_STENCILPASS                   = d3d::RS::StencilPass</span>
+<span class="comment">//#cpp2rust D3DRS_STENCILFUNC                   = d3d::RS::StencilFunc</span>
+<span class="comment">//#cpp2rust D3DRS_STENCILREF                    = d3d::RS::StencilRef</span>
+<span class="comment">//#cpp2rust D3DRS_STENCILMASK                   = d3d::RS::StencilMask</span>
+<span class="comment">//#cpp2rust D3DRS_STENCILWRITEMASK              = d3d::RS::StencilWriteMask</span>
+<span class="comment">//#cpp2rust D3DRS_TEXTUREFACTOR                 = d3d::RS::TextureFactor</span>
+<span class="comment">//#cpp2rust D3DRS_WRAP0                         = d3d::RS::Wrap0</span>
+<span class="comment">//#cpp2rust D3DRS_WRAP1                         = d3d::RS::Wrap1</span>
+<span class="comment">//#cpp2rust D3DRS_WRAP2                         = d3d::RS::Wrap2</span>
+<span class="comment">//#cpp2rust D3DRS_WRAP3                         = d3d::RS::Wrap3</span>
+<span class="comment">//#cpp2rust D3DRS_WRAP4                         = d3d::RS::Wrap4</span>
+<span class="comment">//#cpp2rust D3DRS_WRAP5                         = d3d::RS::Wrap5</span>
+<span class="comment">//#cpp2rust D3DRS_WRAP6                         = d3d::RS::Wrap6</span>
+<span class="comment">//#cpp2rust D3DRS_WRAP7                         = d3d::RS::Wrap7</span>
+<span class="comment">//#cpp2rust D3DRS_CLIPPING                      = d3d::RS::Clipping</span>
+<span class="comment">//#cpp2rust D3DRS_LIGHTING                      = d3d::RS::Lighting</span>
+<span class="comment">//#cpp2rust D3DRS_AMBIENT                       = d3d::RS::Ambient</span>
+<span class="comment">//#cpp2rust D3DRS_FOGVERTEXMODE                 = d3d::RS::FogVertexMode</span>
+<span class="comment">//#cpp2rust D3DRS_COLORVERTEX                   = d3d::RS::ColorVertex</span>
+<span class="comment">//#cpp2rust D3DRS_LOCALVIEWER                   = d3d::RS::LocalViewer</span>
+<span class="comment">//#cpp2rust D3DRS_NORMALIZENORMALS              = d3d::RS::NormalizeNormals</span>
+<span class="comment">//#cpp2rust D3DRS_DIFFUSEMATERIALSOURCE         = d3d::RS::DiffuseMaterialSource</span>
+<span class="comment">//#cpp2rust D3DRS_SPECULARMATERIALSOURCE        = d3d::RS::SpecularMaterialSource</span>
+<span class="comment">//#cpp2rust D3DRS_AMBIENTMATERIALSOURCE         = d3d::RS::AmbientMaterialSource</span>
+<span class="comment">//#cpp2rust D3DRS_EMISSIVEMATERIALSOURCE        = d3d::RS::EmissiveMaterialSource</span>
+<span class="comment">//#cpp2rust D3DRS_VERTEXBLEND                   = d3d::RS::VertexBlend</span>
+<span class="comment">//#cpp2rust D3DRS_CLIPPLANEENABLE               = d3d::RS::ClipPlaneEnable</span>
+<span class="comment">//#cpp2rust D3DRS_POINTSIZE                     = d3d::RS::PointSize</span>
+<span class="comment">//#cpp2rust D3DRS_POINTSIZE_MIN                 = d3d::RS::PointSizeMin</span>
+<span class="comment">//#cpp2rust D3DRS_POINTSPRITEENABLE             = d3d::RS::PointSpriteEnable</span>
+<span class="comment">//#cpp2rust D3DRS_POINTSCALEENABLE              = d3d::RS::PointScaleEnable</span>
+<span class="comment">//#cpp2rust D3DRS_POINTSCALE_A                  = d3d::RS::PointScaleA</span>
+<span class="comment">//#cpp2rust D3DRS_POINTSCALE_B                  = d3d::RS::PointScaleB</span>
+<span class="comment">//#cpp2rust D3DRS_POINTSCALE_C                  = d3d::RS::PointScaleC</span>
+<span class="comment">//#cpp2rust D3DRS_MULTISAMPLEANTIALIAS          = d3d::RS::MultiSampleAntiAlias</span>
+<span class="comment">//#cpp2rust D3DRS_MULTISAMPLEMASK               = d3d::RS::MultiSampleMask</span>
+<span class="comment">//#cpp2rust D3DRS_PATCHEDGESTYLE                = d3d::RS::PatchEdgeStyle</span>
+<span class="comment">//#cpp2rust D3DRS_DEBUGMONITORTOKEN             = d3d::RS::DebugMonitorToken</span>
+<span class="comment">//#cpp2rust D3DRS_POINTSIZE_MAX                 = d3d::RS::PointSizeMax</span>
+<span class="comment">//#cpp2rust D3DRS_INDEXEDVERTEXBLENDENABLE      = d3d::RS::IndexedVertexBlendEnable</span>
+<span class="comment">//#cpp2rust D3DRS_COLORWRITEENABLE              = d3d::RS::ColorWriteEnable</span>
+<span class="comment">//#cpp2rust D3DRS_TWEENFACTOR                   = d3d::RS::TweenFactor</span>
+<span class="comment">//#cpp2rust D3DRS_BLENDOP                       = d3d::RS::BlendOp</span>
+<span class="comment">//#cpp2rust D3DRS_POSITIONDEGREE                = d3d::RS::PositionDegree</span>
+<span class="comment">//#cpp2rust D3DRS_NORMALDEGREE                  = d3d::RS::NormalDegree</span>
+<span class="comment">//#cpp2rust D3DRS_SCISSORTESTENABLE             = d3d::RS::ScissorTestEnable</span>
+<span class="comment">//#cpp2rust D3DRS_SLOPESCALEDEPTHBIAS           = d3d::RS::SlopeScaleDepthBias</span>
+<span class="comment">//#cpp2rust D3DRS_ANTIALIASEDLINEENABLE         = d3d::RS::AntiAliasedLineEnable</span>
+<span class="comment">//#cpp2rust D3DRS_MINTESSELLATIONLEVEL          = d3d::RS::MinTessellationLevel</span>
+<span class="comment">//#cpp2rust D3DRS_MAXTESSELLATIONLEVEL          = d3d::RS::MaxTessellationLevel</span>
+<span class="comment">//#cpp2rust D3DRS_ADAPTIVETESS_X                = d3d::RS::AdaptiveTessX</span>
+<span class="comment">//#cpp2rust D3DRS_ADAPTIVETESS_Y                = d3d::RS::AdaptiveTessY</span>
+<span class="comment">//#cpp2rust D3DRS_ADAPTIVETESS_Z                = d3d::RS::AdaptiveTessZ</span>
+<span class="comment">//#cpp2rust D3DRS_ADAPTIVETESS_W                = d3d::RS::AdaptiveTessW</span>
+<span class="comment">//#cpp2rust D3DRS_ENABLEADAPTIVETESSELLATION    = d3d::RS::EnableAdaptiveTessellation</span>
+<span class="comment">//#cpp2rust D3DRS_TWOSIDEDSTENCILMODE           = d3d::RS::TwoSidedStencilMode</span>
+<span class="comment">//#cpp2rust D3DRS_CCW_STENCILFAIL               = d3d::RS::CcwStencilFail</span>
+<span class="comment">//#cpp2rust D3DRS_CCW_STENCILZFAIL              = d3d::RS::CcwStencilZFail</span>
+<span class="comment">//#cpp2rust D3DRS_CCW_STENCILPASS               = d3d::RS::CcwStencilPass</span>
+<span class="comment">//#cpp2rust D3DRS_CCW_STENCILFUNC               = d3d::RS::CcwStencilFunc</span>
+<span class="comment">//#cpp2rust D3DRS_COLORWRITEENABLE1             = d3d::RS::ColorWriteEnable1</span>
+<span class="comment">//#cpp2rust D3DRS_COLORWRITEENABLE2             = d3d::RS::ColorWriteEnable2</span>
+<span class="comment">//#cpp2rust D3DRS_COLORWRITEENABLE3             = d3d::RS::ColorWriteEnable3</span>
+<span class="comment">//#cpp2rust D3DRS_BLENDFACTOR                   = d3d::RS::BlendFactor</span>
+<span class="comment">//#cpp2rust D3DRS_SRGBWRITEENABLE               = d3d::RS::SRGBWriteEnable</span>
+<span class="comment">//#cpp2rust D3DRS_DEPTHBIAS                     = d3d::RS::DepthBias</span>
+<span class="comment">//#cpp2rust D3DRS_WRAP8                         = d3d::RS::Wrap8</span>
+<span class="comment">//#cpp2rust D3DRS_WRAP9                         = d3d::RS::Wrap9</span>
+<span class="comment">//#cpp2rust D3DRS_WRAP10                        = d3d::RS::Wrap10</span>
+<span class="comment">//#cpp2rust D3DRS_WRAP11                        = d3d::RS::Wrap11</span>
+<span class="comment">//#cpp2rust D3DRS_WRAP12                        = d3d::RS::Wrap12</span>
+<span class="comment">//#cpp2rust D3DRS_WRAP13                        = d3d::RS::Wrap13</span>
+<span class="comment">//#cpp2rust D3DRS_WRAP14                        = d3d::RS::Wrap14</span>
+<span class="comment">//#cpp2rust D3DRS_WRAP15                        = d3d::RS::Wrap15</span>
+<span class="comment">//#cpp2rust D3DRS_SEPARATEALPHABLENDENABLE      = d3d::RS::SeparateAlphaBlendEnable</span>
+<span class="comment">//#cpp2rust D3DRS_SRCBLENDALPHA                 = d3d::RS::SrcBlendAlpha</span>
+<span class="comment">//#cpp2rust D3DRS_DESTBLENDALPHA                = d3d::RS::DestBlendAlpha</span>
+<span class="comment">//#cpp2rust D3DRS_BLENDOPALPHA                  = d3d::RS::BlendOpAlpha</span>
+</code></pre></div>
+</section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-search-index-js="../../../../../search-index.js" data-search-js="../../../../../search.js"></div>
+</body></html>
