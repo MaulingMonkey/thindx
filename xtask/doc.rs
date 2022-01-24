@@ -10,7 +10,7 @@ pub fn build(_args: std::env::Args, help: bool) {
     run("cargo build --examples");
     update();
     if !help { return }
-    insecure_open_url(r#"target/all-features/doc/thindx/index.html"#);
+    browser::open("target/all-features/doc/thindx/index.html");
 }
 
 pub fn update() {
@@ -62,23 +62,4 @@ fn rewrite_file(path: &Path, f: impl FnOnce(String) -> String) -> io::Result<()>
     let text = f(text);
     std::fs::write(&path, text)?;
     Ok(())
-}
-
-/// ### Security
-///
-/// *   Does not guard against shell escapes
-fn insecure_open_url(url: &str) {
-    status!("Opening", "{}", url);
-    let mut cmd = if cfg!(windows) {
-        Command::parse("cmd /C start \"\"").unwrap()
-    } else if cfg!(target_os = "linux") {
-        Command::new("xdg-open")
-    } else if cfg!(target_os = "macos") {
-        Command::new("open")
-    } else {
-        error!("doc::insecure_open_url not implemented on this platform");
-        return;
-    };
-    cmd.arg(url);
-    let _ = cmd.status0().map_err(|err| error!("{}", err));
 }

@@ -4,29 +4,48 @@ use std::collections::*;
 
 
 
-pub fn coverage(mut args: std::env::Args) {
-    // Configuration
+pub struct Settings {
+    pub test:       bool,
+    pub demangle:   bool,
+    pub open:       bool,
+}
 
-    let channel = "nightly";
-    let mut open = false;
-    let mut skip_test = false;
-    let mut demangle = true;
+impl Default for Settings {
+    fn default() -> Self {
+        Self {
+            test:       true,
+            demangle:   true,
+            open:       false,
+        }
+    }
+}
 
-    // Arguments
+pub fn from_args(mut args: std::env::Args) {
+    let mut settings = Settings::default();
 
     while let Some(arg) = args.next() {
         match &*arg {
-            "--open"                        => open = true,
-            "--skip-test"                   => skip_test = true,
-            "--no-demangle"                 => demangle = false,
+            "--open"                        => settings.open = true,
+
+            "--test"                        => settings.test = true,
+            "--no-test"                     => settings.test = false,
+            "--skip-test"                   => settings.test = false,
+
+            "--demangle"                    => settings.demangle = true,
+            "--no-demangle"                 => settings.demangle = false,
+            "--skip-demangle"               => settings.demangle = false,
+
             flag if flag.starts_with("-")   => fatal!("unrecognized flag {} (did you mean --open or --skip-test?)", flag),
             pos                             => fatal!("unexpected positional argument {:?}", pos),
         }
     }
 
+    from_settings(settings)
+}
 
-
+pub fn from_settings(settings: Settings) {
     // Dependencies
+    let channel = "nightly";
 
     let rustup = Rustup::default().or_die();
     let toolchains = rustup.toolchains();
@@ -49,7 +68,7 @@ pub fn coverage(mut args: std::env::Args) {
     let deps    = target_dir.join(r"debug\deps");
     let profraw = target_dir.join(r"profraw");
 
-    if !skip_test {
+    if settings.test {
         for e in std::fs::read_dir(&deps).unwrap_or_else(|err| fatal!("unable to enumerate target/coverage/debug/deps: {}", err)) {
             let e = e.unwrap_or_else(|err| fatal!("error enumerating target/coverage/debug/deps: {}", err));
             let path = e.path();
@@ -111,7 +130,7 @@ pub fn coverage(mut args: std::env::Args) {
         let mut fndas = HashMap::<String, u32>::new();
         let mut lines = lcov_info_data.lines();
 
-        if !demangle {
+        if !settings.demangle {
             while let Some(line) = lines.next() {
                 writeln!(o, "{line}")?;
             }
@@ -199,7 +218,7 @@ pub fn coverage(mut args: std::env::Args) {
     grcov.status0().or_die();
 
     // Open said summary in your browser of choice
-    if open { run(r#"cmd /c start "" "target\coverage\grcov\index.html""#) }
+    if settings.open { browser::open("target/coverage/grcov/index.html") }
 }
 
 

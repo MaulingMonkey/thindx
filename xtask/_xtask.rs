@@ -1,3 +1,4 @@
+mod browser;
 mod coverage;
 mod crlf;
 mod doc;
@@ -23,7 +24,7 @@ fn main() {
         "c" | "check"   => check(args),
         "d" | "doc"     => doc::build(args, false),
         "h" | "help"    => doc::build(args, true),
-        "coverage"      => coverage::coverage(args),
+        "coverage"      => coverage::from_args(args),
         "publish"       => publish::publish(args),
         "vsc"           => vsc::vsc(args),
         other           => fatal!("unknown command {:?}", other),
