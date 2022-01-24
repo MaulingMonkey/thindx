@@ -40,7 +40,6 @@ pub fn coverage(mut args: std::env::Args) {
 
     if !llvm_profdata_exe.exists() { run(format!("rustup component add --toolchain={toolchain} llvm-tools-preview")) }
     cmd("grcov --version").stdout0().map(|_| {}).unwrap_or_else(|_| run("cargo install grcov"));
-    //cmd("rustfilt --version").stdout0().map(|_| {}).unwrap_or_else(|_| run("cargo install rustfilt"));
 
 
 
