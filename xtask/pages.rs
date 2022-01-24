@@ -15,6 +15,9 @@ pub struct Settings {
     pub git_add:                    bool,
     pub git_commit:                 bool,
     pub git_push:                   bool,
+
+    pub open_hosted_coverage:       bool,
+    pub open_hosted_docs:           bool,
 }
 
 impl Default for Settings {
@@ -29,6 +32,9 @@ impl Default for Settings {
             git_add:                true,
             git_commit:             true,
             git_push:               true,
+
+            open_hosted_coverage:   true,
+            open_hosted_docs:       true,
         }
     }
 }
@@ -53,6 +59,9 @@ pub fn from_settings(settings: Settings) {
     if settings.git_add         { run_in(gh_pages_dir, "git add -A preview") }
     if settings.git_commit      { run_in(gh_pages_dir, "git commit -m \"cargo xtask pages\"") }
     if settings.git_push        { run_in(gh_pages_dir, "git push github gh-pages") }
+
+    if settings.open_hosted_coverage    { browser::open("https://maulingmonkey.com/thindx/preview/coverage/") }
+    if settings.open_hosted_docs        { browser::open("https://maulingmonkey.com/thindx/preview/docs/thindx/") }
 }
 
 fn robocopy<'a>(source: &str, dest: &str, patterns: impl IntoIterator<Item = &'a str>) {
