@@ -5,6 +5,7 @@ mod doc;
 mod examples;
 mod headers;
 mod natvis;
+mod pages;
 mod publish;
 mod scan;
 mod vsc;
@@ -25,6 +26,7 @@ fn main() {
         "d" | "doc"     => doc::from_args(args, false),
         "h" | "help"    => doc::from_args(args, true),
         "coverage"      => coverage::from_args(args),
+        "pages"         => pages::from_args(args),
         "publish"       => publish::publish(args),
         "vsc"           => vsc::vsc(args),
         other           => fatal!("unknown command {:?}", other),

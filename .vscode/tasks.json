@@ -67,6 +67,10 @@
             "command": "cargo xtask coverage --open",
         },
         {
+            "label":   "update pages",
+            "command": "cargo xtask pages",
+        },
+        {
             "label":   "push github master",
             "command": "git push github master",
         },

@@ -19,6 +19,7 @@ const COMMANDS : &'static [(&'static str, &'static str)] = &[
     ("clean",               r"scripts\clean.cmd"),
     ("update coverage",     "cargo xtask coverage"),
     ("open coverage",       "cargo xtask coverage --open"),
+    ("update pages",        "cargo xtask pages"),
     ("push github master",  "git push github master"),
 ];
 
