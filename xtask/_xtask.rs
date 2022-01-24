@@ -22,8 +22,8 @@ fn main() {
     match cmd.as_str() {
         "b" | "build"   => build(args),
         "c" | "check"   => check(args),
-        "d" | "doc"     => doc::build(args, false),
-        "h" | "help"    => doc::build(args, true),
+        "d" | "doc"     => doc::from_args(args, false),
+        "h" | "help"    => doc::from_args(args, true),
         "coverage"      => coverage::from_args(args),
         "publish"       => publish::publish(args),
         "vsc"           => vsc::vsc(args),
@@ -39,7 +39,11 @@ fn build(args: std::env::Args) {
         run("cargo fetch");
         run("cargo build --frozen --workspace --all-targets");
         run(r"cargo build --frozen --workspace --all-targets --all-features --target-dir=target\all-features");
-        doc::update();
+        doc::from_settings(doc::Settings {
+            copy_thindx_files:  false, // already updated
+            build_examples:     false, // already built by cargo build
+            .. Default::default()
+        });
         run(r"cargo test          --frozen --workspace --all-features --target-dir=target\all-features");
     } else {
         copy_thindx_files();

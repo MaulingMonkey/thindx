@@ -4,20 +4,50 @@ use std::io;
 
 
 
-/// `cargo doc` subcommand entry point
-pub fn build(_args: std::env::Args, help: bool) {
-    copy_thindx_files();
-    run("cargo build --examples");
-    update();
-    if !help { return }
-    browser::open("target/all-features/doc/thindx/index.html");
+pub struct Settings {
+    pub copy_thindx_files:      bool,
+    pub build_examples:         bool, // TODO: move to `examples`?
+    pub update_examples:        bool,
+    pub update_headers:         bool,
+
+    pub all_features_cargo_doc: (), // always true
+
+    pub fixup:                  bool,
+    pub open:                   bool,
 }
 
-pub fn update() {
-    examples::update();
-    headers::update();
+impl Default for Settings {
+    fn default() -> Self {
+        Self {
+            copy_thindx_files:      true,
+            build_examples:         true,
+            update_examples:        true,
+            update_headers:         true,
+
+            all_features_cargo_doc: (),
+
+            fixup:                  true,
+            open:                   false,
+        }
+    }
+}
+
+/// `cargo doc` subcommand entry point
+pub fn from_args(_args: std::env::Args, help: bool) {
+    from_settings(Settings { open: help, .. Default::default() })
+}
+
+pub fn from_settings(settings: Settings) {
+    if settings.copy_thindx_files   { copy_thindx_files() }
+    if settings.build_examples      { run("cargo build --examples") }
+    if settings.update_examples     { examples::update() }
+    if settings.update_headers      { headers::update() }
+
+    let _always : () = settings.all_features_cargo_doc;
     run(r"cargo doc --no-deps --frozen --workspace --all-features --target-dir=target\all-features");
-    fixup();
+
+    if settings.fixup               { fixup() }
+    if settings.open                { browser::open("target/all-features/doc/thindx/index.html") }
 }
 
 fn fixup() {
