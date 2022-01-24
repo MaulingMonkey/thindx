@@ -1,4 +1,5 @@
 mod coverage;
+mod crlf;
 mod doc;
 mod examples;
 mod headers;
