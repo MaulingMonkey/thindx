@@ -28,6 +28,7 @@ mods! {
         pub mod d3d;
         pub mod d3d9;
         pub mod d3d11;
+        #[cfg(feature = "d3dx9")] pub mod d3dx9;
         pub mod xinput;
     }
 
@@ -40,6 +41,8 @@ mods! {
     #[path="headers/guiddef.h/guiddef.rs"]          mod guiddef_h;
     #[path="headers/unknwn.h/unknwn.rs"]            mod unknwn_h;
     #[path="headers/xinput.h/xinput.rs"]            mod xinput_h;
+
+    #[cfg(feature = "d3dx9")] #[path="headers/d3dx9tex.h/d3dx9tex.rs"]  mod d3dx9tex_h; // d3dx9 mod
 
     #[path="traits/_traits.rs"]                     mod traits;
 

@@ -34,6 +34,8 @@ path            = "src/_lib.rs"
 [features]
 default         = []
 9ex             = []
+d3dx9           = []
+
 # extra               = []
 # impl-poor-defaults  = []
 # impl-from-unchecked = []

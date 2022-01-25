@@ -1,0 +1,62 @@
+<!-- headers -->
+[d3dx9tex.h]:                                   https://docs.microsoft.com/en-us/windows/win32/direct3d9/dx9-graphics-reference-d3dx-functions-texture
+
+<!-- flags -->
+[D3DX_CHANNEL]:                                 https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dx-channel
+[D3DX_FILTER]:                                  https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dx-filter
+[D3DX_NORMALMAP]:                               https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dx-normalmap
+[D3DXSHADER]:                                   https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxshader-flags
+[D3DXSPRITE]:                                   https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxsprite
+
+<!-- functions -->
+[D3DXCheckCubeTextureRequirements]:             https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxcheckcubetexturerequirements
+[D3DXCheckTextureRequirements]:                 https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxchecktexturerequirements
+[D3DXCheckVolumeTextureRequirements]:           https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxcheckvolumetexturerequirements
+[D3DXComputeNormalMap]:                         https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxcomputenormalmap
+[D3DXCreateCubeTexture]:                        https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxcreatecubetexture
+[D3DXCreateCubeTextureFromFile]:                https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxcreatecubetexturefromfile
+[D3DXCreateCubeTextureFromFileEx]:              https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxcreatecubetexturefromfileex
+[D3DXCreateCubeTextureFromFileInMemory]:        https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxcreatecubetexturefromfileinmemory
+[D3DXCreateCubeTextureFromFileInMemoryEx]:      https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxcreatecubetexturefromfileinmemoryex
+[D3DXCreateCubeTextureFromResource]:            https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxcreatecubetexturefromresource
+[D3DXCreateCubeTextureFromResourceEx]:          https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxcreatecubetexturefromresourceex
+[D3DXCreateTexture]:                            https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxcreatetexture
+[D3DXCreateTextureFromFile]:                    https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxcreatetexturefromfile
+[D3DXCreateTextureFromFileEx]:                  https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxcreatetexturefromfileex
+[D3DXCreateTextureFromFileInMemory]:            https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxcreatetexturefromfileinmemory
+[D3DXCreateTextureFromFileInMemoryEx]:          https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxcreatetexturefromfileinmemoryex
+[D3DXCreateTextureFromResource]:                https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxcreatetexturefromresource
+[D3DXCreateTextureFromResourceEx]:              https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxcreatetexturefromresourceex
+[D3DXCreateVolumeTexture]:                      https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxcreatevolumetexture
+[D3DXCreateVolumeTextureFromFile]:              https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxcreatevolumetexturefromfile
+[D3DXCreateVolumeTextureFromFileEx]:            https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxcreatevolumetexturefromfileex
+[D3DXCreateVolumeTextureFromFileInMemory]:      https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxcreatevolumetexturefromfileinmemory
+[D3DXCreateVolumeTextureFromFileInMemoryEx]:    https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxcreatevolumetexturefromfileinmemoryex
+[D3DXCreateVolumeTextureFromResource]:          https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxcreatevolumetexturefromresource
+[D3DXCreateVolumeTextureFromResourceEx]:        https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxcreatevolumetexturefromresourceex
+[D3DXFillCubeTexture]:                          https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxfillcubetexture
+[D3DXFillCubeTextureTX]:                        https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxfillcubetexturetx
+[D3DXFillTexture]:                              https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxfilltexture
+[D3DXFillTextureTX]:                            https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxfilltexturetx
+[D3DXFillVolumeTexture]:                        https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxfillvolumetexture
+[D3DXFillVolumeTextureTX]:                      https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxfillvolumetexturetx
+[D3DXFilterTexture]:                            https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxfiltertexture
+[D3DXGetImageInfoFromFile]:                     https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxgetimageinfofromfile
+[D3DXGetImageInfoFromFileInMemory]:             https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxgetimageinfofromfileinmemory
+[D3DXGetImageInfoFromResource]:                 https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxgetimageinfofromresource
+[D3DXLoadSurfaceFromFile]:                      https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxloadsurfacefromfile
+[D3DXLoadSurfaceFromFileInMemory]:              https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxloadsurfacefromfileinmemory
+[D3DXLoadSurfaceFromMemory]:                    https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxloadsurfacefrommemory
+[D3DXLoadSurfaceFromResource]:                  https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxloadsurfacefromresource
+[D3DXLoadSurfaceFromSurface]:                   https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxloadsurfacefromsurface
+[D3DXLoadVolumeFromFile]:                       https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxloadvolumefromfile
+[D3DXLoadVolumeFromFileInMemory]:               https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxloadvolumefromfileinmemory
+[D3DXLoadVolumeFromMemory]:                     https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxloadvolumefrommemory
+[D3DXLoadVolumeFromResource]:                   https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxloadvolumefromresource
+[D3DXLoadVolumeFromVolume]:                     https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxloadvolumefromvolume
+[D3DXSaveSurfaceToFile]:                        https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxsavesurfacetofile
+[D3DXSaveSurfaceToFileInMemory]:                https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxsavesurfacetofileinmemory
+[D3DXSaveTextureToFile]:                        https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxsavetexturetofile
+[D3DXSaveTextureToFileInMemory]:                https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxsavetexturetofileinmemory
+[D3DXSaveVolumeToFile]:                         https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxsavevolumetofile
+[D3DXSaveVolumeToFileInMemory]:                 https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxsavevolumetofileinmemory

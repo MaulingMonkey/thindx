@@ -1,0 +1,28 @@
+
+//----------------------------------------------------------------------------
+// LPD3DXFILL2D and LPD3DXFILL3D:
+// ------------------------------
+// Function types used by the texture fill functions.
+//
+// Parameters:
+//  pOut
+//      Pointer to a vector which the function uses to return its result.
+//      X,Y,Z,W will be mapped to R,G,B,A respectivly.
+//  pTexCoord
+//      Pointer to a vector containing the coordinates of the texel currently
+//      being evaluated.  Textures and VolumeTexture texcoord components
+//      range from 0 to 1. CubeTexture texcoord component range from -1 to 1.
+//  pTexelSize
+//      Pointer to a vector containing the dimensions of the current texel.
+//  pData
+//      Pointer to user data.
+//
+//----------------------------------------------------------------------------
+
+typedef VOID (WINAPI *LPD3DXFILL2D)(D3DXVECTOR4 *pOut,
+    CONST D3DXVECTOR2 *pTexCoord, CONST D3DXVECTOR2 *pTexelSize, LPVOID pData);
+
+typedef VOID (WINAPI *LPD3DXFILL3D)(D3DXVECTOR4 *pOut,
+    CONST D3DXVECTOR3 *pTexCoord, CONST D3DXVECTOR3 *pTexelSize, LPVOID pData);
+
+

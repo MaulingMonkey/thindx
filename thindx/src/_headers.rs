@@ -30,7 +30,7 @@
 //! | [d3dx9mesh.h](const@d3dx9mesh_h) | ❌ 0 of 10 | ❌ 0 of 13 | ❌ 0 of 8 | ❌ 0 of 12 | ❌ 0 of 48 |   |
 //! | [d3dx9shader.h](const@d3dx9shader_h) | ❌ 0 of 3 | ❌ 0 of 8 | ❌ 0 of 4 |   | ❌ 0 of 58 | ❌ 0 of 1 |
 //! | [d3dx9shape.h](const@d3dx9shape_h) |   |   |   |   | ❌ 0 of 1 |   |
-//! | [d3dx9tex.h](const@d3dx9tex_h) |   | ❌ 0 of 1 | ❌ 0 of 1 |   | ❌ 0 of 58 | ❌ 0 of 1 |
+//! | [d3dx9tex.h](const@d3dx9tex_h) |   | ❌ 0 of 1 | ✔️ 1 of 1 |   | ⚠️ 30 of 58 | ❌ 0 of 1 |
 //! | [d3dx9xof.h](const@d3dx9xof_h) | ❌ 0 of 5 | ❌ 0 of 2 |   |   | ❌ 0 of 29 | ❌ 0 of 2 |
 
 
@@ -4202,42 +4202,42 @@ pub const d3dx9shape_h : cxx_header = cxx_header;
 /// `D3DXIMAGE_INFO` →&nbsp;❌ <br>
 /// ### C++ Enums → Rust Structs
 ///
-/// `D3DXIMAGE_FILEFORMAT` →&nbsp;❌ <br>
-/// * `D3DXIFF_BMP` →&nbsp;❌ <br>
-/// * `D3DXIFF_DDS` →&nbsp;❌ <br>
-/// * `D3DXIFF_DIB` →&nbsp;❌ <br>
-/// * `D3DXIFF_HDR` →&nbsp;❌ <br>
-/// * `D3DXIFF_JPG` →&nbsp;❌ <br>
-/// * `D3DXIFF_PFM` →&nbsp;❌ <br>
-/// * `D3DXIFF_PNG` →&nbsp;❌ <br>
-/// * `D3DXIFF_PPM` →&nbsp;❌ <br>
-/// * `D3DXIFF_TGA` →&nbsp;❌ <br>
+/// `D3DXIMAGE_FILEFORMAT`&nbsp;→ [`d3dx9::ImageFileFormat`] <br>
+/// * `D3DXIFF_BMP`&nbsp;→ [`d3dx9::IFF::BMP`] <br>
+/// * `D3DXIFF_DDS`&nbsp;→ [`d3dx9::IFF::DDS`] <br>
+/// * `D3DXIFF_DIB`&nbsp;→ [`d3dx9::IFF::DIB`] <br>
+/// * `D3DXIFF_HDR`&nbsp;→ [`d3dx9::IFF::HDR`] <br>
+/// * `D3DXIFF_JPG`&nbsp;→ [`d3dx9::IFF::JPG`] <br>
+/// * `D3DXIFF_PFM`&nbsp;→ [`d3dx9::IFF::PFM`] <br>
+/// * `D3DXIFF_PNG`&nbsp;→ [`d3dx9::IFF::PNG`] <br>
+/// * `D3DXIFF_PPM`&nbsp;→ [`d3dx9::IFF::PPM`] <br>
+/// * `D3DXIFF_TGA`&nbsp;→ [`d3dx9::IFF::TGA`] <br>
 ///
 /// ### C++ Constants → Rust Constants
 ///
-/// `D3DXCreateCubeTextureFromFile` →&nbsp;❌ <br>
-/// `D3DXCreateCubeTextureFromFileEx` →&nbsp;❌ <br>
-/// `D3DXCreateCubeTextureFromResource` →&nbsp;❌ <br>
-/// `D3DXCreateCubeTextureFromResourceEx` →&nbsp;❌ <br>
-/// `D3DXCreateTextureFromFile` →&nbsp;❌ <br>
-/// `D3DXCreateTextureFromFileEx` →&nbsp;❌ <br>
-/// `D3DXCreateTextureFromResource` →&nbsp;❌ <br>
-/// `D3DXCreateTextureFromResourceEx` →&nbsp;❌ <br>
-/// `D3DXCreateVolumeTextureFromFile` →&nbsp;❌ <br>
-/// `D3DXCreateVolumeTextureFromFileEx` →&nbsp;❌ <br>
-/// `D3DXCreateVolumeTextureFromResource` →&nbsp;❌ <br>
-/// `D3DXCreateVolumeTextureFromResourceEx` →&nbsp;❌ <br>
+/// [`D3DXCreateCubeTextureFromFile`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxcreatecubetexturefromfile)&nbsp;→ [`d3dx9::create_cube_texture_from_file`] <br>
+/// [`D3DXCreateCubeTextureFromFileEx`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxcreatecubetexturefromfileex)&nbsp;→ [`d3dx9::create_cube_texture_from_file_ex`] <br>
+/// [`D3DXCreateCubeTextureFromResource`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxcreatecubetexturefromresource)&nbsp;→ [`d3dx9::create_cube_texture_from_resource`] <br>
+/// [`D3DXCreateCubeTextureFromResourceEx`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxcreatecubetexturefromresourceex)&nbsp;→ [`d3dx9::create_cube_texture_from_resource_ex`] <br>
+/// [`D3DXCreateTextureFromFile`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxcreatetexturefromfile)&nbsp;→ [`d3dx9::create_texture_from_file`] <br>
+/// [`D3DXCreateTextureFromFileEx`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxcreatetexturefromfileex)&nbsp;→ [`d3dx9::create_texture_from_file_ex`] <br>
+/// [`D3DXCreateTextureFromResource`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxcreatetexturefromresource)&nbsp;→ [`d3dx9::create_texture_from_resource`] <br>
+/// [`D3DXCreateTextureFromResourceEx`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxcreatetexturefromresourceex)&nbsp;→ [`d3dx9::create_texture_from_resource_ex`] <br>
+/// [`D3DXCreateVolumeTextureFromFile`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxcreatevolumetexturefromfile)&nbsp;→ [`d3dx9::create_volume_texture_from_file`] <br>
+/// [`D3DXCreateVolumeTextureFromFileEx`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxcreatevolumetexturefromfileex)&nbsp;→ [`d3dx9::create_volume_texture_from_file_ex`] <br>
+/// [`D3DXCreateVolumeTextureFromResource`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxcreatevolumetexturefromresource)&nbsp;→ [`d3dx9::create_volume_texture_from_resource`] <br>
+/// [`D3DXCreateVolumeTextureFromResourceEx`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxcreatevolumetexturefromresourceex)&nbsp;→ [`d3dx9::create_volume_texture_from_resource_ex`] <br>
 /// `D3DXFilterCubeTexture` →&nbsp;❌ <br>
 /// `D3DXFilterVolumeTexture` →&nbsp;❌ <br>
-/// `D3DXGetImageInfoFromFile` →&nbsp;❌ <br>
-/// `D3DXGetImageInfoFromResource` →&nbsp;❌ <br>
-/// `D3DXLoadSurfaceFromFile` →&nbsp;❌ <br>
-/// `D3DXLoadSurfaceFromResource` →&nbsp;❌ <br>
-/// `D3DXLoadVolumeFromFile` →&nbsp;❌ <br>
-/// `D3DXLoadVolumeFromResource` →&nbsp;❌ <br>
-/// `D3DXSaveSurfaceToFile` →&nbsp;❌ <br>
-/// `D3DXSaveTextureToFile` →&nbsp;❌ <br>
-/// `D3DXSaveVolumeToFile` →&nbsp;❌ <br>
+/// [`D3DXGetImageInfoFromFile`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxgetimageinfofromfile)&nbsp;→ [`d3dx9::get_image_info_from_file`] <br>
+/// [`D3DXGetImageInfoFromResource`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxgetimageinfofromresource)&nbsp;→ [`d3dx9::get_image_info_from_resource`] <br>
+/// [`D3DXLoadSurfaceFromFile`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxloadsurfacefromfile)&nbsp;→ [`d3dx9::load_surface_from_file`] <br>
+/// [`D3DXLoadSurfaceFromResource`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxloadsurfacefromresource)&nbsp;→ [`d3dx9::load_surface_from_resource`] <br>
+/// [`D3DXLoadVolumeFromFile`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxloadvolumefromfile)&nbsp;→ [`d3dx9::load_volume_from_file`] <br>
+/// [`D3DXLoadVolumeFromResource`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxloadvolumefromresource)&nbsp;→ [`d3dx9::load_volume_from_resource`] <br>
+/// [`D3DXSaveSurfaceToFile`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxsavesurfacetofile)&nbsp;→ [`d3dx9::save_surface_to_file`] <br>
+/// [`D3DXSaveTextureToFile`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxsavetexturetofile)&nbsp;→ [`d3dx9::save_texture_to_file`] <br>
+/// [`D3DXSaveVolumeToFile`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxsavevolumetofile)&nbsp;→ [`d3dx9::save_volume_to_file`] <br>
 /// `D3DX_CHANNEL_ALPHA` →&nbsp;❌ <br>
 /// `D3DX_CHANNEL_BLUE` →&nbsp;❌ <br>
 /// `D3DX_CHANNEL_GREEN` →&nbsp;❌ <br>

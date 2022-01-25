@@ -115,6 +115,7 @@ fn check(mut args: std::env::Args) {
     let mut cmd = Command::new("cargo");
     cmd.arg("test");
     cmd.arg("-p").arg(package);
+    if pattern1.contains("d3dx9") { cmd.arg("--all-features").arg(r"--target-dir=target\all-features"); }
     cmd.arg("--").arg(pattern1).arg(pattern2);
     status!("Running", "{:?}", cmd);
     cmd.status0().unwrap_or_else(|err| fatal!("{}", err));

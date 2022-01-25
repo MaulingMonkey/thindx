@@ -11,7 +11,7 @@ mod sealed {
         fn as_safe(&self) -> &T;
         fn as_winapi(&self) -> &T { self.as_safe() } // TODO: deprecate
         fn as_ptr(&self) -> *const T { self.as_safe() }
-        // fn as_mut_ptr(&self) -> *mut T { self.as_ptr() as _ } // sketchy, make name scarier?
+        fn as_mut_ptr(&self) -> *mut T { self.as_ptr() as _ } // sketchy, make name scarier?
         // nonnull variants?
     }
 }
