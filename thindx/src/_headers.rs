@@ -2,7 +2,7 @@
 
 #![warn(rustdoc::broken_intra_doc_links)]
 
-//! Rust ⮀ C++ coverage information based on Windows SDK 10.0.19041.0
+//! Rust ⮀ C++ coverage information based on Windows SDK 10.0.19041.0 + DirectX SDK (June 2010)
 //!
 //! ⚠️ Scanned C++ definitions are not yet complete.
 //! Based on [MaulingMonkey/windows-sdk-scanner](https://github.com/MaulingMonkey/windows-sdk-scanner).
@@ -22,6 +22,16 @@
 //! | [d3d11shadertracing.h](const@d3d11shadertracing_h) | ❌ 0 of 2 | ❌ 0 of 11 | ❌ 0 of 3 |   | ❌ 0 of 62 |   |
 //! | [xinput.h](const@xinput_h) |   | ✔️ 6 of 6 |   | ✔️ 8 of 8 | ⚠️ 83 of 86 |   |
 //! | [xaudio2.h](const@xaudio2_h) | ❌ 0 of 8 | ❌ 0 of 11 | ❌ 0 of 1 |   | ❌ 0 of 162 | ❌ 0 of 2 |
+//! | [d3dx9.h](const@d3dx9_h) |   |   |   |   | ❌ 0 of 7 | ❌ 0 of 1 |
+//! | [d3dx9anim.h](const@d3dx9anim_h) | ❌ 0 of 8 | ❌ 0 of 8 | ❌ 0 of 7 |   | ❌ 0 of 21 |   |
+//! | [d3dx9core.h](const@d3dx9core_h) | ❌ 0 of 6 | ❌ 0 of 4 |   |   | ❌ 0 of 16 |   |
+//! | [d3dx9effect.h](const@d3dx9effect_h) | ❌ 0 of 5 | ❌ 0 of 5 |   |   | ❌ 0 of 15 |   |
+//! | [d3dx9math.h](const@d3dx9math_h) | ❌ 0 of 1 | ❌ 0 of 9 |   | ❌ 0 of 103 | ❌ 0 of 17 | ❌ 0 of 2 |
+//! | [d3dx9mesh.h](const@d3dx9mesh_h) | ❌ 0 of 10 | ❌ 0 of 13 | ❌ 0 of 8 | ❌ 0 of 12 | ❌ 0 of 48 |   |
+//! | [d3dx9shader.h](const@d3dx9shader_h) | ❌ 0 of 3 | ❌ 0 of 8 | ❌ 0 of 4 |   | ❌ 0 of 58 | ❌ 0 of 1 |
+//! | [d3dx9shape.h](const@d3dx9shape_h) |   |   |   |   | ❌ 0 of 1 |   |
+//! | [d3dx9tex.h](const@d3dx9tex_h) |   | ❌ 0 of 1 | ❌ 0 of 1 |   | ❌ 0 of 58 | ❌ 0 of 1 |
+//! | [d3dx9xof.h](const@d3dx9xof_h) | ❌ 0 of 5 | ❌ 0 of 2 |   |   | ❌ 0 of 29 | ❌ 0 of 2 |
 
 
 
@@ -3132,6 +3142,1231 @@ pub const xinput_h : cxx_header = cxx_header;
 /// `FWD_DECLARE` →&nbsp;❌ <br>
 /// `X2DEFAULT` →&nbsp;❌ <br>
 pub const xaudio2_h : cxx_header = cxx_header;
+
+
+
+/// # d3dx9.h
+///
+/// ### C++ Constants → Rust Constants
+///
+/// `D3DFMT_FROM_FILE` →&nbsp;❌ <br>
+/// `D3DXINLINE` →&nbsp;❌ <br>
+/// `D3DX_DEFAULT` →&nbsp;❌ <br>
+/// `D3DX_DEFAULT_FLOAT` →&nbsp;❌ <br>
+/// `D3DX_DEFAULT_NONPOW2` →&nbsp;❌ <br>
+/// `D3DX_FROM_FILE` →&nbsp;❌ <br>
+/// `_FACDD` →&nbsp;❌ <br>
+/// ### C++ Macros → Rust fns/macros
+///
+/// `MAKE_DDHRESULT` →&nbsp;❌ <br>
+pub const d3dx9_h : cxx_header = cxx_header;
+
+
+
+/// # d3dx9anim.h
+///
+/// ### C++ Interfaces → Rust Types
+///
+/// `ID3DXAllocateHierarchy` →&nbsp;❌ <br>
+/// * `ID3DXAllocateHierarchy::CreateFrame` →&nbsp;❌ <br>
+/// * `ID3DXAllocateHierarchy::CreateMeshContainer` →&nbsp;❌ <br>
+/// * `ID3DXAllocateHierarchy::DestroyFrame` →&nbsp;❌ <br>
+/// * `ID3DXAllocateHierarchy::DestroyMeshContainer` →&nbsp;❌ <br>
+///
+/// `ID3DXAnimationCallbackHandler` →&nbsp;❌ <br>
+/// * `ID3DXAnimationCallbackHandler::HandleCallback` →&nbsp;❌ <br>
+///
+/// `ID3DXAnimationController` →&nbsp;❌ <br>
+/// * `ID3DXAnimationController::AdvanceTime` →&nbsp;❌ <br>
+/// * `ID3DXAnimationController::CloneAnimationController` →&nbsp;❌ <br>
+/// * `ID3DXAnimationController::GetAnimationSet` →&nbsp;❌ <br>
+/// * `ID3DXAnimationController::GetAnimationSetByName` →&nbsp;❌ <br>
+/// * `ID3DXAnimationController::GetCurrentPriorityBlend` →&nbsp;❌ <br>
+/// * `ID3DXAnimationController::GetCurrentTrackEvent` →&nbsp;❌ <br>
+/// * `ID3DXAnimationController::GetEventDesc` →&nbsp;❌ <br>
+/// * `ID3DXAnimationController::GetMaxNumAnimationOutputs` →&nbsp;❌ <br>
+/// * `ID3DXAnimationController::GetMaxNumAnimationSets` →&nbsp;❌ <br>
+/// * `ID3DXAnimationController::GetMaxNumEvents` →&nbsp;❌ <br>
+/// * `ID3DXAnimationController::GetMaxNumTracks` →&nbsp;❌ <br>
+/// * `ID3DXAnimationController::GetNumAnimationSets` →&nbsp;❌ <br>
+/// * `ID3DXAnimationController::GetPriorityBlend` →&nbsp;❌ <br>
+/// * `ID3DXAnimationController::GetTime` →&nbsp;❌ <br>
+/// * `ID3DXAnimationController::GetTrackAnimationSet` →&nbsp;❌ <br>
+/// * `ID3DXAnimationController::GetTrackDesc` →&nbsp;❌ <br>
+/// * `ID3DXAnimationController::GetUpcomingPriorityBlend` →&nbsp;❌ <br>
+/// * `ID3DXAnimationController::GetUpcomingTrackEvent` →&nbsp;❌ <br>
+/// * `ID3DXAnimationController::KeyPriorityBlend` →&nbsp;❌ <br>
+/// * `ID3DXAnimationController::KeyTrackEnable` →&nbsp;❌ <br>
+/// * `ID3DXAnimationController::KeyTrackPosition` →&nbsp;❌ <br>
+/// * `ID3DXAnimationController::KeyTrackSpeed` →&nbsp;❌ <br>
+/// * `ID3DXAnimationController::KeyTrackWeight` →&nbsp;❌ <br>
+/// * `ID3DXAnimationController::RegisterAnimationOutput` →&nbsp;❌ <br>
+/// * `ID3DXAnimationController::RegisterAnimationSet` →&nbsp;❌ <br>
+/// * `ID3DXAnimationController::ResetTime` →&nbsp;❌ <br>
+/// * `ID3DXAnimationController::SetPriorityBlend` →&nbsp;❌ <br>
+/// * `ID3DXAnimationController::SetTrackAnimationSet` →&nbsp;❌ <br>
+/// * `ID3DXAnimationController::SetTrackDesc` →&nbsp;❌ <br>
+/// * `ID3DXAnimationController::SetTrackEnable` →&nbsp;❌ <br>
+/// * `ID3DXAnimationController::SetTrackPosition` →&nbsp;❌ <br>
+/// * `ID3DXAnimationController::SetTrackPriority` →&nbsp;❌ <br>
+/// * `ID3DXAnimationController::SetTrackSpeed` →&nbsp;❌ <br>
+/// * `ID3DXAnimationController::SetTrackWeight` →&nbsp;❌ <br>
+/// * `ID3DXAnimationController::UnkeyAllPriorityBlends` →&nbsp;❌ <br>
+/// * `ID3DXAnimationController::UnkeyAllTrackEvents` →&nbsp;❌ <br>
+/// * `ID3DXAnimationController::UnkeyEvent` →&nbsp;❌ <br>
+/// * `ID3DXAnimationController::UnregisterAnimationSet` →&nbsp;❌ <br>
+/// * `ID3DXAnimationController::ValidateEvent` →&nbsp;❌ <br>
+///
+/// `ID3DXAnimationSet` →&nbsp;❌ <br>
+/// * `ID3DXAnimationSet::GetAnimationIndexByName` →&nbsp;❌ <br>
+/// * `ID3DXAnimationSet::GetAnimationNameByIndex` →&nbsp;❌ <br>
+/// * `ID3DXAnimationSet::GetCallback` →&nbsp;❌ <br>
+/// * `ID3DXAnimationSet::GetName` →&nbsp;❌ <br>
+/// * `ID3DXAnimationSet::GetNumAnimations` →&nbsp;❌ <br>
+/// * `ID3DXAnimationSet::GetPeriod` →&nbsp;❌ <br>
+/// * `ID3DXAnimationSet::GetPeriodicPosition` →&nbsp;❌ <br>
+/// * `ID3DXAnimationSet::GetSRT` →&nbsp;❌ <br>
+///
+/// `ID3DXCompressedAnimationSet` →&nbsp;❌ <br>
+/// * `ID3DXCompressedAnimationSet::GetCallbackKeys` →&nbsp;❌ <br>
+/// * `ID3DXCompressedAnimationSet::GetCompressedData` →&nbsp;❌ <br>
+/// * `ID3DXCompressedAnimationSet::GetNumCallbackKeys` →&nbsp;❌ <br>
+/// * `ID3DXCompressedAnimationSet::GetPlaybackType` →&nbsp;❌ <br>
+/// * `ID3DXCompressedAnimationSet::GetSourceTicksPerSecond` →&nbsp;❌ <br>
+///
+/// `ID3DXKeyframedAnimationSet` →&nbsp;❌ <br>
+/// * `ID3DXKeyframedAnimationSet::Compress` →&nbsp;❌ <br>
+/// * `ID3DXKeyframedAnimationSet::GetCallbackKey` →&nbsp;❌ <br>
+/// * `ID3DXKeyframedAnimationSet::GetCallbackKeys` →&nbsp;❌ <br>
+/// * `ID3DXKeyframedAnimationSet::GetNumCallbackKeys` →&nbsp;❌ <br>
+/// * `ID3DXKeyframedAnimationSet::GetNumRotationKeys` →&nbsp;❌ <br>
+/// * `ID3DXKeyframedAnimationSet::GetNumScaleKeys` →&nbsp;❌ <br>
+/// * `ID3DXKeyframedAnimationSet::GetNumTranslationKeys` →&nbsp;❌ <br>
+/// * `ID3DXKeyframedAnimationSet::GetPlaybackType` →&nbsp;❌ <br>
+/// * `ID3DXKeyframedAnimationSet::GetRotationKey` →&nbsp;❌ <br>
+/// * `ID3DXKeyframedAnimationSet::GetRotationKeys` →&nbsp;❌ <br>
+/// * `ID3DXKeyframedAnimationSet::GetScaleKey` →&nbsp;❌ <br>
+/// * `ID3DXKeyframedAnimationSet::GetScaleKeys` →&nbsp;❌ <br>
+/// * `ID3DXKeyframedAnimationSet::GetSourceTicksPerSecond` →&nbsp;❌ <br>
+/// * `ID3DXKeyframedAnimationSet::GetTranslationKey` →&nbsp;❌ <br>
+/// * `ID3DXKeyframedAnimationSet::GetTranslationKeys` →&nbsp;❌ <br>
+/// * `ID3DXKeyframedAnimationSet::RegisterAnimationSRTKeys` →&nbsp;❌ <br>
+/// * `ID3DXKeyframedAnimationSet::SetCallbackKey` →&nbsp;❌ <br>
+/// * `ID3DXKeyframedAnimationSet::SetRotationKey` →&nbsp;❌ <br>
+/// * `ID3DXKeyframedAnimationSet::SetScaleKey` →&nbsp;❌ <br>
+/// * `ID3DXKeyframedAnimationSet::SetTranslationKey` →&nbsp;❌ <br>
+/// * `ID3DXKeyframedAnimationSet::UnregisterAnimation` →&nbsp;❌ <br>
+/// * `ID3DXKeyframedAnimationSet::UnregisterRotationKey` →&nbsp;❌ <br>
+/// * `ID3DXKeyframedAnimationSet::UnregisterScaleKey` →&nbsp;❌ <br>
+/// * `ID3DXKeyframedAnimationSet::UnregisterTranslationKey` →&nbsp;❌ <br>
+///
+/// `ID3DXLoadUserData` →&nbsp;❌ <br>
+/// * `ID3DXLoadUserData::LoadFrameChildData` →&nbsp;❌ <br>
+/// * `ID3DXLoadUserData::LoadMeshChildData` →&nbsp;❌ <br>
+/// * `ID3DXLoadUserData::LoadTopLevelData` →&nbsp;❌ <br>
+///
+/// `ID3DXSaveUserData` →&nbsp;❌ <br>
+/// * `ID3DXSaveUserData::AddFrameChildData` →&nbsp;❌ <br>
+/// * `ID3DXSaveUserData::AddMeshChildData` →&nbsp;❌ <br>
+/// * `ID3DXSaveUserData::AddTopLevelDataObjectsPost` →&nbsp;❌ <br>
+/// * `ID3DXSaveUserData::AddTopLevelDataObjectsPre` →&nbsp;❌ <br>
+/// * `ID3DXSaveUserData::RegisterTemplates` →&nbsp;❌ <br>
+/// * `ID3DXSaveUserData::SaveTemplates` →&nbsp;❌ <br>
+///
+/// ### C++ Structs -> Rust Structs
+///
+/// `D3DXEVENT_DESC` →&nbsp;❌ <br>
+/// `D3DXFRAME` →&nbsp;❌ <br>
+/// `D3DXKEY_CALLBACK` →&nbsp;❌ <br>
+/// `D3DXKEY_QUATERNION` →&nbsp;❌ <br>
+/// `D3DXKEY_VECTOR3` →&nbsp;❌ <br>
+/// `D3DXMESHCONTAINER` →&nbsp;❌ <br>
+/// `D3DXMESHDATA` →&nbsp;❌ <br>
+/// `D3DXTRACK_DESC` →&nbsp;❌ <br>
+/// ### C++ Enums → Rust Structs
+///
+/// `D3DXCALLBACK_SEARCH_FLAGS` →&nbsp;❌ <br>
+/// * `D3DXCALLBACK_SEARCH_BEHIND_INITIAL_POSITION` →&nbsp;❌ <br>
+/// * `D3DXCALLBACK_SEARCH_EXCLUDING_INITIAL_POSITION` →&nbsp;❌ <br>
+///
+/// `D3DXCOMPRESSION_FLAGS` →&nbsp;❌ <br>
+/// * `D3DXCOMPRESS_DEFAULT` →&nbsp;❌ <br>
+///
+/// `D3DXEVENT_TYPE` →&nbsp;❌ <br>
+/// * `D3DXEVENT_PRIORITYBLEND` →&nbsp;❌ <br>
+/// * `D3DXEVENT_TRACKENABLE` →&nbsp;❌ <br>
+/// * `D3DXEVENT_TRACKPOSITION` →&nbsp;❌ <br>
+/// * `D3DXEVENT_TRACKSPEED` →&nbsp;❌ <br>
+/// * `D3DXEVENT_TRACKWEIGHT` →&nbsp;❌ <br>
+///
+/// `D3DXMESHDATATYPE` →&nbsp;❌ <br>
+/// * `D3DXMESHTYPE_MESH` →&nbsp;❌ <br>
+/// * `D3DXMESHTYPE_PATCHMESH` →&nbsp;❌ <br>
+/// * `D3DXMESHTYPE_PMESH` →&nbsp;❌ <br>
+///
+/// `D3DXPLAYBACK_TYPE` →&nbsp;❌ <br>
+/// * `D3DXPLAY_LOOP` →&nbsp;❌ <br>
+/// * `D3DXPLAY_ONCE` →&nbsp;❌ <br>
+/// * `D3DXPLAY_PINGPONG` →&nbsp;❌ <br>
+///
+/// `D3DXPRIORITY_TYPE` →&nbsp;❌ <br>
+/// * `D3DXPRIORITY_HIGH` →&nbsp;❌ <br>
+/// * `D3DXPRIORITY_LOW` →&nbsp;❌ <br>
+///
+/// `D3DXTRANSITION_TYPE` →&nbsp;❌ <br>
+/// * `D3DXTRANSITION_EASEINEASEOUT` →&nbsp;❌ <br>
+/// * `D3DXTRANSITION_LINEAR` →&nbsp;❌ <br>
+///
+/// ### C++ Constants → Rust Constants
+///
+/// `D3DXLoadMeshHierarchyFromX` →&nbsp;❌ <br>
+/// `D3DXSaveMeshHierarchyToFile` →&nbsp;❌ <br>
+/// `INTERFACE` →&nbsp;❌ <br>
+pub const d3dx9anim_h : cxx_header = cxx_header;
+
+
+
+/// # d3dx9core.h
+///
+/// ### C++ Interfaces → Rust Types
+///
+/// `ID3DXBuffer` →&nbsp;❌ <br>
+/// * `ID3DXBuffer::GetBufferPointer` →&nbsp;❌ <br>
+/// * `ID3DXBuffer::GetBufferSize` →&nbsp;❌ <br>
+///
+/// `ID3DXFont` →&nbsp;❌ <br>
+/// * `ID3DXFont::DrawTextA` →&nbsp;❌ <br>
+/// * `ID3DXFont::DrawTextW` →&nbsp;❌ <br>
+/// * `ID3DXFont::GetDC` →&nbsp;❌ <br>
+/// * `ID3DXFont::GetDescA` →&nbsp;❌ <br>
+/// * `ID3DXFont::GetDescW` →&nbsp;❌ <br>
+/// * `ID3DXFont::GetDevice` →&nbsp;❌ <br>
+/// * `ID3DXFont::GetGlyphData` →&nbsp;❌ <br>
+/// * `ID3DXFont::GetTextMetricsA` →&nbsp;❌ <br>
+/// * `ID3DXFont::GetTextMetricsW` →&nbsp;❌ <br>
+/// * `ID3DXFont::OnLostDevice` →&nbsp;❌ <br>
+/// * `ID3DXFont::OnResetDevice` →&nbsp;❌ <br>
+/// * `ID3DXFont::PreloadCharacters` →&nbsp;❌ <br>
+/// * `ID3DXFont::PreloadGlyphs` →&nbsp;❌ <br>
+/// * `ID3DXFont::PreloadTextA` →&nbsp;❌ <br>
+/// * `ID3DXFont::PreloadTextW` →&nbsp;❌ <br>
+///
+/// `ID3DXLine` →&nbsp;❌ <br>
+/// * `ID3DXLine::Begin` →&nbsp;❌ <br>
+/// * `ID3DXLine::Draw` →&nbsp;❌ <br>
+/// * `ID3DXLine::DrawTransform` →&nbsp;❌ <br>
+/// * `ID3DXLine::End` →&nbsp;❌ <br>
+/// * `ID3DXLine::GetAntialias` →&nbsp;❌ <br>
+/// * `ID3DXLine::GetDevice` →&nbsp;❌ <br>
+/// * `ID3DXLine::GetGLLines` →&nbsp;❌ <br>
+/// * `ID3DXLine::GetPattern` →&nbsp;❌ <br>
+/// * `ID3DXLine::GetPatternScale` →&nbsp;❌ <br>
+/// * `ID3DXLine::GetWidth` →&nbsp;❌ <br>
+/// * `ID3DXLine::OnLostDevice` →&nbsp;❌ <br>
+/// * `ID3DXLine::OnResetDevice` →&nbsp;❌ <br>
+/// * `ID3DXLine::SetAntialias` →&nbsp;❌ <br>
+/// * `ID3DXLine::SetGLLines` →&nbsp;❌ <br>
+/// * `ID3DXLine::SetPattern` →&nbsp;❌ <br>
+/// * `ID3DXLine::SetPatternScale` →&nbsp;❌ <br>
+/// * `ID3DXLine::SetWidth` →&nbsp;❌ <br>
+///
+/// `ID3DXRenderToEnvMap` →&nbsp;❌ <br>
+/// * `ID3DXRenderToEnvMap::BeginCube` →&nbsp;❌ <br>
+/// * `ID3DXRenderToEnvMap::BeginHemisphere` →&nbsp;❌ <br>
+/// * `ID3DXRenderToEnvMap::BeginParabolic` →&nbsp;❌ <br>
+/// * `ID3DXRenderToEnvMap::BeginSphere` →&nbsp;❌ <br>
+/// * `ID3DXRenderToEnvMap::End` →&nbsp;❌ <br>
+/// * `ID3DXRenderToEnvMap::Face` →&nbsp;❌ <br>
+/// * `ID3DXRenderToEnvMap::GetDesc` →&nbsp;❌ <br>
+/// * `ID3DXRenderToEnvMap::GetDevice` →&nbsp;❌ <br>
+/// * `ID3DXRenderToEnvMap::OnLostDevice` →&nbsp;❌ <br>
+/// * `ID3DXRenderToEnvMap::OnResetDevice` →&nbsp;❌ <br>
+///
+/// `ID3DXRenderToSurface` →&nbsp;❌ <br>
+/// * `ID3DXRenderToSurface::BeginScene` →&nbsp;❌ <br>
+/// * `ID3DXRenderToSurface::EndScene` →&nbsp;❌ <br>
+/// * `ID3DXRenderToSurface::GetDesc` →&nbsp;❌ <br>
+/// * `ID3DXRenderToSurface::GetDevice` →&nbsp;❌ <br>
+/// * `ID3DXRenderToSurface::OnLostDevice` →&nbsp;❌ <br>
+/// * `ID3DXRenderToSurface::OnResetDevice` →&nbsp;❌ <br>
+///
+/// `ID3DXSprite` →&nbsp;❌ <br>
+/// * `ID3DXSprite::Begin` →&nbsp;❌ <br>
+/// * `ID3DXSprite::Draw` →&nbsp;❌ <br>
+/// * `ID3DXSprite::End` →&nbsp;❌ <br>
+/// * `ID3DXSprite::Flush` →&nbsp;❌ <br>
+/// * `ID3DXSprite::GetDevice` →&nbsp;❌ <br>
+/// * `ID3DXSprite::GetTransform` →&nbsp;❌ <br>
+/// * `ID3DXSprite::OnLostDevice` →&nbsp;❌ <br>
+/// * `ID3DXSprite::OnResetDevice` →&nbsp;❌ <br>
+/// * `ID3DXSprite::SetTransform` →&nbsp;❌ <br>
+/// * `ID3DXSprite::SetWorldViewLH` →&nbsp;❌ <br>
+/// * `ID3DXSprite::SetWorldViewRH` →&nbsp;❌ <br>
+///
+/// ### C++ Structs -> Rust Structs
+///
+/// `D3DXFONT_DESCA` →&nbsp;❌ <br>
+/// `D3DXFONT_DESCW` →&nbsp;❌ <br>
+/// `D3DXRTE_DESC` →&nbsp;❌ <br>
+/// `D3DXRTS_DESC` →&nbsp;❌ <br>
+/// ### C++ Constants → Rust Constants
+///
+/// `D3DXCreateFont` →&nbsp;❌ <br>
+/// `D3DXCreateFontIndirect` →&nbsp;❌ <br>
+/// `D3DXSPRITE_ALPHABLEND` →&nbsp;❌ <br>
+/// `D3DXSPRITE_BILLBOARD` →&nbsp;❌ <br>
+/// `D3DXSPRITE_DONOTMODIFY_RENDERSTATE` →&nbsp;❌ <br>
+/// `D3DXSPRITE_DONOTSAVESTATE` →&nbsp;❌ <br>
+/// `D3DXSPRITE_DO_NOT_ADDREF_TEXTURE` →&nbsp;❌ <br>
+/// `D3DXSPRITE_OBJECTSPACE` →&nbsp;❌ <br>
+/// `D3DXSPRITE_SORT_DEPTH_BACKTOFRONT` →&nbsp;❌ <br>
+/// `D3DXSPRITE_SORT_DEPTH_FRONTTOBACK` →&nbsp;❌ <br>
+/// `D3DXSPRITE_SORT_TEXTURE` →&nbsp;❌ <br>
+/// `D3DX_SDK_VERSION` →&nbsp;❌ <br>
+/// `D3DX_VERSION` →&nbsp;❌ <br>
+/// `DrawText` →&nbsp;❌ <br>
+/// `GetTextMetrics` →&nbsp;❌ <br>
+/// `INTERFACE` →&nbsp;❌ <br>
+pub const d3dx9core_h : cxx_header = cxx_header;
+
+
+
+/// # d3dx9effect.h
+///
+/// ### C++ Interfaces → Rust Types
+///
+/// `ID3DXBaseEffect` →&nbsp;❌ <br>
+/// * `ID3DXBaseEffect::GetAnnotation` →&nbsp;❌ <br>
+/// * `ID3DXBaseEffect::GetAnnotationByName` →&nbsp;❌ <br>
+/// * `ID3DXBaseEffect::GetBool` →&nbsp;❌ <br>
+/// * `ID3DXBaseEffect::GetBoolArray` →&nbsp;❌ <br>
+/// * `ID3DXBaseEffect::GetDesc` →&nbsp;❌ <br>
+/// * `ID3DXBaseEffect::GetFloat` →&nbsp;❌ <br>
+/// * `ID3DXBaseEffect::GetFloatArray` →&nbsp;❌ <br>
+/// * `ID3DXBaseEffect::GetFunction` →&nbsp;❌ <br>
+/// * `ID3DXBaseEffect::GetFunctionByName` →&nbsp;❌ <br>
+/// * `ID3DXBaseEffect::GetFunctionDesc` →&nbsp;❌ <br>
+/// * `ID3DXBaseEffect::GetInt` →&nbsp;❌ <br>
+/// * `ID3DXBaseEffect::GetIntArray` →&nbsp;❌ <br>
+/// * `ID3DXBaseEffect::GetMatrix` →&nbsp;❌ <br>
+/// * `ID3DXBaseEffect::GetMatrixArray` →&nbsp;❌ <br>
+/// * `ID3DXBaseEffect::GetMatrixPointerArray` →&nbsp;❌ <br>
+/// * `ID3DXBaseEffect::GetMatrixTranspose` →&nbsp;❌ <br>
+/// * `ID3DXBaseEffect::GetMatrixTransposeArray` →&nbsp;❌ <br>
+/// * `ID3DXBaseEffect::GetMatrixTransposePointerArray` →&nbsp;❌ <br>
+/// * `ID3DXBaseEffect::GetParameter` →&nbsp;❌ <br>
+/// * `ID3DXBaseEffect::GetParameterByName` →&nbsp;❌ <br>
+/// * `ID3DXBaseEffect::GetParameterBySemantic` →&nbsp;❌ <br>
+/// * `ID3DXBaseEffect::GetParameterDesc` →&nbsp;❌ <br>
+/// * `ID3DXBaseEffect::GetParameterElement` →&nbsp;❌ <br>
+/// * `ID3DXBaseEffect::GetPass` →&nbsp;❌ <br>
+/// * `ID3DXBaseEffect::GetPassByName` →&nbsp;❌ <br>
+/// * `ID3DXBaseEffect::GetPassDesc` →&nbsp;❌ <br>
+/// * `ID3DXBaseEffect::GetPixelShader` →&nbsp;❌ <br>
+/// * `ID3DXBaseEffect::GetString` →&nbsp;❌ <br>
+/// * `ID3DXBaseEffect::GetTechnique` →&nbsp;❌ <br>
+/// * `ID3DXBaseEffect::GetTechniqueByName` →&nbsp;❌ <br>
+/// * `ID3DXBaseEffect::GetTechniqueDesc` →&nbsp;❌ <br>
+/// * `ID3DXBaseEffect::GetTexture` →&nbsp;❌ <br>
+/// * `ID3DXBaseEffect::GetValue` →&nbsp;❌ <br>
+/// * `ID3DXBaseEffect::GetVector` →&nbsp;❌ <br>
+/// * `ID3DXBaseEffect::GetVectorArray` →&nbsp;❌ <br>
+/// * `ID3DXBaseEffect::GetVertexShader` →&nbsp;❌ <br>
+/// * `ID3DXBaseEffect::SetArrayRange` →&nbsp;❌ <br>
+/// * `ID3DXBaseEffect::SetBool` →&nbsp;❌ <br>
+/// * `ID3DXBaseEffect::SetBoolArray` →&nbsp;❌ <br>
+/// * `ID3DXBaseEffect::SetFloat` →&nbsp;❌ <br>
+/// * `ID3DXBaseEffect::SetFloatArray` →&nbsp;❌ <br>
+/// * `ID3DXBaseEffect::SetInt` →&nbsp;❌ <br>
+/// * `ID3DXBaseEffect::SetIntArray` →&nbsp;❌ <br>
+/// * `ID3DXBaseEffect::SetMatrix` →&nbsp;❌ <br>
+/// * `ID3DXBaseEffect::SetMatrixArray` →&nbsp;❌ <br>
+/// * `ID3DXBaseEffect::SetMatrixPointerArray` →&nbsp;❌ <br>
+/// * `ID3DXBaseEffect::SetMatrixTranspose` →&nbsp;❌ <br>
+/// * `ID3DXBaseEffect::SetMatrixTransposeArray` →&nbsp;❌ <br>
+/// * `ID3DXBaseEffect::SetMatrixTransposePointerArray` →&nbsp;❌ <br>
+/// * `ID3DXBaseEffect::SetString` →&nbsp;❌ <br>
+/// * `ID3DXBaseEffect::SetTexture` →&nbsp;❌ <br>
+/// * `ID3DXBaseEffect::SetValue` →&nbsp;❌ <br>
+/// * `ID3DXBaseEffect::SetVector` →&nbsp;❌ <br>
+/// * `ID3DXBaseEffect::SetVectorArray` →&nbsp;❌ <br>
+///
+/// `ID3DXEffect` →&nbsp;❌ <br>
+/// * `ID3DXEffect::ApplyParameterBlock` →&nbsp;❌ <br>
+/// * `ID3DXEffect::Begin` →&nbsp;❌ <br>
+/// * `ID3DXEffect::BeginParameterBlock` →&nbsp;❌ <br>
+/// * `ID3DXEffect::BeginPass` →&nbsp;❌ <br>
+/// * `ID3DXEffect::CloneEffect` →&nbsp;❌ <br>
+/// * `ID3DXEffect::CommitChanges` →&nbsp;❌ <br>
+/// * `ID3DXEffect::DeleteParameterBlock` →&nbsp;❌ <br>
+/// * `ID3DXEffect::End` →&nbsp;❌ <br>
+/// * `ID3DXEffect::EndParameterBlock` →&nbsp;❌ <br>
+/// * `ID3DXEffect::EndPass` →&nbsp;❌ <br>
+/// * `ID3DXEffect::FindNextValidTechnique` →&nbsp;❌ <br>
+/// * `ID3DXEffect::GetCurrentTechnique` →&nbsp;❌ <br>
+/// * `ID3DXEffect::GetDevice` →&nbsp;❌ <br>
+/// * `ID3DXEffect::GetPool` →&nbsp;❌ <br>
+/// * `ID3DXEffect::GetStateManager` →&nbsp;❌ <br>
+/// * `ID3DXEffect::IsParameterUsed` →&nbsp;❌ <br>
+/// * `ID3DXEffect::OnLostDevice` →&nbsp;❌ <br>
+/// * `ID3DXEffect::OnResetDevice` →&nbsp;❌ <br>
+/// * `ID3DXEffect::SetRawValue` →&nbsp;❌ <br>
+/// * `ID3DXEffect::SetStateManager` →&nbsp;❌ <br>
+/// * `ID3DXEffect::SetTechnique` →&nbsp;❌ <br>
+/// * `ID3DXEffect::ValidateTechnique` →&nbsp;❌ <br>
+///
+/// `ID3DXEffectCompiler` →&nbsp;❌ <br>
+/// * `ID3DXEffectCompiler::CompileEffect` →&nbsp;❌ <br>
+/// * `ID3DXEffectCompiler::CompileShader` →&nbsp;❌ <br>
+/// * `ID3DXEffectCompiler::GetLiteral` →&nbsp;❌ <br>
+/// * `ID3DXEffectCompiler::SetLiteral` →&nbsp;❌ <br>
+///
+/// `ID3DXEffectPool` →&nbsp;❌ <br>
+///
+/// `ID3DXEffectStateManager` →&nbsp;❌ <br>
+/// * `ID3DXEffectStateManager::LightEnable` →&nbsp;❌ <br>
+/// * `ID3DXEffectStateManager::SetFVF` →&nbsp;❌ <br>
+/// * `ID3DXEffectStateManager::SetLight` →&nbsp;❌ <br>
+/// * `ID3DXEffectStateManager::SetMaterial` →&nbsp;❌ <br>
+/// * `ID3DXEffectStateManager::SetNPatchMode` →&nbsp;❌ <br>
+/// * `ID3DXEffectStateManager::SetPixelShader` →&nbsp;❌ <br>
+/// * `ID3DXEffectStateManager::SetPixelShaderConstantB` →&nbsp;❌ <br>
+/// * `ID3DXEffectStateManager::SetPixelShaderConstantF` →&nbsp;❌ <br>
+/// * `ID3DXEffectStateManager::SetPixelShaderConstantI` →&nbsp;❌ <br>
+/// * `ID3DXEffectStateManager::SetRenderState` →&nbsp;❌ <br>
+/// * `ID3DXEffectStateManager::SetSamplerState` →&nbsp;❌ <br>
+/// * `ID3DXEffectStateManager::SetTexture` →&nbsp;❌ <br>
+/// * `ID3DXEffectStateManager::SetTextureStageState` →&nbsp;❌ <br>
+/// * `ID3DXEffectStateManager::SetTransform` →&nbsp;❌ <br>
+/// * `ID3DXEffectStateManager::SetVertexShader` →&nbsp;❌ <br>
+/// * `ID3DXEffectStateManager::SetVertexShaderConstantB` →&nbsp;❌ <br>
+/// * `ID3DXEffectStateManager::SetVertexShaderConstantF` →&nbsp;❌ <br>
+/// * `ID3DXEffectStateManager::SetVertexShaderConstantI` →&nbsp;❌ <br>
+///
+/// ### C++ Structs -> Rust Structs
+///
+/// `D3DXEFFECT_DESC` →&nbsp;❌ <br>
+/// `D3DXFUNCTION_DESC` →&nbsp;❌ <br>
+/// `D3DXPARAMETER_DESC` →&nbsp;❌ <br>
+/// `D3DXPASS_DESC` →&nbsp;❌ <br>
+/// `D3DXTECHNIQUE_DESC` →&nbsp;❌ <br>
+/// ### C++ Constants → Rust Constants
+///
+/// `D3DXCreateEffectCompilerFromFile` →&nbsp;❌ <br>
+/// `D3DXCreateEffectCompilerFromResource` →&nbsp;❌ <br>
+/// `D3DXCreateEffectFromFile` →&nbsp;❌ <br>
+/// `D3DXCreateEffectFromFileEx` →&nbsp;❌ <br>
+/// `D3DXCreateEffectFromResource` →&nbsp;❌ <br>
+/// `D3DXCreateEffectFromResourceEx` →&nbsp;❌ <br>
+/// `D3DXFX_DONOTSAVESAMPLERSTATE` →&nbsp;❌ <br>
+/// `D3DXFX_DONOTSAVESHADERSTATE` →&nbsp;❌ <br>
+/// `D3DXFX_DONOTSAVESTATE` →&nbsp;❌ <br>
+/// `D3DXFX_LARGEADDRESSAWARE` →&nbsp;❌ <br>
+/// `D3DXFX_NOT_CLONEABLE` →&nbsp;❌ <br>
+/// `D3DX_PARAMETER_ANNOTATION` →&nbsp;❌ <br>
+/// `D3DX_PARAMETER_LITERAL` →&nbsp;❌ <br>
+/// `D3DX_PARAMETER_SHARED` →&nbsp;❌ <br>
+/// `INTERFACE` →&nbsp;❌ <br>
+pub const d3dx9effect_h : cxx_header = cxx_header;
+
+
+
+/// # d3dx9math.h
+///
+/// ### C++ Interfaces → Rust Types
+///
+/// `ID3DXMatrixStack` →&nbsp;❌ <br>
+/// * `ID3DXMatrixStack::GetTop` →&nbsp;❌ <br>
+/// * `ID3DXMatrixStack::LoadIdentity` →&nbsp;❌ <br>
+/// * `ID3DXMatrixStack::LoadMatrix` →&nbsp;❌ <br>
+/// * `ID3DXMatrixStack::MultMatrix` →&nbsp;❌ <br>
+/// * `ID3DXMatrixStack::MultMatrixLocal` →&nbsp;❌ <br>
+/// * `ID3DXMatrixStack::Pop` →&nbsp;❌ <br>
+/// * `ID3DXMatrixStack::Push` →&nbsp;❌ <br>
+/// * `ID3DXMatrixStack::RotateAxis` →&nbsp;❌ <br>
+/// * `ID3DXMatrixStack::RotateAxisLocal` →&nbsp;❌ <br>
+/// * `ID3DXMatrixStack::RotateYawPitchRoll` →&nbsp;❌ <br>
+/// * `ID3DXMatrixStack::RotateYawPitchRollLocal` →&nbsp;❌ <br>
+/// * `ID3DXMatrixStack::Scale` →&nbsp;❌ <br>
+/// * `ID3DXMatrixStack::ScaleLocal` →&nbsp;❌ <br>
+/// * `ID3DXMatrixStack::Translate` →&nbsp;❌ <br>
+/// * `ID3DXMatrixStack::TranslateLocal` →&nbsp;❌ <br>
+///
+/// ### C++ Structs -> Rust Structs
+///
+/// `D3DXCOLOR` →&nbsp;❌ <br>
+/// `D3DXFLOAT16` →&nbsp;❌ <br>
+/// `D3DXPLANE` →&nbsp;❌ <br>
+/// `D3DXQUATERNION` →&nbsp;❌ <br>
+/// `D3DXVECTOR2` →&nbsp;❌ <br>
+/// `D3DXVECTOR2_16F` →&nbsp;❌ <br>
+/// `D3DXVECTOR3_16F` →&nbsp;❌ <br>
+/// `D3DXVECTOR4` →&nbsp;❌ <br>
+/// `D3DXVECTOR4_16F` →&nbsp;❌ <br>
+/// ### C++ Functions → Rust Fns
+///
+/// `D3DXColorAdjustContrast` →&nbsp;❌ <br>
+/// `D3DXColorAdjustSaturation` →&nbsp;❌ <br>
+/// `D3DXFloat16To32Array` →&nbsp;❌ <br>
+/// `D3DXFloat32To16Array` →&nbsp;❌ <br>
+/// `D3DXFresnelTerm` →&nbsp;❌ <br>
+/// `D3DXMatrixAffineTransformation` →&nbsp;❌ <br>
+/// `D3DXMatrixAffineTransformation2D` →&nbsp;❌ <br>
+/// `D3DXMatrixDecompose` →&nbsp;❌ <br>
+/// `D3DXMatrixDeterminant` →&nbsp;❌ <br>
+/// `D3DXMatrixInverse` →&nbsp;❌ <br>
+/// `D3DXMatrixLookAtLH` →&nbsp;❌ <br>
+/// `D3DXMatrixLookAtRH` →&nbsp;❌ <br>
+/// `D3DXMatrixMultiply` →&nbsp;❌ <br>
+/// `D3DXMatrixMultiplyTranspose` →&nbsp;❌ <br>
+/// `D3DXMatrixOrthoLH` →&nbsp;❌ <br>
+/// `D3DXMatrixOrthoOffCenterLH` →&nbsp;❌ <br>
+/// `D3DXMatrixOrthoOffCenterRH` →&nbsp;❌ <br>
+/// `D3DXMatrixOrthoRH` →&nbsp;❌ <br>
+/// `D3DXMatrixPerspectiveFovLH` →&nbsp;❌ <br>
+/// `D3DXMatrixPerspectiveFovRH` →&nbsp;❌ <br>
+/// `D3DXMatrixPerspectiveLH` →&nbsp;❌ <br>
+/// `D3DXMatrixPerspectiveOffCenterLH` →&nbsp;❌ <br>
+/// `D3DXMatrixPerspectiveOffCenterRH` →&nbsp;❌ <br>
+/// `D3DXMatrixPerspectiveRH` →&nbsp;❌ <br>
+/// `D3DXMatrixReflect` →&nbsp;❌ <br>
+/// `D3DXMatrixRotationAxis` →&nbsp;❌ <br>
+/// `D3DXMatrixRotationQuaternion` →&nbsp;❌ <br>
+/// `D3DXMatrixRotationX` →&nbsp;❌ <br>
+/// `D3DXMatrixRotationY` →&nbsp;❌ <br>
+/// `D3DXMatrixRotationYawPitchRoll` →&nbsp;❌ <br>
+/// `D3DXMatrixRotationZ` →&nbsp;❌ <br>
+/// `D3DXMatrixScaling` →&nbsp;❌ <br>
+/// `D3DXMatrixShadow` →&nbsp;❌ <br>
+/// `D3DXMatrixTransformation` →&nbsp;❌ <br>
+/// `D3DXMatrixTransformation2D` →&nbsp;❌ <br>
+/// `D3DXMatrixTranslation` →&nbsp;❌ <br>
+/// `D3DXMatrixTranspose` →&nbsp;❌ <br>
+/// `D3DXPlaneFromPointNormal` →&nbsp;❌ <br>
+/// `D3DXPlaneFromPoints` →&nbsp;❌ <br>
+/// `D3DXPlaneIntersectLine` →&nbsp;❌ <br>
+/// `D3DXPlaneNormalize` →&nbsp;❌ <br>
+/// `D3DXPlaneTransform` →&nbsp;❌ <br>
+/// `D3DXPlaneTransformArray` →&nbsp;❌ <br>
+/// `D3DXQuaternionBaryCentric` →&nbsp;❌ <br>
+/// `D3DXQuaternionExp` →&nbsp;❌ <br>
+/// `D3DXQuaternionInverse` →&nbsp;❌ <br>
+/// `D3DXQuaternionLn` →&nbsp;❌ <br>
+/// `D3DXQuaternionMultiply` →&nbsp;❌ <br>
+/// `D3DXQuaternionNormalize` →&nbsp;❌ <br>
+/// `D3DXQuaternionRotationAxis` →&nbsp;❌ <br>
+/// `D3DXQuaternionRotationMatrix` →&nbsp;❌ <br>
+/// `D3DXQuaternionRotationYawPitchRoll` →&nbsp;❌ <br>
+/// `D3DXQuaternionSlerp` →&nbsp;❌ <br>
+/// `D3DXQuaternionSquad` →&nbsp;❌ <br>
+/// `D3DXQuaternionSquadSetup` →&nbsp;❌ <br>
+/// `D3DXQuaternionToAxisAngle` →&nbsp;❌ <br>
+/// `D3DXSHAdd` →&nbsp;❌ <br>
+/// `D3DXSHDot` →&nbsp;❌ <br>
+/// `D3DXSHEvalConeLight` →&nbsp;❌ <br>
+/// `D3DXSHEvalDirection` →&nbsp;❌ <br>
+/// `D3DXSHEvalDirectionalLight` →&nbsp;❌ <br>
+/// `D3DXSHEvalHemisphereLight` →&nbsp;❌ <br>
+/// `D3DXSHEvalSphericalLight` →&nbsp;❌ <br>
+/// `D3DXSHMultiply2` →&nbsp;❌ <br>
+/// `D3DXSHMultiply3` →&nbsp;❌ <br>
+/// `D3DXSHMultiply4` →&nbsp;❌ <br>
+/// `D3DXSHMultiply5` →&nbsp;❌ <br>
+/// `D3DXSHMultiply6` →&nbsp;❌ <br>
+/// `D3DXSHProjectCubeMap` →&nbsp;❌ <br>
+/// `D3DXSHRotate` →&nbsp;❌ <br>
+/// `D3DXSHRotateZ` →&nbsp;❌ <br>
+/// `D3DXSHScale` →&nbsp;❌ <br>
+/// `D3DXVec2BaryCentric` →&nbsp;❌ <br>
+/// `D3DXVec2CatmullRom` →&nbsp;❌ <br>
+/// `D3DXVec2Hermite` →&nbsp;❌ <br>
+/// `D3DXVec2Normalize` →&nbsp;❌ <br>
+/// `D3DXVec2Transform` →&nbsp;❌ <br>
+/// `D3DXVec2TransformArray` →&nbsp;❌ <br>
+/// `D3DXVec2TransformCoord` →&nbsp;❌ <br>
+/// `D3DXVec2TransformCoordArray` →&nbsp;❌ <br>
+/// `D3DXVec2TransformNormal` →&nbsp;❌ <br>
+/// `D3DXVec2TransformNormalArray` →&nbsp;❌ <br>
+/// `D3DXVec3BaryCentric` →&nbsp;❌ <br>
+/// `D3DXVec3CatmullRom` →&nbsp;❌ <br>
+/// `D3DXVec3Hermite` →&nbsp;❌ <br>
+/// `D3DXVec3Normalize` →&nbsp;❌ <br>
+/// `D3DXVec3Project` →&nbsp;❌ <br>
+/// `D3DXVec3ProjectArray` →&nbsp;❌ <br>
+/// `D3DXVec3Transform` →&nbsp;❌ <br>
+/// `D3DXVec3TransformArray` →&nbsp;❌ <br>
+/// `D3DXVec3TransformCoord` →&nbsp;❌ <br>
+/// `D3DXVec3TransformCoordArray` →&nbsp;❌ <br>
+/// `D3DXVec3TransformNormal` →&nbsp;❌ <br>
+/// `D3DXVec3TransformNormalArray` →&nbsp;❌ <br>
+/// `D3DXVec3Unproject` →&nbsp;❌ <br>
+/// `D3DXVec3UnprojectArray` →&nbsp;❌ <br>
+/// `D3DXVec4BaryCentric` →&nbsp;❌ <br>
+/// `D3DXVec4CatmullRom` →&nbsp;❌ <br>
+/// `D3DXVec4Cross` →&nbsp;❌ <br>
+/// `D3DXVec4Hermite` →&nbsp;❌ <br>
+/// `D3DXVec4Normalize` →&nbsp;❌ <br>
+/// `D3DXVec4Transform` →&nbsp;❌ <br>
+/// `D3DXVec4TransformArray` →&nbsp;❌ <br>
+/// ### C++ Constants → Rust Constants
+///
+/// `D3DXSH_MAXORDER` →&nbsp;❌ <br>
+/// `D3DXSH_MINORDER` →&nbsp;❌ <br>
+/// `D3DX_16F_DIG` →&nbsp;❌ <br>
+/// `D3DX_16F_EPSILON` →&nbsp;❌ <br>
+/// `D3DX_16F_MANT_DIG` →&nbsp;❌ <br>
+/// `D3DX_16F_MAX` →&nbsp;❌ <br>
+/// `D3DX_16F_MAX_10_EXP` →&nbsp;❌ <br>
+/// `D3DX_16F_MAX_EXP` →&nbsp;❌ <br>
+/// `D3DX_16F_MIN` →&nbsp;❌ <br>
+/// `D3DX_16F_MIN_10_EXP` →&nbsp;❌ <br>
+/// `D3DX_16F_MIN_EXP` →&nbsp;❌ <br>
+/// `D3DX_16F_RADIX` →&nbsp;❌ <br>
+/// `D3DX_16F_ROUNDS` →&nbsp;❌ <br>
+/// `D3DX_1BYPI` →&nbsp;❌ <br>
+/// `D3DX_ALIGN16` →&nbsp;❌ <br>
+/// `D3DX_PI` →&nbsp;❌ <br>
+/// `INTERFACE` →&nbsp;❌ <br>
+/// ### C++ Macros → Rust fns/macros
+///
+/// `D3DXToDegree` →&nbsp;❌ <br>
+/// `D3DXToRadian` →&nbsp;❌ <br>
+pub const d3dx9math_h : cxx_header = cxx_header;
+
+
+
+/// # d3dx9mesh.h
+///
+/// ### C++ Interfaces → Rust Types
+///
+/// `ID3DXBaseMesh` →&nbsp;❌ <br>
+/// * `ID3DXBaseMesh::CloneMesh` →&nbsp;❌ <br>
+/// * `ID3DXBaseMesh::CloneMeshFVF` →&nbsp;❌ <br>
+/// * `ID3DXBaseMesh::ConvertAdjacencyToPointReps` →&nbsp;❌ <br>
+/// * `ID3DXBaseMesh::ConvertPointRepsToAdjacency` →&nbsp;❌ <br>
+/// * `ID3DXBaseMesh::DrawSubset` →&nbsp;❌ <br>
+/// * `ID3DXBaseMesh::GenerateAdjacency` →&nbsp;❌ <br>
+/// * `ID3DXBaseMesh::GetAttributeTable` →&nbsp;❌ <br>
+/// * `ID3DXBaseMesh::GetDeclaration` →&nbsp;❌ <br>
+/// * `ID3DXBaseMesh::GetDevice` →&nbsp;❌ <br>
+/// * `ID3DXBaseMesh::GetFVF` →&nbsp;❌ <br>
+/// * `ID3DXBaseMesh::GetIndexBuffer` →&nbsp;❌ <br>
+/// * `ID3DXBaseMesh::GetNumBytesPerVertex` →&nbsp;❌ <br>
+/// * `ID3DXBaseMesh::GetNumFaces` →&nbsp;❌ <br>
+/// * `ID3DXBaseMesh::GetNumVertices` →&nbsp;❌ <br>
+/// * `ID3DXBaseMesh::GetOptions` →&nbsp;❌ <br>
+/// * `ID3DXBaseMesh::GetVertexBuffer` →&nbsp;❌ <br>
+/// * `ID3DXBaseMesh::LockIndexBuffer` →&nbsp;❌ <br>
+/// * `ID3DXBaseMesh::LockVertexBuffer` →&nbsp;❌ <br>
+/// * `ID3DXBaseMesh::UnlockIndexBuffer` →&nbsp;❌ <br>
+/// * `ID3DXBaseMesh::UnlockVertexBuffer` →&nbsp;❌ <br>
+/// * `ID3DXBaseMesh::UpdateSemantics` →&nbsp;❌ <br>
+///
+/// `ID3DXMesh` →&nbsp;❌ <br>
+/// * `ID3DXMesh::LockAttributeBuffer` →&nbsp;❌ <br>
+/// * `ID3DXMesh::Optimize` →&nbsp;❌ <br>
+/// * `ID3DXMesh::OptimizeInplace` →&nbsp;❌ <br>
+/// * `ID3DXMesh::SetAttributeTable` →&nbsp;❌ <br>
+/// * `ID3DXMesh::UnlockAttributeBuffer` →&nbsp;❌ <br>
+///
+/// `ID3DXPMesh` →&nbsp;❌ <br>
+/// * `ID3DXPMesh::ClonePMesh` →&nbsp;❌ <br>
+/// * `ID3DXPMesh::ClonePMeshFVF` →&nbsp;❌ <br>
+/// * `ID3DXPMesh::GenerateVertexHistory` →&nbsp;❌ <br>
+/// * `ID3DXPMesh::GetAdjacency` →&nbsp;❌ <br>
+/// * `ID3DXPMesh::GetMaxFaces` →&nbsp;❌ <br>
+/// * `ID3DXPMesh::GetMaxVertices` →&nbsp;❌ <br>
+/// * `ID3DXPMesh::GetMinFaces` →&nbsp;❌ <br>
+/// * `ID3DXPMesh::GetMinVertices` →&nbsp;❌ <br>
+/// * `ID3DXPMesh::Optimize` →&nbsp;❌ <br>
+/// * `ID3DXPMesh::OptimizeBaseLOD` →&nbsp;❌ <br>
+/// * `ID3DXPMesh::Save` →&nbsp;❌ <br>
+/// * `ID3DXPMesh::SetNumFaces` →&nbsp;❌ <br>
+/// * `ID3DXPMesh::SetNumVertices` →&nbsp;❌ <br>
+/// * `ID3DXPMesh::TrimByFaces` →&nbsp;❌ <br>
+/// * `ID3DXPMesh::TrimByVertices` →&nbsp;❌ <br>
+///
+/// `ID3DXPRTBuffer` →&nbsp;❌ <br>
+/// * `ID3DXPRTBuffer::AddBuffer` →&nbsp;❌ <br>
+/// * `ID3DXPRTBuffer::AttachGH` →&nbsp;❌ <br>
+/// * `ID3DXPRTBuffer::EvalGH` →&nbsp;❌ <br>
+/// * `ID3DXPRTBuffer::ExtractTexture` →&nbsp;❌ <br>
+/// * `ID3DXPRTBuffer::ExtractToMesh` →&nbsp;❌ <br>
+/// * `ID3DXPRTBuffer::GetHeight` →&nbsp;❌ <br>
+/// * `ID3DXPRTBuffer::GetNumChannels` →&nbsp;❌ <br>
+/// * `ID3DXPRTBuffer::GetNumCoeffs` →&nbsp;❌ <br>
+/// * `ID3DXPRTBuffer::GetNumSamples` →&nbsp;❌ <br>
+/// * `ID3DXPRTBuffer::GetWidth` →&nbsp;❌ <br>
+/// * `ID3DXPRTBuffer::IsTexture` →&nbsp;❌ <br>
+/// * `ID3DXPRTBuffer::LockBuffer` →&nbsp;❌ <br>
+/// * `ID3DXPRTBuffer::ReleaseGH` →&nbsp;❌ <br>
+/// * `ID3DXPRTBuffer::Resize` →&nbsp;❌ <br>
+/// * `ID3DXPRTBuffer::ScaleBuffer` →&nbsp;❌ <br>
+/// * `ID3DXPRTBuffer::UnlockBuffer` →&nbsp;❌ <br>
+///
+/// `ID3DXPRTCompBuffer` →&nbsp;❌ <br>
+/// * `ID3DXPRTCompBuffer::ExtractBasis` →&nbsp;❌ <br>
+/// * `ID3DXPRTCompBuffer::ExtractClusterIDs` →&nbsp;❌ <br>
+/// * `ID3DXPRTCompBuffer::ExtractPCA` →&nbsp;❌ <br>
+/// * `ID3DXPRTCompBuffer::ExtractTexture` →&nbsp;❌ <br>
+/// * `ID3DXPRTCompBuffer::ExtractToMesh` →&nbsp;❌ <br>
+/// * `ID3DXPRTCompBuffer::GetHeight` →&nbsp;❌ <br>
+/// * `ID3DXPRTCompBuffer::GetNumChannels` →&nbsp;❌ <br>
+/// * `ID3DXPRTCompBuffer::GetNumClusters` →&nbsp;❌ <br>
+/// * `ID3DXPRTCompBuffer::GetNumCoeffs` →&nbsp;❌ <br>
+/// * `ID3DXPRTCompBuffer::GetNumPCA` →&nbsp;❌ <br>
+/// * `ID3DXPRTCompBuffer::GetNumSamples` →&nbsp;❌ <br>
+/// * `ID3DXPRTCompBuffer::GetWidth` →&nbsp;❌ <br>
+/// * `ID3DXPRTCompBuffer::IsTexture` →&nbsp;❌ <br>
+/// * `ID3DXPRTCompBuffer::NormalizeData` →&nbsp;❌ <br>
+///
+/// `ID3DXPRTEngine` →&nbsp;❌ <br>
+/// * `ID3DXPRTEngine::ClosestRayIntersects` →&nbsp;❌ <br>
+/// * `ID3DXPRTEngine::ComputeBounce` →&nbsp;❌ <br>
+/// * `ID3DXPRTEngine::ComputeBounceAdaptive` →&nbsp;❌ <br>
+/// * `ID3DXPRTEngine::ComputeDirectLightingSH` →&nbsp;❌ <br>
+/// * `ID3DXPRTEngine::ComputeDirectLightingSHAdaptive` →&nbsp;❌ <br>
+/// * `ID3DXPRTEngine::ComputeDirectLightingSHGPU` →&nbsp;❌ <br>
+/// * `ID3DXPRTEngine::ComputeLDPRTCoeffs` →&nbsp;❌ <br>
+/// * `ID3DXPRTEngine::ComputeSS` →&nbsp;❌ <br>
+/// * `ID3DXPRTEngine::ComputeSSAdaptive` →&nbsp;❌ <br>
+/// * `ID3DXPRTEngine::ComputeSurfSamplesBounce` →&nbsp;❌ <br>
+/// * `ID3DXPRTEngine::ComputeSurfSamplesDirectSH` →&nbsp;❌ <br>
+/// * `ID3DXPRTEngine::ComputeVolumeSamples` →&nbsp;❌ <br>
+/// * `ID3DXPRTEngine::ComputeVolumeSamplesDirectSH` →&nbsp;❌ <br>
+/// * `ID3DXPRTEngine::ExtractPerVertexAlbedo` →&nbsp;❌ <br>
+/// * `ID3DXPRTEngine::FreeBounceData` →&nbsp;❌ <br>
+/// * `ID3DXPRTEngine::FreeSSData` →&nbsp;❌ <br>
+/// * `ID3DXPRTEngine::GetAdaptedMesh` →&nbsp;❌ <br>
+/// * `ID3DXPRTEngine::GetNumFaces` →&nbsp;❌ <br>
+/// * `ID3DXPRTEngine::GetNumVerts` →&nbsp;❌ <br>
+/// * `ID3DXPRTEngine::GetVertexAlbedo` →&nbsp;❌ <br>
+/// * `ID3DXPRTEngine::MultiplyAlbedo` →&nbsp;❌ <br>
+/// * `ID3DXPRTEngine::ResampleBuffer` →&nbsp;❌ <br>
+/// * `ID3DXPRTEngine::RobustMeshRefine` →&nbsp;❌ <br>
+/// * `ID3DXPRTEngine::ScaleMeshChunk` →&nbsp;❌ <br>
+/// * `ID3DXPRTEngine::SetCallBack` →&nbsp;❌ <br>
+/// * `ID3DXPRTEngine::SetMeshMaterials` →&nbsp;❌ <br>
+/// * `ID3DXPRTEngine::SetMinMaxIntersection` →&nbsp;❌ <br>
+/// * `ID3DXPRTEngine::SetPerTexelAlbedo` →&nbsp;❌ <br>
+/// * `ID3DXPRTEngine::SetPerTexelNormal` →&nbsp;❌ <br>
+/// * `ID3DXPRTEngine::SetPerVertexAlbedo` →&nbsp;❌ <br>
+/// * `ID3DXPRTEngine::SetSamplingInfo` →&nbsp;❌ <br>
+/// * `ID3DXPRTEngine::ShadowRayIntersects` →&nbsp;❌ <br>
+///
+/// `ID3DXPatchMesh` →&nbsp;❌ <br>
+/// * `ID3DXPatchMesh::CloneMesh` →&nbsp;❌ <br>
+/// * `ID3DXPatchMesh::GenerateAdjacency` →&nbsp;❌ <br>
+/// * `ID3DXPatchMesh::GetControlVerticesPerPatch` →&nbsp;❌ <br>
+/// * `ID3DXPatchMesh::GetDeclaration` →&nbsp;❌ <br>
+/// * `ID3DXPatchMesh::GetDevice` →&nbsp;❌ <br>
+/// * `ID3DXPatchMesh::GetDisplaceParam` →&nbsp;❌ <br>
+/// * `ID3DXPatchMesh::GetIndexBuffer` →&nbsp;❌ <br>
+/// * `ID3DXPatchMesh::GetNumPatches` →&nbsp;❌ <br>
+/// * `ID3DXPatchMesh::GetNumVertices` →&nbsp;❌ <br>
+/// * `ID3DXPatchMesh::GetOptions` →&nbsp;❌ <br>
+/// * `ID3DXPatchMesh::GetPatchInfo` →&nbsp;❌ <br>
+/// * `ID3DXPatchMesh::GetTessSize` →&nbsp;❌ <br>
+/// * `ID3DXPatchMesh::GetVertexBuffer` →&nbsp;❌ <br>
+/// * `ID3DXPatchMesh::LockAttributeBuffer` →&nbsp;❌ <br>
+/// * `ID3DXPatchMesh::LockIndexBuffer` →&nbsp;❌ <br>
+/// * `ID3DXPatchMesh::LockVertexBuffer` →&nbsp;❌ <br>
+/// * `ID3DXPatchMesh::Optimize` →&nbsp;❌ <br>
+/// * `ID3DXPatchMesh::SetDisplaceParam` →&nbsp;❌ <br>
+/// * `ID3DXPatchMesh::Tessellate` →&nbsp;❌ <br>
+/// * `ID3DXPatchMesh::TessellateAdaptive` →&nbsp;❌ <br>
+/// * `ID3DXPatchMesh::UnlockAttributeBuffer` →&nbsp;❌ <br>
+/// * `ID3DXPatchMesh::UnlockIndexBuffer` →&nbsp;❌ <br>
+/// * `ID3DXPatchMesh::UnlockVertexBuffer` →&nbsp;❌ <br>
+///
+/// `ID3DXSPMesh` →&nbsp;❌ <br>
+/// * `ID3DXSPMesh::CloneMesh` →&nbsp;❌ <br>
+/// * `ID3DXSPMesh::CloneMeshFVF` →&nbsp;❌ <br>
+/// * `ID3DXSPMesh::ClonePMesh` →&nbsp;❌ <br>
+/// * `ID3DXSPMesh::ClonePMeshFVF` →&nbsp;❌ <br>
+/// * `ID3DXSPMesh::GetDeclaration` →&nbsp;❌ <br>
+/// * `ID3DXSPMesh::GetDevice` →&nbsp;❌ <br>
+/// * `ID3DXSPMesh::GetFVF` →&nbsp;❌ <br>
+/// * `ID3DXSPMesh::GetMaxFaces` →&nbsp;❌ <br>
+/// * `ID3DXSPMesh::GetMaxVertices` →&nbsp;❌ <br>
+/// * `ID3DXSPMesh::GetNumFaces` →&nbsp;❌ <br>
+/// * `ID3DXSPMesh::GetNumVertices` →&nbsp;❌ <br>
+/// * `ID3DXSPMesh::GetOptions` →&nbsp;❌ <br>
+/// * `ID3DXSPMesh::GetVertexAttributeWeights` →&nbsp;❌ <br>
+/// * `ID3DXSPMesh::GetVertexWeights` →&nbsp;❌ <br>
+/// * `ID3DXSPMesh::ReduceFaces` →&nbsp;❌ <br>
+/// * `ID3DXSPMesh::ReduceVertices` →&nbsp;❌ <br>
+///
+/// `ID3DXSkinInfo` →&nbsp;❌ <br>
+/// * `ID3DXSkinInfo::Clone` →&nbsp;❌ <br>
+/// * `ID3DXSkinInfo::ConvertToBlendedMesh` →&nbsp;❌ <br>
+/// * `ID3DXSkinInfo::ConvertToIndexedBlendedMesh` →&nbsp;❌ <br>
+/// * `ID3DXSkinInfo::FindBoneVertexInfluenceIndex` →&nbsp;❌ <br>
+/// * `ID3DXSkinInfo::GetBoneInfluence` →&nbsp;❌ <br>
+/// * `ID3DXSkinInfo::GetBoneName` →&nbsp;❌ <br>
+/// * `ID3DXSkinInfo::GetBoneOffsetMatrix` →&nbsp;❌ <br>
+/// * `ID3DXSkinInfo::GetBoneVertexInfluence` →&nbsp;❌ <br>
+/// * `ID3DXSkinInfo::GetDeclaration` →&nbsp;❌ <br>
+/// * `ID3DXSkinInfo::GetFVF` →&nbsp;❌ <br>
+/// * `ID3DXSkinInfo::GetMaxFaceInfluences` →&nbsp;❌ <br>
+/// * `ID3DXSkinInfo::GetMaxVertexInfluences` →&nbsp;❌ <br>
+/// * `ID3DXSkinInfo::GetMinBoneInfluence` →&nbsp;❌ <br>
+/// * `ID3DXSkinInfo::GetNumBoneInfluences` →&nbsp;❌ <br>
+/// * `ID3DXSkinInfo::GetNumBones` →&nbsp;❌ <br>
+/// * `ID3DXSkinInfo::Remap` →&nbsp;❌ <br>
+/// * `ID3DXSkinInfo::SetBoneInfluence` →&nbsp;❌ <br>
+/// * `ID3DXSkinInfo::SetBoneName` →&nbsp;❌ <br>
+/// * `ID3DXSkinInfo::SetBoneOffsetMatrix` →&nbsp;❌ <br>
+/// * `ID3DXSkinInfo::SetBoneVertexInfluence` →&nbsp;❌ <br>
+/// * `ID3DXSkinInfo::SetDeclaration` →&nbsp;❌ <br>
+/// * `ID3DXSkinInfo::SetFVF` →&nbsp;❌ <br>
+/// * `ID3DXSkinInfo::SetMinBoneInfluence` →&nbsp;❌ <br>
+/// * `ID3DXSkinInfo::UpdateSkinnedMesh` →&nbsp;❌ <br>
+///
+/// `ID3DXTextureGutterHelper` →&nbsp;❌ <br>
+/// * `ID3DXTextureGutterHelper::ApplyGuttersFloat` →&nbsp;❌ <br>
+/// * `ID3DXTextureGutterHelper::ApplyGuttersPRT` →&nbsp;❌ <br>
+/// * `ID3DXTextureGutterHelper::ApplyGuttersTex` →&nbsp;❌ <br>
+/// * `ID3DXTextureGutterHelper::GetBaryMap` →&nbsp;❌ <br>
+/// * `ID3DXTextureGutterHelper::GetFaceMap` →&nbsp;❌ <br>
+/// * `ID3DXTextureGutterHelper::GetGutterMap` →&nbsp;❌ <br>
+/// * `ID3DXTextureGutterHelper::GetHeight` →&nbsp;❌ <br>
+/// * `ID3DXTextureGutterHelper::GetTexelMap` →&nbsp;❌ <br>
+/// * `ID3DXTextureGutterHelper::GetWidth` →&nbsp;❌ <br>
+/// * `ID3DXTextureGutterHelper::ResampleTex` →&nbsp;❌ <br>
+/// * `ID3DXTextureGutterHelper::SetBaryMap` →&nbsp;❌ <br>
+/// * `ID3DXTextureGutterHelper::SetFaceMap` →&nbsp;❌ <br>
+/// * `ID3DXTextureGutterHelper::SetGutterMap` →&nbsp;❌ <br>
+/// * `ID3DXTextureGutterHelper::SetTexelMap` →&nbsp;❌ <br>
+///
+/// ### C++ Structs -> Rust Structs
+///
+/// `D3DXATTRIBUTERANGE` →&nbsp;❌ <br>
+/// `D3DXATTRIBUTEWEIGHTS` →&nbsp;❌ <br>
+/// `D3DXBONECOMBINATION` →&nbsp;❌ <br>
+/// `D3DXEFFECTDEFAULT` →&nbsp;❌ <br>
+/// `D3DXEFFECTINSTANCE` →&nbsp;❌ <br>
+/// `D3DXINTERSECTINFO` →&nbsp;❌ <br>
+/// `D3DXMATERIAL` →&nbsp;❌ <br>
+/// `D3DXPATCHINFO` →&nbsp;❌ <br>
+/// `D3DXSHMATERIAL` →&nbsp;❌ <br>
+/// `D3DXSHPRTSPLITMESHCLUSTERDATA` →&nbsp;❌ <br>
+/// `D3DXSHPRTSPLITMESHVERTDATA` →&nbsp;❌ <br>
+/// `D3DXWELDEPSILONS` →&nbsp;❌ <br>
+/// `XFILECOMPRESSEDANIMATIONSET` →&nbsp;❌ <br>
+/// ### C++ Enums → Rust Structs
+///
+/// `D3DXCLEANTYPE` →&nbsp;❌ <br>
+/// * `D3DXCLEAN_BACKFACING` →&nbsp;❌ <br>
+/// * `D3DXCLEAN_BOWTIES` →&nbsp;❌ <br>
+/// * `D3DXCLEAN_OPTIMIZATION` →&nbsp;❌ <br>
+/// * `D3DXCLEAN_SIMPLIFICATION` →&nbsp;❌ <br>
+/// * `D3DXCLEAN_SKINNING` →&nbsp;❌ <br>
+///
+/// `D3DXEFFECTDEFAULTTYPE` →&nbsp;❌ <br>
+/// * `D3DXEDT_DWORD` →&nbsp;❌ <br>
+/// * `D3DXEDT_FLOATS` →&nbsp;❌ <br>
+/// * `D3DXEDT_FORCEDWORD` →&nbsp;❌ <br>
+/// * `D3DXEDT_STRING` →&nbsp;❌ <br>
+///
+/// `D3DXIMT` →&nbsp;❌ <br>
+/// * `D3DXIMT_WRAP_U` →&nbsp;❌ <br>
+/// * `D3DXIMT_WRAP_UV` →&nbsp;❌ <br>
+/// * `D3DXIMT_WRAP_V` →&nbsp;❌ <br>
+///
+/// `D3DXPATCHMESHTYPE` →&nbsp;❌ <br>
+/// * `D3DXPATCHMESH_NPATCH` →&nbsp;❌ <br>
+/// * `D3DXPATCHMESH_RECT` →&nbsp;❌ <br>
+/// * `D3DXPATCHMESH_TRI` →&nbsp;❌ <br>
+///
+/// `D3DXSHCOMPRESSQUALITYTYPE` →&nbsp;❌ <br>
+/// * `D3DXSHCQUAL_FASTLOWQUALITY` →&nbsp;❌ <br>
+/// * `D3DXSHCQUAL_SLOWHIGHQUALITY` →&nbsp;❌ <br>
+///
+/// `D3DXSHGPUSIMOPT` →&nbsp;❌ <br>
+/// * `D3DXSHGPUSIMOPT_HIGHQUALITY` →&nbsp;❌ <br>
+/// * `D3DXSHGPUSIMOPT_SHADOWRES1024` →&nbsp;❌ <br>
+/// * `D3DXSHGPUSIMOPT_SHADOWRES2048` →&nbsp;❌ <br>
+/// * `D3DXSHGPUSIMOPT_SHADOWRES256` →&nbsp;❌ <br>
+/// * `D3DXSHGPUSIMOPT_SHADOWRES512` →&nbsp;❌ <br>
+///
+/// `D3DXTANGENT` →&nbsp;❌ <br>
+/// * `D3DXTANGENT_CALCULATE_NORMALS` →&nbsp;❌ <br>
+/// * `D3DXTANGENT_DONT_NORMALIZE_PARTIALS` →&nbsp;❌ <br>
+/// * `D3DXTANGENT_DONT_ORTHOGONALIZE` →&nbsp;❌ <br>
+/// * `D3DXTANGENT_GENERATE_IN_PLACE` →&nbsp;❌ <br>
+/// * `D3DXTANGENT_ORTHOGONALIZE_FROM_U` →&nbsp;❌ <br>
+/// * `D3DXTANGENT_ORTHOGONALIZE_FROM_V` →&nbsp;❌ <br>
+/// * `D3DXTANGENT_WEIGHT_BY_AREA` →&nbsp;❌ <br>
+/// * `D3DXTANGENT_WEIGHT_EQUAL` →&nbsp;❌ <br>
+/// * `D3DXTANGENT_WIND_CW` →&nbsp;❌ <br>
+/// * `D3DXTANGENT_WRAP_U` →&nbsp;❌ <br>
+/// * `D3DXTANGENT_WRAP_UV` →&nbsp;❌ <br>
+/// * `D3DXTANGENT_WRAP_V` →&nbsp;❌ <br>
+///
+/// `D3DXUVATLAS` →&nbsp;❌ <br>
+/// * `D3DXUVATLAS_DEFAULT` →&nbsp;❌ <br>
+/// * `D3DXUVATLAS_GEODESIC_FAST` →&nbsp;❌ <br>
+/// * `D3DXUVATLAS_GEODESIC_QUALITY` →&nbsp;❌ <br>
+///
+/// ### C++ Functions → Rust Fns
+///
+/// `D3DXComputeIMTFromPerTexelSignal` →&nbsp;❌ <br>
+/// `D3DXComputeIMTFromPerVertexSignal` →&nbsp;❌ <br>
+/// `D3DXComputeIMTFromSignal` →&nbsp;❌ <br>
+/// `D3DXComputeIMTFromTexture` →&nbsp;❌ <br>
+/// `D3DXComputeTangent` →&nbsp;❌ <br>
+/// `D3DXComputeTangentFrame` →&nbsp;❌ <br>
+/// `D3DXComputeTangentFrameEx` →&nbsp;❌ <br>
+/// `D3DXIntersectTri` →&nbsp;❌ <br>
+/// `D3DXSplitMesh` →&nbsp;❌ <br>
+/// `D3DXUVAtlasCreate` →&nbsp;❌ <br>
+/// `D3DXUVAtlasPack` →&nbsp;❌ <br>
+/// `D3DXUVAtlasPartition` →&nbsp;❌ <br>
+/// ### C++ Constants → Rust Constants
+///
+/// `D3DXLoadMeshFromX` →&nbsp;❌ <br>
+/// `D3DXLoadPRTBufferFromFile` →&nbsp;❌ <br>
+/// `D3DXLoadPRTCompBufferFromFile` →&nbsp;❌ <br>
+/// `D3DXSaveMeshToX` →&nbsp;❌ <br>
+/// `D3DXSavePRTBufferToFile` →&nbsp;❌ <br>
+/// `D3DXSavePRTCompBufferToFile` →&nbsp;❌ <br>
+/// `INTERFACE` →&nbsp;❌ <br>
+/// `UNUSED16` →&nbsp;❌ <br>
+/// `UNUSED32` →&nbsp;❌ <br>
+/// `XEXTENSIONS_TEMPLATES` →&nbsp;❌ <br>
+/// `XSKINEXP_TEMPLATES` →&nbsp;❌ <br>
+pub const d3dx9mesh_h : cxx_header = cxx_header;
+
+
+
+/// # d3dx9shader.h
+///
+/// ### C++ Interfaces → Rust Types
+///
+/// `ID3DXConstantTable` →&nbsp;❌ <br>
+/// * `ID3DXConstantTable::GetBufferPointer` →&nbsp;❌ <br>
+/// * `ID3DXConstantTable::GetBufferSize` →&nbsp;❌ <br>
+/// * `ID3DXConstantTable::GetConstant` →&nbsp;❌ <br>
+/// * `ID3DXConstantTable::GetConstantByName` →&nbsp;❌ <br>
+/// * `ID3DXConstantTable::GetConstantDesc` →&nbsp;❌ <br>
+/// * `ID3DXConstantTable::GetConstantElement` →&nbsp;❌ <br>
+/// * `ID3DXConstantTable::GetDesc` →&nbsp;❌ <br>
+/// * `ID3DXConstantTable::GetSamplerIndex` →&nbsp;❌ <br>
+/// * `ID3DXConstantTable::SetBool` →&nbsp;❌ <br>
+/// * `ID3DXConstantTable::SetBoolArray` →&nbsp;❌ <br>
+/// * `ID3DXConstantTable::SetDefaults` →&nbsp;❌ <br>
+/// * `ID3DXConstantTable::SetFloat` →&nbsp;❌ <br>
+/// * `ID3DXConstantTable::SetFloatArray` →&nbsp;❌ <br>
+/// * `ID3DXConstantTable::SetInt` →&nbsp;❌ <br>
+/// * `ID3DXConstantTable::SetIntArray` →&nbsp;❌ <br>
+/// * `ID3DXConstantTable::SetMatrix` →&nbsp;❌ <br>
+/// * `ID3DXConstantTable::SetMatrixArray` →&nbsp;❌ <br>
+/// * `ID3DXConstantTable::SetMatrixPointerArray` →&nbsp;❌ <br>
+/// * `ID3DXConstantTable::SetMatrixTranspose` →&nbsp;❌ <br>
+/// * `ID3DXConstantTable::SetMatrixTransposeArray` →&nbsp;❌ <br>
+/// * `ID3DXConstantTable::SetMatrixTransposePointerArray` →&nbsp;❌ <br>
+/// * `ID3DXConstantTable::SetValue` →&nbsp;❌ <br>
+/// * `ID3DXConstantTable::SetVector` →&nbsp;❌ <br>
+/// * `ID3DXConstantTable::SetVectorArray` →&nbsp;❌ <br>
+///
+/// `ID3DXInclude` →&nbsp;❌ <br>
+/// * `ID3DXInclude::Close` →&nbsp;❌ <br>
+/// * `ID3DXInclude::Open` →&nbsp;❌ <br>
+///
+/// `ID3DXTextureShader` →&nbsp;❌ <br>
+/// * `ID3DXTextureShader::GetConstant` →&nbsp;❌ <br>
+/// * `ID3DXTextureShader::GetConstantBuffer` →&nbsp;❌ <br>
+/// * `ID3DXTextureShader::GetConstantByName` →&nbsp;❌ <br>
+/// * `ID3DXTextureShader::GetConstantDesc` →&nbsp;❌ <br>
+/// * `ID3DXTextureShader::GetConstantElement` →&nbsp;❌ <br>
+/// * `ID3DXTextureShader::GetDesc` →&nbsp;❌ <br>
+/// * `ID3DXTextureShader::GetFunction` →&nbsp;❌ <br>
+/// * `ID3DXTextureShader::SetBool` →&nbsp;❌ <br>
+/// * `ID3DXTextureShader::SetBoolArray` →&nbsp;❌ <br>
+/// * `ID3DXTextureShader::SetDefaults` →&nbsp;❌ <br>
+/// * `ID3DXTextureShader::SetFloat` →&nbsp;❌ <br>
+/// * `ID3DXTextureShader::SetFloatArray` →&nbsp;❌ <br>
+/// * `ID3DXTextureShader::SetInt` →&nbsp;❌ <br>
+/// * `ID3DXTextureShader::SetIntArray` →&nbsp;❌ <br>
+/// * `ID3DXTextureShader::SetMatrix` →&nbsp;❌ <br>
+/// * `ID3DXTextureShader::SetMatrixArray` →&nbsp;❌ <br>
+/// * `ID3DXTextureShader::SetMatrixPointerArray` →&nbsp;❌ <br>
+/// * `ID3DXTextureShader::SetMatrixTranspose` →&nbsp;❌ <br>
+/// * `ID3DXTextureShader::SetMatrixTransposeArray` →&nbsp;❌ <br>
+/// * `ID3DXTextureShader::SetMatrixTransposePointerArray` →&nbsp;❌ <br>
+/// * `ID3DXTextureShader::SetValue` →&nbsp;❌ <br>
+/// * `ID3DXTextureShader::SetVector` →&nbsp;❌ <br>
+/// * `ID3DXTextureShader::SetVectorArray` →&nbsp;❌ <br>
+///
+/// ### C++ Structs -> Rust Structs
+///
+/// `D3DXCONSTANTTABLE_DESC` →&nbsp;❌ <br>
+/// `D3DXCONSTANT_DESC` →&nbsp;❌ <br>
+/// `D3DXMACRO` →&nbsp;❌ <br>
+/// `D3DXSEMANTIC` →&nbsp;❌ <br>
+/// `D3DXSHADER_CONSTANTINFO` →&nbsp;❌ <br>
+/// `D3DXSHADER_CONSTANTTABLE` →&nbsp;❌ <br>
+/// `D3DXSHADER_STRUCTMEMBERINFO` →&nbsp;❌ <br>
+/// `D3DXSHADER_TYPEINFO` →&nbsp;❌ <br>
+/// ### C++ Enums → Rust Structs
+///
+/// `D3DXINCLUDE_TYPE` →&nbsp;❌ <br>
+/// * `D3DXINC_LOCAL` →&nbsp;❌ <br>
+/// * `D3DXINC_SYSTEM` →&nbsp;❌ <br>
+///
+/// `D3DXPARAMETER_CLASS` →&nbsp;❌ <br>
+/// * `D3DXPC_MATRIX_COLUMNS` →&nbsp;❌ <br>
+/// * `D3DXPC_MATRIX_ROWS` →&nbsp;❌ <br>
+/// * `D3DXPC_OBJECT` →&nbsp;❌ <br>
+/// * `D3DXPC_SCALAR` →&nbsp;❌ <br>
+/// * `D3DXPC_STRUCT` →&nbsp;❌ <br>
+/// * `D3DXPC_VECTOR` →&nbsp;❌ <br>
+///
+/// `D3DXPARAMETER_TYPE` →&nbsp;❌ <br>
+/// * `D3DXPT_BOOL` →&nbsp;❌ <br>
+/// * `D3DXPT_FLOAT` →&nbsp;❌ <br>
+/// * `D3DXPT_INT` →&nbsp;❌ <br>
+/// * `D3DXPT_PIXELFRAGMENT` →&nbsp;❌ <br>
+/// * `D3DXPT_PIXELSHADER` →&nbsp;❌ <br>
+/// * `D3DXPT_SAMPLER` →&nbsp;❌ <br>
+/// * `D3DXPT_SAMPLER1D` →&nbsp;❌ <br>
+/// * `D3DXPT_SAMPLER2D` →&nbsp;❌ <br>
+/// * `D3DXPT_SAMPLER3D` →&nbsp;❌ <br>
+/// * `D3DXPT_SAMPLERCUBE` →&nbsp;❌ <br>
+/// * `D3DXPT_STRING` →&nbsp;❌ <br>
+/// * `D3DXPT_TEXTURE` →&nbsp;❌ <br>
+/// * `D3DXPT_TEXTURE1D` →&nbsp;❌ <br>
+/// * `D3DXPT_TEXTURE2D` →&nbsp;❌ <br>
+/// * `D3DXPT_TEXTURE3D` →&nbsp;❌ <br>
+/// * `D3DXPT_TEXTURECUBE` →&nbsp;❌ <br>
+/// * `D3DXPT_UNSUPPORTED` →&nbsp;❌ <br>
+/// * `D3DXPT_VERTEXFRAGMENT` →&nbsp;❌ <br>
+/// * `D3DXPT_VERTEXSHADER` →&nbsp;❌ <br>
+/// * `D3DXPT_VOID` →&nbsp;❌ <br>
+///
+/// `D3DXREGISTER_SET` →&nbsp;❌ <br>
+/// * `D3DXRS_BOOL` →&nbsp;❌ <br>
+/// * `D3DXRS_FLOAT4` →&nbsp;❌ <br>
+/// * `D3DXRS_INT4` →&nbsp;❌ <br>
+/// * `D3DXRS_SAMPLER` →&nbsp;❌ <br>
+///
+/// ### C++ Constants → Rust Constants
+///
+/// `D3DXAssembleShaderFromFile` →&nbsp;❌ <br>
+/// `D3DXAssembleShaderFromResource` →&nbsp;❌ <br>
+/// `D3DXCONSTTABLE_LARGEADDRESSAWARE` →&nbsp;❌ <br>
+/// `D3DXCompileShaderFromFile` →&nbsp;❌ <br>
+/// `D3DXCompileShaderFromResource` →&nbsp;❌ <br>
+/// `D3DXPreprocessShaderFromFile` →&nbsp;❌ <br>
+/// `D3DXPreprocessShaderFromResource` →&nbsp;❌ <br>
+/// `D3DXSHADER_AVOID_FLOW_CONTROL` →&nbsp;❌ <br>
+/// `D3DXSHADER_DEBUG` →&nbsp;❌ <br>
+/// `D3DXSHADER_ENABLE_BACKWARDS_COMPATIBILITY` →&nbsp;❌ <br>
+/// `D3DXSHADER_FORCE_PS_SOFTWARE_NOOPT` →&nbsp;❌ <br>
+/// `D3DXSHADER_FORCE_VS_SOFTWARE_NOOPT` →&nbsp;❌ <br>
+/// `D3DXSHADER_IEEE_STRICTNESS` →&nbsp;❌ <br>
+/// `D3DXSHADER_NO_PRESHADER` →&nbsp;❌ <br>
+/// `D3DXSHADER_OPTIMIZATION_LEVEL0` →&nbsp;❌ <br>
+/// `D3DXSHADER_OPTIMIZATION_LEVEL1` →&nbsp;❌ <br>
+/// `D3DXSHADER_OPTIMIZATION_LEVEL2` →&nbsp;❌ <br>
+/// `D3DXSHADER_OPTIMIZATION_LEVEL3` →&nbsp;❌ <br>
+/// `D3DXSHADER_PACKMATRIX_COLUMNMAJOR` →&nbsp;❌ <br>
+/// `D3DXSHADER_PACKMATRIX_ROWMAJOR` →&nbsp;❌ <br>
+/// `D3DXSHADER_PARTIALPRECISION` →&nbsp;❌ <br>
+/// `D3DXSHADER_PREFER_FLOW_CONTROL` →&nbsp;❌ <br>
+/// `D3DXSHADER_SKIPOPTIMIZATION` →&nbsp;❌ <br>
+/// `D3DXSHADER_SKIPVALIDATION` →&nbsp;❌ <br>
+/// `D3DXSHADER_USE_LEGACY_D3DX9_31_DLL` →&nbsp;❌ <br>
+/// `INTERFACE` →&nbsp;❌ <br>
+/// ### C++ Macros → Rust fns/macros
+///
+/// `D3DXTX_VERSION` →&nbsp;❌ <br>
+pub const d3dx9shader_h : cxx_header = cxx_header;
+
+
+
+/// # d3dx9shape.h
+///
+/// ### C++ Constants → Rust Constants
+///
+/// `D3DXCreateText` →&nbsp;❌ <br>
+pub const d3dx9shape_h : cxx_header = cxx_header;
+
+
+
+/// # d3dx9tex.h
+///
+/// ### C++ Structs -> Rust Structs
+///
+/// `D3DXIMAGE_INFO` →&nbsp;❌ <br>
+/// ### C++ Enums → Rust Structs
+///
+/// `D3DXIMAGE_FILEFORMAT` →&nbsp;❌ <br>
+/// * `D3DXIFF_BMP` →&nbsp;❌ <br>
+/// * `D3DXIFF_DDS` →&nbsp;❌ <br>
+/// * `D3DXIFF_DIB` →&nbsp;❌ <br>
+/// * `D3DXIFF_HDR` →&nbsp;❌ <br>
+/// * `D3DXIFF_JPG` →&nbsp;❌ <br>
+/// * `D3DXIFF_PFM` →&nbsp;❌ <br>
+/// * `D3DXIFF_PNG` →&nbsp;❌ <br>
+/// * `D3DXIFF_PPM` →&nbsp;❌ <br>
+/// * `D3DXIFF_TGA` →&nbsp;❌ <br>
+///
+/// ### C++ Constants → Rust Constants
+///
+/// `D3DXCreateCubeTextureFromFile` →&nbsp;❌ <br>
+/// `D3DXCreateCubeTextureFromFileEx` →&nbsp;❌ <br>
+/// `D3DXCreateCubeTextureFromResource` →&nbsp;❌ <br>
+/// `D3DXCreateCubeTextureFromResourceEx` →&nbsp;❌ <br>
+/// `D3DXCreateTextureFromFile` →&nbsp;❌ <br>
+/// `D3DXCreateTextureFromFileEx` →&nbsp;❌ <br>
+/// `D3DXCreateTextureFromResource` →&nbsp;❌ <br>
+/// `D3DXCreateTextureFromResourceEx` →&nbsp;❌ <br>
+/// `D3DXCreateVolumeTextureFromFile` →&nbsp;❌ <br>
+/// `D3DXCreateVolumeTextureFromFileEx` →&nbsp;❌ <br>
+/// `D3DXCreateVolumeTextureFromResource` →&nbsp;❌ <br>
+/// `D3DXCreateVolumeTextureFromResourceEx` →&nbsp;❌ <br>
+/// `D3DXFilterCubeTexture` →&nbsp;❌ <br>
+/// `D3DXFilterVolumeTexture` →&nbsp;❌ <br>
+/// `D3DXGetImageInfoFromFile` →&nbsp;❌ <br>
+/// `D3DXGetImageInfoFromResource` →&nbsp;❌ <br>
+/// `D3DXLoadSurfaceFromFile` →&nbsp;❌ <br>
+/// `D3DXLoadSurfaceFromResource` →&nbsp;❌ <br>
+/// `D3DXLoadVolumeFromFile` →&nbsp;❌ <br>
+/// `D3DXLoadVolumeFromResource` →&nbsp;❌ <br>
+/// `D3DXSaveSurfaceToFile` →&nbsp;❌ <br>
+/// `D3DXSaveTextureToFile` →&nbsp;❌ <br>
+/// `D3DXSaveVolumeToFile` →&nbsp;❌ <br>
+/// `D3DX_CHANNEL_ALPHA` →&nbsp;❌ <br>
+/// `D3DX_CHANNEL_BLUE` →&nbsp;❌ <br>
+/// `D3DX_CHANNEL_GREEN` →&nbsp;❌ <br>
+/// `D3DX_CHANNEL_LUMINANCE` →&nbsp;❌ <br>
+/// `D3DX_CHANNEL_RED` →&nbsp;❌ <br>
+/// `D3DX_FILTER_BOX` →&nbsp;❌ <br>
+/// `D3DX_FILTER_DITHER` →&nbsp;❌ <br>
+/// `D3DX_FILTER_DITHER_DIFFUSION` →&nbsp;❌ <br>
+/// `D3DX_FILTER_LINEAR` →&nbsp;❌ <br>
+/// `D3DX_FILTER_MIRROR` →&nbsp;❌ <br>
+/// `D3DX_FILTER_MIRROR_U` →&nbsp;❌ <br>
+/// `D3DX_FILTER_MIRROR_V` →&nbsp;❌ <br>
+/// `D3DX_FILTER_MIRROR_W` →&nbsp;❌ <br>
+/// `D3DX_FILTER_NONE` →&nbsp;❌ <br>
+/// `D3DX_FILTER_POINT` →&nbsp;❌ <br>
+/// `D3DX_FILTER_SRGB` →&nbsp;❌ <br>
+/// `D3DX_FILTER_SRGB_IN` →&nbsp;❌ <br>
+/// `D3DX_FILTER_SRGB_OUT` →&nbsp;❌ <br>
+/// `D3DX_FILTER_TRIANGLE` →&nbsp;❌ <br>
+/// `D3DX_NORMALMAP_COMPUTE_OCCLUSION` →&nbsp;❌ <br>
+/// `D3DX_NORMALMAP_INVERTSIGN` →&nbsp;❌ <br>
+/// `D3DX_NORMALMAP_MIRROR` →&nbsp;❌ <br>
+/// `D3DX_NORMALMAP_MIRROR_U` →&nbsp;❌ <br>
+/// `D3DX_NORMALMAP_MIRROR_V` →&nbsp;❌ <br>
+/// `D3DX_SKIP_DDS_MIP_LEVELS_MASK` →&nbsp;❌ <br>
+/// `D3DX_SKIP_DDS_MIP_LEVELS_SHIFT` →&nbsp;❌ <br>
+/// ### C++ Macros → Rust fns/macros
+///
+/// `D3DX_SKIP_DDS_MIP_LEVELS` →&nbsp;❌ <br>
+pub const d3dx9tex_h : cxx_header = cxx_header;
+
+
+
+/// # d3dx9xof.h
+///
+/// ### C++ Interfaces → Rust Types
+///
+/// ` ID3DXFile` →&nbsp;❌ <br>
+/// * ` ID3DXFile::AddRef` →&nbsp;❌ <br>
+/// * ` ID3DXFile::CreateEnumObject` →&nbsp;❌ <br>
+/// * ` ID3DXFile::CreateSaveObject` →&nbsp;❌ <br>
+/// * ` ID3DXFile::QueryInterface` →&nbsp;❌ <br>
+/// * ` ID3DXFile::RegisterEnumTemplates` →&nbsp;❌ <br>
+/// * ` ID3DXFile::RegisterTemplates` →&nbsp;❌ <br>
+/// * ` ID3DXFile::Release` →&nbsp;❌ <br>
+///
+/// ` ID3DXFileData` →&nbsp;❌ <br>
+/// * ` ID3DXFileData::AddRef` →&nbsp;❌ <br>
+/// * ` ID3DXFileData::GetChild` →&nbsp;❌ <br>
+/// * ` ID3DXFileData::GetChildren` →&nbsp;❌ <br>
+/// * ` ID3DXFileData::GetEnum` →&nbsp;❌ <br>
+/// * ` ID3DXFileData::GetId` →&nbsp;❌ <br>
+/// * ` ID3DXFileData::GetName` →&nbsp;❌ <br>
+/// * ` ID3DXFileData::GetType` →&nbsp;❌ <br>
+/// * ` ID3DXFileData::IsReference` →&nbsp;❌ <br>
+/// * ` ID3DXFileData::Lock` →&nbsp;❌ <br>
+/// * ` ID3DXFileData::QueryInterface` →&nbsp;❌ <br>
+/// * ` ID3DXFileData::Release` →&nbsp;❌ <br>
+/// * ` ID3DXFileData::Unlock` →&nbsp;❌ <br>
+///
+/// ` ID3DXFileEnumObject` →&nbsp;❌ <br>
+/// * ` ID3DXFileEnumObject::AddRef` →&nbsp;❌ <br>
+/// * ` ID3DXFileEnumObject::GetChild` →&nbsp;❌ <br>
+/// * ` ID3DXFileEnumObject::GetChildren` →&nbsp;❌ <br>
+/// * ` ID3DXFileEnumObject::GetDataObjectById` →&nbsp;❌ <br>
+/// * ` ID3DXFileEnumObject::GetDataObjectByName` →&nbsp;❌ <br>
+/// * ` ID3DXFileEnumObject::GetFile` →&nbsp;❌ <br>
+/// * ` ID3DXFileEnumObject::QueryInterface` →&nbsp;❌ <br>
+/// * ` ID3DXFileEnumObject::Release` →&nbsp;❌ <br>
+///
+/// ` ID3DXFileSaveData` →&nbsp;❌ <br>
+/// * ` ID3DXFileSaveData::AddDataObject` →&nbsp;❌ <br>
+/// * ` ID3DXFileSaveData::AddDataReference` →&nbsp;❌ <br>
+/// * ` ID3DXFileSaveData::AddRef` →&nbsp;❌ <br>
+/// * ` ID3DXFileSaveData::GetId` →&nbsp;❌ <br>
+/// * ` ID3DXFileSaveData::GetName` →&nbsp;❌ <br>
+/// * ` ID3DXFileSaveData::GetSave` →&nbsp;❌ <br>
+/// * ` ID3DXFileSaveData::GetType` →&nbsp;❌ <br>
+/// * ` ID3DXFileSaveData::QueryInterface` →&nbsp;❌ <br>
+/// * ` ID3DXFileSaveData::Release` →&nbsp;❌ <br>
+///
+/// ` ID3DXFileSaveObject` →&nbsp;❌ <br>
+/// * ` ID3DXFileSaveObject::AddDataObject` →&nbsp;❌ <br>
+/// * ` ID3DXFileSaveObject::AddRef` →&nbsp;❌ <br>
+/// * ` ID3DXFileSaveObject::GetFile` →&nbsp;❌ <br>
+/// * ` ID3DXFileSaveObject::QueryInterface` →&nbsp;❌ <br>
+/// * ` ID3DXFileSaveObject::Release` →&nbsp;❌ <br>
+/// * ` ID3DXFileSaveObject::Save` →&nbsp;❌ <br>
+///
+/// ### C++ Structs -> Rust Structs
+///
+/// `D3DXF_FILELOADMEMORY` →&nbsp;❌ <br>
+/// `D3DXF_FILELOADRESOURCE` →&nbsp;❌ <br>
+/// ### C++ Constants → Rust Constants
+///
+/// `D3DXFERR_BADARRAYSIZE` →&nbsp;❌ <br>
+/// `D3DXFERR_BADCACHEFILE` →&nbsp;❌ <br>
+/// `D3DXFERR_BADDATAREFERENCE` →&nbsp;❌ <br>
+/// `D3DXFERR_BADFILE` →&nbsp;❌ <br>
+/// `D3DXFERR_BADFILEFLOATSIZE` →&nbsp;❌ <br>
+/// `D3DXFERR_BADFILETYPE` →&nbsp;❌ <br>
+/// `D3DXFERR_BADFILEVERSION` →&nbsp;❌ <br>
+/// `D3DXFERR_BADOBJECT` →&nbsp;❌ <br>
+/// `D3DXFERR_BADRESOURCE` →&nbsp;❌ <br>
+/// `D3DXFERR_BADTYPE` →&nbsp;❌ <br>
+/// `D3DXFERR_BADVALUE` →&nbsp;❌ <br>
+/// `D3DXFERR_FILENOTFOUND` →&nbsp;❌ <br>
+/// `D3DXFERR_NOMOREDATA` →&nbsp;❌ <br>
+/// `D3DXFERR_NOMOREOBJECTS` →&nbsp;❌ <br>
+/// `D3DXFERR_NOTDONEYET` →&nbsp;❌ <br>
+/// `D3DXFERR_NOTFOUND` →&nbsp;❌ <br>
+/// `D3DXFERR_PARSEERROR` →&nbsp;❌ <br>
+/// `D3DXFERR_RESOURCENOTFOUND` →&nbsp;❌ <br>
+/// `D3DXF_FILEFORMAT_BINARY` →&nbsp;❌ <br>
+/// `D3DXF_FILEFORMAT_COMPRESSED` →&nbsp;❌ <br>
+/// `D3DXF_FILEFORMAT_TEXT` →&nbsp;❌ <br>
+/// `D3DXF_FILELOAD_FROMFILE` →&nbsp;❌ <br>
+/// `D3DXF_FILELOAD_FROMMEMORY` →&nbsp;❌ <br>
+/// `D3DXF_FILELOAD_FROMRESOURCE` →&nbsp;❌ <br>
+/// `D3DXF_FILELOAD_FROMWFILE` →&nbsp;❌ <br>
+/// `D3DXF_FILESAVE_TOFILE` →&nbsp;❌ <br>
+/// `D3DXF_FILESAVE_TOWFILE` →&nbsp;❌ <br>
+/// `INTERFACE` →&nbsp;❌ <br>
+/// `_FACD3DXF` →&nbsp;❌ <br>
+/// ### C++ Macros → Rust fns/macros
+///
+/// `DECLSPEC_UUID` →&nbsp;❌ <br>
+/// `WIN_TYPES` →&nbsp;❌ <br>
+pub const d3dx9xof_h : cxx_header = cxx_header;
 
 
 

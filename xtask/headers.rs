@@ -10,19 +10,32 @@ use std::path::*;
 
 
 
-fn headers() -> impl Iterator<Item = &'static str> {
-    include_str!("../thindx/doc/headers.txt").lines().map(|l| l.split_once('#').map_or(l, |l| l.0).trim()).filter(|l| !l.is_empty())
+fn windows_sdk_headers() -> impl Iterator<Item = &'static str> {
+    include_str!("../thindx/doc/headers-windows-sdk.txt").lines().map(|l| l.split_once('#').map_or(l, |l| l.0).trim()).filter(|l| !l.is_empty())
+}
+
+fn directx_sdk_headers() -> impl Iterator<Item = &'static str> {
+    include_str!("../thindx/doc/headers-directx-sdk.txt").lines().map(|l| l.split_once('#').map_or(l, |l| l.0).trim()).filter(|l| !l.is_empty())
 }
 
 pub fn update() {
+    status!("Generating", "thindx/src/_headers.rs");
     let cpp2rust = &*CPP2RUST;
 
+    let dxsdk = ["ProgramFiles(x86)", "ProgramFiles"].iter().copied()
+        .filter_map(|env| std::env::var_os(env))
+        .map(|env| PathBuf::from(env).join(r"Microsoft DirectX SDK (June 2010)\Include"))
+        .filter(|p| p.exists())
+        .next();
+    let dxsdk = dxsdk.as_ref();
+
     use maulingmonkey_windows_sdk_scanner::*;
-    let sdk = sdk::WindowsKit::find_latest().unwrap();
+    let winsdk = sdk::WindowsKit::find_latest().unwrap();
     let mut cpp = RootBuilder::new();
-    for file in headers() { cpp.add_from_cpp_path(sdk.include.join(file)).unwrap(); }
+    for file in windows_sdk_headers() { cpp.add_from_cpp_path(winsdk.include.join(file)).unwrap() }
+    if let Some(dxsdk) = dxsdk { for file in directx_sdk_headers() { cpp.add_from_cpp_path(dxsdk.join(file)).unwrap() } }
     let cpp : Root = cpp.finish();
-    let headers = headers().map(|h| Header::new(h, &cpp)).collect::<Vec<_>>();
+    let headers = windows_sdk_headers().chain(directx_sdk_headers()).map(|h| Header::new(h, &cpp)).collect::<Vec<_>>();
 
     mmrbi::fs::write_if_modified_with("thindx/src/_headers.rs", |rs|{
         let mut rs = EolRewriter(rs);
@@ -31,7 +44,7 @@ pub fn update() {
         writeln!(rs)?;
         writeln!(rs, "#![warn(rustdoc::broken_intra_doc_links)]")?;
         writeln!(rs)?;
-        writeln!(rs, "//! Rust ⮀ C++ coverage information based on Windows SDK {}", sdk.sdk_version)?;
+        writeln!(rs, "//! Rust ⮀ C++ coverage information based on Windows SDK {} + DirectX SDK (June 2010)", winsdk.sdk_version)?;
         writeln!(rs, "//!")?;
         writeln!(rs, "//! ⚠️ Scanned C++ definitions are not yet complete.")?;
         writeln!(rs, "//! Based on [MaulingMonkey/windows-sdk-scanner](https://github.com/MaulingMonkey/windows-sdk-scanner).")?;
