@@ -231,6 +231,8 @@ pub const d3d9_01_clear_winapi : () = ();
 /// use thindx::*;
 /// use thindx::d3d9::*;
 /// 
+/// use bytemuck::*;
+/// 
 /// use mmrbi::*;
 /// 
 /// use raw_window_handle::*;
@@ -583,7 +585,7 @@ pub const d3d9_01_clear_winapi : () = ();
 ///     }
 /// }
 /// 
-/// #[derive(Clone, Copy)]
+/// #[derive(Clone, Copy, Zeroable, Pod)]
 /// #[repr(C)] struct Vertex {
 ///     pub position:   [f32; 4],
 ///     pub texcoord:   [f32; 2],

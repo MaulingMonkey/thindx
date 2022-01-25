@@ -169,5 +169,6 @@ pub use crate::d3d9caps_h::*;
 pub use crate::d3d9types_h::*;
 
 mods! {
+    inl mod index;
     inl mod shared_handle;
 }

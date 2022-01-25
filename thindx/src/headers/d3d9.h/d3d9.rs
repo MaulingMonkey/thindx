@@ -8,7 +8,6 @@ mods! {
     inl mod interfaces {
         inl mod device;
         inl mod deviceex;
-        mod device_draw;
         inl mod buffers;
         inl mod direct3d;
         inl mod direct3dex;

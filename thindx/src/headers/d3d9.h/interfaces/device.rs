@@ -2,11 +2,10 @@
 
 use crate::*;
 use crate::d3d9::*;
-use crate::d3d9_h::interfaces::device_draw::{IndexData, VertexStreamData};
 
 use abibool::bool32;
 
-use bytemuck::Zeroable;
+use bytemuck::{Zeroable, Pod};
 
 use winapi::shared::d3d9::IDirect3DDevice9;
 use winapi::shared::d3d9types::*;
@@ -538,13 +537,12 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// *   [E::OUTOFMEMORY]
     /// *   [THINERR::ALLOC_OVERFLOW]   if allocation rejected by thindx to avoid possible UB
     /// *   Ok([IndexBuffer])
-    fn create_index_buffer_from(&self, data: impl IndexData, usage: impl Into<Usage>, pool: impl Into<Pool>, shared_handle: impl SharedHandleParam) -> Result<IndexBuffer, MethodError> {
-        let bytes = data.bytes();
+    fn create_index_buffer_from<I: Index>(&self, data: &[I], usage: impl Into<Usage>, pool: impl Into<Pool>, shared_handle: impl SharedHandleParam) -> Result<IndexBuffer, MethodError> {
+        let bytes = std::mem::size_of_val(data);
         let bytes32 : u32 = bytes.try_into().map_err(|_| MethodError("IDirect3DDevice9Ext::create_index_buffer_from", THINERR::ALLOC_OVERFLOW))?;
-        let format = data.format();
         let usage = usage.into();
         let lock = if usage.into() & Usage::Dynamic.into() != 0 { Lock::NoOverwrite } else { Lock::None };
-        let ib = self.create_index_buffer(bytes32, usage, format, pool, shared_handle)?;
+        let ib = self.create_index_buffer(bytes32, usage, I::format(), pool, shared_handle)?;
         unsafe {
             let dst = ib.lock_unchecked(0, 0, lock)?;
             std::ptr::copy_nonoverlapping(data.as_ptr() as *const u8, dst.cast(), bytes);
@@ -736,8 +734,8 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// *   [E::OUTOFMEMORY]            if allocation failed (driver or d3d runtime)
     /// *   [THINERR::ALLOC_OVERFLOW]   if allocation rejected by thindx to avoid possible UB
     /// *   Ok([VertexBuffer])
-    fn create_vertex_buffer_from(&self, data: impl VertexStreamData, usage: impl Into<Usage>, fvf: impl Into<FVF>, pool: impl Into<Pool>, _shared_handle: impl SharedHandleParam) -> Result<VertexBuffer, MethodError> {
-        let bytes = data.bytes();
+    fn create_vertex_buffer_from<V: Pod>(&self, data: &[V], usage: impl Into<Usage>, fvf: impl Into<FVF>, pool: impl Into<Pool>, _shared_handle: impl SharedHandleParam) -> Result<VertexBuffer, MethodError> {
+        let bytes = std::mem::size_of_val(data);
         let bytes32 : u32 = bytes.try_into().map_err(|_| MethodError("IDirect3DDevice9Ext::create_vertex_buffer_from", THINERR::ALLOC_OVERFLOW))?;
         let usage = usage.into();
         let lock = if usage.into() & Usage::Dynamic.into() != 0 { Lock::NoOverwrite } else { Lock::None };
@@ -845,8 +843,8 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         MethodError::check("IDirect3DDevice9::DrawIndexedPrimitive", hr)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-drawindexedprimitive)\]
-    /// IDirect3DDevice9::DrawIndexedPrimitive
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-drawindexedprimitiveup)\]
+    /// IDirect3DDevice9::DrawIndexedPrimitiveUP
     ///
     /// ### ⚠️ Safety ⚠️
     ///
@@ -858,8 +856,8 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok(())
-    unsafe fn draw_indexed_primitive_up(&self, primitive_type: PrimitiveType, min_vertex_index: u32, num_verticies: u32, primitive_count: u32, index_data: impl IndexData, vertex_stream_zero: impl VertexStreamData) -> Result<(), MethodError> {
-        let hr = self.as_winapi().DrawIndexedPrimitiveUP(primitive_type.into(), min_vertex_index, num_verticies, primitive_count, index_data.as_ptr(), index_data.format().into(), vertex_stream_zero.as_ptr(), vertex_stream_zero.stride());
+    unsafe fn draw_indexed_primitive_up<I: Index, V: Pod>(&self, primitive_type: PrimitiveType, min_vertex_index: u32, num_verticies: u32, primitive_count: u32, indicies: &[I], vertex_stream_zero: &[V]) -> Result<(), MethodError> {
+        let hr = self.as_winapi().DrawIndexedPrimitiveUP(primitive_type.into(), min_vertex_index, num_verticies, primitive_count, indicies.as_ptr().cast(), I::format().into(), vertex_stream_zero.as_ptr().cast(), std::mem::size_of::<V>() as _);
         MethodError::check("IDirect3DDevice9::DrawIndexedPrimitiveUP", hr)
     }
 
@@ -894,8 +892,8 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok(())
-    unsafe fn draw_primitive_up(&self, primitive_type: PrimitiveType, primitive_count: u32, vertex_stream_zero: impl VertexStreamData) -> Result<(), MethodError> {
-        let hr = self.as_winapi().DrawPrimitiveUP(primitive_type.into(), primitive_count, vertex_stream_zero.as_ptr(), vertex_stream_zero.stride());
+    unsafe fn draw_primitive_up<V: Pod>(&self, primitive_type: PrimitiveType, primitive_count: u32, vertex_stream_zero: &[V]) -> Result<(), MethodError> {
+        let hr = self.as_winapi().DrawPrimitiveUP(primitive_type.into(), primitive_count, vertex_stream_zero.as_ptr().cast(), std::mem::size_of::<V>() as _);
         MethodError::check("IDirect3DDevice9::DrawPrimitiveUP", hr)
     }
 

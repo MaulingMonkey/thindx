@@ -4,6 +4,8 @@
 use thindx::*;
 use thindx::d3d9::*;
 
+use bytemuck::*;
+
 use mmrbi::*;
 
 use raw_window_handle::*;
@@ -356,7 +358,7 @@ fn png2tex(device: &Device, path: &str) -> Texture { // TODO: replace with utili
     }
 }
 
-#[derive(Clone, Copy)]
+#[derive(Clone, Copy, Zeroable, Pod)]
 #[repr(C)] struct Vertex {
     pub position:   [f32; 4],
     pub texcoord:   [f32; 2],
