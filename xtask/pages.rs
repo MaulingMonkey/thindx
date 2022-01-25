@@ -6,6 +6,8 @@ use std::path::*;
 pub struct Settings {
     // pub create_worktree_if_missing: bool, // TODO?
 
+    pub git_sync_branch:            bool,
+
     pub update_coverage:            bool,
     pub update_docs:                bool,
 
@@ -23,6 +25,8 @@ pub struct Settings {
 impl Default for Settings {
     fn default() -> Self {
         Self {
+            git_sync_branch:        true,
+
             update_coverage:        true,
             update_docs:            true,
 
@@ -49,6 +53,14 @@ pub fn from_settings(settings: Settings) {
 
     let _ = std::fs::create_dir_all(".worktree/gh-pages/preview/coverage");
     let _ = std::fs::create_dir_all(".worktree/gh-pages/preview/docs");
+
+    if settings.git_sync_branch { run_in(gh_pages_dir, "git fetch github gh-pages")         } // ensure we're looking at latest github/gh-pages
+    if settings.git_sync_branch { run_in(gh_pages_dir, "git checkout gh-pages")             } // ensure we're on the gh-pages branch
+    if settings.git_sync_branch { run_in(gh_pages_dir, "git reset --hard github/gh-pages")  } // force-sync gh-pages to github/gh-pages
+
+    // file:///C:/Program%20Files/Git/mingw64/share/doc/git-doc/git-log.html#_pretty_formats
+    // short hash: `git log --max-count=1 --format=%h master`
+    // long  hash: `git log --max-count=1 --format=%H master`
 
     if settings.update_docs     { doc::from_settings(doc::Settings::default()) }
     if settings.update_coverage { coverage::from_settings(coverage::Settings::default()) }
