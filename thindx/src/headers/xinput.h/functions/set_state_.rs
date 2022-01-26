@@ -13,7 +13,7 @@ use winapi::um::xinput::*;
 /// ### Errors
 /// *   [ERROR::BAD_ARGUMENTS]          - Invalid [`User`] or [`User::Any`]
 /// *   [ERROR::DEVICE_NOT_CONNECTED]   - [`User`] is not connected
-pub fn set_state(user_index: impl Into<User>, mut vibration: Vibration) -> Result<(), MethodError> {
+pub fn set_state(user_index: impl Into<u32>, mut vibration: Vibration) -> Result<(), MethodError> {
     // SAFETY: ✔️
     //  * fuzzed        in `fuzz-xinput.rs`
     //  * tested        in `d3d9-02-xinput.rs`
@@ -25,16 +25,16 @@ pub fn set_state(user_index: impl Into<User>, mut vibration: Vibration) -> Resul
 
 #[test] fn test_valid_params() {
     let v = Vibration::default();
-    if let Err(err) = set_state(User::Zero,  v) { assert_eq!(err.kind(), ERROR::DEVICE_NOT_CONNECTED); }
-    if let Err(err) = set_state(User::Three, v) { assert_eq!(err.kind(), ERROR::DEVICE_NOT_CONNECTED); }
-    if let Err(err) = set_state(User::Zero,  v) { assert_eq!(err.kind(), ERROR::DEVICE_NOT_CONNECTED); }
-    if let Err(err) = set_state(User::Three, v) { assert_eq!(err.kind(), ERROR::DEVICE_NOT_CONNECTED); }
+    if let Err(err) = set_state(0u32, v) { assert_eq!(err.kind(), ERROR::DEVICE_NOT_CONNECTED); }
+    if let Err(err) = set_state(3u32, v) { assert_eq!(err.kind(), ERROR::DEVICE_NOT_CONNECTED); }
+    if let Err(err) = set_state(0u32, v) { assert_eq!(err.kind(), ERROR::DEVICE_NOT_CONNECTED); }
+    if let Err(err) = set_state(3u32, v) { assert_eq!(err.kind(), ERROR::DEVICE_NOT_CONNECTED); }
 }
 
 #[test] fn test_bad_arguments() {
     let v = Vibration::default();
     assert_eq!(ERROR::BAD_ARGUMENTS, set_state(User::Any,               v));
-    assert_eq!(ERROR::BAD_ARGUMENTS, set_state(User::from_unchecked(4), v));
+    assert_eq!(ERROR::BAD_ARGUMENTS, set_state(4u32, v));
 }
 
 //#cpp2rust XInputSetState      = xinput::set_state

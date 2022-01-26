@@ -354,12 +354,11 @@ pub const d3d9_01_clear_winapi : () = ();
 ///     let sx = 2.0 / 800.0;
 ///     let sy = 2.0 / 600.0;
 /// 
-///     let user = xinput::User::Zero;
-///     let state = xinput::get_state(user).ok()
+///     let state = xinput::get_state(0u32).ok()
 ///         .filter(|_| !dev::d3d9::hide_for_docs_gen())
 ///         .unwrap_or(xinput::State::default());
 /// 
-///     let _ = xinput::set_state(user, xinput::Vibration {
+///     let _ = xinput::set_state(0u32, xinput::Vibration {
 ///         left_motor_speed:  0x101 * (state.left_trigger  as u16),
 ///         right_motor_speed: 0x101 * (state.right_trigger as u16),
 ///     });

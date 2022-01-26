@@ -22,20 +22,15 @@ impl From<User> for  u8 { fn from(user: User) -> Self { user.0        } } // XIn
 impl From<User> for u32 { fn from(user: User) -> Self { user.0.into() } } // XInputGet* requires DWORDs
 
 #[allow(non_upper_case_globals)] impl User {
-    #[allow(missing_docs)] pub const Zero  : User = User(0);
-    #[allow(missing_docs)] pub const One   : User = User(1);
-    #[allow(missing_docs)] pub const Two   : User = User(2);
-    #[allow(missing_docs)] pub const Three : User = User(3);
-
     /// Not a user "index" per se - can be passed to e.g. XInputGetState to get the state of "any" gamepad.
-    /// (The first still connected?  The first currently active?  Often similar to [`User::Zero`], but not always!)
+    /// (The first still connected?  The first currently active?  Often similar to [`0u32`], but not always!)
     pub const Any   : User = User(XUSER_INDEX_ANY as _);
 
     /// XUSER_MAX_COUNT - The maximum number of valid, typical user indicies.
     pub const MAX_COUNT : u8 = XUSER_MAX_COUNT as _;
 
     /// Iterator over valid user indicies [User]\(0\) .. [User]\(4\)
-    pub fn iter_valid() -> impl Iterator<Item = User> { [User::Zero, User::One, User::Two, User::Three].iter().copied() }
+    pub fn iter_valid() -> impl Iterator<Item = User> { (0..4).map(User) }
 }
 
 //#cpp2rust XUSER_INDEX_ANY     = xinput::User::Any

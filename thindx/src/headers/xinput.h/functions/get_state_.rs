@@ -15,7 +15,7 @@ use winapi::um::xinput::*;
 /// ### Errors
 /// *   [ERROR::BAD_ARGUMENTS]          - Invalid [`User`] or [`User::Any`]
 /// *   [ERROR::DEVICE_NOT_CONNECTED]   - [`User`] gamepad not connected
-pub fn get_state(user_index: impl Into<User>) -> Result<State, MethodError> {
+pub fn get_state(user_index: impl Into<u32>) -> Result<State, MethodError> {
     let mut state = State::zeroed();
     // SAFETY: ✔️
     //  * fuzzed        in `tests/fuzz-xinput.rs`
@@ -28,13 +28,13 @@ pub fn get_state(user_index: impl Into<User>) -> Result<State, MethodError> {
 }
 
 #[test] fn test_valid_params() {
-    if let Err(err) = get_state(User::Zero ) { assert_eq!(err.kind(), ERROR::DEVICE_NOT_CONNECTED); }
-    if let Err(err) = get_state(User::Three) { assert_eq!(err.kind(), ERROR::DEVICE_NOT_CONNECTED); }
+    if let Err(err) = get_state(0u32 ) { assert_eq!(err.kind(), ERROR::DEVICE_NOT_CONNECTED); }
+    if let Err(err) = get_state(3u32) { assert_eq!(err.kind(), ERROR::DEVICE_NOT_CONNECTED); }
 }
 
 #[test] fn test_bad_arguments() {
     assert_eq!(ERROR::BAD_ARGUMENTS, get_state(User::Any));
-    assert_eq!(ERROR::BAD_ARGUMENTS, get_state(User::from_unchecked(4)));
+    assert_eq!(ERROR::BAD_ARGUMENTS, get_state(4u32));
     assert_eq!(ERROR::BAD_ARGUMENTS, get_state(User::from_unchecked(254)));
 }
 

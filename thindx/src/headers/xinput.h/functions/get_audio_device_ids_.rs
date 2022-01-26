@@ -32,7 +32,7 @@ use std::os::windows::ffi::*;
 ///
 /// ### See Also
 /// *   [Getting Audio Device Identifiers](https://docs.microsoft.com/en-us/windows/win32/xinput/getting-started-with-xinput#getting-audio-device-identifiers)
-pub fn get_audio_device_ids(user_index: impl Into<User>) -> Result<AudioDeviceIds, MethodError> {
+pub fn get_audio_device_ids(user_index: impl Into<u32>) -> Result<AudioDeviceIds, MethodError> {
     #[allow(non_snake_case)] let XInputGetAudioDeviceIds = Imports::get().XInputGetAudioDeviceIds.ok_or(MethodError("XInputGetAudioDeviceIds", THINERR::MISSING_DLL_EXPORT))?;
 
     let mut render_id  = [0u16; 4096];
@@ -45,7 +45,7 @@ pub fn get_audio_device_ids(user_index: impl Into<User>) -> Result<AudioDeviceId
     //  * `user_index`  is well tested from 0 ..= 255 (but retest if the type of `user_index` expands to allow `u32`!)
     //  * `*_ptr`       is never null, should only be accessed during XInputGetAudioDeviceIds's scope
     //  * `*_len`       are in/out, properly initialized.
-    let code = unsafe { XInputGetAudioDeviceIds(user_index.into().into(), render_id.as_mut_ptr(), &mut render_len, capture_id.as_mut_ptr(), &mut capture_len) };
+    let code = unsafe { XInputGetAudioDeviceIds(user_index.into(), render_id.as_mut_ptr(), &mut render_len, capture_id.as_mut_ptr(), &mut capture_len) };
     // a dynamic alloc fallback might be appropriate...? what error is returned? experiment, as it's not documented? D3D's own docs show only 256 byte buffers, surely 16x that (4096) is enough?
     check_error_success("XInputGetAudioDeviceIds", code)?;
     let render_device_id    = OsString::from_wide(render_id .get(..render_len  as usize).ok_or(MethodError("XInputGetAudioDeviceIds (render_device_id conversion)",  THINERR::SLICE_TOO_LARGE))?.split(|c| *c==0).next().unwrap_or(&[]));
@@ -57,17 +57,17 @@ pub fn get_audio_device_ids(user_index: impl Into<User>) -> Result<AudioDeviceId
 }
 
 #[test] fn test_returns() {
-    if get_audio_device_ids(User::Zero) == THINERR::MISSING_DLL_EXPORT { return }
+    if get_audio_device_ids(0u32) == THINERR::MISSING_DLL_EXPORT { return }
 
     // May or may not succeed, even if gamepad not connected
-    if let Err(err) = get_audio_device_ids(User::Zero ) { assert_eq!(ERROR::DEVICE_NOT_CONNECTED, err.kind()); }
-    if let Err(err) = get_audio_device_ids(User::One  ) { assert_eq!(ERROR::DEVICE_NOT_CONNECTED, err.kind()); }
-    if let Err(err) = get_audio_device_ids(User::Two  ) { assert_eq!(ERROR::DEVICE_NOT_CONNECTED, err.kind()); }
-    if let Err(err) = get_audio_device_ids(User::Three) { assert_eq!(ERROR::DEVICE_NOT_CONNECTED, err.kind()); }
+    if let Err(err) = get_audio_device_ids(0u32) { assert_eq!(ERROR::DEVICE_NOT_CONNECTED, err.kind()); }
+    if let Err(err) = get_audio_device_ids(1u32) { assert_eq!(ERROR::DEVICE_NOT_CONNECTED, err.kind()); }
+    if let Err(err) = get_audio_device_ids(2u32) { assert_eq!(ERROR::DEVICE_NOT_CONNECTED, err.kind()); }
+    if let Err(err) = get_audio_device_ids(3u32) { assert_eq!(ERROR::DEVICE_NOT_CONNECTED, err.kind()); }
 
     // Invalid User s
-    assert_eq!(ERROR::BAD_ARGUMENTS, get_audio_device_ids(User::from_unchecked(4))  );
-    assert_eq!(ERROR::BAD_ARGUMENTS, get_audio_device_ids(User::Any)                );
+    assert_eq!(ERROR::BAD_ARGUMENTS, get_audio_device_ids(4u32)     );
+    assert_eq!(ERROR::BAD_ARGUMENTS, get_audio_device_ids(User::Any));
 }
 
 //#cpp2rust XInputGetAudioDeviceIds     = xinput::get_audio_device_ids

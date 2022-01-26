@@ -16,7 +16,7 @@ use winapi::um::xinput::*;
 /// ### Errors
 /// *   [ERROR::BAD_ARGUMENTS]          - Invalid [`User`]
 /// *   [ERROR::DEVICE_NOT_CONNECTED]   - Disconnected [`User`]
-pub fn get_keystroke(user_index: impl Into<User>, _reserved: ()) -> Result<Option<Keystroke>, MethodError> {
+pub fn get_keystroke(user_index: impl Into<u32>, _reserved: ()) -> Result<Option<Keystroke>, MethodError> {
     let mut keystroke = Keystroke::zeroed();
     // SAFETY: ✔️
     //  * fuzzed        in `tests/fuzz-xinput.rs`
@@ -29,17 +29,18 @@ pub fn get_keystroke(user_index: impl Into<User>, _reserved: ()) -> Result<Optio
 }
 
 #[test] fn test_valid_args() {
-    if let Err(err) = get_keystroke(User::Zero,  ()) { assert_eq!(ERROR::DEVICE_NOT_CONNECTED, err.kind()); }
-    if let Err(err) = get_keystroke(User::One,   ()) { assert_eq!(ERROR::DEVICE_NOT_CONNECTED, err.kind()); }
-    if let Err(err) = get_keystroke(User::Two,   ()) { assert_eq!(ERROR::DEVICE_NOT_CONNECTED, err.kind()); }
-    if let Err(err) = get_keystroke(User::Three, ()) { assert_eq!(ERROR::DEVICE_NOT_CONNECTED, err.kind()); }
-    if let Err(err) = get_keystroke(User::Any,   ()) { assert_eq!(ERROR::DEVICE_NOT_CONNECTED, err.kind()); }
+    if let Err(err) = get_keystroke(0u32,       ()) { assert_eq!(ERROR::DEVICE_NOT_CONNECTED, err.kind()); }
+    if let Err(err) = get_keystroke(1u32,       ()) { assert_eq!(ERROR::DEVICE_NOT_CONNECTED, err.kind()); }
+    if let Err(err) = get_keystroke(2u32,       ()) { assert_eq!(ERROR::DEVICE_NOT_CONNECTED, err.kind()); }
+    if let Err(err) = get_keystroke(3u32,       ()) { assert_eq!(ERROR::DEVICE_NOT_CONNECTED, err.kind()); }
+    if let Err(err) = get_keystroke(User::Any,  ()) { assert_eq!(ERROR::DEVICE_NOT_CONNECTED, err.kind()); }
 }
 
 #[test] fn test_invalid_args() {
-    assert_eq!(ERROR::BAD_ARGUMENTS, get_keystroke(User::from_unchecked(4), ()));
-    assert_eq!(ERROR::BAD_ARGUMENTS, get_keystroke(User::from_unchecked(99), ()));
-    assert_eq!(ERROR::BAD_ARGUMENTS, get_keystroke(User::from_unchecked(254), ()));
+    assert_eq!(ERROR::BAD_ARGUMENTS, get_keystroke(4u32, ()));
+    assert_eq!(ERROR::BAD_ARGUMENTS, get_keystroke(99u32, ()));
+    assert_eq!(ERROR::BAD_ARGUMENTS, get_keystroke(254u32, ()));
+    assert_eq!(ERROR::BAD_ARGUMENTS, get_keystroke(9001u32, ()));
 }
 
 //#cpp2rust XInputGetKeystroke  = xinput::get_keystroke

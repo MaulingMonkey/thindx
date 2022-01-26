@@ -21,7 +21,7 @@ use bytemuck::Zeroable;
 /// *   [ERROR::BAD_ARGUMENTS]?         - [`User`] out of bounds?
 /// *   [ERROR::DEVICE_NOT_CONNECTED]?  - [`User`] in bounds, but without a gamepad?
 #[deprecated = "Deprecated in favor of xinput::get_audio_device_ids.  Unavailable for Windows Store apps, may fail on Windows 8."]
-pub fn get_dsound_audio_device_guids(user_index: impl Into<User>) -> Result<DSoundAudioDeviceGuids, MethodError> {
+pub fn get_dsound_audio_device_guids(user_index: impl Into<u32>) -> Result<DSoundAudioDeviceGuids, MethodError> {
     #[allow(non_snake_case)] let XInputGetDSoundAudioDeviceGuids = Imports::get().XInputGetDSoundAudioDeviceGuids.ok_or(MethodError("XInputGetDSoundAudioDeviceGuids", THINERR::MISSING_DLL_EXPORT))?;
 
     let mut guids = DSoundAudioDeviceGuids::zeroed();
@@ -35,7 +35,7 @@ pub fn get_dsound_audio_device_guids(user_index: impl Into<User>) -> Result<DSou
 }
 
 #[test] fn test() {
-    #[allow(deprecated)] let r = get_dsound_audio_device_guids(User::Zero);
+    #[allow(deprecated)] let r = get_dsound_audio_device_guids(0u32);
     if r != THINERR::MISSING_DLL_EXPORT {
         mmrbi::warning!(at: file!(), line: line!() as usize,
             "xinput::get_dsound_audio_device_guids(0) returned {:?}: may be implemented on this platform: add test coverage!",

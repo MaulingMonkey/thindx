@@ -152,18 +152,18 @@ fn initialize_com_for_the_first_time_on_this_thread(mta: bool) {
     // We don't ever try to pair this with uninitializing COM
 }
 
-fn fuzz<T>(title: &str, file: &str, line: u32, codes: &[ErrorKind], f: impl Fn(xinput::User) -> Result<T, MethodError>) {
-    for _ in 0 ..= 100 { let _ = f(xinput::User::Zero ); }
-    for _ in 0 ..= 100 { let _ = f(xinput::User::One  ); }
-    for _ in 0 ..= 100 { let _ = f(xinput::User::Two  ); }
-    for _ in 0 ..= 100 { let _ = f(xinput::User::Three); }
-    for _ in 0 ..= 100 { let _ = f(xinput::User::Any  ); }
-    for _ in 0 ..= 100 { let _ = f(xinput::User::from_unchecked(4)); }
-    for _ in 0 ..= 100 { let _ = f(xinput::User::from_unchecked(42)); }
-    for _ in 0 ..= 100 { let _ = f(xinput::User::from_unchecked(67)); }
-    for _ in 0 ..= 100 { let _ = f(xinput::User::from_unchecked(254)); }
+fn fuzz<T>(title: &str, file: &str, line: u32, codes: &[ErrorKind], f: impl Fn(u32) -> Result<T, MethodError>) {
+    for _ in 0 ..= 100 { let _ = f(0); }
+    for _ in 0 ..= 100 { let _ = f(1); }
+    for _ in 0 ..= 100 { let _ = f(2); }
+    for _ in 0 ..= 100 { let _ = f(3); }
+    for _ in 0 ..= 100 { let _ = f(xinput::User::Any.into()); }
+    for _ in 0 ..= 100 { let _ = f(4); }
+    for _ in 0 ..= 100 { let _ = f(42); }
+    for _ in 0 ..= 100 { let _ = f(67); }
+    for _ in 0 ..= 100 { let _ = f(254); }
 
-    for u in (0 ..= 255).map(|u| xinput::User::from_unchecked(u)) {
+    for u in (0 ..= 255).chain([256, 4096, 12005, 123456, 1234567, 12345678, 123456789, 0x0F00_0000, 0x1000_0000, 0x1100_0000, 0xFFFF_FFFF].iter().copied()) {
         if let Err(err) = f(u) {
             let kind = err.kind();
             if !codes.contains(&kind) { fatal!(at: file, line: line as _, "when fuzzing {}: unexpected error {:?}", title, kind); }
