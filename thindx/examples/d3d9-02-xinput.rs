@@ -350,7 +350,7 @@ fn png2tex(device: &Device, path: &str) -> Texture { // TODO: replace with utili
             for y in 0..h {
                 let src = pngbuf[y * src_pitch as usize..].as_ptr();
                 let dst = (lock.pBits as *mut u8).add(y * lock.Pitch as usize);
-                std::ptr::copy_nonoverlapping(src, dst.cast(), 4 * w);
+                std::ptr::copy_nonoverlapping(src, dst, src_pitch);
             }
             texture.unlock_rect(0)?;
         }
