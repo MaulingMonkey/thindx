@@ -16,13 +16,13 @@ use winapi::um::xinput::*;
 /// ### Errors
 /// *   [ERROR::BAD_ARGUMENTS]          - Invalid [`User`]
 /// *   [ERROR::DEVICE_NOT_CONNECTED]   - Disconnected [`User`]
-pub fn get_keystroke(user_index: impl Into<User>, _reserved: ()) -> Result<Option<Keystroke>, MethodError> {
+pub fn get_keystroke(user_index: impl Into<u32>, _reserved: ()) -> Result<Option<Keystroke>, MethodError> {
     let mut keystroke = Keystroke::zeroed();
     // SAFETY: ✔️
     //  * fuzzed        in `tests/fuzz-xinput.rs`
     //  * tested        in `examples/xinput-exercise-all.rs`
-    //  * `user_index`  is well tested from 0 ..= 255 (but retest if the type of `user_index` expands to allow `u32`!)
-    let code = unsafe { XInputGetKeystroke(user_index.into().into(), 0, &mut keystroke as *mut _ as *mut _) };
+    //  * `user_index`  is well tested
+    let code = unsafe { XInputGetKeystroke(user_index.into(), 0, &mut keystroke as *mut _ as *mut _) };
     if code == ERROR_EMPTY { return Ok(None) }
     check_error_success("XInputGetKeystroke", code)?;
     Ok(Some(keystroke))
@@ -37,9 +37,10 @@ pub fn get_keystroke(user_index: impl Into<User>, _reserved: ()) -> Result<Optio
 }
 
 #[test] fn test_invalid_args() {
-    assert_eq!(ERROR::BAD_ARGUMENTS, get_keystroke(User::from_unchecked(4), ()));
-    assert_eq!(ERROR::BAD_ARGUMENTS, get_keystroke(User::from_unchecked(99), ()));
-    assert_eq!(ERROR::BAD_ARGUMENTS, get_keystroke(User::from_unchecked(254), ()));
+    // User::Any is valid
+    for u in User::iter_invalid() {
+        assert_eq!(ERROR::BAD_ARGUMENTS, get_keystroke(u, ()));
+    }
 }
 
 //#cpp2rust XInputGetKeystroke  = xinput::get_keystroke

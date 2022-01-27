@@ -36,6 +36,13 @@ impl From<User> for u32 { fn from(user: User) -> Self { user.0.into() } } // XIn
 
     /// Iterator over valid user indicies [User]\(0\) .. [User]\(4\)
     pub fn iter_valid() -> impl Iterator<Item = User> { [User::Zero, User::One, User::Two, User::Three].iter().copied() }
+
+    /// Iterator over a wide range of invalid user indicies for testing purpouses.  Does **not** include [User::Any].
+    /// Includes *every* user index from 4 ..= 254, 256, 512, ..., 0x8000_0000
+    #[cfg_attr(not(test), allow(dead_code))]
+    pub(crate) fn iter_invalid() -> impl Iterator<Item = u32> {
+        (4 ..= 254).chain((8 .. 32).map(|pow| 1<<pow))
+    }
 }
 
 //#cpp2rust XUSER_INDEX_ANY     = xinput::User::Any

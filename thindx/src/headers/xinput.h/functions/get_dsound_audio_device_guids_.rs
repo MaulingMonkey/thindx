@@ -27,7 +27,7 @@ pub fn get_dsound_audio_device_guids(user_index: impl Into<User>) -> Result<DSou
     let mut guids = DSoundAudioDeviceGuids::zeroed();
     // SAFETY: ❌ Untested (need a system actually defining XInputGetDSoundAudioDeviceGuids)
     //  * fuzzed        in `tests/fuzz-xinput.rs`
-    //  * `user_index`  is well tested from 0 ..= 255 (but retest if the type of `user_index` expands to allow `u32`!)
+    //  * `user_index`  ❌ should be well tested
     //  * `*_guid`      are nice and fixed-size etc.
     let code = unsafe { XInputGetDSoundAudioDeviceGuids(user_index.into().into(), &mut guids.dsound_render_guid as *mut _ as *mut _, &mut guids.dsound_capture_guid as *mut _ as *mut _) };
     check_error_success("XInputGetDSoundAudioDeviceGuids", code)?;
