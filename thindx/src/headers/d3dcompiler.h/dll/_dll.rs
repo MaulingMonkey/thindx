@@ -25,52 +25,50 @@ mod d3d11_methods;                  pub use d3d11_methods::*;
 
 /// Lazily-loaded `d3dcompiler_NN.dll`
 ///
-/// <div class="interface-tree">
+/// &nbsp;   **[Constructors](#constructors)**<br>
+/// [new](Compiler::load_system)(version: [u32]) -> Result&lt;[Compiler]&gt;<br>
 ///
-/// &nbsp;   **[Constructors](#constructors)**
-/// [new](Compiler::load_system)(version: [u32]) -> Result&lt;[Compiler]&gt;
+/// &nbsp;   **[Compile & Preprocess HLSL to Bytecode](#compile)**<br>
+/// [compile_from_file](Compiler::compile_from_file)(...) - compile hlsl to bytecode<br>
+/// [compile](Compiler::compile)(...) - compile hlsl to bytecode<br>
+/// [compile2](Compiler::compile2)(...) - compile hlsl to bytecode<br>
+/// [preprocess](Compiler::preprocess)(...) - preprocess HLSL `#include`s and `#define`s<br>
 ///
-/// &nbsp;   **[Compile & Preprocess HLSL to Bytecode](#compile)**
-/// [compile_from_file](Compiler::compile_from_file)(...) - compile hlsl to bytecode
-/// [compile](Compiler::compile)(...) - compile hlsl to bytecode
-/// [compile2](Compiler::compile2)(...) - compile hlsl to bytecode
-/// [preprocess](Compiler::preprocess)(...) - preprocess HLSL `#include`s and `#define`s
+/// &nbsp;   **[Manipulate Bytecode Archives](#archive)**<br>
+/// [compress_shaders](Compiler::compress_shaders)(...) - compress hlsl or bytecode<br>
+/// [decompress_shaders](Compiler::decompress_shaders)(...) - decompress shaders<br>
+/// [decompress_shaders_inplace](Compiler::decompress_shaders_inplace)(...) - decompress shaders without allocating<br>
+/// [decompress_shaders_count](Compiler::decompress_shaders_count)(...) - get the number of shaders in a compressed archive<br>
 ///
-/// &nbsp;   **[Manipulate Bytecode Archives](#archive)**
-/// [compress_shaders](Compiler::compress_shaders)(...) - compress hlsl or bytecode
-/// [decompress_shaders](Compiler::decompress_shaders)(...) - decompress shaders
-/// [decompress_shaders_inplace](Compiler::decompress_shaders_inplace)(...) - decompress shaders without allocating
-/// [decompress_shaders_count](Compiler::decompress_shaders_count)(...) - get the number of shaders in a compressed archive
+/// &nbsp;   **[Manipulate Bytecode by BlobPart](#parts)**<br>
+/// [get_blob_part](Compiler::get_blob_part)(...) - read a [BlobPart] of a shader bytecode blob<br>
+/// [get_debug_info](Compiler::get_debug_info)(...) - read [BlobPart::DebugInfo] of a shader bytecode blob<br>
+/// [get_input_and_output_signature_blob](Compiler::get_input_and_output_signature_blob)(...) - read [BlobPart::InputAndOutputSignatureBlob] of a shader bytecode blob<br>
+/// [get_input_signature_blob](Compiler::get_input_signature_blob)(...) - read [BlobPart::InputSignatureBlob] of a shader bytecode blob<br>
+/// [get_output_signature_blob](Compiler::get_output_signature_blob)(...) - read [BlobPart::OutputSignatureBlob] of a shader bytecode blob<br>
+/// [set_blob_part](Compiler::set_blob_part)(...) - write a [BlobPart] of a shader bytecode blob<br>
+/// [strip_shader](Compiler::strip_shader)(...) - strip debug information etc. from bytecode<br>
 ///
-/// &nbsp;   **[Manipulate Bytecode by BlobPart](#parts)**
-/// [get_blob_part](Compiler::get_blob_part)(...) - read a [BlobPart] of a shader bytecode blob
-/// [get_debug_info](Compiler::get_debug_info)(...) - read [BlobPart::DebugInfo] of a shader bytecode blob
-/// [get_input_and_output_signature_blob](Compiler::get_input_and_output_signature_blob)(...) - read [BlobPart::InputAndOutputSignatureBlob] of a shader bytecode blob
-/// [get_input_signature_blob](Compiler::get_input_signature_blob)(...) - read [BlobPart::InputSignatureBlob] of a shader bytecode blob
-/// [get_output_signature_blob](Compiler::get_output_signature_blob)(...) - read [BlobPart::OutputSignatureBlob] of a shader bytecode blob
-/// [set_blob_part](Compiler::set_blob_part)(...) - write a [BlobPart] of a shader bytecode blob
-/// [strip_shader](Compiler::strip_shader)(...) - strip debug information etc. from bytecode
+/// &nbsp;   **[Bytecode Reflection](#reflection)**<br>
+/// [reflect](Compiler::reflect)(...) - reflect over a single shader's bytecode<br>
+/// [reflect_library](Compiler::reflect_library)(...) - ???<br>
 ///
-/// &nbsp;   **[Bytecode Reflection](#reflection)**
-/// [reflect](Compiler::reflect)(...) - reflect over a single shader's bytecode
-/// [reflect_library](Compiler::reflect_library)(...) - ???
+/// &nbsp;   **[Bytecode Debugging](#debugging)**<br>
+/// [disassemble](Compiler::disassemble)(...) - disassemble bytecode as human readable text<br>
+/// [disassemble_region](Compiler::disassemble_region)(...) - disassemble bytecode as human readable text<br>
+/// [get_trace_instruction_offsets_count](Compiler::get_trace_instruction_offsets_count)(...) - get the number of trace instruction byte offsets<br>
+/// [get_trace_instruction_offsets_inplace](Compiler::get_trace_instruction_offsets_inplace)(...) - read trace instruction byte offsets<br>
+/// [get_trace_instruction_offsets](Compiler::get_trace_instruction_offsets)(...) - read trace instruction byte offsets<br>
 ///
-/// &nbsp;   **[Bytecode Debugging](#debugging)**
-/// [disassemble](Compiler::disassemble)(...) - disassemble bytecode as human readable text
-/// [disassemble_region](Compiler::disassemble_region)(...) - disassemble bytecode as human readable text
-/// [get_trace_instruction_offsets_count](Compiler::get_trace_instruction_offsets_count)(...) - get the number of trace instruction byte offsets
-/// [get_trace_instruction_offsets_inplace](Compiler::get_trace_instruction_offsets_inplace)(...) - read trace instruction byte offsets
-/// [get_trace_instruction_offsets](Compiler::get_trace_instruction_offsets)(...) - read trace instruction byte offsets
+/// &nbsp;   **[ReadOnlyBlob Utilities](#blobs)**<br>
+/// [create_read_only_blob](Compiler::create_read_only_blob)(...) - create a [ReadOnlyBlob] from memory<br>
+/// [read_file_to_blob](Compiler::read_file_to_blob)(...) - read a [ReadOnlyBlob] from disk<br>
+/// [write_blob_to_file](Compiler::write_blob_to_file)(...) - write a [ReadOnlyBlob] to disk<br>
 ///
-/// &nbsp;   **[ReadOnlyBlob Utilities](#blobs)**
-/// [create_read_only_blob](Compiler::create_read_only_blob)(...) - create a [ReadOnlyBlob] from memory
-/// [read_file_to_blob](Compiler::read_file_to_blob)(...) - read a [ReadOnlyBlob] from disk
-/// [write_blob_to_file](Compiler::write_blob_to_file)(...) - write a [ReadOnlyBlob] to disk
-///
-/// &nbsp;   **[D3D11 Factories & APIs](#d3d11)**
-/// [create_function_linking_graph](Compiler::create_function_linking_graph)(...) - create a [d3d11::FunctionLinkingGraph]
-/// [create_linker](Compiler::create_linker)(...) - create a [d3d11::Linker]
-/// [load_module](Compiler::load_module)(...) - load a [d3d11::Module]</div>
+/// &nbsp;   **[D3D11 Factories & APIs](#d3d11)**<br>
+/// [create_function_linking_graph](Compiler::create_function_linking_graph)(...) - create a [d3d11::FunctionLinkingGraph]<br>
+/// [create_linker](Compiler::create_linker)(...) - create a [d3d11::Linker]<br>
+/// [load_module](Compiler::load_module)(...) - load a [d3d11::Module]<br>
 #[allow(non_snake_case)] // fn ptrs
 #[allow(clippy::type_complexity)] // no point extracting `type`s with these single use types... would just increase the chances of editing shrapnel
 pub struct Compiler {
