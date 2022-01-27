@@ -2,7 +2,6 @@
 
 [![GitHub](https://img.shields.io/github/stars/MaulingMonkey/thindx.svg?label=GitHub&style=social)](https://github.com/MaulingMonkey/thindx)
 [![Build Status](https://github.com/MaulingMonkey/thindx/workflows/Rust/badge.svg)](https://github.com/MaulingMonkey/thindx/actions?query=workflow%3Arust)
-[![dependency status](https://deps.rs/repo/github/MaulingMonkey/thindx/status.svg)](https://deps.rs/repo/github/MaulingMonkey/thindx)
 
 [![crates.io](https://img.shields.io/crates/v/thindx.svg)](https://crates.io/crates/thindx)
 [![docs.rs](https://docs.rs/thindx/badge.svg)](https://docs.rs/thindx)
