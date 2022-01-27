@@ -115,7 +115,7 @@ impl Imports {
 /// Well, perhaps eventually I'll verify xinput.dll is code-signed by Microsoft, which would fix that well enough for my
 /// tastes, but for now this is good enough for me ;)
 unsafe fn try_find_loaded_xinput() -> Option<Library> {
-    let proc = GetCurrentProcess();
+    let proc = unsafe { GetCurrentProcess() };
     let mut modules = Vec::<HMODULE>::new();
 
     let mut max_retries = 64;
@@ -123,7 +123,7 @@ unsafe fn try_find_loaded_xinput() -> Option<Library> {
     loop {
         let available_bytes = u32::try_from(std::mem::size_of_val(&modules[..])).unwrap_or(!0);
         let mut needed_bytes : u32 = 0;
-        let ok = EnumProcessModulesEx(proc, modules.as_mut_ptr(), available_bytes, &mut needed_bytes, LIST_MODULES_DEFAULT);
+        let ok = unsafe { EnumProcessModulesEx(proc, modules.as_mut_ptr(), available_bytes, &mut needed_bytes, LIST_MODULES_DEFAULT) };
         if ok == FALSE {
             if max_retries == 0 { return None; }
             max_retries -= 1;
@@ -148,7 +148,7 @@ unsafe fn try_find_loaded_xinput() -> Option<Library> {
         ref mut multiple => {
             let mut name = [0u8; 4096];
             multiple.sort_by_cached_key(|&m|{
-                let len = GetModuleBaseNameA(proc, m, name.as_mut_ptr().cast(), name.len() as _) as usize;
+                let len = unsafe { GetModuleBaseNameA(proc, m, name.as_mut_ptr().cast(), name.len() as _) } as usize;
                 let name = &mut name[..len];
                 name.make_ascii_lowercase();
                 let prefix = b"xinput_";
