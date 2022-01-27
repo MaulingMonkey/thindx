@@ -67,3 +67,5 @@ impl Deref for ShaderData<'_> {
     assert_eq!(std::mem::align_of::<ShaderData>(), std::mem::align_of::<D3D_SHADER_DATA>());
     assert_eq!(std::mem::size_of ::<ShaderData>(), std::mem::size_of ::<D3D_SHADER_DATA>());
 }
+
+//#cpp2rust D3D_SHADER_DATA                         = d3d::ShaderData

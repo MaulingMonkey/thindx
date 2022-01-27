@@ -344,3 +344,11 @@ impl Compiler {
         Ok(unsafe { CodeBlob::from_unchecked(ReadOnlyBlob::from_raw(blob)) })
     }
 }
+
+//#cpp2rust D3DGetBlobPart                          = d3d::Compiler::get_blob_part
+//#cpp2rust D3DGetDebugInfo                         = d3d::Compiler::get_debug_info
+//#cpp2rust D3DGetInputAndOutputSignatureBlob       = d3d::Compiler::get_input_and_output_signature_blob
+//#cpp2rust D3DGetInputSignatureBlob                = d3d::Compiler::get_input_signature_blob
+//#cpp2rust D3DGetOutputSignatureBlob               = d3d::Compiler::get_output_signature_blob
+//#cpp2rust D3DSetBlobPart                          = d3d::Compiler::set_blob_part
+//#cpp2rust D3DStripShader                          = d3d::Compiler::strip_shader

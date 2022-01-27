@@ -174,3 +174,8 @@ impl<'lr> Iterator for LibraryReflectionFunctionsIter<'lr> {
         }
     }
 }
+
+//#cpp2rust ID3D11LibraryReflection                         = d3d11::LibraryReflection
+
+//#cpp2rust ID3D11LibraryReflection::GetDesc                = d3d11::LibraryReflection::get_desc
+//#cpp2rust ID3D11LibraryReflection::GetFunctionByIndex     = d3d11::LibraryReflection::get_function_by_index

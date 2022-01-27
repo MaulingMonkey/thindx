@@ -395,3 +395,9 @@ impl Compiler {
         Ok(buffer)
     }
 }
+
+//#cpp2rust D3DDisassemble                          = d3d::Compiler::disassemble
+//TODO:     D3DDisassemble10Effect                  = d3d::Compiler::disassemble_10_effect
+//#cpp2rust D3DDisassembleRegion                    = d3d::Compiler::disassemble_region
+//#cpp2rust D3DGetTraceInstructionOffsets           = d3d::Compiler::get_trace_instruction_offsets
+//#cpp2rust D3DGetTraceInstructionOffsets           = d3d::Compiler::get_trace_instruction_offsets_inplace

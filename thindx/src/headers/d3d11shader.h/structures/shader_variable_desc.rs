@@ -61,3 +61,5 @@ test_layout! { ShaderVariableDesc => D3D11_SHADER_VARIABLE_DESC {
     start_sampler   => StartSampler,
     sampler_size    => SamplerSize,
 }}
+
+//#cpp2rust D3D11_SHADER_VARIABLE_DESC              = d3d11::ShaderVariableDesc

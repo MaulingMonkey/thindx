@@ -93,3 +93,10 @@ impl<'r> ShaderReflectionVariable<'r> {
         unsafe { ShaderReflectionType::from_raw(self.phantom, ptr) }
     }
 }
+
+//#cpp2rust ID3D11ShaderReflectionVariable                      = d3d11::ShaderReflectionVariable
+
+//#cpp2rust ID3D11ShaderReflectionVariable::GetBuffer           = d3d11::ShaderReflectionVariable::get_buffer
+//#cpp2rust ID3D11ShaderReflectionVariable::GetDesc             = d3d11::ShaderReflectionVariable::get_desc
+//#cpp2rust ID3D11ShaderReflectionVariable::GetInterfaceSlot    = d3d11::ShaderReflectionVariable::get_interface_slot
+//#cpp2rust ID3D11ShaderReflectionVariable::GetType             = d3d11::ShaderReflectionVariable::get_type

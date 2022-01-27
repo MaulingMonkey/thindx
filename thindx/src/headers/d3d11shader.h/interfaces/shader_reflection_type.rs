@@ -251,3 +251,17 @@ impl<'r> ShaderReflectionType<'r> {
         }
     }
 }
+
+//#cpp2rust ID3D11ShaderReflectionType                          = d3d11::ShaderReflectionType
+
+//#cpp2rust ID3D11ShaderReflectionType::GetBaseClass            = d3d11::ShaderReflectionType::get_base_class
+//#cpp2rust ID3D11ShaderReflectionType::GetDesc                 = d3d11::ShaderReflectionType::get_desc
+//#cpp2rust ID3D11ShaderReflectionType::GetInterfaceByIndex     = d3d11::ShaderReflectionType::get_interface_by_index
+//#cpp2rust ID3D11ShaderReflectionType::GetMemberTypeByIndex    = d3d11::ShaderReflectionType::get_member_type_by_index
+//#cpp2rust ID3D11ShaderReflectionType::GetMemberTypeByName     = d3d11::ShaderReflectionType::get_member_type_by_name
+//#cpp2rust ID3D11ShaderReflectionType::GetMemberTypeName       = d3d11::ShaderReflectionType::get_member_type_name
+//#cpp2rust ID3D11ShaderReflectionType::GetNumInterfaces        = d3d11::ShaderReflectionType::get_num_interfaces
+//#cpp2rust ID3D11ShaderReflectionType::GetSubType              = d3d11::ShaderReflectionType::get_sub_type
+//#cpp2rust ID3D11ShaderReflectionType::ImplementsInterface     = d3d11::ShaderReflectionType::implements_interface
+//#cpp2rust ID3D11ShaderReflectionType::IsEqual                 = d3d11::ShaderReflectionType::is_equal
+//#cpp2rust ID3D11ShaderReflectionType::IsOfType                = d3d11::ShaderReflectionType::is_of_type

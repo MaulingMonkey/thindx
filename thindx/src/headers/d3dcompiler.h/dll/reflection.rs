@@ -266,3 +266,7 @@ impl Compiler {
 
     // TODO: full test coverage of all methods
 }
+
+//#cpp2rust D3DReflect                              = d3d::Compiler::reflect
+//#cpp2rust D3DReflect                              = d3d::Compiler::reflect11
+//#cpp2rust D3DReflectLibrary                       = d3d::Compiler::reflect_library

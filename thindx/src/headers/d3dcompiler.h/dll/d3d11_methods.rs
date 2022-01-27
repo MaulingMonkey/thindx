@@ -122,3 +122,7 @@ impl Compiler {
         Ok(unsafe { d3d11::Module::from_raw(module) })
     }
 }
+
+//#cpp2rust D3DCreateFunctionLinkingGraph           = d3d::Compiler::create_function_linking_graph
+//#cpp2rust D3DCreateLinker                         = d3d::Compiler::create_linker
+//#cpp2rust D3DLoadModule                           = d3d::Compiler::load_module

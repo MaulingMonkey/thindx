@@ -130,3 +130,5 @@ test_layout! { FunctionDesc => D3D11_FUNCTION_DESC {
     has_10_level_9_vertex_shader    => Has10Level9VertexShader,
     has_10_level_9_pixel_shader     => Has10Level9PixelShader,
 }}
+
+//#cpp2rust D3D11_FUNCTION_DESC     = d3d11::FunctionDesc

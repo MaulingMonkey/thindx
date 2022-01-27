@@ -101,3 +101,5 @@ test_layout! { ShaderDesc => D3D11_SHADER_DESC {
     interlocked_instructions        => cInterlockedInstructions,
     texture_store_instructions      => cTextureStoreInstructions,
 }}
+
+//#cpp2rust D3D11_SHADER_DESC                       = d3d11::ShaderDesc

@@ -40,3 +40,5 @@ test_layout! { ShaderTypeDesc => D3D11_SHADER_TYPE_DESC {
     offset      => Offset,
     name        => Name,
 }}
+
+//#cpp2rust D3D11_SHADER_TYPE_DESC                  = d3d11::ShaderTypeDesc

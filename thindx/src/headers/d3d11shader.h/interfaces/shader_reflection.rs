@@ -520,3 +520,25 @@ impl ShaderReflection {
         0 != unsafe { self.0.IsSampleFrequencyShader() }
     }
 }
+
+//#cpp2rust ID3D11ShaderReflection                                          = d3d11::ShaderReflection
+
+//#cpp2rust ID3D11ShaderReflection::GetBitwiseInstructionCount              = d3d11::ShaderReflection::get_bitwise_instruction_count
+//#cpp2rust ID3D11ShaderReflection::GetConstantBufferByIndex                = d3d11::ShaderReflection::get_constant_buffer_by_index
+//#cpp2rust ID3D11ShaderReflection::GetConstantBufferByName                 = d3d11::ShaderReflection::get_constant_buffer_by_name
+//#cpp2rust ID3D11ShaderReflection::GetConversionInstructionCount           = d3d11::ShaderReflection::get_conversion_instruction_count
+//#cpp2rust ID3D11ShaderReflection::GetDesc                                 = d3d11::ShaderReflection::get_desc
+//#cpp2rust ID3D11ShaderReflection::GetGSInputPrimitive                     = d3d11::ShaderReflection::get_gs_input_primitive
+//#cpp2rust ID3D11ShaderReflection::GetInputParameterDesc                   = d3d11::ShaderReflection::get_input_parameter_desc
+//#cpp2rust ID3D11ShaderReflection::GetMinFeatureLevel                      = d3d11::ShaderReflection::get_min_feature_level
+//#cpp2rust ID3D11ShaderReflection::GetMovcInstructionCount                 = d3d11::ShaderReflection::get_movc_instruction_count
+//#cpp2rust ID3D11ShaderReflection::GetMovInstructionCount                  = d3d11::ShaderReflection::get_mov_instruction_count
+//#cpp2rust ID3D11ShaderReflection::GetNumInterfaceSlots                    = d3d11::ShaderReflection::get_num_interface_slots
+//#cpp2rust ID3D11ShaderReflection::GetOutputParameterDesc                  = d3d11::ShaderReflection::get_output_parameter_desc
+//#cpp2rust ID3D11ShaderReflection::GetPatchConstantParameterDesc           = d3d11::ShaderReflection::get_patch_constant_parameter_desc
+//#cpp2rust ID3D11ShaderReflection::GetRequiresFlags                        = d3d11::ShaderReflection::get_requires_flags
+//#cpp2rust ID3D11ShaderReflection::GetResourceBindingDesc                  = d3d11::ShaderReflection::get_resource_binding_desc
+//#cpp2rust ID3D11ShaderReflection::GetResourceBindingDescByName            = d3d11::ShaderReflection::get_resource_binding_desc_by_name
+//#cpp2rust ID3D11ShaderReflection::GetThreadGroupSize                      = d3d11::ShaderReflection::get_thread_group_size
+//#cpp2rust ID3D11ShaderReflection::GetVariableByName                       = d3d11::ShaderReflection::get_variable_by_name
+//#cpp2rust ID3D11ShaderReflection::IsSampleFrequencyShader                 = d3d11::ShaderReflection::is_sample_frequency_shader

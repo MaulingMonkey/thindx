@@ -156,3 +156,8 @@ impl Compiler {
         MethodError::check("D3DWriteBlobToFile", hr)
     }
 }
+
+//TODO:     D3DCreateBlob                           = d3d::Compiler::create_blob
+//#cpp2rust D3DCreateBlob                           = d3d::Compiler::create_read_only_blob
+//#cpp2rust D3DReadFileToBlob                       = d3d::Compiler::read_file_to_blob
+//#cpp2rust D3DWriteBlobToFile                      = d3d::Compiler::write_blob_to_file

@@ -34,3 +34,5 @@ test_layout! { ShaderBufferDesc => D3D11_SHADER_BUFFER_DESC {
     size                            => Size,
     flags                           => uFlags,
 }}
+
+//#cpp2rust D3D11_SHADER_BUFFER_DESC                = d3d11::ShaderBufferDesc

@@ -108,6 +108,7 @@ impl Debug for ShaderVersion {
 }
 
 //#cpp2rust D3D11_SHADER_VERSION_TYPE       = d3d11::ShaderVersionType
+
 //#cpp2rust D3D11_SHVER_PIXEL_SHADER        = d3d11::ShVer::PixelShader
 //#cpp2rust D3D11_SHVER_VERTEX_SHADER       = d3d11::ShVer::VertexShader
 //#cpp2rust D3D11_SHVER_GEOMETRY_SHADER     = d3d11::ShVer::GeometryShader

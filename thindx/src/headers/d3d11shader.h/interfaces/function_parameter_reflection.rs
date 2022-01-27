@@ -121,3 +121,6 @@ impl<'r> FunctionParameterReflection<'r> {
         Ok(desc)
     }
 }
+
+//#cpp2rust ID3D11FunctionParameterReflection           = d3d11::FunctionParameterReflection
+//#cpp2rust ID3D11FunctionParameterReflection::GetDesc  = d3d11::FunctionParameterReflection::get_desc

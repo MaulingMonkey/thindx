@@ -43,3 +43,5 @@ test_layout! { ShaderInputBindDesc => D3D11_SHADER_INPUT_BIND_DESC {
     dimension       => Dimension,
     num_samples     => NumSamples,
 }}
+
+//#cpp2rust D3D11_SHADER_INPUT_BIND_DESC            = d3d11::ShaderInputBindDesc

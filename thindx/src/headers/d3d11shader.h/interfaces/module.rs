@@ -69,3 +69,6 @@ impl Module {
         Ok(unsafe { ModuleInstance::from_raw(instance) })
     }
 }
+
+//#cpp2rust ID3D11Module                    = d3d11::Module
+//#cpp2rust ID3D11Module::CreateInstance    = d3d11::Module::create_instance

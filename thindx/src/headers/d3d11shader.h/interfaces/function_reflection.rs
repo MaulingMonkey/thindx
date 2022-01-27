@@ -424,3 +424,13 @@ impl<'r> FunctionReflection<'r> {
         unsafe { ShaderReflectionVariable::from_raw(self.phantom, ptr) }
     }
 }
+
+//#cpp2rust ID3D11FunctionReflection                                        = d3d11::FunctionReflection
+
+//#cpp2rust ID3D11FunctionReflection::GetConstantBufferByIndex              = d3d11::FunctionReflection::get_constant_buffer_by_index
+//#cpp2rust ID3D11FunctionReflection::GetConstantBufferByName               = d3d11::FunctionReflection::get_constant_buffer_by_name
+//#cpp2rust ID3D11FunctionReflection::GetDesc                               = d3d11::FunctionReflection::get_desc
+//#cpp2rust ID3D11FunctionReflection::GetFunctionParameter                  = d3d11::FunctionReflection::get_function_parameter
+//#cpp2rust ID3D11FunctionReflection::GetResourceBindingDesc                = d3d11::FunctionReflection::get_resource_binding_desc
+//#cpp2rust ID3D11FunctionReflection::GetResourceBindingDescByName          = d3d11::FunctionReflection::get_resource_binding_desc_by_name
+//#cpp2rust ID3D11FunctionReflection::GetVariableByName                     = d3d11::FunctionReflection::get_variable_by_name

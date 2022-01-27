@@ -56,3 +56,5 @@ test_layout! { LibraryDesc => D3D11_LIBRARY_DESC {
     flags           => Flags,
     function_count  => FunctionCount,
 }}
+
+//#cpp2rust D3D11_LIBRARY_DESC                      = d3d11::LibraryDesc

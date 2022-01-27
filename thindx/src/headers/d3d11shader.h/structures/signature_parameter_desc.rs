@@ -45,3 +45,5 @@ test_layout! { SignatureParameterDesc => D3D11_SIGNATURE_PARAMETER_DESC {
     stream              => Stream,
     min_precision       => MinPrecision,
 }}
+
+//#cpp2rust D3D11_SIGNATURE_PARAMETER_DESC          = d3d11::SignatureParameterDesc

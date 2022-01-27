@@ -567,3 +567,8 @@ impl Compiler {
         }
     }
 }
+
+//#cpp2rust D3DCompile                              = d3d::Compiler::compile
+//#cpp2rust D3DCompile2                             = d3d::Compiler::compile2
+//#cpp2rust D3DCompileFromFile                      = d3d::Compiler::compile_from_file
+//#cpp2rust D3DPreprocess                           = d3d::Compiler::preprocess

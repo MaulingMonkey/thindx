@@ -92,3 +92,5 @@ test_layout! { ParameterDesc => winapi::um::d3d11shader::D3D11_PARAMETER_DESC {
     first_out_register      => FirstOutRegister,
     first_out_component     => FirstOutComponent,
 }}
+
+//#cpp2rust D3D11_PARAMETER_DESC                    = d3d11::ParameterDesc

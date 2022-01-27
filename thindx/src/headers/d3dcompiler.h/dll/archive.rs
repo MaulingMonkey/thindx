@@ -259,3 +259,8 @@ impl Compiler {
     // TODO: D3DDecompressShaders accepting array of indicies ?
     // TODO: D3DDecompressShaders eliding Option s?
 }
+
+//#cpp2rust D3DCompressShaders                      = d3d::Compiler::compress_shaders
+//#cpp2rust D3DDecompressShaders                    = d3d::Compiler::decompress_shaders
+//#cpp2rust D3DDecompressShaders                    = d3d::Compiler::decompress_shaders_count
+//#cpp2rust D3DDecompressShaders                    = d3d::Compiler::decompress_shaders_inplace

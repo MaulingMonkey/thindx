@@ -363,3 +363,14 @@ impl FunctionLinkingGraph {
         Ok(unsafe { LinkingNode::from_raw(node) })
     }
 }
+
+//#cpp2rust ID3D11FunctionLinkingGraph                          = d3d11::FunctionLinkingGraph
+
+//#cpp2rust ID3D11FunctionLinkingGraph::CallFunction            = d3d11::FunctionLinkingGraph::call_function
+//#cpp2rust ID3D11FunctionLinkingGraph::CreateModuleInstance    = d3d11::FunctionLinkingGraph::create_module_instance
+//#cpp2rust ID3D11FunctionLinkingGraph::GenerateHlsl            = d3d11::FunctionLinkingGraph::generate_hlsl
+//#cpp2rust ID3D11FunctionLinkingGraph::GetLastError            = d3d11::FunctionLinkingGraph::get_last_error
+//#cpp2rust ID3D11FunctionLinkingGraph::PassValue               = d3d11::FunctionLinkingGraph::pass_value
+//#cpp2rust ID3D11FunctionLinkingGraph::PassValueWithSwizzle    = d3d11::FunctionLinkingGraph::pass_value_with_swizzle
+//#cpp2rust ID3D11FunctionLinkingGraph::SetInputSignature       = d3d11::FunctionLinkingGraph::set_input_signature
+//#cpp2rust ID3D11FunctionLinkingGraph::SetOutputSignature      = d3d11::FunctionLinkingGraph::set_output_signature

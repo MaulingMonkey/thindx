@@ -319,3 +319,16 @@ impl ModuleInstance {
         check("ID3D11ModuleInstance::BindUnorderedAccessViewByName", hr)
     }
 }
+
+//#cpp2rust ID3D11ModuleInstance                                            = d3d11::ModuleInstance
+
+//#cpp2rust ID3D11ModuleInstance::BindConstantBuffer                        = d3d11::ModuleInstance::bind_constant_buffer
+//#cpp2rust ID3D11ModuleInstance::BindConstantBufferByName                  = d3d11::ModuleInstance::bind_constant_buffer_by_name
+//#cpp2rust ID3D11ModuleInstance::BindResource                              = d3d11::ModuleInstance::bind_resource
+//#cpp2rust ID3D11ModuleInstance::BindResourceAsUnorderedAccessView         = d3d11::ModuleInstance::bind_resource_as_unordered_access_view
+//#cpp2rust ID3D11ModuleInstance::BindResourceAsUnorderedAccessViewByName   = d3d11::ModuleInstance::bind_resource_as_unordered_access_view_by_name
+//#cpp2rust ID3D11ModuleInstance::BindResourceByName                        = d3d11::ModuleInstance::bind_resource_by_name
+//#cpp2rust ID3D11ModuleInstance::BindSampler                               = d3d11::ModuleInstance::bind_sampler
+//#cpp2rust ID3D11ModuleInstance::BindSamplerByName                         = d3d11::ModuleInstance::bind_sampler_by_name
+//#cpp2rust ID3D11ModuleInstance::BindUnorderedAccessView                   = d3d11::ModuleInstance::bind_unordered_access_view
+//#cpp2rust ID3D11ModuleInstance::BindUnorderedAccessViewByName             = d3d11::ModuleInstance::bind_unordered_access_view_by_name

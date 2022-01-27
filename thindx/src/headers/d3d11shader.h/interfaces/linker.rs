@@ -168,3 +168,9 @@ impl Linker {
         MethodError::check("ID3D11Linker::UseLibrary", hr)
     }
 }
+
+//#cpp2rust ID3D11Linker                            = d3d11::Linker
+
+//#cpp2rust ID3D11Linker::AddClipPlaneFromCBuffer   = d3d11::Linker::add_clip_plane_from_cbuffer
+//#cpp2rust ID3D11Linker::Link                      = d3d11::Linker::link
+//#cpp2rust ID3D11Linker::UseLibrary                = d3d11::Linker::use_library

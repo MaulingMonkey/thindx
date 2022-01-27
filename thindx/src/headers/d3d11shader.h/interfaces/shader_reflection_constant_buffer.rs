@@ -181,3 +181,9 @@ impl<'r> ShaderReflectionConstantBuffer<'r> {
         unsafe { ShaderReflectionVariable::from_raw(self.phantom, ptr) }
     }
 }
+
+//#cpp2rust ID3D11ShaderReflectionConstantBuffer                            = d3d11::ShaderReflectionConstantBuffer
+
+//#cpp2rust ID3D11ShaderReflectionConstantBuffer::GetDesc                   = d3d11::ShaderReflectionConstantBuffer::get_desc
+//#cpp2rust ID3D11ShaderReflectionConstantBuffer::GetVariableByIndex        = d3d11::ShaderReflectionConstantBuffer::get_variable_by_index
+//#cpp2rust ID3D11ShaderReflectionConstantBuffer::GetVariableByName         = d3d11::ShaderReflectionConstantBuffer::get_variable_by_name

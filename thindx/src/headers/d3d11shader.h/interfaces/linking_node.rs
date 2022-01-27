@@ -13,3 +13,5 @@ convert!(unsafe LinkingNode => Unknown, winapi::um::d3d11shader::ID3D11LinkingNo
 
 // This space intentionally left blank!
 // It has no methods beyond the default IUnknown methods.
+
+//#cpp2rust ID3D11LinkingNode   = d3d11::LinkingNode
