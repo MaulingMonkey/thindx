@@ -527,7 +527,6 @@ pub const d3d9_01_clear_winapi : () = ();
 ///         let mut reader = decoder.read_info()?;
 ///         let mut pngbuf = vec![0; reader.output_buffer_size()];
 ///         let info = reader.next_frame(&mut pngbuf)?;
-///         let levels = 1;
 ///         assert_eq!(info.bit_depth, png::BitDepth::Eight);
 /// 
 ///         let bpp;
@@ -535,20 +534,20 @@ pub const d3d9_01_clear_winapi : () = ();
 ///         match info.color_type {
 ///             png::ColorType::Grayscale => {
 ///                 bpp     = 1;
-///                 format  = Format::L8;
+///                 format  = FixedTextureFormat::L8;
 ///             },
 ///             png::ColorType::GrayscaleAlpha => {
 ///                 bpp     = 2;
-///                 format  = Format::A8L8;
+///                 format  = FixedTextureFormat::A8L8;
 ///             },
 ///             png::ColorType::Rgb => {
 ///                 bpp    = 3;
-///                 format = Format::R8G8B8; // little endian - B,G,R byte order
+///                 format = FixedTextureFormat::R8G8B8; // little endian - B,G,R byte order
 ///                 pngbuf.chunks_exact_mut(3).for_each(|w| w.reverse()); // fix RGB => BGR
 ///             },
 ///             png::ColorType::Rgba => {
 ///                 bpp    = 4;
-///                 format = Format::A8R8G8B8; // little endian - B,G,R,A byte order
+///                 format = FixedTextureFormat::A8R8G8B8; // little endian - B,G,R,A byte order
 ///                 let mut pending = &mut pngbuf[..];
 ///                 while let [r, g, b, a, rest @ ..] = pending {
 ///                     // fix RGBA => BGRA
@@ -565,23 +564,14 @@ pub const d3d9_01_clear_winapi : () = ();
 ///             other => fatal!("unexpected png::ColorType::{:?} for `{}`", other, path),
 ///         };
 /// 
-///         let texture = device.create_texture(
-///             info.width, info.height, levels,
+///         let mips = [
+///             d3d9::TextureMipRef { data: &pngbuf[..], stride: (bpp * info.width) as usize },
+///         ];
+/// 
+///         Ok(device.create_texture_from(
+///             info.width, info.height, &mips,
 ///             Usage::AutoGenMipMap, format, Pool::Managed, ()
-///         )?;
-///         let w = info.width as usize;
-///         let h = info.height as usize;
-///         let src_pitch = bpp * w;
-///         unsafe {
-///             let lock = texture.lock_rect_unchecked(0, .., Lock::NoOverwrite)?;
-///             for y in 0..h {
-///                 let src = pngbuf[y * src_pitch as usize..].as_ptr();
-///                 let dst = (lock.pBits as *mut u8).add(y * lock.Pitch as usize);
-///                 std::ptr::copy_nonoverlapping(src, dst, src_pitch);
-///             }
-///             texture.unlock_rect(0)?;
-///         }
-///         Ok(texture)
+///         )?)
 ///     }
 /// }
 /// 

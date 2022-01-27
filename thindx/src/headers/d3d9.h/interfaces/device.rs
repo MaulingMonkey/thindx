@@ -658,6 +658,87 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         Ok(unsafe { Texture::from_raw(texture) })
     }
 
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createtexture)\]
+    /// IDirect3DDevice9::CreateTexture
+    ///
+    /// Creates a texture resource.
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]       On various invalid parameters, including the texture size being beyond the device's capabilities
+    /// *   [D3DERR::OUTOFVIDEOMEMORY]
+    /// *   [E::OUTOFMEMORY]
+    /// *   Ok([Texture])
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_pure();
+    /// // Create a 4x4 manually mipmapped ARGB texture
+    /// let data = [0u8; 4*4*4];
+    /// let mips = [
+    ///     // Normally you wouldn't overlap mip data like this, but for solid colors its fine:
+    ///     TextureMipRef { data: &data[..4 * 4*4 ], stride: 4*4 },
+    ///     TextureMipRef { data: &data[..4 * 2*2 ], stride: 4*2 },
+    ///     TextureMipRef { data: &data[..4 * 1*1 ], stride: 4*1 },
+    /// ];
+    /// let texture = device.create_texture_from(4, 4, &mips[..3], Usage::None,    FixedTextureFormat::A8R8G8B8, Pool::Managed, ()).unwrap();
+    /// let texture = device.create_texture_from(4, 4, &mips[..1], Usage::Dynamic, FixedTextureFormat::A8R8G8B8, Pool::Default, ()).unwrap();
+    ///
+    /// // fails: dynamic textures can only lock the top mip?
+    /// // let texture = device.create_texture_from(4, 4, &mips[..2], Usage::Dynamic, FixedTextureFormat::A8R8G8B8, Pool::Default, ()).unwrap();
+    /// ```
+    fn create_texture_from(&self, width: u32, height: u32, mips: &[TextureMipRef], usage: impl Into<Usage>, format: &FixedTextureFormat, pool: impl Into<Pool>, _shared_handle: impl SharedHandleParam) -> Result<Texture, MethodError> {
+        // TODO: consider THINERR::* constants instead?
+        if width == 0       { return Err(MethodError("IDirect3DDevice9Ext::create_texture_from", D3DERR::INVALIDCALL)); }
+        if height == 0      { return Err(MethodError("IDirect3DDevice9Ext::create_texture_from", D3DERR::INVALIDCALL)); }
+        if mips.is_empty()  { return Err(MethodError("IDirect3DDevice9Ext::create_texture_from", D3DERR::INVALIDCALL)); } // 0 levels = autogenerate mips, which is different from no levels
+
+        let levels : u32    = mips.len().try_into().map_err(|_| MethodError("IDirect3DDevice9Ext::create_texture_from", THINERR::SLICE_TOO_LARGE))?;
+        let usage           = usage.into();
+        let pool            = pool.into();
+        let texture         = self.create_texture(width, height, levels, usage, format.format, pool, _shared_handle)?;
+        let block_bits      = u32::from(format.bits_per_block);
+        let block_width     = u32::from(format.block_size.0);
+        let block_height    = u32::from(format.block_size.1);
+        let is_dynamic      = 0 != (usage.into() & d3d::Usage::Dynamic.into());
+        let lock_type       = if is_dynamic { Lock::Discard } else { Lock::NoOverwrite }; // NoOverwrite appears to not be an option?
+
+        let mut mip_pixels_width    = width;
+        let mut mip_pixels_height   = height;
+        for (mip_level, mip_ref) in mips.iter().enumerate() {
+            assert!(mip_pixels_width != 0 || mip_pixels_height != 0, "too many mips"); // should this bail out instead perhaps?
+            mip_pixels_width    = mip_pixels_width.max(1);
+            mip_pixels_height   = mip_pixels_height.max(1);
+
+            let mip_level           = mip_level as u32; // safe: mip_level < mips.len() == levels <= u32::MAX
+            let mip_blocks_width    = (mip_pixels_width  + block_width  - 1) / block_width;
+            let mip_blocks_height   = (mip_pixels_height + block_height - 1) / block_height;
+            let block_size_bytes    = ((mip_blocks_width * block_bits + 7) / 8) as usize;
+
+            let lock                = unsafe { texture.lock_rect_unchecked(mip_level, .., lock_type) }?;
+            let dst_origin          = lock.pBits as *mut u8;
+            let dst_pitch           = lock.Pitch as u32;
+            debug_assert!(dst_pitch as usize >= block_size_bytes);
+
+            for block_row in 0 .. mip_blocks_height {
+                // while `[..block_size_bytes]` looks redundant, its bounds check is necessary for soundness!
+                let src = mip_ref.data[block_row as usize * mip_ref.stride ..][..block_size_bytes].as_ptr();
+
+                // In Direct3D 8+, Pitch is bytes per *row of blocks* (ref: https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dlocked-rect)
+                let dst = unsafe { dst_origin.add((block_row * dst_pitch) as usize) };
+
+                unsafe { std::ptr::copy_nonoverlapping(src, dst, block_size_bytes) };
+            }
+
+            texture.unlock_rect(0)?;
+            mip_pixels_width    >>= 1;
+            mip_pixels_height   >>= 1;
+        }
+
+        Ok(texture)
+    }
+
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createvertexbuffer)\]
     /// IDirect3DDevice9::CreateVertexBuffer
     ///
