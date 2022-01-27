@@ -2030,6 +2030,34 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         Ok(StreamSource::from_unchecked(freq))
     }
 
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getswapchain)\]
+    /// IDirect3DDevice9::GetSwapChain
+    ///
+    /// Gets a pointer to a swap chain.
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_pure();
+    /// for swap_chain in 0 .. device.get_number_of_swap_chains() {
+    ///     let swap_chain = device.get_swap_chain(swap_chain).unwrap();
+    /// }
+    /// # for swap_chain in (device.get_number_of_swap_chains() .. 255).chain((8..32).map(|pow| 1<<pow)) {
+    /// #   assert_eq!(device.get_swap_chain(swap_chain).err().unwrap().kind(), D3DERR::INVALIDCALL);
+    /// # }
+    /// ```
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]
+    /// *   Ok([SwapChain])
+    fn get_swap_chain(&self, swap_chain: u32) -> Result<SwapChain, MethodError> {
+        let mut sc = null_mut();
+        let hr = unsafe { self.as_winapi().GetSwapChain(swap_chain, &mut sc) };
+        MethodError::check("IDirect3DDevice9::GetSwapChain", hr)?;
+        let swap_chain = unsafe { SwapChain::from_raw(sc) };
+        Ok(swap_chain)
+    }
+
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-gettexture)\]
     /// IDirect3DDevice9::GetTexture
     ///

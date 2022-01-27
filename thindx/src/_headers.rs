@@ -931,7 +931,7 @@ pub const d3dcompiler_h : cxx_header = cxx_header;
 /// * [`IDirect3DDevice9::GetSoftwareVertexProcessing`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getsoftwarevertexprocessing) →&nbsp;❌ <br>
 /// * [`IDirect3DDevice9::GetStreamSource`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getstreamsource)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_stream_source`] <br>
 /// * [`IDirect3DDevice9::GetStreamSourceFreq`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getstreamsourcefreq)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_stream_source_freq`] <br>
-/// * [`IDirect3DDevice9::GetSwapChain`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getswapchain) →&nbsp;❌ <br>
+/// * [`IDirect3DDevice9::GetSwapChain`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getswapchain)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_swap_chain`] <br>
 /// * [`IDirect3DDevice9::GetTexture`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-gettexture)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_texture`] <br>
 /// * [`IDirect3DDevice9::GetTextureStageState`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-gettexturestagestate) →&nbsp;❌ <br>
 /// * [`IDirect3DDevice9::GetTransform`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-gettransform) →&nbsp;❌ <br>
