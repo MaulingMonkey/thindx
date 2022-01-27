@@ -1960,6 +1960,24 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         MethodError::check("IDirect3DDevice9::GetRenderTargetData", hr)
     }
 
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getsoftwarevertexprocessing)\]
+    /// IDirect3DDevice9::GetSoftwareVertexProcessing
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_pure();
+    /// let software_mode : bool = device.get_software_vertex_processing();
+    /// let hardware_mode : bool = !software_mode;
+    /// assert!(hardware_mode);
+    /// ```
+    ///
+    /// ### Returns
+    /// *   `true`      if in software processing mode
+    /// *   `false`     if in hardware processing mode
+    fn get_software_vertex_processing(&self) -> bool {
+        unsafe { self.as_winapi().GetSoftwareVertexProcessing() != 0 }
+    }
+
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getstreamsource)\]
     /// IDirect3DDevice9::GetStreamSource
     ///
