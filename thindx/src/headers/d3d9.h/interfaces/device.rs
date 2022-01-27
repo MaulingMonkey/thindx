@@ -455,6 +455,93 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         Ok(unsafe { CubeTexture::from_raw(texture) })
     }
 
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createcubetexture)\]
+    /// IDirect3DDevice9::CreateCubeTexture
+    ///
+    /// Creates a cube texture resource.
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]       On various invalid parameters, including the texture size being beyond the device's capabilities
+    /// *   [D3DERR::OUTOFVIDEOMEMORY]
+    /// *   [E::OUTOFMEMORY]
+    /// *   Ok([CubeTexture])
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_pure();
+    /// // Create a cubemap where each face is a 4x4 manually mipmapped ARGB texture
+    /// let data = [0u8; 4*4*4];
+    /// // Normally you wouldn't overlap mip data like this, but for solid colors its fine:
+    /// let m0 = TextureMipRef { data: &data[..4 * 4*4 ], stride: 4*4 };
+    /// let m1 = TextureMipRef { data: &data[..4 * 2*2 ], stride: 4*2 };
+    /// let m2 = TextureMipRef { data: &data[..4 * 1*1 ], stride: 4*1 };
+    /// let mips = [
+    ///     // Normally you wouldn't have identical cubemap faces either
+    ///     CubeTextureMipRef { pos_x: m0, neg_x: m0, pos_y: m0, neg_y: m0, pos_z: m0, neg_z: m0 },
+    ///     CubeTextureMipRef { pos_x: m1, neg_x: m1, pos_y: m1, neg_y: m1, pos_z: m1, neg_z: m1 },
+    ///     CubeTextureMipRef { pos_x: m2, neg_x: m2, pos_y: m2, neg_y: m2, pos_z: m2, neg_z: m2 },
+    /// ];
+    /// let texture = device.create_cube_texture_from(4, &mips, Usage::None,    FixedTextureFormat::A8R8G8B8, Pool::Managed, ()).unwrap();
+    /// let texture = device.create_cube_texture_from(4, &mips, Usage::Dynamic, FixedTextureFormat::A8R8G8B8, Pool::Default, ()).unwrap();
+    /// ```
+    fn create_cube_texture_from(&self, size: u32, mips: &[CubeTextureMipRef], usage: impl Into<Usage>, format: &FixedTextureFormat, pool: impl Into<Pool>, _shared_handle: impl SharedHandleParam) -> Result<CubeTexture, MethodError> {
+        // TODO: consider THINERR::* constants instead?
+        if size == 0        { return Err(MethodError("IDirect3DDevice9Ext::create_cube_texture_from", D3DERR::INVALIDCALL)); }
+        if mips.is_empty()  { return Err(MethodError("IDirect3DDevice9Ext::create_cube_texture_from", D3DERR::INVALIDCALL)); } // 0 levels = autogenerate mips, which is different from no levels
+
+        let levels : u32    = mips.len().try_into().map_err(|_| MethodError("IDirect3DDevice9Ext::create_cube_texture_from", THINERR::SLICE_TOO_LARGE))?;
+        let usage           = usage.into();
+        let pool            = pool.into();
+        let texture         = self.create_cube_texture(size, levels, usage, format.format, pool, _shared_handle)?;
+        let block_bits      = u32::from(format.bits_per_block);
+        let block_width     = u32::from(format.block_size.0);
+        let block_height    = u32::from(format.block_size.1);
+        let is_dynamic      = 0 != (usage.into() & d3d::Usage::Dynamic.into());
+
+        let mut mip_pixels_size = size;
+        for (mip_level, mip_ref) in mips.iter().enumerate() {
+            assert!(mip_pixels_size != 0, "too many mips"); // should this bail out instead perhaps?
+
+            let mip_level           = mip_level as u32; // safe: mip_level < mips.len() == levels <= u32::MAX
+            let mip_blocks_width    = (mip_pixels_size + block_width  - 1) / block_width;
+            let mip_blocks_height   = (mip_pixels_size + block_height - 1) / block_height;
+            let block_row_bytes     = ((mip_blocks_width * block_bits + 7) / 8) as usize;
+
+            for (face,                          mip_ref         ) in [
+                (d3d::CubeMapFace::PositiveX,   &mip_ref.pos_x  ),
+                (d3d::CubeMapFace::NegativeX,   &mip_ref.neg_x  ),
+                (d3d::CubeMapFace::PositiveY,   &mip_ref.pos_y  ),
+                (d3d::CubeMapFace::NegativeY,   &mip_ref.neg_y  ),
+                (d3d::CubeMapFace::PositiveZ,   &mip_ref.pos_z  ),
+                (d3d::CubeMapFace::NegativeZ,   &mip_ref.neg_z  ),
+            ].iter().copied() {
+                let lock_type           = if !is_dynamic { Lock::NoOverwrite } else if mip_level == 0 && face == d3d::CubeMapFace::PositiveX { Lock::Discard } else { Lock::None };
+                let lock                = unsafe { texture.lock_rect_unchecked(face, mip_level, .., lock_type) }?;
+                let dst_origin          = lock.pBits as *mut u8;
+                let dst_pitch           = lock.Pitch as u32;
+                debug_assert!(dst_pitch as usize >= block_row_bytes);
+
+                for block_row in 0 .. mip_blocks_height {
+                    // while `[..block_row_bytes]` looks redundant, its bounds check is necessary for soundness!
+                    let src = mip_ref.data[block_row as usize * mip_ref.stride ..][..block_row_bytes].as_ptr();
+
+                    // In Direct3D 8+, Pitch is bytes per *row of blocks* (ref: https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dlocked-rect)
+                    let dst = unsafe { dst_origin.add((block_row * dst_pitch) as usize) };
+
+                    unsafe { std::ptr::copy_nonoverlapping(src, dst, block_row_bytes) };
+                }
+
+                texture.unlock_rect(face, mip_level)?;
+            }
+
+            mip_pixels_size >>= 1;
+        }
+
+        Ok(texture)
+    }
+
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createdepthstencilsurface)\]
     /// IDirect3DDevice9::CreateDepthStencilSurface
     ///
@@ -901,6 +988,91 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         let hr = unsafe { self.as_winapi().CreateVolumeTexture(width, height, depth, levels, usage.into().into(), format.into().into(), pool.into().into(), &mut volumetexture, null_mut()) };
         MethodError::check("IDirect3DDevice9::CreateVolumeTexture", hr)?;
         Ok(unsafe { VolumeTexture::from_raw(volumetexture) })
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createvolumetexture)\]
+    /// IDirect3DDevice9::CreateVolumeTexture
+    ///
+    /// Creates a volume texture resource.
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]       On various invalid parameters, including the texture size being beyond the device's capabilities
+    /// *   [D3DERR::OUTOFVIDEOMEMORY]
+    /// *   [E::OUTOFMEMORY]
+    /// *   Ok([VolumeTexture])
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_pure();
+    /// // Create a 4x4x4 manually mipmapped ARGB texture
+    /// let data = [0u8; 4*4*4*4];
+    /// let mips = [
+    ///     // Normally you wouldn't overlap mip data like this, but for solid colors its fine:
+    ///     VolumeTextureMipRef { data: &data[..4 * 4*4*4 ], stride_row: 4*4, stride_slice: 4*4*4 },
+    ///     VolumeTextureMipRef { data: &data[..4 * 2*2*2 ], stride_row: 4*2, stride_slice: 4*2*2 },
+    ///     VolumeTextureMipRef { data: &data[..4 * 1*1*1 ], stride_row: 4*1, stride_slice: 4*1*1 },
+    /// ];
+    /// let texture = device.create_volume_texture_from(4, 4, 4, &mips, Usage::None,    FixedTextureFormat::A8R8G8B8, Pool::Managed, ()).unwrap();
+    /// let texture = device.create_volume_texture_from(4, 4, 4, &mips, Usage::Dynamic, FixedTextureFormat::A8R8G8B8, Pool::Default, ()).unwrap();
+    /// ```
+    fn create_volume_texture_from(&self, width: u32, height: u32, depth: u32, mips: &[VolumeTextureMipRef], usage: impl Into<Usage>, format: &FixedTextureFormat, pool: impl Into<Pool>, _shared_handle: impl SharedHandleParam) -> Result<VolumeTexture, MethodError> {
+        // TODO: consider THINERR::* constants instead?
+        if width == 0       { return Err(MethodError("IDirect3DDevice9Ext::create_volume_texture_from", D3DERR::INVALIDCALL)); }
+        if height == 0      { return Err(MethodError("IDirect3DDevice9Ext::create_volume_texture_from", D3DERR::INVALIDCALL)); }
+        if mips.is_empty()  { return Err(MethodError("IDirect3DDevice9Ext::create_volume_texture_from", D3DERR::INVALIDCALL)); } // 0 levels = autogenerate mips, which is different from no levels
+
+        let levels : u32    = mips.len().try_into().map_err(|_| MethodError("IDirect3DDevice9Ext::create_volume_texture_from", THINERR::SLICE_TOO_LARGE))?;
+        let usage           = usage.into();
+        let pool            = pool.into();
+        let texture         = self.create_volume_texture(width, height, depth, levels, usage, format.format, pool, _shared_handle)?;
+        let block_bits      = u32::from(format.bits_per_block);
+        let block_width     = u32::from(format.block_size.0);
+        let block_height    = u32::from(format.block_size.1);
+        let is_dynamic      = 0 != (usage.into() & d3d::Usage::Dynamic.into());
+
+        let mut mip_pixels_width    = width;
+        let mut mip_pixels_height   = height;
+        let mut mip_pixels_depth    = depth;
+        for (mip_level, mip_ref) in mips.iter().enumerate() {
+            assert!(mip_pixels_width != 0 || mip_pixels_height != 0 || mip_pixels_depth != 0, "too many mips"); // should this bail out instead perhaps?
+            mip_pixels_width    = mip_pixels_width.max(1);
+            mip_pixels_height   = mip_pixels_height.max(1);
+            mip_pixels_depth    = mip_pixels_depth.max(1);
+
+            let lock_type           = if !is_dynamic { Lock::None } else if mip_level == 0 { Lock::Discard } else { Lock::None };
+            let mip_level           = mip_level as u32; // safe: mip_level < mips.len() == levels <= u32::MAX
+            let mip_blocks_width    = (mip_pixels_width  + block_width  - 1) / block_width;
+            let mip_blocks_height   = (mip_pixels_height + block_height - 1) / block_height;
+            let block_row_bytes     = ((mip_blocks_width * block_bits + 7) / 8) as usize;
+
+            dbg!((mip_level, lock_type));
+            let lock                = unsafe { texture.lock_box_unchecked(mip_level, .., lock_type) }?;
+            let dst_origin          = lock.pBits as *mut u8;
+            let dst_pitch_row       = lock.RowPitch as u32;
+            let dst_pitch_slice     = lock.SlicePitch as u32;
+            debug_assert!(dst_pitch_row as usize >= block_row_bytes);
+
+            for pixel_slice in 0 .. mip_pixels_depth {
+                for block_row in 0 .. mip_blocks_height {
+                    // while `[..block_row_bytes]` looks redundant, its bounds check is necessary for soundness!
+                    let src = mip_ref.data[pixel_slice as usize * mip_ref.stride_slice + block_row as usize * mip_ref.stride_row ..][..block_row_bytes].as_ptr();
+
+                    // In Direct3D 8+, Pitch is bytes per *row of blocks* (ref: https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dlocked-rect)
+                    let dst = unsafe { dst_origin.add((pixel_slice * dst_pitch_slice + block_row * dst_pitch_row) as usize) };
+
+                    unsafe { std::ptr::copy_nonoverlapping(src, dst, block_row_bytes) };
+                }
+            }
+
+            texture.unlock_box(mip_level)?;
+            mip_pixels_width    >>= 1;
+            mip_pixels_height   >>= 1;
+            mip_pixels_depth    >>= 1;
+        }
+
+        Ok(texture)
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-drawindexedprimitive)\]

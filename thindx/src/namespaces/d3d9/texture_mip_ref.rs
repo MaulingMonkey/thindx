@@ -3,6 +3,7 @@ use crate::d3d9::IDirect3DDevice9Ext;
 
 
 /// Reference a 2-dimensional array of pixels for use with e.g. [IDirect3DDevice9Ext::create_texture_from].
+#[derive(Clone, Copy)]
 pub struct TextureMipRef<'p> {
     /// Raw pixel bytes.  Perhaps sourced from [bytemuck::bytes_of]\(your_typed_pixels\)
     pub data:           &'p [u8], // good use case for bytemuck::bytes_of(your_pixels_slice)
@@ -13,8 +14,8 @@ pub struct TextureMipRef<'p> {
     pub stride:         usize,
 }
 
-#[cfg(not_yet)]
 /// Reference a 3-dimensional array of pixels for use with e.g. [IDirect3DDevice9Ext::create_volume_texture_from].
+#[derive(Clone, Copy)]
 pub struct VolumeTextureMipRef<'p> {
     /// Raw pixel bytes.  Perhaps sourced from [bytemuck::bytes_of]\(your_typed_pixels\)
     pub data:           &'p [u8],
@@ -28,8 +29,8 @@ pub struct VolumeTextureMipRef<'p> {
     pub stride_slice:   usize,
 }
 
-#[cfg(not_yet)]
 /// Reference 6x[TextureMipRef]s to form cubemap dara for use with e.g. [IDirect3DDevice9Ext::create_cube_texture_from].
+#[derive(Clone)] // a bit big and pointless to Copy
 pub struct CubeTextureMipRef<'p> {
     /// The cubemap face covering the +X direction
     pub pos_x: TextureMipRef<'p>,
