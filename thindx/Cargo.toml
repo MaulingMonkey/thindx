@@ -41,7 +41,8 @@ default         = []
 
 
 [target.'cfg(windows)'.dependencies]
-abibool         = "0.5"
+abibool.version = "0.5"
+abibool.features=["bytemuck"]
 abistr          = "0.2.0-rc1"
 #abistr          = { git = "https://github.com/MaulingMonkey/abistr", rev = "1f4d6e40c7d430d586fe81eca46f9e64d569aaca" }
 bytemuck.version    = "1"

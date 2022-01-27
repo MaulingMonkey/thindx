@@ -922,7 +922,7 @@ pub const d3dcompiler_h : cxx_header = cxx_header;
 /// * [`IDirect3DDevice9::GetPixelShaderConstantB`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getpixelshaderconstantb) →&nbsp;❌ <br>
 /// * [`IDirect3DDevice9::GetPixelShaderConstantF`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getpixelshaderconstantf) →&nbsp;❌ <br>
 /// * [`IDirect3DDevice9::GetPixelShaderConstantI`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getpixelshaderconstanti) →&nbsp;❌ <br>
-/// * [`IDirect3DDevice9::GetRasterStatus`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getrasterstatus) →&nbsp;❌ <br>
+/// * [`IDirect3DDevice9::GetRasterStatus`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getrasterstatus)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_raster_status`] <br>
 /// * [`IDirect3DDevice9::GetRenderState`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getrenderstate) →&nbsp;❌ <br>
 /// * [`IDirect3DDevice9::GetRenderTarget`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getrendertarget)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_render_target`] <br>
 /// * [`IDirect3DDevice9::GetRenderTargetData`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getrendertargetdata)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_render_target_data`] <br>

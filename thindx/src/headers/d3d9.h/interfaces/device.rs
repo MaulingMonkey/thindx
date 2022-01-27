@@ -1882,6 +1882,41 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         Ok(unsafe { PixelShader::from_raw(shader) })
     }
 
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getrasterstatus)\]
+    /// IDirect3DDevice9::GetRasterStatus
+    ///
+    /// Returns information describing the [RasterStatus] of the monitor on which the swap chain is presented.
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_test();
+    /// let swap_chains = device.get_number_of_swap_chains();
+    /// for i in 0 .. swap_chains {
+    ///     dbg!(device.get_raster_status(i).unwrap());
+    /// }
+    /// # for i in (swap_chains .. 255).chain((8 .. 32).map(|pow| 1<<pow)) {
+    /// #   assert_eq!(device.get_raster_status(i).err().unwrap().kind(), D3DERR::INVALIDCALL);
+    /// # }
+    /// ```
+    ///
+    /// ### Output
+    /// ```text
+    /// RasterStatus {
+    ///     in_vblank: false,
+    ///     scan_line: 3082,
+    /// }
+    /// ```
+    ///
+    /// ### Returns
+    /// *   [D3DERR::INVALIDCALL]   If `swap_chain` is not a valid swap chain.
+    /// *   Ok([RasterStatus])      If `swap_chain` is a valid swap chain.
+    fn get_raster_status(&self, swap_chain: u32) -> Result<RasterStatus, MethodError> {
+        let mut raster_status = RasterStatus::zeroed();
+        let hr = unsafe { self.as_winapi().GetRasterStatus(swap_chain, &mut *raster_status) };
+        MethodError::check("IDirect3DDevice9::GetRasterStatus", hr)?;
+        Ok(raster_status)
+    }
+
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getrendertarget)\]
     /// IDirect3DDevice9::GetRenderTarget
     ///

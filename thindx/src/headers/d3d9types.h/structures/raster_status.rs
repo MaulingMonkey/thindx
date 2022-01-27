@@ -1,5 +1,7 @@
 use crate::ctypes::*;
 
+use bytemuck::*;
+
 use winapi::shared::d3d9types::*;
 use winapi::shared::minwindef::UINT;
 
@@ -12,6 +14,7 @@ use std::ops::{Deref, DerefMut};
 ///
 /// Describes the raster status.
 #[derive(Clone, Copy, Debug, Default)]
+#[derive(Pod, Zeroable)]
 #[repr(C)] pub struct RasterStatus {
     /// `true` if the raster is in the vertical blank period.
     /// `false` if the raster is not in the vertical blank period.
