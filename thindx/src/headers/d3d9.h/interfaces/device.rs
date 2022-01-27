@@ -711,21 +711,21 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
             let mip_level           = mip_level as u32; // safe: mip_level < mips.len() == levels <= u32::MAX
             let mip_blocks_width    = (mip_pixels_width  + block_width  - 1) / block_width;
             let mip_blocks_height   = (mip_pixels_height + block_height - 1) / block_height;
-            let block_size_bytes    = ((mip_blocks_width * block_bits + 7) / 8) as usize;
+            let block_row_bytes     = ((mip_blocks_width * block_bits + 7) / 8) as usize;
 
             let lock                = unsafe { texture.lock_rect_unchecked(mip_level, .., lock_type) }?;
             let dst_origin          = lock.pBits as *mut u8;
             let dst_pitch           = lock.Pitch as u32;
-            debug_assert!(dst_pitch as usize >= block_size_bytes);
+            debug_assert!(dst_pitch as usize >= block_row_bytes);
 
             for block_row in 0 .. mip_blocks_height {
-                // while `[..block_size_bytes]` looks redundant, its bounds check is necessary for soundness!
-                let src = mip_ref.data[block_row as usize * mip_ref.stride ..][..block_size_bytes].as_ptr();
+                // while `[..block_row_bytes]` looks redundant, its bounds check is necessary for soundness!
+                let src = mip_ref.data[block_row as usize * mip_ref.stride ..][..block_row_bytes].as_ptr();
 
                 // In Direct3D 8+, Pitch is bytes per *row of blocks* (ref: https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dlocked-rect)
                 let dst = unsafe { dst_origin.add((block_row * dst_pitch) as usize) };
 
-                unsafe { std::ptr::copy_nonoverlapping(src, dst, block_size_bytes) };
+                unsafe { std::ptr::copy_nonoverlapping(src, dst, block_row_bytes) };
             }
 
             texture.unlock_rect(mip_level)?;
