@@ -15,7 +15,7 @@
         <div>
             <p class="heading">Lines</p>
             <p class="title has-text-success">
-                <abbr title="21 / 21">100 %</abbr></p>
+                <abbr title="22 / 22">100 %</abbr></p>
         </div>
     </div>
 
@@ -23,7 +23,7 @@
         <div>
             <p class="heading">Functions</p>
             <p class="title has-text-success">
-                <abbr title="5 / 5">100 %</abbr></p>
+                <abbr title="6 / 6">100 %</abbr></p>
         </div>
     </div>
 
@@ -239,10 +239,10 @@
             </div>
             <div
                 class="column is-1 is-narrow p-0 has-text-centered has-text-success-light has-background-success">
-                6
+                280
             </div>
             <div class="column has-background-success-light p-0">
-                <pre class="has-background-success-light py-0 px-2">pub fn set_state(user_index: impl Into&lt;User&gt;, mut vibration: Vibration) -&gt; Result&lt;(), MethodError&gt; {</pre>
+                <pre class="has-background-success-light py-0 px-2">pub fn set_state(user_index: impl Into&lt;u32&gt;, mut vibration: Vibration) -&gt; Result&lt;(), MethodError&gt; {</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -252,7 +252,7 @@
             </div>
             <div
                 class="column is-1 is-narrow p-0 has-text-centered has-text-success-light has-background-success">
-                6
+                280
             </div>
             <div class="column has-background-success-light p-0">
                 <pre class="has-background-success-light py-0 px-2">    &#x2F;&#x2F; SAFETY: ✔️</pre>
@@ -265,7 +265,7 @@
             </div>
             <div
                 class="column is-1 is-narrow p-0 has-text-centered has-text-success-light has-background-success">
-                6
+                280
             </div>
             <div class="column has-background-success-light p-0">
                 <pre class="has-background-success-light py-0 px-2">    &#x2F;&#x2F;  * fuzzed        in `fuzz-xinput.rs`</pre>
@@ -278,7 +278,7 @@
             </div>
             <div
                 class="column is-1 is-narrow p-0 has-text-centered has-text-success-light has-background-success">
-                6
+                280
             </div>
             <div class="column has-background-success-light p-0">
                 <pre class="has-background-success-light py-0 px-2">    &#x2F;&#x2F;  * tested        in `d3d9-02-xinput.rs`</pre>
@@ -291,10 +291,10 @@
             </div>
             <div
                 class="column is-1 is-narrow p-0 has-text-centered has-text-success-light has-background-success">
-                6
+                280
             </div>
             <div class="column has-background-success-light p-0">
-                <pre class="has-background-success-light py-0 px-2">    &#x2F;&#x2F;  * `user_index`  is well tested from 0 ..= 255 (but retest if the type of `user_index` expands to allow `u32`!)</pre>
+                <pre class="has-background-success-light py-0 px-2">    &#x2F;&#x2F;  * `user_index`  is well tested</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -304,7 +304,7 @@
             </div>
             <div
                 class="column is-1 is-narrow p-0 has-text-centered has-text-success-light has-background-success">
-                6
+                280
             </div>
             <div class="column has-background-success-light p-0">
                 <pre class="has-background-success-light py-0 px-2">    &#x2F;&#x2F;  * `vibration`   is never null, fixed size, no `cbSize` field, all bit patterns are valid and reasonable</pre>
@@ -317,10 +317,10 @@
             </div>
             <div
                 class="column is-1 is-narrow p-0 has-text-centered has-text-success-light has-background-success">
-                6
+                280
             </div>
             <div class="column has-background-success-light p-0">
-                <pre class="has-background-success-light py-0 px-2">    let code = unsafe { XInputSetState(user_index.into().into(), &amp;mut vibration as *mut _ as *mut _) };</pre>
+                <pre class="has-background-success-light py-0 px-2">    let code = unsafe { XInputSetState(user_index.into(), &amp;mut vibration as *mut _ as *mut _) };</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -330,7 +330,7 @@
             </div>
             <div
                 class="column is-1 is-narrow p-0 has-text-centered has-text-success-light has-background-success">
-                6
+                280
             </div>
             <div class="column has-background-success-light p-0">
                 <pre class="has-background-success-light py-0 px-2">    check_error_success(&quot;XInputSetState&quot;, code)</pre>
@@ -343,7 +343,7 @@
             </div>
             <div
                 class="column is-1 is-narrow p-0 has-text-centered has-text-success-light has-background-success">
-                6
+                280
             </div>
             <div class="column has-background-success-light p-0">
                 <pre class="has-background-success-light py-0 px-2">}</pre>
@@ -398,7 +398,7 @@
                 1
             </div>
             <div class="column has-background-success-light p-0">
-                <pre class="has-background-success-light py-0 px-2">    if let Err(err) = set_state(User::Zero,  v) { assert_eq!(err.kind(), ERROR::DEVICE_NOT_CONNECTED); }</pre>
+                <pre class="has-background-success-light py-0 px-2">    if let Err(err) = set_state(0u32, v) { assert_eq!(err.kind(), ERROR::DEVICE_NOT_CONNECTED); }</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -411,7 +411,7 @@
                 1
             </div>
             <div class="column has-background-success-light p-0">
-                <pre class="has-background-success-light py-0 px-2">    if let Err(err) = set_state(User::Three, v) { assert_eq!(err.kind(), ERROR::DEVICE_NOT_CONNECTED); }</pre>
+                <pre class="has-background-success-light py-0 px-2">    if let Err(err) = set_state(1u32, v) { assert_eq!(err.kind(), ERROR::DEVICE_NOT_CONNECTED); }</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -424,7 +424,7 @@
                 1
             </div>
             <div class="column has-background-success-light p-0">
-                <pre class="has-background-success-light py-0 px-2">    if let Err(err) = set_state(User::Zero,  v) { assert_eq!(err.kind(), ERROR::DEVICE_NOT_CONNECTED); }</pre>
+                <pre class="has-background-success-light py-0 px-2">    if let Err(err) = set_state(2u32, v) { assert_eq!(err.kind(), ERROR::DEVICE_NOT_CONNECTED); }</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -437,7 +437,7 @@
                 1
             </div>
             <div class="column has-background-success-light p-0">
-                <pre class="has-background-success-light py-0 px-2">    if let Err(err) = set_state(User::Three, v) { assert_eq!(err.kind(), ERROR::DEVICE_NOT_CONNECTED); }</pre>
+                <pre class="has-background-success-light py-0 px-2">    if let Err(err) = set_state(3u32, v) { assert_eq!(err.kind(), ERROR::DEVICE_NOT_CONNECTED); }</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -502,7 +502,7 @@
                 1
             </div>
             <div class="column has-background-success-light p-0">
-                <pre class="has-background-success-light py-0 px-2">    assert_eq!(ERROR::BAD_ARGUMENTS, set_state(User::Any,               v));</pre>
+                <pre class="has-background-success-light py-0 px-2">    assert_eq!(ERROR::BAD_ARGUMENTS, set_state(User::Any, v));</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -512,10 +512,10 @@
             </div>
             <div
                 class="column is-1 is-narrow p-0 has-text-centered has-text-success-light has-background-success">
-                1
+                276
             </div>
             <div class="column has-background-success-light p-0">
-                <pre class="has-background-success-light py-0 px-2">    assert_eq!(ERROR::BAD_ARGUMENTS, set_state(User::from_unchecked(4), v));</pre>
+                <pre class="has-background-success-light py-0 px-2">    for u in User::iter_invalid() {</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -525,10 +525,10 @@
             </div>
             <div
                 class="column is-1 is-narrow p-0 has-text-centered has-text-success-light has-background-success">
-                1
+                275
             </div>
             <div class="column has-background-success-light p-0">
-                <pre class="has-background-success-light py-0 px-2">}</pre>
+                <pre class="has-background-success-light py-0 px-2">        assert_eq!(ERROR::BAD_ARGUMENTS, set_state(u, v));</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -541,13 +541,39 @@
                 
             </div>
             <div class="column has-background-white p-0">
-                <pre class="has-background-white py-0 px-2"></pre>
+                <pre class="has-background-white py-0 px-2">    }</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
                 class="column is-1 is-narrow p-0 has-text-centered"
                 id="40">
                 <a href="#40">40</a>
+            </div>
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered has-text-success-light has-background-success">
+                1
+            </div>
+            <div class="column has-background-success-light p-0">
+                <pre class="has-background-success-light py-0 px-2">}</pre>
+            </div>
+        </div><div class="columns p-0 m-0">
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered"
+                id="41">
+                <a href="#41">41</a>
+            </div>
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
+                
+            </div>
+            <div class="column has-background-white p-0">
+                <pre class="has-background-white py-0 px-2"></pre>
+            </div>
+        </div><div class="columns p-0 m-0">
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered"
+                id="42">
+                <a href="#42">42</a>
             </div>
             <div
                 class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
@@ -559,7 +585,7 @@
         </div></div>
         <footer class="footer">
             <div class="content has-text-centered">
-                <p class="heading">Date: 2022-01-24 09:12</p>
+                <p class="heading">Date: 2022-01-27 09:42</p>
             </div>
         </footer>
     </body>

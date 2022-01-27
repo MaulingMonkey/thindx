@@ -72,6 +72,8 @@
 <span id="71">71</span>
 <span id="72">72</span>
 <span id="73">73</span>
+<span id="74">74</span>
+<span id="75">75</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="kw">crate</span>::<span class="kw-2">*</span>;
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::xinput</span>::<span class="kw-2">*</span>;
 
@@ -106,7 +108,7 @@
 <span class="doccomment">///</span>
 <span class="doccomment">/// ### See Also</span>
 <span class="doccomment">/// *   [Getting Audio Device Identifiers](https://docs.microsoft.com/en-us/windows/win32/xinput/getting-started-with-xinput#getting-audio-device-identifiers)</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_audio_device_ids</span>(<span class="ident">user_index</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">User</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">AudioDeviceIds</span>, <span class="ident">MethodError</span><span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_audio_device_ids</span>(<span class="ident">user_index</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">AudioDeviceIds</span>, <span class="ident">MethodError</span><span class="op">&gt;</span> {
     <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">non_snake_case</span>)]</span> <span class="kw">let</span> <span class="ident">XInputGetAudioDeviceIds</span> <span class="op">=</span> <span class="ident">Imports::get</span>().<span class="ident">XInputGetAudioDeviceIds</span>.<span class="ident">ok_or</span>(<span class="ident">MethodError</span>(<span class="string">&quot;XInputGetAudioDeviceIds&quot;</span>, <span class="ident">THINERR::MISSING_DLL_EXPORT</span>))<span class="question-mark">?</span>;
 
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">render_id</span>  <span class="op">=</span> [<span class="number">0u16</span>; <span class="number">4096</span>];
@@ -116,10 +118,10 @@
 
     <span class="comment">// SAFETY: ⚠️ Needs testing with real audio devices</span>
     <span class="comment">//  * fuzzed        in `tests/fuzz-xinput.rs`</span>
-    <span class="comment">//  * `user_index`  is well tested from 0 ..= 255 (but retest if the type of `user_index` expands to allow `u32`!)</span>
+    <span class="comment">//  * `user_index`  is well tested</span>
     <span class="comment">//  * `*_ptr`       is never null, should only be accessed during XInputGetAudioDeviceIds&#39;s scope</span>
     <span class="comment">//  * `*_len`       are in/out, properly initialized.</span>
-    <span class="kw">let</span> <span class="ident">code</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="ident">XInputGetAudioDeviceIds</span>(<span class="ident">user_index</span>.<span class="ident">into</span>().<span class="ident">into</span>(), <span class="ident">render_id</span>.<span class="ident">as_mut_ptr</span>(), <span class="kw-2">&amp;mut</span> <span class="ident">render_len</span>, <span class="ident">capture_id</span>.<span class="ident">as_mut_ptr</span>(), <span class="kw-2">&amp;mut</span> <span class="ident">capture_len</span>) };
+    <span class="kw">let</span> <span class="ident">code</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="ident">XInputGetAudioDeviceIds</span>(<span class="ident">user_index</span>.<span class="ident">into</span>(), <span class="ident">render_id</span>.<span class="ident">as_mut_ptr</span>(), <span class="kw-2">&amp;mut</span> <span class="ident">render_len</span>, <span class="ident">capture_id</span>.<span class="ident">as_mut_ptr</span>(), <span class="kw-2">&amp;mut</span> <span class="ident">capture_len</span>) };
     <span class="comment">// a dynamic alloc fallback might be appropriate...? what error is returned? experiment, as it&#39;s not documented? D3D&#39;s own docs show only 256 byte buffers, surely 16x that (4096) is enough?</span>
     <span class="ident">check_error_success</span>(<span class="string">&quot;XInputGetAudioDeviceIds&quot;</span>, <span class="ident">code</span>)<span class="question-mark">?</span>;
     <span class="kw">let</span> <span class="ident">render_device_id</span>    <span class="op">=</span> <span class="ident">OsString::from_wide</span>(<span class="ident">render_id</span> .<span class="ident">get</span>(..<span class="ident">render_len</span>  <span class="kw">as</span> <span class="ident">usize</span>).<span class="ident">ok_or</span>(<span class="ident">MethodError</span>(<span class="string">&quot;XInputGetAudioDeviceIds (render_device_id conversion)&quot;</span>,  <span class="ident">THINERR::SLICE_TOO_LARGE</span>))<span class="question-mark">?</span>.<span class="ident">split</span>(<span class="op">|</span><span class="ident">c</span><span class="op">|</span> <span class="kw-2">*</span><span class="ident">c</span><span class="op">==</span><span class="number">0</span>).<span class="ident">next</span>().<span class="ident">unwrap_or</span>(<span class="kw-2">&amp;</span>[]));
@@ -140,8 +142,10 @@
     <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=</span> <span class="ident">get_audio_device_ids</span>(<span class="ident">User::Three</span>) { <span class="macro">assert_eq!</span>(<span class="ident">ERROR::DEVICE_NOT_CONNECTED</span>, <span class="ident">err</span>.<span class="ident">kind</span>()); }
 
     <span class="comment">// Invalid User s</span>
-    <span class="macro">assert_eq!</span>(<span class="ident">ERROR::BAD_ARGUMENTS</span>, <span class="ident">get_audio_device_ids</span>(<span class="ident">User::from_unchecked</span>(<span class="number">4</span>))  );
-    <span class="macro">assert_eq!</span>(<span class="ident">ERROR::BAD_ARGUMENTS</span>, <span class="ident">get_audio_device_ids</span>(<span class="ident">User::Any</span>)                );
+    <span class="macro">assert_eq!</span>(<span class="ident">ERROR::BAD_ARGUMENTS</span>, <span class="ident">get_audio_device_ids</span>(<span class="ident">User::Any</span>));
+    <span class="kw">for</span> <span class="ident">u</span> <span class="kw">in</span> <span class="ident">User::iter_invalid</span>() {
+        <span class="macro">assert_eq!</span>(<span class="ident">ERROR::BAD_ARGUMENTS</span>, <span class="ident">get_audio_device_ids</span>(<span class="ident">u</span>));
+    }
 }
 
 <span class="comment">//#cpp2rust XInputGetAudioDeviceIds     = xinput::get_audio_device_ids</span>

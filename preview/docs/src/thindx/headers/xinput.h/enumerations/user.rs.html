@@ -41,6 +41,13 @@
 <span id="40">40</span>
 <span id="41">41</span>
 <span id="42">42</span>
+<span id="43">43</span>
+<span id="44">44</span>
+<span id="45">45</span>
+<span id="46">46</span>
+<span id="47">47</span>
+<span id="48">48</span>
+<span id="49">49</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">bytemuck</span>::{<span class="ident">Pod</span>, <span class="ident">Zeroable</span>};
 <span class="kw">use</span> <span class="ident">winapi::um::xinput</span>::<span class="kw-2">*</span>;
 <span class="kw">use</span> <span class="ident">std::fmt</span>::{<span class="self">self</span>, <span class="ident">Debug</span>, <span class="ident">Formatter</span>};
@@ -79,6 +86,13 @@
 
     <span class="doccomment">/// Iterator over valid user indicies [User]\(0\) .. [User]\(4\)</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">iter_valid</span>() -&gt; <span class="kw">impl</span> <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="ident">User</span><span class="op">&gt;</span> { [<span class="ident">User::Zero</span>, <span class="ident">User::One</span>, <span class="ident">User::Two</span>, <span class="ident">User::Three</span>].<span class="ident">iter</span>().<span class="ident">copied</span>() }
+
+    <span class="doccomment">/// Iterator over a wide range of invalid user indicies for testing purpouses.  Does **not** include [User::Any].</span>
+    <span class="doccomment">/// Includes *every* user index from 4 ..= 254, 256, 512, ..., 0x8000_0000</span>
+    <span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">not</span>(<span class="ident">test</span>), <span class="ident">allow</span>(<span class="ident">dead_code</span>))]</span>
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">iter_invalid</span>() -&gt; <span class="kw">impl</span> <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="ident">u32</span><span class="op">&gt;</span> {
+        (<span class="number">4</span> ..<span class="op">=</span> <span class="number">254</span>).<span class="ident">chain</span>((<span class="number">8</span> .. <span class="number">32</span>).<span class="ident">map</span>(<span class="op">|</span><span class="ident">pow</span><span class="op">|</span> <span class="number">1</span><span class="op">&lt;</span><span class="op">&lt;</span><span class="ident">pow</span>))
+    }
 }
 
 <span class="comment">//#cpp2rust XUSER_INDEX_ANY     = xinput::User::Any</span>

@@ -421,6 +421,7 @@
 <span id="420">420</span>
 <span id="421">421</span>
 <span id="422">422</span>
+<span id="423">423</span>
 </pre><pre class="rust"><code><span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span> <span class="kw">use</span> <span class="kw">crate</span>::<span class="kw-2">*</span>;
 
 <span class="kw">use</span> <span class="ident">bytemuck</span>::<span class="kw-2">*</span>;
@@ -642,6 +643,7 @@
 
     <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Q16W16V16U16</span>          : <span class="ident">Format</span> <span class="op">=</span> <span class="ident">Format</span>(<span class="ident">D3DFMT_Q16W16V16U16</span>);
 
+    <span class="doccomment">/// See [Multiple-element Textures](https://docs.microsoft.com/en-us/windows/win32/direct3d9/multiple-element-textures)</span>
     <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">MULTI2_ARGB8</span>          : <span class="ident">Format</span> <span class="op">=</span> <span class="ident">Format</span>(<span class="ident">D3DFMT_MULTI2_ARGB8</span>);
 
     <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">R16F</span>                  : <span class="ident">Format</span> <span class="op">=</span> <span class="ident">Format</span>(<span class="ident">D3DFMT_R16F</span>);

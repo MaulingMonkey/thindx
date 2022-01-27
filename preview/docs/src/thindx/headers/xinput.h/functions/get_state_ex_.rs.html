@@ -47,6 +47,9 @@
 <span id="46">46</span>
 <span id="47">47</span>
 <span id="48">48</span>
+<span id="49">49</span>
+<span id="50">50</span>
+<span id="51">51</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="kw">crate</span>::<span class="kw-2">*</span>;
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::xinput</span>::<span class="kw-2">*</span>;
 <span class="kw">use</span> <span class="ident">bytemuck::Zeroable</span>;
@@ -65,17 +68,17 @@
 <span class="doccomment">/// *   [ERROR::DEVICE_NOT_CONNECTED]   - [`User`] gamepad not connected</span>
 <span class="doccomment">/// *   ~~[THINERR::MISSING_DLL_EXPORT]~~ - Silently falls back on [get_state] instead</span>
 <span class="attribute">#[<span class="ident">deprecated</span> <span class="op">=</span> <span class="string">&quot;This undocumented function is reserved for system software to access Buttons::Guide.&quot;</span>]</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_state_ex</span>(<span class="ident">user_index</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">User</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">State</span>, <span class="ident">MethodError</span><span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_state_ex</span>(<span class="ident">user_index</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">State</span>, <span class="ident">MethodError</span><span class="op">&gt;</span> {
     <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">non_snake_case</span>)]</span>
     <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">XInputGetStateEx</span>) <span class="op">=</span> <span class="ident">Imports::get</span>().<span class="ident">_XInputGetStateEx</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">state</span> <span class="op">=</span> <span class="ident">State::zeroed</span>();
         <span class="comment">// SAFETY: ✔️</span>
         <span class="comment">//  * fuzzed        in `tests/fuzz-xinput.rs`</span>
         <span class="comment">//  * tested        in `examples/xinput-exercise-all.rs` (Guide button works)</span>
-        <span class="comment">//  * `user_index`  is well tested from 0 ..= 255 (but retest if the type of `user_index` expands to allow `u32`!)</span>
+        <span class="comment">//  * `user_index`  is well tested</span>
         <span class="comment">//  * `state`       is out-only, fixed size, no `cbSize` field, never null, all bit patterns sane</span>
         <span class="comment">//  * `fn`          should be `None` or valid if returned by `Imports::get()`</span>
-        <span class="kw">let</span> <span class="ident">code</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="ident">XInputGetStateEx</span>(<span class="ident">user_index</span>.<span class="ident">into</span>().<span class="ident">into</span>(), <span class="kw-2">&amp;mut</span> <span class="ident">state</span> <span class="kw">as</span> <span class="kw-2">*mut</span> <span class="kw">_</span> <span class="kw">as</span> <span class="kw-2">*mut</span> <span class="kw">_</span>) };
+        <span class="kw">let</span> <span class="ident">code</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="ident">XInputGetStateEx</span>(<span class="ident">user_index</span>.<span class="ident">into</span>(), <span class="kw-2">&amp;mut</span> <span class="ident">state</span> <span class="kw">as</span> <span class="kw-2">*mut</span> <span class="kw">_</span> <span class="kw">as</span> <span class="kw-2">*mut</span> <span class="kw">_</span>) };
         <span class="ident">check_error_success</span>(<span class="string">&quot;XInputGetStateEx&quot;</span>, <span class="ident">code</span>)<span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(<span class="ident">state</span>)
     } <span class="kw">else</span> {
@@ -84,14 +87,17 @@
 }
 
 <span class="attribute">#[<span class="ident">test</span>]</span> <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">deprecated</span>)]</span> <span class="kw">fn</span> <span class="ident">test_valid_params</span>() {
-    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=</span> <span class="ident">get_state_ex</span>(<span class="ident">User::Zero</span> ) { <span class="macro">assert_eq!</span>(<span class="ident">err</span>.<span class="ident">kind</span>(), <span class="ident">ERROR::DEVICE_NOT_CONNECTED</span>); }
-    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=</span> <span class="ident">get_state_ex</span>(<span class="ident">User::Three</span>) { <span class="macro">assert_eq!</span>(<span class="ident">err</span>.<span class="ident">kind</span>(), <span class="ident">ERROR::DEVICE_NOT_CONNECTED</span>); }
+    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=</span> <span class="ident">get_state_ex</span>(<span class="number">0u32</span>) { <span class="macro">assert_eq!</span>(<span class="ident">err</span>.<span class="ident">kind</span>(), <span class="ident">ERROR::DEVICE_NOT_CONNECTED</span>); }
+    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=</span> <span class="ident">get_state_ex</span>(<span class="number">1u32</span>) { <span class="macro">assert_eq!</span>(<span class="ident">err</span>.<span class="ident">kind</span>(), <span class="ident">ERROR::DEVICE_NOT_CONNECTED</span>); }
+    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=</span> <span class="ident">get_state_ex</span>(<span class="number">2u32</span>) { <span class="macro">assert_eq!</span>(<span class="ident">err</span>.<span class="ident">kind</span>(), <span class="ident">ERROR::DEVICE_NOT_CONNECTED</span>); }
+    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=</span> <span class="ident">get_state_ex</span>(<span class="number">3u32</span>) { <span class="macro">assert_eq!</span>(<span class="ident">err</span>.<span class="ident">kind</span>(), <span class="ident">ERROR::DEVICE_NOT_CONNECTED</span>); }
 }
 
 <span class="attribute">#[<span class="ident">test</span>]</span> <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">deprecated</span>)]</span> <span class="kw">fn</span> <span class="ident">test_bad_arguments</span>() {
     <span class="macro">assert_eq!</span>(<span class="ident">ERROR::BAD_ARGUMENTS</span>, <span class="ident">get_state_ex</span>(<span class="ident">User::Any</span>));
-    <span class="macro">assert_eq!</span>(<span class="ident">ERROR::BAD_ARGUMENTS</span>, <span class="ident">get_state_ex</span>(<span class="ident">User::from_unchecked</span>(<span class="number">4</span>)));
-    <span class="macro">assert_eq!</span>(<span class="ident">ERROR::BAD_ARGUMENTS</span>, <span class="ident">get_state_ex</span>(<span class="ident">User::from_unchecked</span>(<span class="number">254</span>)));
+    <span class="kw">for</span> <span class="ident">u</span> <span class="kw">in</span> <span class="ident">User::iter_invalid</span>() {
+        <span class="macro">assert_eq!</span>(<span class="ident">ERROR::BAD_ARGUMENTS</span>, <span class="ident">get_state_ex</span>(<span class="ident">u</span>));
+    }
 }
 
 <span class="comment">//#cpp2rust XInputGetStateEx    = xinput::get_state_ex</span>

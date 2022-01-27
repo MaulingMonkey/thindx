@@ -876,7 +876,7 @@
             </div>
             <div
                 class="column is-1 is-narrow p-0 has-text-centered has-text-success-light has-background-success">
-                27973
+                28522
             </div>
             <div class="column has-background-success-light p-0">
                 <pre class="has-background-success-light py-0 px-2">    pub fn get() -&gt; &amp;&#x27;static Self { &amp;*IMPORTS }</pre>
@@ -1568,7 +1568,7 @@
                 2
             </div>
             <div class="column has-background-success-light p-0">
-                <pre class="has-background-success-light py-0 px-2">    let proc = GetCurrentProcess();</pre>
+                <pre class="has-background-success-light py-0 px-2">    let proc = unsafe { GetCurrentProcess() };</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1672,7 +1672,7 @@
                 4
             </div>
             <div class="column has-background-success-light p-0">
-                <pre class="has-background-success-light py-0 px-2">        let ok = EnumProcessModulesEx(proc, modules.as_mut_ptr(), available_bytes, &amp;mut needed_bytes, LIST_MODULES_DEFAULT);</pre>
+                <pre class="has-background-success-light py-0 px-2">        let ok = unsafe { EnumProcessModulesEx(proc, modules.as_mut_ptr(), available_bytes, &amp;mut needed_bytes, LIST_MODULES_DEFAULT) };</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1890,7 +1890,7 @@
             </div>
             <div
                 class="column is-1 is-narrow p-0 has-text-centered has-text-success-light has-background-success">
-                105
+                107
             </div>
             <div class="column has-background-success-light p-0">
                 <pre class="has-background-success-light py-0 px-2">    modules.retain(|&amp;m| unsafe { Library::from_hmodule(m) }.map_or(false, |m| m.has_sym(&quot;XInputGetState\0&quot;)));</pre>
@@ -1997,7 +1997,7 @@
                 
             </div>
             <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">                let len = GetModuleBaseNameA(proc, m, name.as_mut_ptr().cast(), name.len() as _) as usize;</pre>
+                <pre class="has-background-danger-light py-0 px-2">                let len = unsafe { GetModuleBaseNameA(proc, m, name.as_mut_ptr().cast(), name.len() as _) } as usize;</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -2171,7 +2171,7 @@
         </div></div>
         <footer class="footer">
             <div class="content has-text-centered">
-                <p class="heading">Date: 2022-01-24 09:12</p>
+                <p class="heading">Date: 2022-01-27 09:42</p>
             </div>
         </footer>
     </body>

@@ -45,6 +45,13 @@
 <span id="44">44</span>
 <span id="45">45</span>
 <span id="46">46</span>
+<span id="47">47</span>
+<span id="48">48</span>
+<span id="49">49</span>
+<span id="50">50</span>
+<span id="51">51</span>
+<span id="52">52</span>
+<span id="53">53</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="kw">crate</span>::<span class="kw-2">*</span>;
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::xinput</span>::<span class="kw-2">*</span>;
 
@@ -65,29 +72,36 @@
 <span class="doccomment">/// *   [ERROR::BAD_ARGUMENTS]          - Invalid [`User`] or [`User::Any`]</span>
 <span class="doccomment">/// *   [ERROR::DEVICE_NOT_CONNECTED]   - Disconnected [`User`]</span>
 <span class="doccomment">/// *   [ERROR::DEVICE_NOT_CONNECTED]   - Invalid [`BatteryDevType`]</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_battery_information</span>(<span class="ident">user_index</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">User</span><span class="op">&gt;</span>, <span class="ident">dev_type</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">BatteryDevType</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">BatteryInformation</span>, <span class="ident">MethodError</span><span class="op">&gt;</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_battery_information</span>(<span class="ident">user_index</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>, <span class="ident">dev_type</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">BatteryDevType</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">BatteryInformation</span>, <span class="ident">MethodError</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">info</span> <span class="op">=</span> <span class="ident">BatteryInformation::zeroed</span>();
     <span class="comment">// SAFETY: ✔️</span>
     <span class="comment">//  * fuzzed        in `tests/fuzz-xinput.rs`</span>
-    <span class="comment">//  * `user_index`  is well tested from 0 ..= 255 (but retest if the type of `user_index` expands to allow `u32`!)</span>
+    <span class="comment">//  * `user_index`  is well tested</span>
     <span class="comment">//  * `dev_type`    is decently tested (0, 1, 2 (OOB), 42, 255 all result in defined behavior)</span>
     <span class="comment">//  * `info`        is out-only, no cbSize field, fixed size, sane</span>
-    <span class="kw">let</span> <span class="ident">code</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="ident">XInputGetBatteryInformation</span>(<span class="ident">user_index</span>.<span class="ident">into</span>().<span class="ident">into</span>(), <span class="ident">dev_type</span>.<span class="ident">into</span>().<span class="ident">into</span>(), <span class="kw-2">&amp;mut</span> <span class="ident">info</span> <span class="kw">as</span> <span class="kw-2">*mut</span> <span class="kw">_</span> <span class="kw">as</span> <span class="kw-2">*mut</span> <span class="kw">_</span>) };
+    <span class="kw">let</span> <span class="ident">code</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="ident">XInputGetBatteryInformation</span>(<span class="ident">user_index</span>.<span class="ident">into</span>(), <span class="ident">dev_type</span>.<span class="ident">into</span>().<span class="ident">into</span>(), <span class="kw-2">&amp;mut</span> <span class="ident">info</span> <span class="kw">as</span> <span class="kw-2">*mut</span> <span class="kw">_</span> <span class="kw">as</span> <span class="kw-2">*mut</span> <span class="kw">_</span>) };
     <span class="ident">check_error_success</span>(<span class="string">&quot;XInputGetBatteryInformation&quot;</span>, <span class="ident">code</span>)<span class="question-mark">?</span>;
     <span class="prelude-val">Ok</span>(<span class="ident">info</span>)
 }
 
 <span class="attribute">#[<span class="ident">test</span>]</span> <span class="kw">fn</span> <span class="ident">test_valid_params</span>() {
-    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=</span> <span class="ident">get_battery_information</span>(<span class="ident">User::Zero</span>,  <span class="ident">BatteryDevType::Gamepad</span>) { <span class="macro">assert_eq!</span>(<span class="ident">err</span>.<span class="ident">kind</span>(), <span class="ident">ERROR::DEVICE_NOT_CONNECTED</span>); }
-    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=</span> <span class="ident">get_battery_information</span>(<span class="ident">User::Three</span>, <span class="ident">BatteryDevType::Gamepad</span>) { <span class="macro">assert_eq!</span>(<span class="ident">err</span>.<span class="ident">kind</span>(), <span class="ident">ERROR::DEVICE_NOT_CONNECTED</span>); }
-    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=</span> <span class="ident">get_battery_information</span>(<span class="ident">User::Zero</span>,  <span class="ident">BatteryDevType::Headset</span>) { <span class="macro">assert_eq!</span>(<span class="ident">err</span>.<span class="ident">kind</span>(), <span class="ident">ERROR::DEVICE_NOT_CONNECTED</span>); }
-    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=</span> <span class="ident">get_battery_information</span>(<span class="ident">User::Three</span>, <span class="ident">BatteryDevType::Headset</span>) { <span class="macro">assert_eq!</span>(<span class="ident">err</span>.<span class="ident">kind</span>(), <span class="ident">ERROR::DEVICE_NOT_CONNECTED</span>); }
+    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=</span> <span class="ident">get_battery_information</span>(<span class="number">0u32</span>, <span class="ident">BatteryDevType::Gamepad</span>) { <span class="macro">assert_eq!</span>(<span class="ident">err</span>.<span class="ident">kind</span>(), <span class="ident">ERROR::DEVICE_NOT_CONNECTED</span>); }
+    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=</span> <span class="ident">get_battery_information</span>(<span class="number">1u32</span>, <span class="ident">BatteryDevType::Gamepad</span>) { <span class="macro">assert_eq!</span>(<span class="ident">err</span>.<span class="ident">kind</span>(), <span class="ident">ERROR::DEVICE_NOT_CONNECTED</span>); }
+    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=</span> <span class="ident">get_battery_information</span>(<span class="number">2u32</span>, <span class="ident">BatteryDevType::Gamepad</span>) { <span class="macro">assert_eq!</span>(<span class="ident">err</span>.<span class="ident">kind</span>(), <span class="ident">ERROR::DEVICE_NOT_CONNECTED</span>); }
+    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=</span> <span class="ident">get_battery_information</span>(<span class="number">3u32</span>, <span class="ident">BatteryDevType::Gamepad</span>) { <span class="macro">assert_eq!</span>(<span class="ident">err</span>.<span class="ident">kind</span>(), <span class="ident">ERROR::DEVICE_NOT_CONNECTED</span>); }
+
+    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=</span> <span class="ident">get_battery_information</span>(<span class="number">0u32</span>, <span class="ident">BatteryDevType::Headset</span>) { <span class="macro">assert_eq!</span>(<span class="ident">err</span>.<span class="ident">kind</span>(), <span class="ident">ERROR::DEVICE_NOT_CONNECTED</span>); }
+    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=</span> <span class="ident">get_battery_information</span>(<span class="number">1u32</span>, <span class="ident">BatteryDevType::Headset</span>) { <span class="macro">assert_eq!</span>(<span class="ident">err</span>.<span class="ident">kind</span>(), <span class="ident">ERROR::DEVICE_NOT_CONNECTED</span>); }
+    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=</span> <span class="ident">get_battery_information</span>(<span class="number">2u32</span>, <span class="ident">BatteryDevType::Headset</span>) { <span class="macro">assert_eq!</span>(<span class="ident">err</span>.<span class="ident">kind</span>(), <span class="ident">ERROR::DEVICE_NOT_CONNECTED</span>); }
+    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=</span> <span class="ident">get_battery_information</span>(<span class="number">3u32</span>, <span class="ident">BatteryDevType::Headset</span>) { <span class="macro">assert_eq!</span>(<span class="ident">err</span>.<span class="ident">kind</span>(), <span class="ident">ERROR::DEVICE_NOT_CONNECTED</span>); }
 }
 
 <span class="attribute">#[<span class="ident">test</span>]</span> <span class="kw">fn</span> <span class="ident">test_bad_arguments</span>() {
-    <span class="macro">assert_eq!</span>(<span class="ident">ERROR::BAD_ARGUMENTS</span>,        <span class="ident">get_battery_information</span>(<span class="ident">User::Any</span>,                  <span class="ident">BatteryDevType::Gamepad</span>));
-    <span class="macro">assert_eq!</span>(<span class="ident">ERROR::BAD_ARGUMENTS</span>,        <span class="ident">get_battery_information</span>(<span class="ident">User::from_unchecked</span>(<span class="number">4</span>),    <span class="ident">BatteryDevType::Gamepad</span>));
-    <span class="macro">assert_eq!</span>(<span class="ident">ERROR::DEVICE_NOT_CONNECTED</span>, <span class="ident">get_battery_information</span>(<span class="ident">User::Zero</span>,                 <span class="ident">BatteryDevType::from_unchecked</span>(<span class="number">42</span>)));
+    <span class="macro">assert_eq!</span>(<span class="ident">ERROR::DEVICE_NOT_CONNECTED</span>, <span class="ident">get_battery_information</span>(<span class="ident">User::Zero</span>, <span class="ident">BatteryDevType::from_unchecked</span>(<span class="number">42</span>))); <span class="comment">// bad devtype</span>
+    <span class="macro">assert_eq!</span>(<span class="ident">ERROR::BAD_ARGUMENTS</span>,        <span class="ident">get_battery_information</span>(<span class="ident">User::Any</span>,  <span class="ident">BatteryDevType::Gamepad</span>));
+    <span class="kw">for</span> <span class="ident">u</span> <span class="kw">in</span> <span class="ident">User::iter_invalid</span>() {
+        <span class="macro">assert_eq!</span>(<span class="ident">ERROR::BAD_ARGUMENTS</span>, <span class="ident">get_battery_information</span>(<span class="ident">u</span>, <span class="ident">BatteryDevType::Gamepad</span>));
+    }
 }
 
 <span class="comment">//#cpp2rust XInputGetBatteryInformation     = xinput::get_battery_information</span>
