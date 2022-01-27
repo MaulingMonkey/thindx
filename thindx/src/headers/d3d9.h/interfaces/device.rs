@@ -1960,6 +1960,25 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         MethodError::check("IDirect3DDevice9::GetRenderTargetData", hr)
     }
 
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getscissorrect)\]
+    /// IDirect3DDevice9::GetScissorRect
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_pure();
+    /// let rect = device.get_scissor_rect().unwrap();
+    /// dbg!(rect); // ex: Rect { x: 0..784, y: 0..561 }
+    /// ```
+    ///
+    /// ### Returns
+    /// *   Ok([Rect])
+    fn get_scissor_rect(&self) -> Result<Rect, MethodError> {
+        let mut rect = Rect::zeroed();
+        let hr = unsafe { self.as_winapi().GetScissorRect(rect.as_mut()) };
+        MethodError::check("IDirect3DDevice9::GetScissorRect", hr)?;
+        Ok(rect)
+    }
+
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getsoftwarevertexprocessing)\]
     /// IDirect3DDevice9::GetSoftwareVertexProcessing
     ///

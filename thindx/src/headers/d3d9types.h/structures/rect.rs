@@ -1,5 +1,7 @@
 #[allow(unused_imports)] use crate::*;
 
+use bytemuck::*;
+
 use winapi::shared::d3d9types::*;
 use winapi::shared::windef::RECT;
 
@@ -21,6 +23,7 @@ use std::fmt::{self, Debug, Formatter};
 /// | x2                    | right     |
 /// | y2                    | bottom    |
 #[derive(Clone, Copy, Default)]
+#[derive(Pod, Zeroable)]
 #[repr(C)] pub struct Rect {
     /// left
     pub x1: i32,
@@ -44,6 +47,16 @@ impl From<D3DRECT> for Rect { fn from(value: D3DRECT) -> Self { unsafe { std::me
 impl From<Rect> for D3DRECT { fn from(value: Rect   ) -> Self { unsafe { std::mem::transmute(value) } } }
 impl From<RECT> for Rect { fn from(value: RECT) -> Self { unsafe { std::mem::transmute(value) } } }
 impl From<Rect> for RECT { fn from(value: Rect) -> Self { unsafe { std::mem::transmute(value) } } }
+
+impl AsRef<D3DRECT> for Rect { fn as_ref(&self) -> &D3DRECT { unsafe { std::mem::transmute(self) } } }
+impl AsRef<   RECT> for Rect { fn as_ref(&self) -> &   RECT { unsafe { std::mem::transmute(self) } } }
+impl AsMut<D3DRECT> for Rect { fn as_mut(&mut self) -> &mut D3DRECT { unsafe { std::mem::transmute(self) } } }
+impl AsMut<   RECT> for Rect { fn as_mut(&mut self) -> &mut    RECT { unsafe { std::mem::transmute(self) } } }
+
+impl AsRef<Rect> for D3DRECT { fn as_ref(&self) -> &Rect { unsafe { std::mem::transmute(self) } } }
+impl AsRef<Rect> for    RECT { fn as_ref(&self) -> &Rect { unsafe { std::mem::transmute(self) } } }
+impl AsMut<Rect> for D3DRECT { fn as_mut(&mut self) -> &mut Rect { unsafe { std::mem::transmute(self) } } }
+impl AsMut<Rect> for    RECT { fn as_mut(&mut self) -> &mut Rect { unsafe { std::mem::transmute(self) } } }
 
 impl Rect {
     pub fn from(value: impl Into<Self>) -> Self { value.into() }
