@@ -920,6 +920,17 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///
     /// See the [Vertex Declaration (Direct3D 9)] page for a detailed description of how to map vertex declarations between different versions of DirectX.
     ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_pure();
+    /// let decl = device.create_vertex_declaration(&[
+    ///     VertexElement::new(0,  0, DeclType8::Float4, DeclMethod8::Default, DeclUsage8::Position, 0),
+    ///     VertexElement::new(0, 16, DeclType8::Float2, DeclMethod8::Default, DeclUsage8::TexCoord, 0),
+    ///     VertexElement::END
+    /// ]).unwrap();
+    /// ```
+    ///
     /// ### Returns
     ///
     /// *   [D3DERR::INVALIDCALL]   if `elements.last()` != `Some(D3DDECL_END)`
@@ -2133,6 +2144,39 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         let hr = unsafe { self.as_winapi().GetTexture(stage, &mut texture) };
         MethodError::check("IDirect3DDevice9::GetTexture", hr)?;
         Ok(unsafe { BaseTexture::from_raw_opt(texture) })
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getvertexdeclaration)\]
+    /// IDirect3DDevice9::GetVertexDeclaration
+    ///
+    /// Gets the currently bound [VertexDeclaration], or None if none was set.
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_pure();
+    /// # let some_decl = device.create_vertex_declaration(&[
+    /// #     VertexElement::new(0,  0, DeclType8::Float4, DeclMethod8::Default, DeclUsage8::Position, 0),
+    /// #     VertexElement::new(0, 16, DeclType8::Float2, DeclMethod8::Default, DeclUsage8::TexCoord, 0),
+    /// #     VertexElement::END
+    /// # ]).unwrap();
+    /// let decl1 = device.get_vertex_declaration().unwrap();
+    /// assert!(decl1.is_none());
+    ///
+    /// device.set_vertex_declaration(Some(&some_decl)).unwrap();
+    ///
+    /// let decl2 = device.get_vertex_declaration().unwrap().unwrap();
+    /// assert_eq!(some_decl.as_raw(), decl2.as_raw());
+    /// ```
+    ///
+    /// ### Returns
+    /// *   Ok(Some([VertexDeclaration]))   If a vertex declaration was set
+    /// *   Ok(None)                        If no vertex declaration was set
+    fn get_vertex_declaration(&self) -> Result<Option<VertexDeclaration>, MethodError> {
+        let mut vd = null_mut();
+        let hr = unsafe { self.as_winapi().GetVertexDeclaration(&mut vd) };
+        MethodError::check("IDirect3DDevice9::GetVertexDeclaration", hr)?;
+        Ok(unsafe { VertexDeclaration::from_raw_opt(vd) })
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getvertexshader)\]
