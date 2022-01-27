@@ -731,7 +731,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
                 unsafe { std::ptr::copy_nonoverlapping(src, dst, block_size_bytes) };
             }
 
-            texture.unlock_rect(0)?;
+            texture.unlock_rect(mip_level)?;
             mip_pixels_width    >>= 1;
             mip_pixels_height   >>= 1;
         }
