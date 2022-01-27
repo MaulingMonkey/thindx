@@ -4,6 +4,13 @@ use std::fmt::{self, Debug, Formatter};
 
 
 
+/// [PS_1_1](Self::PS_1_1)
+/// ..=
+/// [PS_3_0](Self::PS_3_0),
+/// [VS_1_1](Self::VS_1_1)
+/// ..=
+/// [VS_3_0](Self::VS_3_0)
+/// (Direct3D 9 compatible shader versions)
 #[derive(Clone, Copy, Default, PartialEq, Eq, PartialOrd, Ord, Hash, Pod, Zeroable)]
 #[repr(transparent)]
 pub struct ShaderVersion(DWORD);
@@ -11,25 +18,35 @@ pub struct ShaderVersion(DWORD);
 impl ShaderVersion {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dps-version)\]
     /// D3DPS_VERSION
+    ///
+    /// Construct a pixel shader version
     pub const fn ps(major: u8, minor: u8) -> Self {
         Self(0xFFFF0000 | ((major as u32) << 8) | ((minor as u32) << 0))
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dvs-version)\]
     /// D3DVS_VERSION
+    ///
+    /// Construct a vertex shader version
     pub const fn vs(major: u8, minor: u8) -> Self {
         Self(0xFFFE0000 | ((major as u32) << 8) | ((minor as u32) << 0))
     }
 
-    /// \[docs.microsoft.com\]
     /// D3DSHADER_VERSION_MAJOR
+    ///
+    /// The major version component of a shader version (e.g. `2` for [`PS_2_0`](Self::PS_2_0)\)
     pub fn version_major(&self) -> u8 { (self.0 >> 8) as _ }
 
-    /// \[docs.microsoft.com\]
     /// D3DSHADER_VERSION_MINOR
+    ///
+    /// The minor version component of a shader version (e.g. `0` for [`PS_2_0`](Self::PS_2_0)\)
     pub fn version_minor(&self) -> u8 { (self.0 >> 0) as _ }
 
+    /// `true` for `PS_*` versions (pixel shaders)
+    pub fn is_pixel_shader(&self) -> bool { self.0 >> 16 == 0xFFFF }
 
+    /// `true` for `VS_*` versions (vertex shaders)
+    pub fn is_vertex_shader(&self) -> bool { self.0 >> 16 == 0xFFFE }
 
     // all valid pixel shader versions per
     // <https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dps-version#remarks>
