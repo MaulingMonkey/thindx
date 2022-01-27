@@ -37,3 +37,9 @@ pub(crate) fn drop_final(unk: impl AsSafe<IUnknown>) {
     };
     debug_assert_eq!(1, rc, "this wasn't the final object");
 }
+
+//#cpp2rust IUnknown                    = Unknown
+
+//#cpp2rust IUnknown::AddRef            = mcom::Rc::clone
+//#cpp2rust IUnknown::Release           = mcom::Rc::drop
+//#cpp2rust IUnknown::QueryInterface    = mcom::Rc::try_cast

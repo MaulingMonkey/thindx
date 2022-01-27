@@ -1,13 +1,3 @@
-# unknwn.h interfaces
-IUnknown                                = Unknown
-
-# unknwn.h methods
-IUnknown::AddRef                        = mcom::Rc::clone
-IUnknown::Release                       = mcom::Rc::drop
-IUnknown::QueryInterface                = mcom::Rc::try_cast
-
-
-
 # d3d11shader.h interfaces
 ID3D11FunctionLinkingGraph              = d3d11::FunctionLinkingGraph
 ID3D11FunctionParameterReflection       = d3d11::FunctionParameterReflection
