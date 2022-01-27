@@ -682,11 +682,8 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///     TextureMipRef { data: &data[..4 * 2*2 ], stride: 4*2 },
     ///     TextureMipRef { data: &data[..4 * 1*1 ], stride: 4*1 },
     /// ];
-    /// let texture = device.create_texture_from(4, 4, &mips[..3], Usage::None,    FixedTextureFormat::A8R8G8B8, Pool::Managed, ()).unwrap();
-    /// let texture = device.create_texture_from(4, 4, &mips[..1], Usage::Dynamic, FixedTextureFormat::A8R8G8B8, Pool::Default, ()).unwrap();
-    ///
-    /// // fails: dynamic textures can only lock the top mip?
-    /// // let texture = device.create_texture_from(4, 4, &mips[..2], Usage::Dynamic, FixedTextureFormat::A8R8G8B8, Pool::Default, ()).unwrap();
+    /// let texture = device.create_texture_from(4, 4, &mips, Usage::None,    FixedTextureFormat::A8R8G8B8, Pool::Managed, ()).unwrap();
+    /// let texture = device.create_texture_from(4, 4, &mips, Usage::Dynamic, FixedTextureFormat::A8R8G8B8, Pool::Default, ()).unwrap();
     /// ```
     fn create_texture_from(&self, width: u32, height: u32, mips: &[TextureMipRef], usage: impl Into<Usage>, format: &FixedTextureFormat, pool: impl Into<Pool>, _shared_handle: impl SharedHandleParam) -> Result<Texture, MethodError> {
         // TODO: consider THINERR::* constants instead?
@@ -702,7 +699,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         let block_width     = u32::from(format.block_size.0);
         let block_height    = u32::from(format.block_size.1);
         let is_dynamic      = 0 != (usage.into() & d3d::Usage::Dynamic.into());
-        let lock_type       = if is_dynamic { Lock::Discard } else { Lock::NoOverwrite }; // NoOverwrite appears to not be an option?
 
         let mut mip_pixels_width    = width;
         let mut mip_pixels_height   = height;
@@ -711,6 +707,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
             mip_pixels_width    = mip_pixels_width.max(1);
             mip_pixels_height   = mip_pixels_height.max(1);
 
+            let lock_type           = if !is_dynamic { Lock::NoOverwrite } else if mip_level == 0 { Lock::Discard } else { Lock::None };
             let mip_level           = mip_level as u32; // safe: mip_level < mips.len() == levels <= u32::MAX
             let mip_blocks_width    = (mip_pixels_width  + block_width  - 1) / block_width;
             let mip_blocks_height   = (mip_pixels_height + block_height - 1) / block_height;
