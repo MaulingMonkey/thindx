@@ -1807,6 +1807,23 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         unsafe { self.as_winapi().GetNPatchMode() }
     }
 
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getnumberofswapchains)\]
+    /// IDirect3DDevice9::GetNumberOfSwapChains
+    ///
+    /// Gets the number of implicit swap chains created for this device during [IDirect3D9Ext::create_device].
+    ///
+    /// (Does not include additional explicit swap chains created using [IDirect3DDevice9Ext::create_additional_swap_chain]?)
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_test();
+    /// assert_eq!(device.get_number_of_swap_chains(), 1);
+    /// ```
+    fn get_number_of_swap_chains(&self) -> u32 {
+        unsafe { self.as_winapi().GetNumberOfSwapChains() }
+    }
+
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getpaletteentries)\]
     /// IDirect3DDevice9::GetPaletteEntries
     ///

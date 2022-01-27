@@ -916,7 +916,7 @@ pub const d3dcompiler_h : cxx_header = cxx_header;
 /// * [`IDirect3DDevice9::GetLightEnable`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getlightenable)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_light_enable`], [`d3d9::IDirect3DDevice9Ext::get_light_enable_32`] <br>
 /// * [`IDirect3DDevice9::GetMaterial`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getmaterial)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_material`] <br>
 /// * [`IDirect3DDevice9::GetNPatchMode`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getnpatchmode)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_npatch_mode`] <br>
-/// * [`IDirect3DDevice9::GetNumberOfSwapChains`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getnumberofswapchains) →&nbsp;❌ <br>
+/// * [`IDirect3DDevice9::GetNumberOfSwapChains`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getnumberofswapchains)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_number_of_swap_chains`] <br>
 /// * [`IDirect3DDevice9::GetPaletteEntries`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getpaletteentries)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_palette_entries`] <br>
 /// * [`IDirect3DDevice9::GetPixelShader`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getpixelshader)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_pixel_shader`] <br>
 /// * [`IDirect3DDevice9::GetPixelShaderConstantB`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getpixelshaderconstantb) →&nbsp;❌ <br>
