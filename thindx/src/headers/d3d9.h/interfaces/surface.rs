@@ -161,8 +161,8 @@ pub trait IDirect3DSurface9Ext : AsSafe<IDirect3DSurface9> {
     unsafe fn lock_rect_unchecked(&self, rect: impl IntoRectOrFull, flags: impl Into<Lock>) -> Result<D3DLOCKED_RECT, MethodError> {
         let rect = rect.into_rect();
         let rect = rect.as_ref().map_or(null(), |b| &**b);
-        let mut locked = std::mem::zeroed::<D3DLOCKED_RECT>();
-        let hr = self.as_winapi().LockRect(&mut locked, rect.cast(), flags.into().into());
+        let mut locked = unsafe { std::mem::zeroed::<D3DLOCKED_RECT>() };
+        let hr = unsafe { self.as_winapi().LockRect(&mut locked, rect.cast(), flags.into().into()) };
         MethodError::check("IDirect3DSurface9::LockRect", hr)?;
         Ok(locked)
     }

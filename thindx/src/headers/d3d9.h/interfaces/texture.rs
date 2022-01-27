@@ -485,8 +485,8 @@ pub trait IDirect3DCubeTexture9Ext : AsSafe<IDirect3DCubeTexture9> {
         let rect = rect.into_rect();
         let rect = rect.as_ref().map_or(null(), |r| &**r);
         let flags = flags.into().into();
-        let mut locked = std::mem::zeroed::<D3DLOCKED_RECT>();
-        let hr = self.as_winapi().LockRect(face, level, &mut locked, rect.cast(), flags);
+        let mut locked = unsafe { std::mem::zeroed::<D3DLOCKED_RECT>() };
+        let hr = unsafe { self.as_winapi().LockRect(face, level, &mut locked, rect.cast(), flags) };
         MethodError::check("IDirect3DCubeTexture9::LockRect", hr)?;
         Ok(locked)
     }
@@ -687,8 +687,8 @@ pub trait IDirect3DTexture9Ext : AsSafe<IDirect3DTexture9> {
         let rect = rect.into_rect();
         let rect = rect.as_ref().map_or(null(), |r| &**r);
         let flags = flags.into().into();
-        let mut locked = std::mem::zeroed::<D3DLOCKED_RECT>();
-        let hr = self.as_winapi().LockRect(level, &mut locked, rect.cast(), flags);
+        let mut locked = unsafe { std::mem::zeroed::<D3DLOCKED_RECT>() };
+        let hr = unsafe { self.as_winapi().LockRect(level, &mut locked, rect.cast(), flags) };
         MethodError::check("IDirect3DTexture9::LockRect", hr)?;
         Ok(locked)
     }
@@ -892,8 +892,8 @@ pub trait IDirect3DVolumeTexture9Ext : AsSafe<IDirect3DVolumeTexture9> {
         let box_    = box_.into_box();
         let box_    = box_.as_ref().map_or(null(), |b| &**b);
         let flags   = flags.into().into();
-        let mut lockedbox = std::mem::zeroed::<D3DLOCKED_BOX>();
-        let hr = self.as_winapi().LockBox(level, &mut lockedbox, box_, flags);
+        let mut lockedbox = unsafe { std::mem::zeroed::<D3DLOCKED_BOX>() };
+        let hr = unsafe { self.as_winapi().LockBox(level, &mut lockedbox, box_, flags) };
         MethodError::check("IDirect3DVolumeTexture9::LockBox", hr)?;
         Ok(lockedbox)
     }

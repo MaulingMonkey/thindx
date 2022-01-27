@@ -162,10 +162,10 @@ pub trait IDirect3DVolume9Ext : AsSafe<IDirect3DVolume9> {
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok([D3DLOCKED_BOX])
     unsafe fn lock_box_unchecked(&self, box_: impl IntoBoxOrFull, flags: impl Into<Lock>) -> Result<D3DLOCKED_BOX, MethodError> {
-        let mut locked = std::mem::zeroed::<D3DLOCKED_BOX>();
+        let mut locked = unsafe { std::mem::zeroed::<D3DLOCKED_BOX>() };
         let box_ = box_.into_box();
         let box_ = box_.as_ref().map_or(null(), |b| &**b);
-        let hr = self.as_winapi().LockBox(&mut locked, box_, flags.into().into());
+        let hr = unsafe { self.as_winapi().LockBox(&mut locked, box_, flags.into().into()) };
         MethodError::check("IDirect3DVolume9::LockBox", hr)?;
         Ok(locked)
     }

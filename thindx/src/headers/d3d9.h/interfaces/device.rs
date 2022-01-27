@@ -423,9 +423,9 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// [create_device]:            #method.create_device
     unsafe fn create_additional_swap_chain(&self, presentation_parameters: &mut D3DPRESENT_PARAMETERS) -> Result<SwapChain, MethodError> {
         let mut swap_chain = null_mut();
-        let hr = self.as_winapi().CreateAdditionalSwapChain(presentation_parameters, &mut swap_chain);
+        let hr = unsafe { self.as_winapi().CreateAdditionalSwapChain(presentation_parameters, &mut swap_chain) };
         MethodError::check("IDirect3DDevice9::CreateAdditionalSwapChain", hr)?;
-        Ok(SwapChain::from_raw(swap_chain))
+        Ok(unsafe { SwapChain::from_raw(swap_chain) })
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createcubetexture)\]
@@ -582,9 +582,9 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// *   Ok([PixelShader])
     unsafe fn create_pixel_shader(&self, function: &[u32]) -> Result<PixelShader, MethodError> {
         let mut shader = null_mut();
-        let hr = self.as_winapi().CreatePixelShader(function.as_ptr(), &mut shader);
+        let hr = unsafe { self.as_winapi().CreatePixelShader(function.as_ptr(), &mut shader) };
         MethodError::check("IDirect3DDevice9::CreatePixelShader", hr)?;
-        Ok(PixelShader::from_raw(shader))
+        Ok(unsafe { PixelShader::from_raw(shader) })
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createquery)\]
@@ -874,9 +874,9 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// *   Ok([VertexShader])
     unsafe fn create_vertex_shader(&self, function: &[u32]) -> Result<VertexShader, MethodError> {
         let mut shader = null_mut();
-        let hr = self.as_winapi().CreateVertexShader(function.as_ptr(), &mut shader);
+        let hr = unsafe { self.as_winapi().CreateVertexShader(function.as_ptr(), &mut shader) };
         MethodError::check("IDirect3DDevice9::CreateVertexShader", hr)?;
-        Ok(VertexShader::from_raw(shader))
+        Ok(unsafe { VertexShader::from_raw(shader) })
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createvolumetexture)\]
@@ -920,7 +920,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok(())
     unsafe fn draw_indexed_primitive(&self, primitive_type: PrimitiveType, base_vertex_index: i32, min_vertex_index: u32, num_verticies: u32, start_index: u32, primitive_count: u32) -> Result<(), MethodError> {
-        let hr = self.as_winapi().DrawIndexedPrimitive(primitive_type.into(), base_vertex_index, min_vertex_index, num_verticies, start_index, primitive_count);
+        let hr = unsafe { self.as_winapi().DrawIndexedPrimitive(primitive_type.into(), base_vertex_index, min_vertex_index, num_verticies, start_index, primitive_count) };
         MethodError::check("IDirect3DDevice9::DrawIndexedPrimitive", hr)
     }
 
@@ -938,7 +938,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok(())
     unsafe fn draw_indexed_primitive_up<I: Index, V: Pod>(&self, primitive_type: PrimitiveType, min_vertex_index: u32, num_verticies: u32, primitive_count: u32, indicies: &[I], vertex_stream_zero: &[V]) -> Result<(), MethodError> {
-        let hr = self.as_winapi().DrawIndexedPrimitiveUP(primitive_type.into(), min_vertex_index, num_verticies, primitive_count, indicies.as_ptr().cast(), I::format().into(), vertex_stream_zero.as_ptr().cast(), std::mem::size_of::<V>() as _);
+        let hr = unsafe { self.as_winapi().DrawIndexedPrimitiveUP(primitive_type.into(), min_vertex_index, num_verticies, primitive_count, indicies.as_ptr().cast(), I::format().into(), vertex_stream_zero.as_ptr().cast(), std::mem::size_of::<V>() as _) };
         MethodError::check("IDirect3DDevice9::DrawIndexedPrimitiveUP", hr)
     }
 
@@ -956,7 +956,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok(())
     unsafe fn draw_primitive(&self, primitive_type: PrimitiveType, start_vertex: u32, primitive_count: u32) -> Result<(), MethodError> {
-        let hr = self.as_winapi().DrawPrimitive(primitive_type.into(), start_vertex, primitive_count);
+        let hr = unsafe { self.as_winapi().DrawPrimitive(primitive_type.into(), start_vertex, primitive_count) };
         MethodError::check("IDirect3DDevice9::DrawPrimitive", hr)
     }
 
@@ -974,7 +974,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok(())
     unsafe fn draw_primitive_up<V: Pod>(&self, primitive_type: PrimitiveType, primitive_count: u32, vertex_stream_zero: &[V]) -> Result<(), MethodError> {
-        let hr = self.as_winapi().DrawPrimitiveUP(primitive_type.into(), primitive_count, vertex_stream_zero.as_ptr().cast(), std::mem::size_of::<V>() as _);
+        let hr = unsafe { self.as_winapi().DrawPrimitiveUP(primitive_type.into(), primitive_count, vertex_stream_zero.as_ptr().cast(), std::mem::size_of::<V>() as _) };
         MethodError::check("IDirect3DDevice9::DrawPrimitiveUP", hr)
     }
 
@@ -1674,7 +1674,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     unsafe fn get_palette_entries(&self, palette_number: u32) -> Result<[Color; 256], MethodError> {
         // D3D9 uses PALETTEENTRYs but misuses the flags field.  D3DCOLORs are much better fits.
         let mut colors = [Color::argb(0); 256];
-        let hr = self.as_winapi().GetPaletteEntries(palette_number, colors.as_mut_ptr().cast());
+        let hr = unsafe { self.as_winapi().GetPaletteEntries(palette_number, colors.as_mut_ptr().cast()) };
         MethodError::check("IDirect3DDevice9::GetPaletteEntries", hr)?;
         Ok(colors)
     }
@@ -1844,9 +1844,9 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// ```
     unsafe fn get_texture(&self, stage: u32) -> Result<Option<BaseTexture>, MethodError> {
         let mut texture = null_mut();
-        let hr = self.as_winapi().GetTexture(stage, &mut texture);
+        let hr = unsafe { self.as_winapi().GetTexture(stage, &mut texture) };
         MethodError::check("IDirect3DDevice9::GetTexture", hr)?;
-        Ok(BaseTexture::from_raw_opt(texture))
+        Ok(unsafe { BaseTexture::from_raw_opt(texture) })
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getvertexshader)\]
@@ -1943,7 +1943,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// }
     /// ```
     unsafe fn light_enable_32_unchecked(&self, index: u32, enable: bool) -> Result<(), MethodError> {
-        let hr = self.as_winapi().LightEnable(index, enable.into());
+        let hr = unsafe { self.as_winapi().LightEnable(index, enable.into()) };
         MethodError::check("IDirect3DDevice9::LightEnable", hr)
     }
 
@@ -2033,7 +2033,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// * [D3DERR::OUTOFVIDEOMEMORY]
     /// * Ok(())
     unsafe fn reset(&self, presentation_parameters: &mut D3DPRESENT_PARAMETERS) -> Result<(), MethodError> {
-        let hr = self.as_winapi().Reset(presentation_parameters);
+        let hr = unsafe { self.as_winapi().Reset(presentation_parameters) };
         MethodError::check("IDirect3DDevice9::Reset", hr)
     }
 
@@ -2213,7 +2213,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// ```
     unsafe fn set_light_32_unchecked(&self, index: u32, light: impl Into<Light>) -> Result<(), MethodError> {
         let light = light.into();
-        let hr = self.as_winapi().SetLight(index, &*light);
+        let hr = unsafe { self.as_winapi().SetLight(index, &*light) };
         MethodError::check("IDirect3DDevice9::SetLight", hr)
     }
 
@@ -2470,7 +2470,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///
     /// *   Ok(())              no matter what invalid parameters are used?
     unsafe fn set_sampler_state_unchecked(&self, sampler: u32, ty: SamplerStateType, value: impl Into<u32>) -> Result<(), MethodError> {
-        let hr = self.as_winapi().SetSamplerState(sampler, ty.into(), value.into());
+        let hr = unsafe { self.as_winapi().SetSamplerState(sampler, ty.into(), value.into()) };
         MethodError::check("IDirect3DDevice9::SetSamplerState", hr)
     }
 
@@ -2618,7 +2618,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         // TODO: make a more convenient trait for texture binding
         let texture = texture.into();
         let texture = texture.map_or(null_mut(), |t| t.as_raw());
-        let hr = self.as_winapi().SetTexture(stage, texture);
+        let hr = unsafe { self.as_winapi().SetTexture(stage, texture) };
         MethodError::check("IDirect3DDevice9::SetTexture", hr)
     }
 

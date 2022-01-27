@@ -51,7 +51,7 @@ impl Bytecode {
             }
         }
 
-        Ok(Self::from_unchecked(bytecode))
+        Ok(unsafe { Self::from_unchecked(bytecode) })
     }
 
     /// Trust that `bytecode` contains valid DXBC or DXIL bytecode.
@@ -66,7 +66,7 @@ impl Bytecode {
     ///
     /// [Bytecode::from_unchecked] performs no validation.  Prefer [Bytecode::from] which at least performs some.
     //#allow_missing_argument_docs
-    pub unsafe fn from_unchecked(bytecode: &[u8]) -> &Self { std::mem::transmute(bytecode) }
+    pub unsafe fn from_unchecked(bytecode: &[u8]) -> &Self { unsafe { std::mem::transmute(bytecode) } }
 
     /// Get the bytecode as a slice of bytes.
     pub fn as_bytes(&self) -> &[u8] { self.0.as_ref() }

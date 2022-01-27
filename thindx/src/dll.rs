@@ -79,14 +79,14 @@ pub(crate) trait LibraryExt : Sized + From<Library> + Into<Library> {
         //  * `hmodule`     ✔️ is a valid, non-dangling, permanently loaded hmodule
         //  * `ordinal`     ✔️ is a WORD/u16, meeting GetProcAddress's documented requirement:
         //                  "If this parameter is an ordinal value, it must be in the low-order word; the high-order word must be zero."
-        let func = GetProcAddress(self.as_hmodule(), ordinal as usize as *const _);
+        let func = unsafe { GetProcAddress(self.as_hmodule(), ordinal as usize as *const _) };
         if func.is_null() {
             None
         } else {
             // SAFETY: ✔️
             //  * `FnPtr`       ✔️ is asserted to be the same size as `FARPROC` via assert at start of function (can't enforce this at compile time)
             //  * `FnPtr`       ✔️ is assumed compatible with `FARPROC` per the documented safety contract of this unsafe function
-            Some(std::mem::transmute_copy::<FARPROC, FnPtr>(&func))
+            Some(unsafe { std::mem::transmute_copy::<FARPROC, FnPtr>(&func) })
         }
     }
 
@@ -110,7 +110,7 @@ pub(crate) trait LibraryExt : Sized + From<Library> + Into<Library> {
             None
         } else {
             // SAFETY: ⚠️ `minidl::Library` is a `#[repr(transparent)]` wrapper around a basic pointer type as of minidl.rev = "e1e86cb7a6e48a3ed1aff4a1e927311d90039e82"
-            Some(Self::from(std::mem::transmute::<HMODULE, Library>(hmodule)))
+            Some(Self::from(unsafe { std::mem::transmute::<HMODULE, Library>(hmodule) }))
         }
     }
 }

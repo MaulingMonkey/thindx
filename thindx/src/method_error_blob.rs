@@ -32,7 +32,7 @@ impl MethodErrorBlob {
     /// *   `errors`    - A `\0`-terminated blob of errors to be owned by <code>[Err]\([MethodErrorBlob]\)</code> if `!SUCCEEDED(hr)`
     pub(crate) unsafe fn check_blob(method: &'static str, hr: HRESULT, errors: *mut ID3DBlob) -> Result<(), Self> {
         if !SUCCEEDED(hr) {
-            let errors = TextBlob::new(ReadOnlyBlob::from_raw_opt(errors));
+            let errors = TextBlob::new(unsafe { ReadOnlyBlob::from_raw_opt(errors) });
             Err(Self {
                 kind:   ErrorKind(hr),
                 method: Some(method),

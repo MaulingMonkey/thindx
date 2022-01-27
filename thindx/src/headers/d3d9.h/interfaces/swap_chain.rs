@@ -101,7 +101,7 @@ pub trait IDirect3DSwapChain9Ext : AsSafe<IDirect3DSwapChain9> {
     /// *   `dest_surface` may need to belong to the same [`Device`] as `self`
     /// *   `dest_surface` may need to be the size of the entire desktop if the [`Device`] is in windowed mode
     unsafe fn get_front_buffer_data(&self, dest_surface: &impl IDirect3DSurface9Ext) -> Result<(), MethodError> {
-        let hr = self.as_winapi().GetFrontBufferData(dest_surface.as_winapi() as *const _ as *mut _);
+        let hr = unsafe { self.as_winapi().GetFrontBufferData(dest_surface.as_winapi() as *const _ as *mut _) };
         MethodError::check("IDirect3DSwapChain9::GetFrontBufferData", hr)
     }
 

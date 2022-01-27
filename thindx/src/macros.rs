@@ -260,8 +260,8 @@ macro_rules! convert {
         unsafe impl $crate::Raw for $outer {
             type Raw = $winapi;
 
-            unsafe fn from_raw(raw: *mut Self::Raw) -> Self { Self(mcom::Rc::from_raw(raw)) }
-            unsafe fn from_raw_opt(raw: *mut Self::Raw) -> Option<Self> { Some(Self(mcom::Rc::from_raw_opt(raw)?)) }
+            unsafe fn from_raw(raw: *mut Self::Raw) -> Self { Self(unsafe { mcom::Rc::from_raw(raw) }) }
+            unsafe fn from_raw_opt(raw: *mut Self::Raw) -> Option<Self> { Some(Self(unsafe { mcom::Rc::from_raw_opt(raw) }?)) }
             fn into_raw(self) -> *mut Self::Raw { self.0.into_raw() }
             fn as_raw(&self) -> *mut Self::Raw { self.0.as_ptr() }
         }

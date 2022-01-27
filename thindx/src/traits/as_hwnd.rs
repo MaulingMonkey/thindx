@@ -45,7 +45,7 @@ impl<'w> SafeHWND<'w> {
     /// This is enforced by `assert!(...)` upon construction and drop, but that's potentially *after* undefined behavior has been invoked.
     pub unsafe fn assert(hwnd: &'w HWND) -> Self {
         let hwnd = *hwnd;
-        assert!(hwnd.is_null() || IsWindow(hwnd) != 0);
+        assert!(hwnd.is_null() || unsafe { IsWindow(hwnd) } != 0);
         Self { hwnd, phantom: PhantomData }
     }
 }

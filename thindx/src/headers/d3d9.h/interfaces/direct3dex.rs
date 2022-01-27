@@ -71,9 +71,9 @@ pub trait IDirect3D9ExExt : AsSafe<IDirect3D9Ex> {
     /// The `unsafe` of this fn is the token acknowledgement of those errors.
     unsafe fn create_ex(sdk_version: SdkVersion) -> Result<Self, MethodError> where Self : From<mcom::Rc<IDirect3D9Ex>> {
         let mut d3d9ex = null_mut();
-        let hr = Direct3DCreate9Ex(sdk_version.into(), &mut d3d9ex);
+        let hr = unsafe { Direct3DCreate9Ex(sdk_version.into(), &mut d3d9ex) };
         MethodError::check("Direct3DCreate9Ex", hr)?;
-        Ok(Self::from(mcom::Rc::from_raw(d3d9ex)))
+        Ok(Self::from(unsafe { mcom::Rc::from_raw(d3d9ex) }))
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9ex-createdeviceex)\]
@@ -94,9 +94,9 @@ pub trait IDirect3D9ExExt : AsSafe<IDirect3D9Ex> {
         // TODO: examples, returns, etc.
         let mut device = null_mut();
         let modes = if fullscreen_display_modes.is_empty() { null_mut() } else { fullscreen_display_modes.as_mut_ptr().cast() };
-        let hr = self.as_winapi().CreateDeviceEx(adapter, device_type.into().into(), hwnd, behavior_flags.into().into(), presentation_parameters, modes, &mut device);
+        let hr = unsafe { self.as_winapi().CreateDeviceEx(adapter, device_type.into().into(), hwnd, behavior_flags.into().into(), presentation_parameters, modes, &mut device) };
         MethodError::check("IDirect3D9Ex::CreateDeviceEx", hr)?;
-        Ok(DeviceEx::from_raw(device))
+        Ok(unsafe { DeviceEx::from_raw(device) })
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9ex-enumadaptermodesex)\]

@@ -107,8 +107,8 @@ pub trait IDirect3D9Ext : AsSafe<IDirect3D9> + Sized {
     /// [IDirect3D9]:                   https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3d9
     ///
     unsafe fn create(sdk_version: SdkVersion) -> Result<Self, MethodError> where Self : From<mcom::Rc<IDirect3D9>> {
-        let d3d9 = Direct3DCreate9(sdk_version.into());
-        mcom::Rc::from_raw_opt(d3d9).ok_or(MethodError("Direct3DCreate9", THINERR::NONSPECIFIC)).map(Self::from)
+        let d3d9 = unsafe { Direct3DCreate9(sdk_version.into()) };
+        unsafe { mcom::Rc::from_raw_opt(d3d9) }.ok_or(MethodError("Direct3DCreate9", THINERR::NONSPECIFIC)).map(Self::from)
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdepthstencilmatch)\]
@@ -332,9 +332,9 @@ pub trait IDirect3D9Ext : AsSafe<IDirect3D9> + Sized {
     unsafe fn create_device(&self, adapter: AdapterIndex, device_type: impl Into<DevType>, focus_window: HWND, behavior_flags: impl Into<Create>, present_parameters: &mut D3DPRESENT_PARAMETERS) -> Result<Device, MethodError> {
         // TODO: better doc comments
         let mut device = null_mut();
-        let hr = self.as_winapi().CreateDevice(adapter, device_type.into().into(), focus_window, behavior_flags.into().into(), present_parameters, &mut device);
+        let hr = unsafe { self.as_winapi().CreateDevice(adapter, device_type.into().into(), focus_window, behavior_flags.into().into(), present_parameters, &mut device) };
         MethodError::check("IDirect3D9::CreateDevice", hr)?;
-        Ok(Device::from_raw(device))
+        Ok(unsafe { Device::from_raw(device) })
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-enumadaptermodes)\] IDirect3D9::EnumAdapterModes
