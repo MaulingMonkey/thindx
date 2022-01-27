@@ -109,7 +109,7 @@
     <span class="doccomment">/// *   `errors`    - A `\0`-terminated blob of errors to be owned by &lt;code&gt;[Err]\([MethodErrorBlob]\)&lt;/code&gt; if `!SUCCEEDED(hr)`</span>
     <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw unsafe">unsafe</span> <span class="kw">fn</span> <span class="ident">check_blob</span>(<span class="ident">method</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span>, <span class="ident">hr</span>: <span class="ident">HRESULT</span>, <span class="ident">errors</span>: <span class="kw-2">*mut</span> <span class="ident">ID3DBlob</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="self">Self</span><span class="op">&gt;</span> {
         <span class="kw">if</span> <span class="op">!</span><span class="ident">SUCCEEDED</span>(<span class="ident">hr</span>) {
-            <span class="kw">let</span> <span class="ident">errors</span> <span class="op">=</span> <span class="ident">TextBlob::new</span>(<span class="ident">ReadOnlyBlob::from_raw_opt</span>(<span class="ident">errors</span>));
+            <span class="kw">let</span> <span class="ident">errors</span> <span class="op">=</span> <span class="ident">TextBlob::new</span>(<span class="kw unsafe">unsafe</span> { <span class="ident">ReadOnlyBlob::from_raw_opt</span>(<span class="ident">errors</span>) });
             <span class="prelude-val">Err</span>(<span class="self">Self</span> {
                 <span class="ident">kind</span>:   <span class="ident">ErrorKind</span>(<span class="ident">hr</span>),
                 <span class="ident">method</span>: <span class="prelude-val">Some</span>(<span class="ident">method</span>),

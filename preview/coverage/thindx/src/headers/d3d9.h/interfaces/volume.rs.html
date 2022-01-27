@@ -2179,7 +2179,7 @@
                 
             </div>
             <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">        let mut locked = std::mem::zeroed::&lt;D3DLOCKED_BOX&gt;();</pre>
+                <pre class="has-background-danger-light py-0 px-2">        let mut locked = unsafe { std::mem::zeroed::&lt;D3DLOCKED_BOX&gt;() };</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -2218,7 +2218,7 @@
                 
             </div>
             <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">        let hr = self.as_winapi().LockBox(&amp;mut locked, box_, flags.into().into());</pre>
+                <pre class="has-background-danger-light py-0 px-2">        let hr = unsafe { self.as_winapi().LockBox(&amp;mut locked, box_, flags.into().into()) };</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -2574,7 +2574,7 @@
         </div></div>
         <footer class="footer">
             <div class="content has-text-centered">
-                <p class="heading">Date: 2022-01-27 09:42</p>
+                <p class="heading">Date: 2022-01-27 16:43</p>
             </div>
         </footer>
     </body>

@@ -3453,7 +3453,7 @@
                 38
             </div>
             <div class="column has-background-success-light p-0">
-                <pre class="has-background-success-light py-0 px-2">            unsafe fn from_raw(raw: *mut Self::Raw) -&gt; Self { Self(mcom::Rc::from_raw(raw)) }</pre>
+                <pre class="has-background-success-light py-0 px-2">            unsafe fn from_raw(raw: *mut Self::Raw) -&gt; Self { Self(unsafe { mcom::Rc::from_raw(raw) }) }</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -3466,7 +3466,7 @@
                 28
             </div>
             <div class="column has-background-success-light p-0">
-                <pre class="has-background-success-light py-0 px-2">            unsafe fn from_raw_opt(raw: *mut Self::Raw) -&gt; Option&lt;Self&gt; { Some(Self(mcom::Rc::from_raw_opt(raw)?)) }</pre>
+                <pre class="has-background-success-light py-0 px-2">            unsafe fn from_raw_opt(raw: *mut Self::Raw) -&gt; Option&lt;Self&gt; { Some(Self(unsafe { mcom::Rc::from_raw_opt(raw) }?)) }</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -3640,7 +3640,7 @@
         </div></div>
         <footer class="footer">
             <div class="content has-text-centered">
-                <p class="heading">Date: 2022-01-27 09:42</p>
+                <p class="heading">Date: 2022-01-27 16:43</p>
             </div>
         </footer>
     </body>

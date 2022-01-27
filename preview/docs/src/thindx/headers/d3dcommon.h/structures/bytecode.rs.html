@@ -133,7 +133,7 @@
             }
         }
 
-        <span class="prelude-val">Ok</span>(<span class="ident"><span class="self">Self</span>::from_unchecked</span>(<span class="ident">bytecode</span>))
+        <span class="prelude-val">Ok</span>(<span class="kw unsafe">unsafe</span> { <span class="ident"><span class="self">Self</span>::from_unchecked</span>(<span class="ident">bytecode</span>) })
     }
 
     <span class="doccomment">/// Trust that `bytecode` contains valid DXBC or DXIL bytecode.</span>
@@ -148,7 +148,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// [Bytecode::from_unchecked] performs no validation.  Prefer [Bytecode::from] which at least performs some.</span>
     <span class="comment">//#allow_missing_argument_docs</span>
-    <span class="kw">pub</span> <span class="kw unsafe">unsafe</span> <span class="kw">fn</span> <span class="ident">from_unchecked</span>(<span class="ident">bytecode</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) -&gt; <span class="kw-2">&amp;</span><span class="self">Self</span> { <span class="ident">std::mem::transmute</span>(<span class="ident">bytecode</span>) }
+    <span class="kw">pub</span> <span class="kw unsafe">unsafe</span> <span class="kw">fn</span> <span class="ident">from_unchecked</span>(<span class="ident">bytecode</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) -&gt; <span class="kw-2">&amp;</span><span class="self">Self</span> { <span class="kw unsafe">unsafe</span> { <span class="ident">std::mem::transmute</span>(<span class="ident">bytecode</span>) } }
 
     <span class="doccomment">/// Get the bytecode as a slice of bytes.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_bytes</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] { <span class="self">self</span>.<span class="number">0</span>.<span class="ident">as_ref</span>() }

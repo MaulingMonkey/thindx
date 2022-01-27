@@ -736,7 +736,7 @@
                 
             </div>
             <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">        Ok(Self::from_unchecked(bytecode))</pre>
+                <pre class="has-background-danger-light py-0 px-2">        Ok(unsafe { Self::from_unchecked(bytecode) })</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -931,7 +931,7 @@
                 1
             </div>
             <div class="column has-background-success-light p-0">
-                <pre class="has-background-success-light py-0 px-2">    pub unsafe fn from_unchecked(bytecode: &amp;[u8]) -&gt; &amp;Self { std::mem::transmute(bytecode) }</pre>
+                <pre class="has-background-success-light py-0 px-2">    pub unsafe fn from_unchecked(bytecode: &amp;[u8]) -&gt; &amp;Self { unsafe { std::mem::transmute(bytecode) } }</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1092,7 +1092,7 @@
         </div></div>
         <footer class="footer">
             <div class="content has-text-centered">
-                <p class="heading">Date: 2022-01-27 09:42</p>
+                <p class="heading">Date: 2022-01-27 16:43</p>
             </div>
         </footer>
     </body>

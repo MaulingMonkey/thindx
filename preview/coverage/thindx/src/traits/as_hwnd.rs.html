@@ -658,7 +658,7 @@
                 4
             </div>
             <div class="column has-background-success-light p-0">
-                <pre class="has-background-success-light py-0 px-2">        assert!(hwnd.is_null() || IsWindow(hwnd) != 0);</pre>
+                <pre class="has-background-success-light py-0 px-2">        assert!(hwnd.is_null() || unsafe { IsWindow(hwnd) } != 0);</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1222,7 +1222,7 @@
         </div></div>
         <footer class="footer">
             <div class="content has-text-centered">
-                <p class="heading">Date: 2022-01-27 09:42</p>
+                <p class="heading">Date: 2022-01-27 16:43</p>
             </div>
         </footer>
     </body>

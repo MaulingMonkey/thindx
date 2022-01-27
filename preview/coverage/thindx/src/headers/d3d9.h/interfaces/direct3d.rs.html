@@ -408,7 +408,7 @@
             </div>
             <div
                 class="column is-1 is-narrow p-0 has-text-centered has-text-success-light has-background-success">
-                4171
+                4168
             </div>
             <div class="column has-background-success-light p-0">
                 <pre class="has-background-success-light py-0 px-2">unsafe impl AsSafe&lt;IDirect3D9   &gt; for Direct3D { fn as_safe(&amp;self) -&gt; &amp;IDirect3D9   { &amp;*self.0 } }</pre>
@@ -1464,7 +1464,7 @@
                 50
             </div>
             <div class="column has-background-success-light p-0">
-                <pre class="has-background-success-light py-0 px-2">        let d3d9 = Direct3DCreate9(sdk_version.into());</pre>
+                <pre class="has-background-success-light py-0 px-2">        let d3d9 = unsafe { Direct3DCreate9(sdk_version.into()) };</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1477,7 +1477,7 @@
                 50
             </div>
             <div class="column has-background-success-light p-0">
-                <pre class="has-background-success-light py-0 px-2">        mcom::Rc::from_raw_opt(d3d9).ok_or(MethodError(&quot;Direct3DCreate9&quot;, THINERR::NONSPECIFIC)).map(Self::from)</pre>
+                <pre class="has-background-success-light py-0 px-2">        unsafe { mcom::Rc::from_raw_opt(d3d9) }.ok_or(MethodError(&quot;Direct3DCreate9&quot;, THINERR::NONSPECIFIC)).map(Self::from)</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -4389,7 +4389,7 @@
                 26
             </div>
             <div class="column has-background-success-light p-0">
-                <pre class="has-background-success-light py-0 px-2">        let hr = self.as_winapi().CreateDevice(adapter, device_type.into().into(), focus_window, behavior_flags.into().into(), present_parameters, &amp;mut device);</pre>
+                <pre class="has-background-success-light py-0 px-2">        let hr = unsafe { self.as_winapi().CreateDevice(adapter, device_type.into().into(), focus_window, behavior_flags.into().into(), present_parameters, &amp;mut device) };</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -4415,7 +4415,7 @@
                 20
             </div>
             <div class="column has-background-success-light p-0">
-                <pre class="has-background-success-light py-0 px-2">        Ok(Device::from_raw(device))</pre>
+                <pre class="has-background-success-light py-0 px-2">        Ok(unsafe { Device::from_raw(device) })</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -10010,7 +10010,7 @@
         </div></div>
         <footer class="footer">
             <div class="content has-text-centered">
-                <p class="heading">Date: 2022-01-27 09:42</p>
+                <p class="heading">Date: 2022-01-27 16:43</p>
             </div>
         </footer>
     </body>

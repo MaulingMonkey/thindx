@@ -199,14 +199,14 @@
         <span class="comment">//  * `hmodule`     ✔️ is a valid, non-dangling, permanently loaded hmodule</span>
         <span class="comment">//  * `ordinal`     ✔️ is a WORD/u16, meeting GetProcAddress&#39;s documented requirement:</span>
         <span class="comment">//                  &quot;If this parameter is an ordinal value, it must be in the low-order word; the high-order word must be zero.&quot;</span>
-        <span class="kw">let</span> <span class="ident">func</span> <span class="op">=</span> <span class="ident">GetProcAddress</span>(<span class="self">self</span>.<span class="ident">as_hmodule</span>(), <span class="ident">ordinal</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="kw">as</span> <span class="kw-2">*const</span> <span class="kw">_</span>);
+        <span class="kw">let</span> <span class="ident">func</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="ident">GetProcAddress</span>(<span class="self">self</span>.<span class="ident">as_hmodule</span>(), <span class="ident">ordinal</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="kw">as</span> <span class="kw-2">*const</span> <span class="kw">_</span>) };
         <span class="kw">if</span> <span class="ident">func</span>.<span class="ident">is_null</span>() {
             <span class="prelude-val">None</span>
         } <span class="kw">else</span> {
             <span class="comment">// SAFETY: ✔️</span>
             <span class="comment">//  * `FnPtr`       ✔️ is asserted to be the same size as `FARPROC` via assert at start of function (can&#39;t enforce this at compile time)</span>
             <span class="comment">//  * `FnPtr`       ✔️ is assumed compatible with `FARPROC` per the documented safety contract of this unsafe function</span>
-            <span class="prelude-val">Some</span>(<span class="ident">std::mem::transmute_copy</span>::<span class="op">&lt;</span><span class="ident">FARPROC</span>, <span class="ident">FnPtr</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="ident">func</span>))
+            <span class="prelude-val">Some</span>(<span class="kw unsafe">unsafe</span> { <span class="ident">std::mem::transmute_copy</span>::<span class="op">&lt;</span><span class="ident">FARPROC</span>, <span class="ident">FnPtr</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="ident">func</span>) })
         }
     }
 
@@ -230,7 +230,7 @@
             <span class="prelude-val">None</span>
         } <span class="kw">else</span> {
             <span class="comment">// SAFETY: ⚠️ `minidl::Library` is a `#[repr(transparent)]` wrapper around a basic pointer type as of minidl.rev = &quot;e1e86cb7a6e48a3ed1aff4a1e927311d90039e82&quot;</span>
-            <span class="prelude-val">Some</span>(<span class="ident"><span class="self">Self</span>::from</span>(<span class="ident">std::mem::transmute</span>::<span class="op">&lt;</span><span class="ident">HMODULE</span>, <span class="ident">Library</span><span class="op">&gt;</span>(<span class="ident">hmodule</span>)))
+            <span class="prelude-val">Some</span>(<span class="ident"><span class="self">Self</span>::from</span>(<span class="kw unsafe">unsafe</span> { <span class="ident">std::mem::transmute</span>::<span class="op">&lt;</span><span class="ident">HMODULE</span>, <span class="ident">Library</span><span class="op">&gt;</span>(<span class="ident">hmodule</span>) }))
         }
     }
 }

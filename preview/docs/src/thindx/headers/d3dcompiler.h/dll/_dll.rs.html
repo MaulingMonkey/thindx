@@ -311,8 +311,6 @@
 <span id="310">310</span>
 <span id="311">311</span>
 <span id="312">312</span>
-<span id="313">313</span>
-<span id="314">314</span>
 </pre><pre class="rust"><code><span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span> <span class="kw">use</span> <span class="kw">crate</span>::<span class="kw-2">*</span>;
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span> <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::d3d</span>::<span class="kw-2">*</span>;
 
@@ -340,52 +338,50 @@
 
 <span class="doccomment">/// Lazily-loaded `d3dcompiler_NN.dll`</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// &lt;div class=&quot;interface-tree&quot;&gt;</span>
+<span class="doccomment">/// &amp;nbsp;   **[Constructors](#constructors)**&lt;br&gt;</span>
+<span class="doccomment">/// [new](Compiler::load_system)(version: [u32]) -&gt; Result&amp;lt;[Compiler]&amp;gt;&lt;br&gt;</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// &amp;nbsp;   **[Constructors](#constructors)**</span>
-<span class="doccomment">/// [new](Compiler::load_system)(version: [u32]) -&gt; Result&amp;lt;[Compiler]&amp;gt;</span>
+<span class="doccomment">/// &amp;nbsp;   **[Compile &amp; Preprocess HLSL to Bytecode](#compile)**&lt;br&gt;</span>
+<span class="doccomment">/// [compile_from_file](Compiler::compile_from_file)(...) - compile hlsl to bytecode&lt;br&gt;</span>
+<span class="doccomment">/// [compile](Compiler::compile)(...) - compile hlsl to bytecode&lt;br&gt;</span>
+<span class="doccomment">/// [compile2](Compiler::compile2)(...) - compile hlsl to bytecode&lt;br&gt;</span>
+<span class="doccomment">/// [preprocess](Compiler::preprocess)(...) - preprocess HLSL `#include`s and `#define`s&lt;br&gt;</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// &amp;nbsp;   **[Compile &amp; Preprocess HLSL to Bytecode](#compile)**</span>
-<span class="doccomment">/// [compile_from_file](Compiler::compile_from_file)(...) - compile hlsl to bytecode</span>
-<span class="doccomment">/// [compile](Compiler::compile)(...) - compile hlsl to bytecode</span>
-<span class="doccomment">/// [compile2](Compiler::compile2)(...) - compile hlsl to bytecode</span>
-<span class="doccomment">/// [preprocess](Compiler::preprocess)(...) - preprocess HLSL `#include`s and `#define`s</span>
+<span class="doccomment">/// &amp;nbsp;   **[Manipulate Bytecode Archives](#archive)**&lt;br&gt;</span>
+<span class="doccomment">/// [compress_shaders](Compiler::compress_shaders)(...) - compress hlsl or bytecode&lt;br&gt;</span>
+<span class="doccomment">/// [decompress_shaders](Compiler::decompress_shaders)(...) - decompress shaders&lt;br&gt;</span>
+<span class="doccomment">/// [decompress_shaders_inplace](Compiler::decompress_shaders_inplace)(...) - decompress shaders without allocating&lt;br&gt;</span>
+<span class="doccomment">/// [decompress_shaders_count](Compiler::decompress_shaders_count)(...) - get the number of shaders in a compressed archive&lt;br&gt;</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// &amp;nbsp;   **[Manipulate Bytecode Archives](#archive)**</span>
-<span class="doccomment">/// [compress_shaders](Compiler::compress_shaders)(...) - compress hlsl or bytecode</span>
-<span class="doccomment">/// [decompress_shaders](Compiler::decompress_shaders)(...) - decompress shaders</span>
-<span class="doccomment">/// [decompress_shaders_inplace](Compiler::decompress_shaders_inplace)(...) - decompress shaders without allocating</span>
-<span class="doccomment">/// [decompress_shaders_count](Compiler::decompress_shaders_count)(...) - get the number of shaders in a compressed archive</span>
+<span class="doccomment">/// &amp;nbsp;   **[Manipulate Bytecode by BlobPart](#parts)**&lt;br&gt;</span>
+<span class="doccomment">/// [get_blob_part](Compiler::get_blob_part)(...) - read a [BlobPart] of a shader bytecode blob&lt;br&gt;</span>
+<span class="doccomment">/// [get_debug_info](Compiler::get_debug_info)(...) - read [BlobPart::DebugInfo] of a shader bytecode blob&lt;br&gt;</span>
+<span class="doccomment">/// [get_input_and_output_signature_blob](Compiler::get_input_and_output_signature_blob)(...) - read [BlobPart::InputAndOutputSignatureBlob] of a shader bytecode blob&lt;br&gt;</span>
+<span class="doccomment">/// [get_input_signature_blob](Compiler::get_input_signature_blob)(...) - read [BlobPart::InputSignatureBlob] of a shader bytecode blob&lt;br&gt;</span>
+<span class="doccomment">/// [get_output_signature_blob](Compiler::get_output_signature_blob)(...) - read [BlobPart::OutputSignatureBlob] of a shader bytecode blob&lt;br&gt;</span>
+<span class="doccomment">/// [set_blob_part](Compiler::set_blob_part)(...) - write a [BlobPart] of a shader bytecode blob&lt;br&gt;</span>
+<span class="doccomment">/// [strip_shader](Compiler::strip_shader)(...) - strip debug information etc. from bytecode&lt;br&gt;</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// &amp;nbsp;   **[Manipulate Bytecode by BlobPart](#parts)**</span>
-<span class="doccomment">/// [get_blob_part](Compiler::get_blob_part)(...) - read a [BlobPart] of a shader bytecode blob</span>
-<span class="doccomment">/// [get_debug_info](Compiler::get_debug_info)(...) - read [BlobPart::DebugInfo] of a shader bytecode blob</span>
-<span class="doccomment">/// [get_input_and_output_signature_blob](Compiler::get_input_and_output_signature_blob)(...) - read [BlobPart::InputAndOutputSignatureBlob] of a shader bytecode blob</span>
-<span class="doccomment">/// [get_input_signature_blob](Compiler::get_input_signature_blob)(...) - read [BlobPart::InputSignatureBlob] of a shader bytecode blob</span>
-<span class="doccomment">/// [get_output_signature_blob](Compiler::get_output_signature_blob)(...) - read [BlobPart::OutputSignatureBlob] of a shader bytecode blob</span>
-<span class="doccomment">/// [set_blob_part](Compiler::set_blob_part)(...) - write a [BlobPart] of a shader bytecode blob</span>
-<span class="doccomment">/// [strip_shader](Compiler::strip_shader)(...) - strip debug information etc. from bytecode</span>
+<span class="doccomment">/// &amp;nbsp;   **[Bytecode Reflection](#reflection)**&lt;br&gt;</span>
+<span class="doccomment">/// [reflect](Compiler::reflect)(...) - reflect over a single shader&#39;s bytecode&lt;br&gt;</span>
+<span class="doccomment">/// [reflect_library](Compiler::reflect_library)(...) - ???&lt;br&gt;</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// &amp;nbsp;   **[Bytecode Reflection](#reflection)**</span>
-<span class="doccomment">/// [reflect](Compiler::reflect)(...) - reflect over a single shader&#39;s bytecode</span>
-<span class="doccomment">/// [reflect_library](Compiler::reflect_library)(...) - ???</span>
+<span class="doccomment">/// &amp;nbsp;   **[Bytecode Debugging](#debugging)**&lt;br&gt;</span>
+<span class="doccomment">/// [disassemble](Compiler::disassemble)(...) - disassemble bytecode as human readable text&lt;br&gt;</span>
+<span class="doccomment">/// [disassemble_region](Compiler::disassemble_region)(...) - disassemble bytecode as human readable text&lt;br&gt;</span>
+<span class="doccomment">/// [get_trace_instruction_offsets_count](Compiler::get_trace_instruction_offsets_count)(...) - get the number of trace instruction byte offsets&lt;br&gt;</span>
+<span class="doccomment">/// [get_trace_instruction_offsets_inplace](Compiler::get_trace_instruction_offsets_inplace)(...) - read trace instruction byte offsets&lt;br&gt;</span>
+<span class="doccomment">/// [get_trace_instruction_offsets](Compiler::get_trace_instruction_offsets)(...) - read trace instruction byte offsets&lt;br&gt;</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// &amp;nbsp;   **[Bytecode Debugging](#debugging)**</span>
-<span class="doccomment">/// [disassemble](Compiler::disassemble)(...) - disassemble bytecode as human readable text</span>
-<span class="doccomment">/// [disassemble_region](Compiler::disassemble_region)(...) - disassemble bytecode as human readable text</span>
-<span class="doccomment">/// [get_trace_instruction_offsets_count](Compiler::get_trace_instruction_offsets_count)(...) - get the number of trace instruction byte offsets</span>
-<span class="doccomment">/// [get_trace_instruction_offsets_inplace](Compiler::get_trace_instruction_offsets_inplace)(...) - read trace instruction byte offsets</span>
-<span class="doccomment">/// [get_trace_instruction_offsets](Compiler::get_trace_instruction_offsets)(...) - read trace instruction byte offsets</span>
+<span class="doccomment">/// &amp;nbsp;   **[ReadOnlyBlob Utilities](#blobs)**&lt;br&gt;</span>
+<span class="doccomment">/// [create_read_only_blob](Compiler::create_read_only_blob)(...) - create a [ReadOnlyBlob] from memory&lt;br&gt;</span>
+<span class="doccomment">/// [read_file_to_blob](Compiler::read_file_to_blob)(...) - read a [ReadOnlyBlob] from disk&lt;br&gt;</span>
+<span class="doccomment">/// [write_blob_to_file](Compiler::write_blob_to_file)(...) - write a [ReadOnlyBlob] to disk&lt;br&gt;</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// &amp;nbsp;   **[ReadOnlyBlob Utilities](#blobs)**</span>
-<span class="doccomment">/// [create_read_only_blob](Compiler::create_read_only_blob)(...) - create a [ReadOnlyBlob] from memory</span>
-<span class="doccomment">/// [read_file_to_blob](Compiler::read_file_to_blob)(...) - read a [ReadOnlyBlob] from disk</span>
-<span class="doccomment">/// [write_blob_to_file](Compiler::write_blob_to_file)(...) - write a [ReadOnlyBlob] to disk</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// &amp;nbsp;   **[D3D11 Factories &amp; APIs](#d3d11)**</span>
-<span class="doccomment">/// [create_function_linking_graph](Compiler::create_function_linking_graph)(...) - create a [d3d11::FunctionLinkingGraph]</span>
-<span class="doccomment">/// [create_linker](Compiler::create_linker)(...) - create a [d3d11::Linker]</span>
-<span class="doccomment">/// [load_module](Compiler::load_module)(...) - load a [d3d11::Module]&lt;/div&gt;</span>
+<span class="doccomment">/// &amp;nbsp;   **[D3D11 Factories &amp; APIs](#d3d11)**&lt;br&gt;</span>
+<span class="doccomment">/// [create_function_linking_graph](Compiler::create_function_linking_graph)(...) - create a [d3d11::FunctionLinkingGraph]&lt;br&gt;</span>
+<span class="doccomment">/// [create_linker](Compiler::create_linker)(...) - create a [d3d11::Linker]&lt;br&gt;</span>
+<span class="doccomment">/// [load_module](Compiler::load_module)(...) - load a [d3d11::Module]&lt;br&gt;</span>
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">non_snake_case</span>)]</span> <span class="comment">// fn ptrs</span>
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::type_complexity</span>)]</span> <span class="comment">// no point extracting `type`s with these single use types... would just increase the chances of editing shrapnel</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Compiler</span> {

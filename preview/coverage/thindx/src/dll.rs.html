@@ -1100,7 +1100,7 @@
                 8
             </div>
             <div class="column has-background-success-light p-0">
-                <pre class="has-background-success-light py-0 px-2">        let func = GetProcAddress(self.as_hmodule(), ordinal as usize as *const _);</pre>
+                <pre class="has-background-success-light py-0 px-2">        let func = unsafe { GetProcAddress(self.as_hmodule(), ordinal as usize as *const _) };</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1191,7 +1191,7 @@
                 8
             </div>
             <div class="column has-background-success-light p-0">
-                <pre class="has-background-success-light py-0 px-2">            Some(std::mem::transmute_copy::&lt;FARPROC, FnPtr&gt;(&amp;func))</pre>
+                <pre class="has-background-success-light py-0 px-2">            Some(unsafe { std::mem::transmute_copy::&lt;FARPROC, FnPtr&gt;(&amp;func) })</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1503,7 +1503,7 @@
                 109
             </div>
             <div class="column has-background-success-light p-0">
-                <pre class="has-background-success-light py-0 px-2">            Some(Self::from(std::mem::transmute::&lt;HMODULE, Library&gt;(hmodule)))</pre>
+                <pre class="has-background-success-light py-0 px-2">            Some(Self::from(unsafe { std::mem::transmute::&lt;HMODULE, Library&gt;(hmodule) }))</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1586,7 +1586,7 @@
         </div></div>
         <footer class="footer">
             <div class="content has-text-centered">
-                <p class="heading">Date: 2022-01-27 09:42</p>
+                <p class="heading">Date: 2022-01-27 16:43</p>
             </div>
         </footer>
     </body>
