@@ -1,24 +1,27 @@
-# thindx - **Thin** **D**irect**X** wrappers
+<center>
+
+# 🦀 **thindx** - **Thin** **D**irect**X** 🦀
+
+Safer DirectX: Types, fns, lifetimes, tests, real docs, intellisense, examples, debug visualizers, ...
+
+| 🦀 | When         | DirectX APIs |
+| --- | ----------- | ------------ |
+| 📦 |              | [examples](https://maulingmonkey.com/thindx/preview/docs/thindx/_examples/) • [rust ⮀ c++](https://maulingmonkey.com/thindx/preview/docs/thindx/_headers/) • [test coverage](https://maulingmonkey.com/thindx/preview/coverage/) • [lib.rs](https://lib.rs/crates/thindx) • [docs.rs](https://docs.rs/thindx)
+| ✔️ | Now          | [thindx](https://maulingmonkey.com/thindx/preview/docs/thindx/)::{[d3d9](https://maulingmonkey.com/thindx/preview/docs/thindx/d3d9/), [d3d::Compiler](https://maulingmonkey.com/thindx/preview/docs/thindx/d3d/struct.Compiler.html), [xinput](https://maulingmonkey.com/thindx/preview/docs/thindx/xinput/)}
+| ⚠️ | Soon™        | d3d11, d3d12, dxgi, dxcompiler, dinput, xaudio2
+| ⚠️ | Eventually   | d2d, dcompute, dsound, dstorage, dwrite, dxr, xact3, uwp::input?
+| ❌ | Never?       | d3d10, d3dx\*, ddraw, dplay
+
 
 [![GitHub](https://img.shields.io/github/stars/MaulingMonkey/thindx.svg?label=GitHub&style=social)](https://github.com/MaulingMonkey/thindx)
 [![Build Status](https://github.com/MaulingMonkey/thindx/workflows/Rust/badge.svg)](https://github.com/MaulingMonkey/thindx/actions?query=workflow%3Arust)
-
 [![crates.io](https://img.shields.io/crates/v/thindx.svg)](https://crates.io/crates/thindx)
-[![docs.rs](https://docs.rs/thindx/badge.svg)](https://docs.rs/thindx)
+[![docs.rs](https://img.shields.io/docsrs/thindx)](https://docs.rs/thindx)
 [![License](https://img.shields.io/crates/l/thindx.svg)](https://github.com/MaulingMonkey/thindx)
 
-Thin DirectX wrappers for Rust.
+</center>
 
-### Why not [winapi] directly?
 
-*   This crate aims to make fns safe/sound/slightly rusty when possible
-*   Attempts to verify API soundness through mass unit tests, even if they mostly test DirectX's behavior.
-*   Doc comments for one-stop intellisense, safety documentation, etc.
-
-### Why not `<other graphics crate>`?
-
-*   Most other graphics crates focus on **hiding** the underlying graphics API as much as possible, improving application portability.
-*   This crate **surfaces** the underlying graphics API as much as possible, improving the potential for interoperability with other graphics code / use in middleware applications.
 
 ### ❌ This crate is probably unsound! ❌
 
@@ -45,54 +48,6 @@ As such, `thindx` itself will likely always suffer from major version churn.
 This isn't too much of a problem until two crates wish to share / pass `thindx` types between themselves.
 It might be possible to somewhat stabilize some types by exiling them into subcrates, but this has not yet been done.
 Additionally, individual extension traits / functions / methods will likely never get the same treatment (no need?)
-
-
-
-### Project Status
-
-[examples](https://docs.rs/thindx/*/thindx/_examples/)
-•
-[header coverage](https://docs.rs/thindx/*/thindx/_headers/)
-•
-[docs.rs](https://docs.rs/thindx)
-•
-[lib.rs](https://lib.rs/crates/thindx)
-•
-[crates.io](https://crates.io/crates/thindx)
-
-| DirectX           | API   | Tests | Sound | Stable| Notes |
-| ----------------- | ----- | ----- | ----- | ----- | ----- |
-| `d3dcompiler.dll` | ✔️    | ⚠️    | ⚠️    | ❌    | first goal to stabilize
-| `dxcompiler.dll`  | ❌    | ❌    | ❌    | ❌    |
-| d3d9              | ⚠️    | ⚠️    | ❌    | ❌    |
-| d3d11             | ❌    | ❌    | ❌    | ❌    |
-| d3d12             | ❌    | ❌    | ❌    | ❌    |
-| dxgi              | ❌    | ❌    | ❌    | ❌    |
-| dinput            | ❌    | ❌    | ❌    | ❌    |
-| xinput            | ✔️    | ✔️    | ✔️\*  | ⚠️    | \* Could use more testing on older Windows
-| xaudio2           | ❌    | ❌    | ❌    | ❌    |
-| **Low Priority**  |
-| d2d               | | | | | I prefer d3d wrappers?
-| dcompute          | | | | |
-| dsound            | | | | | prefer xaudio2? (might be needed for gamepad headset audio?)
-| dwrite            | | | | | consider uniscribe?
-| dxr               | | | | |
-| xact3             | | | | |
-| **Not Planned**   | | | | | Feel free to change my mind though!  Maybe with $?
-| d3d10             | | | | | d3d11 is the same but saner, and just as portable?
-| d3d**x**10        | | | | | deprecated, saner to use less d3d specific stuff
-| d3d**x**11        | | | | | deprecated, saner to use less d3d specific stuff
-| d3d**x**9         | | | | | deprecated, saner to use less d3d specific stuff
-| ddraw             | | | | | prefer d2d, gdi, or other less ancient api?
-| dplay             | | | | | prefer steamworks, raw sockets, etc.?
-| xaudio1           | | | | | does this even exist? prefer xaudio2
-
-| Legend    | Description   |
-| --------- | ------------- |
-| API       | API coverage seems mostly complete
-| Tests     | API has basic tests
-| Sound     | API has enough tests to convince me of it's soundness
-| Stable    | API seems stable enough to start giving semver treatment
 
 
 
