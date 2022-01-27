@@ -219,6 +219,7 @@ impl Format {
 
     pub const Q16W16V16U16          : Format = Format(D3DFMT_Q16W16V16U16);
 
+    /// See [Multiple-element Textures](https://docs.microsoft.com/en-us/windows/win32/direct3d9/multiple-element-textures)
     pub const MULTI2_ARGB8          : Format = Format(D3DFMT_MULTI2_ARGB8);
 
     pub const R16F                  : Format = Format(D3DFMT_R16F);
