@@ -18,7 +18,7 @@
 //! | [d3d9.h](const@d3d9_h) | ⚠️ 20 of 24 |   |   | ⚠️ 2 of 9 | ⚠️ 26 of 73 | ❌ 0 of 3 |
 //! | [d3d9caps.h](const@d3d9caps_h) |   | ⚠️ 3 of 5 |   |   | ⚠️ 213 of 249 |   |
 //! | [d3d9types.h](const@d3d9types_h) |   | ⚠️ 19 of 71 | ⚠️ 40 of 54 |   | ⚠️ 508 of 844 | ⚠️ 8 of 20 |
-//! | [d3d11shader.h](const@d3d11shader_h) | ✔️ 12 of 12 | ✔️ 9 of 9 | ✔️ 1 of 1 |   | ⚠️ 7 of 18 | ❌ 0 of 3 |
+//! | [d3d11shader.h](const@d3d11shader_h) | ✔️ 12 of 12 | ✔️ 9 of 9 | ✔️ 1 of 1 |   | ⚠️ 16 of 18 | ❌ 0 of 3 |
 //! | [d3d11shadertracing.h](const@d3d11shadertracing_h) | ❌ 0 of 2 | ❌ 0 of 11 | ❌ 0 of 3 |   | ❌ 0 of 62 |   |
 //! | [xinput.h](const@xinput_h) |   | ✔️ 6 of 6 |   | ✔️ 8 of 8 | ⚠️ 83 of 86 |   |
 //! | [xaudio2.h](const@xaudio2_h) | ❌ 0 of 8 | ❌ 0 of 11 | ❌ 0 of 1 |   | ❌ 0 of 162 | ❌ 0 of 2 |
@@ -2637,15 +2637,15 @@ pub const d3d9types_h : cxx_header = cxx_header;
 /// ### C++ Constants → Rust Constants
 ///
 /// `D3D_RETURN_PARAMETER_INDEX` →&nbsp;❌ <br>
-/// `D3D_SHADER_REQUIRES_11_1_DOUBLE_EXTENSIONS` →&nbsp;❌ <br>
-/// `D3D_SHADER_REQUIRES_11_1_SHADER_EXTENSIONS` →&nbsp;❌ <br>
-/// `D3D_SHADER_REQUIRES_64_UAVS` →&nbsp;❌ <br>
-/// `D3D_SHADER_REQUIRES_DOUBLES` →&nbsp;❌ <br>
-/// `D3D_SHADER_REQUIRES_EARLY_DEPTH_STENCIL` →&nbsp;❌ <br>
-/// `D3D_SHADER_REQUIRES_LEVEL_9_COMPARISON_FILTERING` →&nbsp;❌ <br>
-/// `D3D_SHADER_REQUIRES_MINIMUM_PRECISION` →&nbsp;❌ <br>
-/// `D3D_SHADER_REQUIRES_TILED_RESOURCES` →&nbsp;❌ <br>
-/// `D3D_SHADER_REQUIRES_UAVS_AT_EVERY_STAGE` →&nbsp;❌ <br>
+/// `D3D_SHADER_REQUIRES_11_1_DOUBLE_EXTENSIONS`&nbsp;→ [`d3d::ShaderRequires::_11_1_DoubleExtensions`] <br>
+/// `D3D_SHADER_REQUIRES_11_1_SHADER_EXTENSIONS`&nbsp;→ [`d3d::ShaderRequires::_11_1_ShaderExtensions`] <br>
+/// `D3D_SHADER_REQUIRES_64_UAVS`&nbsp;→ [`d3d::ShaderRequires::_64_Uavs`] <br>
+/// `D3D_SHADER_REQUIRES_DOUBLES`&nbsp;→ [`d3d::ShaderRequires::Doubles`] <br>
+/// `D3D_SHADER_REQUIRES_EARLY_DEPTH_STENCIL`&nbsp;→ [`d3d::ShaderRequires::EarlyDepthStencil`] <br>
+/// `D3D_SHADER_REQUIRES_LEVEL_9_COMPARISON_FILTERING`&nbsp;→ [`d3d::ShaderRequires::Level9ComparisonFiltering`] <br>
+/// `D3D_SHADER_REQUIRES_MINIMUM_PRECISION`&nbsp;→ [`d3d::ShaderRequires::MinimumPrecision`] <br>
+/// `D3D_SHADER_REQUIRES_TILED_RESOURCES`&nbsp;→ [`d3d::ShaderRequires::TiledResources`] <br>
+/// `D3D_SHADER_REQUIRES_UAVS_AT_EVERY_STAGE`&nbsp;→ [`d3d::ShaderRequires::UavsAtEveryStage`] <br>
 /// `INTERFACE` →&nbsp;❌ <br>
 /// ### C++ Macros → Rust fns/macros
 ///
