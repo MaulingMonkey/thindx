@@ -1,5 +1,5 @@
 use crate::*;
-use mmrbi::*;
+use mmrbi::{ResultExt, Rustup};
 use std::collections::*;
 
 
@@ -44,6 +44,8 @@ pub fn from_args(mut args: std::env::Args) {
 }
 
 pub fn from_settings(settings: Settings) {
+    scope!("coverage::from_settings");
+
     // Dependencies
     let channel = "nightly";
 

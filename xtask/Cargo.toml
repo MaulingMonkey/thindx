@@ -18,8 +18,11 @@ path            = "_xtask.rs"
 
 [dependencies]
 base64          = "0.13"
+flame           = "=0.2.2"
 lazy_static     = "1"
 maulingmonkey-windows-sdk-scanner.git = "https://github.com/MaulingMonkey/windows-sdk-scanner"
 mmrbi           = "0.0.17"
 # mmrbi           = { git = "https://github.com/MaulingMonkey/mmrbi", rev = "1e27c41be24a4cb5ae31dd6388dba08a2af9e02b" }
 rustc-demangle  = "0.1"
+time.version    = "0.3"
+time.features   = ["formatting", "local-offset"]

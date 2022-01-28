@@ -1,4 +1,3 @@
-use mmrbi::*;
 use mmrbi::fs::write_if_modified_with;
 
 use std::io::{self, ErrorKind::Other, *};
@@ -12,6 +11,7 @@ pub fn generate_and_merge() {
 }
 
 fn merge() {
+    scope!("natvis::merge");
     status!("Merging", ".vscode/merged.natvis");
     let r = write_if_modified_with(".vscode/merged.natvis", |nv| {
         writeln!(nv, r#"<?xml version="1.0" encoding="utf-8"?>"#)?;
@@ -30,6 +30,8 @@ fn merge() {
 }
 
 fn find_merge_natvis(nv: &mut impl Write, path: &Path) -> io::Result<()> {
+    scope!("natvis::find_merge_natvis(..., {path:?})");
+
     for skip in ".cargo .git .github .notes .vscode target vs".split(' ') {
         if path.ends_with(skip) { return Ok(()) }
     }

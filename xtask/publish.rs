@@ -1,11 +1,13 @@
 use crate::{cmd, run};
-use mmrbi::*;
+use mmrbi::CommandExt;
 use std::io;
 use std::path::*;
 
 
 
 pub fn publish(mut args: std::env::Args) {
+    scope!("publish::publish");
+
     let version = args.next()                       .unwrap_or_else(|| fatal!("expected a `v0.0.0-unsound.n` version tag"));
     let version_no_v = version.strip_prefix("v")    .unwrap_or_else(|| fatal!("expected a `v0.0.0-unsound.n` version tag, instead got `{}`", version));
     if !version.contains("-unsound.") {                                fatal!("expected a `v0.0.0-unsound.n` version tag, instead got `{}`", version) }
@@ -21,6 +23,8 @@ pub fn publish(mut args: std::env::Args) {
 }
 
 fn work_in_pub(version: &str, version_no_v: &str) -> io::Result<()> {
+    scope!("publish::work_in_pub");
+
     let cargo_toml_path = r"target\pub\thindx\Cargo.toml";
     let cargo_toml = std::fs::read_to_string(cargo_toml_path)?;
     let cargo_toml = cargo_toml.replace("0.0.0-git", &version_no_v);

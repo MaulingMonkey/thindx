@@ -1,3 +1,4 @@
+#[macro_use] mod _macros;
 mod browser;
 mod coverage;
 mod crlf;
@@ -10,12 +11,15 @@ mod publish;
 mod scan;
 mod vsc;
 
+use mmrbi::{Command, CommandExt};
 use std::path::*;
-use mmrbi::*;
 
 
 
 fn main() {
+    init();
+    scope!("main");
+
     let mut args = std::env::args();
     let _exe = args.next();
 
@@ -31,9 +35,12 @@ fn main() {
         "vsc"           => vsc::vsc(args),
         other           => fatal!("unknown command {:?}", other),
     }
+
+    before_exit();
 }
 
 fn build(args: std::env::Args) {
+    scope!("build");
     let mut args = args.peekable();
     if args.peek().is_none() {
         copy_thindx_files();
@@ -75,6 +82,7 @@ fn build(args: std::env::Args) {
 }
 
 fn check(mut args: std::env::Args) {
+    scope!("check");
     let orig_path = args.next().expect("path");
     let mut path = orig_path.split(|ch| "/\\".contains(ch)).collect::<Vec<_>>();
 
@@ -116,12 +124,14 @@ fn check(mut args: std::env::Args) {
     cmd.arg("test");
     cmd.arg("-p").arg(package);
     cmd.arg("--").arg(pattern1).arg(pattern2);
+    scope!("Running {cmd:?}");
     status!("Running", "{:?}", cmd);
     cmd.status0().unwrap_or_else(|err| fatal!("{}", err));
 }
 
 fn run(command: impl AsRef<str>) {
     let mut c = cmd(command);
+    scope!("Running ({c:?})");
     status!("Running", "{:?}", c);
     c.status0().unwrap_or_else(|err| fatal!("{}", err));
 }
@@ -129,6 +139,7 @@ fn run(command: impl AsRef<str>) {
 fn run_in(dir: &Path, command: impl AsRef<str>) {
     let mut c = cmd(command);
     c.current_dir(dir);
+    scope!("Running {c:?}");
     status!("Running", "{:?}", c);
     c.status0().unwrap_or_else(|err| fatal!("{}", err));
 }
@@ -136,8 +147,10 @@ fn run_in(dir: &Path, command: impl AsRef<str>) {
 fn cmd(original: impl AsRef<str>) -> Command { Command::parse(original).unwrap_or_else(|err| fatal!("{}", err)) }
 
 fn copy_thindx_files() {
+    scope!("copy_thindx_files");
     natvis::generate_and_merge();
     for file in "LICENSE-APACHE LICENSE-MIT LICENSE.md Readme.md".split(' ') {
+        scope!("file: {file}");
         let from = Path::new(file);
         let to = Path::new("thindx").join(file);
         if from.metadata().and_then(|m| m.modified()).ok() > to.metadata().and_then(|m| m.modified()).ok() {
@@ -145,5 +158,34 @@ fn copy_thindx_files() {
                 error!("unable to copy {} to thindx/{}: {}", from.display(), to.display(), err);
             }
         }
+    }
+}
+
+fn init() {
+    let hook = std::panic::take_hook();
+    std::panic::set_hook(Box::new(move |pi|{
+        flame::note(format!("panic: {pi:?}").replace("\\", "\\\\").replace("\"", "\\\""), None);
+        before_exit();
+        hook(pi);
+    }));
+}
+
+fn before_exit() {
+    // avoid panics or fatal!(...)s to avoid recursion issues... also manually guard against recursion:
+    use std::sync::atomic::*;
+    static EXITING : AtomicBool = AtomicBool::new(false);
+    if EXITING.swap(true, Ordering::SeqCst) { return }
+
+    imp().unwrap_or_else(|err| error!("before_exit error: {}", err));
+    fn imp() -> Result<(), Box<dyn std::error::Error>> {
+        let _ = std::fs::create_dir_all("target/logs");
+        let now = time::OffsetDateTime::now_local().unwrap_or_else(|_| time::OffsetDateTime::now_utc());
+        let now = now.format(&time::format_description::parse("[year]-[month]-[day]-[hour]-[minute]-[second]")?)?;
+        let html_path_1 = format!("target/logs/xtask-{now}.html");
+        let html_path_2 = format!("target/logs/xtask-latest.html");
+        flame::dump_html(&mut std::fs::File::create(&html_path_1)?)?;
+        let _ = std::fs::copy(&html_path_1, &html_path_2);
+        //browser::open(&html_path_2);
+        Ok(())
     }
 }

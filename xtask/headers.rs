@@ -1,7 +1,6 @@
 use crate::crlf::EolRewriter;
 
 use maulingmonkey_windows_sdk_scanner::*;
-use mmrbi::*;
 
 use std::collections::*;
 use std::fmt::{self, Display, Formatter};
@@ -15,6 +14,7 @@ fn headers() -> impl Iterator<Item = &'static str> {
 }
 
 pub fn update() {
+    scope!("headers::update");
     let cpp2rust = &*CPP2RUST;
 
     use maulingmonkey_windows_sdk_scanner::*;

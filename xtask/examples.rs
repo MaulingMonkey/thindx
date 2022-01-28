@@ -1,14 +1,14 @@
 use crate::*;
 use crate::crlf::EolRewriter;
 
-use mmrbi::*;
-
 use std::io::Write;
 use std::time::SystemTime;
 
 
 
 pub fn update() {
+    scope!("examples::update");
+
     download_extract_assets();
 
     mmrbi::fs::write_if_modified_with("thindx/src/_examples.rs", |o|{
@@ -84,6 +84,8 @@ pub fn update() {
 }
 
 pub fn download_extract_assets() {
+    scope!("examples::download_extract_assets");
+
     let url = "https://thoseawesomeguys.com/prompts/Xelu_Free_Controller&Key_Prompts.zip";
 
     let xelu_dir = Path::new("thindx/examples/assets/xelu");
@@ -110,6 +112,8 @@ struct ExampleOutput {
 
 impl ExampleOutput {
     pub fn get(example_name: &str, config: &str) -> Self {
+        scope!("examples::ExampleOutput::get({example_name:?}, {config:?})");
+
         debug_assert!(!example_name.contains("\\"));
         debug_assert!(!example_name.contains("/"));
         debug_assert!(!example_name.ends_with(".rs"));

@@ -1,5 +1,4 @@
 use crate::*;
-use mmrbi::*;
 use std::io;
 
 
@@ -38,6 +37,8 @@ pub fn from_args(_args: std::env::Args, help: bool) {
 }
 
 pub fn from_settings(settings: Settings) {
+    scope!("doc::from_settings");
+
     if settings.copy_thindx_files   { copy_thindx_files() }
     if settings.build_examples      { run("cargo build --examples") }
     if settings.update_examples     { examples::update() }
@@ -51,6 +52,8 @@ pub fn from_settings(settings: Settings) {
 }
 
 fn fixup() {
+    scope!("doc::fixup");
+
     status!("Fixing", "{}", "target/all-features/doc/**/*.{css, html}");
     let _ = fixup_path(Path::new("target/all-features/doc")).map_err(|err| warning!("error fixing up docs: {}", err));
 }

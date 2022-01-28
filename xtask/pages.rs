@@ -48,6 +48,8 @@ pub fn from_args(_args: std::env::Args) {
 }
 
 pub fn from_settings(settings: Settings) {
+    scope!("pages::from_settings");
+
     let gh_pages_dir = Path::new(".worktree/gh-pages");
     if !gh_pages_dir.exists() { return error!(".worktree/gh-pages does not exist (use `git worktree add .worktree/gh-pages github/gh-pages`?)"); }
 
@@ -88,6 +90,7 @@ fn robocopy<'a>(source: &str, dest: &str, patterns: impl IntoIterator<Item = &'a
     cmd.arg("/NFL");    // No File List (path spam)
     cmd.arg("/NDL");    // No Directory List (path spam)
     cmd.stdout(|| std::process::Stdio::null()); // *still* spams an EOL despite all those settings
+    scope!("Running {cmd}");
     status!("Running", "{}", cmd);
     // N.B. robocopy uses nonzero for lots of success cases, so we only check for death-by-"signal"
     let _ = cmd.status().map_err(|err| error!("{}", err));

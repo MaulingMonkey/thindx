@@ -1,7 +1,5 @@
 #![allow(unused_variables)] macro_rules! warning { ($($tt:tt)*) => {} } // XXX: temporarilly supress warnings
 
-use mmrbi::*;
-
 use std::path::Path;
 use std::str::FromStr;
 
@@ -14,7 +12,7 @@ pub fn src() -> Result<(), ()> {
 fn dir(path: &Path) -> Result<(), ()> {
     if ".git target vs".split(' ').any(|dir| path.ends_with(dir)) { return Ok(()) } // skip
     let mut errors = false;
-    for e in fs::DirPathType::read_by_alphanumeric(path).unwrap() {
+    for e in mmrbi::fs::DirPathType::read_by_alphanumeric(path).unwrap() {
         if e.is_dir() { errors |= dir(&e.path).is_err(); }
         if e.is_file() { errors |= file(&e.path).is_err(); }
     }

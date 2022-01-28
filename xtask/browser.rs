@@ -1,4 +1,4 @@
-use mmrbi::*;
+use mmrbi::{Command, CommandExt};
 
 pub fn open(url: &str) {
     status!("Opening", "{}", url);
