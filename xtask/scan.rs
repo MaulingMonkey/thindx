@@ -161,7 +161,7 @@ fn file_doc_comments(path: &Path, text: &str) -> Result<(), ()> {
                 } else if let Some(r) = rest.strip_prefix("#[repr(C)]") {
                     rest = r.trim_start();
                     //s.repr = Some(C);
-                } else if let Some((r, pre)) = "#[allow #[cfg #[deprecated #[derive #[doc #[inline #[must_use #[non_exhaustive".split(' ').filter_map(|pre| Some((rest.strip_prefix(pre)?, pre))).next() {
+                } else if let Some((r, pre)) = "#[allow #[cfg #[deprecated #[derive #[doc #[inline #[must_use #[non_exhaustive #[macro_export".split(' ').filter_map(|pre| Some((rest.strip_prefix(pre)?, pre))).next() {
                     let end_str = if r.starts_with("(") { ")]" } else { "]" };
                     let end = match r.find(end_str) {
                         Some(n) => n,

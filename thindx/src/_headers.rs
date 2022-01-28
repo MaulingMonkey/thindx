@@ -11,7 +11,7 @@
 //!
 //! | C++ Header | Interfaces | Structs | Enums | Functions | Constants | Macros |
 //! | ---------- | ---------- | ------- | ----- | --------- | --------- | ------ |
-//! | [guiddef.h](const@guiddef_h) |   | ✔️ 1 of 1 |   |   | ✔️ 7 of 7 | ⚠️ 5 of 7 |
+//! | [guiddef.h](const@guiddef_h) |   | ✔️ 1 of 1 |   |   | ✔️ 7 of 7 | ✔️ 7 of 7 |
 //! | [unknwn.h](const@unknwn_h) | ✔️ 1 of 1 |   |   |   |   |   |
 //! | [d3dcommon.h](const@d3dcommon_h) | ⚠️ 2 of 3 | ✔️ 1 of 1 | ✔️ 22 of 22 |   | ⚠️ 555 of 575 | ❌ 0 of 4 |
 //! | [d3dcompiler.h](const@d3dcompiler_h) |   | ✔️ 1 of 1 | ✔️ 2 of 2 |   | ⚠️ 60 of 71 |   |
@@ -41,8 +41,8 @@
 /// `REFIID`&nbsp;→ <code>&[IID](IID)</code> <br>
 /// ### C++ Macros → Rust fns/macros
 ///
-/// `DEFINE_GUID` →&nbsp;❌ <br>
-/// `DEFINE_OLEGUID` →&nbsp;❌ <br>
+/// `DEFINE_GUID`&nbsp;→ [`guid!`] <br>
+/// `DEFINE_OLEGUID`&nbsp;→ [`guid!`] <br>
 /// `InlineIsEqualGUID`&nbsp;→ [`Guid::eq`] <br>
 /// `IsEqualCLSID`&nbsp;→ [`ClsID::eq`] <br>
 /// `IsEqualFMTID`&nbsp;→ [`FmtID::eq`] <br>
