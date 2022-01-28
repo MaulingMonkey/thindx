@@ -150,7 +150,7 @@ impl ShaderReflection {
     /// # let vs = d3dc.compile_from_file(r"test\data\basic.hlsl", None, None, "vs_main", "vs_4_0", d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
     /// # let vs = d3dc.reflect11(&vs).unwrap();
     /// let desc = vs.get_desc().unwrap();
-    /// assert_eq!(desc.version.shver(), d3d11::ShVer::VertexShader);
+    /// assert_eq!(desc.version.ty(), d3d11::ShVer::VertexShader);
     /// assert_eq!(desc.version.major(), 4);
     /// assert_eq!(desc.version.minor(), 0);
     /// ```

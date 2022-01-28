@@ -15,14 +15,14 @@ use std::fmt::{self, Debug, Formatter};
 /// # let d3dc = Compiler::load_system(47).unwrap();
 /// # let shader = d3dc.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap();
 /// let shader = d3dc.reflect11(&shader).unwrap();
-/// let shver : ShaderVersionType = shader.get_desc().unwrap().version.shver();
-/// assert_eq!(ShVer::PixelShader, shver);
+/// let ty : ShaderVersionType = shader.get_desc().unwrap().version.ty();
+/// assert_eq!(ShVer::PixelShader, ty);
 /// ```
 ///
 /// ### See Also
 /// *   [d3d11::ShaderDesc::version]
 /// *   [d3d11::ShaderReflection::get_desc]
-/// *   [d3d11::ShaderVersion::shver]
+/// *   [d3d11::ShaderVersion::ty]
 /// *   [examples::d3dcompiler_04_reflect_shader]
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)] pub struct ShaderVersionType(D3D11_SHADER_VERSION_TYPE);
@@ -68,7 +68,7 @@ impl Default for ShVer {
 /// # let shader = d3dc.compile_from_file(r"test\data\basic.hlsl", None, None, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap();
 /// let shader = d3dc.reflect11(&shader).unwrap();
 /// let version : d3d11::ShaderVersion = shader.get_desc().unwrap().version;
-/// assert_eq!(version.shver(), ShVer::PixelShader);
+/// assert_eq!(version.ty(), ShVer::PixelShader);
 /// assert_eq!(version.major(), 4);
 /// assert_eq!(version.minor(), 0);
 /// assert_eq!(format!("{:?}", version), "ps_4_0");
@@ -83,7 +83,7 @@ impl Default for ShVer {
 
 impl ShaderVersion {
     /// D3D11_SHVER_GET_TYPE
-    pub fn shver(&self) -> ShaderVersionType { ShaderVersionType((self.0 >> 16) & 0xFFFF) }
+    pub fn ty(&self) -> ShaderVersionType { ShaderVersionType((self.0 >> 16) & 0xFFFF) }
 
     /// D3D11_SHVER_GET_MAJOR
     pub fn major(&self) -> u32 { (self.0 >> 4) & 0xF }
@@ -94,7 +94,7 @@ impl ShaderVersion {
 
 impl Debug for ShaderVersion {
     fn fmt(&self, fmt: &mut Formatter) -> fmt::Result {
-        let (ty, maj, min) = (self.shver(), self.major(), self.minor());
+        let (ty, maj, min) = (self.ty(), self.major(), self.minor());
         match ty {
             ShVer::PixelShader      => write!(fmt, "ps_{}_{}", maj, min),
             ShVer::VertexShader     => write!(fmt, "vs_{}_{}", maj, min),
@@ -102,10 +102,14 @@ impl Debug for ShaderVersion {
             ShVer::HullShader       => write!(fmt, "hs_{}_{}", maj, min),
             ShVer::DomainShader     => write!(fmt, "ds_{}_{}", maj, min),
             ShVer::ComputeShader    => write!(fmt, "cs_{}_{}", maj, min),
-            _other                  => fmt.debug_struct("ShaderVersion").field("shver", &ty).field("major", &maj).field("minor", &min).finish()
+            _other                  => fmt.debug_struct("ShaderVersion").field("ty", &ty).field("major", &maj).field("minor", &min).finish()
         }
     }
 }
+
+//#cpp2rust D3D11_SHVER_GET_TYPE            = d3d11::ShaderVersion::ty
+//#cpp2rust D3D11_SHVER_GET_MAJOR           = d3d11::ShaderVersion::major
+//#cpp2rust D3D11_SHVER_GET_MINOR           = d3d11::ShaderVersion::minor
 
 //#cpp2rust D3D11_SHADER_VERSION_TYPE       = d3d11::ShaderVersionType
 

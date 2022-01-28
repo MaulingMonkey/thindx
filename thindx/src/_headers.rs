@@ -13,15 +13,15 @@
 //! | ---------- | ---------- | ------- | ----- | --------- | --------- | ------ |
 //! | [guiddef.h](const@guiddef_h) |   | ✔️ 1 of 1 |   |   | ✔️ 7 of 7 | ⚠️ 5 of 7 |
 //! | [unknwn.h](const@unknwn_h) | ✔️ 1 of 1 |   |   |   |   |   |
-//! | [d3dcommon.h](const@d3dcommon_h) | ⚠️ 2 of 3 | ✔️ 1 of 1 | ✔️ 22 of 22 |   | ⚠️ 555 of 576 | ❌ 0 of 4 |
+//! | [d3dcommon.h](const@d3dcommon_h) | ⚠️ 2 of 3 | ✔️ 1 of 1 | ✔️ 22 of 22 |   | ⚠️ 555 of 575 | ❌ 0 of 4 |
 //! | [d3dcompiler.h](const@d3dcompiler_h) |   | ✔️ 1 of 1 | ✔️ 2 of 2 |   | ⚠️ 60 of 71 |   |
-//! | [d3d9.h](const@d3d9_h) | ⚠️ 20 of 24 |   |   | ⚠️ 2 of 9 | ⚠️ 26 of 73 | ❌ 0 of 3 |
+//! | [d3d9.h](const@d3d9_h) | ⚠️ 20 of 24 |   |   | ⚠️ 2 of 9 | ⚠️ 26 of 72 | ❌ 0 of 3 |
 //! | [d3d9caps.h](const@d3d9caps_h) |   | ⚠️ 3 of 5 |   |   | ⚠️ 213 of 249 |   |
 //! | [d3d9types.h](const@d3d9types_h) |   | ⚠️ 19 of 71 | ⚠️ 40 of 54 |   | ⚠️ 508 of 844 | ⚠️ 8 of 20 |
-//! | [d3d11shader.h](const@d3d11shader_h) | ✔️ 12 of 12 | ✔️ 9 of 9 | ✔️ 1 of 1 |   | ⚠️ 16 of 18 | ❌ 0 of 3 |
+//! | [d3d11shader.h](const@d3d11shader_h) | ✔️ 12 of 12 | ✔️ 9 of 9 | ✔️ 1 of 1 |   | ⚠️ 16 of 17 | ✔️ 3 of 3 |
 //! | [d3d11shadertracing.h](const@d3d11shadertracing_h) | ❌ 0 of 2 | ❌ 0 of 11 | ❌ 0 of 3 |   | ❌ 0 of 62 |   |
 //! | [xinput.h](const@xinput_h) |   | ✔️ 6 of 6 |   | ✔️ 8 of 8 | ⚠️ 83 of 86 |   |
-//! | [xaudio2.h](const@xaudio2_h) | ❌ 0 of 8 | ❌ 0 of 11 | ❌ 0 of 1 |   | ❌ 0 of 162 | ❌ 0 of 2 |
+//! | [xaudio2.h](const@xaudio2_h) | ❌ 0 of 8 | ❌ 0 of 11 | ❌ 0 of 1 |   | ❌ 0 of 161 | ❌ 0 of 2 |
 
 
 
@@ -707,7 +707,6 @@ pub const unknwn_h : cxx_header = cxx_header;
 /// `D3D_FL9_3_REQ_TEXTURECUBE_DIMENSION` →&nbsp;❌ <br>
 /// `D3D_FL9_3_SIMULTANEOUS_RENDER_TARGET_COUNT` →&nbsp;❌ <br>
 /// `IID_ID3DBlob` →&nbsp;❌ <br>
-/// `INTERFACE` →&nbsp;❌ <br>
 /// ### C++ Macros → Rust fns/macros
 ///
 /// `D3D_SET_OBJECT_NAME_A` →&nbsp;❌ <br>
@@ -1179,7 +1178,6 @@ pub const d3dcompiler_h : cxx_header = cxx_header;
 /// `D3D_OK` →&nbsp;❌ <br>
 /// `D3D_SDK_VERSION`&nbsp;→ [`d3d::SdkVersion::DEFAULT`] <br>
 /// `DIRECT3D_VERSION` →&nbsp;❌ <br>
-/// `INTERFACE` →&nbsp;❌ <br>
 /// `S_NOT_RESIDENT` →&nbsp;❌ <br>
 /// `S_PRESENT_MODE_CHANGED` →&nbsp;❌ <br>
 /// `S_PRESENT_OCCLUDED` →&nbsp;❌ <br>
@@ -2646,12 +2644,11 @@ pub const d3d9types_h : cxx_header = cxx_header;
 /// `D3D_SHADER_REQUIRES_MINIMUM_PRECISION`&nbsp;→ [`d3d::ShaderRequires::MinimumPrecision`] <br>
 /// `D3D_SHADER_REQUIRES_TILED_RESOURCES`&nbsp;→ [`d3d::ShaderRequires::TiledResources`] <br>
 /// `D3D_SHADER_REQUIRES_UAVS_AT_EVERY_STAGE`&nbsp;→ [`d3d::ShaderRequires::UavsAtEveryStage`] <br>
-/// `INTERFACE` →&nbsp;❌ <br>
 /// ### C++ Macros → Rust fns/macros
 ///
-/// `D3D11_SHVER_GET_MAJOR` →&nbsp;❌ <br>
-/// `D3D11_SHVER_GET_MINOR` →&nbsp;❌ <br>
-/// `D3D11_SHVER_GET_TYPE` →&nbsp;❌ <br>
+/// `D3D11_SHVER_GET_MAJOR`&nbsp;→ [`d3d11::ShaderVersion::major`] <br>
+/// `D3D11_SHVER_GET_MINOR`&nbsp;→ [`d3d11::ShaderVersion::minor`] <br>
+/// `D3D11_SHVER_GET_TYPE`&nbsp;→ [`d3d11::ShaderVersion::ty`] <br>
 pub const d3d11shader_h : cxx_header = cxx_header;
 
 
@@ -2972,7 +2969,6 @@ pub const xinput_h : cxx_header = cxx_header;
 /// ### C++ Constants → Rust Constants
 ///
 /// `FACILITY_XAUDIO2` →&nbsp;❌ <br>
-/// `INTERFACE` →&nbsp;❌ <br>
 /// `IXAudio2MasteringVoice_DestroyVoice` →&nbsp;❌ <br>
 /// `IXAudio2MasteringVoice_DisableEffect` →&nbsp;❌ <br>
 /// `IXAudio2MasteringVoice_EnableEffect` →&nbsp;❌ <br>
