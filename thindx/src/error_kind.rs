@@ -30,6 +30,15 @@ impl ErrorKind {
         Self(((sev << 31) | (fac << 16) | (code << 0)) as _)
     }
 
+    /// MAKE_D3DHRESULT
+    pub const fn make_d3dhresult(code: u32) -> ErrorKind { ErrorKind::make_hresult(1, _FACD3D, code) }
+
+    /// MAKE_DDHRESULT
+    pub const fn make_ddhresult(code: u32) -> ErrorKind { ErrorKind::make_hresult(1, _FACD3D, code) } // Yes, _FACD3D is the same
+
+    /// MAKE_D3DSTATUS
+    pub const fn make_d3dstatus(code: u32) -> ErrorKind { ErrorKind::make_hresult(0, _FACD3D, code) }
+
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/dmerror/nf-dmerror-make_hresult)\]
     /// MAKE_HRESULT(1, FACILITY_WIN32, code)
     ///
@@ -179,5 +188,11 @@ impl PartialEq<ErrorKind> for Option<ErrorKind> { fn eq(&self, other: &ErrorKind
 impl<O> PartialEq<Result<O, ErrorKind>> for ErrorKind { fn eq(&self, other: &Result<O, ErrorKind>) -> bool { Some(self) == other.as_ref().err() } }
 impl<O> PartialEq<ErrorKind> for Result<O, ErrorKind> { fn eq(&self, other: &ErrorKind)            -> bool { Some(other) == self.as_ref().err() } }
 
+const _FACD3D : u32 = 0x876; // d3d9helper.h
+
 //#cpp2rust HRESULT         = ErrorKind
 //#cpp2rust MAKE_HRESULT    = ErrorKind::make_hresult
+
+//#cpp2rust MAKE_D3DSTATUS  = ErrorKind::make_d3dstatus
+//#cpp2rust MAKE_D3DHRESULT = ErrorKind::make_d3dhresult
+//#cpp2rust MAKE_DDHRESULT  = ErrorKind::make_ddhresult

@@ -32,4 +32,4 @@ impl Default for SGR {
 }
 
 //#cpp2rust D3DSGR_CALIBRATE        = d3d::SGR::Calibrate
-//#cpp2rust D3DSGR_NOCALIBRATION    = d3d::SGR::NoCalibration
+//#cpp2rust D3DSGR_NO_CALIBRATION   = d3d::SGR::NoCalibration

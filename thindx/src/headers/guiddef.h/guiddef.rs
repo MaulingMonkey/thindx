@@ -185,6 +185,8 @@ impl Guid {
 //#cpp2rust DEFINE_GUID         = guid!
 //#cpp2rust DEFINE_OLEGUID      = guid!
 
+//#cpp2rust DECLSPEC_UUID       = impl winapi::Interface
+
 //#cpp2rust InlineIsEqualGUID   = Guid::eq
 //#cpp2rust IsEqualCLSID        = ClsID::eq
 //#cpp2rust IsEqualFMTID        = FmtID::eq

@@ -15,7 +15,7 @@
 //! | [unknwn.h](const@unknwn_h) | ✔️ 1 of 1 |   |   |   |   |   |
 //! | [d3dcommon.h](const@d3dcommon_h) | ⚠️ 2 of 3 | ✔️ 1 of 1 | ✔️ 22 of 22 |   | ⚠️ 555 of 575 | ❌ 0 of 4 |
 //! | [d3dcompiler.h](const@d3dcompiler_h) |   | ✔️ 1 of 1 | ✔️ 2 of 2 |   | ⚠️ 60 of 71 |   |
-//! | [d3d9.h](const@d3d9_h) | ⚠️ 20 of 24 |   |   | ⚠️ 2 of 9 | ⚠️ 26 of 72 | ❌ 0 of 3 |
+//! | [d3d9.h](const@d3d9_h) | ⚠️ 20 of 24 |   |   | ⚠️ 2 of 9 | ⚠️ 63 of 72 | ✔️ 3 of 3 |
 //! | [d3d9caps.h](const@d3d9caps_h) |   | ⚠️ 3 of 5 |   |   | ⚠️ 213 of 249 |   |
 //! | [d3d9types.h](const@d3d9types_h) |   | ⚠️ 19 of 71 | ⚠️ 40 of 54 |   | ⚠️ 508 of 844 | ⚠️ 8 of 20 |
 //! | [d3d11shader.h](const@d3d11shader_h) | ✔️ 12 of 12 | ✔️ 9 of 9 | ✔️ 1 of 1 |   | ⚠️ 16 of 17 | ✔️ 3 of 3 |
@@ -77,13 +77,13 @@ pub const unknwn_h : cxx_header = cxx_header;
 /// * [`ID3DDestructionNotifier::RegisterDestructionCallback`](https://microsoft.github.io/windows-docs-rs/doc/windows/Win32/Graphics/Direct3D/struct.ID3DDestructionNotifier.html#method.RegisterDestructionCallback) →&nbsp;❌ <br>
 /// * [`ID3DDestructionNotifier::UnregisterDestructionCallback`](https://microsoft.github.io/windows-docs-rs/doc/windows/Win32/Graphics/Direct3D/struct.ID3DDestructionNotifier.html#method.UnregisterDestructionCallback) →&nbsp;❌ <br>
 ///
-/// [`ID3DInclude`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nn-d3dcommon-id3dinclude)&nbsp;→ [`d3d::AsInclude`] <br>
+/// [`ID3DInclude`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nn-d3dcommon-id3dinclude)&nbsp;→ <code>trait [d3d::AsInclude](d3d::AsInclude)</code> <br>
 /// * [`ID3DInclude::Close`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nf-d3dcommon-id3dinclude-close) →&nbsp;❌ <br>
 /// * [`ID3DInclude::Open`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nf-d3dcommon-id3dinclude-open) →&nbsp;❌ <br>
 ///
 /// ### C++ Structs -> Rust Structs
 ///
-/// [`D3D_SHADER_MACRO`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ns-d3dcommon-d3d_shader_macro)&nbsp;→ [`d3d::AsShaderMacros`] <br>
+/// [`D3D_SHADER_MACRO`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ns-d3dcommon-d3d_shader_macro)&nbsp;→ <code>trait [d3d::AsShaderMacros](d3d::AsShaderMacros)</code> <br>
 /// ### C++ Enums → Rust Structs
 ///
 /// [`D3D_CBUFFER_TYPE`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_cbuffer_type)&nbsp;→ [`d3d::CBufferType`] <br>
@@ -1113,7 +1113,7 @@ pub const d3dcompiler_h : cxx_header = cxx_header;
 ///
 /// `D3D9b_SDK_VERSION`&nbsp;→ [`d3d::SdkVersion::DEFAULT9B`] <br>
 /// `D3DADAPTER_DEFAULT` →&nbsp;❌ <br>
-/// `D3DAPI` →&nbsp;❌ <br>
+/// `D3DAPI`&nbsp;→ [`extern "system"`](https://doc.rust-lang.org/reference/items/external-blocks.html#abi) <br>
 /// `D3DCREATE_ADAPTERGROUP_DEVICE`&nbsp;→ [`d3d::Create::AdapterGroupDevice`] <br>
 /// `D3DCREATE_DISABLE_DRIVER_MANAGEMENT`&nbsp;→ [`d3d::Create::DisableDriverManagement`] <br>
 /// `D3DCREATE_DISABLE_DRIVER_MANAGEMENT_EX`&nbsp;→ [`d3d::Create::DisableDriverManagementEx`] <br>
@@ -1131,36 +1131,36 @@ pub const d3dcompiler_h : cxx_header = cxx_header;
 /// `D3DCURSOR_IMMEDIATE_UPDATE` →&nbsp;❌ <br>
 /// `D3DENUM_NO_DRIVERVERSION` →&nbsp;❌ <br>
 /// `D3DENUM_WHQL_LEVEL` →&nbsp;❌ <br>
-/// `D3DERR_CANNOTPROTECTCONTENT` →&nbsp;❌ <br>
-/// `D3DERR_CONFLICTINGRENDERSTATE` →&nbsp;❌ <br>
-/// `D3DERR_CONFLICTINGTEXTUREFILTER` →&nbsp;❌ <br>
-/// `D3DERR_CONFLICTINGTEXTUREPALETTE` →&nbsp;❌ <br>
-/// `D3DERR_DEVICEHUNG` →&nbsp;❌ <br>
-/// `D3DERR_DEVICELOST` →&nbsp;❌ <br>
-/// `D3DERR_DEVICENOTRESET` →&nbsp;❌ <br>
-/// `D3DERR_DEVICEREMOVED` →&nbsp;❌ <br>
-/// `D3DERR_DRIVERINTERNALERROR` →&nbsp;❌ <br>
-/// `D3DERR_DRIVERINVALIDCALL` →&nbsp;❌ <br>
-/// `D3DERR_INVALIDCALL` →&nbsp;❌ <br>
-/// `D3DERR_INVALIDDEVICE` →&nbsp;❌ <br>
-/// `D3DERR_MOREDATA` →&nbsp;❌ <br>
-/// `D3DERR_NOTAVAILABLE` →&nbsp;❌ <br>
-/// `D3DERR_NOTFOUND` →&nbsp;❌ <br>
-/// `D3DERR_OUTOFVIDEOMEMORY` →&nbsp;❌ <br>
-/// `D3DERR_PRESENT_STATISTICS_DISJOINT` →&nbsp;❌ <br>
-/// `D3DERR_TOOMANYOPERATIONS` →&nbsp;❌ <br>
-/// `D3DERR_UNSUPPORTEDALPHAARG` →&nbsp;❌ <br>
-/// `D3DERR_UNSUPPORTEDALPHAOPERATION` →&nbsp;❌ <br>
-/// `D3DERR_UNSUPPORTEDCOLORARG` →&nbsp;❌ <br>
-/// `D3DERR_UNSUPPORTEDCOLOROPERATION` →&nbsp;❌ <br>
-/// `D3DERR_UNSUPPORTEDCRYPTO` →&nbsp;❌ <br>
-/// `D3DERR_UNSUPPORTEDFACTORVALUE` →&nbsp;❌ <br>
-/// `D3DERR_UNSUPPORTEDOVERLAY` →&nbsp;❌ <br>
-/// `D3DERR_UNSUPPORTEDOVERLAYFORMAT` →&nbsp;❌ <br>
-/// `D3DERR_UNSUPPORTEDTEXTUREFILTER` →&nbsp;❌ <br>
-/// `D3DERR_WASSTILLDRAWING` →&nbsp;❌ <br>
-/// `D3DERR_WRONGTEXTUREFORMAT` →&nbsp;❌ <br>
-/// `D3DOK_NOAUTOGEN` →&nbsp;❌ <br>
+/// `D3DERR_CANNOTPROTECTCONTENT`&nbsp;→ [`D3DERR::CANNOTPROTECTCONTENT`] <br>
+/// `D3DERR_CONFLICTINGRENDERSTATE`&nbsp;→ [`D3DERR::CONFLICTINGRENDERSTATE`] <br>
+/// `D3DERR_CONFLICTINGTEXTUREFILTER`&nbsp;→ [`D3DERR::CONFLICTINGTEXTUREFILTER`] <br>
+/// `D3DERR_CONFLICTINGTEXTUREPALETTE`&nbsp;→ [`D3DERR::CONFLICTINGTEXTUREPALETTE`] <br>
+/// `D3DERR_DEVICEHUNG`&nbsp;→ [`D3DERR::DEVICEHUNG`] <br>
+/// `D3DERR_DEVICELOST`&nbsp;→ [`D3DERR::DEVICELOST`] <br>
+/// `D3DERR_DEVICENOTRESET`&nbsp;→ [`D3DERR::DEVICENOTRESET`] <br>
+/// `D3DERR_DEVICEREMOVED`&nbsp;→ [`D3DERR::DEVICEREMOVED`] <br>
+/// `D3DERR_DRIVERINTERNALERROR`&nbsp;→ [`D3DERR::DRIVERINTERNALERROR`] <br>
+/// `D3DERR_DRIVERINVALIDCALL`&nbsp;→ [`D3DERR::DRIVERINVALIDCALL`] <br>
+/// `D3DERR_INVALIDCALL`&nbsp;→ [`D3DERR::INVALIDCALL`] <br>
+/// `D3DERR_INVALIDDEVICE`&nbsp;→ [`D3DERR::INVALIDDEVICE`] <br>
+/// `D3DERR_MOREDATA`&nbsp;→ [`D3DERR::MOREDATA`] <br>
+/// `D3DERR_NOTAVAILABLE`&nbsp;→ [`D3DERR::NOTAVAILABLE`] <br>
+/// `D3DERR_NOTFOUND`&nbsp;→ [`D3DERR::NOTFOUND`] <br>
+/// `D3DERR_OUTOFVIDEOMEMORY`&nbsp;→ [`D3DERR::OUTOFVIDEOMEMORY`] <br>
+/// `D3DERR_PRESENT_STATISTICS_DISJOINT`&nbsp;→ [`D3DERR::PRESENT_STATISTICS_DISJOINT`] <br>
+/// `D3DERR_TOOMANYOPERATIONS`&nbsp;→ [`D3DERR::TOOMANYOPERATIONS`] <br>
+/// `D3DERR_UNSUPPORTEDALPHAARG`&nbsp;→ [`D3DERR::UNSUPPORTEDALPHAARG`] <br>
+/// `D3DERR_UNSUPPORTEDALPHAOPERATION`&nbsp;→ [`D3DERR::UNSUPPORTEDALPHAOPERATION`] <br>
+/// `D3DERR_UNSUPPORTEDCOLORARG`&nbsp;→ [`D3DERR::UNSUPPORTEDCOLORARG`] <br>
+/// `D3DERR_UNSUPPORTEDCOLOROPERATION`&nbsp;→ [`D3DERR::UNSUPPORTEDCOLOROPERATION`] <br>
+/// `D3DERR_UNSUPPORTEDCRYPTO`&nbsp;→ [`D3DERR::UNSUPPORTEDCRYPTO`] <br>
+/// `D3DERR_UNSUPPORTEDFACTORVALUE`&nbsp;→ [`D3DERR::UNSUPPORTEDFACTORVALUE`] <br>
+/// `D3DERR_UNSUPPORTEDOVERLAY`&nbsp;→ [`D3DERR::UNSUPPORTEDOVERLAY`] <br>
+/// `D3DERR_UNSUPPORTEDOVERLAYFORMAT`&nbsp;→ [`D3DERR::UNSUPPORTEDOVERLAYFORMAT`] <br>
+/// `D3DERR_UNSUPPORTEDTEXTUREFILTER`&nbsp;→ [`D3DERR::UNSUPPORTEDTEXTUREFILTER`] <br>
+/// `D3DERR_WASSTILLDRAWING`&nbsp;→ [`D3DERR::WASSTILLDRAWING`] <br>
+/// `D3DERR_WRONGTEXTUREFORMAT`&nbsp;→ [`D3DERR::WRONGTEXTUREFORMAT`] <br>
+/// `D3DOK_NOAUTOGEN`&nbsp;→ [`D3D::OK_NOAUTOGEN`] <br>
 /// `D3DPRESENT_BACK_BUFFERS_MAX` →&nbsp;❌ <br>
 /// `D3DPRESENT_BACK_BUFFERS_MAX_EX` →&nbsp;❌ <br>
 /// `D3DPRESENT_DONOTFLIP`&nbsp;→ [`d3d::Present::DoNotFlip`] <br>
@@ -1173,21 +1173,21 @@ pub const d3dcompiler_h : cxx_header = cxx_header;
 /// `D3DPRESENT_UPDATEOVERLAYONLY`&nbsp;→ [`d3d::Present::UpdateOverlayOnly`] <br>
 /// `D3DPRESENT_VIDEO_RESTRICT_TO_MONITOR`&nbsp;→ [`d3d::Present::VideoRestrictToMonitor`] <br>
 /// `D3DSGR_CALIBRATE`&nbsp;→ [`d3d::SGR::Calibrate`] <br>
-/// `D3DSGR_NO_CALIBRATION` →&nbsp;❌ <br>
+/// `D3DSGR_NO_CALIBRATION`&nbsp;→ [`d3d::SGR::NoCalibration`] <br>
 /// `D3DSPD_IUNKNOWN` →&nbsp;❌ <br>
-/// `D3D_OK` →&nbsp;❌ <br>
+/// `D3D_OK`&nbsp;→ [`D3D::OK`] <br>
 /// `D3D_SDK_VERSION`&nbsp;→ [`d3d::SdkVersion::DEFAULT`] <br>
 /// `DIRECT3D_VERSION` →&nbsp;❌ <br>
-/// `S_NOT_RESIDENT` →&nbsp;❌ <br>
-/// `S_PRESENT_MODE_CHANGED` →&nbsp;❌ <br>
-/// `S_PRESENT_OCCLUDED` →&nbsp;❌ <br>
-/// `S_RESIDENT_IN_SHARED_MEMORY` →&nbsp;❌ <br>
+/// `S_NOT_RESIDENT`&nbsp;→ [`S::NOT_RESIDENT`] <br>
+/// `S_PRESENT_MODE_CHANGED`&nbsp;→ [`S::PRESENT_MODE_CHANGED`] <br>
+/// `S_PRESENT_OCCLUDED`&nbsp;→ [`S::PRESENT_OCCLUDED`] <br>
+/// `S_RESIDENT_IN_SHARED_MEMORY`&nbsp;→ [`S::RESIDENT_IN_SHARED_MEMORY`] <br>
 /// `_FACD3D` →&nbsp;❌ <br>
 /// ### C++ Macros → Rust fns/macros
 ///
-/// `DECLSPEC_UUID` →&nbsp;❌ <br>
-/// `MAKE_D3DHRESULT` →&nbsp;❌ <br>
-/// `MAKE_D3DSTATUS` →&nbsp;❌ <br>
+/// `DECLSPEC_UUID`&nbsp;→ <code>impl [winapi::Interface](winapi::Interface)</code> <br>
+/// `MAKE_D3DHRESULT`&nbsp;→ [`ErrorKind::make_d3dhresult`] <br>
+/// `MAKE_D3DSTATUS`&nbsp;→ [`ErrorKind::make_d3dstatus`] <br>
 pub const d3d9_h : cxx_header = cxx_header;
 
 

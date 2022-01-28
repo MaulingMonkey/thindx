@@ -56,3 +56,8 @@ convert!(unsafe VertexBuffer        => Resource,    winapi::shared::d3d9::IDirec
 convert!(unsafe PixelShader         => Unknown,     winapi::shared::d3d9::IDirect3DPixelShader9);
 convert!(unsafe VertexShader        => Unknown,     winapi::shared::d3d9::IDirect3DVertexShader9);
 convert!(unsafe Volume              => Unknown,     winapi::shared::d3d9::IDirect3DVolume9);
+
+
+// d3d.h has: #define D3DAPI WINAPI
+//#cpp2rust D3DAPI          = extern "system"
+//#cpp2rust WINAPI          = extern "system"
