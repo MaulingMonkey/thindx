@@ -22,6 +22,9 @@ use std::fmt::{self, Debug, Formatter};
 /// | y1                    | top       |
 /// | x2                    | right     |
 /// | y2                    | bottom    |
+///
+/// [D3DRECT]:  https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3drect
+/// [RECT]:     https://docs.microsoft.com/en-us/windows/win32/api/windef/ns-windef-rect
 #[derive(Clone, Copy, Default)]
 #[derive(Pod, Zeroable)]
 #[repr(C)] pub struct Rect {
