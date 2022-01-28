@@ -11,7 +11,7 @@
 //!
 #![doc = include_str!("d3d9-interface-tree.md")] // Breaks horribly in rust-analyzer's intellisense
 //!
-//! | Rust COM Pointer      | C+++ \[Rust Ext Trait\]                                                   | Description   |
+//! | Rust COM Pointer      | C++ \[Rust Ext Trait\]                                                    | Description   |
 //! | --------------------- | ------------------------------------------------------------------------- | ------------- |
 //! | [Unknown]             | [IUnknown]\[~~Ext~~\]                                                     | The root type from which all sane COM types derive
 //! | [Direct3D]            | [IDirect3D9]\[[Ext](IDirect3D9Ext)\]                                      | Core factory for creating [Device]s
