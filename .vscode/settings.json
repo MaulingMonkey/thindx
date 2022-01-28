@@ -7,8 +7,8 @@
         "thindx/Readme.md": true,
 
         "xtask/target/*": true,
-        ".worktree/gh-pages/coverage/*": true,
-        ".worktree/gh-pages/docs/*": true,
+        ".worktree/gh-pages/preview/coverage/*": true,
+        ".worktree/gh-pages/preview/docs/*": true,
     },
     "terminal.integrated.cwd": "${workspaceFolder}",
     "terminal.integrated.env.windows": {
