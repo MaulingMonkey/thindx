@@ -926,7 +926,7 @@ pub const d3dcompiler_h : cxx_header = cxx_header;
 /// * [`IDirect3DDevice9::GetRenderState`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getrenderstate)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_render_state_untyped`] <br>
 /// * [`IDirect3DDevice9::GetRenderTarget`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getrendertarget)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_render_target`] <br>
 /// * [`IDirect3DDevice9::GetRenderTargetData`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getrendertargetdata)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_render_target_data`] <br>
-/// * [`IDirect3DDevice9::GetSamplerState`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getsamplerstate) →&nbsp;❌ <br>
+/// * [`IDirect3DDevice9::GetSamplerState`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getsamplerstate)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_sampler_state_unchecked`], [`d3d9::IDirect3DDevice9Ext::get_sampler_state_untyped`] <br>
 /// * [`IDirect3DDevice9::GetScissorRect`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getscissorrect)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_scissor_rect`] <br>
 /// * [`IDirect3DDevice9::GetSoftwareVertexProcessing`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getsoftwarevertexprocessing)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_software_vertex_processing`] <br>
 /// * [`IDirect3DDevice9::GetStreamSource`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getstreamsource)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_stream_source`] <br>

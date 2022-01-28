@@ -2013,6 +2013,97 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         MethodError::check("IDirect3DDevice9::GetRenderTargetData", hr)
     }
 
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getsamplerstate)\]
+    /// IDirect3DDevice9::GetSamplerState
+    ///
+    /// Retrieves a sampler state value for a device.
+    ///
+    /// May fail for pure devices.
+    ///
+    /// ### ⚠️ Safety ⚠️
+    /// *   `ty` is not bounds checked by thindx nor DirectX, and will cause undefined behavior if invalid!
+    /// *   `sampler` being out of bounds *appears* sound?  DirectX returns default sampler state when out of bounds?
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_test();
+    /// let sampler = 0;
+    /// # let _ = sampler;
+    /// # for sampler in (0 .. 256).chain((8 .. 32).map(|pow| 1<<pow)) {
+    ///
+    /// assert_eq!(
+    ///     unsafe { device.get_sampler_state_unchecked(sampler, Samp::AddressU) }.map(TextureAddress::from_unchecked).unwrap(),
+    ///     TAddress::Wrap
+    /// );
+    ///
+    /// assert_eq!(
+    ///     unsafe { device.get_sampler_state_unchecked(sampler, Samp::BorderColor) }.map(Color::argb).unwrap(),
+    ///     Color::argb(0x00000000),
+    /// );
+    ///
+    /// if false {
+    ///     // undefined behavior (invalid sampler):
+    ///     let _ = unsafe { device.get_sampler_state_unchecked(sampler, Samp::from_unchecked(!0)) };
+    /// }
+    /// # }
+    /// ```
+    ///
+    /// ### Returns
+    /// *   Ok([u32])   If `(sampler, state)` has a value
+    unsafe fn get_sampler_state_unchecked(&self, sampler: u32, ty: SamplerStateType) -> Result<u32, MethodError> {
+        let mut value = 0;
+        let hr = unsafe { self.as_winapi().GetSamplerState(sampler, ty.into(), &mut value) };
+        MethodError::check("IDirect3DDevice9::GetSamplerState", hr)?;
+        Ok(value)
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getsamplerstate)\]
+    /// IDirect3DDevice9::GetSamplerState
+    ///
+    /// Retrieves a sampler state value for a device.
+    ///
+    /// May fail for pure devices.
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_test();
+    /// let sampler = 0;
+    /// # let _ = sampler;
+    /// # for sampler in (0 .. 256).chain((8 .. 32).map(|pow| 1<<pow)) {
+    ///
+    /// assert_eq!(
+    ///     device.get_sampler_state_untyped(sampler, Samp::AddressU).map(TextureAddress::from_unchecked).unwrap(),
+    ///     TAddress::Wrap
+    /// );
+    ///
+    /// assert_eq!(
+    ///     device.get_sampler_state_untyped(sampler, Samp::BorderColor).map(Color::argb).unwrap(),
+    ///     Color::argb(0x00000000),
+    /// );
+    ///
+    /// assert_eq!(
+    ///     device.get_sampler_state_untyped(sampler, Samp::from_unchecked(!0)).unwrap_err().kind(),
+    ///     D3DERR::INVALIDCALL
+    /// );
+    /// #
+    /// # for s in (0 .. 256).chain((8..32).map(|pow| 1<<pow)).map(|i| SamplerStateType::from_unchecked(i)) {
+    /// #   let r = device.get_sampler_state_untyped(sampler, s);
+    /// #   dbg!((sampler, s, r));
+    /// #   if let Err(err) = device.get_sampler_state_untyped(sampler, s) {
+    /// #       assert_eq!(err.kind(), D3DERR::INVALIDCALL);
+    /// #   }
+    /// # }
+    /// # }
+    /// ```
+    ///
+    /// ### Returns
+    /// *   [D3DERR::INVALIDCALL]   If `state` is not a valid render state
+    /// *   Ok([u32])               If `state` has a value (including default values for "out-of-bounds" `sampler`s)
+    fn get_sampler_state_untyped(&self, sampler: u32, ty: SamplerStateType) -> Result<u32, MethodError> {
+        if !matches!(ty.into(), 1 ..= 13) { return Err(MethodError("IDirect3DDevice9Ext::get_sampler_state_untyped", D3DERR::INVALIDCALL)) }
+        unsafe { self.get_sampler_state_unchecked(sampler, ty) }
+    }
+
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getscissorrect)\]
     /// IDirect3DDevice9::GetScissorRect
     ///
