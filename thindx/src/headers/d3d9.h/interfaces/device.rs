@@ -1928,6 +1928,48 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         Ok(raster_status)
     }
 
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getrenderstate)\]
+    /// IDirect3DDevice9::GetRenderState
+    ///
+    /// Retrieves a render-state value for a device.
+    ///
+    /// May fail for pure devices.
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_test();
+    /// assert_eq!(
+    ///     device.get_render_state_untyped(RS::ZEnable).unwrap() != 0,
+    ///     false
+    /// );
+    ///
+    /// assert_eq!(
+    ///     device.get_render_state_untyped(RS::FillMode).map(FillMode::from_unchecked).unwrap(),
+    ///     FillMode::Solid
+    /// );
+    ///
+    /// assert_eq!(
+    ///     device.get_render_state_untyped(RS::from_unchecked(!0)).unwrap_err().kind(),
+    ///     D3DERR::INVALIDCALL
+    /// );
+    /// #
+    /// # for s in (0 .. 256).chain((8..32).map(|pow| 1<<pow)).map(|i| RenderStateType::from_unchecked(i)) {
+    /// #   if let Err(err) = device.get_render_state_untyped(s) {
+    /// #       assert_eq!(err.kind(), D3DERR::INVALIDCALL);
+    /// #   }
+    /// # }
+    /// ```
+    ///
+    /// ### Returns
+    /// *   [D3DERR::INVALIDCALL]   If `state` is not a valid render state
+    /// *   Ok([u32])               If `state` has a value
+    fn get_render_state_untyped(&self, state: RenderStateType) -> Result<u32, MethodError> {
+        let mut value = 0;
+        let hr = unsafe { self.as_winapi().GetRenderState(state.into(), &mut value) };
+        MethodError::check("IDirect3DDevice9::GetRenderState", hr)?;
+        Ok(value)
+    }
+
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getrendertarget)\]
     /// IDirect3DDevice9::GetRenderTarget
     ///
