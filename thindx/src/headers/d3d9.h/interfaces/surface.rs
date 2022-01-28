@@ -397,3 +397,15 @@ impl<T: AsSafe<IDirect3DSurface9>> IDirect3DSurface9Ext for T {}
         // TODO: test unsupported formats
     }
 }
+
+
+
+//#cpp2rust IDirect3DSurface9                       = d3d9::Surface
+//#cpp2rust IDirect3DSurface9                       = d3d9::IDirect3DSurface9Ext
+
+//#cpp2rust IDirect3DSurface9::GetContainer         = d3d9::IDirect3DSurface9Ext::get_container
+//#cpp2rust IDirect3DSurface9::GetDC                = d3d9::IDirect3DSurface9Ext::get_dc
+//#cpp2rust IDirect3DSurface9::GetDesc              = d3d9::IDirect3DSurface9Ext::get_desc
+//#cpp2rust IDirect3DSurface9::LockRect             = d3d9::IDirect3DSurface9Ext::lock_rect_unchecked
+//#cpp2rust IDirect3DSurface9::ReleaseDC            = d3d9::IDirect3DSurface9Ext::release_dc
+//#cpp2rust IDirect3DSurface9::UnlockRect           = d3d9::IDirect3DSurface9Ext::unlock_rect

@@ -516,3 +516,25 @@ pub trait IDirect3DDevice9ExExt : AsSafe<IDirect3DDevice9Ex> {
 
 #[cfg(feature = "9ex")]
 impl<T: AsSafe<IDirect3DDevice9Ex>> IDirect3DDevice9ExExt for T {}
+
+
+
+//#cpp2rust IDirect3DDevice9Ex                                  = d3d9::DeviceEx
+//#cpp2rust IDirect3DDevice9Ex                                  = d3d9::IDirect3DDevice9ExExt
+
+//#cpp2rust IDirect3DDevice9Ex::CheckDeviceState                = d3d9::IDirect3DDevice9ExExt::check_device_state
+//TODO:     IDirect3DDevice9Ex::CheckResourceResidency          = d3d9::IDirect3DDevice9ExExt::check_resource_residency
+//#cpp2rust IDirect3DDevice9Ex::ComposeRects                    = d3d9::IDirect3DDevice9ExExt::compose_rects
+//#cpp2rust IDirect3DDevice9Ex::CreateDepthStencilSurfaceEx     = d3d9::IDirect3DDevice9ExExt::create_depth_stencil_surface_ex
+//#cpp2rust IDirect3DDevice9Ex::CreateOffscreenPlainSurfaceEx   = d3d9::IDirect3DDevice9ExExt::create_offscreen_plain_surface_ex
+//#cpp2rust IDirect3DDevice9Ex::CreateRenderTargetEx            = d3d9::IDirect3DDevice9ExExt::create_render_target_ex
+//#cpp2rust IDirect3DDevice9Ex::GetDisplayModeEx                = d3d9::IDirect3DDevice9ExExt::get_display_mode_ex
+//#cpp2rust IDirect3DDevice9Ex::GetGPUThreadPriority            = d3d9::IDirect3DDevice9ExExt::get_gpu_thread_priority
+//#cpp2rust IDirect3DDevice9Ex::GetMaximumFrameLatency          = d3d9::IDirect3DDevice9ExExt::get_maximum_frame_latency
+//#cpp2rust IDirect3DDevice9Ex::PresentEx                       = d3d9::IDirect3DDevice9ExExt::present_ex
+//#cpp2rust IDirect3DDevice9Ex::ResetEx                         = d3d9::IDirect3DDevice9ExExt::reset_ex
+//#cpp2rust IDirect3DDevice9Ex::SetConvolutionMonoKernel        = d3d9::IDirect3DDevice9ExExt::set_convolution_mono_kernel
+//#cpp2rust IDirect3DDevice9Ex::SetGPUThreadPriority            = d3d9::IDirect3DDevice9ExExt::set_gpu_thread_priority
+//#cpp2rust IDirect3DDevice9Ex::SetMaximumFrameLatency          = d3d9::IDirect3DDevice9ExExt::set_maximum_frame_latency
+//#cpp2rust IDirect3DDevice9Ex::TestCooperativeLevel            = d3d9::IDirect3DDevice9ExExt::test_cooperative_level
+//#cpp2rust IDirect3DDevice9Ex::WaitForVBlank                   = d3d9::IDirect3DDevice9ExExt::wait_for_vblank

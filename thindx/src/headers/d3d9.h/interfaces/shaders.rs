@@ -229,3 +229,21 @@ impl<T: AsSafe<IDirect3DVertexShader9>> IDirect3DVertexShader9Ext for T {}
 
 // TODO: testing, glorious testing
 // TODO: examples
+
+
+
+//#cpp2rust IDirect3DPixelShader9                   = d3d9::PixelShader
+//#cpp2rust IDirect3DPixelShader9                   = d3d9::IDirect3DPixelShader9Ext
+
+//#cpp2rust IDirect3DVertexShader9                  = d3d9::VertexShader
+//#cpp2rust IDirect3DVertexShader9                  = d3d9::IDirect3DVertexShader9Ext
+
+//#cpp2rust IDirect3DPixelShader9::GetDevice        = d3d9::IDirect3DPixelShader9Ext::get_device
+//#cpp2rust IDirect3DPixelShader9::GetFunction      = d3d9::IDirect3DPixelShader9Ext::get_function_size
+//#cpp2rust IDirect3DPixelShader9::GetFunction      = d3d9::IDirect3DPixelShader9Ext::get_function_inplace
+//#cpp2rust IDirect3DPixelShader9::GetFunction      = d3d9::IDirect3DPixelShader9Ext::get_function
+
+//#cpp2rust IDirect3DVertexShader9::GetDevice       = d3d9::IDirect3DVertexShader9Ext::get_device
+//#cpp2rust IDirect3DVertexShader9::GetFunction     = d3d9::IDirect3DVertexShader9Ext::get_function_size
+//#cpp2rust IDirect3DVertexShader9::GetFunction     = d3d9::IDirect3DVertexShader9Ext::get_function_inplace
+//#cpp2rust IDirect3DVertexShader9::GetFunction     = d3d9::IDirect3DVertexShader9Ext::get_function

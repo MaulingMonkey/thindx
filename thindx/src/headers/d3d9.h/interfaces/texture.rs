@@ -933,3 +933,39 @@ impl<T: AsSafe<IDirect3DVolumeTexture9>> IDirect3DVolumeTexture9Ext for T {}
 impl<'t> From<&'t CubeTexture   > for Option<&'t BaseTexture> { fn from(t: &'t CubeTexture      ) -> Self { Some(&*t) } }
 impl<'t> From<&'t Texture       > for Option<&'t BaseTexture> { fn from(t: &'t Texture          ) -> Self { Some(&*t) } }
 impl<'t> From<&'t VolumeTexture > for Option<&'t BaseTexture> { fn from(t: &'t VolumeTexture    ) -> Self { Some(&*t) } }
+
+
+
+//#cpp2rust IDirect3DBaseTexture9                               = d3d9::BaseTexture
+//#cpp2rust IDirect3DBaseTexture9                               = d3d9::IDirect3DBaseTexture9Ext
+//#cpp2rust IDirect3DCubeTexture9                               = d3d9::CubeTexture
+//#cpp2rust IDirect3DCubeTexture9                               = d3d9::IDirect3DCubeTexture9Ext
+//#cpp2rust IDirect3DTexture9                                   = d3d9::Texture
+//#cpp2rust IDirect3DTexture9                                   = d3d9::IDirect3DTexture9Ext
+//#cpp2rust IDirect3DVolumeTexture9                             = d3d9::VolumeTexture
+//#cpp2rust IDirect3DVolumeTexture9                             = d3d9::IDirect3DVolumeTexture9Ext
+
+//#cpp2rust IDirect3DBaseTexture9::GenerateMipSubLevels         = d3d9::IDirect3DBaseTexture9Ext::generate_mip_sub_levels
+//#cpp2rust IDirect3DBaseTexture9::GetAutoGenFilterType         = d3d9::IDirect3DBaseTexture9Ext::get_auto_gen_filter_type
+//#cpp2rust IDirect3DBaseTexture9::GetLevelCount                = d3d9::IDirect3DBaseTexture9Ext::get_level_count
+//#cpp2rust IDirect3DBaseTexture9::GetLOD                       = d3d9::IDirect3DBaseTexture9Ext::get_lod
+//#cpp2rust IDirect3DBaseTexture9::SetAutoGenFilterType         = d3d9::IDirect3DBaseTexture9Ext::set_auto_gen_filter_type
+//#cpp2rust IDirect3DBaseTexture9::SetLOD                       = d3d9::IDirect3DBaseTexture9Ext::set_lod
+
+//#cpp2rust IDirect3DCubeTexture9::AddDirtyRect                 = d3d9::IDirect3DCubeTexture9Ext::add_dirty_rect
+//#cpp2rust IDirect3DCubeTexture9::GetCubeMapSurface            = d3d9::IDirect3DCubeTexture9Ext::get_cube_map_surface
+//#cpp2rust IDirect3DCubeTexture9::GetLevelDesc                 = d3d9::IDirect3DCubeTexture9Ext::get_level_desc
+//#cpp2rust IDirect3DCubeTexture9::LockRect                     = d3d9::IDirect3DCubeTexture9Ext::lock_rect_unchecked
+//#cpp2rust IDirect3DCubeTexture9::UnlockRect                   = d3d9::IDirect3DCubeTexture9Ext::unlock_rect
+
+//#cpp2rust IDirect3DTexture9::AddDirtyRect                     = d3d9::IDirect3DTexture9Ext::add_dirty_rect
+//#cpp2rust IDirect3DTexture9::GetLevelDesc                     = d3d9::IDirect3DTexture9Ext::get_level_desc
+//#cpp2rust IDirect3DTexture9::GetSurfaceLevel                  = d3d9::IDirect3DTexture9Ext::get_surface_level
+//#cpp2rust IDirect3DTexture9::LockRect                         = d3d9::IDirect3DTexture9Ext::lock_rect_unchecked
+//#cpp2rust IDirect3DTexture9::UnlockRect                       = d3d9::IDirect3DTexture9Ext::unlock_rect
+
+//#cpp2rust IDirect3DVolumeTexture9::AddDirtyBox                = d3d9::IDirect3DVolumeTexture9Ext::add_dirty_box
+//#cpp2rust IDirect3DVolumeTexture9::GetLevelDesc               = d3d9::IDirect3DVolumeTexture9Ext::get_level_desc
+//#cpp2rust IDirect3DVolumeTexture9::GetVolumeLevel             = d3d9::IDirect3DVolumeTexture9Ext::get_volume_level
+//#cpp2rust IDirect3DVolumeTexture9::LockBox                    = d3d9::IDirect3DVolumeTexture9Ext::lock_box_unchecked
+//#cpp2rust IDirect3DVolumeTexture9::UnlockBox                  = d3d9::IDirect3DVolumeTexture9Ext::unlock_box

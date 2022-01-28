@@ -765,3 +765,25 @@ impl<T: AsSafe<IDirect3D9> + Sized> IDirect3D9Ext for T {}
         assert_eq!(D3DERR::INVALIDCALL,     d3d.get_device_caps(adapter, DevType::from_unchecked(100000000)).map(|_| ()));
     }
 }
+
+
+
+
+//#cpp2rust IDirect3D9                                          = d3d9::Direct3D
+//#cpp2rust IDirect3D9                                          = d3d9::IDirect3D9Ext
+//#cpp2rust Direct3DCreate9                                     = d3d9::IDirect3D9Ext::create
+
+//#cpp2rust IDirect3D9::CheckDepthStencilMatch                  = d3d9::IDirect3D9Ext::check_depth_stencil_match
+//#cpp2rust IDirect3D9::CheckDeviceFormat                       = d3d9::IDirect3D9Ext::check_device_format
+//#cpp2rust IDirect3D9::CheckDeviceFormatConversion             = d3d9::IDirect3D9Ext::check_device_format_conversion
+//#cpp2rust IDirect3D9::CheckDeviceMultiSampleType              = d3d9::IDirect3D9Ext::check_device_multi_sample_type
+//#cpp2rust IDirect3D9::CheckDeviceType                         = d3d9::IDirect3D9Ext::check_device_type
+//#cpp2rust IDirect3D9::CreateDevice                            = d3d9::IDirect3D9Ext::create_device
+//#cpp2rust IDirect3D9::EnumAdapterModes                        = d3d9::IDirect3D9Ext::enum_adapter_modes
+//#cpp2rust IDirect3D9::GetAdapterCount                         = d3d9::IDirect3D9Ext::get_adapter_count
+//#cpp2rust IDirect3D9::GetAdapterDisplayMode                   = d3d9::IDirect3D9Ext::get_adapter_display_mode
+//#cpp2rust IDirect3D9::GetAdapterIdentifier                    = d3d9::IDirect3D9Ext::get_adapter_identifier
+//#cpp2rust IDirect3D9::GetAdapterModeCount                     = d3d9::IDirect3D9Ext::get_adapter_mode_count
+//#cpp2rust IDirect3D9::GetAdapterMonitor                       = d3d9::IDirect3D9Ext::get_adapter_monitor
+//#cpp2rust IDirect3D9::GetDeviceCaps                           = d3d9::IDirect3D9Ext::get_device_caps
+//TODO:     IDirect3D9::RegisterSoftwareDevice                  = d3d9::IDirect3D9Ext::register_software_device

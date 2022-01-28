@@ -193,3 +193,20 @@ impl<T: AsSafe<IDirect3DVolume9>> IDirect3DVolume9Ext for T {}
 // TODO: integration tests
 // TODO: make set_private_data generic on any data type?  bytemuck data types?
 // TODO: make get_private_data_inplace generic on bytemuck data types?
+
+
+
+//#cpp2rust IDirect3DVolume9                        = d3d9::Volume
+//#cpp2rust IDirect3DVolume9                        = d3d9::IDirect3DVolume9Ext
+
+//#cpp2rust IDirect3DVolume9::FreePrivateData       = d3d9::IDirect3DVolume9Ext::free_private_data
+//#cpp2rust IDirect3DVolume9::GetContainer          = d3d9::IDirect3DVolume9Ext::get_container
+//#cpp2rust IDirect3DVolume9::GetDesc               = d3d9::IDirect3DVolume9Ext::get_desc
+//#cpp2rust IDirect3DVolume9::GetDevice             = d3d9::IDirect3DVolume9Ext::get_device
+//#cpp2rust IDirect3DVolume9::GetPrivateData        = d3d9::IDirect3DVolume9Ext::get_private_data_inplace
+//TODO:     IDirect3DVolume9::GetPrivateData        = d3d9::IDirect3DVolume9Ext::get_private_data_com
+//#cpp2rust IDirect3DVolume9::LockBox               = d3d9::IDirect3DVolume9Ext::lock_box_unchecked
+//#cpp2rust IDirect3DVolume9::SetPrivateData        = d3d9::IDirect3DVolume9Ext::set_private_data
+//TODO:     IDirect3DVolume9::SetPrivateData        = d3d9::IDirect3DVolume9Ext::set_debug_name
+//TODO:     IDirect3DVolume9::SetPrivateData        = d3d9::IDirect3DVolume9Ext::set_private_data_com
+//#cpp2rust IDirect3DVolume9::UnlockBox             = d3d9::IDirect3DVolume9Ext::unlock_box

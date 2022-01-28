@@ -373,3 +373,19 @@ impl<T: AsSafe<IDirect3DVertexBuffer9>> IDirect3DVertexBuffer9Ext for T {}
         }
     }
 }
+
+
+
+//#cpp2rust IDirect3DIndexBuffer9                   = d3d9::IndexBuffer
+//#cpp2rust IDirect3DIndexBuffer9                   = d3d9::IDirect3DIndexBuffer9Ext
+
+//#cpp2rust IDirect3DVertexBuffer9                  = d3d9::VertexBuffer
+//#cpp2rust IDirect3DVertexBuffer9                  = d3d9::IDirect3DVertexBuffer9Ext
+
+//#cpp2rust IDirect3DIndexBuffer9::GetDesc          = d3d9::IDirect3DIndexBuffer9Ext::get_desc
+//#cpp2rust IDirect3DIndexBuffer9::Lock             = d3d9::IDirect3DIndexBuffer9Ext::lock_unchecked
+//#cpp2rust IDirect3DIndexBuffer9::Unlock           = d3d9::IDirect3DIndexBuffer9Ext::unlock
+
+//#cpp2rust IDirect3DVertexBuffer9::GetDesc         = d3d9::IDirect3DVertexBuffer9Ext::get_desc
+//#cpp2rust IDirect3DVertexBuffer9::Lock            = d3d9::IDirect3DVertexBuffer9Ext::lock_unchecked
+//#cpp2rust IDirect3DVertexBuffer9::Unlock          = d3d9::IDirect3DVertexBuffer9Ext::unlock

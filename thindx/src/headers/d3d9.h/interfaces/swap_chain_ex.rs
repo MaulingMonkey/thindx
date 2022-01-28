@@ -76,3 +76,14 @@ pub trait IDirect3DSwapChain9ExExt : AsSafe<IDirect3DSwapChain9Ex> {
 
 #[cfg(feature = "9ex")] impl IDirect3DSwapChain9ExExt for mcom::Rc<IDirect3DSwapChain9Ex>   {}
 #[cfg(feature = "9ex")] impl IDirect3DSwapChain9ExExt for super::SwapChainEx                {}
+
+
+
+//#cpp2rust IDirect3DSwapChain9Ex                   = d3d9::SwapChainEx
+//#cpp2rust IDirect3DSwapChain9Ex                   = d3d9::IDirect3DSwapChain9ExExt
+
+//#cpp2rust IDirect3DSwapChain9Ex::GetDisplayModeEx             = d3d9::IDirect3DSwapChain9ExExt::get_display_mode_ex
+//#cpp2rust IDirect3DSwapChain9Ex::GetLastPresentCount          = d3d9::IDirect3DSwapChain9ExExt::get_last_present_count
+//TODO:     XXX: documentation uses "GetPresentStatistics", but some C++ headers/vtables use "GetPresentStats"
+//#cpp2rust IDirect3DSwapChain9Ex::GetPresentStatistics         = d3d9::IDirect3DSwapChain9ExExt::get_present_statistics
+//#cpp2rust IDirect3DSwapChain9Ex::GetPresentStats              = d3d9::IDirect3DSwapChain9ExExt::get_present_statistics

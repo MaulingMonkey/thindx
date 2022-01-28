@@ -181,3 +181,16 @@ pub trait IDirect3DSwapChain9Ext : AsSafe<IDirect3DSwapChain9> {
 
 impl IDirect3DSwapChain9Ext for mcom::Rc<IDirect3DSwapChain9>   { type Device = mcom::Rc<IDirect3DDevice9>; type Surface = mcom::Rc<IDirect3DSurface9>;   }
 impl IDirect3DSwapChain9Ext for super::SwapChain                { type Device = super::Device;              type Surface = super::Surface;                }
+
+
+
+//#cpp2rust IDirect3DSwapChain9                         = d3d9::SwapChain
+//#cpp2rust IDirect3DSwapChain9                         = d3d9::IDirect3DSwapChain9Ext
+
+//#cpp2rust IDirect3DSwapChain9::GetBackBuffer          = d3d9::IDirect3DSwapChain9Ext::get_back_buffer
+//#cpp2rust IDirect3DSwapChain9::GetDevice              = d3d9::IDirect3DSwapChain9Ext::get_device
+//#cpp2rust IDirect3DSwapChain9::GetDisplayMode         = d3d9::IDirect3DSwapChain9Ext::get_display_mode
+//#cpp2rust IDirect3DSwapChain9::GetFrontBufferData     = d3d9::IDirect3DSwapChain9Ext::get_front_buffer_data
+//#cpp2rust IDirect3DSwapChain9::GetPresentParameters   = d3d9::IDirect3DSwapChain9Ext::get_present_parameters
+//#cpp2rust IDirect3DSwapChain9::GetRasterStatus        = d3d9::IDirect3DSwapChain9Ext::get_raster_status
+//#cpp2rust IDirect3DSwapChain9::Present                = d3d9::IDirect3DSwapChain9Ext::present

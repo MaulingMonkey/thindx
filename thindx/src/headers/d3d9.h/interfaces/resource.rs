@@ -187,3 +187,20 @@ impl<T: AsSafe<IDirect3DResource9>> IDirect3DResource9Ext for T {}
 // TODO: integration tests
 // TODO: make set_private_data generic on any data type?  bytemuck data types?
 // TODO: make get_private_data_inplace generic on bytemuck data types?
+
+
+
+//#cpp2rust IDirect3DResource9                      = d3d9::Resource
+//#cpp2rust IDirect3DResource9                      = d3d9::IDirect3DResource9Ext
+
+//#cpp2rust IDirect3DResource9::FreePrivateData     = d3d9::IDirect3DResource9Ext::free_private_data
+//#cpp2rust IDirect3DResource9::GetDevice           = d3d9::IDirect3DResource9Ext::get_device
+//#cpp2rust IDirect3DResource9::GetPriority         = d3d9::IDirect3DResource9Ext::get_priority
+//#cpp2rust IDirect3DResource9::GetPrivateData      = d3d9::IDirect3DResource9Ext::get_private_data_inplace
+//TODO:     IDirect3DResource9::GetPrivateData      = d3d9::IDirect3DResource9Ext::get_private_data_com
+//#cpp2rust IDirect3DResource9::GetType             = d3d9::IDirect3DResource9Ext::get_type
+//#cpp2rust IDirect3DResource9::PreLoad             = d3d9::IDirect3DResource9Ext::preload
+//#cpp2rust IDirect3DResource9::SetPriority         = d3d9::IDirect3DResource9Ext::set_priority
+//#cpp2rust IDirect3DResource9::SetPrivateData      = d3d9::IDirect3DResource9Ext::set_private_data
+//TODO:     IDirect3DResource9::SetPrivateData      = d3d9::IDirect3DResource9Ext::set_debug_name
+//TODO:     IDirect3DResource9::SetPrivateData      = d3d9::IDirect3DResource9Ext::set_private_data_com

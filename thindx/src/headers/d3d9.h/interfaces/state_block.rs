@@ -109,3 +109,12 @@ impl<T: AsSafe<IDirect3DStateBlock9>> IDirect3DStateBlock9Ext for T {}
 }
 
 // TODO: test explicit state capturing
+
+
+
+//#cpp2rust IDirect3DStateBlock9                    = d3d9::StateBlock
+//#cpp2rust IDirect3DStateBlock9                    = d3d9::IDirect3DStateBlock9Ext
+
+//#cpp2rust IDirect3DStateBlock9::Apply             = d3d9::IDirect3DStateBlock9Ext::apply
+//#cpp2rust IDirect3DStateBlock9::Capture           = d3d9::IDirect3DStateBlock9Ext::capture
+//#cpp2rust IDirect3DStateBlock9::GetDevice         = d3d9::IDirect3DStateBlock9Ext::get_device

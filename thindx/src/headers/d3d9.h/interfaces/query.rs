@@ -110,3 +110,14 @@ pub trait IDirect3DQuery9Ext : AsSafe<IDirect3DQuery9> {
 }
 
 impl<T: AsSafe<IDirect3DQuery9>> IDirect3DQuery9Ext for T {}
+
+
+
+//#cpp2rust IDirect3DQuery9                         = d3d9::Query
+//#cpp2rust IDirect3DQuery9                         = d3d9::IDirect3DQuery9Ext
+
+//TODO:     IDirect3DQuery9::GetData                = d3d9::IDirect3DQuery9Ext::get_data
+//#cpp2rust IDirect3DQuery9::GetDataSize            = d3d9::IDirect3DQuery9Ext::get_data_size
+//#cpp2rust IDirect3DQuery9::GetDevice              = d3d9::IDirect3DQuery9Ext::get_device
+//#cpp2rust IDirect3DQuery9::GetType                = d3d9::IDirect3DQuery9Ext::get_type
+//#cpp2rust IDirect3DQuery9::Issue                  = d3d9::IDirect3DQuery9Ext::issue

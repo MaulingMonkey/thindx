@@ -168,3 +168,15 @@ pub trait IDirect3D9ExExt : AsSafe<IDirect3D9Ex> {
 }
 
 // TODO: so much more test coverage!
+
+
+
+//#cpp2rust IDirect3D9Ex                            = d3d9::Direct3DEx
+//#cpp2rust IDirect3D9Ex                            = d3d9::IDirect3D9ExExt
+//#cpp2rust Direct3DCreate9Ex                       = d3d9::IDirect3D9ExExt::create_ex
+
+//#cpp2rust IDirect3D9Ex::CreateDeviceEx            = d3d9::IDirect3D9ExExt::create_device_ex
+//#cpp2rust IDirect3D9Ex::EnumAdapterModesEx        = d3d9::IDirect3D9ExExt::enum_adapter_modes_ex
+//#cpp2rust IDirect3D9Ex::GetAdapterDisplayModeEx   = d3d9::IDirect3D9ExExt::get_adapter_display_mode_ex
+//#cpp2rust IDirect3D9Ex::GetAdapterLUID            = d3d9::IDirect3D9ExExt::get_adapter_luid
+//#cpp2rust IDirect3D9Ex::GetAdapterModeCountEx     = d3d9::IDirect3D9ExExt::get_adapter_mode_count_ex

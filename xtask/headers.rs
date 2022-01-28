@@ -344,19 +344,7 @@ fn collect_cpp2ignore() -> BTreeSet<&'static str> {
 fn collect_cpp2rust() -> BTreeMap<&'static str, Vec<&'static str>> {
     let mut r = BTreeMap::<&'static str, Vec<&'static str>>::new();
     for (&path, text) in TEXTFILES.iter() {
-        let name = path.rsplit_once(&['/', '\\']).map_or(path, |p| p.1);
-        if name == "cpp2rust.txt" {
-            for (line_idx, line) in text.lines().enumerate() {
-                let line = line.split_once('#').map_or(line, |s| s.0).trim();
-                if line.is_empty() { continue }
-
-                if let Some((k, v)) = line.split_once('=') {
-                    r.entry(k.trim()).or_default().push(v.trim());
-                } else {
-                    error!(at: path, line: line_idx+1, code: "cpp2rust", "expected `key = value` pair");
-                }
-            }
-        } else if path.ends_with(".rs") {
+        if path.ends_with(".rs") {
             for (line_idx, line) in text.lines().enumerate() {
                 if let Some(cpp_rs) = line.trim().strip_prefix("//#cpp2rust ") {
                     let cpp_rs = cpp_rs.trim_start();

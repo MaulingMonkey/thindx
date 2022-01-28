@@ -112,3 +112,13 @@ impl<T: AsSafe<IDirect3DVertexDeclaration9>> IDirect3DVertexDeclaration9Ext for 
 // #[test] fn create_vertex_declaration() {} // TODO
 
 // TODO: test coverage, examples
+
+
+
+//#cpp2rust IDirect3DVertexDeclaration9                     = d3d9::VertexDeclaration
+//#cpp2rust IDirect3DVertexDeclaration9                     = d3d9::IDirect3DVertexDeclaration9Ext
+
+//#cpp2rust IDirect3DVertexDeclaration9::GetDeclaration     = d3d9::IDirect3DVertexDeclaration9Ext::get_declaration_size
+//#cpp2rust IDirect3DVertexDeclaration9::GetDeclaration     = d3d9::IDirect3DVertexDeclaration9Ext::get_declaration_inplace
+//#cpp2rust IDirect3DVertexDeclaration9::GetDeclaration     = d3d9::IDirect3DVertexDeclaration9Ext::get_declaration
+//#cpp2rust IDirect3DVertexDeclaration9::GetDevice          = d3d9::IDirect3DVertexDeclaration9Ext::get_device
