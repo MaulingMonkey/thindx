@@ -2279,6 +2279,40 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         Ok(unsafe { BaseTexture::from_raw_opt(texture) })
     }
 
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-gettexturestagestate)\]
+    /// IDirect3DDevice9::GetTextureStageState
+    ///
+    /// Retrieves the value associated with a [TextureStageStateType]
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_test();
+    /// let value = device.get_texture_stage_state_untyped(0, TSS::ColorArg1).unwrap();
+    /// let value = device.get_texture_stage_state_untyped(0, TSS::TexCoordIndex).unwrap();
+    ///
+    /// let value = device.get_texture_stage_state_untyped(7, TSS::ColorArg1).unwrap();
+    /// let value = device.get_texture_stage_state_untyped(8, TSS::ColorArg1).unwrap(); // out of bounds `stage`
+    /// let value = device.get_texture_stage_state_untyped(0, TSS::from_unchecked(0)).unwrap(); // invalid `ty`
+    /// let value = device.get_texture_stage_state_untyped(0, TSS::from_unchecked(!0)).unwrap(); // out of bounds `ty`
+    /// #
+    /// # for stage in (0 .. 256).chain((8..32).map(|pow| 1<<pow)) {
+    /// #   for tss in (0 .. 256).chain((8..32).map(|pow| 1<<pow)) {
+    /// #       if let Err(err) = device.get_texture_stage_state_untyped(stage, TSS::from_unchecked(tss)) {
+    /// #           assert_eq!(err.kind(), D3DERR::INVALIDCALL);
+    /// #       }
+    /// #   }
+    /// # }
+    /// ```
+    ///
+    /// ### Returns
+    /// *   Ok([u32])
+    fn get_texture_stage_state_untyped(&self, stage: u32, ty: impl Into<TextureStageStateType>) -> Result<u32, MethodError> {
+        let mut value = 0;
+        let hr = unsafe { self.as_winapi().GetTextureStageState(stage, ty.into().into(), &mut value) };
+        MethodError::check("IDirect3DDevice9::GetTextureStageState", hr)?;
+        Ok(value)
+    }
+
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getvertexdeclaration)\]
     /// IDirect3DDevice9::GetVertexDeclaration
     ///
@@ -3389,6 +3423,7 @@ pub struct RgnData {
 //#cpp2rust IDirect3DDevice9::GetSwapChain                      = d3d9::IDirect3DDevice9Ext::get_swap_chain
 //#cpp2rust IDirect3DDevice9::GetTexture                        = d3d9::IDirect3DDevice9Ext::get_texture
 //TODO:     IDirect3DDevice9::GetTextureStageState              = d3d9::IDirect3DDevice9Ext::get_texture_stage_state
+//#cpp2rust IDirect3DDevice9::GetTextureStageState              = d3d9::IDirect3DDevice9Ext::get_texture_stage_state_untyped
 //TODO:     IDirect3DDevice9::GetTransform                      = d3d9::IDirect3DDevice9Ext::get_transform
 //#cpp2rust IDirect3DDevice9::GetVertexDeclaration              = d3d9::IDirect3DDevice9Ext::get_vertex_declaration
 //#cpp2rust IDirect3DDevice9::GetVertexShader                   = d3d9::IDirect3DDevice9Ext::get_vertex_shader
