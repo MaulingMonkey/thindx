@@ -517,6 +517,28 @@
 <span id="516">516</span>
 <span id="517">517</span>
 <span id="518">518</span>
+<span id="519">519</span>
+<span id="520">520</span>
+<span id="521">521</span>
+<span id="522">522</span>
+<span id="523">523</span>
+<span id="524">524</span>
+<span id="525">525</span>
+<span id="526">526</span>
+<span id="527">527</span>
+<span id="528">528</span>
+<span id="529">529</span>
+<span id="530">530</span>
+<span id="531">531</span>
+<span id="532">532</span>
+<span id="533">533</span>
+<span id="534">534</span>
+<span id="535">535</span>
+<span id="536">536</span>
+<span id="537">537</span>
+<span id="538">538</span>
+<span id="539">539</span>
+<span id="540">540</span>
 </pre><pre class="rust"><code><span class="attribute">#![<span class="ident">cfg_attr</span>(<span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;9ex&quot;</span>), <span class="ident">allow</span>(<span class="ident">unused_imports</span>))]</span>
 
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="kw-2">*</span>;
@@ -1035,6 +1057,28 @@
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;9ex&quot;</span>)]</span>
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">AsSafe</span><span class="op">&lt;</span><span class="ident">IDirect3DDevice9Ex</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="ident">IDirect3DDevice9ExExt</span> <span class="kw">for</span> <span class="ident">T</span> {}
+
+
+
+<span class="comment">//#cpp2rust IDirect3DDevice9Ex                                  = d3d9::DeviceEx</span>
+<span class="comment">//#cpp2rust IDirect3DDevice9Ex                                  = d3d9::IDirect3DDevice9ExExt</span>
+
+<span class="comment">//#cpp2rust IDirect3DDevice9Ex::CheckDeviceState                = d3d9::IDirect3DDevice9ExExt::check_device_state</span>
+<span class="comment">//TODO:     IDirect3DDevice9Ex::CheckResourceResidency          = d3d9::IDirect3DDevice9ExExt::check_resource_residency</span>
+<span class="comment">//#cpp2rust IDirect3DDevice9Ex::ComposeRects                    = d3d9::IDirect3DDevice9ExExt::compose_rects</span>
+<span class="comment">//#cpp2rust IDirect3DDevice9Ex::CreateDepthStencilSurfaceEx     = d3d9::IDirect3DDevice9ExExt::create_depth_stencil_surface_ex</span>
+<span class="comment">//#cpp2rust IDirect3DDevice9Ex::CreateOffscreenPlainSurfaceEx   = d3d9::IDirect3DDevice9ExExt::create_offscreen_plain_surface_ex</span>
+<span class="comment">//#cpp2rust IDirect3DDevice9Ex::CreateRenderTargetEx            = d3d9::IDirect3DDevice9ExExt::create_render_target_ex</span>
+<span class="comment">//#cpp2rust IDirect3DDevice9Ex::GetDisplayModeEx                = d3d9::IDirect3DDevice9ExExt::get_display_mode_ex</span>
+<span class="comment">//#cpp2rust IDirect3DDevice9Ex::GetGPUThreadPriority            = d3d9::IDirect3DDevice9ExExt::get_gpu_thread_priority</span>
+<span class="comment">//#cpp2rust IDirect3DDevice9Ex::GetMaximumFrameLatency          = d3d9::IDirect3DDevice9ExExt::get_maximum_frame_latency</span>
+<span class="comment">//#cpp2rust IDirect3DDevice9Ex::PresentEx                       = d3d9::IDirect3DDevice9ExExt::present_ex</span>
+<span class="comment">//#cpp2rust IDirect3DDevice9Ex::ResetEx                         = d3d9::IDirect3DDevice9ExExt::reset_ex</span>
+<span class="comment">//#cpp2rust IDirect3DDevice9Ex::SetConvolutionMonoKernel        = d3d9::IDirect3DDevice9ExExt::set_convolution_mono_kernel</span>
+<span class="comment">//#cpp2rust IDirect3DDevice9Ex::SetGPUThreadPriority            = d3d9::IDirect3DDevice9ExExt::set_gpu_thread_priority</span>
+<span class="comment">//#cpp2rust IDirect3DDevice9Ex::SetMaximumFrameLatency          = d3d9::IDirect3DDevice9ExExt::set_maximum_frame_latency</span>
+<span class="comment">//#cpp2rust IDirect3DDevice9Ex::TestCooperativeLevel            = d3d9::IDirect3DDevice9ExExt::test_cooperative_level</span>
+<span class="comment">//#cpp2rust IDirect3DDevice9Ex::WaitForVBlank                   = d3d9::IDirect3DDevice9ExExt::wait_for_vblank</span>
 </code></pre></div>
 </section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-search-index-js="../../../../../search-index.js" data-search-js="../../../../../search.js"></div>
 </body></html>

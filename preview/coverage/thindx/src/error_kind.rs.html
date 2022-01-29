@@ -15,7 +15,7 @@
         <div>
             <p class="heading">Lines</p>
             <p class="title has-text-danger">
-                <abbr title="12 / 102">11.76 %</abbr></p>
+                <abbr title="12 / 105">11.43 %</abbr></p>
         </div>
     </div>
 
@@ -23,7 +23,7 @@
         <div>
             <p class="heading">Functions</p>
             <p class="title has-text-danger">
-                <abbr title="5 / 20">25 %</abbr></p>
+                <abbr title="5 / 23">21.74 %</abbr></p>
         </div>
     </div>
 
@@ -463,7 +463,7 @@
                 
             </div>
             <div class="column has-background-white p-0">
-                <pre class="has-background-white py-0 px-2">    &#x2F;&#x2F;&#x2F; \[[docs.microsoft.com](https:&#x2F;&#x2F;docs.microsoft.com&#x2F;en-us&#x2F;windows&#x2F;win32&#x2F;api&#x2F;dmerror&#x2F;nf-dmerror-make_hresult)\]</pre>
+                <pre class="has-background-white py-0 px-2">    &#x2F;&#x2F;&#x2F; MAKE_D3DHRESULT</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -472,11 +472,11 @@
                 <a href="#34">34</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
+                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger">
                 
             </div>
-            <div class="column has-background-white p-0">
-                <pre class="has-background-white py-0 px-2">    &#x2F;&#x2F;&#x2F; MAKE_HRESULT(1, FACILITY_WIN32, code)</pre>
+            <div class="column has-background-danger-light p-0">
+                <pre class="has-background-danger-light py-0 px-2">    pub const fn make_d3dhresult(code: u32) -&gt; ErrorKind { ErrorKind::make_hresult(1, _FACD3D, code) }</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -489,7 +489,7 @@
                 
             </div>
             <div class="column has-background-white p-0">
-                <pre class="has-background-white py-0 px-2">    &#x2F;&#x2F;&#x2F;</pre>
+                <pre class="has-background-white py-0 px-2"></pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -502,7 +502,7 @@
                 
             </div>
             <div class="column has-background-white p-0">
-                <pre class="has-background-white py-0 px-2">    &#x2F;&#x2F;&#x2F; ### Arguments</pre>
+                <pre class="has-background-white py-0 px-2">    &#x2F;&#x2F;&#x2F; MAKE_DDHRESULT</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -511,11 +511,11 @@
                 <a href="#37">37</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
+                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger">
                 
             </div>
-            <div class="column has-background-white p-0">
-                <pre class="has-background-white py-0 px-2">    &#x2F;&#x2F;&#x2F; *   `code`  - the `ERROR_*` code&#x2F;value (e.g. `ERROR_FILE_NOT_FOUND`)</pre>
+            <div class="column has-background-danger-light p-0">
+                <pre class="has-background-danger-light py-0 px-2">    pub const fn make_ddhresult(code: u32) -&gt; ErrorKind { ErrorKind::make_hresult(1, _FACD3D, code) } &#x2F;&#x2F; Yes, _FACD3D is the same</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -524,11 +524,11 @@
                 <a href="#38">38</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger">
+                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
                 
             </div>
-            <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">    pub const fn from_win32(code: u32) -&gt; Self { Self::make_hresult(1, 7, code) }</pre>
+            <div class="column has-background-white p-0">
+                <pre class="has-background-white py-0 px-2"></pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -541,7 +541,7 @@
                 
             </div>
             <div class="column has-background-white p-0">
-                <pre class="has-background-white py-0 px-2"></pre>
+                <pre class="has-background-white py-0 px-2">    &#x2F;&#x2F;&#x2F; MAKE_D3DSTATUS</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -550,11 +550,11 @@
                 <a href="#40">40</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-success-light has-background-success">
-                1
+                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger">
+                
             </div>
-            <div class="column has-background-success-light p-0">
-                <pre class="has-background-success-light py-0 px-2">    pub(crate) fn check(hr: HRESULT) -&gt; Result&lt;(), Self&gt; {</pre>
+            <div class="column has-background-danger-light p-0">
+                <pre class="has-background-danger-light py-0 px-2">    pub const fn make_d3dstatus(code: u32) -&gt; ErrorKind { ErrorKind::make_hresult(0, _FACD3D, code) }</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -563,11 +563,11 @@
                 <a href="#41">41</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-success-light has-background-success">
-                1
+                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
+                
             </div>
-            <div class="column has-background-success-light p-0">
-                <pre class="has-background-success-light py-0 px-2">        if !SUCCEEDED(hr) {</pre>
+            <div class="column has-background-white p-0">
+                <pre class="has-background-white py-0 px-2"></pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -576,11 +576,11 @@
                 <a href="#42">42</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger">
+                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
                 
             </div>
-            <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            Err(Self(hr))</pre>
+            <div class="column has-background-white p-0">
+                <pre class="has-background-white py-0 px-2">    &#x2F;&#x2F;&#x2F; \[[docs.microsoft.com](https:&#x2F;&#x2F;docs.microsoft.com&#x2F;en-us&#x2F;windows&#x2F;win32&#x2F;api&#x2F;dmerror&#x2F;nf-dmerror-make_hresult)\]</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -593,7 +593,7 @@
                 
             </div>
             <div class="column has-background-white p-0">
-                <pre class="has-background-white py-0 px-2">        } else {</pre>
+                <pre class="has-background-white py-0 px-2">    &#x2F;&#x2F;&#x2F; MAKE_HRESULT(1, FACILITY_WIN32, code)</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -602,11 +602,11 @@
                 <a href="#44">44</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-success-light has-background-success">
-                1
+                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
+                
             </div>
-            <div class="column has-background-success-light p-0">
-                <pre class="has-background-success-light py-0 px-2">            Ok(())</pre>
+            <div class="column has-background-white p-0">
+                <pre class="has-background-white py-0 px-2">    &#x2F;&#x2F;&#x2F;</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -619,7 +619,7 @@
                 
             </div>
             <div class="column has-background-white p-0">
-                <pre class="has-background-white py-0 px-2">        }</pre>
+                <pre class="has-background-white py-0 px-2">    &#x2F;&#x2F;&#x2F; ### Arguments</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -628,17 +628,30 @@
                 <a href="#46">46</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-success-light has-background-success">
-                1
+                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
+                
             </div>
-            <div class="column has-background-success-light p-0">
-                <pre class="has-background-success-light py-0 px-2">    }</pre>
+            <div class="column has-background-white p-0">
+                <pre class="has-background-white py-0 px-2">    &#x2F;&#x2F;&#x2F; *   `code`  - the `ERROR_*` code&#x2F;value (e.g. `ERROR_FILE_NOT_FOUND`)</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
                 class="column is-1 is-narrow p-0 has-text-centered"
                 id="47">
                 <a href="#47">47</a>
+            </div>
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger">
+                
+            </div>
+            <div class="column has-background-danger-light p-0">
+                <pre class="has-background-danger-light py-0 px-2">    pub const fn from_win32(code: u32) -&gt; Self { Self::make_hresult(1, 7, code) }</pre>
+            </div>
+        </div><div class="columns p-0 m-0">
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered"
+                id="48">
+                <a href="#48">48</a>
             </div>
             <div
                 class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
@@ -650,28 +663,15 @@
         </div><div class="columns p-0 m-0">
             <div
                 class="column is-1 is-narrow p-0 has-text-centered"
-                id="48">
-                <a href="#48">48</a>
-            </div>
-            <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-success-light has-background-success">
-                984
-            </div>
-            <div class="column has-background-success-light p-0">
-                <pre class="has-background-success-light py-0 px-2">    fn id_desc(self) -&gt; Option&lt;(&amp;&#x27;static str, &amp;&#x27;static str)&gt; {</pre>
-            </div>
-        </div><div class="columns p-0 m-0">
-            <div
-                class="column is-1 is-narrow p-0 has-text-centered"
                 id="49">
                 <a href="#49">49</a>
             </div>
             <div
                 class="column is-1 is-narrow p-0 has-text-centered has-text-success-light has-background-success">
-                984
+                1
             </div>
             <div class="column has-background-success-light p-0">
-                <pre class="has-background-success-light py-0 px-2">        match self {</pre>
+                <pre class="has-background-success-light py-0 px-2">    pub(crate) fn check(hr: HRESULT) -&gt; Result&lt;(), Self&gt; {</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -680,11 +680,11 @@
                 <a href="#50">50</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger">
-                
+                class="column is-1 is-narrow p-0 has-text-centered has-text-success-light has-background-success">
+                1
             </div>
-            <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            D3D::OK                             =&gt; Some((&quot;D3D_OK&quot;,                              &quot;No error occured.&quot;)),</pre>
+            <div class="column has-background-success-light p-0">
+                <pre class="has-background-success-light py-0 px-2">        if !SUCCEEDED(hr) {</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -697,7 +697,7 @@
                 
             </div>
             <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            D3D::OK_NOAUTOGEN                   =&gt; Some((&quot;D3DOK_NOAUTOGEN&quot;,                     &quot;The autogeneration of mipmaps is not supported for this format.&quot;)),</pre>
+                <pre class="has-background-danger-light py-0 px-2">            Err(Self(hr))</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -710,7 +710,7 @@
                 
             </div>
             <div class="column has-background-white p-0">
-                <pre class="has-background-white py-0 px-2"></pre>
+                <pre class="has-background-white py-0 px-2">        } else {</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -719,11 +719,11 @@
                 <a href="#53">53</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger">
-                
+                class="column is-1 is-narrow p-0 has-text-centered has-text-success-light has-background-success">
+                1
             </div>
-            <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            D3DERR::WRONGTEXTUREFORMAT          =&gt; Some((&quot;D3DERR_WRONGTEXTUREFORMAT&quot;,           &quot;The pixel format of the texture surface is not valid.&quot;)),</pre>
+            <div class="column has-background-success-light p-0">
+                <pre class="has-background-success-light py-0 px-2">            Ok(())</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -732,11 +732,11 @@
                 <a href="#54">54</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger">
+                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
                 
             </div>
-            <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            D3DERR::UNSUPPORTEDCOLOROPERATION   =&gt; Some((&quot;D3DERR_UNSUPPORTEDCOLOROPERATION&quot;,    &quot;The device does not support a specified texture-blending operation for color values.&quot;)),</pre>
+            <div class="column has-background-white p-0">
+                <pre class="has-background-white py-0 px-2">        }</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -745,11 +745,11 @@
                 <a href="#55">55</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger">
-                
+                class="column is-1 is-narrow p-0 has-text-centered has-text-success-light has-background-success">
+                1
             </div>
-            <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            D3DERR::UNSUPPORTEDCOLORARG         =&gt; Some((&quot;D3DERR_UNSUPPORTEDCOLORARG&quot;,          &quot;The device does not support a specified texture-blending argument for color values.&quot;)),</pre>
+            <div class="column has-background-success-light p-0">
+                <pre class="has-background-success-light py-0 px-2">    }</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -758,11 +758,11 @@
                 <a href="#56">56</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger">
+                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
                 
             </div>
-            <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            D3DERR::UNSUPPORTEDALPHAOPERATION   =&gt; Some((&quot;D3DERR_UNSUPPORTEDALPHAOPERATION&quot;,    &quot;The device does not support a specified texture-blending operation for the alpha channel.&quot;)),</pre>
+            <div class="column has-background-white p-0">
+                <pre class="has-background-white py-0 px-2"></pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -771,11 +771,11 @@
                 <a href="#57">57</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger">
-                
+                class="column is-1 is-narrow p-0 has-text-centered has-text-success-light has-background-success">
+                984
             </div>
-            <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            D3DERR::UNSUPPORTEDALPHAARG         =&gt; Some((&quot;D3DERR_UNSUPPORTEDALPHAARG&quot;,          &quot;The device does not support a specified texture-blending argument for the alpha channel.&quot;)),</pre>
+            <div class="column has-background-success-light p-0">
+                <pre class="has-background-success-light py-0 px-2">    fn id_desc(self) -&gt; Option&lt;(&amp;&#x27;static str, &amp;&#x27;static str)&gt; {</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -784,11 +784,11 @@
                 <a href="#58">58</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger">
-                
+                class="column is-1 is-narrow p-0 has-text-centered has-text-success-light has-background-success">
+                984
             </div>
-            <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            D3DERR::TOOMANYOPERATIONS           =&gt; Some((&quot;D3DERR_TOOMANYOPERATIONS&quot;,            &quot;The application is requesting more texture-filtering operations than the device supports.&quot;)),</pre>
+            <div class="column has-background-success-light p-0">
+                <pre class="has-background-success-light py-0 px-2">        match self {</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -801,7 +801,7 @@
                 
             </div>
             <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            D3DERR::CONFLICTINGTEXTUREFILTER    =&gt; Some((&quot;D3DERR_CONFLICTINGTEXTUREFILTER&quot;,     &quot;The current texture filters cannot be used together.&quot;)),</pre>
+                <pre class="has-background-danger-light py-0 px-2">            D3D::OK                             =&gt; Some((&quot;D3D_OK&quot;,                              &quot;No error occured.&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -814,7 +814,7 @@
                 
             </div>
             <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            D3DERR::UNSUPPORTEDFACTORVALUE      =&gt; Some((&quot;D3DERR_UNSUPPORTEDFACTORVALUE&quot;,       &quot;The device does not support the specified texture factor value. Not used; provided only to support older drivers.&quot;)),</pre>
+                <pre class="has-background-danger-light py-0 px-2">            D3D::OK_NOAUTOGEN                   =&gt; Some((&quot;D3DOK_NOAUTOGEN&quot;,                     &quot;The autogeneration of mipmaps is not supported for this format.&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -823,11 +823,11 @@
                 <a href="#61">61</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger">
+                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
                 
             </div>
-            <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            D3DERR::CONFLICTINGRENDERSTATE      =&gt; Some((&quot;D3DERR_CONFLICTINGRENDERSTATE&quot;,       &quot;The currently set render states cannot be used together.&quot;)),</pre>
+            <div class="column has-background-white p-0">
+                <pre class="has-background-white py-0 px-2"></pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -840,7 +840,7 @@
                 
             </div>
             <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            D3DERR::UNSUPPORTEDTEXTUREFILTER    =&gt; Some((&quot;D3DERR_UNSUPPORTEDTEXTUREFILTER&quot;,     &quot;The device does not support the specified texture filter.&quot;)),</pre>
+                <pre class="has-background-danger-light py-0 px-2">            D3DERR::WRONGTEXTUREFORMAT          =&gt; Some((&quot;D3DERR_WRONGTEXTUREFORMAT&quot;,           &quot;The pixel format of the texture surface is not valid.&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -853,7 +853,7 @@
                 
             </div>
             <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            D3DERR::CONFLICTINGTEXTUREPALETTE   =&gt; Some((&quot;D3DERR_CONFLICTINGTEXTUREPALETTE&quot;,    &quot;The current textures cannot be used simultaneously.&quot;)),</pre>
+                <pre class="has-background-danger-light py-0 px-2">            D3DERR::UNSUPPORTEDCOLOROPERATION   =&gt; Some((&quot;D3DERR_UNSUPPORTEDCOLOROPERATION&quot;,    &quot;The device does not support a specified texture-blending operation for color values.&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -866,7 +866,7 @@
                 
             </div>
             <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            D3DERR::DRIVERINTERNALERROR         =&gt; Some((&quot;D3DERR_DRIVERINTERNALERROR&quot;,          &quot;Internal driver error. Applications should destroy and recreate the device when receiving this error.&quot;)),</pre>
+                <pre class="has-background-danger-light py-0 px-2">            D3DERR::UNSUPPORTEDCOLORARG         =&gt; Some((&quot;D3DERR_UNSUPPORTEDCOLORARG&quot;,          &quot;The device does not support a specified texture-blending argument for color values.&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -875,11 +875,11 @@
                 <a href="#65">65</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
+                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger">
                 
             </div>
-            <div class="column has-background-white p-0">
-                <pre class="has-background-white py-0 px-2"></pre>
+            <div class="column has-background-danger-light p-0">
+                <pre class="has-background-danger-light py-0 px-2">            D3DERR::UNSUPPORTEDALPHAOPERATION   =&gt; Some((&quot;D3DERR_UNSUPPORTEDALPHAOPERATION&quot;,    &quot;The device does not support a specified texture-blending operation for the alpha channel.&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -892,7 +892,7 @@
                 
             </div>
             <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            D3DERR::NOTFOUND                    =&gt; Some((&quot;D3DERR_NOTFOUND&quot;,                     &quot;The requested item was not found.&quot;)),</pre>
+                <pre class="has-background-danger-light py-0 px-2">            D3DERR::UNSUPPORTEDALPHAARG         =&gt; Some((&quot;D3DERR_UNSUPPORTEDALPHAARG&quot;,          &quot;The device does not support a specified texture-blending argument for the alpha channel.&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -905,7 +905,7 @@
                 
             </div>
             <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            D3DERR::MOREDATA                    =&gt; Some((&quot;D3DERR_MOREDATA&quot;,                     &quot;There is more data available than the specified buffer size can hold.&quot;)),</pre>
+                <pre class="has-background-danger-light py-0 px-2">            D3DERR::TOOMANYOPERATIONS           =&gt; Some((&quot;D3DERR_TOOMANYOPERATIONS&quot;,            &quot;The application is requesting more texture-filtering operations than the device supports.&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -918,7 +918,7 @@
                 
             </div>
             <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            D3DERR::DEVICELOST                  =&gt; Some((&quot;D3DERR_DEVICELOST&quot;,                   &quot;The device has been lost but cannot be reset at this time.&quot;)),</pre>
+                <pre class="has-background-danger-light py-0 px-2">            D3DERR::CONFLICTINGTEXTUREFILTER    =&gt; Some((&quot;D3DERR_CONFLICTINGTEXTUREFILTER&quot;,     &quot;The current texture filters cannot be used together.&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -931,7 +931,7 @@
                 
             </div>
             <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            D3DERR::DEVICENOTRESET              =&gt; Some((&quot;D3DERR_DEVICENOTRESET&quot;,               &quot;The device has been lost but can be reset at this time.&quot;)),</pre>
+                <pre class="has-background-danger-light py-0 px-2">            D3DERR::UNSUPPORTEDFACTORVALUE      =&gt; Some((&quot;D3DERR_UNSUPPORTEDFACTORVALUE&quot;,       &quot;The device does not support the specified texture factor value. Not used; provided only to support older drivers.&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -944,7 +944,7 @@
                 
             </div>
             <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            D3DERR::NOTAVAILABLE                =&gt; Some((&quot;D3DERR_NOTAVAILABLE&quot;,                 &quot;This device does not support the queried technique.&quot;)),</pre>
+                <pre class="has-background-danger-light py-0 px-2">            D3DERR::CONFLICTINGRENDERSTATE      =&gt; Some((&quot;D3DERR_CONFLICTINGRENDERSTATE&quot;,       &quot;The currently set render states cannot be used together.&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -957,7 +957,7 @@
                 
             </div>
             <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            D3DERR::OUTOFVIDEOMEMORY            =&gt; Some((&quot;D3DERR_OUTOFVIDEOMEMORY&quot;,             &quot;Direct3D does not have enough display memory to perform the operation. The device is using more resources in a single scene than can fit simultaneously into video memory.&quot;)),</pre>
+                <pre class="has-background-danger-light py-0 px-2">            D3DERR::UNSUPPORTEDTEXTUREFILTER    =&gt; Some((&quot;D3DERR_UNSUPPORTEDTEXTUREFILTER&quot;,     &quot;The device does not support the specified texture filter.&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -970,7 +970,7 @@
                 
             </div>
             <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            D3DERR::INVALIDDEVICE               =&gt; Some((&quot;D3DERR_INVALIDDEVICE&quot;,                &quot;The requested device type is not valid.&quot;)),</pre>
+                <pre class="has-background-danger-light py-0 px-2">            D3DERR::CONFLICTINGTEXTUREPALETTE   =&gt; Some((&quot;D3DERR_CONFLICTINGTEXTUREPALETTE&quot;,    &quot;The current textures cannot be used simultaneously.&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -979,11 +979,11 @@
                 <a href="#73">73</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-success-light has-background-success">
-                984
+                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger">
+                
             </div>
-            <div class="column has-background-success-light p-0">
-                <pre class="has-background-success-light py-0 px-2">            D3DERR::INVALIDCALL                 =&gt; Some((&quot;D3DERR_INVALIDCALL&quot;,                  &quot;The method call is invalid. For example, a method&#x27;s parameter may not be a valid pointer.&quot;)),</pre>
+            <div class="column has-background-danger-light p-0">
+                <pre class="has-background-danger-light py-0 px-2">            D3DERR::DRIVERINTERNALERROR         =&gt; Some((&quot;D3DERR_DRIVERINTERNALERROR&quot;,          &quot;Internal driver error. Applications should destroy and recreate the device when receiving this error.&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -992,11 +992,11 @@
                 <a href="#74">74</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger">
+                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
                 
             </div>
-            <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            D3DERR::DRIVERINVALIDCALL           =&gt; Some((&quot;D3DERR_DRIVERINVALIDCALL&quot;,            &quot;Not used.&quot;)),</pre>
+            <div class="column has-background-white p-0">
+                <pre class="has-background-white py-0 px-2"></pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1009,7 +1009,7 @@
                 
             </div>
             <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            D3DERR::WASSTILLDRAWING             =&gt; Some((&quot;D3DERR_WASSTILLDRAWING&quot;,              &quot;The previous blit operation that is transferring information to or from this surface is incomplete.&quot;)),</pre>
+                <pre class="has-background-danger-light py-0 px-2">            D3DERR::NOTFOUND                    =&gt; Some((&quot;D3DERR_NOTFOUND&quot;,                     &quot;The requested item was not found.&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1018,11 +1018,11 @@
                 <a href="#76">76</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
+                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger">
                 
             </div>
-            <div class="column has-background-white p-0">
-                <pre class="has-background-white py-0 px-2"></pre>
+            <div class="column has-background-danger-light p-0">
+                <pre class="has-background-danger-light py-0 px-2">            D3DERR::MOREDATA                    =&gt; Some((&quot;D3DERR_MOREDATA&quot;,                     &quot;There is more data available than the specified buffer size can hold.&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1031,11 +1031,11 @@
                 <a href="#77">77</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
+                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger">
                 
             </div>
-            <div class="column has-background-white p-0">
-                <pre class="has-background-white py-0 px-2">            #[allow(unreachable_patterns)] &#x2F;&#x2F; D3D_OK</pre>
+            <div class="column has-background-danger-light p-0">
+                <pre class="has-background-danger-light py-0 px-2">            D3DERR::DEVICELOST                  =&gt; Some((&quot;D3DERR_DEVICELOST&quot;,                   &quot;The device has been lost but cannot be reset at this time.&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1044,11 +1044,11 @@
                 <a href="#78">78</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
+                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger">
                 
             </div>
-            <div class="column has-background-white p-0">
-                <pre class="has-background-white py-0 px-2">            S::OK                               =&gt; Some((&quot;S_OK&quot;,                            &quot;No error occurred.&quot;)),</pre>
+            <div class="column has-background-danger-light p-0">
+                <pre class="has-background-danger-light py-0 px-2">            D3DERR::DEVICENOTRESET              =&gt; Some((&quot;D3DERR_DEVICENOTRESET&quot;,               &quot;The device has been lost but can be reset at this time.&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1061,7 +1061,7 @@
                 
             </div>
             <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            S::FALSE                            =&gt; Some((&quot;S_FALSE&quot;,                         &quot;Alternate success value, indicating a successful but nonstandard completion.&quot;)),</pre>
+                <pre class="has-background-danger-light py-0 px-2">            D3DERR::NOTAVAILABLE                =&gt; Some((&quot;D3DERR_NOTAVAILABLE&quot;,                 &quot;This device does not support the queried technique.&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1074,7 +1074,7 @@
                 
             </div>
             <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            S::NOT_RESIDENT                     =&gt; Some((&quot;S_NOT_RESIDENT&quot;,                  &quot;At least one allocation that comprises the resources is on disk.&quot;)),</pre>
+                <pre class="has-background-danger-light py-0 px-2">            D3DERR::OUTOFVIDEOMEMORY            =&gt; Some((&quot;D3DERR_OUTOFVIDEOMEMORY&quot;,             &quot;Direct3D does not have enough display memory to perform the operation. The device is using more resources in a single scene than can fit simultaneously into video memory.&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1087,7 +1087,7 @@
                 
             </div>
             <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            S::RESIDENT_IN_SHARED_MEMORY        =&gt; Some((&quot;S_RESIDENT_IN_SHARED_MEMORY&quot;,     &quot;No allocations that comprise the resources are on disk. However, at least one allocation is not in GPU-accessible memory.&quot;)),</pre>
+                <pre class="has-background-danger-light py-0 px-2">            D3DERR::INVALIDDEVICE               =&gt; Some((&quot;D3DERR_INVALIDDEVICE&quot;,                &quot;The requested device type is not valid.&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1096,11 +1096,11 @@
                 <a href="#82">82</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger">
-                
+                class="column is-1 is-narrow p-0 has-text-centered has-text-success-light has-background-success">
+                984
             </div>
-            <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            S::PRESENT_MODE_CHANGED             =&gt; Some((&quot;S_PRESENT_MODE_CHANGED&quot;,          &quot;The desktop display mode has been changed.&quot;)),</pre>
+            <div class="column has-background-success-light p-0">
+                <pre class="has-background-success-light py-0 px-2">            D3DERR::INVALIDCALL                 =&gt; Some((&quot;D3DERR_INVALIDCALL&quot;,                  &quot;The method call is invalid. For example, a method&#x27;s parameter may not be a valid pointer.&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1113,13 +1113,26 @@
                 
             </div>
             <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            S::PRESENT_OCCLUDED                 =&gt; Some((&quot;S_PRESENT_OCCLUDED&quot;,              &quot;The presentation area is occluded.&quot;)),</pre>
+                <pre class="has-background-danger-light py-0 px-2">            D3DERR::DRIVERINVALIDCALL           =&gt; Some((&quot;D3DERR_DRIVERINVALIDCALL&quot;,            &quot;Not used.&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
                 class="column is-1 is-narrow p-0 has-text-centered"
                 id="84">
                 <a href="#84">84</a>
+            </div>
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger">
+                
+            </div>
+            <div class="column has-background-danger-light p-0">
+                <pre class="has-background-danger-light py-0 px-2">            D3DERR::WASSTILLDRAWING             =&gt; Some((&quot;D3DERR_WASSTILLDRAWING&quot;,              &quot;The previous blit operation that is transferring information to or from this surface is incomplete.&quot;)),</pre>
+            </div>
+        </div><div class="columns p-0 m-0">
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered"
+                id="85">
+                <a href="#85">85</a>
             </div>
             <div
                 class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
@@ -1131,28 +1144,15 @@
         </div><div class="columns p-0 m-0">
             <div
                 class="column is-1 is-narrow p-0 has-text-centered"
-                id="85">
-                <a href="#85">85</a>
-            </div>
-            <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger">
-                
-            </div>
-            <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            D3DERR::DEVICEREMOVED               =&gt; Some((&quot;D3DERR_DEVICEREMOVED&quot;,                &quot;The hardware adapter has been removed.&quot;)),</pre>
-            </div>
-        </div><div class="columns p-0 m-0">
-            <div
-                class="column is-1 is-narrow p-0 has-text-centered"
                 id="86">
                 <a href="#86">86</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger">
+                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
                 
             </div>
-            <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            D3DERR::DEVICEHUNG                  =&gt; Some((&quot;D3DERR_DEVICEHUNG&quot;,                   &quot;The device that returned this code caused the hardware adapter to be reset by the OS.&quot;)),</pre>
+            <div class="column has-background-white p-0">
+                <pre class="has-background-white py-0 px-2">            #[allow(unreachable_patterns)] &#x2F;&#x2F; D3D_OK</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1161,11 +1161,11 @@
                 <a href="#87">87</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger">
+                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
                 
             </div>
-            <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            D3DERR::UNSUPPORTEDOVERLAY          =&gt; Some((&quot;D3DERR_UNSUPPORTEDOVERLAY&quot;,           &quot;The device does not support overlay for the specified size or display mode.&quot;)),</pre>
+            <div class="column has-background-white p-0">
+                <pre class="has-background-white py-0 px-2">            S::OK                               =&gt; Some((&quot;S_OK&quot;,                            &quot;No error occurred.&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1178,7 +1178,7 @@
                 
             </div>
             <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            D3DERR::UNSUPPORTEDOVERLAYFORMAT    =&gt; Some((&quot;D3DERR_UNSUPPORTEDOVERLAYFORMAT&quot;,     &quot;The device does not support overlay for the specified surface format.&quot;)),</pre>
+                <pre class="has-background-danger-light py-0 px-2">            S::FALSE                            =&gt; Some((&quot;S_FALSE&quot;,                         &quot;Alternate success value, indicating a successful but nonstandard completion.&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1191,7 +1191,7 @@
                 
             </div>
             <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            D3DERR::CANNOTPROTECTCONTENT        =&gt; Some((&quot;D3DERR_CANNOTPROTECTCONTENT&quot;,         &quot;The specified content cannot be protected.&quot;)),</pre>
+                <pre class="has-background-danger-light py-0 px-2">            S::NOT_RESIDENT                     =&gt; Some((&quot;S_NOT_RESIDENT&quot;,                  &quot;At least one allocation that comprises the resources is on disk.&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1204,7 +1204,7 @@
                 
             </div>
             <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            D3DERR::UNSUPPORTEDCRYPTO           =&gt; Some((&quot;D3DERR_UNSUPPORTEDCRYPTO&quot;,            &quot;The specified cryptographic algorithm is not supported.&quot;)),</pre>
+                <pre class="has-background-danger-light py-0 px-2">            S::RESIDENT_IN_SHARED_MEMORY        =&gt; Some((&quot;S_RESIDENT_IN_SHARED_MEMORY&quot;,     &quot;No allocations that comprise the resources are on disk. However, at least one allocation is not in GPU-accessible memory.&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1217,7 +1217,7 @@
                 
             </div>
             <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            D3DERR::PRESENT_STATISTICS_DISJOINT =&gt; Some((&quot;D3DERR_PRESENT_STATISTICS_DISJOINT&quot;,  &quot;The present statistics have no orderly sequence.&quot;)),</pre>
+                <pre class="has-background-danger-light py-0 px-2">            S::PRESENT_MODE_CHANGED             =&gt; Some((&quot;S_PRESENT_MODE_CHANGED&quot;,          &quot;The desktop display mode has been changed.&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1226,11 +1226,11 @@
                 <a href="#92">92</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
+                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger">
                 
             </div>
-            <div class="column has-background-white p-0">
-                <pre class="has-background-white py-0 px-2"></pre>
+            <div class="column has-background-danger-light p-0">
+                <pre class="has-background-danger-light py-0 px-2">            S::PRESENT_OCCLUDED                 =&gt; Some((&quot;S_PRESENT_OCCLUDED&quot;,              &quot;The presentation area is occluded.&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1239,11 +1239,11 @@
                 <a href="#93">93</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger">
+                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
                 
             </div>
-            <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            D3DXERR::CANNOTMODIFYINDEXBUFFER    =&gt; Some((&quot;D3DXERR_CANNOTMODIFYINDEXBUFFER&quot;, &quot;The index buffer cannot be modified.&quot;)),</pre>
+            <div class="column has-background-white p-0">
+                <pre class="has-background-white py-0 px-2"></pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1256,7 +1256,7 @@
                 
             </div>
             <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            D3DXERR::INVALIDMESH                =&gt; Some((&quot;D3DXERR_INVALIDMESH&quot;,             &quot;The mesh is invalid.&quot;)),</pre>
+                <pre class="has-background-danger-light py-0 px-2">            D3DERR::DEVICEREMOVED               =&gt; Some((&quot;D3DERR_DEVICEREMOVED&quot;,                &quot;The hardware adapter has been removed.&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1269,7 +1269,7 @@
                 
             </div>
             <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            D3DXERR::CANNOTATTRSORT             =&gt; Some((&quot;D3DXERR_CANNOTATTRSORT&quot;,          &quot;Attribute sort (D3DXMESHOPT_ATTRSORT) is not supported as an optimization technique.&quot;)),</pre>
+                <pre class="has-background-danger-light py-0 px-2">            D3DERR::DEVICEHUNG                  =&gt; Some((&quot;D3DERR_DEVICEHUNG&quot;,                   &quot;The device that returned this code caused the hardware adapter to be reset by the OS.&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1282,7 +1282,7 @@
                 
             </div>
             <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            D3DXERR::SKINNINGNOTSUPPORTED       =&gt; Some((&quot;D3DXERR_SKINNINGNOTSUPPORTED&quot;,    &quot;Skinning is not supported.&quot;)),</pre>
+                <pre class="has-background-danger-light py-0 px-2">            D3DERR::UNSUPPORTEDOVERLAY          =&gt; Some((&quot;D3DERR_UNSUPPORTEDOVERLAY&quot;,           &quot;The device does not support overlay for the specified size or display mode.&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1295,7 +1295,7 @@
                 
             </div>
             <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            D3DXERR::TOOMANYINFLUENCES          =&gt; Some((&quot;D3DXERR_TOOMANYINFLUENCES&quot;,       &quot;Too many influences specified.&quot;)),</pre>
+                <pre class="has-background-danger-light py-0 px-2">            D3DERR::UNSUPPORTEDOVERLAYFORMAT    =&gt; Some((&quot;D3DERR_UNSUPPORTEDOVERLAYFORMAT&quot;,     &quot;The device does not support overlay for the specified surface format.&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1308,7 +1308,7 @@
                 
             </div>
             <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            D3DXERR::INVALIDDATA                =&gt; Some((&quot;D3DXERR_INVALIDDATA&quot;,             &quot;The data is invalid.&quot;)),</pre>
+                <pre class="has-background-danger-light py-0 px-2">            D3DERR::CANNOTPROTECTCONTENT        =&gt; Some((&quot;D3DERR_CANNOTPROTECTCONTENT&quot;,         &quot;The specified content cannot be protected.&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1321,7 +1321,7 @@
                 
             </div>
             <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            D3DXERR::LOADEDMESHASNODATA         =&gt; Some((&quot;D3DXERR_LOADEDMESHASNODATA&quot;,      &quot;The mesh has no data.&quot;)),</pre>
+                <pre class="has-background-danger-light py-0 px-2">            D3DERR::UNSUPPORTEDCRYPTO           =&gt; Some((&quot;D3DERR_UNSUPPORTEDCRYPTO&quot;,            &quot;The specified cryptographic algorithm is not supported.&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1334,7 +1334,7 @@
                 
             </div>
             <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            D3DXERR::DUPLICATENAMEDFRAGMENT     =&gt; Some((&quot;D3DXERR_DUPLICATENAMEDFRAGMENT&quot;,  &quot;A fragment with that name already exists.&quot;)),</pre>
+                <pre class="has-background-danger-light py-0 px-2">            D3DERR::PRESENT_STATISTICS_DISJOINT =&gt; Some((&quot;D3DERR_PRESENT_STATISTICS_DISJOINT&quot;,  &quot;The present statistics have no orderly sequence.&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1343,11 +1343,11 @@
                 <a href="#101">101</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger">
+                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
                 
             </div>
-            <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            D3DXERR::CANNOTREMOVELASTITEM       =&gt; Some((&quot;D3DXERR_CANNOTREMOVELASTITEM&quot;,    &quot;The last item cannot be deleted.&quot;)),</pre>
+            <div class="column has-background-white p-0">
+                <pre class="has-background-white py-0 px-2"></pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1356,11 +1356,11 @@
                 <a href="#102">102</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
+                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger">
                 
             </div>
-            <div class="column has-background-white p-0">
-                <pre class="has-background-white py-0 px-2"></pre>
+            <div class="column has-background-danger-light p-0">
+                <pre class="has-background-danger-light py-0 px-2">            D3DXERR::CANNOTMODIFYINDEXBUFFER    =&gt; Some((&quot;D3DXERR_CANNOTMODIFYINDEXBUFFER&quot;, &quot;The index buffer cannot be modified.&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1373,7 +1373,7 @@
                 
             </div>
             <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            DXGI_ERROR::INVALID_CALL            =&gt; Some((&quot;DXGI_ERROR_INVALID_CALL&quot;,         &quot;The method call is invalid. For example, a method&#x27;s parameter may not be a valid pointer.&quot;)),</pre>
+                <pre class="has-background-danger-light py-0 px-2">            D3DXERR::INVALIDMESH                =&gt; Some((&quot;D3DXERR_INVALIDMESH&quot;,             &quot;The mesh is invalid.&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1386,7 +1386,7 @@
                 
             </div>
             <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            DXGI_ERROR::WAS_STILL_DRAWING       =&gt; Some((&quot;DXGI_ERROR_WAS_STILL_DRAWING&quot;,    &quot;The previous blit operation that is transferring information to or from this surface is incomplete.&quot;)),</pre>
+                <pre class="has-background-danger-light py-0 px-2">            D3DXERR::CANNOTATTRSORT             =&gt; Some((&quot;D3DXERR_CANNOTATTRSORT&quot;,          &quot;Attribute sort (D3DXMESHOPT_ATTRSORT) is not supported as an optimization technique.&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1395,11 +1395,11 @@
                 <a href="#105">105</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
+                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger">
                 
             </div>
-            <div class="column has-background-white p-0">
-                <pre class="has-background-white py-0 px-2"></pre>
+            <div class="column has-background-danger-light p-0">
+                <pre class="has-background-danger-light py-0 px-2">            D3DXERR::SKINNINGNOTSUPPORTED       =&gt; Some((&quot;D3DXERR_SKINNINGNOTSUPPORTED&quot;,    &quot;Skinning is not supported.&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1412,7 +1412,7 @@
                 
             </div>
             <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            D3DERR::COMMAND_UNPARSED            =&gt; Some((&quot;D3DERR_COMMAND_UNPARSED&quot;,             &quot;The command was unparsed.&quot;)),</pre>
+                <pre class="has-background-danger-light py-0 px-2">            D3DXERR::TOOMANYINFLUENCES          =&gt; Some((&quot;D3DXERR_TOOMANYINFLUENCES&quot;,       &quot;Too many influences specified.&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1421,11 +1421,11 @@
                 <a href="#107">107</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
+                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger">
                 
             </div>
-            <div class="column has-background-white p-0">
-                <pre class="has-background-white py-0 px-2"></pre>
+            <div class="column has-background-danger-light p-0">
+                <pre class="has-background-danger-light py-0 px-2">            D3DXERR::INVALIDDATA                =&gt; Some((&quot;D3DXERR_INVALIDDATA&quot;,             &quot;The data is invalid.&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1438,7 +1438,7 @@
                 
             </div>
             <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            E::FAIL                             =&gt; Some((&quot;E_FAIL&quot;,                              &quot;A generic error, such as attempting to create a device with the debug layer enabled and the layer is not installed.&quot;)),</pre>
+                <pre class="has-background-danger-light py-0 px-2">            D3DXERR::LOADEDMESHASNODATA         =&gt; Some((&quot;D3DXERR_LOADEDMESHASNODATA&quot;,      &quot;The mesh has no data.&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1451,7 +1451,7 @@
                 
             </div>
             <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            E::INVALIDARG                       =&gt; Some((&quot;E_INVALIDARG&quot;,                        &quot;An invalid parameter was passed to the returning function.&quot;)),</pre>
+                <pre class="has-background-danger-light py-0 px-2">            D3DXERR::DUPLICATENAMEDFRAGMENT     =&gt; Some((&quot;D3DXERR_DUPLICATENAMEDFRAGMENT&quot;,  &quot;A fragment with that name already exists.&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1464,7 +1464,7 @@
                 
             </div>
             <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            E::OUTOFMEMORY                      =&gt; Some((&quot;E_OUTOFMEMORY&quot;,                       &quot;Ran out of memory&quot;)),</pre>
+                <pre class="has-background-danger-light py-0 px-2">            D3DXERR::CANNOTREMOVELASTITEM       =&gt; Some((&quot;D3DXERR_CANNOTREMOVELASTITEM&quot;,    &quot;The last item cannot be deleted.&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1473,11 +1473,11 @@
                 <a href="#111">111</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger">
+                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
                 
             </div>
-            <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            E::NOTIMPL                          =&gt; Some((&quot;E_NOTIMPL&quot;,                           &quot;The method call isn&#x27;t implemented with the passed parameter combination.&quot;)),</pre>
+            <div class="column has-background-white p-0">
+                <pre class="has-background-white py-0 px-2"></pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1490,7 +1490,7 @@
                 
             </div>
             <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            E::ACCESSDENIED                     =&gt; Some((&quot;E_ACCESSDENIED&quot;,                      &quot;Access is denied.&quot;)),</pre>
+                <pre class="has-background-danger-light py-0 px-2">            DXGI_ERROR::INVALID_CALL            =&gt; Some((&quot;DXGI_ERROR_INVALID_CALL&quot;,         &quot;The method call is invalid. For example, a method&#x27;s parameter may not be a valid pointer.&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1503,7 +1503,7 @@
                 
             </div>
             <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            E::NOINTERFACE                      =&gt; Some((&quot;E_NOINTERFACE&quot;,                       &quot;No such interface supported&quot;)),</pre>
+                <pre class="has-background-danger-light py-0 px-2">            DXGI_ERROR::WAS_STILL_DRAWING       =&gt; Some((&quot;DXGI_ERROR_WAS_STILL_DRAWING&quot;,    &quot;The previous blit operation that is transferring information to or from this surface is incomplete.&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1529,7 +1529,7 @@
                 
             </div>
             <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            ERROR::FILE_NOT_FOUND               =&gt; Some((&quot;ERROR_FILE_NOT_FOUND&quot;,                &quot;A file was not found&quot;)),</pre>
+                <pre class="has-background-danger-light py-0 px-2">            D3DERR::COMMAND_UNPARSED            =&gt; Some((&quot;D3DERR_COMMAND_UNPARSED&quot;,             &quot;The command was unparsed.&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1538,11 +1538,11 @@
                 <a href="#116">116</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger">
+                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
                 
             </div>
-            <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            ERROR::ACCESS_DENIED                =&gt; Some((&quot;ERROR_ACCESS_DENIED&quot;,                 &quot;Access is denied.&quot;)),</pre>
+            <div class="column has-background-white p-0">
+                <pre class="has-background-white py-0 px-2"></pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1555,7 +1555,7 @@
                 
             </div>
             <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            ERROR::PATH_NOT_FOUND               =&gt; Some((&quot;ERROR_PATH_NOT_FOUND&quot;,                &quot;The system cannot find the path specified.&quot;)),</pre>
+                <pre class="has-background-danger-light py-0 px-2">            E::FAIL                             =&gt; Some((&quot;E_FAIL&quot;,                              &quot;A generic error, such as attempting to create a device with the debug layer enabled and the layer is not installed.&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1568,7 +1568,7 @@
                 
             </div>
             <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            ERROR::FILE_EXISTS                  =&gt; Some((&quot;ERROR_FILE_EXISTS&quot;,                   &quot;The file exists.&quot;)),</pre>
+                <pre class="has-background-danger-light py-0 px-2">            E::INVALIDARG                       =&gt; Some((&quot;E_INVALIDARG&quot;,                        &quot;An invalid parameter was passed to the returning function.&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1581,7 +1581,7 @@
                 
             </div>
             <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            ERROR::BAD_ARGUMENTS                =&gt; Some((&quot;ERROR_BAD_ARGUMENTS&quot;,                 &quot;One or more arguments are not correct.&quot;)),</pre>
+                <pre class="has-background-danger-light py-0 px-2">            E::OUTOFMEMORY                      =&gt; Some((&quot;E_OUTOFMEMORY&quot;,                       &quot;Ran out of memory&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1594,7 +1594,7 @@
                 
             </div>
             <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            ERROR::DEVICE_NOT_CONNECTED         =&gt; Some((&quot;ERROR_DEVICE_NOT_CONNECTED&quot;,          &quot;The device is not connected.&quot;)),</pre>
+                <pre class="has-background-danger-light py-0 px-2">            E::NOTIMPL                          =&gt; Some((&quot;E_NOTIMPL&quot;,                           &quot;The method call isn&#x27;t implemented with the passed parameter combination.&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1603,11 +1603,11 @@
                 <a href="#121">121</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
+                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger">
                 
             </div>
-            <div class="column has-background-white p-0">
-                <pre class="has-background-white py-0 px-2"></pre>
+            <div class="column has-background-danger-light p-0">
+                <pre class="has-background-danger-light py-0 px-2">            E::ACCESSDENIED                     =&gt; Some((&quot;E_ACCESSDENIED&quot;,                      &quot;Access is denied.&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1620,7 +1620,7 @@
                 
             </div>
             <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            THINERR::NONSPECIFIC                =&gt; Some((&quot;THINERR_NONSPECIFIC&quot;,             &quot;A nonspecific error of some sort occured.&quot;)),</pre>
+                <pre class="has-background-danger-light py-0 px-2">            E::NOINTERFACE                      =&gt; Some((&quot;E_NOINTERFACE&quot;,                       &quot;No such interface supported&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1629,11 +1629,11 @@
                 <a href="#123">123</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger">
+                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
                 
             </div>
-            <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            THINERR::SLICE_OVERFLOW             =&gt; Some((&quot;THINERR_SLICE_OVERFLOW&quot;,          &quot;Large slice passed to a DirectX API that only accepts a 32-bit length&quot;)),</pre>
+            <div class="column has-background-white p-0">
+                <pre class="has-background-white py-0 px-2"></pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1646,7 +1646,7 @@
                 
             </div>
             <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            THINERR::DEVICE_MISMATCH            =&gt; Some((&quot;THINERR_DEVICE_MISMATCH&quot;,         &quot;Resource belonging to one Device was passed to a different Device.  To avoid undefined behavior, DirectX was not called.&quot;)),</pre>
+                <pre class="has-background-danger-light py-0 px-2">            ERROR::FILE_NOT_FOUND               =&gt; Some((&quot;ERROR_FILE_NOT_FOUND&quot;,                &quot;A file was not found&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1659,7 +1659,7 @@
                 
             </div>
             <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            THINERR::ALLOC_OVERFLOW             =&gt; Some((&quot;THINERR_ALLOC_OVERFLOW&quot;,          &quot;Large allocation size was requested.  To avoid undefined behavior from arithmetic overflows, DirectX was not called.&quot;)),</pre>
+                <pre class="has-background-danger-light py-0 px-2">            ERROR::ACCESS_DENIED                =&gt; Some((&quot;ERROR_ACCESS_DENIED&quot;,                 &quot;Access is denied.&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1672,7 +1672,7 @@
                 
             </div>
             <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            THINERR::INVALID_STRUCT_FIELD       =&gt; Some((&quot;THINERR_INVALID_STRUCT_FIELD&quot;,    &quot;A structure contained some kind of field such as `dwSize` or `iType` that was invalid.&quot;)),</pre>
+                <pre class="has-background-danger-light py-0 px-2">            ERROR::PATH_NOT_FOUND               =&gt; Some((&quot;ERROR_PATH_NOT_FOUND&quot;,                &quot;The system cannot find the path specified.&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1685,7 +1685,7 @@
                 
             </div>
             <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            THINERR::MISSING_DLL_EXPORT         =&gt; Some((&quot;THINERR_MISSING_DLL_EXPORT&quot;,      &quot;This version of the DLL doesn&#x27;t support this fn.&quot;)),</pre>
+                <pre class="has-background-danger-light py-0 px-2">            ERROR::FILE_EXISTS                  =&gt; Some((&quot;ERROR_FILE_EXISTS&quot;,                   &quot;The file exists.&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1698,7 +1698,7 @@
                 
             </div>
             <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            THINERR::SLICE_TOO_LARGE            =&gt; Some((&quot;THINERR_SLICE_TOO_LARGE&quot;,         &quot;Slice length exceeded some kind of length limit.&quot;)),</pre>
+                <pre class="has-background-danger-light py-0 px-2">            ERROR::BAD_ARGUMENTS                =&gt; Some((&quot;ERROR_BAD_ARGUMENTS&quot;,                 &quot;One or more arguments are not correct.&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1711,7 +1711,7 @@
                 
             </div>
             <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            THINERR::STRING_CONTAINS_NULS       =&gt; Some((&quot;THINERR_STRING_CONTAINS_NULS&quot;,    &quot;String contains unexpected internal `\\0`s when being passed to a function taking C-style `\\0`-*terminated* strings.&quot;)),</pre>
+                <pre class="has-background-danger-light py-0 px-2">            ERROR::DEVICE_NOT_CONNECTED         =&gt; Some((&quot;ERROR_DEVICE_NOT_CONNECTED&quot;,          &quot;The device is not connected.&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1720,11 +1720,11 @@
                 <a href="#130">130</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger">
+                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
                 
             </div>
-            <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            THINERR::INVALID_BYTECODE           =&gt; Some((&quot;THINERR_INVALID_BYTECODE&quot;,        &quot;Bytecode is invalid (bad header, invalid checksum, wrong length, etc.)&quot;)),</pre>
+            <div class="column has-background-white p-0">
+                <pre class="has-background-white py-0 px-2"></pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1733,11 +1733,11 @@
                 <a href="#131">131</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
+                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger">
                 
             </div>
-            <div class="column has-background-white p-0">
-                <pre class="has-background-white py-0 px-2"></pre>
+            <div class="column has-background-danger-light p-0">
+                <pre class="has-background-danger-light py-0 px-2">            THINERR::NONSPECIFIC                =&gt; Some((&quot;THINERR_NONSPECIFIC&quot;,             &quot;A nonspecific error of some sort occured.&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1750,7 +1750,7 @@
                 
             </div>
             <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            D3D11_ERROR::FILE_NOT_FOUND                                 =&gt; Some((&quot;D3D11_ERROR_FILE_NOT_FOUND&quot;,                                  &quot;The file was not found.&quot;)),</pre>
+                <pre class="has-background-danger-light py-0 px-2">            THINERR::SLICE_OVERFLOW             =&gt; Some((&quot;THINERR_SLICE_OVERFLOW&quot;,          &quot;Large slice passed to a DirectX API that only accepts a 32-bit length&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1763,7 +1763,7 @@
                 
             </div>
             <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            D3D11_ERROR::TOO_MANY_UNIQUE_STATE_OBJECTS                  =&gt; Some((&quot;D3D11_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS&quot;,                   &quot;There are too many unique instances of a particular type of state object.&quot;)),</pre>
+                <pre class="has-background-danger-light py-0 px-2">            THINERR::DEVICE_MISMATCH            =&gt; Some((&quot;THINERR_DEVICE_MISMATCH&quot;,         &quot;Resource belonging to one Device was passed to a different Device.  To avoid undefined behavior, DirectX was not called.&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1776,7 +1776,7 @@
                 
             </div>
             <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            D3D11_ERROR::TOO_MANY_UNIQUE_VIEW_OBJECTS                   =&gt; Some((&quot;D3D11_ERROR_TOO_MANY_UNIQUE_VIEW_OBJECTS&quot;,                    &quot;There are too many unique instances of a particular type of view object.&quot;)),</pre>
+                <pre class="has-background-danger-light py-0 px-2">            THINERR::ALLOC_OVERFLOW             =&gt; Some((&quot;THINERR_ALLOC_OVERFLOW&quot;,          &quot;Large allocation size was requested.  To avoid undefined behavior from arithmetic overflows, DirectX was not called.&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1789,7 +1789,7 @@
                 
             </div>
             <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            D3D11_ERROR::DEFERRED_CONTEXT_MAP_WITHOUT_INITIAL_DISCARD   =&gt; Some((&quot;D3D11_ERROR_DEFERRED_CONTEXT_MAP_WITHOUT_INITIAL_DISCARD&quot;,    &quot;The first call to ID3D11DeviceContext::Map after either ID3D11Device::CreateDeferredContext or ID3D11DeviceContext::FinishCommandList per Resource was not D3D11_MAP_WRITE_DISCARD.&quot;)),</pre>
+                <pre class="has-background-danger-light py-0 px-2">            THINERR::INVALID_STRUCT_FIELD       =&gt; Some((&quot;THINERR_INVALID_STRUCT_FIELD&quot;,    &quot;A structure contained some kind of field such as `dwSize` or `iType` that was invalid.&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1798,11 +1798,11 @@
                 <a href="#136">136</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
+                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger">
                 
             </div>
-            <div class="column has-background-white p-0">
-                <pre class="has-background-white py-0 px-2"></pre>
+            <div class="column has-background-danger-light p-0">
+                <pre class="has-background-danger-light py-0 px-2">            THINERR::MISSING_DLL_EXPORT         =&gt; Some((&quot;THINERR_MISSING_DLL_EXPORT&quot;,      &quot;This version of the DLL doesn&#x27;t support this fn.&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1811,11 +1811,11 @@
                 <a href="#137">137</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
+                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger">
                 
             </div>
-            <div class="column has-background-white p-0">
-                <pre class="has-background-white py-0 px-2"></pre>
+            <div class="column has-background-danger-light p-0">
+                <pre class="has-background-danger-light py-0 px-2">            THINERR::SLICE_TOO_LARGE            =&gt; Some((&quot;THINERR_SLICE_TOO_LARGE&quot;,         &quot;Slice length exceeded some kind of length limit.&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1828,7 +1828,7 @@
                 
             </div>
             <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            _                                   =&gt; None,</pre>
+                <pre class="has-background-danger-light py-0 px-2">            THINERR::STRING_CONTAINS_NULS       =&gt; Some((&quot;THINERR_STRING_CONTAINS_NULS&quot;,    &quot;String contains unexpected internal `\\0`s when being passed to a function taking C-style `\\0`-*terminated* strings.&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1837,43 +1837,17 @@
                 <a href="#139">139</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
+                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger">
                 
             </div>
-            <div class="column has-background-white p-0">
-                <pre class="has-background-white py-0 px-2">        }</pre>
+            <div class="column has-background-danger-light p-0">
+                <pre class="has-background-danger-light py-0 px-2">            THINERR::INVALID_BYTECODE           =&gt; Some((&quot;THINERR_INVALID_BYTECODE&quot;,        &quot;Bytecode is invalid (bad header, invalid checksum, wrong length, etc.)&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
                 class="column is-1 is-narrow p-0 has-text-centered"
                 id="140">
                 <a href="#140">140</a>
-            </div>
-            <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-success-light has-background-success">
-                984
-            </div>
-            <div class="column has-background-success-light p-0">
-                <pre class="has-background-success-light py-0 px-2">    }</pre>
-            </div>
-        </div><div class="columns p-0 m-0">
-            <div
-                class="column is-1 is-narrow p-0 has-text-centered"
-                id="141">
-                <a href="#141">141</a>
-            </div>
-            <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
-                
-            </div>
-            <div class="column has-background-white p-0">
-                <pre class="has-background-white py-0 px-2">}</pre>
-            </div>
-        </div><div class="columns p-0 m-0">
-            <div
-                class="column is-1 is-narrow p-0 has-text-centered"
-                id="142">
-                <a href="#142">142</a>
             </div>
             <div
                 class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
@@ -1885,15 +1859,41 @@
         </div><div class="columns p-0 m-0">
             <div
                 class="column is-1 is-narrow p-0 has-text-centered"
+                id="141">
+                <a href="#141">141</a>
+            </div>
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger">
+                
+            </div>
+            <div class="column has-background-danger-light p-0">
+                <pre class="has-background-danger-light py-0 px-2">            D3D11_ERROR::FILE_NOT_FOUND                                 =&gt; Some((&quot;D3D11_ERROR_FILE_NOT_FOUND&quot;,                                  &quot;The file was not found.&quot;)),</pre>
+            </div>
+        </div><div class="columns p-0 m-0">
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered"
+                id="142">
+                <a href="#142">142</a>
+            </div>
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger">
+                
+            </div>
+            <div class="column has-background-danger-light p-0">
+                <pre class="has-background-danger-light py-0 px-2">            D3D11_ERROR::TOO_MANY_UNIQUE_STATE_OBJECTS                  =&gt; Some((&quot;D3D11_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS&quot;,                   &quot;There are too many unique instances of a particular type of state object.&quot;)),</pre>
+            </div>
+        </div><div class="columns p-0 m-0">
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered"
                 id="143">
                 <a href="#143">143</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
+                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger">
                 
             </div>
-            <div class="column has-background-white p-0">
-                <pre class="has-background-white py-0 px-2">impl Display for ErrorKind {</pre>
+            <div class="column has-background-danger-light p-0">
+                <pre class="has-background-danger-light py-0 px-2">            D3D11_ERROR::TOO_MANY_UNIQUE_VIEW_OBJECTS                   =&gt; Some((&quot;D3D11_ERROR_TOO_MANY_UNIQUE_VIEW_OBJECTS&quot;,                    &quot;There are too many unique instances of a particular type of view object.&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1902,11 +1902,11 @@
                 <a href="#144">144</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
+                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger">
                 
             </div>
-            <div class="column has-background-white p-0">
-                <pre class="has-background-white py-0 px-2">    fn fmt(&amp;self, f: &amp;mut Formatter) -&gt; fmt::Result {</pre>
+            <div class="column has-background-danger-light p-0">
+                <pre class="has-background-danger-light py-0 px-2">            D3D11_ERROR::DEFERRED_CONTEXT_MAP_WITHOUT_INITIAL_DISCARD   =&gt; Some((&quot;D3D11_ERROR_DEFERRED_CONTEXT_MAP_WITHOUT_INITIAL_DISCARD&quot;,    &quot;The first call to ID3D11DeviceContext::Map after either ID3D11Device::CreateDeferredContext or ID3D11DeviceContext::FinishCommandList per Resource was not D3D11_MAP_WRITE_DISCARD.&quot;)),</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1915,11 +1915,11 @@
                 <a href="#145">145</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger">
+                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
                 
             </div>
-            <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">        if let Some((id, desc)) = self.id_desc() {</pre>
+            <div class="column has-background-white p-0">
+                <pre class="has-background-white py-0 px-2"></pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1928,11 +1928,11 @@
                 <a href="#146">146</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger">
+                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
                 
             </div>
-            <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            write!(f, &quot;{} (0x{:08x}) {}&quot;, id, self.0 as u32, desc)</pre>
+            <div class="column has-background-white p-0">
+                <pre class="has-background-white py-0 px-2"></pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1941,30 +1941,17 @@
                 <a href="#147">147</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
+                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger">
                 
             </div>
-            <div class="column has-background-white p-0">
-                <pre class="has-background-white py-0 px-2">        } else {</pre>
+            <div class="column has-background-danger-light p-0">
+                <pre class="has-background-danger-light py-0 px-2">            _                                   =&gt; None,</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
                 class="column is-1 is-narrow p-0 has-text-centered"
                 id="148">
                 <a href="#148">148</a>
-            </div>
-            <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger">
-                
-            </div>
-            <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            write!(f, &quot;D3DERR_??? (0x{:08x})&quot;, self.0 as u32)</pre>
-            </div>
-        </div><div class="columns p-0 m-0">
-            <div
-                class="column is-1 is-narrow p-0 has-text-centered"
-                id="149">
-                <a href="#149">149</a>
             </div>
             <div
                 class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
@@ -1976,15 +1963,28 @@
         </div><div class="columns p-0 m-0">
             <div
                 class="column is-1 is-narrow p-0 has-text-centered"
+                id="149">
+                <a href="#149">149</a>
+            </div>
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered has-text-success-light has-background-success">
+                984
+            </div>
+            <div class="column has-background-success-light p-0">
+                <pre class="has-background-success-light py-0 px-2">    }</pre>
+            </div>
+        </div><div class="columns p-0 m-0">
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered"
                 id="150">
                 <a href="#150">150</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger">
+                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
                 
             </div>
-            <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">    }</pre>
+            <div class="column has-background-white p-0">
+                <pre class="has-background-white py-0 px-2">}</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1997,7 +1997,7 @@
                 
             </div>
             <div class="column has-background-white p-0">
-                <pre class="has-background-white py-0 px-2">}</pre>
+                <pre class="has-background-white py-0 px-2"></pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -2010,7 +2010,7 @@
                 
             </div>
             <div class="column has-background-white p-0">
-                <pre class="has-background-white py-0 px-2"></pre>
+                <pre class="has-background-white py-0 px-2">impl Display for ErrorKind {</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -2023,7 +2023,7 @@
                 
             </div>
             <div class="column has-background-white p-0">
-                <pre class="has-background-white py-0 px-2">impl Debug for ErrorKind {</pre>
+                <pre class="has-background-white py-0 px-2">    fn fmt(&amp;self, f: &amp;mut Formatter) -&gt; fmt::Result {</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -2032,11 +2032,11 @@
                 <a href="#154">154</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
+                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger">
                 
             </div>
-            <div class="column has-background-white p-0">
-                <pre class="has-background-white py-0 px-2">    fn fmt(&amp;self, f: &amp;mut Formatter) -&gt; fmt::Result {</pre>
+            <div class="column has-background-danger-light p-0">
+                <pre class="has-background-danger-light py-0 px-2">        if let Some((id, desc)) = self.id_desc() {</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -2045,30 +2045,17 @@
                 <a href="#155">155</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-success-light has-background-success">
-                984
+                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger">
+                
             </div>
-            <div class="column has-background-success-light p-0">
-                <pre class="has-background-success-light py-0 px-2">        if let Some((id, _desc)) = self.id_desc() {</pre>
+            <div class="column has-background-danger-light p-0">
+                <pre class="has-background-danger-light py-0 px-2">            write!(f, &quot;{} (0x{:08x}) {}&quot;, id, self.0 as u32, desc)</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
                 class="column is-1 is-narrow p-0 has-text-centered"
                 id="156">
                 <a href="#156">156</a>
-            </div>
-            <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-success-light has-background-success">
-                984
-            </div>
-            <div class="column has-background-success-light p-0">
-                <pre class="has-background-success-light py-0 px-2">            write!(f, &quot;{}&quot;, id)</pre>
-            </div>
-        </div><div class="columns p-0 m-0">
-            <div
-                class="column is-1 is-narrow p-0 has-text-centered"
-                id="157">
-                <a href="#157">157</a>
             </div>
             <div
                 class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
@@ -2080,21 +2067,21 @@
         </div><div class="columns p-0 m-0">
             <div
                 class="column is-1 is-narrow p-0 has-text-centered"
-                id="158">
-                <a href="#158">158</a>
+                id="157">
+                <a href="#157">157</a>
             </div>
             <div
                 class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger">
                 
             </div>
             <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            write!(f, &quot;ErrorKind(0x{:08x})&quot;, self.0 as u32)</pre>
+                <pre class="has-background-danger-light py-0 px-2">            write!(f, &quot;D3DERR_??? (0x{:08x})&quot;, self.0 as u32)</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
                 class="column is-1 is-narrow p-0 has-text-centered"
-                id="159">
-                <a href="#159">159</a>
+                id="158">
+                <a href="#158">158</a>
             </div>
             <div
                 class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
@@ -2106,15 +2093,28 @@
         </div><div class="columns p-0 m-0">
             <div
                 class="column is-1 is-narrow p-0 has-text-centered"
+                id="159">
+                <a href="#159">159</a>
+            </div>
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger">
+                
+            </div>
+            <div class="column has-background-danger-light p-0">
+                <pre class="has-background-danger-light py-0 px-2">    }</pre>
+            </div>
+        </div><div class="columns p-0 m-0">
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered"
                 id="160">
                 <a href="#160">160</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-success-light has-background-success">
-                984
+                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
+                
             </div>
-            <div class="column has-background-success-light p-0">
-                <pre class="has-background-success-light py-0 px-2">    }</pre>
+            <div class="column has-background-white p-0">
+                <pre class="has-background-white py-0 px-2">}</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -2127,7 +2127,7 @@
                 
             </div>
             <div class="column has-background-white p-0">
-                <pre class="has-background-white py-0 px-2">}</pre>
+                <pre class="has-background-white py-0 px-2"></pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -2140,7 +2140,7 @@
                 
             </div>
             <div class="column has-background-white p-0">
-                <pre class="has-background-white py-0 px-2"></pre>
+                <pre class="has-background-white py-0 px-2">impl Debug for ErrorKind {</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -2153,7 +2153,7 @@
                 
             </div>
             <div class="column has-background-white p-0">
-                <pre class="has-background-white py-0 px-2">impl std::error::Error for ErrorKind {}</pre>
+                <pre class="has-background-white py-0 px-2">    fn fmt(&amp;self, f: &amp;mut Formatter) -&gt; fmt::Result {</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -2162,11 +2162,11 @@
                 <a href="#164">164</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
-                
+                class="column is-1 is-narrow p-0 has-text-centered has-text-success-light has-background-success">
+                984
             </div>
-            <div class="column has-background-white p-0">
-                <pre class="has-background-white py-0 px-2"></pre>
+            <div class="column has-background-success-light p-0">
+                <pre class="has-background-success-light py-0 px-2">        if let Some((id, _desc)) = self.id_desc() {</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -2175,11 +2175,11 @@
                 <a href="#165">165</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
-                
+                class="column is-1 is-narrow p-0 has-text-centered has-text-success-light has-background-success">
+                984
             </div>
-            <div class="column has-background-white p-0">
-                <pre class="has-background-white py-0 px-2">impl From&lt;std::ffi::NulError&gt; for ErrorKind {</pre>
+            <div class="column has-background-success-light p-0">
+                <pre class="has-background-success-light py-0 px-2">            write!(f, &quot;{}&quot;, id)</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -2188,11 +2188,11 @@
                 <a href="#166">166</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger">
+                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
                 
             </div>
-            <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">    fn from(_: std::ffi::NulError) -&gt; ErrorKind { THINERR::STRING_CONTAINS_NULS }</pre>
+            <div class="column has-background-white p-0">
+                <pre class="has-background-white py-0 px-2">        } else {</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -2201,11 +2201,11 @@
                 <a href="#167">167</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
+                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger">
                 
             </div>
-            <div class="column has-background-white p-0">
-                <pre class="has-background-white py-0 px-2">}</pre>
+            <div class="column has-background-danger-light p-0">
+                <pre class="has-background-danger-light py-0 px-2">            write!(f, &quot;ErrorKind(0x{:08x})&quot;, self.0 as u32)</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -2218,7 +2218,7 @@
                 
             </div>
             <div class="column has-background-white p-0">
-                <pre class="has-background-white py-0 px-2"></pre>
+                <pre class="has-background-white py-0 px-2">        }</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -2227,11 +2227,11 @@
                 <a href="#169">169</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
-                
+                class="column is-1 is-narrow p-0 has-text-centered has-text-success-light has-background-success">
+                984
             </div>
-            <div class="column has-background-white p-0">
-                <pre class="has-background-white py-0 px-2">impl From&lt;abistr::InteriorNulError&gt; for ErrorKind {</pre>
+            <div class="column has-background-success-light p-0">
+                <pre class="has-background-success-light py-0 px-2">    }</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -2240,11 +2240,11 @@
                 <a href="#170">170</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger">
+                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
                 
             </div>
-            <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">    fn from(_: abistr::InteriorNulError) -&gt; ErrorKind { THINERR::STRING_CONTAINS_NULS }</pre>
+            <div class="column has-background-white p-0">
+                <pre class="has-background-white py-0 px-2">}</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -2257,7 +2257,7 @@
                 
             </div>
             <div class="column has-background-white p-0">
-                <pre class="has-background-white py-0 px-2">}</pre>
+                <pre class="has-background-white py-0 px-2"></pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -2270,39 +2270,13 @@
                 
             </div>
             <div class="column has-background-white p-0">
-                <pre class="has-background-white py-0 px-2"></pre>
+                <pre class="has-background-white py-0 px-2">impl std::error::Error for ErrorKind {}</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
                 class="column is-1 is-narrow p-0 has-text-centered"
                 id="173">
                 <a href="#173">173</a>
-            </div>
-            <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger">
-                
-            </div>
-            <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">impl PartialEq&lt;HRESULT&gt; for ErrorKind { fn eq(&amp;self, other: &amp;HRESULT)   -&gt; bool { self.0 == *other } }</pre>
-            </div>
-        </div><div class="columns p-0 m-0">
-            <div
-                class="column is-1 is-narrow p-0 has-text-centered"
-                id="174">
-                <a href="#174">174</a>
-            </div>
-            <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-success-light has-background-success">
-                21
-            </div>
-            <div class="column has-background-success-light p-0">
-                <pre class="has-background-success-light py-0 px-2">impl PartialEq&lt;ErrorKind&gt; for HRESULT { fn eq(&amp;self, other: &amp;ErrorKind)    -&gt; bool { other.0 == *self } }</pre>
-            </div>
-        </div><div class="columns p-0 m-0">
-            <div
-                class="column is-1 is-narrow p-0 has-text-centered"
-                id="175">
-                <a href="#175">175</a>
             </div>
             <div
                 class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
@@ -2314,15 +2288,41 @@
         </div><div class="columns p-0 m-0">
             <div
                 class="column is-1 is-narrow p-0 has-text-centered"
-                id="176">
-                <a href="#176">176</a>
+                id="174">
+                <a href="#174">174</a>
+            </div>
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
+                
+            </div>
+            <div class="column has-background-white p-0">
+                <pre class="has-background-white py-0 px-2">impl From&lt;std::ffi::NulError&gt; for ErrorKind {</pre>
+            </div>
+        </div><div class="columns p-0 m-0">
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered"
+                id="175">
+                <a href="#175">175</a>
             </div>
             <div
                 class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger">
                 
             </div>
             <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">impl PartialEq&lt;Option&lt;ErrorKind&gt;&gt; for ErrorKind { fn eq(&amp;self, other: &amp;Option&lt;ErrorKind&gt;) -&gt; bool { Some(self) == other.as_ref() } }</pre>
+                <pre class="has-background-danger-light py-0 px-2">    fn from(_: std::ffi::NulError) -&gt; ErrorKind { THINERR::STRING_CONTAINS_NULS }</pre>
+            </div>
+        </div><div class="columns p-0 m-0">
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered"
+                id="176">
+                <a href="#176">176</a>
+            </div>
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
+                
+            </div>
+            <div class="column has-background-white p-0">
+                <pre class="has-background-white py-0 px-2">}</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -2331,11 +2331,11 @@
                 <a href="#177">177</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger">
+                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
                 
             </div>
-            <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">impl PartialEq&lt;ErrorKind&gt; for Option&lt;ErrorKind&gt; { fn eq(&amp;self, other: &amp;ErrorKind)         -&gt; bool { Some(other) == self.as_ref() } }</pre>
+            <div class="column has-background-white p-0">
+                <pre class="has-background-white py-0 px-2"></pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -2348,7 +2348,7 @@
                 
             </div>
             <div class="column has-background-white p-0">
-                <pre class="has-background-white py-0 px-2"></pre>
+                <pre class="has-background-white py-0 px-2">impl From&lt;abistr::InteriorNulError&gt; for ErrorKind {</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -2361,7 +2361,7 @@
                 
             </div>
             <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">impl&lt;O&gt; PartialEq&lt;Result&lt;O, ErrorKind&gt;&gt; for ErrorKind { fn eq(&amp;self, other: &amp;Result&lt;O, ErrorKind&gt;) -&gt; bool { Some(self) == other.as_ref().err() } }</pre>
+                <pre class="has-background-danger-light py-0 px-2">    fn from(_: abistr::InteriorNulError) -&gt; ErrorKind { THINERR::STRING_CONTAINS_NULS }</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -2370,11 +2370,11 @@
                 <a href="#180">180</a>
             </div>
             <div
-                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger">
+                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
                 
             </div>
-            <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">impl&lt;O&gt; PartialEq&lt;ErrorKind&gt; for Result&lt;O, ErrorKind&gt; { fn eq(&amp;self, other: &amp;ErrorKind)            -&gt; bool { Some(other) == self.as_ref().err() } }</pre>
+            <div class="column has-background-white p-0">
+                <pre class="has-background-white py-0 px-2">}</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -2396,6 +2396,149 @@
                 <a href="#182">182</a>
             </div>
             <div
+                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger">
+                
+            </div>
+            <div class="column has-background-danger-light p-0">
+                <pre class="has-background-danger-light py-0 px-2">impl PartialEq&lt;HRESULT&gt; for ErrorKind { fn eq(&amp;self, other: &amp;HRESULT)   -&gt; bool { self.0 == *other } }</pre>
+            </div>
+        </div><div class="columns p-0 m-0">
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered"
+                id="183">
+                <a href="#183">183</a>
+            </div>
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered has-text-success-light has-background-success">
+                21
+            </div>
+            <div class="column has-background-success-light p-0">
+                <pre class="has-background-success-light py-0 px-2">impl PartialEq&lt;ErrorKind&gt; for HRESULT { fn eq(&amp;self, other: &amp;ErrorKind)    -&gt; bool { other.0 == *self } }</pre>
+            </div>
+        </div><div class="columns p-0 m-0">
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered"
+                id="184">
+                <a href="#184">184</a>
+            </div>
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
+                
+            </div>
+            <div class="column has-background-white p-0">
+                <pre class="has-background-white py-0 px-2"></pre>
+            </div>
+        </div><div class="columns p-0 m-0">
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered"
+                id="185">
+                <a href="#185">185</a>
+            </div>
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger">
+                
+            </div>
+            <div class="column has-background-danger-light p-0">
+                <pre class="has-background-danger-light py-0 px-2">impl PartialEq&lt;Option&lt;ErrorKind&gt;&gt; for ErrorKind { fn eq(&amp;self, other: &amp;Option&lt;ErrorKind&gt;) -&gt; bool { Some(self) == other.as_ref() } }</pre>
+            </div>
+        </div><div class="columns p-0 m-0">
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered"
+                id="186">
+                <a href="#186">186</a>
+            </div>
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger">
+                
+            </div>
+            <div class="column has-background-danger-light p-0">
+                <pre class="has-background-danger-light py-0 px-2">impl PartialEq&lt;ErrorKind&gt; for Option&lt;ErrorKind&gt; { fn eq(&amp;self, other: &amp;ErrorKind)         -&gt; bool { Some(other) == self.as_ref() } }</pre>
+            </div>
+        </div><div class="columns p-0 m-0">
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered"
+                id="187">
+                <a href="#187">187</a>
+            </div>
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
+                
+            </div>
+            <div class="column has-background-white p-0">
+                <pre class="has-background-white py-0 px-2"></pre>
+            </div>
+        </div><div class="columns p-0 m-0">
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered"
+                id="188">
+                <a href="#188">188</a>
+            </div>
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger">
+                
+            </div>
+            <div class="column has-background-danger-light p-0">
+                <pre class="has-background-danger-light py-0 px-2">impl&lt;O&gt; PartialEq&lt;Result&lt;O, ErrorKind&gt;&gt; for ErrorKind { fn eq(&amp;self, other: &amp;Result&lt;O, ErrorKind&gt;) -&gt; bool { Some(self) == other.as_ref().err() } }</pre>
+            </div>
+        </div><div class="columns p-0 m-0">
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered"
+                id="189">
+                <a href="#189">189</a>
+            </div>
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered has-text-danger-light has-background-danger">
+                
+            </div>
+            <div class="column has-background-danger-light p-0">
+                <pre class="has-background-danger-light py-0 px-2">impl&lt;O&gt; PartialEq&lt;ErrorKind&gt; for Result&lt;O, ErrorKind&gt; { fn eq(&amp;self, other: &amp;ErrorKind)            -&gt; bool { Some(other) == self.as_ref().err() } }</pre>
+            </div>
+        </div><div class="columns p-0 m-0">
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered"
+                id="190">
+                <a href="#190">190</a>
+            </div>
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
+                
+            </div>
+            <div class="column has-background-white p-0">
+                <pre class="has-background-white py-0 px-2"></pre>
+            </div>
+        </div><div class="columns p-0 m-0">
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered"
+                id="191">
+                <a href="#191">191</a>
+            </div>
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
+                
+            </div>
+            <div class="column has-background-white p-0">
+                <pre class="has-background-white py-0 px-2">const _FACD3D : u32 = 0x876; &#x2F;&#x2F; d3d9helper.h</pre>
+            </div>
+        </div><div class="columns p-0 m-0">
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered"
+                id="192">
+                <a href="#192">192</a>
+            </div>
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
+                
+            </div>
+            <div class="column has-background-white p-0">
+                <pre class="has-background-white py-0 px-2"></pre>
+            </div>
+        </div><div class="columns p-0 m-0">
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered"
+                id="193">
+                <a href="#193">193</a>
+            </div>
+            <div
                 class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
                 
             </div>
@@ -2405,8 +2548,8 @@
         </div><div class="columns p-0 m-0">
             <div
                 class="column is-1 is-narrow p-0 has-text-centered"
-                id="183">
-                <a href="#183">183</a>
+                id="194">
+                <a href="#194">194</a>
             </div>
             <div
                 class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
@@ -2415,10 +2558,62 @@
             <div class="column has-background-white p-0">
                 <pre class="has-background-white py-0 px-2">&#x2F;&#x2F;#cpp2rust MAKE_HRESULT    = ErrorKind::make_hresult</pre>
             </div>
+        </div><div class="columns p-0 m-0">
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered"
+                id="195">
+                <a href="#195">195</a>
+            </div>
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
+                
+            </div>
+            <div class="column has-background-white p-0">
+                <pre class="has-background-white py-0 px-2"></pre>
+            </div>
+        </div><div class="columns p-0 m-0">
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered"
+                id="196">
+                <a href="#196">196</a>
+            </div>
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
+                
+            </div>
+            <div class="column has-background-white p-0">
+                <pre class="has-background-white py-0 px-2">&#x2F;&#x2F;#cpp2rust MAKE_D3DSTATUS  = ErrorKind::make_d3dstatus</pre>
+            </div>
+        </div><div class="columns p-0 m-0">
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered"
+                id="197">
+                <a href="#197">197</a>
+            </div>
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
+                
+            </div>
+            <div class="column has-background-white p-0">
+                <pre class="has-background-white py-0 px-2">&#x2F;&#x2F;#cpp2rust MAKE_D3DHRESULT = ErrorKind::make_d3dhresult</pre>
+            </div>
+        </div><div class="columns p-0 m-0">
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered"
+                id="198">
+                <a href="#198">198</a>
+            </div>
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
+                
+            </div>
+            <div class="column has-background-white p-0">
+                <pre class="has-background-white py-0 px-2">&#x2F;&#x2F;#cpp2rust MAKE_DDHRESULT  = ErrorKind::make_ddhresult</pre>
+            </div>
         </div></div>
         <footer class="footer">
             <div class="content has-text-centered">
-                <p class="heading">Date: 2022-01-27 16:43</p>
+                <p class="heading">Date: 2022-01-29 08:05</p>
             </div>
         </footer>
     </body>

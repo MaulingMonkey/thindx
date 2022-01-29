@@ -65,12 +65,36 @@
 <span id="64">64</span>
 <span id="65">65</span>
 <span id="66">66</span>
+<span id="67">67</span>
+<span id="68">68</span>
+<span id="69">69</span>
+<span id="70">70</span>
+<span id="71">71</span>
+<span id="72">72</span>
+<span id="73">73</span>
+<span id="74">74</span>
+<span id="75">75</span>
+<span id="76">76</span>
+<span id="77">77</span>
+<span id="78">78</span>
+<span id="79">79</span>
+<span id="80">80</span>
+<span id="81">81</span>
+<span id="82">82</span>
+<span id="83">83</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">bytemuck</span>::<span class="kw-2">*</span>;
 <span class="kw">use</span> <span class="ident">winapi::shared::minwindef::DWORD</span>;
 <span class="kw">use</span> <span class="ident">std::fmt</span>::{<span class="self">self</span>, <span class="ident">Debug</span>, <span class="ident">Formatter</span>};
 
 
 
+<span class="doccomment">/// [PS_1_1](Self::PS_1_1)</span>
+<span class="doccomment">/// ..=</span>
+<span class="doccomment">/// [PS_3_0](Self::PS_3_0),</span>
+<span class="doccomment">/// [VS_1_1](Self::VS_1_1)</span>
+<span class="doccomment">/// ..=</span>
+<span class="doccomment">/// [VS_3_0](Self::VS_3_0)</span>
+<span class="doccomment">/// (Direct3D 9 compatible shader versions)</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">Default</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">PartialOrd</span>, <span class="ident">Ord</span>, <span class="ident">Hash</span>, <span class="ident">Pod</span>, <span class="ident">Zeroable</span>)]</span>
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">transparent</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ShaderVersion</span>(<span class="ident">DWORD</span>);
@@ -78,25 +102,35 @@
 <span class="kw">impl</span> <span class="ident">ShaderVersion</span> {
     <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dps-version)\]</span>
     <span class="doccomment">/// D3DPS_VERSION</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Construct a pixel shader version</span>
     <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">ps</span>(<span class="ident">major</span>: <span class="ident">u8</span>, <span class="ident">minor</span>: <span class="ident">u8</span>) -&gt; <span class="self">Self</span> {
         <span class="self">Self</span>(<span class="number">0xFFFF0000</span> <span class="op">|</span> ((<span class="ident">major</span> <span class="kw">as</span> <span class="ident">u32</span>) <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">8</span>) <span class="op">|</span> ((<span class="ident">minor</span> <span class="kw">as</span> <span class="ident">u32</span>) <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">0</span>))
     }
 
     <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dvs-version)\]</span>
     <span class="doccomment">/// D3DVS_VERSION</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Construct a vertex shader version</span>
     <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">vs</span>(<span class="ident">major</span>: <span class="ident">u8</span>, <span class="ident">minor</span>: <span class="ident">u8</span>) -&gt; <span class="self">Self</span> {
         <span class="self">Self</span>(<span class="number">0xFFFE0000</span> <span class="op">|</span> ((<span class="ident">major</span> <span class="kw">as</span> <span class="ident">u32</span>) <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">8</span>) <span class="op">|</span> ((<span class="ident">minor</span> <span class="kw">as</span> <span class="ident">u32</span>) <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">0</span>))
     }
 
-    <span class="doccomment">/// \[docs.microsoft.com\]</span>
     <span class="doccomment">/// D3DSHADER_VERSION_MAJOR</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// The major version component of a shader version (e.g. `2` for [`PS_2_0`](Self::PS_2_0)\)</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">version_major</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u8</span> { (<span class="self">self</span>.<span class="number">0</span> <span class="op">&gt;</span><span class="op">&gt;</span> <span class="number">8</span>) <span class="kw">as</span> <span class="kw">_</span> }
 
-    <span class="doccomment">/// \[docs.microsoft.com\]</span>
     <span class="doccomment">/// D3DSHADER_VERSION_MINOR</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// The minor version component of a shader version (e.g. `0` for [`PS_2_0`](Self::PS_2_0)\)</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">version_minor</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u8</span> { (<span class="self">self</span>.<span class="number">0</span> <span class="op">&gt;</span><span class="op">&gt;</span> <span class="number">0</span>) <span class="kw">as</span> <span class="kw">_</span> }
 
+    <span class="doccomment">/// `true` for `PS_*` versions (pixel shaders)</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_pixel_shader</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> { <span class="self">self</span>.<span class="number">0</span> <span class="op">&gt;</span><span class="op">&gt;</span> <span class="number">16</span> <span class="op">==</span> <span class="number">0xFFFF</span> }
 
+    <span class="doccomment">/// `true` for `VS_*` versions (vertex shaders)</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_vertex_shader</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> { <span class="self">self</span>.<span class="number">0</span> <span class="op">&gt;</span><span class="op">&gt;</span> <span class="number">16</span> <span class="op">==</span> <span class="number">0xFFFE</span> }
 
     <span class="comment">// all valid pixel shader versions per</span>
     <span class="comment">// &lt;https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dps-version#remarks&gt;</span>

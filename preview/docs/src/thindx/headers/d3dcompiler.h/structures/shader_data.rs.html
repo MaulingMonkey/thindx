@@ -68,6 +68,8 @@
 <span id="67">67</span>
 <span id="68">68</span>
 <span id="69">69</span>
+<span id="70">70</span>
+<span id="71">71</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">winapi::um::d3dcompiler</span>::<span class="kw-2">*</span>;
 
 <span class="kw">use</span> <span class="ident">std::borrow::Borrow</span>;
@@ -137,6 +139,8 @@
     <span class="macro">assert_eq!</span>(<span class="ident">std::mem::align_of</span>::<span class="op">&lt;</span><span class="ident">ShaderData</span><span class="op">&gt;</span>(), <span class="ident">std::mem::align_of</span>::<span class="op">&lt;</span><span class="ident">D3D_SHADER_DATA</span><span class="op">&gt;</span>());
     <span class="macro">assert_eq!</span>(<span class="ident">std::mem::size_of</span> ::<span class="op">&lt;</span><span class="ident">ShaderData</span><span class="op">&gt;</span>(), <span class="ident">std::mem::size_of</span> ::<span class="op">&lt;</span><span class="ident">D3D_SHADER_DATA</span><span class="op">&gt;</span>());
 }
+
+<span class="comment">//#cpp2rust D3D_SHADER_DATA                         = d3d::ShaderData</span>
 </code></pre></div>
 </section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-search-index-js="../../../../../search-index.js" data-search-js="../../../../../search.js"></div>
 </body></html>

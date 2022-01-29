@@ -111,6 +111,17 @@
 <span id="110">110</span>
 <span id="111">111</span>
 <span id="112">112</span>
+<span id="113">113</span>
+<span id="114">114</span>
+<span id="115">115</span>
+<span id="116">116</span>
+<span id="117">117</span>
+<span id="118">118</span>
+<span id="119">119</span>
+<span id="120">120</span>
+<span id="121">121</span>
+<span id="122">122</span>
+<span id="123">123</span>
 </pre><pre class="rust"><code><span class="attribute">#![<span class="ident">allow</span>(<span class="ident">dead_code</span>)]</span> <span class="comment">// TODO: remove</span>
 
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="kw-2">*</span>;
@@ -223,6 +234,17 @@
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">AsSafe</span><span class="op">&lt;</span><span class="ident">IDirect3DQuery9</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="ident">IDirect3DQuery9Ext</span> <span class="kw">for</span> <span class="ident">T</span> {}
+
+
+
+<span class="comment">//#cpp2rust IDirect3DQuery9                         = d3d9::Query</span>
+<span class="comment">//#cpp2rust IDirect3DQuery9                         = d3d9::IDirect3DQuery9Ext</span>
+
+<span class="comment">//TODO:     IDirect3DQuery9::GetData                = d3d9::IDirect3DQuery9Ext::get_data</span>
+<span class="comment">//#cpp2rust IDirect3DQuery9::GetDataSize            = d3d9::IDirect3DQuery9Ext::get_data_size</span>
+<span class="comment">//#cpp2rust IDirect3DQuery9::GetDevice              = d3d9::IDirect3DQuery9Ext::get_device</span>
+<span class="comment">//#cpp2rust IDirect3DQuery9::GetType                = d3d9::IDirect3DQuery9Ext::get_type</span>
+<span class="comment">//#cpp2rust IDirect3DQuery9::Issue                  = d3d9::IDirect3DQuery9Ext::issue</span>
 </code></pre></div>
 </section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-search-index-js="../../../../../search-index.js" data-search-js="../../../../../search.js"></div>
 </body></html>

@@ -3,13 +3,13 @@
 D3D11_SHADER_VERSION_TYPE / D3D11_SHVER_*</p>
 <h4 id="example" class="section-header"><a href="#example">Example</a></h4>
 <div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let</span> <span class="ident">shader</span> <span class="op">=</span> <span class="ident">d3dc</span>.<span class="ident">reflect11</span>(<span class="kw-2">&amp;</span><span class="ident">shader</span>).<span class="ident">unwrap</span>();
-<span class="kw">let</span> <span class="ident">shver</span> : <span class="ident">ShaderVersionType</span> <span class="op">=</span> <span class="ident">shader</span>.<span class="ident">get_desc</span>().<span class="ident">unwrap</span>().<span class="ident">version</span>.<span class="ident">shver</span>();
-<span class="macro">assert_eq!</span>(<span class="ident">ShVer::PixelShader</span>, <span class="ident">shver</span>);</code></pre></div>
+<span class="kw">let</span> <span class="ident">ty</span> : <span class="ident">ShaderVersionType</span> <span class="op">=</span> <span class="ident">shader</span>.<span class="ident">get_desc</span>().<span class="ident">unwrap</span>().<span class="ident">version</span>.<span class="ident">ty</span>();
+<span class="macro">assert_eq!</span>(<span class="ident">ShVer::PixelShader</span>, <span class="ident">ty</span>);</code></pre></div>
 <h4 id="see-also" class="section-header"><a href="#see-also">See Also</a></h4>
 <ul>
 <li><a href="struct.ShaderDesc.html#structfield.version" title="d3d11::ShaderDesc::version">d3d11::ShaderDesc::version</a></li>
 <li><a href="struct.ShaderReflection.html#method.get_desc" title="d3d11::ShaderReflection::get_desc">d3d11::ShaderReflection::get_desc</a></li>
-<li><a href="struct.ShaderVersion.html#method.shver" title="d3d11::ShaderVersion::shver">d3d11::ShaderVersion::shver</a></li>
+<li><a href="struct.ShaderVersion.html#method.ty" title="d3d11::ShaderVersion::ty">d3d11::ShaderVersion::ty</a></li>
 <li><a href="../_examples/constant.d3dcompiler_04_reflect_shader.html" title="examples::d3dcompiler_04_reflect_shader">examples::d3dcompiler_04_reflect_shader</a></li>
 </ul>
 </div></details><h2 id="implementations" class="small-section-header">Implementations<a href="#implementations" class="anchor"></a></h2><details class="rustdoc-toggle implementors-toggle" open><summary><div id="impl" class="impl has-srclink"><div class="rightside"><a class="srclink" href="../../src/thindx/headers/d3d11shader.h/enumerations/shader_version_type.rs.html#31" title="goto source code">[src]</a></div><a href="#impl" class="anchor"></a><h3 class="code-header in-band">impl <a class="struct" href="struct.ShaderVersionType.html" title="struct thindx::d3d11::ShaderVersionType">ShVer</a></h3></div></summary><div class="impl-items"><details class="rustdoc-toggle method-toggle" open><summary><div id="method.from_unchecked" class="method has-srclink"><div class="rightside"><a class="srclink" href="../../src/thindx/headers/d3d11shader.h/enumerations/shader_version_type.rs.html#31" title="goto source code">[src]</a></div><a href="#method.from_unchecked" class="anchor"></a><h4 class="code-header">pub const fn <a href="#method.from_unchecked" class="fnname">from_unchecked</a>(d3d: D3D11_SHADER_VERSION_TYPE) -&gt; Self</h4></div></summary><div class="docblock"><p>Convert from an underlying [winapi] <code>D3D...</code> type.

@@ -521,6 +521,28 @@
 <span id="520">520</span>
 <span id="521">521</span>
 <span id="522">522</span>
+<span id="523">523</span>
+<span id="524">524</span>
+<span id="525">525</span>
+<span id="526">526</span>
+<span id="527">527</span>
+<span id="528">528</span>
+<span id="529">529</span>
+<span id="530">530</span>
+<span id="531">531</span>
+<span id="532">532</span>
+<span id="533">533</span>
+<span id="534">534</span>
+<span id="535">535</span>
+<span id="536">536</span>
+<span id="537">537</span>
+<span id="538">538</span>
+<span id="539">539</span>
+<span id="540">540</span>
+<span id="541">541</span>
+<span id="542">542</span>
+<span id="543">543</span>
+<span id="544">544</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="kw">crate</span>::<span class="kw-2">*</span>;
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::ctypes</span>::<span class="kw-2">*</span>;
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::d3d</span>::<span class="kw-2">*</span>;
@@ -673,7 +695,7 @@
     <span class="doccomment">/// # let vs = d3dc.compile_from_file(r&quot;test\data\basic.hlsl&quot;, None, None, &quot;vs_main&quot;, &quot;vs_4_0&quot;, d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();</span>
     <span class="doccomment">/// # let vs = d3dc.reflect11(&amp;vs).unwrap();</span>
     <span class="doccomment">/// let desc = vs.get_desc().unwrap();</span>
-    <span class="doccomment">/// assert_eq!(desc.version.shver(), d3d11::ShVer::VertexShader);</span>
+    <span class="doccomment">/// assert_eq!(desc.version.ty(), d3d11::ShVer::VertexShader);</span>
     <span class="doccomment">/// assert_eq!(desc.version.major(), 4);</span>
     <span class="doccomment">/// assert_eq!(desc.version.minor(), 0);</span>
     <span class="doccomment">/// ```</span>
@@ -1043,6 +1065,28 @@
         <span class="number">0</span> <span class="op">!</span><span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="number">0</span>.<span class="ident">IsSampleFrequencyShader</span>() }
     }
 }
+
+<span class="comment">//#cpp2rust ID3D11ShaderReflection                                          = d3d11::ShaderReflection</span>
+
+<span class="comment">//#cpp2rust ID3D11ShaderReflection::GetBitwiseInstructionCount              = d3d11::ShaderReflection::get_bitwise_instruction_count</span>
+<span class="comment">//#cpp2rust ID3D11ShaderReflection::GetConstantBufferByIndex                = d3d11::ShaderReflection::get_constant_buffer_by_index</span>
+<span class="comment">//#cpp2rust ID3D11ShaderReflection::GetConstantBufferByName                 = d3d11::ShaderReflection::get_constant_buffer_by_name</span>
+<span class="comment">//#cpp2rust ID3D11ShaderReflection::GetConversionInstructionCount           = d3d11::ShaderReflection::get_conversion_instruction_count</span>
+<span class="comment">//#cpp2rust ID3D11ShaderReflection::GetDesc                                 = d3d11::ShaderReflection::get_desc</span>
+<span class="comment">//#cpp2rust ID3D11ShaderReflection::GetGSInputPrimitive                     = d3d11::ShaderReflection::get_gs_input_primitive</span>
+<span class="comment">//#cpp2rust ID3D11ShaderReflection::GetInputParameterDesc                   = d3d11::ShaderReflection::get_input_parameter_desc</span>
+<span class="comment">//#cpp2rust ID3D11ShaderReflection::GetMinFeatureLevel                      = d3d11::ShaderReflection::get_min_feature_level</span>
+<span class="comment">//#cpp2rust ID3D11ShaderReflection::GetMovcInstructionCount                 = d3d11::ShaderReflection::get_movc_instruction_count</span>
+<span class="comment">//#cpp2rust ID3D11ShaderReflection::GetMovInstructionCount                  = d3d11::ShaderReflection::get_mov_instruction_count</span>
+<span class="comment">//#cpp2rust ID3D11ShaderReflection::GetNumInterfaceSlots                    = d3d11::ShaderReflection::get_num_interface_slots</span>
+<span class="comment">//#cpp2rust ID3D11ShaderReflection::GetOutputParameterDesc                  = d3d11::ShaderReflection::get_output_parameter_desc</span>
+<span class="comment">//#cpp2rust ID3D11ShaderReflection::GetPatchConstantParameterDesc           = d3d11::ShaderReflection::get_patch_constant_parameter_desc</span>
+<span class="comment">//#cpp2rust ID3D11ShaderReflection::GetRequiresFlags                        = d3d11::ShaderReflection::get_requires_flags</span>
+<span class="comment">//#cpp2rust ID3D11ShaderReflection::GetResourceBindingDesc                  = d3d11::ShaderReflection::get_resource_binding_desc</span>
+<span class="comment">//#cpp2rust ID3D11ShaderReflection::GetResourceBindingDescByName            = d3d11::ShaderReflection::get_resource_binding_desc_by_name</span>
+<span class="comment">//#cpp2rust ID3D11ShaderReflection::GetThreadGroupSize                      = d3d11::ShaderReflection::get_thread_group_size</span>
+<span class="comment">//#cpp2rust ID3D11ShaderReflection::GetVariableByName                       = d3d11::ShaderReflection::get_variable_by_name</span>
+<span class="comment">//#cpp2rust ID3D11ShaderReflection::IsSampleFrequencyShader                 = d3d11::ShaderReflection::is_sample_frequency_shader</span>
 </code></pre></div>
 </section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-search-index-js="../../../../../search-index.js" data-search-js="../../../../../search.js"></div>
 </body></html>

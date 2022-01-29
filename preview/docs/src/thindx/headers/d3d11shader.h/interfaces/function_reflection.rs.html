@@ -425,6 +425,16 @@
 <span id="424">424</span>
 <span id="425">425</span>
 <span id="426">426</span>
+<span id="427">427</span>
+<span id="428">428</span>
+<span id="429">429</span>
+<span id="430">430</span>
+<span id="431">431</span>
+<span id="432">432</span>
+<span id="433">433</span>
+<span id="434">434</span>
+<span id="435">435</span>
+<span id="436">436</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="kw">crate</span>::<span class="kw-2">*</span>;
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::ctypes</span>::<span class="kw-2">*</span>;
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::d3d11</span>::<span class="kw-2">*</span>;
@@ -851,6 +861,16 @@
         <span class="kw unsafe">unsafe</span> { <span class="ident">ShaderReflectionVariable::from_raw</span>(<span class="self">self</span>.<span class="ident">phantom</span>, <span class="ident">ptr</span>) }
     }
 }
+
+<span class="comment">//#cpp2rust ID3D11FunctionReflection                                        = d3d11::FunctionReflection</span>
+
+<span class="comment">//#cpp2rust ID3D11FunctionReflection::GetConstantBufferByIndex              = d3d11::FunctionReflection::get_constant_buffer_by_index</span>
+<span class="comment">//#cpp2rust ID3D11FunctionReflection::GetConstantBufferByName               = d3d11::FunctionReflection::get_constant_buffer_by_name</span>
+<span class="comment">//#cpp2rust ID3D11FunctionReflection::GetDesc                               = d3d11::FunctionReflection::get_desc</span>
+<span class="comment">//#cpp2rust ID3D11FunctionReflection::GetFunctionParameter                  = d3d11::FunctionReflection::get_function_parameter</span>
+<span class="comment">//#cpp2rust ID3D11FunctionReflection::GetResourceBindingDesc                = d3d11::FunctionReflection::get_resource_binding_desc</span>
+<span class="comment">//#cpp2rust ID3D11FunctionReflection::GetResourceBindingDescByName          = d3d11::FunctionReflection::get_resource_binding_desc_by_name</span>
+<span class="comment">//#cpp2rust ID3D11FunctionReflection::GetVariableByName                     = d3d11::FunctionReflection::get_variable_by_name</span>
 </code></pre></div>
 </section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-search-index-js="../../../../../search-index.js" data-search-js="../../../../../search.js"></div>
 </body></html>

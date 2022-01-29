@@ -5,10 +5,12 @@
 <span id="4">4</span>
 <span id="5">5</span>
 <span id="6">6</span>
+<span id="7">7</span>
 </pre><pre class="rust"><code><span class="doccomment">//! Direct3D related types and APIs used across multiple Direct3D versions.</span>
 
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::d3dcommon_h</span>::<span class="kw-2">*</span>;
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::d3dcompiler_h</span>::<span class="kw-2">*</span>;
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::d3d9_h::perf</span>;
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::d3d9caps_h</span>::<span class="kw-2">*</span>;
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::d3d9types_h</span>::<span class="kw-2">*</span>; <span class="comment">// TODO: exclude d3d9::ShaderVersion (conflicts with d3d11::ShaderVersion)</span>
 </code></pre></div>

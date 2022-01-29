@@ -110,6 +110,15 @@
 <span id="109">109</span>
 <span id="110">110</span>
 <span id="111">111</span>
+<span id="112">112</span>
+<span id="113">113</span>
+<span id="114">114</span>
+<span id="115">115</span>
+<span id="116">116</span>
+<span id="117">117</span>
+<span id="118">118</span>
+<span id="119">119</span>
+<span id="120">120</span>
 </pre><pre class="rust"><code><span class="attribute">#![<span class="ident">allow</span>(<span class="ident">dead_code</span>)]</span> <span class="comment">// TODO: remove</span>
 
 <span class="kw">use</span> <span class="ident">winapi::shared::d3d9::IDirect3DStateBlock9</span>;
@@ -221,6 +230,15 @@
 }
 
 <span class="comment">// TODO: test explicit state capturing</span>
+
+
+
+<span class="comment">//#cpp2rust IDirect3DStateBlock9                    = d3d9::StateBlock</span>
+<span class="comment">//#cpp2rust IDirect3DStateBlock9                    = d3d9::IDirect3DStateBlock9Ext</span>
+
+<span class="comment">//#cpp2rust IDirect3DStateBlock9::Apply             = d3d9::IDirect3DStateBlock9Ext::apply</span>
+<span class="comment">//#cpp2rust IDirect3DStateBlock9::Capture           = d3d9::IDirect3DStateBlock9Ext::capture</span>
+<span class="comment">//#cpp2rust IDirect3DStateBlock9::GetDevice         = d3d9::IDirect3DStateBlock9Ext::get_device</span>
 </code></pre></div>
 </section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-search-index-js="../../../../../search-index.js" data-search-js="../../../../../search.js"></div>
 </body></html>

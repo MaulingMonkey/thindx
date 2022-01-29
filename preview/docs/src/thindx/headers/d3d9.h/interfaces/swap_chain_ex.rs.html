@@ -77,6 +77,17 @@
 <span id="76">76</span>
 <span id="77">77</span>
 <span id="78">78</span>
+<span id="79">79</span>
+<span id="80">80</span>
+<span id="81">81</span>
+<span id="82">82</span>
+<span id="83">83</span>
+<span id="84">84</span>
+<span id="85">85</span>
+<span id="86">86</span>
+<span id="87">87</span>
+<span id="88">88</span>
+<span id="89">89</span>
 </pre><pre class="rust"><code><span class="attribute">#![<span class="ident">cfg_attr</span>(<span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;9ex&quot;</span>), <span class="ident">allow</span>(<span class="ident">unused_imports</span>))]</span>
 
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="kw-2">*</span>;
@@ -155,6 +166,17 @@
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;9ex&quot;</span>)]</span> <span class="kw">impl</span> <span class="ident">IDirect3DSwapChain9ExExt</span> <span class="kw">for</span> <span class="ident">mcom::Rc</span><span class="op">&lt;</span><span class="ident">IDirect3DSwapChain9Ex</span><span class="op">&gt;</span>   {}
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;9ex&quot;</span>)]</span> <span class="kw">impl</span> <span class="ident">IDirect3DSwapChain9ExExt</span> <span class="kw">for</span> <span class="ident"><span class="kw">super</span>::SwapChainEx</span>                {}
+
+
+
+<span class="comment">//#cpp2rust IDirect3DSwapChain9Ex                   = d3d9::SwapChainEx</span>
+<span class="comment">//#cpp2rust IDirect3DSwapChain9Ex                   = d3d9::IDirect3DSwapChain9ExExt</span>
+
+<span class="comment">//#cpp2rust IDirect3DSwapChain9Ex::GetDisplayModeEx             = d3d9::IDirect3DSwapChain9ExExt::get_display_mode_ex</span>
+<span class="comment">//#cpp2rust IDirect3DSwapChain9Ex::GetLastPresentCount          = d3d9::IDirect3DSwapChain9ExExt::get_last_present_count</span>
+<span class="comment">//TODO:     XXX: documentation uses &quot;GetPresentStatistics&quot;, but some C++ headers/vtables use &quot;GetPresentStats&quot;</span>
+<span class="comment">//#cpp2rust IDirect3DSwapChain9Ex::GetPresentStatistics         = d3d9::IDirect3DSwapChain9ExExt::get_present_statistics</span>
+<span class="comment">//#cpp2rust IDirect3DSwapChain9Ex::GetPresentStats              = d3d9::IDirect3DSwapChain9ExExt::get_present_statistics</span>
 </code></pre></div>
 </section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-search-index-js="../../../../../search-index.js" data-search-js="../../../../../search.js"></div>
 </body></html>

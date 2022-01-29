@@ -188,6 +188,23 @@
 <span id="187">187</span>
 <span id="188">188</span>
 <span id="189">189</span>
+<span id="190">190</span>
+<span id="191">191</span>
+<span id="192">192</span>
+<span id="193">193</span>
+<span id="194">194</span>
+<span id="195">195</span>
+<span id="196">196</span>
+<span id="197">197</span>
+<span id="198">198</span>
+<span id="199">199</span>
+<span id="200">200</span>
+<span id="201">201</span>
+<span id="202">202</span>
+<span id="203">203</span>
+<span id="204">204</span>
+<span id="205">205</span>
+<span id="206">206</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="kw">crate</span>::<span class="kw-2">*</span>;
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::d3d9</span>::<span class="kw-2">*</span>;
 
@@ -377,6 +394,23 @@
 <span class="comment">// TODO: integration tests</span>
 <span class="comment">// TODO: make set_private_data generic on any data type?  bytemuck data types?</span>
 <span class="comment">// TODO: make get_private_data_inplace generic on bytemuck data types?</span>
+
+
+
+<span class="comment">//#cpp2rust IDirect3DResource9                      = d3d9::Resource</span>
+<span class="comment">//#cpp2rust IDirect3DResource9                      = d3d9::IDirect3DResource9Ext</span>
+
+<span class="comment">//#cpp2rust IDirect3DResource9::FreePrivateData     = d3d9::IDirect3DResource9Ext::free_private_data</span>
+<span class="comment">//#cpp2rust IDirect3DResource9::GetDevice           = d3d9::IDirect3DResource9Ext::get_device</span>
+<span class="comment">//#cpp2rust IDirect3DResource9::GetPriority         = d3d9::IDirect3DResource9Ext::get_priority</span>
+<span class="comment">//#cpp2rust IDirect3DResource9::GetPrivateData      = d3d9::IDirect3DResource9Ext::get_private_data_inplace</span>
+<span class="comment">//TODO:     IDirect3DResource9::GetPrivateData      = d3d9::IDirect3DResource9Ext::get_private_data_com</span>
+<span class="comment">//#cpp2rust IDirect3DResource9::GetType             = d3d9::IDirect3DResource9Ext::get_type</span>
+<span class="comment">//#cpp2rust IDirect3DResource9::PreLoad             = d3d9::IDirect3DResource9Ext::preload</span>
+<span class="comment">//#cpp2rust IDirect3DResource9::SetPriority         = d3d9::IDirect3DResource9Ext::set_priority</span>
+<span class="comment">//#cpp2rust IDirect3DResource9::SetPrivateData      = d3d9::IDirect3DResource9Ext::set_private_data</span>
+<span class="comment">//TODO:     IDirect3DResource9::SetPrivateData      = d3d9::IDirect3DResource9Ext::set_debug_name</span>
+<span class="comment">//TODO:     IDirect3DResource9::SetPrivateData      = d3d9::IDirect3DResource9Ext::set_private_data_com</span>
 </code></pre></div>
 </section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-search-index-js="../../../../../search-index.js" data-search-js="../../../../../search.js"></div>
 </body></html>

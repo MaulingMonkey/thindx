@@ -268,7 +268,7 @@
                 
             </div>
             <div class="column has-background-white p-0">
-                <pre class="has-background-white py-0 px-2">&#x2F;&#x2F;&#x2F; let shver : ShaderVersionType = shader.get_desc().unwrap().version.shver();</pre>
+                <pre class="has-background-white py-0 px-2">&#x2F;&#x2F;&#x2F; let ty : ShaderVersionType = shader.get_desc().unwrap().version.ty();</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -281,7 +281,7 @@
                 
             </div>
             <div class="column has-background-white p-0">
-                <pre class="has-background-white py-0 px-2">&#x2F;&#x2F;&#x2F; assert_eq!(ShVer::PixelShader, shver);</pre>
+                <pre class="has-background-white py-0 px-2">&#x2F;&#x2F;&#x2F; assert_eq!(ShVer::PixelShader, ty);</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -359,7 +359,7 @@
                 
             </div>
             <div class="column has-background-white p-0">
-                <pre class="has-background-white py-0 px-2">&#x2F;&#x2F;&#x2F; *   [d3d11::ShaderVersion::shver]</pre>
+                <pre class="has-background-white py-0 px-2">&#x2F;&#x2F;&#x2F; *   [d3d11::ShaderVersion::ty]</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -957,7 +957,7 @@
                 
             </div>
             <div class="column has-background-white p-0">
-                <pre class="has-background-white py-0 px-2">&#x2F;&#x2F;&#x2F; assert_eq!(version.shver(), ShVer::PixelShader);</pre>
+                <pre class="has-background-white py-0 px-2">&#x2F;&#x2F;&#x2F; assert_eq!(version.ty(), ShVer::PixelShader);</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1152,7 +1152,7 @@
                 
             </div>
             <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">    pub fn shver(&amp;self) -&gt; ShaderVersionType { ShaderVersionType((self.0 &gt;&gt; 16) &amp; 0xFFFF) }</pre>
+                <pre class="has-background-danger-light py-0 px-2">    pub fn ty(&amp;self) -&gt; ShaderVersionType { ShaderVersionType((self.0 &gt;&gt; 16) &amp; 0xFFFF) }</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1295,7 +1295,7 @@
                 
             </div>
             <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">        let (ty, maj, min) = (self.shver(), self.major(), self.minor());</pre>
+                <pre class="has-background-danger-light py-0 px-2">        let (ty, maj, min) = (self.ty(), self.major(), self.minor());</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1399,7 +1399,7 @@
                 
             </div>
             <div class="column has-background-danger-light p-0">
-                <pre class="has-background-danger-light py-0 px-2">            _other                  =&gt; fmt.debug_struct(&quot;ShaderVersion&quot;).field(&quot;shver&quot;, &amp;ty).field(&quot;major&quot;, &amp;maj).field(&quot;minor&quot;, &amp;min).finish()</pre>
+                <pre class="has-background-danger-light py-0 px-2">            _other                  =&gt; fmt.debug_struct(&quot;ShaderVersion&quot;).field(&quot;ty&quot;, &amp;ty).field(&quot;major&quot;, &amp;maj).field(&quot;minor&quot;, &amp;min).finish()</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1464,7 +1464,7 @@
                 
             </div>
             <div class="column has-background-white p-0">
-                <pre class="has-background-white py-0 px-2">&#x2F;&#x2F;#cpp2rust D3D11_SHADER_VERSION_TYPE       = d3d11::ShaderVersionType</pre>
+                <pre class="has-background-white py-0 px-2">&#x2F;&#x2F;#cpp2rust D3D11_SHVER_GET_TYPE            = d3d11::ShaderVersion::ty</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1477,7 +1477,7 @@
                 
             </div>
             <div class="column has-background-white p-0">
-                <pre class="has-background-white py-0 px-2">&#x2F;&#x2F;#cpp2rust D3D11_SHVER_PIXEL_SHADER        = d3d11::ShVer::PixelShader</pre>
+                <pre class="has-background-white py-0 px-2">&#x2F;&#x2F;#cpp2rust D3D11_SHVER_GET_MAJOR           = d3d11::ShaderVersion::major</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1490,7 +1490,7 @@
                 
             </div>
             <div class="column has-background-white p-0">
-                <pre class="has-background-white py-0 px-2">&#x2F;&#x2F;#cpp2rust D3D11_SHVER_VERTEX_SHADER       = d3d11::ShVer::VertexShader</pre>
+                <pre class="has-background-white py-0 px-2">&#x2F;&#x2F;#cpp2rust D3D11_SHVER_GET_MINOR           = d3d11::ShaderVersion::minor</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1503,7 +1503,7 @@
                 
             </div>
             <div class="column has-background-white p-0">
-                <pre class="has-background-white py-0 px-2">&#x2F;&#x2F;#cpp2rust D3D11_SHVER_GEOMETRY_SHADER     = d3d11::ShVer::GeometryShader</pre>
+                <pre class="has-background-white py-0 px-2"></pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1516,7 +1516,7 @@
                 
             </div>
             <div class="column has-background-white p-0">
-                <pre class="has-background-white py-0 px-2">&#x2F;&#x2F;#cpp2rust D3D11_SHVER_HULL_SHADER         = d3d11::ShVer::HullShader</pre>
+                <pre class="has-background-white py-0 px-2">&#x2F;&#x2F;#cpp2rust D3D11_SHADER_VERSION_TYPE       = d3d11::ShaderVersionType</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1529,7 +1529,7 @@
                 
             </div>
             <div class="column has-background-white p-0">
-                <pre class="has-background-white py-0 px-2">&#x2F;&#x2F;#cpp2rust D3D11_SHVER_DOMAIN_SHADER       = d3d11::ShVer::DomainShader</pre>
+                <pre class="has-background-white py-0 px-2"></pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1542,7 +1542,7 @@
                 
             </div>
             <div class="column has-background-white p-0">
-                <pre class="has-background-white py-0 px-2">&#x2F;&#x2F;#cpp2rust D3D11_SHVER_COMPUTE_SHADER      = d3d11::ShVer::ComputeShader</pre>
+                <pre class="has-background-white py-0 px-2">&#x2F;&#x2F;#cpp2rust D3D11_SHVER_PIXEL_SHADER        = d3d11::ShVer::PixelShader</pre>
             </div>
         </div><div class="columns p-0 m-0">
             <div
@@ -1555,12 +1555,77 @@
                 
             </div>
             <div class="column has-background-white p-0">
+                <pre class="has-background-white py-0 px-2">&#x2F;&#x2F;#cpp2rust D3D11_SHVER_VERTEX_SHADER       = d3d11::ShVer::VertexShader</pre>
+            </div>
+        </div><div class="columns p-0 m-0">
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered"
+                id="118">
+                <a href="#118">118</a>
+            </div>
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
+                
+            </div>
+            <div class="column has-background-white p-0">
+                <pre class="has-background-white py-0 px-2">&#x2F;&#x2F;#cpp2rust D3D11_SHVER_GEOMETRY_SHADER     = d3d11::ShVer::GeometryShader</pre>
+            </div>
+        </div><div class="columns p-0 m-0">
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered"
+                id="119">
+                <a href="#119">119</a>
+            </div>
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
+                
+            </div>
+            <div class="column has-background-white p-0">
+                <pre class="has-background-white py-0 px-2">&#x2F;&#x2F;#cpp2rust D3D11_SHVER_HULL_SHADER         = d3d11::ShVer::HullShader</pre>
+            </div>
+        </div><div class="columns p-0 m-0">
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered"
+                id="120">
+                <a href="#120">120</a>
+            </div>
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
+                
+            </div>
+            <div class="column has-background-white p-0">
+                <pre class="has-background-white py-0 px-2">&#x2F;&#x2F;#cpp2rust D3D11_SHVER_DOMAIN_SHADER       = d3d11::ShVer::DomainShader</pre>
+            </div>
+        </div><div class="columns p-0 m-0">
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered"
+                id="121">
+                <a href="#121">121</a>
+            </div>
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
+                
+            </div>
+            <div class="column has-background-white p-0">
+                <pre class="has-background-white py-0 px-2">&#x2F;&#x2F;#cpp2rust D3D11_SHVER_COMPUTE_SHADER      = d3d11::ShVer::ComputeShader</pre>
+            </div>
+        </div><div class="columns p-0 m-0">
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered"
+                id="122">
+                <a href="#122">122</a>
+            </div>
+            <div
+                class="column is-1 is-narrow p-0 has-text-centered has-text-white has-background-white">
+                
+            </div>
+            <div class="column has-background-white p-0">
                 <pre class="has-background-white py-0 px-2">&#x2F;&#x2F;#cpp2rust D3D11_SHVER_RESERVED0           = d3d11::ShVer::Reserved0</pre>
             </div>
         </div></div>
         <footer class="footer">
             <div class="content has-text-centered">
-                <p class="heading">Date: 2022-01-27 16:43</p>
+                <p class="heading">Date: 2022-01-29 08:05</p>
             </div>
         </footer>
     </body>

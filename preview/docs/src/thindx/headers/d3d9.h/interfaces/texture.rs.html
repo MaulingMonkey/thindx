@@ -934,6 +934,42 @@
 <span id="933">933</span>
 <span id="934">934</span>
 <span id="935">935</span>
+<span id="936">936</span>
+<span id="937">937</span>
+<span id="938">938</span>
+<span id="939">939</span>
+<span id="940">940</span>
+<span id="941">941</span>
+<span id="942">942</span>
+<span id="943">943</span>
+<span id="944">944</span>
+<span id="945">945</span>
+<span id="946">946</span>
+<span id="947">947</span>
+<span id="948">948</span>
+<span id="949">949</span>
+<span id="950">950</span>
+<span id="951">951</span>
+<span id="952">952</span>
+<span id="953">953</span>
+<span id="954">954</span>
+<span id="955">955</span>
+<span id="956">956</span>
+<span id="957">957</span>
+<span id="958">958</span>
+<span id="959">959</span>
+<span id="960">960</span>
+<span id="961">961</span>
+<span id="962">962</span>
+<span id="963">963</span>
+<span id="964">964</span>
+<span id="965">965</span>
+<span id="966">966</span>
+<span id="967">967</span>
+<span id="968">968</span>
+<span id="969">969</span>
+<span id="970">970</span>
+<span id="971">971</span>
 </pre><pre class="rust"><code><span class="attribute">#![<span class="ident">allow</span>(<span class="ident">dead_code</span>)]</span> <span class="comment">// TODO: remove</span>
 
 <span class="kw">use</span> <span class="kw">crate</span>::<span class="kw-2">*</span>;
@@ -1869,6 +1905,42 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;t</span><span class="op">&gt;</span> <span class="ident">From</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;t</span> <span class="ident">CubeTexture</span>   <span class="op">&gt;</span> <span class="kw">for</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;t</span> <span class="ident">BaseTexture</span><span class="op">&gt;</span> { <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">t</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;t</span> <span class="ident">CubeTexture</span>      ) -&gt; <span class="self">Self</span> { <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="ident">t</span>) } }
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;t</span><span class="op">&gt;</span> <span class="ident">From</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;t</span> <span class="ident">Texture</span>       <span class="op">&gt;</span> <span class="kw">for</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;t</span> <span class="ident">BaseTexture</span><span class="op">&gt;</span> { <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">t</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;t</span> <span class="ident">Texture</span>          ) -&gt; <span class="self">Self</span> { <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="ident">t</span>) } }
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;t</span><span class="op">&gt;</span> <span class="ident">From</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;t</span> <span class="ident">VolumeTexture</span> <span class="op">&gt;</span> <span class="kw">for</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;t</span> <span class="ident">BaseTexture</span><span class="op">&gt;</span> { <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">t</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;t</span> <span class="ident">VolumeTexture</span>    ) -&gt; <span class="self">Self</span> { <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="ident">t</span>) } }
+
+
+
+<span class="comment">//#cpp2rust IDirect3DBaseTexture9                               = d3d9::BaseTexture</span>
+<span class="comment">//#cpp2rust IDirect3DBaseTexture9                               = d3d9::IDirect3DBaseTexture9Ext</span>
+<span class="comment">//#cpp2rust IDirect3DCubeTexture9                               = d3d9::CubeTexture</span>
+<span class="comment">//#cpp2rust IDirect3DCubeTexture9                               = d3d9::IDirect3DCubeTexture9Ext</span>
+<span class="comment">//#cpp2rust IDirect3DTexture9                                   = d3d9::Texture</span>
+<span class="comment">//#cpp2rust IDirect3DTexture9                                   = d3d9::IDirect3DTexture9Ext</span>
+<span class="comment">//#cpp2rust IDirect3DVolumeTexture9                             = d3d9::VolumeTexture</span>
+<span class="comment">//#cpp2rust IDirect3DVolumeTexture9                             = d3d9::IDirect3DVolumeTexture9Ext</span>
+
+<span class="comment">//#cpp2rust IDirect3DBaseTexture9::GenerateMipSubLevels         = d3d9::IDirect3DBaseTexture9Ext::generate_mip_sub_levels</span>
+<span class="comment">//#cpp2rust IDirect3DBaseTexture9::GetAutoGenFilterType         = d3d9::IDirect3DBaseTexture9Ext::get_auto_gen_filter_type</span>
+<span class="comment">//#cpp2rust IDirect3DBaseTexture9::GetLevelCount                = d3d9::IDirect3DBaseTexture9Ext::get_level_count</span>
+<span class="comment">//#cpp2rust IDirect3DBaseTexture9::GetLOD                       = d3d9::IDirect3DBaseTexture9Ext::get_lod</span>
+<span class="comment">//#cpp2rust IDirect3DBaseTexture9::SetAutoGenFilterType         = d3d9::IDirect3DBaseTexture9Ext::set_auto_gen_filter_type</span>
+<span class="comment">//#cpp2rust IDirect3DBaseTexture9::SetLOD                       = d3d9::IDirect3DBaseTexture9Ext::set_lod</span>
+
+<span class="comment">//#cpp2rust IDirect3DCubeTexture9::AddDirtyRect                 = d3d9::IDirect3DCubeTexture9Ext::add_dirty_rect</span>
+<span class="comment">//#cpp2rust IDirect3DCubeTexture9::GetCubeMapSurface            = d3d9::IDirect3DCubeTexture9Ext::get_cube_map_surface</span>
+<span class="comment">//#cpp2rust IDirect3DCubeTexture9::GetLevelDesc                 = d3d9::IDirect3DCubeTexture9Ext::get_level_desc</span>
+<span class="comment">//#cpp2rust IDirect3DCubeTexture9::LockRect                     = d3d9::IDirect3DCubeTexture9Ext::lock_rect_unchecked</span>
+<span class="comment">//#cpp2rust IDirect3DCubeTexture9::UnlockRect                   = d3d9::IDirect3DCubeTexture9Ext::unlock_rect</span>
+
+<span class="comment">//#cpp2rust IDirect3DTexture9::AddDirtyRect                     = d3d9::IDirect3DTexture9Ext::add_dirty_rect</span>
+<span class="comment">//#cpp2rust IDirect3DTexture9::GetLevelDesc                     = d3d9::IDirect3DTexture9Ext::get_level_desc</span>
+<span class="comment">//#cpp2rust IDirect3DTexture9::GetSurfaceLevel                  = d3d9::IDirect3DTexture9Ext::get_surface_level</span>
+<span class="comment">//#cpp2rust IDirect3DTexture9::LockRect                         = d3d9::IDirect3DTexture9Ext::lock_rect_unchecked</span>
+<span class="comment">//#cpp2rust IDirect3DTexture9::UnlockRect                       = d3d9::IDirect3DTexture9Ext::unlock_rect</span>
+
+<span class="comment">//#cpp2rust IDirect3DVolumeTexture9::AddDirtyBox                = d3d9::IDirect3DVolumeTexture9Ext::add_dirty_box</span>
+<span class="comment">//#cpp2rust IDirect3DVolumeTexture9::GetLevelDesc               = d3d9::IDirect3DVolumeTexture9Ext::get_level_desc</span>
+<span class="comment">//#cpp2rust IDirect3DVolumeTexture9::GetVolumeLevel             = d3d9::IDirect3DVolumeTexture9Ext::get_volume_level</span>
+<span class="comment">//#cpp2rust IDirect3DVolumeTexture9::LockBox                    = d3d9::IDirect3DVolumeTexture9Ext::lock_box_unchecked</span>
+<span class="comment">//#cpp2rust IDirect3DVolumeTexture9::UnlockBox                  = d3d9::IDirect3DVolumeTexture9Ext::unlock_box</span>
 </code></pre></div>
 </section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-search-index-js="../../../../../search-index.js" data-search-js="../../../../../search.js"></div>
 </body></html>

@@ -38,6 +38,12 @@
 <span id="37">37</span>
 <span id="38">38</span>
 <span id="39">39</span>
+<span id="40">40</span>
+<span id="41">41</span>
+<span id="42">42</span>
+<span id="43">43</span>
+<span id="44">44</span>
+<span id="45">45</span>
 </pre><pre class="rust"><code><span class="attribute">#![<span class="ident">warn</span>(<span class="ident">clippy::undocumented_unsafe_blocks</span>)]</span>
 
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::AsSafe</span>;
@@ -77,6 +83,12 @@
     };
     <span class="macro">debug_assert_eq!</span>(<span class="number">1</span>, <span class="ident">rc</span>, <span class="string">&quot;this wasn&#39;t the final object&quot;</span>);
 }
+
+<span class="comment">//#cpp2rust IUnknown                    = Unknown</span>
+
+<span class="comment">//#cpp2rust IUnknown::AddRef            = mcom::Rc::clone</span>
+<span class="comment">//#cpp2rust IUnknown::Release           = mcom::Rc::drop</span>
+<span class="comment">//#cpp2rust IUnknown::QueryInterface    = mcom::Rc::try_cast</span>
 </code></pre></div>
 </section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="thindx" data-search-index-js="../../../../search-index.js" data-search-js="../../../../search.js"></div>
 </body></html>
