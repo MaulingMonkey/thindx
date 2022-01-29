@@ -5,6 +5,10 @@
 use crate::Unknown;
 
 mods! {
+    inl mod functions {
+        pub mod perf;
+    }
+
     inl mod interfaces {
         inl mod device;
         inl mod deviceex;

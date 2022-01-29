@@ -15,7 +15,7 @@
 //! | [unknwn.h](const@unknwn_h) | ✔️ 1 of 1 |   |   |   |   |   |
 //! | [d3dcommon.h](const@d3dcommon_h) | ⚠️ 2 of 3 | ✔️ 1 of 1 | ✔️ 22 of 22 |   | ⚠️ 555 of 575 | ❌ 0 of 4 |
 //! | [d3dcompiler.h](const@d3dcompiler_h) |   | ✔️ 1 of 1 | ✔️ 2 of 2 |   | ⚠️ 60 of 71 |   |
-//! | [d3d9.h](const@d3d9_h) | ⚠️ 20 of 24 |   |   | ⚠️ 2 of 9 | ⚠️ 63 of 72 | ✔️ 3 of 3 |
+//! | [d3d9.h](const@d3d9_h) | ⚠️ 20 of 24 |   |   | ✔️ 9 of 9 | ⚠️ 63 of 72 | ✔️ 3 of 3 |
 //! | [d3d9caps.h](const@d3d9caps_h) |   | ⚠️ 3 of 5 |   |   | ⚠️ 213 of 249 |   |
 //! | [d3d9types.h](const@d3d9types_h) |   | ⚠️ 19 of 71 | ⚠️ 40 of 54 |   | ⚠️ 508 of 844 | ⚠️ 8 of 20 |
 //! | [d3d11shader.h](const@d3d11shader_h) | ✔️ 12 of 12 | ✔️ 9 of 9 | ✔️ 1 of 1 |   | ⚠️ 16 of 17 | ✔️ 3 of 3 |
@@ -1100,13 +1100,13 @@ pub const d3dcompiler_h : cxx_header = cxx_header;
 ///
 /// ### C++ Functions → Rust Fns
 ///
-/// [`D3DPERF_BeginEvent`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_beginevent) →&nbsp;❌ <br>
-/// [`D3DPERF_EndEvent`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_endevent) →&nbsp;❌ <br>
-/// [`D3DPERF_GetStatus`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_getstatus) →&nbsp;❌ <br>
-/// [`D3DPERF_QueryRepeatFrame`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_queryrepeatframe) →&nbsp;❌ <br>
-/// [`D3DPERF_SetMarker`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_setmarker) →&nbsp;❌ <br>
-/// [`D3DPERF_SetOptions`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_setoptions) →&nbsp;❌ <br>
-/// [`D3DPERF_SetRegion`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_setregion) →&nbsp;❌ <br>
+/// [`D3DPERF_BeginEvent`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_beginevent)&nbsp;→ [`d3d::perf::begin_event`], [`d3d::perf::event_scope`], [`d3d::perf::event_scope_if`] <br>
+/// [`D3DPERF_EndEvent`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_endevent)&nbsp;→ [`d3d::perf::EventScope::close_unchecked`], [`d3d::perf::EventScope::close`], [`d3d::perf::EventScope::drop`], [`d3d::perf::end_event`] <br>
+/// [`D3DPERF_GetStatus`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_getstatus)&nbsp;→ [`d3d::perf::get_status`] <br>
+/// [`D3DPERF_QueryRepeatFrame`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_queryrepeatframe)&nbsp;→ [`d3d::perf::query_repeat_frame`] <br>
+/// [`D3DPERF_SetMarker`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_setmarker)&nbsp;→ [`d3d::perf::set_marker`] <br>
+/// [`D3DPERF_SetOptions`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_setoptions)&nbsp;→ [`d3d::perf::set_options`] <br>
+/// [`D3DPERF_SetRegion`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_setregion)&nbsp;→ [`d3d::perf::set_region`] <br>
 /// [`Direct3DCreate9`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-direct3dcreate9)&nbsp;→ [`d3d9::IDirect3D9Ext::create`] <br>
 /// [`Direct3DCreate9Ex`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-direct3dcreate9ex)&nbsp;→ [`d3d9::IDirect3D9ExExt::create_ex`] <br>
 /// ### C++ Constants → Rust Constants

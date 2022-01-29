@@ -325,7 +325,16 @@ fn file_doc_comments(path: &Path, text: &str) -> Result<(), ()> {
                     }
 
                     // TODO: better parsing of self
-                    if rest.starts_with("()") || rest.starts_with("(self)") || rest.starts_with("(&self)") || rest.starts_with("(&'s self)") || rest.starts_with("(&'lr self)") || rest.starts_with("(&mut self)") {
+                    let self_only =
+                        rest.starts_with("()") ||
+                        rest.starts_with("(self)") ||
+                        rest.starts_with("(mut self)") ||
+                        rest.starts_with("(&self)") ||
+                        rest.starts_with("(&'s self)") ||
+                        rest.starts_with("(&'lr self)") ||
+                        rest.starts_with("(&mut self)") ||
+                    false;
+                    if self_only {
                         s.on_comment_end(path, idx, Some(no));
                         continue;
                     }
