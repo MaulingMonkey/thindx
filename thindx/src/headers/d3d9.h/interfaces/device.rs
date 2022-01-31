@@ -2418,6 +2418,40 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         Ok(value)
     }
 
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-gettransform)\]
+    /// IDirect3DDevice9::GetTransform
+    ///
+    /// Gets a single device transform.
+    ///
+    /// May fail for pure devices.
+    ///
+    /// ### Examples
+    ///
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_pure();
+    /// let m = device.get_transform(d3d::TS::View).unwrap();
+    /// assert_eq!(m.m, d3d::Matrix::identity().m);
+    ///
+    /// let m = device.get_transform(d3d::TS::world_matrix(255)).unwrap();
+    /// assert_eq!(m.m, d3d::Matrix::identity().m);
+    ///
+    /// assert_eq!(D3DERR::INVALIDCALL, device.get_transform(d3d::TS::from_unchecked(0xFFFFFFF)));
+    /// assert_eq!(D3DERR::INVALIDCALL, device.get_transform(d3d::TS::from_unchecked(0x0FFFF00)));
+    /// assert_eq!(D3DERR::INVALIDCALL, device.get_transform(d3d::TS::from_unchecked(0x1000000)));
+    /// assert_eq!(D3DERR::INVALIDCALL, device.get_transform(d3d::TS::from_unchecked(0x10000FF)));
+    /// ```
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]   If the specified transform state type is invalid.
+    /// *   Ok([d3d::Matrix])
+    fn get_transform(&self, ts: impl Into<TransformStateType>) -> Result<d3d::Matrix, MethodError> {
+        let mut matrix = unsafe { std::mem::zeroed() };
+        let hr = unsafe { self.as_winapi().GetTransform(ts.into().into(), &mut matrix) };
+        MethodError::check("IDirect3DDevice9::GetTransform", hr)?;
+        Ok(matrix.into())
+    }
+
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getvertexdeclaration)\]
     /// IDirect3DDevice9::GetVertexDeclaration
     ///
@@ -3683,7 +3717,7 @@ pub struct RgnData {
 //#cpp2rust IDirect3DDevice9::GetTexture                        = d3d9::IDirect3DDevice9Ext::get_texture
 //TODO:     IDirect3DDevice9::GetTextureStageState              = d3d9::IDirect3DDevice9Ext::get_texture_stage_state
 //#cpp2rust IDirect3DDevice9::GetTextureStageState              = d3d9::IDirect3DDevice9Ext::get_texture_stage_state_untyped
-//TODO:     IDirect3DDevice9::GetTransform                      = d3d9::IDirect3DDevice9Ext::get_transform
+//#cpp2rust IDirect3DDevice9::GetTransform                      = d3d9::IDirect3DDevice9Ext::get_transform
 //#cpp2rust IDirect3DDevice9::GetVertexDeclaration              = d3d9::IDirect3DDevice9Ext::get_vertex_declaration
 //#cpp2rust IDirect3DDevice9::GetVertexShader                   = d3d9::IDirect3DDevice9Ext::get_vertex_shader
 //#cpp2rust IDirect3DDevice9::GetVertexShaderConstantB          = d3d9::IDirect3DDevice9Ext::get_vertex_shader_constant_b
