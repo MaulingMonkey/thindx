@@ -8,12 +8,12 @@ use std::fmt::{self, Debug, Formatter};
 
 
 
-//#allow_freeform_headers
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dformat)\] D3DFORMAT
 ///
 /// Enumeration cases are labeled in native endian.
 ///
-/// ### RGBA Color Formats
+/// <h3>RGBA Color Formats</h3>
+///
 /// | Format                    | Bits/Pixel  | Back Buffer | Display | Native Endian Bits  |
 /// | ------------------------- | ----------- | ----------- | ------- | ------------------- |
 /// | [`Format::UNKNOWN`]       | <span style="opacity: 25%">N/A</span> | <span style="opacity: 25%">N/A</span> | <span style="opacity: 25%">N/A</span> | <span style="opacity: 25%">N/A</span>
@@ -46,7 +46,8 @@ use std::fmt::{self, Debug, Formatter};
 /// | <code style="font-weight: bold; opacity: 100%">aaaa</code>    | Alpha channel bits
 /// | <code style="font-weight: bold; opacity:  33%">xxxx</code>    | Unused channel bits
 ///
-/// ### Non-RGBA Color Formats
+/// <h3>Non-RGBA Color Formats</h3>
+///
 /// | Format                    | Bits/Pixel | Native Endian Bits   |
 /// | ------------------------- | ----- | ------------------------- |
 /// | [`Format::A8P8`]          | 16    | <code style="font-weight: bold"><span style="opacity: 100%">aaaaaaaa</span><span style="color: purple">pppppppp</span></code>
@@ -62,7 +63,8 @@ use std::fmt::{self, Debug, Formatter};
 /// | <code style="font-weight: bold; color: purple">pppp</code>    | Pallete index bits
 /// | <code style="font-weight: bold; color: orange">llll</code>    | Luminance bits (red+green+blue?)
 ///
-/// ### Compressed Color Formats
+/// <h3>Compressed Color Formats</h3>
+///
 /// | [X3TC] Formats            | Bits/Block | Block  | BC# | Alpha |
 /// | ------------------------- | ---- | ------ | --- | ----- |
 /// | [`Format::DXT1`]          |  64  | 4x4    | BC1 | 1-bit
@@ -73,7 +75,8 @@ use std::fmt::{self, Debug, Formatter};
 ///
 /// [X3TC]:             https://en.wikipedia.org/wiki/X3_Texture_Compression
 ///
-/// ### Depth/Stencil Formats
+/// <h3>Depth/Stencil Formats</h3>
+///
 /// | Format                    | Bits/Pixel    | Native Endian Bits |
 /// | ------------------------- | ------------- | ------------------ |
 /// | [`Format::D16_LOCKABLE`]  | 16            | <code style="font-weight: bold">dddddddddddddddd</code>
@@ -89,7 +92,8 @@ use std::fmt::{self, Debug, Formatter};
 /// | [`Format::D32_LOCKABLE`]  | 32            | <code style="font-weight: bold">dddddddddddddddddddddddddddddddd</code>
 /// | [`Format::X8_LOCKABLE`]   | 8             | <code style="font-weight: bold; color: red">ssssssss</code>
 ///
-/// ### Data Formats
+/// <h3>Data Formats</h3>
+///
 /// | Format                    | Bits/Element  |
 /// | ------------------------- | ------------- |
 /// | [`Format::BINARYBUFFER`]  | <span style="opacity: 25%">N/A</span> |
@@ -97,7 +101,8 @@ use std::fmt::{self, Debug, Formatter};
 /// | [`Format::INDEX16`]       | 16            |
 /// | [`Format::INDEX32`]       | 32            |
 ///
-/// ### Uncategorized Formats
+/// <h3>Uncategorized Formats</h3>
+///
 /// | Format                    |
 /// | ------------------------- |
 /// | [`Format::UYVY`]          |
