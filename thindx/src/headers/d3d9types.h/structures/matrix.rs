@@ -11,7 +11,7 @@ use std::ops::{Deref, DerefMut};
 ///
 /// Defines a 4x4-component [f32] matrix.
 #[derive(Clone, Copy, Debug)]
-#[derive(Default, Pod, Zeroable)]
+#[derive(Pod, Zeroable)]
 #[repr(C)] pub struct Matrix {
     pub m: [[f32; 4]; 4],
 }
@@ -24,6 +24,17 @@ impl From<Matrix> for D3DMATRIX { fn from(value: Matrix   ) -> Self { unsafe { s
 test_layout! { Matrix => D3DMATRIX { m => m } }
 
 impl Matrix {
+    /// A matrix filled with `0`s.  A poor default: consider [`Matrix::identity`] instead.
+    pub const fn zeroed() -> Self {
+        Self { m: [
+            [0.0, 0.0, 0.0, 0.0],
+            [0.0, 0.0, 0.0, 0.0],
+            [0.0, 0.0, 0.0, 0.0],
+            [0.0, 0.0, 0.0, 0.0],
+        ]}
+    }
+
+    /// A matrix filled with `1` on the diagonal, `0` otherwise.
     pub const fn identity() -> Self {
         Self { m: [
             [1.0, 0.0, 0.0, 0.0],
@@ -33,5 +44,8 @@ impl Matrix {
         ]}
     }
 }
+
+// TODO: matrix indexing ops?
+// TODO: matrix math ops ala d3dvec.inl?
 
 //#cpp2rust D3DMATRIX = d3d::Matrix
