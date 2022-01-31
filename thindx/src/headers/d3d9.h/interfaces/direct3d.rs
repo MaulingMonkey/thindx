@@ -475,8 +475,8 @@ pub trait IDirect3D9Ext : AsSafe<IDirect3D9> + Sized {
     ///
     /// ### Arguments
     ///
-    /// * `adapter` - the adapter/monitor to query modes for
-    /// * `format` - the adapter format to query modes for.  `Format::X8R8G8B8` likely works, many other formats likely don't.
+    /// *   `adapter`   - the adapter/monitor to query modes for
+    /// *   `format`    - the adapter format to query modes for.  `Format::X8R8G8B8` likely works, many other formats likely don't.
     ///
     /// ### Returns
     ///
@@ -504,7 +504,7 @@ pub trait IDirect3D9Ext : AsSafe<IDirect3D9> + Sized {
     ///
     /// ### See Also
     ///
-    /// * [enum_adapter_modes]
+    /// *   [enum_adapter_modes]
     ///
     /// [enum_adapter_modes]:       #method.enum_adapter_modes
     fn get_adapter_mode_count(&self, adapter: AdapterIndex, format: impl Into<Format>) -> ModeIndex {

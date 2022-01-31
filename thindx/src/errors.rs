@@ -58,8 +58,8 @@ use winapi::shared::winerror::*;
 
 /// `0xA7D8....` • **T**hin**DX** [ErrorKind]s
 ///
-/// * `0xA.......`  - **S**everity and **C**ustomer bits for [HRESULT](https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-erref/0642cb2f-2075-4469-918c-4441e69c548a)s
-/// * `0x.7D8....`  - **T**hin **DX** error codes
+/// *   `0xA.......`  - **S**everity and **C**ustomer bits for [HRESULT](https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-erref/0642cb2f-2075-4469-918c-4441e69c548a)s
+/// *   `0x.7D8....`  - **T**hin **DX** error codes
 pub mod THINERR {
     use super::*;
 

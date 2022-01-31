@@ -104,7 +104,7 @@ pub(crate) trait LibraryExt : Sized + From<Library> + Into<Library> {
 
     /// ### ⚠️ Safety ⚠️
     ///
-    /// * `hmodule` should be a permanently loaded, valid module
+    /// *   `hmodule` should be a permanently loaded, valid module
     unsafe fn from_hmodule(hmodule: HMODULE) -> Option<Self> {
         if hmodule.is_null() {
             None

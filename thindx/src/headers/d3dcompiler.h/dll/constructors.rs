@@ -90,8 +90,8 @@ impl Compiler {
     /// | Windows Server 2008 R2    | ⚠️ Requires [KB2533623](https://support.microsoft.com/kb/2533623)
     /// | Windows Server 2008       | ⚠️ Requires [KB2533623](https://support.microsoft.com/kb/2533623)
     /// | Windows Server 2003       | ❌ Not supported
-    pub fn load_system(verison: impl CompilerLoadSysemVersion) -> Result<Self, std::io::Error> {
-        Self::load_impl(verison.try_load()?)
+    pub fn load_system(version: impl CompilerLoadSysemVersion) -> Result<Self, std::io::Error> {
+        Self::load_impl(version.try_load()?)
     }
 
     fn load_impl(lib: minidl::Library) -> Result<Self, std::io::Error> {

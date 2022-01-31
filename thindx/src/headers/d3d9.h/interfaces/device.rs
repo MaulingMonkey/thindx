@@ -343,12 +343,12 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///
     /// ### Returns
     ///
-    /// * [D3DERR::INVALIDCALL]     if `rects.len()` > `u32::MAX`
-    /// * [D3DERR::INVALIDCALL]     if all non-`rects` parameters were `None`
-    /// * [D3DERR::INVALIDCALL]     if `color`   was `Some(...)` without a render target being bound
-    /// * [D3DERR::INVALIDCALL]     if `depth`   was `Some(...)` without a depth buffer being bound
-    /// * [D3DERR::INVALIDCALL]     if `stencil` was `Some(...)` without a stencil buffer being bound
-    /// * `Ok(())`                  otherwise
+    /// *   [D3DERR::INVALIDCALL]   if `rects.len()` > `u32::MAX`
+    /// *   [D3DERR::INVALIDCALL]   if all non-`rects` parameters were `None`
+    /// *   [D3DERR::INVALIDCALL]   if `color`   was `Some(...)` without a render target being bound
+    /// *   [D3DERR::INVALIDCALL]   if `depth`   was `Some(...)` without a depth buffer being bound
+    /// *   [D3DERR::INVALIDCALL]   if `stencil` was `Some(...)` without a stencil buffer being bound
+    /// *   `Ok(())`                otherwise
     fn clear(&self, rects: Option<&[Rect]>, color: Option<Color>, depth: Option<f32>, stencil: Option<u32>) -> Result<(), MethodError> {
         // TODO: more clear docs
         // TODO: conversion traits for params?
@@ -376,10 +376,10 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///
     /// ### Returns
     ///
-    /// * [D3DERR::INVALIDCALL]     if `surface` isn't from [Pool::Default] ?
-    /// * [D3DERR::INVALIDCALL]     if `surface` isn't a supported format ?
-    /// * [D3DERR::INVALIDCALL]     if `rect` exceeds the bounds of the surface
-    /// * `Ok(())`                  on success
+    /// *   [D3DERR::INVALIDCALL]     if `surface` isn't from [Pool::Default] ?
+    /// *   [D3DERR::INVALIDCALL]     if `surface` isn't a supported format ?
+    /// *   [D3DERR::INVALIDCALL]     if `rect` exceeds the bounds of the surface
+    /// *   `Ok(())`                  on success
     fn color_fill(&self, surface: &Surface, rect: Option<Rect>, color: impl Into<Color>) -> Result<(), MethodError> {
         let rect = rect.map(RECT::from);
         let rect = rect.as_ref().map_or(null(), |r| r);
@@ -405,16 +405,16 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///
     /// ### Returns
     ///
-    /// * [D3DERR::NOTAVAILABLE]
-    /// * [D3DERR::DEVICELOST]
-    /// * [D3DERR::INVALIDCALL]
-    /// * [D3DERR::OUTOFVIDEOMEMORY]
-    /// * [E::OUTOFMEMORY]
-    /// * Ok([SwapChain])
+    /// *   [D3DERR::NOTAVAILABLE]
+    /// *   [D3DERR::DEVICELOST]
+    /// *   [D3DERR::INVALIDCALL]
+    /// *   [D3DERR::OUTOFVIDEOMEMORY]
+    /// *   [E::OUTOFMEMORY]
+    /// *   Ok([SwapChain])
     ///
     /// ### See Also
     ///
-    /// * [Presenting Multiple Views in Windowed Mode (Direct3D 9)](https://docs.microsoft.com/en-us/windows/desktop/direct3d9/presenting-multiple-views-in-windowed-mode)
+    /// *   [Presenting Multiple Views in Windowed Mode (Direct3D 9)](https://docs.microsoft.com/en-us/windows/desktop/direct3d9/presenting-multiple-views-in-windowed-mode)
     ///
     /// [create_device]:            #method.create_device
     unsafe fn create_additional_swap_chain(&self, presentation_parameters: &mut D3DPRESENT_PARAMETERS) -> Result<SwapChain, MethodError> {
@@ -851,11 +851,12 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// *   [E::OUTOFMEMORY]            if allocation failed (driver or d3d runtime)
     /// *   [THINERR::ALLOC_OVERFLOW]   if allocation rejected by thindx to avoid possible UB
     /// *   Ok([VertexBuffer])
-    fn create_vertex_buffer(&self, length: u32, usage: impl Into<Usage>, fvf: impl Into<FVF>, pool: impl Into<Pool>, _shared_handle: impl SharedHandleParam) -> Result<VertexBuffer, MethodError> {
+    fn create_vertex_buffer(&self, length: u32, usage: impl Into<Usage>, fvf: impl Into<FVF>, pool: impl Into<Pool>, shared_handle: impl SharedHandleParam) -> Result<VertexBuffer, MethodError> {
         // !0 will fail OUTOFMEMORY
         // !0/2 spammed will fail OUTOFVIDEOMEMORY
         // !0-4 spammed will "succeed", hinting at an arithmetic overflow within d3d or the driver
         if length > MAX_BUFFER_ALLOC { return Err(MethodError("IDirect3DDevice9Ext::create_vertex_buffer", THINERR::ALLOC_OVERFLOW)); }
+        let _ = shared_handle;
 
         let mut buffer = null_mut();
         let hr = unsafe { self.as_winapi().CreateVertexBuffer(length, usage.into().into(), fvf.into().into(), pool.into().into(), &mut buffer, null_mut()) };
@@ -895,12 +896,12 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// *   [E::OUTOFMEMORY]            if allocation failed (driver or d3d runtime)
     /// *   [THINERR::ALLOC_OVERFLOW]   if allocation rejected by thindx to avoid possible UB
     /// *   Ok([VertexBuffer])
-    fn create_vertex_buffer_from<V: Pod>(&self, data: &[V], usage: impl Into<Usage>, fvf: impl Into<FVF>, pool: impl Into<Pool>, _shared_handle: impl SharedHandleParam) -> Result<VertexBuffer, MethodError> {
+    fn create_vertex_buffer_from<V: Pod>(&self, data: &[V], usage: impl Into<Usage>, fvf: impl Into<FVF>, pool: impl Into<Pool>, shared_handle: impl SharedHandleParam) -> Result<VertexBuffer, MethodError> {
         let bytes = std::mem::size_of_val(data);
         let bytes32 : u32 = bytes.try_into().map_err(|_| MethodError("IDirect3DDevice9Ext::create_vertex_buffer_from", THINERR::ALLOC_OVERFLOW))?;
         let usage = usage.into();
         let lock = if usage.into() & Usage::Dynamic.into() != 0 { Lock::NoOverwrite } else { Lock::None };
-        let vb = self.create_vertex_buffer(bytes32, usage, fvf, pool, _shared_handle)?;
+        let vb = self.create_vertex_buffer(bytes32, usage, fvf, pool, shared_handle)?;
         unsafe {
             let dst = vb.lock_unchecked(0, 0, lock)?;
             std::ptr::copy_nonoverlapping(data.as_ptr() as *const u8, dst.cast(), bytes);
@@ -1366,9 +1367,9 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///
     /// ### Returns
     ///
-    /// * <span style="inaccurate">[D3DERR::INVALIDCALL] ...?</span>
-    /// * Ok(Some([Surface]))       the render target bound to that index
-    /// * Ok(None)                  no render target was bound to that index
+    /// *   <span style="inaccurate">[D3DERR::INVALIDCALL] ...?</span>
+    /// *   Ok(Some([Surface]))       the render target bound to that index
+    /// *   Ok(None)                  no render target was bound to that index
     ///
     /// [Multiple Render Targets (Direct3D 9)]:         https://docs.microsoft.com/en-us/windows/win32/direct3d9/multiple-render-targets
     fn get_depth_stencil_surface(&self) -> Result<Option<Surface>, MethodError> {
@@ -1840,10 +1841,10 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///
     /// This function may crash if no palette was previously set!
     ///
-    /// * Windows version:      `10.0.19041.630`
-    /// * `d3d9.dll` version:   `10.0.19041.546`
-    /// * Driver version:       `24.20.11026.2001`
-    /// * Driver name:          `C:\Windows\System32\DriverStore\FileRepository\u0332836.inf_amd64_9f6b5ef5a1aed97e\B332771\aticfx64.dll,...`
+    /// *   Windows version:      `10.0.19041.630`
+    /// *   `d3d9.dll` version:   `10.0.19041.546`
+    /// *   Driver version:       `24.20.11026.2001`
+    /// *   Driver name:          `C:\Windows\System32\DriverStore\FileRepository\u0332836.inf_amd64_9f6b5ef5a1aed97e\B332771\aticfx64.dll,...`
     ///
     /// ### Returns
     ///
@@ -2083,9 +2084,9 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///
     /// ### Returns
     ///
-    /// * [D3DERR]::???             `render_target_index` > [Caps].NumSimultaneousRTs ?
-    /// * Ok(Some([Surface]))       the render target bound to that index
-    /// * Ok(None)                  no render target was bound to that index
+    /// *   [D3DERR]::???             `render_target_index` > [Caps].NumSimultaneousRTs ?
+    /// *   Ok(Some([Surface]))       the render target bound to that index
+    /// *   Ok(None)                  no render target was bound to that index
     ///
     /// [Multiple Render Targets (Direct3D 9)]:         https://docs.microsoft.com/en-us/windows/win32/direct3d9/multiple-render-targets
     fn get_render_target(&self, render_target_index: u32) -> Result<Option<Surface>, MethodError> {
@@ -2800,11 +2801,11 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///
     /// ### Returns
     ///
-    /// * [D3DERR::DEVICELOST]
-    /// * [D3DERR::DEVICEREMOVED]
-    /// * [D3DERR::DRIVERINTERNALERROR]
-    /// * [D3DERR::OUTOFVIDEOMEMORY]
-    /// * Ok(())
+    /// *   [D3DERR::DEVICELOST]
+    /// *   [D3DERR::DEVICEREMOVED]
+    /// *   [D3DERR::DRIVERINTERNALERROR]
+    /// *   [D3DERR::OUTOFVIDEOMEMORY]
+    /// *   Ok(())
     unsafe fn reset(&self, presentation_parameters: &mut D3DPRESENT_PARAMETERS) -> Result<(), MethodError> {
         let hr = unsafe { self.as_winapi().Reset(presentation_parameters) };
         MethodError::check("IDirect3DDevice9::Reset", hr)
@@ -2840,8 +2841,8 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///
     /// ### Returns
     ///
-    /// * [D3DERR::INVALIDCALL]         if `depth_stencil_surface == Some(surface)` and `surface.usage() != Usage::DepthStencil`
-    /// * `Ok(())`                      if the depth stencil was successfully (un)bound
+    /// *   [D3DERR::INVALIDCALL]         if `depth_stencil_surface == Some(surface)` and `surface.usage() != Usage::DepthStencil`
+    /// *   `Ok(())`                      if the depth stencil was successfully (un)bound
     fn set_depth_stencil_surface(&self, depth_stencil_surface: Option<&Surface>) -> Result<(), MethodError> {
         let ds = depth_stencil_surface.map_or(null_mut(), |ds| ds.as_raw());
         let hr = unsafe { self.as_winapi().SetDepthStencilSurface(ds) };
@@ -3239,9 +3240,9 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///
     /// ### Returns
     ///
-    /// * [D3DERR::INVALIDCALL]         if `render_target_index == 0` and `render_target == None`
-    /// * [D3DERR::INVALIDCALL]         if `render_target == Some(surface)` and `surface.usage() != Usage::RenderTarget`
-    /// * `Ok(())`                      if the render target was successfully bound
+    /// *   [D3DERR::INVALIDCALL]         if `render_target_index == 0` and `render_target == None`
+    /// *   [D3DERR::INVALIDCALL]         if `render_target == Some(surface)` and `surface.usage() != Usage::RenderTarget`
+    /// *   `Ok(())`                      if the render target was successfully bound
     fn set_render_target(&self, render_target_index: u32, render_target: Option<&Surface>) -> Result<(), MethodError> {
         let rt = render_target.map_or(null_mut(), |rt| rt.as_raw());
         let hr = unsafe { self.as_winapi().SetRenderTarget(render_target_index, rt) };
