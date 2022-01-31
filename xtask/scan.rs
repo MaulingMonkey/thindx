@@ -22,18 +22,31 @@ fn dir(path: &Path) -> Result<(), ()> {
 }
 
 fn file(path: &Path) -> Result<(), ()> {
+    let name = path.file_name().unwrap_or_default().to_string_lossy();
+    let name = &*name;
+
+    if name.ends_with(".rs") {
+        file_rs(path)
+    } else if name.ends_with(".md") {
+        Ok(())
+    } else if name.ends_with(".txt") {
+        Ok(())
+    } else {
+        panic!("xtask::scan::file: unexpected extension for `{name}`");
+    }
+}
+
+fn file_rs(path: &Path) -> Result<(), ()> {
     let file = std::fs::read_to_string(path).unwrap_or_else(|err| fatal!("failed to read {}: {}", path.display(), err));
 
     let errors =
-        file_doc_comments(path, &file).is_err() |
+        file_rs_doc_comments(path, &file).is_err() |
         false;
 
     if errors { Err(()) } else { Ok(()) }
 }
 
-
-
-fn file_doc_comments(path: &Path, text: &str) -> Result<(), ()> {
+fn file_rs_doc_comments(path: &Path, text: &str) -> Result<(), ()> {
     // skip validating comments of these free-form / generated files
     let skip = ["_examples.rs", "_headers.rs", "_lib.rs"];
     let skip = path.file_name().map_or(false, |file_name| skip.iter().copied().any(|n| file_name == n));
