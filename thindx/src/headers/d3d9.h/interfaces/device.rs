@@ -152,9 +152,7 @@ unsafe impl AsSafe<IDirect3DDevice9 > for Device { fn as_safe(&self) -> &IDirect
 /// | [set_pixel_shader](Self::set_pixel_shader)                                | [SetPixelShader]              | Sets the current pixel shader to a previously created pixel shader.
 /// | [set_pixel_shader_constant_b](Self::set_pixel_shader_constant_b)          | [SetPixelShaderConstantB]     | Sets a Boolean shader constant.
 /// | [set_pixel_shader_constant_f](Self::set_pixel_shader_constant_f)          | [SetPixelShaderConstantF]     | Sets a floating-point shader constant.
-/// | [set_pixel_shader_constant_fv](Self::set_pixel_shader_constant_fv)        | [SetPixelShaderConstantF]     | Sets a floating-point shader constant.
 /// | [set_pixel_shader_constant_i](Self::set_pixel_shader_constant_i)          | [SetPixelShaderConstantI]     | Sets an integer shader constant.
-/// | [set_pixel_shader_constant_iv](Self::set_pixel_shader_constant_iv)        | [SetPixelShaderConstantI]     | Sets an integer shader constant.
 /// | [set_render_state](Self::set_render_state)                                | [SetRenderState]              | Sets a single device render-state parameter.
 /// | [set_render_target](Self::set_render_target)                              | [SetRenderTarget]             | Sets a new color buffer for the device.
 /// | [set_sampler_state](Self::set_sampler_state)                              | [SetSamplerState]             | Sets the sampler state value.
@@ -169,9 +167,7 @@ unsafe impl AsSafe<IDirect3DDevice9 > for Device { fn as_safe(&self) -> &IDirect
 /// | [set_vertex_shader](Self::set_vertex_shader)                              | [SetVertexShader]             | Sets the vertex shader.
 /// | [set_vertex_shader_constant_b](Self::set_vertex_shader_constant_b)        | [SetVertexShaderConstantB]    | Sets a Boolean vertex shader constant.
 /// | [set_vertex_shader_constant_f](Self::set_vertex_shader_constant_f)        | [SetVertexShaderConstantF]    | Sets a floating-point vertex shader constant.
-/// | [set_vertex_shader_constant_fv](Self::set_vertex_shader_constant_fv)      | [SetVertexShaderConstantF]    | Sets a floating-point vertex shader constant.
 /// | [set_vertex_shader_constant_i](Self::set_vertex_shader_constant_i)        | [SetVertexShaderConstantI]    | Sets an integer vertex shader constant.
-/// | [set_vertex_shader_constant_iv](Self::set_vertex_shader_constant_iv)      | [SetVertexShaderConstantI]    | Sets an integer vertex shader constant.
 /// | [set_viewport](Self::set_viewport)                                        | [SetViewport]                 | Sets the viewport parameters for the device.
 /// | [show_cursor](Self::show_cursor)                                          | [ShowCursor]                  | Displays or hides the cursor.
 /// | [stretch_rect](Self::stretch_rect)                                        | [StretchRect]                 | Copy the contents of the source rectangle to the destination rectangle. The source rectangle can be stretched and filtered by the copy. This function is often used to change the aspect ratio of a video stream.
@@ -1893,6 +1889,115 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         Ok(unsafe { PixelShader::from_raw(shader) })
     }
 
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getpixelshaderconstantb)\]
+    /// IDirect3DDevice9::GetPixelShaderConstantB
+    ///
+    /// Gets boolean shader constants.
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_pure();
+    /// // ps_3_0 (d3d9 max) only supports 16 boolean registers
+    /// // ref: https://docs.microsoft.com/en-us/windows/win32/direct3dhlsl/dx9-graphics-reference-asm-ps-registers-ps-3-0
+    /// let mut constants = [abibool::bool32::FALSE; 16];
+    /// let mut too_many  = [abibool::bool32::FALSE; 16+1];
+    ///
+    /// device.get_pixel_shader_constant_b(0, &mut constants).unwrap();         // b0 .. b16
+    /// device.get_pixel_shader_constant_b(8, &mut constants[8..]).unwrap();    // b8 .. b16
+    ///
+    /// // Out of bounds:
+    /// let r1 = device.get_pixel_shader_constant_b(!0, &mut constants);        // b-1.. b15
+    /// let r2 = device.get_pixel_shader_constant_b(0, &mut too_many);          // b0 .. b17
+    /// let r3 = device.get_pixel_shader_constant_b(1, &mut constants);         // b1 .. b17
+    /// assert_eq!(D3DERR::INVALIDCALL, r1, "start: negative");
+    /// assert_eq!(D3DERR::INVALIDCALL, r2, "count: oob");
+    /// assert_eq!(D3DERR::INVALIDCALL, r3, "end: oob");
+    /// ```
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]       If `start_register + constant_data.len()` > max boolean registers
+    /// *   Ok(())
+    fn get_pixel_shader_constant_b(&self, start_register: u32, constant_data: &mut [bool32]) -> Result<(), MethodError> {
+        let n : u32 = constant_data.len().try_into().map_err(|_| MethodError("Device::get_pixel_shader_constant_b", D3DERR::INVALIDCALL))?;
+        let hr = unsafe { self.as_winapi().GetPixelShaderConstantB(start_register, constant_data.as_mut_ptr().cast(), n) };
+        MethodError::check("IDirect3DDevice9::GetPixelShaderConstantB", hr)
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getpixelshaderconstantf)\]
+    /// IDirect3DDevice9::GetPixelShaderConstantF
+    ///
+    /// Gets floating-point shader constants.
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_pure();
+    /// // ps_3_0 (d3d9 max) supports 224 float4 registers
+    /// // ref: https://docs.microsoft.com/en-us/windows/win32/direct3dhlsl/dx9-graphics-reference-asm-ps-registers-ps-3-0
+    /// let cmax = 224;
+    /// let mut constants = vec![[0.0, 0.0, 0.0, 0.0]; cmax];
+    /// let mut too_many  = vec![[0.0, 0.0, 0.0, 0.0]; cmax+1];
+    ///
+    /// device.get_pixel_shader_constant_f(0, &mut constants).unwrap();         // c0 .. c224
+    /// device.get_pixel_shader_constant_f(8, &mut constants[8..]).unwrap();    // c8 .. c224
+    ///
+    /// // Out of bounds:
+    /// let r1 = device.get_pixel_shader_constant_f(!0, &mut constants);        // c-1.. c223
+    /// let r2 = device.get_pixel_shader_constant_f(0, &mut too_many);          // c0 .. c225
+    /// let r3 = device.get_pixel_shader_constant_f(1, &mut constants);         // c1 .. c225
+    /// assert_eq!(D3DERR::INVALIDCALL, r1, "start: negative");
+    /// assert_eq!(D3DERR::INVALIDCALL, r2, "count: oob");
+    /// assert_eq!(D3DERR::INVALIDCALL, r3, "end: oob");
+    /// ```
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]       If `start_register + constant_data.len()` > max floating point vector registers
+    /// *   Ok(())
+    fn get_pixel_shader_constant_f(&self, start_register: u32, constant_data: &mut [[f32; 4]]) -> Result<(), MethodError> {
+        let n : u32 = constant_data.len().try_into().map_err(|_| MethodError("Device::get_pixel_shader_constant_fv", D3DERR::INVALIDCALL))?;
+        let hr = unsafe { self.as_winapi().GetPixelShaderConstantF(start_register, constant_data.as_mut_ptr().cast(), n) };
+        MethodError::check("IDirect3DDevice9::GetPixelShaderConstantF", hr)
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getpixelshaderconstanti)\]
+    /// IDirect3DDevice9::GetPixelShaderConstantI
+    ///
+    /// Gets integer shader constants.
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_pure();
+    /// // ps_3_0 (d3d9 max) only supports 16 int4 registers
+    /// // ref: https://docs.microsoft.com/en-us/windows/win32/direct3dhlsl/dx9-graphics-reference-asm-ps-registers-ps-3-0
+    /// let mut constants = [[0, 0, 0, 0]; 16];
+    /// let mut too_many  = [[0, 0, 0, 0]; 16+1];
+    ///
+    /// device.get_pixel_shader_constant_i(0, &mut constants).unwrap();         // i0 .. i16
+    /// device.get_pixel_shader_constant_i(8, &mut constants[8..]).unwrap();    // i8 .. i16
+    ///
+    /// // Out of bounds:
+    /// let r1 = device.get_pixel_shader_constant_i(!0, &mut constants);        // i-1.. i15
+    /// let r2 = device.get_pixel_shader_constant_i(0, &mut too_many);          // i0 .. i17
+    /// let r3 = device.get_pixel_shader_constant_i(1, &mut constants);         // i1 .. i17
+    /// assert_eq!(D3DERR::INVALIDCALL, r1, "start: negative");
+    /// assert_eq!(D3DERR::INVALIDCALL, r2, "count: oob");
+    /// assert_eq!(D3DERR::INVALIDCALL, r3, "end: oob");
+    /// ```
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]       If `start_register + constant_data.len()` > max integer vector registers
+    /// *   Ok(())
+    fn get_pixel_shader_constant_i(&self, start_register: u32, constant_data: &mut [[i32; 4]]) -> Result<(), MethodError> {
+        let n : u32 = constant_data.len().try_into().map_err(|_| MethodError("Device::get_pixel_shader_constant_iv", D3DERR::INVALIDCALL))?;
+        let hr = unsafe { self.as_winapi().GetPixelShaderConstantI(start_register, constant_data.as_mut_ptr().cast(), n) };
+        MethodError::check("IDirect3DDevice9::GetPixelShaderConstantI", hr)
+    }
+
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getrasterstatus)\]
     /// IDirect3DDevice9::GetRasterStatus
     ///
@@ -2363,6 +2468,115 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         Ok(unsafe { VertexShader::from_raw(shader) })
     }
 
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getvertexshaderconstantb)\]
+    /// IDirect3DDevice9::GetVertexShaderConstantB
+    ///
+    /// Gets boolean shader constants.
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_pure();
+    /// // vs_3_0 (d3d9 max) only supports 16 boolean registers
+    /// // ref: https://docs.microsoft.com/en-us/windows/win32/direct3dhlsl/dx9-graphics-reference-asm-vs-registers-vs-3-0
+    /// let mut constants = [abibool::bool32::FALSE; 16];
+    /// let mut too_many  = [abibool::bool32::FALSE; 16+1];
+    ///
+    /// device.get_vertex_shader_constant_b(0, &mut constants).unwrap();        // b0 .. b16
+    /// device.get_vertex_shader_constant_b(8, &mut constants[8..]).unwrap();   // b8 .. b16
+    ///
+    /// // Out of bounds:
+    /// let r1 = device.get_vertex_shader_constant_b(!0, &mut constants);       // b-1.. b15
+    /// let r2 = device.get_vertex_shader_constant_b(0, &mut too_many);         // b0 .. b17
+    /// let r3 = device.get_vertex_shader_constant_b(1, &mut constants);        // b1 .. b17
+    /// assert_eq!(D3DERR::INVALIDCALL, r1, "start: negative");
+    /// assert_eq!(D3DERR::INVALIDCALL, r2, "count: oob");
+    /// assert_eq!(D3DERR::INVALIDCALL, r3, "end: oob");
+    /// ```
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]       If `start_register + constant_data.len()` > max boolean registers
+    /// *   Ok(())
+    fn get_vertex_shader_constant_b(&self, start_register: u32, constant_data: &mut [bool32]) -> Result<(), MethodError> {
+        let n : u32 = constant_data.len().try_into().map_err(|_| MethodError("Device::get_vertex_shader_constant_b", D3DERR::INVALIDCALL))?;
+        let hr = unsafe { self.as_winapi().GetVertexShaderConstantB(start_register, constant_data.as_mut_ptr().cast(), n) };
+        MethodError::check("IDirect3DDevice9::GetVertexShaderConstantB", hr)
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getvertexshaderconstantf)\]
+    /// IDirect3DDevice9::GetVertexShaderConstantF
+    ///
+    /// Gets floating-point shader constants.
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_pure();
+    /// // vs_3_0 (d3d9 max) only supports at least 256 float4 registers
+    /// // ref: https://docs.microsoft.com/en-us/windows/win32/direct3dhlsl/dx9-graphics-reference-asm-vs-registers-vs-3-0
+    /// let cmax = device.get_device_caps().unwrap().max_vertex_shader_const as usize;
+    /// let mut constants = vec![[0.0, 0.0, 0.0, 0.0]; cmax];
+    /// let mut too_many  = vec![[0.0, 0.0, 0.0, 0.0]; cmax+1];
+    ///
+    /// device.get_vertex_shader_constant_f(0, &mut constants).unwrap();        // c0 .. cMAX
+    /// device.get_vertex_shader_constant_f(8, &mut constants[8..]).unwrap();   // c8 .. cMAX
+    ///
+    /// // Out of bounds:
+    /// let r1 = device.get_vertex_shader_constant_f(!0, &mut constants);       // c-1.. cMAX-1
+    /// let r2 = device.get_vertex_shader_constant_f(0, &mut too_many);         // c0 .. cMAX+1
+    /// let r3 = device.get_vertex_shader_constant_f(1, &mut constants);        // c1 .. cMAX+1
+    /// assert_eq!(D3DERR::INVALIDCALL, r1, "start: negative");
+    /// assert_eq!(D3DERR::INVALIDCALL, r2, "count: oob");
+    /// assert_eq!(D3DERR::INVALIDCALL, r3, "end: oob");
+    /// ```
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]       If `start_register + constant_data.len()` > max floating point vector registers
+    /// *   Ok(())
+    fn get_vertex_shader_constant_f(&self, start_register: u32, constant_data: &mut [[f32; 4]]) -> Result<(), MethodError> {
+        let n : u32 = constant_data.len().try_into().map_err(|_| MethodError("Device::get_vertex_shader_constant_fv", D3DERR::INVALIDCALL))?;
+        let hr = unsafe { self.as_winapi().GetVertexShaderConstantF(start_register, constant_data.as_mut_ptr().cast(), n) };
+        MethodError::check("IDirect3DDevice9::GetVertexShaderConstantF", hr)
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getvertexshaderconstanti)\]
+    /// IDirect3DDevice9::GetVertexShaderConstantI
+    ///
+    /// Gets integer shader constants.
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_pure();
+    /// // vs_3_0 (d3d9 max) only supports 16 int4 registers
+    /// // ref: https://docs.microsoft.com/en-us/windows/win32/direct3dhlsl/dx9-graphics-reference-asm-vs-registers-vs-3-0
+    /// let mut constants = [[0, 0, 0, 0]; 16];
+    /// let mut too_many  = [[0, 0, 0, 0]; 16+1];
+    ///
+    /// device.get_vertex_shader_constant_i(0, &mut constants).unwrap();        // i0 .. i16
+    /// device.get_vertex_shader_constant_i(8, &mut constants[8..]).unwrap();   // i8 .. i16
+    ///
+    /// // Out of bounds:
+    /// let r1 = device.get_vertex_shader_constant_i(!0, &mut constants);       // i-1.. i15
+    /// let r2 = device.get_vertex_shader_constant_i(0, &mut too_many);         // i0 .. i17
+    /// let r3 = device.get_vertex_shader_constant_i(1, &mut constants);        // i1 .. i17
+    /// assert_eq!(D3DERR::INVALIDCALL, r1, "start: negative");
+    /// assert_eq!(D3DERR::INVALIDCALL, r2, "count: oob");
+    /// assert_eq!(D3DERR::INVALIDCALL, r3, "end: oob");
+    /// ```
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]       If `start_register + constant_data.len()` > max integer vector registers
+    /// *   Ok(())
+    fn get_vertex_shader_constant_i(&self, start_register: u32, constant_data: &mut [[i32; 4]]) -> Result<(), MethodError> {
+        let n : u32 = constant_data.len().try_into().map_err(|_| MethodError("Device::get_vertex_shader_constant_iv", D3DERR::INVALIDCALL))?;
+        let hr = unsafe { self.as_winapi().GetVertexShaderConstantI(start_register, constant_data.as_mut_ptr().cast(), n) };
+        MethodError::check("IDirect3DDevice9::GetVertexShaderConstantI", hr)
+    }
+
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getviewport)\]
     /// IDirect3DDevice9::GetViewport
     ///
@@ -2801,10 +3015,30 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///
     /// Sets boolean shader constants.
     ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_pure();
+    /// // ps_3_0 (d3d9 max) only supports 16 boolean registers
+    /// // ref: https://docs.microsoft.com/en-us/windows/win32/direct3dhlsl/dx9-graphics-reference-asm-ps-registers-ps-3-0
+    /// let constants = [abibool::bool32::TRUE; 16];
+    /// let too_many  = [abibool::bool32::TRUE; 17];
+    ///
+    /// device.set_pixel_shader_constant_b(0, &constants).unwrap();         // b0 .. b16
+    /// device.set_pixel_shader_constant_b(8, &constants[8..]).unwrap();    // b8 .. b16
+    ///
+    /// // Out of bounds:
+    /// let r1 = device.set_pixel_shader_constant_b(!0, &constants);        // b-1.. b15
+    /// let r2 = device.set_pixel_shader_constant_b(0, &too_many);          // b0 .. b17
+    /// let r3 = device.set_pixel_shader_constant_b(1, &constants);         // b1 .. b17
+    /// assert_eq!(D3DERR::INVALIDCALL, r1, "start: negative");
+    /// assert_eq!(D3DERR::INVALIDCALL, r2, "count: oob");
+    /// assert_eq!(D3DERR::INVALIDCALL, r3, "end: oob");
+    /// ```
+    ///
     /// ### Returns
     ///
-    /// *   [D3DERR::INVALIDCALL]       If `constant_data.len()` > `u32::MAX`
-    /// *   [D3DERR::INVALIDCALL]       If `start_register + constant_data.len()` > max boolean registers?
+    /// *   [D3DERR::INVALIDCALL]       If `start_register + constant_data.len()` > max boolean registers
     /// *   Ok(())
     fn set_pixel_shader_constant_b(&self, start_register: u32, constant_data: &[bool32]) -> Result<(), MethodError> {
         let n : u32 = constant_data.len().try_into().map_err(|_| MethodError("Device::set_pixel_shader_constant_b", D3DERR::INVALIDCALL))?;
@@ -2817,31 +3051,32 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///
     /// Sets floating-point shader constants.
     ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_pure();
+    /// // ps_3_0 (d3d9 max) supports 224 float4 registers
+    /// // ref: https://docs.microsoft.com/en-us/windows/win32/direct3dhlsl/dx9-graphics-reference-asm-ps-registers-ps-3-0
+    /// let constants   = vec![[0.0, 0.0, 0.0, 0.0]; 224];
+    /// let too_many    = vec![[0.0, 0.0, 0.0, 0.0]; 225];
+    ///
+    /// device.set_pixel_shader_constant_f(0, &constants).unwrap();         // c0 .. c224
+    /// device.set_pixel_shader_constant_f(8, &constants[8..]).unwrap();    // c8 .. c224
+    ///
+    /// // Out of bounds:
+    /// let r1 = device.set_pixel_shader_constant_f(!0, &constants);        // c-1.. c223
+    /// let r2 = device.set_pixel_shader_constant_f(0, &too_many);          // c0 .. c225
+    /// let r3 = device.set_pixel_shader_constant_f(1, &constants);         // c1 .. c225
+    /// assert_eq!(D3DERR::INVALIDCALL, r1, "start: negative");
+    /// assert_eq!(D3DERR::INVALIDCALL, r2, "count: oob");
+    /// assert_eq!(D3DERR::INVALIDCALL, r3, "end: oob");
+    /// ```
+    ///
     /// ### Returns
     ///
-    /// *   [D3DERR::INVALIDCALL]       If `constant_data.len() / 4` > `u32::MAX`
-    /// *   [D3DERR::INVALIDCALL]       If `constant_data.len() % 4` != `0` (not a multiple of vectors)
-    /// *   [D3DERR::INVALIDCALL]       If `start_register + constant_data.len()/4` > max floating point vector registers?
+    /// *   [D3DERR::INVALIDCALL]       If `start_register + constant_data.len()` > max floating point vector registers
     /// *   Ok(())
-    fn set_pixel_shader_constant_f(&self, start_register: u32, constant_data: &[f32]) -> Result<(), MethodError> {
-        let n = constant_data.len();
-        if (n % 4) != 0 { return Err(MethodError("Device::set_pixel_shader_constant_f", D3DERR::INVALIDCALL)); }
-        let n : u32 = (n/4).try_into().map_err(|_| MethodError("Device::set_pixel_shader_constant_f", D3DERR::INVALIDCALL))?;
-        let hr = unsafe { self.as_winapi().SetPixelShaderConstantF(start_register, constant_data.as_ptr(), n) };
-        MethodError::check("IDirect3DDevice9::SetPixelShaderConstantF", hr)
-    }
-
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setpixelshaderconstantf)\]
-    /// IDirect3DDevice9::SetPixelShaderConstantF
-    ///
-    /// Sets floating-point shader constants.
-    ///
-    /// ### Returns
-    ///
-    /// *   [D3DERR::INVALIDCALL]       If `constant_data.len()` > `u32::MAX`
-    /// *   [D3DERR::INVALIDCALL]       If `start_register + constant_data.len()` > max floating point vector registers?
-    /// *   Ok(())
-    fn set_pixel_shader_constant_fv(&self, start_register: u32, constant_data: &[[f32; 4]]) -> Result<(), MethodError> {
+    fn set_pixel_shader_constant_f(&self, start_register: u32, constant_data: &[[f32; 4]]) -> Result<(), MethodError> {
         let n : u32 = constant_data.len().try_into().map_err(|_| MethodError("Device::set_pixel_shader_constant_fv", D3DERR::INVALIDCALL))?;
         let hr = unsafe { self.as_winapi().SetPixelShaderConstantF(start_register, constant_data.as_ptr().cast(), n) };
         MethodError::check("IDirect3DDevice9::SetPixelShaderConstantF", hr)
@@ -2852,31 +3087,32 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///
     /// Sets integer shader constants.
     ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_pure();
+    /// // ps_3_0 (d3d9 max) only supports 16 int4 registers
+    /// // ref: https://docs.microsoft.com/en-us/windows/win32/direct3dhlsl/dx9-graphics-reference-asm-ps-registers-ps-3-0
+    /// let constants = [[0, 0, 0, 0]; 16];
+    /// let too_many  = [[0, 0, 0, 0]; 17];
+    ///
+    /// device.set_pixel_shader_constant_i(0, &constants).unwrap();         // i0 .. i16
+    /// device.set_pixel_shader_constant_i(8, &constants[8..]).unwrap();    // i8 .. i16
+    ///
+    /// // Out of bounds:
+    /// let r1 = device.set_pixel_shader_constant_i(!0, &constants);        // i-1.. i15
+    /// let r2 = device.set_pixel_shader_constant_i(0, &too_many);          // i0 .. i17
+    /// let r3 = device.set_pixel_shader_constant_i(1, &constants);         // i1 .. i17
+    /// assert_eq!(D3DERR::INVALIDCALL, r1, "start: negative");
+    /// assert_eq!(D3DERR::INVALIDCALL, r2, "count: oob");
+    /// assert_eq!(D3DERR::INVALIDCALL, r3, "end: oob");
+    /// ```
+    ///
     /// ### Returns
     ///
-    /// *   [D3DERR::INVALIDCALL]       If `constant_data.len() / 4` > `u32::MAX`
-    /// *   [D3DERR::INVALIDCALL]       If `constant_data.len() % 4` != `0` (not a multiple of vectors)
-    /// *   [D3DERR::INVALIDCALL]       If `start_register + constant_data.len()/4` > max floating point vector registers?
+    /// *   [D3DERR::INVALIDCALL]       If `start_register + constant_data.len()` > max floating point vector registers
     /// *   Ok(())
-    fn set_pixel_shader_constant_i(&self, start_register: u32, constant_data: &[i32]) -> Result<(), MethodError> {
-        let n = constant_data.len();
-        if (n % 4) != 0 { return Err(MethodError("Device::set_pixel_shader_constant_i", D3DERR::INVALIDCALL)); }
-        let n : u32 = (n/4).try_into().map_err(|_| MethodError("Device::set_pixel_shader_constant_i", D3DERR::INVALIDCALL))?;
-        let hr = unsafe { self.as_winapi().SetPixelShaderConstantI(start_register, constant_data.as_ptr(), n) };
-        MethodError::check("IDirect3DDevice9::SetPixelShaderConstantI", hr)
-    }
-
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setpixelshaderconstanti)\]
-    /// IDirect3DDevice9::SetPixelShaderConstantI
-    ///
-    /// Sets integer shader constants.
-    ///
-    /// ### Returns
-    ///
-    /// *   [D3DERR::INVALIDCALL]       If `constant_data.len()` > `u32::MAX`
-    /// *   [D3DERR::INVALIDCALL]       If `start_register + constant_data.len()` > max floating point vector registers?
-    /// *   Ok(())
-    fn set_pixel_shader_constant_iv(&self, start_register: u32, constant_data: &[[i32; 4]]) -> Result<(), MethodError> {
+    fn set_pixel_shader_constant_i(&self, start_register: u32, constant_data: &[[i32; 4]]) -> Result<(), MethodError> {
         let n : u32 = constant_data.len().try_into().map_err(|_| MethodError("Device::set_pixel_shader_constant_iv", D3DERR::INVALIDCALL))?;
         let hr = unsafe { self.as_winapi().SetPixelShaderConstantI(start_register, constant_data.as_ptr().cast(), n) };
         MethodError::check("IDirect3DDevice9::SetPixelShaderConstantI", hr)
@@ -3180,12 +3416,32 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setvertexshaderconstantb)\]
     /// IDirect3DDevice9::SetVertexShaderConstantB
     ///
-    /// Sets boolean shader constants.
+    /// Sets boolean shader constants (b#). Unlike floating-point or integer constants, these have a dimension of 1, and are **not** grouped into 4-element vectors.
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_pure();
+    /// // vs_3_0 (d3d9 max) only supports 16 boolean registers
+    /// // ref: https://docs.microsoft.com/en-us/windows/win32/direct3dhlsl/dx9-graphics-reference-asm-vs-registers-vs-3-0
+    /// let constants = [abibool::bool32::TRUE; 16];
+    /// let too_many  = [abibool::bool32::TRUE; 16+1];
+    ///
+    /// device.set_vertex_shader_constant_b(0, &constants).unwrap();        // b0 .. b16
+    /// device.set_vertex_shader_constant_b(8, &constants[8..]).unwrap();   // b8 .. b16
+    ///
+    /// // Out of bounds:
+    /// let r1 = device.set_vertex_shader_constant_b(!0, &constants);       // b-1.. b15
+    /// let r2 = device.set_vertex_shader_constant_b(0, &too_many);         // b0 .. b17
+    /// let r3 = device.set_vertex_shader_constant_b(1, &constants);        // b1 .. b17
+    /// assert_eq!(D3DERR::INVALIDCALL, r1, "start: negative");
+    /// assert_eq!(D3DERR::INVALIDCALL, r2, "count: oob");
+    /// assert_eq!(D3DERR::INVALIDCALL, r3, "end: oob");
+    /// ```
     ///
     /// ### Returns
     ///
-    /// *   [D3DERR::INVALIDCALL]       If `constant_data.len()` > `u32::MAX`
-    /// *   [D3DERR::INVALIDCALL]       If `start_register + constant_data.len()` > max boolean registers?
+    /// *   [D3DERR::INVALIDCALL]       If `start_register + constant_data.len()` > max boolean registers
     /// *   Ok(())
     fn set_vertex_shader_constant_b(&self, start_register: u32, constant_data: &[bool32]) -> Result<(), MethodError> {
         let n : u32 = constant_data.len().try_into().map_err(|_| MethodError("Device::set_vertex_shader_constant_b", D3DERR::INVALIDCALL))?;
@@ -3196,33 +3452,35 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setvertexshaderconstantf)\]
     /// IDirect3DDevice9::SetVertexShaderConstantF
     ///
-    /// Sets floating-point shader constants.
+    /// Sets floating-point shader constants (c#).  Each individual c# register is a 4-element floating point vector: \[[f32]; 4\]
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_pure();
+    /// // vs_3_0 (d3d9 max) supports at least 256 float4 registers
+    /// // ref: https://docs.microsoft.com/en-us/windows/win32/direct3dhlsl/dx9-graphics-reference-asm-vs-registers-vs-3-0
+    /// let cmax = device.get_device_caps().unwrap().max_vertex_shader_const as usize;
+    /// let constants = vec![[0.0, 0.0, 0.0, 0.0]; cmax];
+    /// let too_many  = vec![[0.0, 0.0, 0.0, 0.0]; cmax+1];
+    ///
+    /// device.set_vertex_shader_constant_f(0, &constants).unwrap();        // c0 .. cMAX
+    /// device.set_vertex_shader_constant_f(8, &constants[8..]).unwrap();   // c8 .. cMAX
+    ///
+    /// // Out of bounds:
+    /// let r1 = device.set_vertex_shader_constant_f(!0, &constants);       // c-1.. cMAX+1
+    /// let r2 = device.set_vertex_shader_constant_f(0, &too_many);         // c0 .. cMAX+1
+    /// let r3 = device.set_vertex_shader_constant_f(1, &constants);        // c1 .. cMAX-1
+    /// assert_eq!(D3DERR::INVALIDCALL, r1, "start: negative");
+    /// assert_eq!(D3DERR::INVALIDCALL, r2, "count: oob");
+    /// assert_eq!(D3DERR::INVALIDCALL, r3, "end: oob");
+    /// ```
     ///
     /// ### Returns
     ///
-    /// *   [D3DERR::INVALIDCALL]       If `constant_data.len() / 4` > `u32::MAX`
-    /// *   [D3DERR::INVALIDCALL]       If `constant_data.len() % 4` != `0` (not a multiple of vectors)
-    /// *   [D3DERR::INVALIDCALL]       If `start_register + constant_data.len()/4` > max floating point vector registers?
+    /// *   [D3DERR::INVALIDCALL]       If `start_register + constant_data.len()` > max floating point vector registers
     /// *   Ok(())
-    fn set_vertex_shader_constant_f(&self, start_register: u32, constant_data: &[f32]) -> Result<(), MethodError> {
-        let n = constant_data.len();
-        if (n % 4) != 0 { return Err(MethodError("Device::set_vertex_shader_constant_f", D3DERR::INVALIDCALL)); }
-        let n : u32 = (n/4).try_into().map_err(|_| MethodError("Device::set_vertex_shader_constant_f", D3DERR::INVALIDCALL))?;
-        let hr = unsafe { self.as_winapi().SetVertexShaderConstantF(start_register, constant_data.as_ptr(), n) };
-        MethodError::check("IDirect3DDevice9::SetVertexShaderConstantF", hr)
-    }
-
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setvertexshaderconstantf)\]
-    /// IDirect3DDevice9::SetVertexShaderConstantF
-    ///
-    /// Sets floating-point shader constants.
-    ///
-    /// ### Returns
-    ///
-    /// *   [D3DERR::INVALIDCALL]       If `constant_data.len()` > `u32::MAX`
-    /// *   [D3DERR::INVALIDCALL]       If `start_register + constant_data.len()` > max floating point vector registers?
-    /// *   Ok(())
-    fn set_vertex_shader_constant_fv(&self, start_register: u32, constant_data: &[[f32; 4]]) -> Result<(), MethodError> {
+    fn set_vertex_shader_constant_f(&self, start_register: u32, constant_data: &[[f32; 4]]) -> Result<(), MethodError> {
         let n : u32 = constant_data.len().try_into().map_err(|_| MethodError("Device::set_vertex_shader_constant_fv", D3DERR::INVALIDCALL))?;
         let hr = unsafe { self.as_winapi().SetVertexShaderConstantF(start_register, constant_data.as_ptr().cast(), n) };
         MethodError::check("IDirect3DDevice9::SetVertexShaderConstantF", hr)
@@ -3231,33 +3489,34 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setvertexshaderconstanti)\]
     /// IDirect3DDevice9::SetVertexShaderConstantI
     ///
-    /// Sets integer shader constants.
+    /// Sets integer shader constants (i#).  Each individual i# register is a 4-element integer vector: \[[i32]; 4\]
+    ///
+    /// ### Example
+    ///
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_pure();
+    /// // vs_3_0 (d3d9 max) only supports 16 int4 registers
+    /// // ref: https://docs.microsoft.com/en-us/windows/win32/direct3dhlsl/dx9-graphics-reference-asm-vs-registers-vs-3-0
+    /// let constants = [[0, 0, 0, 0]; 16];
+    /// let too_many  = [[0, 0, 0, 0]; 16+1];
+    ///
+    /// device.set_vertex_shader_constant_i(0, &constants).unwrap();        // i0 .. i16
+    /// device.set_vertex_shader_constant_i(8, &constants[8..]).unwrap();   // i8 .. i16
+    ///
+    /// // Out of bounds:
+    /// let r1 = device.set_vertex_shader_constant_i(!0, &constants);       // i-1.. i15
+    /// let r2 = device.set_vertex_shader_constant_i(0, &too_many);         // i0 .. i17
+    /// let r3 = device.set_vertex_shader_constant_i(1, &constants);        // i1 .. i17
+    /// assert_eq!(D3DERR::INVALIDCALL, r1, "start: negative");
+    /// assert_eq!(D3DERR::INVALIDCALL, r2, "count: oob");
+    /// assert_eq!(D3DERR::INVALIDCALL, r3, "end: oob");
+    /// ```
     ///
     /// ### Returns
     ///
-    /// *   [D3DERR::INVALIDCALL]       If `constant_data.len() / 4` > `u32::MAX`
-    /// *   [D3DERR::INVALIDCALL]       If `constant_data.len() % 4` != `0` (not a multiple of vectors)
-    /// *   [D3DERR::INVALIDCALL]       If `start_register + constant_data.len()/4` > max floating point vector registers?
+    /// *   [D3DERR::INVALIDCALL]       If `start_register + constant_data.len()` > max integer vector registers
     /// *   Ok(())
-    fn set_vertex_shader_constant_i(&self, start_register: u32, constant_data: &[i32]) -> Result<(), MethodError> {
-        let n = constant_data.len();
-        if (n % 4) != 0 { return Err(MethodError("Device::set_vertex_shader_constant_i", D3DERR::INVALIDCALL)); }
-        let n : u32 = (n/4).try_into().map_err(|_| MethodError("Device::set_vertex_shader_constant_i", D3DERR::INVALIDCALL))?;
-        let hr = unsafe { self.as_winapi().SetVertexShaderConstantI(start_register, constant_data.as_ptr(), n) };
-        MethodError::check("IDirect3DDevice9::SetVertexShaderConstantI", hr)
-    }
-
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setvertexshaderconstanti)\]
-    /// IDirect3DDevice9::SetVertexShaderConstantI
-    ///
-    /// Sets integer shader constants.
-    ///
-    /// ### Returns
-    ///
-    /// *   [D3DERR::INVALIDCALL]       If `constant_data.len()` > `u32::MAX`
-    /// *   [D3DERR::INVALIDCALL]       If `start_register + constant_data.len()` > max floating point vector registers?
-    /// *   Ok(())
-    fn set_vertex_shader_constant_iv(&self, start_register: u32, constant_data: &[[i32; 4]]) -> Result<(), MethodError> {
+    fn set_vertex_shader_constant_i(&self, start_register: u32, constant_data: &[[i32; 4]]) -> Result<(), MethodError> {
         let n : u32 = constant_data.len().try_into().map_err(|_| MethodError("Device::set_vertex_shader_constant_iv", D3DERR::INVALIDCALL))?;
         let hr = unsafe { self.as_winapi().SetVertexShaderConstantI(start_register, constant_data.as_ptr().cast(), n) };
         MethodError::check("IDirect3DDevice9::SetVertexShaderConstantI", hr)
@@ -3405,9 +3664,9 @@ pub struct RgnData {
 //#cpp2rust IDirect3DDevice9::GetNumberOfSwapChains             = d3d9::IDirect3DDevice9Ext::get_number_of_swap_chains
 //#cpp2rust IDirect3DDevice9::GetPaletteEntries                 = d3d9::IDirect3DDevice9Ext::get_palette_entries
 //#cpp2rust IDirect3DDevice9::GetPixelShader                    = d3d9::IDirect3DDevice9Ext::get_pixel_shader
-//TODO:     IDirect3DDevice9::GetPixelShaderConstantB           = d3d9::IDirect3DDevice9Ext::get_pixel_shader_constant_b
-//TODO:     IDirect3DDevice9::GetPixelShaderConstantF           = d3d9::IDirect3DDevice9Ext::get_pixel_shader_constant_f
-//TODO:     IDirect3DDevice9::GetPixelShaderConstantI           = d3d9::IDirect3DDevice9Ext::get_pixel_shader_constant_i
+//#cpp2rust IDirect3DDevice9::GetPixelShaderConstantB           = d3d9::IDirect3DDevice9Ext::get_pixel_shader_constant_b
+//#cpp2rust IDirect3DDevice9::GetPixelShaderConstantF           = d3d9::IDirect3DDevice9Ext::get_pixel_shader_constant_f
+//#cpp2rust IDirect3DDevice9::GetPixelShaderConstantI           = d3d9::IDirect3DDevice9Ext::get_pixel_shader_constant_i
 //#cpp2rust IDirect3DDevice9::GetRasterStatus                   = d3d9::IDirect3DDevice9Ext::get_raster_status
 //TODO:     IDirect3DDevice9::GetRenderState                    = d3d9::IDirect3DDevice9Ext::get_render_state
 //#cpp2rust IDirect3DDevice9::GetRenderState                    = d3d9::IDirect3DDevice9Ext::get_render_state_untyped
@@ -3427,9 +3686,9 @@ pub struct RgnData {
 //TODO:     IDirect3DDevice9::GetTransform                      = d3d9::IDirect3DDevice9Ext::get_transform
 //#cpp2rust IDirect3DDevice9::GetVertexDeclaration              = d3d9::IDirect3DDevice9Ext::get_vertex_declaration
 //#cpp2rust IDirect3DDevice9::GetVertexShader                   = d3d9::IDirect3DDevice9Ext::get_vertex_shader
-//TODO:     IDirect3DDevice9::GetVertexShaderConstantB          = d3d9::IDirect3DDevice9Ext::get_vertex_shader_constant_b
-//TODO:     IDirect3DDevice9::GetVertexShaderConstantF          = d3d9::IDirect3DDevice9Ext::get_vertex_shader_constant_f
-//TODO:     IDirect3DDevice9::GetVertexShaderConstantI          = d3d9::IDirect3DDevice9Ext::get_vertex_shader_constant_i
+//#cpp2rust IDirect3DDevice9::GetVertexShaderConstantB          = d3d9::IDirect3DDevice9Ext::get_vertex_shader_constant_b
+//#cpp2rust IDirect3DDevice9::GetVertexShaderConstantF          = d3d9::IDirect3DDevice9Ext::get_vertex_shader_constant_f
+//#cpp2rust IDirect3DDevice9::GetVertexShaderConstantI          = d3d9::IDirect3DDevice9Ext::get_vertex_shader_constant_i
 //#cpp2rust IDirect3DDevice9::GetViewport                       = d3d9::IDirect3DDevice9Ext::get_viewport
 //#cpp2rust IDirect3DDevice9::LightEnable                       = d3d9::IDirect3DDevice9Ext::light_enable
 //TODO:     IDirect3DDevice9::MultiplyTransform                 = d3d9::IDirect3DDevice9Ext::multiply_transform
@@ -3454,9 +3713,7 @@ pub struct RgnData {
 //#cpp2rust IDirect3DDevice9::SetPixelShader                    = d3d9::IDirect3DDevice9Ext::set_pixel_shader
 //#cpp2rust IDirect3DDevice9::SetPixelShaderConstantB           = d3d9::IDirect3DDevice9Ext::set_pixel_shader_constant_b
 //#cpp2rust IDirect3DDevice9::SetPixelShaderConstantF           = d3d9::IDirect3DDevice9Ext::set_pixel_shader_constant_f
-//#cpp2rust IDirect3DDevice9::SetPixelShaderConstantF           = d3d9::IDirect3DDevice9Ext::set_pixel_shader_constant_fv
 //#cpp2rust IDirect3DDevice9::SetPixelShaderConstantI           = d3d9::IDirect3DDevice9Ext::set_pixel_shader_constant_i
-//#cpp2rust IDirect3DDevice9::SetPixelShaderConstantI           = d3d9::IDirect3DDevice9Ext::set_pixel_shader_constant_iv
 //TODO:     IDirect3DDevice9::SetRenderState                    = d3d9::IDirect3DDevice9Ext::set_render_state
 //#cpp2rust IDirect3DDevice9::SetRenderState                    = d3d9::IDirect3DDevice9Ext::set_render_state_untyped
 //#cpp2rust IDirect3DDevice9::SetRenderTarget                   = d3d9::IDirect3DDevice9Ext::set_render_target
@@ -3473,9 +3730,7 @@ pub struct RgnData {
 //#cpp2rust IDirect3DDevice9::SetVertexShader                   = d3d9::IDirect3DDevice9Ext::set_vertex_shader
 //#cpp2rust IDirect3DDevice9::SetVertexShaderConstantB          = d3d9::IDirect3DDevice9Ext::set_vertex_shader_constant_b
 //#cpp2rust IDirect3DDevice9::SetVertexShaderConstantF          = d3d9::IDirect3DDevice9Ext::set_vertex_shader_constant_f
-//#cpp2rust IDirect3DDevice9::SetVertexShaderConstantF          = d3d9::IDirect3DDevice9Ext::set_vertex_shader_constant_fv
 //#cpp2rust IDirect3DDevice9::SetVertexShaderConstantI          = d3d9::IDirect3DDevice9Ext::set_vertex_shader_constant_i
-//#cpp2rust IDirect3DDevice9::SetVertexShaderConstantI          = d3d9::IDirect3DDevice9Ext::set_vertex_shader_constant_iv
 //#cpp2rust IDirect3DDevice9::SetViewport                       = d3d9::IDirect3DDevice9Ext::set_viewport
 //TODO:     IDirect3DDevice9::ShowCursor                        = d3d9::IDirect3DDevice9Ext::show_cursor
 //TODO:     IDirect3DDevice9::StretchRect                       = d3d9::IDirect3DDevice9Ext::stretch_rect
