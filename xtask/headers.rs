@@ -92,8 +92,14 @@ pub fn update() {
                 for method in cpp.methods() {
                     let cpp     = format!("{}::{}", method.ty, method.f.id);
                     let rust    = cpp2rust.get(&*cpp);
-                    write!(rs, "/// * {}", CppLink(&cpp))?;
-                    for (idx, rust) in rust.into_iter().flat_map(|p| p.iter()).enumerate() { write!(rs, "{}{}", if idx == 0 { "&nbsp;→ " } else { ", " }, RustLink(rust))?; }
+                    match CPP2URL.get(&*cpp) {
+                        Some(link)  => write!(rs, "/// * [`{cpp}`]({link})",    cpp = method.f.id, link = link[0])?,
+                        None        => write!(rs, "/// * `{cpp}`",              cpp = method.f.id)?,
+                    }
+                    for (idx, rust) in rust.into_iter().flat_map(|p| p.iter()).enumerate() {
+                        write!(rs, "{}", if idx == 0 { "&nbsp;→ " } else { ", " })?;
+                        write!(rs, "{}", RustLink(rust))?; // TODO: strip prefix when it matches the only `rust` prefix?
+                    }
                     if rust.is_none() { write!(rs, " →&nbsp;❌")?; }
                     writeln!(rs, " <br>")?;
                 }
