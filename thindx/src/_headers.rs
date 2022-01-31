@@ -941,7 +941,7 @@ pub const d3dcompiler_h : cxx_header = cxx_header;
 /// * [`IDirect3DDevice9::GetVertexShaderConstantI`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getvertexshaderconstanti)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_vertex_shader_constant_i`] <br>
 /// * [`IDirect3DDevice9::GetViewport`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getviewport)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_viewport`] <br>
 /// * [`IDirect3DDevice9::LightEnable`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-lightenable)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::light_enable`] <br>
-/// * [`IDirect3DDevice9::MultiplyTransform`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-multiplytransform) →&nbsp;❌ <br>
+/// * [`IDirect3DDevice9::MultiplyTransform`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-multiplytransform)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::multiply_transform`] <br>
 /// * [`IDirect3DDevice9::Present`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-present)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::present`] <br>
 /// * [`IDirect3DDevice9::ProcessVertices`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-processvertices) →&nbsp;❌ <br>
 /// * [`IDirect3DDevice9::Reset`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-reset)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::reset`] <br>

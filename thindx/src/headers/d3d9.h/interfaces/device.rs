@@ -2692,6 +2692,34 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         MethodError::check("IDirect3DDevice9::LightEnable", hr)
     }
 
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-multiplytransform)\]
+    /// IDirect3DDevice9::MultiplyTransform
+    ///
+    /// Multiplies a device's world, view, or projection matrices by a specified matrix.
+    ///
+    /// ### Examples
+    ///
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_pure();
+    /// device.multiply_transform(d3d::TS::View,  d3d::Matrix::identity()).unwrap();
+    /// device.multiply_transform(d3d::TS::World, d3d::Matrix::identity()).unwrap();
+    /// device.multiply_transform(d3d::TS::world_matrix(255), d3d::Matrix::identity()).unwrap();
+    ///
+    /// assert_eq!(D3DERR::INVALIDCALL, device.multiply_transform(d3d::TS::from_unchecked(0xFFFFFFF), d3d::Matrix::identity()));
+    /// # assert_eq!(D3DERR::INVALIDCALL, device.multiply_transform(d3d::TS::from_unchecked(0x0FFFF00), d3d::Matrix::identity()));
+    /// # assert_eq!(D3DERR::INVALIDCALL, device.multiply_transform(d3d::TS::from_unchecked(0x1000000), d3d::Matrix::identity()));
+    /// # assert_eq!(D3DERR::INVALIDCALL, device.multiply_transform(d3d::TS::from_unchecked(0x10000FF), d3d::Matrix::identity()));
+    /// ```
+    ///
+    /// ### Returns
+    ///
+    /// *   [D3DERR::INVALIDCALL]   If `ts` is not a valid [TransformStateType].
+    /// *   Ok(())
+    fn multiply_transform(&self, ts: impl Into<TransformStateType>, matrix: impl Into<Matrix>) -> Result<(), MethodError> {
+        let hr = unsafe { self.as_winapi().MultiplyTransform(ts.into().into(), &matrix.into().into()) };
+        MethodError::check("IDirect3DDevice9::MultiplyTransform", hr)
+    }
+
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-present)\]
     /// IDirect3DDevice9::Present
     ///
@@ -3725,7 +3753,7 @@ pub struct RgnData {
 //#cpp2rust IDirect3DDevice9::GetVertexShaderConstantI          = d3d9::IDirect3DDevice9Ext::get_vertex_shader_constant_i
 //#cpp2rust IDirect3DDevice9::GetViewport                       = d3d9::IDirect3DDevice9Ext::get_viewport
 //#cpp2rust IDirect3DDevice9::LightEnable                       = d3d9::IDirect3DDevice9Ext::light_enable
-//TODO:     IDirect3DDevice9::MultiplyTransform                 = d3d9::IDirect3DDevice9Ext::multiply_transform
+//#cpp2rust IDirect3DDevice9::MultiplyTransform                 = d3d9::IDirect3DDevice9Ext::multiply_transform
 //#cpp2rust IDirect3DDevice9::Present                           = d3d9::IDirect3DDevice9Ext::present
 //TODO:     IDirect3DDevice9::ProcessVertices                   = d3d9::IDirect3DDevice9Ext::process_vertices
 //#cpp2rust IDirect3DDevice9::Reset                             = d3d9::IDirect3DDevice9Ext::reset
