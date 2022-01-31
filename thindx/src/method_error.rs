@@ -10,6 +10,12 @@ use std::fmt::{self, Debug, Display, Formatter};
 #[derive(Clone)]
 pub struct MethodError(pub(crate) &'static str, pub(crate) ErrorKind);
 
+// TODO: replace MethodError with a generic Error that takes a single `&'static ErrorSite` payload.
+// This wil allow:
+//  1. a cheaper Error type (narrow ref instead of a fat ref)
+//  2. extra metadata (detailed reason, d3d method + thindx method, ...)
+// Start with a `method_error!(...)` macro to replace existing `MethodError(...)` tuple construction?
+
 impl MethodError {
     /// Returns an `Err(MethodError(...))` if `!SUCCEEDED(hr)`
     pub fn check(method: &'static str, hr: HRESULT) -> Result<(), Self> {
