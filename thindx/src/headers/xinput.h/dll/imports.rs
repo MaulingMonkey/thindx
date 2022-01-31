@@ -96,7 +96,6 @@ impl Imports {
 /// *   DLLs with shorter filenames will be prefered (e.g. `XInput1_4.dll` wins out over `xinput_9_0_3.dll`)
 ///
 /// ### ⚠️ Safety ⚠️
-///
 /// Microsoft's PSAPI documentation makes it clear that some of the stuff this relies on for e.g. process module enumeration
 /// are best effort debug functionality, not battle tested production quality tooling:
 ///

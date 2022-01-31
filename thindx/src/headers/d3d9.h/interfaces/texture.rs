@@ -65,12 +65,10 @@ impl SafeDevice {
     /// Assigns a texture to a stage for a device.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]   if `stage` >= `self.caps().MaxSimultaneousTextures`
     /// *   Ok(())
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = safe_device_pure();
     /// let texture = device.create_texture(128, 128, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
@@ -103,14 +101,12 @@ impl SafeDevice {
     /// Retrieves a texture assigned to a stage for a device.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]       If the device is a pure device?
     /// *   [D3DERR::INVALIDCALL]       If `stage` >= `device.caps().MaxSimultaneousTextures`
     /// *   Ok(Some([BaseTexture]))     If a texture was bound to that stage
     /// *   Ok(None)                    If no texture was bound to that stage
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = safe_device_pure();
     /// let texture = device.create_texture(128, 128, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
@@ -135,7 +131,6 @@ impl SafeDevice {
 /// IDirect3DBaseTexture9 extension methods
 ///
 /// ### Methods
-///
 /// | thindx                                                        | docs.microsoft.com        | Description |
 /// | ------------------------------------------------------------- | ------------------------- | ----------- |
 /// | [generate_mip_sub_levels](Self::generate_mip_sub_levels)      | [GenerateMipSubLevels]    | Generate mipmap sublevels.
@@ -159,7 +154,6 @@ pub trait IDirect3DBaseTexture9Ext : AsSafe<IDirect3DBaseTexture9> {
     /// Generate mipmap sublevels.
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = safe_device_pure();
     /// # let texture = device.create_texture(128, 128, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
@@ -175,7 +169,6 @@ pub trait IDirect3DBaseTexture9Ext : AsSafe<IDirect3DBaseTexture9> {
     /// Get the filter type that is used for automatically generated mipmap sublevels.
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = safe_device_pure();
     /// # let texture = device.create_texture(128, 128, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
@@ -193,13 +186,11 @@ pub trait IDirect3DBaseTexture9Ext : AsSafe<IDirect3DBaseTexture9> {
     /// **Warning:**  If you create a texture with [Usage::AutoGenMipMap] to make that texture automatically generate sublevels, get_level_count always returns 1 for the number of levels.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok(`1`)                 If created with [Usage::AutoGenMipMap]
     /// *   Ok(`levels`)            Otherwise
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = safe_device_pure();
     /// // Automatic level count
@@ -220,12 +211,10 @@ pub trait IDirect3DBaseTexture9Ext : AsSafe<IDirect3DBaseTexture9> {
     /// Returns a value clamped to the maximum level-of-detail set for a managed texture (this method is not supported for an unmanaged texture).
     ///
     /// ### Returns
-    ///
     /// *   `lod`   [Pool::Managed] textures
     /// *   `0`     Unmanaged textures
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = safe_device_pure();
     /// let texture = device.create_texture(128, 128, 0, Usage::None, Format::A8R8G8B8, Pool::Managed, ()).unwrap();
@@ -260,13 +249,11 @@ pub trait IDirect3DBaseTexture9Ext : AsSafe<IDirect3DBaseTexture9> {
     /// In this case, no failure is returned. For more information about usage constants, see [Usage].
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]   On invalid [TextureFilterType]s
     /// *   [D3DERR::INVALIDCALL]   On [TextureFilterType]s not supported by the driver
     /// *   Ok(`()`)
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = safe_device_pure();
     /// # let texture = device.create_texture(128, 128, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
@@ -292,12 +279,10 @@ pub trait IDirect3DBaseTexture9Ext : AsSafe<IDirect3DBaseTexture9> {
     /// Sets the most detailed level-of-detail for a [Pool::Managed] texture.
     ///
     /// ### Returns
-    ///
     /// *   `0`                 - for nonmanaged textures (e.g. not [Pool::Managed]?)
     /// *   `old_lod` : [u32]   - the previous most detailed level-of-detail supported.
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = safe_device_pure();
     /// let texture = device.create_texture(128, 128, 0, Usage::None, Format::A8R8G8B8, Pool::Managed, ()).unwrap();
@@ -325,7 +310,6 @@ impl<T: AsSafe<IDirect3DBaseTexture9>> IDirect3DBaseTexture9Ext for T {}
 /// IDirect3DCubeTexture9 extension methods
 ///
 /// ### Methods
-///
 /// | thindx                                                                            | docs.microsoft.com        | Description |
 /// | --------------------------------------------------------------------------------- | ------------------------- | ----------- |
 /// | [add_dirty_rect](Self::add_dirty_rect)                                            | [AddDirtyRect]            | Adds a dirty region to a cube texture resource.
@@ -362,13 +346,11 @@ pub trait IDirect3DCubeTexture9Ext : AsSafe<IDirect3DCubeTexture9> {
     /// Adds a dirty region to a cube texture resource.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]   if `face` is invalid
     /// *   [D3DERR::INVALIDCALL]   if `bounds` exceeds bounds or has negative dimensions
     /// *   Ok(`()`)
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = safe_device_pure();
     /// let texture = device.create_cube_texture(128, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
@@ -395,12 +377,10 @@ pub trait IDirect3DCubeTexture9Ext : AsSafe<IDirect3DCubeTexture9> {
     /// Retrieves a cube texture map surface.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok([Surface])
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = safe_device_pure();
     /// let texture = device.create_cube_texture(128, 8, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
@@ -423,12 +403,10 @@ pub trait IDirect3DCubeTexture9Ext : AsSafe<IDirect3DCubeTexture9> {
     /// Retrieves a description of one face of the specified cube texture level.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]   if `level` >= `get_level_count`
     /// *   Ok([SurfaceDesc])
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = safe_device_pure();
     /// let texture = device.create_cube_texture(128, 8, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
@@ -451,7 +429,6 @@ pub trait IDirect3DCubeTexture9Ext : AsSafe<IDirect3DCubeTexture9> {
     /// Locks a rectangle on a cube texture resource.
     ///
     /// ### ⚠️ Safety ⚠️
-    ///
     /// *   `face` must be a valid cubemap face
     /// *   `level` must be a valid mipmap level
     /// *   `rect` must be `..` or a valid subregion of the surface in question
@@ -459,12 +436,10 @@ pub trait IDirect3DCubeTexture9Ext : AsSafe<IDirect3DCubeTexture9> {
     /// *   `self` may need to be unlocked again before being bound, drawn, or released
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok([D3DLOCKED_RECT])
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = safe_device_pure();
     /// const S : usize = 128;
@@ -497,12 +472,10 @@ pub trait IDirect3DCubeTexture9Ext : AsSafe<IDirect3DCubeTexture9> {
     /// Unlocks a rectangle on a cube texture resource.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok(`()`)
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = safe_device_pure();
     /// const S : usize = 128;
@@ -533,7 +506,6 @@ impl<T: AsSafe<IDirect3DCubeTexture9>> IDirect3DCubeTexture9Ext for T {}
 /// IDirect3DTexture9 extension methods
 ///
 /// ### Methods
-///
 /// | thindx                                                                            | docs.microsoft.com        | Description |
 /// | --------------------------------------------------------------------------------- | ------------------------- | ----------- |
 /// | [add_dirty_rect](Self::add_dirty_rect)                                            | [AddDirtyRect]            | Adds a dirty region to a texture resource.
@@ -570,12 +542,10 @@ pub trait IDirect3DTexture9Ext : AsSafe<IDirect3DTexture9> {
     /// Adds a dirty region to a texture resource.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]   if `bounds` exceeds bounds or has negative dimensions
     /// *   Ok(`()`)
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = safe_device_pure();
     /// let texture = device.create_texture(128, 128, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
@@ -600,12 +570,10 @@ pub trait IDirect3DTexture9Ext : AsSafe<IDirect3DTexture9> {
     /// Retrieves a texture map surface.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok([Surface])
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = safe_device_pure();
     /// let texture = device.create_texture(128, 128, 8, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
@@ -626,12 +594,10 @@ pub trait IDirect3DTexture9Ext : AsSafe<IDirect3DTexture9> {
     /// Retrieves a description of one face of the specified cube texture level.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]   if `level` >= `get_level_count`
     /// *   Ok([SurfaceDesc])
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = safe_device_pure();
     /// let texture = device.create_texture(128, 128, 8, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
@@ -654,19 +620,16 @@ pub trait IDirect3DTexture9Ext : AsSafe<IDirect3DTexture9> {
     /// Locks a rectangle on a cube texture resource.
     ///
     /// ### ⚠️ Safety ⚠️
-    ///
     /// *   `level` must be a valid mipmap level
     /// *   `rect` must be `..` or a valid subregion of the surface in question
     /// *   `self` should be lockable in the style specified by `flags`... and not already locked?
     /// *   `self` may need to be unlocked again before being bound, drawn, or released
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok([D3DLOCKED_RECT])
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = safe_device_pure();
     /// const W : usize = 128;
@@ -699,12 +662,10 @@ pub trait IDirect3DTexture9Ext : AsSafe<IDirect3DTexture9> {
     /// Unlocks a rectangle on a cube texture resource.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok(`()`)
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = safe_device_pure();
     /// const W : usize = 128;
@@ -735,7 +696,6 @@ impl<T: AsSafe<IDirect3DTexture9>> IDirect3DTexture9Ext for T {}
 /// IDirect3DVolumeTexture9 extension methods
 ///
 /// ### Methods
-///
 /// | thindx                                                                            | docs.microsoft.com        | Description |
 /// | --------------------------------------------------------------------------------- | ------------------------- | ----------- |
 /// | [add_dirty_box](Self::add_dirty_box)                                              | [AddDirtyBox]             | Adds a dirty region to a volume texture resource.
@@ -771,8 +731,11 @@ pub trait IDirect3DVolumeTexture9Ext : AsSafe<IDirect3DVolumeTexture9> {
     ///
     /// Adds a dirty region to a volume texture resource.
     ///
-    /// ### Example
+    /// ### Returns
+    /// *   [D3DERR::INVALIDCALL]
+    /// *   Ok(`()`)
     ///
+    /// ### Example
     /// ```rust
     /// # use dev::d3d9::*; let device = device_pure();
     /// # let texture = device.create_volume_texture(32, 32, 32, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
@@ -780,11 +743,6 @@ pub trait IDirect3DVolumeTexture9Ext : AsSafe<IDirect3DVolumeTexture9> {
     /// texture.add_dirty_box((0,0,0) .. (32,32,32)).unwrap();
     /// texture.add_dirty_box(Box::from((0,0,0) .. (32,32,32))).unwrap();
     /// ```
-    ///
-    /// ### Returns
-    ///
-    /// *   [D3DERR::INVALIDCALL]
-    /// *   Ok(`()`)
     fn add_dirty_box(&self, dirty_box: impl IntoBoxOrFull) -> Result<(), MethodError> {
         let dirty_box   = dirty_box.into_box();
         let dirty_box   = dirty_box.as_ref().map_or(null(), |b| &**b);
@@ -795,8 +753,11 @@ pub trait IDirect3DVolumeTexture9Ext : AsSafe<IDirect3DVolumeTexture9> {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolumetexture9-getleveldesc)\]
     /// IDirect3DVolumeTexture9::GetLevelDesc
     ///
-    /// ### Example
+    /// ### Returns
+    /// *   [D3DERR::INVALIDCALL]
+    /// *   Ok([VolumeDesc])
     ///
+    /// ### Example
     /// ```rust
     /// # use dev::d3d9::*; let device = device_pure();
     /// # let texture = device.create_volume_texture(32, 32, 32, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
@@ -809,11 +770,6 @@ pub trait IDirect3DVolumeTexture9Ext : AsSafe<IDirect3DVolumeTexture9> {
     /// assert_eq!(level0.height, 32);
     /// assert_eq!(level0.depth,  32);
     /// ```
-    ///
-    /// ### Returns
-    ///
-    /// *   [D3DERR::INVALIDCALL]
-    /// *   Ok([VolumeDesc])
     fn get_level_desc(&self, level: u32) -> Result<VolumeDesc, MethodError> {
         let mut desc = VolumeDesc::default();
         let hr = unsafe { self.as_winapi().GetLevelDesc(level, &mut *desc) };
@@ -824,8 +780,11 @@ pub trait IDirect3DVolumeTexture9Ext : AsSafe<IDirect3DVolumeTexture9> {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolumetexture9-getvolumelevel)\]
     /// IDirect3DVolumeTexture9::GetVolumeLevel
     ///
-    /// ### Example
+    /// ### Returns
+    /// *   [D3DERR::INVALIDCALL]
+    /// *   Ok([Volume])
     ///
+    /// ### Example
     /// ```rust
     /// # use dev::d3d9::*; let device = device_pure();
     /// # let texture = device.create_volume_texture(32, 32, 32, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
@@ -840,11 +799,6 @@ pub trait IDirect3DVolumeTexture9Ext : AsSafe<IDirect3DVolumeTexture9> {
     /// assert_eq!(desc.height, 32);
     /// assert_eq!(desc.depth,  32);
     /// ```
-    ///
-    /// ### Returns
-    ///
-    /// *   [D3DERR::INVALIDCALL]
-    /// *   Ok([Volume])
     fn get_volume_level(&self, level: u32) -> Result<Volume, MethodError> {
         let mut volume = null_mut();
         let hr = unsafe { self.as_winapi().GetVolumeLevel(level, &mut volume) };
@@ -856,14 +810,16 @@ pub trait IDirect3DVolumeTexture9Ext : AsSafe<IDirect3DVolumeTexture9> {
     /// IDirect3DVolumeTexture9::LockBox
     ///
     /// ### ⚠️ Safety ⚠️
-    ///
     /// *   `level` must be a valid mipmap level
     /// *   `box_` must be `..` or a valid subregion of the volume in question
     /// *   `self` should be lockable in the style specified by `flags`... and not already locked?
     /// *   `self` may need to be unlocked again before being bound, drawn, or released
     ///
-    /// ### Example
+    /// ### Returns
+    /// *   [D3DERR::INVALIDCALL]   If the texture belongs to [Pool::Default]
+    /// *   Ok([D3DLOCKED_BOX])
     ///
+    /// ### Example
     /// ```rust
     /// # use dev::d3d9::*; let device = device_pure();
     /// // Pool::Default textures cannot be locked
@@ -883,11 +839,6 @@ pub trait IDirect3DVolumeTexture9Ext : AsSafe<IDirect3DVolumeTexture9> {
     /// }
     /// texture.unlock_box(0).unwrap();
     /// ```
-    ///
-    /// ### Returns
-    ///
-    /// *   [D3DERR::INVALIDCALL]   If the texture belongs to [Pool::Default]
-    /// *   Ok([D3DLOCKED_BOX])
     unsafe fn lock_box_unchecked(&self, level: u32, box_: impl IntoBoxOrFull, flags: impl Into<Lock>) -> Result<D3DLOCKED_BOX, MethodError> {
         let box_    = box_.into_box();
         let box_    = box_.as_ref().map_or(null(), |b| &**b);
@@ -901,8 +852,11 @@ pub trait IDirect3DVolumeTexture9Ext : AsSafe<IDirect3DVolumeTexture9> {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolumetexture9-unlockbox)\]
     /// IDirect3DVolumeTexture9::UnlockBox
     ///
-    /// ### Example
+    /// ### Returns
+    /// *   [D3DERR::INVALIDCALL]   If the texture wasn't locked
+    /// *   Ok(`()`)
     ///
+    /// ### Example
     /// ```rust
     /// # use dev::d3d9::*; let device = device_pure();
     /// # let texture = device.create_volume_texture(32, 32, 32, 0, Usage::None, Format::A8R8G8B8, Pool::Managed, ()).unwrap();
@@ -915,11 +869,6 @@ pub trait IDirect3DVolumeTexture9Ext : AsSafe<IDirect3DVolumeTexture9> {
     /// texture.unlock_box(0).unwrap();
     /// assert_eq!(D3DERR::INVALIDCALL, texture.unlock_box(0));
     /// ```
-    ///
-    /// ### Returns
-    ///
-    /// *   [D3DERR::INVALIDCALL]   If the texture wasn't locked
-    /// *   Ok(`()`)
     fn unlock_box(&self, level: u32) -> Result<(), MethodError> {
         let hr = unsafe { self.as_winapi().UnlockBox(level) };
         MethodError::check("IDirect3DVolumeTexture9::UnlockBox", hr)

@@ -26,7 +26,6 @@ pub struct SwapChainEx(pub(crate) mcom::Rc<IDirect3DSwapChain9Ex>);
 /// IDirect3DSwapChain9Ex extension methods
 ///
 /// ### Methods
-///
 /// | thindx                                                    | docs.microsoft.com        | description   |
 /// | --------------------------------------------------------- | ------------------------- | ------------- |
 /// | [get_display_mode_ex](Self::get_display_mode_ex)          | [GetDisplayModeEx]        | Retrieves the display mode's spatial resolution, color resolution, refresh frequency, and rotation settings.

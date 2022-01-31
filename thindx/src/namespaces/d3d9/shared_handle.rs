@@ -8,7 +8,6 @@ use winapi::shared::ntdef::HANDLE;
 /// Currently, the only type that implements this is `()`, which represents not using resource sharing.
 ///
 /// ### ⚠️ Safety ⚠️
-///
 /// Don't implement this trait yet.  Just use `()`.
 pub unsafe trait SharedHandleParam {
     #[doc(hidden)] fn to_handle(self) -> *mut HANDLE;

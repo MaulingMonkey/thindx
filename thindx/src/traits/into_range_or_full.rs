@@ -7,7 +7,6 @@ use std::ops::{Range, RangeFull};
 /// [`Range`] or [`..`](RangeFull)
 pub trait IntoRangeOrFull<T> {
     /// ### Returns
-    ///
     /// *   Some([Range]) to indicate a subrange
     /// *   [None] to indicate [RangeFull]
     fn into_range(self) -> Option<Range<T>>;
@@ -16,7 +15,6 @@ pub trait IntoRangeOrFull<T> {
 /// [`Rect`] or [`..`](RangeFull)
 pub trait IntoRectOrFull {
     /// ### Returns
-    ///
     /// *   Some([Rect]) to indicate a subrect
     /// *   [None] to indicate [RangeFull]
     fn into_rect(self) -> Option<Rect>;
@@ -25,7 +23,6 @@ pub trait IntoRectOrFull {
 /// [`Box`] or [`..`](RangeFull)
 pub trait IntoBoxOrFull {
     /// ### Returns
-    ///
     /// *   Some([Box]) to indicate a subbox
     /// *   [None] to indicate [RangeFull]
     fn into_box(self) -> Option<Box>;

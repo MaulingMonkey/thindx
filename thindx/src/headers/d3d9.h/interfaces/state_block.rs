@@ -15,7 +15,6 @@ use std::ptr::null_mut;
 /// changes to [Device] state.
 ///
 /// ### See Also
-///
 /// *   [IDirect3DDevice9Ext::begin_state_block]
 /// *   [IDirect3DDevice9Ext::create_state_block]
 /// *   [IDirect3DDevice9Ext::end_state_block]
@@ -31,7 +30,6 @@ unsafe impl AsSafe<IDirect3DStateBlock9 > for StateBlock { fn as_safe(&self) -> 
 /// IDirect3DStateBlock9 extension methods
 ///
 /// ### Methods
-///
 /// | thindx                                                        | docs.microsoft.com    | Description |
 /// | ------------------------------------------------------------- | --------------------- | ----------- |
 /// | [apply](Self::apply)                                          | [Apply]               | Apply the state block to the current device state.
@@ -49,7 +47,6 @@ pub trait IDirect3DStateBlock9Ext : AsSafe<IDirect3DStateBlock9> {
     /// Apply the state block to the current device state.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok(`()`)
     fn apply(&self) -> Result<(), MethodError> {
@@ -63,7 +60,6 @@ pub trait IDirect3DStateBlock9Ext : AsSafe<IDirect3DStateBlock9> {
     /// Capture the current value of states that are included in a stateblock.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok(`()`)
     fn capture(&self) -> Result<(), MethodError> {
@@ -77,7 +73,6 @@ pub trait IDirect3DStateBlock9Ext : AsSafe<IDirect3DStateBlock9> {
     /// Gets the device.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]   (Pure device?)
     /// *   Ok([Device])
     fn get_device(&self) -> Result<Device, MethodError> {

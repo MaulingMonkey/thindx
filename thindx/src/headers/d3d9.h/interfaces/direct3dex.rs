@@ -32,7 +32,6 @@ pub struct Direct3DEx(pub(crate) mcom::Rc<IDirect3D9Ex>);
 /// IDirect3D9Ex extension methods
 ///
 /// ### Methods
-///
 /// | thindx                                                            | docs.microsoft.com        | Description |
 /// | ----------------------------------------------------------------- | ------------------------- | ----------- |
 /// | [create](Self::create)                                            | [Direct3DCreate9Ex]       | Creates an [IDirect3D9Ex] object and returns an interface to it.
@@ -59,7 +58,6 @@ pub trait IDirect3D9ExExt : AsSafe<IDirect3D9Ex> {
     /// Creates an [IDirect3D9Ex](IDirect3D9ExExt) object and returns an interface to it.
     ///
     /// ### ⚠️ Safety ⚠️
-    ///
     /// While this individual call should be 100% safe/sound, there is a bunch of general
     /// soundness holes that Rust can't always sanely guard against.  These include:
     ///
@@ -82,7 +80,6 @@ pub trait IDirect3D9ExExt : AsSafe<IDirect3D9Ex> {
     /// Creates a device to represent the display adapter.
     ///
     /// ### ⚠️ Safety ⚠️
-    ///
     /// *   The caller's codebase is responsible for ensuring any [HWND]s (`hwnd`, `presentation_parameters.hDeviceWindow`) outlive the [Device].
     ///      See [IDirect3D9Ext::create_device] for guidance and details.
     /// *   `fullscreen_display_modes` is assumed to contain an entry for every adapter if `behavior_flags & D3DCREATE_ADAPTERGROUP_DEVICE` (TODO: enforce this via checks?)

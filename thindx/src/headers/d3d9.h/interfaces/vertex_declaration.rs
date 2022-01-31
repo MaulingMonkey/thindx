@@ -24,7 +24,6 @@ unsafe impl AsSafe<IDirect3DVertexDeclaration9  > for VertexDeclaration { fn as_
 /// IDirect3DVertexDeclaration9 extension methods
 ///
 /// ### Methods
-///
 /// | thindx                                                        | docs.microsoft.com    | Description |
 /// | ------------------------------------------------------------- | --------------------- | ----------- |
 /// | [get_declaration_size](Self::get_declaration_size)            | [GetDeclaration]      | Get the number of elements in this vertex declaration, including the [VertexElement::END]
@@ -42,7 +41,6 @@ pub trait IDirect3DVertexDeclaration9Ext : AsSafe<IDirect3DVertexDeclaration9> {
     /// Get the number of elements in this vertex declaration, including the [VertexElement::END]
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]   If the device is a pure device?
     /// *   Ok([u32])               The number of elements in this vertex declaration, including the [VertexElement::END]
     fn get_declaration_size(&self) -> Result<u32, MethodError> {
@@ -58,7 +56,6 @@ pub trait IDirect3DVertexDeclaration9Ext : AsSafe<IDirect3DVertexDeclaration9> {
     /// Gets the elements in this vertex declaration, including the [VertexElement::END]
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]   If the device is a pure device?
     /// *   [D3DERR::INVALIDCALL]   If `elements` is too small to contain the result
     /// *   Ok(&[[VertexElement]])                  If `elements` was successfully written to, including the [VertexElement::END]
@@ -76,7 +73,6 @@ pub trait IDirect3DVertexDeclaration9Ext : AsSafe<IDirect3DVertexDeclaration9> {
     /// Gets the elements in this vertex declaration, including the [VertexElement::END]
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]               If the device is a pure device?
     /// *   Ok(Vec&lt;[VertexElement]&gt;)      The elements of this vertex declaration, including the [VertexElement::END]
     fn get_declaration(&self) -> Result<Vec<VertexElement>, MethodError> {
@@ -94,7 +90,6 @@ pub trait IDirect3DVertexDeclaration9Ext : AsSafe<IDirect3DVertexDeclaration9> {
     /// Gets the current device.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]   if the device is a pure device?
     /// *   Ok([Device])
     fn get_device(&self) -> Result<Device, MethodError> {

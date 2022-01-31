@@ -13,16 +13,13 @@ use std::ptr::null_mut;
 /// Load a library using with `LOAD_LIBRARY_SEARCH_SYSTEM32`
 ///
 /// ### Arguments
-///
 /// - `name0`   should be a `\0` terminated DLL name, like `"d3dcompiler_47.dll\0"`
 ///
 /// ### Panics
-///
 /// - if `name0` does not end with `\0`
 /// - if `name0` contains interior `\0`s
 ///
 /// ### See Also
-///
 /// *   Dynamic-Link Library Security<br>
 ///     <https://docs.microsoft.com/en-us/windows/win32/dlls/dynamic-link-library-security>
 /// *   Secure loading of libraries to prevent DLL preloading attacks<br>
@@ -68,7 +65,6 @@ pub(crate) trait LibraryExt : Sized + From<Library> + Into<Library> {
     /// Load a symbol from the library by ordinal.
     ///
     /// ### ⚠️ Safety ⚠️
-    ///
     /// *   This function implicitly transmutes `FARPROC` to `FnPtr` without type checking!
     ///     Use extreme caution, and consider following [d3d::Compiler::load_impl]'s example in using a proc macro to verify function type signatures against winapi if possible.
     /// *   New DLLs often change the ordinals of their functions.  This is super sketchy!
@@ -103,7 +99,6 @@ pub(crate) trait LibraryExt : Sized + From<Library> + Into<Library> {
     }
 
     /// ### ⚠️ Safety ⚠️
-    ///
     /// *   `hmodule` should be a permanently loaded, valid module
     unsafe fn from_hmodule(hmodule: HMODULE) -> Option<Self> {
         if hmodule.is_null() {

@@ -16,7 +16,6 @@ use std::ptr::null_mut;
 /// An asyncronous GPU query for [occlusion or other information](https://docs.microsoft.com/en-us/windows/win32/direct3d9/queries).
 ///
 /// ### See Also
-///
 /// *   [IDirect3DDevice9Ext::create_query]
 #[derive(Clone)] #[repr(transparent)]
 pub struct Query(pub(crate) mcom::Rc<IDirect3DQuery9>);
@@ -30,7 +29,6 @@ unsafe impl AsSafe<IDirect3DQuery9  > for Query { fn as_safe(&self) -> &IDirect3
 /// IDirect3DQuery9 extension methods
 ///
 /// ### Methods
-///
 /// | thindx                                    | docs.microsoft.com    | Description |
 /// | ----------------------------------------- | --------------------- | ----------- |
 /// | [get_data](Self::get_data_inplace)        | [GetData]             | Polls a queried resource to get the query state or a query result. For more information about queries, see [Queries (Direct3D 9)].
@@ -57,7 +55,6 @@ pub trait IDirect3DQuery9Ext : AsSafe<IDirect3DQuery9> {
     /// [Queries (Direct3D9)]:          https://docs.microsoft.com/en-us/windows/desktop/direct3d9/queries
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::DEVICELOST]    The device was lost
     /// *   [D3DERR::INVALIDCALL]   If `data.as_mut().len()` > `u32::MAX`
     /// *   Ok(`true`)              The query data is available

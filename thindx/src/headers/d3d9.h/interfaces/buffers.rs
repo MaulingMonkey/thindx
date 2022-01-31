@@ -15,7 +15,6 @@ use std::ptr::null_mut;
 /// indexes verticies in a [VertexBuffer] when rendering.
 ///
 /// ### See Also
-///
 /// *   [IDirect3DDevice9Ext::create_index_buffer]
 /// *   [IDirect3DDevice9Ext::set_indices]
 /// *   [IDirect3DDevice9Ext::get_indices]
@@ -28,7 +27,6 @@ pub struct IndexBuffer(pub(crate) mcom::Rc<IDirect3DIndexBuffer9>);
 /// typically contains points of a mesh to be rendered.
 ///
 /// ### See Also
-///
 /// *   [IDirect3DDevice9Ext::create_vertex_buffer]
 /// *   [IDirect3DDevice9Ext::set_stream_source]
 /// *   [IDirect3DDevice9Ext::set_stream_source_freq]
@@ -53,7 +51,6 @@ unsafe impl AsSafe<IDirect3DVertexBuffer9   > for VertexBuffer { fn as_safe(&sel
 /// IDirect3DIndexBuffer9 extension methods
 ///
 /// ### Methods
-///
 /// | thindx                                    | docs.microsoft.com    | Description |
 /// | ----------------------------------------- | --------------------- | ----------- |
 /// | [get_desc](Self::get_desc)                | [GetDesc]             | Retrieves a description of the index buffer.
@@ -70,8 +67,11 @@ pub trait IDirect3DIndexBuffer9Ext : AsSafe<IDirect3DIndexBuffer9> {
     ///
     /// Retrieves a description of the index buffer.
     ///
-    /// ### Example
+    /// ### Returns
+    /// *   [D3DERR::INVALIDCALL]
+    /// *   Ok([IndexBufferDesc])
     ///
+    /// ### Example
     /// ```rust
     /// # use dev::d3d9::*; let device = device_pure();
     /// let tri = device.create_index_buffer(3 * 2, Usage::None, Format::Index16, Pool::Managed, ()).unwrap();
@@ -82,11 +82,6 @@ pub trait IDirect3DIndexBuffer9Ext : AsSafe<IDirect3DIndexBuffer9> {
     /// assert_eq!(desc.pool,   Pool::Managed);
     /// assert_eq!(desc.size,   6);
     /// ```
-    ///
-    /// ### Returns
-    ///
-    /// *   [D3DERR::INVALIDCALL]
-    /// *   Ok([IndexBufferDesc])
     fn get_desc(&self) -> Result<IndexBufferDesc, MethodError> {
         let mut desc = IndexBufferDesc::default();
         let hr = unsafe { self.as_winapi().GetDesc(&mut *desc) };
@@ -100,7 +95,6 @@ pub trait IDirect3DIndexBuffer9Ext : AsSafe<IDirect3DIndexBuffer9> {
     /// Locks a range of index data, and obtains a pointer to the index buffer memory.
     ///
     /// ### ⚠️ Safety ⚠️
-    ///
     /// *   Invalid, out-of-bounds `offset` / `size`s might be unsound
     /// *   Violating the constraints imposed by `flags` is definitely unsound
     /// *   Having multiple writers to the resulting pointer (including from other locks?) is also super unsound
@@ -108,8 +102,11 @@ pub trait IDirect3DIndexBuffer9Ext : AsSafe<IDirect3DIndexBuffer9> {
     /// Sound users of this API will lock, modify, and unlock in such a way as to prevent any other concurrent modifier of the data in question.
     /// This is simplified by the Direct3D APIs being \![Send], \![Sync], but care must be involved with traits that could execute arbitrary code.
     ///
-    /// ### Example
+    /// ### Returns
+    /// *   [D3DERR::INVALIDCALL]
+    /// *   Ok(data)
     ///
+    /// ### Example
     /// ```rust
     /// # use dev::d3d9::*; let device = device_pure();
     /// let tri = device.create_index_buffer(3 * 2, Usage::None, Format::Index16, Pool::Managed, ()).unwrap();
@@ -120,11 +117,6 @@ pub trait IDirect3DIndexBuffer9Ext : AsSafe<IDirect3DIndexBuffer9> {
     /// }
     /// tri.unlock().unwrap();
     /// ```
-    ///
-    /// ### Returns
-    ///
-    /// *   [D3DERR::INVALIDCALL]
-    /// *   Ok(data)
     unsafe fn lock_unchecked(&self, offset: u32, size: u32, flags: impl Into<Lock>) -> Result<*mut c_void, MethodError> {
         let mut data = null_mut();
         let hr = unsafe { self.as_winapi().Lock(offset, size, &mut data, flags.into().into()) };
@@ -137,18 +129,16 @@ pub trait IDirect3DIndexBuffer9Ext : AsSafe<IDirect3DIndexBuffer9> {
     ///
     /// Unlocks index data.
     ///
-    /// ### Example
+    /// ### Returns
+    /// *   [D3DERR::INVALIDCALL]   The index buffer wasn't locked?
+    /// *   Ok(`()`)
     ///
+    /// ### Example
     /// ```rust
     /// # use dev::d3d9::*; let device = device_pure();
     /// let tri = device.create_index_buffer(3*4*3, Usage::None, Format::Index16, Pool::Managed, ()).unwrap();
     /// tri.unlock().unwrap(); // may succeed, even if the buffer wasn't locked <_<;;
     /// ```
-    ///
-    /// ### Returns
-    ///
-    /// *   [D3DERR::INVALIDCALL]   The index buffer wasn't locked?
-    /// *   Ok(`()`)
     fn unlock(&self) -> Result<(), MethodError> {
         let hr = unsafe { self.as_winapi().Unlock() };
         MethodError::check("IDirect3DIndexBuffer9::Unlock", hr)
@@ -163,7 +153,6 @@ impl<T: AsSafe<IDirect3DIndexBuffer9>> IDirect3DIndexBuffer9Ext for T {}
 /// IDirect3DVertexBuffer9 extension methods
 ///
 /// ### Methods
-///
 /// | thindx                                    | docs.microsoft.com    | Description |
 /// | ----------------------------------------- | --------------------- | ----------- |
 /// | [get_desc](Self::get_desc)                | [GetDesc]             | Retrieves a description of the vertex buffer.
@@ -180,8 +169,11 @@ pub trait IDirect3DVertexBuffer9Ext : AsSafe<IDirect3DVertexBuffer9> {
     ///
     /// Retrieves a description of the vertex buffer.
     ///
-    /// ### Example
+    /// ### Returns
+    /// *   [D3DERR::INVALIDCALL]
+    /// *   Ok([VertexBufferDesc])
     ///
+    /// ### Example
     /// ```rust
     /// # use dev::d3d9::*; let device = device_pure();
     /// let tri = device.create_vertex_buffer(3*4*3, Usage::None, FVF::XYZ, Pool::Managed, ()).unwrap();
@@ -193,11 +185,6 @@ pub trait IDirect3DVertexBuffer9Ext : AsSafe<IDirect3DVertexBuffer9> {
     /// assert_eq!(desc.size,   36);
     /// assert_eq!(desc.fvf,    FVF::XYZ);
     /// ```
-    ///
-    /// ### Returns
-    ///
-    /// *   [D3DERR::INVALIDCALL]
-    /// *   Ok([VertexBufferDesc])
     fn get_desc(&self) -> Result<VertexBufferDesc, MethodError> {
         let mut desc = VertexBufferDesc::default();
         let hr = unsafe { self.as_winapi().GetDesc(&mut *desc) };
@@ -211,7 +198,6 @@ pub trait IDirect3DVertexBuffer9Ext : AsSafe<IDirect3DVertexBuffer9> {
     /// Locks a range of vertex data, and obtains a pointer to the vertex buffer memory.
     ///
     /// ### ⚠️ Safety ⚠️
-    ///
     /// *   Invalid, out-of-bounds `offset` / `size`s might be unsound
     /// *   Violating the constraints imposed by `flags` is definitely unsound
     /// *   Having multiple writers to the resulting pointer (including from other locks?) is also super unsound
@@ -219,8 +205,11 @@ pub trait IDirect3DVertexBuffer9Ext : AsSafe<IDirect3DVertexBuffer9> {
     /// Sound users of this API will lock, modify, and unlock in such a way as to prevent any other concurrent modifier of the data in question.
     /// This is simplified by the Direct3D APIs being \![Send], \![Sync], but care must be involved with traits that could execute arbitrary code.
     ///
-    /// ### Example
+    /// ### Returns
+    /// *   [D3DERR::INVALIDCALL]
+    /// *   Ok(data)
     ///
+    /// ### Example
     /// ```rust
     /// # use dev::d3d9::*; let device = device_pure();
     /// let tri = device.create_vertex_buffer(3*4*3, Usage::None, FVF::XYZ, Pool::Managed, ()).unwrap();
@@ -235,11 +224,6 @@ pub trait IDirect3DVertexBuffer9Ext : AsSafe<IDirect3DVertexBuffer9> {
     /// }
     /// tri.unlock().unwrap();
     /// ```
-    ///
-    /// ### Returns
-    ///
-    /// *   [D3DERR::INVALIDCALL]
-    /// *   Ok(data)
     unsafe fn lock_unchecked(&self, offset: u32, size: u32, flags: impl Into<Lock>) -> Result<*mut c_void, MethodError> {
         let mut data = null_mut();
         let hr = unsafe { self.as_winapi().Lock(offset, size, &mut data, flags.into().into()) };
@@ -252,18 +236,16 @@ pub trait IDirect3DVertexBuffer9Ext : AsSafe<IDirect3DVertexBuffer9> {
     ///
     /// Unlocks vertex data.
     ///
-    /// ### Example
+    /// ### Returns
+    /// *   [D3DERR::INVALIDCALL]
+    /// *   Ok(`()`)
     ///
+    /// ### Example
     /// ```rust
     /// # use dev::d3d9::*; let device = device_pure();
     /// let tri = device.create_vertex_buffer(3*4*3, Usage::None, FVF::XYZ, Pool::Managed, ()).unwrap();
     /// tri.unlock().unwrap(); // may succeed, even if the buffer wasn't locked <_<;;
     /// ```
-    ///
-    /// ### Returns
-    ///
-    /// *   [D3DERR::INVALIDCALL]
-    /// *   Ok(`()`)
     fn unlock(&self) -> Result<(), MethodError> {
         let hr = unsafe { self.as_winapi().Unlock() };
         MethodError::check("IDirect3DVertexBuffer9::Unlock", hr)

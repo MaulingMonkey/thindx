@@ -32,7 +32,6 @@ pub struct DeviceEx(pub(crate) mcom::Rc<IDirect3DDevice9Ex>);
 /// IDirect3DDevice9Ex extension methods
 ///
 /// ### Methods
-///
 /// | thindx                                                                        | docs.microsoft.com                | Description |
 /// | ----------------------------------------------------------------------------- | --------------------------------- | ----------- |
 /// | [check_device_state](Self::check_device_state)                                | [CheckDeviceState]                | Reports the current cooperative-level status of the Direct3D device for a windowed or full-screen application.
@@ -77,7 +76,6 @@ pub trait IDirect3DDevice9ExExt : AsSafe<IDirect3DDevice9Ex> {
     /// Reports the current cooperative-level status of the Direct3D device for a windowed or full-screen application.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::DEVICEHUNG]
     /// *   [D3DERR::DEVICELOST]
     /// *   [D3DERR::DEVICEREMOVED]
@@ -87,7 +85,6 @@ pub trait IDirect3DDevice9ExExt : AsSafe<IDirect3DDevice9Ex> {
     /// *   [D3D::S_PRESENT_MODE_CHANGED]
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = device_ex_test();
     /// // TODO
@@ -102,13 +99,11 @@ pub trait IDirect3DDevice9ExExt : AsSafe<IDirect3DDevice9Ex> {
     /// Checks an array of resources to determine if it is likely that they will cause a large stall at Draw time because the system must make the resources GPU-accessible.
     ///
     /// ### Returns
-    ///
-    /// *   [THINERR::SLICE_OVERFLOW]    if `resources.len()` > `65535`
+    /// *   [THINERR::SLICE_OVERFLOW]   if `resources.len()` > `65535`
     /// *   [D3DERR::INVALIDCALL]       ???
     /// *   Ok(
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = device_ex_test();
     /// // TODO
@@ -135,12 +130,10 @@ pub trait IDirect3DDevice9ExExt : AsSafe<IDirect3DDevice9Ex> {
     /// Composition is done by the GPU using bitwise operations.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok(`()`)
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = device_ex_test();
     /// // TODO
@@ -159,12 +152,10 @@ pub trait IDirect3DDevice9ExExt : AsSafe<IDirect3DDevice9Ex> {
     /// Creates a depth-stencil surface.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok([Surface])
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = device_ex_test();
     /// // TODO
@@ -188,12 +179,10 @@ pub trait IDirect3DDevice9ExExt : AsSafe<IDirect3DDevice9Ex> {
     /// Create an off-screen surface.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok([Surface])
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = device_ex_test();
     /// // TODO
@@ -216,12 +205,10 @@ pub trait IDirect3DDevice9ExExt : AsSafe<IDirect3DDevice9Ex> {
     /// Creates a render-target surface.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok([Surface])
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = device_ex_test();
     /// // TODO
@@ -245,12 +232,10 @@ pub trait IDirect3DDevice9ExExt : AsSafe<IDirect3DDevice9Ex> {
     /// Retrieves the display mode's spatial resolution, color resolution, refresh frequency, and rotation settings.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok([DisplayModeEx])
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = device_ex_test();
     /// // TODO
@@ -270,13 +255,11 @@ pub trait IDirect3DDevice9ExExt : AsSafe<IDirect3DDevice9Ex> {
     /// Get the priority of the GPU thread.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::DEVICEREMOVED]
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok(`priority`) where `-7` <= `priority` <= `7`
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = device_ex_test();
     /// // TODO
@@ -294,7 +277,6 @@ pub trait IDirect3DDevice9ExExt : AsSafe<IDirect3DDevice9Ex> {
     /// Retrieves the number of frames of data that the system is allowed to queue.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::DEVICELOST]
     /// *   [D3DERR::DEVICEREMOVED]
     /// *   [D3DERR::DRIVERINTERNALERROR]
@@ -303,7 +285,6 @@ pub trait IDirect3DDevice9ExExt : AsSafe<IDirect3DDevice9Ex> {
     /// *   Ok(`frames`)
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = device_ex_test();
     /// // TODO
@@ -321,7 +302,6 @@ pub trait IDirect3DDevice9ExExt : AsSafe<IDirect3DDevice9Ex> {
     /// Swap the swapchain's next buffer with the front buffer.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::DEVICELOST]
     /// *   [D3DERR::DEVICEHUNG]
     /// *   [D3DERR::DEVICEREMOVED]
@@ -329,7 +309,6 @@ pub trait IDirect3DDevice9ExExt : AsSafe<IDirect3DDevice9Ex> {
     /// *   Ok(`()`)
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = device_ex_test();
     /// // TODO
@@ -364,14 +343,12 @@ pub trait IDirect3DDevice9ExExt : AsSafe<IDirect3DDevice9Ex> {
     /// Resets the type, size, and format of the swap chain with all other surfaces persistent.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::DEVICELOST]
     /// *   [D3DERR::DEVICEHUNG]
     /// *   [D3DERR::INVALIDCALL] ?
     /// *   Ok(`()`)
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = device_ex_test();
     /// // TODO
@@ -388,12 +365,10 @@ pub trait IDirect3DDevice9ExExt : AsSafe<IDirect3DDevice9Ex> {
     /// Prepare the texture sampler for monochrome convolution filtering on a single-color texture.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok(`()`)
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = device_ex_test();
     /// // TODO
@@ -409,12 +384,10 @@ pub trait IDirect3DDevice9ExExt : AsSafe<IDirect3DDevice9Ex> {
     /// Prepare the texture sampler for monochrome convolution filtering on a single-color texture.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok(`()`)
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = device_ex_test();
     /// // TODO
@@ -433,13 +406,11 @@ pub trait IDirect3DDevice9ExExt : AsSafe<IDirect3DDevice9Ex> {
     /// Set the priority on the GPU thread.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]
     /// *   [D3DERR::DEVICEREMOVED]
     /// *   Ok(`()`)
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = device_ex_test();
     /// // TODO
@@ -455,12 +426,10 @@ pub trait IDirect3DDevice9ExExt : AsSafe<IDirect3DDevice9Ex> {
     /// Set the number of frames that the system is allowed to queue for rendering.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok(`()`)
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = device_ex_test();
     /// // TODO
@@ -476,12 +445,10 @@ pub trait IDirect3DDevice9ExExt : AsSafe<IDirect3DDevice9Ex> {
     /// Reports the current cooperative-level status of the Direct3D device for a windowed or full-screen application.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]
-    /// *   Ok(
+    /// *   Ok(`()`)
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = device_ex_test();
     /// // TODO
@@ -498,12 +465,10 @@ pub trait IDirect3DDevice9ExExt : AsSafe<IDirect3DDevice9Ex> {
     ///
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]
-    /// *   Ok(
+    /// *   Ok(`()`)
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = device_ex_test();
     /// // TODO

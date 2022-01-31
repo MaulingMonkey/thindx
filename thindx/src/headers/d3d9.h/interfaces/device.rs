@@ -53,7 +53,6 @@ unsafe impl AsSafe<IDirect3DDevice9 > for Device { fn as_safe(&self) -> &IDirect
 /// IDirect3DDevice9 extension methods
 ///
 /// ### Methods
-///
 /// | thindx                                                                    | docs.microsoft.com            | Description |
 /// | ------------------------------------------------------------------------- | ----------------------------- | ----------- |
 /// | [begin_scene](Self::begin_scene)                                          | [BeginScene]                  | Begins a scene.
@@ -302,19 +301,17 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-beginscene)\]
     /// IDirect3DDevice9::BeginScene
     ///
-    /// ### Example
+    /// ### Returns
+    /// *   [D3DERR::INVALIDCALL]   if the device was already within a scene (e.g. [begin_scene] was called twice without an intervening [end_scene])
+    /// *   `Ok(())`                if the device was not already within a scene, and now is
     ///
+    /// ### Example
     /// ```rust
     /// # use dev::d3d9::*; let device = device_pure();
     /// device.begin_scene().unwrap();
     /// // ...issue draw calls and stuff...
     /// device.end_scene().unwrap();
     /// ```
-    ///
-    /// ### Returns
-    ///
-    /// *   [D3DERR::INVALIDCALL]   if the device was already within a scene (e.g. [begin_scene] was called twice without an intervening [end_scene])
-    /// *   `Ok(())`                if the device was not already within a scene, and now is
     ///
     /// [begin_scene]:          Self::begin_scene
     /// [end_scene]:            Self::end_scene
@@ -328,7 +325,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// IDirect3DDevice9::BeginStateBlock
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]   if the device was already within a state block
     /// *   `Ok(())`                otherwise
     fn begin_state_block(&self) -> Result<(), MethodError> {
@@ -342,7 +338,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// Clears one or more surfaces such as a render target, multiple render targets, a stencil buffer, and a depth buffer.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]   if `rects.len()` > `u32::MAX`
     /// *   [D3DERR::INVALIDCALL]   if all non-`rects` parameters were `None`
     /// *   [D3DERR::INVALIDCALL]   if `color`   was `Some(...)` without a render target being bound
@@ -375,7 +370,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// Allows an application to fill a rectangular area of a [Pool::Default] surface with a specified color.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]     if `surface` isn't from [Pool::Default] ?
     /// *   [D3DERR::INVALIDCALL]     if `surface` isn't a supported format ?
     /// *   [D3DERR::INVALIDCALL]     if `rect` exceeds the bounds of the surface
@@ -399,12 +393,10 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// For full-screen mode, the back buffer format must be specified.
     ///
     /// ### ⚠️ Safety ⚠️
-    ///
     /// *   The caller's codebase is responsible for ensuring any [HWND]s inside [D3DPRESENT_PARAMETERS] outlive the resulting [SwapChain]s that depend on them.
     ///     See [IDirect3D9Ext::create_device] for details and guidance about dealing with this lifetime issue.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::NOTAVAILABLE]
     /// *   [D3DERR::DEVICELOST]
     /// *   [D3DERR::INVALIDCALL]
@@ -413,7 +405,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// *   Ok([SwapChain])
     ///
     /// ### See Also
-    ///
     /// *   [Presenting Multiple Views in Windowed Mode (Direct3D 9)](https://docs.microsoft.com/en-us/windows/desktop/direct3d9/presenting-multiple-views-in-windowed-mode)
     ///
     /// [create_device]:            #method.create_device
@@ -430,14 +421,12 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// Creates a cube texture resource.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]       On various invalid parameters, including the texture size being beyond the device's capabilities
     /// *   [D3DERR::OUTOFVIDEOMEMORY]
     /// *   [E::OUTOFMEMORY]
     /// *   Ok([CubeTexture])
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = device_pure();
     /// // Create a 6 x 128x128 ARGB cubemap with no mipmaps
@@ -457,14 +446,12 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// Creates a cube texture resource.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]       On various invalid parameters, including the texture size being beyond the device's capabilities
     /// *   [D3DERR::OUTOFVIDEOMEMORY]
     /// *   [E::OUTOFMEMORY]
     /// *   Ok([CubeTexture])
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = device_pure();
     /// // Create a cubemap where each face is a 4x4 manually mipmapped ARGB texture
@@ -555,22 +542,13 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// Creates an index buffer.
     ///
     /// ### Arguments
-    ///
     /// *   `length`            Size of the index buffer, **in bytes**.
     /// *   `usage`             Typically [Usage::None] or [Usage::Dynamic]
     /// *   `format`            Typically [Format::Index16] or [Format::Index32] (type of index buffer)
     /// *   `pool`              Memory class into which to place the [IndexBuffer].
     /// *   `shared_handle`     Used in Direct3D 9 for Windows Vista to [share resources](https://docs.microsoft.com/en-us/windows/desktop/direct3d9/dx9lh); set it to `()` to not share a resource.
     ///
-    /// ### Example
-    ///
-    /// ```rust
-    /// # use dev::d3d9::*; let device = device_pure();
-    /// let tri = device.create_index_buffer(3 * 2, Usage::None, Format::Index16, Pool::Managed, ()).unwrap();
-    /// ```
-    ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]       if `length` cannot hold at least one index (2 for [Format::Index16], 4 for [Format::Index32])
     /// *   [D3DERR::INVALIDCALL]       if `usage`, `format`, or `pool` is invalid
     /// *   [D3DERR::OUTOFVIDEOMEMORY]
@@ -578,6 +556,12 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// *   [E::OUTOFMEMORY]
     /// *   [THINERR::ALLOC_OVERFLOW]   if allocation rejected by thindx to avoid possible UB
     /// *   Ok([IndexBuffer])
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_pure();
+    /// let tri = device.create_index_buffer(3 * 2, Usage::None, Format::Index16, Pool::Managed, ()).unwrap();
+    /// ```
     fn create_index_buffer(&self, length: u32, usage: impl Into<Usage>, format: impl Into<Format>, pool: impl Into<Pool>, shared_handle: impl SharedHandleParam) -> Result<IndexBuffer, MethodError> {
         // !0 will fail OUTOFMEMORY
         // !0/2 spammed will fail OUTOFVIDEOMEMORY
@@ -597,22 +581,12 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// Creates an index buffer.
     ///
     /// ### Arguments
-    ///
     /// *   `data`              &\[u16\] or &\[u32\]
     /// *   `usage`             Typically [Usage::None] or [Usage::Dynamic]
     /// *   `pool`              Memory class into which to place the [IndexBuffer].
     /// *   `shared_handle`     Used in Direct3D 9 for Windows Vista to [share resources](https://docs.microsoft.com/en-us/windows/desktop/direct3d9/dx9lh); set it to `()` to not share a resource.
     ///
-    /// ### Example
-    ///
-    /// ```rust
-    /// # use dev::d3d9::*; let device = device_pure();
-    /// let inds : &[u16] = &[0, 1, 2, 0, 2, 3];
-    /// let tri = device.create_index_buffer_from(inds, Usage::None, Pool::Managed, ()).unwrap();
-    /// ```
-    ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]       if `length` cannot hold at least one index (2 for [Format::Index16], 4 for [Format::Index32])
     /// *   [D3DERR::INVALIDCALL]       if `usage`, `format`, or `pool` is invalid
     /// *   [D3DERR::OUTOFVIDEOMEMORY]
@@ -620,6 +594,13 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// *   [E::OUTOFMEMORY]
     /// *   [THINERR::ALLOC_OVERFLOW]   if allocation rejected by thindx to avoid possible UB
     /// *   Ok([IndexBuffer])
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_pure();
+    /// let inds : &[u16] = &[0, 1, 2, 0, 2, 3];
+    /// let tri = device.create_index_buffer_from(inds, Usage::None, Pool::Managed, ()).unwrap();
+    /// ```
     fn create_index_buffer_from<I: Index>(&self, data: &[I], usage: impl Into<Usage>, pool: impl Into<Pool>, shared_handle: impl SharedHandleParam) -> Result<IndexBuffer, MethodError> {
         let bytes = std::mem::size_of_val(data);
         let bytes32 : u32 = bytes.try_into().map_err(|_| MethodError("IDirect3DDevice9Ext::create_index_buffer_from", THINERR::ALLOC_OVERFLOW))?;
@@ -651,14 +632,12 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// Creates a pixel shader.
     ///
     /// ### ⚠️ Safety ⚠️
-    ///
     /// The caller must pass a valid shader blob.
     /// The underlying Direct3D API is unsound - it doesn't even take a length for the DWORD array.
     /// This function will likely attempt to validate the shader blob bytecode in the future and/or offload such validation onto the parameter, but until then this is unsound as heck.
     /// Do not trust user-generated-content for shader bytecode blobs.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]
     /// *   [D3DERR::OUTOFVIDEOMEMORY]
     /// *   [E::OUTOFMEMORY]
@@ -702,7 +681,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// Some states are contained in both groups.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]
     /// *   [D3DERR::OUTOFVIDEOMEMORY]
     /// *   [E::OUTOFMEMORY]
@@ -720,14 +698,12 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// Creates a texture resource.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]       On various invalid parameters, including the texture size being beyond the device's capabilities
     /// *   [D3DERR::OUTOFVIDEOMEMORY]
     /// *   [E::OUTOFMEMORY]
     /// *   Ok([Texture])
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = device_pure();
     /// // Create a 128x128 ARGB texture with no mipmaps
@@ -747,14 +723,12 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// Creates a texture resource.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]       On various invalid parameters, including the texture size being beyond the device's capabilities
     /// *   [D3DERR::OUTOFVIDEOMEMORY]
     /// *   [E::OUTOFMEMORY]
     /// *   Ok([Texture])
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = device_pure();
     /// // Create a 4x4 manually mipmapped ARGB texture
@@ -825,7 +799,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// Creates an vertex buffer.
     ///
     /// ### Arguments
-    ///
     /// *   `length`            Size of the index buffer, **in bytes**.
     ///                         For FVF vertex buffers, Length must be large enough to contain at least one vertex, but it need not be a multiple of the vertex size.
     ///                         Length is not validated for non-FVF buffers.
@@ -834,23 +807,21 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// *   `pool`              Memory class into which to place the [IndexBuffer].
     /// *   `shared_handle`     Used in Direct3D 9 for Windows Vista to [share resources](https://docs.microsoft.com/en-us/windows/desktop/direct3d9/dx9lh); set it to `()` to not share a resource.
     ///
-    /// ### Example
-    ///
-    /// ```rust
-    /// # use dev::d3d9::*; let device = device_pure();
-    /// let vert_size = 3 * 4; // XYZ * floats
-    /// let length = 3 * vert_size; // 3 verts
-    /// let tri = device.create_vertex_buffer(length, Usage::None, FVF::XYZ, Pool::Managed, ()).unwrap();
-    /// ```
-    ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]       if `length` cannot hold at least one [FVF]-sized vertex (1 if [FVF::None])
     /// *   [D3DERR::INVALIDCALL]       if `usage` or `pool` is invalid
     /// *   [D3DERR::OUTOFVIDEOMEMORY]  if allocation failed (driver or gpu memory)
     /// *   [E::OUTOFMEMORY]            if allocation failed (driver or d3d runtime)
     /// *   [THINERR::ALLOC_OVERFLOW]   if allocation rejected by thindx to avoid possible UB
     /// *   Ok([VertexBuffer])
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_pure();
+    /// let vert_size = 3 * 4; // XYZ * floats
+    /// let length = 3 * vert_size; // 3 verts
+    /// let tri = device.create_vertex_buffer(length, Usage::None, FVF::XYZ, Pool::Managed, ()).unwrap();
+    /// ```
     fn create_vertex_buffer(&self, length: u32, usage: impl Into<Usage>, fvf: impl Into<FVF>, pool: impl Into<Pool>, shared_handle: impl SharedHandleParam) -> Result<VertexBuffer, MethodError> {
         // !0 will fail OUTOFMEMORY
         // !0/2 spammed will fail OUTOFVIDEOMEMORY
@@ -870,15 +841,21 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// Creates an vertex buffer.
     ///
     /// ### Arguments
-    ///
     /// *   `data`              Data to initialize the vertex buffer with.
     /// *   `usage`             Typically [Usage::None] or [Usage::Dynamic]
     /// *   `fvf`               Combination of [FVF], a usage specifier that describes the vertex format of the verticies in this buffer.
     /// *   `pool`              Memory class into which to place the [IndexBuffer].
     /// *   `shared_handle`     Used in Direct3D 9 for Windows Vista to [share resources](https://docs.microsoft.com/en-us/windows/desktop/direct3d9/dx9lh); set it to `()` to not share a resource.
     ///
-    /// ### Example
+    /// ### Returns
+    /// *   [D3DERR::INVALIDCALL]       if `length` cannot hold at least one [FVF]-sized vertex (1 if [FVF::None])
+    /// *   [D3DERR::INVALIDCALL]       if `usage` or `pool` is invalid
+    /// *   [D3DERR::OUTOFVIDEOMEMORY]  if allocation failed (driver or gpu memory)
+    /// *   [E::OUTOFMEMORY]            if allocation failed (driver or d3d runtime)
+    /// *   [THINERR::ALLOC_OVERFLOW]   if allocation rejected by thindx to avoid possible UB
+    /// *   Ok([VertexBuffer])
     ///
+    /// ### Example
     /// ```rust
     /// # use dev::d3d9::*; let device = device_pure();
     /// let tri = device.create_vertex_buffer_from(&[
@@ -887,15 +864,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///     [0.0_f32, 0.0, 1.0],
     /// ][..], Usage::None, FVF::XYZ, Pool::Managed, ()).unwrap();
     /// ```
-    ///
-    /// ### Returns
-    ///
-    /// *   [D3DERR::INVALIDCALL]       if `length` cannot hold at least one [FVF]-sized vertex (1 if [FVF::None])
-    /// *   [D3DERR::INVALIDCALL]       if `usage` or `pool` is invalid
-    /// *   [D3DERR::OUTOFVIDEOMEMORY]  if allocation failed (driver or gpu memory)
-    /// *   [E::OUTOFMEMORY]            if allocation failed (driver or d3d runtime)
-    /// *   [THINERR::ALLOC_OVERFLOW]   if allocation rejected by thindx to avoid possible UB
-    /// *   Ok([VertexBuffer])
     fn create_vertex_buffer_from<V: Pod>(&self, data: &[V], usage: impl Into<Usage>, fvf: impl Into<FVF>, pool: impl Into<Pool>, shared_handle: impl SharedHandleParam) -> Result<VertexBuffer, MethodError> {
         let bytes = std::mem::size_of_val(data);
         let bytes32 : u32 = bytes.try_into().map_err(|_| MethodError("IDirect3DDevice9Ext::create_vertex_buffer_from", THINERR::ALLOC_OVERFLOW))?;
@@ -917,8 +885,12 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///
     /// See the [Vertex Declaration (Direct3D 9)] page for a detailed description of how to map vertex declarations between different versions of DirectX.
     ///
-    /// ### Example
+    /// ### Returns
+    /// *   [D3DERR::INVALIDCALL]   if `elements.last()` != `Some(D3DDECL_END)`
+    /// *   [D3DERR::INVALIDCALL]
+    /// *   Ok([VertexDeclaration])
     ///
+    /// ### Example
     /// ```rust
     /// # use dev::d3d9::*; let device = device_pure();
     /// let decl = device.create_vertex_declaration(&[
@@ -927,12 +899,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///     VertexElement::END
     /// ]).unwrap();
     /// ```
-    ///
-    /// ### Returns
-    ///
-    /// *   [D3DERR::INVALIDCALL]   if `elements.last()` != `Some(D3DDECL_END)`
-    /// *   [D3DERR::INVALIDCALL]
-    /// *   Ok([VertexDeclaration])
     ///
     /// [Vertex Declaration (Direct3D 9)]:          https://docs.microsoft.com/en-us/windows/desktop/direct3d9/vertex-declaration
     fn create_vertex_declaration(&self, elements: &[VertexElement]) -> Result<VertexDeclaration, MethodError> {
@@ -952,14 +918,12 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// Creates a vertex shader.
     ///
     /// ### ⚠️ Safety ⚠️
-    ///
     /// The caller must pass a valid shader blob.
     /// The underlying Direct3D API is unsound - it doesn't even take a length for the DWORD array.
     /// This function will likely attempt to validate the shader blob bytecode in the future and/or offload such validation onto the parameter, but until then this is unsound as heck.
     /// Do not trust user-generated-content for shader bytecode blobs.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]
     /// *   [D3DERR::OUTOFVIDEOMEMORY]
     /// *   [E::OUTOFMEMORY]
@@ -977,14 +941,12 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// Creates a volume texture resource.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]       On various invalid parameters, including the texture size being beyond the device's capabilities
     /// *   [D3DERR::OUTOFVIDEOMEMORY]
     /// *   [E::OUTOFMEMORY]
     /// *   Ok([VolumeTexture])
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = device_pure();
     /// // Create a 32x32x32 volumetric ARGB texture with no mipmaps
@@ -1004,14 +966,12 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// Creates a volume texture resource.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]       On various invalid parameters, including the texture size being beyond the device's capabilities
     /// *   [D3DERR::OUTOFVIDEOMEMORY]
     /// *   [E::OUTOFMEMORY]
     /// *   Ok([VolumeTexture])
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = device_pure();
     /// // Create a 4x4x4 manually mipmapped ARGB texture
@@ -1087,13 +1047,11 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// IDirect3DDevice9::DrawIndexedPrimitive
     ///
     /// ### ⚠️ Safety ⚠️
-    ///
     /// Draw calls are unsafe as heck.  Not just the parameters, but the [`Device`]'s current state must be valid for the draw call.
     /// Unbound resources that a shader depends on, missing index buffers for indexed draw calls... the possibilities for undefined behavior are endless.
     /// Safe-yet-performant wrappers around these calls will likely be fed entire scenegraphs or the like, alongside validated or trusted shaders and meshes.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok(())
     unsafe fn draw_indexed_primitive(&self, primitive_type: PrimitiveType, base_vertex_index: i32, min_vertex_index: u32, num_verticies: u32, start_index: u32, primitive_count: u32) -> Result<(), MethodError> {
@@ -1105,13 +1063,11 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// IDirect3DDevice9::DrawIndexedPrimitiveUP
     ///
     /// ### ⚠️ Safety ⚠️
-    ///
     /// Draw calls are unsafe as heck.  Not just the parameters, but the [`Device`]'s current state must be valid for the draw call.
     /// Unbound resources that a shader depends on, missing index buffers for indexed draw calls... the possibilities for undefined behavior are endless.
     /// Safe-yet-performant wrappers around these calls will likely be fed entire scenegraphs or the like, alongside validated or trusted shaders and meshes.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok(())
     unsafe fn draw_indexed_primitive_up<I: Index, V: Pod>(&self, primitive_type: PrimitiveType, min_vertex_index: u32, num_verticies: u32, primitive_count: u32, indicies: &[I], vertex_stream_zero: &[V]) -> Result<(), MethodError> {
@@ -1123,13 +1079,11 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// IDirect3DDevice9::DrawPrimitive
     ///
     /// ### ⚠️ Safety ⚠️
-    ///
     /// Draw calls are unsafe as heck.  Not just the parameters, but the [`Device`]'s current state must be valid for the draw call.
     /// Unbound resources that a shader depends on, missing index buffers for indexed draw calls... the possibilities for undefined behavior are endless.
     /// Safe-yet-performant wrappers around these calls will likely be fed entire scenegraphs or the like, alongside validated or trusted shaders and meshes.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok(())
     unsafe fn draw_primitive(&self, primitive_type: PrimitiveType, start_vertex: u32, primitive_count: u32) -> Result<(), MethodError> {
@@ -1141,13 +1095,11 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// IDirect3DDevice9::DrawPrimitiveUP
     ///
     /// ### ⚠️ Safety ⚠️
-    ///
     /// Draw calls are unsafe as heck.  Not just the parameters, but the [`Device`]'s current state must be valid for the draw call.
     /// Unbound resources that a shader depends on, missing index buffers for indexed draw calls... the possibilities for undefined behavior are endless.
     /// Safe-yet-performant wrappers around these calls will likely be fed entire scenegraphs or the like, alongside validated or trusted shaders and meshes.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok(())
     unsafe fn draw_primitive_up<V: Pod>(&self, primitive_type: PrimitiveType, primitive_count: u32, vertex_stream_zero: &[V]) -> Result<(), MethodError> {
@@ -1164,19 +1116,17 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-endscene)\]
     /// IDirect3DDevice9::EndScene
     ///
-    /// ### Example
+    /// ### Returns
+    /// *   [D3DERR::INVALIDCALL]   if the device was not within a scene (e.g. [end_scene] was called without a [begin_scene], or was called a second time)
+    /// *   `Ok(())`                if the device was within a scene that has now ended
     ///
+    /// ### Example
     /// ```rust
     /// # use dev::d3d9::*; let device = device_pure();
     /// device.begin_scene().unwrap();
     /// // ...issue draw calls and stuff...
     /// device.end_scene().unwrap();
     /// ```
-    ///
-    /// ### Returns
-    ///
-    /// *   [D3DERR::INVALIDCALL]   if the device was not within a scene (e.g. [end_scene] was called without a [begin_scene], or was called a second time)
-    /// *   `Ok(())`                if the device was within a scene that has now ended
     ///
     /// [begin_scene]:          Self::begin_scene
     /// [end_scene]:            Self::end_scene
@@ -1190,7 +1140,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// IDirect3DDevice9::EndStateBlock
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]   if the device wasn't within a state block
     /// *   `Ok(state_block)`       if a state block was successfully captured
     fn end_state_block(&self) -> Result<StateBlock, MethodError> {
@@ -1209,7 +1158,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// The resource copy in system memory is retained. See [Pool].
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::OUTOFVIDEOMEMORY]
     /// *   [D3DERR::COMMAND_UNPARSED]
     /// *   Ok(())
@@ -1229,12 +1177,10 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// but applications cannot use this value to make small-scale decisions such as if there is enough memory left to allocate another resource.
     ///
     /// ### Returns
-    ///
     /// *   `0xFFE00000`
     /// *   Maybe occasionally some other values too
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = device_test();
     /// let available = device.get_available_texture_mem();
@@ -1246,7 +1192,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// ```
     ///
     /// ### Output
-    ///
     /// ```text
     /// > 4 GiB available
     /// ```
@@ -1260,7 +1205,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// Retrieves a back buffer from the device's swap chain.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]           if `back_buffer` >= number of back buffers
     /// *   Ok([Surface])
     fn get_back_buffer(&self, swap_chain: u32, back_buffer: u32, type_: BackBufferType) -> Result<Surface, MethodError> {
@@ -1276,19 +1220,16 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// Retrieves the coefficients of a user-defined clipping plane for the device.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]   if the index exceeds the maximum clipping pane index supported by the device (if there is such a limit)
     /// *   `Ok([A, B, C, D])`, where points `Ax + By + Cz + Dw >= 0` are visible
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = device_test();
     /// println!("{:?}", device.get_clip_plane(0).unwrap());
     /// ```
     ///
     /// ### Output
-    ///
     /// ```text
     /// [0.0, 0.0, 0.0, 0.0]
     /// ```
@@ -1305,19 +1246,16 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// Retrieves the clip status.
     ///
     /// ### Returns
-    ///
     /// *   <span class="inaccurate">[D3DERR::INVALIDCALL]  - "if the argument is invalid", but this should always be valid"
     /// *   Ok([ClipStatus])
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = device_test();
     /// println!("{:?}", device.get_clip_status().unwrap());
     /// ```
     ///
     /// ### Output
-    ///
     /// ```text
     /// ClipStatus { ClipUnion: 0, ClipIntersection: 4294967295 }
     /// ```
@@ -1334,7 +1272,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// Retrieves the creation parameters of the device.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]   "If the returned argument is invalid" (impossible via thindx?)
     /// *   Ok(())
     fn get_creation_parameters(&self) -> Result<D3DDEVICE_CREATION_PARAMETERS, MethodError> {
@@ -1350,7 +1287,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// Retrieves the current texture palette
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]   "If the method fails" (impossible via thindx?)
     /// *   Ok(`texture_palette_index`)
     fn get_current_texture_palette(&self) -> Result<u32, MethodError> {
@@ -1366,7 +1302,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// Gets the depth-stencil surface owned by the Direct3DDevice object.
     ///
     /// ### Returns
-    ///
     /// *   <span style="inaccurate">[D3DERR::INVALIDCALL] ...?</span>
     /// *   Ok(Some([Surface]))       the render target bound to that index
     /// *   Ok(None)                  no render target was bound to that index
@@ -1388,12 +1323,10 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// IDirect3DDevice9::GetDeviceCaps
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]       "If the method fails" (impossible via thindx?)
     /// *   Ok([Caps])                  otherwise
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = device_test();
     /// let caps : Caps = device.get_device_caps().unwrap();
@@ -1406,7 +1339,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// ```
     ///
     /// ### Output
-    ///
     /// ```text
     /// Caps {
     ///     device_type: DevType::HAL,
@@ -1504,12 +1436,10 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// IDirect3DDevice9::GetDirect3D
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]       "If the method fails" (impossible via thindx?)
     /// *   Ok([Direct3D])              otherwise
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = device_test();
     /// let d3d : Direct3D = device.get_direct3d().unwrap();
@@ -1525,12 +1455,10 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// IDirect3DDevice9::GetDisplayMode
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]       "If the method fails" (impossible via thindx?)
     /// *   Ok([DisplayMode])
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = device_test();
     /// let mode : DisplayMode = device.get_display_mode(0).unwrap();
@@ -1540,7 +1468,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// ```
     ///
     /// ### Output
-    ///
     /// ```text
     /// DisplayMode {
     ///     width: 2160,
@@ -1568,12 +1495,10 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// IDirect3DDevice9::GetFVF
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]       "If the method fails" (impossible via thindx?)
     /// *   Ok([FVF])
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = device_test();
     /// assert_eq!(device.get_fvf().unwrap(), FVF::None);
@@ -1589,11 +1514,9 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// IDirect3DDevice9::GetGammaRamp
     ///
     /// ### Returns
-    ///
     /// *   [D3DGAMMARAMP]
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = device_test();
     /// let ramp = device.get_gamma_ramp(0);
@@ -1609,8 +1532,12 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///
     /// Retrieves index data.
     ///
-    /// ### Example
+    /// ### Returns
+    /// *   [D3DERR::INVALIDCALL]
+    /// *   Ok(Some([IndexBuffer]))     if an index buffer was bound
+    /// *   Ok(None)                    if no index buffer was bound
     ///
+    /// ### Example
     /// ```rust
     /// # use dev::d3d9::*; let device = device_pure();
     /// # let tri = device.create_index_buffer(3*2, Usage::None, Format::Index16, Pool::Default, ()).unwrap();
@@ -1620,12 +1547,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// device.set_indices(Some(&tri));
     /// assert_eq!(tri.as_raw(), device.get_indices().unwrap().unwrap().as_raw());
     /// ```
-    ///
-    /// ### Returns
-    ///
-    /// *   [D3DERR::INVALIDCALL]
-    /// *   Ok(Some([IndexBuffer]))     if an index buffer was bound
-    /// *   Ok(None)                    if no index buffer was bound
     fn get_indices(&self) -> Result<Option<IndexBuffer>, MethodError> {
         let mut buffer = null_mut();
         let hr = unsafe { self.as_winapi().GetIndices(&mut buffer) };
@@ -1641,12 +1562,10 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// This API mirrors [set_light] by accepting [u16], instead of the underlying [u32].
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]   - if no light was previously set at `index`
     /// *   Ok([Light])
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = device_test();
     /// // Since there's no real way to clear previously set lights,
@@ -1674,12 +1593,10 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// This API appears sound despite the 32-bit indicies
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]   - if no light was previously set at `index`
     /// *   Ok([Light])
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = device_test();
     /// for light in [0, 1, 100, 10000, 1000000, !0].iter().copied() {
@@ -1711,14 +1628,12 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// This API mirrors [light_enable] by accepting [u16], instead of the underlying [u32].
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]       If the light was never explicitly previously enabled or disabled
     /// *   [D3DERR::INVALIDCALL]       The device is a pure device?
     /// *   Ok(`true`)                  The light is enabled
     /// *   Ok(`false`)                 The light is disabled
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = device_test();
     /// // Since there's no real way to invalidate previously enabled/disabled lights,
@@ -1746,14 +1661,12 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// This API appears sound despite the 32-bit indicies
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]       If the light was never explicitly previously enabled or disabled
     /// *   [D3DERR::INVALIDCALL]       The device is a pure device?
     /// *   Ok(`true`)                  The light is enabled
     /// *   Ok(`false`)                 The light is disabled
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = device_test();
     /// for light in [0, 1, 100, 10000, 1000000, !0].iter().copied() {
@@ -1779,12 +1692,10 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// IDirect3DDevice9::GetMaterial
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]   If the material is invalid
     /// *   Ok([Material])
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = device_test();
     /// let material = device.get_material().unwrap();
@@ -1806,7 +1717,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// The default value is 0.0.
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = device_test();
     /// assert_eq!(device.get_npatch_mode(), 0.0);
@@ -1823,7 +1733,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// (Does not include additional explicit swap chains created using [IDirect3DDevice9Ext::create_additional_swap_chain]?)
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = device_test();
     /// assert_eq!(device.get_number_of_swap_chains(), 1);
@@ -1838,7 +1747,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// Retrieves palette entries.
     ///
     /// ### ⚠️ Safety ⚠️
-    ///
     /// This function may crash if no palette was previously set!
     ///
     /// *   Windows version:      `10.0.19041.630`
@@ -1847,12 +1755,10 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// *   Driver name:          `C:\Windows\System32\DriverStore\FileRepository\u0332836.inf_amd64_9f6b5ef5a1aed97e\B332771\aticfx64.dll,...`
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]   "If the method fails"
     /// *   Ok(`()`)
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = device_test();
     /// // XXX: No palette set, this may crash!!!
@@ -1879,7 +1785,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// Gets the pixel shader currently bound to the device, if any.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]       If the device was created with D3DCREATE_PUREDEVICE?
     /// *   Ok(Some([PixelShader]))     If a pixel shader was bound
     /// *   Ok(None)                    If no pixel shader was bound
@@ -1895,8 +1800,11 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///
     /// Gets boolean shader constants.
     ///
-    /// ### Example
+    /// ### Returns
+    /// *   [D3DERR::INVALIDCALL]       If `start_register + constant_data.len()` > max boolean registers
+    /// *   Ok(())
     ///
+    /// ### Example
     /// ```rust
     /// # use dev::d3d9::*; let device = device_pure();
     /// // ps_3_0 (d3d9 max) only supports 16 boolean registers
@@ -1915,11 +1823,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// assert_eq!(D3DERR::INVALIDCALL, r2, "count: oob");
     /// assert_eq!(D3DERR::INVALIDCALL, r3, "end: oob");
     /// ```
-    ///
-    /// ### Returns
-    ///
-    /// *   [D3DERR::INVALIDCALL]       If `start_register + constant_data.len()` > max boolean registers
-    /// *   Ok(())
     fn get_pixel_shader_constant_b(&self, start_register: u32, constant_data: &mut [bool32]) -> Result<(), MethodError> {
         let n : u32 = constant_data.len().try_into().map_err(|_| MethodError("Device::get_pixel_shader_constant_b", D3DERR::INVALIDCALL))?;
         let hr = unsafe { self.as_winapi().GetPixelShaderConstantB(start_register, constant_data.as_mut_ptr().cast(), n) };
@@ -1931,8 +1834,11 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///
     /// Gets floating-point shader constants.
     ///
-    /// ### Example
+    /// ### Returns
+    /// *   [D3DERR::INVALIDCALL]       If `start_register + constant_data.len()` > max floating point vector registers
+    /// *   Ok(())
     ///
+    /// ### Example
     /// ```rust
     /// # use dev::d3d9::*; let device = device_pure();
     /// // ps_3_0 (d3d9 max) supports 224 float4 registers
@@ -1952,11 +1858,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// assert_eq!(D3DERR::INVALIDCALL, r2, "count: oob");
     /// assert_eq!(D3DERR::INVALIDCALL, r3, "end: oob");
     /// ```
-    ///
-    /// ### Returns
-    ///
-    /// *   [D3DERR::INVALIDCALL]       If `start_register + constant_data.len()` > max floating point vector registers
-    /// *   Ok(())
     fn get_pixel_shader_constant_f(&self, start_register: u32, constant_data: &mut [[f32; 4]]) -> Result<(), MethodError> {
         let n : u32 = constant_data.len().try_into().map_err(|_| MethodError("Device::get_pixel_shader_constant_fv", D3DERR::INVALIDCALL))?;
         let hr = unsafe { self.as_winapi().GetPixelShaderConstantF(start_register, constant_data.as_mut_ptr().cast(), n) };
@@ -1968,8 +1869,11 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///
     /// Gets integer shader constants.
     ///
-    /// ### Example
+    /// ### Returns
+    /// *   [D3DERR::INVALIDCALL]       If `start_register + constant_data.len()` > max integer vector registers
+    /// *   Ok(())
     ///
+    /// ### Example
     /// ```rust
     /// # use dev::d3d9::*; let device = device_pure();
     /// // ps_3_0 (d3d9 max) only supports 16 int4 registers
@@ -1988,11 +1892,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// assert_eq!(D3DERR::INVALIDCALL, r2, "count: oob");
     /// assert_eq!(D3DERR::INVALIDCALL, r3, "end: oob");
     /// ```
-    ///
-    /// ### Returns
-    ///
-    /// *   [D3DERR::INVALIDCALL]       If `start_register + constant_data.len()` > max integer vector registers
-    /// *   Ok(())
     fn get_pixel_shader_constant_i(&self, start_register: u32, constant_data: &mut [[i32; 4]]) -> Result<(), MethodError> {
         let n : u32 = constant_data.len().try_into().map_err(|_| MethodError("Device::get_pixel_shader_constant_iv", D3DERR::INVALIDCALL))?;
         let hr = unsafe { self.as_winapi().GetPixelShaderConstantI(start_register, constant_data.as_mut_ptr().cast(), n) };
@@ -2003,6 +1902,10 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// IDirect3DDevice9::GetRasterStatus
     ///
     /// Returns information describing the [RasterStatus] of the monitor on which the swap chain is presented.
+    ///
+    /// ### Returns
+    /// *   [D3DERR::INVALIDCALL]   If `swap_chain` is not a valid swap chain.
+    /// *   Ok([RasterStatus])      If `swap_chain` is a valid swap chain.
     ///
     /// ### Example
     /// ```rust
@@ -2023,10 +1926,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///     scan_line: 3082,
     /// }
     /// ```
-    ///
-    /// ### Returns
-    /// *   [D3DERR::INVALIDCALL]   If `swap_chain` is not a valid swap chain.
-    /// *   Ok([RasterStatus])      If `swap_chain` is a valid swap chain.
     fn get_raster_status(&self, swap_chain: u32) -> Result<RasterStatus, MethodError> {
         let mut raster_status = RasterStatus::zeroed();
         let hr = unsafe { self.as_winapi().GetRasterStatus(swap_chain, &mut *raster_status) };
@@ -2040,6 +1939,10 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// Retrieves a render-state value for a device.
     ///
     /// May fail for pure devices.
+    ///
+    /// ### Returns
+    /// *   [D3DERR::INVALIDCALL]   If `state` is not a valid render state
+    /// *   Ok([u32])               If `state` has a value
     ///
     /// ### Example
     /// ```rust
@@ -2065,10 +1968,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// #   }
     /// # }
     /// ```
-    ///
-    /// ### Returns
-    /// *   [D3DERR::INVALIDCALL]   If `state` is not a valid render state
-    /// *   Ok([u32])               If `state` has a value
     fn get_render_state_untyped(&self, state: RenderStateType) -> Result<u32, MethodError> {
         let mut value = 0;
         let hr = unsafe { self.as_winapi().GetRenderState(state.into(), &mut value) };
@@ -2083,7 +1982,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// The device can now support multiple render targets. The number of render targets supported by a device is contained in the NumSimultaneousRTs member of [Caps]. See [Multiple Render Targets (Direct3D 9)].
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR]::???             `render_target_index` > [Caps].NumSimultaneousRTs ?
     /// *   Ok(Some([Surface]))       the render target bound to that index
     /// *   Ok(None)                  no render target was bound to that index
@@ -2107,7 +2005,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// Copies the render-target data from device memory to system memory.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]   If the source and destination formats do not match
     /// *   [D3DERR]::???           If the source and destination sizes do not match
     /// *   [D3DERR]::???           If the source is multisampled
@@ -2129,6 +2026,9 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// ### ⚠️ Safety ⚠️
     /// *   `ty` is not bounds checked by thindx nor DirectX, and will cause undefined behavior if invalid!
     /// *   `sampler` being out of bounds *appears* sound?  DirectX returns default sampler state when out of bounds?
+    ///
+    /// ### Returns
+    /// *   Ok([u32])   If `(sampler, state)` has a value
     ///
     /// ### Example
     /// ```rust
@@ -2153,9 +2053,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// }
     /// # }
     /// ```
-    ///
-    /// ### Returns
-    /// *   Ok([u32])   If `(sampler, state)` has a value
     unsafe fn get_sampler_state_unchecked(&self, sampler: u32, ty: SamplerStateType) -> Result<u32, MethodError> {
         let mut value = 0;
         let hr = unsafe { self.as_winapi().GetSamplerState(sampler, ty.into(), &mut value) };
@@ -2169,6 +2066,10 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// Retrieves a sampler state value for a device.
     ///
     /// May fail for pure devices.
+    ///
+    /// ### Returns
+    /// *   [D3DERR::INVALIDCALL]   If `state` is not a valid render state
+    /// *   Ok([u32])               If `state` has a value (including default values for "out-of-bounds" `sampler`s)
     ///
     /// ### Example
     /// ```rust
@@ -2201,10 +2102,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// # }
     /// # }
     /// ```
-    ///
-    /// ### Returns
-    /// *   [D3DERR::INVALIDCALL]   If `state` is not a valid render state
-    /// *   Ok([u32])               If `state` has a value (including default values for "out-of-bounds" `sampler`s)
     fn get_sampler_state_untyped(&self, sampler: u32, ty: SamplerStateType) -> Result<u32, MethodError> {
         if !matches!(ty.into(), 1 ..= 13) { return Err(MethodError("IDirect3DDevice9Ext::get_sampler_state_untyped", D3DERR::INVALIDCALL)) }
         unsafe { self.get_sampler_state_unchecked(sampler, ty) }
@@ -2213,15 +2110,15 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getscissorrect)\]
     /// IDirect3DDevice9::GetScissorRect
     ///
+    /// ### Returns
+    /// *   Ok([Rect])
+    ///
     /// ### Example
     /// ```rust
     /// # use dev::d3d9::*; let device = device_pure();
     /// let rect = device.get_scissor_rect().unwrap();
     /// dbg!(rect); // ex: Rect { x: 0..784, y: 0..561 }
     /// ```
-    ///
-    /// ### Returns
-    /// *   Ok([Rect])
     fn get_scissor_rect(&self) -> Result<Rect, MethodError> {
         let mut rect = Rect::zeroed();
         let hr = unsafe { self.as_winapi().GetScissorRect(rect.as_mut()) };
@@ -2232,6 +2129,10 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getsoftwarevertexprocessing)\]
     /// IDirect3DDevice9::GetSoftwareVertexProcessing
     ///
+    /// ### Returns
+    /// *   `true`      if in software processing mode
+    /// *   `false`     if in hardware processing mode
+    ///
     /// ### Example
     /// ```rust
     /// # use dev::d3d9::*; let device = device_pure();
@@ -2239,10 +2140,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// let hardware_mode : bool = !software_mode;
     /// assert!(hardware_mode);
     /// ```
-    ///
-    /// ### Returns
-    /// *   `true`      if in software processing mode
-    /// *   `false`     if in hardware processing mode
     fn get_software_vertex_processing(&self) -> bool {
         unsafe { self.as_winapi().GetSoftwareVertexProcessing() != 0 }
     }
@@ -2252,8 +2149,12 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///
     /// Retrieves a vertex buffer bound to the specified data stream.
     ///
-    /// ### Example
+    /// ### Returns
+    /// *   [D3DERR::INVALIDCALL]
+    /// *   Ok(Some([VertexBuffer]), `offset_in_bytes`, `stride`)
+    /// *   Ok(`(None, 0, 0)`)
     ///
+    /// ### Example
     /// ```rust
     /// # use dev::d3d9::*; let device = device_pure();
     /// // No stream bound to start
@@ -2271,12 +2172,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// assert_eq!(offset, 0);
     /// assert_eq!(stride, 4*3);
     /// ```
-    ///
-    /// ### Returns
-    ///
-    /// *   [D3DERR::INVALIDCALL]
-    /// *   Ok(Some([VertexBuffer]), `offset_in_bytes`, `stride`)
-    /// *   Ok(`(None, 0, 0)`)
     fn get_stream_source(&self, stream_number: u32) -> Result<(Option<VertexBuffer>, u32, u32), MethodError> {
         let mut buffer = null_mut();
         let mut offset = 0;
@@ -2292,8 +2187,11 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///
     /// Gets the stream source frequency divider value.
     ///
-    /// ### Example
+    /// ### Returns
+    /// *   [D3DERR::INVALIDCALL]
+    /// *   Ok([StreamSource])
     ///
+    /// ### Example
     /// ```rust
     /// # use dev::d3d9::*; let device = device_pure();
     /// assert_eq!(device.get_stream_source_freq(0).unwrap(), StreamSource::regular());
@@ -2305,11 +2203,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// assert_eq!(device.get_stream_source_freq(0).unwrap(), StreamSource::indexed_data(100));
     /// assert_eq!(device.get_stream_source_freq(1).unwrap(), StreamSource::instance_data(1));
     /// ```
-    ///
-    /// ### Returns
-    ///
-    /// *   [D3DERR::INVALIDCALL]
-    /// *   Ok([StreamSource])
     fn get_stream_source_freq(&self, stream_number: u32) -> Result<StreamSource, MethodError> {
         let mut freq = 0;
         let hr = unsafe { self.as_winapi().GetStreamSourceFreq(stream_number, &mut freq) };
@@ -2322,6 +2215,10 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///
     /// Gets a pointer to a swap chain.
     ///
+    /// ### Returns
+    /// *   [D3DERR::INVALIDCALL]
+    /// *   Ok([SwapChain])
+    ///
     /// ### Example
     /// ```rust
     /// # use dev::d3d9::*; let device = device_pure();
@@ -2332,11 +2229,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// #   assert_eq!(device.get_swap_chain(swap_chain).err().unwrap().kind(), D3DERR::INVALIDCALL);
     /// # }
     /// ```
-    ///
-    /// ### Returns
-    ///
-    /// *   [D3DERR::INVALIDCALL]
-    /// *   Ok([SwapChain])
     fn get_swap_chain(&self, swap_chain: u32) -> Result<SwapChain, MethodError> {
         let mut sc = null_mut();
         let hr = unsafe { self.as_winapi().GetSwapChain(swap_chain, &mut sc) };
@@ -2351,17 +2243,14 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// Retrieves a texture assigned to a stage for a device.
     ///
     /// ### ⚠️ Safety ⚠️
-    ///
     /// *   This function will crash (or worse!) if `set_texture` was never called for `stage`!
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]       If the device is a pure device?
     /// *   Ok(Some([BaseTexture]))     If a texture was bound to that stage
     /// *   Ok(None)                    If no texture was bound to that stage
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = device_pure();
     /// // XXX: No texture set for stage 0, this may crash!!!
@@ -2390,6 +2279,9 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///
     /// Retrieves the value associated with a [TextureStageStateType]
     ///
+    /// ### Returns
+    /// *   Ok([u32])
+    ///
     /// ### Example
     /// ```rust
     /// # use dev::d3d9::*; let device = device_test();
@@ -2409,9 +2301,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// #   }
     /// # }
     /// ```
-    ///
-    /// ### Returns
-    /// *   Ok([u32])
     fn get_texture_stage_state_untyped(&self, stage: u32, ty: impl Into<TextureStageStateType>) -> Result<u32, MethodError> {
         let mut value = 0;
         let hr = unsafe { self.as_winapi().GetTextureStageState(stage, ty.into().into(), &mut value) };
@@ -2426,8 +2315,11 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///
     /// May fail for pure devices.
     ///
-    /// ### Examples
+    /// ### Returns
+    /// *   [D3DERR::INVALIDCALL]   If the specified transform state type is invalid.
+    /// *   Ok([d3d::Matrix])
     ///
+    /// ### Examples
     /// ```rust
     /// # use dev::d3d9::*; let device = device_pure();
     /// let m = device.get_transform(d3d::TS::View).unwrap();
@@ -2441,11 +2333,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// assert_eq!(D3DERR::INVALIDCALL, device.get_transform(d3d::TS::from_unchecked(0x1000000)));
     /// assert_eq!(D3DERR::INVALIDCALL, device.get_transform(d3d::TS::from_unchecked(0x10000FF)));
     /// ```
-    ///
-    /// ### Returns
-    ///
-    /// *   [D3DERR::INVALIDCALL]   If the specified transform state type is invalid.
-    /// *   Ok([d3d::Matrix])
     fn get_transform(&self, ts: impl Into<TransformStateType>) -> Result<d3d::Matrix, MethodError> {
         let mut matrix = unsafe { std::mem::zeroed() };
         let hr = unsafe { self.as_winapi().GetTransform(ts.into().into(), &mut matrix) };
@@ -2458,8 +2345,11 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///
     /// Gets the currently bound [VertexDeclaration], or None if none was set.
     ///
-    /// ### Example
+    /// ### Returns
+    /// *   Ok(Some([VertexDeclaration]))   If a vertex declaration was set
+    /// *   Ok(None)                        If no vertex declaration was set
     ///
+    /// ### Example
     /// ```rust
     /// # use dev::d3d9::*; let device = device_pure();
     /// # let some_decl = device.create_vertex_declaration(&[
@@ -2475,10 +2365,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// let decl2 = device.get_vertex_declaration().unwrap().unwrap();
     /// assert_eq!(some_decl.as_raw(), decl2.as_raw());
     /// ```
-    ///
-    /// ### Returns
-    /// *   Ok(Some([VertexDeclaration]))   If a vertex declaration was set
-    /// *   Ok(None)                        If no vertex declaration was set
     fn get_vertex_declaration(&self) -> Result<Option<VertexDeclaration>, MethodError> {
         let mut vd = null_mut();
         let hr = unsafe { self.as_winapi().GetVertexDeclaration(&mut vd) };
@@ -2492,7 +2378,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// Gets the vertex shader currently bound to the device, if any.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]       If the device was created with D3DCREATE_PUREDEVICE?
     /// *   Ok(Some([VertexShader]))    If a vertex shader was bound
     /// *   Ok(None)                    If no vertex shader was bound
@@ -2508,8 +2393,11 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///
     /// Gets boolean shader constants.
     ///
-    /// ### Example
+    /// ### Returns
+    /// *   [D3DERR::INVALIDCALL]       If `start_register + constant_data.len()` > max boolean registers
+    /// *   Ok(())
     ///
+    /// ### Example
     /// ```rust
     /// # use dev::d3d9::*; let device = device_pure();
     /// // vs_3_0 (d3d9 max) only supports 16 boolean registers
@@ -2528,11 +2416,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// assert_eq!(D3DERR::INVALIDCALL, r2, "count: oob");
     /// assert_eq!(D3DERR::INVALIDCALL, r3, "end: oob");
     /// ```
-    ///
-    /// ### Returns
-    ///
-    /// *   [D3DERR::INVALIDCALL]       If `start_register + constant_data.len()` > max boolean registers
-    /// *   Ok(())
     fn get_vertex_shader_constant_b(&self, start_register: u32, constant_data: &mut [bool32]) -> Result<(), MethodError> {
         let n : u32 = constant_data.len().try_into().map_err(|_| MethodError("Device::get_vertex_shader_constant_b", D3DERR::INVALIDCALL))?;
         let hr = unsafe { self.as_winapi().GetVertexShaderConstantB(start_register, constant_data.as_mut_ptr().cast(), n) };
@@ -2544,8 +2427,11 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///
     /// Gets floating-point shader constants.
     ///
-    /// ### Example
+    /// ### Returns
+    /// *   [D3DERR::INVALIDCALL]       If `start_register + constant_data.len()` > max floating point vector registers
+    /// *   Ok(())
     ///
+    /// ### Example
     /// ```rust
     /// # use dev::d3d9::*; let device = device_pure();
     /// // vs_3_0 (d3d9 max) only supports at least 256 float4 registers
@@ -2565,11 +2451,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// assert_eq!(D3DERR::INVALIDCALL, r2, "count: oob");
     /// assert_eq!(D3DERR::INVALIDCALL, r3, "end: oob");
     /// ```
-    ///
-    /// ### Returns
-    ///
-    /// *   [D3DERR::INVALIDCALL]       If `start_register + constant_data.len()` > max floating point vector registers
-    /// *   Ok(())
     fn get_vertex_shader_constant_f(&self, start_register: u32, constant_data: &mut [[f32; 4]]) -> Result<(), MethodError> {
         let n : u32 = constant_data.len().try_into().map_err(|_| MethodError("Device::get_vertex_shader_constant_fv", D3DERR::INVALIDCALL))?;
         let hr = unsafe { self.as_winapi().GetVertexShaderConstantF(start_register, constant_data.as_mut_ptr().cast(), n) };
@@ -2581,8 +2462,11 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///
     /// Gets integer shader constants.
     ///
-    /// ### Example
+    /// ### Returns
+    /// *   [D3DERR::INVALIDCALL]       If `start_register + constant_data.len()` > max integer vector registers
+    /// *   Ok(())
     ///
+    /// ### Example
     /// ```rust
     /// # use dev::d3d9::*; let device = device_pure();
     /// // vs_3_0 (d3d9 max) only supports 16 int4 registers
@@ -2601,11 +2485,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// assert_eq!(D3DERR::INVALIDCALL, r2, "count: oob");
     /// assert_eq!(D3DERR::INVALIDCALL, r3, "end: oob");
     /// ```
-    ///
-    /// ### Returns
-    ///
-    /// *   [D3DERR::INVALIDCALL]       If `start_register + constant_data.len()` > max integer vector registers
-    /// *   Ok(())
     fn get_vertex_shader_constant_i(&self, start_register: u32, constant_data: &mut [[i32; 4]]) -> Result<(), MethodError> {
         let n : u32 = constant_data.len().try_into().map_err(|_| MethodError("Device::get_vertex_shader_constant_iv", D3DERR::INVALIDCALL))?;
         let hr = unsafe { self.as_winapi().GetVertexShaderConstantI(start_register, constant_data.as_mut_ptr().cast(), n) };
@@ -2616,13 +2495,11 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// IDirect3DDevice9::GetViewport
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]   If this is a pure device?
     /// *   [D3DERR::INVALIDCALL]   If the viewport is invalid
     /// *   Ok(`()`)
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = device_test();
     /// let viewport : Viewport = device.get_viewport().unwrap();
@@ -2642,12 +2519,10 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// For soundness, this limits `index` to [u16], instead of accepting [u32] like the underlying API does.
     ///
     /// ### Returns
-    ///
     /// *   <span class="inaccurate">[D3DERR::INVALIDCALL]</span>
     /// *   Ok(`()`)
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = device_test();
     /// device.light_enable(0,  true).unwrap(); // Ok
@@ -2665,7 +2540,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// Enables or disables a set of lighting parameters within a device.
     ///
     /// ### ⚠️ Safety ⚠️
-    ///
     /// *   This will buffer overflow and crash (or worse!) if `index` >= `0x1000_0000 - 8` on some systems!
     /// *   Other, smaller sizes may also crash on other system I haven't tested.
     /// *   Prefer [light_enable] (limits the index to [u16], and is thus 100% infalliable.)
@@ -2673,12 +2547,10 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// [light_enable]:                Self::light_enable
     ///
     /// ### Returns
-    ///
     /// *   <span class="inaccurate">[D3DERR::INVALIDCALL]</span>
     /// *   Ok(`()`)
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = device_test();
     /// unsafe {
@@ -2698,8 +2570,11 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///
     /// Multiplies a device's world, view, or projection matrices by a specified matrix.
     ///
-    /// ### Examples
+    /// ### Returns
+    /// *   [D3DERR::INVALIDCALL]   If `ts` is not a valid [TransformStateType].
+    /// *   Ok(())
     ///
+    /// ### Examples
     /// ```rust
     /// # use dev::d3d9::*; let device = device_pure();
     /// device.multiply_transform(d3d::TS::View,  d3d::Matrix::identity()).unwrap();
@@ -2711,11 +2586,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// # assert_eq!(D3DERR::INVALIDCALL, device.multiply_transform(d3d::TS::from_unchecked(0x1000000), d3d::Matrix::identity()));
     /// # assert_eq!(D3DERR::INVALIDCALL, device.multiply_transform(d3d::TS::from_unchecked(0x10000FF), d3d::Matrix::identity()));
     /// ```
-    ///
-    /// ### Returns
-    ///
-    /// *   [D3DERR::INVALIDCALL]   If `ts` is not a valid [TransformStateType].
-    /// *   Ok(())
     fn multiply_transform(&self, ts: impl Into<TransformStateType>, matrix: impl Into<Matrix>) -> Result<(), MethodError> {
         let hr = unsafe { self.as_winapi().MultiplyTransform(ts.into().into(), &matrix.into().into()) };
         MethodError::check("IDirect3DDevice9::MultiplyTransform", hr)
@@ -2727,27 +2597,23 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// Presents the contents of the next buffer in the sequence of back buffers owned by the device.
     ///
     /// ### ⚠️ Safety ⚠️
-    ///
     /// *   It's likely unsound to use an invalid, non-null `hwnd`
     /// *   It's likely unsound to use a null `hwnd` if the original `presentation_parameters.hDeviceWindow` is an invalid, non-null HWND
     /// *   Out of bounds rects might also be an issue IDK?
     ///
     /// ### Arguments
-    ///
     /// *   `source_rect`           - "Must be `..`" unless the [SwapChain] was created with [SwapEffect::Copy].  Can still be `..` even then (the entire source surface is presented.)
     /// *   `dest_rect`             - "Must be `..`" unless the [SwapChain] was created with [SwapEffect::Copy].  Can still be `..` even then (the entire client area is filled.)
     /// *   `dest_window_override`  - The destination window to render to.  If null / `()`, the runtime uses the `hDeviceWindow` member of D3DPRESENT_PARAMETERS for the presentation.
     /// *   `dirty_region`          - "Must be [None]" unless the [SwapChain] was created with [SwapEffect::Copy].  Can still be [None] even then (the entire region will be considered dirty.)  The implementation is free to copy more than the exact dirty region.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::DEVICEREMOVED]     When you least expect it
     /// *   [D3DERR::DEVICELOST]        When switching into/out-of fullscreen, or when invoking `C:\Windows\System32\DXCap.exe -forcetdr`
     /// *   [D3DERR::INVALIDCALL]       If called within a [IDirect3DDevice9Ext::begin_scene] .. [IDirect3DDevice9Ext::end_scene] section, if the render target is the current render target.
     /// *   Ok(`()`)
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use std::ptr::null_mut;   let hwnd = null_mut();
     /// # use dev::d3d9::*;               let device = device_test();
@@ -2795,12 +2661,10 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// Resets the type, size, and format of the swap chain.
     ///
     /// ### ⚠️ Safety ⚠️
-    ///
     /// *   `presentation_parameters.hDeviceWindow` must be null or a valid window
     /// *   `presentation_parameters.*` in general probably needs certain "valid" values
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::DEVICELOST]
     /// *   [D3DERR::DEVICEREMOVED]
     /// *   [D3DERR::DRIVERINTERNALERROR]
@@ -2816,6 +2680,10 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///
     /// Sets the coefficients of a user-defined clipping plane for the device.
     ///
+    /// ### Returns
+    /// *   [D3DERR::INVALIDCALL]   If out of memory / address space?
+    /// *   Ok(())
+    ///
     /// ### Example
     /// ```rust
     /// # use dev::d3d9::*; let device = device_pure();
@@ -2827,10 +2695,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// for i in max .. 256 { device.set_clip_plane(i,        &[0.1, 0.2, 0.3, 0.4]).unwrap() }
     /// for pow in 8 .. 32  { device.set_clip_plane(1 << pow, &[0.1, 0.2, 0.3, 0.4]).unwrap() }
     /// ```
-    ///
-    /// ### Returns
-    /// *   [D3DERR::INVALIDCALL]   If out of memory / address space?
-    /// *   Ok(())
     fn set_clip_plane(&self, index: u32, plane: &[f32; 4]) -> Result<(), MethodError> {
         let hr = unsafe { self.as_winapi().SetClipPlane(index, plane.as_ptr().cast()) };
         MethodError::check("IDirect3DDevice9::SetClipPlane", hr)
@@ -2840,7 +2704,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// IDirect3DDevice9::SetDepthStencilSurface
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]         if `depth_stencil_surface == Some(surface)` and `surface.usage() != Usage::DepthStencil`
     /// *   `Ok(())`                      if the depth stencil was successfully (un)bound
     fn set_depth_stencil_surface(&self, depth_stencil_surface: Option<&Surface>) -> Result<(), MethodError> {
@@ -2853,12 +2716,10 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// IDirect3DDevice9::SetFVF
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]       "If the method fails (impossible via thindx?)
     /// *   Ok(())
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = device_test();
     /// device.set_fvf(FVF::None).unwrap();
@@ -2881,12 +2742,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// In DirectX 8, SetGammaRamp will set the gamma ramp only on a full-screen mode application.
     /// For more information about gamma correction, see [Gamma (Direct3D 9)].
     ///
-    /// ### Returns
-    ///
-    /// *   `()`
-    ///
     /// ### Example
-    ///
     /// ```rust,no_run
     /// # use dev::d3d9::*; let device = device_test();
     /// let ramp = device.get_gamma_ramp(0);
@@ -2904,8 +2760,12 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///
     /// Sets index data.
     ///
-    /// ### Example
+    /// ### Returns
+    /// *   [D3DERR::INVALIDCALL]       (perhaps only on an invalid [IndexBuffer] that thindx's API prevents?)
+    /// *   [THINERR::DEVICE_MISMATCH]   If the [IndexBuffer] was created with a different [Device].
+    /// *   Ok(())
     ///
+    /// ### Example
     /// ```rust
     /// # use dev::d3d9::*; let [device, device2] = device_pure2();
     /// let tri = device.create_index_buffer(3*2, Usage::None, Format::Index16, Pool::Default, ()).unwrap();
@@ -2917,12 +2777,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///
     /// assert_eq!(device2.set_indices(&tri), THINERR::DEVICE_MISMATCH);
     /// ```
-    ///
-    /// ### Returns
-    ///
-    /// *   [D3DERR::INVALIDCALL]       (perhaps only on an invalid [IndexBuffer] that thindx's API prevents?)
-    /// *   [THINERR::DEVICE_MISMATCH]   If the [IndexBuffer] was created with a different [Device].
-    /// *   Ok(())
     fn set_indices<'ib>(&self, index_data: impl Into<Option<&'ib IndexBuffer>>) -> Result<(), MethodError> {
         let ptr = match index_data.into() {
             None => null_mut(),
@@ -2941,12 +2795,10 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// For soundness, this limits `index` to [u16], instead of accepting [u32] like the underlying API does.
     ///
     /// ### Returns
-    ///
     /// *   <span class="inaccurate">[D3DERR::INVALIDCALL]</span>
     /// *   Ok(`()`)
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = device_test();
     /// let mut light = Light::default();
@@ -2967,7 +2819,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// Assigns a set of lighting properties for this device.
     ///
     /// ### ⚠️ Safety ⚠️
-    ///
     /// *   This will buffer overflow and crash (or worse!) if `index` >= `0x1000_0000 - 8` on some systems!
     /// *   Other, smaller sizes may also crash on other system I haven't tested.
     /// *   Prefer [set_light] (limits the index to [u16], and is thus 100% infalliable.)
@@ -2993,11 +2844,9 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// [set_light]:                Self::set_light
     ///
     /// ### Returns
-    ///
     /// *   Ok(`()`)
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = device_test();
     /// let mut light = Light::default();
@@ -3020,12 +2869,10 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// IDirect3DDevice9::SetMaterial
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]   If the material is invalid
     /// *   Ok(`()`)
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = device_test();
     /// let material = Material {
@@ -3047,7 +2894,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// The default value is 0.0.
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = device_test();
     /// device.set_npatch_mode(0.0).unwrap();
@@ -3065,12 +2911,10 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// Sets palette entries.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]   If D3DPTEXTURECAPS_ALPHAPALETTE is not set and any entries has an alpha other than 1.0.
     /// *   Ok(`()`)
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = device_test();
     /// let pal = [Color::argb(0xFF112233); 256];
@@ -3088,7 +2932,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// Sets the pixel shader to render with.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]   If `pixel_shader` was created by another device?
     /// *   Ok(())
     fn set_pixel_shader<'sh>(&self, pixel_shader: impl Into<Option<&'sh PixelShader>>) -> Result<(), MethodError> {
@@ -3103,8 +2946,11 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///
     /// Sets boolean shader constants.
     ///
-    /// ### Example
+    /// ### Returns
+    /// *   [D3DERR::INVALIDCALL]       If `start_register + constant_data.len()` > max boolean registers
+    /// *   Ok(())
     ///
+    /// ### Example
     /// ```rust
     /// # use dev::d3d9::*; let device = device_pure();
     /// // ps_3_0 (d3d9 max) only supports 16 boolean registers
@@ -3123,11 +2969,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// assert_eq!(D3DERR::INVALIDCALL, r2, "count: oob");
     /// assert_eq!(D3DERR::INVALIDCALL, r3, "end: oob");
     /// ```
-    ///
-    /// ### Returns
-    ///
-    /// *   [D3DERR::INVALIDCALL]       If `start_register + constant_data.len()` > max boolean registers
-    /// *   Ok(())
     fn set_pixel_shader_constant_b(&self, start_register: u32, constant_data: &[bool32]) -> Result<(), MethodError> {
         let n : u32 = constant_data.len().try_into().map_err(|_| MethodError("Device::set_pixel_shader_constant_b", D3DERR::INVALIDCALL))?;
         let hr = unsafe { self.as_winapi().SetPixelShaderConstantB(start_register, constant_data.as_ptr().cast(), n) };
@@ -3139,8 +2980,11 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///
     /// Sets floating-point shader constants.
     ///
-    /// ### Example
+    /// ### Returns
+    /// *   [D3DERR::INVALIDCALL]       If `start_register + constant_data.len()` > max floating point vector registers
+    /// *   Ok(())
     ///
+    /// ### Example
     /// ```rust
     /// # use dev::d3d9::*; let device = device_pure();
     /// // ps_3_0 (d3d9 max) supports 224 float4 registers
@@ -3159,11 +3003,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// assert_eq!(D3DERR::INVALIDCALL, r2, "count: oob");
     /// assert_eq!(D3DERR::INVALIDCALL, r3, "end: oob");
     /// ```
-    ///
-    /// ### Returns
-    ///
-    /// *   [D3DERR::INVALIDCALL]       If `start_register + constant_data.len()` > max floating point vector registers
-    /// *   Ok(())
     fn set_pixel_shader_constant_f(&self, start_register: u32, constant_data: &[[f32; 4]]) -> Result<(), MethodError> {
         let n : u32 = constant_data.len().try_into().map_err(|_| MethodError("Device::set_pixel_shader_constant_fv", D3DERR::INVALIDCALL))?;
         let hr = unsafe { self.as_winapi().SetPixelShaderConstantF(start_register, constant_data.as_ptr().cast(), n) };
@@ -3175,8 +3014,11 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///
     /// Sets integer shader constants.
     ///
-    /// ### Example
+    /// ### Returns
+    /// *   [D3DERR::INVALIDCALL]       If `start_register + constant_data.len()` > max floating point vector registers
+    /// *   Ok(())
     ///
+    /// ### Example
     /// ```rust
     /// # use dev::d3d9::*; let device = device_pure();
     /// // ps_3_0 (d3d9 max) only supports 16 int4 registers
@@ -3195,11 +3037,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// assert_eq!(D3DERR::INVALIDCALL, r2, "count: oob");
     /// assert_eq!(D3DERR::INVALIDCALL, r3, "end: oob");
     /// ```
-    ///
-    /// ### Returns
-    ///
-    /// *   [D3DERR::INVALIDCALL]       If `start_register + constant_data.len()` > max floating point vector registers
-    /// *   Ok(())
     fn set_pixel_shader_constant_i(&self, start_register: u32, constant_data: &[[i32; 4]]) -> Result<(), MethodError> {
         let n : u32 = constant_data.len().try_into().map_err(|_| MethodError("Device::set_pixel_shader_constant_iv", D3DERR::INVALIDCALL))?;
         let hr = unsafe { self.as_winapi().SetPixelShaderConstantI(start_register, constant_data.as_ptr().cast(), n) };
@@ -3211,8 +3048,10 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///
     /// Sets a single device render-state parameter
     ///
-    /// ### Examples
+    /// ### Returns
+    /// *   Ok(())              no matter what invalid parameters are used?
     ///
+    /// ### Examples
     /// ```rust
     /// # use dev::d3d9::*; let device = device_pure();
     /// device.set_render_state_untyped(d3d::RS::Lighting,          true as u32             ).unwrap();
@@ -3226,10 +3065,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// #     }
     /// # }
     /// ```
-    ///
-    /// ### Returns
-    ///
-    /// *   Ok(())              no matter what invalid parameters are used?
     fn set_render_state_untyped(&self, state: impl Into<d3d9::RenderStateType>, value: impl Into<u32>) -> Result<(), MethodError> {
         let hr = unsafe { self.as_winapi().SetRenderState(state.into().into(), value.into()) };
         MethodError::check("IDirect3DDevice9::SetRenderState", hr)
@@ -3239,7 +3074,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// IDirect3DDevice9::SetRenderTarget
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]         if `render_target_index == 0` and `render_target == None`
     /// *   [D3DERR::INVALIDCALL]         if `render_target == Some(surface)` and `surface.usage() != Usage::RenderTarget`
     /// *   `Ok(())`                      if the render target was successfully bound
@@ -3255,7 +3089,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// Prefer [set_sampler_state](Self::set_sampler_state)
     ///
     /// ### ⚠️ Safety ⚠️
-    ///
     /// Known undefined behavior:
     /// *   This function may crash with out-of-bounds sampler state types! (possibly only if fed nonzero values?)
     ///
@@ -3263,8 +3096,10 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// *   This function may crash with out-of-bounds samplers?
     /// *   This function may crash with out-of-bounds sampler state type values?
     ///
-    /// ### Example
+    /// ### Returns
+    /// *   Ok(())              no matter what invalid parameters are used?
     ///
+    /// ### Example
     /// ```rust
     /// # use dev::d3d9::*; let device = device_pure();
     /// unsafe {
@@ -3286,10 +3121,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///     }
     /// }
     /// ```
-    ///
-    /// ### Returns
-    ///
-    /// *   Ok(())              no matter what invalid parameters are used?
     unsafe fn set_sampler_state_unchecked(&self, sampler: u32, ty: SamplerStateType, value: impl Into<u32>) -> Result<(), MethodError> {
         let hr = unsafe { self.as_winapi().SetSamplerState(sampler, ty.into(), value.into()) };
         MethodError::check("IDirect3DDevice9::SetSamplerState", hr)
@@ -3298,8 +3129,10 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setsamplerstate)\]
     /// IDirect3DDevice9::SetSamplerState
     ///
-    /// ### Example
+    /// ### Returns
+    /// *   Ok(())              no matter what invalid parameters are used?
     ///
+    /// ### Example
     /// ```rust
     /// # use dev::d3d9::*; let device = device_pure();
     /// device.set_sampler_state(0, d3d::SampV::MinFilter(d3d::TexF::Linear)).unwrap();
@@ -3330,10 +3163,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// #   }
     /// # }
     /// ```
-    ///
-    /// ### Returns
-    ///
-    /// *   Ok(())              no matter what invalid parameters are used?
     fn set_sampler_state(&self, sampler: u32, ssv: impl Into<SamplerStateValue>) -> Result<(), MethodError> {
         let (ty, value) = ssv.into().ty_value();
         unsafe { self.set_sampler_state_unchecked(sampler, ty, value) }
@@ -3346,8 +3175,12 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///
     /// [Setting the Stream Source (Direct3D 9)]:       https://docs.microsoft.com/en-us/windows/desktop/direct3d9/setting-the-stream-source
     ///
-    /// ### Example
+    /// ### Returns
+    /// *   [D3DERR::INVALIDCALL]       if the [VertexBuffer] belongs to another device?
+    /// *   [THINERR::DEVICE_MISMATCH]   If the [IndexBuffer] was created with a different [Device].
+    /// *   Ok(`()`)
     ///
+    /// ### Example
     /// ```rust
     /// # use dev::d3d9::*; let [device, device2] = device_pure2();
     /// let tri = device.create_vertex_buffer(3*4*3, Usage::None, FVF::XYZ, Pool::Default, ()).unwrap();
@@ -3358,12 +3191,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///
     /// assert_eq!(device2.set_stream_source(0, &tri, 0, 4*3), THINERR::DEVICE_MISMATCH);
     /// ```
-    ///
-    /// ### Returns
-    ///
-    /// *   [D3DERR::INVALIDCALL]       if the [VertexBuffer] belongs to another device?
-    /// *   [THINERR::DEVICE_MISMATCH]   If the [IndexBuffer] was created with a different [Device].
-    /// *   Ok(`()`)
     fn set_stream_source<'b>(&self, stream_number: u32, stream_data: impl Into<Option<&'b VertexBuffer>>, offset_in_bytes: u32, stride: u32) -> Result<(), MethodError> {
         let stream_data = match stream_data.into() {
             None => null_mut(),
@@ -3380,8 +3207,11 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///
     /// Sets the stream source frequency divider value. This may be used to draw several instances of geometry.
     ///
-    /// ### Example
+    /// ### Returns
+    /// *   [D3DERR::INVALIDCALL]
+    /// *   Ok(`()`)
     ///
+    /// ### Example
     /// ```rust
     /// # use dev::d3d9::*; let device = device_pure();
     /// // Setup instanced rendering, 100 instances, with:
@@ -3394,11 +3224,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// device.set_stream_source_freq(0, StreamSource::regular()).unwrap();
     /// device.set_stream_source_freq(1, StreamSource::regular()).unwrap();
     /// ```
-    ///
-    /// ### Returns
-    ///
-    /// *   [D3DERR::INVALIDCALL]
-    /// *   Ok(`()`)
     fn set_stream_source_freq(&self, stream_number: u32, setting: impl Into<StreamSource>) -> Result<(), MethodError> {
         let setting = setting.into().into();
         let hr = unsafe { self.as_winapi().SetStreamSourceFreq(stream_number, setting) };
@@ -3411,16 +3236,13 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// Assigns a texture to a stage for a device.
     ///
     /// ### ⚠️ Safety ⚠️
-    ///
     /// *   This function will crash (or worse!) if `stage` is too large (> `MaxSimultaneousTextures`?)
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok(())
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = device_pure();
     /// let texture = device.create_texture(128, 128, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
@@ -3448,8 +3270,10 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///
     /// Sets a single device transform
     ///
-    /// ### Examples
+    /// ### Returns
+    /// *   Ok(())
     ///
+    /// ### Examples
     /// ```rust
     /// # use dev::d3d9::*; let device = device_pure();
     /// device.set_transform(d3d::TS::World, d3d::Matrix::identity()).unwrap();
@@ -3460,10 +3284,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// // no errors generated no matter what?
     /// device.set_transform(d3d::TS::from_unchecked(0xFFFFFFF), d3d::Matrix::identity()).unwrap();
     /// ```
-    ///
-    /// ### Returns
-    ///
-    /// *   Ok(())
     fn set_transform(&self, ts: impl Into<TransformStateType>, matrix: impl Into<Matrix>) -> Result<(), MethodError> {
         let hr = unsafe { self.as_winapi().SetTransform(ts.into().into(), &matrix.into().into()) };
         MethodError::check("IDirect3DDevice9::SetTransform", hr)
@@ -3475,7 +3295,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// Describes the layout of vertexes for rendering.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]   If `decl` was created by another device?
     /// *   Ok(())
     fn set_vertex_declaration<'d>(&self, decl: impl Into<Option<&'d VertexDeclaration>>) -> Result<(), MethodError> {
@@ -3491,7 +3310,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// Sets the vertex shader to render with.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]   If `vertex_shader` was created by another device?
     /// *   Ok(())
     fn set_vertex_shader<'sh>(&self, vertex_shader: impl Into<Option<&'sh VertexShader>>) -> Result<(), MethodError> {
@@ -3506,8 +3324,11 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///
     /// Sets boolean shader constants (b#). Unlike floating-point or integer constants, these have a dimension of 1, and are **not** grouped into 4-element vectors.
     ///
-    /// ### Example
+    /// ### Returns
+    /// *   [D3DERR::INVALIDCALL]       If `start_register + constant_data.len()` > max boolean registers
+    /// *   Ok(())
     ///
+    /// ### Example
     /// ```rust
     /// # use dev::d3d9::*; let device = device_pure();
     /// // vs_3_0 (d3d9 max) only supports 16 boolean registers
@@ -3526,11 +3347,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// assert_eq!(D3DERR::INVALIDCALL, r2, "count: oob");
     /// assert_eq!(D3DERR::INVALIDCALL, r3, "end: oob");
     /// ```
-    ///
-    /// ### Returns
-    ///
-    /// *   [D3DERR::INVALIDCALL]       If `start_register + constant_data.len()` > max boolean registers
-    /// *   Ok(())
     fn set_vertex_shader_constant_b(&self, start_register: u32, constant_data: &[bool32]) -> Result<(), MethodError> {
         let n : u32 = constant_data.len().try_into().map_err(|_| MethodError("Device::set_vertex_shader_constant_b", D3DERR::INVALIDCALL))?;
         let hr = unsafe { self.as_winapi().SetVertexShaderConstantB(start_register, constant_data.as_ptr().cast(), n) };
@@ -3542,8 +3358,11 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///
     /// Sets floating-point shader constants (c#).  Each individual c# register is a 4-element floating point vector: \[[f32]; 4\]
     ///
-    /// ### Example
+    /// ### Returns
+    /// *   [D3DERR::INVALIDCALL]       If `start_register + constant_data.len()` > max floating point vector registers
+    /// *   Ok(())
     ///
+    /// ### Example
     /// ```rust
     /// # use dev::d3d9::*; let device = device_pure();
     /// // vs_3_0 (d3d9 max) supports at least 256 float4 registers
@@ -3563,11 +3382,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// assert_eq!(D3DERR::INVALIDCALL, r2, "count: oob");
     /// assert_eq!(D3DERR::INVALIDCALL, r3, "end: oob");
     /// ```
-    ///
-    /// ### Returns
-    ///
-    /// *   [D3DERR::INVALIDCALL]       If `start_register + constant_data.len()` > max floating point vector registers
-    /// *   Ok(())
     fn set_vertex_shader_constant_f(&self, start_register: u32, constant_data: &[[f32; 4]]) -> Result<(), MethodError> {
         let n : u32 = constant_data.len().try_into().map_err(|_| MethodError("Device::set_vertex_shader_constant_fv", D3DERR::INVALIDCALL))?;
         let hr = unsafe { self.as_winapi().SetVertexShaderConstantF(start_register, constant_data.as_ptr().cast(), n) };
@@ -3579,8 +3393,11 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///
     /// Sets integer shader constants (i#).  Each individual i# register is a 4-element integer vector: \[[i32]; 4\]
     ///
-    /// ### Example
+    /// ### Returns
+    /// *   [D3DERR::INVALIDCALL]       If `start_register + constant_data.len()` > max integer vector registers
+    /// *   Ok(())
     ///
+    /// ### Example
     /// ```rust
     /// # use dev::d3d9::*; let device = device_pure();
     /// // vs_3_0 (d3d9 max) only supports 16 int4 registers
@@ -3599,11 +3416,6 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// assert_eq!(D3DERR::INVALIDCALL, r2, "count: oob");
     /// assert_eq!(D3DERR::INVALIDCALL, r3, "end: oob");
     /// ```
-    ///
-    /// ### Returns
-    ///
-    /// *   [D3DERR::INVALIDCALL]       If `start_register + constant_data.len()` > max integer vector registers
-    /// *   Ok(())
     fn set_vertex_shader_constant_i(&self, start_register: u32, constant_data: &[[i32; 4]]) -> Result<(), MethodError> {
         let n : u32 = constant_data.len().try_into().map_err(|_| MethodError("Device::set_vertex_shader_constant_iv", D3DERR::INVALIDCALL))?;
         let hr = unsafe { self.as_winapi().SetVertexShaderConstantI(start_register, constant_data.as_ptr().cast(), n) };
@@ -3614,12 +3426,10 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// IDirect3DDevice9::SetViewport
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]   If the viewport is invalid / describes a region that cannot exist within the render target surface.
     /// *   Ok(`()`)
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = device_test();
     /// device.set_viewport(Viewport{ x: 0, y: 0, width: 100, height: 100, min_z: 0.0, max_z: 1.0 }).unwrap();

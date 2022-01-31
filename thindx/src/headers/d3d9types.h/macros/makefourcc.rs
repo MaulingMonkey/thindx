@@ -7,7 +7,6 @@
 /// This is really just a fancy [u32::from_le_bytes].
 ///
 /// ### Examples
-///
 /// ```rust
 /// // These are all equivalent:
 /// # mod a {

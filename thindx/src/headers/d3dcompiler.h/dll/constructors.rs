@@ -9,7 +9,6 @@ impl Compiler {
     /// Attempt to load d3dcompiler_NN.dll
     ///
     /// ### ⚠️ Safety ⚠️
-    ///
     /// **Prefer [Compiler::load_system].**
     ///
     /// The possibility of DLL preloading attacks makes this function insecure.
@@ -58,7 +57,6 @@ impl Compiler {
     /// Attempt to load d3dcompiler_NN.dll via LOAD_LIBRARY_SEARCH_SYSTEM32 (e.g. `%WINDOWS%\System32`)
     ///
     /// ### ⚠️ Safety ⚠️
-    ///
     /// The use of LOAD_LIBRARY_SEARCH_SYSTEM32 should guard somewhat against DLL preloading attacks.
     ///
     /// However, using d3dcompiler at all on untrusted data is questionable.

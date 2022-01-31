@@ -6,7 +6,6 @@
 //! *   Graphics middleware looking to integrate into existing D3D9 codebases
 //!
 //! ### Interfaces
-//!
 //! These are all refcounting COM smart pointers convertable to/from [mcom::Rc].
 //!
 #![doc = include_str!("d3d9-interface-tree.md")] // Breaks horribly in rust-analyzer's intellisense
@@ -36,7 +35,6 @@
 //! | [VertexDeclaration]   | [IDirect3DVertexDeclaration9]\[[Ext](IDirect3DVertexDeclaration9Ext)\]    | Describes the layout of the contents of a [VertexBuffer]
 //!
 //! ### Enumerations
-//!
 //! ⚠️ **NOTE:** D3D `enum`s are represented as Rust `struct`s to avoid undefined behavior related to unlisted enumerants.
 //!
 //! ⚠️ **NOTE:** [DeclMethod8], [DeclType8], and [DeclUsage8] are all 8-bit, despite `enum D3DDECL*` being 32-bit.<br>
@@ -90,7 +88,6 @@
 //! | [ZBufferType]                                     <br> [ZB]::\*                                       | [D3DZBUFFERTYPE]              <br> [D3DZB_*]                  |
 //!
 //! ### Flags
-//!
 //! | Rust                                      | C++                       | Description   |
 //! | ----------------------------------------- | ------------------------- | ------------- |
 //! | [Create]                                  | [D3DCREATE_*]             | A combination of one or more flags that controls [IDirect3D9Ext::create_device] behavior.
@@ -101,14 +98,12 @@
 //! | [Usage]                                   | [D3DUSAGE_*]              | Usage options that identify how resources are to be used.
 //!
 //! ### Traits
-//!
 //! | Rust                                      | C++                       | Description   |
 //! | ----------------------------------------- | ------------------------- | ------------- |
 //! | unsafe [Raw]                              |                           | Conversion trait for converting between [thindx] ⇄ [winapi]
 //! | unsafe [SharedHandleParam]                | \*mut HANDLE              | Placeholder for [Sharing Resources](https://docs.microsoft.com/en-us/windows/win32/direct3d9/dx9lh#sharing-resources) `*mut HANDLE`s
 //!
 //! ### Structures
-//!
 //! | Rust                                      | C++                       | Description   |
 //! | ----------------------------------------- | ------------------------- | ------------- |
 //! | [AdapterIdentifier]                       | [D3DADAPTER_IDENTIFIER9]  | Adapter metadata (driver, Description, driver version, vendor/device ids, ...)
@@ -129,7 +124,6 @@
 //! | [Viewport]                                | [D3DVIEWPORT9]            | A `{ x, y, width, height, min_z, max_z }` area to render into
 //!
 //! ### Values
-//!
 //! | Rust                                      | C++                       | Description   |
 //! | ----------------------------------------- | ------------------------- | ------------- |
 //! | [bool32]                                  | [BOOL]                    | 32-bit boolean type that's ABI-compatible with Win32's [BOOL]
@@ -138,13 +132,11 @@
 //! | [SdkVersion]                              | [DWORD]                   | Specify what Direct3D SDK to use ([Direct3D]\[[Ex](Direct3DEx)\]::[create](IDirect3D9Ext::create)'s only parameter)
 //!
 //! ### Wrappers
-//!
 //! | Wrapper type                              | Underlying type           | Description   |
 //! | ----------------------------------------- | ------------------------- | ------------- |
 //! | [SafeDevice]                              | [Device]                  | Device pointer + enough metadata to make more API calls safe
 //!
 //! ### Features
-//!
 //! | feature               | Description           |
 //! | --------------------- | --------------------- |
 // |                       | Default: **enabled** by default|

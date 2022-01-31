@@ -7,7 +7,6 @@ use std::marker::PhantomData;
 /// Indicates this type can be treated as an HWND.
 ///
 /// ### ⚠️ Safety ⚠️
-///
 /// By implementing this trait, you assert that `as_hwnd` returns either:
 /// *   [std::ptr::null_mut]\(\)
 /// *   A handle to a window belonging to the current thread.
@@ -40,7 +39,6 @@ impl<'w> SafeHWND<'w> {
     /// To encourage limited lifetimes, this takes `hwnd` by reference.
     ///
     /// ### ⚠️ Safety ⚠️
-    ///
     /// By using this method, you assert that `hwnd` will be valid for the entire duration of `Self`.
     /// This is enforced by `assert!(...)` upon construction and drop, but that's potentially *after* undefined behavior has been invoked.
     pub unsafe fn assert(hwnd: &'w HWND) -> Self {

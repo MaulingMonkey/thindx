@@ -29,7 +29,6 @@ unsafe impl AsSafe<IDirect3DSwapChain9  > for SwapChain { fn as_safe(&self) -> &
 /// IDirect3DSwapChain9 extension methods
 ///
 /// ### Methods
-///
 /// | thindx                                                    | docs.microsoft.com        | description   |
 /// | --------------------------------------------------------- | ------------------------- | ------------- |
 /// | [get_back_buffer](Self::get_back_buffer)                  | [GetBackBuffer]           | Retrieves a back buffer from the swap chain of the device.
@@ -41,7 +40,6 @@ unsafe impl AsSafe<IDirect3DSwapChain9  > for SwapChain { fn as_safe(&self) -> &
 /// | [present](Self::present)                                  | [Present]                 | Presents the contents of the next back buffer.
 ///
 /// ### See Also
-///
 /// *   [IDirect3DDevice9Ext::create_additional_swap_chain]
 ///
 /// [GetBackBuffer]:        https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getbackbuffer
@@ -97,7 +95,6 @@ pub trait IDirect3DSwapChain9Ext : AsSafe<IDirect3DSwapChain9> {
     /// Retrieves a copy of the swapchain's front buffer
     ///
     /// ### ⚠️ Safety ⚠️
-    ///
     /// *   `dest_surface` may need to belong to the same [`Device`] as `self`
     /// *   `dest_surface` may need to be the size of the entire desktop if the [`Device`] is in windowed mode
     unsafe fn get_front_buffer_data(&self, dest_surface: &impl IDirect3DSurface9Ext) -> Result<(), MethodError> {
@@ -133,13 +130,11 @@ pub trait IDirect3DSwapChain9Ext : AsSafe<IDirect3DSwapChain9> {
     /// Presents the contents of the next buffer in the sequence of back buffers owned by the swap chain.
     ///
     /// ### ⚠️ Safety ⚠️
-    ///
     /// *   It's likely unsound to use an invalid, non-null `hwnd`
     /// *   It's likely unsound to use a null `hwnd` if the original `presentation_parameters.hDeviceWindow` is an invalid, non-null HWND
     /// *   Out of bounds rects might also be an issue IDK?
     ///
     /// ### Arguments
-    ///
     /// *   `source_rect`           - "Must be `..`" unless the [SwapChain] was created with [SwapEffect::Copy].  Can still be `..` even then (the entire source surface is presented.)
     /// *   `dest_rect`             - "Must be `..`" unless the [SwapChain] was created with [SwapEffect::Copy].  Can still be `..` even then (the entire client area is filled.)
     /// *   `dest_window_override`  - The destination window to render to.  If null / `()`, the runtime uses the `hDeviceWindow` member of D3DPRESENT_PARAMETERS for the presentation.
@@ -147,7 +142,6 @@ pub trait IDirect3DSwapChain9Ext : AsSafe<IDirect3DSwapChain9> {
     /// *   `flags`                 - Valid values are [Present::None], [Present::DoNotWait], or [Present::LinearContent].
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::DEVICEREMOVED]     When you least expect it
     /// *   [D3DERR::DEVICELOST]        When switching into/out-of fullscreen, or when invoking `C:\Windows\System32\DXCap.exe -forcetdr`
     /// *   [D3DERR::INVALIDCALL]       If called within a [IDirect3DDevice9Ext::begin_scene] .. [IDirect3DDevice9Ext::end_scene] section, if the render target is the current render target.

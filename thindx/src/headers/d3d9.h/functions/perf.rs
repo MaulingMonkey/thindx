@@ -21,6 +21,10 @@ type Error = ();
 ///
 /// Marks the beginning of a user-defined event.
 ///
+/// ### Returns
+/// *   Ok(level_of_the_starting_event: [u32])
+/// *   Err(...)                                If no PIX debugger is attached?
+///
 /// ### Example
 /// ```rust
 /// # use thindx::*;
@@ -30,10 +34,6 @@ type Error = ();
 /// if scope.is_ok() { drop(d3d::perf::end_event()) }
 /// # }
 /// ```
-///
-/// ### Returns
-/// *   Ok(level_of_the_starting_event: [u32])
-/// *   Err(...)                                If no PIX debugger is attached?
 pub fn begin_event(col: impl Into<d3d::Color>, name: impl abistr::TryIntoAsCStr<u16>) -> Result<u32, Error> {
     let col     = col.into().into();
     let name    = name.try_into().map_err(|_| ())?;
@@ -164,6 +164,9 @@ impl Drop for EventScope {
 ///
 /// Marks the end of a user-defined event.
 ///
+/// ### Returns
+/// *   Ok(level_of_the_ending_event: [u32])
+///
 /// ### Example
 /// ```rust
 /// # use thindx::*;
@@ -173,9 +176,6 @@ impl Drop for EventScope {
 /// if scope.is_ok() { drop(d3d::perf::end_event()) }
 /// # }
 /// ```
-///
-/// ### Returns
-/// *   Ok(level_of_the_ending_event: [u32])
 pub fn end_event() -> Result<u32, Error> {
     let level   = unsafe { D3DPERF_EndEvent() };
     if level < 0 { Err(()) } else { Ok(level as _) }
@@ -189,16 +189,16 @@ pub fn end_event() -> Result<u32, Error> {
 ///
 /// Determine the current state of the profiler from the target program.
 ///
+/// ### Returns
+/// *   `0`    If PIX is **not** profiling the target program.
+/// *   `?`    If PIX is profiling the target program
+///
 /// ### Example
 /// ```rust
 /// # use thindx::*;
 /// let is_pix_attached = d3d::perf::get_status() != 0;
 /// dbg!(is_pix_attached); // false
 /// ```
-///
-/// ### Returns
-/// *   `0`    If PIX is **not** profiling the target program.
-/// *   `?`    If PIX is profiling the target program
 pub fn get_status() -> u32 {
     unsafe { D3DPERF_GetStatus() }
 }
@@ -213,16 +213,16 @@ pub fn get_status() -> u32 {
 ///
 /// **NOTE:** May not be supported / may always return `false`.
 ///
+/// ### Returns
+/// *   `true`      If the caller should repeat the same sequence of calls.
+/// *   `false`     If the caller should continue.
+///
 /// ### Example
 /// ```rust
 /// # use thindx::*;
 /// let should_rerender_frame = d3d::perf::query_repeat_frame();
 /// dbg!(should_rerender_frame); // false
 /// ```
-///
-/// ### Returns
-/// *   `true`      If the caller should repeat the same sequence of calls.
-/// *   `false`     If the caller should continue.
 pub fn query_repeat_frame() -> bool {
     let r = unsafe { D3DPERF_QueryRepeatFrame() };
     r != 0

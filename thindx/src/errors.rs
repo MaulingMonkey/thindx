@@ -39,7 +39,6 @@
 //! | `0x.899....` |                    | Direct2D
 //!
 //! ### See Also
-//!
 //! *   <https://www.hresult.info/>
 //! *   <https://docs.microsoft.com/en-us/windows/win32/debug/system-error-codes#system-error-codes>
 //! *   <https://docs.microsoft.com/en-us/windows/win32/direct3d11/d3d11-graphics-reference-returnvalues>

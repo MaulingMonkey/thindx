@@ -1,6 +1,5 @@
 #[cfg(not(test))] macro_rules! test_layout_only { ( $($tt:tt)* ) => {} }
 /// ### Usage
-///
 /// ```no_run
 /// test_layout_only! {
 ///     RustyStruct => D3D_STRUCT {
@@ -37,7 +36,6 @@
 
 #[cfg(not(test))] macro_rules! test_layout { ( $($tt:tt)* ) => {} }
 /// ### Usage
-///
 /// ```no_run
 /// test_layout! {
 ///     RustyStruct => D3D_STRUCT {
@@ -81,7 +79,6 @@
 #[cfg(test)] pub fn offset_of<S, F>(s: *const S, f: *const F) -> usize { (f as usize) - (s as usize) }
 
 /// ### Usage
-///
 /// ```no_run
 /// enumish! { RustyEnum => D3D_ENUM; FQN; RustyEnum::A, RustyEnum::B, RustyEnum::C }
 /// enumish! { RustyEnum => D3D_ENUM;      A, B, C }
@@ -152,7 +149,6 @@ macro_rules! enumish {
 }
 
 /// ### Usage
-///
 /// ```no_run
 /// flags! { RustyFlags => D3D_FLAGS; A, B, C }
 /// ```

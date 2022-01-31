@@ -10,7 +10,6 @@ impl FixedTextureFormat {
     /// Create a [FixedTextureFormat].
     ///
     /// ### ⚠️ Safety ⚠️
-    ///
     /// ThinDX APIs rely on format's fields being accurate/consistent with each other.
     /// Specifying the wrong size or bits per block for a given format may result in buffer
     /// overflows, access of uninitialized data, or other nastiness.

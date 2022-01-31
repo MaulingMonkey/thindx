@@ -34,7 +34,6 @@ unsafe impl AsSafe<IDirect3D9   > for Direct3D { fn as_safe(&self) -> &IDirect3D
 /// IDirect3D9 extension methods
 ///
 /// ### Methods
-///
 /// | thindx                                                                    | docs.microsoft.com            | Description |
 /// | ------------------------------------------------------------------------- | ----------------------------- | ----------- |
 /// | [create](Self::create)                                                    | [Direct3DCreate9]             | Creates an [IDirect3D9] object and returns it.
@@ -78,7 +77,6 @@ pub trait IDirect3D9Ext : AsSafe<IDirect3D9> + Sized {
     /// Creates an [IDirect3D9] object and returns it.
     ///
     /// ### ⚠️ Safety ⚠️
-    ///
     /// While this individual call should be 100% safe/sound, there is a bunch of general
     /// soundness holes that Rust can't always sanely guard against.  These include:
     ///
@@ -90,7 +88,6 @@ pub trait IDirect3D9Ext : AsSafe<IDirect3D9> + Sized {
     /// The `unsafe` of this fn is the token acknowledgement of those errors.
     ///
     /// ### Returns
-    ///
     /// *   [THINERR::NONSPECIFIC]  on an invalid SDK version
     /// *   [THINERR::NONSPECIFIC]  if d3d access is forbidden? (services?)
     /// *   Ok([Direct3D])          otherwise
@@ -98,7 +95,6 @@ pub trait IDirect3D9Ext : AsSafe<IDirect3D9> + Sized {
     /// Consider calling [Direct3DEx::create_ex] instead if you want a meaningful error code than [THINERR::NONSPECIFIC].
     ///
     /// ### Example
-    ///
     /// ```rust
     /// use thindx::d3d9::*;
     /// let d3d = unsafe { Direct3D::create(SdkVersion::default()) }.unwrap();
@@ -117,14 +113,12 @@ pub trait IDirect3D9Ext : AsSafe<IDirect3D9> + Sized {
     /// Determines whether a depth-stencil format is compatible with a render-target format in a particular display mode.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]   if `adapter` >= `self.get_adapter_count()`
     /// *   [D3DERR::INVALIDCALL]   on most bad parameters
     /// *   <span class="inaccurate">[D3DERR::NOTAVAILABLE] "If a depth-stencil format is not compatible"</span>
     /// *   `Ok(())`                if the adapter x render target x depth stencil format combination is supported
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*;
     /// # let d3d = d3d_test();
@@ -150,14 +144,12 @@ pub trait IDirect3D9Ext : AsSafe<IDirect3D9> + Sized {
     /// Determines whether a surface format is available as a specified resource type and can be used as a texture, depth-stencil buffer, or render target, or any combination of the three, on a device representing this adapter.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]       if `adapter` >= `self.get_adapter_count()`
     /// *   [D3DERR::INVALIDCALL]       on most bad parameters
     /// *   <span class="inaccurate">[D3DERR::NOTAVAILABLE] "if the format is not acceptable to the device for this usage"</span>
     /// *   `Ok(())`                    if the format is supported
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let d3d = d3d_test();
     /// assert!(d3d.check_device_format(
@@ -181,7 +173,6 @@ pub trait IDirect3D9Ext : AsSafe<IDirect3D9> + Sized {
     /// Tests the device to see if it supports conversion from one display format to another.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]       if `adapter` >= `self.get_adapter_count()`
     /// *   [D3DERR::INVALIDDEVICE]     if `device_type` is invalid
     /// *   [D3DERR::NOTAVAILABLE]      on an invalid source format
@@ -190,7 +181,6 @@ pub trait IDirect3D9Ext : AsSafe<IDirect3D9> + Sized {
     /// *   `Ok(())`                    if the device can convert from `source_format` to `target_format`
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let d3d = d3d_test();
     /// assert!(d3d.check_device_format_conversion(
@@ -212,13 +202,11 @@ pub trait IDirect3D9Ext : AsSafe<IDirect3D9> + Sized {
     /// Determines if a multisampling technique is available on this device.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]   if `adapter` >= `self.get_adapter_count()`
     /// *   [D3DERR::NOTAVAILABLE]  on invalid surface formats, unless `D3DMULTISAMPLE_NONE`
     /// *   `Ok(quality_levels)`    if the multisampling type is valid for the given format
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let d3d = d3d_test();
     /// assert!(d3d.check_device_multi_sample_type(
@@ -242,14 +230,12 @@ pub trait IDirect3D9Ext : AsSafe<IDirect3D9> + Sized {
     /// Verifies whether a hardware accelerated device type can be used on this adapter.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]   if `adapter` >= `self.get_adapter_count()`
     /// *   [D3DERR::INVALIDCALL]   if `device_type` is invalid
     /// *   [D3DERR::NOTAVAILABLE]  if `adapter_format` x `back_buffer_format` x `windowed` is invalid
     /// *   `Ok(())`                otherwise
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let d3d = d3d_test();
     /// assert!(d3d.check_device_type(
@@ -272,7 +258,6 @@ pub trait IDirect3D9Ext : AsSafe<IDirect3D9> + Sized {
     /// Creates a [Device].
     ///
     /// ### ⚠️ Safety ⚠️
-    ///
     /// *   The caller's codebase is responsible for ensuring any [HWND]s outlive the [Device].
     ///     This is effectively impossible to enforce at compile time.
     ///     Windows can typically destroy themselves without warning at any time.
@@ -293,7 +278,6 @@ pub trait IDirect3D9Ext : AsSafe<IDirect3D9> + Sized {
     /// *   ???
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let d3d = d3d_test();
     /// let device = unsafe { d3d.create_device(
@@ -342,13 +326,11 @@ pub trait IDirect3D9Ext : AsSafe<IDirect3D9> + Sized {
     /// Queries the possible display modes of an adapter (~ connected monitor)
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]       if `adapter` >= `self.get_adapter_count()`
     /// *   [D3DERR::INVALIDCALL]       if `mode` >= `self.get_adapter_mode_count(adapter, format)`
     /// *   Ok([DisplayMode])           otherwise
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let d3d = d3d_test();
     /// let adapter = 0;
@@ -361,7 +343,6 @@ pub trait IDirect3D9Ext : AsSafe<IDirect3D9> + Sized {
     /// ```
     ///
     /// ### Output
-    ///
     /// ```text
     /// 480x640 @ 59hz Format(D3DFMT_X8R8G8B8)
     /// 480x640 @ 60hz Format(D3DFMT_X8R8G8B8)
@@ -384,14 +365,12 @@ pub trait IDirect3D9Ext : AsSafe<IDirect3D9> + Sized {
     /// Gets the number of adapters (~ connected monitors) available to this device.
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let d3d = d3d_test();
     /// println!("{} adapters", d3d.get_adapter_count());
     /// ```
     ///
     /// ### Output
-    ///
     /// ```text
     /// 4 adapters
     /// ```
@@ -404,7 +383,6 @@ pub trait IDirect3D9Ext : AsSafe<IDirect3D9> + Sized {
     /// Gets the current display mode of an adapter (~ connected monitor)
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let d3d = d3d_test();
     /// for adapter in 0..d3d.get_adapter_count() {
@@ -415,7 +393,6 @@ pub trait IDirect3D9Ext : AsSafe<IDirect3D9> + Sized {
     /// ```
     ///
     /// ### Output
-    ///
     /// ```text
     /// 2160x3840 @ 60hz Format(D3DFMT_X8R8G8B8)
     /// 2160x3840 @ 60hz Format(D3DFMT_X8R8G8B8)
@@ -434,20 +411,17 @@ pub trait IDirect3D9Ext : AsSafe<IDirect3D9> + Sized {
     /// Gets metadata about an adapter (~ connected monitor), including driver name/version/guids/whql info/vendor/device ids/blood type/birthplace/???
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]       if `adapter` >= `self.get_adapter_count()`
     /// *   [D3DERR::INVALIDCALL]       if `flags` isn't valid (0, D3DENUM_WHQL_LEVEL, ...)
     /// *   Ok([AdapterIdentifier])     otherwise
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let d3d = d3d_test();
     /// eprintln!("{:#?}", d3d.get_adapter_identifier(0, 0).unwrap());
     /// ```
     ///
     /// ### Output
-    ///
     /// ```text
     /// AdapterIdentifier {
     ///     Driver: "aticfx64.dll",
@@ -474,19 +448,16 @@ pub trait IDirect3D9Ext : AsSafe<IDirect3D9> + Sized {
     /// Get the number of display modes this adapter/monitor supports.
     ///
     /// ### Arguments
-    ///
     /// *   `adapter`   - the adapter/monitor to query modes for
     /// *   `format`    - the adapter format to query modes for.  `Format::X8R8G8B8` likely works, many other formats likely don't.
     ///
     /// ### Returns
-    ///
     /// *   `0`         if `adapter` >= `self.get_adapter_count()`
     /// *   `0`         if `format` is an invalid format
     /// *   `0`         if `format` is an unsupported format
     /// *   `n`         modes you can query [enum_adapter_modes] for
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let d3d = d3d_test();
     /// for fmt in [Format::X8R8G8B8, Format::A8R8G8B8].iter().copied() {
@@ -496,14 +467,12 @@ pub trait IDirect3D9Ext : AsSafe<IDirect3D9> + Sized {
     /// ```
     ///
     /// ### Output
-    ///
     /// ```text
     /// adapter 1: Format(D3DFMT_X8R8G8B8): 44 mode(s)
     /// adapter 1: Format(D3DFMT_A8R8G8B8): 0 mode(s)
     /// ```
     ///
     /// ### See Also
-    ///
     /// *   [enum_adapter_modes]
     ///
     /// [enum_adapter_modes]:       #method.enum_adapter_modes
@@ -514,13 +483,11 @@ pub trait IDirect3D9Ext : AsSafe<IDirect3D9> + Sized {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadaptermonitor)\] IDirect3D9::GetAdapterMonitor
     ///
     /// ### Returns
-    ///
     /// *   [THINERR::NONSPECIFIC]  on an invalid `adapter`
     /// *   [THINERR::NONSPECIFIC]  if no monitor is connected to `adapter`?
     /// *   Ok([HMONITOR])          otherwise
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let d3d = d3d_test();
     /// let monitor : HMONITOR  = d3d.get_adapter_monitor(   0).unwrap();
@@ -534,13 +501,11 @@ pub trait IDirect3D9Ext : AsSafe<IDirect3D9> + Sized {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getdevicecaps)\] IDirect3D9::GetDeviceCaps
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]       on an invalid `adapter`
     /// *   [D3DERR::INVALIDDEVICE]     on an invalid `device_type`
     /// *   Ok([Caps])                  otherwise
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let d3d = d3d_test();
     /// let caps : Caps = d3d.get_device_caps(0, DevType::HAL).unwrap();

@@ -29,7 +29,6 @@ unsafe impl AsSafe<IDirect3DSurface9    > for Surface { fn as_safe(&self) -> &ID
 /// IDirect3DSurface9 extension method list
 ///
 /// ### Methods
-///
 /// | thindx                                                        | docs.microsoft.com    | Description |
 /// | ------------------------------------------------------------- | --------------------- | ----------- |
 /// | [get_container](Self::get_container)                          | [GetContainer]        | Provides access to the parent cube texture or texture (mipmap) object, if this surface is a child level of a cube texture or a mipmap. This method can also provide access to the parent swap chain if the surface is a back-buffer child.
@@ -58,7 +57,6 @@ pub trait IDirect3DSurface9Ext : AsSafe<IDirect3DSurface9> {
     /// *   Ok(`C`)
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = device_test();
     /// # let texture = device.create_texture(128, 128, 8, Usage::None, Format::A8R8G8B8, Pool::Managed, ()).unwrap();
@@ -83,7 +81,6 @@ pub trait IDirect3DSurface9Ext : AsSafe<IDirect3DSurface9> {
     /// *   Ok([HDC])
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = device_test();
     /// # let texture = device.create_texture(128, 128, 8, Usage::None, Format::A8R8G8B8, Pool::Managed, ()).unwrap();
@@ -110,7 +107,6 @@ pub trait IDirect3DSurface9Ext : AsSafe<IDirect3DSurface9> {
     /// *   Ok([SurfaceDesc])
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = device_test();
     /// let texture = device.create_texture(128, 128, 8, Usage::None, Format::A8R8G8B8, Pool::Managed, ()).unwrap();
@@ -142,7 +138,6 @@ pub trait IDirect3DSurface9Ext : AsSafe<IDirect3DSurface9> {
     /// *   Ok([D3DLOCKED_RECT])
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = device_test();
     /// let texture = device.create_texture(128, 128, 8, Usage::None, Format::A8R8G8B8, Pool::Managed, ()).unwrap();
@@ -177,7 +172,6 @@ pub trait IDirect3DSurface9Ext : AsSafe<IDirect3DSurface9> {
     /// *   Ok(`()`)
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = device_test();
     /// # let texture = device.create_texture(128, 128, 8, Usage::None, Format::A8R8G8B8, Pool::Managed, ()).unwrap();
@@ -207,7 +201,6 @@ pub trait IDirect3DSurface9Ext : AsSafe<IDirect3DSurface9> {
     /// *   Ok(`()`)
     ///
     /// ### Example
-    ///
     /// ```rust
     /// # use dev::d3d9::*; let device = device_test();
     /// let texture = device.create_texture(128, 128, 8, Usage::None, Format::A8R8G8B8, Pool::Managed, ()).unwrap();

@@ -6,7 +6,6 @@ use bytemuck::*;
 /// [u16] or [u32] - an index type safe for use with Direct3D 9
 ///
 /// ### ⚠️ Safety ⚠️
-///
 /// By implementing this trait, you assert that:
 ///
 /// *   You're returning a valid [d3d::Format] for an index buffer (e.g. [d3d::Format::Index16] or [d3d::Format::Index32])

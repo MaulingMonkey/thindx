@@ -1,6 +1,5 @@
 mod sealed {
     /// ### ⚠️ Safety ⚠️
-    ///
     /// By implementing `AsSafe<winapi::...::IWhatever>`, you assert that:
     /// *   The vtable's function pointers are valid
     /// *   The functions referenced by said vtable aren't any less sound for any given

@@ -24,7 +24,6 @@ unsafe impl AsSafe<IDirect3DVolume9 > for Volume { fn as_safe(&self) -> &IDirect
 /// IDirect3DVolume9 extension methods
 ///
 /// ### Methods
-///
 /// | thindx                                                        | docs.microsoft.com    | Description |
 /// | ------------------------------------------------------------- | --------------------- | ----------- |
 /// | [free_private_data](Self::free_private_data)                  | [FreePrivateData]     | Frees the specified private data associated with this volume.
@@ -55,7 +54,6 @@ pub trait IDirect3DVolume9Ext : AsSafe<IDirect3DVolume9> {
     /// Frees the specified private data associated with this resource.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]
     /// *   [D3DERR::NOTFOUND]
     /// *   Ok(`()`)
@@ -70,7 +68,6 @@ pub trait IDirect3DVolume9Ext : AsSafe<IDirect3DVolume9> {
     /// Provides access to the parent volume texture object, if this surface is a child level of a volume texture.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok(`C`)
     fn get_container<C: Raw>(&self) -> Result<C, MethodError> where C::Raw : Interface {
@@ -86,7 +83,6 @@ pub trait IDirect3DVolume9Ext : AsSafe<IDirect3DVolume9> {
     /// Retrieves a description of the volume.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok([VolumeDesc])
     fn get_desc(&self) -> Result<VolumeDesc, MethodError> {
@@ -102,7 +98,6 @@ pub trait IDirect3DVolume9Ext : AsSafe<IDirect3DVolume9> {
     /// Retrieves the device associated with a resource.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok([Device])
     fn get_device(&self) -> Result<Device, MethodError> {
@@ -118,7 +113,6 @@ pub trait IDirect3DVolume9Ext : AsSafe<IDirect3DVolume9> {
     /// Copies the private data associated with the resource to a provided buffer.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]
     /// *   [D3DERR::MOREDATA]
     /// *   [D3DERR::NOTFOUND]
@@ -134,7 +128,6 @@ pub trait IDirect3DVolume9Ext : AsSafe<IDirect3DVolume9> {
     /// IDirect3DVolume9::SetPrivateData
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]
     /// *   [E::OUTOFMEMORY]
     /// *   Ok(`()`)
@@ -152,13 +145,11 @@ pub trait IDirect3DVolume9Ext : AsSafe<IDirect3DVolume9> {
     /// IDirect3DVolume9::LockBox
     ///
     /// ### ⚠️ Safety ⚠️
-    ///
     /// *   `box_` must be `..` or a valid subregion of the volume in question
     /// *   `self` should be lockable in the style specified by `flags`... and not already locked?
     /// *   `self` may need to be unlocked again before being bound, drawn, or released
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok([D3DLOCKED_BOX])
     unsafe fn lock_box_unchecked(&self, box_: impl IntoBoxOrFull, flags: impl Into<Lock>) -> Result<D3DLOCKED_BOX, MethodError> {
@@ -176,7 +167,6 @@ pub trait IDirect3DVolume9Ext : AsSafe<IDirect3DVolume9> {
     /// Unlocks a box on a volume resource.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok(`()`)
     fn unlock_box(&self) -> Result<(), MethodError> {

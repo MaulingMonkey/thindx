@@ -10,7 +10,6 @@ use bytemuck::{Pod, Zeroable};
 /// Describes the state of an Xbox 360 controller.
 ///
 /// ### See Also
-///
 /// *   [examples::d3d9_02_xinput]
 /// *   [Doing thumbstick dead zones right](https://web.archive.org/web/20141025190105/https://www.third-helix.com/2013/04/12/doing-thumbstick-dead-zones-right.html)
 ///     (**strongly** recommended reading!)

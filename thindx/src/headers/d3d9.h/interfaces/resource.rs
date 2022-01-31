@@ -14,7 +14,6 @@ use std::ptr::null_mut;
 /// [\*Texture\*](crate::BaseTexture), [Surface] (but not <strike>[Volume]</strike>!), [IndexBuffer], [VertexBuffer], but not <strike>[\*Shader](crate::PixelShader)</strike>!
 ///
 /// ### See Also
-///
 /// *   [IDirect3DDevice9Ext::create_cube_texture]
 /// *   [IDirect3DDevice9Ext::create_texture]
 /// *   [IDirect3DDevice9Ext::create_volume_texture]
@@ -44,7 +43,6 @@ impl Resource {
 /// IDirect3DResource9 extension methods
 ///
 /// ### Methods
-///
 /// | thindx                                                        | docs.microsoft.com    | Description |
 /// | ------------------------------------------------------------- | --------------------- | ----------- |
 /// | [free_private_data](Self::free_private_data)                  | [FreePrivateData]     | Frees the specified private data associated with this resource.
@@ -75,7 +73,6 @@ pub trait IDirect3DResource9Ext : AsSafe<IDirect3DResource9> {
     /// Frees the specified private data associated with this resource.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]
     /// *   [D3DERR::NOTFOUND]
     /// *   Ok(`()`)
@@ -90,7 +87,6 @@ pub trait IDirect3DResource9Ext : AsSafe<IDirect3DResource9> {
     /// Retrieves the device associated with a resource.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok([Device])
     fn get_device(&self) -> Result<Device, MethodError> {
@@ -121,7 +117,6 @@ pub trait IDirect3DResource9Ext : AsSafe<IDirect3DResource9> {
     /// Copies the private data associated with the resource to a provided buffer.
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]
     /// *   [D3DERR::MOREDATA]
     /// *   [D3DERR::NOTFOUND]
@@ -153,7 +148,6 @@ pub trait IDirect3DResource9Ext : AsSafe<IDirect3DResource9> {
     /// IDirect3DResource9::SetPriority
     ///
     /// ### Returns
-    ///
     /// The previous priority
     fn set_priority(&self, priority: u32) -> u32 {
         // see also https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9-resource-priority
@@ -164,7 +158,6 @@ pub trait IDirect3DResource9Ext : AsSafe<IDirect3DResource9> {
     /// IDirect3DResource9::SetPrivateData
     ///
     /// ### Returns
-    ///
     /// *   [D3DERR::INVALIDCALL]
     /// *   [E::OUTOFMEMORY]
     /// *   Ok(())
