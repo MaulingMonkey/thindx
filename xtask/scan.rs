@@ -1,4 +1,4 @@
-#![allow(unused_variables)] macro_rules! warning { ($($tt:tt)*) => {} } // XXX: temporarilly supress warnings
+#![allow(unused_variables)] macro_rules! qwarning { ($($tt:tt)*) => {()} } // XXX: temporarilly supress warnings
 
 use mmrbi::*;
 
@@ -118,7 +118,7 @@ fn file_doc_comments(path: &Path, text: &str) -> Result<(), ()> {
         let comment = if let Some(comment) = trimmed.strip_prefix("//!") {
             let comment = comment.strip_prefix(" ").unwrap_or_else(|| {
                 if !comment.is_empty() {
-                    warning!(at: path, line: no, "Expected space after `//!`");
+                    error!(at: path, line: no, "Expected space after `//!` (failure to do so may break markdown tables)");
                 }
                 comment
             });
@@ -128,7 +128,7 @@ fn file_doc_comments(path: &Path, text: &str) -> Result<(), ()> {
         } else if let Some(comment) = trimmed.strip_prefix("///") {
             let comment = comment.strip_prefix(" ").unwrap_or_else(|| {
                 if !comment.is_empty() {
-                    warning!(at: path, line: no, "Expected space after `///`");
+                    error!(at: path, line: no, "Expected space after `///` (failure to do so may break markdown tables)");
                 }
                 comment
             });
@@ -383,9 +383,8 @@ fn file_doc_comments(path: &Path, text: &str) -> Result<(), ()> {
                                     warning!(at: path, line: no,          "argument {}: documented as `{}` but actually named `{}`", arg_idx+1, doc_name, arg_name);
                                 },
                                 Some(_doc) => {},
-                                None => {
-                                    warning!(at: path, line: no, "argument `{}` is undocumented in `### Arguments` section (`//#allow_missing_argument_docs` to suppress)", arg_name);
-                                },
+                                None if s.arguments.is_empty()  => qwarning!(at: path, line: no, "argument `{}` is undocumented (no `### Arguments` section)", arg_name),
+                                None                            => warning!(at: path, line: no, "argument `{}` is undocumented in `### Arguments` section", arg_name),
                             }
 
                             if !strip_prefix_inplace(&mut rest, ",") {
@@ -444,9 +443,8 @@ fn file_doc_comments(path: &Path, text: &str) -> Result<(), ()> {
                                     warning!(at: path, line: no,          "argument {}: documented as `{}` but actually named `{}`", arg_idx+1, doc_name, arg_name);
                                 },
                                 Some(_doc) => {},
-                                None => {
-                                    warning!(at: path, line: no, "argument `{}` is undocumented in `### Arguments` section (`//#allow_missing_argument_docs` to suppress)", arg_name);
-                                },
+                                None if s.arguments.is_empty()  => qwarning!(at: path, line: no, "argument `{}` is undocumented (no `### Arguments` section)", arg_name),
+                                None                            => warning!(at: path, line: no, "argument `{}` is undocumented in `### Arguments` section", arg_name),
                             }
 
                             if strip_prefix_inplace(&mut rest, ")") {
@@ -508,7 +506,7 @@ fn file_doc_comments(path: &Path, text: &str) -> Result<(), ()> {
                     s.current_h3 = Some(h3);
                     s.mode = Mode::ExpectNonBlankLine;
                 } else if let Some(_) = comment.strip_prefix("#") {
-                    warning!(at: path, line: no, "Unexpected header `{}`: expected h3 comments only", comment);
+                    qwarning!(at: path, line: no, "Unexpected header `{}`: expected h3 comments only", comment);
                 } else if comment == "" && expect_non_blank {
                     warning!(at: path, line: no, "Don't add a blank line after headers");
                 } else if comment.starts_with("```") {
@@ -595,14 +593,14 @@ h3! {
 
     // Module specific
     "Enumerations"  => Enumerations,
-    "Functions"     => Functions,
     "Flags"         => Flags,
+    "Functions"     => Functions,
     "Interfaces"    => Interfaces,
+    "Traits"        => Traits,
     "Structures"    => Structures,
     "Values"        => Values,
-    "Traits"        => Traits,
-    "Features"      => Features,
     "Wrappers"      => Wrappers, // XXX
+    "Features"      => Features,
 
     // General
     "Examples"      => Examples,
