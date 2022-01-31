@@ -945,7 +945,7 @@ pub const d3dcompiler_h : cxx_header = cxx_header;
 /// * [`IDirect3DDevice9::Present`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-present)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::present`] <br>
 /// * [`IDirect3DDevice9::ProcessVertices`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-processvertices) →&nbsp;❌ <br>
 /// * [`IDirect3DDevice9::Reset`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-reset)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::reset`] <br>
-/// * [`IDirect3DDevice9::SetClipPlane`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setclipplane) →&nbsp;❌ <br>
+/// * [`IDirect3DDevice9::SetClipPlane`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setclipplane)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_clip_plane`] <br>
 /// * [`IDirect3DDevice9::SetClipStatus`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setclipstatus) →&nbsp;❌ <br>
 /// * [`IDirect3DDevice9::SetCurrentTexturePalette`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setcurrenttexturepalette) →&nbsp;❌ <br>
 /// * [`IDirect3DDevice9::SetCursorPosition`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setcursorposition) →&nbsp;❌ <br>

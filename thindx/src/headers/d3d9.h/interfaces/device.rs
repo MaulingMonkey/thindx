@@ -2810,6 +2810,31 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         MethodError::check("IDirect3DDevice9::Reset", hr)
     }
 
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setclipplane)\]
+    /// IDirect3DDevice9::SetClipPlane
+    ///
+    /// Sets the coefficients of a user-defined clipping plane for the device.
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_pure();
+    /// device.set_clip_plane(0, &[0.1, 0.2, 0.3, 0.4]).unwrap();
+    ///
+    /// let max = device.get_device_caps().unwrap().max_user_clip_planes;
+    /// // Maximum number of *simultaniously enabled* clip planes?  Not limit on total set:
+    /// for i in 0 .. max   { device.set_clip_plane(i,        &[0.1, 0.2, 0.3, 0.4]).unwrap() }
+    /// for i in max .. 256 { device.set_clip_plane(i,        &[0.1, 0.2, 0.3, 0.4]).unwrap() }
+    /// for pow in 8 .. 32  { device.set_clip_plane(1 << pow, &[0.1, 0.2, 0.3, 0.4]).unwrap() }
+    /// ```
+    ///
+    /// ### Returns
+    /// *   [D3DERR::INVALIDCALL]   If out of memory / address space?
+    /// *   Ok(())
+    fn set_clip_plane(&self, index: u32, plane: &[f32; 4]) -> Result<(), MethodError> {
+        let hr = unsafe { self.as_winapi().SetClipPlane(index, plane.as_ptr().cast()) };
+        MethodError::check("IDirect3DDevice9::SetClipPlane", hr)
+    }
+
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setdepthstencilsurface)\]
     /// IDirect3DDevice9::SetDepthStencilSurface
     ///
@@ -3757,7 +3782,7 @@ pub struct RgnData {
 //#cpp2rust IDirect3DDevice9::Present                           = d3d9::IDirect3DDevice9Ext::present
 //TODO:     IDirect3DDevice9::ProcessVertices                   = d3d9::IDirect3DDevice9Ext::process_vertices
 //#cpp2rust IDirect3DDevice9::Reset                             = d3d9::IDirect3DDevice9Ext::reset
-//TODO:     IDirect3DDevice9::SetClipPlane                      = d3d9::IDirect3DDevice9Ext::set_clip_plane
+//#cpp2rust IDirect3DDevice9::SetClipPlane                      = d3d9::IDirect3DDevice9Ext::set_clip_plane
 //TODO:     IDirect3DDevice9::SetClipStatus                     = d3d9::IDirect3DDevice9Ext::set_clip_status
 //TODO:     IDirect3DDevice9::SetCurrentTexturePalette          = d3d9::IDirect3DDevice9Ext::set_current_texture_palette
 //TODO:     IDirect3DDevice9::SetCursorPosition                 = d3d9::IDirect3DDevice9Ext::set_cursor_position
