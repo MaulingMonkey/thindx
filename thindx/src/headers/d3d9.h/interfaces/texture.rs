@@ -247,7 +247,7 @@ pub trait IDirect3DBaseTexture9Ext : AsSafe<IDirect3DBaseTexture9> {
     /// IDirect3DBaseTexture9::SetAutoGenFilterType
     ///
     /// Changing the filter type "dirties" the mipmap sublevels and causes them to be regenerated.
-    ////
+    ///
     /// The (default) filter type set at texture creation time is [TexF::Linear].
     /// If the driver does not support a linear filter, the filter type will be set to [TexF::Point].
     /// All filter types supported by the driver for regular texture filtering are supported for autogeneration except [TexF::None].
