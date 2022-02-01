@@ -24,6 +24,8 @@ pub struct ShaderReflectionConstantBuffer<'r> {
 }
 
 impl<'r> ShaderReflectionConstantBuffer<'r> {
+    /// ### ⚠️ Safety ⚠️
+    /// *   `ptr` must be a valid `ID3D11ShaderReflectionConstantBuffer` for the entire lifetime of `_`
     pub(crate) unsafe fn from_raw(_: impl ParentOrPhantom<'r>, ptr: *mut ID3D11ShaderReflectionConstantBuffer) -> Self {
         Self {
             ptr:        NonNull::new(ptr).expect("ShaderReflectionConstantBuffer should never be null"),

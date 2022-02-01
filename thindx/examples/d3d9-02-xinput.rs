@@ -79,8 +79,7 @@ fn main() {
     });
 }
 
-/// ### Safety
-///
+/// ### ⚠️ Safety ⚠️
 /// Caller is responsible for ensuring the [`d3d9::Device`] does not outlive the `window`.
 unsafe fn try_create_device(d3d: &Direct3D, window: &Window) -> Option<d3d9::Device> {
     let hwnd = match window.raw_window_handle() {

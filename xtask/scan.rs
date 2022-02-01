@@ -1,18 +1,22 @@
-#![allow(unused_variables)] macro_rules! qwarning { ($($tt:tt)*) => {()} } // XXX: temporarilly supress warnings
-
 use mmrbi::*;
 
+use syn::*;
+use syn::spanned::Spanned;
+
 use std::path::Path;
+use std::result::Result;
 use std::str::FromStr;
 
+const MAX_UNDOCUMENTED_ARGS : usize = 10;
 
 
-pub fn src() -> Result<(), ()> {
-    dir(Path::new("thindx/src"))
+
+pub fn all() -> Result<(), ()> {
+    dir(&std::env::current_dir().expect("current_dir"))
 }
 
 fn dir(path: &Path) -> Result<(), ()> {
-    if ".git target vs".split(' ').any(|dir| path.ends_with(dir)) { return Ok(()) } // skip
+    if ".cargo .git .notes .worktree assets target vs".split(' ').any(|dir| path.ends_with(dir)) { return Ok(()) } // skip
     let mut errors = false;
     for e in fs::DirPathType::read_by_alphanumeric(path).unwrap() {
         if e.is_dir() { errors |= dir(&e.path).is_err(); }
@@ -27,542 +31,252 @@ fn file(path: &Path) -> Result<(), ()> {
 
     if name.ends_with(".rs") {
         file_rs(path)
-    } else if name.ends_with(".md") {
-        Ok(())
-    } else if name.ends_with(".txt") {
-        Ok(())
+    } else if ".cmd .hlsl .json .md .natvis .toml .txt .yml".split(' ').any(|ext| name.ends_with(ext)) {
+        Ok(()) // no linting yet
+    } else if ".gitignore Cargo.lock LICENSE-APACHE LICENSE-MIT".split(' ').any(|exact| name == exact) {
+        Ok(()) // no linting yet
     } else {
-        panic!("xtask::scan::file: unexpected extension for `{name}`");
+        panic!("xtask::scan::file: unexpected extension for `{}`", path.display());
     }
 }
 
 fn file_rs(path: &Path) -> Result<(), ()> {
-    let file = std::fs::read_to_string(path).unwrap_or_else(|err| fatal!("failed to read {}: {}", path.display(), err));
+    let text = std::fs::read_to_string(path).map_err(|err| fatal!("failed to read {}: {}", path.display(), err))?;
 
-    let errors =
-        file_rs_doc_comments(path, &file).is_err() |
-        false;
-
-    if errors { Err(()) } else { Ok(()) }
-}
-
-fn file_rs_doc_comments(path: &Path, text: &str) -> Result<(), ()> {
     // skip validating comments of these free-form / generated files
     let skip = ["_examples.rs", "_headers.rs", "_lib.rs"];
     let skip = path.file_name().map_or(false, |file_name| skip.iter().copied().any(|n| file_name == n));
     if skip { return Ok(()) }
 
-    #[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)] enum Mode {
-        Default,
-        ExpectNonBlankLine,
-        InCodeBlock,
-        InStyleBlock,
+    let mut ctx = Context { errors: false };
+    let ctx = &mut ctx;
+
+    let file = syn::parse_file(&text).map_err(|err| error!("unable to parse {}: {}", path.display(), err))?;
+    let _docs = Docs::parse(path, &file.attrs, ctx);
+    file.items.iter().for_each(|i| item(path, i, ctx));
+    if ctx.errors { Err(()) } else { Ok(()) }
+}
+
+fn item(path: &Path, item: &Item, ctx: &mut Context) {
+    match item {
+        Item::Const(g)          => item_generic(path, &g.attrs, ctx),
+        Item::Enum(g)           => item_generic(path, &g.attrs, ctx),
+        Item::ExternCrate(g)    => item_generic(path, &g.attrs, ctx),
+        Item::Fn(f)             => item_fn(path, f, ctx),
+        Item::ForeignMod(g)     => item_generic(path, &g.attrs, ctx),
+        Item::Impl(i)           => item_impl(path, i, ctx),
+        Item::Macro(g)          => item_generic(path, &g.attrs, ctx),
+        Item::Macro2(g)         => item_generic(path, &g.attrs, ctx),
+        Item::Mod(m)            => item_mod(path, m, ctx),
+        Item::Static(g)         => item_generic(path, &g.attrs, ctx),
+        Item::Struct(s)         => item_struct(path, s, ctx),
+        Item::Trait(t)          => item_trait(path, t, ctx),
+        Item::TraitAlias(g)     => item_generic(path, &g.attrs, ctx),
+        Item::Type(g)           => item_generic(path, &g.attrs, ctx),
+        Item::Union(u)          => item_union(path, u, ctx),
+        Item::Use(g)            => item_generic(path, &g.attrs, ctx),
+        _                       => warning!(path: path, line: item.span().start().line, "failed to parse"),
     }
+}
 
-    impl Default for Mode {
-        fn default() -> Mode { Mode::Default }
+fn item_generic(path: &Path, attrs: &[Attribute], ctx: &mut Context) {
+    let _docs = Docs::parse(path, &attrs, ctx);
+}
+
+/// `fn f() { ... }`
+fn item_fn(path: &Path, f: &ItemFn, ctx: &mut Context) {
+    let docs = Docs::parse(path, &f.attrs, ctx);
+    validate_docs_vs_signature(path, &docs, &f.sig, ctx);
+}
+
+/// `impl i { ... }`
+fn item_impl(path: &Path, i: &ItemImpl, ctx: &mut Context) {
+    item_generic(path, &i.attrs, ctx);
+    i.items.iter().for_each(|i| match i {
+        ImplItem::Method(m) => {
+            let docs = Docs::parse(path, &m.attrs, ctx);
+            validate_docs_vs_signature(path, &docs, &m.sig, ctx);
+        },
+        ImplItem::Const(c)  => item_generic(path, &c.attrs, ctx),
+        ImplItem::Type(t)   => item_generic(path, &t.attrs, ctx),
+        ImplItem::Macro(m)  => item_generic(path, &m.attrs, ctx),
+        _                   => warning!(path: path, line: i.span().start().line, "failed to parse"),
+    })
+}
+
+/// `mod m { ... }`
+fn item_mod(path: &Path, m: &ItemMod, ctx: &mut Context) {
+    let _docs = Docs::parse(path, &m.attrs, ctx);
+    m.content.iter().flat_map(|(_, items)| items).for_each(|i| item(path, i, ctx));
+}
+
+/// `struct s { ... }`
+fn item_struct(path: &Path, s: &ItemStruct, ctx: &mut Context) {
+    let _docs = Docs::parse(path, &s.attrs, ctx);
+    match &s.fields {
+        Fields::Named(f)    => f.named  .iter().for_each(|f| item_field(path, f, ctx)),
+        Fields::Unnamed(f)  => f.unnamed.iter().for_each(|f| item_field(path, f, ctx)),
+        Fields::Unit => {},
     }
+}
 
-    #[derive(Debug, Default)] struct State {
-        allow_missing_argument_docs:    bool,
-        current_comment_is_mod: Option<bool>,
-        current_h3:             Option<H3>,
-        errors:                 bool,
-        mode:                   Mode,
-        arguments_line_no:      Option<usize>,
-        safety_line_no:         Option<usize>,
-        arguments:              Vec<(String, usize)>,
-    }
+fn item_field(path: &Path, f: &Field, ctx: &mut Context) {
+    let _docs = Docs::parse(path, &f.attrs, ctx);
+}
 
-    impl State {
-        pub fn on_comment_end(&mut self, path: &Path, last_comment_line_no: usize, item_line_no: Option<usize>) {
-            if !self.current_comment_is_mod.is_some() { return }
+/// `trait t { ... }`
+fn item_trait(path: &Path, t: &ItemTrait, ctx: &mut Context) {
+    let _docs = Docs::parse(path, &t.attrs, ctx);
+    t.items.iter().for_each(|i| match i {
+        TraitItem::Method(m) => {
+            let docs = Docs::parse(path, &m.attrs, ctx);
+            validate_docs_vs_signature(path, &docs, &m.sig, ctx);
+        },
+        TraitItem::Const(c) => item_generic(path, &c.attrs, ctx),
+        TraitItem::Type(t)  => item_generic(path, &t.attrs, ctx),
+        TraitItem::Macro(m) => item_generic(path, &m.attrs, ctx),
+        _                   => warning!(path: path, line: i.span().start().line, "failed to parse"),
+    })
+}
 
-            match self.mode {
-                Mode::Default => {},
-                Mode::ExpectNonBlankLine => {
-                    if let Some(h3) = self.current_h3 {
-                        error!(at: path, line: last_comment_line_no, "Expected non-blank line after `### {}`", h3.as_str());
-                        self.errors = true;
-                    } else {
-                        panic!("bug: should've had current_h3 set?");
-                    }
-                },
-                Mode::InCodeBlock => {
-                    error!(at: path, line: last_comment_line_no, "Expected end of code block before end of doc comment");
-                    self.errors = true;
-                },
-                Mode::InStyleBlock => {
-                    error!(at: path, line: last_comment_line_no, "Expected end of style block before end of doc comment");
-                    self.errors = true;
-                },
-            }
+/// `union u { ... }`
+fn item_union(path: &Path, u: &ItemUnion, ctx: &mut Context) {
+    let _docs = Docs::parse(path, &u.attrs, ctx);
+    u.fields.named.iter().for_each(|f| item_field(path, f, ctx));
+}
 
-            if !self.arguments.is_empty() {
-                for (arg, line) in self.arguments.iter() {
-                    error!(at: path, line: *line, "Documented argument `{}` missing from actual fn", arg);
-                    if let Some(item_line_no) = item_line_no {
-                        error!(at: path, line: item_line_no, "Documented argument `{}` missing from actual fn", arg);
-                    }
-                }
-                self.errors = true;
-            }
+fn validate_docs_vs_signature(path: &Path, docs: &Docs, sig: &Signature, ctx: &mut Context) {
+    let line = sig.ident.span().start().line;
 
-            self.allow_missing_argument_docs    = false;
-            self.current_comment_is_mod = None;
-            self.current_h3             = None;
-            self.mode                   = Mode::Default;
-            self.arguments_line_no      = None;
-            self.safety_line_no         = None;
-            self.arguments.clear();
-        }
-    }
+    macro_rules! error { ( $($tt:tt)* ) => {{ ctx.errors = true; super::error!(path: path, line: line, $($tt)*) }} }
 
-    let mut s = State::default();
+    if sig.unsafety.is_some() && !docs.has_safety_docs                  { error!("unsafe fn missing `### ⚠️ Safety ⚠️` docs") }
+    if sig.inputs.len() > MAX_UNDOCUMENTED_ARGS && docs.args.is_empty() { error!("fn missing `### Arguments` docs") }
 
-    let mut lines = text.lines().enumerate();
-
-    let mut last_line_no = 0;
-    while let Some((idx, line)) = lines.next() {
-        let no = idx+1;
-        last_line_no = no;
-        let trimmed = line.trim();
-
-        let comment = if let Some(comment) = trimmed.strip_prefix("//!") {
-            let comment = comment.strip_prefix(" ").unwrap_or_else(|| {
-                if !comment.is_empty() {
-                    error!(at: path, line: no, "Expected space after `//!` (failure to do so may break markdown tables)");
-                }
-                comment
-            });
-            if s.current_comment_is_mod != Some(true) { s.on_comment_end(path, idx, None); }
-            s.current_comment_is_mod = Some(true);
-            comment
-        } else if let Some(comment) = trimmed.strip_prefix("///") {
-            let comment = comment.strip_prefix(" ").unwrap_or_else(|| {
-                if !comment.is_empty() {
-                    error!(at: path, line: no, "Expected space after `///` (failure to do so may break markdown tables)");
-                }
-                comment
-            });
-            if s.current_comment_is_mod != Some(false) { s.on_comment_end(path, idx, None); }
-            s.current_comment_is_mod = Some(false);
-            comment
-        } else if trimmed.starts_with("//") && !trimmed.starts_with("//#") {
-            continue // ignore regular comment lines
-        } else if s.current_comment_is_mod == Some(true) {
-            s.on_comment_end(path, idx, None);
-            continue
-        } else if s.current_comment_is_mod == Some(false) {
-            if trimmed.is_empty() {
-                error!(at: path, line: no, "unexpected blank line after doc comment");
-                s.errors = true;
-                continue;
-            }
-
-            let mut rest = trimmed;
-
-            loop {
-                if let Some(r) = rest.strip_prefix("#[repr(transparent)]") {
-                    rest = r.trim_start();
-                    //s.repr = Some(Transparent);
-                } else if let Some(r) = rest.strip_prefix("#[repr(C)]") {
-                    rest = r.trim_start();
-                    //s.repr = Some(C);
-                } else if let Some((r, pre)) = "#[allow #[cfg #[deprecated #[derive #[doc #[inline #[must_use #[non_exhaustive #[macro_export".split(' ').filter_map(|pre| Some((rest.strip_prefix(pre)?, pre))).next() {
-                    let end_str = if r.starts_with("(") { ")]" } else { "]" };
-                    let end = match r.find(end_str) {
-                        Some(n) => n,
-                        None => {
-                            error!(at: path, line: no, "{}...{} expected to be a single line", pre, end_str);
-                            s.errors = true;
-                            continue;
-                        },
-                    };
-                    rest = r[end+end_str.len()..].trim_start();
-                } else if rest == "//#allow_missing_argument_docs" {
-                    s.allow_missing_argument_docs = true;
-                    rest = "";
-                } else if rest.starts_with("//#") {
-                    error!(at: path, line: no, "unexpected directive");
-                    s.errors = true;
-                    rest = "";
-                } else if rest.starts_with("//") {
-                    rest = "";
-                } else {
-                    break;
-                }
-            }
-
-            if rest.is_empty() {
-                continue; // not an error
-            }
-
-            let (_vis, rest) = if let Some(rest) = rest.strip_prefix("pub(crate) ") {
-                (Visibility::PubCrate, rest.trim_start())
-            } else if let Some(rest) = rest.strip_prefix("pub ") {
-                (Visibility::Pub, rest.trim_start())
-            } else {
-                (Visibility::Private, rest)
-            };
-
-            let (is_unsafe, rest) = if let Some(rest) = rest.strip_prefix("unsafe ") {
-                (true, rest.trim_start())
-            } else {
-                (false, rest)
-            };
-
-            let (dik, rest) = if let Some(rest) = rest.strip_prefix("fn ")  { (DocItemKind::Fn,     rest.trim_start()) }
-            else if let Some(rest) = rest.strip_prefix("const fn ")         { (DocItemKind::Fn,     rest.trim_start()) }
-            else if let Some(rest) = rest.strip_prefix("const ")            { (DocItemKind::Const,  rest.trim_start()) }
-            else if let Some(rest) = rest.strip_prefix("impl ")             { (DocItemKind::Impl,   rest.trim_start()) }
-            else if let Some(rest) = rest.strip_prefix("macro_rules! ")     { (DocItemKind::Macro,  rest.trim_start()) }
-            else if let Some(rest) = rest.strip_prefix("mod ")              { (DocItemKind::Mod,    rest.trim_start()) }
-            else if let Some(rest) = rest.strip_prefix("struct ")           { (DocItemKind::Struct, rest.trim_start()) }
-            else if let Some(rest) = rest.strip_prefix("enum ")             { (DocItemKind::Enum,   rest.trim_start()) }
-            else if let Some(rest) = rest.strip_prefix("trait ")            { (DocItemKind::Trait,  rest.trim_start()) }
-            else if let Some(rest) = rest.strip_prefix("type ")             { (DocItemKind::Type,   rest.trim_start()) }
-            else if rest.starts_with("use ") {
-                // use statement
-                s.on_comment_end(path, idx, Some(no));
-                continue;
-            } else if rest.contains(":") && rest.contains(",") {
-                // struct item
-                s.on_comment_end(path, idx, Some(no));
-                continue;
-            } else if rest.ends_with(r#": Option<unsafe extern "system" fn ("#) {
-                // struct fn item
-                s.on_comment_end(path, idx, Some(no));
-                continue;
-            } else {
-                error!(at: path, line: no, "expected const, fn, impl, mod, or struct for documented item");
-                s.errors = true;
-                s.arguments.clear();
-                s.on_comment_end(path, idx, Some(no));
-                continue;
-            };
-
-            fn is_ident_char(ch: char) -> bool { ch.is_ascii_alphanumeric() || "_#".contains(ch) }
-
-            fn strip_prefix_chars_inplace<'s>(rest: &mut &'s str, mut pred: impl FnMut(char) -> bool) -> &'s str {
-                let n = rest.find(|ch| !pred(ch)).unwrap_or(rest.len());
-                let r = &rest[..n];
-                *rest = &rest[n..];
-                r
-            }
-
-            fn strip_prefix_ident_inplace<'s>(rest: &mut &'s str) -> &'s str {
-                strip_prefix_chars_inplace(rest, is_ident_char)
-            }
-
-            fn strip_prefix_arg_ty_inplace<'s>(rest: &mut &'s str) -> &'s str {
-                // don't bother exactly validating <>() pairings - the compiler already does
-                let mut indent = 0;
-
-                let n = rest.find(|ch: char|{
-                    if ch == '(' || ch == '[' || ch == '<' {
-                        indent += 1;
-                        false
-                    } else if ch == ')' || ch == ']' || ch == '>' {
-                        if indent == 0 {
-                            true
-                        } else {
-                            indent -= 1;
-                            false
-                        }
-                    } else if ch.is_ascii_alphanumeric() || ch == '_' || ch == '$' {
-                        false
-                    } else if " *&#':;".contains(ch) {
-                        false
-                    } else if ch == ',' && indent > 0 {
-                        false
-                    } else {
-                        true
-                    }
-                }).unwrap_or(rest.len());
-
-                let r = &rest[..n];
-                *rest = &rest[n..];
-                r
-            }
-
-            #[must_use] fn strip_prefix_inplace(rest: &mut &str, prefix: &str) -> bool {
-                match rest.strip_prefix(prefix) {
-                    Some(r) => { *rest = r; true },
-                    None => false,
-                }
-            }
-
-            fn trim_start_inplace(rest: &mut &str) {
-                *rest = rest.trim_start();
-            }
-
-            let mut rest = rest;
-            let name = strip_prefix_ident_inplace(&mut rest);
-            if name == "" {
-                error!(at: path, line: no, "documented item missing name");
-                s.errors = true;
-            }
-
-            // generic params
-            if strip_prefix_inplace(&mut rest, "<") {
-                let mut n = 0;
-                let _ = strip_prefix_chars_inplace(&mut rest, |ch|{
-                    if ch == '<'                { n += 1;   true }
-                    else if ch == '>' && n == 0 {           false}
-                    else if ch == '>'           { n -= 1;   true }
-                    else                        {           true }
-                });
-                if !strip_prefix_inplace(&mut rest, ">") {
-                    error!(at: path, line: no, "unclosed generic parameter list?");
-                    s.errors = true;
-                }
-                trim_start_inplace(&mut rest);
-            }
-
-            if is_unsafe && !s.safety_line_no.is_some() {
-                error!(at: path, line: no, "doc comment for `{}` missing `### ⚠️ Safety ⚠️` section", name);
-                s.errors = true;
-            }
-
-            match dik {
-                DocItemKind::Fn if s.allow_missing_argument_docs && s.arguments.is_empty() => {}, // don't validate nonexistant `### Arguments` sections
-                DocItemKind::Fn => {
-                    if s.allow_missing_argument_docs {
-                        warning!(at: path, line: no, "//#allow_missing_argument_docs used but argument docs provided");
-                    }
-
-                    // TODO: better parsing of self
-                    let self_only =
-                        rest.starts_with("()") ||
-                        rest.starts_with("(self)") ||
-                        rest.starts_with("(mut self)") ||
-                        rest.starts_with("(&self)") ||
-                        rest.starts_with("(&'s self)") ||
-                        rest.starts_with("(&'lr self)") ||
-                        rest.starts_with("(&mut self)") ||
-                    false;
-                    if self_only {
-                        s.on_comment_end(path, idx, Some(no));
-                        continue;
-                    }
-
-                    let rest = if let Some(rest) = rest.strip_prefix("(") {
-                        rest.trim_start()
-                    } else {
-                        error!(at: path, line: no, "expected opening parenthesis `(` for fn arguments list on same line as `fn {}`", name);
-                        s.errors = true;
-                        s.arguments.clear();
-                        s.on_comment_end(path, idx, Some(no));
-                        continue;
-                    };
-
-                    if rest.is_empty() {
-                        // multi-line argument list
-                        let lines = lines.clone();
-                        let mut arguments = s.arguments.iter().enumerate();
-                        let mut first_arg = false;
-                        for (idx, line) in lines {
-                            let no = idx+1;
-                            let trimmed = line.trim();
-
-                            if trimmed.starts_with(")") { break }
-                            if !first_arg {
-                                first_arg = true;
-                                if trimmed.starts_with("self,") || trimmed.starts_with("&self,") || trimmed.starts_with("&mut self,") { continue }
-                            }
-
-                            let mut rest = trimmed;
-                            let arg_name = strip_prefix_ident_inplace(&mut rest);
-                            if arg_name == "" {
-                                error!(at: path, line: no, "error parsing argument name (rest == {:?})", rest);
-                                s.errors = true;
-                                while arguments.next().is_some() {}
-                                break
-                            }
-                            if !strip_prefix_inplace(&mut rest, ":") {
-                                error!(at: path, line: no, "expected type after argument `{}`", arg_name);
-                                s.errors = true;
-                                while arguments.next().is_some() {}
-                                break
-                            }
-                            trim_start_inplace(&mut rest);
-                            let arg_ty = strip_prefix_arg_ty_inplace(&mut rest);
-                            trim_start_inplace(&mut rest);
-
-                            match arguments.next() {
-                                Some((arg_idx, (doc_name, doc_line))) if *doc_name != arg_name => {
-                                    warning!(at: path, line: *doc_line,   "argument {}: documented as `{}` but actually named `{}`", arg_idx+1, doc_name, arg_name);
-                                    warning!(at: path, line: no,          "argument {}: documented as `{}` but actually named `{}`", arg_idx+1, doc_name, arg_name);
-                                },
-                                Some(_doc) => {},
-                                None if s.arguments.is_empty()  => qwarning!(at: path, line: no, "argument `{}` is undocumented (no `### Arguments` section)", arg_name),
-                                None                            => warning!(at: path, line: no, "argument `{}` is undocumented in `### Arguments` section", arg_name),
-                            }
-
-                            if !strip_prefix_inplace(&mut rest, ",") {
-                                error!(at: path, line: no, "expected `,` after argument type `{}`", arg_ty);
-                                s.errors = true;
-                            } else {
-                                trim_start_inplace(&mut rest);
-                                if !rest.is_empty() && !rest.starts_with("//") {
-                                    error!(at: path, line: no, "unexpected tokens after `,` in multi-line argument list");
-                                    s.errors = true;
-                                }
-                            }
-                        }
-                        if let Some((i, _)) = arguments.next() {
-                            s.arguments.splice(..i, None);
-                        } else {
-                            s.arguments.clear();
-                        }
-                    } else {
-                        // single line argument list
-
-                        let (_self_arg, rest) = if let Some(rest) = rest.strip_prefix("&mut self,") {
-                            (true, rest.trim_start())
-                        } else if let Some(rest) = rest.strip_prefix("&self,") {
-                            (true, rest.trim_start())
-                        } else if let Some(rest) = rest.strip_prefix("self,") {
-                            (true, rest.trim_start())
-                        } else {
-                            (false, rest)
-                        };
-
-                        let mut arguments = s.arguments.iter().enumerate();
-                        let mut rest = rest;
-                        loop {
-                            let _ = strip_prefix_inplace(&mut rest, "mut ");
-                            let arg_name = strip_prefix_ident_inplace(&mut rest);
-                            if arg_name == "" {
-                                error!(at: path, line: no, "error parsing argument name (rest == {:?})", rest);
-                                s.errors = true;
-                                while arguments.next().is_some() {}
-                                break
-                            }
-                            if !strip_prefix_inplace(&mut rest, ":") {
-                                error!(at: path, line: no, "expected type after argument `{}`", arg_name);
-                                s.errors = true;
-                                while arguments.next().is_some() {}
-                                break
-                            }
-                            trim_start_inplace(&mut rest);
-                            let arg_ty = strip_prefix_arg_ty_inplace(&mut rest);
-                            trim_start_inplace(&mut rest);
-
-                            match arguments.next() {
-                                Some((arg_idx, (doc_name, doc_line))) if *doc_name != arg_name => {
-                                    warning!(at: path, line: *doc_line,   "argument {}: documented as `{}` but actually named `{}`", arg_idx+1, doc_name, arg_name);
-                                    warning!(at: path, line: no,          "argument {}: documented as `{}` but actually named `{}`", arg_idx+1, doc_name, arg_name);
-                                },
-                                Some(_doc) => {},
-                                None if s.arguments.is_empty()  => qwarning!(at: path, line: no, "argument `{}` is undocumented (no `### Arguments` section)", arg_name),
-                                None                            => warning!(at: path, line: no, "argument `{}` is undocumented in `### Arguments` section", arg_name),
-                            }
-
-                            if strip_prefix_inplace(&mut rest, ")") {
-                                break;
-                            } else if strip_prefix_inplace(&mut rest, ",") {
-                                trim_start_inplace(&mut rest);
-                            } else {
-                                error!(at: path, line: no, "expected `)` or `,` after argument type `{}`", arg_ty);
-                                s.errors = true;
-                            }
-                        }
-                        if let Some((i, _)) = arguments.next() {
-                            s.arguments.splice(..i, None);
-                        } else {
-                            s.arguments.clear();
-                        }
-                    }
-                },
-                DocItemKind::Macro  => s.arguments.clear(), // TODO: Verify arguments are part of macro token stream?
-                _                   => {},
-            }
-
-            s.on_comment_end(path, idx, Some(no));
-            continue
-        } else {
-            continue
-        };
-
-        match s.mode {
-            Mode::Default | Mode::ExpectNonBlankLine => {
-                let expect_non_blank = s.mode == Mode::ExpectNonBlankLine;
-                s.mode = Mode::Default;
-
-                if let Some(h3) = comment.strip_prefix("### ") {
-                    if expect_non_blank {
-                        error!(at: path, line: no, "Unexpected header `{}`: expected content after previous header first", comment);
-                        s.errors = true;
-                    }
-                    let h3 = match H3::from_str(h3) {
-                        Ok(h3) => h3,
-                        Err(err) => {
-                            error!(at: path, line: no, "{}", err);
-                            s.errors = true;
-                            continue;
-                        },
-                    };
-
-                    match h3 {
-                        H3::Arguments   => s.arguments_line_no  = Some(no),
-                        H3::Safety      => s.safety_line_no     = Some(no),
-                        _other          => {},
-                    }
-
-                    if let Some(prev_h3) = s.current_h3 {
-                        if prev_h3 >= h3 {
-                            warning!(at: path, line: no, "Expected `{}` to come before `### {}`", comment, prev_h3.as_str());
-                        }
-                    }
-                    s.current_h3 = Some(h3);
-                    s.mode = Mode::ExpectNonBlankLine;
-                } else if let Some(_) = comment.strip_prefix("#") {
-                    qwarning!(at: path, line: no, "Unexpected header `{}`: expected h3 comments only", comment);
-                } else if comment == "" && expect_non_blank {
-                    warning!(at: path, line: no, "Don't add a blank line after headers");
-                } else if comment.starts_with("```") {
-                    s.mode = Mode::InCodeBlock;
-                } else if comment == "<style>" {
-                    s.mode = Mode::InStyleBlock;
-                } else if let Some(li) = comment.strip_prefix("*   ") {
-                    match s.current_h3 {
-                        Some(H3::Arguments) => {
-                            if let Some(li) = li.strip_prefix("`") {
-                                let name_end = match li.bytes().position(|b| b == b'`') {
-                                    Some(n) => n,
-                                    None => {
-                                        error!(at: path, line: no, "Argument name missing closing backtick");
-                                        s.errors = true;
-                                        continue;
-                                    },
-                                };
-                                let (name, li) = li.split_at(name_end);
-                                let li = &li[1..].trim_start();
-                                let li = li.strip_prefix("-").unwrap_or(li);
-                                let _desc = li.trim_start();
-                                s.arguments.push((name.into(), no));
-                            } else {
-                                warning!(at: path, line: no, "Quote argument names with `backticks`");
-                            }
-                        },
-                        _other => {},
-                    }
-                } else if let Some(_li) = comment.strip_prefix("* ") {
-                    warning!(at: path, line: no, "Tab-indent line items");
-                }
+    if !docs.args.is_empty() {
+        let mut doc_args = docs.args.iter().fuse();
+        let mut code_args = sig.inputs.iter().filter_map(|i| match i {
+            FnArg::Receiver(_) => None, // self
+            FnArg::Typed(PatType { pat, .. }) => match &**pat {
+                Pat::Ident(PatIdent{ident,..}) => Some(ident),
+                pat => { warning!("unexpected argument type {:?}", pat); None },
             },
-            Mode::InCodeBlock if comment == "```" => s.mode = Mode::Default,
-            Mode::InCodeBlock => {},
-            Mode::InStyleBlock if comment == "</style>" => s.mode = Mode::Default,
-            Mode::InStyleBlock => {},
+        }).fuse();
+
+        let mut arg_no = 0;
+        loop {
+            arg_no += 1;
+            match (doc_args.next(), code_args.next()) {
+                (Some(doc_arg), Some(code_arg)) => {
+                    let code_arg_name = code_arg.to_string();
+                    if doc_arg.name != code_arg_name {
+                        super::error!(path: path, line: doc_arg.line, "argument {} was mis-documented to be `{}` but was actually `{}`", arg_no, doc_arg.name, code_arg_name);
+                        ctx.errors = true;
+                    }
+                },
+                (Some(doc_arg), None) => {
+                    super::error!(path: path, line: doc_arg.line, "argument {} does not exist, but was documented to be `{}`", arg_no, doc_arg.name);
+                    ctx.errors = true;
+                },
+                (None, Some(code_arg)) => {
+                    let code_arg_name = code_arg.to_string();
+                    super::error!(path: path, line: code_arg.span().start().line, "argument {} (`{}`) is undocumented", arg_no, code_arg_name);
+                    ctx.errors = true;
+                },
+                (None, None) => break,
+            }
         }
     }
+}
 
-    s.on_comment_end(path, last_line_no, None);
 
-    if s.errors { Err(()) } else { Ok(()) }
+
+#[derive(Default)]
+struct Docs {
+    pub has_safety_docs:    bool,
+    pub args:               Vec<Arg>,
+}
+
+struct Arg {
+    pub line:   usize,
+    pub name:   String,
+}
+
+impl Docs {
+    pub fn parse(path: &Path, attrs: &[Attribute], ctx: &mut Context) -> Self {
+        let mut docs = Docs::default();
+
+        let mut doc_lines = attrs.iter().filter_map(|attr| if !attr.path.is_ident("doc") {
+            None
+        } else if let Ok(Meta::NameValue(MetaNameValue { lit: Lit::Str(doc), .. })) = attr.parse_meta() {
+            Some(doc)
+        } else {
+            None
+        }).peekable();
+
+        let mut current_h3 = None;
+
+        while let Some(doc) = doc_lines.next() {
+            let line = doc.span().start().line;
+            let text = doc.value();
+            let trim = text.trim();
+            macro_rules! error      { ( $($tt:tt)* ) => {{ ctx.errors = true; super::error!  (path: path, line: line, $($tt)*) }} }
+            macro_rules! warning    { ( $($tt:tt)* ) => {{                    super::warning!(path: path, line: line, $($tt)*) }} }
+
+            if !trim.is_empty() && !text.starts_with(" ") { error!("use a space between `///` or `//!` and the doc comment text (avoids breaking markdown tables!)") }
+
+            if let Some(h3) = trim.strip_prefix("### ").map(|s| s.trim_start()) {
+                let prev_h3 = current_h3;
+                match H3::from_str(h3) {
+                    Ok(h3)      => current_h3 = Some(h3),
+                    Err(err)    => { current_h3 = None; error!("{}", err); },
+                }
+                docs.has_safety_docs |= current_h3 == Some(H3::Safety);
+
+                if let (Some(prev_h3), Some(current_h3)) = (prev_h3, current_h3) {
+                    if prev_h3 >= current_h3 {
+                        //warning!("Expected `{}` to come before `### {}`", trim, prev_h3.as_str())
+                    }
+                }
+
+                match doc_lines.peek() {
+                    None                                        => error!("Expected documentation content after `### {}`", h3),
+                    Some(doc) if doc.value().trim().is_empty()  => error!("Unexpected blank line after doc comment"),
+                    // TODO: warn if back-to-back headers?
+                    _                                           => {},
+                }
+            } else if trim.starts_with("#") {
+                current_h3 = None;
+                //warning!("Unexpected header `{}`: expected h3 comments only", text);
+            } else if current_h3 == Some(H3::Arguments) {
+                // TODO: warn to tab-indent line items
+                if let Some(arg) = text.strip_prefix(" *").map(str::trim_start) { // only match top-level line items
+                    let arg = arg.strip_prefix('`').unwrap_or_else(|| { warning!("quote arg_name with backquotes ala `arg_name`"); arg });
+                    if let Some((arg, _after)) = arg.split_once('`') {
+                        if arg.len() != arg.trim().len()        { warning!("unexpected whitespace in arg_name") }
+                        //if !_after.trim_start().starts_with("-") { warning!("expected dash after code-quoted arg_name") }
+                        docs.args.push(Arg { line, name: arg.into() });
+                    } else {
+                        warning!("missing closing backquote to arg name");
+                    }
+                } else {
+                    // continued arg text?
+                }
+            } else { // not a header
+                if trim.starts_with("```") { // "```", "```rust", "```text", etc.
+                    while doc_lines.next_if(|l| l.value().trim() != "```").is_some() {}
+                    if doc_lines.next().is_none() { warning!("Unexpected end of documentation mid code-block") }
+                    continue;
+                }
+            }
+        }
+
+        docs
+    }
+}
+
+struct Context {
+    pub errors: bool,
 }
 
 macro_rules! h3 {
@@ -585,6 +299,7 @@ macro_rules! h3 {
         }
 
         impl H3 {
+            #[allow(dead_code)] // used in for-now commented out warnings
             pub fn as_str(&self) -> &'static str { match *self { $(H3::$ident => $label),* } }
         }
     }
@@ -620,26 +335,4 @@ h3! {
     "Output"        => Output,
     "See Also"      => SeeAlso,
     "Remarks"       => Remarks,
-}
-
-#[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)]
-enum Visibility {
-    Pub,
-    PubCrate,
-    Private,
-}
-
-
-
-#[derive(Clone, Copy, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)]
-enum DocItemKind {
-    Const,
-    Fn,
-    Impl,
-    Macro,
-    Mod,
-    Struct,
-    Enum,
-    Trait,
-    Type, // possibly an associated type, possibly a free type
 }

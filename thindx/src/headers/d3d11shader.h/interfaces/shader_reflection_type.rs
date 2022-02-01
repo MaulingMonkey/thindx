@@ -25,6 +25,8 @@ pub struct ShaderReflectionType<'r> {
 }
 
 impl<'r> ShaderReflectionType<'r> {
+    /// ### ⚠️ Safety ⚠️
+    /// *   `ptr` must be a valid `ID3D11ShaderReflectionType` for the entire lifetime of `_`
     pub(crate) unsafe fn from_raw(_: impl ParentOrPhantom<'r>, ptr: *mut ID3D11ShaderReflectionType) -> Self {
         Self {
             ptr:        NonNull::new(ptr).expect("ShaderReflectionType should never be null"),

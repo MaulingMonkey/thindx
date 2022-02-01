@@ -118,6 +118,9 @@ pub const d3d9_00_clear_winit : () = ();
 ///     static DEVICE   : RefCell<Option<Device>> = RefCell::new(None);
 /// }
 /// 
+/// /// ### ⚠️ Safety ⚠️
+/// /// *   `hwnd` must be a valid window
+/// /// *   `wparam` / `lparam` may be assumed to be valid pointers depending no the exact `umsg` passed
 /// unsafe extern "system" fn window_proc(hwnd: HWND, umsg: u32, wparam: WPARAM, lparam: LPARAM) -> LRESULT {
 ///     match umsg {
 ///         WM_DESTROY => {
@@ -306,8 +309,7 @@ pub const d3d9_01_clear_winapi : () = ();
 ///     });
 /// }
 /// 
-/// /// ### Safety
-/// ///
+/// /// ### ⚠️ Safety ⚠️
 /// /// Caller is responsible for ensuring the [`d3d9::Device`] does not outlive the `window`.
 /// unsafe fn try_create_device(d3d: &Direct3D, window: &Window) -> Option<d3d9::Device> {
 ///     let hwnd = match window.raw_window_handle() {

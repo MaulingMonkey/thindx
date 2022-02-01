@@ -37,7 +37,7 @@ fn build(args: std::env::Args) {
     let mut args = args.peekable();
     if args.peek().is_none() {
         copy_thindx_files();
-        scan::src().unwrap_or_else(|()| std::process::exit(1));
+        scan::all().unwrap_or_else(|()| std::process::exit(1));
         run("cargo fetch");
         run("cargo build --frozen --workspace --all-targets");
         run(r"cargo build --frozen --workspace --all-targets --all-features --target-dir=target\all-features");

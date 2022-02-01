@@ -22,6 +22,8 @@ pub struct FunctionParameterReflection<'r> {
 }
 
 impl<'r> FunctionParameterReflection<'r> {
+    /// ### ⚠️ Safety ⚠️
+    /// *   `ptr` must be a valid `ID3D11FunctionParameterReflection` for the entire lifetime of `_`
     pub(crate) unsafe fn from_raw(_: impl ParentOrPhantom<'r>, ptr: *mut ID3D11FunctionParameterReflection) -> Self {
         Self {
             ptr:        NonNull::new(ptr).expect("FunctionParameterReflection should never be null"),
