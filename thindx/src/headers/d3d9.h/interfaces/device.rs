@@ -2993,18 +2993,26 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// Sets palette entries.
     ///
     /// ### Returns
-    /// *   [D3DERR::INVALIDCALL]   If D3DPTEXTURECAPS_ALPHAPALETTE is not set and any entries has an alpha other than 1.0.
+    /// *   [D3DERR::INVALIDCALL]   If [d3d::PTextureCaps::AlphaPalette] is not set and any entries has an alpha other than 1.0.
     /// *   Ok(`()`)
     ///
     /// ### Example
     /// ```rust
     /// # use dev::d3d9::*; let device = device_test();
+    /// let caps = device.get_device_caps().unwrap();
+    ///
     /// let pal = [Color::argb(0xFF112233); 256];
     /// device.set_palette_entries( 0, &pal).unwrap();
     /// device.set_palette_entries(!0, &pal).unwrap();
     ///
+    /// // May or may not succeed depending on system
     /// let pal2 = [Color::argb(0x00112233); 256]; // alpha != 1.0
-    /// assert_eq!(D3DERR::INVALIDCALL, device.set_palette_entries(0, &pal2));
+    /// let r = device.set_palette_entries(0, &pal2);
+    /// if caps.texture_caps.into() & PTextureCaps::AlphaPalette.into() == 0 { // e.g. Sacrilige
+    ///     assert_eq!(D3DERR::INVALIDCALL, r);
+    /// } else { // e.g. Github Actions's Windows 2019 Server
+    ///     r.unwrap();
+    /// }
     /// ```
     ///
     /// ### See Also
@@ -3025,21 +3033,28 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// *   `palette_number` > `0x0000FFFF` may work with some runtimes... or may **hang** (my experience trying e.g. `!0u32`), overflow an alloc, crash, etc.
     ///
     /// ### Returns
-    /// *   [D3DERR::INVALIDCALL]   If D3DPTEXTURECAPS_ALPHAPALETTE is not set and any entries has an alpha other than 1.0.
+    /// *   [D3DERR::INVALIDCALL]   If [d3d::PTextureCaps::AlphaPalette] is not set and any entries has an alpha other than 1.0.
     /// *   Ok(`()`)
     ///
     /// ### Example
     /// ```rust
     /// # use dev::d3d9::*; let device = device_test();
+    /// let caps = device.get_device_caps().unwrap();
+    ///
     /// unsafe {
     ///     // Should succeed:
     ///     let pal = [Color::argb(0xFF112233); 256];
     ///     device.set_palette_entries_unchecked(0, &pal).unwrap();
     ///     device.set_palette_entries_unchecked(0xFFFF, &pal).unwrap();
     ///
-    ///     // Should be a defined error:
+    ///     // May or may not succeed depending on system
     ///     let pal2 = [Color::argb(0x00112233); 256]; // alpha != 1.0
-    ///     assert_eq!(D3DERR::INVALIDCALL, device.set_palette_entries(0, &pal2));
+    ///     let r = device.set_palette_entries_unchecked(0, &pal2);
+    ///     if caps.texture_caps.into() & PTextureCaps::AlphaPalette.into() == 0 { // e.g. Sacrilige
+    ///         assert_eq!(D3DERR::INVALIDCALL, r);
+    ///     } else { // e.g. Github Actions's Windows 2019 Server
+    ///         r.unwrap();
+    ///     }
     ///
     /// #   if false {
     ///     // Undefined behavior? (palette_number > 0xFFFF)
