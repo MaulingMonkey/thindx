@@ -916,7 +916,7 @@ pub const d3dcompiler_h : cxx_header = cxx_header;
 /// * [`GetMaterial`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getmaterial)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_material`] <br>
 /// * [`GetNPatchMode`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getnpatchmode)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_npatch_mode`] <br>
 /// * [`GetNumberOfSwapChains`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getnumberofswapchains)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_number_of_swap_chains`] <br>
-/// * [`GetPaletteEntries`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getpaletteentries)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_palette_entries`] <br>
+/// * [`GetPaletteEntries`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getpaletteentries)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_palette_entries_unchecked`] <br>
 /// * [`GetPixelShader`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getpixelshader)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_pixel_shader`] <br>
 /// * [`GetPixelShaderConstantB`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getpixelshaderconstantb)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_pixel_shader_constant_b`] <br>
 /// * [`GetPixelShaderConstantF`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getpixelshaderconstantf)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_pixel_shader_constant_f`] <br>
@@ -947,7 +947,7 @@ pub const d3dcompiler_h : cxx_header = cxx_header;
 /// * [`Reset`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-reset)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::reset`] <br>
 /// * [`SetClipPlane`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setclipplane)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_clip_plane`] <br>
 /// * [`SetClipStatus`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setclipstatus)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_clip_status`] <br>
-/// * [`SetCurrentTexturePalette`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setcurrenttexturepalette) →&nbsp;❌ <br>
+/// * [`SetCurrentTexturePalette`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setcurrenttexturepalette)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_current_texture_palette_unchecked`] <br>
 /// * [`SetCursorPosition`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setcursorposition) →&nbsp;❌ <br>
 /// * [`SetCursorProperties`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setcursorproperties) →&nbsp;❌ <br>
 /// * [`SetDepthStencilSurface`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setdepthstencilsurface)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_depth_stencil_surface`] <br>
@@ -958,7 +958,7 @@ pub const d3dcompiler_h : cxx_header = cxx_header;
 /// * [`SetLight`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setlight)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_light`], [`d3d9::IDirect3DDevice9Ext::set_light_32_unchecked`] <br>
 /// * [`SetMaterial`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setmaterial)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_material`] <br>
 /// * [`SetNPatchMode`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setnpatchmode)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_npatch_mode`] <br>
-/// * [`SetPaletteEntries`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setpaletteentries)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_palette_entries`] <br>
+/// * [`SetPaletteEntries`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setpaletteentries)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_palette_entries`], [`d3d9::IDirect3DDevice9Ext::set_palette_entries_unchecked`] <br>
 /// * [`SetPixelShader`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setpixelshader)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_pixel_shader`] <br>
 /// * [`SetPixelShaderConstantB`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setpixelshaderconstantb)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_pixel_shader_constant_b`] <br>
 /// * [`SetPixelShaderConstantF`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setpixelshaderconstantf)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_pixel_shader_constant_f`] <br>

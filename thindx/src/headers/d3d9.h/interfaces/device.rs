@@ -104,7 +104,7 @@ unsafe impl AsSafe<IDirect3DDevice9 > for Device { fn as_safe(&self) -> &IDirect
 /// | [get_material](Self::get_material)                                        | [GetMaterial]                 | Retrieves the current material properties for the device.
 /// | [get_npatch_mode](Self::get_npatch_mode)                                  | [GetNPatchMode]               | Gets the N-patch mode segments.
 /// | [get_number_of_swap_chains](Self::get_number_of_swap_chains)              | [GetNumberOfSwapChains]       | Gets the number of implicit swap chains.
-/// | [get_palette_entries](Self::get_palette_entries)                          | [GetPaletteEntries]           | Retrieves palette entries.
+/// | [get_palette_entries_unchecked](Self::get_palette_entries_unchecked)      | [GetPaletteEntries]           | Retrieves palette entries.
 /// | [get_pixel_shader](Self::get_pixel_shader)                                | [GetPixelShader]              | Retrieves the currently set pixel shader.
 /// | [get_pixel_shader_constant_b](Self::get_pixel_shader_constant_b)          | [GetPixelShaderConstantB]     | Gets a Boolean shader constant.
 /// | [get_pixel_shader_constant_f](Self::get_pixel_shader_constant_f)          | [GetPixelShaderConstantF]     | Gets a floating-point shader constant.
@@ -135,7 +135,7 @@ unsafe impl AsSafe<IDirect3DDevice9 > for Device { fn as_safe(&self) -> &IDirect
 /// | [reset](Self::reset)                                                      | [Reset]                       | Resets the type, size, and format of the swap chain.
 /// | [set_clip_plane](Self::set_clip_plane)                                    | [SetClipPlane]                | Sets the coefficients of a user-defined clipping plane for the device.
 /// | [set_clip_status](Self::set_clip_status)                                  | [SetClipStatus]               | Sets the clip status.
-/// | [set_current_texture_palette](Self::set_current_texture_palette)          | [SetCurrentTexturePalette]    | Sets the current texture palette.
+/// | [set_current_texture_palette_unchecked](Self::set_current_texture_palette_unchecked) | [SetCurrentTexturePalette] | Sets the current texture palette.
 /// | [set_cursor_position](Self::set_cursor_position)                          | [SetCursorPosition]           | Sets the cursor position and update options.
 /// | [set_cursor_properties](Self::set_cursor_properties)                      | [SetCursorProperties]         | Sets properties for the cursor.
 /// | [set_depth_stencil_surface](Self::set_depth_stencil_surface)              | [SetDepthStencilSurface]      | Sets the depth stencil surface.
@@ -1287,8 +1287,21 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// Retrieves the current texture palette
     ///
     /// ### Returns
-    /// *   [D3DERR::INVALIDCALL]   "If the method fails" (impossible via thindx?)
-    /// *   Ok(`texture_palette_index`)
+    /// *   [D3DERR::INVALIDCALL]       "If the method fails" (impossible via thindx?)
+    /// *   Ok(`0xFFFF`)                If no palette was previously set (ambiguous!)
+    /// *   Ok(`0xFFFF`)                If palette 0xFFFF was previously set (ambiguous!)
+    /// *   Ok(`i`)                     If palette `i` was previously set
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_pure();
+    /// let pal = device.get_current_texture_palette().unwrap();
+    /// assert_eq!(0xFFFF, pal);
+    /// ```
+    ///
+    /// ### See Also
+    /// *   [Texture Palettes (Direct3D 9)](https://docs.microsoft.com/en-us/windows/win32/direct3d9/texture-palettes)
+    /// *   [set_current_texture_palette_unchecked](Self::set_current_texture_palette_unchecked)
     fn get_current_texture_palette(&self) -> Result<u32, MethodError> {
         let mut pal = 0;
         let hr = unsafe { self.as_winapi().GetCurrentTexturePalette(&mut pal) };
@@ -1762,16 +1775,16 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// ```rust
     /// # use dev::d3d9::*; let device = device_test();
     /// // XXX: No palette set, this may crash!!!
-    /// // let pal = unsafe { device.get_palette_entries(0) }.unwrap();
+    /// // let pal = unsafe { device.get_palette_entries_unchecked(0) }.unwrap();
     ///
     /// device.set_palette_entries(0, &[Color::argb(0xFF112233); 256]).unwrap();
     ///
-    /// let pal = unsafe { device.get_palette_entries(0) }.unwrap();
+    /// let pal = unsafe { device.get_palette_entries_unchecked(0) }.unwrap();
     /// assert_eq!(pal.len(), 256);
     /// assert_eq!(pal[  0], Color::argb(0xFF112233));
     /// assert_eq!(pal[255], Color::argb(0xFF112233));
     /// ```
-    unsafe fn get_palette_entries(&self, palette_number: u32) -> Result<[Color; 256], MethodError> {
+    unsafe fn get_palette_entries_unchecked(&self, palette_number: u32) -> Result<[Color; 256], MethodError> {
         // D3D9 uses PALETTEENTRYs but misuses the flags field.  D3DCOLORs are much better fits.
         let mut colors = [Color::argb(0); 256];
         let hr = unsafe { self.as_winapi().GetPaletteEntries(palette_number, colors.as_mut_ptr().cast()) };
@@ -2727,6 +2740,48 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         MethodError::check("IDirect3DDevice9::SetClipStatus", hr)
     }
 
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setcurrenttexturepalette)\]
+    /// IDirect3DDevice9::SetCurrentTexturePalette
+    ///
+    /// Sets the current texture palette.
+    ///
+    /// ### ⚠️ Safety ⚠️
+    /// Undefined behavior may result unless:
+    /// *   `palette_number` <= `max`, given a previous call to [set_palette_entries](Self::set_palette_entries)\(max\)
+    /// *   `palette_number` <= `0xFFFF` (max palette count per [Texture Palettes (Direct3D 9)](https://docs.microsoft.com/en-us/windows/win32/direct3d9/texture-palettes))
+    ///
+    /// ### Returns
+    /// *   Ok(`()`)
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_pure();
+    /// # if false {
+    /// // undefined behavior!
+    /// unsafe { device.set_current_texture_palette_unchecked(0).unwrap() };
+    /// # }
+    ///
+    /// // make palettes 0 ..= 0xFFFF safe:
+    /// device.set_palette_entries(0xFFFF, &[Color::argb(0xFFFFFFFF); 256]).unwrap();
+    ///
+    /// // now sound?
+    /// unsafe { device.set_current_texture_palette_unchecked(0).unwrap() };
+    /// #
+    /// # for i in (0 .. 16).map(|p| 1<<p).chain([0xFFFF]) { dbg!(i);
+    /// #   unsafe { device.set_current_texture_palette_unchecked(i).unwrap() };
+    /// # }
+    /// ```
+    ///
+    /// ### See Also
+    /// *   [Texture Palettes (Direct3D 9)](https://docs.microsoft.com/en-us/windows/win32/direct3d9/texture-palettes)
+    /// *   [get_current_texture_palette](Self::get_current_texture_palette)
+    /// *   [set_palette_entries](Self::set_palette_entries)
+    /// *   [set_palette_entries_unchecked](Self::set_palette_entries_unchecked)
+    unsafe fn set_current_texture_palette_unchecked(&self, palette_number: u32) -> Result<(), MethodError> {
+        let hr = unsafe { self.as_winapi().SetCurrentTexturePalette(palette_number) };
+        MethodError::check("IDirect3DDevice9::SetCurrentTexturePalette", hr)
+    }
+
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setdepthstencilsurface)\]
     /// IDirect3DDevice9::SetDepthStencilSurface
     ///
@@ -2945,9 +3000,59 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// ```rust
     /// # use dev::d3d9::*; let device = device_test();
     /// let pal = [Color::argb(0xFF112233); 256];
-    /// device.set_palette_entries(0, &pal).unwrap();
+    /// device.set_palette_entries( 0, &pal).unwrap();
+    /// device.set_palette_entries(!0, &pal).unwrap();
+    ///
+    /// let pal2 = [Color::argb(0x00112233); 256]; // alpha != 1.0
+    /// assert_eq!(D3DERR::INVALIDCALL, device.set_palette_entries(0, &pal2));
     /// ```
-    fn set_palette_entries(&self, palette_number: u32, entries: &[Color; 256]) -> Result<(), MethodError> {
+    ///
+    /// ### See Also
+    /// *   [Texture Palettes (Direct3D 9)](https://docs.microsoft.com/en-us/windows/win32/direct3d9/texture-palettes)
+    fn set_palette_entries(&self, palette_number: u16, entries: &[Color; 256]) -> Result<(), MethodError> {
+        // Safety: ✔️ u16::MAX is documented to be valid, tests OK
+        unsafe { self.set_palette_entries_unchecked(palette_number.into(), entries) }
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setpaletteentries)\]
+    /// IDirect3DDevice9::SetPaletteEntries
+    ///
+    /// Sets palette entries.
+    ///
+    /// ### ⚠️ Safety ⚠️
+    /// *   Prefer [set_palette_entries](Self::set_palette_entries), which should be sound!
+    /// *   `palette_number` should probably be <= `0x0000FFFF` as "[There is a maximum of 65,536 (0x0000FFFF) palettes.](https://docs.microsoft.com/en-us/windows/win32/direct3d9/texture-palettes)"
+    /// *   `palette_number` > `0x0000FFFF` may work with some runtimes... or may **hang** (my experience trying e.g. `!0u32`), overflow an alloc, crash, etc.
+    ///
+    /// ### Returns
+    /// *   [D3DERR::INVALIDCALL]   If D3DPTEXTURECAPS_ALPHAPALETTE is not set and any entries has an alpha other than 1.0.
+    /// *   Ok(`()`)
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_test();
+    /// unsafe {
+    ///     // Should succeed:
+    ///     let pal = [Color::argb(0xFF112233); 256];
+    ///     device.set_palette_entries_unchecked(0, &pal).unwrap();
+    ///     device.set_palette_entries_unchecked(0xFFFF, &pal).unwrap();
+    ///
+    ///     // Should be a defined error:
+    ///     let pal2 = [Color::argb(0x00112233); 256]; // alpha != 1.0
+    ///     assert_eq!(D3DERR::INVALIDCALL, device.set_palette_entries(0, &pal2));
+    ///
+    /// #   if false {
+    ///     // Undefined behavior? (palette_number > 0xFFFF)
+    ///     device.set_palette_entries_unchecked(0x10000, &pal).unwrap();
+    /// #   }
+    /// }
+    /// ```
+    ///
+    /// ### See Also
+    /// *   [Texture Palettes (Direct3D 9)](https://docs.microsoft.com/en-us/windows/win32/direct3d9/texture-palettes)
+    /// *   [set_current_texture_palette_unchecked](Self::set_current_texture_palette_unchecked)
+    /// *   [set_palette_entries](Self::set_palette_entries)
+    unsafe fn set_palette_entries_unchecked(&self, palette_number: u32, entries: &[Color; 256]) -> Result<(), MethodError> {
         // D3D9 uses PALETTEENTRYs but misuses the flags field.  D3DCOLORs are much better fits.
         let hr = unsafe { self.as_winapi().SetPaletteEntries(palette_number, entries.as_ptr().cast()) };
         MethodError::check("IDirect3DDevice9::SetPaletteEntries", hr)
@@ -3587,7 +3692,7 @@ pub struct RgnData {
 //#cpp2rust IDirect3DDevice9::GetMaterial                       = d3d9::IDirect3DDevice9Ext::get_material
 //#cpp2rust IDirect3DDevice9::GetNPatchMode                     = d3d9::IDirect3DDevice9Ext::get_npatch_mode
 //#cpp2rust IDirect3DDevice9::GetNumberOfSwapChains             = d3d9::IDirect3DDevice9Ext::get_number_of_swap_chains
-//#cpp2rust IDirect3DDevice9::GetPaletteEntries                 = d3d9::IDirect3DDevice9Ext::get_palette_entries
+//#cpp2rust IDirect3DDevice9::GetPaletteEntries                 = d3d9::IDirect3DDevice9Ext::get_palette_entries_unchecked
 //#cpp2rust IDirect3DDevice9::GetPixelShader                    = d3d9::IDirect3DDevice9Ext::get_pixel_shader
 //#cpp2rust IDirect3DDevice9::GetPixelShaderConstantB           = d3d9::IDirect3DDevice9Ext::get_pixel_shader_constant_b
 //#cpp2rust IDirect3DDevice9::GetPixelShaderConstantF           = d3d9::IDirect3DDevice9Ext::get_pixel_shader_constant_f
@@ -3622,7 +3727,7 @@ pub struct RgnData {
 //#cpp2rust IDirect3DDevice9::Reset                             = d3d9::IDirect3DDevice9Ext::reset
 //#cpp2rust IDirect3DDevice9::SetClipPlane                      = d3d9::IDirect3DDevice9Ext::set_clip_plane
 //#cpp2rust IDirect3DDevice9::SetClipStatus                     = d3d9::IDirect3DDevice9Ext::set_clip_status
-//TODO:     IDirect3DDevice9::SetCurrentTexturePalette          = d3d9::IDirect3DDevice9Ext::set_current_texture_palette
+//#cpp2rust IDirect3DDevice9::SetCurrentTexturePalette          = d3d9::IDirect3DDevice9Ext::set_current_texture_palette_unchecked
 //TODO:     IDirect3DDevice9::SetCursorPosition                 = d3d9::IDirect3DDevice9Ext::set_cursor_position
 //TODO:     IDirect3DDevice9::SetCursorProperties               = d3d9::IDirect3DDevice9Ext::set_cursor_properties
 //#cpp2rust IDirect3DDevice9::SetDepthStencilSurface            = d3d9::IDirect3DDevice9Ext::set_depth_stencil_surface
@@ -3635,6 +3740,7 @@ pub struct RgnData {
 //#cpp2rust IDirect3DDevice9::SetMaterial                       = d3d9::IDirect3DDevice9Ext::set_material
 //#cpp2rust IDirect3DDevice9::SetNPatchMode                     = d3d9::IDirect3DDevice9Ext::set_npatch_mode
 //#cpp2rust IDirect3DDevice9::SetPaletteEntries                 = d3d9::IDirect3DDevice9Ext::set_palette_entries
+//#cpp2rust IDirect3DDevice9::SetPaletteEntries                 = d3d9::IDirect3DDevice9Ext::set_palette_entries_unchecked
 //#cpp2rust IDirect3DDevice9::SetPixelShader                    = d3d9::IDirect3DDevice9Ext::set_pixel_shader
 //#cpp2rust IDirect3DDevice9::SetPixelShaderConstantB           = d3d9::IDirect3DDevice9Ext::set_pixel_shader_constant_b
 //#cpp2rust IDirect3DDevice9::SetPixelShaderConstantF           = d3d9::IDirect3DDevice9Ext::set_pixel_shader_constant_f
