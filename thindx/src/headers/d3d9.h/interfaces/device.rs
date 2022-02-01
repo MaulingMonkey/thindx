@@ -1257,7 +1257,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///
     /// ### Output
     /// ```text
-    /// ClipStatus { ClipUnion: 0, ClipIntersection: 4294967295 }
+    /// ClipStatus { ClipUnion: CS::None, ClipIntersection: CS::{All|0xfffff000} }
     /// ```
     fn get_clip_status(&self) -> Result<ClipStatus, MethodError> {
         let mut status = D3DCLIPSTATUS9 { ClipUnion: 0, ClipIntersection: 0 };
@@ -2700,6 +2700,33 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         MethodError::check("IDirect3DDevice9::SetClipPlane", hr)
     }
 
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setclipstatus)\]
+    /// IDirect3DDevice9::SetClipStatus
+    ///
+    /// Sets the [ClipStatus], indicating what clipping plane(s) to use.
+    ///
+    /// ### Returns
+    /// *   Ok(`()`)
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_pure();
+    /// let cs = ClipStatus { clip_union: CS::None, clip_intersection: CS::All };
+    /// device.set_clip_status(&cs).unwrap();
+    /// # for u in (0 .. 32).map(|p| 1<<p).chain([0x55555555, 0xAAAAAAAA, 0xFFFFFFFF]) {
+    /// #   for i in (0 .. 32).map(|p| 1<<p).chain([0x55555555, 0xAAAAAAAA, 0xFFFFFFFF]) {
+    /// #       device.set_clip_status(&ClipStatus {
+    /// #           clip_union:         CS::from_unchecked(u),
+    /// #           clip_intersection:  CS::from_unchecked(i),
+    /// #       }).unwrap();
+    /// #   }
+    /// # }
+    /// ```
+    fn set_clip_status(&self, clip_status: &ClipStatus) -> Result<(), MethodError> {
+        let hr = unsafe { self.as_winapi().SetClipStatus(clip_status.as_ref()) };
+        MethodError::check("IDirect3DDevice9::SetClipStatus", hr)
+    }
+
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setdepthstencilsurface)\]
     /// IDirect3DDevice9::SetDepthStencilSurface
     ///
@@ -3594,7 +3621,7 @@ pub struct RgnData {
 //TODO:     IDirect3DDevice9::ProcessVertices                   = d3d9::IDirect3DDevice9Ext::process_vertices
 //#cpp2rust IDirect3DDevice9::Reset                             = d3d9::IDirect3DDevice9Ext::reset
 //#cpp2rust IDirect3DDevice9::SetClipPlane                      = d3d9::IDirect3DDevice9Ext::set_clip_plane
-//TODO:     IDirect3DDevice9::SetClipStatus                     = d3d9::IDirect3DDevice9Ext::set_clip_status
+//#cpp2rust IDirect3DDevice9::SetClipStatus                     = d3d9::IDirect3DDevice9Ext::set_clip_status
 //TODO:     IDirect3DDevice9::SetCurrentTexturePalette          = d3d9::IDirect3DDevice9Ext::set_current_texture_palette
 //TODO:     IDirect3DDevice9::SetCursorPosition                 = d3d9::IDirect3DDevice9Ext::set_cursor_position
 //TODO:     IDirect3DDevice9::SetCursorProperties               = d3d9::IDirect3DDevice9Ext::set_cursor_properties

@@ -17,7 +17,7 @@
 //! | [d3dcompiler.h](const@d3dcompiler_h) |   | ✔️ 1 of 1 | ✔️ 2 of 2 |   | ⚠️ 60 of 71 |   |
 //! | [d3d9.h](const@d3d9_h) | ⚠️ 20 of 24 |   |   | ✔️ 9 of 9 | ⚠️ 63 of 72 | ✔️ 3 of 3 |
 //! | [d3d9caps.h](const@d3d9caps_h) |   | ⚠️ 3 of 5 |   |   | ⚠️ 213 of 249 |   |
-//! | [d3d9types.h](const@d3d9types_h) |   | ⚠️ 19 of 71 | ⚠️ 40 of 54 |   | ⚠️ 508 of 844 | ⚠️ 8 of 20 |
+//! | [d3d9types.h](const@d3d9types_h) |   | ⚠️ 19 of 71 | ⚠️ 40 of 54 |   | ⚠️ 521 of 844 | ⚠️ 8 of 20 |
 //! | [d3d11shader.h](const@d3d11shader_h) | ✔️ 12 of 12 | ✔️ 9 of 9 | ✔️ 1 of 1 |   | ⚠️ 16 of 17 | ✔️ 3 of 3 |
 //! | [d3d11shadertracing.h](const@d3d11shadertracing_h) | ❌ 0 of 2 | ❌ 0 of 11 | ❌ 0 of 3 |   | ❌ 0 of 62 |   |
 //! | [xinput.h](const@xinput_h) |   | ✔️ 6 of 6 |   | ✔️ 8 of 8 | ⚠️ 83 of 86 |   |
@@ -946,7 +946,7 @@ pub const d3dcompiler_h : cxx_header = cxx_header;
 /// * [`ProcessVertices`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-processvertices) →&nbsp;❌ <br>
 /// * [`Reset`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-reset)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::reset`] <br>
 /// * [`SetClipPlane`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setclipplane)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_clip_plane`] <br>
-/// * [`SetClipStatus`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setclipstatus) →&nbsp;❌ <br>
+/// * [`SetClipStatus`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setclipstatus)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_clip_status`] <br>
 /// * [`SetCurrentTexturePalette`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setcurrenttexturepalette) →&nbsp;❌ <br>
 /// * [`SetCursorPosition`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setcursorposition) →&nbsp;❌ <br>
 /// * [`SetCursorProperties`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setcursorproperties) →&nbsp;❌ <br>
@@ -2276,19 +2276,19 @@ pub const d3d9caps_h : cxx_header = cxx_header;
 /// `D3DCOMPOSERECTS_MAXNUMRECTS` →&nbsp;❌ <br>
 /// `D3DCONVOLUTIONMONO_MAXHEIGHT` →&nbsp;❌ <br>
 /// `D3DCONVOLUTIONMONO_MAXWIDTH` →&nbsp;❌ <br>
-/// `D3DCS_ALL` →&nbsp;❌ <br>
-/// `D3DCS_BACK` →&nbsp;❌ <br>
-/// `D3DCS_BOTTOM` →&nbsp;❌ <br>
-/// `D3DCS_FRONT` →&nbsp;❌ <br>
-/// `D3DCS_LEFT` →&nbsp;❌ <br>
-/// `D3DCS_PLANE0` →&nbsp;❌ <br>
-/// `D3DCS_PLANE1` →&nbsp;❌ <br>
-/// `D3DCS_PLANE2` →&nbsp;❌ <br>
-/// `D3DCS_PLANE3` →&nbsp;❌ <br>
-/// `D3DCS_PLANE4` →&nbsp;❌ <br>
-/// `D3DCS_PLANE5` →&nbsp;❌ <br>
-/// `D3DCS_RIGHT` →&nbsp;❌ <br>
-/// `D3DCS_TOP` →&nbsp;❌ <br>
+/// `D3DCS_ALL`&nbsp;→ [`d3d::CS::All`] <br>
+/// `D3DCS_BACK`&nbsp;→ [`d3d::CS::Back`] <br>
+/// `D3DCS_BOTTOM`&nbsp;→ [`d3d::CS::Bottom`] <br>
+/// `D3DCS_FRONT`&nbsp;→ [`d3d::CS::Front`] <br>
+/// `D3DCS_LEFT`&nbsp;→ [`d3d::CS::Left`] <br>
+/// `D3DCS_PLANE0`&nbsp;→ [`d3d::CS::Plane0`] <br>
+/// `D3DCS_PLANE1`&nbsp;→ [`d3d::CS::Plane1`] <br>
+/// `D3DCS_PLANE2`&nbsp;→ [`d3d::CS::Plane2`] <br>
+/// `D3DCS_PLANE3`&nbsp;→ [`d3d::CS::Plane3`] <br>
+/// `D3DCS_PLANE4`&nbsp;→ [`d3d::CS::Plane4`] <br>
+/// `D3DCS_PLANE5`&nbsp;→ [`d3d::CS::Plane5`] <br>
+/// `D3DCS_RIGHT`&nbsp;→ [`d3d::CS::Right`] <br>
+/// `D3DCS_TOP`&nbsp;→ [`d3d::CS::Top`] <br>
 /// `D3DDMAPSAMPLER` →&nbsp;❌ <br>
 /// `D3DDP_MAXTEXCOORD` →&nbsp;❌ <br>
 /// `D3DFMT_A1_SURFACE_MAXHEIGHT` →&nbsp;❌ <br>
