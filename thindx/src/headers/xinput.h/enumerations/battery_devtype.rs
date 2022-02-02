@@ -9,25 +9,17 @@ use winapi::um::xinput::*;
 /// ### See Also
 /// *   [xinput::get_battery_information](crate::xinput::get_battery_information)
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[derive(Default, Pod, Zeroable)] // 0 = Gamepad
+#[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct BatteryDevType(u8);
 
-enumish! { BatteryDevType => u8; Gamepad, Headset }
+enumish! { BatteryDevType => u8; default: Gamepad == 0; Gamepad, Headset }
 
 #[allow(non_upper_case_globals)] impl BatteryDevType {
     /// Get the battery information for a gamepad
-    pub const Gamepad : BatteryDevType = BatteryDevType(BATTERY_DEVTYPE_GAMEPAD);
+    pub const Gamepad : BatteryDevType = BatteryDevType(BATTERY_DEVTYPE_GAMEPAD); // 0
 
     /// Get the battery information for a headset
     pub const Headset : BatteryDevType = BatteryDevType(BATTERY_DEVTYPE_HEADSET);
-}
-
-#[doc(hidden)] impl BatteryDevType {
-    /// Get the battery information for a gamepad
-    pub const GAMEPAD : BatteryDevType = BatteryDevType(BATTERY_DEVTYPE_GAMEPAD);
-
-    /// Get the battery information for a headset
-    pub const HEADSET : BatteryDevType = BatteryDevType(BATTERY_DEVTYPE_HEADSET);
 }
 
 //#cpp2rust BATTERY_DEVTYPE_GAMEPAD = xinput::BatteryDevType::Gamepad

@@ -25,6 +25,7 @@ const D3D_NAME_INNER_COVERAGE   : D3D_NAME = 70;
 
 enumish! {
     Name => D3D_NAME;
+    default: Undefined == 0;
     Undefined, Position, ClipDistance, CullDistance, RenderTargetArrayIndex, ViewportArrayIndex, VertexId, PrimitiveId,
     InstanceId, IsFrontFace, SampleIndex, FinalQuadEdgeTessFactor, FinalQuadInsideTessFactor, FinalTriEdgeTessFactor,
     FinalTriInsideTessFactor, FinalLineDetailTessFactor, FinalLineDensityTessFactor, Barycentrics, ShadingRate,
@@ -62,42 +63,8 @@ enumish! {
     pub const InnerCoverage                    : Name = Name(D3D_NAME_INNER_COVERAGE);
 }
 
-#[doc(hidden)] impl Name { // Ctrl+C Ctrl+V support
-    pub const UNDEFINED                        : Name = Name(D3D_NAME_UNDEFINED); // 0
-    pub const POSITION                         : Name = Name(D3D_NAME_POSITION);
-    pub const CLIP_DISTANCE                    : Name = Name(D3D_NAME_CLIP_DISTANCE);
-    pub const CULL_DISTANCE                    : Name = Name(D3D_NAME_CULL_DISTANCE);
-    pub const RENDER_TARGET_ARRAY_INDEX        : Name = Name(D3D_NAME_RENDER_TARGET_ARRAY_INDEX);
-    pub const VIEWPORT_ARRAY_INDEX             : Name = Name(D3D_NAME_VIEWPORT_ARRAY_INDEX);
-    pub const VERTEX_ID                        : Name = Name(D3D_NAME_VERTEX_ID);
-    pub const PRIMITIVE_ID                     : Name = Name(D3D_NAME_PRIMITIVE_ID);
-    pub const INSTANCE_ID                      : Name = Name(D3D_NAME_INSTANCE_ID);
-    pub const IS_FRONT_FACE                    : Name = Name(D3D_NAME_IS_FRONT_FACE);
-    pub const SAMPLE_INDEX                     : Name = Name(D3D_NAME_SAMPLE_INDEX);
-    pub const FINAL_QUAD_EDGE_TESSFACTOR       : Name = Name(D3D_NAME_FINAL_QUAD_EDGE_TESSFACTOR);
-    pub const FINAL_QUAD_INSIDE_TESSFACTOR     : Name = Name(D3D_NAME_FINAL_QUAD_INSIDE_TESSFACTOR);
-    pub const FINAL_TRI_EDGE_TESSFACTOR        : Name = Name(D3D_NAME_FINAL_TRI_EDGE_TESSFACTOR);
-    pub const FINAL_TRI_INSIDE_TESSFACTOR      : Name = Name(D3D_NAME_FINAL_TRI_INSIDE_TESSFACTOR);
-    pub const FINAL_LINE_DETAIL_TESSFACTOR     : Name = Name(D3D_NAME_FINAL_LINE_DETAIL_TESSFACTOR);
-    pub const FINAL_LINE_DENSITY_TESSFACTOR    : Name = Name(D3D_NAME_FINAL_LINE_DENSITY_TESSFACTOR);
-    pub const BARYCENTRICS                     : Name = Name(D3D_NAME_BARYCENTRICS);
-    pub const SHADINGRATE                      : Name = Name(D3D_NAME_SHADINGRATE);
-    pub const CULLPRIMITIVE                    : Name = Name(D3D_NAME_CULLPRIMITIVE);
-    pub const TARGET                           : Name = Name(D3D_NAME_TARGET);
-    pub const DEPTH                            : Name = Name(D3D_NAME_DEPTH);
-    pub const COVERAGE                         : Name = Name(D3D_NAME_COVERAGE);
-    pub const DEPTH_GREATER_EQUAL              : Name = Name(D3D_NAME_DEPTH_GREATER_EQUAL);
-    pub const DEPTH_LESS_EQUAL                 : Name = Name(D3D_NAME_DEPTH_LESS_EQUAL);
-    pub const STENCIL_REF                      : Name = Name(D3D_NAME_STENCIL_REF);
-    pub const INNER_COVERAGE                   : Name = Name(D3D_NAME_INNER_COVERAGE);
-}
-
-
-impl Default for Name {
-    fn default() -> Self { Name::Undefined }
-}
-
 //#cpp2rust D3D_NAME                                    = d3d::Name
+
 //#cpp2rust D3D_NAME_UNDEFINED                          = d3d::Name::Undefined
 //#cpp2rust D3D_NAME_POSITION                           = d3d::Name::Position
 //#cpp2rust D3D_NAME_CLIP_DISTANCE                      = d3d::Name::ClipDistance

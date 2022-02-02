@@ -26,11 +26,10 @@ enumish! { Cmp => D3DCMPFUNC; Never, Less, Equal, LessEqual, Greater, NotEqual, 
     pub const Always        : CmpFunc = CmpFunc(D3DCMP_ALWAYS);
 }
 
-impl CmpFunc {
-    pub const fn zeroed() -> Self { Self(0) }
-}
+
 
 //#cpp2rust D3DCMPFUNC          = d3d::CmpFunc
+
 //#cpp2rust D3DCMP_NEVER        = d3d::Cmp::Never
 //#cpp2rust D3DCMP_LESS         = d3d::Cmp::Less
 //#cpp2rust D3DCMP_EQUAL        = d3d::Cmp::Equal

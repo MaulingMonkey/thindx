@@ -26,18 +26,7 @@ flags! { SIF => D3D_SHADER_INPUT_FLAGS; None, UserPacked, ComparisonSampler, Tex
     pub const Unused                : SIF = SIF(D3D_SIF_UNUSED);
 }
 
-#[doc(hidden)] impl SIF { // Ctrl+C Ctrl+V support
-    pub const USERPACKED            : SIF = SIF(D3D_SIF_USERPACKED);
-    pub const COMPARISON_SAMPLER    : SIF = SIF(D3D_SIF_COMPARISON_SAMPLER);
-    pub const TEXTURE_COMPONENT_0   : SIF = SIF(D3D_SIF_TEXTURE_COMPONENT_0);
-    pub const TEXTURE_COMPONENT_1   : SIF = SIF(D3D_SIF_TEXTURE_COMPONENT_1);
-    pub const TEXTURE_COMPONENTS    : SIF = SIF(D3D_SIF_TEXTURE_COMPONENTS);
-    pub const UNUSED                : SIF = SIF(D3D_SIF_UNUSED);
-}
 
-impl Default for SIF {
-    fn default() -> Self { SIF::None }
-}
 
 //#cpp2rust D3D_SHADER_INPUT_FLAGS          = d3d::ShaderInputFlags
 

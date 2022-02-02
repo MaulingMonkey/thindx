@@ -13,11 +13,11 @@ use winapi::um::d3dcommon::*;
 #[repr(transparent)] pub struct InterpolationMode(D3D_INTERPOLATION_MODE);
 #[doc(hidden)] pub use InterpolationMode as Interpolation;
 
-enumish! { Interpolation => D3D_INTERPOLATION_MODE; Undefined, Constant, Linear, LinearCentroid, LinearNoPerspective, LinearNoPerspectiveCentroid, LinearSample, LinearNoPerspectiveSample }
+enumish! { Interpolation => D3D_INTERPOLATION_MODE; default: Undefined == 0; Undefined, Constant, Linear, LinearCentroid, LinearNoPerspective, LinearNoPerspectiveCentroid, LinearSample, LinearNoPerspectiveSample }
 
 #[allow(missing_docs)]
 #[allow(non_upper_case_globals)] impl Interpolation { // These are enum-like
-    pub const Undefined                     : Interpolation = Interpolation(D3D_INTERPOLATION_UNDEFINED);
+    pub const Undefined                     : Interpolation = Interpolation(D3D_INTERPOLATION_UNDEFINED); // 0
     pub const Constant                      : Interpolation = Interpolation(D3D_INTERPOLATION_CONSTANT);
     pub const Linear                        : Interpolation = Interpolation(D3D_INTERPOLATION_LINEAR);
     pub const LinearCentroid                : Interpolation = Interpolation(D3D_INTERPOLATION_LINEAR_CENTROID);
@@ -27,22 +27,8 @@ enumish! { Interpolation => D3D_INTERPOLATION_MODE; Undefined, Constant, Linear,
     pub const LinearNoPerspectiveSample     : Interpolation = Interpolation(D3D_INTERPOLATION_LINEAR_NOPERSPECTIVE_SAMPLE);
 }
 
-#[doc(hidden)] impl Interpolation { // Ctrl+C Ctrl+V support
-    pub const UNDEFINED                     : Interpolation = Interpolation(D3D_INTERPOLATION_UNDEFINED);
-    pub const CONSTANT                      : Interpolation = Interpolation(D3D_INTERPOLATION_CONSTANT);
-    pub const LINEAR                        : Interpolation = Interpolation(D3D_INTERPOLATION_LINEAR);
-    pub const LINEAR_CENTROID               : Interpolation = Interpolation(D3D_INTERPOLATION_LINEAR_CENTROID);
-    pub const LINEAR_NOPERSPECTIVE          : Interpolation = Interpolation(D3D_INTERPOLATION_LINEAR_NOPERSPECTIVE);
-    pub const LINEAR_NOPERSPECTIVE_CENTROID : Interpolation = Interpolation(D3D_INTERPOLATION_LINEAR_NOPERSPECTIVE_CENTROID);
-    pub const LINEAR_SAMPLE                 : Interpolation = Interpolation(D3D_INTERPOLATION_LINEAR_SAMPLE);
-    pub const LINEAR_NOPERSPECTIVE_SAMPLE   : Interpolation = Interpolation(D3D_INTERPOLATION_LINEAR_NOPERSPECTIVE_SAMPLE);
-}
-
-impl Default for Interpolation {
-    fn default() -> Self { Interpolation(0) }
-}
-
 //#cpp2rust D3D_INTERPOLATION_MODE                          = d3d::InterpolationMode
+
 //#cpp2rust D3D_INTERPOLATION_UNDEFINED                     = d3d::Interpolation::Undefined
 //#cpp2rust D3D_INTERPOLATION_CONSTANT                      = d3d::Interpolation::Constant
 //#cpp2rust D3D_INTERPOLATION_LINEAR                        = d3d::Interpolation::Linear

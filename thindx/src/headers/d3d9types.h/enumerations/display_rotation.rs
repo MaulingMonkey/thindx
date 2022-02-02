@@ -12,7 +12,7 @@ use winapi::shared::d3d9types::*;
 #[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct DisplayRotation(D3DDISPLAYROTATION);
 
-enumish! { DisplayRotation => D3DDISPLAYROTATION; Identity, _90, _180, _270 }
+enumish! { DisplayRotation => D3DDISPLAYROTATION; default: Identity != 0; Identity, _90, _180, _270 }
 
 #[allow(non_upper_case_globals)] impl DisplayRotation { // These are enum-like
     pub const Identity  : DisplayRotation = DisplayRotation(D3DDISPLAYROTATION_IDENTITY); // 1
@@ -21,11 +21,8 @@ enumish! { DisplayRotation => D3DDISPLAYROTATION; Identity, _90, _180, _270 }
     pub const _270      : DisplayRotation = DisplayRotation(D3DDISPLAYROTATION_270);
 }
 
-impl Default for DisplayRotation {
-    fn default() -> Self { DisplayRotation::Identity } // 1
-}
-
 //#cpp2rust D3DDISPLAYROTATION              = d3d::DisplayRotation
+
 //#cpp2rust D3DDISPLAYROTATION_IDENTITY     = d3d::DisplayRotation::Identity
 //#cpp2rust D3DDISPLAYROTATION_90           = d3d::DisplayRotation::_90
 //#cpp2rust D3DDISPLAYROTATION_180          = d3d::DisplayRotation::_180

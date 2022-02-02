@@ -12,7 +12,7 @@ use winapi::shared::d3d9types::*;
 #[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct DeclMethod8(u8);
 
-enumish! { DeclMethod8 => D3DDECLMETHOD; Default, PartialU, PartialV, CrossUV, UV, Lookup, LookupPresampled }
+enumish! { DeclMethod8 => D3DDECLMETHOD; default: Default == 0; Default, PartialU, PartialV, CrossUV, UV, Lookup, LookupPresampled }
 
 #[allow(non_upper_case_globals)] impl DeclMethod8 { // These are enum-like
     pub const Default           : DeclMethod8 = DeclMethod8(D3DDECLMETHOD_DEFAULT as u8); // 0
@@ -24,11 +24,8 @@ enumish! { DeclMethod8 => D3DDECLMETHOD; Default, PartialU, PartialV, CrossUV, U
     pub const LookupPresampled  : DeclMethod8 = DeclMethod8(D3DDECLMETHOD_LOOKUPPRESAMPLED as u8);
 }
 
-impl Default for DeclMethod8 {
-    fn default() -> Self { DeclMethod8::Default } // 0
-}
-
 //#cpp2rust D3DDECLMETHOD                   = d3d::DeclMethod8
+
 //#cpp2rust D3DDECLMETHOD_DEFAULT           = d3d::DeclMethod8::Default
 //#cpp2rust D3DDECLMETHOD_PARTIALU          = d3d::DeclMethod8::PartialU
 //#cpp2rust D3DDECLMETHOD_PARTIALV          = d3d::DeclMethod8::PartialV

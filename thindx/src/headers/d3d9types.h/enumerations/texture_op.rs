@@ -51,11 +51,8 @@ enumish! {
     pub const Lerp                      : TextureOp = TextureOp(D3DTOP_LERP);
 }
 
-impl TextureOp {
-    pub const fn zeroed() -> Self { Self(0) }
-}
-
 //#cpp2rust D3DTEXTUREOP                        = d3d::TextureOp
+
 //#cpp2rust D3DTOP_DISABLE                      = d3d::TOP::Disable
 //#cpp2rust D3DTOP_SELECTARG1                   = d3d::TOP::SelectArg1
 //#cpp2rust D3DTOP_SELECTARG2                   = d3d::TOP::SelectArg2

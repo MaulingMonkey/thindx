@@ -25,16 +25,7 @@ flags! { SVF => UINT; None, UserPacked, Used, InterfacePointer, InterfaceParamet
     pub const InterfaceParameter    : SVF = SVF(D3D_SVF_INTERFACE_PARAMETER);
 }
 
-#[doc(hidden)] impl SVF { // Ctrl+C Ctrl+V support
-    pub const USERPACKED            : SVF = SVF(D3D_SVF_USERPACKED);
-    pub const USED                  : SVF = SVF(D3D_SVF_USED);
-    pub const INTERFACE_POINTER     : SVF = SVF(D3D_SVF_INTERFACE_POINTER);
-    pub const INTERFACE_PARAMETER   : SVF = SVF(D3D_SVF_INTERFACE_PARAMETER);
-}
 
-impl Default for SVF {
-    fn default() -> Self { SVF::None }
-}
 
 //#cpp2rust D3D_SHADER_VARIABLE_FLAGS       = d3d::ShaderVariableFlags
 

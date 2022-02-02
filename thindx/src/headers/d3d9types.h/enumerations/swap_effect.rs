@@ -25,7 +25,7 @@ enumish! { SwapEffect => D3DSWAPEFFECT; Discard, Flip, Copy, Overlay, FlipEx }
     ///
     /// An application that uses this swap effect cannot make any assumptions about the contents of a discarded back buffer and should therefore update an entire back buffer before invoking a Present operation that would display it.
     /// Although this is not enforced, the debug version of the runtime will overwrite the contents of discarded back buffers with random data to enable developers to verify that their applications are updating the entire back buffer surfaces correctly.
-    pub const Discard       : SwapEffect = SwapEffect(D3DSWAPEFFECT_DISCARD);
+    pub const Discard       : SwapEffect = SwapEffect(D3DSWAPEFFECT_DISCARD); // 1
 
     /// The swap chain might include multiple back buffers and is best envisaged as a circular queue that includes the front buffer.
     /// Within this queue, the back buffers are always numbered sequentially from 0 to (n - 1), where n is the number of back buffers, so that 0 denotes the least recently presented buffer.
@@ -60,11 +60,8 @@ enumish! { SwapEffect => D3DSWAPEFFECT; Discard, Flip, Copy, Overlay, FlipEx }
     pub const FlipEx        : SwapEffect = SwapEffect(D3DSWAPEFFECT_FLIPEX);
 }
 
-impl SwapEffect {
-    pub const fn zeroed() -> Self { Self(0) }
-}
-
 //#cpp2rust D3DSWAPEFFECT           = d3d::SwapEffect
+
 //#cpp2rust D3DSWAPEFFECT_DISCARD   = d3d::SwapEffect::Discard
 //#cpp2rust D3DSWAPEFFECT_FLIP      = d3d::SwapEffect::Flip
 //#cpp2rust D3DSWAPEFFECT_COPY      = d3d::SwapEffect::Copy

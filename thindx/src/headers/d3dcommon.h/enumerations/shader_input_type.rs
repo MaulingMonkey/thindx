@@ -22,6 +22,7 @@ const D3D_SIT_UAV_FEEDBACKTEXTURE       : D3D_RESOURCE_RETURN_TYPE = 13;
 
 enumish! {
     SIT => D3D_SHADER_INPUT_TYPE;
+    default: CBuffer == 0;
     CBuffer, TBuffer, Texture, Sampler, UavRWTyped, Structured, UavRWStructured,
     ByteAddress, UavRWByteAddress, UavAppendStructured, UavConsumeStructured,
     UavRWStructuredWithCounter, RTAccelerationStructure, UavFeedbackTexture,
@@ -29,7 +30,7 @@ enumish! {
 
 #[allow(missing_docs)]
 #[allow(non_upper_case_globals)] impl SIT { // These are enum-like
-    pub const CBuffer                       : SIT = SIT(D3D_SIT_CBUFFER);
+    pub const CBuffer                       : SIT = SIT(D3D_SIT_CBUFFER); // 0
     pub const TBuffer                       : SIT = SIT(D3D_SIT_TBUFFER);
     pub const Texture                       : SIT = SIT(D3D_SIT_TEXTURE);
     pub const Sampler                       : SIT = SIT(D3D_SIT_SAMPLER);
@@ -43,27 +44,6 @@ enumish! {
     pub const UavRWStructuredWithCounter    : SIT = SIT(D3D_SIT_UAV_RWSTRUCTURED_WITH_COUNTER);
     pub const RTAccelerationStructure       : SIT = SIT(D3D_SIT_RTACCELERATIONSTRUCTURE);
     pub const UavFeedbackTexture            : SIT = SIT(D3D_SIT_UAV_FEEDBACKTEXTURE);
-}
-
-#[doc(hidden)] impl SIT { // Ctrl+C Ctrl+V support
-    pub const CBUFFER                       : SIT = SIT(D3D_SIT_CBUFFER);
-    pub const TBUFFER                       : SIT = SIT(D3D_SIT_TBUFFER);
-    pub const TEXTURE                       : SIT = SIT(D3D_SIT_TEXTURE);
-    pub const SAMPLER                       : SIT = SIT(D3D_SIT_SAMPLER);
-    pub const UAV_RWTYPED                   : SIT = SIT(D3D_SIT_UAV_RWTYPED);
-    pub const STRUCTURED                    : SIT = SIT(D3D_SIT_STRUCTURED);
-    pub const UAV_RWSTRUCTURED              : SIT = SIT(D3D_SIT_UAV_RWSTRUCTURED);
-    pub const BYTEADDRESS                   : SIT = SIT(D3D_SIT_BYTEADDRESS);
-    pub const UAV_RWBYTEADDRESS             : SIT = SIT(D3D_SIT_UAV_RWBYTEADDRESS);
-    pub const UAV_APPEND_STRUCTURED         : SIT = SIT(D3D_SIT_UAV_APPEND_STRUCTURED);
-    pub const UAV_CONSUME_STRUCTURED        : SIT = SIT(D3D_SIT_UAV_CONSUME_STRUCTURED);
-    pub const UAV_RWSTRUCTURED_WITH_COUNTER : SIT = SIT(D3D_SIT_UAV_RWSTRUCTURED_WITH_COUNTER);
-    pub const RTACCELERATIONSTRUCTURE       : SIT = SIT(D3D_SIT_RTACCELERATIONSTRUCTURE);
-    pub const UAV_FEEDBACKTEXTURE           : SIT = SIT(D3D_SIT_UAV_FEEDBACKTEXTURE);
-}
-
-impl Default for SIT {
-    fn default() -> Self { SIT(0) }
 }
 
 //#cpp2rust D3D_SHADER_INPUT_TYPE                   = d3d::ShaderInputType

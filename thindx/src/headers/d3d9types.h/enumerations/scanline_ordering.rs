@@ -17,16 +17,13 @@ use winapi::shared::d3d9types::*;
 enumish! { ScanlineOrdering => D3DSCANLINEORDERING; Progressive, Interlaced, Unknown }
 
 #[allow(non_upper_case_globals)] impl ScanlineOrdering { // These are enum-like
+    pub const Unknown       : ScanlineOrdering = ScanlineOrdering(D3DSCANLINEORDERING_UNKNOWN); // 0
     pub const Progressive   : ScanlineOrdering = ScanlineOrdering(D3DSCANLINEORDERING_PROGRESSIVE);
     pub const Interlaced    : ScanlineOrdering = ScanlineOrdering(D3DSCANLINEORDERING_INTERLACED);
-    pub const Unknown       : ScanlineOrdering = ScanlineOrdering(D3DSCANLINEORDERING_UNKNOWN);
-}
-
-impl ScanlineOrdering {
-    pub const fn zeroed() -> Self { Self(0) }
 }
 
 //#cpp2rust D3DSCANLINEORDERING             = d3d::ScanlineOrdering
+
 //#cpp2rust D3DSCANLINEORDERING_PROGRESSIVE = d3d::ScanlineOrdering::Progressive
 //#cpp2rust D3DSCANLINEORDERING_INTERLACED  = d3d::ScanlineOrdering::Interlaced
 //#cpp2rust D3DSCANLINEORDERING_UNKNOWN     = d3d::ScanlineOrdering::Unknown

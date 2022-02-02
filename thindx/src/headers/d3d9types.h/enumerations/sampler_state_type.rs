@@ -39,11 +39,8 @@ enumish! {
     pub const DMapOffset        : SamplerStateType = SamplerStateType(D3DSAMP_DMAPOFFSET);
 }
 
-impl SamplerStateType {
-    pub const fn zeroed() -> Self { Self(0) }
-}
-
 //#cpp2rust D3DSAMPLERSTATETYPE     = d3d::SamplerStateType
+
 //#cpp2rust D3DSAMP_ADDRESSU        = d3d::Samp::AddressU
 //#cpp2rust D3DSAMP_ADDRESSV        = d3d::Samp::AddressV
 //#cpp2rust D3DSAMP_ADDRESSW        = d3d::Samp::AddressW

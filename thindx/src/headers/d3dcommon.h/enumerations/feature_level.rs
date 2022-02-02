@@ -14,7 +14,7 @@ const D3D_FEATURE_LEVEL_1_0_CORE : D3D_FEATURE_LEVEL = 0x1000; // Not in winapi 
 #[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct FeatureLevel(D3D_FEATURE_LEVEL);
 
-enumish! { FeatureLevel => D3D_FEATURE_LEVEL; _1_0_Core, _9_1, _9_2, _9_3, _10_0, _10_1, _11_0, _11_1, _12_0, _12_1 }
+enumish! { FeatureLevel => D3D_FEATURE_LEVEL; default: 0; _1_0_Core, _9_1, _9_2, _9_3, _10_0, _10_1, _11_0, _11_1, _12_0, _12_1 }
 
 #[allow(missing_docs)]
 #[allow(non_upper_case_globals)] impl FeatureLevel { // These are enum-like
@@ -30,15 +30,8 @@ enumish! { FeatureLevel => D3D_FEATURE_LEVEL; _1_0_Core, _9_1, _9_2, _9_3, _10_0
     pub const _12_1     : FeatureLevel = FeatureLevel(D3D_FEATURE_LEVEL_12_1);
 }
 
-#[doc(hidden)] impl FeatureLevel { // Ctrl+C Ctrl+V support
-    pub const _1_0_CORE : FeatureLevel = FeatureLevel(D3D_FEATURE_LEVEL_1_0_CORE);
-}
-
-impl Default for FeatureLevel {
-    fn default() -> Self { FeatureLevel(0) }
-}
-
 //#cpp2rust D3D_FEATURE_LEVEL           = d3d::FeatureLevel
+
 //#cpp2rust D3D_FEATURE_LEVEL_1_0_CORE  = d3d::FeatureLevel::_1_0_Core
 //#cpp2rust D3D_FEATURE_LEVEL_9_1       = d3d::FeatureLevel::_9_1
 //#cpp2rust D3D_FEATURE_LEVEL_9_2       = d3d::FeatureLevel::_9_2

@@ -9,7 +9,7 @@ type D3DGETDATA = u32; // there's no actual type
 /// DWORD / D3DGETDATA_*
 ///
 /// Controls how [IDirect3DQuery9Ext::get_data_inplace] behaves.
-#[derive(Clone, Copy, Default, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)] pub struct GetData(D3DGETDATA);
 
 flags! { GetData => D3DGETDATA; None, Flush }

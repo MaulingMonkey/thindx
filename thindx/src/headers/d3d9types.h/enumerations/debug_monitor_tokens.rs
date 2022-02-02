@@ -20,10 +20,7 @@ enumish! { DMT => D3DDEBUGMONITORTOKENS; Enable, Disable }
     pub const Disable       : DMT = DMT(D3DDMT_DISABLE); // 1
 }
 
-impl DMT {
-    pub const fn zeroed() -> Self { Self(0) }
-}
-
 //#cpp2rust D3DDEBUGMONITORTOKENS   = d3d::DebugMonitorTokens
+
 //#cpp2rust D3DDMT_ENABLE           = d3d::DMT::Enable
 //#cpp2rust D3DDMT_DISABLE          = d3d::DMT::Disable

@@ -22,10 +22,6 @@ enumish! { Degree => D3DDEGREETYPE; Linear, Quadratic, Cubic, Quintic }
     pub const Quintic       : Degree = Degree(D3DDEGREE_QUINTIC);
 }
 
-impl Degree {
-    pub const fn zeroed() -> Self { Self(0) }
-}
-
 //#cpp2rust D3DDEGREETYPE       = d3d::DegreeType
 
 //#cpp2rust D3DDEGREE_LINEAR    = d3d::Degree::Linear

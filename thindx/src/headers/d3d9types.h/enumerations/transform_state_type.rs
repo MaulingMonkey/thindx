@@ -35,8 +35,6 @@ enumish! { TS => D3DTRANSFORMSTATETYPE; View, Projection, Texture0, Texture1, Te
 }
 
 impl TransformStateType {
-    pub const fn zeroed() -> Self { Self(0) }
-
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dts-worldmatrix)\]
     /// D3DTS_WORLDMATRIX
     pub const fn world_matrix(index: u8) -> TransformStateType { TransformStateType(index as u32 + 256) }

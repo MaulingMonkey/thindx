@@ -53,40 +53,7 @@ flags! {
     pub const PrintHexLiterals                  : Disasm = Disasm(D3D_DISASM_PRINT_HEX_LITERALS);
 }
 
-#[doc(hidden)] impl Disasm { // Ctrl+C Ctrl+V support
-    pub const NONE                              : Disasm = Disasm(0);
 
-    /// Enable the output of color codes.
-    pub const ENABLE_COLOR_CODE                 : Disasm = Disasm(D3D_DISASM_ENABLE_COLOR_CODE);
-
-    /// Enable the output of default values.
-    pub const ENABLE_DEFAULT_VALUE_PRINTS       : Disasm = Disasm(D3D_DISASM_ENABLE_DEFAULT_VALUE_PRINTS);
-
-    /// Enable instruction numbering.
-    pub const ENABLE_INSTRUCTION_NUMBERING      : Disasm = Disasm(D3D_DISASM_ENABLE_INSTRUCTION_NUMBERING);
-
-    /// No effect.
-    pub const ENABLE_INSTRUCTION_CYCLE          : Disasm = Disasm(D3D_DISASM_ENABLE_INSTRUCTION_CYCLE);
-
-    /// Disable the output of debug information.
-    pub const DISABLE_DEBUG_INFO                : Disasm = Disasm(D3D_DISASM_DISABLE_DEBUG_INFO);
-
-    /// Enable the output of instruction offsets.
-    pub const ENABLE_INSTRUCTION_OFFSET         : Disasm = Disasm(D3D_DISASM_ENABLE_INSTRUCTION_OFFSET);
-
-    /// This flag has no effect in [Compiler::disassemble_region].
-    /// Cycle information comes from the trace; therefore, cycle information is available only in [D3DDisassemble11Trace]'s trace disassembly.
-    ///
-    /// [D3DDisassemble11Trace]:    https://docs.microsoft.com/en-us/windows/win32/api/d3d11shadertracing/nf-d3d11shadertracing-d3ddisassemble11trace
-    pub const INSTRUCTION_ONLY                  : Disasm = Disasm(D3D_DISASM_INSTRUCTION_ONLY);
-
-    /// Use hex symbols in disassemblies.
-    pub const PRINT_HEX_LITERALS                : Disasm = Disasm(D3D_DISASM_PRINT_HEX_LITERALS);
-}
-
-impl Default for Disasm {
-    fn default() -> Self { Disasm::None }
-}
 
 //#cpp2rust D3D_DISASM_ENABLE_COLOR_CODE            = d3d::Disasm::EnableColorCode
 //#cpp2rust D3D_DISASM_ENABLE_DEFAULT_VALUE_PRINTS  = d3d::Disasm::EnableDefaultValuePrints

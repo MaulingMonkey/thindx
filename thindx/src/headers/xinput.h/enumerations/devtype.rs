@@ -13,12 +13,7 @@ enumish! { DevType => u8; Gamepad }
 
 #[allow(non_upper_case_globals)] impl DevType {
     /// The device is a game controller.
-    pub const Gamepad : DevType = DevType(XINPUT_DEVTYPE_GAMEPAD as _);
-}
-
-#[doc(hidden)] impl DevType {
-    /// The device is a game controller.
-    pub const GAMEPAD : DevType = DevType(XINPUT_DEVTYPE_GAMEPAD as _);
+    pub const Gamepad : DevType = DevType(XINPUT_DEVTYPE_GAMEPAD as _); // 1
 }
 
 //#cpp2rust XINPUT_DEVTYPE_GAMEPAD = xinput::DevType::Gamepad

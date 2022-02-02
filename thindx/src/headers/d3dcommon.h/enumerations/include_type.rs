@@ -13,7 +13,7 @@ use winapi::um::d3dcommon::*;
 #[repr(transparent)] pub struct IncludeType(D3D_INCLUDE_TYPE);
 #[doc(hidden)] pub use IncludeType as Include;
 
-enumish! { Include => D3D_INCLUDE_TYPE; Local, System }
+enumish! { Include => D3D_INCLUDE_TYPE; default: Local == 0; Local, System }
 
 #[allow(non_upper_case_globals)] impl Include { // These are enum-like
     /// A "local" `#include "..."` style include
@@ -23,16 +23,8 @@ enumish! { Include => D3D_INCLUDE_TYPE; Local, System }
     pub const System    : Include = Include(D3D_INCLUDE_SYSTEM);
 }
 
-#[doc(hidden)] impl Include { // Ctrl+C Ctrl+V support
-    pub const LOCAL     : Include = Include(D3D_INCLUDE_LOCAL);
-    pub const SYSTEM    : Include = Include(D3D_INCLUDE_SYSTEM);
-}
-
-impl Default for Include {
-    fn default() -> Self { Include(0) }
-}
-
 //#cpp2rust D3D_INCLUDE_TYPE        = d3d::IncludeType
+
 //#cpp2rust D3D_INCLUDE_LOCAL       = d3d::Include::Local
 //#cpp2rust D3D_INCLUDE_SYSTEM      = d3d::Include::System
 

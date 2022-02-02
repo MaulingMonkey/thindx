@@ -22,11 +22,8 @@ enumish! { ComposeRects => D3DCOMPOSERECTSOP; Copy, Or, And, Neg }
     pub const Neg   : ComposeRectsOp = ComposeRectsOp(D3DCOMPOSERECTS_NEG);
 }
 
-impl ComposeRects {
-    pub const fn zeroed() -> Self { Self(0) }
-}
-
 //#cpp2rust D3DCOMPOSERECTSOP           = d3d::ComposeRectsOp
+
 //#cpp2rust D3DCOMPOSERECTS_COPY        = d3d::ComposeRects::Copy
 //#cpp2rust D3DCOMPOSERECTS_OR          = d3d::ComposeRects::Or
 //#cpp2rust D3DCOMPOSERECTS_AND         = d3d::ComposeRects::And

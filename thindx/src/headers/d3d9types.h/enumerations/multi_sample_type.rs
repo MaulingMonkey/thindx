@@ -22,7 +22,7 @@ impl MultiSample {
     }
 }
 
-enumish! { MultiSample => D3DMULTISAMPLE_TYPE; None, NonMaskable, X2, X3, X4, X5, X6, X7, X8, X9, X10, X11, X12, X13, X14, X15, X16 }
+enumish! { MultiSample => D3DMULTISAMPLE_TYPE; default: None == 0; None, NonMaskable, X2, X3, X4, X5, X6, X7, X8, X9, X10, X11, X12, X13, X14, X15, X16 }
 
 #[allow(non_upper_case_globals)] impl MultiSample { // These are enum-like
     /// No level of full-scene multisampling is available.
@@ -48,11 +48,8 @@ enumish! { MultiSample => D3DMULTISAMPLE_TYPE; None, NonMaskable, X2, X3, X4, X5
     pub const X16           : MultiSample = MultiSample(D3DMULTISAMPLE_16_SAMPLES);
 }
 
-impl Default for MultiSample {
-    fn default() -> Self { MultiSample::None } // 0
-}
-
 //#cpp2rust D3DMULTISAMPLE_TYPE         = d3d::MultiSampleType
+
 //#cpp2rust D3DMULTISAMPLE_NONE         = d3d::MultiSample::None
 //#cpp2rust D3DMULTISAMPLE_NONMASKABLE  = d3d::MultiSample::NonMaskable
 //#cpp2rust D3DMULTISAMPLE_2_SAMPLES    = d3d::MultiSample::X2

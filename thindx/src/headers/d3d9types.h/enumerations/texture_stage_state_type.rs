@@ -45,10 +45,6 @@ enumish! {
     pub const Constant                  : TextureStageStateType = TextureStageStateType(D3DTSS_CONSTANT);
 }
 
-impl TextureStageStateType {
-    pub const fn zeroed() -> Self { Self(0) }
-}
-
 //#cpp2rust D3DTEXTURESTAGESTATETYPE        = d3d::TextureStageStateType
 
 //#cpp2rust D3DTSS_COLOROP                  = d3d::TSS::ColorOp

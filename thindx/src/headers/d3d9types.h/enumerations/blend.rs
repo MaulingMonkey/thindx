@@ -38,11 +38,8 @@ enumish! {
     pub const InvSrcColor2          : Blend = Blend(D3DBLEND_INVSRCCOLOR2);
 }
 
-impl Blend {
-    pub const fn zeroed() -> Self { Self(0) }
-}
-
 //#cpp2rust D3DBLEND                    = d3d::Blend
+
 //#cpp2rust D3DBLEND_ZERO               = d3d::Blend::Zero
 //#cpp2rust D3DBLEND_ONE                = d3d::Blend::One
 //#cpp2rust D3DBLEND_SRCCOLOR           = d3d::Blend::SrcColor

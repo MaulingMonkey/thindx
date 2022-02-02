@@ -9,7 +9,7 @@ type D3DISSUE = u32; // there's no actual type
 /// DWORD / D3DISSUE_*
 ///
 /// Controls how [IDirect3DQuery9Ext::issue] behaves.
-#[derive(Clone, Copy, Default, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)] pub struct Issue(D3DISSUE);
 
 flags! { Issue => D3DISSUE; None, Begin, End }

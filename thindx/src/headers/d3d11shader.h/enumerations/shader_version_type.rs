@@ -45,16 +45,6 @@ enumish! { ShVer => D3D11_SHADER_VERSION_TYPE; PixelShader, VertexShader, Geomet
     pub const Reserved0         : ShVer = ShVer(D3D11_SHVER_RESERVED0);
 }
 
-#[doc(hidden)] impl ShVer { // Ctrl+C Ctrl+V support
-    pub const PIXEL_SHADER      : ShVer = ShVer(D3D11_SHVER_PIXEL_SHADER); // 0
-    pub const VERTEX_SHADER     : ShVer = ShVer(D3D11_SHVER_VERTEX_SHADER);
-    pub const GEOMETRY_SHADER   : ShVer = ShVer(D3D11_SHVER_GEOMETRY_SHADER);
-    pub const HULL_SHADER       : ShVer = ShVer(D3D11_SHVER_HULL_SHADER);
-    pub const DOMAIN_SHADER     : ShVer = ShVer(D3D11_SHVER_DOMAIN_SHADER);
-    pub const COMPUTE_SHADER    : ShVer = ShVer(D3D11_SHVER_COMPUTE_SHADER);
-    pub const RESERVED0         : ShVer = ShVer(D3D11_SHVER_RESERVED0);
-}
-
 
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/ne-d3d11shader-d3d11_shader_version_type)\]
@@ -77,8 +67,8 @@ enumish! { ShVer => D3D11_SHADER_VERSION_TYPE; PixelShader, VertexShader, Geomet
 /// *   [d3d11::ShaderDesc::version]
 /// *   [d3d11::ShaderReflection::get_desc]
 /// *   [examples::d3dcompiler_04_reflect_shader]
-#[derive(Clone, Copy, Default, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[derive(Pod, Zeroable)]
+#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Default, Pod, Zeroable)]
 #[repr(transparent)] pub struct ShaderVersion(u32);
 
 impl ShaderVersion {

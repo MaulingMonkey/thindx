@@ -16,7 +16,7 @@ use winapi::shared::d3d9types::*;
 #[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct DevType(D3DDEVTYPE);
 
-enumish! { DevType => D3DDEVTYPE; HAL, NullRef, Ref, SW }
+enumish! { DevType => D3DDEVTYPE; default: HAL != 0; HAL, NullRef, Ref, SW }
 
 #[allow(non_upper_case_globals)] impl DevType { // These are enum-like
     /// Hardware rasterization. Shading is done with software, hardware, or mixed transform and lighting.
@@ -32,24 +32,6 @@ enumish! { DevType => D3DDEVTYPE; HAL, NullRef, Ref, SW }
 
     /// A pluggable software device that has been registered with [IDirect3D9::RegisterSoftwareDevice](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-registersoftwaredevice)
     pub const SW        : DevType = DevType(D3DDEVTYPE_SW);
-}
-
-#[doc(hidden)] impl DevType {
-    /// Initialize Direct3D on a computer that has neither hardware nor reference rasterization available, and enable resources for 3D content creation.
-    pub const NULLREF   : DevType = DevType(D3DDEVTYPE_NULLREF);
-
-    /// Direct3D features are implemented in software; however, the reference rasterizer does make use of special CPU instructions whenever it can.
-    ///
-    /// The reference device is installed by the Windows SDK 8.0 or later and is intended as an aid in debugging for development only.
-    pub const REF       : DevType = DevType(D3DDEVTYPE_REF);
-}
-
-impl DevType {
-    pub const fn zeroed() -> Self { Self(0) }
-}
-
-impl Default for DevType {
-    fn default() -> Self { DevType::HAL } // 1
 }
 
 //#cpp2rust D3DDEVTYPE          = d3d::DevType

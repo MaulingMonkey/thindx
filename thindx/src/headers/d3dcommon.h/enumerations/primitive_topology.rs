@@ -20,6 +20,7 @@ use winapi::um::d3dcommon::*;
 
 enumish! {
     PrimitiveTopology => D3D_PRIMITIVE_TOPOLOGY;
+    default: Undefined == 0;
     Undefined, PointList, LineList, LineStrip, TriangleList, TriangleStrip, LineListAdj, LineStripAdj, TriangleListAdj, TriangleStripAdj,
     _1ControlPointPatchList, _2ControlPointPatchList, _3ControlPointPatchList, _4ControlPointPatchList,
     _5ControlPointPatchList, _6ControlPointPatchList, _7ControlPointPatchList, _8ControlPointPatchList,
@@ -33,7 +34,7 @@ enumish! {
 
 #[allow(missing_docs)]
 #[allow(non_upper_case_globals)] impl PrimitiveTopology { // These are enum-like
-    pub const Undefined                     : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_UNDEFINED);
+    pub const Undefined                     : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_UNDEFINED); // 0
     pub const PointList                     : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_POINTLIST);
     pub const LineList                      : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_LINELIST);
     pub const LineStrip                     : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_LINESTRIP);
@@ -77,56 +78,8 @@ enumish! {
     pub const _32ControlPointPatchList      : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_32_CONTROL_POINT_PATCHLIST);
 }
 
-#[doc(hidden)] impl PrimitiveTopology { // Ctrl+C Ctrl+V support
-    pub const UNDEFINED                     : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_UNDEFINED);
-    pub const POINTLIST                     : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_POINTLIST);
-    pub const LINELIST                      : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_LINELIST);
-    pub const LINESTRIP                     : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_LINESTRIP);
-    pub const TRIANGLELIST                  : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-    pub const TRIANGLESTRIP                 : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
-    pub const LINELIST_ADJ                  : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_LINELIST_ADJ);
-    pub const LINESTRIP_ADJ                 : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_LINESTRIP_ADJ);
-    pub const TRIANGLELIST_ADJ              : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST_ADJ);
-    pub const TRIANGLESTRIP_ADJ             : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP_ADJ);
-    pub const _1_CONTROL_POINT_PATCHLIST    : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_1_CONTROL_POINT_PATCHLIST);
-    pub const _2_CONTROL_POINT_PATCHLIST    : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_2_CONTROL_POINT_PATCHLIST);
-    pub const _3_CONTROL_POINT_PATCHLIST    : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_3_CONTROL_POINT_PATCHLIST);
-    pub const _4_CONTROL_POINT_PATCHLIST    : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_4_CONTROL_POINT_PATCHLIST);
-    pub const _5_CONTROL_POINT_PATCHLIST    : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_5_CONTROL_POINT_PATCHLIST);
-    pub const _6_CONTROL_POINT_PATCHLIST    : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_6_CONTROL_POINT_PATCHLIST);
-    pub const _7_CONTROL_POINT_PATCHLIST    : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_7_CONTROL_POINT_PATCHLIST);
-    pub const _8_CONTROL_POINT_PATCHLIST    : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_8_CONTROL_POINT_PATCHLIST);
-    pub const _9_CONTROL_POINT_PATCHLIST    : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_9_CONTROL_POINT_PATCHLIST);
-    pub const _10_CONTROL_POINT_PATCHLIST   : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_10_CONTROL_POINT_PATCHLIST);
-    pub const _11_CONTROL_POINT_PATCHLIST   : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_11_CONTROL_POINT_PATCHLIST);
-    pub const _12_CONTROL_POINT_PATCHLIST   : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_12_CONTROL_POINT_PATCHLIST);
-    pub const _13_CONTROL_POINT_PATCHLIST   : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_13_CONTROL_POINT_PATCHLIST);
-    pub const _14_CONTROL_POINT_PATCHLIST   : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_14_CONTROL_POINT_PATCHLIST);
-    pub const _15_CONTROL_POINT_PATCHLIST   : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_15_CONTROL_POINT_PATCHLIST);
-    pub const _16_CONTROL_POINT_PATCHLIST   : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_16_CONTROL_POINT_PATCHLIST);
-    pub const _17_CONTROL_POINT_PATCHLIST   : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_17_CONTROL_POINT_PATCHLIST);
-    pub const _18_CONTROL_POINT_PATCHLIST   : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_18_CONTROL_POINT_PATCHLIST);
-    pub const _19_CONTROL_POINT_PATCHLIST   : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_19_CONTROL_POINT_PATCHLIST);
-    pub const _20_CONTROL_POINT_PATCHLIST   : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_20_CONTROL_POINT_PATCHLIST);
-    pub const _21_CONTROL_POINT_PATCHLIST   : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_21_CONTROL_POINT_PATCHLIST);
-    pub const _22_CONTROL_POINT_PATCHLIST   : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_22_CONTROL_POINT_PATCHLIST);
-    pub const _23_CONTROL_POINT_PATCHLIST   : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_23_CONTROL_POINT_PATCHLIST);
-    pub const _24_CONTROL_POINT_PATCHLIST   : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_24_CONTROL_POINT_PATCHLIST);
-    pub const _25_CONTROL_POINT_PATCHLIST   : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_25_CONTROL_POINT_PATCHLIST);
-    pub const _26_CONTROL_POINT_PATCHLIST   : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_26_CONTROL_POINT_PATCHLIST);
-    pub const _27_CONTROL_POINT_PATCHLIST   : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_27_CONTROL_POINT_PATCHLIST);
-    pub const _28_CONTROL_POINT_PATCHLIST   : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_28_CONTROL_POINT_PATCHLIST);
-    pub const _29_CONTROL_POINT_PATCHLIST   : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_29_CONTROL_POINT_PATCHLIST);
-    pub const _30_CONTROL_POINT_PATCHLIST   : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_30_CONTROL_POINT_PATCHLIST);
-    pub const _31_CONTROL_POINT_PATCHLIST   : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_31_CONTROL_POINT_PATCHLIST);
-    pub const _32_CONTROL_POINT_PATCHLIST   : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_32_CONTROL_POINT_PATCHLIST);
-}
-
-impl Default for PrimitiveTopology {
-    fn default() -> Self { PrimitiveTopology(0) }
-}
-
 //#cpp2rust D3D_PRIMITIVE_TOPOLOGY                              = d3d::PrimitiveTopology
+
 //#cpp2rust D3D_PRIMITIVE_TOPOLOGY_UNDEFINED                    = d3d::PrimitiveTopology::Undefined
 //#cpp2rust D3D_PRIMITIVE_TOPOLOGY_POINTLIST                    = d3d::PrimitiveTopology::PointList
 //#cpp2rust D3D_PRIMITIVE_TOPOLOGY_LINELIST                     = d3d::PrimitiveTopology::LineList

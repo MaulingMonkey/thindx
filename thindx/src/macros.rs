@@ -113,6 +113,39 @@ macro_rules! enumish {
 
         enumish!( $enumish => $d3d );
     };
+    ( $enumish:ty => $d3d:ty; default: $default:ident != 0; $($tt:tt)* ) => {
+        impl std::default::Default for $enumish {
+            fn default() -> Self { Self::$default }
+        }
+
+        const _ : () = {
+            const DEFAULT : $enumish = <$enumish>::$default;
+            const ZEROED  : $enumish = <$enumish>::zeroed();
+            assert!(!matches!(DEFAULT, ZEROED), "default was expected to be nonzero, but was 0");
+        };
+
+        enumish!( $enumish => $d3d; $($tt)* );
+    };
+    ( $enumish:ty => $d3d:ty; default: $default:ident == 0; $($tt:tt)* ) => {
+        impl std::default::Default for $enumish {
+            fn default() -> Self { Self::$default }
+        }
+
+        const _ : () = {
+            const DEFAULT : $enumish = <$enumish>::$default;
+            const ZEROED  : $enumish = <$enumish>::zeroed();
+            assert!(matches!(DEFAULT, ZEROED), "default was expected to be 0, but wasn't");
+        };
+
+        enumish!( $enumish => $d3d; $($tt)* );
+    };
+    ( $enumish:ty => $d3d:ty; default: 0; $($tt:tt)* ) => {
+        impl std::default::Default for $enumish {
+            fn default() -> Self { Self(0) }
+        }
+
+        enumish!( $enumish => $d3d; $($tt)* );
+    };
     ( $enumish:ty => $d3d:ty; $($ident:ident),* $(,)? ) => {
         impl std::fmt::Debug for $enumish {
             fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
@@ -138,6 +171,9 @@ macro_rules! enumish {
         }
 
         impl $enumish {
+            /// Initialize to 0.
+            pub const fn zeroed() -> Self { Self(0) }
+
             /// Convert from an underlying [winapi] `D3D...` type.
             /// This is *probably* safe... probably...
             pub const fn from_unchecked(d3d: $d3d) -> Self { Self(d3d as _) }
@@ -163,7 +199,7 @@ macro_rules! flags {
                     )*
                     // No flags
                     #[allow(unreachable_patterns)] Self(0) => {
-                        write!(f, "{}(0)", stringify!($flagish))
+                        write!(f, "{}::none()", stringify!($flagish))
                     },
                     // Multiple flags or unnamed flags only
                     other => {
@@ -201,12 +237,22 @@ macro_rules! flags {
         }
 
         impl $flagish {
+            /// Initialize to 0.
+            pub const fn zeroed() -> Self { Self(0) }
+
+            /// Initialize to 0.
+            pub const fn none() -> Self { Self(0) }
+
             /// Convert from an underlying [winapi] `D3D...` type.
             /// This is *probably* safe... probably...
             pub const fn from_unchecked(d3d: $d3d) -> Self { Self(d3d as _) }
 
             /// Convert back into an underlying [winapi] `D3D...` type.
             pub const fn into(self) -> $d3d { self.0 as _ }
+        }
+
+        impl std::default::Default for $flagish {
+            fn default() -> Self { Self::none() }
         }
 
         impl std::ops::BitOrAssign for $flagish {

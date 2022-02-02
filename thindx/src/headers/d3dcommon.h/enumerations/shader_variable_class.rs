@@ -16,11 +16,11 @@ use winapi::um::d3dcommon::*;
 // Note: D3D10_* aliases D3D_* despite poor docs kinda implying otherwise (see d3dcommon.h)
 // Note: D3D11_* aliases D3D_* despite poor docs kinda implying otherwise (see d3dcommon.h)
 
-enumish! { SVC => D3D_SHADER_VARIABLE_CLASS; Scalar, Vector, MatrixRows, MatrixColumns, Object, Struct, InterfaceClass, InterfacePointer }
+enumish! { SVC => D3D_SHADER_VARIABLE_CLASS; default: Scalar == 0; Scalar, Vector, MatrixRows, MatrixColumns, Object, Struct, InterfaceClass, InterfacePointer }
 
 #[allow(missing_docs)]
 #[allow(non_upper_case_globals)] impl SVC { // These are enum-like
-    pub const Scalar            : SVC = SVC(D3D_SVC_SCALAR);
+    pub const Scalar            : SVC = SVC(D3D_SVC_SCALAR); // 0
     pub const Vector            : SVC = SVC(D3D_SVC_VECTOR);
     pub const MatrixRows        : SVC = SVC(D3D_SVC_MATRIX_ROWS);
     pub const MatrixColumns     : SVC = SVC(D3D_SVC_MATRIX_COLUMNS);
@@ -28,21 +28,6 @@ enumish! { SVC => D3D_SHADER_VARIABLE_CLASS; Scalar, Vector, MatrixRows, MatrixC
     pub const Struct            : SVC = SVC(D3D_SVC_STRUCT);
     pub const InterfaceClass    : SVC = SVC(D3D_SVC_INTERFACE_CLASS);
     pub const InterfacePointer  : SVC = SVC(D3D_SVC_INTERFACE_POINTER);
-}
-
-#[doc(hidden)] impl SVC { // Ctrl+C Ctrl+V support
-    pub const SCALAR            : SVC = SVC(D3D_SVC_SCALAR);
-    pub const VECTOR            : SVC = SVC(D3D_SVC_VECTOR);
-    pub const MATRIX_ROWS       : SVC = SVC(D3D_SVC_MATRIX_ROWS);
-    pub const MATRIX_COLUMNS    : SVC = SVC(D3D_SVC_MATRIX_COLUMNS);
-    pub const OBJECT            : SVC = SVC(D3D_SVC_OBJECT);
-    pub const STRUCT            : SVC = SVC(D3D_SVC_STRUCT);
-    pub const INTERFACE_CLASS   : SVC = SVC(D3D_SVC_INTERFACE_CLASS);
-    pub const INTERFACE_POINTER : SVC = SVC(D3D_SVC_INTERFACE_POINTER);
-}
-
-impl Default for SVC {
-    fn default() -> Self { SVC(0) }
 }
 
 //#cpp2rust D3D_SHADER_VARIABLE_CLASS   = d3d::ShaderVariableClass

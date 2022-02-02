@@ -17,7 +17,7 @@ flags! { PF => D3D_PARAMETER_FLAGS; None, In, Out }
 
 #[allow(non_upper_case_globals)] impl PF { // These are enum-like
     /// The parameter has no semantic flags.
-    pub const None  : PF = PF(D3D_PF_NONE);
+    pub const None  : PF = PF(D3D_PF_NONE); // 0
 
     /// The parameter is an input parameter (e.g. marked `in`)
     pub const In    : PF = PF(D3D_PF_IN);
@@ -26,15 +26,7 @@ flags! { PF => D3D_PARAMETER_FLAGS; None, In, Out }
     pub const Out   : PF = PF(D3D_PF_OUT);
 }
 
-#[doc(hidden)] impl PF { // Ctrl+C Ctrl+V support
-    pub const NONE  : PF = PF(D3D_PF_NONE);
-    pub const IN    : PF = PF(D3D_PF_IN);
-    pub const OUT   : PF = PF(D3D_PF_OUT);
-}
 
-impl Default for PF {
-    fn default() -> Self { PF::None }
-}
 
 //#cpp2rust D3D_PARAMETER_FLAGS = d3d::ParameterFlags
 //#cpp2rust D3D_PF_NONE         = d3d::PF::None

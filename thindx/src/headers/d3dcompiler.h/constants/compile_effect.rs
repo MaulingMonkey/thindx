@@ -44,15 +44,7 @@ flags! {
     pub const AllowSlowOps                          : CompileEffect = CompileEffect(D3DCOMPILE_EFFECT_ALLOW_SLOW_OPS);
 }
 
-#[doc(hidden)] impl CompileEffect { // Ctrl+C Ctrl+V support
-    pub const NONE                                  : CompileEffect = CompileEffect(0);
-    pub const CHILD_EFFECT                          : CompileEffect = CompileEffect(D3DCOMPILE_EFFECT_CHILD_EFFECT);
-    pub const ALLOW_SLOW_OPS                        : CompileEffect = CompileEffect(D3DCOMPILE_EFFECT_ALLOW_SLOW_OPS);
-}
 
-impl Default for CompileEffect {
-    fn default() -> Self { CompileEffect::None }
-}
 
 //#cpp2rust D3DCOMPILE_EFFECT                   = d3d::CompileEffect
 //#cpp2rust D3DCOMPILE_EFFECT_CHILD_EFFECT      = d3d::CompileEffect::ChildEffect

@@ -37,21 +37,7 @@ flags! {
     pub const TiledResources                : ShaderRequires = ShaderRequires(D3D_SHADER_REQUIRES_TILED_RESOURCES);
 }
 
-#[doc(hidden)] impl ShaderRequires { // Ctrl+C Ctrl+V support
-    pub const DOUBLES                       : ShaderRequires = ShaderRequires(D3D_SHADER_REQUIRES_DOUBLES);
-    pub const EARLY_DEPTH_STENCIL           : ShaderRequires = ShaderRequires(D3D_SHADER_REQUIRES_EARLY_DEPTH_STENCIL);
-    pub const UAVS_AT_EVERY_STAGE           : ShaderRequires = ShaderRequires(D3D_SHADER_REQUIRES_UAVS_AT_EVERY_STAGE);
-    pub const _64_UAVS                      : ShaderRequires = ShaderRequires(D3D_SHADER_REQUIRES_64_UAVS);
-    pub const MINIMUM_PRECISION             : ShaderRequires = ShaderRequires(D3D_SHADER_REQUIRES_MINIMUM_PRECISION);
-    pub const _11_1_DOUBLE_EXTENSIONS       : ShaderRequires = ShaderRequires(D3D_SHADER_REQUIRES_11_1_DOUBLE_EXTENSIONS);
-    pub const _11_1_SHADER_EXTENSIONS       : ShaderRequires = ShaderRequires(D3D_SHADER_REQUIRES_11_1_SHADER_EXTENSIONS);
-    pub const LEVEL_9_COMPARISON_FILTERING  : ShaderRequires = ShaderRequires(D3D_SHADER_REQUIRES_LEVEL_9_COMPARISON_FILTERING);
-    pub const TILED_RESOURCES               : ShaderRequires = ShaderRequires(D3D_SHADER_REQUIRES_TILED_RESOURCES);
-}
 
-impl Default for ShaderRequires {
-    fn default() -> Self { ShaderRequires::None }
-}
 
 //#cpp2rust D3D_SHADER_REQUIRES_DOUBLES                         = d3d::ShaderRequires::Doubles
 //#cpp2rust D3D_SHADER_REQUIRES_EARLY_DEPTH_STENCIL             = d3d::ShaderRequires::EarlyDepthStencil

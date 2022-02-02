@@ -144,11 +144,8 @@ impl RenderStateType {
     pub const BlendOpAlpha                  : RenderStateType = RenderStateType(D3DRS_BLENDOPALPHA);
 }
 
-impl RenderStateType {
-    pub const fn zeroed() -> Self { Self(0) }
-}
-
 //#cpp2rust D3DRENDERSTATETYPE                  = d3d::RenderStateType
+
 //#cpp2rust D3DRS_ZENABLE                       = d3d::RS::ZEnable
 //#cpp2rust D3DRS_FILLMODE                      = d3d::RS::FillMode
 //#cpp2rust D3DRS_SHADEMODE                     = d3d::RS::ShadeMode

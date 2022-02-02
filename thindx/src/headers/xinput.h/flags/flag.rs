@@ -6,7 +6,7 @@ use winapi::um::xinput::*;
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetcapabilities#parameters)\]
 /// XINPUT_FLAG_\*
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[derive(Default, Pod, Zeroable)] // 0 = No flags
+#[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct Flag(u32);
 
 flags! { Flag => u32; None, Gamepad }
@@ -19,13 +19,6 @@ flags! { Flag => u32; None, Gamepad }
     ///
     /// Limit [xinput::get_capabilities](crate::xinput::get_capabilities) to Xbox 360 controllers.
     pub const Gamepad : Flag = Flag(XINPUT_FLAG_GAMEPAD);
-}
-
-#[doc(hidden)] impl Flag {
-    /// [XINPUT_FLAG_GAMEPAD](https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetcapabilities)
-    ///
-    /// Limit [xinput::get_capabilities](crate::xinput::get_capabilities) to Xbox 360 controllers.
-    pub const GAMEPAD : Flag = Flag(XINPUT_FLAG_GAMEPAD);
 }
 
 //#cpp2rust XINPUT_FLAG_GAMEPAD     = xinput::Flag::Gamepad

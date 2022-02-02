@@ -81,9 +81,6 @@ flags! { CS => DWORD; None, All, Left, Right, Top, Bottom, Front, Back, Plane0, 
 
 #[allow(non_upper_case_globals)] impl CS {
     /// No clip flags.
-    pub const fn zeroed() -> Self { Self(0) }
-
-    /// No clip flags.
     pub const None : CS = CS(0);
 
     /// A combination of "all" clip flags

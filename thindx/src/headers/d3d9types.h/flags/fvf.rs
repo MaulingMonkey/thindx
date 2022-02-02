@@ -71,10 +71,6 @@ flags! {
     pub const TexCountShift     : u32 = D3DFVF_TEXCOUNT_SHIFT;
 }
 
-impl Default for FVF {
-    fn default() -> Self { FVF::None }
-}
-
 impl Deref for FVF {
     type Target = D3DFVF;
     fn deref(&self) -> &Self::Target { &self.0 }
@@ -84,7 +80,10 @@ impl DerefMut for FVF {
     fn deref_mut(&mut self) -> &mut Self::Target { &mut self.0 }
 }
 
+
+
 //#cpp2rust D3DFVF                      = d3d::FVF
+
 //#cpp2rust D3DFVF_DIFFUSE              = d3d::FVF::Diffuse
 //#cpp2rust D3DFVF_NORMAL               = d3d::FVF::Normal
 //#cpp2rust D3DFVF_PSIZE                = d3d::FVF::PSize

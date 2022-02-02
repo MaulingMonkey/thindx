@@ -18,7 +18,7 @@ use winapi::shared::d3d9types::*;
 #[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct BackBufferType(D3DBACKBUFFER_TYPE);
 
-enumish! { BackBufferType => D3DBACKBUFFER_TYPE; Mono, Left, Right }
+enumish! { BackBufferType => D3DBACKBUFFER_TYPE; default: Mono == 0; Mono, Left, Right }
 
 #[allow(non_upper_case_globals)] impl BackBufferType { // These are enum-like
     /// Specifies a nonstereo swap chain.
@@ -31,22 +31,8 @@ enumish! { BackBufferType => D3DBACKBUFFER_TYPE; Mono, Left, Right }
     pub const Right : BackBufferType = BackBufferType(D3DBACKBUFFER_TYPE_RIGHT);
 }
 
-#[doc(hidden)] impl BackBufferType {
-    /// Specifies a nonstereo swap chain.
-    pub const MONO  : BackBufferType = BackBufferType(D3DBACKBUFFER_TYPE_MONO);
-
-    /// Specifies the left side of a stereo pair in a swap chain.
-    pub const LEFT  : BackBufferType = BackBufferType(D3DBACKBUFFER_TYPE_LEFT);
-
-    /// Specifies the right side of a stereo pair in a swap chain.
-    pub const RIGHT : BackBufferType = BackBufferType(D3DBACKBUFFER_TYPE_RIGHT);
-}
-
-impl Default for BackBufferType {
-    fn default() -> Self { BackBufferType::Mono } // 0
-}
-
 //#cpp2rust D3DBACKBUFFER_TYPE          = d3d::BackBufferType
+
 //#cpp2rust D3DBACKBUFFER_TYPE_MONO     = d3d::BackBufferType::Mono
 //#cpp2rust D3DBACKBUFFER_TYPE_LEFT     = d3d::BackBufferType::Left
 //#cpp2rust D3DBACKBUFFER_TYPE_RIGHT    = d3d::BackBufferType::Right

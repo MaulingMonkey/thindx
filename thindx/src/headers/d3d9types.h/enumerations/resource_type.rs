@@ -38,34 +38,8 @@ enumish! { ResourceType => D3DRESOURCETYPE; Surface, Volume, Texture, VolumeText
     pub const IndexBuffer   : ResourceType = ResourceType(D3DRTYPE_INDEXBUFFER);
 }
 
-#[doc(hidden)] impl ResourceType {
-    /// [Surface] resource.
-    pub const SURFACE       : ResourceType = ResourceType(D3DRTYPE_SURFACE);
-
-    /// [Volume] resource.
-    pub const VOLUME        : ResourceType = ResourceType(D3DRTYPE_VOLUME);
-
-    /// [Texture] resource.
-    pub const TEXTURE       : ResourceType = ResourceType(D3DRTYPE_TEXTURE);
-
-    /// [VolumeTexture] resource.
-    pub const VOLUMETEXTURE : ResourceType = ResourceType(D3DRTYPE_VOLUMETEXTURE);
-
-    /// [CubeTexture] resource.
-    pub const CUBETEXTURE   : ResourceType = ResourceType(D3DRTYPE_CUBETEXTURE);
-
-    /// [VertexBuffer] resource.
-    pub const VERTEXBUFFER  : ResourceType = ResourceType(D3DRTYPE_VERTEXBUFFER);
-
-    /// [IndexBuffer] resource.
-    pub const INDEXBUFFER   : ResourceType = ResourceType(D3DRTYPE_INDEXBUFFER);
-}
-
-impl ResourceType {
-    pub const fn zeroed() -> Self { Self(0) }
-}
-
 //#cpp2rust D3DRESOURCETYPE         = d3d::ResourceType
+
 //#cpp2rust D3DRTYPE_SURFACE        = d3d::RType::Surface
 //#cpp2rust D3DRTYPE_VOLUME         = d3d::RType::Volume
 //#cpp2rust D3DRTYPE_TEXTURE        = d3d::RType::Texture

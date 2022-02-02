@@ -35,22 +35,7 @@ flags! { CompileSecData => UINT; None, MergeUavSlots, PreserveTemplateSlots, Req
     pub const RequireTemplateMatch      : CompileSecData = CompileSecData(D3DCOMPILE_SECDATA_REQUIRE_TEMPLATE_MATCH);
 }
 
-#[doc(hidden)] impl CompileSecData { // Ctrl+C Ctrl+V support
-    pub const NONE                      : CompileSecData = CompileSecData(0);
 
-    /// Merge unordered access view (UAV) slots in the secondary data that the pSecondaryData parameter points to.
-    pub const MERGE_UAV_SLOTS           : CompileSecData = CompileSecData(D3DCOMPILE_SECDATA_MERGE_UAV_SLOTS);
-
-    /// Preserve template slots in the secondary data that the pSecondaryData parameter points to.
-    pub const PRESERVE_TEMPLATE_SLOTS   : CompileSecData = CompileSecData(D3DCOMPILE_SECDATA_PRESERVE_TEMPLATE_SLOTS);
-
-    /// Require that templates in the secondary data that the pSecondaryData parameter points to match when the compiler compiles the HLSL code.
-    pub const REQUIRE_TEMPLATE_MATCH    : CompileSecData = CompileSecData(D3DCOMPILE_SECDATA_REQUIRE_TEMPLATE_MATCH);
-}
-
-impl Default for CompileSecData {
-    fn default() -> Self { CompileSecData::None }
-}
 
 //#cpp2rust D3DCOMPILE_SECDATA_MERGE_UAV_SLOTS          = d3d::CompileSecData::MergeUavSlots
 //#cpp2rust D3DCOMPILE_SECDATA_PRESERVE_TEMPLATE_SLOTS  = d3d::CompileSecData::PreserveTemplateSlots

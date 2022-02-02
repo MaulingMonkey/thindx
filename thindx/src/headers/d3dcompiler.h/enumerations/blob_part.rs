@@ -22,6 +22,7 @@ const D3D_BLOB_DEBUG_NAME : D3D_BLOB_PART = 12; // not part of winapi 0.3.9
 
 enumish! {
     BlobPart => D3D_BLOB_PART;
+    default: InputSignatureBlob == 0;
     InputSignatureBlob, OutputSignatureBlob, InputAndOutputSignatureBlob, PatchConstantSignatureBlob, AllSignatureBlob,
     DebugInfo, LegacyShader, XnaPrepassShader, XnaShader, Pdb, PrivateData, RootSignature, DebugName,
     TestAlternateShader, TestCompileDetails, TestCompilePerf, TestCompileReport,
@@ -29,7 +30,7 @@ enumish! {
 
 #[allow(missing_docs)]
 #[allow(non_upper_case_globals)] impl Blob { // These are enum-like
-    pub const InputSignatureBlob               : Blob = Blob(D3D_BLOB_INPUT_SIGNATURE_BLOB);
+    pub const InputSignatureBlob               : Blob = Blob(D3D_BLOB_INPUT_SIGNATURE_BLOB); // 0
     pub const OutputSignatureBlob              : Blob = Blob(D3D_BLOB_OUTPUT_SIGNATURE_BLOB);
     pub const InputAndOutputSignatureBlob      : Blob = Blob(D3D_BLOB_INPUT_AND_OUTPUT_SIGNATURE_BLOB);
     pub const PatchConstantSignatureBlob       : Blob = Blob(D3D_BLOB_PATCH_CONSTANT_SIGNATURE_BLOB);
@@ -83,66 +84,8 @@ enumish! {
     pub const TestCompileReport                : Blob = Blob(D3D_BLOB_TEST_COMPILE_REPORT);
 }
 
-#[doc(hidden)] impl Blob { // Ctrl+C Ctrl+V support
-    pub const INPUT_SIGNATURE_BLOB             : Blob = Blob(D3D_BLOB_INPUT_SIGNATURE_BLOB);
-    pub const OUTPUT_SIGNATURE_BLOB            : Blob = Blob(D3D_BLOB_OUTPUT_SIGNATURE_BLOB);
-    pub const INPUT_AND_OUTPUT_SIGNATURE_BLOB  : Blob = Blob(D3D_BLOB_INPUT_AND_OUTPUT_SIGNATURE_BLOB);
-    pub const PATCH_CONSTANT_SIGNATURE_BLOB    : Blob = Blob(D3D_BLOB_PATCH_CONSTANT_SIGNATURE_BLOB);
-    pub const ALL_SIGNATURE_BLOB               : Blob = Blob(D3D_BLOB_ALL_SIGNATURE_BLOB);
-    pub const DEBUG_INFO                       : Blob = Blob(D3D_BLOB_DEBUG_INFO);
-    pub const LEGACY_SHADER                    : Blob = Blob(D3D_BLOB_LEGACY_SHADER);
-    pub const XNA_PREPASS_SHADER               : Blob = Blob(D3D_BLOB_XNA_PREPASS_SHADER);
-    pub const XNA_SHADER                       : Blob = Blob(D3D_BLOB_XNA_SHADER);
-
-    /// The blob part is program database (PDB) information.
-    ///
-    /// ### Remarks
-    /// *   This was introduced by d3dcompiler_44.dll, and is unavailable in earlier versions.
-    pub const PDB                              : Blob = Blob(D3D_BLOB_PDB);
-
-    /// The blob part is private data.
-    ///
-    /// ### Remarks
-    /// *   This was introduced by d3dcompiler_44.dll, and is unavailable in earlier versions.
-    pub const PRIVATE_DATA                     : Blob = Blob(D3D_BLOB_PRIVATE_DATA);
-
-    /// The blob part is a root signature. Refer to [Specifying Root Signatures in HLSL] for more information on using Direct3D12 with HLSL.
-    ///
-    /// [Specifying Root Signatures in HLSL]:   https://docs.microsoft.com/en-us/windows/desktop/direct3d12/specifying-root-signatures-in-hlsl
-    ///
-    /// ### Remarks
-    /// *   This was introduced by d3dcompiler_47.dll, and is unavailable in earlier versions.
-    pub const ROOT_SIGNATURE                   : Blob = Blob(D3D_BLOB_ROOT_SIGNATURE);
-
-    /// The blob part is the debug name of the shader. If the application does not specify the debug name itself,
-    /// an auto-generated name matching the PDB file of the shader is provided instead.
-    ///
-    /// ### Remarks
-    /// *   This was introduced by d3dcompiler_47.dll, and is unavailable in earlier versions.
-    pub const DEBUG_NAME                       : Blob = Blob(D3D_BLOB_DEBUG_NAME);
-
-    /// ### Remarks
-    /// *   This requires a special test version of d3dcompiler.
-    pub const TEST_ALTERNATE_SHADER            : Blob = Blob(D3D_BLOB_TEST_ALTERNATE_SHADER);
-
-    /// ### Remarks
-    /// *   This requires a special test version of d3dcompiler.
-    pub const TEST_COMPILE_DETAILS             : Blob = Blob(D3D_BLOB_TEST_COMPILE_DETAILS);
-
-    /// ### Remarks
-    /// *   This requires a special test version of d3dcompiler.
-    pub const TEST_COMPILE_PERF                : Blob = Blob(D3D_BLOB_TEST_COMPILE_PERF);
-
-    /// ### Remarks
-    /// *   This requires a special test version of d3dcompiler.
-    pub const TEST_COMPILE_REPORT              : Blob = Blob(D3D_BLOB_TEST_COMPILE_REPORT);
-}
-
-impl Default for Blob {
-    fn default() -> Self { Blob(0) }
-}
-
 //#cpp2rust D3D_BLOB_PART                               = d3d::BlobPart
+
 //#cpp2rust D3D_BLOB_INPUT_SIGNATURE_BLOB               = d3d::Blob::InputSignatureBlob
 //#cpp2rust D3D_BLOB_OUTPUT_SIGNATURE_BLOB              = d3d::Blob::OutputSignatureBlob
 //#cpp2rust D3D_BLOB_INPUT_AND_OUTPUT_SIGNATURE_BLOB    = d3d::Blob::InputAndOutputSignatureBlob

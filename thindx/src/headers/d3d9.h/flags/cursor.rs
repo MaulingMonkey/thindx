@@ -10,7 +10,7 @@ const D3DCURSOR_IMMEDIATE_UPDATE : u32 = 1; // not defined in winapi
 ///
 /// Controls how [IDirect3DQuery9Ext::set_cursor_position] behaves.
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[derive(Default, Pod, Zeroable)]
+#[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct Cursor(DWORD);
 
 flags! { Cursor => DWORD; None, ImmediateUpdate }

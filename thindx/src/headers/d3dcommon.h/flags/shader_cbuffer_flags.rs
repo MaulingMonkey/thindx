@@ -24,15 +24,9 @@ flags! { CBF => UINT; None, UserPacked }
     pub const UserPacked    : CBF = CBF(D3D_CBF_USERPACKED);
 }
 
-#[doc(hidden)] impl CBF { // Ctrl+C Ctrl+V support
-    /// Bind the constant buffer to an input slot defined in HLSL code (instead of letting the compiler choose the input slot).
-    pub const USERPACKED    : CBF = CBF(D3D_CBF_USERPACKED);
-}
 
-impl Default for CBF {
-    fn default() -> Self { CBF::None }
-}
 
 //#cpp2rust D3D_SHADER_CBUFFER_FLAGS    = d3d::ShaderCbufferFlags
+
 //#cpp2rust D3D_CBF_USERPACKED          = d3d::CBF::UserPacked
 //#cpp2rust D3D10_CBF_USERPACKED        = d3d::CBF::UserPacked

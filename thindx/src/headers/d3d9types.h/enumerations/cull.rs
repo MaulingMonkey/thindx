@@ -20,11 +20,8 @@ enumish! { Cull => D3DCULL; None, CW, CCW }
     pub const CCW       : Cull = Cull(D3DCULL_CCW);
 }
 
-impl Cull {
-    pub const fn zeroed() -> Self { Self(0) }
-}
-
 //#cpp2rust D3DCULL         = d3d::Cull
+
 //#cpp2rust D3DCULL_NONE    = d3d::Cull::None
 //#cpp2rust D3DCULL_CW      = d3d::Cull::CW
 //#cpp2rust D3DCULL_CCW     = d3d::Cull::CCW

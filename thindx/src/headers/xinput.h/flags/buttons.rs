@@ -13,7 +13,7 @@ use winapi::um::xinput::*;
 /// ### See Also
 /// *   [Xbox 360 controller: Layout](https://en.wikipedia.org/wiki/Xbox_360_controller#Layout) (Wikipedia)
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[derive(Default, Pod, Zeroable)] // 0 = No buttons
+#[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct Buttons(u16);
 
 flags! { Buttons => u16; None, DPadUp, DPadDown, DPadLeft, DPadRight, Start, Guide, Back, LeftThumb, RightThumb, LeftShoulder, RightShoulder, A, B, X, Y }
@@ -171,22 +171,7 @@ impl Buttons {
     pub const Y : Buttons = Buttons(XINPUT_GAMEPAD_Y as _);
 }
 
-#[doc(hidden)] impl Buttons {
-    pub const NONE              : Buttons = Buttons(0);
-    pub const DPAD_UP           : Buttons = Buttons(XINPUT_GAMEPAD_DPAD_UP as _);
-    pub const DPAD_DOWN         : Buttons = Buttons(XINPUT_GAMEPAD_DPAD_DOWN as _);
-    pub const DPAD_LEFT         : Buttons = Buttons(XINPUT_GAMEPAD_DPAD_LEFT as _);
-    pub const DPAD_RIGHT        : Buttons = Buttons(XINPUT_GAMEPAD_DPAD_RIGHT as _);
-    pub const START             : Buttons = Buttons(XINPUT_GAMEPAD_START as _);
-    pub const BACK              : Buttons = Buttons(XINPUT_GAMEPAD_BACK as _);
-    pub const LEFT_THUMB        : Buttons = Buttons(XINPUT_GAMEPAD_LEFT_THUMB as _);
-    pub const RIGHT_THUMB       : Buttons = Buttons(XINPUT_GAMEPAD_RIGHT_THUMB as _);
-    pub const LEFT_SHOULDER     : Buttons = Buttons(XINPUT_GAMEPAD_LEFT_SHOULDER as _);
-    pub const RIGHT_SHOULDER    : Buttons = Buttons(XINPUT_GAMEPAD_RIGHT_SHOULDER as _);
-    #[deprecated = "This undocumented button is not returned by most APIs, being reserved for system software.  See thindx's docs for details."]
-    pub const GUIDE             : Buttons = Buttons(1 << 10);
-    // A, B, X, Y are already canon
-}
+
 
 //#cpp2rust XINPUT_GAMEPAD_DPAD_UP          = xinput::Buttons::DPadUp
 //#cpp2rust XINPUT_GAMEPAD_DPAD_DOWN        = xinput::Buttons::DPadDown

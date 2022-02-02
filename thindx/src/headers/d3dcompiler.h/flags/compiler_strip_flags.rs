@@ -24,7 +24,7 @@ flags! { CompilerStrip => D3DCOMPILER_STRIP_FLAGS; None, ReflectionData, DebugIn
     /// Strip reflection data (presumably disables [d3d::Compiler::reflect11] and friends?)
     pub const ReflectionData    : CompilerStrip = CompilerStrip(D3DCOMPILER_STRIP_REFLECTION_DATA);
 
-    /// Strip debug information (file/line/name info? [d3d::Blob::DebugInfo]?  Possibly [d3d::Blob::PDB] sections as well?)
+    /// Strip debug information (file/line/name info? [d3d::Blob::DebugInfo]?  Possibly [d3d::Blob::Pdb] sections as well?)
     pub const DebugInfo         : CompilerStrip = CompilerStrip(D3DCOMPILER_STRIP_DEBUG_INFO);
 
     /// Strip test blobs (e.g. [Blob::Test*](d3d::Blob::TestAlternateShader))
@@ -39,20 +39,10 @@ flags! { CompilerStrip => D3DCOMPILER_STRIP_FLAGS; None, ReflectionData, DebugIn
     pub const RootSignature     : CompilerStrip = CompilerStrip(D3DCOMPILER_STRIP_ROOT_SIGNATURE);
 }
 
-#[doc(hidden)] impl CompilerStrip { // Ctrl+C Ctrl+V support
-    pub const NONE              : CompilerStrip = CompilerStrip(0);
-    pub const REFLECTION_DATA   : CompilerStrip = CompilerStrip(D3DCOMPILER_STRIP_REFLECTION_DATA);
-    pub const DEBUG_INFO        : CompilerStrip = CompilerStrip(D3DCOMPILER_STRIP_DEBUG_INFO);
-    pub const TEST_BLOBS        : CompilerStrip = CompilerStrip(D3DCOMPILER_STRIP_TEST_BLOBS);
-    pub const PRIVATE_DATA      : CompilerStrip = CompilerStrip(D3DCOMPILER_STRIP_PRIVATE_DATA);
-    pub const ROOT_SIGNATURE    : CompilerStrip = CompilerStrip(D3DCOMPILER_STRIP_ROOT_SIGNATURE);
-}
 
-impl Default for CompilerStripFlags {
-    fn default() -> Self { CompilerStrip::None }
-}
 
 //#cpp2rust D3DCOMPILER_STRIP_FLAGS             = d3d::CompilerStripFlags
+
 //#cpp2rust D3DCOMPILER_STRIP_REFLECTION_DATA   = d3d::CompilerStrip::ReflectionData
 //#cpp2rust D3DCOMPILER_STRIP_DEBUG_INFO        = d3d::CompilerStrip::DebugInfo
 //#cpp2rust D3DCOMPILER_STRIP_TEST_BLOBS        = d3d::CompilerStrip::TestBlobs

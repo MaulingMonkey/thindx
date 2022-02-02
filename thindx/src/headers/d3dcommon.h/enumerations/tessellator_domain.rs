@@ -14,25 +14,14 @@ use winapi::um::d3dcommon::*;
 
 // Note: D3D11_* aliases D3D_* despite poor docs kinda implying otherwise (see d3dcommon.h)
 
-enumish! { TessellatorDomain => D3D_TESSELLATOR_DOMAIN; Undefined, IsoLine, Tri, Quad }
+enumish! { TessellatorDomain => D3D_TESSELLATOR_DOMAIN; default: Undefined == 0; Undefined, IsoLine, Tri, Quad }
 
 #[allow(missing_docs)]
 #[allow(non_upper_case_globals)] impl TessellatorDomain { // These are enum-like
-    pub const Undefined : TessellatorDomain = TessellatorDomain(D3D_TESSELLATOR_DOMAIN_UNDEFINED);
+    pub const Undefined : TessellatorDomain = TessellatorDomain(D3D_TESSELLATOR_DOMAIN_UNDEFINED); // 0
     pub const IsoLine   : TessellatorDomain = TessellatorDomain(D3D_TESSELLATOR_DOMAIN_ISOLINE);
     pub const Tri       : TessellatorDomain = TessellatorDomain(D3D_TESSELLATOR_DOMAIN_TRI);
     pub const Quad      : TessellatorDomain = TessellatorDomain(D3D_TESSELLATOR_DOMAIN_QUAD);
-}
-
-#[doc(hidden)] impl TessellatorDomain { // Ctrl+C Ctrl+V support
-    pub const UNDEFINED : TessellatorDomain = TessellatorDomain(D3D_TESSELLATOR_DOMAIN_UNDEFINED);
-    pub const ISOLINE   : TessellatorDomain = TessellatorDomain(D3D_TESSELLATOR_DOMAIN_ISOLINE);
-    pub const TRI       : TessellatorDomain = TessellatorDomain(D3D_TESSELLATOR_DOMAIN_TRI);
-    pub const QUAD      : TessellatorDomain = TessellatorDomain(D3D_TESSELLATOR_DOMAIN_QUAD);
-}
-
-impl Default for TessellatorDomain {
-    fn default() -> Self { TessellatorDomain(0) }
 }
 
 //#cpp2rust D3D_TESSELLATOR_DOMAIN              = d3d::TessellatorDomain

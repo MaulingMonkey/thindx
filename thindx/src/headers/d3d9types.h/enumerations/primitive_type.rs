@@ -42,11 +42,8 @@ enumish! { PT => D3DPRIMITIVETYPE; PointList, LineList, LineStrip, TriangleList,
     pub const TriangleFan       : PrimitiveType = PrimitiveType(D3DPT_TRIANGLEFAN);
 }
 
-impl PrimitiveType {
-    pub const fn zeroed() -> Self { Self(0) }
-}
-
 //#cpp2rust D3DPRIMITIVETYPE    = d3d::PrimitiveType
+
 //#cpp2rust D3DPT_POINTLIST     = d3d::PT::PointList
 //#cpp2rust D3DPT_LINELIST      = d3d::PT::LineList
 //#cpp2rust D3DPT_LINESTRIP     = d3d::PT::LineStrip

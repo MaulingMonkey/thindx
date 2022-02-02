@@ -282,7 +282,7 @@ pub fn set_options(options: impl Into<Options>) {
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_setoptions#parameters)\]
 /// D3DPERF_SetOptions's dwOptions
-#[derive(Clone, Copy, Default, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)] pub struct Options(DWORD);
 flags! { Options => DWORD; None, ForbidPix }
 #[allow(non_upper_case_globals)] impl Options {

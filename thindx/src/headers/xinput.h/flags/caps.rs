@@ -11,7 +11,7 @@ use winapi::um::xinput::*;
 /// ### See Also
 /// *   [Xbox 360 controller: Layout](https://en.wikipedia.org/wiki/Xbox_360_controller#Layout) (Wikipedia)
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[derive(Default, Pod, Zeroable)] // 0 = No caps
+#[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct Caps(u16);
 
 flags! { Caps => u16; None, VoiceSupported, FfbSupported, Wireless, PmdSupported, NoNavigation }
@@ -38,27 +38,6 @@ flags! { Caps => u16; None, VoiceSupported, FfbSupported, Wireless, PmdSupported
     pub const NoNavigation      : Caps = Caps(XINPUT_CAPS_NO_NAVIGATION);
 }
 
-#[doc(hidden)] impl Caps {
-    /// No capabilities are held.
-    pub const NONE              : Caps = Caps(0);
-
-    /// Device has an integrated voice device.
-    pub const VOICE_SUPPORTED   : Caps = Caps(XINPUT_CAPS_VOICE_SUPPORTED);
-
-    /// **F**orce **F**eed**b**ack is supported.
-    pub const FFB_SUPPORTED     : Caps = Caps(XINPUT_CAPS_FFB_SUPPORTED);
-
-    /// The device is wireless.
-    pub const WIRELESS          : Caps = Caps(XINPUT_CAPS_WIRELESS);
-
-    /// **P**lug-in **M**o**d**ules are supported.
-    ///
-    /// **NOTE:** Plug-in modules like the text input device (TID) may not be supported on Windows.
-    pub const PMD_SUPPORTED     : Caps = Caps(XINPUT_CAPS_PMD_SUPPORTED);
-
-    /// Device lacks menu navigation buttons (START, BACK, DPAD).
-    pub const NO_NAVIGATION     : Caps = Caps(XINPUT_CAPS_NO_NAVIGATION);
-}
 
 
 //#cpp2rust XINPUT_CAPS_VOICE_SUPPORTED     = xinput::Caps::VoiceSupported

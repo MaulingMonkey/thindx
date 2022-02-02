@@ -21,6 +21,7 @@ use winapi::um::d3dcommon::*;
 
 enumish! {
     Primitive => D3D_PRIMITIVE;
+    default: Undefined == 0;
     Undefined, Point, Line, Triangle, LineAdj, TriangleAdj,
     _1ControlPointPatch, _2ControlPointPatch, _3ControlPointPatch, _4ControlPointPatch,
     _5ControlPointPatch, _6ControlPointPatch, _7ControlPointPatch, _8ControlPointPatch,
@@ -34,7 +35,7 @@ enumish! {
 
 #[allow(missing_docs)]
 #[allow(non_upper_case_globals)] impl Primitive { // These are enum-like
-    pub const Undefined                 : Primitive = Primitive(D3D_PRIMITIVE_UNDEFINED);
+    pub const Undefined                 : Primitive = Primitive(D3D_PRIMITIVE_UNDEFINED); // 0
     pub const Point                     : Primitive = Primitive(D3D_PRIMITIVE_POINT);
     pub const Line                      : Primitive = Primitive(D3D_PRIMITIVE_LINE);
     pub const Triangle                  : Primitive = Primitive(D3D_PRIMITIVE_TRIANGLE);
@@ -74,52 +75,8 @@ enumish! {
     pub const _32ControlPointPatch      : Primitive = Primitive(D3D_PRIMITIVE_32_CONTROL_POINT_PATCH);
 }
 
-#[doc(hidden)] impl Primitive { // Ctrl+C Ctrl+V support
-    pub const UNDEFINED                 : Primitive = Primitive(D3D_PRIMITIVE_UNDEFINED);
-    pub const POINT                     : Primitive = Primitive(D3D_PRIMITIVE_POINT);
-    pub const LINE                      : Primitive = Primitive(D3D_PRIMITIVE_LINE);
-    pub const TRIANGLE                  : Primitive = Primitive(D3D_PRIMITIVE_TRIANGLE);
-    pub const LINE_ADJ                  : Primitive = Primitive(D3D_PRIMITIVE_LINE_ADJ);
-    pub const TRIANGLE_ADJ              : Primitive = Primitive(D3D_PRIMITIVE_TRIANGLE_ADJ);
-    pub const _1_CONTROL_POINT_PATCH    : Primitive = Primitive(D3D_PRIMITIVE_1_CONTROL_POINT_PATCH);
-    pub const _2_CONTROL_POINT_PATCH    : Primitive = Primitive(D3D_PRIMITIVE_2_CONTROL_POINT_PATCH);
-    pub const _3_CONTROL_POINT_PATCH    : Primitive = Primitive(D3D_PRIMITIVE_3_CONTROL_POINT_PATCH);
-    pub const _4_CONTROL_POINT_PATCH    : Primitive = Primitive(D3D_PRIMITIVE_4_CONTROL_POINT_PATCH);
-    pub const _5_CONTROL_POINT_PATCH    : Primitive = Primitive(D3D_PRIMITIVE_5_CONTROL_POINT_PATCH);
-    pub const _6_CONTROL_POINT_PATCH    : Primitive = Primitive(D3D_PRIMITIVE_6_CONTROL_POINT_PATCH);
-    pub const _7_CONTROL_POINT_PATCH    : Primitive = Primitive(D3D_PRIMITIVE_7_CONTROL_POINT_PATCH);
-    pub const _8_CONTROL_POINT_PATCH    : Primitive = Primitive(D3D_PRIMITIVE_8_CONTROL_POINT_PATCH);
-    pub const _9_CONTROL_POINT_PATCH    : Primitive = Primitive(D3D_PRIMITIVE_9_CONTROL_POINT_PATCH);
-    pub const _10_CONTROL_POINT_PATCH   : Primitive = Primitive(D3D_PRIMITIVE_10_CONTROL_POINT_PATCH);
-    pub const _11_CONTROL_POINT_PATCH   : Primitive = Primitive(D3D_PRIMITIVE_11_CONTROL_POINT_PATCH);
-    pub const _12_CONTROL_POINT_PATCH   : Primitive = Primitive(D3D_PRIMITIVE_12_CONTROL_POINT_PATCH);
-    pub const _13_CONTROL_POINT_PATCH   : Primitive = Primitive(D3D_PRIMITIVE_13_CONTROL_POINT_PATCH);
-    pub const _14_CONTROL_POINT_PATCH   : Primitive = Primitive(D3D_PRIMITIVE_14_CONTROL_POINT_PATCH);
-    pub const _15_CONTROL_POINT_PATCH   : Primitive = Primitive(D3D_PRIMITIVE_15_CONTROL_POINT_PATCH);
-    pub const _16_CONTROL_POINT_PATCH   : Primitive = Primitive(D3D_PRIMITIVE_16_CONTROL_POINT_PATCH);
-    pub const _17_CONTROL_POINT_PATCH   : Primitive = Primitive(D3D_PRIMITIVE_17_CONTROL_POINT_PATCH);
-    pub const _18_CONTROL_POINT_PATCH   : Primitive = Primitive(D3D_PRIMITIVE_18_CONTROL_POINT_PATCH);
-    pub const _19_CONTROL_POINT_PATCH   : Primitive = Primitive(D3D_PRIMITIVE_19_CONTROL_POINT_PATCH);
-    pub const _20_CONTROL_POINT_PATCH   : Primitive = Primitive(D3D_PRIMITIVE_20_CONTROL_POINT_PATCH);
-    pub const _21_CONTROL_POINT_PATCH   : Primitive = Primitive(D3D_PRIMITIVE_21_CONTROL_POINT_PATCH);
-    pub const _22_CONTROL_POINT_PATCH   : Primitive = Primitive(D3D_PRIMITIVE_22_CONTROL_POINT_PATCH);
-    pub const _23_CONTROL_POINT_PATCH   : Primitive = Primitive(D3D_PRIMITIVE_23_CONTROL_POINT_PATCH);
-    pub const _24_CONTROL_POINT_PATCH   : Primitive = Primitive(D3D_PRIMITIVE_24_CONTROL_POINT_PATCH);
-    pub const _25_CONTROL_POINT_PATCH   : Primitive = Primitive(D3D_PRIMITIVE_25_CONTROL_POINT_PATCH);
-    pub const _26_CONTROL_POINT_PATCH   : Primitive = Primitive(D3D_PRIMITIVE_26_CONTROL_POINT_PATCH);
-    pub const _27_CONTROL_POINT_PATCH   : Primitive = Primitive(D3D_PRIMITIVE_27_CONTROL_POINT_PATCH);
-    pub const _28_CONTROL_POINT_PATCH   : Primitive = Primitive(D3D_PRIMITIVE_28_CONTROL_POINT_PATCH);
-    pub const _29_CONTROL_POINT_PATCH   : Primitive = Primitive(D3D_PRIMITIVE_29_CONTROL_POINT_PATCH);
-    pub const _30_CONTROL_POINT_PATCH   : Primitive = Primitive(D3D_PRIMITIVE_30_CONTROL_POINT_PATCH);
-    pub const _31_CONTROL_POINT_PATCH   : Primitive = Primitive(D3D_PRIMITIVE_31_CONTROL_POINT_PATCH);
-    pub const _32_CONTROL_POINT_PATCH   : Primitive = Primitive(D3D_PRIMITIVE_32_CONTROL_POINT_PATCH);
-}
-
-impl Default for Primitive {
-    fn default() -> Self { Primitive(0) }
-}
-
 //#cpp2rust D3D_PRIMITIVE                           = d3d::Primitive
+
 //#cpp2rust D3D_PRIMITIVE_UNDEFINED                 = d3d::Primitive::Undefined
 //#cpp2rust D3D_PRIMITIVE_POINT                     = d3d::Primitive::Point
 //#cpp2rust D3D_PRIMITIVE_LINE                      = d3d::Primitive::Line

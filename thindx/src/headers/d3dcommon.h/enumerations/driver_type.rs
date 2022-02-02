@@ -12,7 +12,7 @@ use winapi::um::d3dcommon::*;
 #[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct DriverType(D3D_DRIVER_TYPE);
 
-enumish! { DriverType => D3D_DRIVER_TYPE; Unknown, Hardware, Reference, Null, Software, WARP }
+enumish! { DriverType => D3D_DRIVER_TYPE; default: Unknown == 0; Unknown, Hardware, Reference, Null, Software, WARP }
 
 #[allow(non_upper_case_globals)] impl DriverType { // These are enum-like
     /// The device type is unknown.
@@ -20,7 +20,7 @@ enumish! { DriverType => D3D_DRIVER_TYPE; Unknown, Hardware, Reference, Null, So
     /// You must use this when calling
     /// [D3D11CreateDevice](https://docs.microsoft.com/en-us/windows/win32/api/d3d11/nf-d3d11-d3d11createdevice)
     /// (and friends) on a specific adapter, since the adapter dictates what driver type is used.
-    pub const Unknown   : DriverType = DriverType(D3D_DRIVER_TYPE_UNKNOWN);
+    pub const Unknown   : DriverType = DriverType(D3D_DRIVER_TYPE_UNKNOWN); // 0
 
     /// Use a hardware driver (e.g. your graphics card.)
     ///
@@ -50,19 +50,8 @@ enumish! { DriverType => D3D_DRIVER_TYPE; Unknown, Hardware, Reference, Null, So
     pub const WARP      : DriverType = DriverType(D3D_DRIVER_TYPE_WARP);
 }
 
-#[doc(hidden)] impl DriverType { // Ctrl+C Ctrl+V support
-    pub const UNKNOWN   : DriverType = DriverType(D3D_DRIVER_TYPE_UNKNOWN);
-    pub const HARDWARE  : DriverType = DriverType(D3D_DRIVER_TYPE_HARDWARE);
-    pub const REFERENCE : DriverType = DriverType(D3D_DRIVER_TYPE_REFERENCE);
-    pub const NULL      : DriverType = DriverType(D3D_DRIVER_TYPE_NULL);
-    pub const SOFTWARE  : DriverType = DriverType(D3D_DRIVER_TYPE_SOFTWARE);
-}
-
-impl Default for DriverType {
-    fn default() -> Self { DriverType(0) }
-}
-
 //#cpp2rust D3D_DRIVER_TYPE             = d3d::DriverType
+
 //#cpp2rust D3D_DRIVER_TYPE_UNKNOWN     = d3d::DriverType::Unknown
 //#cpp2rust D3D_DRIVER_TYPE_HARDWARE    = d3d::DriverType::Hardware
 //#cpp2rust D3D_DRIVER_TYPE_REFERENCE   = d3d::DriverType::Reference

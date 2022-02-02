@@ -179,9 +179,7 @@ flags! {
     pub const QueryWrapAndMip               : Usage = Usage(D3DUSAGE_QUERY_WRAPANDMIP);
 }
 
-impl Default for Usage {
-    fn default() -> Self { Usage::None }
-}
+
 
 //#cpp2rust D3DUSAGE_RENDERTARGET                       = d3d::Usage::RenderTarget
 //#cpp2rust D3DUSAGE_DEPTHSTENCIL                       = d3d::Usage::DepthStencil

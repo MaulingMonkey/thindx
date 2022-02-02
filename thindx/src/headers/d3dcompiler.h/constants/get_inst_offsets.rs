@@ -25,15 +25,6 @@ flags! { GetInstOffsets => UINT; None, IncludeNonExecutable }
     pub const IncludeNonExecutable      : GetInstOffsets = GetInstOffsets(D3D_GET_INST_OFFSETS_INCLUDE_NON_EXECUTABLE);
 }
 
-#[doc(hidden)] impl GetInstOffsets { // Ctrl+C Ctrl+V support
-    pub const NONE                      : GetInstOffsets = GetInstOffsets(0);
 
-    /// Include non-executable code in the retrieved information.
-    pub const INCLUDE_NON_EXECUTABLE    : GetInstOffsets = GetInstOffsets(D3D_GET_INST_OFFSETS_INCLUDE_NON_EXECUTABLE);
-}
-
-impl Default for GetInstOffsets {
-    fn default() -> Self { GetInstOffsets::None }
-}
 
 //#cpp2rust D3D_GET_INST_OFFSETS_INCLUDE_NON_EXECUTABLE     = d3d::GetInstOffsets::IncludeNonExecutable

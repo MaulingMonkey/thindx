@@ -19,7 +19,7 @@ enumish! { SBT => D3DSTATEBLOCKTYPE; All, PixelState, VertexState }
 
 #[allow(non_upper_case_globals)] impl StateBlockType { // These are enum-like
     /// Capture the current [device state](https://docs.microsoft.com/en-us/windows/win32/direct3d9/saving-all-device-states-with-a-stateblock).
-    pub const All           : StateBlockType = StateBlockType(D3DSBT_ALL);
+    pub const All           : StateBlockType = StateBlockType(D3DSBT_ALL); // 1
 
     /// Capture the current [pixel state](https://docs.microsoft.com/en-us/windows/win32/direct3d9/saving-pixel-states-with-a-stateblock).
     pub const PixelState    : StateBlockType = StateBlockType(D3DSBT_PIXELSTATE);
@@ -28,11 +28,8 @@ enumish! { SBT => D3DSTATEBLOCKTYPE; All, PixelState, VertexState }
     pub const VertexState   : StateBlockType = StateBlockType(D3DSBT_VERTEXSTATE);
 }
 
-impl StateBlockType {
-    pub const fn zeroed() -> Self { Self(0) }
-}
-
 //#cpp2rust D3DSTATEBLOCKTYPE       = d3d::StateBlockType
+
 //#cpp2rust D3DSBT_ALL              = d3d::SBT::All
 //#cpp2rust D3DSBT_PIXELSTATE       = d3d::SBT::PixelState
 //#cpp2rust D3DSBT_VERTEXSTATE      = d3d::SBT::VertexState

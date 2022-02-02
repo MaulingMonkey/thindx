@@ -22,11 +22,8 @@ enumish! { BlendOp => D3DBLENDOP; Add, Subtract, RevSubtract, Min, Max }
     pub const Max           : BlendOp = BlendOp(D3DBLENDOP_MAX);
 }
 
-impl BlendOp {
-    pub const fn zeroed() -> Self { Self(0) }
-}
-
 //#cpp2rust D3DBLENDOP              = d3d::BlendOp
+
 //#cpp2rust D3DBLENDOP_ADD          = d3d::BlendOp::Add
 //#cpp2rust D3DBLENDOP_SUBTRACT     = d3d::BlendOp::Subtract
 //#cpp2rust D3DBLENDOP_REVSUBTRACT  = d3d::BlendOp::RevSubtract

@@ -60,10 +60,6 @@ flags! {
     pub const UpdateColorKey            : Present = Present(D3DPRESENT_UPDATECOLORKEY);
 }
 
-impl Default for Present {
-    fn default() -> Self { Present::None }
-}
-
 //#cpp2rust D3DPRESENT_DONOTFLIP                    = d3d::Present::DoNotFlip
 //#cpp2rust D3DPRESENT_DONOTWAIT                    = d3d::Present::DoNotWait
 //#cpp2rust D3DPRESENT_FLIPRESTART                  = d3d::Present::FlipRestart

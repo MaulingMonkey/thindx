@@ -78,11 +78,8 @@ enumish! {
     pub(crate) const MemoryPressure : QueryType = QueryType(D3DQUERYTYPE_MEMORYPRESSURE);
 }
 
-impl QueryType {
-    pub const fn zeroed() -> Self { Self(0) }
-}
-
 //#cpp2rust D3DQUERYTYPE                    = d3d::QueryType
+
 //#cpp2rust D3DQUERYTYPE_VCACHE             = d3d::QueryType::VCache
 //#cpp2rust D3DQUERYTYPE_RESOURCEMANAGER    = d3d::QueryType::ResourceManager
 //#cpp2rust D3DQUERYTYPE_VERTEXSTATS        = d3d::QueryType::VertexStats
