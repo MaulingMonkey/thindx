@@ -5,6 +5,10 @@
 use crate::Unknown;
 
 mods! {
+    inl mod flags {
+        inl mod cursor;
+    }
+
     inl mod functions {
         pub mod perf;
     }

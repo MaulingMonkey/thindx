@@ -15,7 +15,7 @@
 //! | [unknwn.h](const@unknwn_h) | ✔️ 1 of 1 |   |   |   |   |   |
 //! | [d3dcommon.h](const@d3dcommon_h) | ⚠️ 2 of 3 | ✔️ 1 of 1 | ✔️ 22 of 22 |   | ⚠️ 555 of 575 | ❌ 0 of 4 |
 //! | [d3dcompiler.h](const@d3dcompiler_h) |   | ✔️ 1 of 1 | ✔️ 2 of 2 |   | ⚠️ 60 of 71 |   |
-//! | [d3d9.h](const@d3d9_h) | ⚠️ 20 of 24 |   |   | ✔️ 9 of 9 | ⚠️ 63 of 72 | ✔️ 3 of 3 |
+//! | [d3d9.h](const@d3d9_h) | ⚠️ 20 of 24 |   |   | ✔️ 9 of 9 | ⚠️ 64 of 72 | ✔️ 3 of 3 |
 //! | [d3d9caps.h](const@d3d9caps_h) |   | ⚠️ 3 of 5 |   |   | ⚠️ 213 of 249 |   |
 //! | [d3d9types.h](const@d3d9types_h) |   | ⚠️ 19 of 71 | ⚠️ 40 of 54 |   | ⚠️ 521 of 844 | ⚠️ 8 of 20 |
 //! | [d3d11shader.h](const@d3d11shader_h) | ✔️ 12 of 12 | ✔️ 9 of 9 | ✔️ 1 of 1 |   | ⚠️ 16 of 17 | ✔️ 3 of 3 |
@@ -948,7 +948,7 @@ pub const d3dcompiler_h : cxx_header = cxx_header;
 /// * [`SetClipPlane`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setclipplane)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_clip_plane`] <br>
 /// * [`SetClipStatus`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setclipstatus)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_clip_status`] <br>
 /// * [`SetCurrentTexturePalette`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setcurrenttexturepalette)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_current_texture_palette_unchecked`] <br>
-/// * [`SetCursorPosition`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setcursorposition) →&nbsp;❌ <br>
+/// * [`SetCursorPosition`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setcursorposition)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_cursor_position`] <br>
 /// * [`SetCursorProperties`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setcursorproperties) →&nbsp;❌ <br>
 /// * [`SetDepthStencilSurface`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setdepthstencilsurface)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_depth_stencil_surface`] <br>
 /// * [`SetDialogBoxMode`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setdialogboxmode) →&nbsp;❌ <br>
@@ -1128,7 +1128,7 @@ pub const d3dcompiler_h : cxx_header = cxx_header;
 /// `D3DCREATE_PUREDEVICE`&nbsp;→ [`d3d::Create::PureDevice`] <br>
 /// `D3DCREATE_SCREENSAVER`&nbsp;→ [`d3d::Create::ScreenSaver`] <br>
 /// `D3DCREATE_SOFTWARE_VERTEXPROCESSING`&nbsp;→ [`d3d::Create::SoftwareVertexProcessing`] <br>
-/// `D3DCURSOR_IMMEDIATE_UPDATE` →&nbsp;❌ <br>
+/// `D3DCURSOR_IMMEDIATE_UPDATE`&nbsp;→ [`d3d::Cursor::ImmediateUpdate`] <br>
 /// `D3DENUM_NO_DRIVERVERSION` →&nbsp;❌ <br>
 /// `D3DENUM_WHQL_LEVEL` →&nbsp;❌ <br>
 /// `D3DERR_CANNOTPROTECTCONTENT`&nbsp;→ [`D3DERR::CANNOTPROTECTCONTENT`] <br>

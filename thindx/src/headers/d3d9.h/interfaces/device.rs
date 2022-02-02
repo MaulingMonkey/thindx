@@ -2782,6 +2782,28 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         MethodError::check("IDirect3DDevice9::SetCurrentTexturePalette", hr)
     }
 
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setcursorposition)\]
+    /// IDirect3DDevice9::SetCursorPosition
+    ///
+    /// Sets the cursor position (in virtual desktop coordinates, with `0,0` generally being the top left corner of the primary monitor.)
+    ///
+    /// ### Errors
+    /// May silently fail to do anything if... the window is hidden?  Not focused?
+    /// Perhaps also with invalid flags or out-of-bounds coordinates?
+    ///
+    /// All I'm really certain of, is that there's no HRESULT or crashes.  On my system.  So far.
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_pure();
+    /// device.set_cursor_position(0, 0, d3d::Cursor::None);
+    /// device.set_cursor_position(-500, 500, d3d::Cursor::ImmediateUpdate);
+    /// device.set_cursor_position(i32::MIN, i32::MAX, d3d::Cursor::from_unchecked(!0));
+    /// ```
+    fn set_cursor_position(&self, x: i32, y: i32, flags: impl Into<Cursor>) {
+        unsafe { self.as_winapi().SetCursorPosition(x, y, flags.into().into()) };
+    }
+
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setdepthstencilsurface)\]
     /// IDirect3DDevice9::SetDepthStencilSurface
     ///
@@ -3743,7 +3765,7 @@ pub struct RgnData {
 //#cpp2rust IDirect3DDevice9::SetClipPlane                      = d3d9::IDirect3DDevice9Ext::set_clip_plane
 //#cpp2rust IDirect3DDevice9::SetClipStatus                     = d3d9::IDirect3DDevice9Ext::set_clip_status
 //#cpp2rust IDirect3DDevice9::SetCurrentTexturePalette          = d3d9::IDirect3DDevice9Ext::set_current_texture_palette_unchecked
-//TODO:     IDirect3DDevice9::SetCursorPosition                 = d3d9::IDirect3DDevice9Ext::set_cursor_position
+//#cpp2rust IDirect3DDevice9::SetCursorPosition                 = d3d9::IDirect3DDevice9Ext::set_cursor_position
 //TODO:     IDirect3DDevice9::SetCursorProperties               = d3d9::IDirect3DDevice9Ext::set_cursor_properties
 //#cpp2rust IDirect3DDevice9::SetDepthStencilSurface            = d3d9::IDirect3DDevice9Ext::set_depth_stencil_surface
 //TODO:     IDirect3DDevice9::SetDialogBoxMode                  = d3d9::IDirect3DDevice9Ext::set_dialog_box_mode
