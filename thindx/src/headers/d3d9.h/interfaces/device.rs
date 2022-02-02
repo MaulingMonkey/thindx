@@ -2785,12 +2785,13 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setcursorposition)\]
     /// IDirect3DDevice9::SetCursorPosition
     ///
-    /// Sets the cursor position (in virtual desktop coordinates, with `0,0` generally being the top left corner of the primary monitor.)
+    /// Sets the cursor position (either in virtual desktop coordinates when in windowed mode, with `0,0` generally
+    /// being the top left corner of the primary monitor, or in backbuffer coordinates when in fullscreen mode.)
     ///
     /// ### Errors
     /// May silently fail to do anything if... the window is hidden?  Not focused?
     /// Perhaps also with invalid flags or out-of-bounds coordinates?
-    ///
+    /// Is this setting the position of the emulated cursor position, rather than controlling the OS cursor position?
     /// All I'm really certain of, is that there's no HRESULT or crashes.  On my system.  So far.
     ///
     /// ### Example
@@ -2802,6 +2803,55 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// ```
     fn set_cursor_position(&self, x: i32, y: i32, flags: impl Into<Cursor>) {
         unsafe { self.as_winapi().SetCursorPosition(x, y, flags.into().into()) };
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setcursorproperties)\]
+    /// IDirect3DDevice9::SetCursorProperties
+    ///
+    /// Set cursor properties.
+    ///
+    /// ### Arguments
+    /// *   `x`             - Horizontal center of the cursor (in pixels)
+    /// *   `y`             - Vertical center of the cursor (in pixels)
+    /// *   `cursor_bitmap` - A [d3d::Format::A8R8G8B8] surface describing the cursor.
+    ///     *   Must be smaller than the display mode.
+    ///     *   Alpha "must" be binary (0x00 or 0xFF).
+    ///     *   May be resized down to 32x32 if larger than 32x32.
+    ///     *   Should also be 32x32 if you desire an OS cursor in windowed mode.
+    ///
+    /// ### Errors
+    /// *   [D3DERR::INVALIDCALL]   - If fed a cursor that's too big
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_pure();
+    /// let pixels = vec![d3d::Color::argb(0xFF112233); 32 * 32];
+    /// let data = bytemuck::cast_slice(&pixels);
+    /// let mips = [TextureMipRef { data, stride: 4 * 32 }];
+    /// let texture = device.create_texture_from(32, 32, &mips, Usage::None, FixedTextureFormat::A8R8G8B8, Pool::SystemMem, ()).unwrap();
+    /// let surface = texture.get_surface_level(0).unwrap();
+    ///
+    /// device.set_cursor_properties(16, 16, &surface).unwrap();
+    /// #
+    /// # // 128x128, non-binary alpha cursors don't seem to break anything:
+    /// # let pixels = vec![d3d::Color::argb(0x80112233); 128 * 128];
+    /// # let data = bytemuck::cast_slice(&pixels);
+    /// # let mips = [TextureMipRef { data, stride: 4 * 128 }];
+    /// # let texture = device.create_texture_from(128, 128, &mips, Usage::None, FixedTextureFormat::A8R8G8B8, Pool::SystemMem, ()).unwrap();
+    /// # let surface = texture.get_surface_level(0).unwrap();
+    /// # device.set_cursor_properties(0, 0, &surface).expect("128x128 nonbinary alpha cursor");
+    /// #
+    /// # // Watch the world burn, with a 4k cursor:
+    /// # let pixels = vec![d3d::Color::argb(0xFF112233); 4096 * 4096];
+    /// # let data = bytemuck::cast_slice(&pixels);
+    /// # let mips = [TextureMipRef { data, stride: 4 * 4096 }];
+    /// # let texture = device.create_texture_from(4096, 4096, &mips, Usage::None, FixedTextureFormat::A8R8G8B8, Pool::SystemMem, ()).unwrap();
+    /// # let surface = texture.get_surface_level(0).unwrap();
+    /// # assert_eq!(D3DERR::INVALIDCALL, device.set_cursor_properties(0, 0, &surface), "4k x 4k cursor");
+    /// ```
+    fn set_cursor_properties(&self, x: u32, y: u32, cursor_bitmap: &Surface) -> Result<(), MethodError> {
+        let hr = unsafe { self.as_winapi().SetCursorProperties(x, y, cursor_bitmap.as_mut_ptr()) };
+        MethodError::check("IDirect3DDevice9::SetCursorProperties", hr)
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setdepthstencilsurface)\]
@@ -3766,7 +3816,7 @@ pub struct RgnData {
 //#cpp2rust IDirect3DDevice9::SetClipStatus                     = d3d9::IDirect3DDevice9Ext::set_clip_status
 //#cpp2rust IDirect3DDevice9::SetCurrentTexturePalette          = d3d9::IDirect3DDevice9Ext::set_current_texture_palette_unchecked
 //#cpp2rust IDirect3DDevice9::SetCursorPosition                 = d3d9::IDirect3DDevice9Ext::set_cursor_position
-//TODO:     IDirect3DDevice9::SetCursorProperties               = d3d9::IDirect3DDevice9Ext::set_cursor_properties
+//#cpp2rust IDirect3DDevice9::SetCursorProperties               = d3d9::IDirect3DDevice9Ext::set_cursor_properties
 //#cpp2rust IDirect3DDevice9::SetDepthStencilSurface            = d3d9::IDirect3DDevice9Ext::set_depth_stencil_surface
 //TODO:     IDirect3DDevice9::SetDialogBoxMode                  = d3d9::IDirect3DDevice9Ext::set_dialog_box_mode
 //#cpp2rust IDirect3DDevice9::SetFVF                            = d3d9::IDirect3DDevice9Ext::set_fvf

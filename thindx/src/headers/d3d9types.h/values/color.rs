@@ -1,5 +1,7 @@
 #[allow(unused_imports)] use crate::*;
 
+use bytemuck::*;
+
 use winapi::shared::d3d9types::*;
 
 use std::ops::*;
@@ -11,7 +13,8 @@ use std::fmt::{self, Debug, Formatter};
 /// D3DCOLOR
 ///
 /// 0xAA<span style="color: red">RR</span><span style="color: green">GG</span><span style="color: blue">BB</span>
-#[derive(Clone, Copy, Default, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Default, Pod, Zeroable)]
 #[repr(transparent)] pub struct Color(D3DCOLOR);
 
 impl Color {
