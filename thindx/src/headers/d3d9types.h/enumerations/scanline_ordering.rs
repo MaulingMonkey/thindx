@@ -22,9 +22,8 @@ enumish! { ScanlineOrdering => D3DSCANLINEORDERING; Progressive, Interlaced, Unk
     pub const Unknown       : ScanlineOrdering = ScanlineOrdering(D3DSCANLINEORDERING_UNKNOWN);
 }
 
-#[cfg(feature = "impl-poor-defaults")]
-impl Default for ScanlineOrdering {
-    fn default() -> Self { ScanlineOrdering::Progressive } // 1
+impl ScanlineOrdering {
+    pub const fn zeroed() -> Self { Self(0) }
 }
 
 //#cpp2rust D3DSCANLINEORDERING             = d3d::ScanlineOrdering

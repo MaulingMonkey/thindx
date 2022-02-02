@@ -1,5 +1,7 @@
 #[allow(unused_imports)] use crate::*;
 
+use bytemuck::*;
+
 use winapi::shared::minwindef::*;
 use winapi::um::d3dcompiler::*;
 
@@ -10,6 +12,7 @@ use winapi::um::d3dcompiler::*;
 ///
 /// Flags controlling how [d3d::Compiler::disassemble_region] disassembles the compiled shader data.
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct Disasm(UINT);
 
 flags! {

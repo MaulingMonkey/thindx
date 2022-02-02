@@ -1,5 +1,5 @@
 #[allow(unused_imports)] use crate::*;
-
+use bytemuck::*;
 use winapi::shared::d3d9types::*;
 
 
@@ -11,6 +11,7 @@ use winapi::shared::d3d9types::*;
 ///
 /// [Queries (Direct3D 9)]:         https://docs.microsoft.com/en-us/windows/win32/direct3d9/queries
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct QueryType(D3DQUERYTYPE);
 
 enumish! {
@@ -77,9 +78,8 @@ enumish! {
     pub(crate) const MemoryPressure : QueryType = QueryType(D3DQUERYTYPE_MEMORYPRESSURE);
 }
 
-#[cfg(feature = "impl-poor-defaults")]
-impl Default for QueryType {
-    fn default() -> Self { QueryType(0) }
+impl QueryType {
+    pub const fn zeroed() -> Self { Self(0) }
 }
 
 //#cpp2rust D3DQUERYTYPE                    = d3d::QueryType

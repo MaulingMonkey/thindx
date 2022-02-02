@@ -1,5 +1,7 @@
 #[allow(unused_imports)] use crate::*;
 
+use bytemuck::*;
+
 use winapi::shared::minwindef::UINT;
 use winapi::um::d3dcommon::*;
 
@@ -8,6 +10,7 @@ use winapi::um::d3dcommon::*;
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_shader_variable_flags)\]
 /// UINT / D3D_SHADER_VARIABLE_FLAGS_\*
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct ShaderVariableFlags(UINT);
 #[doc(hidden)] pub use ShaderVariableFlags as SVF;
 

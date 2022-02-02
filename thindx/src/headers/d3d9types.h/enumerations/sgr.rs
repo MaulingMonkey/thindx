@@ -1,5 +1,5 @@
 #[allow(unused_imports)] use crate::*;
-
+use bytemuck::*;
 type D3DSGR = u32;
 
 
@@ -11,6 +11,7 @@ type D3DSGR = u32;
 /// Gamma correction results in a more consistent display, but can incur processing overhead and should not be used frequently.
 /// Short-duration effects, such as flashing the whole screen red, should not be calibrated, but long-duration gamma changes should be calibrated.
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct SGR(D3DSGR);
 
 enumish! { SGR => D3DSGR; Calibrate, NoCalibration }

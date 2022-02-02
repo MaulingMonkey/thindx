@@ -1,5 +1,7 @@
 #[allow(unused_imports)] use crate::*;
 
+use bytemuck::*;
+
 use winapi::shared::minwindef::UINT;
 use winapi::um::d3dcompiler::*;
 
@@ -10,6 +12,7 @@ use winapi::um::d3dcompiler::*;
 ///
 /// [d3d::Compiler::get_trace_instruction_offsets] `flags`
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct GetInstOffsets(UINT);
 
 flags! { GetInstOffsets => UINT; None, IncludeNonExecutable }

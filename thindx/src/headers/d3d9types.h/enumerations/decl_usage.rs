@@ -1,5 +1,5 @@
 #[allow(unused_imports)] use crate::*;
-
+use bytemuck::*;
 use winapi::shared::d3d9types::*;
 
 
@@ -9,6 +9,7 @@ use winapi::shared::d3d9types::*;
 ///
 /// Identifies the intended use of vertex data.
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct DeclUsage8(u8);
 
 enumish! {

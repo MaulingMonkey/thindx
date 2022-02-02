@@ -134,6 +134,8 @@ use std::fmt::{self, Debug, Formatter};
 pub use Format as Fmt;
 
 impl Format {
+    pub const fn zeroed() -> Self { Self(0) }
+
     /// Convert a raw [D3DFORMAT] value into a [Format].  This is *probably* safe... probably...
     ///
     /// [D3DFORMAT]:     https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dformat
@@ -344,11 +346,6 @@ impl Debug for Format {
         if fmt == "D3DFMT_???" { write!(f, " (0x{:08x})", self.0 as u32)?; }
         write!(f, ")")
     }
-}
-
-// #[cfg(feature = "impl-poor-defaults")]
-impl Default for Format {
-    fn default() -> Self { Format::UNKNOWN }
 }
 
 impl From<Format> for D3DFORMAT {

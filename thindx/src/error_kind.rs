@@ -1,5 +1,7 @@
 use crate::*;
 
+use bytemuck::*;
+
 use winapi::shared::winerror::*;
 
 use std::fmt::{self, Debug, Display, Formatter};
@@ -14,6 +16,7 @@ use std::fmt::{self, Debug, Display, Formatter};
 ///
 /// See [thindx::errors](crate::errors) for a list of constants
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct ErrorKind(pub(crate) HRESULT);
 
 enumish! { ErrorKind => HRESULT }

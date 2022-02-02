@@ -1,5 +1,5 @@
 #[allow(unused_imports)] use crate::*;
-
+use bytemuck::*;
 use winapi::shared::d3d9types::*;
 
 
@@ -9,6 +9,7 @@ use winapi::shared::d3d9types::*;
 ///
 /// Defines swap effects.
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct SwapEffect(D3DSWAPEFFECT);
 
 enumish! { SwapEffect => D3DSWAPEFFECT; Discard, Flip, Copy, Overlay, FlipEx }
@@ -59,9 +60,8 @@ enumish! { SwapEffect => D3DSWAPEFFECT; Discard, Flip, Copy, Overlay, FlipEx }
     pub const FlipEx        : SwapEffect = SwapEffect(D3DSWAPEFFECT_FLIPEX);
 }
 
-#[cfg(feature = "impl-poor-defaults")]
-impl Default for SwapEffect {
-    fn default() -> Self { SwapEffect(0) }
+impl SwapEffect {
+    pub const fn zeroed() -> Self { Self(0) }
 }
 
 //#cpp2rust D3DSWAPEFFECT           = d3d::SwapEffect

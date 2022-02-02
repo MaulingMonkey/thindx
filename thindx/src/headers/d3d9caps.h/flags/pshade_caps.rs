@@ -15,7 +15,9 @@ use winapi::shared::minwindef::DWORD;
 /// This is the maximum possible alpha (that is, the alpha component is at full intensity).
 ///
 /// The color, specular highlights, fog, and alpha interpolants of a triangle each have capability flags that an application can use to find out how they are implemented by the device driver.
-#[derive(Clone, Copy, Default, PartialEq, Eq, PartialOrd, Ord, Hash, Pod, Zeroable)] #[repr(transparent)] pub struct PShadeCaps(DWORD);
+#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Pod, Zeroable)]
+#[repr(transparent)] pub struct PShadeCaps(DWORD);
 
 flags! {
     PShadeCaps => DWORD;

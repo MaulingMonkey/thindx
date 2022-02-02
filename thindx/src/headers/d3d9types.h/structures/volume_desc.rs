@@ -1,5 +1,7 @@
 use crate::d3d9::*;
 
+use bytemuck::*;
+
 use winapi::shared::d3d9types::*;
 
 use std::ops::{Deref, DerefMut};
@@ -10,7 +12,8 @@ use std::ops::{Deref, DerefMut};
 /// D3DVOLUME_DESC
 ///
 /// Describes a [Volume].
-#[derive(Clone, Copy, Debug, Default)]
+#[derive(Clone, Copy, Debug)]
+#[derive(Pod, Zeroable)]
 #[repr(C)] pub struct VolumeDesc {
     pub format:     Format,
     pub ty:         ResourceType,

@@ -1,5 +1,5 @@
 #[allow(unused_imports)] use crate::*;
-
+use bytemuck::*;
 use winapi::shared::d3d9types::*;
 
 
@@ -11,6 +11,7 @@ use winapi::shared::d3d9types::*;
 ///
 /// [State Blocks Save and Restore State (Direct3D 9)]:         https://docs.microsoft.com/en-us/windows/win32/direct3d9/state-blocks-save-and-restore-state
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct StateBlockType(D3DSTATEBLOCKTYPE);
 pub use StateBlockType as SBT;
 
@@ -27,9 +28,8 @@ enumish! { SBT => D3DSTATEBLOCKTYPE; All, PixelState, VertexState }
     pub const VertexState   : StateBlockType = StateBlockType(D3DSBT_VERTEXSTATE);
 }
 
-#[cfg(feature = "impl-poor-defaults")]
-impl Default for StateBlockType {
-    fn default() -> Self { StateBlockType::All } // 1
+impl StateBlockType {
+    pub const fn zeroed() -> Self { Self(0) }
 }
 
 //#cpp2rust D3DSTATEBLOCKTYPE       = d3d::StateBlockType

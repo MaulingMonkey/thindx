@@ -1,5 +1,7 @@
 #[allow(unused_imports)] use crate::*;
 
+use bytemuck::*;
+
 use winapi::um::d3dcommon::*;
 
 
@@ -7,6 +9,7 @@ use winapi::um::d3dcommon::*;
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_tessellator_domain)\]
 /// D3D_TESSELLATOR_DOMAIN
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct TessellatorDomain(D3D_TESSELLATOR_DOMAIN);
 
 // Note: D3D11_* aliases D3D_* despite poor docs kinda implying otherwise (see d3dcommon.h)

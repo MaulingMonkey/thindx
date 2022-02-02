@@ -1,5 +1,5 @@
 #[allow(unused_imports)] use crate::*;
-
+use bytemuck::*;
 use winapi::shared::d3d9types::*;
 
 
@@ -13,6 +13,7 @@ use winapi::shared::d3d9types::*;
 ///
 /// [State Blocks Save and Restore State (Direct3D 9)]:     https://docs.microsoft.com/en-us/windows/win32/direct3d9/state-blocks-save-and-restore-state
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct TextureStageStateType(D3DTEXTURESTAGESTATETYPE);
 pub use TextureStageStateType as TSS;
 
@@ -44,12 +45,12 @@ enumish! {
     pub const Constant                  : TextureStageStateType = TextureStageStateType(D3DTSS_CONSTANT);
 }
 
-#[cfg(feature = "impl-poor-defaults")]
-impl Default for TextureStageStateType {
-    fn default() -> Self { TextureStageStateType(0) }
+impl TextureStageStateType {
+    pub const fn zeroed() -> Self { Self(0) }
 }
 
 //#cpp2rust D3DTEXTURESTAGESTATETYPE        = d3d::TextureStageStateType
+
 //#cpp2rust D3DTSS_COLOROP                  = d3d::TSS::ColorOp
 //#cpp2rust D3DTSS_COLORARG1                = d3d::TSS::ColorArg1
 //#cpp2rust D3DTSS_COLORARG2                = d3d::TSS::ColorArg2

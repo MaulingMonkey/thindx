@@ -1,8 +1,7 @@
 #[allow(unused_imports)] use crate::*;
-
+use bytemuck::*;
 use winapi::shared::d3d9types::*;
 type D3DSTREAMSOURCE = u32;
-
 use std::fmt::{self, Debug, Formatter};
 
 
@@ -16,6 +15,7 @@ use std::fmt::{self, Debug, Formatter};
 ///
 /// [Efficiently Drawing Multiple Instances of Geometry (Direct3D 9)]:  https://docs.microsoft.com/en-us/windows/win32/direct3d9/efficiently-drawing-multiple-instances-of-geometry
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct StreamSource(D3DSTREAMSOURCE);
 
 impl StreamSource {

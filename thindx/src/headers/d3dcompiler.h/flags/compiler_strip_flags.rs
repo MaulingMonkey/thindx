@@ -1,5 +1,7 @@
 #[allow(unused_imports)] use crate::*;
 
+use bytemuck::*;
+
 use winapi::um::d3dcompiler::*;
 
 
@@ -9,6 +11,7 @@ use winapi::um::d3dcompiler::*;
 ///
 /// Flags controlling what data is stripped by [d3d::Compiler::strip_shader]
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct CompilerStripFlags(D3DCOMPILER_STRIP_FLAGS);
 #[doc(hidden)] pub use CompilerStripFlags as CompilerStrip;
 

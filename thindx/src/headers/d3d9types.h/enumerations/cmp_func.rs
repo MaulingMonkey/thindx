@@ -1,5 +1,5 @@
 #[allow(unused_imports)] use crate::*;
-
+use bytemuck::*;
 use winapi::shared::d3d9types::*;
 
 
@@ -9,6 +9,7 @@ use winapi::shared::d3d9types::*;
 ///
 /// Defines the supported compare functions.
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct CmpFunc(D3DCMPFUNC);
 pub use CmpFunc as Cmp;
 
@@ -25,9 +26,8 @@ enumish! { Cmp => D3DCMPFUNC; Never, Less, Equal, LessEqual, Greater, NotEqual, 
     pub const Always        : CmpFunc = CmpFunc(D3DCMP_ALWAYS);
 }
 
-#[cfg(feature = "impl-poor-defaults")]
-impl Default for CmpFunc {
-    fn default() -> Self { CmpFunc(0) }
+impl CmpFunc {
+    pub const fn zeroed() -> Self { Self(0) }
 }
 
 //#cpp2rust D3DCMPFUNC          = d3d::CmpFunc

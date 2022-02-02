@@ -1,5 +1,5 @@
 #[allow(unused_imports)] use crate::*;
-
+use bytemuck::*;
 use winapi::shared::d3d9types::*;
 
 
@@ -9,6 +9,7 @@ use winapi::shared::d3d9types::*;
 ///
 /// Defines the vertex declaration method which is a predefined operation performed by the tessellator (or any procedural geometry routine on the vertex data during tessellation).
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct DeclMethod8(u8);
 
 enumish! { DeclMethod8 => D3DDECLMETHOD; Default, PartialU, PartialV, CrossUV, UV, Lookup, LookupPresampled }

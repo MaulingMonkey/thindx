@@ -1,5 +1,7 @@
 #[allow(unused_imports)] use crate::*;
 
+use bytemuck::*;
+
 use winapi::um::d3dcommon::*;
 
 
@@ -11,6 +13,7 @@ use winapi::um::d3dcommon::*;
 /// *   [d3d::PrimitiveTopology]
 /// *   [Primitive Topologies](https://docs.microsoft.com/en-us/windows/win32/direct3d11/d3d10-graphics-programming-guide-primitive-topologies)
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct Primitive(D3D_PRIMITIVE);
 
 // Note: D3D10_* aliases D3D_* despite poor docs kinda implying otherwise (see d3dcommon.h)

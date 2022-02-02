@@ -1,5 +1,5 @@
 #[allow(unused_imports)] use crate::*;
-
+use bytemuck::*;
 use winapi::shared::d3d9types::*;
 
 
@@ -7,6 +7,7 @@ use winapi::shared::d3d9types::*;
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dmultisample-type)\]
 /// D3DMULTISAMPLE_TYPE
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct MultiSampleType(D3DMULTISAMPLE_TYPE);
 pub use MultiSampleType as MultiSample;
 

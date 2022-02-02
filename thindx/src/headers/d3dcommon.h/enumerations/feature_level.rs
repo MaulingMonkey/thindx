@@ -1,5 +1,7 @@
 #[allow(unused_imports)] use crate::*;
 
+use bytemuck::*;
+
 use winapi::um::d3dcommon::*;
 
 const D3D_FEATURE_LEVEL_1_0_CORE : D3D_FEATURE_LEVEL = 0x1000; // Not in winapi (yet?)
@@ -9,6 +11,7 @@ const D3D_FEATURE_LEVEL_1_0_CORE : D3D_FEATURE_LEVEL = 0x1000; // Not in winapi 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_feature_level)\]
 /// D3D_FEATURE_LEVEL / D3D_FEATURE_LEVEL_\*
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct FeatureLevel(D3D_FEATURE_LEVEL);
 
 enumish! { FeatureLevel => D3D_FEATURE_LEVEL; _1_0_Core, _9_1, _9_2, _9_3, _10_0, _10_1, _11_0, _11_1, _12_0, _12_1 }

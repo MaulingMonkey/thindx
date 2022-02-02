@@ -35,7 +35,6 @@ path            = "src/_lib.rs"
 default         = []
 9ex             = []
 # extra               = []
-# impl-poor-defaults  = []
 # impl-from-unchecked = []
 
 

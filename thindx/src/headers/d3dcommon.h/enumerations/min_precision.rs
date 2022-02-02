@@ -1,5 +1,7 @@
 #[allow(unused_imports)] use crate::*;
 
+use bytemuck::*;
+
 use winapi::um::d3dcommon::*;
 
 
@@ -7,6 +9,7 @@ use winapi::um::d3dcommon::*;
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_min_precision)\]
 /// D3D_MIN_PRECISION
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct MinPrecision(D3D_MIN_PRECISION);
 
 enumish! { MinPrecision => D3D_MIN_PRECISION; Default, Float16, Float2_8, Reserved, SInt16, UInt16, Any16, Any10 }

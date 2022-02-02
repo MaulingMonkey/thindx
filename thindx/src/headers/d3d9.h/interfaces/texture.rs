@@ -3,6 +3,8 @@
 use crate::*;
 use crate::d3d9::*;
 
+use bytemuck::*;
+
 use winapi::shared::d3d9::*;
 use winapi::shared::d3d9types::*;
 use winapi::um::unknwnbase::IUnknown;
@@ -417,7 +419,7 @@ pub trait IDirect3DCubeTexture9Ext : AsSafe<IDirect3DCubeTexture9> {
     /// # assert_eq!(D3DERR::INVALIDCALL, texture.get_level_desc(!0-100).err(), "!0-100");
     /// ```
     fn get_level_desc(&self, level: u32) -> Result<SurfaceDesc, MethodError> {
-        let mut desc = SurfaceDesc::default();
+        let mut desc = SurfaceDesc::zeroed();
         let hr = unsafe { self.as_winapi().GetLevelDesc(level, &mut *desc) };
         MethodError::check("IDirect3DCubeTexture9::GetLevelDesc", hr)?;
         Ok(desc)
@@ -608,7 +610,7 @@ pub trait IDirect3DTexture9Ext : AsSafe<IDirect3DTexture9> {
     /// # assert_eq!(D3DERR::INVALIDCALL, texture.get_level_desc(!0-100).err(), "!0-100");
     /// ```
     fn get_level_desc(&self, level: u32) -> Result<SurfaceDesc, MethodError> {
-        let mut desc = SurfaceDesc::default();
+        let mut desc = SurfaceDesc::zeroed();
         let hr = unsafe { self.as_winapi().GetLevelDesc(level, &mut *desc) };
         MethodError::check("IDirect3DTexture9::GetLevelDesc", hr)?;
         Ok(desc)
@@ -771,7 +773,7 @@ pub trait IDirect3DVolumeTexture9Ext : AsSafe<IDirect3DVolumeTexture9> {
     /// assert_eq!(level0.depth,  32);
     /// ```
     fn get_level_desc(&self, level: u32) -> Result<VolumeDesc, MethodError> {
-        let mut desc = VolumeDesc::default();
+        let mut desc = VolumeDesc::zeroed();
         let hr = unsafe { self.as_winapi().GetLevelDesc(level, &mut *desc) };
         MethodError::check("IDirect3DVolumeTexture9::GetLevelDesc", hr)?;
         Ok(desc)

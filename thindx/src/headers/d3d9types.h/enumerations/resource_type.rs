@@ -1,5 +1,5 @@
 #[allow(unused_imports)] use crate::*;
-
+use bytemuck::*;
 use winapi::shared::d3d9types::*;
 
 
@@ -9,6 +9,7 @@ use winapi::shared::d3d9types::*;
 ///
 /// Specifies the type of a [Resource]
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct ResourceType(D3DRESOURCETYPE);
 pub use ResourceType as RType;
 
@@ -60,9 +61,8 @@ enumish! { ResourceType => D3DRESOURCETYPE; Surface, Volume, Texture, VolumeText
     pub const INDEXBUFFER   : ResourceType = ResourceType(D3DRTYPE_INDEXBUFFER);
 }
 
-// #[cfg(feature = "impl-poor-defaults")] // XXX
-impl Default for ResourceType {
-    fn default() -> Self { ResourceType(0) }
+impl ResourceType {
+    pub const fn zeroed() -> Self { Self(0) }
 }
 
 //#cpp2rust D3DRESOURCETYPE         = d3d::ResourceType

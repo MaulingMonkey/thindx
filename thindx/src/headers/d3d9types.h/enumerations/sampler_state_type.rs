@@ -1,5 +1,5 @@
 #[allow(unused_imports)] use crate::*;
-
+use bytemuck::*;
 use winapi::shared::d3d9types::*;
 
 
@@ -13,6 +13,7 @@ use winapi::shared::d3d9types::*;
 ///
 /// [State Blocks Save and Restore State (Direct3D 9)]:     https://docs.microsoft.com/en-us/windows/win32/direct3d9/state-blocks-save-and-restore-state
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct SamplerStateType(D3DSAMPLERSTATETYPE);
 pub use SamplerStateType as Samp;
 
@@ -38,9 +39,8 @@ enumish! {
     pub const DMapOffset        : SamplerStateType = SamplerStateType(D3DSAMP_DMAPOFFSET);
 }
 
-#[cfg(feature = "impl-poor-defaults")]
-impl Default for SamplerStateType {
-    fn default() -> Self { SamplerStateType(0) }
+impl SamplerStateType {
+    pub const fn zeroed() -> Self { Self(0) }
 }
 
 //#cpp2rust D3DSAMPLERSTATETYPE     = d3d::SamplerStateType

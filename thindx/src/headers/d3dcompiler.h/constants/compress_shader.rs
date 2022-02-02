@@ -1,5 +1,7 @@
 #[allow(unused_imports)] use crate::*;
 
+use bytemuck::*;
+
 use winapi::shared::minwindef::UINT;
 const D3D_COMPRESS_SHADER_KEEP_ALL_PARTS : UINT = 0x00000001; // not part of winapi 0.3.9
 
@@ -10,6 +12,7 @@ const D3D_COMPRESS_SHADER_KEEP_ALL_PARTS : UINT = 0x00000001; // not part of win
 ///
 /// Flags controlling the behavior of [d3d::Compiler::compress_shaders]
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct CompressShader(UINT);
 
 flags! { CompressShader => UINT; None, KeepAllParts }

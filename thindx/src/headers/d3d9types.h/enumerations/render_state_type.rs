@@ -1,5 +1,5 @@
 #[allow(unused_imports)] use crate::*;
-
+use bytemuck::*;
 use winapi::shared::d3d9types::*;
 
 
@@ -14,6 +14,7 @@ use winapi::shared::d3d9types::*;
 /// [Render States (Direct3D 9)]:                       https://docs.microsoft.com/en-us/windows/win32/direct3d9/render-states
 /// [State Blocks Save and Restore State (Direct3D 9)]: https://docs.microsoft.com/en-us/windows/win32/direct3d9/state-blocks-save-and-restore-state
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct RenderStateType(D3DRENDERSTATETYPE);
 pub use RenderStateType as RS;
 
@@ -143,9 +144,8 @@ impl RenderStateType {
     pub const BlendOpAlpha                  : RenderStateType = RenderStateType(D3DRS_BLENDOPALPHA);
 }
 
-#[cfg(feature = "impl-poor-defaults")]
-impl Default for RenderStateType {
-    fn default() -> Self { RenderStateType(0) }
+impl RenderStateType {
+    pub const fn zeroed() -> Self { Self(0) }
 }
 
 //#cpp2rust D3DRENDERSTATETYPE                  = d3d::RenderStateType

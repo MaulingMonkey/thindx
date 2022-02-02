@@ -1,5 +1,5 @@
 #[allow(unused_imports)] use crate::*;
-
+use bytemuck::*;
 use winapi::shared::d3d9types::*;
 
 
@@ -9,6 +9,7 @@ use winapi::shared::d3d9types::*;
 ///
 /// Defines constants that describe transformation state values.
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct TransformStateType(D3DTRANSFORMSTATETYPE);
 pub use TransformStateType as TS;
 
@@ -34,17 +35,15 @@ enumish! { TS => D3DTRANSFORMSTATETYPE; View, Projection, Texture0, Texture1, Te
 }
 
 impl TransformStateType {
+    pub const fn zeroed() -> Self { Self(0) }
+
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dts-worldmatrix)\]
     /// D3DTS_WORLDMATRIX
     pub const fn world_matrix(index: u8) -> TransformStateType { TransformStateType(index as u32 + 256) }
 }
 
-#[cfg(feature = "impl-poor-defaults")]
-impl Default for TransformStateType {
-    fn default() -> Self { TransformStateType(0) }
-}
-
 //#cpp2rust D3DTRANSFORMSTATETYPE   = d3d::TransformStateType
+
 //#cpp2rust D3DTS_VIEW              = d3d::TS::View
 //#cpp2rust D3DTS_PROJECTION        = d3d::TS::Projection
 //#cpp2rust D3DTS_TEXTURE0          = d3d::TS::Texture0

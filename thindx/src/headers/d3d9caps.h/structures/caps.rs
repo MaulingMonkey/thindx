@@ -399,7 +399,7 @@ pub struct Caps {
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9caps/ns-d3d9caps-d3dpshadercaps2_0)\]
 /// D3DPSHADERCAPS2_0
-#[derive(Clone, Copy, Default, Debug, Pod, Zeroable)]
+#[derive(Clone, Copy, Debug, Pod, Zeroable)]
 #[repr(C)]
 pub struct PShaderCaps20 {
     pub caps:                                           Ps20Caps,
@@ -411,7 +411,7 @@ pub struct PShaderCaps20 {
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9caps/ns-d3d9caps-d3dvshadercaps2_0)\]
 /// D3DVSHADERCAPS2_0
-#[derive(Clone, Copy, Default, Debug, Pod, Zeroable)]
+#[derive(Clone, Copy, Debug, Pod, Zeroable)]
 #[repr(C)]
 pub struct VShaderCaps20 {
     pub caps:                                           Vs20Caps,

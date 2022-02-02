@@ -1,5 +1,5 @@
 #[allow(unused_imports)] use crate::*;
-
+use bytemuck::*;
 use winapi::shared::d3d9types::*;
 
 
@@ -9,6 +9,7 @@ use winapi::shared::d3d9types::*;
 ///
 /// Defines the debug monitor tokens.
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct DebugMonitorTokens(D3DDEBUGMONITORTOKENS);
 pub use DebugMonitorTokens as DMT;
 
@@ -19,9 +20,8 @@ enumish! { DMT => D3DDEBUGMONITORTOKENS; Enable, Disable }
     pub const Disable       : DMT = DMT(D3DDMT_DISABLE); // 1
 }
 
-#[cfg(feature = "impl-poor-defaults")]
-impl Default for DMT {
-    fn default() -> Self { DMT::Disable } // 1
+impl DMT {
+    pub const fn zeroed() -> Self { Self(0) }
 }
 
 //#cpp2rust D3DDEBUGMONITORTOKENS   = d3d::DebugMonitorTokens

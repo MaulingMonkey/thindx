@@ -1,5 +1,7 @@
 #[allow(unused_imports)] use crate::*;
 
+use bytemuck::*;
+
 use winapi::um::d3dcommon::*;
 
 
@@ -7,6 +9,7 @@ use winapi::um::d3dcommon::*;
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_tessellator_partitioning)\]
 /// D3D_TESSELLATOR_PARTITIONING
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct TessellatorPartitioning(D3D_TESSELLATOR_PARTITIONING);
 
 enumish! { TessellatorPartitioning => D3D_TESSELLATOR_PARTITIONING; Undefined, Integer, Pow2, FractionalOdd, FractionalEven }

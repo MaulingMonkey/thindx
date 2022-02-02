@@ -1,5 +1,7 @@
 #[allow(unused_imports)] use crate::*;
 
+use bytemuck::*;
+
 use winapi::um::d3dcommon::*;
 
 
@@ -7,6 +9,7 @@ use winapi::um::d3dcommon::*;
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_resource_return_type)\]
 /// D3D_RESOURCE_RETURN_TYPE / D3D_RETURN_TYPE_\*
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct ResourceReturnType(D3D_RESOURCE_RETURN_TYPE);
 #[doc(hidden)] pub use ResourceReturnType as ReturnType;
 

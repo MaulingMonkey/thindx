@@ -1,5 +1,7 @@
 #[allow(unused_imports)] use crate::*;
 
+use bytemuck::*;
+
 use winapi::um::d3dcompiler::*;
 
 const D3D_BLOB_DEBUG_NAME : D3D_BLOB_PART = 12; // not part of winapi 0.3.9
@@ -14,6 +16,7 @@ const D3D_BLOB_DEBUG_NAME : D3D_BLOB_PART = 12; // not part of winapi 0.3.9
 /// ### Remarks
 /// These values are passed to the [d3d::Compiler::get_blob_part] or [d3d::Compiler::set_blob_part] functions.
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct BlobPart(D3D_BLOB_PART);
 #[doc(hidden)] pub use BlobPart as Blob;
 

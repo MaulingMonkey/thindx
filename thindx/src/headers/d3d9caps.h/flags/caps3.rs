@@ -6,7 +6,9 @@ use winapi::shared::minwindef::DWORD;
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dcaps3)\]
 /// D3DCAPS3_*
-#[derive(Clone, Copy, Default, PartialEq, Eq, PartialOrd, Ord, Hash, Pod, Zeroable)] #[repr(transparent)] pub struct Caps3(DWORD);
+#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Pod, Zeroable)]
+#[repr(transparent)] pub struct Caps3(DWORD);
 
 flags! { Caps3 => DWORD; None, AlphaFullscreenFlipOrDiscard, CopyToVidMem, CopyToSystemMem, DxvaHD, LinearToSrgbPresentation, Reserved }
 

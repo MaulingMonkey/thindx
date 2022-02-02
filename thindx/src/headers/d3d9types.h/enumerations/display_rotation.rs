@@ -1,5 +1,5 @@
 #[allow(unused_imports)] use crate::*;
-
+use bytemuck::*;
 use winapi::shared::d3d9types::*;
 
 
@@ -9,6 +9,7 @@ use winapi::shared::d3d9types::*;
 ///
 /// Specifies how the monitor being used to display a full-screen application is rotated.
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct DisplayRotation(D3DDISPLAYROTATION);
 
 enumish! { DisplayRotation => D3DDISPLAYROTATION; Identity, _90, _180, _270 }

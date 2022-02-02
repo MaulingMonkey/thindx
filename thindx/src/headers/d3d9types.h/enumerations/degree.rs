@@ -1,5 +1,5 @@
 #[allow(unused_imports)] use crate::*;
-
+use bytemuck::*;
 use winapi::shared::d3d9types::*;
 
 
@@ -9,6 +9,7 @@ use winapi::shared::d3d9types::*;
 ///
 /// Defines the degree of the variables in the equation that describes a curve.
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct DegreeType(D3DDEGREETYPE);
 pub use DegreeType as Degree;
 
@@ -21,12 +22,12 @@ enumish! { Degree => D3DDEGREETYPE; Linear, Quadratic, Cubic, Quintic }
     pub const Quintic       : Degree = Degree(D3DDEGREE_QUINTIC);
 }
 
-#[cfg(feature = "impl-poor-defaults")]
-impl Default for Degree {
-    fn default() -> Self { Degree(0) }
+impl Degree {
+    pub const fn zeroed() -> Self { Self(0) }
 }
 
 //#cpp2rust D3DDEGREETYPE       = d3d::DegreeType
+
 //#cpp2rust D3DDEGREE_LINEAR    = d3d::Degree::Linear
 //#cpp2rust D3DDEGREE_QUADRATIC = d3d::Degree::Quadratic
 //#cpp2rust D3DDEGREE_CUBIC     = d3d::Degree::Cubic

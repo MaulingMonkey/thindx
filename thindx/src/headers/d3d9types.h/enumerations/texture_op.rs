@@ -1,5 +1,5 @@
 #[allow(unused_imports)] use crate::*;
-
+use bytemuck::*;
 use winapi::shared::d3d9types::*;
 
 
@@ -9,6 +9,7 @@ use winapi::shared::d3d9types::*;
 ///
 /// Defines per-stage texture-blending operations.
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct TextureOp(D3DTEXTUREOP);
 pub use TextureOp as TOP;
 
@@ -50,9 +51,8 @@ enumish! {
     pub const Lerp                      : TextureOp = TextureOp(D3DTOP_LERP);
 }
 
-#[cfg(feature = "impl-poor-defaults")]
-impl Default for TextureOp {
-    fn default() -> Self { TextureOp(0) }
+impl TextureOp {
+    pub const fn zeroed() -> Self { Self(0) }
 }
 
 //#cpp2rust D3DTEXTUREOP                        = d3d::TextureOp

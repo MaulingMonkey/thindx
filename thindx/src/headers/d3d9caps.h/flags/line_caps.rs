@@ -6,7 +6,9 @@ use winapi::shared::minwindef::DWORD;
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9caps/ns-d3d9caps-d3dcaps9)\]
 /// D3DLINECAPS_*
-#[derive(Clone, Copy, Default, PartialEq, Eq, PartialOrd, Ord, Hash, Pod, Zeroable)] #[repr(transparent)] pub struct LineCaps(DWORD);
+#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Pod, Zeroable)]
+#[repr(transparent)] pub struct LineCaps(DWORD);
 
 flags! {
     LineCaps => DWORD;

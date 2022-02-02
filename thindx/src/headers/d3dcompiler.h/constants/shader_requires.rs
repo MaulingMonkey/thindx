@@ -1,5 +1,7 @@
 #[allow(unused_imports)] use crate::*;
 
+use bytemuck::*;
+
 use winapi::shared::basetsd::UINT64;
 use winapi::um::d3d11shader::*;
 
@@ -11,6 +13,7 @@ use winapi::um::d3d11shader::*;
 /// ### See Also
 /// *   [d3d11::ShaderReflection::get_requires_flags]
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct ShaderRequires(UINT64);
 
 flags! {

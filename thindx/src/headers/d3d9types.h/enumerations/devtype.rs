@@ -12,7 +12,8 @@ use winapi::shared::d3d9types::*;
 /// A [DevType::Ref] device should be created in [Pool::Scratch] memory, unless vertex and index buffers are required. To support vertex and index buffers, create the device in [Pool::SystemMem] memory.
 ///
 /// If D3dref9.dll is installed, Direct3D will use the reference rasterizer to create a [DevType::Ref] device type, even if [DevType::NullRef] is specified. If D3dref9.dll is not available and [DevType::NullRef] is specified, Direct3D will neither render nor present the scene.
-#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Pod, Zeroable)]
+#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct DevType(D3DDEVTYPE);
 
 enumish! { DevType => D3DDEVTYPE; HAL, NullRef, Ref, SW }
@@ -43,12 +44,16 @@ enumish! { DevType => D3DDEVTYPE; HAL, NullRef, Ref, SW }
     pub const REF       : DevType = DevType(D3DDEVTYPE_REF);
 }
 
-#[cfg(feature = "impl-poor-defaults")]
+impl DevType {
+    pub const fn zeroed() -> Self { Self(0) }
+}
+
 impl Default for DevType {
     fn default() -> Self { DevType::HAL } // 1
 }
 
 //#cpp2rust D3DDEVTYPE          = d3d::DevType
+
 //#cpp2rust D3DDEVTYPE_HAL      = d3d::DevType::HAL
 //#cpp2rust D3DDEVTYPE_NULLREF  = d3d::DevType::NullRef
 //#cpp2rust D3DDEVTYPE_REF      = d3d::DevType::Ref

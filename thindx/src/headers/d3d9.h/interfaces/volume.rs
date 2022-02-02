@@ -1,6 +1,8 @@
 use crate::*;
 use crate::d3d9::*;
 
+use bytemuck::*;
+
 use winapi::Interface;
 use winapi::shared::d3d9::IDirect3DVolume9;
 use winapi::shared::d3d9types::*;
@@ -86,7 +88,7 @@ pub trait IDirect3DVolume9Ext : AsSafe<IDirect3DVolume9> {
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok([VolumeDesc])
     fn get_desc(&self) -> Result<VolumeDesc, MethodError> {
-        let mut desc = VolumeDesc::default();
+        let mut desc = VolumeDesc::zeroed();
         let hr = unsafe { self.as_winapi().GetDesc(&mut *desc) };
         MethodError::check("IDirect3DVolume9::GetDesc", hr)?;
         Ok(desc)

@@ -1,5 +1,5 @@
 #[allow(unused_imports)] use crate::*;
-
+use bytemuck::*;
 use winapi::shared::d3d9types::*;
 
 
@@ -9,6 +9,7 @@ use winapi::shared::d3d9types::*;
 ///
 /// Defines the supported culling modes ([None](crate::Cull::None), [CW](crate::Cull::CW), [CCW](crate::Cull::CCW))
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct Cull(D3DCULL);
 
 enumish! { Cull => D3DCULL; None, CW, CCW }
@@ -19,9 +20,8 @@ enumish! { Cull => D3DCULL; None, CW, CCW }
     pub const CCW       : Cull = Cull(D3DCULL_CCW);
 }
 
-#[cfg(feature = "impl-poor-defaults")]
-impl Default for Cull {
-    fn default() -> Self { Cull::None } // 1
+impl Cull {
+    pub const fn zeroed() -> Self { Self(0) }
 }
 
 //#cpp2rust D3DCULL         = d3d::Cull

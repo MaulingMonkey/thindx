@@ -6,7 +6,9 @@ use winapi::shared::minwindef::DWORD;
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dcaps2)\]
 /// D3DCAPS2_*
-#[derive(Clone, Copy, Default, PartialEq, Eq, PartialOrd, Ord, Hash, Pod, Zeroable)] #[repr(transparent)] pub struct Caps2(DWORD);
+#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Pod, Zeroable)]
+#[repr(transparent)] pub struct Caps2(DWORD);
 
 flags! { Caps2 => DWORD; None, CanAutoGenMipMap, CanCalibrateGamma, CanShareResource, CanManageResource, DynamicTextures, FullScreenGamma, Reserved }
 
@@ -29,4 +31,3 @@ flags! { Caps2 => DWORD; None, CanAutoGenMipMap, CanCalibrateGamma, CanShareReso
 //#cpp2rust D3DCAPS2_DYNAMICTEXTURES        = d3d::Caps2::DynamicTextures
 //#cpp2rust D3DCAPS2_FULLSCREENGAMMA        = d3d::Caps2::FullScreenGamma
 //#cpp2ignore D3DCAPS2_RESERVED
-

@@ -1,5 +1,7 @@
 #[allow(unused_imports)] use crate::*;
 
+use bytemuck::*;
+
 use winapi::shared::d3d9types::*;
 type D3DUSAGE = u32; // there's no actual type
 
@@ -10,6 +12,7 @@ type D3DUSAGE = u32; // there's no actual type
 ///
 /// Usage options that identify how resources are to be used.
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct Usage(D3DUSAGE);
 // TODO: usage table from https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dusage#usage-and-resource-combinations?
 

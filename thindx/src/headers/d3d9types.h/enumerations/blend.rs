@@ -1,5 +1,5 @@
 #[allow(unused_imports)] use crate::*;
-
+use bytemuck::*;
 use winapi::shared::d3d9types::*;
 
 
@@ -9,6 +9,7 @@ use winapi::shared::d3d9types::*;
 ///
 /// Defines the supported blend mode.
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct Blend(D3DBLEND);
 
 enumish! {
@@ -37,9 +38,8 @@ enumish! {
     pub const InvSrcColor2          : Blend = Blend(D3DBLEND_INVSRCCOLOR2);
 }
 
-#[cfg(feature = "impl-poor-defaults")]
-impl Default for Blend {
-    fn default() -> Self { Blend(0) }
+impl Blend {
+    pub const fn zeroed() -> Self { Self(0) }
 }
 
 //#cpp2rust D3DBLEND                    = d3d::Blend

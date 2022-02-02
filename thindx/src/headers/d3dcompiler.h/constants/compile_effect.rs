@@ -1,5 +1,7 @@
 #[allow(unused_imports)] use crate::*;
 
+use bytemuck::*;
+
 use winapi::um::d3dcompiler::*;
 #[allow(non_camel_case_types)] type D3DCOMPILE_EFFECT = u32; // there's no actual type
 
@@ -15,6 +17,7 @@ use winapi::um::d3dcompiler::*;
 /// *   [d3d::Compiler::compile]
 /// *   [d3d::Compiler::compile2]
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct CompileEffect(D3DCOMPILE_EFFECT);
 
 flags! {

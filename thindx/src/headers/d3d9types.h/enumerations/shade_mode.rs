@@ -1,5 +1,5 @@
 #[allow(unused_imports)] use crate::*;
-
+use bytemuck::*;
 use winapi::shared::d3d9types::*;
 
 
@@ -9,6 +9,7 @@ use winapi::shared::d3d9types::*;
 ///
 /// Defines constants that describe the supported shading modes.
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct ShadeMode(D3DSHADEMODE);
 pub use ShadeMode as Shade;
 
@@ -20,9 +21,8 @@ enumish! { Shade => D3DSHADEMODE; Flat, Gouraud, Phong }
     pub const Phong     : ShadeMode = ShadeMode(D3DSHADE_PHONG);
 }
 
-#[cfg(feature = "impl-poor-defaults")]
-impl Default for ShadeMode {
-    fn default() -> Self { ShadeMode::Flat } // 1
+impl ShadeMode {
+    pub const fn zeroed() -> Self { Self(0) }
 }
 
 //#cpp2rust D3DSHADEMODE        = d3d::ShadeMode

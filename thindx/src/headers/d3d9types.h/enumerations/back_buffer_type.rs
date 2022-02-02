@@ -1,5 +1,5 @@
 #[allow(unused_imports)] use crate::*;
-
+use bytemuck::*;
 use winapi::shared::d3d9types::*;
 
 
@@ -15,6 +15,7 @@ use winapi::shared::d3d9types::*;
 /// *   [IDirect3DDevice9Ext::get_back_buffer]
 /// *   [SwapChain::get_back_buffer]
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct BackBufferType(D3DBACKBUFFER_TYPE);
 
 enumish! { BackBufferType => D3DBACKBUFFER_TYPE; Mono, Left, Right }

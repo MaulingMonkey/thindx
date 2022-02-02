@@ -1,5 +1,7 @@
 #[allow(unused_imports)] use crate::*;
 
+use bytemuck::*;
+
 use winapi::um::d3dcommon::*;
 
 // not exposed by winapi 0.3.9
@@ -11,6 +13,7 @@ const D3D_SIT_UAV_FEEDBACKTEXTURE       : D3D_RESOURCE_RETURN_TYPE = 13;
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_shader_input_type)\]
 /// D3D_SHADER_INPUT_TYPE / D3D_SIT_\*
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct ShaderInputType(D3D_SHADER_INPUT_TYPE);
 #[doc(hidden)] pub use ShaderInputType as SIT;
 

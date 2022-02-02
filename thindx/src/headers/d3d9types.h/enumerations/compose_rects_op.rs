@@ -1,5 +1,5 @@
 #[allow(unused_imports)] use crate::*;
-
+use bytemuck::*;
 use winapi::shared::d3d9types::*;
 
 
@@ -9,6 +9,7 @@ use winapi::shared::d3d9types::*;
 ///
 /// Specifies how to combine the glyph data from the source and destination surfaces in a call to [IDirect3DDevice9ExExt::compose_rects]
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct ComposeRectsOp(D3DCOMPOSERECTSOP);
 pub use ComposeRectsOp as ComposeRects;
 
@@ -21,9 +22,8 @@ enumish! { ComposeRects => D3DCOMPOSERECTSOP; Copy, Or, And, Neg }
     pub const Neg   : ComposeRectsOp = ComposeRectsOp(D3DCOMPOSERECTS_NEG);
 }
 
-#[cfg(feature = "impl-poor-defaults")]
-impl Default for ComposeRects {
-    fn default() -> Self { ComposeRects::Copy } // 1
+impl ComposeRects {
+    pub const fn zeroed() -> Self { Self(0) }
 }
 
 //#cpp2rust D3DCOMPOSERECTSOP           = d3d::ComposeRectsOp

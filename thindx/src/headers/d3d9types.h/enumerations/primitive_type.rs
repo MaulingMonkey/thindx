@@ -1,5 +1,5 @@
 #[allow(unused_imports)] use crate::*;
-
+use bytemuck::*;
 use winapi::shared::d3d9types::*;
 
 
@@ -14,6 +14,7 @@ use winapi::shared::d3d9types::*;
 /// [Triangle Strips]:              https://docs.microsoft.com/en-us/windows/win32/direct3d9/triangle-strips
 /// [Triangle Fans (Direct3D 9)]:   https://docs.microsoft.com/en-us/windows/win32/direct3d9/triangle-fans
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct PrimitiveType(D3DPRIMITIVETYPE);
 pub use PrimitiveType as PT;
 
@@ -41,9 +42,8 @@ enumish! { PT => D3DPRIMITIVETYPE; PointList, LineList, LineStrip, TriangleList,
     pub const TriangleFan       : PrimitiveType = PrimitiveType(D3DPT_TRIANGLEFAN);
 }
 
-#[cfg(feature = "impl-poor-defaults")]
-impl Default for PrimitiveType {
-    fn default() -> Self { PrimitiveType(0) }
+impl PrimitiveType {
+    pub const fn zeroed() -> Self { Self(0) }
 }
 
 //#cpp2rust D3DPRIMITIVETYPE    = d3d::PrimitiveType

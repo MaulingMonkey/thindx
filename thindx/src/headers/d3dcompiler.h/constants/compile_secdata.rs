@@ -1,5 +1,7 @@
 #[allow(unused_imports)] use crate::*;
 
+use bytemuck::*;
+
 use winapi::shared::minwindef::UINT;
 use winapi::um::d3dcompiler::*;
 
@@ -13,6 +15,7 @@ use winapi::um::d3dcompiler::*;
 /// ### See Also
 /// *   [d3d::Compiler::compile2]
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct CompileSecData(UINT);
 #[doc(hidden)] pub use CompileSecData as CompileSecdata;
 

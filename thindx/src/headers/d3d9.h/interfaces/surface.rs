@@ -3,6 +3,8 @@
 use crate::*;
 use crate::d3d9::*;
 
+use bytemuck::*;
+
 use winapi::Interface;
 use winapi::shared::d3d9::{IDirect3DSurface9, IDirect3DResource9};
 use winapi::shared::d3d9types::*;
@@ -117,7 +119,7 @@ pub trait IDirect3DSurface9Ext : AsSafe<IDirect3DSurface9> {
     /// // ...
     /// ```
     fn get_desc(&self) -> Result<SurfaceDesc, MethodError> {
-        let mut desc = SurfaceDesc::default();
+        let mut desc = SurfaceDesc::zeroed();
         let hr = unsafe { self.as_winapi().GetDesc(&mut *desc) };
         MethodError::check("IDirect3DSurface9::GetDesc", hr)?;
         Ok(desc)

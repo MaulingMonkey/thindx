@@ -6,7 +6,9 @@ use winapi::shared::minwindef::DWORD;
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dpmisccaps)\]
 /// D3DPMISCCAPS_*
-#[derive(Clone, Copy, Default, PartialEq, Eq, PartialOrd, Ord, Hash, Pod, Zeroable)] #[repr(transparent)] pub struct PMiscCaps(DWORD);
+#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Pod, Zeroable)]
+#[repr(transparent)] pub struct PMiscCaps(DWORD);
 
 flags! {
     PMiscCaps => DWORD;

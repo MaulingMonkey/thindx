@@ -1,5 +1,5 @@
 use crate::d3d9::*;
-
+use bytemuck::*;
 use winapi::shared::d3d9types::*;
 
 
@@ -12,6 +12,7 @@ use winapi::shared::d3d9types::*;
 /// Directional lights are slightly faster than point light sources, but point lights look a little better.
 /// Spotlights offer interesting visual effects but are computationally time-consuming.
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct LightType(D3DLIGHTTYPE);
 
 enumish! { LightType => D3DLIGHTTYPE; Point, Spot, Directional }

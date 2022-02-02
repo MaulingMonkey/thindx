@@ -1,5 +1,5 @@
 #[allow(unused_imports)] use crate::*;
-
+use bytemuck::*;
 use winapi::shared::d3d9types::*;
 
 
@@ -9,6 +9,7 @@ use winapi::shared::d3d9types::*;
 ///
 /// Defines whether the current tessellation mode is [Discrete](crate::PatchEdge::Discrete) or [Continuous](crate::PatchEdge::Continuous).
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct PatchEdgeStyle(D3DPATCHEDGESTYLE);
 pub use PatchEdgeStyle as PatchEdge;
 

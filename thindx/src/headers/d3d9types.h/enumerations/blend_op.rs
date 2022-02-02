@@ -1,5 +1,5 @@
 #[allow(unused_imports)] use crate::*;
-
+use bytemuck::*;
 use winapi::shared::d3d9types::*;
 
 
@@ -9,6 +9,7 @@ use winapi::shared::d3d9types::*;
 ///
 /// Defines the supported blend operations.
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct BlendOp(D3DBLENDOP);
 
 enumish! { BlendOp => D3DBLENDOP; Add, Subtract, RevSubtract, Min, Max }
@@ -21,9 +22,8 @@ enumish! { BlendOp => D3DBLENDOP; Add, Subtract, RevSubtract, Min, Max }
     pub const Max           : BlendOp = BlendOp(D3DBLENDOP_MAX);
 }
 
-#[cfg(feature = "impl-poor-defaults")]
-impl Default for BlendOp {
-    fn default() -> Self { BlendOp::Add } // 1
+impl BlendOp {
+    pub const fn zeroed() -> Self { Self(0) }
 }
 
 //#cpp2rust D3DBLENDOP              = d3d::BlendOp

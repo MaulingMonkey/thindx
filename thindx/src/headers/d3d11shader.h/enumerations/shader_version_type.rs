@@ -1,5 +1,7 @@
 #[allow(unused_imports)] use crate::*;
 
+use bytemuck::*;
+
 use winapi::um::d3d11shader::*;
 
 use std::fmt::{self, Debug, Formatter};
@@ -25,6 +27,7 @@ use std::fmt::{self, Debug, Formatter};
 /// *   [d3d11::ShaderVersion::ty]
 /// *   [examples::d3dcompiler_04_reflect_shader]
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct ShaderVersionType(D3D11_SHADER_VERSION_TYPE);
 #[doc(hidden)] pub use ShaderVersionType as ShVer;
 
@@ -52,10 +55,6 @@ enumish! { ShVer => D3D11_SHADER_VERSION_TYPE; PixelShader, VertexShader, Geomet
     pub const RESERVED0         : ShVer = ShVer(D3D11_SHVER_RESERVED0);
 }
 
-impl Default for ShVer {
-    fn default() -> Self { ShVer(0) }
-}
-
 
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/ne-d3d11shader-d3d11_shader_version_type)\]
@@ -79,6 +78,7 @@ impl Default for ShVer {
 /// *   [d3d11::ShaderReflection::get_desc]
 /// *   [examples::d3dcompiler_04_reflect_shader]
 #[derive(Clone, Copy, Default, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct ShaderVersion(u32);
 
 impl ShaderVersion {

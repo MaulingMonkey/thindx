@@ -1,5 +1,7 @@
 #[allow(unused_imports)] use crate::*;
 
+use bytemuck::*;
+
 use winapi::shared::d3d9types::*;
 type D3DLOCK = u32; // there's no actual type
 
@@ -10,6 +12,7 @@ type D3DLOCK = u32; // there's no actual type
 ///
 /// A combination of zero or more locking options that describe the type of lock to perform.
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct Lock(D3DLOCK);
 
 flags! { Lock => D3DLOCK; None, Discard, DoNotWait, NoDirtyUpdate, NoOverwrite, NoSysLock, ReadOnly }

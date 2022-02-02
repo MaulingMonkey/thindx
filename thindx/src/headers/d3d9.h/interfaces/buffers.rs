@@ -1,6 +1,8 @@
 use crate::*;
 use crate::d3d9::*;
 
+use bytemuck::*;
+
 use winapi::ctypes::c_void;
 use winapi::shared::d3d9::{IDirect3DIndexBuffer9, IDirect3DVertexBuffer9, IDirect3DResource9};
 use winapi::um::unknwnbase::IUnknown;
@@ -83,7 +85,7 @@ pub trait IDirect3DIndexBuffer9Ext : AsSafe<IDirect3DIndexBuffer9> {
     /// assert_eq!(desc.size,   6);
     /// ```
     fn get_desc(&self) -> Result<IndexBufferDesc, MethodError> {
-        let mut desc = IndexBufferDesc::default();
+        let mut desc = IndexBufferDesc::zeroed();
         let hr = unsafe { self.as_winapi().GetDesc(&mut *desc) };
         MethodError::check("IDirect3DIndexBuffer9::GetDesc", hr)?;
         Ok(desc)
@@ -186,7 +188,7 @@ pub trait IDirect3DVertexBuffer9Ext : AsSafe<IDirect3DVertexBuffer9> {
     /// assert_eq!(desc.fvf,    FVF::XYZ);
     /// ```
     fn get_desc(&self) -> Result<VertexBufferDesc, MethodError> {
-        let mut desc = VertexBufferDesc::default();
+        let mut desc = VertexBufferDesc::zeroed();
         let hr = unsafe { self.as_winapi().GetDesc(&mut *desc) };
         MethodError::check("IDirect3DVertexBuffer9::GetDesc", hr)?;
         Ok(desc)

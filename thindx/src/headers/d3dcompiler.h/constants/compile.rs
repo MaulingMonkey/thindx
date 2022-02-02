@@ -1,5 +1,7 @@
 #[allow(unused_imports)] use crate::*;
 
+use bytemuck::*;
+
 use winapi::um::d3dcompiler::*;
 type D3DCOMPILE = u32; // there's no actual type
 
@@ -15,6 +17,7 @@ type D3DCOMPILE = u32; // there's no actual type
 /// *   [d3d::Compiler::compile]
 /// *   [d3d::Compiler::compile2]
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct Compile(D3DCOMPILE);
 
 flags! {
