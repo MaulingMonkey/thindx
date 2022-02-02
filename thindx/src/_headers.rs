@@ -966,7 +966,7 @@ pub const d3dcompiler_h : cxx_header = cxx_header;
 /// * [`SetRenderState`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setrenderstate)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_render_state_untyped`] <br>
 /// * [`SetRenderTarget`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setrendertarget)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_render_target`] <br>
 /// * [`SetSamplerState`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setsamplerstate)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_sampler_state`], [`d3d9::IDirect3DDevice9Ext::set_sampler_state_unchecked`] <br>
-/// * [`SetScissorRect`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setscissorrect) →&nbsp;❌ <br>
+/// * [`SetScissorRect`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setscissorrect)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_scissor_rect`] <br>
 /// * [`SetSoftwareVertexProcessing`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setsoftwarevertexprocessing) →&nbsp;❌ <br>
 /// * [`SetStreamSource`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setstreamsource)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_stream_source`] <br>
 /// * [`SetStreamSourceFreq`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setstreamsourcefreq)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_stream_source_freq`] <br>

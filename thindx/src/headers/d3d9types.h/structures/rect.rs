@@ -25,8 +25,8 @@ use std::fmt::{self, Debug, Formatter};
 ///
 /// [D3DRECT]:  https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3drect
 /// [RECT]:     https://docs.microsoft.com/en-us/windows/win32/api/windef/ns-windef-rect
-#[derive(Clone, Copy, Default)]
-#[derive(Pod, Zeroable)]
+#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Default, Pod, Zeroable)]
 #[repr(C)] pub struct Rect {
     /// left
     pub x1: i32,
@@ -62,7 +62,19 @@ impl AsMut<Rect> for D3DRECT { fn as_mut(&mut self) -> &mut Rect { unsafe { std:
 impl AsMut<Rect> for    RECT { fn as_mut(&mut self) -> &mut Rect { unsafe { std::mem::transmute(self) } } }
 
 impl Rect {
+    pub const fn zeroed() -> Self { Self { x1: 0, y1: 0, x2: 0, y2: 0 } }
+
+    /// ### Examples
+    /// ```rust
+    /// # use thindx::d3d::Rect;
+    /// let r = Rect { x1: 0, y1: 10, x2: 100, y2: 90 };
+    /// assert_eq!(r, Rect::from((0 .. 100, 10 .. 90)));
+    /// assert_eq!(r, Rect::from((0, 10) .. (100, 90)));
+    /// assert_eq!(r, Rect::from([0 .. 100, 10 .. 90]));
+    /// assert_eq!(r, Rect::from([0, 10] .. [100, 90]));
+    /// ```
     pub fn from(value: impl Into<Self>) -> Self { value.into() }
+
     pub fn into<C: From<Self>>(self) -> C { C::from(self) }
 
     pub fn left     (&self) -> i32 { self.x1 }

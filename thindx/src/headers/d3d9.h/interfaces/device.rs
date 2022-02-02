@@ -3387,6 +3387,29 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         unsafe { self.set_sampler_state_unchecked(sampler, ty, value) }
     }
 
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setscissorrect)\]
+    /// IDirect3DDevice9::SetScissorRect
+    ///
+    /// Sets the scissor rectangle.
+    ///
+    /// ### Errors
+    /// Speculation: [D3DERR::INVALIDCALL]   If scissor rects not supported?
+    ///
+    /// Observed: None
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_pure();
+    /// device.set_scissor_rect([0..0, 0..0]).unwrap();
+    /// device.set_scissor_rect([0..100, 0..100]).unwrap();
+    /// device.set_scissor_rect([100..0, 100..0]).unwrap();
+    /// device.set_scissor_rect([i32::MIN .. i32::MAX, i32::MIN .. i32::MAX]).unwrap();
+    /// ```
+    fn set_scissor_rect(&self, rect: impl Into<d3d::Rect>) -> Result<(), MethodError> {
+        let hr = unsafe { self.as_winapi().SetScissorRect(rect.into().as_ref()) };
+        MethodError::check("IDirect3DDevice9::SetScissorRect", hr)
+    }
+
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setstreamsource)\]
     /// IDirect3DDevice9::SetStreamSource
     ///
@@ -3837,7 +3860,7 @@ pub struct RgnData {
 //#cpp2rust IDirect3DDevice9::SetRenderTarget                   = d3d9::IDirect3DDevice9Ext::set_render_target
 //#cpp2rust IDirect3DDevice9::SetSamplerState                   = d3d9::IDirect3DDevice9Ext::set_sampler_state
 //#cpp2rust IDirect3DDevice9::SetSamplerState                   = d3d9::IDirect3DDevice9Ext::set_sampler_state_unchecked
-//TODO:     IDirect3DDevice9::SetScissorRect                    = d3d9::IDirect3DDevice9Ext::set_scissor_rect
+//#cpp2rust IDirect3DDevice9::SetScissorRect                    = d3d9::IDirect3DDevice9Ext::set_scissor_rect
 //TODO:     IDirect3DDevice9::SetSoftwareVertexProcessing       = d3d9::IDirect3DDevice9Ext::set_software_vertex_processing
 //#cpp2rust IDirect3DDevice9::SetStreamSource                   = d3d9::IDirect3DDevice9Ext::set_stream_source
 //#cpp2rust IDirect3DDevice9::SetStreamSourceFreq               = d3d9::IDirect3DDevice9Ext::set_stream_source_freq
