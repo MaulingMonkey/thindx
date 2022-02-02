@@ -3681,6 +3681,26 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         let hr = unsafe { self.as_winapi().SetViewport(&*viewport) };
         MethodError::check("IDirect3DDevice9::SetViewport", hr)
     }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-showcursor)\]
+    /// IDirect3DDevice9::ShowCursor
+    ///
+    /// Displays or hides the cursor.
+    ///
+    /// ### Returns
+    /// *   `true`  - If the cursor was previously visible.
+    /// *   `false` - If the cursor was previously hidden.
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_pure();
+    /// device.show_cursor(false); // hide
+    /// let was_visible = device.show_cursor(true); // show
+    /// assert_eq!(was_visible, false);
+    /// ```
+    fn show_cursor(&self, show: bool) -> bool {
+        unsafe { self.as_winapi().ShowCursor(show as _) != 0 }
+    }
 }
 
 impl<T: AsSafe<IDirect3DDevice9>> IDirect3DDevice9Ext for T {}
@@ -3873,7 +3893,7 @@ pub struct RgnData {
 //#cpp2rust IDirect3DDevice9::SetVertexShaderConstantF          = d3d9::IDirect3DDevice9Ext::set_vertex_shader_constant_f
 //#cpp2rust IDirect3DDevice9::SetVertexShaderConstantI          = d3d9::IDirect3DDevice9Ext::set_vertex_shader_constant_i
 //#cpp2rust IDirect3DDevice9::SetViewport                       = d3d9::IDirect3DDevice9Ext::set_viewport
-//TODO:     IDirect3DDevice9::ShowCursor                        = d3d9::IDirect3DDevice9Ext::show_cursor
+//#cpp2rust IDirect3DDevice9::ShowCursor                        = d3d9::IDirect3DDevice9Ext::show_cursor
 //TODO:     IDirect3DDevice9::StretchRect                       = d3d9::IDirect3DDevice9Ext::stretch_rect
 //TODO:     IDirect3DDevice9::TestCooperativeLevel              = d3d9::IDirect3DDevice9Ext::test_cooperative_level
 //TODO:     IDirect3DDevice9::UpdateSurface                     = d3d9::IDirect3DDevice9Ext::update_surface

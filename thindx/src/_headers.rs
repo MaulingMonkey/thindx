@@ -979,7 +979,7 @@ pub const d3dcompiler_h : cxx_header = cxx_header;
 /// * [`SetVertexShaderConstantF`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setvertexshaderconstantf)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_vertex_shader_constant_f`] <br>
 /// * [`SetVertexShaderConstantI`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setvertexshaderconstanti)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_vertex_shader_constant_i`] <br>
 /// * [`SetViewport`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setviewport)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_viewport`] <br>
-/// * [`ShowCursor`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-showcursor) →&nbsp;❌ <br>
+/// * [`ShowCursor`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-showcursor)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::show_cursor`] <br>
 /// * [`StretchRect`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-stretchrect) →&nbsp;❌ <br>
 /// * [`TestCooperativeLevel`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-testcooperativelevel) →&nbsp;❌ <br>
 /// * [`UpdateSurface`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-updatesurface) →&nbsp;❌ <br>
