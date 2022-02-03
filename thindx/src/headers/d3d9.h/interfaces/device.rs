@@ -3410,6 +3410,43 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         MethodError::check("IDirect3DDevice9::SetScissorRect", hr)
     }
 
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setsoftwarevertexprocessing)\]
+    /// IDirect3DDevice9::SetSoftwareVertexProcessing
+    ///
+    /// Use this method to switch between software and hardware vertex processing on devices created with [d3d::Create::MixedVertexProcessing].
+    ///
+    /// ### Errors
+    /// *   [D3DERR::INVALIDCALL]   If `software` was `false`, unless the device was created with [d3d::Create::MixedVertexProcessing] or [SoftwareVertexProcessing](d3d::Create::SoftwareVertexProcessing)
+    /// *   [D3DERR::INVALIDCALL]   If `software` was `true`, unless the device was created with [d3d::Create::MixedVertexProcessing] or [HardwareVertexProcessing](d3d::Create::HardwareVertexProcessing)
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use dev::d3d9::*;
+    /// # for create in [
+    /// #   Create::FpuPreserve | Create::NoWindowChanges | Create::SoftwareVertexProcessing,
+    /// #   Create::FpuPreserve | Create::NoWindowChanges | Create::MixedVertexProcessing,
+    /// #   Create::FpuPreserve | Create::NoWindowChanges | Create::HardwareVertexProcessing,
+    /// # ].iter().copied() {
+    /// # let device = device_test_pp(false, |_,c| *c = create).unwrap();
+    /// let params = device.get_creation_parameters().unwrap();
+    /// let device_is_software = params.BehaviorFlags & Create::SoftwareVertexProcessing.into() == Create::SoftwareVertexProcessing.into();
+    /// let device_is_mixed    = params.BehaviorFlags & Create::MixedVertexProcessing   .into() == Create::MixedVertexProcessing   .into();
+    /// let device_is_hardware = params.BehaviorFlags & Create::HardwareVertexProcessing.into() == Create::HardwareVertexProcessing.into();
+    ///
+    /// let r = device.set_software_vertex_processing(true);
+    /// assert_eq!(r.is_ok(), device_is_software || device_is_mixed);
+    /// r.map_err(|e| assert_eq!(e.kind(), D3DERR::INVALIDCALL));
+    ///
+    /// let r = device.set_software_vertex_processing(false);
+    /// assert_eq!(r.is_ok(), device_is_hardware || device_is_mixed);
+    /// r.map_err(|e| assert_eq!(e.kind(), D3DERR::INVALIDCALL));
+    /// # }
+    /// ```
+    fn set_software_vertex_processing(&self, software: bool) -> Result<(), MethodError> {
+        let hr = unsafe { self.as_winapi().SetSoftwareVertexProcessing(software as _) };
+        MethodError::check("IDirect3DDevice9::SetSoftwareVertexProcessing", hr)
+    }
+
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setstreamsource)\]
     /// IDirect3DDevice9::SetStreamSource
     ///
@@ -3881,7 +3918,7 @@ pub struct RgnData {
 //#cpp2rust IDirect3DDevice9::SetSamplerState                   = d3d9::IDirect3DDevice9Ext::set_sampler_state
 //#cpp2rust IDirect3DDevice9::SetSamplerState                   = d3d9::IDirect3DDevice9Ext::set_sampler_state_unchecked
 //#cpp2rust IDirect3DDevice9::SetScissorRect                    = d3d9::IDirect3DDevice9Ext::set_scissor_rect
-//TODO:     IDirect3DDevice9::SetSoftwareVertexProcessing       = d3d9::IDirect3DDevice9Ext::set_software_vertex_processing
+//#cpp2rust IDirect3DDevice9::SetSoftwareVertexProcessing       = d3d9::IDirect3DDevice9Ext::set_software_vertex_processing
 //#cpp2rust IDirect3DDevice9::SetStreamSource                   = d3d9::IDirect3DDevice9Ext::set_stream_source
 //#cpp2rust IDirect3DDevice9::SetStreamSourceFreq               = d3d9::IDirect3DDevice9Ext::set_stream_source_freq
 //#cpp2rust IDirect3DDevice9::SetTexture                        = d3d9::IDirect3DDevice9Ext::set_texture
