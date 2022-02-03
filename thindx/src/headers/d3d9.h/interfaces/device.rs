@@ -1272,11 +1272,29 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// Retrieves the creation parameters of the device.
     ///
     /// ### Returns
-    /// *   [D3DERR::INVALIDCALL]   "If the returned argument is invalid" (impossible via thindx?)
-    /// *   Ok(())
-    fn get_creation_parameters(&self) -> Result<D3DDEVICE_CREATION_PARAMETERS, MethodError> {
-        let mut dcp = unsafe { std::mem::zeroed::<D3DDEVICE_CREATION_PARAMETERS>() };
-        let hr = unsafe { self.as_winapi().GetCreationParameters(&mut dcp) };
+    /// *   ~~[D3DERR::INVALIDCALL]~~   "If the returned argument is invalid" (impossible via thindx?)
+    /// *   Ok([d3d::DeviceCreationParameters])
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_pure();
+    /// let params = device.get_creation_parameters().unwrap();
+    /// assert_eq!(params.device_type, DevType::HAL);
+    /// dbg!(params);
+    /// ```
+    ///
+    /// ### Output
+    /// ```text
+    /// params = DevieCreationParameters {
+    ///     adapter_ordinal: 0,
+    ///     device_type: DevType::HAL,
+    ///     focus_window: 0x0000000000000000,
+    ///     behavior_flags: Create::{FpuPreserve | PureDevice | HardwareVertexProcessing | NoWindowChanges},
+    /// }
+    /// ```
+    fn get_creation_parameters(&self) -> Result<DeviceCreationParameters, MethodError> {
+        let mut dcp = DeviceCreationParameters::zeroed();
+        let hr = unsafe { self.as_winapi().GetCreationParameters(&mut *dcp) };
         MethodError::check("IDirect3DDevice9::GetCreationParameters", hr)?;
         Ok(dcp)
     }
@@ -3429,9 +3447,9 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// # ].iter().copied() {
     /// # let device = device_test_pp(false, |_,c| *c = create).unwrap();
     /// let params = device.get_creation_parameters().unwrap();
-    /// let device_is_software = params.BehaviorFlags & Create::SoftwareVertexProcessing.into() == Create::SoftwareVertexProcessing.into();
-    /// let device_is_mixed    = params.BehaviorFlags & Create::MixedVertexProcessing   .into() == Create::MixedVertexProcessing   .into();
-    /// let device_is_hardware = params.BehaviorFlags & Create::HardwareVertexProcessing.into() == Create::HardwareVertexProcessing.into();
+    /// let device_is_software = params.behavior_flags.into() & Create::SoftwareVertexProcessing.into() == Create::SoftwareVertexProcessing.into();
+    /// let device_is_mixed    = params.behavior_flags.into() & Create::MixedVertexProcessing   .into() == Create::MixedVertexProcessing   .into();
+    /// let device_is_hardware = params.behavior_flags.into() & Create::HardwareVertexProcessing.into() == Create::HardwareVertexProcessing.into();
     ///
     /// let r = device.set_software_vertex_processing(true);
     /// assert_eq!(r.is_ok(), device_is_software || device_is_mixed);

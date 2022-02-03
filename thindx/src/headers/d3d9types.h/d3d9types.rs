@@ -68,6 +68,7 @@ mods! {
         inl mod box_;
         inl mod clip_status;
         inl mod color_value;
+        inl mod device_creation_parameters;
         inl mod display_mode_ex;
         inl mod display_mode;
         inl mod index_buffer_desc;
