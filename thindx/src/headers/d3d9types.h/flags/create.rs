@@ -1,5 +1,5 @@
 #[allow(unused_imports)] use crate::*;
-
+use bytemuck::*;
 use winapi::shared::d3d9::*;
 type D3DCREATE = u32; // there's no actual type
 
@@ -14,7 +14,8 @@ use std::ops::*;
 /// DWORD / D3DCREATE_*
 ///
 /// Controls how [IDirect3D9Ext::create_device] behaves.
-#[derive(Clone, Copy, Default, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Default, Pod, Zeroable)]
 #[repr(transparent)] pub struct Create(D3DCREATE);
 
 impl Create {
@@ -171,6 +172,7 @@ impl From<D3DCREATE> for Create {
 }
 
 //#cpp2rust D3DCREATE                               = d3d::Create
+
 //#cpp2rust D3DCREATE_FPU_PRESERVE                  = d3d::Create::FpuPreserve
 //#cpp2rust D3DCREATE_MULTITHREADED                 = d3d::Create::MultiThreaded
 //#cpp2rust D3DCREATE_PUREDEVICE                    = d3d::Create::PureDevice

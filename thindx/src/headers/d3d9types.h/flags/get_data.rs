@@ -1,5 +1,5 @@
 #[allow(unused_imports)] use crate::*;
-
+use bytemuck::*;
 use winapi::shared::d3d9types::*;
 type D3DGETDATA = u32; // there's no actual type
 
@@ -10,6 +10,7 @@ type D3DGETDATA = u32; // there's no actual type
 ///
 /// Controls how [IDirect3DQuery9Ext::get_data_inplace] behaves.
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct GetData(D3DGETDATA);
 
 flags! { GetData => D3DGETDATA; None, Flush }

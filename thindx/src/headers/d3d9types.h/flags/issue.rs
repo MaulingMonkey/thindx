@@ -1,5 +1,5 @@
 #[allow(unused_imports)] use crate::*;
-
+use bytemuck::*;
 use winapi::shared::d3d9types::*;
 type D3DISSUE = u32; // there's no actual type
 
@@ -10,6 +10,7 @@ type D3DISSUE = u32; // there's no actual type
 ///
 /// Controls how [IDirect3DQuery9Ext::issue] behaves.
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct Issue(D3DISSUE);
 
 flags! { Issue => D3DISSUE; None, Begin, End }
