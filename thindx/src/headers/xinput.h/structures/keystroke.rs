@@ -26,7 +26,8 @@ use bytemuck::{Pod, Zeroable};
     pub hid_code:       u8,
 }
 
-test_layout! {
+struct_mapping! {
+    #[derive(unsafe { AsRef, AsMut, FromInto })]
     Keystroke => winapi::um::xinput::XINPUT_KEYSTROKE {
         virtual_key     => VirtualKey,
         unicode         => Unicode,

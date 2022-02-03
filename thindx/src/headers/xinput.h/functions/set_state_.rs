@@ -19,7 +19,7 @@ pub fn set_state(user_index: impl Into<u32>, mut vibration: Vibration) -> Result
     //  * tested        in `d3d9-02-xinput.rs`
     //  * `user_index`  is well tested
     //  * `vibration`   is never null, fixed size, no `cbSize` field, all bit patterns are valid and reasonable
-    let code = unsafe { XInputSetState(user_index.into(), &mut vibration as *mut _ as *mut _) };
+    let code = unsafe { XInputSetState(user_index.into(), vibration.as_mut()) };
     check_error_success("XInputSetState", code)
 }
 

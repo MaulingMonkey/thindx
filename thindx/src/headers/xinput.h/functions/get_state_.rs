@@ -22,7 +22,7 @@ pub fn get_state(user_index: impl Into<u32>) -> Result<State, MethodError> {
     //  * tested        in `examples/d3d9-02-xinput.rs`
     //  * `user_index`  is well tested
     //  * `state`       is out-only, fixed size, no `cbSize` field, never null, all bit patterns sane
-    let code = unsafe { XInputGetState(user_index.into(), &mut state as *mut _ as *mut _) };
+    let code = unsafe { XInputGetState(user_index.into(), state.as_mut()) };
     check_error_success("XInputGetState", code)?;
     Ok(state)
 }

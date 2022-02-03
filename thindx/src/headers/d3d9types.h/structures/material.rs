@@ -2,8 +2,6 @@ use crate::d3d9::*;
 
 use winapi::shared::d3d9types::*;
 
-use std::ops::{Deref, DerefMut};
-
 
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dmaterial9)\]
@@ -32,11 +30,15 @@ use std::ops::{Deref, DerefMut};
     pub power:      f32,
 }
 
-impl Deref    for Material { fn deref    (&    self) -> &    Self::Target { unsafe { std::mem::transmute(self) } } type Target = D3DMATERIAL9; }
-impl DerefMut for Material { fn deref_mut(&mut self) -> &mut Self::Target { unsafe { std::mem::transmute(self) } } }
-impl From<D3DMATERIAL9> for Material { fn from(value: D3DMATERIAL9) -> Self { unsafe { std::mem::transmute(value) } } }
-impl From<Material> for D3DMATERIAL9 { fn from(value: Material    ) -> Self { unsafe { std::mem::transmute(value) } } }
-
-test_layout! { Material => D3DMATERIAL9 { diffuse => Diffuse, ambient => Ambient, specular => Specular, emissive => Emissive, power => Power } }
+struct_mapping! {
+    #[derive(unsafe { AsRef, AsMut, Deref, DerefMut, FromInto })]
+    Material => D3DMATERIAL9 {
+        diffuse     => Diffuse,
+        ambient     => Ambient,
+        specular    => Specular,
+        emissive    => Emissive,
+        power       => Power
+    }
+}
 
 //#cpp2rust D3DMATERIAL9 = d3d9::Material

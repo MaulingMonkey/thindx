@@ -95,40 +95,47 @@ impl FunctionDesc<'_> {
     }
 }
 
-test_layout! { FunctionDesc => D3D11_FUNCTION_DESC {
-    version                         => Version,
-    creator                         => Creator,
-    flags                           => Flags,
-    constant_buffers                => ConstantBuffers,
-    bound_resources                 => BoundResources,
-    instruction_count               => InstructionCount,
-    temp_register_count             => TempRegisterCount,
-    temp_array_count                => TempArrayCount,
-    def_count                       => DefCount,
-    dcl_count                       => DclCount,
-    texture_normal_instructions     => TextureNormalInstructions,
-    texture_load_instructions       => TextureLoadInstructions,
-    texture_comp_instructions       => TextureCompInstructions,
-    texture_bias_instructions       => TextureBiasInstructions,
-    texture_gradient_instructions   => TextureGradientInstructions,
-    float_instruction_count         => FloatInstructionCount,
-    int_instruction_count           => IntInstructionCount,
-    uint_instruction_count          => UintInstructionCount,
-    static_flow_control_count       => StaticFlowControlCount,
-    dynamic_flow_control_count      => DynamicFlowControlCount,
-    macro_instruction_count         => MacroInstructionCount,
-    array_instruction_count         => ArrayInstructionCount,
-    mov_instruction_count           => MovInstructionCount,
-    movc_instruction_count          => MovcInstructionCount,
-    conversion_instruction_count    => ConversionInstructionCount,
-    bitwise_instruction_count       => BitwiseInstructionCount,
-    min_feature_level               => MinFeatureLevel,
-    required_feature_flags          => RequiredFeatureFlags,
-    name                            => Name,
-    function_parameter_count        => FunctionParameterCount,
-    has_return                      => HasReturn,
-    has_10_level_9_vertex_shader    => Has10Level9VertexShader,
-    has_10_level_9_pixel_shader     => Has10Level9PixelShader,
-}}
+struct_mapping! {
+    #[derive(unsafe { AsRefD3D, IntoD3D })]
+    // forbidden: AsRef     (could invalidate `creator` & `name`)
+    // forbidden: AsMut     (could invalidate `creator` & `name`)
+    // forbidden: DerefMut  (could invalidate `creator` & `name`)
+    // forbidden: FromD3D   (could invalidate `creator` & `name`)
+    FunctionDesc<'_> => D3D11_FUNCTION_DESC {
+        version                         => Version,
+        creator                         => Creator,
+        flags                           => Flags,
+        constant_buffers                => ConstantBuffers,
+        bound_resources                 => BoundResources,
+        instruction_count               => InstructionCount,
+        temp_register_count             => TempRegisterCount,
+        temp_array_count                => TempArrayCount,
+        def_count                       => DefCount,
+        dcl_count                       => DclCount,
+        texture_normal_instructions     => TextureNormalInstructions,
+        texture_load_instructions       => TextureLoadInstructions,
+        texture_comp_instructions       => TextureCompInstructions,
+        texture_bias_instructions       => TextureBiasInstructions,
+        texture_gradient_instructions   => TextureGradientInstructions,
+        float_instruction_count         => FloatInstructionCount,
+        int_instruction_count           => IntInstructionCount,
+        uint_instruction_count          => UintInstructionCount,
+        static_flow_control_count       => StaticFlowControlCount,
+        dynamic_flow_control_count      => DynamicFlowControlCount,
+        macro_instruction_count         => MacroInstructionCount,
+        array_instruction_count         => ArrayInstructionCount,
+        mov_instruction_count           => MovInstructionCount,
+        movc_instruction_count          => MovcInstructionCount,
+        conversion_instruction_count    => ConversionInstructionCount,
+        bitwise_instruction_count       => BitwiseInstructionCount,
+        min_feature_level               => MinFeatureLevel,
+        required_feature_flags          => RequiredFeatureFlags,
+        name                            => Name,
+        function_parameter_count        => FunctionParameterCount,
+        has_return                      => HasReturn,
+        has_10_level_9_vertex_shader    => Has10Level9VertexShader,
+        has_10_level_9_pixel_shader     => Has10Level9PixelShader,
+    }
+}
 
 //#cpp2rust D3D11_FUNCTION_DESC     = d3d11::FunctionDesc

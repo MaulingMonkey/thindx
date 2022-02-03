@@ -18,7 +18,8 @@ use bytemuck::{Pod, Zeroable};
     pub battery_level:  BatteryLevel,
 }
 
-test_layout! {
+struct_mapping! {
+    #[derive(unsafe { AsRef, AsMut, FromInto })]
     BatteryInformation => winapi::um::xinput::XINPUT_BATTERY_INFORMATION {
         battery_type    => BatteryType,
         battery_level   => BatteryLevel,

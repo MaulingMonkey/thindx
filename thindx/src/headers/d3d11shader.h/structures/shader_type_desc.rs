@@ -30,15 +30,22 @@ impl ShaderTypeDesc<'_> {
     }
 }
 
-test_layout! { ShaderTypeDesc => D3D11_SHADER_TYPE_DESC {
-    class       => Class,
-    ty          => Type,
-    rows        => Rows,
-    columns     => Columns,
-    elements    => Elements,
-    members     => Members,
-    offset      => Offset,
-    name        => Name,
-}}
+struct_mapping! {
+    #[derive(unsafe { AsRefD3D, IntoD3D })]
+    // forbidden: AsRef     (could invalidate `name`)
+    // forbidden: AsMut     (could invalidate `name`)
+    // forbidden: DerefMut  (could invalidate `name`)
+    // forbidden: FromD3D   (could invalidate `name`)
+    ShaderTypeDesc<'_> => D3D11_SHADER_TYPE_DESC {
+        class       => Class,
+        ty          => Type,
+        rows        => Rows,
+        columns     => Columns,
+        elements    => Elements,
+        members     => Members,
+        offset      => Offset,
+        name        => Name,
+    }
+}
 
 //#cpp2rust D3D11_SHADER_TYPE_DESC                  = d3d11::ShaderTypeDesc

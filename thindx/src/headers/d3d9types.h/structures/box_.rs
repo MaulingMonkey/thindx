@@ -13,27 +13,48 @@ use std::fmt::{self, Debug, Formatter};
 /// Define a 3d volume with [u32]s: `{ left, top, right, bottom, front, back }`
 #[derive(Clone, Copy, Default)]
 #[repr(C)] pub struct Box {
+    /// min X
     pub left:   u32,
+
+    /// min Y
     pub top:    u32,
+
+    /// max X
     pub right:  u32,
+
+    /// max Y
     pub bottom: u32,
+
+    /// min Z
     pub front:  u32,
+
+    /// max Z
     pub back:   u32,
 }
 
-test_layout! { Box => D3DBOX { left => Left, top => Top, right => Right, bottom => Bottom, front => Front, back => Back } }
-
-impl Deref    for Box { fn deref    (&    self) -> &    Self::Target { unsafe { std::mem::transmute(self) } } type Target = D3DBOX; }
-impl DerefMut for Box { fn deref_mut(&mut self) -> &mut Self::Target { unsafe { std::mem::transmute(self) } } }
-impl From<D3DBOX> for Box { fn from(value: D3DBOX) -> Self { unsafe { std::mem::transmute(value) } } }
-impl From<Box> for D3DBOX { fn from(value: Box   ) -> Self { unsafe { std::mem::transmute(value) } } }
+struct_mapping! {
+    #[derive(unsafe { AsRef, AsMut, Deref, DerefMut, FromInto })]
+    Box => D3DBOX {
+        left    => Left,
+        top     => Top,
+        right   => Right,
+        bottom  => Bottom,
+        front   => Front,
+        back    => Back
+    }
+}
 
 impl Box {
     pub fn from(value: impl Into<Self>) -> Self { value.into() }
     pub fn into<C: From<Self>>(self) -> C { C::from(self) }
 
+    /// right - left
     pub fn width    (&self) -> u32 { self.right - self.left }
+
+    /// bottom - top
     pub fn height   (&self) -> u32 { self.bottom - self.top }
+
+    /// back - front
     pub fn depth    (&self) -> u32 { self.back - self.front }
 }
 
@@ -100,4 +121,3 @@ impl From<Range<[u32; 3]>> for Box {
 }
 
 //#cpp2rust D3DBOX  = d3d::Box
-//#cpp2rust BOX     = d3d::Box

@@ -6,7 +6,6 @@ use winapi::shared::d3d9types::*;
 use winapi::shared::minwindef::DWORD;
 
 use std::fmt::Debug;
-use std::ops::*;
 
 
 
@@ -48,16 +47,8 @@ impl ClipStatus {
     pub const fn into(self) -> D3DCLIPSTATUS9 { unsafe { std::mem::transmute(self) } }
 }
 
-impl Deref    for ClipStatus { fn deref    (&    self) -> &    Self::Target { unsafe { std::mem::transmute(self) } } type Target = D3DCLIPSTATUS9; }
-impl DerefMut for ClipStatus { fn deref_mut(&mut self) -> &mut Self::Target { unsafe { std::mem::transmute(self) } } }
-impl AsRef<D3DCLIPSTATUS9> for ClipStatus { fn as_ref(&    self) -> &    D3DCLIPSTATUS9 { unsafe { std::mem::transmute(self) } } }
-impl AsMut<D3DCLIPSTATUS9> for ClipStatus { fn as_mut(&mut self) -> &mut D3DCLIPSTATUS9 { unsafe { std::mem::transmute(self) } } }
-impl AsRef<ClipStatus> for D3DCLIPSTATUS9 { fn as_ref(&    self) -> &    ClipStatus     { unsafe { std::mem::transmute(self) } } }
-impl AsMut<ClipStatus> for D3DCLIPSTATUS9 { fn as_mut(&mut self) -> &mut ClipStatus     { unsafe { std::mem::transmute(self) } } }
-impl From<ClipStatus> for D3DCLIPSTATUS9 { fn from(value: ClipStatus    ) -> Self { unsafe { std::mem::transmute(value) } } }
-impl From<D3DCLIPSTATUS9> for ClipStatus { fn from(value: D3DCLIPSTATUS9) -> Self { unsafe { std::mem::transmute(value) } } }
-
-test_layout! {
+struct_mapping! {
+    #[derive(unsafe { AsRef, AsMut, Deref, DerefMut, FromInto })]
     ClipStatus => D3DCLIPSTATUS9 {
         clip_union          => ClipUnion,
         clip_intersection   => ClipIntersection,

@@ -5,8 +5,6 @@ use bytemuck::*;
 use winapi::shared::d3d9types::*;
 use winapi::shared::windef::HWND;
 
-use std::ops::{Deref, DerefMut};
-
 
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddevice-creation-parameters)\]
@@ -40,11 +38,14 @@ use std::ops::{Deref, DerefMut};
     pub behavior_flags:     Create,
 }
 
-test_layout! { DeviceCreationParameters => D3DDEVICE_CREATION_PARAMETERS { adapter_ordinal => AdapterOrdinal, device_type => DeviceType, focus_window => hFocusWindow, behavior_flags => BehaviorFlags } }
-
-impl Deref    for DeviceCreationParameters { fn deref    (&    self) -> &    Self::Target { unsafe { std::mem::transmute(self) } } type Target = D3DDEVICE_CREATION_PARAMETERS; }
-impl DerefMut for DeviceCreationParameters { fn deref_mut(&mut self) -> &mut Self::Target { unsafe { std::mem::transmute(self) } } }
-impl From<D3DDEVICE_CREATION_PARAMETERS> for DeviceCreationParameters { fn from(value: D3DDEVICE_CREATION_PARAMETERS) -> Self { unsafe { std::mem::transmute(value) } } }
-impl From<DeviceCreationParameters> for D3DDEVICE_CREATION_PARAMETERS { fn from(value: DeviceCreationParameters   ) -> Self { unsafe { std::mem::transmute(value) } } }
+struct_mapping! {
+    #[derive(unsafe { AsRef, AsMut, Deref, DerefMut, FromInto })]
+    DeviceCreationParameters => D3DDEVICE_CREATION_PARAMETERS {
+        adapter_ordinal => AdapterOrdinal,
+        device_type     => DeviceType,
+        focus_window    => hFocusWindow,
+        behavior_flags  => BehaviorFlags
+    }
+}
 
 //#cpp2rust D3DDEVICE_CREATION_PARAMETERS = d3d::DeviceCreationParameters

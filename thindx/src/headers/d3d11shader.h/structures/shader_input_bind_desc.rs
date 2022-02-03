@@ -33,15 +33,22 @@ impl ShaderInputBindDesc<'_> {
     }
 }
 
-test_layout! { ShaderInputBindDesc => D3D11_SHADER_INPUT_BIND_DESC {
-    name            => Name,
-    ty              => Type,
-    bind_point      => BindPoint,
-    bind_count      => BindCount,
-    flags           => uFlags,
-    return_type     => ReturnType,
-    dimension       => Dimension,
-    num_samples     => NumSamples,
-}}
+struct_mapping! {
+    #[derive(unsafe { AsRefD3D, IntoD3D })]
+    // forbidden: AsRef     (could invalidate `name`)
+    // forbidden: AsMut     (could invalidate `name`)
+    // forbidden: DerefMut  (could invalidate `name`)
+    // forbidden: FromD3D   (could invalidate `name`)
+    ShaderInputBindDesc<'_> => D3D11_SHADER_INPUT_BIND_DESC {
+        name            => Name,
+        ty              => Type,
+        bind_point      => BindPoint,
+        bind_count      => BindCount,
+        flags           => uFlags,
+        return_type     => ReturnType,
+        dimension       => Dimension,
+        num_samples     => NumSamples,
+    }
+}
 
 //#cpp2rust D3D11_SHADER_INPUT_BIND_DESC            = d3d11::ShaderInputBindDesc

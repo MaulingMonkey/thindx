@@ -75,6 +75,8 @@ impl Default            for Guid { fn default() -> Self { Self::zeroed() } }
 impl Debug              for Guid { fn fmt(&self, fmt: &mut Formatter) -> fmt::Result { self.fmt_impl(fmt) } }
 impl Display            for Guid { fn fmt(&self, fmt: &mut Formatter) -> fmt::Result { self.fmt_impl(fmt) } }
 
+impl AsRef<GUID> for Guid { fn as_ref(&    self) -> &    GUID { &    self.0 } }
+impl AsMut<GUID> for Guid { fn as_mut(&mut self) -> &mut GUID { &mut self.0 } }
 impl From<GUID> for Guid { fn from(guid: GUID) -> Self { Self(guid) } }
 impl From<Guid> for GUID { fn from(guid: Guid) -> Self { guid.0 } }
 

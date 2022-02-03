@@ -110,15 +110,16 @@ impl Gamepad {
     pub const RIGHT_THUMB_DEADZONE : i16 = XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE;
 }
 
-test_layout_only! {
+struct_mapping! {
+    #[derive(unsafe { AsRef, AsMut, FromInto })]
     Gamepad => winapi::um::xinput::XINPUT_GAMEPAD {
         buttons         => wButtons,
         left_trigger    => bLeftTrigger,
         right_trigger   => bRightTrigger,
-        left_thumb_x    => sThumbLX,
-        left_thumb_y    => sThumbLY,
-        right_thumb_x   => sThumbRX,
-        right_thumb_y   => sThumbRY,
+        #[renamed] left_thumb_x    => sThumbLX,
+        #[renamed] left_thumb_y    => sThumbLY,
+        #[renamed] right_thumb_x   => sThumbRX,
+        #[renamed] right_thumb_y   => sThumbRY,
     }
 }
 
@@ -130,6 +131,7 @@ test_layout_only! {
 }
 
 //#cpp2rust XINPUT_GAMEPAD                      = xinput::Gamepad
+
 //#cpp2rust XINPUT_GAMEPAD_TRIGGER_THRESHOLD    = xinput::Gamepad::TRIGGER_THRESHOLD
 //#cpp2rust XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE  = xinput::Gamepad::LEFT_THUMB_DEADZONE
 //#cpp2rust XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE = xinput::Gamepad::RIGHT_THUMB_DEADZONE

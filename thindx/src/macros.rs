@@ -1,77 +1,111 @@
-#[cfg(not(test))] macro_rules! test_layout_only { ( $($tt:tt)* ) => {} }
-/// ### Usage
-/// ```no_run
-/// test_layout_only! {
-///     RustyStruct => D3D_STRUCT {
-///         rusty_field_a => CppFieldA,
-///         rusty_field_b => CppFieldB,
-///     }
-/// }
-/// ```
-#[cfg(    test )] macro_rules! test_layout_only {
-    (
-        $thin:ty => $d3d:ty {
-            $( $thin_field:ident => $d3d_field:ident ),*
-            $(,)?
-        }
-    ) => {
-        #[test] fn layout() {
-            use std::mem::*;
-            use std::ptr::addr_of;
-            use $crate::macros::*;
-            let thin = MaybeUninit::<$thin>::uninit();
-            let d3d  = MaybeUninit::<$d3d >::uninit();
-            let thin = thin.as_ptr();
-            let d3d  = d3d .as_ptr();
-            assert_eq!( size_of::<$thin>(),  size_of::<$d3d>(),  "size_of {} != {}", stringify!($thin), stringify!($d3d));
-            assert_eq!(align_of::<$thin>(), align_of::<$d3d>(), "align_of {} != {}", stringify!($thin), stringify!($d3d));
-            assert!(stringify!($d3d).to_lowercase().replace("_","").contains(stringify!($thin).to_lowercase().as_str()), "{} not included in {}'s name", stringify!($thin), stringify!($d3d));
-            $(unsafe {
-                assert_eq!(size_of_val_raw_sized(addr_of!((*thin).$thin_field)), size_of_val_raw_sized(addr_of!((*d3d).$d3d_field)),   "size_of {}::{} != {}::{}", stringify!($thin), stringify!($thin_field), stringify!($d3d), stringify!($d3d_field));
-                assert_eq!(      offset_of(thin, addr_of!((*thin).$thin_field)),        offset_of(d3d, addr_of!((*d3d).$d3d_field)), "offset_of {}::{} != {}::{}", stringify!($thin), stringify!($thin_field), stringify!($d3d), stringify!($d3d_field));
-            })*
-        }
-    };
-}
+#![cfg_attr(not(test), allow(unused_macros))]
 
-#[cfg(not(test))] macro_rules! test_layout { ( $($tt:tt)* ) => {} }
 /// ### Usage
 /// ```no_run
-/// test_layout! {
+/// struct_mapping! {
 ///     RustyStruct => D3D_STRUCT {
 ///         rusty_field_a => CppFieldA,
 ///         rusty_field_b => CppFieldB,
 ///     }
 /// }
 /// ```
-#[cfg(    test )] macro_rules! test_layout {
+macro_rules! struct_mapping {
     ($(
-        $thin:ty => $d3d:ty {
-            $( $thin_field:ident => $d3d_field:ident ),*
+        $(#[$($meta_struct:tt)*])*
+        $thin_struct:ty => $d3d_struct:ty {
+            $( $(#[$($meta_field:tt)*])* $thin_field:ident => $d3d_field:ident ),*
             $(,)?
         }
     )*) => {
+        $(
+            struct_mapping! {
+                @derive_from_meta
+                $(#[$($meta_struct)*])*
+                $thin_struct => $d3d_struct
+            }
+        )*
+
         #[test] fn layout() {
             use std::mem::*;
             use std::ptr::addr_of;
             use $crate::macros::*;
 
             $(
-                let thin = MaybeUninit::<$thin>::uninit();
-                let d3d  = MaybeUninit::<$d3d >::uninit();
+                $(  struct_mapping!(@meta_struct_validate $($meta_struct)* );)*
+                $($(struct_mapping!(@meta_field_validate  $($meta_field)* );)*)*
+
+
+                let thin = MaybeUninit::<$thin_struct>::uninit();
+                let d3d  = MaybeUninit::<$d3d_struct >::uninit();
                 let thin = thin.as_ptr();
                 let d3d  = d3d .as_ptr();
-                assert_eq!( size_of::<$thin>(),  size_of::<$d3d>(),  "size_of {} != {}", stringify!($thin), stringify!($d3d));
-                assert_eq!(align_of::<$thin>(), align_of::<$d3d>(), "align_of {} != {}", stringify!($thin), stringify!($d3d));
-                assert!(stringify!($d3d).to_lowercase().replace("_","").contains(stringify!($thin).to_lowercase().as_str()), "{} not included in {}'s name", stringify!($thin), stringify!($d3d));
+
+                assert_eq!( size_of::<$thin_struct>(),  size_of::<$d3d_struct>(),  "size_of {} != {}", stringify!($thin_struct), stringify!($d3d_struct));
+                assert_eq!(align_of::<$thin_struct>(), align_of::<$d3d_struct>(), "align_of {} != {}", stringify!($thin_struct), stringify!($d3d_struct));
+
+                let same_name = {
+                    let d3d = stringify!($d3d_struct).to_lowercase().replace("_","");
+                    let thin = stringify!($thin_struct).to_lowercase();
+                    let thin = thin.strip_suffix("<'_>").unwrap_or(thin.as_str());
+                    d3d.contains(thin)
+                };
+
+                let expect_renamed = struct_mapping!(@meta_renamed $($($meta_struct)*)*);
+                if expect_renamed {
+                    assert!(!same_name, "{} included in {}'s name, despite being marked as #[renamed]!", stringify!($thin_struct), stringify!($d3d_struct));
+                } else {
+                    assert!(same_name, "{} not included in {}'s name, nor marked as #[renamed]", stringify!($thin_struct), stringify!($d3d_struct));
+                }
+
                 $(unsafe {
-                    assert_eq!(size_of_val_raw_sized(addr_of!((*thin).$thin_field)), size_of_val_raw_sized(addr_of!((*d3d).$d3d_field)),   "size_of {}::{} != {}::{}", stringify!($thin), stringify!($thin_field), stringify!($d3d), stringify!($d3d_field));
-                    assert_eq!(      offset_of(thin, addr_of!((*thin).$thin_field)),        offset_of(d3d, addr_of!((*d3d).$d3d_field)), "offset_of {}::{} != {}::{}", stringify!($thin), stringify!($thin_field), stringify!($d3d), stringify!($d3d_field));
-                    assert!(stringify!($d3d_field).to_lowercase().replace("_","").contains(stringify!($thin_field).strip_prefix("r#").unwrap_or(stringify!($thin_field)).to_lowercase().replace("_","").as_str()), "{} not included in {}'s name", stringify!($thin_field), stringify!($d3d_field));
+                    assert_eq!(size_of_val_raw_sized(addr_of!((*thin).$thin_field)), size_of_val_raw_sized(addr_of!((*d3d).$d3d_field)),   "size_of {}::{} != {}::{}", stringify!($thin_struct), stringify!($thin_field), stringify!($d3d_struct), stringify!($d3d_field));
+                    assert_eq!(      offset_of(thin, addr_of!((*thin).$thin_field)),        offset_of(d3d, addr_of!((*d3d).$d3d_field)), "offset_of {}::{} != {}::{}", stringify!($thin_struct), stringify!($thin_field), stringify!($d3d_struct), stringify!($d3d_field));
+
+                    let same_name = stringify!($d3d_field).to_lowercase().replace("_","").contains(stringify!($thin_field).strip_prefix("r#").unwrap_or(stringify!($thin_field)).to_lowercase().replace("_","").as_str());
+                    let expect_renamed = struct_mapping!(@meta_renamed $($($meta_field)*)*);
+                    if expect_renamed {
+                        assert!(!same_name, "{} included in {}'s name, despite being marked as #[renamed]!", stringify!($thin_field), stringify!($d3d_field));
+                    } else {
+                        assert!(same_name, "{} not included in {}'s name, nor marked as #[renamed]", stringify!($thin_field), stringify!($d3d_field));
+                    }
                 })*
             )*
         }
     };
+
+    (@meta_struct_validate                      ) => {};
+    (@meta_struct_validate renamed              ) => {};
+    (@meta_struct_validate derive($($d:tt)*)    ) => {};
+    (@meta_struct_validate $meta:meta           ) => { panic!("unexpected struct attribute: #[{}]", stringify!($meta)); };
+
+    (@meta_field_validate)            => {};
+    (@meta_field_validate renamed   ) => {};
+    (@meta_field_validate $meta:meta) => { panic!("unexpected field attribute: #[{}]", stringify!($meta)); };
+
+    (@meta_renamed)                       => { false };
+    (@meta_renamed renamed    $($tt:tt)*) => { true };
+    (@meta_renamed $meta:meta $($tt:tt)*) => { struct_mapping!(@meta_renamed $($tt)*) };
+
+    (@derive_from_meta                                                          $thin_struct:ty => $d3d_struct:ty) => {};
+    (@derive_from_meta #[derive(unsafe { $($d:ident),+$(,)? })] $(#[$($next:tt)+])* $thin_struct:ty => $d3d_struct:ty) => { $( struct_mapping! { @derive unsafe $d $thin_struct => $d3d_struct } )+ struct_mapping! { @derive_from_meta $(#[$($next)+])* $thin_struct => $d3d_struct } };
+    (@derive_from_meta #[$($ignore:tt)*]                        $(#[$($next:tt)+])* $thin_struct:ty => $d3d_struct:ty) => { struct_mapping! { @derive_from_meta $(#[$($next)+])* $thin_struct => $d3d_struct } };
+
+    (@derive unsafe AsRefD3D $thin_struct:ty => $d3d_struct:ty) => {    impl AsRef<$d3d_struct> for $thin_struct { fn as_ref(&    self)         -> &    $d3d_struct     { unsafe { std::mem::transmute(self) } } } };
+    (@derive unsafe AsMutD3D $thin_struct:ty => $d3d_struct:ty) => {    impl AsMut<$d3d_struct> for $thin_struct { fn as_mut(&mut self)         -> &mut $d3d_struct     { unsafe { std::mem::transmute(self) } } } }; // XXX: Pointless?
+    (@derive unsafe AsRef    $thin_struct:ty => $d3d_struct:ty) => {    impl AsRef<$thin_struct> for $d3d_struct { fn as_ref(&self)             -> &$thin_struct        { unsafe { std::mem::transmute(self) } } }
+                                                                        impl AsRef<$d3d_struct> for $thin_struct { fn as_ref(&self)             -> &$d3d_struct         { unsafe { std::mem::transmute(self) } } } }; // XXX: Footgun?
+    (@derive unsafe AsMut    $thin_struct:ty => $d3d_struct:ty) => {    impl AsMut<$thin_struct> for $d3d_struct { fn as_mut(&mut self)         -> &mut $thin_struct    { unsafe { std::mem::transmute(self) } } }
+                                                                        impl AsMut<$d3d_struct> for $thin_struct { fn as_mut(&mut self)         -> &mut $d3d_struct     { unsafe { std::mem::transmute(self) } } } };
+    (@derive unsafe Deref    $thin_struct:ty => $d3d_struct:ty) => {    impl std::ops::Deref    for $thin_struct { fn deref(&self)              -> &Self::Target        { unsafe { std::mem::transmute(self) } } type Target = $d3d_struct; } };
+    (@derive unsafe DerefMut $thin_struct:ty => $d3d_struct:ty) => {    impl std::ops::DerefMut for $thin_struct { fn deref_mut(&mut self)      -> &mut Self::Target    { unsafe { std::mem::transmute(self) } } } };
+    (@derive unsafe FromD3D  $thin_struct:ty => $d3d_struct:ty) => {    impl From<$d3d_struct>  for $thin_struct { fn from(value: $d3d_struct)  -> Self                 { unsafe { std::mem::transmute(value) } } } };
+    (@derive unsafe IntoD3D  $thin_struct:ty => $d3d_struct:ty) => {    impl From<$thin_struct> for $d3d_struct  { fn from(value: $thin_struct) -> Self                 { unsafe { std::mem::transmute(value) } } } };
+    (@derive unsafe FromInto $thin_struct:ty => $d3d_struct:ty) => {
+        struct_mapping! { @derive unsafe FromD3D $thin_struct => $d3d_struct }
+        struct_mapping! { @derive unsafe IntoD3D $thin_struct => $d3d_struct }
+    };
+
+    // AsPtr?  AsPtrMut?
 }
 
 // XXX: Unlike the pending nightly fn, this acquires safety by sacrificing `?Sized` support.

@@ -26,7 +26,8 @@ use bytemuck::{Pod, Zeroable};
     pub right_motor_speed:  u16,
 }
 
-test_layout! {
+struct_mapping! {
+    #[derive(unsafe { AsRef, AsMut, FromInto })]
     Vibration => winapi::um::xinput::XINPUT_VIBRATION {
         left_motor_speed    => wLeftMotorSpeed,
         right_motor_speed   => wRightMotorSpeed,

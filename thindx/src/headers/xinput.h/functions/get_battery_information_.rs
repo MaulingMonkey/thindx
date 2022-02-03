@@ -25,7 +25,7 @@ pub fn get_battery_information(user_index: impl Into<u32>, dev_type: impl Into<B
     //  * `user_index`  is well tested
     //  * `dev_type`    is decently tested (0, 1, 2 (OOB), 42, 255 all result in defined behavior)
     //  * `info`        is out-only, no cbSize field, fixed size, sane
-    let code = unsafe { XInputGetBatteryInformation(user_index.into(), dev_type.into().into(), &mut info as *mut _ as *mut _) };
+    let code = unsafe { XInputGetBatteryInformation(user_index.into(), dev_type.into().into(), info.as_mut()) };
     check_error_success("XInputGetBatteryInformation", code)?;
     Ok(info)
 }

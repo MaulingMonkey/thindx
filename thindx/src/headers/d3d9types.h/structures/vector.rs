@@ -2,8 +2,6 @@ use bytemuck::*;
 
 use winapi::shared::d3d9types::*;
 
-use std::ops::{Deref, DerefMut};
-
 
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dvector)\]
@@ -18,11 +16,9 @@ use std::ops::{Deref, DerefMut};
     pub z: f32,
 }
 
-impl Deref    for Vector { fn deref    (&    self) -> &    Self::Target { unsafe { std::mem::transmute(self) } } type Target = D3DVECTOR; }
-impl DerefMut for Vector { fn deref_mut(&mut self) -> &mut Self::Target { unsafe { std::mem::transmute(self) } } }
-impl From<D3DVECTOR> for Vector { fn from(value: D3DVECTOR) -> Self { unsafe { std::mem::transmute(value) } } }
-impl From<Vector> for D3DVECTOR { fn from(value: Vector   ) -> Self { unsafe { std::mem::transmute(value) } } }
-
-test_layout! { Vector => D3DVECTOR { x => x, y => y, z => z } }
+struct_mapping! {
+    #[derive(unsafe { AsRef, AsMut, Deref, DerefMut, FromInto })]
+    Vector => D3DVECTOR { x => x, y => y, z => z }
+}
 
 //#cpp2rust D3DVECTOR = d3d::Vector

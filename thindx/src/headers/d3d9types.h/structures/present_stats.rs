@@ -1,7 +1,5 @@
 use winapi::shared::d3d9types::*;
 
-use std::ops::{Deref, DerefMut};
-
 
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dpresentstats)\]
@@ -31,11 +29,15 @@ use std::ops::{Deref, DerefMut};
     pub sync_gpu_time:          u64,
 }
 
-impl Deref    for PresentStats { fn deref    (&    self) -> &    Self::Target { unsafe { std::mem::transmute(self) } } type Target = D3DPRESENTSTATS; }
-impl DerefMut for PresentStats { fn deref_mut(&mut self) -> &mut Self::Target { unsafe { std::mem::transmute(self) } } }
-impl From<D3DPRESENTSTATS> for PresentStats { fn from(value: D3DPRESENTSTATS) -> Self { unsafe { std::mem::transmute(value) } } }
-impl From<PresentStats> for D3DPRESENTSTATS { fn from(value: PresentStats   ) -> Self { unsafe { std::mem::transmute(value) } } }
-
-test_layout! { PresentStats => D3DPRESENTSTATS { present_count => PresentCount, present_refresh_count => PresentRefreshCount, sync_refresh_count => SyncRefreshCount, sync_qpc_time => SyncQPCTime, sync_gpu_time => SyncGPUTime } }
+struct_mapping! {
+    #[derive(unsafe { AsRef, AsMut, Deref, DerefMut, FromInto })]
+    PresentStats => D3DPRESENTSTATS {
+        present_count           => PresentCount,
+        present_refresh_count   => PresentRefreshCount,
+        sync_refresh_count      => SyncRefreshCount,
+        sync_qpc_time           => SyncQPCTime,
+        sync_gpu_time           => SyncGPUTime
+    }
+}
 
 //#cpp2rust D3DPRESENTSTATS = d3d::PresentStats

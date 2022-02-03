@@ -5,7 +5,6 @@ use bytemuck::*;
 use winapi::shared::d3d9types::*;
 
 use std::mem::size_of;
-use std::ops::{Deref, DerefMut};
 
 
 
@@ -52,11 +51,16 @@ impl Default for DisplayModeEx {
     }
 }
 
-test_layout! { DisplayModeEx => D3DDISPLAYMODEEX { size => Size, width => Width, height => Height, refresh_rate => RefreshRate, format => Format, scanline_ordering => ScanLineOrdering } }
-
-impl Deref    for DisplayModeEx { fn deref    (&    self) -> &    Self::Target { unsafe { std::mem::transmute(self) } } type Target = D3DDISPLAYMODEEX; }
-impl DerefMut for DisplayModeEx { fn deref_mut(&mut self) -> &mut Self::Target { unsafe { std::mem::transmute(self) } } }
-impl From<D3DDISPLAYMODEEX> for DisplayModeEx { fn from(value: D3DDISPLAYMODEEX) -> Self { unsafe { std::mem::transmute(value) } } }
-impl From<DisplayModeEx> for D3DDISPLAYMODEEX { fn from(value: DisplayModeEx   ) -> Self { unsafe { std::mem::transmute(value) } } }
+struct_mapping! {
+    #[derive(unsafe { AsRef, AsMut, Deref, DerefMut, FromInto })]
+    DisplayModeEx => D3DDISPLAYMODEEX {
+        size                => Size,
+        width               => Width,
+        height              => Height,
+        refresh_rate        => RefreshRate,
+        format              => Format,
+        scanline_ordering   => ScanLineOrdering
+    }
+}
 
 //#cpp2rust D3DDISPLAYMODEEX = d3d::DisplayModeEx

@@ -2,8 +2,6 @@ use crate::d3d9::*;
 
 use winapi::shared::d3d9types::*;
 
-use std::ops::{Deref, DerefMut};
-
 
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dlight9)\]
@@ -105,12 +103,8 @@ use std::ops::{Deref, DerefMut};
     pub phi:            f32,
 }
 
-impl Deref    for Light { fn deref    (&    self) -> &    Self::Target { unsafe { std::mem::transmute(self) } } type Target = D3DLIGHT9; }
-impl DerefMut for Light { fn deref_mut(&mut self) -> &mut Self::Target { unsafe { std::mem::transmute(self) } } }
-impl From<D3DLIGHT9> for Light { fn from(value: D3DLIGHT9) -> Self { unsafe { std::mem::transmute(value) } } }
-impl From<Light> for D3DLIGHT9 { fn from(value: Light    ) -> Self { unsafe { std::mem::transmute(value) } } }
-
-test_layout! {
+struct_mapping! {
+    #[derive(unsafe { AsRef, AsMut, Deref, DerefMut, FromInto })]
     Light => D3DLIGHT9 {
         ty              => Type,
         diffuse         => Diffuse,

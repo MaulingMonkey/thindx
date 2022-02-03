@@ -29,7 +29,7 @@ pub fn get_dsound_audio_device_guids(user_index: impl Into<User>) -> Result<DSou
     //  * fuzzed        in `tests/fuzz-xinput.rs`
     //  * `user_index`  ❌ should be well tested
     //  * `*_guid`      are nice and fixed-size etc.
-    let code = unsafe { XInputGetDSoundAudioDeviceGuids(user_index.into().into(), &mut guids.dsound_render_guid as *mut _ as *mut _, &mut guids.dsound_capture_guid as *mut _ as *mut _) };
+    let code = unsafe { XInputGetDSoundAudioDeviceGuids(user_index.into().into(), guids.dsound_render_guid.as_mut(), guids.dsound_capture_guid.as_mut()) };
     check_error_success("XInputGetDSoundAudioDeviceGuids", code)?;
     Ok(guids)
 }

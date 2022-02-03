@@ -28,7 +28,8 @@ use bytemuck::{Pod, Zeroable};
     pub vibration:  Vibration,
 }
 
-test_layout! {
+struct_mapping! {
+    #[derive(unsafe { AsRef, AsMut, FromInto })]
     Capabilities => winapi::um::xinput::XINPUT_CAPABILITIES {
         ty          => Type,
         sub_type    => SubType,

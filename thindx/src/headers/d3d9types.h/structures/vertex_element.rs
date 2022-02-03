@@ -2,8 +2,6 @@ use crate::d3d9::*;
 
 use winapi::shared::d3d9types::*;
 
-use std::ops::{Deref, DerefMut};
-
 
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dvertexelement9)\]
@@ -44,12 +42,16 @@ impl VertexElement {
     }
 }
 
-impl Deref    for VertexElement { fn deref    (&    self) -> &    Self::Target { unsafe { std::mem::transmute(self) } } type Target = D3DVERTEXELEMENT9; }
-impl DerefMut for VertexElement { fn deref_mut(&mut self) -> &mut Self::Target { unsafe { std::mem::transmute(self) } } }
-impl From<D3DVERTEXELEMENT9> for VertexElement { fn from(value: D3DVERTEXELEMENT9) -> Self { unsafe { std::mem::transmute(value) } } }
-impl From<VertexElement> for D3DVERTEXELEMENT9 { fn from(value: VertexElement    ) -> Self { unsafe { std::mem::transmute(value) } } }
-
-test_layout! { VertexElement => D3DVERTEXELEMENT9 { stream => Stream, offset => Offset, ty => Type, method => Method, usage_index => UsageIndex } }
+struct_mapping! {
+    #[derive(unsafe { AsRef, AsMut, Deref, DerefMut, FromInto })]
+    VertexElement => D3DVERTEXELEMENT9 {
+        stream          => Stream,
+        offset          => Offset,
+        ty              => Type,
+        method          => Method,
+        usage_index     => UsageIndex,
+    }
+}
 
 //#cpp2rust D3DVERTEXELEMENT9   = d3d9::VertexElement
 //#cpp2rust D3DDECL_END         = d3d9::VertexElement::END

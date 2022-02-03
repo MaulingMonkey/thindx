@@ -27,12 +27,19 @@ impl ShaderBufferDesc<'_> {
     }
 }
 
-test_layout! { ShaderBufferDesc => D3D11_SHADER_BUFFER_DESC {
-    name                            => Name,
-    ty                              => Type,
-    variables                       => Variables,
-    size                            => Size,
-    flags                           => uFlags,
-}}
+struct_mapping! {
+    #[derive(unsafe { AsRefD3D, IntoD3D })]
+    // forbidden: AsRef     (could invalidate `name`)
+    // forbidden: AsMut     (could invalidate `name`)
+    // forbidden: DerefMut  (could invalidate `name`)
+    // forbidden: FromD3D   (could invalidate `name`)
+    ShaderBufferDesc<'_> => D3D11_SHADER_BUFFER_DESC {
+        name                            => Name,
+        ty                              => Type,
+        variables                       => Variables,
+        size                            => Size,
+        flags                           => uFlags,
+    }
+}
 
 //#cpp2rust D3D11_SHADER_BUFFER_DESC                = d3d11::ShaderBufferDesc

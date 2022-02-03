@@ -51,10 +51,17 @@ impl LibraryDesc<'_> {
     }
 }
 
-test_layout! { LibraryDesc => D3D11_LIBRARY_DESC {
-    creator         => Creator,
-    flags           => Flags,
-    function_count  => FunctionCount,
-}}
+struct_mapping! {
+    #[derive(unsafe { AsRefD3D, IntoD3D })]
+    // forbidden: AsRef     (could invalidate `creator`)
+    // forbidden: AsMut     (could invalidate `creator`)
+    // forbidden: DerefMut  (could invalidate `creator`)
+    // forbidden: FromD3D   (could invalidate `creator`)
+    LibraryDesc<'_> => D3D11_LIBRARY_DESC {
+        creator         => Creator,
+        flags           => Flags,
+        function_count  => FunctionCount,
+    }
+}
 
 //#cpp2rust D3D11_LIBRARY_DESC                      = d3d11::LibraryDesc

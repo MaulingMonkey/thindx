@@ -4,8 +4,6 @@ use bytemuck::*;
 
 use winapi::shared::d3d9types::*;
 
-use std::ops::{Deref, DerefMut};
-
 
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddisplaymode)\]
@@ -32,11 +30,14 @@ use std::ops::{Deref, DerefMut};
     pub format:         Format,
 }
 
-test_layout! { DisplayMode => D3DDISPLAYMODE { width => Width, height => Height, refresh_rate => RefreshRate, format => Format } }
-
-impl Deref    for DisplayMode { fn deref    (&    self) -> &    Self::Target { unsafe { std::mem::transmute(self) } } type Target = D3DDISPLAYMODE; }
-impl DerefMut for DisplayMode { fn deref_mut(&mut self) -> &mut Self::Target { unsafe { std::mem::transmute(self) } } }
-impl From<D3DDISPLAYMODE> for DisplayMode { fn from(value: D3DDISPLAYMODE) -> Self { unsafe { std::mem::transmute(value) } } }
-impl From<DisplayMode> for D3DDISPLAYMODE { fn from(value: DisplayMode   ) -> Self { unsafe { std::mem::transmute(value) } } }
+struct_mapping! {
+    #[derive(unsafe { AsRef, AsMut, Deref, DerefMut, FromInto })]
+    DisplayMode => D3DDISPLAYMODE {
+        width           => Width,
+        height          => Height,
+        refresh_rate    => RefreshRate,
+        format          => Format
+    }
+}
 
 //#cpp2rust D3DDISPLAYMODE = d3d::DisplayMode

@@ -50,16 +50,23 @@ impl ShaderVariableDesc<'_> {
     }
 }
 
-test_layout! { ShaderVariableDesc => D3D11_SHADER_VARIABLE_DESC {
-    name            => Name,
-    start_offset    => StartOffset,
-    size            => Size,
-    flags           => uFlags,
-    default_value   => DefaultValue,
-    start_texture   => StartTexture,
-    texture_size    => TextureSize,
-    start_sampler   => StartSampler,
-    sampler_size    => SamplerSize,
-}}
+struct_mapping! {
+    #[derive(unsafe { AsRefD3D, IntoD3D })]
+    // forbidden: AsRef     (could invalidate `name`)
+    // forbidden: AsMut     (could invalidate `name`)
+    // forbidden: DerefMut  (could invalidate `name`)
+    // forbidden: FromD3D   (could invalidate `name`)
+    ShaderVariableDesc<'_> => D3D11_SHADER_VARIABLE_DESC {
+        name            => Name,
+        start_offset    => StartOffset,
+        size            => Size,
+        flags           => uFlags,
+        default_value   => DefaultValue,
+        start_texture   => StartTexture,
+        texture_size    => TextureSize,
+        start_sampler   => StartSampler,
+        sampler_size    => SamplerSize,
+    }
+}
 
 //#cpp2rust D3D11_SHADER_VARIABLE_DESC              = d3d11::ShaderVariableDesc

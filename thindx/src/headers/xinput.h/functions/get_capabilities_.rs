@@ -22,7 +22,7 @@ pub fn get_capabilities(user_index: impl Into<u32>, flags: Flag) -> Result<Capab
     //  * `user_index`  is well tested
     //  * `flags`       is decently tested (0, 1, 2 (OOB), 4, 8, 16, 32, 64, 128, 0xFFFFFFFF)
     //  * `caps`        is out-only, no cbSize field, fixed size, sane
-    let code = unsafe { XInputGetCapabilities(user_index.into(), flags.into(), &mut caps as *mut _ as *mut _) };
+    let code = unsafe { XInputGetCapabilities(user_index.into(), flags.into(), caps.as_mut()) };
     check_error_success("XInputGetCapabilities", code)?;
     Ok(caps)
 }

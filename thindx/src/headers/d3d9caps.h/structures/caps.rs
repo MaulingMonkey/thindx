@@ -6,7 +6,6 @@ use winapi::shared::d3d9caps::*;
 use winapi::shared::minwindef::DWORD;
 
 // use std::fmt::{self, Debug, Formatter}; // TODO: a super awesome Debug impl
-use std::ops::{Deref, DerefMut};
 
 #[allow(non_camel_case_types)] type dword  = u32;
 #[allow(non_camel_case_types)] type uint   = u32;
@@ -420,12 +419,8 @@ pub struct VShaderCaps20 {
     pub static_flow_control_depth:                      int,    // FIXME: type
 }
 
-impl Deref    for Caps { fn deref    (&    self) -> &    Self::Target { unsafe { std::mem::transmute(self) } } type Target = D3DCAPS9; }
-impl DerefMut for Caps { fn deref_mut(&mut self) -> &mut Self::Target { unsafe { std::mem::transmute(self) } } }
-impl From<D3DCAPS9> for Caps { fn from(value: D3DCAPS9) -> Self { unsafe { std::mem::transmute(value) } } }
-impl From<Caps> for D3DCAPS9 { fn from(value: Caps   ) -> Self { unsafe { std::mem::transmute(value) } } }
-
-test_layout! {
+struct_mapping! {
+    #[derive(unsafe { AsRef, AsMut, Deref, DerefMut, FromInto })]
     Caps => D3DCAPS9 {
         device_type                                     => DeviceType,
         adapter_ordinal                                 => AdapterOrdinal,
@@ -498,6 +493,7 @@ test_layout! {
         max_pixel_shader_30_instruction_slots           => MaxPixelShader30InstructionSlots,
     }
 
+    #[derive(unsafe { AsRef, AsMut, FromInto })]
     VShaderCaps20 => D3DVSHADERCAPS2_0 {
         caps                                            => Caps,
         dynamic_flow_control_depth                      => DynamicFlowControlDepth,
@@ -505,6 +501,7 @@ test_layout! {
         static_flow_control_depth                       => StaticFlowControlDepth,
     }
 
+    #[derive(unsafe { AsRef, AsMut, FromInto })]
     PShaderCaps20 => D3DPSHADERCAPS2_0 {
         caps                                            => Caps,
         dynamic_flow_control_depth                      => DynamicFlowControlDepth,

@@ -26,7 +26,7 @@ pub fn get_state_ex(user_index: impl Into<u32>) -> Result<State, MethodError> {
         //  * `user_index`  is well tested
         //  * `state`       is out-only, fixed size, no `cbSize` field, never null, all bit patterns sane
         //  * `fn`          should be `None` or valid if returned by `Imports::get()`
-        let code = unsafe { XInputGetStateEx(user_index.into(), &mut state as *mut _ as *mut _) };
+        let code = unsafe { XInputGetStateEx(user_index.into(), state.as_mut()) };
         check_error_success("XInputGetStateEx", code)?;
         Ok(state)
     } else {

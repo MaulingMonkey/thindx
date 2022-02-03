@@ -34,16 +34,23 @@ impl SignatureParameterDesc<'_> {
     }
 }
 
-test_layout! { SignatureParameterDesc => D3D11_SIGNATURE_PARAMETER_DESC {
-    semantic_name       => SemanticName,
-    semantic_index      => SemanticIndex,
-    register            => Register,
-    system_value_type   => SystemValueType,
-    component_type      => ComponentType,
-    mask                => Mask,
-    read_write_mask     => ReadWriteMask,
-    stream              => Stream,
-    min_precision       => MinPrecision,
-}}
+struct_mapping! {
+    #[derive(unsafe { AsRefD3D, IntoD3D })]
+    // forbidden: AsRef     (could invalidate `semantic_name`)
+    // forbidden: AsMut     (could invalidate `semantic_name`)
+    // forbidden: DerefMut  (could invalidate `semantic_name`)
+    // forbidden: FromD3D   (could invalidate `semantic_name`)
+    SignatureParameterDesc<'_> => D3D11_SIGNATURE_PARAMETER_DESC {
+        semantic_name       => SemanticName,
+        semantic_index      => SemanticIndex,
+        register            => Register,
+        system_value_type   => SystemValueType,
+        component_type      => ComponentType,
+        mask                => Mask,
+        read_write_mask     => ReadWriteMask,
+        stream              => Stream,
+        min_precision       => MinPrecision,
+    }
+}
 
 //#cpp2rust D3D11_SIGNATURE_PARAMETER_DESC          = d3d11::SignatureParameterDesc

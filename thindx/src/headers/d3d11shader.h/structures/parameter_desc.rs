@@ -78,19 +78,26 @@ impl<'s> ParameterDesc<'s> {
     }
 }
 
-test_layout! { ParameterDesc => winapi::um::d3d11shader::D3D11_PARAMETER_DESC {
-    name                    => Name,
-    semantic_name           => SemanticName,
-    ty                      => Type,
-    class                   => Class,
-    rows                    => Rows,
-    columns                 => Columns,
-    interpolation_mode      => InterpolationMode,
-    flags                   => Flags,
-    first_in_register       => FirstInRegister,
-    first_in_component      => FirstInComponent,
-    first_out_register      => FirstOutRegister,
-    first_out_component     => FirstOutComponent,
-}}
+struct_mapping! {
+    #[derive(unsafe { AsRefD3D, IntoD3D })]
+    // forbidden: AsRef     (could invalidate `name` & `semantic_name`)
+    // forbidden: AsMut     (could invalidate `name` & `semantic_name`)
+    // forbidden: DerefMut  (could invalidate `name` & `semantic_name`)
+    // forbidden: FromD3D   (could invalidate `name` & `semantic_name`)
+    ParameterDesc<'_> => winapi::um::d3d11shader::D3D11_PARAMETER_DESC {
+        name                    => Name,
+        semantic_name           => SemanticName,
+        ty                      => Type,
+        class                   => Class,
+        rows                    => Rows,
+        columns                 => Columns,
+        interpolation_mode      => InterpolationMode,
+        flags                   => Flags,
+        first_in_register       => FirstInRegister,
+        first_in_component      => FirstInComponent,
+        first_out_register      => FirstOutRegister,
+        first_out_component     => FirstOutComponent,
+    }
+}
 
 //#cpp2rust D3D11_PARAMETER_DESC                    = d3d11::ParameterDesc

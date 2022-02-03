@@ -1,7 +1,5 @@
 use winapi::shared::d3d9types::*;
 
-use std::ops::{Deref, DerefMut};
-
 
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dcolorvalue)\]
@@ -42,11 +40,9 @@ impl ColorValue {
     pub fn alpha(&self) -> f32 { self.a }
 }
 
-impl Deref    for ColorValue { fn deref    (&    self) -> &    Self::Target { unsafe { std::mem::transmute(self) } } type Target = D3DCOLORVALUE; }
-impl DerefMut for ColorValue { fn deref_mut(&mut self) -> &mut Self::Target { unsafe { std::mem::transmute(self) } } }
-impl From<D3DCOLORVALUE> for ColorValue { fn from(value: D3DCOLORVALUE) -> Self { unsafe { std::mem::transmute(value) } } }
-impl From<ColorValue> for D3DCOLORVALUE { fn from(value: ColorValue   ) -> Self { unsafe { std::mem::transmute(value) } } }
-
-test_layout! { ColorValue => D3DCOLORVALUE { r => r, g => g, b => b, a => a } }
+struct_mapping! {
+    #[derive(unsafe { AsRef, AsMut, Deref, DerefMut, FromInto })]
+    ColorValue => D3DCOLORVALUE { r => r, g => g, b => b, a => a }
+}
 
 //#cpp2rust D3DCOLORVALUE = d3d::ColorValue
