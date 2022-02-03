@@ -48,107 +48,107 @@ fn file_rs(path: &Path) -> Result<(), ()> {
     let skip = path.file_name().map_or(false, |file_name| skip.iter().copied().any(|n| file_name == n));
     if skip { return Ok(()) }
 
-    let mut ctx = Context { errors: false };
+    let mut ctx = Context { path, errors: false };
     let ctx = &mut ctx;
 
     let file = syn::parse_file(&text).map_err(|err| error!("unable to parse {}: {}", path.display(), err))?;
-    let _docs = Docs::parse(path, &file.attrs, ctx);
-    file.items.iter().for_each(|i| item(path, i, ctx));
+    let _docs = Docs::parse(ctx, &file.attrs);
+    file.items.iter().for_each(|i| item(ctx, i));
     if ctx.errors { Err(()) } else { Ok(()) }
 }
 
-fn item(path: &Path, item: &Item, ctx: &mut Context) {
+fn item(ctx: &mut Context, item: &Item) {
     match item {
-        Item::Const(g)          => item_generic(path, &g.attrs, ctx),
-        Item::Enum(g)           => item_generic(path, &g.attrs, ctx),
-        Item::ExternCrate(g)    => item_generic(path, &g.attrs, ctx),
-        Item::Fn(f)             => item_fn(path, f, ctx),
-        Item::ForeignMod(g)     => item_generic(path, &g.attrs, ctx),
-        Item::Impl(i)           => item_impl(path, i, ctx),
-        Item::Macro(g)          => item_generic(path, &g.attrs, ctx),
-        Item::Macro2(g)         => item_generic(path, &g.attrs, ctx),
-        Item::Mod(m)            => item_mod(path, m, ctx),
-        Item::Static(g)         => item_generic(path, &g.attrs, ctx),
-        Item::Struct(s)         => item_struct(path, s, ctx),
-        Item::Trait(t)          => item_trait(path, t, ctx),
-        Item::TraitAlias(g)     => item_generic(path, &g.attrs, ctx),
-        Item::Type(g)           => item_generic(path, &g.attrs, ctx),
-        Item::Union(u)          => item_union(path, u, ctx),
-        Item::Use(g)            => item_generic(path, &g.attrs, ctx),
-        _                       => warning!(path: path, line: item.span().start().line, "failed to parse"),
+        Item::Const(g)          => item_generic(ctx, &g.attrs),
+        Item::Enum(g)           => item_generic(ctx, &g.attrs),
+        Item::ExternCrate(g)    => item_generic(ctx, &g.attrs),
+        Item::Fn(f)             => item_fn(ctx, f),
+        Item::ForeignMod(g)     => item_generic(ctx, &g.attrs),
+        Item::Impl(i)           => item_impl(ctx, i),
+        Item::Macro(g)          => item_generic(ctx, &g.attrs),
+        Item::Macro2(g)         => item_generic(ctx, &g.attrs),
+        Item::Mod(m)            => item_mod(ctx, m),
+        Item::Static(g)         => item_generic(ctx, &g.attrs),
+        Item::Struct(s)         => item_struct(ctx, s),
+        Item::Trait(t)          => item_trait(ctx, t),
+        Item::TraitAlias(g)     => item_generic(ctx, &g.attrs),
+        Item::Type(g)           => item_generic(ctx, &g.attrs),
+        Item::Union(u)          => item_union(ctx, u),
+        Item::Use(g)            => item_generic(ctx, &g.attrs),
+        _                       => warning!(path: ctx.path, line: item.span().start().line, "failed to parse"),
     }
 }
 
-fn item_generic(path: &Path, attrs: &[Attribute], ctx: &mut Context) {
-    let _docs = Docs::parse(path, &attrs, ctx);
+fn item_generic(ctx: &mut Context, attrs: &[Attribute]) {
+    let _docs = Docs::parse(ctx, &attrs);
 }
 
 /// `fn f() { ... }`
-fn item_fn(path: &Path, f: &ItemFn, ctx: &mut Context) {
-    let docs = Docs::parse(path, &f.attrs, ctx);
-    validate_docs_vs_signature(path, &docs, &f.sig, ctx);
+fn item_fn(ctx: &mut Context, f: &ItemFn) {
+    let docs = Docs::parse(ctx, &f.attrs);
+    validate_docs_vs_signature(ctx, &docs, &f.sig);
 }
 
 /// `impl i { ... }`
-fn item_impl(path: &Path, i: &ItemImpl, ctx: &mut Context) {
-    item_generic(path, &i.attrs, ctx);
+fn item_impl(ctx: &mut Context, i: &ItemImpl) {
+    item_generic(ctx, &i.attrs);
     i.items.iter().for_each(|i| match i {
         ImplItem::Method(m) => {
-            let docs = Docs::parse(path, &m.attrs, ctx);
-            validate_docs_vs_signature(path, &docs, &m.sig, ctx);
+            let docs = Docs::parse(ctx, &m.attrs);
+            validate_docs_vs_signature(ctx, &docs, &m.sig);
         },
-        ImplItem::Const(c)  => item_generic(path, &c.attrs, ctx),
-        ImplItem::Type(t)   => item_generic(path, &t.attrs, ctx),
-        ImplItem::Macro(m)  => item_generic(path, &m.attrs, ctx),
-        _                   => warning!(path: path, line: i.span().start().line, "failed to parse"),
+        ImplItem::Const(c)  => item_generic(ctx, &c.attrs),
+        ImplItem::Type(t)   => item_generic(ctx, &t.attrs),
+        ImplItem::Macro(m)  => item_generic(ctx, &m.attrs),
+        _                   => warning!(path: ctx.path, line: i.span().start().line, "failed to parse"),
     })
 }
 
 /// `mod m { ... }`
-fn item_mod(path: &Path, m: &ItemMod, ctx: &mut Context) {
-    let _docs = Docs::parse(path, &m.attrs, ctx);
-    m.content.iter().flat_map(|(_, items)| items).for_each(|i| item(path, i, ctx));
+fn item_mod(ctx: &mut Context, m: &ItemMod) {
+    let _docs = Docs::parse(ctx, &m.attrs);
+    m.content.iter().flat_map(|(_, items)| items).for_each(|i| item(ctx, i));
 }
 
 /// `struct s { ... }`
-fn item_struct(path: &Path, s: &ItemStruct, ctx: &mut Context) {
-    let _docs = Docs::parse(path, &s.attrs, ctx);
+fn item_struct(ctx: &mut Context, s: &ItemStruct) {
+    let _docs = Docs::parse(ctx, &s.attrs);
     match &s.fields {
-        Fields::Named(f)    => f.named  .iter().for_each(|f| item_field(path, f, ctx)),
-        Fields::Unnamed(f)  => f.unnamed.iter().for_each(|f| item_field(path, f, ctx)),
+        Fields::Named(f)    => f.named  .iter().for_each(|f| item_field(ctx, f)),
+        Fields::Unnamed(f)  => f.unnamed.iter().for_each(|f| item_field(ctx, f)),
         Fields::Unit => {},
     }
 }
 
-fn item_field(path: &Path, f: &Field, ctx: &mut Context) {
-    let _docs = Docs::parse(path, &f.attrs, ctx);
+fn item_field(ctx: &mut Context, f: &Field) {
+    let _docs = Docs::parse(ctx, &f.attrs);
 }
 
 /// `trait t { ... }`
-fn item_trait(path: &Path, t: &ItemTrait, ctx: &mut Context) {
-    let _docs = Docs::parse(path, &t.attrs, ctx);
+fn item_trait(ctx: &mut Context, t: &ItemTrait) {
+    let _docs = Docs::parse(ctx, &t.attrs);
     t.items.iter().for_each(|i| match i {
         TraitItem::Method(m) => {
-            let docs = Docs::parse(path, &m.attrs, ctx);
-            validate_docs_vs_signature(path, &docs, &m.sig, ctx);
+            let docs = Docs::parse(ctx, &m.attrs);
+            validate_docs_vs_signature(ctx, &docs, &m.sig);
         },
-        TraitItem::Const(c) => item_generic(path, &c.attrs, ctx),
-        TraitItem::Type(t)  => item_generic(path, &t.attrs, ctx),
-        TraitItem::Macro(m) => item_generic(path, &m.attrs, ctx),
-        _                   => warning!(path: path, line: i.span().start().line, "failed to parse"),
+        TraitItem::Const(c) => item_generic(ctx, &c.attrs),
+        TraitItem::Type(t)  => item_generic(ctx, &t.attrs),
+        TraitItem::Macro(m) => item_generic(ctx, &m.attrs),
+        _                   => warning!(path: ctx.path, line: i.span().start().line, "failed to parse"),
     })
 }
 
 /// `union u { ... }`
-fn item_union(path: &Path, u: &ItemUnion, ctx: &mut Context) {
-    let _docs = Docs::parse(path, &u.attrs, ctx);
-    u.fields.named.iter().for_each(|f| item_field(path, f, ctx));
+fn item_union(ctx: &mut Context, u: &ItemUnion) {
+    let _docs = Docs::parse(ctx, &u.attrs);
+    u.fields.named.iter().for_each(|f| item_field(ctx, f));
 }
 
-fn validate_docs_vs_signature(path: &Path, docs: &Docs, sig: &Signature, ctx: &mut Context) {
+fn validate_docs_vs_signature(ctx: &mut Context, docs: &Docs, sig: &Signature) {
     let line = sig.ident.span().start().line;
 
-    macro_rules! error { ( $($tt:tt)* ) => {{ ctx.errors = true; super::error!(path: path, line: line, $($tt)*) }} }
+    macro_rules! error { ( $($tt:tt)* ) => {{ ctx.errors = true; super::error!(path: ctx.path, line: line, $($tt)*) }} }
 
     if sig.unsafety.is_some() && !docs.has_safety_docs                  { error!("unsafe fn missing `### ⚠️ Safety ⚠️` docs") }
     if sig.inputs.len() > MAX_UNDOCUMENTED_ARGS && docs.args.is_empty() { error!("fn missing `### Arguments` docs") }
@@ -170,17 +170,17 @@ fn validate_docs_vs_signature(path: &Path, docs: &Docs, sig: &Signature, ctx: &m
                 (Some(doc_arg), Some(code_arg)) => {
                     let code_arg_name = code_arg.to_string();
                     if doc_arg.name != code_arg_name {
-                        super::error!(path: path, line: doc_arg.line, "argument {} was mis-documented to be `{}` but was actually `{}`", arg_no, doc_arg.name, code_arg_name);
+                        super::error!(path: ctx.path, line: doc_arg.line, "argument {} was mis-documented to be `{}` but was actually `{}`", arg_no, doc_arg.name, code_arg_name);
                         ctx.errors = true;
                     }
                 },
                 (Some(doc_arg), None) => {
-                    super::error!(path: path, line: doc_arg.line, "argument {} does not exist, but was documented to be `{}`", arg_no, doc_arg.name);
+                    super::error!(path: ctx.path, line: doc_arg.line, "argument {} does not exist, but was documented to be `{}`", arg_no, doc_arg.name);
                     ctx.errors = true;
                 },
                 (None, Some(code_arg)) => {
                     let code_arg_name = code_arg.to_string();
-                    super::error!(path: path, line: code_arg.span().start().line, "argument {} (`{}`) is undocumented", arg_no, code_arg_name);
+                    super::error!(path: ctx.path, line: code_arg.span().start().line, "argument {} (`{}`) is undocumented", arg_no, code_arg_name);
                     ctx.errors = true;
                 },
                 (None, None) => break,
@@ -203,7 +203,7 @@ struct Arg {
 }
 
 impl Docs {
-    pub fn parse(path: &Path, attrs: &[Attribute], ctx: &mut Context) -> Self {
+    pub fn parse(ctx: &mut Context, attrs: &[Attribute]) -> Self {
         let mut docs = Docs::default();
 
         let mut doc_lines = attrs.iter().filter_map(|attr| if !attr.path.is_ident("doc") {
@@ -220,8 +220,8 @@ impl Docs {
             let line = doc.span().start().line;
             let text = doc.value();
             let trim = text.trim();
-            macro_rules! error      { ( $($tt:tt)* ) => {{ ctx.errors = true; super::error!  (path: path, line: line, $($tt)*) }} }
-            macro_rules! warning    { ( $($tt:tt)* ) => {{                    super::warning!(path: path, line: line, $($tt)*) }} }
+            macro_rules! error      { ( $($tt:tt)* ) => {{ ctx.errors = true; super::error!  (path: ctx.path, line: line, $($tt)*) }} }
+            macro_rules! warning    { ( $($tt:tt)* ) => {{                    super::warning!(path: ctx.path, line: line, $($tt)*) }} }
 
             if !trim.is_empty() && !text.starts_with(" ") { error!("use a space between `///` or `//!` and the doc comment text (avoids breaking markdown tables!)") }
 
@@ -275,7 +275,8 @@ impl Docs {
     }
 }
 
-struct Context {
+struct Context<'p> {
+    pub path:   &'p Path,
     pub errors: bool,
 }
 
