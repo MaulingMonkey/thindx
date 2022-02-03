@@ -1246,7 +1246,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// Retrieves the clip status.
     ///
     /// ### Returns
-    /// *   <span class="inaccurate">[D3DERR::INVALIDCALL]  - "if the argument is invalid", but this should always be valid"
+    /// *   ~~[D3DERR::INVALIDCALL]~~   "If the returned argument is invalid" (impossible via thindx?)
     /// *   Ok([ClipStatus])
     ///
     /// ### Example
@@ -1287,7 +1287,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// Retrieves the current texture palette
     ///
     /// ### Returns
-    /// *   [D3DERR::INVALIDCALL]       "If the method fails" (impossible via thindx?)
+    /// *   ~~[D3DERR::INVALIDCALL]~~   "If the method fails" (impossible via thindx?)
     /// *   Ok(`0xFFFF`)                If no palette was previously set (ambiguous!)
     /// *   Ok(`0xFFFF`)                If palette 0xFFFF was previously set (ambiguous!)
     /// *   Ok(`i`)                     If palette `i` was previously set
@@ -1315,7 +1315,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// Gets the depth-stencil surface owned by the Direct3DDevice object.
     ///
     /// ### Returns
-    /// *   <span style="inaccurate">[D3DERR::INVALIDCALL] ...?</span>
+    /// *   ~~[D3DERR::INVALIDCALL]~~ ...?
     /// *   Ok(Some([Surface]))       the render target bound to that index
     /// *   Ok(None)                  no render target was bound to that index
     ///
