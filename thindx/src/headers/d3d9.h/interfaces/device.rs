@@ -437,6 +437,14 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///
     /// Creates a cube texture resource.
     ///
+    /// ### Arguments
+    /// *   `edge_length`       The size in pixels of every edge of the cubemap at mip 0.  E.g. an edge length of 128 means 6 x 128 x 128 pixel cubemap faces.
+    /// *   `levels`            The number of mipmap levels, or `0` to have Direct3D generate sublevels down to 1x1.
+    /// *   `usage`             See [Usage and Resource Combinations](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dusage#usage-and-resource-combinations)
+    /// *   `format`            The format to be used by this texture to store pixels or pixel blocks.
+    /// *   `pool`              Specifies how to manage the memory of the cube texture.
+    /// *   `shared_handle`     Reserved, specify `()`.
+    ///
     /// ### Returns
     /// *   [D3DERR::INVALIDCALL]       On various invalid parameters, including the texture size being beyond the device's capabilities
     /// *   [D3DERR::OUTOFVIDEOMEMORY]
@@ -446,11 +454,12 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// ### Example
     /// ```rust
     /// # use dev::d3d9::*; let device = device_pure();
-    /// // Create a 6 x 128x128 ARGB cubemap with no mipmaps
+    /// // Create a 6 x 128x128 ARGB cubemap with automatic mipmaps
     /// let texture = device.create_cube_texture(128, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
     /// assert_eq!(D3DERR::INVALIDCALL, device.create_cube_texture(1 << 15, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).err());
     /// ```
-    fn create_cube_texture(&self, edge_length: u32, levels: u32, usage: impl Into<Usage>, format: impl Into<Format>, pool: impl Into<Pool>, _shared_handle: impl SharedHandleParam) -> Result<CubeTexture, MethodError> {
+    fn create_cube_texture(&self, edge_length: u32, levels: u32, usage: impl Into<Usage>, format: impl Into<Format>, pool: impl Into<Pool>, shared_handle: impl SharedHandleParam) -> Result<CubeTexture, MethodError> {
+        let _ = shared_handle;
         let mut texture = null_mut();
         let hr = unsafe { self.as_winapi().CreateCubeTexture(edge_length, levels, usage.into().into(), format.into().into(), pool.into().into(), &mut texture, null_mut()) };
         MethodError::check("IDirect3DDevice9::CreateCubeTexture", hr)?;
@@ -461,6 +470,14 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// IDirect3DDevice9::CreateCubeTexture
     ///
     /// Creates a cube texture resource.
+    ///
+    /// ### Arguments
+    /// *   `size`              The size in pixels of every edge of the cubemap at mip 0.  E.g. an edge length of 128 means 6 x 128 x 128 pixel cubemap faces.
+    /// *   `mips`              The pixel data to initialize the cubemap with.
+    /// *   `usage`             See [Usage and Resource Combinations](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dusage#usage-and-resource-combinations)
+    /// *   `format`            The format to be used by this texture to store pixels or pixel blocks, and to use to interpret `mips`.
+    /// *   `pool`              Specifies how to manage the memory of the cube texture.
+    /// *   `shared_handle`     Reserved, specify `()`.
     ///
     /// ### Returns
     /// *   [D3DERR::INVALIDCALL]       On various invalid parameters, including the texture size being beyond the device's capabilities
@@ -486,7 +503,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// let texture = device.create_cube_texture_from(4, &mips, Usage::None,    FixedTextureFormat::A8R8G8B8, Pool::Managed, ()).unwrap();
     /// let texture = device.create_cube_texture_from(4, &mips, Usage::Dynamic, FixedTextureFormat::A8R8G8B8, Pool::Default, ()).unwrap();
     /// ```
-    fn create_cube_texture_from(&self, size: u32, mips: &[CubeTextureMipRef], usage: impl Into<Usage>, format: &FixedTextureFormat, pool: impl Into<Pool>, _shared_handle: impl SharedHandleParam) -> Result<CubeTexture, MethodError> {
+    fn create_cube_texture_from(&self, size: u32, mips: &[CubeTextureMipRef], usage: impl Into<Usage>, format: &FixedTextureFormat, pool: impl Into<Pool>, shared_handle: impl SharedHandleParam) -> Result<CubeTexture, MethodError> {
         // TODO: consider THINERR::* constants instead?
         if size == 0        { return Err(MethodError("IDirect3DDevice9Ext::create_cube_texture_from", D3DERR::INVALIDCALL)); }
         if mips.is_empty()  { return Err(MethodError("IDirect3DDevice9Ext::create_cube_texture_from", D3DERR::INVALIDCALL)); } // 0 levels = autogenerate mips, which is different from no levels
@@ -494,7 +511,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         let levels : u32    = mips.len().try_into().map_err(|_| MethodError("IDirect3DDevice9Ext::create_cube_texture_from", THINERR::SLICE_TOO_LARGE))?;
         let usage           = usage.into();
         let pool            = pool.into();
-        let texture         = self.create_cube_texture(size, levels, usage, format.format, pool, _shared_handle)?;
+        let texture         = self.create_cube_texture(size, levels, usage, format.format, pool, shared_handle)?;
         let block_bits      = u32::from(format.bits_per_block);
         let block_width     = u32::from(format.block_size.0);
         let block_height    = u32::from(format.block_size.1);
