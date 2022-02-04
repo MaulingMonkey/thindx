@@ -3562,6 +3562,34 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         MethodError::check("IDirect3DDevice9::SetTexture", hr)
     }
 
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-settexturestagestate)\]
+    /// IDirect3DDevice9::SetTextureStageState
+    ///
+    /// Sets the state value for the currently assigned texture.
+    ///
+    /// ### Errors
+    /// *   ~~[D3DERR::INVALIDCALL]~~ None observed?
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_pure();
+    /// device.set_texture_stage_state_untyped(0, TSS::ColorArg1, 0xFF112233).unwrap();
+    /// # device.set_texture_stage_state_untyped(!0, TSS::ColorArg1, 0xFF112233).unwrap();
+    /// # device.set_texture_stage_state_untyped(0, TSS::from_unchecked(0), 0xFF112233).unwrap();
+    /// # device.set_texture_stage_state_untyped(0, TSS::from_unchecked(!0), 0xFF112233).unwrap();
+    /// # for stage in (0 .. 32).map(|p| 1<<p) {
+    /// #   for ty in (0 .. 32).map(|p| 1<<p) {
+    /// #       for val in [0, 1, 2, 4, 8, 0x11223344, 0xFF112233, 0xFFFFFFFF] {
+    /// #           device.set_texture_stage_state_untyped(stage, TSS::from_unchecked(ty), val).unwrap();
+    /// #       }
+    /// #   }
+    /// # }
+    /// ```
+    fn set_texture_stage_state_untyped(&self, stage: u32, ty: impl Into<TextureStageStateType>, value: u32) -> Result<(), MethodError> {
+        let hr = unsafe { self.as_winapi().SetTextureStageState(stage, ty.into().into(), value) };
+        MethodError::check("IDirect3DDevice9::SetTextureStageState", hr)
+    }
+
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-settransform)\]
     /// IDirect3DDevice9::SetTransform
     ///
@@ -3941,6 +3969,7 @@ pub struct RgnData {
 //#cpp2rust IDirect3DDevice9::SetStreamSourceFreq               = d3d9::IDirect3DDevice9Ext::set_stream_source_freq
 //#cpp2rust IDirect3DDevice9::SetTexture                        = d3d9::IDirect3DDevice9Ext::set_texture
 //TODO:     IDirect3DDevice9::SetTextureStageState              = d3d9::IDirect3DDevice9Ext::set_texture_stage_state
+//#cpp2rust IDirect3DDevice9::SetTextureStageState              = d3d9::IDirect3DDevice9Ext::set_texture_stage_state_untyped
 //#cpp2rust IDirect3DDevice9::SetTransform                      = d3d9::IDirect3DDevice9Ext::set_transform
 //#cpp2rust IDirect3DDevice9::SetVertexDeclaration              = d3d9::IDirect3DDevice9Ext::set_vertex_declaration
 //#cpp2rust IDirect3DDevice9::SetVertexShader                   = d3d9::IDirect3DDevice9Ext::set_vertex_shader

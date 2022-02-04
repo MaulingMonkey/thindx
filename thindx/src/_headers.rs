@@ -971,7 +971,7 @@ pub const d3dcompiler_h : cxx_header = cxx_header;
 /// * [`SetStreamSource`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setstreamsource)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_stream_source`] <br>
 /// * [`SetStreamSourceFreq`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setstreamsourcefreq)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_stream_source_freq`] <br>
 /// * [`SetTexture`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-settexture)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_texture`] <br>
-/// * [`SetTextureStageState`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-settexturestagestate) →&nbsp;❌ <br>
+/// * [`SetTextureStageState`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-settexturestagestate)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_texture_stage_state_untyped`] <br>
 /// * [`SetTransform`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-settransform)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_transform`] <br>
 /// * [`SetVertexDeclaration`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setvertexdeclaration)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_vertex_declaration`] <br>
 /// * [`SetVertexShader`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setvertexshader)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_vertex_shader`] <br>
