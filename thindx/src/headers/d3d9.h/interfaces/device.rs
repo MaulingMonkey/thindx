@@ -309,14 +309,15 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// ```rust
     /// # use dev::d3d9::*; let device = device_pure();
     /// device.begin_scene().unwrap();
+    /// # assert_eq!(D3DERR::INVALIDCALL, device.begin_scene());
     /// // ...issue draw calls and stuff...
     /// device.end_scene().unwrap();
+    /// # assert_eq!(D3DERR::INVALIDCALL, device.end_scene());
     /// ```
     ///
     /// [begin_scene]:          Self::begin_scene
     /// [end_scene]:            Self::end_scene
     fn begin_scene(&self) -> Result<(), MethodError> {
-        // TODO: examples
         let hr = unsafe { self.as_winapi().BeginScene() };
         MethodError::check("IDirect3DDevice9::BeginScene", hr)
     }
@@ -327,6 +328,16 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// ### Returns
     /// *   [D3DERR::INVALIDCALL]   if the device was already within a state block
     /// *   `Ok(())`                otherwise
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_pure();
+    /// device.begin_state_block().unwrap();
+    /// # assert_eq!(D3DERR::INVALIDCALL, device.begin_state_block());
+    /// // ...issue draw calls and stuff...
+    /// let block : StateBlock = device.end_state_block().unwrap();
+    /// # assert_eq!(D3DERR::INVALIDCALL, device.end_state_block().map(|_| ()));
+    /// ```
     fn begin_state_block(&self) -> Result<(), MethodError> {
         let hr = unsafe { self.as_winapi().BeginStateBlock() };
         MethodError::check("IDirect3DDevice9::BeginStateBlock", hr)
@@ -344,6 +355,12 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// *   [D3DERR::INVALIDCALL]   if `depth`   was `Some(...)` without a depth buffer being bound
     /// *   [D3DERR::INVALIDCALL]   if `stencil` was `Some(...)` without a stencil buffer being bound
     /// *   `Ok(())`                otherwise
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_pure();
+    /// device.clear(None, Some(d3d::Color::argb(0xFF112233)), None, None).unwrap();
+    /// ```
     fn clear(&self, rects: Option<&[Rect]>, color: Option<Color>, depth: Option<f32>, stencil: Option<u32>) -> Result<(), MethodError> {
         // TODO: more clear docs
         // TODO: conversion traits for params?
@@ -1124,8 +1141,10 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// ```rust
     /// # use dev::d3d9::*; let device = device_pure();
     /// device.begin_scene().unwrap();
+    /// # assert_eq!(D3DERR::INVALIDCALL, device.begin_scene());
     /// // ...issue draw calls and stuff...
     /// device.end_scene().unwrap();
+    /// # assert_eq!(D3DERR::INVALIDCALL, device.end_scene());
     /// ```
     ///
     /// [begin_scene]:          Self::begin_scene
@@ -1141,7 +1160,17 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///
     /// ### Returns
     /// *   [D3DERR::INVALIDCALL]   if the device wasn't within a state block
-    /// *   `Ok(state_block)`       if a state block was successfully captured
+    /// *   Ok([StateBlock])        if a state block was successfully captured
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_pure();
+    /// device.begin_state_block().unwrap();
+    /// # assert_eq!(D3DERR::INVALIDCALL, device.begin_state_block());
+    /// // ...issue draw calls and stuff...
+    /// let block : StateBlock = device.end_state_block().unwrap();
+    /// # assert_eq!(D3DERR::INVALIDCALL, device.end_state_block().map(|_| ()));
+    /// ```
     fn end_state_block(&self) -> Result<StateBlock, MethodError> {
         let mut sb = null_mut();
         let hr = unsafe { self.as_winapi().EndStateBlock(&mut sb) };
