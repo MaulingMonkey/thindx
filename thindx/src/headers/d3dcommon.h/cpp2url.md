@@ -30,8 +30,7 @@
 <!-- d3dcommon.h interfaces -->
 [ID3D10Blob]:                                                       https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nn-d3dcommon-id3d10blob
 [ID3DBlob]:                                                         https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nn-d3dcommon-id3d10blob
-                                                                    <!-- docs.microsoft.com links are all broken? -->
-[ID3DDestructionNotifier]:                                          https://microsoft.github.io/windows-docs-rs/doc/windows/Win32/Graphics/Direct3D/struct.ID3DDestructionNotifier.html
+[ID3DDestructionNotifier]:                                          https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nn-d3dcommon-id3ddestructionotifier
 [ID3DInclude]:                                                      https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nn-d3dcommon-id3dinclude
 
 <!-- d3dcommon.h methods -->
@@ -39,8 +38,8 @@
 [ID3D10Blob::GetBufferSize]:                                        https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nf-d3dcommon-id3d10blob-getbuffersize
 [ID3DBlob::GetBufferPointer]:                                       https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nf-d3dcommon-id3d10blob-getbufferpointer
 [ID3DBlob::GetBufferSize]:                                          https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nf-d3dcommon-id3d10blob-getbuffersize
-[ID3DDestructionNotifier::RegisterDestructionCallback]:             https://microsoft.github.io/windows-docs-rs/doc/windows/Win32/Graphics/Direct3D/struct.ID3DDestructionNotifier.html#method.RegisterDestructionCallback
-[ID3DDestructionNotifier::UnregisterDestructionCallback]:           https://microsoft.github.io/windows-docs-rs/doc/windows/Win32/Graphics/Direct3D/struct.ID3DDestructionNotifier.html#method.UnregisterDestructionCallback
+[ID3DDestructionNotifier::RegisterDestructionCallback]:             https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nf-d3dcommon-id3ddestructionotifier-registerdestructioncallback
+[ID3DDestructionNotifier::UnregisterDestructionCallback]:           https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nf-d3dcommon-id3ddestructionotifier-unregisterdestructioncallback
 [ID3DInclude::Close]:                                               https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nf-d3dcommon-id3dinclude-close
 [ID3DInclude::Open]:                                                https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nf-d3dcommon-id3dinclude-open
 
