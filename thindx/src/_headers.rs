@@ -17,7 +17,7 @@
 //! | [d3dcompiler.h](const@d3dcompiler_h) |   | ✔️ 1 of 1 | ✔️ 2 of 2 |   | ⚠️ 60 of 71 |   |
 //! | [d3d9.h](const@d3d9_h) | ⚠️ 20 of 24 |   |   | ✔️ 9 of 9 | ⚠️ 64 of 72 | ✔️ 3 of 3 |
 //! | [d3d9caps.h](const@d3d9caps_h) |   | ⚠️ 3 of 5 |   |   | ⚠️ 213 of 249 |   |
-//! | [d3d9types.h](const@d3d9types_h) |   | ⚠️ 20 of 71 | ⚠️ 40 of 54 |   | ⚠️ 521 of 844 | ⚠️ 8 of 20 |
+//! | [d3d9types.h](const@d3d9types_h) |   | ⚠️ 20 of 71 | ⚠️ 40 of 54 |   | ⚠️ 532 of 844 | ⚠️ 8 of 20 |
 //! | [d3d11shader.h](const@d3d11shader_h) | ✔️ 12 of 12 | ✔️ 9 of 9 | ✔️ 1 of 1 |   | ⚠️ 16 of 17 | ✔️ 3 of 3 |
 //! | [d3d11shadertracing.h](const@d3d11shadertracing_h) | ❌ 0 of 2 | ❌ 0 of 11 | ❌ 0 of 3 |   | ❌ 0 of 62 |   |
 //! | [xinput.h](const@xinput_h) |   | ✔️ 6 of 6 |   | ✔️ 8 of 8 | ⚠️ 83 of 86 |   |
@@ -2335,17 +2335,17 @@ pub const d3d9caps_h : cxx_header = cxx_header;
 /// `D3DLOCK_NO_DIRTY_UPDATE`&nbsp;→ [`d3d::Lock::NoDirtyUpdate`] <br>
 /// `D3DLOCK_READONLY`&nbsp;→ [`d3d::Lock::ReadOnly`] <br>
 /// `D3DMAXUSERCLIPPLANES` →&nbsp;❌ <br>
-/// `D3DPRESENTFLAG_DEVICECLIP` →&nbsp;❌ <br>
-/// `D3DPRESENTFLAG_DISCARD_DEPTHSTENCIL` →&nbsp;❌ <br>
-/// `D3DPRESENTFLAG_LOCKABLE_BACKBUFFER` →&nbsp;❌ <br>
-/// `D3DPRESENTFLAG_NOAUTOROTATE` →&nbsp;❌ <br>
-/// `D3DPRESENTFLAG_OVERLAY_LIMITEDRGB` →&nbsp;❌ <br>
-/// `D3DPRESENTFLAG_OVERLAY_YCbCr_BT709` →&nbsp;❌ <br>
-/// `D3DPRESENTFLAG_OVERLAY_YCbCr_xvYCC` →&nbsp;❌ <br>
-/// `D3DPRESENTFLAG_RESTRICTED_CONTENT` →&nbsp;❌ <br>
-/// `D3DPRESENTFLAG_RESTRICT_SHARED_RESOURCE_DRIVER` →&nbsp;❌ <br>
-/// `D3DPRESENTFLAG_UNPRUNEDMODE` →&nbsp;❌ <br>
-/// `D3DPRESENTFLAG_VIDEO` →&nbsp;❌ <br>
+/// `D3DPRESENTFLAG_DEVICECLIP`&nbsp;→ [`d3d::PresentFlag::DeviceClip`] <br>
+/// `D3DPRESENTFLAG_DISCARD_DEPTHSTENCIL`&nbsp;→ [`d3d::PresentFlag::DiscardDepthStencil`] <br>
+/// `D3DPRESENTFLAG_LOCKABLE_BACKBUFFER`&nbsp;→ [`d3d::PresentFlag::LockableBackBuffer`] <br>
+/// `D3DPRESENTFLAG_NOAUTOROTATE`&nbsp;→ [`d3d::PresentFlag::NoAutoRotate`] <br>
+/// `D3DPRESENTFLAG_OVERLAY_LIMITEDRGB`&nbsp;→ [`d3d::PresentFlag::OverlayLimitedRgb`] <br>
+/// `D3DPRESENTFLAG_OVERLAY_YCbCr_BT709`&nbsp;→ [`d3d::PresentFlag::OverlayYCbCrBt709`] <br>
+/// `D3DPRESENTFLAG_OVERLAY_YCbCr_xvYCC`&nbsp;→ [`d3d::PresentFlag::OverlayYCbCrXvYCC`] <br>
+/// `D3DPRESENTFLAG_RESTRICTED_CONTENT`&nbsp;→ [`d3d::PresentFlag::RestrictedContent`] <br>
+/// `D3DPRESENTFLAG_RESTRICT_SHARED_RESOURCE_DRIVER`&nbsp;→ [`d3d::PresentFlag::RestrictSharedResourceDriver`] <br>
+/// `D3DPRESENTFLAG_UNPRUNEDMODE`&nbsp;→ [`d3d::PresentFlag::UnprunedMode`] <br>
+/// `D3DPRESENTFLAG_VIDEO`&nbsp;→ [`d3d::PresentFlag::Video`] <br>
 /// `D3DPRESENT_RATE_DEFAULT` →&nbsp;❌ <br>
 /// `D3DPV_DONOTCOPYDATA` →&nbsp;❌ <br>
 /// `D3DRENDERSTATE_WRAPBIAS` →&nbsp;❌ <br>
