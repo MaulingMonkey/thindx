@@ -651,6 +651,8 @@ pub const d3dcompiler_01_construction : () = ();
 /// use thindx::*;
 /// use thindx::d3d::*;
 /// 
+/// use std::path::*;
+/// 
 /// fn main() {
 ///     let d3dc = d3d::Compiler::load_system(47).unwrap();
 ///     let basic_hlsl   : &[u8] = include_bytes!("../test/data/basic.hlsl");
@@ -682,7 +684,43 @@ pub const d3dcompiler_01_construction : () = ();
 ///     let library       = d3dc.compile2(library_hlsl, (), None, None, (),       "lib_5_0", Compile::Debug, CompileEffect::None, CompileSecdata::None, None).unwrap();
 ///     // resulting blobs are binary data
 /// 
-///     // TODO: show ID3DInclude usage
+/// 
+/// 
+///     // ID3DInclude
+///     println!("ID3DInclude\n===========");
+///     let include1 = d3d::include_from_fn_with_header(|include_type, file_name, parent|{
+///         let (quote, unquote) = match include_type {
+///             d3d::IncludeType::Local     => ('"', '"'),
+///             d3d::IncludeType::System    => ('<', '>'),
+///             _                           => ('?', '?'),
+///         };
+/// 
+///         let file_name   = file_name.to_str().map_err(|_| E::FAIL)?;
+///         let path        = Path::new(r"thindx\test\data").join(file_name);
+/// 
+///         println!("resolving `#include {quote}{file_name}{unquote}` to {path:?}");
+/// 
+///         let data        = std::fs::read(&path).map_err(|_| E::FAIL)?;
+///         let header      = path; // PathBuf
+/// 
+///         println!("  read {} bytes", data.len());
+/// 
+///         if let Some((parent_header, _parent_data)) = parent {
+///             println!("  into {:?}", parent_header);
+///         } else {
+///             println!("  into root file");
+///         }
+/// 
+///         Ok((header, data))
+///     });
+/// 
+///     let include2 = d3d::include_from_path_fn(Path::new(r"thindx\test\data"), |_ty, dir, include| Ok(dir.join(include)));
+/// 
+///     let ic1a = d3dc.compile_from_file(r"thindx\test\data\include-chain-1.hlsl", None, &include1,           "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap();
+///     let ic1b = d3dc.compile_from_file(r"thindx\test\data\include-chain-1.hlsl", None, &include2,           "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap();
+///     let ic1c = d3dc.compile_from_file(r"thindx\test\data\include-chain-1.hlsl", None, StandardFileInclude, "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap();
+///     println!();
+/// 
 ///     // TODO: show defines usage
 ///     // TODO: show effects usage?
 /// }
@@ -779,6 +817,18 @@ pub const d3dcompiler_01_construction : () = ();
 /// 
 /// export float4 xyz1 ( float3 v ) { return float4 ( v , 1.0 ) ; }
 /// 
+/// 
+/// ID3DInclude
+/// ===========
+/// resolving `#include "include-chain-2.hlsl"` to "thindx\\test\\data\\include-chain-2.hlsl"
+///   read 33 bytes
+///   into root file
+/// resolving `#include <include-chain-3.hlsl>` to "thindx\\test\\data\\include-chain-3.hlsl"
+///   read 23 bytes
+///   into "thindx\\test\\data\\include-chain-2.hlsl"
+/// resolving `#include "basic.hlsl"` to "thindx\\test\\data\\basic.hlsl"
+///   read 550 bytes
+///   into "thindx\\test\\data\\include-chain-3.hlsl"
 /// 
 /// ```
 ///
