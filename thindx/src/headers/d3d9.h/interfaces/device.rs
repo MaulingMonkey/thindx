@@ -2930,6 +2930,37 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         MethodError::check("IDirect3DDevice9::SetDepthStencilSurface", hr)
     }
 
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setdialogboxmode)\]
+    /// IDirect3DDevice9::SetDialogBoxMode
+    ///
+    /// Enable the use of GDI dialog boxes in full-screen mode.
+    ///
+    /// Has no effect on windowed mode applications.
+    ///
+    /// ### Errors
+    /// *   [D3DERR::INVALIDCALL]   Unless using a GDI compatible back buffer format:<br>
+    ///     [d3d::Format]::{[X1R5G5B5](d3d::Format::X1R5G5B5), [R5G6B5](d3d::Format::R5G6B5), [X8R8G8B8](d3d::Format::X8R8G8B8)}
+    /// *   [D3DERR::INVALIDCALL]   Unless [d3d::SwapEffect::Discard] was specified.
+    /// *   [D3DERR::INVALIDCALL]   Unless [d3d::PresentFlag::LockableBackBuffer] was specified.
+    /// *   [D3DERR::INVALIDCALL]   If multisampling is enabled.
+    /// *   [D3DERR::INVALIDCALL]   If [d3d::Create::AdapterGroupDevice] was specified.
+    /// *   [D3DERR::INVALIDCALL]   If between [begin_scene](Self::begin_scene)\(\) and [end_scene](Self::end_scene)\(\).
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_pure();
+    /// device.set_dialog_box_mode(true).unwrap();
+    /// #
+    /// # device.set_dialog_box_mode(false).unwrap();
+    /// # device.begin_scene().unwrap();
+    /// # assert_eq!(D3DERR::INVALIDCALL, device.set_dialog_box_mode(false));
+    /// # device.end_scene().unwrap();
+    /// ```
+    fn set_dialog_box_mode(&self, mode: bool) -> Result<(), MethodError> {
+        let hr = unsafe { self.as_winapi().SetDialogBoxMode(mode as _) };
+        MethodError::check("IDirect3DDevice9::SetDialogBoxMode", hr)
+    }
+
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setfvf)\]
     /// IDirect3DDevice9::SetFVF
     ///
@@ -3990,7 +4021,7 @@ pub struct RgnData {
 //#cpp2rust IDirect3DDevice9::SetCursorPosition                 = d3d9::IDirect3DDevice9Ext::set_cursor_position
 //#cpp2rust IDirect3DDevice9::SetCursorProperties               = d3d9::IDirect3DDevice9Ext::set_cursor_properties
 //#cpp2rust IDirect3DDevice9::SetDepthStencilSurface            = d3d9::IDirect3DDevice9Ext::set_depth_stencil_surface
-//TODO:     IDirect3DDevice9::SetDialogBoxMode                  = d3d9::IDirect3DDevice9Ext::set_dialog_box_mode
+//#cpp2rust IDirect3DDevice9::SetDialogBoxMode                  = d3d9::IDirect3DDevice9Ext::set_dialog_box_mode
 //#cpp2rust IDirect3DDevice9::SetFVF                            = d3d9::IDirect3DDevice9Ext::set_fvf
 //#cpp2rust IDirect3DDevice9::SetGammaRamp                      = d3d9::IDirect3DDevice9Ext::set_gamma_ramp
 //#cpp2rust IDirect3DDevice9::SetIndices                        = d3d9::IDirect3DDevice9Ext::set_indices

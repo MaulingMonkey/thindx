@@ -951,7 +951,7 @@ pub const d3dcompiler_h : cxx_header = cxx_header;
 /// * [`SetCursorPosition`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setcursorposition)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_cursor_position`] <br>
 /// * [`SetCursorProperties`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setcursorproperties)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_cursor_properties`] <br>
 /// * [`SetDepthStencilSurface`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setdepthstencilsurface)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_depth_stencil_surface`] <br>
-/// * [`SetDialogBoxMode`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setdialogboxmode) →&nbsp;❌ <br>
+/// * [`SetDialogBoxMode`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setdialogboxmode)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_dialog_box_mode`] <br>
 /// * [`SetFVF`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setfvf)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_fvf`] <br>
 /// * [`SetGammaRamp`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setgammaramp)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_gamma_ramp`] <br>
 /// * [`SetIndices`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setindices)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_indices`] <br>
