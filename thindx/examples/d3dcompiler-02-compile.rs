@@ -40,7 +40,7 @@ fn main() {
 
     // ID3DInclude
     println!("ID3DInclude\n===========");
-    let include1 = d3d::Include::from_fn_with_header(|include_type, file_name, parent|{
+    let include1 = d3d::Include::from_blob_meta_fn(|include_type, file_name, parent|{
         let (quote, unquote) = match include_type {
             d3d::Include::Local     => ('"', '"'),
             d3d::Include::System    => ('<', '>'),
@@ -53,17 +53,16 @@ fn main() {
         println!("resolving `#include {quote}{file_name}{unquote}` to {path:?}");
 
         let data        = std::fs::read(&path).map_err(|_| E::FAIL)?;
-        let header      = path; // PathBuf
 
         println!("  read {} bytes", data.len());
 
-        if let Some((parent_header, _parent_data)) = parent {
-            println!("  into {:?}", parent_header);
+        if let Some(parent_path) = parent {
+            println!("  into {:?}", parent_path);
         } else {
             println!("  into root file");
         }
 
-        Ok((header, data))
+        Ok((data, path))
     });
 
     let include2 = d3d::Include::from_path_fn(Path::new(r"thindx\test\data"), |dir, _ty, include| Ok(dir.join(include.to_str().map_err(|_| D3D11_ERROR::FILE_NOT_FOUND)?)));
