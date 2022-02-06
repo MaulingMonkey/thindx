@@ -40,11 +40,11 @@ fn main() {
 
     // ID3DInclude
     println!("ID3DInclude\n===========");
-    let include1 = d3d::include_from_fn_with_header(|include_type, file_name, parent|{
+    let include1 = d3d::Include::from_fn_with_header(|include_type, file_name, parent|{
         let (quote, unquote) = match include_type {
-            d3d::IncludeType::Local     => ('"', '"'),
-            d3d::IncludeType::System    => ('<', '>'),
-            _                           => ('?', '?'),
+            d3d::Include::Local     => ('"', '"'),
+            d3d::Include::System    => ('<', '>'),
+            _                       => ('?', '?'),
         };
 
         let file_name   = file_name.to_str().map_err(|_| E::FAIL)?;
@@ -66,7 +66,7 @@ fn main() {
         Ok((header, data))
     });
 
-    let include2 = d3d::include_from_path_fn(Path::new(r"thindx\test\data"), |_ty, dir, include| Ok(dir.join(include)));
+    let include2 = d3d::Include::from_path_fn(Path::new(r"thindx\test\data"), |_ty, dir, include| Ok(dir.join(include)));
 
     let ic1a = d3dc.compile_from_file(r"thindx\test\data\include-chain-1.hlsl", None, &include1,           "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap();
     let ic1b = d3dc.compile_from_file(r"thindx\test\data\include-chain-1.hlsl", None, &include2,           "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap();

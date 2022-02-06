@@ -11,11 +11,19 @@ use winapi::um::d3dcommon::*;
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct IncludeType(D3D_INCLUDE_TYPE);
-#[doc(hidden)] pub use IncludeType as Include;
+#[doc(hidden)] use IncludeType as Include;
 
 enumish! { Include => D3D_INCLUDE_TYPE; default: Local == 0; Local, System }
 
-#[allow(non_upper_case_globals)] impl Include { // These are enum-like
+#[allow(non_upper_case_globals)] impl IncludeType { // These are enum-like
+    /// A "local" `#include "..."` style include
+    pub const Local     : Include = Include(D3D_INCLUDE_LOCAL);
+
+    /// A "system" `#include <...>` style include
+    pub const System    : Include = Include(D3D_INCLUDE_SYSTEM);
+}
+
+#[allow(non_upper_case_globals)] impl d3d::Include<()> { // These are enum-like
     /// A "local" `#include "..."` style include
     pub const Local     : Include = Include(D3D_INCLUDE_LOCAL);
 

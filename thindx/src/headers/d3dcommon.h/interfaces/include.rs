@@ -7,7 +7,6 @@ use winapi::um::d3dcompiler::D3D_COMPILE_STANDARD_FILE_INCLUDE;
 
 use std::alloc::Layout;
 use std::convert::TryInto;
-use std::marker::PhantomData;
 use std::path::*;
 use std::ptr::*;
 
@@ -55,124 +54,119 @@ unsafe impl AsInclude for StandardFileInclude {
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nn-d3dcommon-id3dinclude)\]
-/// ID3DInclude implentation from [Fn]\([d3d::IncludeType], file_name: [abistr::CStrNonNull], parent: Option<(&H, &\[u8\])>\).
-pub fn include_from_fn_with_header<H>(f: impl Fn(d3d::IncludeType, abistr::CStrNonNull, Option<(&H, &[u8])>) -> Result<(H, Vec<u8>), ErrorKind>) -> impl AsInclude {
-    IncludeByFnWithHeader::new(f)
-}
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nn-d3dcommon-id3dinclude)\]
-/// ID3DInclude implentation from [Fn]\([d3d::IncludeType], file_name: [abistr::CStrNonNull]\).
-pub fn include_from_fn(f: impl Fn(d3d::IncludeType, abistr::CStrNonNull) -> Result<Vec<u8>, ErrorKind>) -> impl AsInclude {
-    include_from_fn_with_header(move |include_type, file_name, _parent| {
-        Ok(((), f(include_type, file_name)?))
-    })
-}
-
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nn-d3dcommon-id3dinclude)\]
-/// ID3DInclude implementation from [Fn]\([d3d::IncludeType], dir: &[Path], include: &[Path]\) -> [PathBuf].
-pub fn include_from_path_fn<'a>(dir: &'a Path, f: impl 'a + Fn(d3d::IncludeType, &Path, &Path) -> Result<PathBuf, ErrorKind>) -> impl AsInclude + 'a {
-    include_from_fn_with_header(move |include_type, file_name: abistr::CStrNonNull, parent: Option<(&PathBuf, &[u8])>| {
-        let file_name = file_name.to_str().map_err(|_| D3D11_ERROR::FILE_NOT_FOUND)?;
-        let dir = match parent {
-            Some((parent_path, _parent_data))   => &**parent_path,
-            None                                => dir,
-        };
-        let mut path = f(include_type, &dir, Path::new(file_name))?;
-        let data = std::fs::read(&path).map_err(|err| err.raw_os_error().map_or(D3D11_ERROR::FILE_NOT_FOUND, |raw| ErrorKind::from_win32(raw as _)))?;
-        // path: filename -> dir
-        if !path.pop() { return Err(D3D11_ERROR::FILE_NOT_FOUND); }
-        Ok((path, data))
-    })
-}
-
-
-
-
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nn-d3dcommon-id3dinclude)\]
-/// ID3DInclude implentation wrapping a [Fn]\([d3d::IncludeType], file_name: [abistr::CStrNonNull], parent: Option<(&H, &\[u8\])>\).
-#[repr(C)] struct IncludeByFnWithHeader<H, F: Fn(d3d::IncludeType, abistr::CStrNonNull, Option<(&H, &[u8])>) -> Result<(H, Vec<u8>), ErrorKind>> {
+/// ID3DInclude
+#[repr(C)] pub struct Include<I> {
     vtable: *const ID3DIncludeVtbl,
-    f:      F,
-    _pd:    PhantomData<H>,
+    imp:    I,
 }
 
-unsafe impl<H, F: Fn(d3d::IncludeType, abistr::CStrNonNull, Option<(&H, &[u8])>) -> Result<(H, Vec<u8>), ErrorKind>> AsInclude for IncludeByFnWithHeader<H, F> {
+unsafe impl<I> AsInclude for Include<I> {
     fn as_id3dinclude(&self) -> *mut ID3DInclude { self as *const Self as *mut Self as *mut ID3DInclude }
 }
 
-impl<H, F: Fn(d3d::IncludeType, abistr::CStrNonNull, Option<(&H, &[u8])>) -> Result<(H, Vec<u8>), ErrorKind>> IncludeByFnWithHeader<H, F> {
-    pub fn new(f: F) -> Self { Self { vtable: &Self::VTABLE, f, _pd: PhantomData } }
-
-    const VTABLE : ID3DIncludeVtbl = ID3DIncludeVtbl {
-        Open:   Self::open,
-        Close:  Self::close,
-    };
-
-    /// ### ⚠️ Safety ⚠️
-    /// *   All pointers should be valid
-    /// *   No pointers should alias each other
-    /// *   `this` must point at a `Self`
-    unsafe extern "system" fn open(this: *mut ID3DInclude, include_type: D3D_INCLUDE_TYPE, file_name: LPCSTR, parent_data: LPCVOID, data: *mut LPCVOID, bytes: *mut UINT) -> HRESULT {
-        if this         .is_null() { return E::INVALIDARG.into() }
-        if file_name    .is_null() { return E::INVALIDARG.into() }
-        if data         .is_null() { return E::INVALIDARG.into() }
-        if bytes        .is_null() { return E::INVALIDARG.into() }
-
-        let this            = unsafe { &*(this as *const Self) };
-        let include_type    = d3d::IncludeType::from_unchecked(include_type);
-        let file_name       = unsafe { abistr::CStrNonNull::from_ptr_unchecked_unbounded(file_name) };
-
-        let parent = if parent_data.is_null() {
-            None
-        } else {
-            let parent_data = parent_data as *mut u8;
-            let parent_thb = unsafe { ThinHeaderBlob::<H>::from_data(parent_data) };
-            let parent_thb = unsafe { &*parent_thb };
-            let parent_data = unsafe { std::slice::from_raw_parts(parent_data, (*parent_thb).data_bytes) };
-            Some((&parent_thb.header, parent_data))
+impl Include<()> {
+    /// Wrap [Fn]\([d3d::IncludeType], file_name: [abistr::CStrNonNull], parent: Option<(&H, &\[u8\])>\).
+    pub fn from_fn_with_header<H, F: Fn(d3d::IncludeType, abistr::CStrNonNull, Option<(&H, &[u8])>) -> Result<(H, Vec<u8>), ErrorKind>>(f: F) -> Include<F> {
+        let vtable : &'static ID3DIncludeVtbl = &ID3DIncludeVtbl {
+            Open:   open::<H, F>,
+            Close:  close::<H, F>,
         };
 
-        let o_data  = unsafe { &mut *data };
-        let o_bytes = unsafe { &mut *bytes };
-        *o_data     = null();
-        *o_bytes    = 0;
+        return Include {
+            vtable: vtable,
+            imp:    f,
+        };
 
-        match (this.f)(include_type, file_name, parent) {
-            Ok((header, data)) => {
-                let len32 : UINT = match data.len().try_into() {
-                    Ok(n)   => n,
-                    Err(_)  => return THINERR::SLICE_TOO_LARGE.into(),
-                };
+        /// ### ⚠️ Safety ⚠️
+        /// *   All pointers should be valid
+        /// *   No pointers should alias each other
+        /// *   `this` must point at a `Self`
+        unsafe extern "system" fn open<H, F: Fn(d3d::IncludeType, abistr::CStrNonNull, Option<(&H, &[u8])>) -> Result<(H, Vec<u8>), ErrorKind>>(this: *mut ID3DInclude, include_type: D3D_INCLUDE_TYPE, file_name: LPCSTR, parent_data: LPCVOID, data: *mut LPCVOID, bytes: *mut UINT) -> HRESULT {
+            if this         .is_null() { return E::INVALIDARG.into() }
+            if file_name    .is_null() { return E::INVALIDARG.into() }
+            if data         .is_null() { return E::INVALIDARG.into() }
+            if bytes        .is_null() { return E::INVALIDARG.into() }
 
-                let thb = match ThinHeaderBlob::<H>::alloc(header, &data[..]) {
-                    Ok(thb) => thb.as_ptr(),
-                    Err(_)  => return THINERR::SLICE_TOO_LARGE.into(),
-                };
+            let this            = unsafe { &*(this as *const Include<F>) };
+            let include_type    = d3d::IncludeType::from_unchecked(include_type);
+            let file_name       = unsafe { abistr::CStrNonNull::from_ptr_unchecked_unbounded(file_name) };
 
-                *o_data     = unsafe { ThinHeaderBlob::<H>::to_data(thb) }.cast();
-                *o_bytes    = len32;
-                S::OK
-            },
-            Err(kind) => kind,
-        }.into()
+            let parent = if parent_data.is_null() {
+                None
+            } else {
+                let parent_data = parent_data as *mut u8;
+                let parent_thb = unsafe { ThinHeaderBlob::<H>::from_data(parent_data) };
+                let parent_thb = unsafe { &*parent_thb };
+                let parent_data = unsafe { std::slice::from_raw_parts(parent_data, (*parent_thb).data_bytes) };
+                Some((&parent_thb.header, parent_data))
+            };
+
+            let o_data  = unsafe { &mut *data };
+            let o_bytes = unsafe { &mut *bytes };
+            *o_data     = null();
+            *o_bytes    = 0;
+
+            match (this.imp)(include_type, file_name, parent) {
+                Ok((header, data)) => {
+                    let len32 : UINT = match data.len().try_into() {
+                        Ok(n)   => n,
+                        Err(_)  => return THINERR::SLICE_TOO_LARGE.into(),
+                    };
+
+                    let thb = match ThinHeaderBlob::<H>::alloc(header, &data[..]) {
+                        Ok(thb) => thb.as_ptr(),
+                        Err(_)  => return THINERR::SLICE_TOO_LARGE.into(),
+                    };
+
+                    *o_data     = unsafe { ThinHeaderBlob::<H>::to_data(thb) }.cast();
+                    *o_bytes    = len32;
+                    S::OK
+                },
+                Err(kind) => kind,
+            }.into()
+        }
+
+        /// ### ⚠️ Safety ⚠️
+        /// *   All pointers should be valid
+        /// *   `this` must point at a `Self`
+        /// *   `data` must match the output of a previous call to `open` that has not yet been `close`d
+        unsafe extern "system" fn close<H, F: Fn(d3d::IncludeType, abistr::CStrNonNull, Option<(&H, &[u8])>) -> Result<(H, Vec<u8>), ErrorKind>>(this: *mut ID3DInclude, data: LPCVOID) -> HRESULT {
+            if this         .is_null() { return E::INVALIDARG.into() }
+            if data         .is_null() { return E::INVALIDARG.into() }
+
+            // this is unused
+            let data        = data as *mut u8;
+            let thb         = unsafe { ThinHeaderBlob::<H>::from_data(data) };
+
+            unsafe { ThinHeaderBlob::<H>::free(thb) };
+
+            S::OK.into()
+        }
     }
 
-    /// ### ⚠️ Safety ⚠️
-    /// *   All pointers should be valid
-    /// *   `this` must point at a `Self`
-    /// *   `data` must match the output of a previous call to `open` that has not yet been `close`d
-    unsafe extern "system" fn close(this: *mut ID3DInclude, data: LPCVOID) -> HRESULT {
-        if this         .is_null() { return E::INVALIDARG.into() }
-        if data         .is_null() { return E::INVALIDARG.into() }
+    /// Wrap [Fn]\([d3d::IncludeType], file_name: [abistr::CStrNonNull]\).
+    pub fn from_fn(f: impl Fn(d3d::IncludeType, abistr::CStrNonNull) -> Result<Vec<u8>, ErrorKind>) -> impl AsInclude {
+        Self::from_fn_with_header(move |include_type, file_name, _parent| {
+            Ok(((), f(include_type, file_name)?))
+        })
+    }
 
-        // this is unused
-        let data        = data as *mut u8;
-        let thb         = unsafe { ThinHeaderBlob::<H>::from_data(data) };
-
-        unsafe { ThinHeaderBlob::<H>::free(thb) };
-
-        S::OK.into()
+    /// Wrap [Fn]\([d3d::IncludeType], dir: &[Path], include: &[Path]\) -> [PathBuf].
+    pub fn from_path_fn<'a>(dir: &'a Path, f: impl 'a + Fn(d3d::IncludeType, &Path, &Path) -> Result<PathBuf, ErrorKind>) -> impl AsInclude + 'a {
+        Self::from_fn_with_header(move |include_type, file_name: abistr::CStrNonNull, parent: Option<(&PathBuf, &[u8])>| {
+            let file_name = file_name.to_str().map_err(|_| D3D11_ERROR::FILE_NOT_FOUND)?;
+            let dir = match parent {
+                Some((parent_path, _parent_data))   => &**parent_path,
+                None                                => dir,
+            };
+            let mut path = f(include_type, &dir, Path::new(file_name))?;
+            let data = std::fs::read(&path).map_err(|err| err.raw_os_error().map_or(D3D11_ERROR::FILE_NOT_FOUND, |raw| ErrorKind::from_win32(raw as _)))?;
+            // path: filename -> dir
+            if !path.pop() { return Err(D3D11_ERROR::FILE_NOT_FOUND); }
+            Ok((path, data))
+        })
     }
 }
 
