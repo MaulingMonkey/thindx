@@ -108,6 +108,8 @@ impl Include<()> {
     /// ```
     /// *   [_examples::d3dcompiler_02_compile]
     pub fn from_blob_meta_fn<M, F: Fn(d3d::IncludeType, abistr::CStrNonNull, Option<&M>) -> Result<(Vec<u8>, M), ErrorKind>>(f: F) -> Include<F> {
+        // TODO: consider meta-seeded version of this fn to get rid of the Option spam.
+
         let vtable : &'static ID3DIncludeVtbl = &ID3DIncludeVtbl {
             Open:   open::<M, F>,
             Close:  close::<M, F>,
