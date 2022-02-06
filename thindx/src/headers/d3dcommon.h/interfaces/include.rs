@@ -68,6 +68,46 @@ unsafe impl<I> AsInclude for Include<I> {
 
 impl Include<()> {
     /// Wrap [Fn]\([d3d::IncludeType], file_name: [abistr::CStrNonNull], parent: Option<(&H, &\[u8\])>\).
+    ///
+    /// ### Examples
+    /// ```rust
+    /// # use thindx::*;
+    /// # use std::path::*;
+    /// # return; // doc tests have wrong dir
+    /// let d3dc = d3d::Compiler::load_system(47).unwrap();
+    ///
+    /// let include = d3d::Include::from_fn_with_header(|include_type, file_name, parent|{
+    ///     let (quote, unquote) = match include_type {
+    ///         d3d::Include::Local     => ('"', '"'),
+    ///         d3d::Include::System    => ('<', '>'),
+    ///         _                       => ('?', '?'),
+    ///     };
+    ///
+    ///     let file_name   = file_name.to_str().map_err(|_| E::FAIL)?;
+    ///     let path        = Path::new(r"thindx\test\data").join(file_name);
+    ///
+    ///     println!("resolving `#include {quote}{file_name}{unquote}` to {path:?}");
+    ///
+    ///     let data        = std::fs::read(&path).map_err(|_| E::FAIL)?;
+    ///     let header      = path; // PathBuf
+    ///
+    ///     println!("  read {} bytes", data.len());
+    ///
+    ///     if let Some((parent_header, _parent_data)) = parent {
+    ///         println!("  into {:?}", parent_header);
+    ///     } else {
+    ///         println!("  into root file");
+    ///     }
+    ///
+    ///     Ok((header, data))
+    /// });
+    ///
+    /// let compiled = d3dc.compile_from_file(
+    ///     r"thindx\test\data\include-chain-1.hlsl", None, &include,
+    ///     "ps_main", "ps_4_0", d3d::Compile::Debug, d3d::CompileEffect::None
+    /// );
+    /// ```
+    /// *   [_examples::d3dcompiler_02_compile]
     pub fn from_fn_with_header<H, F: Fn(d3d::IncludeType, abistr::CStrNonNull, Option<(&H, &[u8])>) -> Result<(H, Vec<u8>), ErrorKind>>(f: F) -> Include<F> {
         let vtable : &'static ID3DIncludeVtbl = &ID3DIncludeVtbl {
             Open:   open::<H, F>,
@@ -147,28 +187,69 @@ impl Include<()> {
     }
 
     /// Wrap [Fn]\([d3d::IncludeType], file_name: [abistr::CStrNonNull]\).
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use thindx::*;
+    /// # use std::path::*;
+    /// # return; // doc tests have wrong dir
+    /// let d3dc = d3d::Compiler::load_system(47).unwrap();
+    ///
+    /// let include = d3d::Include::from_fn(|_ty, file|{
+    ///     let p = Path::new(r"thindx\test\data");
+    ///     let p = p.join(file.to_str().map_err(|_| D3D11_ERROR::FILE_NOT_FOUND)?);
+    ///     std::fs::read(p).map_err(|_| D3D11_ERROR::FILE_NOT_FOUND)
+    /// });
+    ///
+    /// let compiled = d3dc.compile_from_file(
+    ///     r"thindx\test\data\include-chain-1.hlsl", None, &include,
+    ///     "ps_main", "ps_4_0", d3d::Compile::Debug, d3d::CompileEffect::None
+    /// );
+    /// ```
     pub fn from_fn(f: impl Fn(d3d::IncludeType, abistr::CStrNonNull) -> Result<Vec<u8>, ErrorKind>) -> impl AsInclude {
         Self::from_fn_with_header(move |include_type, file_name, _parent| {
             Ok(((), f(include_type, file_name)?))
         })
     }
 
-    /// Wrap [Fn]\([d3d::IncludeType], dir: &[Path], include: &[Path]\) -> [PathBuf].
-    pub fn from_path_fn<'a>(dir: &'a Path, f: impl 'a + Fn(d3d::IncludeType, &Path, &Path) -> Result<PathBuf, ErrorKind>) -> impl AsInclude + 'a {
+    /// Wrap [Fn]\(dir: &[Path], [d3d::IncludeType], include: [abistr::CStrNonNull]\) -> [PathBuf].
+    ///
+    /// ### Examples
+    /// ```rust
+    /// # use thindx::*;
+    /// # return; // doc tests have wrong dir
+    /// let d3dc = d3d::Compiler::load_system(47).unwrap();
+    ///
+    /// let include = d3d::Include::from_path_fn(
+    ///     r"thindx\test\data",
+    ///     |dir, _t, file| Ok(dir.join(file.to_str().map_err(|_| D3D11_ERROR::FILE_NOT_FOUND)?))
+    /// );
+    ///
+    /// let compiled = d3dc.compile_from_file(
+    ///     r"thindx\test\data\include-chain-1.hlsl", None, &include,
+    ///     "ps_main", "ps_4_0", d3d::Compile::Debug, d3d::CompileEffect::None
+    /// );
+    /// ```
+    /// *   [_examples::d3dcompiler_02_compile]
+    pub fn from_path_fn<'a>(dir: impl AsRef<Path> + 'a, f: impl 'a + Fn(&Path, d3d::IncludeType, abistr::CStrNonNull) -> Result<PathBuf, ErrorKind>) -> impl AsInclude + 'a {
         Self::from_fn_with_header(move |include_type, file_name: abistr::CStrNonNull, parent: Option<(&PathBuf, &[u8])>| {
-            let file_name = file_name.to_str().map_err(|_| D3D11_ERROR::FILE_NOT_FOUND)?;
             let dir = match parent {
-                Some((parent_path, _parent_data))   => &**parent_path,
-                None                                => dir,
+                Some((parent_dir, _parent_data))    => &**parent_dir,
+                None                                => dir.as_ref(),
             };
-            let mut path = f(include_type, &dir, Path::new(file_name))?;
+            let mut path = f(dir, include_type, file_name)?;
             let data = std::fs::read(&path).map_err(|err| err.raw_os_error().map_or(D3D11_ERROR::FILE_NOT_FOUND, |raw| ErrorKind::from_win32(raw as _)))?;
-            // path: filename -> dir
-            if !path.pop() { return Err(D3D11_ERROR::FILE_NOT_FOUND); }
+            if !path.pop() { return Err(D3D11_ERROR::FILE_NOT_FOUND); } // path: filename -> dir
             Ok((path, data))
         })
     }
 }
+
+//#cpp2rust ID3DInclude         = struct d3d::Include
+//#cpp2rust ID3DInclude::Open   = d3d::Include::from_fn_with_header
+//#cpp2rust ID3DInclude::Open   = d3d::Include::from_fn
+//#cpp2rust ID3DInclude::Open   = d3d::Include::from_path_fn
+//#cpp2rust ID3DInclude::Close  = std::ops::Drop::drop
 
 
 

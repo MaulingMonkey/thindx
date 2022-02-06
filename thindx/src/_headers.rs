@@ -77,9 +77,9 @@ pub const unknwn_h : cxx_header = cxx_header;
 /// * [`RegisterDestructionCallback`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nf-d3dcommon-id3ddestructionotifier-registerdestructioncallback) →&nbsp;❌ <br>
 /// * [`UnregisterDestructionCallback`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nf-d3dcommon-id3ddestructionotifier-unregisterdestructioncallback) →&nbsp;❌ <br>
 ///
-/// [`ID3DInclude`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nn-d3dcommon-id3dinclude)&nbsp;→ <code>trait [d3d::AsInclude](d3d::AsInclude)</code> <br>
-/// * [`Close`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nf-d3dcommon-id3dinclude-close) →&nbsp;❌ <br>
-/// * [`Open`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nf-d3dcommon-id3dinclude-open) →&nbsp;❌ <br>
+/// [`ID3DInclude`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nn-d3dcommon-id3dinclude)&nbsp;→ <code>trait [d3d::AsInclude](d3d::AsInclude)</code>, <code>struct [d3d::Include](d3d::Include)</code> <br>
+/// * [`Close`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nf-d3dcommon-id3dinclude-close)&nbsp;→ [`std::ops::Drop::drop`] <br>
+/// * [`Open`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nf-d3dcommon-id3dinclude-open)&nbsp;→ [`d3d::Include::from_fn_with_header`], [`d3d::Include::from_fn`], [`d3d::Include::from_path_fn`] <br>
 ///
 /// ### C++ Structs -> Rust Structs
 ///

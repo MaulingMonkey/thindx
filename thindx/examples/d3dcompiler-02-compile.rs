@@ -66,7 +66,7 @@ fn main() {
         Ok((header, data))
     });
 
-    let include2 = d3d::Include::from_path_fn(Path::new(r"thindx\test\data"), |_ty, dir, include| Ok(dir.join(include)));
+    let include2 = d3d::Include::from_path_fn(Path::new(r"thindx\test\data"), |dir, _ty, include| Ok(dir.join(include.to_str().map_err(|_| D3D11_ERROR::FILE_NOT_FOUND)?)));
 
     let ic1a = d3dc.compile_from_file(r"thindx\test\data\include-chain-1.hlsl", None, &include1,           "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap();
     let ic1b = d3dc.compile_from_file(r"thindx\test\data\include-chain-1.hlsl", None, &include2,           "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap();
