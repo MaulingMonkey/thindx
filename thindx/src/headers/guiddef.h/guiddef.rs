@@ -35,37 +35,80 @@ pub type FmtID  = Guid;
 /// ### Examples
 /// ```rust
 /// # use thindx::*;
-/// const IID_NULL : Guid = guid!{00000000-0000-0000-0000-000000000000};
+/// const IID_NULL : Guid = guid!("00000000-0000-0000-0000-000000000000");
 /// ```
 #[macro_export]
 macro_rules! guid {
-    ( $a:tt - $b:tt - $c:tt - $d:tt - $e:tt ) => {{
+    ( $s:literal ) => {{
         // ensure macro contents are evaluated at compile time
         const GUID : $crate::Guid = {
-            const A : &'static [u8] = stringify!($a).as_bytes();
-            const B : &'static [u8] = stringify!($b).as_bytes();
-            const C : &'static [u8] = stringify!($c).as_bytes();
-            const D : &'static [u8] = stringify!($d).as_bytes();
-            const E : &'static [u8] = stringify!($e).as_bytes();
-            assert!(A.len() ==  8,  "expected 8 hex characters for 1st group of guid digits");
-            assert!(B.len() ==  4,  "expected 4 hex characters for 2nd group of guid digits");
-            assert!(C.len() ==  4,  "expected 4 hex characters for 3rd group of guid digits");
-            assert!(D.len() ==  4,  "expected 4 hex characters for 4th group of guid digits");
-            assert!(E.len() == 12, "expected 12 hex characters for 5th group of guid digits");
-            assert!($crate::Guid::_zzz_all_hex_digits_8(A),  "non-hexidecimal characters in 1st group of guid digits");
-            assert!($crate::Guid::_zzz_all_hex_digits_4(B),  "non-hexidecimal characters in 2nd group of guid digits");
-            assert!($crate::Guid::_zzz_all_hex_digits_4(C),  "non-hexidecimal characters in 3rd group of guid digits");
-            assert!($crate::Guid::_zzz_all_hex_digits_4(D),  "non-hexidecimal characters in 4th group of guid digits");
-            assert!($crate::Guid::_zzz_all_hex_digits_12(E), "non-hexidecimal characters in 5th group of guid digits");
-            $crate::Guid::_zzz_from_macro_contents(A, B, C, D, E)
+            use $crate::*;
+            const STR : &'static str = $s;
+            let mut bytes = STR.as_bytes();
+
+            guid!(@expect-hex  bytes, 8, "1st");
+            guid!(@expect-dash bytes, 8, "1st");
+            guid!(@expect-hex  bytes, 4, "2nd");
+            guid!(@expect-dash bytes, 4, "2nd");
+            guid!(@expect-hex  bytes, 4, "3rd");
+            guid!(@expect-dash bytes, 4, "3rd");
+            guid!(@expect-hex  bytes, 4, "4th");
+            guid!(@expect-dash bytes, 4, "4th");
+            guid!(@expect-hex  bytes,12, "5th");
+            guid!(@expect-eof  bytes,12, "5th");
+
+            $crate::Guid::_zzz_from_literal(STR)
         };
         GUID
     }};
+    ( @expect-dash $bytes:ident, $expected_digits:literal, $group:literal ) => {
+        if let Some((ch, rest)) = $bytes.split_first() {
+            if ch.is_ascii_hexdigit() {
+                panic!("{}", concat!("expected `-` after ", $expected_digits, " hex digits in ", $group, " group, but found more than that"));
+            } else if *ch == b'-' {
+                $bytes = rest; // OK
+            } else {
+                panic!("{}", concat!("expected `-` after ", $group, " group of hex digits, but found something else"));
+            }
+        } else {
+            panic!("{}", concat!("expected `-` after ", $group, " group of hex digits, but reached the end of the string instead"));
+        }
+    };
+    ( @expect-eof $bytes:ident, $expected_digits:literal, $group:literal ) => {
+        if let Some((ch, _rest)) = $bytes.split_first() {
+            if ch.is_ascii_hexdigit() {
+                panic!("{}", concat!("expected end of string after ", $expected_digits, " hex digits in ", $group, " group, but found more than that"));
+            } else if *ch == b'-' {
+                panic!("{}", concat!("expected end of string after ", $expected_digits, " hex digits in ", $group, " group, but found a trailing dash instead"));
+            } else {
+                panic!("{}", concat!("expected end of string after ", $group, " group of hex digits, but found something else"));
+            }
+        } else {
+            // OK
+        }
+    };
+    ( @expect-hex $bytes:ident, $expected_digits:literal, $group:literal ) => {
+        let mut digits : usize = $expected_digits;
+        while digits > 0 {
+            digits -= 1;
+            if let Some((ch, rest)) = $bytes.split_first() {
+                if ch.is_ascii_hexdigit() {
+                    $bytes = rest; // OK
+                } else if *ch == b'-' {
+                    panic!("{}", concat!("expected ", $expected_digits, " hex digits in ", $group, " group, but found a dash before that"));
+                } else {
+                    panic!("{}", concat!("expected ", $expected_digits, " hex digits in ", $group, " group, but found something else"));
+                }
+            } else {
+                panic!("{}", concat!("expected ", $expected_digits, " hex digits in ", $group, " group, but reached the end of the string instead"));
+            }
+        }
+    };
 }
 
 impl Guid {
     /// `{00000000-0000-0000-0000-000000000000}` - the "null" guid
-    pub const NULL : Self = guid!{00000000-0000-0000-0000-000000000000};
+    pub const NULL : Self = guid!("00000000-0000-0000-0000-000000000000");
 }
 
 unsafe impl Pod         for Guid {}
@@ -91,18 +134,9 @@ impl PartialOrd         for Guid { fn partial_cmp(&self, other: &Self) -> Option
 impl Hash               for Guid { fn hash<H: Hasher>(&self, state: &mut H) { self.as_bytes().hash(state) } }
 
 impl Guid {
-    #[doc(hidden)] pub const fn _zzz_all_hex_digits_4 (s: &[u8]) -> bool { s[0].is_ascii_hexdigit() && s[1].is_ascii_hexdigit() && s[2].is_ascii_hexdigit() && s[3].is_ascii_hexdigit() }
-    #[doc(hidden)] pub const fn _zzz_all_hex_digits_8 (s: &[u8]) -> bool { Self::_zzz_all_hex_digits_4(&[s[0], s[1], s[2], s[3]]) && Self::_zzz_all_hex_digits_4(&[s[4], s[5], s[6], s[7]]) }
-    #[doc(hidden)] pub const fn _zzz_all_hex_digits_12(s: &[u8]) -> bool { Self::_zzz_all_hex_digits_4(&[s[0], s[1], s[2], s[3]]) && Self::_zzz_all_hex_digits_4(&[s[4], s[5], s[6], s[7]]) && Self::_zzz_all_hex_digits_4(&[s[8], s[9], s[10], s[11]]) }
-
-    #[doc(hidden)] pub const fn _zzz_from_macro_contents(
-        a: &[u8],
-        b: &[u8],
-        c: &[u8],
-        d: &[u8],
-        e: &[u8],
-    ) -> Self {
+    #[doc(hidden)] pub const fn _zzz_from_literal(s: &'static str) -> Self {
         #![allow(non_snake_case)]
+        let s = s.as_bytes();
 
         const fn hex2b(hi: u8, lo: u8) -> u8 {
             let hi = match hi {
@@ -121,32 +155,32 @@ impl Guid {
         }
 
         let Data1 = u32::from_be_bytes([
-            hex2b(a[0], a[1]),
-            hex2b(a[2], a[3]),
-            hex2b(a[4], a[5]),
-            hex2b(a[6], a[7]),
+            hex2b(s[ 0], s[ 1]),
+            hex2b(s[ 2], s[ 3]),
+            hex2b(s[ 4], s[ 5]),
+            hex2b(s[ 6], s[ 7]),
         ]);
 
         let Data2 = u16::from_be_bytes([
-            hex2b(b[0], b[1]),
-            hex2b(b[2], b[3]),
+            hex2b(s[ 9], s[10]),
+            hex2b(s[11], s[12]),
         ]);
 
         let Data3 = u16::from_be_bytes([
-            hex2b(c[0], c[1]),
-            hex2b(c[2], c[3]),
+            hex2b(s[14], s[15]),
+            hex2b(s[16], s[17]),
         ]);
 
         let Data4 = [
-            hex2b(d[ 0], d[ 1]),
-            hex2b(d[ 2], d[ 3]),
+            hex2b(s[19], s[20]),
+            hex2b(s[21], s[22]),
             // -
-            hex2b(e[ 0], e[ 1]),
-            hex2b(e[ 2], e[ 3]),
-            hex2b(e[ 4], e[ 5]),
-            hex2b(e[ 6], e[ 7]),
-            hex2b(e[ 8], e[ 9]),
-            hex2b(e[10], e[11]),
+            hex2b(s[24], s[25]),
+            hex2b(s[26], s[27]),
+            hex2b(s[28], s[29]),
+            hex2b(s[30], s[31]),
+            hex2b(s[32], s[33]),
+            hex2b(s[34], s[35]),
         ];
 
         Self(GUID { Data1, Data2, Data3, Data4 })
@@ -169,8 +203,8 @@ impl Guid {
 
 #[test] fn test_display() {
     assert_eq!("{6B29FC40-CA47-1067-B31D-00DD010662DA}", Guid(GUID { Data1: 0x6B29FC40, Data2: 0xCA47, Data3: 0x1067, Data4: *b"\xB3\x1D\x00\xDD\x01\x06\x62\xDA" }).to_string());
-    assert_eq!("{6B29FC40-CA47-1067-B31D-00DD010662DA}", guid!{6B29FC40-CA47-1067-B31D-00DD010662DA}.to_string());
-    assert_eq!("{6B29FC40-CA47-1067-B31D-00DD010662DA}", guid!{6b29fc40-ca47-1067-b31d-00dd010662da}.to_string());
+    assert_eq!("{6B29FC40-CA47-1067-B31D-00DD010662DA}", guid!("6B29FC40-CA47-1067-B31D-00DD010662DA").to_string());
+    assert_eq!("{6B29FC40-CA47-1067-B31D-00DD010662DA}", guid!("6b29fc40-ca47-1067-b31d-00dd010662da").to_string());
 }
 
 //#cpp2rust GUID                = Guid

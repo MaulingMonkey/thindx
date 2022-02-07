@@ -20,12 +20,16 @@ use crate::*;
 ///
 /// The name is encoded in some narrow charset, interpreted by multiple applications, possibly on multiple computers if e.g. debug captures were transfered between systems.
 /// As such, any sane name should *probably* stick to a ASCII-safe subset, or use [wkpdid::D3DDebugObjectNameW] if supported instead.
-pub const D3DDebugObjectName     : Guid = guid!{429b8c22-9188-4b0c-8742-acb0bf85c200};
+pub const D3DDebugObjectName     : Guid = guid!("429b8c22-9188-4b0c-8742-acb0bf85c200");
 
 /// A UTF16ish debug object name, displayed in some graphics debuggers.
-pub const D3DDebugObjectNameW    : Guid = guid!{4cca5fd8-921f-42c8-8566-70caf2a9b741};
+pub const D3DDebugObjectNameW    : Guid = guid!("4cca5fd8-921f-42c8-8566-70caf2a9b741");
 
-//pub const CommentStringW         : Guid = guid!{d0149dc0-90e8-4ec8-8144-e900ad266bb2}; // error: expected at least one digit in exponent
+/// A UTF16ish comment string.
+///
+/// >   I don't know what this is actually used for?<br>
+/// >   &ndash; MaulingMonkey
+pub const CommentStringW         : Guid = guid!("d0149dc0-90e8-4ec8-8144-e900ad266bb2");
 
 
 
