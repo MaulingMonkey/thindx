@@ -109,6 +109,15 @@ fn check(mut args: std::env::Args) {
             path = &mut path[..n-1]; // "foo\_foo.rs" => "foo"
         }
     }
+
+    // [.., "guiddef.h", "guiddef"] => [.., "guiddef.h"]
+    if let [.., dir, last] = path {
+        if dir.strip_suffix(".h").unwrap_or(dir) == *last {
+            let n = path.len();
+            path = &mut path[..n-1];
+        }
+    }
+
     let pattern1 = path.join("::").replace(".h::", "::");   // "d3d11shader.h" => "d3d11shader"
     let pattern2 = path.join("::").replace(".h::", "_h::"); // "d3d11shader.h" => "d3d11shader_h"
 
