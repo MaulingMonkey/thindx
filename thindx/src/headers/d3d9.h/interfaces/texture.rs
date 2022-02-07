@@ -439,7 +439,7 @@ pub trait IDirect3DCubeTexture9Ext : AsSafe<IDirect3DCubeTexture9> {
     ///
     /// ### Returns
     /// *   [D3DERR::INVALIDCALL]
-    /// *   Ok([D3DLOCKED_RECT])
+    /// *   Ok([d3d::LockedRect])
     ///
     /// ### Example
     /// ```rust
@@ -457,13 +457,13 @@ pub trait IDirect3DCubeTexture9Ext : AsSafe<IDirect3DCubeTexture9> {
     ///     texture.unlock_rect(CubeMapFace::PositiveX, 0).unwrap();
     /// }
     /// ```
-    unsafe fn lock_rect_unchecked(&self, face: impl Into<CubeMapFace>, level: u32, rect: impl IntoRectOrFull, flags: impl Into<Lock>) -> Result<D3DLOCKED_RECT, MethodError> {
+    unsafe fn lock_rect_unchecked(&self, face: impl Into<CubeMapFace>, level: u32, rect: impl IntoRectOrFull, flags: impl Into<Lock>) -> Result<LockedRect, MethodError> {
         let face = face.into().into();
         let rect = rect.into_rect();
         let rect = rect.as_ref().map_or(null(), |r| &**r);
         let flags = flags.into().into();
-        let mut locked = unsafe { std::mem::zeroed::<D3DLOCKED_RECT>() };
-        let hr = unsafe { self.as_winapi().LockRect(face, level, &mut locked, rect.cast(), flags) };
+        let mut locked = LockedRect::zeroed();
+        let hr = unsafe { self.as_winapi().LockRect(face, level, locked.as_mut(), rect.cast(), flags) };
         MethodError::check("IDirect3DCubeTexture9::LockRect", hr)?;
         Ok(locked)
     }
@@ -819,7 +819,7 @@ pub trait IDirect3DVolumeTexture9Ext : AsSafe<IDirect3DVolumeTexture9> {
     ///
     /// ### Returns
     /// *   [D3DERR::INVALIDCALL]   If the texture belongs to [Pool::Default]
-    /// *   Ok([D3DLOCKED_BOX])
+    /// *   Ok([d3d::LockedBox])
     ///
     /// ### Example
     /// ```rust
@@ -841,12 +841,12 @@ pub trait IDirect3DVolumeTexture9Ext : AsSafe<IDirect3DVolumeTexture9> {
     /// }
     /// texture.unlock_box(0).unwrap();
     /// ```
-    unsafe fn lock_box_unchecked(&self, level: u32, box_: impl IntoBoxOrFull, flags: impl Into<Lock>) -> Result<D3DLOCKED_BOX, MethodError> {
+    unsafe fn lock_box_unchecked(&self, level: u32, box_: impl IntoBoxOrFull, flags: impl Into<Lock>) -> Result<LockedBox, MethodError> {
         let box_    = box_.into_box();
         let box_    = box_.as_ref().map_or(null(), |b| &**b);
         let flags   = flags.into().into();
-        let mut lockedbox = unsafe { std::mem::zeroed::<D3DLOCKED_BOX>() };
-        let hr = unsafe { self.as_winapi().LockBox(level, &mut lockedbox, box_, flags) };
+        let mut lockedbox = LockedBox::zeroed();
+        let hr = unsafe { self.as_winapi().LockBox(level, lockedbox.as_mut(), box_, flags) };
         MethodError::check("IDirect3DVolumeTexture9::LockBox", hr)?;
         Ok(lockedbox)
     }

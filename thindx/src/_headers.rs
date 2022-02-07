@@ -13,11 +13,11 @@
 //! | ---------- | ---------- | ------- | ----- | --------- | --------- | ------ |
 //! | [guiddef.h](const@guiddef_h) |   | ✔️ 1 of 1 |   |   | ✔️ 7 of 7 | ✔️ 7 of 7 |
 //! | [unknwn.h](const@unknwn_h) | ✔️ 1 of 1 |   |   |   |   |   |
-//! | [d3dcommon.h](const@d3dcommon_h) | ⚠️ 2 of 3 | ✔️ 1 of 1 | ✔️ 22 of 22 |   | ⚠️ 555 of 575 | ❌ 0 of 4 |
+//! | [d3dcommon.h](const@d3dcommon_h) | ⚠️ 2 of 3 | ✔️ 1 of 1 | ✔️ 22 of 22 |   | ⚠️ 555 of 575 | ✔️ 4 of 4 |
 //! | [d3dcompiler.h](const@d3dcompiler_h) |   | ✔️ 1 of 1 | ✔️ 2 of 2 |   | ⚠️ 60 of 71 |   |
 //! | [d3d9.h](const@d3d9_h) | ⚠️ 20 of 24 |   |   | ✔️ 9 of 9 | ⚠️ 64 of 72 | ✔️ 3 of 3 |
 //! | [d3d9caps.h](const@d3d9caps_h) |   | ⚠️ 3 of 5 |   |   | ⚠️ 213 of 249 |   |
-//! | [d3d9types.h](const@d3d9types_h) |   | ⚠️ 20 of 71 | ⚠️ 40 of 54 |   | ⚠️ 532 of 844 | ⚠️ 8 of 20 |
+//! | [d3d9types.h](const@d3d9types_h) |   | ⚠️ 22 of 71 | ⚠️ 40 of 54 |   | ⚠️ 532 of 844 | ⚠️ 8 of 20 |
 //! | [d3d11shader.h](const@d3d11shader_h) | ✔️ 12 of 12 | ✔️ 9 of 9 | ✔️ 1 of 1 |   | ⚠️ 16 of 17 | ✔️ 3 of 3 |
 //! | [d3d11shadertracing.h](const@d3d11shadertracing_h) | ❌ 0 of 2 | ❌ 0 of 11 | ❌ 0 of 3 |   | ❌ 0 of 62 |   |
 //! | [xinput.h](const@xinput_h) |   | ✔️ 6 of 6 |   | ✔️ 8 of 8 | ⚠️ 83 of 86 |   |
@@ -709,10 +709,10 @@ pub const unknwn_h : cxx_header = cxx_header;
 /// `IID_ID3DBlob` →&nbsp;❌ <br>
 /// ### C++ Macros → Rust fns/macros
 ///
-/// `D3D_SET_OBJECT_NAME_A` →&nbsp;❌ <br>
-/// `D3D_SET_OBJECT_NAME_N_A` →&nbsp;❌ <br>
-/// `D3D_SET_OBJECT_NAME_N_W` →&nbsp;❌ <br>
-/// `D3D_SET_OBJECT_NAME_W` →&nbsp;❌ <br>
+/// `D3D_SET_OBJECT_NAME_A`&nbsp;→ [`d3d9::IDirect3DResource9Ext::set_object_name`], [`d3d9::IDirect3DResource9Ext::set_object_name_a`], [`d3d9::IDirect3DVolume9Ext::set_object_name`], [`d3d9::IDirect3DVolume9Ext::set_object_name_a`] <br>
+/// `D3D_SET_OBJECT_NAME_N_A`&nbsp;→ [`d3d9::IDirect3DResource9Ext::set_object_name`], [`d3d9::IDirect3DResource9Ext::set_object_name_a`], [`d3d9::IDirect3DVolume9Ext::set_object_name`], [`d3d9::IDirect3DVolume9Ext::set_object_name_a`] <br>
+/// `D3D_SET_OBJECT_NAME_N_W`&nbsp;→ [`d3d9::IDirect3DResource9Ext::set_object_name_w`], [`d3d9::IDirect3DVolume9Ext::set_object_name_w`] <br>
+/// `D3D_SET_OBJECT_NAME_W`&nbsp;→ [`d3d9::IDirect3DResource9Ext::set_object_name_w`], [`d3d9::IDirect3DVolume9Ext::set_object_name_w`] <br>
 pub const d3dcommon_h : cxx_header = cxx_header;
 
 
@@ -1032,7 +1032,7 @@ pub const d3dcompiler_h : cxx_header = cxx_header;
 /// * [`GetType`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-gettype)&nbsp;→ [`d3d9::IDirect3DResource9Ext::get_type`] <br>
 /// * [`PreLoad`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-preload)&nbsp;→ [`d3d9::IDirect3DResource9Ext::preload`] <br>
 /// * [`SetPriority`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-setpriority)&nbsp;→ [`d3d9::IDirect3DResource9Ext::set_priority`] <br>
-/// * [`SetPrivateData`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-setprivatedata)&nbsp;→ [`d3d9::IDirect3DResource9Ext::set_private_data`] <br>
+/// * [`SetPrivateData`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-setprivatedata)&nbsp;→ [`d3d9::IDirect3DResource9Ext::set_private_data`], [`d3d9::IDirect3DResource9Ext::set_object_name`], [`d3d9::IDirect3DResource9Ext::set_object_name_a`], [`d3d9::IDirect3DResource9Ext::set_object_name_w`] <br>
 ///
 /// [`IDirect3DStateBlock9`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dstateblock9)&nbsp;→ [`d3d9::StateBlock`], [`d3d9::IDirect3DStateBlock9Ext`] <br>
 /// * [`Apply`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dstateblock9-apply)&nbsp;→ [`d3d9::IDirect3DStateBlock9Ext::apply`] <br>
@@ -1088,7 +1088,7 @@ pub const d3dcompiler_h : cxx_header = cxx_header;
 /// * [`GetDevice`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-getdevice)&nbsp;→ [`d3d9::IDirect3DVolume9Ext::get_device`] <br>
 /// * [`GetPrivateData`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-getprivatedata)&nbsp;→ [`d3d9::IDirect3DVolume9Ext::get_private_data_inplace`] <br>
 /// * [`LockBox`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-lockbox)&nbsp;→ [`d3d9::IDirect3DVolume9Ext::lock_box_unchecked`] <br>
-/// * [`SetPrivateData`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-setprivatedata)&nbsp;→ [`d3d9::IDirect3DVolume9Ext::set_private_data`] <br>
+/// * [`SetPrivateData`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-setprivatedata)&nbsp;→ [`d3d9::IDirect3DVolume9Ext::set_private_data`], [`d3d9::IDirect3DVolume9Ext::set_object_name`], [`d3d9::IDirect3DVolume9Ext::set_object_name_a`], [`d3d9::IDirect3DVolume9Ext::set_object_name_w`] <br>
 /// * [`UnlockBox`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-unlockbox)&nbsp;→ [`d3d9::IDirect3DVolume9Ext::unlock_box`] <br>
 ///
 /// [`IDirect3DVolumeTexture9`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dvolumetexture9)&nbsp;→ [`d3d9::VolumeTexture`], [`d3d9::IDirect3DVolumeTexture9Ext`] <br>
@@ -1511,8 +1511,8 @@ pub const d3d9caps_h : cxx_header = cxx_header;
 /// [`D3DGAMMARAMP`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dgammaramp) →&nbsp;❌ <br>
 /// [`D3DINDEXBUFFER_DESC`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dindexbuffer-desc)&nbsp;→ [`d3d::IndexBufferDesc`] <br>
 /// [`D3DLIGHT9`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dlight9)&nbsp;→ [`d3d9::Light`] <br>
-/// [`D3DLOCKED_BOX`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dlocked-box) →&nbsp;❌ <br>
-/// [`D3DLOCKED_RECT`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dlocked-rect) →&nbsp;❌ <br>
+/// [`D3DLOCKED_BOX`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dlocked-box)&nbsp;→ [`d3d::LockedBox`] <br>
+/// [`D3DLOCKED_RECT`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dlocked-rect)&nbsp;→ [`d3d::LockedRect`] <br>
 /// [`D3DMATERIAL9`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dmaterial9)&nbsp;→ [`d3d9::Material`] <br>
 /// [`D3DMATRIX`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dmatrix)&nbsp;→ [`d3d::Matrix`] <br>
 /// [`D3DMEMORYPRESSURE`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dmemorypressure) →&nbsp;❌ <br>

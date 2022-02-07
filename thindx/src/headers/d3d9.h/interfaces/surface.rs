@@ -7,7 +7,6 @@ use bytemuck::*;
 
 use winapi::Interface;
 use winapi::shared::d3d9::{IDirect3DSurface9, IDirect3DResource9};
-use winapi::shared::d3d9types::*;
 use winapi::shared::windef::HDC;
 use winapi::um::unknwnbase::IUnknown;
 
@@ -137,7 +136,7 @@ pub trait IDirect3DSurface9Ext : AsSafe<IDirect3DSurface9> {
     ///
     /// ### Returns
     /// *   [D3DERR::INVALIDCALL]
-    /// *   Ok([D3DLOCKED_RECT])
+    /// *   Ok([d3d::LockedRect])
     ///
     /// ### Example
     /// ```rust
@@ -155,11 +154,11 @@ pub trait IDirect3DSurface9Ext : AsSafe<IDirect3DSurface9> {
     ///     surface.unlock_rect();
     /// }
     /// ```
-    unsafe fn lock_rect_unchecked(&self, rect: impl IntoRectOrFull, flags: impl Into<Lock>) -> Result<D3DLOCKED_RECT, MethodError> {
+    unsafe fn lock_rect_unchecked(&self, rect: impl IntoRectOrFull, flags: impl Into<Lock>) -> Result<LockedRect, MethodError> {
         let rect = rect.into_rect();
         let rect = rect.as_ref().map_or(null(), |b| &**b);
-        let mut locked = unsafe { std::mem::zeroed::<D3DLOCKED_RECT>() };
-        let hr = unsafe { self.as_winapi().LockRect(&mut locked, rect.cast(), flags.into().into()) };
+        let mut locked = LockedRect::zeroed();
+        let hr = unsafe { self.as_winapi().LockRect(locked.as_mut(), rect.cast(), flags.into().into()) };
         MethodError::check("IDirect3DSurface9::LockRect", hr)?;
         Ok(locked)
     }

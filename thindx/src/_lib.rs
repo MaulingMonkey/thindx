@@ -29,6 +29,7 @@ mods! {
         pub mod d3d;
         pub mod d3d9;
         pub mod d3d11;
+        pub mod wkpdid;
         pub mod xinput;
     }
 

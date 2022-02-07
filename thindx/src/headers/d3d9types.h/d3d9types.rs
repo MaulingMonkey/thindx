@@ -74,6 +74,8 @@ mods! {
         inl mod display_mode;
         inl mod index_buffer_desc;
         inl mod light;
+        inl mod locked_box;
+        inl mod locked_rect;
         inl mod material;
         inl mod matrix;
         inl mod present_stats;

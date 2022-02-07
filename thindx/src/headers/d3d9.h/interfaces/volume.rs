@@ -5,8 +5,6 @@ use bytemuck::*;
 
 use winapi::Interface;
 use winapi::shared::d3d9::IDirect3DVolume9;
-use winapi::shared::d3d9types::*;
-use winapi::shared::guiddef::GUID;
 use winapi::um::unknwnbase::IUnknown;
 
 use std::convert::TryInto;
@@ -36,7 +34,9 @@ unsafe impl AsSafe<IDirect3DVolume9 > for Volume { fn as_safe(&self) -> &IDirect
 /// | <span style="opacity: 25%">get_private_data_com</span>        | [GetPrivateData]      | Retrieves a COM object associated with the volume.
 /// | [lock_box_unchecked](Self::lock_box_unchecked)                | [LockBox]             | Locks a box on a volume resource.
 /// | [set_private_data](Self::set_private_data)                    | [SetPrivateData]      | Associates data with the volume that is intended for use by the application, not by Direct3D.
-/// | <span style="opacity: 25%">set_debug_name</span>              | [SetPrivateData]      | Associates a debug name with the volume for graphics debuggers.
+/// | [set_object_name](Self::set_object_name)                      | [SetPrivateData]      | Associates a debug name with the resource for graphics debuggers.
+/// | [set_object_name_a](Self::set_object_name_a)                  | [SetPrivateData]      | Associates a debug name with the resource for graphics debuggers.
+/// | [set_object_name_w](Self::set_object_name_w)                  | [SetPrivateData]      | Associates a debug name with the resource for graphics debuggers.
 /// | <span style="opacity: 25%">set_private_data_com</span>        | [SetPrivateData]      | Associates a COM object with the resource for use by the application.
 /// | [unlock_box](Self::unlock_box)                                | [UnlockBox]           | Unlocks a box on a volume resource.
 ///
@@ -59,8 +59,23 @@ pub trait IDirect3DVolume9Ext : AsSafe<IDirect3DVolume9> {
     /// *   [D3DERR::INVALIDCALL]
     /// *   [D3DERR::NOTFOUND]
     /// *   Ok(`()`)
-    fn free_private_data(&self, guid: &GUID) -> Result<(), MethodError> {
-        let hr = unsafe { self.as_winapi().FreePrivateData(guid) };
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use dev::d3d9::*; let dev = device_pure();
+    /// let t = dev.create_volume_texture(8, 8, 8, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
+    /// let v = t.get_volume_level(0).unwrap();
+    ///
+    /// // wkpdid::D3DDebugObjectName not yet set:
+    /// assert_eq!(D3DERR::NOTFOUND, v.free_private_data(&wkpdid::D3DDebugObjectName));
+    ///
+    /// v.set_object_name("triangle index buffer").unwrap();
+    ///
+    /// // wkpdid::D3DDebugObjectName was set by set_object_name, so now it should succeed:
+    /// v.free_private_data(&wkpdid::D3DDebugObjectName).unwrap();
+    /// ```
+    fn free_private_data(&self, guid: &impl AsRef<Guid>) -> Result<(), MethodError> {
+        let hr = unsafe { self.as_winapi().FreePrivateData(guid.as_ref().as_ref()) };
         MethodError::check("IDirect3DVolume9::FreePrivateData", hr)
     }
 
@@ -71,7 +86,22 @@ pub trait IDirect3DVolume9Ext : AsSafe<IDirect3DVolume9> {
     ///
     /// ### Returns
     /// *   [D3DERR::INVALIDCALL]
+    /// *   [E::NOINTERFACE]        If the container doesn't implement the interface `C`
     /// *   Ok(`C`)
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use dev::d3d9::*; let dev = device_pure();
+    /// let t = dev.create_volume_texture(8, 8, 8, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
+    /// let v = t.get_volume_level(0).unwrap();
+    ///
+    /// assert_eq!(E::NOINTERFACE, v.get_container::<Device>().map(|_| ())); // use .get_device() instead
+    /// let t2 : VolumeTexture = v.get_container().unwrap();
+    ///
+    /// let t  = mcom::Rc::<winapi::shared::d3d9::IDirect3DVolumeTexture9>::from(t );
+    /// let t2 = mcom::Rc::<winapi::shared::d3d9::IDirect3DVolumeTexture9>::from(t2);
+    /// assert_eq!(t.as_ptr(), t2.as_ptr());
+    /// ```
     fn get_container<C: Raw>(&self) -> Result<C, MethodError> where C::Raw : Interface {
         let mut container = null_mut();
         let hr = unsafe { self.as_winapi().GetContainer(&C::Raw::uuidof(), &mut container) };
@@ -87,6 +117,27 @@ pub trait IDirect3DVolume9Ext : AsSafe<IDirect3DVolume9> {
     /// ### Returns
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok([VolumeDesc])
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use dev::d3d9::*; let dev = device_pure();
+    /// let t = dev.create_volume_texture(8, 8, 8, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
+    /// let v = t.get_volume_level(0).unwrap();
+    /// dbg!(v.get_desc().unwrap());
+    /// ```
+    ///
+    /// ### Output
+    /// ```text
+    /// v.get_desc().unwrap() = VolumeDesc {
+    ///     format: Format(D3DFMT_A8R8G8B8),
+    ///     ty: ResourceType::Volume,
+    ///     usage: Usage::None,
+    ///     pool: Pool::Default,
+    ///     width: 8,
+    ///     height: 8,
+    ///     depth: 8,
+    /// }
+    /// ```
     fn get_desc(&self) -> Result<VolumeDesc, MethodError> {
         let mut desc = VolumeDesc::zeroed();
         let hr = unsafe { self.as_winapi().GetDesc(&mut *desc) };
@@ -102,6 +153,18 @@ pub trait IDirect3DVolume9Ext : AsSafe<IDirect3DVolume9> {
     /// ### Returns
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok([Device])
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use dev::d3d9::*; let dev = device_pure();
+    /// let t = dev.create_volume_texture(8, 8, 8, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
+    /// let v = t.get_volume_level(0).unwrap();
+    /// let dev2 = v.get_device().unwrap();
+    ///
+    /// let dev  = mcom::Rc::<winapi::shared::d3d9::IDirect3DDevice9>::from(dev );
+    /// let dev2 = mcom::Rc::<winapi::shared::d3d9::IDirect3DDevice9>::from(dev2);
+    /// assert_eq!(dev.as_ptr(), dev2.as_ptr());
+    /// ```
     fn get_device(&self) -> Result<Device, MethodError> {
         let mut device = null_mut();
         let hr = unsafe { self.as_winapi().GetDevice(&mut device) };
@@ -119,9 +182,27 @@ pub trait IDirect3DVolume9Ext : AsSafe<IDirect3DVolume9> {
     /// *   [D3DERR::MOREDATA]
     /// *   [D3DERR::NOTFOUND]
     /// *   Ok(`read_slice`)
-    fn get_private_data_inplace<'s>(&self, guid: &GUID, data: &'s mut [u8]) -> Result<&'s [u8], MethodError> {
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use dev::d3d9::*; let dev = device_pure();
+    /// let mut buf = [0u8; 128];
+    /// let t = dev.create_volume_texture(8, 8, 8, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
+    /// let v = t.get_volume_level(0).unwrap();
+    ///
+    /// assert_eq!(D3DERR::NOTFOUND, v.get_private_data_inplace(&wkpdid::D3DDebugObjectName, &mut buf[..]));
+    ///
+    /// let name : &[u8] = b"triangle index buffer";
+    /// v.set_object_name_a(name).unwrap();
+    ///
+    /// assert_eq!(name, v.get_private_data_inplace(&wkpdid::D3DDebugObjectName, &mut buf[..]).unwrap());
+    ///
+    /// let mut buf = [0u8];
+    /// assert_eq!(D3DERR::MOREDATA, v.get_private_data_inplace(&wkpdid::D3DDebugObjectName, &mut buf[..]));
+    /// ```
+    fn get_private_data_inplace<'s>(&self, guid: &impl AsRef<Guid>, data: &'s mut [u8]) -> Result<&'s [u8], MethodError> {
         let mut n : u32 = data.len().try_into().map_err(|_| MethodError("Resource::get_private_data_inplace", THINERR::SLICE_OVERFLOW))?;
-        let hr = unsafe { self.as_winapi().GetPrivateData(guid, data.as_mut_ptr().cast(), &mut n) };
+        let hr = unsafe { self.as_winapi().GetPrivateData(guid.as_ref().as_ref(), data.as_mut_ptr().cast(), &mut n) };
         MethodError::check("IDirect3DVolume9::GetPrivateData", hr)?;
         Ok(&data[..(n as usize)])
     }
@@ -133,10 +214,66 @@ pub trait IDirect3DVolume9Ext : AsSafe<IDirect3DVolume9> {
     /// *   [D3DERR::INVALIDCALL]
     /// *   [E::OUTOFMEMORY]
     /// *   Ok(`()`)
-    fn set_private_data(&self, guid: &GUID, data: &[u8]) -> Result<(), MethodError> {
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use dev::d3d9::*; let dev = device_pure();
+    /// let t = dev.create_volume_texture(8, 8, 8, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
+    /// let v = t.get_volume_level(0).unwrap();
+    /// v.set_private_data(&wkpdid::D3DDebugObjectName, b"my volume").unwrap();
+    /// ```
+    fn set_private_data(&self, guid: &impl AsRef<Guid>, data: &[u8]) -> Result<(), MethodError> {
         let n : u32 = data.len().try_into().map_err(|_| MethodError("Resource::set_private_data", THINERR::SLICE_OVERFLOW))?;
-        let hr = unsafe { self.as_winapi().SetPrivateData(guid, data.as_ptr().cast(), n, 0) };
+        let hr = unsafe { self.as_winapi().SetPrivateData(guid.as_ref().as_ref(), data.as_ptr().cast(), n, 0) };
         MethodError::check("IDirect3DVolume9::SetPrivateData", hr)
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-setprivatedata)\]
+    /// IDirect3DVolume9::SetPrivateData(WKPDID_D3DDebugObjectName, ...)
+    ///
+    /// Set a human-readable name for this object, to make graphics debug captures easier to understand.
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use dev::d3d9::*; let dev = device_pure();
+    /// let t = dev.create_volume_texture(8, 8, 8, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
+    /// let v = t.get_volume_level(0).unwrap();
+    /// v.set_object_name("my volume").unwrap();
+    /// ```
+    fn set_object_name(&self, name: &str) -> Result<(), MethodError> {
+        self.set_object_name_a(name.as_bytes())
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-setprivatedata)\]
+    /// IDirect3DVolume9::SetPrivateData(WKPDID_D3DDebugObjectName, ...)
+    ///
+    /// Set a human-readable name for this object, to make graphics debug captures easier to understand.
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use dev::d3d9::*; let dev = device_pure();
+    /// let t = dev.create_volume_texture(8, 8, 8, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
+    /// let v = t.get_volume_level(0).unwrap();
+    /// v.set_object_name_a(b"my volume").unwrap();
+    /// ```
+    fn set_object_name_a(&self, name: &[u8]) -> Result<(), MethodError> {
+        self.set_private_data(&wkpdid::D3DDebugObjectName, name)
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-setprivatedata)\]
+    /// IDirect3DVolume9::SetPrivateData(WKPDID_D3DDebugObjectNameW, ...)
+    ///
+    /// Set a human-readable name for this object, to make graphics debug captures easier to understand.
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use dev::d3d9::*; let dev = device_pure();
+    /// let t = dev.create_volume_texture(8, 8, 8, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
+    /// let v = t.get_volume_level(0).unwrap();
+    /// v.set_object_name_w(abistr::cstr16!("my volume").to_units()).unwrap();
+    /// ```
+    fn set_object_name_w(&self, name: &[u16]) -> Result<(), MethodError> {
+        self.set_private_data(&wkpdid::D3DDebugObjectNameW, bytemuck::cast_slice(name))
     }
 
     // TODO: set_private_data_unk
@@ -153,12 +290,22 @@ pub trait IDirect3DVolume9Ext : AsSafe<IDirect3DVolume9> {
     ///
     /// ### Returns
     /// *   [D3DERR::INVALIDCALL]
-    /// *   Ok([D3DLOCKED_BOX])
-    unsafe fn lock_box_unchecked(&self, box_: impl IntoBoxOrFull, flags: impl Into<Lock>) -> Result<D3DLOCKED_BOX, MethodError> {
-        let mut locked = unsafe { std::mem::zeroed::<D3DLOCKED_BOX>() };
+    /// *   Ok([d3d::LockedBox])
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use dev::d3d9::*; let dev = device_pure();
+    /// let t = dev.create_volume_texture(8, 8, 8, 0, Usage::None, Format::A8R8G8B8, Pool::Managed, ()).unwrap();
+    /// let v = t.get_volume_level(0).unwrap();
+    /// let lock = unsafe { v.lock_box_unchecked(.., Lock::None).unwrap() };
+    /// // TODO: init data
+    /// v.unlock_box().unwrap();
+    /// ```
+    unsafe fn lock_box_unchecked(&self, box_: impl IntoBoxOrFull, flags: impl Into<Lock>) -> Result<LockedBox, MethodError> {
+        let mut locked = LockedBox::zeroed();
         let box_ = box_.into_box();
         let box_ = box_.as_ref().map_or(null(), |b| &**b);
-        let hr = unsafe { self.as_winapi().LockBox(&mut locked, box_, flags.into().into()) };
+        let hr = unsafe { self.as_winapi().LockBox(locked.as_mut(), box_, flags.into().into()) };
         MethodError::check("IDirect3DVolume9::LockBox", hr)?;
         Ok(locked)
     }
@@ -171,6 +318,18 @@ pub trait IDirect3DVolume9Ext : AsSafe<IDirect3DVolume9> {
     /// ### Returns
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok(`()`)
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use dev::d3d9::*; let dev = device_pure();
+    /// let t = dev.create_volume_texture(8, 8, 8, 0, Usage::None, Format::A8R8G8B8, Pool::Managed, ()).unwrap();
+    /// let v = t.get_volume_level(0).unwrap();
+    /// let lock = unsafe { v.lock_box_unchecked(.., Lock::None).unwrap() };
+    /// # assert_eq!(D3DERR::INVALIDCALL, unsafe { v.lock_box_unchecked(.., Lock::None) }, "was already locked");
+    /// // ...
+    /// v.unlock_box().unwrap();
+    /// # assert_eq!(D3DERR::INVALIDCALL, v.unlock_box(), "was already unlocked");
+    /// ```
     fn unlock_box(&self) -> Result<(), MethodError> {
         let hr = unsafe { self.as_winapi().UnlockBox() };
         MethodError::check("IDirect3DVolume9::UnlockBox", hr)
@@ -181,10 +340,7 @@ impl<T: AsSafe<IDirect3DVolume9>> IDirect3DVolume9Ext for T {}
 
 
 
-// TODO: examples
 // TODO: integration tests
-// TODO: make set_private_data generic on any data type?  bytemuck data types?
-// TODO: make get_private_data_inplace generic on bytemuck data types?
 
 
 
@@ -199,6 +355,15 @@ impl<T: AsSafe<IDirect3DVolume9>> IDirect3DVolume9Ext for T {}
 //TODO:     IDirect3DVolume9::GetPrivateData        = d3d9::IDirect3DVolume9Ext::get_private_data_com
 //#cpp2rust IDirect3DVolume9::LockBox               = d3d9::IDirect3DVolume9Ext::lock_box_unchecked
 //#cpp2rust IDirect3DVolume9::SetPrivateData        = d3d9::IDirect3DVolume9Ext::set_private_data
-//TODO:     IDirect3DVolume9::SetPrivateData        = d3d9::IDirect3DVolume9Ext::set_debug_name
+//#cpp2rust IDirect3DVolume9::SetPrivateData        = d3d9::IDirect3DVolume9Ext::set_object_name
+//#cpp2rust IDirect3DVolume9::SetPrivateData        = d3d9::IDirect3DVolume9Ext::set_object_name_a
+//#cpp2rust IDirect3DVolume9::SetPrivateData        = d3d9::IDirect3DVolume9Ext::set_object_name_w
 //TODO:     IDirect3DVolume9::SetPrivateData        = d3d9::IDirect3DVolume9Ext::set_private_data_com
 //#cpp2rust IDirect3DVolume9::UnlockBox             = d3d9::IDirect3DVolume9Ext::unlock_box
+
+//#cpp2rust D3D_SET_OBJECT_NAME_A                   = d3d9::IDirect3DVolume9Ext::set_object_name
+//#cpp2rust D3D_SET_OBJECT_NAME_N_A                 = d3d9::IDirect3DVolume9Ext::set_object_name
+//#cpp2rust D3D_SET_OBJECT_NAME_A                   = d3d9::IDirect3DVolume9Ext::set_object_name_a
+//#cpp2rust D3D_SET_OBJECT_NAME_N_A                 = d3d9::IDirect3DVolume9Ext::set_object_name_a
+//#cpp2rust D3D_SET_OBJECT_NAME_N_W                 = d3d9::IDirect3DVolume9Ext::set_object_name_w
+//#cpp2rust D3D_SET_OBJECT_NAME_W                   = d3d9::IDirect3DVolume9Ext::set_object_name_w

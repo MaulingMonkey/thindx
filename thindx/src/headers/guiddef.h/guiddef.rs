@@ -75,8 +75,12 @@ impl Default            for Guid { fn default() -> Self { Self::zeroed() } }
 impl Debug              for Guid { fn fmt(&self, fmt: &mut Formatter) -> fmt::Result { self.fmt_impl(fmt) } }
 impl Display            for Guid { fn fmt(&self, fmt: &mut Formatter) -> fmt::Result { self.fmt_impl(fmt) } }
 
+impl AsRef<Guid> for Guid { fn as_ref(&    self) -> &    Guid {      self } }
+impl AsMut<Guid> for Guid { fn as_mut(&mut self) -> &mut Guid {      self } }
 impl AsRef<GUID> for Guid { fn as_ref(&    self) -> &    GUID { &    self.0 } }
 impl AsMut<GUID> for Guid { fn as_mut(&mut self) -> &mut GUID { &mut self.0 } }
+impl AsRef<Guid> for GUID { fn as_ref(&    self) -> &    Guid { unsafe { std::mem::transmute(self) } } }
+impl AsMut<Guid> for GUID { fn as_mut(&mut self) -> &mut Guid { unsafe { std::mem::transmute(self) } } }
 impl From<GUID> for Guid { fn from(guid: GUID) -> Self { Self(guid) } }
 impl From<Guid> for GUID { fn from(guid: Guid) -> Self { guid.0 } }
 
