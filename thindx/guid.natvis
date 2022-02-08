@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AutoVisualizer xmlns="http://schemas.microsoft.com/vstudio/debugger/natvis/2010">
+
+    <Type Name="thindx::guiddef_h::Guid">
+        <DisplayString>{{{__0.Data1,xb}-{__0.Data2,xb}-{__0.Data3,xb}-{__0.Data4[0],nvoxb}{__0.Data4[1],nvoxb}-{__0.Data4[2],nvoxb}{__0.Data4[3],nvoxb}{__0.Data4[4],nvoxb}{__0.Data4[5],nvoxb}{__0.Data4[6],nvoxb}{__0.Data4[7],nvoxb}}}</DisplayString>
+    </Type>
+
+</AutoVisualizer>
