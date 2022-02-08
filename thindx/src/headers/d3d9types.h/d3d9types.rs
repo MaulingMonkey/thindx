@@ -84,6 +84,7 @@ mods! {
         inl mod present_stats;
         inl mod raster_status;
         inl mod rect;
+        inl mod resource_stats;
         inl mod surface_desc;
         inl mod vector;
         inl mod vertex_buffer_desc;
