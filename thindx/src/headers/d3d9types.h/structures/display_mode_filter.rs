@@ -13,7 +13,8 @@ use winapi::shared::minwindef::UINT;
 /// Specifies types of display modes to filter out.
 ///
 /// ### See Also
-// TODO
+/// *   [d3d9::IDirect3D9ExExt::enum_adapter_modes_ex]
+/// *   [d3d9::IDirect3D9ExExt::get_adapter_mode_count_ex]
 #[derive(Clone, Copy, Debug)]
 #[derive(Pod, Zeroable)]
 #[repr(C)] pub struct DisplayModeFilter {

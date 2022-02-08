@@ -100,12 +100,12 @@ pub trait IDirect3D9ExExt : AsSafe<IDirect3D9Ex> {
     /// IDirect3D9Ex::EnumAdapterModesEx
     ///
     /// Enumerate actual display mode info based on the given mode index.
-    fn enum_adapter_modes_ex(&self, adapter: u32, filter: impl Into<D3DDISPLAYMODEFILTER>, mode: u32) -> Result<DisplayModeEx, MethodError> {
+    fn enum_adapter_modes_ex(&self, adapter: u32, filter: impl Into<DisplayModeFilter>, mode: u32) -> Result<DisplayModeEx, MethodError> {
         let mut filter = filter.into();
-        filter.Size = std::mem::size_of_val(&filter).try_into().unwrap();
+        filter.size = std::mem::size_of_val(&filter).try_into().unwrap();
         let mut dmex = DisplayModeEx::zeroed();
         dmex.size = std::mem::size_of_val(&dmex).try_into().unwrap();
-        let hr = unsafe { self.as_winapi().EnumAdapterModesEx(adapter, &filter, mode, &mut *dmex) };
+        let hr = unsafe { self.as_winapi().EnumAdapterModesEx(adapter, filter.as_ref(), mode, dmex.as_mut()) };
         MethodError::check("IDirect3D9Ex::EnumAdapterModesEx", hr)?;
         Ok(dmex)
     }
@@ -118,7 +118,7 @@ pub trait IDirect3D9ExExt : AsSafe<IDirect3D9Ex> {
         let mut mode = DisplayModeEx::zeroed();
         mode.size = std::mem::size_of_val(&mode).try_into().unwrap();
         let mut rot = D3DDISPLAYROTATION_IDENTITY;
-        let hr = unsafe { self.as_winapi().GetAdapterDisplayModeEx(adapter, &mut *mode, &mut rot) };
+        let hr = unsafe { self.as_winapi().GetAdapterDisplayModeEx(adapter, mode.as_mut(), &mut rot) };
         MethodError::check("IDirect3D9Ex::GetAdapterDisplayModeEx", hr)?;
         Ok((mode, DisplayRotation::from_unchecked(rot)))
     }
@@ -139,10 +139,10 @@ pub trait IDirect3D9ExExt : AsSafe<IDirect3D9Ex> {
     /// IDirect3D9Ex::GetAdapterModeCountEx
     ///
     /// Returns the number of display modes available.
-    fn get_adapter_mode_count_ex(&self, adapter: u32, filter: impl Into<D3DDISPLAYMODEFILTER>) -> u32 {
+    fn get_adapter_mode_count_ex(&self, adapter: u32, filter: impl Into<DisplayModeFilter>) -> u32 {
         let mut filter = filter.into();
-        filter.Size = std::mem::size_of_val(&filter).try_into().unwrap();
-        unsafe { self.as_winapi().GetAdapterModeCountEx(adapter, &filter) }
+        filter.size = std::mem::size_of_val(&filter).try_into().unwrap();
+        unsafe { self.as_winapi().GetAdapterModeCountEx(adapter, filter.as_ref()) }
     }
 }
 
