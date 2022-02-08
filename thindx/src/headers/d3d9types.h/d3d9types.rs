@@ -73,6 +73,7 @@ mods! {
         inl mod display_mode_ex;
         inl mod display_mode_filter;
         inl mod display_mode;
+        inl mod gamma_ramp;
         inl mod index_buffer_desc;
         inl mod light;
         inl mod locked_box;
