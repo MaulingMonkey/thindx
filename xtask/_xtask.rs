@@ -46,7 +46,8 @@ fn build(args: std::env::Args) {
             build_examples:     false, // already built by cargo build
             .. Default::default()
         });
-        run(r"cargo test          --frozen --workspace --all-features --target-dir=target\all-features");
+        run(r"cargo test                                --frozen --workspace --all-features --target-dir=target\all-features");
+        run(r"cargo test --target=i686-pc-windows-msvc  --frozen --workspace --all-features --target-dir=target\all-features");
     } else {
         copy_thindx_files();
         let mut cmd = Command::new("cargo");
@@ -121,12 +122,20 @@ fn check(mut args: std::env::Args) {
     let pattern1 = path.join("::").replace(".h::", "::");   // "d3d11shader.h" => "d3d11shader"
     let pattern2 = path.join("::").replace(".h::", "_h::"); // "d3d11shader.h" => "d3d11shader_h"
 
-    let mut cmd = Command::new("cargo");
-    cmd.arg("test");
-    cmd.arg("-p").arg(package);
-    cmd.arg("--").arg(pattern1).arg(pattern2);
-    status!("Running", "{:?}", cmd);
-    cmd.status0().unwrap_or_else(|err| fatal!("{}", err));
+    for t in [
+        None,
+        Some("i686-pc-windows-msvc"),
+    ] {
+        let mut cmd = Command::new("cargo");
+        cmd.arg("test");
+        if let Some(t) = t {
+            cmd.arg("--target").arg(t);
+        }
+        cmd.arg("-p").arg(&package);
+        cmd.arg("--").arg(&pattern1).arg(&pattern2);
+        status!("Running", "{:?}", cmd);
+        cmd.status0().unwrap_or_else(|err| fatal!("{}", err));
+    }
 }
 
 fn run(command: impl AsRef<str>) {
