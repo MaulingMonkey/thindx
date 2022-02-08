@@ -17,7 +17,7 @@
 //! | [d3dcompiler.h](const@d3dcompiler_h) |   | ✔️ 1 of 1 | ✔️ 2 of 2 |   | ⚠️ 60 of 71 |   |
 //! | [d3d9.h](const@d3d9_h) | ⚠️ 20 of 24 |   |   | ✔️ 9 of 9 | ⚠️ 64 of 72 | ✔️ 3 of 3 |
 //! | [d3d9caps.h](const@d3d9caps_h) |   | ⚠️ 3 of 5 |   |   | ⚠️ 213 of 249 |   |
-//! | [d3d9types.h](const@d3d9types_h) |   | ⚠️ 25 of 71 | ⚠️ 40 of 54 |   | ⚠️ 532 of 844 | ⚠️ 8 of 20 |
+//! | [d3d9types.h](const@d3d9types_h) |   | ⚠️ 26 of 71 | ⚠️ 40 of 54 |   | ⚠️ 532 of 844 | ⚠️ 8 of 20 |
 //! | [d3d11shader.h](const@d3d11shader_h) | ✔️ 12 of 12 | ✔️ 9 of 9 | ✔️ 1 of 1 |   | ⚠️ 16 of 17 | ✔️ 3 of 3 |
 //! | [d3d11shadertracing.h](const@d3d11shadertracing_h) | ❌ 0 of 2 | ❌ 0 of 11 | ❌ 0 of 3 |   | ❌ 0 of 62 |   |
 //! | [xinput.h](const@xinput_h) |   | ✔️ 6 of 6 |   | ✔️ 8 of 8 | ⚠️ 83 of 86 |   |
@@ -1518,7 +1518,7 @@ pub const d3d9caps_h : cxx_header = cxx_header;
 /// [`D3DMEMORYPRESSURE`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dmemorypressure)&nbsp;→ [`d3d::MemoryPressure`] <br>
 /// [`D3DPRESENTSTATS`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dpresentstats)&nbsp;→ [`d3d::PresentStats`] <br>
 /// [`D3DPRESENT_PARAMETERS`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dpresent-parameters) →&nbsp;❌ <br>
-/// [`D3DRANGE`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3drange) →&nbsp;❌ <br>
+/// [`D3DRANGE`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3drange)&nbsp;→ [`d3d::Range`] <br>
 /// [`D3DRASTER_STATUS`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3draster-status)&nbsp;→ [`d3d::RasterStatus`] <br>
 /// [`D3DRECT`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3drect)&nbsp;→ [`d3d::Rect`] <br>
 /// [`D3DRECTPATCH_INFO`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3drectpatch-info) →&nbsp;❌ <br>
