@@ -11,7 +11,8 @@ use winapi::shared::minwindef::WORD;
 /// Contains red, green, and blue ramp data.
 ///
 /// ### See Also
-// TODO
+/// *   [d3d::IDirect3DDevice9Ext::get_gamma_ramp]
+/// *   [d3d::IDirect3DDevice9Ext::set_gamma_ramp]
 #[derive(Clone, Copy, Debug)]
 #[derive(Pod, Zeroable)]
 #[repr(C)] pub struct GammaRamp {

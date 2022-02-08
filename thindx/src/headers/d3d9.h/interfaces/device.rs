@@ -1591,16 +1591,16 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// IDirect3DDevice9::GetGammaRamp
     ///
     /// ### Returns
-    /// *   [D3DGAMMARAMP]
+    /// *   [d3d::GammaRamp]
     ///
     /// ### Example
     /// ```rust
     /// # use dev::d3d9::*; let device = device_test();
     /// let ramp = device.get_gamma_ramp(0);
     /// ```
-    fn get_gamma_ramp(&self, swap_chain: u32) -> D3DGAMMARAMP {
-        let mut ramp = unsafe { std::mem::zeroed::<D3DGAMMARAMP>() };
-        let _nohr : () = unsafe { self.as_winapi().GetGammaRamp(swap_chain, &mut ramp) };
+    fn get_gamma_ramp(&self, swap_chain: u32) -> GammaRamp {
+        let mut ramp = GammaRamp::zeroed();
+        let _nohr : () = unsafe { self.as_winapi().GetGammaRamp(swap_chain, ramp.as_mut()) };
         ramp
     }
 
@@ -3000,8 +3000,8 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// ```
     ///
     /// [Gamma (Direct3D 9)]:           https://docs.microsoft.com/en-us/windows/desktop/direct3d9/gamma
-    fn set_gamma_ramp(&self, swap_chain: u32, flags: impl Into<SGR>, ramp: &D3DGAMMARAMP) {
-        let _nohr : () = unsafe { self.as_winapi().SetGammaRamp(swap_chain, flags.into().into(), ramp) };
+    fn set_gamma_ramp(&self, swap_chain: u32, flags: impl Into<SGR>, ramp: &GammaRamp) {
+        let _nohr : () = unsafe { self.as_winapi().SetGammaRamp(swap_chain, flags.into().into(), ramp.as_ref()) };
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setindices)\]
