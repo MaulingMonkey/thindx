@@ -80,6 +80,7 @@ mods! {
         inl mod locked_rect;
         inl mod material;
         inl mod matrix;
+        inl mod memory_pressure;
         inl mod present_stats;
         inl mod raster_status;
         inl mod rect;
