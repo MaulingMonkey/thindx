@@ -12,7 +12,7 @@ use winapi::shared::d3d9types::*;
 // ### See Also
 // TODO
 #[derive(Clone, Copy, Debug)]
-#[derive(Zeroable)] // !Pod: trailing padding
+#[derive(Zeroable)] // !Pod: trailing padding on x64
 pub struct MemoryPressure {
     /// The number of bytes that were evicted by the process during the duration of the query.
     pub bytes_evicted_from_process:     Pack4OnX86<u64>,
@@ -35,7 +35,6 @@ pub struct MemoryPressure {
         assert_eq!(20, std::mem::size_of::<MemoryPressure>());
         assert_eq!( 4, std::mem::align_of::<MemoryPressure>());
     } else {
-        assert_eq!(std::mem::size_of ::<D3DMEMORYPRESSURE>(), std::mem::size_of ::<MemoryPressure>());
         assert_eq!(std::mem::align_of::<D3DMEMORYPRESSURE>(), std::mem::align_of::<MemoryPressure>());
         if cfg!(target_arch = "x86_64") {
             assert_eq!(24, std::mem::size_of::<MemoryPressure>());
