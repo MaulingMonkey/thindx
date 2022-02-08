@@ -1,3 +1,5 @@
+use crate::ctypes::*;
+
 use winapi::shared::d3d9types::*;
 
 
@@ -23,14 +25,23 @@ use winapi::shared::d3d9types::*;
     /// The scheduler's last sampled machine time, obtained by calling [QueryPerformanceCounter].
     ///
     /// [QueryPerformanceCounter]:  https://docs.microsoft.com/en-us/windows/win32/api/profileapi/nf-profileapi-queryperformancecounter
-    pub sync_qpc_time:          u64,
+    pub sync_qpc_time:          Pack4OnX86<u64>,
 
     /// This value is not used.
-    pub sync_gpu_time:          u64,
+    pub sync_gpu_time:          Pack4OnX86<u64>,
+}
+
+#[test] fn align_vs_cpp() {
+    if cfg!(target_arch = "x86") { // or itanium, but Rust doesn't have any target_arch for itanium
+        assert_eq!(4, std::mem::align_of::<PresentStats>());
+    } else {
+        assert_eq!(std::mem::align_of::<D3DPRESENTSTATS>(), std::mem::align_of::<PresentStats>());
+    }
 }
 
 struct_mapping! {
-    #[derive(unsafe { AsRef, AsMut, Deref, DerefMut, FromInto })]
+    #[derive(unsafe { AsRefD3D, AsMutD3D, Deref, DerefMut, FromInto })]
+    #[ignore(align)] // See align_vs_cpp - winapi has alignment 1, real alignment should be 4 on x86, 8+ otherwise
     PresentStats => D3DPRESENTSTATS {
         present_count           => PresentCount,
         present_refresh_count   => PresentRefreshCount,

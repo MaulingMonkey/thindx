@@ -1,5 +1,6 @@
 #![doc = include_str!("../Readme.md")]
 #![forbid(unsafe_op_in_unsafe_fn)]
+#![forbid(unaligned_references)]
 #![warn(rustdoc::broken_intra_doc_links)]
 #![warn(missing_docs)]
 #![deny(unreachable_patterns)] // probably improperly `match { ... }`ed constants

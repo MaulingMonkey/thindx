@@ -40,8 +40,12 @@ macro_rules! struct_mapping {
                 let thin = thin.as_ptr();
                 let d3d  = d3d .as_ptr();
 
+                let ignore_align = struct_mapping!(@meta_ignore_align $($($meta_struct)*)*);
+
                 assert_eq!( size_of::<$thin_struct>(),  size_of::<$d3d_struct>(),  "size_of {} != {}", stringify!($thin_struct), stringify!($d3d_struct));
-                assert_eq!(align_of::<$thin_struct>(), align_of::<$d3d_struct>(), "align_of {} != {}", stringify!($thin_struct), stringify!($d3d_struct));
+                if !ignore_align {
+                    assert_eq!(align_of::<$thin_struct>(), align_of::<$d3d_struct>(), "align_of {} != {}", stringify!($thin_struct), stringify!($d3d_struct));
+                }
 
                 let same_name = {
                     let d3d = stringify!($d3d_struct).to_lowercase().replace("_","");
@@ -76,6 +80,7 @@ macro_rules! struct_mapping {
     (@meta_struct_validate                      ) => {};
     (@meta_struct_validate renamed              ) => {};
     (@meta_struct_validate derive($($d:tt)*)    ) => {};
+    (@meta_struct_validate ignore(align)        ) => {};
     (@meta_struct_validate $meta:meta           ) => { panic!("unexpected struct attribute: #[{}]", stringify!($meta)); };
 
     (@meta_field_validate)            => {};
@@ -85,6 +90,10 @@ macro_rules! struct_mapping {
     (@meta_renamed)                       => { false };
     (@meta_renamed renamed    $($tt:tt)*) => { true };
     (@meta_renamed $meta:meta $($tt:tt)*) => { struct_mapping!(@meta_renamed $($tt)*) };
+
+    (@meta_ignore_align)                            => { false };
+    (@meta_ignore_align ignore(align)   $($tt:tt)*) => { true };
+    (@meta_ignore_align $meta:meta      $($tt:tt)*) => { struct_mapping!(@meta_ignore_align $($tt)*) };
 
     (@derive_from_meta                                                          $thin_struct:ty => $d3d_struct:ty) => {};
     (@derive_from_meta #[derive(unsafe { $($d:ident),+$(,)? })] $(#[$($next:tt)+])* $thin_struct:ty => $d3d_struct:ty) => { $( struct_mapping! { @derive unsafe $d $thin_struct => $d3d_struct } )+ struct_mapping! { @derive_from_meta $(#[$($next)+])* $thin_struct => $d3d_struct } };

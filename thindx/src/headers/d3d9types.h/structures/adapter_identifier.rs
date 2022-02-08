@@ -41,7 +41,7 @@ impl AdapterIdentifier {
     /// It is legal to do less than and greater than comparisons on the 64-bit signed integer value.
     /// However, exercise caution if you use this element to identify problematic drivers.
     /// Instead, you should use DeviceIdentifier.
-    pub fn driver_version(&self) -> i64 { unsafe { *self.0.DriverVersion.QuadPart() } }
+    pub fn driver_version(&self) -> i64 { let dv = self.0.DriverVersion; unsafe { *dv.QuadPart() } }
 }
 
 impl Default for AdapterIdentifier {
@@ -63,6 +63,7 @@ impl Default for AdapterIdentifier {
 
 impl Debug for AdapterIdentifier {
     fn fmt(&self, f: &mut Formatter) -> fmt::Result {
+        let whql_level = self.WHQLLevel;
         f.debug_struct("AdapterIdentifier")
             .field("Driver",            &self.driver_lossy_utf8())
             .field("Description",       &self.description_lossy_utf8())
@@ -73,7 +74,7 @@ impl Debug for AdapterIdentifier {
             .field("SubSysId",          &Hexify(8, self.SubSysId))
             .field("Revision",          &Hexify(8, self.Revision))
             .field("DeviceIdentifier",  &"{...}") // TODO
-            .field("WHQLLevel",         &self.WHQLLevel)
+            .field("WHQLLevel",         &whql_level)
             .finish()
     }
 }
