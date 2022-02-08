@@ -65,12 +65,12 @@ unsafe impl AsHWND for SafeHWND<'_> {
     use dev::win32::*;
 
     #[test] #[should_panic] fn should_panic_on_create() {
-        let _safe = unsafe { SafeHWND::assert(&(42 as HWND)) };
+        let _safe = unsafe { SafeHWND::assert(&(!42 as HWND)) };
     }
 
     #[test] #[should_panic] fn should_panic_on_drop() {
         let window = create_window("destroyed before dropped");
-        let safe = unsafe { SafeHWND::assert(&(42 as HWND)) };
+        let safe = unsafe { SafeHWND::assert(&(!42 as HWND)) };
         unsafe { CloseWindow(window) };
         std::mem::drop(safe);
     }
