@@ -71,6 +71,7 @@ mods! {
         inl mod color_value;
         inl mod device_creation_parameters;
         inl mod display_mode_ex;
+        inl mod display_mode_filter;
         inl mod display_mode;
         inl mod index_buffer_desc;
         inl mod light;
