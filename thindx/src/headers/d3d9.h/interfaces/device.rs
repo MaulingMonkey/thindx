@@ -410,7 +410,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// For full-screen mode, the back buffer format must be specified.
     ///
     /// ### ⚠️ Safety ⚠️
-    /// *   The caller's codebase is responsible for ensuring any [HWND]s inside [D3DPRESENT_PARAMETERS] outlive the resulting [SwapChain]s that depend on them.
+    /// *   The caller's codebase is responsible for ensuring any [HWND]s inside [PresentParameters] outlive the resulting [SwapChain]s that depend on them.
     ///     See [IDirect3D9Ext::create_device] for details and guidance about dealing with this lifetime issue.
     ///
     /// ### Returns
@@ -425,9 +425,9 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// *   [Presenting Multiple Views in Windowed Mode (Direct3D 9)](https://docs.microsoft.com/en-us/windows/desktop/direct3d9/presenting-multiple-views-in-windowed-mode)
     ///
     /// [create_device]:            #method.create_device
-    unsafe fn create_additional_swap_chain(&self, presentation_parameters: &mut D3DPRESENT_PARAMETERS) -> Result<SwapChain, MethodError> {
+    unsafe fn create_additional_swap_chain(&self, presentation_parameters: &mut PresentParameters<'static>) -> Result<SwapChain, MethodError> {
         let mut swap_chain = null_mut();
-        let hr = unsafe { self.as_winapi().CreateAdditionalSwapChain(presentation_parameters, &mut swap_chain) };
+        let hr = unsafe { self.as_winapi().CreateAdditionalSwapChain(presentation_parameters.as_mut(), &mut swap_chain) };
         MethodError::check("IDirect3DDevice9::CreateAdditionalSwapChain", hr)?;
         Ok(unsafe { SwapChain::from_raw(swap_chain) })
     }
@@ -2681,7 +2681,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// ### Arguments
     /// *   `source_rect`           - "Must be `..`" unless the [SwapChain] was created with [SwapEffect::Copy].  Can still be `..` even then (the entire source surface is presented.)
     /// *   `dest_rect`             - "Must be `..`" unless the [SwapChain] was created with [SwapEffect::Copy].  Can still be `..` even then (the entire client area is filled.)
-    /// *   `dest_window_override`  - The destination window to render to.  If null / `()`, the runtime uses the `hDeviceWindow` member of D3DPRESENT_PARAMETERS for the presentation.
+    /// *   `dest_window_override`  - The destination window to render to.  If null / `()`, the runtime uses the `device_window` member of [PresentParameters] for the presentation.
     /// *   `dirty_region`          - "Must be [None]" unless the [SwapChain] was created with [SwapEffect::Copy].  Can still be [None] even then (the entire region will be considered dirty.)  The implementation is free to copy more than the exact dirty region.
     ///
     /// ### Returns
@@ -2738,7 +2738,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// Resets the type, size, and format of the swap chain.
     ///
     /// ### ⚠️ Safety ⚠️
-    /// *   `presentation_parameters.hDeviceWindow` must be null or a valid window
+    /// *   `presentation_parameters.device_window` must be [None] or a valid window
     /// *   `presentation_parameters.*` in general probably needs certain "valid" values
     ///
     /// ### Returns
@@ -2747,8 +2747,8 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// *   [D3DERR::DRIVERINTERNALERROR]
     /// *   [D3DERR::OUTOFVIDEOMEMORY]
     /// *   Ok(())
-    unsafe fn reset(&self, presentation_parameters: &mut D3DPRESENT_PARAMETERS) -> Result<(), MethodError> {
-        let hr = unsafe { self.as_winapi().Reset(presentation_parameters) };
+    unsafe fn reset(&self, presentation_parameters: &mut PresentParameters) -> Result<(), MethodError> {
+        let hr = unsafe { self.as_winapi().Reset(presentation_parameters.as_mut()) };
         MethodError::check("IDirect3DDevice9::Reset", hr)
     }
 
@@ -3902,7 +3902,7 @@ pub struct RgnData {
     }
 
     #[test] fn present() {
-        let device = device_test_pp(false, |pp, _| pp.SwapEffect = SwapEffect::Copy.into()).unwrap();
+        let device = device_test_pp(false, |pp, _| pp.swap_effect = SwapEffect::Copy).unwrap();
         device.present(.., .., (), None).unwrap();
 
         for rect in [

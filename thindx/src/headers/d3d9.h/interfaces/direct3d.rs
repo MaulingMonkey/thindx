@@ -4,8 +4,7 @@ use crate::d3d9::*;
 use bytemuck::Zeroable;
 
 use winapi::shared::d3d9::{Direct3DCreate9, IDirect3D9};
-use winapi::shared::d3d9types::{D3DPRESENT_PARAMETERS};
-use winapi::shared::windef::{HMONITOR, HWND};
+use winapi::shared::windef::HMONITOR;
 use winapi::um::unknwnbase::IUnknown;
 
 use std::ptr::null_mut;
@@ -283,40 +282,40 @@ pub trait IDirect3D9Ext : AsSafe<IDirect3D9> + Sized {
     /// let device = unsafe { d3d.create_device(
     ///     D3DADAPTER_DEFAULT,     // adapter
     ///     DevType::HAL,           // device_type
-    ///     std::ptr::null_mut(),   // focus_window
+    ///     None,                   // focus_window
     ///     Create::FpuPreserve,    // behavior_flags
-    ///     &mut D3DPRESENT_PARAMETERS {
+    ///     &mut PresentParameters {
     ///         // In/Out paramters - if these are 0 before the method create_device
     ///         // is called, they will be changed when create_device returns
-    ///         BackBufferWidth:            0,
-    ///         BackBufferHeight:           0,
-    ///         BackBufferCount:            0,
+    ///         back_buffer_width:              0,
+    ///         back_buffer_height:             0,
+    ///         back_buffer_count:              0,
     ///
-    ///         // In/Out - if this equals Format::UNKNOWN it will be changed when
+    ///         // In/Out - if this equals Format::Unknown, it will be changed when
     ///         // create_device returns
-    ///         BackBufferFormat:           Format::X8R8G8B8.into(),
+    ///         back_buffer_format:             Format::X8R8G8B8,
     ///
     ///         // In parameters
-    ///         MultiSampleType:            MultiSample::None.into(),
-    ///         MultiSampleQuality:         0,
-    ///         SwapEffect:                 SwapEffect::Discard.into(),
-    ///         hDeviceWindow:              std::ptr::null_mut(),
-    ///         Windowed:                   true.into(),
-    ///         EnableAutoDepthStencil:     false.into(),
-    ///         AutoDepthStencilFormat:     Format::UNKNOWN.into(),
-    ///         Flags:                      0,
-    ///         FullScreen_RefreshRateInHz: 0,
-    ///         PresentationInterval:       0,
+    ///         multi_sample_type:              MultiSample::None,
+    ///         multi_sample_quality:           0,
+    ///         swap_effect:                    SwapEffect::Discard,
+    ///         device_window:                  None,
+    ///         windowed:                       true.into(),
+    ///         enable_auto_depth_stencil:      false.into(),
+    ///         auto_depth_stencil_format:      Format::Unknown,
+    ///         flags:                          PresentFlag::none(),
+    ///         full_screen_refresh_rate_in_hz: 0,
+    ///         presentation_interval:          Present::zeroed(),
     ///     }
     /// )};
     /// let _device = device; // XXX
     /// ```
     ///
     /// [WM_DESTROY]:           https://docs.microsoft.com/en-us/windows/win32/winmsg/wm-destroy
-    unsafe fn create_device(&self, adapter: AdapterIndex, device_type: impl Into<DevType>, focus_window: HWND, behavior_flags: impl Into<Create>, present_parameters: &mut D3DPRESENT_PARAMETERS) -> Result<Device, MethodError> {
+    unsafe fn create_device(&self, adapter: AdapterIndex, device_type: impl Into<DevType>, focus_window: impl AsHWND, behavior_flags: impl Into<Create>, present_parameters: &mut PresentParameters<'static>) -> Result<Device, MethodError> {
         // TODO: better doc comments
         let mut device = null_mut();
-        let hr = unsafe { self.as_winapi().CreateDevice(adapter, device_type.into().into(), focus_window, behavior_flags.into().into(), present_parameters, &mut device) };
+        let hr = unsafe { self.as_winapi().CreateDevice(adapter, device_type.into().into(), focus_window.as_hwnd(), behavior_flags.into().into(), present_parameters.as_mut(), &mut device) };
         MethodError::check("IDirect3D9::CreateDevice", hr)?;
         Ok(unsafe { Device::from_raw(device) })
     }

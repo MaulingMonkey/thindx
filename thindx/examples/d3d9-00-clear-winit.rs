@@ -1,18 +1,15 @@
 //! Basic [d3d9::Device] setup with [winit](https://docs.rs/winit/)
 #![windows_subsystem = "windows"]
 
+use thindx::SafeHWND;
 use thindx::d3d9::*;
 
 use raw_window_handle::*;
-
-use winapi::shared::d3d9types::*;
 
 use winit::dpi::*;
 use winit::event::{Event::*, WindowEvent::*};
 use winit::event_loop::*;
 use winit::window::*;
-
-use std::ptr::*;
 
 
 
@@ -29,13 +26,14 @@ fn main() {
         RawWindowHandle::Win32(Win32Handle { hwnd, .. }) => hwnd.cast(),
         other => panic!("Expected RawWindowHandle::Windows(...), got {:?} instead", other),
     };
+    let hwnd = unsafe { SafeHWND::assert_unbounded(hwnd).unwrap() };
 
-    let mut pp = D3DPRESENT_PARAMETERS {
-        Windowed:               true.into(),
-        hDeviceWindow:          hwnd,
-        SwapEffect:             SwapEffect::Discard.into(),
-        PresentationInterval:   Present::IntervalOne.into(),
-        .. unsafe { std::mem::zeroed() }
+    let mut pp = PresentParameters {
+        windowed:               true.into(),
+        device_window:          Some(hwnd),
+        swap_effect:            SwapEffect::Discard,
+        presentation_interval:  Present::IntervalOne,
+        .. PresentParameters::zeroed()
     };
 
     let behavior =
@@ -45,7 +43,7 @@ fn main() {
         Create::NoWindowChanges;
 
     let d3d     = unsafe { Direct3D::create(SdkVersion::default()) }.unwrap();
-    let device  = unsafe { d3d.create_device(0, DevType::HAL, null_mut(), behavior, &mut pp) }.unwrap();
+    let device  = unsafe { d3d.create_device(0, DevType::HAL, None, behavior, &mut pp) }.unwrap();
 
     event_loop.run(move |event, _, control_flow|{
         *control_flow = ControlFlow::Poll;

@@ -238,8 +238,8 @@ impl<T: AsSafe<IDirect3DSurface9>> IDirect3DSurface9Ext for T {}
 
     #[test] fn get_set_depth_stencil_surface() {
         let device = device_test_pp(false, |pp, _| {
-            pp.EnableAutoDepthStencil = true.into();
-            pp.AutoDepthStencilFormat = Format::D24S8.into();
+            pp.enable_auto_depth_stencil = true.into();
+            pp.auto_depth_stencil_format = Format::D24S8;
         }).unwrap();
 
         let ds = device.get_depth_stencil_surface().unwrap().unwrap();
@@ -306,8 +306,8 @@ impl<T: AsSafe<IDirect3DSurface9>> IDirect3DSurface9Ext for T {}
         ].iter().copied() {
             let device = device_test_pp(false, |pp, _| {
                 if let Some(ds_fmt) = ds_fmt {
-                    pp.EnableAutoDepthStencil = true.into();
-                    pp.AutoDepthStencilFormat = ds_fmt.into();
+                    pp.enable_auto_depth_stencil = true.into();
+                    pp.auto_depth_stencil_format = ds_fmt;
                 }
             });
             if device.is_err() && !require { continue }

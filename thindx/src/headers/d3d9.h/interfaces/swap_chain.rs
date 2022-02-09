@@ -5,7 +5,6 @@ use crate::*;
 use crate::d3d9::*;
 
 use winapi::shared::d3d9::*;
-use winapi::shared::d3d9types::D3DPRESENT_PARAMETERS;
 use winapi::shared::minwindef::UINT;
 use winapi::um::unknwnbase::IUnknown;
 use winapi::um::wingdi::{RDH_RECTANGLES, RGNDATA, RGNDATAHEADER};
@@ -106,9 +105,10 @@ pub trait IDirect3DSwapChain9Ext : AsSafe<IDirect3DSwapChain9> {
     /// IDirect3DSwapChain9::GetPresentParameters
     ///
     /// Retrieves the presentation parameters associated with a swap chain.
-    fn get_present_parameters(&self) -> Result<D3DPRESENT_PARAMETERS, MethodError> {
-        let mut pp = unsafe { std::mem::zeroed() };
-        let hr = unsafe { self.as_winapi().GetPresentParameters(&mut pp) };
+    fn get_present_parameters(&self) -> Result<d3d::PresentParameters<'_>, MethodError> {
+        let mut pp = d3d::PresentParameters::zeroed();
+        let hr = unsafe { self.as_winapi().GetPresentParameters(pp.as_mut()) };
+        debug_assert!(pp.device_window.as_ref().map_or(true, |w| w.is_valid()), "IDirect3DSwapChain9Ext::get_present_parameters: device_window isn't valid");
         MethodError::check("IDirect3DSwapChain9::GetPresentParameters", hr)?;
         Ok(pp)
     }
@@ -137,7 +137,7 @@ pub trait IDirect3DSwapChain9Ext : AsSafe<IDirect3DSwapChain9> {
     /// ### Arguments
     /// *   `source_rect`           - "Must be `..`" unless the [SwapChain] was created with [SwapEffect::Copy].  Can still be `..` even then (the entire source surface is presented.)
     /// *   `dest_rect`             - "Must be `..`" unless the [SwapChain] was created with [SwapEffect::Copy].  Can still be `..` even then (the entire client area is filled.)
-    /// *   `dest_window_override`  - The destination window to render to.  If null / `()`, the runtime uses the `hDeviceWindow` member of D3DPRESENT_PARAMETERS for the presentation.
+    /// *   `dest_window_override`  - The destination window to render to.  If null / `()`, the runtime uses the `device_window` member of [d3d::PresentParameters] for the presentation.
     /// *   `dirty_region`          - "Must be [None]" unless the [SwapChain] was created with [SwapEffect::Copy].  Can still be [None] even then (the entire region will be considered dirty.)  The implementation is free to copy more than the exact dirty region.
     /// *   `flags`                 - Valid values are [Present::None], [Present::DoNotWait], or [Present::LinearContent].
     ///

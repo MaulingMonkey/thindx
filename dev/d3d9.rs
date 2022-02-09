@@ -5,9 +5,6 @@
 #[doc(no_inline)] pub use thindx::d3d::*;
 #[doc(no_inline)] pub use thindx::d3d9::*;
 
-use winapi::shared::d3d9caps::*;
-use winapi::shared::d3d9types::*;
-
 use std::fs::*;
 use std::io::*;
 use std::mem::swap;
@@ -18,9 +15,6 @@ use std::result::Result;
 
 // XXX: temporary?
 
-#[doc(no_inline)] pub use winapi::shared::d3d9types::{
-    D3DPRESENT_PARAMETERS,
-};
 #[doc(no_inline)] pub use winapi::shared::windef::{
     HWND,
     HMONITOR,
@@ -42,7 +36,7 @@ pub fn d3d_test()   -> Direct3D   { unsafe { Direct3D  ::create(SdkVersion::defa
 
 pub fn safe_device_test() -> SafeDevice { SafeDevice::new(device_test()).unwrap() }
 pub fn safe_device_pure() -> SafeDevice { SafeDevice::new(device_pure()).unwrap() }
-pub fn safe_device_test_pp(two: bool, ppf: impl FnOnce(&mut D3DPRESENT_PARAMETERS, &mut Create)) -> Result<SafeDevice, MethodError> { SafeDevice::new(device_test_pp(two, ppf)?) }
+pub fn safe_device_test_pp(two: bool, ppf: impl FnOnce(&mut PresentParameters, &mut Create)) -> Result<SafeDevice, MethodError> { SafeDevice::new(device_test_pp(two, ppf)?) }
 
 
 
@@ -59,19 +53,19 @@ pub fn device_pure2() -> [Device; 2] {[
     device_test_pp(true,  |_,c| *c |= Create::PureDevice).unwrap(),
 ]}
 
-pub fn device_test_pp(two: bool, ppf: impl FnOnce(&mut D3DPRESENT_PARAMETERS, &mut Create)) -> Result<Device, MethodError> {
+pub fn device_test_pp(two: bool, ppf: impl FnOnce(&mut PresentParameters, &mut Create)) -> Result<Device, MethodError> {
     let mut behavior = /* Create::DisablePrintScreen | */ Create::FpuPreserve | Create::HardwareVertexProcessing | Create::NoWindowChanges;
-    let mut pp = D3DPRESENT_PARAMETERS {
-        Windowed:               true.into(),
-        hDeviceWindow:          test_window(two),
-        SwapEffect:             D3DSWAPEFFECT_DISCARD,
-        PresentationInterval:   D3DPRESENT_INTERVAL_IMMEDIATE,
+    let mut pp = PresentParameters {
+        windowed:               true.into(),
+        device_window:          Some(test_window(two)),
+        swap_effect:            SwapEffect::Discard,
+        presentation_interval:  Present::IntervalImmediate,
         .. unsafe { std::mem::zeroed() }
     };
 
     ppf(&mut pp, &mut behavior);
     let d3d = d3d_test();
-    unsafe { d3d.create_device(0, DevType::HAL, std::ptr::null_mut(), behavior, &mut pp) }
+    unsafe { d3d.create_device(0, DevType::HAL, None, behavior, &mut pp) }
 }
 
 
@@ -91,14 +85,14 @@ pub fn device_test_pp(two: bool, ppf: impl FnOnce(&mut D3DPRESENT_PARAMETERS, &m
     device_ex_test_pp(true,  |_,c| *c |= Create::PureDevice).unwrap(),
 ]}
 
-#[cfg(feature = "9ex")] pub fn device_ex_test_pp(two: bool, ppf: impl FnOnce(&mut D3DPRESENT_PARAMETERS, &mut Create)) -> Result<DeviceEx, MethodError> {
+#[cfg(feature = "9ex")] pub fn device_ex_test_pp(two: bool, ppf: impl FnOnce(&mut PresentParameters, &mut Create)) -> Result<DeviceEx, MethodError> {
     let mut behavior = Create::DisablePrintScreen | Create::FpuPreserve | Create::HardwareVertexProcessing | Create::NoWindowChanges;
-    let mut pp = D3DPRESENT_PARAMETERS {
-        Windowed:               true.into(),
-        hDeviceWindow:          test_window(two),
-        SwapEffect:             D3DSWAPEFFECT_DISCARD,
-        PresentationInterval:   D3DPRESENT_INTERVAL_IMMEDIATE,
-        .. unsafe { std::mem::zeroed() }
+    let mut pp = PresentParameters {
+        windowed:               true.into(),
+        device_window:          Some(test_window(two)),
+        swap_effect:            SwapEffect::Discard,
+        presentation_interval:  Present::IntervalImmediate,
+        .. PresentParameters::zeroed()
     };
 
     ppf(&mut pp, &mut behavior);

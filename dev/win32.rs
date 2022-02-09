@@ -1,6 +1,5 @@
 use thindx::abistr::cstr16 as wcstr;
-
-use winapi::shared::windef::*;
+use thindx::SafeHWND;
 
 use winapi::um::debugapi::*;
 use winapi::um::libloaderapi::*;
@@ -9,7 +8,7 @@ use winapi::um::winuser::*;
 
 use std::ptr::*;
 
-pub fn create_window(title: &str) -> HWND {
+pub fn create_window(title: &str) -> SafeHWND<'static> {
     unsafe {
         let hinstance = GetModuleHandleW(null());
         assert!(!hinstance.is_null());
@@ -40,23 +39,22 @@ pub fn create_window(title: &str) -> HWND {
             hinstance,
             null_mut(),
         );
-        assert!(!hwnd.is_null());
 
-        hwnd
+        SafeHWND::assert_unbounded(hwnd).unwrap()
     }
 }
 
-#[doc(hidden)] pub fn test_window(two: bool) -> HWND {
+#[doc(hidden)] pub fn test_window(two: bool) -> SafeHWND<'static> {
     if two {
-        HWND2.with(|hwnd| *hwnd)
+        HWND2.with(|hwnd| hwnd.clone())
     } else {
-        HWND1.with(|hwnd| *hwnd)
+        HWND1.with(|hwnd| hwnd.clone())
     }
 }
 
 thread_local! {
-    pub static HWND1 : HWND = create_window("thindx test window #1");
-    pub static HWND2 : HWND = create_window("thindx test window #2");
+    pub static HWND1 : SafeHWND<'static> = create_window("thindx test window #1");
+    pub static HWND2 : SafeHWND<'static> = create_window("thindx test window #2");
 }
 
 pub fn optional_dev_init() {

@@ -81,6 +81,7 @@ mods! {
         inl mod material;
         inl mod matrix;
         inl mod memory_pressure;
+        inl mod present_parameters;
         inl mod present_stats;
         inl mod raster_status;
         inl mod rect;

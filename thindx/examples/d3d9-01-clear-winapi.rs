@@ -1,11 +1,11 @@
 //! Basic [d3d9::Device] setup with [winapi](https://docs.rs/winapi/)
 #![windows_subsystem = "windows"]
 
+use thindx::{AsHWND, SafeHWND};
 use thindx::d3d9::*;
 
 use abistr::cstr16 as wcstr;
 
-use winapi::shared::d3d9types::*;
 use winapi::shared::minwindef::*;
 use winapi::shared::windef::*;
 
@@ -73,18 +73,18 @@ fn main() {
         hinstance,
         null_mut(),
     )};
-    assert!(!hwnd.is_null());
+    let hwnd = unsafe { SafeHWND::assert_unbounded(hwnd).unwrap() };
 
     if !dev::d3d9::hide_for_docs_gen() {
-        assert_eq!(0, unsafe { ShowWindow(hwnd, SW_SHOW) });
+        assert_eq!(0, unsafe { ShowWindow(hwnd.as_hwnd(), SW_SHOW) });
     }
 
-    let mut pp = D3DPRESENT_PARAMETERS {
-        Windowed:               true.into(),
-        hDeviceWindow:          hwnd,
-        SwapEffect:             SwapEffect::Discard.into(),
-        PresentationInterval:   Present::IntervalOne.into(),
-        .. unsafe { std::mem::zeroed() }
+    let mut pp = PresentParameters {
+        windowed:               true.into(),
+        device_window:          Some(hwnd),
+        swap_effect:            SwapEffect::Discard,
+        presentation_interval:  Present::IntervalOne,
+        .. PresentParameters::zeroed()
     };
 
     let behavior =
@@ -93,7 +93,7 @@ fn main() {
         Create::HardwareVertexProcessing |
         Create::NoWindowChanges;
 
-    let device = D3D.with(|d3d| unsafe { d3d.create_device(0, DevType::HAL, null_mut(), behavior, &mut pp) }).unwrap();
+    let device = D3D.with(|d3d| unsafe { d3d.create_device(0, DevType::HAL, None, behavior, &mut pp) }).unwrap();
     DEVICE.with(|d| *d.borrow_mut() = Some(device));
 
     loop {

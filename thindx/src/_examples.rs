@@ -14,18 +14,15 @@ use crate::*;
 /// ```no_run
 /// #![windows_subsystem = "windows"]
 /// 
+/// use thindx::SafeHWND;
 /// use thindx::d3d9::*;
 /// 
 /// use raw_window_handle::*;
-/// 
-/// use winapi::shared::d3d9types::*;
 /// 
 /// use winit::dpi::*;
 /// use winit::event::{Event::*, WindowEvent::*};
 /// use winit::event_loop::*;
 /// use winit::window::*;
-/// 
-/// use std::ptr::*;
 /// 
 /// 
 /// 
@@ -42,13 +39,14 @@ use crate::*;
 ///         RawWindowHandle::Win32(Win32Handle { hwnd, .. }) => hwnd.cast(),
 ///         other => panic!("Expected RawWindowHandle::Windows(...), got {:?} instead", other),
 ///     };
+///     let hwnd = unsafe { SafeHWND::assert_unbounded(hwnd).unwrap() };
 /// 
-///     let mut pp = D3DPRESENT_PARAMETERS {
-///         Windowed:               true.into(),
-///         hDeviceWindow:          hwnd,
-///         SwapEffect:             SwapEffect::Discard.into(),
-///         PresentationInterval:   Present::IntervalOne.into(),
-///         .. unsafe { std::mem::zeroed() }
+///     let mut pp = PresentParameters {
+///         windowed:               true.into(),
+///         device_window:          Some(hwnd),
+///         swap_effect:            SwapEffect::Discard,
+///         presentation_interval:  Present::IntervalOne,
+///         .. PresentParameters::zeroed()
 ///     };
 /// 
 ///     let behavior =
@@ -58,7 +56,7 @@ use crate::*;
 ///         Create::NoWindowChanges;
 /// 
 ///     let d3d     = unsafe { Direct3D::create(SdkVersion::default()) }.unwrap();
-///     let device  = unsafe { d3d.create_device(0, DevType::HAL, null_mut(), behavior, &mut pp) }.unwrap();
+///     let device  = unsafe { d3d.create_device(0, DevType::HAL, None, behavior, &mut pp) }.unwrap();
 /// 
 ///     event_loop.run(move |event, _, control_flow|{
 ///         *control_flow = ControlFlow::Poll;
@@ -97,11 +95,11 @@ pub const d3d9_00_clear_winit : () = ();
 /// ```no_run
 /// #![windows_subsystem = "windows"]
 /// 
+/// use thindx::{AsHWND, SafeHWND};
 /// use thindx::d3d9::*;
 /// 
 /// use abistr::cstr16 as wcstr;
 /// 
-/// use winapi::shared::d3d9types::*;
 /// use winapi::shared::minwindef::*;
 /// use winapi::shared::windef::*;
 /// 
@@ -169,18 +167,18 @@ pub const d3d9_00_clear_winit : () = ();
 ///         hinstance,
 ///         null_mut(),
 ///     )};
-///     assert!(!hwnd.is_null());
+///     let hwnd = unsafe { SafeHWND::assert_unbounded(hwnd).unwrap() };
 /// 
 ///     if !dev::d3d9::hide_for_docs_gen() {
-///         assert_eq!(0, unsafe { ShowWindow(hwnd, SW_SHOW) });
+///         assert_eq!(0, unsafe { ShowWindow(hwnd.as_hwnd(), SW_SHOW) });
 ///     }
 /// 
-///     let mut pp = D3DPRESENT_PARAMETERS {
-///         Windowed:               true.into(),
-///         hDeviceWindow:          hwnd,
-///         SwapEffect:             SwapEffect::Discard.into(),
-///         PresentationInterval:   Present::IntervalOne.into(),
-///         .. unsafe { std::mem::zeroed() }
+///     let mut pp = PresentParameters {
+///         windowed:               true.into(),
+///         device_window:          Some(hwnd),
+///         swap_effect:            SwapEffect::Discard,
+///         presentation_interval:  Present::IntervalOne,
+///         .. PresentParameters::zeroed()
 ///     };
 /// 
 ///     let behavior =
@@ -189,7 +187,7 @@ pub const d3d9_00_clear_winit : () = ();
 ///         Create::HardwareVertexProcessing |
 ///         Create::NoWindowChanges;
 /// 
-///     let device = D3D.with(|d3d| unsafe { d3d.create_device(0, DevType::HAL, null_mut(), behavior, &mut pp) }).unwrap();
+///     let device = D3D.with(|d3d| unsafe { d3d.create_device(0, DevType::HAL, None, behavior, &mut pp) }).unwrap();
 ///     DEVICE.with(|d| *d.borrow_mut() = Some(device));
 /// 
 ///     loop {
@@ -240,7 +238,6 @@ pub const d3d9_01_clear_winapi : () = ();
 /// 
 /// use raw_window_handle::*;
 /// 
-/// use winapi::shared::d3d9types::*;
 /// use winapi::um::objbase::CoInitialize;
 /// 
 /// use winit::dpi::*;
@@ -316,13 +313,14 @@ pub const d3d9_01_clear_winapi : () = ();
 ///         RawWindowHandle::Win32(Win32Handle { hwnd, .. }) => hwnd.cast(),
 ///         other => panic!("Expected RawWindowHandle::Windows(...), got {:?} instead", other),
 ///     };
+///     let hwnd = SafeHWND::assert_unbounded(hwnd).unwrap();
 /// 
-///     let mut pp = D3DPRESENT_PARAMETERS { // TODO: replace with d3d::PresentParameters
-///         Windowed:               true.into(),
-///         hDeviceWindow:          hwnd,
-///         SwapEffect:             SwapEffect::Discard.into(),
-///         PresentationInterval:   Present::IntervalOne.into(),
-///         .. std::mem::zeroed()
+///     let mut pp = d3d::PresentParameters {
+///         windowed:               true.into(),
+///         device_window:          Some(hwnd),
+///         swap_effect:            SwapEffect::Discard,
+///         presentation_interval:  Present::IntervalOne,
+///         .. d3d::PresentParameters::zeroed()
 ///     };
 /// 
 ///     let behavior =
@@ -331,7 +329,7 @@ pub const d3d9_01_clear_winapi : () = ();
 ///         Create::HardwareVertexProcessing |
 ///         Create::NoWindowChanges;
 /// 
-///     Some(d3d.create_device(0, DevType::HAL, null_mut(), behavior, &mut pp).unwrap())
+///     Some(d3d.create_device(0, DevType::HAL, None, behavior, &mut pp).unwrap())
 /// }
 /// 
 /// fn render(device: &Device, assets: &Assets) -> Result<(), BugRenderErrors> {

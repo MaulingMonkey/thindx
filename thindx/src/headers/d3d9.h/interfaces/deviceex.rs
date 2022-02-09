@@ -6,7 +6,6 @@ use crate::d3d9::*;
 use bytemuck::*;
 
 use winapi::shared::d3d9::{IDirect3DDevice9Ex, IDirect3DDevice9};
-use winapi::shared::d3d9types::*;
 use winapi::um::unknwnbase::IUnknown;
 use winapi::um::wingdi::*;
 
@@ -353,9 +352,9 @@ pub trait IDirect3DDevice9ExExt : AsSafe<IDirect3DDevice9Ex> {
     /// # use dev::d3d9::*; let device = device_ex_test();
     /// // TODO
     /// ```
-    fn reset_ex<'mode>(&self, presentation_parameters: &mut D3DPRESENT_PARAMETERS, fullscreen_display_mode: impl Into<Option<&'mode mut DisplayModeEx>>) -> Result<(), MethodError> {
+    fn reset_ex<'mode>(&self, presentation_parameters: &mut PresentParameters<'static>, fullscreen_display_mode: impl Into<Option<&'mode mut DisplayModeEx>>) -> Result<(), MethodError> {
         let fullscreen_display_mode = fullscreen_display_mode.into().map_or(null_mut(), |dm| dm);
-        let hr = unsafe { self.as_winapi().ResetEx(presentation_parameters, fullscreen_display_mode.cast()) };
+        let hr = unsafe { self.as_winapi().ResetEx(presentation_parameters.as_mut(), fullscreen_display_mode.cast()) };
         MethodError::check("IDirect3DDevice9Ex::ResetEx", hr)
     }
 

@@ -83,7 +83,7 @@ pub trait IDirect3D9ExExt : AsSafe<IDirect3D9Ex> {
     /// *   The caller's codebase is responsible for ensuring any [HWND]s (`hwnd`, `presentation_parameters.hDeviceWindow`) outlive the [Device].
     ///      See [IDirect3D9Ext::create_device] for guidance and details.
     /// *   `fullscreen_display_modes` is assumed to contain an entry for every adapter if `behavior_flags & D3DCREATE_ADAPTERGROUP_DEVICE` (TODO: enforce this via checks?)
-    unsafe fn create_device_ex(&self, adapter: u32, device_type: impl Into<DevType>, hwnd: HWND, behavior_flags: impl Into<Create>, presentation_parameters: &mut D3DPRESENT_PARAMETERS, fullscreen_display_modes: &mut [DisplayModeEx]) -> Result<DeviceEx, MethodError> {
+    unsafe fn create_device_ex(&self, adapter: u32, device_type: impl Into<DevType>, hwnd: HWND, behavior_flags: impl Into<Create>, presentation_parameters: &mut PresentParameters<'static>, fullscreen_display_modes: &mut [DisplayModeEx]) -> Result<DeviceEx, MethodError> {
         for fdm in fullscreen_display_modes.iter_mut() {
             fdm.size = std::mem::size_of_val(fdm).try_into().unwrap();
         }
@@ -91,7 +91,7 @@ pub trait IDirect3D9ExExt : AsSafe<IDirect3D9Ex> {
         // TODO: examples, returns, etc.
         let mut device = null_mut();
         let modes = if fullscreen_display_modes.is_empty() { null_mut() } else { fullscreen_display_modes.as_mut_ptr().cast() };
-        let hr = unsafe { self.as_winapi().CreateDeviceEx(adapter, device_type.into().into(), hwnd, behavior_flags.into().into(), presentation_parameters, modes, &mut device) };
+        let hr = unsafe { self.as_winapi().CreateDeviceEx(adapter, device_type.into().into(), hwnd, behavior_flags.into().into(), presentation_parameters.as_mut(), modes, &mut device) };
         MethodError::check("IDirect3D9Ex::CreateDeviceEx", hr)?;
         Ok(unsafe { DeviceEx::from_raw(device) })
     }

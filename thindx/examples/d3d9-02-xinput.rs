@@ -10,7 +10,6 @@ use mmrbi::*;
 
 use raw_window_handle::*;
 
-use winapi::shared::d3d9types::*;
 use winapi::um::objbase::CoInitialize;
 
 use winit::dpi::*;
@@ -86,13 +85,14 @@ unsafe fn try_create_device(d3d: &Direct3D, window: &Window) -> Option<d3d9::Dev
         RawWindowHandle::Win32(Win32Handle { hwnd, .. }) => hwnd.cast(),
         other => panic!("Expected RawWindowHandle::Windows(...), got {:?} instead", other),
     };
+    let hwnd = SafeHWND::assert_unbounded(hwnd).unwrap();
 
-    let mut pp = D3DPRESENT_PARAMETERS { // TODO: replace with d3d::PresentParameters
-        Windowed:               true.into(),
-        hDeviceWindow:          hwnd,
-        SwapEffect:             SwapEffect::Discard.into(),
-        PresentationInterval:   Present::IntervalOne.into(),
-        .. std::mem::zeroed()
+    let mut pp = d3d::PresentParameters {
+        windowed:               true.into(),
+        device_window:          Some(hwnd),
+        swap_effect:            SwapEffect::Discard,
+        presentation_interval:  Present::IntervalOne,
+        .. d3d::PresentParameters::zeroed()
     };
 
     let behavior =
@@ -101,7 +101,7 @@ unsafe fn try_create_device(d3d: &Direct3D, window: &Window) -> Option<d3d9::Dev
         Create::HardwareVertexProcessing |
         Create::NoWindowChanges;
 
-    Some(d3d.create_device(0, DevType::HAL, null_mut(), behavior, &mut pp).unwrap())
+    Some(d3d.create_device(0, DevType::HAL, None, behavior, &mut pp).unwrap())
 }
 
 fn render(device: &Device, assets: &Assets) -> Result<(), BugRenderErrors> {
