@@ -368,7 +368,8 @@ pub const d3d9_01_clear_winapi : () = ();
 /// 
 ///     use xinput::Buttons;
 ///     let asset_dpad;
-///     if      state.buttons.any_held(Buttons::DPadUp)     { asset_dpad = &assets.Dpad_Up; }
+///     if state.buttons.all_held(Buttons::DPadUp | Buttons::DPadLeft) { asset_dpad = &assets.Dpad_Left; }
+///     else if state.buttons.any_held(Buttons::DPadUp)     { asset_dpad = &assets.Dpad_Up; }
 ///     else if state.buttons.any_held(Buttons::DPadRight)  { asset_dpad = &assets.Dpad_Right; }
 ///     else if state.buttons.any_held(Buttons::DPadDown)   { asset_dpad = &assets.Dpad_Down; }
 ///     else if state.buttons.any_held(Buttons::DPadLeft)   { asset_dpad = &assets.Dpad_Left; }
