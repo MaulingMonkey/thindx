@@ -96,6 +96,7 @@ fn check(mut args: std::env::Args) {
             }
         },
         ["thindx", "src", "headers", rest @ ..] => ("thindx", rest),
+        ["dev", rest @ ..]                      => ("dev", rest),
         [package, "src", rest @ ..]             => (*package, rest),
         _other                                  => fatal!("unable to check `{}`: not an expected package src folder", orig_path),
     };
