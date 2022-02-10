@@ -30,7 +30,7 @@ pub use CompileResult as LinkResult;
 
 
 
-/// { code: [TextBlob], errors: [TextBlob] } returned by [Compiler::preprocess]
+/// { shader: [TextBlob], errors: [TextBlob] } returned by [Compiler::preprocess]
 #[derive(Clone, Debug)]
 pub struct PreprocessResult {
     /// The preprocessed HLSL
@@ -45,7 +45,7 @@ pub struct PreprocessResult {
 /// { error: [Error], shader: Option&lt;[ReadOnlyBlob]&gt;, errors: [TextBlob] }
 #[derive(Clone)]
 pub struct CompileError {
-    /// The [Error] and associated metadata (method, parameter, etc.) associated with the error in question.
+    /// The [Error] generated when compiling the shader.
     pub error:      Error,
 
     /// Any shader bytecode that may have resulted despite compilation failing.
@@ -70,7 +70,7 @@ impl std::error::Error for CompileError {}
 impl Debug for CompileError {
     fn fmt(&self, fmt: &mut Formatter) -> fmt::Result {
         fmt.debug_struct("CompileError")
-            .field("error", &self.error)
+            .field("error",  &self.error)
             .field("shader", &self.shader.as_ref().map(|_| ..))
             .field("errors", &self.errors.to_utf8_lossy())
             .finish()
@@ -89,14 +89,11 @@ impl Display for CompileError {
 
 
 
-/// { kind: [ErrorKind], shader: Option&lt;[ReadOnlyBlob]&gt;, errors: [TextBlob] }
+/// { error: [Error], shader: Option&lt;[ReadOnlyBlob]&gt;, errors: [TextBlob] }
 #[derive(Clone)]
 pub struct PreprocessError {
-    /// The [ErrorKind] / HRESULT generated when preprocessing the shader.
-    pub kind:       ErrorKind,
-
-    /// The method that generated the error in question.
-    pub method:     Option<&'static str>,
+    /// The [Error] generated when preprocessing the shader.
+    pub error:      Error,
 
     /// Any preprocessed HLSL that may have been generated.
     ///
@@ -110,8 +107,8 @@ pub struct PreprocessError {
 }
 
 impl From<Error> for PreprocessError {
-    fn from(e: Error) -> Self {
-        Self { kind: e.kind(), method: Some(e.method()), errors: Default::default(), shader: Default::default() }
+    fn from(error: Error) -> Self {
+        Self { error, errors: Default::default(), shader: Default::default() }
     }
 }
 
@@ -120,7 +117,7 @@ impl std::error::Error for PreprocessError {}
 impl Debug for PreprocessError {
     fn fmt(&self, fmt: &mut Formatter) -> fmt::Result {
         fmt.debug_struct("PreprocessError")
-            .field("kind", &self.kind)
+            .field("error",  &self.error)
             .field("shader", &self.shader.to_utf8_lossy())
             .field("errors", &self.errors.to_utf8_lossy())
             .finish()
@@ -129,7 +126,7 @@ impl Debug for PreprocessError {
 
 impl Display for PreprocessError {
     fn fmt(&self, fmt: &mut Formatter) -> fmt::Result {
-        write!(fmt, "Error preprocessing shader: {:?}", self.kind)?;
+        write!(fmt, "Error preprocessing shader: {:?}", self.error.kind())?;
         if !self.errors.is_empty() {
             writeln!(fmt, "\n{}", self.errors.to_utf8_lossy())?;
         }
@@ -558,9 +555,9 @@ impl Compiler {
         let shader = TextBlob::new(unsafe { ReadOnlyBlob::from_raw_opt(shader) });
         let errors = TextBlob::new(unsafe { ReadOnlyBlob::from_raw_opt(errors) });
 
-        match ErrorKind::check(hr) {
+        match fn_check_hr!(hr) {
             Ok(())      => Ok(PreprocessResult { shader, errors }),
-            Err(kind)   => Err(PreprocessError { kind, method: Some("D3DPreprocess"), shader, errors }),
+            Err(error)  => Err(PreprocessError { error, shader, errors }),
         }
     }
 }

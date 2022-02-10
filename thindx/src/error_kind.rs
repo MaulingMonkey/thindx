@@ -49,14 +49,6 @@ impl ErrorKind {
     /// *   `code`  - the `ERROR_*` code/value (e.g. `ERROR_FILE_NOT_FOUND`)
     pub const fn from_win32(code: u32) -> Self { Self::make_hresult(1, 7, code) }
 
-    pub(crate) fn check(hr: HRESULT) -> Result<(), Self> {
-        if !SUCCEEDED(hr) {
-            Err(Self(hr))
-        } else {
-            Ok(())
-        }
-    }
-
     fn id_desc(self) -> Option<(&'static str, &'static str)> {
         match self {
             D3D::OK                             => Some(("D3D_OK",                              "No error occured.")),

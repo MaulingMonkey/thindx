@@ -5,7 +5,7 @@ use std::fmt::{self, Debug, Display, Formatter};
 
 
 
-/// { error: [Error], method, errors: [TextBlob] }
+/// { error: [Error], errors: [TextBlob] }
 #[derive(Clone)]
 pub struct ErrorWithBlob {
     pub(crate) error:   Error,
@@ -20,7 +20,7 @@ impl ErrorWithBlob {
 }
 
 impl From<ErrorWithBlob> for ErrorKind { fn from(error: ErrorWithBlob) -> ErrorKind { error.kind() } }
-//impl From<ErrorKind> for ErrorWithBlob { fn from(error: ErrorKind   ) -> Self { Self { kind: error, method: None, errors: Default::default() } } }
+//impl From<ErrorKind> for ErrorWithBlob { fn from(error: ErrorKind   ) -> Self { Self { error: ..., errors: Default::default() } } }
 impl From<Error> for ErrorWithBlob { fn from(error: Error) -> Self { Self { error, errors: Default::default() } } }
 
 impl std::error::Error for ErrorWithBlob {}
@@ -28,8 +28,7 @@ impl std::error::Error for ErrorWithBlob {}
 impl Debug for ErrorWithBlob {
     fn fmt(&self, fmt: &mut Formatter) -> fmt::Result {
         let mut ds = fmt.debug_struct("ErrorWithBlob");
-        ds.field("kind", &self.kind());
-        ds.field("method", &self.method());
+        ds.field("error", &self.error);
         if !self.errors.is_empty() {
             ds.field("errors", &self.errors.to_utf8_lossy());
         }
