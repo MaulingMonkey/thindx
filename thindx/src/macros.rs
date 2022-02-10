@@ -222,7 +222,7 @@ macro_rules! enumish {
             pub const fn from_unchecked(d3d: $d3d) -> Self { Self(d3d as _) }
 
             /// Convert back into an underlying [winapi] `D3D...` type.
-            pub const fn into(self) -> $d3d { self.0 as _ }
+            pub const fn into_inner(self) -> $d3d { self.0 as _ }
         }
     };
 }
@@ -291,7 +291,7 @@ macro_rules! flags {
             pub const fn from_unchecked(d3d: $d3d) -> Self { Self(d3d as _) }
 
             /// Convert back into an underlying [winapi] `D3D...` type.
-            pub const fn into(self) -> $d3d { self.0 as _ }
+            pub const fn into_inner(self) -> $d3d { self.0 as _ }
         }
 
         impl std::default::Default for $flagish {

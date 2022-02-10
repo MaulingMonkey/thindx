@@ -46,7 +46,6 @@ struct_mapping! {
 
 impl Box {
     pub fn from(value: impl Into<Self>) -> Self { value.into() }
-    pub fn into<C: From<Self>>(self) -> C { C::from(self) }
 
     /// right - left
     pub fn width    (&self) -> u32 { self.right - self.left }

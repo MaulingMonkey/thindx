@@ -40,11 +40,6 @@ impl ClipStatus {
     ///
     /// [D3DCLIPSTATUS9]:       https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dclipstatus9
     pub const fn from_unchecked(value: D3DCLIPSTATUS9) -> Self { unsafe { std::mem::transmute(value) } }
-
-    /// Convert a [ClipStatus] into a raw [D3DCLIPSTATUS9].
-    ///
-    /// [D3DCLIPSTATUS9]:       https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dclipstatus9
-    pub const fn into(self) -> D3DCLIPSTATUS9 { unsafe { std::mem::transmute(self) } }
 }
 
 struct_mapping! {

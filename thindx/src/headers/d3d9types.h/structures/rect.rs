@@ -73,8 +73,6 @@ impl Rect {
     /// ```
     pub fn from(value: impl Into<Self>) -> Self { value.into() }
 
-    pub fn into<C: From<Self>>(self) -> C { C::from(self) }
-
     pub fn left     (&self) -> i32 { self.x1 }
     pub fn right    (&self) -> i32 { self.x2 }
     pub fn top      (&self) -> i32 { self.y1 }

@@ -516,7 +516,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         let block_bits      = u32::from(format.bits_per_block);
         let block_width     = u32::from(format.block_size.0);
         let block_height    = u32::from(format.block_size.1);
-        let is_dynamic      = 0 != (usage.into() & d3d::Usage::Dynamic.into());
+        let is_dynamic      = 0 != (usage.into_inner() & d3d::Usage::Dynamic.into_inner());
 
         let mut mip_pixels_size = size;
         for (mip_level, mip_ref) in mips.iter().enumerate() {
@@ -641,7 +641,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         let bytes = std::mem::size_of_val(data);
         let bytes32 : u32 = bytes.try_into().map_err(|_| fn_param_error!(data, THINERR::ALLOC_OVERFLOW))?;
         let usage = usage.into();
-        let lock = if usage.into() & Usage::Dynamic.into() != 0 { Lock::NoOverwrite } else { Lock::None };
+        let lock = if usage.into_inner() & Usage::Dynamic.into_inner() != 0 { Lock::NoOverwrite } else { Lock::None };
         let ib = self.create_index_buffer(bytes32, usage, I::format(), pool, shared_handle)?;
         unsafe {
             let dst = ib.lock_unchecked(0, 0, lock)?;
@@ -792,7 +792,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         let block_bits      = u32::from(format.bits_per_block);
         let block_width     = u32::from(format.block_size.0);
         let block_height    = u32::from(format.block_size.1);
-        let is_dynamic      = 0 != (usage.into() & d3d::Usage::Dynamic.into());
+        let is_dynamic      = 0 != (usage.into_inner() & d3d::Usage::Dynamic.into_inner());
 
         let mut mip_pixels_width    = width;
         let mut mip_pixels_height   = height;
@@ -906,7 +906,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         let bytes = std::mem::size_of_val(data);
         let bytes32 : u32 = bytes.try_into().map_err(|_| fn_param_error!(data, THINERR::ALLOC_OVERFLOW))?;
         let usage = usage.into();
-        let lock = if usage.into() & Usage::Dynamic.into() != 0 { Lock::NoOverwrite } else { Lock::None };
+        let lock = if usage.into_inner() & Usage::Dynamic.into_inner() != 0 { Lock::NoOverwrite } else { Lock::None };
         let vb = self.create_vertex_buffer(bytes32, usage, fvf, pool, shared_handle)?;
         unsafe {
             let dst = vb.lock_unchecked(0, 0, lock)?;
@@ -1037,7 +1037,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         let block_bits      = u32::from(format.bits_per_block);
         let block_width     = u32::from(format.block_size.0);
         let block_height    = u32::from(format.block_size.1);
-        let is_dynamic      = 0 != (usage.into() & d3d::Usage::Dynamic.into());
+        let is_dynamic      = 0 != (usage.into_inner() & d3d::Usage::Dynamic.into_inner());
 
         let mut mip_pixels_width    = width;
         let mut mip_pixels_height   = height;
@@ -3192,7 +3192,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// // May or may not succeed depending on system
     /// let pal2 = [Color::argb(0x00112233); 256]; // alpha != 1.0
     /// let r = device.set_palette_entries(0, &pal2);
-    /// if caps.texture_caps.into() & PTextureCaps::AlphaPalette.into() == 0 { // e.g. Sacrilige
+    /// if caps.texture_caps.into_inner() & PTextureCaps::AlphaPalette.into_inner() == 0 { // e.g. Sacrilige
     ///     assert_eq!(D3DERR::INVALIDCALL, r);
     /// } else { // e.g. Github Actions's Windows 2019 Server
     ///     r.unwrap();
@@ -3235,7 +3235,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///     // May or may not succeed depending on system
     ///     let pal2 = [Color::argb(0x00112233); 256]; // alpha != 1.0
     ///     let r = device.set_palette_entries_unchecked(0, &pal2);
-    ///     if caps.texture_caps.into() & PTextureCaps::AlphaPalette.into() == 0 { // e.g. Sacrilige
+    ///     if caps.texture_caps.into_inner() & PTextureCaps::AlphaPalette.into_inner() == 0 { // e.g. Sacrilige
     ///         assert_eq!(D3DERR::INVALIDCALL, r);
     ///     } else { // e.g. Github Actions's Windows 2019 Server
     ///         r.unwrap();
