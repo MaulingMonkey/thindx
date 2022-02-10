@@ -211,8 +211,8 @@ fn render(device: &Device, assets: &Assets) -> Result<(), BugRenderErrors> {
 }
 
 struct BugRenderErrors;
-impl From<thindx::MethodError> for BugRenderErrors {
-    fn from(err: thindx::MethodError) -> Self {
+impl From<thindx::Error> for BugRenderErrors {
+    fn from(err: thindx::Error) -> Self {
         // report issue immediately upon error conversion (e.g. at `?` operator)
         bugsalot::bug!("rendering error: {}", err);
         Self

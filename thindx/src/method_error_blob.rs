@@ -5,29 +5,29 @@ use std::fmt::{self, Debug, Display, Formatter};
 
 
 
-/// { kind: [ErrorKind], method, errors }
+/// { error: [Error], method, errors: [TextBlob] }
 #[derive(Clone)]
-pub struct MethodErrorBlob {
-    pub(crate) error:   MethodError,
+pub struct ErrorWithBlob {
+    pub(crate) error:   Error,
     pub(crate) errors:  TextBlob,
 }
 
-impl MethodErrorBlob {
+impl ErrorWithBlob {
     /// Returns the corresponding [ErrorKind] for this error.
     pub fn kind(&self) -> ErrorKind { self.error.kind() }
 
     pub(crate) fn method(&self) -> &'static str { self.error.method() }
 }
 
-impl From<MethodErrorBlob> for ErrorKind { fn from(error: MethodErrorBlob) -> ErrorKind { error.kind() } }
-//impl From<ErrorKind> for MethodErrorBlob { fn from(error: ErrorKind   ) -> Self { Self { kind: error, method: None, errors: Default::default() } } }
-impl From<MethodError> for MethodErrorBlob { fn from(error: MethodError) -> Self { Self { error, errors: Default::default() } } }
+impl From<ErrorWithBlob> for ErrorKind { fn from(error: ErrorWithBlob) -> ErrorKind { error.kind() } }
+//impl From<ErrorKind> for ErrorWithBlob { fn from(error: ErrorKind   ) -> Self { Self { kind: error, method: None, errors: Default::default() } } }
+impl From<Error> for ErrorWithBlob { fn from(error: Error) -> Self { Self { error, errors: Default::default() } } }
 
-impl std::error::Error for MethodErrorBlob {}
+impl std::error::Error for ErrorWithBlob {}
 
-impl Debug for MethodErrorBlob {
+impl Debug for ErrorWithBlob {
     fn fmt(&self, fmt: &mut Formatter) -> fmt::Result {
-        let mut ds = fmt.debug_struct("MethodErrorBlob");
+        let mut ds = fmt.debug_struct("ErrorWithBlob");
         ds.field("kind", &self.kind());
         ds.field("method", &self.method());
         if !self.errors.is_empty() {
@@ -37,7 +37,7 @@ impl Debug for MethodErrorBlob {
     }
 }
 
-impl Display for MethodErrorBlob {
+impl Display for ErrorWithBlob {
     fn fmt(&self, fmt: &mut Formatter) -> fmt::Result {
         write!(fmt, "{} failed ({:?})", self.method(), self.kind())?;
         if !self.errors.is_empty() {

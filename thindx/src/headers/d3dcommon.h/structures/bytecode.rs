@@ -39,7 +39,7 @@ impl Bytecode {
     /// [Bytecode::from] performs some validation (currently the length field of DXBC bytecode headers) and may perform more in the future without semver changes.
     /// This guards against some accidental UB, but maliciously crafted bytecode - or even filesystem corruption - can probably bypass validation.
     //#allow_missing_argument_docs
-    pub unsafe fn from(bytecode: &[u8]) -> Result<&Self, MethodError> {
+    pub unsafe fn from(bytecode: &[u8]) -> Result<&Self, Error> {
         // http://timjones.io/blog/archive/2015/09/02/parsing-direct3d-shader-bytecode
         fn_context!(d3d::Bytecode::from);
         if bytecode.get(0..=3) == Some(b"DXBC") {

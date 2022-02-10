@@ -74,7 +74,7 @@ pub trait IDirect3DVolume9Ext : AsSafe<IDirect3DVolume9> {
     /// // wkpdid::D3DDebugObjectName was set by set_object_name, so now it should succeed:
     /// v.free_private_data(&wkpdid::D3DDebugObjectName).unwrap();
     /// ```
-    fn free_private_data(&self, guid: &impl AsRef<Guid>) -> Result<(), MethodError> {
+    fn free_private_data(&self, guid: &impl AsRef<Guid>) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DVolume9Ext::free_private_data => IDirect3DVolume9::FreePrivateData);
         fn_check_hr!(unsafe { self.as_winapi().FreePrivateData(guid.as_ref().as_ref()) })
     }
@@ -102,7 +102,7 @@ pub trait IDirect3DVolume9Ext : AsSafe<IDirect3DVolume9> {
     /// let t2 = mcom::Rc::<winapi::shared::d3d9::IDirect3DVolumeTexture9>::from(t2);
     /// assert_eq!(t.as_ptr(), t2.as_ptr());
     /// ```
-    fn get_container<C: Raw>(&self) -> Result<C, MethodError> where C::Raw : Interface {
+    fn get_container<C: Raw>(&self) -> Result<C, Error> where C::Raw : Interface {
         fn_context!(d3d9::IDirect3DVolume9Ext::get_container => IDirect3DVolume9::GetContainer);
         let mut container = null_mut();
         fn_check_hr!(unsafe { self.as_winapi().GetContainer(&C::Raw::uuidof(), &mut container) })?;
@@ -138,7 +138,7 @@ pub trait IDirect3DVolume9Ext : AsSafe<IDirect3DVolume9> {
     ///     depth: 8,
     /// }
     /// ```
-    fn get_desc(&self) -> Result<VolumeDesc, MethodError> {
+    fn get_desc(&self) -> Result<VolumeDesc, Error> {
         fn_context!(d3d9::IDirect3DVolume9Ext::get_desc => IDirect3DVolume9::GetDesc);
         let mut desc = VolumeDesc::zeroed();
         fn_check_hr!(unsafe { self.as_winapi().GetDesc(&mut *desc) })?;
@@ -165,7 +165,7 @@ pub trait IDirect3DVolume9Ext : AsSafe<IDirect3DVolume9> {
     /// let dev2 = mcom::Rc::<winapi::shared::d3d9::IDirect3DDevice9>::from(dev2);
     /// assert_eq!(dev.as_ptr(), dev2.as_ptr());
     /// ```
-    fn get_device(&self) -> Result<Device, MethodError> {
+    fn get_device(&self) -> Result<Device, Error> {
         fn_context!(d3d9::IDirect3DVolume9Ext::get_device => IDirect3DVolume9::GetDevice);
         let mut device = null_mut();
         fn_check_hr!(unsafe { self.as_winapi().GetDevice(&mut device) })?;
@@ -200,7 +200,7 @@ pub trait IDirect3DVolume9Ext : AsSafe<IDirect3DVolume9> {
     /// let mut buf = [0u8];
     /// assert_eq!(D3DERR::MOREDATA, v.get_private_data_inplace(&wkpdid::D3DDebugObjectName, &mut buf[..]));
     /// ```
-    fn get_private_data_inplace<'s>(&self, guid: &impl AsRef<Guid>, data: &'s mut [u8]) -> Result<&'s [u8], MethodError> {
+    fn get_private_data_inplace<'s>(&self, guid: &impl AsRef<Guid>, data: &'s mut [u8]) -> Result<&'s [u8], Error> {
         fn_context!(d3d9::IDirect3DVolume9Ext::get_private_data_inplace => IDirect3DVolume9::GetPrivateData);
         let mut n : u32 = data.len().try_into().map_err(|_| fn_param_error!(data, THINERR::SLICE_OVERFLOW))?;
         fn_check_hr!(unsafe { self.as_winapi().GetPrivateData(guid.as_ref().as_ref(), data.as_mut_ptr().cast(), &mut n) })?;
@@ -222,7 +222,7 @@ pub trait IDirect3DVolume9Ext : AsSafe<IDirect3DVolume9> {
     /// let v = t.get_volume_level(0).unwrap();
     /// v.set_private_data(&wkpdid::D3DDebugObjectName, b"my volume").unwrap();
     /// ```
-    fn set_private_data(&self, guid: &impl AsRef<Guid>, data: &[u8]) -> Result<(), MethodError> {
+    fn set_private_data(&self, guid: &impl AsRef<Guid>, data: &[u8]) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DVolume9Ext::set_private_data => IDirect3DVolume9::SetPrivateData);
         let n : u32 = data.len().try_into().map_err(|_| fn_param_error!(data, THINERR::SLICE_OVERFLOW))?;
         fn_check_hr!(unsafe { self.as_winapi().SetPrivateData(guid.as_ref().as_ref(), data.as_ptr().cast(), n, 0) })
@@ -240,7 +240,7 @@ pub trait IDirect3DVolume9Ext : AsSafe<IDirect3DVolume9> {
     /// let v = t.get_volume_level(0).unwrap();
     /// v.set_object_name("my volume").unwrap();
     /// ```
-    fn set_object_name(&self, name: &str) -> Result<(), MethodError> {
+    fn set_object_name(&self, name: &str) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DVolume9Ext::set_object_name => IDirect3DVolume9::SetPrivateData);
         self.set_object_name_a(name.as_bytes())
     }
@@ -257,7 +257,7 @@ pub trait IDirect3DVolume9Ext : AsSafe<IDirect3DVolume9> {
     /// let v = t.get_volume_level(0).unwrap();
     /// v.set_object_name_a(b"my volume").unwrap();
     /// ```
-    fn set_object_name_a(&self, name: &[u8]) -> Result<(), MethodError> {
+    fn set_object_name_a(&self, name: &[u8]) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DVolume9Ext::set_object_name_a => IDirect3DVolume9::SetPrivateData);
         self.set_private_data(&wkpdid::D3DDebugObjectName, name)
     }
@@ -274,7 +274,7 @@ pub trait IDirect3DVolume9Ext : AsSafe<IDirect3DVolume9> {
     /// let v = t.get_volume_level(0).unwrap();
     /// v.set_object_name_w(abistr::cstr16!("my volume").to_units()).unwrap();
     /// ```
-    fn set_object_name_w(&self, name: &[u16]) -> Result<(), MethodError> {
+    fn set_object_name_w(&self, name: &[u16]) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DVolume9Ext::set_object_name_w => IDirect3DVolume9::SetPrivateData);
         self.set_private_data(&wkpdid::D3DDebugObjectNameW, bytemuck::cast_slice(name))
     }
@@ -304,7 +304,7 @@ pub trait IDirect3DVolume9Ext : AsSafe<IDirect3DVolume9> {
     /// // TODO: init data
     /// v.unlock_box().unwrap();
     /// ```
-    unsafe fn lock_box_unchecked(&self, box_: impl IntoBoxOrFull, flags: impl Into<Lock>) -> Result<LockedBox, MethodError> {
+    unsafe fn lock_box_unchecked(&self, box_: impl IntoBoxOrFull, flags: impl Into<Lock>) -> Result<LockedBox, Error> {
         fn_context!(d3d9::IDirect3DVolume9Ext::lock_box_unchecked => IDirect3DVolume9::LockBox);
         let mut locked = LockedBox::zeroed();
         let box_ = box_.into_box();
@@ -333,7 +333,7 @@ pub trait IDirect3DVolume9Ext : AsSafe<IDirect3DVolume9> {
     /// v.unlock_box().unwrap();
     /// # assert_eq!(D3DERR::INVALIDCALL, v.unlock_box(), "was already unlocked");
     /// ```
-    fn unlock_box(&self) -> Result<(), MethodError> {
+    fn unlock_box(&self) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DVolume9Ext::unlock_box => IDirect3DVolume9::UnlockBox);
         fn_check_hr!(unsafe { self.as_winapi().UnlockBox() })
     }

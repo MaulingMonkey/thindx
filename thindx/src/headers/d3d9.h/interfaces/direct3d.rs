@@ -101,7 +101,7 @@ pub trait IDirect3D9Ext : AsSafe<IDirect3D9> + Sized {
     ///
     /// [IDirect3D9]:                   https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3d9
     ///
-    unsafe fn create(sdk_version: SdkVersion) -> Result<Self, MethodError> where Self : From<mcom::Rc<IDirect3D9>> {
+    unsafe fn create(sdk_version: SdkVersion) -> Result<Self, Error> where Self : From<mcom::Rc<IDirect3D9>> {
         fn_context!(d3d9::IDirect3D9Ext::create => Direct3DCreate9);
         let d3d9 = unsafe { Direct3DCreate9(sdk_version.into()) };
         unsafe { mcom::Rc::from_raw_opt(d3d9) }.ok_or(fn_error!(THINERR::NONSPECIFIC)).map(Self::from)
@@ -132,7 +132,7 @@ pub trait IDirect3D9Ext : AsSafe<IDirect3D9> + Sized {
     ///     ).is_ok()
     /// ));
     /// ```
-    fn check_depth_stencil_match(&self, adapter: AdapterIndex, device_type: impl Into<DevType>, adapter_format: impl Into<Format>, render_target_format: impl Into<Format>, depth_stencil_format: impl Into<Format>) -> Result<(), MethodError> {
+    fn check_depth_stencil_match(&self, adapter: AdapterIndex, device_type: impl Into<DevType>, adapter_format: impl Into<Format>, render_target_format: impl Into<Format>, depth_stencil_format: impl Into<Format>) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3D9Ext::check_depth_stencil_match => IDirect3D9::CheckDepthStencilMatch);
         fn_check_hr!(unsafe { self.as_winapi().CheckDepthStencilMatch(adapter, device_type.into().into(), adapter_format.into().into(), render_target_format.into().into(), depth_stencil_format.into().into()) })?;
         Ok(())
@@ -161,7 +161,7 @@ pub trait IDirect3D9Ext : AsSafe<IDirect3D9> + Sized {
     ///     Format::A8R8G8B8        // texture format
     /// ).is_ok());
     /// ```
-    fn check_device_format(&self, adapter: AdapterIndex, device_type: impl Into<DevType>, adapter_format: impl Into<Format>, usage: u32, rtype: impl Into<ResourceType>, check_format: impl Into<Format>) -> Result<(), MethodError> {
+    fn check_device_format(&self, adapter: AdapterIndex, device_type: impl Into<DevType>, adapter_format: impl Into<Format>, usage: u32, rtype: impl Into<ResourceType>, check_format: impl Into<Format>) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3D9Ext::check_device_format => IDirect3D9::CheckDeviceFormat);
         fn_check_hr!(unsafe { self.as_winapi().CheckDeviceFormat(adapter, device_type.into().into(), adapter_format.into().into(), usage, rtype.into().into(), check_format.into().into()) })?;
         Ok(())
@@ -190,7 +190,7 @@ pub trait IDirect3D9Ext : AsSafe<IDirect3D9> + Sized {
     ///     Format::A8R8G8B8
     /// ).is_ok());
     /// ```
-    fn check_device_format_conversion(&self, adapter: AdapterIndex, device_type: impl Into<DevType>, source_format: impl Into<Format>, target_format: impl Into<Format>) -> Result<(), MethodError> {
+    fn check_device_format_conversion(&self, adapter: AdapterIndex, device_type: impl Into<DevType>, source_format: impl Into<Format>, target_format: impl Into<Format>) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3D9Ext::check_device_format_conversion => IDirect3D9::CheckDeviceFormatConversion);
         fn_check_hr!(unsafe { self.as_winapi().CheckDeviceFormatConversion(adapter, device_type.into().into(), source_format.into().into(), target_format.into().into()) })?;
         Ok(())
@@ -217,7 +217,7 @@ pub trait IDirect3D9Ext : AsSafe<IDirect3D9> + Sized {
     ///     MultiSample::None,
     /// ).is_ok());
     /// ```
-    fn check_device_multi_sample_type(&self, adapter: AdapterIndex, device_type: impl Into<DevType>, surface_format: impl Into<Format>, windowed: bool, multi_sample_type: impl Into<MultiSample>) -> Result<u32, MethodError> {
+    fn check_device_multi_sample_type(&self, adapter: AdapterIndex, device_type: impl Into<DevType>, surface_format: impl Into<Format>, windowed: bool, multi_sample_type: impl Into<MultiSample>) -> Result<u32, Error> {
         fn_context!(d3d9::IDirect3D9Ext::check_device_multi_sample_type => IDirect3D9::CheckDeviceMultiSampleType);
         let mut quality_levels = 0;
         fn_check_hr!(unsafe { self.as_winapi().CheckDeviceMultiSampleType(adapter, device_type.into().into(), surface_format.into().into(), windowed.into(), multi_sample_type.into().into(), &mut quality_levels) })?;
@@ -246,7 +246,7 @@ pub trait IDirect3D9Ext : AsSafe<IDirect3D9> + Sized {
     ///     true,               // windowed
     /// ).is_ok());
     /// ```
-    fn check_device_type(&self, adapter: AdapterIndex, device_type: impl Into<DevType>, adapter_format: impl Into<Format>, back_buffer_format: impl Into<Format>, windowed: bool) -> Result<(), MethodError> {
+    fn check_device_type(&self, adapter: AdapterIndex, device_type: impl Into<DevType>, adapter_format: impl Into<Format>, back_buffer_format: impl Into<Format>, windowed: bool) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3D9Ext::check_device_type => IDirect3D9::CheckDeviceType);
         fn_check_hr!(unsafe { self.as_winapi().CheckDeviceType(adapter, device_type.into().into(), adapter_format.into().into(), back_buffer_format.into().into(), windowed.into()) })?;
         Ok(())
@@ -313,7 +313,7 @@ pub trait IDirect3D9Ext : AsSafe<IDirect3D9> + Sized {
     /// ```
     ///
     /// [WM_DESTROY]:           https://docs.microsoft.com/en-us/windows/win32/winmsg/wm-destroy
-    unsafe fn create_device(&self, adapter: AdapterIndex, device_type: impl Into<DevType>, focus_window: impl AsHWND, behavior_flags: impl Into<Create>, present_parameters: &mut PresentParameters<'static>) -> Result<Device, MethodError> {
+    unsafe fn create_device(&self, adapter: AdapterIndex, device_type: impl Into<DevType>, focus_window: impl AsHWND, behavior_flags: impl Into<Create>, present_parameters: &mut PresentParameters<'static>) -> Result<Device, Error> {
         fn_context!(d3d9::IDirect3D9Ext::create_device => IDirect3D9::CreateDevice);
         // TODO: better doc comments
         let mut device = null_mut();
@@ -353,7 +353,7 @@ pub trait IDirect3D9Ext : AsSafe<IDirect3D9> + Sized {
     /// 2160x3840 @ 30hz Format(D3DFMT_X8R8G8B8)
     /// 2160x3840 @ 60hz Format(D3DFMT_X8R8G8B8)
     /// ```
-    fn enum_adapter_modes(&self, adapter: AdapterIndex, format: impl Into<Format>, mode: ModeIndex) -> Result<DisplayMode, MethodError> {
+    fn enum_adapter_modes(&self, adapter: AdapterIndex, format: impl Into<Format>, mode: ModeIndex) -> Result<DisplayMode, Error> {
         fn_context!(d3d9::IDirect3D9Ext::enum_adapter_modes => IDirect3D9::EnumAdapterModes);
         let mut dm = DisplayMode::zeroed();
         fn_check_hr!(unsafe { self.as_winapi().EnumAdapterModes(adapter, format.into().into(), mode, &mut *dm) })?;
@@ -400,7 +400,7 @@ pub trait IDirect3D9Ext : AsSafe<IDirect3D9> + Sized {
     /// 2160x3840 @ 29hz Format(D3DFMT_X8R8G8B8)
     /// 2160x3840 @ 29hz Format(D3DFMT_X8R8G8B8)
     /// ```
-    fn get_adapter_display_mode(&self, adapter: AdapterIndex) -> Result<DisplayMode, MethodError> {
+    fn get_adapter_display_mode(&self, adapter: AdapterIndex) -> Result<DisplayMode, Error> {
         fn_context!(d3d9::IDirect3D9Ext::get_adapter_display_mode => IDirect3D9::GetAdapterDisplayMode);
         let mut dm = DisplayMode::zeroed();
         fn_check_hr!(unsafe { self.as_winapi().GetAdapterDisplayMode(adapter, &mut *dm) })?;
@@ -437,7 +437,7 @@ pub trait IDirect3D9Ext : AsSafe<IDirect3D9> + Sized {
     ///     WHQLLevel: 0,
     /// }
     /// ```
-    fn get_adapter_identifier(&self, adapter: AdapterIndex, flags: u32) -> Result<AdapterIdentifier, MethodError> {
+    fn get_adapter_identifier(&self, adapter: AdapterIndex, flags: u32) -> Result<AdapterIdentifier, Error> {
         fn_context!(d3d9::IDirect3D9Ext::get_adapter_identifier => IDirect3D9::GetAdapterIdentifier);
         let mut ident = AdapterIdentifier::default();
         fn_check_hr!(unsafe { self.as_winapi().GetAdapterIdentifier(adapter, flags, &mut *ident) })?;
@@ -495,7 +495,7 @@ pub trait IDirect3D9Ext : AsSafe<IDirect3D9> + Sized {
     /// let monitor : HMONITOR  = d3d.get_adapter_monitor(   0).unwrap();
     /// let error               = d3d.get_adapter_monitor(9001).unwrap_err();
     /// ```
-    fn get_adapter_monitor(&self, adapter: AdapterIndex) -> Result<HMONITOR, MethodError> {
+    fn get_adapter_monitor(&self, adapter: AdapterIndex) -> Result<HMONITOR, Error> {
         fn_context!(d3d9::IDirect3D9Ext::get_adapter_monitor => IDirect3D9::GetAdapterMonitor);
         let hm = unsafe { self.as_winapi().GetAdapterMonitor(adapter) }; // Safety: Seems to be safe even when `adapter` >= `self.get_adapter_count()` per unit test bellow
         if hm.is_null() { Err(fn_error!(THINERR::NONSPECIFIC)) } else { Ok(hm) }
@@ -518,7 +518,7 @@ pub trait IDirect3D9Ext : AsSafe<IDirect3D9> + Sized {
     /// assert!(caps.MaxTextureHeight > 0);
     /// // ...
     /// ```
-    fn get_device_caps(&self, adapter: AdapterIndex, device_type: DevType) -> Result<Caps, MethodError> {
+    fn get_device_caps(&self, adapter: AdapterIndex, device_type: DevType) -> Result<Caps, Error> {
         fn_context!(d3d9::IDirect3D9Ext::get_device_caps => IDirect3D9::GetDeviceCaps);
         let mut caps = Caps::zeroed();
         fn_check_hr!(unsafe { self.as_winapi().GetDeviceCaps(adapter, device_type.into(), &mut *caps) })?; // Safety: Appears sound on all invalid parameters per unit testing

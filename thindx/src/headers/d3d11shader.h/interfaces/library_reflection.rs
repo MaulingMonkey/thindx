@@ -49,7 +49,7 @@ impl LibraryReflection {
     ///     function_count: 1,
     /// }
     /// ```
-    pub fn get_desc(&self) -> Result<LibraryDesc, MethodError> {
+    pub fn get_desc(&self) -> Result<LibraryDesc, Error> {
         fn_context!(d3d11::LibraryReflection::get_desc => ID3D11LibraryReflection::GetDesc);
         let mut desc = LibraryDesc::default();
         fn_check_hr!(unsafe { self.0.GetDesc(desc.as_mut_ptr()) })?;
@@ -148,7 +148,7 @@ impl LibraryReflection {
     ///     has_10_level_9_pixel_shader: false,
     /// }
     /// ```
-    pub fn functions(&self) -> Result<impl Iterator<Item = FunctionReflection> + '_, MethodError> {
+    pub fn functions(&self) -> Result<impl Iterator<Item = FunctionReflection> + '_, Error> {
         fn_context!(d3d11::LibraryReflection::functions => ID3D11LibraryReflection::GetFunctionByIndex);
         Ok(LibraryReflectionFunctionsIter {
             desc:               self.get_desc()?,

@@ -43,7 +43,7 @@ pub trait IDirect3DVertexDeclaration9Ext : AsSafe<IDirect3DVertexDeclaration9> {
     /// ### Returns
     /// *   [D3DERR::INVALIDCALL]   If the device is a pure device?
     /// *   Ok([u32])               The number of elements in this vertex declaration, including the [VertexElement::END]
-    fn get_declaration_size(&self) -> Result<u32, MethodError> {
+    fn get_declaration_size(&self) -> Result<u32, Error> {
         fn_context!(d3d9::IDirect3DVertexDeclaration9Ext::get_declaration_size => IDirect3DVertexDeclaration9::GetDeclaration);
         let mut num_elements = 0;
         fn_check_hr!(unsafe { self.as_winapi().GetDeclaration(null_mut(), &mut num_elements) })?;
@@ -59,7 +59,7 @@ pub trait IDirect3DVertexDeclaration9Ext : AsSafe<IDirect3DVertexDeclaration9> {
     /// *   [D3DERR::INVALIDCALL]   If the device is a pure device?
     /// *   [D3DERR::INVALIDCALL]   If `elements` is too small to contain the result
     /// *   Ok(&[[VertexElement]])                  If `elements` was successfully written to, including the [VertexElement::END]
-    fn get_declaration_inplace<'e>(&self, elements: &'e mut [VertexElement]) -> Result<&'e [VertexElement], MethodError> {
+    fn get_declaration_inplace<'e>(&self, elements: &'e mut [VertexElement]) -> Result<&'e [VertexElement], Error> {
         fn_context!(d3d9::IDirect3DVertexDeclaration9Ext::get_declaration_inplace => IDirect3DVertexDeclaration9::GetDeclaration);
         let mut num_elements = self.get_declaration_size()?;
         if num_elements as usize > elements.len() { return Err(fn_param_error!(elements, D3DERR::INVALIDCALL)); }
@@ -75,7 +75,7 @@ pub trait IDirect3DVertexDeclaration9Ext : AsSafe<IDirect3DVertexDeclaration9> {
     /// ### Returns
     /// *   [D3DERR::INVALIDCALL]               If the device is a pure device?
     /// *   Ok(Vec&lt;[VertexElement]&gt;)      The elements of this vertex declaration, including the [VertexElement::END]
-    fn get_declaration(&self) -> Result<Vec<VertexElement>, MethodError> {
+    fn get_declaration(&self) -> Result<Vec<VertexElement>, Error> {
         fn_context!(d3d9::IDirect3DVertexDeclaration9Ext::get_declaration => IDirect3DVertexDeclaration9::GetDeclaration);
         let mut num_elements = self.get_declaration_size()?;
         let mut v = vec![VertexElement::default(); num_elements as usize];
@@ -93,7 +93,7 @@ pub trait IDirect3DVertexDeclaration9Ext : AsSafe<IDirect3DVertexDeclaration9> {
     /// ### Returns
     /// *   [D3DERR::INVALIDCALL]   if the device is a pure device?
     /// *   Ok([Device])
-    fn get_device(&self) -> Result<Device, MethodError> {
+    fn get_device(&self) -> Result<Device, Error> {
         fn_context!(d3d9::IDirect3DVertexDeclaration9Ext::get_device => IDirect3DVertexDeclaration9::GetDevice);
         let mut device = null_mut();
         fn_check_hr!(unsafe { self.as_winapi().GetDevice(&mut device) })?;

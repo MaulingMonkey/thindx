@@ -158,7 +158,7 @@ impl ShaderReflection {
     /// assert_eq!(desc.version.major(), 4);
     /// assert_eq!(desc.version.minor(), 0);
     /// ```
-    pub fn get_desc(&self) -> Result<ShaderDesc, MethodError> {
+    pub fn get_desc(&self) -> Result<ShaderDesc, Error> {
         fn_context!(d3d11::ShaderReflection::get_desc => ID3D11ShaderReflection::GetDesc);
         let mut desc = ShaderDesc::default();
         fn_check_hr!(unsafe { self.0.GetDesc(desc.as_mut_ptr()) })?;
@@ -214,7 +214,7 @@ impl ShaderReflection {
     /// # assert_eq!(E::INVALIDARG, vs.get_input_parameter_desc(!0).unwrap_err().kind());
     /// ```
     //#allow_missing_argument_docs
-    pub fn get_input_parameter_desc(&self, parameter_index: u32) -> Result<SignatureParameterDesc, MethodError> {
+    pub fn get_input_parameter_desc(&self, parameter_index: u32) -> Result<SignatureParameterDesc, Error> {
         fn_context!(d3d11::ShaderReflection::get_input_parameter_desc => ID3D11ShaderReflection::GetInputParameterDesc);
         let mut desc = SignatureParameterDesc::default();
         fn_check_hr!(unsafe { self.0.GetInputParameterDesc(parameter_index, desc.as_mut_ptr()) })?;
@@ -237,7 +237,7 @@ impl ShaderReflection {
     /// # let vs = d3dc.reflect11(&vs).unwrap();
     /// assert_eq!(vs.get_min_feature_level().unwrap(), d3d::FeatureLevel::_10_0);
     /// ```
-    pub fn get_min_feature_level(&self) -> Result<FeatureLevel, MethodError> {
+    pub fn get_min_feature_level(&self) -> Result<FeatureLevel, Error> {
         fn_context!(d3d11::ShaderReflection::get_min_feature_level => ID3D11ShaderReflection::GetMinFeatureLevel);
         let mut fl = 0;
         fn_check_hr!(unsafe { self.0.GetMinFeatureLevel(&mut fl) })?;
@@ -326,7 +326,7 @@ impl ShaderReflection {
     /// # assert_eq!(E::INVALIDARG, vs.get_output_parameter_desc(!0).unwrap_err().kind());
     /// ```
     //#allow_missing_argument_docs
-    pub fn get_output_parameter_desc(&self, parameter_index: u32) -> Result<SignatureParameterDesc, MethodError> {
+    pub fn get_output_parameter_desc(&self, parameter_index: u32) -> Result<SignatureParameterDesc, Error> {
         fn_context!(d3d11::ShaderReflection::get_output_parameter_desc => ID3D11ShaderReflection::GetOutputParameterDesc);
         let mut desc = SignatureParameterDesc::default();
         fn_check_hr!(unsafe { self.0.GetOutputParameterDesc(parameter_index, desc.as_mut_ptr()) })?;
@@ -360,7 +360,7 @@ impl ShaderReflection {
     /// # assert_eq!(E::INVALIDARG, vs.get_patch_constant_parameter_desc(!0).unwrap_err().kind());
     /// ```
     //#allow_missing_argument_docs
-    pub fn get_patch_constant_parameter_desc(&self, parameter_index: u32) -> Result<SignatureParameterDesc, MethodError> {
+    pub fn get_patch_constant_parameter_desc(&self, parameter_index: u32) -> Result<SignatureParameterDesc, Error> {
         fn_context!(d3d11::ShaderReflection::get_patch_constant_parameter_desc => ID3D11ShaderReflection::GetPatchConstantParameterDesc);
         let mut desc = SignatureParameterDesc::default();
         fn_check_hr!(unsafe { self.0.GetPatchConstantParameterDesc(parameter_index, desc.as_mut_ptr()) })?;
@@ -417,7 +417,7 @@ impl ShaderReflection {
     /// # assert_eq!(vs.get_resource_binding_desc(!0).err().unwrap().kind(), E::INVALIDARG);
     /// ```
     //#allow_missing_argument_docs
-    pub fn get_resource_binding_desc(&self, resource_index: u32) -> Result<ShaderInputBindDesc, MethodError> {
+    pub fn get_resource_binding_desc(&self, resource_index: u32) -> Result<ShaderInputBindDesc, Error> {
         fn_context!(d3d11::ShaderReflection::get_resource_binding_desc => ID3D11ShaderReflection::GetResourceBindingDesc);
         let mut desc = ShaderInputBindDesc::default();
         fn_check_hr!(unsafe { self.0.GetResourceBindingDesc(resource_index, desc.as_mut_ptr()) })?;
@@ -448,7 +448,7 @@ impl ShaderReflection {
     /// # assert_eq!(vs.get_resource_binding_desc_by_name("").err().unwrap().kind(), E::INVALIDARG);
     /// ```
     //#allow_missing_argument_docs
-    pub fn get_resource_binding_desc_by_name(&self, name: impl TryIntoAsCStr) -> Result<ShaderInputBindDesc, MethodError> {
+    pub fn get_resource_binding_desc_by_name(&self, name: impl TryIntoAsCStr) -> Result<ShaderInputBindDesc, Error> {
         fn_context!(d3d11::ShaderReflection::get_resource_binding_desc_by_name => ID3D11ShaderReflection::GetResourceBindingDescByName);
         let name = name.try_into();
         let name = name.as_ref().map_or(null(), |name| name.as_cstr());

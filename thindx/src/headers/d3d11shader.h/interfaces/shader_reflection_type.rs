@@ -64,7 +64,7 @@ impl<'r> ShaderReflectionType<'r> {
     /// # use thindx::*;
     /// // TODO
     /// ```
-    pub fn get_desc(&self) -> Result<ShaderTypeDesc<'r>, MethodError> {
+    pub fn get_desc(&self) -> Result<ShaderTypeDesc<'r>, Error> {
         fn_context!(d3d11::ShaderReflectionType::get_desc => ID3D11ShaderReflectionType::GetDesc);
         let mut desc = ShaderTypeDesc::default();
         fn_check_hr!(unsafe { self.ptr.as_ref().GetDesc(desc.as_mut_ptr()) })?;
@@ -194,7 +194,7 @@ impl<'r> ShaderReflectionType<'r> {
     /// // TODO
     /// ```
     //#allow_missing_argument_docs
-    pub fn implements_interface(&self, base: &ShaderReflectionType) -> Result<bool, MethodError> {
+    pub fn implements_interface(&self, base: &ShaderReflectionType) -> Result<bool, Error> {
         fn_context!(d3d11::ShaderReflectionType::implements_interface => ID3D11ShaderReflectionType::ImplementsInterface);
         let hr = unsafe { self.ptr.as_ref().ImplementsInterface(base.as_raw()) };
         if hr == S_FALSE {
@@ -223,7 +223,7 @@ impl<'r> ShaderReflectionType<'r> {
     /// // TODO
     /// ```
     //#allow_missing_argument_docs
-    pub fn is_equal(&self, ty: &ShaderReflectionType) -> Result<bool, MethodError> {
+    pub fn is_equal(&self, ty: &ShaderReflectionType) -> Result<bool, Error> {
         fn_context!(d3d11::ShaderReflectionType::is_equal => ID3D11ShaderReflectionType::IsEqual);
         let hr = unsafe { self.ptr.as_ref().IsEqual(ty.as_raw()) };
         if hr == S_FALSE {
@@ -252,7 +252,7 @@ impl<'r> ShaderReflectionType<'r> {
     /// // TODO
     /// ```
     //#allow_missing_argument_docs
-    pub fn is_of_type(&self, ty: &ShaderReflectionType) -> Result<bool, MethodError> {
+    pub fn is_of_type(&self, ty: &ShaderReflectionType) -> Result<bool, Error> {
         fn_context!(d3d11::ShaderReflectionType::is_of_type => ID3D11ShaderReflectionType::IsOfType);
         let hr = unsafe { self.ptr.as_ref().IsOfType(ty.as_raw()) };
         if hr == S_FALSE {

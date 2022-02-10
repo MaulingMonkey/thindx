@@ -171,7 +171,7 @@ impl<'r> FunctionReflection<'r> {
     ///     has_10_level_9_pixel_shader: false,
     /// }
     /// ```
-    pub fn get_desc(&self) -> Result<FunctionDesc<'r>, MethodError> {
+    pub fn get_desc(&self) -> Result<FunctionDesc<'r>, Error> {
         fn_context!(d3d11::FunctionReflection::get_desc => ID3D11FunctionReflection::GetDesc);
         let mut desc = FunctionDesc::default();
         fn_check_hr!(unsafe { self.ptr.as_ref().GetDesc(desc.as_mut_ptr()) })?;
@@ -322,7 +322,7 @@ impl<'r> FunctionReflection<'r> {
     /// }
     /// ```
     //#allow_missing_argument_docs
-    pub fn get_resource_binding_desc(&self, resource_index: u32) -> Result<ShaderInputBindDesc<'r>, MethodError> {
+    pub fn get_resource_binding_desc(&self, resource_index: u32) -> Result<ShaderInputBindDesc<'r>, Error> {
         fn_context!(d3d11::FunctionReflection::get_resource_binding_desc => ID3D11FunctionReflection::GetResourceBindingDesc);
         let mut desc = ShaderInputBindDesc::default();
         fn_check_hr!(unsafe { self.ptr.as_ref().GetResourceBindingDesc(resource_index, desc.as_mut_ptr()) })?;
@@ -372,7 +372,7 @@ impl<'r> FunctionReflection<'r> {
     /// }
     /// ```
     //#allow_missing_argument_docs
-    pub fn get_resource_binding_desc_by_name(&self, name: impl TryIntoAsCStr) -> Result<ShaderInputBindDesc<'r>, MethodError> {
+    pub fn get_resource_binding_desc_by_name(&self, name: impl TryIntoAsCStr) -> Result<ShaderInputBindDesc<'r>, Error> {
         fn_context!(d3d11::FunctionReflection::get_resource_binding_desc_by_name => ID3D11FunctionReflection::GetResourceBindingDescByName);
         let name = name.try_into().ok();
         let name = name.as_ref().map_or(cstr!("").as_cstr(), |n| n.as_cstr());

@@ -42,11 +42,11 @@ pub struct PreprocessResult {
 
 
 
-/// { error: [MethodError], shader: Option&lt;[ReadOnlyBlob]&gt;, errors: [TextBlob] }
+/// { error: [Error], shader: Option&lt;[ReadOnlyBlob]&gt;, errors: [TextBlob] }
 #[derive(Clone)]
 pub struct CompileError {
-    /// The [MethodError] and associated metadata (method, parameter, etc.) associated with the error in question.
-    pub error:      MethodError,
+    /// The [Error] and associated metadata (method, parameter, etc.) associated with the error in question.
+    pub error:      Error,
 
     /// Any shader bytecode that may have resulted despite compilation failing.
     ///
@@ -59,8 +59,8 @@ pub struct CompileError {
     pub errors:     TextBlob,
 }
 
-impl From<MethodError> for CompileError {
-    fn from(error: MethodError) -> Self {
+impl From<Error> for CompileError {
+    fn from(error: Error) -> Self {
         Self { error, errors: Default::default(), shader: Default::default() }
     }
 }
@@ -109,8 +109,8 @@ pub struct PreprocessError {
     pub errors:     TextBlob,
 }
 
-impl From<MethodError> for PreprocessError {
-    fn from(e: MethodError) -> Self {
+impl From<Error> for PreprocessError {
+    fn from(e: Error) -> Self {
         Self { kind: e.kind(), method: Some(e.method()), errors: Default::default(), shader: Default::default() }
     }
 }

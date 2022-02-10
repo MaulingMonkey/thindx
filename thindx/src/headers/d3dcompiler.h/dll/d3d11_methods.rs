@@ -27,7 +27,7 @@ impl Compiler {
     ///
     /// ### Remarks
     /// *   This was introduced by d3dcompiler_47.dll, and is unavailable in earlier versions.
-    pub fn create_function_linking_graph(&self, flags: Option<std::convert::Infallible>) -> Result<d3d11::FunctionLinkingGraph, MethodError> {
+    pub fn create_function_linking_graph(&self, flags: Option<std::convert::Infallible>) -> Result<d3d11::FunctionLinkingGraph, Error> {
         fn_context_dll!(d3d::Compiler::create_function_linking_graph => self.D3DCreateFunctionLinkingGraph);
         let _ = flags;
 
@@ -62,7 +62,7 @@ impl Compiler {
     ///
     /// ### Remarks
     /// *   This was introduced by d3dcompiler_47.dll, and is unavailable in earlier versions.
-    pub fn create_linker(&self) -> Result<d3d11::Linker, MethodError> {
+    pub fn create_linker(&self) -> Result<d3d11::Linker, Error> {
         fn_context_dll!(d3d::Compiler::create_linker => self.D3DCreateLinker);
 
         // SAFETY: ✔️
@@ -104,7 +104,7 @@ impl Compiler {
     ///
     /// ### Remarks
     /// *   This was introduced by d3dcompiler_47.dll, and is unavailable in earlier versions.
-    pub fn load_module(&self, src_data: &Bytecode) -> Result<d3d11::Module, MethodError> {
+    pub fn load_module(&self, src_data: &Bytecode) -> Result<d3d11::Module, Error> {
         fn_context_dll!(d3d::Compiler::load_module => self.D3DLoadModule);
         let src_data = src_data.as_bytes();
 

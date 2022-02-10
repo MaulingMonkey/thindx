@@ -116,7 +116,7 @@ impl<'r> FunctionParameterReflection<'r> {
     ///     first_out_component: 4294967295,
     /// }
     /// ```
-    pub fn get_desc(&self) -> Result<ParameterDesc<'r>, MethodError> {
+    pub fn get_desc(&self) -> Result<ParameterDesc<'r>, Error> {
         fn_context!(d3d11::FunctionParameterReflection::get_desc => ID3D11FunctionParameterReflection::GetDesc);
         let mut desc = ParameterDesc::default();
         fn_check_hr!(unsafe { self.ptr.as_ref().GetDesc(&mut desc as *mut _ as *mut _) })?;

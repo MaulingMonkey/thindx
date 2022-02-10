@@ -152,7 +152,7 @@ fn initialize_com_for_the_first_time_on_this_thread(mta: bool) {
     // We don't ever try to pair this with uninitializing COM
 }
 
-fn fuzz<T>(title: &str, file: &str, line: u32, codes: &[ErrorKind], f: impl Fn(xinput::User) -> Result<T, MethodError>) {
+fn fuzz<T>(title: &str, file: &str, line: u32, codes: &[ErrorKind], f: impl Fn(xinput::User) -> Result<T, Error>) {
     for _ in 0 ..= 100 { let _ = f(xinput::User::Zero ); }
     for _ in 0 ..= 100 { let _ = f(xinput::User::One  ); }
     for _ in 0 ..= 100 { let _ = f(xinput::User::Two  ); }

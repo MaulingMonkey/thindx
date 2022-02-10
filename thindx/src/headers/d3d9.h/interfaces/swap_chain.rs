@@ -59,7 +59,7 @@ pub trait IDirect3DSwapChain9Ext : AsSafe<IDirect3DSwapChain9> {
     /// IDirect3DSwapChain9::GetBackBuffer
     ///
     /// Retrieves a back buffer from the swap chain of the device.
-    fn get_back_buffer(&self, i_back_buffer: impl TryInto<UINT>, ty: impl Into<BackBufferType>) -> Result<Self::Surface, MethodError> {
+    fn get_back_buffer(&self, i_back_buffer: impl TryInto<UINT>, ty: impl Into<BackBufferType>) -> Result<Self::Surface, Error> {
         fn_context!(d3d9::IDirect3DSwapChain9Ext::get_back_buffer => IDirect3DSwapChain9::GetBackBuffer);
         let i_back_buffer = i_back_buffer.try_into().map_err(|_| fn_param_error!(i_back_buffer, THINERR::SLICE_OVERFLOW))?;
         let ty = ty.into().into();
@@ -72,7 +72,7 @@ pub trait IDirect3DSwapChain9Ext : AsSafe<IDirect3DSwapChain9> {
     /// IDirect3DSwapChain9::GetDevice
     ///
     /// Retrieves the device associated with the swap chain.
-    fn get_device(&self) -> Result<Self::Device, MethodError> {
+    fn get_device(&self) -> Result<Self::Device, Error> {
         fn_context!(d3d9::IDirect3DSwapChain9Ext::get_device => IDirect3DSwapChain9::GetDevice);
         let mut device = null_mut();
         fn_check_hr!(unsafe { self.as_winapi().GetDevice(&mut device) })?;
@@ -83,7 +83,7 @@ pub trait IDirect3DSwapChain9Ext : AsSafe<IDirect3DSwapChain9> {
     /// IDirect3DSwapChain9::GetDisplayMode
     ///
     /// Retrieves the display mode's spatial resolution, color resolution, and refresh frequency.
-    fn get_display_mode(&self) -> Result<DisplayMode, MethodError> {
+    fn get_display_mode(&self) -> Result<DisplayMode, Error> {
         fn_context!(d3d9::IDirect3DSwapChain9Ext::get_display_mode => IDirect3DSwapChain9::GetDisplayMode);
         let mut dm = DisplayMode::zeroed();
         fn_check_hr!(unsafe { self.as_winapi().GetDisplayMode(dm.as_mut()) })?;
@@ -98,7 +98,7 @@ pub trait IDirect3DSwapChain9Ext : AsSafe<IDirect3DSwapChain9> {
     /// ### ⚠️ Safety ⚠️
     /// *   `dest_surface` may need to belong to the same [`Device`] as `self`
     /// *   `dest_surface` may need to be the size of the entire desktop if the [`Device`] is in windowed mode
-    unsafe fn get_front_buffer_data(&self, dest_surface: &impl IDirect3DSurface9Ext) -> Result<(), MethodError> {
+    unsafe fn get_front_buffer_data(&self, dest_surface: &impl IDirect3DSurface9Ext) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DSwapChain9Ext::get_front_buffer_data => IDirect3DSwapChain9::GetFrontBufferData);
         fn_check_hr!(unsafe { self.as_winapi().GetFrontBufferData(dest_surface.as_winapi() as *const _ as *mut _) })
     }
@@ -107,7 +107,7 @@ pub trait IDirect3DSwapChain9Ext : AsSafe<IDirect3DSwapChain9> {
     /// IDirect3DSwapChain9::GetPresentParameters
     ///
     /// Retrieves the presentation parameters associated with a swap chain.
-    fn get_present_parameters(&self) -> Result<d3d::PresentParameters<'_>, MethodError> {
+    fn get_present_parameters(&self) -> Result<d3d::PresentParameters<'_>, Error> {
         fn_context!(d3d9::IDirect3DSwapChain9Ext::get_present_parameters => IDirect3DSwapChain9::GetPresentParameters);
         let mut pp = d3d::PresentParameters::zeroed();
         let hr = unsafe { self.as_winapi().GetPresentParameters(pp.as_mut()) };
@@ -120,7 +120,7 @@ pub trait IDirect3DSwapChain9Ext : AsSafe<IDirect3DSwapChain9> {
     /// IDirect3DSwapChain9::GetRasterStatus
     ///
     /// Returns information describing the raster of the monitor on which the swap chain is presented.
-    fn get_raster_status(&self) -> Result<RasterStatus, MethodError> {
+    fn get_raster_status(&self) -> Result<RasterStatus, Error> {
         fn_context!(d3d9::IDirect3DSwapChain9Ext::get_raster_status => IDirect3DSwapChain9::GetRasterStatus);
         let mut rs = RasterStatus::zeroed();
         fn_check_hr!(unsafe { self.as_winapi().GetRasterStatus(rs.as_mut()) })?;
@@ -150,7 +150,7 @@ pub trait IDirect3DSwapChain9Ext : AsSafe<IDirect3DSwapChain9> {
     /// *   [D3DERR::INVALIDCALL]       If called within a [IDirect3DDevice9Ext::begin_scene] .. [IDirect3DDevice9Ext::end_scene] section, if the render target is the current render target.
     /// *   Ok(`()`)
     // TODO: ### Example
-    fn present<'r>(&self, source_rect: impl IntoRectOrFull, dest_rect: impl IntoRectOrFull, dest_window_override: impl AsHWND, dirty_region: impl Into<Option<&'r RgnData>>, flags: impl Into<Present>) -> Result<(), MethodError> {
+    fn present<'r>(&self, source_rect: impl IntoRectOrFull, dest_rect: impl IntoRectOrFull, dest_window_override: impl AsHWND, dirty_region: impl Into<Option<&'r RgnData>>, flags: impl Into<Present>) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DSwapChain9Ext::present => IDirect3DSwapChain9::Present);
         let source_rect     = source_rect.into_rect();
         let dest_rect       = dest_rect.into_rect();

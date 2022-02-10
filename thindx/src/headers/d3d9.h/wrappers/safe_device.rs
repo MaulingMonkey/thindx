@@ -1,4 +1,4 @@
-use crate::MethodError;
+use crate::Error;
 use crate::d3d9::*;
 
 use std::ops::*;
@@ -22,7 +22,7 @@ impl SafeDevice {
     /// This list list should not be assumed to be exaustive, and will likely continue to be extended.
     ///
     /// To avoid causing new bugs from clearing state, you should generally construct this wrapper as early as possible.
-    pub fn new(device: Device) -> Result<Self, MethodError> {
+    pub fn new(device: Device) -> Result<Self, Error> {
         let caps = device.get_device_caps()?;
         for t in 0 .. caps.MaxSimultaneousTextures {
             // SOUND1: get_texture is unsound unless set_texture is called first

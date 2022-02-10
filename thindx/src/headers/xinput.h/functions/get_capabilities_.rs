@@ -15,7 +15,7 @@ use winapi::um::xinput::*;
 /// *   [ERROR::BAD_ARGUMENTS]          - Invalid [`User`] or [`User::Any`]
 /// *   [ERROR::DEVICE_NOT_CONNECTED]   - [`Flag::None`]
 /// *   [ERROR::DEVICE_NOT_CONNECTED]   - [`User`] in bounds, but without a gamepad
-pub fn get_capabilities(user_index: impl Into<u32>, flags: Flag) -> Result<Capabilities, MethodError> {
+pub fn get_capabilities(user_index: impl Into<u32>, flags: Flag) -> Result<Capabilities, Error> {
     fn_context!(xinput::get_capabilities => XInputGetCapabilities);
     let mut caps = Capabilities::zeroed();
     // SAFETY: ✔️

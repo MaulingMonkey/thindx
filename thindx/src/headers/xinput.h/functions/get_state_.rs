@@ -15,7 +15,7 @@ use winapi::um::xinput::*;
 /// ### Errors
 /// *   [ERROR::BAD_ARGUMENTS]          - Invalid [`User`] or [`User::Any`]
 /// *   [ERROR::DEVICE_NOT_CONNECTED]   - [`User`] gamepad not connected
-pub fn get_state(user_index: impl Into<u32>) -> Result<State, MethodError> {
+pub fn get_state(user_index: impl Into<u32>) -> Result<State, Error> {
     fn_context!(xinput::get_state => XInputGetState);
     let mut state = State::zeroed();
     // SAFETY: ✔️

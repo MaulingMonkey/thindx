@@ -139,7 +139,7 @@ pub trait IDirect3DDevice9ExExt : AsSafe<IDirect3DDevice9Ex> {
     /// # use dev::d3d9::*; let device = device_ex_test();
     /// // TODO
     /// ```
-    fn compose_rects(&self, src: &Surface, dst: &Surface, src_rect_descs: &VertexBuffer, num_rects: u32, dst_rect_descs: &VertexBuffer, operation: impl Into<ComposeRectsOp>, xoffset: i32, yoffset: i32) -> Result<(), MethodError> {
+    fn compose_rects(&self, src: &Surface, dst: &Surface, src_rect_descs: &VertexBuffer, num_rects: u32, dst_rect_descs: &VertexBuffer, operation: impl Into<ComposeRectsOp>, xoffset: i32, yoffset: i32) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9ExExt::compose_rects => IDirect3DDevice9Ex::ComposeRects);
         let (src, dst, src_rect_descs, dst_rect_descs) = (src.as_raw(), dst.as_raw(), src_rect_descs.as_raw(), dst_rect_descs.as_raw());
         let operation = operation.into().into();
@@ -161,7 +161,7 @@ pub trait IDirect3DDevice9ExExt : AsSafe<IDirect3DDevice9Ex> {
     /// # use dev::d3d9::*; let device = device_ex_test();
     /// // TODO
     /// ```
-    fn create_depth_stencil_surface_ex(&self, width: u32, height: u32, format: impl Into<Format>, multi_sample: impl Into<MultiSampleType>, multi_sample_quality: u32, discard: bool, _shared_handle: impl SharedHandleParam, usage: impl Into<Usage>) -> Result<Surface, MethodError> {
+    fn create_depth_stencil_surface_ex(&self, width: u32, height: u32, format: impl Into<Format>, multi_sample: impl Into<MultiSampleType>, multi_sample_quality: u32, discard: bool, _shared_handle: impl SharedHandleParam, usage: impl Into<Usage>) -> Result<Surface, Error> {
         fn_context!(d3d9::IDirect3DDevice9ExExt::create_depth_stencil_surface_ex => IDirect3DDevice9Ex::CreateDepthStencilSurfaceEx);
         let format = format.into().into();
         let multi_sample = multi_sample.into().into();
@@ -188,7 +188,7 @@ pub trait IDirect3DDevice9ExExt : AsSafe<IDirect3DDevice9Ex> {
     /// # use dev::d3d9::*; let device = device_ex_test();
     /// // TODO
     /// ```
-    fn create_offscreen_plain_surface_ex(&self, width: u32, height: u32, format: impl Into<Format>, pool: impl Into<Pool>, _shared_handle: impl SharedHandleParam, usage: impl Into<Usage>) -> Result<Surface, MethodError> {
+    fn create_offscreen_plain_surface_ex(&self, width: u32, height: u32, format: impl Into<Format>, pool: impl Into<Pool>, _shared_handle: impl SharedHandleParam, usage: impl Into<Usage>) -> Result<Surface, Error> {
         fn_context!(d3d9::IDirect3DDevice9ExExt::create_offscreen_plain_surface_ex => IDirect3DDevice9Ex::CreateOffscreenPlainSurfaceEx);
         let format = format.into().into();
         let pool = pool.into().into();
@@ -214,7 +214,7 @@ pub trait IDirect3DDevice9ExExt : AsSafe<IDirect3DDevice9Ex> {
     /// # use dev::d3d9::*; let device = device_ex_test();
     /// // TODO
     /// ```
-    fn create_render_target_ex(&self, width: u32, height: u32, format: impl Into<Format>, multi_sample: impl Into<MultiSampleType>, multi_sample_quality: u32, lockable: bool, _shared_handle: impl SharedHandleParam, usage: impl Into<Usage>) -> Result<Surface, MethodError> {
+    fn create_render_target_ex(&self, width: u32, height: u32, format: impl Into<Format>, multi_sample: impl Into<MultiSampleType>, multi_sample_quality: u32, lockable: bool, _shared_handle: impl SharedHandleParam, usage: impl Into<Usage>) -> Result<Surface, Error> {
         fn_context!(d3d9::IDirect3DDevice9ExExt::create_render_target_ex => IDirect3DDevice9Ex::CreateRenderTargetEx);
         let format = format.into().into();
         let multi_sample = multi_sample.into().into();
@@ -241,7 +241,7 @@ pub trait IDirect3DDevice9ExExt : AsSafe<IDirect3DDevice9Ex> {
     /// # use dev::d3d9::*; let device = device_ex_test();
     /// // TODO
     /// ```
-    fn get_display_mode_ex(&self, swap_chain: u32) -> Result<(DisplayModeEx, DisplayRotation), MethodError> {
+    fn get_display_mode_ex(&self, swap_chain: u32) -> Result<(DisplayModeEx, DisplayRotation), Error> {
         fn_context!(d3d9::IDirect3DDevice9ExExt::get_display_mode_ex => IDirect3DDevice9Ex::GetDisplayModeEx);
         let mut display_mode_ex = DisplayModeEx::zeroed();
         display_mode_ex.size = std::mem::size_of_val(&display_mode_ex).try_into().unwrap();
@@ -265,7 +265,7 @@ pub trait IDirect3DDevice9ExExt : AsSafe<IDirect3DDevice9Ex> {
     /// # use dev::d3d9::*; let device = device_ex_test();
     /// // TODO
     /// ```
-    fn get_gpu_thread_priority(&self) -> Result<i32, MethodError> {
+    fn get_gpu_thread_priority(&self) -> Result<i32, Error> {
         fn_context!(d3d9::IDirect3DDevice9ExExt::get_gpu_thread_priority => IDirect3DDevice9Ex::GetGPUThreadPriority);
         let mut pri = 0;
         fn_check_hr!(unsafe { self.as_winapi().GetGPUThreadPriority(&mut pri) })?;
@@ -290,7 +290,7 @@ pub trait IDirect3DDevice9ExExt : AsSafe<IDirect3DDevice9Ex> {
     /// # use dev::d3d9::*; let device = device_ex_test();
     /// // TODO
     /// ```
-    fn get_maximum_frame_latency(&self) -> Result<u32, MethodError> {
+    fn get_maximum_frame_latency(&self) -> Result<u32, Error> {
         fn_context!(d3d9::IDirect3DDevice9ExExt::get_maximum_frame_latency => IDirect3DDevice9Ex::GetMaximumFrameLatency);
         let mut max_latency = 0;
         fn_check_hr!(unsafe { self.as_winapi().GetMaximumFrameLatency(&mut max_latency) })?;
@@ -314,7 +314,7 @@ pub trait IDirect3DDevice9ExExt : AsSafe<IDirect3DDevice9Ex> {
     /// # use dev::d3d9::*; let device = device_ex_test();
     /// // TODO
     /// ```
-    fn present_ex<'r>(&self, source_rect: impl IntoRectOrFull, dest_rect: impl IntoRectOrFull, dest_window_override: impl AsHWND, dirty_region: impl Into<Option<&'r RgnData>>, flags: impl Into<Present>) -> Result<(), MethodError> {
+    fn present_ex<'r>(&self, source_rect: impl IntoRectOrFull, dest_rect: impl IntoRectOrFull, dest_window_override: impl AsHWND, dirty_region: impl Into<Option<&'r RgnData>>, flags: impl Into<Present>) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9ExExt::present_ex => IDirect3DDevice9Ex::PresentEx);
         let source_rect = source_rect.into_rect();
         let dest_rect   = dest_rect.into_rect();
@@ -354,7 +354,7 @@ pub trait IDirect3DDevice9ExExt : AsSafe<IDirect3DDevice9Ex> {
     /// # use dev::d3d9::*; let device = device_ex_test();
     /// // TODO
     /// ```
-    fn reset_ex<'mode>(&self, presentation_parameters: &mut PresentParameters<'static>, fullscreen_display_mode: impl Into<Option<&'mode mut DisplayModeEx>>) -> Result<(), MethodError> {
+    fn reset_ex<'mode>(&self, presentation_parameters: &mut PresentParameters<'static>, fullscreen_display_mode: impl Into<Option<&'mode mut DisplayModeEx>>) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9ExExt::reset_ex => IDirect3DDevice9Ex::ResetEx);
         let fullscreen_display_mode = fullscreen_display_mode.into().map_or(null_mut(), |dm| dm);
         fn_check_hr!(unsafe { self.as_winapi().ResetEx(presentation_parameters.as_mut(), fullscreen_display_mode.cast()) })
@@ -374,7 +374,7 @@ pub trait IDirect3DDevice9ExExt : AsSafe<IDirect3DDevice9Ex> {
     /// # use dev::d3d9::*; let device = device_ex_test();
     /// // TODO
     /// ```
-    fn set_convolution_mono_kernel_unweighted(&self, width: u32, height: u32) -> Result<(), MethodError> {
+    fn set_convolution_mono_kernel_unweighted(&self, width: u32, height: u32) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9ExExt::set_convolution_mono_kernel_unweighted => IDirect3DDevice9Ex::SetConvolutionMonoKernel);
         fn_check_hr!(unsafe { self.as_winapi().SetConvolutionMonoKernel(width, height, null_mut(), null_mut()) })
     }
@@ -393,7 +393,7 @@ pub trait IDirect3DDevice9ExExt : AsSafe<IDirect3DDevice9Ex> {
     /// # use dev::d3d9::*; let device = device_ex_test();
     /// // TODO
     /// ```
-    fn set_convolution_mono_kernel(&self, rows: &mut [f32], cols: &mut [f32]) -> Result<(), MethodError> {
+    fn set_convolution_mono_kernel(&self, rows: &mut [f32], cols: &mut [f32]) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9ExExt::set_convolution_mono_kernel => IDirect3DDevice9Ex::SetConvolutionMonoKernel);
         // XXX: should rows/cols be non-mut?  Not sure if d3d *actually* writes those values or not...
         let width  : u32 = rows.len().try_into().map_err(|_| fn_param_error!(rows, THINERR::SLICE_OVERFLOW))?;
@@ -416,7 +416,7 @@ pub trait IDirect3DDevice9ExExt : AsSafe<IDirect3DDevice9Ex> {
     /// # use dev::d3d9::*; let device = device_ex_test();
     /// // TODO
     /// ```
-    fn set_gpu_thread_priority(&self, priority: i32) -> Result<(), MethodError> {
+    fn set_gpu_thread_priority(&self, priority: i32) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9ExExt::set_gpu_thread_priority => IDirect3DDevice9Ex::SetGPUThreadPriority);
         fn_check_hr!(unsafe { self.as_winapi().SetGPUThreadPriority(priority) })
     }
@@ -435,7 +435,7 @@ pub trait IDirect3DDevice9ExExt : AsSafe<IDirect3DDevice9Ex> {
     /// # use dev::d3d9::*; let device = device_ex_test();
     /// // TODO
     /// ```
-    fn set_maximum_frame_latency(&self, max_latency: u32) -> Result<(), MethodError> {
+    fn set_maximum_frame_latency(&self, max_latency: u32) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9ExExt::set_maximum_frame_latency => IDirect3DDevice9Ex::SetMaximumFrameLatency);
         fn_check_hr!(unsafe { self.as_winapi().SetMaximumFrameLatency(max_latency) })
     }
@@ -455,7 +455,7 @@ pub trait IDirect3DDevice9ExExt : AsSafe<IDirect3DDevice9Ex> {
     /// // TODO
     /// ```
     #[deprecated = "docs claim test_cooperative_level is no longer available for use - instead, use check_device_state"]
-    fn test_cooperative_level(&self) -> Result<(), MethodError> {
+    fn test_cooperative_level(&self) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9ExExt::test_cooperative_level => IDirect3DDevice9Ex::TestCooperativeLevel);
         fn_check_hr!(unsafe { self.as_winapi().TestCooperativeLevel() })
     }
@@ -474,7 +474,7 @@ pub trait IDirect3DDevice9ExExt : AsSafe<IDirect3DDevice9Ex> {
     /// # use dev::d3d9::*; let device = device_ex_test();
     /// // TODO
     /// ```
-    fn wait_for_vblank(&self, swap_chain: u32) -> Result<(), MethodError> {
+    fn wait_for_vblank(&self, swap_chain: u32) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9ExExt::wait_for_vblank => IDirect3DDevice9Ex::WaitForVBlank);
         fn_check_hr!(unsafe { self.as_winapi().WaitForVBlank(swap_chain) })
     }

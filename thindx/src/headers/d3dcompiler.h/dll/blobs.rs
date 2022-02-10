@@ -27,7 +27,7 @@ impl Compiler {
     ///
     /// ### Remarks
     /// *   This was introduced by d3dcompiler_43.dll, and is unavailable in earlier versions.
-    pub fn create_read_only_blob(&self, data: &[u8]) -> Result<ReadOnlyBlob, MethodError> {
+    pub fn create_read_only_blob(&self, data: &[u8]) -> Result<ReadOnlyBlob, Error> {
         fn_context_dll!(d3d::Compiler::create_read_only_blob => self.D3DCreateBlob);
 
         // SAFETY: ❌ needs fuzz testing against ~4GB `data` to attempt to induce alloc overflow bugs
@@ -82,7 +82,7 @@ impl Compiler {
     ///
     /// ### Remarks
     /// *   This was introduced by d3dcompiler_44.dll, and is unavailable in earlier versions.
-    pub fn read_file_to_blob(&self, file_name: impl AsRef<Path>) -> Result<ReadOnlyBlob, MethodError> {
+    pub fn read_file_to_blob(&self, file_name: impl AsRef<Path>) -> Result<ReadOnlyBlob, Error> {
         fn_context_dll!(d3d::Compiler::read_file_to_blob => self.D3DReadFileToBlob);
         let file_name = file_name.to_wcstr().map_err(|e| fn_param_error!(file_name, e))?;
 
@@ -142,7 +142,7 @@ impl Compiler {
         blob:       &ReadOnlyBlob,
         file_name:  impl AsRef<Path>,
         overwrite:  bool,
-    ) -> Result<(), MethodError> {
+    ) -> Result<(), Error> {
         fn_context_dll!(d3d::Compiler::write_blob_to_file => self.D3DWriteBlobToFile);
         let file_name = file_name.to_wcstr().map_err(|e| fn_param_error!(file_name, e))?;
 

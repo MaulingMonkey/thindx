@@ -72,7 +72,7 @@ pub trait IDirect3DPixelShader9Ext : AsSafe<IDirect3DPixelShader9> {
     /// ### Returns
     /// *   [D3DERR::INVALIDCALL]   The device was pure?
     /// *   Ok([Device])
-    fn get_device(&self) -> Result<Device, MethodError> {
+    fn get_device(&self) -> Result<Device, Error> {
         fn_context!(d3d9::IDirect3DPixelShader9Ext::get_device => IDirect3DPixelShader9::GetDevice);
         let mut device = null_mut();
         fn_check_hr!(unsafe { self.as_winapi().GetDevice(&mut device) })?;
@@ -87,7 +87,7 @@ pub trait IDirect3DPixelShader9Ext : AsSafe<IDirect3DPixelShader9> {
     /// ### Returns
     /// *   [D3DERR::INVALIDCALL]   The device was pure?
     /// *   Ok(`size`)
-    fn get_function_size(&self) -> Result<u32, MethodError> {
+    fn get_function_size(&self) -> Result<u32, Error> {
         fn_context!(d3d9::IDirect3DPixelShader9Ext::get_function_size => IDirect3DPixelShader9::GetFunction);
         let mut size = 0;
         fn_check_hr!(unsafe { self.as_winapi().GetFunction(null_mut(), &mut size) })?;
@@ -103,7 +103,7 @@ pub trait IDirect3DPixelShader9Ext : AsSafe<IDirect3DPixelShader9> {
     /// *   [THINERR::SLICE_TOO_LARGE]  `data` exceeded 4GB
     /// *   [D3DERR::INVALIDCALL]   The device was pure?
     /// *   Ok(`&data[???]`)        Function data was read
-    fn get_function_inplace<'d>(&self, data: &'d mut [u8]) -> Result<&'d [u8], MethodError> {
+    fn get_function_inplace<'d>(&self, data: &'d mut [u8]) -> Result<&'d [u8], Error> {
         fn_context!(d3d9::IDirect3DPixelShader9Ext::get_function_inplace => IDirect3DPixelShader9::GetFunction);
         let mut size = data.len().try_into().map_err(|_| fn_param_error!(data, THINERR::SLICE_TOO_LARGE))?;
         // XXX: Do I need a get_function_size check in here too?
@@ -119,7 +119,7 @@ pub trait IDirect3DPixelShader9Ext : AsSafe<IDirect3DPixelShader9> {
     /// ### Returns
     /// *   [D3DERR::INVALIDCALL]   The device was pure?
     /// *   Ok([Vec]&lt;[u8]&gt;)    Function data was read
-    fn get_function(&self) -> Result<Vec<u8>, MethodError> {
+    fn get_function(&self) -> Result<Vec<u8>, Error> {
         fn_context!(d3d9::IDirect3DPixelShader9Ext::get_function => IDirect3DPixelShader9::GetFunction);
         let mut size = self.get_function_size()?;
         let mut data = vec![0u8; size as usize];
@@ -156,7 +156,7 @@ pub trait IDirect3DVertexShader9Ext : AsSafe<IDirect3DVertexShader9> {
     /// ### Returns
     /// *   [D3DERR::INVALIDCALL]   The device was pure?
     /// *   Ok([Device])
-    fn get_device(&self) -> Result<Device, MethodError> {
+    fn get_device(&self) -> Result<Device, Error> {
         fn_context!(d3d9::IDirect3DVertexShader9Ext::get_device => IDirect3DVertexShader9::GetDevice);
         let mut device = null_mut();
         fn_check_hr!(unsafe { self.as_winapi().GetDevice(&mut device) })?;
@@ -171,7 +171,7 @@ pub trait IDirect3DVertexShader9Ext : AsSafe<IDirect3DVertexShader9> {
     /// ### Returns
     /// *   [D3DERR::INVALIDCALL]   The device was pure?
     /// *   Ok(`size`)
-    fn get_function_size(&self) -> Result<u32, MethodError> {
+    fn get_function_size(&self) -> Result<u32, Error> {
         fn_context!(d3d9::IDirect3DVertexShader9Ext::get_function_size => IDirect3DVertexShader9::GetFunction);
         let mut size = 0;
         fn_check_hr!(unsafe { self.as_winapi().GetFunction(null_mut(), &mut size) })?;
@@ -187,7 +187,7 @@ pub trait IDirect3DVertexShader9Ext : AsSafe<IDirect3DVertexShader9> {
     /// *   [THINERR::SLICE_TOO_LARGE]  `data` exceeded 4GB
     /// *   [D3DERR::INVALIDCALL]   The device was pure?
     /// *   Ok(`&data[???]`)        Function data was read
-    fn get_function_inplace<'d>(&self, data: &'d mut [u8]) -> Result<&'d [u8], MethodError> {
+    fn get_function_inplace<'d>(&self, data: &'d mut [u8]) -> Result<&'d [u8], Error> {
         fn_context!(d3d9::IDirect3DVertexShader9Ext::get_function_inplace => IDirect3DVertexShader9::GetFunction);
         let mut size = data.len().try_into().map_err(|_| fn_param_error!(data, THINERR::SLICE_TOO_LARGE))?;
         // XXX: Do I need a get_function_size check in here too?
@@ -203,7 +203,7 @@ pub trait IDirect3DVertexShader9Ext : AsSafe<IDirect3DVertexShader9> {
     /// ### Returns
     /// *   [D3DERR::INVALIDCALL]   The device was pure?
     /// *   Ok([Vec]&lt;[u8]&gt;)    Function data was read
-    fn get_function(&self) -> Result<Vec<u8>, MethodError> {
+    fn get_function(&self) -> Result<Vec<u8>, Error> {
         fn_context!(d3d9::IDirect3DVertexShader9Ext::get_function => IDirect3DVertexShader9::GetFunction);
         let mut size = self.get_function_size()?;
         let mut data = vec![0u8; size as usize];

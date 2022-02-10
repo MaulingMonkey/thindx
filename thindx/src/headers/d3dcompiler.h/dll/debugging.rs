@@ -125,7 +125,7 @@ impl Compiler {
         src_data:           &Bytecode,
         flags:              impl Into<Disasm>,
         comments:           impl TryIntoAsOptCStr,
-    ) -> Result<TextBlob, MethodError> {
+    ) -> Result<TextBlob, Error> {
         fn_context_dll!(d3d::Compiler::disassemble => self.D3DDisassemble);
         let src_data = src_data.as_bytes();
         let flags = flags.into().into();
@@ -221,7 +221,7 @@ impl Compiler {
         comments:           impl TryIntoAsOptCStr,
         start_byte_offset:  usize,
         num_insts:          usize,
-    ) -> Result<DisassembledRegion, MethodError> {
+    ) -> Result<DisassembledRegion, Error> {
         fn_context_dll!(d3d::Compiler::disassemble_region => self.D3DDisassembleRegion);
         let src_data = src_data.as_bytes();
         let flags = flags.into().into();
@@ -282,7 +282,7 @@ impl Compiler {
         flags:              impl Into<GetInstOffsets>,
         start_inst_index:   usize,
         num_insts:          usize,
-    ) -> Result<usize, MethodError> {
+    ) -> Result<usize, Error> {
         fn_context_dll!(d3d::Compiler::get_trace_instruction_offsets_count => self.D3DGetTraceInstructionOffsets);
         let src_data = src_data.as_bytes();
         let mut n = 0;
@@ -332,7 +332,7 @@ impl Compiler {
         flags:              impl Into<GetInstOffsets>,
         start_inst_index:   usize,
         offsets:            &'o mut [usize],
-    ) -> Result<&'o [usize], MethodError> {
+    ) -> Result<&'o [usize], Error> {
         fn_context_dll!(d3d::Compiler::get_trace_instruction_offsets_inplace => self.D3DGetTraceInstructionOffsets);
         let src_data = src_data.as_bytes();
         let mut n = 0;
@@ -381,7 +381,7 @@ impl Compiler {
         flags:              impl Into<GetInstOffsets>,
         start_inst_index:   usize,
         num_insts:          usize,
-    ) -> Result<Vec<usize>, MethodError> {
+    ) -> Result<Vec<usize>, Error> {
         fn_context!(d3d::Compiler::get_trace_instruction_offsets => D3DGetTraceInstructionOffsets);
         let flags = flags.into();
         let n = self.get_trace_instruction_offsets_count(src_data, flags, start_inst_index, num_insts)?;

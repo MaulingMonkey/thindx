@@ -9,21 +9,21 @@ use std::fmt::{self, Debug, Display, Formatter};
 
 /// An error about some specific method returning an [HRESULT](https://www.hresult.info/)
 #[derive(Clone)]
-pub struct MethodError(pub(crate) &'static FnContext, pub(crate) ErrorKind);
+pub struct Error(pub(crate) &'static FnContext, pub(crate) ErrorKind);
 
-// TODO: replace MethodError with a generic Error that takes a single `&'static ErrorSite` payload.
+// TODO: replace Error with a generic Error that takes a single `&'static ErrorSite` payload.
 // This wil allow:
 //  1. a cheaper Error type (narrow ref instead of a fat ref)
 //  2. extra metadata (detailed reason, d3d method + thindx method, ...)
-// Start with a `method_error!(...)` macro to replace existing `MethodError(...)` tuple construction?
+// Start with a `method_error!(...)` macro to replace existing `Error(...)` tuple construction?
 
-impl MethodError {
-    /// Returns an `Err(MethodError(...))` if `!SUCCEEDED(hr)`
+impl Error {
+    /// Returns an `Err(Error(...))` if `!SUCCEEDED(hr)`
     pub(crate) fn check(ctx: &'static FnContext, hr: HRESULT) -> Result<(), Self> {
         if SUCCEEDED(hr) {
             Ok(())
         } else {
-            Err(MethodError(ctx, ErrorKind(hr)))
+            Err(Error(ctx, ErrorKind(hr)))
         }
     }
 
@@ -39,13 +39,13 @@ impl MethodError {
     pub fn hresult_info_search_link(&self) -> String { format!("https://www.hresult.info/Search?q=0x{:08x}", self.1.0 as u32) }
 }
 
-impl Debug   for MethodError { fn fmt(&self, fmt: &mut Formatter) -> fmt::Result { write!(fmt, "MethodError({:?}, {:?})", self.method(), self.1) } }
-impl Display for MethodError { fn fmt(&self, fmt: &mut Formatter) -> fmt::Result { write!(fmt, "{} failed with HRESULT == {}", self.method(), self.1) } }
+impl Debug   for Error { fn fmt(&self, fmt: &mut Formatter) -> fmt::Result { write!(fmt, "Error({:?}, {:?})", self.method(), self.1) } }
+impl Display for Error { fn fmt(&self, fmt: &mut Formatter) -> fmt::Result { write!(fmt, "{} failed with HRESULT == {}", self.method(), self.1) } }
 
-impl std::error::Error for MethodError {}
-impl From<MethodError> for std::io::Error { fn from(err: MethodError) -> Self { std::io::Error::new(std::io::ErrorKind::Other, err) } }
+impl std::error::Error for Error {}
+impl From<Error> for std::io::Error { fn from(err: Error) -> Self { std::io::Error::new(std::io::ErrorKind::Other, err) } }
 
-impl PartialEq<Option<MethodError>> for ErrorKind { fn eq(&self, other: &Option<MethodError>) -> bool { Some(*self) == other.as_ref().map(|e| e.kind()) } }
-impl PartialEq<ErrorKind> for Option<MethodError> { fn eq(&self, other: &ErrorKind)           -> bool { Some(*other) == self.as_ref().map(|e| e.kind()) } }
-impl<O> PartialEq<Result<O, MethodError>> for ErrorKind { fn eq(&self, other: &Result<O, MethodError>) -> bool { Some(*self) == other.as_ref().err().map(|e| e.kind()) } }
-impl<O> PartialEq<ErrorKind> for Result<O, MethodError> { fn eq(&self, other: &ErrorKind)              -> bool { Some(*other) == self.as_ref().err().map(|e| e.kind()) } }
+impl PartialEq<Option<Error>> for ErrorKind { fn eq(&self, other: &Option<Error>) -> bool { Some(*self) == other.as_ref().map(|e| e.kind()) } }
+impl PartialEq<ErrorKind> for Option<Error> { fn eq(&self, other: &ErrorKind)           -> bool { Some(*other) == self.as_ref().map(|e| e.kind()) } }
+impl<O> PartialEq<Result<O, Error>> for ErrorKind { fn eq(&self, other: &Result<O, Error>) -> bool { Some(*self) == other.as_ref().err().map(|e| e.kind()) } }
+impl<O> PartialEq<ErrorKind> for Result<O, Error> { fn eq(&self, other: &ErrorKind)              -> bool { Some(*other) == self.as_ref().err().map(|e| e.kind()) } }

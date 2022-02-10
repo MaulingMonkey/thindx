@@ -51,7 +51,7 @@ impl ModuleInstance {
     /// # use thindx::*;
     /// // TODO
     /// ```
-    pub fn bind_constant_buffer(&self, src_slot: u32, dst_slot: u32, dst_offset: u32) -> Result<bool, MethodError> {
+    pub fn bind_constant_buffer(&self, src_slot: u32, dst_slot: u32, dst_offset: u32) -> Result<bool, Error> {
         fn_context!(d3d11::ModuleInstance::bind_constant_buffer => ID3D11ModuleInstance::BindConstantBuffer);
         let hr = unsafe { self.0.BindConstantBuffer(src_slot, dst_slot, dst_offset) };
         check!(hr)
@@ -81,7 +81,7 @@ impl ModuleInstance {
     /// # use thindx::*;
     /// // TODO
     /// ```
-    pub fn bind_constant_buffer_by_name(&self, name: impl TryIntoAsCStr, dst_slot: u32, dst_offset: u32) -> Result<bool, MethodError> {
+    pub fn bind_constant_buffer_by_name(&self, name: impl TryIntoAsCStr, dst_slot: u32, dst_offset: u32) -> Result<bool, Error> {
         fn_context!(d3d11::ModuleInstance::bind_constant_buffer_by_name => ID3D11ModuleInstance::BindConstantBufferByName);
         let name = name.try_into().map_err(|e| fn_param_error!(name, e.into()))?;
         let hr = unsafe { self.0.BindConstantBufferByName(name.as_cstr(), dst_slot, dst_offset) };
@@ -112,7 +112,7 @@ impl ModuleInstance {
     /// # use thindx::*;
     /// // TODO
     /// ```
-    pub fn bind_resource(&self, src_slot: u32, dst_slot: u32, count: u32) -> Result<bool, MethodError> {
+    pub fn bind_resource(&self, src_slot: u32, dst_slot: u32, count: u32) -> Result<bool, Error> {
         fn_context!(d3d11::ModuleInstance::bind_resource => ID3D11ModuleInstance::BindResource);
         let hr = unsafe { self.0.BindResource(src_slot, dst_slot, count) };
         check!(hr)
@@ -142,7 +142,7 @@ impl ModuleInstance {
     /// # use thindx::*;
     /// // TODO
     /// ```
-    pub fn bind_resource_as_unordered_access_view(&self, src_srv_slot: u32, dst_uav_slot: u32, count: u32) -> Result<bool, MethodError> {
+    pub fn bind_resource_as_unordered_access_view(&self, src_srv_slot: u32, dst_uav_slot: u32, count: u32) -> Result<bool, Error> {
         fn_context!(d3d11::ModuleInstance::bind_resource_as_unordered_access_view => ID3D11ModuleInstance::BindResourceAsUnorderedAccessView);
         let hr = unsafe { self.0.BindResourceAsUnorderedAccessView(src_srv_slot, dst_uav_slot, count) };
         check!(hr)
@@ -172,7 +172,7 @@ impl ModuleInstance {
     /// # use thindx::*;
     /// // TODO
     /// ```
-    pub fn bind_resource_as_unordered_access_view_by_name(&self, srv_name: impl TryIntoAsCStr, dst_uav_slot: u32, count: u32) -> Result<bool, MethodError> {
+    pub fn bind_resource_as_unordered_access_view_by_name(&self, srv_name: impl TryIntoAsCStr, dst_uav_slot: u32, count: u32) -> Result<bool, Error> {
         fn_context!(d3d11::ModuleInstance::bind_resource_as_unordered_access_view_by_name => ID3D11ModuleInstance::BindResourceAsUnorderedAccessViewByName);
         let srv_name = srv_name.try_into().map_err(|e| fn_param_error!(srv_name, e.into()))?;
         let hr = unsafe { self.0.BindResourceAsUnorderedAccessViewByName(srv_name.as_cstr(), dst_uav_slot, count) };
@@ -203,7 +203,7 @@ impl ModuleInstance {
     /// # use thindx::*;
     /// // TODO
     /// ```
-    pub fn bind_resource_by_name(&self, name: impl TryIntoAsCStr, dst_slot: u32, count: u32) -> Result<bool, MethodError> {
+    pub fn bind_resource_by_name(&self, name: impl TryIntoAsCStr, dst_slot: u32, count: u32) -> Result<bool, Error> {
         fn_context!(d3d11::ModuleInstance::bind_resource_by_name => ID3D11ModuleInstance::BindResourceByName);
         let name = name.try_into().map_err(|e| fn_param_error!(name, e.into()))?;
         let hr = unsafe { self.0.BindResourceByName(name.as_cstr(), dst_slot, count) };
@@ -234,7 +234,7 @@ impl ModuleInstance {
     /// # use thindx::*;
     /// // TODO
     /// ```
-    pub fn bind_sampler(&self, src_slot: u32, dst_slot: u32, count: u32) -> Result<bool, MethodError> {
+    pub fn bind_sampler(&self, src_slot: u32, dst_slot: u32, count: u32) -> Result<bool, Error> {
         fn_context!(d3d11::ModuleInstance::bind_sampler => ID3D11ModuleInstance::BindSampler);
         let hr = unsafe { self.0.BindSampler(src_slot, dst_slot, count) };
         check!(hr)
@@ -264,7 +264,7 @@ impl ModuleInstance {
     /// # use thindx::*;
     /// // TODO
     /// ```
-    pub fn bind_sampler_by_name(&self, name: impl TryIntoAsCStr, dst_slot: u32, count: u32) -> Result<bool, MethodError> {
+    pub fn bind_sampler_by_name(&self, name: impl TryIntoAsCStr, dst_slot: u32, count: u32) -> Result<bool, Error> {
         fn_context!(d3d11::ModuleInstance::bind_sampler_by_name => ID3D11ModuleInstance::BindSamplerByName);
         let name = name.try_into().map_err(|e| fn_param_error!(name, e.into()))?;
         let hr = unsafe { self.0.BindSamplerByName(name.as_cstr(), dst_slot, count) };
@@ -295,7 +295,7 @@ impl ModuleInstance {
     /// # use thindx::*;
     /// // TODO
     /// ```
-    pub fn bind_unordered_access_view(&self, src_slot: u32, dst_slot: u32, count: u32) -> Result<bool, MethodError> {
+    pub fn bind_unordered_access_view(&self, src_slot: u32, dst_slot: u32, count: u32) -> Result<bool, Error> {
         fn_context!(d3d11::ModuleInstance::bind_unordered_access_view => ID3D11ModuleInstance::BindUnorderedAccessView);
         let hr = unsafe { self.0.BindUnorderedAccessView(src_slot, dst_slot, count) };
         check!(hr)
@@ -325,7 +325,7 @@ impl ModuleInstance {
     /// # use thindx::*;
     /// // TODO
     /// ```
-    pub fn bind_unordered_access_view_by_name(&self, name: impl TryIntoAsCStr, dst_slot: u32, count: u32) -> Result<bool, MethodError> {
+    pub fn bind_unordered_access_view_by_name(&self, name: impl TryIntoAsCStr, dst_slot: u32, count: u32) -> Result<bool, Error> {
         fn_context!(d3d11::ModuleInstance::bind_unordered_access_view_by_name => ID3D11ModuleInstance::BindUnorderedAccessViewByName);
         let name = name.try_into().map_err(|e| fn_param_error!(name, e.into()))?;
         let hr = unsafe { self.0.BindUnorderedAccessViewByName(name.as_cstr(), dst_slot, count) };

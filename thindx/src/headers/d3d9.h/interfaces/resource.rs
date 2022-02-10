@@ -91,7 +91,7 @@ pub trait IDirect3DResource9Ext : AsSafe<IDirect3DResource9> {
     /// // wkpdid::D3DDebugObjectName was set by set_object_name, so now it should succeed:
     /// r.free_private_data(&wkpdid::D3DDebugObjectName).unwrap();
     /// ```
-    fn free_private_data(&self, guid: &impl AsRef<Guid>) -> Result<(), MethodError> {
+    fn free_private_data(&self, guid: &impl AsRef<Guid>) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DResource9Ext::free_private_data => IDirect3DResource9::FreePrivateData);
         fn_check_hr!(unsafe { self.as_winapi().FreePrivateData(guid.as_ref().as_ref()) })
     }
@@ -115,7 +115,7 @@ pub trait IDirect3DResource9Ext : AsSafe<IDirect3DResource9> {
     /// let dev2 = mcom::Rc::<winapi::shared::d3d9::IDirect3DDevice9>::from(dev2);
     /// assert_eq!(dev.as_ptr(), dev2.as_ptr());
     /// ```
-    fn get_device(&self) -> Result<Device, MethodError> {
+    fn get_device(&self) -> Result<Device, Error> {
         fn_context!(d3d9::IDirect3DResource9Ext::get_device => IDirect3DResource9::GetDevice);
         let mut device = null_mut();
         fn_check_hr!(unsafe { self.as_winapi().GetDevice(&mut device) })?;
@@ -174,7 +174,7 @@ pub trait IDirect3DResource9Ext : AsSafe<IDirect3DResource9> {
     /// let mut buf = [0u8];
     /// assert_eq!(D3DERR::MOREDATA, r.get_private_data_inplace(&wkpdid::D3DDebugObjectName, &mut buf[..]));
     /// ```
-    fn get_private_data_inplace<'s>(&self, guid: &impl AsRef<Guid>, data: &'s mut [u8]) -> Result<&'s [u8], MethodError> {
+    fn get_private_data_inplace<'s>(&self, guid: &impl AsRef<Guid>, data: &'s mut [u8]) -> Result<&'s [u8], Error> {
         fn_context!(d3d9::IDirect3DResource9Ext::get_private_data_inplace => IDirect3DResource9::GetPrivateData);
         let mut n : u32 = data.len().try_into().map_err(|_| fn_param_error!(data, THINERR::SLICE_OVERFLOW))?;
         fn_check_hr!(unsafe { self.as_winapi().GetPrivateData(guid.as_ref().as_ref(), data.as_mut_ptr().cast(), &mut n) })?;
@@ -256,7 +256,7 @@ pub trait IDirect3DResource9Ext : AsSafe<IDirect3DResource9> {
     /// let r = dev.create_index_buffer(6, Usage::None, Format::Index16, Pool::Managed, ()).unwrap();
     /// r.set_private_data(&wkpdid::D3DDebugObjectName, b"triangle index buffer").unwrap();
     /// ```
-    fn set_private_data(&self, guid: &impl AsRef<Guid>, data: &[u8]) -> Result<(), MethodError> {
+    fn set_private_data(&self, guid: &impl AsRef<Guid>, data: &[u8]) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DResource9Ext::set_private_data => IDirect3DResource9::SetPrivateData);
         let n : u32 = data.len().try_into().map_err(|_| fn_param_error!(data, THINERR::SLICE_OVERFLOW))?;
         fn_check_hr!(unsafe { self.as_winapi().SetPrivateData(guid.as_ref().as_ref(), data.as_ptr().cast(), n, 0) })
@@ -273,7 +273,7 @@ pub trait IDirect3DResource9Ext : AsSafe<IDirect3DResource9> {
     /// let r = dev.create_index_buffer(6, Usage::None, Format::Index16, Pool::Managed, ()).unwrap();
     /// r.set_object_name("triangle index buffer").unwrap();
     /// ```
-    fn set_object_name(&self, name: &str) -> Result<(), MethodError> {
+    fn set_object_name(&self, name: &str) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DResource9Ext::set_object_name => IDirect3DResource9::SetPrivateData);
         self.set_object_name_a(name.as_bytes())
     }
@@ -289,7 +289,7 @@ pub trait IDirect3DResource9Ext : AsSafe<IDirect3DResource9> {
     /// let r = dev.create_index_buffer(6, Usage::None, Format::Index16, Pool::Managed, ()).unwrap();
     /// r.set_object_name_a(b"triangle index buffer").unwrap();
     /// ```
-    fn set_object_name_a(&self, name: &[u8]) -> Result<(), MethodError> {
+    fn set_object_name_a(&self, name: &[u8]) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DResource9Ext::set_object_name_a => IDirect3DResource9::SetPrivateData);
         self.set_private_data(&wkpdid::D3DDebugObjectName, name)
     }
@@ -305,7 +305,7 @@ pub trait IDirect3DResource9Ext : AsSafe<IDirect3DResource9> {
     /// let r = dev.create_index_buffer(6, Usage::None, Format::Index16, Pool::Managed, ()).unwrap();
     /// r.set_object_name_w(abistr::cstr16!("triangle index buffer").to_units()).unwrap();
     /// ```
-    fn set_object_name_w(&self, name: &[u16]) -> Result<(), MethodError> {
+    fn set_object_name_w(&self, name: &[u16]) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DResource9Ext::set_object_name_w => IDirect3DResource9::SetPrivateData);
         self.set_private_data(&wkpdid::D3DDebugObjectNameW, bytemuck::cast_slice(name))
     }

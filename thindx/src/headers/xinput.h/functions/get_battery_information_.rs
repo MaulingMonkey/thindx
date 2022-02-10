@@ -18,7 +18,7 @@ use winapi::um::xinput::XInputGetBatteryInformation;
 /// *   [ERROR::BAD_ARGUMENTS]          - Invalid [`User`] or [`User::Any`]
 /// *   [ERROR::DEVICE_NOT_CONNECTED]   - Disconnected [`User`]
 /// *   [ERROR::DEVICE_NOT_CONNECTED]   - Invalid [`BatteryDevType`]
-pub fn get_battery_information(user_index: impl Into<u32>, dev_type: impl Into<BatteryDevType>) -> Result<BatteryInformation, MethodError> {
+pub fn get_battery_information(user_index: impl Into<u32>, dev_type: impl Into<BatteryDevType>) -> Result<BatteryInformation, Error> {
     fn_context!(xinput::get_battery_information => XInputGetBatteryInformation);
     let mut info = BatteryInformation::zeroed();
     // SAFETY: ✔️

@@ -317,7 +317,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///
     /// [begin_scene]:          Self::begin_scene
     /// [end_scene]:            Self::end_scene
-    fn begin_scene(&self) -> Result<(), MethodError> {
+    fn begin_scene(&self) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::begin_scene => IDirect3DDevice9::BeginScene);
         fn_check_hr!(unsafe { self.as_winapi().BeginScene() })
     }
@@ -338,7 +338,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// let block : StateBlock = device.end_state_block().unwrap();
     /// # assert_eq!(D3DERR::INVALIDCALL, device.end_state_block().map(|_| ()));
     /// ```
-    fn begin_state_block(&self) -> Result<(), MethodError> {
+    fn begin_state_block(&self) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::begin_state_block => IDirect3DDevice9::BeginStateBlock);
         fn_check_hr!(unsafe { self.as_winapi().BeginStateBlock() })
     }
@@ -361,7 +361,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// # use dev::d3d9::*; let device = device_pure();
     /// device.clear(None, Some(d3d::Color::argb(0xFF112233)), None, None).unwrap();
     /// ```
-    fn clear(&self, rects: Option<&[Rect]>, color: Option<Color>, depth: Option<f32>, stencil: Option<u32>) -> Result<(), MethodError> {
+    fn clear(&self, rects: Option<&[Rect]>, color: Option<Color>, depth: Option<f32>, stencil: Option<u32>) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::clear => IDirect3DDevice9::Clear);
         // TODO: more clear docs
         // TODO: conversion traits for params?
@@ -391,7 +391,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// *   [D3DERR::INVALIDCALL]     if `surface` isn't a supported format ?
     /// *   [D3DERR::INVALIDCALL]     if `rect` exceeds the bounds of the surface
     /// *   `Ok(())`                  on success
-    fn color_fill(&self, surface: &Surface, rect: Option<Rect>, color: impl Into<Color>) -> Result<(), MethodError> {
+    fn color_fill(&self, surface: &Surface, rect: Option<Rect>, color: impl Into<Color>) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::color_fill => IDirect3DDevice9::ColorFill);
         let rect = rect.map(RECT::from);
         let rect = rect.as_ref().map_or(null(), |r| r);
@@ -425,7 +425,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// *   [Presenting Multiple Views in Windowed Mode (Direct3D 9)](https://docs.microsoft.com/en-us/windows/desktop/direct3d9/presenting-multiple-views-in-windowed-mode)
     ///
     /// [create_device]:            #method.create_device
-    unsafe fn create_additional_swap_chain(&self, presentation_parameters: &mut PresentParameters<'static>) -> Result<SwapChain, MethodError> {
+    unsafe fn create_additional_swap_chain(&self, presentation_parameters: &mut PresentParameters<'static>) -> Result<SwapChain, Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::create_additional_swap_chain => IDirect3DDevice9::CreateAdditionalSwapChain);
         let mut swap_chain = null_mut();
         fn_check_hr!(unsafe { self.as_winapi().CreateAdditionalSwapChain(presentation_parameters.as_mut(), &mut swap_chain) })?;
@@ -458,7 +458,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// let texture = device.create_cube_texture(128, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
     /// assert_eq!(D3DERR::INVALIDCALL, device.create_cube_texture(1 << 15, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).err());
     /// ```
-    fn create_cube_texture(&self, edge_length: u32, levels: u32, usage: impl Into<Usage>, format: impl Into<Format>, pool: impl Into<Pool>, shared_handle: impl SharedHandleParam) -> Result<CubeTexture, MethodError> {
+    fn create_cube_texture(&self, edge_length: u32, levels: u32, usage: impl Into<Usage>, format: impl Into<Format>, pool: impl Into<Pool>, shared_handle: impl SharedHandleParam) -> Result<CubeTexture, Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::create_cube_texture => IDirect3DDevice9::CreateCubeTexture);
         let _ = shared_handle;
         let mut texture = null_mut();
@@ -503,7 +503,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// let texture = device.create_cube_texture_from(4, &mips, Usage::None,    FixedTextureFormat::A8R8G8B8, Pool::Managed, ()).unwrap();
     /// let texture = device.create_cube_texture_from(4, &mips, Usage::Dynamic, FixedTextureFormat::A8R8G8B8, Pool::Default, ()).unwrap();
     /// ```
-    fn create_cube_texture_from(&self, size: u32, mips: &[CubeTextureMipRef], usage: impl Into<Usage>, format: &FixedTextureFormat, pool: impl Into<Pool>, shared_handle: impl SharedHandleParam) -> Result<CubeTexture, MethodError> {
+    fn create_cube_texture_from(&self, size: u32, mips: &[CubeTextureMipRef], usage: impl Into<Usage>, format: &FixedTextureFormat, pool: impl Into<Pool>, shared_handle: impl SharedHandleParam) -> Result<CubeTexture, Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::create_cube_texture_from => IDirect3DDevice9::CreateCubeTexture);
         // TODO: consider THINERR::* constants instead?
         if size == 0        { return Err(fn_param_error!(size, D3DERR::INVALIDCALL)); }
@@ -564,7 +564,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// IDirect3DDevice9::CreateDepthStencilSurface
     ///
     /// Creates a depth-stencil resource.
-    fn create_depth_stencil_surface(&self, width: u32, height: u32, format: Format, multi_sample: MultiSample, multi_sample_quality: u32, discard: bool, _shared_handle: impl SharedHandleParam) -> Result<Surface, MethodError> {
+    fn create_depth_stencil_surface(&self, width: u32, height: u32, format: Format, multi_sample: MultiSample, multi_sample_quality: u32, discard: bool, _shared_handle: impl SharedHandleParam) -> Result<Surface, Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::create_depth_stencil_surface => IDirect3DDevice9::CreateDepthStencilSurface);
         let mut surface = null_mut();
         fn_check_hr!(unsafe { self.as_winapi().CreateDepthStencilSurface(width, height, format.into(), multi_sample.into(), multi_sample_quality, discard.into(), &mut surface, null_mut()) })?;
@@ -597,7 +597,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// # use dev::d3d9::*; let device = device_pure();
     /// let tri = device.create_index_buffer(3 * 2, Usage::None, Format::Index16, Pool::Managed, ()).unwrap();
     /// ```
-    fn create_index_buffer(&self, length: u32, usage: impl Into<Usage>, format: impl Into<Format>, pool: impl Into<Pool>, shared_handle: impl SharedHandleParam) -> Result<IndexBuffer, MethodError> {
+    fn create_index_buffer(&self, length: u32, usage: impl Into<Usage>, format: impl Into<Format>, pool: impl Into<Pool>, shared_handle: impl SharedHandleParam) -> Result<IndexBuffer, Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::create_index_buffer => IDirect3DDevice9::CreateIndexBuffer);
         // !0 will fail OUTOFMEMORY
         // !0/2 spammed will fail OUTOFVIDEOMEMORY
@@ -636,7 +636,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// let inds : &[u16] = &[0, 1, 2, 0, 2, 3];
     /// let tri = device.create_index_buffer_from(inds, Usage::None, Pool::Managed, ()).unwrap();
     /// ```
-    fn create_index_buffer_from<I: Index>(&self, data: &[I], usage: impl Into<Usage>, pool: impl Into<Pool>, shared_handle: impl SharedHandleParam) -> Result<IndexBuffer, MethodError> {
+    fn create_index_buffer_from<I: Index>(&self, data: &[I], usage: impl Into<Usage>, pool: impl Into<Pool>, shared_handle: impl SharedHandleParam) -> Result<IndexBuffer, Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::create_index_buffer_from => IDirect3DDevice9::CreateIndexBuffer);
         let bytes = std::mem::size_of_val(data);
         let bytes32 : u32 = bytes.try_into().map_err(|_| fn_param_error!(data, THINERR::ALLOC_OVERFLOW))?;
@@ -655,7 +655,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// IDirect3DDevice9::CreateOffscreenPlainSurface
     ///
     /// Create an off-screen surface.
-    fn create_offscreen_plain_surface(&self, width: u32, height: u32, format: Format, pool: Pool, _shared_handle: impl SharedHandleParam) -> Result<Surface, MethodError> {
+    fn create_offscreen_plain_surface(&self, width: u32, height: u32, format: Format, pool: Pool, _shared_handle: impl SharedHandleParam) -> Result<Surface, Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::create_offscreen_plain_surface => IDirect3DDevice9::CreateOffscreenPlainSurface);
         let mut surface = null_mut();
         fn_check_hr!(unsafe { self.as_winapi().CreateOffscreenPlainSurface(width, height, format.into(), pool.into(), &mut surface, null_mut()) })?;
@@ -678,7 +678,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// *   [D3DERR::OUTOFVIDEOMEMORY]
     /// *   [E::OUTOFMEMORY]
     /// *   Ok([PixelShader])
-    unsafe fn create_pixel_shader(&self, function: &[u32]) -> Result<PixelShader, MethodError> {
+    unsafe fn create_pixel_shader(&self, function: &[u32]) -> Result<PixelShader, Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::create_pixel_shader => IDirect3DDevice9::CreatePixelShader);
         let mut shader = null_mut();
         fn_check_hr!(unsafe { self.as_winapi().CreatePixelShader(function.as_ptr(), &mut shader) })?;
@@ -689,7 +689,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// IDirect3DDevice9::CreateQuery
     ///
     /// Creates a status query.
-    fn create_query(&self, type_: QueryType) -> Result<Query, MethodError> {
+    fn create_query(&self, type_: QueryType) -> Result<Query, Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::create_query => IDirect3DDevice9::CreateQuery);
         let mut query = null_mut();
         fn_check_hr!(unsafe { self.as_winapi().CreateQuery(type_.into(), &mut query) })?;
@@ -700,7 +700,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// IDirect3DDevice9::CreateRenderTarget
     ///
     /// Creates a render-target surface.
-    fn create_render_target(&self, width: u32, height: u32, format: Format, multi_sample: MultiSample, multi_sample_quality: u32, lockable: bool, _shared_handle: impl SharedHandleParam) -> Result<Surface, MethodError> {
+    fn create_render_target(&self, width: u32, height: u32, format: Format, multi_sample: MultiSample, multi_sample_quality: u32, lockable: bool, _shared_handle: impl SharedHandleParam) -> Result<Surface, Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::create_render_target => IDirect3DDevice9::CreateRenderTarget);
         let mut surface = null_mut();
         fn_check_hr!(unsafe { self.as_winapi().CreateRenderTarget(width, height, format.into(), multi_sample.into(), multi_sample_quality, lockable.into(), &mut surface, null_mut()) })?;
@@ -721,7 +721,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// *   [D3DERR::OUTOFVIDEOMEMORY]
     /// *   [E::OUTOFMEMORY]
     /// *   Ok([StateBlock])
-    fn create_state_block(&self, type_: StateBlockType) -> Result<StateBlock, MethodError> {
+    fn create_state_block(&self, type_: StateBlockType) -> Result<StateBlock, Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::create_state_block => IDirect3DDevice9::CreateStateBlock);
         let mut sb = null_mut();
         fn_check_hr!(unsafe { self.as_winapi().CreateStateBlock(type_.into(), &mut sb) })?;
@@ -746,7 +746,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// let texture = device.create_texture(128, 128, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
     /// assert_eq!(D3DERR::INVALIDCALL, device.create_texture(1 << 15, 1 << 15, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).err());
     /// ```
-    fn create_texture(&self, width: u32, height: u32, levels: u32, usage: impl Into<Usage>, format: impl Into<Format>, pool: impl Into<Pool>, _shared_handle: impl SharedHandleParam) -> Result<Texture, MethodError> {
+    fn create_texture(&self, width: u32, height: u32, levels: u32, usage: impl Into<Usage>, format: impl Into<Format>, pool: impl Into<Pool>, _shared_handle: impl SharedHandleParam) -> Result<Texture, Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::create_texture => IDirect3DDevice9::CreateTexture);
         let mut texture = null_mut();
         fn_check_hr!(unsafe { self.as_winapi().CreateTexture(width, height, levels, usage.into().into(), format.into().into(), pool.into().into(), &mut texture, null_mut()) })?;
@@ -778,7 +778,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// let texture = device.create_texture_from(4, 4, &mips, Usage::None,    FixedTextureFormat::A8R8G8B8, Pool::Managed, ()).unwrap();
     /// let texture = device.create_texture_from(4, 4, &mips, Usage::Dynamic, FixedTextureFormat::A8R8G8B8, Pool::Default, ()).unwrap();
     /// ```
-    fn create_texture_from(&self, width: u32, height: u32, mips: &[TextureMipRef], usage: impl Into<Usage>, format: &FixedTextureFormat, pool: impl Into<Pool>, _shared_handle: impl SharedHandleParam) -> Result<Texture, MethodError> {
+    fn create_texture_from(&self, width: u32, height: u32, mips: &[TextureMipRef], usage: impl Into<Usage>, format: &FixedTextureFormat, pool: impl Into<Pool>, _shared_handle: impl SharedHandleParam) -> Result<Texture, Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::create_texture_from => IDirect3DDevice9::CreateTexture);
         // TODO: consider THINERR::* constants instead?
         if width == 0       { return Err(fn_param_error!(width,  D3DERR::INVALIDCALL)); }
@@ -859,7 +859,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// let length = 3 * vert_size; // 3 verts
     /// let tri = device.create_vertex_buffer(length, Usage::None, FVF::XYZ, Pool::Managed, ()).unwrap();
     /// ```
-    fn create_vertex_buffer(&self, length: u32, usage: impl Into<Usage>, fvf: impl Into<FVF>, pool: impl Into<Pool>, shared_handle: impl SharedHandleParam) -> Result<VertexBuffer, MethodError> {
+    fn create_vertex_buffer(&self, length: u32, usage: impl Into<Usage>, fvf: impl Into<FVF>, pool: impl Into<Pool>, shared_handle: impl SharedHandleParam) -> Result<VertexBuffer, Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::create_vertex_buffer => IDirect3DDevice9::CreateVertexBuffer);
         // !0 will fail OUTOFMEMORY
         // !0/2 spammed will fail OUTOFVIDEOMEMORY
@@ -901,7 +901,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///     [0.0_f32, 0.0, 1.0],
     /// ][..], Usage::None, FVF::XYZ, Pool::Managed, ()).unwrap();
     /// ```
-    fn create_vertex_buffer_from<V: Pod>(&self, data: &[V], usage: impl Into<Usage>, fvf: impl Into<FVF>, pool: impl Into<Pool>, shared_handle: impl SharedHandleParam) -> Result<VertexBuffer, MethodError> {
+    fn create_vertex_buffer_from<V: Pod>(&self, data: &[V], usage: impl Into<Usage>, fvf: impl Into<FVF>, pool: impl Into<Pool>, shared_handle: impl SharedHandleParam) -> Result<VertexBuffer, Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::create_vertex_buffer_from => IDirect3DDevice9::CreateVertexBuffer);
         let bytes = std::mem::size_of_val(data);
         let bytes32 : u32 = bytes.try_into().map_err(|_| fn_param_error!(data, THINERR::ALLOC_OVERFLOW))?;
@@ -939,7 +939,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// ```
     ///
     /// [Vertex Declaration (Direct3D 9)]:          https://docs.microsoft.com/en-us/windows/desktop/direct3d9/vertex-declaration
-    fn create_vertex_declaration(&self, elements: &[VertexElement]) -> Result<VertexDeclaration, MethodError> {
+    fn create_vertex_declaration(&self, elements: &[VertexElement]) -> Result<VertexDeclaration, Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::create_vertex_declaration => IDirect3DDevice9::CreateVertexDeclaration);
         let end = elements.last().ok_or(fn_param_error!(elements, D3DERR::INVALIDCALL))?;
         // This check is required for CreateVertexDeclaration to be sound!
@@ -966,7 +966,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// *   [D3DERR::OUTOFVIDEOMEMORY]
     /// *   [E::OUTOFMEMORY]
     /// *   Ok([VertexShader])
-    unsafe fn create_vertex_shader(&self, function: &[u32]) -> Result<VertexShader, MethodError> {
+    unsafe fn create_vertex_shader(&self, function: &[u32]) -> Result<VertexShader, Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::create_vertex_shader => IDirect3DDevice9::CreateVertexShader);
         let mut shader = null_mut();
         fn_check_hr!(unsafe { self.as_winapi().CreateVertexShader(function.as_ptr(), &mut shader) })?;
@@ -991,7 +991,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// let texture = device.create_volume_texture(32, 32, 32, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
     /// assert_eq!(D3DERR::INVALIDCALL, device.create_volume_texture(1 << 10, 1 << 10, 1 << 10, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).err());
     /// ```
-    fn create_volume_texture(&self, width: u32, height: u32, depth: u32, levels: u32, usage: impl Into<Usage>, format: impl Into<Format>, pool: impl Into<Pool>, _shared_handle: impl SharedHandleParam) -> Result<VolumeTexture, MethodError> {
+    fn create_volume_texture(&self, width: u32, height: u32, depth: u32, levels: u32, usage: impl Into<Usage>, format: impl Into<Format>, pool: impl Into<Pool>, _shared_handle: impl SharedHandleParam) -> Result<VolumeTexture, Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::create_volume_texture => IDirect3DDevice9::CreateVolumeTexture);
         let mut volumetexture = null_mut();
         fn_check_hr!(unsafe { self.as_winapi().CreateVolumeTexture(width, height, depth, levels, usage.into().into(), format.into().into(), pool.into().into(), &mut volumetexture, null_mut()) })?;
@@ -1023,7 +1023,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// let texture = device.create_volume_texture_from(4, 4, 4, &mips, Usage::None,    FixedTextureFormat::A8R8G8B8, Pool::Managed, ()).unwrap();
     /// let texture = device.create_volume_texture_from(4, 4, 4, &mips, Usage::Dynamic, FixedTextureFormat::A8R8G8B8, Pool::Default, ()).unwrap();
     /// ```
-    fn create_volume_texture_from(&self, width: u32, height: u32, depth: u32, mips: &[VolumeTextureMipRef], usage: impl Into<Usage>, format: &FixedTextureFormat, pool: impl Into<Pool>, _shared_handle: impl SharedHandleParam) -> Result<VolumeTexture, MethodError> {
+    fn create_volume_texture_from(&self, width: u32, height: u32, depth: u32, mips: &[VolumeTextureMipRef], usage: impl Into<Usage>, format: &FixedTextureFormat, pool: impl Into<Pool>, _shared_handle: impl SharedHandleParam) -> Result<VolumeTexture, Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::create_volume_texture_from => IDirect3DDevice9::CreateVolumeTexture);
         // TODO: consider THINERR::* constants instead?
         if width == 0       { return Err(fn_param_error!(width,  D3DERR::INVALIDCALL)); }
@@ -1093,7 +1093,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// ### Returns
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok(())
-    unsafe fn draw_indexed_primitive(&self, primitive_type: PrimitiveType, base_vertex_index: i32, min_vertex_index: u32, num_verticies: u32, start_index: u32, primitive_count: u32) -> Result<(), MethodError> {
+    unsafe fn draw_indexed_primitive(&self, primitive_type: PrimitiveType, base_vertex_index: i32, min_vertex_index: u32, num_verticies: u32, start_index: u32, primitive_count: u32) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::draw_indexed_primitive => IDirect3DDevice9::DrawIndexedPrimitive);
         fn_check_hr!(unsafe { self.as_winapi().DrawIndexedPrimitive(primitive_type.into(), base_vertex_index, min_vertex_index, num_verticies, start_index, primitive_count) })
     }
@@ -1109,7 +1109,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// ### Returns
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok(())
-    unsafe fn draw_indexed_primitive_up<I: Index, V: Pod>(&self, primitive_type: PrimitiveType, min_vertex_index: u32, num_verticies: u32, primitive_count: u32, indicies: &[I], vertex_stream_zero: &[V]) -> Result<(), MethodError> {
+    unsafe fn draw_indexed_primitive_up<I: Index, V: Pod>(&self, primitive_type: PrimitiveType, min_vertex_index: u32, num_verticies: u32, primitive_count: u32, indicies: &[I], vertex_stream_zero: &[V]) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::draw_indexed_primitive_up => IDirect3DDevice9::DrawIndexedPrimitiveUP);
         fn_check_hr!(unsafe { self.as_winapi().DrawIndexedPrimitiveUP(primitive_type.into(), min_vertex_index, num_verticies, primitive_count, indicies.as_ptr().cast(), I::format().into(), vertex_stream_zero.as_ptr().cast(), std::mem::size_of::<V>() as _) })
     }
@@ -1125,7 +1125,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// ### Returns
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok(())
-    unsafe fn draw_primitive(&self, primitive_type: PrimitiveType, start_vertex: u32, primitive_count: u32) -> Result<(), MethodError> {
+    unsafe fn draw_primitive(&self, primitive_type: PrimitiveType, start_vertex: u32, primitive_count: u32) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::draw_primitive => IDirect3DDevice9::DrawPrimitive);
         fn_check_hr!(unsafe { self.as_winapi().DrawPrimitive(primitive_type.into(), start_vertex, primitive_count) })
     }
@@ -1141,7 +1141,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// ### Returns
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok(())
-    unsafe fn draw_primitive_up<V: Pod>(&self, primitive_type: PrimitiveType, primitive_count: u32, vertex_stream_zero: &[V]) -> Result<(), MethodError> {
+    unsafe fn draw_primitive_up<V: Pod>(&self, primitive_type: PrimitiveType, primitive_count: u32, vertex_stream_zero: &[V]) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::draw_primitive_up => IDirect3DDevice9::DrawPrimitiveUP);
         fn_check_hr!(unsafe { self.as_winapi().DrawPrimitiveUP(primitive_type.into(), primitive_count, vertex_stream_zero.as_ptr().cast(), std::mem::size_of::<V>() as _) })
     }
@@ -1171,7 +1171,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///
     /// [begin_scene]:          Self::begin_scene
     /// [end_scene]:            Self::end_scene
-    fn end_scene(&self) -> Result<(), MethodError> {
+    fn end_scene(&self) -> Result<(), Error> {
         // TODO: examples
         fn_context!(d3d9::IDirect3DDevice9Ext::end_scene => IDirect3DDevice9::EndScene);
         fn_check_hr!(unsafe { self.as_winapi().EndScene() })
@@ -1193,7 +1193,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// let block : StateBlock = device.end_state_block().unwrap();
     /// # assert_eq!(D3DERR::INVALIDCALL, device.end_state_block().map(|_| ()));
     /// ```
-    fn end_state_block(&self) -> Result<StateBlock, MethodError> {
+    fn end_state_block(&self) -> Result<StateBlock, Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::end_state_block => IDirect3DDevice9::EndStateBlock);
         let mut sb = null_mut();
         fn_check_hr!(unsafe { self.as_winapi().EndStateBlock(&mut sb) })?;
@@ -1212,7 +1212,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// *   [D3DERR::OUTOFVIDEOMEMORY]
     /// *   [D3DERR::COMMAND_UNPARSED]
     /// *   Ok(())
-    fn evict_managed_resources(&self) -> Result<(), MethodError> {
+    fn evict_managed_resources(&self) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::evict_managed_resources => IDirect3DDevice9::EvictManagedResources);
         fn_check_hr!(unsafe { self.as_winapi().EvictManagedResources() })
     }
@@ -1259,7 +1259,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// ### Returns
     /// *   [D3DERR::INVALIDCALL]           if `back_buffer` >= number of back buffers
     /// *   Ok([Surface])
-    fn get_back_buffer(&self, swap_chain: u32, back_buffer: u32, type_: BackBufferType) -> Result<Surface, MethodError> {
+    fn get_back_buffer(&self, swap_chain: u32, back_buffer: u32, type_: BackBufferType) -> Result<Surface, Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::get_back_buffer => IDirect3DDevice9::GetBackBuffer);
         let mut surface = null_mut();
         fn_check_hr!(unsafe { self.as_winapi().GetBackBuffer(swap_chain, back_buffer, type_.into(), &mut surface) })?;
@@ -1285,7 +1285,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// ```text
     /// [0.0, 0.0, 0.0, 0.0]
     /// ```
-    fn get_clip_plane(&self, index: u32) -> Result<[f32; 4], MethodError> {
+    fn get_clip_plane(&self, index: u32) -> Result<[f32; 4], Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::get_clip_plane => IDirect3DDevice9::GetClipPlane);
         let mut plane = [0.0, 0.0, 0.0, 0.0];
         fn_check_hr!(unsafe { self.as_winapi().GetClipPlane(index, plane.as_mut_ptr()) })?;
@@ -1311,7 +1311,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// ```text
     /// ClipStatus { ClipUnion: CS::None, ClipIntersection: CS::{All|0xfffff000} }
     /// ```
-    fn get_clip_status(&self) -> Result<ClipStatus, MethodError> {
+    fn get_clip_status(&self) -> Result<ClipStatus, Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::get_clip_status => IDirect3DDevice9::GetClipStatus);
         let mut status = ClipStatus::zeroed();
         fn_check_hr!(unsafe { self.as_winapi().GetClipStatus(status.as_mut()) })?;
@@ -1344,7 +1344,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///     behavior_flags: Create::{FpuPreserve | PureDevice | HardwareVertexProcessing | NoWindowChanges},
     /// }
     /// ```
-    fn get_creation_parameters(&self) -> Result<DeviceCreationParameters, MethodError> {
+    fn get_creation_parameters(&self) -> Result<DeviceCreationParameters, Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::get_creation_parameters => IDirect3DDevice9::GetCreationParameters);
         let mut dcp = DeviceCreationParameters::zeroed();
         fn_check_hr!(unsafe { self.as_winapi().GetCreationParameters(&mut *dcp) })?;
@@ -1372,7 +1372,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// ### See Also
     /// *   [Texture Palettes (Direct3D 9)](https://docs.microsoft.com/en-us/windows/win32/direct3d9/texture-palettes)
     /// *   [set_current_texture_palette_unchecked](Self::set_current_texture_palette_unchecked)
-    fn get_current_texture_palette(&self) -> Result<u32, MethodError> {
+    fn get_current_texture_palette(&self) -> Result<u32, Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::get_current_texture_palette => IDirect3DDevice9::GetCurrentTexturePalette);
         let mut pal = 0;
         fn_check_hr!(unsafe { self.as_winapi().GetCurrentTexturePalette(&mut pal) })?;
@@ -1388,7 +1388,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// *   ~~[D3DERR::INVALIDCALL]~~ ...?
     /// *   Ok(Some([Surface]))       the render target bound to that index
     /// *   Ok(None)                  no render target was bound to that index
-    fn get_depth_stencil_surface(&self) -> Result<Option<Surface>, MethodError> {
+    fn get_depth_stencil_surface(&self) -> Result<Option<Surface>, Error> {
         // TODO: verify soundness before making pub
         fn_context!(d3d9::IDirect3DDevice9Ext::get_depth_stencil_surface => IDirect3DDevice9::GetDepthStencilSurface);
         let mut ds = null_mut();
@@ -1507,7 +1507,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///     max_pixel_shader_30_instruction_slots: 32768,
     /// }
     /// ```
-    fn get_device_caps(&self) -> Result<Caps, MethodError> {
+    fn get_device_caps(&self) -> Result<Caps, Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::get_device_caps => IDirect3DDevice9::GetDeviceCaps);
         let mut caps = Caps::zeroed();
         fn_check_hr!(unsafe { self.as_winapi().GetDeviceCaps(caps.as_mut()) })?;
@@ -1526,7 +1526,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// # use dev::d3d9::*; let device = device_test();
     /// let d3d : Direct3D = device.get_direct3d().unwrap();
     /// ```
-    fn get_direct3d(&self) -> Result<Direct3D, MethodError> {
+    fn get_direct3d(&self) -> Result<Direct3D, Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::get_direct3d => IDirect3DDevice9::GetDirect3D);
         let mut d3d = null_mut();
         fn_check_hr!(unsafe { self.as_winapi().GetDirect3D(&mut d3d) })?;
@@ -1558,7 +1558,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///     format: Format(D3DFMT_X8R8G8B8),
     /// }
     /// ```
-    fn get_display_mode(&self, swap_chain: u32) -> Result<DisplayMode, MethodError> {
+    fn get_display_mode(&self, swap_chain: u32) -> Result<DisplayMode, Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::get_display_mode => IDirect3DDevice9::GetDisplayMode);
         let mut dm = DisplayMode::zeroed();
         fn_check_hr!(unsafe { self.as_winapi().GetDisplayMode(swap_chain, &mut *dm) })?;
@@ -1567,7 +1567,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getfrontbufferdata)\]
     /// IDirect3DDevice9::GetFrontBufferData
-    fn get_front_buffer_data(&self, swap_chain: u32, surface: &Surface) -> Result<(), MethodError> {
+    fn get_front_buffer_data(&self, swap_chain: u32, surface: &Surface) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::get_front_buffer_data => IDirect3DDevice9::GetFrontBufferData);
         // TODO: verify soundness before making pub
         fn_check_hr!(unsafe { self.as_winapi().GetFrontBufferData(swap_chain, surface.as_raw()) })
@@ -1585,7 +1585,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// # use dev::d3d9::*; let device = device_test();
     /// assert_eq!(device.get_fvf().unwrap(), FVF::None);
     /// ```
-    fn get_fvf(&self) -> Result<FVF, MethodError> {
+    fn get_fvf(&self) -> Result<FVF, Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::get_fvf => IDirect3DDevice9::GetFVF);
         let mut fvf = FVF::None;
         fn_check_hr!(unsafe { self.as_winapi().GetFVF(&mut *fvf) })?;
@@ -1630,7 +1630,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// device.set_indices(Some(&tri));
     /// assert_eq!(tri.as_raw(), device.get_indices().unwrap().unwrap().as_raw());
     /// ```
-    fn get_indices(&self) -> Result<Option<IndexBuffer>, MethodError> {
+    fn get_indices(&self) -> Result<Option<IndexBuffer>, Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::get_indices => IDirect3DDevice9::GetIndices);
         let mut buffer = null_mut();
         fn_check_hr!(unsafe { self.as_winapi().GetIndices(&mut buffer) })?;
@@ -1666,7 +1666,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// ```
     ///
     /// [set_light]:    Self::set_light
-    fn get_light(&self, index: u16) -> Result<Light, MethodError> {
+    fn get_light(&self, index: u16) -> Result<Light, Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::get_light => IDirect3DDevice9::GetLight);
         self.get_light_32(index.into())
     }
@@ -1697,7 +1697,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///     assert_eq!(D3DERR::INVALIDCALL, device.get_light_32(light));
     /// }
     /// ```
-    fn get_light_32(&self, index: u32) -> Result<Light, MethodError> {
+    fn get_light_32(&self, index: u32) -> Result<Light, Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::get_light_32 => IDirect3DDevice9::GetLight);
         let mut light = Light::default();
         fn_check_hr!(unsafe { self.as_winapi().GetLight(index, &mut *light) })?;
@@ -1735,7 +1735,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// ```
     ///
     /// [light_enable]:    Self::light_enable
-    fn get_light_enable(&self, index: u16) -> Result<bool, MethodError> {
+    fn get_light_enable(&self, index: u16) -> Result<bool, Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::get_light_enable => IDirect3DDevice9::GetLightEnable);
         self.get_light_enable_32(index.into())
     }
@@ -1766,7 +1766,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///     assert_eq!(D3DERR::INVALIDCALL, device.get_light_enable_32(light));
     /// }
     /// ```
-    fn get_light_enable_32(&self, index: u32) -> Result<bool, MethodError> {
+    fn get_light_enable_32(&self, index: u32) -> Result<bool, Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::get_light_enable_32 => IDirect3DDevice9::GetLightEnable);
         let mut enable = 0;
         fn_check_hr!(unsafe { self.as_winapi().GetLightEnable(index, &mut enable) })?;
@@ -1785,7 +1785,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// # use dev::d3d9::*; let device = device_test();
     /// let material = device.get_material().unwrap();
     /// ```
-    fn get_material(&self) -> Result<Material, MethodError> {
+    fn get_material(&self) -> Result<Material, Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::get_material => IDirect3DDevice9::GetMaterial);
         let mut material = Material::default();
         fn_check_hr!(unsafe { self.as_winapi().GetMaterial(&mut *material) })?;
@@ -1858,7 +1858,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// assert_eq!(pal[  0], Color::argb(0xFF112233));
     /// assert_eq!(pal[255], Color::argb(0xFF112233));
     /// ```
-    unsafe fn get_palette_entries_unchecked(&self, palette_number: u32) -> Result<[Color; 256], MethodError> {
+    unsafe fn get_palette_entries_unchecked(&self, palette_number: u32) -> Result<[Color; 256], Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::get_palette_entries_unchecked => IDirect3DDevice9::GetPaletteEntries);
         // D3D9 uses PALETTEENTRYs but misuses the flags field.  D3DCOLORs are much better fits.
         let mut colors = [Color::argb(0); 256];
@@ -1875,7 +1875,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// *   [D3DERR::INVALIDCALL]       If the device was created with D3DCREATE_PUREDEVICE?
     /// *   Ok(Some([PixelShader]))     If a pixel shader was bound
     /// *   Ok(None)                    If no pixel shader was bound
-    fn get_pixel_shader(&self) -> Result<PixelShader, MethodError> {
+    fn get_pixel_shader(&self) -> Result<PixelShader, Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::get_pixel_shader => IDirect3DDevice9::GetPixelShader);
         let mut shader = null_mut();
         fn_check_hr!(unsafe { self.as_winapi().GetPixelShader(&mut shader) })?;
@@ -1910,7 +1910,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// assert_eq!(D3DERR::INVALIDCALL, r2, "count: oob");
     /// assert_eq!(D3DERR::INVALIDCALL, r3, "end: oob");
     /// ```
-    fn get_pixel_shader_constant_b(&self, start_register: u32, constant_data: &mut [bool32]) -> Result<(), MethodError> {
+    fn get_pixel_shader_constant_b(&self, start_register: u32, constant_data: &mut [bool32]) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::get_pixel_shader_constant_b => IDirect3DDevice9::GetPixelShaderConstantB);
         let n : u32 = constant_data.len().try_into().map_err(|_| fn_param_error!(constant_data, D3DERR::INVALIDCALL))?;
         fn_check_hr!(unsafe { self.as_winapi().GetPixelShaderConstantB(start_register, constant_data.as_mut_ptr().cast(), n) })
@@ -1945,7 +1945,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// assert_eq!(D3DERR::INVALIDCALL, r2, "count: oob");
     /// assert_eq!(D3DERR::INVALIDCALL, r3, "end: oob");
     /// ```
-    fn get_pixel_shader_constant_f(&self, start_register: u32, constant_data: &mut [[f32; 4]]) -> Result<(), MethodError> {
+    fn get_pixel_shader_constant_f(&self, start_register: u32, constant_data: &mut [[f32; 4]]) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::get_pixel_shader_constant_f => IDirect3DDevice9::GetPixelShaderConstantF);
         let n : u32 = constant_data.len().try_into().map_err(|_| fn_param_error!(constant_data, D3DERR::INVALIDCALL))?;
         fn_check_hr!(unsafe { self.as_winapi().GetPixelShaderConstantF(start_register, constant_data.as_mut_ptr().cast(), n) })
@@ -1979,7 +1979,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// assert_eq!(D3DERR::INVALIDCALL, r2, "count: oob");
     /// assert_eq!(D3DERR::INVALIDCALL, r3, "end: oob");
     /// ```
-    fn get_pixel_shader_constant_i(&self, start_register: u32, constant_data: &mut [[i32; 4]]) -> Result<(), MethodError> {
+    fn get_pixel_shader_constant_i(&self, start_register: u32, constant_data: &mut [[i32; 4]]) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::get_pixel_shader_constant_i => IDirect3DDevice9::GetPixelShaderConstantI);
         let n : u32 = constant_data.len().try_into().map_err(|_| fn_param_error!(constant_data, D3DERR::INVALIDCALL))?;
         fn_check_hr!(unsafe { self.as_winapi().GetPixelShaderConstantI(start_register, constant_data.as_mut_ptr().cast(), n) })
@@ -2013,7 +2013,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///     scan_line: 3082,
     /// }
     /// ```
-    fn get_raster_status(&self, swap_chain: u32) -> Result<RasterStatus, MethodError> {
+    fn get_raster_status(&self, swap_chain: u32) -> Result<RasterStatus, Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::get_raster_status => IDirect3DDevice9::GetRasterStatus);
         let mut raster_status = RasterStatus::zeroed();
         fn_check_hr!(unsafe { self.as_winapi().GetRasterStatus(swap_chain, &mut *raster_status) })?;
@@ -2055,7 +2055,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// #   }
     /// # }
     /// ```
-    fn get_render_state_untyped(&self, state: RenderStateType) -> Result<u32, MethodError> {
+    fn get_render_state_untyped(&self, state: RenderStateType) -> Result<u32, Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::get_render_state_untyped => IDirect3DDevice9::GetRenderState);
         let mut value = 0;
         fn_check_hr!(unsafe { self.as_winapi().GetRenderState(state.into(), &mut value) })?;
@@ -2074,7 +2074,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// *   Ok(None)                  no render target was bound to that index
     ///
     /// [Multiple Render Targets (Direct3D 9)]:         https://docs.microsoft.com/en-us/windows/win32/direct3d9/multiple-render-targets
-    fn get_render_target(&self, render_target_index: u32) -> Result<Option<Surface>, MethodError> {
+    fn get_render_target(&self, render_target_index: u32) -> Result<Option<Surface>, Error> {
         // TODO: verify soundness before making pub
         fn_context!(d3d9::IDirect3DDevice9Ext::get_render_target => IDirect3DDevice9::GetRenderTarget);
         let mut rt = null_mut();
@@ -2099,7 +2099,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// *   [D3DERR]::???           If the source is not a regular render target, or level thereof, created with [Pool::Default]
     /// *   [D3DERR]::???           If the destination is not an off-screen plain surface, or level of a texture created with [Pool::SystemMem]
     ///
-    fn get_render_target_data(&self, render_target: &Surface, dest_surface: &Surface) -> Result<(), MethodError> {
+    fn get_render_target_data(&self, render_target: &Surface, dest_surface: &Surface) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::get_render_target_data => IDirect3DDevice9::GetRenderTargetData);
         fn_check_hr!(unsafe { self.as_winapi().GetRenderTargetData(render_target.as_raw(), dest_surface.as_raw()) })
     }
@@ -2141,7 +2141,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// }
     /// # }
     /// ```
-    unsafe fn get_sampler_state_unchecked(&self, sampler: u32, ty: SamplerStateType) -> Result<u32, MethodError> {
+    unsafe fn get_sampler_state_unchecked(&self, sampler: u32, ty: SamplerStateType) -> Result<u32, Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::get_sampler_state_unchecked => IDirect3DDevice9::GetSamplerState);
         let mut value = 0;
         fn_check_hr!(unsafe { self.as_winapi().GetSamplerState(sampler, ty.into(), &mut value) })?;
@@ -2190,7 +2190,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// # }
     /// # }
     /// ```
-    fn get_sampler_state_untyped(&self, sampler: u32, ty: SamplerStateType) -> Result<u32, MethodError> {
+    fn get_sampler_state_untyped(&self, sampler: u32, ty: SamplerStateType) -> Result<u32, Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::get_sampler_state_untyped => IDirect3DDevice9::GetSamplerState);
         if !matches!(ty.into(), 1 ..= 13) { return Err(fn_param_error!(ty, D3DERR::INVALIDCALL)) }
         unsafe { self.get_sampler_state_unchecked(sampler, ty) }
@@ -2208,7 +2208,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// let rect = device.get_scissor_rect().unwrap();
     /// dbg!(rect); // ex: Rect { x: 0..784, y: 0..561 }
     /// ```
-    fn get_scissor_rect(&self) -> Result<Rect, MethodError> {
+    fn get_scissor_rect(&self) -> Result<Rect, Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::get_scissor_rect => IDirect3DDevice9::GetScissorRect);
         let mut rect = Rect::zeroed();
         fn_check_hr!(unsafe { self.as_winapi().GetScissorRect(rect.as_mut()) })?;
@@ -2262,7 +2262,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// assert_eq!(offset, 0);
     /// assert_eq!(stride, 4*3);
     /// ```
-    fn get_stream_source(&self, stream_number: u32) -> Result<(Option<VertexBuffer>, u32, u32), MethodError> {
+    fn get_stream_source(&self, stream_number: u32) -> Result<(Option<VertexBuffer>, u32, u32), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::get_stream_source => IDirect3DDevice9::GetStreamSource);
         let mut buffer = null_mut();
         let mut offset = 0;
@@ -2293,7 +2293,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// assert_eq!(device.get_stream_source_freq(0).unwrap(), StreamSource::indexed_data(100));
     /// assert_eq!(device.get_stream_source_freq(1).unwrap(), StreamSource::instance_data(1));
     /// ```
-    fn get_stream_source_freq(&self, stream_number: u32) -> Result<StreamSource, MethodError> {
+    fn get_stream_source_freq(&self, stream_number: u32) -> Result<StreamSource, Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::get_stream_source_freq => IDirect3DDevice9::GetStreamSourceFreq);
         let mut freq = 0;
         fn_check_hr!(unsafe { self.as_winapi().GetStreamSourceFreq(stream_number, &mut freq) })?;
@@ -2319,7 +2319,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// #   assert_eq!(device.get_swap_chain(swap_chain).err().unwrap().kind(), D3DERR::INVALIDCALL);
     /// # }
     /// ```
-    fn get_swap_chain(&self, swap_chain: u32) -> Result<SwapChain, MethodError> {
+    fn get_swap_chain(&self, swap_chain: u32) -> Result<SwapChain, Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::get_swap_chain => IDirect3DDevice9::GetSwapChain);
         let mut sc = null_mut();
         fn_check_hr!(unsafe { self.as_winapi().GetSwapChain(swap_chain, &mut sc) })?;
@@ -2357,7 +2357,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// unsafe { device.set_texture(0, &texture) }.unwrap();
     /// assert_eq!(unsafe { device.get_texture(0) }.unwrap().map(|t| t.as_raw()), Some((*texture).as_raw()));
     /// ```
-    unsafe fn get_texture(&self, stage: u32) -> Result<Option<BaseTexture>, MethodError> {
+    unsafe fn get_texture(&self, stage: u32) -> Result<Option<BaseTexture>, Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::get_texture => IDirect3DDevice9::GetTexture);
         let mut texture = null_mut();
         fn_check_hr!(unsafe { self.as_winapi().GetTexture(stage, &mut texture) })?;
@@ -2391,7 +2391,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// #   }
     /// # }
     /// ```
-    fn get_texture_stage_state_untyped(&self, stage: u32, ty: impl Into<TextureStageStateType>) -> Result<u32, MethodError> {
+    fn get_texture_stage_state_untyped(&self, stage: u32, ty: impl Into<TextureStageStateType>) -> Result<u32, Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::get_texture_stage_state_untyped => IDirect3DDevice9::GetTextureStageState);
         let mut value = 0;
         fn_check_hr!(unsafe { self.as_winapi().GetTextureStageState(stage, ty.into().into(), &mut value) })?;
@@ -2423,7 +2423,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// assert_eq!(D3DERR::INVALIDCALL, device.get_transform(d3d::TS::from_unchecked(0x1000000)));
     /// assert_eq!(D3DERR::INVALIDCALL, device.get_transform(d3d::TS::from_unchecked(0x10000FF)));
     /// ```
-    fn get_transform(&self, ts: impl Into<TransformStateType>) -> Result<d3d::Matrix, MethodError> {
+    fn get_transform(&self, ts: impl Into<TransformStateType>) -> Result<d3d::Matrix, Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::get_transform => IDirect3DDevice9::GetTransform);
         let mut matrix = Matrix::zeroed();
         fn_check_hr!(unsafe { self.as_winapi().GetTransform(ts.into().into(), matrix.as_mut()) })?;
@@ -2455,7 +2455,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// let decl2 = device.get_vertex_declaration().unwrap().unwrap();
     /// assert_eq!(some_decl.as_raw(), decl2.as_raw());
     /// ```
-    fn get_vertex_declaration(&self) -> Result<Option<VertexDeclaration>, MethodError> {
+    fn get_vertex_declaration(&self) -> Result<Option<VertexDeclaration>, Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::get_vertex_declaration => IDirect3DDevice9::GetVertexDeclaration);
         let mut vd = null_mut();
         fn_check_hr!(unsafe { self.as_winapi().GetVertexDeclaration(&mut vd) })?;
@@ -2471,7 +2471,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// *   [D3DERR::INVALIDCALL]       If the device was created with D3DCREATE_PUREDEVICE?
     /// *   Ok(Some([VertexShader]))    If a vertex shader was bound
     /// *   Ok(None)                    If no vertex shader was bound
-    fn get_vertex_shader(&self) -> Result<VertexShader, MethodError> {
+    fn get_vertex_shader(&self) -> Result<VertexShader, Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::get_vertex_shader => IDirect3DDevice9::GetVertexShader);
         let mut shader = null_mut();
         fn_check_hr!(unsafe { self.as_winapi().GetVertexShader(&mut shader) })?;
@@ -2506,7 +2506,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// assert_eq!(D3DERR::INVALIDCALL, r2, "count: oob");
     /// assert_eq!(D3DERR::INVALIDCALL, r3, "end: oob");
     /// ```
-    fn get_vertex_shader_constant_b(&self, start_register: u32, constant_data: &mut [bool32]) -> Result<(), MethodError> {
+    fn get_vertex_shader_constant_b(&self, start_register: u32, constant_data: &mut [bool32]) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::get_vertex_shader_constant_b => IDirect3DDevice9::GetVertexShaderConstantB);
         let n : u32 = constant_data.len().try_into().map_err(|_| fn_param_error!(constant_data, D3DERR::INVALIDCALL))?;
         fn_check_hr!(unsafe { self.as_winapi().GetVertexShaderConstantB(start_register, constant_data.as_mut_ptr().cast(), n) })
@@ -2541,7 +2541,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// assert_eq!(D3DERR::INVALIDCALL, r2, "count: oob");
     /// assert_eq!(D3DERR::INVALIDCALL, r3, "end: oob");
     /// ```
-    fn get_vertex_shader_constant_f(&self, start_register: u32, constant_data: &mut [[f32; 4]]) -> Result<(), MethodError> {
+    fn get_vertex_shader_constant_f(&self, start_register: u32, constant_data: &mut [[f32; 4]]) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::get_vertex_shader_constant_f => IDirect3DDevice9::GetVertexShaderConstantF);
         let n : u32 = constant_data.len().try_into().map_err(|_| fn_param_error!(constant_data, D3DERR::INVALIDCALL))?;
         fn_check_hr!(unsafe { self.as_winapi().GetVertexShaderConstantF(start_register, constant_data.as_mut_ptr().cast(), n) })
@@ -2575,7 +2575,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// assert_eq!(D3DERR::INVALIDCALL, r2, "count: oob");
     /// assert_eq!(D3DERR::INVALIDCALL, r3, "end: oob");
     /// ```
-    fn get_vertex_shader_constant_i(&self, start_register: u32, constant_data: &mut [[i32; 4]]) -> Result<(), MethodError> {
+    fn get_vertex_shader_constant_i(&self, start_register: u32, constant_data: &mut [[i32; 4]]) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::get_vertex_shader_constant_i => IDirect3DDevice9::GetVertexShaderConstantI);
         let n : u32 = constant_data.len().try_into().map_err(|_| fn_param_error!(constant_data, D3DERR::INVALIDCALL))?;
         fn_check_hr!(unsafe { self.as_winapi().GetVertexShaderConstantI(start_register, constant_data.as_mut_ptr().cast(), n) })
@@ -2594,7 +2594,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// # use dev::d3d9::*; let device = device_test();
     /// let viewport : Viewport = device.get_viewport().unwrap();
     /// ```
-    fn get_viewport(&self) -> Result<Viewport, MethodError> {
+    fn get_viewport(&self) -> Result<Viewport, Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::get_viewport => IDirect3DDevice9::GetViewport);
         let mut viewport = Viewport::default();
         fn_check_hr!(unsafe { self.as_winapi().GetViewport(&mut *viewport) })?;
@@ -2619,7 +2619,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// device.light_enable(1,  true).unwrap(); // Ok
     /// device.light_enable(!0, true).unwrap(); // Ok (16-bit)
     /// ```
-    fn light_enable(&self, index: u16, enable: bool) -> Result<(), MethodError> {
+    fn light_enable(&self, index: u16, enable: bool) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::light_enable => IDirect3DDevice9::LightEnable);
         // Safe: `index` max == `u16::MAX` == `0xFFFF`, well bellow when GArrayT starts buffer overflowing (`0x1000_0000 - 8`)
         unsafe { self.light_enable_32_unchecked(index.into(), enable) }
@@ -2651,7 +2651,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///     // XXX: Buffer overflow, crash, or worse!
     /// }
     /// ```
-    unsafe fn light_enable_32_unchecked(&self, index: u32, enable: bool) -> Result<(), MethodError> {
+    unsafe fn light_enable_32_unchecked(&self, index: u32, enable: bool) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::light_enable_32_unchecked => IDirect3DDevice9::LightEnable);
         fn_check_hr!(unsafe { self.as_winapi().LightEnable(index, enable.into()) })
     }
@@ -2677,7 +2677,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// # assert_eq!(D3DERR::INVALIDCALL, device.multiply_transform(d3d::TS::from_unchecked(0x1000000), d3d::Matrix::identity()));
     /// # assert_eq!(D3DERR::INVALIDCALL, device.multiply_transform(d3d::TS::from_unchecked(0x10000FF), d3d::Matrix::identity()));
     /// ```
-    fn multiply_transform(&self, ts: impl Into<TransformStateType>, matrix: impl Into<Matrix>) -> Result<(), MethodError> {
+    fn multiply_transform(&self, ts: impl Into<TransformStateType>, matrix: impl Into<Matrix>) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::multiply_transform => IDirect3DDevice9::MultiplyTransform);
         fn_check_hr!(unsafe { self.as_winapi().MultiplyTransform(ts.into().into(), &matrix.into().into()) })
     }
@@ -2722,7 +2722,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///     Err(other                   ) => panic!("oh no something bad happened: {}", other),
     /// }
     /// ```
-    fn present<'r>(&self, source_rect: impl IntoRectOrFull, dest_rect: impl IntoRectOrFull, dest_window_override: impl AsHWND, dirty_region: impl Into<Option<&'r RgnData>>) -> Result<(), MethodError> {
+    fn present<'r>(&self, source_rect: impl IntoRectOrFull, dest_rect: impl IntoRectOrFull, dest_window_override: impl AsHWND, dirty_region: impl Into<Option<&'r RgnData>>) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::present => IDirect3DDevice9::Present);
         let source_rect     = source_rect.into_rect();
         let dest_rect       = dest_rect.into_rect();
@@ -2761,7 +2761,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// *   [D3DERR::DRIVERINTERNALERROR]
     /// *   [D3DERR::OUTOFVIDEOMEMORY]
     /// *   Ok(())
-    unsafe fn reset(&self, presentation_parameters: &mut PresentParameters) -> Result<(), MethodError> {
+    unsafe fn reset(&self, presentation_parameters: &mut PresentParameters) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::reset => IDirect3DDevice9::Reset);
         fn_check_hr!(unsafe { self.as_winapi().Reset(presentation_parameters.as_mut()) })
     }
@@ -2786,7 +2786,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// for i in max .. 256 { device.set_clip_plane(i,        &[0.1, 0.2, 0.3, 0.4]).unwrap() }
     /// for pow in 8 .. 32  { device.set_clip_plane(1 << pow, &[0.1, 0.2, 0.3, 0.4]).unwrap() }
     /// ```
-    fn set_clip_plane(&self, index: u32, plane: &[f32; 4]) -> Result<(), MethodError> {
+    fn set_clip_plane(&self, index: u32, plane: &[f32; 4]) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::set_clip_plane => IDirect3DDevice9::SetClipPlane);
         fn_check_hr!(unsafe { self.as_winapi().SetClipPlane(index, plane.as_ptr().cast()) })
     }
@@ -2813,7 +2813,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// #   }
     /// # }
     /// ```
-    fn set_clip_status(&self, clip_status: &ClipStatus) -> Result<(), MethodError> {
+    fn set_clip_status(&self, clip_status: &ClipStatus) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::set_clip_status => IDirect3DDevice9::SetClipStatus);
         fn_check_hr!(unsafe { self.as_winapi().SetClipStatus(clip_status.as_ref()) })
     }
@@ -2855,7 +2855,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// *   [get_current_texture_palette](Self::get_current_texture_palette)
     /// *   [set_palette_entries](Self::set_palette_entries)
     /// *   [set_palette_entries_unchecked](Self::set_palette_entries_unchecked)
-    unsafe fn set_current_texture_palette_unchecked(&self, palette_number: u32) -> Result<(), MethodError> {
+    unsafe fn set_current_texture_palette_unchecked(&self, palette_number: u32) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::set_current_texture_palette_unchecked => IDirect3DDevice9::SetCurrentTexturePalette);
         fn_check_hr!(unsafe { self.as_winapi().SetCurrentTexturePalette(palette_number) })
     }
@@ -2928,7 +2928,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// # let surface = texture.get_surface_level(0).unwrap();
     /// # assert_eq!(D3DERR::INVALIDCALL, device.set_cursor_properties(0, 0, &surface), "4k x 4k cursor");
     /// ```
-    fn set_cursor_properties(&self, x: u32, y: u32, cursor_bitmap: &Surface) -> Result<(), MethodError> {
+    fn set_cursor_properties(&self, x: u32, y: u32, cursor_bitmap: &Surface) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::set_cursor_properties => IDirect3DDevice9::SetCursorProperties);
         fn_check_hr!(unsafe { self.as_winapi().SetCursorProperties(x, y, cursor_bitmap.as_mut_ptr()) })
     }
@@ -2939,7 +2939,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// ### Returns
     /// *   [D3DERR::INVALIDCALL]         if `depth_stencil_surface == Some(surface)` and `surface.usage() != Usage::DepthStencil`
     /// *   `Ok(())`                      if the depth stencil was successfully (un)bound
-    fn set_depth_stencil_surface(&self, depth_stencil_surface: Option<&Surface>) -> Result<(), MethodError> {
+    fn set_depth_stencil_surface(&self, depth_stencil_surface: Option<&Surface>) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::set_depth_stencil_surface => IDirect3DDevice9::SetDepthStencilSurface);
         let ds = depth_stencil_surface.map_or(null_mut(), |ds| ds.as_raw());
         fn_check_hr!(unsafe { self.as_winapi().SetDepthStencilSurface(ds) })
@@ -2971,7 +2971,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// # assert_eq!(D3DERR::INVALIDCALL, device.set_dialog_box_mode(false));
     /// # device.end_scene().unwrap();
     /// ```
-    fn set_dialog_box_mode(&self, mode: bool) -> Result<(), MethodError> {
+    fn set_dialog_box_mode(&self, mode: bool) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::set_dialog_box_mode => IDirect3DDevice9::SetDialogBoxMode);
         fn_check_hr!(unsafe { self.as_winapi().SetDialogBoxMode(mode as _) })
     }
@@ -2989,7 +2989,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// device.set_fvf(FVF::None).unwrap();
     /// device.set_fvf(FVF::XYZ).unwrap();
     /// ```
-    fn set_fvf(&self, fvf: impl Into<FVF>) -> Result<(), MethodError> {
+    fn set_fvf(&self, fvf: impl Into<FVF>) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::set_fvf => IDirect3DDevice9::SetFVF);
         fn_check_hr!(unsafe { self.as_winapi().SetFVF(fvf.into().into()) })
     }
@@ -3042,7 +3042,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///
     /// assert_eq!(device2.set_indices(&tri), THINERR::DEVICE_MISMATCH);
     /// ```
-    fn set_indices<'ib>(&self, index_data: impl Into<Option<&'ib IndexBuffer>>) -> Result<(), MethodError> {
+    fn set_indices<'ib>(&self, index_data: impl Into<Option<&'ib IndexBuffer>>) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::set_indices => IDirect3DDevice9::SetIndices);
         let ptr = match index_data.into() {
             None => null_mut(),
@@ -3073,7 +3073,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// device.set_light(1,  light).unwrap(); // Ok
     /// device.set_light(!0, light).unwrap(); // Ok (16-bit)
     /// ```
-    fn set_light(&self, index: u16, light: impl Into<Light>) -> Result<(), MethodError> {
+    fn set_light(&self, index: u16, light: impl Into<Light>) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::set_light => IDirect3DDevice9::SetLight);
         // Safe: `index` max == `u16::MAX` == `0xFFFF`, well bellow when GArrayT starts buffer overflowing (`0x1000_0000 - 8`)
         unsafe { self.set_light_32_unchecked(index.into(), light.into()) }
@@ -3125,7 +3125,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///     // XXX: Buffer overflow, crash, or worse!
     /// }
     /// ```
-    unsafe fn set_light_32_unchecked(&self, index: u32, light: impl Into<Light>) -> Result<(), MethodError> {
+    unsafe fn set_light_32_unchecked(&self, index: u32, light: impl Into<Light>) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::set_light_32_unchecked => IDirect3DDevice9::SetLight);
         let light = light.into();
         fn_check_hr!(unsafe { self.as_winapi().SetLight(index, &*light) })
@@ -3147,7 +3147,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// };
     /// device.set_material(material).unwrap();
     /// ```
-    fn set_material(&self, material: impl Into<Material>) -> Result<(), MethodError> {
+    fn set_material(&self, material: impl Into<Material>) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::set_material => IDirect3DDevice9::SetMaterial);
         fn_check_hr!(unsafe { self.as_winapi().SetMaterial(&*material.into()) })
     }
@@ -3166,7 +3166,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// device.set_npatch_mode(1.0).unwrap();
     /// device.set_npatch_mode(9001.0).unwrap();
     /// ```
-    fn set_npatch_mode(&self, mode: f32) -> Result<(), MethodError> {
+    fn set_npatch_mode(&self, mode: f32) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::set_npatch_mode => IDirect3DDevice9::SetNPatchMode);
         fn_check_hr!(unsafe { self.as_winapi().SetNPatchMode(mode) })
     }
@@ -3201,7 +3201,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///
     /// ### See Also
     /// *   [Texture Palettes (Direct3D 9)](https://docs.microsoft.com/en-us/windows/win32/direct3d9/texture-palettes)
-    fn set_palette_entries(&self, palette_number: u16, entries: &[Color; 256]) -> Result<(), MethodError> {
+    fn set_palette_entries(&self, palette_number: u16, entries: &[Color; 256]) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::set_palette_entries => IDirect3DDevice9::SetPaletteEntries);
         // Safety: ✔️ u16::MAX is documented to be valid, tests OK
         unsafe { self.set_palette_entries_unchecked(palette_number.into(), entries) }
@@ -3252,7 +3252,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// *   [Texture Palettes (Direct3D 9)](https://docs.microsoft.com/en-us/windows/win32/direct3d9/texture-palettes)
     /// *   [set_current_texture_palette_unchecked](Self::set_current_texture_palette_unchecked)
     /// *   [set_palette_entries](Self::set_palette_entries)
-    unsafe fn set_palette_entries_unchecked(&self, palette_number: u32, entries: &[Color; 256]) -> Result<(), MethodError> {
+    unsafe fn set_palette_entries_unchecked(&self, palette_number: u32, entries: &[Color; 256]) -> Result<(), Error> {
         // D3D9 uses PALETTEENTRYs but misuses the flags field.  D3DCOLORs are much better fits.
         fn_context!(d3d9::IDirect3DDevice9Ext::set_palette_entries_unchecked => IDirect3DDevice9::SetPaletteEntries);
         fn_check_hr!(unsafe { self.as_winapi().SetPaletteEntries(palette_number, entries.as_ptr().cast()) })
@@ -3266,7 +3266,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// ### Returns
     /// *   [D3DERR::INVALIDCALL]   If `pixel_shader` was created by another device?
     /// *   Ok(())
-    fn set_pixel_shader<'sh>(&self, pixel_shader: impl Into<Option<&'sh PixelShader>>) -> Result<(), MethodError> {
+    fn set_pixel_shader<'sh>(&self, pixel_shader: impl Into<Option<&'sh PixelShader>>) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::set_pixel_shader => IDirect3DDevice9::SetPixelShader);
         let pixel_shader = pixel_shader.into();
         let ps = pixel_shader.map_or(null_mut(), |ps| ps.as_raw());
@@ -3301,7 +3301,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// assert_eq!(D3DERR::INVALIDCALL, r2, "count: oob");
     /// assert_eq!(D3DERR::INVALIDCALL, r3, "end: oob");
     /// ```
-    fn set_pixel_shader_constant_b(&self, start_register: u32, constant_data: &[bool32]) -> Result<(), MethodError> {
+    fn set_pixel_shader_constant_b(&self, start_register: u32, constant_data: &[bool32]) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::set_pixel_shader_constant_b => IDirect3DDevice9::SetPixelShaderConstantB);
         let n : u32 = constant_data.len().try_into().map_err(|_| fn_param_error!(constant_data, D3DERR::INVALIDCALL))?;
         fn_check_hr!(unsafe { self.as_winapi().SetPixelShaderConstantB(start_register, constant_data.as_ptr().cast(), n) })
@@ -3335,7 +3335,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// assert_eq!(D3DERR::INVALIDCALL, r2, "count: oob");
     /// assert_eq!(D3DERR::INVALIDCALL, r3, "end: oob");
     /// ```
-    fn set_pixel_shader_constant_f(&self, start_register: u32, constant_data: &[[f32; 4]]) -> Result<(), MethodError> {
+    fn set_pixel_shader_constant_f(&self, start_register: u32, constant_data: &[[f32; 4]]) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::set_pixel_shader_constant_f => IDirect3DDevice9::SetPixelShaderConstantF);
         let n : u32 = constant_data.len().try_into().map_err(|_| fn_param_error!(constant_data, D3DERR::INVALIDCALL))?;
         fn_check_hr!(unsafe { self.as_winapi().SetPixelShaderConstantF(start_register, constant_data.as_ptr().cast(), n) })
@@ -3369,7 +3369,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// assert_eq!(D3DERR::INVALIDCALL, r2, "count: oob");
     /// assert_eq!(D3DERR::INVALIDCALL, r3, "end: oob");
     /// ```
-    fn set_pixel_shader_constant_i(&self, start_register: u32, constant_data: &[[i32; 4]]) -> Result<(), MethodError> {
+    fn set_pixel_shader_constant_i(&self, start_register: u32, constant_data: &[[i32; 4]]) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::set_pixel_shader_constant_i => IDirect3DDevice9::SetPixelShaderConstantI);
         let n : u32 = constant_data.len().try_into().map_err(|_| fn_param_error!(constant_data, D3DERR::INVALIDCALL))?;
         fn_check_hr!(unsafe { self.as_winapi().SetPixelShaderConstantI(start_register, constant_data.as_ptr().cast(), n) })
@@ -3397,7 +3397,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// #     }
     /// # }
     /// ```
-    fn set_render_state_untyped(&self, state: impl Into<d3d9::RenderStateType>, value: impl Into<u32>) -> Result<(), MethodError> {
+    fn set_render_state_untyped(&self, state: impl Into<d3d9::RenderStateType>, value: impl Into<u32>) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::set_render_state_untyped => IDirect3DDevice9::SetRenderState);
         fn_check_hr!(unsafe { self.as_winapi().SetRenderState(state.into().into(), value.into()) })
     }
@@ -3409,7 +3409,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// *   [D3DERR::INVALIDCALL]         if `render_target_index == 0` and `render_target == None`
     /// *   [D3DERR::INVALIDCALL]         if `render_target == Some(surface)` and `surface.usage() != Usage::RenderTarget`
     /// *   `Ok(())`                      if the render target was successfully bound
-    fn set_render_target(&self, render_target_index: u32, render_target: Option<&Surface>) -> Result<(), MethodError> {
+    fn set_render_target(&self, render_target_index: u32, render_target: Option<&Surface>) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::set_render_target => IDirect3DDevice9::SetRenderTarget);
         let rt = render_target.map_or(null_mut(), |rt| rt.as_raw());
         fn_check_hr!(unsafe { self.as_winapi().SetRenderTarget(render_target_index, rt) })
@@ -3453,7 +3453,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///     }
     /// }
     /// ```
-    unsafe fn set_sampler_state_unchecked(&self, sampler: u32, ty: SamplerStateType, value: impl Into<u32>) -> Result<(), MethodError> {
+    unsafe fn set_sampler_state_unchecked(&self, sampler: u32, ty: SamplerStateType, value: impl Into<u32>) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::set_sampler_state_unchecked => IDirect3DDevice9::SetSamplerState);
         fn_check_hr!(unsafe { self.as_winapi().SetSamplerState(sampler, ty.into(), value.into()) })
     }
@@ -3495,7 +3495,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// #   }
     /// # }
     /// ```
-    fn set_sampler_state(&self, sampler: u32, ssv: impl Into<SamplerStateValue>) -> Result<(), MethodError> {
+    fn set_sampler_state(&self, sampler: u32, ssv: impl Into<SamplerStateValue>) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::set_sampler_state => IDirect3DDevice9::SetSamplerState);
         let (ty, value) = ssv.into().ty_value();
         unsafe { self.set_sampler_state_unchecked(sampler, ty, value) }
@@ -3519,7 +3519,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// device.set_scissor_rect([100..0, 100..0]).unwrap();
     /// device.set_scissor_rect([i32::MIN .. i32::MAX, i32::MIN .. i32::MAX]).unwrap();
     /// ```
-    fn set_scissor_rect(&self, rect: impl Into<d3d::Rect>) -> Result<(), MethodError> {
+    fn set_scissor_rect(&self, rect: impl Into<d3d::Rect>) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::set_scissor_rect => IDirect3DDevice9::SetScissorRect);
         fn_check_hr!(unsafe { self.as_winapi().SetScissorRect(rect.into().as_ref()) })
     }
@@ -3556,7 +3556,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// r.map_err(|e| assert_eq!(e.kind(), D3DERR::INVALIDCALL));
     /// # }
     /// ```
-    fn set_software_vertex_processing(&self, software: bool) -> Result<(), MethodError> {
+    fn set_software_vertex_processing(&self, software: bool) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::set_software_vertex_processing => IDirect3DDevice9::SetSoftwareVertexProcessing);
         fn_check_hr!(unsafe { self.as_winapi().SetSoftwareVertexProcessing(software as _) })
     }
@@ -3584,7 +3584,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///
     /// assert_eq!(device2.set_stream_source(0, &tri, 0, 4*3), THINERR::DEVICE_MISMATCH);
     /// ```
-    fn set_stream_source<'b>(&self, stream_number: u32, stream_data: impl Into<Option<&'b VertexBuffer>>, offset_in_bytes: u32, stride: u32) -> Result<(), MethodError> {
+    fn set_stream_source<'b>(&self, stream_number: u32, stream_data: impl Into<Option<&'b VertexBuffer>>, offset_in_bytes: u32, stride: u32) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::set_stream_source => IDirect3DDevice9::SetStreamSource);
         let stream_data = match stream_data.into() {
             None => null_mut(),
@@ -3617,7 +3617,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// device.set_stream_source_freq(0, StreamSource::regular()).unwrap();
     /// device.set_stream_source_freq(1, StreamSource::regular()).unwrap();
     /// ```
-    fn set_stream_source_freq(&self, stream_number: u32, setting: impl Into<StreamSource>) -> Result<(), MethodError> {
+    fn set_stream_source_freq(&self, stream_number: u32, setting: impl Into<StreamSource>) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::set_stream_source_freq => IDirect3DDevice9::SetStreamSourceFreq);
         let setting = setting.into().into();
         fn_check_hr!(unsafe { self.as_winapi().SetStreamSourceFreq(stream_number, setting) })
@@ -3650,7 +3650,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// // unsafe{device.set_texture(1000,  &texture)}.unwrap(); // XXX: works on my machine, but might could be doing bad shit like corrupting memory?
     /// // unsafe{device.set_texture(10000, &texture)}.unwrap(); // XXX: crashes on my machine!
     /// ```
-    unsafe fn set_texture<'t>(&self, stage: u32, texture: impl Into<Option<&'t BaseTexture>>) -> Result<(), MethodError> {
+    unsafe fn set_texture<'t>(&self, stage: u32, texture: impl Into<Option<&'t BaseTexture>>) -> Result<(), Error> {
         // TODO: make a more convenient trait for texture binding
         fn_context!(d3d9::IDirect3DDevice9Ext::set_texture => IDirect3DDevice9::SetTexture);
         let texture = texture.into();
@@ -3681,7 +3681,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// #   }
     /// # }
     /// ```
-    fn set_texture_stage_state_untyped(&self, stage: u32, ty: impl Into<TextureStageStateType>, value: u32) -> Result<(), MethodError> {
+    fn set_texture_stage_state_untyped(&self, stage: u32, ty: impl Into<TextureStageStateType>, value: u32) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::set_texture_stage_state_untyped => IDirect3DDevice9::SetTextureStageState);
         fn_check_hr!(unsafe { self.as_winapi().SetTextureStageState(stage, ty.into().into(), value) })
     }
@@ -3705,7 +3705,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// // no errors generated no matter what?
     /// device.set_transform(d3d::TS::from_unchecked(0xFFFFFFF), d3d::Matrix::identity()).unwrap();
     /// ```
-    fn set_transform(&self, ts: impl Into<TransformStateType>, matrix: impl Into<Matrix>) -> Result<(), MethodError> {
+    fn set_transform(&self, ts: impl Into<TransformStateType>, matrix: impl Into<Matrix>) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::set_transform => IDirect3DDevice9::SetTransform);
         fn_check_hr!(unsafe { self.as_winapi().SetTransform(ts.into().into(), &matrix.into().into()) })
     }
@@ -3718,7 +3718,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// ### Returns
     /// *   [D3DERR::INVALIDCALL]   If `decl` was created by another device?
     /// *   Ok(())
-    fn set_vertex_declaration<'d>(&self, decl: impl Into<Option<&'d VertexDeclaration>>) -> Result<(), MethodError> {
+    fn set_vertex_declaration<'d>(&self, decl: impl Into<Option<&'d VertexDeclaration>>) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::set_vertex_declaration => IDirect3DDevice9::SetVertexDeclaration);
         let decl = decl.into();
         let decl = decl.map_or(null_mut(), |d| d.as_raw());
@@ -3733,7 +3733,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// ### Returns
     /// *   [D3DERR::INVALIDCALL]   If `vertex_shader` was created by another device?
     /// *   Ok(())
-    fn set_vertex_shader<'sh>(&self, vertex_shader: impl Into<Option<&'sh VertexShader>>) -> Result<(), MethodError> {
+    fn set_vertex_shader<'sh>(&self, vertex_shader: impl Into<Option<&'sh VertexShader>>) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::set_vertex_shader => IDirect3DDevice9::SetVertexShader);
         let vertex_shader = vertex_shader.into();
         let ps = vertex_shader.map_or(null_mut(), |ps| ps.as_raw());
@@ -3768,7 +3768,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// assert_eq!(D3DERR::INVALIDCALL, r2, "count: oob");
     /// assert_eq!(D3DERR::INVALIDCALL, r3, "end: oob");
     /// ```
-    fn set_vertex_shader_constant_b(&self, start_register: u32, constant_data: &[bool32]) -> Result<(), MethodError> {
+    fn set_vertex_shader_constant_b(&self, start_register: u32, constant_data: &[bool32]) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::set_vertex_shader_constant_b => IDirect3DDevice9::SetVertexShaderConstantB);
         let n : u32 = constant_data.len().try_into().map_err(|_| fn_param_error!(constant_data, D3DERR::INVALIDCALL))?;
         fn_check_hr!(unsafe { self.as_winapi().SetVertexShaderConstantB(start_register, constant_data.as_ptr().cast(), n) })
@@ -3803,7 +3803,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// assert_eq!(D3DERR::INVALIDCALL, r2, "count: oob");
     /// assert_eq!(D3DERR::INVALIDCALL, r3, "end: oob");
     /// ```
-    fn set_vertex_shader_constant_f(&self, start_register: u32, constant_data: &[[f32; 4]]) -> Result<(), MethodError> {
+    fn set_vertex_shader_constant_f(&self, start_register: u32, constant_data: &[[f32; 4]]) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::set_vertex_shader_constant_f => IDirect3DDevice9::SetVertexShaderConstantF);
         let n : u32 = constant_data.len().try_into().map_err(|_| fn_param_error!(constant_data, D3DERR::INVALIDCALL))?;
         fn_check_hr!(unsafe { self.as_winapi().SetVertexShaderConstantF(start_register, constant_data.as_ptr().cast(), n) })
@@ -3837,7 +3837,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// assert_eq!(D3DERR::INVALIDCALL, r2, "count: oob");
     /// assert_eq!(D3DERR::INVALIDCALL, r3, "end: oob");
     /// ```
-    fn set_vertex_shader_constant_i(&self, start_register: u32, constant_data: &[[i32; 4]]) -> Result<(), MethodError> {
+    fn set_vertex_shader_constant_i(&self, start_register: u32, constant_data: &[[i32; 4]]) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::set_vertex_shader_constant_i => IDirect3DDevice9::SetVertexShaderConstantI);
         let n : u32 = constant_data.len().try_into().map_err(|_| fn_param_error!(constant_data, D3DERR::INVALIDCALL))?;
         fn_check_hr!(unsafe { self.as_winapi().SetVertexShaderConstantI(start_register, constant_data.as_ptr().cast(), n) })
@@ -3855,7 +3855,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// # use dev::d3d9::*; let device = device_test();
     /// device.set_viewport(Viewport{ x: 0, y: 0, width: 100, height: 100, min_z: 0.0, max_z: 1.0 }).unwrap();
     /// ```
-    fn set_viewport(&self, viewport: impl Into<Viewport>) -> Result<(), MethodError> {
+    fn set_viewport(&self, viewport: impl Into<Viewport>) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::set_viewport => IDirect3DDevice9::SetViewport);
         let viewport = viewport.into();
         fn_check_hr!(unsafe { self.as_winapi().SetViewport(&*viewport) })

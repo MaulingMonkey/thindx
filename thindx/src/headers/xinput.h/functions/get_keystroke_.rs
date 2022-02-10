@@ -16,7 +16,7 @@ use winapi::um::xinput::*;
 /// ### Errors
 /// *   [ERROR::BAD_ARGUMENTS]          - Invalid [`User`]
 /// *   [ERROR::DEVICE_NOT_CONNECTED]   - Disconnected [`User`]
-pub fn get_keystroke(user_index: impl Into<u32>, _reserved: ()) -> Result<Option<Keystroke>, MethodError> {
+pub fn get_keystroke(user_index: impl Into<u32>, _reserved: ()) -> Result<Option<Keystroke>, Error> {
     fn_context!(xinput::get_keystroke => XInputGetKeystroke);
     let mut keystroke = Keystroke::zeroed();
     // SAFETY: ✔️

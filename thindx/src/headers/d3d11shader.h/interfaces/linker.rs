@@ -84,7 +84,7 @@ impl Linker {
     /// ### See Also
     /// *   [User clip planes on feature level 9 hardware](https://docs.microsoft.com/en-us/windows/win32/direct3dhlsl/user-clip-planes-on-10level9) (clip plane limit)
     /// *   [Introduction to Buffers in Direct3D 11:  Constant Buffer](https://docs.microsoft.com/en-us/windows/win32/direct3d11/overviews-direct3d-11-resources-buffers-intro#constant-buffer) (cbuffer limits quoted in example)
-    pub fn add_clip_plane_from_cbuffer(&self, cbuffer_slot: u32, cbuffer_entry: u32) -> Result<(), MethodError> {
+    pub fn add_clip_plane_from_cbuffer(&self, cbuffer_slot: u32, cbuffer_entry: u32) -> Result<(), Error> {
         fn_context!(d3d11::Linker::add_clip_plane_from_cbuffer => ID3D11Linker::AddClipPlaneFromCBuffer);
         fn_check_hr!(unsafe { self.0.AddClipPlaneFromCBuffer(cbuffer_slot, cbuffer_entry) })
     }
@@ -121,7 +121,7 @@ impl Linker {
     ///
     /// ### See Also
     /// *   [examples::d3dcompiler_03_link]
-    pub fn link(&self, entry: &ModuleInstance, entry_name: impl TryIntoAsCStr, target_name: impl TryIntoAsCStr, flags: Option<std::convert::Infallible>) -> Result<LinkResult, MethodErrorBlob> {
+    pub fn link(&self, entry: &ModuleInstance, entry_name: impl TryIntoAsCStr, target_name: impl TryIntoAsCStr, flags: Option<std::convert::Infallible>) -> Result<LinkResult, ErrorWithBlob> {
         fn_context!(d3d11::Linker::link => ID3D11Linker::Link);
         let entry_name  = entry_name .try_into().map_err(|e| fn_param_error!(entry_name,  e.into()))?;
         let target_name = target_name.try_into().map_err(|e| fn_param_error!(target_name, e.into()))?;
@@ -135,7 +135,7 @@ impl Linker {
         let hr = unsafe { self.0.Link(entry.as_raw(), entry_name, target_name, flags, &mut blob, &mut errors) };
         let errors = TextBlob::new(unsafe { ReadOnlyBlob::from_raw_opt(errors) });
         match fn_check_hr!(hr) {
-            Err(error) => Err(MethodErrorBlob { error, errors }),
+            Err(error) => Err(ErrorWithBlob { error, errors }),
             Ok(()) => Ok(LinkResult {
                 shader: unsafe { CodeBlob::from_unchecked(ReadOnlyBlob::from_raw(blob)) },
                 errors,
@@ -167,7 +167,7 @@ impl Linker {
     /// ### See Also
     /// *   [examples::d3dcompiler_03_link]
     //#allow_missing_argument_docs
-    pub fn use_library(&self, library_mi: &ModuleInstance) -> Result<(), MethodError> {
+    pub fn use_library(&self, library_mi: &ModuleInstance) -> Result<(), Error> {
         fn_context!(d3d11::Linker::use_library => ID3D11Linker::UseLibrary);
         fn_check_hr!(unsafe { self.0.UseLibrary(library_mi.as_raw()) })
     }

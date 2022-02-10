@@ -2,6 +2,7 @@
 #[doc(no_inline)] pub use crate::win32::*;
 
 #[doc(no_inline)] pub use thindx::*;
+#[doc(no_inline)] pub use thindx::Error;
 #[doc(no_inline)] pub use thindx::d3d::*;
 #[doc(no_inline)] pub use thindx::d3d9::*;
 
@@ -36,7 +37,7 @@ pub fn d3d_test()   -> Direct3D   { unsafe { Direct3D  ::create(SdkVersion::defa
 
 pub fn safe_device_test() -> SafeDevice { SafeDevice::new(device_test()).unwrap() }
 pub fn safe_device_pure() -> SafeDevice { SafeDevice::new(device_pure()).unwrap() }
-pub fn safe_device_test_pp(two: bool, ppf: impl FnOnce(&mut PresentParameters, &mut Create)) -> Result<SafeDevice, MethodError> { SafeDevice::new(device_test_pp(two, ppf)?) }
+pub fn safe_device_test_pp(two: bool, ppf: impl FnOnce(&mut PresentParameters, &mut Create)) -> Result<SafeDevice, Error> { SafeDevice::new(device_test_pp(two, ppf)?) }
 
 
 
@@ -53,7 +54,7 @@ pub fn device_pure2() -> [Device; 2] {[
     device_test_pp(true,  |_,c| *c |= Create::PureDevice).unwrap(),
 ]}
 
-pub fn device_test_pp(two: bool, ppf: impl FnOnce(&mut PresentParameters, &mut Create)) -> Result<Device, MethodError> {
+pub fn device_test_pp(two: bool, ppf: impl FnOnce(&mut PresentParameters, &mut Create)) -> Result<Device, Error> {
     let mut behavior = /* Create::DisablePrintScreen | */ Create::FpuPreserve | Create::HardwareVertexProcessing | Create::NoWindowChanges;
     let mut pp = PresentParameters {
         windowed:               true.into(),
@@ -85,7 +86,7 @@ pub fn device_test_pp(two: bool, ppf: impl FnOnce(&mut PresentParameters, &mut C
     device_ex_test_pp(true,  |_,c| *c |= Create::PureDevice).unwrap(),
 ]}
 
-#[cfg(feature = "9ex")] pub fn device_ex_test_pp(two: bool, ppf: impl FnOnce(&mut PresentParameters, &mut Create)) -> Result<DeviceEx, MethodError> {
+#[cfg(feature = "9ex")] pub fn device_ex_test_pp(two: bool, ppf: impl FnOnce(&mut PresentParameters, &mut Create)) -> Result<DeviceEx, Error> {
     let mut behavior = Create::DisablePrintScreen | Create::FpuPreserve | Create::HardwareVertexProcessing | Create::NoWindowChanges;
     let mut pp = PresentParameters {
         windowed:               true.into(),

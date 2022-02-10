@@ -36,7 +36,7 @@ impl Compiler {
     ///
     /// ### Remarks
     /// *   This was introduced by d3dcompiler_43.dll, and is unavailable in earlier versions.
-    pub fn get_blob_part(&self, src_data: &Bytecode, part: impl Into<BlobPart>, flags: Option<std::convert::Infallible>) -> Result<BytesBlob, MethodError> {
+    pub fn get_blob_part(&self, src_data: &Bytecode, part: impl Into<BlobPart>, flags: Option<std::convert::Infallible>) -> Result<BytesBlob, Error> {
         fn_context_dll!(d3d::Compiler::get_blob_part => self.D3DGetBlobPart);
         let src_data = src_data.as_bytes();
         let part = part.into().into();
@@ -99,7 +99,7 @@ impl Compiler {
     ///
     /// ### Remarks
     /// *   This was introduced by d3dcompiler_40.dll, and is unavailable in earlier versions.
-    pub fn get_debug_info(&self, src_data: &Bytecode) -> Result<BytesBlob, MethodError> {
+    pub fn get_debug_info(&self, src_data: &Bytecode) -> Result<BytesBlob, Error> {
         fn_context_dll!(d3d::Compiler::get_debug_info => self.D3DGetDebugInfo);
         let src_data = src_data.as_bytes();
 
@@ -138,7 +138,7 @@ impl Compiler {
     /// ```
     // #[requires(d3dcompiler=33)] // or earlier?
     //#allow_missing_argument_docs
-    pub fn get_input_and_output_signature_blob(&self, src_data: &Bytecode) -> Result<BytesBlob, MethodError> {
+    pub fn get_input_and_output_signature_blob(&self, src_data: &Bytecode) -> Result<BytesBlob, Error> {
         fn_context_dll!(d3d::Compiler::get_input_and_output_signature_blob => self.D3DGetInputAndOutputSignatureBlob);
         let src_data = src_data.as_bytes();
 
@@ -177,7 +177,7 @@ impl Compiler {
     /// ```
     // #[requires(d3dcompiler=33)] // or earlier?
     //#allow_missing_argument_docs
-    pub fn get_input_signature_blob(&self, src_data: &Bytecode) -> Result<BytesBlob, MethodError> {
+    pub fn get_input_signature_blob(&self, src_data: &Bytecode) -> Result<BytesBlob, Error> {
         fn_context_dll!(d3d::Compiler::get_input_signature_blob => self.D3DGetInputSignatureBlob);
         let src_data = src_data.as_bytes();
 
@@ -216,7 +216,7 @@ impl Compiler {
     /// ```
     // #[requires(d3dcompiler=33)] // or earlier?
     //#allow_missing_argument_docs
-    pub fn get_output_signature_blob(&self, src_data: &Bytecode) -> Result<BytesBlob, MethodError> {
+    pub fn get_output_signature_blob(&self, src_data: &Bytecode) -> Result<BytesBlob, Error> {
         fn_context_dll!(d3d::Compiler::get_output_signature_blob => self.D3DGetOutputSignatureBlob);
         let src_data = src_data.as_bytes();
 
@@ -267,7 +267,7 @@ impl Compiler {
         part:               impl Into<BlobPart>,
         flags:              (),
         part_data:          &[u8],
-    ) -> Result<CodeBlob, MethodError> {
+    ) -> Result<CodeBlob, Error> {
         fn_context_dll!(d3d::Compiler::set_blob_part => self.D3DSetBlobPart);
         let src_data = src_data.as_bytes();
         let _ = flags;
@@ -319,7 +319,7 @@ impl Compiler {
         &self,
         src_data:           &Bytecode,
         strip_flags:        impl Into<CompilerStripFlags>,
-    ) -> Result<CodeBlob, MethodError> {
+    ) -> Result<CodeBlob, Error> {
         fn_context_dll!(d3d::Compiler::strip_shader => self.D3DStripShader);
         let mut blob = null_mut();
 

@@ -59,7 +59,7 @@ pub trait IDirect3DQuery9Ext : AsSafe<IDirect3DQuery9> {
     /// *   [D3DERR::INVALIDCALL]   If `data.as_mut().len()` > `u32::MAX`
     /// *   Ok(`true`)              The query data is available
     /// *   Ok(`false`)             The query data is not available
-    fn get_data_inplace(&self, mut data: impl AsMut<[u8]>, get_data_flags: impl Into<GetData>) -> Result<bool, MethodError> {
+    fn get_data_inplace(&self, mut data: impl AsMut<[u8]>, get_data_flags: impl Into<GetData>) -> Result<bool, Error> {
         fn_context!(d3d9::IDirect3DQuery9Ext::get_data_inplace => IDirect3DQuery9::GetData);
         let data = data.as_mut();
         let flags = get_data_flags.into().into();
@@ -86,7 +86,7 @@ pub trait IDirect3DQuery9Ext : AsSafe<IDirect3DQuery9> {
     /// IDirect3DQuery9::GetDevice
     ///
     /// Gets the device that is being queried.
-    fn get_device(&self) -> Result<Device, MethodError> {
+    fn get_device(&self) -> Result<Device, Error> {
         fn_context!(d3d9::IDirect3DQuery9Ext::get_device => IDirect3DQuery9::GetDevice);
         let mut device = null_mut();
         fn_check_hr!(unsafe { self.as_winapi().GetDevice(&mut device) })?;
@@ -106,7 +106,7 @@ pub trait IDirect3DQuery9Ext : AsSafe<IDirect3DQuery9> {
     /// IDirect3DQuery9::Issue
     ///
     /// Issue a query.
-    fn issue(&self, issue_flags: impl Into<Issue>) -> Result<(), MethodError> {
+    fn issue(&self, issue_flags: impl Into<Issue>) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DQuery9Ext::issue => IDirect3DQuery9::Issue);
         fn_check_hr!(unsafe { self.as_winapi().Issue(issue_flags.into().into()) })
     }

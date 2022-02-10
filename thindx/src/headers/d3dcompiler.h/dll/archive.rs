@@ -48,7 +48,7 @@ impl Compiler {
         &self,
         shaders:                &[ShaderData],
         flags:                  impl Into<CompressShader>,
-    ) -> Result<BytesBlob, MethodError> {
+    ) -> Result<BytesBlob, Error> {
         // Early outs
         fn_context_dll!(d3d::Compiler::compress_shaders => self.D3DCompressShaders);
         let num_shaders = shaders.len().try_into().map_err(|_| fn_param_error!(shaders, THINERR::MISSING_DLL_EXPORT))?;
@@ -117,7 +117,7 @@ impl Compiler {
     /// ### Remarks
     /// *   You can use this API to develop your Windows Store apps, but you can't use it in apps that you submit to the Windows Store.
     /// *   This was introduced by d3dcompiler_43.dll, and is unavailable in earlier versions.
-    pub fn decompress_shaders_count(&self, src_data: &[u8]) -> Result<u32, MethodError> {
+    pub fn decompress_shaders_count(&self, src_data: &[u8]) -> Result<u32, Error> {
         fn_context_dll!(d3d::Compiler::decompress_shaders_count => self.D3DDecompressShaders);
         let mut shader = null_mut(); // D3DDecompressShaders will fail with E_FAIL if ppShaders is null, even if it doesn't use it
         let mut total_shaders = 0;
@@ -182,7 +182,7 @@ impl Compiler {
         flags:                  impl Into<Option<std::convert::Infallible>>,
         start_index:            u32,
         out_shaders:            &'s mut [Option<ReadOnlyBlob>],
-    ) -> Result<&'s [Option<ReadOnlyBlob>], MethodError> {
+    ) -> Result<&'s [Option<ReadOnlyBlob>], Error> {
         fn_context_dll!(d3d::Compiler::decompress_shaders_inplace => self.D3DDecompressShaders);
         let n : u32 = out_shaders.len().try_into().map_err(|_| fn_param_error!(out_shaders, THINERR::SLICE_TOO_LARGE))?;
         let _ = flags;
@@ -244,7 +244,7 @@ impl Compiler {
         src_data:               &[u8],
         flags:                  impl Into<Option<std::convert::Infallible>>,
         _range:                 std::ops::RangeFull,
-    ) -> Result<Vec<Option<ReadOnlyBlob>>, MethodError> {
+    ) -> Result<Vec<Option<ReadOnlyBlob>>, Error> {
         fn_context!(d3d::Compiler::decompress_shaders => D3DDecompressShaders);
         let n = self.decompress_shaders_count(src_data)? as usize;
         let mut v = Vec::new();

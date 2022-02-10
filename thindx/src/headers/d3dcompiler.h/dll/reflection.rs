@@ -48,7 +48,7 @@ impl Compiler {
     ///
     /// ### Remarks
     /// *   This was introduced by d3dcompiler_40.dll, and is unavailable in earlier versions.
-    pub fn reflect<I: Raw>(&self, src_data: &Bytecode) -> Result<I, MethodError> where I::Raw : Interface {
+    pub fn reflect<I: Raw>(&self, src_data: &Bytecode) -> Result<I, Error> where I::Raw : Interface {
         fn_context_dll!(d3d::Compiler::reflect => self.D3DReflect);
         let src_data = src_data.as_bytes();
 
@@ -99,7 +99,7 @@ impl Compiler {
     ///
     /// ### Remarks
     /// *   This was introduced by d3dcompiler_40.dll, and is unavailable in earlier versions.
-    pub fn reflect11(&self, src_data: &Bytecode) -> Result<d3d11::ShaderReflection, MethodError> {
+    pub fn reflect11(&self, src_data: &Bytecode) -> Result<d3d11::ShaderReflection, Error> {
         fn_context_dll!(d3d::Compiler::reflect11 => self.D3DReflect);
         self.reflect(src_data)
     }
@@ -145,7 +145,7 @@ impl Compiler {
     /// ### See Also
     /// *   [d3d11::LibraryReflection] for a more complete example
     // #[requires(d3dcompiler=47)] // ?
-    pub fn reflect_library<I: Raw>(&self, src_data: &Bytecode) -> Result<I, MethodError> where I::Raw : Interface {
+    pub fn reflect_library<I: Raw>(&self, src_data: &Bytecode) -> Result<I, Error> where I::Raw : Interface {
         fn_context_dll!(d3d::Compiler::reflect_library => self.D3DReflectLibrary);
         let src_data = src_data.as_bytes();
 
@@ -198,7 +198,7 @@ impl Compiler {
     /// ### See Also
     /// *   [d3d11::LibraryReflection] for a more complete example
     // #[requires(d3dcompiler=47)] // ?
-    pub fn reflect_library_11(&self, src_data: &Bytecode) -> Result<d3d11::LibraryReflection, MethodError> {
+    pub fn reflect_library_11(&self, src_data: &Bytecode) -> Result<d3d11::LibraryReflection, Error> {
         fn_context_dll!(d3d::Compiler::reflect_library_11 => self.D3DReflectLibrary);
         self.reflect_library(src_data)
     }

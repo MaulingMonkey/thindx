@@ -13,7 +13,7 @@ use winapi::um::xinput::*;
 /// ### Errors
 /// *   [ERROR::BAD_ARGUMENTS]          - Invalid [`User`] or [`User::Any`]
 /// *   [ERROR::DEVICE_NOT_CONNECTED]   - [`User`] is not connected
-pub fn set_state(user_index: impl Into<u32>, mut vibration: Vibration) -> Result<(), MethodError> {
+pub fn set_state(user_index: impl Into<u32>, mut vibration: Vibration) -> Result<(), Error> {
     fn_context!(xinput::set_state => XInputSetState);
     // SAFETY: ✔️
     //  * fuzzed        in `fuzz-xinput.rs`
