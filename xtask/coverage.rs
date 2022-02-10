@@ -69,6 +69,7 @@ pub fn from_settings(settings: Settings) {
     let profraw = target_dir.join(r"profraw");
 
     if settings.test {
+        let _ = std::fs::create_dir_all(&deps);
         for e in std::fs::read_dir(&deps).unwrap_or_else(|err| fatal!("unable to enumerate target/coverage/debug/deps: {}", err)) {
             let e = e.unwrap_or_else(|err| fatal!("error enumerating target/coverage/debug/deps: {}", err));
             let path = e.path();
