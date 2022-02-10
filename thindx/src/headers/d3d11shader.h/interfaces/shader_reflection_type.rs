@@ -49,6 +49,7 @@ impl<'r> ShaderReflectionType<'r> {
     /// // TODO
     /// ```
     #[must_use] pub fn get_base_class(&self) -> ShaderReflectionType<'r> {
+        fn_context!(d3d11::ShaderReflectionType::get_base_class => ID3D11ShaderReflectionType::GetBaseClass);
         let ptr = unsafe { self.ptr.as_ref().GetBaseClass() };
         unsafe { ShaderReflectionType::from_raw(self.phantom, ptr) }
     }
@@ -64,9 +65,10 @@ impl<'r> ShaderReflectionType<'r> {
     /// // TODO
     /// ```
     pub fn get_desc(&self) -> Result<ShaderTypeDesc<'r>, MethodError> {
+        fn_context!(d3d11::ShaderReflectionType::get_desc => ID3D11ShaderReflectionType::GetDesc);
         let mut desc = ShaderTypeDesc::default();
         let hr = unsafe { self.ptr.as_ref().GetDesc(desc.as_mut_ptr()) };
-        MethodError::check("ID3D11ShaderReflectionType::GetDesc", hr)?;
+        fn_check_hr!(hr)?;
         Ok(desc)
     }
 
@@ -82,6 +84,7 @@ impl<'r> ShaderReflectionType<'r> {
     /// ```
     //#allow_missing_argument_docs
     #[must_use] pub fn get_interface_by_index(&self, index: u32) -> ShaderReflectionType<'r> {
+        fn_context!(d3d11::ShaderReflectionType::get_interface_by_index => ID3D11ShaderReflectionType::GetInterfaceByIndex);
         let ptr = unsafe { self.ptr.as_ref().GetInterfaceByIndex(index) };
         unsafe { ShaderReflectionType::from_raw(self.phantom, ptr) }
     }
@@ -98,6 +101,7 @@ impl<'r> ShaderReflectionType<'r> {
     /// ```
     //#allow_missing_argument_docs
     #[must_use] pub fn get_member_type_by_index(&self, index: u32) -> ShaderReflectionType<'r> {
+        fn_context!(d3d11::ShaderReflectionType::get_member_type_by_index => ID3D11ShaderReflectionType::GetMemberTypeByIndex);
         let ptr = unsafe { self.ptr.as_ref().GetMemberTypeByIndex(index) };
         unsafe { ShaderReflectionType::from_raw(self.phantom, ptr) }
     }
@@ -114,6 +118,7 @@ impl<'r> ShaderReflectionType<'r> {
     /// ```
     //#allow_missing_argument_docs
     #[must_use] pub fn get_member_type_by_name(&self, name: impl TryIntoAsCStr) -> ShaderReflectionType<'r> {
+        fn_context!(d3d11::ShaderReflectionType::get_member_type_by_name => ID3D11ShaderReflectionType::GetMemberTypeByName);
         let name = name.try_into().ok();
         let name = name.as_ref().map_or(cstr!("").as_cstr(), |n| n.as_cstr());
         let ptr = unsafe { self.ptr.as_ref().GetMemberTypeByName(name) };
@@ -132,6 +137,7 @@ impl<'r> ShaderReflectionType<'r> {
     /// ```
     //#allow_missing_argument_docs
     pub fn get_member_type_name(&self, index: u32) -> Option<&'r CStr> {
+        fn_context!(d3d11::ShaderReflectionType::get_member_type_name => ID3D11ShaderReflectionType::GetMemberTypeName);
         let cstr = unsafe { self.ptr.as_ref().GetMemberTypeName(index) };
         if cstr.is_null() {
             None
@@ -151,6 +157,7 @@ impl<'r> ShaderReflectionType<'r> {
     /// // TODO
     /// ```
     pub fn get_num_interfaces(&self) -> u32 {
+        fn_context!(d3d11::ShaderReflectionType::get_num_interfaces => ID3D11ShaderReflectionType::GetNumInterfaces);
         unsafe { self.ptr.as_ref().GetNumInterfaces() }
     }
 
@@ -165,6 +172,7 @@ impl<'r> ShaderReflectionType<'r> {
     /// // TODO
     /// ```
     #[must_use] pub fn get_sub_type(&self) -> ShaderReflectionType<'r> {
+        fn_context!(d3d11::ShaderReflectionType::get_sub_type => ID3D11ShaderReflectionType::GetSubType);
         let ptr = unsafe { self.ptr.as_ref().GetSubType() };
         unsafe { ShaderReflectionType::from_raw(self.phantom, ptr) }
     }
@@ -188,11 +196,12 @@ impl<'r> ShaderReflectionType<'r> {
     /// ```
     //#allow_missing_argument_docs
     pub fn implements_interface(&self, base: &ShaderReflectionType) -> Result<bool, MethodError> {
+        fn_context!(d3d11::ShaderReflectionType::implements_interface => ID3D11ShaderReflectionType::ImplementsInterface);
         let hr = unsafe { self.ptr.as_ref().ImplementsInterface(base.as_raw()) };
         if hr == S_FALSE {
             Ok(false)
         } else {
-            MethodError::check("ID3D11ShaderReflectionType::ImplementsInterface", hr)?;
+            fn_check_hr!(hr)?;
             Ok(true)
         }
     }
@@ -216,11 +225,12 @@ impl<'r> ShaderReflectionType<'r> {
     /// ```
     //#allow_missing_argument_docs
     pub fn is_equal(&self, ty: &ShaderReflectionType) -> Result<bool, MethodError> {
+        fn_context!(d3d11::ShaderReflectionType::is_equal => ID3D11ShaderReflectionType::IsEqual);
         let hr = unsafe { self.ptr.as_ref().IsEqual(ty.as_raw()) };
         if hr == S_FALSE {
             Ok(false)
         } else {
-            MethodError::check("ID3D11ShaderReflectionType::IsEqual", hr)?;
+            fn_check_hr!(hr)?;
             Ok(true)
         }
     }
@@ -244,26 +254,15 @@ impl<'r> ShaderReflectionType<'r> {
     /// ```
     //#allow_missing_argument_docs
     pub fn is_of_type(&self, ty: &ShaderReflectionType) -> Result<bool, MethodError> {
+        fn_context!(d3d11::ShaderReflectionType::is_of_type => ID3D11ShaderReflectionType::IsOfType);
         let hr = unsafe { self.ptr.as_ref().IsOfType(ty.as_raw()) };
         if hr == S_FALSE {
             Ok(false)
         } else {
-            MethodError::check("ID3D11ShaderReflectionType::IsOfType", hr)?;
+            fn_check_hr!(hr)?;
             Ok(true)
         }
     }
 }
 
 //#cpp2rust ID3D11ShaderReflectionType                          = d3d11::ShaderReflectionType
-
-//#cpp2rust ID3D11ShaderReflectionType::GetBaseClass            = d3d11::ShaderReflectionType::get_base_class
-//#cpp2rust ID3D11ShaderReflectionType::GetDesc                 = d3d11::ShaderReflectionType::get_desc
-//#cpp2rust ID3D11ShaderReflectionType::GetInterfaceByIndex     = d3d11::ShaderReflectionType::get_interface_by_index
-//#cpp2rust ID3D11ShaderReflectionType::GetMemberTypeByIndex    = d3d11::ShaderReflectionType::get_member_type_by_index
-//#cpp2rust ID3D11ShaderReflectionType::GetMemberTypeByName     = d3d11::ShaderReflectionType::get_member_type_by_name
-//#cpp2rust ID3D11ShaderReflectionType::GetMemberTypeName       = d3d11::ShaderReflectionType::get_member_type_name
-//#cpp2rust ID3D11ShaderReflectionType::GetNumInterfaces        = d3d11::ShaderReflectionType::get_num_interfaces
-//#cpp2rust ID3D11ShaderReflectionType::GetSubType              = d3d11::ShaderReflectionType::get_sub_type
-//#cpp2rust ID3D11ShaderReflectionType::ImplementsInterface     = d3d11::ShaderReflectionType::implements_interface
-//#cpp2rust ID3D11ShaderReflectionType::IsEqual                 = d3d11::ShaderReflectionType::is_equal
-//#cpp2rust ID3D11ShaderReflectionType::IsOfType                = d3d11::ShaderReflectionType::is_of_type

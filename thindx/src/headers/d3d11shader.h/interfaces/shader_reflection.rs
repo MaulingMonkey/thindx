@@ -48,6 +48,7 @@ impl ShaderReflection {
     /// let count = vs.get_bitwise_instruction_count();
     /// ```
     pub fn get_bitwise_instruction_count(&self) -> u32 {
+        fn_context!(d3d11::ShaderReflection::get_bitwise_instruction_count => ID3D11ShaderReflection::GetBitwiseInstructionCount);
         unsafe { self.0.GetBitwiseInstructionCount() }
     }
 
@@ -83,6 +84,7 @@ impl ShaderReflection {
     /// ```
     //#allow_missing_argument_docs
     pub fn get_constant_buffer_by_index(&self, index: u32) -> ShaderReflectionConstantBuffer {
+        fn_context!(d3d11::ShaderReflection::get_constant_buffer_by_index => ID3D11ShaderReflection::GetConstantBufferByIndex);
         let ptr = unsafe { self.0.GetConstantBufferByIndex(index) };
         unsafe { ShaderReflectionConstantBuffer::from_raw(self, ptr) }
     }
@@ -112,6 +114,7 @@ impl ShaderReflection {
     /// ```
     //#allow_missing_argument_docs
     pub fn get_constant_buffer_by_name(&self, name: impl TryIntoAsCStr) -> ShaderReflectionConstantBuffer {
+        fn_context!(d3d11::ShaderReflection::get_constant_buffer_by_name => ID3D11ShaderReflection::GetConstantBufferByName);
         let name = name.try_into().ok();
         let name = name.as_ref().map_or(cstr!("").as_cstr(), |n| n.as_cstr());
         let ptr = unsafe { self.0.GetConstantBufferByName(name) };
@@ -132,6 +135,7 @@ impl ShaderReflection {
     /// let count : u32 = vs.get_conversion_instruction_count();
     /// ```
     pub fn get_conversion_instruction_count(&self) -> u32 {
+        fn_context!(d3d11::ShaderReflection::get_conversion_instruction_count => ID3D11ShaderReflection::GetConversionInstructionCount);
         unsafe { self.0.GetConversionInstructionCount() }
     }
 
@@ -155,9 +159,10 @@ impl ShaderReflection {
     /// assert_eq!(desc.version.minor(), 0);
     /// ```
     pub fn get_desc(&self) -> Result<ShaderDesc, MethodError> {
+        fn_context!(d3d11::ShaderReflection::get_desc => ID3D11ShaderReflection::GetDesc);
         let mut desc = ShaderDesc::default();
         let hr = unsafe { self.0.GetDesc(desc.as_mut_ptr()) };
-        MethodError::check("ID3D11ShaderReflection::GetDesc", hr)?;
+        fn_check_hr!(hr)?;
         Ok(desc)
     }
 
@@ -178,6 +183,7 @@ impl ShaderReflection {
     /// assert_eq!(vs.get_gs_input_primitive(), d3d::Primitive::Undefined);
     /// ```
     pub fn get_gs_input_primitive(&self) -> Primitive {
+        fn_context!(d3d11::ShaderReflection::get_gs_input_primitive => ID3D11ShaderReflection::GetGSInputPrimitive);
         Primitive::from_unchecked(unsafe { self.0.GetGSInputPrimitive() })
     }
 
@@ -210,9 +216,10 @@ impl ShaderReflection {
     /// ```
     //#allow_missing_argument_docs
     pub fn get_input_parameter_desc(&self, parameter_index: u32) -> Result<SignatureParameterDesc, MethodError> {
+        fn_context!(d3d11::ShaderReflection::get_input_parameter_desc => ID3D11ShaderReflection::GetInputParameterDesc);
         let mut desc = SignatureParameterDesc::default();
         let hr = unsafe { self.0.GetInputParameterDesc(parameter_index, desc.as_mut_ptr()) };
-        MethodError::check("ID3D11ShaderReflection::GetInputParameterDesc", hr)?;
+        fn_check_hr!(hr)?;
         Ok(desc)
     }
 
@@ -233,9 +240,10 @@ impl ShaderReflection {
     /// assert_eq!(vs.get_min_feature_level().unwrap(), d3d::FeatureLevel::_10_0);
     /// ```
     pub fn get_min_feature_level(&self) -> Result<FeatureLevel, MethodError> {
+        fn_context!(d3d11::ShaderReflection::get_min_feature_level => ID3D11ShaderReflection::GetMinFeatureLevel);
         let mut fl = 0;
         let hr = unsafe { self.0.GetMinFeatureLevel(&mut fl) };
-        MethodError::check("ID3D11ShaderReflection::GetMinFeatureLevel", hr)?;
+        fn_check_hr!(hr)?;
         Ok(FeatureLevel::from_unchecked(fl))
     }
 
@@ -253,6 +261,7 @@ impl ShaderReflection {
     /// let count = vs.get_movc_instruction_count();
     /// ```
     pub fn get_movc_instruction_count(&self) -> u32 {
+        fn_context!(d3d11::ShaderReflection::get_movc_instruction_count => ID3D11ShaderReflection::GetMovcInstructionCount);
         unsafe { self.0.GetMovcInstructionCount() }
     }
 
@@ -270,6 +279,7 @@ impl ShaderReflection {
     /// let count : u32 = vs.get_mov_instruction_count();
     /// ```
     pub fn get_mov_instruction_count(&self) -> u32 {
+        fn_context!(d3d11::ShaderReflection::get_mov_instruction_count => ID3D11ShaderReflection::GetMovInstructionCount);
         unsafe { self.0.GetMovInstructionCount() }
     }
 
@@ -287,6 +297,7 @@ impl ShaderReflection {
     /// let slots : u32 = vs.get_num_interface_slots();
     /// ```
     pub fn get_num_interface_slots(&self) -> u32 {
+        fn_context!(d3d11::ShaderReflection::get_num_interface_slots => ID3D11ShaderReflection::GetNumInterfaceSlots);
         unsafe { self.0.GetNumInterfaceSlots() }
     }
 
@@ -319,9 +330,10 @@ impl ShaderReflection {
     /// ```
     //#allow_missing_argument_docs
     pub fn get_output_parameter_desc(&self, parameter_index: u32) -> Result<SignatureParameterDesc, MethodError> {
+        fn_context!(d3d11::ShaderReflection::get_output_parameter_desc => ID3D11ShaderReflection::GetOutputParameterDesc);
         let mut desc = SignatureParameterDesc::default();
         let hr = unsafe { self.0.GetOutputParameterDesc(parameter_index, desc.as_mut_ptr()) };
-        MethodError::check("ID3D11ShaderReflection::GetOutputParameterDesc", hr)?;
+        fn_check_hr!(hr)?;
         Ok(desc)
     }
 
@@ -353,9 +365,10 @@ impl ShaderReflection {
     /// ```
     //#allow_missing_argument_docs
     pub fn get_patch_constant_parameter_desc(&self, parameter_index: u32) -> Result<SignatureParameterDesc, MethodError> {
+        fn_context!(d3d11::ShaderReflection::get_patch_constant_parameter_desc => ID3D11ShaderReflection::GetPatchConstantParameterDesc);
         let mut desc = SignatureParameterDesc::default();
         let hr = unsafe { self.0.GetPatchConstantParameterDesc(parameter_index, desc.as_mut_ptr()) };
-        MethodError::check("ID3D11ShaderReflection::GetPatchConstantParameterDesc", hr)?;
+        fn_check_hr!(hr)?;
         Ok(desc)
     }
 
@@ -373,6 +386,7 @@ impl ShaderReflection {
     /// assert_eq!(vs.get_requires_flags(), d3d::ShaderRequires::None);
     /// ```
     pub fn get_requires_flags(&self) -> ShaderRequires {
+        fn_context!(d3d11::ShaderReflection::get_requires_flags => ID3D11ShaderReflection::GetRequiresFlags);
         ShaderRequires::from_unchecked(unsafe { self.0.GetRequiresFlags() })
     }
 
@@ -409,9 +423,10 @@ impl ShaderReflection {
     /// ```
     //#allow_missing_argument_docs
     pub fn get_resource_binding_desc(&self, resource_index: u32) -> Result<ShaderInputBindDesc, MethodError> {
+        fn_context!(d3d11::ShaderReflection::get_resource_binding_desc => ID3D11ShaderReflection::GetResourceBindingDesc);
         let mut desc = ShaderInputBindDesc::default();
         let hr = unsafe { self.0.GetResourceBindingDesc(resource_index, desc.as_mut_ptr()) };
-        MethodError::check("ID3D11ShaderReflection::GetResourceBindingDesc", hr)?;
+        fn_check_hr!(hr)?;
         Ok(desc)
     }
 
@@ -440,11 +455,12 @@ impl ShaderReflection {
     /// ```
     //#allow_missing_argument_docs
     pub fn get_resource_binding_desc_by_name(&self, name: impl TryIntoAsCStr) -> Result<ShaderInputBindDesc, MethodError> {
+        fn_context!(d3d11::ShaderReflection::get_resource_binding_desc_by_name => ID3D11ShaderReflection::GetResourceBindingDescByName);
         let name = name.try_into();
         let name = name.as_ref().map_or(null(), |name| name.as_cstr());
         let mut desc = ShaderInputBindDesc::default();
         let hr = unsafe { self.0.GetResourceBindingDescByName(name, desc.as_mut_ptr()) };
-        MethodError::check("ID3D11ShaderReflection::GetResourceBindingDescByName", hr)?;
+        fn_check_hr!(hr)?;
         Ok(desc)
     }
 
@@ -465,6 +481,7 @@ impl ShaderReflection {
     /// assert_eq!(vs.get_thread_group_size(), (0, 0, 0));
     /// ```
     pub fn get_thread_group_size(&self) -> (u32, u32, u32) {
+        fn_context!(d3d11::ShaderReflection::get_thread_group_size => ID3D11ShaderReflection::GetThreadGroupSize);
         let (mut x, mut y, mut z) = (0, 0, 0);
         let _total = unsafe { self.0.GetThreadGroupSize(&mut x, &mut y, &mut z) };
         debug_assert_eq!(_total, x*y*z, "ID3D11ShaderReflection::GetThreadGroupSize was supposed to return x*y*z");
@@ -497,6 +514,7 @@ impl ShaderReflection {
     /// ```
     //#allow_missing_argument_docs
     pub fn get_variable_by_name(&self, name: impl TryIntoAsCStr) -> ShaderReflectionVariable {
+        fn_context!(d3d11::ShaderReflection::get_variable_by_name => ID3D11ShaderReflection::GetVariableByName);
         let name = name.try_into().ok();
         let name = name.as_ref().map_or(cstr!("").as_cstr(), |n| n.as_cstr());
         let ptr = unsafe { self.0.GetVariableByName(name) };
@@ -517,28 +535,9 @@ impl ShaderReflection {
     /// assert_eq!(vs.is_sample_frequency_shader(), false);
     /// ```
     pub fn is_sample_frequency_shader(&self) -> bool {
+        fn_context!(d3d11::ShaderReflection::is_sample_frequency_shader => ID3D11ShaderReflection::IsSampleFrequencyShader);
         0 != unsafe { self.0.IsSampleFrequencyShader() }
     }
 }
 
 //#cpp2rust ID3D11ShaderReflection                                          = d3d11::ShaderReflection
-
-//#cpp2rust ID3D11ShaderReflection::GetBitwiseInstructionCount              = d3d11::ShaderReflection::get_bitwise_instruction_count
-//#cpp2rust ID3D11ShaderReflection::GetConstantBufferByIndex                = d3d11::ShaderReflection::get_constant_buffer_by_index
-//#cpp2rust ID3D11ShaderReflection::GetConstantBufferByName                 = d3d11::ShaderReflection::get_constant_buffer_by_name
-//#cpp2rust ID3D11ShaderReflection::GetConversionInstructionCount           = d3d11::ShaderReflection::get_conversion_instruction_count
-//#cpp2rust ID3D11ShaderReflection::GetDesc                                 = d3d11::ShaderReflection::get_desc
-//#cpp2rust ID3D11ShaderReflection::GetGSInputPrimitive                     = d3d11::ShaderReflection::get_gs_input_primitive
-//#cpp2rust ID3D11ShaderReflection::GetInputParameterDesc                   = d3d11::ShaderReflection::get_input_parameter_desc
-//#cpp2rust ID3D11ShaderReflection::GetMinFeatureLevel                      = d3d11::ShaderReflection::get_min_feature_level
-//#cpp2rust ID3D11ShaderReflection::GetMovcInstructionCount                 = d3d11::ShaderReflection::get_movc_instruction_count
-//#cpp2rust ID3D11ShaderReflection::GetMovInstructionCount                  = d3d11::ShaderReflection::get_mov_instruction_count
-//#cpp2rust ID3D11ShaderReflection::GetNumInterfaceSlots                    = d3d11::ShaderReflection::get_num_interface_slots
-//#cpp2rust ID3D11ShaderReflection::GetOutputParameterDesc                  = d3d11::ShaderReflection::get_output_parameter_desc
-//#cpp2rust ID3D11ShaderReflection::GetPatchConstantParameterDesc           = d3d11::ShaderReflection::get_patch_constant_parameter_desc
-//#cpp2rust ID3D11ShaderReflection::GetRequiresFlags                        = d3d11::ShaderReflection::get_requires_flags
-//#cpp2rust ID3D11ShaderReflection::GetResourceBindingDesc                  = d3d11::ShaderReflection::get_resource_binding_desc
-//#cpp2rust ID3D11ShaderReflection::GetResourceBindingDescByName            = d3d11::ShaderReflection::get_resource_binding_desc_by_name
-//#cpp2rust ID3D11ShaderReflection::GetThreadGroupSize                      = d3d11::ShaderReflection::get_thread_group_size
-//#cpp2rust ID3D11ShaderReflection::GetVariableByName                       = d3d11::ShaderReflection::get_variable_by_name
-//#cpp2rust ID3D11ShaderReflection::IsSampleFrequencyShader                 = d3d11::ShaderReflection::is_sample_frequency_shader

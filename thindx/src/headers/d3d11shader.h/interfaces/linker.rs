@@ -85,8 +85,9 @@ impl Linker {
     /// *   [User clip planes on feature level 9 hardware](https://docs.microsoft.com/en-us/windows/win32/direct3dhlsl/user-clip-planes-on-10level9) (clip plane limit)
     /// *   [Introduction to Buffers in Direct3D 11:  Constant Buffer](https://docs.microsoft.com/en-us/windows/win32/direct3d11/overviews-direct3d-11-resources-buffers-intro#constant-buffer) (cbuffer limits quoted in example)
     pub fn add_clip_plane_from_cbuffer(&self, cbuffer_slot: u32, cbuffer_entry: u32) -> Result<(), MethodError> {
+        fn_context!(d3d11::Linker::add_clip_plane_from_cbuffer => ID3D11Linker::AddClipPlaneFromCBuffer);
         let hr = unsafe { self.0.AddClipPlaneFromCBuffer(cbuffer_slot, cbuffer_entry) };
-        MethodError::check("ID3D11Linker::AddClipPlaneFromCBuffer", hr)
+        fn_check_hr!(hr)
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11linker-link)\]
@@ -122,6 +123,7 @@ impl Linker {
     /// ### See Also
     /// *   [examples::d3dcompiler_03_link]
     pub fn link(&self, entry: &ModuleInstance, entry_name: impl TryIntoAsCStr, target_name: impl TryIntoAsCStr, flags: Option<std::convert::Infallible>) -> Result<LinkResult, MethodErrorBlob> {
+        fn_context!(d3d11::Linker::link => ID3D11Linker::Link);
         let entry_name  = entry_name .try_into().map_err(|e| MethodErrorBlob::new("ID3D11Linker::Link", e))?;
         let target_name = target_name.try_into().map_err(|e| MethodErrorBlob::new("ID3D11Linker::Link", e))?;
         let entry_name  = entry_name .as_cstr();
@@ -164,13 +166,10 @@ impl Linker {
     /// *   [examples::d3dcompiler_03_link]
     //#allow_missing_argument_docs
     pub fn use_library(&self, library_mi: &ModuleInstance) -> Result<(), MethodError> {
+        fn_context!(d3d11::Linker::use_library => ID3D11Linker::UseLibrary);
         let hr = unsafe { self.0.UseLibrary(library_mi.as_raw()) };
-        MethodError::check("ID3D11Linker::UseLibrary", hr)
+        fn_check_hr!(hr)
     }
 }
 
 //#cpp2rust ID3D11Linker                            = d3d11::Linker
-
-//#cpp2rust ID3D11Linker::AddClipPlaneFromCBuffer   = d3d11::Linker::add_clip_plane_from_cbuffer
-//#cpp2rust ID3D11Linker::Link                      = d3d11::Linker::link
-//#cpp2rust ID3D11Linker::UseLibrary                = d3d11::Linker::use_library

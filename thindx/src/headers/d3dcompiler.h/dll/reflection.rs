@@ -49,7 +49,7 @@ impl Compiler {
     /// ### Remarks
     /// *   This was introduced by d3dcompiler_40.dll, and is unavailable in earlier versions.
     pub fn reflect<I: Raw>(&self, src_data: &Bytecode) -> Result<I, MethodError> where I::Raw : Interface {
-        let f = self.D3DReflect.ok_or(MethodError("D3DReflect", THINERR::MISSING_DLL_EXPORT))?;
+        fn_context_dll!(d3d::Compiler::reflect => self.D3DReflect);
         let src_data = src_data.as_bytes();
 
         // SAFETY: ❌ needs fuzz testing against ~4GB `data` to attempt to induce alloc overflow bugs
@@ -59,8 +59,8 @@ impl Compiler {
         //  * `uuid`        ✔️ is a simple GUID input
         //  * `reflector`   ✔️ is a simple out-param
         let mut reflector = null_mut();
-        let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), &I::Raw::uuidof(), &mut reflector) };
-        MethodError::check("D3DReflect", hr)?;
+        let hr = unsafe { D3DReflect(src_data.as_ptr().cast(), src_data.len(), &I::Raw::uuidof(), &mut reflector) };
+        fn_check_hr!(hr)?;
 
         // SAFETY: ✔️ `reflector` should be null (from_raw panics) or a valid non-dangling I::Raw (from_raw takes ownership)
         Ok(unsafe { I::from_raw(reflector.cast()) })
@@ -101,6 +101,7 @@ impl Compiler {
     /// ### Remarks
     /// *   This was introduced by d3dcompiler_40.dll, and is unavailable in earlier versions.
     pub fn reflect11(&self, src_data: &Bytecode) -> Result<d3d11::ShaderReflection, MethodError> {
+        fn_context_dll!(d3d::Compiler::reflect11 => self.D3DReflect);
         self.reflect(src_data)
     }
 
@@ -146,7 +147,7 @@ impl Compiler {
     /// *   [d3d11::LibraryReflection] for a more complete example
     // #[requires(d3dcompiler=47)] // ?
     pub fn reflect_library<I: Raw>(&self, src_data: &Bytecode) -> Result<I, MethodError> where I::Raw : Interface {
-        let f = self.D3DReflectLibrary.ok_or(MethodError("D3DReflectLibrary", THINERR::MISSING_DLL_EXPORT))?;
+        fn_context_dll!(d3d::Compiler::reflect_library => self.D3DReflectLibrary);
         let src_data = src_data.as_bytes();
 
         // SAFETY: ❌ needs fuzz testing against ~4GB `data` to attempt to induce alloc overflow bugs
@@ -156,8 +157,8 @@ impl Compiler {
         //  * `uuid`        ✔️ is a simple GUID input
         //  * `reflector`   ✔️ is a simple out-param
         let mut reflector = null_mut();
-        let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), &I::Raw::uuidof(), &mut reflector) };
-        MethodError::check("D3DReflectLibrary", hr)?;
+        let hr = unsafe { D3DReflectLibrary(src_data.as_ptr().cast(), src_data.len(), &I::Raw::uuidof(), &mut reflector) };
+        fn_check_hr!(hr)?;
 
         // SAFETY: ✔️ `reflector` should be null (from_raw panics) or a valid non-dangling I::Raw (from_raw takes ownership)
         Ok(unsafe { I::from_raw(reflector.cast()) })
@@ -200,6 +201,7 @@ impl Compiler {
     /// *   [d3d11::LibraryReflection] for a more complete example
     // #[requires(d3dcompiler=47)] // ?
     pub fn reflect_library_11(&self, src_data: &Bytecode) -> Result<d3d11::LibraryReflection, MethodError> {
+        fn_context_dll!(d3d::Compiler::reflect_library_11 => self.D3DReflectLibrary);
         self.reflect_library(src_data)
     }
 }
@@ -266,7 +268,3 @@ impl Compiler {
 
     // TODO: full test coverage of all methods
 }
-
-//#cpp2rust D3DReflect                              = d3d::Compiler::reflect
-//#cpp2rust D3DReflect                              = d3d::Compiler::reflect11
-//#cpp2rust D3DReflectLibrary                       = d3d::Compiler::reflect_library

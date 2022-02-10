@@ -85,9 +85,10 @@ pub trait IDirect3DIndexBuffer9Ext : AsSafe<IDirect3DIndexBuffer9> {
     /// assert_eq!(desc.size,   6);
     /// ```
     fn get_desc(&self) -> Result<IndexBufferDesc, MethodError> {
+        fn_context!(d3d9::IDirect3DIndexBuffer9Ext::get_desc => IDirect3DIndexBuffer9::GetDesc);
         let mut desc = IndexBufferDesc::zeroed();
         let hr = unsafe { self.as_winapi().GetDesc(&mut *desc) };
-        MethodError::check("IDirect3DIndexBuffer9::GetDesc", hr)?;
+        fn_check_hr!(hr)?;
         Ok(desc)
     }
 
@@ -120,9 +121,10 @@ pub trait IDirect3DIndexBuffer9Ext : AsSafe<IDirect3DIndexBuffer9> {
     /// tri.unlock().unwrap();
     /// ```
     unsafe fn lock_unchecked(&self, offset: u32, size: u32, flags: impl Into<Lock>) -> Result<*mut c_void, MethodError> {
+        fn_context!(d3d9::IDirect3DIndexBuffer9Ext::lock_unchecked => IDirect3DIndexBuffer9::Lock);
         let mut data = null_mut();
         let hr = unsafe { self.as_winapi().Lock(offset, size, &mut data, flags.into().into()) };
-        MethodError::check("IDirect3DIndexBuffer9::Lock", hr)?;
+        fn_check_hr!(hr)?;
         Ok(data)
     }
 
@@ -142,8 +144,9 @@ pub trait IDirect3DIndexBuffer9Ext : AsSafe<IDirect3DIndexBuffer9> {
     /// tri.unlock().unwrap(); // may succeed, even if the buffer wasn't locked <_<;;
     /// ```
     fn unlock(&self) -> Result<(), MethodError> {
+        fn_context!(d3d9::IDirect3DIndexBuffer9Ext::unlock => IDirect3DIndexBuffer9::Unlock);
         let hr = unsafe { self.as_winapi().Unlock() };
-        MethodError::check("IDirect3DIndexBuffer9::Unlock", hr)
+        fn_check_hr!(hr)
     }
 }
 
@@ -188,9 +191,10 @@ pub trait IDirect3DVertexBuffer9Ext : AsSafe<IDirect3DVertexBuffer9> {
     /// assert_eq!(desc.fvf,    FVF::XYZ);
     /// ```
     fn get_desc(&self) -> Result<VertexBufferDesc, MethodError> {
+        fn_context!(d3d9::IDirect3DVertexBuffer9Ext::get_desc => IDirect3DVertexBuffer9::GetDesc);
         let mut desc = VertexBufferDesc::zeroed();
         let hr = unsafe { self.as_winapi().GetDesc(&mut *desc) };
-        MethodError::check("IDirect3DVertexBuffer9::GetDesc", hr)?;
+        fn_check_hr!(hr)?;
         Ok(desc)
     }
 
@@ -227,9 +231,10 @@ pub trait IDirect3DVertexBuffer9Ext : AsSafe<IDirect3DVertexBuffer9> {
     /// tri.unlock().unwrap();
     /// ```
     unsafe fn lock_unchecked(&self, offset: u32, size: u32, flags: impl Into<Lock>) -> Result<*mut c_void, MethodError> {
+        fn_context!(d3d9::IDirect3DVertexBuffer9Ext::lock_unchecked => IDirect3DVertexBuffer9::Lock);
         let mut data = null_mut();
         let hr = unsafe { self.as_winapi().Lock(offset, size, &mut data, flags.into().into()) };
-        MethodError::check("IDirect3DVertexBuffer9::Lock", hr)?;
+        fn_check_hr!(hr)?;
         Ok(data)
     }
 
@@ -249,8 +254,9 @@ pub trait IDirect3DVertexBuffer9Ext : AsSafe<IDirect3DVertexBuffer9> {
     /// tri.unlock().unwrap(); // may succeed, even if the buffer wasn't locked <_<;;
     /// ```
     fn unlock(&self) -> Result<(), MethodError> {
+        fn_context!(d3d9::IDirect3DVertexBuffer9Ext::unlock => IDirect3DVertexBuffer9::Unlock);
         let hr = unsafe { self.as_winapi().Unlock() };
-        MethodError::check("IDirect3DVertexBuffer9::Unlock", hr)
+        fn_check_hr!(hr)
     }
 }
 
@@ -365,11 +371,3 @@ impl<T: AsSafe<IDirect3DVertexBuffer9>> IDirect3DVertexBuffer9Ext for T {}
 
 //#cpp2rust IDirect3DVertexBuffer9                  = d3d9::VertexBuffer
 //#cpp2rust IDirect3DVertexBuffer9                  = d3d9::IDirect3DVertexBuffer9Ext
-
-//#cpp2rust IDirect3DIndexBuffer9::GetDesc          = d3d9::IDirect3DIndexBuffer9Ext::get_desc
-//#cpp2rust IDirect3DIndexBuffer9::Lock             = d3d9::IDirect3DIndexBuffer9Ext::lock_unchecked
-//#cpp2rust IDirect3DIndexBuffer9::Unlock           = d3d9::IDirect3DIndexBuffer9Ext::unlock
-
-//#cpp2rust IDirect3DVertexBuffer9::GetDesc         = d3d9::IDirect3DVertexBuffer9Ext::get_desc
-//#cpp2rust IDirect3DVertexBuffer9::Lock            = d3d9::IDirect3DVertexBuffer9Ext::lock_unchecked
-//#cpp2rust IDirect3DVertexBuffer9::Unlock          = d3d9::IDirect3DVertexBuffer9Ext::unlock

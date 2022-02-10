@@ -26,12 +26,12 @@ unsafe impl AsSafe<IDirect3DResource9   > for Resource { fn as_safe(&self) -> &I
 
 impl Resource {
     /// Check if `self` is compatible with `device`, returning an `Err(...)` if it isn't.
-    pub fn check_compatible_with(&self, device: &impl IDirect3DDevice9Ext, method: &'static str) -> Result<(), MethodError> {
-        let my_device = self.get_device()?;
+    pub(crate) fn check_compatible_with(&self, device: &impl IDirect3DDevice9Ext) -> Result<(), ErrorKind> {
+        let my_device = self.get_device().map_err(|e| e.kind())?;
         if my_device.as_raw() == device.as_winapi() as *const _ as *mut _ {
             Ok(())
         } else {
-            Err(MethodError(method, THINERR::DEVICE_MISMATCH))
+            Err(THINERR::DEVICE_MISMATCH)
         }
     }
 }
@@ -92,8 +92,9 @@ pub trait IDirect3DResource9Ext : AsSafe<IDirect3DResource9> {
     /// r.free_private_data(&wkpdid::D3DDebugObjectName).unwrap();
     /// ```
     fn free_private_data(&self, guid: &impl AsRef<Guid>) -> Result<(), MethodError> {
+        fn_context!(d3d9::IDirect3DResource9Ext::free_private_data => IDirect3DResource9::FreePrivateData);
         let hr = unsafe { self.as_winapi().FreePrivateData(guid.as_ref().as_ref()) };
-        MethodError::check("IDirect3DResource9::FreePrivateData", hr)
+        fn_check_hr!(hr)
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-getdevice)\]
@@ -116,9 +117,10 @@ pub trait IDirect3DResource9Ext : AsSafe<IDirect3DResource9> {
     /// assert_eq!(dev.as_ptr(), dev2.as_ptr());
     /// ```
     fn get_device(&self) -> Result<Device, MethodError> {
+        fn_context!(d3d9::IDirect3DResource9Ext::get_device => IDirect3DResource9::GetDevice);
         let mut device = null_mut();
         let hr = unsafe { self.as_winapi().GetDevice(&mut device) };
-        MethodError::check("IDirect3DResource9::GetDevice", hr)?;
+        fn_check_hr!(hr)?;
         Ok(unsafe { Device::from_raw(device) })
     }
 
@@ -143,6 +145,7 @@ pub trait IDirect3DResource9Ext : AsSafe<IDirect3DResource9> {
     /// assert_eq!(42, r.get_priority());
     /// ```
     fn get_priority(&self) -> u32 {
+        fn_context!(d3d9::IDirect3DResource9Ext::get_priority => IDirect3DResource9::GetPriority);
         unsafe { self.as_winapi().GetPriority() }
     }
 
@@ -174,9 +177,10 @@ pub trait IDirect3DResource9Ext : AsSafe<IDirect3DResource9> {
     /// assert_eq!(D3DERR::MOREDATA, r.get_private_data_inplace(&wkpdid::D3DDebugObjectName, &mut buf[..]));
     /// ```
     fn get_private_data_inplace<'s>(&self, guid: &impl AsRef<Guid>, data: &'s mut [u8]) -> Result<&'s [u8], MethodError> {
-        let mut n : u32 = data.len().try_into().map_err(|_| MethodError("Resource::get_private_data_inplace", THINERR::SLICE_OVERFLOW))?;
+        fn_context!(d3d9::IDirect3DResource9Ext::get_private_data_inplace => IDirect3DResource9::GetPrivateData);
+        let mut n : u32 = data.len().try_into().map_err(|_| fn_param_error!(data, THINERR::SLICE_OVERFLOW))?;
         let hr = unsafe { self.as_winapi().GetPrivateData(guid.as_ref().as_ref(), data.as_mut_ptr().cast(), &mut n) };
-        MethodError::check("IDirect3DResource9::GetPrivateData", hr)?;
+        fn_check_hr!(hr)?;
         Ok(&data[..(n as usize)])
     }
 
@@ -192,6 +196,7 @@ pub trait IDirect3DResource9Ext : AsSafe<IDirect3DResource9> {
     /// assert_eq!(r.get_type(), ResourceType::IndexBuffer);
     /// ```
     fn get_type(&self) -> ResourceType {
+        fn_context!(d3d9::IDirect3DResource9Ext::get_type => IDirect3DResource9::GetType);
         ResourceType::from_unchecked(unsafe { self.as_winapi().GetType() })
     }
 
@@ -209,6 +214,7 @@ pub trait IDirect3DResource9Ext : AsSafe<IDirect3DResource9> {
     /// r.preload();
     /// ```
     fn preload(&self) {
+        fn_context!(d3d9::IDirect3DResource9Ext::preload => IDirect3DResource9::PreLoad);
         unsafe { self.as_winapi().PreLoad() }
     }
 
@@ -231,8 +237,11 @@ pub trait IDirect3DResource9Ext : AsSafe<IDirect3DResource9> {
     /// assert_eq!(0, r.set_priority(!0));
     /// assert_eq!(!0, r.set_priority(0));
     /// ```
+    ///
+    /// ### See Also
+    /// *   <https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9-resource-priority>
     fn set_priority(&self, priority: u32) -> u32 {
-        // see also https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9-resource-priority
+        fn_context!(d3d9::IDirect3DResource9Ext::set_priority => IDirect3DResource9::SetPriority);
         unsafe { self.as_winapi().SetPriority(priority) }
     }
 
@@ -251,9 +260,10 @@ pub trait IDirect3DResource9Ext : AsSafe<IDirect3DResource9> {
     /// r.set_private_data(&wkpdid::D3DDebugObjectName, b"triangle index buffer").unwrap();
     /// ```
     fn set_private_data(&self, guid: &impl AsRef<Guid>, data: &[u8]) -> Result<(), MethodError> {
-        let n : u32 = data.len().try_into().map_err(|_| MethodError("Resource::set_private_data", THINERR::SLICE_OVERFLOW))?;
+        fn_context!(d3d9::IDirect3DResource9Ext::set_private_data => IDirect3DResource9::SetPrivateData);
+        let n : u32 = data.len().try_into().map_err(|_| fn_param_error!(data, THINERR::SLICE_OVERFLOW))?;
         let hr = unsafe { self.as_winapi().SetPrivateData(guid.as_ref().as_ref(), data.as_ptr().cast(), n, 0) };
-        MethodError::check("IDirect3DResource9::SetPrivateData", hr)
+        fn_check_hr!(hr)
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-setprivatedata)\]
@@ -268,6 +278,7 @@ pub trait IDirect3DResource9Ext : AsSafe<IDirect3DResource9> {
     /// r.set_object_name("triangle index buffer").unwrap();
     /// ```
     fn set_object_name(&self, name: &str) -> Result<(), MethodError> {
+        fn_context!(d3d9::IDirect3DResource9Ext::set_object_name => IDirect3DResource9::SetPrivateData);
         self.set_object_name_a(name.as_bytes())
     }
 
@@ -283,6 +294,7 @@ pub trait IDirect3DResource9Ext : AsSafe<IDirect3DResource9> {
     /// r.set_object_name_a(b"triangle index buffer").unwrap();
     /// ```
     fn set_object_name_a(&self, name: &[u8]) -> Result<(), MethodError> {
+        fn_context!(d3d9::IDirect3DResource9Ext::set_object_name_a => IDirect3DResource9::SetPrivateData);
         self.set_private_data(&wkpdid::D3DDebugObjectName, name)
     }
 
@@ -298,6 +310,7 @@ pub trait IDirect3DResource9Ext : AsSafe<IDirect3DResource9> {
     /// r.set_object_name_w(abistr::cstr16!("triangle index buffer").to_units()).unwrap();
     /// ```
     fn set_object_name_w(&self, name: &[u16]) -> Result<(), MethodError> {
+        fn_context!(d3d9::IDirect3DResource9Ext::set_object_name_w => IDirect3DResource9::SetPrivateData);
         self.set_private_data(&wkpdid::D3DDebugObjectNameW, bytemuck::cast_slice(name))
     }
 
@@ -317,18 +330,7 @@ impl<T: AsSafe<IDirect3DResource9>> IDirect3DResource9Ext for T {}
 //#cpp2rust IDirect3DResource9                      = d3d9::Resource
 //#cpp2rust IDirect3DResource9                      = d3d9::IDirect3DResource9Ext
 
-//#cpp2rust IDirect3DResource9::FreePrivateData     = d3d9::IDirect3DResource9Ext::free_private_data
-//#cpp2rust IDirect3DResource9::GetDevice           = d3d9::IDirect3DResource9Ext::get_device
-//#cpp2rust IDirect3DResource9::GetPriority         = d3d9::IDirect3DResource9Ext::get_priority
-//#cpp2rust IDirect3DResource9::GetPrivateData      = d3d9::IDirect3DResource9Ext::get_private_data_inplace
 //TODO:     IDirect3DResource9::GetPrivateData      = d3d9::IDirect3DResource9Ext::get_private_data_com
-//#cpp2rust IDirect3DResource9::GetType             = d3d9::IDirect3DResource9Ext::get_type
-//#cpp2rust IDirect3DResource9::PreLoad             = d3d9::IDirect3DResource9Ext::preload
-//#cpp2rust IDirect3DResource9::SetPriority         = d3d9::IDirect3DResource9Ext::set_priority
-//#cpp2rust IDirect3DResource9::SetPrivateData      = d3d9::IDirect3DResource9Ext::set_private_data
-//#cpp2rust IDirect3DResource9::SetPrivateData      = d3d9::IDirect3DResource9Ext::set_object_name
-//#cpp2rust IDirect3DResource9::SetPrivateData      = d3d9::IDirect3DResource9Ext::set_object_name_a
-//#cpp2rust IDirect3DResource9::SetPrivateData      = d3d9::IDirect3DResource9Ext::set_object_name_w
 //TODO:     IDirect3DResource9::SetPrivateData      = d3d9::IDirect3DResource9Ext::set_private_data_com
 
 //#cpp2rust D3D_SET_OBJECT_NAME_A                   = d3d9::IDirect3DResource9Ext::set_object_name

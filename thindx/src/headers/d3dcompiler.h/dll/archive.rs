@@ -50,8 +50,8 @@ impl Compiler {
         flags:                  impl Into<CompressShader>,
     ) -> Result<BytesBlob, MethodError> {
         // Early outs
-        let f           = self.D3DCompressShaders.ok_or(MethodError("D3DCompressShaders", THINERR::MISSING_DLL_EXPORT))?;
-        let num_shaders = shaders.len().try_into().map_err(|_| MethodError::new("D3DCompressShaders", THINERR::MISSING_DLL_EXPORT))?;
+        fn_context_dll!(d3d::Compiler::compress_shaders => self.D3DCompressShaders);
+        let num_shaders = shaders.len().try_into().map_err(|_| fn_param_error!(shaders, THINERR::MISSING_DLL_EXPORT))?;
 
         // SAFETY: ⚠️ This sketchy mut cast *should* be sane (famous last words.)
         // We're only casting away the immutability of the D3D_SHADER_DATA elements, not the bytecode those elements point to.
@@ -70,8 +70,8 @@ impl Compiler {
         //  * `flags`           ⚠️ could be invalid
         //  * `compressed_data` ✔️ is a trivial out-param
         let mut compressed_data = null_mut();
-        let hr = unsafe { f(num_shaders, shader_data, flags, &mut compressed_data) };
-        MethodError::check("D3DCompressShaders", hr)?;
+        let hr = unsafe { D3DCompressShaders(num_shaders, shader_data, flags, &mut compressed_data) };
+        fn_check_hr!(hr)?;
 
         // SAFETY: ✔️
         //  * `compressed_data` ✔️ is either null (from_raw panics) or a valid, owned, non-dangling ID3DBlob (ownership transfers)
@@ -119,7 +119,7 @@ impl Compiler {
     /// *   You can use this API to develop your Windows Store apps, but you can't use it in apps that you submit to the Windows Store.
     /// *   This was introduced by d3dcompiler_43.dll, and is unavailable in earlier versions.
     pub fn decompress_shaders_count(&self, src_data: &[u8]) -> Result<u32, MethodError> {
-        let f = self.D3DDecompressShaders.ok_or(MethodError("D3DDecompressShaders", THINERR::MISSING_DLL_EXPORT))?;
+        fn_context_dll!(d3d::Compiler::decompress_shaders_count => self.D3DDecompressShaders);
         let mut shader = null_mut(); // D3DDecompressShaders will fail with E_FAIL if ppShaders is null, even if it doesn't use it
         let mut total_shaders = 0;
 
@@ -129,9 +129,9 @@ impl Compiler {
         //  * `src_data`        ❌ could contain corrupt decompression data
         //  * `shader`          ✔️ is unused except for a null ptr check
         //  * `total_shaders`   ⚠️ could be truncated at the 4 GB mark
-        let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), 0, 0, null_mut(), 0, &mut shader, &mut total_shaders) };
+        let hr = unsafe { D3DDecompressShaders(src_data.as_ptr().cast(), src_data.len(), 0, 0, null_mut(), 0, &mut shader, &mut total_shaders) };
         debug_assert!(shader.is_null(), "BUG: shader shouldn't have been touched!?!?");
-        MethodError::check("D3DDecompressShaders", hr)?;
+        fn_check_hr!(hr)?;
         Ok(total_shaders)
     }
 
@@ -184,8 +184,8 @@ impl Compiler {
         start_index:            u32,
         out_shaders:            &'s mut [Option<ReadOnlyBlob>],
     ) -> Result<&'s [Option<ReadOnlyBlob>], MethodError> {
-        let f = self.D3DDecompressShaders.ok_or(MethodError("D3DDecompressShaders", THINERR::MISSING_DLL_EXPORT))?;
-        let n : u32 = out_shaders.len().try_into().map_err(|_| MethodError::new("D3DDecompressShaders", THINERR::SLICE_TOO_LARGE))?;
+        fn_context_dll!(d3d::Compiler::decompress_shaders_inplace => self.D3DDecompressShaders);
+        let n : u32 = out_shaders.len().try_into().map_err(|_| fn_param_error!(out_shaders, THINERR::SLICE_TOO_LARGE))?;
         let _ = flags;
 
         for shader in out_shaders.iter_mut() { *shader = None; } // D3DCompressShaders will overwrite
@@ -201,8 +201,8 @@ impl Compiler {
         //  * `out_shaders`     ✔️ should be ABI compatible thanks to the #[repr(transparent)] conversion chain: Option<ReadOnlyBlob> -> Option<mcom::Rc<ID3DBlob>> -> Option<NonNull<ID3DBlob>> -> `*mut ID3DBlob`
         //  * `out_shaders`     ✔️ should not leak (explicitly `None`ed out earlier)
         //  * `out_shaders`     ✔️ should contain sufficient elements to avoid overflow (`n` inferred from `.len`)
-        let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), n, start_index, null_mut(), 0, out_shaders.as_mut_ptr().cast(), &mut total_shaders) };
-        MethodError::check("D3DDecompressShaders", hr)?;
+        let hr = unsafe { D3DDecompressShaders(src_data.as_ptr().cast(), src_data.len(), n, start_index, null_mut(), 0, out_shaders.as_mut_ptr().cast(), &mut total_shaders) };
+        fn_check_hr!(hr)?;
         let read = n.min(total_shaders) as usize;
         Ok(&out_shaders[..read])
     }
@@ -247,6 +247,7 @@ impl Compiler {
         flags:                  impl Into<Option<std::convert::Infallible>>,
         _range:                 std::ops::RangeFull,
     ) -> Result<Vec<Option<ReadOnlyBlob>>, MethodError> {
+        fn_context!(d3d::Compiler::decompress_shaders => D3DDecompressShaders);
         let n = self.decompress_shaders_count(src_data)? as usize;
         let mut v = Vec::new();
         v.resize_with(n, || None);
@@ -259,8 +260,3 @@ impl Compiler {
     // TODO: D3DDecompressShaders accepting array of indicies ?
     // TODO: D3DDecompressShaders eliding Option s?
 }
-
-//#cpp2rust D3DCompressShaders                      = d3d::Compiler::compress_shaders
-//#cpp2rust D3DDecompressShaders                    = d3d::Compiler::decompress_shaders
-//#cpp2rust D3DDecompressShaders                    = d3d::Compiler::decompress_shaders_count
-//#cpp2rust D3DDecompressShaders                    = d3d::Compiler::decompress_shaders_inplace

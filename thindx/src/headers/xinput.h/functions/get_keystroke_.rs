@@ -17,6 +17,7 @@ use winapi::um::xinput::*;
 /// *   [ERROR::BAD_ARGUMENTS]          - Invalid [`User`]
 /// *   [ERROR::DEVICE_NOT_CONNECTED]   - Disconnected [`User`]
 pub fn get_keystroke(user_index: impl Into<u32>, _reserved: ()) -> Result<Option<Keystroke>, MethodError> {
+    fn_context!(xinput::get_keystroke => XInputGetKeystroke);
     let mut keystroke = Keystroke::zeroed();
     // SAFETY: ✔️
     //  * fuzzed        in `tests/fuzz-xinput.rs`
@@ -24,7 +25,7 @@ pub fn get_keystroke(user_index: impl Into<u32>, _reserved: ()) -> Result<Option
     //  * `user_index`  is well tested
     let code = unsafe { XInputGetKeystroke(user_index.into(), 0, keystroke.as_mut()) };
     if code == ERROR_EMPTY { return Ok(None) }
-    check_error_success("XInputGetKeystroke", code)?;
+    check_success!(code)?;
     Ok(Some(keystroke))
 }
 
@@ -42,5 +43,3 @@ pub fn get_keystroke(user_index: impl Into<u32>, _reserved: ()) -> Result<Option
         assert_eq!(ERROR::BAD_ARGUMENTS, get_keystroke(u, ()));
     }
 }
-
-//#cpp2rust XInputGetKeystroke  = xinput::get_keystroke

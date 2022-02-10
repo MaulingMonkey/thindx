@@ -18,15 +18,13 @@ pub struct MethodError(pub(crate) &'static str, pub(crate) ErrorKind);
 
 impl MethodError {
     /// Returns an `Err(MethodError(...))` if `!SUCCEEDED(hr)`
-    pub fn check(method: &'static str, hr: HRESULT) -> Result<(), Self> {
+    pub(crate) fn check(method: &'static str, hr: HRESULT) -> Result<(), Self> {
         if SUCCEEDED(hr) {
             Ok(())
         } else {
             Err(MethodError(method, ErrorKind(hr)))
         }
     }
-
-    pub(crate) fn new(method: &'static str, kind: impl Into<ErrorKind>) -> Self { Self(method, kind.into()) }
 
     pub(crate) fn method(&self) -> &'static str { self.0 }
 

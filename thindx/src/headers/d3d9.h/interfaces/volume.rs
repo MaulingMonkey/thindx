@@ -75,8 +75,9 @@ pub trait IDirect3DVolume9Ext : AsSafe<IDirect3DVolume9> {
     /// v.free_private_data(&wkpdid::D3DDebugObjectName).unwrap();
     /// ```
     fn free_private_data(&self, guid: &impl AsRef<Guid>) -> Result<(), MethodError> {
+        fn_context!(d3d9::IDirect3DVolume9Ext::free_private_data => IDirect3DVolume9::FreePrivateData);
         let hr = unsafe { self.as_winapi().FreePrivateData(guid.as_ref().as_ref()) };
-        MethodError::check("IDirect3DVolume9::FreePrivateData", hr)
+        fn_check_hr!(hr)
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-getcontainer)\]
@@ -103,9 +104,10 @@ pub trait IDirect3DVolume9Ext : AsSafe<IDirect3DVolume9> {
     /// assert_eq!(t.as_ptr(), t2.as_ptr());
     /// ```
     fn get_container<C: Raw>(&self) -> Result<C, MethodError> where C::Raw : Interface {
+        fn_context!(d3d9::IDirect3DVolume9Ext::get_container => IDirect3DVolume9::GetContainer);
         let mut container = null_mut();
         let hr = unsafe { self.as_winapi().GetContainer(&C::Raw::uuidof(), &mut container) };
-        MethodError::check("IDirect3DVolume9::GetContainer", hr)?;
+        fn_check_hr!(hr)?;
         Ok(unsafe { C::from_raw(container.cast()) })
     }
 
@@ -139,9 +141,10 @@ pub trait IDirect3DVolume9Ext : AsSafe<IDirect3DVolume9> {
     /// }
     /// ```
     fn get_desc(&self) -> Result<VolumeDesc, MethodError> {
+        fn_context!(d3d9::IDirect3DVolume9Ext::get_desc => IDirect3DVolume9::GetDesc);
         let mut desc = VolumeDesc::zeroed();
         let hr = unsafe { self.as_winapi().GetDesc(&mut *desc) };
-        MethodError::check("IDirect3DVolume9::GetDesc", hr)?;
+        fn_check_hr!(hr)?;
         Ok(desc)
     }
 
@@ -166,9 +169,10 @@ pub trait IDirect3DVolume9Ext : AsSafe<IDirect3DVolume9> {
     /// assert_eq!(dev.as_ptr(), dev2.as_ptr());
     /// ```
     fn get_device(&self) -> Result<Device, MethodError> {
+        fn_context!(d3d9::IDirect3DVolume9Ext::get_device => IDirect3DVolume9::GetDevice);
         let mut device = null_mut();
         let hr = unsafe { self.as_winapi().GetDevice(&mut device) };
-        MethodError::check("IDirect3DVolume9::GetDevice", hr)?;
+        fn_check_hr!(hr)?;
         Ok(unsafe { Device::from_raw(device) })
     }
 
@@ -201,9 +205,10 @@ pub trait IDirect3DVolume9Ext : AsSafe<IDirect3DVolume9> {
     /// assert_eq!(D3DERR::MOREDATA, v.get_private_data_inplace(&wkpdid::D3DDebugObjectName, &mut buf[..]));
     /// ```
     fn get_private_data_inplace<'s>(&self, guid: &impl AsRef<Guid>, data: &'s mut [u8]) -> Result<&'s [u8], MethodError> {
-        let mut n : u32 = data.len().try_into().map_err(|_| MethodError("Resource::get_private_data_inplace", THINERR::SLICE_OVERFLOW))?;
+        fn_context!(d3d9::IDirect3DVolume9Ext::get_private_data_inplace => IDirect3DVolume9::GetPrivateData);
+        let mut n : u32 = data.len().try_into().map_err(|_| fn_param_error!(data, THINERR::SLICE_OVERFLOW))?;
         let hr = unsafe { self.as_winapi().GetPrivateData(guid.as_ref().as_ref(), data.as_mut_ptr().cast(), &mut n) };
-        MethodError::check("IDirect3DVolume9::GetPrivateData", hr)?;
+        fn_check_hr!(hr)?;
         Ok(&data[..(n as usize)])
     }
 
@@ -223,9 +228,10 @@ pub trait IDirect3DVolume9Ext : AsSafe<IDirect3DVolume9> {
     /// v.set_private_data(&wkpdid::D3DDebugObjectName, b"my volume").unwrap();
     /// ```
     fn set_private_data(&self, guid: &impl AsRef<Guid>, data: &[u8]) -> Result<(), MethodError> {
-        let n : u32 = data.len().try_into().map_err(|_| MethodError("Resource::set_private_data", THINERR::SLICE_OVERFLOW))?;
+        fn_context!(d3d9::IDirect3DVolume9Ext::set_private_data => IDirect3DVolume9::SetPrivateData);
+        let n : u32 = data.len().try_into().map_err(|_| fn_param_error!(data, THINERR::SLICE_OVERFLOW))?;
         let hr = unsafe { self.as_winapi().SetPrivateData(guid.as_ref().as_ref(), data.as_ptr().cast(), n, 0) };
-        MethodError::check("IDirect3DVolume9::SetPrivateData", hr)
+        fn_check_hr!(hr)
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-setprivatedata)\]
@@ -241,6 +247,7 @@ pub trait IDirect3DVolume9Ext : AsSafe<IDirect3DVolume9> {
     /// v.set_object_name("my volume").unwrap();
     /// ```
     fn set_object_name(&self, name: &str) -> Result<(), MethodError> {
+        fn_context!(d3d9::IDirect3DVolume9Ext::set_object_name => IDirect3DVolume9::SetPrivateData);
         self.set_object_name_a(name.as_bytes())
     }
 
@@ -257,6 +264,7 @@ pub trait IDirect3DVolume9Ext : AsSafe<IDirect3DVolume9> {
     /// v.set_object_name_a(b"my volume").unwrap();
     /// ```
     fn set_object_name_a(&self, name: &[u8]) -> Result<(), MethodError> {
+        fn_context!(d3d9::IDirect3DVolume9Ext::set_object_name_a => IDirect3DVolume9::SetPrivateData);
         self.set_private_data(&wkpdid::D3DDebugObjectName, name)
     }
 
@@ -273,6 +281,7 @@ pub trait IDirect3DVolume9Ext : AsSafe<IDirect3DVolume9> {
     /// v.set_object_name_w(abistr::cstr16!("my volume").to_units()).unwrap();
     /// ```
     fn set_object_name_w(&self, name: &[u16]) -> Result<(), MethodError> {
+        fn_context!(d3d9::IDirect3DVolume9Ext::set_object_name_w => IDirect3DVolume9::SetPrivateData);
         self.set_private_data(&wkpdid::D3DDebugObjectNameW, bytemuck::cast_slice(name))
     }
 
@@ -302,11 +311,12 @@ pub trait IDirect3DVolume9Ext : AsSafe<IDirect3DVolume9> {
     /// v.unlock_box().unwrap();
     /// ```
     unsafe fn lock_box_unchecked(&self, box_: impl IntoBoxOrFull, flags: impl Into<Lock>) -> Result<LockedBox, MethodError> {
+        fn_context!(d3d9::IDirect3DVolume9Ext::lock_box_unchecked => IDirect3DVolume9::LockBox);
         let mut locked = LockedBox::zeroed();
         let box_ = box_.into_box();
         let box_ = box_.as_ref().map_or(null(), |b| &**b);
         let hr = unsafe { self.as_winapi().LockBox(locked.as_mut(), box_, flags.into().into()) };
-        MethodError::check("IDirect3DVolume9::LockBox", hr)?;
+        fn_check_hr!(hr)?;
         Ok(locked)
     }
 
@@ -331,8 +341,9 @@ pub trait IDirect3DVolume9Ext : AsSafe<IDirect3DVolume9> {
     /// # assert_eq!(D3DERR::INVALIDCALL, v.unlock_box(), "was already unlocked");
     /// ```
     fn unlock_box(&self) -> Result<(), MethodError> {
+        fn_context!(d3d9::IDirect3DVolume9Ext::unlock_box => IDirect3DVolume9::UnlockBox);
         let hr = unsafe { self.as_winapi().UnlockBox() };
-        MethodError::check("IDirect3DVolume9::UnlockBox", hr)
+        fn_check_hr!(hr)
     }
 }
 
@@ -347,19 +358,8 @@ impl<T: AsSafe<IDirect3DVolume9>> IDirect3DVolume9Ext for T {}
 //#cpp2rust IDirect3DVolume9                        = d3d9::Volume
 //#cpp2rust IDirect3DVolume9                        = d3d9::IDirect3DVolume9Ext
 
-//#cpp2rust IDirect3DVolume9::FreePrivateData       = d3d9::IDirect3DVolume9Ext::free_private_data
-//#cpp2rust IDirect3DVolume9::GetContainer          = d3d9::IDirect3DVolume9Ext::get_container
-//#cpp2rust IDirect3DVolume9::GetDesc               = d3d9::IDirect3DVolume9Ext::get_desc
-//#cpp2rust IDirect3DVolume9::GetDevice             = d3d9::IDirect3DVolume9Ext::get_device
-//#cpp2rust IDirect3DVolume9::GetPrivateData        = d3d9::IDirect3DVolume9Ext::get_private_data_inplace
 //TODO:     IDirect3DVolume9::GetPrivateData        = d3d9::IDirect3DVolume9Ext::get_private_data_com
-//#cpp2rust IDirect3DVolume9::LockBox               = d3d9::IDirect3DVolume9Ext::lock_box_unchecked
-//#cpp2rust IDirect3DVolume9::SetPrivateData        = d3d9::IDirect3DVolume9Ext::set_private_data
-//#cpp2rust IDirect3DVolume9::SetPrivateData        = d3d9::IDirect3DVolume9Ext::set_object_name
-//#cpp2rust IDirect3DVolume9::SetPrivateData        = d3d9::IDirect3DVolume9Ext::set_object_name_a
-//#cpp2rust IDirect3DVolume9::SetPrivateData        = d3d9::IDirect3DVolume9Ext::set_object_name_w
 //TODO:     IDirect3DVolume9::SetPrivateData        = d3d9::IDirect3DVolume9Ext::set_private_data_com
-//#cpp2rust IDirect3DVolume9::UnlockBox             = d3d9::IDirect3DVolume9Ext::unlock_box
 
 //#cpp2rust D3D_SET_OBJECT_NAME_A                   = d3d9::IDirect3DVolume9Ext::set_object_name
 //#cpp2rust D3D_SET_OBJECT_NAME_N_A                 = d3d9::IDirect3DVolume9Ext::set_object_name

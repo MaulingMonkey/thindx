@@ -66,9 +66,10 @@ pub trait IDirect3DSurface9Ext : AsSafe<IDirect3DSurface9> {
     /// assert_eq!(E::NOINTERFACE, surface.get_container::<Device>().err());
     /// ```
     fn get_container<C: Raw>(&self) -> Result<C, MethodError> where C::Raw : Interface {
+        fn_context!(d3d9::IDirect3DSurface9Ext::get_container => IDirect3DSurface9::GetContainer);
         let mut container = null_mut();
         let hr = unsafe { self.as_winapi().GetContainer(&C::Raw::uuidof(), &mut container) };
-        MethodError::check("IDirect3DVolume9::GetContainer", hr)?;
+        fn_check_hr!(hr)?;
         Ok(unsafe { C::from_raw(container.cast()) })
     }
 
@@ -92,9 +93,10 @@ pub trait IDirect3DSurface9Ext : AsSafe<IDirect3DSurface9> {
     /// assert_eq!(D3DERR::INVALIDCALL, surface.get_dc().err(), "HDC already acquired");
     /// ```
     fn get_dc(&self) -> Result<HDC, MethodError> {
+        fn_context!(d3d9::IDirect3DSurface9Ext::get_dc => IDirect3DSurface9::GetDC);
         let mut hdc = null_mut();
         let hr = unsafe { self.as_winapi().GetDC(&mut hdc) };
-        MethodError::check("IDirect3DSurface9::GetDC", hr)?;
+        fn_check_hr!(hr)?;
         Ok(hdc)
     }
 
@@ -118,9 +120,10 @@ pub trait IDirect3DSurface9Ext : AsSafe<IDirect3DSurface9> {
     /// // ...
     /// ```
     fn get_desc(&self) -> Result<SurfaceDesc, MethodError> {
+        fn_context!(d3d9::IDirect3DSurface9Ext::get_desc => IDirect3DSurface9::GetDesc);
         let mut desc = SurfaceDesc::zeroed();
         let hr = unsafe { self.as_winapi().GetDesc(&mut *desc) };
-        MethodError::check("IDirect3DSurface9::GetDesc", hr)?;
+        fn_check_hr!(hr)?;
         Ok(desc)
     }
 
@@ -155,11 +158,12 @@ pub trait IDirect3DSurface9Ext : AsSafe<IDirect3DSurface9> {
     /// }
     /// ```
     unsafe fn lock_rect_unchecked(&self, rect: impl IntoRectOrFull, flags: impl Into<Lock>) -> Result<LockedRect, MethodError> {
+        fn_context!(d3d9::IDirect3DSurface9Ext::lock_rect_unchecked => IDirect3DSurface9::LockRect);
         let rect = rect.into_rect();
         let rect = rect.as_ref().map_or(null(), |b| &**b);
         let mut locked = LockedRect::zeroed();
         let hr = unsafe { self.as_winapi().LockRect(locked.as_mut(), rect.cast(), flags.into().into()) };
-        MethodError::check("IDirect3DSurface9::LockRect", hr)?;
+        fn_check_hr!(hr)?;
         Ok(locked)
     }
 
@@ -188,8 +192,9 @@ pub trait IDirect3DSurface9Ext : AsSafe<IDirect3DSurface9> {
     /// surface.release_dc(dc).unwrap();
     /// ```
     fn release_dc(&self, hdc: HDC) -> Result<(), MethodError> {
+        fn_context!(d3d9::IDirect3DSurface9Ext::release_dc => IDirect3DSurface9::ReleaseDC);
         let hr = unsafe { self.as_winapi().ReleaseDC(hdc) };
-        MethodError::check("IDirect3DSurface9::ReleaseDC", hr)
+        fn_check_hr!(hr)
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3dsurface9-unlockrect)\]
@@ -218,8 +223,9 @@ pub trait IDirect3DSurface9Ext : AsSafe<IDirect3DSurface9> {
     /// }
     /// ```
     fn unlock_rect(&self) -> Result<(), MethodError> {
+        fn_context!(d3d9::IDirect3DSurface9Ext::unlock_rect => IDirect3DSurface9::UnlockRect);
         let hr = unsafe { self.as_winapi().UnlockRect() };
-        MethodError::check("IDirect3DSurface9::UnlockRect", hr)
+        fn_check_hr!(hr)
     }
 }
 
@@ -396,10 +402,3 @@ impl<T: AsSafe<IDirect3DSurface9>> IDirect3DSurface9Ext for T {}
 
 //#cpp2rust IDirect3DSurface9                       = d3d9::Surface
 //#cpp2rust IDirect3DSurface9                       = d3d9::IDirect3DSurface9Ext
-
-//#cpp2rust IDirect3DSurface9::GetContainer         = d3d9::IDirect3DSurface9Ext::get_container
-//#cpp2rust IDirect3DSurface9::GetDC                = d3d9::IDirect3DSurface9Ext::get_dc
-//#cpp2rust IDirect3DSurface9::GetDesc              = d3d9::IDirect3DSurface9Ext::get_desc
-//#cpp2rust IDirect3DSurface9::LockRect             = d3d9::IDirect3DSurface9Ext::lock_rect_unchecked
-//#cpp2rust IDirect3DSurface9::ReleaseDC            = d3d9::IDirect3DSurface9Ext::release_dc
-//#cpp2rust IDirect3DSurface9::UnlockRect           = d3d9::IDirect3DSurface9Ext::unlock_rect

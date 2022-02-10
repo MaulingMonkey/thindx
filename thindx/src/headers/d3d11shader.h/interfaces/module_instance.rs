@@ -14,14 +14,17 @@ pub struct ModuleInstance(pub(crate) mcom::Rc<winapi::um::d3d11shader::ID3D11Mod
 
 convert!(unsafe ModuleInstance => Unknown, winapi::um::d3d11shader::ID3D11ModuleInstance);
 
-fn check(method: &'static str, hr: HRESULT) -> Result<bool, MethodError> {
+macro_rules! check { ( $hr:expr ) => {{
+    let hr = $hr;
     if hr == S_FALSE {
         Ok(false)
     } else {
-        MethodError::check(method, hr)?;
+        fn_check_hr!(hr)?;
         Ok(true)
     }
-}
+}}}
+
+// TODO: traitify
 
 impl ModuleInstance {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindconstantbuffer)\]
@@ -49,8 +52,9 @@ impl ModuleInstance {
     /// // TODO
     /// ```
     pub fn bind_constant_buffer(&self, src_slot: u32, dst_slot: u32, dst_offset: u32) -> Result<bool, MethodError> {
+        fn_context!(d3d11::ModuleInstance::bind_constant_buffer => ID3D11ModuleInstance::BindConstantBuffer);
         let hr = unsafe { self.0.BindConstantBuffer(src_slot, dst_slot, dst_offset) };
-        check("ID3D11ModuleInstance::BindConstantBuffer", hr)
+        check!(hr)
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindconstantbufferbyname)\]
@@ -78,9 +82,10 @@ impl ModuleInstance {
     /// // TODO
     /// ```
     pub fn bind_constant_buffer_by_name(&self, name: impl TryIntoAsCStr, dst_slot: u32, dst_offset: u32) -> Result<bool, MethodError> {
-        let name = name.try_into().map_err(|e| MethodError::new("ID3D11ModuleInstance::BindConstantBufferByName", e))?;
+        fn_context!(d3d11::ModuleInstance::bind_constant_buffer_by_name => ID3D11ModuleInstance::BindConstantBufferByName);
+        let name = name.try_into().map_err(|e| fn_param_error!(name, e.into()))?;
         let hr = unsafe { self.0.BindConstantBufferByName(name.as_cstr(), dst_slot, dst_offset) };
-        check("ID3D11ModuleInstance::BindConstantBufferByName", hr)
+        check!(hr)
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindresource)\]
@@ -108,8 +113,9 @@ impl ModuleInstance {
     /// // TODO
     /// ```
     pub fn bind_resource(&self, src_slot: u32, dst_slot: u32, count: u32) -> Result<bool, MethodError> {
+        fn_context!(d3d11::ModuleInstance::bind_resource => ID3D11ModuleInstance::BindResource);
         let hr = unsafe { self.0.BindResource(src_slot, dst_slot, count) };
-        check("ID3D11ModuleInstance::BindResource", hr)
+        check!(hr)
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindresourceasunorderedaccessview)\]
@@ -137,8 +143,9 @@ impl ModuleInstance {
     /// // TODO
     /// ```
     pub fn bind_resource_as_unordered_access_view(&self, src_srv_slot: u32, dst_uav_slot: u32, count: u32) -> Result<bool, MethodError> {
+        fn_context!(d3d11::ModuleInstance::bind_resource_as_unordered_access_view => ID3D11ModuleInstance::BindResourceAsUnorderedAccessView);
         let hr = unsafe { self.0.BindResourceAsUnorderedAccessView(src_srv_slot, dst_uav_slot, count) };
-        check("ID3D11ModuleInstance::BindResourceAsUnorderedAccessView", hr)
+        check!(hr)
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindresourceasunorderedaccessviewbyname)\]
@@ -166,9 +173,10 @@ impl ModuleInstance {
     /// // TODO
     /// ```
     pub fn bind_resource_as_unordered_access_view_by_name(&self, srv_name: impl TryIntoAsCStr, dst_uav_slot: u32, count: u32) -> Result<bool, MethodError> {
-        let srv_name = srv_name.try_into().map_err(|e| MethodError::new("ID3D11ModuleInstance::BindResourceAsUnorderedAccessViewByName", e))?;
+        fn_context!(d3d11::ModuleInstance::bind_resource_as_unordered_access_view_by_name => ID3D11ModuleInstance::BindResourceAsUnorderedAccessViewByName);
+        let srv_name = srv_name.try_into().map_err(|e| fn_param_error!(srv_name, e.into()))?;
         let hr = unsafe { self.0.BindResourceAsUnorderedAccessViewByName(srv_name.as_cstr(), dst_uav_slot, count) };
-        check("ID3D11ModuleInstance::BindResourceAsUnorderedAccessViewByName", hr)
+        check!(hr)
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindresourcebyname)\]
@@ -196,9 +204,10 @@ impl ModuleInstance {
     /// // TODO
     /// ```
     pub fn bind_resource_by_name(&self, name: impl TryIntoAsCStr, dst_slot: u32, count: u32) -> Result<bool, MethodError> {
-        let name = name.try_into().map_err(|e| MethodError::new("ID3D11ModuleInstance::BindResourceByName", e))?;
+        fn_context!(d3d11::ModuleInstance::bind_resource_by_name => ID3D11ModuleInstance::BindResourceByName);
+        let name = name.try_into().map_err(|e| fn_param_error!(name, e.into()))?;
         let hr = unsafe { self.0.BindResourceByName(name.as_cstr(), dst_slot, count) };
-        check("ID3D11ModuleInstance::BindResourceByName", hr)
+        check!(hr)
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindsampler)\]
@@ -226,8 +235,9 @@ impl ModuleInstance {
     /// // TODO
     /// ```
     pub fn bind_sampler(&self, src_slot: u32, dst_slot: u32, count: u32) -> Result<bool, MethodError> {
+        fn_context!(d3d11::ModuleInstance::bind_sampler => ID3D11ModuleInstance::BindSampler);
         let hr = unsafe { self.0.BindSampler(src_slot, dst_slot, count) };
-        check("ID3D11ModuleInstance::BindSampler", hr)
+        check!(hr)
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindsamplerbyname)\]
@@ -255,9 +265,10 @@ impl ModuleInstance {
     /// // TODO
     /// ```
     pub fn bind_sampler_by_name(&self, name: impl TryIntoAsCStr, dst_slot: u32, count: u32) -> Result<bool, MethodError> {
-        let name = name.try_into().map_err(|e| MethodError::new("ID3D11ModuleInstance::BindSamplerByName", e))?;
+        fn_context!(d3d11::ModuleInstance::bind_sampler_by_name => ID3D11ModuleInstance::BindSamplerByName);
+        let name = name.try_into().map_err(|e| fn_param_error!(name, e.into()))?;
         let hr = unsafe { self.0.BindSamplerByName(name.as_cstr(), dst_slot, count) };
-        check("ID3D11ModuleInstance::BindSamplerByName", hr)
+        check!(hr)
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindunorderedaccessview)\]
@@ -285,8 +296,9 @@ impl ModuleInstance {
     /// // TODO
     /// ```
     pub fn bind_unordered_access_view(&self, src_slot: u32, dst_slot: u32, count: u32) -> Result<bool, MethodError> {
+        fn_context!(d3d11::ModuleInstance::bind_unordered_access_view => ID3D11ModuleInstance::BindUnorderedAccessView);
         let hr = unsafe { self.0.BindUnorderedAccessView(src_slot, dst_slot, count) };
-        check("ID3D11ModuleInstance::BindUnorderedAccessView", hr)
+        check!(hr)
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindunorderedaccessviewbyname)\]
@@ -314,21 +326,11 @@ impl ModuleInstance {
     /// // TODO
     /// ```
     pub fn bind_unordered_access_view_by_name(&self, name: impl TryIntoAsCStr, dst_slot: u32, count: u32) -> Result<bool, MethodError> {
-        let name = name.try_into().map_err(|e| MethodError::new("ID3D11ModuleInstance::BindUnorderedAccessViewByName", e))?;
+        fn_context!(d3d11::ModuleInstance::bind_unordered_access_view_by_name => ID3D11ModuleInstance::BindUnorderedAccessViewByName);
+        let name = name.try_into().map_err(|e| fn_param_error!(name, e.into()))?;
         let hr = unsafe { self.0.BindUnorderedAccessViewByName(name.as_cstr(), dst_slot, count) };
-        check("ID3D11ModuleInstance::BindUnorderedAccessViewByName", hr)
+        check!(hr)
     }
 }
 
 //#cpp2rust ID3D11ModuleInstance                                            = d3d11::ModuleInstance
-
-//#cpp2rust ID3D11ModuleInstance::BindConstantBuffer                        = d3d11::ModuleInstance::bind_constant_buffer
-//#cpp2rust ID3D11ModuleInstance::BindConstantBufferByName                  = d3d11::ModuleInstance::bind_constant_buffer_by_name
-//#cpp2rust ID3D11ModuleInstance::BindResource                              = d3d11::ModuleInstance::bind_resource
-//#cpp2rust ID3D11ModuleInstance::BindResourceAsUnorderedAccessView         = d3d11::ModuleInstance::bind_resource_as_unordered_access_view
-//#cpp2rust ID3D11ModuleInstance::BindResourceAsUnorderedAccessViewByName   = d3d11::ModuleInstance::bind_resource_as_unordered_access_view_by_name
-//#cpp2rust ID3D11ModuleInstance::BindResourceByName                        = d3d11::ModuleInstance::bind_resource_by_name
-//#cpp2rust ID3D11ModuleInstance::BindSampler                               = d3d11::ModuleInstance::bind_sampler
-//#cpp2rust ID3D11ModuleInstance::BindSamplerByName                         = d3d11::ModuleInstance::bind_sampler_by_name
-//#cpp2rust ID3D11ModuleInstance::BindUnorderedAccessView                   = d3d11::ModuleInstance::bind_unordered_access_view
-//#cpp2rust ID3D11ModuleInstance::BindUnorderedAccessViewByName             = d3d11::ModuleInstance::bind_unordered_access_view_by_name

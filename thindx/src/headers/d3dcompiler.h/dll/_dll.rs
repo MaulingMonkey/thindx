@@ -12,6 +12,18 @@ use winapi::um::d3d11shader::*;
 
 
 
+/// ### Usage
+/// ```no_compile
+/// fn_context_dll!(d3d::Compiler::compile => self.D3DCompile);
+/// ```
+macro_rules! fn_context_dll {
+    ( $thindx:path => $self:ident . $directx:ident ) => {
+        fn_context!($thindx => $directx);
+        #[allow(non_snake_case, unused_variables)]
+        let $directx = $self.$directx.ok_or(fn_error!(THINERR::MISSING_DLL_EXPORT))?;
+    };
+}
+
 mod constructors;                   pub use constructors::*;
 mod compile_;                       pub use compile_::*;
 mod archive;                        pub use archive::*;

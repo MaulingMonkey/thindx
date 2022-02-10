@@ -33,7 +33,8 @@ use std::os::windows::ffi::*;
 /// ### See Also
 /// *   [Getting Audio Device Identifiers](https://docs.microsoft.com/en-us/windows/win32/xinput/getting-started-with-xinput#getting-audio-device-identifiers)
 pub fn get_audio_device_ids(user_index: impl Into<u32>) -> Result<AudioDeviceIds, MethodError> {
-    #[allow(non_snake_case)] let XInputGetAudioDeviceIds = Imports::get().XInputGetAudioDeviceIds.ok_or(MethodError("XInputGetAudioDeviceIds", THINERR::MISSING_DLL_EXPORT))?;
+    fn_context!(xinput::get_audio_device_ids => XInputGetAudioDeviceIds);
+    #[allow(non_snake_case)] let XInputGetAudioDeviceIds = Imports::get().XInputGetAudioDeviceIds.ok_or(fn_error!(THINERR::MISSING_DLL_EXPORT))?;
 
     let mut render_id  = [0u16; 4096];
     let mut capture_id = [0u16; 4096];
@@ -47,9 +48,9 @@ pub fn get_audio_device_ids(user_index: impl Into<u32>) -> Result<AudioDeviceIds
     //  * `*_len`       are in/out, properly initialized.
     let code = unsafe { XInputGetAudioDeviceIds(user_index.into(), render_id.as_mut_ptr(), &mut render_len, capture_id.as_mut_ptr(), &mut capture_len) };
     // a dynamic alloc fallback might be appropriate...? what error is returned? experiment, as it's not documented? D3D's own docs show only 256 byte buffers, surely 16x that (4096) is enough?
-    check_error_success("XInputGetAudioDeviceIds", code)?;
-    let render_device_id    = OsString::from_wide(render_id .get(..render_len  as usize).ok_or(MethodError("XInputGetAudioDeviceIds (render_device_id conversion)",  THINERR::SLICE_TOO_LARGE))?.split(|c| *c==0).next().unwrap_or(&[]));
-    let capture_device_id   = OsString::from_wide(capture_id.get(..capture_len as usize).ok_or(MethodError("XInputGetAudioDeviceIds (capture_device_id conversion)", THINERR::SLICE_TOO_LARGE))?.split(|c| *c==0).next().unwrap_or(&[]));
+    check_success!(code)?;
+    let render_device_id    = OsString::from_wide(render_id .get(..render_len  as usize).ok_or(fn_param_error!(render_device_id,  THINERR::SLICE_TOO_LARGE))?.split(|c| *c==0).next().unwrap_or(&[]));
+    let capture_device_id   = OsString::from_wide(capture_id.get(..capture_len as usize).ok_or(fn_param_error!(capture_device_id, THINERR::SLICE_TOO_LARGE))?.split(|c| *c==0).next().unwrap_or(&[]));
     Ok(AudioDeviceIds {
         render_device_id:   if render_device_id .is_empty() { None } else { Some(render_device_id ) },
         capture_device_id:  if capture_device_id.is_empty() { None } else { Some(capture_device_id) },
@@ -71,5 +72,3 @@ pub fn get_audio_device_ids(user_index: impl Into<u32>) -> Result<AudioDeviceIds
         assert_eq!(ERROR::BAD_ARGUMENTS, get_audio_device_ids(u));
     }
 }
-
-//#cpp2rust XInputGetAudioDeviceIds     = xinput::get_audio_device_ids

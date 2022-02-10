@@ -117,12 +117,12 @@ impl<'r> FunctionParameterReflection<'r> {
     /// }
     /// ```
     pub fn get_desc(&self) -> Result<ParameterDesc<'r>, MethodError> {
+        fn_context!(d3d11::FunctionParameterReflection::get_desc => ID3D11FunctionParameterReflection::GetDesc);
         let mut desc = ParameterDesc::default();
         let hr = unsafe { self.ptr.as_ref().GetDesc(&mut desc as *mut _ as *mut _) };
-        MethodError::check("ID3D11FunctionParameterReflection::GetDesc", hr)?;
+        fn_check_hr!(hr)?;
         Ok(desc)
     }
 }
 
 //#cpp2rust ID3D11FunctionParameterReflection           = d3d11::FunctionParameterReflection
-//#cpp2rust ID3D11FunctionParameterReflection::GetDesc  = d3d11::FunctionParameterReflection::get_desc

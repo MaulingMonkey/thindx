@@ -20,6 +20,7 @@ pub extern crate abistr;
 
 
 #[macro_use] mod macros;
+#[macro_use] mod error_macros;
 
 /// C ABI interop types
 #[path="ctypes/_ctypes.rs"] pub mod ctypes;

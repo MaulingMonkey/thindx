@@ -369,6 +369,25 @@ fn collect_cpp2rust() -> BTreeMap<&'static str, Vec<&'static str>> {
                     } else {
                         error!(at: path, line: line_idx+1, code: "cpp2rust", "expected `//#cpp2rust cpp=rs` but missing `=`");
                     }
+                } else if let Some(rs_cpp) = line.trim().strip_prefix("fn_context!(").and_then(|l| l.strip_suffix(");")) {
+                    let rs_cpp = rs_cpp.trim();
+                    if let Some((rs, cpp)) = rs_cpp.split_once("=>") {
+                        let rs  = rs .trim_end();
+                        let cpp = cpp.trim_start();
+                        let rusts = r.entry(cpp).or_default();
+                        if !rusts.contains(&rs) { rusts.push(rs); } // O(NN) but N should always be tiny
+                    }
+                } else if let Some(rs_cpp) = line.trim().strip_prefix("fn_context_dll!(").and_then(|l| l.strip_suffix(");")) {
+                    let rs_cpp = rs_cpp.trim();
+                    if let Some((rs, cpp)) = rs_cpp.split_once("=>") {
+                        let rs  = rs .trim_end();
+                        let cpp = cpp.trim_start();
+                        let cpp = cpp.strip_prefix("self").and_then(|cpp| cpp.trim_start().strip_prefix(".")).unwrap_or(cpp);
+                        let rusts = r.entry(cpp).or_default();
+                        if !rusts.contains(&rs) { rusts.push(rs); } // O(NN) but N should always be tiny
+                    } else if !path.ends_with("error_macros.rs") {
+                        error!(at: path, line: line_idx+1, code: "cpp2rust", "expected `fn_context_dll!(rust => self.cpp);` but missing `=>`");
+                    }
                 } // else not a directive, ignore
             }
         } // else ignore

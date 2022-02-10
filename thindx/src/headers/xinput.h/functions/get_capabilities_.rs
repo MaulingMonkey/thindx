@@ -16,6 +16,7 @@ use winapi::um::xinput::*;
 /// *   [ERROR::DEVICE_NOT_CONNECTED]   - [`Flag::None`]
 /// *   [ERROR::DEVICE_NOT_CONNECTED]   - [`User`] in bounds, but without a gamepad
 pub fn get_capabilities(user_index: impl Into<u32>, flags: Flag) -> Result<Capabilities, MethodError> {
+    fn_context!(xinput::get_capabilities => XInputGetCapabilities);
     let mut caps = Capabilities::zeroed();
     // SAFETY: ✔️
     //  * fuzzed        in `tests/fuzz-xinput.rs`
@@ -23,7 +24,7 @@ pub fn get_capabilities(user_index: impl Into<u32>, flags: Flag) -> Result<Capab
     //  * `flags`       is decently tested (0, 1, 2 (OOB), 4, 8, 16, 32, 64, 128, 0xFFFFFFFF)
     //  * `caps`        is out-only, no cbSize field, fixed size, sane
     let code = unsafe { XInputGetCapabilities(user_index.into(), flags.into(), caps.as_mut()) };
-    check_error_success("XInputGetCapabilities", code)?;
+    check_success!(code)?;
     Ok(caps)
 }
 
@@ -50,5 +51,3 @@ pub fn get_capabilities(user_index: impl Into<u32>, flags: Flag) -> Result<Capab
         assert_eq!(ERROR::BAD_ARGUMENTS, get_capabilities(u, Flag::from_unchecked(!0))); // Bad Flag (obb)
     }
 }
-
-//#cpp2rust XInputGetCapabilities   = xinput::get_capabilities

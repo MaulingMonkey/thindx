@@ -2,6 +2,8 @@
 
 use crate::{MethodError, ErrorKind, errors::ERROR};
 
+macro_rules! check_success { ( $err:expr ) => { $crate::xinput::check_error_success(_THINDX_FN_CONTEXT, $err) } }
+
 mods! {
     inl mod dll {
         inl mod imports;
@@ -50,10 +52,10 @@ mods! {
 
 pub use flags::keystroke::Keystroke as KeystrokeFlags;
 
-pub(crate) fn check_error_success(method: &'static str, err: u32) -> Result<(), MethodError> {
+pub(crate) fn check_error_success(fn_context: &'static crate::error_macros::FnContext, err: u32) -> Result<(), MethodError> {
     if err == ERROR::SUCCESS.0 as _ {
         Ok(())
     } else {
-        Err(MethodError::new(method, ErrorKind(err as _)))
+        Err(MethodError(fn_context.directx_method.unwrap_or(fn_context.thindx_method), ErrorKind(err as _)))
     }
 }

@@ -28,14 +28,14 @@ impl Compiler {
     /// ### Remarks
     /// *   This was introduced by d3dcompiler_43.dll, and is unavailable in earlier versions.
     pub fn create_read_only_blob(&self, data: &[u8]) -> Result<ReadOnlyBlob, MethodError> {
-        let f = self.D3DCreateBlob.ok_or(MethodError("D3DCreateBlob", THINERR::MISSING_DLL_EXPORT))?;
+        fn_context_dll!(d3d::Compiler::create_read_only_blob => self.D3DCreateBlob);
 
         // SAFETY: ❌ needs fuzz testing against ~4GB `data` to attempt to induce alloc overflow bugs
         //  * `f`           should be valid/sound like all `self.*`
         //  * `blob`        is a trivial out param.
         let mut blob = null_mut();
-        let hr = unsafe { f(data.len(), &mut blob) };
-        MethodError::check("D3DCreateBlob", hr)?;
+        let hr = unsafe { D3DCreateBlob(data.len(), &mut blob) };
+        fn_check_hr!(hr)?;
 
         if !blob.is_null() {
             // SAFETY: ⚠️ see earlier safety comments about ~4GB overflow concerns
@@ -84,16 +84,16 @@ impl Compiler {
     /// ### Remarks
     /// *   This was introduced by d3dcompiler_44.dll, and is unavailable in earlier versions.
     pub fn read_file_to_blob(&self, file_name: impl AsRef<Path>) -> Result<ReadOnlyBlob, MethodError> {
-        let f = self.D3DReadFileToBlob.ok_or(MethodError("D3DReadFileToBlob", THINERR::MISSING_DLL_EXPORT))?;
-        let file_name = file_name.to_wcstr("D3DReadFileToBlob")?;
+        fn_context_dll!(d3d::Compiler::read_file_to_blob => self.D3DReadFileToBlob);
+        let file_name = file_name.to_wcstr().map_err(|e| fn_param_error!(file_name, e))?;
 
         // SAFETY: ❌ needs fuzz testing against ~4GB files to attempt to induce alloc overflow bugs
         //  * `f`           should be valid/sound like all `self.*`
         //  * `file_name`   is `\0` terminated per `to_wcstr`.
         //  * `blob`        is a trivial out param.
         let mut blob = null_mut();
-        let hr = unsafe { f(file_name.as_ptr(), &mut blob) };
-        MethodError::check("D3DReadFileToBlob", hr)?;
+        let hr = unsafe { D3DReadFileToBlob(file_name.as_ptr(), &mut blob) };
+        fn_check_hr!(hr)?;
 
         // SAFETY: ✔️
         //  * `blob`            should be null (panics) or non-dangling, and should be a valid ID3DBlob
@@ -145,15 +145,15 @@ impl Compiler {
         file_name:  impl AsRef<Path>,
         overwrite:  bool,
     ) -> Result<(), MethodError> {
-        let f = self.D3DWriteBlobToFile.ok_or(MethodError("D3DWriteBlobToFile", THINERR::MISSING_DLL_EXPORT))?;
-        let file_name = file_name.to_wcstr("D3DWriteBlobToFile")?;
+        fn_context_dll!(d3d::Compiler::write_blob_to_file => self.D3DWriteBlobToFile);
+        let file_name = file_name.to_wcstr().map_err(|e| fn_param_error!(file_name, e))?;
 
         // SAFETY: ✔️
         //  * `f`           should be valid/sound like all `self.*`
         //  * `file_name`   is `\0` terminated per `to_wcstr`.
         //  * `overwrite`   is a trivial well tested bool.
-        let hr = unsafe { f(blob.as_raw(), file_name.as_ptr(), overwrite.into()) };
-        MethodError::check("D3DWriteBlobToFile", hr)
+        let hr = unsafe { D3DWriteBlobToFile(blob.as_raw(), file_name.as_ptr(), overwrite.into()) };
+        fn_check_hr!(hr)
     }
 }
 

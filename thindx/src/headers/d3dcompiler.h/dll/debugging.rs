@@ -126,10 +126,10 @@ impl Compiler {
         flags:              impl Into<Disasm>,
         comments:           impl TryIntoAsOptCStr,
     ) -> Result<TextBlob, MethodError> {
-        let f = self.D3DDisassemble.ok_or(MethodError("D3DDisassemble", THINERR::MISSING_DLL_EXPORT))?;
+        fn_context_dll!(d3d::Compiler::disassemble => self.D3DDisassemble);
         let src_data = src_data.as_bytes();
         let flags = flags.into().into();
-        let comments = comments.try_into().map_err(|e| MethodError::new("D3DDisassemble", e))?;
+        let comments = comments.try_into().map_err(|e| fn_param_error!(comments, e.into()))?;
         let comments = comments.as_opt_cstr();
         let mut disassembly = null_mut();
 
@@ -140,8 +140,8 @@ impl Compiler {
         //  * `flags`           ⚠️ could be invalid?
         //  * `comments`        ❌ could cause alloc for `disassembly` to overflow
         //  * `comments`        ✔️ should be a valid `\0` terminated C-string without interior `\0`s
-        let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), flags, comments, &mut disassembly) };
-        MethodError::check("D3DDisassemble", hr)?;
+        let hr = unsafe { D3DDisassemble(src_data.as_ptr().cast(), src_data.len(), flags, comments, &mut disassembly) };
+        fn_check_hr!(hr)?;
 
         // SAFETY: ✔️
         //  * `disassembly`     should be null (panics) or a non-dangling, valid ID3DBlob
@@ -223,10 +223,10 @@ impl Compiler {
         start_byte_offset:  usize,
         num_insts:          usize,
     ) -> Result<DisassembledRegion, MethodError> {
-        let f = self.D3DDisassembleRegion.ok_or(MethodError("D3DDisassembleRegion", THINERR::MISSING_DLL_EXPORT))?;
+        fn_context_dll!(d3d::Compiler::disassemble_region => self.D3DDisassembleRegion);
         let src_data = src_data.as_bytes();
         let flags = flags.into().into();
-        let comments = comments.try_into().map_err(|e| MethodError::new("D3DDisassembleRegion", e))?;
+        let comments = comments.try_into().map_err(|e| fn_param_error!(comments, e.into()))?;
         let comments = comments.as_opt_cstr();
         let mut disassembly = null_mut();
         let mut finish_byte_offset = 0;
@@ -242,8 +242,8 @@ impl Compiler {
         //  * `num_insts`           ❌ could be out-of-bounds
         //  * `finish_byte_offset`  ✔️ is a trivial out param
         //  * `disassembly`         ✔️ is a trivial out param
-        let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), flags, comments, start_byte_offset, num_insts, &mut finish_byte_offset, &mut disassembly) };
-        MethodError::check("D3DDisassembleRegion", hr)?;
+        let hr = unsafe { D3DDisassembleRegion(src_data.as_ptr().cast(), src_data.len(), flags, comments, start_byte_offset, num_insts, &mut finish_byte_offset, &mut disassembly) };
+        fn_check_hr!(hr)?;
         Ok(DisassembledRegion {
             // SAFETY: ✔️
             //  * `disassembly`     should be null (panics) or a non-dangling, valid ID3DBlob
@@ -285,7 +285,7 @@ impl Compiler {
         start_inst_index:   usize,
         num_insts:          usize,
     ) -> Result<usize, MethodError> {
-        let f = self.D3DGetTraceInstructionOffsets.ok_or(MethodError("D3DGetTraceInstructionOffsets", THINERR::MISSING_DLL_EXPORT))?;
+        fn_context_dll!(d3d::Compiler::get_trace_instruction_offsets_count => self.D3DGetTraceInstructionOffsets);
         let src_data = src_data.as_bytes();
         let mut n = 0;
 
@@ -297,8 +297,8 @@ impl Compiler {
         //  * `num_insts`           ❌ could be out-of-bounds
         //  * `pOffsets`            ✔️ null is valid (we're just getting the count)
         //  * `pTotalInsts`         ✔️ is a trivial out param
-        let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), flags.into().into(), start_inst_index, num_insts, null_mut(), &mut n) };
-        MethodError::check("D3DGetTraceInstructionOffsets", hr)?;
+        let hr = unsafe { D3DGetTraceInstructionOffsets(src_data.as_ptr().cast(), src_data.len(), flags.into().into(), start_inst_index, num_insts, null_mut(), &mut n) };
+        fn_check_hr!(hr)?;
         Ok(n)
     }
 
@@ -336,7 +336,7 @@ impl Compiler {
         start_inst_index:   usize,
         offsets:            &'o mut [usize],
     ) -> Result<&'o [usize], MethodError> {
-        let f = self.D3DGetTraceInstructionOffsets.ok_or(MethodError("D3DGetTraceInstructionOffsets", THINERR::MISSING_DLL_EXPORT))?;
+        fn_context_dll!(d3d::Compiler::get_trace_instruction_offsets_inplace => self.D3DGetTraceInstructionOffsets);
         let src_data = src_data.as_bytes();
         let mut n = 0;
 
@@ -348,8 +348,8 @@ impl Compiler {
         //  * `NumInsts`            ✔️ should be valid.  Even if `D3DGetTraceInstructionOffsets` truncates, offsets is initialized, so a short read should be harmless.
         //  * `pOffsets`            ✔️ is valid for offsets.len() elements.
         //  * `pTotalInsts`         ✔️ is a trivial out param
-        let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), flags.into().into(), start_inst_index, offsets.len(), offsets.as_mut_ptr(), &mut n) };
-        MethodError::check("D3DGetTraceInstructionOffsets", hr)?;
+        let hr = unsafe { D3DGetTraceInstructionOffsets(src_data.as_ptr().cast(), src_data.len(), flags.into().into(), start_inst_index, offsets.len(), offsets.as_mut_ptr(), &mut n) };
+        fn_check_hr!(hr)?;
         Ok(&offsets[..n])
     }
 
@@ -386,6 +386,7 @@ impl Compiler {
         start_inst_index:   usize,
         num_insts:          usize,
     ) -> Result<Vec<usize>, MethodError> {
+        fn_context!(d3d::Compiler::get_trace_instruction_offsets => D3DGetTraceInstructionOffsets);
         let flags = flags.into();
         let n = self.get_trace_instruction_offsets_count(src_data, flags, start_inst_index, num_insts)?;
         let mut buffer = vec![0usize; n];
@@ -396,8 +397,4 @@ impl Compiler {
     }
 }
 
-//#cpp2rust D3DDisassemble                          = d3d::Compiler::disassemble
 //TODO:     D3DDisassemble10Effect                  = d3d::Compiler::disassemble_10_effect
-//#cpp2rust D3DDisassembleRegion                    = d3d::Compiler::disassemble_region
-//#cpp2rust D3DGetTraceInstructionOffsets           = d3d::Compiler::get_trace_instruction_offsets
-//#cpp2rust D3DGetTraceInstructionOffsets           = d3d::Compiler::get_trace_instruction_offsets_inplace

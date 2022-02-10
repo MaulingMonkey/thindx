@@ -50,9 +50,10 @@ impl LibraryReflection {
     /// }
     /// ```
     pub fn get_desc(&self) -> Result<LibraryDesc, MethodError> {
+        fn_context!(d3d11::LibraryReflection::get_desc => ID3D11LibraryReflection::GetDesc);
         let mut desc = LibraryDesc::default();
         let hr = unsafe { self.0.GetDesc(desc.as_mut_ptr()) };
-        MethodError::check("ID3D11LibraryReflection::GetDesc", hr)?;
+        fn_check_hr!(hr)?;
         Ok(desc)
     }
 
@@ -101,6 +102,7 @@ impl LibraryReflection {
     /// ```
     //#allow_missing_argument_docs
     pub fn get_function_by_index(&self, function_index: u32) -> FunctionReflection {
+        fn_context!(d3d11::LibraryReflection::get_function_by_index => ID3D11LibraryReflection::GetFunctionByIndex);
         let ptr = unsafe { self.0.GetFunctionByIndex(function_index as i32) };
         unsafe { FunctionReflection::from_raw(self, ptr) }
     }
@@ -148,6 +150,7 @@ impl LibraryReflection {
     /// }
     /// ```
     pub fn functions(&self) -> Result<impl Iterator<Item = FunctionReflection> + '_, MethodError> {
+        fn_context!(d3d11::LibraryReflection::functions => ID3D11LibraryReflection::GetFunctionByIndex);
         Ok(LibraryReflectionFunctionsIter {
             desc:               self.get_desc()?,
             library_reflection: self,
@@ -176,6 +179,3 @@ impl<'lr> Iterator for LibraryReflectionFunctionsIter<'lr> {
 }
 
 //#cpp2rust ID3D11LibraryReflection                         = d3d11::LibraryReflection
-
-//#cpp2rust ID3D11LibraryReflection::GetDesc                = d3d11::LibraryReflection::get_desc
-//#cpp2rust ID3D11LibraryReflection::GetFunctionByIndex     = d3d11::LibraryReflection::get_function_by_index

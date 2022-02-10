@@ -60,15 +60,15 @@ impl Module {
     /// let _ : d3d11::ModuleInstance = module.create_instance(cstr!("namespace")).unwrap();
     /// ```
     pub fn create_instance(&self, namespace: impl TryIntoAsOptCStr) -> Result<ModuleInstance, MethodError> {
-        let namespace = namespace.try_into().map_err(|e| MethodError::new("ID3D11Module::CreateInstance", e))?;
+        fn_context!(d3d11::Module::create_instance => ID3D11Module::CreateInstance);
+        let namespace = namespace.try_into().map_err(|e| fn_param_error!(namespace, e.into()))?;
         let namespace = namespace.as_opt_cstr();
 
         let mut instance = null_mut();
         let hr = unsafe { self.0.CreateInstance(namespace, &mut instance) };
-        MethodError::check("ID3D11Module::CreateInstance", hr)?;
+        fn_check_hr!(hr)?;
         Ok(unsafe { ModuleInstance::from_raw(instance) })
     }
 }
 
 //#cpp2rust ID3D11Module                    = d3d11::Module
-//#cpp2rust ID3D11Module::CreateInstance    = d3d11::Module::create_instance

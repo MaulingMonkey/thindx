@@ -68,9 +68,10 @@ pub trait IDirect3D9ExExt : AsSafe<IDirect3D9Ex> {
     ///
     /// The `unsafe` of this fn is the token acknowledgement of those errors.
     unsafe fn create_ex(sdk_version: SdkVersion) -> Result<Self, MethodError> where Self : From<mcom::Rc<IDirect3D9Ex>> {
+        fn_context!(d3d9::IDirect3D9ExExt::create_ex => Direct3DCreate9Ex);
         let mut d3d9ex = null_mut();
         let hr = unsafe { Direct3DCreate9Ex(sdk_version.into(), &mut d3d9ex) };
-        MethodError::check("Direct3DCreate9Ex", hr)?;
+        fn_check_hr!(hr)?;
         Ok(Self::from(unsafe { mcom::Rc::from_raw(d3d9ex) }))
     }
 
@@ -84,6 +85,7 @@ pub trait IDirect3D9ExExt : AsSafe<IDirect3D9Ex> {
     ///      See [IDirect3D9Ext::create_device] for guidance and details.
     /// *   `fullscreen_display_modes` is assumed to contain an entry for every adapter if `behavior_flags & D3DCREATE_ADAPTERGROUP_DEVICE` (TODO: enforce this via checks?)
     unsafe fn create_device_ex(&self, adapter: u32, device_type: impl Into<DevType>, hwnd: HWND, behavior_flags: impl Into<Create>, presentation_parameters: &mut PresentParameters<'static>, fullscreen_display_modes: &mut [DisplayModeEx]) -> Result<DeviceEx, MethodError> {
+        fn_context!(d3d9::IDirect3D9ExExt::create_device_ex => IDirect3D9Ex::CreateDeviceEx);
         for fdm in fullscreen_display_modes.iter_mut() {
             fdm.size = std::mem::size_of_val(fdm).try_into().unwrap();
         }
@@ -92,7 +94,7 @@ pub trait IDirect3D9ExExt : AsSafe<IDirect3D9Ex> {
         let mut device = null_mut();
         let modes = if fullscreen_display_modes.is_empty() { null_mut() } else { fullscreen_display_modes.as_mut_ptr().cast() };
         let hr = unsafe { self.as_winapi().CreateDeviceEx(adapter, device_type.into().into(), hwnd, behavior_flags.into().into(), presentation_parameters.as_mut(), modes, &mut device) };
-        MethodError::check("IDirect3D9Ex::CreateDeviceEx", hr)?;
+        fn_check_hr!(hr)?;
         Ok(unsafe { DeviceEx::from_raw(device) })
     }
 
@@ -101,12 +103,13 @@ pub trait IDirect3D9ExExt : AsSafe<IDirect3D9Ex> {
     ///
     /// Enumerate actual display mode info based on the given mode index.
     fn enum_adapter_modes_ex(&self, adapter: u32, filter: impl Into<DisplayModeFilter>, mode: u32) -> Result<DisplayModeEx, MethodError> {
+        fn_context!(d3d9::IDirect3D9ExExt::enum_adapter_modes_ex => IDirect3D9Ex::EnumAdapterModesEx);
         let mut filter = filter.into();
         filter.size = std::mem::size_of_val(&filter).try_into().unwrap();
         let mut dmex = DisplayModeEx::zeroed();
         dmex.size = std::mem::size_of_val(&dmex).try_into().unwrap();
         let hr = unsafe { self.as_winapi().EnumAdapterModesEx(adapter, filter.as_ref(), mode, dmex.as_mut()) };
-        MethodError::check("IDirect3D9Ex::EnumAdapterModesEx", hr)?;
+        fn_check_hr!(hr)?;
         Ok(dmex)
     }
 
@@ -115,11 +118,12 @@ pub trait IDirect3D9ExExt : AsSafe<IDirect3D9Ex> {
     ///
     /// Retrieves the current display mode and rotation settings of the adapter.
     fn get_adapter_display_mode_ex(&self, adapter: u32) -> Result<(DisplayModeEx, DisplayRotation), MethodError> {
+        fn_context!(d3d9::IDirect3D9ExExt::get_adapter_display_mode_ex => IDirect3D9Ex::GetAdapterDisplayModeEx);
         let mut mode = DisplayModeEx::zeroed();
         mode.size = std::mem::size_of_val(&mode).try_into().unwrap();
         let mut rot = D3DDISPLAYROTATION_IDENTITY;
         let hr = unsafe { self.as_winapi().GetAdapterDisplayModeEx(adapter, mode.as_mut(), &mut rot) };
-        MethodError::check("IDirect3D9Ex::GetAdapterDisplayModeEx", hr)?;
+        fn_check_hr!(hr)?;
         Ok((mode, DisplayRotation::from_unchecked(rot)))
     }
 
@@ -129,9 +133,10 @@ pub trait IDirect3D9ExExt : AsSafe<IDirect3D9Ex> {
     /// This method returns a unique identifier for the adapter that is specific to the adapter hardware.
     /// Applications can use this identifier to define robust mappings across various APIs (Direct3D 9, DXGI).
     fn get_adapter_luid(&self, adapter: u32) -> Result<Luid, MethodError> {
+        fn_context!(d3d9::IDirect3D9ExExt::get_adapter_luid => IDirect3D9Ex::GetAdapterLUID);
         let mut luid = Luid::default();
         let hr = unsafe { self.as_winapi().GetAdapterLUID(adapter, &mut *luid) };
-        MethodError::check("IDirect3D9Ex::GetAdapterLUID", hr)?;
+        fn_check_hr!(hr)?;
         Ok(luid)
     }
 
@@ -140,6 +145,7 @@ pub trait IDirect3D9ExExt : AsSafe<IDirect3D9Ex> {
     ///
     /// Returns the number of display modes available.
     fn get_adapter_mode_count_ex(&self, adapter: u32, filter: impl Into<DisplayModeFilter>) -> u32 {
+        fn_context!(d3d9::IDirect3D9ExExt::get_adapter_mode_count_ex => IDirect3D9Ex::GetAdapterModeCountEx);
         let mut filter = filter.into();
         filter.size = std::mem::size_of_val(&filter).try_into().unwrap();
         unsafe { self.as_winapi().GetAdapterModeCountEx(adapter, filter.as_ref()) }
@@ -170,10 +176,3 @@ pub trait IDirect3D9ExExt : AsSafe<IDirect3D9Ex> {
 
 //#cpp2rust IDirect3D9Ex                            = d3d9::Direct3DEx
 //#cpp2rust IDirect3D9Ex                            = d3d9::IDirect3D9ExExt
-//#cpp2rust Direct3DCreate9Ex                       = d3d9::IDirect3D9ExExt::create_ex
-
-//#cpp2rust IDirect3D9Ex::CreateDeviceEx            = d3d9::IDirect3D9ExExt::create_device_ex
-//#cpp2rust IDirect3D9Ex::EnumAdapterModesEx        = d3d9::IDirect3D9ExExt::enum_adapter_modes_ex
-//#cpp2rust IDirect3D9Ex::GetAdapterDisplayModeEx   = d3d9::IDirect3D9ExExt::get_adapter_display_mode_ex
-//#cpp2rust IDirect3D9Ex::GetAdapterLUID            = d3d9::IDirect3D9ExExt::get_adapter_luid
-//#cpp2rust IDirect3D9Ex::GetAdapterModeCountEx     = d3d9::IDirect3D9ExExt::get_adapter_mode_count_ex

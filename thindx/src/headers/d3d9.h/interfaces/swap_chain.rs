@@ -4,6 +4,8 @@ use super::*;
 use crate::*;
 use crate::d3d9::*;
 
+use bytemuck::*;
+
 use winapi::shared::d3d9::*;
 use winapi::shared::minwindef::UINT;
 use winapi::um::unknwnbase::IUnknown;
@@ -58,11 +60,12 @@ pub trait IDirect3DSwapChain9Ext : AsSafe<IDirect3DSwapChain9> {
     ///
     /// Retrieves a back buffer from the swap chain of the device.
     fn get_back_buffer(&self, i_back_buffer: impl TryInto<UINT>, ty: impl Into<BackBufferType>) -> Result<Self::Surface, MethodError> {
-        let i_back_buffer = i_back_buffer.try_into().map_err(|_| MethodError("IDirect3DSwapChain9::GetBackBuffer", THINERR::SLICE_OVERFLOW))?;
+        fn_context!(d3d9::IDirect3DSwapChain9Ext::get_back_buffer => IDirect3DSwapChain9::GetBackBuffer);
+        let i_back_buffer = i_back_buffer.try_into().map_err(|_| fn_param_error!(i_back_buffer, THINERR::SLICE_OVERFLOW))?;
         let ty = ty.into().into();
         let mut back_buffer = null_mut();
         let hr = unsafe { self.as_winapi().GetBackBuffer(i_back_buffer, ty, &mut back_buffer) };
-        MethodError::check("IDirect3DSwapChain9::GetBackBuffer", hr)?;
+        fn_check_hr!(hr)?;
         Ok(Self::Surface::from(unsafe { Surface::from_raw(back_buffer) }))
     }
 
@@ -71,9 +74,10 @@ pub trait IDirect3DSwapChain9Ext : AsSafe<IDirect3DSwapChain9> {
     ///
     /// Retrieves the device associated with the swap chain.
     fn get_device(&self) -> Result<Self::Device, MethodError> {
+        fn_context!(d3d9::IDirect3DSwapChain9Ext::get_device => IDirect3DSwapChain9::GetDevice);
         let mut device = null_mut();
         let hr = unsafe { self.as_winapi().GetDevice(&mut device) };
-        MethodError::check("IDirect3DSwapChain9::GetDevice", hr)?;
+        fn_check_hr!(hr)?;
         Ok(Self::Device::from(unsafe { Device::from_raw(device) }))
     }
 
@@ -82,10 +86,11 @@ pub trait IDirect3DSwapChain9Ext : AsSafe<IDirect3DSwapChain9> {
     ///
     /// Retrieves the display mode's spatial resolution, color resolution, and refresh frequency.
     fn get_display_mode(&self) -> Result<DisplayMode, MethodError> {
-        let mut dm = unsafe { std::mem::zeroed() };
-        let hr = unsafe { self.as_winapi().GetDisplayMode(&mut dm) };
-        MethodError::check("IDirect3DSwapChain9::GetDisplayMode", hr)?;
-        Ok(DisplayMode::from(dm))
+        fn_context!(d3d9::IDirect3DSwapChain9Ext::get_display_mode => IDirect3DSwapChain9::GetDisplayMode);
+        let mut dm = DisplayMode::zeroed();
+        let hr = unsafe { self.as_winapi().GetDisplayMode(dm.as_mut()) };
+        fn_check_hr!(hr)?;
+        Ok(dm)
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getfrontbufferdata)\]
@@ -97,8 +102,9 @@ pub trait IDirect3DSwapChain9Ext : AsSafe<IDirect3DSwapChain9> {
     /// *   `dest_surface` may need to belong to the same [`Device`] as `self`
     /// *   `dest_surface` may need to be the size of the entire desktop if the [`Device`] is in windowed mode
     unsafe fn get_front_buffer_data(&self, dest_surface: &impl IDirect3DSurface9Ext) -> Result<(), MethodError> {
+        fn_context!(d3d9::IDirect3DSwapChain9Ext::get_front_buffer_data => IDirect3DSwapChain9::GetFrontBufferData);
         let hr = unsafe { self.as_winapi().GetFrontBufferData(dest_surface.as_winapi() as *const _ as *mut _) };
-        MethodError::check("IDirect3DSwapChain9::GetFrontBufferData", hr)
+        fn_check_hr!(hr)
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getpresentparameters)\]
@@ -106,10 +112,11 @@ pub trait IDirect3DSwapChain9Ext : AsSafe<IDirect3DSwapChain9> {
     ///
     /// Retrieves the presentation parameters associated with a swap chain.
     fn get_present_parameters(&self) -> Result<d3d::PresentParameters<'_>, MethodError> {
+        fn_context!(d3d9::IDirect3DSwapChain9Ext::get_present_parameters => IDirect3DSwapChain9::GetPresentParameters);
         let mut pp = d3d::PresentParameters::zeroed();
         let hr = unsafe { self.as_winapi().GetPresentParameters(pp.as_mut()) };
         debug_assert!(pp.device_window.as_ref().map_or(true, |w| w.is_valid()), "IDirect3DSwapChain9Ext::get_present_parameters: device_window isn't valid");
-        MethodError::check("IDirect3DSwapChain9::GetPresentParameters", hr)?;
+        fn_check_hr!(hr)?;
         Ok(pp)
     }
 
@@ -118,10 +125,11 @@ pub trait IDirect3DSwapChain9Ext : AsSafe<IDirect3DSwapChain9> {
     ///
     /// Returns information describing the raster of the monitor on which the swap chain is presented.
     fn get_raster_status(&self) -> Result<RasterStatus, MethodError> {
-        let mut rs = unsafe { std::mem::zeroed() };
-        let hr = unsafe { self.as_winapi().GetRasterStatus(&mut rs) };
-        MethodError::check("IDirect3DSwapChain9::GetRasterStatus", hr)?;
-        Ok(RasterStatus::from(rs))
+        fn_context!(d3d9::IDirect3DSwapChain9Ext::get_raster_status => IDirect3DSwapChain9::GetRasterStatus);
+        let mut rs = RasterStatus::zeroed();
+        let hr = unsafe { self.as_winapi().GetRasterStatus(rs.as_mut()) };
+        fn_check_hr!(hr)?;
+        Ok(rs)
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-present)\]
@@ -148,6 +156,7 @@ pub trait IDirect3DSwapChain9Ext : AsSafe<IDirect3DSwapChain9> {
     /// *   Ok(`()`)
     // TODO: ### Example
     fn present<'r>(&self, source_rect: impl IntoRectOrFull, dest_rect: impl IntoRectOrFull, dest_window_override: impl AsHWND, dirty_region: impl Into<Option<&'r RgnData>>, flags: impl Into<Present>) -> Result<(), MethodError> {
+        fn_context!(d3d9::IDirect3DSwapChain9Ext::present => IDirect3DSwapChain9::Present);
         let source_rect     = source_rect.into_rect();
         let dest_rect       = dest_rect.into_rect();
         let hwnd            = dest_window_override.as_hwnd();
@@ -159,17 +168,17 @@ pub trait IDirect3DSwapChain9Ext : AsSafe<IDirect3DSwapChain9> {
         let dirty_region    = match dirty_region {
             None => null::<RGNDATA>(),
             Some(dr) => {
-                if dr.rdh.dwSize as usize   != std::mem::size_of::<RGNDATAHEADER>() { return Err(MethodError("IDirect3DSwapChain9Ext::present", THINERR::INVALID_STRUCT_FIELD)); }
-                if dr.rdh.iType             != RDH_RECTANGLES                       { return Err(MethodError("IDirect3DSwapChain9Ext::present", THINERR::INVALID_STRUCT_FIELD)); }
-                if dr.rdh.nCount as usize   > dr.buffer.len()                       { return Err(MethodError("IDirect3DSwapChain9Ext::present", THINERR::INVALID_STRUCT_FIELD)); }
-                if dr.rdh.nRgnSize as usize > std::mem::size_of_val(dr)             { return Err(MethodError("IDirect3DSwapChain9Ext::present", THINERR::INVALID_STRUCT_FIELD)); }
+                if dr.rdh.dwSize as usize   != std::mem::size_of::<RGNDATAHEADER>() { return Err(fn_param_error!(dirty_region, THINERR::INVALID_STRUCT_FIELD)); }
+                if dr.rdh.iType             != RDH_RECTANGLES                       { return Err(fn_param_error!(dirty_region, THINERR::INVALID_STRUCT_FIELD)); }
+                if dr.rdh.nCount as usize   > dr.buffer.len()                       { return Err(fn_param_error!(dirty_region, THINERR::INVALID_STRUCT_FIELD)); }
+                if dr.rdh.nRgnSize as usize > std::mem::size_of_val(dr)             { return Err(fn_param_error!(dirty_region, THINERR::INVALID_STRUCT_FIELD)); }
                 let dr : *const RgnData = dr;
                 dr.cast()
             },
         };
 
         let hr = unsafe { self.as_winapi().Present(source_rect, dest_rect, hwnd, dirty_region, flags) };
-        MethodError::check("IDirect3DSwapChain9::Present", hr)
+        fn_check_hr!(hr)
     }
 }
 
@@ -180,11 +189,3 @@ impl IDirect3DSwapChain9Ext for super::SwapChain                { type Device = 
 
 //#cpp2rust IDirect3DSwapChain9                         = d3d9::SwapChain
 //#cpp2rust IDirect3DSwapChain9                         = d3d9::IDirect3DSwapChain9Ext
-
-//#cpp2rust IDirect3DSwapChain9::GetBackBuffer          = d3d9::IDirect3DSwapChain9Ext::get_back_buffer
-//#cpp2rust IDirect3DSwapChain9::GetDevice              = d3d9::IDirect3DSwapChain9Ext::get_device
-//#cpp2rust IDirect3DSwapChain9::GetDisplayMode         = d3d9::IDirect3DSwapChain9Ext::get_display_mode
-//#cpp2rust IDirect3DSwapChain9::GetFrontBufferData     = d3d9::IDirect3DSwapChain9Ext::get_front_buffer_data
-//#cpp2rust IDirect3DSwapChain9::GetPresentParameters   = d3d9::IDirect3DSwapChain9Ext::get_present_parameters
-//#cpp2rust IDirect3DSwapChain9::GetRasterStatus        = d3d9::IDirect3DSwapChain9Ext::get_raster_status
-//#cpp2rust IDirect3DSwapChain9::Present                = d3d9::IDirect3DSwapChain9Ext::present

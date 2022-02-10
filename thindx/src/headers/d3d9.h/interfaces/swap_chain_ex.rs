@@ -43,10 +43,11 @@ pub trait IDirect3DSwapChain9ExExt : AsSafe<IDirect3DSwapChain9Ex> {
     ///
     /// Retrieves the display mode's spatial resolution, color resolution, refresh frequency, and rotation settings.
     fn get_display_mode_ex(&self) -> Result<(DisplayModeEx, DisplayRotation), MethodError> {
+        fn_context!(d3d9::IDirect3DSwapChain9ExExt::get_display_mode_ex => IDirect3DSwapChain9Ex::GetDisplayModeEx);
         let mut mode = DisplayModeEx::default();
         let mut rot = 0;
         let hr = unsafe { self.as_winapi().GetDisplayModeEx(&mut *mode, &mut rot) };
-        MethodError::check("IDirect3DSwapChain9Ex::GetDisplayModeEx", hr)?;
+        fn_check_hr!(hr)?;
         Ok((mode, DisplayRotation::from_unchecked(rot)))
     }
 
@@ -55,9 +56,10 @@ pub trait IDirect3DSwapChain9ExExt : AsSafe<IDirect3DSwapChain9Ex> {
     ///
     /// Returns the number of times the swapchain has been processed.
     fn get_last_present_count(&self) -> Result<UINT, MethodError> {
+        fn_context!(d3d9::IDirect3DSwapChain9ExExt::get_last_present_count => IDirect3DSwapChain9Ex::GetLastPresentCount);
         let mut count = 0;
         let hr = unsafe { self.as_winapi().GetLastPresentCount(&mut count) };
-        MethodError::check("IDirect3DSwapChain9Ex::GetLastPresentCount", hr)?;
+        fn_check_hr!(hr)?;
         Ok(count)
     }
 
@@ -66,9 +68,15 @@ pub trait IDirect3DSwapChain9ExExt : AsSafe<IDirect3DSwapChain9Ex> {
     ///
     /// Gets presentation statistics so an application can identify frames that do not have a Present method call.
     fn get_present_statistics(&self) -> Result<PresentStats, MethodError> {
+        {
+            // some documentation uses "GetPresentStatistics", but some C++ headers/vtables use "GetPresentStats"
+            fn_context!(d3d9::IDirect3DSwapChain9ExExt::get_present_statistics => IDirect3DSwapChain9Ex::GetPresentStats);
+        }
+        fn_context!(d3d9::IDirect3DSwapChain9ExExt::get_present_statistics => IDirect3DSwapChain9Ex::GetPresentStatistics);
+
         let mut stats = PresentStats::default();
         let hr = unsafe { self.as_winapi().GetPresentStats(&mut *stats) };
-        MethodError::check("IDirect3DSwapChain9Ex::GetPresentStatistics", hr)?;
+        fn_check_hr!(hr)?;
         Ok(stats)
     }
 }
@@ -80,9 +88,3 @@ pub trait IDirect3DSwapChain9ExExt : AsSafe<IDirect3DSwapChain9Ex> {
 
 //#cpp2rust IDirect3DSwapChain9Ex                   = d3d9::SwapChainEx
 //#cpp2rust IDirect3DSwapChain9Ex                   = d3d9::IDirect3DSwapChain9ExExt
-
-//#cpp2rust IDirect3DSwapChain9Ex::GetDisplayModeEx             = d3d9::IDirect3DSwapChain9ExExt::get_display_mode_ex
-//#cpp2rust IDirect3DSwapChain9Ex::GetLastPresentCount          = d3d9::IDirect3DSwapChain9ExExt::get_last_present_count
-//TODO:     XXX: documentation uses "GetPresentStatistics", but some C++ headers/vtables use "GetPresentStats"
-//#cpp2rust IDirect3DSwapChain9Ex::GetPresentStatistics         = d3d9::IDirect3DSwapChain9ExExt::get_present_statistics
-//#cpp2rust IDirect3DSwapChain9Ex::GetPresentStats              = d3d9::IDirect3DSwapChain9ExExt::get_present_statistics

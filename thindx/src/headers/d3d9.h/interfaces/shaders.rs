@@ -73,9 +73,10 @@ pub trait IDirect3DPixelShader9Ext : AsSafe<IDirect3DPixelShader9> {
     /// *   [D3DERR::INVALIDCALL]   The device was pure?
     /// *   Ok([Device])
     fn get_device(&self) -> Result<Device, MethodError> {
+        fn_context!(d3d9::IDirect3DPixelShader9Ext::get_device => IDirect3DPixelShader9::GetDevice);
         let mut device = null_mut();
         let hr = unsafe { self.as_winapi().GetDevice(&mut device) };
-        MethodError::check("IDirect3DPixelShader9::GetDevice", hr)?;
+        fn_check_hr!(hr)?;
         Ok(unsafe { Device::from_raw(device) })
     }
 
@@ -88,9 +89,10 @@ pub trait IDirect3DPixelShader9Ext : AsSafe<IDirect3DPixelShader9> {
     /// *   [D3DERR::INVALIDCALL]   The device was pure?
     /// *   Ok(`size`)
     fn get_function_size(&self) -> Result<u32, MethodError> {
+        fn_context!(d3d9::IDirect3DPixelShader9Ext::get_function_size => IDirect3DPixelShader9::GetFunction);
         let mut size = 0;
         let hr = unsafe { self.as_winapi().GetFunction(null_mut(), &mut size) };
-        MethodError::check("IDirect3DPixelShader9::GetFunction", hr)?;
+        fn_check_hr!(hr)?;
         Ok(size)
     }
 
@@ -100,13 +102,15 @@ pub trait IDirect3DPixelShader9Ext : AsSafe<IDirect3DPixelShader9> {
     /// Gets the shader function data.
     ///
     /// ### Returns
+    /// *   [THINERR::SLICE_TOO_LARGE]  `data` exceeded 4GB
     /// *   [D3DERR::INVALIDCALL]   The device was pure?
     /// *   Ok(`&data[???]`)        Function data was read
     fn get_function_inplace<'d>(&self, data: &'d mut [u8]) -> Result<&'d [u8], MethodError> {
-        let mut size = data.len().try_into().map_err(|_| MethodError("PixelShader::get_function_inplace", D3DERR::INVALIDCALL))?;
+        fn_context!(d3d9::IDirect3DPixelShader9Ext::get_function_inplace => IDirect3DPixelShader9::GetFunction);
+        let mut size = data.len().try_into().map_err(|_| fn_param_error!(data, THINERR::SLICE_TOO_LARGE))?;
         // XXX: Do I need a get_function_size check in here too?
         let hr = unsafe { self.as_winapi().GetFunction(data.as_mut_ptr().cast(), &mut size) };
-        MethodError::check("IDirect3DPixelShader9::GetFunction", hr)?;
+        fn_check_hr!(hr)?;
         Ok(&data[0..(size as usize)])
     }
 
@@ -119,10 +123,11 @@ pub trait IDirect3DPixelShader9Ext : AsSafe<IDirect3DPixelShader9> {
     /// *   [D3DERR::INVALIDCALL]   The device was pure?
     /// *   Ok([Vec]&lt;[u8]&gt;)    Function data was read
     fn get_function(&self) -> Result<Vec<u8>, MethodError> {
+        fn_context!(d3d9::IDirect3DPixelShader9Ext::get_function => IDirect3DPixelShader9::GetFunction);
         let mut size = self.get_function_size()?;
         let mut data = vec![0u8; size as usize];
         let hr = unsafe { self.as_winapi().GetFunction(data.as_mut_ptr().cast(), &mut size) };
-        MethodError::check("IDirect3DPixelShader9::GetFunction", hr)?;
+        fn_check_hr!(hr)?;
         debug_assert_eq!(data.len(), size as usize);
         Ok(data)
     }
@@ -156,9 +161,10 @@ pub trait IDirect3DVertexShader9Ext : AsSafe<IDirect3DVertexShader9> {
     /// *   [D3DERR::INVALIDCALL]   The device was pure?
     /// *   Ok([Device])
     fn get_device(&self) -> Result<Device, MethodError> {
+        fn_context!(d3d9::IDirect3DVertexShader9Ext::get_device => IDirect3DVertexShader9::GetDevice);
         let mut device = null_mut();
         let hr = unsafe { self.as_winapi().GetDevice(&mut device) };
-        MethodError::check("IDirect3DVertexShader9::GetDevice", hr)?;
+        fn_check_hr!(hr)?;
         Ok(unsafe { Device::from_raw(device) })
     }
 
@@ -171,9 +177,10 @@ pub trait IDirect3DVertexShader9Ext : AsSafe<IDirect3DVertexShader9> {
     /// *   [D3DERR::INVALIDCALL]   The device was pure?
     /// *   Ok(`size`)
     fn get_function_size(&self) -> Result<u32, MethodError> {
+        fn_context!(d3d9::IDirect3DVertexShader9Ext::get_function_size => IDirect3DVertexShader9::GetFunction);
         let mut size = 0;
         let hr = unsafe { self.as_winapi().GetFunction(null_mut(), &mut size) };
-        MethodError::check("IDirect3DVertexShader9::GetFunction", hr)?;
+        fn_check_hr!(hr)?;
         Ok(size)
     }
 
@@ -183,13 +190,15 @@ pub trait IDirect3DVertexShader9Ext : AsSafe<IDirect3DVertexShader9> {
     /// Gets the shader function data.
     ///
     /// ### Returns
+    /// *   [THINERR::SLICE_TOO_LARGE]  `data` exceeded 4GB
     /// *   [D3DERR::INVALIDCALL]   The device was pure?
     /// *   Ok(`&data[???]`)        Function data was read
     fn get_function_inplace<'d>(&self, data: &'d mut [u8]) -> Result<&'d [u8], MethodError> {
-        let mut size = data.len().try_into().map_err(|_| MethodError("VertexShader::get_function_inplace", D3DERR::INVALIDCALL))?;
+        fn_context!(d3d9::IDirect3DVertexShader9Ext::get_function_inplace => IDirect3DVertexShader9::GetFunction);
+        let mut size = data.len().try_into().map_err(|_| fn_param_error!(data, THINERR::SLICE_TOO_LARGE))?;
         // XXX: Do I need a get_function_size check in here too?
         let hr = unsafe { self.as_winapi().GetFunction(data.as_mut_ptr().cast(), &mut size) };
-        MethodError::check("IDirect3DVertexShader9::GetFunction", hr)?;
+        fn_check_hr!(hr)?;
         Ok(&data[0..(size as usize)])
     }
 
@@ -202,10 +211,11 @@ pub trait IDirect3DVertexShader9Ext : AsSafe<IDirect3DVertexShader9> {
     /// *   [D3DERR::INVALIDCALL]   The device was pure?
     /// *   Ok([Vec]&lt;[u8]&gt;)    Function data was read
     fn get_function(&self) -> Result<Vec<u8>, MethodError> {
+        fn_context!(d3d9::IDirect3DVertexShader9Ext::get_function => IDirect3DVertexShader9::GetFunction);
         let mut size = self.get_function_size()?;
         let mut data = vec![0u8; size as usize];
         let hr = unsafe { self.as_winapi().GetFunction(data.as_mut_ptr().cast(), &mut size) };
-        MethodError::check("IDirect3DVertexShader9::GetFunction", hr)?;
+        fn_check_hr!(hr)?;
         debug_assert_eq!(data.len(), size as usize);
         Ok(data)
     }
@@ -225,13 +235,3 @@ impl<T: AsSafe<IDirect3DVertexShader9>> IDirect3DVertexShader9Ext for T {}
 
 //#cpp2rust IDirect3DVertexShader9                  = d3d9::VertexShader
 //#cpp2rust IDirect3DVertexShader9                  = d3d9::IDirect3DVertexShader9Ext
-
-//#cpp2rust IDirect3DPixelShader9::GetDevice        = d3d9::IDirect3DPixelShader9Ext::get_device
-//#cpp2rust IDirect3DPixelShader9::GetFunction      = d3d9::IDirect3DPixelShader9Ext::get_function_size
-//#cpp2rust IDirect3DPixelShader9::GetFunction      = d3d9::IDirect3DPixelShader9Ext::get_function_inplace
-//#cpp2rust IDirect3DPixelShader9::GetFunction      = d3d9::IDirect3DPixelShader9Ext::get_function
-
-//#cpp2rust IDirect3DVertexShader9::GetDevice       = d3d9::IDirect3DVertexShader9Ext::get_device
-//#cpp2rust IDirect3DVertexShader9::GetFunction     = d3d9::IDirect3DVertexShader9Ext::get_function_size
-//#cpp2rust IDirect3DVertexShader9::GetFunction     = d3d9::IDirect3DVertexShader9Ext::get_function_inplace
-//#cpp2rust IDirect3DVertexShader9::GetFunction     = d3d9::IDirect3DVertexShader9Ext::get_function

@@ -17,6 +17,7 @@ use bytemuck::Zeroable;
 /// *   ~~[THINERR::MISSING_DLL_EXPORT]~~ - Silently falls back on [get_state] instead
 #[deprecated = "This undocumented function is reserved for system software to access Buttons::Guide."]
 pub fn get_state_ex(user_index: impl Into<u32>) -> Result<State, MethodError> {
+    fn_context!(xinput::get_state_ex => XInputGetStateEx);
     #[allow(non_snake_case)]
     if let Some(XInputGetStateEx) = Imports::get()._XInputGetStateEx {
         let mut state = State::zeroed();
@@ -27,7 +28,7 @@ pub fn get_state_ex(user_index: impl Into<u32>) -> Result<State, MethodError> {
         //  * `state`       is out-only, fixed size, no `cbSize` field, never null, all bit patterns sane
         //  * `fn`          should be `None` or valid if returned by `Imports::get()`
         let code = unsafe { XInputGetStateEx(user_index.into(), state.as_mut()) };
-        check_error_success("XInputGetStateEx", code)?;
+        check_success!(code)?;
         Ok(state)
     } else {
         get_state(user_index)
@@ -47,5 +48,3 @@ pub fn get_state_ex(user_index: impl Into<u32>) -> Result<State, MethodError> {
         assert_eq!(ERROR::BAD_ARGUMENTS, get_state_ex(u));
     }
 }
-
-//#cpp2rust XInputGetStateEx    = xinput::get_state_ex

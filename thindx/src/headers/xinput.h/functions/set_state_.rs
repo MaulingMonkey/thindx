@@ -14,13 +14,14 @@ use winapi::um::xinput::*;
 /// *   [ERROR::BAD_ARGUMENTS]          - Invalid [`User`] or [`User::Any`]
 /// *   [ERROR::DEVICE_NOT_CONNECTED]   - [`User`] is not connected
 pub fn set_state(user_index: impl Into<u32>, mut vibration: Vibration) -> Result<(), MethodError> {
+    fn_context!(xinput::set_state => XInputSetState);
     // SAFETY: ✔️
     //  * fuzzed        in `fuzz-xinput.rs`
     //  * tested        in `d3d9-02-xinput.rs`
     //  * `user_index`  is well tested
     //  * `vibration`   is never null, fixed size, no `cbSize` field, all bit patterns are valid and reasonable
     let code = unsafe { XInputSetState(user_index.into(), vibration.as_mut()) };
-    check_error_success("XInputSetState", code)
+    check_success!(code)
 }
 
 #[test] fn test_valid_params() {
@@ -38,5 +39,3 @@ pub fn set_state(user_index: impl Into<u32>, mut vibration: Vibration) -> Result
         assert_eq!(ERROR::BAD_ARGUMENTS, set_state(u, v));
     }
 }
-
-//#cpp2rust XInputSetState      = xinput::set_state

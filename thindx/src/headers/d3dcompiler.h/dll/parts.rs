@@ -37,7 +37,7 @@ impl Compiler {
     /// ### Remarks
     /// *   This was introduced by d3dcompiler_43.dll, and is unavailable in earlier versions.
     pub fn get_blob_part(&self, src_data: &Bytecode, part: impl Into<BlobPart>, flags: Option<std::convert::Infallible>) -> Result<BytesBlob, MethodError> {
-        let f = self.D3DGetBlobPart.ok_or(MethodError("D3DGetBlobPart", THINERR::MISSING_DLL_EXPORT))?;
+        fn_context_dll!(d3d::Compiler::get_blob_part => self.D3DGetBlobPart);
         let src_data = src_data.as_bytes();
         let part = part.into().into();
         let _ = flags;
@@ -50,8 +50,8 @@ impl Compiler {
         //  * `part`        ⚠️ could be invalid
         //  * `flags`       ✔️ are reserved/0
         //  * `blob`        ✔️ is a simple out-param
-        let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), part, 0, &mut blob) };
-        MethodError::check("D3DGetBlobPart", hr)?;
+        let hr = unsafe { D3DGetBlobPart(src_data.as_ptr().cast(), src_data.len(), part, 0, &mut blob) };
+        fn_check_hr!(hr)?;
 
         // SAFETY: ✔️ `blob` is null (from_raw panics) or a valid non-dangling pointer (from_raw takes ownership).  ReadOnlyBlob imposes no content requirements.
         Ok(BytesBlob::new(unsafe { ReadOnlyBlob::from_raw(blob) }))
@@ -101,7 +101,7 @@ impl Compiler {
     /// ### Remarks
     /// *   This was introduced by d3dcompiler_40.dll, and is unavailable in earlier versions.
     pub fn get_debug_info(&self, src_data: &Bytecode) -> Result<BytesBlob, MethodError> {
-        let f = self.D3DGetDebugInfo.ok_or(MethodError("D3DGetDebugInfo", THINERR::MISSING_DLL_EXPORT))?;
+        fn_context_dll!(d3d::Compiler::get_debug_info => self.D3DGetDebugInfo);
         let src_data = src_data.as_bytes();
 
         // SAFETY: ❌ needs fuzz testing against ~4GB `data` to attempt to induce alloc overflow bugs
@@ -110,8 +110,8 @@ impl Compiler {
         //  * `src_data`    ✔️ should be valid bytecode as implied by [`Bytecode`]
         //  * `blob`        ✔️ is a simple out-param
         let mut blob = null_mut();
-        let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), &mut blob) };
-        MethodError::check("D3DGetDebugInfo", hr)?;
+        let hr = unsafe { D3DGetDebugInfo(src_data.as_ptr().cast(), src_data.len(), &mut blob) };
+        fn_check_hr!(hr)?;
 
         // SAFETY: ✔️ `blob` is null (from_raw panics) or a valid non-dangling pointer (from_raw takes ownership).  ReadOnlyBlob imposes no content requirements.
         Ok(BytesBlob::new(unsafe { ReadOnlyBlob::from_raw(blob) }))
@@ -141,7 +141,7 @@ impl Compiler {
     // #[requires(d3dcompiler=33)] // or earlier?
     //#allow_missing_argument_docs
     pub fn get_input_and_output_signature_blob(&self, src_data: &Bytecode) -> Result<BytesBlob, MethodError> {
-        let f = self.D3DGetInputAndOutputSignatureBlob.ok_or(MethodError("D3DGetInputAndOutputSignatureBlob", THINERR::MISSING_DLL_EXPORT))?;
+        fn_context_dll!(d3d::Compiler::get_input_and_output_signature_blob => self.D3DGetInputAndOutputSignatureBlob);
         let src_data = src_data.as_bytes();
 
         // SAFETY: ❌ needs fuzz testing against ~4GB `data` to attempt to induce alloc overflow bugs
@@ -150,8 +150,8 @@ impl Compiler {
         //  * `src_data`    ✔️ should be valid bytecode as implied by [`Bytecode`]
         //  * `blob`        ✔️ is a simple out-param
         let mut blob = null_mut();
-        let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), &mut blob) };
-        MethodError::check("D3DGetInputAndOutputSignatureBlob", hr)?;
+        let hr = unsafe { D3DGetInputAndOutputSignatureBlob(src_data.as_ptr().cast(), src_data.len(), &mut blob) };
+        fn_check_hr!(hr)?;
 
         // SAFETY: ✔️ `blob` is null (from_raw panics) or a valid non-dangling pointer (from_raw takes ownership).  ReadOnlyBlob imposes no content requirements.
         Ok(BytesBlob::new(unsafe { ReadOnlyBlob::from_raw(blob) }))
@@ -181,7 +181,7 @@ impl Compiler {
     // #[requires(d3dcompiler=33)] // or earlier?
     //#allow_missing_argument_docs
     pub fn get_input_signature_blob(&self, src_data: &Bytecode) -> Result<BytesBlob, MethodError> {
-        let f = self.D3DGetInputSignatureBlob.ok_or(MethodError("D3DGetInputSignatureBlob", THINERR::MISSING_DLL_EXPORT))?;
+        fn_context_dll!(d3d::Compiler::get_input_signature_blob => self.D3DGetInputSignatureBlob);
         let src_data = src_data.as_bytes();
 
         // SAFETY: ❌ needs fuzz testing against ~4GB `data` to attempt to induce alloc overflow bugs
@@ -190,8 +190,8 @@ impl Compiler {
         //  * `src_data`    ✔️ should be valid bytecode as implied by [`Bytecode`]
         //  * `blob`        ✔️ is a simple out-param
         let mut blob = null_mut();
-        let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), &mut blob) };
-        MethodError::check("D3DGetInputSignatureBlob", hr)?;
+        let hr = unsafe { D3DGetInputSignatureBlob(src_data.as_ptr().cast(), src_data.len(), &mut blob) };
+        fn_check_hr!(hr)?;
 
         // SAFETY: ✔️ `blob` is null (from_raw panics) or a valid non-dangling pointer (from_raw takes ownership).  ReadOnlyBlob imposes no content requirements.
         Ok(BytesBlob::new(unsafe { ReadOnlyBlob::from_raw(blob) }))
@@ -221,7 +221,7 @@ impl Compiler {
     // #[requires(d3dcompiler=33)] // or earlier?
     //#allow_missing_argument_docs
     pub fn get_output_signature_blob(&self, src_data: &Bytecode) -> Result<BytesBlob, MethodError> {
-        let f = self.D3DGetOutputSignatureBlob.ok_or(MethodError("D3DGetOutputSignatureBlob", THINERR::MISSING_DLL_EXPORT))?;
+        fn_context_dll!(d3d::Compiler::get_output_signature_blob => self.D3DGetOutputSignatureBlob);
         let src_data = src_data.as_bytes();
 
         // SAFETY: ❌ needs fuzz testing against ~4GB `data` to attempt to induce alloc overflow bugs
@@ -230,8 +230,8 @@ impl Compiler {
         //  * `src_data`    ✔️ should be valid bytecode as implied by [`Bytecode`]
         //  * `blob`        ✔️ is a simple out-param
         let mut blob = null_mut();
-        let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), &mut blob) };
-        MethodError::check("D3DGetOutputSignatureBlob", hr)?;
+        let hr = unsafe { D3DGetOutputSignatureBlob(src_data.as_ptr().cast(), src_data.len(), &mut blob) };
+        fn_check_hr!(hr)?;
 
         // SAFETY: ✔️ `blob` is null (from_raw panics) or a valid non-dangling pointer (from_raw takes ownership).  ReadOnlyBlob imposes no content requirements.
         Ok(BytesBlob::new(unsafe { ReadOnlyBlob::from_raw(blob) }))
@@ -273,7 +273,7 @@ impl Compiler {
         flags:              (),
         part_data:          &[u8],
     ) -> Result<CodeBlob, MethodError> {
-        let f = self.D3DSetBlobPart.ok_or(MethodError("D3DSetBlobPart", THINERR::MISSING_DLL_EXPORT))?;
+        fn_context_dll!(d3d::Compiler::set_blob_part => self.D3DSetBlobPart);
         let src_data = src_data.as_bytes();
         let _ = flags;
 
@@ -285,8 +285,8 @@ impl Compiler {
         //  * `part`        ⚠️ could be invalid
         //  * `part_data`   ❌ could be invalid for `part`
         let mut blob = null_mut();
-        let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), part.into().into(), 0, part_data.as_ptr().cast(), part_data.len(), &mut blob) };
-        MethodError::check("D3DSetBlobPart", hr)?;
+        let hr = unsafe { D3DSetBlobPart(src_data.as_ptr().cast(), src_data.len(), part.into().into(), 0, part_data.as_ptr().cast(), part_data.len(), &mut blob) };
+        fn_check_hr!(hr)?;
 
         // SAFETY: ⚠️
         //  * `blob`        ✔️ should be null (from_raw panics) or a valid non-dangling blob (from_raw takes ownership)
@@ -326,7 +326,7 @@ impl Compiler {
         src_data:           &Bytecode,
         strip_flags:        impl Into<CompilerStripFlags>,
     ) -> Result<CodeBlob, MethodError> {
-        let f = self.D3DStripShader.ok_or(MethodError("D3DStripShader", THINERR::MISSING_DLL_EXPORT))?;
+        fn_context_dll!(d3d::Compiler::strip_shader => self.D3DStripShader);
         let mut blob = null_mut();
 
         // SAFETY: ❌ needs fuzz testing against ~4GB `data` to attempt to induce alloc overflow bugs
@@ -335,8 +335,8 @@ impl Compiler {
         //  * `src_data`    ✔️ should be valid bytecode as implied by [`Bytecode`]
         //  * `strip_flags` ⚠️ could be invalid
         //  * `blob`        ✔️ is a simple out-param
-        let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), strip_flags.into().into(), &mut blob) };
-        MethodError::check("D3DStripShader", hr)?;
+        let hr = unsafe { D3DStripShader(src_data.as_ptr().cast(), src_data.len(), strip_flags.into().into(), &mut blob) };
+        fn_check_hr!(hr)?;
 
         // SAFETY: ⚠️
         //  * `blob`        ✔️ should be null (from_raw panics) or a valid non-dangling blob (from_raw takes ownership)
@@ -344,11 +344,3 @@ impl Compiler {
         Ok(unsafe { CodeBlob::from_unchecked(ReadOnlyBlob::from_raw(blob)) })
     }
 }
-
-//#cpp2rust D3DGetBlobPart                          = d3d::Compiler::get_blob_part
-//#cpp2rust D3DGetDebugInfo                         = d3d::Compiler::get_debug_info
-//#cpp2rust D3DGetInputAndOutputSignatureBlob       = d3d::Compiler::get_input_and_output_signature_blob
-//#cpp2rust D3DGetInputSignatureBlob                = d3d::Compiler::get_input_signature_blob
-//#cpp2rust D3DGetOutputSignatureBlob               = d3d::Compiler::get_output_signature_blob
-//#cpp2rust D3DSetBlobPart                          = d3d::Compiler::set_blob_part
-//#cpp2rust D3DStripShader                          = d3d::Compiler::strip_shader

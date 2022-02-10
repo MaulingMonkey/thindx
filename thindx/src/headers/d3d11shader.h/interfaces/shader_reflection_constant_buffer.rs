@@ -75,9 +75,10 @@ impl<'r> ShaderReflectionConstantBuffer<'r> {
     /// }
     /// ```
     pub fn get_desc(&self) -> Result<ShaderBufferDesc<'r>, MethodError> {
+        fn_context!(d3d11::ShaderReflectionConstantBuffer::get_desc => ID3D11ShaderReflectionConstantBuffer::GetDesc);
         let mut desc = ShaderBufferDesc::default();
         let hr = unsafe { self.ptr.as_ref().GetDesc(desc.as_mut_ptr()) };
-        MethodError::check("ID3D11ShaderReflectionConstantBuffer::GetDesc", hr)?;
+        fn_check_hr!(hr)?;
         Ok(desc)
     }
 
@@ -127,6 +128,7 @@ impl<'r> ShaderReflectionConstantBuffer<'r> {
     /// ```
     //#allow_missing_argument_docs
     pub fn get_variable_by_index(&self, index: u32) -> ShaderReflectionVariable<'r> {
+        fn_context!(d3d11::ShaderReflectionConstantBuffer::get_variable_by_index => ID3D11ShaderReflectionConstantBuffer::GetVariableByIndex);
         let ptr = unsafe { self.ptr.as_ref().GetVariableByIndex(index) };
         unsafe { ShaderReflectionVariable::from_raw(self.phantom, ptr) }
     }
@@ -177,6 +179,7 @@ impl<'r> ShaderReflectionConstantBuffer<'r> {
     /// ```
     //#allow_missing_argument_docs
     pub fn get_variable_by_name(&self, name: impl TryIntoAsCStr) -> ShaderReflectionVariable<'r> {
+        fn_context!(d3d11::ShaderReflectionConstantBuffer::get_variable_by_name => ID3D11ShaderReflectionConstantBuffer::GetVariableByName);
         let name = name.try_into().ok();
         let name = name.as_ref().map_or(cstr!("").as_cstr(), |n| n.as_cstr());
         let ptr = unsafe { self.ptr.as_ref().GetVariableByName(name) };
@@ -185,7 +188,3 @@ impl<'r> ShaderReflectionConstantBuffer<'r> {
 }
 
 //#cpp2rust ID3D11ShaderReflectionConstantBuffer                            = d3d11::ShaderReflectionConstantBuffer
-
-//#cpp2rust ID3D11ShaderReflectionConstantBuffer::GetDesc                   = d3d11::ShaderReflectionConstantBuffer::get_desc
-//#cpp2rust ID3D11ShaderReflectionConstantBuffer::GetVariableByIndex        = d3d11::ShaderReflectionConstantBuffer::get_variable_by_index
-//#cpp2rust ID3D11ShaderReflectionConstantBuffer::GetVariableByName         = d3d11::ShaderReflectionConstantBuffer::get_variable_by_name

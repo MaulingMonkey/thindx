@@ -89,6 +89,7 @@ impl<'r> FunctionReflection<'r> {
     /// ```
     //#allow_missing_argument_docs
     pub fn get_constant_buffer_by_index(&self, buffer_index: u32) -> ShaderReflectionConstantBuffer<'r> {
+        fn_context!(d3d11::FunctionReflection::get_constant_buffer_by_index => ID3D11FunctionReflection::GetConstantBufferByIndex);
         let ptr = unsafe { self.ptr.as_ref().GetConstantBufferByIndex(buffer_index) };
         unsafe { ShaderReflectionConstantBuffer::from_raw(self.phantom, ptr) }
     }
@@ -130,6 +131,7 @@ impl<'r> FunctionReflection<'r> {
     /// ```
     //#allow_missing_argument_docs
     pub fn get_constant_buffer_by_name(&self, name: impl TryIntoAsCStr) -> ShaderReflectionConstantBuffer<'r> {
+        fn_context!(d3d11::FunctionReflection::get_constant_buffer_by_name => ID3D11FunctionReflection::GetConstantBufferByName);
         let name = name.try_into().ok();
         let name = name.as_ref().map_or(cstr!("").as_cstr(), |n| n.as_cstr());
         let ptr = unsafe { self.ptr.as_ref().GetConstantBufferByName(name) };
@@ -170,9 +172,10 @@ impl<'r> FunctionReflection<'r> {
     /// }
     /// ```
     pub fn get_desc(&self) -> Result<FunctionDesc<'r>, MethodError> {
+        fn_context!(d3d11::FunctionReflection::get_desc => ID3D11FunctionReflection::GetDesc);
         let mut desc = FunctionDesc::default();
         let hr = unsafe { self.ptr.as_ref().GetDesc(desc.as_mut_ptr()) };
-        MethodError::check("ID3D11FunctionReflection::GetDesc", hr)?;
+        fn_check_hr!(hr)?;
         Ok(desc)
     }
 
@@ -265,6 +268,7 @@ impl<'r> FunctionReflection<'r> {
     /// }
     /// ```
     pub fn get_function_parameter(&self, parameter_index: i32) -> FunctionParameterReflection<'r> {
+        fn_context!(d3d11::FunctionReflection::get_function_parameter => ID3D11FunctionReflection::GetFunctionParameter);
         let ptr = unsafe { self.ptr.as_ref().GetFunctionParameter(parameter_index) };
         unsafe { FunctionParameterReflection::from_raw(self.phantom, ptr) }
     }
@@ -320,9 +324,10 @@ impl<'r> FunctionReflection<'r> {
     /// ```
     //#allow_missing_argument_docs
     pub fn get_resource_binding_desc(&self, resource_index: u32) -> Result<ShaderInputBindDesc<'r>, MethodError> {
+        fn_context!(d3d11::FunctionReflection::get_resource_binding_desc => ID3D11FunctionReflection::GetResourceBindingDesc);
         let mut desc = ShaderInputBindDesc::default();
         let hr = unsafe { self.ptr.as_ref().GetResourceBindingDesc(resource_index, desc.as_mut_ptr()) };
-        MethodError::check("ID3D11FunctionReflection::GetResourceBindingDesc", hr)?;
+        fn_check_hr!(hr)?;
         Ok(desc)
     }
 
@@ -370,11 +375,12 @@ impl<'r> FunctionReflection<'r> {
     /// ```
     //#allow_missing_argument_docs
     pub fn get_resource_binding_desc_by_name(&self, name: impl TryIntoAsCStr) -> Result<ShaderInputBindDesc<'r>, MethodError> {
+        fn_context!(d3d11::FunctionReflection::get_resource_binding_desc_by_name => ID3D11FunctionReflection::GetResourceBindingDescByName);
         let name = name.try_into().ok();
         let name = name.as_ref().map_or(cstr!("").as_cstr(), |n| n.as_cstr());
         let mut desc = ShaderInputBindDesc::default();
         let hr = unsafe { self.ptr.as_ref().GetResourceBindingDescByName(name, desc.as_mut_ptr()) };
-        MethodError::check("ID3D11FunctionReflection::GetResourceBindingDescByName", hr)?;
+        fn_check_hr!(hr)?;
         Ok(desc)
     }
 
@@ -420,6 +426,7 @@ impl<'r> FunctionReflection<'r> {
     /// ```
     //#allow_missing_argument_docs
     pub fn get_variable_by_name(&self, name: impl TryIntoAsCStr) -> ShaderReflectionVariable<'r> {
+        fn_context!(d3d11::FunctionReflection::get_variable_by_name => ID3D11FunctionReflection::GetVariableByName);
         let name = name.try_into().ok();
         let name = name.as_ref().map_or(cstr!("").as_cstr(), |n| n.as_cstr());
         let ptr = unsafe { self.ptr.as_ref().GetVariableByName(name) };
@@ -428,11 +435,3 @@ impl<'r> FunctionReflection<'r> {
 }
 
 //#cpp2rust ID3D11FunctionReflection                                        = d3d11::FunctionReflection
-
-//#cpp2rust ID3D11FunctionReflection::GetConstantBufferByIndex              = d3d11::FunctionReflection::get_constant_buffer_by_index
-//#cpp2rust ID3D11FunctionReflection::GetConstantBufferByName               = d3d11::FunctionReflection::get_constant_buffer_by_name
-//#cpp2rust ID3D11FunctionReflection::GetDesc                               = d3d11::FunctionReflection::get_desc
-//#cpp2rust ID3D11FunctionReflection::GetFunctionParameter                  = d3d11::FunctionReflection::get_function_parameter
-//#cpp2rust ID3D11FunctionReflection::GetResourceBindingDesc                = d3d11::FunctionReflection::get_resource_binding_desc
-//#cpp2rust ID3D11FunctionReflection::GetResourceBindingDescByName          = d3d11::FunctionReflection::get_resource_binding_desc_by_name
-//#cpp2rust ID3D11FunctionReflection::GetVariableByName                     = d3d11::FunctionReflection::get_variable_by_name

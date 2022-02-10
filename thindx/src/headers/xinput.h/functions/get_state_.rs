@@ -16,6 +16,7 @@ use winapi::um::xinput::*;
 /// *   [ERROR::BAD_ARGUMENTS]          - Invalid [`User`] or [`User::Any`]
 /// *   [ERROR::DEVICE_NOT_CONNECTED]   - [`User`] gamepad not connected
 pub fn get_state(user_index: impl Into<u32>) -> Result<State, MethodError> {
+    fn_context!(xinput::get_state => XInputGetState);
     let mut state = State::zeroed();
     // SAFETY: ✔️
     //  * fuzzed        in `tests/fuzz-xinput.rs`
@@ -23,7 +24,7 @@ pub fn get_state(user_index: impl Into<u32>) -> Result<State, MethodError> {
     //  * `user_index`  is well tested
     //  * `state`       is out-only, fixed size, no `cbSize` field, never null, all bit patterns sane
     let code = unsafe { XInputGetState(user_index.into(), state.as_mut()) };
-    check_error_success("XInputGetState", code)?;
+    check_success!(code)?;
     Ok(state)
 }
 
@@ -40,5 +41,3 @@ pub fn get_state(user_index: impl Into<u32>) -> Result<State, MethodError> {
         assert_eq!(ERROR::BAD_ARGUMENTS, get_state(u));
     }
 }
-
-//#cpp2rust XInputGetState      = xinput::get_state

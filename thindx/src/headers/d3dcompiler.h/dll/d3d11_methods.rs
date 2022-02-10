@@ -28,7 +28,7 @@ impl Compiler {
     /// ### Remarks
     /// *   This was introduced by d3dcompiler_47.dll, and is unavailable in earlier versions.
     pub fn create_function_linking_graph(&self, flags: Option<std::convert::Infallible>) -> Result<d3d11::FunctionLinkingGraph, MethodError> {
-        let f = self.D3DCreateFunctionLinkingGraph.ok_or(MethodError("D3DCreateFunctionLinkingGraph", THINERR::MISSING_DLL_EXPORT))?;
+        fn_context_dll!(d3d::Compiler::create_function_linking_graph => self.D3DCreateFunctionLinkingGraph);
         let _ = flags;
 
         // SAFETY: ✔️
@@ -36,8 +36,8 @@ impl Compiler {
         //  * `0` for reserved flags of `D3DCreateFunctionLinkingGraph` is expected
         //  * `flg` is just an output `**ID3D11FunctionLinkingGraph`
         let mut flg = null_mut();
-        let hr = unsafe { f(0, &mut flg) };
-        MethodError::check("D3DCreateFunctionLinkingGraph", hr)?;
+        let hr = unsafe { D3DCreateFunctionLinkingGraph(0, &mut flg) };
+        fn_check_hr!(hr)?;
 
         // SAFETY: ✔️ `flg` is null (from_raw panics) or valid
         Ok(unsafe { d3d11::FunctionLinkingGraph::from_raw(flg) })
@@ -64,14 +64,14 @@ impl Compiler {
     /// ### Remarks
     /// *   This was introduced by d3dcompiler_47.dll, and is unavailable in earlier versions.
     pub fn create_linker(&self) -> Result<d3d11::Linker, MethodError> {
-        let f = self.D3DCreateLinker.ok_or(MethodError("D3DCreateFunctionLinkingGraph", THINERR::MISSING_DLL_EXPORT))?;
+        fn_context_dll!(d3d::Compiler::create_linker => self.D3DCreateLinker);
 
         // SAFETY: ✔️
         //  * `f` should be a valid/sound fn, like all of `self.*`
         //  * `linker` is just an output `**ID3D11Linker`
         let mut linker = null_mut();
-        let hr = unsafe { f(&mut linker) };
-        MethodError::check("D3DCreateFunctionLinkingGraph", hr)?;
+        let hr = unsafe { D3DCreateLinker(&mut linker) };
+        fn_check_hr!(hr)?;
 
         // SAFETY: ✔️ `linker` is null (from_raw panics) or valid
         Ok(unsafe { d3d11::Linker::from_raw(linker) })
@@ -107,7 +107,7 @@ impl Compiler {
     /// ### Remarks
     /// *   This was introduced by d3dcompiler_47.dll, and is unavailable in earlier versions.
     pub fn load_module(&self, src_data: &Bytecode) -> Result<d3d11::Module, MethodError> {
-        let f = self.D3DLoadModule.ok_or(MethodError("D3DLoadModule", THINERR::MISSING_DLL_EXPORT))?;
+        fn_context_dll!(d3d::Compiler::load_module => self.D3DLoadModule);
         let src_data = src_data.as_bytes();
 
         // SAFETY: ✔️
@@ -115,14 +115,10 @@ impl Compiler {
         //  * `D3DLoadModule` may require `src_data` be valid bytecode, but this is implied by `Bytecode`
         //  * `module` is just an output `**ID3D11Module`
         let mut module = null_mut();
-        let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), &mut module) };
-        MethodError::check("D3DLoadModule", hr)?;
+        let hr = unsafe { D3DLoadModule(src_data.as_ptr().cast(), src_data.len(), &mut module) };
+        fn_check_hr!(hr)?;
 
         // SAFETY: ✔️ `module` is null (from_raw panics) or valid
         Ok(unsafe { d3d11::Module::from_raw(module) })
     }
 }
-
-//#cpp2rust D3DCreateFunctionLinkingGraph           = d3d::Compiler::create_function_linking_graph
-//#cpp2rust D3DCreateLinker                         = d3d::Compiler::create_linker
-//#cpp2rust D3DLoadModule                           = d3d::Compiler::load_module

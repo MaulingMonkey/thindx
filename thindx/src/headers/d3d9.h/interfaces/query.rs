@@ -60,20 +60,24 @@ pub trait IDirect3DQuery9Ext : AsSafe<IDirect3DQuery9> {
     /// *   Ok(`true`)              The query data is available
     /// *   Ok(`false`)             The query data is not available
     fn get_data_inplace(&self, mut data: impl AsMut<[u8]>, get_data_flags: impl Into<GetData>) -> Result<bool, MethodError> {
+        fn_context!(d3d9::IDirect3DQuery9Ext::get_data_inplace => IDirect3DQuery9::GetData);
         let data = data.as_mut();
         let flags = get_data_flags.into().into();
-        let len = data.len().try_into().map_err(|_| MethodError("Query::get_data_inplace", D3DERR::INVALIDCALL))?;
+        let len = data.len().try_into().map_err(|_| fn_param_error!(data, THINERR::SLICE_TOO_LARGE))?;
 
         let hr = unsafe { self.as_winapi().GetData(data.as_mut_ptr().cast(), len, flags) };
-        MethodError::check("IDirect3DQuery9::GetData", hr)?;
+        fn_check_hr!(hr)?;
         Ok(hr != S_FALSE)
     }
+
+    // TODO: fn get_data<T>?
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dquery9-getdatasize)\]
     /// IDirect3DQuery9::GetDataSize
     ///
     /// Gets the number of bytes in the query data.
     fn get_data_size(&self) -> u32 {
+        fn_context!(d3d9::IDirect3DQuery9Ext::get_data_size => IDirect3DQuery9::GetDataSize);
         unsafe { self.as_winapi().GetDataSize() }
     }
 
@@ -82,9 +86,10 @@ pub trait IDirect3DQuery9Ext : AsSafe<IDirect3DQuery9> {
     ///
     /// Gets the device that is being queried.
     fn get_device(&self) -> Result<Device, MethodError> {
+        fn_context!(d3d9::IDirect3DQuery9Ext::get_device => IDirect3DQuery9::GetDevice);
         let mut device = null_mut();
         let hr = unsafe { self.as_winapi().GetDevice(&mut device) };
-        MethodError::check("IDirect3DQuery9::GetDevice", hr)?;
+        fn_check_hr!(hr)?;
         Ok(unsafe { Device::from_raw(device) })
     }
 
@@ -93,6 +98,7 @@ pub trait IDirect3DQuery9Ext : AsSafe<IDirect3DQuery9> {
     ///
     /// Gets the query type.
     fn get_type(&self) -> QueryType {
+        fn_context!(d3d9::IDirect3DQuery9Ext::get_type => IDirect3DQuery9::GetType);
         QueryType::from_unchecked(unsafe { self.as_winapi().GetType() })
     }
 
@@ -101,8 +107,9 @@ pub trait IDirect3DQuery9Ext : AsSafe<IDirect3DQuery9> {
     ///
     /// Issue a query.
     fn issue(&self, issue_flags: impl Into<Issue>) -> Result<(), MethodError> {
+        fn_context!(d3d9::IDirect3DQuery9Ext::issue => IDirect3DQuery9::Issue);
         let hr = unsafe { self.as_winapi().Issue(issue_flags.into().into()) };
-        MethodError::check("IDirect3DQuery9::Issue", hr)
+        fn_check_hr!(hr)
     }
 }
 
@@ -112,9 +119,3 @@ impl<T: AsSafe<IDirect3DQuery9>> IDirect3DQuery9Ext for T {}
 
 //#cpp2rust IDirect3DQuery9                         = d3d9::Query
 //#cpp2rust IDirect3DQuery9                         = d3d9::IDirect3DQuery9Ext
-
-//TODO:     IDirect3DQuery9::GetData                = d3d9::IDirect3DQuery9Ext::get_data
-//#cpp2rust IDirect3DQuery9::GetDataSize            = d3d9::IDirect3DQuery9Ext::get_data_size
-//#cpp2rust IDirect3DQuery9::GetDevice              = d3d9::IDirect3DQuery9Ext::get_device
-//#cpp2rust IDirect3DQuery9::GetType                = d3d9::IDirect3DQuery9Ext::get_type
-//#cpp2rust IDirect3DQuery9::Issue                  = d3d9::IDirect3DQuery9Ext::issue

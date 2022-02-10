@@ -50,8 +50,9 @@ pub trait IDirect3DStateBlock9Ext : AsSafe<IDirect3DStateBlock9> {
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok(`()`)
     fn apply(&self) -> Result<(), MethodError> {
+        fn_context!(d3d9::IDirect3DStateBlock9Ext::apply => IDirect3DStateBlock9::Apply);
         let hr = unsafe { self.as_winapi().Apply() };
-        MethodError::check("IDirect3DStateBlock9::Apply", hr)
+        fn_check_hr!(hr)
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dstateblock9-capture)\]
@@ -63,8 +64,9 @@ pub trait IDirect3DStateBlock9Ext : AsSafe<IDirect3DStateBlock9> {
     /// *   [D3DERR::INVALIDCALL]
     /// *   Ok(`()`)
     fn capture(&self) -> Result<(), MethodError> {
+        fn_context!(d3d9::IDirect3DStateBlock9Ext::capture => IDirect3DStateBlock9::Capture);
         let hr = unsafe { self.as_winapi().Capture() };
-        MethodError::check("IDirect3DStateBlock9::Capture", hr)
+        fn_check_hr!(hr)
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dstateblock9-getdevice)\]
@@ -76,9 +78,10 @@ pub trait IDirect3DStateBlock9Ext : AsSafe<IDirect3DStateBlock9> {
     /// *   [D3DERR::INVALIDCALL]   (Pure device?)
     /// *   Ok([Device])
     fn get_device(&self) -> Result<Device, MethodError> {
+        fn_context!(d3d9::IDirect3DStateBlock9Ext::get_device => IDirect3DStateBlock9::GetDevice);
         let mut device = null_mut();
         let hr = unsafe { self.as_winapi().GetDevice(&mut device) };
-        MethodError::check("IDirect3DStateBlock9::GetDevice", hr)?;
+        fn_check_hr!(hr)?;
         Ok(unsafe { Device::from_raw(device) })
     }
 }
@@ -109,7 +112,3 @@ impl<T: AsSafe<IDirect3DStateBlock9>> IDirect3DStateBlock9Ext for T {}
 
 //#cpp2rust IDirect3DStateBlock9                    = d3d9::StateBlock
 //#cpp2rust IDirect3DStateBlock9                    = d3d9::IDirect3DStateBlock9Ext
-
-//#cpp2rust IDirect3DStateBlock9::Apply             = d3d9::IDirect3DStateBlock9Ext::apply
-//#cpp2rust IDirect3DStateBlock9::Capture           = d3d9::IDirect3DStateBlock9Ext::capture
-//#cpp2rust IDirect3DStateBlock9::GetDevice         = d3d9::IDirect3DStateBlock9Ext::get_device

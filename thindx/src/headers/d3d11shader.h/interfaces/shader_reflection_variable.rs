@@ -44,6 +44,7 @@ impl<'r> ShaderReflectionVariable<'r> {
     /// // TODO
     /// ```
     pub fn get_buffer(&self) -> ShaderReflectionConstantBuffer<'r> {
+        fn_context!(d3d11::ShaderReflectionVariable::get_buffer => ID3D11ShaderReflectionVariable::GetBuffer);
         let ptr = unsafe { self.ptr.as_ref().GetBuffer() };
         unsafe { ShaderReflectionConstantBuffer::from_raw(self.phantom, ptr) }
     }
@@ -59,9 +60,10 @@ impl<'r> ShaderReflectionVariable<'r> {
     /// // TODO
     /// ```
     pub fn get_desc(&self) -> Result<ShaderVariableDesc<'r>, MethodError> {
+        fn_context!(d3d11::ShaderReflectionVariable::get_desc => ID3D11ShaderReflectionVariable::GetDesc);
         let mut desc = ShaderVariableDesc::default();
         let hr = unsafe { self.ptr.as_ref().GetDesc(desc.as_mut_ptr()) };
-        MethodError::check("ID3D11ShaderReflectionVariable::GetDesc", hr)?;
+        fn_check_hr!(hr)?;
         Ok(desc)
     }
 
@@ -77,6 +79,7 @@ impl<'r> ShaderReflectionVariable<'r> {
     /// ```
     //#allow_missing_argument_docs
     pub fn get_interface_slot(&self, array_index: u32) -> u32 {
+        fn_context!(d3d11::ShaderReflectionVariable::get_interface_slot => ID3D11ShaderReflectionVariable::GetInterfaceSlot);
         unsafe { self.ptr.as_ref().GetInterfaceSlot(array_index) }
     }
 
@@ -91,14 +94,10 @@ impl<'r> ShaderReflectionVariable<'r> {
     /// // TODO
     /// ```
     pub fn get_type(&self) -> ShaderReflectionType<'r> {
+        fn_context!(d3d11::ShaderReflectionVariable::get_type => ID3D11ShaderReflectionVariable::GetType);
         let ptr = unsafe { self.ptr.as_ref().GetType() };
         unsafe { ShaderReflectionType::from_raw(self.phantom, ptr) }
     }
 }
 
 //#cpp2rust ID3D11ShaderReflectionVariable                      = d3d11::ShaderReflectionVariable
-
-//#cpp2rust ID3D11ShaderReflectionVariable::GetBuffer           = d3d11::ShaderReflectionVariable::get_buffer
-//#cpp2rust ID3D11ShaderReflectionVariable::GetDesc             = d3d11::ShaderReflectionVariable::get_desc
-//#cpp2rust ID3D11ShaderReflectionVariable::GetInterfaceSlot    = d3d11::ShaderReflectionVariable::get_interface_slot
-//#cpp2rust ID3D11ShaderReflectionVariable::GetType             = d3d11::ShaderReflectionVariable::get_type

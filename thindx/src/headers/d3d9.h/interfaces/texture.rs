@@ -89,8 +89,9 @@ impl SafeDevice {
     /// assert_eq!(D3DERR::INVALIDCALL, device.set_texture(!0,     &texture));
     /// ```
     pub fn set_texture<'t>(&self, stage: u32, texture: impl Into<Option<&'t BaseTexture>>) -> Result<(), MethodError> {
+        fn_context!(d3d9::SafeDevice::set_texture => IDirect3DDevice9::SetTexture);
         if stage >= self.caps().MaxSimultaneousTextures {
-            Err(MethodError("SafeDevice::set_texture", D3DERR::INVALIDCALL))
+            fn_err!(D3DERR::INVALIDCALL)
         } else {
             // Safe thanks to bounds check
             unsafe { self.device().set_texture(stage, texture) }
@@ -118,8 +119,9 @@ impl SafeDevice {
     /// assert_eq!(device.get_texture(1).unwrap().unwrap().as_raw(), (*texture).as_raw());
     /// ```
     pub fn get_texture(&self, stage: u32) -> Result<Option<BaseTexture>, MethodError> {
+        fn_context!(d3d9::SafeDevice::get_texture => IDirect3DDevice9::GetTexture);
         if stage >= self.caps().MaxSimultaneousTextures {
-            Err(MethodError("SafeDevice::get_texture", D3DERR::INVALIDCALL))
+            fn_err!(D3DERR::INVALIDCALL)
         } else {
             // Safe, because we force-initialized up to MaxSimultaneousTextures (see SOUND1)
             unsafe { self.device().get_texture(stage) }
@@ -162,6 +164,7 @@ pub trait IDirect3DBaseTexture9Ext : AsSafe<IDirect3DBaseTexture9> {
     /// texture.generate_mip_sub_levels();
     /// ```
     fn generate_mip_sub_levels(&self) {
+        fn_context!(d3d9::IDirect3DBaseTexture9Ext::generate_mip_sub_levels => IDirect3DBaseTexture9::GenerateMipSubLevels);
         unsafe { self.as_winapi().GenerateMipSubLevels() }
     }
 
@@ -177,6 +180,7 @@ pub trait IDirect3DBaseTexture9Ext : AsSafe<IDirect3DBaseTexture9> {
     /// assert_eq!(TextureFilterType::Linear, texture.get_auto_gen_filter_type());
     /// ```
     fn get_auto_gen_filter_type(&self) -> TextureFilterType {
+        fn_context!(d3d9::IDirect3DBaseTexture9Ext::get_auto_gen_filter_type => IDirect3DBaseTexture9::GetAutoGenFilterType);
         TextureFilterType::from_unchecked(unsafe { self.as_winapi().GetAutoGenFilterType() })
     }
 
@@ -204,6 +208,7 @@ pub trait IDirect3DBaseTexture9Ext : AsSafe<IDirect3DBaseTexture9> {
     /// assert_eq!(3, texture.get_level_count());
     /// ```
     fn get_level_count(&self) -> u32 {
+        fn_context!(d3d9::IDirect3DBaseTexture9Ext::get_level_count => IDirect3DBaseTexture9::GetLevelCount);
         unsafe { self.as_winapi().GetLevelCount() }
     }
 
@@ -231,6 +236,7 @@ pub trait IDirect3DBaseTexture9Ext : AsSafe<IDirect3DBaseTexture9> {
     /// assert_eq!(0, texture.get_lod());
     /// ```
     fn get_lod(&self) -> u32 {
+        fn_context!(d3d9::IDirect3DBaseTexture9Ext::get_lod => IDirect3DBaseTexture9::GetLOD);
         unsafe { self.as_winapi().GetLOD() }
     }
 
@@ -271,8 +277,9 @@ pub trait IDirect3DBaseTexture9Ext : AsSafe<IDirect3DBaseTexture9> {
     /// assert_eq!(D3DERR::INVALIDCALL, texture.set_auto_gen_filter_type(TextureFilterType::from_unchecked(!0-100)).err());
     /// ```
     fn set_auto_gen_filter_type(&self, filter_type: impl Into<TextureFilterType>) -> Result<(), MethodError> {
+        fn_context!(d3d9::IDirect3DBaseTexture9Ext::set_auto_gen_filter_type => IDirect3DBaseTexture9::SetAutoGenFilterType);
         let hr = unsafe { self.as_winapi().SetAutoGenFilterType(filter_type.into().into()) };
-        MethodError::check("IDirect3DBaseTexture9::SetAutoGenFilterType", hr)
+        fn_check_hr!(hr)
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-setlod)\]
@@ -300,6 +307,7 @@ pub trait IDirect3DBaseTexture9Ext : AsSafe<IDirect3DBaseTexture9> {
     /// assert_eq!(0, texture.get_lod());
     /// ```
     fn set_lod(&self, new_lod: u32) -> u32 {
+        fn_context!(d3d9::IDirect3DBaseTexture9Ext::set_lod => IDirect3DBaseTexture9::SetLOD);
         unsafe { self.as_winapi().SetLOD(new_lod) }
     }
 }
@@ -366,11 +374,12 @@ pub trait IDirect3DCubeTexture9Ext : AsSafe<IDirect3DCubeTexture9> {
     /// assert_eq!(D3DERR::INVALIDCALL, texture.add_dirty_rect(CubeMapFace::from_unchecked(6), ..).err(), "invalid face");
     /// ```
     fn add_dirty_rect(&self, face: impl Into<CubeMapFace>, dirty_rect: impl IntoRectOrFull) -> Result<(), MethodError> {
+        fn_context!(d3d9::IDirect3DCubeTexture9Ext::add_dirty_rect => IDirect3DCubeTexture9::AddDirtyRect);
         let face = face.into().into();
         let dirty_rect = dirty_rect.into_rect();
         let dirty_rect = dirty_rect.as_ref().map_or(null(), |dr| &**dr);
         let hr = unsafe { self.as_winapi().AddDirtyRect(face, dirty_rect.cast()) };
-        MethodError::check("IDirect3DCubeTexture9::AddDirtyRect", hr)
+        fn_check_hr!(hr)
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcubetexture9-getcubemapsurface)\]
@@ -392,10 +401,11 @@ pub trait IDirect3DCubeTexture9Ext : AsSafe<IDirect3DCubeTexture9> {
     /// # assert_eq!(D3DERR::INVALIDCALL, texture.get_cube_map_surface(CubeMapFace::from_unchecked(!0), 0).err(), "invalid face");
     /// ```
     fn get_cube_map_surface(&self, face: impl Into<CubeMapFace>, level: u32) -> Result<Surface, MethodError> {
+        fn_context!(d3d9::IDirect3DCubeTexture9Ext::get_cube_map_surface => IDirect3DCubeTexture9::GetCubeMapSurface);
         let face = face.into().into();
         let mut surface = null_mut();
         let hr = unsafe { self.as_winapi().GetCubeMapSurface(face, level, &mut surface) };
-        MethodError::check("IDirect3DCubeTexture9::GetCubeMapSurface", hr)?;
+        fn_check_hr!(hr)?;
         Ok(unsafe { Surface::from_raw(surface) })
     }
 
@@ -419,9 +429,10 @@ pub trait IDirect3DCubeTexture9Ext : AsSafe<IDirect3DCubeTexture9> {
     /// # assert_eq!(D3DERR::INVALIDCALL, texture.get_level_desc(!0-100).err(), "!0-100");
     /// ```
     fn get_level_desc(&self, level: u32) -> Result<SurfaceDesc, MethodError> {
+        fn_context!(d3d9::IDirect3DCubeTexture9Ext::get_level_desc => IDirect3DCubeTexture9::GetLevelDesc);
         let mut desc = SurfaceDesc::zeroed();
         let hr = unsafe { self.as_winapi().GetLevelDesc(level, &mut *desc) };
-        MethodError::check("IDirect3DCubeTexture9::GetLevelDesc", hr)?;
+        fn_check_hr!(hr)?;
         Ok(desc)
     }
 
@@ -458,13 +469,14 @@ pub trait IDirect3DCubeTexture9Ext : AsSafe<IDirect3DCubeTexture9> {
     /// }
     /// ```
     unsafe fn lock_rect_unchecked(&self, face: impl Into<CubeMapFace>, level: u32, rect: impl IntoRectOrFull, flags: impl Into<Lock>) -> Result<LockedRect, MethodError> {
+        fn_context!(d3d9::IDirect3DCubeTexture9Ext::lock_rect_unchecked => IDirect3DCubeTexture9::LockRect);
         let face = face.into().into();
         let rect = rect.into_rect();
         let rect = rect.as_ref().map_or(null(), |r| &**r);
         let flags = flags.into().into();
         let mut locked = LockedRect::zeroed();
         let hr = unsafe { self.as_winapi().LockRect(face, level, locked.as_mut(), rect.cast(), flags) };
-        MethodError::check("IDirect3DCubeTexture9::LockRect", hr)?;
+        fn_check_hr!(hr)?;
         Ok(locked)
     }
 
@@ -495,8 +507,9 @@ pub trait IDirect3DCubeTexture9Ext : AsSafe<IDirect3DCubeTexture9> {
     /// // TODO
     /// ```
     fn unlock_rect(&self, face: impl Into<CubeMapFace>, level: u32) -> Result<(), MethodError> {
+        fn_context!(d3d9::IDirect3DCubeTexture9Ext::unlock_rect => IDirect3DCubeTexture9::UnlockRect);
         let hr = unsafe { self.as_winapi().UnlockRect(face.into().into(), level) };
-        MethodError::check("IDirect3DCubeTexture9::UnlockRect", hr)
+        fn_check_hr!(hr)
     }
 }
 
@@ -560,10 +573,11 @@ pub trait IDirect3DTexture9Ext : AsSafe<IDirect3DTexture9> {
     /// assert_eq!(D3DERR::INVALIDCALL, texture.add_dirty_rect((i32::MIN, i32::MIN) .. (i32::MAX, i32::MAX)).err(), "out of bounds");
     /// ```
     fn add_dirty_rect(&self, dirty_rect: impl IntoRectOrFull) -> Result<(), MethodError> {
+        fn_context!(d3d9::IDirect3DTexture9Ext::add_dirty_rect => IDirect3DTexture9::AddDirtyRect);
         let dirty_rect = dirty_rect.into_rect();
         let dirty_rect = dirty_rect.as_ref().map_or(null(), |dr| &**dr);
         let hr = unsafe { self.as_winapi().AddDirtyRect(dirty_rect.cast()) };
-        MethodError::check("IDirect3DTexture9::AddDirtyRect", hr)
+        fn_check_hr!(hr)
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dtexture9-getsurfacelevel)\]
@@ -584,9 +598,10 @@ pub trait IDirect3DTexture9Ext : AsSafe<IDirect3DTexture9> {
     /// # assert_eq!(D3DERR::INVALIDCALL, texture.get_surface_level(!0).err(), "level !0");
     /// ```
     fn get_surface_level(&self, level: u32) -> Result<Surface, MethodError> {
+        fn_context!(d3d9::IDirect3DTexture9Ext::get_surface_level => IDirect3DTexture9::GetSurfaceLevel);
         let mut surface = null_mut();
         let hr = unsafe { self.as_winapi().GetSurfaceLevel(level, &mut surface) };
-        MethodError::check("IDirect3DTexture9::GetSurfaceLevel", hr)?;
+        fn_check_hr!(hr)?;
         Ok(unsafe { Surface::from_raw(surface) })
     }
 
@@ -610,9 +625,10 @@ pub trait IDirect3DTexture9Ext : AsSafe<IDirect3DTexture9> {
     /// # assert_eq!(D3DERR::INVALIDCALL, texture.get_level_desc(!0-100).err(), "!0-100");
     /// ```
     fn get_level_desc(&self, level: u32) -> Result<SurfaceDesc, MethodError> {
+        fn_context!(d3d9::IDirect3DTexture9Ext::get_level_desc => IDirect3DTexture9::GetLevelDesc);
         let mut desc = SurfaceDesc::zeroed();
         let hr = unsafe { self.as_winapi().GetLevelDesc(level, &mut *desc) };
-        MethodError::check("IDirect3DTexture9::GetLevelDesc", hr)?;
+        fn_check_hr!(hr)?;
         Ok(desc)
     }
 
@@ -649,12 +665,13 @@ pub trait IDirect3DTexture9Ext : AsSafe<IDirect3DTexture9> {
     /// }
     /// ```
     unsafe fn lock_rect_unchecked(&self, level: u32, rect: impl IntoRectOrFull, flags: impl Into<Lock>) -> Result<D3DLOCKED_RECT, MethodError> {
+        fn_context!(d3d9::IDirect3DTexture9Ext::lock_rect_unchecked => IDirect3DTexture9::LockRect);
         let rect = rect.into_rect();
         let rect = rect.as_ref().map_or(null(), |r| &**r);
         let flags = flags.into().into();
         let mut locked = unsafe { std::mem::zeroed::<D3DLOCKED_RECT>() };
         let hr = unsafe { self.as_winapi().LockRect(level, &mut locked, rect.cast(), flags) };
-        MethodError::check("IDirect3DTexture9::LockRect", hr)?;
+        fn_check_hr!(hr)?;
         Ok(locked)
     }
 
@@ -685,8 +702,9 @@ pub trait IDirect3DTexture9Ext : AsSafe<IDirect3DTexture9> {
     /// }
     /// ```
     fn unlock_rect(&self, level: u32) -> Result<(), MethodError> {
+        fn_context!(d3d9::IDirect3DTexture9Ext::unlock_rect => IDirect3DTexture9::UnlockRect);
         let hr = unsafe { self.as_winapi().UnlockRect(level) };
-        MethodError::check("IDirect3DTexture9::UnlockRect", hr)
+        fn_check_hr!(hr)
     }
 }
 
@@ -746,10 +764,11 @@ pub trait IDirect3DVolumeTexture9Ext : AsSafe<IDirect3DVolumeTexture9> {
     /// texture.add_dirty_box(Box::from((0,0,0) .. (32,32,32))).unwrap();
     /// ```
     fn add_dirty_box(&self, dirty_box: impl IntoBoxOrFull) -> Result<(), MethodError> {
+        fn_context!(d3d9::IDirect3DVolumeTexture9Ext::add_dirty_box => IDirect3DVolumeTexture9::AddDirtyBox);
         let dirty_box   = dirty_box.into_box();
         let dirty_box   = dirty_box.as_ref().map_or(null(), |b| &**b);
         let hr = unsafe { self.as_winapi().AddDirtyBox(dirty_box) };
-        MethodError::check("IDirect3DVolumeTexture9::AddDirtyBox", hr)
+        fn_check_hr!(hr)
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolumetexture9-getleveldesc)\]
@@ -773,9 +792,10 @@ pub trait IDirect3DVolumeTexture9Ext : AsSafe<IDirect3DVolumeTexture9> {
     /// assert_eq!(level0.depth,  32);
     /// ```
     fn get_level_desc(&self, level: u32) -> Result<VolumeDesc, MethodError> {
+        fn_context!(d3d9::IDirect3DVolumeTexture9Ext::get_level_desc => IDirect3DVolumeTexture9::GetLevelDesc);
         let mut desc = VolumeDesc::zeroed();
         let hr = unsafe { self.as_winapi().GetLevelDesc(level, &mut *desc) };
-        MethodError::check("IDirect3DVolumeTexture9::GetLevelDesc", hr)?;
+        fn_check_hr!(hr)?;
         Ok(desc)
     }
 
@@ -802,9 +822,10 @@ pub trait IDirect3DVolumeTexture9Ext : AsSafe<IDirect3DVolumeTexture9> {
     /// assert_eq!(desc.depth,  32);
     /// ```
     fn get_volume_level(&self, level: u32) -> Result<Volume, MethodError> {
+        fn_context!(d3d9::IDirect3DVolumeTexture9Ext::get_volume_level => IDirect3DVolumeTexture9::GetVolumeLevel);
         let mut volume = null_mut();
         let hr = unsafe { self.as_winapi().GetVolumeLevel(level, &mut volume) };
-        MethodError::check("IDirect3DVolumeTexture9::GetVolumeLevel", hr)?;
+        fn_check_hr!(hr)?;
         Ok(unsafe { Volume::from_raw(volume) })
     }
 
@@ -842,12 +863,13 @@ pub trait IDirect3DVolumeTexture9Ext : AsSafe<IDirect3DVolumeTexture9> {
     /// texture.unlock_box(0).unwrap();
     /// ```
     unsafe fn lock_box_unchecked(&self, level: u32, box_: impl IntoBoxOrFull, flags: impl Into<Lock>) -> Result<LockedBox, MethodError> {
+        fn_context!(d3d9::IDirect3DVolumeTexture9Ext::lock_box_unchecked => IDirect3DVolumeTexture9::LockBox);
         let box_    = box_.into_box();
         let box_    = box_.as_ref().map_or(null(), |b| &**b);
         let flags   = flags.into().into();
         let mut lockedbox = LockedBox::zeroed();
         let hr = unsafe { self.as_winapi().LockBox(level, lockedbox.as_mut(), box_, flags) };
-        MethodError::check("IDirect3DVolumeTexture9::LockBox", hr)?;
+        fn_check_hr!(hr)?;
         Ok(lockedbox)
     }
 
@@ -872,8 +894,9 @@ pub trait IDirect3DVolumeTexture9Ext : AsSafe<IDirect3DVolumeTexture9> {
     /// assert_eq!(D3DERR::INVALIDCALL, texture.unlock_box(0));
     /// ```
     fn unlock_box(&self, level: u32) -> Result<(), MethodError> {
+        fn_context!(d3d9::IDirect3DVolumeTexture9Ext::unlock_box => IDirect3DVolumeTexture9::UnlockBox);
         let hr = unsafe { self.as_winapi().UnlockBox(level) };
-        MethodError::check("IDirect3DVolumeTexture9::UnlockBox", hr)
+        fn_check_hr!(hr)
     }
 
     // TODO: Saner texture init/update methods
@@ -895,28 +918,3 @@ impl<'t> From<&'t VolumeTexture > for Option<&'t BaseTexture> { fn from(t: &'t V
 //#cpp2rust IDirect3DTexture9                                   = d3d9::IDirect3DTexture9Ext
 //#cpp2rust IDirect3DVolumeTexture9                             = d3d9::VolumeTexture
 //#cpp2rust IDirect3DVolumeTexture9                             = d3d9::IDirect3DVolumeTexture9Ext
-
-//#cpp2rust IDirect3DBaseTexture9::GenerateMipSubLevels         = d3d9::IDirect3DBaseTexture9Ext::generate_mip_sub_levels
-//#cpp2rust IDirect3DBaseTexture9::GetAutoGenFilterType         = d3d9::IDirect3DBaseTexture9Ext::get_auto_gen_filter_type
-//#cpp2rust IDirect3DBaseTexture9::GetLevelCount                = d3d9::IDirect3DBaseTexture9Ext::get_level_count
-//#cpp2rust IDirect3DBaseTexture9::GetLOD                       = d3d9::IDirect3DBaseTexture9Ext::get_lod
-//#cpp2rust IDirect3DBaseTexture9::SetAutoGenFilterType         = d3d9::IDirect3DBaseTexture9Ext::set_auto_gen_filter_type
-//#cpp2rust IDirect3DBaseTexture9::SetLOD                       = d3d9::IDirect3DBaseTexture9Ext::set_lod
-
-//#cpp2rust IDirect3DCubeTexture9::AddDirtyRect                 = d3d9::IDirect3DCubeTexture9Ext::add_dirty_rect
-//#cpp2rust IDirect3DCubeTexture9::GetCubeMapSurface            = d3d9::IDirect3DCubeTexture9Ext::get_cube_map_surface
-//#cpp2rust IDirect3DCubeTexture9::GetLevelDesc                 = d3d9::IDirect3DCubeTexture9Ext::get_level_desc
-//#cpp2rust IDirect3DCubeTexture9::LockRect                     = d3d9::IDirect3DCubeTexture9Ext::lock_rect_unchecked
-//#cpp2rust IDirect3DCubeTexture9::UnlockRect                   = d3d9::IDirect3DCubeTexture9Ext::unlock_rect
-
-//#cpp2rust IDirect3DTexture9::AddDirtyRect                     = d3d9::IDirect3DTexture9Ext::add_dirty_rect
-//#cpp2rust IDirect3DTexture9::GetLevelDesc                     = d3d9::IDirect3DTexture9Ext::get_level_desc
-//#cpp2rust IDirect3DTexture9::GetSurfaceLevel                  = d3d9::IDirect3DTexture9Ext::get_surface_level
-//#cpp2rust IDirect3DTexture9::LockRect                         = d3d9::IDirect3DTexture9Ext::lock_rect_unchecked
-//#cpp2rust IDirect3DTexture9::UnlockRect                       = d3d9::IDirect3DTexture9Ext::unlock_rect
-
-//#cpp2rust IDirect3DVolumeTexture9::AddDirtyBox                = d3d9::IDirect3DVolumeTexture9Ext::add_dirty_box
-//#cpp2rust IDirect3DVolumeTexture9::GetLevelDesc               = d3d9::IDirect3DVolumeTexture9Ext::get_level_desc
-//#cpp2rust IDirect3DVolumeTexture9::GetVolumeLevel             = d3d9::IDirect3DVolumeTexture9Ext::get_volume_level
-//#cpp2rust IDirect3DVolumeTexture9::LockBox                    = d3d9::IDirect3DVolumeTexture9Ext::lock_box_unchecked
-//#cpp2rust IDirect3DVolumeTexture9::UnlockBox                  = d3d9::IDirect3DVolumeTexture9Ext::unlock_box

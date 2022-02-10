@@ -201,12 +201,12 @@ impl Compiler {
         flags2:         impl Into<CompileEffect>,
     ) -> Result<CompileResult, CompileError> {
         // Early outs
-        let f           = self.D3DCompileFromFile.ok_or(MethodError("D3DCompileFromFile", THINERR::MISSING_DLL_EXPORT))?;
-        let defines     = defines.as_shader_macros().map_err(|e| MethodError::new("D3DCompileFromFile", e))?;
-        let file_name   = file_name.to_wcstr("D3DCompileFromFile")?;
+        fn_context_dll!(d3d::Compiler::compile_from_file => self.D3DCompileFromFile);
+        let defines     = defines.as_shader_macros().map_err(|e| fn_param_error!(defines,   e))?;
+        let file_name   = file_name.to_wcstr()      .map_err(|e| fn_param_error!(file_name, e))?;
 
-        let entrypoint  = entrypoint.try_into().map_err(|e| MethodError::new("D3DCompileFromFile", e))?;
-        let target      = target    .try_into().map_err(|e| MethodError::new("D3DCompileFromFile", e))?;
+        let entrypoint  = entrypoint.try_into().map_err(|e| fn_param_error!(entrypoint, e.into()))?;
+        let target      = target    .try_into().map_err(|e| fn_param_error!(target,     e.into()))?;
         let entrypoint  = entrypoint.as_opt_cstr();
         let target      = target    .as_cstr();
 
@@ -229,7 +229,7 @@ impl Compiler {
         //  * `flags2`      ⚠️ could be invalid
         //  * `shader`      ✔️ is a trivial out parameter
         //  * `errors`      ✔️ is a trivial out parameter
-        let hr = unsafe { f(
+        let hr = unsafe { D3DCompileFromFile(
             file_name.as_ptr(),
             defines, include, entrypoint, target,
             flags1, flags2, &mut shader, &mut errors,
@@ -303,15 +303,15 @@ impl Compiler {
         flags2:         impl Into<CompileEffect>,
     ) -> Result<CompileResult, CompileError> {
         // Early outs
-        let f           = self.D3DCompile.ok_or(MethodError("D3DCompile", THINERR::MISSING_DLL_EXPORT))?;
-        let defines     = defines.as_shader_macros().map_err(|e| MethodError::new("D3DCompile", e))?;
+        fn_context_dll!(d3d::Compiler::compile => self.D3DCompile);
+        let defines     = defines.as_shader_macros().map_err(|e| fn_param_error!(defines, e))?;
 
         let src_data    = src_data.as_ref();
         // Note: No error checking occurs for internal `\0`s - they will simply terminate the string earlier than expected.
         // Note: We should perhaps reject non-ASCII values instead of allowing UTF8
-        let source_name = source_name   .try_into().map_err(|e| MethodError::new("D3DCompile", e))?;
-        let entrypoint  = entrypoint    .try_into().map_err(|e| MethodError::new("D3DCompile", e))?;
-        let target      = target        .try_into().map_err(|e| MethodError::new("D3DCompile", e))?;
+        let source_name = source_name   .try_into().map_err(|e| fn_param_error!(source_name,    e.into()))?;
+        let entrypoint  = entrypoint    .try_into().map_err(|e| fn_param_error!(entrypoint,     e.into()))?;
+        let target      = target        .try_into().map_err(|e| fn_param_error!(target,         e.into()))?;
         let source_name = source_name   .as_opt_cstr();
         let entrypoint  = entrypoint    .as_opt_cstr();
         let target      = target        .as_cstr();
@@ -336,7 +336,7 @@ impl Compiler {
         //  * `flags2`      ⚠️ could be invalid
         //  * `shader`      ✔️ is a trivial out parameter
         //  * `errors`      ✔️ is a trivial out parameter
-        let hr = unsafe { f(
+        let hr = unsafe { D3DCompile(
             src_data.as_ptr().cast(), src_data.len(),
             source_name, defines, include, entrypoint, target,
             flags1, flags2, &mut shader, &mut errors,
@@ -419,15 +419,15 @@ impl Compiler {
         secondary_data:         impl Into<Option<&'s [u8]>>,
     ) -> Result<CompileResult, CompileError> {
         // Early outs
-        let f           = self.D3DCompile2.ok_or(MethodError("D3DCompile2", THINERR::MISSING_DLL_EXPORT))?;
-        let defines     = defines.as_shader_macros().map_err(|e| MethodError::new("D3DCompile2", e))?;
+        fn_context_dll!(d3d::Compiler::compile2 => self.D3DCompile2);
+        let defines     = defines.as_shader_macros().map_err(|e| fn_param_error!(defines, e))?;
 
         let src_data    = src_data.as_ref();
         // Note: No error checking occurs for internal `\0`s - they will simply terminate the string earlier than expected.
         // Note: We should perhaps reject non-ASCII values instead of allowing UTF8
-        let source_name = source_name   .try_into().map_err(|e| MethodError::new("D3DCompile2", e))?;
-        let entrypoint  = entrypoint    .try_into().map_err(|e| MethodError::new("D3DCompile2", e))?;
-        let target      = target        .try_into().map_err(|e| MethodError::new("D3DCompile2", e))?;
+        let source_name = source_name   .try_into().map_err(|e| fn_param_error!(source_name,    e.into()))?;
+        let entrypoint  = entrypoint    .try_into().map_err(|e| fn_param_error!(entrypoint,     e.into()))?;
+        let target      = target        .try_into().map_err(|e| fn_param_error!(target,         e.into()))?;
         let source_name = source_name   .as_opt_cstr();
         let entrypoint  = entrypoint    .as_opt_cstr();
         let target      = target        .as_cstr();
@@ -459,7 +459,7 @@ impl Compiler {
         //  * `secondary_data`          ❌ could be invalid or cause alloc overflow?
         //  * `shader`                  ✔️ is a trivial out parameter
         //  * `errors`                  ✔️ is a trivial out parameter
-        let hr = unsafe { f(
+        let hr = unsafe { D3DCompile2(
             src_data.as_ptr().cast(), src_data.len(),
             source_name, defines, include, entrypoint, target,
             flags1, flags2, secondary_data_flags, secondary_data, secondary_data_len,
@@ -531,13 +531,13 @@ impl Compiler {
         include:        impl AsInclude,
     ) -> Result<PreprocessResult, PreprocessError> {
         // Early outs
-        let f           = self.D3DPreprocess.ok_or(MethodError("D3DPreprocess", THINERR::MISSING_DLL_EXPORT))?;
-        let defines     = defines.as_shader_macros().map_err(|e| MethodError::new("D3DPreprocess", e))?;
+        fn_context_dll!(d3d::Compiler::preprocess => self.D3DPreprocess);
+        let defines     = defines.as_shader_macros().map_err(|e| fn_param_error!(defines, e))?;
 
         let src_data    = src_data.as_ref();
         // Note: No error checking occurs for internal `\0`s - they will simply terminate the string earlier than expected.
         // Note: We should perhaps reject non-ASCII values instead of allowing UTF8
-        let source_name = source_name.try_into().map_err(|e| MethodError::new("D3DPreprocess", e))?;
+        let source_name = source_name.try_into().map_err(|e| fn_param_error!(source_name, e.into()))?;
         let source_name = source_name.as_opt_cstr();
         let include     = include.as_id3dinclude();
 
@@ -553,7 +553,7 @@ impl Compiler {
         //  * `include`     ❌ huge source files could cause alloc overflows in final shader text blob?
         //  * `shader`      ✔️ is a trivial out parameter
         //  * `errors`      ✔️ is a trivial out parameter
-        let hr = unsafe { f(src_data.as_ptr().cast(), src_data.len(), source_name, defines, include, &mut shader, &mut errors)};
+        let hr = unsafe { D3DPreprocess(src_data.as_ptr().cast(), src_data.len(), source_name, defines, include, &mut shader, &mut errors)};
 
         // SAFETY: ✔️
         //  * `shader` & `errors`   ✔️ are either null (from_raw_opt returns None), or valid, non-dangling, unowned, ID3DBlob s (from_raw_opt takes ownership)
@@ -567,8 +567,3 @@ impl Compiler {
         }
     }
 }
-
-//#cpp2rust D3DCompile                              = d3d::Compiler::compile
-//#cpp2rust D3DCompile2                             = d3d::Compiler::compile2
-//#cpp2rust D3DCompileFromFile                      = d3d::Compiler::compile_from_file
-//#cpp2rust D3DPreprocess                           = d3d::Compiler::preprocess

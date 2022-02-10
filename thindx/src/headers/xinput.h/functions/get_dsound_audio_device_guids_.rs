@@ -22,7 +22,9 @@ use bytemuck::Zeroable;
 /// *   [ERROR::DEVICE_NOT_CONNECTED]?  - [`User`] in bounds, but without a gamepad?
 #[deprecated = "Deprecated in favor of xinput::get_audio_device_ids.  Unavailable for Windows Store apps, may fail on Windows 8."]
 pub fn get_dsound_audio_device_guids(user_index: impl Into<User>) -> Result<DSoundAudioDeviceGuids, MethodError> {
-    #[allow(non_snake_case)] let XInputGetDSoundAudioDeviceGuids = Imports::get().XInputGetDSoundAudioDeviceGuids.ok_or(MethodError("XInputGetDSoundAudioDeviceGuids", THINERR::MISSING_DLL_EXPORT))?;
+    fn_context!(xinput::get_dsound_audio_device_guids => XInputGetDSoundAudioDeviceGuids);
+
+    #[allow(non_snake_case)] let XInputGetDSoundAudioDeviceGuids = Imports::get().XInputGetDSoundAudioDeviceGuids.ok_or(fn_error!(THINERR::MISSING_DLL_EXPORT))?;
 
     let mut guids = DSoundAudioDeviceGuids::zeroed();
     // SAFETY: ❌ Untested (need a system actually defining XInputGetDSoundAudioDeviceGuids)
@@ -30,7 +32,7 @@ pub fn get_dsound_audio_device_guids(user_index: impl Into<User>) -> Result<DSou
     //  * `user_index`  ❌ should be well tested
     //  * `*_guid`      are nice and fixed-size etc.
     let code = unsafe { XInputGetDSoundAudioDeviceGuids(user_index.into().into(), guids.dsound_render_guid.as_mut(), guids.dsound_capture_guid.as_mut()) };
-    check_error_success("XInputGetDSoundAudioDeviceGuids", code)?;
+    check_success!(code)?;
     Ok(guids)
 }
 
@@ -43,5 +45,3 @@ pub fn get_dsound_audio_device_guids(user_index: impl Into<User>) -> Result<DSou
         );
     }
 }
-
-//#cpp2rust XInputGetDSoundAudioDeviceGuids     = xinput::get_dsound_audio_device_guids
