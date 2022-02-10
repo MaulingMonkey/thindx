@@ -4,7 +4,7 @@
 name            = "dev"
 version         = "0.0.0"
 publish         = false
-edition         = "2018"
+edition         = "2021"
 description     = "Internal utility crate for thindx doc comments and unit tests"
 
 [lib]

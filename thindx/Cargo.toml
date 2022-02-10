@@ -4,7 +4,7 @@
 name            = "thindx"
 version         = "0.0.0-git"
 authors         = ["MaulingMonkey <git@maulingmonkey.com>"]
-edition         = "2018"
+edition         = "2021"
 repository      = "https://github.com/MaulingMonkey/thindx"
 documentation   = "https://docs.rs/thindx"
 license         = "Apache-2.0 OR MIT"
