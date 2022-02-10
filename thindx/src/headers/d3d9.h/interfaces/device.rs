@@ -2609,7 +2609,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// For soundness, this limits `index` to [u16], instead of accepting [u32] like the underlying API does.
     ///
     /// ### Returns
-    /// *   <span class="inaccurate">[D3DERR::INVALIDCALL]</span>
+    /// *   <span style="opacity: 25%">[D3DERR::INVALIDCALL]</span>
     /// *   Ok(`()`)
     ///
     /// ### Example
@@ -2638,7 +2638,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// [light_enable]:                Self::light_enable
     ///
     /// ### Returns
-    /// *   <span class="inaccurate">[D3DERR::INVALIDCALL]</span>
+    /// *   <span style="opacity: 25%">[D3DERR::INVALIDCALL]</span>
     /// *   Ok(`()`)
     ///
     /// ### Example
@@ -3060,7 +3060,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// For soundness, this limits `index` to [u16], instead of accepting [u32] like the underlying API does.
     ///
     /// ### Returns
-    /// *   <span class="inaccurate">[D3DERR::INVALIDCALL]</span>
+    /// *   <span style="opacity: 25%">[D3DERR::INVALIDCALL]</span>
     /// *   Ok(`()`)
     ///
     /// ### Example

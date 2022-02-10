@@ -20,7 +20,7 @@ type ModeIndex      = u32;
 /// Factory for use in creating your initial [Device].
 ///
 /// Microsoft's documentation claims that several APIs return [D3DERR::NOTAVAILABLE] when, in my testing, they return [D3DERR::INVALIDCALL] instead.
-/// Do not trust the greyed out, crossed out, air quoted documentation <span class="inaccurate">like this</span>!
+/// Do not trust the greyed out, crossed out, air quoted documentation <span style="opacity: 25%">like this</span>!
 #[derive(Clone)] #[repr(transparent)]
 pub struct Direct3D(pub(crate) mcom::Rc<IDirect3D9>);
 
@@ -115,7 +115,7 @@ pub trait IDirect3D9Ext : AsSafe<IDirect3D9> + Sized {
     /// ### Returns
     /// *   [D3DERR::INVALIDCALL]   if `adapter` >= `self.get_adapter_count()`
     /// *   [D3DERR::INVALIDCALL]   on most bad parameters
-    /// *   <span class="inaccurate">[D3DERR::NOTAVAILABLE] "If a depth-stencil format is not compatible"</span>
+    /// *   <span style="opacity: 25%">[D3DERR::NOTAVAILABLE] "If a depth-stencil format is not compatible"</span>
     /// *   `Ok(())`                if the adapter x render target x depth stencil format combination is supported
     ///
     /// ### Example
@@ -146,7 +146,7 @@ pub trait IDirect3D9Ext : AsSafe<IDirect3D9> + Sized {
     /// ### Returns
     /// *   [D3DERR::INVALIDCALL]       if `adapter` >= `self.get_adapter_count()`
     /// *   [D3DERR::INVALIDCALL]       on most bad parameters
-    /// *   <span class="inaccurate">[D3DERR::NOTAVAILABLE] "if the format is not acceptable to the device for this usage"</span>
+    /// *   <span style="opacity: 25%">[D3DERR::NOTAVAILABLE] "if the format is not acceptable to the device for this usage"</span>
     /// *   `Ok(())`                    if the format is supported
     ///
     /// ### Example
