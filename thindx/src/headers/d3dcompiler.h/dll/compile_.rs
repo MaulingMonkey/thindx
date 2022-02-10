@@ -42,14 +42,11 @@ pub struct PreprocessResult {
 
 
 
-/// { kind: [ErrorKind], shader: Option&lt;[ReadOnlyBlob]&gt;, errors: [TextBlob] }
+/// { error: [MethodError], shader: Option&lt;[ReadOnlyBlob]&gt;, errors: [TextBlob] }
 #[derive(Clone)]
 pub struct CompileError {
-    /// The [ErrorKind] / HRESULT generated when compiling the shader.
-    pub kind:       ErrorKind,
-
-    /// The method that generated the error in question.
-    pub method:     Option<&'static str>,
+    /// The [MethodError] and associated metadata (method, parameter, etc.) associated with the error in question.
+    pub error:      MethodError,
 
     /// Any shader bytecode that may have resulted despite compilation failing.
     ///
@@ -63,8 +60,8 @@ pub struct CompileError {
 }
 
 impl From<MethodError> for CompileError {
-    fn from(e: MethodError) -> Self {
-        Self { kind: e.kind(), method: Some(e.method()), errors: Default::default(), shader: Default::default() }
+    fn from(error: MethodError) -> Self {
+        Self { error, errors: Default::default(), shader: Default::default() }
     }
 }
 
@@ -73,7 +70,7 @@ impl std::error::Error for CompileError {}
 impl Debug for CompileError {
     fn fmt(&self, fmt: &mut Formatter) -> fmt::Result {
         fmt.debug_struct("CompileError")
-            .field("kind", &self.kind)
+            .field("error", &self.error)
             .field("shader", &self.shader.as_ref().map(|_| ..))
             .field("errors", &self.errors.to_utf8_lossy())
             .finish()
@@ -82,7 +79,7 @@ impl Debug for CompileError {
 
 impl Display for CompileError {
     fn fmt(&self, fmt: &mut Formatter) -> fmt::Result {
-        write!(fmt, "Error compiling shader: {:?}", self.kind)?;
+        write!(fmt, "Error compiling shader: {:?}", self.error.kind())?;
         if !self.errors.is_empty() {
             writeln!(fmt, "\n{}", self.errors.to_utf8_lossy())?;
         }
@@ -242,9 +239,9 @@ impl Compiler {
         let shader = unsafe { ReadOnlyBlob::from_raw_opt(shader).map(|shader| CodeBlob::from_unchecked(shader)) };
         let errors = TextBlob::new(unsafe { ReadOnlyBlob::from_raw_opt(errors) });
 
-        match ErrorKind::check(hr) {
+        match fn_check_hr!(hr) {
             Ok(())      => Ok(CompileResult { shader: shader.unwrap(), errors }),
-            Err(kind)   => Err(CompileError { kind, method: Some("D3DCompileFromFile"), shader, errors }),
+            Err(error)  => Err(CompileError { error, shader, errors }),
         }
     }
 
@@ -349,9 +346,9 @@ impl Compiler {
         let shader = unsafe { ReadOnlyBlob::from_raw_opt(shader).map(|shader| CodeBlob::from_unchecked(shader)) };
         let errors = TextBlob::new(unsafe { ReadOnlyBlob::from_raw_opt(errors) });
 
-        match ErrorKind::check(hr) {
+        match fn_check_hr!(hr) {
             Ok(())      => Ok(CompileResult { shader: shader.unwrap(), errors }),
-            Err(kind)   => Err(CompileError { kind, method: Some("D3DCompile"), shader, errors }),
+            Err(error)  => Err(CompileError { error, shader, errors }),
         }
     }
 
@@ -473,9 +470,9 @@ impl Compiler {
         let shader = unsafe { ReadOnlyBlob::from_raw_opt(shader).map(|shader| CodeBlob::from_unchecked(shader)) };
         let errors = TextBlob::new(unsafe { ReadOnlyBlob::from_raw_opt(errors) });
 
-        match ErrorKind::check(hr) {
+        match fn_check_hr!(hr) {
             Ok(())      => Ok(CompileResult { shader: shader.unwrap(), errors }),
-            Err(kind)   => Err(CompileError { kind, method: Some("D3DCompile2"), shader, errors }),
+            Err(error)  => Err(CompileError { error, shader, errors }),
         }
     }
 

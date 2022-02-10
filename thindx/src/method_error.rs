@@ -1,4 +1,5 @@
 use crate::*;
+use crate::error_macros::FnContext;
 
 use winapi::shared::winerror::{HRESULT, SUCCEEDED};
 
@@ -8,7 +9,7 @@ use std::fmt::{self, Debug, Display, Formatter};
 
 /// An error about some specific method returning an [HRESULT](https://www.hresult.info/)
 #[derive(Clone)]
-pub struct MethodError(pub(crate) &'static str, pub(crate) ErrorKind);
+pub struct MethodError(pub(crate) &'static FnContext, pub(crate) ErrorKind);
 
 // TODO: replace MethodError with a generic Error that takes a single `&'static ErrorSite` payload.
 // This wil allow:
@@ -18,15 +19,15 @@ pub struct MethodError(pub(crate) &'static str, pub(crate) ErrorKind);
 
 impl MethodError {
     /// Returns an `Err(MethodError(...))` if `!SUCCEEDED(hr)`
-    pub(crate) fn check(method: &'static str, hr: HRESULT) -> Result<(), Self> {
+    pub(crate) fn check(ctx: &'static FnContext, hr: HRESULT) -> Result<(), Self> {
         if SUCCEEDED(hr) {
             Ok(())
         } else {
-            Err(MethodError(method, ErrorKind(hr)))
+            Err(MethodError(ctx, ErrorKind(hr)))
         }
     }
 
-    pub(crate) fn method(&self) -> &'static str { self.0 }
+    pub(crate) fn method(&self) -> &'static str { self.0.directx_method.unwrap_or(self.0.thindx_method) }
 
     /// Returns the [ErrorKind] of the error
     pub fn kind(&self) -> ErrorKind { self.1 }
@@ -38,8 +39,8 @@ impl MethodError {
     pub fn hresult_info_search_link(&self) -> String { format!("https://www.hresult.info/Search?q=0x{:08x}", self.1.0 as u32) }
 }
 
-impl Debug   for MethodError { fn fmt(&self, fmt: &mut Formatter) -> fmt::Result { write!(fmt, "MethodError({:?}, {:?})", self.0, self.1) } }
-impl Display for MethodError { fn fmt(&self, fmt: &mut Formatter) -> fmt::Result { write!(fmt, "{} failed with HRESULT == {}", self.0, self.1) } }
+impl Debug   for MethodError { fn fmt(&self, fmt: &mut Formatter) -> fmt::Result { write!(fmt, "MethodError({:?}, {:?})", self.method(), self.1) } }
+impl Display for MethodError { fn fmt(&self, fmt: &mut Formatter) -> fmt::Result { write!(fmt, "{} failed with HRESULT == {}", self.method(), self.1) } }
 
 impl std::error::Error for MethodError {}
 impl From<MethodError> for std::io::Error { fn from(err: MethodError) -> Self { std::io::Error::new(std::io::ErrorKind::Other, err) } }

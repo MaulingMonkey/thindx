@@ -1,9 +1,9 @@
 
-macro_rules! fn_err         { ( $kind:expr ) => {    Err($crate::MethodError(_THINDX_FN_CONTEXT.directx_method.unwrap_or(_THINDX_FN_CONTEXT.thindx_method), $kind)) }}
-macro_rules! fn_error       { ( $kind:expr ) => {        $crate::MethodError(_THINDX_FN_CONTEXT.directx_method.unwrap_or(_THINDX_FN_CONTEXT.thindx_method), $kind)  }}
-macro_rules! fn_check_hr    { ( $hr:expr )   => { $crate::MethodError::check(_THINDX_FN_CONTEXT.directx_method.unwrap_or(_THINDX_FN_CONTEXT.thindx_method), $hr)    }}
+macro_rules! fn_err         { ( $kind:expr ) => {    Err($crate::MethodError(_THINDX_FN_CONTEXT, $kind)) }}
+macro_rules! fn_error       { ( $kind:expr ) => {        $crate::MethodError(_THINDX_FN_CONTEXT, $kind)  }}
+macro_rules! fn_check_hr    { ( $hr:expr )   => { $crate::MethodError::check(_THINDX_FN_CONTEXT, $hr)    }}
 // TODO: collapse fn_check_hr! spam
-macro_rules! fn_param_error { ( $param:ident, $kind:expr ) => { $crate::MethodError(_THINDX_FN_CONTEXT.directx_method.unwrap_or(_THINDX_FN_CONTEXT.thindx_method), $kind) } }
+macro_rules! fn_param_error { ( $param:ident, $kind:expr ) => { $crate::MethodError(_THINDX_FN_CONTEXT, $kind) } }
 // TODO: use $param in error payload
 // TODO: audit fn_param_error! for consistency
 

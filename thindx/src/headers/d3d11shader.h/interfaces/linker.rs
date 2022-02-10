@@ -123,8 +123,8 @@ impl Linker {
     /// *   [examples::d3dcompiler_03_link]
     pub fn link(&self, entry: &ModuleInstance, entry_name: impl TryIntoAsCStr, target_name: impl TryIntoAsCStr, flags: Option<std::convert::Infallible>) -> Result<LinkResult, MethodErrorBlob> {
         fn_context!(d3d11::Linker::link => ID3D11Linker::Link);
-        let entry_name  = entry_name .try_into().map_err(|e| MethodErrorBlob::new("ID3D11Linker::Link", e))?;
-        let target_name = target_name.try_into().map_err(|e| MethodErrorBlob::new("ID3D11Linker::Link", e))?;
+        let entry_name  = entry_name .try_into().map_err(|e| fn_param_error!(entry_name,  e.into()))?;
+        let target_name = target_name.try_into().map_err(|e| fn_param_error!(target_name, e.into()))?;
         let entry_name  = entry_name .as_cstr();
         let target_name = target_name.as_cstr();
 
@@ -133,11 +133,14 @@ impl Linker {
         let mut blob = null_mut();
         let mut errors = null_mut();
         let hr = unsafe { self.0.Link(entry.as_raw(), entry_name, target_name, flags, &mut blob, &mut errors) };
-        unsafe { MethodErrorBlob::check_blob("ID3D11Linker::Link", hr, errors) }?;
-        Ok(LinkResult {
-            shader: unsafe { CodeBlob::from_unchecked(ReadOnlyBlob::from_raw(blob)) },
-            errors: TextBlob::new(unsafe { ReadOnlyBlob::from_raw_opt(errors) }),
-        })
+        let errors = TextBlob::new(unsafe { ReadOnlyBlob::from_raw_opt(errors) });
+        match fn_check_hr!(hr) {
+            Err(error) => Err(MethodErrorBlob { error, errors }),
+            Ok(()) => Ok(LinkResult {
+                shader: unsafe { CodeBlob::from_unchecked(ReadOnlyBlob::from_raw(blob)) },
+                errors,
+            })
+        }
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11linker-uselibrary)\]

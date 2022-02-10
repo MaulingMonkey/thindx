@@ -56,6 +56,6 @@ pub(crate) fn check_error_success(fn_context: &'static crate::error_macros::FnCo
     if err == ERROR::SUCCESS.0 as _ {
         Ok(())
     } else {
-        Err(MethodError(fn_context.directx_method.unwrap_or(fn_context.thindx_method), ErrorKind(err as _)))
+        Err(MethodError(fn_context, ErrorKind(err as _)))
     }
 }

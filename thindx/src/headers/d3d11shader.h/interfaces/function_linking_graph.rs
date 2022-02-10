@@ -167,16 +167,20 @@ impl FunctionLinkingGraph {
     /// ### Errors
     /// *   [E::FAIL]   - if called before set_output_signature
     /// *   [E::FAIL]   - if the FLG has no nodes
-    pub fn create_module_instance(&self) -> Result<(ModuleInstance, Option<ReadOnlyBlob>), MethodErrorBlob> {
+    pub fn create_module_instance(&self) -> Result<(ModuleInstance, TextBlob), MethodErrorBlob> {
         fn_context!(d3d11::FunctionLinkingGraph::create_module_instance => ID3D11FunctionLinkingGraph::CreateModuleInstance);
-        // TODO: named tuple return?  better error type that can carry the blob?
+        // TODO: named tuple return?
         let mut module = null_mut();
         let mut errors = null_mut();
         let hr = unsafe { self.0.CreateModuleInstance(&mut module, &mut errors) };
-        unsafe { MethodErrorBlob::check_blob("ID3D11FunctionLinkingGraph::CreateModuleInstance", hr, errors)? };
-        let module = unsafe { ModuleInstance::from_raw(module) };
-        let errors = unsafe { ReadOnlyBlob::from_raw_opt(errors) };
-        Ok((module, errors))
+        let errors = TextBlob::new(unsafe { ReadOnlyBlob::from_raw_opt(errors) });
+        match fn_check_hr!(hr) {
+            Err(error) => Err(MethodErrorBlob { error, errors }),
+            Ok(()) => {
+                let module = unsafe { ModuleInstance::from_raw(module) };
+                Ok((module, errors))
+            }
+        }
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionlinkinggraph-generatehlsl)\]
