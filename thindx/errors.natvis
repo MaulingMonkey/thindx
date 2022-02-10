@@ -2,7 +2,7 @@
 <AutoVisualizer xmlns="http://schemas.microsoft.com/vstudio/debugger/natvis/2010">
 
     <Type Name="thindx::method_error::MethodError">
-        <DisplayString>{__1} ({__0,sb})</DisplayString>
+        <DisplayString>{__1} ({__0->thindx_method,sb})</DisplayString>
         <!--
         <DisplayString>{__1} - MethodError({__0}, ...)</DisplayString>
         <DisplayString>MethodError({__0}, {__1})</DisplayString>
