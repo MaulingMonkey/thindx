@@ -46,8 +46,7 @@ pub trait IDirect3DVertexDeclaration9Ext : AsSafe<IDirect3DVertexDeclaration9> {
     fn get_declaration_size(&self) -> Result<u32, MethodError> {
         fn_context!(d3d9::IDirect3DVertexDeclaration9Ext::get_declaration_size => IDirect3DVertexDeclaration9::GetDeclaration);
         let mut num_elements = 0;
-        let hr = unsafe { self.as_winapi().GetDeclaration(null_mut(), &mut num_elements) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { self.as_winapi().GetDeclaration(null_mut(), &mut num_elements) })?;
         Ok(num_elements)
     }
 
@@ -64,8 +63,7 @@ pub trait IDirect3DVertexDeclaration9Ext : AsSafe<IDirect3DVertexDeclaration9> {
         fn_context!(d3d9::IDirect3DVertexDeclaration9Ext::get_declaration_inplace => IDirect3DVertexDeclaration9::GetDeclaration);
         let mut num_elements = self.get_declaration_size()?;
         if num_elements as usize > elements.len() { return Err(fn_param_error!(elements, D3DERR::INVALIDCALL)); }
-        let hr = unsafe { self.as_winapi().GetDeclaration(null_mut(), &mut num_elements) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { self.as_winapi().GetDeclaration(null_mut(), &mut num_elements) })?;
         Ok(&elements[0..(num_elements as usize)])
     }
 
@@ -98,8 +96,7 @@ pub trait IDirect3DVertexDeclaration9Ext : AsSafe<IDirect3DVertexDeclaration9> {
     fn get_device(&self) -> Result<Device, MethodError> {
         fn_context!(d3d9::IDirect3DVertexDeclaration9Ext::get_device => IDirect3DVertexDeclaration9::GetDevice);
         let mut device = null_mut();
-        let hr = unsafe { self.as_winapi().GetDevice(&mut device) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { self.as_winapi().GetDevice(&mut device) })?;
         Ok(unsafe { Device::from_raw(device) })
     }
 }

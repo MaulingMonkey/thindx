@@ -50,8 +50,7 @@ impl Compiler {
         //  * `part`        ⚠️ could be invalid
         //  * `flags`       ✔️ are reserved/0
         //  * `blob`        ✔️ is a simple out-param
-        let hr = unsafe { D3DGetBlobPart(src_data.as_ptr().cast(), src_data.len(), part, 0, &mut blob) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { D3DGetBlobPart(src_data.as_ptr().cast(), src_data.len(), part, 0, &mut blob) })?;
 
         // SAFETY: ✔️ `blob` is null (from_raw panics) or a valid non-dangling pointer (from_raw takes ownership).  ReadOnlyBlob imposes no content requirements.
         Ok(BytesBlob::new(unsafe { ReadOnlyBlob::from_raw(blob) }))
@@ -110,8 +109,7 @@ impl Compiler {
         //  * `src_data`    ✔️ should be valid bytecode as implied by [`Bytecode`]
         //  * `blob`        ✔️ is a simple out-param
         let mut blob = null_mut();
-        let hr = unsafe { D3DGetDebugInfo(src_data.as_ptr().cast(), src_data.len(), &mut blob) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { D3DGetDebugInfo(src_data.as_ptr().cast(), src_data.len(), &mut blob) })?;
 
         // SAFETY: ✔️ `blob` is null (from_raw panics) or a valid non-dangling pointer (from_raw takes ownership).  ReadOnlyBlob imposes no content requirements.
         Ok(BytesBlob::new(unsafe { ReadOnlyBlob::from_raw(blob) }))
@@ -150,8 +148,7 @@ impl Compiler {
         //  * `src_data`    ✔️ should be valid bytecode as implied by [`Bytecode`]
         //  * `blob`        ✔️ is a simple out-param
         let mut blob = null_mut();
-        let hr = unsafe { D3DGetInputAndOutputSignatureBlob(src_data.as_ptr().cast(), src_data.len(), &mut blob) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { D3DGetInputAndOutputSignatureBlob(src_data.as_ptr().cast(), src_data.len(), &mut blob) })?;
 
         // SAFETY: ✔️ `blob` is null (from_raw panics) or a valid non-dangling pointer (from_raw takes ownership).  ReadOnlyBlob imposes no content requirements.
         Ok(BytesBlob::new(unsafe { ReadOnlyBlob::from_raw(blob) }))
@@ -190,8 +187,7 @@ impl Compiler {
         //  * `src_data`    ✔️ should be valid bytecode as implied by [`Bytecode`]
         //  * `blob`        ✔️ is a simple out-param
         let mut blob = null_mut();
-        let hr = unsafe { D3DGetInputSignatureBlob(src_data.as_ptr().cast(), src_data.len(), &mut blob) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { D3DGetInputSignatureBlob(src_data.as_ptr().cast(), src_data.len(), &mut blob) })?;
 
         // SAFETY: ✔️ `blob` is null (from_raw panics) or a valid non-dangling pointer (from_raw takes ownership).  ReadOnlyBlob imposes no content requirements.
         Ok(BytesBlob::new(unsafe { ReadOnlyBlob::from_raw(blob) }))
@@ -230,8 +226,7 @@ impl Compiler {
         //  * `src_data`    ✔️ should be valid bytecode as implied by [`Bytecode`]
         //  * `blob`        ✔️ is a simple out-param
         let mut blob = null_mut();
-        let hr = unsafe { D3DGetOutputSignatureBlob(src_data.as_ptr().cast(), src_data.len(), &mut blob) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { D3DGetOutputSignatureBlob(src_data.as_ptr().cast(), src_data.len(), &mut blob) })?;
 
         // SAFETY: ✔️ `blob` is null (from_raw panics) or a valid non-dangling pointer (from_raw takes ownership).  ReadOnlyBlob imposes no content requirements.
         Ok(BytesBlob::new(unsafe { ReadOnlyBlob::from_raw(blob) }))
@@ -285,8 +280,7 @@ impl Compiler {
         //  * `part`        ⚠️ could be invalid
         //  * `part_data`   ❌ could be invalid for `part`
         let mut blob = null_mut();
-        let hr = unsafe { D3DSetBlobPart(src_data.as_ptr().cast(), src_data.len(), part.into().into(), 0, part_data.as_ptr().cast(), part_data.len(), &mut blob) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { D3DSetBlobPart(src_data.as_ptr().cast(), src_data.len(), part.into().into(), 0, part_data.as_ptr().cast(), part_data.len(), &mut blob) })?;
 
         // SAFETY: ⚠️
         //  * `blob`        ✔️ should be null (from_raw panics) or a valid non-dangling blob (from_raw takes ownership)
@@ -335,8 +329,7 @@ impl Compiler {
         //  * `src_data`    ✔️ should be valid bytecode as implied by [`Bytecode`]
         //  * `strip_flags` ⚠️ could be invalid
         //  * `blob`        ✔️ is a simple out-param
-        let hr = unsafe { D3DStripShader(src_data.as_ptr().cast(), src_data.len(), strip_flags.into().into(), &mut blob) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { D3DStripShader(src_data.as_ptr().cast(), src_data.len(), strip_flags.into().into(), &mut blob) })?;
 
         // SAFETY: ⚠️
         //  * `blob`        ✔️ should be null (from_raw panics) or a valid non-dangling blob (from_raw takes ownership)

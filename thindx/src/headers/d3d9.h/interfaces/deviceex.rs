@@ -144,8 +144,7 @@ pub trait IDirect3DDevice9ExExt : AsSafe<IDirect3DDevice9Ex> {
         let (src, dst, src_rect_descs, dst_rect_descs) = (src.as_raw(), dst.as_raw(), src_rect_descs.as_raw(), dst_rect_descs.as_raw());
         let operation = operation.into().into();
 
-        let hr = unsafe { self.as_winapi().ComposeRects(src, dst, src_rect_descs, num_rects, dst_rect_descs, operation, xoffset, yoffset) };
-        fn_check_hr!(hr)
+        fn_check_hr!(unsafe { self.as_winapi().ComposeRects(src, dst, src_rect_descs, num_rects, dst_rect_descs, operation, xoffset, yoffset) })
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-createdepthstencilsurfaceex)\]
@@ -171,8 +170,7 @@ pub trait IDirect3DDevice9ExExt : AsSafe<IDirect3DDevice9Ex> {
         let usage = usage.into().into();
 
         let mut surface = null_mut();
-        let hr = unsafe { self.as_winapi().CreateDepthStencilSurfaceEx(width, height, format, multi_sample, multi_sample_quality, discard, &mut surface, shared_handle, usage) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { self.as_winapi().CreateDepthStencilSurfaceEx(width, height, format, multi_sample, multi_sample_quality, discard, &mut surface, shared_handle, usage) })?;
         Ok(unsafe { Surface::from_raw(surface) })
     }
 
@@ -198,8 +196,7 @@ pub trait IDirect3DDevice9ExExt : AsSafe<IDirect3DDevice9Ex> {
         let usage = usage.into().into();
 
         let mut surface = null_mut();
-        let hr = unsafe { self.as_winapi().CreateOffscreenPlainSurfaceEx(width, height, format, pool, &mut surface, shared_handle, usage) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { self.as_winapi().CreateOffscreenPlainSurfaceEx(width, height, format, pool, &mut surface, shared_handle, usage) })?;
         Ok(unsafe { Surface::from_raw(surface) })
     }
 
@@ -226,8 +223,7 @@ pub trait IDirect3DDevice9ExExt : AsSafe<IDirect3DDevice9Ex> {
         let usage = usage.into().into();
 
         let mut surface = null_mut();
-        let hr = unsafe { self.as_winapi().CreateRenderTargetEx(width, height, format, multi_sample, multi_sample_quality, lockable, &mut surface, shared_handle, usage) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { self.as_winapi().CreateRenderTargetEx(width, height, format, multi_sample, multi_sample_quality, lockable, &mut surface, shared_handle, usage) })?;
         Ok(unsafe { Surface::from_raw(surface) })
     }
 
@@ -250,8 +246,7 @@ pub trait IDirect3DDevice9ExExt : AsSafe<IDirect3DDevice9Ex> {
         let mut display_mode_ex = DisplayModeEx::zeroed();
         display_mode_ex.size = std::mem::size_of_val(&display_mode_ex).try_into().unwrap();
         let mut rotation = 0;
-        let hr = unsafe { self.as_winapi().GetDisplayModeEx(swap_chain, &mut *display_mode_ex, &mut rotation) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { self.as_winapi().GetDisplayModeEx(swap_chain, &mut *display_mode_ex, &mut rotation) })?;
         Ok((display_mode_ex, DisplayRotation::from_unchecked(rotation)))
     }
 
@@ -273,8 +268,7 @@ pub trait IDirect3DDevice9ExExt : AsSafe<IDirect3DDevice9Ex> {
     fn get_gpu_thread_priority(&self) -> Result<i32, MethodError> {
         fn_context!(d3d9::IDirect3DDevice9ExExt::get_gpu_thread_priority => IDirect3DDevice9Ex::GetGPUThreadPriority);
         let mut pri = 0;
-        let hr = unsafe { self.as_winapi().GetGPUThreadPriority(&mut pri) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { self.as_winapi().GetGPUThreadPriority(&mut pri) })?;
         Ok(pri)
     }
 
@@ -299,8 +293,7 @@ pub trait IDirect3DDevice9ExExt : AsSafe<IDirect3DDevice9Ex> {
     fn get_maximum_frame_latency(&self) -> Result<u32, MethodError> {
         fn_context!(d3d9::IDirect3DDevice9ExExt::get_maximum_frame_latency => IDirect3DDevice9Ex::GetMaximumFrameLatency);
         let mut max_latency = 0;
-        let hr = unsafe { self.as_winapi().GetMaximumFrameLatency(&mut max_latency) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { self.as_winapi().GetMaximumFrameLatency(&mut max_latency) })?;
         Ok(max_latency)
     }
 
@@ -342,8 +335,7 @@ pub trait IDirect3DDevice9ExExt : AsSafe<IDirect3DDevice9Ex> {
             },
         };
 
-        let hr = unsafe { self.as_winapi().PresentEx(source_rect.cast(), dest_rect.cast(), dest_window_override.as_hwnd(), dirty_region, flags) };
-        fn_check_hr!(hr)
+        fn_check_hr!(unsafe { self.as_winapi().PresentEx(source_rect.cast(), dest_rect.cast(), dest_window_override.as_hwnd(), dirty_region, flags) })
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-resetex)\]
@@ -365,8 +357,7 @@ pub trait IDirect3DDevice9ExExt : AsSafe<IDirect3DDevice9Ex> {
     fn reset_ex<'mode>(&self, presentation_parameters: &mut PresentParameters<'static>, fullscreen_display_mode: impl Into<Option<&'mode mut DisplayModeEx>>) -> Result<(), MethodError> {
         fn_context!(d3d9::IDirect3DDevice9ExExt::reset_ex => IDirect3DDevice9Ex::ResetEx);
         let fullscreen_display_mode = fullscreen_display_mode.into().map_or(null_mut(), |dm| dm);
-        let hr = unsafe { self.as_winapi().ResetEx(presentation_parameters.as_mut(), fullscreen_display_mode.cast()) };
-        fn_check_hr!(hr)
+        fn_check_hr!(unsafe { self.as_winapi().ResetEx(presentation_parameters.as_mut(), fullscreen_display_mode.cast()) })
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-setconvolutionmonokernel)\]
@@ -385,8 +376,7 @@ pub trait IDirect3DDevice9ExExt : AsSafe<IDirect3DDevice9Ex> {
     /// ```
     fn set_convolution_mono_kernel_unweighted(&self, width: u32, height: u32) -> Result<(), MethodError> {
         fn_context!(d3d9::IDirect3DDevice9ExExt::set_convolution_mono_kernel_unweighted => IDirect3DDevice9Ex::SetConvolutionMonoKernel);
-        let hr = unsafe { self.as_winapi().SetConvolutionMonoKernel(width, height, null_mut(), null_mut()) };
-        fn_check_hr!(hr)
+        fn_check_hr!(unsafe { self.as_winapi().SetConvolutionMonoKernel(width, height, null_mut(), null_mut()) })
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-setconvolutionmonokernel)\]
@@ -408,8 +398,7 @@ pub trait IDirect3DDevice9ExExt : AsSafe<IDirect3DDevice9Ex> {
         // XXX: should rows/cols be non-mut?  Not sure if d3d *actually* writes those values or not...
         let width  : u32 = rows.len().try_into().map_err(|_| fn_param_error!(rows, THINERR::SLICE_OVERFLOW))?;
         let height : u32 = cols.len().try_into().map_err(|_| fn_param_error!(cols, THINERR::SLICE_OVERFLOW))?;
-        let hr = unsafe { self.as_winapi().SetConvolutionMonoKernel(width, height, rows.as_mut_ptr(), cols.as_mut_ptr()) };
-        fn_check_hr!(hr)
+        fn_check_hr!(unsafe { self.as_winapi().SetConvolutionMonoKernel(width, height, rows.as_mut_ptr(), cols.as_mut_ptr()) })
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-setgputhreadpriority)\]
@@ -429,8 +418,7 @@ pub trait IDirect3DDevice9ExExt : AsSafe<IDirect3DDevice9Ex> {
     /// ```
     fn set_gpu_thread_priority(&self, priority: i32) -> Result<(), MethodError> {
         fn_context!(d3d9::IDirect3DDevice9ExExt::set_gpu_thread_priority => IDirect3DDevice9Ex::SetGPUThreadPriority);
-        let hr = unsafe { self.as_winapi().SetGPUThreadPriority(priority) };
-        fn_check_hr!(hr)
+        fn_check_hr!(unsafe { self.as_winapi().SetGPUThreadPriority(priority) })
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-setmaximumframelatency)\]
@@ -449,8 +437,7 @@ pub trait IDirect3DDevice9ExExt : AsSafe<IDirect3DDevice9Ex> {
     /// ```
     fn set_maximum_frame_latency(&self, max_latency: u32) -> Result<(), MethodError> {
         fn_context!(d3d9::IDirect3DDevice9ExExt::set_maximum_frame_latency => IDirect3DDevice9Ex::SetMaximumFrameLatency);
-        let hr = unsafe { self.as_winapi().SetMaximumFrameLatency(max_latency) };
-        fn_check_hr!(hr)
+        fn_check_hr!(unsafe { self.as_winapi().SetMaximumFrameLatency(max_latency) })
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-testcooperativelevel)\]
@@ -470,8 +457,7 @@ pub trait IDirect3DDevice9ExExt : AsSafe<IDirect3DDevice9Ex> {
     #[deprecated = "docs claim test_cooperative_level is no longer available for use - instead, use check_device_state"]
     fn test_cooperative_level(&self) -> Result<(), MethodError> {
         fn_context!(d3d9::IDirect3DDevice9ExExt::test_cooperative_level => IDirect3DDevice9Ex::TestCooperativeLevel);
-        let hr = unsafe { self.as_winapi().TestCooperativeLevel() };
-        fn_check_hr!(hr)
+        fn_check_hr!(unsafe { self.as_winapi().TestCooperativeLevel() })
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-waitforvblank)\]
@@ -490,8 +476,7 @@ pub trait IDirect3DDevice9ExExt : AsSafe<IDirect3DDevice9Ex> {
     /// ```
     fn wait_for_vblank(&self, swap_chain: u32) -> Result<(), MethodError> {
         fn_context!(d3d9::IDirect3DDevice9ExExt::wait_for_vblank => IDirect3DDevice9Ex::WaitForVBlank);
-        let hr = unsafe { self.as_winapi().WaitForVBlank(swap_chain) };
-        fn_check_hr!(hr)
+        fn_check_hr!(unsafe { self.as_winapi().WaitForVBlank(swap_chain) })
     }
 }
 

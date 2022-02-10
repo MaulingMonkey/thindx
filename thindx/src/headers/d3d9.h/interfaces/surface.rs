@@ -68,8 +68,7 @@ pub trait IDirect3DSurface9Ext : AsSafe<IDirect3DSurface9> {
     fn get_container<C: Raw>(&self) -> Result<C, MethodError> where C::Raw : Interface {
         fn_context!(d3d9::IDirect3DSurface9Ext::get_container => IDirect3DSurface9::GetContainer);
         let mut container = null_mut();
-        let hr = unsafe { self.as_winapi().GetContainer(&C::Raw::uuidof(), &mut container) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { self.as_winapi().GetContainer(&C::Raw::uuidof(), &mut container) })?;
         Ok(unsafe { C::from_raw(container.cast()) })
     }
 
@@ -95,8 +94,7 @@ pub trait IDirect3DSurface9Ext : AsSafe<IDirect3DSurface9> {
     fn get_dc(&self) -> Result<HDC, MethodError> {
         fn_context!(d3d9::IDirect3DSurface9Ext::get_dc => IDirect3DSurface9::GetDC);
         let mut hdc = null_mut();
-        let hr = unsafe { self.as_winapi().GetDC(&mut hdc) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { self.as_winapi().GetDC(&mut hdc) })?;
         Ok(hdc)
     }
 
@@ -122,8 +120,7 @@ pub trait IDirect3DSurface9Ext : AsSafe<IDirect3DSurface9> {
     fn get_desc(&self) -> Result<SurfaceDesc, MethodError> {
         fn_context!(d3d9::IDirect3DSurface9Ext::get_desc => IDirect3DSurface9::GetDesc);
         let mut desc = SurfaceDesc::zeroed();
-        let hr = unsafe { self.as_winapi().GetDesc(&mut *desc) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { self.as_winapi().GetDesc(&mut *desc) })?;
         Ok(desc)
     }
 
@@ -162,8 +159,7 @@ pub trait IDirect3DSurface9Ext : AsSafe<IDirect3DSurface9> {
         let rect = rect.into_rect();
         let rect = rect.as_ref().map_or(null(), |b| &**b);
         let mut locked = LockedRect::zeroed();
-        let hr = unsafe { self.as_winapi().LockRect(locked.as_mut(), rect.cast(), flags.into().into()) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { self.as_winapi().LockRect(locked.as_mut(), rect.cast(), flags.into().into()) })?;
         Ok(locked)
     }
 
@@ -193,8 +189,7 @@ pub trait IDirect3DSurface9Ext : AsSafe<IDirect3DSurface9> {
     /// ```
     fn release_dc(&self, hdc: HDC) -> Result<(), MethodError> {
         fn_context!(d3d9::IDirect3DSurface9Ext::release_dc => IDirect3DSurface9::ReleaseDC);
-        let hr = unsafe { self.as_winapi().ReleaseDC(hdc) };
-        fn_check_hr!(hr)
+        fn_check_hr!(unsafe { self.as_winapi().ReleaseDC(hdc) })
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3dsurface9-unlockrect)\]
@@ -224,8 +219,7 @@ pub trait IDirect3DSurface9Ext : AsSafe<IDirect3DSurface9> {
     /// ```
     fn unlock_rect(&self) -> Result<(), MethodError> {
         fn_context!(d3d9::IDirect3DSurface9Ext::unlock_rect => IDirect3DSurface9::UnlockRect);
-        let hr = unsafe { self.as_winapi().UnlockRect() };
-        fn_check_hr!(hr)
+        fn_check_hr!(unsafe { self.as_winapi().UnlockRect() })
     }
 }
 

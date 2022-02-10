@@ -52,8 +52,7 @@ impl LibraryReflection {
     pub fn get_desc(&self) -> Result<LibraryDesc, MethodError> {
         fn_context!(d3d11::LibraryReflection::get_desc => ID3D11LibraryReflection::GetDesc);
         let mut desc = LibraryDesc::default();
-        let hr = unsafe { self.0.GetDesc(desc.as_mut_ptr()) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { self.0.GetDesc(desc.as_mut_ptr()) })?;
         Ok(desc)
     }
 

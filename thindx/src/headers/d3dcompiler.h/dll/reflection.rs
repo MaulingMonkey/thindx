@@ -59,8 +59,7 @@ impl Compiler {
         //  * `uuid`        ✔️ is a simple GUID input
         //  * `reflector`   ✔️ is a simple out-param
         let mut reflector = null_mut();
-        let hr = unsafe { D3DReflect(src_data.as_ptr().cast(), src_data.len(), &I::Raw::uuidof(), &mut reflector) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { D3DReflect(src_data.as_ptr().cast(), src_data.len(), &I::Raw::uuidof(), &mut reflector) })?;
 
         // SAFETY: ✔️ `reflector` should be null (from_raw panics) or a valid non-dangling I::Raw (from_raw takes ownership)
         Ok(unsafe { I::from_raw(reflector.cast()) })
@@ -157,8 +156,7 @@ impl Compiler {
         //  * `uuid`        ✔️ is a simple GUID input
         //  * `reflector`   ✔️ is a simple out-param
         let mut reflector = null_mut();
-        let hr = unsafe { D3DReflectLibrary(src_data.as_ptr().cast(), src_data.len(), &I::Raw::uuidof(), &mut reflector) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { D3DReflectLibrary(src_data.as_ptr().cast(), src_data.len(), &I::Raw::uuidof(), &mut reflector) })?;
 
         // SAFETY: ✔️ `reflector` should be null (from_raw panics) or a valid non-dangling I::Raw (from_raw takes ownership)
         Ok(unsafe { I::from_raw(reflector.cast()) })

@@ -70,8 +70,7 @@ pub trait IDirect3D9ExExt : AsSafe<IDirect3D9Ex> {
     unsafe fn create_ex(sdk_version: SdkVersion) -> Result<Self, MethodError> where Self : From<mcom::Rc<IDirect3D9Ex>> {
         fn_context!(d3d9::IDirect3D9ExExt::create_ex => Direct3DCreate9Ex);
         let mut d3d9ex = null_mut();
-        let hr = unsafe { Direct3DCreate9Ex(sdk_version.into(), &mut d3d9ex) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { Direct3DCreate9Ex(sdk_version.into(), &mut d3d9ex) })?;
         Ok(Self::from(unsafe { mcom::Rc::from_raw(d3d9ex) }))
     }
 
@@ -93,8 +92,7 @@ pub trait IDirect3D9ExExt : AsSafe<IDirect3D9Ex> {
         // TODO: examples, returns, etc.
         let mut device = null_mut();
         let modes = if fullscreen_display_modes.is_empty() { null_mut() } else { fullscreen_display_modes.as_mut_ptr().cast() };
-        let hr = unsafe { self.as_winapi().CreateDeviceEx(adapter, device_type.into().into(), hwnd, behavior_flags.into().into(), presentation_parameters.as_mut(), modes, &mut device) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { self.as_winapi().CreateDeviceEx(adapter, device_type.into().into(), hwnd, behavior_flags.into().into(), presentation_parameters.as_mut(), modes, &mut device) })?;
         Ok(unsafe { DeviceEx::from_raw(device) })
     }
 
@@ -108,8 +106,7 @@ pub trait IDirect3D9ExExt : AsSafe<IDirect3D9Ex> {
         filter.size = std::mem::size_of_val(&filter).try_into().unwrap();
         let mut dmex = DisplayModeEx::zeroed();
         dmex.size = std::mem::size_of_val(&dmex).try_into().unwrap();
-        let hr = unsafe { self.as_winapi().EnumAdapterModesEx(adapter, filter.as_ref(), mode, dmex.as_mut()) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { self.as_winapi().EnumAdapterModesEx(adapter, filter.as_ref(), mode, dmex.as_mut()) })?;
         Ok(dmex)
     }
 
@@ -122,8 +119,7 @@ pub trait IDirect3D9ExExt : AsSafe<IDirect3D9Ex> {
         let mut mode = DisplayModeEx::zeroed();
         mode.size = std::mem::size_of_val(&mode).try_into().unwrap();
         let mut rot = D3DDISPLAYROTATION_IDENTITY;
-        let hr = unsafe { self.as_winapi().GetAdapterDisplayModeEx(adapter, mode.as_mut(), &mut rot) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { self.as_winapi().GetAdapterDisplayModeEx(adapter, mode.as_mut(), &mut rot) })?;
         Ok((mode, DisplayRotation::from_unchecked(rot)))
     }
 
@@ -135,8 +131,7 @@ pub trait IDirect3D9ExExt : AsSafe<IDirect3D9Ex> {
     fn get_adapter_luid(&self, adapter: u32) -> Result<Luid, MethodError> {
         fn_context!(d3d9::IDirect3D9ExExt::get_adapter_luid => IDirect3D9Ex::GetAdapterLUID);
         let mut luid = Luid::default();
-        let hr = unsafe { self.as_winapi().GetAdapterLUID(adapter, &mut *luid) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { self.as_winapi().GetAdapterLUID(adapter, &mut *luid) })?;
         Ok(luid)
     }
 

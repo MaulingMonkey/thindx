@@ -46,8 +46,7 @@ pub trait IDirect3DSwapChain9ExExt : AsSafe<IDirect3DSwapChain9Ex> {
         fn_context!(d3d9::IDirect3DSwapChain9ExExt::get_display_mode_ex => IDirect3DSwapChain9Ex::GetDisplayModeEx);
         let mut mode = DisplayModeEx::default();
         let mut rot = 0;
-        let hr = unsafe { self.as_winapi().GetDisplayModeEx(&mut *mode, &mut rot) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { self.as_winapi().GetDisplayModeEx(&mut *mode, &mut rot) })?;
         Ok((mode, DisplayRotation::from_unchecked(rot)))
     }
 
@@ -58,8 +57,7 @@ pub trait IDirect3DSwapChain9ExExt : AsSafe<IDirect3DSwapChain9Ex> {
     fn get_last_present_count(&self) -> Result<UINT, MethodError> {
         fn_context!(d3d9::IDirect3DSwapChain9ExExt::get_last_present_count => IDirect3DSwapChain9Ex::GetLastPresentCount);
         let mut count = 0;
-        let hr = unsafe { self.as_winapi().GetLastPresentCount(&mut count) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { self.as_winapi().GetLastPresentCount(&mut count) })?;
         Ok(count)
     }
 
@@ -75,8 +73,7 @@ pub trait IDirect3DSwapChain9ExExt : AsSafe<IDirect3DSwapChain9Ex> {
         fn_context!(d3d9::IDirect3DSwapChain9ExExt::get_present_statistics => IDirect3DSwapChain9Ex::GetPresentStatistics);
 
         let mut stats = PresentStats::default();
-        let hr = unsafe { self.as_winapi().GetPresentStats(&mut *stats) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { self.as_winapi().GetPresentStats(&mut *stats) })?;
         Ok(stats)
     }
 }

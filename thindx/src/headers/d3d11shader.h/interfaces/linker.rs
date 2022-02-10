@@ -86,8 +86,7 @@ impl Linker {
     /// *   [Introduction to Buffers in Direct3D 11:  Constant Buffer](https://docs.microsoft.com/en-us/windows/win32/direct3d11/overviews-direct3d-11-resources-buffers-intro#constant-buffer) (cbuffer limits quoted in example)
     pub fn add_clip_plane_from_cbuffer(&self, cbuffer_slot: u32, cbuffer_entry: u32) -> Result<(), MethodError> {
         fn_context!(d3d11::Linker::add_clip_plane_from_cbuffer => ID3D11Linker::AddClipPlaneFromCBuffer);
-        let hr = unsafe { self.0.AddClipPlaneFromCBuffer(cbuffer_slot, cbuffer_entry) };
-        fn_check_hr!(hr)
+        fn_check_hr!(unsafe { self.0.AddClipPlaneFromCBuffer(cbuffer_slot, cbuffer_entry) })
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11linker-link)\]
@@ -167,8 +166,7 @@ impl Linker {
     //#allow_missing_argument_docs
     pub fn use_library(&self, library_mi: &ModuleInstance) -> Result<(), MethodError> {
         fn_context!(d3d11::Linker::use_library => ID3D11Linker::UseLibrary);
-        let hr = unsafe { self.0.UseLibrary(library_mi.as_raw()) };
-        fn_check_hr!(hr)
+        fn_check_hr!(unsafe { self.0.UseLibrary(library_mi.as_raw()) })
     }
 }
 

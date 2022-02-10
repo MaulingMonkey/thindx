@@ -77,8 +77,7 @@ impl<'r> ShaderReflectionConstantBuffer<'r> {
     pub fn get_desc(&self) -> Result<ShaderBufferDesc<'r>, MethodError> {
         fn_context!(d3d11::ShaderReflectionConstantBuffer::get_desc => ID3D11ShaderReflectionConstantBuffer::GetDesc);
         let mut desc = ShaderBufferDesc::default();
-        let hr = unsafe { self.ptr.as_ref().GetDesc(desc.as_mut_ptr()) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { self.ptr.as_ref().GetDesc(desc.as_mut_ptr()) })?;
         Ok(desc)
     }
 

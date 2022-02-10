@@ -65,8 +65,7 @@ impl Module {
         let namespace = namespace.as_opt_cstr();
 
         let mut instance = null_mut();
-        let hr = unsafe { self.0.CreateInstance(namespace, &mut instance) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { self.0.CreateInstance(namespace, &mut instance) })?;
         Ok(unsafe { ModuleInstance::from_raw(instance) })
     }
 }

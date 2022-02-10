@@ -93,8 +93,7 @@ pub trait IDirect3DResource9Ext : AsSafe<IDirect3DResource9> {
     /// ```
     fn free_private_data(&self, guid: &impl AsRef<Guid>) -> Result<(), MethodError> {
         fn_context!(d3d9::IDirect3DResource9Ext::free_private_data => IDirect3DResource9::FreePrivateData);
-        let hr = unsafe { self.as_winapi().FreePrivateData(guid.as_ref().as_ref()) };
-        fn_check_hr!(hr)
+        fn_check_hr!(unsafe { self.as_winapi().FreePrivateData(guid.as_ref().as_ref()) })
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-getdevice)\]
@@ -119,8 +118,7 @@ pub trait IDirect3DResource9Ext : AsSafe<IDirect3DResource9> {
     fn get_device(&self) -> Result<Device, MethodError> {
         fn_context!(d3d9::IDirect3DResource9Ext::get_device => IDirect3DResource9::GetDevice);
         let mut device = null_mut();
-        let hr = unsafe { self.as_winapi().GetDevice(&mut device) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { self.as_winapi().GetDevice(&mut device) })?;
         Ok(unsafe { Device::from_raw(device) })
     }
 
@@ -179,8 +177,7 @@ pub trait IDirect3DResource9Ext : AsSafe<IDirect3DResource9> {
     fn get_private_data_inplace<'s>(&self, guid: &impl AsRef<Guid>, data: &'s mut [u8]) -> Result<&'s [u8], MethodError> {
         fn_context!(d3d9::IDirect3DResource9Ext::get_private_data_inplace => IDirect3DResource9::GetPrivateData);
         let mut n : u32 = data.len().try_into().map_err(|_| fn_param_error!(data, THINERR::SLICE_OVERFLOW))?;
-        let hr = unsafe { self.as_winapi().GetPrivateData(guid.as_ref().as_ref(), data.as_mut_ptr().cast(), &mut n) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { self.as_winapi().GetPrivateData(guid.as_ref().as_ref(), data.as_mut_ptr().cast(), &mut n) })?;
         Ok(&data[..(n as usize)])
     }
 
@@ -262,8 +259,7 @@ pub trait IDirect3DResource9Ext : AsSafe<IDirect3DResource9> {
     fn set_private_data(&self, guid: &impl AsRef<Guid>, data: &[u8]) -> Result<(), MethodError> {
         fn_context!(d3d9::IDirect3DResource9Ext::set_private_data => IDirect3DResource9::SetPrivateData);
         let n : u32 = data.len().try_into().map_err(|_| fn_param_error!(data, THINERR::SLICE_OVERFLOW))?;
-        let hr = unsafe { self.as_winapi().SetPrivateData(guid.as_ref().as_ref(), data.as_ptr().cast(), n, 0) };
-        fn_check_hr!(hr)
+        fn_check_hr!(unsafe { self.as_winapi().SetPrivateData(guid.as_ref().as_ref(), data.as_ptr().cast(), n, 0) })
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-setprivatedata)\]

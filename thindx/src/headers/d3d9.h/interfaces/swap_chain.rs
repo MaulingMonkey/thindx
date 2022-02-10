@@ -64,8 +64,7 @@ pub trait IDirect3DSwapChain9Ext : AsSafe<IDirect3DSwapChain9> {
         let i_back_buffer = i_back_buffer.try_into().map_err(|_| fn_param_error!(i_back_buffer, THINERR::SLICE_OVERFLOW))?;
         let ty = ty.into().into();
         let mut back_buffer = null_mut();
-        let hr = unsafe { self.as_winapi().GetBackBuffer(i_back_buffer, ty, &mut back_buffer) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { self.as_winapi().GetBackBuffer(i_back_buffer, ty, &mut back_buffer) })?;
         Ok(Self::Surface::from(unsafe { Surface::from_raw(back_buffer) }))
     }
 
@@ -76,8 +75,7 @@ pub trait IDirect3DSwapChain9Ext : AsSafe<IDirect3DSwapChain9> {
     fn get_device(&self) -> Result<Self::Device, MethodError> {
         fn_context!(d3d9::IDirect3DSwapChain9Ext::get_device => IDirect3DSwapChain9::GetDevice);
         let mut device = null_mut();
-        let hr = unsafe { self.as_winapi().GetDevice(&mut device) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { self.as_winapi().GetDevice(&mut device) })?;
         Ok(Self::Device::from(unsafe { Device::from_raw(device) }))
     }
 
@@ -88,8 +86,7 @@ pub trait IDirect3DSwapChain9Ext : AsSafe<IDirect3DSwapChain9> {
     fn get_display_mode(&self) -> Result<DisplayMode, MethodError> {
         fn_context!(d3d9::IDirect3DSwapChain9Ext::get_display_mode => IDirect3DSwapChain9::GetDisplayMode);
         let mut dm = DisplayMode::zeroed();
-        let hr = unsafe { self.as_winapi().GetDisplayMode(dm.as_mut()) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { self.as_winapi().GetDisplayMode(dm.as_mut()) })?;
         Ok(dm)
     }
 
@@ -103,8 +100,7 @@ pub trait IDirect3DSwapChain9Ext : AsSafe<IDirect3DSwapChain9> {
     /// *   `dest_surface` may need to be the size of the entire desktop if the [`Device`] is in windowed mode
     unsafe fn get_front_buffer_data(&self, dest_surface: &impl IDirect3DSurface9Ext) -> Result<(), MethodError> {
         fn_context!(d3d9::IDirect3DSwapChain9Ext::get_front_buffer_data => IDirect3DSwapChain9::GetFrontBufferData);
-        let hr = unsafe { self.as_winapi().GetFrontBufferData(dest_surface.as_winapi() as *const _ as *mut _) };
-        fn_check_hr!(hr)
+        fn_check_hr!(unsafe { self.as_winapi().GetFrontBufferData(dest_surface.as_winapi() as *const _ as *mut _) })
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getpresentparameters)\]
@@ -127,8 +123,7 @@ pub trait IDirect3DSwapChain9Ext : AsSafe<IDirect3DSwapChain9> {
     fn get_raster_status(&self) -> Result<RasterStatus, MethodError> {
         fn_context!(d3d9::IDirect3DSwapChain9Ext::get_raster_status => IDirect3DSwapChain9::GetRasterStatus);
         let mut rs = RasterStatus::zeroed();
-        let hr = unsafe { self.as_winapi().GetRasterStatus(rs.as_mut()) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { self.as_winapi().GetRasterStatus(rs.as_mut()) })?;
         Ok(rs)
     }
 
@@ -177,8 +172,7 @@ pub trait IDirect3DSwapChain9Ext : AsSafe<IDirect3DSwapChain9> {
             },
         };
 
-        let hr = unsafe { self.as_winapi().Present(source_rect, dest_rect, hwnd, dirty_region, flags) };
-        fn_check_hr!(hr)
+        fn_check_hr!(unsafe { self.as_winapi().Present(source_rect, dest_rect, hwnd, dirty_region, flags) })
     }
 }
 

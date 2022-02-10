@@ -87,8 +87,7 @@ pub trait IDirect3DIndexBuffer9Ext : AsSafe<IDirect3DIndexBuffer9> {
     fn get_desc(&self) -> Result<IndexBufferDesc, MethodError> {
         fn_context!(d3d9::IDirect3DIndexBuffer9Ext::get_desc => IDirect3DIndexBuffer9::GetDesc);
         let mut desc = IndexBufferDesc::zeroed();
-        let hr = unsafe { self.as_winapi().GetDesc(&mut *desc) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { self.as_winapi().GetDesc(&mut *desc) })?;
         Ok(desc)
     }
 
@@ -123,8 +122,7 @@ pub trait IDirect3DIndexBuffer9Ext : AsSafe<IDirect3DIndexBuffer9> {
     unsafe fn lock_unchecked(&self, offset: u32, size: u32, flags: impl Into<Lock>) -> Result<*mut c_void, MethodError> {
         fn_context!(d3d9::IDirect3DIndexBuffer9Ext::lock_unchecked => IDirect3DIndexBuffer9::Lock);
         let mut data = null_mut();
-        let hr = unsafe { self.as_winapi().Lock(offset, size, &mut data, flags.into().into()) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { self.as_winapi().Lock(offset, size, &mut data, flags.into().into()) })?;
         Ok(data)
     }
 
@@ -145,8 +143,7 @@ pub trait IDirect3DIndexBuffer9Ext : AsSafe<IDirect3DIndexBuffer9> {
     /// ```
     fn unlock(&self) -> Result<(), MethodError> {
         fn_context!(d3d9::IDirect3DIndexBuffer9Ext::unlock => IDirect3DIndexBuffer9::Unlock);
-        let hr = unsafe { self.as_winapi().Unlock() };
-        fn_check_hr!(hr)
+        fn_check_hr!(unsafe { self.as_winapi().Unlock() })
     }
 }
 
@@ -193,8 +190,7 @@ pub trait IDirect3DVertexBuffer9Ext : AsSafe<IDirect3DVertexBuffer9> {
     fn get_desc(&self) -> Result<VertexBufferDesc, MethodError> {
         fn_context!(d3d9::IDirect3DVertexBuffer9Ext::get_desc => IDirect3DVertexBuffer9::GetDesc);
         let mut desc = VertexBufferDesc::zeroed();
-        let hr = unsafe { self.as_winapi().GetDesc(&mut *desc) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { self.as_winapi().GetDesc(&mut *desc) })?;
         Ok(desc)
     }
 
@@ -233,8 +229,7 @@ pub trait IDirect3DVertexBuffer9Ext : AsSafe<IDirect3DVertexBuffer9> {
     unsafe fn lock_unchecked(&self, offset: u32, size: u32, flags: impl Into<Lock>) -> Result<*mut c_void, MethodError> {
         fn_context!(d3d9::IDirect3DVertexBuffer9Ext::lock_unchecked => IDirect3DVertexBuffer9::Lock);
         let mut data = null_mut();
-        let hr = unsafe { self.as_winapi().Lock(offset, size, &mut data, flags.into().into()) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { self.as_winapi().Lock(offset, size, &mut data, flags.into().into()) })?;
         Ok(data)
     }
 
@@ -255,8 +250,7 @@ pub trait IDirect3DVertexBuffer9Ext : AsSafe<IDirect3DVertexBuffer9> {
     /// ```
     fn unlock(&self) -> Result<(), MethodError> {
         fn_context!(d3d9::IDirect3DVertexBuffer9Ext::unlock => IDirect3DVertexBuffer9::Unlock);
-        let hr = unsafe { self.as_winapi().Unlock() };
-        fn_check_hr!(hr)
+        fn_check_hr!(unsafe { self.as_winapi().Unlock() })
     }
 }
 

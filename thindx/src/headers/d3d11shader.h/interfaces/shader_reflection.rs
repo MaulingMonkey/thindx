@@ -161,8 +161,7 @@ impl ShaderReflection {
     pub fn get_desc(&self) -> Result<ShaderDesc, MethodError> {
         fn_context!(d3d11::ShaderReflection::get_desc => ID3D11ShaderReflection::GetDesc);
         let mut desc = ShaderDesc::default();
-        let hr = unsafe { self.0.GetDesc(desc.as_mut_ptr()) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { self.0.GetDesc(desc.as_mut_ptr()) })?;
         Ok(desc)
     }
 
@@ -218,8 +217,7 @@ impl ShaderReflection {
     pub fn get_input_parameter_desc(&self, parameter_index: u32) -> Result<SignatureParameterDesc, MethodError> {
         fn_context!(d3d11::ShaderReflection::get_input_parameter_desc => ID3D11ShaderReflection::GetInputParameterDesc);
         let mut desc = SignatureParameterDesc::default();
-        let hr = unsafe { self.0.GetInputParameterDesc(parameter_index, desc.as_mut_ptr()) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { self.0.GetInputParameterDesc(parameter_index, desc.as_mut_ptr()) })?;
         Ok(desc)
     }
 
@@ -242,8 +240,7 @@ impl ShaderReflection {
     pub fn get_min_feature_level(&self) -> Result<FeatureLevel, MethodError> {
         fn_context!(d3d11::ShaderReflection::get_min_feature_level => ID3D11ShaderReflection::GetMinFeatureLevel);
         let mut fl = 0;
-        let hr = unsafe { self.0.GetMinFeatureLevel(&mut fl) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { self.0.GetMinFeatureLevel(&mut fl) })?;
         Ok(FeatureLevel::from_unchecked(fl))
     }
 
@@ -332,8 +329,7 @@ impl ShaderReflection {
     pub fn get_output_parameter_desc(&self, parameter_index: u32) -> Result<SignatureParameterDesc, MethodError> {
         fn_context!(d3d11::ShaderReflection::get_output_parameter_desc => ID3D11ShaderReflection::GetOutputParameterDesc);
         let mut desc = SignatureParameterDesc::default();
-        let hr = unsafe { self.0.GetOutputParameterDesc(parameter_index, desc.as_mut_ptr()) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { self.0.GetOutputParameterDesc(parameter_index, desc.as_mut_ptr()) })?;
         Ok(desc)
     }
 
@@ -367,8 +363,7 @@ impl ShaderReflection {
     pub fn get_patch_constant_parameter_desc(&self, parameter_index: u32) -> Result<SignatureParameterDesc, MethodError> {
         fn_context!(d3d11::ShaderReflection::get_patch_constant_parameter_desc => ID3D11ShaderReflection::GetPatchConstantParameterDesc);
         let mut desc = SignatureParameterDesc::default();
-        let hr = unsafe { self.0.GetPatchConstantParameterDesc(parameter_index, desc.as_mut_ptr()) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { self.0.GetPatchConstantParameterDesc(parameter_index, desc.as_mut_ptr()) })?;
         Ok(desc)
     }
 
@@ -425,8 +420,7 @@ impl ShaderReflection {
     pub fn get_resource_binding_desc(&self, resource_index: u32) -> Result<ShaderInputBindDesc, MethodError> {
         fn_context!(d3d11::ShaderReflection::get_resource_binding_desc => ID3D11ShaderReflection::GetResourceBindingDesc);
         let mut desc = ShaderInputBindDesc::default();
-        let hr = unsafe { self.0.GetResourceBindingDesc(resource_index, desc.as_mut_ptr()) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { self.0.GetResourceBindingDesc(resource_index, desc.as_mut_ptr()) })?;
         Ok(desc)
     }
 
@@ -459,8 +453,7 @@ impl ShaderReflection {
         let name = name.try_into();
         let name = name.as_ref().map_or(null(), |name| name.as_cstr());
         let mut desc = ShaderInputBindDesc::default();
-        let hr = unsafe { self.0.GetResourceBindingDescByName(name, desc.as_mut_ptr()) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { self.0.GetResourceBindingDescByName(name, desc.as_mut_ptr()) })?;
         Ok(desc)
     }
 

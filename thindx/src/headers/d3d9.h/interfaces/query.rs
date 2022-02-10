@@ -66,8 +66,9 @@ pub trait IDirect3DQuery9Ext : AsSafe<IDirect3DQuery9> {
         let len = data.len().try_into().map_err(|_| fn_param_error!(data, THINERR::SLICE_TOO_LARGE))?;
 
         let hr = unsafe { self.as_winapi().GetData(data.as_mut_ptr().cast(), len, flags) };
+        if hr == S_FALSE { return Ok(false) }
         fn_check_hr!(hr)?;
-        Ok(hr != S_FALSE)
+        Ok(true)
     }
 
     // TODO: fn get_data<T>?
@@ -88,8 +89,7 @@ pub trait IDirect3DQuery9Ext : AsSafe<IDirect3DQuery9> {
     fn get_device(&self) -> Result<Device, MethodError> {
         fn_context!(d3d9::IDirect3DQuery9Ext::get_device => IDirect3DQuery9::GetDevice);
         let mut device = null_mut();
-        let hr = unsafe { self.as_winapi().GetDevice(&mut device) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { self.as_winapi().GetDevice(&mut device) })?;
         Ok(unsafe { Device::from_raw(device) })
     }
 
@@ -108,8 +108,7 @@ pub trait IDirect3DQuery9Ext : AsSafe<IDirect3DQuery9> {
     /// Issue a query.
     fn issue(&self, issue_flags: impl Into<Issue>) -> Result<(), MethodError> {
         fn_context!(d3d9::IDirect3DQuery9Ext::issue => IDirect3DQuery9::Issue);
-        let hr = unsafe { self.as_winapi().Issue(issue_flags.into().into()) };
-        fn_check_hr!(hr)
+        fn_check_hr!(unsafe { self.as_winapi().Issue(issue_flags.into().into()) })
     }
 }
 

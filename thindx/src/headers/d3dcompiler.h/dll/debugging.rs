@@ -140,8 +140,7 @@ impl Compiler {
         //  * `flags`           ⚠️ could be invalid?
         //  * `comments`        ❌ could cause alloc for `disassembly` to overflow
         //  * `comments`        ✔️ should be a valid `\0` terminated C-string without interior `\0`s
-        let hr = unsafe { D3DDisassemble(src_data.as_ptr().cast(), src_data.len(), flags, comments, &mut disassembly) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { D3DDisassemble(src_data.as_ptr().cast(), src_data.len(), flags, comments, &mut disassembly) })?;
 
         // SAFETY: ✔️
         //  * `disassembly`     should be null (panics) or a non-dangling, valid ID3DBlob
@@ -242,8 +241,7 @@ impl Compiler {
         //  * `num_insts`           ❌ could be out-of-bounds
         //  * `finish_byte_offset`  ✔️ is a trivial out param
         //  * `disassembly`         ✔️ is a trivial out param
-        let hr = unsafe { D3DDisassembleRegion(src_data.as_ptr().cast(), src_data.len(), flags, comments, start_byte_offset, num_insts, &mut finish_byte_offset, &mut disassembly) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { D3DDisassembleRegion(src_data.as_ptr().cast(), src_data.len(), flags, comments, start_byte_offset, num_insts, &mut finish_byte_offset, &mut disassembly) })?;
         Ok(DisassembledRegion {
             // SAFETY: ✔️
             //  * `disassembly`     should be null (panics) or a non-dangling, valid ID3DBlob
@@ -297,8 +295,7 @@ impl Compiler {
         //  * `num_insts`           ❌ could be out-of-bounds
         //  * `pOffsets`            ✔️ null is valid (we're just getting the count)
         //  * `pTotalInsts`         ✔️ is a trivial out param
-        let hr = unsafe { D3DGetTraceInstructionOffsets(src_data.as_ptr().cast(), src_data.len(), flags.into().into(), start_inst_index, num_insts, null_mut(), &mut n) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { D3DGetTraceInstructionOffsets(src_data.as_ptr().cast(), src_data.len(), flags.into().into(), start_inst_index, num_insts, null_mut(), &mut n) })?;
         Ok(n)
     }
 
@@ -348,8 +345,7 @@ impl Compiler {
         //  * `NumInsts`            ✔️ should be valid.  Even if `D3DGetTraceInstructionOffsets` truncates, offsets is initialized, so a short read should be harmless.
         //  * `pOffsets`            ✔️ is valid for offsets.len() elements.
         //  * `pTotalInsts`         ✔️ is a trivial out param
-        let hr = unsafe { D3DGetTraceInstructionOffsets(src_data.as_ptr().cast(), src_data.len(), flags.into().into(), start_inst_index, offsets.len(), offsets.as_mut_ptr(), &mut n) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { D3DGetTraceInstructionOffsets(src_data.as_ptr().cast(), src_data.len(), flags.into().into(), start_inst_index, offsets.len(), offsets.as_mut_ptr(), &mut n) })?;
         Ok(&offsets[..n])
     }
 

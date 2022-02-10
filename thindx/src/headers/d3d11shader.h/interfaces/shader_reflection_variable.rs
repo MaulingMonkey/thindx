@@ -62,8 +62,7 @@ impl<'r> ShaderReflectionVariable<'r> {
     pub fn get_desc(&self) -> Result<ShaderVariableDesc<'r>, MethodError> {
         fn_context!(d3d11::ShaderReflectionVariable::get_desc => ID3D11ShaderReflectionVariable::GetDesc);
         let mut desc = ShaderVariableDesc::default();
-        let hr = unsafe { self.ptr.as_ref().GetDesc(desc.as_mut_ptr()) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { self.ptr.as_ref().GetDesc(desc.as_mut_ptr()) })?;
         Ok(desc)
     }
 

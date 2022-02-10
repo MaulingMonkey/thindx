@@ -70,8 +70,7 @@ impl Compiler {
         //  * `flags`           ⚠️ could be invalid
         //  * `compressed_data` ✔️ is a trivial out-param
         let mut compressed_data = null_mut();
-        let hr = unsafe { D3DCompressShaders(num_shaders, shader_data, flags, &mut compressed_data) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { D3DCompressShaders(num_shaders, shader_data, flags, &mut compressed_data) })?;
 
         // SAFETY: ✔️
         //  * `compressed_data` ✔️ is either null (from_raw panics) or a valid, owned, non-dangling ID3DBlob (ownership transfers)
@@ -201,8 +200,7 @@ impl Compiler {
         //  * `out_shaders`     ✔️ should be ABI compatible thanks to the #[repr(transparent)] conversion chain: Option<ReadOnlyBlob> -> Option<mcom::Rc<ID3DBlob>> -> Option<NonNull<ID3DBlob>> -> `*mut ID3DBlob`
         //  * `out_shaders`     ✔️ should not leak (explicitly `None`ed out earlier)
         //  * `out_shaders`     ✔️ should contain sufficient elements to avoid overflow (`n` inferred from `.len`)
-        let hr = unsafe { D3DDecompressShaders(src_data.as_ptr().cast(), src_data.len(), n, start_index, null_mut(), 0, out_shaders.as_mut_ptr().cast(), &mut total_shaders) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { D3DDecompressShaders(src_data.as_ptr().cast(), src_data.len(), n, start_index, null_mut(), 0, out_shaders.as_mut_ptr().cast(), &mut total_shaders) })?;
         let read = n.min(total_shaders) as usize;
         Ok(&out_shaders[..read])
     }

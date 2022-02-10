@@ -36,8 +36,7 @@ impl Compiler {
         //  * `0` for reserved flags of `D3DCreateFunctionLinkingGraph` is expected
         //  * `flg` is just an output `**ID3D11FunctionLinkingGraph`
         let mut flg = null_mut();
-        let hr = unsafe { D3DCreateFunctionLinkingGraph(0, &mut flg) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { D3DCreateFunctionLinkingGraph(0, &mut flg) })?;
 
         // SAFETY: ✔️ `flg` is null (from_raw panics) or valid
         Ok(unsafe { d3d11::FunctionLinkingGraph::from_raw(flg) })
@@ -70,8 +69,7 @@ impl Compiler {
         //  * `f` should be a valid/sound fn, like all of `self.*`
         //  * `linker` is just an output `**ID3D11Linker`
         let mut linker = null_mut();
-        let hr = unsafe { D3DCreateLinker(&mut linker) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { D3DCreateLinker(&mut linker) })?;
 
         // SAFETY: ✔️ `linker` is null (from_raw panics) or valid
         Ok(unsafe { d3d11::Linker::from_raw(linker) })
@@ -115,8 +113,7 @@ impl Compiler {
         //  * `D3DLoadModule` may require `src_data` be valid bytecode, but this is implied by `Bytecode`
         //  * `module` is just an output `**ID3D11Module`
         let mut module = null_mut();
-        let hr = unsafe { D3DLoadModule(src_data.as_ptr().cast(), src_data.len(), &mut module) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { D3DLoadModule(src_data.as_ptr().cast(), src_data.len(), &mut module) })?;
 
         // SAFETY: ✔️ `module` is null (from_raw panics) or valid
         Ok(unsafe { d3d11::Module::from_raw(module) })

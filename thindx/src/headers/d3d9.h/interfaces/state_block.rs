@@ -51,8 +51,7 @@ pub trait IDirect3DStateBlock9Ext : AsSafe<IDirect3DStateBlock9> {
     /// *   Ok(`()`)
     fn apply(&self) -> Result<(), MethodError> {
         fn_context!(d3d9::IDirect3DStateBlock9Ext::apply => IDirect3DStateBlock9::Apply);
-        let hr = unsafe { self.as_winapi().Apply() };
-        fn_check_hr!(hr)
+        fn_check_hr!(unsafe { self.as_winapi().Apply() })
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dstateblock9-capture)\]
@@ -65,8 +64,7 @@ pub trait IDirect3DStateBlock9Ext : AsSafe<IDirect3DStateBlock9> {
     /// *   Ok(`()`)
     fn capture(&self) -> Result<(), MethodError> {
         fn_context!(d3d9::IDirect3DStateBlock9Ext::capture => IDirect3DStateBlock9::Capture);
-        let hr = unsafe { self.as_winapi().Capture() };
-        fn_check_hr!(hr)
+        fn_check_hr!(unsafe { self.as_winapi().Capture() })
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dstateblock9-getdevice)\]
@@ -80,8 +78,7 @@ pub trait IDirect3DStateBlock9Ext : AsSafe<IDirect3DStateBlock9> {
     fn get_device(&self) -> Result<Device, MethodError> {
         fn_context!(d3d9::IDirect3DStateBlock9Ext::get_device => IDirect3DStateBlock9::GetDevice);
         let mut device = null_mut();
-        let hr = unsafe { self.as_winapi().GetDevice(&mut device) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { self.as_winapi().GetDevice(&mut device) })?;
         Ok(unsafe { Device::from_raw(device) })
     }
 }

@@ -34,8 +34,7 @@ impl Compiler {
         //  * `f`           should be valid/sound like all `self.*`
         //  * `blob`        is a trivial out param.
         let mut blob = null_mut();
-        let hr = unsafe { D3DCreateBlob(data.len(), &mut blob) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { D3DCreateBlob(data.len(), &mut blob) })?;
 
         if !blob.is_null() {
             // SAFETY: ⚠️ see earlier safety comments about ~4GB overflow concerns
@@ -92,8 +91,7 @@ impl Compiler {
         //  * `file_name`   is `\0` terminated per `to_wcstr`.
         //  * `blob`        is a trivial out param.
         let mut blob = null_mut();
-        let hr = unsafe { D3DReadFileToBlob(file_name.as_ptr(), &mut blob) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { D3DReadFileToBlob(file_name.as_ptr(), &mut blob) })?;
 
         // SAFETY: ✔️
         //  * `blob`            should be null (panics) or non-dangling, and should be a valid ID3DBlob
@@ -152,8 +150,7 @@ impl Compiler {
         //  * `f`           should be valid/sound like all `self.*`
         //  * `file_name`   is `\0` terminated per `to_wcstr`.
         //  * `overwrite`   is a trivial well tested bool.
-        let hr = unsafe { D3DWriteBlobToFile(blob.as_raw(), file_name.as_ptr(), overwrite.into()) };
-        fn_check_hr!(hr)
+        fn_check_hr!(unsafe { D3DWriteBlobToFile(blob.as_raw(), file_name.as_ptr(), overwrite.into()) })
     }
 }
 

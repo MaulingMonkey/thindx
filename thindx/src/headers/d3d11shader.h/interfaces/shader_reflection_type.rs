@@ -67,8 +67,7 @@ impl<'r> ShaderReflectionType<'r> {
     pub fn get_desc(&self) -> Result<ShaderTypeDesc<'r>, MethodError> {
         fn_context!(d3d11::ShaderReflectionType::get_desc => ID3D11ShaderReflectionType::GetDesc);
         let mut desc = ShaderTypeDesc::default();
-        let hr = unsafe { self.ptr.as_ref().GetDesc(desc.as_mut_ptr()) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { self.ptr.as_ref().GetDesc(desc.as_mut_ptr()) })?;
         Ok(desc)
     }
 

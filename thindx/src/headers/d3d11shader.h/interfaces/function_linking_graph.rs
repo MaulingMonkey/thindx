@@ -155,8 +155,7 @@ impl FunctionLinkingGraph {
         let module  = module_with_function_prototype.as_raw();
 
         let mut node = null_mut();
-        let hr = unsafe { self.0.CallFunction(ns.as_opt_cstr(), module, name.as_cstr(), &mut node) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { self.0.CallFunction(ns.as_opt_cstr(), module, name.as_cstr(), &mut node) })?;
         Ok(unsafe { LinkingNode::from_raw(node) })
     }
 
@@ -208,8 +207,7 @@ impl FunctionLinkingGraph {
         let _ = flags; let flags = 0;
 
         let mut blob = null_mut();
-        let hr = unsafe { self.0.GenerateHlsl(flags, &mut blob) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { self.0.GenerateHlsl(flags, &mut blob) })?;
         Ok(TextBlob::new(unsafe { ReadOnlyBlob::from_raw(blob) }))
     }
 
@@ -233,8 +231,7 @@ impl FunctionLinkingGraph {
     pub fn get_last_error(&self) -> Result<TextBlob, MethodError> {
         fn_context!(d3d11::FunctionLinkingGraph::get_last_error => ID3D11FunctionLinkingGraph::GetLastError);
         let mut errors = null_mut();
-        let hr = unsafe { self.0.GetLastError(&mut errors) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { self.0.GetLastError(&mut errors) })?;
         Ok(TextBlob::new(unsafe { ReadOnlyBlob::from_raw_opt(errors) }))
     }
 
@@ -265,8 +262,7 @@ impl FunctionLinkingGraph {
     /// ```
     pub fn pass_value(&self, src_node: &LinkingNode, src_parameter_index: i32, dst_node: &LinkingNode, dst_parameter_index: i32) -> Result<(), MethodError> {
         fn_context!(d3d11::FunctionLinkingGraph::pass_value => ID3D11FunctionLinkingGraph::PassValue);
-        let hr = unsafe { self.0.PassValue(src_node.as_raw(), src_parameter_index, dst_node.as_raw(), dst_parameter_index) };
-        fn_check_hr!(hr)
+        fn_check_hr!(unsafe { self.0.PassValue(src_node.as_raw(), src_parameter_index, dst_node.as_raw(), dst_parameter_index) })
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionlinkinggraph-passvaluewithswizzle)\]
@@ -297,8 +293,7 @@ impl FunctionLinkingGraph {
         fn_context!(d3d11::FunctionLinkingGraph::pass_value_with_swizzle => ID3D11FunctionLinkingGraph::PassValueWithSwizzle);
         let src_swizzle = src_swizzle.try_into().map_err(|e| fn_param_error!(src_swizzle, e.into()))?;
         let dst_swizzle = dst_swizzle.try_into().map_err(|e| fn_param_error!(dst_swizzle, e.into()))?;
-        let hr = unsafe { self.0.PassValueWithSwizzle(src_node.as_raw(), src_parameter_index, src_swizzle.as_cstr(), dst_node.as_raw(), dst_parameter_index, dst_swizzle.as_cstr()) };
-        fn_check_hr!(hr)
+        fn_check_hr!(unsafe { self.0.PassValueWithSwizzle(src_node.as_raw(), src_parameter_index, src_swizzle.as_cstr(), dst_node.as_raw(), dst_parameter_index, dst_swizzle.as_cstr()) })
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionlinkinggraph-setinputsignature)\]
@@ -331,8 +326,7 @@ impl FunctionLinkingGraph {
         let n = input_parameters.len().try_into().map_err(|_| fn_param_error!(input_parameters, THINERR::SLICE_TOO_LARGE))?;
 
         let mut node = null_mut();
-        let hr = unsafe { self.0.SetInputSignature(input_parameters.as_ptr().cast(), n, &mut node) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { self.0.SetInputSignature(input_parameters.as_ptr().cast(), n, &mut node) })?;
         Ok(unsafe { LinkingNode::from_raw(node) })
     }
 
@@ -366,8 +360,7 @@ impl FunctionLinkingGraph {
         let n = output_parameters.len().try_into().map_err(|_| fn_param_error!(output_parameters, THINERR::SLICE_TOO_LARGE))?;
 
         let mut node = null_mut();
-        let hr = unsafe { self.0.SetOutputSignature(output_parameters.as_ptr().cast(), n, &mut node) };
-        fn_check_hr!(hr)?;
+        fn_check_hr!(unsafe { self.0.SetOutputSignature(output_parameters.as_ptr().cast(), n, &mut node) })?;
         Ok(unsafe { LinkingNode::from_raw(node) })
     }
 }
