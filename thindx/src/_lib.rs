@@ -50,8 +50,8 @@ mods! {
     pub(crate) mod dll;
     mod error_kind;
     pub mod errors;
-    mod method_error_blob;
-    mod method_error;
+    mod error_with_blob;
+    mod error;
 }
 
 #[cfg(doc)] #[doc = include_str!("../doc/changelog.md")] pub mod _changelog {}

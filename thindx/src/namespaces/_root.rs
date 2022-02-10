@@ -5,6 +5,6 @@ pub use crate::unknwn_h::*;
 pub use crate::traits::*;
 
 pub use crate::error_kind::*;
-pub use crate::method_error_blob::*;
-pub use crate::method_error::*;
+pub use crate::error_with_blob::*;
+pub use crate::error::*;
 #[doc(no_inline)] pub use crate::errors::*;
