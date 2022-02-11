@@ -981,7 +981,7 @@ pub const d3dcompiler_h : cxx_header = cxx_header;
 /// * [`SetViewport`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setviewport)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_viewport`] <br>
 /// * [`ShowCursor`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-showcursor)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::show_cursor`] <br>
 /// * [`StretchRect`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-stretchrect) →&nbsp;❌ <br>
-/// * [`TestCooperativeLevel`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-testcooperativelevel) →&nbsp;❌ <br>
+/// * [`TestCooperativeLevel`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-testcooperativelevel)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::test_cooperative_level`] <br>
 /// * [`UpdateSurface`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-updatesurface) →&nbsp;❌ <br>
 /// * [`UpdateTexture`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-updatetexture) →&nbsp;❌ <br>
 /// * [`ValidateDevice`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-validatedevice) →&nbsp;❌ <br>

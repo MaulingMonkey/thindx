@@ -3881,6 +3881,27 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         fn_context!(d3d9::IDirect3DDevice9Ext::show_cursor => IDirect3DDevice9::ShowCursor);
         unsafe { self.as_winapi().ShowCursor(show as _) != 0 }
     }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-testcooperativelevel)\]
+    /// IDirect3DDevice9::TestCooperativeLevel
+    ///
+    /// Reports the current cooperative-level status of the Direct3D device for a windowed or full-screen application.
+    ///
+    /// ### Returns
+    /// *   Ok(`()`)                                If the device is operational and the calling application can continue.
+    /// *   Err([`D3DERR::DEVICELOST`])             If the device is lost, and cannot be restored at the current time (e.g. perhaps a full-screen device has lost focus.)
+    /// *   Err([`D3DERR::DEVICENOTRESET`])         If the device is lost, and can either be restored via [`d3d::IDirect3DDevice9Ext::reset`], or via device recreation.
+    /// *   Err([`D3DERR::DRIVERINTERNALERROR`])    If things went boom.
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_pure();
+    /// assert!(device.test_cooperative_level().is_ok());
+    /// ```
+    fn test_cooperative_level(&self) -> Result<(), ErrorKind> {
+        fn_context!(d3d9::IDirect3DDevice9Ext::test_cooperative_level => IDirect3DDevice9::TestCooperativeLevel);
+        fn_check_hr!(unsafe { self.as_winapi().TestCooperativeLevel() }).map_err(|e| e.kind())
+    }
 }
 
 impl<T: AsSafe<IDirect3DDevice9>> IDirect3DDevice9Ext for T {}
@@ -3958,7 +3979,6 @@ pub struct RgnData {
 //TODO:     IDirect3DDevice9::SetRenderState                    = d3d9::IDirect3DDevice9Ext::set_render_state
 //TODO:     IDirect3DDevice9::SetTextureStageState              = d3d9::IDirect3DDevice9Ext::set_texture_stage_state
 //TODO:     IDirect3DDevice9::StretchRect                       = d3d9::IDirect3DDevice9Ext::stretch_rect
-//TODO:     IDirect3DDevice9::TestCooperativeLevel              = d3d9::IDirect3DDevice9Ext::test_cooperative_level
 //TODO:     IDirect3DDevice9::UpdateSurface                     = d3d9::IDirect3DDevice9Ext::update_surface
 //TODO:     IDirect3DDevice9::UpdateTexture                     = d3d9::IDirect3DDevice9Ext::update_texture
 //TODO:     IDirect3DDevice9::ValidateDevice                    = d3d9::IDirect3DDevice9Ext::validate_device
