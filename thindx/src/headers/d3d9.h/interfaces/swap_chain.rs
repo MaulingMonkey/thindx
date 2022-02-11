@@ -7,11 +7,9 @@ use crate::d3d9::*;
 use bytemuck::*;
 
 use winapi::shared::d3d9::*;
-use winapi::shared::minwindef::UINT;
 use winapi::um::unknwnbase::IUnknown;
 use winapi::um::wingdi::{RDH_RECTANGLES, RGNDATA, RGNDATAHEADER};
 
-use std::convert::TryInto;
 use std::ptr::*;
 
 
@@ -59,9 +57,8 @@ pub trait IDirect3DSwapChain9Ext : AsSafe<IDirect3DSwapChain9> {
     /// IDirect3DSwapChain9::GetBackBuffer
     ///
     /// Retrieves a back buffer from the swap chain of the device.
-    fn get_back_buffer(&self, i_back_buffer: impl TryInto<UINT>, ty: impl Into<BackBufferType>) -> Result<Self::Surface, Error> {
+    fn get_back_buffer(&self, i_back_buffer: u32, ty: impl Into<BackBufferType>) -> Result<Self::Surface, Error> {
         fn_context!(d3d9::IDirect3DSwapChain9Ext::get_back_buffer => IDirect3DSwapChain9::GetBackBuffer);
-        let i_back_buffer = i_back_buffer.try_into().map_err(|_| fn_param_error!(i_back_buffer, THINERR::SLICE_OVERFLOW))?;
         let ty = ty.into().into();
         let mut back_buffer = null_mut();
         fn_check_hr!(unsafe { self.as_winapi().GetBackBuffer(i_back_buffer, ty, &mut back_buffer) })?;

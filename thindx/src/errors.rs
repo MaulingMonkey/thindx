@@ -67,8 +67,7 @@ pub mod THINERR {
     /// `0xA7D80000`    A nonspecific error of some sort occured.  This should generally only be used when DirectX returned some kind of error or unexpected null pointer, without actually bothering to say what the error was.
     pub const NONSPECIFIC : ErrorKind = ErrorKind(0xA7D80000);
 
-    /// `0xA7D80001`    Large slice passed to a DirectX API that only accepts a 32-bit length.
-    pub const SLICE_OVERFLOW    : ErrorKind = ErrorKind(0xA7D80001);
+    // `0xA7D80001` was SLICE_OVERFLOW, prefer SLICE_TOO_LARGE
 
     /// `0xA7D80002`    Resource belonging to one [Device] was passed to a different [Device].  To avoid undefined behavior, DirectX was not called.
     pub const DEVICE_MISMATCH   : ErrorKind = ErrorKind(0xA7D80002);

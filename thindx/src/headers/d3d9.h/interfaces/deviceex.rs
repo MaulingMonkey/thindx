@@ -99,7 +99,7 @@ pub trait IDirect3DDevice9ExExt : AsSafe<IDirect3DDevice9Ex> {
     /// Checks an array of resources to determine if it is likely that they will cause a large stall at Draw time because the system must make the resources GPU-accessible.
     ///
     /// ### Returns
-    /// *   [THINERR::SLICE_OVERFLOW]   if `resources.len()` > `65535`
+    /// *   [THINERR::SLICE_TOO_LARGE]  if `resources.len()` > `65535`
     /// *   [D3DERR::INVALIDCALL]       ???
     /// *   Ok(
     ///
@@ -117,7 +117,7 @@ pub trait IDirect3DDevice9ExExt : AsSafe<IDirect3DDevice9Ex> {
         // "... up to a maximum of 65535."
         let len : u16 = match resources.len().try_into() {
             Ok(len) => len,
-            Err(_) => return THINERR::SLICE_OVERFLOW,
+            Err(_) => return THINERR::SLICE_TOO_LARGE,
         };
         let len = u32::from(len);
         let resources = resources.as_mut_ptr().cast(); // XXX

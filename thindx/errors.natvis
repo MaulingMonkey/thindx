@@ -13,7 +13,7 @@
         <DisplayString Condition="__0 ==          0">{{S,D3D,DD}}::OK</DisplayString>
 
         <DisplayString Condition="__0 == 0xA7D80000">THINERR::NONSPECIFIC</DisplayString>
-        <DisplayString Condition="__0 == 0xA7D80001">THINERR::SLICE_OVERFLOW</DisplayString>
+        <DisplayString Condition="__0 == 0xA7D80001">THINERR::SLICE_OVERFLOW (removed)</DisplayString>
         <DisplayString Condition="__0 == 0xA7D80002">THINERR::DEVICE_MISMATCH</DisplayString>
         <DisplayString Condition="__0 == 0xA7D80003">THINERR::ALLOC_OVERFLOW</DisplayString>
         <DisplayString Condition="__0 == 0xA7D80004">THINERR::INVALID_STRUCT_FIELD</DisplayString>
