@@ -887,7 +887,7 @@ pub const d3dcompiler_h : cxx_header = cxx_header;
 /// * [`CreateVertexDeclaration`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createvertexdeclaration)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::create_vertex_declaration`] <br>
 /// * [`CreateVertexShader`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createvertexshader)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::create_vertex_shader`] <br>
 /// * [`CreateVolumeTexture`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createvolumetexture)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::create_volume_texture`], [`d3d9::IDirect3DDevice9Ext::create_volume_texture_from`] <br>
-/// * [`DeletePatch`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-deletepatch) →&nbsp;❌ <br>
+/// * [`DeletePatch`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-deletepatch)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::delete_patch`] <br>
 /// * [`DrawIndexedPrimitive`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-drawindexedprimitive)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::draw_indexed_primitive`] <br>
 /// * [`DrawIndexedPrimitiveUP`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-drawindexedprimitiveup)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::draw_indexed_primitive_up`] <br>
 /// * [`DrawPrimitive`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-drawprimitive)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::draw_primitive`] <br>

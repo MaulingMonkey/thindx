@@ -1082,7 +1082,27 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         Ok(texture)
     }
 
-    //TODO:     IDirect3DDevice9::DeletePatch                       = d3d9::IDirect3DDevice9Ext::delete_patch
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-deletepatch)\]
+    /// IDirect3DDevice9::DeletePatch
+    ///
+    /// ### Errors
+    /// *   [D3DERR::INVALIDCALL]   If `handle` wasn't a valid cached high-order patch handle.
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_pure();
+    /// assert_eq!(D3DERR::INVALIDCALL, device.delete_patch(0));
+    /// # for p in 0..32 {
+    /// #   assert_eq!(D3DERR::INVALIDCALL, device.delete_patch(1 << p));
+    /// # }
+    /// ```
+    ///
+    /// ### See Also
+    /// *   [Using Higher-Order Primitives (Direct3D 9)](https://docs.microsoft.com/en-us/windows/win32/direct3d9/using-higher-order-primitives)
+    fn delete_patch(&self, handle: u32) -> Result<(), Error> {
+        fn_context!(d3d9::IDirect3DDevice9Ext::delete_patch => IDirect3DDevice9::DeletePatch);
+        fn_check_hr!(unsafe { self.as_winapi().DeletePatch(handle) })
+    }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-drawindexedprimitive)\]
     /// IDirect3DDevice9::DrawIndexedPrimitive
