@@ -1,9 +1,8 @@
 
-macro_rules! fn_err         { ( $kind:expr ) => {    Err($crate::Error(_THINDX_FN_CONTEXT, $kind)) }}
-macro_rules! fn_error       { ( $kind:expr ) => {        $crate::Error(_THINDX_FN_CONTEXT, $kind)  }}
-macro_rules! fn_check_hr    { ( $hr:expr )   => { $crate::Error::check(_THINDX_FN_CONTEXT, $hr)    }}
-macro_rules! fn_param_error { ( $param:ident, $kind:expr ) => { $crate::Error(_THINDX_FN_CONTEXT, ($kind).into()) } }
-// TODO: use $param in error payload
+macro_rules! fn_err         { ( $kind:expr ) => {    Err($crate::Error(&_THINDX_FN_CONTEXT, $kind)) }}
+macro_rules! fn_error       { ( $kind:expr ) => {        $crate::Error(&_THINDX_FN_CONTEXT, $kind)  }}
+macro_rules! fn_check_hr    { ( $hr:expr )   => { $crate::Error::check(&_THINDX_FN_CONTEXT, $hr)    }}
+macro_rules! fn_param_error { ( $param:ident, $kind:expr ) => { $crate::Error(&$crate::error_macros::FnContext { parameter: Some(stringify!($param)), .._THINDX_FN_CONTEXT }, ($kind).into()) } }
 // TODO: audit fn_param_error! for consistency
 
 /// Annotate a Rust => C++ function mapping.
@@ -16,9 +15,10 @@ macro_rules! fn_param_error { ( $param:ident, $kind:expr ) => { $crate::Error(_T
 /// ```
 macro_rules! fn_context {
     ( $thindx:path ) => {
-        const _THINDX_FN_CONTEXT : &'static $crate::error_macros::FnContext = &$crate::error_macros::FnContext { // Ensure it's evaluated at compile time
+        const _THINDX_FN_CONTEXT : $crate::error_macros::FnContext = $crate::error_macros::FnContext { // Ensure it's evaluated at compile time
             directx_method: None,
             thindx_method:  stringify!($thindx),
+            parameter:      None,
 
             module_path:    std::module_path!(),
             file:           std::file!(),
@@ -27,9 +27,10 @@ macro_rules! fn_context {
         };
     };
     ( $thindx:path => $directx:path ) => {
-        const _THINDX_FN_CONTEXT : &'static $crate::error_macros::FnContext = &$crate::error_macros::FnContext { // Ensure it's evaluated at compile time
+        const _THINDX_FN_CONTEXT : $crate::error_macros::FnContext = $crate::error_macros::FnContext { // Ensure it's evaluated at compile time
             directx_method: Some(stringify!($directx)),
             thindx_method:  stringify!($thindx),
+            parameter:      None,
 
             module_path:    std::module_path!(),
             file:           std::file!(),
@@ -43,6 +44,7 @@ macro_rules! fn_context {
 pub(crate) struct FnContext {
     pub directx_method: Option<&'static str>,
     pub thindx_method:  &'static str,
+    pub parameter:      Option<&'static str>,
 
     pub module_path:    &'static str,
     pub file:           &'static str,

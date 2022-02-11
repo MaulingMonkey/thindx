@@ -2,7 +2,7 @@
 
 use crate::{Error, ErrorKind, errors::ERROR};
 
-macro_rules! check_success { ( $err:expr ) => { $crate::xinput::check_error_success(_THINDX_FN_CONTEXT, $err) } }
+macro_rules! check_success { ( $err:expr ) => { $crate::xinput::check_error_success(&_THINDX_FN_CONTEXT, $err) } }
 
 mods! {
     inl mod dll {
