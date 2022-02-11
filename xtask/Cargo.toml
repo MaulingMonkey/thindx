@@ -20,7 +20,7 @@ path            = "_xtask.rs"
 base64          = "0.13"
 lazy_static     = "1"
 maulingmonkey-windows-sdk-scanner.git = "https://github.com/MaulingMonkey/windows-sdk-scanner"
-mmrbi           = "0.0.17"
+mmrbi           = "0.0.19"
 # mmrbi           = { git = "https://github.com/MaulingMonkey/mmrbi", rev = "1e27c41be24a4cb5ae31dd6388dba08a2af9e02b" }
 proc-macro2.version = "1"
 rustc-demangle  = "0.1"

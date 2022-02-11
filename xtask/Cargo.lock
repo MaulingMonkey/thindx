@@ -48,7 +48,7 @@ source = "git+https://github.com/MaulingMonkey/windows-sdk-scanner#d81e08e9df6a7
 dependencies = [
  "abibool",
  "abistr",
- "mmrbi",
+ "mmrbi 0.0.17",
 ]
 
 [[package]]
@@ -58,6 +58,16 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "4a842a3e81185ddb8194afc1987c809cf96771b34b2b882120741f106efcd509"
 dependencies = [
  "alphanumeric-sort",
+]
+
+[[package]]
+name = "mmrbi"
+version = "0.0.19"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "058c8fa8016094e210ded0db786a733399f5a1a41ba28ea792ea544e807dd905"
+dependencies = [
+ "alphanumeric-sort",
+ "lazy_static",
 ]
 
 [[package]]
@@ -108,7 +118,7 @@ dependencies = [
  "base64",
  "lazy_static",
  "maulingmonkey-windows-sdk-scanner",
- "mmrbi",
+ "mmrbi 0.0.19",
  "proc-macro2",
  "rustc-demangle",
  "syn",

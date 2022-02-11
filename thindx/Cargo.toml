@@ -80,7 +80,7 @@ winapi.features = [
 [target.'cfg(windows)'.dev-dependencies]
 bugsalot            = "0.2"
 dev.path            = "../dev"
-mmrbi               = "0.0.17"
+mmrbi               = "0.0.19"
 png                 = "0.17"
 raw-window-handle   = "0.4"
 winit               = "0.26"
