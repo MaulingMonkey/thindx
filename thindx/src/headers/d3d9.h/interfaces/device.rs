@@ -1082,6 +1082,8 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         Ok(texture)
     }
 
+    //TODO:     IDirect3DDevice9::DeletePatch                       = d3d9::IDirect3DDevice9Ext::delete_patch
+
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-drawindexedprimitive)\]
     /// IDirect3DDevice9::DrawIndexedPrimitive
     ///
@@ -1146,8 +1148,8 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         fn_check_hr!(unsafe { self.as_winapi().DrawPrimitiveUP(primitive_type.into(), primitive_count, vertex_stream_zero.as_ptr().cast(), std::mem::size_of::<V>() as _) })
     }
 
-    // TODO: DrawRectPatch
-    // TODO: DrawTriPatch
+    //TODO:     IDirect3DDevice9::DrawRectPatch                     = d3d9::IDirect3DDevice9Ext::draw_rect_patch
+    //TODO:     IDirect3DDevice9::DrawTriPatch                      = d3d9::IDirect3DDevice9Ext::draw_tri_patch
 
     // TODO: docs for args, remarks, deep links, etc.
     // TODO: safety sections
@@ -2020,6 +2022,8 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         Ok(raster_status)
     }
 
+    //TODO: get_render_state (typed)
+
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getrenderstate)\]
     /// IDirect3DDevice9::GetRenderState
     ///
@@ -2103,6 +2107,8 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         fn_context!(d3d9::IDirect3DDevice9Ext::get_render_target_data => IDirect3DDevice9::GetRenderTargetData);
         fn_check_hr!(unsafe { self.as_winapi().GetRenderTargetData(render_target.as_raw(), dest_surface.as_raw()) })
     }
+
+    //TODO: get_sampler_state (typed)
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getsamplerstate)\]
     /// IDirect3DDevice9::GetSamplerState
@@ -2363,6 +2369,8 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         fn_check_hr!(unsafe { self.as_winapi().GetTexture(stage, &mut texture) })?;
         Ok(unsafe { BaseTexture::from_raw_opt(texture) })
     }
+
+    //TODO: get_texture_stage_state (typed)
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-gettexturestagestate)\]
     /// IDirect3DDevice9::GetTextureStageState
@@ -2745,6 +2753,8 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
 
         fn_check_hr!(unsafe { self.as_winapi().Present(source_rect, dest_rect, hwnd, dirty_region) })
     }
+
+    //TODO:     IDirect3DDevice9::ProcessVertices                   = d3d9::IDirect3DDevice9Ext::process_vertices
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-reset)\]
     /// IDirect3DDevice9::Reset
@@ -3375,6 +3385,8 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         fn_check_hr!(unsafe { self.as_winapi().SetPixelShaderConstantI(start_register, constant_data.as_ptr().cast(), n) })
     }
 
+    //TODO: set_render_state (typed)
+
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setrenderstate)\]
     /// IDirect3DDevice9::SetRenderState
     ///
@@ -3658,6 +3670,8 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         fn_check_hr!(unsafe { self.as_winapi().SetTexture(stage, texture) })
     }
 
+    // TODO: set_texture_stage_state (typed)
+
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-settexturestagestate)\]
     /// IDirect3DDevice9::SetTextureStageState
     ///
@@ -3882,6 +3896,8 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         unsafe { self.as_winapi().ShowCursor(show as _) != 0 }
     }
 
+    //TODO:     IDirect3DDevice9::StretchRect                       = d3d9::IDirect3DDevice9Ext::stretch_rect
+
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-testcooperativelevel)\]
     /// IDirect3DDevice9::TestCooperativeLevel
     ///
@@ -3902,6 +3918,10 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         fn_context!(d3d9::IDirect3DDevice9Ext::test_cooperative_level => IDirect3DDevice9::TestCooperativeLevel);
         fn_check_hr!(unsafe { self.as_winapi().TestCooperativeLevel() }).map_err(|e| e.kind())
     }
+
+    //TODO:     IDirect3DDevice9::UpdateSurface                     = d3d9::IDirect3DDevice9Ext::update_surface
+    //TODO:     IDirect3DDevice9::UpdateTexture                     = d3d9::IDirect3DDevice9Ext::update_texture
+    //TODO:     IDirect3DDevice9::ValidateDevice                    = d3d9::IDirect3DDevice9Ext::validate_device
 }
 
 impl<T: AsSafe<IDirect3DDevice9>> IDirect3DDevice9Ext for T {}
@@ -3969,16 +3989,3 @@ pub struct RgnData {
 //#cpp2rust IDirect3DDevice9                                    = d3d9::Device
 //#cpp2rust IDirect3DDevice9                                    = d3d9::IDirect3DDevice9Ext
 
-//TODO:     IDirect3DDevice9::DeletePatch                       = d3d9::IDirect3DDevice9Ext::delete_patch
-//TODO:     IDirect3DDevice9::DrawRectPatch                     = d3d9::IDirect3DDevice9Ext::draw_rect_patch
-//TODO:     IDirect3DDevice9::DrawTriPatch                      = d3d9::IDirect3DDevice9Ext::draw_tri_patch
-//TODO:     IDirect3DDevice9::GetRenderState                    = d3d9::IDirect3DDevice9Ext::get_render_state
-//TODO:     IDirect3DDevice9::GetSamplerState                   = d3d9::IDirect3DDevice9Ext::get_sampler_state
-//TODO:     IDirect3DDevice9::GetTextureStageState              = d3d9::IDirect3DDevice9Ext::get_texture_stage_state
-//TODO:     IDirect3DDevice9::ProcessVertices                   = d3d9::IDirect3DDevice9Ext::process_vertices
-//TODO:     IDirect3DDevice9::SetRenderState                    = d3d9::IDirect3DDevice9Ext::set_render_state
-//TODO:     IDirect3DDevice9::SetTextureStageState              = d3d9::IDirect3DDevice9Ext::set_texture_stage_state
-//TODO:     IDirect3DDevice9::StretchRect                       = d3d9::IDirect3DDevice9Ext::stretch_rect
-//TODO:     IDirect3DDevice9::UpdateSurface                     = d3d9::IDirect3DDevice9Ext::update_surface
-//TODO:     IDirect3DDevice9::UpdateTexture                     = d3d9::IDirect3DDevice9Ext::update_texture
-//TODO:     IDirect3DDevice9::ValidateDevice                    = d3d9::IDirect3DDevice9Ext::validate_device
