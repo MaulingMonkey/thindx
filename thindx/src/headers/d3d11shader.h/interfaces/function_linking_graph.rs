@@ -3,7 +3,6 @@ use crate::ctypes::*;
 use crate::d3d::*;
 use crate::d3d11::*;
 
-use std::convert::TryInto;
 use std::ptr::*;
 
 // TODO REFACTOR:
@@ -295,8 +294,8 @@ impl FunctionLinkingGraph {
     /// ```
     pub fn pass_value_with_swizzle(&self, src_node: &LinkingNode, src_parameter_index: i32, src_swizzle: impl TryIntoAsCStr, dst_node: &LinkingNode, dst_parameter_index: i32, dst_swizzle: impl TryIntoAsCStr) -> Result<(), Error> {
         fn_context!(d3d11::FunctionLinkingGraph::pass_value_with_swizzle => ID3D11FunctionLinkingGraph::PassValueWithSwizzle);
-        let src_swizzle = src_swizzle.try_into().map_err(|e| fn_param_error!(src_swizzle, e))?;
-        let dst_swizzle = dst_swizzle.try_into().map_err(|e| fn_param_error!(dst_swizzle, e))?;
+        let src_swizzle = fn_param_try_into!(src_swizzle)?;
+        let dst_swizzle = fn_param_try_into!(dst_swizzle)?;
         fn_check_hr!(unsafe { self.0.PassValueWithSwizzle(src_node.as_raw(), src_parameter_index, src_swizzle.as_cstr(), dst_node.as_raw(), dst_parameter_index, dst_swizzle.as_cstr()) })
     }
 
@@ -327,7 +326,7 @@ impl FunctionLinkingGraph {
     /// ```
     pub fn set_input_signature(&self, input_parameters: &[ParameterDesc<'static>]) -> Result<LinkingNode, Error> {
         fn_context!(d3d11::FunctionLinkingGraph::set_input_signature => ID3D11FunctionLinkingGraph::SetInputSignature);
-        let n = input_parameters.len().try_into().map_err(|_| fn_param_error!(input_parameters, THINERR::SLICE_TOO_LARGE))?;
+        let n = fn_param_try_len32!(input_parameters)?;
 
         let mut node = null_mut();
         fn_check_hr!(unsafe { self.0.SetInputSignature(input_parameters.as_ptr().cast(), n, &mut node) })?;
@@ -361,7 +360,7 @@ impl FunctionLinkingGraph {
     /// ```
     pub fn set_output_signature(&self, output_parameters: &[ParameterDesc<'static>]) -> Result<LinkingNode, Error> {
         fn_context!(d3d11::FunctionLinkingGraph::set_output_signature => ID3D11FunctionLinkingGraph::SetOutputSignature);
-        let n = output_parameters.len().try_into().map_err(|_| fn_param_error!(output_parameters, THINERR::SLICE_TOO_LARGE))?;
+        let n = fn_param_try_len32!(output_parameters)?;
 
         let mut node = null_mut();
         fn_check_hr!(unsafe { self.0.SetOutputSignature(output_parameters.as_ptr().cast(), n, &mut node) })?;

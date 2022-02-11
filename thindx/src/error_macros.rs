@@ -4,6 +4,8 @@ macro_rules! fn_error       { ( $kind:expr ) => {        $crate::Error(&_THINDX_
 macro_rules! fn_check_hr    { ( $hr:expr )   => { $crate::Error::check(&_THINDX_FN_CONTEXT, $hr)    }}
 macro_rules! fn_param_error { ( $param:ident, $kind:expr ) => { $crate::Error(&$crate::error_macros::FnContext { parameter: Some(stringify!($param)), .._THINDX_FN_CONTEXT }, ($kind).into()) } }
 // TODO: audit fn_param_error! for consistency
+macro_rules! fn_param_try_into  { ( $param:ident ) => { ($param).try_into().map_err(|err| fn_param_error!($param, err)) } }
+macro_rules! fn_param_try_len32 { ( $param:ident ) => { u32::try_from(($param).len()).map_err(|_| fn_param_error!($param, $crate::THINERR::SLICE_TOO_LARGE)) } }
 
 /// Annotate a Rust => C++ function mapping.
 ///

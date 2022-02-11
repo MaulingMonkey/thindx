@@ -10,12 +10,8 @@ use winapi::shared::minwindef::DWORD;
 
 use std::fmt::{self, Debug, Display, Formatter};
 
-type Error = ();
 
 
-
-
-//#cpp2rust D3DPERF_BeginEvent = d3d::perf::begin_event
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_beginevent)\]
 /// D3DPERF_BeginEvent
 ///
@@ -35,10 +31,15 @@ type Error = ();
 /// # }
 /// ```
 pub fn begin_event(col: impl Into<d3d::Color>, name: impl abistr::TryIntoAsCStr<u16>) -> Result<u32, Error> {
+    fn_context!(d3d::perf::begin_event => D3DPERF_BeginEvent);
     let col     = col.into().into();
-    let name    = name.try_into().map_err(|_| ())?;
+    let name    = fn_param_try_into!(name)?;
     let level   = unsafe { D3DPERF_BeginEvent(col, name.as_cstr()) };
-    if level < 0 { Err(()) } else { Ok(level as _) }
+    if level < 0 {
+        fn_err!(THINERR::NONSPECIFIC)
+    } else {
+        Ok(level as _)
+    }
 }
 
 //#cpp2rust D3DPERF_BeginEvent = d3d::perf::event_scope
@@ -158,7 +159,6 @@ impl Drop for EventScope {
 
 
 
-//#cpp2rust D3DPERF_EndEvent = d3d::perf::end_event
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_endevent)\]
 /// D3DPERF_EndEvent
 ///
@@ -177,13 +177,17 @@ impl Drop for EventScope {
 /// # }
 /// ```
 pub fn end_event() -> Result<u32, Error> {
+    fn_context!(d3d::perf::end_event => D3DPERF_EndEvent);
     let level   = unsafe { D3DPERF_EndEvent() };
-    if level < 0 { Err(()) } else { Ok(level as _) }
+    if level < 0 {
+        fn_err!(THINERR::NONSPECIFIC)
+    } else {
+        Ok(level as _)
+    }
 }
 
 
 
-//#cpp2rust D3DPERF_GetStatus = d3d::perf::get_status
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_getstatus)\]
 /// D3DPERF_GetStatus
 ///
@@ -200,12 +204,12 @@ pub fn end_event() -> Result<u32, Error> {
 /// dbg!(is_pix_attached); // false
 /// ```
 pub fn get_status() -> u32 {
+    fn_context!(d3d::perf::get_status => D3DPERF_GetStatus);
     unsafe { D3DPERF_GetStatus() }
 }
 
 
 
-//#cpp2rust D3DPERF_QueryRepeatFrame = d3d::perf::query_repeat_frame
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_queryrepeatframe)\]
 /// D3DPERF_QueryRepeatFrame
 ///
@@ -224,13 +228,13 @@ pub fn get_status() -> u32 {
 /// dbg!(should_rerender_frame); // false
 /// ```
 pub fn query_repeat_frame() -> bool {
+    fn_context!(d3d::perf::query_repeat_frame => D3DPERF_QueryRepeatFrame);
     let r = unsafe { D3DPERF_QueryRepeatFrame() };
     r != 0
 }
 
 
 
-//#cpp2rust D3DPERF_SetMarker = d3d::perf::set_marker
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_setmarker)\]
 /// D3DPERF_SetMarker
 ///
@@ -248,15 +252,15 @@ pub fn query_repeat_frame() -> bool {
 /// # }
 /// ```
 pub fn set_marker(col: impl Into<d3d::Color>, name: impl abistr::TryIntoAsCStr<u16>) -> Result<(), Error> {
+    fn_context!(d3d::perf::set_marker => D3DPERF_SetMarker);
     let col     = col.into().into();
-    let name    = name.try_into().map_err(|_| ())?;
+    let name    = fn_param_try_into!(name)?;
     unsafe { D3DPERF_SetMarker(col, name.as_cstr()) };
     Ok(())
 }
 
 
 
-//#cpp2rust D3DPERF_SetOptions = d3d::perf::set_options
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_setoptions)\]
 /// D3DPERF_SetOptions
 ///
@@ -273,6 +277,7 @@ pub fn set_marker(col: impl Into<d3d::Color>, name: impl abistr::TryIntoAsCStr<u
 /// # d3d::perf::set_options(d3d::perf::Options::None);
 /// ```
 pub fn set_options(options: impl Into<Options>) {
+    fn_context!(d3d::perf::set_options => D3DPERF_SetOptions);
     // MSDN's "Syntax" sections misdocuments this as having an `int` return.
     // The "Return value" section states it "doesn't return a value".
     // The function returns `void` in the headers, so we trust the latter.
@@ -295,7 +300,6 @@ flags! { Options => DWORD; None, ForbidPix }
 
 
 
-//#cpp2rust D3DPERF_SetRegion = d3d::perf::set_region
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_setregion)\]
 /// D3DPERF_SetRegion
 ///
@@ -315,8 +319,9 @@ flags! { Options => DWORD; None, ForbidPix }
 /// # }
 /// ```
 pub fn set_region(col: impl Into<d3d::Color>, name: impl abistr::TryIntoAsCStr<u16>) -> Result<(), Error> {
+    fn_context!(d3d::perf::set_region => D3DPERF_SetRegion);
     let col     = col.into().into();
-    let name    = name.try_into().map_err(|_| ())?;
+    let name    = fn_param_try_into!(name)?;
     unsafe { D3DPERF_SetRegion(col, name.as_cstr()) };
     Ok(())
 }

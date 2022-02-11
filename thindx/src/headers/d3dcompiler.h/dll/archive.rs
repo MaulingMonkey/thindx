@@ -1,7 +1,6 @@
 use crate::*;
 use crate::d3d::*;
 
-use std::convert::TryInto;
 use std::ptr::*;
 
 
@@ -51,7 +50,7 @@ impl Compiler {
     ) -> Result<BytesBlob, Error> {
         // Early outs
         fn_context_dll!(d3d::Compiler::compress_shaders => self.D3DCompressShaders);
-        let num_shaders = shaders.len().try_into().map_err(|_| fn_param_error!(shaders, THINERR::MISSING_DLL_EXPORT))?;
+        let num_shaders = fn_param_try_len32!(shaders)?;
 
         // SAFETY: ⚠️ This sketchy mut cast *should* be sane (famous last words.)
         // We're only casting away the immutability of the D3D_SHADER_DATA elements, not the bytecode those elements point to.
@@ -184,7 +183,7 @@ impl Compiler {
         out_shaders:            &'s mut [Option<ReadOnlyBlob>],
     ) -> Result<&'s [Option<ReadOnlyBlob>], Error> {
         fn_context_dll!(d3d::Compiler::decompress_shaders_inplace => self.D3DDecompressShaders);
-        let n : u32 = out_shaders.len().try_into().map_err(|_| fn_param_error!(out_shaders, THINERR::SLICE_TOO_LARGE))?;
+        let n = fn_param_try_len32!(out_shaders)?;
         let _ = flags;
 
         for shader in out_shaders.iter_mut() { *shader = None; } // D3DCompressShaders will overwrite

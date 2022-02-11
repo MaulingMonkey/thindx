@@ -105,7 +105,7 @@ pub trait IDirect3DPixelShader9Ext : AsSafe<IDirect3DPixelShader9> {
     /// *   Ok(`&data[???]`)        Function data was read
     fn get_function_inplace<'d>(&self, data: &'d mut [u8]) -> Result<&'d [u8], Error> {
         fn_context!(d3d9::IDirect3DPixelShader9Ext::get_function_inplace => IDirect3DPixelShader9::GetFunction);
-        let mut size = data.len().try_into().map_err(|_| fn_param_error!(data, THINERR::SLICE_TOO_LARGE))?;
+        let mut size = fn_param_try_len32!(data)?;
         // XXX: Do I need a get_function_size check in here too?
         fn_check_hr!(unsafe { self.as_winapi().GetFunction(data.as_mut_ptr().cast(), &mut size) })?;
         Ok(&data[0..(size as usize)])
@@ -189,7 +189,7 @@ pub trait IDirect3DVertexShader9Ext : AsSafe<IDirect3DVertexShader9> {
     /// *   Ok(`&data[???]`)        Function data was read
     fn get_function_inplace<'d>(&self, data: &'d mut [u8]) -> Result<&'d [u8], Error> {
         fn_context!(d3d9::IDirect3DVertexShader9Ext::get_function_inplace => IDirect3DVertexShader9::GetFunction);
-        let mut size = data.len().try_into().map_err(|_| fn_param_error!(data, THINERR::SLICE_TOO_LARGE))?;
+        let mut size = fn_param_try_len32!(data)?;
         // XXX: Do I need a get_function_size check in here too?
         fn_check_hr!(unsafe { self.as_winapi().GetFunction(data.as_mut_ptr().cast(), &mut size) })?;
         Ok(&data[0..(size as usize)])

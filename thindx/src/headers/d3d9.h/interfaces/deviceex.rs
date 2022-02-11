@@ -396,8 +396,8 @@ pub trait IDirect3DDevice9ExExt : AsSafe<IDirect3DDevice9Ex> {
     fn set_convolution_mono_kernel(&self, rows: &mut [f32], cols: &mut [f32]) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9ExExt::set_convolution_mono_kernel => IDirect3DDevice9Ex::SetConvolutionMonoKernel);
         // XXX: should rows/cols be non-mut?  Not sure if d3d *actually* writes those values or not...
-        let width  : u32 = rows.len().try_into().map_err(|_| fn_param_error!(rows, THINERR::SLICE_OVERFLOW))?;
-        let height : u32 = cols.len().try_into().map_err(|_| fn_param_error!(cols, THINERR::SLICE_OVERFLOW))?;
+        let width  = fn_param_try_len32!(rows)?;
+        let height = fn_param_try_len32!(cols)?;
         fn_check_hr!(unsafe { self.as_winapi().SetConvolutionMonoKernel(width, height, rows.as_mut_ptr(), cols.as_mut_ptr()) })
     }
 

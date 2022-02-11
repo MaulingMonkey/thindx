@@ -13,7 +13,6 @@ use winapi::shared::windef::RECT;
 use winapi::um::unknwnbase::IUnknown;
 use winapi::um::wingdi::*;
 
-use std::convert::TryInto;
 use std::ptr::*;
 
 pub(crate) const MAX_BUFFER_ALLOC : u32 = 0xFFFF_0000;
@@ -366,7 +365,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         // TODO: more clear docs
         // TODO: conversion traits for params?
 
-        let n : u32 = rects.map_or(0, |r| r.len()).try_into().map_err(|_| fn_param_error!(rects, D3DERR::INVALIDCALL))?;
+        let n     = rects.map_or(Ok(0), |rects| fn_param_try_len32!(rects))?;
         let rects = rects.map_or(null(), |r| r.as_ptr().cast());
 
         let flags =
@@ -509,7 +508,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         if size == 0        { return Err(fn_param_error!(size, D3DERR::INVALIDCALL)); }
         if mips.is_empty()  { return Err(fn_param_error!(mips, D3DERR::INVALIDCALL)); } // 0 levels = autogenerate mips, which is different from no levels
 
-        let levels : u32    = mips.len().try_into().map_err(|_| fn_param_error!(mips, THINERR::SLICE_TOO_LARGE))?;
+        let levels          = fn_param_try_len32!(mips)?;
         let usage           = usage.into();
         let pool            = pool.into();
         let texture         = self.create_cube_texture(size, levels, usage, format.format, pool, shared_handle)?;
@@ -785,7 +784,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         if height == 0      { return Err(fn_param_error!(height, D3DERR::INVALIDCALL)); }
         if mips.is_empty()  { return Err(fn_param_error!(mips,   D3DERR::INVALIDCALL)); } // 0 levels = autogenerate mips, which is different from no levels
 
-        let levels : u32    = mips.len().try_into().map_err(|_| fn_param_error!(mips, THINERR::SLICE_TOO_LARGE))?;
+        let levels          = fn_param_try_len32!(mips)?;
         let usage           = usage.into();
         let pool            = pool.into();
         let texture         = self.create_texture(width, height, levels, usage, format.format, pool, _shared_handle)?;
@@ -1030,7 +1029,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         if height == 0      { return Err(fn_param_error!(height, D3DERR::INVALIDCALL)); }
         if mips.is_empty()  { return Err(fn_param_error!(mips,   D3DERR::INVALIDCALL)); } // 0 levels = autogenerate mips, which is different from no levels
 
-        let levels : u32    = mips.len().try_into().map_err(|_| fn_param_error!(mips, THINERR::SLICE_TOO_LARGE))?;
+        let levels          = fn_param_try_len32!(mips)?;
         let usage           = usage.into();
         let pool            = pool.into();
         let texture         = self.create_volume_texture(width, height, depth, levels, usage, format.format, pool, _shared_handle)?;
@@ -1934,7 +1933,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// ```
     fn get_pixel_shader_constant_b(&self, start_register: u32, constant_data: &mut [bool32]) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::get_pixel_shader_constant_b => IDirect3DDevice9::GetPixelShaderConstantB);
-        let n : u32 = constant_data.len().try_into().map_err(|_| fn_param_error!(constant_data, D3DERR::INVALIDCALL))?;
+        let n = fn_param_try_len32!(constant_data)?;
         fn_check_hr!(unsafe { self.as_winapi().GetPixelShaderConstantB(start_register, constant_data.as_mut_ptr().cast(), n) })
     }
 
@@ -1969,7 +1968,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// ```
     fn get_pixel_shader_constant_f(&self, start_register: u32, constant_data: &mut [[f32; 4]]) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::get_pixel_shader_constant_f => IDirect3DDevice9::GetPixelShaderConstantF);
-        let n : u32 = constant_data.len().try_into().map_err(|_| fn_param_error!(constant_data, D3DERR::INVALIDCALL))?;
+        let n = fn_param_try_len32!(constant_data)?;
         fn_check_hr!(unsafe { self.as_winapi().GetPixelShaderConstantF(start_register, constant_data.as_mut_ptr().cast(), n) })
     }
 
@@ -2003,7 +2002,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// ```
     fn get_pixel_shader_constant_i(&self, start_register: u32, constant_data: &mut [[i32; 4]]) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::get_pixel_shader_constant_i => IDirect3DDevice9::GetPixelShaderConstantI);
-        let n : u32 = constant_data.len().try_into().map_err(|_| fn_param_error!(constant_data, D3DERR::INVALIDCALL))?;
+        let n = fn_param_try_len32!(constant_data)?;
         fn_check_hr!(unsafe { self.as_winapi().GetPixelShaderConstantI(start_register, constant_data.as_mut_ptr().cast(), n) })
     }
 
@@ -2536,7 +2535,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// ```
     fn get_vertex_shader_constant_b(&self, start_register: u32, constant_data: &mut [bool32]) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::get_vertex_shader_constant_b => IDirect3DDevice9::GetVertexShaderConstantB);
-        let n : u32 = constant_data.len().try_into().map_err(|_| fn_param_error!(constant_data, D3DERR::INVALIDCALL))?;
+        let n = fn_param_try_len32!(constant_data)?;
         fn_check_hr!(unsafe { self.as_winapi().GetVertexShaderConstantB(start_register, constant_data.as_mut_ptr().cast(), n) })
     }
 
@@ -2571,7 +2570,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// ```
     fn get_vertex_shader_constant_f(&self, start_register: u32, constant_data: &mut [[f32; 4]]) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::get_vertex_shader_constant_f => IDirect3DDevice9::GetVertexShaderConstantF);
-        let n : u32 = constant_data.len().try_into().map_err(|_| fn_param_error!(constant_data, D3DERR::INVALIDCALL))?;
+        let n = fn_param_try_len32!(constant_data)?;
         fn_check_hr!(unsafe { self.as_winapi().GetVertexShaderConstantF(start_register, constant_data.as_mut_ptr().cast(), n) })
     }
 
@@ -2605,7 +2604,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// ```
     fn get_vertex_shader_constant_i(&self, start_register: u32, constant_data: &mut [[i32; 4]]) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::get_vertex_shader_constant_i => IDirect3DDevice9::GetVertexShaderConstantI);
-        let n : u32 = constant_data.len().try_into().map_err(|_| fn_param_error!(constant_data, D3DERR::INVALIDCALL))?;
+        let n = fn_param_try_len32!(constant_data)?;
         fn_check_hr!(unsafe { self.as_winapi().GetVertexShaderConstantI(start_register, constant_data.as_mut_ptr().cast(), n) })
     }
 
@@ -3333,7 +3332,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// ```
     fn set_pixel_shader_constant_b(&self, start_register: u32, constant_data: &[bool32]) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::set_pixel_shader_constant_b => IDirect3DDevice9::SetPixelShaderConstantB);
-        let n : u32 = constant_data.len().try_into().map_err(|_| fn_param_error!(constant_data, D3DERR::INVALIDCALL))?;
+        let n = fn_param_try_len32!(constant_data)?;
         fn_check_hr!(unsafe { self.as_winapi().SetPixelShaderConstantB(start_register, constant_data.as_ptr().cast(), n) })
     }
 
@@ -3367,7 +3366,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// ```
     fn set_pixel_shader_constant_f(&self, start_register: u32, constant_data: &[[f32; 4]]) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::set_pixel_shader_constant_f => IDirect3DDevice9::SetPixelShaderConstantF);
-        let n : u32 = constant_data.len().try_into().map_err(|_| fn_param_error!(constant_data, D3DERR::INVALIDCALL))?;
+        let n = fn_param_try_len32!(constant_data)?;
         fn_check_hr!(unsafe { self.as_winapi().SetPixelShaderConstantF(start_register, constant_data.as_ptr().cast(), n) })
     }
 
@@ -3401,7 +3400,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// ```
     fn set_pixel_shader_constant_i(&self, start_register: u32, constant_data: &[[i32; 4]]) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::set_pixel_shader_constant_i => IDirect3DDevice9::SetPixelShaderConstantI);
-        let n : u32 = constant_data.len().try_into().map_err(|_| fn_param_error!(constant_data, D3DERR::INVALIDCALL))?;
+        let n = fn_param_try_len32!(constant_data)?;
         fn_check_hr!(unsafe { self.as_winapi().SetPixelShaderConstantI(start_register, constant_data.as_ptr().cast(), n) })
     }
 
@@ -3804,7 +3803,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// ```
     fn set_vertex_shader_constant_b(&self, start_register: u32, constant_data: &[bool32]) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::set_vertex_shader_constant_b => IDirect3DDevice9::SetVertexShaderConstantB);
-        let n : u32 = constant_data.len().try_into().map_err(|_| fn_param_error!(constant_data, D3DERR::INVALIDCALL))?;
+        let n = fn_param_try_len32!(constant_data)?;
         fn_check_hr!(unsafe { self.as_winapi().SetVertexShaderConstantB(start_register, constant_data.as_ptr().cast(), n) })
     }
 
@@ -3839,7 +3838,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// ```
     fn set_vertex_shader_constant_f(&self, start_register: u32, constant_data: &[[f32; 4]]) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::set_vertex_shader_constant_f => IDirect3DDevice9::SetVertexShaderConstantF);
-        let n : u32 = constant_data.len().try_into().map_err(|_| fn_param_error!(constant_data, D3DERR::INVALIDCALL))?;
+        let n = fn_param_try_len32!(constant_data)?;
         fn_check_hr!(unsafe { self.as_winapi().SetVertexShaderConstantF(start_register, constant_data.as_ptr().cast(), n) })
     }
 
@@ -3873,7 +3872,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// ```
     fn set_vertex_shader_constant_i(&self, start_register: u32, constant_data: &[[i32; 4]]) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::set_vertex_shader_constant_i => IDirect3DDevice9::SetVertexShaderConstantI);
-        let n : u32 = constant_data.len().try_into().map_err(|_| fn_param_error!(constant_data, D3DERR::INVALIDCALL))?;
+        let n = fn_param_try_len32!(constant_data)?;
         fn_check_hr!(unsafe { self.as_winapi().SetVertexShaderConstantI(start_register, constant_data.as_ptr().cast(), n) })
     }
 

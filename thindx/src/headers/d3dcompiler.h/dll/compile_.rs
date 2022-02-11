@@ -199,8 +199,8 @@ impl Compiler {
         let defines     = defines.as_shader_macros().map_err(|e| fn_param_error!(defines,   e))?;
         let file_name   = file_name.to_wcstr()      .map_err(|e| fn_param_error!(file_name, e))?;
 
-        let entrypoint  = entrypoint.try_into().map_err(|e| fn_param_error!(entrypoint, e))?;
-        let target      = target    .try_into().map_err(|e| fn_param_error!(target, e))?;
+        let entrypoint  = fn_param_try_into!(entrypoint)?;
+        let target      = fn_param_try_into!(target)?;
         let entrypoint  = entrypoint.as_opt_cstr();
         let target      = target    .as_cstr();
 
@@ -303,9 +303,9 @@ impl Compiler {
         let src_data    = src_data.as_ref();
         // Note: No error checking occurs for internal `\0`s - they will simply terminate the string earlier than expected.
         // Note: We should perhaps reject non-ASCII values instead of allowing UTF8
-        let source_name = source_name   .try_into().map_err(|e| fn_param_error!(source_name, e))?;
-        let entrypoint  = entrypoint    .try_into().map_err(|e| fn_param_error!(entrypoint, e))?;
-        let target      = target        .try_into().map_err(|e| fn_param_error!(target, e))?;
+        let source_name = fn_param_try_into!(source_name)?;
+        let entrypoint  = fn_param_try_into!(entrypoint)?;
+        let target      = fn_param_try_into!(target)?;
         let source_name = source_name   .as_opt_cstr();
         let entrypoint  = entrypoint    .as_opt_cstr();
         let target      = target        .as_cstr();
@@ -419,9 +419,9 @@ impl Compiler {
         let src_data    = src_data.as_ref();
         // Note: No error checking occurs for internal `\0`s - they will simply terminate the string earlier than expected.
         // Note: We should perhaps reject non-ASCII values instead of allowing UTF8
-        let source_name = source_name   .try_into().map_err(|e| fn_param_error!(source_name, e))?;
-        let entrypoint  = entrypoint    .try_into().map_err(|e| fn_param_error!(entrypoint, e))?;
-        let target      = target        .try_into().map_err(|e| fn_param_error!(target, e))?;
+        let source_name = fn_param_try_into!(source_name)?;
+        let entrypoint  = fn_param_try_into!(entrypoint)?;
+        let target      = fn_param_try_into!(target)?;
         let source_name = source_name   .as_opt_cstr();
         let entrypoint  = entrypoint    .as_opt_cstr();
         let target      = target        .as_cstr();
@@ -531,7 +531,7 @@ impl Compiler {
         let src_data    = src_data.as_ref();
         // Note: No error checking occurs for internal `\0`s - they will simply terminate the string earlier than expected.
         // Note: We should perhaps reject non-ASCII values instead of allowing UTF8
-        let source_name = source_name.try_into().map_err(|e| fn_param_error!(source_name, e))?;
+        let source_name = fn_param_try_into!(source_name)?;
         let source_name = source_name.as_opt_cstr();
         let include     = include.as_id3dinclude();
 

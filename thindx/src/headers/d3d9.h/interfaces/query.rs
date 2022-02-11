@@ -7,7 +7,6 @@ use winapi::shared::d3d9::IDirect3DQuery9;
 use winapi::shared::winerror::*;
 use winapi::um::unknwnbase::IUnknown;
 
-use std::convert::TryInto;
 use std::ptr::null_mut;
 
 
@@ -63,7 +62,7 @@ pub trait IDirect3DQuery9Ext : AsSafe<IDirect3DQuery9> {
         fn_context!(d3d9::IDirect3DQuery9Ext::get_data_inplace => IDirect3DQuery9::GetData);
         let data = data.as_mut();
         let flags = get_data_flags.into().into();
-        let len = data.len().try_into().map_err(|_| fn_param_error!(data, THINERR::SLICE_TOO_LARGE))?;
+        let len = fn_param_try_len32!(data)?;
 
         let hr = unsafe { self.as_winapi().GetData(data.as_mut_ptr().cast(), len, flags) };
         if hr == S_FALSE { return Ok(false) }

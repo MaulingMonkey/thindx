@@ -7,7 +7,6 @@ use winapi::Interface;
 use winapi::shared::d3d9::IDirect3DVolume9;
 use winapi::um::unknwnbase::IUnknown;
 
-use std::convert::TryInto;
 use std::ptr::*;
 
 
@@ -202,7 +201,7 @@ pub trait IDirect3DVolume9Ext : AsSafe<IDirect3DVolume9> {
     /// ```
     fn get_private_data_inplace<'s>(&self, guid: &impl AsRef<Guid>, data: &'s mut [u8]) -> Result<&'s [u8], Error> {
         fn_context!(d3d9::IDirect3DVolume9Ext::get_private_data_inplace => IDirect3DVolume9::GetPrivateData);
-        let mut n : u32 = data.len().try_into().map_err(|_| fn_param_error!(data, THINERR::SLICE_OVERFLOW))?;
+        let mut n = fn_param_try_len32!(data)?;
         fn_check_hr!(unsafe { self.as_winapi().GetPrivateData(guid.as_ref().as_ref(), data.as_mut_ptr().cast(), &mut n) })?;
         Ok(&data[..(n as usize)])
     }
@@ -224,7 +223,7 @@ pub trait IDirect3DVolume9Ext : AsSafe<IDirect3DVolume9> {
     /// ```
     fn set_private_data(&self, guid: &impl AsRef<Guid>, data: &[u8]) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DVolume9Ext::set_private_data => IDirect3DVolume9::SetPrivateData);
-        let n : u32 = data.len().try_into().map_err(|_| fn_param_error!(data, THINERR::SLICE_OVERFLOW))?;
+        let n = fn_param_try_len32!(data)?;
         fn_check_hr!(unsafe { self.as_winapi().SetPrivateData(guid.as_ref().as_ref(), data.as_ptr().cast(), n, 0) })
     }
 
