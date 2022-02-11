@@ -123,8 +123,8 @@ impl Linker {
     /// *   [examples::d3dcompiler_03_link]
     pub fn link(&self, entry: &ModuleInstance, entry_name: impl TryIntoAsCStr, target_name: impl TryIntoAsCStr, flags: Option<std::convert::Infallible>) -> Result<LinkResult, ErrorWithBlob> {
         fn_context!(d3d11::Linker::link => ID3D11Linker::Link);
-        let entry_name  = entry_name .try_into().map_err(|e| fn_param_error!(entry_name,  e.into()))?;
-        let target_name = target_name.try_into().map_err(|e| fn_param_error!(target_name, e.into()))?;
+        let entry_name  = entry_name .try_into().map_err(|e| fn_param_error!(entry_name, e))?;
+        let target_name = target_name.try_into().map_err(|e| fn_param_error!(target_name, e))?;
         let entry_name  = entry_name .as_cstr();
         let target_name = target_name.as_cstr();
 

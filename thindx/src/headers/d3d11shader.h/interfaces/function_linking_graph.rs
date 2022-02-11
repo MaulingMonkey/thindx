@@ -150,8 +150,8 @@ impl FunctionLinkingGraph {
         function_name:                  impl TryIntoAsCStr,
     ) -> Result<LinkingNode, Error> {
         fn_context!(d3d11::FunctionLinkingGraph::call_function => ID3D11FunctionLinkingGraph::CallFunction);
-        let ns      = module_instance_namespace.try_into()  .map_err(|e| fn_param_error!(module_instance_namespace, e.into()))?;
-        let name    = function_name.try_into()              .map_err(|e| fn_param_error!(function_name,             e.into()))?;
+        let ns      = module_instance_namespace.try_into()  .map_err(|e| fn_param_error!(module_instance_namespace, e))?;
+        let name    = function_name.try_into()              .map_err(|e| fn_param_error!(function_name, e))?;
         let module  = module_with_function_prototype.as_raw();
 
         let mut node = null_mut();
@@ -295,8 +295,8 @@ impl FunctionLinkingGraph {
     /// ```
     pub fn pass_value_with_swizzle(&self, src_node: &LinkingNode, src_parameter_index: i32, src_swizzle: impl TryIntoAsCStr, dst_node: &LinkingNode, dst_parameter_index: i32, dst_swizzle: impl TryIntoAsCStr) -> Result<(), Error> {
         fn_context!(d3d11::FunctionLinkingGraph::pass_value_with_swizzle => ID3D11FunctionLinkingGraph::PassValueWithSwizzle);
-        let src_swizzle = src_swizzle.try_into().map_err(|e| fn_param_error!(src_swizzle, e.into()))?;
-        let dst_swizzle = dst_swizzle.try_into().map_err(|e| fn_param_error!(dst_swizzle, e.into()))?;
+        let src_swizzle = src_swizzle.try_into().map_err(|e| fn_param_error!(src_swizzle, e))?;
+        let dst_swizzle = dst_swizzle.try_into().map_err(|e| fn_param_error!(dst_swizzle, e))?;
         fn_check_hr!(unsafe { self.0.PassValueWithSwizzle(src_node.as_raw(), src_parameter_index, src_swizzle.as_cstr(), dst_node.as_raw(), dst_parameter_index, dst_swizzle.as_cstr()) })
     }
 

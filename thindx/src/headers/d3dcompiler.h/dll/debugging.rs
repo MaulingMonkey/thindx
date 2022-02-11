@@ -129,7 +129,7 @@ impl Compiler {
         fn_context_dll!(d3d::Compiler::disassemble => self.D3DDisassemble);
         let src_data = src_data.as_bytes();
         let flags = flags.into().into();
-        let comments = comments.try_into().map_err(|e| fn_param_error!(comments, e.into()))?;
+        let comments = comments.try_into().map_err(|e| fn_param_error!(comments, e))?;
         let comments = comments.as_opt_cstr();
         let mut disassembly = null_mut();
 
@@ -225,7 +225,7 @@ impl Compiler {
         fn_context_dll!(d3d::Compiler::disassemble_region => self.D3DDisassembleRegion);
         let src_data = src_data.as_bytes();
         let flags = flags.into().into();
-        let comments = comments.try_into().map_err(|e| fn_param_error!(comments, e.into()))?;
+        let comments = comments.try_into().map_err(|e| fn_param_error!(comments, e))?;
         let comments = comments.as_opt_cstr();
         let mut disassembly = null_mut();
         let mut finish_byte_offset = 0;
