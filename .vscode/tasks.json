@@ -28,7 +28,7 @@
         },
         {
             "label":   "check-file",
-            "command": "scripts\\check.cmd ${relativeFile}",
+            "command": "scripts\\check.cmd ${relativeFile} <NUL",
         },
         {
             "label":   "clippy",
@@ -56,7 +56,7 @@
         },
         {
             "label":   "clean",
-            "command": "scripts\\clean.cmd",
+            "command": "scripts\\clean.cmd <NUL",
         },
         {
             "label":   "update coverage",
