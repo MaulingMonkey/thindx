@@ -42,7 +42,9 @@ fn main() {
 
         match event {
             WindowEvent { event: CloseRequested, window_id } if window_id == window.id() => {
-                std::process::exit(0); // Ensure Device outlasts closing HWND!
+                assets = None;
+                device = None;
+                *control_flow = ControlFlow::Exit;
             },
             WindowEvent { event: Focused(focus), window_id } if window_id == window.id() => {
                 xinput::enable(focus);
@@ -85,7 +87,7 @@ fn main() {
                     let assets = assets.as_ref().unwrap();
                     let _ = render(device, assets);
                     dev::d3d9::screenshot_rt0_for_docs_gen(&device);
-                    let _present_err = device.present(.., .., (), None).err();
+                    let _ = device.present(.., .., (), None);
                 }
             },
             _ => {},
@@ -142,7 +144,7 @@ fn render(device: &Device, assets: &Assets) -> Result<(), BugRenderErrors> {
     device.set_sampler_state(0, d3d::SampV::MagFilter(d3d::TexF::Linear))?;
     device.set_sampler_state(0, d3d::SampV::MipFilter(d3d::TexF::Linear))?;
 
-    let vp = device.get_viewport().unwrap();
+    let vp = device.get_viewport()?;
     let sx = 2.0 / vp.width  as f32;
     let sy = 2.0 / vp.height as f32;
 
