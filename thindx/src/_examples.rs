@@ -272,33 +272,48 @@ pub const d3d9_01_clear_winapi : () = ();
 ///             WindowEvent { event: CloseRequested, window_id } if window_id == window.id() => {
 ///                 std::process::exit(0); // Ensure Device outlasts closing HWND!
 ///             },
-///             WindowEvent { event: Resized(size), window_id } if window_id == window.id() => {
-///                 let _ = size; // TODO: resize buffers, set viewport
-///             },
 ///             WindowEvent { event: Focused(focus), window_id } if window_id == window.id() => {
 ///                 xinput::enable(focus);
 ///             },
 ///             MainEventsCleared => {
-///                 let present_err;
+///                 let window_size = window.inner_size();
+///                 if window_size.width == 0 || window_size.height == 0 { return } // unable to create or reset device like this (will result in E::NOTIMPL)
+/// 
+///                 if let Some(d) = device.as_ref() {
+///                     let reset = match d.test_cooperative_level() {
+///                         Ok(()) => {
+///                             let bb = d.get_back_buffer(0, 0, BackBufferType::Mono).unwrap().get_desc().unwrap();
+///                             (bb.width, bb.height) != (window_size.width, window_size.height)
+///                         },
+///                         Err(D3DERR::DEVICELOST)     => return, // cannot reset yet
+///                         Err(D3DERR::DEVICENOTRESET) => true,
+///                         Err(err) => {
+///                             assets = None;
+///                             device = None;
+///                             panic!("test_cooperative_level() failed with: {:?}", err);
+///                         },
+///                     };
+/// 
+///                     if !reset {
+///                         // no action
+///                     } else if let Err(err) = unsafe { d.reset(&mut pp(&window)) } {
+///                         bugsalot::debugln!("failed to reset device, will attempt to recreate: {:?}", err);
+///                         assets = None;
+///                         device = None;
+///                     } else {
+///                         // reset successful
+///                         d.set_viewport(Viewport { x: 0, y: 0, width: window_size.width, height: window_size.height, min_z: 0.0, max_z: 1.0 }).unwrap();
+///                     }
+///                 } else {
+///                     device = unsafe { try_create_device(&d3d, &window) };
+///                 }
+/// 
 ///                 if let Some(device) = device.as_ref() {
 ///                     if assets.is_none() { assets = Some(Assets::new(&device)); }
 ///                     let assets = assets.as_ref().unwrap();
 ///                     let _ = render(device, assets);
 ///                     dev::d3d9::screenshot_rt0_for_docs_gen(&device);
-///                     present_err = device.present(.., .., (), None).err();
-///                 } else {
-///                     present_err = None;
-///                 }
-/// 
-///                 if let Some(err) = present_err {
-///                     match err.kind() {
-///                         D3DERR::DEVICELOST => {
-///                             assets = None;
-///                             drop(device.take()); // avoid simultanious devices for window
-///                             device = unsafe { try_create_device(&d3d, &window) };
-///                         },
-///                         _other => {},
-///                     }
+///                     let _present_err = device.present(.., .., (), None).err();
 ///                 }
 ///             },
 ///             _ => {},
@@ -306,22 +321,26 @@ pub const d3d9_01_clear_winapi : () = ();
 ///     });
 /// }
 /// 
-/// /// ### ⚠️ Safety ⚠️
-/// /// Caller is responsible for ensuring the [`d3d9::Device`] does not outlive the `window`.
-/// unsafe fn try_create_device(d3d: &Direct3D, window: &Window) -> Option<d3d9::Device> {
+/// unsafe fn pp(window: &Window) -> PresentParameters<'static> {
 ///     let hwnd = match window.raw_window_handle() {
 ///         RawWindowHandle::Win32(Win32Handle { hwnd, .. }) => hwnd.cast(),
 ///         other => panic!("Expected RawWindowHandle::Windows(...), got {:?} instead", other),
 ///     };
 ///     let hwnd = SafeHWND::assert_unbounded(hwnd).unwrap();
 /// 
-///     let mut pp = d3d::PresentParameters {
+///     d3d::PresentParameters {
 ///         windowed:               true.into(),
 ///         device_window:          Some(hwnd),
 ///         swap_effect:            SwapEffect::Discard,
 ///         presentation_interval:  Present::IntervalOne,
 ///         .. d3d::PresentParameters::zeroed()
-///     };
+///     }
+/// }
+/// 
+/// /// ### ⚠️ Safety ⚠️
+/// /// Caller is responsible for ensuring the [`d3d9::Device`] does not outlive the `window`.
+/// unsafe fn try_create_device(d3d: &Direct3D, window: &Window) -> Option<d3d9::Device> {
+///     let mut pp = pp(window);
 /// 
 ///     let behavior =
 ///         // Create::DisablePrintScreen | // d3d9ex
@@ -351,8 +370,9 @@ pub const d3d9_01_clear_winapi : () = ();
 ///     device.set_sampler_state(0, d3d::SampV::MagFilter(d3d::TexF::Linear))?;
 ///     device.set_sampler_state(0, d3d::SampV::MipFilter(d3d::TexF::Linear))?;
 /// 
-///     let sx = 2.0 / 800.0;
-///     let sy = 2.0 / 600.0;
+///     let vp = device.get_viewport().unwrap();
+///     let sx = 2.0 / vp.width  as f32;
+///     let sy = 2.0 / vp.height as f32;
 /// 
 ///     let user = xinput::User::Zero;
 ///     let state = xinput::get_state(user).ok()
