@@ -33,6 +33,7 @@ mods! {
         pub mod d3d11;
         pub mod wkpdid;
         pub mod xinput;
+        pub mod win32;
     }
 
     #[path="headers/d3d9.h/d3d9.rs"]                mod d3d9_h;         // d3d9 mod
@@ -42,7 +43,9 @@ mods! {
     #[path="headers/d3dcommon.h/d3dcommon.rs"]      mod d3dcommon_h;    // d3d mod
     #[path="headers/d3dcompiler.h/d3dcompiler.rs"]  mod d3dcompiler_h;  // d3d mod
     #[path="headers/guiddef.h/guiddef.rs"]          mod guiddef_h;
+    #[path="headers/processthreadsapi.h/processthreadsapi.rs"] mod processthreadsapi_h;
     #[path="headers/unknwn.h/unknwn.rs"]            mod unknwn_h;
+    #[path="headers/winuser.h/winuser.rs"]          mod winuser_h;
     #[path="headers/xinput.h/xinput.rs"]            mod xinput_h;
 
     #[path="traits/_traits.rs"]                     mod traits;

@@ -122,6 +122,7 @@ impl ErrorKind {
             ERROR::FILE_EXISTS                  => Some(("ERROR_FILE_EXISTS",                   "The file exists.")),
             ERROR::BAD_ARGUMENTS                => Some(("ERROR_BAD_ARGUMENTS",                 "One or more arguments are not correct.")),
             ERROR::DEVICE_NOT_CONNECTED         => Some(("ERROR_DEVICE_NOT_CONNECTED",          "The device is not connected.")),
+            ERROR::INVALID_WINDOW_HANDLE        => Some(("ERROR_INVALID_WINDOW_HANDLE",         "Invalid window handle.")),
 
             THINERR::NONSPECIFIC                => Some(("THINERR_NONSPECIFIC",             "A nonspecific error of some sort occured.")),
             THINERR::DEVICE_MISMATCH            => Some(("THINERR_DEVICE_MISMATCH",         "Resource belonging to one Device was passed to a different Device.  To avoid undefined behavior, DirectX was not called.")),

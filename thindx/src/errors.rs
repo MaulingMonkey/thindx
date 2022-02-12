@@ -344,6 +344,9 @@ pub mod ERROR {
 
     /// The device is not connected.
     pub const DEVICE_NOT_CONNECTED      : ErrorKind = ErrorKind(ERROR_DEVICE_NOT_CONNECTED as _);
+
+    /// Invalid window handle.
+    pub const INVALID_WINDOW_HANDLE     : ErrorKind = ErrorKind(ERROR_INVALID_WINDOW_HANDLE as _);
 }
 
 /// `0x0000....` • \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/learnwin32/error-handling-in-com)\] • Win32/COM success "[ErrorKind]"s<br>
