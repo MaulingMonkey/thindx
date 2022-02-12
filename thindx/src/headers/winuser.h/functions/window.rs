@@ -1,5 +1,4 @@
-//! ### Safety
-//!
+//! ### ⚠️ Safety ⚠️
 //! `HWND`s are pretty funky.
 //! On the one hand, they're supposedly pointers, and in the single threaded days of 16-bit windows, they perhaps were.
 //! Modern 32-bit windows has turned these into generational indicies of sorts, and has sunken a lot of time into making Win32 safe/sound despite userspace's abuse.
