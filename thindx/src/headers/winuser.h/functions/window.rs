@@ -121,11 +121,13 @@ pub fn get_client_rect(hwnd: impl TryInto<HWND>) -> Result<Rect, Error> {
 /// ### Example
 /// ```rust
 /// # use thindx::*;
+/// # use std::ptr::*;
 /// # let hwnd = win32::get_desktop_window();
 /// let (thread, process) = win32::get_window_thread_process_id(hwnd).unwrap();
 /// let hwnd_belongs_to_this_thread = thread == win32::get_current_thread_id();
 /// # assert!(!hwnd_belongs_to_this_thread, "desktop doesn't belong to us!");
 /// #
+/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, win32::get_window_thread_process_id(null_mut()));
 /// # for p in 0 .. 8 * std::mem::size_of::<win32::HWND>() {
 /// #   let e = win32::get_window_thread_process_id((1usize << p) as win32::HWND); // shouldn't crash
 /// #   if e.is_err() { assert_eq!(ERROR::INVALID_WINDOW_HANDLE, e) }
