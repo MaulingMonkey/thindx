@@ -7,7 +7,7 @@
 //! Windows may be owned by another user, probably?
 //! HWNDs should generally be treated as weak references without proper validity checking.
 
-use crate::{Error, ErrorKind, ERROR};
+use crate::*;
 use crate::d3d::Rect; // ...?
 
 use winapi::um::winuser::*;
@@ -112,7 +112,41 @@ pub fn get_client_rect(hwnd: impl TryInto<HWND>) -> Result<Rect, Error> {
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowthreadprocessid)\]
 /// GetWindowThreadProcessId
 ///
-/// Retrieves the identifier of the thread that created the specified window and, optionally, the identifier of the process that created the window.
+/// Retrieves the identifier of the thread that created the specified window.
+///
+/// ### Returns
+/// *   Ok(thread_id)
+/// *   [ERROR::INVALID_WINDOW_HANDLE]
+///
+/// ### Example
+/// ```rust
+/// # use thindx::*;
+/// # use std::ptr::*;
+/// # let hwnd = win32::get_desktop_window();
+/// let thread = win32::get_window_thread_id(hwnd).unwrap();
+/// let hwnd_belongs_to_this_thread = thread == win32::get_current_thread_id();
+/// # assert!(!hwnd_belongs_to_this_thread, "desktop doesn't belong to us!");
+/// #
+/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, win32::get_window_thread_id(null_mut()));
+/// # for p in 0 .. 8 * std::mem::size_of::<win32::HWND>() {
+/// #   let e = win32::get_window_thread_id((1usize << p) as win32::HWND); // shouldn't crash
+/// #   if e.is_err() { assert_eq!(ERROR::INVALID_WINDOW_HANDLE, e) }
+/// # }
+/// ```
+///
+/// ### See Also
+/// *   [win32::get_window_thread_process_id]
+#[must_use] pub fn get_window_thread_id(hwnd: impl Into<HWND>) -> Result<u32, Error> {
+    fn_context!(win32::get_window_thread_id => GetWindowThreadProcessId);
+    let hwnd = hwnd.into();
+    let tid = unsafe { GetWindowThreadProcessId(hwnd, std::ptr::null_mut()) };
+    if tid != 0 { Ok(tid) } else { fn_err!(get_last_error()) }
+}
+
+/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowthreadprocessid)\]
+/// GetWindowThreadProcessId
+///
+/// Retrieves the identifier of the thread that created the specified window and the identifier of the process that created the window.
 ///
 /// ### Returns
 /// *   Ok((thread_id, process_id))
@@ -133,6 +167,9 @@ pub fn get_client_rect(hwnd: impl TryInto<HWND>) -> Result<Rect, Error> {
 /// #   if e.is_err() { assert_eq!(ERROR::INVALID_WINDOW_HANDLE, e) }
 /// # }
 /// ```
+///
+/// ### See Also
+/// *   [win32::get_window_thread_id]
 #[must_use] pub fn get_window_thread_process_id(hwnd: impl Into<HWND>) -> Result<(u32, u32), Error> {
     fn_context!(win32::get_window_thread_process_id => GetWindowThreadProcessId);
     let hwnd = hwnd.into();
