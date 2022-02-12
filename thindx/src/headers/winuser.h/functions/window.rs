@@ -14,6 +14,8 @@ use winapi::um::winuser::*;
 
 
 
+macro_rules! fn_err_get_last_error { () => { fn_err!(ErrorKind(get_last_error() as _)) } }
+
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/learnwin32/what-is-a-window-)\]
 /// HWND
 ///
@@ -55,7 +57,7 @@ pub unsafe fn destroy_window(hwnd: impl Into<HWND>) -> Result<(), Error> {
     fn_context!(win32::destroy_window => DestroyWindow);
     let hwnd = hwnd.into();
     let succeeded = unsafe { DestroyWindow(hwnd) != 0 };
-    if succeeded { Ok(()) } else { fn_err!(get_last_error()) }
+    if succeeded { Ok(()) } else { fn_err_get_last_error!() }
 }
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getclientrect)\]
@@ -88,7 +90,7 @@ pub fn get_client_rect(hwnd: impl TryInto<HWND>) -> Result<Rect, Error> {
     let hwnd = hwnd.try_into().map_err(|_| fn_param_error!(hwnd, ERROR::INVALID_WINDOW_HANDLE))?;
     let mut rect = Rect::zeroed();
     let succeeded = unsafe { GetClientRect(hwnd, rect.as_mut()) != 0 };
-    if succeeded { Ok(rect) } else { fn_err!(get_last_error()) }
+    if succeeded { Ok(rect) } else { fn_err_get_last_error!() }
 }
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getdesktopwindow)\]
@@ -107,6 +109,88 @@ pub fn get_client_rect(hwnd: impl TryInto<HWND>) -> Result<Rect, Error> {
 #[must_use] pub fn get_desktop_window() -> HWND {
     fn_context!(win32::get_desktop_window => GetDesktopWindow);
     unsafe { GetDesktopWindow() }
+}
+
+/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowlongptra)\]
+/// GetWindowLongPtrA
+///
+/// Retrieves information about the specified window. The function also retrieves the value at a specified offset into the extra window memory.
+///
+/// ### Errors
+/// *   [ERROR::ACCESS_DENIED]          If `index` is e.g. `GWLP_WNDPROC` for a `hwnd` belonging to a different process.
+/// *   [ERROR::INVALID_INDEX]          If `index` isn't valid for `hwnd`
+/// *   [ERROR::INVALID_WINDOW_HANDLE]  If `hwnd` isn't valid
+///
+/// ### Example
+/// ```rust
+/// # use thindx::*;
+/// # use winapi::um::winuser::{GWL_STYLE, GWLP_WNDPROC}; // FIXME: replace
+/// # use std::ptr::*;
+/// # let desktop = win32::get_desktop_window();
+/// assert_eq!(ERROR::INVALID_WINDOW_HANDLE, win32::get_window_long_ptr_a(null_mut(), 0));
+/// assert_eq!(ERROR::INVALID_WINDOW_HANDLE, win32::get_window_long_ptr_a(!42usize as win32::HWND, 0));
+/// assert_eq!(ERROR::INVALID_INDEX,         win32::get_window_long_ptr_a(desktop, -9001));
+/// assert_eq!(ERROR::ACCESS_DENIED,         win32::get_window_long_ptr_a(desktop, GWLP_WNDPROC));
+/// let desktop_style = win32::get_window_long_ptr_a(desktop, GWL_STYLE).unwrap();
+/// # for i in [i32::MIN, i32::MIN/2, -9001, 0, 9001, i32::MAX/2, i32::MAX].iter().copied().chain(-64 ..= 64).chain((0..30).map(|p| 1<<p)).chain((0..31).map(|p| -(1<<p))) {
+/// #   if let Err(err) = win32::get_window_long_ptr_a(desktop, i) {
+/// #       match err.kind() {
+/// #           ERROR::ACCESS_DENIED => {},
+/// #           ERROR::INVALID_INDEX => {},
+/// #           kind                 => panic!("get_window_long_ptr_a(desktop, {i}) == {kind:?}"),
+/// #       }
+/// #   }
+/// # }
+/// ```
+pub fn get_window_long_ptr_a(hwnd: impl Into<HWND>, index: i32) -> Result<isize, Error> {
+    fn_context!(win32::get_window_long_ptr_a => GetWindowLongPtrA);
+    let hwnd = hwnd.into();
+    let r = unsafe { GetWindowLongPtrA(hwnd, index) };
+    match (r == 0).then(|| get_last_error()).unwrap_or(0) {
+        0   => Ok(r as _), // i32 -> isize on 32-bit windows
+        err => fn_err!(ErrorKind(err as _)),
+    }
+}
+
+/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowlongptrw)\]
+/// GetWindowLongPtrW
+///
+/// Retrieves information about the specified window. The function also retrieves the value at a specified offset into the extra window memory.
+///
+/// ### Errors
+/// *   [ERROR::ACCESS_DENIED]          If `index` is e.g. `GWLP_WNDPROC` for a `hwnd` belonging to a different process.
+/// *   [ERROR::INVALID_INDEX]          If `index` isn't valid for `hwnd`
+/// *   [ERROR::INVALID_WINDOW_HANDLE]  If `hwnd` isn't valid
+///
+/// ### Example
+/// ```rust
+/// # use thindx::*;
+/// # use winapi::um::winuser::{GWL_STYLE, GWLP_WNDPROC}; // FIXME: replace
+/// # use std::ptr::*;
+/// # let desktop = win32::get_desktop_window();
+/// assert_eq!(ERROR::INVALID_WINDOW_HANDLE, win32::get_window_long_ptr_w(null_mut(), 0));
+/// assert_eq!(ERROR::INVALID_WINDOW_HANDLE, win32::get_window_long_ptr_w(!42usize as win32::HWND, 0));
+/// assert_eq!(ERROR::INVALID_INDEX,         win32::get_window_long_ptr_w(desktop, -9001));
+/// assert_eq!(ERROR::ACCESS_DENIED,         win32::get_window_long_ptr_w(desktop, GWLP_WNDPROC));
+/// let desktop_style = win32::get_window_long_ptr_w(desktop, GWL_STYLE).unwrap();
+/// # for i in [i32::MIN, i32::MIN/2, -9001, 0, 9001, i32::MAX/2, i32::MAX].iter().copied().chain(-64 ..= 64).chain((0..30).map(|p| 1<<p)).chain((0..31).map(|p| -(1<<p))) {
+/// #   if let Err(err) = win32::get_window_long_ptr_w(desktop, i) {
+/// #       match err.kind() {
+/// #           ERROR::ACCESS_DENIED => {},
+/// #           ERROR::INVALID_INDEX => {},
+/// #           kind                 => panic!("get_window_long_ptr_w(desktop, {i}) == {kind:?}"),
+/// #       }
+/// #   }
+/// # }
+/// ```
+pub fn get_window_long_ptr_w(hwnd: impl Into<HWND>, index: i32) -> Result<isize, Error> {
+    fn_context!(win32::get_window_long_ptr_w => GetWindowLongPtrW);
+    let hwnd = hwnd.into();
+    let r = unsafe { GetWindowLongPtrW(hwnd, index) };
+    match (r == 0).then(|| get_last_error()).unwrap_or(0) {
+        0   => Ok(r as _), // i32 -> isize on 32-bit windows
+        err => fn_err!(ErrorKind(err as _)),
+    }
 }
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowthreadprocessid)\]
@@ -140,7 +224,7 @@ pub fn get_client_rect(hwnd: impl TryInto<HWND>) -> Result<Rect, Error> {
     fn_context!(win32::get_window_thread_id => GetWindowThreadProcessId);
     let hwnd = hwnd.into();
     let tid = unsafe { GetWindowThreadProcessId(hwnd, std::ptr::null_mut()) };
-    if tid != 0 { Ok(tid) } else { fn_err!(get_last_error()) }
+    if tid != 0 { Ok(tid) } else { fn_err_get_last_error!() }
 }
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowthreadprocessid)\]
@@ -175,7 +259,7 @@ pub fn get_client_rect(hwnd: impl TryInto<HWND>) -> Result<Rect, Error> {
     let hwnd = hwnd.into();
     let mut pid = 0;
     let tid = unsafe { GetWindowThreadProcessId(hwnd, &mut pid) };
-    if tid != 0 { Ok((tid, pid)) } else { fn_err!(get_last_error()) }
+    if tid != 0 { Ok((tid, pid)) } else { fn_err_get_last_error!() }
 }
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-iswindow)\]
@@ -261,6 +345,6 @@ pub fn get_client_rect(hwnd: impl TryInto<HWND>) -> Result<Rect, Error> {
 
 
 
-#[must_use] fn get_last_error() -> ErrorKind {
-    ErrorKind(unsafe { winapi::um::errhandlingapi::GetLastError() } as _)
+#[must_use] fn get_last_error() -> u32 {
+    unsafe { winapi::um::errhandlingapi::GetLastError() }
 }

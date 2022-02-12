@@ -347,6 +347,9 @@ pub mod ERROR {
 
     /// Invalid window handle.
     pub const INVALID_WINDOW_HANDLE     : ErrorKind = ErrorKind(ERROR_INVALID_WINDOW_HANDLE as _);
+
+    /// Invalid index.
+    pub const INVALID_INDEX             : ErrorKind = ErrorKind(ERROR_INVALID_INDEX as _);
 }
 
 /// `0x0000....` • \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/learnwin32/error-handling-in-com)\] • Win32/COM success "[ErrorKind]"s<br>
