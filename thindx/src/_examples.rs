@@ -323,6 +323,8 @@ pub const d3d9_01_clear_winapi : () = ();
 ///     });
 /// }
 /// 
+/// /// ### ⚠️ Safety ⚠️
+/// /// Caller is responsible for ensuring whatever uses [`PresentParameters`] does not outlive the `window`.
 /// unsafe fn pp(window: &Window) -> PresentParameters<'static> {
 ///     let hwnd = match window.raw_window_handle() {
 ///         RawWindowHandle::Win32(Win32Handle { hwnd, .. }) => hwnd.cast(),
