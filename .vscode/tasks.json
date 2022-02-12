@@ -75,6 +75,10 @@
             "command": "git push github master",
         },
         {
+            "label":   "dxcap -forcetdr",
+            "command": "powershell -Command \"Start-Process -Verb RunAs dxcap ^-forcetdr\"",
+        },
+        {
             "label":   "cargo b --package thindx --example d3d9-00-clear-winit",
             "command": "cargo b --package thindx --example d3d9-00-clear-winit",
         },

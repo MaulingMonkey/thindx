@@ -21,6 +21,7 @@ const COMMANDS : &'static [(&'static str, &'static str)] = &[
     ("open coverage",       "cargo xtask coverage --open"),
     ("update pages",        "cargo xtask pages"),
     ("push github master",  "git push github master"),
+    ("dxcap -forcetdr",     "powershell -Command \"Start-Process -Verb RunAs dxcap ^-forcetdr\""),
 ];
 
 pub fn vsc(_args: std::env::Args) {
