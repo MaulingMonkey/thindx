@@ -61,10 +61,10 @@ pub fn get_audio_device_ids(user_index: impl Into<u32>) -> Result<AudioDeviceIds
     if get_audio_device_ids(User::Zero) == THINERR::MISSING_DLL_EXPORT { return }
 
     // May or may not succeed, even if gamepad not connected
-    if let Err(err) = get_audio_device_ids(User::Zero ) { assert_eq!(ERROR::DEVICE_NOT_CONNECTED, err.kind()); }
-    if let Err(err) = get_audio_device_ids(User::One  ) { assert_eq!(ERROR::DEVICE_NOT_CONNECTED, err.kind()); }
-    if let Err(err) = get_audio_device_ids(User::Two  ) { assert_eq!(ERROR::DEVICE_NOT_CONNECTED, err.kind()); }
-    if let Err(err) = get_audio_device_ids(User::Three) { assert_eq!(ERROR::DEVICE_NOT_CONNECTED, err.kind()); }
+    if let Err(err) = get_audio_device_ids(User::Zero ) { assert_eq!(ERROR::DEVICE_NOT_CONNECTED, err); }
+    if let Err(err) = get_audio_device_ids(User::One  ) { assert_eq!(ERROR::DEVICE_NOT_CONNECTED, err); }
+    if let Err(err) = get_audio_device_ids(User::Two  ) { assert_eq!(ERROR::DEVICE_NOT_CONNECTED, err); }
+    if let Err(err) = get_audio_device_ids(User::Three) { assert_eq!(ERROR::DEVICE_NOT_CONNECTED, err); }
 
     // Invalid User s
     assert_eq!(ERROR::BAD_ARGUMENTS, get_audio_device_ids(User::Any));

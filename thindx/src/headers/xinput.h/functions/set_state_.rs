@@ -26,10 +26,10 @@ pub fn set_state(user_index: impl Into<u32>, mut vibration: Vibration) -> Result
 
 #[test] fn test_valid_params() {
     let v = Vibration::default();
-    if let Err(err) = set_state(0u32, v) { assert_eq!(err.kind(), ERROR::DEVICE_NOT_CONNECTED); }
-    if let Err(err) = set_state(1u32, v) { assert_eq!(err.kind(), ERROR::DEVICE_NOT_CONNECTED); }
-    if let Err(err) = set_state(2u32, v) { assert_eq!(err.kind(), ERROR::DEVICE_NOT_CONNECTED); }
-    if let Err(err) = set_state(3u32, v) { assert_eq!(err.kind(), ERROR::DEVICE_NOT_CONNECTED); }
+    if let Err(err) = set_state(0u32, v) { assert_eq!(err, ERROR::DEVICE_NOT_CONNECTED); }
+    if let Err(err) = set_state(1u32, v) { assert_eq!(err, ERROR::DEVICE_NOT_CONNECTED); }
+    if let Err(err) = set_state(2u32, v) { assert_eq!(err, ERROR::DEVICE_NOT_CONNECTED); }
+    if let Err(err) = set_state(3u32, v) { assert_eq!(err, ERROR::DEVICE_NOT_CONNECTED); }
 }
 
 #[test] fn test_bad_arguments() {

@@ -30,11 +30,11 @@ pub fn get_keystroke(user_index: impl Into<u32>, _reserved: ()) -> Result<Option
 }
 
 #[test] fn test_valid_args() {
-    if let Err(err) = get_keystroke(User::Zero,  ()) { assert_eq!(ERROR::DEVICE_NOT_CONNECTED, err.kind()); }
-    if let Err(err) = get_keystroke(User::One,   ()) { assert_eq!(ERROR::DEVICE_NOT_CONNECTED, err.kind()); }
-    if let Err(err) = get_keystroke(User::Two,   ()) { assert_eq!(ERROR::DEVICE_NOT_CONNECTED, err.kind()); }
-    if let Err(err) = get_keystroke(User::Three, ()) { assert_eq!(ERROR::DEVICE_NOT_CONNECTED, err.kind()); }
-    if let Err(err) = get_keystroke(User::Any,   ()) { assert_eq!(ERROR::DEVICE_NOT_CONNECTED, err.kind()); }
+    if let Err(err) = get_keystroke(User::Zero,  ()) { assert_eq!(ERROR::DEVICE_NOT_CONNECTED, err); }
+    if let Err(err) = get_keystroke(User::One,   ()) { assert_eq!(ERROR::DEVICE_NOT_CONNECTED, err); }
+    if let Err(err) = get_keystroke(User::Two,   ()) { assert_eq!(ERROR::DEVICE_NOT_CONNECTED, err); }
+    if let Err(err) = get_keystroke(User::Three, ()) { assert_eq!(ERROR::DEVICE_NOT_CONNECTED, err); }
+    if let Err(err) = get_keystroke(User::Any,   ()) { assert_eq!(ERROR::DEVICE_NOT_CONNECTED, err); }
 }
 
 #[test] fn test_invalid_args() {

@@ -2076,7 +2076,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// #
     /// # for s in (0 .. 256).chain((8..32).map(|pow| 1<<pow)).map(|i| RenderStateType::from_unchecked(i)) {
     /// #   if let Err(err) = device.get_render_state_untyped(s) {
-    /// #       assert_eq!(err.kind(), D3DERR::INVALIDCALL);
+    /// #       assert_eq!(err, D3DERR::INVALIDCALL);
     /// #   }
     /// # }
     /// ```
@@ -2212,7 +2212,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// #   let r = device.get_sampler_state_untyped(sampler, s);
     /// #   dbg!((sampler, s, r));
     /// #   if let Err(err) = device.get_sampler_state_untyped(sampler, s) {
-    /// #       assert_eq!(err.kind(), D3DERR::INVALIDCALL);
+    /// #       assert_eq!(err, D3DERR::INVALIDCALL);
     /// #   }
     /// # }
     /// # }
@@ -2415,7 +2415,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// # for stage in (0 .. 256).chain((8..32).map(|pow| 1<<pow)) {
     /// #   for tss in (0 .. 256).chain((8..32).map(|pow| 1<<pow)) {
     /// #       if let Err(err) = device.get_texture_stage_state_untyped(stage, TSS::from_unchecked(tss)) {
-    /// #           assert_eq!(err.kind(), D3DERR::INVALIDCALL);
+    /// #           assert_eq!(err, D3DERR::INVALIDCALL);
     /// #       }
     /// #   }
     /// # }
@@ -3581,11 +3581,11 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///
     /// let r = device.set_software_vertex_processing(true);
     /// assert_eq!(r.is_ok(), device_is_software || device_is_mixed);
-    /// r.map_err(|e| assert_eq!(e.kind(), D3DERR::INVALIDCALL));
+    /// r.map_err(|e| assert_eq!(e, D3DERR::INVALIDCALL));
     ///
     /// let r = device.set_software_vertex_processing(false);
     /// assert_eq!(r.is_ok(), device_is_hardware || device_is_mixed);
-    /// r.map_err(|e| assert_eq!(e.kind(), D3DERR::INVALIDCALL));
+    /// r.map_err(|e| assert_eq!(e, D3DERR::INVALIDCALL));
     /// # }
     /// ```
     fn set_software_vertex_processing(&self, software: bool) -> Result<(), Error> {

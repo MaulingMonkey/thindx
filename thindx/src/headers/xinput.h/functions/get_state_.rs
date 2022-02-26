@@ -29,10 +29,10 @@ pub fn get_state(user_index: impl Into<u32>) -> Result<State, Error> {
 }
 
 #[test] fn test_valid_params() {
-    if let Err(err) = get_state(0u32) { assert_eq!(err.kind(), ERROR::DEVICE_NOT_CONNECTED); }
-    if let Err(err) = get_state(1u32) { assert_eq!(err.kind(), ERROR::DEVICE_NOT_CONNECTED); }
-    if let Err(err) = get_state(2u32) { assert_eq!(err.kind(), ERROR::DEVICE_NOT_CONNECTED); }
-    if let Err(err) = get_state(3u32) { assert_eq!(err.kind(), ERROR::DEVICE_NOT_CONNECTED); }
+    if let Err(err) = get_state(0u32) { assert_eq!(err, ERROR::DEVICE_NOT_CONNECTED); }
+    if let Err(err) = get_state(1u32) { assert_eq!(err, ERROR::DEVICE_NOT_CONNECTED); }
+    if let Err(err) = get_state(2u32) { assert_eq!(err, ERROR::DEVICE_NOT_CONNECTED); }
+    if let Err(err) = get_state(3u32) { assert_eq!(err, ERROR::DEVICE_NOT_CONNECTED); }
 }
 
 #[test] fn test_bad_arguments() {

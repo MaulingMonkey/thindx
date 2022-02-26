@@ -29,15 +29,15 @@ pub fn get_capabilities(user_index: impl Into<u32>, flags: Flag) -> Result<Capab
 }
 
 #[test] fn test_valid_params() {
-    if let Err(err) = get_capabilities(0u32, Flag::Gamepad) { assert_eq!(err.kind(), ERROR::DEVICE_NOT_CONNECTED); }
-    if let Err(err) = get_capabilities(1u32, Flag::Gamepad) { assert_eq!(err.kind(), ERROR::DEVICE_NOT_CONNECTED); }
-    if let Err(err) = get_capabilities(2u32, Flag::Gamepad) { assert_eq!(err.kind(), ERROR::DEVICE_NOT_CONNECTED); }
-    if let Err(err) = get_capabilities(3u32, Flag::Gamepad) { assert_eq!(err.kind(), ERROR::DEVICE_NOT_CONNECTED); }
+    if let Err(err) = get_capabilities(0u32, Flag::Gamepad) { assert_eq!(err, ERROR::DEVICE_NOT_CONNECTED); }
+    if let Err(err) = get_capabilities(1u32, Flag::Gamepad) { assert_eq!(err, ERROR::DEVICE_NOT_CONNECTED); }
+    if let Err(err) = get_capabilities(2u32, Flag::Gamepad) { assert_eq!(err, ERROR::DEVICE_NOT_CONNECTED); }
+    if let Err(err) = get_capabilities(3u32, Flag::Gamepad) { assert_eq!(err, ERROR::DEVICE_NOT_CONNECTED); }
 
-    if let Err(err) = get_capabilities(0u32, Flag::None   ) { assert_eq!(err.kind(), ERROR::DEVICE_NOT_CONNECTED); }
-    if let Err(err) = get_capabilities(1u32, Flag::None   ) { assert_eq!(err.kind(), ERROR::DEVICE_NOT_CONNECTED); }
-    if let Err(err) = get_capabilities(2u32, Flag::None   ) { assert_eq!(err.kind(), ERROR::DEVICE_NOT_CONNECTED); }
-    if let Err(err) = get_capabilities(3u32, Flag::None   ) { assert_eq!(err.kind(), ERROR::DEVICE_NOT_CONNECTED); }
+    if let Err(err) = get_capabilities(0u32, Flag::None   ) { assert_eq!(err, ERROR::DEVICE_NOT_CONNECTED); }
+    if let Err(err) = get_capabilities(1u32, Flag::None   ) { assert_eq!(err, ERROR::DEVICE_NOT_CONNECTED); }
+    if let Err(err) = get_capabilities(2u32, Flag::None   ) { assert_eq!(err, ERROR::DEVICE_NOT_CONNECTED); }
+    if let Err(err) = get_capabilities(3u32, Flag::None   ) { assert_eq!(err, ERROR::DEVICE_NOT_CONNECTED); }
 }
 
 #[test] fn test_bad_arguments() {

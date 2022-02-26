@@ -32,15 +32,15 @@ pub fn get_battery_information(user_index: impl Into<u32>, dev_type: impl Into<B
 }
 
 #[test] fn test_valid_params() {
-    if let Err(err) = get_battery_information(0u32, BatteryDevType::Gamepad) { assert_eq!(err.kind(), ERROR::DEVICE_NOT_CONNECTED); }
-    if let Err(err) = get_battery_information(1u32, BatteryDevType::Gamepad) { assert_eq!(err.kind(), ERROR::DEVICE_NOT_CONNECTED); }
-    if let Err(err) = get_battery_information(2u32, BatteryDevType::Gamepad) { assert_eq!(err.kind(), ERROR::DEVICE_NOT_CONNECTED); }
-    if let Err(err) = get_battery_information(3u32, BatteryDevType::Gamepad) { assert_eq!(err.kind(), ERROR::DEVICE_NOT_CONNECTED); }
+    if let Err(err) = get_battery_information(0u32, BatteryDevType::Gamepad) { assert_eq!(err, ERROR::DEVICE_NOT_CONNECTED); }
+    if let Err(err) = get_battery_information(1u32, BatteryDevType::Gamepad) { assert_eq!(err, ERROR::DEVICE_NOT_CONNECTED); }
+    if let Err(err) = get_battery_information(2u32, BatteryDevType::Gamepad) { assert_eq!(err, ERROR::DEVICE_NOT_CONNECTED); }
+    if let Err(err) = get_battery_information(3u32, BatteryDevType::Gamepad) { assert_eq!(err, ERROR::DEVICE_NOT_CONNECTED); }
 
-    if let Err(err) = get_battery_information(0u32, BatteryDevType::Headset) { assert_eq!(err.kind(), ERROR::DEVICE_NOT_CONNECTED); }
-    if let Err(err) = get_battery_information(1u32, BatteryDevType::Headset) { assert_eq!(err.kind(), ERROR::DEVICE_NOT_CONNECTED); }
-    if let Err(err) = get_battery_information(2u32, BatteryDevType::Headset) { assert_eq!(err.kind(), ERROR::DEVICE_NOT_CONNECTED); }
-    if let Err(err) = get_battery_information(3u32, BatteryDevType::Headset) { assert_eq!(err.kind(), ERROR::DEVICE_NOT_CONNECTED); }
+    if let Err(err) = get_battery_information(0u32, BatteryDevType::Headset) { assert_eq!(err, ERROR::DEVICE_NOT_CONNECTED); }
+    if let Err(err) = get_battery_information(1u32, BatteryDevType::Headset) { assert_eq!(err, ERROR::DEVICE_NOT_CONNECTED); }
+    if let Err(err) = get_battery_information(2u32, BatteryDevType::Headset) { assert_eq!(err, ERROR::DEVICE_NOT_CONNECTED); }
+    if let Err(err) = get_battery_information(3u32, BatteryDevType::Headset) { assert_eq!(err, ERROR::DEVICE_NOT_CONNECTED); }
 }
 
 #[test] fn test_bad_arguments() {

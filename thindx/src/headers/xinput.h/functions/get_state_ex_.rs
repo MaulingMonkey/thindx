@@ -36,10 +36,10 @@ pub fn get_state_ex(user_index: impl Into<u32>) -> Result<State, Error> {
 }
 
 #[test] #[allow(deprecated)] fn test_valid_params() {
-    if let Err(err) = get_state_ex(0u32) { assert_eq!(err.kind(), ERROR::DEVICE_NOT_CONNECTED); }
-    if let Err(err) = get_state_ex(1u32) { assert_eq!(err.kind(), ERROR::DEVICE_NOT_CONNECTED); }
-    if let Err(err) = get_state_ex(2u32) { assert_eq!(err.kind(), ERROR::DEVICE_NOT_CONNECTED); }
-    if let Err(err) = get_state_ex(3u32) { assert_eq!(err.kind(), ERROR::DEVICE_NOT_CONNECTED); }
+    if let Err(err) = get_state_ex(0u32) { assert_eq!(err, ERROR::DEVICE_NOT_CONNECTED); }
+    if let Err(err) = get_state_ex(1u32) { assert_eq!(err, ERROR::DEVICE_NOT_CONNECTED); }
+    if let Err(err) = get_state_ex(2u32) { assert_eq!(err, ERROR::DEVICE_NOT_CONNECTED); }
+    if let Err(err) = get_state_ex(3u32) { assert_eq!(err, ERROR::DEVICE_NOT_CONNECTED); }
 }
 
 #[test] #[allow(deprecated)] fn test_bad_arguments() {
