@@ -1,6 +1,7 @@
 #![warn(clippy::undocumented_unsafe_blocks)]
 
-use crate::{Error, ErrorKind, errors::ERROR};
+use crate::{Error, ErrorKind};
+use winresult::ERROR;
 
 macro_rules! check_success { ( $err:expr ) => { $crate::xinput::check_error_success(&_THINDX_FN_CONTEXT, $err) } }
 
@@ -53,9 +54,9 @@ mods! {
 pub use flags::keystroke::Keystroke as KeystrokeFlags;
 
 pub(crate) fn check_error_success(fn_context: &'static crate::error_macros::FnContext, err: u32) -> Result<(), Error> {
-    if err == ERROR::SUCCESS.0 as _ {
+    if err == ERROR::SUCCESS.to_u32() {
         Ok(())
     } else {
-        Err(Error(fn_context, ErrorKind(err as _)))
+        Err(Error(fn_context, ErrorKind::from_winapi(err as _)))
     }
 }

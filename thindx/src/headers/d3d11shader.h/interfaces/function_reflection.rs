@@ -72,7 +72,7 @@ impl<'r> FunctionReflection<'r> {
     /// println!("{:#?}", valid.get_desc().unwrap());
     ///
     /// let invalid = scale4.get_constant_buffer_by_index(1);
-    /// assert_eq!(Some(E::FAIL), invalid.get_desc().err().map(|e| e.kind()));
+    /// assert_eq!(E::FAIL, invalid.get_desc());
     /// ```
     ///
     /// ### Output
@@ -111,10 +111,10 @@ impl<'r> FunctionReflection<'r> {
     /// println!("{:#?}", valid.get_desc().unwrap());
     ///
     /// let invalid = scale4.get_constant_buffer_by_name("Nonexistant");
-    /// assert_eq!(Some(E::FAIL), invalid.get_desc().err().map(|e| e.kind()));
+    /// assert_eq!(E::FAIL, invalid.get_desc());
     ///
     /// let invalid = scale4.get_constant_buffer_by_name("Non\0existant");
-    /// assert_eq!(Some(E::FAIL), invalid.get_desc().err().map(|e| e.kind()));
+    /// assert_eq!(E::FAIL, invalid.get_desc());
     /// ```
     ///
     /// ### Output
@@ -213,22 +213,22 @@ impl<'r> FunctionReflection<'r> {
     /// assert_eq!(v.columns,   4);
     /// println!("{:#?}", v);
     ///
-    /// assert_eq!(E::FAIL, scale4.get_function_parameter(-2).get_desc().unwrap_err().kind());
-    /// assert_eq!(E::FAIL, scale4.get_function_parameter( 1).get_desc().unwrap_err().kind());
+    /// assert_eq!(E::FAIL, scale4.get_function_parameter(-2).get_desc());
+    /// assert_eq!(E::FAIL, scale4.get_function_parameter( 1).get_desc());
     /// #
-    /// # assert_eq!(scale4.get_function_parameter(std::i32::MIN).get_desc().err().map(|err| err.kind()), Some(E::FAIL));
-    /// # assert_eq!(scale4.get_function_parameter(-1000000).get_desc().err().map(|err| err.kind()), Some(E::FAIL));
-    /// # assert_eq!(scale4.get_function_parameter(-10000).get_desc().err().map(|err| err.kind()), Some(E::FAIL));
-    /// # assert_eq!(scale4.get_function_parameter(-100).get_desc().err().map(|err| err.kind()), Some(E::FAIL));
-    /// # assert_eq!(scale4.get_function_parameter(100).get_desc().err().map(|err| err.kind()), Some(E::FAIL));
-    /// # assert_eq!(scale4.get_function_parameter(10000).get_desc().err().map(|err| err.kind()), Some(E::FAIL));
-    /// # assert_eq!(scale4.get_function_parameter(1000000).get_desc().err().map(|err| err.kind()), Some(E::FAIL));
-    /// # assert_eq!(scale4.get_function_parameter(std::i32::MAX-100).get_desc().err().map(|err| err.kind()), Some(E::FAIL));
-    /// # assert_eq!(scale4.get_function_parameter(std::i32::MAX-16).get_desc().err().map(|err| err.kind()), Some(E::FAIL));
-    /// # assert_eq!(scale4.get_function_parameter(std::i32::MAX-10).get_desc().err().map(|err| err.kind()), Some(E::FAIL));
-    /// # assert_eq!(scale4.get_function_parameter(std::i32::MAX-4).get_desc().err().map(|err| err.kind()), Some(E::FAIL));
-    /// # assert_eq!(scale4.get_function_parameter(std::i32::MAX-1).get_desc().err().map(|err| err.kind()), Some(E::FAIL));
-    /// # assert_eq!(scale4.get_function_parameter(std::i32::MAX).get_desc().err().map(|err| err.kind()), Some(E::FAIL));
+    /// # assert_eq!(E::FAIL, scale4.get_function_parameter(std::i32::MIN).get_desc());
+    /// # assert_eq!(E::FAIL, scale4.get_function_parameter(-1000000).get_desc());
+    /// # assert_eq!(E::FAIL, scale4.get_function_parameter(-10000).get_desc());
+    /// # assert_eq!(E::FAIL, scale4.get_function_parameter(-100).get_desc());
+    /// # assert_eq!(E::FAIL, scale4.get_function_parameter(100).get_desc());
+    /// # assert_eq!(E::FAIL, scale4.get_function_parameter(10000).get_desc());
+    /// # assert_eq!(E::FAIL, scale4.get_function_parameter(1000000).get_desc());
+    /// # assert_eq!(E::FAIL, scale4.get_function_parameter(std::i32::MAX-100).get_desc());
+    /// # assert_eq!(E::FAIL, scale4.get_function_parameter(std::i32::MAX-16).get_desc());
+    /// # assert_eq!(E::FAIL, scale4.get_function_parameter(std::i32::MAX-10).get_desc());
+    /// # assert_eq!(E::FAIL, scale4.get_function_parameter(std::i32::MAX-4).get_desc());
+    /// # assert_eq!(E::FAIL, scale4.get_function_parameter(std::i32::MAX-1).get_desc());
+    /// # assert_eq!(E::FAIL, scale4.get_function_parameter(std::i32::MAX).get_desc());
     /// ```
     ///
     /// ### Output
@@ -294,18 +294,18 @@ impl<'r> FunctionReflection<'r> {
     ///
     /// // out of bounds
     /// assert_eq!(
-    ///     scale4.get_resource_binding_desc(100).err().map(|err| err.kind()),
-    ///     Some(E::INVALIDARG)
+    ///     scale4.get_resource_binding_desc(100),
+    ///     E::INVALIDARG
     /// );
     /// #
-    /// # assert_eq!(scale4.get_resource_binding_desc(10000).err().map(|err| err.kind()), Some(E::INVALIDARG));
-    /// # assert_eq!(scale4.get_resource_binding_desc(1000000).err().map(|err| err.kind()), Some(E::INVALIDARG));
-    /// # assert_eq!(scale4.get_resource_binding_desc(!0-100).err().map(|err| err.kind()), Some(E::INVALIDARG));
-    /// # assert_eq!(scale4.get_resource_binding_desc(!0-16).err().map(|err| err.kind()), Some(E::INVALIDARG));
-    /// # assert_eq!(scale4.get_resource_binding_desc(!0-10).err().map(|err| err.kind()), Some(E::INVALIDARG));
-    /// # assert_eq!(scale4.get_resource_binding_desc(!0-4).err().map(|err| err.kind()), Some(E::INVALIDARG));
-    /// # assert_eq!(scale4.get_resource_binding_desc(!0-1).err().map(|err| err.kind()), Some(E::INVALIDARG));
-    /// # assert_eq!(scale4.get_resource_binding_desc(!0).err().map(|err| err.kind()), Some(E::INVALIDARG));
+    /// # assert_eq!(E::INVALIDARG, scale4.get_resource_binding_desc(10000));
+    /// # assert_eq!(E::INVALIDARG, scale4.get_resource_binding_desc(1000000));
+    /// # assert_eq!(E::INVALIDARG, scale4.get_resource_binding_desc(!0-100));
+    /// # assert_eq!(E::INVALIDARG, scale4.get_resource_binding_desc(!0-16));
+    /// # assert_eq!(E::INVALIDARG, scale4.get_resource_binding_desc(!0-10));
+    /// # assert_eq!(E::INVALIDARG, scale4.get_resource_binding_desc(!0-4));
+    /// # assert_eq!(E::INVALIDARG, scale4.get_resource_binding_desc(!0-1));
+    /// # assert_eq!(E::INVALIDARG, scale4.get_resource_binding_desc(!0));
     /// ```
     ///
     /// ### Output
@@ -348,13 +348,13 @@ impl<'r> FunctionReflection<'r> {
     /// println!("{:#?}", scale4.get_resource_binding_desc_by_name("ExampleCBuffer").unwrap());
     ///
     /// assert_eq!(
-    ///     scale4.get_resource_binding_desc_by_name("Nonexistant").err().map(|err| err.kind()),
-    ///     Some(E::INVALIDARG)
+    ///     scale4.get_resource_binding_desc_by_name("Nonexistant"),
+    ///     E::INVALIDARG
     /// );
     ///
     /// assert_eq!(
-    ///     scale4.get_resource_binding_desc_by_name("Non\0existant").err().map(|err| err.kind()),
-    ///     Some(E::INVALIDARG)
+    ///     scale4.get_resource_binding_desc_by_name("Non\0existant"),
+    ///     E::INVALIDARG
     /// );
     /// ```
     ///
@@ -397,13 +397,13 @@ impl<'r> FunctionReflection<'r> {
     /// println!("{:#?}", scale4.get_variable_by_name("scale").get_desc().unwrap());
     ///
     /// assert_eq!(
-    ///     scale4.get_variable_by_name("v").get_desc().err().map(|err| err.kind()),
-    ///     Some(E::FAIL) // parameter vars don't count
+    ///     scale4.get_variable_by_name("v").get_desc(),
+    ///     E::FAIL // parameter vars don't count
     /// );
     ///
     /// assert_eq!(
-    ///     scale4.get_variable_by_name("\0").get_desc().err().map(|err| err.kind()),
-    ///     Some(E::FAIL)
+    ///     scale4.get_variable_by_name("\0").get_desc(),
+    ///     E::FAIL
     /// );
     /// ```
     ///

@@ -36,11 +36,11 @@ impl Compiler {
     ///
     /// // Invalid interface:
     /// let r = d3dc.reflect::<Unknown>(&shader);
-    /// assert_eq!(Some(E::INVALIDARG), r.err().map(|e| e.kind()));
+    /// assert_eq!(E::INVALIDARG, r.map(|_|()));
     ///
     /// // Invalid `src_data`:
     /// let r = d3dc.reflect::<d3d11::ShaderReflection>(unsafe { Bytecode::from_unchecked(&[]) });
-    /// assert_eq!(Some(D3DERR::INVALIDCALL), r.err().map(|e| e.kind()));
+    /// assert_eq!(D3DERR::INVALIDCALL, r.map(|_|()));
     /// ```
     ///
     /// ### See Also
@@ -91,7 +91,7 @@ impl Compiler {
     ///
     /// // Invalid `src_data`:
     /// let r = d3dc.reflect11(unsafe { Bytecode::from_unchecked(&[]) });
-    /// assert_eq!(Some(D3DERR::INVALIDCALL), r.err().map(|e| e.kind()));
+    /// assert_eq!(D3DERR::INVALIDCALL, r.map(|_|()));
     /// ```
     ///
     /// ### See Also
@@ -135,11 +135,11 @@ impl Compiler {
     ///
     /// // Invalid interface:
     /// let r = d3dc.reflect_library::<Unknown>(&shader);
-    /// assert_eq!(Some(E::INVALIDARG), r.err().map(|e| e.kind()));
+    /// assert_eq!(E::INVALIDARG, r.map(|_|()));
     ///
     /// // Invalid `src_data`:
     /// let r = d3dc.reflect_library::<d3d11::LibraryReflection>(unsafe { Bytecode::from_unchecked(&[]) });
-    /// assert_eq!(Some(D3DERR::INVALIDCALL), r.err().map(|e| e.kind()));
+    /// assert_eq!(D3DERR::INVALIDCALL, r.map(|_|()));
     /// ```
     ///
     /// ### See Also
@@ -192,7 +192,7 @@ impl Compiler {
     ///
     /// // Invalid `src_data`:
     /// let r = d3dc.reflect_library_11(unsafe { Bytecode::from_unchecked(&[]) });
-    /// assert_eq!(Some(D3DERR::INVALIDCALL), r.err().map(|e| e.kind()));
+    /// assert_eq!(D3DERR::INVALIDCALL, r.map(|_|()));
     /// ```
     ///
     /// ### See Also
@@ -246,10 +246,10 @@ impl Compiler {
     ].iter().copied() {
         println!("testing get_function_by_index({})", invalid_index);
         let f = r.get_function_by_index(invalid_index);
-        assert_eq!(Some(E::FAIL), f.get_desc().err().map(|e| e.kind()));
+        assert_eq!(E::FAIL, f.get_desc());
 
         let cb = f.get_constant_buffer_by_name("SomeNonexistantCBuffer");
-        assert_eq!(Some(E::FAIL), cb.get_desc().err().map(|e| e.kind()));
+        assert_eq!(E::FAIL, cb.get_desc());
 
         for invalid_index in [
             0, 1, 4, 10, 100, 1000, 100000,  100000,
@@ -257,10 +257,10 @@ impl Compiler {
             !0-100, !0-10, !0-4, !0-1, !0,
         ].iter().copied() {
             let cb = f.get_constant_buffer_by_index(invalid_index);
-            assert_eq!(Some(E::FAIL), cb.get_desc().err().map(|e| e.kind()));
+            assert_eq!(E::FAIL, cb.get_desc());
 
             let param = f.get_function_parameter(invalid_index as _);
-            assert_eq!(Some(E::FAIL), param.get_desc().err().map(|e| e.kind()));
+            assert_eq!(E::FAIL, param.get_desc());
         }
     }
 

@@ -63,22 +63,22 @@ impl<'r> FunctionParameterReflection<'r> {
     /// assert_eq!(v.columns,   4);
     /// println!("{:#?}", v);
     ///
-    /// assert_eq!(E::FAIL, scale4.get_function_parameter(-2).get_desc().unwrap_err().kind());
-    /// assert_eq!(E::FAIL, scale4.get_function_parameter( 1).get_desc().unwrap_err().kind());
+    /// assert_eq!(E::FAIL, scale4.get_function_parameter(-2).get_desc());
+    /// assert_eq!(E::FAIL, scale4.get_function_parameter( 1).get_desc());
     /// #
-    /// # assert_eq!(scale4.get_function_parameter(std::i32::MIN).get_desc().err().map(|err| err.kind()), Some(E::FAIL));
-    /// # assert_eq!(scale4.get_function_parameter(-1000000).get_desc().err().map(|err| err.kind()), Some(E::FAIL));
-    /// # assert_eq!(scale4.get_function_parameter(-10000).get_desc().err().map(|err| err.kind()), Some(E::FAIL));
-    /// # assert_eq!(scale4.get_function_parameter(-100).get_desc().err().map(|err| err.kind()), Some(E::FAIL));
-    /// # assert_eq!(scale4.get_function_parameter(100).get_desc().err().map(|err| err.kind()), Some(E::FAIL));
-    /// # assert_eq!(scale4.get_function_parameter(10000).get_desc().err().map(|err| err.kind()), Some(E::FAIL));
-    /// # assert_eq!(scale4.get_function_parameter(1000000).get_desc().err().map(|err| err.kind()), Some(E::FAIL));
-    /// # assert_eq!(scale4.get_function_parameter(std::i32::MAX-100).get_desc().err().map(|err| err.kind()), Some(E::FAIL));
-    /// # assert_eq!(scale4.get_function_parameter(std::i32::MAX-16).get_desc().err().map(|err| err.kind()), Some(E::FAIL));
-    /// # assert_eq!(scale4.get_function_parameter(std::i32::MAX-10).get_desc().err().map(|err| err.kind()), Some(E::FAIL));
-    /// # assert_eq!(scale4.get_function_parameter(std::i32::MAX-4).get_desc().err().map(|err| err.kind()), Some(E::FAIL));
-    /// # assert_eq!(scale4.get_function_parameter(std::i32::MAX-1).get_desc().err().map(|err| err.kind()), Some(E::FAIL));
-    /// # assert_eq!(scale4.get_function_parameter(std::i32::MAX).get_desc().err().map(|err| err.kind()), Some(E::FAIL));
+    /// # assert_eq!(E::FAIL, scale4.get_function_parameter(std::i32::MIN).get_desc());
+    /// # assert_eq!(E::FAIL, scale4.get_function_parameter(-1000000).get_desc());
+    /// # assert_eq!(E::FAIL, scale4.get_function_parameter(-10000).get_desc());
+    /// # assert_eq!(E::FAIL, scale4.get_function_parameter(-100).get_desc());
+    /// # assert_eq!(E::FAIL, scale4.get_function_parameter(100).get_desc());
+    /// # assert_eq!(E::FAIL, scale4.get_function_parameter(10000).get_desc());
+    /// # assert_eq!(E::FAIL, scale4.get_function_parameter(1000000).get_desc());
+    /// # assert_eq!(E::FAIL, scale4.get_function_parameter(std::i32::MAX-100).get_desc());
+    /// # assert_eq!(E::FAIL, scale4.get_function_parameter(std::i32::MAX-16).get_desc());
+    /// # assert_eq!(E::FAIL, scale4.get_function_parameter(std::i32::MAX-10).get_desc());
+    /// # assert_eq!(E::FAIL, scale4.get_function_parameter(std::i32::MAX-4).get_desc());
+    /// # assert_eq!(E::FAIL, scale4.get_function_parameter(std::i32::MAX-1).get_desc());
+    /// # assert_eq!(E::FAIL, scale4.get_function_parameter(std::i32::MAX).get_desc());
     /// ```
     ///
     /// ### Output

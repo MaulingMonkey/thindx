@@ -51,34 +51,34 @@ impl Linker {
     ///     .map_err(|e| e.kind());
     ///
     /// assert_eq!(add_clip_plane(0, 0), Ok(())); // 1
-    /// assert_eq!(add_clip_plane(0, 0), Err(E::INVALIDARG)); // already added
+    /// assert_eq!(add_clip_plane(0, 0), E::INVALIDARG); // already added
     ///
     /// // "Each shader stage allows up to 15 shader-constant buffers; [...]"
     /// assert_eq!(add_clip_plane(1,  0), Ok(())); // 2
     /// assert_eq!(add_clip_plane(14, 0), Ok(())); // 3
-    /// assert_eq!(add_clip_plane(15, 0), Err(E::INVALIDARG));
+    /// assert_eq!(add_clip_plane(15, 0), E::INVALIDARG);
     ///
     /// // "[...] each buffer can hold up to 4096 constants."
     /// assert_eq!(add_clip_plane(0, 1   ), Ok(())); // 4
     /// assert_eq!(add_clip_plane(0, 4095), Ok(())); // 5
-    /// assert_eq!(add_clip_plane(0, 4096), Err(E::INVALIDARG));
+    /// assert_eq!(add_clip_plane(0, 4096), E::INVALIDARG);
     /// #
-    /// # assert_eq!(Err(E::INVALIDARG), add_clip_plane(!0, 0));
-    /// # assert_eq!(Err(E::INVALIDARG), add_clip_plane(0, !0));
-    /// # assert_eq!(Err(E::INVALIDARG), add_clip_plane(0, !0-1));
-    /// # assert_eq!(Err(E::INVALIDARG), add_clip_plane(0, !0-4));
-    /// # assert_eq!(Err(E::INVALIDARG), add_clip_plane(0, !0-10));
-    /// # assert_eq!(Err(E::INVALIDARG), add_clip_plane(0, !0-100));
-    /// # assert_eq!(Err(E::INVALIDARG), add_clip_plane(!0-1, 0));
-    /// # assert_eq!(Err(E::INVALIDARG), add_clip_plane(!0-4, 0));
-    /// # assert_eq!(Err(E::INVALIDARG), add_clip_plane(!0-10, 0));
-    /// # assert_eq!(Err(E::INVALIDARG), add_clip_plane(!0-100, 0));
-    /// # assert_eq!(Err(E::INVALIDARG), add_clip_plane(!0, !0));
+    /// # assert_eq!(E::INVALIDARG, add_clip_plane(!0, 0));
+    /// # assert_eq!(E::INVALIDARG, add_clip_plane(0, !0));
+    /// # assert_eq!(E::INVALIDARG, add_clip_plane(0, !0-1));
+    /// # assert_eq!(E::INVALIDARG, add_clip_plane(0, !0-4));
+    /// # assert_eq!(E::INVALIDARG, add_clip_plane(0, !0-10));
+    /// # assert_eq!(E::INVALIDARG, add_clip_plane(0, !0-100));
+    /// # assert_eq!(E::INVALIDARG, add_clip_plane(!0-1, 0));
+    /// # assert_eq!(E::INVALIDARG, add_clip_plane(!0-4, 0));
+    /// # assert_eq!(E::INVALIDARG, add_clip_plane(!0-10, 0));
+    /// # assert_eq!(E::INVALIDARG, add_clip_plane(!0-100, 0));
+    /// # assert_eq!(E::INVALIDARG, add_clip_plane(!0, !0));
     ///
     /// // "... you provide a list of up to 6 float4 constants that define the plane coefficients
     /// // for each active clip plane."
     /// assert_eq!(add_clip_plane(3, 1), Ok(())); // 6th successful clip plane added to linker
-    /// assert_eq!(add_clip_plane(3, 2), Err(E::FAIL)); // 7th clip plane exceeds limits
+    /// assert_eq!(add_clip_plane(3, 2), E::FAIL); // 7th clip plane exceeds limits
     /// ```
     ///
     /// ### See Also

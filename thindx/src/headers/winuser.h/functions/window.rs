@@ -14,7 +14,7 @@ use winapi::um::winuser::*;
 
 
 
-macro_rules! fn_err_get_last_error { () => { fn_err!(ErrorKind(get_last_error() as _)) } }
+macro_rules! fn_err_get_last_error { () => { fn_err!(ErrorKind::from_winapi(get_last_error() as _)) } }
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/learnwin32/what-is-a-window-)\]
 /// HWND
@@ -134,11 +134,10 @@ pub fn get_client_rect(hwnd: impl TryInto<HWND>) -> Result<Rect, Error> {
 /// let desktop_style = win32::get_window_long_ptr_a(desktop, GWL_STYLE).unwrap();
 /// # for i in [i32::MIN, i32::MIN/2, -9001, 0, 9001, i32::MAX/2, i32::MAX].iter().copied().chain(-64 ..= 64).chain((0..30).map(|p| 1<<p)).chain((0..31).map(|p| -(1<<p))) {
 /// #   if let Err(err) = win32::get_window_long_ptr_a(desktop, i) {
-/// #       match err.kind() {
-/// #           ERROR::ACCESS_DENIED => {},
-/// #           ERROR::INVALID_INDEX => {},
-/// #           kind                 => panic!("get_window_long_ptr_a(desktop, {i}) == {kind:?}"),
-/// #       }
+/// #       assert!(
+/// #           err == ERROR::ACCESS_DENIED || err == ERROR::INVALID_INDEX,
+/// #           "get_window_long_ptr_a(desktop, {i}) == {err:?}"
+/// #       );
 /// #   }
 /// # }
 /// ```
@@ -148,7 +147,7 @@ pub fn get_window_long_ptr_a(hwnd: impl Into<HWND>, index: i32) -> Result<isize,
     let r = unsafe { GetWindowLongPtrA(hwnd, index) };
     match (r == 0).then(|| get_last_error()).unwrap_or(0) {
         0   => Ok(r as _), // i32 -> isize on 32-bit windows
-        err => fn_err!(ErrorKind(err as _)),
+        err => fn_err!(ErrorKind::from_winapi(err as _)),
     }
 }
 
@@ -175,11 +174,10 @@ pub fn get_window_long_ptr_a(hwnd: impl Into<HWND>, index: i32) -> Result<isize,
 /// let desktop_style = win32::get_window_long_ptr_w(desktop, GWL_STYLE).unwrap();
 /// # for i in [i32::MIN, i32::MIN/2, -9001, 0, 9001, i32::MAX/2, i32::MAX].iter().copied().chain(-64 ..= 64).chain((0..30).map(|p| 1<<p)).chain((0..31).map(|p| -(1<<p))) {
 /// #   if let Err(err) = win32::get_window_long_ptr_w(desktop, i) {
-/// #       match err.kind() {
-/// #           ERROR::ACCESS_DENIED => {},
-/// #           ERROR::INVALID_INDEX => {},
-/// #           kind                 => panic!("get_window_long_ptr_w(desktop, {i}) == {kind:?}"),
-/// #       }
+/// #       assert!(
+/// #           err == ERROR::ACCESS_DENIED || err == ERROR::INVALID_INDEX,
+/// #           "get_window_long_ptr_w(desktop, {i}) == {err:?}"
+/// #       );
 /// #   }
 /// # }
 /// ```
@@ -189,7 +187,7 @@ pub fn get_window_long_ptr_w(hwnd: impl Into<HWND>, index: i32) -> Result<isize,
     let r = unsafe { GetWindowLongPtrW(hwnd, index) };
     match (r == 0).then(|| get_last_error()).unwrap_or(0) {
         0   => Ok(r as _), // i32 -> isize on 32-bit windows
-        err => fn_err!(ErrorKind(err as _)),
+        err => fn_err!(ErrorKind::from_winapi(err as _)),
     }
 }
 

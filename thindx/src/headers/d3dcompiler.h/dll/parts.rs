@@ -82,14 +82,14 @@ impl Compiler {
     /// assert!(debug_info.len() > 0);
     /// #
     /// # // This is not legal, despite MSDN suggesting that src_data can contain "either uncompiled or compiled HLSL code" (didn't sound right)
-    /// # assert_eq!(d3dc.get_debug_info(unsafe { d3d::Bytecode::from_unchecked(&shader_src) }).err().map(|err| err.kind()), Some(E::FAIL), "uncompiled shader code isn't actually legal");
+    /// # assert_eq!(E::FAIL, d3dc.get_debug_info(unsafe { d3d::Bytecode::from_unchecked(&shader_src) }), "uncompiled shader code isn't actually legal");
     /// #
     /// # let shader = d3dc.compile(&shader_src, cstr!(r"test\data\basic.hlsl"), None, None, "ps_main", "ps_4_0", d3d::Compile::None, d3d::CompileEffect::None).unwrap();
-    /// # assert_eq!(d3dc.get_debug_info(&shader).err().map(|err| err.kind()), Some(E::FAIL), "shader was compiled without debug info");
+    /// # assert_eq!(E::FAIL, d3dc.get_debug_info(&shader), "shader was compiled without debug info");
     /// #
     /// # let d3dc = d3d::Compiler::load_system(47).unwrap();
     /// # let shader = d3dc.compile(&shader_src, cstr!(r"test\data\basic.hlsl"), None, None, "ps_main", "ps_4_0", d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
-    /// # assert_eq!(d3dc.get_debug_info(&shader).err().map(|err| err.kind()), Some(E::FAIL), "shader was compiled with d3dcompiler_47.dll");
+    /// # assert_eq!(E::FAIL, d3dc.get_debug_info(&shader), "shader was compiled with d3dcompiler_47.dll");
     /// ```
     ///
     /// ### Output

@@ -30,7 +30,7 @@ impl Resource {
         if my_device.as_raw() == device.as_winapi() as *const _ as *mut _ {
             Ok(())
         } else {
-            Err(THINERR::DEVICE_MISMATCH)
+            Err(THINERR::DEVICE_MISMATCH.into())
         }
     }
 }

@@ -22,7 +22,7 @@ use std::time::Duration;
 
 macro_rules! fuzz {
     ( $expr:expr $(, $error:expr)* $(,)? ) => {
-        fuzz(stringify!($expr), file!(), line!(), &[$($error),*], $expr)
+        fuzz(stringify!($expr), file!(), line!(), &[$(($error).into()),*], $expr)
     }
 }
 

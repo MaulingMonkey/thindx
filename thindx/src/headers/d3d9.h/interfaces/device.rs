@@ -13,6 +13,8 @@ use winapi::shared::windef::RECT;
 use winapi::um::unknwnbase::IUnknown;
 use winapi::um::wingdi::*;
 
+use winresult::*;
+
 use std::ptr::*;
 
 pub(crate) const MAX_BUFFER_ALLOC : u32 = 0xFFFF_0000;
@@ -455,7 +457,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// # use dev::d3d9::*; let device = device_pure();
     /// // Create a 6 x 128x128 ARGB cubemap with automatic mipmaps
     /// let texture = device.create_cube_texture(128, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
-    /// assert_eq!(D3DERR::INVALIDCALL, device.create_cube_texture(1 << 15, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).err());
+    /// assert_eq!(D3DERR::INVALIDCALL, device.create_cube_texture(1 << 15, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).map(|_|()));
     /// ```
     fn create_cube_texture(&self, edge_length: u32, levels: u32, usage: impl Into<Usage>, format: impl Into<Format>, pool: impl Into<Pool>, shared_handle: impl SharedHandleParam) -> Result<CubeTexture, Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::create_cube_texture => IDirect3DDevice9::CreateCubeTexture);
@@ -743,7 +745,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// # use dev::d3d9::*; let device = device_pure();
     /// // Create a 128x128 ARGB texture with no mipmaps
     /// let texture = device.create_texture(128, 128, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
-    /// assert_eq!(D3DERR::INVALIDCALL, device.create_texture(1 << 15, 1 << 15, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).err());
+    /// assert_eq!(D3DERR::INVALIDCALL, device.create_texture(1 << 15, 1 << 15, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).map(|_|()));
     /// ```
     fn create_texture(&self, width: u32, height: u32, levels: u32, usage: impl Into<Usage>, format: impl Into<Format>, pool: impl Into<Pool>, _shared_handle: impl SharedHandleParam) -> Result<Texture, Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::create_texture => IDirect3DDevice9::CreateTexture);
@@ -988,7 +990,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// # use dev::d3d9::*; let device = device_pure();
     /// // Create a 32x32x32 volumetric ARGB texture with no mipmaps
     /// let texture = device.create_volume_texture(32, 32, 32, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
-    /// assert_eq!(D3DERR::INVALIDCALL, device.create_volume_texture(1 << 10, 1 << 10, 1 << 10, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).err());
+    /// assert_eq!(D3DERR::INVALIDCALL, device.create_volume_texture(1 << 10, 1 << 10, 1 << 10, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).map(|_|()));
     /// ```
     fn create_volume_texture(&self, width: u32, height: u32, depth: u32, levels: u32, usage: impl Into<Usage>, format: impl Into<Format>, pool: impl Into<Pool>, _shared_handle: impl SharedHandleParam) -> Result<VolumeTexture, Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::create_volume_texture => IDirect3DDevice9::CreateVolumeTexture);
@@ -2023,7 +2025,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///     dbg!(device.get_raster_status(i).unwrap());
     /// }
     /// # for i in (swap_chains .. 255).chain((8 .. 32).map(|pow| 1<<pow)) {
-    /// #   assert_eq!(device.get_raster_status(i).err().unwrap().kind(), D3DERR::INVALIDCALL);
+    /// #   assert_eq!(D3DERR::INVALIDCALL, device.get_raster_status(i));
     /// # }
     /// ```
     ///
@@ -2068,7 +2070,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// );
     ///
     /// assert_eq!(
-    ///     device.get_render_state_untyped(RS::from_unchecked(!0)).unwrap_err().kind(),
+    ///     device.get_render_state_untyped(RS::from_unchecked(!0)),
     ///     D3DERR::INVALIDCALL
     /// );
     /// #
@@ -2202,7 +2204,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// );
     ///
     /// assert_eq!(
-    ///     device.get_sampler_state_untyped(sampler, Samp::from_unchecked(!0)).unwrap_err().kind(),
+    ///     device.get_sampler_state_untyped(sampler, Samp::from_unchecked(!0)),
     ///     D3DERR::INVALIDCALL
     /// );
     /// #
@@ -2341,7 +2343,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///     let swap_chain = device.get_swap_chain(swap_chain).unwrap();
     /// }
     /// # for swap_chain in (device.get_number_of_swap_chains() .. 255).chain((8..32).map(|pow| 1<<pow)) {
-    /// #   assert_eq!(device.get_swap_chain(swap_chain).err().unwrap().kind(), D3DERR::INVALIDCALL);
+    /// #   assert_eq!(D3DERR::INVALIDCALL, device.get_swap_chain(swap_chain).map(|_|()));
     /// # }
     /// ```
     fn get_swap_chain(&self, swap_chain: u32) -> Result<SwapChain, Error> {
@@ -2741,13 +2743,12 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     ///
     /// // Or, with a SwapEffect::Copy swap chain, this should succeed (might succeed by simply ignoring the args, even for other SwapEffect s:)
     /// let hwnd = unsafe { SafeHWND::assert(&hwnd) };
-    /// match device.present((0,0)..(100,100), Rect::from((0,0)..(100,100)), hwnd, None).map_err(|e| e.kind()) {
-    ///     Ok(()) => {}, // Huzzah!
-    ///     Err(D3DERR::DEVICEREMOVED   ) => { /* oooh, a removable GPU?  Nifty!  Might switch to the laptop's built-in Device (might have different caps!) */ },
-    ///     Err(D3DERR::DEVICELOST      ) => { /* switching fullscreen modes? GPU driver crashed? might prompt the user before recreating the device to avoid hang loops */ },
-    ///     Err(D3DERR::DEVICEHUNG      ) => { /* ...is it your fault? crazy shaders? might prompt the user before recreating the device to avoid hang loops */ },
-    ///     Err(other                   ) => panic!("oh no something bad happened: {}", other),
-    /// }
+    /// let r = device.present((0,0)..(100,100), Rect::from((0,0)..(100,100)), hwnd, None);
+    /// if r.is_ok() {} // Huzzah!
+    /// else if r == D3DERR::DEVICEREMOVED { /* oooh, a removable GPU?  Nifty!  Might switch to the laptop's built-in Device (might have different caps!) */ }
+    /// else if r == D3DERR::DEVICELOST    { /* switching fullscreen modes? GPU driver crashed? might prompt the user before recreating the device to avoid hang loops */ }
+    /// else if r == D3DERR::DEVICEHUNG    { /* ...is it your fault? crazy shaders? might prompt the user before recreating the device to avoid hang loops */ }
+    /// else                               { panic!("oh no something bad happened: {r:?}") }
     /// ```
     fn present<'r>(&self, source_rect: impl IntoRectOrFull, dest_rect: impl IntoRectOrFull, dest_window_override: impl AsHWND, dirty_region: impl Into<Option<&'r RgnData>>) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::present => IDirect3DDevice9::Present);
@@ -3923,7 +3924,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// Reports the current cooperative-level status of the Direct3D device for a windowed or full-screen application.
     ///
     /// ### Returns
-    /// *   Ok(`()`)                                If the device is operational and the calling application can continue.
+    /// *   Ok([`S::OK`])                           If the device is operational and the calling application can continue.
     /// *   Err([`D3DERR::DEVICELOST`])             If the device is lost, and cannot be restored at the current time (e.g. perhaps a full-screen device has lost focus.)
     /// *   Err([`D3DERR::DEVICENOTRESET`])         If the device is lost, and can either be restored via [`d3d::IDirect3DDevice9Ext::reset`], or via device recreation.
     /// *   Err([`D3DERR::DRIVERINTERNALERROR`])    If things went boom.
@@ -3933,9 +3934,9 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// # use dev::d3d9::*; let device = device_pure();
     /// assert!(device.test_cooperative_level().is_ok());
     /// ```
-    fn test_cooperative_level(&self) -> Result<(), ErrorKind> {
+    fn test_cooperative_level(&self) -> Result<HResultSuccess, HResultError> {
         fn_context!(d3d9::IDirect3DDevice9Ext::test_cooperative_level => IDirect3DDevice9::TestCooperativeLevel);
-        fn_check_hr!(unsafe { self.as_winapi().TestCooperativeLevel() }).map_err(|e| e.kind())
+        HResult::from(unsafe { self.as_winapi().TestCooperativeLevel() } as u32).succeeded()
     }
 
     //TODO:     IDirect3DDevice9::UpdateSurface                     = d3d9::IDirect3DDevice9Ext::update_surface

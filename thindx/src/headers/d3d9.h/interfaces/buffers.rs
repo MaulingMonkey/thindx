@@ -268,14 +268,14 @@ impl<T: AsSafe<IDirect3DVertexBuffer9>> IDirect3DVertexBuffer9Ext for T {}
         let odd16 = device.create_index_buffer(3*3, Usage::None, Format::Index16, Pool::Default, ()).unwrap(); // weird size (9)
         let tri32 = device.create_index_buffer(3*4, Usage::None, Format::Index32, Pool::Default, ()).unwrap(); // simple triangle IB
 
-        assert_eq!(D3DERR::INVALIDCALL, device.create_index_buffer(0,    Usage::None, Format::Index16,  Pool::Default, ()).err(), "empty");
-        assert_eq!(D3DERR::INVALIDCALL, device.create_index_buffer(1,    Usage::None, Format::Index16,  Pool::Default, ()).err(), "too small for 16-bit IndexBuffer");
-        assert_eq!(D3DERR::INVALIDCALL, device.create_index_buffer(3,    Usage::None, Format::Index32,  Pool::Default, ()).err(), "too small for 32-bit IndexBuffer");
-        assert_eq!(D3DERR::INVALIDCALL, device.create_index_buffer(1000, Invalid,     Format::Index16,  Pool::Default, ()).err(), "invalid usage");
-        assert_eq!(D3DERR::INVALIDCALL, device.create_index_buffer(1000, Usage::None, Format::Unknown,  Pool::Default, ()).err(), "bad format");
-        assert_eq!(D3DERR::INVALIDCALL, device.create_index_buffer(1000, Usage::None, Format::X8B8G8R8, Pool::Default, ()).err(), "bad format");
-        assert_eq!(D3DERR::INVALIDCALL, device.create_index_buffer(1000, Usage::None, Invalid,          Pool::Default, ()).err(), "bad format");
-        assert_eq!(D3DERR::INVALIDCALL, device.create_index_buffer(1000, Usage::None, Format::Index16,  Invalid,       ()).err(), "bad pool");
+        assert_eq!(D3DERR::INVALIDCALL, device.create_index_buffer(0,    Usage::None, Format::Index16,  Pool::Default, ()).map(|_|()), "empty");
+        assert_eq!(D3DERR::INVALIDCALL, device.create_index_buffer(1,    Usage::None, Format::Index16,  Pool::Default, ()).map(|_|()), "too small for 16-bit IndexBuffer");
+        assert_eq!(D3DERR::INVALIDCALL, device.create_index_buffer(3,    Usage::None, Format::Index32,  Pool::Default, ()).map(|_|()), "too small for 32-bit IndexBuffer");
+        assert_eq!(D3DERR::INVALIDCALL, device.create_index_buffer(1000, Invalid,     Format::Index16,  Pool::Default, ()).map(|_|()), "invalid usage");
+        assert_eq!(D3DERR::INVALIDCALL, device.create_index_buffer(1000, Usage::None, Format::Unknown,  Pool::Default, ()).map(|_|()), "bad format");
+        assert_eq!(D3DERR::INVALIDCALL, device.create_index_buffer(1000, Usage::None, Format::X8B8G8R8, Pool::Default, ()).map(|_|()), "bad format");
+        assert_eq!(D3DERR::INVALIDCALL, device.create_index_buffer(1000, Usage::None, Invalid,          Pool::Default, ()).map(|_|()), "bad format");
+        assert_eq!(D3DERR::INVALIDCALL, device.create_index_buffer(1000, Usage::None, Format::Index16,  Invalid,       ()).map(|_|()), "bad pool");
 
         assert!(device.get_indices().unwrap().is_none());
 
@@ -307,12 +307,12 @@ impl<T: AsSafe<IDirect3DVertexBuffer9>> IDirect3DVertexBuffer9Ext for T {}
         let _quadxyz= device.create_vertex_buffer(4*4*3, Usage::None, FVF::XYZ,  Pool::Default, ()).unwrap(); // simple quad     VB (FVF)
 
         let _one =                      device.create_vertex_buffer(1, Usage::None, FVF::None, Pool::Default, ()).unwrap();
-        assert_eq!(D3DERR::INVALIDCALL, device.create_vertex_buffer(1, Usage::None, FVF::XYZ,  Pool::Default, ()).err()); // 1 byte is too small for FVF::XYZ
+        assert_eq!(D3DERR::INVALIDCALL, device.create_vertex_buffer(1, Usage::None, FVF::XYZ,  Pool::Default, ()).map(|_|())); // 1 byte is too small for FVF::XYZ
 
-        assert_eq!(D3DERR::INVALIDCALL, device.create_vertex_buffer(0,    Usage::None, FVF::XYZ, Pool::Default, ()).err(), "empty");
-        assert_eq!(D3DERR::INVALIDCALL, device.create_vertex_buffer(1000, Invalid,     FVF::XYZ, Pool::Default, ()).err(), "invalid usage");
+        assert_eq!(D3DERR::INVALIDCALL, device.create_vertex_buffer(0,    Usage::None, FVF::XYZ, Pool::Default, ()).map(|_|()), "empty");
+        assert_eq!(D3DERR::INVALIDCALL, device.create_vertex_buffer(1000, Invalid,     FVF::XYZ, Pool::Default, ()).map(|_|()), "invalid usage");
         let _badfmt =                   device.create_vertex_buffer(1000, Usage::None, Invalid,  Pool::Default, ()).unwrap(); // apparently no such thing as a bad FVF?
-        assert_eq!(D3DERR::INVALIDCALL, device.create_vertex_buffer(1000, Usage::None, FVF::XYZ, Invalid,       ()).err(), "bad pool");
+        assert_eq!(D3DERR::INVALIDCALL, device.create_vertex_buffer(1000, Usage::None, FVF::XYZ, Invalid,       ()).map(|_|()), "bad pool");
     }
 
     #[test] fn overflow_allocs() {
@@ -341,19 +341,17 @@ impl<T: AsSafe<IDirect3DVertexBuffer9>> IDirect3DVertexBuffer9Ext for T {}
             !0/2,
             !0/8,
         ].iter().copied() {
-            match index_loop_alloc_size(n).unwrap_err().kind() {
-                E::OUTOFMEMORY              => {}, // expected
-                D3DERR::OUTOFVIDEOMEMORY    => {}, // expected
-                THINERR::ALLOC_OVERFLOW     => {}, // expected
-                other => panic!("index_loop_alloc_size(0x{:08x}), expected a different kind of error, got: {}", n, other),
-            }
+            let r = index_loop_alloc_size(n);
+            assert!(
+                r == E::OUTOFMEMORY || r == D3DERR::OUTOFVIDEOMEMORY || r == THINERR::ALLOC_OVERFLOW,
+                "index_loop_alloc_size(0x{n:08x}), expected a different kind of error, got: {r:?}"
+            );
 
-            match vertex_loop_alloc_size(n).unwrap_err().kind() {
-                E::OUTOFMEMORY              => {}, // expected
-                D3DERR::OUTOFVIDEOMEMORY    => {}, // expected
-                THINERR::ALLOC_OVERFLOW     => {}, // expected
-                other => panic!("vertex_loop_alloc_size(0x{:08x}), expected a different kind of error, got: {}", n, other),
-            }
+            let r = vertex_loop_alloc_size(n);
+            assert!(
+                r == E::OUTOFMEMORY || r == D3DERR::OUTOFVIDEOMEMORY || r == THINERR::ALLOC_OVERFLOW,
+                "vertex_loop_alloc_size(0x{n:08x}), expected a different kind of error, got: {r:?}"
+            );
         }
     }
 }

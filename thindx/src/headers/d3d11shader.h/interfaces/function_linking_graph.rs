@@ -140,7 +140,7 @@ impl FunctionLinkingGraph {
     /// let xyz1 = graph.call_function("", &lib, "xyz1").unwrap();
     /// let xyz1 = graph.call_function((), &lib, "xyz1").unwrap();
     ///
-    /// assert_eq!(E::FAIL, graph.call_function("", &lib, "nonexistant").err().unwrap().kind());
+    /// assert_eq!(E::FAIL, graph.call_function("", &lib, "nonexistant").map(|_|()));
     /// ```
     pub fn call_function(
         &self,
@@ -322,7 +322,7 @@ impl FunctionLinkingGraph {
     ///     ParameterDesc::new(cstr!("inputTex"),  cstr!("TEXCOORD0"), SVT::Float, SVC::Vector, 1, 2, Interpolation::Linear, PF::In, 0, 0, 0, 0),
     ///     ParameterDesc::new(cstr!("inputNorm"), cstr!("NORMAL0"),   SVT::Float, SVC::Vector, 1, 3, Interpolation::Linear, PF::In, 0, 0, 0, 0),
     /// ]).unwrap();
-    /// # assert_eq!(E::FAIL, flg.set_input_signature(&[]).err().unwrap().kind());
+    /// # assert_eq!(E::FAIL, flg.set_input_signature(&[]).map(|_|()));
     /// ```
     pub fn set_input_signature(&self, input_parameters: &[ParameterDesc<'static>]) -> Result<LinkingNode, Error> {
         fn_context!(d3d11::FunctionLinkingGraph::set_input_signature => ID3D11FunctionLinkingGraph::SetInputSignature);
@@ -356,7 +356,7 @@ impl FunctionLinkingGraph {
     ///     ParameterDesc::new(cstr!("outputNorm"), cstr!("NORMAL0"),     SVT::Float, SVC::Vector, 1, 3, Interpolation::Undefined, PF::Out, 0, 0, 0, 0),
     ///     ParameterDesc::new(cstr!("outputTex"),  cstr!("SV_POSITION"), SVT::Float, SVC::Vector, 1, 4, Interpolation::Undefined, PF::Out, 0, 0, 0, 0),
     /// ]).unwrap();
-    /// # assert_eq!(E::FAIL, flg.set_output_signature(&[]).err().unwrap().kind());
+    /// # assert_eq!(E::FAIL, flg.set_output_signature(&[]).map(|_|()));
     /// ```
     pub fn set_output_signature(&self, output_parameters: &[ParameterDesc<'static>]) -> Result<LinkingNode, Error> {
         fn_context!(d3d11::FunctionLinkingGraph::set_output_signature => ID3D11FunctionLinkingGraph::SetOutputSignature);

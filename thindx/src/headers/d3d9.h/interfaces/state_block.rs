@@ -91,16 +91,16 @@ impl<T: AsSafe<IDirect3DStateBlock9>> IDirect3DStateBlock9Ext for T {}
     use dev::d3d9::*;
 
     let device = device_test();
-    assert_eq!(D3DERR::INVALIDCALL, device.end_state_block().err()); // not in a state block
+    assert_eq!(D3DERR::INVALIDCALL, device.end_state_block().map(|_|())); // not in a state block
 
     device.begin_state_block().unwrap();
     device.end_state_block().unwrap();
-    assert_eq!(D3DERR::INVALIDCALL, device.end_state_block().err()); // not in a state block
+    assert_eq!(D3DERR::INVALIDCALL, device.end_state_block().map(|_|())); // not in a state block
 
     device.begin_state_block().unwrap();
-    assert_eq!(D3DERR::INVALIDCALL, device.begin_state_block().err()); // cannot nest state blocks
+    assert_eq!(D3DERR::INVALIDCALL, device.begin_state_block()); // cannot nest state blocks
     device.end_state_block().unwrap();
-    assert_eq!(D3DERR::INVALIDCALL, device.end_state_block().err());
+    assert_eq!(D3DERR::INVALIDCALL, device.end_state_block().map(|_|()));
 }
 
 // TODO: test explicit state capturing

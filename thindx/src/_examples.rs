@@ -283,7 +283,7 @@ pub const d3d9_01_clear_winapi : () = ();
 /// 
 ///                 if let Some(d) = device.as_ref() {
 ///                     let reset = match d.test_cooperative_level() {
-///                         Ok(()) => {
+///                         Ok(_) => {
 ///                             let bb = d.get_back_buffer(0, 0, BackBufferType::Mono).unwrap().get_desc().unwrap();
 ///                             (bb.width, bb.height) != (window_size.width, window_size.height)
 ///                         },
@@ -736,7 +736,7 @@ pub const d3dcompiler_01_construction : () = ();
 ///         Ok((data, path))
 ///     });
 /// 
-///     let include2 = d3d::Include::from_path_fn(Path::new(r"thindx\test\data"), |dir, _ty, include| Ok(dir.join(include.to_str().map_err(|_| D3D11_ERROR::FILE_NOT_FOUND)?)));
+///     let include2 = d3d::Include::from_path_fn(Path::new(r"thindx\test\data"), |dir, _ty, include| Ok(dir.join(include.to_str().map_err(|_| D3D11::ERROR_FILE_NOT_FOUND)?)));
 /// 
 ///     let ic1a = d3dc.compile_from_file(r"thindx\test\data\include-chain-1.hlsl", None, &include1,           "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap();
 ///     let ic1b = d3dc.compile_from_file(r"thindx\test\data\include-chain-1.hlsl", None, &include2,           "ps_main", "ps_4_0", Compile::Debug, CompileEffect::None).unwrap();
@@ -1117,26 +1117,26 @@ pub const d3dcompiler_03_link : () = ();
 /// }
 /// 
 /// .get_constant_buffer_by_index(0).get_desc() = Ok(ShaderBufferDesc { name: "ExampleCBuffer", ty: CT::CBuffer, variables: 1, size: 16, flags: CBF::None })
-/// .get_constant_buffer_by_index(1).get_desc() = Err(Error("ID3D11ShaderReflectionConstantBuffer::GetDesc", E_FAIL))
+/// .get_constant_buffer_by_index(1).get_desc() = Err(Error("ID3D11ShaderReflectionConstantBuffer::GetDesc", E::FAIL (0x80004005)))
 /// 
 /// .get_constant_buffer_by_name("ExampleCBuffer").get_desc() = Ok(ShaderBufferDesc { name: "ExampleCBuffer", ty: CT::CBuffer, variables: 1, size: 16, flags: CBF::None })
-/// .get_constant_buffer_by_name("ExampleCBuffer\u{0}").get_desc() = Err(Error("ID3D11ShaderReflectionConstantBuffer::GetDesc", E_FAIL))
-/// .get_constant_buffer_by_name("NonExistant").get_desc() = Err(Error("ID3D11ShaderReflectionConstantBuffer::GetDesc", E_FAIL))
-/// .get_constant_buffer_by_name("").get_desc() = Err(Error("ID3D11ShaderReflectionConstantBuffer::GetDesc", E_FAIL))
+/// .get_constant_buffer_by_name("ExampleCBuffer\u{0}").get_desc() = Err(Error("ID3D11ShaderReflectionConstantBuffer::GetDesc", E::FAIL (0x80004005)))
+/// .get_constant_buffer_by_name("NonExistant").get_desc() = Err(Error("ID3D11ShaderReflectionConstantBuffer::GetDesc", E::FAIL (0x80004005)))
+/// .get_constant_buffer_by_name("").get_desc() = Err(Error("ID3D11ShaderReflectionConstantBuffer::GetDesc", E::FAIL (0x80004005)))
 /// 
 /// .get_resource_binding_desc(0) = Ok(ShaderInputBindDesc { name: "ExampleCBuffer", ty: SIT::CBuffer, bind_point: 0, bind_count: 1, flags: SIF::None, return_type: ReturnType(0), dimension: SrvDimension::Unknown, num_samples: 0 })
-/// .get_resource_binding_desc(1) = Err(Error("ID3D11ShaderReflection::GetResourceBindingDesc", E_INVALIDARG))
+/// .get_resource_binding_desc(1) = Err(Error("ID3D11ShaderReflection::GetResourceBindingDesc", E::INVALIDARG (0x80070057)))
 /// 
 /// .get_resource_binding_desc_by_name("ExampleCBuffer") = Ok(ShaderInputBindDesc { name: "ExampleCBuffer", ty: SIT::CBuffer, bind_point: 0, bind_count: 1, flags: SIF::None, return_type: ReturnType(0), dimension: SrvDimension::Unknown, num_samples: 0 })
-/// .get_resource_binding_desc_by_name("ExampleCBuffer\u{0}") = Err(Error("ID3D11ShaderReflection::GetResourceBindingDescByName", E_INVALIDARG))
-/// .get_resource_binding_desc_by_name("NonExistant") = Err(Error("ID3D11ShaderReflection::GetResourceBindingDescByName", E_INVALIDARG))
-/// .get_resource_binding_desc_by_name("") = Err(Error("ID3D11ShaderReflection::GetResourceBindingDescByName", E_INVALIDARG))
+/// .get_resource_binding_desc_by_name("ExampleCBuffer\u{0}") = Err(Error("ID3D11ShaderReflection::GetResourceBindingDescByName", E::INVALIDARG (0x80070057)))
+/// .get_resource_binding_desc_by_name("NonExistant") = Err(Error("ID3D11ShaderReflection::GetResourceBindingDescByName", E::INVALIDARG (0x80070057)))
+/// .get_resource_binding_desc_by_name("") = Err(Error("ID3D11ShaderReflection::GetResourceBindingDescByName", E::INVALIDARG (0x80070057)))
 /// 
 /// .get_variable_by_name("tint") = Ok(ShaderVariableDesc { name: "tint", start_offset: 0, size: 16, flags: SVF::Used, default_value: 0x0, start_texture: 4294967295, texture_size: 0, start_sampler: 4294967295, sampler_size: 0 })
-/// .get_variable_by_name("v") = Err(Error("ID3D11ShaderReflectionVariable::GetDesc", E_FAIL))
-/// .get_variable_by_name("i") = Err(Error("ID3D11ShaderReflectionVariable::GetDesc", E_FAIL))
-/// .get_variable_by_name("o") = Err(Error("ID3D11ShaderReflectionVariable::GetDesc", E_FAIL))
-/// .get_variable_by_name("color") = Err(Error("ID3D11ShaderReflectionVariable::GetDesc", E_FAIL))
+/// .get_variable_by_name("v") = Err(Error("ID3D11ShaderReflectionVariable::GetDesc", E::FAIL (0x80004005)))
+/// .get_variable_by_name("i") = Err(Error("ID3D11ShaderReflectionVariable::GetDesc", E::FAIL (0x80004005)))
+/// .get_variable_by_name("o") = Err(Error("ID3D11ShaderReflectionVariable::GetDesc", E::FAIL (0x80004005)))
+/// .get_variable_by_name("color") = Err(Error("ID3D11ShaderReflectionVariable::GetDesc", E::FAIL (0x80004005)))
 /// ```
 ///
 /// ### To run this example yourself

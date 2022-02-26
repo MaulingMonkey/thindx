@@ -2,6 +2,7 @@ use crate::*;
 use crate::error_macros::FnContext;
 
 use winapi::shared::winerror::{HRESULT, SUCCEEDED};
+use winresult::{ErrorCode, HResultError};
 
 use std::fmt::{self, Debug, Display, Formatter};
 
@@ -23,7 +24,7 @@ impl Error {
         if SUCCEEDED(hr) {
             Ok(())
         } else {
-            Err(Error(ctx, ErrorKind(hr)))
+            Err(Error(ctx, ErrorKind::from_winapi(hr)))
         }
     }
 
@@ -33,7 +34,7 @@ impl Error {
     pub fn kind(&self) -> ErrorKind { self.1 }
 
     /// Returns the [HRESULT] of the error
-    pub fn hresult(&self) -> HRESULT { self.1.0 }
+    pub fn hresult(&self) -> HRESULT { self.1.to_winapi() }
 }
 
 impl Debug   for Error { fn fmt(&self, fmt: &mut Formatter) -> fmt::Result { write!(fmt, "Error({:?}, {:?})", self.method(), self.1) } }
@@ -46,3 +47,8 @@ impl PartialEq<Option<Error>> for ErrorKind { fn eq(&self, other: &Option<Error>
 impl PartialEq<ErrorKind> for Option<Error> { fn eq(&self, other: &ErrorKind)           -> bool { Some(*other) == self.as_ref().map(|e| e.kind()) } }
 impl<O> PartialEq<Result<O, Error>> for ErrorKind { fn eq(&self, other: &Result<O, Error>) -> bool { Some(*self) == other.as_ref().err().map(|e| e.kind()) } }
 impl<O> PartialEq<ErrorKind> for Result<O, Error> { fn eq(&self, other: &ErrorKind)              -> bool { Some(*other) == self.as_ref().err().map(|e| e.kind()) } }
+
+impl PartialEq<Error> for ErrorCode     { fn eq(&self, other: &Error        ) -> bool { other.kind() == *self } }
+impl PartialEq<Error> for HResultError  { fn eq(&self, other: &Error        ) -> bool { other.kind() == *self } }
+impl PartialEq<ErrorCode    > for Error { fn eq(&self, other: &ErrorCode    ) -> bool { self.kind() == *other } }
+impl PartialEq<HResultError > for Error { fn eq(&self, other: &HResultError ) -> bool { self.kind() == *other } }

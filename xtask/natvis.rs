@@ -17,6 +17,7 @@ fn merge() {
         writeln!(nv, r#"<?xml version="1.0" encoding="utf-8"?>"#)?;
         writeln!(nv, r#"<AutoVisualizer xmlns="http://schemas.microsoft.com/vstudio/debugger/natvis/2010">"#)?;
         find_merge_natvis(nv, Path::new("."))?;
+        find_merge_natvis(nv, Path::new("../winresult"))?; // a real codebase should use natvis-pdbs instead to import by crate
         writeln!(nv)?;
         writeln!(nv, r#"</AutoVisualizer>"#)?;
         Ok(())

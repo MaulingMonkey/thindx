@@ -1,7 +1,7 @@
 
-macro_rules! fn_err         { ( $kind:expr ) => {    Err($crate::Error(&_THINDX_FN_CONTEXT, $kind)) }}
-macro_rules! fn_error       { ( $kind:expr ) => {        $crate::Error(&_THINDX_FN_CONTEXT, $kind)  }}
-macro_rules! fn_check_hr    { ( $hr:expr )   => { $crate::Error::check(&_THINDX_FN_CONTEXT, $hr)    }}
+macro_rules! fn_err         { ( $kind:expr ) => {    Err($crate::Error(&_THINDX_FN_CONTEXT, ($kind).into())) }}
+macro_rules! fn_error       { ( $kind:expr ) => {        $crate::Error(&_THINDX_FN_CONTEXT, ($kind).into())  }}
+macro_rules! fn_check_hr    { ( $hr:expr )   => { $crate::Error::check(&_THINDX_FN_CONTEXT, ($hr).into())    }}
 macro_rules! fn_param_error { ( $param:ident, $kind:expr ) => { $crate::Error(&$crate::error_macros::FnContext { parameter: Some(stringify!($param)), .._THINDX_FN_CONTEXT }, ($kind).into()) } }
 // TODO: audit fn_param_error! for consistency
 macro_rules! fn_param_try_into  { ( $param:ident ) => { ($param).try_into().map_err(|err| fn_param_error!($param, err)) } }

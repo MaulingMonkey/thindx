@@ -55,7 +55,7 @@ fn main() {
 
                 if let Some(d) = device.as_ref() {
                     let reset = match d.test_cooperative_level() {
-                        Ok(()) => {
+                        Ok(_) => {
                             let bb = d.get_back_buffer(0, 0, BackBufferType::Mono).unwrap().get_desc().unwrap();
                             (bb.width, bb.height) != (window_size.width, window_size.height)
                         },

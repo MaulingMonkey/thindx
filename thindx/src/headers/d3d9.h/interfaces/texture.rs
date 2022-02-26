@@ -270,11 +270,11 @@ pub trait IDirect3DBaseTexture9Ext : AsSafe<IDirect3DBaseTexture9> {
     ///
     /// let _ = texture.set_auto_gen_filter_type(TextureFilterType::ConvolutionMono); // may not be supported
     ///
-    /// assert_eq!(D3DERR::INVALIDCALL, texture.set_auto_gen_filter_type(TextureFilterType::None).err());
-    /// assert_eq!(D3DERR::INVALIDCALL, texture.set_auto_gen_filter_type(TextureFilterType::from_unchecked(9001)).err());
-    /// assert_eq!(D3DERR::INVALIDCALL, texture.set_auto_gen_filter_type(TextureFilterType::from_unchecked(!0)).err());
-    /// assert_eq!(D3DERR::INVALIDCALL, texture.set_auto_gen_filter_type(TextureFilterType::from_unchecked(!0-4)).err());
-    /// assert_eq!(D3DERR::INVALIDCALL, texture.set_auto_gen_filter_type(TextureFilterType::from_unchecked(!0-100)).err());
+    /// assert_eq!(D3DERR::INVALIDCALL, texture.set_auto_gen_filter_type(TextureFilterType::None));
+    /// assert_eq!(D3DERR::INVALIDCALL, texture.set_auto_gen_filter_type(TextureFilterType::from_unchecked(9001)));
+    /// assert_eq!(D3DERR::INVALIDCALL, texture.set_auto_gen_filter_type(TextureFilterType::from_unchecked(!0)));
+    /// assert_eq!(D3DERR::INVALIDCALL, texture.set_auto_gen_filter_type(TextureFilterType::from_unchecked(!0-4)));
+    /// assert_eq!(D3DERR::INVALIDCALL, texture.set_auto_gen_filter_type(TextureFilterType::from_unchecked(!0-100)));
     /// ```
     fn set_auto_gen_filter_type(&self, filter_type: impl Into<TextureFilterType>) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DBaseTexture9Ext::set_auto_gen_filter_type => IDirect3DBaseTexture9::SetAutoGenFilterType);
@@ -366,11 +366,11 @@ pub trait IDirect3DCubeTexture9Ext : AsSafe<IDirect3DCubeTexture9> {
     /// texture.add_dirty_rect(CubeMapFace::PositiveX, ..).unwrap();
     /// texture.add_dirty_rect(CubeMapFace::PositiveY, (0,0) .. (128,128)).unwrap();
     ///
-    /// assert_eq!(D3DERR::INVALIDCALL, texture.add_dirty_rect(CubeMapFace::PositiveY, (-1, -1) .. (128, 128)).err(), "out of bounds");
-    /// assert_eq!(D3DERR::INVALIDCALL, texture.add_dirty_rect(CubeMapFace::PositiveY, (0, 0) .. (129, 129)).err(), "out of bounds");
-    /// assert_eq!(D3DERR::INVALIDCALL, texture.add_dirty_rect(CubeMapFace::PositiveY, (128, 128) .. (0, 0)).err(), "inverted bounds");
-    /// assert_eq!(D3DERR::INVALIDCALL, texture.add_dirty_rect(CubeMapFace::PositiveY, (i32::MIN, i32::MIN) .. (i32::MAX, i32::MAX)).err(), "out of bounds");
-    /// assert_eq!(D3DERR::INVALIDCALL, texture.add_dirty_rect(CubeMapFace::from_unchecked(6), ..).err(), "invalid face");
+    /// assert_eq!(D3DERR::INVALIDCALL, texture.add_dirty_rect(CubeMapFace::PositiveY, (-1, -1) .. (128, 128)), "out of bounds");
+    /// assert_eq!(D3DERR::INVALIDCALL, texture.add_dirty_rect(CubeMapFace::PositiveY, (0, 0) .. (129, 129)), "out of bounds");
+    /// assert_eq!(D3DERR::INVALIDCALL, texture.add_dirty_rect(CubeMapFace::PositiveY, (128, 128) .. (0, 0)), "inverted bounds");
+    /// assert_eq!(D3DERR::INVALIDCALL, texture.add_dirty_rect(CubeMapFace::PositiveY, (i32::MIN, i32::MIN) .. (i32::MAX, i32::MAX)), "out of bounds");
+    /// assert_eq!(D3DERR::INVALIDCALL, texture.add_dirty_rect(CubeMapFace::from_unchecked(6), ..), "invalid face");
     /// ```
     fn add_dirty_rect(&self, face: impl Into<CubeMapFace>, dirty_rect: impl IntoRectOrFull) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DCubeTexture9Ext::add_dirty_rect => IDirect3DCubeTexture9::AddDirtyRect);
@@ -394,9 +394,9 @@ pub trait IDirect3DCubeTexture9Ext : AsSafe<IDirect3DCubeTexture9> {
     /// # use dev::d3d9::*; let device = safe_device_pure();
     /// let texture = device.create_cube_texture(128, 8, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
     /// let surface0px : Surface = texture.get_cube_map_surface(CubeMapFace::PositiveX, 0).unwrap();
-    /// assert_eq!(D3DERR::INVALIDCALL, texture.get_cube_map_surface(CubeMapFace::PositiveX, 8).err(), "only levels 0 .. 7 are valid");
-    /// # assert_eq!(D3DERR::INVALIDCALL, texture.get_cube_map_surface(CubeMapFace::PositiveX, !0).err(), "level !0");
-    /// # assert_eq!(D3DERR::INVALIDCALL, texture.get_cube_map_surface(CubeMapFace::from_unchecked(!0), 0).err(), "invalid face");
+    /// assert_eq!(D3DERR::INVALIDCALL, texture.get_cube_map_surface(CubeMapFace::PositiveX, 8).map(|_|()), "only levels 0 .. 7 are valid");
+    /// # assert_eq!(D3DERR::INVALIDCALL, texture.get_cube_map_surface(CubeMapFace::PositiveX, !0).map(|_|()), "level !0");
+    /// # assert_eq!(D3DERR::INVALIDCALL, texture.get_cube_map_surface(CubeMapFace::from_unchecked(!0), 0).map(|_|()), "invalid face");
     /// ```
     fn get_cube_map_surface(&self, face: impl Into<CubeMapFace>, level: u32) -> Result<Surface, Error> {
         fn_context!(d3d9::IDirect3DCubeTexture9Ext::get_cube_map_surface => IDirect3DCubeTexture9::GetCubeMapSurface);
@@ -420,10 +420,10 @@ pub trait IDirect3DCubeTexture9Ext : AsSafe<IDirect3DCubeTexture9> {
     /// # use dev::d3d9::*; let device = safe_device_pure();
     /// let texture = device.create_cube_texture(128, 8, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
     /// let desc : SurfaceDesc = texture.get_level_desc(0).unwrap();
-    /// assert_eq!(D3DERR::INVALIDCALL, texture.get_level_desc(8).err(), "only levels 0..7 are valid");
-    /// # assert_eq!(D3DERR::INVALIDCALL, texture.get_level_desc(!0).err(), "!0");
-    /// # assert_eq!(D3DERR::INVALIDCALL, texture.get_level_desc(!0-4).err(), "!0-4");
-    /// # assert_eq!(D3DERR::INVALIDCALL, texture.get_level_desc(!0-100).err(), "!0-100");
+    /// assert_eq!(D3DERR::INVALIDCALL, texture.get_level_desc(8), "only levels 0..7 are valid");
+    /// # assert_eq!(D3DERR::INVALIDCALL, texture.get_level_desc(!0), "!0");
+    /// # assert_eq!(D3DERR::INVALIDCALL, texture.get_level_desc(!0-4), "!0-4");
+    /// # assert_eq!(D3DERR::INVALIDCALL, texture.get_level_desc(!0-100), "!0-100");
     /// ```
     fn get_level_desc(&self, level: u32) -> Result<SurfaceDesc, Error> {
         fn_context!(d3d9::IDirect3DCubeTexture9Ext::get_level_desc => IDirect3DCubeTexture9::GetLevelDesc);
@@ -561,10 +561,10 @@ pub trait IDirect3DTexture9Ext : AsSafe<IDirect3DTexture9> {
     /// texture.add_dirty_rect(..).unwrap();
     /// texture.add_dirty_rect((0,0) .. (128,128)).unwrap();
     ///
-    /// assert_eq!(D3DERR::INVALIDCALL, texture.add_dirty_rect((-1, -1) .. (128, 128)).err(), "out of bounds");
-    /// assert_eq!(D3DERR::INVALIDCALL, texture.add_dirty_rect((0, 0) .. (129, 129)).err(), "out of bounds");
-    /// assert_eq!(D3DERR::INVALIDCALL, texture.add_dirty_rect((128, 128) .. (0, 0)).err(), "inverted bounds");
-    /// assert_eq!(D3DERR::INVALIDCALL, texture.add_dirty_rect((i32::MIN, i32::MIN) .. (i32::MAX, i32::MAX)).err(), "out of bounds");
+    /// assert_eq!(D3DERR::INVALIDCALL, texture.add_dirty_rect((-1, -1) .. (128, 128)), "out of bounds");
+    /// assert_eq!(D3DERR::INVALIDCALL, texture.add_dirty_rect((0, 0) .. (129, 129)), "out of bounds");
+    /// assert_eq!(D3DERR::INVALIDCALL, texture.add_dirty_rect((128, 128) .. (0, 0)), "inverted bounds");
+    /// assert_eq!(D3DERR::INVALIDCALL, texture.add_dirty_rect((i32::MIN, i32::MIN) .. (i32::MAX, i32::MAX)), "out of bounds");
     /// ```
     fn add_dirty_rect(&self, dirty_rect: impl IntoRectOrFull) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DTexture9Ext::add_dirty_rect => IDirect3DTexture9::AddDirtyRect);
@@ -587,8 +587,8 @@ pub trait IDirect3DTexture9Ext : AsSafe<IDirect3DTexture9> {
     /// # use dev::d3d9::*; let device = safe_device_pure();
     /// let texture = device.create_texture(128, 128, 8, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
     /// let surface0px : Surface = texture.get_surface_level(0).unwrap();
-    /// assert_eq!(D3DERR::INVALIDCALL, texture.get_surface_level(8).err(), "only levels 0 .. 7 are valid");
-    /// # assert_eq!(D3DERR::INVALIDCALL, texture.get_surface_level(!0).err(), "level !0");
+    /// assert_eq!(D3DERR::INVALIDCALL, texture.get_surface_level(8).map(|_|()), "only levels 0 .. 7 are valid");
+    /// # assert_eq!(D3DERR::INVALIDCALL, texture.get_surface_level(!0).map(|_|()), "level !0");
     /// ```
     fn get_surface_level(&self, level: u32) -> Result<Surface, Error> {
         fn_context!(d3d9::IDirect3DTexture9Ext::get_surface_level => IDirect3DTexture9::GetSurfaceLevel);
@@ -611,10 +611,10 @@ pub trait IDirect3DTexture9Ext : AsSafe<IDirect3DTexture9> {
     /// # use dev::d3d9::*; let device = safe_device_pure();
     /// let texture = device.create_texture(128, 128, 8, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
     /// let desc : SurfaceDesc = texture.get_level_desc(0).unwrap();
-    /// assert_eq!(D3DERR::INVALIDCALL, texture.get_level_desc(8).err(), "only levels 0..7 are valid");
-    /// # assert_eq!(D3DERR::INVALIDCALL, texture.get_level_desc(!0).err(), "!0");
-    /// # assert_eq!(D3DERR::INVALIDCALL, texture.get_level_desc(!0-4).err(), "!0-4");
-    /// # assert_eq!(D3DERR::INVALIDCALL, texture.get_level_desc(!0-100).err(), "!0-100");
+    /// assert_eq!(D3DERR::INVALIDCALL, texture.get_level_desc(8), "only levels 0..7 are valid");
+    /// # assert_eq!(D3DERR::INVALIDCALL, texture.get_level_desc(!0), "!0");
+    /// # assert_eq!(D3DERR::INVALIDCALL, texture.get_level_desc(!0-4), "!0-4");
+    /// # assert_eq!(D3DERR::INVALIDCALL, texture.get_level_desc(!0-100), "!0-100");
     /// ```
     fn get_level_desc(&self, level: u32) -> Result<SurfaceDesc, Error> {
         fn_context!(d3d9::IDirect3DTexture9Ext::get_level_desc => IDirect3DTexture9::GetLevelDesc);
@@ -833,7 +833,7 @@ pub trait IDirect3DVolumeTexture9Ext : AsSafe<IDirect3DVolumeTexture9> {
     /// # use dev::d3d9::*; let device = device_pure();
     /// // Pool::Default textures cannot be locked
     /// let texture = device.create_volume_texture(32, 32, 32, 1, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
-    /// assert_eq!(D3DERR::INVALIDCALL, unsafe { texture.lock_box_unchecked(0, .., Lock::None) }.err());
+    /// assert_eq!(D3DERR::INVALIDCALL, unsafe { texture.lock_box_unchecked(0, .., Lock::None) });
     ///
     /// // Pool::Managed textures *can* be locked
     /// let data = [[[Color::argb(0xFF112233); 32]; 32]; 32];

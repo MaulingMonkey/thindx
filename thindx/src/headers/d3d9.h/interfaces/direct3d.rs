@@ -512,10 +512,10 @@ pub trait IDirect3D9Ext : AsSafe<IDirect3D9> + Sized {
     /// ```rust
     /// # use dev::d3d9::*; let d3d = d3d_test();
     /// let caps : Caps = d3d.get_device_caps(0, DevType::HAL).unwrap();
-    /// assert_eq!(caps.DeviceType,     DevType::HAL.into());
-    /// assert_eq!(caps.AdapterOrdinal, 0);
-    /// assert!(caps.MaxTextureWidth  > 0);
-    /// assert!(caps.MaxTextureHeight > 0);
+    /// assert_eq!(caps.device_type,        DevType::HAL);
+    /// assert_eq!(caps.adapter_ordinal,    0);
+    /// assert!(caps.max_texture_width    > 0);
+    /// assert!(caps.max_texture_height   > 0);
     /// // ...
     /// ```
     fn get_device_caps(&self, adapter: AdapterIndex, device_type: DevType) -> Result<Caps, Error> {
@@ -550,9 +550,9 @@ impl<T: AsSafe<IDirect3D9> + Sized> IDirect3D9Ext for T {}
             Direct3D::create(SdkVersion::DEFAULT9B.with_debug_enabled()).unwrap();
             Direct3D::create(SdkVersion::from(D3D_SDK_VERSION).with_debug_disabled()).unwrap();
             Direct3D::create(SdkVersion::from(D3D_SDK_VERSION).with_debug_enabled()).unwrap();
-            assert_eq!(THINERR::NONSPECIFIC, Direct3D::create(SdkVersion::from(0)                       ).err());
-            assert_eq!(THINERR::NONSPECIFIC, Direct3D::create(SdkVersion::from(0).with_debug_disabled() ).err());
-            assert_eq!(THINERR::NONSPECIFIC, Direct3D::create(SdkVersion::from(0).with_debug_enabled()  ).err());
+            assert_eq!(THINERR::NONSPECIFIC, Direct3D::create(SdkVersion::from(0)                       ).map(|_|()));
+            assert_eq!(THINERR::NONSPECIFIC, Direct3D::create(SdkVersion::from(0).with_debug_disabled() ).map(|_|()));
+            assert_eq!(THINERR::NONSPECIFIC, Direct3D::create(SdkVersion::from(0).with_debug_enabled()  ).map(|_|()));
         }
     }
 
@@ -627,7 +627,7 @@ impl<T: AsSafe<IDirect3D9> + Sized> IDirect3D9Ext for T {}
                     d3d.enum_adapter_modes(adapter, fmt, mode).unwrap_or_else(|err| panic!("enum_adapter_modes({}, {:?}, {}) failed: {}", adapter, fmt, mode, err));
                 }
                 for mode in modes..modes+100 {
-                    assert_eq!(D3DERR::INVALIDCALL, d3d.enum_adapter_modes(adapter, fmt, mode).map(|_| ()));
+                    assert_eq!(D3DERR::INVALIDCALL, d3d.enum_adapter_modes(adapter, fmt, mode));
                 }
             }
         }
@@ -635,9 +635,9 @@ impl<T: AsSafe<IDirect3D9> + Sized> IDirect3D9Ext for T {}
         // doublecheck that d3d doesn't segfault for out-of-bounds adapters or anything
         for adapter in [adapters+0, adapters+100, adapters+100000, adapters+10000000].iter().copied() {
             eprintln!("checking invalid adapter {} of {}", adapter+1, adapters);
-            assert_eq!(D3DERR::INVALIDCALL, d3d.enum_adapter_modes(adapter, Format::X8R8G8B8, 0).map(|_| ()));
-            assert_eq!(D3DERR::INVALIDCALL, d3d.enum_adapter_modes(adapter, Format::X8R8G8B8, 100).map(|_| ()));
-            assert_eq!(D3DERR::INVALIDCALL, d3d.enum_adapter_modes(adapter, Format::X8R8G8B8, 10000).map(|_| ()));
+            assert_eq!(D3DERR::INVALIDCALL, d3d.enum_adapter_modes(adapter, Format::X8R8G8B8, 0));
+            assert_eq!(D3DERR::INVALIDCALL, d3d.enum_adapter_modes(adapter, Format::X8R8G8B8, 100));
+            assert_eq!(D3DERR::INVALIDCALL, d3d.enum_adapter_modes(adapter, Format::X8R8G8B8, 10000));
         }
     }
 
@@ -653,7 +653,7 @@ impl<T: AsSafe<IDirect3D9> + Sized> IDirect3D9Ext for T {}
             d3d.get_adapter_display_mode(adapter).unwrap_or_else(|err| panic!("unable to query display mode of adapter {} of {}: {}", adapter+1, adapters, err));
         }
         for adapter in adapters..(100+adapters) {
-            assert_eq!(D3DERR::INVALIDCALL, d3d.get_adapter_display_mode(adapter).err());
+            assert_eq!(D3DERR::INVALIDCALL, d3d.get_adapter_display_mode(adapter));
         }
     }
 
@@ -668,13 +668,13 @@ impl<T: AsSafe<IDirect3D9> + Sized> IDirect3D9Ext for T {}
         let valid = 0;
         d3d.get_adapter_identifier(valid, 0                 ).unwrap();
         d3d.get_adapter_identifier(valid, D3DENUM_WHQL_LEVEL).unwrap();
-        assert_eq!(D3DERR::INVALIDCALL, d3d.get_adapter_identifier(valid, D3DENUM_WHQL_LEVEL+1).map(|_| ()));
-        assert_eq!(D3DERR::INVALIDCALL, d3d.get_adapter_identifier(valid, D3DENUM_WHQL_LEVEL+1000).map(|_| ()));
-        assert_eq!(D3DERR::INVALIDCALL, d3d.get_adapter_identifier(valid, D3DENUM_WHQL_LEVEL+1000000).map(|_| ()));
+        assert_eq!(D3DERR::INVALIDCALL, d3d.get_adapter_identifier(valid, D3DENUM_WHQL_LEVEL+1));
+        assert_eq!(D3DERR::INVALIDCALL, d3d.get_adapter_identifier(valid, D3DENUM_WHQL_LEVEL+1000));
+        assert_eq!(D3DERR::INVALIDCALL, d3d.get_adapter_identifier(valid, D3DENUM_WHQL_LEVEL+1000000));
 
         let invalid = 9001;
-        assert_eq!(D3DERR::INVALIDCALL, d3d.get_adapter_identifier(invalid, 0                   ).map(|_| ()));
-        assert_eq!(D3DERR::INVALIDCALL, d3d.get_adapter_identifier(invalid, D3DENUM_WHQL_LEVEL  ).map(|_| ()));
+        assert_eq!(D3DERR::INVALIDCALL, d3d.get_adapter_identifier(invalid, 0                   ));
+        assert_eq!(D3DERR::INVALIDCALL, d3d.get_adapter_identifier(invalid, D3DENUM_WHQL_LEVEL  ));
     }
 
     #[test] fn get_adapter_mode_count() {
@@ -718,19 +718,19 @@ impl<T: AsSafe<IDirect3D9> + Sized> IDirect3D9Ext for T {}
         d3d.get_device_caps(adapter, DevType::HAL).unwrap();
         d3d.get_device_caps(adapter, DevType::Ref).unwrap();
         d3d.get_device_caps(adapter, DevType::NullRef).unwrap();
-        assert_eq!(D3DERR::INVALIDDEVICE,   d3d.get_device_caps(adapter, DevType::from_unchecked(100)).map(|_| ()));
-        assert_eq!(D3DERR::INVALIDDEVICE,   d3d.get_device_caps(adapter, DevType::from_unchecked(10000)).map(|_| ()));
-        assert_eq!(D3DERR::INVALIDDEVICE,   d3d.get_device_caps(adapter, DevType::from_unchecked(1000000)).map(|_| ()));
-        assert_eq!(D3DERR::INVALIDDEVICE,   d3d.get_device_caps(adapter, DevType::from_unchecked(100000000)).map(|_| ()));
+        assert_eq!(D3DERR::INVALIDDEVICE,   d3d.get_device_caps(adapter, DevType::from_unchecked(100)));
+        assert_eq!(D3DERR::INVALIDDEVICE,   d3d.get_device_caps(adapter, DevType::from_unchecked(10000)));
+        assert_eq!(D3DERR::INVALIDDEVICE,   d3d.get_device_caps(adapter, DevType::from_unchecked(1000000)));
+        assert_eq!(D3DERR::INVALIDDEVICE,   d3d.get_device_caps(adapter, DevType::from_unchecked(100000000)));
 
         let adapter = 9001; // invalid
-        assert_eq!(D3DERR::INVALIDCALL,     d3d.get_device_caps(adapter, DevType::HAL).map(|_| ()));
-        assert_eq!(D3DERR::INVALIDCALL,     d3d.get_device_caps(adapter, DevType::Ref).map(|_| ()));
-        assert_eq!(D3DERR::INVALIDCALL,     d3d.get_device_caps(adapter, DevType::NullRef).map(|_| ()));
-        assert_eq!(D3DERR::INVALIDCALL,     d3d.get_device_caps(adapter, DevType::from_unchecked(100)).map(|_| ()));
-        assert_eq!(D3DERR::INVALIDCALL,     d3d.get_device_caps(adapter, DevType::from_unchecked(10000)).map(|_| ()));
-        assert_eq!(D3DERR::INVALIDCALL,     d3d.get_device_caps(adapter, DevType::from_unchecked(1000000)).map(|_| ()));
-        assert_eq!(D3DERR::INVALIDCALL,     d3d.get_device_caps(adapter, DevType::from_unchecked(100000000)).map(|_| ()));
+        assert_eq!(D3DERR::INVALIDCALL,     d3d.get_device_caps(adapter, DevType::HAL));
+        assert_eq!(D3DERR::INVALIDCALL,     d3d.get_device_caps(adapter, DevType::Ref));
+        assert_eq!(D3DERR::INVALIDCALL,     d3d.get_device_caps(adapter, DevType::NullRef));
+        assert_eq!(D3DERR::INVALIDCALL,     d3d.get_device_caps(adapter, DevType::from_unchecked(100)));
+        assert_eq!(D3DERR::INVALIDCALL,     d3d.get_device_caps(adapter, DevType::from_unchecked(10000)));
+        assert_eq!(D3DERR::INVALIDCALL,     d3d.get_device_caps(adapter, DevType::from_unchecked(1000000)));
+        assert_eq!(D3DERR::INVALIDCALL,     d3d.get_device_caps(adapter, DevType::from_unchecked(100000000)));
     }
 }
 

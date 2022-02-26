@@ -59,7 +59,7 @@ impl<'r> ShaderReflectionConstantBuffer<'r> {
     /// println!("{:#?}", desc);
     ///
     /// let invalid = scale4.get_constant_buffer_by_name("Nonexistant");
-    /// assert_eq!(Some(E::FAIL), invalid.get_desc().err().map(|e| e.kind()));
+    /// assert_eq!(E::FAIL, invalid.get_desc());
     /// ```
     ///
     /// ### Output
@@ -101,12 +101,12 @@ impl<'r> ShaderReflectionConstantBuffer<'r> {
     /// ).unwrap();
     ///
     /// let valid = scale4.get_constant_buffer_by_name("ExampleCBuffer");
-    /// println!("{:#?}",         valid.get_variable_by_index(0).get_desc().unwrap());
-    /// assert_eq!(Some(E::FAIL), valid.get_variable_by_index(1).get_desc().err().map(|e| e.kind()));
+    /// println!("{:#?}",   valid.get_variable_by_index(0).get_desc().unwrap());
+    /// assert_eq!(E::FAIL, valid.get_variable_by_index(1).get_desc());
     ///
     /// let invalid = scale4.get_constant_buffer_by_name("Nonexistant");
-    /// assert_eq!(Some(E::FAIL), invalid.get_variable_by_index(0).get_desc().err().map(|e| e.kind()));
-    /// assert_eq!(Some(E::FAIL), invalid.get_variable_by_index(1).get_desc().err().map(|e| e.kind()));
+    /// assert_eq!(E::FAIL, invalid.get_variable_by_index(0).get_desc());
+    /// assert_eq!(E::FAIL, invalid.get_variable_by_index(1).get_desc());
     /// ```
     ///
     /// ### Output
@@ -152,12 +152,12 @@ impl<'r> ShaderReflectionConstantBuffer<'r> {
     /// ).unwrap();
     ///
     /// let valid = scale4.get_constant_buffer_by_name("ExampleCBuffer");
-    /// println!("{:#?}",         valid.get_variable_by_name("scale").get_desc().unwrap());
-    /// assert_eq!(Some(E::FAIL), valid.get_variable_by_name("nope" ).get_desc().err().map(|e| e.kind()));
+    /// println!("{:#?}",   valid.get_variable_by_name("scale").get_desc().unwrap());
+    /// assert_eq!(E::FAIL, valid.get_variable_by_name("nope" ).get_desc());
     ///
     /// let invalid = scale4.get_constant_buffer_by_name("Nonexistant");
-    /// assert_eq!(Some(E::FAIL), invalid.get_variable_by_name("scale").get_desc().err().map(|e| e.kind()));
-    /// assert_eq!(Some(E::FAIL), invalid.get_variable_by_name("nope" ).get_desc().err().map(|e| e.kind()));
+    /// assert_eq!(E::FAIL, invalid.get_variable_by_name("scale").get_desc());
+    /// assert_eq!(E::FAIL, invalid.get_variable_by_name("nope" ).get_desc());
     /// ```
     ///
     /// ### Output

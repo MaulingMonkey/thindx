@@ -63,7 +63,7 @@ pub trait IDirect3DSurface9Ext : AsSafe<IDirect3DSurface9> {
     /// # let texture = device.create_texture(128, 128, 8, Usage::None, Format::A8R8G8B8, Pool::Managed, ()).unwrap();
     /// # let surface = texture.get_surface_level(0).unwrap();
     /// let texture = surface.get_container::<Texture>().unwrap();
-    /// assert_eq!(E::NOINTERFACE, surface.get_container::<Device>().err());
+    /// assert_eq!(E::NOINTERFACE, surface.get_container::<Device>().map(|_|()));
     /// ```
     fn get_container<C: Raw>(&self) -> Result<C, Error> where C::Raw : Interface {
         fn_context!(d3d9::IDirect3DSurface9Ext::get_container => IDirect3DSurface9::GetContainer);
@@ -89,7 +89,7 @@ pub trait IDirect3DSurface9Ext : AsSafe<IDirect3DSurface9> {
     /// let dc = surface.get_dc().unwrap();
     /// assert!(!dc.is_null());
     ///
-    /// assert_eq!(D3DERR::INVALIDCALL, surface.get_dc().err(), "HDC already acquired");
+    /// assert_eq!(D3DERR::INVALIDCALL, surface.get_dc(), "HDC already acquired");
     /// ```
     fn get_dc(&self) -> Result<HDC, Error> {
         fn_context!(d3d9::IDirect3DSurface9Ext::get_dc => IDirect3DSurface9::GetDC);
@@ -180,8 +180,8 @@ pub trait IDirect3DSurface9Ext : AsSafe<IDirect3DSurface9> {
     /// let dc = surface.get_dc().unwrap();
     /// assert!(!dc.is_null());
     ///
-    /// assert_eq!(D3DERR::INVALIDCALL, surface.get_dc().err(), "HDC already acquired");
-    /// assert_eq!(D3DERR::INVALIDCALL, surface.release_dc(42 as _).err(), "not the right HDC");
+    /// assert_eq!(D3DERR::INVALIDCALL, surface.get_dc(), "HDC already acquired");
+    /// assert_eq!(D3DERR::INVALIDCALL, surface.release_dc(42 as _), "not the right HDC");
     ///
     /// surface.release_dc(dc).unwrap();
     /// let dc = surface.get_dc().unwrap();

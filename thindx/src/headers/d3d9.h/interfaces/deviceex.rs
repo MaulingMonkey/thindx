@@ -9,6 +9,8 @@ use winapi::shared::d3d9::{IDirect3DDevice9Ex, IDirect3DDevice9};
 use winapi::um::unknwnbase::IUnknown;
 use winapi::um::wingdi::*;
 
+use winresult::*;
+
 use std::convert::TryInto;
 use std::ptr::*;
 
@@ -88,9 +90,9 @@ pub trait IDirect3DDevice9ExExt : AsSafe<IDirect3DDevice9Ex> {
     /// # use dev::d3d9::*; let device = device_ex_test();
     /// // TODO
     /// ```
-    fn check_device_state(&self, destination_window: impl AsHWND) -> ErrorKind {
+    fn check_device_state(&self, destination_window: impl AsHWND) -> HResult {
         fn_context!(d3d9::IDirect3DDevice9ExExt::check_device_state => IDirect3DDevice9Ex::CheckDeviceState);
-        ErrorKind(unsafe { self.as_winapi().CheckDeviceState(destination_window.as_hwnd()) })
+        HResult::from(unsafe { self.as_winapi().CheckDeviceState(destination_window.as_hwnd()) } as u32)
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-checkresourceresidency )\]
@@ -99,9 +101,10 @@ pub trait IDirect3DDevice9ExExt : AsSafe<IDirect3DDevice9Ex> {
     /// Checks an array of resources to determine if it is likely that they will cause a large stall at Draw time because the system must make the resources GPU-accessible.
     ///
     /// ### Returns
-    /// *   [THINERR::SLICE_TOO_LARGE]  if `resources.len()` > `65535`
-    /// *   [D3DERR::INVALIDCALL]       ???
-    /// *   Ok(
+    /// *   Ok([S::OK])
+    /// *   Ok([S::NOT_RESIDENT])
+    /// *   Err([THINERR::SLICE_TOO_LARGE]) if `resources.len()` > `65535`
+    /// *   Err([D3DERR::INVALIDCALL])      ???
     ///
     /// ### Example
     /// ```rust
@@ -109,19 +112,16 @@ pub trait IDirect3DDevice9ExExt : AsSafe<IDirect3DDevice9Ex> {
     /// // TODO
     /// ```
     #[doc(hidden)]
-    fn _xxx_check_resource_residency(&self, resources: &mut [Resource]) -> ErrorKind {
+    fn _xxx_check_resource_residency(&self, resources: &mut [Resource]) -> Result<HResultSuccess, HResultError> {
         fn_context!(d3d9::IDirect3DDevice9ExExt::_xxx_check_resource_residency => IDirect3DDevice9Ex::CheckResourceResidency);
         // FIXME: Taking resources as a value slice is bloody annoying, but we can't cast `&[&Resource]` sanely.
         // FIXME: mut casts bellow are sketch as heck
 
         // "... up to a maximum of 65535."
-        let len : u16 = match resources.len().try_into() {
-            Ok(len) => len,
-            Err(_) => return THINERR::SLICE_TOO_LARGE,
-        };
+        let len : u16 = resources.len().try_into().map_err(|_| THINERR::SLICE_TOO_LARGE)?;
         let len = u32::from(len);
         let resources = resources.as_mut_ptr().cast(); // XXX
-        ErrorKind(unsafe { self.as_winapi().CheckResourceResidency(resources, len) })
+        HResult::from(unsafe { self.as_winapi().CheckResourceResidency(resources, len) } as u32).succeeded()
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-composerects)\]

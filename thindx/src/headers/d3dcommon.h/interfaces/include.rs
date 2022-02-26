@@ -160,7 +160,7 @@ impl Include<()> {
 
                     *o_data     = unsafe { ThinMetaBlob::<M>::to_data(tmb) }.cast();
                     *o_bytes    = len32;
-                    S::OK
+                    return S::OK.into();
                 },
                 Err(kind) => kind,
             }.into()
@@ -194,7 +194,7 @@ impl Include<()> {
     ///
     /// let include = d3d::Include::from_path_fn(
     ///     r"thindx\test\data",
-    ///     |dir, _t, file| Ok(dir.join(file.to_str().map_err(|_| D3D11_ERROR::FILE_NOT_FOUND)?))
+    ///     |dir, _t, file| Ok(dir.join(file.to_str().map_err(|_| D3D11::ERROR_FILE_NOT_FOUND)?))
     /// );
     ///
     /// let compiled = d3dc.compile_from_file(
@@ -210,8 +210,8 @@ impl Include<()> {
                 None                => dir.as_ref(),
             };
             let mut path = f(dir, include_type, file_name)?;
-            let data = std::fs::read(&path).map_err(|err| err.raw_os_error().map_or(D3D11_ERROR::FILE_NOT_FOUND, |raw| ErrorKind::from_win32(raw as _)))?;
-            if !path.pop() { return Err(D3D11_ERROR::FILE_NOT_FOUND); } // path: filename -> dir
+            let data = std::fs::read(&path).map_err(|err| err.raw_os_error().map_or(ErrorKind::from(D3D11::ERROR_FILE_NOT_FOUND), |raw| ErrorKind::from_win32(raw as _)))?;
+            if !path.pop() { return Err(D3D11::ERROR_FILE_NOT_FOUND.into()); } // path: filename -> dir
             Ok((data, path))
         })
     }

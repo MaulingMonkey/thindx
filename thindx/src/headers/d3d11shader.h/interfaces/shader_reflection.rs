@@ -70,17 +70,17 @@ impl ShaderReflection {
     /// let _ = cb0.get_desc().unwrap();
     ///
     /// let cb1 = vs.get_constant_buffer_by_index(1);
-    /// assert_eq!(Some(E::FAIL), cb1.get_desc().err().map(|err| err.kind()));
+    /// assert_eq!(E::FAIL, cb1.get_desc());
     /// #
-    /// # assert_eq!(Some(E::FAIL), vs.get_constant_buffer_by_index(100).get_desc().err().map(|err| err.kind()));
-    /// # assert_eq!(Some(E::FAIL), vs.get_constant_buffer_by_index(10000).get_desc().err().map(|err| err.kind()));
-    /// # assert_eq!(Some(E::FAIL), vs.get_constant_buffer_by_index(1000000).get_desc().err().map(|err| err.kind()));
-    /// # assert_eq!(Some(E::FAIL), vs.get_constant_buffer_by_index(!0-100).get_desc().err().map(|err| err.kind()));
-    /// # assert_eq!(Some(E::FAIL), vs.get_constant_buffer_by_index(!0-16).get_desc().err().map(|err| err.kind()));
-    /// # assert_eq!(Some(E::FAIL), vs.get_constant_buffer_by_index(!0-10).get_desc().err().map(|err| err.kind()));
-    /// # assert_eq!(Some(E::FAIL), vs.get_constant_buffer_by_index(!0-4).get_desc().err().map(|err| err.kind()));
-    /// # assert_eq!(Some(E::FAIL), vs.get_constant_buffer_by_index(!0-1).get_desc().err().map(|err| err.kind()));
-    /// # assert_eq!(Some(E::FAIL), vs.get_constant_buffer_by_index(!0).get_desc().err().map(|err| err.kind()));
+    /// # assert_eq!(E::FAIL, vs.get_constant_buffer_by_index(100).get_desc());
+    /// # assert_eq!(E::FAIL, vs.get_constant_buffer_by_index(10000).get_desc());
+    /// # assert_eq!(E::FAIL, vs.get_constant_buffer_by_index(1000000).get_desc());
+    /// # assert_eq!(E::FAIL, vs.get_constant_buffer_by_index(!0-100).get_desc());
+    /// # assert_eq!(E::FAIL, vs.get_constant_buffer_by_index(!0-16).get_desc());
+    /// # assert_eq!(E::FAIL, vs.get_constant_buffer_by_index(!0-10).get_desc());
+    /// # assert_eq!(E::FAIL, vs.get_constant_buffer_by_index(!0-4).get_desc());
+    /// # assert_eq!(E::FAIL, vs.get_constant_buffer_by_index(!0-1).get_desc());
+    /// # assert_eq!(E::FAIL, vs.get_constant_buffer_by_index(!0).get_desc());
     /// ```
     //#allow_missing_argument_docs
     pub fn get_constant_buffer_by_index(&self, index: u32) -> ShaderReflectionConstantBuffer {
@@ -107,10 +107,10 @@ impl ShaderReflection {
     /// let _ = cb0.get_desc().unwrap();
     ///
     /// let cb1 = vs.get_constant_buffer_by_name("Invalid");
-    /// assert_eq!(Some(E::FAIL), cb1.get_desc().err().map(|err| err.kind()));
+    /// assert_eq!(E::FAIL, cb1.get_desc());
     /// #
-    /// # assert_eq!(Some(E::FAIL), vs.get_constant_buffer_by_name("").get_desc().err().map(|err| err.kind()));
-    /// # assert_eq!(Some(E::FAIL), vs.get_constant_buffer_by_name("ExampleCBuffer\0").get_desc().err().map(|err| err.kind()));
+    /// # assert_eq!(E::FAIL, vs.get_constant_buffer_by_name("").get_desc());
+    /// # assert_eq!(E::FAIL, vs.get_constant_buffer_by_name("ExampleCBuffer\0").get_desc());
     /// ```
     //#allow_missing_argument_docs
     pub fn get_constant_buffer_by_name(&self, name: impl TryIntoAsCStr) -> ShaderReflectionConstantBuffer {
@@ -202,16 +202,16 @@ impl ShaderReflection {
     /// # let vs = d3dc.reflect11(&vs).unwrap();
     /// assert_eq!(0,               vs.get_input_parameter_desc(0).unwrap().semantic_index);
     /// assert_eq!(0,               vs.get_input_parameter_desc(1).unwrap().semantic_index);
-    /// assert_eq!(E::INVALIDARG,   vs.get_input_parameter_desc(2).unwrap_err().kind());
-    /// # assert_eq!(E::INVALIDARG, vs.get_input_parameter_desc(100).unwrap_err().kind());
-    /// # assert_eq!(E::INVALIDARG, vs.get_input_parameter_desc(10000).unwrap_err().kind());
-    /// # assert_eq!(E::INVALIDARG, vs.get_input_parameter_desc(1000000).unwrap_err().kind());
-    /// # assert_eq!(E::INVALIDARG, vs.get_input_parameter_desc(!0-100).unwrap_err().kind());
-    /// # assert_eq!(E::INVALIDARG, vs.get_input_parameter_desc(!0-16).unwrap_err().kind());
-    /// # assert_eq!(E::INVALIDARG, vs.get_input_parameter_desc(!0-8).unwrap_err().kind());
-    /// # assert_eq!(E::INVALIDARG, vs.get_input_parameter_desc(!0-4).unwrap_err().kind());
-    /// # assert_eq!(E::INVALIDARG, vs.get_input_parameter_desc(!0-1).unwrap_err().kind());
-    /// # assert_eq!(E::INVALIDARG, vs.get_input_parameter_desc(!0).unwrap_err().kind());
+    /// assert_eq!(E::INVALIDARG,   vs.get_input_parameter_desc(2));
+    /// # assert_eq!(E::INVALIDARG, vs.get_input_parameter_desc(100));
+    /// # assert_eq!(E::INVALIDARG, vs.get_input_parameter_desc(10000));
+    /// # assert_eq!(E::INVALIDARG, vs.get_input_parameter_desc(1000000));
+    /// # assert_eq!(E::INVALIDARG, vs.get_input_parameter_desc(!0-100));
+    /// # assert_eq!(E::INVALIDARG, vs.get_input_parameter_desc(!0-16));
+    /// # assert_eq!(E::INVALIDARG, vs.get_input_parameter_desc(!0-8));
+    /// # assert_eq!(E::INVALIDARG, vs.get_input_parameter_desc(!0-4));
+    /// # assert_eq!(E::INVALIDARG, vs.get_input_parameter_desc(!0-1));
+    /// # assert_eq!(E::INVALIDARG, vs.get_input_parameter_desc(!0));
     /// ```
     //#allow_missing_argument_docs
     pub fn get_input_parameter_desc(&self, parameter_index: u32) -> Result<SignatureParameterDesc, Error> {
@@ -314,16 +314,16 @@ impl ShaderReflection {
     /// # let vs = d3dc.reflect11(&vs).unwrap();
     /// assert_eq!(0,               vs.get_output_parameter_desc(0).unwrap().semantic_index);
     /// assert_eq!(0,               vs.get_output_parameter_desc(1).unwrap().semantic_index);
-    /// assert_eq!(E::INVALIDARG,   vs.get_output_parameter_desc(2).unwrap_err().kind());
-    /// # assert_eq!(E::INVALIDARG, vs.get_output_parameter_desc(100).unwrap_err().kind());
-    /// # assert_eq!(E::INVALIDARG, vs.get_output_parameter_desc(10000).unwrap_err().kind());
-    /// # assert_eq!(E::INVALIDARG, vs.get_output_parameter_desc(1000000).unwrap_err().kind());
-    /// # assert_eq!(E::INVALIDARG, vs.get_output_parameter_desc(!0-100).unwrap_err().kind());
-    /// # assert_eq!(E::INVALIDARG, vs.get_output_parameter_desc(!0-16).unwrap_err().kind());
-    /// # assert_eq!(E::INVALIDARG, vs.get_output_parameter_desc(!0-8).unwrap_err().kind());
-    /// # assert_eq!(E::INVALIDARG, vs.get_output_parameter_desc(!0-4).unwrap_err().kind());
-    /// # assert_eq!(E::INVALIDARG, vs.get_output_parameter_desc(!0-1).unwrap_err().kind());
-    /// # assert_eq!(E::INVALIDARG, vs.get_output_parameter_desc(!0).unwrap_err().kind());
+    /// assert_eq!(E::INVALIDARG,   vs.get_output_parameter_desc(2));
+    /// # assert_eq!(E::INVALIDARG, vs.get_output_parameter_desc(100));
+    /// # assert_eq!(E::INVALIDARG, vs.get_output_parameter_desc(10000));
+    /// # assert_eq!(E::INVALIDARG, vs.get_output_parameter_desc(1000000));
+    /// # assert_eq!(E::INVALIDARG, vs.get_output_parameter_desc(!0-100));
+    /// # assert_eq!(E::INVALIDARG, vs.get_output_parameter_desc(!0-16));
+    /// # assert_eq!(E::INVALIDARG, vs.get_output_parameter_desc(!0-8));
+    /// # assert_eq!(E::INVALIDARG, vs.get_output_parameter_desc(!0-4));
+    /// # assert_eq!(E::INVALIDARG, vs.get_output_parameter_desc(!0-1));
+    /// # assert_eq!(E::INVALIDARG, vs.get_output_parameter_desc(!0));
     /// ```
     //#allow_missing_argument_docs
     pub fn get_output_parameter_desc(&self, parameter_index: u32) -> Result<SignatureParameterDesc, Error> {
@@ -348,16 +348,16 @@ impl ShaderReflection {
     /// # let vs = d3dc.compile_from_file(r"test\data\basic.hlsl", None, None, "vs_main", "vs_4_0", d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
     /// # let vs = d3dc.reflect11(&vs).unwrap();
     /// // TODO: proper examples
-    /// assert_eq!(E::INVALIDARG,   vs.get_patch_constant_parameter_desc(2).unwrap_err().kind());
-    /// # assert_eq!(E::INVALIDARG, vs.get_patch_constant_parameter_desc(100).unwrap_err().kind());
-    /// # assert_eq!(E::INVALIDARG, vs.get_patch_constant_parameter_desc(10000).unwrap_err().kind());
-    /// # assert_eq!(E::INVALIDARG, vs.get_patch_constant_parameter_desc(1000000).unwrap_err().kind());
-    /// # assert_eq!(E::INVALIDARG, vs.get_patch_constant_parameter_desc(!0-100).unwrap_err().kind());
-    /// # assert_eq!(E::INVALIDARG, vs.get_patch_constant_parameter_desc(!0-16).unwrap_err().kind());
-    /// # assert_eq!(E::INVALIDARG, vs.get_patch_constant_parameter_desc(!0-8).unwrap_err().kind());
-    /// # assert_eq!(E::INVALIDARG, vs.get_patch_constant_parameter_desc(!0-4).unwrap_err().kind());
-    /// # assert_eq!(E::INVALIDARG, vs.get_patch_constant_parameter_desc(!0-1).unwrap_err().kind());
-    /// # assert_eq!(E::INVALIDARG, vs.get_patch_constant_parameter_desc(!0).unwrap_err().kind());
+    /// assert_eq!(E::INVALIDARG,   vs.get_patch_constant_parameter_desc(2));
+    /// # assert_eq!(E::INVALIDARG, vs.get_patch_constant_parameter_desc(100));
+    /// # assert_eq!(E::INVALIDARG, vs.get_patch_constant_parameter_desc(10000));
+    /// # assert_eq!(E::INVALIDARG, vs.get_patch_constant_parameter_desc(1000000));
+    /// # assert_eq!(E::INVALIDARG, vs.get_patch_constant_parameter_desc(!0-100));
+    /// # assert_eq!(E::INVALIDARG, vs.get_patch_constant_parameter_desc(!0-16));
+    /// # assert_eq!(E::INVALIDARG, vs.get_patch_constant_parameter_desc(!0-8));
+    /// # assert_eq!(E::INVALIDARG, vs.get_patch_constant_parameter_desc(!0-4));
+    /// # assert_eq!(E::INVALIDARG, vs.get_patch_constant_parameter_desc(!0-1));
+    /// # assert_eq!(E::INVALIDARG, vs.get_patch_constant_parameter_desc(!0));
     /// ```
     //#allow_missing_argument_docs
     pub fn get_patch_constant_parameter_desc(&self, parameter_index: u32) -> Result<SignatureParameterDesc, Error> {
@@ -402,19 +402,18 @@ impl ShaderReflection {
     /// let ex = vs.get_resource_binding_desc(0).unwrap();
     /// assert_eq!(ex.ty, d3d::SIT::CBuffer);
     ///
-    /// let err = vs.get_resource_binding_desc(1).err().unwrap().kind();
-    /// assert_eq!(err, E::INVALIDARG);
+    /// assert_eq!(E::INVALIDARG, vs.get_resource_binding_desc(1));
     /// #
-    /// # assert_eq!(vs.get_resource_binding_desc(100).err().unwrap().kind(), E::INVALIDARG);
-    /// # assert_eq!(vs.get_resource_binding_desc(10000).err().unwrap().kind(), E::INVALIDARG);
-    /// # assert_eq!(vs.get_resource_binding_desc(1000000).err().unwrap().kind(), E::INVALIDARG);
-    /// # assert_eq!(vs.get_resource_binding_desc(!0-100).err().unwrap().kind(), E::INVALIDARG);
-    /// # assert_eq!(vs.get_resource_binding_desc(!0-16).err().unwrap().kind(), E::INVALIDARG);
-    /// # assert_eq!(vs.get_resource_binding_desc(!0-10).err().unwrap().kind(), E::INVALIDARG);
-    /// # assert_eq!(vs.get_resource_binding_desc(!0-8).err().unwrap().kind(), E::INVALIDARG);
-    /// # assert_eq!(vs.get_resource_binding_desc(!0-4).err().unwrap().kind(), E::INVALIDARG);
-    /// # assert_eq!(vs.get_resource_binding_desc(!0-1).err().unwrap().kind(), E::INVALIDARG);
-    /// # assert_eq!(vs.get_resource_binding_desc(!0).err().unwrap().kind(), E::INVALIDARG);
+    /// # assert_eq!(E::INVALIDARG, vs.get_resource_binding_desc(100));
+    /// # assert_eq!(E::INVALIDARG, vs.get_resource_binding_desc(10000));
+    /// # assert_eq!(E::INVALIDARG, vs.get_resource_binding_desc(1000000));
+    /// # assert_eq!(E::INVALIDARG, vs.get_resource_binding_desc(!0-100));
+    /// # assert_eq!(E::INVALIDARG, vs.get_resource_binding_desc(!0-16));
+    /// # assert_eq!(E::INVALIDARG, vs.get_resource_binding_desc(!0-10));
+    /// # assert_eq!(E::INVALIDARG, vs.get_resource_binding_desc(!0-8));
+    /// # assert_eq!(E::INVALIDARG, vs.get_resource_binding_desc(!0-4));
+    /// # assert_eq!(E::INVALIDARG, vs.get_resource_binding_desc(!0-1));
+    /// # assert_eq!(E::INVALIDARG, vs.get_resource_binding_desc(!0));
     /// ```
     //#allow_missing_argument_docs
     pub fn get_resource_binding_desc(&self, resource_index: u32) -> Result<ShaderInputBindDesc, Error> {
@@ -441,11 +440,9 @@ impl ShaderReflection {
     /// let ex = vs.get_resource_binding_desc_by_name("ExampleCBuffer").unwrap();
     /// assert_eq!(ex.ty, d3d::SIT::CBuffer);
     ///
-    /// let err = vs.get_resource_binding_desc_by_name("Invalid").err().unwrap().kind();
-    /// assert_eq!(err, E::INVALIDARG);
-    /// #
-    /// # assert_eq!(vs.get_resource_binding_desc_by_name("ExampleCBuffer\0").err().unwrap().kind(), E::INVALIDARG);
-    /// # assert_eq!(vs.get_resource_binding_desc_by_name("").err().unwrap().kind(), E::INVALIDARG);
+    /// assert_eq!(E::INVALIDARG, vs.get_resource_binding_desc_by_name("Invalid"));
+    /// assert_eq!(E::INVALIDARG, vs.get_resource_binding_desc_by_name("ExampleCBuffer\0"));
+    /// assert_eq!(E::INVALIDARG, vs.get_resource_binding_desc_by_name(""));
     /// ```
     //#allow_missing_argument_docs
     pub fn get_resource_binding_desc_by_name(&self, name: impl TryIntoAsCStr) -> Result<ShaderInputBindDesc, Error> {
@@ -499,11 +496,10 @@ impl ShaderReflection {
     /// assert_eq!(tint.start_offset, 0, "unexpected tint.start_offset");
     /// assert_eq!(tint.size,        16, "unexpected tint.size");
     ///
-    /// let invalid = vs.get_variable_by_name("invalid").get_desc().unwrap_err();
-    /// assert_eq!(invalid.kind(), E::FAIL);
+    /// assert_eq!(E::FAIL, vs.get_variable_by_name("invalid").get_desc());
     /// #
-    /// # assert_eq!(vs.get_variable_by_name("tint\0").get_desc().unwrap_err().kind(), E::FAIL);
-    /// # assert_eq!(vs.get_variable_by_name("").get_desc().unwrap_err().kind(), E::FAIL);
+    /// # assert_eq!(vs.get_variable_by_name("tint\0").get_desc(), E::FAIL);
+    /// # assert_eq!(vs.get_variable_by_name("").get_desc(), E::FAIL);
     /// ```
     //#allow_missing_argument_docs
     pub fn get_variable_by_name(&self, name: impl TryIntoAsCStr) -> ShaderReflectionVariable {
