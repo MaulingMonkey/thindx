@@ -32,9 +32,6 @@ impl Error {
 
     /// Returns the [ErrorKind] of the error
     pub fn kind(&self) -> ErrorKind { self.1 }
-
-    /// Returns the [HRESULT] of the error
-    pub fn hresult(&self) -> HRESULT { self.1.to_winapi() }
 }
 
 impl Debug   for Error { fn fmt(&self, fmt: &mut Formatter) -> fmt::Result { write!(fmt, "Error({:?}, {:?})", self.method(), self.1) } }
