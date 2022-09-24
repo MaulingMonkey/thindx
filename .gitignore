@@ -9,7 +9,7 @@
 
 # build output (copied from workspace root)
 /thindx/LICENSE*
-/thindx/Readme.md
+#/thindx/Readme.md      # checkin so this is git-dependency ready
 
 # build output
 /xtask/target
