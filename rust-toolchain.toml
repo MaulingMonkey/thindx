@@ -1,4 +1,4 @@
 [toolchain]
-channel = "1.58.1"
+channel = "1.63.0"  # abistr 0.2.0-rc3 MSRV
 targets = [ "x86_64-pc-windows-msvc", "i686-pc-windows-msvc" ]
 profile = "minimal"
