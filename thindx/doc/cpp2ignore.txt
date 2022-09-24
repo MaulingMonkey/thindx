@@ -1,3 +1,4 @@
 AsyncIUnknown
+DECLSPEC_XFGVIRT
 IClassFactory
 INTERFACE

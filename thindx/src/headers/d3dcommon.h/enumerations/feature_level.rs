@@ -28,6 +28,7 @@ enumish! { FeatureLevel => D3D_FEATURE_LEVEL; default: 0; _1_0_Core, _9_1, _9_2,
     pub const _11_1     : FeatureLevel = FeatureLevel(D3D_FEATURE_LEVEL_11_1);
     pub const _12_0     : FeatureLevel = FeatureLevel(D3D_FEATURE_LEVEL_12_0);
     pub const _12_1     : FeatureLevel = FeatureLevel(D3D_FEATURE_LEVEL_12_1);
+    pub const _12_2     : FeatureLevel = FeatureLevel(D3D_FEATURE_LEVEL_12_2);
 }
 
 //#cpp2rust D3D_FEATURE_LEVEL           = d3d::FeatureLevel
@@ -42,3 +43,7 @@ enumish! { FeatureLevel => D3D_FEATURE_LEVEL; default: 0; _1_0_Core, _9_1, _9_2,
 //#cpp2rust D3D_FEATURE_LEVEL_11_1      = d3d::FeatureLevel::_11_1
 //#cpp2rust D3D_FEATURE_LEVEL_12_0      = d3d::FeatureLevel::_12_0
 //#cpp2rust D3D_FEATURE_LEVEL_12_1      = d3d::FeatureLevel::_12_1
+//#cpp2rust D3D_FEATURE_LEVEL_12_2      = d3d::FeatureLevel::_12_2
+
+// C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\d3dcommon.h
+const D3D_FEATURE_LEVEL_12_2 : u32 = 0xc200;

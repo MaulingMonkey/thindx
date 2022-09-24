@@ -2,7 +2,7 @@
 
 #![warn(rustdoc::broken_intra_doc_links)]
 
-//! Rust ⮀ C++ coverage information based on Windows SDK 10.0.19041.0
+//! Rust ⮀ C++ coverage information based on Windows SDK 10.0.22621.0
 //!
 //! ⚠️ Scanned C++ definitions are not yet complete.
 //! Based on [MaulingMonkey/windows-sdk-scanner](https://github.com/MaulingMonkey/windows-sdk-scanner).
@@ -13,7 +13,7 @@
 //! | ---------- | ---------- | ------- | ----- | --------- | --------- | ------ |
 //! | [guiddef.h](const@guiddef_h) |   | ✔️ 1 of 1 |   |   | ✔️ 7 of 7 | ✔️ 7 of 7 |
 //! | [unknwn.h](const@unknwn_h) | ✔️ 1 of 1 |   |   |   |   |   |
-//! | [d3dcommon.h](const@d3dcommon_h) | ⚠️ 2 of 3 | ✔️ 1 of 1 | ✔️ 22 of 22 |   | ⚠️ 555 of 575 | ✔️ 4 of 4 |
+//! | [d3dcommon.h](const@d3dcommon_h) | ⚠️ 2 of 3 | ✔️ 1 of 1 | ✔️ 22 of 22 |   | ⚠️ 561 of 610 | ✔️ 4 of 4 |
 //! | [d3dcompiler.h](const@d3dcompiler_h) |   | ✔️ 1 of 1 | ✔️ 2 of 2 |   | ⚠️ 60 of 71 |   |
 //! | [d3d9.h](const@d3d9_h) | ⚠️ 20 of 24 |   |   | ✔️ 9 of 9 | ⚠️ 64 of 72 | ✔️ 3 of 3 |
 //! | [d3d9caps.h](const@d3d9caps_h) |   | ⚠️ 3 of 5 |   |   | ⚠️ 213 of 249 |   |
@@ -113,6 +113,7 @@ pub const unknwn_h : cxx_header = cxx_header;
 /// * `D3D_FEATURE_LEVEL_11_1`&nbsp;→ [`d3d::FeatureLevel::_11_1`] <br>
 /// * `D3D_FEATURE_LEVEL_12_0`&nbsp;→ [`d3d::FeatureLevel::_12_0`] <br>
 /// * `D3D_FEATURE_LEVEL_12_1`&nbsp;→ [`d3d::FeatureLevel::_12_1`] <br>
+/// * `D3D_FEATURE_LEVEL_12_2`&nbsp;→ [`d3d::FeatureLevel::_12_2`] <br>
 /// * `D3D_FEATURE_LEVEL_1_0_CORE`&nbsp;→ [`d3d::FeatureLevel::_1_0_Core`] <br>
 /// * `D3D_FEATURE_LEVEL_9_1`&nbsp;→ [`d3d::FeatureLevel::_9_1`] <br>
 /// * `D3D_FEATURE_LEVEL_9_2`&nbsp;→ [`d3d::FeatureLevel::_9_2`] <br>
@@ -558,9 +559,12 @@ pub const unknwn_h : cxx_header = cxx_header;
 /// * `D3D_SVT_DOMAINSHADER`&nbsp;→ [`d3d::SVT::DomainShader`] <br>
 /// * `D3D_SVT_DOUBLE`&nbsp;→ [`d3d::SVT::Double`] <br>
 /// * `D3D_SVT_FLOAT`&nbsp;→ [`d3d::SVT::Float`] <br>
+/// * `D3D_SVT_FLOAT16`&nbsp;→ [`d3d::SVT::Float16`] <br>
 /// * `D3D_SVT_GEOMETRYSHADER`&nbsp;→ [`d3d::SVT::GeometryShader`] <br>
 /// * `D3D_SVT_HULLSHADER`&nbsp;→ [`d3d::SVT::HullShader`] <br>
 /// * `D3D_SVT_INT`&nbsp;→ [`d3d::SVT::Int`] <br>
+/// * `D3D_SVT_INT16`&nbsp;→ [`d3d::SVT::Int16`] <br>
+/// * `D3D_SVT_INT64`&nbsp;→ [`d3d::SVT::Int64`] <br>
 /// * `D3D_SVT_INTERFACE_POINTER`&nbsp;→ [`d3d::SVT::InterfacePointer`] <br>
 /// * `D3D_SVT_MIN10FLOAT`&nbsp;→ [`d3d::SVT::Min10Float`] <br>
 /// * `D3D_SVT_MIN12INT`&nbsp;→ [`d3d::SVT::Min12Int`] <br>
@@ -599,6 +603,8 @@ pub const unknwn_h : cxx_header = cxx_header;
 /// * `D3D_SVT_TEXTURECUBE`&nbsp;→ [`d3d::SVT::TextureCube`] <br>
 /// * `D3D_SVT_TEXTURECUBEARRAY`&nbsp;→ [`d3d::SVT::TextureCubeArray`] <br>
 /// * `D3D_SVT_UINT`&nbsp;→ [`d3d::SVT::UInt`] <br>
+/// * `D3D_SVT_UINT16`&nbsp;→ [`d3d::SVT::UInt16`] <br>
+/// * `D3D_SVT_UINT64`&nbsp;→ [`d3d::SVT::UInt64`] <br>
 /// * `D3D_SVT_UINT8`&nbsp;→ [`d3d::SVT::UInt8`] <br>
 /// * `D3D_SVT_VERTEXFRAGMENT`&nbsp;→ [`d3d::SVT::VertexFragment`] <br>
 /// * `D3D_SVT_VERTEXSHADER`&nbsp;→ [`d3d::SVT::VertexShader`] <br>
@@ -706,6 +712,35 @@ pub const unknwn_h : cxx_header = cxx_header;
 /// `D3D_FL9_3_REQ_TEXTURE2D_U_OR_V_DIMENSION` →&nbsp;❌ <br>
 /// `D3D_FL9_3_REQ_TEXTURECUBE_DIMENSION` →&nbsp;❌ <br>
 /// `D3D_FL9_3_SIMULTANEOUS_RENDER_TARGET_COUNT` →&nbsp;❌ <br>
+/// `D3D_SHADER_FEATURE_11_1_DOUBLE_EXTENSIONS` →&nbsp;❌ <br>
+/// `D3D_SHADER_FEATURE_11_1_SHADER_EXTENSIONS` →&nbsp;❌ <br>
+/// `D3D_SHADER_FEATURE_64_UAVS` →&nbsp;❌ <br>
+/// `D3D_SHADER_FEATURE_ATOMIC_INT64_ON_DESCRIPTOR_HEAP_RESOURCE` →&nbsp;❌ <br>
+/// `D3D_SHADER_FEATURE_ATOMIC_INT64_ON_GROUP_SHARED` →&nbsp;❌ <br>
+/// `D3D_SHADER_FEATURE_ATOMIC_INT64_ON_TYPED_RESOURCE` →&nbsp;❌ <br>
+/// `D3D_SHADER_FEATURE_BARYCENTRICS` →&nbsp;❌ <br>
+/// `D3D_SHADER_FEATURE_COMPUTE_SHADERS_PLUS_RAW_AND_STRUCTURED_BUFFERS_VIA_SHADER_4_X` →&nbsp;❌ <br>
+/// `D3D_SHADER_FEATURE_DERIVATIVES_IN_MESH_AND_AMPLIFICATION_SHADERS` →&nbsp;❌ <br>
+/// `D3D_SHADER_FEATURE_DOUBLES` →&nbsp;❌ <br>
+/// `D3D_SHADER_FEATURE_INNER_COVERAGE` →&nbsp;❌ <br>
+/// `D3D_SHADER_FEATURE_INT64_OPS` →&nbsp;❌ <br>
+/// `D3D_SHADER_FEATURE_LEVEL_9_COMPARISON_FILTERING` →&nbsp;❌ <br>
+/// `D3D_SHADER_FEATURE_MINIMUM_PRECISION` →&nbsp;❌ <br>
+/// `D3D_SHADER_FEATURE_NATIVE_16BIT_OPS` →&nbsp;❌ <br>
+/// `D3D_SHADER_FEATURE_RAYTRACING_TIER_1_1` →&nbsp;❌ <br>
+/// `D3D_SHADER_FEATURE_RESOURCE_DESCRIPTOR_HEAP_INDEXING` →&nbsp;❌ <br>
+/// `D3D_SHADER_FEATURE_ROVS` →&nbsp;❌ <br>
+/// `D3D_SHADER_FEATURE_SAMPLER_DESCRIPTOR_HEAP_INDEXING` →&nbsp;❌ <br>
+/// `D3D_SHADER_FEATURE_SAMPLER_FEEDBACK` →&nbsp;❌ <br>
+/// `D3D_SHADER_FEATURE_SHADING_RATE` →&nbsp;❌ <br>
+/// `D3D_SHADER_FEATURE_STENCIL_REF` →&nbsp;❌ <br>
+/// `D3D_SHADER_FEATURE_TILED_RESOURCES` →&nbsp;❌ <br>
+/// `D3D_SHADER_FEATURE_TYPED_UAV_LOAD_ADDITIONAL_FORMATS` →&nbsp;❌ <br>
+/// `D3D_SHADER_FEATURE_UAVS_AT_EVERY_STAGE` →&nbsp;❌ <br>
+/// `D3D_SHADER_FEATURE_VIEWPORT_AND_RT_ARRAY_INDEX_FROM_ANY_SHADER_FEEDING_RASTERIZER` →&nbsp;❌ <br>
+/// `D3D_SHADER_FEATURE_VIEW_ID` →&nbsp;❌ <br>
+/// `D3D_SHADER_FEATURE_WAVE_MMA` →&nbsp;❌ <br>
+/// `D3D_SHADER_FEATURE_WAVE_OPS` →&nbsp;❌ <br>
 /// `IID_ID3DBlob` →&nbsp;❌ <br>
 /// ### C++ Macros → Rust fns/macros
 ///

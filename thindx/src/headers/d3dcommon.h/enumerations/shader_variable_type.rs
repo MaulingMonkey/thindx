@@ -88,6 +88,11 @@ enumish! {
     pub const Min12Int                  : SVT = SVT(D3D_SVT_MIN12INT);
     pub const Min16Int                  : SVT = SVT(D3D_SVT_MIN16INT);
     pub const Min16UInt                 : SVT = SVT(D3D_SVT_MIN16UINT);
+    pub const Int16                     : SVT = SVT(D3D_SVT_INT16);
+    pub const UInt16                    : SVT = SVT(D3D_SVT_UINT16);
+    pub const Float16                   : SVT = SVT(D3D_SVT_FLOAT16);
+    pub const Int64                     : SVT = SVT(D3D_SVT_INT64);
+    pub const UInt64                    : SVT = SVT(D3D_SVT_UINT64);
 }
 
 //#cpp2rust D3D_SHADER_VARIABLE_TYPE            = d3d::ShaderVariableType
@@ -150,6 +155,11 @@ enumish! {
 //#cpp2rust D3D_SVT_MIN12INT                    = d3d::SVT::Min12Int
 //#cpp2rust D3D_SVT_MIN16INT                    = d3d::SVT::Min16Int
 //#cpp2rust D3D_SVT_MIN16UINT                   = d3d::SVT::Min16UInt
+//#cpp2rust D3D_SVT_INT16                       = d3d::SVT::Int16
+//#cpp2rust D3D_SVT_UINT16                      = d3d::SVT::UInt16
+//#cpp2rust D3D_SVT_FLOAT16                     = d3d::SVT::Float16
+//#cpp2rust D3D_SVT_INT64                       = d3d::SVT::Int64
+//#cpp2rust D3D_SVT_UINT64                      = d3d::SVT::UInt64
 
 //#cpp2rust D3D10_SVT_VOID                      = d3d::SVT::Void
 //#cpp2rust D3D10_SVT_BOOL                      = d3d::SVT::Bool
@@ -204,3 +214,10 @@ enumish! {
 //#cpp2rust D3D11_SVT_RWSTRUCTURED_BUFFER       = d3d::SVT::RWStructuredBuffer
 //#cpp2rust D3D11_SVT_APPEND_STRUCTURED_BUFFER  = d3d::SVT::AppendStructuredBuffer
 //#cpp2rust D3D11_SVT_CONSUME_STRUCTURED_BUFFER = d3d::SVT::ConsumeStructuredBuffer
+
+// C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\d3dcommon.h
+const D3D_SVT_INT16     : u32 = 58;
+const D3D_SVT_UINT16    : u32 = 59;
+const D3D_SVT_FLOAT16   : u32 = 60;
+const D3D_SVT_INT64     : u32 = 61;
+const D3D_SVT_UINT64    : u32 = 62;
