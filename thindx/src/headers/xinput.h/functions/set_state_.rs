@@ -1,8 +1,6 @@
 use crate::*;
 use crate::xinput::*;
 
-use winapi::um::xinput::*;
-
 
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputsetstate)\]
@@ -11,10 +9,12 @@ use winapi::um::xinput::*;
 /// Control the vibration of a controller.
 ///
 /// ### Errors
+/// *   [THINERR::MISSING_DLL_EXPORT]   - Couldn't find an XInput DLL
 /// *   [ERROR::BAD_ARGUMENTS]          - Invalid [`User`] or [`User::Any`]
 /// *   [ERROR::DEVICE_NOT_CONNECTED]   - [`User`] is not connected
 pub fn set_state(user_index: impl Into<u32>, mut vibration: Vibration) -> Result<(), Error> {
     fn_context!(xinput::set_state => XInputSetState);
+    #[allow(non_snake_case)] let XInputSetState = Imports::get().XInputSetState.ok_or(fn_error!(THINERR::MISSING_DLL_EXPORT))?;
     // SAFETY: ✔️
     //  * fuzzed        in `fuzz-xinput.rs`
     //  * tested        in `d3d9-02-xinput.rs`

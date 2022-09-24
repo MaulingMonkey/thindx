@@ -1,4 +1,5 @@
-use winapi::um::xinput::*;
+use crate::*;
+use crate::xinput::*;
 
 
 
@@ -34,27 +35,31 @@ use winapi::um::xinput::*;
 ///     }
 /// }
 /// ```
-pub fn enable(enable: bool) {
+///
+/// ### Errors
+/// *   [THINERR::MISSING_DLL_EXPORT]   - Enable/disable API unavailable: requires XInput 1.1 or later
+pub fn enable(enable: bool) -> Result<(), Error> {
+    fn_context!(xinput::enable => XInputEnable);
+    #[allow(non_snake_case)] let XInputEnable = Imports::get().XInputEnable.ok_or(fn_error!(THINERR::MISSING_DLL_EXPORT))?;
     // SAFETY: ✔️
     //  * fuzzed        in `tests/fuzz-xinput.rs`
     //  * `enable`      can be true or false.  Pretty easy to have exhaustive test coverage.
-    unsafe { XInputEnable(enable.into()) }
+    unsafe { XInputEnable(enable.into()) };
+    Ok(())
 }
 
 #[test] fn spam_xinput_enable() {
-    enable(true);
-    enable(true);
-    enable(true);
-    enable(false);
-    enable(false);
-    enable(false);
-    enable(true);
-    enable(false);
-    enable(true);
-    enable(false);
-    enable(true);
-    enable(false);
-    enable(true);
+    let _ = enable(true);
+    let _ = enable(true);
+    let _ = enable(true);
+    let _ = enable(false);
+    let _ = enable(false);
+    let _ = enable(false);
+    let _ = enable(true);
+    let _ = enable(false);
+    let _ = enable(true);
+    let _ = enable(false);
+    let _ = enable(true);
+    let _ = enable(false);
+    let _ = enable(true);
 }
-
-//#cpp2rust XInputEnable    = xinput::enable

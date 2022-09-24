@@ -47,7 +47,7 @@ fn main() {
                 *control_flow = ControlFlow::Exit;
             },
             WindowEvent { event: Focused(focus), window_id } if window_id == window.id() => {
-                xinput::enable(focus);
+                let _ = xinput::enable(focus);
             },
             MainEventsCleared => {
                 let window_size = window.inner_size();

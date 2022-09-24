@@ -3,8 +3,6 @@ use crate::xinput::*;
 
 use bytemuck::Zeroable;
 
-use winapi::um::xinput::*;
-
 
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetstate)\]
@@ -13,10 +11,12 @@ use winapi::um::xinput::*;
 /// Retrieves the current state of the specified controller.
 ///
 /// ### Errors
+/// *   [THINERR::MISSING_DLL_EXPORT]   - Couldn't find an XInput DLL
 /// *   [ERROR::BAD_ARGUMENTS]          - Invalid [`User`] or [`User::Any`]
 /// *   [ERROR::DEVICE_NOT_CONNECTED]   - [`User`] gamepad not connected
 pub fn get_state(user_index: impl Into<u32>) -> Result<State, Error> {
     fn_context!(xinput::get_state => XInputGetState);
+    #[allow(non_snake_case)] let XInputGetState = Imports::get().XInputGetState.ok_or(fn_error!(THINERR::MISSING_DLL_EXPORT))?;
     let mut state = State::zeroed();
     // SAFETY: ✔️
     //  * fuzzed        in `tests/fuzz-xinput.rs`

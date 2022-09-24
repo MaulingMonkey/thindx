@@ -22,7 +22,7 @@ use std::os::windows::ffi::*;
 /// ### Errors
 /// *   [ERROR::BAD_ARGUMENTS]          - Invalid [`User`] or [`User::Any`]
 /// *   [ERROR::DEVICE_NOT_CONNECTED]   - **Unreliably.**
-/// *   [THINERR::MISSING_DLL_EXPORT]   - XAudio2 / Windows Core Audio Device Names unavailable: XInput 1.3 or earlier
+/// *   [THINERR::MISSING_DLL_EXPORT]   - XAudio2 / Windows Core Audio Device Names unavailable: XInput 1.4 or later
 /// *   [THINERR::SLICE_TOO_LARGE]      - Audio device paths exceedingly large
 ///
 /// | System            | Windows `ver`     | Windows SKU           | Behavior |

@@ -17,7 +17,7 @@ use bytemuck::Zeroable;
 /// | 9.1.0 | Available |
 ///
 /// ### Errors
-/// *   [THINERR::MISSING_DLL_EXPORT]   - DirectSound GUIDs unavailable: XInput 1.4 or later
+/// *   [THINERR::MISSING_DLL_EXPORT]   - DirectSound GUIDs unavailable: XInput 1.3 or earlier
 /// *   [ERROR::BAD_ARGUMENTS]?         - [`User`] out of bounds?
 /// *   [ERROR::DEVICE_NOT_CONNECTED]?  - [`User`] in bounds, but without a gamepad?
 #[deprecated = "Deprecated in favor of xinput::get_audio_device_ids.  Unavailable for Windows Store apps, may fail on Windows 8."]

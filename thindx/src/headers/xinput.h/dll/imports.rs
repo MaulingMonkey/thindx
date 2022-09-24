@@ -16,7 +16,7 @@ use std::ptr::null_mut;
 
 
 lazy_static::lazy_static! {
-    static ref IMPORTS : Imports = Imports::load_from_linked_xinput().unwrap_or_default();
+    static ref IMPORTS : Imports = Imports::load().unwrap_or_default();
 }
 
 #[allow(non_snake_case)]
@@ -24,25 +24,95 @@ lazy_static::lazy_static! {
 pub(crate) struct Imports {
     // Official Imports
 
+    /// \[[MSDN](https://learn.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetstate)\]
+    /// Get gamepad button state.
+    ///
+    /// | XInput | State    |
+    /// | ------ | -------- |
+    /// | \*    | Available |
+    pub XInputGetState: Option<unsafe extern "system" fn(dwUserIndex: DWORD, pState: *mut XINPUT_STATE) -> DWORD>,
+
+    /// \[[MSDN](https://learn.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputsetstate)\]
+    /// Set gamepad vibration state.
+    ///
+    /// | XInput | State    |
+    /// | ------ | -------- |
+    /// | \*    | Available |
+    pub XInputSetState: Option<unsafe extern "system" fn(dwUserIndex: DWORD, pVibration: *mut XINPUT_VIBRATION) -> DWORD>,
+
+    /// \[[MSDN](https://learn.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetcapabilities)\]
+    /// Query the capabilities of a gamepad (vibration, wireless, voice, etc.)
+    ///
+    /// | XInput | State    |
+    /// | ------ | -------- |
+    /// | \*    | Available |
+    pub XInputGetCapabilities: Option<unsafe extern "system" fn(dwUserIndex: DWORD, dwFlags: DWORD, pCapabilities: *mut XINPUT_CAPABILITIES) -> DWORD>,
+
     /// \[[MSDN](https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetdsoundaudiodeviceguids)]
     /// Get DirectSound Audio Device GUIDs (N/A for Windows Store apps).
     ///
     /// | XInput | State    |
     /// | ------ | -------- |
+    /// | Uap   | N/A       |
     /// | 1.4   | N/A       |
     /// | 1.3   | Available |
+    /// | 1.2   | Available |
+    /// | 1.1   | Available |
     /// | 9.1.0 | Available |
     pub XInputGetDSoundAudioDeviceGuids: Option<unsafe extern "system" fn(dwUserIndex: DWORD, pDSoundRenderGuid: *mut GUID, pDSoundCaptureGuid: *mut GUID) -> DWORD>,
+
+    // Windows 8+
 
     /// \[[MSDN](https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetaudiodeviceids)]
     /// Get XAudio2 Device Names.
     ///
     /// | XInput | State    |
     /// | ------ | -------- |
+    /// | Uap   | Available? |
     /// | 1.4   | Available |
     /// | 1.3   | N/A       |
+    /// | 1.2   | N/A       |
+    /// | 1.1   | N/A       |
     /// | 9.1.0 | N/A       |
     pub XInputGetAudioDeviceIds: Option<unsafe extern "system" fn(dwUserIndex: DWORD, pRenderDeviceId: LPWSTR, pRenderCount: *mut UINT, pCaptureDeviceId: LPWSTR, pCaptureCount: *mut UINT) -> DWORD>,
+
+    /// \[[MSDN](https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputenable)]
+    /// Enable or disable xinput (for use in window focus/blur events.)
+    ///
+    /// | XInput | State        |
+    /// | ------ | ------------ |
+    /// | UWP   | Deprecated?   |
+    /// | 1.4   | Available     |
+    /// | 1.3   | Available     |
+    /// | 1.2   | Available     |
+    /// | 1.1   | Available     |
+    /// | 9.1.0 | N/A           |
+    pub XInputEnable: Option<unsafe extern "system" fn(enable: BOOL)>,
+
+    /// \[[MSDN](https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetbatteryinformation)]
+    /// Get battery information for a wireless gamepad.
+    ///
+    /// | XInput | State        |
+    /// | ------ | ------------ |
+    /// | Uap   | Available     |
+    /// | 1.4   | Available     |
+    /// | 1.3   | Available     |
+    /// | 1.2   | N/A           |
+    /// | 1.1   | N/A           |
+    /// | 9.1.0 | N/A           |
+    pub XInputGetBatteryInformation: Option<unsafe extern "system" fn(dwUserIndex: DWORD, devType: BYTE, pBatteryInformation: *mut XINPUT_BATTERY_INFORMATION) -> DWORD>,
+
+    /// \[[MSDN](https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetkeystroke)]
+    ///
+    /// | XInput | State        |
+    /// | ------ | ------------ |
+    /// | Uap   | Available     |
+    /// | 1.4   | Available     |
+    /// | 1.3   | Available     |
+    /// | 1.2   | N/A           |
+    /// | 1.1   | N/A           |
+    /// | 9.1.0 | N/A           |
+    pub XInputGetKeystroke: Option<unsafe extern "system" fn(dwUserIndex: u32, dwReserved: u32, pKeystroke: PXINPUT_KEYSTROKE) -> DWORD>,
 
 
 
@@ -64,16 +134,32 @@ pub(crate) struct Imports {
 impl Imports {
     pub fn get() -> &'static Self { &*IMPORTS }
 
-    fn load_from_linked_xinput() -> Result<Self, io::Error> {
+    fn load() -> Result<Self, io::Error> {
         // SAFETY: ⚠️ Technically unsound
         //  * We assume `hmodule`, if retrieved, is a valid xinput DLL.
         //  * We assume specific magic ordinals always map to specific un-named functions.
         unsafe {
-            let lib = try_find_loaded_xinput().ok_or(io::ErrorKind::NotFound)?;
+            let lib = try_find_loaded_xinput()
+                .or_else(|| Library::load("xinput1_4.dll").ok())
+                .or_else(|| Library::load("xinput1_3.dll").ok())
+                .or_else(|| Library::load("xinput1_2.dll").ok())
+                .or_else(|| Library::load("xinput1_1.dll").ok())
+                .or_else(|| Library::load("xinput9_1_0.dll").ok())
+                .or_else(|| Library::load("xinputuap.dll").ok())    // absolute last resort, breaks shutdown in non-uwp/uap desktop apps
+                .ok_or(io::ErrorKind::NotFound)
+                ?;
 
             Ok(Self {
+                // not even remotely optional:
+                XInputGetState:                     Some(lib.sym("XInputGetState\0")?),
+
+                XInputSetState:                     lib.sym_opt("XInputSetState\0"),
+                XInputGetCapabilities:              lib.sym_opt("XInputGetCapabilities\0"),
                 XInputGetDSoundAudioDeviceGuids:    lib.sym_opt("XInputGetDSoundAudioDeviceGuids\0"),
                 XInputGetAudioDeviceIds:            lib.sym_opt("XInputGetAudioDeviceIds\0"),
+                XInputEnable:                       lib.sym_opt("XInputEnable\0"),
+                XInputGetBatteryInformation:        lib.sym_opt("XInputGetBatteryInformation\0"),
+                XInputGetKeystroke:                 lib.sym_opt("XInputGetKeystroke\0"),
 
                 _XInputGetStateEx:                  lib.sym_opt_by_ordinal(100),
                 _XInputWaitForGuideButton:          lib.sym_opt_by_ordinal(101),

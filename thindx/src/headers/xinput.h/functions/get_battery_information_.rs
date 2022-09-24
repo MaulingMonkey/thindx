@@ -3,8 +3,6 @@ use crate::xinput::*;
 
 use bytemuck::Zeroable;
 
-use winapi::um::xinput::XInputGetBatteryInformation;
-
 
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetbatteryinformation)\]
@@ -15,11 +13,13 @@ use winapi::um::xinput::XInputGetBatteryInformation;
 /// *   `dev_type`      [BatteryDevType::Gamepad] or [BatteryDevType::Headset]
 ///
 /// ### Errors
+/// *   [THINERR::MISSING_DLL_EXPORT]   - Battery information unavailable: requires XInput 1.3 or later
 /// *   [ERROR::BAD_ARGUMENTS]          - Invalid [`User`] or [`User::Any`]
 /// *   [ERROR::DEVICE_NOT_CONNECTED]   - Disconnected [`User`]
 /// *   [ERROR::DEVICE_NOT_CONNECTED]   - Invalid [`BatteryDevType`]
 pub fn get_battery_information(user_index: impl Into<u32>, dev_type: impl Into<BatteryDevType>) -> Result<BatteryInformation, Error> {
     fn_context!(xinput::get_battery_information => XInputGetBatteryInformation);
+    #[allow(non_snake_case)] let XInputGetBatteryInformation = Imports::get().XInputGetBatteryInformation.ok_or(fn_error!(THINERR::MISSING_DLL_EXPORT))?;
     let mut info = BatteryInformation::zeroed();
     // SAFETY: ✔️
     //  * fuzzed        in `tests/fuzz-xinput.rs`

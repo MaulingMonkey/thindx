@@ -3,20 +3,20 @@ use crate::xinput::*;
 
 use bytemuck::Zeroable;
 
-use winapi::um::xinput::*;
-
 
 
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetcapabilities)\]
 /// XInputGetCapabilities
 ///
 /// ### Errors
+/// *   [THINERR::MISSING_DLL_EXPORT]   - Couldn't find an XInput DLL
 /// *   [ERROR::BAD_ARGUMENTS]          - Invalid [`Flag`]
 /// *   [ERROR::BAD_ARGUMENTS]          - Invalid [`User`] or [`User::Any`]
 /// *   [ERROR::DEVICE_NOT_CONNECTED]   - [`Flag::None`]
 /// *   [ERROR::DEVICE_NOT_CONNECTED]   - [`User`] in bounds, but without a gamepad
 pub fn get_capabilities(user_index: impl Into<u32>, flags: Flag) -> Result<Capabilities, Error> {
     fn_context!(xinput::get_capabilities => XInputGetCapabilities);
+    #[allow(non_snake_case)] let XInputGetCapabilities = Imports::get().XInputGetCapabilities.ok_or(fn_error!(THINERR::MISSING_DLL_EXPORT))?;
     let mut caps = Capabilities::zeroed();
     // SAFETY: ✔️
     //  * fuzzed        in `tests/fuzz-xinput.rs`

@@ -42,7 +42,9 @@ macro_rules! fuzz {
                     initialize_com_for_the_first_time_on_this_thread(thread_idx & 1 != 0);
                 }
 
-                for i in 0 ..= 100 { xinput::enable(i>>2 & 1 != 0) } // no error code, no xuser
+                for i in 0 ..= 100 {
+                    let _ = xinput::enable(i>>2 & 1 != 0);
+                }
 
                 fuzz!(
                     #[allow(deprecated)] |u| xinput::get_audio_device_ids(u),
@@ -110,7 +112,7 @@ macro_rules! fuzz {
                 );
 
                 for enable in [false, true].iter().copied() {
-                    xinput::enable(enable);
+                    let _ = xinput::enable(enable);
                     for vibration in [
                         xinput::Vibration::default(),
                         xinput::Vibration { left_motor_speed: 1, right_motor_speed: 1 },
