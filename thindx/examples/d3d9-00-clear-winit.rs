@@ -23,8 +23,8 @@ fn main() {
         .build(&event_loop).unwrap();
 
     let hwnd = match window.raw_window_handle() {
-        RawWindowHandle::Win32(Win32Handle { hwnd, .. }) => hwnd.cast(),
-        other => panic!("Expected RawWindowHandle::Windows(...), got {:?} instead", other),
+        RawWindowHandle::Win32(Win32WindowHandle { hwnd, .. }) => hwnd.cast(),
+        other => panic!("Expected RawWindowHandle::Win32(...), got {:?} instead", other),
     };
     let hwnd = unsafe { SafeHWND::assert_unbounded(hwnd).unwrap() };
 

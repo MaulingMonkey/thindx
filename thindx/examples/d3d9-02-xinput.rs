@@ -99,7 +99,7 @@ fn main() {
 /// Caller is responsible for ensuring whatever uses [`PresentParameters`] does not outlive the `window`.
 unsafe fn pp(window: &Window) -> PresentParameters<'static> {
     let hwnd = match window.raw_window_handle() {
-        RawWindowHandle::Win32(Win32Handle { hwnd, .. }) => hwnd.cast(),
+        RawWindowHandle::Win32(Win32WindowHandle { hwnd, .. }) => hwnd.cast(),
         other => panic!("Expected RawWindowHandle::Windows(...), got {:?} instead", other),
     };
     let hwnd = SafeHWND::assert_unbounded(hwnd).unwrap();

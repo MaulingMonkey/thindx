@@ -88,8 +88,8 @@ bugsalot                                = "0.2"
 dev.path                                = "../dev"
 mmrbi                                   = "0.0.19"
 png                                     = "0.17"
-raw-window-handle                       = "0.4"
-winit                                   = "0.26"
+raw-window-handle                       = "0.5"
+winit                                   = "0.27"
 winapi.version                          = "0.3.9"
 
 winapi.features = [

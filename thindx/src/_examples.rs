@@ -36,8 +36,8 @@ use crate::*;
 ///         .build(&event_loop).unwrap();
 /// 
 ///     let hwnd = match window.raw_window_handle() {
-///         RawWindowHandle::Win32(Win32Handle { hwnd, .. }) => hwnd.cast(),
-///         other => panic!("Expected RawWindowHandle::Windows(...), got {:?} instead", other),
+///         RawWindowHandle::Win32(Win32WindowHandle { hwnd, .. }) => hwnd.cast(),
+///         other => panic!("Expected RawWindowHandle::Win32(...), got {:?} instead", other),
 ///     };
 ///     let hwnd = unsafe { SafeHWND::assert_unbounded(hwnd).unwrap() };
 /// 
@@ -275,7 +275,7 @@ pub const d3d9_01_clear_winapi : () = ();
 ///                 *control_flow = ControlFlow::Exit;
 ///             },
 ///             WindowEvent { event: Focused(focus), window_id } if window_id == window.id() => {
-///                 xinput::enable(focus);
+///                 let _ = xinput::enable(focus);
 ///             },
 ///             MainEventsCleared => {
 ///                 let window_size = window.inner_size();
@@ -327,7 +327,7 @@ pub const d3d9_01_clear_winapi : () = ();
 /// /// Caller is responsible for ensuring whatever uses [`PresentParameters`] does not outlive the `window`.
 /// unsafe fn pp(window: &Window) -> PresentParameters<'static> {
 ///     let hwnd = match window.raw_window_handle() {
-///         RawWindowHandle::Win32(Win32Handle { hwnd, .. }) => hwnd.cast(),
+///         RawWindowHandle::Win32(Win32WindowHandle { hwnd, .. }) => hwnd.cast(),
 ///         other => panic!("Expected RawWindowHandle::Windows(...), got {:?} instead", other),
 ///     };
 ///     let hwnd = SafeHWND::assert_unbounded(hwnd).unwrap();
@@ -1120,7 +1120,7 @@ pub const d3dcompiler_03_link : () = ();
 /// .get_constant_buffer_by_index(1).get_desc() = Err(Error("ID3D11ShaderReflectionConstantBuffer::GetDesc", E::FAIL (0x80004005)))
 /// 
 /// .get_constant_buffer_by_name("ExampleCBuffer").get_desc() = Ok(ShaderBufferDesc { name: "ExampleCBuffer", ty: CT::CBuffer, variables: 1, size: 16, flags: CBF::None })
-/// .get_constant_buffer_by_name("ExampleCBuffer\u{0}").get_desc() = Err(Error("ID3D11ShaderReflectionConstantBuffer::GetDesc", E::FAIL (0x80004005)))
+/// .get_constant_buffer_by_name("ExampleCBuffer\0").get_desc() = Err(Error("ID3D11ShaderReflectionConstantBuffer::GetDesc", E::FAIL (0x80004005)))
 /// .get_constant_buffer_by_name("NonExistant").get_desc() = Err(Error("ID3D11ShaderReflectionConstantBuffer::GetDesc", E::FAIL (0x80004005)))
 /// .get_constant_buffer_by_name("").get_desc() = Err(Error("ID3D11ShaderReflectionConstantBuffer::GetDesc", E::FAIL (0x80004005)))
 /// 
@@ -1128,7 +1128,7 @@ pub const d3dcompiler_03_link : () = ();
 /// .get_resource_binding_desc(1) = Err(Error("ID3D11ShaderReflection::GetResourceBindingDesc", E::INVALIDARG (0x80070057)))
 /// 
 /// .get_resource_binding_desc_by_name("ExampleCBuffer") = Ok(ShaderInputBindDesc { name: "ExampleCBuffer", ty: SIT::CBuffer, bind_point: 0, bind_count: 1, flags: SIF::None, return_type: ReturnType(0), dimension: SrvDimension::Unknown, num_samples: 0 })
-/// .get_resource_binding_desc_by_name("ExampleCBuffer\u{0}") = Err(Error("ID3D11ShaderReflection::GetResourceBindingDescByName", E::INVALIDARG (0x80070057)))
+/// .get_resource_binding_desc_by_name("ExampleCBuffer\0") = Err(Error("ID3D11ShaderReflection::GetResourceBindingDescByName", E::INVALIDARG (0x80070057)))
 /// .get_resource_binding_desc_by_name("NonExistant") = Err(Error("ID3D11ShaderReflection::GetResourceBindingDescByName", E::INVALIDARG (0x80070057)))
 /// .get_resource_binding_desc_by_name("") = Err(Error("ID3D11ShaderReflection::GetResourceBindingDescByName", E::INVALIDARG (0x80070057)))
 /// 
