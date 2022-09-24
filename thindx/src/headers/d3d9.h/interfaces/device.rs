@@ -2143,7 +2143,9 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// *   `sampler` being out of bounds *appears* sound?  DirectX returns default sampler state when out of bounds?
     ///
     /// ### Returns
-    /// *   Ok([u32])   If `(sampler, state)` has a value
+    /// *   Ok([u32])           If `(sampler, state)` has a value
+    /// *   Ok(0xBAADCAFE)      If `sampler` is out of bounds (on some systems)
+    /// *   Ok(sane default)    If `sampler` is out of bounds (on some systems)
     ///
     /// ### Example
     /// ```rust
@@ -2151,6 +2153,8 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// let sampler = 0;
     /// # let _ = sampler;
     /// # for sampler in (0 .. 256).chain((8 .. 32).map(|pow| 1<<pow)) {
+    ///
+    /// if device.get_sampler_state_untyped(sampler, Samp::AddressU).unwrap() == 0xBAADCAFE { continue }
     ///
     /// assert_eq!(
     ///     unsafe { device.get_sampler_state_unchecked(sampler, Samp::AddressU) }.map(TextureAddress::from_unchecked).unwrap(),
@@ -2185,6 +2189,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// ### Returns
     /// *   [D3DERR::INVALIDCALL]   If `state` is not a valid render state
     /// *   Ok([u32])               If `state` has a value (including default values for "out-of-bounds" `sampler`s)
+    /// *   Ok(0xBAADCAFE)          If `sampler` is out of bounds on some systems.
     ///
     /// ### Example
     /// ```rust
@@ -2192,6 +2197,8 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// let sampler = 0;
     /// # let _ = sampler;
     /// # for sampler in (0 .. 256).chain((8 .. 32).map(|pow| 1<<pow)) {
+    ///
+    /// if device.get_sampler_state_untyped(sampler, Samp::AddressU).unwrap() == 0xBAADCAFE { continue }
     ///
     /// assert_eq!(
     ///     device.get_sampler_state_untyped(sampler, Samp::AddressU).map(TextureAddress::from_unchecked).unwrap(),
