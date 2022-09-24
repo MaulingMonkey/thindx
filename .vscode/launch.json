@@ -11,6 +11,7 @@
             "program":                  "${workspaceFolder}/target/debug/examples/d3d9-00-clear-winit",
             "cwd":                      "${workspaceFolder}",
             "environment":              [ { "name": "RUST_BACKTRACE", "value": "1" } ],
+            "symbolOptions":            { "searchMicrosoftSymbolServer": true },
             "windows": {
                 "type":                     "cppvsdbg",
                 "program":                  "${workspaceFolder}/target/debug/examples/d3d9-00-clear-winit.exe",
@@ -27,6 +28,7 @@
             "program":                  "${workspaceFolder}/target/release/examples/d3d9-00-clear-winit",
             "cwd":                      "${workspaceFolder}",
             "environment":              [ { "name": "RUST_BACKTRACE", "value": "1" } ],
+            "symbolOptions":            { "searchMicrosoftSymbolServer": true },
             "windows": {
                 "type":                     "cppvsdbg",
                 "program":                  "${workspaceFolder}/target/release/examples/d3d9-00-clear-winit.exe",
@@ -43,6 +45,7 @@
             "program":                  "${workspaceFolder}/target/debug/examples/d3d9-01-clear-winapi",
             "cwd":                      "${workspaceFolder}",
             "environment":              [ { "name": "RUST_BACKTRACE", "value": "1" } ],
+            "symbolOptions":            { "searchMicrosoftSymbolServer": true },
             "windows": {
                 "type":                     "cppvsdbg",
                 "program":                  "${workspaceFolder}/target/debug/examples/d3d9-01-clear-winapi.exe",
@@ -59,6 +62,7 @@
             "program":                  "${workspaceFolder}/target/release/examples/d3d9-01-clear-winapi",
             "cwd":                      "${workspaceFolder}",
             "environment":              [ { "name": "RUST_BACKTRACE", "value": "1" } ],
+            "symbolOptions":            { "searchMicrosoftSymbolServer": true },
             "windows": {
                 "type":                     "cppvsdbg",
                 "program":                  "${workspaceFolder}/target/release/examples/d3d9-01-clear-winapi.exe",
@@ -75,6 +79,7 @@
             "program":                  "${workspaceFolder}/target/debug/examples/d3d9-02-xinput",
             "cwd":                      "${workspaceFolder}",
             "environment":              [ { "name": "RUST_BACKTRACE", "value": "1" } ],
+            "symbolOptions":            { "searchMicrosoftSymbolServer": true },
             "windows": {
                 "type":                     "cppvsdbg",
                 "program":                  "${workspaceFolder}/target/debug/examples/d3d9-02-xinput.exe",
@@ -91,6 +96,7 @@
             "program":                  "${workspaceFolder}/target/release/examples/d3d9-02-xinput",
             "cwd":                      "${workspaceFolder}",
             "environment":              [ { "name": "RUST_BACKTRACE", "value": "1" } ],
+            "symbolOptions":            { "searchMicrosoftSymbolServer": true },
             "windows": {
                 "type":                     "cppvsdbg",
                 "program":                  "${workspaceFolder}/target/release/examples/d3d9-02-xinput.exe",
@@ -107,6 +113,7 @@
             "program":                  "${workspaceFolder}/target/debug/examples/d3dcompiler-01-construction",
             "cwd":                      "${workspaceFolder}",
             "environment":              [ { "name": "RUST_BACKTRACE", "value": "1" } ],
+            "symbolOptions":            { "searchMicrosoftSymbolServer": true },
             "windows": {
                 "type":                     "cppvsdbg",
                 "program":                  "${workspaceFolder}/target/debug/examples/d3dcompiler-01-construction.exe",
@@ -123,6 +130,7 @@
             "program":                  "${workspaceFolder}/target/release/examples/d3dcompiler-01-construction",
             "cwd":                      "${workspaceFolder}",
             "environment":              [ { "name": "RUST_BACKTRACE", "value": "1" } ],
+            "symbolOptions":            { "searchMicrosoftSymbolServer": true },
             "windows": {
                 "type":                     "cppvsdbg",
                 "program":                  "${workspaceFolder}/target/release/examples/d3dcompiler-01-construction.exe",
@@ -139,6 +147,7 @@
             "program":                  "${workspaceFolder}/target/debug/examples/d3dcompiler-02-compile",
             "cwd":                      "${workspaceFolder}",
             "environment":              [ { "name": "RUST_BACKTRACE", "value": "1" } ],
+            "symbolOptions":            { "searchMicrosoftSymbolServer": true },
             "windows": {
                 "type":                     "cppvsdbg",
                 "program":                  "${workspaceFolder}/target/debug/examples/d3dcompiler-02-compile.exe",
@@ -155,6 +164,7 @@
             "program":                  "${workspaceFolder}/target/release/examples/d3dcompiler-02-compile",
             "cwd":                      "${workspaceFolder}",
             "environment":              [ { "name": "RUST_BACKTRACE", "value": "1" } ],
+            "symbolOptions":            { "searchMicrosoftSymbolServer": true },
             "windows": {
                 "type":                     "cppvsdbg",
                 "program":                  "${workspaceFolder}/target/release/examples/d3dcompiler-02-compile.exe",
@@ -171,6 +181,7 @@
             "program":                  "${workspaceFolder}/target/debug/examples/d3dcompiler-03-link",
             "cwd":                      "${workspaceFolder}",
             "environment":              [ { "name": "RUST_BACKTRACE", "value": "1" } ],
+            "symbolOptions":            { "searchMicrosoftSymbolServer": true },
             "windows": {
                 "type":                     "cppvsdbg",
                 "program":                  "${workspaceFolder}/target/debug/examples/d3dcompiler-03-link.exe",
@@ -187,6 +198,7 @@
             "program":                  "${workspaceFolder}/target/release/examples/d3dcompiler-03-link",
             "cwd":                      "${workspaceFolder}",
             "environment":              [ { "name": "RUST_BACKTRACE", "value": "1" } ],
+            "symbolOptions":            { "searchMicrosoftSymbolServer": true },
             "windows": {
                 "type":                     "cppvsdbg",
                 "program":                  "${workspaceFolder}/target/release/examples/d3dcompiler-03-link.exe",
@@ -203,6 +215,7 @@
             "program":                  "${workspaceFolder}/target/debug/examples/d3dcompiler-04-reflect-shader",
             "cwd":                      "${workspaceFolder}",
             "environment":              [ { "name": "RUST_BACKTRACE", "value": "1" } ],
+            "symbolOptions":            { "searchMicrosoftSymbolServer": true },
             "windows": {
                 "type":                     "cppvsdbg",
                 "program":                  "${workspaceFolder}/target/debug/examples/d3dcompiler-04-reflect-shader.exe",
@@ -219,6 +232,7 @@
             "program":                  "${workspaceFolder}/target/release/examples/d3dcompiler-04-reflect-shader",
             "cwd":                      "${workspaceFolder}",
             "environment":              [ { "name": "RUST_BACKTRACE", "value": "1" } ],
+            "symbolOptions":            { "searchMicrosoftSymbolServer": true },
             "windows": {
                 "type":                     "cppvsdbg",
                 "program":                  "${workspaceFolder}/target/release/examples/d3dcompiler-04-reflect-shader.exe",
@@ -235,6 +249,7 @@
             "program":                  "${workspaceFolder}/target/debug/examples/d3dcompiler-05-reflect-library",
             "cwd":                      "${workspaceFolder}",
             "environment":              [ { "name": "RUST_BACKTRACE", "value": "1" } ],
+            "symbolOptions":            { "searchMicrosoftSymbolServer": true },
             "windows": {
                 "type":                     "cppvsdbg",
                 "program":                  "${workspaceFolder}/target/debug/examples/d3dcompiler-05-reflect-library.exe",
@@ -251,6 +266,7 @@
             "program":                  "${workspaceFolder}/target/release/examples/d3dcompiler-05-reflect-library",
             "cwd":                      "${workspaceFolder}",
             "environment":              [ { "name": "RUST_BACKTRACE", "value": "1" } ],
+            "symbolOptions":            { "searchMicrosoftSymbolServer": true },
             "windows": {
                 "type":                     "cppvsdbg",
                 "program":                  "${workspaceFolder}/target/release/examples/d3dcompiler-05-reflect-library.exe",
@@ -267,6 +283,7 @@
             "program":                  "${workspaceFolder}/target/debug/examples/xinput-exercise-all",
             "cwd":                      "${workspaceFolder}",
             "environment":              [ { "name": "RUST_BACKTRACE", "value": "1" } ],
+            "symbolOptions":            { "searchMicrosoftSymbolServer": true },
             "windows": {
                 "type":                     "cppvsdbg",
                 "program":                  "${workspaceFolder}/target/debug/examples/xinput-exercise-all.exe",
@@ -283,6 +300,7 @@
             "program":                  "${workspaceFolder}/target/release/examples/xinput-exercise-all",
             "cwd":                      "${workspaceFolder}",
             "environment":              [ { "name": "RUST_BACKTRACE", "value": "1" } ],
+            "symbolOptions":            { "searchMicrosoftSymbolServer": true },
             "windows": {
                 "type":                     "cppvsdbg",
                 "program":                  "${workspaceFolder}/target/release/examples/xinput-exercise-all.exe",

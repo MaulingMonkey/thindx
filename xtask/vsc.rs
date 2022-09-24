@@ -59,6 +59,7 @@ fn launch_json(j: impl Write) -> io::Result<()> {
             writeln!(j, "            \"program\":                  {:?},", format!("${{workspaceFolder}}/target/{}/examples/{}", config, example))?;
             writeln!(j, "            \"cwd\":                      \"${{workspaceFolder}}\",")?;
             writeln!(j, "            \"environment\":              [ {{ \"name\": \"RUST_BACKTRACE\", \"value\": \"1\" }} ],")?;
+            writeln!(j, "            \"symbolOptions\":            {{ \"searchMicrosoftSymbolServer\": true }},")?;
             writeln!(j, "            \"windows\": {{")?;
             writeln!(j, "                \"type\":                     \"cppvsdbg\",")?;
             writeln!(j, "                \"program\":                  \"${{workspaceFolder}}/target/{}/examples/{}.exe\",", config, example)?;
