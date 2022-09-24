@@ -1,7 +1,7 @@
 #![cfg_attr(not(test), allow(unused_macros))]
 
 /// ### Usage
-/// ```no_run
+/// ```ignore
 /// struct_mapping! {
 ///     RustyStruct => D3D_STRUCT {
 ///         rusty_field_a => CppFieldA,
@@ -122,7 +122,7 @@ macro_rules! struct_mapping {
 #[cfg(test)] pub fn offset_of<S, F>(s: *const S, f: *const F) -> usize { (f as usize) - (s as usize) }
 
 /// ### Usage
-/// ```no_run
+/// ```ignore
 /// enumish! { RustyEnum => D3D_ENUM; FQN; RustyEnum::A, RustyEnum::B, RustyEnum::C }
 /// enumish! { RustyEnum => D3D_ENUM;      A, B, C }
 /// enumish! { RustyEnum => D3D_ENUM }
@@ -228,7 +228,7 @@ macro_rules! enumish {
 }
 
 /// ### Usage
-/// ```no_run
+/// ```ignore
 /// flags! { RustyFlags => D3D_FLAGS; A, B, C }
 /// ```
 macro_rules! flags {

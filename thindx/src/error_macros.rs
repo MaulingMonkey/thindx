@@ -12,7 +12,7 @@ macro_rules! fn_param_try_len32 { ( $param:ident ) => { u32::try_from(($param).l
 /// This is an alternative to `//#cpp2rust Cpp = Rust` comments, and also provides a constant for other `fn_*!` macros to read.
 ///
 /// ### Usage
-/// ```
+/// ```ignore
 /// fn_context!(Rust::method => ICpp::Method);
 /// ```
 macro_rules! fn_context {
