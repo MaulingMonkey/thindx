@@ -65,6 +65,10 @@ convert!(unsafe PixelShader         => Unknown,     winapi::shared::d3d9::IDirec
 convert!(unsafe VertexShader        => Unknown,     winapi::shared::d3d9::IDirect3DVertexShader9);
 convert!(unsafe Volume              => Unknown,     winapi::shared::d3d9::IDirect3DVolume9);
 
+// missing from winapi
+// C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\d3d9.h
+pub(crate) const D3DSPD_IUNKNOWN : u32 = 1;
+
 
 // d3d.h has: #define D3DAPI WINAPI
 //#cpp2rust D3DAPI          = extern "system"

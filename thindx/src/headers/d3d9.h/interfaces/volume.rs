@@ -7,6 +7,7 @@ use winapi::Interface;
 use winapi::shared::d3d9::IDirect3DVolume9;
 use winapi::um::unknwnbase::IUnknown;
 
+use std::mem::size_of_val;
 use std::ptr::*;
 
 
@@ -250,6 +251,47 @@ pub trait IDirect3DVolume9Ext : AsSafe<IDirect3DVolume9> {
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-setprivatedata)\]
+    /// IDirect3DVolume9::SetPrivateData w/ D3DSPD_IUNKNOWN
+    ///
+    /// Associate arbitrary COM objects with a volume and guid.
+    ///
+    /// ### ⚠️ Safety ⚠️
+    /// It's possible for third party code to impose soundness requirements on the data associated with a given volume and guid.
+    /// Such soundness requirements might include "is a valid COM pointer to a specific type".
+    /// Since this function does not and cannot enforce such requirements, it is `unsafe`.
+    ///
+    /// I wouldn't be suprised if allocation failures might also result in undefined behavior.
+    ///
+    /// This function is otherwise sound.
+    /// Additionally, I would consider it sound to make a wrapper around this function, so long as you enforce any invariants associated with the `guid` in question.
+    /// If you generated the GUID yourself, you can presumably choose your own desired invariants, if any.
+    ///
+    /// ### Returns
+    /// *   [D3DERR::INVALIDCALL]
+    /// *   [E::OUTOFMEMORY]
+    /// *   Ok(())
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use dev::d3d9::*; let dev = device_pure();
+    /// let t = dev.create_volume_texture(8, 8, 8, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
+    /// let v = t.get_volume_level(0).unwrap();
+    ///
+    /// // I can't think of anything fun to associate with a volume,
+    /// // so let's just associate an index buffer for no reason:
+    /// const MY_ASSOCIATED_INDEX_BUFFER : Guid = guid!("bbfd6f01-0c62-4f69-8be1-db0e439b6185");
+    /// let ib = dev.create_index_buffer(6, Usage::None, Format::Index16, Pool::Managed, ()).unwrap();
+    /// unsafe { v.set_private_data_com(&MY_ASSOCIATED_INDEX_BUFFER, ib) }.unwrap();
+    /// ```
+    unsafe fn set_private_data_com(&self, guid: &impl AsRef<Guid>, data: impl AsSafe<IUnknown>) -> Result<(), Error> {
+        fn_context!(d3d9::IDirect3DVolume9Ext::set_private_data_com => IDirect3DVolume9::SetPrivateData);
+        let data : *const IUnknown = data.as_safe();
+        unsafe { (*data).AddRef() }; // SetPrivateData takes ownership over 1 refcount
+        // N.B.: we don't pass a pointer to a buffer containing the *const IUnknown, we just pass the *const IUnknown directly.
+        fn_check_hr!(unsafe { self.as_winapi().SetPrivateData(guid.as_ref().as_ref(), data.cast(), size_of_val(&data) as _, D3DSPD_IUNKNOWN) })
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-setprivatedata)\]
     /// IDirect3DVolume9::SetPrivateData(WKPDID_D3DDebugObjectName, ...)
     ///
     /// Set a human-readable name for this object, to make graphics debug captures easier to understand.
@@ -372,7 +414,6 @@ impl<T: AsSafe<IDirect3DVolume9>> IDirect3DVolume9Ext for T {}
 //#cpp2rust IDirect3DVolume9                        = d3d9::IDirect3DVolume9Ext
 
 //TODO:     IDirect3DVolume9::GetPrivateData        = d3d9::IDirect3DVolume9Ext::get_private_data_com
-//TODO:     IDirect3DVolume9::SetPrivateData        = d3d9::IDirect3DVolume9Ext::set_private_data_com
 
 //#cpp2rust D3D_SET_OBJECT_NAME_A                   = d3d9::IDirect3DVolume9Ext::set_object_name
 //#cpp2rust D3D_SET_OBJECT_NAME_N_A                 = d3d9::IDirect3DVolume9Ext::set_object_name

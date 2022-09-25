@@ -4,6 +4,7 @@ use crate::d3d9::*;
 use winapi::shared::d3d9::IDirect3DResource9;
 use winapi::um::unknwnbase::IUnknown;
 
+use std::mem::size_of_val;
 use std::ptr::null_mut;
 
 
@@ -284,6 +285,43 @@ pub trait IDirect3DResource9Ext : AsSafe<IDirect3DResource9> {
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-setprivatedata)\]
+    /// IDirect3DResource9::SetPrivateData w/ D3DSPD_IUNKNOWN
+    ///
+    /// Associate arbitrary COM objects with a resource and guid.
+    ///
+    /// ### ⚠️ Safety ⚠️
+    /// It's possible for third party code to impose soundness requirements on the data associated with a given resource and guid.
+    /// Such soundness requirements might include "is a valid COM pointer to a specific type".
+    /// Since this function does not and cannot enforce such requirements, it is `unsafe`.
+    ///
+    /// I wouldn't be suprised if allocation failures might also result in undefined behavior.
+    ///
+    /// This function is otherwise sound.
+    /// Additionally, I would consider it sound to make a wrapper around this function, so long as you enforce any invariants associated with the `guid` in question.
+    /// If you generated the GUID yourself, you can presumably choose your own desired invariants, if any.
+    ///
+    /// ### Returns
+    /// *   [D3DERR::INVALIDCALL]
+    /// *   [E::OUTOFMEMORY]
+    /// *   Ok(())
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use dev::d3d9::*; let dev = device_pure();
+    /// const MY_ASSOCIATED_INDEX_BUFFER : Guid = guid!("bbfd6f01-0c62-4f69-8be1-db0e439b6185");
+    /// let vb = dev.create_vertex_buffer(3*4*3, Usage::None, FVF::XYZ, Pool::Managed, ()).unwrap();
+    /// let ib = dev.create_index_buffer(6, Usage::None, Format::Index16, Pool::Managed, ()).unwrap();
+    /// unsafe { vb.set_private_data_com(&MY_ASSOCIATED_INDEX_BUFFER, ib) }.unwrap();
+    /// ```
+    unsafe fn set_private_data_com(&self, guid: &impl AsRef<Guid>, data: impl AsSafe<IUnknown>) -> Result<(), Error> {
+        fn_context!(d3d9::IDirect3DResource9Ext::set_private_data_com => IDirect3DResource9::SetPrivateData);
+        let data : *const IUnknown = data.as_safe();
+        unsafe { (*data).AddRef() }; // SetPrivateData takes ownership over 1 refcount
+        // N.B.: we don't pass a pointer to a buffer containing the *const IUnknown, we just pass the *const IUnknown directly.
+        fn_check_hr!(unsafe { self.as_winapi().SetPrivateData(guid.as_ref().as_ref(), data.cast(), size_of_val(&data) as _, D3DSPD_IUNKNOWN) })
+    }
+
+    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-setprivatedata)\]
     /// IDirect3DResource9::SetPrivateData(WKPDID_D3DDebugObjectName, ...)
     ///
     /// Set a human-readable name for this object, to make graphics debug captures easier to understand.
@@ -330,10 +368,6 @@ pub trait IDirect3DResource9Ext : AsSafe<IDirect3DResource9> {
         fn_context!(d3d9::IDirect3DResource9Ext::set_object_name_w => IDirect3DResource9::SetPrivateData);
         unsafe { self.set_private_data(&wkpdid::D3DDebugObjectNameW, bytemuck::cast_slice(name)) }
     }
-
-    // TODO: set_private_data_unk
-    // TODO: get_private_data_unk ?
-    // figure out where unsoundness should lie - both of those fns?  set_private_data too, as it can invalidate unknown ptrs?
 }
 
 impl<T: AsSafe<IDirect3DResource9>> IDirect3DResource9Ext for T {}
@@ -348,7 +382,6 @@ impl<T: AsSafe<IDirect3DResource9>> IDirect3DResource9Ext for T {}
 //#cpp2rust IDirect3DResource9                      = d3d9::IDirect3DResource9Ext
 
 //TODO:     IDirect3DResource9::GetPrivateData      = d3d9::IDirect3DResource9Ext::get_private_data_com
-//TODO:     IDirect3DResource9::SetPrivateData      = d3d9::IDirect3DResource9Ext::set_private_data_com
 
 //#cpp2rust D3D_SET_OBJECT_NAME_A                   = d3d9::IDirect3DResource9Ext::set_object_name
 //#cpp2rust D3D_SET_OBJECT_NAME_N_A                 = d3d9::IDirect3DResource9Ext::set_object_name

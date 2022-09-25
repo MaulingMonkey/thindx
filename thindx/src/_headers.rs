@@ -1067,7 +1067,7 @@ pub const d3dcompiler_h : cxx_header = cxx_header;
 /// * [`GetType`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-gettype)&nbsp;→ [`d3d9::IDirect3DResource9Ext::get_type`] <br>
 /// * [`PreLoad`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-preload)&nbsp;→ [`d3d9::IDirect3DResource9Ext::preload`] <br>
 /// * [`SetPriority`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-setpriority)&nbsp;→ [`d3d9::IDirect3DResource9Ext::set_priority`] <br>
-/// * [`SetPrivateData`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-setprivatedata)&nbsp;→ [`d3d9::IDirect3DResource9Ext::set_private_data`], [`d3d9::IDirect3DResource9Ext::set_object_name`], [`d3d9::IDirect3DResource9Ext::set_object_name_a`], [`d3d9::IDirect3DResource9Ext::set_object_name_w`] <br>
+/// * [`SetPrivateData`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-setprivatedata)&nbsp;→ [`d3d9::IDirect3DResource9Ext::set_private_data`], [`d3d9::IDirect3DResource9Ext::set_private_data_com`], [`d3d9::IDirect3DResource9Ext::set_object_name`], [`d3d9::IDirect3DResource9Ext::set_object_name_a`], [`d3d9::IDirect3DResource9Ext::set_object_name_w`] <br>
 ///
 /// [`IDirect3DStateBlock9`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dstateblock9)&nbsp;→ [`d3d9::StateBlock`], [`d3d9::IDirect3DStateBlock9Ext`] <br>
 /// * [`Apply`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dstateblock9-apply)&nbsp;→ [`d3d9::IDirect3DStateBlock9Ext::apply`] <br>
@@ -1123,7 +1123,7 @@ pub const d3dcompiler_h : cxx_header = cxx_header;
 /// * [`GetDevice`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-getdevice)&nbsp;→ [`d3d9::IDirect3DVolume9Ext::get_device`] <br>
 /// * [`GetPrivateData`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-getprivatedata)&nbsp;→ [`d3d9::IDirect3DVolume9Ext::get_private_data_inplace`] <br>
 /// * [`LockBox`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-lockbox)&nbsp;→ [`d3d9::IDirect3DVolume9Ext::lock_box_unchecked`] <br>
-/// * [`SetPrivateData`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-setprivatedata)&nbsp;→ [`d3d9::IDirect3DVolume9Ext::set_private_data`], [`d3d9::IDirect3DVolume9Ext::set_object_name`], [`d3d9::IDirect3DVolume9Ext::set_object_name_a`], [`d3d9::IDirect3DVolume9Ext::set_object_name_w`] <br>
+/// * [`SetPrivateData`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-setprivatedata)&nbsp;→ [`d3d9::IDirect3DVolume9Ext::set_private_data`], [`d3d9::IDirect3DVolume9Ext::set_private_data_com`], [`d3d9::IDirect3DVolume9Ext::set_object_name`], [`d3d9::IDirect3DVolume9Ext::set_object_name_a`], [`d3d9::IDirect3DVolume9Ext::set_object_name_w`] <br>
 /// * [`UnlockBox`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-unlockbox)&nbsp;→ [`d3d9::IDirect3DVolume9Ext::unlock_box`] <br>
 ///
 /// [`IDirect3DVolumeTexture9`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dvolumetexture9)&nbsp;→ [`d3d9::VolumeTexture`], [`d3d9::IDirect3DVolumeTexture9Ext`] <br>
