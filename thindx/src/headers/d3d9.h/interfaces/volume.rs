@@ -209,6 +209,19 @@ pub trait IDirect3DVolume9Ext : AsSafe<IDirect3DVolume9> {
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-setprivatedata)\]
     /// IDirect3DVolume9::SetPrivateData
     ///
+    /// Associate arbitrary data with a volume and guid.
+    ///
+    /// ### ⚠️ Safety ⚠️
+    /// It's possible for third party code to impose soundness requirements on the data associated with a given resource and guid.
+    /// The existence of the `D3DSPD_IUNKNOWN` flag implies it's valid for one such requirement to be "points to a valid COM object."
+    /// Since this function does not and cannot enforce such requirements, it is `unsafe`.
+    ///
+    /// I wouldn't be suprised if allocation failures - or sufficiently large buffers causing 32-bit overflows - might also result in undefined behavior.
+    ///
+    /// This function is otherwise sound.
+    /// Additionally, I would consider it sound to make a wrapper around this function, so long as you enforce any invariants associated with the `guid` in question.
+    /// If you generated the GUID yourself, you can presumably choose your own desired invariants, if any.
+    ///
     /// ### Returns
     /// *   [D3DERR::INVALIDCALL]
     /// *   [E::OUTOFMEMORY]
@@ -219,9 +232,18 @@ pub trait IDirect3DVolume9Ext : AsSafe<IDirect3DVolume9> {
     /// # use dev::d3d9::*; let dev = device_pure();
     /// let t = dev.create_volume_texture(8, 8, 8, 0, Usage::None, Format::A8R8G8B8, Pool::Default, ()).unwrap();
     /// let v = t.get_volume_level(0).unwrap();
-    /// v.set_private_data(&wkpdid::D3DDebugObjectName, b"my volume").unwrap();
+    /// unsafe { v.set_private_data(&wkpdid::D3DDebugObjectName, b"my volume") }.unwrap();
+    /// // prefer set_object_name{,_a,_w} as a safe alternative to the above:
+    /// v.set_object_name("my volume").unwrap();
     /// ```
-    fn set_private_data(&self, guid: &impl AsRef<Guid>, data: &[u8]) -> Result<(), Error> {
+    ///
+    /// ### See Also
+    /// *   [IDirect3DVolume9Ext::get_private_data_inplace]
+    /// *   [IDirect3DVolume9Ext::set_object_name]
+    /// *   [IDirect3DVolume9Ext::set_object_name_a]
+    /// *   [IDirect3DVolume9Ext::set_object_name_w]
+    /// *   [IDirect3DResource9Ext::set_private_data]
+    unsafe fn set_private_data(&self, guid: &impl AsRef<Guid>, data: &[u8]) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DVolume9Ext::set_private_data => IDirect3DVolume9::SetPrivateData);
         let n = fn_param_try_len32!(data)?;
         fn_check_hr!(unsafe { self.as_winapi().SetPrivateData(guid.as_ref().as_ref(), data.as_ptr().cast(), n, 0) })
@@ -258,7 +280,7 @@ pub trait IDirect3DVolume9Ext : AsSafe<IDirect3DVolume9> {
     /// ```
     fn set_object_name_a(&self, name: &[u8]) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DVolume9Ext::set_object_name_a => IDirect3DVolume9::SetPrivateData);
-        self.set_private_data(&wkpdid::D3DDebugObjectName, name)
+        unsafe { self.set_private_data(&wkpdid::D3DDebugObjectName, name) }
     }
 
     /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-setprivatedata)\]
@@ -275,7 +297,7 @@ pub trait IDirect3DVolume9Ext : AsSafe<IDirect3DVolume9> {
     /// ```
     fn set_object_name_w(&self, name: &[u16]) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DVolume9Ext::set_object_name_w => IDirect3DVolume9::SetPrivateData);
-        self.set_private_data(&wkpdid::D3DDebugObjectNameW, bytemuck::cast_slice(name))
+        unsafe { self.set_private_data(&wkpdid::D3DDebugObjectNameW, bytemuck::cast_slice(name)) }
     }
 
     // TODO: set_private_data_unk
