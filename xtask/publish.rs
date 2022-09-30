@@ -6,23 +6,23 @@ use std::path::*;
 
 
 pub fn publish(mut args: std::env::Args) {
-    let version = args.next()                       .unwrap_or_else(|| fatal!("expected a `v0.0.0-unsound.n` version tag"));
-    let version_no_v = version.strip_prefix("v")    .unwrap_or_else(|| fatal!("expected a `v0.0.0-unsound.n` version tag, instead got `{}`", version));
+    let version = args.next().unwrap_or_else(|| fatal!("expected a `0.0.0-yyyy-mm-dd` version"));
+    if !version.starts_with("0.0.0-20") { fatal!("expected a `0.0.0-yyyy-mm-dd` version, instead got `{}`", version) }
     let _ = args.next().map(|unexpected| fatal!("unexpected positional argument: {:?}", unexpected));
 
     run(r"cargo publish --allow-dirty --dry-run --no-verify -p thindx"); // early check for e.g. git dependencies
     run(r"git worktree add target\pub");
-    let err = work_in_pub(&version, &version_no_v);
+    let err = work_in_pub(&version);
     let err = err.map_err(|err| error!("{}", err));
     run(r"git worktree remove target\pub --force");
     run(r"git branch -D pub"); // created by worktree commands
     if err.is_err() { std::process::exit(1) }
 }
 
-fn work_in_pub(version: &str, version_no_v: &str) -> io::Result<()> {
+fn work_in_pub(version: &str) -> io::Result<()> {
     let cargo_toml_path = r"target\pub\thindx\Cargo.toml";
     let cargo_toml = std::fs::read_to_string(cargo_toml_path)?;
-    let cargo_toml = cargo_toml.replace("0.0.0-git", &version_no_v);
+    let cargo_toml = cargo_toml.replace("0.0.0-git", version);
     std::fs::write(cargo_toml_path, cargo_toml)?;
     run_in_nonfatal(r"target\pub", "git add thindx/Cargo.toml")?;
     run_in_nonfatal(r"target\pub", format!("git commit -m {:?}", version))?;
