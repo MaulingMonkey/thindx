@@ -45,14 +45,12 @@ pub fn from_args(mut args: std::env::Args) {
 
 pub fn from_settings(settings: Settings) {
     // Dependencies
-    let channel = "nightly";
-
     let rustup = Rustup::default().or_die();
     let toolchains = rustup.toolchains();
-    let toolchain = toolchains.get(channel).unwrap_or_else(|| toolchains.install(channel).or_die());
+    let toolchain = toolchains.active().ok_or("no active toolchain").or_die();
     let toolchain = toolchain.as_str();
 
-    let toolchain_arch      = toolchain.strip_prefix(channel).unwrap().strip_prefix("-").unwrap();
+    let (_toolchain_channel, toolchain_arch) = toolchain.split_once('-').unwrap_or_else(|| fatal!("unable to parse toolchain: {toolchain:?}"));
     let toolchain_bin       = PathBuf::from(std::env::var_os("USERPROFILE").expect("%USERPROFILE%")).join(format!(r".rustup\toolchains\{toolchain}\lib\rustlib\{toolchain_arch}\bin"));
     let llvm_profdata_exe   = toolchain_bin.join("llvm-profdata.exe");
     let llvm_cov_exe        = toolchain_bin.join("llvm-cov.exe");
@@ -86,11 +84,10 @@ pub fn from_settings(settings: Settings) {
         let _ = std::fs::remove_dir_all(&profraw);
 
         let mut cargo_test = cmd("cargo test --tests");
-        cargo_test.env("RUSTUP_TOOLCHAIN",   toolchain);
         status!("Running", "{:?}", cargo_test);
         cargo_test.env("CARGO_TARGET_DIR",   &target_dir);
         cargo_test.env("LLVM_PROFILE_FILE",  target_dir.join(r"profraw\thindx-%p-%m.profraw"));
-        cargo_test.env("RUSTFLAGS",          "-Zinstrument-coverage --cfg unsafe_unsound_unstable_remove_static_asserts_for_coverage");
+        cargo_test.env("RUSTFLAGS",          "-Cinstrument-coverage --cfg unsafe_unsound_unstable_remove_static_asserts_for_coverage");
         cargo_test.status0().or_die();
     }
 
