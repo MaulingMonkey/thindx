@@ -1,6 +1,7 @@
 use crate::*;
 use mmrbi::*;
 use std::collections::*;
+use std::ffi::*;
 
 
 
@@ -50,10 +51,11 @@ pub fn from_settings(settings: Settings) {
     let toolchain = toolchains.active().ok_or("no active toolchain").or_die();
     let toolchain = toolchain.as_str();
 
-    let (_toolchain_channel, toolchain_arch) = toolchain.split_once('-').unwrap_or_else(|| fatal!("unable to parse toolchain: {toolchain:?}"));
+    let (toolchain_channel, toolchain_arch) = toolchain.split_once('-').unwrap_or_else(|| fatal!("unable to parse toolchain: {toolchain:?}"));
     let toolchain_bin       = PathBuf::from(std::env::var_os("USERPROFILE").expect("%USERPROFILE%")).join(format!(r".rustup\toolchains\{toolchain}\lib\rustlib\{toolchain_arch}\bin"));
     let llvm_profdata_exe   = toolchain_bin.join("llvm-profdata.exe");
     let llvm_cov_exe        = toolchain_bin.join("llvm-cov.exe");
+    let can_persist_doctests = toolchain_channel == "nightly"; // https://github.com/rust-lang/rust/issues/56925
 
     if !llvm_profdata_exe.exists() { run(format!("rustup component add --toolchain={toolchain} llvm-tools-preview")) }
     cmd("grcov --version").stdout0().map(|_| {}).unwrap_or_else(|_| run("cargo install grcov"));
@@ -65,6 +67,7 @@ pub fn from_settings(settings: Settings) {
     let target_dir = std::env::current_dir().unwrap().join(r"target\coverage");
     let deps    = target_dir.join(r"debug\deps");
     let profraw = target_dir.join(r"profraw");
+    let doctests= target_dir.join(r"doctests");
 
     if settings.test {
         let _ = std::fs::create_dir_all(&deps);
@@ -82,12 +85,22 @@ pub fn from_settings(settings: Settings) {
             if del { std::fs::remove_file(&path).unwrap_or_else(|err| fatal!("unable to delete {}: {}", path.display(), err)) }
         }
         let _ = std::fs::remove_dir_all(&profraw);
+        let _ = std::fs::remove_dir_all(&doctests);
+
+        let rustflags = "-Cinstrument-coverage --cfg unsafe_unsound_unstable_remove_static_asserts_for_coverage";
 
         let mut cargo_test = cmd("cargo test");
+        if !can_persist_doctests { cargo_test.arg("--tests"); }
         status!("Running", "{:?}", cargo_test);
         cargo_test.env("CARGO_TARGET_DIR",   &target_dir);
-        cargo_test.env("LLVM_PROFILE_FILE",  target_dir.join(r"profraw\thindx-%p-%m.profraw"));
-        cargo_test.env("RUSTFLAGS",          "-Cinstrument-coverage --cfg unsafe_unsound_unstable_remove_static_asserts_for_coverage");
+        cargo_test.env("LLVM_PROFILE_FILE",  profraw.join(r"thindx-%p-%m.profraw"));
+        cargo_test.env("RUSTFLAGS",          rustflags);
+        if can_persist_doctests {
+            let mut rustdocflags = OsString::from(rustflags);
+            rustdocflags.push(" -Zunstable-options --persist-doctests ");
+            rustdocflags.push(&doctests);
+            cargo_test.env("RUSTDOCFLAGS", rustdocflags);
+        }
         cargo_test.status0().or_die();
     }
 
@@ -107,6 +120,26 @@ pub fn from_settings(settings: Settings) {
 
 
 
+    if can_persist_doctests {
+        // collect doctest executables into a single directory where they can be passed to llvm-cov via wildcard
+        let all = doctests.join("_all");
+        let _ = std::fs::create_dir_all(&all);
+        for e in std::fs::read_dir(&doctests).or_die() {
+            let e = e.or_die();
+            let rust_out = e.path().join("rust_out");
+            if !rust_out.exists() { continue }
+            let rust_out_pdb = e.path().join("rust_out.pdb");
+
+            let mut dst_exe = e.file_name();
+            dst_exe.push(".exe");
+            let mut dst_pdb = e.file_name();
+            dst_pdb.push(".pdb");
+
+            let _ = std::os::windows::fs::symlink_file(&rust_out,       all.join(&dst_exe));
+            let _ = std::os::windows::fs::symlink_file(&rust_out_pdb,   all.join(&dst_pdb));
+        }
+    }
+
     // For "Coverage Gutters" vscode extension
 
     let mut llvm_cov_export = Command::new(&llvm_cov_exe);
@@ -114,10 +147,12 @@ pub fn from_settings(settings: Settings) {
         .arg("export")
         .arg(r"--instr-profile=target\coverage\tests.profdata")
         .arg("--format=lcov")
-        .arg(r"target\coverage\debug\deps\thindx-*.exe")
+        .arg("--object").arg(r"target\coverage\debug\deps\thindx-*.exe")
+        .arg("--object").arg(r"target\coverage\doctests\_all\*.exe")
         ;
+    const _ : () = panic!("I think the above line only picks up the first .exe or something since I don't see more is_window tests?  Also, `C:\\local\\thindx0\\thindx\\thindx\\src\\...` is the wrong path as seen in lcov.info...");
     status!("Running", "{:?}", llvm_cov_export);
-    let lcov_info_data = llvm_cov_export.stdout0().unwrap_or_else(|_| fatal!("error merging profraw data"));
+    let lcov_info_data = llvm_cov_export.stdout0().unwrap_or_else(|_| fatal!("error exporting profraw data"));
     let lcov_info_path = r"target\coverage\lcov.info";
 
     status!("Processing", "{}", lcov_info_path);
@@ -198,7 +233,7 @@ pub fn from_settings(settings: Settings) {
     grcov
         .arg(&lcov_info_path)
         .arg("--source-dir").arg(".")
-        .arg("--binary-path").arg(target_dir.join("debug"))
+        .arg("--binary-path").arg(&target_dir)
         .arg("-t").arg("html")
         .arg("--branch")
         .arg("--ignore-not-existing")

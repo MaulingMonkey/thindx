@@ -53,15 +53,15 @@
         },
         {
             "label":   "update coverage",
-            "command": "cargo xtask coverage",
+            "command": "cargo +nightly xtask coverage",
         },
         {
             "label":   "open coverage",
-            "command": "cargo xtask coverage --open",
+            "command": "cargo +nightly xtask coverage --open",
         },
         {
             "label":   "update pages",
-            "command": "cargo xtask pages",
+            "command": "cargo +nightly xtask pages",
         },
         {
             "label":   "git push github master",
