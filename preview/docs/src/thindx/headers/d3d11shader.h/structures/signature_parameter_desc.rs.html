@@ -1,13 +1,12 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3d11shader.h\structures\signature_parameter_desc.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>signature_parameter_desc.rs - source</title><link rel="stylesheet" type="text/css" href="../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script src="../../../../../crates.js"></script><script defer src="../../../../../main.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script>
-    <noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"><style type="text/css">#crate-search{background-image:url("../../../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../../../../thindx/index.html'><div class='logo-container rust-logo'><img src='../../../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../../../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../../../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../../../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1"> 1</span>
-<span id="2"> 2</span>
-<span id="3"> 3</span>
-<span id="4"> 4</span>
-<span id="5"> 5</span>
-<span id="6"> 6</span>
-<span id="7"> 7</span>
-<span id="8"> 8</span>
-<span id="9"> 9</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3d11shader.h\structures\signature_parameter_desc.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>signature_parameter_desc.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../../normalize.css"><link rel="stylesheet" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../../dark.css" disabled><link rel="stylesheet" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<span id="2">2</span>
+<span id="3">3</span>
+<span id="4">4</span>
+<span id="5">5</span>
+<span id="6">6</span>
+<span id="7">7</span>
+<span id="8">8</span>
+<span id="9">9</span>
 <span id="10">10</span>
 <span id="11">11</span>
 <span id="12">12</span>
@@ -48,55 +47,68 @@
 <span id="47">47</span>
 <span id="48">48</span>
 <span id="49">49</span>
-</pre><pre class="rust"><code><span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span> <span class="kw">use</span> <span class="kw">crate</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::ctypes</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::d3d</span>::<span class="kw-2">*</span>;
+<span id="50">50</span>
+<span id="51">51</span>
+<span id="52">52</span>
+<span id="53">53</span>
+<span id="54">54</span>
+<span id="55">55</span>
+<span id="56">56</span>
+</pre><pre class="rust"><code><span class="attribute">#[allow(unused_imports)] </span><span class="kw">use crate</span>::<span class="kw-2">*</span>;
+<span class="kw">use </span><span class="kw">crate</span>::ctypes::<span class="kw-2">*</span>;
+<span class="kw">use </span><span class="kw">crate</span>::d3d::<span class="kw-2">*</span>;
 
-<span class="kw">use</span> <span class="ident">winapi::um::d3d11shader</span>::<span class="kw-2">*</span>;
+<span class="kw">use </span>winapi::um::d3d11shader::<span class="kw-2">*</span>;
 
 
 
-<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/ns-d3d11shader-d3d11_signature_parameter_desc)\]</span>
-<span class="doccomment">/// D3D11_SIGNATURE_PARAMETER_DESC</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// ### See Also</span>
-<span class="doccomment">/// *   [d3d11::ShaderReflection::get_input_parameter_desc]</span>
-<span class="doccomment">/// *   [d3d11::ShaderReflection::get_output_parameter_desc]</span>
-<span class="doccomment">/// *   [d3d11::ShaderReflection::get_patch_constant_parameter_desc]</span>
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">missing_docs</span>)]</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">Debug</span>, <span class="ident">Default</span>)]</span>
-<span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span> <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SignatureParameterDesc</span><span class="op">&lt;</span><span class="lifetime">&#39;s</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// An input semantic name such as &quot;POSITION&quot;, &quot;TEXCOORD&quot;, etc.</span>
-    <span class="kw">pub</span> <span class="ident">semantic_name</span>:      <span class="ident">CStrPtr</span><span class="op">&lt;</span><span class="lifetime">&#39;s</span><span class="op">&gt;</span>, <span class="comment">// maybe never null?</span>
-    <span class="kw">pub</span> <span class="ident">semantic_index</span>:     <span class="ident">u32</span>,
-    <span class="kw">pub</span> <span class="ident">register</span>:           <span class="ident">u32</span>,
-    <span class="kw">pub</span> <span class="ident">system_value_type</span>:  <span class="ident">Name</span>,
-    <span class="kw">pub</span> <span class="ident">component_type</span>:     <span class="ident">RegisterComponentType</span>,
-    <span class="kw">pub</span> <span class="ident">mask</span>:               <span class="ident">u8</span>,
-    <span class="kw">pub</span> <span class="ident">read_write_mask</span>:    <span class="ident">u8</span>,
-    <span class="kw">pub</span> <span class="ident">stream</span>:             <span class="ident">u32</span>,
-    <span class="kw">pub</span> <span class="ident">min_precision</span>:      <span class="ident">MinPrecision</span>,
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/ns-d3d11shader-d3d11_signature_parameter_desc)\]
+/// D3D11_SIGNATURE_PARAMETER_DESC
+///
+/// ### See Also
+/// *   [d3d11::ShaderReflection::get_input_parameter_desc]
+/// *   [d3d11::ShaderReflection::get_output_parameter_desc]
+/// *   [d3d11::ShaderReflection::get_patch_constant_parameter_desc]
+</span><span class="attribute">#[allow(missing_docs)]
+#[derive(Clone, Copy, Debug, Default)]
+#[repr(C)] </span><span class="kw">pub struct </span>SignatureParameterDesc&lt;<span class="lifetime">&#39;s</span>&gt; {
+    <span class="doccomment">/// An input semantic name such as &quot;POSITION&quot;, &quot;TEXCOORD&quot;, etc.
+    </span><span class="kw">pub </span>semantic_name:      CStrPtr&lt;<span class="lifetime">&#39;s</span>&gt;, <span class="comment">// maybe never null?
+    </span><span class="kw">pub </span>semantic_index:     u32,
+    <span class="kw">pub </span>register:           u32,
+    <span class="kw">pub </span>system_value_type:  Name,
+    <span class="kw">pub </span>component_type:     RegisterComponentType,
+    <span class="kw">pub </span>mask:               u8,
+    <span class="kw">pub </span>read_write_mask:    u8,
+    <span class="kw">pub </span>stream:             u32,
+    <span class="kw">pub </span>min_precision:      MinPrecision,
 }
 
-<span class="kw">impl</span> <span class="ident">SignatureParameterDesc</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span> {
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">as_mut_ptr</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">*mut</span> <span class="ident">D3D11_SIGNATURE_PARAMETER_DESC</span> {
-        <span class="self">self</span> <span class="kw">as</span> <span class="kw-2">*const</span> <span class="self">Self</span> <span class="kw">as</span> <span class="kw-2">*mut</span> <span class="self">Self</span> <span class="kw">as</span> <span class="kw-2">*mut</span> <span class="kw">_</span>
+<span class="kw">impl </span>SignatureParameterDesc&lt;<span class="lifetime">&#39;_</span>&gt; {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>as_mut_ptr(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="kw-2">*mut </span>D3D11_SIGNATURE_PARAMETER_DESC {
+        <span class="self">self </span><span class="kw">as </span><span class="kw-2">*const </span><span class="self">Self </span><span class="kw">as </span><span class="kw-2">*mut </span><span class="self">Self </span><span class="kw">as </span><span class="kw-2">*mut </span><span class="kw">_
+    </span>}
+}
+
+<span class="macro">struct_mapping! </span>{
+    <span class="attribute">#[derive(<span class="kw">unsafe </span>{ AsRefD3D, IntoD3D })]
+    </span><span class="comment">// forbidden: AsRef     (could invalidate `semantic_name`)
+    // forbidden: AsMut     (could invalidate `semantic_name`)
+    // forbidden: DerefMut  (could invalidate `semantic_name`)
+    // forbidden: FromD3D   (could invalidate `semantic_name`)
+    </span>SignatureParameterDesc&lt;<span class="lifetime">&#39;_</span>&gt; =&gt; D3D11_SIGNATURE_PARAMETER_DESC {
+        semantic_name       =&gt; SemanticName,
+        semantic_index      =&gt; SemanticIndex,
+        register            =&gt; Register,
+        system_value_type   =&gt; SystemValueType,
+        component_type      =&gt; ComponentType,
+        mask                =&gt; Mask,
+        read_write_mask     =&gt; ReadWriteMask,
+        stream              =&gt; Stream,
+        min_precision       =&gt; MinPrecision,
     }
 }
 
-<span class="macro">test_layout!</span> { <span class="ident">SignatureParameterDesc</span> =&gt; <span class="ident">D3D11_SIGNATURE_PARAMETER_DESC</span> {
-    <span class="ident">semantic_name</span>       =&gt; <span class="ident">SemanticName</span>,
-    <span class="ident">semantic_index</span>      =&gt; <span class="ident">SemanticIndex</span>,
-    <span class="ident">register</span>            =&gt; <span class="ident">Register</span>,
-    <span class="ident">system_value_type</span>   =&gt; <span class="ident">SystemValueType</span>,
-    <span class="ident">component_type</span>      =&gt; <span class="ident">ComponentType</span>,
-    <span class="ident">mask</span>                =&gt; <span class="ident">Mask</span>,
-    <span class="ident">read_write_mask</span>     =&gt; <span class="ident">ReadWriteMask</span>,
-    <span class="ident">stream</span>              =&gt; <span class="ident">Stream</span>,
-    <span class="ident">min_precision</span>       =&gt; <span class="ident">MinPrecision</span>,
-}}
-
-<span class="comment">//#cpp2rust D3D11_SIGNATURE_PARAMETER_DESC          = d3d11::SignatureParameterDesc</span>
-</code></pre></div>
-</section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-search-index-js="../../../../../search-index.js" data-search-js="../../../../../search.js"></div>
-</body></html>
+<span class="comment">//#cpp2rust D3D11_SIGNATURE_PARAMETER_DESC          = d3d11::SignatureParameterDesc
+</span></code></pre></div>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (b44197abb 2022-09-05)" ></div></body></html>

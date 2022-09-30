@@ -1,13 +1,12 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\xinput.h\functions\get_capabilities_.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>get_capabilities_.rs - source</title><link rel="stylesheet" type="text/css" href="../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script src="../../../../../crates.js"></script><script defer src="../../../../../main.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script>
-    <noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"><style type="text/css">#crate-search{background-image:url("../../../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../../../../thindx/index.html'><div class='logo-container rust-logo'><img src='../../../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../../../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../../../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../../../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1"> 1</span>
-<span id="2"> 2</span>
-<span id="3"> 3</span>
-<span id="4"> 4</span>
-<span id="5"> 5</span>
-<span id="6"> 6</span>
-<span id="7"> 7</span>
-<span id="8"> 8</span>
-<span id="9"> 9</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\xinput.h\functions\get_capabilities_.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>get_capabilities_.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../../normalize.css"><link rel="stylesheet" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../../dark.css" disabled><link rel="stylesheet" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<span id="2">2</span>
+<span id="3">3</span>
+<span id="4">4</span>
+<span id="5">5</span>
+<span id="6">6</span>
+<span id="7">7</span>
+<span id="8">8</span>
+<span id="9">9</span>
 <span id="10">10</span>
 <span id="11">11</span>
 <span id="12">12</span>
@@ -52,61 +51,58 @@
 <span id="51">51</span>
 <span id="52">52</span>
 <span id="53">53</span>
-<span id="54">54</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="kw">crate</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::xinput</span>::<span class="kw-2">*</span>;
+</pre><pre class="rust"><code><span class="kw">use crate</span>::<span class="kw-2">*</span>;
+<span class="kw">use </span><span class="kw">crate</span>::xinput::<span class="kw-2">*</span>;
 
-<span class="kw">use</span> <span class="ident">bytemuck::Zeroable</span>;
-
-<span class="kw">use</span> <span class="ident">winapi::um::xinput</span>::<span class="kw-2">*</span>;
+<span class="kw">use </span>bytemuck::Zeroable;
 
 
 
-<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetcapabilities)\]</span>
-<span class="doccomment">/// XInputGetCapabilities</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// ### Errors</span>
-<span class="doccomment">/// *   [ERROR::BAD_ARGUMENTS]          - Invalid [`Flag`]</span>
-<span class="doccomment">/// *   [ERROR::BAD_ARGUMENTS]          - Invalid [`User`] or [`User::Any`]</span>
-<span class="doccomment">/// *   [ERROR::DEVICE_NOT_CONNECTED]   - [`Flag::None`]</span>
-<span class="doccomment">/// *   [ERROR::DEVICE_NOT_CONNECTED]   - [`User`] in bounds, but without a gamepad</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_capabilities</span>(<span class="ident">user_index</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>, <span class="ident">flags</span>: <span class="ident">Flag</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Capabilities</span>, <span class="ident">MethodError</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">caps</span> <span class="op">=</span> <span class="ident">Capabilities::zeroed</span>();
-    <span class="comment">// SAFETY: ✔️</span>
-    <span class="comment">//  * fuzzed        in `tests/fuzz-xinput.rs`</span>
-    <span class="comment">//  * `user_index`  is well tested</span>
-    <span class="comment">//  * `flags`       is decently tested (0, 1, 2 (OOB), 4, 8, 16, 32, 64, 128, 0xFFFFFFFF)</span>
-    <span class="comment">//  * `caps`        is out-only, no cbSize field, fixed size, sane</span>
-    <span class="kw">let</span> <span class="ident">code</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="ident">XInputGetCapabilities</span>(<span class="ident">user_index</span>.<span class="ident">into</span>(), <span class="ident">flags</span>.<span class="ident">into</span>(), <span class="kw-2">&amp;mut</span> <span class="ident">caps</span> <span class="kw">as</span> <span class="kw-2">*mut</span> <span class="kw">_</span> <span class="kw">as</span> <span class="kw-2">*mut</span> <span class="kw">_</span>) };
-    <span class="ident">check_error_success</span>(<span class="string">&quot;XInputGetCapabilities&quot;</span>, <span class="ident">code</span>)<span class="question-mark">?</span>;
-    <span class="prelude-val">Ok</span>(<span class="ident">caps</span>)
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetcapabilities)\]
+/// XInputGetCapabilities
+///
+/// ### Errors
+/// *   [THINERR::MISSING_DLL_EXPORT]   - Couldn&#39;t find an XInput DLL
+/// *   [ERROR::BAD_ARGUMENTS]          - Invalid [`Flag`]
+/// *   [ERROR::BAD_ARGUMENTS]          - Invalid [`User`] or [`User::Any`]
+/// *   [ERROR::DEVICE_NOT_CONNECTED]   - [`Flag::None`]
+/// *   [ERROR::DEVICE_NOT_CONNECTED]   - [`User`] in bounds, but without a gamepad
+</span><span class="kw">pub fn </span>get_capabilities(user_index: <span class="kw">impl </span>Into&lt;u32&gt;, flags: Flag) -&gt; <span class="prelude-ty">Result</span>&lt;Capabilities, Error&gt; {
+    <span class="macro">fn_context!</span>(xinput::get_capabilities =&gt; XInputGetCapabilities);
+    <span class="attribute">#[allow(non_snake_case)] </span><span class="kw">let </span>XInputGetCapabilities = Imports::get().XInputGetCapabilities.ok_or(<span class="macro">fn_error!</span>(THINERR::MISSING_DLL_EXPORT))<span class="question-mark">?</span>;
+    <span class="kw">let </span><span class="kw-2">mut </span>caps = Capabilities::zeroed();
+    <span class="comment">// SAFETY: ✔️
+    //  * fuzzed        in `tests/fuzz-xinput.rs`
+    //  * `user_index`  is well tested
+    //  * `flags`       is decently tested (0, 1, 2 (OOB), 4, 8, 16, 32, 64, 128, 0xFFFFFFFF)
+    //  * `caps`        is out-only, no cbSize field, fixed size, sane
+    </span><span class="kw">let </span>code = <span class="kw">unsafe </span>{ XInputGetCapabilities(user_index.into(), flags.into(), caps.as_mut()) };
+    <span class="macro">check_success!</span>(code)<span class="question-mark">?</span>;
+    <span class="prelude-val">Ok</span>(caps)
 }
 
-<span class="attribute">#[<span class="ident">test</span>]</span> <span class="kw">fn</span> <span class="ident">test_valid_params</span>() {
-    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=</span> <span class="ident">get_capabilities</span>(<span class="number">0u32</span>, <span class="ident">Flag::Gamepad</span>) { <span class="macro">assert_eq!</span>(<span class="ident">err</span>.<span class="ident">kind</span>(), <span class="ident">ERROR::DEVICE_NOT_CONNECTED</span>); }
-    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=</span> <span class="ident">get_capabilities</span>(<span class="number">1u32</span>, <span class="ident">Flag::Gamepad</span>) { <span class="macro">assert_eq!</span>(<span class="ident">err</span>.<span class="ident">kind</span>(), <span class="ident">ERROR::DEVICE_NOT_CONNECTED</span>); }
-    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=</span> <span class="ident">get_capabilities</span>(<span class="number">2u32</span>, <span class="ident">Flag::Gamepad</span>) { <span class="macro">assert_eq!</span>(<span class="ident">err</span>.<span class="ident">kind</span>(), <span class="ident">ERROR::DEVICE_NOT_CONNECTED</span>); }
-    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=</span> <span class="ident">get_capabilities</span>(<span class="number">3u32</span>, <span class="ident">Flag::Gamepad</span>) { <span class="macro">assert_eq!</span>(<span class="ident">err</span>.<span class="ident">kind</span>(), <span class="ident">ERROR::DEVICE_NOT_CONNECTED</span>); }
+<span class="attribute">#[test] </span><span class="kw">fn </span>test_valid_params() {
+    <span class="kw">if let </span><span class="prelude-val">Err</span>(err) = get_capabilities(<span class="number">0u32</span>, Flag::Gamepad) { <span class="macro">assert_eq!</span>(err, ERROR::DEVICE_NOT_CONNECTED); }
+    <span class="kw">if let </span><span class="prelude-val">Err</span>(err) = get_capabilities(<span class="number">1u32</span>, Flag::Gamepad) { <span class="macro">assert_eq!</span>(err, ERROR::DEVICE_NOT_CONNECTED); }
+    <span class="kw">if let </span><span class="prelude-val">Err</span>(err) = get_capabilities(<span class="number">2u32</span>, Flag::Gamepad) { <span class="macro">assert_eq!</span>(err, ERROR::DEVICE_NOT_CONNECTED); }
+    <span class="kw">if let </span><span class="prelude-val">Err</span>(err) = get_capabilities(<span class="number">3u32</span>, Flag::Gamepad) { <span class="macro">assert_eq!</span>(err, ERROR::DEVICE_NOT_CONNECTED); }
 
-    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=</span> <span class="ident">get_capabilities</span>(<span class="number">0u32</span>, <span class="ident">Flag::None</span>   ) { <span class="macro">assert_eq!</span>(<span class="ident">err</span>.<span class="ident">kind</span>(), <span class="ident">ERROR::DEVICE_NOT_CONNECTED</span>); }
-    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=</span> <span class="ident">get_capabilities</span>(<span class="number">1u32</span>, <span class="ident">Flag::None</span>   ) { <span class="macro">assert_eq!</span>(<span class="ident">err</span>.<span class="ident">kind</span>(), <span class="ident">ERROR::DEVICE_NOT_CONNECTED</span>); }
-    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=</span> <span class="ident">get_capabilities</span>(<span class="number">2u32</span>, <span class="ident">Flag::None</span>   ) { <span class="macro">assert_eq!</span>(<span class="ident">err</span>.<span class="ident">kind</span>(), <span class="ident">ERROR::DEVICE_NOT_CONNECTED</span>); }
-    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=</span> <span class="ident">get_capabilities</span>(<span class="number">3u32</span>, <span class="ident">Flag::None</span>   ) { <span class="macro">assert_eq!</span>(<span class="ident">err</span>.<span class="ident">kind</span>(), <span class="ident">ERROR::DEVICE_NOT_CONNECTED</span>); }
+    <span class="kw">if let </span><span class="prelude-val">Err</span>(err) = get_capabilities(<span class="number">0u32</span>, Flag::None   ) { <span class="macro">assert_eq!</span>(err, ERROR::DEVICE_NOT_CONNECTED); }
+    <span class="kw">if let </span><span class="prelude-val">Err</span>(err) = get_capabilities(<span class="number">1u32</span>, Flag::None   ) { <span class="macro">assert_eq!</span>(err, ERROR::DEVICE_NOT_CONNECTED); }
+    <span class="kw">if let </span><span class="prelude-val">Err</span>(err) = get_capabilities(<span class="number">2u32</span>, Flag::None   ) { <span class="macro">assert_eq!</span>(err, ERROR::DEVICE_NOT_CONNECTED); }
+    <span class="kw">if let </span><span class="prelude-val">Err</span>(err) = get_capabilities(<span class="number">3u32</span>, Flag::None   ) { <span class="macro">assert_eq!</span>(err, ERROR::DEVICE_NOT_CONNECTED); }
 }
 
-<span class="attribute">#[<span class="ident">test</span>]</span> <span class="kw">fn</span> <span class="ident">test_bad_arguments</span>() {
-    <span class="macro">assert_eq!</span>(<span class="ident">ERROR::BAD_ARGUMENTS</span>,        <span class="ident">get_capabilities</span>(<span class="ident">User::Any</span>,                 <span class="ident">Flag::Gamepad</span>));            <span class="comment">// Bad User (any)</span>
-    <span class="macro">assert_eq!</span>(<span class="ident">ERROR::BAD_ARGUMENTS</span>,        <span class="ident">get_capabilities</span>(<span class="ident">User::from_unchecked</span>(<span class="number">4</span>),   <span class="ident">Flag::Gamepad</span>));            <span class="comment">// Bad User (obb)</span>
-    <span class="macro">assert_eq!</span>(<span class="ident">ERROR::BAD_ARGUMENTS</span>,        <span class="ident">get_capabilities</span>(<span class="ident">User::Zero</span>,                <span class="ident">Flag::from_unchecked</span>(<span class="number">42</span>))); <span class="comment">// Bad Flag (obb)</span>
-    <span class="macro">assert_eq!</span>(<span class="ident">ERROR::BAD_ARGUMENTS</span>,        <span class="ident">get_capabilities</span>(<span class="ident">User::Zero</span>,                <span class="ident">Flag::from_unchecked</span>(<span class="op">!</span><span class="number">0</span>))); <span class="comment">// Bad Flag (obb)</span>
-    <span class="kw">for</span> <span class="ident">u</span> <span class="kw">in</span> <span class="ident">User::iter_invalid</span>() {
-        <span class="macro">assert_eq!</span>(<span class="ident">ERROR::BAD_ARGUMENTS</span>, <span class="ident">get_capabilities</span>(<span class="ident">u</span>, <span class="ident">Flag::Gamepad</span>)); <span class="comment">// Bad user only</span>
-        <span class="macro">assert_eq!</span>(<span class="ident">ERROR::BAD_ARGUMENTS</span>, <span class="ident">get_capabilities</span>(<span class="ident">u</span>, <span class="ident">Flag::from_unchecked</span>(<span class="number">42</span>))); <span class="comment">// Bad Flag (obb)</span>
-        <span class="macro">assert_eq!</span>(<span class="ident">ERROR::BAD_ARGUMENTS</span>, <span class="ident">get_capabilities</span>(<span class="ident">u</span>, <span class="ident">Flag::from_unchecked</span>(<span class="op">!</span><span class="number">0</span>))); <span class="comment">// Bad Flag (obb)</span>
-    }
+<span class="attribute">#[test] </span><span class="kw">fn </span>test_bad_arguments() {
+    <span class="macro">assert_eq!</span>(ERROR::BAD_ARGUMENTS,        get_capabilities(User::Any,                 Flag::Gamepad));            <span class="comment">// Bad User (any)
+    </span><span class="macro">assert_eq!</span>(ERROR::BAD_ARGUMENTS,        get_capabilities(User::from_unchecked(<span class="number">4</span>),   Flag::Gamepad));            <span class="comment">// Bad User (obb)
+    </span><span class="macro">assert_eq!</span>(ERROR::BAD_ARGUMENTS,        get_capabilities(User::Zero,                Flag::from_unchecked(<span class="number">42</span>))); <span class="comment">// Bad Flag (obb)
+    </span><span class="macro">assert_eq!</span>(ERROR::BAD_ARGUMENTS,        get_capabilities(User::Zero,                Flag::from_unchecked(!<span class="number">0</span>))); <span class="comment">// Bad Flag (obb)
+    </span><span class="kw">for </span>u <span class="kw">in </span>User::iter_invalid() {
+        <span class="macro">assert_eq!</span>(ERROR::BAD_ARGUMENTS, get_capabilities(u, Flag::Gamepad)); <span class="comment">// Bad user only
+        </span><span class="macro">assert_eq!</span>(ERROR::BAD_ARGUMENTS, get_capabilities(u, Flag::from_unchecked(<span class="number">42</span>))); <span class="comment">// Bad Flag (obb)
+        </span><span class="macro">assert_eq!</span>(ERROR::BAD_ARGUMENTS, get_capabilities(u, Flag::from_unchecked(!<span class="number">0</span>))); <span class="comment">// Bad Flag (obb)
+    </span>}
 }
-
-<span class="comment">//#cpp2rust XInputGetCapabilities   = xinput::get_capabilities</span>
 </code></pre></div>
-</section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-search-index-js="../../../../../search-index.js" data-search-js="../../../../../search.js"></div>
-</body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (b44197abb 2022-09-05)" ></div></body></html>

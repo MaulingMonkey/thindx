@@ -1,103 +1,102 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\macros.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>macros.rs - source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><script defer src="../../main.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script>
-    <noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../thindx/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
-<span id="2">  2</span>
-<span id="3">  3</span>
-<span id="4">  4</span>
-<span id="5">  5</span>
-<span id="6">  6</span>
-<span id="7">  7</span>
-<span id="8">  8</span>
-<span id="9">  9</span>
-<span id="10"> 10</span>
-<span id="11"> 11</span>
-<span id="12"> 12</span>
-<span id="13"> 13</span>
-<span id="14"> 14</span>
-<span id="15"> 15</span>
-<span id="16"> 16</span>
-<span id="17"> 17</span>
-<span id="18"> 18</span>
-<span id="19"> 19</span>
-<span id="20"> 20</span>
-<span id="21"> 21</span>
-<span id="22"> 22</span>
-<span id="23"> 23</span>
-<span id="24"> 24</span>
-<span id="25"> 25</span>
-<span id="26"> 26</span>
-<span id="27"> 27</span>
-<span id="28"> 28</span>
-<span id="29"> 29</span>
-<span id="30"> 30</span>
-<span id="31"> 31</span>
-<span id="32"> 32</span>
-<span id="33"> 33</span>
-<span id="34"> 34</span>
-<span id="35"> 35</span>
-<span id="36"> 36</span>
-<span id="37"> 37</span>
-<span id="38"> 38</span>
-<span id="39"> 39</span>
-<span id="40"> 40</span>
-<span id="41"> 41</span>
-<span id="42"> 42</span>
-<span id="43"> 43</span>
-<span id="44"> 44</span>
-<span id="45"> 45</span>
-<span id="46"> 46</span>
-<span id="47"> 47</span>
-<span id="48"> 48</span>
-<span id="49"> 49</span>
-<span id="50"> 50</span>
-<span id="51"> 51</span>
-<span id="52"> 52</span>
-<span id="53"> 53</span>
-<span id="54"> 54</span>
-<span id="55"> 55</span>
-<span id="56"> 56</span>
-<span id="57"> 57</span>
-<span id="58"> 58</span>
-<span id="59"> 59</span>
-<span id="60"> 60</span>
-<span id="61"> 61</span>
-<span id="62"> 62</span>
-<span id="63"> 63</span>
-<span id="64"> 64</span>
-<span id="65"> 65</span>
-<span id="66"> 66</span>
-<span id="67"> 67</span>
-<span id="68"> 68</span>
-<span id="69"> 69</span>
-<span id="70"> 70</span>
-<span id="71"> 71</span>
-<span id="72"> 72</span>
-<span id="73"> 73</span>
-<span id="74"> 74</span>
-<span id="75"> 75</span>
-<span id="76"> 76</span>
-<span id="77"> 77</span>
-<span id="78"> 78</span>
-<span id="79"> 79</span>
-<span id="80"> 80</span>
-<span id="81"> 81</span>
-<span id="82"> 82</span>
-<span id="83"> 83</span>
-<span id="84"> 84</span>
-<span id="85"> 85</span>
-<span id="86"> 86</span>
-<span id="87"> 87</span>
-<span id="88"> 88</span>
-<span id="89"> 89</span>
-<span id="90"> 90</span>
-<span id="91"> 91</span>
-<span id="92"> 92</span>
-<span id="93"> 93</span>
-<span id="94"> 94</span>
-<span id="95"> 95</span>
-<span id="96"> 96</span>
-<span id="97"> 97</span>
-<span id="98"> 98</span>
-<span id="99"> 99</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\macros.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>macros.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../thindx/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<span id="2">2</span>
+<span id="3">3</span>
+<span id="4">4</span>
+<span id="5">5</span>
+<span id="6">6</span>
+<span id="7">7</span>
+<span id="8">8</span>
+<span id="9">9</span>
+<span id="10">10</span>
+<span id="11">11</span>
+<span id="12">12</span>
+<span id="13">13</span>
+<span id="14">14</span>
+<span id="15">15</span>
+<span id="16">16</span>
+<span id="17">17</span>
+<span id="18">18</span>
+<span id="19">19</span>
+<span id="20">20</span>
+<span id="21">21</span>
+<span id="22">22</span>
+<span id="23">23</span>
+<span id="24">24</span>
+<span id="25">25</span>
+<span id="26">26</span>
+<span id="27">27</span>
+<span id="28">28</span>
+<span id="29">29</span>
+<span id="30">30</span>
+<span id="31">31</span>
+<span id="32">32</span>
+<span id="33">33</span>
+<span id="34">34</span>
+<span id="35">35</span>
+<span id="36">36</span>
+<span id="37">37</span>
+<span id="38">38</span>
+<span id="39">39</span>
+<span id="40">40</span>
+<span id="41">41</span>
+<span id="42">42</span>
+<span id="43">43</span>
+<span id="44">44</span>
+<span id="45">45</span>
+<span id="46">46</span>
+<span id="47">47</span>
+<span id="48">48</span>
+<span id="49">49</span>
+<span id="50">50</span>
+<span id="51">51</span>
+<span id="52">52</span>
+<span id="53">53</span>
+<span id="54">54</span>
+<span id="55">55</span>
+<span id="56">56</span>
+<span id="57">57</span>
+<span id="58">58</span>
+<span id="59">59</span>
+<span id="60">60</span>
+<span id="61">61</span>
+<span id="62">62</span>
+<span id="63">63</span>
+<span id="64">64</span>
+<span id="65">65</span>
+<span id="66">66</span>
+<span id="67">67</span>
+<span id="68">68</span>
+<span id="69">69</span>
+<span id="70">70</span>
+<span id="71">71</span>
+<span id="72">72</span>
+<span id="73">73</span>
+<span id="74">74</span>
+<span id="75">75</span>
+<span id="76">76</span>
+<span id="77">77</span>
+<span id="78">78</span>
+<span id="79">79</span>
+<span id="80">80</span>
+<span id="81">81</span>
+<span id="82">82</span>
+<span id="83">83</span>
+<span id="84">84</span>
+<span id="85">85</span>
+<span id="86">86</span>
+<span id="87">87</span>
+<span id="88">88</span>
+<span id="89">89</span>
+<span id="90">90</span>
+<span id="91">91</span>
+<span id="92">92</span>
+<span id="93">93</span>
+<span id="94">94</span>
+<span id="95">95</span>
+<span id="96">96</span>
+<span id="97">97</span>
+<span id="98">98</span>
+<span id="99">99</span>
 <span id="100">100</span>
 <span id="101">101</span>
 <span id="102">102</span>
@@ -276,196 +275,356 @@
 <span id="275">275</span>
 <span id="276">276</span>
 <span id="277">277</span>
-</pre><pre class="rust"><code><span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">test</span>))]</span> <span class="macro">macro_rules!</span> <span class="ident">test_layout_only</span> { ( $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">tt</span>:<span class="ident">tt</span>)<span class="op">*</span> ) =&gt; {} }
-<span class="doccomment">/// ### Usage</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// ```no_run</span>
-<span class="doccomment">/// test_layout_only! {</span>
-<span class="doccomment">///     RustyStruct =&gt; D3D_STRUCT {</span>
-<span class="doccomment">///         rusty_field_a =&gt; CppFieldA,</span>
-<span class="doccomment">///         rusty_field_b =&gt; CppFieldB,</span>
-<span class="doccomment">///     }</span>
-<span class="doccomment">/// }</span>
-<span class="doccomment">/// ```</span>
-<span class="attribute">#[<span class="ident">cfg</span>(    <span class="ident">test</span> )]</span> <span class="macro">macro_rules!</span> <span class="ident">test_layout_only</span> {
-    (
-        <span class="macro-nonterminal">$</span><span class="macro-nonterminal">thin</span>:<span class="ident">ty</span> =&gt; <span class="macro-nonterminal">$</span><span class="macro-nonterminal">d3d</span>:<span class="ident">ty</span> {
-            $( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">thin_field</span>:<span class="ident">ident</span> =&gt; <span class="macro-nonterminal">$</span><span class="macro-nonterminal">d3d_field</span>:<span class="ident">ident</span> ),<span class="op">*</span>
-            $(,)<span class="question-mark">?</span>
-        }
-    ) =&gt; {
-        <span class="attribute">#[<span class="ident">test</span>]</span> <span class="kw">fn</span> <span class="ident">layout</span>() {
-            <span class="kw">use</span> <span class="ident">std::mem</span>::<span class="kw-2">*</span>;
-            <span class="kw">use</span> <span class="ident">std::ptr::addr_of</span>;
-            <span class="kw">use</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">crate::macros</span>::<span class="kw-2">*</span>;
-            <span class="kw">let</span> <span class="ident">thin</span> <span class="op">=</span> <span class="ident">MaybeUninit</span>::<span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">thin</span><span class="op">&gt;</span><span class="ident">::uninit</span>();
-            <span class="kw">let</span> <span class="ident">d3d</span>  <span class="op">=</span> <span class="ident">MaybeUninit</span>::<span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">d3d</span> <span class="op">&gt;</span><span class="ident">::uninit</span>();
-            <span class="kw">let</span> <span class="ident">thin</span> <span class="op">=</span> <span class="ident">thin</span>.<span class="ident">as_ptr</span>();
-            <span class="kw">let</span> <span class="ident">d3d</span>  <span class="op">=</span> <span class="ident">d3d</span> .<span class="ident">as_ptr</span>();
-            <span class="macro">assert_eq!</span>( <span class="ident">size_of</span>::<span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">thin</span><span class="op">&gt;</span>(),  <span class="ident">size_of</span>::<span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">d3d</span><span class="op">&gt;</span>(),  <span class="string">&quot;size_of {} != {}&quot;</span>, <span class="macro">stringify!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">thin</span>), <span class="macro">stringify!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">d3d</span>));
-            <span class="macro">assert_eq!</span>(<span class="ident">align_of</span>::<span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">thin</span><span class="op">&gt;</span>(), <span class="ident">align_of</span>::<span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">d3d</span><span class="op">&gt;</span>(), <span class="string">&quot;align_of {} != {}&quot;</span>, <span class="macro">stringify!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">thin</span>), <span class="macro">stringify!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">d3d</span>));
-            <span class="macro">assert!</span>(<span class="macro">stringify!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">d3d</span>).<span class="ident">to_lowercase</span>().<span class="ident">replace</span>(<span class="string">&quot;_&quot;</span>,<span class="string">&quot;&quot;</span>).<span class="ident">contains</span>(<span class="macro">stringify!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">thin</span>).<span class="ident">to_lowercase</span>().<span class="ident">as_str</span>()), <span class="string">&quot;{} not included in {}&#39;s name&quot;</span>, <span class="macro">stringify!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">thin</span>), <span class="macro">stringify!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">d3d</span>));
-            $(<span class="kw unsafe">unsafe</span> {
-                <span class="macro">assert_eq!</span>(<span class="ident">size_of_val_raw_sized</span>(<span class="macro">addr_of!</span>((<span class="kw-2">*</span><span class="ident">thin</span>).<span class="macro-nonterminal">$</span><span class="macro-nonterminal">thin_field</span>)), <span class="ident">size_of_val_raw_sized</span>(<span class="macro">addr_of!</span>((<span class="kw-2">*</span><span class="ident">d3d</span>).<span class="macro-nonterminal">$</span><span class="macro-nonterminal">d3d_field</span>)),   <span class="string">&quot;size_of {}::{} != {}::{}&quot;</span>, <span class="macro">stringify!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">thin</span>), <span class="macro">stringify!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">thin_field</span>), <span class="macro">stringify!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">d3d</span>), <span class="macro">stringify!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">d3d_field</span>));
-                <span class="macro">assert_eq!</span>(      <span class="ident">offset_of</span>(<span class="ident">thin</span>, <span class="macro">addr_of!</span>((<span class="kw-2">*</span><span class="ident">thin</span>).<span class="macro-nonterminal">$</span><span class="macro-nonterminal">thin_field</span>)),        <span class="ident">offset_of</span>(<span class="ident">d3d</span>, <span class="macro">addr_of!</span>((<span class="kw-2">*</span><span class="ident">d3d</span>).<span class="macro-nonterminal">$</span><span class="macro-nonterminal">d3d_field</span>)), <span class="string">&quot;offset_of {}::{} != {}::{}&quot;</span>, <span class="macro">stringify!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">thin</span>), <span class="macro">stringify!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">thin_field</span>), <span class="macro">stringify!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">d3d</span>), <span class="macro">stringify!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">d3d_field</span>));
-            })<span class="op">*</span>
-        }
-    };
-}
+<span id="278">278</span>
+<span id="279">279</span>
+<span id="280">280</span>
+<span id="281">281</span>
+<span id="282">282</span>
+<span id="283">283</span>
+<span id="284">284</span>
+<span id="285">285</span>
+<span id="286">286</span>
+<span id="287">287</span>
+<span id="288">288</span>
+<span id="289">289</span>
+<span id="290">290</span>
+<span id="291">291</span>
+<span id="292">292</span>
+<span id="293">293</span>
+<span id="294">294</span>
+<span id="295">295</span>
+<span id="296">296</span>
+<span id="297">297</span>
+<span id="298">298</span>
+<span id="299">299</span>
+<span id="300">300</span>
+<span id="301">301</span>
+<span id="302">302</span>
+<span id="303">303</span>
+<span id="304">304</span>
+<span id="305">305</span>
+<span id="306">306</span>
+<span id="307">307</span>
+<span id="308">308</span>
+<span id="309">309</span>
+<span id="310">310</span>
+<span id="311">311</span>
+<span id="312">312</span>
+<span id="313">313</span>
+<span id="314">314</span>
+<span id="315">315</span>
+<span id="316">316</span>
+<span id="317">317</span>
+<span id="318">318</span>
+<span id="319">319</span>
+<span id="320">320</span>
+<span id="321">321</span>
+<span id="322">322</span>
+<span id="323">323</span>
+<span id="324">324</span>
+<span id="325">325</span>
+<span id="326">326</span>
+<span id="327">327</span>
+<span id="328">328</span>
+<span id="329">329</span>
+<span id="330">330</span>
+<span id="331">331</span>
+<span id="332">332</span>
+<span id="333">333</span>
+<span id="334">334</span>
+<span id="335">335</span>
+<span id="336">336</span>
+<span id="337">337</span>
+<span id="338">338</span>
+<span id="339">339</span>
+<span id="340">340</span>
+<span id="341">341</span>
+<span id="342">342</span>
+<span id="343">343</span>
+<span id="344">344</span>
+<span id="345">345</span>
+<span id="346">346</span>
+<span id="347">347</span>
+<span id="348">348</span>
+<span id="349">349</span>
+<span id="350">350</span>
+<span id="351">351</span>
+<span id="352">352</span>
+<span id="353">353</span>
+<span id="354">354</span>
+<span id="355">355</span>
+<span id="356">356</span>
+<span id="357">357</span>
+<span id="358">358</span>
+<span id="359">359</span>
+<span id="360">360</span>
+<span id="361">361</span>
+<span id="362">362</span>
+</pre><pre class="rust"><code><span class="attribute">#![cfg_attr(not(test), allow(unused_macros))]
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">test</span>))]</span> <span class="macro">macro_rules!</span> <span class="ident">test_layout</span> { ( $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">tt</span>:<span class="ident">tt</span>)<span class="op">*</span> ) =&gt; {} }
-<span class="doccomment">/// ### Usage</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// ```no_run</span>
-<span class="doccomment">/// test_layout! {</span>
-<span class="doccomment">///     RustyStruct =&gt; D3D_STRUCT {</span>
-<span class="doccomment">///         rusty_field_a =&gt; CppFieldA,</span>
-<span class="doccomment">///         rusty_field_b =&gt; CppFieldB,</span>
-<span class="doccomment">///     }</span>
-<span class="doccomment">/// }</span>
-<span class="doccomment">/// ```</span>
-<span class="attribute">#[<span class="ident">cfg</span>(    <span class="ident">test</span> )]</span> <span class="macro">macro_rules!</span> <span class="ident">test_layout</span> {
+</span><span class="doccomment">/// ### Usage
+/// ```ignore
+/// struct_mapping! {
+///     RustyStruct =&gt; D3D_STRUCT {
+///         rusty_field_a =&gt; CppFieldA,
+///         rusty_field_b =&gt; CppFieldB,
+///     }
+/// }
+/// ```
+</span><span class="macro">macro_rules! </span>struct_mapping {
     ($(
-        <span class="macro-nonterminal">$</span><span class="macro-nonterminal">thin</span>:<span class="ident">ty</span> =&gt; <span class="macro-nonterminal">$</span><span class="macro-nonterminal">d3d</span>:<span class="ident">ty</span> {
-            $( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">thin_field</span>:<span class="ident">ident</span> =&gt; <span class="macro-nonterminal">$</span><span class="macro-nonterminal">d3d_field</span>:<span class="ident">ident</span> ),<span class="op">*</span>
-            $(,)<span class="question-mark">?</span>
-        }
+        $(<span class="attribute">#[$(<span class="macro-nonterminal">$meta_struct</span>:tt)<span class="kw-2">*</span>]</span>)*
+        <span class="macro-nonterminal">$thin_struct</span>:ty =&gt; <span class="macro-nonterminal">$d3d_struct</span>:ty {
+            $( $(<span class="attribute">#[$(<span class="macro-nonterminal">$meta_field</span>:tt)<span class="kw-2">*</span>]</span>)* <span class="macro-nonterminal">$thin_field</span>:ident =&gt; <span class="macro-nonterminal">$d3d_field</span>:ident ),*
+            $(,)<span class="question-mark">?
+        </span>}
     )<span class="kw-2">*</span>) =&gt; {
-        <span class="attribute">#[<span class="ident">test</span>]</span> <span class="kw">fn</span> <span class="ident">layout</span>() {
-            <span class="kw">use</span> <span class="ident">std::mem</span>::<span class="kw-2">*</span>;
-            <span class="kw">use</span> <span class="ident">std::ptr::addr_of</span>;
-            <span class="kw">use</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">crate::macros</span>::<span class="kw-2">*</span>;
+        $(
+            <span class="macro">struct_mapping! </span>{
+                @derive_from_meta
+                $(<span class="attribute">#[$(<span class="macro-nonterminal">$meta_struct</span>)<span class="kw-2">*</span>]</span>)*
+                <span class="macro-nonterminal">$thin_struct </span>=&gt; <span class="macro-nonterminal">$d3d_struct
+            </span>}
+        )*
+
+        <span class="attribute">#[test] </span><span class="kw">fn </span>layout() {
+            <span class="kw">use </span>std::mem::<span class="kw-2">*</span>;
+            <span class="kw">use </span>std::ptr::addr_of;
+            <span class="kw">use </span><span class="macro-nonterminal">$crate::macros</span>::<span class="kw-2">*</span>;
 
             $(
-                <span class="kw">let</span> <span class="ident">thin</span> <span class="op">=</span> <span class="ident">MaybeUninit</span>::<span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">thin</span><span class="op">&gt;</span><span class="ident">::uninit</span>();
-                <span class="kw">let</span> <span class="ident">d3d</span>  <span class="op">=</span> <span class="ident">MaybeUninit</span>::<span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">d3d</span> <span class="op">&gt;</span><span class="ident">::uninit</span>();
-                <span class="kw">let</span> <span class="ident">thin</span> <span class="op">=</span> <span class="ident">thin</span>.<span class="ident">as_ptr</span>();
-                <span class="kw">let</span> <span class="ident">d3d</span>  <span class="op">=</span> <span class="ident">d3d</span> .<span class="ident">as_ptr</span>();
-                <span class="macro">assert_eq!</span>( <span class="ident">size_of</span>::<span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">thin</span><span class="op">&gt;</span>(),  <span class="ident">size_of</span>::<span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">d3d</span><span class="op">&gt;</span>(),  <span class="string">&quot;size_of {} != {}&quot;</span>, <span class="macro">stringify!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">thin</span>), <span class="macro">stringify!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">d3d</span>));
-                <span class="macro">assert_eq!</span>(<span class="ident">align_of</span>::<span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">thin</span><span class="op">&gt;</span>(), <span class="ident">align_of</span>::<span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">d3d</span><span class="op">&gt;</span>(), <span class="string">&quot;align_of {} != {}&quot;</span>, <span class="macro">stringify!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">thin</span>), <span class="macro">stringify!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">d3d</span>));
-                <span class="macro">assert!</span>(<span class="macro">stringify!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">d3d</span>).<span class="ident">to_lowercase</span>().<span class="ident">replace</span>(<span class="string">&quot;_&quot;</span>,<span class="string">&quot;&quot;</span>).<span class="ident">contains</span>(<span class="macro">stringify!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">thin</span>).<span class="ident">to_lowercase</span>().<span class="ident">as_str</span>()), <span class="string">&quot;{} not included in {}&#39;s name&quot;</span>, <span class="macro">stringify!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">thin</span>), <span class="macro">stringify!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">d3d</span>));
-                $(<span class="kw unsafe">unsafe</span> {
-                    <span class="macro">assert_eq!</span>(<span class="ident">size_of_val_raw_sized</span>(<span class="macro">addr_of!</span>((<span class="kw-2">*</span><span class="ident">thin</span>).<span class="macro-nonterminal">$</span><span class="macro-nonterminal">thin_field</span>)), <span class="ident">size_of_val_raw_sized</span>(<span class="macro">addr_of!</span>((<span class="kw-2">*</span><span class="ident">d3d</span>).<span class="macro-nonterminal">$</span><span class="macro-nonterminal">d3d_field</span>)),   <span class="string">&quot;size_of {}::{} != {}::{}&quot;</span>, <span class="macro">stringify!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">thin</span>), <span class="macro">stringify!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">thin_field</span>), <span class="macro">stringify!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">d3d</span>), <span class="macro">stringify!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">d3d_field</span>));
-                    <span class="macro">assert_eq!</span>(      <span class="ident">offset_of</span>(<span class="ident">thin</span>, <span class="macro">addr_of!</span>((<span class="kw-2">*</span><span class="ident">thin</span>).<span class="macro-nonterminal">$</span><span class="macro-nonterminal">thin_field</span>)),        <span class="ident">offset_of</span>(<span class="ident">d3d</span>, <span class="macro">addr_of!</span>((<span class="kw-2">*</span><span class="ident">d3d</span>).<span class="macro-nonterminal">$</span><span class="macro-nonterminal">d3d_field</span>)), <span class="string">&quot;offset_of {}::{} != {}::{}&quot;</span>, <span class="macro">stringify!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">thin</span>), <span class="macro">stringify!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">thin_field</span>), <span class="macro">stringify!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">d3d</span>), <span class="macro">stringify!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">d3d_field</span>));
-                    <span class="macro">assert!</span>(<span class="macro">stringify!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">d3d_field</span>).<span class="ident">to_lowercase</span>().<span class="ident">replace</span>(<span class="string">&quot;_&quot;</span>,<span class="string">&quot;&quot;</span>).<span class="ident">contains</span>(<span class="macro">stringify!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">thin_field</span>).<span class="ident">strip_prefix</span>(<span class="string">&quot;r#&quot;</span>).<span class="ident">unwrap_or</span>(<span class="macro">stringify!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">thin_field</span>)).<span class="ident">to_lowercase</span>().<span class="ident">replace</span>(<span class="string">&quot;_&quot;</span>,<span class="string">&quot;&quot;</span>).<span class="ident">as_str</span>()), <span class="string">&quot;{} not included in {}&#39;s name&quot;</span>, <span class="macro">stringify!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">thin_field</span>), <span class="macro">stringify!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">d3d_field</span>));
-                })<span class="op">*</span>
-            )<span class="op">*</span>
+                $(  <span class="macro">struct_mapping!</span>(@meta_struct_validate $(<span class="macro-nonterminal">$meta_struct</span>)* );)*
+                $($(<span class="macro">struct_mapping!</span>(@meta_field_validate  $(<span class="macro-nonterminal">$meta_field</span>)* );)<span class="kw-2">*</span>)*
+
+
+                <span class="kw">let </span>thin = MaybeUninit::&lt;<span class="macro-nonterminal">$thin_struct</span>&gt;::uninit();
+                <span class="kw">let </span>d3d  = MaybeUninit::&lt;<span class="macro-nonterminal">$d3d_struct </span>&gt;::uninit();
+                <span class="kw">let </span>thin = thin.as_ptr();
+                <span class="kw">let </span>d3d  = d3d .as_ptr();
+
+                <span class="kw">let </span>ignore_align = <span class="macro">struct_mapping!</span>(@meta_ignore_align $($(<span class="macro-nonterminal">$meta_struct</span>)<span class="kw-2">*</span>)<span class="kw-2">*</span>);
+
+                <span class="macro">assert_eq!</span>( size_of::&lt;<span class="macro-nonterminal">$thin_struct</span>&gt;(),  size_of::&lt;<span class="macro-nonterminal">$d3d_struct</span>&gt;(),  <span class="string">&quot;size_of {} != {}&quot;</span>, <span class="macro">stringify!</span>(<span class="macro-nonterminal">$thin_struct</span>), <span class="macro">stringify!</span>(<span class="macro-nonterminal">$d3d_struct</span>));
+                <span class="kw">if </span>!ignore_align {
+                    <span class="macro">assert_eq!</span>(align_of::&lt;<span class="macro-nonterminal">$thin_struct</span>&gt;(), align_of::&lt;<span class="macro-nonterminal">$d3d_struct</span>&gt;(), <span class="string">&quot;align_of {} != {}&quot;</span>, <span class="macro">stringify!</span>(<span class="macro-nonterminal">$thin_struct</span>), <span class="macro">stringify!</span>(<span class="macro-nonterminal">$d3d_struct</span>));
+                }
+
+                <span class="kw">let </span>same_name = {
+                    <span class="kw">let </span>d3d = <span class="macro">stringify!</span>(<span class="macro-nonterminal">$d3d_struct</span>).to_lowercase().replace(<span class="string">&quot;_&quot;</span>,<span class="string">&quot;&quot;</span>);
+                    <span class="kw">let </span>thin = <span class="macro">stringify!</span>(<span class="macro-nonterminal">$thin_struct</span>).to_lowercase();
+                    <span class="kw">let </span>thin = thin.strip_suffix(<span class="string">&quot;&lt;&#39;_&gt;&quot;</span>).unwrap_or(thin.as_str());
+                    d3d.contains(thin)
+                };
+
+                <span class="kw">let </span>expect_renamed = <span class="macro">struct_mapping!</span>(@meta_renamed $($(<span class="macro-nonterminal">$meta_struct</span>)<span class="kw-2">*</span>)<span class="kw-2">*</span>);
+                <span class="kw">if </span>expect_renamed {
+                    <span class="macro">assert!</span>(!same_name, <span class="string">&quot;{} included in {}&#39;s name, despite being marked as #[renamed]!&quot;</span>, <span class="macro">stringify!</span>(<span class="macro-nonterminal">$thin_struct</span>), <span class="macro">stringify!</span>(<span class="macro-nonterminal">$d3d_struct</span>));
+                } <span class="kw">else </span>{
+                    <span class="macro">assert!</span>(same_name, <span class="string">&quot;{} not included in {}&#39;s name, nor marked as #[renamed]&quot;</span>, <span class="macro">stringify!</span>(<span class="macro-nonterminal">$thin_struct</span>), <span class="macro">stringify!</span>(<span class="macro-nonterminal">$d3d_struct</span>));
+                }
+
+                $(<span class="kw">unsafe </span>{
+                    <span class="macro">assert_eq!</span>(size_of_val_raw_sized(<span class="macro">addr_of!</span>((<span class="kw-2">*</span>thin).<span class="macro-nonterminal">$thin_field</span>)), size_of_val_raw_sized(<span class="macro">addr_of!</span>((<span class="kw-2">*</span>d3d).<span class="macro-nonterminal">$d3d_field</span>)),   <span class="string">&quot;size_of {}::{} != {}::{}&quot;</span>, <span class="macro">stringify!</span>(<span class="macro-nonterminal">$thin_struct</span>), <span class="macro">stringify!</span>(<span class="macro-nonterminal">$thin_field</span>), <span class="macro">stringify!</span>(<span class="macro-nonterminal">$d3d_struct</span>), <span class="macro">stringify!</span>(<span class="macro-nonterminal">$d3d_field</span>));
+                    <span class="macro">assert_eq!</span>(      offset_of(thin, <span class="macro">addr_of!</span>((<span class="kw-2">*</span>thin).<span class="macro-nonterminal">$thin_field</span>)),        offset_of(d3d, <span class="macro">addr_of!</span>((<span class="kw-2">*</span>d3d).<span class="macro-nonterminal">$d3d_field</span>)), <span class="string">&quot;offset_of {}::{} != {}::{}&quot;</span>, <span class="macro">stringify!</span>(<span class="macro-nonterminal">$thin_struct</span>), <span class="macro">stringify!</span>(<span class="macro-nonterminal">$thin_field</span>), <span class="macro">stringify!</span>(<span class="macro-nonterminal">$d3d_struct</span>), <span class="macro">stringify!</span>(<span class="macro-nonterminal">$d3d_field</span>));
+
+                    <span class="kw">let </span>same_name = <span class="macro">stringify!</span>(<span class="macro-nonterminal">$d3d_field</span>).to_lowercase().replace(<span class="string">&quot;_&quot;</span>,<span class="string">&quot;&quot;</span>).contains(<span class="macro">stringify!</span>(<span class="macro-nonterminal">$thin_field</span>).strip_prefix(<span class="string">&quot;r#&quot;</span>).unwrap_or(<span class="macro">stringify!</span>(<span class="macro-nonterminal">$thin_field</span>)).to_lowercase().replace(<span class="string">&quot;_&quot;</span>,<span class="string">&quot;&quot;</span>).as_str());
+                    <span class="kw">let </span>expect_renamed = <span class="macro">struct_mapping!</span>(@meta_renamed $($(<span class="macro-nonterminal">$meta_field</span>)<span class="kw-2">*</span>)<span class="kw-2">*</span>);
+                    <span class="kw">if </span>expect_renamed {
+                        <span class="macro">assert!</span>(!same_name, <span class="string">&quot;{} included in {}&#39;s name, despite being marked as #[renamed]!&quot;</span>, <span class="macro">stringify!</span>(<span class="macro-nonterminal">$thin_field</span>), <span class="macro">stringify!</span>(<span class="macro-nonterminal">$d3d_field</span>));
+                    } <span class="kw">else </span>{
+                        <span class="macro">assert!</span>(same_name, <span class="string">&quot;{} not included in {}&#39;s name, nor marked as #[renamed]&quot;</span>, <span class="macro">stringify!</span>(<span class="macro-nonterminal">$thin_field</span>), <span class="macro">stringify!</span>(<span class="macro-nonterminal">$d3d_field</span>));
+                    }
+                })*
+            )*
+        }
+    };
+
+    (@meta_struct_validate                      ) =&gt; {};
+    (@meta_struct_validate renamed              ) =&gt; {};
+    (@meta_struct_validate derive($(<span class="macro-nonterminal">$d</span>:tt)<span class="kw-2">*</span>)    ) =&gt; {};
+    (@meta_struct_validate ignore(align)        ) =&gt; {};
+    (@meta_struct_validate <span class="macro-nonterminal">$meta</span>:meta           ) =&gt; { <span class="macro">panic!</span>(<span class="string">&quot;unexpected struct attribute: #[{}]&quot;</span>, <span class="macro">stringify!</span>(<span class="macro-nonterminal">$meta</span>)); };
+
+    (@meta_field_validate)            =&gt; {};
+    (@meta_field_validate renamed   ) =&gt; {};
+    (@meta_field_validate <span class="macro-nonterminal">$meta</span>:meta) =&gt; { <span class="macro">panic!</span>(<span class="string">&quot;unexpected field attribute: #[{}]&quot;</span>, <span class="macro">stringify!</span>(<span class="macro-nonterminal">$meta</span>)); };
+
+    (@meta_renamed)                       =&gt; { <span class="bool-val">false </span>};
+    (@meta_renamed renamed    $(<span class="macro-nonterminal">$tt</span>:tt)<span class="kw-2">*</span>) =&gt; { <span class="bool-val">true </span>};
+    (@meta_renamed <span class="macro-nonterminal">$meta</span>:meta $(<span class="macro-nonterminal">$tt</span>:tt)<span class="kw-2">*</span>) =&gt; { <span class="macro">struct_mapping!</span>(@meta_renamed $(<span class="macro-nonterminal">$tt</span>)<span class="kw-2">*</span>) };
+
+    (@meta_ignore_align)                            =&gt; { <span class="bool-val">false </span>};
+    (@meta_ignore_align ignore(align)   $(<span class="macro-nonterminal">$tt</span>:tt)<span class="kw-2">*</span>) =&gt; { <span class="bool-val">true </span>};
+    (@meta_ignore_align <span class="macro-nonterminal">$meta</span>:meta      $(<span class="macro-nonterminal">$tt</span>:tt)<span class="kw-2">*</span>) =&gt; { <span class="macro">struct_mapping!</span>(@meta_ignore_align $(<span class="macro-nonterminal">$tt</span>)<span class="kw-2">*</span>) };
+
+    (@derive_from_meta                                                          <span class="macro-nonterminal">$thin_struct</span>:ty =&gt; <span class="macro-nonterminal">$d3d_struct</span>:ty) =&gt; {};
+    (@derive_from_meta <span class="attribute">#[derive(<span class="kw">unsafe </span>{ $(<span class="macro-nonterminal">$d</span>:ident),+$(,)<span class="question-mark">? </span>})] </span>$(<span class="attribute">#[$(<span class="macro-nonterminal">$next</span>:tt)+]</span>)* <span class="macro-nonterminal">$thin_struct</span>:ty =&gt; <span class="macro-nonterminal">$d3d_struct</span>:ty) =&gt; { $( <span class="macro">struct_mapping! </span>{ @derive <span class="kw">unsafe </span><span class="macro-nonterminal">$d $thin_struct </span>=&gt; <span class="macro-nonterminal">$d3d_struct </span>} )+ <span class="macro">struct_mapping! </span>{ @derive_from_meta $(<span class="attribute">#[$(<span class="macro-nonterminal">$next</span>)+]</span>)* <span class="macro-nonterminal">$thin_struct </span>=&gt; <span class="macro-nonterminal">$d3d_struct </span>} };
+    (@derive_from_meta <span class="attribute">#[$(<span class="macro-nonterminal">$ignore</span>:tt)<span class="kw-2">*</span>]                        </span>$(<span class="attribute">#[$(<span class="macro-nonterminal">$next</span>:tt)+]</span>)* <span class="macro-nonterminal">$thin_struct</span>:ty =&gt; <span class="macro-nonterminal">$d3d_struct</span>:ty) =&gt; { <span class="macro">struct_mapping! </span>{ @derive_from_meta $(<span class="attribute">#[$(<span class="macro-nonterminal">$next</span>)+]</span>)* <span class="macro-nonterminal">$thin_struct </span>=&gt; <span class="macro-nonterminal">$d3d_struct </span>} };
+
+    (@derive <span class="kw">unsafe </span>AsRefD3D <span class="macro-nonterminal">$thin_struct</span>:ty =&gt; <span class="macro-nonterminal">$d3d_struct</span>:ty) =&gt; {    <span class="kw">impl </span>AsRef&lt;<span class="macro-nonterminal">$d3d_struct</span>&gt; <span class="kw">for </span><span class="macro-nonterminal">$thin_struct </span>{ <span class="kw">fn </span>as_ref(&amp;    <span class="self">self</span>)         -&gt; &amp;    <span class="macro-nonterminal">$d3d_struct     </span>{ <span class="kw">unsafe </span>{ std::mem::transmute(<span class="self">self</span>) } } } };
+    (@derive <span class="kw">unsafe </span>AsMutD3D <span class="macro-nonterminal">$thin_struct</span>:ty =&gt; <span class="macro-nonterminal">$d3d_struct</span>:ty) =&gt; {    <span class="kw">impl </span>AsMut&lt;<span class="macro-nonterminal">$d3d_struct</span>&gt; <span class="kw">for </span><span class="macro-nonterminal">$thin_struct </span>{ <span class="kw">fn </span>as_mut(<span class="kw-2">&amp;mut </span><span class="self">self</span>)         -&gt; <span class="kw-2">&amp;mut </span><span class="macro-nonterminal">$d3d_struct     </span>{ <span class="kw">unsafe </span>{ std::mem::transmute(<span class="self">self</span>) } } } }; <span class="comment">// XXX: Pointless?
+    </span>(@derive <span class="kw">unsafe </span>AsRef    <span class="macro-nonterminal">$thin_struct</span>:ty =&gt; <span class="macro-nonterminal">$d3d_struct</span>:ty) =&gt; {    <span class="kw">impl </span>AsRef&lt;<span class="macro-nonterminal">$thin_struct</span>&gt; <span class="kw">for </span><span class="macro-nonterminal">$d3d_struct </span>{ <span class="kw">fn </span>as_ref(<span class="kw-2">&amp;</span><span class="self">self</span>)             -&gt; <span class="kw-2">&amp;</span><span class="macro-nonterminal">$thin_struct        </span>{ <span class="kw">unsafe </span>{ std::mem::transmute(<span class="self">self</span>) } } }
+                                                                        <span class="kw">impl </span>AsRef&lt;<span class="macro-nonterminal">$d3d_struct</span>&gt; <span class="kw">for </span><span class="macro-nonterminal">$thin_struct </span>{ <span class="kw">fn </span>as_ref(<span class="kw-2">&amp;</span><span class="self">self</span>)             -&gt; <span class="kw-2">&amp;</span><span class="macro-nonterminal">$d3d_struct         </span>{ <span class="kw">unsafe </span>{ std::mem::transmute(<span class="self">self</span>) } } } }; <span class="comment">// XXX: Footgun?
+    </span>(@derive <span class="kw">unsafe </span>AsMut    <span class="macro-nonterminal">$thin_struct</span>:ty =&gt; <span class="macro-nonterminal">$d3d_struct</span>:ty) =&gt; {    <span class="kw">impl </span>AsMut&lt;<span class="macro-nonterminal">$thin_struct</span>&gt; <span class="kw">for </span><span class="macro-nonterminal">$d3d_struct </span>{ <span class="kw">fn </span>as_mut(<span class="kw-2">&amp;mut </span><span class="self">self</span>)         -&gt; <span class="kw-2">&amp;mut </span><span class="macro-nonterminal">$thin_struct    </span>{ <span class="kw">unsafe </span>{ std::mem::transmute(<span class="self">self</span>) } } }
+                                                                        <span class="kw">impl </span>AsMut&lt;<span class="macro-nonterminal">$d3d_struct</span>&gt; <span class="kw">for </span><span class="macro-nonterminal">$thin_struct </span>{ <span class="kw">fn </span>as_mut(<span class="kw-2">&amp;mut </span><span class="self">self</span>)         -&gt; <span class="kw-2">&amp;mut </span><span class="macro-nonterminal">$d3d_struct     </span>{ <span class="kw">unsafe </span>{ std::mem::transmute(<span class="self">self</span>) } } } };
+    (@derive <span class="kw">unsafe </span>Deref    <span class="macro-nonterminal">$thin_struct</span>:ty =&gt; <span class="macro-nonterminal">$d3d_struct</span>:ty) =&gt; {    <span class="kw">impl </span>std::ops::Deref    <span class="kw">for </span><span class="macro-nonterminal">$thin_struct </span>{ <span class="kw">fn </span>deref(<span class="kw-2">&amp;</span><span class="self">self</span>)              -&gt; <span class="kw-2">&amp;</span><span class="self">Self</span>::Target        { <span class="kw">unsafe </span>{ std::mem::transmute(<span class="self">self</span>) } } <span class="kw">type </span>Target = <span class="macro-nonterminal">$d3d_struct</span>; } };
+    (@derive <span class="kw">unsafe </span>DerefMut <span class="macro-nonterminal">$thin_struct</span>:ty =&gt; <span class="macro-nonterminal">$d3d_struct</span>:ty) =&gt; {    <span class="kw">impl </span>std::ops::DerefMut <span class="kw">for </span><span class="macro-nonterminal">$thin_struct </span>{ <span class="kw">fn </span>deref_mut(<span class="kw-2">&amp;mut </span><span class="self">self</span>)      -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>::Target    { <span class="kw">unsafe </span>{ std::mem::transmute(<span class="self">self</span>) } } } };
+    (@derive <span class="kw">unsafe </span>FromD3D  <span class="macro-nonterminal">$thin_struct</span>:ty =&gt; <span class="macro-nonterminal">$d3d_struct</span>:ty) =&gt; {    <span class="kw">impl </span>From&lt;<span class="macro-nonterminal">$d3d_struct</span>&gt;  <span class="kw">for </span><span class="macro-nonterminal">$thin_struct </span>{ <span class="kw">fn </span>from(value: <span class="macro-nonterminal">$d3d_struct</span>)  -&gt; <span class="self">Self                 </span>{ <span class="kw">unsafe </span>{ std::mem::transmute(value) } } } };
+    (@derive <span class="kw">unsafe </span>IntoD3D  <span class="macro-nonterminal">$thin_struct</span>:ty =&gt; <span class="macro-nonterminal">$d3d_struct</span>:ty) =&gt; {    <span class="kw">impl </span>From&lt;<span class="macro-nonterminal">$thin_struct</span>&gt; <span class="kw">for </span><span class="macro-nonterminal">$d3d_struct  </span>{ <span class="kw">fn </span>from(value: <span class="macro-nonterminal">$thin_struct</span>) -&gt; <span class="self">Self                 </span>{ <span class="kw">unsafe </span>{ std::mem::transmute(value) } } } };
+    (@derive <span class="kw">unsafe </span>FromInto <span class="macro-nonterminal">$thin_struct</span>:ty =&gt; <span class="macro-nonterminal">$d3d_struct</span>:ty) =&gt; {
+        <span class="macro">struct_mapping! </span>{ @derive <span class="kw">unsafe </span>FromD3D <span class="macro-nonterminal">$thin_struct </span>=&gt; <span class="macro-nonterminal">$d3d_struct </span>}
+        <span class="macro">struct_mapping! </span>{ @derive <span class="kw">unsafe </span>IntoD3D <span class="macro-nonterminal">$thin_struct </span>=&gt; <span class="macro-nonterminal">$d3d_struct </span>}
+    };
+
+    <span class="comment">// AsPtr?  AsPtrMut?
+</span>}
+
+<span class="comment">// XXX: Unlike the pending nightly fn, this acquires safety by sacrificing `?Sized` support.
+</span><span class="attribute">#[cfg(test)] </span><span class="kw">pub const fn </span>size_of_val_raw_sized&lt;T&gt;(<span class="kw">_</span>: <span class="kw-2">*const </span>T) -&gt; usize { std::mem::size_of::&lt;T&gt;() }
+<span class="attribute">#[cfg(test)] </span><span class="kw">pub fn </span>offset_of&lt;S, F&gt;(s: <span class="kw-2">*const </span>S, f: <span class="kw-2">*const </span>F) -&gt; usize { (f <span class="kw">as </span>usize) - (s <span class="kw">as </span>usize) }
+
+<span class="doccomment">/// ### Usage
+/// ```ignore
+/// enumish! { RustyEnum =&gt; D3D_ENUM; FQN; RustyEnum::A, RustyEnum::B, RustyEnum::C }
+/// enumish! { RustyEnum =&gt; D3D_ENUM;      A, B, C }
+/// enumish! { RustyEnum =&gt; D3D_ENUM }
+/// ```
+</span><span class="macro">macro_rules! </span>enumish {
+    ( <span class="macro-nonterminal">$enumish</span>:ty =&gt; <span class="macro-nonterminal">$d3d</span>:ty; FQN; $(<span class="macro-nonterminal">$a</span>:ident :: <span class="macro-nonterminal">$b</span>:ident),* $(,)<span class="question-mark">? </span>) =&gt; {
+        <span class="kw">impl </span>std::fmt::Debug <span class="kw">for </span><span class="macro-nonterminal">$enumish </span>{
+            <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>std::fmt::Formatter) -&gt; std::fmt::Result {
+                <span class="kw">match </span><span class="kw-2">*</span><span class="self">self </span>{
+                    $(
+                        <span class="macro-nonterminal">$a</span>::<span class="macro-nonterminal">$b          </span>=&gt; <span class="macro">write!</span>(f, <span class="string">&quot;{}&quot;</span>, <span class="macro">concat!</span>(<span class="macro">stringify!</span>(<span class="macro-nonterminal">$a</span>), <span class="string">&quot;::&quot;</span>, <span class="macro">stringify!</span>(<span class="macro-nonterminal">$b</span>))),
+                    )*
+                    other               =&gt; <span class="macro">write!</span>(f, <span class="string">&quot;{}({})&quot;</span>, <span class="macro">stringify!</span>(<span class="macro-nonterminal">$enumish</span>), other.<span class="number">0</span>),
+                }
+            }
+        }
+
+        <span class="macro">enumish!</span>( <span class="macro-nonterminal">$enumish </span>=&gt; <span class="macro-nonterminal">$d3d </span>);
+    };
+    ( <span class="macro-nonterminal">$enumish</span>:ty =&gt; <span class="macro-nonterminal">$d3d</span>:ty; FQN; $($(<span class="macro-nonterminal">$ident</span>:ident)::+),* $(,)<span class="question-mark">? </span>) =&gt; {
+        <span class="kw">impl </span>std::fmt::Debug <span class="kw">for </span><span class="macro-nonterminal">$enumish </span>{
+            <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>std::fmt::Formatter) -&gt; std::fmt::Result {
+                <span class="kw">match </span><span class="kw-2">*</span><span class="self">self </span>{
+                    $(
+                        $(<span class="macro-nonterminal">$ident</span>)::+    =&gt; <span class="macro">write!</span>(f, <span class="string">&quot;{}&quot;</span>, <span class="macro">concat!</span>(<span class="macro">stringify!</span>($(<span class="macro-nonterminal">$ident</span>)::+))),
+                    )*
+                    other               =&gt; <span class="macro">write!</span>(f, <span class="string">&quot;{}({})&quot;</span>, <span class="macro">stringify!</span>(<span class="macro-nonterminal">$enumish</span>), other.<span class="number">0</span>),
+                }
+            }
+        }
+
+        <span class="macro">enumish!</span>( <span class="macro-nonterminal">$enumish </span>=&gt; <span class="macro-nonterminal">$d3d </span>);
+    };
+    ( <span class="macro-nonterminal">$enumish</span>:ty =&gt; <span class="macro-nonterminal">$d3d</span>:ty; default: <span class="macro-nonterminal">$default</span>:ident != <span class="number">0</span>; $(<span class="macro-nonterminal">$tt</span>:tt)* ) =&gt; {
+        <span class="kw">impl </span>std::default::Default <span class="kw">for </span><span class="macro-nonterminal">$enumish </span>{
+            <span class="kw">fn </span>default() -&gt; <span class="self">Self </span>{ <span class="self">Self</span>::<span class="macro-nonterminal">$default </span>}
+        }
+
+        <span class="kw">const _ </span>: () = {
+            <span class="kw">const </span>DEFAULT : <span class="macro-nonterminal">$enumish </span>= &lt;<span class="macro-nonterminal">$enumish</span>&gt;::<span class="macro-nonterminal">$default</span>;
+            <span class="kw">const </span>ZEROED  : <span class="macro-nonterminal">$enumish </span>= &lt;<span class="macro-nonterminal">$enumish</span>&gt;::zeroed();
+            <span class="macro">assert!</span>(!<span class="macro">matches!</span>(DEFAULT, ZEROED), <span class="string">&quot;default was expected to be nonzero, but was 0&quot;</span>);
+        };
+
+        <span class="macro">enumish!</span>( <span class="macro-nonterminal">$enumish </span>=&gt; <span class="macro-nonterminal">$d3d</span>; $(<span class="macro-nonterminal">$tt</span>)* );
+    };
+    ( <span class="macro-nonterminal">$enumish</span>:ty =&gt; <span class="macro-nonterminal">$d3d</span>:ty; default: <span class="macro-nonterminal">$default</span>:ident == <span class="number">0</span>; $(<span class="macro-nonterminal">$tt</span>:tt)* ) =&gt; {
+        <span class="kw">impl </span>std::default::Default <span class="kw">for </span><span class="macro-nonterminal">$enumish </span>{
+            <span class="kw">fn </span>default() -&gt; <span class="self">Self </span>{ <span class="self">Self</span>::<span class="macro-nonterminal">$default </span>}
+        }
+
+        <span class="kw">const _ </span>: () = {
+            <span class="kw">const </span>DEFAULT : <span class="macro-nonterminal">$enumish </span>= &lt;<span class="macro-nonterminal">$enumish</span>&gt;::<span class="macro-nonterminal">$default</span>;
+            <span class="kw">const </span>ZEROED  : <span class="macro-nonterminal">$enumish </span>= &lt;<span class="macro-nonterminal">$enumish</span>&gt;::zeroed();
+            <span class="macro">assert!</span>(<span class="macro">matches!</span>(DEFAULT, ZEROED), <span class="string">&quot;default was expected to be 0, but wasn&#39;t&quot;</span>);
+        };
+
+        <span class="macro">enumish!</span>( <span class="macro-nonterminal">$enumish </span>=&gt; <span class="macro-nonterminal">$d3d</span>; $(<span class="macro-nonterminal">$tt</span>)* );
+    };
+    ( <span class="macro-nonterminal">$enumish</span>:ty =&gt; <span class="macro-nonterminal">$d3d</span>:ty; default: <span class="number">0</span>; $(<span class="macro-nonterminal">$tt</span>:tt)* ) =&gt; {
+        <span class="kw">impl </span>std::default::Default <span class="kw">for </span><span class="macro-nonterminal">$enumish </span>{
+            <span class="kw">fn </span>default() -&gt; <span class="self">Self </span>{ <span class="self">Self</span>(<span class="number">0</span>) }
+        }
+
+        <span class="macro">enumish!</span>( <span class="macro-nonterminal">$enumish </span>=&gt; <span class="macro-nonterminal">$d3d</span>; $(<span class="macro-nonterminal">$tt</span>)* );
+    };
+    ( <span class="macro-nonterminal">$enumish</span>:ty =&gt; <span class="macro-nonterminal">$d3d</span>:ty; $(<span class="macro-nonterminal">$ident</span>:ident),* $(,)<span class="question-mark">? </span>) =&gt; {
+        <span class="kw">impl </span>std::fmt::Debug <span class="kw">for </span><span class="macro-nonterminal">$enumish </span>{
+            <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>std::fmt::Formatter) -&gt; std::fmt::Result {
+                <span class="kw">match </span><span class="kw-2">*</span><span class="self">self </span>{
+                    $(
+                        &lt; <span class="macro-nonterminal">$enumish </span>&gt; :: <span class="macro-nonterminal">$ident </span>=&gt;  <span class="macro">write!</span>(f, <span class="macro">concat!</span>(<span class="macro">stringify!</span>(<span class="macro-nonterminal">$enumish</span>), <span class="string">&quot;::&quot;</span>, <span class="macro">stringify!</span>(<span class="macro-nonterminal">$ident</span>))),
+                    )*
+                    other                   =&gt; <span class="macro">write!</span>(f, <span class="string">&quot;{}({})&quot;</span>, <span class="macro">stringify!</span>(<span class="macro-nonterminal">$enumish</span>), other.<span class="number">0</span>),
+                }
+            }
+        }
+
+        <span class="macro">enumish!</span>( <span class="macro-nonterminal">$enumish </span>=&gt; <span class="macro-nonterminal">$d3d </span>);
+    };
+    ( <span class="macro-nonterminal">$enumish</span>:ty =&gt; <span class="macro-nonterminal">$d3d</span>:ty ) =&gt; {
+        <span class="kw">impl </span>From&lt;<span class="macro-nonterminal">$enumish</span>&gt; <span class="kw">for </span><span class="macro-nonterminal">$d3d </span>{
+            <span class="kw">fn </span>from(value: <span class="macro-nonterminal">$enumish</span>) -&gt; <span class="self">Self </span>{ value.<span class="number">0</span>.into() }
+        }
+
+        <span class="attribute">#[cfg(feature = <span class="string">&quot;impl-from-unchecked&quot;</span>)]
+        </span><span class="kw">impl </span>From&lt;<span class="macro-nonterminal">$d3d</span>&gt; <span class="kw">for </span><span class="macro-nonterminal">$enumish </span>{
+            <span class="kw">fn </span>from(value: <span class="macro-nonterminal">$d3d</span>) -&gt; <span class="self">Self </span>{ <span class="self">Self</span>(value <span class="kw">as _</span>) }
+        }
+
+        <span class="kw">impl </span><span class="macro-nonterminal">$enumish </span>{
+            <span class="doccomment">/// Initialize to 0.
+            </span><span class="kw">pub const fn </span>zeroed() -&gt; <span class="self">Self </span>{ <span class="self">Self</span>(<span class="number">0</span>) }
+
+            <span class="doccomment">/// Convert from an underlying [winapi] `D3D...` type.
+            /// This is *probably* safe... probably...
+            </span><span class="kw">pub const fn </span>from_unchecked(d3d: <span class="macro-nonterminal">$d3d</span>) -&gt; <span class="self">Self </span>{ <span class="self">Self</span>(d3d <span class="kw">as _</span>) }
+
+            <span class="doccomment">/// Convert back into an underlying [winapi] `D3D...` type.
+            </span><span class="kw">pub const fn </span>into_inner(<span class="self">self</span>) -&gt; <span class="macro-nonterminal">$d3d </span>{ <span class="self">self</span>.<span class="number">0 </span><span class="kw">as _ </span>}
         }
     };
 }
 
-<span class="comment">// XXX: Unlike the pending nightly fn, this acquires safety by sacrificing `?Sized` support.</span>
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span> <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">size_of_val_raw_sized</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="kw">_</span>: <span class="kw-2">*const</span> <span class="ident">T</span>) -&gt; <span class="ident">usize</span> { <span class="ident">std::mem::size_of</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>() }
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span> <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">offset_of</span><span class="op">&lt;</span><span class="ident">S</span>, <span class="ident">F</span><span class="op">&gt;</span>(<span class="ident">s</span>: <span class="kw-2">*const</span> <span class="ident">S</span>, <span class="ident">f</span>: <span class="kw-2">*const</span> <span class="ident">F</span>) -&gt; <span class="ident">usize</span> { (<span class="ident">f</span> <span class="kw">as</span> <span class="ident">usize</span>) <span class="op">-</span> (<span class="ident">s</span> <span class="kw">as</span> <span class="ident">usize</span>) }
-
-<span class="doccomment">/// ### Usage</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// ```no_run</span>
-<span class="doccomment">/// enumish! { RustyEnum =&gt; D3D_ENUM; FQN; RustyEnum::A, RustyEnum::B, RustyEnum::C }</span>
-<span class="doccomment">/// enumish! { RustyEnum =&gt; D3D_ENUM;      A, B, C }</span>
-<span class="doccomment">/// enumish! { RustyEnum =&gt; D3D_ENUM }</span>
-<span class="doccomment">/// ```</span>
-<span class="macro">macro_rules!</span> <span class="ident">enumish</span> {
-    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">enumish</span>:<span class="ident">ty</span> =&gt; <span class="macro-nonterminal">$</span><span class="macro-nonterminal">d3d</span>:<span class="ident">ty</span>; <span class="ident">FQN</span>; $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">a</span>:<span class="ident">ident</span> :: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">b</span>:<span class="ident">ident</span>),<span class="op">*</span> $(,)<span class="question-mark">?</span> ) =&gt; {
-        <span class="kw">impl</span> <span class="ident">std::fmt::Debug</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">enumish</span> {
-            <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;mut</span> <span class="ident">std::fmt::Formatter</span>) -&gt; <span class="ident">std::fmt::Result</span> {
-                <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
-                    $(
-                        <span class="macro-nonterminal">$</span><span class="macro-nonterminal">a</span>::<span class="macro-nonterminal">$</span><span class="macro-nonterminal">b</span>          =&gt; <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;{}&quot;</span>, <span class="macro">concat!</span>(<span class="macro">stringify!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">a</span>), <span class="string">&quot;::&quot;</span>, <span class="macro">stringify!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">b</span>))),
-                    )<span class="op">*</span>
-                    <span class="ident">other</span>               =&gt; <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;{}({})&quot;</span>, <span class="macro">stringify!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">enumish</span>), <span class="ident">other</span>.<span class="number">0</span>),
-                }
-            }
-        }
-
-        <span class="macro">enumish!</span>( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">enumish</span> =&gt; <span class="macro-nonterminal">$</span><span class="macro-nonterminal">d3d</span> );
-    };
-    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">enumish</span>:<span class="ident">ty</span> =&gt; <span class="macro-nonterminal">$</span><span class="macro-nonterminal">d3d</span>:<span class="ident">ty</span>; <span class="ident">FQN</span>; $($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">ident</span>:<span class="ident">ident</span>)::<span class="op">+</span>),<span class="op">*</span> $(,)<span class="question-mark">?</span> ) =&gt; {
-        <span class="kw">impl</span> <span class="ident">std::fmt::Debug</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">enumish</span> {
-            <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;mut</span> <span class="ident">std::fmt::Formatter</span>) -&gt; <span class="ident">std::fmt::Result</span> {
-                <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
-                    $(
-                        $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">ident</span>)::<span class="op">+</span>    =&gt; <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;{}&quot;</span>, <span class="macro">concat!</span>(<span class="macro">stringify!</span>($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">ident</span>)::<span class="op">+</span>))),
-                    )<span class="op">*</span>
-                    <span class="ident">other</span>               =&gt; <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;{}({})&quot;</span>, <span class="macro">stringify!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">enumish</span>), <span class="ident">other</span>.<span class="number">0</span>),
-                }
-            }
-        }
-
-        <span class="macro">enumish!</span>( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">enumish</span> =&gt; <span class="macro-nonterminal">$</span><span class="macro-nonterminal">d3d</span> );
-    };
-    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">enumish</span>:<span class="ident">ty</span> =&gt; <span class="macro-nonterminal">$</span><span class="macro-nonterminal">d3d</span>:<span class="ident">ty</span>; $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">ident</span>:<span class="ident">ident</span>),<span class="op">*</span> $(,)<span class="question-mark">?</span> ) =&gt; {
-        <span class="kw">impl</span> <span class="ident">std::fmt::Debug</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">enumish</span> {
-            <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;mut</span> <span class="ident">std::fmt::Formatter</span>) -&gt; <span class="ident">std::fmt::Result</span> {
-                <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
-                    $(
-                        <span class="op">&lt;</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">enumish</span> <span class="op">&gt;</span> :: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">ident</span> =&gt;  <span class="macro">write!</span>(<span class="ident">f</span>, <span class="macro">concat!</span>(<span class="macro">stringify!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">enumish</span>), <span class="string">&quot;::&quot;</span>, <span class="macro">stringify!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">ident</span>))),
-                    )<span class="op">*</span>
-                    <span class="ident">other</span>                   =&gt; <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;{}({})&quot;</span>, <span class="macro">stringify!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">enumish</span>), <span class="ident">other</span>.<span class="number">0</span>),
-                }
-            }
-        }
-
-        <span class="macro">enumish!</span>( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">enumish</span> =&gt; <span class="macro-nonterminal">$</span><span class="macro-nonterminal">d3d</span> );
-    };
-    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">enumish</span>:<span class="ident">ty</span> =&gt; <span class="macro-nonterminal">$</span><span class="macro-nonterminal">d3d</span>:<span class="ident">ty</span> ) =&gt; {
-        <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">enumish</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">d3d</span> {
-            <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">value</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">enumish</span>) -&gt; <span class="self">Self</span> { <span class="ident">value</span>.<span class="number">0</span>.<span class="ident">into</span>() }
-        }
-
-        <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;impl-from-unchecked&quot;</span>)]</span>
-        <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">d3d</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">enumish</span> {
-            <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">value</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">d3d</span>) -&gt; <span class="self">Self</span> { <span class="self">Self</span>(<span class="ident">value</span> <span class="kw">as</span> <span class="kw">_</span>) }
-        }
-
-        <span class="kw">impl</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">enumish</span> {
-            <span class="doccomment">/// Convert from an underlying [winapi] `D3D...` type.</span>
-            <span class="doccomment">/// This is *probably* safe... probably...</span>
-            <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">from_unchecked</span>(<span class="ident">d3d</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">d3d</span>) -&gt; <span class="self">Self</span> { <span class="self">Self</span>(<span class="ident">d3d</span> <span class="kw">as</span> <span class="kw">_</span>) }
-
-            <span class="doccomment">/// Convert back into an underlying [winapi] `D3D...` type.</span>
-            <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">into</span>(<span class="self">self</span>) -&gt; <span class="macro-nonterminal">$</span><span class="macro-nonterminal">d3d</span> { <span class="self">self</span>.<span class="number">0</span> <span class="kw">as</span> <span class="kw">_</span> }
-        }
-    };
-}
-
-<span class="doccomment">/// ### Usage</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// ```no_run</span>
-<span class="doccomment">/// flags! { RustyFlags =&gt; D3D_FLAGS; A, B, C }</span>
-<span class="doccomment">/// ```</span>
-<span class="macro">macro_rules!</span> <span class="ident">flags</span> {
-    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">flagish</span>:<span class="ident">ty</span> =&gt; <span class="macro-nonterminal">$</span><span class="macro-nonterminal">d3d</span>:<span class="ident">ty</span>; $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">ident</span>:<span class="ident">ident</span>),<span class="op">*</span> $(,)<span class="question-mark">?</span> ) =&gt; {
-        <span class="kw">impl</span> <span class="ident">std::fmt::Debug</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">flagish</span> {
-            <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;mut</span> <span class="ident">std::fmt::Formatter</span>) -&gt; <span class="ident">std::fmt::Result</span> {
-                <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
-                    <span class="comment">// Single flag cases</span>
-                    $(
-                        <span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">flagish</span><span class="op">&gt;</span>::<span class="macro-nonterminal">$</span><span class="macro-nonterminal">ident</span> =&gt; <span class="macro">write!</span>(<span class="ident">f</span>, <span class="macro">concat!</span>(<span class="macro">stringify!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">flagish</span>), <span class="string">&quot;::&quot;</span>, <span class="macro">stringify!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">ident</span>))),
-                    )<span class="op">*</span>
-                    <span class="comment">// No flags</span>
-                    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unreachable_patterns</span>)]</span> <span class="self">Self</span>(<span class="number">0</span>) =&gt; {
-                        <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;{}(0)&quot;</span>, <span class="macro">stringify!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">flagish</span>))
+<span class="doccomment">/// ### Usage
+/// ```ignore
+/// flags! { RustyFlags =&gt; D3D_FLAGS; A, B, C }
+/// ```
+</span><span class="macro">macro_rules! </span>flags {
+    ( <span class="macro-nonterminal">$flagish</span>:ty =&gt; <span class="macro-nonterminal">$d3d</span>:ty; $(<span class="macro-nonterminal">$ident</span>:ident),* $(,)<span class="question-mark">? </span>) =&gt; {
+        <span class="kw">impl </span>std::fmt::Debug <span class="kw">for </span><span class="macro-nonterminal">$flagish </span>{
+            <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>std::fmt::Formatter) -&gt; std::fmt::Result {
+                <span class="kw">match </span><span class="kw-2">*</span><span class="self">self </span>{
+                    <span class="comment">// Single flag cases
+                    </span>$(
+                        &lt;<span class="macro-nonterminal">$flagish</span>&gt;::<span class="macro-nonterminal">$ident </span>=&gt; <span class="macro">write!</span>(f, <span class="macro">concat!</span>(<span class="macro">stringify!</span>(<span class="macro-nonterminal">$flagish</span>), <span class="string">&quot;::&quot;</span>, <span class="macro">stringify!</span>(<span class="macro-nonterminal">$ident</span>))),
+                    )*
+                    <span class="comment">// No flags
+                    </span><span class="attribute">#[allow(unreachable_patterns)] </span><span class="self">Self</span>(<span class="number">0</span>) =&gt; {
+                        <span class="macro">write!</span>(f, <span class="string">&quot;{}::none()&quot;</span>, <span class="macro">stringify!</span>(<span class="macro-nonterminal">$flagish</span>))
                     },
-                    <span class="comment">// Multiple flags or unnamed flags only</span>
-                    <span class="ident">other</span> =&gt; {
-                        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">bits</span> <span class="op">=</span> <span class="ident">other</span>.<span class="number">0</span>;
+                    <span class="comment">// Multiple flags or unnamed flags only
+                    </span>other =&gt; {
+                        <span class="kw">let </span><span class="kw-2">mut </span>bits = other.<span class="number">0</span>;
                         $(
-                            <span class="kw">if</span> <span class="ident">bits</span> <span class="op">&amp;</span> <span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">flagish</span><span class="op">&gt;</span>::<span class="macro-nonterminal">$</span><span class="macro-nonterminal">ident</span>.<span class="number">0</span> <span class="op">==</span> <span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">flagish</span><span class="op">&gt;</span>::<span class="macro-nonterminal">$</span><span class="macro-nonterminal">ident</span>.<span class="number">0</span> <span class="op">&amp;&amp;</span> <span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">flagish</span><span class="op">&gt;</span>::<span class="macro-nonterminal">$</span><span class="macro-nonterminal">ident</span>.<span class="number">0</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-                                <span class="kw">if</span> <span class="ident">bits</span> <span class="op">==</span> <span class="ident">other</span>.<span class="number">0</span> {
-                                    <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;{}::{{{}&quot;</span>, <span class="macro">stringify!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">flagish</span>), <span class="macro">stringify!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">ident</span>))<span class="question-mark">?</span>;
-                                } <span class="kw">else</span> {
-                                    <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;|{}&quot;</span>, <span class="macro">stringify!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">ident</span>))<span class="question-mark">?</span>;
+                            <span class="kw">if </span>bits &amp; &lt;<span class="macro-nonterminal">$flagish</span>&gt;::<span class="macro-nonterminal">$ident</span>.<span class="number">0 </span>== &lt;<span class="macro-nonterminal">$flagish</span>&gt;::<span class="macro-nonterminal">$ident</span>.<span class="number">0 </span>&amp;&amp; &lt;<span class="macro-nonterminal">$flagish</span>&gt;::<span class="macro-nonterminal">$ident</span>.<span class="number">0 </span>!= <span class="number">0 </span>{
+                                <span class="kw">if </span>bits == other.<span class="number">0 </span>{
+                                    <span class="macro">write!</span>(f, <span class="string">&quot;{}::{{{}&quot;</span>, <span class="macro">stringify!</span>(<span class="macro-nonterminal">$flagish</span>), <span class="macro">stringify!</span>(<span class="macro-nonterminal">$ident</span>))<span class="question-mark">?</span>;
+                                } <span class="kw">else </span>{
+                                    <span class="macro">write!</span>(f, <span class="string">&quot;|{}&quot;</span>, <span class="macro">stringify!</span>(<span class="macro-nonterminal">$ident</span>))<span class="question-mark">?</span>;
                                 }
-                                <span class="ident">bits</span> <span class="op">&amp;=</span> <span class="op">!</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">flagish</span><span class="op">&gt;</span>::<span class="macro-nonterminal">$</span><span class="macro-nonterminal">ident</span>.<span class="number">0</span>;
+                                bits &amp;= !&lt;<span class="macro-nonterminal">$flagish</span>&gt;::<span class="macro-nonterminal">$ident</span>.<span class="number">0</span>;
                             }
-                        )<span class="op">*</span>
-                        <span class="kw">if</span> <span class="ident">bits</span> <span class="op">==</span> <span class="ident">other</span>.<span class="number">0</span> {
-                            <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;{}(0x{:08x})&quot;</span>, <span class="macro">stringify!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">flagish</span>), <span class="ident">bits</span>)<span class="question-mark">?</span>;
-                        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">bits</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> {
-                            <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;|0x{:08x}}}&quot;</span>, <span class="ident">bits</span>)<span class="question-mark">?</span>;
-                        } <span class="kw">else</span> {
-                            <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;}}&quot;</span>)<span class="question-mark">?</span>;
+                        )*
+                        <span class="kw">if </span>bits == other.<span class="number">0 </span>{
+                            <span class="macro">write!</span>(f, <span class="string">&quot;{}(0x{:08x})&quot;</span>, <span class="macro">stringify!</span>(<span class="macro-nonterminal">$flagish</span>), bits)<span class="question-mark">?</span>;
+                        } <span class="kw">else if </span>bits != <span class="number">0 </span>{
+                            <span class="macro">write!</span>(f, <span class="string">&quot;|0x{:08x}}}&quot;</span>, bits)<span class="question-mark">?</span>;
+                        } <span class="kw">else </span>{
+                            <span class="macro">write!</span>(f, <span class="string">&quot;}}&quot;</span>)<span class="question-mark">?</span>;
                         }
                         <span class="prelude-val">Ok</span>(())
                     },
@@ -473,86 +632,95 @@
             }
         }
 
-        <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">flagish</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">d3d</span> {
-            <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">value</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">flagish</span>) -&gt; <span class="self">Self</span> { <span class="ident">value</span>.<span class="number">0</span>.<span class="ident">into</span>() }
+        <span class="kw">impl </span>From&lt;<span class="macro-nonterminal">$flagish</span>&gt; <span class="kw">for </span><span class="macro-nonterminal">$d3d </span>{
+            <span class="kw">fn </span>from(value: <span class="macro-nonterminal">$flagish</span>) -&gt; <span class="self">Self </span>{ value.<span class="number">0</span>.into() }
         }
 
-        <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;impl-from-unchecked&quot;</span>)]</span>
-        <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">d3d</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">flagish</span> {
-            <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">value</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">d3d</span>) -&gt; <span class="self">Self</span> { <span class="self">Self</span>(<span class="ident">value</span> <span class="kw">as</span> <span class="kw">_</span>) }
+        <span class="attribute">#[cfg(feature = <span class="string">&quot;impl-from-unchecked&quot;</span>)]
+        </span><span class="kw">impl </span>From&lt;<span class="macro-nonterminal">$d3d</span>&gt; <span class="kw">for </span><span class="macro-nonterminal">$flagish </span>{
+            <span class="kw">fn </span>from(value: <span class="macro-nonterminal">$d3d</span>) -&gt; <span class="self">Self </span>{ <span class="self">Self</span>(value <span class="kw">as _</span>) }
         }
 
-        <span class="kw">impl</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">flagish</span> {
-            <span class="doccomment">/// Convert from an underlying [winapi] `D3D...` type.</span>
-            <span class="doccomment">/// This is *probably* safe... probably...</span>
-            <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">from_unchecked</span>(<span class="ident">d3d</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">d3d</span>) -&gt; <span class="self">Self</span> { <span class="self">Self</span>(<span class="ident">d3d</span> <span class="kw">as</span> <span class="kw">_</span>) }
+        <span class="kw">impl </span><span class="macro-nonterminal">$flagish </span>{
+            <span class="doccomment">/// Initialize to 0.
+            </span><span class="kw">pub const fn </span>zeroed() -&gt; <span class="self">Self </span>{ <span class="self">Self</span>(<span class="number">0</span>) }
 
-            <span class="doccomment">/// Convert back into an underlying [winapi] `D3D...` type.</span>
-            <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">into</span>(<span class="self">self</span>) -&gt; <span class="macro-nonterminal">$</span><span class="macro-nonterminal">d3d</span> { <span class="self">self</span>.<span class="number">0</span> <span class="kw">as</span> <span class="kw">_</span> }
+            <span class="doccomment">/// Initialize to 0.
+            </span><span class="kw">pub const fn </span>none() -&gt; <span class="self">Self </span>{ <span class="self">Self</span>(<span class="number">0</span>) }
+
+            <span class="doccomment">/// Convert from an underlying [winapi] `D3D...` type.
+            /// This is *probably* safe... probably...
+            </span><span class="kw">pub const fn </span>from_unchecked(d3d: <span class="macro-nonterminal">$d3d</span>) -&gt; <span class="self">Self </span>{ <span class="self">Self</span>(d3d <span class="kw">as _</span>) }
+
+            <span class="doccomment">/// Convert back into an underlying [winapi] `D3D...` type.
+            </span><span class="kw">pub const fn </span>into_inner(<span class="self">self</span>) -&gt; <span class="macro-nonterminal">$d3d </span>{ <span class="self">self</span>.<span class="number">0 </span><span class="kw">as _ </span>}
         }
 
-        <span class="kw">impl</span> <span class="ident">std::ops::BitOrAssign</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">flagish</span> {
-            <span class="kw">fn</span> <span class="ident">bitor_assign</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">other</span>: <span class="self">Self</span>) { <span class="self">self</span>.<span class="number">0</span> <span class="op">|</span><span class="op">=</span> <span class="ident">other</span>.<span class="number">0</span> }
+        <span class="kw">impl </span>std::default::Default <span class="kw">for </span><span class="macro-nonterminal">$flagish </span>{
+            <span class="kw">fn </span>default() -&gt; <span class="self">Self </span>{ <span class="self">Self</span>::none() }
         }
 
-        <span class="kw">impl</span> <span class="ident">std::ops::BitOr</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">flagish</span> {
-            <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="self">Self</span>;
-            <span class="kw">fn</span> <span class="ident">bitor</span>(<span class="self">self</span>, <span class="ident">other</span>: <span class="self">Self</span>) -&gt; <span class="self">Self</span> { <span class="self">Self</span>(<span class="self">self</span>.<span class="number">0</span> <span class="op">|</span> <span class="ident">other</span>.<span class="number">0</span>) }
+        <span class="kw">impl </span>std::ops::BitOrAssign <span class="kw">for </span><span class="macro-nonterminal">$flagish </span>{
+            <span class="kw">fn </span>bitor_assign(<span class="kw-2">&amp;mut </span><span class="self">self</span>, other: <span class="self">Self</span>) { <span class="self">self</span>.<span class="number">0 </span>|= other.<span class="number">0 </span>}
+        }
+
+        <span class="kw">impl </span>std::ops::BitOr <span class="kw">for </span><span class="macro-nonterminal">$flagish </span>{
+            <span class="kw">type </span>Output = <span class="self">Self</span>;
+            <span class="kw">fn </span>bitor(<span class="self">self</span>, other: <span class="self">Self</span>) -&gt; <span class="self">Self </span>{ <span class="self">Self</span>(<span class="self">self</span>.<span class="number">0 </span>| other.<span class="number">0</span>) }
         }
     }
 }
 
-<span class="doccomment">/// COM conversion boilerplate</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// ### ⚠️ Safety ⚠️</span>
-<span class="doccomment">/// *   Assumes `$outer` and `$inner` are `#[repr(transparent)]` wrappers around [mcom::Rc] and ABI compatible</span>
-<span class="doccomment">/// *   Typechecked via some `From` impls, but sufficiently malicious `Deref` impls might be able to defeat that.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// ### Usage</span>
-<span class="doccomment">/// *   `convert!(unsafe $outer =&gt; $inner, $winapi);`</span>
-<span class="doccomment">/// *   `convert!(unsafe $outer,           $winapi);`</span>
-<span class="macro">macro_rules!</span> <span class="ident">convert</span> {
-    ( <span class="kw unsafe">unsafe</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">outer</span>:<span class="ident">ty</span> =&gt; <span class="macro-nonterminal">$</span><span class="macro-nonterminal">deref</span>:<span class="ident">ty</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">winapi</span>:<span class="ident">ty</span> ) =&gt; {
-        <span class="macro">convert!</span>(<span class="kw unsafe">unsafe</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">outer</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">winapi</span>);
+<span class="doccomment">/// COM conversion boilerplate
+///
+/// ### ⚠️ Safety ⚠️
+/// *   Assumes `$outer` and `$inner` are `#[repr(transparent)]` wrappers around [mcom::Rc] and ABI compatible
+/// *   Typechecked via some `From` impls, but sufficiently malicious `Deref` impls might be able to defeat that.
+///
+/// ### Usage
+/// *   `convert!(unsafe $outer =&gt; $inner, $winapi);`
+/// *   `convert!(unsafe $outer,           $winapi);`
+</span><span class="macro">macro_rules! </span>convert {
+    ( <span class="kw">unsafe </span><span class="macro-nonterminal">$outer</span>:ty =&gt; <span class="macro-nonterminal">$deref</span>:ty, <span class="macro-nonterminal">$winapi</span>:ty ) =&gt; {
+        <span class="macro">convert!</span>(<span class="kw">unsafe </span><span class="macro-nonterminal">$outer</span>, <span class="macro-nonterminal">$winapi</span>);
 
-        <span class="kw">impl</span> <span class="ident">std::ops::Deref</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">outer</span> {
-            <span class="kw">type</span> <span class="ident">Target</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">deref</span>;
-            <span class="kw">fn</span> <span class="ident">deref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::Target</span> { <span class="self">self</span>.<span class="number">0</span>.<span class="ident">up_ref</span>().<span class="ident">into</span>() }
+        <span class="kw">impl </span>std::ops::Deref <span class="kw">for </span><span class="macro-nonterminal">$outer </span>{
+            <span class="kw">type </span>Target = <span class="macro-nonterminal">$deref</span>;
+            <span class="kw">fn </span>deref(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="self">Self</span>::Target { <span class="self">self</span>.<span class="number">0</span>.up_ref().into() }
         }
     };
-    ( <span class="kw unsafe">unsafe</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">outer</span>:<span class="ident">ty</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">winapi</span>:<span class="ident">ty</span> ) =&gt; {
-        <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">mcom::Rc</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">winapi</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">outer</span> { <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">value</span>: <span class="ident">mcom::Rc</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">winapi</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> { <span class="self">Self</span>(<span class="ident">value</span>) } }
-        <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">outer</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">mcom::Rc</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">winapi</span><span class="op">&gt;</span> { <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">value</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">outer</span>) -&gt; <span class="self">Self</span> { <span class="ident">value</span>.<span class="number">0</span> } }
+    ( <span class="kw">unsafe </span><span class="macro-nonterminal">$outer</span>:ty, <span class="macro-nonterminal">$winapi</span>:ty ) =&gt; {
+        <span class="kw">impl </span>From&lt;mcom::Rc&lt;<span class="macro-nonterminal">$winapi</span>&gt;&gt; <span class="kw">for </span><span class="macro-nonterminal">$outer </span>{ <span class="kw">fn </span>from(value: mcom::Rc&lt;<span class="macro-nonterminal">$winapi</span>&gt;) -&gt; <span class="self">Self </span>{ <span class="self">Self</span>(value) } }
+        <span class="kw">impl </span>From&lt;<span class="macro-nonterminal">$outer</span>&gt; <span class="kw">for </span>mcom::Rc&lt;<span class="macro-nonterminal">$winapi</span>&gt; { <span class="kw">fn </span>from(value: <span class="macro-nonterminal">$outer</span>) -&gt; <span class="self">Self </span>{ value.<span class="number">0 </span>} }
 
-        <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">mcom::Rc</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">winapi</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="kw-2">&amp;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">outer</span> { <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">value</span>: <span class="kw-2">&amp;</span><span class="ident">mcom::Rc</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">winapi</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
-            <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::undocumented_unsafe_blocks</span>)]</span>
-            <span class="comment">// SAFETY: ✔️ sound per documented `#[repr(transparent)]` safety precondition of this `unsafe`-marked macro</span>
-            <span class="kw unsafe">unsafe</span> { <span class="ident">std::mem::transmute</span>(<span class="ident">value</span>) }
+        <span class="kw">impl </span>From&lt;<span class="kw-2">&amp;</span>mcom::Rc&lt;<span class="macro-nonterminal">$winapi</span>&gt;&gt; <span class="kw">for </span><span class="kw-2">&amp;</span><span class="macro-nonterminal">$outer </span>{ <span class="kw">fn </span>from(value: <span class="kw-2">&amp;</span>mcom::Rc&lt;<span class="macro-nonterminal">$winapi</span>&gt;) -&gt; <span class="self">Self </span>{
+            <span class="attribute">#[allow(clippy::undocumented_unsafe_blocks)]
+            </span><span class="comment">// SAFETY: ✔️ sound per documented `#[repr(transparent)]` safety precondition of this `unsafe`-marked macro
+            </span><span class="kw">unsafe </span>{ std::mem::transmute(value) }
         }}
-        <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">outer</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="kw-2">&amp;</span><span class="ident">mcom::Rc</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">winapi</span><span class="op">&gt;</span> { <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">value</span>: <span class="kw-2">&amp;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">outer</span>) -&gt; <span class="self">Self</span> {
-            <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::undocumented_unsafe_blocks</span>)]</span>
-            <span class="comment">// SAFETY: ✔️ sound per documented `#[repr(transparent)]` safety precondition of this `unsafe`-marked macro</span>
-            <span class="kw unsafe">unsafe</span> { <span class="ident">std::mem::transmute</span>(<span class="ident">value</span>) }
+        <span class="kw">impl </span>From&lt;<span class="kw-2">&amp;</span><span class="macro-nonterminal">$outer</span>&gt; <span class="kw">for </span><span class="kw-2">&amp;</span>mcom::Rc&lt;<span class="macro-nonterminal">$winapi</span>&gt; { <span class="kw">fn </span>from(value: <span class="kw-2">&amp;</span><span class="macro-nonterminal">$outer</span>) -&gt; <span class="self">Self </span>{
+            <span class="attribute">#[allow(clippy::undocumented_unsafe_blocks)]
+            </span><span class="comment">// SAFETY: ✔️ sound per documented `#[repr(transparent)]` safety precondition of this `unsafe`-marked macro
+            </span><span class="kw">unsafe </span>{ std::mem::transmute(value) }
         }}
 
-        <span class="kw unsafe">unsafe</span> <span class="kw">impl</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">crate::Raw</span> <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">outer</span> {
-            <span class="kw">type</span> <span class="ident">Raw</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">winapi</span>;
+        <span class="kw">unsafe impl </span><span class="macro-nonterminal">$crate::Raw </span><span class="kw">for </span><span class="macro-nonterminal">$outer </span>{
+            <span class="kw">type </span>Raw = <span class="macro-nonterminal">$winapi</span>;
 
-            <span class="kw unsafe">unsafe</span> <span class="kw">fn</span> <span class="ident">from_raw</span>(<span class="ident">raw</span>: <span class="kw-2">*mut</span> <span class="ident"><span class="self">Self</span>::Raw</span>) -&gt; <span class="self">Self</span> { <span class="self">Self</span>(<span class="kw unsafe">unsafe</span> { <span class="ident">mcom::Rc::from_raw</span>(<span class="ident">raw</span>) }) }
-            <span class="kw unsafe">unsafe</span> <span class="kw">fn</span> <span class="ident">from_raw_opt</span>(<span class="ident">raw</span>: <span class="kw-2">*mut</span> <span class="ident"><span class="self">Self</span>::Raw</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> { <span class="prelude-val">Some</span>(<span class="self">Self</span>(<span class="kw unsafe">unsafe</span> { <span class="ident">mcom::Rc::from_raw_opt</span>(<span class="ident">raw</span>) }<span class="question-mark">?</span>)) }
-            <span class="kw">fn</span> <span class="ident">into_raw</span>(<span class="self">self</span>) -&gt; <span class="kw-2">*mut</span> <span class="ident"><span class="self">Self</span>::Raw</span> { <span class="self">self</span>.<span class="number">0</span>.<span class="ident">into_raw</span>() }
-            <span class="kw">fn</span> <span class="ident">as_raw</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">*mut</span> <span class="ident"><span class="self">Self</span>::Raw</span> { <span class="self">self</span>.<span class="number">0</span>.<span class="ident">as_ptr</span>() }
+            <span class="kw">unsafe fn </span>from_raw(raw: <span class="kw-2">*mut </span><span class="self">Self</span>::Raw) -&gt; <span class="self">Self </span>{ <span class="self">Self</span>(<span class="kw">unsafe </span>{ mcom::Rc::from_raw(raw) }) }
+            <span class="kw">unsafe fn </span>from_raw_opt(raw: <span class="kw-2">*mut </span><span class="self">Self</span>::Raw) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>&gt; { <span class="prelude-val">Some</span>(<span class="self">Self</span>(<span class="kw">unsafe </span>{ mcom::Rc::from_raw_opt(raw) }<span class="question-mark">?</span>)) }
+            <span class="kw">fn </span>into_raw(<span class="self">self</span>) -&gt; <span class="kw-2">*mut </span><span class="self">Self</span>::Raw { <span class="self">self</span>.<span class="number">0</span>.into_raw() }
+            <span class="kw">fn </span>as_raw(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">*mut </span><span class="self">Self</span>::Raw { <span class="self">self</span>.<span class="number">0</span>.as_ptr() }
         }
     };
 }
 
-<span class="macro">macro_rules!</span> <span class="ident">mods</span> {
-    ( $( <span class="attribute">#[<span class="macro-nonterminal">$</span><span class="macro-nonterminal">attr</span>:<span class="ident">meta</span>]</span> )<span class="op">*</span> <span class="ident">inl</span>      <span class="kw">mod</span> <span class="macro-nonterminal">$</span><span class="kw">mod</span>:<span class="macro-nonterminal">ident</span> ;                $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">tt</span>:<span class="ident">tt</span>)<span class="op">*</span> ) =&gt; { $(<span class="attribute">#[<span class="macro-nonterminal">$</span><span class="macro-nonterminal">attr</span>]</span>)<span class="op">*</span> <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">mod</span> <span class="macro-nonterminal">$</span><span class="kw">mod</span>;                       <span class="attribute">#[<span class="macro-nonterminal">allow</span>(<span class="ident">unused_imports</span>)]</span> <span class="kw">pub</span> <span class="kw">use</span> <span class="macro-nonterminal">$</span><span class="kw">mod</span>::<span class="kw-2">*</span>; <span class="macro">mods!</span>{ $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">tt</span>)<span class="op">*</span> } };
-    ( $( <span class="attribute">#[<span class="macro-nonterminal">$</span><span class="macro-nonterminal">attr</span>:<span class="ident">meta</span>]</span> )<span class="op">*</span> <span class="ident">inl</span>      <span class="kw">mod</span> <span class="macro-nonterminal">$</span><span class="kw">mod</span>:<span class="macro-nonterminal">ident</span> { $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">body</span>:<span class="ident">tt</span>)<span class="op">*</span> } $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">tt</span>:<span class="ident">tt</span>)<span class="op">*</span> ) =&gt; { $(<span class="attribute">#[<span class="macro-nonterminal">$</span><span class="macro-nonterminal">attr</span>]</span>)<span class="op">*</span> <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">mod</span> <span class="macro-nonterminal">$</span><span class="kw">mod</span> { <span class="macro">mods!</span>{ $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">body</span>)<span class="op">*</span> } } <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span> <span class="kw">pub</span> <span class="kw">use</span> <span class="macro-nonterminal">$</span><span class="kw">mod</span>::<span class="kw-2">*</span>; <span class="macro">mods!</span>{ $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">tt</span>)<span class="op">*</span> } };
-    ( $( <span class="attribute">#[<span class="macro-nonterminal">$</span><span class="macro-nonterminal">attr</span>:<span class="ident">meta</span>]</span> )<span class="op">*</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">vis</span>:<span class="ident">vis</span> <span class="kw">mod</span> <span class="macro-nonterminal">$</span><span class="kw">mod</span>:<span class="macro-nonterminal">ident</span> ;                $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">tt</span>:<span class="ident">tt</span>)<span class="op">*</span> ) =&gt; { $(<span class="attribute">#[<span class="macro-nonterminal">$</span><span class="macro-nonterminal">attr</span>]</span>)<span class="op">*</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">vis</span> <span class="kw">mod</span> <span class="macro-nonterminal">$</span><span class="kw">mod</span>;                                                                 <span class="macro">mods!</span>{ $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">tt</span>)<span class="op">*</span> } };
-    ( $( <span class="attribute">#[<span class="macro-nonterminal">$</span><span class="macro-nonterminal">attr</span>:<span class="ident">meta</span>]</span> )<span class="op">*</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">vis</span>:<span class="ident">vis</span> <span class="kw">mod</span> <span class="macro-nonterminal">$</span><span class="kw">mod</span>:<span class="macro-nonterminal">ident</span> { $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">body</span>:<span class="ident">tt</span>)<span class="op">*</span> } $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">tt</span>:<span class="ident">tt</span>)<span class="op">*</span> ) =&gt; { $(<span class="attribute">#[<span class="macro-nonterminal">$</span><span class="macro-nonterminal">attr</span>]</span>)<span class="op">*</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">vis</span> <span class="kw">mod</span> <span class="macro-nonterminal">$</span><span class="kw">mod</span> { <span class="macro">mods!</span>{ $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">body</span>)<span class="op">*</span> } }                                           <span class="macro">mods!</span>{ $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">tt</span>)<span class="op">*</span> } };
+<span class="macro">macro_rules! </span>mods {
+    ( $( <span class="attribute">#[<span class="macro-nonterminal">$attr</span>:meta] </span>)* inl      <span class="kw">mod </span><span class="macro-nonterminal">$</span><span class="kw">mod</span>:<span class="macro-nonterminal">ident </span>;                $(<span class="macro-nonterminal">$tt</span>:tt)* ) =&gt; { $(<span class="attribute">#[<span class="macro-nonterminal">$attr</span>]</span>)* <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">mod </span><span class="macro-nonterminal">$</span><span class="kw">mod</span>;                       <span class="attribute">#[<span class="macro-nonterminal">allow</span>(unused_imports)] </span><span class="kw">pub use </span><span class="macro-nonterminal">$</span><span class="kw">mod</span>::<span class="kw-2">*</span>; <span class="macro">mods!</span>{ $(<span class="macro-nonterminal">$tt</span>)* } };
+    ( $( <span class="attribute">#[<span class="macro-nonterminal">$attr</span>:meta] </span>)* inl      <span class="kw">mod </span><span class="macro-nonterminal">$</span><span class="kw">mod</span>:<span class="macro-nonterminal">ident </span>{ $(<span class="macro-nonterminal">$body</span>:tt)* } $(<span class="macro-nonterminal">$tt</span>:tt)* ) =&gt; { $(<span class="attribute">#[<span class="macro-nonterminal">$attr</span>]</span>)* <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">mod </span><span class="macro-nonterminal">$</span><span class="kw">mod </span>{ <span class="macro">mods!</span>{ $(<span class="macro-nonterminal">$body</span>)* } } <span class="attribute">#[allow(unused_imports)] </span><span class="kw">pub use </span><span class="macro-nonterminal">$</span><span class="kw">mod</span>::<span class="kw-2">*</span>; <span class="macro">mods!</span>{ $(<span class="macro-nonterminal">$tt</span>)* } };
+    ( $( <span class="attribute">#[<span class="macro-nonterminal">$attr</span>:meta] </span>)* <span class="macro-nonterminal">$vis</span>:vis <span class="kw">mod </span><span class="macro-nonterminal">$</span><span class="kw">mod</span>:<span class="macro-nonterminal">ident </span>;                $(<span class="macro-nonterminal">$tt</span>:tt)* ) =&gt; { $(<span class="attribute">#[<span class="macro-nonterminal">$attr</span>]</span>)* <span class="macro-nonterminal">$vis </span><span class="kw">mod </span><span class="macro-nonterminal">$</span><span class="kw">mod</span>;                                                                 <span class="macro">mods!</span>{ $(<span class="macro-nonterminal">$tt</span>)* } };
+    ( $( <span class="attribute">#[<span class="macro-nonterminal">$attr</span>:meta] </span>)* <span class="macro-nonterminal">$vis</span>:vis <span class="kw">mod </span><span class="macro-nonterminal">$</span><span class="kw">mod</span>:<span class="macro-nonterminal">ident </span>{ $(<span class="macro-nonterminal">$body</span>:tt)* } $(<span class="macro-nonterminal">$tt</span>:tt)* ) =&gt; { $(<span class="attribute">#[<span class="macro-nonterminal">$attr</span>]</span>)* <span class="macro-nonterminal">$vis </span><span class="kw">mod </span><span class="macro-nonterminal">$</span><span class="kw">mod </span>{ <span class="macro">mods!</span>{ $(<span class="macro-nonterminal">$body</span>)* } }                                           <span class="macro">mods!</span>{ $(<span class="macro-nonterminal">$tt</span>)* } };
     () =&gt; {};
 }
 </code></pre></div>
-</section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="thindx" data-search-index-js="../../search-index.js" data-search-js="../../search.js"></div>
-</body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (b44197abb 2022-09-05)" ></div></body></html>

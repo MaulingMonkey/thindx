@@ -1,103 +1,102 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3dcompiler.h\dll\parts.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>parts.rs - source</title><link rel="stylesheet" type="text/css" href="../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script src="../../../../../crates.js"></script><script defer src="../../../../../main.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script>
-    <noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"><style type="text/css">#crate-search{background-image:url("../../../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../../../../thindx/index.html'><div class='logo-container rust-logo'><img src='../../../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../../../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../../../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../../../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
-<span id="2">  2</span>
-<span id="3">  3</span>
-<span id="4">  4</span>
-<span id="5">  5</span>
-<span id="6">  6</span>
-<span id="7">  7</span>
-<span id="8">  8</span>
-<span id="9">  9</span>
-<span id="10"> 10</span>
-<span id="11"> 11</span>
-<span id="12"> 12</span>
-<span id="13"> 13</span>
-<span id="14"> 14</span>
-<span id="15"> 15</span>
-<span id="16"> 16</span>
-<span id="17"> 17</span>
-<span id="18"> 18</span>
-<span id="19"> 19</span>
-<span id="20"> 20</span>
-<span id="21"> 21</span>
-<span id="22"> 22</span>
-<span id="23"> 23</span>
-<span id="24"> 24</span>
-<span id="25"> 25</span>
-<span id="26"> 26</span>
-<span id="27"> 27</span>
-<span id="28"> 28</span>
-<span id="29"> 29</span>
-<span id="30"> 30</span>
-<span id="31"> 31</span>
-<span id="32"> 32</span>
-<span id="33"> 33</span>
-<span id="34"> 34</span>
-<span id="35"> 35</span>
-<span id="36"> 36</span>
-<span id="37"> 37</span>
-<span id="38"> 38</span>
-<span id="39"> 39</span>
-<span id="40"> 40</span>
-<span id="41"> 41</span>
-<span id="42"> 42</span>
-<span id="43"> 43</span>
-<span id="44"> 44</span>
-<span id="45"> 45</span>
-<span id="46"> 46</span>
-<span id="47"> 47</span>
-<span id="48"> 48</span>
-<span id="49"> 49</span>
-<span id="50"> 50</span>
-<span id="51"> 51</span>
-<span id="52"> 52</span>
-<span id="53"> 53</span>
-<span id="54"> 54</span>
-<span id="55"> 55</span>
-<span id="56"> 56</span>
-<span id="57"> 57</span>
-<span id="58"> 58</span>
-<span id="59"> 59</span>
-<span id="60"> 60</span>
-<span id="61"> 61</span>
-<span id="62"> 62</span>
-<span id="63"> 63</span>
-<span id="64"> 64</span>
-<span id="65"> 65</span>
-<span id="66"> 66</span>
-<span id="67"> 67</span>
-<span id="68"> 68</span>
-<span id="69"> 69</span>
-<span id="70"> 70</span>
-<span id="71"> 71</span>
-<span id="72"> 72</span>
-<span id="73"> 73</span>
-<span id="74"> 74</span>
-<span id="75"> 75</span>
-<span id="76"> 76</span>
-<span id="77"> 77</span>
-<span id="78"> 78</span>
-<span id="79"> 79</span>
-<span id="80"> 80</span>
-<span id="81"> 81</span>
-<span id="82"> 82</span>
-<span id="83"> 83</span>
-<span id="84"> 84</span>
-<span id="85"> 85</span>
-<span id="86"> 86</span>
-<span id="87"> 87</span>
-<span id="88"> 88</span>
-<span id="89"> 89</span>
-<span id="90"> 90</span>
-<span id="91"> 91</span>
-<span id="92"> 92</span>
-<span id="93"> 93</span>
-<span id="94"> 94</span>
-<span id="95"> 95</span>
-<span id="96"> 96</span>
-<span id="97"> 97</span>
-<span id="98"> 98</span>
-<span id="99"> 99</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3dcompiler.h\dll\parts.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>parts.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../../normalize.css"><link rel="stylesheet" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../../dark.css" disabled><link rel="stylesheet" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<span id="2">2</span>
+<span id="3">3</span>
+<span id="4">4</span>
+<span id="5">5</span>
+<span id="6">6</span>
+<span id="7">7</span>
+<span id="8">8</span>
+<span id="9">9</span>
+<span id="10">10</span>
+<span id="11">11</span>
+<span id="12">12</span>
+<span id="13">13</span>
+<span id="14">14</span>
+<span id="15">15</span>
+<span id="16">16</span>
+<span id="17">17</span>
+<span id="18">18</span>
+<span id="19">19</span>
+<span id="20">20</span>
+<span id="21">21</span>
+<span id="22">22</span>
+<span id="23">23</span>
+<span id="24">24</span>
+<span id="25">25</span>
+<span id="26">26</span>
+<span id="27">27</span>
+<span id="28">28</span>
+<span id="29">29</span>
+<span id="30">30</span>
+<span id="31">31</span>
+<span id="32">32</span>
+<span id="33">33</span>
+<span id="34">34</span>
+<span id="35">35</span>
+<span id="36">36</span>
+<span id="37">37</span>
+<span id="38">38</span>
+<span id="39">39</span>
+<span id="40">40</span>
+<span id="41">41</span>
+<span id="42">42</span>
+<span id="43">43</span>
+<span id="44">44</span>
+<span id="45">45</span>
+<span id="46">46</span>
+<span id="47">47</span>
+<span id="48">48</span>
+<span id="49">49</span>
+<span id="50">50</span>
+<span id="51">51</span>
+<span id="52">52</span>
+<span id="53">53</span>
+<span id="54">54</span>
+<span id="55">55</span>
+<span id="56">56</span>
+<span id="57">57</span>
+<span id="58">58</span>
+<span id="59">59</span>
+<span id="60">60</span>
+<span id="61">61</span>
+<span id="62">62</span>
+<span id="63">63</span>
+<span id="64">64</span>
+<span id="65">65</span>
+<span id="66">66</span>
+<span id="67">67</span>
+<span id="68">68</span>
+<span id="69">69</span>
+<span id="70">70</span>
+<span id="71">71</span>
+<span id="72">72</span>
+<span id="73">73</span>
+<span id="74">74</span>
+<span id="75">75</span>
+<span id="76">76</span>
+<span id="77">77</span>
+<span id="78">78</span>
+<span id="79">79</span>
+<span id="80">80</span>
+<span id="81">81</span>
+<span id="82">82</span>
+<span id="83">83</span>
+<span id="84">84</span>
+<span id="85">85</span>
+<span id="86">86</span>
+<span id="87">87</span>
+<span id="88">88</span>
+<span id="89">89</span>
+<span id="90">90</span>
+<span id="91">91</span>
+<span id="92">92</span>
+<span id="93">93</span>
+<span id="94">94</span>
+<span id="95">95</span>
+<span id="96">96</span>
+<span id="97">97</span>
+<span id="98">98</span>
+<span id="99">99</span>
 <span id="100">100</span>
 <span id="101">101</span>
 <span id="102">102</span>
@@ -338,375 +337,344 @@
 <span id="337">337</span>
 <span id="338">338</span>
 <span id="339">339</span>
-<span id="340">340</span>
-<span id="341">341</span>
-<span id="342">342</span>
-<span id="343">343</span>
-<span id="344">344</span>
-<span id="345">345</span>
-<span id="346">346</span>
-<span id="347">347</span>
-<span id="348">348</span>
-<span id="349">349</span>
-<span id="350">350</span>
-<span id="351">351</span>
-<span id="352">352</span>
-<span id="353">353</span>
-<span id="354">354</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="kw">crate</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::d3d</span>::<span class="kw-2">*</span>;
+</pre><pre class="rust"><code><span class="kw">use crate</span>::<span class="kw-2">*</span>;
+<span class="kw">use </span><span class="kw">crate</span>::d3d::<span class="kw-2">*</span>;
 
-<span class="kw">use</span> <span class="ident">std::ptr</span>::<span class="kw-2">*</span>;
+<span class="kw">use </span>std::ptr::<span class="kw-2">*</span>;
 
 
 
-<span class="doccomment">/// &lt;h1 id=&quot;parts&quot; class=&quot;section-header&quot;&gt;&lt;a href=&quot;#parts&quot;&gt;Manipulate Bytecode by BlobPart&lt;/a&gt;&lt;/h1&gt;</span>
-<span class="kw">impl</span> <span class="ident">Compiler</span> {
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dgetblobpart)\]</span>
-    <span class="doccomment">/// D3DGetBlobPart</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Retrieves a specific part from a compilation result.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Arguments</span>
-    <span class="doccomment">/// *   `src_data`      - Compiled HLSL code.</span>
-    <span class="doccomment">/// *   `part`          - The [BlobPart] to retrieve</span>
-    <span class="doccomment">/// *   `flags`         - Reserved (pass [None])</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Errors</span>
-    <span class="doccomment">/// *   [THINERR::MISSING_DLL_EXPORT]   - on `d3dcompiler_42.dll` and earlier</span>
-    <span class="doccomment">/// *   [D3DERR::INVALIDCALL]           - on data that wasn&#39;t compiled shader code.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Example</span>
-    <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// # use thindx::d3d::*; let d3dc = Compiler::load_system(47).unwrap();</span>
-    <span class="doccomment">/// # let shader = d3dc.compile_from_file(r&quot;test\data\basic.hlsl&quot;, None, None, &quot;ps_main&quot;, &quot;ps_4_0&quot;, Compile::Debug, CompileEffect::None).unwrap();</span>
-    <span class="doccomment">/// let shader2 = d3dc.set_blob_part(</span>
-    <span class="doccomment">///     &amp;shader, Blob::PrivateData, (), b&quot;testing 123&quot;</span>
-    <span class="doccomment">/// ).unwrap();</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// assert_eq!(b&quot;testing 123&quot;, d3dc.get_blob_part(</span>
-    <span class="doccomment">///     &amp;shader2, Blob::PrivateData, None</span>
-    <span class="doccomment">/// ).unwrap().as_bytes());</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Remarks</span>
-    <span class="doccomment">/// *   This was introduced by d3dcompiler_43.dll, and is unavailable in earlier versions.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_blob_part</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">src_data</span>: <span class="kw-2">&amp;</span><span class="ident">Bytecode</span>, <span class="ident">part</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">BlobPart</span><span class="op">&gt;</span>, <span class="ident">flags</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">std::convert::Infallible</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">BytesBlob</span>, <span class="ident">MethodError</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">f</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">D3DGetBlobPart</span>.<span class="ident">ok_or</span>(<span class="ident">MethodError</span>(<span class="string">&quot;D3DGetBlobPart&quot;</span>, <span class="ident">THINERR::MISSING_DLL_EXPORT</span>))<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">src_data</span> <span class="op">=</span> <span class="ident">src_data</span>.<span class="ident">as_bytes</span>();
-        <span class="kw">let</span> <span class="ident">part</span> <span class="op">=</span> <span class="ident">part</span>.<span class="ident">into</span>().<span class="ident">into</span>();
-        <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">flags</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">blob</span> <span class="op">=</span> <span class="ident">null_mut</span>();
+<span class="doccomment">/// &lt;h1 id=&quot;parts&quot; class=&quot;section-header&quot;&gt;&lt;a href=&quot;#parts&quot;&gt;Manipulate Bytecode by BlobPart&lt;/a&gt;&lt;/h1&gt;
+</span><span class="kw">impl </span>Compiler {
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dgetblobpart)\]
+    /// D3DGetBlobPart
+    ///
+    /// Retrieves a specific part from a compilation result.
+    ///
+    /// ### Arguments
+    /// *   `src_data`      - Compiled HLSL code.
+    /// *   `part`          - The [BlobPart] to retrieve
+    /// *   `flags`         - Reserved (pass [None])
+    ///
+    /// ### Errors
+    /// *   [THINERR::MISSING_DLL_EXPORT]   - on `d3dcompiler_42.dll` and earlier
+    /// *   [D3DERR::INVALIDCALL]           - on data that wasn&#39;t compiled shader code.
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use thindx::d3d::*; let d3dc = Compiler::load_system(47).unwrap();
+    /// # let shader = d3dc.compile_from_file(r&quot;test\data\basic.hlsl&quot;, None, None, &quot;ps_main&quot;, &quot;ps_4_0&quot;, Compile::Debug, CompileEffect::None).unwrap();
+    /// let shader2 = d3dc.set_blob_part(
+    ///     &amp;shader, Blob::PrivateData, (), b&quot;testing 123&quot;
+    /// ).unwrap();
+    ///
+    /// assert_eq!(b&quot;testing 123&quot;, d3dc.get_blob_part(
+    ///     &amp;shader2, Blob::PrivateData, None
+    /// ).unwrap().as_bytes());
+    /// ```
+    ///
+    /// ### Remarks
+    /// *   This was introduced by d3dcompiler_43.dll, and is unavailable in earlier versions.
+    </span><span class="kw">pub fn </span>get_blob_part(<span class="kw-2">&amp;</span><span class="self">self</span>, src_data: <span class="kw-2">&amp;</span>Bytecode, part: <span class="kw">impl </span>Into&lt;BlobPart&gt;, flags: <span class="prelude-ty">Option</span>&lt;std::convert::Infallible&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;BytesBlob, Error&gt; {
+        <span class="macro">fn_context_dll!</span>(d3d::Compiler::get_blob_part =&gt; <span class="self">self</span>.D3DGetBlobPart);
+        <span class="kw">let </span>src_data = src_data.as_bytes();
+        <span class="kw">let </span>part = part.into().into();
+        <span class="kw">let _ </span>= flags;
+        <span class="kw">let </span><span class="kw-2">mut </span>blob = null_mut();
 
-        <span class="comment">// SAFETY: ❌ needs fuzz testing against ~4GB `data` to attempt to induce alloc overflow bugs</span>
-        <span class="comment">//  * `f`           ✔️ should be valid/sound like all `self.*`</span>
-        <span class="comment">//  * `src_data`    ❌ needs fuzz testing against ~4GB data to attempt to induce alloc overflow bugs</span>
-        <span class="comment">//  * `src_data`    ✔️ should be valid bytecode as implied by [`Bytecode`]</span>
-        <span class="comment">//  * `part`        ⚠️ could be invalid</span>
-        <span class="comment">//  * `flags`       ✔️ are reserved/0</span>
-        <span class="comment">//  * `blob`        ✔️ is a simple out-param</span>
-        <span class="kw">let</span> <span class="ident">hr</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="ident">f</span>(<span class="ident">src_data</span>.<span class="ident">as_ptr</span>().<span class="ident">cast</span>(), <span class="ident">src_data</span>.<span class="ident">len</span>(), <span class="ident">part</span>, <span class="number">0</span>, <span class="kw-2">&amp;mut</span> <span class="ident">blob</span>) };
-        <span class="ident">MethodError::check</span>(<span class="string">&quot;D3DGetBlobPart&quot;</span>, <span class="ident">hr</span>)<span class="question-mark">?</span>;
+        <span class="comment">// SAFETY: ❌ needs fuzz testing against ~4GB `data` to attempt to induce alloc overflow bugs
+        //  * `f`           ✔️ should be valid/sound like all `self.*`
+        //  * `src_data`    ❌ needs fuzz testing against ~4GB data to attempt to induce alloc overflow bugs
+        //  * `src_data`    ✔️ should be valid bytecode as implied by [`Bytecode`]
+        //  * `part`        ⚠️ could be invalid
+        //  * `flags`       ✔️ are reserved/0
+        //  * `blob`        ✔️ is a simple out-param
+        </span><span class="macro">fn_check_hr!</span>(<span class="kw">unsafe </span>{ D3DGetBlobPart(src_data.as_ptr().cast(), src_data.len(), part, <span class="number">0</span>, <span class="kw-2">&amp;mut </span>blob) })<span class="question-mark">?</span>;
 
-        <span class="comment">// SAFETY: ✔️ `blob` is null (from_raw panics) or a valid non-dangling pointer (from_raw takes ownership).  ReadOnlyBlob imposes no content requirements.</span>
-        <span class="prelude-val">Ok</span>(<span class="ident">BytesBlob::new</span>(<span class="kw unsafe">unsafe</span> { <span class="ident">ReadOnlyBlob::from_raw</span>(<span class="ident">blob</span>) }))
+        <span class="comment">// SAFETY: ✔️ `blob` is null (from_raw panics) or a valid non-dangling pointer (from_raw takes ownership).  ReadOnlyBlob imposes no content requirements.
+        </span><span class="prelude-val">Ok</span>(BytesBlob::new(<span class="kw">unsafe </span>{ ReadOnlyBlob::from_raw(blob) }))
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dgetdebuginfo)\]</span>
-    <span class="doccomment">/// D3DGetDebugInfo</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// &gt; **Note:** You can use this API to develop your Windows Store apps, but you can&#39;t use it in apps that you submit to the Windows Store.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Gets shader debug information.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Arguments</span>
-    <span class="doccomment">/// *   `src_data`  - Shader bytecode</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Errors</span>
-    <span class="doccomment">/// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_39.dll` and earlier</span>
-    <span class="doccomment">/// *   [E::FAIL]                       - `src_data` wasn&#39;t compiled with [d3d::Compile::Debug]</span>
-    <span class="doccomment">/// *   [E::FAIL]                       - `src_data`&#39;s debug info is too modern? (cannot load debug info for shaders compiled with `d3dcompiler_47.dll`)</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Example</span>
-    <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// # use thindx::*;</span>
-    <span class="doccomment">/// # if d3d::Compiler::load_system(43).is_err() { return; }</span>
-    <span class="doccomment">/// let d3dc = d3d::Compiler::load_system(43).unwrap();</span>
-    <span class="doccomment">/// # let shader_src = std::fs::read(r&quot;test\data\basic.hlsl&quot;).unwrap();</span>
-    <span class="doccomment">/// # let shader = d3dc.compile(&amp;shader_src, cstr!(r&quot;test\data\basic.hlsl&quot;), None, None, &quot;ps_main&quot;, &quot;ps_4_0&quot;, d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();</span>
-    <span class="doccomment">/// let debug_info : d3d::BytesBlob = d3dc.get_debug_info(&amp;shader).unwrap();</span>
-    <span class="doccomment">/// assert!(debug_info.len() &gt; 0);</span>
-    <span class="doccomment">/// #</span>
-    <span class="doccomment">/// # // This is not legal, despite MSDN suggesting that src_data can contain &quot;either uncompiled or compiled HLSL code&quot; (didn&#39;t sound right)</span>
-    <span class="doccomment">/// # assert_eq!(d3dc.get_debug_info(unsafe { d3d::Bytecode::from_unchecked(&amp;shader_src) }).err().map(|err| err.kind()), Some(E::FAIL), &quot;uncompiled shader code isn&#39;t actually legal&quot;);</span>
-    <span class="doccomment">/// #</span>
-    <span class="doccomment">/// # let shader = d3dc.compile(&amp;shader_src, cstr!(r&quot;test\data\basic.hlsl&quot;), None, None, &quot;ps_main&quot;, &quot;ps_4_0&quot;, d3d::Compile::None, d3d::CompileEffect::None).unwrap();</span>
-    <span class="doccomment">/// # assert_eq!(d3dc.get_debug_info(&amp;shader).err().map(|err| err.kind()), Some(E::FAIL), &quot;shader was compiled without debug info&quot;);</span>
-    <span class="doccomment">/// #</span>
-    <span class="doccomment">/// # let d3dc = d3d::Compiler::load_system(47).unwrap();</span>
-    <span class="doccomment">/// # let shader = d3dc.compile(&amp;shader_src, cstr!(r&quot;test\data\basic.hlsl&quot;), None, None, &quot;ps_main&quot;, &quot;ps_4_0&quot;, d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();</span>
-    <span class="doccomment">/// # assert_eq!(d3dc.get_debug_info(&amp;shader).err().map(|err| err.kind()), Some(E::FAIL), &quot;shader was compiled with d3dcompiler_47.dll&quot;);</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Output</span>
-    <span class="doccomment">/// ```text</span>
-    <span class="doccomment">/// BytesBlob(2625 bytes)</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Remarks</span>
-    <span class="doccomment">/// *   This was introduced by d3dcompiler_40.dll, and is unavailable in earlier versions.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_debug_info</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">src_data</span>: <span class="kw-2">&amp;</span><span class="ident">Bytecode</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">BytesBlob</span>, <span class="ident">MethodError</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">f</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">D3DGetDebugInfo</span>.<span class="ident">ok_or</span>(<span class="ident">MethodError</span>(<span class="string">&quot;D3DGetDebugInfo&quot;</span>, <span class="ident">THINERR::MISSING_DLL_EXPORT</span>))<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">src_data</span> <span class="op">=</span> <span class="ident">src_data</span>.<span class="ident">as_bytes</span>();
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dgetdebuginfo)\]
+    /// D3DGetDebugInfo
+    ///
+    /// &gt; **Note:** You can use this API to develop your Windows Store apps, but you can&#39;t use it in apps that you submit to the Windows Store.
+    ///
+    /// Gets shader debug information.
+    ///
+    /// ### Arguments
+    /// *   `src_data`  - Shader bytecode
+    ///
+    /// ### Errors
+    /// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_39.dll` and earlier
+    /// *   [E::FAIL]                       - `src_data` wasn&#39;t compiled with [d3d::Compile::Debug]
+    /// *   [E::FAIL]                       - `src_data`&#39;s debug info is too modern? (cannot load debug info for shaders compiled with `d3dcompiler_47.dll`)
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use thindx::*;
+    /// # if d3d::Compiler::load_system(43).is_err() { return; }
+    /// let d3dc = d3d::Compiler::load_system(43).unwrap();
+    /// # let shader_src = std::fs::read(r&quot;test\data\basic.hlsl&quot;).unwrap();
+    /// # let shader = d3dc.compile(&amp;shader_src, cstr!(r&quot;test\data\basic.hlsl&quot;), None, None, &quot;ps_main&quot;, &quot;ps_4_0&quot;, d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
+    /// let debug_info : d3d::BytesBlob = d3dc.get_debug_info(&amp;shader).unwrap();
+    /// assert!(debug_info.len() &gt; 0);
+    /// #
+    /// # // This is not legal, despite MSDN suggesting that src_data can contain &quot;either uncompiled or compiled HLSL code&quot; (didn&#39;t sound right)
+    /// # assert_eq!(E::FAIL, d3dc.get_debug_info(unsafe { d3d::Bytecode::from_unchecked(&amp;shader_src) }), &quot;uncompiled shader code isn&#39;t actually legal&quot;);
+    /// #
+    /// # let shader = d3dc.compile(&amp;shader_src, cstr!(r&quot;test\data\basic.hlsl&quot;), None, None, &quot;ps_main&quot;, &quot;ps_4_0&quot;, d3d::Compile::None, d3d::CompileEffect::None).unwrap();
+    /// # assert_eq!(E::FAIL, d3dc.get_debug_info(&amp;shader), &quot;shader was compiled without debug info&quot;);
+    /// #
+    /// # let d3dc = d3d::Compiler::load_system(47).unwrap();
+    /// # let shader = d3dc.compile(&amp;shader_src, cstr!(r&quot;test\data\basic.hlsl&quot;), None, None, &quot;ps_main&quot;, &quot;ps_4_0&quot;, d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
+    /// # assert_eq!(E::FAIL, d3dc.get_debug_info(&amp;shader), &quot;shader was compiled with d3dcompiler_47.dll&quot;);
+    /// ```
+    ///
+    /// ### Output
+    /// ```text
+    /// BytesBlob(2625 bytes)
+    /// ```
+    ///
+    /// ### Remarks
+    /// *   This was introduced by d3dcompiler_40.dll, and is unavailable in earlier versions.
+    </span><span class="kw">pub fn </span>get_debug_info(<span class="kw-2">&amp;</span><span class="self">self</span>, src_data: <span class="kw-2">&amp;</span>Bytecode) -&gt; <span class="prelude-ty">Result</span>&lt;BytesBlob, Error&gt; {
+        <span class="macro">fn_context_dll!</span>(d3d::Compiler::get_debug_info =&gt; <span class="self">self</span>.D3DGetDebugInfo);
+        <span class="kw">let </span>src_data = src_data.as_bytes();
 
-        <span class="comment">// SAFETY: ❌ needs fuzz testing against ~4GB `data` to attempt to induce alloc overflow bugs</span>
-        <span class="comment">//  * `f`           ✔️ should be valid/sound like all `self.*`</span>
-        <span class="comment">//  * `src_data`    ❌ needs fuzz testing against ~4GB data to attempt to induce alloc overflow bugs</span>
-        <span class="comment">//  * `src_data`    ✔️ should be valid bytecode as implied by [`Bytecode`]</span>
-        <span class="comment">//  * `blob`        ✔️ is a simple out-param</span>
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">blob</span> <span class="op">=</span> <span class="ident">null_mut</span>();
-        <span class="kw">let</span> <span class="ident">hr</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="ident">f</span>(<span class="ident">src_data</span>.<span class="ident">as_ptr</span>().<span class="ident">cast</span>(), <span class="ident">src_data</span>.<span class="ident">len</span>(), <span class="kw-2">&amp;mut</span> <span class="ident">blob</span>) };
-        <span class="ident">MethodError::check</span>(<span class="string">&quot;D3DGetDebugInfo&quot;</span>, <span class="ident">hr</span>)<span class="question-mark">?</span>;
+        <span class="comment">// SAFETY: ❌ needs fuzz testing against ~4GB `data` to attempt to induce alloc overflow bugs
+        //  * `f`           ✔️ should be valid/sound like all `self.*`
+        //  * `src_data`    ❌ needs fuzz testing against ~4GB data to attempt to induce alloc overflow bugs
+        //  * `src_data`    ✔️ should be valid bytecode as implied by [`Bytecode`]
+        //  * `blob`        ✔️ is a simple out-param
+        </span><span class="kw">let </span><span class="kw-2">mut </span>blob = null_mut();
+        <span class="macro">fn_check_hr!</span>(<span class="kw">unsafe </span>{ D3DGetDebugInfo(src_data.as_ptr().cast(), src_data.len(), <span class="kw-2">&amp;mut </span>blob) })<span class="question-mark">?</span>;
 
-        <span class="comment">// SAFETY: ✔️ `blob` is null (from_raw panics) or a valid non-dangling pointer (from_raw takes ownership).  ReadOnlyBlob imposes no content requirements.</span>
-        <span class="prelude-val">Ok</span>(<span class="ident">BytesBlob::new</span>(<span class="kw unsafe">unsafe</span> { <span class="ident">ReadOnlyBlob::from_raw</span>(<span class="ident">blob</span>) }))
+        <span class="comment">// SAFETY: ✔️ `blob` is null (from_raw panics) or a valid non-dangling pointer (from_raw takes ownership).  ReadOnlyBlob imposes no content requirements.
+        </span><span class="prelude-val">Ok</span>(BytesBlob::new(<span class="kw">unsafe </span>{ ReadOnlyBlob::from_raw(blob) }))
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dgetinputandoutputsignatureblob)\]</span>
-    <span class="doccomment">/// D3DGetInputAndOutputSignatureBlob</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// &gt; **Note:** [get_input_and_output_signature_blob](Self::get_input_and_output_signature_blob) may be altered or</span>
-    <span class="doccomment">/// &gt; unavailable for releases after Windows 8.1. Instead use [get_glob_part](Self::get_blob_part) with the</span>
-    <span class="doccomment">/// &gt; [Blob::InputAndOutputSignatureBlob] value.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Gets the input and output signatures from a compilation result.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Example</span>
-    <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// # use thindx::d3d::*; let d3dc = Compiler::load_system(47).unwrap();</span>
-    <span class="doccomment">/// # let shader = d3dc.compile_from_file(r&quot;test\data\basic.hlsl&quot;, None, None, &quot;ps_main&quot;, &quot;ps_4_0&quot;, Compile::Debug, CompileEffect::None).unwrap();</span>
-    <span class="doccomment">/// let signature = d3dc.get_input_and_output_signature_blob(&amp;shader).unwrap();</span>
-    <span class="doccomment">/// println!(&quot;{:?}&quot;, &amp;signature);</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Output</span>
-    <span class="doccomment">/// ```text</span>
-    <span class="doccomment">/// [68, 88, 66, 67, 97, ...</span>
-    <span class="doccomment">/// ```</span>
-    <span class="comment">// #[requires(d3dcompiler=33)] // or earlier?</span>
-    <span class="comment">//#allow_missing_argument_docs</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_input_and_output_signature_blob</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">src_data</span>: <span class="kw-2">&amp;</span><span class="ident">Bytecode</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">BytesBlob</span>, <span class="ident">MethodError</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">f</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">D3DGetInputAndOutputSignatureBlob</span>.<span class="ident">ok_or</span>(<span class="ident">MethodError</span>(<span class="string">&quot;D3DGetInputAndOutputSignatureBlob&quot;</span>, <span class="ident">THINERR::MISSING_DLL_EXPORT</span>))<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">src_data</span> <span class="op">=</span> <span class="ident">src_data</span>.<span class="ident">as_bytes</span>();
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dgetinputandoutputsignatureblob)\]
+    /// D3DGetInputAndOutputSignatureBlob
+    ///
+    /// &gt; **Note:** [get_input_and_output_signature_blob](Self::get_input_and_output_signature_blob) may be altered or
+    /// &gt; unavailable for releases after Windows 8.1. Instead use [get_glob_part](Self::get_blob_part) with the
+    /// &gt; [Blob::InputAndOutputSignatureBlob] value.
+    ///
+    /// Gets the input and output signatures from a compilation result.
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use thindx::d3d::*; let d3dc = Compiler::load_system(47).unwrap();
+    /// # let shader = d3dc.compile_from_file(r&quot;test\data\basic.hlsl&quot;, None, None, &quot;ps_main&quot;, &quot;ps_4_0&quot;, Compile::Debug, CompileEffect::None).unwrap();
+    /// let signature = d3dc.get_input_and_output_signature_blob(&amp;shader).unwrap();
+    /// println!(&quot;{:?}&quot;, &amp;signature);
+    /// ```
+    ///
+    /// ### Output
+    /// ```text
+    /// [68, 88, 66, 67, 97, ...
+    /// ```
+    </span><span class="comment">// #[requires(d3dcompiler=33)] // or earlier?
+    //#allow_missing_argument_docs
+    </span><span class="kw">pub fn </span>get_input_and_output_signature_blob(<span class="kw-2">&amp;</span><span class="self">self</span>, src_data: <span class="kw-2">&amp;</span>Bytecode) -&gt; <span class="prelude-ty">Result</span>&lt;BytesBlob, Error&gt; {
+        <span class="macro">fn_context_dll!</span>(d3d::Compiler::get_input_and_output_signature_blob =&gt; <span class="self">self</span>.D3DGetInputAndOutputSignatureBlob);
+        <span class="kw">let </span>src_data = src_data.as_bytes();
 
-        <span class="comment">// SAFETY: ❌ needs fuzz testing against ~4GB `data` to attempt to induce alloc overflow bugs</span>
-        <span class="comment">//  * `f`           ✔️ should be valid/sound like all `self.*`</span>
-        <span class="comment">//  * `src_data`    ❌ needs fuzz testing against ~4GB data to attempt to induce alloc overflow bugs</span>
-        <span class="comment">//  * `src_data`    ✔️ should be valid bytecode as implied by [`Bytecode`]</span>
-        <span class="comment">//  * `blob`        ✔️ is a simple out-param</span>
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">blob</span> <span class="op">=</span> <span class="ident">null_mut</span>();
-        <span class="kw">let</span> <span class="ident">hr</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="ident">f</span>(<span class="ident">src_data</span>.<span class="ident">as_ptr</span>().<span class="ident">cast</span>(), <span class="ident">src_data</span>.<span class="ident">len</span>(), <span class="kw-2">&amp;mut</span> <span class="ident">blob</span>) };
-        <span class="ident">MethodError::check</span>(<span class="string">&quot;D3DGetInputAndOutputSignatureBlob&quot;</span>, <span class="ident">hr</span>)<span class="question-mark">?</span>;
+        <span class="comment">// SAFETY: ❌ needs fuzz testing against ~4GB `data` to attempt to induce alloc overflow bugs
+        //  * `f`           ✔️ should be valid/sound like all `self.*`
+        //  * `src_data`    ❌ needs fuzz testing against ~4GB data to attempt to induce alloc overflow bugs
+        //  * `src_data`    ✔️ should be valid bytecode as implied by [`Bytecode`]
+        //  * `blob`        ✔️ is a simple out-param
+        </span><span class="kw">let </span><span class="kw-2">mut </span>blob = null_mut();
+        <span class="macro">fn_check_hr!</span>(<span class="kw">unsafe </span>{ D3DGetInputAndOutputSignatureBlob(src_data.as_ptr().cast(), src_data.len(), <span class="kw-2">&amp;mut </span>blob) })<span class="question-mark">?</span>;
 
-        <span class="comment">// SAFETY: ✔️ `blob` is null (from_raw panics) or a valid non-dangling pointer (from_raw takes ownership).  ReadOnlyBlob imposes no content requirements.</span>
-        <span class="prelude-val">Ok</span>(<span class="ident">BytesBlob::new</span>(<span class="kw unsafe">unsafe</span> { <span class="ident">ReadOnlyBlob::from_raw</span>(<span class="ident">blob</span>) }))
+        <span class="comment">// SAFETY: ✔️ `blob` is null (from_raw panics) or a valid non-dangling pointer (from_raw takes ownership).  ReadOnlyBlob imposes no content requirements.
+        </span><span class="prelude-val">Ok</span>(BytesBlob::new(<span class="kw">unsafe </span>{ ReadOnlyBlob::from_raw(blob) }))
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dgetinputsignatureblob)\]</span>
-    <span class="doccomment">/// D3DGetInputSignatureBlob</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// &gt; **Note:** [get_input_signature_blob](Self::get_input_signature_blob) may be altered or</span>
-    <span class="doccomment">/// &gt; unavailable for releases after Windows 8.1. Instead use [get_glob_part](Self::get_blob_part) with the</span>
-    <span class="doccomment">/// &gt; [Blob::InputSignatureBlob] value.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Gets the input signature from a compilation result.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Example</span>
-    <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// # use thindx::d3d::*; let d3dc = Compiler::load_system(47).unwrap();</span>
-    <span class="doccomment">/// # let shader = d3dc.compile_from_file(r&quot;test\data\basic.hlsl&quot;, None, None, &quot;ps_main&quot;, &quot;ps_4_0&quot;, Compile::Debug, CompileEffect::None).unwrap();</span>
-    <span class="doccomment">/// let signature = d3dc.get_input_signature_blob(&amp;shader).unwrap();</span>
-    <span class="doccomment">/// println!(&quot;{:?}&quot;, &amp;signature);</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Output</span>
-    <span class="doccomment">/// ```text</span>
-    <span class="doccomment">/// [68, 88, 66, 67, 53, ...</span>
-    <span class="doccomment">/// ```</span>
-    <span class="comment">// #[requires(d3dcompiler=33)] // or earlier?</span>
-    <span class="comment">//#allow_missing_argument_docs</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_input_signature_blob</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">src_data</span>: <span class="kw-2">&amp;</span><span class="ident">Bytecode</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">BytesBlob</span>, <span class="ident">MethodError</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">f</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">D3DGetInputSignatureBlob</span>.<span class="ident">ok_or</span>(<span class="ident">MethodError</span>(<span class="string">&quot;D3DGetInputSignatureBlob&quot;</span>, <span class="ident">THINERR::MISSING_DLL_EXPORT</span>))<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">src_data</span> <span class="op">=</span> <span class="ident">src_data</span>.<span class="ident">as_bytes</span>();
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dgetinputsignatureblob)\]
+    /// D3DGetInputSignatureBlob
+    ///
+    /// &gt; **Note:** [get_input_signature_blob](Self::get_input_signature_blob) may be altered or
+    /// &gt; unavailable for releases after Windows 8.1. Instead use [get_glob_part](Self::get_blob_part) with the
+    /// &gt; [Blob::InputSignatureBlob] value.
+    ///
+    /// Gets the input signature from a compilation result.
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use thindx::d3d::*; let d3dc = Compiler::load_system(47).unwrap();
+    /// # let shader = d3dc.compile_from_file(r&quot;test\data\basic.hlsl&quot;, None, None, &quot;ps_main&quot;, &quot;ps_4_0&quot;, Compile::Debug, CompileEffect::None).unwrap();
+    /// let signature = d3dc.get_input_signature_blob(&amp;shader).unwrap();
+    /// println!(&quot;{:?}&quot;, &amp;signature);
+    /// ```
+    ///
+    /// ### Output
+    /// ```text
+    /// [68, 88, 66, 67, 53, ...
+    /// ```
+    </span><span class="comment">// #[requires(d3dcompiler=33)] // or earlier?
+    //#allow_missing_argument_docs
+    </span><span class="kw">pub fn </span>get_input_signature_blob(<span class="kw-2">&amp;</span><span class="self">self</span>, src_data: <span class="kw-2">&amp;</span>Bytecode) -&gt; <span class="prelude-ty">Result</span>&lt;BytesBlob, Error&gt; {
+        <span class="macro">fn_context_dll!</span>(d3d::Compiler::get_input_signature_blob =&gt; <span class="self">self</span>.D3DGetInputSignatureBlob);
+        <span class="kw">let </span>src_data = src_data.as_bytes();
 
-        <span class="comment">// SAFETY: ❌ needs fuzz testing against ~4GB `data` to attempt to induce alloc overflow bugs</span>
-        <span class="comment">//  * `f`           ✔️ should be valid/sound like all `self.*`</span>
-        <span class="comment">//  * `src_data`    ❌ needs fuzz testing against ~4GB data to attempt to induce alloc overflow bugs</span>
-        <span class="comment">//  * `src_data`    ✔️ should be valid bytecode as implied by [`Bytecode`]</span>
-        <span class="comment">//  * `blob`        ✔️ is a simple out-param</span>
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">blob</span> <span class="op">=</span> <span class="ident">null_mut</span>();
-        <span class="kw">let</span> <span class="ident">hr</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="ident">f</span>(<span class="ident">src_data</span>.<span class="ident">as_ptr</span>().<span class="ident">cast</span>(), <span class="ident">src_data</span>.<span class="ident">len</span>(), <span class="kw-2">&amp;mut</span> <span class="ident">blob</span>) };
-        <span class="ident">MethodError::check</span>(<span class="string">&quot;D3DGetInputSignatureBlob&quot;</span>, <span class="ident">hr</span>)<span class="question-mark">?</span>;
+        <span class="comment">// SAFETY: ❌ needs fuzz testing against ~4GB `data` to attempt to induce alloc overflow bugs
+        //  * `f`           ✔️ should be valid/sound like all `self.*`
+        //  * `src_data`    ❌ needs fuzz testing against ~4GB data to attempt to induce alloc overflow bugs
+        //  * `src_data`    ✔️ should be valid bytecode as implied by [`Bytecode`]
+        //  * `blob`        ✔️ is a simple out-param
+        </span><span class="kw">let </span><span class="kw-2">mut </span>blob = null_mut();
+        <span class="macro">fn_check_hr!</span>(<span class="kw">unsafe </span>{ D3DGetInputSignatureBlob(src_data.as_ptr().cast(), src_data.len(), <span class="kw-2">&amp;mut </span>blob) })<span class="question-mark">?</span>;
 
-        <span class="comment">// SAFETY: ✔️ `blob` is null (from_raw panics) or a valid non-dangling pointer (from_raw takes ownership).  ReadOnlyBlob imposes no content requirements.</span>
-        <span class="prelude-val">Ok</span>(<span class="ident">BytesBlob::new</span>(<span class="kw unsafe">unsafe</span> { <span class="ident">ReadOnlyBlob::from_raw</span>(<span class="ident">blob</span>) }))
+        <span class="comment">// SAFETY: ✔️ `blob` is null (from_raw panics) or a valid non-dangling pointer (from_raw takes ownership).  ReadOnlyBlob imposes no content requirements.
+        </span><span class="prelude-val">Ok</span>(BytesBlob::new(<span class="kw">unsafe </span>{ ReadOnlyBlob::from_raw(blob) }))
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dgetoutputsignatureblob)\]</span>
-    <span class="doccomment">/// D3DGetOutputSignatureBlob</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// &gt; **Note:** [get_output_signature_blob](Self::get_output_signature_blob) may be altered or</span>
-    <span class="doccomment">/// &gt; unavailable for releases after Windows 8.1. Instead use [get_glob_part](Self::get_blob_part) with the</span>
-    <span class="doccomment">/// &gt; [Blob::OutputSignatureBlob] value.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Gets the output signature from a compilation result.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Example</span>
-    <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// # use thindx::d3d::*; let d3dc = Compiler::load_system(47).unwrap();</span>
-    <span class="doccomment">/// # let shader = d3dc.compile_from_file(r&quot;test\data\basic.hlsl&quot;, None, None, &quot;ps_main&quot;, &quot;ps_4_0&quot;, Compile::Debug, CompileEffect::None).unwrap();</span>
-    <span class="doccomment">/// let signature = d3dc.get_output_signature_blob(&amp;shader).unwrap();</span>
-    <span class="doccomment">/// println!(&quot;{:?}&quot;, &amp;signature);</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Output</span>
-    <span class="doccomment">/// ```text</span>
-    <span class="doccomment">/// [68, 88, 66, 67, 210, ...</span>
-    <span class="doccomment">/// ```</span>
-    <span class="comment">// #[requires(d3dcompiler=33)] // or earlier?</span>
-    <span class="comment">//#allow_missing_argument_docs</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_output_signature_blob</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">src_data</span>: <span class="kw-2">&amp;</span><span class="ident">Bytecode</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">BytesBlob</span>, <span class="ident">MethodError</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">f</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">D3DGetOutputSignatureBlob</span>.<span class="ident">ok_or</span>(<span class="ident">MethodError</span>(<span class="string">&quot;D3DGetOutputSignatureBlob&quot;</span>, <span class="ident">THINERR::MISSING_DLL_EXPORT</span>))<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">src_data</span> <span class="op">=</span> <span class="ident">src_data</span>.<span class="ident">as_bytes</span>();
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dgetoutputsignatureblob)\]
+    /// D3DGetOutputSignatureBlob
+    ///
+    /// &gt; **Note:** [get_output_signature_blob](Self::get_output_signature_blob) may be altered or
+    /// &gt; unavailable for releases after Windows 8.1. Instead use [get_glob_part](Self::get_blob_part) with the
+    /// &gt; [Blob::OutputSignatureBlob] value.
+    ///
+    /// Gets the output signature from a compilation result.
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use thindx::d3d::*; let d3dc = Compiler::load_system(47).unwrap();
+    /// # let shader = d3dc.compile_from_file(r&quot;test\data\basic.hlsl&quot;, None, None, &quot;ps_main&quot;, &quot;ps_4_0&quot;, Compile::Debug, CompileEffect::None).unwrap();
+    /// let signature = d3dc.get_output_signature_blob(&amp;shader).unwrap();
+    /// println!(&quot;{:?}&quot;, &amp;signature);
+    /// ```
+    ///
+    /// ### Output
+    /// ```text
+    /// [68, 88, 66, 67, 210, ...
+    /// ```
+    </span><span class="comment">// #[requires(d3dcompiler=33)] // or earlier?
+    //#allow_missing_argument_docs
+    </span><span class="kw">pub fn </span>get_output_signature_blob(<span class="kw-2">&amp;</span><span class="self">self</span>, src_data: <span class="kw-2">&amp;</span>Bytecode) -&gt; <span class="prelude-ty">Result</span>&lt;BytesBlob, Error&gt; {
+        <span class="macro">fn_context_dll!</span>(d3d::Compiler::get_output_signature_blob =&gt; <span class="self">self</span>.D3DGetOutputSignatureBlob);
+        <span class="kw">let </span>src_data = src_data.as_bytes();
 
-        <span class="comment">// SAFETY: ❌ needs fuzz testing against ~4GB `data` to attempt to induce alloc overflow bugs</span>
-        <span class="comment">//  * `f`           ✔️ should be valid/sound like all `self.*`</span>
-        <span class="comment">//  * `src_data`    ❌ needs fuzz testing against ~4GB data to attempt to induce alloc overflow bugs</span>
-        <span class="comment">//  * `src_data`    ✔️ should be valid bytecode as implied by [`Bytecode`]</span>
-        <span class="comment">//  * `blob`        ✔️ is a simple out-param</span>
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">blob</span> <span class="op">=</span> <span class="ident">null_mut</span>();
-        <span class="kw">let</span> <span class="ident">hr</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="ident">f</span>(<span class="ident">src_data</span>.<span class="ident">as_ptr</span>().<span class="ident">cast</span>(), <span class="ident">src_data</span>.<span class="ident">len</span>(), <span class="kw-2">&amp;mut</span> <span class="ident">blob</span>) };
-        <span class="ident">MethodError::check</span>(<span class="string">&quot;D3DGetOutputSignatureBlob&quot;</span>, <span class="ident">hr</span>)<span class="question-mark">?</span>;
+        <span class="comment">// SAFETY: ❌ needs fuzz testing against ~4GB `data` to attempt to induce alloc overflow bugs
+        //  * `f`           ✔️ should be valid/sound like all `self.*`
+        //  * `src_data`    ❌ needs fuzz testing against ~4GB data to attempt to induce alloc overflow bugs
+        //  * `src_data`    ✔️ should be valid bytecode as implied by [`Bytecode`]
+        //  * `blob`        ✔️ is a simple out-param
+        </span><span class="kw">let </span><span class="kw-2">mut </span>blob = null_mut();
+        <span class="macro">fn_check_hr!</span>(<span class="kw">unsafe </span>{ D3DGetOutputSignatureBlob(src_data.as_ptr().cast(), src_data.len(), <span class="kw-2">&amp;mut </span>blob) })<span class="question-mark">?</span>;
 
-        <span class="comment">// SAFETY: ✔️ `blob` is null (from_raw panics) or a valid non-dangling pointer (from_raw takes ownership).  ReadOnlyBlob imposes no content requirements.</span>
-        <span class="prelude-val">Ok</span>(<span class="ident">BytesBlob::new</span>(<span class="kw unsafe">unsafe</span> { <span class="ident">ReadOnlyBlob::from_raw</span>(<span class="ident">blob</span>) }))
+        <span class="comment">// SAFETY: ✔️ `blob` is null (from_raw panics) or a valid non-dangling pointer (from_raw takes ownership).  ReadOnlyBlob imposes no content requirements.
+        </span><span class="prelude-val">Ok</span>(BytesBlob::new(<span class="kw">unsafe </span>{ ReadOnlyBlob::from_raw(blob) }))
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dsetblobpart)\]</span>
-    <span class="doccomment">/// D3DSetBlobPart</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Sets information in a compilation result.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Arguments</span>
-    <span class="doccomment">/// *   `src_data`  - The original compiled shader data.</span>
-    <span class="doccomment">/// *   `part`      - What part to replace (currently only [Blob::PrivateData] is supported.)</span>
-    <span class="doccomment">/// *   `flags`     - Resereved.  Pass `()`.</span>
-    <span class="doccomment">/// *   `part_data` - The part data to set.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Errors</span>
-    <span class="doccomment">/// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_43.dll` and earlier</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Example</span>
-    <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// # use thindx::d3d::*; let d3dc = Compiler::load_system(47).unwrap();</span>
-    <span class="doccomment">/// # let shader = d3dc.compile_from_file(r&quot;test\data\basic.hlsl&quot;, None, None, &quot;ps_main&quot;, &quot;ps_4_0&quot;, Compile::Debug, CompileEffect::None).unwrap();</span>
-    <span class="doccomment">/// let shader2 = d3dc.set_blob_part(</span>
-    <span class="doccomment">///     &amp;shader, Blob::PrivateData, (), b&quot;testing 123&quot;</span>
-    <span class="doccomment">/// ).unwrap();</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// assert_eq!(b&quot;testing 123&quot;, d3dc.get_blob_part(</span>
-    <span class="doccomment">///     &amp;shader2, Blob::PrivateData, None</span>
-    <span class="doccomment">/// ).unwrap().as_bytes());</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Remarks</span>
-    <span class="doccomment">/// *   This was introduced by d3dcompiler_44.dll, and is unavailable in earlier versions.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_blob_part</span>(
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dsetblobpart)\]
+    /// D3DSetBlobPart
+    ///
+    /// Sets information in a compilation result.
+    ///
+    /// ### Arguments
+    /// *   `src_data`  - The original compiled shader data.
+    /// *   `part`      - What part to replace (currently only [Blob::PrivateData] is supported.)
+    /// *   `flags`     - Resereved.  Pass `()`.
+    /// *   `part_data` - The part data to set.
+    ///
+    /// ### Errors
+    /// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_43.dll` and earlier
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use thindx::d3d::*; let d3dc = Compiler::load_system(47).unwrap();
+    /// # let shader = d3dc.compile_from_file(r&quot;test\data\basic.hlsl&quot;, None, None, &quot;ps_main&quot;, &quot;ps_4_0&quot;, Compile::Debug, CompileEffect::None).unwrap();
+    /// let shader2 = d3dc.set_blob_part(
+    ///     &amp;shader, Blob::PrivateData, (), b&quot;testing 123&quot;
+    /// ).unwrap();
+    ///
+    /// assert_eq!(b&quot;testing 123&quot;, d3dc.get_blob_part(
+    ///     &amp;shader2, Blob::PrivateData, None
+    /// ).unwrap().as_bytes());
+    /// ```
+    ///
+    /// ### Remarks
+    /// *   This was introduced by d3dcompiler_44.dll, and is unavailable in earlier versions.
+    </span><span class="kw">pub fn </span>set_blob_part(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">src_data</span>:           <span class="kw-2">&amp;</span><span class="ident">Bytecode</span>,
-        <span class="ident">part</span>:               <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">BlobPart</span><span class="op">&gt;</span>,
-        <span class="ident">flags</span>:              (),
-        <span class="ident">part_data</span>:          <span class="kw-2">&amp;</span>[<span class="ident">u8</span>],
-    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">CodeBlob</span>, <span class="ident">MethodError</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">f</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">D3DSetBlobPart</span>.<span class="ident">ok_or</span>(<span class="ident">MethodError</span>(<span class="string">&quot;D3DSetBlobPart&quot;</span>, <span class="ident">THINERR::MISSING_DLL_EXPORT</span>))<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">src_data</span> <span class="op">=</span> <span class="ident">src_data</span>.<span class="ident">as_bytes</span>();
-        <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">flags</span>;
+        src_data:           <span class="kw-2">&amp;</span>Bytecode,
+        part:               <span class="kw">impl </span>Into&lt;BlobPart&gt;,
+        flags:              (),
+        part_data:          <span class="kw-2">&amp;</span>[u8],
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;CodeBlob, Error&gt; {
+        <span class="macro">fn_context_dll!</span>(d3d::Compiler::set_blob_part =&gt; <span class="self">self</span>.D3DSetBlobPart);
+        <span class="kw">let </span>src_data = src_data.as_bytes();
+        <span class="kw">let _ </span>= flags;
 
-        <span class="comment">// SAFETY: ❌ needs fuzz testing against ~4GB `data` to attempt to induce alloc overflow bugs</span>
-        <span class="comment">//  * `f`           ✔️ should be valid/sound like all `self.*`</span>
-        <span class="comment">//  * `src_data`    ❌ needs fuzz testing against ~4GB data to attempt to induce alloc overflow bugs</span>
-        <span class="comment">//  * `src_data`    ✔️ should be valid bytecode as implied by [`Bytecode`]</span>
-        <span class="comment">//  * `blob`        ✔️ is a simple out-param</span>
-        <span class="comment">//  * `part`        ⚠️ could be invalid</span>
-        <span class="comment">//  * `part_data`   ❌ could be invalid for `part`</span>
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">blob</span> <span class="op">=</span> <span class="ident">null_mut</span>();
-        <span class="kw">let</span> <span class="ident">hr</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="ident">f</span>(<span class="ident">src_data</span>.<span class="ident">as_ptr</span>().<span class="ident">cast</span>(), <span class="ident">src_data</span>.<span class="ident">len</span>(), <span class="ident">part</span>.<span class="ident">into</span>().<span class="ident">into</span>(), <span class="number">0</span>, <span class="ident">part_data</span>.<span class="ident">as_ptr</span>().<span class="ident">cast</span>(), <span class="ident">part_data</span>.<span class="ident">len</span>(), <span class="kw-2">&amp;mut</span> <span class="ident">blob</span>) };
-        <span class="ident">MethodError::check</span>(<span class="string">&quot;D3DSetBlobPart&quot;</span>, <span class="ident">hr</span>)<span class="question-mark">?</span>;
+        <span class="comment">// SAFETY: ❌ needs fuzz testing against ~4GB `data` to attempt to induce alloc overflow bugs
+        //  * `f`           ✔️ should be valid/sound like all `self.*`
+        //  * `src_data`    ❌ needs fuzz testing against ~4GB data to attempt to induce alloc overflow bugs
+        //  * `src_data`    ✔️ should be valid bytecode as implied by [`Bytecode`]
+        //  * `blob`        ✔️ is a simple out-param
+        //  * `part`        ⚠️ could be invalid
+        //  * `part_data`   ❌ could be invalid for `part`
+        </span><span class="kw">let </span><span class="kw-2">mut </span>blob = null_mut();
+        <span class="macro">fn_check_hr!</span>(<span class="kw">unsafe </span>{ D3DSetBlobPart(src_data.as_ptr().cast(), src_data.len(), part.into().into(), <span class="number">0</span>, part_data.as_ptr().cast(), part_data.len(), <span class="kw-2">&amp;mut </span>blob) })<span class="question-mark">?</span>;
 
-        <span class="comment">// SAFETY: ⚠️</span>
-        <span class="comment">//  * `blob`        ✔️ should be null (from_raw panics) or a valid non-dangling blob (from_raw takes ownership)</span>
-        <span class="comment">//  * `blob`        ⚠️ should be a shader blob, but invalid params above could violate CodeBlob&#39;s precondition (of the blob being valid DXBC or DXIL bytecode)</span>
-        <span class="prelude-val">Ok</span>(<span class="kw unsafe">unsafe</span> { <span class="ident">CodeBlob::from_unchecked</span>(<span class="ident">ReadOnlyBlob::from_raw</span>(<span class="ident">blob</span>)) })
+        <span class="comment">// SAFETY: ⚠️
+        //  * `blob`        ✔️ should be null (from_raw panics) or a valid non-dangling blob (from_raw takes ownership)
+        //  * `blob`        ⚠️ should be a shader blob, but invalid params above could violate CodeBlob&#39;s precondition (of the blob being valid DXBC or DXIL bytecode)
+        </span><span class="prelude-val">Ok</span>(<span class="kw">unsafe </span>{ CodeBlob::from_unchecked(ReadOnlyBlob::from_raw(blob)) })
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dstripshader)\]</span>
-    <span class="doccomment">/// D3DStripShader</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Removes unwanted blobs from a compilation result.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Arguments</span>
-    <span class="doccomment">/// *   `src_data`          - The original shader bytecode.</span>
-    <span class="doccomment">/// *   `strip_flags`       - The [CompilerStripFlags] to use.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Errors</span>
-    <span class="doccomment">/// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_39.dll` and earlier</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Example</span>
-    <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// # use thindx::d3d::*; let d3dc = Compiler::load_system(47).unwrap();</span>
-    <span class="doccomment">/// let shader = d3dc.compile_from_file(</span>
-    <span class="doccomment">///     r&quot;test\data\basic.hlsl&quot;, None, None, &quot;ps_main&quot;, &quot;ps_4_0&quot;,</span>
-    <span class="doccomment">///     Compile::Debug, CompileEffect::None</span>
-    <span class="doccomment">/// ).unwrap();</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// let shader = d3dc.strip_shader(</span>
-    <span class="doccomment">///     &amp;shader, CompilerStripFlags::DebugInfo</span>
-    <span class="doccomment">/// ).unwrap();</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Remarks</span>
-    <span class="doccomment">/// *   This was introduced by d3dcompiler_40.dll, and is unavailable in earlier versions.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">strip_shader</span>(
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dstripshader)\]
+    /// D3DStripShader
+    ///
+    /// Removes unwanted blobs from a compilation result.
+    ///
+    /// ### Arguments
+    /// *   `src_data`          - The original shader bytecode.
+    /// *   `strip_flags`       - The [CompilerStripFlags] to use.
+    ///
+    /// ### Errors
+    /// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_39.dll` and earlier
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use thindx::d3d::*; let d3dc = Compiler::load_system(47).unwrap();
+    /// let shader = d3dc.compile_from_file(
+    ///     r&quot;test\data\basic.hlsl&quot;, None, None, &quot;ps_main&quot;, &quot;ps_4_0&quot;,
+    ///     Compile::Debug, CompileEffect::None
+    /// ).unwrap();
+    ///
+    /// let shader = d3dc.strip_shader(
+    ///     &amp;shader, CompilerStripFlags::DebugInfo
+    /// ).unwrap();
+    /// ```
+    ///
+    /// ### Remarks
+    /// *   This was introduced by d3dcompiler_40.dll, and is unavailable in earlier versions.
+    </span><span class="kw">pub fn </span>strip_shader(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">src_data</span>:           <span class="kw-2">&amp;</span><span class="ident">Bytecode</span>,
-        <span class="ident">strip_flags</span>:        <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">CompilerStripFlags</span><span class="op">&gt;</span>,
-    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">CodeBlob</span>, <span class="ident">MethodError</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">f</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">D3DStripShader</span>.<span class="ident">ok_or</span>(<span class="ident">MethodError</span>(<span class="string">&quot;D3DStripShader&quot;</span>, <span class="ident">THINERR::MISSING_DLL_EXPORT</span>))<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">blob</span> <span class="op">=</span> <span class="ident">null_mut</span>();
+        src_data:           <span class="kw-2">&amp;</span>Bytecode,
+        strip_flags:        <span class="kw">impl </span>Into&lt;CompilerStripFlags&gt;,
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;CodeBlob, Error&gt; {
+        <span class="macro">fn_context_dll!</span>(d3d::Compiler::strip_shader =&gt; <span class="self">self</span>.D3DStripShader);
+        <span class="kw">let </span><span class="kw-2">mut </span>blob = null_mut();
 
-        <span class="comment">// SAFETY: ❌ needs fuzz testing against ~4GB `data` to attempt to induce alloc overflow bugs</span>
-        <span class="comment">//  * `f`           ✔️ should be valid/sound like all `self.*`</span>
-        <span class="comment">//  * `src_data`    ❌ needs fuzz testing against ~4GB data to attempt to induce alloc overflow bugs</span>
-        <span class="comment">//  * `src_data`    ✔️ should be valid bytecode as implied by [`Bytecode`]</span>
-        <span class="comment">//  * `strip_flags` ⚠️ could be invalid</span>
-        <span class="comment">//  * `blob`        ✔️ is a simple out-param</span>
-        <span class="kw">let</span> <span class="ident">hr</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="ident">f</span>(<span class="ident">src_data</span>.<span class="ident">as_ptr</span>().<span class="ident">cast</span>(), <span class="ident">src_data</span>.<span class="ident">len</span>(), <span class="ident">strip_flags</span>.<span class="ident">into</span>().<span class="ident">into</span>(), <span class="kw-2">&amp;mut</span> <span class="ident">blob</span>) };
-        <span class="ident">MethodError::check</span>(<span class="string">&quot;D3DStripShader&quot;</span>, <span class="ident">hr</span>)<span class="question-mark">?</span>;
+        <span class="comment">// SAFETY: ❌ needs fuzz testing against ~4GB `data` to attempt to induce alloc overflow bugs
+        //  * `f`           ✔️ should be valid/sound like all `self.*`
+        //  * `src_data`    ❌ needs fuzz testing against ~4GB data to attempt to induce alloc overflow bugs
+        //  * `src_data`    ✔️ should be valid bytecode as implied by [`Bytecode`]
+        //  * `strip_flags` ⚠️ could be invalid
+        //  * `blob`        ✔️ is a simple out-param
+        </span><span class="macro">fn_check_hr!</span>(<span class="kw">unsafe </span>{ D3DStripShader(src_data.as_ptr().cast(), src_data.len(), strip_flags.into().into(), <span class="kw-2">&amp;mut </span>blob) })<span class="question-mark">?</span>;
 
-        <span class="comment">// SAFETY: ⚠️</span>
-        <span class="comment">//  * `blob`        ✔️ should be null (from_raw panics) or a valid non-dangling blob (from_raw takes ownership)</span>
-        <span class="comment">//  * `blob`        ⚠️ should be a shader blob, but invalid params above could violate CodeBlob&#39;s precondition (of the blob being valid DXBC or DXIL bytecode)</span>
-        <span class="prelude-val">Ok</span>(<span class="kw unsafe">unsafe</span> { <span class="ident">CodeBlob::from_unchecked</span>(<span class="ident">ReadOnlyBlob::from_raw</span>(<span class="ident">blob</span>)) })
+        <span class="comment">// SAFETY: ⚠️
+        //  * `blob`        ✔️ should be null (from_raw panics) or a valid non-dangling blob (from_raw takes ownership)
+        //  * `blob`        ⚠️ should be a shader blob, but invalid params above could violate CodeBlob&#39;s precondition (of the blob being valid DXBC or DXIL bytecode)
+        </span><span class="prelude-val">Ok</span>(<span class="kw">unsafe </span>{ CodeBlob::from_unchecked(ReadOnlyBlob::from_raw(blob)) })
     }
 }
-
-<span class="comment">//#cpp2rust D3DGetBlobPart                          = d3d::Compiler::get_blob_part</span>
-<span class="comment">//#cpp2rust D3DGetDebugInfo                         = d3d::Compiler::get_debug_info</span>
-<span class="comment">//#cpp2rust D3DGetInputAndOutputSignatureBlob       = d3d::Compiler::get_input_and_output_signature_blob</span>
-<span class="comment">//#cpp2rust D3DGetInputSignatureBlob                = d3d::Compiler::get_input_signature_blob</span>
-<span class="comment">//#cpp2rust D3DGetOutputSignatureBlob               = d3d::Compiler::get_output_signature_blob</span>
-<span class="comment">//#cpp2rust D3DSetBlobPart                          = d3d::Compiler::set_blob_part</span>
-<span class="comment">//#cpp2rust D3DStripShader                          = d3d::Compiler::strip_shader</span>
 </code></pre></div>
-</section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-search-index-js="../../../../../search-index.js" data-search-js="../../../../../search.js"></div>
-</body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (b44197abb 2022-09-05)" ></div></body></html>

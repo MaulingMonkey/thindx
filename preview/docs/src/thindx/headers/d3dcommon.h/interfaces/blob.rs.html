@@ -1,103 +1,102 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3dcommon.h\interfaces\blob.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>blob.rs - source</title><link rel="stylesheet" type="text/css" href="../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script src="../../../../../crates.js"></script><script defer src="../../../../../main.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script>
-    <noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"><style type="text/css">#crate-search{background-image:url("../../../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../../../../thindx/index.html'><div class='logo-container rust-logo'><img src='../../../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../../../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../../../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../../../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
-<span id="2">  2</span>
-<span id="3">  3</span>
-<span id="4">  4</span>
-<span id="5">  5</span>
-<span id="6">  6</span>
-<span id="7">  7</span>
-<span id="8">  8</span>
-<span id="9">  9</span>
-<span id="10"> 10</span>
-<span id="11"> 11</span>
-<span id="12"> 12</span>
-<span id="13"> 13</span>
-<span id="14"> 14</span>
-<span id="15"> 15</span>
-<span id="16"> 16</span>
-<span id="17"> 17</span>
-<span id="18"> 18</span>
-<span id="19"> 19</span>
-<span id="20"> 20</span>
-<span id="21"> 21</span>
-<span id="22"> 22</span>
-<span id="23"> 23</span>
-<span id="24"> 24</span>
-<span id="25"> 25</span>
-<span id="26"> 26</span>
-<span id="27"> 27</span>
-<span id="28"> 28</span>
-<span id="29"> 29</span>
-<span id="30"> 30</span>
-<span id="31"> 31</span>
-<span id="32"> 32</span>
-<span id="33"> 33</span>
-<span id="34"> 34</span>
-<span id="35"> 35</span>
-<span id="36"> 36</span>
-<span id="37"> 37</span>
-<span id="38"> 38</span>
-<span id="39"> 39</span>
-<span id="40"> 40</span>
-<span id="41"> 41</span>
-<span id="42"> 42</span>
-<span id="43"> 43</span>
-<span id="44"> 44</span>
-<span id="45"> 45</span>
-<span id="46"> 46</span>
-<span id="47"> 47</span>
-<span id="48"> 48</span>
-<span id="49"> 49</span>
-<span id="50"> 50</span>
-<span id="51"> 51</span>
-<span id="52"> 52</span>
-<span id="53"> 53</span>
-<span id="54"> 54</span>
-<span id="55"> 55</span>
-<span id="56"> 56</span>
-<span id="57"> 57</span>
-<span id="58"> 58</span>
-<span id="59"> 59</span>
-<span id="60"> 60</span>
-<span id="61"> 61</span>
-<span id="62"> 62</span>
-<span id="63"> 63</span>
-<span id="64"> 64</span>
-<span id="65"> 65</span>
-<span id="66"> 66</span>
-<span id="67"> 67</span>
-<span id="68"> 68</span>
-<span id="69"> 69</span>
-<span id="70"> 70</span>
-<span id="71"> 71</span>
-<span id="72"> 72</span>
-<span id="73"> 73</span>
-<span id="74"> 74</span>
-<span id="75"> 75</span>
-<span id="76"> 76</span>
-<span id="77"> 77</span>
-<span id="78"> 78</span>
-<span id="79"> 79</span>
-<span id="80"> 80</span>
-<span id="81"> 81</span>
-<span id="82"> 82</span>
-<span id="83"> 83</span>
-<span id="84"> 84</span>
-<span id="85"> 85</span>
-<span id="86"> 86</span>
-<span id="87"> 87</span>
-<span id="88"> 88</span>
-<span id="89"> 89</span>
-<span id="90"> 90</span>
-<span id="91"> 91</span>
-<span id="92"> 92</span>
-<span id="93"> 93</span>
-<span id="94"> 94</span>
-<span id="95"> 95</span>
-<span id="96"> 96</span>
-<span id="97"> 97</span>
-<span id="98"> 98</span>
-<span id="99"> 99</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3dcommon.h\interfaces\blob.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>blob.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../../normalize.css"><link rel="stylesheet" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../../dark.css" disabled><link rel="stylesheet" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<span id="2">2</span>
+<span id="3">3</span>
+<span id="4">4</span>
+<span id="5">5</span>
+<span id="6">6</span>
+<span id="7">7</span>
+<span id="8">8</span>
+<span id="9">9</span>
+<span id="10">10</span>
+<span id="11">11</span>
+<span id="12">12</span>
+<span id="13">13</span>
+<span id="14">14</span>
+<span id="15">15</span>
+<span id="16">16</span>
+<span id="17">17</span>
+<span id="18">18</span>
+<span id="19">19</span>
+<span id="20">20</span>
+<span id="21">21</span>
+<span id="22">22</span>
+<span id="23">23</span>
+<span id="24">24</span>
+<span id="25">25</span>
+<span id="26">26</span>
+<span id="27">27</span>
+<span id="28">28</span>
+<span id="29">29</span>
+<span id="30">30</span>
+<span id="31">31</span>
+<span id="32">32</span>
+<span id="33">33</span>
+<span id="34">34</span>
+<span id="35">35</span>
+<span id="36">36</span>
+<span id="37">37</span>
+<span id="38">38</span>
+<span id="39">39</span>
+<span id="40">40</span>
+<span id="41">41</span>
+<span id="42">42</span>
+<span id="43">43</span>
+<span id="44">44</span>
+<span id="45">45</span>
+<span id="46">46</span>
+<span id="47">47</span>
+<span id="48">48</span>
+<span id="49">49</span>
+<span id="50">50</span>
+<span id="51">51</span>
+<span id="52">52</span>
+<span id="53">53</span>
+<span id="54">54</span>
+<span id="55">55</span>
+<span id="56">56</span>
+<span id="57">57</span>
+<span id="58">58</span>
+<span id="59">59</span>
+<span id="60">60</span>
+<span id="61">61</span>
+<span id="62">62</span>
+<span id="63">63</span>
+<span id="64">64</span>
+<span id="65">65</span>
+<span id="66">66</span>
+<span id="67">67</span>
+<span id="68">68</span>
+<span id="69">69</span>
+<span id="70">70</span>
+<span id="71">71</span>
+<span id="72">72</span>
+<span id="73">73</span>
+<span id="74">74</span>
+<span id="75">75</span>
+<span id="76">76</span>
+<span id="77">77</span>
+<span id="78">78</span>
+<span id="79">79</span>
+<span id="80">80</span>
+<span id="81">81</span>
+<span id="82">82</span>
+<span id="83">83</span>
+<span id="84">84</span>
+<span id="85">85</span>
+<span id="86">86</span>
+<span id="87">87</span>
+<span id="88">88</span>
+<span id="89">89</span>
+<span id="90">90</span>
+<span id="91">91</span>
+<span id="92">92</span>
+<span id="93">93</span>
+<span id="94">94</span>
+<span id="95">95</span>
+<span id="96">96</span>
+<span id="97">97</span>
+<span id="98">98</span>
+<span id="99">99</span>
 <span id="100">100</span>
 <span id="101">101</span>
 <span id="102">102</span>
@@ -226,124 +225,124 @@
 <span id="225">225</span>
 <span id="226">226</span>
 <span id="227">227</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="kw">crate</span>::<span class="kw-2">*</span>;
+</pre><pre class="rust"><code><span class="kw">use crate</span>::<span class="kw-2">*</span>;
 
-<span class="kw">use</span> <span class="ident">winapi::um::d3dcommon::ID3DBlob</span>;
+<span class="kw">use </span>winapi::um::d3dcommon::ID3DBlob;
 
-<span class="kw">use</span> <span class="ident">std::borrow</span>::{<span class="ident">Borrow</span>, <span class="ident">Cow</span>};
-<span class="kw">use</span> <span class="ident">std::fmt</span>::{<span class="self">self</span>, <span class="ident">Debug</span>, <span class="ident">Display</span>, <span class="ident">Formatter</span>};
-<span class="kw">use</span> <span class="ident">std::ops</span>::{<span class="ident">Deref</span>, <span class="ident">Index</span>};
-<span class="kw">use</span> <span class="ident">std::slice::SliceIndex</span>;
-<span class="kw">use</span> <span class="ident">std::str::Utf8Error</span>;
+<span class="kw">use </span>std::borrow::{Borrow, Cow};
+<span class="kw">use </span>std::fmt::{<span class="self">self</span>, Debug, Display, Formatter};
+<span class="kw">use </span>std::ops::{Deref, Index};
+<span class="kw">use </span>std::slice::SliceIndex;
+<span class="kw">use </span>std::str::Utf8Error;
 
 
 
-<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/previous-versions/windows/desktop/legacy/ff728743(v=vs.85))\]</span>
-<span class="doccomment">/// ID3DBlob</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// This interface is used to return arbitrary-length data.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// ### ⚠️ Safety ⚠️</span>
-<span class="doccomment">/// This assumes `ReadOnlyBlob`s are read-only once created.</span>
-<span class="doccomment">/// While enforced by the safe interface here, raw `unsafe` winapi can totally let you write to the buffer.</span>
-<span class="doccomment">/// This is your one warning!</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>)]</span>
-<span class="attribute">#[<span class="ident">repr</span>(<span class="ident">transparent</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ReadOnlyBlob</span>(<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="ident">mcom::Rc</span><span class="op">&lt;</span><span class="ident">ID3DBlob</span><span class="op">&gt;</span>);
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/previous-versions/windows/desktop/legacy/ff728743(v=vs.85))\]
+/// ID3DBlob
+///
+/// This interface is used to return arbitrary-length data.
+///
+/// ### ⚠️ Safety ⚠️
+/// This assumes `ReadOnlyBlob`s are read-only once created.
+/// While enforced by the safe interface here, raw `unsafe` winapi can totally let you write to the buffer.
+/// This is your one warning!
+</span><span class="attribute">#[derive(Clone)]
+#[repr(transparent)]
+</span><span class="kw">pub struct </span>ReadOnlyBlob(<span class="kw">pub</span>(<span class="kw">crate</span>) mcom::Rc&lt;ID3DBlob&gt;);
 
-<span class="macro">convert!</span>(<span class="kw unsafe">unsafe</span> <span class="ident">ReadOnlyBlob</span> =&gt; <span class="ident">Unknown</span>, <span class="ident">winapi::um::d3dcommon::ID3DBlob</span>);
+<span class="macro">convert!</span>(<span class="kw">unsafe </span>ReadOnlyBlob =&gt; Unknown, winapi::um::d3dcommon::ID3DBlob);
 
-<span class="kw">impl</span> <span class="ident">ReadOnlyBlob</span> {
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/previous-versions/windows/desktop/legacy/ff728745(v=vs.85))\]</span>
-    <span class="doccomment">/// ID3DBlob::GetBufferSize</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Gets the size of the buffer.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_buffer_size</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">usize</span> {
-        <span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="number">0</span>.<span class="ident">GetBufferSize</span>() }
+<span class="kw">impl </span>ReadOnlyBlob {
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/previous-versions/windows/desktop/legacy/ff728745(v=vs.85))\]
+    /// ID3DBlob::GetBufferSize
+    ///
+    /// Gets the size of the buffer.
+    </span><span class="kw">pub fn </span>get_buffer_size(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; usize {
+        <span class="kw">unsafe </span>{ <span class="self">self</span>.<span class="number">0</span>.GetBufferSize() }
     }
 
-    <span class="doccomment">/// [ID3DBlob::GetBufferPointer](https://docs.microsoft.com/en-us/previous-versions/windows/desktop/legacy/ff728744(v=vs.85)) +</span>
-    <span class="doccomment">/// [ID3DBlob::GetBufferSize](https://docs.microsoft.com/en-us/previous-versions/windows/desktop/legacy/ff728745(v=vs.85))</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Gets the data of the buffer as a readonly slice.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_buffer</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] {
-        <span class="kw">let</span> <span class="ident">size</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">get_buffer_size</span>();
-        <span class="kw">let</span> <span class="ident">ptr</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="number">0</span>.<span class="ident">GetBufferPointer</span>() } <span class="kw">as</span> <span class="kw-2">*const</span> <span class="ident">u8</span>;
-        <span class="kw unsafe">unsafe</span> { <span class="ident">std::slice::from_raw_parts</span>(<span class="ident">ptr</span>, <span class="ident">size</span>) }
+    <span class="doccomment">/// [ID3DBlob::GetBufferPointer](https://docs.microsoft.com/en-us/previous-versions/windows/desktop/legacy/ff728744(v=vs.85)) +
+    /// [ID3DBlob::GetBufferSize](https://docs.microsoft.com/en-us/previous-versions/windows/desktop/legacy/ff728745(v=vs.85))
+    ///
+    /// Gets the data of the buffer as a readonly slice.
+    </span><span class="kw">pub fn </span>get_buffer(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[u8] {
+        <span class="kw">let </span>size = <span class="self">self</span>.get_buffer_size();
+        <span class="kw">let </span>ptr = <span class="kw">unsafe </span>{ <span class="self">self</span>.<span class="number">0</span>.GetBufferPointer() } <span class="kw">as </span><span class="kw-2">*const </span>u8;
+        <span class="kw">unsafe </span>{ std::slice::from_raw_parts(ptr, size) }
     }
 
-    <span class="doccomment">/// Gets the data of the buffer as a readonly slice of bytes.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_bytes</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] {
-        <span class="self">self</span>.<span class="ident">get_buffer</span>()
+    <span class="doccomment">/// Gets the data of the buffer as a readonly slice of bytes.
+    </span><span class="kw">pub fn </span>as_bytes(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[u8] {
+        <span class="self">self</span>.get_buffer()
     }
 
 
-    <span class="doccomment">/// Gets the data of the buffer as an iterator over the bytes.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">bytes</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw">impl</span> <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="ident">u8</span><span class="op">&gt;</span> <span class="op">+</span> <span class="lifetime">&#39;_</span> {
-        <span class="self">self</span>.<span class="ident">get_buffer</span>().<span class="ident">iter</span>().<span class="ident">copied</span>()
+    <span class="doccomment">/// Gets the data of the buffer as an iterator over the bytes.
+    </span><span class="kw">pub fn </span>bytes(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw">impl </span>Iterator&lt;Item = u8&gt; + <span class="lifetime">&#39;_ </span>{
+        <span class="self">self</span>.get_buffer().iter().copied()
     }
 }
 
-<span class="kw">impl</span> <span class="ident">AsRef</span> <span class="op">&lt;</span>[<span class="ident">u8</span>]<span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">ReadOnlyBlob</span> { <span class="kw">fn</span> <span class="ident">as_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] { <span class="self">self</span>.<span class="ident">get_buffer</span>() } }
-<span class="kw">impl</span> <span class="ident">Borrow</span><span class="op">&lt;</span>[<span class="ident">u8</span>]<span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">ReadOnlyBlob</span> { <span class="kw">fn</span> <span class="ident">borrow</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] { <span class="self">self</span>.<span class="ident">get_buffer</span>() } }
-<span class="kw">impl</span> <span class="ident">Debug</span>        <span class="kw">for</span> <span class="ident">ReadOnlyBlob</span> { <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">fmt</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Formatter</span>) -&gt; <span class="ident">fmt::Result</span> { <span class="macro">write!</span>(<span class="ident">fmt</span>, <span class="string">&quot;ReadOnlyBlob({} bytes)&quot;</span>, <span class="self">self</span>.<span class="ident">get_buffer_size</span>()) } }
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span> <span class="ident">Index</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>  <span class="kw">for</span> <span class="ident">ReadOnlyBlob</span> <span class="kw">where</span> <span class="ident">I</span>: <span class="ident">SliceIndex</span><span class="op">&lt;</span>[<span class="ident">u8</span>]<span class="op">&gt;</span> { <span class="kw">fn</span> <span class="ident">index</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">index</span>: <span class="ident">I</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::Output</span> { <span class="self">self</span>.<span class="ident">get_buffer</span>().<span class="ident">index</span>(<span class="ident">index</span>) } <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">I::Output</span>; }
+<span class="kw">impl </span>AsRef &lt;[u8]&gt; <span class="kw">for </span>ReadOnlyBlob { <span class="kw">fn </span>as_ref(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[u8] { <span class="self">self</span>.get_buffer() } }
+<span class="kw">impl </span>Borrow&lt;[u8]&gt; <span class="kw">for </span>ReadOnlyBlob { <span class="kw">fn </span>borrow(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[u8] { <span class="self">self</span>.get_buffer() } }
+<span class="kw">impl </span>Debug        <span class="kw">for </span>ReadOnlyBlob { <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, fmt: <span class="kw-2">&amp;mut </span>Formatter) -&gt; fmt::Result { <span class="macro">write!</span>(fmt, <span class="string">&quot;ReadOnlyBlob({} bytes)&quot;</span>, <span class="self">self</span>.get_buffer_size()) } }
+<span class="kw">impl</span>&lt;I&gt; Index&lt;I&gt;  <span class="kw">for </span>ReadOnlyBlob <span class="kw">where </span>I: SliceIndex&lt;[u8]&gt; { <span class="kw">fn </span>index(<span class="kw-2">&amp;</span><span class="self">self</span>, index: I) -&gt; <span class="kw-2">&amp;</span><span class="self">Self</span>::Output { <span class="self">self</span>.get_buffer().index(index) } <span class="kw">type </span>Output = I::Output; }
 
-<span class="comment">// can&#39;t impl Deref - conflicting impl with COM nonsense</span>
+<span class="comment">// can&#39;t impl Deref - conflicting impl with COM nonsense
 
-<span class="comment">// Index?</span>
-<span class="comment">// IntoIterator?</span>
-<span class="comment">// [Partial]Ord/[Partial]Eq? (nah - ambiguous between bytes vs com instances)</span>
-<span class="comment">// Hash? (nah - might want to allow Borrow&lt;[u32]&gt;?)</span>
+// Index?
+// IntoIterator?
+// [Partial]Ord/[Partial]Eq? (nah - ambiguous between bytes vs com instances)
+// Hash? (nah - might want to allow Borrow&lt;[u32]&gt;?)
 
-<span class="comment">// From?  Would require manual ID3DBlob impls in case d3dcompiler.dll isn&#39;t available/loaded?</span>
+// From?  Would require manual ID3DBlob impls in case d3dcompiler.dll isn&#39;t available/loaded?
 
-<span class="attribute">#[<span class="ident">test</span>]</span> <span class="kw">fn</span> <span class="ident">layout</span>() {
-    <span class="kw">use</span> <span class="ident">std::mem</span>::<span class="kw-2">*</span>;
-    <span class="macro">assert_eq!</span>(<span class="ident">align_of</span>::<span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ReadOnlyBlob</span><span class="op">&gt;</span><span class="op">&gt;</span>(), <span class="ident">align_of</span>::<span class="op">&lt;</span><span class="kw-2">*mut</span> <span class="ident">ID3DBlob</span><span class="op">&gt;</span>());
-    <span class="macro">assert_eq!</span>(<span class="ident">size_of</span>::<span class="op">&lt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ReadOnlyBlob</span><span class="op">&gt;</span><span class="op">&gt;</span>(), <span class="ident">size_of</span>::<span class="op">&lt;</span> <span class="kw-2">*mut</span> <span class="ident">ID3DBlob</span><span class="op">&gt;</span>());
+</span><span class="attribute">#[test] </span><span class="kw">fn </span>layout() {
+    <span class="kw">use </span>std::mem::<span class="kw-2">*</span>;
+    <span class="macro">assert_eq!</span>(align_of::&lt;<span class="prelude-ty">Option</span>&lt;ReadOnlyBlob&gt;&gt;(), align_of::&lt;<span class="kw-2">*mut </span>ID3DBlob&gt;());
+    <span class="macro">assert_eq!</span>(size_of::&lt; <span class="prelude-ty">Option</span>&lt;ReadOnlyBlob&gt;&gt;(), size_of::&lt; <span class="kw-2">*mut </span>ID3DBlob&gt;());
 }
 
 
 
-<span class="doccomment">/// [ReadOnlyBlob] wrapper for `\0`-terminated UTF8ish data</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Default</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">TextBlob</span>(<span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ReadOnlyBlob</span><span class="op">&gt;</span>);
+<span class="doccomment">/// [ReadOnlyBlob] wrapper for `\0`-terminated UTF8ish data
+</span><span class="attribute">#[derive(Clone, Default)]
+</span><span class="kw">pub struct </span>TextBlob(<span class="prelude-ty">Option</span>&lt;ReadOnlyBlob&gt;);
 
-<span class="kw">impl</span> <span class="ident">TextBlob</span> {
-    <span class="doccomment">/// Wraps a `\0`-terminated [ReadOnlyBlob] or [Option]\&lt;[ReadOnlyBlob]\&gt; in a more [std::ffi::CString]-esque interface.</span>
-    <span class="comment">//#allow_missing_argument_docs</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">value</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> { <span class="ident">value</span>.<span class="ident">into</span>() }
+<span class="kw">impl </span>TextBlob {
+    <span class="doccomment">/// Wraps a `\0`-terminated [ReadOnlyBlob] or [Option]\&lt;[ReadOnlyBlob]\&gt; in a more [std::ffi::CString]-esque interface.
+    </span><span class="comment">//#allow_missing_argument_docs
+    </span><span class="kw">pub fn </span>new(value: <span class="kw">impl </span>Into&lt;<span class="self">Self</span>&gt;) -&gt; <span class="self">Self </span>{ value.into() }
 
-    <span class="doccomment">/// Check if the string is empty (&quot;\0&quot; counts as empty)</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_empty</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> { <span class="self">self</span>.<span class="number">0</span>.<span class="ident">as_ref</span>().<span class="ident">map_or</span>(<span class="bool-val">true</span>, <span class="op">|</span><span class="ident">blob</span><span class="op">|</span> {
-        <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">blob</span>.<span class="ident">get_buffer</span>();
-        <span class="ident">b</span>.<span class="ident">is_empty</span>() <span class="op">|</span><span class="op">|</span> <span class="ident">b</span> <span class="op">==</span> [<span class="number">0</span>]
+    <span class="doccomment">/// Check if the string is empty (&quot;\0&quot; counts as empty)
+    </span><span class="kw">pub fn </span>is_empty(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool { <span class="self">self</span>.<span class="number">0</span>.as_ref().map_or(<span class="bool-val">true</span>, |blob| {
+        <span class="kw">let </span>b = blob.get_buffer();
+        b.is_empty() || b == [<span class="number">0</span>]
     })}
 
-    <span class="doccomment">/// Treat the blob as a UTF8 string, converting lossily if necessary.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_utf8_lossy</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Cow</span><span class="op">&lt;</span><span class="ident">str</span><span class="op">&gt;</span> { <span class="ident">String::from_utf8_lossy</span>(<span class="self">self</span>.<span class="ident">as_bytes</span>()) }
+    <span class="doccomment">/// Treat the blob as a UTF8 string, converting lossily if necessary.
+    </span><span class="kw">pub fn </span>to_utf8_lossy(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Cow&lt;str&gt; { String::from_utf8_lossy(<span class="self">self</span>.as_bytes()) }
 
-    <span class="doccomment">/// Treat the blob as a UTF8 string, returning a [std::str::Utf8Error] if it&#39;s not valid UTF8.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_utf8</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">Utf8Error</span><span class="op">&gt;</span> { <span class="ident">std::str::from_utf8</span>(<span class="self">self</span>.<span class="ident">as_bytes</span>()) }
+    <span class="doccomment">/// Treat the blob as a UTF8 string, returning a [std::str::Utf8Error] if it&#39;s not valid UTF8.
+    </span><span class="kw">pub fn </span>to_utf8(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="kw-2">&amp;</span>str, Utf8Error&gt; { std::str::from_utf8(<span class="self">self</span>.as_bytes()) }
 
-    <span class="comment">// TODO: parsing diagnostics iterator?</span>
-}
+    <span class="comment">// TODO: parsing diagnostics iterator?
+</span>}
 
-<span class="kw">impl</span> <span class="ident">Debug</span>   <span class="kw">for</span> <span class="ident">TextBlob</span> { <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">fmt</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Formatter</span>) -&gt; <span class="ident">fmt::Result</span> { <span class="macro">write!</span>(<span class="ident">fmt</span>, <span class="string">&quot;TextBlob({:?})&quot;</span>, <span class="self">self</span>.<span class="ident">to_utf8_lossy</span>()) } }
-<span class="kw">impl</span> <span class="ident">Display</span> <span class="kw">for</span> <span class="ident">TextBlob</span> { <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">fmt</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Formatter</span>) -&gt; <span class="ident">fmt::Result</span> { <span class="ident">Display::fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">to_utf8_lossy</span>(), <span class="ident">fmt</span>) } }
+<span class="kw">impl </span>Debug   <span class="kw">for </span>TextBlob { <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, fmt: <span class="kw-2">&amp;mut </span>Formatter) -&gt; fmt::Result { <span class="macro">write!</span>(fmt, <span class="string">&quot;TextBlob({:?})&quot;</span>, <span class="self">self</span>.to_utf8_lossy()) } }
+<span class="kw">impl </span>Display <span class="kw">for </span>TextBlob { <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, fmt: <span class="kw-2">&amp;mut </span>Formatter) -&gt; fmt::Result { Display::fmt(<span class="kw-2">&amp;</span><span class="self">self</span>.to_utf8_lossy(), fmt) } }
 
-<span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ReadOnlyBlob</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">TextBlob</span> { <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">value</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ReadOnlyBlob</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> { <span class="self">Self</span>(     <span class="ident">value</span> ) } }
-<span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span>       <span class="ident">ReadOnlyBlob</span> <span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">TextBlob</span> { <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">value</span>:        <span class="ident">ReadOnlyBlob</span> ) -&gt; <span class="self">Self</span> { <span class="self">Self</span>(<span class="prelude-val">Some</span>(<span class="ident">value</span>)) } }
+<span class="kw">impl </span>From&lt;<span class="prelude-ty">Option</span>&lt;ReadOnlyBlob&gt;&gt; <span class="kw">for </span>TextBlob { <span class="kw">fn </span>from(value: <span class="prelude-ty">Option</span>&lt;ReadOnlyBlob&gt;) -&gt; <span class="self">Self </span>{ <span class="self">Self</span>(     value ) } }
+<span class="kw">impl </span>From&lt;       ReadOnlyBlob &gt; <span class="kw">for </span>TextBlob { <span class="kw">fn </span>from(value:        ReadOnlyBlob ) -&gt; <span class="self">Self </span>{ <span class="self">Self</span>(<span class="prelude-val">Some</span>(value)) } }
 
-<span class="kw">impl</span> <span class="ident">TextBlob</span> {
-    <span class="kw">fn</span> <span class="ident">as_bytes</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] {
-        <span class="self">self</span>.<span class="number">0</span>.<span class="ident">as_ref</span>().<span class="ident">map_or</span>(<span class="kw-2">&amp;</span>[], <span class="op">|</span><span class="ident">blob</span><span class="op">|</span> {
-            <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="ident">blob</span>.<span class="ident">get_buffer</span>();
-            <span class="kw">if</span> <span class="ident">b</span>.<span class="ident">last</span>() <span class="op">==</span> <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="number">0</span>) {
-                <span class="kw-2">&amp;</span><span class="ident">b</span>[..<span class="ident">b</span>.<span class="ident">len</span>()<span class="op">-</span><span class="number">1</span>]
-            } <span class="kw">else</span> {
-                <span class="ident">b</span>
+<span class="kw">impl </span>TextBlob {
+    <span class="kw">fn </span>as_bytes(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[u8] {
+        <span class="self">self</span>.<span class="number">0</span>.as_ref().map_or(<span class="kw-2">&amp;</span>[], |blob| {
+            <span class="kw">let </span>b = blob.get_buffer();
+            <span class="kw">if </span>b.last() == <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="number">0</span>) {
+                <span class="kw-2">&amp;</span>b[..b.len()-<span class="number">1</span>]
+            } <span class="kw">else </span>{
+                b
             }
         })
     }
@@ -351,108 +350,107 @@
 
 
 
-<span class="doccomment">/// [ReadOnlyBlob] wrapper for DXBC or DXIL bytecode.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>)]</span>
-<span class="attribute">#[<span class="ident">repr</span>(<span class="ident">transparent</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">CodeBlob</span>(<span class="ident">ReadOnlyBlob</span>);
+<span class="doccomment">/// [ReadOnlyBlob] wrapper for DXBC or DXIL bytecode.
+</span><span class="attribute">#[derive(Clone)]
+#[repr(transparent)]
+</span><span class="kw">pub struct </span>CodeBlob(ReadOnlyBlob);
 
-<span class="kw">impl</span> <span class="ident">CodeBlob</span> {
-    <span class="doccomment">/// Create a new [CodeBlob] from `value`, assuming it contains valid DXBC or DXIL bytecode.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### ⚠️ Safety ⚠️</span>
-    <span class="doccomment">/// By calling this fn, you assert that `value` contains valid DXBC or DXIL bytecode.</span>
-    <span class="doccomment">/// While it doesn&#39;t result in instant undefined behavior to violate this constraint, many &quot;safe&quot; fns rely on this constraint, and will exhibit undefined behavior if passed an invalid blob.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Parsing and deserialization APIs are prone to undefined behavior and CVEs, and executable bytecode formats are no exception.</span>
-    <span class="doccomment">/// Possible consumers of this bytecode include d3dcompiler, d3d9, d3d11, d3d12, GPU drivers, various third party shader translators, etc.</span>
-    <span class="doccomment">/// If there&#39;s not a single path to undefined behavior between all of those, I&#39;ll eat my hat!</span>
-    <span class="comment">//#allow_missing_argument_docs</span>
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw unsafe">unsafe</span> <span class="kw">fn</span> <span class="ident">from_unchecked</span>(<span class="ident">value</span>: <span class="ident">ReadOnlyBlob</span>) -&gt; <span class="self">Self</span> { <span class="self">Self</span>(<span class="ident">value</span>) }
+<span class="kw">impl </span>CodeBlob {
+    <span class="doccomment">/// Create a new [CodeBlob] from `value`, assuming it contains valid DXBC or DXIL bytecode.
+    ///
+    /// ### ⚠️ Safety ⚠️
+    /// By calling this fn, you assert that `value` contains valid DXBC or DXIL bytecode.
+    /// While it doesn&#39;t result in instant undefined behavior to violate this constraint, many &quot;safe&quot; fns rely on this constraint, and will exhibit undefined behavior if passed an invalid blob.
+    ///
+    /// Parsing and deserialization APIs are prone to undefined behavior and CVEs, and executable bytecode formats are no exception.
+    /// Possible consumers of this bytecode include d3dcompiler, d3d9, d3d11, d3d12, GPU drivers, various third party shader translators, etc.
+    /// If there&#39;s not a single path to undefined behavior between all of those, I&#39;ll eat my hat!
+    </span><span class="comment">//#allow_missing_argument_docs
+    </span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">unsafe fn </span>from_unchecked(value: ReadOnlyBlob) -&gt; <span class="self">Self </span>{ <span class="self">Self</span>(value) }
 
-    <span class="doccomment">/// Get the length of the bytecode, in bytes.</span>
-    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::len_without_is_empty</span>)]</span> <span class="comment">// An empty buffer is **not** valid DXBC or DXIL bytecode, and would thus be an invalid construction of this type!</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">len</span>(<span class="kw-2">&amp;</span><span class="self">self</span>)      -&gt; <span class="ident">usize</span> { <span class="self">self</span>.<span class="number">0</span>.<span class="ident">get_buffer_size</span>() }
+    <span class="doccomment">/// Get the length of the bytecode, in bytes.
+    </span><span class="attribute">#[allow(clippy::len_without_is_empty)] </span><span class="comment">// An empty buffer is **not** valid DXBC or DXIL bytecode, and would thus be an invalid construction of this type!
+    </span><span class="kw">pub fn </span>len(<span class="kw-2">&amp;</span><span class="self">self</span>)      -&gt; usize { <span class="self">self</span>.<span class="number">0</span>.get_buffer_size() }
 
-    <span class="doccomment">/// Interpret the bytecode as a byte array.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_bytes</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] { <span class="self">self</span>.<span class="number">0</span>.<span class="ident">get_buffer</span>() }
+    <span class="doccomment">/// Interpret the bytecode as a byte array.
+    </span><span class="kw">pub fn </span>as_bytes(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[u8] { <span class="self">self</span>.<span class="number">0</span>.get_buffer() }
 
-    <span class="doccomment">/// Interpret the bytecode as a [d3d::Bytecode].</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_bytecode</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">d3d::Bytecode</span> { <span class="kw unsafe">unsafe</span> { <span class="ident">d3d::Bytecode::from_unchecked</span>(<span class="self">self</span>.<span class="ident">as_bytes</span>()) } }
+    <span class="doccomment">/// Interpret the bytecode as a [d3d::Bytecode].
+    </span><span class="kw">pub fn </span>as_bytecode(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>d3d::Bytecode { <span class="kw">unsafe </span>{ d3d::Bytecode::from_unchecked(<span class="self">self</span>.as_bytes()) } }
 }
 
-<span class="kw">impl</span> <span class="ident">AsRef</span> <span class="op">&lt;</span>[<span class="ident">u8</span>]<span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">CodeBlob</span> { <span class="kw">fn</span> <span class="ident">as_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] { <span class="self">self</span>.<span class="ident">as_bytes</span>() } }
-<span class="kw">impl</span> <span class="ident">Borrow</span><span class="op">&lt;</span>[<span class="ident">u8</span>]<span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">CodeBlob</span> { <span class="kw">fn</span> <span class="ident">borrow</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] { <span class="self">self</span>.<span class="ident">as_bytes</span>() } }
-<span class="kw">impl</span> <span class="ident">AsRef</span> <span class="op">&lt;</span><span class="ident">d3d::Bytecode</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">CodeBlob</span> { <span class="kw">fn</span> <span class="ident">as_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">d3d::Bytecode</span> { <span class="self">self</span>.<span class="ident">as_bytecode</span>() } }
-<span class="kw">impl</span> <span class="ident">Borrow</span><span class="op">&lt;</span><span class="ident">d3d::Bytecode</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">CodeBlob</span> { <span class="kw">fn</span> <span class="ident">borrow</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">d3d::Bytecode</span> { <span class="self">self</span>.<span class="ident">as_bytecode</span>() } }
-<span class="kw">impl</span> <span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">CodeBlob</span> { <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">fmt</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Formatter</span>) -&gt; <span class="ident">fmt::Result</span> { <span class="macro">write!</span>(<span class="ident">fmt</span>, <span class="string">&quot;CodeBlob({} bytes)&quot;</span>, <span class="self">self</span>.<span class="ident">len</span>()) } }
-<span class="kw">impl</span> <span class="ident">Deref</span> <span class="kw">for</span> <span class="ident">CodeBlob</span> { <span class="kw">fn</span> <span class="ident">deref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">d3d::Bytecode</span> { <span class="self">self</span>.<span class="ident">as_bytecode</span>() } <span class="kw">type</span> <span class="ident">Target</span> <span class="op">=</span> <span class="ident">d3d::Bytecode</span>; }
+<span class="kw">impl </span>AsRef &lt;[u8]&gt; <span class="kw">for </span>CodeBlob { <span class="kw">fn </span>as_ref(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[u8] { <span class="self">self</span>.as_bytes() } }
+<span class="kw">impl </span>Borrow&lt;[u8]&gt; <span class="kw">for </span>CodeBlob { <span class="kw">fn </span>borrow(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[u8] { <span class="self">self</span>.as_bytes() } }
+<span class="kw">impl </span>AsRef &lt;d3d::Bytecode&gt; <span class="kw">for </span>CodeBlob { <span class="kw">fn </span>as_ref(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>d3d::Bytecode { <span class="self">self</span>.as_bytecode() } }
+<span class="kw">impl </span>Borrow&lt;d3d::Bytecode&gt; <span class="kw">for </span>CodeBlob { <span class="kw">fn </span>borrow(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>d3d::Bytecode { <span class="self">self</span>.as_bytecode() } }
+<span class="kw">impl </span>Debug <span class="kw">for </span>CodeBlob { <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, fmt: <span class="kw-2">&amp;mut </span>Formatter) -&gt; fmt::Result { <span class="macro">write!</span>(fmt, <span class="string">&quot;CodeBlob({} bytes)&quot;</span>, <span class="self">self</span>.len()) } }
+<span class="kw">impl </span>Deref <span class="kw">for </span>CodeBlob { <span class="kw">fn </span>deref(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>d3d::Bytecode { <span class="self">self</span>.as_bytecode() } <span class="kw">type </span>Target = d3d::Bytecode; }
 
-<span class="comment">// DO NOT IMPLEMENT:</span>
-<span class="comment">// From&lt;Option&lt;ReadOnlyBlob&gt;&gt; for TextBlob - &quot;safe&quot; bypass of bytecode validation</span>
-<span class="comment">// From&lt;       ReadOnlyBlob &gt; for TextBlob - &quot;safe&quot; bypass of bytecode validation</span>
-<span class="comment">// From&lt;&amp;[u8]&gt;                for TextBlob - &quot;safe&quot; bypass of bytecode validation</span>
-
-
+<span class="comment">// DO NOT IMPLEMENT:
+// From&lt;Option&lt;ReadOnlyBlob&gt;&gt; for TextBlob - &quot;safe&quot; bypass of bytecode validation
+// From&lt;       ReadOnlyBlob &gt; for TextBlob - &quot;safe&quot; bypass of bytecode validation
+// From&lt;&amp;[u8]&gt;                for TextBlob - &quot;safe&quot; bypass of bytecode validation
 
 
-<span class="doccomment">/// [ReadOnlyBlob] wrapper for other binary data</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>)]</span>
-<span class="attribute">#[<span class="ident">repr</span>(<span class="ident">transparent</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">BytesBlob</span>(<span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ReadOnlyBlob</span><span class="op">&gt;</span>);
 
-<span class="kw">impl</span> <span class="ident">BytesBlob</span> {
-    <span class="doccomment">/// Wraps a [ReadOnlyBlob] or [Option]\&lt;[ReadOnlyBlob]\&gt; in a more &amp;\[[u8]\]-esque interface.</span>
-    <span class="comment">//#allow_missing_argument_docs</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">value</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> { <span class="ident">value</span>.<span class="ident">into</span>() }
 
-    <span class="doccomment">/// Get the length of the binary data, in bytes.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">len</span>(<span class="kw-2">&amp;</span><span class="self">self</span>)      -&gt; <span class="ident">usize</span>   { <span class="self">self</span>.<span class="number">0</span>.<span class="ident">as_ref</span>().<span class="ident">map_or</span>(<span class="number">0</span>,    <span class="op">|</span><span class="ident">blob</span><span class="op">|</span> <span class="ident">blob</span>.<span class="ident">get_buffer_size</span>()) }
+</span><span class="doccomment">/// [ReadOnlyBlob] wrapper for other binary data
+</span><span class="attribute">#[derive(Clone)]
+#[repr(transparent)]
+</span><span class="kw">pub struct </span>BytesBlob(<span class="prelude-ty">Option</span>&lt;ReadOnlyBlob&gt;);
 
-    <span class="doccomment">/// Check if there is any data.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_empty</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span>    { <span class="self">self</span>.<span class="number">0</span>.<span class="ident">as_ref</span>().<span class="ident">map_or</span>(<span class="bool-val">true</span>, <span class="op">|</span><span class="ident">blob</span><span class="op">|</span> <span class="ident">blob</span>.<span class="ident">get_buffer_size</span>() <span class="op">==</span> <span class="number">0</span>) }
+<span class="kw">impl </span>BytesBlob {
+    <span class="doccomment">/// Wraps a [ReadOnlyBlob] or [Option]\&lt;[ReadOnlyBlob]\&gt; in a more &amp;\[[u8]\]-esque interface.
+    </span><span class="comment">//#allow_missing_argument_docs
+    </span><span class="kw">pub fn </span>new(value: <span class="kw">impl </span>Into&lt;<span class="self">Self</span>&gt;) -&gt; <span class="self">Self </span>{ value.into() }
 
-    <span class="doccomment">/// Interpret the data as a slice of bytes.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_bytes</span>(<span class="kw-2">&amp;</span><span class="self">self</span>)   -&gt; <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] { <span class="self">self</span>.<span class="number">0</span>.<span class="ident">as_ref</span>().<span class="ident">map_or</span>(<span class="kw-2">&amp;</span>[],  <span class="op">|</span><span class="ident">blob</span><span class="op">|</span> <span class="ident">blob</span>.<span class="ident">get_buffer</span>()) }
+    <span class="doccomment">/// Get the length of the binary data, in bytes.
+    </span><span class="kw">pub fn </span>len(<span class="kw-2">&amp;</span><span class="self">self</span>)      -&gt; usize   { <span class="self">self</span>.<span class="number">0</span>.as_ref().map_or(<span class="number">0</span>,    |blob| blob.get_buffer_size()) }
+
+    <span class="doccomment">/// Check if there is any data.
+    </span><span class="kw">pub fn </span>is_empty(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool    { <span class="self">self</span>.<span class="number">0</span>.as_ref().map_or(<span class="bool-val">true</span>, |blob| blob.get_buffer_size() == <span class="number">0</span>) }
+
+    <span class="doccomment">/// Interpret the data as a slice of bytes.
+    </span><span class="kw">pub fn </span>as_bytes(<span class="kw-2">&amp;</span><span class="self">self</span>)   -&gt; <span class="kw-2">&amp;</span>[u8] { <span class="self">self</span>.<span class="number">0</span>.as_ref().map_or(<span class="kw-2">&amp;</span>[],  |blob| blob.get_buffer()) }
 }
 
-<span class="kw">impl</span> <span class="ident">AsRef</span> <span class="op">&lt;</span>[<span class="ident">u8</span>]<span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">BytesBlob</span> { <span class="kw">fn</span> <span class="ident">as_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] { <span class="self">self</span>.<span class="ident">as_bytes</span>() } }
-<span class="kw">impl</span> <span class="ident">Borrow</span><span class="op">&lt;</span>[<span class="ident">u8</span>]<span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">BytesBlob</span> { <span class="kw">fn</span> <span class="ident">borrow</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] { <span class="self">self</span>.<span class="ident">as_bytes</span>() } }
-<span class="kw">impl</span> <span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">BytesBlob</span> { <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">fmt</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Formatter</span>) -&gt; <span class="ident">fmt::Result</span> { <span class="macro">write!</span>(<span class="ident">fmt</span>, <span class="string">&quot;BytesBlob({} bytes)&quot;</span>, <span class="self">self</span>.<span class="ident">len</span>()) } }
-<span class="kw">impl</span> <span class="ident">Deref</span> <span class="kw">for</span> <span class="ident">BytesBlob</span> { <span class="kw">fn</span> <span class="ident">deref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] { <span class="self">self</span>.<span class="ident">as_bytes</span>() } <span class="kw">type</span> <span class="ident">Target</span> <span class="op">=</span> [<span class="ident">u8</span>]; }
-<span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ReadOnlyBlob</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">BytesBlob</span> { <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">value</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ReadOnlyBlob</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> { <span class="self">Self</span>(     <span class="ident">value</span> ) } }
-<span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span>       <span class="ident">ReadOnlyBlob</span> <span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">BytesBlob</span> { <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">value</span>:        <span class="ident">ReadOnlyBlob</span> ) -&gt; <span class="self">Self</span> { <span class="self">Self</span>(<span class="prelude-val">Some</span>(<span class="ident">value</span>)) } }
+<span class="kw">impl </span>AsRef &lt;[u8]&gt; <span class="kw">for </span>BytesBlob { <span class="kw">fn </span>as_ref(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[u8] { <span class="self">self</span>.as_bytes() } }
+<span class="kw">impl </span>Borrow&lt;[u8]&gt; <span class="kw">for </span>BytesBlob { <span class="kw">fn </span>borrow(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[u8] { <span class="self">self</span>.as_bytes() } }
+<span class="kw">impl </span>Debug <span class="kw">for </span>BytesBlob { <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, fmt: <span class="kw-2">&amp;mut </span>Formatter) -&gt; fmt::Result { <span class="macro">write!</span>(fmt, <span class="string">&quot;BytesBlob({} bytes)&quot;</span>, <span class="self">self</span>.len()) } }
+<span class="kw">impl </span>Deref <span class="kw">for </span>BytesBlob { <span class="kw">fn </span>deref(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[u8] { <span class="self">self</span>.as_bytes() } <span class="kw">type </span>Target = [u8]; }
+<span class="kw">impl </span>From&lt;<span class="prelude-ty">Option</span>&lt;ReadOnlyBlob&gt;&gt; <span class="kw">for </span>BytesBlob { <span class="kw">fn </span>from(value: <span class="prelude-ty">Option</span>&lt;ReadOnlyBlob&gt;) -&gt; <span class="self">Self </span>{ <span class="self">Self</span>(     value ) } }
+<span class="kw">impl </span>From&lt;       ReadOnlyBlob &gt; <span class="kw">for </span>BytesBlob { <span class="kw">fn </span>from(value:        ReadOnlyBlob ) -&gt; <span class="self">Self </span>{ <span class="self">Self</span>(<span class="prelude-val">Some</span>(value)) } }
 
 
 
-<span class="comment">//#cpp2rust ID3D10Blob  = d3d::BytesBlob</span>
-<span class="comment">//#cpp2rust ID3D10Blob  = d3d::CodeBlob</span>
-<span class="comment">//#cpp2rust ID3D10Blob  = d3d::ReadOnlyBlob</span>
-<span class="comment">//#cpp2rust ID3D10Blob  = d3d::TextBlob</span>
+<span class="comment">//#cpp2rust ID3D10Blob  = d3d::BytesBlob
+//#cpp2rust ID3D10Blob  = d3d::CodeBlob
+//#cpp2rust ID3D10Blob  = d3d::ReadOnlyBlob
+//#cpp2rust ID3D10Blob  = d3d::TextBlob
 
-<span class="comment">//#cpp2rust ID3DBlob    = d3d::BytesBlob</span>
-<span class="comment">//#cpp2rust ID3DBlob    = d3d::CodeBlob</span>
-<span class="comment">//#cpp2rust ID3DBlob    = d3d::ReadOnlyBlob</span>
-<span class="comment">//#cpp2rust ID3DBlob    = d3d::TextBlob</span>
+//#cpp2rust ID3DBlob    = d3d::BytesBlob
+//#cpp2rust ID3DBlob    = d3d::CodeBlob
+//#cpp2rust ID3DBlob    = d3d::ReadOnlyBlob
+//#cpp2rust ID3DBlob    = d3d::TextBlob
 
-<span class="comment">//#cpp2rust ID3D10Blob::GetBufferPointer            = d3d::BytesBlob::as_bytes</span>
-<span class="comment">//#cpp2rust ID3DBlob::GetBufferPointer              = d3d::BytesBlob::as_bytes</span>
-<span class="comment">//#cpp2rust ID3D10Blob::GetBufferPointer            = d3d::CodeBlob::as_bytes</span>
-<span class="comment">//#cpp2rust ID3DBlob::GetBufferPointer              = d3d::CodeBlob::as_bytes</span>
-<span class="comment">//#cpp2rust ID3D10Blob::GetBufferPointer            = d3d::CodeBlob::as_bytecode</span>
-<span class="comment">//#cpp2rust ID3DBlob::GetBufferPointer              = d3d::CodeBlob::as_bytecode</span>
-<span class="comment">//#cpp2rust ID3D10Blob::GetBufferPointer            = d3d::ReadOnlyBlob::get_buffer</span>
-<span class="comment">//#cpp2rust ID3DBlob::GetBufferPointer              = d3d::ReadOnlyBlob::get_buffer</span>
-<span class="comment">//#cpp2rust ID3D10Blob::GetBufferPointer            = d3d::TextBlob::to_utf8</span>
-<span class="comment">//#cpp2rust ID3DBlob::GetBufferPointer              = d3d::TextBlob::to_utf8</span>
-<span class="comment">//#cpp2rust ID3D10Blob::GetBufferPointer            = d3d::TextBlob::to_utf8_lossy</span>
-<span class="comment">//#cpp2rust ID3DBlob::GetBufferPointer              = d3d::TextBlob::to_utf8_lossy</span>
+//#cpp2rust ID3D10Blob::GetBufferPointer            = d3d::BytesBlob::as_bytes
+//#cpp2rust ID3DBlob::GetBufferPointer              = d3d::BytesBlob::as_bytes
+//#cpp2rust ID3D10Blob::GetBufferPointer            = d3d::CodeBlob::as_bytes
+//#cpp2rust ID3DBlob::GetBufferPointer              = d3d::CodeBlob::as_bytes
+//#cpp2rust ID3D10Blob::GetBufferPointer            = d3d::CodeBlob::as_bytecode
+//#cpp2rust ID3DBlob::GetBufferPointer              = d3d::CodeBlob::as_bytecode
+//#cpp2rust ID3D10Blob::GetBufferPointer            = d3d::ReadOnlyBlob::get_buffer
+//#cpp2rust ID3DBlob::GetBufferPointer              = d3d::ReadOnlyBlob::get_buffer
+//#cpp2rust ID3D10Blob::GetBufferPointer            = d3d::TextBlob::to_utf8
+//#cpp2rust ID3DBlob::GetBufferPointer              = d3d::TextBlob::to_utf8
+//#cpp2rust ID3D10Blob::GetBufferPointer            = d3d::TextBlob::to_utf8_lossy
+//#cpp2rust ID3DBlob::GetBufferPointer              = d3d::TextBlob::to_utf8_lossy
 
-<span class="comment">//#cpp2rust ID3D10Blob::GetBufferSize               = d3d::BytesBlob::len</span>
-<span class="comment">//#cpp2rust ID3DBlob::GetBufferSize                 = d3d::BytesBlob::len</span>
-<span class="comment">//#cpp2rust ID3D10Blob::GetBufferSize               = d3d::CodeBlob::len</span>
-<span class="comment">//#cpp2rust ID3DBlob::GetBufferSize                 = d3d::CodeBlob::len</span>
-<span class="comment">//#cpp2rust ID3D10Blob::GetBufferSize               = d3d::ReadOnlyBlob::get_buffer_size</span>
-<span class="comment">//#cpp2rust ID3DBlob::GetBufferSize                 = d3d::ReadOnlyBlob::get_buffer_size</span>
-</code></pre></div>
-</section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-search-index-js="../../../../../search-index.js" data-search-js="../../../../../search.js"></div>
-</body></html>
+//#cpp2rust ID3D10Blob::GetBufferSize               = d3d::BytesBlob::len
+//#cpp2rust ID3DBlob::GetBufferSize                 = d3d::BytesBlob::len
+//#cpp2rust ID3D10Blob::GetBufferSize               = d3d::CodeBlob::len
+//#cpp2rust ID3DBlob::GetBufferSize                 = d3d::CodeBlob::len
+//#cpp2rust ID3D10Blob::GetBufferSize               = d3d::ReadOnlyBlob::get_buffer_size
+//#cpp2rust ID3DBlob::GetBufferSize                 = d3d::ReadOnlyBlob::get_buffer_size
+</span></code></pre></div>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (b44197abb 2022-09-05)" ></div></body></html>

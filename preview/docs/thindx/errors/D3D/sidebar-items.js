@@ -1,1 +1,1 @@
-initSidebarItems({"constant":[["OK","No error occurred."],["OK_NOAUTOGEN","This is a success code. However, the autogeneration of mipmaps is not supported for this format. This means that resource creation will succeed but the mipmap levels will not be automatically generated."]]});
+window.SIDEBAR_ITEMS = {"constant":[["OK",""],["OK_NOAUTOGEN",""]]};

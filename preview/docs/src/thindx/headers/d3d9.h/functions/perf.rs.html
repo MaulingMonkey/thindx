@@ -1,103 +1,102 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3d9.h\functions\perf.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>perf.rs - source</title><link rel="stylesheet" type="text/css" href="../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script src="../../../../../crates.js"></script><script defer src="../../../../../main.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script>
-    <noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"><style type="text/css">#crate-search{background-image:url("../../../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../../../../thindx/index.html'><div class='logo-container rust-logo'><img src='../../../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../../../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../../../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../../../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
-<span id="2">  2</span>
-<span id="3">  3</span>
-<span id="4">  4</span>
-<span id="5">  5</span>
-<span id="6">  6</span>
-<span id="7">  7</span>
-<span id="8">  8</span>
-<span id="9">  9</span>
-<span id="10"> 10</span>
-<span id="11"> 11</span>
-<span id="12"> 12</span>
-<span id="13"> 13</span>
-<span id="14"> 14</span>
-<span id="15"> 15</span>
-<span id="16"> 16</span>
-<span id="17"> 17</span>
-<span id="18"> 18</span>
-<span id="19"> 19</span>
-<span id="20"> 20</span>
-<span id="21"> 21</span>
-<span id="22"> 22</span>
-<span id="23"> 23</span>
-<span id="24"> 24</span>
-<span id="25"> 25</span>
-<span id="26"> 26</span>
-<span id="27"> 27</span>
-<span id="28"> 28</span>
-<span id="29"> 29</span>
-<span id="30"> 30</span>
-<span id="31"> 31</span>
-<span id="32"> 32</span>
-<span id="33"> 33</span>
-<span id="34"> 34</span>
-<span id="35"> 35</span>
-<span id="36"> 36</span>
-<span id="37"> 37</span>
-<span id="38"> 38</span>
-<span id="39"> 39</span>
-<span id="40"> 40</span>
-<span id="41"> 41</span>
-<span id="42"> 42</span>
-<span id="43"> 43</span>
-<span id="44"> 44</span>
-<span id="45"> 45</span>
-<span id="46"> 46</span>
-<span id="47"> 47</span>
-<span id="48"> 48</span>
-<span id="49"> 49</span>
-<span id="50"> 50</span>
-<span id="51"> 51</span>
-<span id="52"> 52</span>
-<span id="53"> 53</span>
-<span id="54"> 54</span>
-<span id="55"> 55</span>
-<span id="56"> 56</span>
-<span id="57"> 57</span>
-<span id="58"> 58</span>
-<span id="59"> 59</span>
-<span id="60"> 60</span>
-<span id="61"> 61</span>
-<span id="62"> 62</span>
-<span id="63"> 63</span>
-<span id="64"> 64</span>
-<span id="65"> 65</span>
-<span id="66"> 66</span>
-<span id="67"> 67</span>
-<span id="68"> 68</span>
-<span id="69"> 69</span>
-<span id="70"> 70</span>
-<span id="71"> 71</span>
-<span id="72"> 72</span>
-<span id="73"> 73</span>
-<span id="74"> 74</span>
-<span id="75"> 75</span>
-<span id="76"> 76</span>
-<span id="77"> 77</span>
-<span id="78"> 78</span>
-<span id="79"> 79</span>
-<span id="80"> 80</span>
-<span id="81"> 81</span>
-<span id="82"> 82</span>
-<span id="83"> 83</span>
-<span id="84"> 84</span>
-<span id="85"> 85</span>
-<span id="86"> 86</span>
-<span id="87"> 87</span>
-<span id="88"> 88</span>
-<span id="89"> 89</span>
-<span id="90"> 90</span>
-<span id="91"> 91</span>
-<span id="92"> 92</span>
-<span id="93"> 93</span>
-<span id="94"> 94</span>
-<span id="95"> 95</span>
-<span id="96"> 96</span>
-<span id="97"> 97</span>
-<span id="98"> 98</span>
-<span id="99"> 99</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3d9.h\functions\perf.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>perf.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../../normalize.css"><link rel="stylesheet" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../../dark.css" disabled><link rel="stylesheet" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<span id="2">2</span>
+<span id="3">3</span>
+<span id="4">4</span>
+<span id="5">5</span>
+<span id="6">6</span>
+<span id="7">7</span>
+<span id="8">8</span>
+<span id="9">9</span>
+<span id="10">10</span>
+<span id="11">11</span>
+<span id="12">12</span>
+<span id="13">13</span>
+<span id="14">14</span>
+<span id="15">15</span>
+<span id="16">16</span>
+<span id="17">17</span>
+<span id="18">18</span>
+<span id="19">19</span>
+<span id="20">20</span>
+<span id="21">21</span>
+<span id="22">22</span>
+<span id="23">23</span>
+<span id="24">24</span>
+<span id="25">25</span>
+<span id="26">26</span>
+<span id="27">27</span>
+<span id="28">28</span>
+<span id="29">29</span>
+<span id="30">30</span>
+<span id="31">31</span>
+<span id="32">32</span>
+<span id="33">33</span>
+<span id="34">34</span>
+<span id="35">35</span>
+<span id="36">36</span>
+<span id="37">37</span>
+<span id="38">38</span>
+<span id="39">39</span>
+<span id="40">40</span>
+<span id="41">41</span>
+<span id="42">42</span>
+<span id="43">43</span>
+<span id="44">44</span>
+<span id="45">45</span>
+<span id="46">46</span>
+<span id="47">47</span>
+<span id="48">48</span>
+<span id="49">49</span>
+<span id="50">50</span>
+<span id="51">51</span>
+<span id="52">52</span>
+<span id="53">53</span>
+<span id="54">54</span>
+<span id="55">55</span>
+<span id="56">56</span>
+<span id="57">57</span>
+<span id="58">58</span>
+<span id="59">59</span>
+<span id="60">60</span>
+<span id="61">61</span>
+<span id="62">62</span>
+<span id="63">63</span>
+<span id="64">64</span>
+<span id="65">65</span>
+<span id="66">66</span>
+<span id="67">67</span>
+<span id="68">68</span>
+<span id="69">69</span>
+<span id="70">70</span>
+<span id="71">71</span>
+<span id="72">72</span>
+<span id="73">73</span>
+<span id="74">74</span>
+<span id="75">75</span>
+<span id="76">76</span>
+<span id="77">77</span>
+<span id="78">78</span>
+<span id="79">79</span>
+<span id="80">80</span>
+<span id="81">81</span>
+<span id="82">82</span>
+<span id="83">83</span>
+<span id="84">84</span>
+<span id="85">85</span>
+<span id="86">86</span>
+<span id="87">87</span>
+<span id="88">88</span>
+<span id="89">89</span>
+<span id="90">90</span>
+<span id="91">91</span>
+<span id="92">92</span>
+<span id="93">93</span>
+<span id="94">94</span>
+<span id="95">95</span>
+<span id="96">96</span>
+<span id="97">97</span>
+<span id="98">98</span>
+<span id="99">99</span>
 <span id="100">100</span>
 <span id="101">101</span>
 <span id="102">102</span>
@@ -393,400 +392,409 @@
 <span id="392">392</span>
 <span id="393">393</span>
 <span id="394">394</span>
-</pre><pre class="rust"><code><span class="doccomment">//! \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/dx9-graphics-reference-d3d-functions)\]</span>
-<span class="doccomment">//! Direct3D PIX events for annotating graphics debugger traces and captures.</span>
+<span id="395">395</span>
+<span id="396">396</span>
+<span id="397">397</span>
+<span id="398">398</span>
+<span id="399">399</span>
+</pre><pre class="rust"><code><span class="doccomment">//! \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/dx9-graphics-reference-d3d-functions)\]
+//! Direct3D PIX events for annotating graphics debugger traces and captures.
 
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="kw-2">*</span>;
+</span><span class="kw">use crate</span>::<span class="kw-2">*</span>;
 
-<span class="kw">use</span> <span class="ident">abistr::AsCStr</span>;
+<span class="kw">use </span>abistr::AsCStr;
 
-<span class="kw">use</span> <span class="ident">winapi::shared::d3d9</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident">winapi::shared::minwindef::DWORD</span>;
+<span class="kw">use </span>winapi::shared::d3d9::<span class="kw-2">*</span>;
+<span class="kw">use </span>winapi::shared::minwindef::DWORD;
 
-<span class="kw">use</span> <span class="ident">std::fmt</span>::{<span class="self">self</span>, <span class="ident">Debug</span>, <span class="ident">Display</span>, <span class="ident">Formatter</span>};
-
-<span class="kw">type</span> <span class="ident">Error</span> <span class="op">=</span> ();
+<span class="kw">use </span>std::fmt::{<span class="self">self</span>, Debug, Display, Formatter};
 
 
 
-
-<span class="comment">//#cpp2rust D3DPERF_BeginEvent = d3d::perf::begin_event</span>
-<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_beginevent)\]</span>
-<span class="doccomment">/// D3DPERF_BeginEvent</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// Marks the beginning of a user-defined event.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// ### Example</span>
-<span class="doccomment">/// ```rust</span>
-<span class="doccomment">/// # use thindx::*;</span>
-<span class="doccomment">/// # if false {</span>
-<span class="doccomment">/// let scope = d3d::perf::begin_event(d3d::Color::argb(0), abistr::cstr16!(&quot;example scope&quot;));</span>
-<span class="doccomment">/// // ...</span>
-<span class="doccomment">/// if scope.is_ok() { drop(d3d::perf::end_event()) }</span>
-<span class="doccomment">/// # }</span>
-<span class="doccomment">/// ```</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// ### Returns</span>
-<span class="doccomment">/// *   Ok(level_of_the_starting_event: [u32])</span>
-<span class="doccomment">/// *   Err(...)                                If no PIX debugger is attached?</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">begin_event</span>(<span class="ident">col</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">d3d::Color</span><span class="op">&gt;</span>, <span class="ident">name</span>: <span class="kw">impl</span> <span class="ident">abistr::TryIntoAsCStr</span><span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">u32</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="ident">col</span>     <span class="op">=</span> <span class="ident">col</span>.<span class="ident">into</span>().<span class="ident">into</span>();
-    <span class="kw">let</span> <span class="ident">name</span>    <span class="op">=</span> <span class="ident">name</span>.<span class="ident">try_into</span>().<span class="ident">map_err</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> ())<span class="question-mark">?</span>;
-    <span class="kw">let</span> <span class="ident">level</span>   <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="ident">D3DPERF_BeginEvent</span>(<span class="ident">col</span>, <span class="ident">name</span>.<span class="ident">as_cstr</span>()) };
-    <span class="kw">if</span> <span class="ident">level</span> <span class="op">&lt;</span> <span class="number">0</span> { <span class="prelude-val">Err</span>(()) } <span class="kw">else</span> { <span class="prelude-val">Ok</span>(<span class="ident">level</span> <span class="kw">as</span> <span class="kw">_</span>) }
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_beginevent)\]
+/// D3DPERF_BeginEvent
+///
+/// Marks the beginning of a user-defined event.
+///
+/// ### Returns
+/// *   Ok(level_of_the_starting_event: [u32])
+/// *   Err(...)                                If no PIX debugger is attached?
+///
+/// ### Example
+/// ```rust
+/// # use thindx::*;
+/// # if false {
+/// let scope = d3d::perf::begin_event(d3d::Color::argb(0), abistr::cstr16!(&quot;example scope&quot;));
+/// // ...
+/// if scope.is_ok() { drop(d3d::perf::end_event()) }
+/// # }
+/// ```
+</span><span class="kw">pub fn </span>begin_event(col: <span class="kw">impl </span>Into&lt;d3d::Color&gt;, name: <span class="kw">impl </span>abistr::TryIntoAsCStr&lt;u16&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;u32, Error&gt; {
+    <span class="macro">fn_context!</span>(d3d::perf::begin_event =&gt; D3DPERF_BeginEvent);
+    <span class="kw">let </span>col     = col.into().into();
+    <span class="kw">let </span>name    = <span class="macro">fn_param_try_into!</span>(name)<span class="question-mark">?</span>;
+    <span class="kw">let </span>level   = <span class="kw">unsafe </span>{ D3DPERF_BeginEvent(col, name.as_cstr()) };
+    <span class="kw">if </span>level &lt; <span class="number">0 </span>{
+        <span class="macro">fn_err!</span>(THINERR::NONSPECIFIC)
+    } <span class="kw">else </span>{
+        <span class="prelude-val">Ok</span>(level <span class="kw">as _</span>)
+    }
 }
 
-<span class="comment">//#cpp2rust D3DPERF_BeginEvent = d3d::perf::event_scope</span>
-<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_beginevent)\]</span>
-<span class="doccomment">/// D3DPERF_BeginEvent .. D3DPERF_EndEvent scope</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// Marks the beginning and end of a user-defined event.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// ### Example</span>
-<span class="doccomment">/// ```rust</span>
-<span class="doccomment">/// # use thindx::*;</span>
-<span class="doccomment">/// # if false {</span>
-<span class="doccomment">/// let _scope = d3d::perf::event_scope(d3d::Color::argb(0), abistr::cstr16!(&quot;example scope&quot;));</span>
-<span class="doccomment">/// // ...</span>
-<span class="doccomment">/// # }</span>
-<span class="doccomment">/// ```</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">event_scope</span>(<span class="ident">col</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">d3d::Color</span><span class="op">&gt;</span>, <span class="ident">name</span>: <span class="kw">impl</span> <span class="ident">abistr::TryIntoAsCStr</span><span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>) -&gt; <span class="ident">EventScope</span> {
-    <span class="ident">begin_event</span>(<span class="ident">col</span>, <span class="ident">name</span>).<span class="ident">map</span>(<span class="op">|</span><span class="ident">s</span><span class="op">|</span> <span class="ident">EventScope</span> { <span class="ident">scope</span>: <span class="prelude-val">Some</span>(<span class="ident">s</span>) }).<span class="ident">unwrap_or_default</span>()
+<span class="comment">//#cpp2rust D3DPERF_BeginEvent = d3d::perf::event_scope
+</span><span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_beginevent)\]
+/// D3DPERF_BeginEvent .. D3DPERF_EndEvent scope
+///
+/// Marks the beginning and end of a user-defined event.
+///
+/// ### Example
+/// ```rust
+/// # use thindx::*;
+/// # if false {
+/// let _scope = d3d::perf::event_scope(d3d::Color::argb(0), abistr::cstr16!(&quot;example scope&quot;));
+/// // ...
+/// # }
+/// ```
+</span><span class="kw">pub fn </span>event_scope(col: <span class="kw">impl </span>Into&lt;d3d::Color&gt;, name: <span class="kw">impl </span>abistr::TryIntoAsCStr&lt;u16&gt;) -&gt; EventScope {
+    begin_event(col, name).map(|s| EventScope { scope: <span class="prelude-val">Some</span>(s) }).unwrap_or_default()
 }
 
-<span class="comment">//#cpp2rust D3DPERF_BeginEvent = d3d::perf::event_scope_if</span>
-<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_beginevent)\]</span>
-<span class="doccomment">/// D3DPERF_BeginEvent .. D3DPERF_EndEvent scope</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// Marks the beginning and end of a user-defined event.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// ### Example</span>
-<span class="doccomment">/// ```rust</span>
-<span class="doccomment">/// # use thindx::*;</span>
-<span class="doccomment">/// # if false {</span>
-<span class="doccomment">/// let _scope = d3d::perf::event_scope_if(</span>
-<span class="doccomment">///     cfg!(debug_assertions),</span>
-<span class="doccomment">///     d3d::Color::argb(0),</span>
-<span class="doccomment">///     abistr::cstr16!(&quot;example scope&quot;)</span>
-<span class="doccomment">/// );</span>
-<span class="doccomment">/// // ...</span>
-<span class="doccomment">/// # }</span>
-<span class="doccomment">/// ```</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">event_scope_if</span>(<span class="ident">condition</span>: <span class="ident">bool</span>, <span class="ident">col</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">d3d::Color</span><span class="op">&gt;</span>, <span class="ident">name</span>: <span class="kw">impl</span> <span class="ident">abistr::TryIntoAsCStr</span><span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>) -&gt; <span class="ident">EventScope</span> {
-    <span class="kw">if</span> <span class="ident">condition</span> { <span class="ident">event_scope</span>(<span class="ident">col</span>, <span class="ident">name</span>) } <span class="kw">else</span> { <span class="ident">EventScope::default</span>() }
+<span class="comment">//#cpp2rust D3DPERF_BeginEvent = d3d::perf::event_scope_if
+</span><span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_beginevent)\]
+/// D3DPERF_BeginEvent .. D3DPERF_EndEvent scope
+///
+/// Marks the beginning and end of a user-defined event.
+///
+/// ### Example
+/// ```rust
+/// # use thindx::*;
+/// # if false {
+/// let _scope = d3d::perf::event_scope_if(
+///     cfg!(debug_assertions),
+///     d3d::Color::argb(0),
+///     abistr::cstr16!(&quot;example scope&quot;)
+/// );
+/// // ...
+/// # }
+/// ```
+</span><span class="kw">pub fn </span>event_scope_if(condition: bool, col: <span class="kw">impl </span>Into&lt;d3d::Color&gt;, name: <span class="kw">impl </span>abistr::TryIntoAsCStr&lt;u16&gt;) -&gt; EventScope {
+    <span class="kw">if </span>condition { event_scope(col, name) } <span class="kw">else </span>{ EventScope::default() }
 }
 
-<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_beginevent)\]</span>
-<span class="doccomment">/// D3DPERF_BeginEvent .. D3DPERF_EndEvent scope</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// Keeps track of if D3DPERF_BeginEvent succeeded, and attempts to pair it with a D3DPERF_EndEvent.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// | Open Method                   | Behavior      |</span>
-<span class="doccomment">/// | ----------------------------- | ------------- |</span>
-<span class="doccomment">/// | [event_scope]                 | Attempts to open a scope</span>
-<span class="doccomment">/// | [event_scope_if]              | Attempts to open a scope if `condition` is set</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// | Close Method                  | Behavior      |</span>
-<span class="doccomment">/// | ----------------------------- | ------------- |</span>
-<span class="doccomment">/// | [EventScope::close_unchecked] | Closes only if opened, errors ignored</span>
-<span class="doccomment">/// | [EventScope::close]           | Closes only if opened, errors returned to the user to handle</span>
-<span class="doccomment">/// | [EventScope::drop]            | Closes only if opened, errors assert in debug builds</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">EventScope</span> { <span class="ident">scope</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span> }
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_beginevent)\]
+/// D3DPERF_BeginEvent .. D3DPERF_EndEvent scope
+///
+/// Keeps track of if D3DPERF_BeginEvent succeeded, and attempts to pair it with a D3DPERF_EndEvent.
+///
+/// | Open Method                   | Behavior      |
+/// | ----------------------------- | ------------- |
+/// | [event_scope]                 | Attempts to open a scope
+/// | [event_scope_if]              | Attempts to open a scope if `condition` is set
+///
+/// | Close Method                  | Behavior      |
+/// | ----------------------------- | ------------- |
+/// | [EventScope::close_unchecked] | Closes only if opened, errors ignored
+/// | [EventScope::close]           | Closes only if opened, errors returned to the user to handle
+/// | [EventScope::drop]            | Closes only if opened, errors assert in debug builds
+</span><span class="kw">pub struct </span>EventScope { scope: <span class="prelude-ty">Option</span>&lt;u32&gt; }
 
-<span class="kw">impl</span> <span class="ident">EventScope</span> {
-    <span class="comment">//#cpp2rust D3DPERF_EndEvent = d3d::perf::EventScope::close_unchecked</span>
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_endevent)\]</span>
-    <span class="doccomment">/// D3DPERF_EndEvent</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Marks the end of a user-defined event, if this event scope was open to begin with.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Example</span>
-    <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// # use thindx::*;</span>
-    <span class="doccomment">/// # if false {</span>
-    <span class="doccomment">/// let scope = d3d::perf::event_scope(d3d::Color::argb(0), abistr::cstr16!(&quot;example scope&quot;));</span>
-    <span class="doccomment">/// // ...</span>
-    <span class="doccomment">/// scope.close_unchecked();</span>
-    <span class="doccomment">/// # }</span>
-    <span class="doccomment">/// ```</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">close_unchecked</span>(<span class="kw-2">mut</span> <span class="self">self</span>) { <span class="ident">drop</span>(<span class="self">self</span>.<span class="ident">close_impl</span>()) }
+<span class="kw">impl </span>EventScope {
+    <span class="comment">//#cpp2rust D3DPERF_EndEvent = d3d::perf::EventScope::close_unchecked
+    </span><span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_endevent)\]
+    /// D3DPERF_EndEvent
+    ///
+    /// Marks the end of a user-defined event, if this event scope was open to begin with.
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use thindx::*;
+    /// # if false {
+    /// let scope = d3d::perf::event_scope(d3d::Color::argb(0), abistr::cstr16!(&quot;example scope&quot;));
+    /// // ...
+    /// scope.close_unchecked();
+    /// # }
+    /// ```
+    </span><span class="kw">pub fn </span>close_unchecked(<span class="kw-2">mut </span><span class="self">self</span>) { drop(<span class="self">self</span>.close_impl()) }
 
-    <span class="comment">//#cpp2rust D3DPERF_EndEvent = d3d::perf::EventScope::close</span>
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_endevent)\]</span>
-    <span class="doccomment">/// D3DPERF_EndEvent</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Marks the end of a user-defined event, if this event scope was open to begin with.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Example</span>
-    <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// # use thindx::*;</span>
-    <span class="doccomment">/// # if false {</span>
-    <span class="doccomment">/// let scope = d3d::perf::event_scope(d3d::Color::argb(0), abistr::cstr16!(&quot;example scope&quot;));</span>
-    <span class="doccomment">/// // ...</span>
-    <span class="doccomment">/// scope.close();</span>
-    <span class="doccomment">/// # }</span>
-    <span class="doccomment">/// ```</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">close</span>(<span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">EventMismatchError</span><span class="op">&gt;</span> { <span class="self">self</span>.<span class="ident">close_impl</span>() }
+    <span class="comment">//#cpp2rust D3DPERF_EndEvent = d3d::perf::EventScope::close
+    </span><span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_endevent)\]
+    /// D3DPERF_EndEvent
+    ///
+    /// Marks the end of a user-defined event, if this event scope was open to begin with.
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use thindx::*;
+    /// # if false {
+    /// let scope = d3d::perf::event_scope(d3d::Color::argb(0), abistr::cstr16!(&quot;example scope&quot;));
+    /// // ...
+    /// scope.close();
+    /// # }
+    /// ```
+    </span><span class="kw">pub fn </span>close(<span class="kw-2">mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;(), EventMismatchError&gt; { <span class="self">self</span>.close_impl() }
 
-    <span class="kw">fn</span> <span class="ident">close_impl</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">EventMismatchError</span><span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">expected</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">scope</span>.<span class="ident">take</span>() {
-            <span class="kw">let</span> <span class="ident">actual</span> <span class="op">=</span> <span class="ident">end_event</span>().<span class="ident">map_err</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">EventMismatchError</span> { <span class="ident">expected</span>, <span class="ident">actual</span>: <span class="ident">expected</span> })<span class="question-mark">?</span>;
-            <span class="kw">if</span> <span class="ident">expected</span> <span class="op">==</span> <span class="ident">actual</span> { <span class="prelude-val">Ok</span>(()) } <span class="kw">else</span> { <span class="prelude-val">Err</span>(<span class="ident">EventMismatchError</span> { <span class="ident">expected</span>, <span class="ident">actual</span> }) }
-        } <span class="kw">else</span> {
+    <span class="kw">fn </span>close_impl(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;(), EventMismatchError&gt; {
+        <span class="kw">if let </span><span class="prelude-val">Some</span>(expected) = <span class="self">self</span>.scope.take() {
+            <span class="kw">let </span>actual = end_event().map_err(|<span class="kw">_</span>| EventMismatchError { expected, actual: expected })<span class="question-mark">?</span>;
+            <span class="kw">if </span>expected == actual { <span class="prelude-val">Ok</span>(()) } <span class="kw">else </span>{ <span class="prelude-val">Err</span>(EventMismatchError { expected, actual }) }
+        } <span class="kw">else </span>{
             <span class="prelude-val">Ok</span>(())
         }
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">EventScope</span> {
-    <span class="kw">fn</span> <span class="ident">default</span>() -&gt; <span class="self">Self</span> { <span class="self">Self</span> { <span class="ident">scope</span>: <span class="prelude-val">None</span> } }
+<span class="kw">impl </span>Default <span class="kw">for </span>EventScope {
+    <span class="kw">fn </span>default() -&gt; <span class="self">Self </span>{ <span class="self">Self </span>{ scope: <span class="prelude-val">None </span>} }
 }
 
-<span class="kw">impl</span> <span class="ident">Drop</span> <span class="kw">for</span> <span class="ident">EventScope</span> {
-    <span class="comment">//#cpp2rust D3DPERF_EndEvent = d3d::perf::EventScope::drop</span>
-    <span class="kw">fn</span> <span class="ident">drop</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {
-        <span class="ident">drop</span>(<span class="self">self</span>.<span class="ident">close_impl</span>().<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">err</span><span class="op">|</span> {
-            <span class="macro">assert!</span>(<span class="op">!</span><span class="macro">cfg!</span>(<span class="ident">debug_assertions</span>), <span class="string">&quot;{}&quot;</span>, <span class="ident">err</span>);
+<span class="kw">impl </span>Drop <span class="kw">for </span>EventScope {
+    <span class="comment">//#cpp2rust D3DPERF_EndEvent = d3d::perf::EventScope::drop
+    </span><span class="kw">fn </span>drop(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
+        drop(<span class="self">self</span>.close_impl().map_err(|err| {
+            <span class="macro">assert!</span>(!<span class="macro">cfg!</span>(debug_assertions), <span class="string">&quot;{}&quot;</span>, err);
         }))
     }
 }
 
 
 
-<span class="comment">//#cpp2rust D3DPERF_EndEvent = d3d::perf::end_event</span>
-<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_endevent)\]</span>
-<span class="doccomment">/// D3DPERF_EndEvent</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// Marks the end of a user-defined event.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// ### Example</span>
-<span class="doccomment">/// ```rust</span>
-<span class="doccomment">/// # use thindx::*;</span>
-<span class="doccomment">/// # if false {</span>
-<span class="doccomment">/// let scope = d3d::perf::begin_event(d3d::Color::argb(0), abistr::cstr16!(&quot;example scope&quot;));</span>
-<span class="doccomment">/// // ...</span>
-<span class="doccomment">/// if scope.is_ok() { drop(d3d::perf::end_event()) }</span>
-<span class="doccomment">/// # }</span>
-<span class="doccomment">/// ```</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// ### Returns</span>
-<span class="doccomment">/// *   Ok(level_of_the_ending_event: [u32])</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">end_event</span>() -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">u32</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="ident">level</span>   <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="ident">D3DPERF_EndEvent</span>() };
-    <span class="kw">if</span> <span class="ident">level</span> <span class="op">&lt;</span> <span class="number">0</span> { <span class="prelude-val">Err</span>(()) } <span class="kw">else</span> { <span class="prelude-val">Ok</span>(<span class="ident">level</span> <span class="kw">as</span> <span class="kw">_</span>) }
-}
-
-
-
-<span class="comment">//#cpp2rust D3DPERF_GetStatus = d3d::perf::get_status</span>
-<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_getstatus)\]</span>
-<span class="doccomment">/// D3DPERF_GetStatus</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// Determine the current state of the profiler from the target program.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// ### Example</span>
-<span class="doccomment">/// ```rust</span>
-<span class="doccomment">/// # use thindx::*;</span>
-<span class="doccomment">/// let is_pix_attached = d3d::perf::get_status() != 0;</span>
-<span class="doccomment">/// dbg!(is_pix_attached); // false</span>
-<span class="doccomment">/// ```</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// ### Returns</span>
-<span class="doccomment">/// *   `0`    If PIX is **not** profiling the target program.</span>
-<span class="doccomment">/// *   `?`    If PIX is profiling the target program</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_status</span>() -&gt; <span class="ident">u32</span> {
-    <span class="kw unsafe">unsafe</span> { <span class="ident">D3DPERF_GetStatus</span>() }
-}
-
-
-
-<span class="comment">//#cpp2rust D3DPERF_QueryRepeatFrame = d3d::perf::query_repeat_frame</span>
-<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_queryrepeatframe)\]</span>
-<span class="doccomment">/// D3DPERF_QueryRepeatFrame</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// Determine whether a performance profiler is requesting that the current frame be resubmitted to Direct3D for performance analysis.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// **NOTE:** May not be supported / may always return `false`.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// ### Example</span>
-<span class="doccomment">/// ```rust</span>
-<span class="doccomment">/// # use thindx::*;</span>
-<span class="doccomment">/// let should_rerender_frame = d3d::perf::query_repeat_frame();</span>
-<span class="doccomment">/// dbg!(should_rerender_frame); // false</span>
-<span class="doccomment">/// ```</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// ### Returns</span>
-<span class="doccomment">/// *   `true`      If the caller should repeat the same sequence of calls.</span>
-<span class="doccomment">/// *   `false`     If the caller should continue.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">query_repeat_frame</span>() -&gt; <span class="ident">bool</span> {
-    <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="ident">D3DPERF_QueryRepeatFrame</span>() };
-    <span class="ident">r</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span>
-}
-
-
-
-<span class="comment">//#cpp2rust D3DPERF_SetMarker = d3d::perf::set_marker</span>
-<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_setmarker)\]</span>
-<span class="doccomment">/// D3DPERF_SetMarker</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// Mark an instantaneous event.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// ### Example</span>
-<span class="doccomment">/// ```rust</span>
-<span class="doccomment">/// # use thindx::*;</span>
-<span class="doccomment">/// # if false {</span>
-<span class="doccomment">/// let scope = d3d::perf::begin_event(d3d::Color::argb(0), abistr::cstr16!(&quot;example scope&quot;));</span>
-<span class="doccomment">/// // ...</span>
-<span class="doccomment">/// if scope.is_ok() { drop(d3d::perf::set_marker(d3d::Color::argb(0), abistr::cstr16!(&quot;example scope&quot;))) }</span>
-<span class="doccomment">/// // ...</span>
-<span class="doccomment">/// if scope.is_ok() { drop(d3d::perf::end_event()) }</span>
-<span class="doccomment">/// # }</span>
-<span class="doccomment">/// ```</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_marker</span>(<span class="ident">col</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">d3d::Color</span><span class="op">&gt;</span>, <span class="ident">name</span>: <span class="kw">impl</span> <span class="ident">abistr::TryIntoAsCStr</span><span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="ident">col</span>     <span class="op">=</span> <span class="ident">col</span>.<span class="ident">into</span>().<span class="ident">into</span>();
-    <span class="kw">let</span> <span class="ident">name</span>    <span class="op">=</span> <span class="ident">name</span>.<span class="ident">try_into</span>().<span class="ident">map_err</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> ())<span class="question-mark">?</span>;
-    <span class="kw unsafe">unsafe</span> { <span class="ident">D3DPERF_SetMarker</span>(<span class="ident">col</span>, <span class="ident">name</span>.<span class="ident">as_cstr</span>()) };
-    <span class="prelude-val">Ok</span>(())
-}
-
-
-
-<span class="comment">//#cpp2rust D3DPERF_SetOptions = d3d::perf::set_options</span>
-<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_setoptions)\]</span>
-<span class="doccomment">/// D3DPERF_SetOptions</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// Set profiler options specified by the target program.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// ### Example</span>
-<span class="doccomment">/// ```rust</span>
-<span class="doccomment">/// # use thindx::*;</span>
-<span class="doccomment">/// d3d::perf::set_options(d3d::perf::Options::ForbidPix);</span>
-<span class="doccomment">/// d3d::perf::set_options(d3d::perf::Options::None);</span>
-<span class="doccomment">/// # for pow in 0 .. 32 {</span>
-<span class="doccomment">/// #   d3d::perf::set_options(d3d::perf::Options::from_unchecked(1 &lt;&lt; pow));</span>
-<span class="doccomment">/// # }</span>
-<span class="doccomment">/// # d3d::perf::set_options(d3d::perf::Options::None);</span>
-<span class="doccomment">/// ```</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_options</span>(<span class="ident">options</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Options</span><span class="op">&gt;</span>) {
-    <span class="comment">// MSDN&#39;s &quot;Syntax&quot; sections misdocuments this as having an `int` return.</span>
-    <span class="comment">// The &quot;Return value&quot; section states it &quot;doesn&#39;t return a value&quot;.</span>
-    <span class="comment">// The function returns `void` in the headers, so we trust the latter.</span>
-    <span class="kw">let</span> <span class="ident">options</span> <span class="op">=</span> <span class="ident">options</span>.<span class="ident">into</span>().<span class="ident">into</span>();
-    <span class="kw unsafe">unsafe</span> { <span class="ident">D3DPERF_SetOptions</span>(<span class="ident">options</span>) };
-}
-
-<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_setoptions#parameters)\]</span>
-<span class="doccomment">/// D3DPERF_SetOptions&#39;s dwOptions</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">Default</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">PartialOrd</span>, <span class="ident">Ord</span>, <span class="ident">Hash</span>)]</span>
-<span class="attribute">#[<span class="ident">repr</span>(<span class="ident">transparent</span>)]</span> <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Options</span>(<span class="ident">DWORD</span>);
-<span class="macro">flags!</span> { <span class="ident">Options</span> =&gt; <span class="ident">DWORD</span>; <span class="prelude-val">None</span>, <span class="ident">ForbidPix</span> }
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">non_upper_case_globals</span>)]</span> <span class="kw">impl</span> <span class="ident">Options</span> {
-    <span class="doccomment">/// No flags</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="prelude-val">None</span> : <span class="ident">Options</span> <span class="op">=</span> <span class="ident">Options</span>(<span class="number">0</span>);
-
-    <span class="doccomment">/// Notify PIX that the target program does not give permission to be profiled.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">ForbidPix</span> : <span class="ident">Options</span> <span class="op">=</span> <span class="ident">Options</span>(<span class="number">1</span>);
-}
-
-
-
-<span class="comment">//#cpp2rust D3DPERF_SetRegion = d3d::perf::set_region</span>
-<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_setregion)\]</span>
-<span class="doccomment">/// D3DPERF_SetRegion</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// Mark a series of frames with the specified color and name.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// **NOTE:** May not be supported (or may overwrite the results of an earlier [d3d::perf::begin_event]?)</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// ### Example</span>
-<span class="doccomment">/// ```rust</span>
-<span class="doccomment">/// # use thindx::*;</span>
-<span class="doccomment">/// # if false {</span>
-<span class="doccomment">/// let scope = d3d::perf::begin_event(d3d::Color::argb(0), abistr::cstr16!(&quot;example scope&quot;));</span>
-<span class="doccomment">/// // ...</span>
-<span class="doccomment">/// if scope.is_ok() { drop(d3d::perf::set_region(d3d::Color::argb(0), abistr::cstr16!(&quot;example scope&quot;))) }</span>
-<span class="doccomment">/// // ...</span>
-<span class="doccomment">/// if scope.is_ok() { drop(d3d::perf::end_event()) }</span>
-<span class="doccomment">/// # }</span>
-<span class="doccomment">/// ```</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_region</span>(<span class="ident">col</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">d3d::Color</span><span class="op">&gt;</span>, <span class="ident">name</span>: <span class="kw">impl</span> <span class="ident">abistr::TryIntoAsCStr</span><span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="ident">col</span>     <span class="op">=</span> <span class="ident">col</span>.<span class="ident">into</span>().<span class="ident">into</span>();
-    <span class="kw">let</span> <span class="ident">name</span>    <span class="op">=</span> <span class="ident">name</span>.<span class="ident">try_into</span>().<span class="ident">map_err</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> ())<span class="question-mark">?</span>;
-    <span class="kw unsafe">unsafe</span> { <span class="ident">D3DPERF_SetRegion</span>(<span class="ident">col</span>, <span class="ident">name</span>.<span class="ident">as_cstr</span>()) };
-    <span class="prelude-val">Ok</span>(())
-}
-
-
-
-<span class="doccomment">/// [D3DPERF_BeginEvent] .. [D3DPERF_EndEvent] were incorrectly matched</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// [D3DPERF_BeginEvent]:   https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_beginevent</span>
-<span class="doccomment">/// [D3DPERF_EndEvent]:     https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_endevent</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">EventMismatchError</span> {
-    <span class="ident">expected</span>:   <span class="ident">u32</span>,
-    <span class="ident">actual</span>:     <span class="ident">u32</span>, <span class="comment">// or == expected if none was present</span>
-}
-
-<span class="kw">impl</span> <span class="ident">std::error::Error</span> <span class="kw">for</span> <span class="ident">EventMismatchError</span> {
-    <span class="kw">fn</span> <span class="ident">description</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">str</span> { <span class="string">&quot;EventMismatchError: D3DPERF_BeginEvent .. D3DPERF_EndEvent were incorrectly paired&quot;</span> }
-}
-
-<span class="kw">impl</span> <span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">EventMismatchError</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">fmt</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
-        <span class="kw">let</span> <span class="self">Self</span> { <span class="ident">expected</span>, <span class="ident">actual</span> } <span class="op">=</span> <span class="kw-2">*</span><span class="self">self</span>;
-        <span class="kw">if</span> <span class="ident">expected</span> <span class="op">==</span> <span class="ident">actual</span> {
-            <span class="macro">write!</span>(<span class="ident">fmt</span>, <span class="string">&quot;d3d::perf::EventMismatchError {{ expected: {expected}, actual: N/A }}&quot;</span>)
-        } <span class="kw">else</span> {
-            <span class="macro">write!</span>(<span class="ident">fmt</span>, <span class="string">&quot;d3d::perf::EventMismatchError {{ expected: {expected}, actual: {actual} }}&quot;</span>)
-        }
-    }
-}
-
-<span class="kw">impl</span> <span class="ident">Display</span> <span class="kw">for</span> <span class="ident">EventMismatchError</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">fmt</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
-        <span class="kw">let</span> <span class="self">Self</span> { <span class="ident">expected</span>, <span class="ident">actual</span> } <span class="op">=</span> <span class="kw-2">*</span><span class="self">self</span>;
-        <span class="kw">if</span> <span class="ident">expected</span> <span class="op">==</span> <span class="ident">actual</span> {
-            <span class="macro">write!</span>(<span class="ident">fmt</span>, <span class="string">&quot;d3d::perf::EventMismatchError: D3DPERF_EndEvent failed (unclosed D3DPERF_BeginEvent)&quot;</span>)
-        } <span class="kw">else</span> {
-            <span class="macro">write!</span>(<span class="ident">fmt</span>, <span class="string">&quot;d3d::perf::EventMismatchError: D3DPERF_BeginEvent opened scope {expected}, but D3DPERF_EndEvent closed scope {actual}&quot;</span>)
-        }
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_endevent)\]
+/// D3DPERF_EndEvent
+///
+/// Marks the end of a user-defined event.
+///
+/// ### Returns
+/// *   Ok(level_of_the_ending_event: [u32])
+///
+/// ### Example
+/// ```rust
+/// # use thindx::*;
+/// # if false {
+/// let scope = d3d::perf::begin_event(d3d::Color::argb(0), abistr::cstr16!(&quot;example scope&quot;));
+/// // ...
+/// if scope.is_ok() { drop(d3d::perf::end_event()) }
+/// # }
+/// ```
+</span><span class="kw">pub fn </span>end_event() -&gt; <span class="prelude-ty">Result</span>&lt;u32, Error&gt; {
+    <span class="macro">fn_context!</span>(d3d::perf::end_event =&gt; D3DPERF_EndEvent);
+    <span class="kw">let </span>level   = <span class="kw">unsafe </span>{ D3DPERF_EndEvent() };
+    <span class="kw">if </span>level &lt; <span class="number">0 </span>{
+        <span class="macro">fn_err!</span>(THINERR::NONSPECIFIC)
+    } <span class="kw">else </span>{
+        <span class="prelude-val">Ok</span>(level <span class="kw">as _</span>)
     }
 }
 
 
 
-<span class="attribute">#[<span class="ident">test</span>]</span> <span class="kw">fn</span> <span class="ident">test_scope_spam</span>() {
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_getstatus)\]
+/// D3DPERF_GetStatus
+///
+/// Determine the current state of the profiler from the target program.
+///
+/// ### Returns
+/// *   `0`    If PIX is **not** profiling the target program.
+/// *   `?`    If PIX is profiling the target program
+///
+/// ### Example
+/// ```rust
+/// # use thindx::*;
+/// let is_pix_attached = d3d::perf::get_status() != 0;
+/// dbg!(is_pix_attached); // false
+/// ```
+</span><span class="kw">pub fn </span>get_status() -&gt; u32 {
+    <span class="macro">fn_context!</span>(d3d::perf::get_status =&gt; D3DPERF_GetStatus);
+    <span class="kw">unsafe </span>{ D3DPERF_GetStatus() }
+}
+
+
+
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_queryrepeatframe)\]
+/// D3DPERF_QueryRepeatFrame
+///
+/// Determine whether a performance profiler is requesting that the current frame be resubmitted to Direct3D for performance analysis.
+///
+/// **NOTE:** May not be supported / may always return `false`.
+///
+/// ### Returns
+/// *   `true`      If the caller should repeat the same sequence of calls.
+/// *   `false`     If the caller should continue.
+///
+/// ### Example
+/// ```rust
+/// # use thindx::*;
+/// let should_rerender_frame = d3d::perf::query_repeat_frame();
+/// dbg!(should_rerender_frame); // false
+/// ```
+</span><span class="kw">pub fn </span>query_repeat_frame() -&gt; bool {
+    <span class="macro">fn_context!</span>(d3d::perf::query_repeat_frame =&gt; D3DPERF_QueryRepeatFrame);
+    <span class="kw">let </span>r = <span class="kw">unsafe </span>{ D3DPERF_QueryRepeatFrame() };
+    r != <span class="number">0
+</span>}
+
+
+
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_setmarker)\]
+/// D3DPERF_SetMarker
+///
+/// Mark an instantaneous event.
+///
+/// ### Example
+/// ```rust
+/// # use thindx::*;
+/// # if false {
+/// let scope = d3d::perf::begin_event(d3d::Color::argb(0), abistr::cstr16!(&quot;example scope&quot;));
+/// // ...
+/// if scope.is_ok() { drop(d3d::perf::set_marker(d3d::Color::argb(0), abistr::cstr16!(&quot;example scope&quot;))) }
+/// // ...
+/// if scope.is_ok() { drop(d3d::perf::end_event()) }
+/// # }
+/// ```
+</span><span class="kw">pub fn </span>set_marker(col: <span class="kw">impl </span>Into&lt;d3d::Color&gt;, name: <span class="kw">impl </span>abistr::TryIntoAsCStr&lt;u16&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+    <span class="macro">fn_context!</span>(d3d::perf::set_marker =&gt; D3DPERF_SetMarker);
+    <span class="kw">let </span>col     = col.into().into();
+    <span class="kw">let </span>name    = <span class="macro">fn_param_try_into!</span>(name)<span class="question-mark">?</span>;
+    <span class="kw">unsafe </span>{ D3DPERF_SetMarker(col, name.as_cstr()) };
+    <span class="prelude-val">Ok</span>(())
+}
+
+
+
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_setoptions)\]
+/// D3DPERF_SetOptions
+///
+/// Set profiler options specified by the target program.
+///
+/// ### Example
+/// ```rust
+/// # use thindx::*;
+/// d3d::perf::set_options(d3d::perf::Options::ForbidPix);
+/// d3d::perf::set_options(d3d::perf::Options::None);
+/// # for pow in 0 .. 32 {
+/// #   d3d::perf::set_options(d3d::perf::Options::from_unchecked(1 &lt;&lt; pow));
+/// # }
+/// # d3d::perf::set_options(d3d::perf::Options::None);
+/// ```
+</span><span class="kw">pub fn </span>set_options(options: <span class="kw">impl </span>Into&lt;Options&gt;) {
+    <span class="macro">fn_context!</span>(d3d::perf::set_options =&gt; D3DPERF_SetOptions);
+    <span class="comment">// MSDN&#39;s &quot;Syntax&quot; sections misdocuments this as having an `int` return.
+    // The &quot;Return value&quot; section states it &quot;doesn&#39;t return a value&quot;.
+    // The function returns `void` in the headers, so we trust the latter.
+    </span><span class="kw">let </span>options = options.into().into();
+    <span class="kw">unsafe </span>{ D3DPERF_SetOptions(options) };
+}
+
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_setoptions#parameters)\]
+/// D3DPERF_SetOptions&#39;s dwOptions
+</span><span class="attribute">#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[repr(transparent)] </span><span class="kw">pub struct </span>Options(DWORD);
+<span class="macro">flags! </span>{ Options =&gt; DWORD; <span class="prelude-val">None</span>, ForbidPix }
+<span class="attribute">#[allow(non_upper_case_globals)] </span><span class="kw">impl </span>Options {
+    <span class="doccomment">/// No flags
+    </span><span class="kw">pub const </span><span class="prelude-val">None </span>: Options = Options(<span class="number">0</span>);
+
+    <span class="doccomment">/// Notify PIX that the target program does not give permission to be profiled.
+    </span><span class="kw">pub const </span>ForbidPix : Options = Options(<span class="number">1</span>);
+}
+
+
+
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_setregion)\]
+/// D3DPERF_SetRegion
+///
+/// Mark a series of frames with the specified color and name.
+///
+/// **NOTE:** May not be supported (or may overwrite the results of an earlier [d3d::perf::begin_event]?)
+///
+/// ### Example
+/// ```rust
+/// # use thindx::*;
+/// # if false {
+/// let scope = d3d::perf::begin_event(d3d::Color::argb(0), abistr::cstr16!(&quot;example scope&quot;));
+/// // ...
+/// if scope.is_ok() { drop(d3d::perf::set_region(d3d::Color::argb(0), abistr::cstr16!(&quot;example scope&quot;))) }
+/// // ...
+/// if scope.is_ok() { drop(d3d::perf::end_event()) }
+/// # }
+/// ```
+</span><span class="kw">pub fn </span>set_region(col: <span class="kw">impl </span>Into&lt;d3d::Color&gt;, name: <span class="kw">impl </span>abistr::TryIntoAsCStr&lt;u16&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+    <span class="macro">fn_context!</span>(d3d::perf::set_region =&gt; D3DPERF_SetRegion);
+    <span class="kw">let </span>col     = col.into().into();
+    <span class="kw">let </span>name    = <span class="macro">fn_param_try_into!</span>(name)<span class="question-mark">?</span>;
+    <span class="kw">unsafe </span>{ D3DPERF_SetRegion(col, name.as_cstr()) };
+    <span class="prelude-val">Ok</span>(())
+}
+
+
+
+<span class="doccomment">/// [D3DPERF_BeginEvent] .. [D3DPERF_EndEvent] were incorrectly matched
+///
+/// [D3DPERF_BeginEvent]:   https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_beginevent
+/// [D3DPERF_EndEvent]:     https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_endevent
+</span><span class="kw">pub struct </span>EventMismatchError {
+    expected:   u32,
+    actual:     u32, <span class="comment">// or == expected if none was present
+</span>}
+
+<span class="kw">impl </span>std::error::Error <span class="kw">for </span>EventMismatchError {
+    <span class="kw">fn </span>description(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>str { <span class="string">&quot;EventMismatchError: D3DPERF_BeginEvent .. D3DPERF_EndEvent were incorrectly paired&quot; </span>}
+}
+
+<span class="kw">impl </span>Debug <span class="kw">for </span>EventMismatchError {
+    <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, fmt: <span class="kw-2">&amp;mut </span>Formatter) -&gt; fmt::Result {
+        <span class="kw">let </span><span class="self">Self </span>{ expected, actual } = <span class="kw-2">*</span><span class="self">self</span>;
+        <span class="kw">if </span>expected == actual {
+            <span class="macro">write!</span>(fmt, <span class="string">&quot;d3d::perf::EventMismatchError {{ expected: {expected}, actual: N/A }}&quot;</span>)
+        } <span class="kw">else </span>{
+            <span class="macro">write!</span>(fmt, <span class="string">&quot;d3d::perf::EventMismatchError {{ expected: {expected}, actual: {actual} }}&quot;</span>)
+        }
+    }
+}
+
+<span class="kw">impl </span>Display <span class="kw">for </span>EventMismatchError {
+    <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, fmt: <span class="kw-2">&amp;mut </span>Formatter) -&gt; fmt::Result {
+        <span class="kw">let </span><span class="self">Self </span>{ expected, actual } = <span class="kw-2">*</span><span class="self">self</span>;
+        <span class="kw">if </span>expected == actual {
+            <span class="macro">write!</span>(fmt, <span class="string">&quot;d3d::perf::EventMismatchError: D3DPERF_EndEvent failed (unclosed D3DPERF_BeginEvent)&quot;</span>)
+        } <span class="kw">else </span>{
+            <span class="macro">write!</span>(fmt, <span class="string">&quot;d3d::perf::EventMismatchError: D3DPERF_BeginEvent opened scope {expected}, but D3DPERF_EndEvent closed scope {actual}&quot;</span>)
+        }
+    }
+}
+
+
+
+<span class="attribute">#[test] </span><span class="kw">fn </span>test_scope_spam() {
     <span class="macro">println!</span>(<span class="string">&quot;testing unbalanced ends&quot;</span>);
-    <span class="kw">for</span> <span class="kw">_</span> <span class="kw">in</span> <span class="number">0</span> .. <span class="number">1000</span> { <span class="ident">drop</span>(<span class="ident">end_event</span>()) }
+    <span class="kw">for _ in </span><span class="number">0 </span>.. <span class="number">1000 </span>{ drop(end_event()) }
 
     <span class="macro">println!</span>(<span class="string">&quot;testing unscoped markers&quot;</span>);
-    <span class="kw">for</span> <span class="kw">_</span> <span class="kw">in</span> <span class="number">0</span> .. <span class="number">1000</span> { <span class="ident">drop</span>(<span class="ident">set_marker</span>(<span class="ident">d3d::Color::argb</span>(<span class="number">0</span>), <span class="macro">abistr::cstr16!</span>(<span class="string">&quot;testing unscoped marker 123&quot;</span>))) }
+    <span class="kw">for _ in </span><span class="number">0 </span>.. <span class="number">1000 </span>{ drop(set_marker(d3d::Color::argb(<span class="number">0</span>), <span class="macro">abistr::cstr16!</span>(<span class="string">&quot;testing unscoped marker 123&quot;</span>))) }
 
     <span class="macro">println!</span>(<span class="string">&quot;testing unscoped regions&quot;</span>);
-    <span class="kw">for</span> <span class="kw">_</span> <span class="kw">in</span> <span class="number">0</span> .. <span class="number">1000</span> { <span class="ident">drop</span>(<span class="ident">set_region</span>(<span class="ident">d3d::Color::argb</span>(<span class="number">0</span>), <span class="macro">abistr::cstr16!</span>(<span class="string">&quot;testing unscoped region 123&quot;</span>))) }
+    <span class="kw">for _ in </span><span class="number">0 </span>.. <span class="number">1000 </span>{ drop(set_region(d3d::Color::argb(<span class="number">0</span>), <span class="macro">abistr::cstr16!</span>(<span class="string">&quot;testing unscoped region 123&quot;</span>))) }
 
     <span class="macro">println!</span>(<span class="string">&quot;testing begin&quot;</span>);
-    <span class="kw">for</span> <span class="kw">_</span> <span class="kw">in</span> <span class="number">0</span> .. <span class="number">1000</span> { <span class="ident">drop</span>(<span class="ident">begin_event</span>(<span class="ident">d3d::Color::argb</span>(<span class="number">0</span>), <span class="macro">abistr::cstr16!</span>(<span class="string">&quot;testing event 123&quot;</span>))) }
+    <span class="kw">for _ in </span><span class="number">0 </span>.. <span class="number">1000 </span>{ drop(begin_event(d3d::Color::argb(<span class="number">0</span>), <span class="macro">abistr::cstr16!</span>(<span class="string">&quot;testing event 123&quot;</span>))) }
 
     <span class="macro">println!</span>(<span class="string">&quot;testing scoped marker&quot;</span>);
-    <span class="kw">for</span> <span class="kw">_</span> <span class="kw">in</span> <span class="number">0</span> .. <span class="number">1000</span> { <span class="ident">drop</span>(<span class="ident">set_marker</span>(<span class="ident">d3d::Color::argb</span>(<span class="number">0</span>), <span class="macro">abistr::cstr16!</span>(<span class="string">&quot;testing marker 123&quot;</span>))) }
+    <span class="kw">for _ in </span><span class="number">0 </span>.. <span class="number">1000 </span>{ drop(set_marker(d3d::Color::argb(<span class="number">0</span>), <span class="macro">abistr::cstr16!</span>(<span class="string">&quot;testing marker 123&quot;</span>))) }
 
     <span class="macro">println!</span>(<span class="string">&quot;testing scoped region&quot;</span>);
-    <span class="kw">for</span> <span class="kw">_</span> <span class="kw">in</span> <span class="number">0</span> .. <span class="number">1000</span> { <span class="ident">drop</span>(<span class="ident">set_region</span>(<span class="ident">d3d::Color::argb</span>(<span class="number">0</span>), <span class="macro">abistr::cstr16!</span>(<span class="string">&quot;testing region 123&quot;</span>))) }
+    <span class="kw">for _ in </span><span class="number">0 </span>.. <span class="number">1000 </span>{ drop(set_region(d3d::Color::argb(<span class="number">0</span>), <span class="macro">abistr::cstr16!</span>(<span class="string">&quot;testing region 123&quot;</span>))) }
 
     <span class="macro">println!</span>(<span class="string">&quot;testing end&quot;</span>);
-    <span class="kw">for</span> <span class="kw">_</span> <span class="kw">in</span> <span class="number">0</span> .. <span class="number">1000</span> { <span class="ident">drop</span>(<span class="ident">end_event</span>()) }
+    <span class="kw">for _ in </span><span class="number">0 </span>.. <span class="number">1000 </span>{ drop(end_event()) }
 
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">scopes</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
+    <span class="kw">let </span><span class="kw-2">mut </span>scopes = Vec::new();
 
     <span class="macro">println!</span>(<span class="string">&quot;testing scope spam&quot;</span>);
-    <span class="kw">for</span> <span class="kw">_</span> <span class="kw">in</span> <span class="number">0</span> .. <span class="number">1000</span> { <span class="ident">scopes</span>.<span class="ident">push</span>(<span class="ident">event_scope</span>(<span class="ident">d3d::Color::argb</span>(<span class="number">0</span>), <span class="macro">abistr::cstr16!</span>(<span class="string">&quot;testing event scope&quot;</span>))) }
-    <span class="kw">while</span> <span class="op">!</span><span class="ident">scopes</span>.<span class="ident">is_empty</span>() { <span class="ident">scopes</span>.<span class="ident">pop</span>(); } <span class="comment">// default drop order not guaranteed</span>
+    <span class="kw">for _ in </span><span class="number">0 </span>.. <span class="number">1000 </span>{ scopes.push(event_scope(d3d::Color::argb(<span class="number">0</span>), <span class="macro">abistr::cstr16!</span>(<span class="string">&quot;testing event scope&quot;</span>))) }
+    <span class="kw">while </span>!scopes.is_empty() { scopes.pop(); } <span class="comment">// default drop order not guaranteed
 
-    <span class="macro">println!</span>(<span class="string">&quot;testing conditional scope spam&quot;</span>);
-    <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span> .. <span class="number">1000</span> { <span class="ident">scopes</span>.<span class="ident">push</span>(<span class="ident">event_scope_if</span>(<span class="ident">i</span><span class="op">%</span><span class="number">2</span><span class="op">==</span><span class="number">0</span>, <span class="ident">d3d::Color::argb</span>(<span class="number">0</span>), <span class="macro">abistr::cstr16!</span>(<span class="string">&quot;testing event scope&quot;</span>))) }
-    <span class="kw">while</span> <span class="op">!</span><span class="ident">scopes</span>.<span class="ident">is_empty</span>() { <span class="ident">scopes</span>.<span class="ident">pop</span>(); } <span class="comment">// default drop order not guaranteed</span>
-}
+    </span><span class="macro">println!</span>(<span class="string">&quot;testing conditional scope spam&quot;</span>);
+    <span class="kw">for </span>i <span class="kw">in </span><span class="number">0 </span>.. <span class="number">1000 </span>{ scopes.push(event_scope_if(i%<span class="number">2</span>==<span class="number">0</span>, d3d::Color::argb(<span class="number">0</span>), <span class="macro">abistr::cstr16!</span>(<span class="string">&quot;testing event scope&quot;</span>))) }
+    <span class="kw">while </span>!scopes.is_empty() { scopes.pop(); } <span class="comment">// default drop order not guaranteed
+</span>}
 </code></pre></div>
-</section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-search-index-js="../../../../../search-index.js" data-search-js="../../../../../search.js"></div>
-</body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (b44197abb 2022-09-05)" ></div></body></html>

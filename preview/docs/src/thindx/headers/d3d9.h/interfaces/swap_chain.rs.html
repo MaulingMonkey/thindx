@@ -1,103 +1,102 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3d9.h\interfaces\swap_chain.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>swap_chain.rs - source</title><link rel="stylesheet" type="text/css" href="../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script src="../../../../../crates.js"></script><script defer src="../../../../../main.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script>
-    <noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"><style type="text/css">#crate-search{background-image:url("../../../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../../../../thindx/index.html'><div class='logo-container rust-logo'><img src='../../../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../../../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../../../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../../../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
-<span id="2">  2</span>
-<span id="3">  3</span>
-<span id="4">  4</span>
-<span id="5">  5</span>
-<span id="6">  6</span>
-<span id="7">  7</span>
-<span id="8">  8</span>
-<span id="9">  9</span>
-<span id="10"> 10</span>
-<span id="11"> 11</span>
-<span id="12"> 12</span>
-<span id="13"> 13</span>
-<span id="14"> 14</span>
-<span id="15"> 15</span>
-<span id="16"> 16</span>
-<span id="17"> 17</span>
-<span id="18"> 18</span>
-<span id="19"> 19</span>
-<span id="20"> 20</span>
-<span id="21"> 21</span>
-<span id="22"> 22</span>
-<span id="23"> 23</span>
-<span id="24"> 24</span>
-<span id="25"> 25</span>
-<span id="26"> 26</span>
-<span id="27"> 27</span>
-<span id="28"> 28</span>
-<span id="29"> 29</span>
-<span id="30"> 30</span>
-<span id="31"> 31</span>
-<span id="32"> 32</span>
-<span id="33"> 33</span>
-<span id="34"> 34</span>
-<span id="35"> 35</span>
-<span id="36"> 36</span>
-<span id="37"> 37</span>
-<span id="38"> 38</span>
-<span id="39"> 39</span>
-<span id="40"> 40</span>
-<span id="41"> 41</span>
-<span id="42"> 42</span>
-<span id="43"> 43</span>
-<span id="44"> 44</span>
-<span id="45"> 45</span>
-<span id="46"> 46</span>
-<span id="47"> 47</span>
-<span id="48"> 48</span>
-<span id="49"> 49</span>
-<span id="50"> 50</span>
-<span id="51"> 51</span>
-<span id="52"> 52</span>
-<span id="53"> 53</span>
-<span id="54"> 54</span>
-<span id="55"> 55</span>
-<span id="56"> 56</span>
-<span id="57"> 57</span>
-<span id="58"> 58</span>
-<span id="59"> 59</span>
-<span id="60"> 60</span>
-<span id="61"> 61</span>
-<span id="62"> 62</span>
-<span id="63"> 63</span>
-<span id="64"> 64</span>
-<span id="65"> 65</span>
-<span id="66"> 66</span>
-<span id="67"> 67</span>
-<span id="68"> 68</span>
-<span id="69"> 69</span>
-<span id="70"> 70</span>
-<span id="71"> 71</span>
-<span id="72"> 72</span>
-<span id="73"> 73</span>
-<span id="74"> 74</span>
-<span id="75"> 75</span>
-<span id="76"> 76</span>
-<span id="77"> 77</span>
-<span id="78"> 78</span>
-<span id="79"> 79</span>
-<span id="80"> 80</span>
-<span id="81"> 81</span>
-<span id="82"> 82</span>
-<span id="83"> 83</span>
-<span id="84"> 84</span>
-<span id="85"> 85</span>
-<span id="86"> 86</span>
-<span id="87"> 87</span>
-<span id="88"> 88</span>
-<span id="89"> 89</span>
-<span id="90"> 90</span>
-<span id="91"> 91</span>
-<span id="92"> 92</span>
-<span id="93"> 93</span>
-<span id="94"> 94</span>
-<span id="95"> 95</span>
-<span id="96"> 96</span>
-<span id="97"> 97</span>
-<span id="98"> 98</span>
-<span id="99"> 99</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3d9.h\interfaces\swap_chain.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>swap_chain.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../../normalize.css"><link rel="stylesheet" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../../dark.css" disabled><link rel="stylesheet" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<span id="2">2</span>
+<span id="3">3</span>
+<span id="4">4</span>
+<span id="5">5</span>
+<span id="6">6</span>
+<span id="7">7</span>
+<span id="8">8</span>
+<span id="9">9</span>
+<span id="10">10</span>
+<span id="11">11</span>
+<span id="12">12</span>
+<span id="13">13</span>
+<span id="14">14</span>
+<span id="15">15</span>
+<span id="16">16</span>
+<span id="17">17</span>
+<span id="18">18</span>
+<span id="19">19</span>
+<span id="20">20</span>
+<span id="21">21</span>
+<span id="22">22</span>
+<span id="23">23</span>
+<span id="24">24</span>
+<span id="25">25</span>
+<span id="26">26</span>
+<span id="27">27</span>
+<span id="28">28</span>
+<span id="29">29</span>
+<span id="30">30</span>
+<span id="31">31</span>
+<span id="32">32</span>
+<span id="33">33</span>
+<span id="34">34</span>
+<span id="35">35</span>
+<span id="36">36</span>
+<span id="37">37</span>
+<span id="38">38</span>
+<span id="39">39</span>
+<span id="40">40</span>
+<span id="41">41</span>
+<span id="42">42</span>
+<span id="43">43</span>
+<span id="44">44</span>
+<span id="45">45</span>
+<span id="46">46</span>
+<span id="47">47</span>
+<span id="48">48</span>
+<span id="49">49</span>
+<span id="50">50</span>
+<span id="51">51</span>
+<span id="52">52</span>
+<span id="53">53</span>
+<span id="54">54</span>
+<span id="55">55</span>
+<span id="56">56</span>
+<span id="57">57</span>
+<span id="58">58</span>
+<span id="59">59</span>
+<span id="60">60</span>
+<span id="61">61</span>
+<span id="62">62</span>
+<span id="63">63</span>
+<span id="64">64</span>
+<span id="65">65</span>
+<span id="66">66</span>
+<span id="67">67</span>
+<span id="68">68</span>
+<span id="69">69</span>
+<span id="70">70</span>
+<span id="71">71</span>
+<span id="72">72</span>
+<span id="73">73</span>
+<span id="74">74</span>
+<span id="75">75</span>
+<span id="76">76</span>
+<span id="77">77</span>
+<span id="78">78</span>
+<span id="79">79</span>
+<span id="80">80</span>
+<span id="81">81</span>
+<span id="82">82</span>
+<span id="83">83</span>
+<span id="84">84</span>
+<span id="85">85</span>
+<span id="86">86</span>
+<span id="87">87</span>
+<span id="88">88</span>
+<span id="89">89</span>
+<span id="90">90</span>
+<span id="91">91</span>
+<span id="92">92</span>
+<span id="93">93</span>
+<span id="94">94</span>
+<span id="95">95</span>
+<span id="96">96</span>
+<span id="97">97</span>
+<span id="98">98</span>
+<span id="99">99</span>
 <span id="100">100</span>
 <span id="101">101</span>
 <span id="102">102</span>
@@ -181,216 +180,187 @@
 <span id="180">180</span>
 <span id="181">181</span>
 <span id="182">182</span>
-<span id="183">183</span>
-<span id="184">184</span>
-<span id="185">185</span>
-<span id="186">186</span>
-<span id="187">187</span>
-<span id="188">188</span>
-<span id="189">189</span>
-<span id="190">190</span>
-<span id="191">191</span>
-<span id="192">192</span>
-<span id="193">193</span>
-<span id="194">194</span>
-<span id="195">195</span>
-<span id="196">196</span>
-</pre><pre class="rust"><code><span class="comment">//#![deny(broken_intra_doc_links)]</span>
+</pre><pre class="rust"><code><span class="comment">//#![deny(broken_intra_doc_links)]
 
-<span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::d3d9</span>::<span class="kw-2">*</span>;
+</span><span class="kw">use super</span>::<span class="kw-2">*</span>;
+<span class="kw">use crate</span>::<span class="kw-2">*</span>;
+<span class="kw">use </span><span class="kw">crate</span>::d3d9::<span class="kw-2">*</span>;
 
-<span class="kw">use</span> <span class="ident">winapi::shared::d3d9</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident">winapi::shared::d3d9types::D3DPRESENT_PARAMETERS</span>;
-<span class="kw">use</span> <span class="ident">winapi::shared::minwindef::UINT</span>;
-<span class="kw">use</span> <span class="ident">winapi::um::unknwnbase::IUnknown</span>;
-<span class="kw">use</span> <span class="ident">winapi::um::wingdi</span>::{<span class="ident">RDH_RECTANGLES</span>, <span class="ident">RGNDATA</span>, <span class="ident">RGNDATAHEADER</span>};
+<span class="kw">use </span>bytemuck::<span class="kw-2">*</span>;
 
-<span class="kw">use</span> <span class="ident">std::convert::TryInto</span>;
-<span class="kw">use</span> <span class="ident">std::ptr</span>::<span class="kw-2">*</span>;
+<span class="kw">use </span>winapi::shared::d3d9::<span class="kw-2">*</span>;
+<span class="kw">use </span>winapi::um::unknwnbase::IUnknown;
+<span class="kw">use </span>winapi::um::wingdi::{RDH_RECTANGLES, RGNDATA, RGNDATAHEADER};
+
+<span class="kw">use </span>std::ptr::<span class="kw-2">*</span>;
 
 
 
-<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dswapchain9)\]</span>
-<span class="doccomment">/// Manages swapping buffers for a view.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>)]</span> <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">transparent</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SwapChain</span>(<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="ident">mcom::Rc</span><span class="op">&lt;</span><span class="ident">IDirect3DSwapChain9</span><span class="op">&gt;</span>);
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dswapchain9)\]
+/// Manages swapping buffers for a view.
+</span><span class="attribute">#[derive(Clone)] #[repr(transparent)]
+</span><span class="kw">pub struct </span>SwapChain(<span class="kw">pub</span>(<span class="kw">crate</span>) mcom::Rc&lt;IDirect3DSwapChain9&gt;);
 
-<span class="kw unsafe">unsafe</span> <span class="kw">impl</span> <span class="ident">AsSafe</span><span class="op">&lt;</span><span class="ident">IUnknown</span>             <span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">SwapChain</span> { <span class="kw">fn</span> <span class="ident">as_safe</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">IUnknown</span>             { <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="kw-2">*</span><span class="self">self</span>.<span class="number">0</span> } }
-<span class="kw unsafe">unsafe</span> <span class="kw">impl</span> <span class="ident">AsSafe</span><span class="op">&lt;</span><span class="ident">IDirect3DSwapChain9</span>  <span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">SwapChain</span> { <span class="kw">fn</span> <span class="ident">as_safe</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">IDirect3DSwapChain9</span>  { <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="self">self</span>.<span class="number">0</span> } }
+<span class="kw">unsafe impl </span>AsSafe&lt;IUnknown             &gt; <span class="kw">for </span>SwapChain { <span class="kw">fn </span>as_safe(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>IUnknown             { <span class="kw-2">&amp;**</span><span class="self">self</span>.<span class="number">0 </span>} }
+<span class="kw">unsafe impl </span>AsSafe&lt;IDirect3DSwapChain9  &gt; <span class="kw">for </span>SwapChain { <span class="kw">fn </span>as_safe(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>IDirect3DSwapChain9  { <span class="kw-2">&amp;*</span><span class="self">self</span>.<span class="number">0 </span>} }
 
 
 
-<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dswapchain9)\]</span>
-<span class="doccomment">/// IDirect3DSwapChain9 extension methods</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// ### Methods</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// | thindx                                                    | docs.microsoft.com        | description   |</span>
-<span class="doccomment">/// | --------------------------------------------------------- | ------------------------- | ------------- |</span>
-<span class="doccomment">/// | [get_back_buffer](Self::get_back_buffer)                  | [GetBackBuffer]           | Retrieves a back buffer from the swap chain of the device.</span>
-<span class="doccomment">/// | [get_device](Self::get_device)                            | [GetDevice]               | Retrieves the device associated with the swap chain.</span>
-<span class="doccomment">/// | [get_display_mode](Self::get_display_mode)                | [GetDisplayMode]          | Retrieves the current resolution / refresh rate.</span>
-<span class="doccomment">/// | [get_front_buffer_data](Self::get_front_buffer_data)      | [GetFrontBufferData]      | Retrieves a copy of the swapchain&#39;s front buffer</span>
-<span class="doccomment">/// | [get_present_parameters](Self::get_present_parameters)    | [GetPresentParameters]    | Retrieves the presentation parameters associated with a swap chain.</span>
-<span class="doccomment">/// | [get_raster_status](Self::get_raster_status)              | [GetRasterStatus]         | Returns vblank/scanline status for the swap chain&#39;s presentation monitor.</span>
-<span class="doccomment">/// | [present](Self::present)                                  | [Present]                 | Presents the contents of the next back buffer.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// ### See Also</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// *   [IDirect3DDevice9Ext::create_additional_swap_chain]</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// [GetBackBuffer]:        https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getbackbuffer</span>
-<span class="doccomment">/// [GetDevice]:            https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getdevice</span>
-<span class="doccomment">/// [GetDisplayMode]:       https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getdisplaymode</span>
-<span class="doccomment">/// [GetFrontBufferData]:   https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getfrontbufferdata</span>
-<span class="doccomment">/// [GetPresentParameters]: https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getpresentparameters</span>
-<span class="doccomment">/// [GetRasterStatus]:      https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getrasterstatus</span>
-<span class="doccomment">/// [Present]:              https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-present</span>
-<span class="doccomment">///</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">IDirect3DSwapChain9Ext</span> : <span class="ident">AsSafe</span><span class="op">&lt;</span><span class="ident">IDirect3DSwapChain9</span><span class="op">&gt;</span> {
-    <span class="kw">type</span> <span class="ident">Device</span>     : <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Device</span><span class="op">&gt;</span>;
-    <span class="kw">type</span> <span class="ident">Surface</span>    : <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Surface</span><span class="op">&gt;</span>;
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dswapchain9)\]
+/// IDirect3DSwapChain9 extension methods
+///
+/// ### Methods
+/// | thindx                                                    | docs.microsoft.com        | description   |
+/// | --------------------------------------------------------- | ------------------------- | ------------- |
+/// | [get_back_buffer](Self::get_back_buffer)                  | [GetBackBuffer]           | Retrieves a back buffer from the swap chain of the device.
+/// | [get_device](Self::get_device)                            | [GetDevice]               | Retrieves the device associated with the swap chain.
+/// | [get_display_mode](Self::get_display_mode)                | [GetDisplayMode]          | Retrieves the current resolution / refresh rate.
+/// | [get_front_buffer_data](Self::get_front_buffer_data)      | [GetFrontBufferData]      | Retrieves a copy of the swapchain&#39;s front buffer
+/// | [get_present_parameters](Self::get_present_parameters)    | [GetPresentParameters]    | Retrieves the presentation parameters associated with a swap chain.
+/// | [get_raster_status](Self::get_raster_status)              | [GetRasterStatus]         | Returns vblank/scanline status for the swap chain&#39;s presentation monitor.
+/// | [present](Self::present)                                  | [Present]                 | Presents the contents of the next back buffer.
+///
+/// ### See Also
+/// *   [IDirect3DDevice9Ext::create_additional_swap_chain]
+///
+/// [GetBackBuffer]:        https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getbackbuffer
+/// [GetDevice]:            https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getdevice
+/// [GetDisplayMode]:       https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getdisplaymode
+/// [GetFrontBufferData]:   https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getfrontbufferdata
+/// [GetPresentParameters]: https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getpresentparameters
+/// [GetRasterStatus]:      https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getrasterstatus
+/// [Present]:              https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-present
+///
+</span><span class="kw">pub trait </span>IDirect3DSwapChain9Ext : AsSafe&lt;IDirect3DSwapChain9&gt; {
+    <span class="kw">type </span>Device     : From&lt;Device&gt;;
+    <span class="kw">type </span>Surface    : From&lt;Surface&gt;;
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getbackbuffer)\]</span>
-    <span class="doccomment">/// IDirect3DSwapChain9::GetBackBuffer</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Retrieves a back buffer from the swap chain of the device.</span>
-    <span class="kw">fn</span> <span class="ident">get_back_buffer</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">i_back_buffer</span>: <span class="kw">impl</span> <span class="ident">TryInto</span><span class="op">&lt;</span><span class="ident">UINT</span><span class="op">&gt;</span>, <span class="ident">ty</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">BackBufferType</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Surface</span>, <span class="ident">MethodError</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">i_back_buffer</span> <span class="op">=</span> <span class="ident">i_back_buffer</span>.<span class="ident">try_into</span>().<span class="ident">map_err</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">MethodError</span>(<span class="string">&quot;IDirect3DSwapChain9::GetBackBuffer&quot;</span>, <span class="ident">THINERR::SLICE_OVERFLOW</span>))<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">ty</span> <span class="op">=</span> <span class="ident">ty</span>.<span class="ident">into</span>().<span class="ident">into</span>();
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">back_buffer</span> <span class="op">=</span> <span class="ident">null_mut</span>();
-        <span class="kw">let</span> <span class="ident">hr</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="ident">as_winapi</span>().<span class="ident">GetBackBuffer</span>(<span class="ident">i_back_buffer</span>, <span class="ident">ty</span>, <span class="kw-2">&amp;mut</span> <span class="ident">back_buffer</span>) };
-        <span class="ident">MethodError::check</span>(<span class="string">&quot;IDirect3DSwapChain9::GetBackBuffer&quot;</span>, <span class="ident">hr</span>)<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(<span class="ident"><span class="self">Self</span>::Surface::from</span>(<span class="kw unsafe">unsafe</span> { <span class="ident">Surface::from_raw</span>(<span class="ident">back_buffer</span>) }))
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getbackbuffer)\]
+    /// IDirect3DSwapChain9::GetBackBuffer
+    ///
+    /// Retrieves a back buffer from the swap chain of the device.
+    </span><span class="kw">fn </span>get_back_buffer(<span class="kw-2">&amp;</span><span class="self">self</span>, i_back_buffer: u32, ty: <span class="kw">impl </span>Into&lt;BackBufferType&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>::Surface, Error&gt; {
+        <span class="macro">fn_context!</span>(d3d9::IDirect3DSwapChain9Ext::get_back_buffer =&gt; IDirect3DSwapChain9::GetBackBuffer);
+        <span class="kw">let </span>ty = ty.into().into();
+        <span class="kw">let </span><span class="kw-2">mut </span>back_buffer = null_mut();
+        <span class="macro">fn_check_hr!</span>(<span class="kw">unsafe </span>{ <span class="self">self</span>.as_winapi().GetBackBuffer(i_back_buffer, ty, <span class="kw-2">&amp;mut </span>back_buffer) })<span class="question-mark">?</span>;
+        <span class="prelude-val">Ok</span>(<span class="self">Self</span>::Surface::from(<span class="kw">unsafe </span>{ Surface::from_raw(back_buffer) }))
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getdevice)\]</span>
-    <span class="doccomment">/// IDirect3DSwapChain9::GetDevice</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Retrieves the device associated with the swap chain.</span>
-    <span class="kw">fn</span> <span class="ident">get_device</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Device</span>, <span class="ident">MethodError</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">device</span> <span class="op">=</span> <span class="ident">null_mut</span>();
-        <span class="kw">let</span> <span class="ident">hr</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="ident">as_winapi</span>().<span class="ident">GetDevice</span>(<span class="kw-2">&amp;mut</span> <span class="ident">device</span>) };
-        <span class="ident">MethodError::check</span>(<span class="string">&quot;IDirect3DSwapChain9::GetDevice&quot;</span>, <span class="ident">hr</span>)<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(<span class="ident"><span class="self">Self</span>::Device::from</span>(<span class="kw unsafe">unsafe</span> { <span class="ident">Device::from_raw</span>(<span class="ident">device</span>) }))
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getdevice)\]
+    /// IDirect3DSwapChain9::GetDevice
+    ///
+    /// Retrieves the device associated with the swap chain.
+    </span><span class="kw">fn </span>get_device(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>::Device, Error&gt; {
+        <span class="macro">fn_context!</span>(d3d9::IDirect3DSwapChain9Ext::get_device =&gt; IDirect3DSwapChain9::GetDevice);
+        <span class="kw">let </span><span class="kw-2">mut </span>device = null_mut();
+        <span class="macro">fn_check_hr!</span>(<span class="kw">unsafe </span>{ <span class="self">self</span>.as_winapi().GetDevice(<span class="kw-2">&amp;mut </span>device) })<span class="question-mark">?</span>;
+        <span class="prelude-val">Ok</span>(<span class="self">Self</span>::Device::from(<span class="kw">unsafe </span>{ Device::from_raw(device) }))
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getdisplaymode)\]</span>
-    <span class="doccomment">/// IDirect3DSwapChain9::GetDisplayMode</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Retrieves the display mode&#39;s spatial resolution, color resolution, and refresh frequency.</span>
-    <span class="kw">fn</span> <span class="ident">get_display_mode</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">DisplayMode</span>, <span class="ident">MethodError</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">dm</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="ident">std::mem::zeroed</span>() };
-        <span class="kw">let</span> <span class="ident">hr</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="ident">as_winapi</span>().<span class="ident">GetDisplayMode</span>(<span class="kw-2">&amp;mut</span> <span class="ident">dm</span>) };
-        <span class="ident">MethodError::check</span>(<span class="string">&quot;IDirect3DSwapChain9::GetDisplayMode&quot;</span>, <span class="ident">hr</span>)<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(<span class="ident">DisplayMode::from</span>(<span class="ident">dm</span>))
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getdisplaymode)\]
+    /// IDirect3DSwapChain9::GetDisplayMode
+    ///
+    /// Retrieves the display mode&#39;s spatial resolution, color resolution, and refresh frequency.
+    </span><span class="kw">fn </span>get_display_mode(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;DisplayMode, Error&gt; {
+        <span class="macro">fn_context!</span>(d3d9::IDirect3DSwapChain9Ext::get_display_mode =&gt; IDirect3DSwapChain9::GetDisplayMode);
+        <span class="kw">let </span><span class="kw-2">mut </span>dm = DisplayMode::zeroed();
+        <span class="macro">fn_check_hr!</span>(<span class="kw">unsafe </span>{ <span class="self">self</span>.as_winapi().GetDisplayMode(dm.as_mut()) })<span class="question-mark">?</span>;
+        <span class="prelude-val">Ok</span>(dm)
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getfrontbufferdata)\]</span>
-    <span class="doccomment">/// IDirect3DSwapChain9::GetFrontBufferData</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Retrieves a copy of the swapchain&#39;s front buffer</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### ⚠️ Safety ⚠️</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// *   `dest_surface` may need to belong to the same [`Device`] as `self`</span>
-    <span class="doccomment">/// *   `dest_surface` may need to be the size of the entire desktop if the [`Device`] is in windowed mode</span>
-    <span class="kw unsafe">unsafe</span> <span class="kw">fn</span> <span class="ident">get_front_buffer_data</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">dest_surface</span>: <span class="kw-2">&amp;</span><span class="kw">impl</span> <span class="ident">IDirect3DSurface9Ext</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">MethodError</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">hr</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="ident">as_winapi</span>().<span class="ident">GetFrontBufferData</span>(<span class="ident">dest_surface</span>.<span class="ident">as_winapi</span>() <span class="kw">as</span> <span class="kw-2">*const</span> <span class="kw">_</span> <span class="kw">as</span> <span class="kw-2">*mut</span> <span class="kw">_</span>) };
-        <span class="ident">MethodError::check</span>(<span class="string">&quot;IDirect3DSwapChain9::GetFrontBufferData&quot;</span>, <span class="ident">hr</span>)
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getfrontbufferdata)\]
+    /// IDirect3DSwapChain9::GetFrontBufferData
+    ///
+    /// Retrieves a copy of the swapchain&#39;s front buffer
+    ///
+    /// ### ⚠️ Safety ⚠️
+    /// *   `dest_surface` may need to belong to the same [`Device`] as `self`
+    /// *   `dest_surface` may need to be the size of the entire desktop if the [`Device`] is in windowed mode
+    </span><span class="kw">unsafe fn </span>get_front_buffer_data(<span class="kw-2">&amp;</span><span class="self">self</span>, dest_surface: <span class="kw-2">&amp;</span><span class="kw">impl </span>IDirect3DSurface9Ext) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+        <span class="macro">fn_context!</span>(d3d9::IDirect3DSwapChain9Ext::get_front_buffer_data =&gt; IDirect3DSwapChain9::GetFrontBufferData);
+        <span class="macro">fn_check_hr!</span>(<span class="kw">unsafe </span>{ <span class="self">self</span>.as_winapi().GetFrontBufferData(dest_surface.as_winapi() <span class="kw">as </span><span class="kw-2">*const </span><span class="kw">_ as </span><span class="kw-2">*mut </span><span class="kw">_</span>) })
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getpresentparameters)\]</span>
-    <span class="doccomment">/// IDirect3DSwapChain9::GetPresentParameters</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Retrieves the presentation parameters associated with a swap chain.</span>
-    <span class="kw">fn</span> <span class="ident">get_present_parameters</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">D3DPRESENT_PARAMETERS</span>, <span class="ident">MethodError</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">pp</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="ident">std::mem::zeroed</span>() };
-        <span class="kw">let</span> <span class="ident">hr</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="ident">as_winapi</span>().<span class="ident">GetPresentParameters</span>(<span class="kw-2">&amp;mut</span> <span class="ident">pp</span>) };
-        <span class="ident">MethodError::check</span>(<span class="string">&quot;IDirect3DSwapChain9::GetPresentParameters&quot;</span>, <span class="ident">hr</span>)<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(<span class="ident">pp</span>)
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getpresentparameters)\]
+    /// IDirect3DSwapChain9::GetPresentParameters
+    ///
+    /// Retrieves the presentation parameters associated with a swap chain.
+    </span><span class="kw">fn </span>get_present_parameters(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;d3d::PresentParameters&lt;<span class="lifetime">&#39;_</span>&gt;, Error&gt; {
+        <span class="macro">fn_context!</span>(d3d9::IDirect3DSwapChain9Ext::get_present_parameters =&gt; IDirect3DSwapChain9::GetPresentParameters);
+        <span class="kw">let </span><span class="kw-2">mut </span>pp = d3d::PresentParameters::zeroed();
+        <span class="kw">let </span>hr = <span class="kw">unsafe </span>{ <span class="self">self</span>.as_winapi().GetPresentParameters(pp.as_mut()) };
+        <span class="macro">debug_assert!</span>(pp.device_window.as_ref().map_or(<span class="bool-val">true</span>, |w| w.is_valid()), <span class="string">&quot;IDirect3DSwapChain9Ext::get_present_parameters: device_window isn&#39;t valid&quot;</span>);
+        <span class="macro">fn_check_hr!</span>(hr)<span class="question-mark">?</span>;
+        <span class="prelude-val">Ok</span>(pp)
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getrasterstatus)\]</span>
-    <span class="doccomment">/// IDirect3DSwapChain9::GetRasterStatus</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Returns information describing the raster of the monitor on which the swap chain is presented.</span>
-    <span class="kw">fn</span> <span class="ident">get_raster_status</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">RasterStatus</span>, <span class="ident">MethodError</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rs</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="ident">std::mem::zeroed</span>() };
-        <span class="kw">let</span> <span class="ident">hr</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="ident">as_winapi</span>().<span class="ident">GetRasterStatus</span>(<span class="kw-2">&amp;mut</span> <span class="ident">rs</span>) };
-        <span class="ident">MethodError::check</span>(<span class="string">&quot;IDirect3DSwapChain9::GetRasterStatus&quot;</span>, <span class="ident">hr</span>)<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(<span class="ident">RasterStatus::from</span>(<span class="ident">rs</span>))
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getrasterstatus)\]
+    /// IDirect3DSwapChain9::GetRasterStatus
+    ///
+    /// Returns information describing the raster of the monitor on which the swap chain is presented.
+    </span><span class="kw">fn </span>get_raster_status(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;RasterStatus, Error&gt; {
+        <span class="macro">fn_context!</span>(d3d9::IDirect3DSwapChain9Ext::get_raster_status =&gt; IDirect3DSwapChain9::GetRasterStatus);
+        <span class="kw">let </span><span class="kw-2">mut </span>rs = RasterStatus::zeroed();
+        <span class="macro">fn_check_hr!</span>(<span class="kw">unsafe </span>{ <span class="self">self</span>.as_winapi().GetRasterStatus(rs.as_mut()) })<span class="question-mark">?</span>;
+        <span class="prelude-val">Ok</span>(rs)
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-present)\]</span>
-    <span class="doccomment">/// IDirect3DSwapChain9::Present</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Presents the contents of the next buffer in the sequence of back buffers owned by the swap chain.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### ⚠️ Safety ⚠️</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// *   It&#39;s likely unsound to use an invalid, non-null `hwnd`</span>
-    <span class="doccomment">/// *   It&#39;s likely unsound to use a null `hwnd` if the original `presentation_parameters.hDeviceWindow` is an invalid, non-null HWND</span>
-    <span class="doccomment">/// *   Out of bounds rects might also be an issue IDK?</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Arguments</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// *   `source_rect`           - &quot;Must be `..`&quot; unless the [SwapChain] was created with [SwapEffect::Copy].  Can still be `..` even then (the entire source surface is presented.)</span>
-    <span class="doccomment">/// *   `dest_rect`             - &quot;Must be `..`&quot; unless the [SwapChain] was created with [SwapEffect::Copy].  Can still be `..` even then (the entire client area is filled.)</span>
-    <span class="doccomment">/// *   `dest_window_override`  - The destination window to render to.  If null / `()`, the runtime uses the `hDeviceWindow` member of D3DPRESENT_PARAMETERS for the presentation.</span>
-    <span class="doccomment">/// *   `dirty_region`          - &quot;Must be [None]&quot; unless the [SwapChain] was created with [SwapEffect::Copy].  Can still be [None] even then (the entire region will be considered dirty.)  The implementation is free to copy more than the exact dirty region.</span>
-    <span class="doccomment">/// *   `flags`                 - Valid values are [Present::None], [Present::DoNotWait], or [Present::LinearContent].</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Returns</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// *   [D3DERR::DEVICEREMOVED]     When you least expect it</span>
-    <span class="doccomment">/// *   [D3DERR::DEVICELOST]        When switching into/out-of fullscreen, or when invoking `C:\Windows\System32\DXCap.exe -forcetdr`</span>
-    <span class="doccomment">/// *   [D3DERR::INVALIDCALL]       If called within a [IDirect3DDevice9Ext::begin_scene] .. [IDirect3DDevice9Ext::end_scene] section, if the render target is the current render target.</span>
-    <span class="doccomment">/// *   Ok(`()`)</span>
-    <span class="comment">// TODO: ### Example</span>
-    <span class="kw">fn</span> <span class="ident">present</span><span class="op">&lt;</span><span class="lifetime">&#39;r</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">source_rect</span>: <span class="kw">impl</span> <span class="ident">IntoRectOrFull</span>, <span class="ident">dest_rect</span>: <span class="kw">impl</span> <span class="ident">IntoRectOrFull</span>, <span class="ident">dest_window_override</span>: <span class="kw">impl</span> <span class="ident">AsHWND</span>, <span class="ident">dirty_region</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;r</span> <span class="ident">RgnData</span><span class="op">&gt;</span><span class="op">&gt;</span>, <span class="ident">flags</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Present</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">MethodError</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">source_rect</span>     <span class="op">=</span> <span class="ident">source_rect</span>.<span class="ident">into_rect</span>();
-        <span class="kw">let</span> <span class="ident">dest_rect</span>       <span class="op">=</span> <span class="ident">dest_rect</span>.<span class="ident">into_rect</span>();
-        <span class="kw">let</span> <span class="ident">hwnd</span>            <span class="op">=</span> <span class="ident">dest_window_override</span>.<span class="ident">as_hwnd</span>();
-        <span class="kw">let</span> <span class="ident">dirty_region</span>    <span class="op">=</span> <span class="ident">dirty_region</span>.<span class="ident">into</span>();
-        <span class="kw">let</span> <span class="ident">flags</span>           <span class="op">=</span> <span class="ident">flags</span>.<span class="ident">into</span>().<span class="ident">into</span>();
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-present)\]
+    /// IDirect3DSwapChain9::Present
+    ///
+    /// Presents the contents of the next buffer in the sequence of back buffers owned by the swap chain.
+    ///
+    /// ### ⚠️ Safety ⚠️
+    /// *   It&#39;s likely unsound to use an invalid, non-null `hwnd`
+    /// *   It&#39;s likely unsound to use a null `hwnd` if the original `presentation_parameters.hDeviceWindow` is an invalid, non-null HWND
+    /// *   Out of bounds rects might also be an issue IDK?
+    ///
+    /// ### Arguments
+    /// *   `source_rect`           - &quot;Must be `..`&quot; unless the [SwapChain] was created with [SwapEffect::Copy].  Can still be `..` even then (the entire source surface is presented.)
+    /// *   `dest_rect`             - &quot;Must be `..`&quot; unless the [SwapChain] was created with [SwapEffect::Copy].  Can still be `..` even then (the entire client area is filled.)
+    /// *   `dest_window_override`  - The destination window to render to.  If null / `()`, the runtime uses the `device_window` member of [d3d::PresentParameters] for the presentation.
+    /// *   `dirty_region`          - &quot;Must be [None]&quot; unless the [SwapChain] was created with [SwapEffect::Copy].  Can still be [None] even then (the entire region will be considered dirty.)  The implementation is free to copy more than the exact dirty region.
+    /// *   `flags`                 - Valid values are [Present::None], [Present::DoNotWait], or [Present::LinearContent].
+    ///
+    /// ### Returns
+    /// *   [D3DERR::DEVICEREMOVED]     When you least expect it
+    /// *   [D3DERR::DEVICELOST]        When switching into/out-of fullscreen, or when invoking `C:\Windows\System32\DXCap.exe -forcetdr`
+    /// *   [D3DERR::INVALIDCALL]       If called within a [IDirect3DDevice9Ext::begin_scene] .. [IDirect3DDevice9Ext::end_scene] section, if the render target is the current render target.
+    /// *   Ok(`()`)
+    </span><span class="comment">// TODO: ### Example
+    </span><span class="kw">fn </span>present&lt;<span class="lifetime">&#39;r</span>&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, source_rect: <span class="kw">impl </span>IntoRectOrFull, dest_rect: <span class="kw">impl </span>IntoRectOrFull, dest_window_override: <span class="kw">impl </span>AsHWND, dirty_region: <span class="kw">impl </span>Into&lt;<span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;r </span>RgnData&gt;&gt;, flags: <span class="kw">impl </span>Into&lt;Present&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+        <span class="macro">fn_context!</span>(d3d9::IDirect3DSwapChain9Ext::present =&gt; IDirect3DSwapChain9::Present);
+        <span class="kw">let </span>source_rect     = source_rect.into_rect();
+        <span class="kw">let </span>dest_rect       = dest_rect.into_rect();
+        <span class="kw">let </span>hwnd            = dest_window_override.as_hwnd();
+        <span class="kw">let </span>dirty_region    = dirty_region.into();
+        <span class="kw">let </span>flags           = flags.into().into();
 
-        <span class="kw">let</span> <span class="ident">source_rect</span>     <span class="op">=</span> <span class="ident">source_rect</span>   .<span class="ident">map_or</span>(<span class="ident">null</span>(), <span class="op">|</span><span class="ident">r</span><span class="op">|</span> <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="ident">r</span>).<span class="ident">cast</span>();
-        <span class="kw">let</span> <span class="ident">dest_rect</span>       <span class="op">=</span> <span class="ident">dest_rect</span>     .<span class="ident">map_or</span>(<span class="ident">null</span>(), <span class="op">|</span><span class="ident">r</span><span class="op">|</span> <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="ident">r</span>).<span class="ident">cast</span>();
-        <span class="kw">let</span> <span class="ident">dirty_region</span>    <span class="op">=</span> <span class="kw">match</span> <span class="ident">dirty_region</span> {
-            <span class="prelude-val">None</span> =&gt; <span class="ident">null</span>::<span class="op">&lt;</span><span class="ident">RGNDATA</span><span class="op">&gt;</span>(),
-            <span class="prelude-val">Some</span>(<span class="ident">dr</span>) =&gt; {
-                <span class="kw">if</span> <span class="ident">dr</span>.<span class="ident">rdh</span>.<span class="ident">dwSize</span> <span class="kw">as</span> <span class="ident">usize</span>   <span class="op">!</span><span class="op">=</span> <span class="ident">std::mem::size_of</span>::<span class="op">&lt;</span><span class="ident">RGNDATAHEADER</span><span class="op">&gt;</span>() { <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">MethodError</span>(<span class="string">&quot;IDirect3DSwapChain9Ext::present&quot;</span>, <span class="ident">THINERR::INVALID_STRUCT_FIELD</span>)); }
-                <span class="kw">if</span> <span class="ident">dr</span>.<span class="ident">rdh</span>.<span class="ident">iType</span>             <span class="op">!</span><span class="op">=</span> <span class="ident">RDH_RECTANGLES</span>                       { <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">MethodError</span>(<span class="string">&quot;IDirect3DSwapChain9Ext::present&quot;</span>, <span class="ident">THINERR::INVALID_STRUCT_FIELD</span>)); }
-                <span class="kw">if</span> <span class="ident">dr</span>.<span class="ident">rdh</span>.<span class="ident">nCount</span> <span class="kw">as</span> <span class="ident">usize</span>   <span class="op">&gt;</span> <span class="ident">dr</span>.<span class="ident">buffer</span>.<span class="ident">len</span>()                       { <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">MethodError</span>(<span class="string">&quot;IDirect3DSwapChain9Ext::present&quot;</span>, <span class="ident">THINERR::INVALID_STRUCT_FIELD</span>)); }
-                <span class="kw">if</span> <span class="ident">dr</span>.<span class="ident">rdh</span>.<span class="ident">nRgnSize</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">&gt;</span> <span class="ident">std::mem::size_of_val</span>(<span class="ident">dr</span>)             { <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">MethodError</span>(<span class="string">&quot;IDirect3DSwapChain9Ext::present&quot;</span>, <span class="ident">THINERR::INVALID_STRUCT_FIELD</span>)); }
-                <span class="kw">let</span> <span class="ident">dr</span> : <span class="kw-2">*const</span> <span class="ident">RgnData</span> <span class="op">=</span> <span class="ident">dr</span>;
-                <span class="ident">dr</span>.<span class="ident">cast</span>()
+        <span class="kw">let </span>source_rect     = source_rect   .map_or(null(), |r| <span class="kw-2">&amp;*</span>r).cast();
+        <span class="kw">let </span>dest_rect       = dest_rect     .map_or(null(), |r| <span class="kw-2">&amp;*</span>r).cast();
+        <span class="kw">let </span>dirty_region    = <span class="kw">match </span>dirty_region {
+            <span class="prelude-val">None </span>=&gt; null::&lt;RGNDATA&gt;(),
+            <span class="prelude-val">Some</span>(dr) =&gt; {
+                <span class="kw">if </span>dr.rdh.dwSize <span class="kw">as </span>usize   != std::mem::size_of::&lt;RGNDATAHEADER&gt;() { <span class="kw">return </span><span class="prelude-val">Err</span>(<span class="macro">fn_param_error!</span>(dirty_region, THINERR::INVALID_STRUCT_FIELD)); }
+                <span class="kw">if </span>dr.rdh.iType             != RDH_RECTANGLES                       { <span class="kw">return </span><span class="prelude-val">Err</span>(<span class="macro">fn_param_error!</span>(dirty_region, THINERR::INVALID_STRUCT_FIELD)); }
+                <span class="kw">if </span>dr.rdh.nCount <span class="kw">as </span>usize   &gt; dr.buffer.len()                       { <span class="kw">return </span><span class="prelude-val">Err</span>(<span class="macro">fn_param_error!</span>(dirty_region, THINERR::INVALID_STRUCT_FIELD)); }
+                <span class="kw">if </span>dr.rdh.nRgnSize <span class="kw">as </span>usize &gt; std::mem::size_of_val(dr)             { <span class="kw">return </span><span class="prelude-val">Err</span>(<span class="macro">fn_param_error!</span>(dirty_region, THINERR::INVALID_STRUCT_FIELD)); }
+                <span class="kw">let </span>dr : <span class="kw-2">*const </span>RgnData = dr;
+                dr.cast()
             },
         };
 
-        <span class="kw">let</span> <span class="ident">hr</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="ident">as_winapi</span>().<span class="ident">Present</span>(<span class="ident">source_rect</span>, <span class="ident">dest_rect</span>, <span class="ident">hwnd</span>, <span class="ident">dirty_region</span>, <span class="ident">flags</span>) };
-        <span class="ident">MethodError::check</span>(<span class="string">&quot;IDirect3DSwapChain9::Present&quot;</span>, <span class="ident">hr</span>)
+        <span class="macro">fn_check_hr!</span>(<span class="kw">unsafe </span>{ <span class="self">self</span>.as_winapi().Present(source_rect, dest_rect, hwnd, dirty_region, flags) })
     }
 }
 
-<span class="kw">impl</span> <span class="ident">IDirect3DSwapChain9Ext</span> <span class="kw">for</span> <span class="ident">mcom::Rc</span><span class="op">&lt;</span><span class="ident">IDirect3DSwapChain9</span><span class="op">&gt;</span>   { <span class="kw">type</span> <span class="ident">Device</span> <span class="op">=</span> <span class="ident">mcom::Rc</span><span class="op">&lt;</span><span class="ident">IDirect3DDevice9</span><span class="op">&gt;</span>; <span class="kw">type</span> <span class="ident">Surface</span> <span class="op">=</span> <span class="ident">mcom::Rc</span><span class="op">&lt;</span><span class="ident">IDirect3DSurface9</span><span class="op">&gt;</span>;   }
-<span class="kw">impl</span> <span class="ident">IDirect3DSwapChain9Ext</span> <span class="kw">for</span> <span class="ident"><span class="kw">super</span>::SwapChain</span>                { <span class="kw">type</span> <span class="ident">Device</span> <span class="op">=</span> <span class="ident"><span class="kw">super</span>::Device</span>;              <span class="kw">type</span> <span class="ident">Surface</span> <span class="op">=</span> <span class="ident"><span class="kw">super</span>::Surface</span>;                }
+<span class="kw">impl </span>IDirect3DSwapChain9Ext <span class="kw">for </span>mcom::Rc&lt;IDirect3DSwapChain9&gt;   { <span class="kw">type </span>Device = mcom::Rc&lt;IDirect3DDevice9&gt;; <span class="kw">type </span>Surface = mcom::Rc&lt;IDirect3DSurface9&gt;;   }
+<span class="kw">impl </span>IDirect3DSwapChain9Ext <span class="kw">for </span><span class="kw">super</span>::SwapChain                { <span class="kw">type </span>Device = <span class="kw">super</span>::Device;              <span class="kw">type </span>Surface = <span class="kw">super</span>::Surface;                }
 
 
 
-<span class="comment">//#cpp2rust IDirect3DSwapChain9                         = d3d9::SwapChain</span>
-<span class="comment">//#cpp2rust IDirect3DSwapChain9                         = d3d9::IDirect3DSwapChain9Ext</span>
-
-<span class="comment">//#cpp2rust IDirect3DSwapChain9::GetBackBuffer          = d3d9::IDirect3DSwapChain9Ext::get_back_buffer</span>
-<span class="comment">//#cpp2rust IDirect3DSwapChain9::GetDevice              = d3d9::IDirect3DSwapChain9Ext::get_device</span>
-<span class="comment">//#cpp2rust IDirect3DSwapChain9::GetDisplayMode         = d3d9::IDirect3DSwapChain9Ext::get_display_mode</span>
-<span class="comment">//#cpp2rust IDirect3DSwapChain9::GetFrontBufferData     = d3d9::IDirect3DSwapChain9Ext::get_front_buffer_data</span>
-<span class="comment">//#cpp2rust IDirect3DSwapChain9::GetPresentParameters   = d3d9::IDirect3DSwapChain9Ext::get_present_parameters</span>
-<span class="comment">//#cpp2rust IDirect3DSwapChain9::GetRasterStatus        = d3d9::IDirect3DSwapChain9Ext::get_raster_status</span>
-<span class="comment">//#cpp2rust IDirect3DSwapChain9::Present                = d3d9::IDirect3DSwapChain9Ext::present</span>
-</code></pre></div>
-</section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-search-index-js="../../../../../search-index.js" data-search-js="../../../../../search.js"></div>
-</body></html>
+<span class="comment">//#cpp2rust IDirect3DSwapChain9                         = d3d9::SwapChain
+//#cpp2rust IDirect3DSwapChain9                         = d3d9::IDirect3DSwapChain9Ext
+</span></code></pre></div>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (b44197abb 2022-09-05)" ></div></body></html>

@@ -1,103 +1,102 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\errors.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>errors.rs - source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><script defer src="../../main.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script>
-    <noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../thindx/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
-<span id="2">  2</span>
-<span id="3">  3</span>
-<span id="4">  4</span>
-<span id="5">  5</span>
-<span id="6">  6</span>
-<span id="7">  7</span>
-<span id="8">  8</span>
-<span id="9">  9</span>
-<span id="10"> 10</span>
-<span id="11"> 11</span>
-<span id="12"> 12</span>
-<span id="13"> 13</span>
-<span id="14"> 14</span>
-<span id="15"> 15</span>
-<span id="16"> 16</span>
-<span id="17"> 17</span>
-<span id="18"> 18</span>
-<span id="19"> 19</span>
-<span id="20"> 20</span>
-<span id="21"> 21</span>
-<span id="22"> 22</span>
-<span id="23"> 23</span>
-<span id="24"> 24</span>
-<span id="25"> 25</span>
-<span id="26"> 26</span>
-<span id="27"> 27</span>
-<span id="28"> 28</span>
-<span id="29"> 29</span>
-<span id="30"> 30</span>
-<span id="31"> 31</span>
-<span id="32"> 32</span>
-<span id="33"> 33</span>
-<span id="34"> 34</span>
-<span id="35"> 35</span>
-<span id="36"> 36</span>
-<span id="37"> 37</span>
-<span id="38"> 38</span>
-<span id="39"> 39</span>
-<span id="40"> 40</span>
-<span id="41"> 41</span>
-<span id="42"> 42</span>
-<span id="43"> 43</span>
-<span id="44"> 44</span>
-<span id="45"> 45</span>
-<span id="46"> 46</span>
-<span id="47"> 47</span>
-<span id="48"> 48</span>
-<span id="49"> 49</span>
-<span id="50"> 50</span>
-<span id="51"> 51</span>
-<span id="52"> 52</span>
-<span id="53"> 53</span>
-<span id="54"> 54</span>
-<span id="55"> 55</span>
-<span id="56"> 56</span>
-<span id="57"> 57</span>
-<span id="58"> 58</span>
-<span id="59"> 59</span>
-<span id="60"> 60</span>
-<span id="61"> 61</span>
-<span id="62"> 62</span>
-<span id="63"> 63</span>
-<span id="64"> 64</span>
-<span id="65"> 65</span>
-<span id="66"> 66</span>
-<span id="67"> 67</span>
-<span id="68"> 68</span>
-<span id="69"> 69</span>
-<span id="70"> 70</span>
-<span id="71"> 71</span>
-<span id="72"> 72</span>
-<span id="73"> 73</span>
-<span id="74"> 74</span>
-<span id="75"> 75</span>
-<span id="76"> 76</span>
-<span id="77"> 77</span>
-<span id="78"> 78</span>
-<span id="79"> 79</span>
-<span id="80"> 80</span>
-<span id="81"> 81</span>
-<span id="82"> 82</span>
-<span id="83"> 83</span>
-<span id="84"> 84</span>
-<span id="85"> 85</span>
-<span id="86"> 86</span>
-<span id="87"> 87</span>
-<span id="88"> 88</span>
-<span id="89"> 89</span>
-<span id="90"> 90</span>
-<span id="91"> 91</span>
-<span id="92"> 92</span>
-<span id="93"> 93</span>
-<span id="94"> 94</span>
-<span id="95"> 95</span>
-<span id="96"> 96</span>
-<span id="97"> 97</span>
-<span id="98"> 98</span>
-<span id="99"> 99</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\errors.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>errors.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../thindx/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<span id="2">2</span>
+<span id="3">3</span>
+<span id="4">4</span>
+<span id="5">5</span>
+<span id="6">6</span>
+<span id="7">7</span>
+<span id="8">8</span>
+<span id="9">9</span>
+<span id="10">10</span>
+<span id="11">11</span>
+<span id="12">12</span>
+<span id="13">13</span>
+<span id="14">14</span>
+<span id="15">15</span>
+<span id="16">16</span>
+<span id="17">17</span>
+<span id="18">18</span>
+<span id="19">19</span>
+<span id="20">20</span>
+<span id="21">21</span>
+<span id="22">22</span>
+<span id="23">23</span>
+<span id="24">24</span>
+<span id="25">25</span>
+<span id="26">26</span>
+<span id="27">27</span>
+<span id="28">28</span>
+<span id="29">29</span>
+<span id="30">30</span>
+<span id="31">31</span>
+<span id="32">32</span>
+<span id="33">33</span>
+<span id="34">34</span>
+<span id="35">35</span>
+<span id="36">36</span>
+<span id="37">37</span>
+<span id="38">38</span>
+<span id="39">39</span>
+<span id="40">40</span>
+<span id="41">41</span>
+<span id="42">42</span>
+<span id="43">43</span>
+<span id="44">44</span>
+<span id="45">45</span>
+<span id="46">46</span>
+<span id="47">47</span>
+<span id="48">48</span>
+<span id="49">49</span>
+<span id="50">50</span>
+<span id="51">51</span>
+<span id="52">52</span>
+<span id="53">53</span>
+<span id="54">54</span>
+<span id="55">55</span>
+<span id="56">56</span>
+<span id="57">57</span>
+<span id="58">58</span>
+<span id="59">59</span>
+<span id="60">60</span>
+<span id="61">61</span>
+<span id="62">62</span>
+<span id="63">63</span>
+<span id="64">64</span>
+<span id="65">65</span>
+<span id="66">66</span>
+<span id="67">67</span>
+<span id="68">68</span>
+<span id="69">69</span>
+<span id="70">70</span>
+<span id="71">71</span>
+<span id="72">72</span>
+<span id="73">73</span>
+<span id="74">74</span>
+<span id="75">75</span>
+<span id="76">76</span>
+<span id="77">77</span>
+<span id="78">78</span>
+<span id="79">79</span>
+<span id="80">80</span>
+<span id="81">81</span>
+<span id="82">82</span>
+<span id="83">83</span>
+<span id="84">84</span>
+<span id="85">85</span>
+<span id="86">86</span>
+<span id="87">87</span>
+<span id="88">88</span>
+<span id="89">89</span>
+<span id="90">90</span>
+<span id="91">91</span>
+<span id="92">92</span>
+<span id="93">93</span>
+<span id="94">94</span>
+<span id="95">95</span>
+<span id="96">96</span>
+<span id="97">97</span>
+<span id="98">98</span>
+<span id="99">99</span>
 <span id="100">100</span>
 <span id="101">101</span>
 <span id="102">102</span>
@@ -164,731 +163,170 @@
 <span id="163">163</span>
 <span id="164">164</span>
 <span id="165">165</span>
-<span id="166">166</span>
-<span id="167">167</span>
-<span id="168">168</span>
-<span id="169">169</span>
-<span id="170">170</span>
-<span id="171">171</span>
-<span id="172">172</span>
-<span id="173">173</span>
-<span id="174">174</span>
-<span id="175">175</span>
-<span id="176">176</span>
-<span id="177">177</span>
-<span id="178">178</span>
-<span id="179">179</span>
-<span id="180">180</span>
-<span id="181">181</span>
-<span id="182">182</span>
-<span id="183">183</span>
-<span id="184">184</span>
-<span id="185">185</span>
-<span id="186">186</span>
-<span id="187">187</span>
-<span id="188">188</span>
-<span id="189">189</span>
-<span id="190">190</span>
-<span id="191">191</span>
-<span id="192">192</span>
-<span id="193">193</span>
-<span id="194">194</span>
-<span id="195">195</span>
-<span id="196">196</span>
-<span id="197">197</span>
-<span id="198">198</span>
-<span id="199">199</span>
-<span id="200">200</span>
-<span id="201">201</span>
-<span id="202">202</span>
-<span id="203">203</span>
-<span id="204">204</span>
-<span id="205">205</span>
-<span id="206">206</span>
-<span id="207">207</span>
-<span id="208">208</span>
-<span id="209">209</span>
-<span id="210">210</span>
-<span id="211">211</span>
-<span id="212">212</span>
-<span id="213">213</span>
-<span id="214">214</span>
-<span id="215">215</span>
-<span id="216">216</span>
-<span id="217">217</span>
-<span id="218">218</span>
-<span id="219">219</span>
-<span id="220">220</span>
-<span id="221">221</span>
-<span id="222">222</span>
-<span id="223">223</span>
-<span id="224">224</span>
-<span id="225">225</span>
-<span id="226">226</span>
-<span id="227">227</span>
-<span id="228">228</span>
-<span id="229">229</span>
-<span id="230">230</span>
-<span id="231">231</span>
-<span id="232">232</span>
-<span id="233">233</span>
-<span id="234">234</span>
-<span id="235">235</span>
-<span id="236">236</span>
-<span id="237">237</span>
-<span id="238">238</span>
-<span id="239">239</span>
-<span id="240">240</span>
-<span id="241">241</span>
-<span id="242">242</span>
-<span id="243">243</span>
-<span id="244">244</span>
-<span id="245">245</span>
-<span id="246">246</span>
-<span id="247">247</span>
-<span id="248">248</span>
-<span id="249">249</span>
-<span id="250">250</span>
-<span id="251">251</span>
-<span id="252">252</span>
-<span id="253">253</span>
-<span id="254">254</span>
-<span id="255">255</span>
-<span id="256">256</span>
-<span id="257">257</span>
-<span id="258">258</span>
-<span id="259">259</span>
-<span id="260">260</span>
-<span id="261">261</span>
-<span id="262">262</span>
-<span id="263">263</span>
-<span id="264">264</span>
-<span id="265">265</span>
-<span id="266">266</span>
-<span id="267">267</span>
-<span id="268">268</span>
-<span id="269">269</span>
-<span id="270">270</span>
-<span id="271">271</span>
-<span id="272">272</span>
-<span id="273">273</span>
-<span id="274">274</span>
-<span id="275">275</span>
-<span id="276">276</span>
-<span id="277">277</span>
-<span id="278">278</span>
-<span id="279">279</span>
-<span id="280">280</span>
-<span id="281">281</span>
-<span id="282">282</span>
-<span id="283">283</span>
-<span id="284">284</span>
-<span id="285">285</span>
-<span id="286">286</span>
-<span id="287">287</span>
-<span id="288">288</span>
-<span id="289">289</span>
-<span id="290">290</span>
-<span id="291">291</span>
-<span id="292">292</span>
-<span id="293">293</span>
-<span id="294">294</span>
-<span id="295">295</span>
-<span id="296">296</span>
-<span id="297">297</span>
-<span id="298">298</span>
-<span id="299">299</span>
-<span id="300">300</span>
-<span id="301">301</span>
-<span id="302">302</span>
-<span id="303">303</span>
-<span id="304">304</span>
-<span id="305">305</span>
-<span id="306">306</span>
-<span id="307">307</span>
-<span id="308">308</span>
-<span id="309">309</span>
-<span id="310">310</span>
-<span id="311">311</span>
-<span id="312">312</span>
-<span id="313">313</span>
-<span id="314">314</span>
-<span id="315">315</span>
-<span id="316">316</span>
-<span id="317">317</span>
-<span id="318">318</span>
-<span id="319">319</span>
-<span id="320">320</span>
-<span id="321">321</span>
-<span id="322">322</span>
-<span id="323">323</span>
-<span id="324">324</span>
-<span id="325">325</span>
-<span id="326">326</span>
-<span id="327">327</span>
-<span id="328">328</span>
-<span id="329">329</span>
-<span id="330">330</span>
-<span id="331">331</span>
-<span id="332">332</span>
-<span id="333">333</span>
-<span id="334">334</span>
-<span id="335">335</span>
-<span id="336">336</span>
-<span id="337">337</span>
-<span id="338">338</span>
-<span id="339">339</span>
-<span id="340">340</span>
-<span id="341">341</span>
-<span id="342">342</span>
-<span id="343">343</span>
-<span id="344">344</span>
-<span id="345">345</span>
-<span id="346">346</span>
-<span id="347">347</span>
-<span id="348">348</span>
-<span id="349">349</span>
-<span id="350">350</span>
-<span id="351">351</span>
-<span id="352">352</span>
-<span id="353">353</span>
-<span id="354">354</span>
-<span id="355">355</span>
-<span id="356">356</span>
-<span id="357">357</span>
-<span id="358">358</span>
-<span id="359">359</span>
-<span id="360">360</span>
-<span id="361">361</span>
-<span id="362">362</span>
-<span id="363">363</span>
-<span id="364">364</span>
-<span id="365">365</span>
-<span id="366">366</span>
-<span id="367">367</span>
-<span id="368">368</span>
-<span id="369">369</span>
-<span id="370">370</span>
-<span id="371">371</span>
-<span id="372">372</span>
-<span id="373">373</span>
-<span id="374">374</span>
-<span id="375">375</span>
-<span id="376">376</span>
-<span id="377">377</span>
-<span id="378">378</span>
-<span id="379">379</span>
-<span id="380">380</span>
-<span id="381">381</span>
-<span id="382">382</span>
-<span id="383">383</span>
-<span id="384">384</span>
-<span id="385">385</span>
-<span id="386">386</span>
-<span id="387">387</span>
-<span id="388">388</span>
-<span id="389">389</span>
-<span id="390">390</span>
-<span id="391">391</span>
-<span id="392">392</span>
-<span id="393">393</span>
-<span id="394">394</span>
-<span id="395">395</span>
-<span id="396">396</span>
-<span id="397">397</span>
-<span id="398">398</span>
-<span id="399">399</span>
-<span id="400">400</span>
-<span id="401">401</span>
-<span id="402">402</span>
-<span id="403">403</span>
-<span id="404">404</span>
-<span id="405">405</span>
-<span id="406">406</span>
-<span id="407">407</span>
-<span id="408">408</span>
-<span id="409">409</span>
-<span id="410">410</span>
-<span id="411">411</span>
-<span id="412">412</span>
-<span id="413">413</span>
-<span id="414">414</span>
-<span id="415">415</span>
-<span id="416">416</span>
-<span id="417">417</span>
-<span id="418">418</span>
-<span id="419">419</span>
-<span id="420">420</span>
-<span id="421">421</span>
-<span id="422">422</span>
-<span id="423">423</span>
-<span id="424">424</span>
-<span id="425">425</span>
-<span id="426">426</span>
-<span id="427">427</span>
-<span id="428">428</span>
-<span id="429">429</span>
-<span id="430">430</span>
-<span id="431">431</span>
-<span id="432">432</span>
-<span id="433">433</span>
-<span id="434">434</span>
-<span id="435">435</span>
-<span id="436">436</span>
-<span id="437">437</span>
-<span id="438">438</span>
-<span id="439">439</span>
-<span id="440">440</span>
-<span id="441">441</span>
-<span id="442">442</span>
-<span id="443">443</span>
-<span id="444">444</span>
-<span id="445">445</span>
-</pre><pre class="rust"><code><span class="doccomment">//! [S],</span>
-<span class="doccomment">//! [D3D],</span>
-<span class="doccomment">//! [E],</span>
-<span class="doccomment">//! [ERROR],</span>
-<span class="doccomment">//! [D3DERR],</span>
-<span class="doccomment">//! [D3DXERR],</span>
-<span class="doccomment">//! [D3D11_ERROR],</span>
-<span class="doccomment">//! [DXGI_ERROR],</span>
-<span class="doccomment">//! and [THINERR]</span>
-<span class="doccomment">//! [ErrorKind] values&lt;br&gt;</span>
-<span class="doccomment">//! **NOTE:** Imported into crate root, no need to prefix `errors::`...</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! DirectX APIs return a mixture of:</span>
-<span class="doccomment">//! *   Non-[HRESULT] S_\* and ERROR_\* codes</span>
-<span class="doccomment">//! *   MAKE_HRESULT(1, FACILITY_WIN32, ...)ified ERROR_\* codes</span>
-<span class="doccomment">//! *   Other [HRESULT]s with proper names</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! Sometimes from the same individual function!</span>
-<span class="doccomment">//! Sanitizing this muddle for the general case is beyond the scope of thindx.&lt;br&gt;</span>
-<span class="doccomment">//! As such, [ErrorKind] awkwardly muddles these all together too.</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! | [HRESULT]    | Facility           | Desc  |</span>
-<span class="doccomment">//! | ------------:| ------------------ | ----- |</span>
-<span class="doccomment">//! | `0x...0....` | FACILITY_NULL      | For broadly applicable common status codes such as S_OK.</span>
-<span class="doccomment">//! | `0x...1....` | FACILITY_RPC       | For status codes returned from remote procedure calls.</span>
-<span class="doccomment">//! | `0x...2....` | FACILITY_DISPATCH  | For late-binding IDispatch interface errors.</span>
-<span class="doccomment">//! | `0x...3....` | FACILITY_STORAGE   | Returned from IStorage or IStream method calls relating to structured storage.</span>
-<span class="doccomment">//! | `0x...4....` | FACILITY_ITF       | For most status codes returned from interface methods.</span>
-<span class="doccomment">//! | `0x...7....` | FACILITY_WIN32     | Windows ERROR_\* codes packaged as an HRESULT.</span>
-<span class="doccomment">//! | `0x...8....` | FACILITY_WINDOWS   | Used for additional error codes from Microsoft-defined interfaces.</span>
-<span class="comment">// | `0x27D8....` |                    | ThinDX Success Codes (2=Customer Bit, 7D8 = TDX)</span>
-<span class="doccomment">//! | `0xA7D8....` |                    | ThinDX Error Codes (A=2\|8=Customer\|Error Bits, 7D8 = TDX = ThinDX)</span>
-<span class="doccomment">//! | `0x.876....` | _FACD3D            | Direct3D (9) / DirectDraw</span>
-<span class="doccomment">//! | `0x.879....` |                    | Direct3D 10</span>
-<span class="doccomment">//! | `0x.87A....` |                    | DXGI</span>
-<span class="doccomment">//! | `0x.87B....` |                    | DXGI DDI</span>
-<span class="doccomment">//! | `0x.87C....` |                    | Direct3D 11</span>
-<span class="doccomment">//! | `0x.898....` |                    | DirectWrite</span>
-<span class="doccomment">//! | `0x.899....` |                    | Direct2D</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! ### See Also</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! *   &lt;https://www.hresult.info/&gt;</span>
-<span class="doccomment">//! *   &lt;https://docs.microsoft.com/en-us/windows/win32/debug/system-error-codes#system-error-codes&gt;</span>
-<span class="doccomment">//! *   &lt;https://docs.microsoft.com/en-us/windows/win32/direct3d11/d3d11-graphics-reference-returnvalues&gt;</span>
-<span class="doccomment">//! *   &lt;https://docs.microsoft.com/en-us/windows/win32/com/structure-of-com-error-codes&gt;</span>
-<span class="doccomment">//!</span>
-<span class="doccomment">//! [HRESULT]:  https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-erref/0642cb2f-2075-4469-918c-4441e69c548a</span>
+</pre><pre class="rust"><code><span class="doccomment">//! [S],
+//! [D3D],
+//! [E],
+//! [ERROR],
+//! [D3DERR],
+//! [D3DXERR],
+//! [D3D11],
+//! [DXGI],
+//! and [THINERR]
+//! [ErrorKind] values&lt;br&gt;
+//! **NOTE:** Imported into crate root, no need to prefix `errors::`...
+//!
+//! DirectX APIs return a mixture of:
+//! *   Non-[HRESULT] S_\* and ERROR_\* codes
+//! *   MAKE_HRESULT(1, FACILITY_WIN32, ...)ified ERROR_\* codes
+//! *   Other [HRESULT]s with proper names
+//!
+//! Sometimes from the same individual function!
+//! Sanitizing this muddle for the general case is beyond the scope of thindx.&lt;br&gt;
+//! As such, [ErrorKind] awkwardly muddles these all together too.
+//!
+//! | [HRESULT]    | Facility           | Desc  |
+//! | ------------:| ------------------ | ----- |
+//! | `0x...0....` | FACILITY_NULL      | For broadly applicable common status codes such as S_OK.
+//! | `0x...1....` | FACILITY_RPC       | For status codes returned from remote procedure calls.
+//! | `0x...2....` | FACILITY_DISPATCH  | For late-binding IDispatch interface errors.
+//! | `0x...3....` | FACILITY_STORAGE   | Returned from IStorage or IStream method calls relating to structured storage.
+//! | `0x...4....` | FACILITY_ITF       | For most status codes returned from interface methods.
+//! | `0x...7....` | FACILITY_WIN32     | Windows ERROR_\* codes packaged as an HRESULT.
+//! | `0x...8....` | FACILITY_WINDOWS   | Used for additional error codes from Microsoft-defined interfaces.
+</span><span class="comment">// | `0x27D8....` |                    | ThinDX Success Codes (2=Customer Bit, 7D8 = TDX)
+</span><span class="doccomment">//! | `0xA7D8....` |                    | ThinDX Error Codes (A=2\|8=Customer\|Error Bits, 7D8 = TDX = ThinDX)
+//! | `0x.876....` | _FACD3D            | Direct3D (9) / DirectDraw
+//! | `0x.879....` |                    | Direct3D 10
+//! | `0x.87A....` |                    | DXGI
+//! | `0x.87B....` |                    | DXGI DDI
+//! | `0x.87C....` |                    | Direct3D 11
+//! | `0x.898....` |                    | DirectWrite
+//! | `0x.899....` |                    | Direct2D
+//!
+//! ### See Also
+//! *   &lt;https://www.hresult.info/&gt;
+//! *   &lt;https://docs.microsoft.com/en-us/windows/win32/debug/system-error-codes#system-error-codes&gt;
+//! *   &lt;https://docs.microsoft.com/en-us/windows/win32/direct3d11/d3d11-graphics-reference-returnvalues&gt;
+//! *   &lt;https://docs.microsoft.com/en-us/windows/win32/com/structure-of-com-error-codes&gt;
+//!
+//! [HRESULT]:  https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-erref/0642cb2f-2075-4469-918c-4441e69c548a
 
-<span class="attribute">#![<span class="ident">allow</span>(<span class="ident">overflowing_literals</span>)]</span> <span class="comment">// ErrorKind is signed for some reason</span>
-<span class="attribute">#![<span class="ident">allow</span>(<span class="ident">non_snake_case</span>)]</span>
-<span class="comment">// TODO: Cleanup formatting etc.</span>
+</span><span class="attribute">#![allow(overflowing_literals)] </span><span class="comment">// ErrorKind is signed for some reason
+</span><span class="attribute">#![allow(non_snake_case)]
+</span><span class="comment">// TODO: Cleanup formatting etc.
 
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="kw-2">*</span>;
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span> <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::d3d9</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident">winapi::shared::winerror</span>::<span class="kw-2">*</span>;
+</span><span class="attribute">#[allow(unused_imports)] </span><span class="kw">use crate</span>::<span class="kw-2">*</span>;
+<span class="attribute">#[allow(unused_imports)] </span><span class="kw">use </span><span class="kw">crate</span>::d3d9::<span class="kw-2">*</span>;
+<span class="kw">use </span>winresult::HResultError;
 
 
-<span class="doccomment">/// `0xA7D8....` • **T**hin**DX** [ErrorKind]s</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// * `0xA.......`  - **S**everity and **C**ustomer bits for [HRESULT](https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-erref/0642cb2f-2075-4469-918c-4441e69c548a)s</span>
-<span class="doccomment">/// * `0x.7D8....`  - **T**hin **DX** error codes</span>
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">THINERR</span> {
-    <span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
 
-    <span class="comment">// General errors</span>
+<span class="doccomment">/// `0xA7D8....` • **T**hin**DX** [ErrorKind]s
+///
+/// *   `0xA.......`  - **S**everity and **C**ustomer bits for [HRESULT](https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-erref/0642cb2f-2075-4469-918c-4441e69c548a)s
+/// *   `0x.7D8....`  - **T**hin **DX** error codes
+</span><span class="kw">pub mod </span>THINERR {
+    <span class="kw">use super</span>::<span class="kw-2">*</span>;
 
-    <span class="doccomment">/// `0xA7D80000`    A nonspecific error of some sort occured.  This should generally only be used when DirectX returned some kind of error or unexpected null pointer, without actually bothering to say what the error was.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">NONSPECIFIC</span> : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">ErrorKind</span>(<span class="number">0xA7D80000</span>);
+    <span class="comment">// General errors
 
-    <span class="doccomment">/// `0xA7D80001`    Large slice passed to a DirectX API that only accepts a 32-bit length.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SLICE_OVERFLOW</span>    : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">ErrorKind</span>(<span class="number">0xA7D80001</span>);
+    </span><span class="doccomment">/// `0xA7D80000`    A nonspecific error of some sort occured.  This should generally only be used when DirectX returned some kind of error or unexpected null pointer, without actually bothering to say what the error was.
+    </span><span class="kw">pub const </span>NONSPECIFIC : HResultError = HResultError::from_constant(<span class="number">0xA7D80000</span>);
 
-    <span class="doccomment">/// `0xA7D80002`    Resource belonging to one [Device] was passed to a different [Device].  To avoid undefined behavior, DirectX was not called.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">DEVICE_MISMATCH</span>   : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">ErrorKind</span>(<span class="number">0xA7D80002</span>);
+    <span class="comment">// `0xA7D80001` was SLICE_OVERFLOW, prefer SLICE_TOO_LARGE
 
-    <span class="doccomment">/// `0xA7D80003`    Large allocation size was requested.  To avoid undefined behavior from arithmetic overflows, DirectX was not called.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">ALLOC_OVERFLOW</span>    : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">ErrorKind</span>(<span class="number">0xA7D80003</span>);
+    </span><span class="doccomment">/// `0xA7D80002`    Resource belonging to one [Device] was passed to a different [Device].  To avoid undefined behavior, DirectX was not called.
+    </span><span class="kw">pub const </span>DEVICE_MISMATCH   : HResultError = HResultError::from_constant(<span class="number">0xA7D80002</span>);
 
-    <span class="doccomment">/// `0xA7D80004`    A structure contained some kind of field such as `dwSize` or `iType` that was invalid.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">INVALID_STRUCT_FIELD</span> : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">ErrorKind</span>(<span class="number">0xA7D80004</span>);
+    <span class="doccomment">/// `0xA7D80003`    Large allocation size was requested.  To avoid undefined behavior from arithmetic overflows, DirectX was not called.
+    </span><span class="kw">pub const </span>ALLOC_OVERFLOW    : HResultError = HResultError::from_constant(<span class="number">0xA7D80003</span>);
 
-    <span class="doccomment">/// `0xA7D80005`    This version of the DLL doesn&#39;t support this fn</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">MISSING_DLL_EXPORT</span> : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">ErrorKind</span>(<span class="number">0xA7D80005</span>);
+    <span class="doccomment">/// `0xA7D80004`    A structure contained some kind of field such as `dwSize` or `iType` that was invalid.
+    </span><span class="kw">pub const </span>INVALID_STRUCT_FIELD : HResultError = HResultError::from_constant(<span class="number">0xA7D80004</span>);
 
-    <span class="doccomment">/// `0xA7D80006`    Slice length exceeded some kind of length limit (typically a conversion to a 32-bit length, or</span>
-    <span class="doccomment">///                 an extra cap introduced by thindx to avoid undefined behavior from allocation size overflows.)</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SLICE_TOO_LARGE</span> : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">ErrorKind</span>(<span class="number">0xA7D80006</span>);
+    <span class="doccomment">/// `0xA7D80005`    This version of the DLL doesn&#39;t support this fn
+    </span><span class="kw">pub const </span>MISSING_DLL_EXPORT : HResultError = HResultError::from_constant(<span class="number">0xA7D80005</span>);
 
-    <span class="doccomment">/// `0xA7D80007`    String contains unexpected internal `\0`s when being passed to a function taking C-style `\0`-*terminated* strings.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">STRING_CONTAINS_NULS</span> : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">ErrorKind</span>(<span class="number">0xA7D80007</span>);
+    <span class="doccomment">/// `0xA7D80006`    Slice length exceeded some kind of length limit (typically a conversion to a 32-bit length, or
+    ///                 an extra cap introduced by thindx to avoid undefined behavior from allocation size overflows.)
+    </span><span class="kw">pub const </span>SLICE_TOO_LARGE : HResultError = HResultError::from_constant(<span class="number">0xA7D80006</span>);
 
-    <span class="doccomment">/// `0xA7D80008`    Bytecode is invalid (bad header, invalid checksum, wrong length, etc.)</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">INVALID_BYTECODE</span> : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">ErrorKind</span>(<span class="number">0xA7D80008</span>);
+    <span class="doccomment">/// `0xA7D80007`    String contains unexpected internal `\0`s when being passed to a function taking C-style `\0`-*terminated* strings.
+    </span><span class="kw">pub const </span>STRING_CONTAINS_NULS : HResultError = HResultError::from_constant(<span class="number">0xA7D80007</span>);
+
+    <span class="doccomment">/// `0xA7D80008`    Bytecode is invalid (bad header, invalid checksum, wrong length, etc.)
+    </span><span class="kw">pub const </span>INVALID_BYTECODE : HResultError = HResultError::from_constant(<span class="number">0xA7D80008</span>);
 }
 
-<span class="doccomment">/// `0x887C....` • \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d11/d3d11-graphics-reference-returnvalues)\] • Direct3D 11 [ErrorKind]s</span>
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">D3D11_ERROR</span> {
-    <span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
-
-    <span class="doccomment">/// The file was not found.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">FILE_NOT_FOUND</span>                                : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">ErrorKind</span>(<span class="ident">D3D11_ERROR_FILE_NOT_FOUND</span>);
-
-    <span class="doccomment">/// There are too many unique instances of a particular type of state object.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">TOO_MANY_UNIQUE_STATE_OBJECTS</span>                 : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">ErrorKind</span>(<span class="ident">D3D11_ERROR_TOO_MANY_UNIQUE_STATE_OBJECTS</span>);
-
-    <span class="doccomment">/// There are too many unique instances of a particular type of view object.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">TOO_MANY_UNIQUE_VIEW_OBJECTS</span>                  : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">ErrorKind</span>(<span class="ident">D3D11_ERROR_TOO_MANY_UNIQUE_VIEW_OBJECTS</span>);
-
-    <span class="doccomment">/// The first call to [ID3D11DeviceContext::Map] after either [ID3D11Device::CreateDeferredContext] or [ID3D11DeviceContext::FinishCommandList] per Resource was not D3D11_MAP_WRITE_DISCARD.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// [ID3D11DeviceContext::Map]:                 https://docs.microsoft.com/en-us/windows/desktop/api/D3D11/nf-d3d11-id3d11devicecontext-map</span>
-    <span class="doccomment">/// [ID3D11Device::CreateDeferredContext]:      https://docs.microsoft.com/en-us/windows/desktop/api/D3D11/nf-d3d11-id3d11device-createdeferredcontext</span>
-    <span class="doccomment">/// [ID3D11DeviceContext::FinishCommandList]:   https://docs.microsoft.com/en-us/windows/desktop/api/D3D11/nf-d3d11-id3d11devicecontext-finishcommandlist</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">DEFERRED_CONTEXT_MAP_WITHOUT_INITIAL_DISCARD</span>  : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">ErrorKind</span>(<span class="ident">D3D11_ERROR_DEFERRED_CONTEXT_MAP_WITHOUT_INITIAL_DISCARD</span>);
-}
-
-<span class="doccomment">/// `0x8876....` • \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3derr)\] • Direct3D / Direct3D9 [ErrorKind]s</span>
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">D3DERR</span> {
-    <span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
-
-    <span class="doccomment">/// The previous blit operation that is transferring information to or from this surface is incomplete.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">WASSTILLDRAWING</span>           : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">MAKE_D3DHRESULT</span>(<span class="number">540</span>);
-
-    <span class="doccomment">/// The pixel format of the texture surface is not valid.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">WRONGTEXTUREFORMAT</span>        : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">MAKE_D3DHRESULT</span>(<span class="number">2072</span>);
-
-    <span class="doccomment">/// The device does not support a specified texture-blending operation for color values.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">UNSUPPORTEDCOLOROPERATION</span> : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">MAKE_D3DHRESULT</span>(<span class="number">2073</span>);
-
-    <span class="doccomment">/// The device does not support a specified texture-blending argument for color values.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">UNSUPPORTEDCOLORARG</span>       : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">MAKE_D3DHRESULT</span>(<span class="number">2074</span>);
-
-    <span class="doccomment">/// The device does not support a specified texture-blending operation for the alpha channel.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">UNSUPPORTEDALPHAOPERATION</span> : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">MAKE_D3DHRESULT</span>(<span class="number">2075</span>);
-
-    <span class="doccomment">/// The device does not support a specified texture-blending argument for the alpha channel.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">UNSUPPORTEDALPHAARG</span>       : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">MAKE_D3DHRESULT</span>(<span class="number">2076</span>);
-
-    <span class="doccomment">/// The application is requesting more texture-filtering operations than the device supports.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">TOOMANYOPERATIONS</span>         : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">MAKE_D3DHRESULT</span>(<span class="number">2077</span>);
-
-    <span class="doccomment">/// The current texture filters cannot be used together.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CONFLICTINGTEXTUREFILTER</span>  : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">MAKE_D3DHRESULT</span>(<span class="number">2078</span>);
-
-    <span class="doccomment">/// The device does not support the specified texture factor value. Not used; provided only to support older drivers.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">UNSUPPORTEDFACTORVALUE</span>    : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">MAKE_D3DHRESULT</span>(<span class="number">2079</span>);
-
-    <span class="doccomment">/// The currently set render states cannot be used together.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CONFLICTINGRENDERSTATE</span>    : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">MAKE_D3DHRESULT</span>(<span class="number">2081</span>);
-
-    <span class="doccomment">/// The device does not support the specified texture filter.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">UNSUPPORTEDTEXTUREFILTER</span>  : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">MAKE_D3DHRESULT</span>(<span class="number">2082</span>);
-
-    <span class="doccomment">/// The current textures cannot be used simultaneously.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CONFLICTINGTEXTUREPALETTE</span> : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">MAKE_D3DHRESULT</span>(<span class="number">2086</span>);
-
-    <span class="doccomment">/// Internal driver error. Applications should destroy and recreate the device when receiving this error.</span>
-    <span class="doccomment">/// For hints on debugging this error, see [Driver Internal Errors (Direct3D 9)](https://docs.microsoft.com/en-us/windows/win32/direct3d9/driver-internal-errors).</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">DRIVERINTERNALERROR</span>       : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">MAKE_D3DHRESULT</span>(<span class="number">2087</span>);
-
-    <span class="doccomment">/// The requested item was not found.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">NOTFOUND</span>                  : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">MAKE_D3DHRESULT</span>(<span class="number">2150</span>);
-
-    <span class="doccomment">/// There is more data available than the specified buffer size can hold.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">MOREDATA</span>                  : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">MAKE_D3DHRESULT</span>(<span class="number">2151</span>);
-
-    <span class="doccomment">/// The device has been lost but cannot be reset at this time. Therefore, rendering is not possible.</span>
-    <span class="doccomment">/// A Direct3D device object other than the one that returned this code caused the hardware adapter to be reset by the OS.</span>
-    <span class="doccomment">/// Delete all video memory objects (surfaces, textures, state blocks) and call Reset() to return the device to a default state.</span>
-    <span class="doccomment">/// If the application continues rendering without a reset, the rendering calls will succeed.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">DEVICELOST</span>                : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">MAKE_D3DHRESULT</span>(<span class="number">2152</span>);
-
-    <span class="doccomment">/// The device has been lost but can be reset at this time.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">DEVICENOTRESET</span>            : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">MAKE_D3DHRESULT</span>(<span class="number">2153</span>);
-
-    <span class="doccomment">/// This device does not support the queried technique.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">NOTAVAILABLE</span>              : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">MAKE_D3DHRESULT</span>(<span class="number">2154</span>);
-
-    <span class="doccomment">/// Direct3D does not have enough display memory to perform the operation.</span>
-    <span class="doccomment">/// The device is using more resources in a single scene than can fit simultaneously into video memory.</span>
-    <span class="doccomment">/// [Present], [PresentEx], or [CheckDeviceState] can return this error.</span>
-    <span class="doccomment">/// Recovery is similar to D3DERR_DEVICEHUNG, though the application may want to reduce its per-frame memory usage as well to avoid having the error recur.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// [Present]:          https://docs.microsoft.com/en-us/windows/desktop/api/d3d9/nf-d3d9-idirect3ddevice9-present</span>
-    <span class="doccomment">/// [PresentEx]:        https://docs.microsoft.com/en-us/windows/desktop/api/d3d9/nf-d3d9-idirect3ddevice9ex-presentex</span>
-    <span class="doccomment">/// [CheckDeviceState]: https://docs.microsoft.com/en-us/windows/desktop/api/d3d9/nf-d3d9-idirect3ddevice9ex-checkdevicestate</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">OUTOFVIDEOMEMORY</span>          : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">MAKE_D3DHRESULT</span>(<span class="number">380</span>);
-
-    <span class="doccomment">/// The requested device type is not valid.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">INVALIDDEVICE</span>             : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">MAKE_D3DHRESULT</span>(<span class="number">2155</span>);
-
-    <span class="doccomment">/// The method call is invalid. For example, a method&#39;s parameter may not be a valid pointer.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">INVALIDCALL</span>               : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">MAKE_D3DHRESULT</span>(<span class="number">2156</span>);
-
-    <span class="doccomment">/// Not used.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">DRIVERINVALIDCALL</span>         : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">MAKE_D3DHRESULT</span>(<span class="number">2157</span>);
-
-
-
-    <span class="comment">// Direct3D 9Ex</span>
-
-    <span class="doccomment">/// The hardware adapter has been removed.</span>
-    <span class="doccomment">/// Application must destroy the device, do enumeration of adapters and create another Direct3D device.</span>
-    <span class="doccomment">/// If application continues rendering without calling Reset, the rendering calls will succeed.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Applies to Direct3D 9Ex only.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">DEVICEREMOVED</span>                 : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">MAKE_D3DHRESULT</span>(<span class="number">2160</span>);
-
-    <span class="doccomment">/// The device that returned this code caused the hardware adapter to be reset by the OS.</span>
-    <span class="doccomment">/// Most applications should destroy the device and quit.</span>
-    <span class="doccomment">/// Applications that must continue should destroy all video memory objects (surfaces, textures, state blocks etc) and call Reset() to put the device in a default state.</span>
-    <span class="doccomment">/// If the application then continues rendering in the same way, the device will return to this state.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Applies to Direct3D 9Ex only.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">DEVICEHUNG</span>                    : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">MAKE_D3DHRESULT</span>(<span class="number">2164</span>);
-
-    <span class="doccomment">/// The device does not support overlay for the specified size or display mode.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Direct3D 9Ex under Windows 7 only.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">UNSUPPORTEDOVERLAY</span>            : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">MAKE_D3DHRESULT</span>(<span class="number">2171</span>);
-
-    <span class="doccomment">/// The device does not support overlay for the specified surface format.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Direct3D 9Ex under Windows 7 only.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">UNSUPPORTEDOVERLAYFORMAT</span>      : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">MAKE_D3DHRESULT</span>(<span class="number">2172</span>);
-
-    <span class="doccomment">/// The specified content cannot be protected.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Direct3D 9Ex under Windows 7 only.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CANNOTPROTECTCONTENT</span>          : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">MAKE_D3DHRESULT</span>(<span class="number">2173</span>);
-
-    <span class="doccomment">/// The specified cryptographic algorithm is not supported.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Direct3D 9Ex under Windows 7 only.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">UNSUPPORTEDCRYPTO</span>             : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">MAKE_D3DHRESULT</span>(<span class="number">2174</span>);
-
-    <span class="doccomment">/// The present statistics have no orderly sequence.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Direct3D 9Ex under Windows 7 only.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">PRESENT_STATISTICS_DISJOINT</span>   : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">MAKE_D3DHRESULT</span>(<span class="number">2180</span>);
-
-
-
-    <span class="comment">// Undocumented / poorly documented semi-internal errors</span>
-
-    <span class="doccomment">/// The command was unparsed.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">COMMAND_UNPARSED</span>          : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">ErrorKind</span>(<span class="number">0x88760BB8</span>);
-}
-
-<span class="doccomment">/// `0x8876....` • \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxerr)\] • D3DX [ErrorKind]s</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// Some of these can be returned by Direct3D itself</span>
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">D3DXERR</span> {
-    <span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
-
-    <span class="comment">// https://github.com/apitrace/dxsdk/blob/master/Include/d3dx9.h</span>
-
-    <span class="doccomment">/// The index buffer cannot be modified.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CANNOTMODIFYINDEXBUFFER</span>   : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">MAKE_DDHRESULT</span>(<span class="number">2900</span>);
-
-    <span class="doccomment">/// The mesh is invalid.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">INVALIDMESH</span>               : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">MAKE_DDHRESULT</span>(<span class="number">2901</span>);
-
-    <span class="doccomment">/// Attribute sort (D3DXMESHOPT_ATTRSORT) is not supported as an optimization technique.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CANNOTATTRSORT</span>            : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">MAKE_DDHRESULT</span>(<span class="number">2902</span>);
-
-    <span class="doccomment">/// Skinning is not supported.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SKINNINGNOTSUPPORTED</span>      : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">MAKE_DDHRESULT</span>(<span class="number">2903</span>);
-
-    <span class="doccomment">/// Too many influences specified.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">TOOMANYINFLUENCES</span>         : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">MAKE_DDHRESULT</span>(<span class="number">2904</span>);
-
-    <span class="doccomment">/// The data is invalid.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">INVALIDDATA</span>               : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">MAKE_DDHRESULT</span>(<span class="number">2905</span>);
-
-    <span class="doccomment">/// The mesh has no data.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">LOADEDMESHASNODATA</span>        : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">MAKE_DDHRESULT</span>(<span class="number">2906</span>);
-
-    <span class="doccomment">/// A fragment with that name already exists.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">DUPLICATENAMEDFRAGMENT</span>    : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">MAKE_DDHRESULT</span>(<span class="number">2907</span>);
-
-    <span class="doccomment">/// The last item cannot be deleted.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CANNOTREMOVELASTITEM</span>      : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">MAKE_DDHRESULT</span>(<span class="number">2908</span>);
-
-}
-
-<span class="doccomment">/// `0x887A....` • \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3ddxgi/dxgi-error)\] • DXGI [ErrorKind]s</span>
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">DXGI_ERROR</span> {
-    <span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
-
-    <span class="doccomment">/// The method call is invalid. For example, a method&#39;s parameter may not be a valid pointer.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">INVALID_CALL</span>              : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">ErrorKind</span>(<span class="ident">DXGI_ERROR_INVALID_CALL</span>);
-
-    <span class="doccomment">/// The previous blit operation that is transferring information to or from this surface is incomplete.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">WAS_STILL_DRAWING</span>         : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">ErrorKind</span>(<span class="ident">DXGI_ERROR_WAS_STILL_DRAWING</span>);
-}
-
-<span class="doccomment">/// `0x8000....` • \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/learnwin32/error-handling-in-com)\] • General [ErrorKind]s&lt;br&gt;</span>
-<span class="doccomment">/// `0x8007....` • \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/learnwin32/error-handling-in-com)\] • Win32/COM [ErrorKind]s</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// Errors that aren&#39;t part of the D3DERR_\* family, but might still be returned by DirectX API calls.</span>
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">E</span> {
-    <span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
-
-    <span class="doccomment">/// Attempted to create a device with the debug layer enabled and the layer is not installed.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">FAIL</span>                      : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">ErrorKind</span>(<span class="ident">E_FAIL</span>);
-
-    <span class="doccomment">/// An invalid parameter was passed to the returning function.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">INVALIDARG</span>                : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">ErrorKind</span>(<span class="ident">E_INVALIDARG</span>);
-
-    <span class="doccomment">/// Direct3D could not allocate sufficient memory to complete the call.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">OUTOFMEMORY</span>               : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">ErrorKind</span>(<span class="ident">E_OUTOFMEMORY</span>);
-
-    <span class="doccomment">/// The method call isn&#39;t implemented with the passed parameter combination.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">NOTIMPL</span>                   : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">ErrorKind</span>(<span class="ident">E_NOTIMPL</span>);
-
-    <span class="doccomment">/// Access is denied.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">ACCESSDENIED</span>              : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">ErrorKind</span>(<span class="ident">E_ACCESSDENIED</span>);
-
-    <span class="doccomment">/// No such interface supported.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">NOINTERFACE</span>               : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">ErrorKind</span>(<span class="ident">E_NOINTERFACE</span>);
-}
-
-<span class="doccomment">/// `0x0000....` • \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/debug/system-error-codes--0-499-)\] • Non-hresult [ErrorKind]s</span>
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">ERROR</span> {
-    <span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
-
-    <span class="doccomment">/// No error occured</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SUCCESS</span>                   : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">ErrorKind</span>(<span class="ident">ERROR_SUCCESS</span> <span class="kw">as</span> <span class="kw">_</span>);
-
-    <span class="doccomment">/// A file was not found</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">FILE_NOT_FOUND</span>            : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">ErrorKind</span>(<span class="ident">ERROR_FILE_NOT_FOUND</span> <span class="kw">as</span> <span class="kw">_</span>);
-
-    <span class="doccomment">/// Access is denied.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">ACCESS_DENIED</span>             : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">ErrorKind</span>(<span class="ident">ERROR_ACCESS_DENIED</span> <span class="kw">as</span> <span class="kw">_</span>);
-
-    <span class="doccomment">/// The system cannot find the path specified.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">PATH_NOT_FOUND</span>            : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">ErrorKind</span>(<span class="ident">ERROR_PATH_NOT_FOUND</span> <span class="kw">as</span> <span class="kw">_</span>);
-
-    <span class="doccomment">/// The file exists.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">FILE_EXISTS</span>               : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">ErrorKind</span>(<span class="ident">ERROR_FILE_EXISTS</span> <span class="kw">as</span> <span class="kw">_</span>);
-
-    <span class="doccomment">/// One or more arguments are not correct.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">BAD_ARGUMENTS</span>             : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">ErrorKind</span>(<span class="ident">ERROR_BAD_ARGUMENTS</span> <span class="kw">as</span> <span class="kw">_</span>);
-
-    <span class="doccomment">/// The device is not connected.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">DEVICE_NOT_CONNECTED</span>      : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">ErrorKind</span>(<span class="ident">ERROR_DEVICE_NOT_CONNECTED</span> <span class="kw">as</span> <span class="kw">_</span>);
-}
-
-<span class="doccomment">/// `0x0000....` • \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/learnwin32/error-handling-in-com)\] • Win32/COM success &quot;[ErrorKind]&quot;s&lt;br&gt;</span>
-<span class="doccomment">/// `0x0876....` • \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3derr)\] • Success &quot;[ErrorKind]&quot;s</span>
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">S</span> {
-    <span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
-
-    <span class="doccomment">/// No error occurred.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">OK</span>                        : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">ErrorKind</span>(<span class="ident">S_OK</span>);
-
-    <span class="doccomment">/// Alternate success value, indicating a successful but nonstandard completion (the precise meaning depends on context).</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">FALSE</span>                     : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">ErrorKind</span>(<span class="ident">S_FALSE</span>);
-
-    <span class="doccomment">/// At least one allocation that comprises the resources is on disk.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Direct3D 9Ex only.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">NOT_RESIDENT</span>                : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">MAKE_D3DSTATUS</span>(<span class="number">2165</span>);
-
-    <span class="doccomment">/// No allocations that comprise the resources are on disk. However, at least one allocation is not in GPU-accessible memory.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Direct3D 9Ex only.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">RESIDENT_IN_SHARED_MEMORY</span>   : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">MAKE_D3DSTATUS</span>(<span class="number">2166</span>);
-
-    <span class="doccomment">/// The desktop display mode has been changed.</span>
-    <span class="doccomment">/// The application can continue rendering, but there might be color conversion/stretching.</span>
-    <span class="doccomment">/// Pick a back buffer format similar to the current display mode, and call Reset to recreate the swap chains.</span>
-    <span class="doccomment">/// The device will leave this state after a Reset is called.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Direct3D 9Ex only.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">PRESENT_MODE_CHANGED</span>        : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">MAKE_D3DSTATUS</span>(<span class="number">2167</span>);
-
-    <span class="doccomment">/// The presentation area is occluded.</span>
-    <span class="doccomment">/// Occlusion means that the presentation window is minimized or another device entered the fullscreen mode on the same monitor as the presentation window and the presentation window is completely on that monitor.</span>
-    <span class="doccomment">/// Occlusion will not occur if the client area is covered by another Window.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Occluded applications can continue rendering and all calls will succeed, but the occluded presentation window will not be updated.</span>
-    <span class="doccomment">/// Preferably the application should stop rendering to the presentation window using the device and keep calling CheckDeviceState until S_OK or S_PRESENT_MODE_CHANGED returns.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Direct3D 9Ex only.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">PRESENT_OCCLUDED</span>            : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">MAKE_D3DSTATUS</span>(<span class="number">2168</span>);
-}
-
-<span class="doccomment">/// `0x0876....` • \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3derr)\] • Success &quot;[ErrorKind]&quot;s</span>
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">D3D</span> {
-    <span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
-
-    <span class="doccomment">/// No error occurred.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">OK</span>            : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">ErrorKind</span>(<span class="number">0</span>);
-
-    <span class="doccomment">/// This is a success code.</span>
-    <span class="doccomment">/// However, the autogeneration of mipmaps is not supported for this format.</span>
-    <span class="doccomment">/// This means that resource creation will succeed but the mipmap levels will not be automatically generated.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">OK_NOAUTOGEN</span>  : <span class="ident">ErrorKind</span> <span class="op">=</span> <span class="ident">MAKE_D3DSTATUS</span>(<span class="number">2159</span>);
-}
-
-<span class="comment">// d3d9helper.h</span>
-<span class="kw">const</span> <span class="kw">fn</span> <span class="ident">MAKE_D3DHRESULT</span>(<span class="ident">code</span>: <span class="ident">u32</span>) -&gt; <span class="ident">ErrorKind</span> { <span class="ident">ErrorKind::make_d3dhresult</span>(<span class="ident">code</span>) }
-<span class="kw">const</span> <span class="kw">fn</span> <span class="ident">MAKE_DDHRESULT</span> (<span class="ident">code</span>: <span class="ident">u32</span>) -&gt; <span class="ident">ErrorKind</span> { <span class="ident">ErrorKind::make_ddhresult</span>(<span class="ident">code</span>) }
-<span class="kw">const</span> <span class="kw">fn</span> <span class="ident">MAKE_D3DSTATUS</span> (<span class="ident">code</span>: <span class="ident">u32</span>) -&gt; <span class="ident">ErrorKind</span> { <span class="ident">ErrorKind::make_d3dstatus</span>(<span class="ident">code</span>) }
-
-<span class="comment">//#cpp2rust S_NOT_RESIDENT                      = S::NOT_RESIDENT</span>
-<span class="comment">//#cpp2rust S_PRESENT_MODE_CHANGED              = S::PRESENT_MODE_CHANGED</span>
-<span class="comment">//#cpp2rust S_PRESENT_OCCLUDED                  = S::PRESENT_OCCLUDED</span>
-<span class="comment">//#cpp2rust S_RESIDENT_IN_SHARED_MEMORY         = S::RESIDENT_IN_SHARED_MEMORY</span>
-
-<span class="comment">//#cpp2rust D3D_OK                              = D3D::OK</span>
-<span class="comment">//#cpp2rust D3DOK_NOAUTOGEN                     = D3D::OK_NOAUTOGEN</span>
-
-<span class="comment">//#cpp2rust D3DERR_CANNOTPROTECTCONTENT         = D3DERR::CANNOTPROTECTCONTENT</span>
-<span class="comment">//#cpp2rust D3DERR_CONFLICTINGRENDERSTATE       = D3DERR::CONFLICTINGRENDERSTATE</span>
-<span class="comment">//#cpp2rust D3DERR_CONFLICTINGTEXTUREFILTER     = D3DERR::CONFLICTINGTEXTUREFILTER</span>
-<span class="comment">//#cpp2rust D3DERR_CONFLICTINGTEXTUREPALETTE    = D3DERR::CONFLICTINGTEXTUREPALETTE</span>
-<span class="comment">//#cpp2rust D3DERR_DEVICEHUNG                   = D3DERR::DEVICEHUNG</span>
-<span class="comment">//#cpp2rust D3DERR_DEVICELOST                   = D3DERR::DEVICELOST</span>
-<span class="comment">//#cpp2rust D3DERR_DEVICENOTRESET               = D3DERR::DEVICENOTRESET</span>
-<span class="comment">//#cpp2rust D3DERR_DEVICEREMOVED                = D3DERR::DEVICEREMOVED</span>
-<span class="comment">//#cpp2rust D3DERR_DRIVERINTERNALERROR          = D3DERR::DRIVERINTERNALERROR</span>
-<span class="comment">//#cpp2rust D3DERR_DRIVERINVALIDCALL            = D3DERR::DRIVERINVALIDCALL</span>
-<span class="comment">//#cpp2rust D3DERR_INVALIDCALL                  = D3DERR::INVALIDCALL</span>
-<span class="comment">//#cpp2rust D3DERR_INVALIDDEVICE                = D3DERR::INVALIDDEVICE</span>
-<span class="comment">//#cpp2rust D3DERR_MOREDATA                     = D3DERR::MOREDATA</span>
-<span class="comment">//#cpp2rust D3DERR_NOTAVAILABLE                 = D3DERR::NOTAVAILABLE</span>
-<span class="comment">//#cpp2rust D3DERR_NOTFOUND                     = D3DERR::NOTFOUND</span>
-<span class="comment">//#cpp2rust D3DERR_OUTOFVIDEOMEMORY             = D3DERR::OUTOFVIDEOMEMORY</span>
-<span class="comment">//#cpp2rust D3DERR_PRESENT_STATISTICS_DISJOINT  = D3DERR::PRESENT_STATISTICS_DISJOINT</span>
-<span class="comment">//#cpp2rust D3DERR_TOOMANYOPERATIONS            = D3DERR::TOOMANYOPERATIONS</span>
-<span class="comment">//#cpp2rust D3DERR_UNSUPPORTEDALPHAARG          = D3DERR::UNSUPPORTEDALPHAARG</span>
-<span class="comment">//#cpp2rust D3DERR_UNSUPPORTEDALPHAOPERATION    = D3DERR::UNSUPPORTEDALPHAOPERATION</span>
-<span class="comment">//#cpp2rust D3DERR_UNSUPPORTEDCOLORARG          = D3DERR::UNSUPPORTEDCOLORARG</span>
-<span class="comment">//#cpp2rust D3DERR_UNSUPPORTEDCOLOROPERATION    = D3DERR::UNSUPPORTEDCOLOROPERATION</span>
-<span class="comment">//#cpp2rust D3DERR_UNSUPPORTEDCRYPTO            = D3DERR::UNSUPPORTEDCRYPTO</span>
-<span class="comment">//#cpp2rust D3DERR_UNSUPPORTEDFACTORVALUE       = D3DERR::UNSUPPORTEDFACTORVALUE</span>
-<span class="comment">//#cpp2rust D3DERR_UNSUPPORTEDOVERLAY           = D3DERR::UNSUPPORTEDOVERLAY</span>
-<span class="comment">//#cpp2rust D3DERR_UNSUPPORTEDOVERLAYFORMAT     = D3DERR::UNSUPPORTEDOVERLAYFORMAT</span>
-<span class="comment">//#cpp2rust D3DERR_UNSUPPORTEDTEXTUREFILTER     = D3DERR::UNSUPPORTEDTEXTUREFILTER</span>
-<span class="comment">//#cpp2rust D3DERR_WASSTILLDRAWING              = D3DERR::WASSTILLDRAWING</span>
-<span class="comment">//#cpp2rust D3DERR_WRONGTEXTUREFORMAT           = D3DERR::WRONGTEXTUREFORMAT</span>
-</code></pre></div>
-</section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="thindx" data-search-index-js="../../search-index.js" data-search-js="../../search.js"></div>
-</body></html>
+<span class="doccomment">/// `0x887C....` • \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d11/d3d11-graphics-reference-returnvalues)\] • Direct3D 11 [ErrorKind](crate::ErrorKind)s
+</span><span class="kw">pub use </span>winresult::D3D11;
+
+<span class="doccomment">/// `0x8876....` • \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3derr)\] • Direct3D / Direct3D9 [ErrorKind](crate::ErrorKind)s
+</span><span class="kw">pub use </span>winresult::D3DERR;
+
+<span class="doccomment">/// `0x8876....` • \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxerr)\] • D3DX [ErrorKind](crate::ErrorKind)s
+///
+/// Some of these can be returned by Direct3D itself
+</span><span class="kw">pub use </span>winresult::D3DXERR;
+
+<span class="doccomment">/// `0x887A....` • \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3ddxgi/dxgi-error)\] • DXGI [ErrorKind](crate::ErrorKind)s
+</span><span class="kw">pub use </span>winresult::DXGI;
+
+<span class="doccomment">/// `0x8000....` • \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/learnwin32/error-handling-in-com)\] • General [ErrorKind](crate::ErrorKind)s&lt;br&gt;
+/// `0x8007....` • \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/learnwin32/error-handling-in-com)\] • Win32/COM [ErrorKind](crate::ErrorKind)s
+///
+/// Errors that aren&#39;t part of the D3DERR_\* family, but might still be returned by DirectX API calls.
+</span><span class="kw">pub use </span>winresult::E;
+
+<span class="doccomment">/// `0x0000....` • \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/debug/system-error-codes--0-499-)\] • Non-hresult [ErrorKind](crate::ErrorKind)s
+</span><span class="kw">pub use </span>winresult::ERROR;
+
+<span class="doccomment">/// `0x0000....` • \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/learnwin32/error-handling-in-com)\] • Win32/COM success &quot;[ErrorKind](crate::ErrorKind)&quot;s&lt;br&gt;
+/// `0x0876....` • \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3derr)\] • Success &quot;[ErrorKind](crate::ErrorKind)&quot;s
+</span><span class="kw">pub use </span>winresult::S;
+
+<span class="doccomment">/// `0x0876....` • \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3derr)\] • Success &quot;[ErrorKind](crate::ErrorKind)&quot;s
+</span><span class="kw">pub mod </span>D3D {
+    <span class="kw">pub use </span>winresult::D3D::<span class="kw-2">*</span>;
+    <span class="kw">pub use </span>winresult::D3DOK::NOAUTOGEN <span class="kw">as </span>OK_NOAUTOGEN; <span class="comment">// TODO: eliminate in favor of fixing winresult
+</span>}
+
+<span class="comment">//#cpp2rust S_NOT_RESIDENT                      = S::NOT_RESIDENT
+//#cpp2rust S_PRESENT_MODE_CHANGED              = S::PRESENT_MODE_CHANGED
+//#cpp2rust S_PRESENT_OCCLUDED                  = S::PRESENT_OCCLUDED
+//#cpp2rust S_RESIDENT_IN_SHARED_MEMORY         = S::RESIDENT_IN_SHARED_MEMORY
+
+//#cpp2rust D3D_OK                              = D3D::OK
+//#cpp2rust D3DOK_NOAUTOGEN                     = D3D::OK_NOAUTOGEN
+
+//#cpp2rust D3DERR_CANNOTPROTECTCONTENT         = D3DERR::CANNOTPROTECTCONTENT
+//#cpp2rust D3DERR_CONFLICTINGRENDERSTATE       = D3DERR::CONFLICTINGRENDERSTATE
+//#cpp2rust D3DERR_CONFLICTINGTEXTUREFILTER     = D3DERR::CONFLICTINGTEXTUREFILTER
+//#cpp2rust D3DERR_CONFLICTINGTEXTUREPALETTE    = D3DERR::CONFLICTINGTEXTUREPALETTE
+//#cpp2rust D3DERR_DEVICEHUNG                   = D3DERR::DEVICEHUNG
+//#cpp2rust D3DERR_DEVICELOST                   = D3DERR::DEVICELOST
+//#cpp2rust D3DERR_DEVICENOTRESET               = D3DERR::DEVICENOTRESET
+//#cpp2rust D3DERR_DEVICEREMOVED                = D3DERR::DEVICEREMOVED
+//#cpp2rust D3DERR_DRIVERINTERNALERROR          = D3DERR::DRIVERINTERNALERROR
+//#cpp2rust D3DERR_DRIVERINVALIDCALL            = D3DERR::DRIVERINVALIDCALL
+//#cpp2rust D3DERR_INVALIDCALL                  = D3DERR::INVALIDCALL
+//#cpp2rust D3DERR_INVALIDDEVICE                = D3DERR::INVALIDDEVICE
+//#cpp2rust D3DERR_MOREDATA                     = D3DERR::MOREDATA
+//#cpp2rust D3DERR_NOTAVAILABLE                 = D3DERR::NOTAVAILABLE
+//#cpp2rust D3DERR_NOTFOUND                     = D3DERR::NOTFOUND
+//#cpp2rust D3DERR_OUTOFVIDEOMEMORY             = D3DERR::OUTOFVIDEOMEMORY
+//#cpp2rust D3DERR_PRESENT_STATISTICS_DISJOINT  = D3DERR::PRESENT_STATISTICS_DISJOINT
+//#cpp2rust D3DERR_TOOMANYOPERATIONS            = D3DERR::TOOMANYOPERATIONS
+//#cpp2rust D3DERR_UNSUPPORTEDALPHAARG          = D3DERR::UNSUPPORTEDALPHAARG
+//#cpp2rust D3DERR_UNSUPPORTEDALPHAOPERATION    = D3DERR::UNSUPPORTEDALPHAOPERATION
+//#cpp2rust D3DERR_UNSUPPORTEDCOLORARG          = D3DERR::UNSUPPORTEDCOLORARG
+//#cpp2rust D3DERR_UNSUPPORTEDCOLOROPERATION    = D3DERR::UNSUPPORTEDCOLOROPERATION
+//#cpp2rust D3DERR_UNSUPPORTEDCRYPTO            = D3DERR::UNSUPPORTEDCRYPTO
+//#cpp2rust D3DERR_UNSUPPORTEDFACTORVALUE       = D3DERR::UNSUPPORTEDFACTORVALUE
+//#cpp2rust D3DERR_UNSUPPORTEDOVERLAY           = D3DERR::UNSUPPORTEDOVERLAY
+//#cpp2rust D3DERR_UNSUPPORTEDOVERLAYFORMAT     = D3DERR::UNSUPPORTEDOVERLAYFORMAT
+//#cpp2rust D3DERR_UNSUPPORTEDTEXTUREFILTER     = D3DERR::UNSUPPORTEDTEXTUREFILTER
+//#cpp2rust D3DERR_WASSTILLDRAWING              = D3DERR::WASSTILLDRAWING
+//#cpp2rust D3DERR_WRONGTEXTUREFORMAT           = D3DERR::WRONGTEXTUREFORMAT
+</span></code></pre></div>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (b44197abb 2022-09-05)" ></div></body></html>

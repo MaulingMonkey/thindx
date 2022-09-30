@@ -1,1 +1,1 @@
-initSidebarItems({"constant":[["HWND1",""],["HWND2",""]],"fn":[["create_window",""],["optional_dev_init",""]]});
+window.SIDEBAR_ITEMS = {"constant":[["HWND1",""],["HWND2",""]],"fn":[["create_window",""],["optional_dev_init",""]]};

@@ -1,103 +1,102 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3dcompiler.h\dll\debugging.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>debugging.rs - source</title><link rel="stylesheet" type="text/css" href="../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script src="../../../../../crates.js"></script><script defer src="../../../../../main.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script>
-    <noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"><style type="text/css">#crate-search{background-image:url("../../../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../../../../thindx/index.html'><div class='logo-container rust-logo'><img src='../../../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../../../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../../../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../../../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
-<span id="2">  2</span>
-<span id="3">  3</span>
-<span id="4">  4</span>
-<span id="5">  5</span>
-<span id="6">  6</span>
-<span id="7">  7</span>
-<span id="8">  8</span>
-<span id="9">  9</span>
-<span id="10"> 10</span>
-<span id="11"> 11</span>
-<span id="12"> 12</span>
-<span id="13"> 13</span>
-<span id="14"> 14</span>
-<span id="15"> 15</span>
-<span id="16"> 16</span>
-<span id="17"> 17</span>
-<span id="18"> 18</span>
-<span id="19"> 19</span>
-<span id="20"> 20</span>
-<span id="21"> 21</span>
-<span id="22"> 22</span>
-<span id="23"> 23</span>
-<span id="24"> 24</span>
-<span id="25"> 25</span>
-<span id="26"> 26</span>
-<span id="27"> 27</span>
-<span id="28"> 28</span>
-<span id="29"> 29</span>
-<span id="30"> 30</span>
-<span id="31"> 31</span>
-<span id="32"> 32</span>
-<span id="33"> 33</span>
-<span id="34"> 34</span>
-<span id="35"> 35</span>
-<span id="36"> 36</span>
-<span id="37"> 37</span>
-<span id="38"> 38</span>
-<span id="39"> 39</span>
-<span id="40"> 40</span>
-<span id="41"> 41</span>
-<span id="42"> 42</span>
-<span id="43"> 43</span>
-<span id="44"> 44</span>
-<span id="45"> 45</span>
-<span id="46"> 46</span>
-<span id="47"> 47</span>
-<span id="48"> 48</span>
-<span id="49"> 49</span>
-<span id="50"> 50</span>
-<span id="51"> 51</span>
-<span id="52"> 52</span>
-<span id="53"> 53</span>
-<span id="54"> 54</span>
-<span id="55"> 55</span>
-<span id="56"> 56</span>
-<span id="57"> 57</span>
-<span id="58"> 58</span>
-<span id="59"> 59</span>
-<span id="60"> 60</span>
-<span id="61"> 61</span>
-<span id="62"> 62</span>
-<span id="63"> 63</span>
-<span id="64"> 64</span>
-<span id="65"> 65</span>
-<span id="66"> 66</span>
-<span id="67"> 67</span>
-<span id="68"> 68</span>
-<span id="69"> 69</span>
-<span id="70"> 70</span>
-<span id="71"> 71</span>
-<span id="72"> 72</span>
-<span id="73"> 73</span>
-<span id="74"> 74</span>
-<span id="75"> 75</span>
-<span id="76"> 76</span>
-<span id="77"> 77</span>
-<span id="78"> 78</span>
-<span id="79"> 79</span>
-<span id="80"> 80</span>
-<span id="81"> 81</span>
-<span id="82"> 82</span>
-<span id="83"> 83</span>
-<span id="84"> 84</span>
-<span id="85"> 85</span>
-<span id="86"> 86</span>
-<span id="87"> 87</span>
-<span id="88"> 88</span>
-<span id="89"> 89</span>
-<span id="90"> 90</span>
-<span id="91"> 91</span>
-<span id="92"> 92</span>
-<span id="93"> 93</span>
-<span id="94"> 94</span>
-<span id="95"> 95</span>
-<span id="96"> 96</span>
-<span id="97"> 97</span>
-<span id="98"> 98</span>
-<span id="99"> 99</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3dcompiler.h\dll\debugging.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>debugging.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../../normalize.css"><link rel="stylesheet" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../../dark.css" disabled><link rel="stylesheet" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<span id="2">2</span>
+<span id="3">3</span>
+<span id="4">4</span>
+<span id="5">5</span>
+<span id="6">6</span>
+<span id="7">7</span>
+<span id="8">8</span>
+<span id="9">9</span>
+<span id="10">10</span>
+<span id="11">11</span>
+<span id="12">12</span>
+<span id="13">13</span>
+<span id="14">14</span>
+<span id="15">15</span>
+<span id="16">16</span>
+<span id="17">17</span>
+<span id="18">18</span>
+<span id="19">19</span>
+<span id="20">20</span>
+<span id="21">21</span>
+<span id="22">22</span>
+<span id="23">23</span>
+<span id="24">24</span>
+<span id="25">25</span>
+<span id="26">26</span>
+<span id="27">27</span>
+<span id="28">28</span>
+<span id="29">29</span>
+<span id="30">30</span>
+<span id="31">31</span>
+<span id="32">32</span>
+<span id="33">33</span>
+<span id="34">34</span>
+<span id="35">35</span>
+<span id="36">36</span>
+<span id="37">37</span>
+<span id="38">38</span>
+<span id="39">39</span>
+<span id="40">40</span>
+<span id="41">41</span>
+<span id="42">42</span>
+<span id="43">43</span>
+<span id="44">44</span>
+<span id="45">45</span>
+<span id="46">46</span>
+<span id="47">47</span>
+<span id="48">48</span>
+<span id="49">49</span>
+<span id="50">50</span>
+<span id="51">51</span>
+<span id="52">52</span>
+<span id="53">53</span>
+<span id="54">54</span>
+<span id="55">55</span>
+<span id="56">56</span>
+<span id="57">57</span>
+<span id="58">58</span>
+<span id="59">59</span>
+<span id="60">60</span>
+<span id="61">61</span>
+<span id="62">62</span>
+<span id="63">63</span>
+<span id="64">64</span>
+<span id="65">65</span>
+<span id="66">66</span>
+<span id="67">67</span>
+<span id="68">68</span>
+<span id="69">69</span>
+<span id="70">70</span>
+<span id="71">71</span>
+<span id="72">72</span>
+<span id="73">73</span>
+<span id="74">74</span>
+<span id="75">75</span>
+<span id="76">76</span>
+<span id="77">77</span>
+<span id="78">78</span>
+<span id="79">79</span>
+<span id="80">80</span>
+<span id="81">81</span>
+<span id="82">82</span>
+<span id="83">83</span>
+<span id="84">84</span>
+<span id="85">85</span>
+<span id="86">86</span>
+<span id="87">87</span>
+<span id="88">88</span>
+<span id="89">89</span>
+<span id="90">90</span>
+<span id="91">91</span>
+<span id="92">92</span>
+<span id="93">93</span>
+<span id="94">94</span>
+<span id="95">95</span>
+<span id="96">96</span>
+<span id="97">97</span>
+<span id="98">98</span>
+<span id="99">99</span>
 <span id="100">100</span>
 <span id="101">101</span>
 <span id="102">102</span>
@@ -395,416 +394,401 @@
 <span id="394">394</span>
 <span id="395">395</span>
 <span id="396">396</span>
-<span id="397">397</span>
-<span id="398">398</span>
-<span id="399">399</span>
-<span id="400">400</span>
-<span id="401">401</span>
-<span id="402">402</span>
-<span id="403">403</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="kw">crate</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::ctypes</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::d3d</span>::<span class="kw-2">*</span>;
+</pre><pre class="rust"><code><span class="kw">use crate</span>::<span class="kw-2">*</span>;
+<span class="kw">use </span><span class="kw">crate</span>::ctypes::<span class="kw-2">*</span>;
+<span class="kw">use </span><span class="kw">crate</span>::d3d::<span class="kw-2">*</span>;
 
-<span class="kw">use</span> <span class="ident">std::ptr</span>::<span class="kw-2">*</span>;
+<span class="kw">use </span>std::ptr::<span class="kw-2">*</span>;
 
 
 
-<span class="doccomment">/// { disassembly: [TextBlob], finish_byte_offset: [usize] }</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// ### See Also</span>
-<span class="doccomment">/// *   [d3d::Compiler::disassemble_region]</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">DisassembledRegion</span> {
-    <span class="doccomment">/// Human-readable commented disassembly</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Example</span>
-    <span class="doccomment">/// ```text</span>
-    <span class="doccomment">/// //</span>
-    <span class="doccomment">/// // Generated by Microsoft (R) HLSL Shader Compiler 10.1</span>
-    <span class="doccomment">/// //</span>
-    <span class="doccomment">/// // example comment</span>
-    <span class="doccomment">/// //</span>
-    <span class="doccomment">/// //</span>
-    <span class="doccomment">/// // Input signature:</span>
-    <span class="doccomment">/// //</span>
-    <span class="doccomment">/// // Name                 Index   Mask Register SysValue  Format   Used</span>
-    <span class="doccomment">/// // -------------------- ----- ------ -------- -------- ------- ------</span>
-    <span class="doccomment">/// // COLOR                    0   xyzw        0     NONE   float   xyzw</span>
-    <span class="doccomment">/// // SV_POSITION              0   xyzw        1      POS   float</span>
-    <span class="doccomment">/// //</span>
-    <span class="doccomment">/// //</span>
-    <span class="doccomment">/// // Output signature:</span>
-    <span class="doccomment">/// //</span>
-    <span class="doccomment">/// // Name                 Index   Mask Register SysValue  Format   Used</span>
-    <span class="doccomment">/// // -------------------- ----- ------ -------- -------- ------- ------</span>
-    <span class="doccomment">/// // SV_TARGET                0   xyzw        0   TARGET   float   xyzw</span>
-    <span class="doccomment">/// //</span>
-    <span class="doccomment">/// ps_4_0</span>
-    <span class="doccomment">/// dcl_input_ps linear v0.xyzw</span>
-    <span class="doccomment">/// dcl_output o0.xyzw</span>
-    <span class="doccomment">/// //</span>
-    <span class="doccomment">/// // Initial variable locations:</span>
-    <span class="doccomment">/// //   v0.x &lt;- i.color.x; v0.y &lt;- i.color.y; v0.z &lt;- i.color.z; v0.w &lt;- i.color.w;</span>
-    <span class="doccomment">/// //   v1.x &lt;- i.position.x; v1.y &lt;- i.position.y; v1.z &lt;- i.position.z; v1.w &lt;- i.position.w;</span>
-    <span class="doccomment">/// //   o0.x &lt;- &lt;ps_main return value&gt;.color.x; o0.y &lt;- &lt;ps_main return value&gt;.color.y; o0.z &lt;- &lt;ps_main return value&gt;.color.z; o0.w &lt;- &lt;ps_main return value&gt;.color.w</span>
-    <span class="doccomment">/// //</span>
-    <span class="doccomment">/// #line 27 &quot;C:\local\thindx\test\data\basic.hlsl&quot;</span>
-    <span class="doccomment">/// mov o0.xyzw, v0.xyzw</span>
-    <span class="doccomment">/// ret</span>
-    <span class="doccomment">/// // Approximately 2 instruction slots used</span>
-    <span class="doccomment">/// ```</span>
-    <span class="kw">pub</span> <span class="ident">disassembly</span>:        <span class="ident">TextBlob</span>,
+<span class="doccomment">/// { disassembly: [TextBlob], finish_byte_offset: [usize] }
+///
+/// ### See Also
+/// *   [d3d::Compiler::disassemble_region]
+</span><span class="attribute">#[derive(Clone, Debug)]
+</span><span class="kw">pub struct </span>DisassembledRegion {
+    <span class="doccomment">/// Human-readable commented disassembly
+    ///
+    /// ### Example
+    /// ```text
+    /// //
+    /// // Generated by Microsoft (R) HLSL Shader Compiler 10.1
+    /// //
+    /// // example comment
+    /// //
+    /// //
+    /// // Input signature:
+    /// //
+    /// // Name                 Index   Mask Register SysValue  Format   Used
+    /// // -------------------- ----- ------ -------- -------- ------- ------
+    /// // COLOR                    0   xyzw        0     NONE   float   xyzw
+    /// // SV_POSITION              0   xyzw        1      POS   float
+    /// //
+    /// //
+    /// // Output signature:
+    /// //
+    /// // Name                 Index   Mask Register SysValue  Format   Used
+    /// // -------------------- ----- ------ -------- -------- ------- ------
+    /// // SV_TARGET                0   xyzw        0   TARGET   float   xyzw
+    /// //
+    /// ps_4_0
+    /// dcl_input_ps linear v0.xyzw
+    /// dcl_output o0.xyzw
+    /// //
+    /// // Initial variable locations:
+    /// //   v0.x &lt;- i.color.x; v0.y &lt;- i.color.y; v0.z &lt;- i.color.z; v0.w &lt;- i.color.w;
+    /// //   v1.x &lt;- i.position.x; v1.y &lt;- i.position.y; v1.z &lt;- i.position.z; v1.w &lt;- i.position.w;
+    /// //   o0.x &lt;- &lt;ps_main return value&gt;.color.x; o0.y &lt;- &lt;ps_main return value&gt;.color.y; o0.z &lt;- &lt;ps_main return value&gt;.color.z; o0.w &lt;- &lt;ps_main return value&gt;.color.w
+    /// //
+    /// #line 27 &quot;C:\local\thindx\test\data\basic.hlsl&quot;
+    /// mov o0.xyzw, v0.xyzw
+    /// ret
+    /// // Approximately 2 instruction slots used
+    /// ```
+    </span><span class="kw">pub </span>disassembly:        TextBlob,
 
-    <span class="doccomment">/// The number of bytes offset into the compiled shader data where [d3d::Compiler::disassemble_region] finishes the disassembly.</span>
-    <span class="kw">pub</span> <span class="ident">finish_byte_offset</span>: <span class="ident">usize</span>,
+    <span class="doccomment">/// The number of bytes offset into the compiled shader data where [d3d::Compiler::disassemble_region] finishes the disassembly.
+    </span><span class="kw">pub </span>finish_byte_offset: usize,
 }
 
 
 
-<span class="doccomment">/// &lt;h1 id=&quot;debugging&quot; class=&quot;section-header&quot;&gt;&lt;a href=&quot;#debugging&quot;&gt;Bytecode Debugging&lt;/a&gt;&lt;/h1&gt;</span>
-<span class="kw">impl</span> <span class="ident">Compiler</span> {
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3ddisassemble)\]</span>
-    <span class="doccomment">/// D3DDisassemble</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Disassembles compiled HLSL code.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Arguments</span>
-    <span class="doccomment">/// *   `src_data`          - Compiled HLSL code.</span>
-    <span class="doccomment">/// *   `flags`             - [Disasm] flags controlling how the compiled shader data is disassembled.</span>
-    <span class="doccomment">/// *   `comments`          - Optional string at the top of the shader that identifies the shader constants and variables.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Errors</span>
-    <span class="doccomment">/// *   [THINERR::MISSING_DLL_EXPORT]   - on `d3dcompiler_39.dll` and earlier</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Example</span>
-    <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// # use thindx::d3d::*; let d3dc = Compiler::load_system(47).unwrap();</span>
-    <span class="doccomment">/// # let shader = d3dc.compile_from_file(r&quot;test\data\basic.hlsl&quot;, None, None, &quot;ps_main&quot;, &quot;ps_4_0&quot;, Compile::Debug, CompileEffect::None).unwrap();</span>
-    <span class="doccomment">/// let dis = d3dc.disassemble(&amp;shader, Disasm::None, &quot;// example comment\n&quot;).unwrap();</span>
-    <span class="doccomment">/// println!(&quot;{}&quot;, dis.to_utf8_lossy());</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Output</span>
-    <span class="doccomment">/// ```text</span>
-    <span class="doccomment">/// //</span>
-    <span class="doccomment">/// // Generated by Microsoft (R) HLSL Shader Compiler 10.1</span>
-    <span class="doccomment">/// //</span>
-    <span class="doccomment">/// // example comment</span>
-    <span class="doccomment">/// //</span>
-    <span class="doccomment">/// //</span>
-    <span class="doccomment">/// // Input signature:</span>
-    <span class="doccomment">/// //</span>
-    <span class="doccomment">/// // Name                 Index   Mask Register SysValue  Format   Used</span>
-    <span class="doccomment">/// // -------------------- ----- ------ -------- -------- ------- ------</span>
-    <span class="doccomment">/// // COLOR                    0   xyzw        0     NONE   float   xyzw</span>
-    <span class="doccomment">/// // SV_POSITION              0   xyzw        1      POS   float</span>
-    <span class="doccomment">/// //</span>
-    <span class="doccomment">/// //</span>
-    <span class="doccomment">/// // Output signature:</span>
-    <span class="doccomment">/// //</span>
-    <span class="doccomment">/// // Name                 Index   Mask Register SysValue  Format   Used</span>
-    <span class="doccomment">/// // -------------------- ----- ------ -------- -------- ------- ------</span>
-    <span class="doccomment">/// // SV_TARGET                0   xyzw        0   TARGET   float   xyzw</span>
-    <span class="doccomment">/// //</span>
-    <span class="doccomment">/// ps_4_0</span>
-    <span class="doccomment">/// dcl_input_ps linear v0.xyzw</span>
-    <span class="doccomment">/// dcl_output o0.xyzw</span>
-    <span class="doccomment">/// //</span>
-    <span class="doccomment">/// // Initial variable locations:</span>
-    <span class="doccomment">/// //   v0.x &lt;- i.color.x; v0.y &lt;- i.color.y; v0.z &lt;- i.color.z; v0.w &lt;- i.color.w;</span>
-    <span class="doccomment">/// //   v1.x &lt;- i.position.x; v1.y &lt;- i.position.y; v1.z &lt;- i.position.z; v1.w &lt;- i.position.w;</span>
-    <span class="doccomment">/// //   o0.x &lt;- &lt;ps_main return value&gt;.color.x; o0.y &lt;- &lt;ps_main return value&gt;.color.y; o0.z &lt;- &lt;ps_main return value&gt;.color.z; o0.w &lt;- &lt;ps_main return value&gt;.color.w</span>
-    <span class="doccomment">/// //</span>
-    <span class="doccomment">/// #line 27 &quot;C:\local\thindx\test\data\basic.hlsl&quot;</span>
-    <span class="doccomment">/// mov o0.xyzw, v0.xyzw</span>
-    <span class="doccomment">/// ret</span>
-    <span class="doccomment">/// // Approximately 2 instruction slots used</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Remarks</span>
-    <span class="doccomment">/// *   This was introduced by d3dcompiler_40.dll, and is unavailable in earlier versions.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">disassemble</span>(
+<span class="doccomment">/// &lt;h1 id=&quot;debugging&quot; class=&quot;section-header&quot;&gt;&lt;a href=&quot;#debugging&quot;&gt;Bytecode Debugging&lt;/a&gt;&lt;/h1&gt;
+</span><span class="kw">impl </span>Compiler {
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3ddisassemble)\]
+    /// D3DDisassemble
+    ///
+    /// Disassembles compiled HLSL code.
+    ///
+    /// ### Arguments
+    /// *   `src_data`          - Compiled HLSL code.
+    /// *   `flags`             - [Disasm] flags controlling how the compiled shader data is disassembled.
+    /// *   `comments`          - Optional string at the top of the shader that identifies the shader constants and variables.
+    ///
+    /// ### Errors
+    /// *   [THINERR::MISSING_DLL_EXPORT]   - on `d3dcompiler_39.dll` and earlier
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use thindx::d3d::*; let d3dc = Compiler::load_system(47).unwrap();
+    /// # let shader = d3dc.compile_from_file(r&quot;test\data\basic.hlsl&quot;, None, None, &quot;ps_main&quot;, &quot;ps_4_0&quot;, Compile::Debug, CompileEffect::None).unwrap();
+    /// let dis = d3dc.disassemble(&amp;shader, Disasm::None, &quot;// example comment\n&quot;).unwrap();
+    /// println!(&quot;{}&quot;, dis.to_utf8_lossy());
+    /// ```
+    ///
+    /// ### Output
+    /// ```text
+    /// //
+    /// // Generated by Microsoft (R) HLSL Shader Compiler 10.1
+    /// //
+    /// // example comment
+    /// //
+    /// //
+    /// // Input signature:
+    /// //
+    /// // Name                 Index   Mask Register SysValue  Format   Used
+    /// // -------------------- ----- ------ -------- -------- ------- ------
+    /// // COLOR                    0   xyzw        0     NONE   float   xyzw
+    /// // SV_POSITION              0   xyzw        1      POS   float
+    /// //
+    /// //
+    /// // Output signature:
+    /// //
+    /// // Name                 Index   Mask Register SysValue  Format   Used
+    /// // -------------------- ----- ------ -------- -------- ------- ------
+    /// // SV_TARGET                0   xyzw        0   TARGET   float   xyzw
+    /// //
+    /// ps_4_0
+    /// dcl_input_ps linear v0.xyzw
+    /// dcl_output o0.xyzw
+    /// //
+    /// // Initial variable locations:
+    /// //   v0.x &lt;- i.color.x; v0.y &lt;- i.color.y; v0.z &lt;- i.color.z; v0.w &lt;- i.color.w;
+    /// //   v1.x &lt;- i.position.x; v1.y &lt;- i.position.y; v1.z &lt;- i.position.z; v1.w &lt;- i.position.w;
+    /// //   o0.x &lt;- &lt;ps_main return value&gt;.color.x; o0.y &lt;- &lt;ps_main return value&gt;.color.y; o0.z &lt;- &lt;ps_main return value&gt;.color.z; o0.w &lt;- &lt;ps_main return value&gt;.color.w
+    /// //
+    /// #line 27 &quot;C:\local\thindx\test\data\basic.hlsl&quot;
+    /// mov o0.xyzw, v0.xyzw
+    /// ret
+    /// // Approximately 2 instruction slots used
+    /// ```
+    ///
+    /// ### Remarks
+    /// *   This was introduced by d3dcompiler_40.dll, and is unavailable in earlier versions.
+    </span><span class="kw">pub fn </span>disassemble(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">src_data</span>:           <span class="kw-2">&amp;</span><span class="ident">Bytecode</span>,
-        <span class="ident">flags</span>:              <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Disasm</span><span class="op">&gt;</span>,
-        <span class="ident">comments</span>:           <span class="kw">impl</span> <span class="ident">TryIntoAsOptCStr</span>,
-    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">TextBlob</span>, <span class="ident">MethodError</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">f</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">D3DDisassemble</span>.<span class="ident">ok_or</span>(<span class="ident">MethodError</span>(<span class="string">&quot;D3DDisassemble&quot;</span>, <span class="ident">THINERR::MISSING_DLL_EXPORT</span>))<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">src_data</span> <span class="op">=</span> <span class="ident">src_data</span>.<span class="ident">as_bytes</span>();
-        <span class="kw">let</span> <span class="ident">flags</span> <span class="op">=</span> <span class="ident">flags</span>.<span class="ident">into</span>().<span class="ident">into</span>();
-        <span class="kw">let</span> <span class="ident">comments</span> <span class="op">=</span> <span class="ident">comments</span>.<span class="ident">try_into</span>().<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="ident">MethodError::new</span>(<span class="string">&quot;D3DDisassemble&quot;</span>, <span class="ident">e</span>))<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">comments</span> <span class="op">=</span> <span class="ident">comments</span>.<span class="ident">as_opt_cstr</span>();
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">disassembly</span> <span class="op">=</span> <span class="ident">null_mut</span>();
+        src_data:           <span class="kw-2">&amp;</span>Bytecode,
+        flags:              <span class="kw">impl </span>Into&lt;Disasm&gt;,
+        comments:           <span class="kw">impl </span>TryIntoAsOptCStr,
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;TextBlob, Error&gt; {
+        <span class="macro">fn_context_dll!</span>(d3d::Compiler::disassemble =&gt; <span class="self">self</span>.D3DDisassemble);
+        <span class="kw">let </span>src_data = src_data.as_bytes();
+        <span class="kw">let </span>flags = flags.into().into();
+        <span class="kw">let </span>comments = <span class="macro">fn_param_try_into!</span>(comments)<span class="question-mark">?</span>;
+        <span class="kw">let </span>comments = comments.as_opt_cstr();
+        <span class="kw">let </span><span class="kw-2">mut </span>disassembly = null_mut();
 
-        <span class="comment">// SAFETY: ❌ alloc not fuzzed for overflow, flags unfuzzed</span>
-        <span class="comment">//  * `f`               ✔️ should be valid, like all of `self.*`</span>
-        <span class="comment">//  * `src_data`        ❌ could cause alloc for `disassembly` to overflow</span>
-        <span class="comment">//  * `src_data`        ✔️ should be valid bytecode, as implied by it&#39;s type, `Bytecode`</span>
-        <span class="comment">//  * `flags`           ⚠️ could be invalid?</span>
-        <span class="comment">//  * `comments`        ❌ could cause alloc for `disassembly` to overflow</span>
-        <span class="comment">//  * `comments`        ✔️ should be a valid `\0` terminated C-string without interior `\0`s</span>
-        <span class="kw">let</span> <span class="ident">hr</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="ident">f</span>(<span class="ident">src_data</span>.<span class="ident">as_ptr</span>().<span class="ident">cast</span>(), <span class="ident">src_data</span>.<span class="ident">len</span>(), <span class="ident">flags</span>, <span class="ident">comments</span>, <span class="kw-2">&amp;mut</span> <span class="ident">disassembly</span>) };
-        <span class="ident">MethodError::check</span>(<span class="string">&quot;D3DDisassemble&quot;</span>, <span class="ident">hr</span>)<span class="question-mark">?</span>;
+        <span class="comment">// SAFETY: ❌ alloc not fuzzed for overflow, flags unfuzzed
+        //  * `f`               ✔️ should be valid, like all of `self.*`
+        //  * `src_data`        ❌ could cause alloc for `disassembly` to overflow
+        //  * `src_data`        ✔️ should be valid bytecode, as implied by it&#39;s type, `Bytecode`
+        //  * `flags`           ⚠️ could be invalid?
+        //  * `comments`        ❌ could cause alloc for `disassembly` to overflow
+        //  * `comments`        ✔️ should be a valid `\0` terminated C-string without interior `\0`s
+        </span><span class="macro">fn_check_hr!</span>(<span class="kw">unsafe </span>{ D3DDisassemble(src_data.as_ptr().cast(), src_data.len(), flags, comments, <span class="kw-2">&amp;mut </span>disassembly) })<span class="question-mark">?</span>;
 
-        <span class="comment">// SAFETY: ✔️</span>
-        <span class="comment">//  * `disassembly`     should be null (panics) or a non-dangling, valid ID3DBlob</span>
-        <span class="comment">//  * `ReadOnlyBlob`    imposes no restrictions on the contents of `disassembly`</span>
-        <span class="prelude-val">Ok</span>(<span class="ident">TextBlob::new</span>(<span class="kw unsafe">unsafe</span> { <span class="ident">ReadOnlyBlob::from_raw</span>(<span class="ident">disassembly</span>) }))
+        <span class="comment">// SAFETY: ✔️
+        //  * `disassembly`     should be null (panics) or a non-dangling, valid ID3DBlob
+        //  * `ReadOnlyBlob`    imposes no restrictions on the contents of `disassembly`
+        </span><span class="prelude-val">Ok</span>(TextBlob::new(<span class="kw">unsafe </span>{ ReadOnlyBlob::from_raw(disassembly) }))
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3ddisassembleregion)\]</span>
-    <span class="doccomment">/// D3DDisassembleRegion</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Disassembles a specific region of compiled Microsoft High Level Shader Language (HLSL) code.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Arguments</span>
-    <span class="doccomment">/// *   `src_data`          - Compiled HLSL code.</span>
-    <span class="doccomment">/// *   `flags`             - [Disasm] flags controlling how the compiled shader data is disassembled.</span>
-    <span class="doccomment">/// *   `comments`          - Optional string at the top of the shader that identifies the shader constants and variables.</span>
-    <span class="doccomment">/// *   `start_byte_offset` - The number of bytes offset into the compiled shader data where [disassemble_region](Self::disassemble_region) starts the disassembly.</span>
-    <span class="doccomment">/// *   `num_insts`         - The number of instructions to disassemble.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Errors</span>
-    <span class="doccomment">/// *   [THINERR::MISSING_DLL_EXPORT]   - on `d3dcompiler_43.dll` and earlier</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Example</span>
-    <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// # use thindx::d3d::*; let d3dc = Compiler::load_system(47).unwrap();</span>
-    <span class="doccomment">/// # let shader = d3dc.compile_from_file(r&quot;test\data\basic.hlsl&quot;, None, None, &quot;ps_main&quot;, &quot;ps_4_0&quot;, Compile::Debug, CompileEffect::None).unwrap();</span>
-    <span class="doccomment">/// let dr = d3dc.disassemble_region(</span>
-    <span class="doccomment">///     &amp;shader, Disasm::None, &quot;// example comment\n&quot;, 0, std::usize::MAX</span>
-    <span class="doccomment">/// ).unwrap();</span>
-    <span class="doccomment">/// println!(&quot;finish_byte_offset: {}&quot;, dr.finish_byte_offset);</span>
-    <span class="doccomment">/// println!(&quot;{}&quot;, dr.disassembly.to_utf8_lossy());</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Output</span>
-    <span class="doccomment">/// ```text</span>
-    <span class="doccomment">/// finish_byte_offset: 56</span>
-    <span class="doccomment">/// //</span>
-    <span class="doccomment">/// // Generated by Microsoft (R) HLSL Shader Compiler 10.1</span>
-    <span class="doccomment">/// //</span>
-    <span class="doccomment">/// // example comment</span>
-    <span class="doccomment">/// //</span>
-    <span class="doccomment">/// //</span>
-    <span class="doccomment">/// // Input signature:</span>
-    <span class="doccomment">/// //</span>
-    <span class="doccomment">/// // Name                 Index   Mask Register SysValue  Format   Used</span>
-    <span class="doccomment">/// // -------------------- ----- ------ -------- -------- ------- ------</span>
-    <span class="doccomment">/// // COLOR                    0   xyzw        0     NONE   float   xyzw</span>
-    <span class="doccomment">/// // SV_POSITION              0   xyzw        1      POS   float</span>
-    <span class="doccomment">/// //</span>
-    <span class="doccomment">/// //</span>
-    <span class="doccomment">/// // Output signature:</span>
-    <span class="doccomment">/// //</span>
-    <span class="doccomment">/// // Name                 Index   Mask Register SysValue  Format   Used</span>
-    <span class="doccomment">/// // -------------------- ----- ------ -------- -------- ------- ------</span>
-    <span class="doccomment">/// // SV_TARGET                0   xyzw        0   TARGET   float   xyzw</span>
-    <span class="doccomment">/// //</span>
-    <span class="doccomment">/// ps_4_0</span>
-    <span class="doccomment">/// dcl_input_ps linear v0.xyzw</span>
-    <span class="doccomment">/// dcl_output o0.xyzw</span>
-    <span class="doccomment">/// //</span>
-    <span class="doccomment">/// // Initial variable locations:</span>
-    <span class="doccomment">/// //   v0.x &lt;- i.color.x; v0.y &lt;- i.color.y; v0.z &lt;- i.color.z; v0.w &lt;- i.color.w;</span>
-    <span class="doccomment">/// //   v1.x &lt;- i.position.x; v1.y &lt;- i.position.y; v1.z &lt;- i.position.z; v1.w &lt;- i.position.w;</span>
-    <span class="doccomment">/// //   o0.x &lt;- &lt;ps_main return value&gt;.color.x; o0.y &lt;- &lt;ps_main return value&gt;.color.y; o0.z &lt;- &lt;ps_main return value&gt;.color.z; o0.w &lt;- &lt;ps_main return value&gt;.color.w</span>
-    <span class="doccomment">/// //</span>
-    <span class="doccomment">/// #line 27 &quot;C:\local\thindx\test\data\basic.hlsl&quot;</span>
-    <span class="doccomment">/// mov o0.xyzw, v0.xyzw</span>
-    <span class="doccomment">/// ret</span>
-    <span class="doccomment">/// // Approximately 2 instruction slots used</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Remarks</span>
-    <span class="doccomment">/// *   This was introduced by d3dcompiler_44.dll, and is unavailable in earlier versions.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">disassemble_region</span>(
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3ddisassembleregion)\]
+    /// D3DDisassembleRegion
+    ///
+    /// Disassembles a specific region of compiled Microsoft High Level Shader Language (HLSL) code.
+    ///
+    /// ### Arguments
+    /// *   `src_data`          - Compiled HLSL code.
+    /// *   `flags`             - [Disasm] flags controlling how the compiled shader data is disassembled.
+    /// *   `comments`          - Optional string at the top of the shader that identifies the shader constants and variables.
+    /// *   `start_byte_offset` - The number of bytes offset into the compiled shader data where [disassemble_region](Self::disassemble_region) starts the disassembly.
+    /// *   `num_insts`         - The number of instructions to disassemble.
+    ///
+    /// ### Errors
+    /// *   [THINERR::MISSING_DLL_EXPORT]   - on `d3dcompiler_43.dll` and earlier
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use thindx::d3d::*; let d3dc = Compiler::load_system(47).unwrap();
+    /// # let shader = d3dc.compile_from_file(r&quot;test\data\basic.hlsl&quot;, None, None, &quot;ps_main&quot;, &quot;ps_4_0&quot;, Compile::Debug, CompileEffect::None).unwrap();
+    /// let dr = d3dc.disassemble_region(
+    ///     &amp;shader, Disasm::None, &quot;// example comment\n&quot;, 0, std::usize::MAX
+    /// ).unwrap();
+    /// println!(&quot;finish_byte_offset: {}&quot;, dr.finish_byte_offset);
+    /// println!(&quot;{}&quot;, dr.disassembly.to_utf8_lossy());
+    /// ```
+    ///
+    /// ### Output
+    /// ```text
+    /// finish_byte_offset: 56
+    /// //
+    /// // Generated by Microsoft (R) HLSL Shader Compiler 10.1
+    /// //
+    /// // example comment
+    /// //
+    /// //
+    /// // Input signature:
+    /// //
+    /// // Name                 Index   Mask Register SysValue  Format   Used
+    /// // -------------------- ----- ------ -------- -------- ------- ------
+    /// // COLOR                    0   xyzw        0     NONE   float   xyzw
+    /// // SV_POSITION              0   xyzw        1      POS   float
+    /// //
+    /// //
+    /// // Output signature:
+    /// //
+    /// // Name                 Index   Mask Register SysValue  Format   Used
+    /// // -------------------- ----- ------ -------- -------- ------- ------
+    /// // SV_TARGET                0   xyzw        0   TARGET   float   xyzw
+    /// //
+    /// ps_4_0
+    /// dcl_input_ps linear v0.xyzw
+    /// dcl_output o0.xyzw
+    /// //
+    /// // Initial variable locations:
+    /// //   v0.x &lt;- i.color.x; v0.y &lt;- i.color.y; v0.z &lt;- i.color.z; v0.w &lt;- i.color.w;
+    /// //   v1.x &lt;- i.position.x; v1.y &lt;- i.position.y; v1.z &lt;- i.position.z; v1.w &lt;- i.position.w;
+    /// //   o0.x &lt;- &lt;ps_main return value&gt;.color.x; o0.y &lt;- &lt;ps_main return value&gt;.color.y; o0.z &lt;- &lt;ps_main return value&gt;.color.z; o0.w &lt;- &lt;ps_main return value&gt;.color.w
+    /// //
+    /// #line 27 &quot;C:\local\thindx\test\data\basic.hlsl&quot;
+    /// mov o0.xyzw, v0.xyzw
+    /// ret
+    /// // Approximately 2 instruction slots used
+    /// ```
+    ///
+    /// ### Remarks
+    /// *   This was introduced by d3dcompiler_44.dll, and is unavailable in earlier versions.
+    </span><span class="kw">pub fn </span>disassemble_region(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">src_data</span>:           <span class="kw-2">&amp;</span><span class="ident">Bytecode</span>,
-        <span class="ident">flags</span>:              <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Disasm</span><span class="op">&gt;</span>,
-        <span class="ident">comments</span>:           <span class="kw">impl</span> <span class="ident">TryIntoAsOptCStr</span>,
-        <span class="ident">start_byte_offset</span>:  <span class="ident">usize</span>,
-        <span class="ident">num_insts</span>:          <span class="ident">usize</span>,
-    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">DisassembledRegion</span>, <span class="ident">MethodError</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">f</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">D3DDisassembleRegion</span>.<span class="ident">ok_or</span>(<span class="ident">MethodError</span>(<span class="string">&quot;D3DDisassembleRegion&quot;</span>, <span class="ident">THINERR::MISSING_DLL_EXPORT</span>))<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">src_data</span> <span class="op">=</span> <span class="ident">src_data</span>.<span class="ident">as_bytes</span>();
-        <span class="kw">let</span> <span class="ident">flags</span> <span class="op">=</span> <span class="ident">flags</span>.<span class="ident">into</span>().<span class="ident">into</span>();
-        <span class="kw">let</span> <span class="ident">comments</span> <span class="op">=</span> <span class="ident">comments</span>.<span class="ident">try_into</span>().<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="ident">MethodError::new</span>(<span class="string">&quot;D3DDisassembleRegion&quot;</span>, <span class="ident">e</span>))<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">comments</span> <span class="op">=</span> <span class="ident">comments</span>.<span class="ident">as_opt_cstr</span>();
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">disassembly</span> <span class="op">=</span> <span class="ident">null_mut</span>();
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">finish_byte_offset</span> <span class="op">=</span> <span class="number">0</span>;
+        src_data:           <span class="kw-2">&amp;</span>Bytecode,
+        flags:              <span class="kw">impl </span>Into&lt;Disasm&gt;,
+        comments:           <span class="kw">impl </span>TryIntoAsOptCStr,
+        start_byte_offset:  usize,
+        num_insts:          usize,
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;DisassembledRegion, Error&gt; {
+        <span class="macro">fn_context_dll!</span>(d3d::Compiler::disassemble_region =&gt; <span class="self">self</span>.D3DDisassembleRegion);
+        <span class="kw">let </span>src_data = src_data.as_bytes();
+        <span class="kw">let </span>flags = flags.into().into();
+        <span class="kw">let </span>comments = <span class="macro">fn_param_try_into!</span>(comments)<span class="question-mark">?</span>;
+        <span class="kw">let </span>comments = comments.as_opt_cstr();
+        <span class="kw">let </span><span class="kw-2">mut </span>disassembly = null_mut();
+        <span class="kw">let </span><span class="kw-2">mut </span>finish_byte_offset = <span class="number">0</span>;
 
-        <span class="comment">// SAFETY: ❌ alloc not fuzzed for overflow, flags unfuzzed</span>
-        <span class="comment">//  * `f`                   ✔️ should be valid, like all of `self.*`</span>
-        <span class="comment">//  * `src_data`            ❌ could cause alloc for `disassembly` to overflow</span>
-        <span class="comment">//  * `src_data`            ✔️ should be valid bytecode, as implied by it&#39;s type, `Bytecode`</span>
-        <span class="comment">//  * `flags`               ⚠️ could be invalid?</span>
-        <span class="comment">//  * `comments`            ❌ could cause alloc for `disassembly` to overflow</span>
-        <span class="comment">//  * `comments`            ✔️ should be a valid `\0` terminated C-string without interior `\0`s</span>
-        <span class="comment">//  * `start_byte_offset`   ❌ could be out-of-bounds</span>
-        <span class="comment">//  * `num_insts`           ❌ could be out-of-bounds</span>
-        <span class="comment">//  * `finish_byte_offset`  ✔️ is a trivial out param</span>
-        <span class="comment">//  * `disassembly`         ✔️ is a trivial out param</span>
-        <span class="kw">let</span> <span class="ident">hr</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="ident">f</span>(<span class="ident">src_data</span>.<span class="ident">as_ptr</span>().<span class="ident">cast</span>(), <span class="ident">src_data</span>.<span class="ident">len</span>(), <span class="ident">flags</span>, <span class="ident">comments</span>, <span class="ident">start_byte_offset</span>, <span class="ident">num_insts</span>, <span class="kw-2">&amp;mut</span> <span class="ident">finish_byte_offset</span>, <span class="kw-2">&amp;mut</span> <span class="ident">disassembly</span>) };
-        <span class="ident">MethodError::check</span>(<span class="string">&quot;D3DDisassembleRegion&quot;</span>, <span class="ident">hr</span>)<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(<span class="ident">DisassembledRegion</span> {
-            <span class="comment">// SAFETY: ✔️</span>
-            <span class="comment">//  * `disassembly`     should be null (panics) or a non-dangling, valid ID3DBlob</span>
-            <span class="comment">//  * `ReadOnlyBlob`    imposes no restrictions on the contents of `disassembly`</span>
-            <span class="ident">disassembly</span>: <span class="ident">TextBlob::new</span>(<span class="kw unsafe">unsafe</span> { <span class="ident">ReadOnlyBlob::from_raw</span>(<span class="ident">disassembly</span>) }),
-            <span class="ident">finish_byte_offset</span>,
+        <span class="comment">// SAFETY: ❌ alloc not fuzzed for overflow, flags unfuzzed
+        //  * `f`                   ✔️ should be valid, like all of `self.*`
+        //  * `src_data`            ❌ could cause alloc for `disassembly` to overflow
+        //  * `src_data`            ✔️ should be valid bytecode, as implied by it&#39;s type, `Bytecode`
+        //  * `flags`               ⚠️ could be invalid?
+        //  * `comments`            ❌ could cause alloc for `disassembly` to overflow
+        //  * `comments`            ✔️ should be a valid `\0` terminated C-string without interior `\0`s
+        //  * `start_byte_offset`   ❌ could be out-of-bounds
+        //  * `num_insts`           ❌ could be out-of-bounds
+        //  * `finish_byte_offset`  ✔️ is a trivial out param
+        //  * `disassembly`         ✔️ is a trivial out param
+        </span><span class="macro">fn_check_hr!</span>(<span class="kw">unsafe </span>{ D3DDisassembleRegion(src_data.as_ptr().cast(), src_data.len(), flags, comments, start_byte_offset, num_insts, <span class="kw-2">&amp;mut </span>finish_byte_offset, <span class="kw-2">&amp;mut </span>disassembly) })<span class="question-mark">?</span>;
+        <span class="prelude-val">Ok</span>(DisassembledRegion {
+            <span class="comment">// SAFETY: ✔️
+            //  * `disassembly`     should be null (panics) or a non-dangling, valid ID3DBlob
+            //  * `ReadOnlyBlob`    imposes no restrictions on the contents of `disassembly`
+            </span>disassembly: TextBlob::new(<span class="kw">unsafe </span>{ ReadOnlyBlob::from_raw(disassembly) }),
+            finish_byte_offset,
         })
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dgettraceinstructionoffsets)\]</span>
-    <span class="doccomment">/// D3DGetTraceInstructionOffsets</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Retrieves the number of byte offsets for instructions within a section of shader code.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Errors</span>
-    <span class="doccomment">/// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_43.dll` and earlier</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Example</span>
-    <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// # use thindx::d3d::*; let d3dc = Compiler::load_system(47).unwrap();</span>
-    <span class="doccomment">/// # let shader = d3dc.compile_from_file(r&quot;test\data\basic.hlsl&quot;, None, None, &quot;ps_main&quot;, &quot;ps_4_0&quot;, Compile::Debug, CompileEffect::None).unwrap();</span>
-    <span class="doccomment">/// println!(&quot;{}&quot;, d3dc.get_trace_instruction_offsets_count(</span>
-    <span class="doccomment">///     &amp;shader, GetInstOffsets::None, 0, std::usize::MAX</span>
-    <span class="doccomment">/// ).unwrap());</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Output</span>
-    <span class="doccomment">/// ```text</span>
-    <span class="doccomment">/// 2</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Remarks</span>
-    <span class="doccomment">/// *   This was introduced by d3dcompiler_44.dll, and is unavailable in earlier versions.</span>
-    <span class="comment">//#allow_missing_argument_docs</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_trace_instruction_offsets_count</span>(
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dgettraceinstructionoffsets)\]
+    /// D3DGetTraceInstructionOffsets
+    ///
+    /// Retrieves the number of byte offsets for instructions within a section of shader code.
+    ///
+    /// ### Errors
+    /// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_43.dll` and earlier
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use thindx::d3d::*; let d3dc = Compiler::load_system(47).unwrap();
+    /// # let shader = d3dc.compile_from_file(r&quot;test\data\basic.hlsl&quot;, None, None, &quot;ps_main&quot;, &quot;ps_4_0&quot;, Compile::Debug, CompileEffect::None).unwrap();
+    /// println!(&quot;{}&quot;, d3dc.get_trace_instruction_offsets_count(
+    ///     &amp;shader, GetInstOffsets::None, 0, std::usize::MAX
+    /// ).unwrap());
+    /// ```
+    ///
+    /// ### Output
+    /// ```text
+    /// 2
+    /// ```
+    ///
+    /// ### Remarks
+    /// *   This was introduced by d3dcompiler_44.dll, and is unavailable in earlier versions.
+    </span><span class="comment">//#allow_missing_argument_docs
+    </span><span class="kw">pub fn </span>get_trace_instruction_offsets_count(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">src_data</span>:           <span class="kw-2">&amp;</span><span class="ident">Bytecode</span>,
-        <span class="ident">flags</span>:              <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">GetInstOffsets</span><span class="op">&gt;</span>,
-        <span class="ident">start_inst_index</span>:   <span class="ident">usize</span>,
-        <span class="ident">num_insts</span>:          <span class="ident">usize</span>,
-    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">usize</span>, <span class="ident">MethodError</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">f</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">D3DGetTraceInstructionOffsets</span>.<span class="ident">ok_or</span>(<span class="ident">MethodError</span>(<span class="string">&quot;D3DGetTraceInstructionOffsets&quot;</span>, <span class="ident">THINERR::MISSING_DLL_EXPORT</span>))<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">src_data</span> <span class="op">=</span> <span class="ident">src_data</span>.<span class="ident">as_bytes</span>();
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">n</span> <span class="op">=</span> <span class="number">0</span>;
+        src_data:           <span class="kw-2">&amp;</span>Bytecode,
+        flags:              <span class="kw">impl </span>Into&lt;GetInstOffsets&gt;,
+        start_inst_index:   usize,
+        num_insts:          usize,
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;usize, Error&gt; {
+        <span class="macro">fn_context_dll!</span>(d3d::Compiler::get_trace_instruction_offsets_count =&gt; <span class="self">self</span>.D3DGetTraceInstructionOffsets);
+        <span class="kw">let </span>src_data = src_data.as_bytes();
+        <span class="kw">let </span><span class="kw-2">mut </span>n = <span class="number">0</span>;
 
-        <span class="comment">// SAFETY: ❌ indicies could be out of bounds, flags unfuzzed</span>
-        <span class="comment">//  * `f`                   ✔️ should be valid, like all of `self.*`</span>
-        <span class="comment">//  * `src_data`            ✔️ should be valid bytecode, as implied by it&#39;s type, `Bytecode`</span>
-        <span class="comment">//  * `flags`               ⚠️ could be invalid?</span>
-        <span class="comment">//  * `start_inst_index`    ❌ could be out-of-bounds</span>
-        <span class="comment">//  * `num_insts`           ❌ could be out-of-bounds</span>
-        <span class="comment">//  * `pOffsets`            ✔️ null is valid (we&#39;re just getting the count)</span>
-        <span class="comment">//  * `pTotalInsts`         ✔️ is a trivial out param</span>
-        <span class="kw">let</span> <span class="ident">hr</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="ident">f</span>(<span class="ident">src_data</span>.<span class="ident">as_ptr</span>().<span class="ident">cast</span>(), <span class="ident">src_data</span>.<span class="ident">len</span>(), <span class="ident">flags</span>.<span class="ident">into</span>().<span class="ident">into</span>(), <span class="ident">start_inst_index</span>, <span class="ident">num_insts</span>, <span class="ident">null_mut</span>(), <span class="kw-2">&amp;mut</span> <span class="ident">n</span>) };
-        <span class="ident">MethodError::check</span>(<span class="string">&quot;D3DGetTraceInstructionOffsets&quot;</span>, <span class="ident">hr</span>)<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(<span class="ident">n</span>)
+        <span class="comment">// SAFETY: ❌ indicies could be out of bounds, flags unfuzzed
+        //  * `f`                   ✔️ should be valid, like all of `self.*`
+        //  * `src_data`            ✔️ should be valid bytecode, as implied by it&#39;s type, `Bytecode`
+        //  * `flags`               ⚠️ could be invalid?
+        //  * `start_inst_index`    ❌ could be out-of-bounds
+        //  * `num_insts`           ❌ could be out-of-bounds
+        //  * `pOffsets`            ✔️ null is valid (we&#39;re just getting the count)
+        //  * `pTotalInsts`         ✔️ is a trivial out param
+        </span><span class="macro">fn_check_hr!</span>(<span class="kw">unsafe </span>{ D3DGetTraceInstructionOffsets(src_data.as_ptr().cast(), src_data.len(), flags.into().into(), start_inst_index, num_insts, null_mut(), <span class="kw-2">&amp;mut </span>n) })<span class="question-mark">?</span>;
+        <span class="prelude-val">Ok</span>(n)
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dgettraceinstructionoffsets)\]</span>
-    <span class="doccomment">/// D3DGetTraceInstructionOffsets</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Retrieves the byte offsets for instructions within a section of shader code.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Errors</span>
-    <span class="doccomment">/// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_43.dll` and earlier</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Example</span>
-    <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// # use thindx::d3d::*; let d3dc = Compiler::load_system(47).unwrap();</span>
-    <span class="doccomment">/// # let shader = d3dc.compile_from_file(r&quot;test\data\basic.hlsl&quot;, None, None, &quot;ps_main&quot;, &quot;ps_4_0&quot;, Compile::Debug, CompileEffect::None).unwrap();</span>
-    <span class="doccomment">/// let mut offsets = [0; 128];</span>
-    <span class="doccomment">/// let offsets : &amp;[usize] = d3dc.get_trace_instruction_offsets_inplace(</span>
-    <span class="doccomment">///     &amp;shader, GetInstOffsets::None, 0, &amp;mut offsets</span>
-    <span class="doccomment">/// ).unwrap();</span>
-    <span class="doccomment">/// println!(&quot;{:?}&quot;, offsets);</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Output</span>
-    <span class="doccomment">/// ```text</span>
-    <span class="doccomment">/// [32, 52]</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Remarks</span>
-    <span class="doccomment">/// *   This was introduced by d3dcompiler_44.dll, and is unavailable in earlier versions.</span>
-    <span class="comment">//#allow_missing_argument_docs</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_trace_instruction_offsets_inplace</span><span class="op">&lt;</span><span class="lifetime">&#39;o</span><span class="op">&gt;</span>(
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dgettraceinstructionoffsets)\]
+    /// D3DGetTraceInstructionOffsets
+    ///
+    /// Retrieves the byte offsets for instructions within a section of shader code.
+    ///
+    /// ### Errors
+    /// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_43.dll` and earlier
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use thindx::d3d::*; let d3dc = Compiler::load_system(47).unwrap();
+    /// # let shader = d3dc.compile_from_file(r&quot;test\data\basic.hlsl&quot;, None, None, &quot;ps_main&quot;, &quot;ps_4_0&quot;, Compile::Debug, CompileEffect::None).unwrap();
+    /// let mut offsets = [0; 128];
+    /// let offsets : &amp;[usize] = d3dc.get_trace_instruction_offsets_inplace(
+    ///     &amp;shader, GetInstOffsets::None, 0, &amp;mut offsets
+    /// ).unwrap();
+    /// println!(&quot;{:?}&quot;, offsets);
+    /// ```
+    ///
+    /// ### Output
+    /// ```text
+    /// [32, 52]
+    /// ```
+    ///
+    /// ### Remarks
+    /// *   This was introduced by d3dcompiler_44.dll, and is unavailable in earlier versions.
+    </span><span class="comment">//#allow_missing_argument_docs
+    </span><span class="kw">pub fn </span>get_trace_instruction_offsets_inplace&lt;<span class="lifetime">&#39;o</span>&gt;(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">src_data</span>:           <span class="kw-2">&amp;</span><span class="ident">Bytecode</span>,
-        <span class="ident">flags</span>:              <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">GetInstOffsets</span><span class="op">&gt;</span>,
-        <span class="ident">start_inst_index</span>:   <span class="ident">usize</span>,
-        <span class="ident">offsets</span>:            <span class="kw-2">&amp;</span><span class="lifetime">&#39;o</span> <span class="kw-2">mut</span> [<span class="ident">usize</span>],
-    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;o</span> [<span class="ident">usize</span>], <span class="ident">MethodError</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">f</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">D3DGetTraceInstructionOffsets</span>.<span class="ident">ok_or</span>(<span class="ident">MethodError</span>(<span class="string">&quot;D3DGetTraceInstructionOffsets&quot;</span>, <span class="ident">THINERR::MISSING_DLL_EXPORT</span>))<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">src_data</span> <span class="op">=</span> <span class="ident">src_data</span>.<span class="ident">as_bytes</span>();
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">n</span> <span class="op">=</span> <span class="number">0</span>;
+        src_data:           <span class="kw-2">&amp;</span>Bytecode,
+        flags:              <span class="kw">impl </span>Into&lt;GetInstOffsets&gt;,
+        start_inst_index:   usize,
+        offsets:            <span class="kw-2">&amp;</span><span class="lifetime">&#39;o </span><span class="kw-2">mut </span>[usize],
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;o </span>[usize], Error&gt; {
+        <span class="macro">fn_context_dll!</span>(d3d::Compiler::get_trace_instruction_offsets_inplace =&gt; <span class="self">self</span>.D3DGetTraceInstructionOffsets);
+        <span class="kw">let </span>src_data = src_data.as_bytes();
+        <span class="kw">let </span><span class="kw-2">mut </span>n = <span class="number">0</span>;
 
-        <span class="comment">// SAFETY: ❌ indicies could be out of bounds, flags unfuzzed</span>
-        <span class="comment">//  * `f`                   ✔️ should be valid, like all of `self.*`</span>
-        <span class="comment">//  * `src_data`            ✔️ should be valid bytecode, as implied by it&#39;s type, `Bytecode`</span>
-        <span class="comment">//  * `flags`               ⚠️ could be invalid?</span>
-        <span class="comment">//  * `start_inst_index`    ❌ could be out-of-bounds</span>
-        <span class="comment">//  * `NumInsts`            ✔️ should be valid.  Even if `D3DGetTraceInstructionOffsets` truncates, offsets is initialized, so a short read should be harmless.</span>
-        <span class="comment">//  * `pOffsets`            ✔️ is valid for offsets.len() elements.</span>
-        <span class="comment">//  * `pTotalInsts`         ✔️ is a trivial out param</span>
-        <span class="kw">let</span> <span class="ident">hr</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="ident">f</span>(<span class="ident">src_data</span>.<span class="ident">as_ptr</span>().<span class="ident">cast</span>(), <span class="ident">src_data</span>.<span class="ident">len</span>(), <span class="ident">flags</span>.<span class="ident">into</span>().<span class="ident">into</span>(), <span class="ident">start_inst_index</span>, <span class="ident">offsets</span>.<span class="ident">len</span>(), <span class="ident">offsets</span>.<span class="ident">as_mut_ptr</span>(), <span class="kw-2">&amp;mut</span> <span class="ident">n</span>) };
-        <span class="ident">MethodError::check</span>(<span class="string">&quot;D3DGetTraceInstructionOffsets&quot;</span>, <span class="ident">hr</span>)<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(<span class="kw-2">&amp;</span><span class="ident">offsets</span>[..<span class="ident">n</span>])
+        <span class="comment">// SAFETY: ❌ indicies could be out of bounds, flags unfuzzed
+        //  * `f`                   ✔️ should be valid, like all of `self.*`
+        //  * `src_data`            ✔️ should be valid bytecode, as implied by it&#39;s type, `Bytecode`
+        //  * `flags`               ⚠️ could be invalid?
+        //  * `start_inst_index`    ❌ could be out-of-bounds
+        //  * `NumInsts`            ✔️ should be valid.  Even if `D3DGetTraceInstructionOffsets` truncates, offsets is initialized, so a short read should be harmless.
+        //  * `pOffsets`            ✔️ is valid for offsets.len() elements.
+        //  * `pTotalInsts`         ✔️ is a trivial out param
+        </span><span class="macro">fn_check_hr!</span>(<span class="kw">unsafe </span>{ D3DGetTraceInstructionOffsets(src_data.as_ptr().cast(), src_data.len(), flags.into().into(), start_inst_index, offsets.len(), offsets.as_mut_ptr(), <span class="kw-2">&amp;mut </span>n) })<span class="question-mark">?</span>;
+        <span class="prelude-val">Ok</span>(<span class="kw-2">&amp;</span>offsets[..n])
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dgettraceinstructionoffsets)\]</span>
-    <span class="doccomment">/// D3DGetTraceInstructionOffsets</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Retrieves the byte offsets for instructions within a section of shader code.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Errors</span>
-    <span class="doccomment">/// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_43.dll` and earlier</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Example</span>
-    <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// # use thindx::d3d::*; let d3dc = Compiler::load_system(47).unwrap();</span>
-    <span class="doccomment">/// # let shader = d3dc.compile_from_file(r&quot;test\data\basic.hlsl&quot;, None, None, &quot;ps_main&quot;, &quot;ps_4_0&quot;, Compile::Debug, CompileEffect::None).unwrap();</span>
-    <span class="doccomment">/// let offsets : Vec&lt;usize&gt; = d3dc.get_trace_instruction_offsets(</span>
-    <span class="doccomment">///     &amp;shader, GetInstOffsets::None, 0, std::usize::MAX</span>
-    <span class="doccomment">/// ).unwrap();</span>
-    <span class="doccomment">/// println!(&quot;{:?}&quot;, offsets);</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Output</span>
-    <span class="doccomment">/// ```text</span>
-    <span class="doccomment">/// [32, 52]</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Remarks</span>
-    <span class="doccomment">/// *   This was introduced by d3dcompiler_44.dll, and is unavailable in earlier versions.</span>
-    <span class="comment">//#allow_missing_argument_docs</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_trace_instruction_offsets</span>(
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dgettraceinstructionoffsets)\]
+    /// D3DGetTraceInstructionOffsets
+    ///
+    /// Retrieves the byte offsets for instructions within a section of shader code.
+    ///
+    /// ### Errors
+    /// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_43.dll` and earlier
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use thindx::d3d::*; let d3dc = Compiler::load_system(47).unwrap();
+    /// # let shader = d3dc.compile_from_file(r&quot;test\data\basic.hlsl&quot;, None, None, &quot;ps_main&quot;, &quot;ps_4_0&quot;, Compile::Debug, CompileEffect::None).unwrap();
+    /// let offsets : Vec&lt;usize&gt; = d3dc.get_trace_instruction_offsets(
+    ///     &amp;shader, GetInstOffsets::None, 0, std::usize::MAX
+    /// ).unwrap();
+    /// println!(&quot;{:?}&quot;, offsets);
+    /// ```
+    ///
+    /// ### Output
+    /// ```text
+    /// [32, 52]
+    /// ```
+    ///
+    /// ### Remarks
+    /// *   This was introduced by d3dcompiler_44.dll, and is unavailable in earlier versions.
+    </span><span class="comment">//#allow_missing_argument_docs
+    </span><span class="kw">pub fn </span>get_trace_instruction_offsets(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">src_data</span>:           <span class="kw-2">&amp;</span><span class="ident">Bytecode</span>,
-        <span class="ident">flags</span>:              <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">GetInstOffsets</span><span class="op">&gt;</span>,
-        <span class="ident">start_inst_index</span>:   <span class="ident">usize</span>,
-        <span class="ident">num_insts</span>:          <span class="ident">usize</span>,
-    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>, <span class="ident">MethodError</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">flags</span> <span class="op">=</span> <span class="ident">flags</span>.<span class="ident">into</span>();
-        <span class="kw">let</span> <span class="ident">n</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">get_trace_instruction_offsets_count</span>(<span class="ident">src_data</span>, <span class="ident">flags</span>, <span class="ident">start_inst_index</span>, <span class="ident">num_insts</span>)<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">buffer</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="number">0usize</span>; <span class="ident">n</span>];
-        <span class="kw">let</span> <span class="ident">n2</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">get_trace_instruction_offsets_inplace</span>(<span class="ident">src_data</span>, <span class="ident">flags</span>, <span class="ident">start_inst_index</span>, <span class="kw-2">&amp;mut</span> <span class="ident">buffer</span>)<span class="question-mark">?</span>.<span class="ident">len</span>();
-        <span class="macro">debug_assert_eq!</span>(<span class="ident">n</span>, <span class="ident">n2</span>, <span class="string">&quot;number of instructions shouldn&#39;t have changed between calls&quot;</span>);
-        <span class="ident">buffer</span>.<span class="ident">shrink_to</span>(<span class="ident">n2</span>);
-        <span class="prelude-val">Ok</span>(<span class="ident">buffer</span>)
+        src_data:           <span class="kw-2">&amp;</span>Bytecode,
+        flags:              <span class="kw">impl </span>Into&lt;GetInstOffsets&gt;,
+        start_inst_index:   usize,
+        num_insts:          usize,
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;Vec&lt;usize&gt;, Error&gt; {
+        <span class="macro">fn_context!</span>(d3d::Compiler::get_trace_instruction_offsets =&gt; D3DGetTraceInstructionOffsets);
+        <span class="kw">let </span>flags = flags.into();
+        <span class="kw">let </span>n = <span class="self">self</span>.get_trace_instruction_offsets_count(src_data, flags, start_inst_index, num_insts)<span class="question-mark">?</span>;
+        <span class="kw">let </span><span class="kw-2">mut </span>buffer = <span class="macro">vec!</span>[<span class="number">0usize</span>; n];
+        <span class="kw">let </span>n2 = <span class="self">self</span>.get_trace_instruction_offsets_inplace(src_data, flags, start_inst_index, <span class="kw-2">&amp;mut </span>buffer)<span class="question-mark">?</span>.len();
+        <span class="macro">debug_assert_eq!</span>(n, n2, <span class="string">&quot;number of instructions shouldn&#39;t have changed between calls&quot;</span>);
+        buffer.shrink_to(n2);
+        <span class="prelude-val">Ok</span>(buffer)
     }
 }
 
-<span class="comment">//#cpp2rust D3DDisassemble                          = d3d::Compiler::disassemble</span>
-<span class="comment">//TODO:     D3DDisassemble10Effect                  = d3d::Compiler::disassemble_10_effect</span>
-<span class="comment">//#cpp2rust D3DDisassembleRegion                    = d3d::Compiler::disassemble_region</span>
-<span class="comment">//#cpp2rust D3DGetTraceInstructionOffsets           = d3d::Compiler::get_trace_instruction_offsets</span>
-<span class="comment">//#cpp2rust D3DGetTraceInstructionOffsets           = d3d::Compiler::get_trace_instruction_offsets_inplace</span>
-</code></pre></div>
-</section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-search-index-js="../../../../../search-index.js" data-search-js="../../../../../search.js"></div>
-</body></html>
+<span class="comment">//TODO:     D3DDisassemble10Effect                  = d3d::Compiler::disassemble_10_effect
+</span></code></pre></div>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (b44197abb 2022-09-05)" ></div></body></html>

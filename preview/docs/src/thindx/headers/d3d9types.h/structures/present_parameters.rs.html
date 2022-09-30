@@ -1,0 +1,158 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3d9types.h\structures\present_parameters.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>present_parameters.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../../normalize.css"><link rel="stylesheet" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../../dark.css" disabled><link rel="stylesheet" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<span id="2">2</span>
+<span id="3">3</span>
+<span id="4">4</span>
+<span id="5">5</span>
+<span id="6">6</span>
+<span id="7">7</span>
+<span id="8">8</span>
+<span id="9">9</span>
+<span id="10">10</span>
+<span id="11">11</span>
+<span id="12">12</span>
+<span id="13">13</span>
+<span id="14">14</span>
+<span id="15">15</span>
+<span id="16">16</span>
+<span id="17">17</span>
+<span id="18">18</span>
+<span id="19">19</span>
+<span id="20">20</span>
+<span id="21">21</span>
+<span id="22">22</span>
+<span id="23">23</span>
+<span id="24">24</span>
+<span id="25">25</span>
+<span id="26">26</span>
+<span id="27">27</span>
+<span id="28">28</span>
+<span id="29">29</span>
+<span id="30">30</span>
+<span id="31">31</span>
+<span id="32">32</span>
+<span id="33">33</span>
+<span id="34">34</span>
+<span id="35">35</span>
+<span id="36">36</span>
+<span id="37">37</span>
+<span id="38">38</span>
+<span id="39">39</span>
+<span id="40">40</span>
+<span id="41">41</span>
+<span id="42">42</span>
+<span id="43">43</span>
+<span id="44">44</span>
+<span id="45">45</span>
+<span id="46">46</span>
+<span id="47">47</span>
+<span id="48">48</span>
+<span id="49">49</span>
+<span id="50">50</span>
+<span id="51">51</span>
+<span id="52">52</span>
+<span id="53">53</span>
+<span id="54">54</span>
+<span id="55">55</span>
+<span id="56">56</span>
+<span id="57">57</span>
+<span id="58">58</span>
+<span id="59">59</span>
+<span id="60">60</span>
+<span id="61">61</span>
+<span id="62">62</span>
+<span id="63">63</span>
+<span id="64">64</span>
+<span id="65">65</span>
+<span id="66">66</span>
+<span id="67">67</span>
+<span id="68">68</span>
+<span id="69">69</span>
+<span id="70">70</span>
+<span id="71">71</span>
+<span id="72">72</span>
+<span id="73">73</span>
+<span id="74">74</span>
+<span id="75">75</span>
+<span id="76">76</span>
+<span id="77">77</span>
+<span id="78">78</span>
+</pre><pre class="rust"><code><span class="kw">use </span><span class="kw">crate</span>::SafeHWND;
+<span class="kw">use </span><span class="kw">crate</span>::ctypes::<span class="kw-2">*</span>;
+<span class="kw">use </span><span class="kw">crate</span>::d3d9::<span class="kw-2">*</span>;
+
+<span class="kw">use </span>bytemuck::Zeroable;
+
+<span class="kw">use </span>winapi::shared::d3d9types::<span class="kw-2">*</span>;
+
+
+
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dpresent-parameters)\]
+/// D3DPRESENT_PARAMETERS
+///
+/// Describes presentation parameters.
+</span><span class="attribute">#[derive(Clone, Debug)]
+#[repr(C)] </span><span class="kw">pub struct </span>PresentParameters&lt;<span class="lifetime">&#39;w</span>&gt; {
+    <span class="kw">pub </span>back_buffer_width:              u32,
+    <span class="kw">pub </span>back_buffer_height:             u32,
+    <span class="kw">pub </span>back_buffer_format:             Format,
+    <span class="kw">pub </span>back_buffer_count:              u32,
+    <span class="kw">pub </span>multi_sample_type:              MultiSampleType,
+    <span class="kw">pub </span>multi_sample_quality:           u32,
+    <span class="kw">pub </span>swap_effect:                    SwapEffect,
+    <span class="kw">pub </span>device_window:                  <span class="prelude-ty">Option</span>&lt;SafeHWND&lt;<span class="lifetime">&#39;w</span>&gt;&gt;,
+    <span class="kw">pub </span>windowed:                       BOOL,
+    <span class="kw">pub </span>enable_auto_depth_stencil:      BOOL,
+    <span class="kw">pub </span>auto_depth_stencil_format:      Format,
+    <span class="kw">pub </span>flags:                          PresentFlag,
+    <span class="kw">pub </span>full_screen_refresh_rate_in_hz: u32,
+    <span class="kw">pub </span>presentation_interval:          Present,
+}
+
+<span class="kw">unsafe impl </span>Zeroable <span class="kw">for </span>PresentParameters&lt;<span class="lifetime">&#39;_</span>&gt; {} <span class="comment">// can&#39;t derive thanks to Option&lt;SafeHWND&lt;&#39;w&gt;&gt;, but should be safe (tm)... probably...
+
+</span><span class="kw">impl </span>PresentParameters&lt;<span class="lifetime">&#39;_</span>&gt; {
+    <span class="kw">pub const fn </span>zeroed() -&gt; <span class="self">Self </span>{ <span class="self">Self </span>{
+        back_buffer_width:              <span class="number">0</span>,
+        back_buffer_height:             <span class="number">0</span>,
+        back_buffer_format:             Format::zeroed(),
+        back_buffer_count:              <span class="number">0</span>,
+        multi_sample_type:              MultiSampleType::zeroed(),
+        multi_sample_quality:           <span class="number">0</span>,
+        swap_effect:                    SwapEffect::zeroed(),
+        device_window:                  <span class="prelude-val">None</span>,
+        windowed:                       BOOL::FALSE,
+        enable_auto_depth_stencil:      BOOL::FALSE,
+        auto_depth_stencil_format:      Format::zeroed(),
+        flags:                          PresentFlag::zeroed(),
+        full_screen_refresh_rate_in_hz: <span class="number">0</span>,
+        presentation_interval:          Present::zeroed(),
+    }}
+
+    <span class="doccomment">/// ### ⚠️ Safety ⚠️
+    /// Mostly safe, but this could be used to bypass `device_window`&#39;s [SafeHWND] requirements.
+    </span><span class="kw">pub unsafe fn </span>as_mut(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut </span>D3DPRESENT_PARAMETERS { <span class="kw">unsafe </span>{ std::mem::transmute(<span class="self">self</span>) } }
+}
+
+<span class="macro">struct_mapping! </span>{
+    <span class="attribute">#[derive(<span class="kw">unsafe </span>{ AsRefD3D, Deref, IntoD3D })]
+    </span>PresentParameters&lt;<span class="lifetime">&#39;_</span>&gt; =&gt; D3DPRESENT_PARAMETERS {
+        back_buffer_width               =&gt; BackBufferWidth,
+        back_buffer_height              =&gt; BackBufferHeight,
+        back_buffer_format              =&gt; BackBufferFormat,
+        back_buffer_count               =&gt; BackBufferCount,
+        multi_sample_type               =&gt; MultiSampleType,
+        multi_sample_quality            =&gt; MultiSampleQuality,
+        swap_effect                     =&gt; SwapEffect,
+        device_window                   =&gt; hDeviceWindow,
+        windowed                        =&gt; Windowed,
+        enable_auto_depth_stencil       =&gt; EnableAutoDepthStencil,
+        auto_depth_stencil_format       =&gt; AutoDepthStencilFormat,
+        flags                           =&gt; Flags,
+        full_screen_refresh_rate_in_hz  =&gt; FullScreen_RefreshRateInHz,
+        presentation_interval           =&gt; PresentationInterval,
+    }
+}
+
+<span class="comment">//#cpp2rust D3DPRESENT_PARAMETERS = d3d::PresentParameters
+</span></code></pre></div>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (b44197abb 2022-09-05)" ></div></body></html>

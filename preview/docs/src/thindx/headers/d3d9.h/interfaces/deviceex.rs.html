@@ -1,103 +1,102 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3d9.h\interfaces\deviceex.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>deviceex.rs - source</title><link rel="stylesheet" type="text/css" href="../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script src="../../../../../crates.js"></script><script defer src="../../../../../main.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script>
-    <noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"><style type="text/css">#crate-search{background-image:url("../../../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../../../../thindx/index.html'><div class='logo-container rust-logo'><img src='../../../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../../../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../../../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../../../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
-<span id="2">  2</span>
-<span id="3">  3</span>
-<span id="4">  4</span>
-<span id="5">  5</span>
-<span id="6">  6</span>
-<span id="7">  7</span>
-<span id="8">  8</span>
-<span id="9">  9</span>
-<span id="10"> 10</span>
-<span id="11"> 11</span>
-<span id="12"> 12</span>
-<span id="13"> 13</span>
-<span id="14"> 14</span>
-<span id="15"> 15</span>
-<span id="16"> 16</span>
-<span id="17"> 17</span>
-<span id="18"> 18</span>
-<span id="19"> 19</span>
-<span id="20"> 20</span>
-<span id="21"> 21</span>
-<span id="22"> 22</span>
-<span id="23"> 23</span>
-<span id="24"> 24</span>
-<span id="25"> 25</span>
-<span id="26"> 26</span>
-<span id="27"> 27</span>
-<span id="28"> 28</span>
-<span id="29"> 29</span>
-<span id="30"> 30</span>
-<span id="31"> 31</span>
-<span id="32"> 32</span>
-<span id="33"> 33</span>
-<span id="34"> 34</span>
-<span id="35"> 35</span>
-<span id="36"> 36</span>
-<span id="37"> 37</span>
-<span id="38"> 38</span>
-<span id="39"> 39</span>
-<span id="40"> 40</span>
-<span id="41"> 41</span>
-<span id="42"> 42</span>
-<span id="43"> 43</span>
-<span id="44"> 44</span>
-<span id="45"> 45</span>
-<span id="46"> 46</span>
-<span id="47"> 47</span>
-<span id="48"> 48</span>
-<span id="49"> 49</span>
-<span id="50"> 50</span>
-<span id="51"> 51</span>
-<span id="52"> 52</span>
-<span id="53"> 53</span>
-<span id="54"> 54</span>
-<span id="55"> 55</span>
-<span id="56"> 56</span>
-<span id="57"> 57</span>
-<span id="58"> 58</span>
-<span id="59"> 59</span>
-<span id="60"> 60</span>
-<span id="61"> 61</span>
-<span id="62"> 62</span>
-<span id="63"> 63</span>
-<span id="64"> 64</span>
-<span id="65"> 65</span>
-<span id="66"> 66</span>
-<span id="67"> 67</span>
-<span id="68"> 68</span>
-<span id="69"> 69</span>
-<span id="70"> 70</span>
-<span id="71"> 71</span>
-<span id="72"> 72</span>
-<span id="73"> 73</span>
-<span id="74"> 74</span>
-<span id="75"> 75</span>
-<span id="76"> 76</span>
-<span id="77"> 77</span>
-<span id="78"> 78</span>
-<span id="79"> 79</span>
-<span id="80"> 80</span>
-<span id="81"> 81</span>
-<span id="82"> 82</span>
-<span id="83"> 83</span>
-<span id="84"> 84</span>
-<span id="85"> 85</span>
-<span id="86"> 86</span>
-<span id="87"> 87</span>
-<span id="88"> 88</span>
-<span id="89"> 89</span>
-<span id="90"> 90</span>
-<span id="91"> 91</span>
-<span id="92"> 92</span>
-<span id="93"> 93</span>
-<span id="94"> 94</span>
-<span id="95"> 95</span>
-<span id="96"> 96</span>
-<span id="97"> 97</span>
-<span id="98"> 98</span>
-<span id="99"> 99</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3d9.h\interfaces\deviceex.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>deviceex.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../../normalize.css"><link rel="stylesheet" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../../dark.css" disabled><link rel="stylesheet" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<span id="2">2</span>
+<span id="3">3</span>
+<span id="4">4</span>
+<span id="5">5</span>
+<span id="6">6</span>
+<span id="7">7</span>
+<span id="8">8</span>
+<span id="9">9</span>
+<span id="10">10</span>
+<span id="11">11</span>
+<span id="12">12</span>
+<span id="13">13</span>
+<span id="14">14</span>
+<span id="15">15</span>
+<span id="16">16</span>
+<span id="17">17</span>
+<span id="18">18</span>
+<span id="19">19</span>
+<span id="20">20</span>
+<span id="21">21</span>
+<span id="22">22</span>
+<span id="23">23</span>
+<span id="24">24</span>
+<span id="25">25</span>
+<span id="26">26</span>
+<span id="27">27</span>
+<span id="28">28</span>
+<span id="29">29</span>
+<span id="30">30</span>
+<span id="31">31</span>
+<span id="32">32</span>
+<span id="33">33</span>
+<span id="34">34</span>
+<span id="35">35</span>
+<span id="36">36</span>
+<span id="37">37</span>
+<span id="38">38</span>
+<span id="39">39</span>
+<span id="40">40</span>
+<span id="41">41</span>
+<span id="42">42</span>
+<span id="43">43</span>
+<span id="44">44</span>
+<span id="45">45</span>
+<span id="46">46</span>
+<span id="47">47</span>
+<span id="48">48</span>
+<span id="49">49</span>
+<span id="50">50</span>
+<span id="51">51</span>
+<span id="52">52</span>
+<span id="53">53</span>
+<span id="54">54</span>
+<span id="55">55</span>
+<span id="56">56</span>
+<span id="57">57</span>
+<span id="58">58</span>
+<span id="59">59</span>
+<span id="60">60</span>
+<span id="61">61</span>
+<span id="62">62</span>
+<span id="63">63</span>
+<span id="64">64</span>
+<span id="65">65</span>
+<span id="66">66</span>
+<span id="67">67</span>
+<span id="68">68</span>
+<span id="69">69</span>
+<span id="70">70</span>
+<span id="71">71</span>
+<span id="72">72</span>
+<span id="73">73</span>
+<span id="74">74</span>
+<span id="75">75</span>
+<span id="76">76</span>
+<span id="77">77</span>
+<span id="78">78</span>
+<span id="79">79</span>
+<span id="80">80</span>
+<span id="81">81</span>
+<span id="82">82</span>
+<span id="83">83</span>
+<span id="84">84</span>
+<span id="85">85</span>
+<span id="86">86</span>
+<span id="87">87</span>
+<span id="88">88</span>
+<span id="89">89</span>
+<span id="90">90</span>
+<span id="91">91</span>
+<span id="92">92</span>
+<span id="93">93</span>
+<span id="94">94</span>
+<span id="95">95</span>
+<span id="96">96</span>
+<span id="97">97</span>
+<span id="98">98</span>
+<span id="99">99</span>
 <span id="100">100</span>
 <span id="101">101</span>
 <span id="102">102</span>
@@ -488,597 +487,494 @@
 <span id="487">487</span>
 <span id="488">488</span>
 <span id="489">489</span>
-<span id="490">490</span>
-<span id="491">491</span>
-<span id="492">492</span>
-<span id="493">493</span>
-<span id="494">494</span>
-<span id="495">495</span>
-<span id="496">496</span>
-<span id="497">497</span>
-<span id="498">498</span>
-<span id="499">499</span>
-<span id="500">500</span>
-<span id="501">501</span>
-<span id="502">502</span>
-<span id="503">503</span>
-<span id="504">504</span>
-<span id="505">505</span>
-<span id="506">506</span>
-<span id="507">507</span>
-<span id="508">508</span>
-<span id="509">509</span>
-<span id="510">510</span>
-<span id="511">511</span>
-<span id="512">512</span>
-<span id="513">513</span>
-<span id="514">514</span>
-<span id="515">515</span>
-<span id="516">516</span>
-<span id="517">517</span>
-<span id="518">518</span>
-<span id="519">519</span>
-<span id="520">520</span>
-<span id="521">521</span>
-<span id="522">522</span>
-<span id="523">523</span>
-<span id="524">524</span>
-<span id="525">525</span>
-<span id="526">526</span>
-<span id="527">527</span>
-<span id="528">528</span>
-<span id="529">529</span>
-<span id="530">530</span>
-<span id="531">531</span>
-<span id="532">532</span>
-<span id="533">533</span>
-<span id="534">534</span>
-<span id="535">535</span>
-<span id="536">536</span>
-<span id="537">537</span>
-<span id="538">538</span>
-<span id="539">539</span>
-<span id="540">540</span>
-</pre><pre class="rust"><code><span class="attribute">#![<span class="ident">cfg_attr</span>(<span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;9ex&quot;</span>), <span class="ident">allow</span>(<span class="ident">unused_imports</span>))]</span>
+</pre><pre class="rust"><code><span class="attribute">#![cfg_attr(not(feature = <span class="string">&quot;9ex&quot;</span>), allow(unused_imports))]
 
-<span class="kw">use</span> <span class="kw">crate</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::d3d9</span>::<span class="kw-2">*</span>;
+</span><span class="kw">use crate</span>::<span class="kw-2">*</span>;
+<span class="kw">use </span><span class="kw">crate</span>::d3d9::<span class="kw-2">*</span>;
 
-<span class="kw">use</span> <span class="ident">bytemuck</span>::<span class="kw-2">*</span>;
+<span class="kw">use </span>bytemuck::<span class="kw-2">*</span>;
 
-<span class="kw">use</span> <span class="ident">winapi::shared::d3d9</span>::{<span class="ident">IDirect3DDevice9Ex</span>, <span class="ident">IDirect3DDevice9</span>};
-<span class="kw">use</span> <span class="ident">winapi::shared::d3d9types</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident">winapi::um::unknwnbase::IUnknown</span>;
-<span class="kw">use</span> <span class="ident">winapi::um::wingdi</span>::<span class="kw-2">*</span>;
+<span class="kw">use </span>winapi::shared::d3d9::{IDirect3DDevice9Ex, IDirect3DDevice9};
+<span class="kw">use </span>winapi::um::unknwnbase::IUnknown;
+<span class="kw">use </span>winapi::um::wingdi::<span class="kw-2">*</span>;
 
-<span class="kw">use</span> <span class="ident">std::convert::TryInto</span>;
-<span class="kw">use</span> <span class="ident">std::ptr</span>::<span class="kw-2">*</span>;
+<span class="kw">use </span>winresult::<span class="kw-2">*</span>;
+
+<span class="kw">use </span>std::convert::TryInto;
+<span class="kw">use </span>std::ptr::<span class="kw-2">*</span>;
 
 
 
-<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3ddevice9ex)\]</span>
-<span class="doccomment">/// (extends [Device])</span>
-<span class="doccomment">/// Core interface used for general rendering, resource creation, etc.</span>
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;9ex&quot;</span>)]</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>)]</span> <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">transparent</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">DeviceEx</span>(<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="ident">mcom::Rc</span><span class="op">&lt;</span><span class="ident">IDirect3DDevice9Ex</span><span class="op">&gt;</span>);
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3ddevice9ex)\]
+/// (extends [Device])
+/// Core interface used for general rendering, resource creation, etc.
+</span><span class="attribute">#[cfg(feature = <span class="string">&quot;9ex&quot;</span>)]
+#[derive(Clone)] #[repr(transparent)]
+</span><span class="kw">pub struct </span>DeviceEx(<span class="kw">pub</span>(<span class="kw">crate</span>) mcom::Rc&lt;IDirect3DDevice9Ex&gt;);
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;9ex&quot;</span>)]</span> <span class="kw unsafe">unsafe</span> <span class="kw">impl</span> <span class="ident">AsSafe</span><span class="op">&lt;</span><span class="ident">IUnknown</span>             <span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">DeviceEx</span> { <span class="kw">fn</span> <span class="ident">as_safe</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">IUnknown</span>            { <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="kw-2">*</span><span class="kw-2">*</span><span class="self">self</span>.<span class="number">0</span> } }
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;9ex&quot;</span>)]</span> <span class="kw unsafe">unsafe</span> <span class="kw">impl</span> <span class="ident">AsSafe</span><span class="op">&lt;</span><span class="ident">IDirect3DDevice9</span>     <span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">DeviceEx</span> { <span class="kw">fn</span> <span class="ident">as_safe</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">IDirect3DDevice9</span>    { <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="kw-2">*</span><span class="self">self</span>.<span class="number">0</span> } }
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;9ex&quot;</span>)]</span> <span class="kw unsafe">unsafe</span> <span class="kw">impl</span> <span class="ident">AsSafe</span><span class="op">&lt;</span><span class="ident">IDirect3DDevice9Ex</span>   <span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">DeviceEx</span> { <span class="kw">fn</span> <span class="ident">as_safe</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">IDirect3DDevice9Ex</span>  { <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="self">self</span>.<span class="number">0</span> } }
+<span class="attribute">#[cfg(feature = <span class="string">&quot;9ex&quot;</span>)] </span><span class="kw">unsafe impl </span>AsSafe&lt;IUnknown             &gt; <span class="kw">for </span>DeviceEx { <span class="kw">fn </span>as_safe(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>IUnknown            { <span class="kw-2">&amp;***</span><span class="self">self</span>.<span class="number">0 </span>} }
+<span class="attribute">#[cfg(feature = <span class="string">&quot;9ex&quot;</span>)] </span><span class="kw">unsafe impl </span>AsSafe&lt;IDirect3DDevice9     &gt; <span class="kw">for </span>DeviceEx { <span class="kw">fn </span>as_safe(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>IDirect3DDevice9    { <span class="kw-2">&amp;**</span><span class="self">self</span>.<span class="number">0 </span>} }
+<span class="attribute">#[cfg(feature = <span class="string">&quot;9ex&quot;</span>)] </span><span class="kw">unsafe impl </span>AsSafe&lt;IDirect3DDevice9Ex   &gt; <span class="kw">for </span>DeviceEx { <span class="kw">fn </span>as_safe(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>IDirect3DDevice9Ex  { <span class="kw-2">&amp;*</span><span class="self">self</span>.<span class="number">0 </span>} }
 
 
 
-<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3ddevice9ex)\]</span>
-<span class="doccomment">/// IDirect3DDevice9Ex extension methods</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// ### Methods</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// | thindx                                                                        | docs.microsoft.com                | Description |</span>
-<span class="doccomment">/// | ----------------------------------------------------------------------------- | --------------------------------- | ----------- |</span>
-<span class="doccomment">/// | [check_device_state](Self::check_device_state)                                | [CheckDeviceState]                | Reports the current cooperative-level status of the Direct3D device for a windowed or full-screen application.</span>
-<span class="doccomment">/// | [check_resource_residency](Self::check_resource_residency)                    | [CheckResourceResidency]          | Checks an array of resources to determine if it is likely that they will cause a large stall at Draw time because the system must make the resources GPU-accessible.</span>
-<span class="doccomment">/// | [compose_rects](Self::compose_rects)                                          | [ComposeRects]                    | Copy a text string to one surface using an alphabet of glyphs on another surface. Composition is done by the GPU using bitwise operations.</span>
-<span class="doccomment">/// | [create_depth_stencil_surface_ex](Self::create_depth_stencil_surface_ex)      | [CreateDepthStencilSurfaceEx]     | Creates a depth-stencil surface.</span>
-<span class="doccomment">/// | [create_offscreen_plain_surface_ex](Self::create_offscreen_plain_surface_ex)  | [CreateOffscreenPlainSurfaceEx]   | Create an off-screen surface.</span>
-<span class="doccomment">/// | [create_render_target_ex](Self::create_render_target_ex)                      | [CreateRenderTargetEx]            | Creates a render-target surface.</span>
-<span class="doccomment">/// | [get_display_mode_ex](Self::get_display_mode_ex)                              | [GetDisplayModeEx]                | Retrieves the display mode&#39;s spatial resolution, color resolution, refresh frequency, and rotation settings.</span>
-<span class="doccomment">/// | [get_gpu_thread_priority](Self::get_gpu_thread_priority)                      | [GetGPUThreadPriority]            | Get the priority of the GPU thread.</span>
-<span class="doccomment">/// | [get_maximum_frame_latency](Self::get_maximum_frame_latency)                  | [GetMaximumFrameLatency]          | Retrieves the number of frames of data that the system is allowed to queue.</span>
-<span class="doccomment">/// | [present_ex](Self::present_ex)                                                | [PresentEx]                       | Swap the swapchain&#39;s next buffer with the front buffer.</span>
-<span class="doccomment">/// | [reset_ex](Self::reset_ex)                                                    | [ResetEx]                         | Resets the type, size, and format of the swap chain with all other surfaces persistent.</span>
-<span class="doccomment">/// | [set_convolution_mono_kernel](Self::set_convolution_mono_kernel)              | [SetConvolutionMonoKernel]        | Prepare the texture sampler for monochrome convolution filtering on a single-color texture.</span>
-<span class="doccomment">/// | [set_gpu_thread_priority](Self::set_gpu_thread_priority)                      | [SetGPUThreadPriority]            | Set the priority on the GPU thread.</span>
-<span class="doccomment">/// | [set_maximum_frame_latency](Self::set_maximum_frame_latency)                  | [SetMaximumFrameLatency]          | Set the number of frames that the system is allowed to queue for rendering.</span>
-<span class="doccomment">/// | [test_cooperative_level](Self::test_cooperative_level)                        | [TestCooperativeLevel]            | Reports the current cooperative-level status of the Direct3D device for a windowed or full-screen application.</span>
-<span class="doccomment">/// | [wait_for_vblank](Self::wait_for_vblank)                                      | [WaitForVBlank]                   | Suspend execution of the calling thread until the next vertical blank signal.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// [CheckDeviceState]:                 https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-checkdevicestate</span>
-<span class="doccomment">/// [CheckResourceResidency]:           https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-checkresourceresidency</span>
-<span class="doccomment">/// [ComposeRects]:                     https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-composerects</span>
-<span class="doccomment">/// [CreateDepthStencilSurfaceEx]:      https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-createdepthstencilsurfaceex</span>
-<span class="doccomment">/// [CreateOffscreenPlainSurfaceEx]:    https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-createoffscreenplainsurfaceex</span>
-<span class="doccomment">/// [CreateRenderTargetEx]:             https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-createrendertargetex</span>
-<span class="doccomment">/// [GetDisplayModeEx]:                 https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-getdisplaymodeex</span>
-<span class="doccomment">/// [GetGPUThreadPriority]:             https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-getgputhreadpriority</span>
-<span class="doccomment">/// [GetMaximumFrameLatency]:           https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-getmaximumframelatency</span>
-<span class="doccomment">/// [PresentEx]:                        https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-presentex</span>
-<span class="doccomment">/// [ResetEx]:                          https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-resetex</span>
-<span class="doccomment">/// [SetConvolutionMonoKernel]:         https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-setconvolutionmonokernel</span>
-<span class="doccomment">/// [SetGPUThreadPriority]:             https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-setgputhreadpriority</span>
-<span class="doccomment">/// [SetMaximumFrameLatency]:           https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-setmaximumframelatency</span>
-<span class="doccomment">/// [TestCooperativeLevel]:             https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-testcooperativelevel</span>
-<span class="doccomment">/// [WaitForVBlank]:                    https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-waitforvblank</span>
-<span class="doccomment">///</span>
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;9ex&quot;</span>)]</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">IDirect3DDevice9ExExt</span> : <span class="ident">AsSafe</span><span class="op">&lt;</span><span class="ident">IDirect3DDevice9Ex</span><span class="op">&gt;</span> {
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-checkdevicestate)\]</span>
-    <span class="doccomment">/// IDirect3DDevice9Ex::CheckDeviceState</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Reports the current cooperative-level status of the Direct3D device for a windowed or full-screen application.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Returns</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// *   [D3DERR::DEVICEHUNG]</span>
-    <span class="doccomment">/// *   [D3DERR::DEVICELOST]</span>
-    <span class="doccomment">/// *   [D3DERR::DEVICEREMOVED]</span>
-    <span class="doccomment">/// *   [D3DERR::OUTOFVIDEOMEMORY]</span>
-    <span class="doccomment">/// *   [D3DERR::INVALIDCALL]</span>
-    <span class="doccomment">/// *   [D3D::S_PRESENT_OCCLUDED]</span>
-    <span class="doccomment">/// *   [D3D::S_PRESENT_MODE_CHANGED]</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Example</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// # use dev::d3d9::*; let device = device_ex_test();</span>
-    <span class="doccomment">/// // TODO</span>
-    <span class="doccomment">/// ```</span>
-    <span class="kw">fn</span> <span class="ident">check_device_state</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">destination_window</span>: <span class="kw">impl</span> <span class="ident">AsHWND</span>) -&gt; <span class="ident">ErrorKind</span> {
-        <span class="ident">ErrorKind</span>(<span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="ident">as_winapi</span>().<span class="ident">CheckDeviceState</span>(<span class="ident">destination_window</span>.<span class="ident">as_hwnd</span>()) })
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3ddevice9ex)\]
+/// IDirect3DDevice9Ex extension methods
+///
+/// ### Methods
+/// | thindx                                                                        | docs.microsoft.com                | Description |
+/// | ----------------------------------------------------------------------------- | --------------------------------- | ----------- |
+/// | [check_device_state](Self::check_device_state)                                | [CheckDeviceState]                | Reports the current cooperative-level status of the Direct3D device for a windowed or full-screen application.
+/// | [check_resource_residency](Self::check_resource_residency)                    | [CheckResourceResidency]          | Checks an array of resources to determine if it is likely that they will cause a large stall at Draw time because the system must make the resources GPU-accessible.
+/// | [compose_rects](Self::compose_rects)                                          | [ComposeRects]                    | Copy a text string to one surface using an alphabet of glyphs on another surface. Composition is done by the GPU using bitwise operations.
+/// | [create_depth_stencil_surface_ex](Self::create_depth_stencil_surface_ex)      | [CreateDepthStencilSurfaceEx]     | Creates a depth-stencil surface.
+/// | [create_offscreen_plain_surface_ex](Self::create_offscreen_plain_surface_ex)  | [CreateOffscreenPlainSurfaceEx]   | Create an off-screen surface.
+/// | [create_render_target_ex](Self::create_render_target_ex)                      | [CreateRenderTargetEx]            | Creates a render-target surface.
+/// | [get_display_mode_ex](Self::get_display_mode_ex)                              | [GetDisplayModeEx]                | Retrieves the display mode&#39;s spatial resolution, color resolution, refresh frequency, and rotation settings.
+/// | [get_gpu_thread_priority](Self::get_gpu_thread_priority)                      | [GetGPUThreadPriority]            | Get the priority of the GPU thread.
+/// | [get_maximum_frame_latency](Self::get_maximum_frame_latency)                  | [GetMaximumFrameLatency]          | Retrieves the number of frames of data that the system is allowed to queue.
+/// | [present_ex](Self::present_ex)                                                | [PresentEx]                       | Swap the swapchain&#39;s next buffer with the front buffer.
+/// | [reset_ex](Self::reset_ex)                                                    | [ResetEx]                         | Resets the type, size, and format of the swap chain with all other surfaces persistent.
+/// | [set_convolution_mono_kernel](Self::set_convolution_mono_kernel)              | [SetConvolutionMonoKernel]        | Prepare the texture sampler for monochrome convolution filtering on a single-color texture.
+/// | [set_gpu_thread_priority](Self::set_gpu_thread_priority)                      | [SetGPUThreadPriority]            | Set the priority on the GPU thread.
+/// | [set_maximum_frame_latency](Self::set_maximum_frame_latency)                  | [SetMaximumFrameLatency]          | Set the number of frames that the system is allowed to queue for rendering.
+/// | [test_cooperative_level](Self::test_cooperative_level)                        | [TestCooperativeLevel]            | Reports the current cooperative-level status of the Direct3D device for a windowed or full-screen application.
+/// | [wait_for_vblank](Self::wait_for_vblank)                                      | [WaitForVBlank]                   | Suspend execution of the calling thread until the next vertical blank signal.
+///
+/// [CheckDeviceState]:                 https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-checkdevicestate
+/// [CheckResourceResidency]:           https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-checkresourceresidency
+/// [ComposeRects]:                     https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-composerects
+/// [CreateDepthStencilSurfaceEx]:      https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-createdepthstencilsurfaceex
+/// [CreateOffscreenPlainSurfaceEx]:    https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-createoffscreenplainsurfaceex
+/// [CreateRenderTargetEx]:             https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-createrendertargetex
+/// [GetDisplayModeEx]:                 https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-getdisplaymodeex
+/// [GetGPUThreadPriority]:             https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-getgputhreadpriority
+/// [GetMaximumFrameLatency]:           https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-getmaximumframelatency
+/// [PresentEx]:                        https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-presentex
+/// [ResetEx]:                          https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-resetex
+/// [SetConvolutionMonoKernel]:         https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-setconvolutionmonokernel
+/// [SetGPUThreadPriority]:             https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-setgputhreadpriority
+/// [SetMaximumFrameLatency]:           https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-setmaximumframelatency
+/// [TestCooperativeLevel]:             https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-testcooperativelevel
+/// [WaitForVBlank]:                    https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-waitforvblank
+///
+</span><span class="attribute">#[cfg(feature = <span class="string">&quot;9ex&quot;</span>)]
+</span><span class="kw">pub trait </span>IDirect3DDevice9ExExt : AsSafe&lt;IDirect3DDevice9Ex&gt; {
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-checkdevicestate)\]
+    /// IDirect3DDevice9Ex::CheckDeviceState
+    ///
+    /// Reports the current cooperative-level status of the Direct3D device for a windowed or full-screen application.
+    ///
+    /// ### Returns
+    /// *   [D3DERR::DEVICEHUNG]
+    /// *   [D3DERR::DEVICELOST]
+    /// *   [D3DERR::DEVICEREMOVED]
+    /// *   [D3DERR::OUTOFVIDEOMEMORY]
+    /// *   [D3DERR::INVALIDCALL]
+    /// *   [D3D::S_PRESENT_OCCLUDED]
+    /// *   [D3D::S_PRESENT_MODE_CHANGED]
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_ex_test();
+    /// // TODO
+    /// ```
+    </span><span class="kw">fn </span>check_device_state(<span class="kw-2">&amp;</span><span class="self">self</span>, destination_window: <span class="kw">impl </span>AsHWND) -&gt; HResult {
+        <span class="macro">fn_context!</span>(d3d9::IDirect3DDevice9ExExt::check_device_state =&gt; IDirect3DDevice9Ex::CheckDeviceState);
+        HResult::from(<span class="kw">unsafe </span>{ <span class="self">self</span>.as_winapi().CheckDeviceState(destination_window.as_hwnd()) } <span class="kw">as </span>u32)
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-checkresourceresidency )\]</span>
-    <span class="doccomment">/// IDirect3DDevice9Ex::CheckResourceResidency</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Checks an array of resources to determine if it is likely that they will cause a large stall at Draw time because the system must make the resources GPU-accessible.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Returns</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// *   [THINERR::SLICE_OVERFLOW]    if `resources.len()` &gt; `65535`</span>
-    <span class="doccomment">/// *   [D3DERR::INVALIDCALL]       ???</span>
-    <span class="doccomment">/// *   Ok(</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Example</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// # use dev::d3d9::*; let device = device_ex_test();</span>
-    <span class="doccomment">/// // TODO</span>
-    <span class="doccomment">/// ```</span>
-    <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">_xxx_check_resource_residency</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">resources</span>: <span class="kw-2">&amp;mut</span> [<span class="ident">Resource</span>]) -&gt; <span class="ident">ErrorKind</span> {
-        <span class="comment">// FIXME: Taking resources as a value slice is bloody annoying, but we can&#39;t cast `&amp;[&amp;Resource]` sanely.</span>
-        <span class="comment">// FIXME: mut casts bellow are sketch as heck</span>
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-checkresourceresidency )\]
+    /// IDirect3DDevice9Ex::CheckResourceResidency
+    ///
+    /// Checks an array of resources to determine if it is likely that they will cause a large stall at Draw time because the system must make the resources GPU-accessible.
+    ///
+    /// ### Returns
+    /// *   Ok([S::OK])
+    /// *   Ok([S::NOT_RESIDENT])
+    /// *   Err([THINERR::SLICE_TOO_LARGE]) if `resources.len()` &gt; `65535`
+    /// *   Err([D3DERR::INVALIDCALL])      ???
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_ex_test();
+    /// // TODO
+    /// ```
+    </span><span class="attribute">#[doc(hidden)]
+    </span><span class="kw">fn </span>_xxx_check_resource_residency(<span class="kw-2">&amp;</span><span class="self">self</span>, resources: <span class="kw-2">&amp;mut </span>[Resource]) -&gt; <span class="prelude-ty">Result</span>&lt;HResultSuccess, HResultError&gt; {
+        <span class="macro">fn_context!</span>(d3d9::IDirect3DDevice9ExExt::_xxx_check_resource_residency =&gt; IDirect3DDevice9Ex::CheckResourceResidency);
+        <span class="comment">// FIXME: Taking resources as a value slice is bloody annoying, but we can&#39;t cast `&amp;[&amp;Resource]` sanely.
+        // FIXME: mut casts bellow are sketch as heck
 
-        <span class="comment">// &quot;... up to a maximum of 65535.&quot;</span>
-        <span class="kw">let</span> <span class="ident">len</span> : <span class="ident">u16</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">resources</span>.<span class="ident">len</span>().<span class="ident">try_into</span>() {
-            <span class="prelude-val">Ok</span>(<span class="ident">len</span>) =&gt; <span class="ident">len</span>,
-            <span class="prelude-val">Err</span>(<span class="kw">_</span>) =&gt; <span class="kw">return</span> <span class="ident">THINERR::SLICE_OVERFLOW</span>,
-        };
-        <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="ident">u32::from</span>(<span class="ident">len</span>);
-        <span class="kw">let</span> <span class="ident">resources</span> <span class="op">=</span> <span class="ident">resources</span>.<span class="ident">as_mut_ptr</span>().<span class="ident">cast</span>(); <span class="comment">// XXX</span>
-        <span class="ident">ErrorKind</span>(<span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="ident">as_winapi</span>().<span class="ident">CheckResourceResidency</span>(<span class="ident">resources</span>, <span class="ident">len</span>) })
+        // &quot;... up to a maximum of 65535.&quot;
+        </span><span class="kw">let </span>len : u16 = resources.len().try_into().map_err(|<span class="kw">_</span>| THINERR::SLICE_TOO_LARGE)<span class="question-mark">?</span>;
+        <span class="kw">let </span>len = u32::from(len);
+        <span class="kw">let </span>resources = resources.as_mut_ptr().cast(); <span class="comment">// XXX
+        </span>HResult::from(<span class="kw">unsafe </span>{ <span class="self">self</span>.as_winapi().CheckResourceResidency(resources, len) } <span class="kw">as </span>u32).succeeded()
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-composerects)\]</span>
-    <span class="doccomment">/// IDirect3DDevice9Ex::ComposeRects</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Copy a text string to one surface using an alphabet of glyphs on another surface.</span>
-    <span class="doccomment">/// Composition is done by the GPU using bitwise operations.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Returns</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// *   [D3DERR::INVALIDCALL]</span>
-    <span class="doccomment">/// *   Ok(`()`)</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Example</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// # use dev::d3d9::*; let device = device_ex_test();</span>
-    <span class="doccomment">/// // TODO</span>
-    <span class="doccomment">/// ```</span>
-    <span class="kw">fn</span> <span class="ident">compose_rects</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">src</span>: <span class="kw-2">&amp;</span><span class="ident">Surface</span>, <span class="ident">dst</span>: <span class="kw-2">&amp;</span><span class="ident">Surface</span>, <span class="ident">src_rect_descs</span>: <span class="kw-2">&amp;</span><span class="ident">VertexBuffer</span>, <span class="ident">num_rects</span>: <span class="ident">u32</span>, <span class="ident">dst_rect_descs</span>: <span class="kw-2">&amp;</span><span class="ident">VertexBuffer</span>, <span class="ident">operation</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">ComposeRectsOp</span><span class="op">&gt;</span>, <span class="ident">xoffset</span>: <span class="ident">i32</span>, <span class="ident">yoffset</span>: <span class="ident">i32</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">MethodError</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> (<span class="ident">src</span>, <span class="ident">dst</span>, <span class="ident">src_rect_descs</span>, <span class="ident">dst_rect_descs</span>) <span class="op">=</span> (<span class="ident">src</span>.<span class="ident">as_raw</span>(), <span class="ident">dst</span>.<span class="ident">as_raw</span>(), <span class="ident">src_rect_descs</span>.<span class="ident">as_raw</span>(), <span class="ident">dst_rect_descs</span>.<span class="ident">as_raw</span>());
-        <span class="kw">let</span> <span class="ident">operation</span> <span class="op">=</span> <span class="ident">operation</span>.<span class="ident">into</span>().<span class="ident">into</span>();
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-composerects)\]
+    /// IDirect3DDevice9Ex::ComposeRects
+    ///
+    /// Copy a text string to one surface using an alphabet of glyphs on another surface.
+    /// Composition is done by the GPU using bitwise operations.
+    ///
+    /// ### Returns
+    /// *   [D3DERR::INVALIDCALL]
+    /// *   Ok(`()`)
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_ex_test();
+    /// // TODO
+    /// ```
+    </span><span class="kw">fn </span>compose_rects(<span class="kw-2">&amp;</span><span class="self">self</span>, src: <span class="kw-2">&amp;</span>Surface, dst: <span class="kw-2">&amp;</span>Surface, src_rect_descs: <span class="kw-2">&amp;</span>VertexBuffer, num_rects: u32, dst_rect_descs: <span class="kw-2">&amp;</span>VertexBuffer, operation: <span class="kw">impl </span>Into&lt;ComposeRectsOp&gt;, xoffset: i32, yoffset: i32) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+        <span class="macro">fn_context!</span>(d3d9::IDirect3DDevice9ExExt::compose_rects =&gt; IDirect3DDevice9Ex::ComposeRects);
+        <span class="kw">let </span>(src, dst, src_rect_descs, dst_rect_descs) = (src.as_raw(), dst.as_raw(), src_rect_descs.as_raw(), dst_rect_descs.as_raw());
+        <span class="kw">let </span>operation = operation.into().into();
 
-        <span class="kw">let</span> <span class="ident">hr</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="ident">as_winapi</span>().<span class="ident">ComposeRects</span>(<span class="ident">src</span>, <span class="ident">dst</span>, <span class="ident">src_rect_descs</span>, <span class="ident">num_rects</span>, <span class="ident">dst_rect_descs</span>, <span class="ident">operation</span>, <span class="ident">xoffset</span>, <span class="ident">yoffset</span>) };
-        <span class="ident">MethodError::check</span>(<span class="string">&quot;IDirect3DDevice9Ex::ComposeRects&quot;</span>, <span class="ident">hr</span>)
+        <span class="macro">fn_check_hr!</span>(<span class="kw">unsafe </span>{ <span class="self">self</span>.as_winapi().ComposeRects(src, dst, src_rect_descs, num_rects, dst_rect_descs, operation, xoffset, yoffset) })
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-createdepthstencilsurfaceex)\]</span>
-    <span class="doccomment">/// IDirect3DDevice9Ex::CreateDepthStencilSurfaceEx</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Creates a depth-stencil surface.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Returns</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// *   [D3DERR::INVALIDCALL]</span>
-    <span class="doccomment">/// *   Ok([Surface])</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Example</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// # use dev::d3d9::*; let device = device_ex_test();</span>
-    <span class="doccomment">/// // TODO</span>
-    <span class="doccomment">/// ```</span>
-    <span class="kw">fn</span> <span class="ident">create_depth_stencil_surface_ex</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">width</span>: <span class="ident">u32</span>, <span class="ident">height</span>: <span class="ident">u32</span>, <span class="ident">format</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Format</span><span class="op">&gt;</span>, <span class="ident">multi_sample</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">MultiSampleType</span><span class="op">&gt;</span>, <span class="ident">multi_sample_quality</span>: <span class="ident">u32</span>, <span class="ident">discard</span>: <span class="ident">bool</span>, <span class="ident">_shared_handle</span>: <span class="kw">impl</span> <span class="ident">SharedHandleParam</span>, <span class="ident">usage</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Usage</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Surface</span>, <span class="ident">MethodError</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">format</span> <span class="op">=</span> <span class="ident">format</span>.<span class="ident">into</span>().<span class="ident">into</span>();
-        <span class="kw">let</span> <span class="ident">multi_sample</span> <span class="op">=</span> <span class="ident">multi_sample</span>.<span class="ident">into</span>().<span class="ident">into</span>();
-        <span class="kw">let</span> <span class="ident">discard</span> <span class="op">=</span> <span class="ident">discard</span>.<span class="ident">into</span>();
-        <span class="kw">let</span> <span class="ident">shared_handle</span> <span class="op">=</span> <span class="ident">null_mut</span>();
-        <span class="kw">let</span> <span class="ident">usage</span> <span class="op">=</span> <span class="ident">usage</span>.<span class="ident">into</span>().<span class="ident">into</span>();
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-createdepthstencilsurfaceex)\]
+    /// IDirect3DDevice9Ex::CreateDepthStencilSurfaceEx
+    ///
+    /// Creates a depth-stencil surface.
+    ///
+    /// ### Returns
+    /// *   [D3DERR::INVALIDCALL]
+    /// *   Ok([Surface])
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_ex_test();
+    /// // TODO
+    /// ```
+    </span><span class="kw">fn </span>create_depth_stencil_surface_ex(<span class="kw-2">&amp;</span><span class="self">self</span>, width: u32, height: u32, format: <span class="kw">impl </span>Into&lt;Format&gt;, multi_sample: <span class="kw">impl </span>Into&lt;MultiSampleType&gt;, multi_sample_quality: u32, discard: bool, _shared_handle: <span class="kw">impl </span>SharedHandleParam, usage: <span class="kw">impl </span>Into&lt;Usage&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;Surface, Error&gt; {
+        <span class="macro">fn_context!</span>(d3d9::IDirect3DDevice9ExExt::create_depth_stencil_surface_ex =&gt; IDirect3DDevice9Ex::CreateDepthStencilSurfaceEx);
+        <span class="kw">let </span>format = format.into().into();
+        <span class="kw">let </span>multi_sample = multi_sample.into().into();
+        <span class="kw">let </span>discard = discard.into();
+        <span class="kw">let </span>shared_handle = null_mut();
+        <span class="kw">let </span>usage = usage.into().into();
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">surface</span> <span class="op">=</span> <span class="ident">null_mut</span>();
-        <span class="kw">let</span> <span class="ident">hr</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="ident">as_winapi</span>().<span class="ident">CreateDepthStencilSurfaceEx</span>(<span class="ident">width</span>, <span class="ident">height</span>, <span class="ident">format</span>, <span class="ident">multi_sample</span>, <span class="ident">multi_sample_quality</span>, <span class="ident">discard</span>, <span class="kw-2">&amp;mut</span> <span class="ident">surface</span>, <span class="ident">shared_handle</span>, <span class="ident">usage</span>) };
-        <span class="ident">MethodError::check</span>(<span class="string">&quot;IDirect3DDevice9Ex::CreateDepthStencilSurfaceEx&quot;</span>, <span class="ident">hr</span>)<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(<span class="kw unsafe">unsafe</span> { <span class="ident">Surface::from_raw</span>(<span class="ident">surface</span>) })
+        <span class="kw">let </span><span class="kw-2">mut </span>surface = null_mut();
+        <span class="macro">fn_check_hr!</span>(<span class="kw">unsafe </span>{ <span class="self">self</span>.as_winapi().CreateDepthStencilSurfaceEx(width, height, format, multi_sample, multi_sample_quality, discard, <span class="kw-2">&amp;mut </span>surface, shared_handle, usage) })<span class="question-mark">?</span>;
+        <span class="prelude-val">Ok</span>(<span class="kw">unsafe </span>{ Surface::from_raw(surface) })
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-createoffscreenplainsurfaceex)\]</span>
-    <span class="doccomment">/// IDirect3DDevice9Ex::CreateOffscreenPlainSurfaceEx</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Create an off-screen surface.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Returns</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// *   [D3DERR::INVALIDCALL]</span>
-    <span class="doccomment">/// *   Ok([Surface])</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Example</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// # use dev::d3d9::*; let device = device_ex_test();</span>
-    <span class="doccomment">/// // TODO</span>
-    <span class="doccomment">/// ```</span>
-    <span class="kw">fn</span> <span class="ident">create_offscreen_plain_surface_ex</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">width</span>: <span class="ident">u32</span>, <span class="ident">height</span>: <span class="ident">u32</span>, <span class="ident">format</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Format</span><span class="op">&gt;</span>, <span class="ident">pool</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Pool</span><span class="op">&gt;</span>, <span class="ident">_shared_handle</span>: <span class="kw">impl</span> <span class="ident">SharedHandleParam</span>, <span class="ident">usage</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Usage</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Surface</span>, <span class="ident">MethodError</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">format</span> <span class="op">=</span> <span class="ident">format</span>.<span class="ident">into</span>().<span class="ident">into</span>();
-        <span class="kw">let</span> <span class="ident">pool</span> <span class="op">=</span> <span class="ident">pool</span>.<span class="ident">into</span>().<span class="ident">into</span>();
-        <span class="kw">let</span> <span class="ident">shared_handle</span> <span class="op">=</span> <span class="ident">null_mut</span>();
-        <span class="kw">let</span> <span class="ident">usage</span> <span class="op">=</span> <span class="ident">usage</span>.<span class="ident">into</span>().<span class="ident">into</span>();
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-createoffscreenplainsurfaceex)\]
+    /// IDirect3DDevice9Ex::CreateOffscreenPlainSurfaceEx
+    ///
+    /// Create an off-screen surface.
+    ///
+    /// ### Returns
+    /// *   [D3DERR::INVALIDCALL]
+    /// *   Ok([Surface])
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_ex_test();
+    /// // TODO
+    /// ```
+    </span><span class="kw">fn </span>create_offscreen_plain_surface_ex(<span class="kw-2">&amp;</span><span class="self">self</span>, width: u32, height: u32, format: <span class="kw">impl </span>Into&lt;Format&gt;, pool: <span class="kw">impl </span>Into&lt;Pool&gt;, _shared_handle: <span class="kw">impl </span>SharedHandleParam, usage: <span class="kw">impl </span>Into&lt;Usage&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;Surface, Error&gt; {
+        <span class="macro">fn_context!</span>(d3d9::IDirect3DDevice9ExExt::create_offscreen_plain_surface_ex =&gt; IDirect3DDevice9Ex::CreateOffscreenPlainSurfaceEx);
+        <span class="kw">let </span>format = format.into().into();
+        <span class="kw">let </span>pool = pool.into().into();
+        <span class="kw">let </span>shared_handle = null_mut();
+        <span class="kw">let </span>usage = usage.into().into();
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">surface</span> <span class="op">=</span> <span class="ident">null_mut</span>();
-        <span class="kw">let</span> <span class="ident">hr</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="ident">as_winapi</span>().<span class="ident">CreateOffscreenPlainSurfaceEx</span>(<span class="ident">width</span>, <span class="ident">height</span>, <span class="ident">format</span>, <span class="ident">pool</span>, <span class="kw-2">&amp;mut</span> <span class="ident">surface</span>, <span class="ident">shared_handle</span>, <span class="ident">usage</span>) };
-        <span class="ident">MethodError::check</span>(<span class="string">&quot;IDirect3DDevice9Ex::CreateOffscreenPlainSurfaceEx&quot;</span>, <span class="ident">hr</span>)<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(<span class="kw unsafe">unsafe</span> { <span class="ident">Surface::from_raw</span>(<span class="ident">surface</span>) })
+        <span class="kw">let </span><span class="kw-2">mut </span>surface = null_mut();
+        <span class="macro">fn_check_hr!</span>(<span class="kw">unsafe </span>{ <span class="self">self</span>.as_winapi().CreateOffscreenPlainSurfaceEx(width, height, format, pool, <span class="kw-2">&amp;mut </span>surface, shared_handle, usage) })<span class="question-mark">?</span>;
+        <span class="prelude-val">Ok</span>(<span class="kw">unsafe </span>{ Surface::from_raw(surface) })
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-createrendertargetex)\]</span>
-    <span class="doccomment">/// IDirect3DDevice9Ex::CreateRenderTargetEx</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Creates a render-target surface.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Returns</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// *   [D3DERR::INVALIDCALL]</span>
-    <span class="doccomment">/// *   Ok([Surface])</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Example</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// # use dev::d3d9::*; let device = device_ex_test();</span>
-    <span class="doccomment">/// // TODO</span>
-    <span class="doccomment">/// ```</span>
-    <span class="kw">fn</span> <span class="ident">create_render_target_ex</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">width</span>: <span class="ident">u32</span>, <span class="ident">height</span>: <span class="ident">u32</span>, <span class="ident">format</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Format</span><span class="op">&gt;</span>, <span class="ident">multi_sample</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">MultiSampleType</span><span class="op">&gt;</span>, <span class="ident">multi_sample_quality</span>: <span class="ident">u32</span>, <span class="ident">lockable</span>: <span class="ident">bool</span>, <span class="ident">_shared_handle</span>: <span class="kw">impl</span> <span class="ident">SharedHandleParam</span>, <span class="ident">usage</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Usage</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Surface</span>, <span class="ident">MethodError</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">format</span> <span class="op">=</span> <span class="ident">format</span>.<span class="ident">into</span>().<span class="ident">into</span>();
-        <span class="kw">let</span> <span class="ident">multi_sample</span> <span class="op">=</span> <span class="ident">multi_sample</span>.<span class="ident">into</span>().<span class="ident">into</span>();
-        <span class="kw">let</span> <span class="ident">lockable</span> <span class="op">=</span> <span class="ident">lockable</span>.<span class="ident">into</span>();
-        <span class="kw">let</span> <span class="ident">shared_handle</span> <span class="op">=</span> <span class="ident">null_mut</span>();
-        <span class="kw">let</span> <span class="ident">usage</span> <span class="op">=</span> <span class="ident">usage</span>.<span class="ident">into</span>().<span class="ident">into</span>();
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-createrendertargetex)\]
+    /// IDirect3DDevice9Ex::CreateRenderTargetEx
+    ///
+    /// Creates a render-target surface.
+    ///
+    /// ### Returns
+    /// *   [D3DERR::INVALIDCALL]
+    /// *   Ok([Surface])
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_ex_test();
+    /// // TODO
+    /// ```
+    </span><span class="kw">fn </span>create_render_target_ex(<span class="kw-2">&amp;</span><span class="self">self</span>, width: u32, height: u32, format: <span class="kw">impl </span>Into&lt;Format&gt;, multi_sample: <span class="kw">impl </span>Into&lt;MultiSampleType&gt;, multi_sample_quality: u32, lockable: bool, _shared_handle: <span class="kw">impl </span>SharedHandleParam, usage: <span class="kw">impl </span>Into&lt;Usage&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;Surface, Error&gt; {
+        <span class="macro">fn_context!</span>(d3d9::IDirect3DDevice9ExExt::create_render_target_ex =&gt; IDirect3DDevice9Ex::CreateRenderTargetEx);
+        <span class="kw">let </span>format = format.into().into();
+        <span class="kw">let </span>multi_sample = multi_sample.into().into();
+        <span class="kw">let </span>lockable = lockable.into();
+        <span class="kw">let </span>shared_handle = null_mut();
+        <span class="kw">let </span>usage = usage.into().into();
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">surface</span> <span class="op">=</span> <span class="ident">null_mut</span>();
-        <span class="kw">let</span> <span class="ident">hr</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="ident">as_winapi</span>().<span class="ident">CreateRenderTargetEx</span>(<span class="ident">width</span>, <span class="ident">height</span>, <span class="ident">format</span>, <span class="ident">multi_sample</span>, <span class="ident">multi_sample_quality</span>, <span class="ident">lockable</span>, <span class="kw-2">&amp;mut</span> <span class="ident">surface</span>, <span class="ident">shared_handle</span>, <span class="ident">usage</span>) };
-        <span class="ident">MethodError::check</span>(<span class="string">&quot;IDirect3DDevice9Ex::CreateRenderTargetEx&quot;</span>, <span class="ident">hr</span>)<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(<span class="kw unsafe">unsafe</span> { <span class="ident">Surface::from_raw</span>(<span class="ident">surface</span>) })
+        <span class="kw">let </span><span class="kw-2">mut </span>surface = null_mut();
+        <span class="macro">fn_check_hr!</span>(<span class="kw">unsafe </span>{ <span class="self">self</span>.as_winapi().CreateRenderTargetEx(width, height, format, multi_sample, multi_sample_quality, lockable, <span class="kw-2">&amp;mut </span>surface, shared_handle, usage) })<span class="question-mark">?</span>;
+        <span class="prelude-val">Ok</span>(<span class="kw">unsafe </span>{ Surface::from_raw(surface) })
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-getdisplaymodeex)\]</span>
-    <span class="doccomment">/// IDirect3DDevice9Ex::GetDisplayModeEx</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Retrieves the display mode&#39;s spatial resolution, color resolution, refresh frequency, and rotation settings.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Returns</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// *   [D3DERR::INVALIDCALL]</span>
-    <span class="doccomment">/// *   Ok([DisplayModeEx])</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Example</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// # use dev::d3d9::*; let device = device_ex_test();</span>
-    <span class="doccomment">/// // TODO</span>
-    <span class="doccomment">/// ```</span>
-    <span class="kw">fn</span> <span class="ident">get_display_mode_ex</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">swap_chain</span>: <span class="ident">u32</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(<span class="ident">DisplayModeEx</span>, <span class="ident">DisplayRotation</span>), <span class="ident">MethodError</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">display_mode_ex</span> <span class="op">=</span> <span class="ident">DisplayModeEx::zeroed</span>();
-        <span class="ident">display_mode_ex</span>.<span class="ident">size</span> <span class="op">=</span> <span class="ident">std::mem::size_of_val</span>(<span class="kw-2">&amp;</span><span class="ident">display_mode_ex</span>).<span class="ident">try_into</span>().<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rotation</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="kw">let</span> <span class="ident">hr</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="ident">as_winapi</span>().<span class="ident">GetDisplayModeEx</span>(<span class="ident">swap_chain</span>, <span class="kw-2">&amp;mut</span> <span class="kw-2">*</span><span class="ident">display_mode_ex</span>, <span class="kw-2">&amp;mut</span> <span class="ident">rotation</span>) };
-        <span class="ident">MethodError::check</span>(<span class="string">&quot;IDirect3DDevice9Ex::GetDisplayModeEx&quot;</span>, <span class="ident">hr</span>)<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>((<span class="ident">display_mode_ex</span>, <span class="ident">DisplayRotation::from_unchecked</span>(<span class="ident">rotation</span>)))
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-getdisplaymodeex)\]
+    /// IDirect3DDevice9Ex::GetDisplayModeEx
+    ///
+    /// Retrieves the display mode&#39;s spatial resolution, color resolution, refresh frequency, and rotation settings.
+    ///
+    /// ### Returns
+    /// *   [D3DERR::INVALIDCALL]
+    /// *   Ok([DisplayModeEx])
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_ex_test();
+    /// // TODO
+    /// ```
+    </span><span class="kw">fn </span>get_display_mode_ex(<span class="kw-2">&amp;</span><span class="self">self</span>, swap_chain: u32) -&gt; <span class="prelude-ty">Result</span>&lt;(DisplayModeEx, DisplayRotation), Error&gt; {
+        <span class="macro">fn_context!</span>(d3d9::IDirect3DDevice9ExExt::get_display_mode_ex =&gt; IDirect3DDevice9Ex::GetDisplayModeEx);
+        <span class="kw">let </span><span class="kw-2">mut </span>display_mode_ex = DisplayModeEx::zeroed();
+        display_mode_ex.size = std::mem::size_of_val(<span class="kw-2">&amp;</span>display_mode_ex).try_into().unwrap();
+        <span class="kw">let </span><span class="kw-2">mut </span>rotation = <span class="number">0</span>;
+        <span class="macro">fn_check_hr!</span>(<span class="kw">unsafe </span>{ <span class="self">self</span>.as_winapi().GetDisplayModeEx(swap_chain, <span class="kw-2">&amp;mut *</span>display_mode_ex, <span class="kw-2">&amp;mut </span>rotation) })<span class="question-mark">?</span>;
+        <span class="prelude-val">Ok</span>((display_mode_ex, DisplayRotation::from_unchecked(rotation)))
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-getgputhreadpriority)\]</span>
-    <span class="doccomment">/// IDirect3DDevice9Ex::GetGPUThreadPriority</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Get the priority of the GPU thread.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Returns</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// *   [D3DERR::DEVICEREMOVED]</span>
-    <span class="doccomment">/// *   [D3DERR::INVALIDCALL]</span>
-    <span class="doccomment">/// *   Ok(`priority`) where `-7` &lt;= `priority` &lt;= `7`</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Example</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// # use dev::d3d9::*; let device = device_ex_test();</span>
-    <span class="doccomment">/// // TODO</span>
-    <span class="doccomment">/// ```</span>
-    <span class="kw">fn</span> <span class="ident">get_gpu_thread_priority</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">i32</span>, <span class="ident">MethodError</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">pri</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="kw">let</span> <span class="ident">hr</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="ident">as_winapi</span>().<span class="ident">GetGPUThreadPriority</span>(<span class="kw-2">&amp;mut</span> <span class="ident">pri</span>) };
-        <span class="ident">MethodError::check</span>(<span class="string">&quot;IDirect3DDevice9Ex::GetGPUThreadPriority&quot;</span>, <span class="ident">hr</span>)<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(<span class="ident">pri</span>)
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-getgputhreadpriority)\]
+    /// IDirect3DDevice9Ex::GetGPUThreadPriority
+    ///
+    /// Get the priority of the GPU thread.
+    ///
+    /// ### Returns
+    /// *   [D3DERR::DEVICEREMOVED]
+    /// *   [D3DERR::INVALIDCALL]
+    /// *   Ok(`priority`) where `-7` &lt;= `priority` &lt;= `7`
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_ex_test();
+    /// // TODO
+    /// ```
+    </span><span class="kw">fn </span>get_gpu_thread_priority(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;i32, Error&gt; {
+        <span class="macro">fn_context!</span>(d3d9::IDirect3DDevice9ExExt::get_gpu_thread_priority =&gt; IDirect3DDevice9Ex::GetGPUThreadPriority);
+        <span class="kw">let </span><span class="kw-2">mut </span>pri = <span class="number">0</span>;
+        <span class="macro">fn_check_hr!</span>(<span class="kw">unsafe </span>{ <span class="self">self</span>.as_winapi().GetGPUThreadPriority(<span class="kw-2">&amp;mut </span>pri) })<span class="question-mark">?</span>;
+        <span class="prelude-val">Ok</span>(pri)
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-getmaximumframelatency)\]</span>
-    <span class="doccomment">/// IDirect3DDevice9Ex::GetMaximumFrameLatency</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Retrieves the number of frames of data that the system is allowed to queue.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Returns</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// *   [D3DERR::DEVICELOST]</span>
-    <span class="doccomment">/// *   [D3DERR::DEVICEREMOVED]</span>
-    <span class="doccomment">/// *   [D3DERR::DRIVERINTERNALERROR]</span>
-    <span class="doccomment">/// *   [D3DERR::INVALIDCALL]</span>
-    <span class="doccomment">/// *   [D3DERR::OUTOFVIDEOMEMORY]</span>
-    <span class="doccomment">/// *   Ok(`frames`)</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Example</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// # use dev::d3d9::*; let device = device_ex_test();</span>
-    <span class="doccomment">/// // TODO</span>
-    <span class="doccomment">/// ```</span>
-    <span class="kw">fn</span> <span class="ident">get_maximum_frame_latency</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">u32</span>, <span class="ident">MethodError</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">max_latency</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="kw">let</span> <span class="ident">hr</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="ident">as_winapi</span>().<span class="ident">GetMaximumFrameLatency</span>(<span class="kw-2">&amp;mut</span> <span class="ident">max_latency</span>) };
-        <span class="ident">MethodError::check</span>(<span class="string">&quot;IDirect3DDevice9Ex::GetMaximumFrameLatency&quot;</span>, <span class="ident">hr</span>)<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(<span class="ident">max_latency</span>)
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-getmaximumframelatency)\]
+    /// IDirect3DDevice9Ex::GetMaximumFrameLatency
+    ///
+    /// Retrieves the number of frames of data that the system is allowed to queue.
+    ///
+    /// ### Returns
+    /// *   [D3DERR::DEVICELOST]
+    /// *   [D3DERR::DEVICEREMOVED]
+    /// *   [D3DERR::DRIVERINTERNALERROR]
+    /// *   [D3DERR::INVALIDCALL]
+    /// *   [D3DERR::OUTOFVIDEOMEMORY]
+    /// *   Ok(`frames`)
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_ex_test();
+    /// // TODO
+    /// ```
+    </span><span class="kw">fn </span>get_maximum_frame_latency(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;u32, Error&gt; {
+        <span class="macro">fn_context!</span>(d3d9::IDirect3DDevice9ExExt::get_maximum_frame_latency =&gt; IDirect3DDevice9Ex::GetMaximumFrameLatency);
+        <span class="kw">let </span><span class="kw-2">mut </span>max_latency = <span class="number">0</span>;
+        <span class="macro">fn_check_hr!</span>(<span class="kw">unsafe </span>{ <span class="self">self</span>.as_winapi().GetMaximumFrameLatency(<span class="kw-2">&amp;mut </span>max_latency) })<span class="question-mark">?</span>;
+        <span class="prelude-val">Ok</span>(max_latency)
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-presentex)\]</span>
-    <span class="doccomment">/// IDirect3DDevice9Ex::PresentEx</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Swap the swapchain&#39;s next buffer with the front buffer.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Returns</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// *   [D3DERR::DEVICELOST]</span>
-    <span class="doccomment">/// *   [D3DERR::DEVICEHUNG]</span>
-    <span class="doccomment">/// *   [D3DERR::DEVICEREMOVED]</span>
-    <span class="doccomment">/// *   [D3DERR::OUTOFVIDEOMEMORY]</span>
-    <span class="doccomment">/// *   Ok(`()`)</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Example</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// # use dev::d3d9::*; let device = device_ex_test();</span>
-    <span class="doccomment">/// // TODO</span>
-    <span class="doccomment">/// ```</span>
-    <span class="kw">fn</span> <span class="ident">present_ex</span><span class="op">&lt;</span><span class="lifetime">&#39;r</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">source_rect</span>: <span class="kw">impl</span> <span class="ident">IntoRectOrFull</span>, <span class="ident">dest_rect</span>: <span class="kw">impl</span> <span class="ident">IntoRectOrFull</span>, <span class="ident">dest_window_override</span>: <span class="kw">impl</span> <span class="ident">AsHWND</span>, <span class="ident">dirty_region</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;r</span> <span class="ident">RgnData</span><span class="op">&gt;</span><span class="op">&gt;</span>, <span class="ident">flags</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Present</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">MethodError</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">source_rect</span> <span class="op">=</span> <span class="ident">source_rect</span>.<span class="ident">into_rect</span>();
-        <span class="kw">let</span> <span class="ident">dest_rect</span>   <span class="op">=</span> <span class="ident">dest_rect</span>.<span class="ident">into_rect</span>();
-        <span class="kw">let</span> <span class="ident">source_rect</span> <span class="op">=</span> <span class="ident">source_rect</span>.<span class="ident">as_ref</span>().<span class="ident">map_or</span>(<span class="ident">null</span>(), <span class="op">|</span><span class="ident">r</span><span class="op">|</span> <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="kw-2">*</span><span class="ident">r</span>);
-        <span class="kw">let</span> <span class="ident">dest_rect</span>   <span class="op">=</span> <span class="ident">dest_rect</span>.<span class="ident">as_ref</span>().<span class="ident">map_or</span>(<span class="ident">null</span>(), <span class="op">|</span><span class="ident">r</span><span class="op">|</span> <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="kw-2">*</span><span class="ident">r</span>);
-        <span class="kw">let</span> <span class="ident">dirty_region</span><span class="op">=</span> <span class="ident">dirty_region</span>.<span class="ident">into</span>();
-        <span class="kw">let</span> <span class="ident">flags</span>       <span class="op">=</span> <span class="ident">flags</span>.<span class="ident">into</span>().<span class="ident">into</span>();
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-presentex)\]
+    /// IDirect3DDevice9Ex::PresentEx
+    ///
+    /// Swap the swapchain&#39;s next buffer with the front buffer.
+    ///
+    /// ### Returns
+    /// *   [D3DERR::DEVICELOST]
+    /// *   [D3DERR::DEVICEHUNG]
+    /// *   [D3DERR::DEVICEREMOVED]
+    /// *   [D3DERR::OUTOFVIDEOMEMORY]
+    /// *   Ok(`()`)
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_ex_test();
+    /// // TODO
+    /// ```
+    </span><span class="kw">fn </span>present_ex&lt;<span class="lifetime">&#39;r</span>&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, source_rect: <span class="kw">impl </span>IntoRectOrFull, dest_rect: <span class="kw">impl </span>IntoRectOrFull, dest_window_override: <span class="kw">impl </span>AsHWND, dirty_region: <span class="kw">impl </span>Into&lt;<span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;r </span>RgnData&gt;&gt;, flags: <span class="kw">impl </span>Into&lt;Present&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+        <span class="macro">fn_context!</span>(d3d9::IDirect3DDevice9ExExt::present_ex =&gt; IDirect3DDevice9Ex::PresentEx);
+        <span class="kw">let </span>source_rect = source_rect.into_rect();
+        <span class="kw">let </span>dest_rect   = dest_rect.into_rect();
+        <span class="kw">let </span>source_rect = source_rect.as_ref().map_or(null(), |r| <span class="kw-2">&amp;**</span>r);
+        <span class="kw">let </span>dest_rect   = dest_rect.as_ref().map_or(null(), |r| <span class="kw-2">&amp;**</span>r);
+        <span class="kw">let </span>dirty_region= dirty_region.into();
+        <span class="kw">let </span>flags       = flags.into().into();
 
-        <span class="kw">let</span> <span class="ident">dirty_region</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">dirty_region</span> {
-            <span class="prelude-val">None</span> =&gt; <span class="ident">null</span>::<span class="op">&lt;</span><span class="ident">RGNDATA</span><span class="op">&gt;</span>(),
-            <span class="prelude-val">Some</span>(<span class="ident">dr</span>) =&gt; {
-                <span class="kw">if</span> <span class="ident">dr</span>.<span class="ident">rdh</span>.<span class="ident">dwSize</span> <span class="kw">as</span> <span class="ident">usize</span>   <span class="op">!</span><span class="op">=</span> <span class="ident">std::mem::size_of</span>::<span class="op">&lt;</span><span class="ident">RGNDATAHEADER</span><span class="op">&gt;</span>() { <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">MethodError</span>(<span class="string">&quot;Device::present&quot;</span>, <span class="ident">THINERR::INVALID_STRUCT_FIELD</span>)); }
-                <span class="kw">if</span> <span class="ident">dr</span>.<span class="ident">rdh</span>.<span class="ident">iType</span>             <span class="op">!</span><span class="op">=</span> <span class="ident">RDH_RECTANGLES</span>                       { <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">MethodError</span>(<span class="string">&quot;Device::present&quot;</span>, <span class="ident">THINERR::INVALID_STRUCT_FIELD</span>)); }
-                <span class="kw">if</span> <span class="ident">dr</span>.<span class="ident">rdh</span>.<span class="ident">nCount</span> <span class="kw">as</span> <span class="ident">usize</span>   <span class="op">&gt;</span> <span class="ident">dr</span>.<span class="ident">buffer</span>.<span class="ident">len</span>()                       { <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">MethodError</span>(<span class="string">&quot;Device::present&quot;</span>, <span class="ident">THINERR::INVALID_STRUCT_FIELD</span>)); }
-                <span class="kw">if</span> <span class="ident">dr</span>.<span class="ident">rdh</span>.<span class="ident">nRgnSize</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">&gt;</span> <span class="ident">std::mem::size_of_val</span>(<span class="ident">dr</span>)             { <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">MethodError</span>(<span class="string">&quot;Device::present&quot;</span>, <span class="ident">THINERR::INVALID_STRUCT_FIELD</span>)); }
-                <span class="kw">let</span> <span class="ident">dr</span> : <span class="kw-2">*const</span> <span class="ident">RgnData</span> <span class="op">=</span> <span class="ident">dr</span>;
-                <span class="ident">dr</span>.<span class="ident">cast</span>()
+        <span class="kw">let </span>dirty_region = <span class="kw">match </span>dirty_region {
+            <span class="prelude-val">None </span>=&gt; null::&lt;RGNDATA&gt;(),
+            <span class="prelude-val">Some</span>(dr) =&gt; {
+                <span class="kw">if </span>dr.rdh.dwSize <span class="kw">as </span>usize   != std::mem::size_of::&lt;RGNDATAHEADER&gt;() { <span class="kw">return </span><span class="prelude-val">Err</span>(<span class="macro">fn_param_error!</span>(dirty_region, THINERR::INVALID_STRUCT_FIELD)); }
+                <span class="kw">if </span>dr.rdh.iType             != RDH_RECTANGLES                       { <span class="kw">return </span><span class="prelude-val">Err</span>(<span class="macro">fn_param_error!</span>(dirty_region, THINERR::INVALID_STRUCT_FIELD)); }
+                <span class="kw">if </span>dr.rdh.nCount <span class="kw">as </span>usize   &gt; dr.buffer.len()                       { <span class="kw">return </span><span class="prelude-val">Err</span>(<span class="macro">fn_param_error!</span>(dirty_region, THINERR::INVALID_STRUCT_FIELD)); }
+                <span class="kw">if </span>dr.rdh.nRgnSize <span class="kw">as </span>usize &gt; std::mem::size_of_val(dr)             { <span class="kw">return </span><span class="prelude-val">Err</span>(<span class="macro">fn_param_error!</span>(dirty_region, THINERR::INVALID_STRUCT_FIELD)); }
+                <span class="kw">let </span>dr : <span class="kw-2">*const </span>RgnData = dr;
+                dr.cast()
             },
         };
 
-        <span class="kw">let</span> <span class="ident">hr</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="ident">as_winapi</span>().<span class="ident">PresentEx</span>(<span class="ident">source_rect</span>.<span class="ident">cast</span>(), <span class="ident">dest_rect</span>.<span class="ident">cast</span>(), <span class="ident">dest_window_override</span>.<span class="ident">as_hwnd</span>(), <span class="ident">dirty_region</span>, <span class="ident">flags</span>) };
-        <span class="ident">MethodError::check</span>(<span class="string">&quot;IDirect3DDevice9Ex::PresentEx&quot;</span>, <span class="ident">hr</span>)
+        <span class="macro">fn_check_hr!</span>(<span class="kw">unsafe </span>{ <span class="self">self</span>.as_winapi().PresentEx(source_rect.cast(), dest_rect.cast(), dest_window_override.as_hwnd(), dirty_region, flags) })
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-resetex)\]</span>
-    <span class="doccomment">/// IDirect3DDevice9Ex::ResetEx</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Resets the type, size, and format of the swap chain with all other surfaces persistent.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Returns</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// *   [D3DERR::DEVICELOST]</span>
-    <span class="doccomment">/// *   [D3DERR::DEVICEHUNG]</span>
-    <span class="doccomment">/// *   [D3DERR::INVALIDCALL] ?</span>
-    <span class="doccomment">/// *   Ok(`()`)</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Example</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// # use dev::d3d9::*; let device = device_ex_test();</span>
-    <span class="doccomment">/// // TODO</span>
-    <span class="doccomment">/// ```</span>
-    <span class="kw">fn</span> <span class="ident">reset_ex</span><span class="op">&lt;</span><span class="lifetime">&#39;mode</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">presentation_parameters</span>: <span class="kw-2">&amp;mut</span> <span class="ident">D3DPRESENT_PARAMETERS</span>, <span class="ident">fullscreen_display_mode</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;mode</span> <span class="kw-2">mut</span> <span class="ident">DisplayModeEx</span><span class="op">&gt;</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">MethodError</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">fullscreen_display_mode</span> <span class="op">=</span> <span class="ident">fullscreen_display_mode</span>.<span class="ident">into</span>().<span class="ident">map_or</span>(<span class="ident">null_mut</span>(), <span class="op">|</span><span class="ident">dm</span><span class="op">|</span> <span class="ident">dm</span>);
-        <span class="kw">let</span> <span class="ident">hr</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="ident">as_winapi</span>().<span class="ident">ResetEx</span>(<span class="ident">presentation_parameters</span>, <span class="ident">fullscreen_display_mode</span>.<span class="ident">cast</span>()) };
-        <span class="ident">MethodError::check</span>(<span class="string">&quot;IDirect3DDevice9Ex::ResetEx&quot;</span>, <span class="ident">hr</span>)
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-resetex)\]
+    /// IDirect3DDevice9Ex::ResetEx
+    ///
+    /// Resets the type, size, and format of the swap chain with all other surfaces persistent.
+    ///
+    /// ### Returns
+    /// *   [D3DERR::DEVICELOST]
+    /// *   [D3DERR::DEVICEHUNG]
+    /// *   [D3DERR::INVALIDCALL] ?
+    /// *   Ok(`()`)
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_ex_test();
+    /// // TODO
+    /// ```
+    </span><span class="kw">fn </span>reset_ex&lt;<span class="lifetime">&#39;mode</span>&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, presentation_parameters: <span class="kw-2">&amp;mut </span>PresentParameters&lt;<span class="lifetime">&#39;static</span>&gt;, fullscreen_display_mode: <span class="kw">impl </span>Into&lt;<span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;mode </span><span class="kw-2">mut </span>DisplayModeEx&gt;&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+        <span class="macro">fn_context!</span>(d3d9::IDirect3DDevice9ExExt::reset_ex =&gt; IDirect3DDevice9Ex::ResetEx);
+        <span class="kw">let </span>fullscreen_display_mode = fullscreen_display_mode.into().map_or(null_mut(), |dm| dm);
+        <span class="macro">fn_check_hr!</span>(<span class="kw">unsafe </span>{ <span class="self">self</span>.as_winapi().ResetEx(presentation_parameters.as_mut(), fullscreen_display_mode.cast()) })
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-setconvolutionmonokernel)\]</span>
-    <span class="doccomment">/// IDirect3DDevice9Ex::SetConvolutionMonoKernel</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Prepare the texture sampler for monochrome convolution filtering on a single-color texture.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Returns</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// *   [D3DERR::INVALIDCALL]</span>
-    <span class="doccomment">/// *   Ok(`()`)</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Example</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// # use dev::d3d9::*; let device = device_ex_test();</span>
-    <span class="doccomment">/// // TODO</span>
-    <span class="doccomment">/// ```</span>
-    <span class="kw">fn</span> <span class="ident">set_convolution_mono_kernel_unweighted</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">width</span>: <span class="ident">u32</span>, <span class="ident">height</span>: <span class="ident">u32</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">MethodError</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">hr</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="ident">as_winapi</span>().<span class="ident">SetConvolutionMonoKernel</span>(<span class="ident">width</span>, <span class="ident">height</span>, <span class="ident">null_mut</span>(), <span class="ident">null_mut</span>()) };
-        <span class="ident">MethodError::check</span>(<span class="string">&quot;IDirect3DDevice9Ex::SetConvolutionMonoKernel&quot;</span>, <span class="ident">hr</span>)
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-setconvolutionmonokernel)\]
+    /// IDirect3DDevice9Ex::SetConvolutionMonoKernel
+    ///
+    /// Prepare the texture sampler for monochrome convolution filtering on a single-color texture.
+    ///
+    /// ### Returns
+    /// *   [D3DERR::INVALIDCALL]
+    /// *   Ok(`()`)
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_ex_test();
+    /// // TODO
+    /// ```
+    </span><span class="kw">fn </span>set_convolution_mono_kernel_unweighted(<span class="kw-2">&amp;</span><span class="self">self</span>, width: u32, height: u32) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+        <span class="macro">fn_context!</span>(d3d9::IDirect3DDevice9ExExt::set_convolution_mono_kernel_unweighted =&gt; IDirect3DDevice9Ex::SetConvolutionMonoKernel);
+        <span class="macro">fn_check_hr!</span>(<span class="kw">unsafe </span>{ <span class="self">self</span>.as_winapi().SetConvolutionMonoKernel(width, height, null_mut(), null_mut()) })
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-setconvolutionmonokernel)\]</span>
-    <span class="doccomment">/// IDirect3DDevice9Ex::SetConvolutionMonoKernel</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Prepare the texture sampler for monochrome convolution filtering on a single-color texture.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Returns</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// *   [D3DERR::INVALIDCALL]</span>
-    <span class="doccomment">/// *   Ok(`()`)</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Example</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// # use dev::d3d9::*; let device = device_ex_test();</span>
-    <span class="doccomment">/// // TODO</span>
-    <span class="doccomment">/// ```</span>
-    <span class="kw">fn</span> <span class="ident">set_convolution_mono_kernel</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">rows</span>: <span class="kw-2">&amp;mut</span> [<span class="ident">f32</span>], <span class="ident">cols</span>: <span class="kw-2">&amp;mut</span> [<span class="ident">f32</span>]) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">MethodError</span><span class="op">&gt;</span> {
-        <span class="comment">// XXX: should rows/cols be non-mut?  Not sure if d3d *actually* writes those values or not...</span>
-        <span class="kw">let</span> <span class="ident">width</span>  : <span class="ident">u32</span> <span class="op">=</span> <span class="ident">rows</span>.<span class="ident">len</span>().<span class="ident">try_into</span>().<span class="ident">map_err</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">MethodError</span>(<span class="string">&quot;DeviceEx::set_convolution_mono_kernel&quot;</span>, <span class="ident">THINERR::SLICE_OVERFLOW</span>))<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">height</span> : <span class="ident">u32</span> <span class="op">=</span> <span class="ident">cols</span>.<span class="ident">len</span>().<span class="ident">try_into</span>().<span class="ident">map_err</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="ident">MethodError</span>(<span class="string">&quot;DeviceEx::set_convolution_mono_kernel&quot;</span>, <span class="ident">THINERR::SLICE_OVERFLOW</span>))<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">hr</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="ident">as_winapi</span>().<span class="ident">SetConvolutionMonoKernel</span>(<span class="ident">width</span>, <span class="ident">height</span>, <span class="ident">rows</span>.<span class="ident">as_mut_ptr</span>(), <span class="ident">cols</span>.<span class="ident">as_mut_ptr</span>()) };
-        <span class="ident">MethodError::check</span>(<span class="string">&quot;IDirect3DDevice9Ex::SetConvolutionMonoKernel&quot;</span>, <span class="ident">hr</span>)
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-setconvolutionmonokernel)\]
+    /// IDirect3DDevice9Ex::SetConvolutionMonoKernel
+    ///
+    /// Prepare the texture sampler for monochrome convolution filtering on a single-color texture.
+    ///
+    /// ### Returns
+    /// *   [D3DERR::INVALIDCALL]
+    /// *   Ok(`()`)
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_ex_test();
+    /// // TODO
+    /// ```
+    </span><span class="kw">fn </span>set_convolution_mono_kernel(<span class="kw-2">&amp;</span><span class="self">self</span>, rows: <span class="kw-2">&amp;mut </span>[f32], cols: <span class="kw-2">&amp;mut </span>[f32]) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+        <span class="macro">fn_context!</span>(d3d9::IDirect3DDevice9ExExt::set_convolution_mono_kernel =&gt; IDirect3DDevice9Ex::SetConvolutionMonoKernel);
+        <span class="comment">// XXX: should rows/cols be non-mut?  Not sure if d3d *actually* writes those values or not...
+        </span><span class="kw">let </span>width  = <span class="macro">fn_param_try_len32!</span>(rows)<span class="question-mark">?</span>;
+        <span class="kw">let </span>height = <span class="macro">fn_param_try_len32!</span>(cols)<span class="question-mark">?</span>;
+        <span class="macro">fn_check_hr!</span>(<span class="kw">unsafe </span>{ <span class="self">self</span>.as_winapi().SetConvolutionMonoKernel(width, height, rows.as_mut_ptr(), cols.as_mut_ptr()) })
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-setgputhreadpriority)\]</span>
-    <span class="doccomment">/// IDirect3DDevice9Ex::SetGPUThreadPriority</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Set the priority on the GPU thread.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Returns</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// *   [D3DERR::INVALIDCALL]</span>
-    <span class="doccomment">/// *   [D3DERR::DEVICEREMOVED]</span>
-    <span class="doccomment">/// *   Ok(`()`)</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Example</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// # use dev::d3d9::*; let device = device_ex_test();</span>
-    <span class="doccomment">/// // TODO</span>
-    <span class="doccomment">/// ```</span>
-    <span class="kw">fn</span> <span class="ident">set_gpu_thread_priority</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">priority</span>: <span class="ident">i32</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">MethodError</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">hr</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="ident">as_winapi</span>().<span class="ident">SetGPUThreadPriority</span>(<span class="ident">priority</span>) };
-        <span class="ident">MethodError::check</span>(<span class="string">&quot;IDirect3DDevice9Ex::SetGPUThreadPriority&quot;</span>, <span class="ident">hr</span>)
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-setgputhreadpriority)\]
+    /// IDirect3DDevice9Ex::SetGPUThreadPriority
+    ///
+    /// Set the priority on the GPU thread.
+    ///
+    /// ### Returns
+    /// *   [D3DERR::INVALIDCALL]
+    /// *   [D3DERR::DEVICEREMOVED]
+    /// *   Ok(`()`)
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_ex_test();
+    /// // TODO
+    /// ```
+    </span><span class="kw">fn </span>set_gpu_thread_priority(<span class="kw-2">&amp;</span><span class="self">self</span>, priority: i32) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+        <span class="macro">fn_context!</span>(d3d9::IDirect3DDevice9ExExt::set_gpu_thread_priority =&gt; IDirect3DDevice9Ex::SetGPUThreadPriority);
+        <span class="macro">fn_check_hr!</span>(<span class="kw">unsafe </span>{ <span class="self">self</span>.as_winapi().SetGPUThreadPriority(priority) })
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-setmaximumframelatency)\]</span>
-    <span class="doccomment">/// IDirect3DDevice9Ex::SetMaximumFrameLatency</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Set the number of frames that the system is allowed to queue for rendering.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Returns</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// *   [D3DERR::INVALIDCALL]</span>
-    <span class="doccomment">/// *   Ok(`()`)</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Example</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// # use dev::d3d9::*; let device = device_ex_test();</span>
-    <span class="doccomment">/// // TODO</span>
-    <span class="doccomment">/// ```</span>
-    <span class="kw">fn</span> <span class="ident">set_maximum_frame_latency</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">max_latency</span>: <span class="ident">u32</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">MethodError</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">hr</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="ident">as_winapi</span>().<span class="ident">SetMaximumFrameLatency</span>(<span class="ident">max_latency</span>) };
-        <span class="ident">MethodError::check</span>(<span class="string">&quot;IDirect3DDevice9Ex::SetMaximumFrameLatency&quot;</span>, <span class="ident">hr</span>)
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-setmaximumframelatency)\]
+    /// IDirect3DDevice9Ex::SetMaximumFrameLatency
+    ///
+    /// Set the number of frames that the system is allowed to queue for rendering.
+    ///
+    /// ### Returns
+    /// *   [D3DERR::INVALIDCALL]
+    /// *   Ok(`()`)
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_ex_test();
+    /// // TODO
+    /// ```
+    </span><span class="kw">fn </span>set_maximum_frame_latency(<span class="kw-2">&amp;</span><span class="self">self</span>, max_latency: u32) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+        <span class="macro">fn_context!</span>(d3d9::IDirect3DDevice9ExExt::set_maximum_frame_latency =&gt; IDirect3DDevice9Ex::SetMaximumFrameLatency);
+        <span class="macro">fn_check_hr!</span>(<span class="kw">unsafe </span>{ <span class="self">self</span>.as_winapi().SetMaximumFrameLatency(max_latency) })
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-testcooperativelevel)\]</span>
-    <span class="doccomment">/// IDirect3DDevice9Ex::TestCooperativeLevel</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Reports the current cooperative-level status of the Direct3D device for a windowed or full-screen application.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Returns</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// *   [D3DERR::INVALIDCALL]</span>
-    <span class="doccomment">/// *   Ok(</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Example</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// # use dev::d3d9::*; let device = device_ex_test();</span>
-    <span class="doccomment">/// // TODO</span>
-    <span class="doccomment">/// ```</span>
-    <span class="attribute">#[<span class="ident">deprecated</span> <span class="op">=</span> <span class="string">&quot;docs claim test_cooperative_level is no longer available for use - instead, use check_device_state&quot;</span>]</span>
-    <span class="kw">fn</span> <span class="ident">test_cooperative_level</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">MethodError</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">hr</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="ident">as_winapi</span>().<span class="ident">TestCooperativeLevel</span>() };
-        <span class="ident">MethodError::check</span>(<span class="string">&quot;IDirect3DDevice9Ex::TestCooperativeLevel&quot;</span>, <span class="ident">hr</span>)
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-testcooperativelevel)\]
+    /// IDirect3DDevice9Ex::TestCooperativeLevel
+    ///
+    /// Reports the current cooperative-level status of the Direct3D device for a windowed or full-screen application.
+    ///
+    /// ### Returns
+    /// *   [D3DERR::INVALIDCALL]
+    /// *   Ok(`()`)
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_ex_test();
+    /// // TODO
+    /// ```
+    </span><span class="attribute">#[deprecated = <span class="string">&quot;docs claim test_cooperative_level is no longer available for use - instead, use check_device_state&quot;</span>]
+    </span><span class="kw">fn </span>test_cooperative_level(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+        <span class="macro">fn_context!</span>(d3d9::IDirect3DDevice9ExExt::test_cooperative_level =&gt; IDirect3DDevice9Ex::TestCooperativeLevel);
+        <span class="macro">fn_check_hr!</span>(<span class="kw">unsafe </span>{ <span class="self">self</span>.as_winapi().TestCooperativeLevel() })
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-waitforvblank)\]</span>
-    <span class="doccomment">/// IDirect3DDevice9Ex::WaitForVBlank</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Returns</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// *   [D3DERR::INVALIDCALL]</span>
-    <span class="doccomment">/// *   Ok(</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Example</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// # use dev::d3d9::*; let device = device_ex_test();</span>
-    <span class="doccomment">/// // TODO</span>
-    <span class="doccomment">/// ```</span>
-    <span class="kw">fn</span> <span class="ident">wait_for_vblank</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">swap_chain</span>: <span class="ident">u32</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">MethodError</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">hr</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="ident">as_winapi</span>().<span class="ident">WaitForVBlank</span>(<span class="ident">swap_chain</span>) };
-        <span class="ident">MethodError::check</span>(<span class="string">&quot;IDirect3DDevice9Ex::WaitForVBlank&quot;</span>, <span class="ident">hr</span>)
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-waitforvblank)\]
+    /// IDirect3DDevice9Ex::WaitForVBlank
+    ///
+    ///
+    ///
+    /// ### Returns
+    /// *   [D3DERR::INVALIDCALL]
+    /// *   Ok(`()`)
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use dev::d3d9::*; let device = device_ex_test();
+    /// // TODO
+    /// ```
+    </span><span class="kw">fn </span>wait_for_vblank(<span class="kw-2">&amp;</span><span class="self">self</span>, swap_chain: u32) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
+        <span class="macro">fn_context!</span>(d3d9::IDirect3DDevice9ExExt::wait_for_vblank =&gt; IDirect3DDevice9Ex::WaitForVBlank);
+        <span class="macro">fn_check_hr!</span>(<span class="kw">unsafe </span>{ <span class="self">self</span>.as_winapi().WaitForVBlank(swap_chain) })
     }
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;9ex&quot;</span>)]</span>
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">AsSafe</span><span class="op">&lt;</span><span class="ident">IDirect3DDevice9Ex</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="ident">IDirect3DDevice9ExExt</span> <span class="kw">for</span> <span class="ident">T</span> {}
+<span class="attribute">#[cfg(feature = <span class="string">&quot;9ex&quot;</span>)]
+</span><span class="kw">impl</span>&lt;T: AsSafe&lt;IDirect3DDevice9Ex&gt;&gt; IDirect3DDevice9ExExt <span class="kw">for </span>T {}
 
 
 
-<span class="comment">//#cpp2rust IDirect3DDevice9Ex                                  = d3d9::DeviceEx</span>
-<span class="comment">//#cpp2rust IDirect3DDevice9Ex                                  = d3d9::IDirect3DDevice9ExExt</span>
-
-<span class="comment">//#cpp2rust IDirect3DDevice9Ex::CheckDeviceState                = d3d9::IDirect3DDevice9ExExt::check_device_state</span>
-<span class="comment">//TODO:     IDirect3DDevice9Ex::CheckResourceResidency          = d3d9::IDirect3DDevice9ExExt::check_resource_residency</span>
-<span class="comment">//#cpp2rust IDirect3DDevice9Ex::ComposeRects                    = d3d9::IDirect3DDevice9ExExt::compose_rects</span>
-<span class="comment">//#cpp2rust IDirect3DDevice9Ex::CreateDepthStencilSurfaceEx     = d3d9::IDirect3DDevice9ExExt::create_depth_stencil_surface_ex</span>
-<span class="comment">//#cpp2rust IDirect3DDevice9Ex::CreateOffscreenPlainSurfaceEx   = d3d9::IDirect3DDevice9ExExt::create_offscreen_plain_surface_ex</span>
-<span class="comment">//#cpp2rust IDirect3DDevice9Ex::CreateRenderTargetEx            = d3d9::IDirect3DDevice9ExExt::create_render_target_ex</span>
-<span class="comment">//#cpp2rust IDirect3DDevice9Ex::GetDisplayModeEx                = d3d9::IDirect3DDevice9ExExt::get_display_mode_ex</span>
-<span class="comment">//#cpp2rust IDirect3DDevice9Ex::GetGPUThreadPriority            = d3d9::IDirect3DDevice9ExExt::get_gpu_thread_priority</span>
-<span class="comment">//#cpp2rust IDirect3DDevice9Ex::GetMaximumFrameLatency          = d3d9::IDirect3DDevice9ExExt::get_maximum_frame_latency</span>
-<span class="comment">//#cpp2rust IDirect3DDevice9Ex::PresentEx                       = d3d9::IDirect3DDevice9ExExt::present_ex</span>
-<span class="comment">//#cpp2rust IDirect3DDevice9Ex::ResetEx                         = d3d9::IDirect3DDevice9ExExt::reset_ex</span>
-<span class="comment">//#cpp2rust IDirect3DDevice9Ex::SetConvolutionMonoKernel        = d3d9::IDirect3DDevice9ExExt::set_convolution_mono_kernel</span>
-<span class="comment">//#cpp2rust IDirect3DDevice9Ex::SetGPUThreadPriority            = d3d9::IDirect3DDevice9ExExt::set_gpu_thread_priority</span>
-<span class="comment">//#cpp2rust IDirect3DDevice9Ex::SetMaximumFrameLatency          = d3d9::IDirect3DDevice9ExExt::set_maximum_frame_latency</span>
-<span class="comment">//#cpp2rust IDirect3DDevice9Ex::TestCooperativeLevel            = d3d9::IDirect3DDevice9ExExt::test_cooperative_level</span>
-<span class="comment">//#cpp2rust IDirect3DDevice9Ex::WaitForVBlank                   = d3d9::IDirect3DDevice9ExExt::wait_for_vblank</span>
-</code></pre></div>
-</section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-search-index-js="../../../../../search-index.js" data-search-js="../../../../../search.js"></div>
-</body></html>
+<span class="comment">//#cpp2rust IDirect3DDevice9Ex                                  = d3d9::DeviceEx
+//#cpp2rust IDirect3DDevice9Ex                                  = d3d9::IDirect3DDevice9ExExt
+</span></code></pre></div>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (b44197abb 2022-09-05)" ></div></body></html>

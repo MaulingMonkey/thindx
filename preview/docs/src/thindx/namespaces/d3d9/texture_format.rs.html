@@ -1,103 +1,102 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\namespaces\d3d9\texture_format.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>texture_format.rs - source</title><link rel="stylesheet" type="text/css" href="../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../../../storage.js"></script><script src="../../../../crates.js"></script><script defer src="../../../../main.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script>
-    <noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"><style type="text/css">#crate-search{background-image:url("../../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../../../thindx/index.html'><div class='logo-container rust-logo'><img src='../../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
-<span id="2">  2</span>
-<span id="3">  3</span>
-<span id="4">  4</span>
-<span id="5">  5</span>
-<span id="6">  6</span>
-<span id="7">  7</span>
-<span id="8">  8</span>
-<span id="9">  9</span>
-<span id="10"> 10</span>
-<span id="11"> 11</span>
-<span id="12"> 12</span>
-<span id="13"> 13</span>
-<span id="14"> 14</span>
-<span id="15"> 15</span>
-<span id="16"> 16</span>
-<span id="17"> 17</span>
-<span id="18"> 18</span>
-<span id="19"> 19</span>
-<span id="20"> 20</span>
-<span id="21"> 21</span>
-<span id="22"> 22</span>
-<span id="23"> 23</span>
-<span id="24"> 24</span>
-<span id="25"> 25</span>
-<span id="26"> 26</span>
-<span id="27"> 27</span>
-<span id="28"> 28</span>
-<span id="29"> 29</span>
-<span id="30"> 30</span>
-<span id="31"> 31</span>
-<span id="32"> 32</span>
-<span id="33"> 33</span>
-<span id="34"> 34</span>
-<span id="35"> 35</span>
-<span id="36"> 36</span>
-<span id="37"> 37</span>
-<span id="38"> 38</span>
-<span id="39"> 39</span>
-<span id="40"> 40</span>
-<span id="41"> 41</span>
-<span id="42"> 42</span>
-<span id="43"> 43</span>
-<span id="44"> 44</span>
-<span id="45"> 45</span>
-<span id="46"> 46</span>
-<span id="47"> 47</span>
-<span id="48"> 48</span>
-<span id="49"> 49</span>
-<span id="50"> 50</span>
-<span id="51"> 51</span>
-<span id="52"> 52</span>
-<span id="53"> 53</span>
-<span id="54"> 54</span>
-<span id="55"> 55</span>
-<span id="56"> 56</span>
-<span id="57"> 57</span>
-<span id="58"> 58</span>
-<span id="59"> 59</span>
-<span id="60"> 60</span>
-<span id="61"> 61</span>
-<span id="62"> 62</span>
-<span id="63"> 63</span>
-<span id="64"> 64</span>
-<span id="65"> 65</span>
-<span id="66"> 66</span>
-<span id="67"> 67</span>
-<span id="68"> 68</span>
-<span id="69"> 69</span>
-<span id="70"> 70</span>
-<span id="71"> 71</span>
-<span id="72"> 72</span>
-<span id="73"> 73</span>
-<span id="74"> 74</span>
-<span id="75"> 75</span>
-<span id="76"> 76</span>
-<span id="77"> 77</span>
-<span id="78"> 78</span>
-<span id="79"> 79</span>
-<span id="80"> 80</span>
-<span id="81"> 81</span>
-<span id="82"> 82</span>
-<span id="83"> 83</span>
-<span id="84"> 84</span>
-<span id="85"> 85</span>
-<span id="86"> 86</span>
-<span id="87"> 87</span>
-<span id="88"> 88</span>
-<span id="89"> 89</span>
-<span id="90"> 90</span>
-<span id="91"> 91</span>
-<span id="92"> 92</span>
-<span id="93"> 93</span>
-<span id="94"> 94</span>
-<span id="95"> 95</span>
-<span id="96"> 96</span>
-<span id="97"> 97</span>
-<span id="98"> 98</span>
-<span id="99"> 99</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\namespaces\d3d9\texture_format.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>texture_format.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../normalize.css"><link rel="stylesheet" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../dark.css" disabled><link rel="stylesheet" href="../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../storage.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../thindx/index.html"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<span id="2">2</span>
+<span id="3">3</span>
+<span id="4">4</span>
+<span id="5">5</span>
+<span id="6">6</span>
+<span id="7">7</span>
+<span id="8">8</span>
+<span id="9">9</span>
+<span id="10">10</span>
+<span id="11">11</span>
+<span id="12">12</span>
+<span id="13">13</span>
+<span id="14">14</span>
+<span id="15">15</span>
+<span id="16">16</span>
+<span id="17">17</span>
+<span id="18">18</span>
+<span id="19">19</span>
+<span id="20">20</span>
+<span id="21">21</span>
+<span id="22">22</span>
+<span id="23">23</span>
+<span id="24">24</span>
+<span id="25">25</span>
+<span id="26">26</span>
+<span id="27">27</span>
+<span id="28">28</span>
+<span id="29">29</span>
+<span id="30">30</span>
+<span id="31">31</span>
+<span id="32">32</span>
+<span id="33">33</span>
+<span id="34">34</span>
+<span id="35">35</span>
+<span id="36">36</span>
+<span id="37">37</span>
+<span id="38">38</span>
+<span id="39">39</span>
+<span id="40">40</span>
+<span id="41">41</span>
+<span id="42">42</span>
+<span id="43">43</span>
+<span id="44">44</span>
+<span id="45">45</span>
+<span id="46">46</span>
+<span id="47">47</span>
+<span id="48">48</span>
+<span id="49">49</span>
+<span id="50">50</span>
+<span id="51">51</span>
+<span id="52">52</span>
+<span id="53">53</span>
+<span id="54">54</span>
+<span id="55">55</span>
+<span id="56">56</span>
+<span id="57">57</span>
+<span id="58">58</span>
+<span id="59">59</span>
+<span id="60">60</span>
+<span id="61">61</span>
+<span id="62">62</span>
+<span id="63">63</span>
+<span id="64">64</span>
+<span id="65">65</span>
+<span id="66">66</span>
+<span id="67">67</span>
+<span id="68">68</span>
+<span id="69">69</span>
+<span id="70">70</span>
+<span id="71">71</span>
+<span id="72">72</span>
+<span id="73">73</span>
+<span id="74">74</span>
+<span id="75">75</span>
+<span id="76">76</span>
+<span id="77">77</span>
+<span id="78">78</span>
+<span id="79">79</span>
+<span id="80">80</span>
+<span id="81">81</span>
+<span id="82">82</span>
+<span id="83">83</span>
+<span id="84">84</span>
+<span id="85">85</span>
+<span id="86">86</span>
+<span id="87">87</span>
+<span id="88">88</span>
+<span id="89">89</span>
+<span id="90">90</span>
+<span id="91">91</span>
+<span id="92">92</span>
+<span id="93">93</span>
+<span id="94">94</span>
+<span id="95">95</span>
+<span id="96">96</span>
+<span id="97">97</span>
+<span id="98">98</span>
+<span id="99">99</span>
 <span id="100">100</span>
 <span id="101">101</span>
 <span id="102">102</span>
@@ -195,204 +194,201 @@
 <span id="194">194</span>
 <span id="195">195</span>
 <span id="196">196</span>
-<span id="197">197</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="kw">crate</span>::<span class="kw-2">*</span>;
+</pre><pre class="rust"><code><span class="kw">use crate</span>::<span class="kw-2">*</span>;
 
 
 
-<span class="doccomment">/// Similar to [d3d::Format], but limited to texture-friendly formats, and adding metadata to allow safe + sound bounds.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">FixedTextureFormat</span>(<span class="ident">UncheckedTextureFormat</span>);
+<span class="doccomment">/// Similar to [d3d::Format], but limited to texture-friendly formats, and adding metadata to allow safe + sound bounds.
+</span><span class="attribute">#[derive(Clone, Copy, Debug)]
+</span><span class="kw">pub struct </span>FixedTextureFormat(UncheckedTextureFormat);
 
-<span class="kw">impl</span> <span class="ident">FixedTextureFormat</span> {
-    <span class="doccomment">/// Create a [FixedTextureFormat].</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### ⚠️ Safety ⚠️</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ThinDX APIs rely on format&#39;s fields being accurate/consistent with each other.</span>
-    <span class="doccomment">/// Specifying the wrong size or bits per block for a given format may result in buffer</span>
-    <span class="doccomment">/// overflows, access of uninitialized data, or other nastiness.</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="kw unsafe">unsafe</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">format</span>: <span class="ident">UncheckedTextureFormat</span>) -&gt; <span class="self">Self</span> { <span class="self">Self</span>(<span class="ident">format</span>) }
+<span class="kw">impl </span>FixedTextureFormat {
+    <span class="doccomment">/// Create a [FixedTextureFormat].
+    ///
+    /// ### ⚠️ Safety ⚠️
+    /// ThinDX APIs rely on format&#39;s fields being accurate/consistent with each other.
+    /// Specifying the wrong size or bits per block for a given format may result in buffer
+    /// overflows, access of uninitialized data, or other nastiness.
+    </span><span class="kw">pub const unsafe fn </span>new(format: UncheckedTextureFormat) -&gt; <span class="self">Self </span>{ <span class="self">Self</span>(format) }
 }
 
-<span class="comment">// DO NOT IMPLEMENT: DerefMut - would break soundness bounds of type.</span>
-<span class="kw">impl</span> <span class="ident">std::ops::Deref</span> <span class="kw">for</span> <span class="ident">FixedTextureFormat</span> {
-    <span class="kw">type</span> <span class="ident">Target</span> <span class="op">=</span> <span class="ident">UncheckedTextureFormat</span>;
-    <span class="kw">fn</span> <span class="ident">deref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::Target</span> { <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="number">0</span> }
-}
-
-
-
-<span class="doccomment">/// Similar to [d3d::Format], but presumably limited to texture-friendly formats.</span>
-<span class="doccomment">/// Unlike [FixedTextureFormat], there&#39;s no guarantee that the values of this type are</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">UncheckedTextureFormat</span> {
-    <span class="doccomment">/// The underlying [d3d::Format].</span>
-    <span class="kw">pub</span> <span class="ident">format</span>:         <span class="ident">d3d::Format</span>,
-
-    <span class="doccomment">/// Bits per block.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// For most formats, a block synonymous with a single pixel.</span>
-    <span class="doccomment">/// However, for e.g. DXT formats, a block is a 4x4 group of pixels.</span>
-    <span class="kw">pub</span> <span class="ident">bits_per_block</span>: <span class="ident">u8</span>,
-
-    <span class="doccomment">/// Block size in pixels.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// For most formats, this will be `(1, 1)`.  For DXT formats, this will be `(4, 4)`.</span>
-    <span class="kw">pub</span> <span class="ident">block_size</span>: (<span class="ident">u8</span>, <span class="ident">u8</span>),
+<span class="comment">// DO NOT IMPLEMENT: DerefMut - would break soundness bounds of type.
+</span><span class="kw">impl </span>std::ops::Deref <span class="kw">for </span>FixedTextureFormat {
+    <span class="kw">type </span>Target = UncheckedTextureFormat;
+    <span class="kw">fn </span>deref(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="self">Self</span>::Target { <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="number">0 </span>}
 }
 
 
 
-<span class="macro">macro_rules!</span> <span class="ident">formats</span> {
-    (<span class="kw unsafe">unsafe</span> { <span class="comment">// we&#39;re bypassing FixedTextureFormat::new</span>
-        (
-            <span class="ident">format</span>,
-            <span class="ident">bits</span>,
-            <span class="ident">block</span> $(,)<span class="question-mark">?</span>
-        )
+<span class="doccomment">/// Similar to [d3d::Format], but presumably limited to texture-friendly formats.
+/// Unlike [FixedTextureFormat], there&#39;s no guarantee that the values of this type are
+</span><span class="attribute">#[derive(Clone, Copy, Debug)]
+</span><span class="kw">pub struct </span>UncheckedTextureFormat {
+    <span class="doccomment">/// The underlying [d3d::Format].
+    </span><span class="kw">pub </span>format:         d3d::Format,
+
+    <span class="doccomment">/// Bits per block.
+    ///
+    /// For most formats, a block synonymous with a single pixel.
+    /// However, for e.g. DXT formats, a block is a 4x4 group of pixels.
+    </span><span class="kw">pub </span>bits_per_block: u8,
+
+    <span class="doccomment">/// Block size in pixels.
+    ///
+    /// For most formats, this will be `(1, 1)`.  For DXT formats, this will be `(4, 4)`.
+    </span><span class="kw">pub </span>block_size: (u8, u8),
+}
+
+
+
+<span class="macro">macro_rules! </span>formats {
+    (<span class="kw">unsafe </span>{ <span class="comment">// we&#39;re bypassing FixedTextureFormat::new
+        </span>(
+            format,
+            bits,
+            block $(,)<span class="question-mark">?
+        </span>)
         $(,
-            <span class="comment">// TODO: docs/attrs</span>
-            (
-                <span class="macro-nonterminal">$</span><span class="macro-nonterminal">format</span>:<span class="ident">ident</span>,
-                <span class="macro-nonterminal">$</span><span class="macro-nonterminal">bits</span>:<span class="ident">literal</span>,
-                (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">block_width</span>:<span class="ident">literal</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">block_height</span>:<span class="ident">literal</span>) $(,)<span class="question-mark">?</span>
-            )
-        )<span class="op">*</span>
-        $(,)<span class="question-mark">?</span>
-    }) =&gt; {
-        <span class="kw">impl</span> <span class="ident">FixedTextureFormat</span> {
+            <span class="comment">// TODO: docs/attrs
+            </span>(
+                <span class="macro-nonterminal">$format</span>:ident,
+                <span class="macro-nonterminal">$bits</span>:literal,
+                (<span class="macro-nonterminal">$block_width</span>:literal, <span class="macro-nonterminal">$block_height</span>:literal) $(,)<span class="question-mark">?
+            </span>)
+        )*
+        $(,)<span class="question-mark">?
+    </span>}) =&gt; {
+        <span class="kw">impl </span>FixedTextureFormat {
             $(
-                <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">missing_docs</span>)]</span> <span class="comment">// TODO?</span>
-                <span class="kw">pub</span> <span class="kw">const</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">format</span> : <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="self">Self</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">Self</span>(<span class="ident">UncheckedTextureFormat</span> {
-                    <span class="ident">format</span>: <span class="ident">d3d::Format</span>::<span class="macro-nonterminal">$</span><span class="macro-nonterminal">format</span>,
-                    <span class="ident">bits_per_block</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">bits</span>,
-                    <span class="ident">block_size</span>: (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">block_width</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">block_height</span>)
+                <span class="attribute">#[allow(missing_docs)] </span><span class="comment">// TODO?
+                </span><span class="kw">pub const </span><span class="macro-nonterminal">$format </span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span><span class="self">Self </span>= <span class="kw-2">&amp;</span><span class="self">Self</span>(UncheckedTextureFormat {
+                    format: d3d::Format::<span class="macro-nonterminal">$format</span>,
+                    bits_per_block: <span class="macro-nonterminal">$bits</span>,
+                    block_size: (<span class="macro-nonterminal">$block_width</span>, <span class="macro-nonterminal">$block_height</span>)
                 });
-            )<span class="op">*</span>
+            )*
 
-            <span class="doccomment">/// Attempt to create a &amp;[FixedTextureFormat] from a [d3d::Format].</span>
-            <span class="doccomment">///</span>
-            <span class="doccomment">/// &lt;h3&gt;Edge Cases of Note&lt;/h3&gt;</span>
-            <span class="doccomment">///</span>
-            <span class="doccomment">/// *   [d3d::Format::Unknown]      is not supported despite being valid for e.g. back buffer format specifiers</span>
-            <span class="doccomment">/// *   [d3d::Format::MULTI2_ARGB8] is not supported due to being variable length depending on device state</span>
-            <span class="doccomment">///</span>
-            <span class="doccomment">/// &lt;h3&gt;Not (yet) supported&lt;/h3&gt;</span>
-            <span class="doccomment">///</span>
-            <span class="doccomment">/// *   [d3d::Format::UYVY]         - TBD</span>
-            <span class="doccomment">/// *   [d3d::Format::R8G8_B8G8]    - block size is ambiguous</span>
-            <span class="doccomment">/// *   [d3d::Format::YUY2]         - TBD</span>
-            <span class="doccomment">/// *   [d3d::Format::G8R8_G8B8]    - block size is ambiguous</span>
-            <span class="doccomment">/// *   [d3d::Format::CxV8U8]       - bit count is ambiguous from documentation</span>
-            <span class="doccomment">///</span>
-            <span class="doccomment">/// &lt;h3&gt;Never to be supported&lt;/h3&gt;</span>
-            <span class="doccomment">///</span>
-            <span class="doccomment">/// *   [d3d::Format::VertexData]   - not intended as texture data, variable stride</span>
-            <span class="doccomment">/// *   [d3d::Format::Index16]      - not intended as texture data</span>
-            <span class="doccomment">/// *   [d3d::Format::Index32]      - not intended as texture data</span>
-            <span class="doccomment">/// *   [d3d::Format::BinaryBuffer] - variable stride</span>
-            <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">try_from_standard</span>(<span class="ident">format</span>: <span class="ident">d3d::Format</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="self">Self</span><span class="op">&gt;</span> {
-                <span class="kw">match</span> <span class="ident">format</span> {
-                    $( <span class="ident">d3d::Format</span>::<span class="macro-nonterminal">$</span><span class="macro-nonterminal">format</span> =&gt; <span class="prelude-val">Some</span>(<span class="self">Self</span>::<span class="macro-nonterminal">$</span><span class="macro-nonterminal">format</span>), )<span class="op">*</span>
-                    <span class="kw">_</span> =&gt; <span class="prelude-val">None</span>
-                }
+            <span class="doccomment">/// Attempt to create a &amp;[FixedTextureFormat] from a [d3d::Format].
+            ///
+            /// &lt;h3&gt;Edge Cases of Note&lt;/h3&gt;
+            ///
+            /// *   [d3d::Format::Unknown]      is not supported despite being valid for e.g. back buffer format specifiers
+            /// *   [d3d::Format::MULTI2_ARGB8] is not supported due to being variable length depending on device state
+            ///
+            /// &lt;h3&gt;Not (yet) supported&lt;/h3&gt;
+            ///
+            /// *   [d3d::Format::UYVY]         - TBD
+            /// *   [d3d::Format::R8G8_B8G8]    - block size is ambiguous
+            /// *   [d3d::Format::YUY2]         - TBD
+            /// *   [d3d::Format::G8R8_G8B8]    - block size is ambiguous
+            /// *   [d3d::Format::CxV8U8]       - bit count is ambiguous from documentation
+            ///
+            /// &lt;h3&gt;Never to be supported&lt;/h3&gt;
+            ///
+            /// *   [d3d::Format::VertexData]   - not intended as texture data, variable stride
+            /// *   [d3d::Format::Index16]      - not intended as texture data
+            /// *   [d3d::Format::Index32]      - not intended as texture data
+            /// *   [d3d::Format::BinaryBuffer] - variable stride
+            </span><span class="kw">pub fn </span>try_from_standard(format: d3d::Format) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span><span class="self">Self</span>&gt; {
+                <span class="kw">match </span>format {
+                    $( d3d::Format::<span class="macro-nonterminal">$format </span>=&gt; <span class="prelude-val">Some</span>(<span class="self">Self</span>::<span class="macro-nonterminal">$format</span>), )*
+                    <span class="kw">_ </span>=&gt; <span class="prelude-val">None
+                </span>}
             }
         }
     };
 }
 
-<span class="macro">formats!</span> {
-    <span class="kw unsafe">unsafe</span> {
-        (<span class="ident">format</span>,              <span class="ident">bits</span>, <span class="ident">block</span>),
+<span class="macro">formats! </span>{
+    <span class="kw">unsafe </span>{
+        (format,              bits, block),
 
-        <span class="comment">//(Unknown,             ??, (?,?)),</span>
+        <span class="comment">//(Unknown,             ??, (?,?)),
 
-        (<span class="ident">R8G8B8</span>,                <span class="number">24</span>, (<span class="number">1</span>,<span class="number">1</span>)),
-        (<span class="ident">A8R8G8B8</span>,              <span class="number">32</span>, (<span class="number">1</span>,<span class="number">1</span>)),
-        (<span class="ident">X8R8G8B8</span>,              <span class="number">32</span>, (<span class="number">1</span>,<span class="number">1</span>)),
-        (<span class="ident">R5G6B5</span>,                <span class="number">16</span>, (<span class="number">1</span>,<span class="number">1</span>)),
-        (<span class="ident">X1R5G5B5</span>,              <span class="number">16</span>, (<span class="number">1</span>,<span class="number">1</span>)),
-        (<span class="ident">A1R5G5B5</span>,              <span class="number">16</span>, (<span class="number">1</span>,<span class="number">1</span>)),
-        (<span class="ident">A4R4G4B4</span>,              <span class="number">16</span>, (<span class="number">1</span>,<span class="number">1</span>)),
-        (<span class="ident">R3G3B2</span>,                 <span class="number">8</span>, (<span class="number">1</span>,<span class="number">1</span>)),
-        (<span class="ident">A8</span>,                     <span class="number">8</span>, (<span class="number">1</span>,<span class="number">1</span>)),
-        (<span class="ident">A8R3G3B2</span>,              <span class="number">16</span>, (<span class="number">1</span>,<span class="number">1</span>)),
-        (<span class="ident">X4R4G4B4</span>,              <span class="number">16</span>, (<span class="number">1</span>,<span class="number">1</span>)),
-        (<span class="ident">A2B10G10R10</span>,           <span class="number">32</span>, (<span class="number">1</span>,<span class="number">1</span>)),
-        (<span class="ident">A8B8G8R8</span>,              <span class="number">32</span>, (<span class="number">1</span>,<span class="number">1</span>)),
-        (<span class="ident">X8B8G8R8</span>,              <span class="number">32</span>, (<span class="number">1</span>,<span class="number">1</span>)),
-        (<span class="ident">G16R16</span>,                <span class="number">32</span>, (<span class="number">1</span>,<span class="number">1</span>)),
-        (<span class="ident">A2R10G10B10</span>,           <span class="number">32</span>, (<span class="number">1</span>,<span class="number">1</span>)),
-        (<span class="ident">A16B16G16R16</span>,          <span class="number">64</span>, (<span class="number">1</span>,<span class="number">1</span>)),
+        </span>(R8G8B8,                <span class="number">24</span>, (<span class="number">1</span>,<span class="number">1</span>)),
+        (A8R8G8B8,              <span class="number">32</span>, (<span class="number">1</span>,<span class="number">1</span>)),
+        (X8R8G8B8,              <span class="number">32</span>, (<span class="number">1</span>,<span class="number">1</span>)),
+        (R5G6B5,                <span class="number">16</span>, (<span class="number">1</span>,<span class="number">1</span>)),
+        (X1R5G5B5,              <span class="number">16</span>, (<span class="number">1</span>,<span class="number">1</span>)),
+        (A1R5G5B5,              <span class="number">16</span>, (<span class="number">1</span>,<span class="number">1</span>)),
+        (A4R4G4B4,              <span class="number">16</span>, (<span class="number">1</span>,<span class="number">1</span>)),
+        (R3G3B2,                 <span class="number">8</span>, (<span class="number">1</span>,<span class="number">1</span>)),
+        (A8,                     <span class="number">8</span>, (<span class="number">1</span>,<span class="number">1</span>)),
+        (A8R3G3B2,              <span class="number">16</span>, (<span class="number">1</span>,<span class="number">1</span>)),
+        (X4R4G4B4,              <span class="number">16</span>, (<span class="number">1</span>,<span class="number">1</span>)),
+        (A2B10G10R10,           <span class="number">32</span>, (<span class="number">1</span>,<span class="number">1</span>)),
+        (A8B8G8R8,              <span class="number">32</span>, (<span class="number">1</span>,<span class="number">1</span>)),
+        (X8B8G8R8,              <span class="number">32</span>, (<span class="number">1</span>,<span class="number">1</span>)),
+        (G16R16,                <span class="number">32</span>, (<span class="number">1</span>,<span class="number">1</span>)),
+        (A2R10G10B10,           <span class="number">32</span>, (<span class="number">1</span>,<span class="number">1</span>)),
+        (A16B16G16R16,          <span class="number">64</span>, (<span class="number">1</span>,<span class="number">1</span>)),
 
-        (<span class="ident">A8P8</span>,                  <span class="number">16</span>, (<span class="number">1</span>,<span class="number">1</span>)),
-        (<span class="ident">P8</span>,                     <span class="number">8</span>, (<span class="number">1</span>,<span class="number">1</span>)),
+        (A8P8,                  <span class="number">16</span>, (<span class="number">1</span>,<span class="number">1</span>)),
+        (P8,                     <span class="number">8</span>, (<span class="number">1</span>,<span class="number">1</span>)),
 
-        (<span class="ident">L8</span>,                     <span class="number">8</span>, (<span class="number">1</span>,<span class="number">1</span>)),
-        (<span class="ident">A8L8</span>,                  <span class="number">16</span>, (<span class="number">1</span>,<span class="number">1</span>)),
-        (<span class="ident">A4L4</span>,                   <span class="number">8</span>, (<span class="number">1</span>,<span class="number">1</span>)),
+        (L8,                     <span class="number">8</span>, (<span class="number">1</span>,<span class="number">1</span>)),
+        (A8L8,                  <span class="number">16</span>, (<span class="number">1</span>,<span class="number">1</span>)),
+        (A4L4,                   <span class="number">8</span>, (<span class="number">1</span>,<span class="number">1</span>)),
 
-        (<span class="ident">V8U8</span>,                  <span class="number">16</span>, (<span class="number">1</span>,<span class="number">1</span>)),
-        (<span class="ident">L6V5U5</span>,                <span class="number">16</span>, (<span class="number">1</span>,<span class="number">1</span>)),
-        (<span class="ident">X8L8V8U8</span>,              <span class="number">32</span>, (<span class="number">1</span>,<span class="number">1</span>)),
-        (<span class="ident">Q8W8V8U8</span>,              <span class="number">32</span>, (<span class="number">1</span>,<span class="number">1</span>)),
-        (<span class="ident">V16U16</span>,                <span class="number">32</span>, (<span class="number">1</span>,<span class="number">1</span>)),
-        (<span class="ident">A2W10V10U10</span>,           <span class="number">32</span>, (<span class="number">1</span>,<span class="number">1</span>)),
+        (V8U8,                  <span class="number">16</span>, (<span class="number">1</span>,<span class="number">1</span>)),
+        (L6V5U5,                <span class="number">16</span>, (<span class="number">1</span>,<span class="number">1</span>)),
+        (X8L8V8U8,              <span class="number">32</span>, (<span class="number">1</span>,<span class="number">1</span>)),
+        (Q8W8V8U8,              <span class="number">32</span>, (<span class="number">1</span>,<span class="number">1</span>)),
+        (V16U16,                <span class="number">32</span>, (<span class="number">1</span>,<span class="number">1</span>)),
+        (A2W10V10U10,           <span class="number">32</span>, (<span class="number">1</span>,<span class="number">1</span>)),
 
-        <span class="comment">//(UYVY,                ??, (?,?)), // TODO: block size?</span>
-        <span class="comment">//(R8G8_B8G8,           ??, (?,?)), // TODO: should these be (2,1) block size? or (1,1)?</span>
-        <span class="comment">//(YUY2,                ??, (?,?)), // TODO: block size?</span>
-        <span class="comment">//(G8R8_G8B8,           ??, (?,?)), // TODO: should these be (2,1) block size? or (1,1)?</span>
-        (<span class="ident">DXT1</span>,                  <span class="number">32</span>, (<span class="number">4</span>,<span class="number">4</span>)), <span class="comment">// aka BC1 w/  premultiplied alpha</span>
-        (<span class="ident">DXT2</span>,                  <span class="number">64</span>, (<span class="number">4</span>,<span class="number">4</span>)), <span class="comment">// aka BC2 w/  premultiplied alpha</span>
-        (<span class="ident">DXT3</span>,                  <span class="number">64</span>, (<span class="number">4</span>,<span class="number">4</span>)), <span class="comment">// aka BC2 w/o premultiplied alpha</span>
-        (<span class="ident">DXT4</span>,                  <span class="number">64</span>, (<span class="number">4</span>,<span class="number">4</span>)), <span class="comment">// aka BC3 w/  premultiplied alpha</span>
-        (<span class="ident">DXT5</span>,                  <span class="number">64</span>, (<span class="number">4</span>,<span class="number">4</span>)), <span class="comment">// aka BC3 w/o premultiplied alpha</span>
+        <span class="comment">//(UYVY,                ??, (?,?)), // TODO: block size?
+        //(R8G8_B8G8,           ??, (?,?)), // TODO: should these be (2,1) block size? or (1,1)?
+        //(YUY2,                ??, (?,?)), // TODO: block size?
+        //(G8R8_G8B8,           ??, (?,?)), // TODO: should these be (2,1) block size? or (1,1)?
+        </span>(DXT1,                  <span class="number">32</span>, (<span class="number">4</span>,<span class="number">4</span>)), <span class="comment">// aka BC1 w/  premultiplied alpha
+        </span>(DXT2,                  <span class="number">64</span>, (<span class="number">4</span>,<span class="number">4</span>)), <span class="comment">// aka BC2 w/  premultiplied alpha
+        </span>(DXT3,                  <span class="number">64</span>, (<span class="number">4</span>,<span class="number">4</span>)), <span class="comment">// aka BC2 w/o premultiplied alpha
+        </span>(DXT4,                  <span class="number">64</span>, (<span class="number">4</span>,<span class="number">4</span>)), <span class="comment">// aka BC3 w/  premultiplied alpha
+        </span>(DXT5,                  <span class="number">64</span>, (<span class="number">4</span>,<span class="number">4</span>)), <span class="comment">// aka BC3 w/o premultiplied alpha
 
-        (<span class="ident">D16_LOCKABLE</span>,          <span class="number">16</span>, (<span class="number">1</span>,<span class="number">1</span>)),
-        (<span class="ident">D32</span>,                   <span class="number">32</span>, (<span class="number">1</span>,<span class="number">1</span>)),
-        (<span class="ident">D15S1</span>,                 <span class="number">16</span>, (<span class="number">1</span>,<span class="number">1</span>)),
-        (<span class="ident">D24S8</span>,                 <span class="number">32</span>, (<span class="number">1</span>,<span class="number">1</span>)),
-        (<span class="ident">D24X8</span>,                 <span class="number">32</span>, (<span class="number">1</span>,<span class="number">1</span>)),
-        (<span class="ident">D24X4S4</span>,               <span class="number">32</span>, (<span class="number">1</span>,<span class="number">1</span>)),
-        (<span class="ident">D16</span>,                   <span class="number">16</span>, (<span class="number">1</span>,<span class="number">1</span>)),
+        </span>(D16_LOCKABLE,          <span class="number">16</span>, (<span class="number">1</span>,<span class="number">1</span>)),
+        (D32,                   <span class="number">32</span>, (<span class="number">1</span>,<span class="number">1</span>)),
+        (D15S1,                 <span class="number">16</span>, (<span class="number">1</span>,<span class="number">1</span>)),
+        (D24S8,                 <span class="number">32</span>, (<span class="number">1</span>,<span class="number">1</span>)),
+        (D24X8,                 <span class="number">32</span>, (<span class="number">1</span>,<span class="number">1</span>)),
+        (D24X4S4,               <span class="number">32</span>, (<span class="number">1</span>,<span class="number">1</span>)),
+        (D16,                   <span class="number">16</span>, (<span class="number">1</span>,<span class="number">1</span>)),
 
-        (<span class="ident">D32F_LOCKABLE</span>,         <span class="number">32</span>, (<span class="number">1</span>,<span class="number">1</span>)),
-        (<span class="ident">D24FS8</span>,                <span class="number">32</span>, (<span class="number">1</span>,<span class="number">1</span>)),
+        (D32F_LOCKABLE,         <span class="number">32</span>, (<span class="number">1</span>,<span class="number">1</span>)),
+        (D24FS8,                <span class="number">32</span>, (<span class="number">1</span>,<span class="number">1</span>)),
 
-        (<span class="ident">D32_LOCKABLE</span>,          <span class="number">32</span>, (<span class="number">1</span>,<span class="number">1</span>)),
+        (D32_LOCKABLE,          <span class="number">32</span>, (<span class="number">1</span>,<span class="number">1</span>)),
 
-        (<span class="ident">X8_LOCKABLE</span>,            <span class="number">8</span>, (<span class="number">1</span>,<span class="number">1</span>)),
+        (X8_LOCKABLE,            <span class="number">8</span>, (<span class="number">1</span>,<span class="number">1</span>)),
 
-        (<span class="ident">L16</span>,                   <span class="number">16</span>, (<span class="number">1</span>,<span class="number">1</span>)),
+        (L16,                   <span class="number">16</span>, (<span class="number">1</span>,<span class="number">1</span>)),
 
-        <span class="comment">//(VertexData,          ??, (?,?)), // not pixel data</span>
-        <span class="comment">//(Index16,             ??, (?,?)), // not pixel data</span>
-        <span class="comment">//(Index32,             ??, (?,?)), // not pixel data</span>
+        <span class="comment">//(VertexData,          ??, (?,?)), // not pixel data
+        //(Index16,             ??, (?,?)), // not pixel data
+        //(Index32,             ??, (?,?)), // not pixel data
 
-        (<span class="ident">Q16W16V16U16</span>,          <span class="number">64</span>, (<span class="number">1</span>,<span class="number">1</span>)),
+        </span>(Q16W16V16U16,          <span class="number">64</span>, (<span class="number">1</span>,<span class="number">1</span>)),
 
-        <span class="comment">//(MULTI2_ARGB8,        ??, (?,?)), // variable bits per pixel! https://docs.microsoft.com/en-us/windows/win32/direct3d9/multiple-element-textures</span>
+        <span class="comment">//(MULTI2_ARGB8,        ??, (?,?)), // variable bits per pixel! https://docs.microsoft.com/en-us/windows/win32/direct3d9/multiple-element-textures
 
-        (<span class="ident">R16F</span>,                  <span class="number">16</span>, (<span class="number">1</span>,<span class="number">1</span>)),
-        (<span class="ident">G16R16F</span>,               <span class="number">32</span>, (<span class="number">1</span>,<span class="number">1</span>)),
-        (<span class="ident">A16B16G16R16F</span>,         <span class="number">64</span>, (<span class="number">1</span>,<span class="number">1</span>)),
+        </span>(R16F,                  <span class="number">16</span>, (<span class="number">1</span>,<span class="number">1</span>)),
+        (G16R16F,               <span class="number">32</span>, (<span class="number">1</span>,<span class="number">1</span>)),
+        (A16B16G16R16F,         <span class="number">64</span>, (<span class="number">1</span>,<span class="number">1</span>)),
 
-        (<span class="ident">R32F</span>,                  <span class="number">32</span>, (<span class="number">1</span>,<span class="number">1</span>)),
-        (<span class="ident">G32R32F</span>,               <span class="number">64</span>, (<span class="number">1</span>,<span class="number">1</span>)),
-        (<span class="ident">A32B32G32R32F</span>,        <span class="number">128</span>, (<span class="number">1</span>,<span class="number">1</span>)),
+        (R32F,                  <span class="number">32</span>, (<span class="number">1</span>,<span class="number">1</span>)),
+        (G32R32F,               <span class="number">64</span>, (<span class="number">1</span>,<span class="number">1</span>)),
+        (A32B32G32R32F,        <span class="number">128</span>, (<span class="number">1</span>,<span class="number">1</span>)),
 
-        <span class="comment">// I&#39;ve seen conflicting documentation for if this is 16 or 32 bits.  I assume it&#39;s *probably* 16 bits based on the name, but I&#39;m holding off on defining it until this can be confirmed.</span>
-        <span class="comment">// &quot;A 16-bit normal compression format.&quot;    https://docs.microsoft.com/en-us/previous-versions/windows/desktop/bb153349(v=vs.85)</span>
-        <span class="comment">// &quot;A 32-bit normal compression format.&quot;    https://docs.microsoft.com/en-us/previous-versions/windows/desktop/bb322854(v=vs.85)</span>
-        <span class="comment">// (CxV8U8              16, (?,?)),</span>
+        <span class="comment">// I&#39;ve seen conflicting documentation for if this is 16 or 32 bits.  I assume it&#39;s *probably* 16 bits based on the name, but I&#39;m holding off on defining it until this can be confirmed.
+        // &quot;A 16-bit normal compression format.&quot;    https://docs.microsoft.com/en-us/previous-versions/windows/desktop/bb153349(v=vs.85)
+        // &quot;A 32-bit normal compression format.&quot;    https://docs.microsoft.com/en-us/previous-versions/windows/desktop/bb322854(v=vs.85)
+        // (CxV8U8              16, (?,?)),
 
-        (<span class="ident">A1</span>,                     <span class="number">1</span>, (<span class="number">1</span>,<span class="number">1</span>)),
-        (<span class="ident">A2B10G10R10_XR_BIAS</span>,   <span class="number">32</span>, (<span class="number">1</span>,<span class="number">1</span>)),
-        <span class="comment">//(BinaryBuffer,        ??, (?,?)), // not pixel data</span>
-    }
+        </span>(A1,                     <span class="number">1</span>, (<span class="number">1</span>,<span class="number">1</span>)),
+        (A2B10G10R10_XR_BIAS,   <span class="number">32</span>, (<span class="number">1</span>,<span class="number">1</span>)),
+        <span class="comment">//(BinaryBuffer,        ??, (?,?)), // not pixel data
+    </span>}
 }
 </code></pre></div>
-</section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="thindx" data-search-index-js="../../../../search-index.js" data-search-js="../../../../search.js"></div>
-</body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (b44197abb 2022-09-05)" ></div></body></html>

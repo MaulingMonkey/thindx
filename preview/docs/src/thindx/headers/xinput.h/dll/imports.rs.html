@@ -1,103 +1,102 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\xinput.h\dll\imports.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>imports.rs - source</title><link rel="stylesheet" type="text/css" href="../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script src="../../../../../crates.js"></script><script defer src="../../../../../main.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script>
-    <noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"><style type="text/css">#crate-search{background-image:url("../../../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../../../../thindx/index.html'><div class='logo-container rust-logo'><img src='../../../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../../../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../../../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../../../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
-<span id="2">  2</span>
-<span id="3">  3</span>
-<span id="4">  4</span>
-<span id="5">  5</span>
-<span id="6">  6</span>
-<span id="7">  7</span>
-<span id="8">  8</span>
-<span id="9">  9</span>
-<span id="10"> 10</span>
-<span id="11"> 11</span>
-<span id="12"> 12</span>
-<span id="13"> 13</span>
-<span id="14"> 14</span>
-<span id="15"> 15</span>
-<span id="16"> 16</span>
-<span id="17"> 17</span>
-<span id="18"> 18</span>
-<span id="19"> 19</span>
-<span id="20"> 20</span>
-<span id="21"> 21</span>
-<span id="22"> 22</span>
-<span id="23"> 23</span>
-<span id="24"> 24</span>
-<span id="25"> 25</span>
-<span id="26"> 26</span>
-<span id="27"> 27</span>
-<span id="28"> 28</span>
-<span id="29"> 29</span>
-<span id="30"> 30</span>
-<span id="31"> 31</span>
-<span id="32"> 32</span>
-<span id="33"> 33</span>
-<span id="34"> 34</span>
-<span id="35"> 35</span>
-<span id="36"> 36</span>
-<span id="37"> 37</span>
-<span id="38"> 38</span>
-<span id="39"> 39</span>
-<span id="40"> 40</span>
-<span id="41"> 41</span>
-<span id="42"> 42</span>
-<span id="43"> 43</span>
-<span id="44"> 44</span>
-<span id="45"> 45</span>
-<span id="46"> 46</span>
-<span id="47"> 47</span>
-<span id="48"> 48</span>
-<span id="49"> 49</span>
-<span id="50"> 50</span>
-<span id="51"> 51</span>
-<span id="52"> 52</span>
-<span id="53"> 53</span>
-<span id="54"> 54</span>
-<span id="55"> 55</span>
-<span id="56"> 56</span>
-<span id="57"> 57</span>
-<span id="58"> 58</span>
-<span id="59"> 59</span>
-<span id="60"> 60</span>
-<span id="61"> 61</span>
-<span id="62"> 62</span>
-<span id="63"> 63</span>
-<span id="64"> 64</span>
-<span id="65"> 65</span>
-<span id="66"> 66</span>
-<span id="67"> 67</span>
-<span id="68"> 68</span>
-<span id="69"> 69</span>
-<span id="70"> 70</span>
-<span id="71"> 71</span>
-<span id="72"> 72</span>
-<span id="73"> 73</span>
-<span id="74"> 74</span>
-<span id="75"> 75</span>
-<span id="76"> 76</span>
-<span id="77"> 77</span>
-<span id="78"> 78</span>
-<span id="79"> 79</span>
-<span id="80"> 80</span>
-<span id="81"> 81</span>
-<span id="82"> 82</span>
-<span id="83"> 83</span>
-<span id="84"> 84</span>
-<span id="85"> 85</span>
-<span id="86"> 86</span>
-<span id="87"> 87</span>
-<span id="88"> 88</span>
-<span id="89"> 89</span>
-<span id="90"> 90</span>
-<span id="91"> 91</span>
-<span id="92"> 92</span>
-<span id="93"> 93</span>
-<span id="94"> 94</span>
-<span id="95"> 95</span>
-<span id="96"> 96</span>
-<span id="97"> 97</span>
-<span id="98"> 98</span>
-<span id="99"> 99</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\xinput.h\dll\imports.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>imports.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../../normalize.css"><link rel="stylesheet" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../../dark.css" disabled><link rel="stylesheet" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<span id="2">2</span>
+<span id="3">3</span>
+<span id="4">4</span>
+<span id="5">5</span>
+<span id="6">6</span>
+<span id="7">7</span>
+<span id="8">8</span>
+<span id="9">9</span>
+<span id="10">10</span>
+<span id="11">11</span>
+<span id="12">12</span>
+<span id="13">13</span>
+<span id="14">14</span>
+<span id="15">15</span>
+<span id="16">16</span>
+<span id="17">17</span>
+<span id="18">18</span>
+<span id="19">19</span>
+<span id="20">20</span>
+<span id="21">21</span>
+<span id="22">22</span>
+<span id="23">23</span>
+<span id="24">24</span>
+<span id="25">25</span>
+<span id="26">26</span>
+<span id="27">27</span>
+<span id="28">28</span>
+<span id="29">29</span>
+<span id="30">30</span>
+<span id="31">31</span>
+<span id="32">32</span>
+<span id="33">33</span>
+<span id="34">34</span>
+<span id="35">35</span>
+<span id="36">36</span>
+<span id="37">37</span>
+<span id="38">38</span>
+<span id="39">39</span>
+<span id="40">40</span>
+<span id="41">41</span>
+<span id="42">42</span>
+<span id="43">43</span>
+<span id="44">44</span>
+<span id="45">45</span>
+<span id="46">46</span>
+<span id="47">47</span>
+<span id="48">48</span>
+<span id="49">49</span>
+<span id="50">50</span>
+<span id="51">51</span>
+<span id="52">52</span>
+<span id="53">53</span>
+<span id="54">54</span>
+<span id="55">55</span>
+<span id="56">56</span>
+<span id="57">57</span>
+<span id="58">58</span>
+<span id="59">59</span>
+<span id="60">60</span>
+<span id="61">61</span>
+<span id="62">62</span>
+<span id="63">63</span>
+<span id="64">64</span>
+<span id="65">65</span>
+<span id="66">66</span>
+<span id="67">67</span>
+<span id="68">68</span>
+<span id="69">69</span>
+<span id="70">70</span>
+<span id="71">71</span>
+<span id="72">72</span>
+<span id="73">73</span>
+<span id="74">74</span>
+<span id="75">75</span>
+<span id="76">76</span>
+<span id="77">77</span>
+<span id="78">78</span>
+<span id="79">79</span>
+<span id="80">80</span>
+<span id="81">81</span>
+<span id="82">82</span>
+<span id="83">83</span>
+<span id="84">84</span>
+<span id="85">85</span>
+<span id="86">86</span>
+<span id="87">87</span>
+<span id="88">88</span>
+<span id="89">89</span>
+<span id="90">90</span>
+<span id="91">91</span>
+<span id="92">92</span>
+<span id="93">93</span>
+<span id="94">94</span>
+<span id="95">95</span>
+<span id="96">96</span>
+<span id="97">97</span>
+<span id="98">98</span>
+<span id="99">99</span>
 <span id="100">100</span>
 <span id="101">101</span>
 <span id="102">102</span>
@@ -163,170 +162,339 @@
 <span id="162">162</span>
 <span id="163">163</span>
 <span id="164">164</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::dll</span>::{<span class="ident">Library</span>, <span class="ident">LibraryExt</span>};
+<span id="165">165</span>
+<span id="166">166</span>
+<span id="167">167</span>
+<span id="168">168</span>
+<span id="169">169</span>
+<span id="170">170</span>
+<span id="171">171</span>
+<span id="172">172</span>
+<span id="173">173</span>
+<span id="174">174</span>
+<span id="175">175</span>
+<span id="176">176</span>
+<span id="177">177</span>
+<span id="178">178</span>
+<span id="179">179</span>
+<span id="180">180</span>
+<span id="181">181</span>
+<span id="182">182</span>
+<span id="183">183</span>
+<span id="184">184</span>
+<span id="185">185</span>
+<span id="186">186</span>
+<span id="187">187</span>
+<span id="188">188</span>
+<span id="189">189</span>
+<span id="190">190</span>
+<span id="191">191</span>
+<span id="192">192</span>
+<span id="193">193</span>
+<span id="194">194</span>
+<span id="195">195</span>
+<span id="196">196</span>
+<span id="197">197</span>
+<span id="198">198</span>
+<span id="199">199</span>
+<span id="200">200</span>
+<span id="201">201</span>
+<span id="202">202</span>
+<span id="203">203</span>
+<span id="204">204</span>
+<span id="205">205</span>
+<span id="206">206</span>
+<span id="207">207</span>
+<span id="208">208</span>
+<span id="209">209</span>
+<span id="210">210</span>
+<span id="211">211</span>
+<span id="212">212</span>
+<span id="213">213</span>
+<span id="214">214</span>
+<span id="215">215</span>
+<span id="216">216</span>
+<span id="217">217</span>
+<span id="218">218</span>
+<span id="219">219</span>
+<span id="220">220</span>
+<span id="221">221</span>
+<span id="222">222</span>
+<span id="223">223</span>
+<span id="224">224</span>
+<span id="225">225</span>
+<span id="226">226</span>
+<span id="227">227</span>
+<span id="228">228</span>
+<span id="229">229</span>
+<span id="230">230</span>
+<span id="231">231</span>
+<span id="232">232</span>
+<span id="233">233</span>
+<span id="234">234</span>
+<span id="235">235</span>
+<span id="236">236</span>
+<span id="237">237</span>
+<span id="238">238</span>
+<span id="239">239</span>
+<span id="240">240</span>
+<span id="241">241</span>
+<span id="242">242</span>
+<span id="243">243</span>
+<span id="244">244</span>
+<span id="245">245</span>
+<span id="246">246</span>
+<span id="247">247</span>
+<span id="248">248</span>
+<span id="249">249</span>
+</pre><pre class="rust"><code><span class="kw">use </span><span class="kw">crate</span>::dll::{Library, LibraryExt};
 
-<span class="kw">use</span> <span class="ident">winapi::shared::guiddef::GUID</span>;
-<span class="kw">use</span> <span class="ident">winapi::shared::minwindef</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident">winapi::um::processthreadsapi</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident">winapi::um::psapi</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident">winapi::um::winnt</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident">winapi::um::xinput</span>::<span class="kw-2">*</span>;
+<span class="kw">use </span>winapi::shared::guiddef::GUID;
+<span class="kw">use </span>winapi::shared::minwindef::<span class="kw-2">*</span>;
+<span class="kw">use </span>winapi::um::processthreadsapi::<span class="kw-2">*</span>;
+<span class="kw">use </span>winapi::um::psapi::<span class="kw-2">*</span>;
+<span class="kw">use </span>winapi::um::winnt::<span class="kw-2">*</span>;
+<span class="kw">use </span>winapi::um::xinput::<span class="kw-2">*</span>;
 
-<span class="kw">use</span> <span class="ident">std::convert</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident">std::ffi::c_void</span>;
-<span class="kw">use</span> <span class="ident">std::io</span>;
-<span class="kw">use</span> <span class="ident">std::mem</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident">std::ptr::null_mut</span>;
+<span class="kw">use </span>std::convert::<span class="kw-2">*</span>;
+<span class="kw">use </span>std::ffi::c_void;
+<span class="kw">use </span>std::io;
+<span class="kw">use </span>std::mem::<span class="kw-2">*</span>;
+<span class="kw">use </span>std::ptr::null_mut;
 
 
 
-<span class="macro">lazy_static::lazy_static!</span> {
-    <span class="kw">static</span> <span class="kw-2">ref</span> <span class="ident">IMPORTS</span> : <span class="ident">Imports</span> <span class="op">=</span> <span class="ident">Imports::load_from_linked_xinput</span>().<span class="ident">unwrap_or_default</span>();
+<span class="macro">lazy_static::lazy_static! </span>{
+    <span class="kw">static </span><span class="kw-2">ref </span>IMPORTS : Imports = Imports::load().unwrap_or_default();
 }
 
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">non_snake_case</span>)]</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Default</span>)]</span>
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">struct</span> <span class="ident">Imports</span> {
-    <span class="comment">// Official Imports</span>
+<span class="attribute">#[allow(non_snake_case)]
+#[derive(Default)]
+</span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">struct </span>Imports {
+    <span class="comment">// Official Imports
 
-    <span class="doccomment">/// \[[MSDN](https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetdsoundaudiodeviceguids)]</span>
-    <span class="doccomment">/// Get DirectSound Audio Device GUIDs (N/A for Windows Store apps).</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// | XInput | State    |</span>
-    <span class="doccomment">/// | ------ | -------- |</span>
-    <span class="doccomment">/// | 1.4   | N/A       |</span>
-    <span class="doccomment">/// | 1.3   | Available |</span>
-    <span class="doccomment">/// | 9.1.0 | Available |</span>
-    <span class="kw">pub</span> <span class="ident">XInputGetDSoundAudioDeviceGuids</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw unsafe">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;system&quot;</span> <span class="kw">fn</span>(<span class="ident">dwUserIndex</span>: <span class="ident">DWORD</span>, <span class="ident">pDSoundRenderGuid</span>: <span class="kw-2">*mut</span> <span class="ident">GUID</span>, <span class="ident">pDSoundCaptureGuid</span>: <span class="kw-2">*mut</span> <span class="ident">GUID</span>) -&gt; <span class="ident">DWORD</span><span class="op">&gt;</span>,
+    </span><span class="doccomment">/// \[[MSDN](https://learn.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetstate)\]
+    /// Get gamepad button state.
+    ///
+    /// | XInput | State    |
+    /// | ------ | -------- |
+    /// | \*    | Available |
+    </span><span class="kw">pub </span>XInputGetState: <span class="prelude-ty">Option</span>&lt;<span class="kw">unsafe extern </span><span class="string">&quot;system&quot; </span><span class="kw">fn</span>(dwUserIndex: DWORD, pState: <span class="kw-2">*mut </span>XINPUT_STATE) -&gt; DWORD&gt;,
 
-    <span class="doccomment">/// \[[MSDN](https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetaudiodeviceids)]</span>
-    <span class="doccomment">/// Get XAudio2 Device Names.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// | XInput | State    |</span>
-    <span class="doccomment">/// | ------ | -------- |</span>
-    <span class="doccomment">/// | 1.4   | Available |</span>
-    <span class="doccomment">/// | 1.3   | N/A       |</span>
-    <span class="doccomment">/// | 9.1.0 | N/A       |</span>
-    <span class="kw">pub</span> <span class="ident">XInputGetAudioDeviceIds</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw unsafe">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;system&quot;</span> <span class="kw">fn</span>(<span class="ident">dwUserIndex</span>: <span class="ident">DWORD</span>, <span class="ident">pRenderDeviceId</span>: <span class="ident">LPWSTR</span>, <span class="ident">pRenderCount</span>: <span class="kw-2">*mut</span> <span class="ident">UINT</span>, <span class="ident">pCaptureDeviceId</span>: <span class="ident">LPWSTR</span>, <span class="ident">pCaptureCount</span>: <span class="kw-2">*mut</span> <span class="ident">UINT</span>) -&gt; <span class="ident">DWORD</span><span class="op">&gt;</span>,
+    <span class="doccomment">/// \[[MSDN](https://learn.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputsetstate)\]
+    /// Set gamepad vibration state.
+    ///
+    /// | XInput | State    |
+    /// | ------ | -------- |
+    /// | \*    | Available |
+    </span><span class="kw">pub </span>XInputSetState: <span class="prelude-ty">Option</span>&lt;<span class="kw">unsafe extern </span><span class="string">&quot;system&quot; </span><span class="kw">fn</span>(dwUserIndex: DWORD, pVibration: <span class="kw-2">*mut </span>XINPUT_VIBRATION) -&gt; DWORD&gt;,
+
+    <span class="doccomment">/// \[[MSDN](https://learn.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetcapabilities)\]
+    /// Query the capabilities of a gamepad (vibration, wireless, voice, etc.)
+    ///
+    /// | XInput | State    |
+    /// | ------ | -------- |
+    /// | \*    | Available |
+    </span><span class="kw">pub </span>XInputGetCapabilities: <span class="prelude-ty">Option</span>&lt;<span class="kw">unsafe extern </span><span class="string">&quot;system&quot; </span><span class="kw">fn</span>(dwUserIndex: DWORD, dwFlags: DWORD, pCapabilities: <span class="kw-2">*mut </span>XINPUT_CAPABILITIES) -&gt; DWORD&gt;,
+
+    <span class="doccomment">/// \[[MSDN](https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetdsoundaudiodeviceguids)]
+    /// Get DirectSound Audio Device GUIDs (N/A for Windows Store apps).
+    ///
+    /// | XInput | State    |
+    /// | ------ | -------- |
+    /// | Uap   | N/A       |
+    /// | 1.4   | N/A       |
+    /// | 1.3   | Available |
+    /// | 1.2   | Available |
+    /// | 1.1   | Available |
+    /// | 9.1.0 | Available |
+    </span><span class="kw">pub </span>XInputGetDSoundAudioDeviceGuids: <span class="prelude-ty">Option</span>&lt;<span class="kw">unsafe extern </span><span class="string">&quot;system&quot; </span><span class="kw">fn</span>(dwUserIndex: DWORD, pDSoundRenderGuid: <span class="kw-2">*mut </span>GUID, pDSoundCaptureGuid: <span class="kw-2">*mut </span>GUID) -&gt; DWORD&gt;,
+
+    <span class="comment">// Windows 8+
+
+    </span><span class="doccomment">/// \[[MSDN](https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetaudiodeviceids)]
+    /// Get XAudio2 Device Names.
+    ///
+    /// | XInput | State    |
+    /// | ------ | -------- |
+    /// | Uap   | Available? |
+    /// | 1.4   | Available |
+    /// | 1.3   | N/A       |
+    /// | 1.2   | N/A       |
+    /// | 1.1   | N/A       |
+    /// | 9.1.0 | N/A       |
+    </span><span class="kw">pub </span>XInputGetAudioDeviceIds: <span class="prelude-ty">Option</span>&lt;<span class="kw">unsafe extern </span><span class="string">&quot;system&quot; </span><span class="kw">fn</span>(dwUserIndex: DWORD, pRenderDeviceId: LPWSTR, pRenderCount: <span class="kw-2">*mut </span>UINT, pCaptureDeviceId: LPWSTR, pCaptureCount: <span class="kw-2">*mut </span>UINT) -&gt; DWORD&gt;,
+
+    <span class="doccomment">/// \[[MSDN](https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputenable)]
+    /// Enable or disable xinput (for use in window focus/blur events.)
+    ///
+    /// | XInput | State        |
+    /// | ------ | ------------ |
+    /// | UWP   | Deprecated?   |
+    /// | 1.4   | Available     |
+    /// | 1.3   | Available     |
+    /// | 1.2   | Available     |
+    /// | 1.1   | Available     |
+    /// | 9.1.0 | N/A           |
+    </span><span class="kw">pub </span>XInputEnable: <span class="prelude-ty">Option</span>&lt;<span class="kw">unsafe extern </span><span class="string">&quot;system&quot; </span><span class="kw">fn</span>(enable: BOOL)&gt;,
+
+    <span class="doccomment">/// \[[MSDN](https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetbatteryinformation)]
+    /// Get battery information for a wireless gamepad.
+    ///
+    /// | XInput | State        |
+    /// | ------ | ------------ |
+    /// | Uap   | Available     |
+    /// | 1.4   | Available     |
+    /// | 1.3   | Available     |
+    /// | 1.2   | N/A           |
+    /// | 1.1   | N/A           |
+    /// | 9.1.0 | N/A           |
+    </span><span class="kw">pub </span>XInputGetBatteryInformation: <span class="prelude-ty">Option</span>&lt;<span class="kw">unsafe extern </span><span class="string">&quot;system&quot; </span><span class="kw">fn</span>(dwUserIndex: DWORD, devType: BYTE, pBatteryInformation: <span class="kw-2">*mut </span>XINPUT_BATTERY_INFORMATION) -&gt; DWORD&gt;,
+
+    <span class="doccomment">/// \[[MSDN](https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetkeystroke)]
+    ///
+    /// | XInput | State        |
+    /// | ------ | ------------ |
+    /// | Uap   | Available     |
+    /// | 1.4   | Available     |
+    /// | 1.3   | Available     |
+    /// | 1.2   | N/A           |
+    /// | 1.1   | N/A           |
+    /// | 9.1.0 | N/A           |
+    </span><span class="kw">pub </span>XInputGetKeystroke: <span class="prelude-ty">Option</span>&lt;<span class="kw">unsafe extern </span><span class="string">&quot;system&quot; </span><span class="kw">fn</span>(dwUserIndex: u32, dwReserved: u32, pKeystroke: PXINPUT_KEYSTROKE) -&gt; DWORD&gt;,
 
 
 
-    <span class="comment">// Super Secret Shady Ordinal-Only Imports</span>
-    <span class="comment">// https://gist.github.com/robindegen/9446175</span>
-    <span class="comment">// https://www.reddit.com/r/ReverseEngineering/comments/148faa/xbox_360_controller_on_windows/c7ayith/</span>
+    <span class="comment">// Super Secret Shady Ordinal-Only Imports
+    // https://gist.github.com/robindegen/9446175
+    // https://www.reddit.com/r/ReverseEngineering/comments/148faa/xbox_360_controller_on_windows/c7ayith/
 
-    <span class="comment">// Ordinals 100-103, available as of XInput1_3.dll</span>
-    <span class="kw">pub</span> <span class="ident">_XInputGetStateEx</span>:               <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw unsafe">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;system&quot;</span> <span class="kw">fn</span>(<span class="ident">dwUserIndex</span>: <span class="ident">DWORD</span>, <span class="ident">pState</span>: <span class="kw-2">*mut</span> <span class="ident">XINPUT_STATE</span>) -&gt; <span class="ident">DWORD</span><span class="op">&gt;</span>,
-    <span class="kw">pub</span> <span class="ident">_XInputWaitForGuideButton</span>:       <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw unsafe">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;system&quot;</span> <span class="kw">fn</span>(<span class="ident">dwUserIndex</span>: <span class="ident">DWORD</span>, <span class="ident">dwFlag</span>: <span class="ident">DWORD</span>, <span class="ident">pUnknown</span>: <span class="kw-2">*mut</span> <span class="ident">c_void</span>) -&gt; <span class="ident">DWORD</span><span class="op">&gt;</span>,
-    <span class="kw">pub</span> <span class="ident">_XInputCancelGuideButtonWait</span>:    <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw unsafe">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;system&quot;</span> <span class="kw">fn</span>(<span class="ident">dwUserIndex</span>: <span class="ident">DWORD</span>) -&gt; <span class="ident">DWORD</span><span class="op">&gt;</span>,
-    <span class="kw">pub</span> <span class="ident">_XInputPowerOffController</span>:       <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw unsafe">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;system&quot;</span> <span class="kw">fn</span>(<span class="ident">dwUserIndex</span>: <span class="ident">DWORD</span>) -&gt; <span class="ident">DWORD</span><span class="op">&gt;</span>,
+    // Ordinals 100-103, available as of XInput1_3.dll
+    </span><span class="kw">pub </span>_XInputGetStateEx:               <span class="prelude-ty">Option</span>&lt;<span class="kw">unsafe extern </span><span class="string">&quot;system&quot; </span><span class="kw">fn</span>(dwUserIndex: DWORD, pState: <span class="kw-2">*mut </span>XINPUT_STATE) -&gt; DWORD&gt;,
+    <span class="kw">pub </span>_XInputWaitForGuideButton:       <span class="prelude-ty">Option</span>&lt;<span class="kw">unsafe extern </span><span class="string">&quot;system&quot; </span><span class="kw">fn</span>(dwUserIndex: DWORD, dwFlag: DWORD, pUnknown: <span class="kw-2">*mut </span>c_void) -&gt; DWORD&gt;,
+    <span class="kw">pub </span>_XInputCancelGuideButtonWait:    <span class="prelude-ty">Option</span>&lt;<span class="kw">unsafe extern </span><span class="string">&quot;system&quot; </span><span class="kw">fn</span>(dwUserIndex: DWORD) -&gt; DWORD&gt;,
+    <span class="kw">pub </span>_XInputPowerOffController:       <span class="prelude-ty">Option</span>&lt;<span class="kw">unsafe extern </span><span class="string">&quot;system&quot; </span><span class="kw">fn</span>(dwUserIndex: DWORD) -&gt; DWORD&gt;,
 
-    <span class="comment">// Ordinals 104 / 108, available as of XInput1_4.dll</span>
-    <span class="comment">// _XInputGetBaseBusInformation (Ordinal 104)</span>
-    <span class="comment">// _XInputGetCapabilitiesEx     (Ordinal 108)</span>
-}
+    <span class="comment">// Ordinals 104 / 108, available as of XInput1_4.dll
+    // _XInputGetBaseBusInformation (Ordinal 104)
+    // _XInputGetCapabilitiesEx     (Ordinal 108)
+</span>}
 
-<span class="kw">impl</span> <span class="ident">Imports</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get</span>() -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="self">Self</span> { <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="ident">IMPORTS</span> }
+<span class="kw">impl </span>Imports {
+    <span class="kw">pub fn </span>get() -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span><span class="self">Self </span>{ <span class="kw-2">&amp;*</span>IMPORTS }
 
-    <span class="kw">fn</span> <span class="ident">load_from_linked_xinput</span>() -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">io::Error</span><span class="op">&gt;</span> {
-        <span class="comment">// SAFETY: ⚠️ Technically unsound</span>
-        <span class="comment">//  * We assume `hmodule`, if retrieved, is a valid xinput DLL.</span>
-        <span class="comment">//  * We assume specific magic ordinals always map to specific un-named functions.</span>
-        <span class="kw unsafe">unsafe</span> {
-            <span class="kw">let</span> <span class="ident">lib</span> <span class="op">=</span> <span class="ident">try_find_loaded_xinput</span>().<span class="ident">ok_or</span>(<span class="ident">io::ErrorKind::NotFound</span>)<span class="question-mark">?</span>;
+    <span class="kw">fn </span>load() -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, io::Error&gt; {
+        <span class="comment">// SAFETY: ⚠️ Technically unsound
+        //  * We assume `hmodule`, if retrieved, is a valid xinput DLL.
+        //  * We assume specific magic ordinals always map to specific un-named functions.
+        </span><span class="kw">unsafe </span>{
+            <span class="kw">let </span>lib = try_find_loaded_xinput()
+                .or_else(|| Library::load(<span class="string">&quot;xinput1_4.dll&quot;</span>).ok())
+                .or_else(|| Library::load(<span class="string">&quot;xinput1_3.dll&quot;</span>).ok())
+                .or_else(|| Library::load(<span class="string">&quot;xinput1_2.dll&quot;</span>).ok())
+                .or_else(|| Library::load(<span class="string">&quot;xinput1_1.dll&quot;</span>).ok())
+                .or_else(|| Library::load(<span class="string">&quot;xinput9_1_0.dll&quot;</span>).ok())
+                .or_else(|| Library::load(<span class="string">&quot;xinputuap.dll&quot;</span>).ok())    <span class="comment">// absolute last resort, breaks shutdown in non-uwp/uap desktop apps
+                </span>.ok_or(io::ErrorKind::NotFound)
+                <span class="question-mark">?</span>;
 
-            <span class="prelude-val">Ok</span>(<span class="self">Self</span> {
-                <span class="ident">XInputGetDSoundAudioDeviceGuids</span>:    <span class="ident">lib</span>.<span class="ident">sym_opt</span>(<span class="string">&quot;XInputGetDSoundAudioDeviceGuids\0&quot;</span>),
-                <span class="ident">XInputGetAudioDeviceIds</span>:            <span class="ident">lib</span>.<span class="ident">sym_opt</span>(<span class="string">&quot;XInputGetAudioDeviceIds\0&quot;</span>),
+            <span class="prelude-val">Ok</span>(<span class="self">Self </span>{
+                <span class="comment">// not even remotely optional:
+                </span>XInputGetState:                     <span class="prelude-val">Some</span>(lib.sym(<span class="string">&quot;XInputGetState\0&quot;</span>)<span class="question-mark">?</span>),
 
-                <span class="ident">_XInputGetStateEx</span>:                  <span class="ident">lib</span>.<span class="ident">sym_opt_by_ordinal</span>(<span class="number">100</span>),
-                <span class="ident">_XInputWaitForGuideButton</span>:          <span class="ident">lib</span>.<span class="ident">sym_opt_by_ordinal</span>(<span class="number">101</span>),
-                <span class="ident">_XInputCancelGuideButtonWait</span>:       <span class="ident">lib</span>.<span class="ident">sym_opt_by_ordinal</span>(<span class="number">102</span>),
-                <span class="ident">_XInputPowerOffController</span>:          <span class="ident">lib</span>.<span class="ident">sym_opt_by_ordinal</span>(<span class="number">103</span>),
+                XInputSetState:                     lib.sym_opt(<span class="string">&quot;XInputSetState\0&quot;</span>),
+                XInputGetCapabilities:              lib.sym_opt(<span class="string">&quot;XInputGetCapabilities\0&quot;</span>),
+                XInputGetDSoundAudioDeviceGuids:    lib.sym_opt(<span class="string">&quot;XInputGetDSoundAudioDeviceGuids\0&quot;</span>),
+                XInputGetAudioDeviceIds:            lib.sym_opt(<span class="string">&quot;XInputGetAudioDeviceIds\0&quot;</span>),
+                XInputEnable:                       lib.sym_opt(<span class="string">&quot;XInputEnable\0&quot;</span>),
+                XInputGetBatteryInformation:        lib.sym_opt(<span class="string">&quot;XInputGetBatteryInformation\0&quot;</span>),
+                XInputGetKeystroke:                 lib.sym_opt(<span class="string">&quot;XInputGetKeystroke\0&quot;</span>),
 
-                <span class="comment">// I don&#39;t have type information for these... yet</span>
-                <span class="comment">// _XInputGetBaseBusInformation:    lib.sym_opt_by_ordinal(104),</span>
-                <span class="comment">// _XInputGetCapabilitiesEx:        lib.sym_opt_by_ordinal(108),</span>
-            })
+                _XInputGetStateEx:                  lib.sym_opt_by_ordinal(<span class="number">100</span>),
+                _XInputWaitForGuideButton:          lib.sym_opt_by_ordinal(<span class="number">101</span>),
+                _XInputCancelGuideButtonWait:       lib.sym_opt_by_ordinal(<span class="number">102</span>),
+                _XInputPowerOffController:          lib.sym_opt_by_ordinal(<span class="number">103</span>),
+
+                <span class="comment">// I don&#39;t have type information for these... yet
+                // _XInputGetBaseBusInformation:    lib.sym_opt_by_ordinal(104),
+                // _XInputGetCapabilitiesEx:        lib.sym_opt_by_ordinal(108),
+            </span>})
         }
     }
 }
 
 
 
-<span class="doccomment">/// Tries to find the most XInput-y looking, already loaded, DLL:</span>
-<span class="doccomment">/// *   DLLs that don&#39;t export `XInputGetState` will be straight up ignored.</span>
-<span class="doccomment">/// *   DLLs with more characters matching the `xinput_` prefix will be prefered.</span>
-<span class="doccomment">/// *   DLLs with shorter filenames will be prefered (e.g. `XInput1_4.dll` wins out over `xinput_9_0_3.dll`)</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// ### ⚠️ Safety ⚠️</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// Microsoft&#39;s PSAPI documentation makes it clear that some of the stuff this relies on for e.g. process module enumeration</span>
-<span class="doccomment">/// are best effort debug functionality, not battle tested production quality tooling:</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// &gt; &quot;The EnumProcessModulesEx function is primarily designed for use by debuggers and similar applications that must</span>
-<span class="doccomment">/// &gt; extract module information from another process. If the module list in the target process is corrupted or not</span>
-<span class="doccomment">/// &gt; yet initialized, or if the module list changes during the function call as a result of DLLs being loaded or</span>
-<span class="doccomment">/// &gt; unloaded, EnumProcessModulesEx may fail or return incorrect information.&quot;</span>
-<span class="doccomment">/// &gt;</span>
-<span class="doccomment">/// &gt; &lt;https://docs.microsoft.com/en-us/windows/win32/api/psapi/nf-psapi-enumprocessmodulesex&gt;</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// Additionally, there&#39;s technically nothing stopping you from loading an evil `xinput_.dll`, that takes priority over</span>
-<span class="doccomment">/// the real xinput DLLs, that defines XInputGetState and exposes unsound functions, which immediately invokes undefined</span>
-<span class="doccomment">/// behavior if you call into it.  Which means relying on the returned HMODULE to do just about anything is, *technically*,</span>
-<span class="doccomment">/// unsound.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// Well, perhaps eventually I&#39;ll verify xinput.dll is code-signed by Microsoft, which would fix that well enough for my</span>
-<span class="doccomment">/// tastes, but for now this is good enough for me ;)</span>
-<span class="kw unsafe">unsafe</span> <span class="kw">fn</span> <span class="ident">try_find_loaded_xinput</span>() -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Library</span><span class="op">&gt;</span> {
-    <span class="kw">let</span> <span class="ident">proc</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="ident">GetCurrentProcess</span>() };
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">modules</span> <span class="op">=</span> <span class="ident">Vec</span>::<span class="op">&lt;</span><span class="ident">HMODULE</span><span class="op">&gt;</span><span class="ident">::new</span>();
+<span class="doccomment">/// Tries to find the most XInput-y looking, already loaded, DLL:
+/// *   DLLs that don&#39;t export `XInputGetState` will be straight up ignored.
+/// *   DLLs with more characters matching the `xinput_` prefix will be prefered.
+/// *   DLLs with shorter filenames will be prefered (e.g. `XInput1_4.dll` wins out over `xinput_9_0_3.dll`)
+///
+/// ### ⚠️ Safety ⚠️
+/// Microsoft&#39;s PSAPI documentation makes it clear that some of the stuff this relies on for e.g. process module enumeration
+/// are best effort debug functionality, not battle tested production quality tooling:
+///
+/// &gt; &quot;The EnumProcessModulesEx function is primarily designed for use by debuggers and similar applications that must
+/// &gt; extract module information from another process. If the module list in the target process is corrupted or not
+/// &gt; yet initialized, or if the module list changes during the function call as a result of DLLs being loaded or
+/// &gt; unloaded, EnumProcessModulesEx may fail or return incorrect information.&quot;
+/// &gt;
+/// &gt; &lt;https://docs.microsoft.com/en-us/windows/win32/api/psapi/nf-psapi-enumprocessmodulesex&gt;
+///
+/// Additionally, there&#39;s technically nothing stopping you from loading an evil `xinput_.dll`, that takes priority over
+/// the real xinput DLLs, that defines XInputGetState and exposes unsound functions, which immediately invokes undefined
+/// behavior if you call into it.  Which means relying on the returned HMODULE to do just about anything is, *technically*,
+/// unsound.
+///
+/// Well, perhaps eventually I&#39;ll verify xinput.dll is code-signed by Microsoft, which would fix that well enough for my
+/// tastes, but for now this is good enough for me ;)
+</span><span class="kw">unsafe fn </span>try_find_loaded_xinput() -&gt; <span class="prelude-ty">Option</span>&lt;Library&gt; {
+    <span class="kw">let </span>proc = <span class="kw">unsafe </span>{ GetCurrentProcess() };
+    <span class="kw">let </span><span class="kw-2">mut </span>modules = Vec::&lt;HMODULE&gt;::new();
 
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">max_retries</span> <span class="op">=</span> <span class="number">64</span>;
+    <span class="kw">let </span><span class="kw-2">mut </span>max_retries = <span class="number">64</span>;
 
-    <span class="kw">loop</span> {
-        <span class="kw">let</span> <span class="ident">available_bytes</span> <span class="op">=</span> <span class="ident">u32::try_from</span>(<span class="ident">std::mem::size_of_val</span>(<span class="kw-2">&amp;</span><span class="ident">modules</span>[..])).<span class="ident">unwrap_or</span>(<span class="op">!</span><span class="number">0</span>);
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">needed_bytes</span> : <span class="ident">u32</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="kw">let</span> <span class="ident">ok</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="ident">EnumProcessModulesEx</span>(<span class="ident">proc</span>, <span class="ident">modules</span>.<span class="ident">as_mut_ptr</span>(), <span class="ident">available_bytes</span>, <span class="kw-2">&amp;mut</span> <span class="ident">needed_bytes</span>, <span class="ident">LIST_MODULES_DEFAULT</span>) };
-        <span class="kw">if</span> <span class="ident">ok</span> <span class="op">==</span> <span class="ident">FALSE</span> {
-            <span class="kw">if</span> <span class="ident">max_retries</span> <span class="op">==</span> <span class="number">0</span> { <span class="kw">return</span> <span class="prelude-val">None</span>; }
-            <span class="ident">max_retries</span> <span class="op">-</span><span class="op">=</span> <span class="number">1</span>;
-            <span class="kw">continue</span>; <span class="comment">// temporary failure? retry!</span>
-        }
-        <span class="kw">let</span> <span class="ident">needed_elements</span> <span class="op">=</span> <span class="ident">usize::try_from</span>(<span class="ident">needed_bytes</span>).<span class="ident">unwrap_or</span>(<span class="op">!</span><span class="number">0usize</span>) <span class="op">/</span> <span class="ident">size_of</span>::<span class="op">&lt;</span><span class="ident">HMODULE</span><span class="op">&gt;</span>();
-        <span class="kw">if</span> <span class="ident">needed_bytes</span> <span class="op">&lt;</span><span class="op">=</span> <span class="ident">available_bytes</span> {
-            <span class="ident">modules</span>.<span class="ident">shrink_to</span>(<span class="ident">needed_elements</span>);
-            <span class="kw">break</span> <span class="comment">// success!</span>
-        } <span class="kw">else</span> {
-            <span class="ident">modules</span>.<span class="ident">resize</span>(<span class="ident">needed_elements</span>, <span class="ident">null_mut</span>());
-            <span class="kw">continue</span> <span class="comment">// not enough modules</span>
-        }
+    <span class="kw">loop </span>{
+        <span class="kw">let </span>available_bytes = u32::try_from(std::mem::size_of_val(<span class="kw-2">&amp;</span>modules[..])).unwrap_or(!<span class="number">0</span>);
+        <span class="kw">let </span><span class="kw-2">mut </span>needed_bytes : u32 = <span class="number">0</span>;
+        <span class="kw">let </span>ok = <span class="kw">unsafe </span>{ EnumProcessModulesEx(proc, modules.as_mut_ptr(), available_bytes, <span class="kw-2">&amp;mut </span>needed_bytes, LIST_MODULES_DEFAULT) };
+        <span class="kw">if </span>ok == FALSE {
+            <span class="kw">if </span>max_retries == <span class="number">0 </span>{ <span class="kw">return </span><span class="prelude-val">None</span>; }
+            max_retries -= <span class="number">1</span>;
+            <span class="kw">continue</span>; <span class="comment">// temporary failure? retry!
+        </span>}
+        <span class="kw">let </span>needed_elements = usize::try_from(needed_bytes).unwrap_or(!<span class="number">0usize</span>) / size_of::&lt;HMODULE&gt;();
+        <span class="kw">if </span>needed_bytes &lt;= available_bytes {
+            modules.shrink_to(needed_elements);
+            <span class="kw">break </span><span class="comment">// success!
+        </span>} <span class="kw">else </span>{
+            modules.resize(needed_elements, null_mut());
+            <span class="kw">continue </span><span class="comment">// not enough modules
+        </span>}
     }
 
-    <span class="comment">// SAFETY: ⚠️ `m` should be a permanently loaded library... probably...</span>
-    <span class="ident">modules</span>.<span class="ident">retain</span>(<span class="op">|</span><span class="kw-2">&amp;</span><span class="ident">m</span><span class="op">|</span> <span class="kw unsafe">unsafe</span> { <span class="ident">Library::from_hmodule</span>(<span class="ident">m</span>) }.<span class="ident">map_or</span>(<span class="bool-val">false</span>, <span class="op">|</span><span class="ident">m</span><span class="op">|</span> <span class="ident">m</span>.<span class="ident">has_sym</span>(<span class="string">&quot;XInputGetState\0&quot;</span>)));
+    <span class="comment">// SAFETY: ⚠️ `m` should be a permanently loaded library... probably...
+    </span>modules.retain(|<span class="kw-2">&amp;</span>m| <span class="kw">unsafe </span>{ Library::from_hmodule(m) }.map_or(<span class="bool-val">false</span>, |m| m.has_sym(<span class="string">&quot;XInputGetState\0&quot;</span>)));
 
-    <span class="kw">let</span> <span class="ident">hmodule</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">modules</span>[..] {
+    <span class="kw">let </span>hmodule = <span class="kw">match </span>modules[..] {
         [] =&gt; <span class="prelude-val">None</span>,
-        [<span class="ident">module</span>] =&gt; <span class="prelude-val">Some</span>(<span class="ident">module</span>),
-        <span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">multiple</span> =&gt; {
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">name</span> <span class="op">=</span> [<span class="number">0u8</span>; <span class="number">4096</span>];
-            <span class="ident">multiple</span>.<span class="ident">sort_by_cached_key</span>(<span class="op">|</span><span class="kw-2">&amp;</span><span class="ident">m</span><span class="op">|</span>{
-                <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="ident">GetModuleBaseNameA</span>(<span class="ident">proc</span>, <span class="ident">m</span>, <span class="ident">name</span>.<span class="ident">as_mut_ptr</span>().<span class="ident">cast</span>(), <span class="ident">name</span>.<span class="ident">len</span>() <span class="kw">as</span> <span class="kw">_</span>) } <span class="kw">as</span> <span class="ident">usize</span>;
-                <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="kw-2">&amp;mut</span> <span class="ident">name</span>[..<span class="ident">len</span>];
-                <span class="ident">name</span>.<span class="ident">make_ascii_lowercase</span>();
-                <span class="kw">let</span> <span class="ident">prefix</span> <span class="op">=</span> <span class="string">b&quot;xinput_&quot;</span>;
-                <span class="kw">let</span> <span class="ident">matching</span> <span class="op">=</span> <span class="ident">prefix</span>.<span class="ident">iter</span>().<span class="ident">copied</span>().<span class="ident">zip</span>(<span class="ident">name</span>.<span class="ident">iter</span>().<span class="ident">copied</span>()).<span class="ident">position</span>(<span class="op">|</span>(<span class="ident">x</span>,<span class="ident">y</span>)<span class="op">|</span> <span class="ident">x</span> <span class="op">!</span><span class="op">=</span> <span class="ident">y</span>).<span class="ident">unwrap_or</span>(<span class="ident">prefix</span>.<span class="ident">len</span>());
-                (<span class="ident">matching</span> <span class="op">*</span> <span class="number">1000</span> <span class="op">+</span> <span class="number">1000</span>).<span class="ident">saturating_sub</span>(<span class="ident">name</span>.<span class="ident">len</span>()) <span class="comment">// prioritize prefix matching &quot;xinput_&quot;, then secondarilly prioritize shorter names.</span>
-            });
-            <span class="ident">multiple</span>.<span class="ident">last</span>().<span class="ident">copied</span>()
+        [module] =&gt; <span class="prelude-val">Some</span>(module),
+        <span class="kw-2">ref mut </span>multiple =&gt; {
+            <span class="kw">let </span><span class="kw-2">mut </span>name = [<span class="number">0u8</span>; <span class="number">4096</span>];
+            multiple.sort_by_cached_key(|<span class="kw-2">&amp;</span>m|{
+                <span class="kw">let </span>len = <span class="kw">unsafe </span>{ GetModuleBaseNameA(proc, m, name.as_mut_ptr().cast(), name.len() <span class="kw">as _</span>) } <span class="kw">as </span>usize;
+                <span class="kw">let </span>name = <span class="kw-2">&amp;mut </span>name[..len];
+                name.make_ascii_lowercase();
+                <span class="kw">let </span>prefix = <span class="string">b&quot;xinput_&quot;</span>;
+                <span class="kw">let </span>matching = prefix.iter().copied().zip(name.iter().copied()).position(|(x,y)| x != y).unwrap_or(prefix.len());
+                (matching * <span class="number">1000 </span>+ <span class="number">1000</span>).saturating_sub(name.len()) <span class="comment">// prioritize prefix matching &quot;xinput_&quot;, then secondarilly prioritize shorter names.
+            </span>});
+            multiple.last().copied()
         },
     };
 
-    <span class="comment">// SAFETY: ✔️ `hmodule` should be a valid HMODULE</span>
-    <span class="ident">hmodule</span>.<span class="ident">and_then</span>(<span class="op">|</span><span class="ident">hmodule</span><span class="op">|</span> <span class="kw unsafe">unsafe</span> { <span class="ident">Library::from_hmodule</span>(<span class="ident">hmodule</span>) })
+    <span class="comment">// SAFETY: ✔️ `hmodule` should be a valid HMODULE
+    </span>hmodule.and_then(|hmodule| <span class="kw">unsafe </span>{ Library::from_hmodule(hmodule) })
 }
 </code></pre></div>
-</section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-search-index-js="../../../../../search-index.js" data-search-js="../../../../../search.js"></div>
-</body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (b44197abb 2022-09-05)" ></div></body></html>

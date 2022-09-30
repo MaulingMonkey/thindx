@@ -1,13 +1,12 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3d9types.h\enumerations\texture_op.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>texture_op.rs - source</title><link rel="stylesheet" type="text/css" href="../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script src="../../../../../crates.js"></script><script defer src="../../../../../main.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script>
-    <noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"><style type="text/css">#crate-search{background-image:url("../../../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../../../../thindx/index.html'><div class='logo-container rust-logo'><img src='../../../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../../../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../../../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../../../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1"> 1</span>
-<span id="2"> 2</span>
-<span id="3"> 3</span>
-<span id="4"> 4</span>
-<span id="5"> 5</span>
-<span id="6"> 6</span>
-<span id="7"> 7</span>
-<span id="8"> 8</span>
-<span id="9"> 9</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3d9types.h\enumerations\texture_op.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>texture_op.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../../normalize.css"><link rel="stylesheet" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../../dark.css" disabled><link rel="stylesheet" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<span id="2">2</span>
+<span id="3">3</span>
+<span id="4">4</span>
+<span id="5">5</span>
+<span id="6">6</span>
+<span id="7">7</span>
+<span id="8">8</span>
+<span id="9">9</span>
 <span id="10">10</span>
 <span id="11">11</span>
 <span id="12">12</span>
@@ -80,93 +79,86 @@
 <span id="79">79</span>
 <span id="80">80</span>
 <span id="81">81</span>
-<span id="82">82</span>
-<span id="83">83</span>
-<span id="84">84</span>
-</pre><pre class="rust"><code><span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span> <span class="kw">use</span> <span class="kw">crate</span>::<span class="kw-2">*</span>;
-
-<span class="kw">use</span> <span class="ident">winapi::shared::d3d9types</span>::<span class="kw-2">*</span>;
+</pre><pre class="rust"><code><span class="attribute">#[allow(unused_imports)] </span><span class="kw">use crate</span>::<span class="kw-2">*</span>;
+<span class="kw">use </span>bytemuck::<span class="kw-2">*</span>;
+<span class="kw">use </span>winapi::shared::d3d9types::<span class="kw-2">*</span>;
 
 
 
-<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dtextureop)\]</span>
-<span class="doccomment">/// D3DTEXTUREOP</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// Defines per-stage texture-blending operations.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">PartialOrd</span>, <span class="ident">Ord</span>, <span class="ident">Hash</span>)]</span>
-<span class="attribute">#[<span class="ident">repr</span>(<span class="ident">transparent</span>)]</span> <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">TextureOp</span>(<span class="ident">D3DTEXTUREOP</span>);
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">TextureOp</span> <span class="kw">as</span> <span class="ident">TOP</span>;
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dtextureop)\]
+/// D3DTEXTUREOP
+///
+/// Defines per-stage texture-blending operations.
+</span><span class="attribute">#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Pod, Zeroable)]
+#[repr(transparent)] </span><span class="kw">pub struct </span>TextureOp(D3DTEXTUREOP);
+<span class="kw">pub use </span>TextureOp <span class="kw">as </span>TOP;
 
-<span class="macro">enumish!</span> {
-    <span class="ident">TOP</span> =&gt; <span class="ident">D3DTEXTUREOP</span>;
-    <span class="ident">Disable</span>, <span class="ident">SelectArg1</span>, <span class="ident">SelectArg2</span>, <span class="ident">Modulate</span>, <span class="ident">Modulate2x</span>, <span class="ident">Modulate4x</span>,
-    <span class="ident">Add</span>, <span class="ident">AddSigned</span>, <span class="ident">AddSigned2x</span>, <span class="ident">Subtract</span>, <span class="ident">AddSmooth</span>,
-    <span class="ident">BlendDiffuseAlpha</span>, <span class="ident">BlendTextureAlpha</span>, <span class="ident">BlendFactorAlpha</span>, <span class="ident">BlendTextureAlphaPM</span>, <span class="ident">BlendCurrentAlpha</span>,
-    <span class="ident">PreModulate</span>, <span class="ident">ModulateAlphaAddColor</span>, <span class="ident">ModulateColorAddAlpha</span>, <span class="ident">ModulateInvAlphaAddColor</span>, <span class="ident">ModulateInvColorAddAlpha</span>,
-    <span class="ident">BumpEnvMap</span>, <span class="ident">BumpEnvMapLuminance</span>, <span class="ident">DotProduct3</span>, <span class="ident">MultiplyAdd</span>, <span class="ident">Lerp</span>,
+<span class="macro">enumish! </span>{
+    TOP =&gt; D3DTEXTUREOP;
+    Disable, SelectArg1, SelectArg2, Modulate, Modulate2x, Modulate4x,
+    Add, AddSigned, AddSigned2x, Subtract, AddSmooth,
+    BlendDiffuseAlpha, BlendTextureAlpha, BlendFactorAlpha, BlendTextureAlphaPM, BlendCurrentAlpha,
+    PreModulate, ModulateAlphaAddColor, ModulateColorAddAlpha, ModulateInvAlphaAddColor, ModulateInvColorAddAlpha,
+    BumpEnvMap, BumpEnvMapLuminance, DotProduct3, MultiplyAdd, Lerp,
 }
 
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">non_upper_case_globals</span>)]</span> <span class="kw">impl</span> <span class="ident">TextureOp</span> { <span class="comment">// These are enum-like</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Disable</span>                   : <span class="ident">TextureOp</span> <span class="op">=</span> <span class="ident">TextureOp</span>(<span class="ident">D3DTOP_DISABLE</span>); <span class="comment">// 1</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SelectArg1</span>                : <span class="ident">TextureOp</span> <span class="op">=</span> <span class="ident">TextureOp</span>(<span class="ident">D3DTOP_SELECTARG1</span>);
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SelectArg2</span>                : <span class="ident">TextureOp</span> <span class="op">=</span> <span class="ident">TextureOp</span>(<span class="ident">D3DTOP_SELECTARG2</span>);
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Modulate</span>                  : <span class="ident">TextureOp</span> <span class="op">=</span> <span class="ident">TextureOp</span>(<span class="ident">D3DTOP_MODULATE</span>);
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Modulate2x</span>                : <span class="ident">TextureOp</span> <span class="op">=</span> <span class="ident">TextureOp</span>(<span class="ident">D3DTOP_MODULATE2X</span>);
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Modulate4x</span>                : <span class="ident">TextureOp</span> <span class="op">=</span> <span class="ident">TextureOp</span>(<span class="ident">D3DTOP_MODULATE4X</span>);
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Add</span>                       : <span class="ident">TextureOp</span> <span class="op">=</span> <span class="ident">TextureOp</span>(<span class="ident">D3DTOP_ADD</span>);
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">AddSigned</span>                 : <span class="ident">TextureOp</span> <span class="op">=</span> <span class="ident">TextureOp</span>(<span class="ident">D3DTOP_ADDSIGNED</span>);
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">AddSigned2x</span>               : <span class="ident">TextureOp</span> <span class="op">=</span> <span class="ident">TextureOp</span>(<span class="ident">D3DTOP_ADDSIGNED2X</span>);
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Subtract</span>                  : <span class="ident">TextureOp</span> <span class="op">=</span> <span class="ident">TextureOp</span>(<span class="ident">D3DTOP_SUBTRACT</span>);
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">AddSmooth</span>                 : <span class="ident">TextureOp</span> <span class="op">=</span> <span class="ident">TextureOp</span>(<span class="ident">D3DTOP_ADDSMOOTH</span>);
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">BlendDiffuseAlpha</span>         : <span class="ident">TextureOp</span> <span class="op">=</span> <span class="ident">TextureOp</span>(<span class="ident">D3DTOP_BLENDDIFFUSEALPHA</span>);
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">BlendTextureAlpha</span>         : <span class="ident">TextureOp</span> <span class="op">=</span> <span class="ident">TextureOp</span>(<span class="ident">D3DTOP_BLENDTEXTUREALPHA</span>);
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">BlendFactorAlpha</span>          : <span class="ident">TextureOp</span> <span class="op">=</span> <span class="ident">TextureOp</span>(<span class="ident">D3DTOP_BLENDFACTORALPHA</span>);
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">BlendTextureAlphaPM</span>       : <span class="ident">TextureOp</span> <span class="op">=</span> <span class="ident">TextureOp</span>(<span class="ident">D3DTOP_BLENDTEXTUREALPHAPM</span>);
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">BlendCurrentAlpha</span>         : <span class="ident">TextureOp</span> <span class="op">=</span> <span class="ident">TextureOp</span>(<span class="ident">D3DTOP_BLENDCURRENTALPHA</span>);
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">PreModulate</span>               : <span class="ident">TextureOp</span> <span class="op">=</span> <span class="ident">TextureOp</span>(<span class="ident">D3DTOP_PREMODULATE</span>);
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">ModulateAlphaAddColor</span>     : <span class="ident">TextureOp</span> <span class="op">=</span> <span class="ident">TextureOp</span>(<span class="ident">D3DTOP_MODULATEALPHA_ADDCOLOR</span>);
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">ModulateColorAddAlpha</span>     : <span class="ident">TextureOp</span> <span class="op">=</span> <span class="ident">TextureOp</span>(<span class="ident">D3DTOP_MODULATECOLOR_ADDALPHA</span>);
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">ModulateInvAlphaAddColor</span>  : <span class="ident">TextureOp</span> <span class="op">=</span> <span class="ident">TextureOp</span>(<span class="ident">D3DTOP_MODULATEINVALPHA_ADDCOLOR</span>);
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">ModulateInvColorAddAlpha</span>  : <span class="ident">TextureOp</span> <span class="op">=</span> <span class="ident">TextureOp</span>(<span class="ident">D3DTOP_MODULATEINVCOLOR_ADDALPHA</span>);
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">BumpEnvMap</span>                : <span class="ident">TextureOp</span> <span class="op">=</span> <span class="ident">TextureOp</span>(<span class="ident">D3DTOP_BUMPENVMAP</span>);
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">BumpEnvMapLuminance</span>       : <span class="ident">TextureOp</span> <span class="op">=</span> <span class="ident">TextureOp</span>(<span class="ident">D3DTOP_BUMPENVMAPLUMINANCE</span>);
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">DotProduct3</span>               : <span class="ident">TextureOp</span> <span class="op">=</span> <span class="ident">TextureOp</span>(<span class="ident">D3DTOP_DOTPRODUCT3</span>);
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">MultiplyAdd</span>               : <span class="ident">TextureOp</span> <span class="op">=</span> <span class="ident">TextureOp</span>(<span class="ident">D3DTOP_MULTIPLYADD</span>);
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Lerp</span>                      : <span class="ident">TextureOp</span> <span class="op">=</span> <span class="ident">TextureOp</span>(<span class="ident">D3DTOP_LERP</span>);
+<span class="attribute">#[allow(non_upper_case_globals)] </span><span class="kw">impl </span>TextureOp { <span class="comment">// These are enum-like
+    </span><span class="kw">pub const </span>Disable                   : TextureOp = TextureOp(D3DTOP_DISABLE); <span class="comment">// 1
+    </span><span class="kw">pub const </span>SelectArg1                : TextureOp = TextureOp(D3DTOP_SELECTARG1);
+    <span class="kw">pub const </span>SelectArg2                : TextureOp = TextureOp(D3DTOP_SELECTARG2);
+    <span class="kw">pub const </span>Modulate                  : TextureOp = TextureOp(D3DTOP_MODULATE);
+    <span class="kw">pub const </span>Modulate2x                : TextureOp = TextureOp(D3DTOP_MODULATE2X);
+    <span class="kw">pub const </span>Modulate4x                : TextureOp = TextureOp(D3DTOP_MODULATE4X);
+    <span class="kw">pub const </span>Add                       : TextureOp = TextureOp(D3DTOP_ADD);
+    <span class="kw">pub const </span>AddSigned                 : TextureOp = TextureOp(D3DTOP_ADDSIGNED);
+    <span class="kw">pub const </span>AddSigned2x               : TextureOp = TextureOp(D3DTOP_ADDSIGNED2X);
+    <span class="kw">pub const </span>Subtract                  : TextureOp = TextureOp(D3DTOP_SUBTRACT);
+    <span class="kw">pub const </span>AddSmooth                 : TextureOp = TextureOp(D3DTOP_ADDSMOOTH);
+    <span class="kw">pub const </span>BlendDiffuseAlpha         : TextureOp = TextureOp(D3DTOP_BLENDDIFFUSEALPHA);
+    <span class="kw">pub const </span>BlendTextureAlpha         : TextureOp = TextureOp(D3DTOP_BLENDTEXTUREALPHA);
+    <span class="kw">pub const </span>BlendFactorAlpha          : TextureOp = TextureOp(D3DTOP_BLENDFACTORALPHA);
+    <span class="kw">pub const </span>BlendTextureAlphaPM       : TextureOp = TextureOp(D3DTOP_BLENDTEXTUREALPHAPM);
+    <span class="kw">pub const </span>BlendCurrentAlpha         : TextureOp = TextureOp(D3DTOP_BLENDCURRENTALPHA);
+    <span class="kw">pub const </span>PreModulate               : TextureOp = TextureOp(D3DTOP_PREMODULATE);
+    <span class="kw">pub const </span>ModulateAlphaAddColor     : TextureOp = TextureOp(D3DTOP_MODULATEALPHA_ADDCOLOR);
+    <span class="kw">pub const </span>ModulateColorAddAlpha     : TextureOp = TextureOp(D3DTOP_MODULATECOLOR_ADDALPHA);
+    <span class="kw">pub const </span>ModulateInvAlphaAddColor  : TextureOp = TextureOp(D3DTOP_MODULATEINVALPHA_ADDCOLOR);
+    <span class="kw">pub const </span>ModulateInvColorAddAlpha  : TextureOp = TextureOp(D3DTOP_MODULATEINVCOLOR_ADDALPHA);
+    <span class="kw">pub const </span>BumpEnvMap                : TextureOp = TextureOp(D3DTOP_BUMPENVMAP);
+    <span class="kw">pub const </span>BumpEnvMapLuminance       : TextureOp = TextureOp(D3DTOP_BUMPENVMAPLUMINANCE);
+    <span class="kw">pub const </span>DotProduct3               : TextureOp = TextureOp(D3DTOP_DOTPRODUCT3);
+    <span class="kw">pub const </span>MultiplyAdd               : TextureOp = TextureOp(D3DTOP_MULTIPLYADD);
+    <span class="kw">pub const </span>Lerp                      : TextureOp = TextureOp(D3DTOP_LERP);
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;impl-poor-defaults&quot;</span>)]</span>
-<span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">TextureOp</span> {
-    <span class="kw">fn</span> <span class="ident">default</span>() -&gt; <span class="self">Self</span> { <span class="ident">TextureOp</span>(<span class="number">0</span>) }
-}
+<span class="comment">//#cpp2rust D3DTEXTUREOP                        = d3d::TextureOp
 
-<span class="comment">//#cpp2rust D3DTEXTUREOP                        = d3d::TextureOp</span>
-<span class="comment">//#cpp2rust D3DTOP_DISABLE                      = d3d::TOP::Disable</span>
-<span class="comment">//#cpp2rust D3DTOP_SELECTARG1                   = d3d::TOP::SelectArg1</span>
-<span class="comment">//#cpp2rust D3DTOP_SELECTARG2                   = d3d::TOP::SelectArg2</span>
-<span class="comment">//#cpp2rust D3DTOP_MODULATE                     = d3d::TOP::Modulate</span>
-<span class="comment">//#cpp2rust D3DTOP_MODULATE2X                   = d3d::TOP::Modulate2x</span>
-<span class="comment">//#cpp2rust D3DTOP_MODULATE4X                   = d3d::TOP::Modulate4x</span>
-<span class="comment">//#cpp2rust D3DTOP_ADD                          = d3d::TOP::Add</span>
-<span class="comment">//#cpp2rust D3DTOP_ADDSIGNED                    = d3d::TOP::AddSigned</span>
-<span class="comment">//#cpp2rust D3DTOP_ADDSIGNED2X                  = d3d::TOP::AddSigned2x</span>
-<span class="comment">//#cpp2rust D3DTOP_SUBTRACT                     = d3d::TOP::Subtract</span>
-<span class="comment">//#cpp2rust D3DTOP_ADDSMOOTH                    = d3d::TOP::AddSmooth</span>
-<span class="comment">//#cpp2rust D3DTOP_BLENDDIFFUSEALPHA            = d3d::TOP::BlendDiffuseAlpha</span>
-<span class="comment">//#cpp2rust D3DTOP_BLENDTEXTUREALPHA            = d3d::TOP::BlendTextureAlpha</span>
-<span class="comment">//#cpp2rust D3DTOP_BLENDFACTORALPHA             = d3d::TOP::BlendFactorAlpha</span>
-<span class="comment">//#cpp2rust D3DTOP_BLENDTEXTUREALPHAPM          = d3d::TOP::BlendTextureAlphaPM</span>
-<span class="comment">//#cpp2rust D3DTOP_BLENDCURRENTALPHA            = d3d::TOP::BlendCurrentAlpha</span>
-<span class="comment">//#cpp2rust D3DTOP_PREMODULATE                  = d3d::TOP::PreModulate</span>
-<span class="comment">//#cpp2rust D3DTOP_MODULATEALPHA_ADDCOLOR       = d3d::TOP::ModulateAlphaAddColor</span>
-<span class="comment">//#cpp2rust D3DTOP_MODULATECOLOR_ADDALPHA       = d3d::TOP::ModulateColorAddAlpha</span>
-<span class="comment">//#cpp2rust D3DTOP_MODULATEINVALPHA_ADDCOLOR    = d3d::TOP::ModulateInvAlphaAddColor</span>
-<span class="comment">//#cpp2rust D3DTOP_MODULATEINVCOLOR_ADDALPHA    = d3d::TOP::ModulateInvColorAddAlpha</span>
-<span class="comment">//#cpp2rust D3DTOP_BUMPENVMAP                   = d3d::TOP::BumpEnvMap</span>
-<span class="comment">//#cpp2rust D3DTOP_BUMPENVMAPLUMINANCE          = d3d::TOP::BumpEnvMapLuminance</span>
-<span class="comment">//#cpp2rust D3DTOP_DOTPRODUCT3                  = d3d::TOP::DotProduct3</span>
-<span class="comment">//#cpp2rust D3DTOP_MULTIPLYADD                  = d3d::TOP::MultiplyAdd</span>
-<span class="comment">//#cpp2rust D3DTOP_LERP                         = d3d::TOP::Lerp</span>
-</code></pre></div>
-</section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-search-index-js="../../../../../search-index.js" data-search-js="../../../../../search.js"></div>
-</body></html>
+//#cpp2rust D3DTOP_DISABLE                      = d3d::TOP::Disable
+//#cpp2rust D3DTOP_SELECTARG1                   = d3d::TOP::SelectArg1
+//#cpp2rust D3DTOP_SELECTARG2                   = d3d::TOP::SelectArg2
+//#cpp2rust D3DTOP_MODULATE                     = d3d::TOP::Modulate
+//#cpp2rust D3DTOP_MODULATE2X                   = d3d::TOP::Modulate2x
+//#cpp2rust D3DTOP_MODULATE4X                   = d3d::TOP::Modulate4x
+//#cpp2rust D3DTOP_ADD                          = d3d::TOP::Add
+//#cpp2rust D3DTOP_ADDSIGNED                    = d3d::TOP::AddSigned
+//#cpp2rust D3DTOP_ADDSIGNED2X                  = d3d::TOP::AddSigned2x
+//#cpp2rust D3DTOP_SUBTRACT                     = d3d::TOP::Subtract
+//#cpp2rust D3DTOP_ADDSMOOTH                    = d3d::TOP::AddSmooth
+//#cpp2rust D3DTOP_BLENDDIFFUSEALPHA            = d3d::TOP::BlendDiffuseAlpha
+//#cpp2rust D3DTOP_BLENDTEXTUREALPHA            = d3d::TOP::BlendTextureAlpha
+//#cpp2rust D3DTOP_BLENDFACTORALPHA             = d3d::TOP::BlendFactorAlpha
+//#cpp2rust D3DTOP_BLENDTEXTUREALPHAPM          = d3d::TOP::BlendTextureAlphaPM
+//#cpp2rust D3DTOP_BLENDCURRENTALPHA            = d3d::TOP::BlendCurrentAlpha
+//#cpp2rust D3DTOP_PREMODULATE                  = d3d::TOP::PreModulate
+//#cpp2rust D3DTOP_MODULATEALPHA_ADDCOLOR       = d3d::TOP::ModulateAlphaAddColor
+//#cpp2rust D3DTOP_MODULATECOLOR_ADDALPHA       = d3d::TOP::ModulateColorAddAlpha
+//#cpp2rust D3DTOP_MODULATEINVALPHA_ADDCOLOR    = d3d::TOP::ModulateInvAlphaAddColor
+//#cpp2rust D3DTOP_MODULATEINVCOLOR_ADDALPHA    = d3d::TOP::ModulateInvColorAddAlpha
+//#cpp2rust D3DTOP_BUMPENVMAP                   = d3d::TOP::BumpEnvMap
+//#cpp2rust D3DTOP_BUMPENVMAPLUMINANCE          = d3d::TOP::BumpEnvMapLuminance
+//#cpp2rust D3DTOP_DOTPRODUCT3                  = d3d::TOP::DotProduct3
+//#cpp2rust D3DTOP_MULTIPLYADD                  = d3d::TOP::MultiplyAdd
+//#cpp2rust D3DTOP_LERP                         = d3d::TOP::Lerp
+</span></code></pre></div>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (b44197abb 2022-09-05)" ></div></body></html>

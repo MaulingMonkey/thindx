@@ -1,103 +1,102 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3d11shader.h\interfaces\module_instance.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>module_instance.rs - source</title><link rel="stylesheet" type="text/css" href="../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script src="../../../../../crates.js"></script><script defer src="../../../../../main.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script>
-    <noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"><style type="text/css">#crate-search{background-image:url("../../../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../../../../thindx/index.html'><div class='logo-container rust-logo'><img src='../../../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../../../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../../../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../../../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
-<span id="2">  2</span>
-<span id="3">  3</span>
-<span id="4">  4</span>
-<span id="5">  5</span>
-<span id="6">  6</span>
-<span id="7">  7</span>
-<span id="8">  8</span>
-<span id="9">  9</span>
-<span id="10"> 10</span>
-<span id="11"> 11</span>
-<span id="12"> 12</span>
-<span id="13"> 13</span>
-<span id="14"> 14</span>
-<span id="15"> 15</span>
-<span id="16"> 16</span>
-<span id="17"> 17</span>
-<span id="18"> 18</span>
-<span id="19"> 19</span>
-<span id="20"> 20</span>
-<span id="21"> 21</span>
-<span id="22"> 22</span>
-<span id="23"> 23</span>
-<span id="24"> 24</span>
-<span id="25"> 25</span>
-<span id="26"> 26</span>
-<span id="27"> 27</span>
-<span id="28"> 28</span>
-<span id="29"> 29</span>
-<span id="30"> 30</span>
-<span id="31"> 31</span>
-<span id="32"> 32</span>
-<span id="33"> 33</span>
-<span id="34"> 34</span>
-<span id="35"> 35</span>
-<span id="36"> 36</span>
-<span id="37"> 37</span>
-<span id="38"> 38</span>
-<span id="39"> 39</span>
-<span id="40"> 40</span>
-<span id="41"> 41</span>
-<span id="42"> 42</span>
-<span id="43"> 43</span>
-<span id="44"> 44</span>
-<span id="45"> 45</span>
-<span id="46"> 46</span>
-<span id="47"> 47</span>
-<span id="48"> 48</span>
-<span id="49"> 49</span>
-<span id="50"> 50</span>
-<span id="51"> 51</span>
-<span id="52"> 52</span>
-<span id="53"> 53</span>
-<span id="54"> 54</span>
-<span id="55"> 55</span>
-<span id="56"> 56</span>
-<span id="57"> 57</span>
-<span id="58"> 58</span>
-<span id="59"> 59</span>
-<span id="60"> 60</span>
-<span id="61"> 61</span>
-<span id="62"> 62</span>
-<span id="63"> 63</span>
-<span id="64"> 64</span>
-<span id="65"> 65</span>
-<span id="66"> 66</span>
-<span id="67"> 67</span>
-<span id="68"> 68</span>
-<span id="69"> 69</span>
-<span id="70"> 70</span>
-<span id="71"> 71</span>
-<span id="72"> 72</span>
-<span id="73"> 73</span>
-<span id="74"> 74</span>
-<span id="75"> 75</span>
-<span id="76"> 76</span>
-<span id="77"> 77</span>
-<span id="78"> 78</span>
-<span id="79"> 79</span>
-<span id="80"> 80</span>
-<span id="81"> 81</span>
-<span id="82"> 82</span>
-<span id="83"> 83</span>
-<span id="84"> 84</span>
-<span id="85"> 85</span>
-<span id="86"> 86</span>
-<span id="87"> 87</span>
-<span id="88"> 88</span>
-<span id="89"> 89</span>
-<span id="90"> 90</span>
-<span id="91"> 91</span>
-<span id="92"> 92</span>
-<span id="93"> 93</span>
-<span id="94"> 94</span>
-<span id="95"> 95</span>
-<span id="96"> 96</span>
-<span id="97"> 97</span>
-<span id="98"> 98</span>
-<span id="99"> 99</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3d11shader.h\interfaces\module_instance.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>module_instance.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../../normalize.css"><link rel="stylesheet" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../../dark.css" disabled><link rel="stylesheet" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<span id="2">2</span>
+<span id="3">3</span>
+<span id="4">4</span>
+<span id="5">5</span>
+<span id="6">6</span>
+<span id="7">7</span>
+<span id="8">8</span>
+<span id="9">9</span>
+<span id="10">10</span>
+<span id="11">11</span>
+<span id="12">12</span>
+<span id="13">13</span>
+<span id="14">14</span>
+<span id="15">15</span>
+<span id="16">16</span>
+<span id="17">17</span>
+<span id="18">18</span>
+<span id="19">19</span>
+<span id="20">20</span>
+<span id="21">21</span>
+<span id="22">22</span>
+<span id="23">23</span>
+<span id="24">24</span>
+<span id="25">25</span>
+<span id="26">26</span>
+<span id="27">27</span>
+<span id="28">28</span>
+<span id="29">29</span>
+<span id="30">30</span>
+<span id="31">31</span>
+<span id="32">32</span>
+<span id="33">33</span>
+<span id="34">34</span>
+<span id="35">35</span>
+<span id="36">36</span>
+<span id="37">37</span>
+<span id="38">38</span>
+<span id="39">39</span>
+<span id="40">40</span>
+<span id="41">41</span>
+<span id="42">42</span>
+<span id="43">43</span>
+<span id="44">44</span>
+<span id="45">45</span>
+<span id="46">46</span>
+<span id="47">47</span>
+<span id="48">48</span>
+<span id="49">49</span>
+<span id="50">50</span>
+<span id="51">51</span>
+<span id="52">52</span>
+<span id="53">53</span>
+<span id="54">54</span>
+<span id="55">55</span>
+<span id="56">56</span>
+<span id="57">57</span>
+<span id="58">58</span>
+<span id="59">59</span>
+<span id="60">60</span>
+<span id="61">61</span>
+<span id="62">62</span>
+<span id="63">63</span>
+<span id="64">64</span>
+<span id="65">65</span>
+<span id="66">66</span>
+<span id="67">67</span>
+<span id="68">68</span>
+<span id="69">69</span>
+<span id="70">70</span>
+<span id="71">71</span>
+<span id="72">72</span>
+<span id="73">73</span>
+<span id="74">74</span>
+<span id="75">75</span>
+<span id="76">76</span>
+<span id="77">77</span>
+<span id="78">78</span>
+<span id="79">79</span>
+<span id="80">80</span>
+<span id="81">81</span>
+<span id="82">82</span>
+<span id="83">83</span>
+<span id="84">84</span>
+<span id="85">85</span>
+<span id="86">86</span>
+<span id="87">87</span>
+<span id="88">88</span>
+<span id="89">89</span>
+<span id="90">90</span>
+<span id="91">91</span>
+<span id="92">92</span>
+<span id="93">93</span>
+<span id="94">94</span>
+<span id="95">95</span>
+<span id="96">96</span>
+<span id="97">97</span>
+<span id="98">98</span>
+<span id="99">99</span>
 <span id="100">100</span>
 <span id="101">101</span>
 <span id="102">102</span>
@@ -333,340 +332,343 @@
 <span id="332">332</span>
 <span id="333">333</span>
 <span id="334">334</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="kw">crate</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::ctypes</span>::<span class="kw-2">*</span>;
+<span id="335">335</span>
+<span id="336">336</span>
+</pre><pre class="rust"><code><span class="kw">use crate</span>::<span class="kw-2">*</span>;
+<span class="kw">use </span><span class="kw">crate</span>::ctypes::<span class="kw-2">*</span>;
 
-<span class="kw">use</span> <span class="ident">winapi::shared::winerror</span>::<span class="kw-2">*</span>;
+<span class="kw">use </span>winapi::shared::winerror::<span class="kw-2">*</span>;
 
 
 
-<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11moduleinstance)\]</span>
-<span class="doccomment">/// ID3D11ModuleInstance</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// A module-instance interface is used for resource rebinding.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>)]</span> <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">transparent</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ModuleInstance</span>(<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="ident">mcom::Rc</span><span class="op">&lt;</span><span class="ident">winapi::um::d3d11shader::ID3D11ModuleInstance</span><span class="op">&gt;</span>);
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11moduleinstance)\]
+/// ID3D11ModuleInstance
+///
+/// A module-instance interface is used for resource rebinding.
+</span><span class="attribute">#[derive(Clone)] #[repr(transparent)]
+</span><span class="kw">pub struct </span>ModuleInstance(<span class="kw">pub</span>(<span class="kw">crate</span>) mcom::Rc&lt;winapi::um::d3d11shader::ID3D11ModuleInstance&gt;);
 
-<span class="macro">convert!</span>(<span class="kw unsafe">unsafe</span> <span class="ident">ModuleInstance</span> =&gt; <span class="ident">Unknown</span>, <span class="ident">winapi::um::d3d11shader::ID3D11ModuleInstance</span>);
+<span class="macro">convert!</span>(<span class="kw">unsafe </span>ModuleInstance =&gt; Unknown, winapi::um::d3d11shader::ID3D11ModuleInstance);
 
-<span class="kw">fn</span> <span class="ident">check</span>(<span class="ident">method</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span>, <span class="ident">hr</span>: <span class="ident">HRESULT</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">bool</span>, <span class="ident">MethodError</span><span class="op">&gt;</span> {
-    <span class="kw">if</span> <span class="ident">hr</span> <span class="op">==</span> <span class="ident">S_FALSE</span> {
+<span class="macro">macro_rules! </span>check { ( <span class="macro-nonterminal">$hr</span>:expr ) =&gt; {{
+    <span class="kw">let </span>hr = <span class="macro-nonterminal">$hr</span>;
+    <span class="kw">if </span>hr == S_FALSE {
         <span class="prelude-val">Ok</span>(<span class="bool-val">false</span>)
-    } <span class="kw">else</span> {
-        <span class="ident">MethodError::check</span>(<span class="ident">method</span>, <span class="ident">hr</span>)<span class="question-mark">?</span>;
+    } <span class="kw">else </span>{
+        <span class="macro">fn_check_hr!</span>(hr)<span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(<span class="bool-val">true</span>)
     }
+}}}
+
+<span class="comment">// TODO: traitify
+
+</span><span class="kw">impl </span>ModuleInstance {
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindconstantbuffer)\]
+    /// ID3D11ModuleInstance::BindConstantBuffer
+    ///
+    /// Rebinds a constant buffer from a source slot to a destination slot.
+    ///
+    /// ### Arguments
+    /// *   `src_slot`      - The source slot number for rebinding.
+    /// *   `dst_slot`      - The destination slot number for rebinding.
+    /// *   `dst_offset`    - The offset in bytes of the destination slot for rebinding. The offset must have 16-byte alignment.
+    ///
+    /// ### Errors
+    /// *   [E::FAIL]       - the rebinding is out-of-bounds
+    /// *   [E::FAIL]       - `dst_slot` was already bound?
+    /// *   [E::FAIL]       - an otherwise invalid rebinding
+    ///
+    /// ### Returns
+    /// *   Ok(`true`)      - for a valid rebinding
+    /// *   Ok(`false`)     - for rebinding a nonexistent slot; that is, for which the shader reflection doesn’t have any data
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use thindx::*;
+    /// // TODO
+    /// ```
+    </span><span class="kw">pub fn </span>bind_constant_buffer(<span class="kw-2">&amp;</span><span class="self">self</span>, src_slot: u32, dst_slot: u32, dst_offset: u32) -&gt; <span class="prelude-ty">Result</span>&lt;bool, Error&gt; {
+        <span class="macro">fn_context!</span>(d3d11::ModuleInstance::bind_constant_buffer =&gt; ID3D11ModuleInstance::BindConstantBuffer);
+        <span class="kw">let </span>hr = <span class="kw">unsafe </span>{ <span class="self">self</span>.<span class="number">0</span>.BindConstantBuffer(src_slot, dst_slot, dst_offset) };
+        <span class="macro">check!</span>(hr)
+    }
+
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindconstantbufferbyname)\]
+    /// ID3D11ModuleInstance::BindConstantBufferByName
+    ///
+    /// Rebinds a constant buffer by name to a destination slot.
+    ///
+    /// ### Arguments
+    /// *   `name`          - The name of the constant buffer for rebinding.
+    /// *   `dst_slot`      - The destination slot number for rebinding.
+    /// *   `dst_offset`    - The offset in bytes of the destination slot for rebinding. The offset must have 16-byte alignment.
+    ///
+    /// ### Errors
+    /// *   [E::FAIL]       - the rebinding is out-of-bounds
+    /// *   [E::FAIL]       - `dst_slot` was already bound?
+    /// *   [E::FAIL]       - an otherwise invalid rebinding
+    ///
+    /// ### Returns
+    /// *   `true`          - for a valid rebinding
+    /// *   `false`         - for rebinding a nonexistent slot; that is, for which the shader reflection doesn’t have any data
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use thindx::*;
+    /// // TODO
+    /// ```
+    </span><span class="kw">pub fn </span>bind_constant_buffer_by_name(<span class="kw-2">&amp;</span><span class="self">self</span>, name: <span class="kw">impl </span>TryIntoAsCStr, dst_slot: u32, dst_offset: u32) -&gt; <span class="prelude-ty">Result</span>&lt;bool, Error&gt; {
+        <span class="macro">fn_context!</span>(d3d11::ModuleInstance::bind_constant_buffer_by_name =&gt; ID3D11ModuleInstance::BindConstantBufferByName);
+        <span class="kw">let </span>name = <span class="macro">fn_param_try_into!</span>(name)<span class="question-mark">?</span>;
+        <span class="kw">let </span>hr = <span class="kw">unsafe </span>{ <span class="self">self</span>.<span class="number">0</span>.BindConstantBufferByName(name.as_cstr(), dst_slot, dst_offset) };
+        <span class="macro">check!</span>(hr)
+    }
+
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindresource)\]
+    /// ID3D11ModuleInstance::BindResource
+    ///
+    /// Rebinds a texture or buffer from source slot to destination slot.
+    ///
+    /// ### Arguments
+    /// *   `src_slot`      - The first source slot number for rebinding.
+    /// *   `dst_slot`      - The first destination slot number for rebinding.
+    /// *   `count`         - The number of slots for rebinding.
+    ///
+    /// ### Errors
+    /// *   [E::FAIL]       - the rebinding is out-of-bounds
+    /// *   [E::FAIL]       - A slot between `dst_slot .. dst_slot + count` was already bound?
+    /// *   [E::FAIL]       - an otherwise invalid rebinding
+    ///
+    /// ### Returns
+    /// *   `true`          - for a valid rebinding
+    /// *   `false`         - for rebinding a nonexistent slot; that is, for which the shader reflection doesn’t have any data
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use thindx::*;
+    /// // TODO
+    /// ```
+    </span><span class="kw">pub fn </span>bind_resource(<span class="kw-2">&amp;</span><span class="self">self</span>, src_slot: u32, dst_slot: u32, count: u32) -&gt; <span class="prelude-ty">Result</span>&lt;bool, Error&gt; {
+        <span class="macro">fn_context!</span>(d3d11::ModuleInstance::bind_resource =&gt; ID3D11ModuleInstance::BindResource);
+        <span class="kw">let </span>hr = <span class="kw">unsafe </span>{ <span class="self">self</span>.<span class="number">0</span>.BindResource(src_slot, dst_slot, count) };
+        <span class="macro">check!</span>(hr)
+    }
+
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindresourceasunorderedaccessview)\]
+    /// ID3D11ModuleInstance::BindResourceAsUnorderedAccessView
+    ///
+    /// Rebinds a resource as an unordered access view (UAV) from source slot to destination slot.
+    ///
+    /// ### Arguments
+    /// *   `src_srv_slot`  - The first source slot number for rebinding.
+    /// *   `dst_uav_slot`  - The first destination slot number for rebinding.
+    /// *   `count`         - The number of slots for rebinding.
+    ///
+    /// ### Errors
+    /// *   [E::FAIL]       - the rebinding is out-of-bounds
+    /// *   [E::FAIL]       - A slot between `dst_uav_slot .. dst_uav_slot + count` was already bound?
+    /// *   [E::FAIL]       - an otherwise invalid rebinding
+    ///
+    /// ### Returns
+    /// *   `true`          - for a valid rebinding
+    /// *   `false`         - for rebinding a nonexistent slot; that is, for which the shader reflection doesn’t have any data
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use thindx::*;
+    /// // TODO
+    /// ```
+    </span><span class="kw">pub fn </span>bind_resource_as_unordered_access_view(<span class="kw-2">&amp;</span><span class="self">self</span>, src_srv_slot: u32, dst_uav_slot: u32, count: u32) -&gt; <span class="prelude-ty">Result</span>&lt;bool, Error&gt; {
+        <span class="macro">fn_context!</span>(d3d11::ModuleInstance::bind_resource_as_unordered_access_view =&gt; ID3D11ModuleInstance::BindResourceAsUnorderedAccessView);
+        <span class="kw">let </span>hr = <span class="kw">unsafe </span>{ <span class="self">self</span>.<span class="number">0</span>.BindResourceAsUnorderedAccessView(src_srv_slot, dst_uav_slot, count) };
+        <span class="macro">check!</span>(hr)
+    }
+
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindresourceasunorderedaccessviewbyname)\]
+    /// ID3D11ModuleInstance::BindResourceAsUnorderedAccessViewByName
+    ///
+    /// Rebinds a resource by name as an unordered access view (UAV) to destination slots.
+    ///
+    /// ### Arguments
+    /// *   `srv_name`      - The name of the resource for rebinding.
+    /// *   `dst_uav_slot`  - The first destination slot number for rebinding.
+    /// *   `count`         - The number of slots for rebinding.
+    ///
+    /// ### Errors
+    /// *   [E::FAIL]       - the rebinding is out-of-bounds
+    /// *   [E::FAIL]       - A slot between `dst_uav_slot .. dst_uav_slot + count` was already bound?
+    /// *   [E::FAIL]       - an otherwise invalid rebinding
+    ///
+    /// ### Returns
+    /// *   `true`          - for a valid rebinding
+    /// *   `false`         - for rebinding a nonexistent slot; that is, for which the shader reflection doesn’t have any data
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use thindx::*;
+    /// // TODO
+    /// ```
+    </span><span class="kw">pub fn </span>bind_resource_as_unordered_access_view_by_name(<span class="kw-2">&amp;</span><span class="self">self</span>, srv_name: <span class="kw">impl </span>TryIntoAsCStr, dst_uav_slot: u32, count: u32) -&gt; <span class="prelude-ty">Result</span>&lt;bool, Error&gt; {
+        <span class="macro">fn_context!</span>(d3d11::ModuleInstance::bind_resource_as_unordered_access_view_by_name =&gt; ID3D11ModuleInstance::BindResourceAsUnorderedAccessViewByName);
+        <span class="kw">let </span>srv_name = <span class="macro">fn_param_try_into!</span>(srv_name)<span class="question-mark">?</span>;
+        <span class="kw">let </span>hr = <span class="kw">unsafe </span>{ <span class="self">self</span>.<span class="number">0</span>.BindResourceAsUnorderedAccessViewByName(srv_name.as_cstr(), dst_uav_slot, count) };
+        <span class="macro">check!</span>(hr)
+    }
+
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindresourcebyname)\]
+    /// ID3D11ModuleInstance::BindResourceByName
+    ///
+    /// Rebinds a texture or buffer by name to destination slots.
+    ///
+    /// ### Arguments
+    /// *   `name`          - The name of the texture or buffer for rebinding.
+    /// *   `dst_slot`      - The first destination slot number for rebinding.
+    /// *   `count`         - The number of slots for rebinding.
+    ///
+    /// ### Errors
+    /// *   [E::FAIL]       - the rebinding is out-of-bounds
+    /// *   [E::FAIL]       - A slot between `dst_slot .. dst_slot + count` was already bound?
+    /// *   [E::FAIL]       - an otherwise invalid rebinding
+    ///
+    /// ### Returns
+    /// *   `true`          - for a valid rebinding
+    /// *   `false`         - for rebinding a nonexistent slot; that is, for which the shader reflection doesn’t have any data
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use thindx::*;
+    /// // TODO
+    /// ```
+    </span><span class="kw">pub fn </span>bind_resource_by_name(<span class="kw-2">&amp;</span><span class="self">self</span>, name: <span class="kw">impl </span>TryIntoAsCStr, dst_slot: u32, count: u32) -&gt; <span class="prelude-ty">Result</span>&lt;bool, Error&gt; {
+        <span class="macro">fn_context!</span>(d3d11::ModuleInstance::bind_resource_by_name =&gt; ID3D11ModuleInstance::BindResourceByName);
+        <span class="kw">let </span>name = <span class="macro">fn_param_try_into!</span>(name)<span class="question-mark">?</span>;
+        <span class="kw">let </span>hr = <span class="kw">unsafe </span>{ <span class="self">self</span>.<span class="number">0</span>.BindResourceByName(name.as_cstr(), dst_slot, count) };
+        <span class="macro">check!</span>(hr)
+    }
+
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindsampler)\]
+    /// ID3D11ModuleInstance::BindSampler
+    ///
+    /// Rebinds a sampler from source slot to destination slot.
+    ///
+    /// ### Arguments
+    /// *   `src_slot`      - The first source slot number for rebinding.
+    /// *   `dst_slot`      - The first destination slot number for rebinding.
+    /// *   `count`         - The number of slots for rebinding.
+    ///
+    /// ### Errors
+    /// *   [E::FAIL]       - the rebinding is out-of-bounds
+    /// *   [E::FAIL]       - A slot between `dst_slot .. dst_slot + count` was already bound?
+    /// *   [E::FAIL]       - an otherwise invalid rebinding
+    ///
+    /// ### Returns
+    /// *   `true`          - for a valid rebinding
+    /// *   `false`         - for rebinding a nonexistent slot; that is, for which the shader reflection doesn’t have any data
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use thindx::*;
+    /// // TODO
+    /// ```
+    </span><span class="kw">pub fn </span>bind_sampler(<span class="kw-2">&amp;</span><span class="self">self</span>, src_slot: u32, dst_slot: u32, count: u32) -&gt; <span class="prelude-ty">Result</span>&lt;bool, Error&gt; {
+        <span class="macro">fn_context!</span>(d3d11::ModuleInstance::bind_sampler =&gt; ID3D11ModuleInstance::BindSampler);
+        <span class="kw">let </span>hr = <span class="kw">unsafe </span>{ <span class="self">self</span>.<span class="number">0</span>.BindSampler(src_slot, dst_slot, count) };
+        <span class="macro">check!</span>(hr)
+    }
+
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindsamplerbyname)\]
+    /// ID3D11ModuleInstance::BindSamplerByName
+    ///
+    /// Rebinds a sampler by name to destination slots.
+    ///
+    /// ### Arguments
+    /// *   `name`          - The name of the sampler for rebinding.
+    /// *   `dst_slot`      - The first destination slot number for rebinding.
+    /// *   `count`         - The number of slots for rebinding.
+    ///
+    /// ### Errors
+    /// *   [E::FAIL]       - the rebinding is out-of-bounds
+    /// *   [E::FAIL]       - A slot between `dst_slot .. dst_slot + count` was already bound?
+    /// *   [E::FAIL]       - an otherwise invalid rebinding
+    ///
+    /// ### Returns
+    /// *   `true`          - for a valid rebinding
+    /// *   `false`         - for rebinding a nonexistent slot; that is, for which the shader reflection doesn’t have any data
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use thindx::*;
+    /// // TODO
+    /// ```
+    </span><span class="kw">pub fn </span>bind_sampler_by_name(<span class="kw-2">&amp;</span><span class="self">self</span>, name: <span class="kw">impl </span>TryIntoAsCStr, dst_slot: u32, count: u32) -&gt; <span class="prelude-ty">Result</span>&lt;bool, Error&gt; {
+        <span class="macro">fn_context!</span>(d3d11::ModuleInstance::bind_sampler_by_name =&gt; ID3D11ModuleInstance::BindSamplerByName);
+        <span class="kw">let </span>name = <span class="macro">fn_param_try_into!</span>(name)<span class="question-mark">?</span>;
+        <span class="kw">let </span>hr = <span class="kw">unsafe </span>{ <span class="self">self</span>.<span class="number">0</span>.BindSamplerByName(name.as_cstr(), dst_slot, count) };
+        <span class="macro">check!</span>(hr)
+    }
+
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindunorderedaccessview)\]
+    /// ID3D11ModuleInstance::BindUnorderedAccessView
+    ///
+    /// Rebinds an unordered access view (UAV) from source slot to destination slot.
+    ///
+    /// ### Arguments
+    /// *   `src_slot`      - The first source slot number for rebinding.
+    /// *   `dst_slot`      - The first destination slot number for rebinding.
+    /// *   `count`         - The number of slots for rebinding.
+    ///
+    /// ### Errors
+    /// *   [E::FAIL]       - the rebinding is out-of-bounds
+    /// *   [E::FAIL]       - A slot between `dst_slot .. dst_slot + count` was already bound?
+    /// *   [E::FAIL]       - an otherwise invalid rebinding
+    ///
+    /// ### Returns
+    /// *   `true`          - for a valid rebinding
+    /// *   `false`         - for rebinding a nonexistent slot; that is, for which the shader reflection doesn’t have any data
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use thindx::*;
+    /// // TODO
+    /// ```
+    </span><span class="kw">pub fn </span>bind_unordered_access_view(<span class="kw-2">&amp;</span><span class="self">self</span>, src_slot: u32, dst_slot: u32, count: u32) -&gt; <span class="prelude-ty">Result</span>&lt;bool, Error&gt; {
+        <span class="macro">fn_context!</span>(d3d11::ModuleInstance::bind_unordered_access_view =&gt; ID3D11ModuleInstance::BindUnorderedAccessView);
+        <span class="kw">let </span>hr = <span class="kw">unsafe </span>{ <span class="self">self</span>.<span class="number">0</span>.BindUnorderedAccessView(src_slot, dst_slot, count) };
+        <span class="macro">check!</span>(hr)
+    }
+
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindunorderedaccessviewbyname)\]
+    /// ID3D11ModuleInstance::BindUnorderedAccessViewByName
+    ///
+    /// Rebinds an unordered access view (UAV) by name to destination slots.
+    ///
+    /// ### Arguments
+    /// *   `name`          - The name of the UAV for rebinding.
+    /// *   `dst_slot`      - The first destination slot number for rebinding.
+    /// *   `count`         - The number of slots for rebinding.
+    ///
+    /// ### Errors
+    /// *   [E::FAIL]       - the rebinding is out-of-bounds
+    /// *   [E::FAIL]       - A slot between `dst_slot .. dst_slot + count` was already bound?
+    /// *   [E::FAIL]       - an otherwise invalid rebinding
+    ///
+    /// ### Returns
+    /// *   `true`          - for a valid rebinding
+    /// *   `false`         - for rebinding a nonexistent slot; that is, for which the shader reflection doesn’t have any data
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use thindx::*;
+    /// // TODO
+    /// ```
+    </span><span class="kw">pub fn </span>bind_unordered_access_view_by_name(<span class="kw-2">&amp;</span><span class="self">self</span>, name: <span class="kw">impl </span>TryIntoAsCStr, dst_slot: u32, count: u32) -&gt; <span class="prelude-ty">Result</span>&lt;bool, Error&gt; {
+        <span class="macro">fn_context!</span>(d3d11::ModuleInstance::bind_unordered_access_view_by_name =&gt; ID3D11ModuleInstance::BindUnorderedAccessViewByName);
+        <span class="kw">let </span>name = <span class="macro">fn_param_try_into!</span>(name)<span class="question-mark">?</span>;
+        <span class="kw">let </span>hr = <span class="kw">unsafe </span>{ <span class="self">self</span>.<span class="number">0</span>.BindUnorderedAccessViewByName(name.as_cstr(), dst_slot, count) };
+        <span class="macro">check!</span>(hr)
+    }
 }
 
-<span class="kw">impl</span> <span class="ident">ModuleInstance</span> {
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindconstantbuffer)\]</span>
-    <span class="doccomment">/// ID3D11ModuleInstance::BindConstantBuffer</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Rebinds a constant buffer from a source slot to a destination slot.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Arguments</span>
-    <span class="doccomment">/// *   `src_slot`      - The source slot number for rebinding.</span>
-    <span class="doccomment">/// *   `dst_slot`      - The destination slot number for rebinding.</span>
-    <span class="doccomment">/// *   `dst_offset`    - The offset in bytes of the destination slot for rebinding. The offset must have 16-byte alignment.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Errors</span>
-    <span class="doccomment">/// *   [E::FAIL]       - the rebinding is out-of-bounds</span>
-    <span class="doccomment">/// *   [E::FAIL]       - `dst_slot` was already bound?</span>
-    <span class="doccomment">/// *   [E::FAIL]       - an otherwise invalid rebinding</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Returns</span>
-    <span class="doccomment">/// *   Ok(`true`)      - for a valid rebinding</span>
-    <span class="doccomment">/// *   Ok(`false`)     - for rebinding a nonexistent slot; that is, for which the shader reflection doesn’t have any data</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Example</span>
-    <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// # use thindx::*;</span>
-    <span class="doccomment">/// // TODO</span>
-    <span class="doccomment">/// ```</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">bind_constant_buffer</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">src_slot</span>: <span class="ident">u32</span>, <span class="ident">dst_slot</span>: <span class="ident">u32</span>, <span class="ident">dst_offset</span>: <span class="ident">u32</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">bool</span>, <span class="ident">MethodError</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">hr</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="number">0</span>.<span class="ident">BindConstantBuffer</span>(<span class="ident">src_slot</span>, <span class="ident">dst_slot</span>, <span class="ident">dst_offset</span>) };
-        <span class="ident">check</span>(<span class="string">&quot;ID3D11ModuleInstance::BindConstantBuffer&quot;</span>, <span class="ident">hr</span>)
-    }
-
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindconstantbufferbyname)\]</span>
-    <span class="doccomment">/// ID3D11ModuleInstance::BindConstantBufferByName</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Rebinds a constant buffer by name to a destination slot.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Arguments</span>
-    <span class="doccomment">/// *   `name`          - The name of the constant buffer for rebinding.</span>
-    <span class="doccomment">/// *   `dst_slot`      - The destination slot number for rebinding.</span>
-    <span class="doccomment">/// *   `dst_offset`    - The offset in bytes of the destination slot for rebinding. The offset must have 16-byte alignment.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Errors</span>
-    <span class="doccomment">/// *   [E::FAIL]       - the rebinding is out-of-bounds</span>
-    <span class="doccomment">/// *   [E::FAIL]       - `dst_slot` was already bound?</span>
-    <span class="doccomment">/// *   [E::FAIL]       - an otherwise invalid rebinding</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Returns</span>
-    <span class="doccomment">/// *   `true`          - for a valid rebinding</span>
-    <span class="doccomment">/// *   `false`         - for rebinding a nonexistent slot; that is, for which the shader reflection doesn’t have any data</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Example</span>
-    <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// # use thindx::*;</span>
-    <span class="doccomment">/// // TODO</span>
-    <span class="doccomment">/// ```</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">bind_constant_buffer_by_name</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">name</span>: <span class="kw">impl</span> <span class="ident">TryIntoAsCStr</span>, <span class="ident">dst_slot</span>: <span class="ident">u32</span>, <span class="ident">dst_offset</span>: <span class="ident">u32</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">bool</span>, <span class="ident">MethodError</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">name</span>.<span class="ident">try_into</span>().<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="ident">MethodError::new</span>(<span class="string">&quot;ID3D11ModuleInstance::BindConstantBufferByName&quot;</span>, <span class="ident">e</span>))<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">hr</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="number">0</span>.<span class="ident">BindConstantBufferByName</span>(<span class="ident">name</span>.<span class="ident">as_cstr</span>(), <span class="ident">dst_slot</span>, <span class="ident">dst_offset</span>) };
-        <span class="ident">check</span>(<span class="string">&quot;ID3D11ModuleInstance::BindConstantBufferByName&quot;</span>, <span class="ident">hr</span>)
-    }
-
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindresource)\]</span>
-    <span class="doccomment">/// ID3D11ModuleInstance::BindResource</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Rebinds a texture or buffer from source slot to destination slot.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Arguments</span>
-    <span class="doccomment">/// *   `src_slot`      - The first source slot number for rebinding.</span>
-    <span class="doccomment">/// *   `dst_slot`      - The first destination slot number for rebinding.</span>
-    <span class="doccomment">/// *   `count`         - The number of slots for rebinding.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Errors</span>
-    <span class="doccomment">/// *   [E::FAIL]       - the rebinding is out-of-bounds</span>
-    <span class="doccomment">/// *   [E::FAIL]       - A slot between `dst_slot .. dst_slot + count` was already bound?</span>
-    <span class="doccomment">/// *   [E::FAIL]       - an otherwise invalid rebinding</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Returns</span>
-    <span class="doccomment">/// *   `true`          - for a valid rebinding</span>
-    <span class="doccomment">/// *   `false`         - for rebinding a nonexistent slot; that is, for which the shader reflection doesn’t have any data</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Example</span>
-    <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// # use thindx::*;</span>
-    <span class="doccomment">/// // TODO</span>
-    <span class="doccomment">/// ```</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">bind_resource</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">src_slot</span>: <span class="ident">u32</span>, <span class="ident">dst_slot</span>: <span class="ident">u32</span>, <span class="ident">count</span>: <span class="ident">u32</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">bool</span>, <span class="ident">MethodError</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">hr</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="number">0</span>.<span class="ident">BindResource</span>(<span class="ident">src_slot</span>, <span class="ident">dst_slot</span>, <span class="ident">count</span>) };
-        <span class="ident">check</span>(<span class="string">&quot;ID3D11ModuleInstance::BindResource&quot;</span>, <span class="ident">hr</span>)
-    }
-
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindresourceasunorderedaccessview)\]</span>
-    <span class="doccomment">/// ID3D11ModuleInstance::BindResourceAsUnorderedAccessView</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Rebinds a resource as an unordered access view (UAV) from source slot to destination slot.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Arguments</span>
-    <span class="doccomment">/// *   `src_srv_slot`  - The first source slot number for rebinding.</span>
-    <span class="doccomment">/// *   `dst_uav_slot`  - The first destination slot number for rebinding.</span>
-    <span class="doccomment">/// *   `count`         - The number of slots for rebinding.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Errors</span>
-    <span class="doccomment">/// *   [E::FAIL]       - the rebinding is out-of-bounds</span>
-    <span class="doccomment">/// *   [E::FAIL]       - A slot between `dst_uav_slot .. dst_uav_slot + count` was already bound?</span>
-    <span class="doccomment">/// *   [E::FAIL]       - an otherwise invalid rebinding</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Returns</span>
-    <span class="doccomment">/// *   `true`          - for a valid rebinding</span>
-    <span class="doccomment">/// *   `false`         - for rebinding a nonexistent slot; that is, for which the shader reflection doesn’t have any data</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Example</span>
-    <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// # use thindx::*;</span>
-    <span class="doccomment">/// // TODO</span>
-    <span class="doccomment">/// ```</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">bind_resource_as_unordered_access_view</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">src_srv_slot</span>: <span class="ident">u32</span>, <span class="ident">dst_uav_slot</span>: <span class="ident">u32</span>, <span class="ident">count</span>: <span class="ident">u32</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">bool</span>, <span class="ident">MethodError</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">hr</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="number">0</span>.<span class="ident">BindResourceAsUnorderedAccessView</span>(<span class="ident">src_srv_slot</span>, <span class="ident">dst_uav_slot</span>, <span class="ident">count</span>) };
-        <span class="ident">check</span>(<span class="string">&quot;ID3D11ModuleInstance::BindResourceAsUnorderedAccessView&quot;</span>, <span class="ident">hr</span>)
-    }
-
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindresourceasunorderedaccessviewbyname)\]</span>
-    <span class="doccomment">/// ID3D11ModuleInstance::BindResourceAsUnorderedAccessViewByName</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Rebinds a resource by name as an unordered access view (UAV) to destination slots.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Arguments</span>
-    <span class="doccomment">/// *   `srv_name`      - The name of the resource for rebinding.</span>
-    <span class="doccomment">/// *   `dst_uav_slot`  - The first destination slot number for rebinding.</span>
-    <span class="doccomment">/// *   `count`         - The number of slots for rebinding.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Errors</span>
-    <span class="doccomment">/// *   [E::FAIL]       - the rebinding is out-of-bounds</span>
-    <span class="doccomment">/// *   [E::FAIL]       - A slot between `dst_uav_slot .. dst_uav_slot + count` was already bound?</span>
-    <span class="doccomment">/// *   [E::FAIL]       - an otherwise invalid rebinding</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Returns</span>
-    <span class="doccomment">/// *   `true`          - for a valid rebinding</span>
-    <span class="doccomment">/// *   `false`         - for rebinding a nonexistent slot; that is, for which the shader reflection doesn’t have any data</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Example</span>
-    <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// # use thindx::*;</span>
-    <span class="doccomment">/// // TODO</span>
-    <span class="doccomment">/// ```</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">bind_resource_as_unordered_access_view_by_name</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">srv_name</span>: <span class="kw">impl</span> <span class="ident">TryIntoAsCStr</span>, <span class="ident">dst_uav_slot</span>: <span class="ident">u32</span>, <span class="ident">count</span>: <span class="ident">u32</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">bool</span>, <span class="ident">MethodError</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">srv_name</span> <span class="op">=</span> <span class="ident">srv_name</span>.<span class="ident">try_into</span>().<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="ident">MethodError::new</span>(<span class="string">&quot;ID3D11ModuleInstance::BindResourceAsUnorderedAccessViewByName&quot;</span>, <span class="ident">e</span>))<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">hr</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="number">0</span>.<span class="ident">BindResourceAsUnorderedAccessViewByName</span>(<span class="ident">srv_name</span>.<span class="ident">as_cstr</span>(), <span class="ident">dst_uav_slot</span>, <span class="ident">count</span>) };
-        <span class="ident">check</span>(<span class="string">&quot;ID3D11ModuleInstance::BindResourceAsUnorderedAccessViewByName&quot;</span>, <span class="ident">hr</span>)
-    }
-
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindresourcebyname)\]</span>
-    <span class="doccomment">/// ID3D11ModuleInstance::BindResourceByName</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Rebinds a texture or buffer by name to destination slots.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Arguments</span>
-    <span class="doccomment">/// *   `name`          - The name of the texture or buffer for rebinding.</span>
-    <span class="doccomment">/// *   `dst_slot`      - The first destination slot number for rebinding.</span>
-    <span class="doccomment">/// *   `count`         - The number of slots for rebinding.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Errors</span>
-    <span class="doccomment">/// *   [E::FAIL]       - the rebinding is out-of-bounds</span>
-    <span class="doccomment">/// *   [E::FAIL]       - A slot between `dst_slot .. dst_slot + count` was already bound?</span>
-    <span class="doccomment">/// *   [E::FAIL]       - an otherwise invalid rebinding</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Returns</span>
-    <span class="doccomment">/// *   `true`          - for a valid rebinding</span>
-    <span class="doccomment">/// *   `false`         - for rebinding a nonexistent slot; that is, for which the shader reflection doesn’t have any data</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Example</span>
-    <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// # use thindx::*;</span>
-    <span class="doccomment">/// // TODO</span>
-    <span class="doccomment">/// ```</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">bind_resource_by_name</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">name</span>: <span class="kw">impl</span> <span class="ident">TryIntoAsCStr</span>, <span class="ident">dst_slot</span>: <span class="ident">u32</span>, <span class="ident">count</span>: <span class="ident">u32</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">bool</span>, <span class="ident">MethodError</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">name</span>.<span class="ident">try_into</span>().<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="ident">MethodError::new</span>(<span class="string">&quot;ID3D11ModuleInstance::BindResourceByName&quot;</span>, <span class="ident">e</span>))<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">hr</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="number">0</span>.<span class="ident">BindResourceByName</span>(<span class="ident">name</span>.<span class="ident">as_cstr</span>(), <span class="ident">dst_slot</span>, <span class="ident">count</span>) };
-        <span class="ident">check</span>(<span class="string">&quot;ID3D11ModuleInstance::BindResourceByName&quot;</span>, <span class="ident">hr</span>)
-    }
-
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindsampler)\]</span>
-    <span class="doccomment">/// ID3D11ModuleInstance::BindSampler</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Rebinds a sampler from source slot to destination slot.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Arguments</span>
-    <span class="doccomment">/// *   `src_slot`      - The first source slot number for rebinding.</span>
-    <span class="doccomment">/// *   `dst_slot`      - The first destination slot number for rebinding.</span>
-    <span class="doccomment">/// *   `count`         - The number of slots for rebinding.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Errors</span>
-    <span class="doccomment">/// *   [E::FAIL]       - the rebinding is out-of-bounds</span>
-    <span class="doccomment">/// *   [E::FAIL]       - A slot between `dst_slot .. dst_slot + count` was already bound?</span>
-    <span class="doccomment">/// *   [E::FAIL]       - an otherwise invalid rebinding</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Returns</span>
-    <span class="doccomment">/// *   `true`          - for a valid rebinding</span>
-    <span class="doccomment">/// *   `false`         - for rebinding a nonexistent slot; that is, for which the shader reflection doesn’t have any data</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Example</span>
-    <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// # use thindx::*;</span>
-    <span class="doccomment">/// // TODO</span>
-    <span class="doccomment">/// ```</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">bind_sampler</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">src_slot</span>: <span class="ident">u32</span>, <span class="ident">dst_slot</span>: <span class="ident">u32</span>, <span class="ident">count</span>: <span class="ident">u32</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">bool</span>, <span class="ident">MethodError</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">hr</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="number">0</span>.<span class="ident">BindSampler</span>(<span class="ident">src_slot</span>, <span class="ident">dst_slot</span>, <span class="ident">count</span>) };
-        <span class="ident">check</span>(<span class="string">&quot;ID3D11ModuleInstance::BindSampler&quot;</span>, <span class="ident">hr</span>)
-    }
-
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindsamplerbyname)\]</span>
-    <span class="doccomment">/// ID3D11ModuleInstance::BindSamplerByName</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Rebinds a sampler by name to destination slots.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Arguments</span>
-    <span class="doccomment">/// *   `name`          - The name of the sampler for rebinding.</span>
-    <span class="doccomment">/// *   `dst_slot`      - The first destination slot number for rebinding.</span>
-    <span class="doccomment">/// *   `count`         - The number of slots for rebinding.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Errors</span>
-    <span class="doccomment">/// *   [E::FAIL]       - the rebinding is out-of-bounds</span>
-    <span class="doccomment">/// *   [E::FAIL]       - A slot between `dst_slot .. dst_slot + count` was already bound?</span>
-    <span class="doccomment">/// *   [E::FAIL]       - an otherwise invalid rebinding</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Returns</span>
-    <span class="doccomment">/// *   `true`          - for a valid rebinding</span>
-    <span class="doccomment">/// *   `false`         - for rebinding a nonexistent slot; that is, for which the shader reflection doesn’t have any data</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Example</span>
-    <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// # use thindx::*;</span>
-    <span class="doccomment">/// // TODO</span>
-    <span class="doccomment">/// ```</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">bind_sampler_by_name</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">name</span>: <span class="kw">impl</span> <span class="ident">TryIntoAsCStr</span>, <span class="ident">dst_slot</span>: <span class="ident">u32</span>, <span class="ident">count</span>: <span class="ident">u32</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">bool</span>, <span class="ident">MethodError</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">name</span>.<span class="ident">try_into</span>().<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="ident">MethodError::new</span>(<span class="string">&quot;ID3D11ModuleInstance::BindSamplerByName&quot;</span>, <span class="ident">e</span>))<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">hr</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="number">0</span>.<span class="ident">BindSamplerByName</span>(<span class="ident">name</span>.<span class="ident">as_cstr</span>(), <span class="ident">dst_slot</span>, <span class="ident">count</span>) };
-        <span class="ident">check</span>(<span class="string">&quot;ID3D11ModuleInstance::BindSamplerByName&quot;</span>, <span class="ident">hr</span>)
-    }
-
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindunorderedaccessview)\]</span>
-    <span class="doccomment">/// ID3D11ModuleInstance::BindUnorderedAccessView</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Rebinds an unordered access view (UAV) from source slot to destination slot.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Arguments</span>
-    <span class="doccomment">/// *   `src_slot`      - The first source slot number for rebinding.</span>
-    <span class="doccomment">/// *   `dst_slot`      - The first destination slot number for rebinding.</span>
-    <span class="doccomment">/// *   `count`         - The number of slots for rebinding.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Errors</span>
-    <span class="doccomment">/// *   [E::FAIL]       - the rebinding is out-of-bounds</span>
-    <span class="doccomment">/// *   [E::FAIL]       - A slot between `dst_slot .. dst_slot + count` was already bound?</span>
-    <span class="doccomment">/// *   [E::FAIL]       - an otherwise invalid rebinding</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Returns</span>
-    <span class="doccomment">/// *   `true`          - for a valid rebinding</span>
-    <span class="doccomment">/// *   `false`         - for rebinding a nonexistent slot; that is, for which the shader reflection doesn’t have any data</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Example</span>
-    <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// # use thindx::*;</span>
-    <span class="doccomment">/// // TODO</span>
-    <span class="doccomment">/// ```</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">bind_unordered_access_view</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">src_slot</span>: <span class="ident">u32</span>, <span class="ident">dst_slot</span>: <span class="ident">u32</span>, <span class="ident">count</span>: <span class="ident">u32</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">bool</span>, <span class="ident">MethodError</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">hr</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="number">0</span>.<span class="ident">BindUnorderedAccessView</span>(<span class="ident">src_slot</span>, <span class="ident">dst_slot</span>, <span class="ident">count</span>) };
-        <span class="ident">check</span>(<span class="string">&quot;ID3D11ModuleInstance::BindUnorderedAccessView&quot;</span>, <span class="ident">hr</span>)
-    }
-
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindunorderedaccessviewbyname)\]</span>
-    <span class="doccomment">/// ID3D11ModuleInstance::BindUnorderedAccessViewByName</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Rebinds an unordered access view (UAV) by name to destination slots.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Arguments</span>
-    <span class="doccomment">/// *   `name`          - The name of the UAV for rebinding.</span>
-    <span class="doccomment">/// *   `dst_slot`      - The first destination slot number for rebinding.</span>
-    <span class="doccomment">/// *   `count`         - The number of slots for rebinding.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Errors</span>
-    <span class="doccomment">/// *   [E::FAIL]       - the rebinding is out-of-bounds</span>
-    <span class="doccomment">/// *   [E::FAIL]       - A slot between `dst_slot .. dst_slot + count` was already bound?</span>
-    <span class="doccomment">/// *   [E::FAIL]       - an otherwise invalid rebinding</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Returns</span>
-    <span class="doccomment">/// *   `true`          - for a valid rebinding</span>
-    <span class="doccomment">/// *   `false`         - for rebinding a nonexistent slot; that is, for which the shader reflection doesn’t have any data</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Example</span>
-    <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// # use thindx::*;</span>
-    <span class="doccomment">/// // TODO</span>
-    <span class="doccomment">/// ```</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">bind_unordered_access_view_by_name</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">name</span>: <span class="kw">impl</span> <span class="ident">TryIntoAsCStr</span>, <span class="ident">dst_slot</span>: <span class="ident">u32</span>, <span class="ident">count</span>: <span class="ident">u32</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">bool</span>, <span class="ident">MethodError</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">name</span>.<span class="ident">try_into</span>().<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="ident">MethodError::new</span>(<span class="string">&quot;ID3D11ModuleInstance::BindUnorderedAccessViewByName&quot;</span>, <span class="ident">e</span>))<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">hr</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="number">0</span>.<span class="ident">BindUnorderedAccessViewByName</span>(<span class="ident">name</span>.<span class="ident">as_cstr</span>(), <span class="ident">dst_slot</span>, <span class="ident">count</span>) };
-        <span class="ident">check</span>(<span class="string">&quot;ID3D11ModuleInstance::BindUnorderedAccessViewByName&quot;</span>, <span class="ident">hr</span>)
-    }
-}
-
-<span class="comment">//#cpp2rust ID3D11ModuleInstance                                            = d3d11::ModuleInstance</span>
-
-<span class="comment">//#cpp2rust ID3D11ModuleInstance::BindConstantBuffer                        = d3d11::ModuleInstance::bind_constant_buffer</span>
-<span class="comment">//#cpp2rust ID3D11ModuleInstance::BindConstantBufferByName                  = d3d11::ModuleInstance::bind_constant_buffer_by_name</span>
-<span class="comment">//#cpp2rust ID3D11ModuleInstance::BindResource                              = d3d11::ModuleInstance::bind_resource</span>
-<span class="comment">//#cpp2rust ID3D11ModuleInstance::BindResourceAsUnorderedAccessView         = d3d11::ModuleInstance::bind_resource_as_unordered_access_view</span>
-<span class="comment">//#cpp2rust ID3D11ModuleInstance::BindResourceAsUnorderedAccessViewByName   = d3d11::ModuleInstance::bind_resource_as_unordered_access_view_by_name</span>
-<span class="comment">//#cpp2rust ID3D11ModuleInstance::BindResourceByName                        = d3d11::ModuleInstance::bind_resource_by_name</span>
-<span class="comment">//#cpp2rust ID3D11ModuleInstance::BindSampler                               = d3d11::ModuleInstance::bind_sampler</span>
-<span class="comment">//#cpp2rust ID3D11ModuleInstance::BindSamplerByName                         = d3d11::ModuleInstance::bind_sampler_by_name</span>
-<span class="comment">//#cpp2rust ID3D11ModuleInstance::BindUnorderedAccessView                   = d3d11::ModuleInstance::bind_unordered_access_view</span>
-<span class="comment">//#cpp2rust ID3D11ModuleInstance::BindUnorderedAccessViewByName             = d3d11::ModuleInstance::bind_unordered_access_view_by_name</span>
-</code></pre></div>
-</section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-search-index-js="../../../../../search-index.js" data-search-js="../../../../../search.js"></div>
-</body></html>
+<span class="comment">//#cpp2rust ID3D11ModuleInstance                                            = d3d11::ModuleInstance
+</span></code></pre></div>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (b44197abb 2022-09-05)" ></div></body></html>

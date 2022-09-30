@@ -1,103 +1,102 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3dcompiler.h\dll\compile_.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>compile_.rs - source</title><link rel="stylesheet" type="text/css" href="../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script src="../../../../../crates.js"></script><script defer src="../../../../../main.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script>
-    <noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"><style type="text/css">#crate-search{background-image:url("../../../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../../../../thindx/index.html'><div class='logo-container rust-logo'><img src='../../../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../../../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../../../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../../../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
-<span id="2">  2</span>
-<span id="3">  3</span>
-<span id="4">  4</span>
-<span id="5">  5</span>
-<span id="6">  6</span>
-<span id="7">  7</span>
-<span id="8">  8</span>
-<span id="9">  9</span>
-<span id="10"> 10</span>
-<span id="11"> 11</span>
-<span id="12"> 12</span>
-<span id="13"> 13</span>
-<span id="14"> 14</span>
-<span id="15"> 15</span>
-<span id="16"> 16</span>
-<span id="17"> 17</span>
-<span id="18"> 18</span>
-<span id="19"> 19</span>
-<span id="20"> 20</span>
-<span id="21"> 21</span>
-<span id="22"> 22</span>
-<span id="23"> 23</span>
-<span id="24"> 24</span>
-<span id="25"> 25</span>
-<span id="26"> 26</span>
-<span id="27"> 27</span>
-<span id="28"> 28</span>
-<span id="29"> 29</span>
-<span id="30"> 30</span>
-<span id="31"> 31</span>
-<span id="32"> 32</span>
-<span id="33"> 33</span>
-<span id="34"> 34</span>
-<span id="35"> 35</span>
-<span id="36"> 36</span>
-<span id="37"> 37</span>
-<span id="38"> 38</span>
-<span id="39"> 39</span>
-<span id="40"> 40</span>
-<span id="41"> 41</span>
-<span id="42"> 42</span>
-<span id="43"> 43</span>
-<span id="44"> 44</span>
-<span id="45"> 45</span>
-<span id="46"> 46</span>
-<span id="47"> 47</span>
-<span id="48"> 48</span>
-<span id="49"> 49</span>
-<span id="50"> 50</span>
-<span id="51"> 51</span>
-<span id="52"> 52</span>
-<span id="53"> 53</span>
-<span id="54"> 54</span>
-<span id="55"> 55</span>
-<span id="56"> 56</span>
-<span id="57"> 57</span>
-<span id="58"> 58</span>
-<span id="59"> 59</span>
-<span id="60"> 60</span>
-<span id="61"> 61</span>
-<span id="62"> 62</span>
-<span id="63"> 63</span>
-<span id="64"> 64</span>
-<span id="65"> 65</span>
-<span id="66"> 66</span>
-<span id="67"> 67</span>
-<span id="68"> 68</span>
-<span id="69"> 69</span>
-<span id="70"> 70</span>
-<span id="71"> 71</span>
-<span id="72"> 72</span>
-<span id="73"> 73</span>
-<span id="74"> 74</span>
-<span id="75"> 75</span>
-<span id="76"> 76</span>
-<span id="77"> 77</span>
-<span id="78"> 78</span>
-<span id="79"> 79</span>
-<span id="80"> 80</span>
-<span id="81"> 81</span>
-<span id="82"> 82</span>
-<span id="83"> 83</span>
-<span id="84"> 84</span>
-<span id="85"> 85</span>
-<span id="86"> 86</span>
-<span id="87"> 87</span>
-<span id="88"> 88</span>
-<span id="89"> 89</span>
-<span id="90"> 90</span>
-<span id="91"> 91</span>
-<span id="92"> 92</span>
-<span id="93"> 93</span>
-<span id="94"> 94</span>
-<span id="95"> 95</span>
-<span id="96"> 96</span>
-<span id="97"> 97</span>
-<span id="98"> 98</span>
-<span id="99"> 99</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3dcompiler.h\dll\compile_.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>compile_.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../../normalize.css"><link rel="stylesheet" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../../dark.css" disabled><link rel="stylesheet" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<span id="2">2</span>
+<span id="3">3</span>
+<span id="4">4</span>
+<span id="5">5</span>
+<span id="6">6</span>
+<span id="7">7</span>
+<span id="8">8</span>
+<span id="9">9</span>
+<span id="10">10</span>
+<span id="11">11</span>
+<span id="12">12</span>
+<span id="13">13</span>
+<span id="14">14</span>
+<span id="15">15</span>
+<span id="16">16</span>
+<span id="17">17</span>
+<span id="18">18</span>
+<span id="19">19</span>
+<span id="20">20</span>
+<span id="21">21</span>
+<span id="22">22</span>
+<span id="23">23</span>
+<span id="24">24</span>
+<span id="25">25</span>
+<span id="26">26</span>
+<span id="27">27</span>
+<span id="28">28</span>
+<span id="29">29</span>
+<span id="30">30</span>
+<span id="31">31</span>
+<span id="32">32</span>
+<span id="33">33</span>
+<span id="34">34</span>
+<span id="35">35</span>
+<span id="36">36</span>
+<span id="37">37</span>
+<span id="38">38</span>
+<span id="39">39</span>
+<span id="40">40</span>
+<span id="41">41</span>
+<span id="42">42</span>
+<span id="43">43</span>
+<span id="44">44</span>
+<span id="45">45</span>
+<span id="46">46</span>
+<span id="47">47</span>
+<span id="48">48</span>
+<span id="49">49</span>
+<span id="50">50</span>
+<span id="51">51</span>
+<span id="52">52</span>
+<span id="53">53</span>
+<span id="54">54</span>
+<span id="55">55</span>
+<span id="56">56</span>
+<span id="57">57</span>
+<span id="58">58</span>
+<span id="59">59</span>
+<span id="60">60</span>
+<span id="61">61</span>
+<span id="62">62</span>
+<span id="63">63</span>
+<span id="64">64</span>
+<span id="65">65</span>
+<span id="66">66</span>
+<span id="67">67</span>
+<span id="68">68</span>
+<span id="69">69</span>
+<span id="70">70</span>
+<span id="71">71</span>
+<span id="72">72</span>
+<span id="73">73</span>
+<span id="74">74</span>
+<span id="75">75</span>
+<span id="76">76</span>
+<span id="77">77</span>
+<span id="78">78</span>
+<span id="79">79</span>
+<span id="80">80</span>
+<span id="81">81</span>
+<span id="82">82</span>
+<span id="83">83</span>
+<span id="84">84</span>
+<span id="85">85</span>
+<span id="86">86</span>
+<span id="87">87</span>
+<span id="88">88</span>
+<span id="89">89</span>
+<span id="90">90</span>
+<span id="91">91</span>
+<span id="92">92</span>
+<span id="93">93</span>
+<span id="94">94</span>
+<span id="95">95</span>
+<span id="96">96</span>
+<span id="97">97</span>
+<span id="98">98</span>
+<span id="99">99</span>
 <span id="100">100</span>
 <span id="101">101</span>
 <span id="102">102</span>
@@ -562,104 +561,90 @@
 <span id="561">561</span>
 <span id="562">562</span>
 <span id="563">563</span>
-<span id="564">564</span>
-<span id="565">565</span>
-<span id="566">566</span>
-<span id="567">567</span>
-<span id="568">568</span>
-<span id="569">569</span>
-<span id="570">570</span>
-<span id="571">571</span>
-<span id="572">572</span>
-<span id="573">573</span>
-<span id="574">574</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="kw">crate</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::ctypes</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::d3d</span>::<span class="kw-2">*</span>;
+</pre><pre class="rust"><code><span class="kw">use crate</span>::<span class="kw-2">*</span>;
+<span class="kw">use </span><span class="kw">crate</span>::ctypes::<span class="kw-2">*</span>;
+<span class="kw">use </span><span class="kw">crate</span>::d3d::<span class="kw-2">*</span>;
 
-<span class="kw">use</span> <span class="ident">std::borrow::Borrow</span>;
-<span class="kw">use</span> <span class="ident">std::fmt</span>::{<span class="self">self</span>, <span class="ident">Debug</span>, <span class="ident">Display</span>, <span class="ident">Formatter</span>};
-<span class="kw">use</span> <span class="ident">std::ops::Deref</span>;
-<span class="kw">use</span> <span class="ident">std::path</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident">std::ptr</span>::<span class="kw-2">*</span>;
+<span class="kw">use </span>std::borrow::Borrow;
+<span class="kw">use </span>std::fmt::{<span class="self">self</span>, Debug, Display, Formatter};
+<span class="kw">use </span>std::ops::Deref;
+<span class="kw">use </span>std::path::<span class="kw-2">*</span>;
+<span class="kw">use </span>std::ptr::<span class="kw-2">*</span>;
 
 
 
-<span class="doccomment">/// { code: [ReadOnlyBlob], errors: [TextBlob] } returned by [Compiler::compile] &amp; friends.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">CompileResult</span> {
-    <span class="doccomment">/// The shader bytecode</span>
-    <span class="kw">pub</span> <span class="ident">shader</span>:     <span class="ident">CodeBlob</span>,
+<span class="doccomment">/// { code: [ReadOnlyBlob], errors: [TextBlob] } returned by [Compiler::compile] &amp; friends.
+</span><span class="attribute">#[derive(Clone, Debug)]
+</span><span class="kw">pub struct </span>CompileResult {
+    <span class="doccomment">/// The shader bytecode
+    </span><span class="kw">pub </span>shader:     CodeBlob,
 
-    <span class="doccomment">/// Any diagnostics, warnings, or non-fatal errors generated while compiling the shader.</span>
-    <span class="kw">pub</span> <span class="ident">errors</span>:     <span class="ident">TextBlob</span>,
+    <span class="doccomment">/// Any diagnostics, warnings, or non-fatal errors generated while compiling the shader.
+    </span><span class="kw">pub </span>errors:     TextBlob,
 }
 
-<span class="kw">impl</span> <span class="ident">AsRef</span> <span class="op">&lt;</span>[<span class="ident">u8</span>]<span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">CompileResult</span> { <span class="kw">fn</span> <span class="ident">as_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] { <span class="self">self</span>.<span class="ident">shader</span>.<span class="ident">as_bytes</span>() } }
-<span class="kw">impl</span> <span class="ident">Borrow</span><span class="op">&lt;</span>[<span class="ident">u8</span>]<span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">CompileResult</span> { <span class="kw">fn</span> <span class="ident">borrow</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] { <span class="self">self</span>.<span class="ident">shader</span>.<span class="ident">as_bytes</span>() } }
-<span class="kw">impl</span> <span class="ident">AsRef</span> <span class="op">&lt;</span><span class="ident">Bytecode</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">CompileResult</span> { <span class="kw">fn</span> <span class="ident">as_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">Bytecode</span> { <span class="self">self</span>.<span class="ident">shader</span>.<span class="ident">as_bytecode</span>() } }
-<span class="kw">impl</span> <span class="ident">Borrow</span><span class="op">&lt;</span><span class="ident">Bytecode</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">CompileResult</span> { <span class="kw">fn</span> <span class="ident">borrow</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">Bytecode</span> { <span class="self">self</span>.<span class="ident">shader</span>.<span class="ident">as_bytecode</span>() } }
-<span class="kw">impl</span> <span class="ident">Deref</span> <span class="kw">for</span> <span class="ident">CompileResult</span> { <span class="kw">fn</span> <span class="ident">deref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">Bytecode</span> { <span class="self">self</span>.<span class="ident">shader</span>.<span class="ident">as_bytecode</span>() } <span class="kw">type</span> <span class="ident">Target</span> <span class="op">=</span> <span class="ident">Bytecode</span>; }
+<span class="kw">impl </span>AsRef &lt;[u8]&gt; <span class="kw">for </span>CompileResult { <span class="kw">fn </span>as_ref(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[u8] { <span class="self">self</span>.shader.as_bytes() } }
+<span class="kw">impl </span>Borrow&lt;[u8]&gt; <span class="kw">for </span>CompileResult { <span class="kw">fn </span>borrow(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[u8] { <span class="self">self</span>.shader.as_bytes() } }
+<span class="kw">impl </span>AsRef &lt;Bytecode&gt; <span class="kw">for </span>CompileResult { <span class="kw">fn </span>as_ref(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>Bytecode { <span class="self">self</span>.shader.as_bytecode() } }
+<span class="kw">impl </span>Borrow&lt;Bytecode&gt; <span class="kw">for </span>CompileResult { <span class="kw">fn </span>borrow(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>Bytecode { <span class="self">self</span>.shader.as_bytecode() } }
+<span class="kw">impl </span>Deref <span class="kw">for </span>CompileResult { <span class="kw">fn </span>deref(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>Bytecode { <span class="self">self</span>.shader.as_bytecode() } <span class="kw">type </span>Target = Bytecode; }
 
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">CompileResult</span> <span class="kw">as</span> <span class="ident">LinkResult</span>;
+<span class="kw">pub use </span>CompileResult <span class="kw">as </span>LinkResult;
 
 
 
-<span class="doccomment">/// { code: [TextBlob], errors: [TextBlob] } returned by [Compiler::preprocess]</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Debug</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">PreprocessResult</span> {
-    <span class="doccomment">/// The preprocessed HLSL</span>
-    <span class="kw">pub</span> <span class="ident">shader</span>:     <span class="ident">TextBlob</span>,
+<span class="doccomment">/// { shader: [TextBlob], errors: [TextBlob] } returned by [Compiler::preprocess]
+</span><span class="attribute">#[derive(Clone, Debug)]
+</span><span class="kw">pub struct </span>PreprocessResult {
+    <span class="doccomment">/// The preprocessed HLSL
+    </span><span class="kw">pub </span>shader:     TextBlob,
 
-    <span class="doccomment">/// Any diagnostics, warnings, or non-fatal errors generated while preprocessing the shader.</span>
-    <span class="kw">pub</span> <span class="ident">errors</span>:     <span class="ident">TextBlob</span>,
+    <span class="doccomment">/// Any diagnostics, warnings, or non-fatal errors generated while preprocessing the shader.
+    </span><span class="kw">pub </span>errors:     TextBlob,
 }
 
 
 
-<span class="doccomment">/// { kind: [ErrorKind], shader: Option&amp;lt;[ReadOnlyBlob]&amp;gt;, errors: [TextBlob] }</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">CompileError</span> {
-    <span class="doccomment">/// The [ErrorKind] / HRESULT generated when compiling the shader.</span>
-    <span class="kw">pub</span> <span class="ident">kind</span>:       <span class="ident">ErrorKind</span>,
+<span class="doccomment">/// { error: [Error], shader: Option&amp;lt;[ReadOnlyBlob]&amp;gt;, errors: [TextBlob] }
+</span><span class="attribute">#[derive(Clone)]
+</span><span class="kw">pub struct </span>CompileError {
+    <span class="doccomment">/// The [Error] generated when compiling the shader.
+    </span><span class="kw">pub </span>error:      Error,
 
-    <span class="doccomment">/// The method that generated the error in question.</span>
-    <span class="kw">pub</span> <span class="ident">method</span>:     <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span><span class="op">&gt;</span>,
+    <span class="doccomment">/// Any shader bytecode that may have resulted despite compilation failing.
+    ///
+    /// This might be always [None]?
+    </span><span class="kw">pub </span>shader:     <span class="prelude-ty">Option</span>&lt;CodeBlob&gt;,
 
-    <span class="doccomment">/// Any shader bytecode that may have resulted despite compilation failing.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// This might be always [None]?</span>
-    <span class="kw">pub</span> <span class="ident">shader</span>:     <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">CodeBlob</span><span class="op">&gt;</span>,
-
-    <span class="doccomment">/// More detailed errors/diagnostics beyond the basic error code.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// May be blank for basic API parameter errors, but should be populated for errors in the HLSL code that was being compiled.</span>
-    <span class="kw">pub</span> <span class="ident">errors</span>:     <span class="ident">TextBlob</span>,
+    <span class="doccomment">/// More detailed errors/diagnostics beyond the basic error code.
+    ///
+    /// May be blank for basic API parameter errors, but should be populated for errors in the HLSL code that was being compiled.
+    </span><span class="kw">pub </span>errors:     TextBlob,
 }
 
-<span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">MethodError</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">CompileError</span> {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">e</span>: <span class="ident">MethodError</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">Self</span> { <span class="ident">kind</span>: <span class="ident">e</span>.<span class="ident">kind</span>(), <span class="ident">method</span>: <span class="prelude-val">Some</span>(<span class="ident">e</span>.<span class="ident">method</span>()), <span class="ident">errors</span>: <span class="ident">Default::default</span>(), <span class="ident">shader</span>: <span class="ident">Default::default</span>() }
+<span class="kw">impl </span>From&lt;Error&gt; <span class="kw">for </span>CompileError {
+    <span class="kw">fn </span>from(error: Error) -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{ error, errors: Default::default(), shader: Default::default() }
     }
 }
 
-<span class="kw">impl</span> <span class="ident">std::error::Error</span> <span class="kw">for</span> <span class="ident">CompileError</span> {}
+<span class="kw">impl </span>std::error::Error <span class="kw">for </span>CompileError {}
 
-<span class="kw">impl</span> <span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">CompileError</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">fmt</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
-        <span class="ident">fmt</span>.<span class="ident">debug_struct</span>(<span class="string">&quot;CompileError&quot;</span>)
-            .<span class="ident">field</span>(<span class="string">&quot;kind&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">kind</span>)
-            .<span class="ident">field</span>(<span class="string">&quot;shader&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">shader</span>.<span class="ident">as_ref</span>().<span class="ident">map</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> ..))
-            .<span class="ident">field</span>(<span class="string">&quot;errors&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">errors</span>.<span class="ident">to_utf8_lossy</span>())
-            .<span class="ident">finish</span>()
+<span class="kw">impl </span>Debug <span class="kw">for </span>CompileError {
+    <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, fmt: <span class="kw-2">&amp;mut </span>Formatter) -&gt; fmt::Result {
+        fmt.debug_struct(<span class="string">&quot;CompileError&quot;</span>)
+            .field(<span class="string">&quot;error&quot;</span>,  <span class="kw-2">&amp;</span><span class="self">self</span>.error)
+            .field(<span class="string">&quot;shader&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.shader.as_ref().map(|<span class="kw">_</span>| ..))
+            .field(<span class="string">&quot;errors&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.errors.to_utf8_lossy())
+            .finish()
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Display</span> <span class="kw">for</span> <span class="ident">CompileError</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">fmt</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
-        <span class="macro">write!</span>(<span class="ident">fmt</span>, <span class="string">&quot;Error compiling shader: {:?}&quot;</span>, <span class="self">self</span>.<span class="ident">kind</span>)<span class="question-mark">?</span>;
-        <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">errors</span>.<span class="ident">is_empty</span>() {
-            <span class="macro">writeln!</span>(<span class="ident">fmt</span>, <span class="string">&quot;\n{}&quot;</span>, <span class="self">self</span>.<span class="ident">errors</span>.<span class="ident">to_utf8_lossy</span>())<span class="question-mark">?</span>;
+<span class="kw">impl </span>Display <span class="kw">for </span>CompileError {
+    <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, fmt: <span class="kw-2">&amp;mut </span>Formatter) -&gt; fmt::Result {
+        <span class="macro">write!</span>(fmt, <span class="string">&quot;Error compiling shader: {:?}&quot;</span>, <span class="self">self</span>.error.kind())<span class="question-mark">?</span>;
+        <span class="kw">if </span>!<span class="self">self</span>.errors.is_empty() {
+            <span class="macro">writeln!</span>(fmt, <span class="string">&quot;\n{}&quot;</span>, <span class="self">self</span>.errors.to_utf8_lossy())<span class="question-mark">?</span>;
         }
         <span class="prelude-val">Ok</span>(())
     }
@@ -667,49 +652,46 @@
 
 
 
-<span class="doccomment">/// { kind: [ErrorKind], shader: Option&amp;lt;[ReadOnlyBlob]&amp;gt;, errors: [TextBlob] }</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>)]</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">PreprocessError</span> {
-    <span class="doccomment">/// The [ErrorKind] / HRESULT generated when preprocessing the shader.</span>
-    <span class="kw">pub</span> <span class="ident">kind</span>:       <span class="ident">ErrorKind</span>,
+<span class="doccomment">/// { error: [Error], shader: Option&amp;lt;[ReadOnlyBlob]&amp;gt;, errors: [TextBlob] }
+</span><span class="attribute">#[derive(Clone)]
+</span><span class="kw">pub struct </span>PreprocessError {
+    <span class="doccomment">/// The [Error] generated when preprocessing the shader.
+    </span><span class="kw">pub </span>error:      Error,
 
-    <span class="doccomment">/// The method that generated the error in question.</span>
-    <span class="kw">pub</span> <span class="ident">method</span>:     <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span><span class="op">&gt;</span>,
+    <span class="doccomment">/// Any preprocessed HLSL that may have been generated.
+    ///
+    /// This might be always empty?
+    </span><span class="kw">pub </span>shader:     TextBlob,
 
-    <span class="doccomment">/// Any preprocessed HLSL that may have been generated.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// This might be always empty?</span>
-    <span class="kw">pub</span> <span class="ident">shader</span>:     <span class="ident">TextBlob</span>,
-
-    <span class="doccomment">/// More detailed errors/diagnostics beyond the basic error code.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// May be blank for basic API parameter errors, but should be populated for errors in the HLSL code that was being preprocessed.</span>
-    <span class="kw">pub</span> <span class="ident">errors</span>:     <span class="ident">TextBlob</span>,
+    <span class="doccomment">/// More detailed errors/diagnostics beyond the basic error code.
+    ///
+    /// May be blank for basic API parameter errors, but should be populated for errors in the HLSL code that was being preprocessed.
+    </span><span class="kw">pub </span>errors:     TextBlob,
 }
 
-<span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">MethodError</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">PreprocessError</span> {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">e</span>: <span class="ident">MethodError</span>) -&gt; <span class="self">Self</span> {
-        <span class="self">Self</span> { <span class="ident">kind</span>: <span class="ident">e</span>.<span class="ident">kind</span>(), <span class="ident">method</span>: <span class="prelude-val">Some</span>(<span class="ident">e</span>.<span class="ident">method</span>()), <span class="ident">errors</span>: <span class="ident">Default::default</span>(), <span class="ident">shader</span>: <span class="ident">Default::default</span>() }
+<span class="kw">impl </span>From&lt;Error&gt; <span class="kw">for </span>PreprocessError {
+    <span class="kw">fn </span>from(error: Error) -&gt; <span class="self">Self </span>{
+        <span class="self">Self </span>{ error, errors: Default::default(), shader: Default::default() }
     }
 }
 
-<span class="kw">impl</span> <span class="ident">std::error::Error</span> <span class="kw">for</span> <span class="ident">PreprocessError</span> {}
+<span class="kw">impl </span>std::error::Error <span class="kw">for </span>PreprocessError {}
 
-<span class="kw">impl</span> <span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">PreprocessError</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">fmt</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
-        <span class="ident">fmt</span>.<span class="ident">debug_struct</span>(<span class="string">&quot;PreprocessError&quot;</span>)
-            .<span class="ident">field</span>(<span class="string">&quot;kind&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">kind</span>)
-            .<span class="ident">field</span>(<span class="string">&quot;shader&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">shader</span>.<span class="ident">to_utf8_lossy</span>())
-            .<span class="ident">field</span>(<span class="string">&quot;errors&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">errors</span>.<span class="ident">to_utf8_lossy</span>())
-            .<span class="ident">finish</span>()
+<span class="kw">impl </span>Debug <span class="kw">for </span>PreprocessError {
+    <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, fmt: <span class="kw-2">&amp;mut </span>Formatter) -&gt; fmt::Result {
+        fmt.debug_struct(<span class="string">&quot;PreprocessError&quot;</span>)
+            .field(<span class="string">&quot;error&quot;</span>,  <span class="kw-2">&amp;</span><span class="self">self</span>.error)
+            .field(<span class="string">&quot;shader&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.shader.to_utf8_lossy())
+            .field(<span class="string">&quot;errors&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.errors.to_utf8_lossy())
+            .finish()
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Display</span> <span class="kw">for</span> <span class="ident">PreprocessError</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">fmt</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
-        <span class="macro">write!</span>(<span class="ident">fmt</span>, <span class="string">&quot;Error preprocessing shader: {:?}&quot;</span>, <span class="self">self</span>.<span class="ident">kind</span>)<span class="question-mark">?</span>;
-        <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">errors</span>.<span class="ident">is_empty</span>() {
-            <span class="macro">writeln!</span>(<span class="ident">fmt</span>, <span class="string">&quot;\n{}&quot;</span>, <span class="self">self</span>.<span class="ident">errors</span>.<span class="ident">to_utf8_lossy</span>())<span class="question-mark">?</span>;
+<span class="kw">impl </span>Display <span class="kw">for </span>PreprocessError {
+    <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, fmt: <span class="kw-2">&amp;mut </span>Formatter) -&gt; fmt::Result {
+        <span class="macro">write!</span>(fmt, <span class="string">&quot;Error preprocessing shader: {:?}&quot;</span>, <span class="self">self</span>.error.kind())<span class="question-mark">?</span>;
+        <span class="kw">if </span>!<span class="self">self</span>.errors.is_empty() {
+            <span class="macro">writeln!</span>(fmt, <span class="string">&quot;\n{}&quot;</span>, <span class="self">self</span>.errors.to_utf8_lossy())<span class="question-mark">?</span>;
         }
         <span class="prelude-val">Ok</span>(())
     }
@@ -717,436 +699,430 @@
 
 
 
-<span class="doccomment">/// &lt;h1 id=&quot;compile&quot; class=&quot;section-header&quot;&gt;&lt;a href=&quot;#compile&quot;&gt;Compile &amp; Preprocess HLSL to Bytecode&lt;/a&gt;&lt;/h1&gt;</span>
-<span class="kw">impl</span> <span class="ident">Compiler</span> {
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dcompilefromfile)\]</span>
-    <span class="doccomment">/// D3DCompileFromFile</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// &gt; **Note:** You can use this API to develop your Windows Store apps, but you can&#39;t use it in apps that you submit to the Windows Store.</span>
-    <span class="doccomment">/// &gt; Refer to the section, &quot;Compiling shaders for UWP&quot;, in the remarks for [compile2](Self::compile2).</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Compiles Microsoft High Level Shader Language (HLSL) code into bytecode for a given target.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Arguments</span>
-    <span class="doccomment">/// *   `file_name`     - The shader file to compile</span>
-    <span class="doccomment">/// *   `defines`       - An optional array of defines.  Use [None] if no extra defines are desired.</span>
-    <span class="doccomment">/// *   `include`       - An optional interface for dispatching `#include`s.</span>
-    <span class="doccomment">///                       Use [None] if `#include`s should not be supported.</span>
-    <span class="doccomment">///                       Use [StandardFileInclude] if you want to resolve `#include`s relative to `source_name`.</span>
-    <span class="doccomment">/// *   `entrypoint`    - An optional entrypoint such as `Some(&quot;main&quot;)`.  Ignored if `target` is `fx_*`.</span>
-    <span class="doccomment">/// *   `target`        - A target shader profile such as `ps_3_0`, `vs_5_0`, `fx_4_0`, etc.</span>
-    <span class="doccomment">/// *   `flags1`        - [Compile]::\* constants.</span>
-    <span class="doccomment">/// *   `flags2`        - [CompileEffect]::\* constants.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Errors</span>
-    <span class="doccomment">/// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_4?.dll` and earlier</span>
-    <span class="doccomment">/// *   [D3DERR::INVALIDCALL]           - on invalid parameters such as nonexistant `target`s</span>
-    <span class="doccomment">/// *   [E::FAIL]                       - if the shader failed to compile</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Examples</span>
-    <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// # use thindx::d3d::*; let d3dc = Compiler::load_system(47).unwrap();</span>
-    <span class="doccomment">/// let pixel_shader = d3dc.compile_from_file(</span>
-    <span class="doccomment">///     r&quot;test\data\basic.hlsl&quot;, None, None, &quot;ps_main&quot;, &quot;ps_4_0&quot;,</span>
-    <span class="doccomment">///     Compile::Debug, CompileEffect::None,</span>
-    <span class="doccomment">/// ).unwrap();</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// let vertex_shader = d3dc.compile_from_file(</span>
-    <span class="doccomment">///     r&quot;test\data\basic.hlsl&quot;, None, StandardFileInclude, &quot;vs_main&quot;, &quot;vs_4_0&quot;,</span>
-    <span class="doccomment">///     Compile::Debug, CompileEffect::None,</span>
-    <span class="doccomment">/// ).unwrap();</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// // TODO: defines/includes examples</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### See Also</span>
-    <span class="doccomment">/// *   [examples::d3dcompiler_02_compile]</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Remarks</span>
-    <span class="doccomment">/// *   You can use this API to develop your Windows Store apps, but you can&#39;t use it in apps that you submit to the Windows Store.</span>
-    <span class="comment">// /// *   This was introduced by d3dcompiler_47.dll, and is unavailable in earlier versions. // ?</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">compile_from_file</span>(
+<span class="doccomment">/// &lt;h1 id=&quot;compile&quot; class=&quot;section-header&quot;&gt;&lt;a href=&quot;#compile&quot;&gt;Compile &amp; Preprocess HLSL to Bytecode&lt;/a&gt;&lt;/h1&gt;
+</span><span class="kw">impl </span>Compiler {
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dcompilefromfile)\]
+    /// D3DCompileFromFile
+    ///
+    /// &gt; **Note:** You can use this API to develop your Windows Store apps, but you can&#39;t use it in apps that you submit to the Windows Store.
+    /// &gt; Refer to the section, &quot;Compiling shaders for UWP&quot;, in the remarks for [compile2](Self::compile2).
+    ///
+    /// Compiles Microsoft High Level Shader Language (HLSL) code into bytecode for a given target.
+    ///
+    /// ### Arguments
+    /// *   `file_name`     - The shader file to compile
+    /// *   `defines`       - An optional array of defines.  Use [None] if no extra defines are desired.
+    /// *   `include`       - An optional interface for dispatching `#include`s.
+    ///                       Use [None] if `#include`s should not be supported.
+    ///                       Use [StandardFileInclude] if you want to resolve `#include`s relative to `source_name`.
+    /// *   `entrypoint`    - An optional entrypoint such as `Some(&quot;main&quot;)`.  Ignored if `target` is `fx_*`.
+    /// *   `target`        - A target shader profile such as `ps_3_0`, `vs_5_0`, `fx_4_0`, etc.
+    /// *   `flags1`        - [Compile]::\* constants.
+    /// *   `flags2`        - [CompileEffect]::\* constants.
+    ///
+    /// ### Errors
+    /// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_4?.dll` and earlier
+    /// *   [D3DERR::INVALIDCALL]           - on invalid parameters such as nonexistant `target`s
+    /// *   [E::FAIL]                       - if the shader failed to compile
+    ///
+    /// ### Examples
+    /// ```rust
+    /// # use thindx::d3d::*; let d3dc = Compiler::load_system(47).unwrap();
+    /// let pixel_shader = d3dc.compile_from_file(
+    ///     r&quot;test\data\basic.hlsl&quot;, None, None, &quot;ps_main&quot;, &quot;ps_4_0&quot;,
+    ///     Compile::Debug, CompileEffect::None,
+    /// ).unwrap();
+    ///
+    /// let vertex_shader = d3dc.compile_from_file(
+    ///     r&quot;test\data\basic.hlsl&quot;, None, StandardFileInclude, &quot;vs_main&quot;, &quot;vs_4_0&quot;,
+    ///     Compile::Debug, CompileEffect::None,
+    /// ).unwrap();
+    ///
+    /// // TODO: defines/includes examples
+    /// ```
+    ///
+    /// ### See Also
+    /// *   [examples::d3dcompiler_02_compile]
+    ///
+    /// ### Remarks
+    /// *   You can use this API to develop your Windows Store apps, but you can&#39;t use it in apps that you submit to the Windows Store.
+    </span><span class="comment">// /// *   This was introduced by d3dcompiler_47.dll, and is unavailable in earlier versions. // ?
+    </span><span class="kw">pub fn </span>compile_from_file(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">file_name</span>:      <span class="kw">impl</span> <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Path</span><span class="op">&gt;</span>,
-        <span class="ident">defines</span>:        <span class="kw">impl</span> <span class="ident">AsShaderMacros</span>,
-        <span class="ident">include</span>:        <span class="kw">impl</span> <span class="ident">AsInclude</span>,
-        <span class="ident">entrypoint</span>:     <span class="kw">impl</span> <span class="ident">TryIntoAsOptCStr</span>,
-        <span class="ident">target</span>:         <span class="kw">impl</span> <span class="ident">TryIntoAsCStr</span>,
-        <span class="ident">flags1</span>:         <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Compile</span><span class="op">&gt;</span>,
-        <span class="ident">flags2</span>:         <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">CompileEffect</span><span class="op">&gt;</span>,
-    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">CompileResult</span>, <span class="ident">CompileError</span><span class="op">&gt;</span> {
-        <span class="comment">// Early outs</span>
-        <span class="kw">let</span> <span class="ident">f</span>           <span class="op">=</span> <span class="self">self</span>.<span class="ident">D3DCompileFromFile</span>.<span class="ident">ok_or</span>(<span class="ident">MethodError</span>(<span class="string">&quot;D3DCompileFromFile&quot;</span>, <span class="ident">THINERR::MISSING_DLL_EXPORT</span>))<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">defines</span>     <span class="op">=</span> <span class="ident">defines</span>.<span class="ident">as_shader_macros</span>().<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="ident">MethodError::new</span>(<span class="string">&quot;D3DCompileFromFile&quot;</span>, <span class="ident">e</span>))<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">file_name</span>   <span class="op">=</span> <span class="ident">file_name</span>.<span class="ident">to_wcstr</span>(<span class="string">&quot;D3DCompileFromFile&quot;</span>)<span class="question-mark">?</span>;
+        file_name:      <span class="kw">impl </span>AsRef&lt;Path&gt;,
+        defines:        <span class="kw">impl </span>AsShaderMacros,
+        include:        <span class="kw">impl </span>AsInclude,
+        entrypoint:     <span class="kw">impl </span>TryIntoAsOptCStr,
+        target:         <span class="kw">impl </span>TryIntoAsCStr,
+        flags1:         <span class="kw">impl </span>Into&lt;Compile&gt;,
+        flags2:         <span class="kw">impl </span>Into&lt;CompileEffect&gt;,
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;CompileResult, CompileError&gt; {
+        <span class="comment">// Early outs
+        </span><span class="macro">fn_context_dll!</span>(d3d::Compiler::compile_from_file =&gt; <span class="self">self</span>.D3DCompileFromFile);
+        <span class="kw">let </span>defines     = defines.as_shader_macros().map_err(|e| <span class="macro">fn_param_error!</span>(defines,   e))<span class="question-mark">?</span>;
+        <span class="kw">let </span>file_name   = file_name.to_wcstr()      .map_err(|e| <span class="macro">fn_param_error!</span>(file_name, e))<span class="question-mark">?</span>;
 
-        <span class="kw">let</span> <span class="ident">entrypoint</span>  <span class="op">=</span> <span class="ident">entrypoint</span>.<span class="ident">try_into</span>().<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="ident">MethodError::new</span>(<span class="string">&quot;D3DCompileFromFile&quot;</span>, <span class="ident">e</span>))<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">target</span>      <span class="op">=</span> <span class="ident">target</span>    .<span class="ident">try_into</span>().<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="ident">MethodError::new</span>(<span class="string">&quot;D3DCompileFromFile&quot;</span>, <span class="ident">e</span>))<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">entrypoint</span>  <span class="op">=</span> <span class="ident">entrypoint</span>.<span class="ident">as_opt_cstr</span>();
-        <span class="kw">let</span> <span class="ident">target</span>      <span class="op">=</span> <span class="ident">target</span>    .<span class="ident">as_cstr</span>();
+        <span class="kw">let </span>entrypoint  = <span class="macro">fn_param_try_into!</span>(entrypoint)<span class="question-mark">?</span>;
+        <span class="kw">let </span>target      = <span class="macro">fn_param_try_into!</span>(target)<span class="question-mark">?</span>;
+        <span class="kw">let </span>entrypoint  = entrypoint.as_opt_cstr();
+        <span class="kw">let </span>target      = target    .as_cstr();
 
-        <span class="kw">let</span> <span class="ident">include</span>     <span class="op">=</span> <span class="ident">include</span>.<span class="ident">as_id3dinclude</span>();
-        <span class="kw">let</span> <span class="ident">flags1</span>      <span class="op">=</span> <span class="ident">flags1</span>.<span class="ident">into</span>().<span class="ident">into</span>();
-        <span class="kw">let</span> <span class="ident">flags2</span>      <span class="op">=</span> <span class="ident">flags2</span>.<span class="ident">into</span>().<span class="ident">into</span>();
+        <span class="kw">let </span>include     = include.as_id3dinclude();
+        <span class="kw">let </span>flags1      = flags1.into().into();
+        <span class="kw">let </span>flags2      = flags2.into().into();
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">shader</span> <span class="op">=</span> <span class="ident">null_mut</span>();
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">errors</span> <span class="op">=</span> <span class="ident">null_mut</span>();
+        <span class="kw">let </span><span class="kw-2">mut </span>shader = null_mut();
+        <span class="kw">let </span><span class="kw-2">mut </span>errors = null_mut();
 
-        <span class="comment">// SAFETY: ❌ needs fuzz testing for alloc overflows</span>
-        <span class="comment">//  * `f`           ✔️ should be a valid/sound fn, like all of `self.*`</span>
-        <span class="comment">//  * `file_name`   ⚠️ huge name could cause alloc overflows... but probably causes file not found errors first?</span>
-        <span class="comment">//  * `defines`     ❌ huge defines could forkbomb and cause alloc overflows?</span>
-        <span class="comment">//  * `include`     ✔️ D3DPreprocess is documented to accept D3D_COMPILE_STANDARD_FILE_INCLUDE, which isn&#39;t really a ID3DInclude, as allowed by AsInclude</span>
-        <span class="comment">//  * `include`     ❌ huge source files could cause alloc overflows in final shader text blob?</span>
-        <span class="comment">//  * `entrypoint`  ❌ huge name could cause alloc overflows</span>
-        <span class="comment">//  * `target`      ⚠️ could be invalid... probably won&#39;t cause alloc overflows?</span>
-        <span class="comment">//  * `flags1`      ⚠️ could be invalid</span>
-        <span class="comment">//  * `flags2`      ⚠️ could be invalid</span>
-        <span class="comment">//  * `shader`      ✔️ is a trivial out parameter</span>
-        <span class="comment">//  * `errors`      ✔️ is a trivial out parameter</span>
-        <span class="kw">let</span> <span class="ident">hr</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="ident">f</span>(
-            <span class="ident">file_name</span>.<span class="ident">as_ptr</span>(),
-            <span class="ident">defines</span>, <span class="ident">include</span>, <span class="ident">entrypoint</span>, <span class="ident">target</span>,
-            <span class="ident">flags1</span>, <span class="ident">flags2</span>, <span class="kw-2">&amp;mut</span> <span class="ident">shader</span>, <span class="kw-2">&amp;mut</span> <span class="ident">errors</span>,
+        <span class="comment">// SAFETY: ❌ needs fuzz testing for alloc overflows
+        //  * `f`           ✔️ should be a valid/sound fn, like all of `self.*`
+        //  * `file_name`   ⚠️ huge name could cause alloc overflows... but probably causes file not found errors first?
+        //  * `defines`     ❌ huge defines could forkbomb and cause alloc overflows?
+        //  * `include`     ✔️ D3DPreprocess is documented to accept D3D_COMPILE_STANDARD_FILE_INCLUDE, which isn&#39;t really a ID3DInclude, as allowed by AsInclude
+        //  * `include`     ❌ huge source files could cause alloc overflows in final shader text blob?
+        //  * `entrypoint`  ❌ huge name could cause alloc overflows
+        //  * `target`      ⚠️ could be invalid... probably won&#39;t cause alloc overflows?
+        //  * `flags1`      ⚠️ could be invalid
+        //  * `flags2`      ⚠️ could be invalid
+        //  * `shader`      ✔️ is a trivial out parameter
+        //  * `errors`      ✔️ is a trivial out parameter
+        </span><span class="kw">let </span>hr = <span class="kw">unsafe </span>{ D3DCompileFromFile(
+            file_name.as_ptr(),
+            defines, include, entrypoint, target,
+            flags1, flags2, <span class="kw-2">&amp;mut </span>shader, <span class="kw-2">&amp;mut </span>errors,
         )};
 
-        <span class="comment">// SAFETY: ✔️</span>
-        <span class="comment">//  * `shader` &amp; `errors`   ✔️ are either null (from_raw_opt returns None), or valid, non-dangling, unowned, ID3DBlob s (from_raw_opt takes ownership)</span>
-        <span class="comment">//  * `ReadOnlyBlob`        ✔️ imposes no restrictions on the contents of the blob</span>
-        <span class="comment">//  * `CodeBlob`            ⚠️ requires the contents of `shader` to be valid bytecode.  It should be...</span>
-        <span class="kw">let</span> <span class="ident">shader</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="ident">ReadOnlyBlob::from_raw_opt</span>(<span class="ident">shader</span>).<span class="ident">map</span>(<span class="op">|</span><span class="ident">shader</span><span class="op">|</span> <span class="ident">CodeBlob::from_unchecked</span>(<span class="ident">shader</span>)) };
-        <span class="kw">let</span> <span class="ident">errors</span> <span class="op">=</span> <span class="ident">TextBlob::new</span>(<span class="kw unsafe">unsafe</span> { <span class="ident">ReadOnlyBlob::from_raw_opt</span>(<span class="ident">errors</span>) });
+        <span class="comment">// SAFETY: ✔️
+        //  * `shader` &amp; `errors`   ✔️ are either null (from_raw_opt returns None), or valid, non-dangling, unowned, ID3DBlob s (from_raw_opt takes ownership)
+        //  * `ReadOnlyBlob`        ✔️ imposes no restrictions on the contents of the blob
+        //  * `CodeBlob`            ⚠️ requires the contents of `shader` to be valid bytecode.  It should be...
+        </span><span class="kw">let </span>shader = <span class="kw">unsafe </span>{ ReadOnlyBlob::from_raw_opt(shader).map(|shader| CodeBlob::from_unchecked(shader)) };
+        <span class="kw">let </span>errors = TextBlob::new(<span class="kw">unsafe </span>{ ReadOnlyBlob::from_raw_opt(errors) });
 
-        <span class="kw">match</span> <span class="ident">ErrorKind::check</span>(<span class="ident">hr</span>) {
-            <span class="prelude-val">Ok</span>(())      =&gt; <span class="prelude-val">Ok</span>(<span class="ident">CompileResult</span> { <span class="ident">shader</span>: <span class="ident">shader</span>.<span class="ident">unwrap</span>(), <span class="ident">errors</span> }),
-            <span class="prelude-val">Err</span>(<span class="ident">kind</span>)   =&gt; <span class="prelude-val">Err</span>(<span class="ident">CompileError</span> { <span class="ident">kind</span>, <span class="ident">method</span>: <span class="prelude-val">Some</span>(<span class="string">&quot;D3DCompileFromFile&quot;</span>), <span class="ident">shader</span>, <span class="ident">errors</span> }),
+        <span class="kw">match </span><span class="macro">fn_check_hr!</span>(hr) {
+            <span class="prelude-val">Ok</span>(())      =&gt; <span class="prelude-val">Ok</span>(CompileResult { shader: shader.unwrap(), errors }),
+            <span class="prelude-val">Err</span>(error)  =&gt; <span class="prelude-val">Err</span>(CompileError { error, shader, errors }),
         }
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dcompile)\]</span>
-    <span class="doccomment">/// D3DCompile</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Compile HLSL code or an effect file into bytecode for a given target.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Arguments</span>
-    <span class="doccomment">/// *   `src_data`      - The shader source code</span>
-    <span class="doccomment">/// *   `source_name`   - An optional shader name such as `Some(&quot;myshader.hlsl&quot;)` for debug purpouses.</span>
-    <span class="doccomment">/// *   `defines`       - An optional array of defines.  Use [None] if no extra defines are desired.</span>
-    <span class="doccomment">/// *   `include`       - An optional interface for dispatching `#include`s.</span>
-    <span class="doccomment">///                       Use [None] if `#include`s should not be supported.</span>
-    <span class="doccomment">///                       Use [StandardFileInclude] if you want to resolve `#include`s relative to `source_name`.</span>
-    <span class="doccomment">/// *   `entrypoint`    - An optional entrypoint such as `Some(&quot;main&quot;)`.  Ignored if `target` is `fx_*`.</span>
-    <span class="doccomment">/// *   `target`        - A target shader profile such as `ps_3_0`, `vs_5_0`, `fx_4_0`, etc.</span>
-    <span class="doccomment">/// *   `flags1`        - [Compile]::\* constants.</span>
-    <span class="doccomment">/// *   `flags2`        - [CompileEffect]::\* constants.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Errors</span>
-    <span class="doccomment">/// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_39.dll` and earlier</span>
-    <span class="doccomment">/// *   [D3DERR::INVALIDCALL]           - on invalid parameters such as nonexistant `target`s</span>
-    <span class="doccomment">/// *   [E::FAIL]                       - if the shader failed to compile</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Examples</span>
-    <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// # use thindx::d3d::*; let d3dc = Compiler::load_system(47).unwrap();</span>
-    <span class="doccomment">/// let basic_hlsl = std::fs::read(r&quot;test\data\basic.hlsl&quot;).unwrap();</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// let pixel_shader = d3dc.compile(</span>
-    <span class="doccomment">///     &amp;basic_hlsl, r&quot;test\data\basic.hlsl&quot;, None, None, &quot;ps_main&quot;, &quot;ps_4_0&quot;,</span>
-    <span class="doccomment">///     Compile::Debug, CompileEffect::None,</span>
-    <span class="doccomment">/// ).unwrap();</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// let vertex_shader = d3dc.compile(</span>
-    <span class="doccomment">///     &amp;basic_hlsl, r&quot;test\data\basic.hlsl&quot;, None, None, &quot;vs_main&quot;, &quot;vs_4_0&quot;,</span>
-    <span class="doccomment">///     Compile::Debug, CompileEffect::None,</span>
-    <span class="doccomment">/// ).unwrap();</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### See Also</span>
-    <span class="doccomment">/// *   [examples::d3dcompiler_02_compile]</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Remarks</span>
-    <span class="doccomment">/// *   This was introduced by d3dcompiler_40.dll, and is unavailable in earlier versions.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">compile</span>(
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dcompile)\]
+    /// D3DCompile
+    ///
+    /// Compile HLSL code or an effect file into bytecode for a given target.
+    ///
+    /// ### Arguments
+    /// *   `src_data`      - The shader source code
+    /// *   `source_name`   - An optional shader name such as `Some(&quot;myshader.hlsl&quot;)` for debug purpouses.
+    /// *   `defines`       - An optional array of defines.  Use [None] if no extra defines are desired.
+    /// *   `include`       - An optional interface for dispatching `#include`s.
+    ///                       Use [None] if `#include`s should not be supported.
+    ///                       Use [StandardFileInclude] if you want to resolve `#include`s relative to `source_name`.
+    /// *   `entrypoint`    - An optional entrypoint such as `Some(&quot;main&quot;)`.  Ignored if `target` is `fx_*`.
+    /// *   `target`        - A target shader profile such as `ps_3_0`, `vs_5_0`, `fx_4_0`, etc.
+    /// *   `flags1`        - [Compile]::\* constants.
+    /// *   `flags2`        - [CompileEffect]::\* constants.
+    ///
+    /// ### Errors
+    /// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_39.dll` and earlier
+    /// *   [D3DERR::INVALIDCALL]           - on invalid parameters such as nonexistant `target`s
+    /// *   [E::FAIL]                       - if the shader failed to compile
+    ///
+    /// ### Examples
+    /// ```rust
+    /// # use thindx::d3d::*; let d3dc = Compiler::load_system(47).unwrap();
+    /// let basic_hlsl = std::fs::read(r&quot;test\data\basic.hlsl&quot;).unwrap();
+    ///
+    /// let pixel_shader = d3dc.compile(
+    ///     &amp;basic_hlsl, r&quot;test\data\basic.hlsl&quot;, None, None, &quot;ps_main&quot;, &quot;ps_4_0&quot;,
+    ///     Compile::Debug, CompileEffect::None,
+    /// ).unwrap();
+    ///
+    /// let vertex_shader = d3dc.compile(
+    ///     &amp;basic_hlsl, r&quot;test\data\basic.hlsl&quot;, None, None, &quot;vs_main&quot;, &quot;vs_4_0&quot;,
+    ///     Compile::Debug, CompileEffect::None,
+    /// ).unwrap();
+    /// ```
+    ///
+    /// ### See Also
+    /// *   [examples::d3dcompiler_02_compile]
+    ///
+    /// ### Remarks
+    /// *   This was introduced by d3dcompiler_40.dll, and is unavailable in earlier versions.
+    </span><span class="kw">pub fn </span>compile(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">src_data</span>:       <span class="kw">impl</span> <span class="ident">AsRef</span><span class="op">&lt;</span>[<span class="ident">u8</span>]<span class="op">&gt;</span>,
-        <span class="ident">source_name</span>:    <span class="kw">impl</span> <span class="ident">TryIntoAsOptCStr</span>,
-        <span class="ident">defines</span>:        <span class="kw">impl</span> <span class="ident">AsShaderMacros</span>,
-        <span class="ident">include</span>:        <span class="kw">impl</span> <span class="ident">AsInclude</span>,
-        <span class="ident">entrypoint</span>:     <span class="kw">impl</span> <span class="ident">TryIntoAsOptCStr</span>,
-        <span class="ident">target</span>:         <span class="kw">impl</span> <span class="ident">TryIntoAsCStr</span>,
-        <span class="ident">flags1</span>:         <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Compile</span><span class="op">&gt;</span>,
-        <span class="ident">flags2</span>:         <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">CompileEffect</span><span class="op">&gt;</span>,
-    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">CompileResult</span>, <span class="ident">CompileError</span><span class="op">&gt;</span> {
-        <span class="comment">// Early outs</span>
-        <span class="kw">let</span> <span class="ident">f</span>           <span class="op">=</span> <span class="self">self</span>.<span class="ident">D3DCompile</span>.<span class="ident">ok_or</span>(<span class="ident">MethodError</span>(<span class="string">&quot;D3DCompile&quot;</span>, <span class="ident">THINERR::MISSING_DLL_EXPORT</span>))<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">defines</span>     <span class="op">=</span> <span class="ident">defines</span>.<span class="ident">as_shader_macros</span>().<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="ident">MethodError::new</span>(<span class="string">&quot;D3DCompile&quot;</span>, <span class="ident">e</span>))<span class="question-mark">?</span>;
+        src_data:       <span class="kw">impl </span>AsRef&lt;[u8]&gt;,
+        source_name:    <span class="kw">impl </span>TryIntoAsOptCStr,
+        defines:        <span class="kw">impl </span>AsShaderMacros,
+        include:        <span class="kw">impl </span>AsInclude,
+        entrypoint:     <span class="kw">impl </span>TryIntoAsOptCStr,
+        target:         <span class="kw">impl </span>TryIntoAsCStr,
+        flags1:         <span class="kw">impl </span>Into&lt;Compile&gt;,
+        flags2:         <span class="kw">impl </span>Into&lt;CompileEffect&gt;,
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;CompileResult, CompileError&gt; {
+        <span class="comment">// Early outs
+        </span><span class="macro">fn_context_dll!</span>(d3d::Compiler::compile =&gt; <span class="self">self</span>.D3DCompile);
+        <span class="kw">let </span>defines     = defines.as_shader_macros().map_err(|e| <span class="macro">fn_param_error!</span>(defines, e))<span class="question-mark">?</span>;
 
-        <span class="kw">let</span> <span class="ident">src_data</span>    <span class="op">=</span> <span class="ident">src_data</span>.<span class="ident">as_ref</span>();
-        <span class="comment">// Note: No error checking occurs for internal `\0`s - they will simply terminate the string earlier than expected.</span>
-        <span class="comment">// Note: We should perhaps reject non-ASCII values instead of allowing UTF8</span>
-        <span class="kw">let</span> <span class="ident">source_name</span> <span class="op">=</span> <span class="ident">source_name</span>   .<span class="ident">try_into</span>().<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="ident">MethodError::new</span>(<span class="string">&quot;D3DCompile&quot;</span>, <span class="ident">e</span>))<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">entrypoint</span>  <span class="op">=</span> <span class="ident">entrypoint</span>    .<span class="ident">try_into</span>().<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="ident">MethodError::new</span>(<span class="string">&quot;D3DCompile&quot;</span>, <span class="ident">e</span>))<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">target</span>      <span class="op">=</span> <span class="ident">target</span>        .<span class="ident">try_into</span>().<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="ident">MethodError::new</span>(<span class="string">&quot;D3DCompile&quot;</span>, <span class="ident">e</span>))<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">source_name</span> <span class="op">=</span> <span class="ident">source_name</span>   .<span class="ident">as_opt_cstr</span>();
-        <span class="kw">let</span> <span class="ident">entrypoint</span>  <span class="op">=</span> <span class="ident">entrypoint</span>    .<span class="ident">as_opt_cstr</span>();
-        <span class="kw">let</span> <span class="ident">target</span>      <span class="op">=</span> <span class="ident">target</span>        .<span class="ident">as_cstr</span>();
+        <span class="kw">let </span>src_data    = src_data.as_ref();
+        <span class="comment">// Note: No error checking occurs for internal `\0`s - they will simply terminate the string earlier than expected.
+        // Note: We should perhaps reject non-ASCII values instead of allowing UTF8
+        </span><span class="kw">let </span>source_name = <span class="macro">fn_param_try_into!</span>(source_name)<span class="question-mark">?</span>;
+        <span class="kw">let </span>entrypoint  = <span class="macro">fn_param_try_into!</span>(entrypoint)<span class="question-mark">?</span>;
+        <span class="kw">let </span>target      = <span class="macro">fn_param_try_into!</span>(target)<span class="question-mark">?</span>;
+        <span class="kw">let </span>source_name = source_name   .as_opt_cstr();
+        <span class="kw">let </span>entrypoint  = entrypoint    .as_opt_cstr();
+        <span class="kw">let </span>target      = target        .as_cstr();
 
-        <span class="kw">let</span> <span class="ident">include</span>     <span class="op">=</span> <span class="ident">include</span>.<span class="ident">as_id3dinclude</span>();
-        <span class="kw">let</span> <span class="ident">flags1</span>      <span class="op">=</span> <span class="ident">flags1</span>.<span class="ident">into</span>().<span class="ident">into</span>();
-        <span class="kw">let</span> <span class="ident">flags2</span>      <span class="op">=</span> <span class="ident">flags2</span>.<span class="ident">into</span>().<span class="ident">into</span>();
+        <span class="kw">let </span>include     = include.as_id3dinclude();
+        <span class="kw">let </span>flags1      = flags1.into().into();
+        <span class="kw">let </span>flags2      = flags2.into().into();
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">shader</span> <span class="op">=</span> <span class="ident">null_mut</span>();
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">errors</span> <span class="op">=</span> <span class="ident">null_mut</span>();
+        <span class="kw">let </span><span class="kw-2">mut </span>shader = null_mut();
+        <span class="kw">let </span><span class="kw-2">mut </span>errors = null_mut();
 
-        <span class="comment">// SAFETY: ❌ needs fuzz testing for alloc overflows</span>
-        <span class="comment">//  * `f`           ✔️ should be a valid/sound fn, like all of `self.*`</span>
-        <span class="comment">//  * `src_data`    ⚠️ should be HLSL to preprocess... but D3DCompile2 should probably be fairly tolerant of invalid as heck data?</span>
-        <span class="comment">//  * `source_name` ❌ huge name could cause alloc overflows</span>
-        <span class="comment">//  * `defines`     ❌ huge defines could forkbomb and cause alloc overflows?</span>
-        <span class="comment">//  * `include`     ✔️ D3DPreprocess is documented to accept D3D_COMPILE_STANDARD_FILE_INCLUDE, which isn&#39;t really a ID3DInclude, as allowed by AsInclude</span>
-        <span class="comment">//  * `include`     ❌ huge source files could cause alloc overflows in final shader text blob?</span>
-        <span class="comment">//  * `entrypoint`  ❌ huge name could cause alloc overflows</span>
-        <span class="comment">//  * `target`      ⚠️ could be invalid... probably won&#39;t cause alloc overflows?</span>
-        <span class="comment">//  * `flags1`      ⚠️ could be invalid</span>
-        <span class="comment">//  * `flags2`      ⚠️ could be invalid</span>
-        <span class="comment">//  * `shader`      ✔️ is a trivial out parameter</span>
-        <span class="comment">//  * `errors`      ✔️ is a trivial out parameter</span>
-        <span class="kw">let</span> <span class="ident">hr</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="ident">f</span>(
-            <span class="ident">src_data</span>.<span class="ident">as_ptr</span>().<span class="ident">cast</span>(), <span class="ident">src_data</span>.<span class="ident">len</span>(),
-            <span class="ident">source_name</span>, <span class="ident">defines</span>, <span class="ident">include</span>, <span class="ident">entrypoint</span>, <span class="ident">target</span>,
-            <span class="ident">flags1</span>, <span class="ident">flags2</span>, <span class="kw-2">&amp;mut</span> <span class="ident">shader</span>, <span class="kw-2">&amp;mut</span> <span class="ident">errors</span>,
+        <span class="comment">// SAFETY: ❌ needs fuzz testing for alloc overflows
+        //  * `f`           ✔️ should be a valid/sound fn, like all of `self.*`
+        //  * `src_data`    ⚠️ should be HLSL to preprocess... but D3DCompile2 should probably be fairly tolerant of invalid as heck data?
+        //  * `source_name` ❌ huge name could cause alloc overflows
+        //  * `defines`     ❌ huge defines could forkbomb and cause alloc overflows?
+        //  * `include`     ✔️ D3DPreprocess is documented to accept D3D_COMPILE_STANDARD_FILE_INCLUDE, which isn&#39;t really a ID3DInclude, as allowed by AsInclude
+        //  * `include`     ❌ huge source files could cause alloc overflows in final shader text blob?
+        //  * `entrypoint`  ❌ huge name could cause alloc overflows
+        //  * `target`      ⚠️ could be invalid... probably won&#39;t cause alloc overflows?
+        //  * `flags1`      ⚠️ could be invalid
+        //  * `flags2`      ⚠️ could be invalid
+        //  * `shader`      ✔️ is a trivial out parameter
+        //  * `errors`      ✔️ is a trivial out parameter
+        </span><span class="kw">let </span>hr = <span class="kw">unsafe </span>{ D3DCompile(
+            src_data.as_ptr().cast(), src_data.len(),
+            source_name, defines, include, entrypoint, target,
+            flags1, flags2, <span class="kw-2">&amp;mut </span>shader, <span class="kw-2">&amp;mut </span>errors,
         )};
 
-        <span class="comment">// SAFETY: ✔️</span>
-        <span class="comment">//  * `shader` &amp; `errors`   ✔️ are either null (from_raw_opt returns None), or valid, non-dangling, unowned, ID3DBlob s (from_raw_opt takes ownership)</span>
-        <span class="comment">//  * `ReadOnlyBlob`        ✔️ imposes no restrictions on the contents of the blob</span>
-        <span class="comment">//  * `CodeBlob`            ⚠️ requires the contents of `shader` to be valid bytecode.  It should be...</span>
-        <span class="kw">let</span> <span class="ident">shader</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="ident">ReadOnlyBlob::from_raw_opt</span>(<span class="ident">shader</span>).<span class="ident">map</span>(<span class="op">|</span><span class="ident">shader</span><span class="op">|</span> <span class="ident">CodeBlob::from_unchecked</span>(<span class="ident">shader</span>)) };
-        <span class="kw">let</span> <span class="ident">errors</span> <span class="op">=</span> <span class="ident">TextBlob::new</span>(<span class="kw unsafe">unsafe</span> { <span class="ident">ReadOnlyBlob::from_raw_opt</span>(<span class="ident">errors</span>) });
+        <span class="comment">// SAFETY: ✔️
+        //  * `shader` &amp; `errors`   ✔️ are either null (from_raw_opt returns None), or valid, non-dangling, unowned, ID3DBlob s (from_raw_opt takes ownership)
+        //  * `ReadOnlyBlob`        ✔️ imposes no restrictions on the contents of the blob
+        //  * `CodeBlob`            ⚠️ requires the contents of `shader` to be valid bytecode.  It should be...
+        </span><span class="kw">let </span>shader = <span class="kw">unsafe </span>{ ReadOnlyBlob::from_raw_opt(shader).map(|shader| CodeBlob::from_unchecked(shader)) };
+        <span class="kw">let </span>errors = TextBlob::new(<span class="kw">unsafe </span>{ ReadOnlyBlob::from_raw_opt(errors) });
 
-        <span class="kw">match</span> <span class="ident">ErrorKind::check</span>(<span class="ident">hr</span>) {
-            <span class="prelude-val">Ok</span>(())      =&gt; <span class="prelude-val">Ok</span>(<span class="ident">CompileResult</span> { <span class="ident">shader</span>: <span class="ident">shader</span>.<span class="ident">unwrap</span>(), <span class="ident">errors</span> }),
-            <span class="prelude-val">Err</span>(<span class="ident">kind</span>)   =&gt; <span class="prelude-val">Err</span>(<span class="ident">CompileError</span> { <span class="ident">kind</span>, <span class="ident">method</span>: <span class="prelude-val">Some</span>(<span class="string">&quot;D3DCompile&quot;</span>), <span class="ident">shader</span>, <span class="ident">errors</span> }),
+        <span class="kw">match </span><span class="macro">fn_check_hr!</span>(hr) {
+            <span class="prelude-val">Ok</span>(())      =&gt; <span class="prelude-val">Ok</span>(CompileResult { shader: shader.unwrap(), errors }),
+            <span class="prelude-val">Err</span>(error)  =&gt; <span class="prelude-val">Err</span>(CompileError { error, shader, errors }),
         }
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dcompile2)\]</span>
-    <span class="doccomment">/// D3DCompile2</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Compiles Microsoft High Level Shader Language (HLSL) code into bytecode for a given target.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Arguments</span>
-    <span class="doccomment">/// *   `src_data`      - The shader source code</span>
-    <span class="doccomment">/// *   `source_name`   - An optional shader name such as `Some(&quot;myshader.hlsl&quot;)` for debug purpouses.</span>
-    <span class="doccomment">/// *   `defines`       - An optional array of defines.  Use [None] if no extra defines are desired.</span>
-    <span class="doccomment">/// *   `include`       - An optional interface for dispatching `#include`s.</span>
-    <span class="doccomment">///                       Use [None] if `#include`s should not be supported.</span>
-    <span class="doccomment">///                       Use [StandardFileInclude] if you want to resolve `#include`s relative to `source_name`.</span>
-    <span class="doccomment">/// *   `entrypoint`    - An optional entrypoint such as `Some(&quot;vs_main&quot;)`.  Ignored if `target` is `&quot;fx_*&quot;`.</span>
-    <span class="doccomment">/// *   `target`        - A target shader profile such as `Some(&quot;ps_3_0&quot;)`, `Some(&quot;vs_5_0&quot;)`, `Some(&quot;fx_4_0&quot;)`, etc.</span>
-    <span class="doccomment">/// *   `flags1`        - [Compile]::\* constants.</span>
-    <span class="doccomment">/// *   `flags2`        - [CompileEffect]::\* constants.</span>
-    <span class="doccomment">/// *   `secondary_data_flags`  - [CompileSecData]::\* constants.</span>
-    <span class="doccomment">/// *   `secondary_data`    - A pointer to secondary data. If you don&#39;t pass secondary data, set to [None].</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Errors</span>
-    <span class="doccomment">/// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_4?.dll` and earlier</span>
-    <span class="doccomment">/// *   [D3DERR::INVALIDCALL]           - on invalid parameters such as nonexistant `target`s</span>
-    <span class="doccomment">/// *   [E::FAIL]                       - if the shader failed to compile</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Examples</span>
-    <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// # use thindx::d3d::*; let d3dc = Compiler::load_system(47).unwrap();</span>
-    <span class="doccomment">/// let basic_hlsl = std::fs::read(r&quot;test\data\basic.hlsl&quot;).unwrap();</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// let pixel_shader = d3dc.compile2(</span>
-    <span class="doccomment">///     &amp;basic_hlsl, r&quot;test\data\basic.hlsl&quot;, None, None, &quot;ps_main&quot;, &quot;ps_4_0&quot;,</span>
-    <span class="doccomment">///     Compile::Debug, CompileEffect::None, CompileSecData::None, None,</span>
-    <span class="doccomment">/// ).unwrap();</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// let vertex_shader = d3dc.compile2(</span>
-    <span class="doccomment">///     &amp;basic_hlsl, r&quot;test\data\basic.hlsl&quot;, None, None, &quot;vs_main&quot;, &quot;vs_4_0&quot;,</span>
-    <span class="doccomment">///     Compile::Debug, CompileEffect::None, CompileSecData::None, None,</span>
-    <span class="doccomment">/// ).unwrap();</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### See Also</span>
-    <span class="doccomment">/// *   [examples::d3dcompiler_02_compile]</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Remarks</span>
-    <span class="doccomment">/// The difference between [compile2](Self::compile2) and [compile](Self::compile) is that [compile2](Self::compile2)</span>
-    <span class="doccomment">/// takes some optional parameters (`secondary_data_flags` and `secondary_data`) that can be used to control some</span>
-    <span class="doccomment">/// aspects of how bytecode is generated.  Refer to the descriptions of these parameters for more details. There is</span>
-    <span class="doccomment">/// no difference otherwise to the efficiency of the bytecode generated between [compile2](Self::compile2) and</span>
-    <span class="doccomment">/// [compile](Self::compile).</span>
-    <span class="comment">// #[requires(d3dcompiler=47)] // ?</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">compile2</span><span class="op">&lt;</span><span class="lifetime">&#39;s</span><span class="op">&gt;</span>(
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dcompile2)\]
+    /// D3DCompile2
+    ///
+    /// Compiles Microsoft High Level Shader Language (HLSL) code into bytecode for a given target.
+    ///
+    /// ### Arguments
+    /// *   `src_data`      - The shader source code
+    /// *   `source_name`   - An optional shader name such as `Some(&quot;myshader.hlsl&quot;)` for debug purpouses.
+    /// *   `defines`       - An optional array of defines.  Use [None] if no extra defines are desired.
+    /// *   `include`       - An optional interface for dispatching `#include`s.
+    ///                       Use [None] if `#include`s should not be supported.
+    ///                       Use [StandardFileInclude] if you want to resolve `#include`s relative to `source_name`.
+    /// *   `entrypoint`    - An optional entrypoint such as `Some(&quot;vs_main&quot;)`.  Ignored if `target` is `&quot;fx_*&quot;`.
+    /// *   `target`        - A target shader profile such as `Some(&quot;ps_3_0&quot;)`, `Some(&quot;vs_5_0&quot;)`, `Some(&quot;fx_4_0&quot;)`, etc.
+    /// *   `flags1`        - [Compile]::\* constants.
+    /// *   `flags2`        - [CompileEffect]::\* constants.
+    /// *   `secondary_data_flags`  - [CompileSecData]::\* constants.
+    /// *   `secondary_data`    - A pointer to secondary data. If you don&#39;t pass secondary data, set to [None].
+    ///
+    /// ### Errors
+    /// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_4?.dll` and earlier
+    /// *   [D3DERR::INVALIDCALL]           - on invalid parameters such as nonexistant `target`s
+    /// *   [E::FAIL]                       - if the shader failed to compile
+    ///
+    /// ### Examples
+    /// ```rust
+    /// # use thindx::d3d::*; let d3dc = Compiler::load_system(47).unwrap();
+    /// let basic_hlsl = std::fs::read(r&quot;test\data\basic.hlsl&quot;).unwrap();
+    ///
+    /// let pixel_shader = d3dc.compile2(
+    ///     &amp;basic_hlsl, r&quot;test\data\basic.hlsl&quot;, None, None, &quot;ps_main&quot;, &quot;ps_4_0&quot;,
+    ///     Compile::Debug, CompileEffect::None, CompileSecData::None, None,
+    /// ).unwrap();
+    ///
+    /// let vertex_shader = d3dc.compile2(
+    ///     &amp;basic_hlsl, r&quot;test\data\basic.hlsl&quot;, None, None, &quot;vs_main&quot;, &quot;vs_4_0&quot;,
+    ///     Compile::Debug, CompileEffect::None, CompileSecData::None, None,
+    /// ).unwrap();
+    /// ```
+    ///
+    /// ### See Also
+    /// *   [examples::d3dcompiler_02_compile]
+    ///
+    /// ### Remarks
+    /// The difference between [compile2](Self::compile2) and [compile](Self::compile) is that [compile2](Self::compile2)
+    /// takes some optional parameters (`secondary_data_flags` and `secondary_data`) that can be used to control some
+    /// aspects of how bytecode is generated.  Refer to the descriptions of these parameters for more details. There is
+    /// no difference otherwise to the efficiency of the bytecode generated between [compile2](Self::compile2) and
+    /// [compile](Self::compile).
+    </span><span class="comment">// #[requires(d3dcompiler=47)] // ?
+    </span><span class="kw">pub fn </span>compile2&lt;<span class="lifetime">&#39;s</span>&gt;(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">src_data</span>:               <span class="kw">impl</span> <span class="ident">AsRef</span><span class="op">&lt;</span>[<span class="ident">u8</span>]<span class="op">&gt;</span>,
-        <span class="ident">source_name</span>:            <span class="kw">impl</span> <span class="ident">TryIntoAsOptCStr</span>,
-        <span class="ident">defines</span>:                <span class="kw">impl</span> <span class="ident">AsShaderMacros</span>,
-        <span class="ident">include</span>:                <span class="kw">impl</span> <span class="ident">AsInclude</span>,
-        <span class="ident">entrypoint</span>:             <span class="kw">impl</span> <span class="ident">TryIntoAsOptCStr</span>,
-        <span class="ident">target</span>:                 <span class="kw">impl</span> <span class="ident">TryIntoAsCStr</span>,
-        <span class="ident">flags1</span>:                 <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Compile</span><span class="op">&gt;</span>,
-        <span class="ident">flags2</span>:                 <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">CompileEffect</span><span class="op">&gt;</span>,
-        <span class="ident">secondary_data_flags</span>:   <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">CompileSecData</span><span class="op">&gt;</span>,
-        <span class="ident">secondary_data</span>:         <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;s</span> [<span class="ident">u8</span>]<span class="op">&gt;</span><span class="op">&gt;</span>,
-    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">CompileResult</span>, <span class="ident">CompileError</span><span class="op">&gt;</span> {
-        <span class="comment">// Early outs</span>
-        <span class="kw">let</span> <span class="ident">f</span>           <span class="op">=</span> <span class="self">self</span>.<span class="ident">D3DCompile2</span>.<span class="ident">ok_or</span>(<span class="ident">MethodError</span>(<span class="string">&quot;D3DCompile2&quot;</span>, <span class="ident">THINERR::MISSING_DLL_EXPORT</span>))<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">defines</span>     <span class="op">=</span> <span class="ident">defines</span>.<span class="ident">as_shader_macros</span>().<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="ident">MethodError::new</span>(<span class="string">&quot;D3DCompile2&quot;</span>, <span class="ident">e</span>))<span class="question-mark">?</span>;
+        src_data:               <span class="kw">impl </span>AsRef&lt;[u8]&gt;,
+        source_name:            <span class="kw">impl </span>TryIntoAsOptCStr,
+        defines:                <span class="kw">impl </span>AsShaderMacros,
+        include:                <span class="kw">impl </span>AsInclude,
+        entrypoint:             <span class="kw">impl </span>TryIntoAsOptCStr,
+        target:                 <span class="kw">impl </span>TryIntoAsCStr,
+        flags1:                 <span class="kw">impl </span>Into&lt;Compile&gt;,
+        flags2:                 <span class="kw">impl </span>Into&lt;CompileEffect&gt;,
+        secondary_data_flags:   <span class="kw">impl </span>Into&lt;CompileSecData&gt;,
+        secondary_data:         <span class="kw">impl </span>Into&lt;<span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;s </span>[u8]&gt;&gt;,
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;CompileResult, CompileError&gt; {
+        <span class="comment">// Early outs
+        </span><span class="macro">fn_context_dll!</span>(d3d::Compiler::compile2 =&gt; <span class="self">self</span>.D3DCompile2);
+        <span class="kw">let </span>defines     = defines.as_shader_macros().map_err(|e| <span class="macro">fn_param_error!</span>(defines, e))<span class="question-mark">?</span>;
 
-        <span class="kw">let</span> <span class="ident">src_data</span>    <span class="op">=</span> <span class="ident">src_data</span>.<span class="ident">as_ref</span>();
-        <span class="comment">// Note: No error checking occurs for internal `\0`s - they will simply terminate the string earlier than expected.</span>
-        <span class="comment">// Note: We should perhaps reject non-ASCII values instead of allowing UTF8</span>
-        <span class="kw">let</span> <span class="ident">source_name</span> <span class="op">=</span> <span class="ident">source_name</span>   .<span class="ident">try_into</span>().<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="ident">MethodError::new</span>(<span class="string">&quot;D3DCompile2&quot;</span>, <span class="ident">e</span>))<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">entrypoint</span>  <span class="op">=</span> <span class="ident">entrypoint</span>    .<span class="ident">try_into</span>().<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="ident">MethodError::new</span>(<span class="string">&quot;D3DCompile2&quot;</span>, <span class="ident">e</span>))<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">target</span>      <span class="op">=</span> <span class="ident">target</span>        .<span class="ident">try_into</span>().<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="ident">MethodError::new</span>(<span class="string">&quot;D3DCompile2&quot;</span>, <span class="ident">e</span>))<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">source_name</span> <span class="op">=</span> <span class="ident">source_name</span>   .<span class="ident">as_opt_cstr</span>();
-        <span class="kw">let</span> <span class="ident">entrypoint</span>  <span class="op">=</span> <span class="ident">entrypoint</span>    .<span class="ident">as_opt_cstr</span>();
-        <span class="kw">let</span> <span class="ident">target</span>      <span class="op">=</span> <span class="ident">target</span>        .<span class="ident">as_cstr</span>();
+        <span class="kw">let </span>src_data    = src_data.as_ref();
+        <span class="comment">// Note: No error checking occurs for internal `\0`s - they will simply terminate the string earlier than expected.
+        // Note: We should perhaps reject non-ASCII values instead of allowing UTF8
+        </span><span class="kw">let </span>source_name = <span class="macro">fn_param_try_into!</span>(source_name)<span class="question-mark">?</span>;
+        <span class="kw">let </span>entrypoint  = <span class="macro">fn_param_try_into!</span>(entrypoint)<span class="question-mark">?</span>;
+        <span class="kw">let </span>target      = <span class="macro">fn_param_try_into!</span>(target)<span class="question-mark">?</span>;
+        <span class="kw">let </span>source_name = source_name   .as_opt_cstr();
+        <span class="kw">let </span>entrypoint  = entrypoint    .as_opt_cstr();
+        <span class="kw">let </span>target      = target        .as_cstr();
 
-        <span class="kw">let</span> <span class="ident">include</span>     <span class="op">=</span> <span class="ident">include</span>.<span class="ident">as_id3dinclude</span>();
-        <span class="kw">let</span> <span class="ident">flags1</span>      <span class="op">=</span> <span class="ident">flags1</span>.<span class="ident">into</span>().<span class="ident">into</span>();
-        <span class="kw">let</span> <span class="ident">flags2</span>      <span class="op">=</span> <span class="ident">flags2</span>.<span class="ident">into</span>().<span class="ident">into</span>();
-        <span class="kw">let</span> <span class="ident">secondary_data_flags</span> <span class="op">=</span> <span class="ident">secondary_data_flags</span>.<span class="ident">into</span>().<span class="ident">into</span>();
+        <span class="kw">let </span>include     = include.as_id3dinclude();
+        <span class="kw">let </span>flags1      = flags1.into().into();
+        <span class="kw">let </span>flags2      = flags2.into().into();
+        <span class="kw">let </span>secondary_data_flags = secondary_data_flags.into().into();
 
-        <span class="kw">let</span> <span class="ident">secondary_data</span>      <span class="op">=</span> <span class="ident">secondary_data</span>.<span class="ident">into</span>();
-        <span class="kw">let</span> <span class="ident">secondary_data_len</span>  <span class="op">=</span> <span class="ident">secondary_data</span>.<span class="ident">map_or</span>(<span class="number">0</span>, <span class="op">|</span><span class="ident">sd</span><span class="op">|</span> <span class="ident">sd</span>.<span class="ident">len</span>());
-        <span class="kw">let</span> <span class="ident">secondary_data</span>      <span class="op">=</span> <span class="ident">secondary_data</span>.<span class="ident">map_or</span>(<span class="ident">null</span>(), <span class="op">|</span><span class="ident">sd</span><span class="op">|</span> <span class="ident">sd</span>.<span class="ident">as_ptr</span>()).<span class="ident">cast</span>();
+        <span class="kw">let </span>secondary_data      = secondary_data.into();
+        <span class="kw">let </span>secondary_data_len  = secondary_data.map_or(<span class="number">0</span>, |sd| sd.len());
+        <span class="kw">let </span>secondary_data      = secondary_data.map_or(null(), |sd| sd.as_ptr()).cast();
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">shader</span> <span class="op">=</span> <span class="ident">null_mut</span>();
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">errors</span> <span class="op">=</span> <span class="ident">null_mut</span>();
+        <span class="kw">let </span><span class="kw-2">mut </span>shader = null_mut();
+        <span class="kw">let </span><span class="kw-2">mut </span>errors = null_mut();
 
-        <span class="comment">// SAFETY: ❌ needs fuzz testing for alloc overflows</span>
-        <span class="comment">//  * `f`                       ✔️ should be a valid/sound fn, like all of `self.*`</span>
-        <span class="comment">//  * `src_data`                ⚠️ should be HLSL to preprocess... but D3DCompile2 should probably be fairly tolerant of invalid as heck data?</span>
-        <span class="comment">//  * `source_name`             ❌ huge name could cause alloc overflows</span>
-        <span class="comment">//  * `defines`                 ❌ huge defines could forkbomb and cause alloc overflows?</span>
-        <span class="comment">//  * `include`                 ✔️ D3DPreprocess is documented to accept D3D_COMPILE_STANDARD_FILE_INCLUDE, which isn&#39;t really a ID3DInclude, as allowed by AsInclude</span>
-        <span class="comment">//  * `include`                 ❌ huge source files could cause alloc overflows in final shader text blob?</span>
-        <span class="comment">//  * `entrypoint`              ❌ huge name could cause alloc overflows</span>
-        <span class="comment">//  * `target`                  ⚠️ could be invalid... probably won&#39;t cause alloc overflows?</span>
-        <span class="comment">//  * `flags1`                  ⚠️ could be invalid</span>
-        <span class="comment">//  * `flags2`                  ⚠️ could be invalid</span>
-        <span class="comment">//  * `secondary_data_flags`    ⚠️ could be invalid</span>
-        <span class="comment">//  * `secondary_data`          ❌ could be invalid or cause alloc overflow?</span>
-        <span class="comment">//  * `shader`                  ✔️ is a trivial out parameter</span>
-        <span class="comment">//  * `errors`                  ✔️ is a trivial out parameter</span>
-        <span class="kw">let</span> <span class="ident">hr</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="ident">f</span>(
-            <span class="ident">src_data</span>.<span class="ident">as_ptr</span>().<span class="ident">cast</span>(), <span class="ident">src_data</span>.<span class="ident">len</span>(),
-            <span class="ident">source_name</span>, <span class="ident">defines</span>, <span class="ident">include</span>, <span class="ident">entrypoint</span>, <span class="ident">target</span>,
-            <span class="ident">flags1</span>, <span class="ident">flags2</span>, <span class="ident">secondary_data_flags</span>, <span class="ident">secondary_data</span>, <span class="ident">secondary_data_len</span>,
-            <span class="kw-2">&amp;mut</span> <span class="ident">shader</span>, <span class="kw-2">&amp;mut</span> <span class="ident">errors</span>,
+        <span class="comment">// SAFETY: ❌ needs fuzz testing for alloc overflows
+        //  * `f`                       ✔️ should be a valid/sound fn, like all of `self.*`
+        //  * `src_data`                ⚠️ should be HLSL to preprocess... but D3DCompile2 should probably be fairly tolerant of invalid as heck data?
+        //  * `source_name`             ❌ huge name could cause alloc overflows
+        //  * `defines`                 ❌ huge defines could forkbomb and cause alloc overflows?
+        //  * `include`                 ✔️ D3DPreprocess is documented to accept D3D_COMPILE_STANDARD_FILE_INCLUDE, which isn&#39;t really a ID3DInclude, as allowed by AsInclude
+        //  * `include`                 ❌ huge source files could cause alloc overflows in final shader text blob?
+        //  * `entrypoint`              ❌ huge name could cause alloc overflows
+        //  * `target`                  ⚠️ could be invalid... probably won&#39;t cause alloc overflows?
+        //  * `flags1`                  ⚠️ could be invalid
+        //  * `flags2`                  ⚠️ could be invalid
+        //  * `secondary_data_flags`    ⚠️ could be invalid
+        //  * `secondary_data`          ❌ could be invalid or cause alloc overflow?
+        //  * `shader`                  ✔️ is a trivial out parameter
+        //  * `errors`                  ✔️ is a trivial out parameter
+        </span><span class="kw">let </span>hr = <span class="kw">unsafe </span>{ D3DCompile2(
+            src_data.as_ptr().cast(), src_data.len(),
+            source_name, defines, include, entrypoint, target,
+            flags1, flags2, secondary_data_flags, secondary_data, secondary_data_len,
+            <span class="kw-2">&amp;mut </span>shader, <span class="kw-2">&amp;mut </span>errors,
         )};
 
-        <span class="comment">// SAFETY: ✔️</span>
-        <span class="comment">//  * `shader` &amp; `errors`   ✔️ are either null (from_raw_opt returns None), or valid, non-dangling, unowned, ID3DBlob s (from_raw_opt takes ownership)</span>
-        <span class="comment">//  * `ReadOnlyBlob`        ✔️ imposes no restrictions on the contents of the blob</span>
-        <span class="comment">//  * `CodeBlob`            ⚠️ requires the contents of `shader` to be valid bytecode.  It should be...</span>
-        <span class="kw">let</span> <span class="ident">shader</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="ident">ReadOnlyBlob::from_raw_opt</span>(<span class="ident">shader</span>).<span class="ident">map</span>(<span class="op">|</span><span class="ident">shader</span><span class="op">|</span> <span class="ident">CodeBlob::from_unchecked</span>(<span class="ident">shader</span>)) };
-        <span class="kw">let</span> <span class="ident">errors</span> <span class="op">=</span> <span class="ident">TextBlob::new</span>(<span class="kw unsafe">unsafe</span> { <span class="ident">ReadOnlyBlob::from_raw_opt</span>(<span class="ident">errors</span>) });
+        <span class="comment">// SAFETY: ✔️
+        //  * `shader` &amp; `errors`   ✔️ are either null (from_raw_opt returns None), or valid, non-dangling, unowned, ID3DBlob s (from_raw_opt takes ownership)
+        //  * `ReadOnlyBlob`        ✔️ imposes no restrictions on the contents of the blob
+        //  * `CodeBlob`            ⚠️ requires the contents of `shader` to be valid bytecode.  It should be...
+        </span><span class="kw">let </span>shader = <span class="kw">unsafe </span>{ ReadOnlyBlob::from_raw_opt(shader).map(|shader| CodeBlob::from_unchecked(shader)) };
+        <span class="kw">let </span>errors = TextBlob::new(<span class="kw">unsafe </span>{ ReadOnlyBlob::from_raw_opt(errors) });
 
-        <span class="kw">match</span> <span class="ident">ErrorKind::check</span>(<span class="ident">hr</span>) {
-            <span class="prelude-val">Ok</span>(())      =&gt; <span class="prelude-val">Ok</span>(<span class="ident">CompileResult</span> { <span class="ident">shader</span>: <span class="ident">shader</span>.<span class="ident">unwrap</span>(), <span class="ident">errors</span> }),
-            <span class="prelude-val">Err</span>(<span class="ident">kind</span>)   =&gt; <span class="prelude-val">Err</span>(<span class="ident">CompileError</span> { <span class="ident">kind</span>, <span class="ident">method</span>: <span class="prelude-val">Some</span>(<span class="string">&quot;D3DCompile2&quot;</span>), <span class="ident">shader</span>, <span class="ident">errors</span> }),
+        <span class="kw">match </span><span class="macro">fn_check_hr!</span>(hr) {
+            <span class="prelude-val">Ok</span>(())      =&gt; <span class="prelude-val">Ok</span>(CompileResult { shader: shader.unwrap(), errors }),
+            <span class="prelude-val">Err</span>(error)  =&gt; <span class="prelude-val">Err</span>(CompileError { error, shader, errors }),
         }
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dpreprocess)\]</span>
-    <span class="doccomment">/// D3DPreprocess</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// Preprocesses uncompiled HLSL code.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Arguments</span>
-    <span class="doccomment">/// *   `src_data`      - The shader source code</span>
-    <span class="doccomment">/// *   `source_name`   - An optional shader name such as `Some(&quot;myshader.hlsl&quot;)` for debug purpouses.</span>
-    <span class="doccomment">/// *   `defines`       - An optional array of defines.  Use `()` if no extra defines are desired.</span>
-    <span class="doccomment">/// *   `include`       - An optional interface for dispatching `#include`s.</span>
-    <span class="doccomment">///                       Use `()` if `#include`s should not be supported.</span>
-    <span class="doccomment">///                       Use [StandardFileInclude] if you want to resolve `#include`s relative to `source_name`.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Errors</span>
-    <span class="doccomment">/// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_39.dll` and earlier</span>
-    <span class="doccomment">/// *   [E::FAIL]                       - if the shader failed to preprocess</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Example</span>
-    <span class="doccomment">/// ```rust</span>
-    <span class="doccomment">/// # use thindx::d3d::*; let d3dc = Compiler::load_system(47).unwrap();</span>
-    <span class="doccomment">/// let basic_hlsl = std::fs::read(r&quot;test\data\basic.hlsl&quot;).unwrap();</span>
-    <span class="doccomment">/// let ps = d3dc.preprocess(&amp;basic_hlsl, r&quot;test\data\basic.hlsl&quot;, (), None).unwrap();</span>
-    <span class="doccomment">/// println!(&quot;{}&quot;, ps.shader.to_utf8_lossy());</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Output</span>
-    <span class="doccomment">/// ```hlsl</span>
-    <span class="doccomment">/// #line 1 &quot;C:\\local\\thindx\\test\\data\\basic.hlsl&quot;</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// struct Vertex {</span>
-    <span class="doccomment">///     float4 position : POSITION0 ;</span>
-    <span class="doccomment">///     float4 color : COLOR0 ;</span>
-    <span class="doccomment">/// } ;</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// struct VsToPs {</span>
-    <span class="doccomment">/// ...</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### See Also</span>
-    <span class="doccomment">/// *   [examples::d3dcompiler_02_compile]</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// ### Remarks</span>
-    <span class="doccomment">/// *   This was introduced by d3dcompiler_40.dll, and is unavailable in earlier versions.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">preprocess</span>(
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dpreprocess)\]
+    /// D3DPreprocess
+    ///
+    /// Preprocesses uncompiled HLSL code.
+    ///
+    /// ### Arguments
+    /// *   `src_data`      - The shader source code
+    /// *   `source_name`   - An optional shader name such as `Some(&quot;myshader.hlsl&quot;)` for debug purpouses.
+    /// *   `defines`       - An optional array of defines.  Use `()` if no extra defines are desired.
+    /// *   `include`       - An optional interface for dispatching `#include`s.
+    ///                       Use `()` if `#include`s should not be supported.
+    ///                       Use [StandardFileInclude] if you want to resolve `#include`s relative to `source_name`.
+    ///
+    /// ### Errors
+    /// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_39.dll` and earlier
+    /// *   [E::FAIL]                       - if the shader failed to preprocess
+    ///
+    /// ### Example
+    /// ```rust
+    /// # use thindx::d3d::*; let d3dc = Compiler::load_system(47).unwrap();
+    /// let basic_hlsl = std::fs::read(r&quot;test\data\basic.hlsl&quot;).unwrap();
+    /// let ps = d3dc.preprocess(&amp;basic_hlsl, r&quot;test\data\basic.hlsl&quot;, (), None).unwrap();
+    /// println!(&quot;{}&quot;, ps.shader.to_utf8_lossy());
+    /// ```
+    ///
+    /// ### Output
+    /// ```hlsl
+    /// #line 1 &quot;C:\\local\\thindx\\test\\data\\basic.hlsl&quot;
+    ///
+    ///
+    /// struct Vertex {
+    ///     float4 position : POSITION0 ;
+    ///     float4 color : COLOR0 ;
+    /// } ;
+    ///
+    /// struct VsToPs {
+    /// ...
+    /// ```
+    ///
+    /// ### See Also
+    /// *   [examples::d3dcompiler_02_compile]
+    ///
+    /// ### Remarks
+    /// *   This was introduced by d3dcompiler_40.dll, and is unavailable in earlier versions.
+    </span><span class="kw">pub fn </span>preprocess(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">src_data</span>:       <span class="kw">impl</span> <span class="ident">AsRef</span><span class="op">&lt;</span>[<span class="ident">u8</span>]<span class="op">&gt;</span>,
-        <span class="ident">source_name</span>:    <span class="kw">impl</span> <span class="ident">TryIntoAsOptCStr</span>,
-        <span class="ident">defines</span>:        <span class="kw">impl</span> <span class="ident">AsShaderMacros</span>,
-        <span class="ident">include</span>:        <span class="kw">impl</span> <span class="ident">AsInclude</span>,
-    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">PreprocessResult</span>, <span class="ident">PreprocessError</span><span class="op">&gt;</span> {
-        <span class="comment">// Early outs</span>
-        <span class="kw">let</span> <span class="ident">f</span>           <span class="op">=</span> <span class="self">self</span>.<span class="ident">D3DPreprocess</span>.<span class="ident">ok_or</span>(<span class="ident">MethodError</span>(<span class="string">&quot;D3DPreprocess&quot;</span>, <span class="ident">THINERR::MISSING_DLL_EXPORT</span>))<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">defines</span>     <span class="op">=</span> <span class="ident">defines</span>.<span class="ident">as_shader_macros</span>().<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="ident">MethodError::new</span>(<span class="string">&quot;D3DPreprocess&quot;</span>, <span class="ident">e</span>))<span class="question-mark">?</span>;
+        src_data:       <span class="kw">impl </span>AsRef&lt;[u8]&gt;,
+        source_name:    <span class="kw">impl </span>TryIntoAsOptCStr,
+        defines:        <span class="kw">impl </span>AsShaderMacros,
+        include:        <span class="kw">impl </span>AsInclude,
+    ) -&gt; <span class="prelude-ty">Result</span>&lt;PreprocessResult, PreprocessError&gt; {
+        <span class="comment">// Early outs
+        </span><span class="macro">fn_context_dll!</span>(d3d::Compiler::preprocess =&gt; <span class="self">self</span>.D3DPreprocess);
+        <span class="kw">let </span>defines     = defines.as_shader_macros().map_err(|e| <span class="macro">fn_param_error!</span>(defines, e))<span class="question-mark">?</span>;
 
-        <span class="kw">let</span> <span class="ident">src_data</span>    <span class="op">=</span> <span class="ident">src_data</span>.<span class="ident">as_ref</span>();
-        <span class="comment">// Note: No error checking occurs for internal `\0`s - they will simply terminate the string earlier than expected.</span>
-        <span class="comment">// Note: We should perhaps reject non-ASCII values instead of allowing UTF8</span>
-        <span class="kw">let</span> <span class="ident">source_name</span> <span class="op">=</span> <span class="ident">source_name</span>.<span class="ident">try_into</span>().<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="ident">MethodError::new</span>(<span class="string">&quot;D3DPreprocess&quot;</span>, <span class="ident">e</span>))<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">source_name</span> <span class="op">=</span> <span class="ident">source_name</span>.<span class="ident">as_opt_cstr</span>();
-        <span class="kw">let</span> <span class="ident">include</span>     <span class="op">=</span> <span class="ident">include</span>.<span class="ident">as_id3dinclude</span>();
+        <span class="kw">let </span>src_data    = src_data.as_ref();
+        <span class="comment">// Note: No error checking occurs for internal `\0`s - they will simply terminate the string earlier than expected.
+        // Note: We should perhaps reject non-ASCII values instead of allowing UTF8
+        </span><span class="kw">let </span>source_name = <span class="macro">fn_param_try_into!</span>(source_name)<span class="question-mark">?</span>;
+        <span class="kw">let </span>source_name = source_name.as_opt_cstr();
+        <span class="kw">let </span>include     = include.as_id3dinclude();
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">shader</span> <span class="op">=</span> <span class="ident">null_mut</span>();
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">errors</span> <span class="op">=</span> <span class="ident">null_mut</span>();
+        <span class="kw">let </span><span class="kw-2">mut </span>shader = null_mut();
+        <span class="kw">let </span><span class="kw-2">mut </span>errors = null_mut();
 
-        <span class="comment">// SAFETY: ❌ needs fuzz testing for alloc overflows</span>
-        <span class="comment">//  * `f`           ✔️ should be a valid/sound fn, like all of `self.*`</span>
-        <span class="comment">//  * `src_data`    ⚠️ should be HLSL to preprocess... but D3DPreprocess should probably be fairly tolerant of invalid as heck data?</span>
-        <span class="comment">//  * `source_name` ❌ huge name could cause alloc overflows</span>
-        <span class="comment">//  * `defines`     ❌ huge defines could forkbomb and cause alloc overflows?</span>
-        <span class="comment">//  * `include`     ✔️ D3DPreprocess is documented to accept D3D_COMPILE_STANDARD_FILE_INCLUDE, which isn&#39;t really a ID3DInclude, as allowed by AsInclude</span>
-        <span class="comment">//  * `include`     ❌ huge source files could cause alloc overflows in final shader text blob?</span>
-        <span class="comment">//  * `shader`      ✔️ is a trivial out parameter</span>
-        <span class="comment">//  * `errors`      ✔️ is a trivial out parameter</span>
-        <span class="kw">let</span> <span class="ident">hr</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="ident">f</span>(<span class="ident">src_data</span>.<span class="ident">as_ptr</span>().<span class="ident">cast</span>(), <span class="ident">src_data</span>.<span class="ident">len</span>(), <span class="ident">source_name</span>, <span class="ident">defines</span>, <span class="ident">include</span>, <span class="kw-2">&amp;mut</span> <span class="ident">shader</span>, <span class="kw-2">&amp;mut</span> <span class="ident">errors</span>)};
+        <span class="comment">// SAFETY: ❌ needs fuzz testing for alloc overflows
+        //  * `f`           ✔️ should be a valid/sound fn, like all of `self.*`
+        //  * `src_data`    ⚠️ should be HLSL to preprocess... but D3DPreprocess should probably be fairly tolerant of invalid as heck data?
+        //  * `source_name` ❌ huge name could cause alloc overflows
+        //  * `defines`     ❌ huge defines could forkbomb and cause alloc overflows?
+        //  * `include`     ✔️ D3DPreprocess is documented to accept D3D_COMPILE_STANDARD_FILE_INCLUDE, which isn&#39;t really a ID3DInclude, as allowed by AsInclude
+        //  * `include`     ❌ huge source files could cause alloc overflows in final shader text blob?
+        //  * `shader`      ✔️ is a trivial out parameter
+        //  * `errors`      ✔️ is a trivial out parameter
+        </span><span class="kw">let </span>hr = <span class="kw">unsafe </span>{ D3DPreprocess(src_data.as_ptr().cast(), src_data.len(), source_name, defines, include, <span class="kw-2">&amp;mut </span>shader, <span class="kw-2">&amp;mut </span>errors)};
 
-        <span class="comment">// SAFETY: ✔️</span>
-        <span class="comment">//  * `shader` &amp; `errors`   ✔️ are either null (from_raw_opt returns None), or valid, non-dangling, unowned, ID3DBlob s (from_raw_opt takes ownership)</span>
-        <span class="comment">//  * `ReadOnlyBlob`        ✔️ imposes no restrictions on the contents of the blob</span>
-        <span class="kw">let</span> <span class="ident">shader</span> <span class="op">=</span> <span class="ident">TextBlob::new</span>(<span class="kw unsafe">unsafe</span> { <span class="ident">ReadOnlyBlob::from_raw_opt</span>(<span class="ident">shader</span>) });
-        <span class="kw">let</span> <span class="ident">errors</span> <span class="op">=</span> <span class="ident">TextBlob::new</span>(<span class="kw unsafe">unsafe</span> { <span class="ident">ReadOnlyBlob::from_raw_opt</span>(<span class="ident">errors</span>) });
+        <span class="comment">// SAFETY: ✔️
+        //  * `shader` &amp; `errors`   ✔️ are either null (from_raw_opt returns None), or valid, non-dangling, unowned, ID3DBlob s (from_raw_opt takes ownership)
+        //  * `ReadOnlyBlob`        ✔️ imposes no restrictions on the contents of the blob
+        </span><span class="kw">let </span>shader = TextBlob::new(<span class="kw">unsafe </span>{ ReadOnlyBlob::from_raw_opt(shader) });
+        <span class="kw">let </span>errors = TextBlob::new(<span class="kw">unsafe </span>{ ReadOnlyBlob::from_raw_opt(errors) });
 
-        <span class="kw">match</span> <span class="ident">ErrorKind::check</span>(<span class="ident">hr</span>) {
-            <span class="prelude-val">Ok</span>(())      =&gt; <span class="prelude-val">Ok</span>(<span class="ident">PreprocessResult</span> { <span class="ident">shader</span>, <span class="ident">errors</span> }),
-            <span class="prelude-val">Err</span>(<span class="ident">kind</span>)   =&gt; <span class="prelude-val">Err</span>(<span class="ident">PreprocessError</span> { <span class="ident">kind</span>, <span class="ident">method</span>: <span class="prelude-val">Some</span>(<span class="string">&quot;D3DPreprocess&quot;</span>), <span class="ident">shader</span>, <span class="ident">errors</span> }),
+        <span class="kw">match </span><span class="macro">fn_check_hr!</span>(hr) {
+            <span class="prelude-val">Ok</span>(())      =&gt; <span class="prelude-val">Ok</span>(PreprocessResult { shader, errors }),
+            <span class="prelude-val">Err</span>(error)  =&gt; <span class="prelude-val">Err</span>(PreprocessError { error, shader, errors }),
         }
     }
 }
-
-<span class="comment">//#cpp2rust D3DCompile                              = d3d::Compiler::compile</span>
-<span class="comment">//#cpp2rust D3DCompile2                             = d3d::Compiler::compile2</span>
-<span class="comment">//#cpp2rust D3DCompileFromFile                      = d3d::Compiler::compile_from_file</span>
-<span class="comment">//#cpp2rust D3DPreprocess                           = d3d::Compiler::preprocess</span>
 </code></pre></div>
-</section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-search-index-js="../../../../../search-index.js" data-search-js="../../../../../search.js"></div>
-</body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (b44197abb 2022-09-05)" ></div></body></html>

@@ -1,1 +1,1 @@
-initSidebarItems({"mod":[["d3d9",""],["misc",""],["win32",""]]});
+window.SIDEBAR_ITEMS = {"mod":[["d3d9",""],["misc",""],["win32",""]]};

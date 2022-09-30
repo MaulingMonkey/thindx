@@ -1,13 +1,12 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\namespaces\d3d9\index.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>index.rs - source</title><link rel="stylesheet" type="text/css" href="../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../../../storage.js"></script><script src="../../../../crates.js"></script><script defer src="../../../../main.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script>
-    <noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"><style type="text/css">#crate-search{background-image:url("../../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../../../thindx/index.html'><div class='logo-container rust-logo'><img src='../../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1"> 1</span>
-<span id="2"> 2</span>
-<span id="3"> 3</span>
-<span id="4"> 4</span>
-<span id="5"> 5</span>
-<span id="6"> 6</span>
-<span id="7"> 7</span>
-<span id="8"> 8</span>
-<span id="9"> 9</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\namespaces\d3d9\index.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>index.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../normalize.css"><link rel="stylesheet" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../dark.css" disabled><link rel="stylesheet" href="../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../storage.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../thindx/index.html"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<span id="2">2</span>
+<span id="3">3</span>
+<span id="4">4</span>
+<span id="5">5</span>
+<span id="6">6</span>
+<span id="7">7</span>
+<span id="8">8</span>
+<span id="9">9</span>
 <span id="10">10</span>
 <span id="11">11</span>
 <span id="12">12</span>
@@ -18,27 +17,24 @@
 <span id="17">17</span>
 <span id="18">18</span>
 <span id="19">19</span>
-<span id="20">20</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::d3d</span>;
-<span class="kw">use</span> <span class="ident">bytemuck</span>::<span class="kw-2">*</span>;
+</pre><pre class="rust"><code><span class="kw">use </span><span class="kw">crate</span>::d3d;
+<span class="kw">use </span>bytemuck::<span class="kw-2">*</span>;
 
 
 
-<span class="doccomment">/// [u16] or [u32] - an index type safe for use with Direct3D 9</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// ### ⚠️ Safety ⚠️</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// By implementing this trait, you assert that:</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// *   You&#39;re returning a valid [d3d::Format] for an index buffer (e.g. [d3d::Format::Index16] or [d3d::Format::Index32])</span>
-<span class="doccomment">/// *   The size/stride of the [d3d::Format] matches the size/stride of `Self` (undefined behavior may result if e.g. the alignment or size differs)</span>
-<span class="kw">pub</span> <span class="kw unsafe">unsafe</span> <span class="kw">trait</span> <span class="ident">Index</span> : <span class="ident">Pod</span> {
-    <span class="doccomment">/// The [d3d::Format] corresponding to `Self`</span>
-    <span class="kw">fn</span> <span class="ident">format</span>() -&gt; <span class="ident">d3d::Format</span>;
+<span class="doccomment">/// [u16] or [u32] - an index type safe for use with Direct3D 9
+///
+/// ### ⚠️ Safety ⚠️
+/// By implementing this trait, you assert that:
+///
+/// *   You&#39;re returning a valid [d3d::Format] for an index buffer (e.g. [d3d::Format::Index16] or [d3d::Format::Index32])
+/// *   The size/stride of the [d3d::Format] matches the size/stride of `Self` (undefined behavior may result if e.g. the alignment or size differs)
+</span><span class="kw">pub unsafe trait </span>Index : Pod {
+    <span class="doccomment">/// The [d3d::Format] corresponding to `Self`
+    </span><span class="kw">fn </span>format() -&gt; d3d::Format;
 }
 
-<span class="kw unsafe">unsafe</span> <span class="kw">impl</span> <span class="ident">Index</span> <span class="kw">for</span> <span class="ident">u16</span> { <span class="kw">fn</span> <span class="ident">format</span>() -&gt; <span class="ident">d3d::Format</span> { <span class="ident">d3d::Format::Index16</span> } }
-<span class="kw unsafe">unsafe</span> <span class="kw">impl</span> <span class="ident">Index</span> <span class="kw">for</span> <span class="ident">u32</span> { <span class="kw">fn</span> <span class="ident">format</span>() -&gt; <span class="ident">d3d::Format</span> { <span class="ident">d3d::Format::Index32</span> } }
+<span class="kw">unsafe impl </span>Index <span class="kw">for </span>u16 { <span class="kw">fn </span>format() -&gt; d3d::Format { d3d::Format::Index16 } }
+<span class="kw">unsafe impl </span>Index <span class="kw">for </span>u32 { <span class="kw">fn </span>format() -&gt; d3d::Format { d3d::Format::Index32 } }
 </code></pre></div>
-</section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="thindx" data-search-index-js="../../../../search-index.js" data-search-js="../../../../search.js"></div>
-</body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (b44197abb 2022-09-05)" ></div></body></html>

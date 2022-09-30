@@ -1,13 +1,12 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3dcommon.h\interfaces\include.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>include.rs - source</title><link rel="stylesheet" type="text/css" href="../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script src="../../../../../crates.js"></script><script defer src="../../../../../main.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script>
-    <noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"><style type="text/css">#crate-search{background-image:url("../../../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../../../../thindx/index.html'><div class='logo-container rust-logo'><img src='../../../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../../../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../../../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../../../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1"> 1</span>
-<span id="2"> 2</span>
-<span id="3"> 3</span>
-<span id="4"> 4</span>
-<span id="5"> 5</span>
-<span id="6"> 6</span>
-<span id="7"> 7</span>
-<span id="8"> 8</span>
-<span id="9"> 9</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3dcommon.h\interfaces\include.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>include.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../../normalize.css"><link rel="stylesheet" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../../dark.css" disabled><link rel="stylesheet" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<span id="2">2</span>
+<span id="3">3</span>
+<span id="4">4</span>
+<span id="5">5</span>
+<span id="6">6</span>
+<span id="7">7</span>
+<span id="8">8</span>
+<span id="9">9</span>
 <span id="10">10</span>
 <span id="11">11</span>
 <span id="12">12</span>
@@ -41,48 +40,505 @@
 <span id="40">40</span>
 <span id="41">41</span>
 <span id="42">42</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">winapi::um::d3dcommon::ID3DInclude</span>;
-<span class="kw">use</span> <span class="ident">winapi::um::d3dcompiler::D3D_COMPILE_STANDARD_FILE_INCLUDE</span>;
+<span id="43">43</span>
+<span id="44">44</span>
+<span id="45">45</span>
+<span id="46">46</span>
+<span id="47">47</span>
+<span id="48">48</span>
+<span id="49">49</span>
+<span id="50">50</span>
+<span id="51">51</span>
+<span id="52">52</span>
+<span id="53">53</span>
+<span id="54">54</span>
+<span id="55">55</span>
+<span id="56">56</span>
+<span id="57">57</span>
+<span id="58">58</span>
+<span id="59">59</span>
+<span id="60">60</span>
+<span id="61">61</span>
+<span id="62">62</span>
+<span id="63">63</span>
+<span id="64">64</span>
+<span id="65">65</span>
+<span id="66">66</span>
+<span id="67">67</span>
+<span id="68">68</span>
+<span id="69">69</span>
+<span id="70">70</span>
+<span id="71">71</span>
+<span id="72">72</span>
+<span id="73">73</span>
+<span id="74">74</span>
+<span id="75">75</span>
+<span id="76">76</span>
+<span id="77">77</span>
+<span id="78">78</span>
+<span id="79">79</span>
+<span id="80">80</span>
+<span id="81">81</span>
+<span id="82">82</span>
+<span id="83">83</span>
+<span id="84">84</span>
+<span id="85">85</span>
+<span id="86">86</span>
+<span id="87">87</span>
+<span id="88">88</span>
+<span id="89">89</span>
+<span id="90">90</span>
+<span id="91">91</span>
+<span id="92">92</span>
+<span id="93">93</span>
+<span id="94">94</span>
+<span id="95">95</span>
+<span id="96">96</span>
+<span id="97">97</span>
+<span id="98">98</span>
+<span id="99">99</span>
+<span id="100">100</span>
+<span id="101">101</span>
+<span id="102">102</span>
+<span id="103">103</span>
+<span id="104">104</span>
+<span id="105">105</span>
+<span id="106">106</span>
+<span id="107">107</span>
+<span id="108">108</span>
+<span id="109">109</span>
+<span id="110">110</span>
+<span id="111">111</span>
+<span id="112">112</span>
+<span id="113">113</span>
+<span id="114">114</span>
+<span id="115">115</span>
+<span id="116">116</span>
+<span id="117">117</span>
+<span id="118">118</span>
+<span id="119">119</span>
+<span id="120">120</span>
+<span id="121">121</span>
+<span id="122">122</span>
+<span id="123">123</span>
+<span id="124">124</span>
+<span id="125">125</span>
+<span id="126">126</span>
+<span id="127">127</span>
+<span id="128">128</span>
+<span id="129">129</span>
+<span id="130">130</span>
+<span id="131">131</span>
+<span id="132">132</span>
+<span id="133">133</span>
+<span id="134">134</span>
+<span id="135">135</span>
+<span id="136">136</span>
+<span id="137">137</span>
+<span id="138">138</span>
+<span id="139">139</span>
+<span id="140">140</span>
+<span id="141">141</span>
+<span id="142">142</span>
+<span id="143">143</span>
+<span id="144">144</span>
+<span id="145">145</span>
+<span id="146">146</span>
+<span id="147">147</span>
+<span id="148">148</span>
+<span id="149">149</span>
+<span id="150">150</span>
+<span id="151">151</span>
+<span id="152">152</span>
+<span id="153">153</span>
+<span id="154">154</span>
+<span id="155">155</span>
+<span id="156">156</span>
+<span id="157">157</span>
+<span id="158">158</span>
+<span id="159">159</span>
+<span id="160">160</span>
+<span id="161">161</span>
+<span id="162">162</span>
+<span id="163">163</span>
+<span id="164">164</span>
+<span id="165">165</span>
+<span id="166">166</span>
+<span id="167">167</span>
+<span id="168">168</span>
+<span id="169">169</span>
+<span id="170">170</span>
+<span id="171">171</span>
+<span id="172">172</span>
+<span id="173">173</span>
+<span id="174">174</span>
+<span id="175">175</span>
+<span id="176">176</span>
+<span id="177">177</span>
+<span id="178">178</span>
+<span id="179">179</span>
+<span id="180">180</span>
+<span id="181">181</span>
+<span id="182">182</span>
+<span id="183">183</span>
+<span id="184">184</span>
+<span id="185">185</span>
+<span id="186">186</span>
+<span id="187">187</span>
+<span id="188">188</span>
+<span id="189">189</span>
+<span id="190">190</span>
+<span id="191">191</span>
+<span id="192">192</span>
+<span id="193">193</span>
+<span id="194">194</span>
+<span id="195">195</span>
+<span id="196">196</span>
+<span id="197">197</span>
+<span id="198">198</span>
+<span id="199">199</span>
+<span id="200">200</span>
+<span id="201">201</span>
+<span id="202">202</span>
+<span id="203">203</span>
+<span id="204">204</span>
+<span id="205">205</span>
+<span id="206">206</span>
+<span id="207">207</span>
+<span id="208">208</span>
+<span id="209">209</span>
+<span id="210">210</span>
+<span id="211">211</span>
+<span id="212">212</span>
+<span id="213">213</span>
+<span id="214">214</span>
+<span id="215">215</span>
+<span id="216">216</span>
+<span id="217">217</span>
+<span id="218">218</span>
+<span id="219">219</span>
+<span id="220">220</span>
+<span id="221">221</span>
+<span id="222">222</span>
+<span id="223">223</span>
+<span id="224">224</span>
+<span id="225">225</span>
+<span id="226">226</span>
+<span id="227">227</span>
+<span id="228">228</span>
+<span id="229">229</span>
+<span id="230">230</span>
+<span id="231">231</span>
+<span id="232">232</span>
+<span id="233">233</span>
+<span id="234">234</span>
+<span id="235">235</span>
+<span id="236">236</span>
+<span id="237">237</span>
+<span id="238">238</span>
+<span id="239">239</span>
+<span id="240">240</span>
+<span id="241">241</span>
+<span id="242">242</span>
+<span id="243">243</span>
+<span id="244">244</span>
+<span id="245">245</span>
+<span id="246">246</span>
+<span id="247">247</span>
+<span id="248">248</span>
+<span id="249">249</span>
+<span id="250">250</span>
+<span id="251">251</span>
+<span id="252">252</span>
+<span id="253">253</span>
+<span id="254">254</span>
+<span id="255">255</span>
+<span id="256">256</span>
+<span id="257">257</span>
+<span id="258">258</span>
+<span id="259">259</span>
+<span id="260">260</span>
+<span id="261">261</span>
+<span id="262">262</span>
+<span id="263">263</span>
+<span id="264">264</span>
+<span id="265">265</span>
+<span id="266">266</span>
+<span id="267">267</span>
+<span id="268">268</span>
+<span id="269">269</span>
+<span id="270">270</span>
+<span id="271">271</span>
+</pre><pre class="rust"><code><span class="kw">use crate</span>::<span class="kw-2">*</span>;
 
-<span class="kw">use</span> <span class="ident">std::ptr</span>::<span class="kw-2">*</span>;
+<span class="kw">use </span>winapi::shared::minwindef::{LPCVOID, UINT};
+<span class="kw">use </span>winapi::shared::ntdef::{LPCSTR, HRESULT};
+<span class="kw">use </span>winapi::um::d3dcommon::{ID3DInclude, ID3DIncludeVtbl, D3D_INCLUDE_TYPE};
+<span class="kw">use </span>winapi::um::d3dcompiler::D3D_COMPILE_STANDARD_FILE_INCLUDE;
+
+<span class="kw">use </span>std::alloc::Layout;
+<span class="kw">use </span>std::convert::TryInto;
+<span class="kw">use </span>std::path::<span class="kw-2">*</span>;
+<span class="kw">use </span>std::ptr::<span class="kw-2">*</span>;
 
 
 
-<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nn-d3dcommon-id3dinclude)\]</span>
-<span class="doccomment">/// ID3DInclude compatible types</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// ### ⚠️ Safety ⚠️</span>
-<span class="doccomment">/// By implementing this trait, you promise to return one of:</span>
-<span class="doccomment">/// *   [null_mut]\(\)</span>
-<span class="doccomment">/// *   [D3D_COMPILE_STANDARD_FILE_INCLUDE]</span>
-<span class="doccomment">/// *   A valid, well behaved [ID3D11Include](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nn-d3dcommon-id3dinclude)</span>
-<span class="doccomment">///     instance, that lives for at least as long as `self` remains untouched / undropped.</span>
-<span class="kw">pub</span> <span class="kw unsafe">unsafe</span> <span class="kw">trait</span> <span class="ident">AsInclude</span> {
-    <span class="doccomment">/// Treat this as a raw winapi [ID3DInclude].</span>
-    <span class="kw">fn</span> <span class="ident">as_id3dinclude</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">*mut</span> <span class="ident">ID3DInclude</span>;
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nn-d3dcommon-id3dinclude)\]
+/// ID3DInclude compatible types
+///
+/// ### ⚠️ Safety ⚠️
+/// By implementing this trait, you promise to return one of:
+/// *   [null_mut]\(\)
+/// *   [D3D_COMPILE_STANDARD_FILE_INCLUDE](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dcompile#parameters)
+/// *   A valid, well behaved [ID3D11Include](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nn-d3dcommon-id3dinclude)
+///     instance, that lives for at least as long as `self` remains untouched / undropped.
+</span><span class="kw">pub unsafe trait </span>AsInclude {
+    <span class="doccomment">/// Treat this as a raw winapi [ID3DInclude].
+    </span><span class="kw">fn </span>as_id3dinclude(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">*mut </span>ID3DInclude;
 }
 
-<span class="kw unsafe">unsafe</span> <span class="kw">impl</span> <span class="ident">AsInclude</span> <span class="kw">for</span> () {
-    <span class="kw">fn</span> <span class="ident">as_id3dinclude</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">*mut</span> <span class="ident">ID3DInclude</span> { <span class="ident">null_mut</span>() }
+<span class="kw">unsafe impl </span>AsInclude <span class="kw">for </span>() {
+    <span class="kw">fn </span>as_id3dinclude(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">*mut </span>ID3DInclude { null_mut() }
 }
 
-<span class="kw unsafe">unsafe</span> <span class="kw">impl</span> <span class="ident">AsInclude</span> <span class="kw">for</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">std::convert::Infallible</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">as_id3dinclude</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">*mut</span> <span class="ident">ID3DInclude</span> { <span class="ident">null_mut</span>() }
+<span class="kw">unsafe impl </span>AsInclude <span class="kw">for </span><span class="prelude-ty">Option</span>&lt;std::convert::Infallible&gt; {
+    <span class="kw">fn </span>as_id3dinclude(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">*mut </span>ID3DInclude { null_mut() }
 }
 
-<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dcompile#parameters)\]</span>
-<span class="doccomment">/// D3D_COMPILE_STANDARD_FILE_INCLUDE</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// This default include handler includes files that are relative to the current directory and files that are relative to</span>
-<span class="doccomment">/// the directory of the initial source file. When you use [StandardFileInclude], you must specify the source file name</span>
-<span class="doccomment">/// in the `source_name` parameter; the compiler will derive the initial relative directory from `source_name`.</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">StandardFileInclude</span>;
-<span class="kw unsafe">unsafe</span> <span class="kw">impl</span> <span class="ident">AsInclude</span> <span class="kw">for</span> <span class="ident">StandardFileInclude</span> {
-    <span class="kw">fn</span> <span class="ident">as_id3dinclude</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">*mut</span> <span class="ident">ID3DInclude</span> { <span class="ident">D3D_COMPILE_STANDARD_FILE_INCLUDE</span> }
+<span class="kw">unsafe impl</span>&lt;AI: AsInclude&gt; AsInclude <span class="kw">for </span><span class="kw-2">&amp;</span>AI {
+    <span class="kw">fn </span>as_id3dinclude(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">*mut </span>ID3DInclude { (<span class="kw-2">**</span><span class="self">self</span>).as_id3dinclude() }
 }
 
-<span class="comment">//#cpp2rust ID3DInclude                         = trait d3d::AsInclude</span>
-<span class="comment">//#cpp2rust D3D_COMPILE_STANDARD_FILE_INCLUDE   = d3d::StandardFileInclude</span>
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dcompile#parameters)\]
+/// D3D_COMPILE_STANDARD_FILE_INCLUDE
+///
+/// This default include handler includes files that are relative to the current directory and files that are relative to
+/// the directory of the initial source file. When you use [StandardFileInclude], you must specify the source file name
+/// in the `source_name` parameter; the compiler will derive the initial relative directory from `source_name`.
+</span><span class="kw">pub struct </span>StandardFileInclude;
+<span class="kw">unsafe impl </span>AsInclude <span class="kw">for </span>StandardFileInclude {
+    <span class="kw">fn </span>as_id3dinclude(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">*mut </span>ID3DInclude { D3D_COMPILE_STANDARD_FILE_INCLUDE }
+}
+
+<span class="comment">//#cpp2rust ID3DInclude                         = trait d3d::AsInclude
+//#cpp2rust D3D_COMPILE_STANDARD_FILE_INCLUDE   = d3d::StandardFileInclude
+
+
+
+
+</span><span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nn-d3dcommon-id3dinclude)\]
+/// ID3DInclude
+</span><span class="attribute">#[repr(C)] </span><span class="kw">pub struct </span>Include&lt;I&gt; {
+    vtable: <span class="kw-2">*const </span>ID3DIncludeVtbl,
+    imp:    I,
+}
+
+<span class="kw">unsafe impl</span>&lt;I&gt; AsInclude <span class="kw">for </span>Include&lt;I&gt; {
+    <span class="kw">fn </span>as_id3dinclude(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">*mut </span>ID3DInclude { <span class="self">self </span><span class="kw">as </span><span class="kw-2">*const </span><span class="self">Self </span><span class="kw">as </span><span class="kw-2">*mut </span><span class="self">Self </span><span class="kw">as </span><span class="kw-2">*mut </span>ID3DInclude }
+}
+
+<span class="kw">impl </span>Include&lt;()&gt; {
+    <span class="doccomment">/// Wrap [Fn]\([d3d::IncludeType], file_name: [abistr::CStrNonNull], parent: Option&lt;(&amp;M, &amp;\[u8\])&gt;\).
+    ///
+    /// ### Examples
+    /// ```rust
+    /// # use thindx::*;
+    /// # use std::path::*;
+    /// # return; // doc tests have wrong dir
+    /// let d3dc = d3d::Compiler::load_system(47).unwrap();
+    ///
+    /// let include = d3d::Include::from_blob_meta_fn(|include_type, file_name, parent|{
+    ///     let (quote, unquote) = match include_type {
+    ///         d3d::Include::Local     =&gt; (&#39;&quot;&#39;, &#39;&quot;&#39;),
+    ///         d3d::Include::System    =&gt; (&#39;&lt;&#39;, &#39;&gt;&#39;),
+    ///         _                       =&gt; (&#39;?&#39;, &#39;?&#39;),
+    ///     };
+    ///
+    ///     let file_name   = file_name.to_str().map_err(|_| E::FAIL)?;
+    ///     let path        = Path::new(r&quot;thindx\test\data&quot;).join(file_name);
+    ///
+    ///     println!(&quot;resolving `#include {quote}{file_name}{unquote}` to {path:?}&quot;);
+    ///
+    ///     let data        = std::fs::read(&amp;path).map_err(|_| E::FAIL)?;
+    ///
+    ///     println!(&quot;  read {} bytes&quot;, data.len());
+    ///
+    ///     if let Some(parent_path) = parent {
+    ///         println!(&quot;  into {:?}&quot;, parent_path);
+    ///     } else {
+    ///         println!(&quot;  into root file&quot;);
+    ///     }
+    ///
+    ///     Ok((data, path))
+    /// });
+    ///
+    /// let compiled = d3dc.compile_from_file(
+    ///     r&quot;thindx\test\data\include-chain-1.hlsl&quot;, None, &amp;include,
+    ///     &quot;ps_main&quot;, &quot;ps_4_0&quot;, d3d::Compile::Debug, d3d::CompileEffect::None
+    /// );
+    /// ```
+    /// *   [_examples::d3dcompiler_02_compile]
+    </span><span class="kw">pub fn </span>from_blob_meta_fn&lt;M, F: Fn(d3d::IncludeType, abistr::CStrNonNull, <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>M&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;(Vec&lt;u8&gt;, M), ErrorKind&gt;&gt;(f: F) -&gt; Include&lt;F&gt; {
+        <span class="comment">// TODO: consider meta-seeded version of this fn to get rid of the Option spam.
+
+        </span><span class="kw">let </span>vtable : <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>ID3DIncludeVtbl = <span class="kw-2">&amp;</span>ID3DIncludeVtbl {
+            Open:   open::&lt;M, F&gt;,
+            Close:  close::&lt;M, F&gt;,
+        };
+
+        <span class="kw">return </span>Include {
+            vtable: vtable,
+            imp:    f,
+        };
+
+        <span class="doccomment">/// ### ⚠️ Safety ⚠️
+        /// *   All pointers should be valid
+        /// *   No pointers should alias each other
+        /// *   `this` must point at a `Self`
+        </span><span class="kw">unsafe extern </span><span class="string">&quot;system&quot; </span><span class="kw">fn </span>open&lt;M, F: Fn(d3d::IncludeType, abistr::CStrNonNull, <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>M&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;(Vec&lt;u8&gt;, M), ErrorKind&gt;&gt;(this: <span class="kw-2">*mut </span>ID3DInclude, include_type: D3D_INCLUDE_TYPE, file_name: LPCSTR, parent_data: LPCVOID, data: <span class="kw-2">*mut </span>LPCVOID, bytes: <span class="kw-2">*mut </span>UINT) -&gt; HRESULT {
+            <span class="kw">if </span>this         .is_null() { <span class="kw">return </span>E::INVALIDARG.into() }
+            <span class="kw">if </span>file_name    .is_null() { <span class="kw">return </span>E::INVALIDARG.into() }
+            <span class="kw">if </span>data         .is_null() { <span class="kw">return </span>E::INVALIDARG.into() }
+            <span class="kw">if </span>bytes        .is_null() { <span class="kw">return </span>E::INVALIDARG.into() }
+
+            <span class="kw">let </span>this            = <span class="kw">unsafe </span>{ <span class="kw-2">&amp;*</span>(this <span class="kw">as </span><span class="kw-2">*const </span>Include&lt;F&gt;) };
+            <span class="kw">let </span>include_type    = d3d::IncludeType::from_unchecked(include_type);
+            <span class="kw">let </span>file_name       = <span class="kw">unsafe </span>{ abistr::CStrNonNull::from_ptr_unchecked_unbounded(file_name) };
+
+            <span class="kw">let </span>parent = <span class="kw">if </span>parent_data.is_null() {
+                <span class="prelude-val">None
+            </span>} <span class="kw">else </span>{
+                <span class="kw">let </span>parent_thb = <span class="kw">unsafe </span>{ <span class="kw-2">&amp;*</span>ThinMetaBlob::&lt;M&gt;::from_data(parent_data <span class="kw">as </span><span class="kw-2">*mut </span>u8) };
+                <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span>parent_thb.meta)
+            };
+
+            <span class="kw">let </span>o_data  = <span class="kw">unsafe </span>{ <span class="kw-2">&amp;mut *</span>data };
+            <span class="kw">let </span>o_bytes = <span class="kw">unsafe </span>{ <span class="kw-2">&amp;mut *</span>bytes };
+            <span class="kw-2">*</span>o_data     = null();
+            <span class="kw-2">*</span>o_bytes    = <span class="number">0</span>;
+
+            <span class="kw">match </span>(this.imp)(include_type, file_name, parent) {
+                <span class="prelude-val">Ok</span>((data, meta)) =&gt; {
+                    <span class="kw">let </span>len32 : UINT = <span class="kw">match </span>data.len().try_into() {
+                        <span class="prelude-val">Ok</span>(n)   =&gt; n,
+                        <span class="prelude-val">Err</span>(<span class="kw">_</span>)  =&gt; <span class="kw">return </span>THINERR::SLICE_TOO_LARGE.into(),
+                    };
+
+                    <span class="kw">let </span>tmb = <span class="kw">match </span>ThinMetaBlob::&lt;M&gt;::alloc(meta, <span class="kw-2">&amp;</span>data[..]) {
+                        <span class="prelude-val">Ok</span>(tmb) =&gt; tmb.as_ptr(),
+                        <span class="prelude-val">Err</span>(<span class="kw">_</span>)  =&gt; <span class="kw">return </span>THINERR::SLICE_TOO_LARGE.into(),
+                    };
+
+                    <span class="kw-2">*</span>o_data     = <span class="kw">unsafe </span>{ ThinMetaBlob::&lt;M&gt;::to_data(tmb) }.cast();
+                    <span class="kw-2">*</span>o_bytes    = len32;
+                    <span class="kw">return </span>S::OK.into();
+                },
+                <span class="prelude-val">Err</span>(kind) =&gt; kind,
+            }.into()
+        }
+
+        <span class="doccomment">/// ### ⚠️ Safety ⚠️
+        /// *   All pointers should be valid
+        /// *   `this` must point at a `Self`
+        /// *   `data` must match the output of a previous call to `open` that has not yet been `close`d
+        </span><span class="kw">unsafe extern </span><span class="string">&quot;system&quot; </span><span class="kw">fn </span>close&lt;M, F: Fn(d3d::IncludeType, abistr::CStrNonNull, <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>M&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;(Vec&lt;u8&gt;, M), ErrorKind&gt;&gt;(this: <span class="kw-2">*mut </span>ID3DInclude, data: LPCVOID) -&gt; HRESULT {
+            <span class="kw">if </span>this         .is_null() { <span class="kw">return </span>E::INVALIDARG.into() }
+            <span class="kw">if </span>data         .is_null() { <span class="kw">return </span>E::INVALIDARG.into() }
+
+            <span class="comment">// this is unused
+            </span><span class="kw">let </span>data        = data <span class="kw">as </span><span class="kw-2">*mut </span>u8;
+            <span class="kw">let </span>tmb         = <span class="kw">unsafe </span>{ ThinMetaBlob::&lt;M&gt;::from_data(data) };
+
+            <span class="kw">unsafe </span>{ ThinMetaBlob::&lt;M&gt;::free(tmb) };
+
+            S::OK.into()
+        }
+    }
+
+    <span class="doccomment">/// Wrap [Fn]\(dir: &amp;[Path], [d3d::IncludeType], include: [abistr::CStrNonNull]\) -&gt; [PathBuf].
+    ///
+    /// ### Examples
+    /// ```rust
+    /// # use thindx::*;
+    /// # return; // doc tests have wrong dir
+    /// let d3dc = d3d::Compiler::load_system(47).unwrap();
+    ///
+    /// let include = d3d::Include::from_path_fn(
+    ///     r&quot;thindx\test\data&quot;,
+    ///     |dir, _t, file| Ok(dir.join(file.to_str().map_err(|_| D3D11::ERROR_FILE_NOT_FOUND)?))
+    /// );
+    ///
+    /// let compiled = d3dc.compile_from_file(
+    ///     r&quot;thindx\test\data\include-chain-1.hlsl&quot;, None, &amp;include,
+    ///     &quot;ps_main&quot;, &quot;ps_4_0&quot;, d3d::Compile::Debug, d3d::CompileEffect::None
+    /// );
+    /// ```
+    /// *   [_examples::d3dcompiler_02_compile]
+    </span><span class="kw">pub fn </span>from_path_fn&lt;<span class="lifetime">&#39;a</span>&gt;(dir: <span class="kw">impl </span>AsRef&lt;Path&gt; + <span class="lifetime">&#39;a</span>, f: <span class="kw">impl </span><span class="lifetime">&#39;a </span>+ Fn(<span class="kw-2">&amp;</span>Path, d3d::IncludeType, abistr::CStrNonNull) -&gt; <span class="prelude-ty">Result</span>&lt;PathBuf, ErrorKind&gt;) -&gt; <span class="kw">impl </span>AsInclude + <span class="lifetime">&#39;a </span>{
+        <span class="self">Self</span>::from_blob_meta_fn(<span class="kw">move </span>|include_type, file_name: abistr::CStrNonNull, parent: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>PathBuf&gt;| {
+            <span class="kw">let </span>dir = <span class="kw">match </span>parent {
+                <span class="prelude-val">Some</span>(parent_dir)    =&gt; <span class="kw-2">&amp;**</span>parent_dir,
+                <span class="prelude-val">None                </span>=&gt; dir.as_ref(),
+            };
+            <span class="kw">let </span><span class="kw-2">mut </span>path = f(dir, include_type, file_name)<span class="question-mark">?</span>;
+            <span class="kw">let </span>data = std::fs::read(<span class="kw-2">&amp;</span>path).map_err(|err| err.raw_os_error().map_or(ErrorKind::from(D3D11::ERROR_FILE_NOT_FOUND), |raw| ErrorKind::from_win32(raw <span class="kw">as _</span>)))<span class="question-mark">?</span>;
+            <span class="kw">if </span>!path.pop() { <span class="kw">return </span><span class="prelude-val">Err</span>(D3D11::ERROR_FILE_NOT_FOUND.into()); } <span class="comment">// path: filename -&gt; dir
+            </span><span class="prelude-val">Ok</span>((data, path))
+        })
+    }
+}
+
+<span class="comment">//#cpp2rust ID3DInclude         = struct d3d::Include
+//#cpp2rust ID3DInclude::Open   = d3d::Include::from_blob_meta_fn
+//#cpp2rust ID3DInclude::Open   = d3d::Include::from_path_fn
+//#cpp2rust ID3DInclude::Close  = std::ops::Drop::drop
+
+
+
+</span><span class="kw">struct </span>ThinMetaBlob&lt;M&gt; {
+    data_bytes: usize, <span class="comment">// not inclusive of `data_bytes` or `meta`
+    </span>meta:       M,
+    <span class="comment">// data follows
+</span>}
+
+<span class="kw">impl</span>&lt;M&gt; ThinMetaBlob&lt;M&gt; {
+    <span class="kw">pub fn </span>alloc(meta: M, data: <span class="kw-2">&amp;</span>[u8]) -&gt; <span class="prelude-ty">Result</span>&lt;NonNull&lt;<span class="self">Self</span>&gt;, ()&gt; {
+        <span class="kw">let </span>layout = <span class="self">Self</span>::layout(data.len())<span class="question-mark">?</span>;
+        <span class="kw">let </span>tmb;
+        <span class="kw">unsafe </span>{
+            tmb = std::alloc::alloc(layout) <span class="kw">as </span><span class="kw-2">*mut </span><span class="self">Self</span>;
+            std::ptr::write(tmb, <span class="self">Self </span>{ data_bytes: data.len(), meta });
+            std::ptr::copy_nonoverlapping(data.as_ptr(), tmb.add(<span class="number">1</span>).cast(), data.len());
+        }
+        NonNull::new(tmb).ok_or(())
+    }
+
+    <span class="doccomment">/// ### ⚠️ Safety ⚠️
+    /// *   `data` must belong to a valid allocated `ThinMetaBlob` that has not been `free`d
+    </span><span class="kw">pub unsafe fn </span>from_data(data: <span class="kw-2">*mut </span>u8) -&gt; <span class="kw-2">*mut </span><span class="self">Self </span>{
+        <span class="kw">unsafe </span>{ (data <span class="kw">as </span><span class="kw-2">*mut </span><span class="self">Self</span>).sub(<span class="number">1</span>) }
+    }
+
+    <span class="doccomment">/// ### ⚠️ Safety ⚠️
+    /// *   `tmb` must be a valid allocated `ThinMetaBlob` that has not been `free`d
+    </span><span class="kw">pub unsafe fn </span>to_data(tmb: <span class="kw-2">*mut </span><span class="self">Self</span>) -&gt; <span class="kw-2">*mut </span>u8 {
+        <span class="kw">unsafe </span>{ tmb.add(<span class="number">1</span>).cast() }
+    }
+
+    <span class="doccomment">/// ### ⚠️ Safety ⚠️
+    /// *   `tmb` must be a valid allocated `ThinMetaBlob` that has not been `free`d
+    /// *   `tmb` will no longer be valid after this call
+    </span><span class="kw">pub unsafe fn </span>free(tmb: <span class="kw-2">*mut </span><span class="self">Self</span>) {
+        <span class="kw">let </span>_header : <span class="self">Self </span>= <span class="kw">unsafe </span>{ std::ptr::read(tmb) };
+        <span class="kw">let </span>layout = <span class="self">Self</span>::layout(<span class="kw">unsafe </span>{ (<span class="kw-2">*</span>tmb).data_bytes }).unwrap();
+        <span class="kw">unsafe </span>{ std::alloc::dealloc(tmb.cast(), layout) }
+    }
+
+    <span class="kw">fn </span>layout(data_bytes: usize) -&gt; <span class="prelude-ty">Result</span>&lt;Layout, ()&gt; {
+        <span class="kw">let </span>meta = Layout::new::&lt;<span class="self">Self</span>&gt;();
+        <span class="kw">let </span>data   = Layout::array::&lt;u8&gt;(data_bytes).map_err(|<span class="kw">_</span>|())<span class="question-mark">?</span>;
+        <span class="prelude-val">Ok</span>(meta.extend(data).map_err(|<span class="kw">_</span>| ())<span class="question-mark">?</span>.<span class="number">0</span>)
+    }
+}
 </code></pre></div>
-</section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-search-index-js="../../../../../search-index.js" data-search-js="../../../../../search.js"></div>
-</body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (b44197abb 2022-09-05)" ></div></body></html>

@@ -1,103 +1,102 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\guiddef.h\guiddef.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>guiddef.rs - source</title><link rel="stylesheet" type="text/css" href="../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../../../storage.js"></script><script src="../../../../crates.js"></script><script defer src="../../../../main.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script>
-    <noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"><style type="text/css">#crate-search{background-image:url("../../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../../../thindx/index.html'><div class='logo-container rust-logo'><img src='../../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
-<span id="2">  2</span>
-<span id="3">  3</span>
-<span id="4">  4</span>
-<span id="5">  5</span>
-<span id="6">  6</span>
-<span id="7">  7</span>
-<span id="8">  8</span>
-<span id="9">  9</span>
-<span id="10"> 10</span>
-<span id="11"> 11</span>
-<span id="12"> 12</span>
-<span id="13"> 13</span>
-<span id="14"> 14</span>
-<span id="15"> 15</span>
-<span id="16"> 16</span>
-<span id="17"> 17</span>
-<span id="18"> 18</span>
-<span id="19"> 19</span>
-<span id="20"> 20</span>
-<span id="21"> 21</span>
-<span id="22"> 22</span>
-<span id="23"> 23</span>
-<span id="24"> 24</span>
-<span id="25"> 25</span>
-<span id="26"> 26</span>
-<span id="27"> 27</span>
-<span id="28"> 28</span>
-<span id="29"> 29</span>
-<span id="30"> 30</span>
-<span id="31"> 31</span>
-<span id="32"> 32</span>
-<span id="33"> 33</span>
-<span id="34"> 34</span>
-<span id="35"> 35</span>
-<span id="36"> 36</span>
-<span id="37"> 37</span>
-<span id="38"> 38</span>
-<span id="39"> 39</span>
-<span id="40"> 40</span>
-<span id="41"> 41</span>
-<span id="42"> 42</span>
-<span id="43"> 43</span>
-<span id="44"> 44</span>
-<span id="45"> 45</span>
-<span id="46"> 46</span>
-<span id="47"> 47</span>
-<span id="48"> 48</span>
-<span id="49"> 49</span>
-<span id="50"> 50</span>
-<span id="51"> 51</span>
-<span id="52"> 52</span>
-<span id="53"> 53</span>
-<span id="54"> 54</span>
-<span id="55"> 55</span>
-<span id="56"> 56</span>
-<span id="57"> 57</span>
-<span id="58"> 58</span>
-<span id="59"> 59</span>
-<span id="60"> 60</span>
-<span id="61"> 61</span>
-<span id="62"> 62</span>
-<span id="63"> 63</span>
-<span id="64"> 64</span>
-<span id="65"> 65</span>
-<span id="66"> 66</span>
-<span id="67"> 67</span>
-<span id="68"> 68</span>
-<span id="69"> 69</span>
-<span id="70"> 70</span>
-<span id="71"> 71</span>
-<span id="72"> 72</span>
-<span id="73"> 73</span>
-<span id="74"> 74</span>
-<span id="75"> 75</span>
-<span id="76"> 76</span>
-<span id="77"> 77</span>
-<span id="78"> 78</span>
-<span id="79"> 79</span>
-<span id="80"> 80</span>
-<span id="81"> 81</span>
-<span id="82"> 82</span>
-<span id="83"> 83</span>
-<span id="84"> 84</span>
-<span id="85"> 85</span>
-<span id="86"> 86</span>
-<span id="87"> 87</span>
-<span id="88"> 88</span>
-<span id="89"> 89</span>
-<span id="90"> 90</span>
-<span id="91"> 91</span>
-<span id="92"> 92</span>
-<span id="93"> 93</span>
-<span id="94"> 94</span>
-<span id="95"> 95</span>
-<span id="96"> 96</span>
-<span id="97"> 97</span>
-<span id="98"> 98</span>
-<span id="99"> 99</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\guiddef.h\guiddef.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>guiddef.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../normalize.css"><link rel="stylesheet" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../dark.css" disabled><link rel="stylesheet" href="../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../storage.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../thindx/index.html"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<span id="2">2</span>
+<span id="3">3</span>
+<span id="4">4</span>
+<span id="5">5</span>
+<span id="6">6</span>
+<span id="7">7</span>
+<span id="8">8</span>
+<span id="9">9</span>
+<span id="10">10</span>
+<span id="11">11</span>
+<span id="12">12</span>
+<span id="13">13</span>
+<span id="14">14</span>
+<span id="15">15</span>
+<span id="16">16</span>
+<span id="17">17</span>
+<span id="18">18</span>
+<span id="19">19</span>
+<span id="20">20</span>
+<span id="21">21</span>
+<span id="22">22</span>
+<span id="23">23</span>
+<span id="24">24</span>
+<span id="25">25</span>
+<span id="26">26</span>
+<span id="27">27</span>
+<span id="28">28</span>
+<span id="29">29</span>
+<span id="30">30</span>
+<span id="31">31</span>
+<span id="32">32</span>
+<span id="33">33</span>
+<span id="34">34</span>
+<span id="35">35</span>
+<span id="36">36</span>
+<span id="37">37</span>
+<span id="38">38</span>
+<span id="39">39</span>
+<span id="40">40</span>
+<span id="41">41</span>
+<span id="42">42</span>
+<span id="43">43</span>
+<span id="44">44</span>
+<span id="45">45</span>
+<span id="46">46</span>
+<span id="47">47</span>
+<span id="48">48</span>
+<span id="49">49</span>
+<span id="50">50</span>
+<span id="51">51</span>
+<span id="52">52</span>
+<span id="53">53</span>
+<span id="54">54</span>
+<span id="55">55</span>
+<span id="56">56</span>
+<span id="57">57</span>
+<span id="58">58</span>
+<span id="59">59</span>
+<span id="60">60</span>
+<span id="61">61</span>
+<span id="62">62</span>
+<span id="63">63</span>
+<span id="64">64</span>
+<span id="65">65</span>
+<span id="66">66</span>
+<span id="67">67</span>
+<span id="68">68</span>
+<span id="69">69</span>
+<span id="70">70</span>
+<span id="71">71</span>
+<span id="72">72</span>
+<span id="73">73</span>
+<span id="74">74</span>
+<span id="75">75</span>
+<span id="76">76</span>
+<span id="77">77</span>
+<span id="78">78</span>
+<span id="79">79</span>
+<span id="80">80</span>
+<span id="81">81</span>
+<span id="82">82</span>
+<span id="83">83</span>
+<span id="84">84</span>
+<span id="85">85</span>
+<span id="86">86</span>
+<span id="87">87</span>
+<span id="88">88</span>
+<span id="89">89</span>
+<span id="90">90</span>
+<span id="91">91</span>
+<span id="92">92</span>
+<span id="93">93</span>
+<span id="94">94</span>
+<span id="95">95</span>
+<span id="96">96</span>
+<span id="97">97</span>
+<span id="98">98</span>
+<span id="99">99</span>
 <span id="100">100</span>
 <span id="101">101</span>
 <span id="102">102</span>
@@ -200,207 +199,286 @@
 <span id="199">199</span>
 <span id="200">200</span>
 <span id="201">201</span>
-</pre><pre class="rust"><code><span class="attribute">#![<span class="ident">warn</span>(<span class="ident">clippy::undocumented_unsafe_blocks</span>)]</span>
+<span id="202">202</span>
+<span id="203">203</span>
+<span id="204">204</span>
+<span id="205">205</span>
+<span id="206">206</span>
+<span id="207">207</span>
+<span id="208">208</span>
+<span id="209">209</span>
+<span id="210">210</span>
+<span id="211">211</span>
+<span id="212">212</span>
+<span id="213">213</span>
+<span id="214">214</span>
+<span id="215">215</span>
+<span id="216">216</span>
+<span id="217">217</span>
+<span id="218">218</span>
+<span id="219">219</span>
+<span id="220">220</span>
+<span id="221">221</span>
+<span id="222">222</span>
+<span id="223">223</span>
+<span id="224">224</span>
+<span id="225">225</span>
+<span id="226">226</span>
+<span id="227">227</span>
+<span id="228">228</span>
+<span id="229">229</span>
+<span id="230">230</span>
+<span id="231">231</span>
+<span id="232">232</span>
+<span id="233">233</span>
+<span id="234">234</span>
+<span id="235">235</span>
+<span id="236">236</span>
+<span id="237">237</span>
+<span id="238">238</span>
+<span id="239">239</span>
+<span id="240">240</span>
+<span id="241">241</span>
+</pre><pre class="rust"><code><span class="attribute">#![warn(clippy::undocumented_unsafe_blocks)]
 
-<span class="kw">use</span> <span class="ident">bytemuck</span>::{<span class="ident">Pod</span>, <span class="ident">Zeroable</span>};
+</span><span class="kw">use </span>bytemuck::{Pod, Zeroable};
 
-<span class="kw">use</span> <span class="ident">winapi::shared::guiddef::GUID</span>;
+<span class="kw">use </span>winapi::shared::guiddef::GUID;
 
-<span class="kw">use</span> <span class="ident">std::cmp</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident">std::fmt</span>::{<span class="self">self</span>, <span class="ident">Debug</span>, <span class="ident">Display</span>, <span class="ident">Formatter</span>};
-<span class="kw">use</span> <span class="ident">std::hash</span>::<span class="kw-2">*</span>;
+<span class="kw">use </span>std::cmp::<span class="kw-2">*</span>;
+<span class="kw">use </span>std::fmt::{<span class="self">self</span>, Debug, Display, Formatter};
+<span class="kw">use </span>std::hash::<span class="kw-2">*</span>;
 
 
 
-<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/guiddef/ns-guiddef-guid)\]</span>
-<span class="doccomment">/// A 128-bit identifier used for COM interfaces, COM class objects, and various other purpouses.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>)]</span>
-<span class="attribute">#[<span class="ident">repr</span>(<span class="ident">transparent</span>)]</span> <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Guid</span>(<span class="ident">GUID</span>);
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/guiddef/ns-guiddef-guid)\]
+/// A 128-bit identifier used for COM interfaces, COM class objects, and various other purpouses.
+</span><span class="attribute">#[derive(Clone, Copy)]
+#[repr(transparent)] </span><span class="kw">pub struct </span>Guid(GUID);
 
-<span class="doccomment">/// = [Guid]</span>
-<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/wmformat/interface-identifiers)\]</span>
-<span class="doccomment">/// **I**interface **Id**entifier - used for uniquely identifiying COM interfaces</span>
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">IID</span>    <span class="op">=</span> <span class="ident">Guid</span>;
+<span class="doccomment">/// = [Guid]
+/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/wmformat/interface-identifiers)\]
+/// **I**interface **Id**entifier - used for uniquely identifiying COM interfaces
+</span><span class="kw">pub type </span>IID    = Guid;
 
-<span class="doccomment">/// = [Guid]</span>
-<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/com/com-class-objects-and-clsids)\]</span>
-<span class="doccomment">/// **Cl**as**s** **Id**entifier - used for uniquely identifying COM classes</span>
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">ClsID</span>  <span class="op">=</span> <span class="ident">Guid</span>;
+<span class="doccomment">/// = [Guid]
+/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/com/com-class-objects-and-clsids)\]
+/// **Cl**as**s** **Id**entifier - used for uniquely identifying COM classes
+</span><span class="kw">pub type </span>ClsID  = Guid;
 
-<span class="doccomment">/// = [Guid]</span>
-<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/stg/format-identifiers)\]</span>
-<span class="doccomment">/// **F**or**m**a**t** **Id**entifier - used for tagging sections in e.g. structured storage property sets</span>
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">FmtID</span>  <span class="op">=</span> <span class="ident">Guid</span>;
+<span class="doccomment">/// = [Guid]
+/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/stg/format-identifiers)\]
+/// **F**or**m**a**t** **Id**entifier - used for tagging sections in e.g. structured storage property sets
+</span><span class="kw">pub type </span>FmtID  = Guid;
 
-<span class="doccomment">/// Define a [Guid] constant.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// ### Examples</span>
-<span class="doccomment">/// ```rust</span>
-<span class="doccomment">/// # use thindx::*;</span>
-<span class="doccomment">/// const IID_NULL : Guid = guid!{00000000-0000-0000-0000-000000000000};</span>
-<span class="doccomment">/// ```</span>
-<span class="attribute">#[<span class="ident">macro_export</span>]</span>
-<span class="macro">macro_rules!</span> <span class="ident">guid</span> {
-    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">a</span>:<span class="ident">tt</span> <span class="op">-</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">b</span>:<span class="ident">tt</span> <span class="op">-</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">c</span>:<span class="ident">tt</span> <span class="op">-</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">d</span>:<span class="ident">tt</span> <span class="op">-</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">e</span>:<span class="ident">tt</span> ) =&gt; {{
-        <span class="comment">// ensure macro contents are evaluated at compile time</span>
-        <span class="kw">const</span> <span class="ident">GUID</span> : <span class="macro-nonterminal">$</span><span class="macro-nonterminal">crate::Guid</span> <span class="op">=</span> {
-            <span class="kw">const</span> <span class="ident">A</span> : <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> [<span class="ident">u8</span>] <span class="op">=</span> <span class="macro">stringify!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">a</span>).<span class="ident">as_bytes</span>();
-            <span class="kw">const</span> <span class="ident">B</span> : <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> [<span class="ident">u8</span>] <span class="op">=</span> <span class="macro">stringify!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">b</span>).<span class="ident">as_bytes</span>();
-            <span class="kw">const</span> <span class="ident">C</span> : <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> [<span class="ident">u8</span>] <span class="op">=</span> <span class="macro">stringify!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">c</span>).<span class="ident">as_bytes</span>();
-            <span class="kw">const</span> <span class="ident">D</span> : <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> [<span class="ident">u8</span>] <span class="op">=</span> <span class="macro">stringify!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">d</span>).<span class="ident">as_bytes</span>();
-            <span class="kw">const</span> <span class="ident">E</span> : <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> [<span class="ident">u8</span>] <span class="op">=</span> <span class="macro">stringify!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">e</span>).<span class="ident">as_bytes</span>();
-            <span class="macro">assert!</span>(<span class="ident">A</span>.<span class="ident">len</span>() <span class="op">==</span>  <span class="number">8</span>,  <span class="string">&quot;expected 8 hex characters for 1st group of guid digits&quot;</span>);
-            <span class="macro">assert!</span>(<span class="ident">B</span>.<span class="ident">len</span>() <span class="op">==</span>  <span class="number">4</span>,  <span class="string">&quot;expected 4 hex characters for 2nd group of guid digits&quot;</span>);
-            <span class="macro">assert!</span>(<span class="ident">C</span>.<span class="ident">len</span>() <span class="op">==</span>  <span class="number">4</span>,  <span class="string">&quot;expected 4 hex characters for 3rd group of guid digits&quot;</span>);
-            <span class="macro">assert!</span>(<span class="ident">D</span>.<span class="ident">len</span>() <span class="op">==</span>  <span class="number">4</span>,  <span class="string">&quot;expected 4 hex characters for 4th group of guid digits&quot;</span>);
-            <span class="macro">assert!</span>(<span class="ident">E</span>.<span class="ident">len</span>() <span class="op">==</span> <span class="number">12</span>, <span class="string">&quot;expected 12 hex characters for 5th group of guid digits&quot;</span>);
-            <span class="macro">assert!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">crate::Guid::_zzz_all_hex_digits_8</span>(<span class="ident">A</span>),  <span class="string">&quot;non-hexidecimal characters in 1st group of guid digits&quot;</span>);
-            <span class="macro">assert!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">crate::Guid::_zzz_all_hex_digits_4</span>(<span class="ident">B</span>),  <span class="string">&quot;non-hexidecimal characters in 2nd group of guid digits&quot;</span>);
-            <span class="macro">assert!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">crate::Guid::_zzz_all_hex_digits_4</span>(<span class="ident">C</span>),  <span class="string">&quot;non-hexidecimal characters in 3rd group of guid digits&quot;</span>);
-            <span class="macro">assert!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">crate::Guid::_zzz_all_hex_digits_4</span>(<span class="ident">D</span>),  <span class="string">&quot;non-hexidecimal characters in 4th group of guid digits&quot;</span>);
-            <span class="macro">assert!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">crate::Guid::_zzz_all_hex_digits_12</span>(<span class="ident">E</span>), <span class="string">&quot;non-hexidecimal characters in 5th group of guid digits&quot;</span>);
-            <span class="macro-nonterminal">$</span><span class="macro-nonterminal">crate::Guid::_zzz_from_macro_contents</span>(<span class="ident">A</span>, <span class="ident">B</span>, <span class="ident">C</span>, <span class="ident">D</span>, <span class="ident">E</span>)
+<span class="doccomment">/// Define a [Guid] constant.
+///
+/// ### Examples
+/// ```rust
+/// # use thindx::*;
+/// const IID_NULL : Guid = guid!(&quot;00000000-0000-0000-0000-000000000000&quot;);
+/// ```
+</span><span class="attribute">#[macro_export]
+</span><span class="macro">macro_rules! </span>guid {
+    ( <span class="macro-nonterminal">$s</span>:literal ) =&gt; {{
+        <span class="comment">// ensure macro contents are evaluated at compile time
+        </span><span class="kw">const </span>GUID : <span class="macro-nonterminal">$crate::Guid </span>= {
+            <span class="kw">use </span><span class="macro-nonterminal">$</span><span class="kw">crate</span>::<span class="kw-2">*</span>;
+            <span class="kw">const </span><span class="macro-nonterminal">STR </span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str = <span class="macro-nonterminal">$s</span>;
+            <span class="kw">let </span><span class="kw-2">mut </span>bytes = STR.as_bytes();
+
+            <span class="macro">guid!</span>(@expect-hex  bytes, <span class="number">8</span>, <span class="string">&quot;1st&quot;</span>);
+            <span class="macro">guid!</span>(@expect-dash bytes, <span class="number">8</span>, <span class="string">&quot;1st&quot;</span>);
+            <span class="macro">guid!</span>(@expect-hex  bytes, <span class="number">4</span>, <span class="string">&quot;2nd&quot;</span>);
+            <span class="macro">guid!</span>(@expect-dash bytes, <span class="number">4</span>, <span class="string">&quot;2nd&quot;</span>);
+            <span class="macro">guid!</span>(@expect-hex  bytes, <span class="number">4</span>, <span class="string">&quot;3rd&quot;</span>);
+            <span class="macro">guid!</span>(@expect-dash bytes, <span class="number">4</span>, <span class="string">&quot;3rd&quot;</span>);
+            <span class="macro">guid!</span>(@expect-hex  bytes, <span class="number">4</span>, <span class="string">&quot;4th&quot;</span>);
+            <span class="macro">guid!</span>(@expect-dash bytes, <span class="number">4</span>, <span class="string">&quot;4th&quot;</span>);
+            <span class="macro">guid!</span>(@expect-hex  bytes,<span class="number">12</span>, <span class="string">&quot;5th&quot;</span>);
+            <span class="macro">guid!</span>(@expect-eof  bytes,<span class="number">12</span>, <span class="string">&quot;5th&quot;</span>);
+
+            <span class="macro-nonterminal">$crate::Guid::_zzz_from_literal</span>(STR)
         };
-        <span class="ident">GUID</span>
+        GUID
     }};
+    ( @expect-dash <span class="macro-nonterminal">$bytes</span>:ident, <span class="macro-nonterminal">$expected_digits</span>:literal, <span class="macro-nonterminal">$group</span>:literal ) =&gt; {
+        <span class="kw">if let </span><span class="prelude-val">Some</span>((ch, rest)) = <span class="macro-nonterminal">$bytes</span>.split_first() {
+            <span class="kw">if </span>ch.is_ascii_hexdigit() {
+                <span class="macro">panic!</span>(<span class="string">&quot;{}&quot;</span>, <span class="macro">concat!</span>(<span class="string">&quot;expected `-` after &quot;</span>, <span class="macro-nonterminal">$expected_digits</span>, <span class="string">&quot; hex digits in &quot;</span>, <span class="macro-nonterminal">$group</span>, <span class="string">&quot; group, but found more than that&quot;</span>));
+            } <span class="kw">else if </span><span class="kw-2">*</span>ch == <span class="string">b&#39;-&#39; </span>{
+                <span class="macro-nonterminal">$bytes </span>= rest; <span class="comment">// OK
+            </span>} <span class="kw">else </span>{
+                <span class="macro">panic!</span>(<span class="string">&quot;{}&quot;</span>, <span class="macro">concat!</span>(<span class="string">&quot;expected `-` after &quot;</span>, <span class="macro-nonterminal">$group</span>, <span class="string">&quot; group of hex digits, but found something else&quot;</span>));
+            }
+        } <span class="kw">else </span>{
+            <span class="macro">panic!</span>(<span class="string">&quot;{}&quot;</span>, <span class="macro">concat!</span>(<span class="string">&quot;expected `-` after &quot;</span>, <span class="macro-nonterminal">$group</span>, <span class="string">&quot; group of hex digits, but reached the end of the string instead&quot;</span>));
+        }
+    };
+    ( @expect-eof <span class="macro-nonterminal">$bytes</span>:ident, <span class="macro-nonterminal">$expected_digits</span>:literal, <span class="macro-nonterminal">$group</span>:literal ) =&gt; {
+        <span class="kw">if let </span><span class="prelude-val">Some</span>((ch, _rest)) = <span class="macro-nonterminal">$bytes</span>.split_first() {
+            <span class="kw">if </span>ch.is_ascii_hexdigit() {
+                <span class="macro">panic!</span>(<span class="string">&quot;{}&quot;</span>, <span class="macro">concat!</span>(<span class="string">&quot;expected end of string after &quot;</span>, <span class="macro-nonterminal">$expected_digits</span>, <span class="string">&quot; hex digits in &quot;</span>, <span class="macro-nonterminal">$group</span>, <span class="string">&quot; group, but found more than that&quot;</span>));
+            } <span class="kw">else if </span><span class="kw-2">*</span>ch == <span class="string">b&#39;-&#39; </span>{
+                <span class="macro">panic!</span>(<span class="string">&quot;{}&quot;</span>, <span class="macro">concat!</span>(<span class="string">&quot;expected end of string after &quot;</span>, <span class="macro-nonterminal">$expected_digits</span>, <span class="string">&quot; hex digits in &quot;</span>, <span class="macro-nonterminal">$group</span>, <span class="string">&quot; group, but found a trailing dash instead&quot;</span>));
+            } <span class="kw">else </span>{
+                <span class="macro">panic!</span>(<span class="string">&quot;{}&quot;</span>, <span class="macro">concat!</span>(<span class="string">&quot;expected end of string after &quot;</span>, <span class="macro-nonterminal">$group</span>, <span class="string">&quot; group of hex digits, but found something else&quot;</span>));
+            }
+        } <span class="kw">else </span>{
+            <span class="comment">// OK
+        </span>}
+    };
+    ( @expect-hex <span class="macro-nonterminal">$bytes</span>:ident, <span class="macro-nonterminal">$expected_digits</span>:literal, <span class="macro-nonterminal">$group</span>:literal ) =&gt; {
+        <span class="kw">let </span><span class="kw-2">mut </span>digits : usize = <span class="macro-nonterminal">$expected_digits</span>;
+        <span class="kw">while </span>digits &gt; <span class="number">0 </span>{
+            digits -= <span class="number">1</span>;
+            <span class="kw">if let </span><span class="prelude-val">Some</span>((ch, rest)) = <span class="macro-nonterminal">$bytes</span>.split_first() {
+                <span class="kw">if </span>ch.is_ascii_hexdigit() {
+                    <span class="macro-nonterminal">$bytes </span>= rest; <span class="comment">// OK
+                </span>} <span class="kw">else if </span><span class="kw-2">*</span>ch == <span class="string">b&#39;-&#39; </span>{
+                    <span class="macro">panic!</span>(<span class="string">&quot;{}&quot;</span>, <span class="macro">concat!</span>(<span class="string">&quot;expected &quot;</span>, <span class="macro-nonterminal">$expected_digits</span>, <span class="string">&quot; hex digits in &quot;</span>, <span class="macro-nonterminal">$group</span>, <span class="string">&quot; group, but found a dash before that&quot;</span>));
+                } <span class="kw">else </span>{
+                    <span class="macro">panic!</span>(<span class="string">&quot;{}&quot;</span>, <span class="macro">concat!</span>(<span class="string">&quot;expected &quot;</span>, <span class="macro-nonterminal">$expected_digits</span>, <span class="string">&quot; hex digits in &quot;</span>, <span class="macro-nonterminal">$group</span>, <span class="string">&quot; group, but found something else&quot;</span>));
+                }
+            } <span class="kw">else </span>{
+                <span class="macro">panic!</span>(<span class="string">&quot;{}&quot;</span>, <span class="macro">concat!</span>(<span class="string">&quot;expected &quot;</span>, <span class="macro-nonterminal">$expected_digits</span>, <span class="string">&quot; hex digits in &quot;</span>, <span class="macro-nonterminal">$group</span>, <span class="string">&quot; group, but reached the end of the string instead&quot;</span>));
+            }
+        }
+    };
 }
 
-<span class="kw">impl</span> <span class="ident">Guid</span> {
-    <span class="doccomment">/// `{00000000-0000-0000-0000-000000000000}` - the &quot;null&quot; guid</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">NULL</span> : <span class="self">Self</span> <span class="op">=</span> <span class="macro">guid!</span>{<span class="number">00000000</span><span class="op">-</span><span class="number">0000</span><span class="op">-</span><span class="number">0000</span><span class="op">-</span><span class="number">0000</span><span class="op">-</span><span class="number">000000000000</span>};
+<span class="kw">impl </span>Guid {
+    <span class="doccomment">/// `{00000000-0000-0000-0000-000000000000}` - the &quot;null&quot; guid
+    </span><span class="kw">pub const </span>NULL : <span class="self">Self </span>= <span class="macro">guid!</span>(<span class="string">&quot;00000000-0000-0000-0000-000000000000&quot;</span>);
 }
 
-<span class="kw unsafe">unsafe</span> <span class="kw">impl</span> <span class="ident">Pod</span>         <span class="kw">for</span> <span class="ident">Guid</span> {}
-<span class="kw unsafe">unsafe</span> <span class="kw">impl</span> <span class="ident">Zeroable</span>    <span class="kw">for</span> <span class="ident">Guid</span> {}
-<span class="kw">impl</span> <span class="ident">Default</span>            <span class="kw">for</span> <span class="ident">Guid</span> { <span class="kw">fn</span> <span class="ident">default</span>() -&gt; <span class="self">Self</span> { <span class="ident"><span class="self">Self</span>::zeroed</span>() } }
+<span class="kw">unsafe impl </span>Pod         <span class="kw">for </span>Guid {}
+<span class="kw">unsafe impl </span>Zeroable    <span class="kw">for </span>Guid {}
+<span class="kw">impl </span>Default            <span class="kw">for </span>Guid { <span class="kw">fn </span>default() -&gt; <span class="self">Self </span>{ <span class="self">Self</span>::zeroed() } }
 
-<span class="kw">impl</span> <span class="ident">Debug</span>              <span class="kw">for</span> <span class="ident">Guid</span> { <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">fmt</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Formatter</span>) -&gt; <span class="ident">fmt::Result</span> { <span class="self">self</span>.<span class="ident">fmt_impl</span>(<span class="ident">fmt</span>) } }
-<span class="kw">impl</span> <span class="ident">Display</span>            <span class="kw">for</span> <span class="ident">Guid</span> { <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">fmt</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Formatter</span>) -&gt; <span class="ident">fmt::Result</span> { <span class="self">self</span>.<span class="ident">fmt_impl</span>(<span class="ident">fmt</span>) } }
+<span class="kw">impl </span>Debug              <span class="kw">for </span>Guid { <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, fmt: <span class="kw-2">&amp;mut </span>Formatter) -&gt; fmt::Result { <span class="self">self</span>.fmt_impl(fmt) } }
+<span class="kw">impl </span>Display            <span class="kw">for </span>Guid { <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, fmt: <span class="kw-2">&amp;mut </span>Formatter) -&gt; fmt::Result { <span class="self">self</span>.fmt_impl(fmt) } }
 
-<span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">GUID</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Guid</span> { <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">guid</span>: <span class="ident">GUID</span>) -&gt; <span class="self">Self</span> { <span class="self">Self</span>(<span class="ident">guid</span>) } }
-<span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Guid</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">GUID</span> { <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">guid</span>: <span class="ident">Guid</span>) -&gt; <span class="self">Self</span> { <span class="ident">guid</span>.<span class="number">0</span> } }
+<span class="kw">impl </span>AsRef&lt;Guid&gt; <span class="kw">for </span>Guid { <span class="kw">fn </span>as_ref(&amp;    <span class="self">self</span>) -&gt; &amp;    Guid {      <span class="self">self </span>} }
+<span class="kw">impl </span>AsMut&lt;Guid&gt; <span class="kw">for </span>Guid { <span class="kw">fn </span>as_mut(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut </span>Guid {      <span class="self">self </span>} }
+<span class="kw">impl </span>AsRef&lt;GUID&gt; <span class="kw">for </span>Guid { <span class="kw">fn </span>as_ref(&amp;    <span class="self">self</span>) -&gt; &amp;    GUID { &amp;    <span class="self">self</span>.<span class="number">0 </span>} }
+<span class="kw">impl </span>AsMut&lt;GUID&gt; <span class="kw">for </span>Guid { <span class="kw">fn </span>as_mut(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut </span>GUID { <span class="kw-2">&amp;mut </span><span class="self">self</span>.<span class="number">0 </span>} }
+<span class="kw">impl </span>AsRef&lt;Guid&gt; <span class="kw">for </span>GUID { <span class="kw">fn </span>as_ref(&amp;    <span class="self">self</span>) -&gt; &amp;    Guid { <span class="kw">unsafe </span>{ std::mem::transmute(<span class="self">self</span>) } } }
+<span class="kw">impl </span>AsMut&lt;Guid&gt; <span class="kw">for </span>GUID { <span class="kw">fn </span>as_mut(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut </span>Guid { <span class="kw">unsafe </span>{ std::mem::transmute(<span class="self">self</span>) } } }
+<span class="kw">impl </span>From&lt;GUID&gt; <span class="kw">for </span>Guid { <span class="kw">fn </span>from(guid: GUID) -&gt; <span class="self">Self </span>{ <span class="self">Self</span>(guid) } }
+<span class="kw">impl </span>From&lt;Guid&gt; <span class="kw">for </span>GUID { <span class="kw">fn </span>from(guid: Guid) -&gt; <span class="self">Self </span>{ guid.<span class="number">0 </span>} }
 
-<span class="kw">impl</span> <span class="ident">Eq</span>                 <span class="kw">for</span> <span class="ident">Guid</span> {}
-<span class="kw">impl</span> <span class="ident">PartialEq</span>          <span class="kw">for</span> <span class="ident">Guid</span> { <span class="kw">fn</span> <span class="ident">eq</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="ident">bool</span> { <span class="self">self</span>.<span class="ident">as_bytes</span>() <span class="op">==</span> <span class="ident">other</span>.<span class="ident">as_bytes</span>() } }
-<span class="kw">impl</span> <span class="ident">Ord</span>                <span class="kw">for</span> <span class="ident">Guid</span> { <span class="kw">fn</span> <span class="ident">cmp</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="ident">Ordering</span> { <span class="self">self</span>.<span class="ident">as_bytes</span>().<span class="ident">cmp</span>(<span class="ident">other</span>.<span class="ident">as_bytes</span>()) } }
-<span class="kw">impl</span> <span class="ident">PartialOrd</span>         <span class="kw">for</span> <span class="ident">Guid</span> { <span class="kw">fn</span> <span class="ident">partial_cmp</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Ordering</span><span class="op">&gt;</span> { <span class="self">self</span>.<span class="ident">as_bytes</span>().<span class="ident">partial_cmp</span>(<span class="ident">other</span>.<span class="ident">as_bytes</span>()) } }
-<span class="kw">impl</span> <span class="ident">Hash</span>               <span class="kw">for</span> <span class="ident">Guid</span> { <span class="kw">fn</span> <span class="ident">hash</span><span class="op">&lt;</span><span class="ident">H</span>: <span class="ident">Hasher</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">state</span>: <span class="kw-2">&amp;mut</span> <span class="ident">H</span>) { <span class="self">self</span>.<span class="ident">as_bytes</span>().<span class="ident">hash</span>(<span class="ident">state</span>) } }
+<span class="kw">impl </span>Eq                 <span class="kw">for </span>Guid {}
+<span class="kw">impl </span>PartialEq          <span class="kw">for </span>Guid { <span class="kw">fn </span>eq(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; bool { <span class="self">self</span>.as_bytes() == other.as_bytes() } }
+<span class="kw">impl </span>Ord                <span class="kw">for </span>Guid { <span class="kw">fn </span>cmp(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; Ordering { <span class="self">self</span>.as_bytes().cmp(other.as_bytes()) } }
+<span class="kw">impl </span>PartialOrd         <span class="kw">for </span>Guid { <span class="kw">fn </span>partial_cmp(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;Ordering&gt; { <span class="self">self</span>.as_bytes().partial_cmp(other.as_bytes()) } }
+<span class="kw">impl </span>Hash               <span class="kw">for </span>Guid { <span class="kw">fn </span>hash&lt;H: Hasher&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, state: <span class="kw-2">&amp;mut </span>H) { <span class="self">self</span>.as_bytes().hash(state) } }
 
-<span class="kw">impl</span> <span class="ident">Guid</span> {
-    <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span> <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">_zzz_all_hex_digits_4</span> (<span class="ident">s</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) -&gt; <span class="ident">bool</span> { <span class="ident">s</span>[<span class="number">0</span>].<span class="ident">is_ascii_hexdigit</span>() <span class="op">&amp;&amp;</span> <span class="ident">s</span>[<span class="number">1</span>].<span class="ident">is_ascii_hexdigit</span>() <span class="op">&amp;&amp;</span> <span class="ident">s</span>[<span class="number">2</span>].<span class="ident">is_ascii_hexdigit</span>() <span class="op">&amp;&amp;</span> <span class="ident">s</span>[<span class="number">3</span>].<span class="ident">is_ascii_hexdigit</span>() }
-    <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span> <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">_zzz_all_hex_digits_8</span> (<span class="ident">s</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) -&gt; <span class="ident">bool</span> { <span class="ident"><span class="self">Self</span>::_zzz_all_hex_digits_4</span>(<span class="kw-2">&amp;</span>[<span class="ident">s</span>[<span class="number">0</span>], <span class="ident">s</span>[<span class="number">1</span>], <span class="ident">s</span>[<span class="number">2</span>], <span class="ident">s</span>[<span class="number">3</span>]]) <span class="op">&amp;&amp;</span> <span class="ident"><span class="self">Self</span>::_zzz_all_hex_digits_4</span>(<span class="kw-2">&amp;</span>[<span class="ident">s</span>[<span class="number">4</span>], <span class="ident">s</span>[<span class="number">5</span>], <span class="ident">s</span>[<span class="number">6</span>], <span class="ident">s</span>[<span class="number">7</span>]]) }
-    <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span> <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">_zzz_all_hex_digits_12</span>(<span class="ident">s</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) -&gt; <span class="ident">bool</span> { <span class="ident"><span class="self">Self</span>::_zzz_all_hex_digits_4</span>(<span class="kw-2">&amp;</span>[<span class="ident">s</span>[<span class="number">0</span>], <span class="ident">s</span>[<span class="number">1</span>], <span class="ident">s</span>[<span class="number">2</span>], <span class="ident">s</span>[<span class="number">3</span>]]) <span class="op">&amp;&amp;</span> <span class="ident"><span class="self">Self</span>::_zzz_all_hex_digits_4</span>(<span class="kw-2">&amp;</span>[<span class="ident">s</span>[<span class="number">4</span>], <span class="ident">s</span>[<span class="number">5</span>], <span class="ident">s</span>[<span class="number">6</span>], <span class="ident">s</span>[<span class="number">7</span>]]) <span class="op">&amp;&amp;</span> <span class="ident"><span class="self">Self</span>::_zzz_all_hex_digits_4</span>(<span class="kw-2">&amp;</span>[<span class="ident">s</span>[<span class="number">8</span>], <span class="ident">s</span>[<span class="number">9</span>], <span class="ident">s</span>[<span class="number">10</span>], <span class="ident">s</span>[<span class="number">11</span>]]) }
+<span class="kw">impl </span>Guid {
+    <span class="attribute">#[doc(hidden)] </span><span class="kw">pub const fn </span>_zzz_from_literal(s: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str) -&gt; <span class="self">Self </span>{
+        <span class="attribute">#![allow(non_snake_case)]
+        </span><span class="kw">let </span>s = s.as_bytes();
 
-    <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span> <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">_zzz_from_macro_contents</span>(
-        <span class="ident">a</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>],
-        <span class="ident">b</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>],
-        <span class="ident">c</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>],
-        <span class="ident">d</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>],
-        <span class="ident">e</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>],
-    ) -&gt; <span class="self">Self</span> {
-        <span class="attribute">#![<span class="ident">allow</span>(<span class="ident">non_snake_case</span>)]</span>
-
-        <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">hex2b</span>(<span class="ident">hi</span>: <span class="ident">u8</span>, <span class="ident">lo</span>: <span class="ident">u8</span>) -&gt; <span class="ident">u8</span> {
-            <span class="kw">let</span> <span class="ident">hi</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">hi</span> {
-                <span class="string">b&#39;0&#39;</span> ..<span class="op">=</span> <span class="string">b&#39;9&#39;</span>   =&gt; <span class="ident">hi</span><span class="op">-</span><span class="string">b&#39;0&#39;</span>,
-                <span class="string">b&#39;a&#39;</span> ..<span class="op">=</span> <span class="string">b&#39;f&#39;</span>   =&gt; <span class="ident">hi</span><span class="op">-</span><span class="string">b&#39;a&#39;</span><span class="op">+</span><span class="number">10</span>,
-                <span class="string">b&#39;A&#39;</span> ..<span class="op">=</span> <span class="string">b&#39;F&#39;</span>   =&gt; <span class="ident">hi</span><span class="op">-</span><span class="string">b&#39;A&#39;</span><span class="op">+</span><span class="number">10</span>,
-                <span class="kw">_</span>               =&gt; <span class="number">0</span>, <span class="comment">// already paniced at macro site</span>
-            };
-            <span class="kw">let</span> <span class="ident">lo</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">lo</span> {
-                <span class="string">b&#39;0&#39;</span> ..<span class="op">=</span> <span class="string">b&#39;9&#39;</span>   =&gt; <span class="ident">lo</span><span class="op">-</span><span class="string">b&#39;0&#39;</span>,
-                <span class="string">b&#39;a&#39;</span> ..<span class="op">=</span> <span class="string">b&#39;f&#39;</span>   =&gt; <span class="ident">lo</span><span class="op">-</span><span class="string">b&#39;a&#39;</span><span class="op">+</span><span class="number">10</span>,
-                <span class="string">b&#39;A&#39;</span> ..<span class="op">=</span> <span class="string">b&#39;F&#39;</span>   =&gt; <span class="ident">lo</span><span class="op">-</span><span class="string">b&#39;A&#39;</span><span class="op">+</span><span class="number">10</span>,
-                <span class="kw">_</span>               =&gt; <span class="number">0</span>, <span class="comment">// already paniced at macro site</span>
-            };
-            (<span class="ident">hi</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">4</span>) <span class="op">|</span> <span class="ident">lo</span>
+        <span class="kw">const fn </span>hex2b(hi: u8, lo: u8) -&gt; u8 {
+            <span class="kw">let </span>hi = <span class="kw">match </span>hi {
+                <span class="string">b&#39;0&#39; </span>..= <span class="string">b&#39;9&#39;   </span>=&gt; hi-<span class="string">b&#39;0&#39;</span>,
+                <span class="string">b&#39;a&#39; </span>..= <span class="string">b&#39;f&#39;   </span>=&gt; hi-<span class="string">b&#39;a&#39;</span>+<span class="number">10</span>,
+                <span class="string">b&#39;A&#39; </span>..= <span class="string">b&#39;F&#39;   </span>=&gt; hi-<span class="string">b&#39;A&#39;</span>+<span class="number">10</span>,
+                <span class="kw">_               </span>=&gt; <span class="number">0</span>, <span class="comment">// already paniced at macro site
+            </span>};
+            <span class="kw">let </span>lo = <span class="kw">match </span>lo {
+                <span class="string">b&#39;0&#39; </span>..= <span class="string">b&#39;9&#39;   </span>=&gt; lo-<span class="string">b&#39;0&#39;</span>,
+                <span class="string">b&#39;a&#39; </span>..= <span class="string">b&#39;f&#39;   </span>=&gt; lo-<span class="string">b&#39;a&#39;</span>+<span class="number">10</span>,
+                <span class="string">b&#39;A&#39; </span>..= <span class="string">b&#39;F&#39;   </span>=&gt; lo-<span class="string">b&#39;A&#39;</span>+<span class="number">10</span>,
+                <span class="kw">_               </span>=&gt; <span class="number">0</span>, <span class="comment">// already paniced at macro site
+            </span>};
+            (hi &lt;&lt; <span class="number">4</span>) | lo
         }
 
-        <span class="kw">let</span> <span class="ident">Data1</span> <span class="op">=</span> <span class="ident">u32::from_be_bytes</span>([
-            <span class="ident">hex2b</span>(<span class="ident">a</span>[<span class="number">0</span>], <span class="ident">a</span>[<span class="number">1</span>]),
-            <span class="ident">hex2b</span>(<span class="ident">a</span>[<span class="number">2</span>], <span class="ident">a</span>[<span class="number">3</span>]),
-            <span class="ident">hex2b</span>(<span class="ident">a</span>[<span class="number">4</span>], <span class="ident">a</span>[<span class="number">5</span>]),
-            <span class="ident">hex2b</span>(<span class="ident">a</span>[<span class="number">6</span>], <span class="ident">a</span>[<span class="number">7</span>]),
+        <span class="kw">let </span>Data1 = u32::from_be_bytes([
+            hex2b(s[ <span class="number">0</span>], s[ <span class="number">1</span>]),
+            hex2b(s[ <span class="number">2</span>], s[ <span class="number">3</span>]),
+            hex2b(s[ <span class="number">4</span>], s[ <span class="number">5</span>]),
+            hex2b(s[ <span class="number">6</span>], s[ <span class="number">7</span>]),
         ]);
 
-        <span class="kw">let</span> <span class="ident">Data2</span> <span class="op">=</span> <span class="ident">u16::from_be_bytes</span>([
-            <span class="ident">hex2b</span>(<span class="ident">b</span>[<span class="number">0</span>], <span class="ident">b</span>[<span class="number">1</span>]),
-            <span class="ident">hex2b</span>(<span class="ident">b</span>[<span class="number">2</span>], <span class="ident">b</span>[<span class="number">3</span>]),
+        <span class="kw">let </span>Data2 = u16::from_be_bytes([
+            hex2b(s[ <span class="number">9</span>], s[<span class="number">10</span>]),
+            hex2b(s[<span class="number">11</span>], s[<span class="number">12</span>]),
         ]);
 
-        <span class="kw">let</span> <span class="ident">Data3</span> <span class="op">=</span> <span class="ident">u16::from_be_bytes</span>([
-            <span class="ident">hex2b</span>(<span class="ident">c</span>[<span class="number">0</span>], <span class="ident">c</span>[<span class="number">1</span>]),
-            <span class="ident">hex2b</span>(<span class="ident">c</span>[<span class="number">2</span>], <span class="ident">c</span>[<span class="number">3</span>]),
+        <span class="kw">let </span>Data3 = u16::from_be_bytes([
+            hex2b(s[<span class="number">14</span>], s[<span class="number">15</span>]),
+            hex2b(s[<span class="number">16</span>], s[<span class="number">17</span>]),
         ]);
 
-        <span class="kw">let</span> <span class="ident">Data4</span> <span class="op">=</span> [
-            <span class="ident">hex2b</span>(<span class="ident">d</span>[ <span class="number">0</span>], <span class="ident">d</span>[ <span class="number">1</span>]),
-            <span class="ident">hex2b</span>(<span class="ident">d</span>[ <span class="number">2</span>], <span class="ident">d</span>[ <span class="number">3</span>]),
-            <span class="comment">// -</span>
-            <span class="ident">hex2b</span>(<span class="ident">e</span>[ <span class="number">0</span>], <span class="ident">e</span>[ <span class="number">1</span>]),
-            <span class="ident">hex2b</span>(<span class="ident">e</span>[ <span class="number">2</span>], <span class="ident">e</span>[ <span class="number">3</span>]),
-            <span class="ident">hex2b</span>(<span class="ident">e</span>[ <span class="number">4</span>], <span class="ident">e</span>[ <span class="number">5</span>]),
-            <span class="ident">hex2b</span>(<span class="ident">e</span>[ <span class="number">6</span>], <span class="ident">e</span>[ <span class="number">7</span>]),
-            <span class="ident">hex2b</span>(<span class="ident">e</span>[ <span class="number">8</span>], <span class="ident">e</span>[ <span class="number">9</span>]),
-            <span class="ident">hex2b</span>(<span class="ident">e</span>[<span class="number">10</span>], <span class="ident">e</span>[<span class="number">11</span>]),
+        <span class="kw">let </span>Data4 = [
+            hex2b(s[<span class="number">19</span>], s[<span class="number">20</span>]),
+            hex2b(s[<span class="number">21</span>], s[<span class="number">22</span>]),
+            <span class="comment">// -
+            </span>hex2b(s[<span class="number">24</span>], s[<span class="number">25</span>]),
+            hex2b(s[<span class="number">26</span>], s[<span class="number">27</span>]),
+            hex2b(s[<span class="number">28</span>], s[<span class="number">29</span>]),
+            hex2b(s[<span class="number">30</span>], s[<span class="number">31</span>]),
+            hex2b(s[<span class="number">32</span>], s[<span class="number">33</span>]),
+            hex2b(s[<span class="number">34</span>], s[<span class="number">35</span>]),
         ];
 
-        <span class="self">Self</span>(<span class="ident">GUID</span> { <span class="ident">Data1</span>, <span class="ident">Data2</span>, <span class="ident">Data3</span>, <span class="ident">Data4</span> })
+        <span class="self">Self</span>(GUID { Data1, Data2, Data3, Data4 })
     }
 
-    <span class="kw">fn</span> <span class="ident">fmt_impl</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">fmt</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
+    <span class="kw">fn </span>fmt_impl(<span class="kw-2">&amp;</span><span class="self">self</span>, fmt: <span class="kw-2">&amp;mut </span>Formatter) -&gt; fmt::Result {
         <span class="macro">write!</span>(
-            <span class="ident">fmt</span>,
+            fmt,
             <span class="string">&quot;{{{:08X}-{:04X}-{:04X}-{:02X}{:02X}-{:02X}{:02X}{:02X}{:02X}{:02X}{:02X}}}&quot;</span>,
-            <span class="self">self</span>.<span class="number">0</span>.<span class="ident">Data1</span>,
-            <span class="self">self</span>.<span class="number">0</span>.<span class="ident">Data2</span>,
-            <span class="self">self</span>.<span class="number">0</span>.<span class="ident">Data3</span>,
-            <span class="self">self</span>.<span class="number">0</span>.<span class="ident">Data4</span>[<span class="number">0</span>], <span class="self">self</span>.<span class="number">0</span>.<span class="ident">Data4</span>[<span class="number">1</span>],
-            <span class="self">self</span>.<span class="number">0</span>.<span class="ident">Data4</span>[<span class="number">2</span>], <span class="self">self</span>.<span class="number">0</span>.<span class="ident">Data4</span>[<span class="number">3</span>], <span class="self">self</span>.<span class="number">0</span>.<span class="ident">Data4</span>[<span class="number">4</span>], <span class="self">self</span>.<span class="number">0</span>.<span class="ident">Data4</span>[<span class="number">5</span>], <span class="self">self</span>.<span class="number">0</span>.<span class="ident">Data4</span>[<span class="number">6</span>], <span class="self">self</span>.<span class="number">0</span>.<span class="ident">Data4</span>[<span class="number">7</span>],
+            <span class="self">self</span>.<span class="number">0</span>.Data1,
+            <span class="self">self</span>.<span class="number">0</span>.Data2,
+            <span class="self">self</span>.<span class="number">0</span>.Data3,
+            <span class="self">self</span>.<span class="number">0</span>.Data4[<span class="number">0</span>], <span class="self">self</span>.<span class="number">0</span>.Data4[<span class="number">1</span>],
+            <span class="self">self</span>.<span class="number">0</span>.Data4[<span class="number">2</span>], <span class="self">self</span>.<span class="number">0</span>.Data4[<span class="number">3</span>], <span class="self">self</span>.<span class="number">0</span>.Data4[<span class="number">4</span>], <span class="self">self</span>.<span class="number">0</span>.Data4[<span class="number">5</span>], <span class="self">self</span>.<span class="number">0</span>.Data4[<span class="number">6</span>], <span class="self">self</span>.<span class="number">0</span>.Data4[<span class="number">7</span>],
         )
     }
 
-    <span class="kw">fn</span> <span class="ident">as_bytes</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] { <span class="ident">bytemuck::bytes_of</span>(<span class="self">self</span>) }
+    <span class="kw">fn </span>as_bytes(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[u8] { bytemuck::bytes_of(<span class="self">self</span>) }
 }
 
-<span class="attribute">#[<span class="ident">test</span>]</span> <span class="kw">fn</span> <span class="ident">test_display</span>() {
-    <span class="macro">assert_eq!</span>(<span class="string">&quot;{6B29FC40-CA47-1067-B31D-00DD010662DA}&quot;</span>, <span class="ident">Guid</span>(<span class="ident">GUID</span> { <span class="ident">Data1</span>: <span class="number">0x6B29FC40</span>, <span class="ident">Data2</span>: <span class="number">0xCA47</span>, <span class="ident">Data3</span>: <span class="number">0x1067</span>, <span class="ident">Data4</span>: <span class="kw-2">*</span><span class="string">b&quot;\xB3\x1D\x00\xDD\x01\x06\x62\xDA&quot;</span> }).<span class="ident">to_string</span>());
-    <span class="macro">assert_eq!</span>(<span class="string">&quot;{6B29FC40-CA47-1067-B31D-00DD010662DA}&quot;</span>, <span class="macro">guid!</span>{<span class="number">6B29FC40</span><span class="op">-</span><span class="ident">CA47</span><span class="op">-</span><span class="number">1067</span><span class="op">-</span><span class="ident">B31D</span><span class="op">-</span><span class="number">00DD010662DA</span>}.<span class="ident">to_string</span>());
-    <span class="macro">assert_eq!</span>(<span class="string">&quot;{6B29FC40-CA47-1067-B31D-00DD010662DA}&quot;</span>, <span class="macro">guid!</span>{<span class="number">6b29fc40</span><span class="op">-</span><span class="ident">ca47</span><span class="op">-</span><span class="number">1067</span><span class="op">-</span><span class="ident">b31d</span><span class="op">-</span><span class="number">00dd010662da</span>}.<span class="ident">to_string</span>());
+<span class="attribute">#[test] </span><span class="kw">fn </span>test_display() {
+    <span class="macro">assert_eq!</span>(<span class="string">&quot;{6B29FC40-CA47-1067-B31D-00DD010662DA}&quot;</span>, Guid(GUID { Data1: <span class="number">0x6B29FC40</span>, Data2: <span class="number">0xCA47</span>, Data3: <span class="number">0x1067</span>, Data4: <span class="kw-2">*</span><span class="string">b&quot;\xB3\x1D\x00\xDD\x01\x06\x62\xDA&quot; </span>}).to_string());
+    <span class="macro">assert_eq!</span>(<span class="string">&quot;{6B29FC40-CA47-1067-B31D-00DD010662DA}&quot;</span>, <span class="macro">guid!</span>(<span class="string">&quot;6B29FC40-CA47-1067-B31D-00DD010662DA&quot;</span>).to_string());
+    <span class="macro">assert_eq!</span>(<span class="string">&quot;{6B29FC40-CA47-1067-B31D-00DD010662DA}&quot;</span>, <span class="macro">guid!</span>(<span class="string">&quot;6b29fc40-ca47-1067-b31d-00dd010662da&quot;</span>).to_string());
 }
 
-<span class="comment">//#cpp2rust GUID                = Guid</span>
-<span class="comment">//#cpp2rust IID                 = IID</span>
-<span class="comment">//#cpp2rust CLSID               = ClsID</span>
-<span class="comment">//#cpp2rust FMTID               = FmtID</span>
+<span class="comment">//#cpp2rust GUID                = Guid
+//#cpp2rust IID                 = IID
+//#cpp2rust CLSID               = ClsID
+//#cpp2rust FMTID               = FmtID
 
-<span class="comment">//#cpp2rust REFGUID             = &amp;Guid</span>
-<span class="comment">//#cpp2rust REFIID              = &amp;IID</span>
-<span class="comment">//#cpp2rust REFCLSID            = &amp;ClsID</span>
-<span class="comment">//#cpp2rust REFFMTID            = &amp;FmtID</span>
+//#cpp2rust REFGUID             = &amp;Guid
+//#cpp2rust REFIID              = &amp;IID
+//#cpp2rust REFCLSID            = &amp;ClsID
+//#cpp2rust REFFMTID            = &amp;FmtID
 
-<span class="comment">//#cpp2rust GUID_NULL           = Guid::NULL</span>
-<span class="comment">//#cpp2rust IID_NULL            = IID::NULL</span>
-<span class="comment">//#cpp2rust CLSID_NULL          = ClsID::NULL</span>
-<span class="comment">//#cpp2rust FMTID_NULL          = FmtID::NULL</span>
+//#cpp2rust GUID_NULL           = Guid::NULL
+//#cpp2rust IID_NULL            = IID::NULL
+//#cpp2rust CLSID_NULL          = ClsID::NULL
+//#cpp2rust FMTID_NULL          = FmtID::NULL
 
-<span class="comment">//#cpp2rust DEFINE_GUID         = guid!</span>
-<span class="comment">//#cpp2rust DEFINE_OLEGUID      = guid!</span>
+//#cpp2rust DEFINE_GUID         = guid!
+//#cpp2rust DEFINE_OLEGUID      = guid!
 
-<span class="comment">//#cpp2rust DECLSPEC_UUID       = impl winapi::Interface</span>
+//#cpp2rust DECLSPEC_UUID       = impl winapi::Interface
 
-<span class="comment">//#cpp2rust InlineIsEqualGUID   = Guid::eq</span>
-<span class="comment">//#cpp2rust IsEqualCLSID        = ClsID::eq</span>
-<span class="comment">//#cpp2rust IsEqualFMTID        = FmtID::eq</span>
-<span class="comment">//#cpp2rust IsEqualGUID         = Guid::eq</span>
-<span class="comment">//#cpp2rust IsEqualIID          = IID::eq</span>
+//#cpp2rust InlineIsEqualGUID   = Guid::eq
+//#cpp2rust IsEqualCLSID        = ClsID::eq
+//#cpp2rust IsEqualFMTID        = FmtID::eq
+//#cpp2rust IsEqualGUID         = Guid::eq
+//#cpp2rust IsEqualIID          = IID::eq
 
-<span class="comment">// ABI/linker cruft</span>
-<span class="comment">//#cpp2ignore EXTERN_C</span>
-<span class="comment">//#cpp2ignore DECLSPEC_SELECTANY</span>
+// ABI/linker cruft
+//#cpp2ignore EXTERN_C
+//#cpp2ignore DECLSPEC_SELECTANY
 
-<span class="comment">// 16-bit Windows cruft</span>
-<span class="comment">//#cpp2ignore FAR</span>
-</code></pre></div>
-</section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="thindx" data-search-index-js="../../../../search-index.js" data-search-js="../../../../search.js"></div>
-</body></html>
+// 16-bit Windows cruft
+//#cpp2ignore FAR
+</span></code></pre></div>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (b44197abb 2022-09-05)" ></div></body></html>

@@ -1,13 +1,12 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3dcommon.h\enumerations\shader_input_type.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>shader_input_type.rs - source</title><link rel="stylesheet" type="text/css" href="../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script src="../../../../../crates.js"></script><script defer src="../../../../../main.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script>
-    <noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"><style type="text/css">#crate-search{background-image:url("../../../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../../../../thindx/index.html'><div class='logo-container rust-logo'><img src='../../../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../../../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../../../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../../../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1"> 1</span>
-<span id="2"> 2</span>
-<span id="3"> 3</span>
-<span id="4"> 4</span>
-<span id="5"> 5</span>
-<span id="6"> 6</span>
-<span id="7"> 7</span>
-<span id="8"> 8</span>
-<span id="9"> 9</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3dcommon.h\enumerations\shader_input_type.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>shader_input_type.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../../normalize.css"><link rel="stylesheet" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../../dark.css" disabled><link rel="stylesheet" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<span id="2">2</span>
+<span id="3">3</span>
+<span id="4">4</span>
+<span id="5">5</span>
+<span id="6">6</span>
+<span id="7">7</span>
+<span id="8">8</span>
+<span id="9">9</span>
 <span id="10">10</span>
 <span id="11">11</span>
 <span id="12">12</span>
@@ -77,118 +76,83 @@
 <span id="76">76</span>
 <span id="77">77</span>
 <span id="78">78</span>
-<span id="79">79</span>
-<span id="80">80</span>
-<span id="81">81</span>
-<span id="82">82</span>
-<span id="83">83</span>
-<span id="84">84</span>
-<span id="85">85</span>
-<span id="86">86</span>
-<span id="87">87</span>
-<span id="88">88</span>
-<span id="89">89</span>
-<span id="90">90</span>
-<span id="91">91</span>
-<span id="92">92</span>
-<span id="93">93</span>
-<span id="94">94</span>
-<span id="95">95</span>
-</pre><pre class="rust"><code><span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span> <span class="kw">use</span> <span class="kw">crate</span>::<span class="kw-2">*</span>;
+</pre><pre class="rust"><code><span class="attribute">#[allow(unused_imports)] </span><span class="kw">use crate</span>::<span class="kw-2">*</span>;
 
-<span class="kw">use</span> <span class="ident">winapi::um::d3dcommon</span>::<span class="kw-2">*</span>;
+<span class="kw">use </span>bytemuck::<span class="kw-2">*</span>;
 
-<span class="comment">// not exposed by winapi 0.3.9</span>
-<span class="kw">const</span> <span class="ident">D3D_SIT_RTACCELERATIONSTRUCTURE</span>   : <span class="ident">D3D_RESOURCE_RETURN_TYPE</span> <span class="op">=</span> <span class="number">12</span>;
-<span class="kw">const</span> <span class="ident">D3D_SIT_UAV_FEEDBACKTEXTURE</span>       : <span class="ident">D3D_RESOURCE_RETURN_TYPE</span> <span class="op">=</span> <span class="number">13</span>;
+<span class="kw">use </span>winapi::um::d3dcommon::<span class="kw-2">*</span>;
+
+<span class="comment">// not exposed by winapi 0.3.9
+</span><span class="kw">const </span>D3D_SIT_RTACCELERATIONSTRUCTURE   : D3D_RESOURCE_RETURN_TYPE = <span class="number">12</span>;
+<span class="kw">const </span>D3D_SIT_UAV_FEEDBACKTEXTURE       : D3D_RESOURCE_RETURN_TYPE = <span class="number">13</span>;
 
 
 
-<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_shader_input_type)\]</span>
-<span class="doccomment">/// D3D_SHADER_INPUT_TYPE / D3D_SIT_\*</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">PartialOrd</span>, <span class="ident">Ord</span>, <span class="ident">Hash</span>)]</span>
-<span class="attribute">#[<span class="ident">repr</span>(<span class="ident">transparent</span>)]</span> <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ShaderInputType</span>(<span class="ident">D3D_SHADER_INPUT_TYPE</span>);
-<span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span> <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">ShaderInputType</span> <span class="kw">as</span> <span class="ident">SIT</span>;
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_shader_input_type)\]
+/// D3D_SHADER_INPUT_TYPE / D3D_SIT_\*
+</span><span class="attribute">#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Pod, Zeroable)]
+#[repr(transparent)] </span><span class="kw">pub struct </span>ShaderInputType(D3D_SHADER_INPUT_TYPE);
+<span class="attribute">#[doc(hidden)] </span><span class="kw">pub use </span>ShaderInputType <span class="kw">as </span>SIT;
 
-<span class="comment">// Note: D3D10_* aliases D3D_* despite poor docs kinda implying otherwise (see d3dcommon.h)</span>
-<span class="comment">// Note: D3D11_* aliases D3D_* despite poor docs kinda implying otherwise (see d3dcommon.h)</span>
+<span class="comment">// Note: D3D10_* aliases D3D_* despite poor docs kinda implying otherwise (see d3dcommon.h)
+// Note: D3D11_* aliases D3D_* despite poor docs kinda implying otherwise (see d3dcommon.h)
 
-<span class="macro">enumish!</span> {
-    <span class="ident">SIT</span> =&gt; <span class="ident">D3D_SHADER_INPUT_TYPE</span>;
-    <span class="ident">CBuffer</span>, <span class="ident">TBuffer</span>, <span class="ident">Texture</span>, <span class="ident">Sampler</span>, <span class="ident">UavRWTyped</span>, <span class="ident">Structured</span>, <span class="ident">UavRWStructured</span>,
-    <span class="ident">ByteAddress</span>, <span class="ident">UavRWByteAddress</span>, <span class="ident">UavAppendStructured</span>, <span class="ident">UavConsumeStructured</span>,
-    <span class="ident">UavRWStructuredWithCounter</span>, <span class="ident">RTAccelerationStructure</span>, <span class="ident">UavFeedbackTexture</span>,
+</span><span class="macro">enumish! </span>{
+    SIT =&gt; D3D_SHADER_INPUT_TYPE;
+    default: CBuffer == <span class="number">0</span>;
+    CBuffer, TBuffer, Texture, Sampler, UavRWTyped, Structured, UavRWStructured,
+    ByteAddress, UavRWByteAddress, UavAppendStructured, UavConsumeStructured,
+    UavRWStructuredWithCounter, RTAccelerationStructure, UavFeedbackTexture,
 }
 
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">missing_docs</span>)]</span>
-<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">non_upper_case_globals</span>)]</span> <span class="kw">impl</span> <span class="ident">SIT</span> { <span class="comment">// These are enum-like</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CBuffer</span>                       : <span class="ident">SIT</span> <span class="op">=</span> <span class="ident">SIT</span>(<span class="ident">D3D_SIT_CBUFFER</span>);
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">TBuffer</span>                       : <span class="ident">SIT</span> <span class="op">=</span> <span class="ident">SIT</span>(<span class="ident">D3D_SIT_TBUFFER</span>);
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Texture</span>                       : <span class="ident">SIT</span> <span class="op">=</span> <span class="ident">SIT</span>(<span class="ident">D3D_SIT_TEXTURE</span>);
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Sampler</span>                       : <span class="ident">SIT</span> <span class="op">=</span> <span class="ident">SIT</span>(<span class="ident">D3D_SIT_SAMPLER</span>);
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">UavRWTyped</span>                    : <span class="ident">SIT</span> <span class="op">=</span> <span class="ident">SIT</span>(<span class="ident">D3D_SIT_UAV_RWTYPED</span>);
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Structured</span>                    : <span class="ident">SIT</span> <span class="op">=</span> <span class="ident">SIT</span>(<span class="ident">D3D_SIT_STRUCTURED</span>);
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">UavRWStructured</span>               : <span class="ident">SIT</span> <span class="op">=</span> <span class="ident">SIT</span>(<span class="ident">D3D_SIT_UAV_RWSTRUCTURED</span>);
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">ByteAddress</span>                   : <span class="ident">SIT</span> <span class="op">=</span> <span class="ident">SIT</span>(<span class="ident">D3D_SIT_BYTEADDRESS</span>);
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">UavRWByteAddress</span>              : <span class="ident">SIT</span> <span class="op">=</span> <span class="ident">SIT</span>(<span class="ident">D3D_SIT_UAV_RWBYTEADDRESS</span>);
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">UavAppendStructured</span>           : <span class="ident">SIT</span> <span class="op">=</span> <span class="ident">SIT</span>(<span class="ident">D3D_SIT_UAV_APPEND_STRUCTURED</span>);
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">UavConsumeStructured</span>          : <span class="ident">SIT</span> <span class="op">=</span> <span class="ident">SIT</span>(<span class="ident">D3D_SIT_UAV_CONSUME_STRUCTURED</span>);
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">UavRWStructuredWithCounter</span>    : <span class="ident">SIT</span> <span class="op">=</span> <span class="ident">SIT</span>(<span class="ident">D3D_SIT_UAV_RWSTRUCTURED_WITH_COUNTER</span>);
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">RTAccelerationStructure</span>       : <span class="ident">SIT</span> <span class="op">=</span> <span class="ident">SIT</span>(<span class="ident">D3D_SIT_RTACCELERATIONSTRUCTURE</span>);
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">UavFeedbackTexture</span>            : <span class="ident">SIT</span> <span class="op">=</span> <span class="ident">SIT</span>(<span class="ident">D3D_SIT_UAV_FEEDBACKTEXTURE</span>);
+<span class="attribute">#[allow(missing_docs)]
+#[allow(non_upper_case_globals)] </span><span class="kw">impl </span>SIT { <span class="comment">// These are enum-like
+    </span><span class="kw">pub const </span>CBuffer                       : SIT = SIT(D3D_SIT_CBUFFER); <span class="comment">// 0
+    </span><span class="kw">pub const </span>TBuffer                       : SIT = SIT(D3D_SIT_TBUFFER);
+    <span class="kw">pub const </span>Texture                       : SIT = SIT(D3D_SIT_TEXTURE);
+    <span class="kw">pub const </span>Sampler                       : SIT = SIT(D3D_SIT_SAMPLER);
+    <span class="kw">pub const </span>UavRWTyped                    : SIT = SIT(D3D_SIT_UAV_RWTYPED);
+    <span class="kw">pub const </span>Structured                    : SIT = SIT(D3D_SIT_STRUCTURED);
+    <span class="kw">pub const </span>UavRWStructured               : SIT = SIT(D3D_SIT_UAV_RWSTRUCTURED);
+    <span class="kw">pub const </span>ByteAddress                   : SIT = SIT(D3D_SIT_BYTEADDRESS);
+    <span class="kw">pub const </span>UavRWByteAddress              : SIT = SIT(D3D_SIT_UAV_RWBYTEADDRESS);
+    <span class="kw">pub const </span>UavAppendStructured           : SIT = SIT(D3D_SIT_UAV_APPEND_STRUCTURED);
+    <span class="kw">pub const </span>UavConsumeStructured          : SIT = SIT(D3D_SIT_UAV_CONSUME_STRUCTURED);
+    <span class="kw">pub const </span>UavRWStructuredWithCounter    : SIT = SIT(D3D_SIT_UAV_RWSTRUCTURED_WITH_COUNTER);
+    <span class="kw">pub const </span>RTAccelerationStructure       : SIT = SIT(D3D_SIT_RTACCELERATIONSTRUCTURE);
+    <span class="kw">pub const </span>UavFeedbackTexture            : SIT = SIT(D3D_SIT_UAV_FEEDBACKTEXTURE);
 }
 
-<span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span> <span class="kw">impl</span> <span class="ident">SIT</span> { <span class="comment">// Ctrl+C Ctrl+V support</span>
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CBUFFER</span>                       : <span class="ident">SIT</span> <span class="op">=</span> <span class="ident">SIT</span>(<span class="ident">D3D_SIT_CBUFFER</span>);
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">TBUFFER</span>                       : <span class="ident">SIT</span> <span class="op">=</span> <span class="ident">SIT</span>(<span class="ident">D3D_SIT_TBUFFER</span>);
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">TEXTURE</span>                       : <span class="ident">SIT</span> <span class="op">=</span> <span class="ident">SIT</span>(<span class="ident">D3D_SIT_TEXTURE</span>);
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SAMPLER</span>                       : <span class="ident">SIT</span> <span class="op">=</span> <span class="ident">SIT</span>(<span class="ident">D3D_SIT_SAMPLER</span>);
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">UAV_RWTYPED</span>                   : <span class="ident">SIT</span> <span class="op">=</span> <span class="ident">SIT</span>(<span class="ident">D3D_SIT_UAV_RWTYPED</span>);
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">STRUCTURED</span>                    : <span class="ident">SIT</span> <span class="op">=</span> <span class="ident">SIT</span>(<span class="ident">D3D_SIT_STRUCTURED</span>);
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">UAV_RWSTRUCTURED</span>              : <span class="ident">SIT</span> <span class="op">=</span> <span class="ident">SIT</span>(<span class="ident">D3D_SIT_UAV_RWSTRUCTURED</span>);
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">BYTEADDRESS</span>                   : <span class="ident">SIT</span> <span class="op">=</span> <span class="ident">SIT</span>(<span class="ident">D3D_SIT_BYTEADDRESS</span>);
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">UAV_RWBYTEADDRESS</span>             : <span class="ident">SIT</span> <span class="op">=</span> <span class="ident">SIT</span>(<span class="ident">D3D_SIT_UAV_RWBYTEADDRESS</span>);
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">UAV_APPEND_STRUCTURED</span>         : <span class="ident">SIT</span> <span class="op">=</span> <span class="ident">SIT</span>(<span class="ident">D3D_SIT_UAV_APPEND_STRUCTURED</span>);
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">UAV_CONSUME_STRUCTURED</span>        : <span class="ident">SIT</span> <span class="op">=</span> <span class="ident">SIT</span>(<span class="ident">D3D_SIT_UAV_CONSUME_STRUCTURED</span>);
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">UAV_RWSTRUCTURED_WITH_COUNTER</span> : <span class="ident">SIT</span> <span class="op">=</span> <span class="ident">SIT</span>(<span class="ident">D3D_SIT_UAV_RWSTRUCTURED_WITH_COUNTER</span>);
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">RTACCELERATIONSTRUCTURE</span>       : <span class="ident">SIT</span> <span class="op">=</span> <span class="ident">SIT</span>(<span class="ident">D3D_SIT_RTACCELERATIONSTRUCTURE</span>);
-    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">UAV_FEEDBACKTEXTURE</span>           : <span class="ident">SIT</span> <span class="op">=</span> <span class="ident">SIT</span>(<span class="ident">D3D_SIT_UAV_FEEDBACKTEXTURE</span>);
-}
+<span class="comment">//#cpp2rust D3D_SHADER_INPUT_TYPE                   = d3d::ShaderInputType
 
-<span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">SIT</span> {
-    <span class="kw">fn</span> <span class="ident">default</span>() -&gt; <span class="self">Self</span> { <span class="ident">SIT</span>(<span class="number">0</span>) }
-}
+//#cpp2rust D3D_SIT_CBUFFER                         = d3d::SIT::CBuffer
+//#cpp2rust D3D_SIT_TBUFFER                         = d3d::SIT::TBuffer
+//#cpp2rust D3D_SIT_TEXTURE                         = d3d::SIT::Texture
+//#cpp2rust D3D_SIT_SAMPLER                         = d3d::SIT::Sampler
+//#cpp2rust D3D_SIT_UAV_RWTYPED                     = d3d::SIT::UavRWTyped
+//#cpp2rust D3D_SIT_STRUCTURED                      = d3d::SIT::Structured
+//#cpp2rust D3D_SIT_UAV_RWSTRUCTURED                = d3d::SIT::UavRWStructured
+//#cpp2rust D3D_SIT_BYTEADDRESS                     = d3d::SIT::ByteAddress
+//#cpp2rust D3D_SIT_UAV_RWBYTEADDRESS               = d3d::SIT::UavRWByteAddress
+//#cpp2rust D3D_SIT_UAV_APPEND_STRUCTURED           = d3d::SIT::UavAppendStructured
+//#cpp2rust D3D_SIT_UAV_CONSUME_STRUCTURED          = d3d::SIT::UavConsumeStructured
+//#cpp2rust D3D_SIT_UAV_RWSTRUCTURED_WITH_COUNTER   = d3d::SIT::UavRWStructuredWithCounter
+//#cpp2rust D3D_SIT_RTACCELERATIONSTRUCTURE         = d3d::SIT::RTAccelerationStructure
+//#cpp2rust D3D_SIT_UAV_FEEDBACKTEXTURE             = d3d::SIT::UavFeedbackTexture
 
-<span class="comment">//#cpp2rust D3D_SHADER_INPUT_TYPE                   = d3d::ShaderInputType</span>
+//#cpp2rust D3D10_SIT_CBUFFER                       = d3d::SIT::CBuffer
+//#cpp2rust D3D10_SIT_TBUFFER                       = d3d::SIT::TBuffer
+//#cpp2rust D3D10_SIT_TEXTURE                       = d3d::SIT::Texture
+//#cpp2rust D3D10_SIT_SAMPLER                       = d3d::SIT::Sampler
 
-<span class="comment">//#cpp2rust D3D_SIT_CBUFFER                         = d3d::SIT::CBuffer</span>
-<span class="comment">//#cpp2rust D3D_SIT_TBUFFER                         = d3d::SIT::TBuffer</span>
-<span class="comment">//#cpp2rust D3D_SIT_TEXTURE                         = d3d::SIT::Texture</span>
-<span class="comment">//#cpp2rust D3D_SIT_SAMPLER                         = d3d::SIT::Sampler</span>
-<span class="comment">//#cpp2rust D3D_SIT_UAV_RWTYPED                     = d3d::SIT::UavRWTyped</span>
-<span class="comment">//#cpp2rust D3D_SIT_STRUCTURED                      = d3d::SIT::Structured</span>
-<span class="comment">//#cpp2rust D3D_SIT_UAV_RWSTRUCTURED                = d3d::SIT::UavRWStructured</span>
-<span class="comment">//#cpp2rust D3D_SIT_BYTEADDRESS                     = d3d::SIT::ByteAddress</span>
-<span class="comment">//#cpp2rust D3D_SIT_UAV_RWBYTEADDRESS               = d3d::SIT::UavRWByteAddress</span>
-<span class="comment">//#cpp2rust D3D_SIT_UAV_APPEND_STRUCTURED           = d3d::SIT::UavAppendStructured</span>
-<span class="comment">//#cpp2rust D3D_SIT_UAV_CONSUME_STRUCTURED          = d3d::SIT::UavConsumeStructured</span>
-<span class="comment">//#cpp2rust D3D_SIT_UAV_RWSTRUCTURED_WITH_COUNTER   = d3d::SIT::UavRWStructuredWithCounter</span>
-<span class="comment">//#cpp2rust D3D_SIT_RTACCELERATIONSTRUCTURE         = d3d::SIT::RTAccelerationStructure</span>
-<span class="comment">//#cpp2rust D3D_SIT_UAV_FEEDBACKTEXTURE             = d3d::SIT::UavFeedbackTexture</span>
-
-<span class="comment">//#cpp2rust D3D10_SIT_CBUFFER                       = d3d::SIT::CBuffer</span>
-<span class="comment">//#cpp2rust D3D10_SIT_TBUFFER                       = d3d::SIT::TBuffer</span>
-<span class="comment">//#cpp2rust D3D10_SIT_TEXTURE                       = d3d::SIT::Texture</span>
-<span class="comment">//#cpp2rust D3D10_SIT_SAMPLER                       = d3d::SIT::Sampler</span>
-
-<span class="comment">//#cpp2rust D3D11_SIT_UAV_RWTYPED                   = d3d::SIT::UavRWTyped</span>
-<span class="comment">//#cpp2rust D3D11_SIT_STRUCTURED                    = d3d::SIT::Structured</span>
-<span class="comment">//#cpp2rust D3D11_SIT_UAV_RWSTRUCTURED              = d3d::SIT::UavRWStructured</span>
-<span class="comment">//#cpp2rust D3D11_SIT_BYTEADDRESS                   = d3d::SIT::ByteAddress</span>
-<span class="comment">//#cpp2rust D3D11_SIT_UAV_RWBYTEADDRESS             = d3d::SIT::UavRWByteAddress</span>
-<span class="comment">//#cpp2rust D3D11_SIT_UAV_APPEND_STRUCTURED         = d3d::SIT::UavAppendStructured</span>
-<span class="comment">//#cpp2rust D3D11_SIT_UAV_CONSUME_STRUCTURED        = d3d::SIT::UavConsumeStructured</span>
-<span class="comment">//#cpp2rust D3D11_SIT_UAV_RWSTRUCTURED_WITH_COUNTER = d3d::SIT::UavRWStructuredWithCounter</span>
-</code></pre></div>
-</section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-search-index-js="../../../../../search-index.js" data-search-js="../../../../../search.js"></div>
-</body></html>
+//#cpp2rust D3D11_SIT_UAV_RWTYPED                   = d3d::SIT::UavRWTyped
+//#cpp2rust D3D11_SIT_STRUCTURED                    = d3d::SIT::Structured
+//#cpp2rust D3D11_SIT_UAV_RWSTRUCTURED              = d3d::SIT::UavRWStructured
+//#cpp2rust D3D11_SIT_BYTEADDRESS                   = d3d::SIT::ByteAddress
+//#cpp2rust D3D11_SIT_UAV_RWBYTEADDRESS             = d3d::SIT::UavRWByteAddress
+//#cpp2rust D3D11_SIT_UAV_APPEND_STRUCTURED         = d3d::SIT::UavAppendStructured
+//#cpp2rust D3D11_SIT_UAV_CONSUME_STRUCTURED        = d3d::SIT::UavConsumeStructured
+//#cpp2rust D3D11_SIT_UAV_RWSTRUCTURED_WITH_COUNTER = d3d::SIT::UavRWStructuredWithCounter
+</span></code></pre></div>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (b44197abb 2022-09-05)" ></div></body></html>

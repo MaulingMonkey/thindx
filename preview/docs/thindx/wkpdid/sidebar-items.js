@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"constant":[["CommentStringW","A UTF16ish comment string."],["D3DDebugObjectName","A debug object name, displayed in some graphics debuggers."],["D3DDebugObjectNameW","A UTF16ish debug object name, displayed in some graphics debuggers."]]};
