@@ -20,12 +20,19 @@ pub fn publish(mut args: std::env::Args) {
 }
 
 fn work_in_pub(version: &str) -> io::Result<()> {
+    // patch Cargo.toml
     let cargo_toml_path = r"target\pub\thindx\Cargo.toml";
     let cargo_toml = std::fs::read_to_string(cargo_toml_path)?;
     let cargo_toml = cargo_toml.replace("0.0.0-git", version);
     std::fs::write(cargo_toml_path, cargo_toml)?;
     run_in_nonfatal(r"target\pub", "git add thindx/Cargo.toml")?;
     run_in_nonfatal(r"target\pub", format!("git commit -m {:?}", version))?;
+
+    // reduce bandwidth costs for build test
+    let _ = std::fs::copy(r"thindx\examples\assets\xelu\xelu.zip", r"target\pub\thindx\examples\assets\xelu\xelu.zip");
+    run_in_nonfatal(r"target\pub", r"curl -z ..\..\thindx\examples\assets\xelu\xelu.zip -o thindx\examples\assets\xelu\xelu.zip https://thoseawesomeguys.com/prompts/Xelu_Free_Controller&Key_Prompts.zip")?;
+
+    // build test + publish
     run_in_nonfatal(r"target\pub", "cargo b")?;
     run_in_nonfatal(r"target\pub", "cargo publish --allow-dirty -p thindx")?;
     run_in_nonfatal(r"target\pub", format!("git tag {version}"))?;
