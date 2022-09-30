@@ -114,7 +114,7 @@ unsafe impl AsSafe<IDirect3DDevice9 > for Device { fn as_safe(&self) -> &IDirect
 /// | [get_render_state](Self::get_render_state)                                | [GetRenderState]              | Retrieves a render-state value for a device.
 /// | [get_render_target](Self::get_render_target)                              | [GetRenderTarget]             | Retrieves a render-target surface.
 /// | [get_render_target_data](Self::get_render_target_data)                    | [GetRenderTargetData]         | Copies the render-target data from device memory to system memory.
-/// | [get_sampler_state](Self::get_sampler_state)                              | [GetSamplerState]             | Gets the sampler state value.
+/// | [get_sampler_state_untyped](Self::get_sampler_state_untyped)              | [GetSamplerState]             | Gets the sampler state value.
 /// | [get_scissor_rect](Self::get_scissor_rect)                                | [GetScissorRect]              | Gets the scissor rectangle.
 /// | [get_software_vertex_processing](Self::get_software_vertex_processing)    | [GetSoftwareVertexProcessing] | Gets the vertex processing (hardware or software) mode.
 /// | [get_stream_source](Self::get_stream_source)                              | [GetStreamSource]             | Retrieves a vertex buffer bound to the specified data stream.
@@ -2135,26 +2135,29 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// IDirect3DDevice9::GetSamplerState
     ///
     /// Retrieves a sampler state value for a device.
+    /// Prefer [`get_sampler_state_untyped`](Self::get_sampler_state_untyped).
     ///
     /// May fail for pure devices.
     ///
     /// ### ⚠️ Safety ⚠️
     /// *   `ty` is not bounds checked by thindx nor DirectX, and will cause undefined behavior if invalid!
-    /// *   `sampler` being out of bounds *appears* sound?  DirectX returns default sampler state when out of bounds?
+    /// *   `sampler` is not bounds checked by thindx.  DirectX *might* bounds check, but has concerningly inconsistent behavior if `sampler >= 16`.
     ///
     /// ### Returns
     /// *   Ok([u32])           If `(sampler, state)` has a value
-    /// *   Ok(0xBAADCAFE)      If `sampler` is out of bounds (on some systems)
-    /// *   Ok(sane default)    If `sampler` is out of bounds (on some systems)
+    /// *   Ok(0xBAADCAFE)      If `sampler >= 16` (on some systems)
+    /// *   Ok(sane default)    If `sampler >= 16` (on some systems)
     ///
     /// ### Example
     /// ```rust
     /// # use dev::d3d9::*; let device = device_test();
-    /// let sampler = 0;
+    /// let sampler : u32;
+    /// // ...
+    /// # sampler = 0;
     /// # let _ = sampler;
     /// # for sampler in (0 .. 256).chain((8 .. 32).map(|pow| 1<<pow)) {
     ///
-    /// if device.get_sampler_state_untyped(sampler, Samp::AddressU).unwrap() == 0xBAADCAFE { continue }
+    /// if sampler >= 16 && unsafe { device.get_sampler_state_unchecked(sampler, Samp::AddressU) }.unwrap() == 0xBAADCAFE { continue }
     ///
     /// assert_eq!(
     ///     unsafe { device.get_sampler_state_unchecked(sampler, Samp::AddressU) }.map(TextureAddress::from_unchecked).unwrap(),
@@ -2187,33 +2190,40 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// May fail for pure devices.
     ///
     /// ### Returns
-    /// *   [D3DERR::INVALIDCALL]   If `state` is not a valid render state
-    /// *   Ok([u32])               If `state` has a value (including default values for "out-of-bounds" `sampler`s)
-    /// *   Ok(0xBAADCAFE)          If `sampler` is out of bounds on some systems.
+    /// *   [D3DERR::INVALIDCALL]   If `state` is not a normal valid render state
+    /// *   [D3DERR::INVALIDCALL]   If `sampler >= 16` (max [sampler](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx9-graphics-reference-asm-ps-registers-sampler) registers for ps_3_0 / D3D9)
+    /// *   Ok([u32])               If `(sampler, state)` has a (possibly default) value
     ///
     /// ### Example
     /// ```rust
     /// # use dev::d3d9::*; let device = device_test();
-    /// let sampler = 0;
+    /// let sampler : u32;
+    /// // ...
+    /// # sampler = 0;
     /// # let _ = sampler;
     /// # for sampler in (0 .. 256).chain((8 .. 32).map(|pow| 1<<pow)) {
     ///
-    /// if device.get_sampler_state_untyped(sampler, Samp::AddressU).unwrap() == 0xBAADCAFE { continue }
+    /// if sampler >= 16 {
+    ///     assert_eq!(
+    ///         device.get_sampler_state_untyped(sampler, Samp::AddressU),
+    ///         D3DERR::INVALIDCALL
+    ///     );
+    /// } else {
+    ///     assert_eq!(
+    ///         device.get_sampler_state_untyped(sampler, Samp::AddressU).map(TextureAddress::from_unchecked).unwrap(),
+    ///         TAddress::Wrap
+    ///     );
     ///
-    /// assert_eq!(
-    ///     device.get_sampler_state_untyped(sampler, Samp::AddressU).map(TextureAddress::from_unchecked).unwrap(),
-    ///     TAddress::Wrap
-    /// );
+    ///     assert_eq!(
+    ///         device.get_sampler_state_untyped(sampler, Samp::BorderColor).map(Color::argb).unwrap(),
+    ///         Color::argb(0x00000000),
+    ///     );
     ///
-    /// assert_eq!(
-    ///     device.get_sampler_state_untyped(sampler, Samp::BorderColor).map(Color::argb).unwrap(),
-    ///     Color::argb(0x00000000),
-    /// );
-    ///
-    /// assert_eq!(
-    ///     device.get_sampler_state_untyped(sampler, Samp::from_unchecked(!0)),
-    ///     D3DERR::INVALIDCALL
-    /// );
+    ///     assert_eq!(
+    ///         device.get_sampler_state_untyped(sampler, Samp::from_unchecked(!0)),
+    ///         D3DERR::INVALIDCALL
+    ///     );
+    /// }
     /// #
     /// # for s in (0 .. 256).chain((8..32).map(|pow| 1<<pow)).map(|i| SamplerStateType::from_unchecked(i)) {
     /// #   let r = device.get_sampler_state_untyped(sampler, s);
@@ -2226,7 +2236,8 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// ```
     fn get_sampler_state_untyped(&self, sampler: u32, ty: SamplerStateType) -> Result<u32, Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::get_sampler_state_untyped => IDirect3DDevice9::GetSamplerState);
-        if !matches!(ty.into(), 1 ..= 13) { return Err(fn_param_error!(ty, D3DERR::INVALIDCALL)) }
+        if !matches!(ty.into(), 1 ..= 13) { return Err(fn_param_error!(ty, D3DERR::INVALIDCALL)) } // SamplerStateType::from_unchecked isn't `unsafe` so we must bounds check here
+        if sampler >= 16 { return Err(fn_param_error!(sampler, D3DERR::INVALIDCALL)); }
         unsafe { self.get_sampler_state_unchecked(sampler, ty) }
     }
 
