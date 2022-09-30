@@ -73,6 +73,7 @@ winapi.features = [
     "winerror",
 
     # um
+    "errhandlingapi",
     "libloaderapi",
     "processthreadsapi",
     "psapi",
