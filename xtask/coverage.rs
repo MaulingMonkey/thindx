@@ -83,7 +83,7 @@ pub fn from_settings(settings: Settings) {
         }
         let _ = std::fs::remove_dir_all(&profraw);
 
-        let mut cargo_test = cmd("cargo test --tests");
+        let mut cargo_test = cmd("cargo test");
         status!("Running", "{:?}", cargo_test);
         cargo_test.env("CARGO_TARGET_DIR",   &target_dir);
         cargo_test.env("LLVM_PROFILE_FILE",  target_dir.join(r"profraw\thindx-%p-%m.profraw"));
