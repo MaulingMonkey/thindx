@@ -43,6 +43,7 @@ older versions unless you've tested yourself.
 
 ### ⚠️ API major version churn ⚠️
 
+`0.0.0-yyyy-mm-dd` doesn't follow semver.
 Individual `fn`s are likely to gain/lose `unsafe`, traits, etc. in a neverending attempt to make DirectX access sound.
 As such, `thindx` itself will likely always suffer from major version churn.
 This isn't too much of a problem until two crates wish to share / pass `thindx` types between themselves.
