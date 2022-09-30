@@ -33,7 +33,7 @@ fn file(path: &Path) -> Result<(), ()> {
         file_rs(path)
     } else if ".cmd .hlsl .json .md .natvis .toml .txt .yml".split(' ').any(|ext| name.ends_with(ext)) {
         Ok(()) // no linting yet
-    } else if ".gitignore Cargo.lock LICENSE-APACHE LICENSE-MIT".split(' ').any(|exact| name == exact) {
+    } else if ".git .gitignore Cargo.lock LICENSE-APACHE LICENSE-MIT".split(' ').any(|exact| name == exact) {
         Ok(()) // no linting yet
     } else {
         panic!("xtask::scan::file: unexpected extension for `{}`", path.display());
