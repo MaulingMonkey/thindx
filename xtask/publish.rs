@@ -8,7 +8,6 @@ use std::path::*;
 pub fn publish(mut args: std::env::Args) {
     let version = args.next()                       .unwrap_or_else(|| fatal!("expected a `v0.0.0-unsound.n` version tag"));
     let version_no_v = version.strip_prefix("v")    .unwrap_or_else(|| fatal!("expected a `v0.0.0-unsound.n` version tag, instead got `{}`", version));
-    if !version.contains("-unsound.") {                                fatal!("expected a `v0.0.0-unsound.n` version tag, instead got `{}`", version) }
     let _ = args.next().map(|unexpected| fatal!("unexpected positional argument: {:?}", unexpected));
 
     run(r"cargo publish --allow-dirty --dry-run --no-verify -p thindx"); // early check for e.g. git dependencies
