@@ -75,7 +75,11 @@ fn item(ctx: &mut Context, item: &Item) {
         Item::Type(g)           => item_generic(ctx, &g.attrs),
         Item::Union(u)          => item_union(ctx, u),
         Item::Use(g)            => item_generic(ctx, &g.attrs),
-        _                       => warning!(path: ctx.path, line: item.span().start().line, "failed to parse"),
+        Item::Verbatim(_) => {
+            warning!(path: ctx.path, line: item.span().start().line, "failed to parse item: verbatim starts here");
+            warning!(path: ctx.path, line: item.span().end()  .line, "failed to parse item: verbatim ends here");
+        },
+        _                       => warning!(path: ctx.path, line: item.span().start().line, "failed to parse item"),
     }
 }
 
@@ -100,7 +104,7 @@ fn item_impl(ctx: &mut Context, i: &ItemImpl) {
         ImplItem::Const(c)  => item_generic(ctx, &c.attrs),
         ImplItem::Type(t)   => item_generic(ctx, &t.attrs),
         ImplItem::Macro(m)  => item_generic(ctx, &m.attrs),
-        _                   => warning!(path: ctx.path, line: i.span().start().line, "failed to parse"),
+        _                   => warning!(path: ctx.path, line: i.span().start().line, "failed to parse impl item"),
     })
 }
 
@@ -135,7 +139,7 @@ fn item_trait(ctx: &mut Context, t: &ItemTrait) {
         TraitItem::Const(c) => item_generic(ctx, &c.attrs),
         TraitItem::Type(t)  => item_generic(ctx, &t.attrs),
         TraitItem::Macro(m) => item_generic(ctx, &m.attrs),
-        _                   => warning!(path: ctx.path, line: i.span().start().line, "failed to parse"),
+        _                   => warning!(path: ctx.path, line: i.span().start().line, "failed to parse trait item"),
     })
 }
 
