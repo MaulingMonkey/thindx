@@ -7,8 +7,8 @@ Safer DirectX: Types, fns, lifetimes, tests, real docs, intellisense, examples, 
 | 🦀 | When         | DirectX APIs |
 | --- | ----------- | ------------ |
 | 📦 |              | [examples](https://maulingmonkey.com/thindx/preview/docs/thindx/_examples/) • [rust ⮀ c++](https://maulingmonkey.com/thindx/preview/docs/thindx/_headers/) • [test coverage](https://maulingmonkey.com/thindx/preview/coverage/) • [lib.rs](https://lib.rs/crates/thindx) • [docs.rs](https://docs.rs/thindx)
-| ✔️ | Now          | [thindx](https://maulingmonkey.com/thindx/preview/docs/thindx/)::{[d3d9](https://maulingmonkey.com/thindx/preview/docs/thindx/d3d9/), [d3d::Compiler](https://maulingmonkey.com/thindx/preview/docs/thindx/d3d/struct.Compiler.html), [xinput](https://maulingmonkey.com/thindx/preview/docs/thindx/xinput/)}
-| ⚠️ | Soon™        | d3d11, d3d12, dxgi, dxcompiler, dinput, xaudio2
+| ✔️ | Now          | [thindx](https://maulingmonkey.com/thindx/preview/docs/thindx/)::{[d3d9](https://maulingmonkey.com/thindx/preview/docs/thindx/d3d9/), [d3d::Compiler](https://maulingmonkey.com/thindx/preview/docs/thindx/d3d/struct.Compiler.html), [xaudio2](https://maulingmonkey.com/thindx/preview/docs/thindx/xaudio2/), [xinput](https://maulingmonkey.com/thindx/preview/docs/thindx/xinput/)}
+| ⚠️ | Soon™        | d3d11, d3d12, dxgi, dxcompiler, dinput
 | ⚠️ | Eventually   | d2d, dcompute, dsound, dstorage, dwrite, dxr, xact3, uwp::input?
 | ❌ | Never?       | d3d10, d3dx\*, ddraw, dplay
 
@@ -43,6 +43,7 @@ older versions unless you've tested yourself.
 
 ### ⚠️ API major version churn ⚠️
 
+`0.0.0-yyyy-mm-dd` doesn't follow semver.
 Individual `fn`s are likely to gain/lose `unsafe`, traits, etc. in a neverending attempt to make DirectX access sound.
 As such, `thindx` itself will likely always suffer from major version churn.
 This isn't too much of a problem until two crates wish to share / pass `thindx` types between themselves.

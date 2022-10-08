@@ -364,6 +364,7 @@ fn collect_cpp2rust() -> BTreeMap<&'static str, Vec<&'static str>> {
                     if let Some((cpp, rs)) = cpp_rs.split_once('=') {
                         let cpp = cpp.trim_end();   // before `=`
                         let rs  = rs .trim_start(); // after `=`
+                        if rs.is_empty() { continue }
                         let rusts = r.entry(cpp).or_default();
                         if !rusts.contains(&rs) { rusts.push(rs); } // O(NN) but N should always be tiny
                     } else {

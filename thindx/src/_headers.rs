@@ -21,7 +21,7 @@
 //! | [d3d11shader.h](const@d3d11shader_h) | ✔️ 12 of 12 | ✔️ 9 of 9 | ✔️ 1 of 1 |   | ⚠️ 16 of 17 | ✔️ 3 of 3 |
 //! | [d3d11shadertracing.h](const@d3d11shadertracing_h) | ❌ 0 of 2 | ❌ 0 of 11 | ❌ 0 of 3 |   | ❌ 0 of 62 |   |
 //! | [xinput.h](const@xinput_h) |   | ✔️ 6 of 6 |   | ✔️ 8 of 8 | ⚠️ 83 of 86 |   |
-//! | [xaudio2.h](const@xaudio2_h) | ❌ 0 of 8 | ❌ 0 of 11 | ❌ 0 of 1 |   | ❌ 0 of 161 | ❌ 0 of 2 |
+//! | [xaudio2.h](const@xaudio2_h) | ⚠️ 6 of 8 | ⚠️ 7 of 11 | ❌ 0 of 1 |   | ⚠️ 55 of 75 |   |
 
 
 
@@ -2911,86 +2911,86 @@ pub const xinput_h : cxx_header = cxx_header;
 /// ### C++ Interfaces → Rust Types
 ///
 /// `IXAudio2` →&nbsp;❌ <br>
-/// * `CommitChanges` →&nbsp;❌ <br>
-/// * `CreateMasteringVoice` →&nbsp;❌ <br>
-/// * `CreateSourceVoice` →&nbsp;❌ <br>
-/// * `CreateSubmixVoice` →&nbsp;❌ <br>
-/// * `GetPerformanceData` →&nbsp;❌ <br>
-/// * `RegisterForCallbacks` →&nbsp;❌ <br>
-/// * `SetDebugConfiguration` →&nbsp;❌ <br>
-/// * `StartEngine` →&nbsp;❌ <br>
-/// * `StopEngine` →&nbsp;❌ <br>
-/// * `UnregisterForCallbacks` →&nbsp;❌ <br>
+/// * `CommitChanges`&nbsp;→ [`xaudio2::IXAudio2Ext::commit_changes`] <br>
+/// * `CreateMasteringVoice`&nbsp;→ [`xaudio2::IXAudio2Ext::create_mastering_voice`] <br>
+/// * `CreateSourceVoice`&nbsp;→ [`xaudio2::IXAudio2Ext::create_source_voice_typed_callback`], [`xaudio2::IXAudio2Ext::create_source_voice_unchecked`] <br>
+/// * `CreateSubmixVoice`&nbsp;→ [`xaudio2::IXAudio2Ext::create_submix_voice`] <br>
+/// * `GetPerformanceData`&nbsp;→ [`xaudio2::IXAudio2Ext::get_performance_data`] <br>
+/// * `RegisterForCallbacks`&nbsp;→ [`xaudio2::IXAudio2Ext::register_for_callbacks`], [`xaudio2::IXAudio2Ext::register_for_callbacks_leak`] <br>
+/// * `SetDebugConfiguration`&nbsp;→ [`xaudio2::IXAudio2Ext::set_debug_configuration`] <br>
+/// * `StartEngine`&nbsp;→ [`xaudio2::IXAudio2Ext::start_engine`] <br>
+/// * `StopEngine`&nbsp;→ [`xaudio2::IXAudio2Ext::stop_engine`] <br>
+/// * `UnregisterForCallbacks`&nbsp;→ [`xaudio2::IXAudio2Ext::unregister_for_callbacks`] <br>
 ///
-/// `IXAudio2EngineCallback` →&nbsp;❌ <br>
-/// * `OnCriticalError` →&nbsp;❌ <br>
-/// * `OnProcessingPassEnd` →&nbsp;❌ <br>
-/// * `OnProcessingPassStart` →&nbsp;❌ <br>
+/// `IXAudio2EngineCallback`&nbsp;→ [`xaudio2::sys::IXAudio2EngineCallback`], [`xaudio2::EngineCallbackWrapper`], [`xaudio2::EngineCallback`] <br>
+/// * `OnCriticalError`&nbsp;→ [`xaudio2::EngineCallback::on_critical_error`] <br>
+/// * `OnProcessingPassEnd`&nbsp;→ [`xaudio2::EngineCallback::on_processing_pass_end`] <br>
+/// * `OnProcessingPassStart`&nbsp;→ [`xaudio2::EngineCallback::on_processing_pass_start`] <br>
 ///
 /// `IXAudio2Extension` →&nbsp;❌ <br>
-/// * `GetProcessingQuantum` →&nbsp;❌ <br>
-/// * `GetProcessor` →&nbsp;❌ <br>
+/// * `GetProcessingQuantum`&nbsp;→ [`xaudio2::IXAudio2ExtensionExt::get_processing_quantum`] <br>
+/// * `GetProcessor`&nbsp;→ [`xaudio2::IXAudio2ExtensionExt::get_processor`] <br>
 ///
-/// `IXAudio2MasteringVoice` →&nbsp;❌ <br>
-/// * `GetChannelMask` →&nbsp;❌ <br>
+/// `IXAudio2MasteringVoice`&nbsp;→ [`xaudio2::sys::IXAudio2MasteringVoice`], [`xaudio2::MasteringVoice`], [`xaudio2::IXAudio2MasteringVoiceExt`] <br>
+/// * `GetChannelMask`&nbsp;→ [`xaudio2::IXAudio2MasteringVoiceExt::get_channel_mask`] <br>
 ///
-/// `IXAudio2SourceVoice` →&nbsp;❌ <br>
-/// * `Discontinuity` →&nbsp;❌ <br>
-/// * `ExitLoop` →&nbsp;❌ <br>
-/// * `FlushSourceBuffers` →&nbsp;❌ <br>
-/// * `GetFrequencyRatio` →&nbsp;❌ <br>
-/// * `GetState` →&nbsp;❌ <br>
-/// * `SetFrequencyRatio` →&nbsp;❌ <br>
-/// * `SetSourceSampleRate` →&nbsp;❌ <br>
-/// * `Start` →&nbsp;❌ <br>
-/// * `Stop` →&nbsp;❌ <br>
-/// * `SubmitSourceBuffer` →&nbsp;❌ <br>
+/// `IXAudio2SourceVoice`&nbsp;→ [`xaudio2::sys::IXAudio2SourceVoice`], [`xaudio2::SourceVoice`], [`xaudio2::IXAudio2SourceVoiceTyped`], [`xaudio2::IXAudio2SourceVoiceExt`] <br>
+/// * `Discontinuity`&nbsp;→ [`xaudio2::IXAudio2SourceVoiceExt::discontinuity`] <br>
+/// * `ExitLoop`&nbsp;→ [`xaudio2::IXAudio2SourceVoiceExt::exit_loop`] <br>
+/// * `FlushSourceBuffers`&nbsp;→ [`xaudio2::IXAudio2SourceVoiceExt::flush_source_buffers`] <br>
+/// * `GetFrequencyRatio`&nbsp;→ [`xaudio2::IXAudio2SourceVoiceExt::get_frequency_ratio`] <br>
+/// * `GetState`&nbsp;→ [`xaudio2::IXAudio2SourceVoiceExt::get_state`] <br>
+/// * `SetFrequencyRatio`&nbsp;→ [`xaudio2::IXAudio2SourceVoiceExt::set_frequency_ratio`] <br>
+/// * `SetSourceSampleRate`&nbsp;→ [`xaudio2::IXAudio2SourceVoiceExt::set_source_sample_rate`] <br>
+/// * `Start`&nbsp;→ [`xaudio2::IXAudio2SourceVoiceExt::start`] <br>
+/// * `Stop`&nbsp;→ [`xaudio2::IXAudio2SourceVoiceExt::stop`] <br>
+/// * `SubmitSourceBuffer`&nbsp;→ [`xaudio2::IXAudio2SourceVoiceTyped::submit_source_buffer`] <br>
 ///
-/// `IXAudio2SubmixVoice` →&nbsp;❌ <br>
+/// `IXAudio2SubmixVoice`&nbsp;→ [`xaudio2::sys::IXAudio2SubmixVoice`], [`xaudio2::SubmixVoice`] <br>
 ///
-/// `IXAudio2Voice` →&nbsp;❌ <br>
-/// * `DestroyVoice` →&nbsp;❌ <br>
-/// * `DisableEffect` →&nbsp;❌ <br>
-/// * `EnableEffect` →&nbsp;❌ <br>
-/// * `GetChannelVolumes` →&nbsp;❌ <br>
-/// * `GetEffectParameters` →&nbsp;❌ <br>
-/// * `GetEffectState` →&nbsp;❌ <br>
-/// * `GetFilterParameters` →&nbsp;❌ <br>
-/// * `GetOutputFilterParameters` →&nbsp;❌ <br>
-/// * `GetOutputMatrix` →&nbsp;❌ <br>
-/// * `GetVoiceDetails` →&nbsp;❌ <br>
-/// * `GetVolume` →&nbsp;❌ <br>
-/// * `SetChannelVolumes` →&nbsp;❌ <br>
-/// * `SetEffectChain` →&nbsp;❌ <br>
-/// * `SetEffectParameters` →&nbsp;❌ <br>
-/// * `SetFilterParameters` →&nbsp;❌ <br>
-/// * `SetOutputFilterParameters` →&nbsp;❌ <br>
-/// * `SetOutputMatrix` →&nbsp;❌ <br>
-/// * `SetOutputVoices` →&nbsp;❌ <br>
-/// * `SetVolume` →&nbsp;❌ <br>
+/// `IXAudio2Voice`&nbsp;→ [`xaudio2::sys::IXAudio2Voice`], [`xaudio2::Voice`], [`xaudio2::IXAudio2VoiceExt`] <br>
+/// * `DestroyVoice`&nbsp;→ [`xaudio2::Voice::destroy_voice`] <br>
+/// * `DisableEffect`&nbsp;→ [`xaudio2::IXAudio2VoiceExt::disable_effect`] <br>
+/// * `EnableEffect`&nbsp;→ [`xaudio2::IXAudio2VoiceExt::enable_effect`] <br>
+/// * `GetChannelVolumes`&nbsp;→ [`xaudio2::IXAudio2VoiceExt::get_channel_volumes`] <br>
+/// * `GetEffectParameters`&nbsp;→ [`xaudio2::IXAudio2VoiceExt::get_effect_parameters_raw`] <br>
+/// * `GetEffectState`&nbsp;→ [`xaudio2::IXAudio2VoiceExt::get_effect_state`] <br>
+/// * `GetFilterParameters`&nbsp;→ [`xaudio2::IXAudio2VoiceExt::get_filter_parameters`] <br>
+/// * `GetOutputFilterParameters`&nbsp;→ [`xaudio2::IXAudio2VoiceExt::get_output_filter_parameters`] <br>
+/// * `GetOutputMatrix`&nbsp;→ [`xaudio2::IXAudio2VoiceExt::get_output_matrix`] <br>
+/// * `GetVoiceDetails`&nbsp;→ [`xaudio2::IXAudio2VoiceExt::get_voice_details`] <br>
+/// * `GetVolume`&nbsp;→ [`xaudio2::IXAudio2VoiceExt::get_volume`] <br>
+/// * `SetChannelVolumes`&nbsp;→ [`xaudio2::IXAudio2VoiceExt::set_channel_volumes`] <br>
+/// * `SetEffectChain`&nbsp;→ [`xaudio2::IXAudio2VoiceExt::set_effect_chain`] <br>
+/// * `SetEffectParameters`&nbsp;→ [`xaudio2::IXAudio2VoiceExt::set_effect_parameters_raw`] <br>
+/// * `SetFilterParameters`&nbsp;→ [`xaudio2::IXAudio2VoiceExt::set_filter_parameters`] <br>
+/// * `SetOutputFilterParameters`&nbsp;→ [`xaudio2::IXAudio2VoiceExt::set_output_filter_parameters`] <br>
+/// * `SetOutputMatrix`&nbsp;→ [`xaudio2::IXAudio2VoiceExt::set_output_matrix`] <br>
+/// * `SetOutputVoices`&nbsp;→ [`xaudio2::IXAudio2VoiceExt::set_output_voices`] <br>
+/// * `SetVolume`&nbsp;→ [`xaudio2::IXAudio2VoiceExt::set_volume`] <br>
 ///
-/// `IXAudio2VoiceCallback` →&nbsp;❌ <br>
-/// * `OnBufferEnd` →&nbsp;❌ <br>
-/// * `OnBufferStart` →&nbsp;❌ <br>
-/// * `OnLoopEnd` →&nbsp;❌ <br>
-/// * `OnStreamEnd` →&nbsp;❌ <br>
-/// * `OnVoiceError` →&nbsp;❌ <br>
-/// * `OnVoiceProcessingPassEnd` →&nbsp;❌ <br>
-/// * `OnVoiceProcessingPassStart` →&nbsp;❌ <br>
+/// `IXAudio2VoiceCallback`&nbsp;→ [`xaudio2::sys::IXAudio2VoiceCallback`], [`xaudio2::VoiceCallbackWrapper`], [`xaudio2::VoiceCallback`] <br>
+/// * `OnBufferEnd`&nbsp;→ [`xaudio2::VoiceCallback::on_buffer_end`] <br>
+/// * `OnBufferStart`&nbsp;→ [`xaudio2::VoiceCallback::on_buffer_start`] <br>
+/// * `OnLoopEnd`&nbsp;→ [`xaudio2::VoiceCallback::on_loop_end`] <br>
+/// * `OnStreamEnd`&nbsp;→ [`xaudio2::VoiceCallback::on_stream_end`] <br>
+/// * `OnVoiceError`&nbsp;→ [`xaudio2::VoiceCallback::on_voice_error`] <br>
+/// * `OnVoiceProcessingPassEnd`&nbsp;→ [`xaudio2::VoiceCallback::on_voice_processing_pass_end`] <br>
+/// * `OnVoiceProcessingPassStart`&nbsp;→ [`xaudio2::VoiceCallback::on_voice_processing_pass_start`] <br>
 ///
 /// ### C++ Structs -> Rust Structs
 ///
 /// `XAUDIO2_BUFFER` →&nbsp;❌ <br>
 /// `XAUDIO2_BUFFER_WMA` →&nbsp;❌ <br>
-/// `XAUDIO2_DEBUG_CONFIGURATION` →&nbsp;❌ <br>
+/// `XAUDIO2_DEBUG_CONFIGURATION`&nbsp;→ [`xaudio2::DebugConfiguration`] <br>
 /// `XAUDIO2_EFFECT_CHAIN` →&nbsp;❌ <br>
-/// `XAUDIO2_EFFECT_DESCRIPTOR` →&nbsp;❌ <br>
-/// `XAUDIO2_FILTER_PARAMETERS` →&nbsp;❌ <br>
-/// `XAUDIO2_PERFORMANCE_DATA` →&nbsp;❌ <br>
-/// `XAUDIO2_SEND_DESCRIPTOR` →&nbsp;❌ <br>
-/// `XAUDIO2_VOICE_DETAILS` →&nbsp;❌ <br>
+/// `XAUDIO2_EFFECT_DESCRIPTOR`&nbsp;→ [`xaudio2::EffectDescriptor`] <br>
+/// `XAUDIO2_FILTER_PARAMETERS`&nbsp;→ [`xaudio2::FilterParameters`] <br>
+/// `XAUDIO2_PERFORMANCE_DATA`&nbsp;→ [`xaudio2::PerformanceData`] <br>
+/// `XAUDIO2_SEND_DESCRIPTOR`&nbsp;→ [`xaudio2::SendDescriptor`] <br>
+/// `XAUDIO2_VOICE_DETAILS`&nbsp;→ [`xaudio2::VoiceDetails`] <br>
 /// `XAUDIO2_VOICE_SENDS` →&nbsp;❌ <br>
-/// `XAUDIO2_VOICE_STATE` →&nbsp;❌ <br>
+/// `XAUDIO2_VOICE_STATE`&nbsp;→ [`xaudio2::VoiceState`] <br>
 /// ### C++ Enums → Rust Structs
 ///
 /// `XAUDIO2_FILTER_TYPE` →&nbsp;❌ <br>
@@ -3003,120 +3003,35 @@ pub const xinput_h : cxx_header = cxx_header;
 ///
 /// ### C++ Constants → Rust Constants
 ///
-/// `FACILITY_XAUDIO2` →&nbsp;❌ <br>
-/// `IXAudio2MasteringVoice_DestroyVoice` →&nbsp;❌ <br>
-/// `IXAudio2MasteringVoice_DisableEffect` →&nbsp;❌ <br>
-/// `IXAudio2MasteringVoice_EnableEffect` →&nbsp;❌ <br>
-/// `IXAudio2MasteringVoice_GetChannelVolumes` →&nbsp;❌ <br>
-/// `IXAudio2MasteringVoice_GetEffectParameters` →&nbsp;❌ <br>
-/// `IXAudio2MasteringVoice_GetEffectState` →&nbsp;❌ <br>
-/// `IXAudio2MasteringVoice_GetFilterParameters` →&nbsp;❌ <br>
-/// `IXAudio2MasteringVoice_GetOutputFilterParameters` →&nbsp;❌ <br>
-/// `IXAudio2MasteringVoice_GetOutputMatrix` →&nbsp;❌ <br>
-/// `IXAudio2MasteringVoice_GetVoiceDetails` →&nbsp;❌ <br>
-/// `IXAudio2MasteringVoice_GetVolume` →&nbsp;❌ <br>
-/// `IXAudio2MasteringVoice_SetChannelVolumes` →&nbsp;❌ <br>
-/// `IXAudio2MasteringVoice_SetEffectChain` →&nbsp;❌ <br>
-/// `IXAudio2MasteringVoice_SetEffectParameters` →&nbsp;❌ <br>
-/// `IXAudio2MasteringVoice_SetFilterParameters` →&nbsp;❌ <br>
-/// `IXAudio2MasteringVoice_SetOutputFilterParameters` →&nbsp;❌ <br>
-/// `IXAudio2MasteringVoice_SetOutputMatrix` →&nbsp;❌ <br>
-/// `IXAudio2MasteringVoice_SetOutputVoices` →&nbsp;❌ <br>
-/// `IXAudio2MasteringVoice_SetVolume` →&nbsp;❌ <br>
-/// `IXAudio2SourceVoice_DestroyVoice` →&nbsp;❌ <br>
-/// `IXAudio2SourceVoice_DisableEffect` →&nbsp;❌ <br>
-/// `IXAudio2SourceVoice_EnableEffect` →&nbsp;❌ <br>
-/// `IXAudio2SourceVoice_GetChannelVolumes` →&nbsp;❌ <br>
-/// `IXAudio2SourceVoice_GetEffectParameters` →&nbsp;❌ <br>
-/// `IXAudio2SourceVoice_GetEffectState` →&nbsp;❌ <br>
-/// `IXAudio2SourceVoice_GetFilterParameters` →&nbsp;❌ <br>
-/// `IXAudio2SourceVoice_GetOutputFilterParameters` →&nbsp;❌ <br>
-/// `IXAudio2SourceVoice_GetOutputMatrix` →&nbsp;❌ <br>
-/// `IXAudio2SourceVoice_GetVoiceDetails` →&nbsp;❌ <br>
-/// `IXAudio2SourceVoice_GetVolume` →&nbsp;❌ <br>
-/// `IXAudio2SourceVoice_SetChannelVolumes` →&nbsp;❌ <br>
-/// `IXAudio2SourceVoice_SetEffectChain` →&nbsp;❌ <br>
-/// `IXAudio2SourceVoice_SetEffectParameters` →&nbsp;❌ <br>
-/// `IXAudio2SourceVoice_SetFilterParameters` →&nbsp;❌ <br>
-/// `IXAudio2SourceVoice_SetOutputFilterParameters` →&nbsp;❌ <br>
-/// `IXAudio2SourceVoice_SetOutputMatrix` →&nbsp;❌ <br>
-/// `IXAudio2SourceVoice_SetOutputVoices` →&nbsp;❌ <br>
-/// `IXAudio2SourceVoice_SetVolume` →&nbsp;❌ <br>
-/// `IXAudio2SubmixVoice_DestroyVoice` →&nbsp;❌ <br>
-/// `IXAudio2SubmixVoice_DisableEffect` →&nbsp;❌ <br>
-/// `IXAudio2SubmixVoice_EnableEffect` →&nbsp;❌ <br>
-/// `IXAudio2SubmixVoice_GetChannelVolumes` →&nbsp;❌ <br>
-/// `IXAudio2SubmixVoice_GetEffectParameters` →&nbsp;❌ <br>
-/// `IXAudio2SubmixVoice_GetEffectState` →&nbsp;❌ <br>
-/// `IXAudio2SubmixVoice_GetFilterParameters` →&nbsp;❌ <br>
-/// `IXAudio2SubmixVoice_GetOutputFilterParameters` →&nbsp;❌ <br>
-/// `IXAudio2SubmixVoice_GetOutputMatrix` →&nbsp;❌ <br>
-/// `IXAudio2SubmixVoice_GetVoiceDetails` →&nbsp;❌ <br>
-/// `IXAudio2SubmixVoice_GetVolume` →&nbsp;❌ <br>
-/// `IXAudio2SubmixVoice_SetChannelVolumes` →&nbsp;❌ <br>
-/// `IXAudio2SubmixVoice_SetEffectChain` →&nbsp;❌ <br>
-/// `IXAudio2SubmixVoice_SetEffectParameters` →&nbsp;❌ <br>
-/// `IXAudio2SubmixVoice_SetFilterParameters` →&nbsp;❌ <br>
-/// `IXAudio2SubmixVoice_SetOutputFilterParameters` →&nbsp;❌ <br>
-/// `IXAudio2SubmixVoice_SetOutputMatrix` →&nbsp;❌ <br>
-/// `IXAudio2SubmixVoice_SetOutputVoices` →&nbsp;❌ <br>
-/// `IXAudio2SubmixVoice_SetVolume` →&nbsp;❌ <br>
-/// `Processor1` →&nbsp;❌ <br>
-/// `Processor10` →&nbsp;❌ <br>
-/// `Processor11` →&nbsp;❌ <br>
-/// `Processor12` →&nbsp;❌ <br>
-/// `Processor13` →&nbsp;❌ <br>
-/// `Processor14` →&nbsp;❌ <br>
-/// `Processor15` →&nbsp;❌ <br>
-/// `Processor16` →&nbsp;❌ <br>
-/// `Processor17` →&nbsp;❌ <br>
-/// `Processor18` →&nbsp;❌ <br>
-/// `Processor19` →&nbsp;❌ <br>
-/// `Processor2` →&nbsp;❌ <br>
-/// `Processor20` →&nbsp;❌ <br>
-/// `Processor21` →&nbsp;❌ <br>
-/// `Processor22` →&nbsp;❌ <br>
-/// `Processor23` →&nbsp;❌ <br>
-/// `Processor24` →&nbsp;❌ <br>
-/// `Processor25` →&nbsp;❌ <br>
-/// `Processor26` →&nbsp;❌ <br>
-/// `Processor27` →&nbsp;❌ <br>
-/// `Processor28` →&nbsp;❌ <br>
-/// `Processor29` →&nbsp;❌ <br>
-/// `Processor3` →&nbsp;❌ <br>
-/// `Processor30` →&nbsp;❌ <br>
-/// `Processor31` →&nbsp;❌ <br>
-/// `Processor32` →&nbsp;❌ <br>
-/// `Processor4` →&nbsp;❌ <br>
-/// `Processor5` →&nbsp;❌ <br>
-/// `Processor6` →&nbsp;❌ <br>
-/// `Processor7` →&nbsp;❌ <br>
-/// `Processor8` →&nbsp;❌ <br>
-/// `Processor9` →&nbsp;❌ <br>
-/// `XAUDIO2D_DLL` →&nbsp;❌ <br>
-/// `XAUDIO2D_DLL_A` →&nbsp;❌ <br>
-/// `XAUDIO2D_DLL_W` →&nbsp;❌ <br>
+/// `FACILITY_XAUDIO2`&nbsp;→ [`xaudio2::FACILITY`] <br>
+/// `Processor1`&nbsp;→ [`xaudio2::Processor1`] <br>
+/// `Processor2`&nbsp;→ [`xaudio2::Processor2`] <br>
+/// `Processor31`&nbsp;→ [`xaudio2::Processor31`] <br>
+/// `Processor32`&nbsp;→ [`xaudio2::Processor32`] <br>
+/// `XAUDIO2D_DLL`&nbsp;→ [`xaudio2::D_DLL`] <br>
+/// `XAUDIO2D_DLL_A`&nbsp;→ [`xaudio2::D_DLL_A`] <br>
+/// `XAUDIO2D_DLL_W`&nbsp;→ [`xaudio2::D_DLL_W`] <br>
 /// `XAUDIO2_1024_QUANTUM` →&nbsp;❌ <br>
-/// `XAUDIO2_ANY_PROCESSOR` →&nbsp;❌ <br>
-/// `XAUDIO2_COMMIT_ALL` →&nbsp;❌ <br>
-/// `XAUDIO2_COMMIT_NOW` →&nbsp;❌ <br>
+/// `XAUDIO2_ANY_PROCESSOR`&nbsp;→ [`xaudio2::ANY_PROCESSOR`] <br>
+/// `XAUDIO2_COMMIT_ALL`&nbsp;→ [`xaudio2::COMMIT_ALL`] <br>
+/// `XAUDIO2_COMMIT_NOW`&nbsp;→ [`xaudio2::COMMIT_NOW`] <br>
 /// `XAUDIO2_DEBUG_ENGINE` →&nbsp;❌ <br>
-/// `XAUDIO2_DEFAULT_CHANNELS` →&nbsp;❌ <br>
-/// `XAUDIO2_DEFAULT_FILTER_FREQUENCY` →&nbsp;❌ <br>
-/// `XAUDIO2_DEFAULT_FILTER_ONEOVERQ` →&nbsp;❌ <br>
-/// `XAUDIO2_DEFAULT_FILTER_TYPE` →&nbsp;❌ <br>
-/// `XAUDIO2_DEFAULT_FREQ_RATIO` →&nbsp;❌ <br>
-/// `XAUDIO2_DEFAULT_PROCESSOR` →&nbsp;❌ <br>
-/// `XAUDIO2_DEFAULT_SAMPLERATE` →&nbsp;❌ <br>
-/// `XAUDIO2_DLL` →&nbsp;❌ <br>
-/// `XAUDIO2_DLL_A` →&nbsp;❌ <br>
-/// `XAUDIO2_DLL_W` →&nbsp;❌ <br>
-/// `XAUDIO2_END_OF_STREAM` →&nbsp;❌ <br>
-/// `XAUDIO2_E_DEVICE_INVALIDATED` →&nbsp;❌ <br>
-/// `XAUDIO2_E_INVALID_CALL` →&nbsp;❌ <br>
-/// `XAUDIO2_E_XAPO_CREATION_FAILED` →&nbsp;❌ <br>
-/// `XAUDIO2_E_XMA_DECODER_ERROR` →&nbsp;❌ <br>
-/// `XAUDIO2_INVALID_OPSET` →&nbsp;❌ <br>
+/// `XAUDIO2_DEFAULT_CHANNELS`&nbsp;→ [`xaudio2::DEFAULT_CHANNELS`] <br>
+/// `XAUDIO2_DEFAULT_FILTER_FREQUENCY`&nbsp;→ [`xaudio2::DEFAULT_FILTER_FREQUENCY`] <br>
+/// `XAUDIO2_DEFAULT_FILTER_ONEOVERQ`&nbsp;→ [`xaudio2::DEFAULT_FILTER_ONEOVERQ`] <br>
+/// `XAUDIO2_DEFAULT_FILTER_TYPE`&nbsp;→ [`xaudio2::DEFAULT_FILTER_TYPE`] <br>
+/// `XAUDIO2_DEFAULT_FREQ_RATIO`&nbsp;→ [`xaudio2::DEFAULT_FREQ_RATIO`] <br>
+/// `XAUDIO2_DEFAULT_PROCESSOR`&nbsp;→ [`xaudio2::DEFAULT_PROCESSOR`] <br>
+/// `XAUDIO2_DEFAULT_SAMPLERATE`&nbsp;→ [`xaudio2::DEFAULT_SAMPLERATE`] <br>
+/// `XAUDIO2_DLL`&nbsp;→ [`xaudio2::DLL`] <br>
+/// `XAUDIO2_DLL_A`&nbsp;→ [`xaudio2::DLL_A`] <br>
+/// `XAUDIO2_DLL_W`&nbsp;→ [`xaudio2::DLL_W`] <br>
+/// `XAUDIO2_END_OF_STREAM`&nbsp;→ [`xaudio2::END_OF_STREAM`] <br>
+/// `XAUDIO2_E_DEVICE_INVALIDATED`&nbsp;→ [`xaudio2::E_DEVICE_INVALIDATED`] <br>
+/// `XAUDIO2_E_INVALID_CALL`&nbsp;→ [`xaudio2::E_INVALID_CALL`] <br>
+/// `XAUDIO2_E_XAPO_CREATION_FAILED`&nbsp;→ [`xaudio2::E_XAPO_CREATION_FAILED`] <br>
+/// `XAUDIO2_E_XMA_DECODER_ERROR`&nbsp;→ [`xaudio2::E_XMA_DECODER_ERROR`] <br>
+/// `XAUDIO2_INVALID_OPSET`&nbsp;→ [`xaudio2::INVALID_OPSET`] <br>
 /// `XAUDIO2_LOG_API_CALLS` →&nbsp;❌ <br>
 /// `XAUDIO2_LOG_DETAIL` →&nbsp;❌ <br>
 /// `XAUDIO2_LOG_ERRORS` →&nbsp;❌ <br>
@@ -3127,41 +3042,36 @@ pub const xinput_h : cxx_header = cxx_header;
 /// `XAUDIO2_LOG_STREAMING` →&nbsp;❌ <br>
 /// `XAUDIO2_LOG_TIMING` →&nbsp;❌ <br>
 /// `XAUDIO2_LOG_WARNINGS` →&nbsp;❌ <br>
-/// `XAUDIO2_LOOP_INFINITE` →&nbsp;❌ <br>
-/// `XAUDIO2_MAX_AUDIO_CHANNELS` →&nbsp;❌ <br>
-/// `XAUDIO2_MAX_BUFFERS_SYSTEM` →&nbsp;❌ <br>
-/// `XAUDIO2_MAX_BUFFER_BYTES` →&nbsp;❌ <br>
-/// `XAUDIO2_MAX_FILTER_FREQUENCY` →&nbsp;❌ <br>
-/// `XAUDIO2_MAX_FILTER_ONEOVERQ` →&nbsp;❌ <br>
-/// `XAUDIO2_MAX_FREQ_RATIO` →&nbsp;❌ <br>
-/// `XAUDIO2_MAX_INSTANCES` →&nbsp;❌ <br>
-/// `XAUDIO2_MAX_LOOP_COUNT` →&nbsp;❌ <br>
-/// `XAUDIO2_MAX_QUEUED_BUFFERS` →&nbsp;❌ <br>
-/// `XAUDIO2_MAX_RATIO_TIMES_RATE_XMA_MONO` →&nbsp;❌ <br>
-/// `XAUDIO2_MAX_RATIO_TIMES_RATE_XMA_MULTICHANNEL` →&nbsp;❌ <br>
-/// `XAUDIO2_MAX_SAMPLE_RATE` →&nbsp;❌ <br>
-/// `XAUDIO2_MAX_VOLUME_LEVEL` →&nbsp;❌ <br>
-/// `XAUDIO2_MIN_FREQ_RATIO` →&nbsp;❌ <br>
-/// `XAUDIO2_MIN_SAMPLE_RATE` →&nbsp;❌ <br>
-/// `XAUDIO2_NO_LOOP_REGION` →&nbsp;❌ <br>
+/// `XAUDIO2_LOOP_INFINITE`&nbsp;→ [`xaudio2::LOOP_INFINITE`] <br>
+/// `XAUDIO2_MAX_AUDIO_CHANNELS`&nbsp;→ [`xaudio2::MAX_AUDIO_CHANNELS`] <br>
+/// `XAUDIO2_MAX_BUFFERS_SYSTEM`&nbsp;→ [`xaudio2::MAX_BUFFERS_SYSTEM`] <br>
+/// `XAUDIO2_MAX_BUFFER_BYTES`&nbsp;→ [`xaudio2::MAX_BUFFER_BYTES`] <br>
+/// `XAUDIO2_MAX_FILTER_FREQUENCY`&nbsp;→ [`xaudio2::MAX_FILTER_FREQUENCY`] <br>
+/// `XAUDIO2_MAX_FILTER_ONEOVERQ`&nbsp;→ [`xaudio2::MAX_FILTER_ONEOVERQ`] <br>
+/// `XAUDIO2_MAX_FREQ_RATIO`&nbsp;→ [`xaudio2::MAX_FREQ_RATIO`] <br>
+/// `XAUDIO2_MAX_INSTANCES`&nbsp;→ [`xaudio2::MAX_INSTANCES`] <br>
+/// `XAUDIO2_MAX_LOOP_COUNT`&nbsp;→ [`xaudio2::MAX_LOOP_COUNT`] <br>
+/// `XAUDIO2_MAX_QUEUED_BUFFERS`&nbsp;→ [`xaudio2::MAX_QUEUED_BUFFERS`] <br>
+/// `XAUDIO2_MAX_RATIO_TIMES_RATE_XMA_MONO`&nbsp;→ [`xaudio2::MAX_RATIO_TIMES_RATE_XMA_MONO`] <br>
+/// `XAUDIO2_MAX_RATIO_TIMES_RATE_XMA_MULTICHANNEL`&nbsp;→ [`xaudio2::MAX_RATIO_TIMES_RATE_XMA_MULTICHANNEL`] <br>
+/// `XAUDIO2_MAX_SAMPLE_RATE`&nbsp;→ [`xaudio2::MAX_SAMPLE_RATE`] <br>
+/// `XAUDIO2_MAX_VOLUME_LEVEL`&nbsp;→ [`xaudio2::MAX_VOLUME_LEVEL`] <br>
+/// `XAUDIO2_MIN_FREQ_RATIO`&nbsp;→ [`xaudio2::MIN_FREQ_RATIO`] <br>
+/// `XAUDIO2_MIN_SAMPLE_RATE`&nbsp;→ [`xaudio2::MIN_SAMPLE_RATE`] <br>
+/// `XAUDIO2_NO_LOOP_REGION`&nbsp;→ [`xaudio2::NO_LOOP_REGION`] <br>
 /// `XAUDIO2_NO_VIRTUAL_AUDIO_CLIENT` →&nbsp;❌ <br>
-/// `XAUDIO2_PLAY_TAILS` →&nbsp;❌ <br>
-/// `XAUDIO2_QUANTUM_DENOMINATOR` →&nbsp;❌ <br>
-/// `XAUDIO2_QUANTUM_MS` →&nbsp;❌ <br>
-/// `XAUDIO2_QUANTUM_NUMERATOR` →&nbsp;❌ <br>
-/// `XAUDIO2_SEND_USEFILTER` →&nbsp;❌ <br>
-/// `XAUDIO2_STDAPI` →&nbsp;❌ <br>
+/// `XAUDIO2_PLAY_TAILS`&nbsp;→ [`xaudio2::PLAY_TAILS`] <br>
+/// `XAUDIO2_QUANTUM_DENOMINATOR`&nbsp;→ [`xaudio2::QUANTUM_DENOMINATOR`] <br>
+/// `XAUDIO2_QUANTUM_MS`&nbsp;→ [`xaudio2::QUANTUM_MS`] <br>
+/// `XAUDIO2_QUANTUM_NUMERATOR`&nbsp;→ [`xaudio2::QUANTUM_NUMERATOR`] <br>
+/// `XAUDIO2_SEND_USEFILTER`&nbsp;→ [`xaudio2::SEND_USEFILTER`] <br>
+/// `XAUDIO2_STDAPI`&nbsp;→ [`extern "system"`](https://doc.rust-lang.org/reference/items/external-blocks.html#abi) <br>
 /// `XAUDIO2_STOP_ENGINE_WHEN_IDLE` →&nbsp;❌ <br>
-/// `XAUDIO2_USE_DEFAULT_PROCESSOR` →&nbsp;❌ <br>
-/// `XAUDIO2_VOICE_NOPITCH` →&nbsp;❌ <br>
-/// `XAUDIO2_VOICE_NOSAMPLESPLAYED` →&nbsp;❌ <br>
-/// `XAUDIO2_VOICE_NOSRC` →&nbsp;❌ <br>
-/// `XAUDIO2_VOICE_USEFILTER` →&nbsp;❌ <br>
-/// `_USE_MATH_DEFINES` →&nbsp;❌ <br>
-/// ### C++ Macros → Rust fns/macros
-///
-/// `FWD_DECLARE` →&nbsp;❌ <br>
-/// `X2DEFAULT` →&nbsp;❌ <br>
+/// `XAUDIO2_USE_DEFAULT_PROCESSOR`&nbsp;→ [`xaudio2::USE_DEFAULT_PROCESSOR`] <br>
+/// `XAUDIO2_VOICE_NOPITCH`&nbsp;→ [`xaudio2::VOICE_NOPITCH`] <br>
+/// `XAUDIO2_VOICE_NOSAMPLESPLAYED`&nbsp;→ [`xaudio2::VOICE_NOSAMPLESPLAYED`] <br>
+/// `XAUDIO2_VOICE_NOSRC`&nbsp;→ [`xaudio2::VOICE_NOSRC`] <br>
+/// `XAUDIO2_VOICE_USEFILTER`&nbsp;→ [`xaudio2::VOICE_USEFILTER`] <br>
 pub const xaudio2_h : cxx_header = cxx_header;
 
 

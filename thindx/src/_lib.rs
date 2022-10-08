@@ -15,6 +15,7 @@
 pub extern crate abibool;
 pub extern crate abistr;
 
+#[doc(no_inline)] pub use thindx_xaudio2::{xaudio2_8, xaudio2_9};
 #[doc(hidden)] pub use abistr::cstr;
 
 
@@ -32,6 +33,7 @@ mods! {
         pub mod d3d9;
         pub mod d3d11;
         pub mod wkpdid;
+        pub mod xaudio2;
         pub mod xinput;
         pub mod win32;
     }
