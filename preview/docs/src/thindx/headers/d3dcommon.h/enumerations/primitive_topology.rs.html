@@ -1,4 +1,10 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3dcommon.h\enumerations\primitive_topology.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>primitive_topology.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../../normalize.css"><link rel="stylesheet" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../../dark.css" disabled><link rel="stylesheet" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3dcommon.h\enumerations\primitive_topology.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>primitive_topology.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div>
+        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
+                                <a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -176,183 +182,184 @@
 <span id="176">176</span>
 <span id="177">177</span>
 <span id="178">178</span>
-</pre><pre class="rust"><code><span class="attribute">#[allow(unused_imports)] </span><span class="kw">use crate</span>::<span class="kw-2">*</span>;
+</pre><pre class="rust"><code><span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span> <span class="kw">use</span> <span class="kw">crate</span>::<span class="kw-2">*</span>;
 
-<span class="kw">use </span>bytemuck::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">bytemuck</span>::<span class="kw-2">*</span>;
 
-<span class="kw">use </span>winapi::um::d3dcommon::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">winapi::um::d3dcommon</span>::<span class="kw-2">*</span>;
 
 
 
-<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_primitive_topology)\]
-/// D3D_PRIMITIVE_TOPOLOGY
-///
-/// ### See Also
-/// *   [Primitive Topologies](https://docs.microsoft.com/en-us/windows/win32/direct3d11/d3d10-graphics-programming-guide-primitive-topologies)
-</span><span class="attribute">#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[derive(Pod, Zeroable)]
-#[repr(transparent)] </span><span class="kw">pub struct </span>PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY);
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_primitive_topology)\]</span>
+<span class="doccomment">/// D3D_PRIMITIVE_TOPOLOGY</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// ### See Also</span>
+<span class="doccomment">/// *   [Primitive Topologies](https://docs.microsoft.com/en-us/windows/win32/direct3d11/d3d10-graphics-programming-guide-primitive-topologies)</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">PartialOrd</span>, <span class="ident">Ord</span>, <span class="ident">Hash</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Pod</span>, <span class="ident">Zeroable</span>)]</span>
+<span class="attribute">#[<span class="ident">repr</span>(<span class="ident">transparent</span>)]</span> <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">PrimitiveTopology</span>(<span class="ident">D3D_PRIMITIVE_TOPOLOGY</span>);
 
-<span class="comment">// Note: D3D10_* aliases D3D_* despite poor docs kinda implying otherwise (see d3dcommon.h)
-// Note: D3D11_* aliases D3D_* despite poor docs kinda implying otherwise (see d3dcommon.h)
+<span class="comment">// Note: D3D10_* aliases D3D_* despite poor docs kinda implying otherwise (see d3dcommon.h)</span>
+<span class="comment">// Note: D3D11_* aliases D3D_* despite poor docs kinda implying otherwise (see d3dcommon.h)</span>
 
-</span><span class="macro">enumish! </span>{
-    PrimitiveTopology =&gt; D3D_PRIMITIVE_TOPOLOGY;
-    default: Undefined == <span class="number">0</span>;
-    Undefined, PointList, LineList, LineStrip, TriangleList, TriangleStrip, LineListAdj, LineStripAdj, TriangleListAdj, TriangleStripAdj,
-    _1ControlPointPatchList, _2ControlPointPatchList, _3ControlPointPatchList, _4ControlPointPatchList,
-    _5ControlPointPatchList, _6ControlPointPatchList, _7ControlPointPatchList, _8ControlPointPatchList,
-    _9ControlPointPatchList, _10ControlPointPatchList, _11ControlPointPatchList, _12ControlPointPatchList,
-    _13ControlPointPatchList, _14ControlPointPatchList, _15ControlPointPatchList, _16ControlPointPatchList,
-    _17ControlPointPatchList, _18ControlPointPatchList, _19ControlPointPatchList, _20ControlPointPatchList,
-    _21ControlPointPatchList, _22ControlPointPatchList, _23ControlPointPatchList, _24ControlPointPatchList,
-    _25ControlPointPatchList, _26ControlPointPatchList, _27ControlPointPatchList, _28ControlPointPatchList,
-    _29ControlPointPatchList, _30ControlPointPatchList, _31ControlPointPatchList, _32ControlPointPatchList,
+<span class="macro">enumish!</span> {
+    <span class="ident">PrimitiveTopology</span> =&gt; <span class="ident">D3D_PRIMITIVE_TOPOLOGY</span>;
+    <span class="ident">default</span>: <span class="ident">Undefined</span> <span class="op">==</span> <span class="number">0</span>;
+    <span class="ident">Undefined</span>, <span class="ident">PointList</span>, <span class="ident">LineList</span>, <span class="ident">LineStrip</span>, <span class="ident">TriangleList</span>, <span class="ident">TriangleStrip</span>, <span class="ident">LineListAdj</span>, <span class="ident">LineStripAdj</span>, <span class="ident">TriangleListAdj</span>, <span class="ident">TriangleStripAdj</span>,
+    <span class="ident">_1ControlPointPatchList</span>, <span class="ident">_2ControlPointPatchList</span>, <span class="ident">_3ControlPointPatchList</span>, <span class="ident">_4ControlPointPatchList</span>,
+    <span class="ident">_5ControlPointPatchList</span>, <span class="ident">_6ControlPointPatchList</span>, <span class="ident">_7ControlPointPatchList</span>, <span class="ident">_8ControlPointPatchList</span>,
+    <span class="ident">_9ControlPointPatchList</span>, <span class="ident">_10ControlPointPatchList</span>, <span class="ident">_11ControlPointPatchList</span>, <span class="ident">_12ControlPointPatchList</span>,
+    <span class="ident">_13ControlPointPatchList</span>, <span class="ident">_14ControlPointPatchList</span>, <span class="ident">_15ControlPointPatchList</span>, <span class="ident">_16ControlPointPatchList</span>,
+    <span class="ident">_17ControlPointPatchList</span>, <span class="ident">_18ControlPointPatchList</span>, <span class="ident">_19ControlPointPatchList</span>, <span class="ident">_20ControlPointPatchList</span>,
+    <span class="ident">_21ControlPointPatchList</span>, <span class="ident">_22ControlPointPatchList</span>, <span class="ident">_23ControlPointPatchList</span>, <span class="ident">_24ControlPointPatchList</span>,
+    <span class="ident">_25ControlPointPatchList</span>, <span class="ident">_26ControlPointPatchList</span>, <span class="ident">_27ControlPointPatchList</span>, <span class="ident">_28ControlPointPatchList</span>,
+    <span class="ident">_29ControlPointPatchList</span>, <span class="ident">_30ControlPointPatchList</span>, <span class="ident">_31ControlPointPatchList</span>, <span class="ident">_32ControlPointPatchList</span>,
 }
 
-<span class="attribute">#[allow(missing_docs)]
-#[allow(non_upper_case_globals)] </span><span class="kw">impl </span>PrimitiveTopology { <span class="comment">// These are enum-like
-    </span><span class="kw">pub const </span>Undefined                     : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_UNDEFINED); <span class="comment">// 0
-    </span><span class="kw">pub const </span>PointList                     : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_POINTLIST);
-    <span class="kw">pub const </span>LineList                      : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_LINELIST);
-    <span class="kw">pub const </span>LineStrip                     : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_LINESTRIP);
-    <span class="kw">pub const </span>TriangleList                  : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-    <span class="kw">pub const </span>TriangleStrip                 : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP);
-    <span class="kw">pub const </span>LineListAdj                   : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_LINELIST_ADJ);
-    <span class="kw">pub const </span>LineStripAdj                  : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_LINESTRIP_ADJ);
-    <span class="kw">pub const </span>TriangleListAdj               : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST_ADJ);
-    <span class="kw">pub const </span>TriangleStripAdj              : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP_ADJ);
-    <span class="kw">pub const </span>_1ControlPointPatchList       : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_1_CONTROL_POINT_PATCHLIST);
-    <span class="kw">pub const </span>_2ControlPointPatchList       : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_2_CONTROL_POINT_PATCHLIST);
-    <span class="kw">pub const </span>_3ControlPointPatchList       : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_3_CONTROL_POINT_PATCHLIST);
-    <span class="kw">pub const </span>_4ControlPointPatchList       : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_4_CONTROL_POINT_PATCHLIST);
-    <span class="kw">pub const </span>_5ControlPointPatchList       : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_5_CONTROL_POINT_PATCHLIST);
-    <span class="kw">pub const </span>_6ControlPointPatchList       : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_6_CONTROL_POINT_PATCHLIST);
-    <span class="kw">pub const </span>_7ControlPointPatchList       : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_7_CONTROL_POINT_PATCHLIST);
-    <span class="kw">pub const </span>_8ControlPointPatchList       : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_8_CONTROL_POINT_PATCHLIST);
-    <span class="kw">pub const </span>_9ControlPointPatchList       : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_9_CONTROL_POINT_PATCHLIST);
-    <span class="kw">pub const </span>_10ControlPointPatchList      : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_10_CONTROL_POINT_PATCHLIST);
-    <span class="kw">pub const </span>_11ControlPointPatchList      : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_11_CONTROL_POINT_PATCHLIST);
-    <span class="kw">pub const </span>_12ControlPointPatchList      : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_12_CONTROL_POINT_PATCHLIST);
-    <span class="kw">pub const </span>_13ControlPointPatchList      : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_13_CONTROL_POINT_PATCHLIST);
-    <span class="kw">pub const </span>_14ControlPointPatchList      : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_14_CONTROL_POINT_PATCHLIST);
-    <span class="kw">pub const </span>_15ControlPointPatchList      : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_15_CONTROL_POINT_PATCHLIST);
-    <span class="kw">pub const </span>_16ControlPointPatchList      : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_16_CONTROL_POINT_PATCHLIST);
-    <span class="kw">pub const </span>_17ControlPointPatchList      : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_17_CONTROL_POINT_PATCHLIST);
-    <span class="kw">pub const </span>_18ControlPointPatchList      : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_18_CONTROL_POINT_PATCHLIST);
-    <span class="kw">pub const </span>_19ControlPointPatchList      : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_19_CONTROL_POINT_PATCHLIST);
-    <span class="kw">pub const </span>_20ControlPointPatchList      : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_20_CONTROL_POINT_PATCHLIST);
-    <span class="kw">pub const </span>_21ControlPointPatchList      : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_21_CONTROL_POINT_PATCHLIST);
-    <span class="kw">pub const </span>_22ControlPointPatchList      : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_22_CONTROL_POINT_PATCHLIST);
-    <span class="kw">pub const </span>_23ControlPointPatchList      : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_23_CONTROL_POINT_PATCHLIST);
-    <span class="kw">pub const </span>_24ControlPointPatchList      : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_24_CONTROL_POINT_PATCHLIST);
-    <span class="kw">pub const </span>_25ControlPointPatchList      : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_25_CONTROL_POINT_PATCHLIST);
-    <span class="kw">pub const </span>_26ControlPointPatchList      : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_26_CONTROL_POINT_PATCHLIST);
-    <span class="kw">pub const </span>_27ControlPointPatchList      : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_27_CONTROL_POINT_PATCHLIST);
-    <span class="kw">pub const </span>_28ControlPointPatchList      : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_28_CONTROL_POINT_PATCHLIST);
-    <span class="kw">pub const </span>_29ControlPointPatchList      : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_29_CONTROL_POINT_PATCHLIST);
-    <span class="kw">pub const </span>_30ControlPointPatchList      : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_30_CONTROL_POINT_PATCHLIST);
-    <span class="kw">pub const </span>_31ControlPointPatchList      : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_31_CONTROL_POINT_PATCHLIST);
-    <span class="kw">pub const </span>_32ControlPointPatchList      : PrimitiveTopology = PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_32_CONTROL_POINT_PATCHLIST);
+<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">missing_docs</span>)]</span>
+<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">non_upper_case_globals</span>)]</span> <span class="kw">impl</span> <span class="ident">PrimitiveTopology</span> { <span class="comment">// These are enum-like</span>
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Undefined</span>                     : <span class="ident">PrimitiveTopology</span> <span class="op">=</span> <span class="ident">PrimitiveTopology</span>(<span class="ident">D3D_PRIMITIVE_TOPOLOGY_UNDEFINED</span>); <span class="comment">// 0</span>
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">PointList</span>                     : <span class="ident">PrimitiveTopology</span> <span class="op">=</span> <span class="ident">PrimitiveTopology</span>(<span class="ident">D3D_PRIMITIVE_TOPOLOGY_POINTLIST</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">LineList</span>                      : <span class="ident">PrimitiveTopology</span> <span class="op">=</span> <span class="ident">PrimitiveTopology</span>(<span class="ident">D3D_PRIMITIVE_TOPOLOGY_LINELIST</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">LineStrip</span>                     : <span class="ident">PrimitiveTopology</span> <span class="op">=</span> <span class="ident">PrimitiveTopology</span>(<span class="ident">D3D_PRIMITIVE_TOPOLOGY_LINESTRIP</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">TriangleList</span>                  : <span class="ident">PrimitiveTopology</span> <span class="op">=</span> <span class="ident">PrimitiveTopology</span>(<span class="ident">D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">TriangleStrip</span>                 : <span class="ident">PrimitiveTopology</span> <span class="op">=</span> <span class="ident">PrimitiveTopology</span>(<span class="ident">D3D_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">LineListAdj</span>                   : <span class="ident">PrimitiveTopology</span> <span class="op">=</span> <span class="ident">PrimitiveTopology</span>(<span class="ident">D3D_PRIMITIVE_TOPOLOGY_LINELIST_ADJ</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">LineStripAdj</span>                  : <span class="ident">PrimitiveTopology</span> <span class="op">=</span> <span class="ident">PrimitiveTopology</span>(<span class="ident">D3D_PRIMITIVE_TOPOLOGY_LINESTRIP_ADJ</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">TriangleListAdj</span>               : <span class="ident">PrimitiveTopology</span> <span class="op">=</span> <span class="ident">PrimitiveTopology</span>(<span class="ident">D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST_ADJ</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">TriangleStripAdj</span>              : <span class="ident">PrimitiveTopology</span> <span class="op">=</span> <span class="ident">PrimitiveTopology</span>(<span class="ident">D3D_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP_ADJ</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">_1ControlPointPatchList</span>       : <span class="ident">PrimitiveTopology</span> <span class="op">=</span> <span class="ident">PrimitiveTopology</span>(<span class="ident">D3D_PRIMITIVE_TOPOLOGY_1_CONTROL_POINT_PATCHLIST</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">_2ControlPointPatchList</span>       : <span class="ident">PrimitiveTopology</span> <span class="op">=</span> <span class="ident">PrimitiveTopology</span>(<span class="ident">D3D_PRIMITIVE_TOPOLOGY_2_CONTROL_POINT_PATCHLIST</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">_3ControlPointPatchList</span>       : <span class="ident">PrimitiveTopology</span> <span class="op">=</span> <span class="ident">PrimitiveTopology</span>(<span class="ident">D3D_PRIMITIVE_TOPOLOGY_3_CONTROL_POINT_PATCHLIST</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">_4ControlPointPatchList</span>       : <span class="ident">PrimitiveTopology</span> <span class="op">=</span> <span class="ident">PrimitiveTopology</span>(<span class="ident">D3D_PRIMITIVE_TOPOLOGY_4_CONTROL_POINT_PATCHLIST</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">_5ControlPointPatchList</span>       : <span class="ident">PrimitiveTopology</span> <span class="op">=</span> <span class="ident">PrimitiveTopology</span>(<span class="ident">D3D_PRIMITIVE_TOPOLOGY_5_CONTROL_POINT_PATCHLIST</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">_6ControlPointPatchList</span>       : <span class="ident">PrimitiveTopology</span> <span class="op">=</span> <span class="ident">PrimitiveTopology</span>(<span class="ident">D3D_PRIMITIVE_TOPOLOGY_6_CONTROL_POINT_PATCHLIST</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">_7ControlPointPatchList</span>       : <span class="ident">PrimitiveTopology</span> <span class="op">=</span> <span class="ident">PrimitiveTopology</span>(<span class="ident">D3D_PRIMITIVE_TOPOLOGY_7_CONTROL_POINT_PATCHLIST</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">_8ControlPointPatchList</span>       : <span class="ident">PrimitiveTopology</span> <span class="op">=</span> <span class="ident">PrimitiveTopology</span>(<span class="ident">D3D_PRIMITIVE_TOPOLOGY_8_CONTROL_POINT_PATCHLIST</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">_9ControlPointPatchList</span>       : <span class="ident">PrimitiveTopology</span> <span class="op">=</span> <span class="ident">PrimitiveTopology</span>(<span class="ident">D3D_PRIMITIVE_TOPOLOGY_9_CONTROL_POINT_PATCHLIST</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">_10ControlPointPatchList</span>      : <span class="ident">PrimitiveTopology</span> <span class="op">=</span> <span class="ident">PrimitiveTopology</span>(<span class="ident">D3D_PRIMITIVE_TOPOLOGY_10_CONTROL_POINT_PATCHLIST</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">_11ControlPointPatchList</span>      : <span class="ident">PrimitiveTopology</span> <span class="op">=</span> <span class="ident">PrimitiveTopology</span>(<span class="ident">D3D_PRIMITIVE_TOPOLOGY_11_CONTROL_POINT_PATCHLIST</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">_12ControlPointPatchList</span>      : <span class="ident">PrimitiveTopology</span> <span class="op">=</span> <span class="ident">PrimitiveTopology</span>(<span class="ident">D3D_PRIMITIVE_TOPOLOGY_12_CONTROL_POINT_PATCHLIST</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">_13ControlPointPatchList</span>      : <span class="ident">PrimitiveTopology</span> <span class="op">=</span> <span class="ident">PrimitiveTopology</span>(<span class="ident">D3D_PRIMITIVE_TOPOLOGY_13_CONTROL_POINT_PATCHLIST</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">_14ControlPointPatchList</span>      : <span class="ident">PrimitiveTopology</span> <span class="op">=</span> <span class="ident">PrimitiveTopology</span>(<span class="ident">D3D_PRIMITIVE_TOPOLOGY_14_CONTROL_POINT_PATCHLIST</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">_15ControlPointPatchList</span>      : <span class="ident">PrimitiveTopology</span> <span class="op">=</span> <span class="ident">PrimitiveTopology</span>(<span class="ident">D3D_PRIMITIVE_TOPOLOGY_15_CONTROL_POINT_PATCHLIST</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">_16ControlPointPatchList</span>      : <span class="ident">PrimitiveTopology</span> <span class="op">=</span> <span class="ident">PrimitiveTopology</span>(<span class="ident">D3D_PRIMITIVE_TOPOLOGY_16_CONTROL_POINT_PATCHLIST</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">_17ControlPointPatchList</span>      : <span class="ident">PrimitiveTopology</span> <span class="op">=</span> <span class="ident">PrimitiveTopology</span>(<span class="ident">D3D_PRIMITIVE_TOPOLOGY_17_CONTROL_POINT_PATCHLIST</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">_18ControlPointPatchList</span>      : <span class="ident">PrimitiveTopology</span> <span class="op">=</span> <span class="ident">PrimitiveTopology</span>(<span class="ident">D3D_PRIMITIVE_TOPOLOGY_18_CONTROL_POINT_PATCHLIST</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">_19ControlPointPatchList</span>      : <span class="ident">PrimitiveTopology</span> <span class="op">=</span> <span class="ident">PrimitiveTopology</span>(<span class="ident">D3D_PRIMITIVE_TOPOLOGY_19_CONTROL_POINT_PATCHLIST</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">_20ControlPointPatchList</span>      : <span class="ident">PrimitiveTopology</span> <span class="op">=</span> <span class="ident">PrimitiveTopology</span>(<span class="ident">D3D_PRIMITIVE_TOPOLOGY_20_CONTROL_POINT_PATCHLIST</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">_21ControlPointPatchList</span>      : <span class="ident">PrimitiveTopology</span> <span class="op">=</span> <span class="ident">PrimitiveTopology</span>(<span class="ident">D3D_PRIMITIVE_TOPOLOGY_21_CONTROL_POINT_PATCHLIST</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">_22ControlPointPatchList</span>      : <span class="ident">PrimitiveTopology</span> <span class="op">=</span> <span class="ident">PrimitiveTopology</span>(<span class="ident">D3D_PRIMITIVE_TOPOLOGY_22_CONTROL_POINT_PATCHLIST</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">_23ControlPointPatchList</span>      : <span class="ident">PrimitiveTopology</span> <span class="op">=</span> <span class="ident">PrimitiveTopology</span>(<span class="ident">D3D_PRIMITIVE_TOPOLOGY_23_CONTROL_POINT_PATCHLIST</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">_24ControlPointPatchList</span>      : <span class="ident">PrimitiveTopology</span> <span class="op">=</span> <span class="ident">PrimitiveTopology</span>(<span class="ident">D3D_PRIMITIVE_TOPOLOGY_24_CONTROL_POINT_PATCHLIST</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">_25ControlPointPatchList</span>      : <span class="ident">PrimitiveTopology</span> <span class="op">=</span> <span class="ident">PrimitiveTopology</span>(<span class="ident">D3D_PRIMITIVE_TOPOLOGY_25_CONTROL_POINT_PATCHLIST</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">_26ControlPointPatchList</span>      : <span class="ident">PrimitiveTopology</span> <span class="op">=</span> <span class="ident">PrimitiveTopology</span>(<span class="ident">D3D_PRIMITIVE_TOPOLOGY_26_CONTROL_POINT_PATCHLIST</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">_27ControlPointPatchList</span>      : <span class="ident">PrimitiveTopology</span> <span class="op">=</span> <span class="ident">PrimitiveTopology</span>(<span class="ident">D3D_PRIMITIVE_TOPOLOGY_27_CONTROL_POINT_PATCHLIST</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">_28ControlPointPatchList</span>      : <span class="ident">PrimitiveTopology</span> <span class="op">=</span> <span class="ident">PrimitiveTopology</span>(<span class="ident">D3D_PRIMITIVE_TOPOLOGY_28_CONTROL_POINT_PATCHLIST</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">_29ControlPointPatchList</span>      : <span class="ident">PrimitiveTopology</span> <span class="op">=</span> <span class="ident">PrimitiveTopology</span>(<span class="ident">D3D_PRIMITIVE_TOPOLOGY_29_CONTROL_POINT_PATCHLIST</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">_30ControlPointPatchList</span>      : <span class="ident">PrimitiveTopology</span> <span class="op">=</span> <span class="ident">PrimitiveTopology</span>(<span class="ident">D3D_PRIMITIVE_TOPOLOGY_30_CONTROL_POINT_PATCHLIST</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">_31ControlPointPatchList</span>      : <span class="ident">PrimitiveTopology</span> <span class="op">=</span> <span class="ident">PrimitiveTopology</span>(<span class="ident">D3D_PRIMITIVE_TOPOLOGY_31_CONTROL_POINT_PATCHLIST</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">_32ControlPointPatchList</span>      : <span class="ident">PrimitiveTopology</span> <span class="op">=</span> <span class="ident">PrimitiveTopology</span>(<span class="ident">D3D_PRIMITIVE_TOPOLOGY_32_CONTROL_POINT_PATCHLIST</span>);
 }
 
-<span class="comment">//#cpp2rust D3D_PRIMITIVE_TOPOLOGY                              = d3d::PrimitiveTopology
+<span class="comment">//#cpp2rust D3D_PRIMITIVE_TOPOLOGY                              = d3d::PrimitiveTopology</span>
 
-//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_UNDEFINED                    = d3d::PrimitiveTopology::Undefined
-//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_POINTLIST                    = d3d::PrimitiveTopology::PointList
-//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_LINELIST                     = d3d::PrimitiveTopology::LineList
-//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_LINESTRIP                    = d3d::PrimitiveTopology::LineStrip
-//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST                 = d3d::PrimitiveTopology::TriangleList
-//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP                = d3d::PrimitiveTopology::TriangleStrip
-//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_LINELIST_ADJ                 = d3d::PrimitiveTopology::LineListAdj
-//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_LINESTRIP_ADJ                = d3d::PrimitiveTopology::LineStripAdj
-//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST_ADJ             = d3d::PrimitiveTopology::TriangleListAdj
-//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP_ADJ            = d3d::PrimitiveTopology::TriangleStripAdj
-//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_1_CONTROL_POINT_PATCHLIST    = d3d::PrimitiveTopology::_1ControlPointPatchList
-//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_2_CONTROL_POINT_PATCHLIST    = d3d::PrimitiveTopology::_2ControlPointPatchList
-//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_3_CONTROL_POINT_PATCHLIST    = d3d::PrimitiveTopology::_3ControlPointPatchList
-//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_4_CONTROL_POINT_PATCHLIST    = d3d::PrimitiveTopology::_4ControlPointPatchList
-//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_5_CONTROL_POINT_PATCHLIST    = d3d::PrimitiveTopology::_5ControlPointPatchList
-//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_6_CONTROL_POINT_PATCHLIST    = d3d::PrimitiveTopology::_6ControlPointPatchList
-//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_7_CONTROL_POINT_PATCHLIST    = d3d::PrimitiveTopology::_7ControlPointPatchList
-//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_8_CONTROL_POINT_PATCHLIST    = d3d::PrimitiveTopology::_8ControlPointPatchList
-//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_9_CONTROL_POINT_PATCHLIST    = d3d::PrimitiveTopology::_9ControlPointPatchList
-//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_10_CONTROL_POINT_PATCHLIST   = d3d::PrimitiveTopology::_10ControlPointPatchList
-//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_11_CONTROL_POINT_PATCHLIST   = d3d::PrimitiveTopology::_11ControlPointPatchList
-//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_12_CONTROL_POINT_PATCHLIST   = d3d::PrimitiveTopology::_12ControlPointPatchList
-//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_13_CONTROL_POINT_PATCHLIST   = d3d::PrimitiveTopology::_13ControlPointPatchList
-//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_14_CONTROL_POINT_PATCHLIST   = d3d::PrimitiveTopology::_14ControlPointPatchList
-//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_15_CONTROL_POINT_PATCHLIST   = d3d::PrimitiveTopology::_15ControlPointPatchList
-//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_16_CONTROL_POINT_PATCHLIST   = d3d::PrimitiveTopology::_16ControlPointPatchList
-//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_17_CONTROL_POINT_PATCHLIST   = d3d::PrimitiveTopology::_17ControlPointPatchList
-//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_18_CONTROL_POINT_PATCHLIST   = d3d::PrimitiveTopology::_18ControlPointPatchList
-//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_19_CONTROL_POINT_PATCHLIST   = d3d::PrimitiveTopology::_19ControlPointPatchList
-//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_20_CONTROL_POINT_PATCHLIST   = d3d::PrimitiveTopology::_20ControlPointPatchList
-//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_21_CONTROL_POINT_PATCHLIST   = d3d::PrimitiveTopology::_21ControlPointPatchList
-//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_22_CONTROL_POINT_PATCHLIST   = d3d::PrimitiveTopology::_22ControlPointPatchList
-//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_23_CONTROL_POINT_PATCHLIST   = d3d::PrimitiveTopology::_23ControlPointPatchList
-//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_24_CONTROL_POINT_PATCHLIST   = d3d::PrimitiveTopology::_24ControlPointPatchList
-//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_25_CONTROL_POINT_PATCHLIST   = d3d::PrimitiveTopology::_25ControlPointPatchList
-//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_26_CONTROL_POINT_PATCHLIST   = d3d::PrimitiveTopology::_26ControlPointPatchList
-//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_27_CONTROL_POINT_PATCHLIST   = d3d::PrimitiveTopology::_27ControlPointPatchList
-//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_28_CONTROL_POINT_PATCHLIST   = d3d::PrimitiveTopology::_28ControlPointPatchList
-//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_29_CONTROL_POINT_PATCHLIST   = d3d::PrimitiveTopology::_29ControlPointPatchList
-//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_30_CONTROL_POINT_PATCHLIST   = d3d::PrimitiveTopology::_30ControlPointPatchList
-//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_31_CONTROL_POINT_PATCHLIST   = d3d::PrimitiveTopology::_31ControlPointPatchList
-//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_32_CONTROL_POINT_PATCHLIST   = d3d::PrimitiveTopology::_32ControlPointPatchList
+<span class="comment">//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_UNDEFINED                    = d3d::PrimitiveTopology::Undefined</span>
+<span class="comment">//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_POINTLIST                    = d3d::PrimitiveTopology::PointList</span>
+<span class="comment">//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_LINELIST                     = d3d::PrimitiveTopology::LineList</span>
+<span class="comment">//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_LINESTRIP                    = d3d::PrimitiveTopology::LineStrip</span>
+<span class="comment">//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST                 = d3d::PrimitiveTopology::TriangleList</span>
+<span class="comment">//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP                = d3d::PrimitiveTopology::TriangleStrip</span>
+<span class="comment">//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_LINELIST_ADJ                 = d3d::PrimitiveTopology::LineListAdj</span>
+<span class="comment">//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_LINESTRIP_ADJ                = d3d::PrimitiveTopology::LineStripAdj</span>
+<span class="comment">//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST_ADJ             = d3d::PrimitiveTopology::TriangleListAdj</span>
+<span class="comment">//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP_ADJ            = d3d::PrimitiveTopology::TriangleStripAdj</span>
+<span class="comment">//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_1_CONTROL_POINT_PATCHLIST    = d3d::PrimitiveTopology::_1ControlPointPatchList</span>
+<span class="comment">//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_2_CONTROL_POINT_PATCHLIST    = d3d::PrimitiveTopology::_2ControlPointPatchList</span>
+<span class="comment">//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_3_CONTROL_POINT_PATCHLIST    = d3d::PrimitiveTopology::_3ControlPointPatchList</span>
+<span class="comment">//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_4_CONTROL_POINT_PATCHLIST    = d3d::PrimitiveTopology::_4ControlPointPatchList</span>
+<span class="comment">//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_5_CONTROL_POINT_PATCHLIST    = d3d::PrimitiveTopology::_5ControlPointPatchList</span>
+<span class="comment">//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_6_CONTROL_POINT_PATCHLIST    = d3d::PrimitiveTopology::_6ControlPointPatchList</span>
+<span class="comment">//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_7_CONTROL_POINT_PATCHLIST    = d3d::PrimitiveTopology::_7ControlPointPatchList</span>
+<span class="comment">//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_8_CONTROL_POINT_PATCHLIST    = d3d::PrimitiveTopology::_8ControlPointPatchList</span>
+<span class="comment">//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_9_CONTROL_POINT_PATCHLIST    = d3d::PrimitiveTopology::_9ControlPointPatchList</span>
+<span class="comment">//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_10_CONTROL_POINT_PATCHLIST   = d3d::PrimitiveTopology::_10ControlPointPatchList</span>
+<span class="comment">//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_11_CONTROL_POINT_PATCHLIST   = d3d::PrimitiveTopology::_11ControlPointPatchList</span>
+<span class="comment">//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_12_CONTROL_POINT_PATCHLIST   = d3d::PrimitiveTopology::_12ControlPointPatchList</span>
+<span class="comment">//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_13_CONTROL_POINT_PATCHLIST   = d3d::PrimitiveTopology::_13ControlPointPatchList</span>
+<span class="comment">//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_14_CONTROL_POINT_PATCHLIST   = d3d::PrimitiveTopology::_14ControlPointPatchList</span>
+<span class="comment">//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_15_CONTROL_POINT_PATCHLIST   = d3d::PrimitiveTopology::_15ControlPointPatchList</span>
+<span class="comment">//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_16_CONTROL_POINT_PATCHLIST   = d3d::PrimitiveTopology::_16ControlPointPatchList</span>
+<span class="comment">//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_17_CONTROL_POINT_PATCHLIST   = d3d::PrimitiveTopology::_17ControlPointPatchList</span>
+<span class="comment">//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_18_CONTROL_POINT_PATCHLIST   = d3d::PrimitiveTopology::_18ControlPointPatchList</span>
+<span class="comment">//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_19_CONTROL_POINT_PATCHLIST   = d3d::PrimitiveTopology::_19ControlPointPatchList</span>
+<span class="comment">//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_20_CONTROL_POINT_PATCHLIST   = d3d::PrimitiveTopology::_20ControlPointPatchList</span>
+<span class="comment">//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_21_CONTROL_POINT_PATCHLIST   = d3d::PrimitiveTopology::_21ControlPointPatchList</span>
+<span class="comment">//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_22_CONTROL_POINT_PATCHLIST   = d3d::PrimitiveTopology::_22ControlPointPatchList</span>
+<span class="comment">//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_23_CONTROL_POINT_PATCHLIST   = d3d::PrimitiveTopology::_23ControlPointPatchList</span>
+<span class="comment">//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_24_CONTROL_POINT_PATCHLIST   = d3d::PrimitiveTopology::_24ControlPointPatchList</span>
+<span class="comment">//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_25_CONTROL_POINT_PATCHLIST   = d3d::PrimitiveTopology::_25ControlPointPatchList</span>
+<span class="comment">//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_26_CONTROL_POINT_PATCHLIST   = d3d::PrimitiveTopology::_26ControlPointPatchList</span>
+<span class="comment">//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_27_CONTROL_POINT_PATCHLIST   = d3d::PrimitiveTopology::_27ControlPointPatchList</span>
+<span class="comment">//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_28_CONTROL_POINT_PATCHLIST   = d3d::PrimitiveTopology::_28ControlPointPatchList</span>
+<span class="comment">//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_29_CONTROL_POINT_PATCHLIST   = d3d::PrimitiveTopology::_29ControlPointPatchList</span>
+<span class="comment">//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_30_CONTROL_POINT_PATCHLIST   = d3d::PrimitiveTopology::_30ControlPointPatchList</span>
+<span class="comment">//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_31_CONTROL_POINT_PATCHLIST   = d3d::PrimitiveTopology::_31ControlPointPatchList</span>
+<span class="comment">//#cpp2rust D3D_PRIMITIVE_TOPOLOGY_32_CONTROL_POINT_PATCHLIST   = d3d::PrimitiveTopology::_32ControlPointPatchList</span>
 
-//#cpp2rust D3D10_PRIMITIVE_TOPOLOGY_UNDEFINED                  = d3d::PrimitiveTopology::Undefined
-//#cpp2rust D3D10_PRIMITIVE_TOPOLOGY_POINTLIST                  = d3d::PrimitiveTopology::PointList
-//#cpp2rust D3D10_PRIMITIVE_TOPOLOGY_LINELIST                   = d3d::PrimitiveTopology::LineList
-//#cpp2rust D3D10_PRIMITIVE_TOPOLOGY_LINESTRIP                  = d3d::PrimitiveTopology::LineStrip
-//#cpp2rust D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST               = d3d::PrimitiveTopology::TriangleList
-//#cpp2rust D3D10_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP              = d3d::PrimitiveTopology::TriangleStrip
-//#cpp2rust D3D10_PRIMITIVE_TOPOLOGY_LINELIST_ADJ               = d3d::PrimitiveTopology::LineListAdj
-//#cpp2rust D3D10_PRIMITIVE_TOPOLOGY_LINESTRIP_ADJ              = d3d::PrimitiveTopology::LineStripAdj
-//#cpp2rust D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST_ADJ           = d3d::PrimitiveTopology::TriangleListAdj
-//#cpp2rust D3D10_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP_ADJ          = d3d::PrimitiveTopology::TriangleStripAdj
+<span class="comment">//#cpp2rust D3D10_PRIMITIVE_TOPOLOGY_UNDEFINED                  = d3d::PrimitiveTopology::Undefined</span>
+<span class="comment">//#cpp2rust D3D10_PRIMITIVE_TOPOLOGY_POINTLIST                  = d3d::PrimitiveTopology::PointList</span>
+<span class="comment">//#cpp2rust D3D10_PRIMITIVE_TOPOLOGY_LINELIST                   = d3d::PrimitiveTopology::LineList</span>
+<span class="comment">//#cpp2rust D3D10_PRIMITIVE_TOPOLOGY_LINESTRIP                  = d3d::PrimitiveTopology::LineStrip</span>
+<span class="comment">//#cpp2rust D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST               = d3d::PrimitiveTopology::TriangleList</span>
+<span class="comment">//#cpp2rust D3D10_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP              = d3d::PrimitiveTopology::TriangleStrip</span>
+<span class="comment">//#cpp2rust D3D10_PRIMITIVE_TOPOLOGY_LINELIST_ADJ               = d3d::PrimitiveTopology::LineListAdj</span>
+<span class="comment">//#cpp2rust D3D10_PRIMITIVE_TOPOLOGY_LINESTRIP_ADJ              = d3d::PrimitiveTopology::LineStripAdj</span>
+<span class="comment">//#cpp2rust D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST_ADJ           = d3d::PrimitiveTopology::TriangleListAdj</span>
+<span class="comment">//#cpp2rust D3D10_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP_ADJ          = d3d::PrimitiveTopology::TriangleStripAdj</span>
 
-//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_UNDEFINED                  = d3d::PrimitiveTopology::Undefined
-//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_POINTLIST                  = d3d::PrimitiveTopology::PointList
-//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_LINELIST                   = d3d::PrimitiveTopology::LineList
-//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP                  = d3d::PrimitiveTopology::LineStrip
-//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST               = d3d::PrimitiveTopology::TriangleList
-//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP              = d3d::PrimitiveTopology::TriangleStrip
-//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_LINELIST_ADJ               = d3d::PrimitiveTopology::LineListAdj
-//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP_ADJ              = d3d::PrimitiveTopology::LineStripAdj
-//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST_ADJ           = d3d::PrimitiveTopology::TriangleListAdj
-//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP_ADJ          = d3d::PrimitiveTopology::TriangleStripAdj
-//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_1_CONTROL_POINT_PATCHLIST  = d3d::PrimitiveTopology::_1ControlPointPatchList
-//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_2_CONTROL_POINT_PATCHLIST  = d3d::PrimitiveTopology::_2ControlPointPatchList
-//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_3_CONTROL_POINT_PATCHLIST  = d3d::PrimitiveTopology::_3ControlPointPatchList
-//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_4_CONTROL_POINT_PATCHLIST  = d3d::PrimitiveTopology::_4ControlPointPatchList
-//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_5_CONTROL_POINT_PATCHLIST  = d3d::PrimitiveTopology::_5ControlPointPatchList
-//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_6_CONTROL_POINT_PATCHLIST  = d3d::PrimitiveTopology::_6ControlPointPatchList
-//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_7_CONTROL_POINT_PATCHLIST  = d3d::PrimitiveTopology::_7ControlPointPatchList
-//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_8_CONTROL_POINT_PATCHLIST  = d3d::PrimitiveTopology::_8ControlPointPatchList
-//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_9_CONTROL_POINT_PATCHLIST  = d3d::PrimitiveTopology::_9ControlPointPatchList
-//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_10_CONTROL_POINT_PATCHLIST = d3d::PrimitiveTopology::_10ControlPointPatchList
-//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_11_CONTROL_POINT_PATCHLIST = d3d::PrimitiveTopology::_11ControlPointPatchList
-//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_12_CONTROL_POINT_PATCHLIST = d3d::PrimitiveTopology::_12ControlPointPatchList
-//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_13_CONTROL_POINT_PATCHLIST = d3d::PrimitiveTopology::_13ControlPointPatchList
-//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_14_CONTROL_POINT_PATCHLIST = d3d::PrimitiveTopology::_14ControlPointPatchList
-//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_15_CONTROL_POINT_PATCHLIST = d3d::PrimitiveTopology::_15ControlPointPatchList
-//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_16_CONTROL_POINT_PATCHLIST = d3d::PrimitiveTopology::_16ControlPointPatchList
-//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_17_CONTROL_POINT_PATCHLIST = d3d::PrimitiveTopology::_17ControlPointPatchList
-//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_18_CONTROL_POINT_PATCHLIST = d3d::PrimitiveTopology::_18ControlPointPatchList
-//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_19_CONTROL_POINT_PATCHLIST = d3d::PrimitiveTopology::_19ControlPointPatchList
-//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_20_CONTROL_POINT_PATCHLIST = d3d::PrimitiveTopology::_20ControlPointPatchList
-//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_21_CONTROL_POINT_PATCHLIST = d3d::PrimitiveTopology::_21ControlPointPatchList
-//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_22_CONTROL_POINT_PATCHLIST = d3d::PrimitiveTopology::_22ControlPointPatchList
-//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_23_CONTROL_POINT_PATCHLIST = d3d::PrimitiveTopology::_23ControlPointPatchList
-//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_24_CONTROL_POINT_PATCHLIST = d3d::PrimitiveTopology::_24ControlPointPatchList
-//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_25_CONTROL_POINT_PATCHLIST = d3d::PrimitiveTopology::_25ControlPointPatchList
-//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_26_CONTROL_POINT_PATCHLIST = d3d::PrimitiveTopology::_26ControlPointPatchList
-//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_27_CONTROL_POINT_PATCHLIST = d3d::PrimitiveTopology::_27ControlPointPatchList
-//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_28_CONTROL_POINT_PATCHLIST = d3d::PrimitiveTopology::_28ControlPointPatchList
-//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_29_CONTROL_POINT_PATCHLIST = d3d::PrimitiveTopology::_29ControlPointPatchList
-//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_30_CONTROL_POINT_PATCHLIST = d3d::PrimitiveTopology::_30ControlPointPatchList
-//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_31_CONTROL_POINT_PATCHLIST = d3d::PrimitiveTopology::_31ControlPointPatchList
-//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_32_CONTROL_POINT_PATCHLIST = d3d::PrimitiveTopology::_32ControlPointPatchList
-</span></code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (b44197abb 2022-09-05)" ></div></body></html>
+<span class="comment">//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_UNDEFINED                  = d3d::PrimitiveTopology::Undefined</span>
+<span class="comment">//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_POINTLIST                  = d3d::PrimitiveTopology::PointList</span>
+<span class="comment">//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_LINELIST                   = d3d::PrimitiveTopology::LineList</span>
+<span class="comment">//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP                  = d3d::PrimitiveTopology::LineStrip</span>
+<span class="comment">//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST               = d3d::PrimitiveTopology::TriangleList</span>
+<span class="comment">//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP              = d3d::PrimitiveTopology::TriangleStrip</span>
+<span class="comment">//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_LINELIST_ADJ               = d3d::PrimitiveTopology::LineListAdj</span>
+<span class="comment">//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_LINESTRIP_ADJ              = d3d::PrimitiveTopology::LineStripAdj</span>
+<span class="comment">//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST_ADJ           = d3d::PrimitiveTopology::TriangleListAdj</span>
+<span class="comment">//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP_ADJ          = d3d::PrimitiveTopology::TriangleStripAdj</span>
+<span class="comment">//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_1_CONTROL_POINT_PATCHLIST  = d3d::PrimitiveTopology::_1ControlPointPatchList</span>
+<span class="comment">//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_2_CONTROL_POINT_PATCHLIST  = d3d::PrimitiveTopology::_2ControlPointPatchList</span>
+<span class="comment">//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_3_CONTROL_POINT_PATCHLIST  = d3d::PrimitiveTopology::_3ControlPointPatchList</span>
+<span class="comment">//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_4_CONTROL_POINT_PATCHLIST  = d3d::PrimitiveTopology::_4ControlPointPatchList</span>
+<span class="comment">//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_5_CONTROL_POINT_PATCHLIST  = d3d::PrimitiveTopology::_5ControlPointPatchList</span>
+<span class="comment">//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_6_CONTROL_POINT_PATCHLIST  = d3d::PrimitiveTopology::_6ControlPointPatchList</span>
+<span class="comment">//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_7_CONTROL_POINT_PATCHLIST  = d3d::PrimitiveTopology::_7ControlPointPatchList</span>
+<span class="comment">//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_8_CONTROL_POINT_PATCHLIST  = d3d::PrimitiveTopology::_8ControlPointPatchList</span>
+<span class="comment">//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_9_CONTROL_POINT_PATCHLIST  = d3d::PrimitiveTopology::_9ControlPointPatchList</span>
+<span class="comment">//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_10_CONTROL_POINT_PATCHLIST = d3d::PrimitiveTopology::_10ControlPointPatchList</span>
+<span class="comment">//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_11_CONTROL_POINT_PATCHLIST = d3d::PrimitiveTopology::_11ControlPointPatchList</span>
+<span class="comment">//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_12_CONTROL_POINT_PATCHLIST = d3d::PrimitiveTopology::_12ControlPointPatchList</span>
+<span class="comment">//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_13_CONTROL_POINT_PATCHLIST = d3d::PrimitiveTopology::_13ControlPointPatchList</span>
+<span class="comment">//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_14_CONTROL_POINT_PATCHLIST = d3d::PrimitiveTopology::_14ControlPointPatchList</span>
+<span class="comment">//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_15_CONTROL_POINT_PATCHLIST = d3d::PrimitiveTopology::_15ControlPointPatchList</span>
+<span class="comment">//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_16_CONTROL_POINT_PATCHLIST = d3d::PrimitiveTopology::_16ControlPointPatchList</span>
+<span class="comment">//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_17_CONTROL_POINT_PATCHLIST = d3d::PrimitiveTopology::_17ControlPointPatchList</span>
+<span class="comment">//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_18_CONTROL_POINT_PATCHLIST = d3d::PrimitiveTopology::_18ControlPointPatchList</span>
+<span class="comment">//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_19_CONTROL_POINT_PATCHLIST = d3d::PrimitiveTopology::_19ControlPointPatchList</span>
+<span class="comment">//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_20_CONTROL_POINT_PATCHLIST = d3d::PrimitiveTopology::_20ControlPointPatchList</span>
+<span class="comment">//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_21_CONTROL_POINT_PATCHLIST = d3d::PrimitiveTopology::_21ControlPointPatchList</span>
+<span class="comment">//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_22_CONTROL_POINT_PATCHLIST = d3d::PrimitiveTopology::_22ControlPointPatchList</span>
+<span class="comment">//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_23_CONTROL_POINT_PATCHLIST = d3d::PrimitiveTopology::_23ControlPointPatchList</span>
+<span class="comment">//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_24_CONTROL_POINT_PATCHLIST = d3d::PrimitiveTopology::_24ControlPointPatchList</span>
+<span class="comment">//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_25_CONTROL_POINT_PATCHLIST = d3d::PrimitiveTopology::_25ControlPointPatchList</span>
+<span class="comment">//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_26_CONTROL_POINT_PATCHLIST = d3d::PrimitiveTopology::_26ControlPointPatchList</span>
+<span class="comment">//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_27_CONTROL_POINT_PATCHLIST = d3d::PrimitiveTopology::_27ControlPointPatchList</span>
+<span class="comment">//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_28_CONTROL_POINT_PATCHLIST = d3d::PrimitiveTopology::_28ControlPointPatchList</span>
+<span class="comment">//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_29_CONTROL_POINT_PATCHLIST = d3d::PrimitiveTopology::_29ControlPointPatchList</span>
+<span class="comment">//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_30_CONTROL_POINT_PATCHLIST = d3d::PrimitiveTopology::_30ControlPointPatchList</span>
+<span class="comment">//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_31_CONTROL_POINT_PATCHLIST = d3d::PrimitiveTopology::_31ControlPointPatchList</span>
+<span class="comment">//#cpp2rust D3D11_PRIMITIVE_TOPOLOGY_32_CONTROL_POINT_PATCHLIST = d3d::PrimitiveTopology::_32ControlPointPatchList</span>
+</code></pre></div>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0 (4b91a6ea7 2022-08-08)" ></div>
+</body></html>

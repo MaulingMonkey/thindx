@@ -1,4 +1,10 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3dcompiler.h\dll\_dll.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>_dll.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../../normalize.css"><link rel="stylesheet" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../../dark.css" disabled><link rel="stylesheet" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3dcompiler.h\dll\_dll.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>_dll.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div>
+        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
+                                <a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -322,329 +328,330 @@
 <span id="322">322</span>
 <span id="323">323</span>
 <span id="324">324</span>
-</pre><pre class="rust"><code><span class="attribute">#[allow(unused_imports)] </span><span class="kw">use crate</span>::<span class="kw-2">*</span>;
-<span class="attribute">#[allow(unused_imports)] </span><span class="kw">use </span><span class="kw">crate</span>::d3d::<span class="kw-2">*</span>;
+</pre><pre class="rust"><code><span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span> <span class="kw">use</span> <span class="kw">crate</span>::<span class="kw-2">*</span>;
+<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span> <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::d3d</span>::<span class="kw-2">*</span>;
 
-<span class="kw">use </span>winapi::shared::basetsd::<span class="kw-2">*</span>;
-<span class="kw">use </span>winapi::shared::guiddef::<span class="kw-2">*</span>;
-<span class="kw">use </span>winapi::shared::minwindef::<span class="kw-2">*</span>;
-<span class="kw">use </span>winapi::shared::ntdef::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">winapi::shared::basetsd</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">winapi::shared::guiddef</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">winapi::shared::minwindef</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">winapi::shared::ntdef</span>::<span class="kw-2">*</span>;
 
-<span class="kw">use </span>winapi::um::d3dcommon::<span class="kw-2">*</span>;
-<span class="kw">use </span>winapi::um::d3dcompiler::<span class="kw-2">*</span>;
-<span class="kw">use </span>winapi::um::d3d11shader::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">winapi::um::d3dcommon</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">winapi::um::d3dcompiler</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">winapi::um::d3d11shader</span>::<span class="kw-2">*</span>;
 
 
 
-<span class="doccomment">/// ### Usage
-/// ```no_compile
-/// fn_context_dll!(d3d::Compiler::compile =&gt; self.D3DCompile);
-/// ```
-</span><span class="macro">macro_rules! </span>fn_context_dll {
-    ( <span class="macro-nonterminal">$thindx</span>:path =&gt; <span class="macro-nonterminal">$self</span>:ident . <span class="macro-nonterminal">$directx</span>:ident ) =&gt; {
-        <span class="macro">fn_context!</span>(<span class="macro-nonterminal">$thindx </span>=&gt; <span class="macro-nonterminal">$directx</span>);
-        <span class="attribute">#[allow(non_snake_case, unused_variables)]
-        </span><span class="kw">let </span><span class="macro-nonterminal">$directx </span>= <span class="macro-nonterminal">$self</span>.<span class="macro-nonterminal">$directx</span>.ok_or(<span class="macro">fn_error!</span>(THINERR::MISSING_DLL_EXPORT))<span class="question-mark">?</span>;
+<span class="doccomment">/// ### Usage</span>
+<span class="doccomment">/// ```no_compile</span>
+<span class="doccomment">/// fn_context_dll!(d3d::Compiler::compile =&gt; self.D3DCompile);</span>
+<span class="doccomment">/// ```</span>
+<span class="macro">macro_rules!</span> <span class="ident">fn_context_dll</span> {
+    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">thindx</span>:<span class="ident">path</span> =&gt; <span class="macro-nonterminal">$</span><span class="macro-nonterminal">self</span>:<span class="ident">ident</span> . <span class="macro-nonterminal">$</span><span class="macro-nonterminal">directx</span>:<span class="ident">ident</span> ) =&gt; {
+        <span class="macro">fn_context!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">thindx</span> =&gt; <span class="macro-nonterminal">$</span><span class="macro-nonterminal">directx</span>);
+        <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">non_snake_case</span>, <span class="ident">unused_variables</span>)]</span>
+        <span class="kw">let</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">directx</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">self</span>.<span class="macro-nonterminal">$</span><span class="macro-nonterminal">directx</span>.<span class="ident">ok_or</span>(<span class="macro">fn_error!</span>(<span class="ident">THINERR::MISSING_DLL_EXPORT</span>))<span class="question-mark">?</span>;
     };
 }
 
-<span class="kw">mod </span>constructors;                   <span class="kw">pub use </span>constructors::<span class="kw-2">*</span>;
-<span class="kw">mod </span>compile_;                       <span class="kw">pub use </span>compile_::<span class="kw-2">*</span>;
-<span class="kw">mod </span>archive;                        <span class="kw">pub use </span>archive::<span class="kw-2">*</span>;
-<span class="kw">mod </span>parts;                          <span class="kw">pub use </span>parts::<span class="kw-2">*</span>;
-<span class="kw">mod </span>reflection;                     <span class="kw">pub use </span>reflection::<span class="kw-2">*</span>;
-<span class="kw">mod </span>debugging;                      <span class="kw">pub use </span>debugging::<span class="kw-2">*</span>;
-<span class="kw">mod </span>blobs;                          <span class="kw">pub use </span>blobs::<span class="kw-2">*</span>;
-<span class="kw">mod </span>d3d11_methods;                  <span class="kw">pub use </span>d3d11_methods::<span class="kw-2">*</span>;
+<span class="kw">mod</span> <span class="ident">constructors</span>;                   <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">constructors</span>::<span class="kw-2">*</span>;
+<span class="kw">mod</span> <span class="ident">compile_</span>;                       <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">compile_</span>::<span class="kw-2">*</span>;
+<span class="kw">mod</span> <span class="ident">archive</span>;                        <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">archive</span>::<span class="kw-2">*</span>;
+<span class="kw">mod</span> <span class="ident">parts</span>;                          <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">parts</span>::<span class="kw-2">*</span>;
+<span class="kw">mod</span> <span class="ident">reflection</span>;                     <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">reflection</span>::<span class="kw-2">*</span>;
+<span class="kw">mod</span> <span class="ident">debugging</span>;                      <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">debugging</span>::<span class="kw-2">*</span>;
+<span class="kw">mod</span> <span class="ident">blobs</span>;                          <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">blobs</span>::<span class="kw-2">*</span>;
+<span class="kw">mod</span> <span class="ident">d3d11_methods</span>;                  <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">d3d11_methods</span>::<span class="kw-2">*</span>;
 
 
 
-<span class="doccomment">/// Lazily-loaded `d3dcompiler_NN.dll`
-///
-/// &amp;nbsp;   **[Constructors](#constructors)**&lt;br&gt;
-/// [new](Compiler::load_system)(version: [u32]) -&gt; Result&amp;lt;[Compiler]&amp;gt;&lt;br&gt;
-///
-/// &amp;nbsp;   **[Compile &amp; Preprocess HLSL to Bytecode](#compile)**&lt;br&gt;
-/// [compile_from_file](Compiler::compile_from_file)(...) - compile hlsl to bytecode&lt;br&gt;
-/// [compile](Compiler::compile)(...) - compile hlsl to bytecode&lt;br&gt;
-/// [compile2](Compiler::compile2)(...) - compile hlsl to bytecode&lt;br&gt;
-/// [preprocess](Compiler::preprocess)(...) - preprocess HLSL `#include`s and `#define`s&lt;br&gt;
-///
-/// &amp;nbsp;   **[Manipulate Bytecode Archives](#archive)**&lt;br&gt;
-/// [compress_shaders](Compiler::compress_shaders)(...) - compress hlsl or bytecode&lt;br&gt;
-/// [decompress_shaders](Compiler::decompress_shaders)(...) - decompress shaders&lt;br&gt;
-/// [decompress_shaders_inplace](Compiler::decompress_shaders_inplace)(...) - decompress shaders without allocating&lt;br&gt;
-/// [decompress_shaders_count](Compiler::decompress_shaders_count)(...) - get the number of shaders in a compressed archive&lt;br&gt;
-///
-/// &amp;nbsp;   **[Manipulate Bytecode by BlobPart](#parts)**&lt;br&gt;
-/// [get_blob_part](Compiler::get_blob_part)(...) - read a [BlobPart] of a shader bytecode blob&lt;br&gt;
-/// [get_debug_info](Compiler::get_debug_info)(...) - read [BlobPart::DebugInfo] of a shader bytecode blob&lt;br&gt;
-/// [get_input_and_output_signature_blob](Compiler::get_input_and_output_signature_blob)(...) - read [BlobPart::InputAndOutputSignatureBlob] of a shader bytecode blob&lt;br&gt;
-/// [get_input_signature_blob](Compiler::get_input_signature_blob)(...) - read [BlobPart::InputSignatureBlob] of a shader bytecode blob&lt;br&gt;
-/// [get_output_signature_blob](Compiler::get_output_signature_blob)(...) - read [BlobPart::OutputSignatureBlob] of a shader bytecode blob&lt;br&gt;
-/// [set_blob_part](Compiler::set_blob_part)(...) - write a [BlobPart] of a shader bytecode blob&lt;br&gt;
-/// [strip_shader](Compiler::strip_shader)(...) - strip debug information etc. from bytecode&lt;br&gt;
-///
-/// &amp;nbsp;   **[Bytecode Reflection](#reflection)**&lt;br&gt;
-/// [reflect](Compiler::reflect)(...) - reflect over a single shader&#39;s bytecode&lt;br&gt;
-/// [reflect_library](Compiler::reflect_library)(...) - ???&lt;br&gt;
-///
-/// &amp;nbsp;   **[Bytecode Debugging](#debugging)**&lt;br&gt;
-/// [disassemble](Compiler::disassemble)(...) - disassemble bytecode as human readable text&lt;br&gt;
-/// [disassemble_region](Compiler::disassemble_region)(...) - disassemble bytecode as human readable text&lt;br&gt;
-/// [get_trace_instruction_offsets_count](Compiler::get_trace_instruction_offsets_count)(...) - get the number of trace instruction byte offsets&lt;br&gt;
-/// [get_trace_instruction_offsets_inplace](Compiler::get_trace_instruction_offsets_inplace)(...) - read trace instruction byte offsets&lt;br&gt;
-/// [get_trace_instruction_offsets](Compiler::get_trace_instruction_offsets)(...) - read trace instruction byte offsets&lt;br&gt;
-///
-/// &amp;nbsp;   **[ReadOnlyBlob Utilities](#blobs)**&lt;br&gt;
-/// [create_read_only_blob](Compiler::create_read_only_blob)(...) - create a [ReadOnlyBlob] from memory&lt;br&gt;
-/// [read_file_to_blob](Compiler::read_file_to_blob)(...) - read a [ReadOnlyBlob] from disk&lt;br&gt;
-/// [write_blob_to_file](Compiler::write_blob_to_file)(...) - write a [ReadOnlyBlob] to disk&lt;br&gt;
-///
-/// &amp;nbsp;   **[D3D11 Factories &amp; APIs](#d3d11)**&lt;br&gt;
-/// [create_function_linking_graph](Compiler::create_function_linking_graph)(...) - create a [d3d11::FunctionLinkingGraph]&lt;br&gt;
-/// [create_linker](Compiler::create_linker)(...) - create a [d3d11::Linker]&lt;br&gt;
-/// [load_module](Compiler::load_module)(...) - load a [d3d11::Module]&lt;br&gt;
-</span><span class="attribute">#[allow(non_snake_case)] </span><span class="comment">// fn ptrs
-</span><span class="attribute">#[allow(clippy::type_complexity)] </span><span class="comment">// no point extracting `type`s with these single use types... would just increase the chances of editing shrapnel
-</span><span class="kw">pub struct </span>Compiler {
-    <span class="comment">// https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/
+<span class="doccomment">/// Lazily-loaded `d3dcompiler_NN.dll`</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// &amp;nbsp;   **[Constructors](#constructors)**&lt;br&gt;</span>
+<span class="doccomment">/// [new](Compiler::load_system)(version: [u32]) -&gt; Result&amp;lt;[Compiler]&amp;gt;&lt;br&gt;</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// &amp;nbsp;   **[Compile &amp; Preprocess HLSL to Bytecode](#compile)**&lt;br&gt;</span>
+<span class="doccomment">/// [compile_from_file](Compiler::compile_from_file)(...) - compile hlsl to bytecode&lt;br&gt;</span>
+<span class="doccomment">/// [compile](Compiler::compile)(...) - compile hlsl to bytecode&lt;br&gt;</span>
+<span class="doccomment">/// [compile2](Compiler::compile2)(...) - compile hlsl to bytecode&lt;br&gt;</span>
+<span class="doccomment">/// [preprocess](Compiler::preprocess)(...) - preprocess HLSL `#include`s and `#define`s&lt;br&gt;</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// &amp;nbsp;   **[Manipulate Bytecode Archives](#archive)**&lt;br&gt;</span>
+<span class="doccomment">/// [compress_shaders](Compiler::compress_shaders)(...) - compress hlsl or bytecode&lt;br&gt;</span>
+<span class="doccomment">/// [decompress_shaders](Compiler::decompress_shaders)(...) - decompress shaders&lt;br&gt;</span>
+<span class="doccomment">/// [decompress_shaders_inplace](Compiler::decompress_shaders_inplace)(...) - decompress shaders without allocating&lt;br&gt;</span>
+<span class="doccomment">/// [decompress_shaders_count](Compiler::decompress_shaders_count)(...) - get the number of shaders in a compressed archive&lt;br&gt;</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// &amp;nbsp;   **[Manipulate Bytecode by BlobPart](#parts)**&lt;br&gt;</span>
+<span class="doccomment">/// [get_blob_part](Compiler::get_blob_part)(...) - read a [BlobPart] of a shader bytecode blob&lt;br&gt;</span>
+<span class="doccomment">/// [get_debug_info](Compiler::get_debug_info)(...) - read [BlobPart::DebugInfo] of a shader bytecode blob&lt;br&gt;</span>
+<span class="doccomment">/// [get_input_and_output_signature_blob](Compiler::get_input_and_output_signature_blob)(...) - read [BlobPart::InputAndOutputSignatureBlob] of a shader bytecode blob&lt;br&gt;</span>
+<span class="doccomment">/// [get_input_signature_blob](Compiler::get_input_signature_blob)(...) - read [BlobPart::InputSignatureBlob] of a shader bytecode blob&lt;br&gt;</span>
+<span class="doccomment">/// [get_output_signature_blob](Compiler::get_output_signature_blob)(...) - read [BlobPart::OutputSignatureBlob] of a shader bytecode blob&lt;br&gt;</span>
+<span class="doccomment">/// [set_blob_part](Compiler::set_blob_part)(...) - write a [BlobPart] of a shader bytecode blob&lt;br&gt;</span>
+<span class="doccomment">/// [strip_shader](Compiler::strip_shader)(...) - strip debug information etc. from bytecode&lt;br&gt;</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// &amp;nbsp;   **[Bytecode Reflection](#reflection)**&lt;br&gt;</span>
+<span class="doccomment">/// [reflect](Compiler::reflect)(...) - reflect over a single shader&#39;s bytecode&lt;br&gt;</span>
+<span class="doccomment">/// [reflect_library](Compiler::reflect_library)(...) - ???&lt;br&gt;</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// &amp;nbsp;   **[Bytecode Debugging](#debugging)**&lt;br&gt;</span>
+<span class="doccomment">/// [disassemble](Compiler::disassemble)(...) - disassemble bytecode as human readable text&lt;br&gt;</span>
+<span class="doccomment">/// [disassemble_region](Compiler::disassemble_region)(...) - disassemble bytecode as human readable text&lt;br&gt;</span>
+<span class="doccomment">/// [get_trace_instruction_offsets_count](Compiler::get_trace_instruction_offsets_count)(...) - get the number of trace instruction byte offsets&lt;br&gt;</span>
+<span class="doccomment">/// [get_trace_instruction_offsets_inplace](Compiler::get_trace_instruction_offsets_inplace)(...) - read trace instruction byte offsets&lt;br&gt;</span>
+<span class="doccomment">/// [get_trace_instruction_offsets](Compiler::get_trace_instruction_offsets)(...) - read trace instruction byte offsets&lt;br&gt;</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// &amp;nbsp;   **[ReadOnlyBlob Utilities](#blobs)**&lt;br&gt;</span>
+<span class="doccomment">/// [create_read_only_blob](Compiler::create_read_only_blob)(...) - create a [ReadOnlyBlob] from memory&lt;br&gt;</span>
+<span class="doccomment">/// [read_file_to_blob](Compiler::read_file_to_blob)(...) - read a [ReadOnlyBlob] from disk&lt;br&gt;</span>
+<span class="doccomment">/// [write_blob_to_file](Compiler::write_blob_to_file)(...) - write a [ReadOnlyBlob] to disk&lt;br&gt;</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// &amp;nbsp;   **[D3D11 Factories &amp; APIs](#d3d11)**&lt;br&gt;</span>
+<span class="doccomment">/// [create_function_linking_graph](Compiler::create_function_linking_graph)(...) - create a [d3d11::FunctionLinkingGraph]&lt;br&gt;</span>
+<span class="doccomment">/// [create_linker](Compiler::create_linker)(...) - create a [d3d11::Linker]&lt;br&gt;</span>
+<span class="doccomment">/// [load_module](Compiler::load_module)(...) - load a [d3d11::Module]&lt;br&gt;</span>
+<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">non_snake_case</span>)]</span> <span class="comment">// fn ptrs</span>
+<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::type_complexity</span>)]</span> <span class="comment">// no point extracting `type`s with these single use types... would just increase the chances of editing shrapnel</span>
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Compiler</span> {
+    <span class="comment">// https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/</span>
 
-    // TODO: D3DDisassemble10Effect
+    <span class="comment">// TODO: D3DDisassemble10Effect</span>
 
-    // Undocumented APIs not exposed:
-    // TODO: D3DAssemble
+    <span class="comment">// Undocumented APIs not exposed:</span>
+    <span class="comment">// TODO: D3DAssemble</span>
 
-    // Legacy APIs not (yet?) exposed:
-    // TODO: D3DCompileFromMemory
-    // TODO: D3DDisassembleCode
-    // TODO: D3DDisassembleEffect
-    // TODO: D3DGetCodeDebugInfo
-    // TODO: D3DPreprocessFromMemory
+    <span class="comment">// Legacy APIs not (yet?) exposed:</span>
+    <span class="comment">// TODO: D3DCompileFromMemory</span>
+    <span class="comment">// TODO: D3DDisassembleCode</span>
+    <span class="comment">// TODO: D3DDisassembleEffect</span>
+    <span class="comment">// TODO: D3DGetCodeDebugInfo</span>
+    <span class="comment">// TODO: D3DPreprocessFromMemory</span>
 
-    // d3d11shadertracing.h not (yet?) exposed:
-    // TODO: D3DDisassemble11Trace
+    <span class="comment">// d3d11shadertracing.h not (yet?) exposed:</span>
+    <span class="comment">// TODO: D3DDisassemble11Trace</span>
 
-    </span><span class="doccomment">/// D3DCompiler_40.dll ..=
-    </span>D3DCompile: <span class="prelude-ty">Option</span>&lt;<span class="kw">unsafe extern </span><span class="string">&quot;system&quot; </span><span class="kw">fn </span>(
-        pSrcData:       LPCVOID,
-        SrcDataSize:    SIZE_T,
-        pSourceName:    LPCSTR,
-        pDefines:       <span class="kw-2">*const </span>D3D_SHADER_MACRO,
-        pInclude:       <span class="kw-2">*mut </span>ID3DInclude,
-        pEntrypoint:    LPCSTR,
-        pTarget:        LPCSTR,
-        Flags1:         UINT,
-        Flags2:         UINT,
-        ppCode:         <span class="kw-2">*mut *mut </span>ID3DBlob,
-        ppErrorMsgs:    <span class="kw-2">*mut *mut </span>ID3DBlob,
-    ) -&gt; HRESULT&gt;,
+    <span class="doccomment">/// D3DCompiler_40.dll ..=</span>
+    <span class="ident">D3DCompile</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw unsafe">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;system&quot;</span> <span class="kw">fn</span> (
+        <span class="ident">pSrcData</span>:       <span class="ident">LPCVOID</span>,
+        <span class="ident">SrcDataSize</span>:    <span class="ident">SIZE_T</span>,
+        <span class="ident">pSourceName</span>:    <span class="ident">LPCSTR</span>,
+        <span class="ident">pDefines</span>:       <span class="kw-2">*const</span> <span class="ident">D3D_SHADER_MACRO</span>,
+        <span class="ident">pInclude</span>:       <span class="kw-2">*mut</span> <span class="ident">ID3DInclude</span>,
+        <span class="ident">pEntrypoint</span>:    <span class="ident">LPCSTR</span>,
+        <span class="ident">pTarget</span>:        <span class="ident">LPCSTR</span>,
+        <span class="ident">Flags1</span>:         <span class="ident">UINT</span>,
+        <span class="ident">Flags2</span>:         <span class="ident">UINT</span>,
+        <span class="ident">ppCode</span>:         <span class="kw-2">*mut</span> <span class="kw-2">*mut</span> <span class="ident">ID3DBlob</span>,
+        <span class="ident">ppErrorMsgs</span>:    <span class="kw-2">*mut</span> <span class="kw-2">*mut</span> <span class="ident">ID3DBlob</span>,
+    ) -&gt; <span class="ident">HRESULT</span><span class="op">&gt;</span>,
 
-    <span class="doccomment">/// D3DCompiler_47.dll
-    /// Possibly as early as D3DCompiler_44.dll ?  Need more install
-    </span>D3DCompile2: <span class="prelude-ty">Option</span>&lt;<span class="kw">unsafe extern </span><span class="string">&quot;system&quot; </span><span class="kw">fn </span>(
-        pSrcData:           LPCVOID,
-        SrcDataSize:        SIZE_T,
-        pSourceName:        LPCSTR,
-        pDefines:           <span class="kw-2">*const </span>D3D_SHADER_MACRO,
-        pInclude:           <span class="kw-2">*mut </span>ID3DInclude,
-        pEntrypoint:        LPCSTR,
-        pTarget:            LPCSTR,
-        Flags1:             UINT,
-        Flags2:             UINT,
-        SecondaryDataFlags: UINT,
-        pSecondaryData:     LPCVOID,
-        SecondaryDataSize:  SIZE_T,
-        ppCode:             <span class="kw-2">*mut *mut </span>ID3DBlob,
-        ppErrorMsgs:        <span class="kw-2">*mut *mut </span>ID3DBlob,
-    ) -&gt; HRESULT&gt;,
+    <span class="doccomment">/// D3DCompiler_47.dll</span>
+    <span class="doccomment">/// Possibly as early as D3DCompiler_44.dll ?  Need more install</span>
+    <span class="ident">D3DCompile2</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw unsafe">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;system&quot;</span> <span class="kw">fn</span> (
+        <span class="ident">pSrcData</span>:           <span class="ident">LPCVOID</span>,
+        <span class="ident">SrcDataSize</span>:        <span class="ident">SIZE_T</span>,
+        <span class="ident">pSourceName</span>:        <span class="ident">LPCSTR</span>,
+        <span class="ident">pDefines</span>:           <span class="kw-2">*const</span> <span class="ident">D3D_SHADER_MACRO</span>,
+        <span class="ident">pInclude</span>:           <span class="kw-2">*mut</span> <span class="ident">ID3DInclude</span>,
+        <span class="ident">pEntrypoint</span>:        <span class="ident">LPCSTR</span>,
+        <span class="ident">pTarget</span>:            <span class="ident">LPCSTR</span>,
+        <span class="ident">Flags1</span>:             <span class="ident">UINT</span>,
+        <span class="ident">Flags2</span>:             <span class="ident">UINT</span>,
+        <span class="ident">SecondaryDataFlags</span>: <span class="ident">UINT</span>,
+        <span class="ident">pSecondaryData</span>:     <span class="ident">LPCVOID</span>,
+        <span class="ident">SecondaryDataSize</span>:  <span class="ident">SIZE_T</span>,
+        <span class="ident">ppCode</span>:             <span class="kw-2">*mut</span> <span class="kw-2">*mut</span> <span class="ident">ID3DBlob</span>,
+        <span class="ident">ppErrorMsgs</span>:        <span class="kw-2">*mut</span> <span class="kw-2">*mut</span> <span class="ident">ID3DBlob</span>,
+    ) -&gt; <span class="ident">HRESULT</span><span class="op">&gt;</span>,
 
-    <span class="doccomment">/// D3DCompiler_47.dll
-    /// Possibly as early as D3DCompiler_44.dll ?  Need more install
-    </span>D3DCompileFromFile: <span class="prelude-ty">Option</span>&lt;<span class="kw">unsafe extern </span><span class="string">&quot;system&quot; </span><span class="kw">fn </span>(
-        pFileName:          LPCWSTR,
-        pDefines:           <span class="kw-2">*const </span>D3D_SHADER_MACRO,
-        pInclude:           <span class="kw-2">*mut </span>ID3DInclude,
-        pEntrypoint:        LPCSTR,
-        pTarget:            LPCSTR,
-        Flags1:             UINT,
-        Flags2:             UINT,
-        ppCode:             <span class="kw-2">*mut *mut </span>ID3DBlob,
-        ppErrorMsgs:        <span class="kw-2">*mut *mut </span>ID3DBlob,
-    ) -&gt; HRESULT&gt;,
+    <span class="doccomment">/// D3DCompiler_47.dll</span>
+    <span class="doccomment">/// Possibly as early as D3DCompiler_44.dll ?  Need more install</span>
+    <span class="ident">D3DCompileFromFile</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw unsafe">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;system&quot;</span> <span class="kw">fn</span> (
+        <span class="ident">pFileName</span>:          <span class="ident">LPCWSTR</span>,
+        <span class="ident">pDefines</span>:           <span class="kw-2">*const</span> <span class="ident">D3D_SHADER_MACRO</span>,
+        <span class="ident">pInclude</span>:           <span class="kw-2">*mut</span> <span class="ident">ID3DInclude</span>,
+        <span class="ident">pEntrypoint</span>:        <span class="ident">LPCSTR</span>,
+        <span class="ident">pTarget</span>:            <span class="ident">LPCSTR</span>,
+        <span class="ident">Flags1</span>:             <span class="ident">UINT</span>,
+        <span class="ident">Flags2</span>:             <span class="ident">UINT</span>,
+        <span class="ident">ppCode</span>:             <span class="kw-2">*mut</span> <span class="kw-2">*mut</span> <span class="ident">ID3DBlob</span>,
+        <span class="ident">ppErrorMsgs</span>:        <span class="kw-2">*mut</span> <span class="kw-2">*mut</span> <span class="ident">ID3DBlob</span>,
+    ) -&gt; <span class="ident">HRESULT</span><span class="op">&gt;</span>,
 
-    <span class="doccomment">/// D3DCOMPILER_43.dll
-    </span>D3DCompressShaders: <span class="prelude-ty">Option</span>&lt;<span class="kw">unsafe extern </span><span class="string">&quot;system&quot; </span><span class="kw">fn </span>(
-        uNumShaders:        UINT,
-        pShaderData:        <span class="kw-2">*mut </span>D3D_SHADER_DATA,
-        uFlags:             UINT,
-        ppCompressedData:   <span class="kw-2">*mut *mut </span>ID3DBlob,
-    ) -&gt; HRESULT&gt;,
+    <span class="doccomment">/// D3DCOMPILER_43.dll</span>
+    <span class="ident">D3DCompressShaders</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw unsafe">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;system&quot;</span> <span class="kw">fn</span> (
+        <span class="ident">uNumShaders</span>:        <span class="ident">UINT</span>,
+        <span class="ident">pShaderData</span>:        <span class="kw-2">*mut</span> <span class="ident">D3D_SHADER_DATA</span>,
+        <span class="ident">uFlags</span>:             <span class="ident">UINT</span>,
+        <span class="ident">ppCompressedData</span>:   <span class="kw-2">*mut</span> <span class="kw-2">*mut</span> <span class="ident">ID3DBlob</span>,
+    ) -&gt; <span class="ident">HRESULT</span><span class="op">&gt;</span>,
 
-    <span class="doccomment">/// D3DCOMPILER_43.dll
-    </span>D3DCreateBlob: <span class="prelude-ty">Option</span>&lt;<span class="kw">unsafe extern </span><span class="string">&quot;system&quot; </span><span class="kw">fn </span>(
-        Size:               SIZE_T,
-        ppBlob:             <span class="kw-2">*mut *mut </span>ID3DBlob,
-    ) -&gt; HRESULT&gt;,
+    <span class="doccomment">/// D3DCOMPILER_43.dll</span>
+    <span class="ident">D3DCreateBlob</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw unsafe">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;system&quot;</span> <span class="kw">fn</span> (
+        <span class="ident">Size</span>:               <span class="ident">SIZE_T</span>,
+        <span class="ident">ppBlob</span>:             <span class="kw-2">*mut</span> <span class="kw-2">*mut</span> <span class="ident">ID3DBlob</span>,
+    ) -&gt; <span class="ident">HRESULT</span><span class="op">&gt;</span>,
 
-    D3DCreateFunctionLinkingGraph: <span class="prelude-ty">Option</span>&lt;<span class="kw">unsafe extern </span><span class="string">&quot;system&quot; </span><span class="kw">fn </span>(
-        uFlags:                 UINT,
-        ppFunctionLinkingGraph: <span class="kw-2">*mut *mut </span>ID3D11FunctionLinkingGraph,
-    ) -&gt; HRESULT&gt;,
+    <span class="ident">D3DCreateFunctionLinkingGraph</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw unsafe">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;system&quot;</span> <span class="kw">fn</span> (
+        <span class="ident">uFlags</span>:                 <span class="ident">UINT</span>,
+        <span class="ident">ppFunctionLinkingGraph</span>: <span class="kw-2">*mut</span> <span class="kw-2">*mut</span> <span class="ident">ID3D11FunctionLinkingGraph</span>,
+    ) -&gt; <span class="ident">HRESULT</span><span class="op">&gt;</span>,
 
-    D3DCreateLinker: <span class="prelude-ty">Option</span>&lt;<span class="kw">unsafe extern </span><span class="string">&quot;system&quot; </span><span class="kw">fn </span>(
-        ppLinker:               <span class="kw-2">*mut *mut </span>ID3D11Linker,
-    ) -&gt; HRESULT&gt;,
+    <span class="ident">D3DCreateLinker</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw unsafe">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;system&quot;</span> <span class="kw">fn</span> (
+        <span class="ident">ppLinker</span>:               <span class="kw-2">*mut</span> <span class="kw-2">*mut</span> <span class="ident">ID3D11Linker</span>,
+    ) -&gt; <span class="ident">HRESULT</span><span class="op">&gt;</span>,
 
-    D3DDecompressShaders: <span class="prelude-ty">Option</span>&lt;<span class="kw">unsafe extern </span><span class="string">&quot;system&quot; </span><span class="kw">fn </span>(
-        pSrcData:           LPCVOID,
-        SrcDataSize:        SIZE_T,
-        uNumShaders:        UINT,
-        uStartIndex:        UINT,
-        pIndices:           <span class="kw-2">*mut </span>UINT,
-        uFlags:             UINT,
-        ppShaders:          <span class="kw-2">*mut *mut </span>ID3DBlob,
-        pTotalShaders:      <span class="kw-2">*mut </span>UINT,
-    ) -&gt; HRESULT&gt;,
+    <span class="ident">D3DDecompressShaders</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw unsafe">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;system&quot;</span> <span class="kw">fn</span> (
+        <span class="ident">pSrcData</span>:           <span class="ident">LPCVOID</span>,
+        <span class="ident">SrcDataSize</span>:        <span class="ident">SIZE_T</span>,
+        <span class="ident">uNumShaders</span>:        <span class="ident">UINT</span>,
+        <span class="ident">uStartIndex</span>:        <span class="ident">UINT</span>,
+        <span class="ident">pIndices</span>:           <span class="kw-2">*mut</span> <span class="ident">UINT</span>,
+        <span class="ident">uFlags</span>:             <span class="ident">UINT</span>,
+        <span class="ident">ppShaders</span>:          <span class="kw-2">*mut</span> <span class="kw-2">*mut</span> <span class="ident">ID3DBlob</span>,
+        <span class="ident">pTotalShaders</span>:      <span class="kw-2">*mut</span> <span class="ident">UINT</span>,
+    ) -&gt; <span class="ident">HRESULT</span><span class="op">&gt;</span>,
 
-    D3DDisassemble: <span class="prelude-ty">Option</span>&lt;<span class="kw">unsafe extern </span><span class="string">&quot;system&quot; </span><span class="kw">fn</span>(
-        pSrcData:           LPCVOID,
-        SrcDataSize:        SIZE_T,
-        Flags:              UINT,
-        szComments:         LPCSTR,
-        ppDisassembly:      <span class="kw-2">*mut *mut </span>ID3DBlob,
-    ) -&gt; HRESULT&gt;,
+    <span class="ident">D3DDisassemble</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw unsafe">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;system&quot;</span> <span class="kw">fn</span>(
+        <span class="ident">pSrcData</span>:           <span class="ident">LPCVOID</span>,
+        <span class="ident">SrcDataSize</span>:        <span class="ident">SIZE_T</span>,
+        <span class="ident">Flags</span>:              <span class="ident">UINT</span>,
+        <span class="ident">szComments</span>:         <span class="ident">LPCSTR</span>,
+        <span class="ident">ppDisassembly</span>:      <span class="kw-2">*mut</span> <span class="kw-2">*mut</span> <span class="ident">ID3DBlob</span>,
+    ) -&gt; <span class="ident">HRESULT</span><span class="op">&gt;</span>,
 
-    D3DDisassembleRegion: <span class="prelude-ty">Option</span>&lt;<span class="kw">unsafe extern </span><span class="string">&quot;system&quot; </span><span class="kw">fn </span>(
-        pSrcData:           LPCVOID,
-        SrcDataSize:        SIZE_T,
-        Flags:              UINT,
-        szComments:         LPCSTR,
-        StartByteOffset:    SIZE_T,
-        NumInsts:           SIZE_T,
-        pFinishByteOffset:  <span class="kw-2">*mut </span>SIZE_T,
-        ppDisassembly:      <span class="kw-2">*mut *mut </span>ID3DBlob,
-    ) -&gt; HRESULT&gt;,
+    <span class="ident">D3DDisassembleRegion</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw unsafe">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;system&quot;</span> <span class="kw">fn</span> (
+        <span class="ident">pSrcData</span>:           <span class="ident">LPCVOID</span>,
+        <span class="ident">SrcDataSize</span>:        <span class="ident">SIZE_T</span>,
+        <span class="ident">Flags</span>:              <span class="ident">UINT</span>,
+        <span class="ident">szComments</span>:         <span class="ident">LPCSTR</span>,
+        <span class="ident">StartByteOffset</span>:    <span class="ident">SIZE_T</span>,
+        <span class="ident">NumInsts</span>:           <span class="ident">SIZE_T</span>,
+        <span class="ident">pFinishByteOffset</span>:  <span class="kw-2">*mut</span> <span class="ident">SIZE_T</span>,
+        <span class="ident">ppDisassembly</span>:      <span class="kw-2">*mut</span> <span class="kw-2">*mut</span> <span class="ident">ID3DBlob</span>,
+    ) -&gt; <span class="ident">HRESULT</span><span class="op">&gt;</span>,
 
-    D3DGetBlobPart: <span class="prelude-ty">Option</span>&lt;<span class="kw">unsafe extern </span><span class="string">&quot;system&quot; </span><span class="kw">fn</span>(
-        pSrcData:           LPCVOID,
-        SrcDataSize:        SIZE_T,
-        Part:               D3D_BLOB_PART,
-        Flags:              UINT,
-        ppPart:             <span class="kw-2">*mut *mut </span>ID3DBlob,
-    ) -&gt; HRESULT&gt;,
+    <span class="ident">D3DGetBlobPart</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw unsafe">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;system&quot;</span> <span class="kw">fn</span>(
+        <span class="ident">pSrcData</span>:           <span class="ident">LPCVOID</span>,
+        <span class="ident">SrcDataSize</span>:        <span class="ident">SIZE_T</span>,
+        <span class="ident">Part</span>:               <span class="ident">D3D_BLOB_PART</span>,
+        <span class="ident">Flags</span>:              <span class="ident">UINT</span>,
+        <span class="ident">ppPart</span>:             <span class="kw-2">*mut</span> <span class="kw-2">*mut</span> <span class="ident">ID3DBlob</span>,
+    ) -&gt; <span class="ident">HRESULT</span><span class="op">&gt;</span>,
 
-    D3DGetDebugInfo: <span class="prelude-ty">Option</span>&lt;<span class="kw">unsafe extern </span><span class="string">&quot;system&quot; </span><span class="kw">fn</span>(
-        pSrcData:           LPCVOID,
-        SrcDataSize:        SIZE_T,
-        ppSignatureBlob:    <span class="kw-2">*mut *mut </span>ID3DBlob,
-    ) -&gt; HRESULT&gt;,
+    <span class="ident">D3DGetDebugInfo</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw unsafe">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;system&quot;</span> <span class="kw">fn</span>(
+        <span class="ident">pSrcData</span>:           <span class="ident">LPCVOID</span>,
+        <span class="ident">SrcDataSize</span>:        <span class="ident">SIZE_T</span>,
+        <span class="ident">ppSignatureBlob</span>:    <span class="kw-2">*mut</span> <span class="kw-2">*mut</span> <span class="ident">ID3DBlob</span>,
+    ) -&gt; <span class="ident">HRESULT</span><span class="op">&gt;</span>,
 
-    D3DGetInputAndOutputSignatureBlob: <span class="prelude-ty">Option</span>&lt;<span class="kw">unsafe extern </span><span class="string">&quot;system&quot; </span><span class="kw">fn</span>(
-        pSrcData:           LPCVOID,
-        SrcDataSize:        SIZE_T,
-        ppSignatureBlob:    <span class="kw-2">*mut *mut </span>ID3DBlob,
-    ) -&gt; HRESULT&gt;,
+    <span class="ident">D3DGetInputAndOutputSignatureBlob</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw unsafe">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;system&quot;</span> <span class="kw">fn</span>(
+        <span class="ident">pSrcData</span>:           <span class="ident">LPCVOID</span>,
+        <span class="ident">SrcDataSize</span>:        <span class="ident">SIZE_T</span>,
+        <span class="ident">ppSignatureBlob</span>:    <span class="kw-2">*mut</span> <span class="kw-2">*mut</span> <span class="ident">ID3DBlob</span>,
+    ) -&gt; <span class="ident">HRESULT</span><span class="op">&gt;</span>,
 
-    D3DGetInputSignatureBlob: <span class="prelude-ty">Option</span>&lt;<span class="kw">unsafe extern </span><span class="string">&quot;system&quot; </span><span class="kw">fn</span>(
-        pSrcData:           LPCVOID,
-        SrcDataSize:        SIZE_T,
-        ppSignatureBlob:    <span class="kw-2">*mut *mut </span>ID3DBlob,
-    ) -&gt; HRESULT&gt;,
+    <span class="ident">D3DGetInputSignatureBlob</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw unsafe">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;system&quot;</span> <span class="kw">fn</span>(
+        <span class="ident">pSrcData</span>:           <span class="ident">LPCVOID</span>,
+        <span class="ident">SrcDataSize</span>:        <span class="ident">SIZE_T</span>,
+        <span class="ident">ppSignatureBlob</span>:    <span class="kw-2">*mut</span> <span class="kw-2">*mut</span> <span class="ident">ID3DBlob</span>,
+    ) -&gt; <span class="ident">HRESULT</span><span class="op">&gt;</span>,
 
-    D3DGetOutputSignatureBlob: <span class="prelude-ty">Option</span>&lt;<span class="kw">unsafe extern </span><span class="string">&quot;system&quot; </span><span class="kw">fn</span>(
-        pSrcData:           LPCVOID,
-        SrcDataSize:        SIZE_T,
-        ppSignatureBlob:    <span class="kw-2">*mut *mut </span>ID3DBlob,
-    ) -&gt; HRESULT&gt;,
+    <span class="ident">D3DGetOutputSignatureBlob</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw unsafe">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;system&quot;</span> <span class="kw">fn</span>(
+        <span class="ident">pSrcData</span>:           <span class="ident">LPCVOID</span>,
+        <span class="ident">SrcDataSize</span>:        <span class="ident">SIZE_T</span>,
+        <span class="ident">ppSignatureBlob</span>:    <span class="kw-2">*mut</span> <span class="kw-2">*mut</span> <span class="ident">ID3DBlob</span>,
+    ) -&gt; <span class="ident">HRESULT</span><span class="op">&gt;</span>,
 
-    D3DGetTraceInstructionOffsets: <span class="prelude-ty">Option</span>&lt;<span class="kw">unsafe extern </span><span class="string">&quot;system&quot; </span><span class="kw">fn </span>(
-        pSrcData:       LPCVOID,
-        SrcDataSize:    SIZE_T,
-        Flags:          UINT,
-        StartInstIndex: SIZE_T,
-        NumInsts:       SIZE_T,
-        pOffsets:       <span class="kw-2">*mut </span>SIZE_T,
-        pTotalInsts:    <span class="kw-2">*mut </span>SIZE_T,
-    ) -&gt; HRESULT&gt;,
+    <span class="ident">D3DGetTraceInstructionOffsets</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw unsafe">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;system&quot;</span> <span class="kw">fn</span> (
+        <span class="ident">pSrcData</span>:       <span class="ident">LPCVOID</span>,
+        <span class="ident">SrcDataSize</span>:    <span class="ident">SIZE_T</span>,
+        <span class="ident">Flags</span>:          <span class="ident">UINT</span>,
+        <span class="ident">StartInstIndex</span>: <span class="ident">SIZE_T</span>,
+        <span class="ident">NumInsts</span>:       <span class="ident">SIZE_T</span>,
+        <span class="ident">pOffsets</span>:       <span class="kw-2">*mut</span> <span class="ident">SIZE_T</span>,
+        <span class="ident">pTotalInsts</span>:    <span class="kw-2">*mut</span> <span class="ident">SIZE_T</span>,
+    ) -&gt; <span class="ident">HRESULT</span><span class="op">&gt;</span>,
 
-    D3DLoadModule: <span class="prelude-ty">Option</span>&lt;<span class="kw">unsafe extern </span><span class="string">&quot;system&quot; </span><span class="kw">fn </span>(
-        pSrcData:       LPCVOID,
-        cbSrcDataSize:  SIZE_T,
-        ppModule:       <span class="kw-2">*mut *mut </span>ID3D11Module,
-    ) -&gt; HRESULT&gt;,
+    <span class="ident">D3DLoadModule</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw unsafe">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;system&quot;</span> <span class="kw">fn</span> (
+        <span class="ident">pSrcData</span>:       <span class="ident">LPCVOID</span>,
+        <span class="ident">cbSrcDataSize</span>:  <span class="ident">SIZE_T</span>,
+        <span class="ident">ppModule</span>:       <span class="kw-2">*mut</span> <span class="kw-2">*mut</span> <span class="ident">ID3D11Module</span>,
+    ) -&gt; <span class="ident">HRESULT</span><span class="op">&gt;</span>,
 
-    D3DPreprocess: <span class="prelude-ty">Option</span>&lt;<span class="kw">unsafe extern </span><span class="string">&quot;system&quot; </span><span class="kw">fn </span>(
-        pSrcData:       LPCVOID,
-        SrcDataSize:    SIZE_T,
-        pSourceName:    LPCSTR,
-        pDefines:       <span class="kw-2">*const </span>D3D_SHADER_MACRO,
-        pInclude:       <span class="kw-2">*mut </span>ID3DInclude,
-        ppCodeText:     <span class="kw-2">*mut *mut </span>ID3DBlob,
-        ppErrorMsgs:    <span class="kw-2">*mut *mut </span>ID3DBlob,
-    ) -&gt; HRESULT&gt;,
+    <span class="ident">D3DPreprocess</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw unsafe">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;system&quot;</span> <span class="kw">fn</span> (
+        <span class="ident">pSrcData</span>:       <span class="ident">LPCVOID</span>,
+        <span class="ident">SrcDataSize</span>:    <span class="ident">SIZE_T</span>,
+        <span class="ident">pSourceName</span>:    <span class="ident">LPCSTR</span>,
+        <span class="ident">pDefines</span>:       <span class="kw-2">*const</span> <span class="ident">D3D_SHADER_MACRO</span>,
+        <span class="ident">pInclude</span>:       <span class="kw-2">*mut</span> <span class="ident">ID3DInclude</span>,
+        <span class="ident">ppCodeText</span>:     <span class="kw-2">*mut</span> <span class="kw-2">*mut</span> <span class="ident">ID3DBlob</span>,
+        <span class="ident">ppErrorMsgs</span>:    <span class="kw-2">*mut</span> <span class="kw-2">*mut</span> <span class="ident">ID3DBlob</span>,
+    ) -&gt; <span class="ident">HRESULT</span><span class="op">&gt;</span>,
 
-    D3DReadFileToBlob: <span class="prelude-ty">Option</span>&lt;<span class="kw">unsafe extern </span><span class="string">&quot;system&quot; </span><span class="kw">fn </span>(
-        pFileName:          LPCWSTR,
-        ppContents:         <span class="kw-2">*mut *mut </span>ID3DBlob,
-    ) -&gt; HRESULT&gt;,
+    <span class="ident">D3DReadFileToBlob</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw unsafe">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;system&quot;</span> <span class="kw">fn</span> (
+        <span class="ident">pFileName</span>:          <span class="ident">LPCWSTR</span>,
+        <span class="ident">ppContents</span>:         <span class="kw-2">*mut</span> <span class="kw-2">*mut</span> <span class="ident">ID3DBlob</span>,
+    ) -&gt; <span class="ident">HRESULT</span><span class="op">&gt;</span>,
 
-    D3DReflect: <span class="prelude-ty">Option</span>&lt;<span class="kw">unsafe extern </span><span class="string">&quot;system&quot; </span><span class="kw">fn </span>(
-        pSrcData:           LPCVOID,
-        SrcDataSize:        SIZE_T,
-        pInterface:         REFIID,
-        ppReflector:        <span class="kw-2">*mut </span>LPVOID,
-    ) -&gt; HRESULT&gt;,
+    <span class="ident">D3DReflect</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw unsafe">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;system&quot;</span> <span class="kw">fn</span> (
+        <span class="ident">pSrcData</span>:           <span class="ident">LPCVOID</span>,
+        <span class="ident">SrcDataSize</span>:        <span class="ident">SIZE_T</span>,
+        <span class="ident">pInterface</span>:         <span class="ident">REFIID</span>,
+        <span class="ident">ppReflector</span>:        <span class="kw-2">*mut</span> <span class="ident">LPVOID</span>,
+    ) -&gt; <span class="ident">HRESULT</span><span class="op">&gt;</span>,
 
-    D3DReflectLibrary: <span class="prelude-ty">Option</span>&lt;<span class="kw">unsafe extern </span><span class="string">&quot;system&quot; </span><span class="kw">fn </span>(
-        pSrcData:           LPCVOID,
-        SrcDataSize:        SIZE_T,
-        riid:               REFIID,
-        ppReflector:        <span class="kw-2">*mut </span>LPVOID,
-    ) -&gt; HRESULT&gt;,
+    <span class="ident">D3DReflectLibrary</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw unsafe">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;system&quot;</span> <span class="kw">fn</span> (
+        <span class="ident">pSrcData</span>:           <span class="ident">LPCVOID</span>,
+        <span class="ident">SrcDataSize</span>:        <span class="ident">SIZE_T</span>,
+        <span class="ident">riid</span>:               <span class="ident">REFIID</span>,
+        <span class="ident">ppReflector</span>:        <span class="kw-2">*mut</span> <span class="ident">LPVOID</span>,
+    ) -&gt; <span class="ident">HRESULT</span><span class="op">&gt;</span>,
 
-    D3DSetBlobPart: <span class="prelude-ty">Option</span>&lt;<span class="kw">unsafe extern </span><span class="string">&quot;system&quot; </span><span class="kw">fn </span>(
-        pSrcData:           LPCVOID,
-        SrcDataSize:        SIZE_T,
-        Part:               D3D_BLOB_PART,
-        Flags:              UINT,
-        pPart:              LPCVOID,
-        PartSize:           SIZE_T,
-        ppNewShader:        <span class="kw-2">*mut *mut </span>ID3DBlob,
-    ) -&gt; HRESULT&gt;,
+    <span class="ident">D3DSetBlobPart</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw unsafe">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;system&quot;</span> <span class="kw">fn</span> (
+        <span class="ident">pSrcData</span>:           <span class="ident">LPCVOID</span>,
+        <span class="ident">SrcDataSize</span>:        <span class="ident">SIZE_T</span>,
+        <span class="ident">Part</span>:               <span class="ident">D3D_BLOB_PART</span>,
+        <span class="ident">Flags</span>:              <span class="ident">UINT</span>,
+        <span class="ident">pPart</span>:              <span class="ident">LPCVOID</span>,
+        <span class="ident">PartSize</span>:           <span class="ident">SIZE_T</span>,
+        <span class="ident">ppNewShader</span>:        <span class="kw-2">*mut</span> <span class="kw-2">*mut</span> <span class="ident">ID3DBlob</span>,
+    ) -&gt; <span class="ident">HRESULT</span><span class="op">&gt;</span>,
 
-    D3DStripShader: <span class="prelude-ty">Option</span>&lt;<span class="kw">unsafe extern </span><span class="string">&quot;system&quot; </span><span class="kw">fn </span>(
-        pShaderBytecode:    LPCVOID ,
-        BytecodeLength:     SIZE_T,
-        uStripFlags:        UINT,
-        ppStrippedBlob:     <span class="kw-2">*mut *mut </span>ID3DBlob,
-    ) -&gt; HRESULT&gt;,
+    <span class="ident">D3DStripShader</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw unsafe">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;system&quot;</span> <span class="kw">fn</span> (
+        <span class="ident">pShaderBytecode</span>:    <span class="ident">LPCVOID</span> ,
+        <span class="ident">BytecodeLength</span>:     <span class="ident">SIZE_T</span>,
+        <span class="ident">uStripFlags</span>:        <span class="ident">UINT</span>,
+        <span class="ident">ppStrippedBlob</span>:     <span class="kw-2">*mut</span> <span class="kw-2">*mut</span> <span class="ident">ID3DBlob</span>,
+    ) -&gt; <span class="ident">HRESULT</span><span class="op">&gt;</span>,
 
-    D3DWriteBlobToFile: <span class="prelude-ty">Option</span>&lt;<span class="kw">unsafe extern </span><span class="string">&quot;system&quot; </span><span class="kw">fn </span>(
-        pBlob:      <span class="kw-2">*mut </span>ID3DBlob,
-        pFileName:  LPCWSTR,
-        bOverwrite: BOOL,
-    ) -&gt; HRESULT&gt;,
+    <span class="ident">D3DWriteBlobToFile</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw unsafe">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;system&quot;</span> <span class="kw">fn</span> (
+        <span class="ident">pBlob</span>:      <span class="kw-2">*mut</span> <span class="ident">ID3DBlob</span>,
+        <span class="ident">pFileName</span>:  <span class="ident">LPCWSTR</span>,
+        <span class="ident">bOverwrite</span>: <span class="ident">BOOL</span>,
+    ) -&gt; <span class="ident">HRESULT</span><span class="op">&gt;</span>,
 }
 
 
 
-<span class="attribute">#[test] </span><span class="kw">fn </span>d3dcompiler_nn() {
-    <span class="kw">for </span>nn <span class="kw">in </span>[
-        <span class="comment">// All versions I have installed
-        </span><span class="number">33</span>, <span class="number">34</span>, <span class="number">35</span>, <span class="number">36</span>, <span class="number">37</span>, <span class="number">38</span>, <span class="number">38</span>, <span class="number">40</span>, <span class="number">41</span>, <span class="number">42</span>, <span class="number">43</span>, <span class="number">47</span>,
-        <span class="comment">// Build servers have less installed, so I&#39;ve neutered this test :(
-    </span>].iter().copied() {
-        <span class="macro">println!</span>(<span class="string">&quot;d3dcompiler_{}.dll: {}&quot;</span>, nn, Compiler::load_system(nn).is_ok());
+<span class="attribute">#[<span class="ident">test</span>]</span> <span class="kw">fn</span> <span class="ident">d3dcompiler_nn</span>() {
+    <span class="kw">for</span> <span class="ident">nn</span> <span class="kw">in</span> [
+        <span class="comment">// All versions I have installed</span>
+        <span class="number">33</span>, <span class="number">34</span>, <span class="number">35</span>, <span class="number">36</span>, <span class="number">37</span>, <span class="number">38</span>, <span class="number">38</span>, <span class="number">40</span>, <span class="number">41</span>, <span class="number">42</span>, <span class="number">43</span>, <span class="number">47</span>,
+        <span class="comment">// Build servers have less installed, so I&#39;ve neutered this test :(</span>
+    ].<span class="ident">iter</span>().<span class="ident">copied</span>() {
+        <span class="macro">println!</span>(<span class="string">&quot;d3dcompiler_{}.dll: {}&quot;</span>, <span class="ident">nn</span>, <span class="ident">Compiler::load_system</span>(<span class="ident">nn</span>).<span class="ident">is_ok</span>());
     }
 }
 
-<span class="attribute">#[test] </span><span class="kw">fn </span>d3dcompiler_47() {
-    <span class="kw">let </span>_d3dc47 = Compiler::load_system(<span class="number">47</span>).unwrap();
+<span class="attribute">#[<span class="ident">test</span>]</span> <span class="kw">fn</span> <span class="ident">d3dcompiler_47</span>() {
+    <span class="kw">let</span> <span class="ident">_d3dc47</span> <span class="op">=</span> <span class="ident">Compiler::load_system</span>(<span class="number">47</span>).<span class="ident">unwrap</span>();
 }
 
-<span class="attribute">#[should_panic] #[test] </span><span class="kw">fn </span>d3dcompiler_48() {
-    <span class="kw">let </span>_d3dc48 = Compiler::load_system(<span class="number">48</span>).unwrap();
+<span class="attribute">#[<span class="ident">should_panic</span>]</span> <span class="attribute">#[<span class="ident">test</span>]</span> <span class="kw">fn</span> <span class="ident">d3dcompiler_48</span>() {
+    <span class="kw">let</span> <span class="ident">_d3dc48</span> <span class="op">=</span> <span class="ident">Compiler::load_system</span>(<span class="number">48</span>).<span class="ident">unwrap</span>();
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (b44197abb 2022-09-05)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0 (4b91a6ea7 2022-08-08)" ></div>
+</body></html>

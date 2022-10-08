@@ -1,4 +1,10 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3dcommon.h\enumerations\shader_variable_type.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>shader_variable_type.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../../normalize.css"><link rel="stylesheet" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../../dark.css" disabled><link rel="stylesheet" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3dcommon.h\enumerations\shader_variable_type.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>shader_variable_type.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div>
+        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
+                                <a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -221,228 +227,229 @@
 <span id="221">221</span>
 <span id="222">222</span>
 <span id="223">223</span>
-</pre><pre class="rust"><code><span class="attribute">#[allow(unused_imports)] </span><span class="kw">use crate</span>::<span class="kw-2">*</span>;
+</pre><pre class="rust"><code><span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span> <span class="kw">use</span> <span class="kw">crate</span>::<span class="kw-2">*</span>;
 
-<span class="kw">use </span>bytemuck::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">bytemuck</span>::<span class="kw-2">*</span>;
 
-<span class="kw">use </span>winapi::um::d3dcommon::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">winapi::um::d3dcommon</span>::<span class="kw-2">*</span>;
 
 
 
-<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_shader_variable_type)\]
-/// D3D_SHADER_VARIABLE_TYPE / D3D_SVT_\*
-</span><span class="attribute">#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[derive(Pod, Zeroable)]
-#[repr(transparent)] </span><span class="kw">pub struct </span>ShaderVariableType(D3D_SHADER_VARIABLE_TYPE);
-<span class="attribute">#[doc(hidden)] </span><span class="kw">pub use </span>ShaderVariableType <span class="kw">as </span>SVT;
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_shader_variable_type)\]</span>
+<span class="doccomment">/// D3D_SHADER_VARIABLE_TYPE / D3D_SVT_\*</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">PartialOrd</span>, <span class="ident">Ord</span>, <span class="ident">Hash</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Pod</span>, <span class="ident">Zeroable</span>)]</span>
+<span class="attribute">#[<span class="ident">repr</span>(<span class="ident">transparent</span>)]</span> <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ShaderVariableType</span>(<span class="ident">D3D_SHADER_VARIABLE_TYPE</span>);
+<span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span> <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">ShaderVariableType</span> <span class="kw">as</span> <span class="ident">SVT</span>;
 
-<span class="comment">// Note: D3D10_* aliases D3D_* despite poor docs kinda implying otherwise (see d3dcommon.h)
-// Note: D3D11_* aliases D3D_* despite poor docs kinda implying otherwise (see d3dcommon.h)
+<span class="comment">// Note: D3D10_* aliases D3D_* despite poor docs kinda implying otherwise (see d3dcommon.h)</span>
+<span class="comment">// Note: D3D11_* aliases D3D_* despite poor docs kinda implying otherwise (see d3dcommon.h)</span>
 
-</span><span class="macro">enumish! </span>{
-    SVT =&gt; D3D_SHADER_VARIABLE_TYPE;
-    default: Void == <span class="number">0</span>;
-    Void, Bool, Int, Float, String, Texture, Texture1D, Texture2D, Texture3D, TextureCube, Sampler, Sampler1D, Sampler2D,
-    Sampler3D, SamplerCube, PixelShader, VertexShader, PixelFragment, VertexFragment, UInt, UInt8, GeometryShader,
-    Rasterizer, DepthStencil, Blend, Buffer, CBuffer, TBuffer, Texture1DArray, Texture2DArray, RenderTargetView,
-    DepthStencilView, Texture2DMS, Texture2DMSArray, TextureCubeArray, HullShader, DomainShader, InterfacePointer,
-    ComputeShader, Double, RWTexture1D, RWTexture1DArray, RWTexture2D, RWTexture2DArray, RWTexture3D, RWBuffer,
-    ByteAddressBuffer, RWByteAddressBuffer, StructuredBuffer, RWStructuredBuffer, AppendStructuredBuffer,
-    ConsumeStructuredBuffer, Min8Float, Min10Float, Min16Float, Min12Int, Min16Int, Min16UInt,
+<span class="macro">enumish!</span> {
+    <span class="ident">SVT</span> =&gt; <span class="ident">D3D_SHADER_VARIABLE_TYPE</span>;
+    <span class="ident">default</span>: <span class="ident">Void</span> <span class="op">==</span> <span class="number">0</span>;
+    <span class="ident">Void</span>, <span class="ident">Bool</span>, <span class="ident">Int</span>, <span class="ident">Float</span>, <span class="ident">String</span>, <span class="ident">Texture</span>, <span class="ident">Texture1D</span>, <span class="ident">Texture2D</span>, <span class="ident">Texture3D</span>, <span class="ident">TextureCube</span>, <span class="ident">Sampler</span>, <span class="ident">Sampler1D</span>, <span class="ident">Sampler2D</span>,
+    <span class="ident">Sampler3D</span>, <span class="ident">SamplerCube</span>, <span class="ident">PixelShader</span>, <span class="ident">VertexShader</span>, <span class="ident">PixelFragment</span>, <span class="ident">VertexFragment</span>, <span class="ident">UInt</span>, <span class="ident">UInt8</span>, <span class="ident">GeometryShader</span>,
+    <span class="ident">Rasterizer</span>, <span class="ident">DepthStencil</span>, <span class="ident">Blend</span>, <span class="ident">Buffer</span>, <span class="ident">CBuffer</span>, <span class="ident">TBuffer</span>, <span class="ident">Texture1DArray</span>, <span class="ident">Texture2DArray</span>, <span class="ident">RenderTargetView</span>,
+    <span class="ident">DepthStencilView</span>, <span class="ident">Texture2DMS</span>, <span class="ident">Texture2DMSArray</span>, <span class="ident">TextureCubeArray</span>, <span class="ident">HullShader</span>, <span class="ident">DomainShader</span>, <span class="ident">InterfacePointer</span>,
+    <span class="ident">ComputeShader</span>, <span class="ident">Double</span>, <span class="ident">RWTexture1D</span>, <span class="ident">RWTexture1DArray</span>, <span class="ident">RWTexture2D</span>, <span class="ident">RWTexture2DArray</span>, <span class="ident">RWTexture3D</span>, <span class="ident">RWBuffer</span>,
+    <span class="ident">ByteAddressBuffer</span>, <span class="ident">RWByteAddressBuffer</span>, <span class="ident">StructuredBuffer</span>, <span class="ident">RWStructuredBuffer</span>, <span class="ident">AppendStructuredBuffer</span>,
+    <span class="ident">ConsumeStructuredBuffer</span>, <span class="ident">Min8Float</span>, <span class="ident">Min10Float</span>, <span class="ident">Min16Float</span>, <span class="ident">Min12Int</span>, <span class="ident">Min16Int</span>, <span class="ident">Min16UInt</span>,
 }
 
-<span class="attribute">#[allow(missing_docs)]
-#[allow(non_upper_case_globals)] </span><span class="kw">impl </span>SVT { <span class="comment">// These are enum-like
-    </span><span class="kw">pub const </span>Void                      : SVT = SVT(D3D_SVT_VOID); <span class="comment">// 0
-    </span><span class="kw">pub const </span>Bool                      : SVT = SVT(D3D_SVT_BOOL);
-    <span class="kw">pub const </span>Int                       : SVT = SVT(D3D_SVT_INT);
-    <span class="kw">pub const </span>Float                     : SVT = SVT(D3D_SVT_FLOAT);
-    <span class="kw">pub const </span>String                    : SVT = SVT(D3D_SVT_STRING);
-    <span class="kw">pub const </span>Texture                   : SVT = SVT(D3D_SVT_TEXTURE);
-    <span class="kw">pub const </span>Texture1D                 : SVT = SVT(D3D_SVT_TEXTURE1D);
-    <span class="kw">pub const </span>Texture2D                 : SVT = SVT(D3D_SVT_TEXTURE2D);
-    <span class="kw">pub const </span>Texture3D                 : SVT = SVT(D3D_SVT_TEXTURE3D);
-    <span class="kw">pub const </span>TextureCube               : SVT = SVT(D3D_SVT_TEXTURECUBE);
-    <span class="kw">pub const </span>Sampler                   : SVT = SVT(D3D_SVT_SAMPLER);
-    <span class="kw">pub const </span>Sampler1D                 : SVT = SVT(D3D_SVT_SAMPLER1D);
-    <span class="kw">pub const </span>Sampler2D                 : SVT = SVT(D3D_SVT_SAMPLER2D);
-    <span class="kw">pub const </span>Sampler3D                 : SVT = SVT(D3D_SVT_SAMPLER3D);
-    <span class="kw">pub const </span>SamplerCube               : SVT = SVT(D3D_SVT_SAMPLERCUBE);
-    <span class="kw">pub const </span>PixelShader               : SVT = SVT(D3D_SVT_PIXELSHADER);
-    <span class="kw">pub const </span>VertexShader              : SVT = SVT(D3D_SVT_VERTEXSHADER);
-    <span class="kw">pub const </span>PixelFragment             : SVT = SVT(D3D_SVT_PIXELFRAGMENT);
-    <span class="kw">pub const </span>VertexFragment            : SVT = SVT(D3D_SVT_VERTEXFRAGMENT);
-    <span class="kw">pub const </span>UInt                      : SVT = SVT(D3D_SVT_UINT);
-    <span class="kw">pub const </span>UInt8                     : SVT = SVT(D3D_SVT_UINT8);
-    <span class="kw">pub const </span>GeometryShader            : SVT = SVT(D3D_SVT_GEOMETRYSHADER);
-    <span class="kw">pub const </span>Rasterizer                : SVT = SVT(D3D_SVT_RASTERIZER);
-    <span class="kw">pub const </span>DepthStencil              : SVT = SVT(D3D_SVT_DEPTHSTENCIL);
-    <span class="kw">pub const </span>Blend                     : SVT = SVT(D3D_SVT_BLEND);
-    <span class="kw">pub const </span>Buffer                    : SVT = SVT(D3D_SVT_BUFFER);
-    <span class="kw">pub const </span>CBuffer                   : SVT = SVT(D3D_SVT_CBUFFER);
-    <span class="kw">pub const </span>TBuffer                   : SVT = SVT(D3D_SVT_TBUFFER);
-    <span class="kw">pub const </span>Texture1DArray            : SVT = SVT(D3D_SVT_TEXTURE1DARRAY);
-    <span class="kw">pub const </span>Texture2DArray            : SVT = SVT(D3D_SVT_TEXTURE2DARRAY);
-    <span class="kw">pub const </span>RenderTargetView          : SVT = SVT(D3D_SVT_RENDERTARGETVIEW);
-    <span class="kw">pub const </span>DepthStencilView          : SVT = SVT(D3D_SVT_DEPTHSTENCILVIEW);
-    <span class="kw">pub const </span>Texture2DMS               : SVT = SVT(D3D_SVT_TEXTURE2DMS);
-    <span class="kw">pub const </span>Texture2DMSArray          : SVT = SVT(D3D_SVT_TEXTURE2DMSARRAY);
-    <span class="kw">pub const </span>TextureCubeArray          : SVT = SVT(D3D_SVT_TEXTURECUBEARRAY);
-    <span class="kw">pub const </span>HullShader                : SVT = SVT(D3D_SVT_HULLSHADER);
-    <span class="kw">pub const </span>DomainShader              : SVT = SVT(D3D_SVT_DOMAINSHADER);
-    <span class="kw">pub const </span>InterfacePointer          : SVT = SVT(D3D_SVT_INTERFACE_POINTER);
-    <span class="kw">pub const </span>ComputeShader             : SVT = SVT(D3D_SVT_COMPUTESHADER);
-    <span class="kw">pub const </span>Double                    : SVT = SVT(D3D_SVT_DOUBLE);
-    <span class="kw">pub const </span>RWTexture1D               : SVT = SVT(D3D_SVT_RWTEXTURE1D);
-    <span class="kw">pub const </span>RWTexture1DArray          : SVT = SVT(D3D_SVT_RWTEXTURE1DARRAY);
-    <span class="kw">pub const </span>RWTexture2D               : SVT = SVT(D3D_SVT_RWTEXTURE2D);
-    <span class="kw">pub const </span>RWTexture2DArray          : SVT = SVT(D3D_SVT_RWTEXTURE2DARRAY);
-    <span class="kw">pub const </span>RWTexture3D               : SVT = SVT(D3D_SVT_RWTEXTURE3D);
-    <span class="kw">pub const </span>RWBuffer                  : SVT = SVT(D3D_SVT_RWBUFFER);
-    <span class="kw">pub const </span>ByteAddressBuffer         : SVT = SVT(D3D_SVT_BYTEADDRESS_BUFFER);
-    <span class="kw">pub const </span>RWByteAddressBuffer       : SVT = SVT(D3D_SVT_RWBYTEADDRESS_BUFFER);
-    <span class="kw">pub const </span>StructuredBuffer          : SVT = SVT(D3D_SVT_STRUCTURED_BUFFER);
-    <span class="kw">pub const </span>RWStructuredBuffer        : SVT = SVT(D3D_SVT_RWSTRUCTURED_BUFFER);
-    <span class="kw">pub const </span>AppendStructuredBuffer    : SVT = SVT(D3D_SVT_APPEND_STRUCTURED_BUFFER);
-    <span class="kw">pub const </span>ConsumeStructuredBuffer   : SVT = SVT(D3D_SVT_CONSUME_STRUCTURED_BUFFER);
-    <span class="kw">pub const </span>Min8Float                 : SVT = SVT(D3D_SVT_MIN8FLOAT);
-    <span class="kw">pub const </span>Min10Float                : SVT = SVT(D3D_SVT_MIN10FLOAT);
-    <span class="kw">pub const </span>Min16Float                : SVT = SVT(D3D_SVT_MIN16FLOAT);
-    <span class="kw">pub const </span>Min12Int                  : SVT = SVT(D3D_SVT_MIN12INT);
-    <span class="kw">pub const </span>Min16Int                  : SVT = SVT(D3D_SVT_MIN16INT);
-    <span class="kw">pub const </span>Min16UInt                 : SVT = SVT(D3D_SVT_MIN16UINT);
-    <span class="kw">pub const </span>Int16                     : SVT = SVT(D3D_SVT_INT16);
-    <span class="kw">pub const </span>UInt16                    : SVT = SVT(D3D_SVT_UINT16);
-    <span class="kw">pub const </span>Float16                   : SVT = SVT(D3D_SVT_FLOAT16);
-    <span class="kw">pub const </span>Int64                     : SVT = SVT(D3D_SVT_INT64);
-    <span class="kw">pub const </span>UInt64                    : SVT = SVT(D3D_SVT_UINT64);
+<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">missing_docs</span>)]</span>
+<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">non_upper_case_globals</span>)]</span> <span class="kw">impl</span> <span class="ident">SVT</span> { <span class="comment">// These are enum-like</span>
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Void</span>                      : <span class="ident">SVT</span> <span class="op">=</span> <span class="ident">SVT</span>(<span class="ident">D3D_SVT_VOID</span>); <span class="comment">// 0</span>
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Bool</span>                      : <span class="ident">SVT</span> <span class="op">=</span> <span class="ident">SVT</span>(<span class="ident">D3D_SVT_BOOL</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Int</span>                       : <span class="ident">SVT</span> <span class="op">=</span> <span class="ident">SVT</span>(<span class="ident">D3D_SVT_INT</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Float</span>                     : <span class="ident">SVT</span> <span class="op">=</span> <span class="ident">SVT</span>(<span class="ident">D3D_SVT_FLOAT</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">String</span>                    : <span class="ident">SVT</span> <span class="op">=</span> <span class="ident">SVT</span>(<span class="ident">D3D_SVT_STRING</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Texture</span>                   : <span class="ident">SVT</span> <span class="op">=</span> <span class="ident">SVT</span>(<span class="ident">D3D_SVT_TEXTURE</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Texture1D</span>                 : <span class="ident">SVT</span> <span class="op">=</span> <span class="ident">SVT</span>(<span class="ident">D3D_SVT_TEXTURE1D</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Texture2D</span>                 : <span class="ident">SVT</span> <span class="op">=</span> <span class="ident">SVT</span>(<span class="ident">D3D_SVT_TEXTURE2D</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Texture3D</span>                 : <span class="ident">SVT</span> <span class="op">=</span> <span class="ident">SVT</span>(<span class="ident">D3D_SVT_TEXTURE3D</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">TextureCube</span>               : <span class="ident">SVT</span> <span class="op">=</span> <span class="ident">SVT</span>(<span class="ident">D3D_SVT_TEXTURECUBE</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Sampler</span>                   : <span class="ident">SVT</span> <span class="op">=</span> <span class="ident">SVT</span>(<span class="ident">D3D_SVT_SAMPLER</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Sampler1D</span>                 : <span class="ident">SVT</span> <span class="op">=</span> <span class="ident">SVT</span>(<span class="ident">D3D_SVT_SAMPLER1D</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Sampler2D</span>                 : <span class="ident">SVT</span> <span class="op">=</span> <span class="ident">SVT</span>(<span class="ident">D3D_SVT_SAMPLER2D</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Sampler3D</span>                 : <span class="ident">SVT</span> <span class="op">=</span> <span class="ident">SVT</span>(<span class="ident">D3D_SVT_SAMPLER3D</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SamplerCube</span>               : <span class="ident">SVT</span> <span class="op">=</span> <span class="ident">SVT</span>(<span class="ident">D3D_SVT_SAMPLERCUBE</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">PixelShader</span>               : <span class="ident">SVT</span> <span class="op">=</span> <span class="ident">SVT</span>(<span class="ident">D3D_SVT_PIXELSHADER</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">VertexShader</span>              : <span class="ident">SVT</span> <span class="op">=</span> <span class="ident">SVT</span>(<span class="ident">D3D_SVT_VERTEXSHADER</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">PixelFragment</span>             : <span class="ident">SVT</span> <span class="op">=</span> <span class="ident">SVT</span>(<span class="ident">D3D_SVT_PIXELFRAGMENT</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">VertexFragment</span>            : <span class="ident">SVT</span> <span class="op">=</span> <span class="ident">SVT</span>(<span class="ident">D3D_SVT_VERTEXFRAGMENT</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">UInt</span>                      : <span class="ident">SVT</span> <span class="op">=</span> <span class="ident">SVT</span>(<span class="ident">D3D_SVT_UINT</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">UInt8</span>                     : <span class="ident">SVT</span> <span class="op">=</span> <span class="ident">SVT</span>(<span class="ident">D3D_SVT_UINT8</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">GeometryShader</span>            : <span class="ident">SVT</span> <span class="op">=</span> <span class="ident">SVT</span>(<span class="ident">D3D_SVT_GEOMETRYSHADER</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Rasterizer</span>                : <span class="ident">SVT</span> <span class="op">=</span> <span class="ident">SVT</span>(<span class="ident">D3D_SVT_RASTERIZER</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">DepthStencil</span>              : <span class="ident">SVT</span> <span class="op">=</span> <span class="ident">SVT</span>(<span class="ident">D3D_SVT_DEPTHSTENCIL</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Blend</span>                     : <span class="ident">SVT</span> <span class="op">=</span> <span class="ident">SVT</span>(<span class="ident">D3D_SVT_BLEND</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Buffer</span>                    : <span class="ident">SVT</span> <span class="op">=</span> <span class="ident">SVT</span>(<span class="ident">D3D_SVT_BUFFER</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CBuffer</span>                   : <span class="ident">SVT</span> <span class="op">=</span> <span class="ident">SVT</span>(<span class="ident">D3D_SVT_CBUFFER</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">TBuffer</span>                   : <span class="ident">SVT</span> <span class="op">=</span> <span class="ident">SVT</span>(<span class="ident">D3D_SVT_TBUFFER</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Texture1DArray</span>            : <span class="ident">SVT</span> <span class="op">=</span> <span class="ident">SVT</span>(<span class="ident">D3D_SVT_TEXTURE1DARRAY</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Texture2DArray</span>            : <span class="ident">SVT</span> <span class="op">=</span> <span class="ident">SVT</span>(<span class="ident">D3D_SVT_TEXTURE2DARRAY</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">RenderTargetView</span>          : <span class="ident">SVT</span> <span class="op">=</span> <span class="ident">SVT</span>(<span class="ident">D3D_SVT_RENDERTARGETVIEW</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">DepthStencilView</span>          : <span class="ident">SVT</span> <span class="op">=</span> <span class="ident">SVT</span>(<span class="ident">D3D_SVT_DEPTHSTENCILVIEW</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Texture2DMS</span>               : <span class="ident">SVT</span> <span class="op">=</span> <span class="ident">SVT</span>(<span class="ident">D3D_SVT_TEXTURE2DMS</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Texture2DMSArray</span>          : <span class="ident">SVT</span> <span class="op">=</span> <span class="ident">SVT</span>(<span class="ident">D3D_SVT_TEXTURE2DMSARRAY</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">TextureCubeArray</span>          : <span class="ident">SVT</span> <span class="op">=</span> <span class="ident">SVT</span>(<span class="ident">D3D_SVT_TEXTURECUBEARRAY</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">HullShader</span>                : <span class="ident">SVT</span> <span class="op">=</span> <span class="ident">SVT</span>(<span class="ident">D3D_SVT_HULLSHADER</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">DomainShader</span>              : <span class="ident">SVT</span> <span class="op">=</span> <span class="ident">SVT</span>(<span class="ident">D3D_SVT_DOMAINSHADER</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">InterfacePointer</span>          : <span class="ident">SVT</span> <span class="op">=</span> <span class="ident">SVT</span>(<span class="ident">D3D_SVT_INTERFACE_POINTER</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">ComputeShader</span>             : <span class="ident">SVT</span> <span class="op">=</span> <span class="ident">SVT</span>(<span class="ident">D3D_SVT_COMPUTESHADER</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Double</span>                    : <span class="ident">SVT</span> <span class="op">=</span> <span class="ident">SVT</span>(<span class="ident">D3D_SVT_DOUBLE</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">RWTexture1D</span>               : <span class="ident">SVT</span> <span class="op">=</span> <span class="ident">SVT</span>(<span class="ident">D3D_SVT_RWTEXTURE1D</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">RWTexture1DArray</span>          : <span class="ident">SVT</span> <span class="op">=</span> <span class="ident">SVT</span>(<span class="ident">D3D_SVT_RWTEXTURE1DARRAY</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">RWTexture2D</span>               : <span class="ident">SVT</span> <span class="op">=</span> <span class="ident">SVT</span>(<span class="ident">D3D_SVT_RWTEXTURE2D</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">RWTexture2DArray</span>          : <span class="ident">SVT</span> <span class="op">=</span> <span class="ident">SVT</span>(<span class="ident">D3D_SVT_RWTEXTURE2DARRAY</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">RWTexture3D</span>               : <span class="ident">SVT</span> <span class="op">=</span> <span class="ident">SVT</span>(<span class="ident">D3D_SVT_RWTEXTURE3D</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">RWBuffer</span>                  : <span class="ident">SVT</span> <span class="op">=</span> <span class="ident">SVT</span>(<span class="ident">D3D_SVT_RWBUFFER</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">ByteAddressBuffer</span>         : <span class="ident">SVT</span> <span class="op">=</span> <span class="ident">SVT</span>(<span class="ident">D3D_SVT_BYTEADDRESS_BUFFER</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">RWByteAddressBuffer</span>       : <span class="ident">SVT</span> <span class="op">=</span> <span class="ident">SVT</span>(<span class="ident">D3D_SVT_RWBYTEADDRESS_BUFFER</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">StructuredBuffer</span>          : <span class="ident">SVT</span> <span class="op">=</span> <span class="ident">SVT</span>(<span class="ident">D3D_SVT_STRUCTURED_BUFFER</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">RWStructuredBuffer</span>        : <span class="ident">SVT</span> <span class="op">=</span> <span class="ident">SVT</span>(<span class="ident">D3D_SVT_RWSTRUCTURED_BUFFER</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">AppendStructuredBuffer</span>    : <span class="ident">SVT</span> <span class="op">=</span> <span class="ident">SVT</span>(<span class="ident">D3D_SVT_APPEND_STRUCTURED_BUFFER</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">ConsumeStructuredBuffer</span>   : <span class="ident">SVT</span> <span class="op">=</span> <span class="ident">SVT</span>(<span class="ident">D3D_SVT_CONSUME_STRUCTURED_BUFFER</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Min8Float</span>                 : <span class="ident">SVT</span> <span class="op">=</span> <span class="ident">SVT</span>(<span class="ident">D3D_SVT_MIN8FLOAT</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Min10Float</span>                : <span class="ident">SVT</span> <span class="op">=</span> <span class="ident">SVT</span>(<span class="ident">D3D_SVT_MIN10FLOAT</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Min16Float</span>                : <span class="ident">SVT</span> <span class="op">=</span> <span class="ident">SVT</span>(<span class="ident">D3D_SVT_MIN16FLOAT</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Min12Int</span>                  : <span class="ident">SVT</span> <span class="op">=</span> <span class="ident">SVT</span>(<span class="ident">D3D_SVT_MIN12INT</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Min16Int</span>                  : <span class="ident">SVT</span> <span class="op">=</span> <span class="ident">SVT</span>(<span class="ident">D3D_SVT_MIN16INT</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Min16UInt</span>                 : <span class="ident">SVT</span> <span class="op">=</span> <span class="ident">SVT</span>(<span class="ident">D3D_SVT_MIN16UINT</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Int16</span>                     : <span class="ident">SVT</span> <span class="op">=</span> <span class="ident">SVT</span>(<span class="ident">D3D_SVT_INT16</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">UInt16</span>                    : <span class="ident">SVT</span> <span class="op">=</span> <span class="ident">SVT</span>(<span class="ident">D3D_SVT_UINT16</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Float16</span>                   : <span class="ident">SVT</span> <span class="op">=</span> <span class="ident">SVT</span>(<span class="ident">D3D_SVT_FLOAT16</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Int64</span>                     : <span class="ident">SVT</span> <span class="op">=</span> <span class="ident">SVT</span>(<span class="ident">D3D_SVT_INT64</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">UInt64</span>                    : <span class="ident">SVT</span> <span class="op">=</span> <span class="ident">SVT</span>(<span class="ident">D3D_SVT_UINT64</span>);
 }
 
-<span class="comment">//#cpp2rust D3D_SHADER_VARIABLE_TYPE            = d3d::ShaderVariableType
+<span class="comment">//#cpp2rust D3D_SHADER_VARIABLE_TYPE            = d3d::ShaderVariableType</span>
 
-//#cpp2rust D3D_SVT_VOID                        = d3d::SVT::Void
-//#cpp2rust D3D_SVT_BOOL                        = d3d::SVT::Bool
-//#cpp2rust D3D_SVT_INT                         = d3d::SVT::Int
-//#cpp2rust D3D_SVT_FLOAT                       = d3d::SVT::Float
-//#cpp2rust D3D_SVT_STRING                      = d3d::SVT::String
-//#cpp2rust D3D_SVT_TEXTURE                     = d3d::SVT::Texture
-//#cpp2rust D3D_SVT_TEXTURE1D                   = d3d::SVT::Texture1D
-//#cpp2rust D3D_SVT_TEXTURE2D                   = d3d::SVT::Texture2D
-//#cpp2rust D3D_SVT_TEXTURE3D                   = d3d::SVT::Texture3D
-//#cpp2rust D3D_SVT_TEXTURECUBE                 = d3d::SVT::TextureCube
-//#cpp2rust D3D_SVT_SAMPLER                     = d3d::SVT::Sampler
-//#cpp2rust D3D_SVT_SAMPLER1D                   = d3d::SVT::Sampler1D
-//#cpp2rust D3D_SVT_SAMPLER2D                   = d3d::SVT::Sampler2D
-//#cpp2rust D3D_SVT_SAMPLER3D                   = d3d::SVT::Sampler3D
-//#cpp2rust D3D_SVT_SAMPLERCUBE                 = d3d::SVT::SamplerCube
-//#cpp2rust D3D_SVT_PIXELSHADER                 = d3d::SVT::PixelShader
-//#cpp2rust D3D_SVT_VERTEXSHADER                = d3d::SVT::VertexShader
-//#cpp2rust D3D_SVT_PIXELFRAGMENT               = d3d::SVT::PixelFragment
-//#cpp2rust D3D_SVT_VERTEXFRAGMENT              = d3d::SVT::VertexFragment
-//#cpp2rust D3D_SVT_UINT                        = d3d::SVT::UInt
-//#cpp2rust D3D_SVT_UINT8                       = d3d::SVT::UInt8
-//#cpp2rust D3D_SVT_GEOMETRYSHADER              = d3d::SVT::GeometryShader
-//#cpp2rust D3D_SVT_RASTERIZER                  = d3d::SVT::Rasterizer
-//#cpp2rust D3D_SVT_DEPTHSTENCIL                = d3d::SVT::DepthStencil
-//#cpp2rust D3D_SVT_BLEND                       = d3d::SVT::Blend
-//#cpp2rust D3D_SVT_BUFFER                      = d3d::SVT::Buffer
-//#cpp2rust D3D_SVT_CBUFFER                     = d3d::SVT::CBuffer
-//#cpp2rust D3D_SVT_TBUFFER                     = d3d::SVT::TBuffer
-//#cpp2rust D3D_SVT_TEXTURE1DARRAY              = d3d::SVT::Texture1DArray
-//#cpp2rust D3D_SVT_TEXTURE2DARRAY              = d3d::SVT::Texture2DArray
-//#cpp2rust D3D_SVT_RENDERTARGETVIEW            = d3d::SVT::RenderTargetView
-//#cpp2rust D3D_SVT_DEPTHSTENCILVIEW            = d3d::SVT::DepthStencilView
-//#cpp2rust D3D_SVT_TEXTURE2DMS                 = d3d::SVT::Texture2DMS
-//#cpp2rust D3D_SVT_TEXTURE2DMSARRAY            = d3d::SVT::Texture2DMSArray
-//#cpp2rust D3D_SVT_TEXTURECUBEARRAY            = d3d::SVT::TextureCubeArray
-//#cpp2rust D3D_SVT_HULLSHADER                  = d3d::SVT::HullShader
-//#cpp2rust D3D_SVT_DOMAINSHADER                = d3d::SVT::DomainShader
-//#cpp2rust D3D_SVT_INTERFACE_POINTER           = d3d::SVT::InterfacePointer
-//#cpp2rust D3D_SVT_COMPUTESHADER               = d3d::SVT::ComputeShader
-//#cpp2rust D3D_SVT_DOUBLE                      = d3d::SVT::Double
-//#cpp2rust D3D_SVT_RWTEXTURE1D                 = d3d::SVT::RWTexture1D
-//#cpp2rust D3D_SVT_RWTEXTURE1DARRAY            = d3d::SVT::RWTexture1DArray
-//#cpp2rust D3D_SVT_RWTEXTURE2D                 = d3d::SVT::RWTexture2D
-//#cpp2rust D3D_SVT_RWTEXTURE2DARRAY            = d3d::SVT::RWTexture2DArray
-//#cpp2rust D3D_SVT_RWTEXTURE3D                 = d3d::SVT::RWTexture3D
-//#cpp2rust D3D_SVT_RWBUFFER                    = d3d::SVT::RWBuffer
-//#cpp2rust D3D_SVT_BYTEADDRESS_BUFFER          = d3d::SVT::ByteAddressBuffer
-//#cpp2rust D3D_SVT_RWBYTEADDRESS_BUFFER        = d3d::SVT::RWByteAddressBuffer
-//#cpp2rust D3D_SVT_STRUCTURED_BUFFER           = d3d::SVT::StructuredBuffer
-//#cpp2rust D3D_SVT_RWSTRUCTURED_BUFFER         = d3d::SVT::RWStructuredBuffer
-//#cpp2rust D3D_SVT_APPEND_STRUCTURED_BUFFER    = d3d::SVT::AppendStructuredBuffer
-//#cpp2rust D3D_SVT_CONSUME_STRUCTURED_BUFFER   = d3d::SVT::ConsumeStructuredBuffer
-//#cpp2rust D3D_SVT_MIN8FLOAT                   = d3d::SVT::Min8Float
-//#cpp2rust D3D_SVT_MIN10FLOAT                  = d3d::SVT::Min10Float
-//#cpp2rust D3D_SVT_MIN16FLOAT                  = d3d::SVT::Min16Float
-//#cpp2rust D3D_SVT_MIN12INT                    = d3d::SVT::Min12Int
-//#cpp2rust D3D_SVT_MIN16INT                    = d3d::SVT::Min16Int
-//#cpp2rust D3D_SVT_MIN16UINT                   = d3d::SVT::Min16UInt
-//#cpp2rust D3D_SVT_INT16                       = d3d::SVT::Int16
-//#cpp2rust D3D_SVT_UINT16                      = d3d::SVT::UInt16
-//#cpp2rust D3D_SVT_FLOAT16                     = d3d::SVT::Float16
-//#cpp2rust D3D_SVT_INT64                       = d3d::SVT::Int64
-//#cpp2rust D3D_SVT_UINT64                      = d3d::SVT::UInt64
+<span class="comment">//#cpp2rust D3D_SVT_VOID                        = d3d::SVT::Void</span>
+<span class="comment">//#cpp2rust D3D_SVT_BOOL                        = d3d::SVT::Bool</span>
+<span class="comment">//#cpp2rust D3D_SVT_INT                         = d3d::SVT::Int</span>
+<span class="comment">//#cpp2rust D3D_SVT_FLOAT                       = d3d::SVT::Float</span>
+<span class="comment">//#cpp2rust D3D_SVT_STRING                      = d3d::SVT::String</span>
+<span class="comment">//#cpp2rust D3D_SVT_TEXTURE                     = d3d::SVT::Texture</span>
+<span class="comment">//#cpp2rust D3D_SVT_TEXTURE1D                   = d3d::SVT::Texture1D</span>
+<span class="comment">//#cpp2rust D3D_SVT_TEXTURE2D                   = d3d::SVT::Texture2D</span>
+<span class="comment">//#cpp2rust D3D_SVT_TEXTURE3D                   = d3d::SVT::Texture3D</span>
+<span class="comment">//#cpp2rust D3D_SVT_TEXTURECUBE                 = d3d::SVT::TextureCube</span>
+<span class="comment">//#cpp2rust D3D_SVT_SAMPLER                     = d3d::SVT::Sampler</span>
+<span class="comment">//#cpp2rust D3D_SVT_SAMPLER1D                   = d3d::SVT::Sampler1D</span>
+<span class="comment">//#cpp2rust D3D_SVT_SAMPLER2D                   = d3d::SVT::Sampler2D</span>
+<span class="comment">//#cpp2rust D3D_SVT_SAMPLER3D                   = d3d::SVT::Sampler3D</span>
+<span class="comment">//#cpp2rust D3D_SVT_SAMPLERCUBE                 = d3d::SVT::SamplerCube</span>
+<span class="comment">//#cpp2rust D3D_SVT_PIXELSHADER                 = d3d::SVT::PixelShader</span>
+<span class="comment">//#cpp2rust D3D_SVT_VERTEXSHADER                = d3d::SVT::VertexShader</span>
+<span class="comment">//#cpp2rust D3D_SVT_PIXELFRAGMENT               = d3d::SVT::PixelFragment</span>
+<span class="comment">//#cpp2rust D3D_SVT_VERTEXFRAGMENT              = d3d::SVT::VertexFragment</span>
+<span class="comment">//#cpp2rust D3D_SVT_UINT                        = d3d::SVT::UInt</span>
+<span class="comment">//#cpp2rust D3D_SVT_UINT8                       = d3d::SVT::UInt8</span>
+<span class="comment">//#cpp2rust D3D_SVT_GEOMETRYSHADER              = d3d::SVT::GeometryShader</span>
+<span class="comment">//#cpp2rust D3D_SVT_RASTERIZER                  = d3d::SVT::Rasterizer</span>
+<span class="comment">//#cpp2rust D3D_SVT_DEPTHSTENCIL                = d3d::SVT::DepthStencil</span>
+<span class="comment">//#cpp2rust D3D_SVT_BLEND                       = d3d::SVT::Blend</span>
+<span class="comment">//#cpp2rust D3D_SVT_BUFFER                      = d3d::SVT::Buffer</span>
+<span class="comment">//#cpp2rust D3D_SVT_CBUFFER                     = d3d::SVT::CBuffer</span>
+<span class="comment">//#cpp2rust D3D_SVT_TBUFFER                     = d3d::SVT::TBuffer</span>
+<span class="comment">//#cpp2rust D3D_SVT_TEXTURE1DARRAY              = d3d::SVT::Texture1DArray</span>
+<span class="comment">//#cpp2rust D3D_SVT_TEXTURE2DARRAY              = d3d::SVT::Texture2DArray</span>
+<span class="comment">//#cpp2rust D3D_SVT_RENDERTARGETVIEW            = d3d::SVT::RenderTargetView</span>
+<span class="comment">//#cpp2rust D3D_SVT_DEPTHSTENCILVIEW            = d3d::SVT::DepthStencilView</span>
+<span class="comment">//#cpp2rust D3D_SVT_TEXTURE2DMS                 = d3d::SVT::Texture2DMS</span>
+<span class="comment">//#cpp2rust D3D_SVT_TEXTURE2DMSARRAY            = d3d::SVT::Texture2DMSArray</span>
+<span class="comment">//#cpp2rust D3D_SVT_TEXTURECUBEARRAY            = d3d::SVT::TextureCubeArray</span>
+<span class="comment">//#cpp2rust D3D_SVT_HULLSHADER                  = d3d::SVT::HullShader</span>
+<span class="comment">//#cpp2rust D3D_SVT_DOMAINSHADER                = d3d::SVT::DomainShader</span>
+<span class="comment">//#cpp2rust D3D_SVT_INTERFACE_POINTER           = d3d::SVT::InterfacePointer</span>
+<span class="comment">//#cpp2rust D3D_SVT_COMPUTESHADER               = d3d::SVT::ComputeShader</span>
+<span class="comment">//#cpp2rust D3D_SVT_DOUBLE                      = d3d::SVT::Double</span>
+<span class="comment">//#cpp2rust D3D_SVT_RWTEXTURE1D                 = d3d::SVT::RWTexture1D</span>
+<span class="comment">//#cpp2rust D3D_SVT_RWTEXTURE1DARRAY            = d3d::SVT::RWTexture1DArray</span>
+<span class="comment">//#cpp2rust D3D_SVT_RWTEXTURE2D                 = d3d::SVT::RWTexture2D</span>
+<span class="comment">//#cpp2rust D3D_SVT_RWTEXTURE2DARRAY            = d3d::SVT::RWTexture2DArray</span>
+<span class="comment">//#cpp2rust D3D_SVT_RWTEXTURE3D                 = d3d::SVT::RWTexture3D</span>
+<span class="comment">//#cpp2rust D3D_SVT_RWBUFFER                    = d3d::SVT::RWBuffer</span>
+<span class="comment">//#cpp2rust D3D_SVT_BYTEADDRESS_BUFFER          = d3d::SVT::ByteAddressBuffer</span>
+<span class="comment">//#cpp2rust D3D_SVT_RWBYTEADDRESS_BUFFER        = d3d::SVT::RWByteAddressBuffer</span>
+<span class="comment">//#cpp2rust D3D_SVT_STRUCTURED_BUFFER           = d3d::SVT::StructuredBuffer</span>
+<span class="comment">//#cpp2rust D3D_SVT_RWSTRUCTURED_BUFFER         = d3d::SVT::RWStructuredBuffer</span>
+<span class="comment">//#cpp2rust D3D_SVT_APPEND_STRUCTURED_BUFFER    = d3d::SVT::AppendStructuredBuffer</span>
+<span class="comment">//#cpp2rust D3D_SVT_CONSUME_STRUCTURED_BUFFER   = d3d::SVT::ConsumeStructuredBuffer</span>
+<span class="comment">//#cpp2rust D3D_SVT_MIN8FLOAT                   = d3d::SVT::Min8Float</span>
+<span class="comment">//#cpp2rust D3D_SVT_MIN10FLOAT                  = d3d::SVT::Min10Float</span>
+<span class="comment">//#cpp2rust D3D_SVT_MIN16FLOAT                  = d3d::SVT::Min16Float</span>
+<span class="comment">//#cpp2rust D3D_SVT_MIN12INT                    = d3d::SVT::Min12Int</span>
+<span class="comment">//#cpp2rust D3D_SVT_MIN16INT                    = d3d::SVT::Min16Int</span>
+<span class="comment">//#cpp2rust D3D_SVT_MIN16UINT                   = d3d::SVT::Min16UInt</span>
+<span class="comment">//#cpp2rust D3D_SVT_INT16                       = d3d::SVT::Int16</span>
+<span class="comment">//#cpp2rust D3D_SVT_UINT16                      = d3d::SVT::UInt16</span>
+<span class="comment">//#cpp2rust D3D_SVT_FLOAT16                     = d3d::SVT::Float16</span>
+<span class="comment">//#cpp2rust D3D_SVT_INT64                       = d3d::SVT::Int64</span>
+<span class="comment">//#cpp2rust D3D_SVT_UINT64                      = d3d::SVT::UInt64</span>
 
-//#cpp2rust D3D10_SVT_VOID                      = d3d::SVT::Void
-//#cpp2rust D3D10_SVT_BOOL                      = d3d::SVT::Bool
-//#cpp2rust D3D10_SVT_INT                       = d3d::SVT::Int
-//#cpp2rust D3D10_SVT_FLOAT                     = d3d::SVT::Float
-//#cpp2rust D3D10_SVT_STRING                    = d3d::SVT::String
-//#cpp2rust D3D10_SVT_TEXTURE                   = d3d::SVT::Texture
-//#cpp2rust D3D10_SVT_TEXTURE1D                 = d3d::SVT::Texture1D
-//#cpp2rust D3D10_SVT_TEXTURE2D                 = d3d::SVT::Texture2D
-//#cpp2rust D3D10_SVT_TEXTURE3D                 = d3d::SVT::Texture3D
-//#cpp2rust D3D10_SVT_TEXTURECUBE               = d3d::SVT::TextureCube
-//#cpp2rust D3D10_SVT_SAMPLER                   = d3d::SVT::Sampler
-//#cpp2rust D3D10_SVT_SAMPLER1D                 = d3d::SVT::Sampler1D
-//#cpp2rust D3D10_SVT_SAMPLER2D                 = d3d::SVT::Sampler2D
-//#cpp2rust D3D10_SVT_SAMPLER3D                 = d3d::SVT::Sampler3D
-//#cpp2rust D3D10_SVT_SAMPLERCUBE               = d3d::SVT::SamplerCube
-//#cpp2rust D3D10_SVT_PIXELSHADER               = d3d::SVT::PixelShader
-//#cpp2rust D3D10_SVT_VERTEXSHADER              = d3d::SVT::VertexShader
-//#cpp2rust D3D10_SVT_PIXELFRAGMENT             = d3d::SVT::PixelFragment
-//#cpp2rust D3D10_SVT_VERTEXFRAGMENT            = d3d::SVT::VertexFragment
-//#cpp2rust D3D10_SVT_UINT                      = d3d::SVT::UInt
-//#cpp2rust D3D10_SVT_UINT8                     = d3d::SVT::UInt8
-//#cpp2rust D3D10_SVT_GEOMETRYSHADER            = d3d::SVT::GeometryShader
-//#cpp2rust D3D10_SVT_RASTERIZER                = d3d::SVT::Rasterizer
-//#cpp2rust D3D10_SVT_DEPTHSTENCIL              = d3d::SVT::DepthStencil
-//#cpp2rust D3D10_SVT_BLEND                     = d3d::SVT::Blend
-//#cpp2rust D3D10_SVT_BUFFER                    = d3d::SVT::Buffer
-//#cpp2rust D3D10_SVT_CBUFFER                   = d3d::SVT::CBuffer
-//#cpp2rust D3D10_SVT_TBUFFER                   = d3d::SVT::TBuffer
-//#cpp2rust D3D10_SVT_TEXTURE1DARRAY            = d3d::SVT::Texture1DArray
-//#cpp2rust D3D10_SVT_TEXTURE2DARRAY            = d3d::SVT::Texture2DArray
-//#cpp2rust D3D10_SVT_RENDERTARGETVIEW          = d3d::SVT::RenderTargetView
-//#cpp2rust D3D10_SVT_DEPTHSTENCILVIEW          = d3d::SVT::DepthStencilView
-//#cpp2rust D3D10_SVT_TEXTURE2DMS               = d3d::SVT::Texture2DMS
-//#cpp2rust D3D10_SVT_TEXTURE2DMSARRAY          = d3d::SVT::Texture2DMSArray
-//#cpp2rust D3D10_SVT_TEXTURECUBEARRAY          = d3d::SVT::TextureCubeArray
+<span class="comment">//#cpp2rust D3D10_SVT_VOID                      = d3d::SVT::Void</span>
+<span class="comment">//#cpp2rust D3D10_SVT_BOOL                      = d3d::SVT::Bool</span>
+<span class="comment">//#cpp2rust D3D10_SVT_INT                       = d3d::SVT::Int</span>
+<span class="comment">//#cpp2rust D3D10_SVT_FLOAT                     = d3d::SVT::Float</span>
+<span class="comment">//#cpp2rust D3D10_SVT_STRING                    = d3d::SVT::String</span>
+<span class="comment">//#cpp2rust D3D10_SVT_TEXTURE                   = d3d::SVT::Texture</span>
+<span class="comment">//#cpp2rust D3D10_SVT_TEXTURE1D                 = d3d::SVT::Texture1D</span>
+<span class="comment">//#cpp2rust D3D10_SVT_TEXTURE2D                 = d3d::SVT::Texture2D</span>
+<span class="comment">//#cpp2rust D3D10_SVT_TEXTURE3D                 = d3d::SVT::Texture3D</span>
+<span class="comment">//#cpp2rust D3D10_SVT_TEXTURECUBE               = d3d::SVT::TextureCube</span>
+<span class="comment">//#cpp2rust D3D10_SVT_SAMPLER                   = d3d::SVT::Sampler</span>
+<span class="comment">//#cpp2rust D3D10_SVT_SAMPLER1D                 = d3d::SVT::Sampler1D</span>
+<span class="comment">//#cpp2rust D3D10_SVT_SAMPLER2D                 = d3d::SVT::Sampler2D</span>
+<span class="comment">//#cpp2rust D3D10_SVT_SAMPLER3D                 = d3d::SVT::Sampler3D</span>
+<span class="comment">//#cpp2rust D3D10_SVT_SAMPLERCUBE               = d3d::SVT::SamplerCube</span>
+<span class="comment">//#cpp2rust D3D10_SVT_PIXELSHADER               = d3d::SVT::PixelShader</span>
+<span class="comment">//#cpp2rust D3D10_SVT_VERTEXSHADER              = d3d::SVT::VertexShader</span>
+<span class="comment">//#cpp2rust D3D10_SVT_PIXELFRAGMENT             = d3d::SVT::PixelFragment</span>
+<span class="comment">//#cpp2rust D3D10_SVT_VERTEXFRAGMENT            = d3d::SVT::VertexFragment</span>
+<span class="comment">//#cpp2rust D3D10_SVT_UINT                      = d3d::SVT::UInt</span>
+<span class="comment">//#cpp2rust D3D10_SVT_UINT8                     = d3d::SVT::UInt8</span>
+<span class="comment">//#cpp2rust D3D10_SVT_GEOMETRYSHADER            = d3d::SVT::GeometryShader</span>
+<span class="comment">//#cpp2rust D3D10_SVT_RASTERIZER                = d3d::SVT::Rasterizer</span>
+<span class="comment">//#cpp2rust D3D10_SVT_DEPTHSTENCIL              = d3d::SVT::DepthStencil</span>
+<span class="comment">//#cpp2rust D3D10_SVT_BLEND                     = d3d::SVT::Blend</span>
+<span class="comment">//#cpp2rust D3D10_SVT_BUFFER                    = d3d::SVT::Buffer</span>
+<span class="comment">//#cpp2rust D3D10_SVT_CBUFFER                   = d3d::SVT::CBuffer</span>
+<span class="comment">//#cpp2rust D3D10_SVT_TBUFFER                   = d3d::SVT::TBuffer</span>
+<span class="comment">//#cpp2rust D3D10_SVT_TEXTURE1DARRAY            = d3d::SVT::Texture1DArray</span>
+<span class="comment">//#cpp2rust D3D10_SVT_TEXTURE2DARRAY            = d3d::SVT::Texture2DArray</span>
+<span class="comment">//#cpp2rust D3D10_SVT_RENDERTARGETVIEW          = d3d::SVT::RenderTargetView</span>
+<span class="comment">//#cpp2rust D3D10_SVT_DEPTHSTENCILVIEW          = d3d::SVT::DepthStencilView</span>
+<span class="comment">//#cpp2rust D3D10_SVT_TEXTURE2DMS               = d3d::SVT::Texture2DMS</span>
+<span class="comment">//#cpp2rust D3D10_SVT_TEXTURE2DMSARRAY          = d3d::SVT::Texture2DMSArray</span>
+<span class="comment">//#cpp2rust D3D10_SVT_TEXTURECUBEARRAY          = d3d::SVT::TextureCubeArray</span>
 
-//#cpp2rust D3D11_SVT_HULLSHADER                = d3d::SVT::HullShader
-//#cpp2rust D3D11_SVT_DOMAINSHADER              = d3d::SVT::DomainShader
-//#cpp2rust D3D11_SVT_INTERFACE_POINTER         = d3d::SVT::InterfacePointer
-//#cpp2rust D3D11_SVT_COMPUTESHADER             = d3d::SVT::ComputeShader
-//#cpp2rust D3D11_SVT_DOUBLE                    = d3d::SVT::Double
-//#cpp2rust D3D11_SVT_RWTEXTURE1D               = d3d::SVT::RWTexture1D
-//#cpp2rust D3D11_SVT_RWTEXTURE1DARRAY          = d3d::SVT::RWTexture1DArray
-//#cpp2rust D3D11_SVT_RWTEXTURE2D               = d3d::SVT::RWTexture2D
-//#cpp2rust D3D11_SVT_RWTEXTURE2DARRAY          = d3d::SVT::RWTexture2DArray
-//#cpp2rust D3D11_SVT_RWTEXTURE3D               = d3d::SVT::RWTexture3D
-//#cpp2rust D3D11_SVT_RWBUFFER                  = d3d::SVT::RWBuffer
-//#cpp2rust D3D11_SVT_BYTEADDRESS_BUFFER        = d3d::SVT::ByteAddressBuffer
-//#cpp2rust D3D11_SVT_RWBYTEADDRESS_BUFFER      = d3d::SVT::RWByteAddressBuffer
-//#cpp2rust D3D11_SVT_STRUCTURED_BUFFER         = d3d::SVT::StructuredBuffer
-//#cpp2rust D3D11_SVT_RWSTRUCTURED_BUFFER       = d3d::SVT::RWStructuredBuffer
-//#cpp2rust D3D11_SVT_APPEND_STRUCTURED_BUFFER  = d3d::SVT::AppendStructuredBuffer
-//#cpp2rust D3D11_SVT_CONSUME_STRUCTURED_BUFFER = d3d::SVT::ConsumeStructuredBuffer
+<span class="comment">//#cpp2rust D3D11_SVT_HULLSHADER                = d3d::SVT::HullShader</span>
+<span class="comment">//#cpp2rust D3D11_SVT_DOMAINSHADER              = d3d::SVT::DomainShader</span>
+<span class="comment">//#cpp2rust D3D11_SVT_INTERFACE_POINTER         = d3d::SVT::InterfacePointer</span>
+<span class="comment">//#cpp2rust D3D11_SVT_COMPUTESHADER             = d3d::SVT::ComputeShader</span>
+<span class="comment">//#cpp2rust D3D11_SVT_DOUBLE                    = d3d::SVT::Double</span>
+<span class="comment">//#cpp2rust D3D11_SVT_RWTEXTURE1D               = d3d::SVT::RWTexture1D</span>
+<span class="comment">//#cpp2rust D3D11_SVT_RWTEXTURE1DARRAY          = d3d::SVT::RWTexture1DArray</span>
+<span class="comment">//#cpp2rust D3D11_SVT_RWTEXTURE2D               = d3d::SVT::RWTexture2D</span>
+<span class="comment">//#cpp2rust D3D11_SVT_RWTEXTURE2DARRAY          = d3d::SVT::RWTexture2DArray</span>
+<span class="comment">//#cpp2rust D3D11_SVT_RWTEXTURE3D               = d3d::SVT::RWTexture3D</span>
+<span class="comment">//#cpp2rust D3D11_SVT_RWBUFFER                  = d3d::SVT::RWBuffer</span>
+<span class="comment">//#cpp2rust D3D11_SVT_BYTEADDRESS_BUFFER        = d3d::SVT::ByteAddressBuffer</span>
+<span class="comment">//#cpp2rust D3D11_SVT_RWBYTEADDRESS_BUFFER      = d3d::SVT::RWByteAddressBuffer</span>
+<span class="comment">//#cpp2rust D3D11_SVT_STRUCTURED_BUFFER         = d3d::SVT::StructuredBuffer</span>
+<span class="comment">//#cpp2rust D3D11_SVT_RWSTRUCTURED_BUFFER       = d3d::SVT::RWStructuredBuffer</span>
+<span class="comment">//#cpp2rust D3D11_SVT_APPEND_STRUCTURED_BUFFER  = d3d::SVT::AppendStructuredBuffer</span>
+<span class="comment">//#cpp2rust D3D11_SVT_CONSUME_STRUCTURED_BUFFER = d3d::SVT::ConsumeStructuredBuffer</span>
 
-// C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\d3dcommon.h
-</span><span class="kw">const </span>D3D_SVT_INT16     : u32 = <span class="number">58</span>;
-<span class="kw">const </span>D3D_SVT_UINT16    : u32 = <span class="number">59</span>;
-<span class="kw">const </span>D3D_SVT_FLOAT16   : u32 = <span class="number">60</span>;
-<span class="kw">const </span>D3D_SVT_INT64     : u32 = <span class="number">61</span>;
-<span class="kw">const </span>D3D_SVT_UINT64    : u32 = <span class="number">62</span>;
+<span class="comment">// C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\um\d3dcommon.h</span>
+<span class="kw">const</span> <span class="ident">D3D_SVT_INT16</span>     : <span class="ident">u32</span> <span class="op">=</span> <span class="number">58</span>;
+<span class="kw">const</span> <span class="ident">D3D_SVT_UINT16</span>    : <span class="ident">u32</span> <span class="op">=</span> <span class="number">59</span>;
+<span class="kw">const</span> <span class="ident">D3D_SVT_FLOAT16</span>   : <span class="ident">u32</span> <span class="op">=</span> <span class="number">60</span>;
+<span class="kw">const</span> <span class="ident">D3D_SVT_INT64</span>     : <span class="ident">u32</span> <span class="op">=</span> <span class="number">61</span>;
+<span class="kw">const</span> <span class="ident">D3D_SVT_UINT64</span>    : <span class="ident">u32</span> <span class="op">=</span> <span class="number">62</span>;
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (b44197abb 2022-09-05)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0 (4b91a6ea7 2022-08-08)" ></div>
+</body></html>

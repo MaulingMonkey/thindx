@@ -1,0 +1,485 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\namespaces\xaudio2_9.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>xaudio2_9.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
+        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../thindx/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
+                                <a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<span id="2">2</span>
+<span id="3">3</span>
+<span id="4">4</span>
+<span id="5">5</span>
+<span id="6">6</span>
+<span id="7">7</span>
+<span id="8">8</span>
+<span id="9">9</span>
+<span id="10">10</span>
+<span id="11">11</span>
+<span id="12">12</span>
+<span id="13">13</span>
+<span id="14">14</span>
+<span id="15">15</span>
+<span id="16">16</span>
+<span id="17">17</span>
+<span id="18">18</span>
+<span id="19">19</span>
+<span id="20">20</span>
+<span id="21">21</span>
+<span id="22">22</span>
+<span id="23">23</span>
+<span id="24">24</span>
+<span id="25">25</span>
+<span id="26">26</span>
+<span id="27">27</span>
+<span id="28">28</span>
+<span id="29">29</span>
+<span id="30">30</span>
+<span id="31">31</span>
+<span id="32">32</span>
+<span id="33">33</span>
+<span id="34">34</span>
+<span id="35">35</span>
+<span id="36">36</span>
+<span id="37">37</span>
+<span id="38">38</span>
+<span id="39">39</span>
+<span id="40">40</span>
+<span id="41">41</span>
+<span id="42">42</span>
+<span id="43">43</span>
+<span id="44">44</span>
+<span id="45">45</span>
+<span id="46">46</span>
+<span id="47">47</span>
+<span id="48">48</span>
+<span id="49">49</span>
+<span id="50">50</span>
+<span id="51">51</span>
+<span id="52">52</span>
+<span id="53">53</span>
+<span id="54">54</span>
+<span id="55">55</span>
+<span id="56">56</span>
+<span id="57">57</span>
+<span id="58">58</span>
+<span id="59">59</span>
+<span id="60">60</span>
+<span id="61">61</span>
+<span id="62">62</span>
+<span id="63">63</span>
+<span id="64">64</span>
+<span id="65">65</span>
+<span id="66">66</span>
+<span id="67">67</span>
+<span id="68">68</span>
+<span id="69">69</span>
+<span id="70">70</span>
+<span id="71">71</span>
+<span id="72">72</span>
+<span id="73">73</span>
+<span id="74">74</span>
+<span id="75">75</span>
+<span id="76">76</span>
+<span id="77">77</span>
+<span id="78">78</span>
+<span id="79">79</span>
+<span id="80">80</span>
+<span id="81">81</span>
+<span id="82">82</span>
+<span id="83">83</span>
+<span id="84">84</span>
+<span id="85">85</span>
+<span id="86">86</span>
+<span id="87">87</span>
+<span id="88">88</span>
+<span id="89">89</span>
+<span id="90">90</span>
+<span id="91">91</span>
+<span id="92">92</span>
+<span id="93">93</span>
+<span id="94">94</span>
+<span id="95">95</span>
+<span id="96">96</span>
+<span id="97">97</span>
+<span id="98">98</span>
+<span id="99">99</span>
+<span id="100">100</span>
+<span id="101">101</span>
+<span id="102">102</span>
+<span id="103">103</span>
+<span id="104">104</span>
+<span id="105">105</span>
+<span id="106">106</span>
+<span id="107">107</span>
+<span id="108">108</span>
+<span id="109">109</span>
+<span id="110">110</span>
+<span id="111">111</span>
+<span id="112">112</span>
+<span id="113">113</span>
+<span id="114">114</span>
+<span id="115">115</span>
+<span id="116">116</span>
+<span id="117">117</span>
+<span id="118">118</span>
+<span id="119">119</span>
+<span id="120">120</span>
+<span id="121">121</span>
+<span id="122">122</span>
+<span id="123">123</span>
+<span id="124">124</span>
+<span id="125">125</span>
+<span id="126">126</span>
+<span id="127">127</span>
+<span id="128">128</span>
+<span id="129">129</span>
+<span id="130">130</span>
+<span id="131">131</span>
+<span id="132">132</span>
+<span id="133">133</span>
+<span id="134">134</span>
+<span id="135">135</span>
+<span id="136">136</span>
+<span id="137">137</span>
+<span id="138">138</span>
+<span id="139">139</span>
+<span id="140">140</span>
+<span id="141">141</span>
+<span id="142">142</span>
+<span id="143">143</span>
+<span id="144">144</span>
+<span id="145">145</span>
+<span id="146">146</span>
+<span id="147">147</span>
+<span id="148">148</span>
+<span id="149">149</span>
+<span id="150">150</span>
+<span id="151">151</span>
+<span id="152">152</span>
+<span id="153">153</span>
+<span id="154">154</span>
+<span id="155">155</span>
+<span id="156">156</span>
+<span id="157">157</span>
+<span id="158">158</span>
+<span id="159">159</span>
+<span id="160">160</span>
+<span id="161">161</span>
+<span id="162">162</span>
+<span id="163">163</span>
+<span id="164">164</span>
+<span id="165">165</span>
+<span id="166">166</span>
+<span id="167">167</span>
+<span id="168">168</span>
+<span id="169">169</span>
+<span id="170">170</span>
+<span id="171">171</span>
+<span id="172">172</span>
+<span id="173">173</span>
+<span id="174">174</span>
+<span id="175">175</span>
+<span id="176">176</span>
+<span id="177">177</span>
+<span id="178">178</span>
+<span id="179">179</span>
+<span id="180">180</span>
+<span id="181">181</span>
+<span id="182">182</span>
+<span id="183">183</span>
+<span id="184">184</span>
+<span id="185">185</span>
+<span id="186">186</span>
+<span id="187">187</span>
+<span id="188">188</span>
+<span id="189">189</span>
+<span id="190">190</span>
+<span id="191">191</span>
+<span id="192">192</span>
+<span id="193">193</span>
+<span id="194">194</span>
+<span id="195">195</span>
+<span id="196">196</span>
+<span id="197">197</span>
+<span id="198">198</span>
+<span id="199">199</span>
+<span id="200">200</span>
+<span id="201">201</span>
+<span id="202">202</span>
+<span id="203">203</span>
+<span id="204">204</span>
+<span id="205">205</span>
+<span id="206">206</span>
+<span id="207">207</span>
+<span id="208">208</span>
+<span id="209">209</span>
+<span id="210">210</span>
+<span id="211">211</span>
+<span id="212">212</span>
+<span id="213">213</span>
+<span id="214">214</span>
+<span id="215">215</span>
+<span id="216">216</span>
+<span id="217">217</span>
+<span id="218">218</span>
+<span id="219">219</span>
+<span id="220">220</span>
+<span id="221">221</span>
+<span id="222">222</span>
+<span id="223">223</span>
+<span id="224">224</span>
+<span id="225">225</span>
+<span id="226">226</span>
+<span id="227">227</span>
+<span id="228">228</span>
+<span id="229">229</span>
+<span id="230">230</span>
+<span id="231">231</span>
+<span id="232">232</span>
+<span id="233">233</span>
+<span id="234">234</span>
+<span id="235">235</span>
+<span id="236">236</span>
+<span id="237">237</span>
+<span id="238">238</span>
+</pre><pre class="rust"><code><span class="doccomment">//! \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/xaudio2/xaudio2-apis-portal)\]</span>
+<span class="doccomment">//! Audio APIs</span>
+<span class="doccomment">//! (Windows 10+, or Windows 7 SP1+ [via Redist](https://learn.microsoft.com/en-us/windows/win32/xaudio2/xaudio2-redistributable))</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! Introduced with the [Windows 10 SDK](https://developer.microsoft.com/en-us/windows/downloads/sdk-archive/#windows-10)</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! ### References</span>
+<span class="doccomment">//! *   [XAudio2 Versions: XAudio 2.9 (Windows 10 and redistributable for Windows 7 and Windows 8.x)](https://learn.microsoft.com/en-us/windows/win32/xaudio2/xaudio2-versions#xaudio-29-windows-10-and-redistributable-for-windows-7-and-windows-8x)</span>
+<span class="doccomment">//! *   [Developer guide for redistributable version of XAudio 2.9](https://learn.microsoft.com/en-us/windows/win32/xaudio2/xaudio2-redistributable)</span>
+
+<span class="attribute">#![<span class="ident">allow</span>(<span class="ident">missing_docs</span>)]</span>
+<span class="attribute">#![<span class="ident">allow</span>(<span class="ident">non_camel_case_types</span>)]</span>
+<span class="attribute">#![<span class="ident">allow</span>(<span class="ident">non_snake_case</span>)]</span>
+<span class="attribute">#![<span class="ident">allow</span>(<span class="ident">non_upper_case_globals</span>)]</span>
+
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">abistr</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">winapi::um::unknwnbase</span>::{<span class="ident">IUnknown</span>, <span class="ident">IUnknownVtbl</span>};
+
+
+
+
+
+
+
+<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">DLL</span>       : <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span>              <span class="op">=</span>           <span class="string">&quot;xaudio2_9.dll&quot;</span>;    <span class="comment">// C++ changes type based on `UNICODE`, but for Rust I think &amp;str makes more sense.</span>
+<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">DLL_A</span>     : <span class="ident">CStrNonNull</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span>, <span class="ident">u8</span> <span class="op">&gt;</span> <span class="op">=</span> <span class="macro">cstr8!</span>(   <span class="string">&quot;xaudio2_9.dll&quot;</span>);
+<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">DLL_W</span>     : <span class="ident">CStrNonNull</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span>, <span class="ident">u16</span><span class="op">&gt;</span> <span class="op">=</span> <span class="macro">cstr16!</span>(  <span class="string">&quot;xaudio2_9.dll&quot;</span>);
+
+<span class="comment">// Debug versions</span>
+<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">D_DLL</span>     : <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span>              <span class="op">=</span>           <span class="string">&quot;xaudio2_9d.dll&quot;</span>;   <span class="comment">// C++ changes type based on `UNICODE`, but for Rust I think &amp;str makes more sense.</span>
+<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">D_DLL_A</span>   : <span class="ident">CStrNonNull</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span>, <span class="ident">u8</span> <span class="op">&gt;</span> <span class="op">=</span> <span class="macro">cstr8!</span>(   <span class="string">&quot;xaudio2_9d.dll&quot;</span>);
+<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">D_DLL_W</span>   : <span class="ident">CStrNonNull</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span>, <span class="ident">u16</span><span class="op">&gt;</span> <span class="op">=</span> <span class="macro">cstr16!</span>(  <span class="string">&quot;xaudio2_9d.dll&quot;</span>);
+
+<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">IID_IXAudio2</span>          : <span class="ident">Guid</span> <span class="op">=</span> <span class="macro">guid!</span>(<span class="string">&quot;2B02E3CF-2E0B-4ec3-BE45-1B2A3FE7210D&quot;</span>);
+<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">IID_IXAudio2Extension</span> : <span class="ident">Guid</span> <span class="op">=</span> <span class="macro">guid!</span>(<span class="string">&quot;84ac29bb-d619-44d2-b197-e4acf7df3ed6&quot;</span>);
+
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="kw">super</span>::xaudio2_8</span>::{
+    <span class="ident">MAX_BUFFER_BYTES</span>,
+    <span class="ident">MAX_QUEUED_BUFFERS</span>,
+    <span class="ident">MAX_BUFFERS_SYSTEM</span>,
+    <span class="ident">MAX_AUDIO_CHANNELS</span>,
+    <span class="ident">MIN_SAMPLE_RATE</span>,
+    <span class="ident">MAX_SAMPLE_RATE</span>,
+    <span class="ident">MAX_VOLUME_LEVEL</span>,
+    <span class="ident">MIN_FREQ_RATIO</span>,
+    <span class="ident">MAX_FREQ_RATIO</span>,
+    <span class="ident">DEFAULT_FREQ_RATIO</span>,
+    <span class="ident">MAX_FILTER_ONEOVERQ</span>,
+    <span class="ident">MAX_FILTER_FREQUENCY</span>,
+    <span class="ident">MAX_LOOP_COUNT</span>,
+    <span class="ident">MAX_INSTANCES</span>,
+};
+
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="kw">super</span>::xaudio2_8</span>::{
+    <span class="ident">MAX_RATIO_TIMES_RATE_XMA_MONO</span>,
+    <span class="ident">MAX_RATIO_TIMES_RATE_XMA_MULTICHANNEL</span>,
+};
+
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="kw">super</span>::xaudio2_8</span>::{
+    <span class="ident">COMMIT_NOW</span>,
+    <span class="ident">COMMIT_ALL</span>,
+    <span class="ident">INVALID_OPSET</span>,
+    <span class="ident">NO_LOOP_REGION</span>,
+    <span class="ident">LOOP_INFINITE</span>,
+    <span class="ident">DEFAULT_CHANNELS</span>,
+    <span class="ident">DEFAULT_SAMPLERATE</span>,
+};
+
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="kw">super</span>::xaudio2_8</span>::{
+    <span class="ident">VOICE_NOPITCH</span>,
+    <span class="ident">VOICE_NOSRC</span>,
+    <span class="ident">VOICE_USEFILTER</span>,
+    <span class="ident">PLAY_TAILS</span>,
+    <span class="ident">END_OF_STREAM</span>,
+    <span class="ident">SEND_USEFILTER</span>,
+    <span class="ident">VOICE_NOSAMPLESPLAYED</span>,
+};
+
+<span class="doccomment">/// Used in XAudio2Create</span>
+<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">DEBUG_ENGINE</span> : <span class="ident">u32</span> <span class="op">=</span> <span class="number">0x0001</span>;
+
+<span class="doccomment">/// Used in XAudio2Create to force the engine to Stop when no source voices are Started, and Start when a voice is Started</span>
+<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">STOP_ENGINE_WHEN_IDLE</span> : <span class="ident">u32</span> <span class="op">=</span> <span class="number">0x2000</span>;
+
+<span class="doccomment">/// Used in XAudio2Create to specify nondefault processing quantum of 21.33 ms (1024 samples at 48KHz)</span>
+<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">_1024_QUANTUM</span> : <span class="ident">u32</span> <span class="op">=</span> <span class="number">0x8000</span>;
+
+<span class="doccomment">/// Used in CreateMasteringVoice to create a virtual audio client</span>
+<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">NO_VIRTUAL_AUDIO_CLIENT</span> : <span class="ident">u32</span> <span class="op">=</span> <span class="number">0x10000</span>;
+
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="kw">super</span>::xaudio2_8</span>::{
+    <span class="ident">DEFAULT_FILTER_TYPE</span>,
+    <span class="ident">DEFAULT_FILTER_FREQUENCY</span>,
+    <span class="ident">DEFAULT_FILTER_ONEOVERQ</span>,
+};
+
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="kw">super</span>::xaudio2_8</span>::{
+    <span class="ident">QUANTUM_NUMERATOR</span>,
+    <span class="ident">QUANTUM_DENOMINATOR</span>,
+    <span class="ident">QUANTUM_MS</span>,
+};
+
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="kw">super</span>::xaudio2_8</span>::{
+    <span class="ident">FACILITY</span>,
+    <span class="ident">E_INVALID_CALL</span>,
+    <span class="ident">E_XMA_DECODER_ERROR</span>,
+    <span class="ident">E_XAPO_CREATION_FAILED</span>,
+    <span class="ident">E_DEVICE_INVALIDATED</span>,
+};
+
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="kw">super</span>::xaudio2_8</span>::{
+    <span class="ident">WINDOWS_PROCESSOR_SPECIFIER</span>,
+    <span class="ident">PROCESSOR</span>,
+    <span class="ident">Processor1</span>,
+    <span class="ident">Processor2</span>,
+    <span class="ident">Processor3</span>,
+    <span class="ident">Processor4</span>,
+    <span class="ident">Processor5</span>,
+    <span class="ident">Processor6</span>,
+    <span class="ident">Processor7</span>,
+    <span class="ident">Processor8</span>,
+    <span class="ident">Processor9</span>,
+    <span class="ident">Processor10</span>,
+    <span class="ident">Processor11</span>,
+    <span class="ident">Processor12</span>,
+    <span class="ident">Processor13</span>,
+    <span class="ident">Processor14</span>,
+    <span class="ident">Processor15</span>,
+    <span class="ident">Processor16</span>,
+    <span class="ident">Processor17</span>,
+    <span class="ident">Processor18</span>,
+    <span class="ident">Processor19</span>,
+    <span class="ident">Processor20</span>,
+    <span class="ident">Processor21</span>,
+    <span class="ident">Processor22</span>,
+    <span class="ident">Processor23</span>,
+    <span class="ident">Processor24</span>,
+    <span class="ident">Processor25</span>,
+    <span class="ident">Processor26</span>,
+    <span class="ident">Processor27</span>,
+    <span class="ident">Processor28</span>,
+    <span class="ident">Processor29</span>,
+    <span class="ident">Processor30</span>,
+    <span class="ident">Processor31</span>,
+    <span class="ident">Processor32</span>,
+    <span class="ident">ANY_PROCESSOR</span>,
+    <span class="comment">//DEFAULT_PROCESSOR,</span>
+};
+
+<span class="doccomment">/// This definition is included for backwards compatibilty.</span>
+<span class="doccomment">/// Implementations targeting Games and WIN10_19H1 and later, should use [`USE_DEFAULT_PROCESSOR`] instead to let XAudio2 select the appropriate default processor for the hardware platform.</span>
+<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">DEFAULT_PROCESSOR</span>     : <span class="ident">WINDOWS_PROCESSOR_SPECIFIER</span> <span class="op">=</span> <span class="ident"><span class="kw">super</span>::xaudio2_8::DEFAULT_PROCESSOR</span>;
+
+<span class="doccomment">/// This value indicates that XAudio2 will choose the default processor by itself.</span>
+<span class="doccomment">/// The actual value chosen may vary depending on the hardware platform.</span>
+<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">USE_DEFAULT_PROCESSOR</span> : <span class="ident">WINDOWS_PROCESSOR_SPECIFIER</span> <span class="op">=</span> <span class="ident">WINDOWS_PROCESSOR_SPECIFIER</span>(<span class="number">0</span>);
+
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="kw">super</span>::xaudio2_8</span>::{
+    <span class="ident">VOICE_DETAILS</span>,
+    <span class="ident">SEND_DESCRIPTOR</span>,
+    <span class="ident">VOICE_SENDS</span>,
+    <span class="ident">EFFECT_DESCRIPTOR</span>,
+    <span class="ident">EFFECT_CHAIN</span>,
+};
+
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="kw">super</span>::xaudio2_8</span>::{
+    <span class="ident">FILTER_TYPE</span>,
+    <span class="ident">LowPassFilter</span>,
+    <span class="ident">BandPassFilter</span>,
+    <span class="ident">HighPassFilter</span>,
+    <span class="ident">NotchFilter</span>,
+    <span class="ident">LowPassOnePoleFilter</span>,
+    <span class="ident">HighPassOnePoleFilter</span>,
+};
+
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="kw">super</span>::xaudio2_8</span>::{
+    <span class="ident">FILTER_PARAMETERS</span>,
+    <span class="ident">BUFFER</span>,
+    <span class="ident">BUFFER_WMA</span>,
+    <span class="ident">VOICE_STATE</span>,
+    <span class="ident">PERFORMANCE_DATA</span>,
+    <span class="ident">DEBUG_CONFIGURATION</span>,
+};
+
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="kw">super</span>::xaudio2_8</span>::{
+    <span class="ident">LOG_ERRORS</span>,
+    <span class="ident">LOG_WARNINGS</span>,
+    <span class="ident">LOG_INFO</span>,
+    <span class="ident">LOG_DETAIL</span>,
+    <span class="ident">LOG_API_CALLS</span>,
+    <span class="ident">LOG_FUNC_CALLS</span>,
+    <span class="ident">LOG_TIMING</span>,
+    <span class="ident">LOG_LOCKS</span>,
+    <span class="ident">LOG_MEMORY</span>,
+    <span class="ident">LOG_STREAMING</span>,
+};
+
+<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span> <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">use</span> <span class="ident"><span class="kw">super</span>::xaudio2_8</span>::{
+    <span class="ident">IXAudio2</span>,
+    <span class="ident">IXAudio2Vtbl</span>,
+    <span class="ident">IXAudio2Voice</span>,
+    <span class="ident">IXAudio2VoiceVtbl</span>,
+    <span class="ident">IXAudio2SourceVoice</span>,
+    <span class="ident">IXAudio2SourceVoiceVtbl</span>,
+    <span class="ident">IXAudio2SubmixVoice</span>,
+    <span class="ident">IXAudio2SubmixVoiceVtbl</span>,
+    <span class="ident">IXAudio2MasteringVoice</span>,
+    <span class="ident">IXAudio2MasteringVoiceVtbl</span>,
+    <span class="ident">IXAudio2EngineCallback</span>,
+    <span class="ident">IXAudio2EngineCallbackVtbl</span>,
+    <span class="ident">IXAudio2VoiceCallback</span>,
+    <span class="ident">IXAudio2VoiceCallbackVtbl</span>,
+};
+
+
+
+<span class="macro">interfaces!</span> {
+    <span class="doccomment">/// This interface extends IXAudio2 with additional functionality.</span>
+    <span class="doccomment">/// Use IXAudio2::QueryInterface to obtain a pointer to this interface.</span>
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="ident">interface</span> <span class="ident">IXAudio2Extension</span>(<span class="ident">IXAudio2ExtensionVtbl</span>) =&gt; <span class="kw unsafe">unsafe</span> <span class="ident">IUnknown</span>(<span class="ident">IUnknownVtbl</span>) {
+        <span class="doccomment">/// Returns the processing quantum</span>
+        <span class="doccomment">/// quantumMilliseconds = (1000.0f * quantumNumerator / quantumDenominator)</span>
+        <span class="doccomment">///</span>
+        <span class="doccomment">/// ### Arguments</span>
+        <span class="doccomment">/// * `quantumNumerator`    - Quantum numerator</span>
+        <span class="doccomment">/// * `quantumDenominator`  - Quantum denominator</span>
+        <span class="kw">pub</span> <span class="kw unsafe">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;system&quot;</span> <span class="kw">fn</span> <span class="ident">GetProcessingQuantum</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">quantumNumerator</span>: <span class="kw-2">*mut</span> <span class="ident">u32</span>, <span class="ident">quantumDenominator</span>: <span class="kw-2">*mut</span> <span class="ident">u32</span>) -&gt; ();
+
+        <span class="doccomment">/// Returns the number of the processor used by XAudio2</span>
+        <span class="doccomment">///</span>
+        <span class="doccomment">/// ### Arguments</span>
+        <span class="doccomment">/// * `processor`           - Non-zero Processor number</span>
+        <span class="kw">pub</span> <span class="kw unsafe">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;system&quot;</span> <span class="kw">fn</span> <span class="ident">GetProcessor</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">processor</span>: <span class="kw-2">*mut</span> <span class="ident">PROCESSOR</span>) -&gt; ();
+    }
+    <span class="comment">//#cpp2rust IXAudio2Extension       = xaudio2_9::IXAudio2Extension</span>
+    <span class="comment">//#cpp2rust IXAudio2ExtensionVtbl   = xaudio2_9::IXAudio2ExtensionVtbl</span>
+}
+</code></pre></div>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0 (4b91a6ea7 2022-08-08)" ></div>
+</body></html>

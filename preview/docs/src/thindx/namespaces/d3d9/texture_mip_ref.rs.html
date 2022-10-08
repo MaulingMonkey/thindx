@@ -1,4 +1,10 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\namespaces\d3d9\texture_mip_ref.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>texture_mip_ref.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../normalize.css"><link rel="stylesheet" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../dark.css" disabled><link rel="stylesheet" href="../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../storage.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../thindx/index.html"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\namespaces\d3d9\texture_mip_ref.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>texture_mip_ref.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../storage.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div>
+        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../thindx/index.html"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
+                                <a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -50,57 +56,58 @@
 <span id="50">50</span>
 <span id="51">51</span>
 <span id="52">52</span>
-</pre><pre class="rust"><code><span class="kw">use </span><span class="kw">crate</span>::d3d9::IDirect3DDevice9Ext;
+</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::d3d9::IDirect3DDevice9Ext</span>;
 
 
 
-<span class="doccomment">/// Reference a 2-dimensional array of pixels for use with e.g. [IDirect3DDevice9Ext::create_texture_from].
-</span><span class="attribute">#[derive(Clone, Copy)]
-</span><span class="kw">pub struct </span>TextureMipRef&lt;<span class="lifetime">&#39;p</span>&gt; {
-    <span class="doccomment">/// Raw pixel bytes.  Perhaps sourced from [bytemuck::bytes_of]\(your_typed_pixels\)
-    </span><span class="kw">pub </span>data:           <span class="kw-2">&amp;</span><span class="lifetime">&#39;p </span>[u8], <span class="comment">// good use case for bytemuck::bytes_of(your_pixels_slice)
+<span class="doccomment">/// Reference a 2-dimensional array of pixels for use with e.g. [IDirect3DDevice9Ext::create_texture_from].</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>)]</span>
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">TextureMipRef</span><span class="op">&lt;</span><span class="lifetime">&#39;p</span><span class="op">&gt;</span> {
+    <span class="doccomment">/// Raw pixel bytes.  Perhaps sourced from [bytemuck::bytes_of]\(your_typed_pixels\)</span>
+    <span class="kw">pub</span> <span class="ident">data</span>:           <span class="kw-2">&amp;</span><span class="lifetime">&#39;p</span> [<span class="ident">u8</span>], <span class="comment">// good use case for bytemuck::bytes_of(your_pixels_slice)</span>
 
-    </span><span class="doccomment">/// The number of **bytes** between rows of pixel blocks.
-    ///
-    /// For most formats, this is equivalent to rows of pixels, but for DXT formats, this will be for rows of 4x4 pixel blocks.
-    </span><span class="kw">pub </span>stride:         usize,
+    <span class="doccomment">/// The number of **bytes** between rows of pixel blocks.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// For most formats, this is equivalent to rows of pixels, but for DXT formats, this will be for rows of 4x4 pixel blocks.</span>
+    <span class="kw">pub</span> <span class="ident">stride</span>:         <span class="ident">usize</span>,
 }
 
-<span class="doccomment">/// Reference a 3-dimensional array of pixels for use with e.g. [IDirect3DDevice9Ext::create_volume_texture_from].
-</span><span class="attribute">#[derive(Clone, Copy)]
-</span><span class="kw">pub struct </span>VolumeTextureMipRef&lt;<span class="lifetime">&#39;p</span>&gt; {
-    <span class="doccomment">/// Raw pixel bytes.  Perhaps sourced from [bytemuck::bytes_of]\(your_typed_pixels\)
-    </span><span class="kw">pub </span>data:           <span class="kw-2">&amp;</span><span class="lifetime">&#39;p </span>[u8],
+<span class="doccomment">/// Reference a 3-dimensional array of pixels for use with e.g. [IDirect3DDevice9Ext::create_volume_texture_from].</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>)]</span>
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">VolumeTextureMipRef</span><span class="op">&lt;</span><span class="lifetime">&#39;p</span><span class="op">&gt;</span> {
+    <span class="doccomment">/// Raw pixel bytes.  Perhaps sourced from [bytemuck::bytes_of]\(your_typed_pixels\)</span>
+    <span class="kw">pub</span> <span class="ident">data</span>:           <span class="kw-2">&amp;</span><span class="lifetime">&#39;p</span> [<span class="ident">u8</span>],
 
-    <span class="doccomment">/// The number of **bytes** between rows of pixel blocks.
-    ///
-    /// For most formats, this is equivalent to rows of pixels, but for DXT formats, this will be for rows of 4x4 pixel blocks.
-    </span><span class="kw">pub </span>stride_row:     usize,
+    <span class="doccomment">/// The number of **bytes** between rows of pixel blocks.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// For most formats, this is equivalent to rows of pixels, but for DXT formats, this will be for rows of 4x4 pixel blocks.</span>
+    <span class="kw">pub</span> <span class="ident">stride_row</span>:     <span class="ident">usize</span>,
 
-    <span class="doccomment">/// The number of **bytes** between 2d planes / slices of pixels.
-    </span><span class="kw">pub </span>stride_slice:   usize,
+    <span class="doccomment">/// The number of **bytes** between 2d planes / slices of pixels.</span>
+    <span class="kw">pub</span> <span class="ident">stride_slice</span>:   <span class="ident">usize</span>,
 }
 
-<span class="doccomment">/// Reference 6x[TextureMipRef]s to form cubemap dara for use with e.g. [IDirect3DDevice9Ext::create_cube_texture_from].
-</span><span class="attribute">#[derive(Clone)] </span><span class="comment">// a bit big and pointless to Copy
-</span><span class="kw">pub struct </span>CubeTextureMipRef&lt;<span class="lifetime">&#39;p</span>&gt; {
-    <span class="doccomment">/// The cubemap face covering the +X direction
-    </span><span class="kw">pub </span>pos_x: TextureMipRef&lt;<span class="lifetime">&#39;p</span>&gt;,
+<span class="doccomment">/// Reference 6x[TextureMipRef]s to form cubemap dara for use with e.g. [IDirect3DDevice9Ext::create_cube_texture_from].</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>)]</span> <span class="comment">// a bit big and pointless to Copy</span>
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">CubeTextureMipRef</span><span class="op">&lt;</span><span class="lifetime">&#39;p</span><span class="op">&gt;</span> {
+    <span class="doccomment">/// The cubemap face covering the +X direction</span>
+    <span class="kw">pub</span> <span class="ident">pos_x</span>: <span class="ident">TextureMipRef</span><span class="op">&lt;</span><span class="lifetime">&#39;p</span><span class="op">&gt;</span>,
 
-    <span class="doccomment">/// The cubemap face covering the -X direction
-    </span><span class="kw">pub </span>neg_x: TextureMipRef&lt;<span class="lifetime">&#39;p</span>&gt;,
+    <span class="doccomment">/// The cubemap face covering the -X direction</span>
+    <span class="kw">pub</span> <span class="ident">neg_x</span>: <span class="ident">TextureMipRef</span><span class="op">&lt;</span><span class="lifetime">&#39;p</span><span class="op">&gt;</span>,
 
-    <span class="doccomment">/// The cubemap face covering the +Y direction
-    </span><span class="kw">pub </span>pos_y: TextureMipRef&lt;<span class="lifetime">&#39;p</span>&gt;,
+    <span class="doccomment">/// The cubemap face covering the +Y direction</span>
+    <span class="kw">pub</span> <span class="ident">pos_y</span>: <span class="ident">TextureMipRef</span><span class="op">&lt;</span><span class="lifetime">&#39;p</span><span class="op">&gt;</span>,
 
-    <span class="doccomment">/// The cubemap face covering the -Y direction
-    </span><span class="kw">pub </span>neg_y: TextureMipRef&lt;<span class="lifetime">&#39;p</span>&gt;,
+    <span class="doccomment">/// The cubemap face covering the -Y direction</span>
+    <span class="kw">pub</span> <span class="ident">neg_y</span>: <span class="ident">TextureMipRef</span><span class="op">&lt;</span><span class="lifetime">&#39;p</span><span class="op">&gt;</span>,
 
-    <span class="doccomment">/// The cubemap face covering the +Z direction
-    </span><span class="kw">pub </span>pos_z: TextureMipRef&lt;<span class="lifetime">&#39;p</span>&gt;,
+    <span class="doccomment">/// The cubemap face covering the +Z direction</span>
+    <span class="kw">pub</span> <span class="ident">pos_z</span>: <span class="ident">TextureMipRef</span><span class="op">&lt;</span><span class="lifetime">&#39;p</span><span class="op">&gt;</span>,
 
-    <span class="doccomment">/// The cubemap face covering the -Z direction
-    </span><span class="kw">pub </span>neg_z: TextureMipRef&lt;<span class="lifetime">&#39;p</span>&gt;,
+    <span class="doccomment">/// The cubemap face covering the -Z direction</span>
+    <span class="kw">pub</span> <span class="ident">neg_z</span>: <span class="ident">TextureMipRef</span><span class="op">&lt;</span><span class="lifetime">&#39;p</span><span class="op">&gt;</span>,
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (b44197abb 2022-09-05)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0 (4b91a6ea7 2022-08-08)" ></div>
+</body></html>

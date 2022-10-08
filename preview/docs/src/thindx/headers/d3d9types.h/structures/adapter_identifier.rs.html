@@ -1,4 +1,10 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3d9types.h\structures\adapter_identifier.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>adapter_identifier.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../../normalize.css"><link rel="stylesheet" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../../dark.css" disabled><link rel="stylesheet" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3d9types.h\structures\adapter_identifier.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>adapter_identifier.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div>
+        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
+                                <a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -161,168 +167,169 @@
 <span id="161">161</span>
 <span id="162">162</span>
 <span id="163">163</span>
-</pre><pre class="rust"><code><span class="kw">use </span><span class="kw">crate</span>::ctypes::<span class="kw-2">*</span>;
-<span class="kw">use </span><span class="kw">crate</span>::Guid;
+</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::ctypes</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::Guid</span>;
 
-<span class="kw">use </span>bytemuck::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">bytemuck</span>::<span class="kw-2">*</span>;
 
-<span class="kw">use </span>winapi::shared::d3d9types::D3DADAPTER_IDENTIFIER9;
+<span class="kw">use</span> <span class="ident">winapi::shared::d3d9types::D3DADAPTER_IDENTIFIER9</span>;
 
-<span class="kw">use </span>std::borrow::Cow;
-<span class="kw">use </span>std::fmt::{<span class="self">self</span>, Debug, Formatter, UpperHex};
+<span class="kw">use</span> <span class="ident">std::borrow::Cow</span>;
+<span class="kw">use</span> <span class="ident">std::fmt</span>::{<span class="self">self</span>, <span class="ident">Debug</span>, <span class="ident">Formatter</span>, <span class="ident">UpperHex</span>};
 
 
 
-<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dadapter-identifier9)\]
-/// D3DADAPTER_IDENTIFIER9
-///
-/// Contains various information about an adapter
-</span><span class="attribute">#[derive(Clone, Copy, Default)]
-#[derive(Zeroable)] </span><span class="comment">// !Pod: trailing padding on x64
-</span><span class="attribute">#[repr(C)] </span><span class="kw">pub struct </span>AdapterIdentifier {
-    <span class="doccomment">/// Used for presentation to the user. This should not be used to identify particular drivers, because many different strings might be associated with the same device and driver from different vendors.
-    </span><span class="kw">pub </span>driver:             abistr::CStrBuf&lt;u8, <span class="number">512</span>&gt;,
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dadapter-identifier9)\]</span>
+<span class="doccomment">/// D3DADAPTER_IDENTIFIER9</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Contains various information about an adapter</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">Default</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Zeroable</span>)]</span> <span class="comment">// !Pod: trailing padding on x64</span>
+<span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span> <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">AdapterIdentifier</span> {
+    <span class="doccomment">/// Used for presentation to the user. This should not be used to identify particular drivers, because many different strings might be associated with the same device and driver from different vendors.</span>
+    <span class="kw">pub</span> <span class="ident">driver</span>:             <span class="ident">abistr::CStrBuf</span><span class="op">&lt;</span><span class="ident">u8</span>, <span class="number">512</span><span class="op">&gt;</span>,
 
-    <span class="doccomment">/// Used for presentation to the user.
-    </span><span class="kw">pub </span>description:        abistr::CStrBuf&lt;u8, <span class="number">512</span>&gt;,
+    <span class="doccomment">/// Used for presentation to the user.</span>
+    <span class="kw">pub</span> <span class="ident">description</span>:        <span class="ident">abistr::CStrBuf</span><span class="op">&lt;</span><span class="ident">u8</span>, <span class="number">512</span><span class="op">&gt;</span>,
 
-    <span class="doccomment">/// Device name for GDI.
-    </span><span class="kw">pub </span>device_name:        abistr::CStrBuf&lt;u8, <span class="number">32</span>&gt;,
+    <span class="doccomment">/// Device name for GDI.</span>
+    <span class="kw">pub</span> <span class="ident">device_name</span>:        <span class="ident">abistr::CStrBuf</span><span class="op">&lt;</span><span class="ident">u8</span>, <span class="number">32</span><span class="op">&gt;</span>,
 
-    <span class="doccomment">/// Identify the version of the Direct3D driver.
-    /// It is legal to do less than and greater than comparisons on the 64-bit signed integer value.
-    /// However, exercise caution if you use this element to identify problematic drivers.
-    /// Instead, you should use DeviceIdentifier.
-    </span><span class="kw">pub </span>driver_version:     Pack4OnX86&lt;i64&gt;,
+    <span class="doccomment">/// Identify the version of the Direct3D driver.</span>
+    <span class="doccomment">/// It is legal to do less than and greater than comparisons on the 64-bit signed integer value.</span>
+    <span class="doccomment">/// However, exercise caution if you use this element to identify problematic drivers.</span>
+    <span class="doccomment">/// Instead, you should use DeviceIdentifier.</span>
+    <span class="kw">pub</span> <span class="ident">driver_version</span>:     <span class="ident">Pack4OnX86</span><span class="op">&lt;</span><span class="ident">i64</span><span class="op">&gt;</span>,
 
-    <span class="doccomment">/// Can be used to help identify a particular chip set.
-    /// Query this member to identify the manufacturer.
-    /// The value can be zero if unknown.
-    </span><span class="kw">pub </span>vendor_id:          u32,
+    <span class="doccomment">/// Can be used to help identify a particular chip set.</span>
+    <span class="doccomment">/// Query this member to identify the manufacturer.</span>
+    <span class="doccomment">/// The value can be zero if unknown.</span>
+    <span class="kw">pub</span> <span class="ident">vendor_id</span>:          <span class="ident">u32</span>,
 
-    <span class="doccomment">/// Can be used to help identify a particular chip set.
-    /// Query this member to identify the type of chip set.
-    /// The value can be zero if unknown.
-    </span><span class="kw">pub </span>device_id:          u32,
+    <span class="doccomment">/// Can be used to help identify a particular chip set.</span>
+    <span class="doccomment">/// Query this member to identify the type of chip set.</span>
+    <span class="doccomment">/// The value can be zero if unknown.</span>
+    <span class="kw">pub</span> <span class="ident">device_id</span>:          <span class="ident">u32</span>,
 
-    <span class="doccomment">/// Can be used to help identify a particular chip set.
-    /// Query this member to identify the subsystem, typically the particular board.
-    /// The value can be zero if unknown.
-    </span><span class="kw">pub </span>sub_sys_id:         u32,
+    <span class="doccomment">/// Can be used to help identify a particular chip set.</span>
+    <span class="doccomment">/// Query this member to identify the subsystem, typically the particular board.</span>
+    <span class="doccomment">/// The value can be zero if unknown.</span>
+    <span class="kw">pub</span> <span class="ident">sub_sys_id</span>:         <span class="ident">u32</span>,
 
-    <span class="doccomment">/// Can be used to help identify a particular chip set.
-    /// Query this member to identify the revision level of the chip set.
-    /// The value can be zero if unknown.
-    </span><span class="kw">pub </span>revision:           u32,
+    <span class="doccomment">/// Can be used to help identify a particular chip set.</span>
+    <span class="doccomment">/// Query this member to identify the revision level of the chip set.</span>
+    <span class="doccomment">/// The value can be zero if unknown.</span>
+    <span class="kw">pub</span> <span class="ident">revision</span>:           <span class="ident">u32</span>,
 
-    <span class="doccomment">/// Can be queried to check changes in the driver and chip set.
-    /// This GUID is a unique identifier for the driver and chip set pair.
-    /// Query this member to track changes to the driver and chip set in order to generate a new profile for the graphics subsystem.
-    /// DeviceIdentifier can also be used to identify particular problematic drivers.
-    </span><span class="kw">pub </span>device_identifier:  Guid,
+    <span class="doccomment">/// Can be queried to check changes in the driver and chip set.</span>
+    <span class="doccomment">/// This GUID is a unique identifier for the driver and chip set pair.</span>
+    <span class="doccomment">/// Query this member to track changes to the driver and chip set in order to generate a new profile for the graphics subsystem.</span>
+    <span class="doccomment">/// DeviceIdentifier can also be used to identify particular problematic drivers.</span>
+    <span class="kw">pub</span> <span class="ident">device_identifier</span>:  <span class="ident">Guid</span>,
 
-    <span class="doccomment">/// Used to determine the Windows Hardware Quality Labs (WHQL) validation level for this driver and device pair.
-    /// The DWORD is a packed date structure defining the date of the release of the most recent WHQL test passed by the driver.
-    /// It is legal to perform &lt; and &gt; operations on this value.
-    /// The following illustrates the date format:
-    ///
-    /// | Bits  | Description |
-    /// | -----:| ----------- |
-    /// | 31-16 | The year, a decimal number from 1999 upwards.
-    /// |  15-8 | The month, a decimal number from 1 to 12.
-    /// |   7-0 | The day, a decimal number from 1 to 31.
-    ///
-    /// The following values are also used:
-    ///
-    /// | Value | Description |
-    /// | -----:| ----------- |
-    /// |     0 | Not certified.
-    /// |     1 | WHQL validated, but no date information is available.
-    </span><span class="kw">pub </span>whql_level: u32,
+    <span class="doccomment">/// Used to determine the Windows Hardware Quality Labs (WHQL) validation level for this driver and device pair.</span>
+    <span class="doccomment">/// The DWORD is a packed date structure defining the date of the release of the most recent WHQL test passed by the driver.</span>
+    <span class="doccomment">/// It is legal to perform &lt; and &gt; operations on this value.</span>
+    <span class="doccomment">/// The following illustrates the date format:</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// | Bits  | Description |</span>
+    <span class="doccomment">/// | -----:| ----------- |</span>
+    <span class="doccomment">/// | 31-16 | The year, a decimal number from 1999 upwards.</span>
+    <span class="doccomment">/// |  15-8 | The month, a decimal number from 1 to 12.</span>
+    <span class="doccomment">/// |   7-0 | The day, a decimal number from 1 to 31.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// The following values are also used:</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// | Value | Description |</span>
+    <span class="doccomment">/// | -----:| ----------- |</span>
+    <span class="doccomment">/// |     0 | Not certified.</span>
+    <span class="doccomment">/// |     1 | WHQL validated, but no date information is available.</span>
+    <span class="kw">pub</span> <span class="ident">whql_level</span>: <span class="ident">u32</span>,
 
-    <span class="comment">// 32 bits of implicit trailing padding on 64-bit
-</span>}
-
-<span class="kw">impl </span>AdapterIdentifier {
-    <span class="doccomment">/// Used for presentation to the user. This should not be used to identify particular drivers, because many different strings might be associated with the same device and driver from different vendors.
-    </span><span class="kw">pub fn </span>driver_lossy_utf8(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Cow&lt;str&gt; { <span class="self">self</span>.driver.to_string_lossy() }
-
-    <span class="doccomment">/// Used for presentation to the user.
-    </span><span class="kw">pub fn </span>description_lossy_utf8(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Cow&lt;str&gt; { <span class="self">self</span>.description.to_string_lossy() }
-
-    <span class="doccomment">/// Device name for GDI.
-    </span><span class="kw">pub fn </span>device_name_lossy_utf8(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Cow&lt;str&gt; { <span class="self">self</span>.device_name.to_string_lossy() }
+    <span class="comment">// 32 bits of implicit trailing padding on 64-bit</span>
 }
 
-<span class="kw">impl </span>AdapterIdentifier {
-    <span class="doccomment">/// Used for presentation to the user. This should not be used to identify particular drivers, because many different strings might be associated with the same device and driver from different vendors.
-    </span><span class="kw">pub fn </span>driver(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[u8] { <span class="self">self</span>.driver.to_units() }
+<span class="kw">impl</span> <span class="ident">AdapterIdentifier</span> {
+    <span class="doccomment">/// Used for presentation to the user. This should not be used to identify particular drivers, because many different strings might be associated with the same device and driver from different vendors.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">driver_lossy_utf8</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Cow</span><span class="op">&lt;</span><span class="ident">str</span><span class="op">&gt;</span> { <span class="self">self</span>.<span class="ident">driver</span>.<span class="ident">to_string_lossy</span>() }
 
-    <span class="doccomment">/// Used for presentation to the user.
-    </span><span class="kw">pub fn </span>description(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[u8] { <span class="self">self</span>.description.to_units() }
+    <span class="doccomment">/// Used for presentation to the user.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">description_lossy_utf8</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Cow</span><span class="op">&lt;</span><span class="ident">str</span><span class="op">&gt;</span> { <span class="self">self</span>.<span class="ident">description</span>.<span class="ident">to_string_lossy</span>() }
 
-    <span class="doccomment">/// Device name for GDI.
-    </span><span class="kw">pub fn </span>device_name(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[u8] { <span class="self">self</span>.device_name.to_units() }
-
-    <span class="doccomment">/// Identify the version of the Direct3D driver.
-    /// It is legal to do less than and greater than comparisons on the 64-bit signed integer value.
-    /// However, exercise caution if you use this element to identify problematic drivers.
-    /// Instead, you should use DeviceIdentifier.
-    </span><span class="kw">pub fn </span>driver_version(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; i64 { <span class="self">self</span>.driver_version.get() }
+    <span class="doccomment">/// Device name for GDI.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">device_name_lossy_utf8</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Cow</span><span class="op">&lt;</span><span class="ident">str</span><span class="op">&gt;</span> { <span class="self">self</span>.<span class="ident">device_name</span>.<span class="ident">to_string_lossy</span>() }
 }
 
-<span class="attribute">#[test] </span><span class="kw">fn </span>align_vs_cpp() {
-    <span class="kw">if </span><span class="macro">cfg!</span>(target_arch = <span class="string">&quot;x86&quot;</span>) { <span class="comment">// or itanium?
-        </span><span class="macro">assert_eq!</span>( <span class="number">4</span>, std::mem::align_of::&lt;AdapterIdentifier&gt;());
-    } <span class="kw">else </span>{
-        <span class="macro">assert_eq!</span>(std::mem::align_of::&lt;D3DADAPTER_IDENTIFIER9&gt;(), std::mem::align_of::&lt;AdapterIdentifier&gt;());
-        <span class="kw">if </span><span class="macro">cfg!</span>(target_arch = <span class="string">&quot;x86_64&quot;</span>) {
-            <span class="macro">assert_eq!</span>( <span class="number">8</span>, std::mem::align_of::&lt;AdapterIdentifier&gt;());
+<span class="kw">impl</span> <span class="ident">AdapterIdentifier</span> {
+    <span class="doccomment">/// Used for presentation to the user. This should not be used to identify particular drivers, because many different strings might be associated with the same device and driver from different vendors.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">driver</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] { <span class="self">self</span>.<span class="ident">driver</span>.<span class="ident">to_units</span>() }
+
+    <span class="doccomment">/// Used for presentation to the user.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">description</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] { <span class="self">self</span>.<span class="ident">description</span>.<span class="ident">to_units</span>() }
+
+    <span class="doccomment">/// Device name for GDI.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">device_name</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] { <span class="self">self</span>.<span class="ident">device_name</span>.<span class="ident">to_units</span>() }
+
+    <span class="doccomment">/// Identify the version of the Direct3D driver.</span>
+    <span class="doccomment">/// It is legal to do less than and greater than comparisons on the 64-bit signed integer value.</span>
+    <span class="doccomment">/// However, exercise caution if you use this element to identify problematic drivers.</span>
+    <span class="doccomment">/// Instead, you should use DeviceIdentifier.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">driver_version</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">i64</span> { <span class="self">self</span>.<span class="ident">driver_version</span>.<span class="ident">get</span>() }
+}
+
+<span class="attribute">#[<span class="ident">test</span>]</span> <span class="kw">fn</span> <span class="ident">align_vs_cpp</span>() {
+    <span class="kw">if</span> <span class="macro">cfg!</span>(<span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;x86&quot;</span>) { <span class="comment">// or itanium?</span>
+        <span class="macro">assert_eq!</span>( <span class="number">4</span>, <span class="ident">std::mem::align_of</span>::<span class="op">&lt;</span><span class="ident">AdapterIdentifier</span><span class="op">&gt;</span>());
+    } <span class="kw">else</span> {
+        <span class="macro">assert_eq!</span>(<span class="ident">std::mem::align_of</span>::<span class="op">&lt;</span><span class="ident">D3DADAPTER_IDENTIFIER9</span><span class="op">&gt;</span>(), <span class="ident">std::mem::align_of</span>::<span class="op">&lt;</span><span class="ident">AdapterIdentifier</span><span class="op">&gt;</span>());
+        <span class="kw">if</span> <span class="macro">cfg!</span>(<span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;x86_64&quot;</span>) {
+            <span class="macro">assert_eq!</span>( <span class="number">8</span>, <span class="ident">std::mem::align_of</span>::<span class="op">&lt;</span><span class="ident">AdapterIdentifier</span><span class="op">&gt;</span>());
         }
     }
 }
 
-<span class="macro">struct_mapping! </span>{
-    <span class="attribute">#[derive(<span class="kw">unsafe </span>{ AsRef, AsMut, Deref, DerefMut, FromInto })]
-    #[ignore(align)] </span><span class="comment">// See align_vs_cpp - winapi has alignment 1, real alignment should be 4 on x86, 8 otherwise
-    </span>AdapterIdentifier =&gt; D3DADAPTER_IDENTIFIER9 {
-        driver              =&gt; Driver,
-        description         =&gt; Description,
-        device_name         =&gt; DeviceName,
-        driver_version      =&gt; DriverVersion,
-        vendor_id           =&gt; VendorId,
-        device_id           =&gt; DeviceId,
-        sub_sys_id          =&gt; SubSysId,
-        revision            =&gt; Revision,
-        device_identifier   =&gt; DeviceIdentifier,
-        whql_level          =&gt; WHQLLevel,
+<span class="macro">struct_mapping!</span> {
+    <span class="attribute">#[<span class="ident">derive</span>(<span class="kw unsafe">unsafe</span> { <span class="ident">AsRef</span>, <span class="ident">AsMut</span>, <span class="ident">Deref</span>, <span class="ident">DerefMut</span>, <span class="ident">FromInto</span> })]</span>
+    <span class="attribute">#[<span class="ident">ignore</span>(<span class="ident">align</span>)]</span> <span class="comment">// See align_vs_cpp - winapi has alignment 1, real alignment should be 4 on x86, 8 otherwise</span>
+    <span class="ident">AdapterIdentifier</span> =&gt; <span class="ident">D3DADAPTER_IDENTIFIER9</span> {
+        <span class="ident">driver</span>              =&gt; <span class="ident">Driver</span>,
+        <span class="ident">description</span>         =&gt; <span class="ident">Description</span>,
+        <span class="ident">device_name</span>         =&gt; <span class="ident">DeviceName</span>,
+        <span class="ident">driver_version</span>      =&gt; <span class="ident">DriverVersion</span>,
+        <span class="ident">vendor_id</span>           =&gt; <span class="ident">VendorId</span>,
+        <span class="ident">device_id</span>           =&gt; <span class="ident">DeviceId</span>,
+        <span class="ident">sub_sys_id</span>          =&gt; <span class="ident">SubSysId</span>,
+        <span class="ident">revision</span>            =&gt; <span class="ident">Revision</span>,
+        <span class="ident">device_identifier</span>   =&gt; <span class="ident">DeviceIdentifier</span>,
+        <span class="ident">whql_level</span>          =&gt; <span class="ident">WHQLLevel</span>,
     }
 }
 
-<span class="kw">impl </span>Debug <span class="kw">for </span>AdapterIdentifier {
-    <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>Formatter) -&gt; fmt::Result {
-        f.debug_struct(<span class="string">&quot;AdapterIdentifier&quot;</span>)
-            .field(<span class="string">&quot;driver&quot;</span>,            <span class="kw-2">&amp;</span><span class="self">self</span>.driver_lossy_utf8())
-            .field(<span class="string">&quot;description&quot;</span>,       <span class="kw-2">&amp;</span><span class="self">self</span>.description_lossy_utf8())
-            .field(<span class="string">&quot;device_name&quot;</span>,       <span class="kw-2">&amp;</span><span class="self">self</span>.device_name_lossy_utf8())
-            .field(<span class="string">&quot;driver_version&quot;</span>,    <span class="kw-2">&amp;</span>Hexify(<span class="number">0</span>, <span class="self">self</span>.driver_version()))
-            .field(<span class="string">&quot;vendor_id&quot;</span>,         <span class="kw-2">&amp;</span>Hexify(<span class="number">4</span>, <span class="self">self</span>.VendorId))
-            .field(<span class="string">&quot;device_id&quot;</span>,         <span class="kw-2">&amp;</span>Hexify(<span class="number">4</span>, <span class="self">self</span>.DeviceId))
-            .field(<span class="string">&quot;sub_sys_id&quot;</span>,        <span class="kw-2">&amp;</span>Hexify(<span class="number">8</span>, <span class="self">self</span>.SubSysId))
-            .field(<span class="string">&quot;revision&quot;</span>,          <span class="kw-2">&amp;</span>Hexify(<span class="number">8</span>, <span class="self">self</span>.Revision))
-            .field(<span class="string">&quot;device_identifier&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.device_identifier)
-            .field(<span class="string">&quot;whql_level&quot;</span>,        <span class="kw-2">&amp;</span><span class="self">self</span>.whql_level)
-            .finish()
+<span class="kw">impl</span> <span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">AdapterIdentifier</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
+        <span class="ident">f</span>.<span class="ident">debug_struct</span>(<span class="string">&quot;AdapterIdentifier&quot;</span>)
+            .<span class="ident">field</span>(<span class="string">&quot;driver&quot;</span>,            <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">driver_lossy_utf8</span>())
+            .<span class="ident">field</span>(<span class="string">&quot;description&quot;</span>,       <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">description_lossy_utf8</span>())
+            .<span class="ident">field</span>(<span class="string">&quot;device_name&quot;</span>,       <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">device_name_lossy_utf8</span>())
+            .<span class="ident">field</span>(<span class="string">&quot;driver_version&quot;</span>,    <span class="kw-2">&amp;</span><span class="ident">Hexify</span>(<span class="number">0</span>, <span class="self">self</span>.<span class="ident">driver_version</span>()))
+            .<span class="ident">field</span>(<span class="string">&quot;vendor_id&quot;</span>,         <span class="kw-2">&amp;</span><span class="ident">Hexify</span>(<span class="number">4</span>, <span class="self">self</span>.<span class="ident">VendorId</span>))
+            .<span class="ident">field</span>(<span class="string">&quot;device_id&quot;</span>,         <span class="kw-2">&amp;</span><span class="ident">Hexify</span>(<span class="number">4</span>, <span class="self">self</span>.<span class="ident">DeviceId</span>))
+            .<span class="ident">field</span>(<span class="string">&quot;sub_sys_id&quot;</span>,        <span class="kw-2">&amp;</span><span class="ident">Hexify</span>(<span class="number">8</span>, <span class="self">self</span>.<span class="ident">SubSysId</span>))
+            .<span class="ident">field</span>(<span class="string">&quot;revision&quot;</span>,          <span class="kw-2">&amp;</span><span class="ident">Hexify</span>(<span class="number">8</span>, <span class="self">self</span>.<span class="ident">Revision</span>))
+            .<span class="ident">field</span>(<span class="string">&quot;device_identifier&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">device_identifier</span>)
+            .<span class="ident">field</span>(<span class="string">&quot;whql_level&quot;</span>,        <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">whql_level</span>)
+            .<span class="ident">finish</span>()
     }
 }
 
-<span class="kw">struct </span>Hexify&lt;T: UpperHex&gt;(usize, T);
-<span class="kw">impl</span>&lt;T: UpperHex&gt; Debug <span class="kw">for </span>Hexify&lt;T&gt; {
-    <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>Formatter&lt;<span class="lifetime">&#39;_</span>&gt;) -&gt; fmt::Result {
-        <span class="macro">write!</span>(f, <span class="string">&quot;0x{:0&gt;1$X}&quot;</span>, <span class="self">self</span>.<span class="number">1</span>, <span class="self">self</span>.<span class="number">0</span>)
+<span class="kw">struct</span> <span class="ident">Hexify</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">UpperHex</span><span class="op">&gt;</span>(<span class="ident">usize</span>, <span class="ident">T</span>);
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">UpperHex</span><span class="op">&gt;</span> <span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">Hexify</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) -&gt; <span class="ident">fmt::Result</span> {
+        <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;0x{:0&gt;1$X}&quot;</span>, <span class="self">self</span>.<span class="number">1</span>, <span class="self">self</span>.<span class="number">0</span>)
     }
 }
 
-<span class="comment">//#cpp2rust D3DADAPTER_IDENTIFIER9 = d3d::AdapterIdentifier
-</span></code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (b44197abb 2022-09-05)" ></div></body></html>
+<span class="comment">//#cpp2rust D3DADAPTER_IDENTIFIER9 = d3d::AdapterIdentifier</span>
+</code></pre></div>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0 (4b91a6ea7 2022-08-08)" ></div>
+</body></html>

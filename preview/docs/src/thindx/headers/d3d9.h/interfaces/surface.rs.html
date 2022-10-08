@@ -1,4 +1,10 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3d9.h\interfaces\surface.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>surface.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../../normalize.css"><link rel="stylesheet" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../../dark.css" disabled><link rel="stylesheet" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3d9.h\interfaces\surface.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>surface.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div>
+        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
+                                <a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -396,403 +402,404 @@
 <span id="396">396</span>
 <span id="397">397</span>
 <span id="398">398</span>
-</pre><pre class="rust"><code><span class="attribute">#![allow(dead_code)] </span><span class="comment">// TODO: remove
+</pre><pre class="rust"><code><span class="attribute">#![<span class="ident">allow</span>(<span class="ident">dead_code</span>)]</span> <span class="comment">// TODO: remove</span>
 
-</span><span class="kw">use crate</span>::<span class="kw-2">*</span>;
-<span class="kw">use </span><span class="kw">crate</span>::d3d9::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::d3d9</span>::<span class="kw-2">*</span>;
 
-<span class="kw">use </span>bytemuck::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">bytemuck</span>::<span class="kw-2">*</span>;
 
-<span class="kw">use </span>winapi::Interface;
-<span class="kw">use </span>winapi::shared::d3d9::{IDirect3DSurface9, IDirect3DResource9};
-<span class="kw">use </span>winapi::shared::windef::HDC;
-<span class="kw">use </span>winapi::um::unknwnbase::IUnknown;
+<span class="kw">use</span> <span class="ident">winapi::Interface</span>;
+<span class="kw">use</span> <span class="ident">winapi::shared::d3d9</span>::{<span class="ident">IDirect3DSurface9</span>, <span class="ident">IDirect3DResource9</span>};
+<span class="kw">use</span> <span class="ident">winapi::shared::windef::HDC</span>;
+<span class="kw">use</span> <span class="ident">winapi::um::unknwnbase::IUnknown</span>;
 
-<span class="kw">use </span>std::ptr::{null, null_mut};
-
-
-
-<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dsurface9)\]
-/// (extends [Resource])
-/// A dense 2-dimensional region of data, often belonging to a [Texture]
-</span><span class="attribute">#[derive(Clone)] #[repr(transparent)]
-</span><span class="kw">pub struct </span>Surface(<span class="kw">pub</span>(<span class="kw">crate</span>) mcom::Rc&lt;IDirect3DSurface9&gt;);
-
-<span class="kw">unsafe impl </span>AsSafe&lt;IUnknown             &gt; <span class="kw">for </span>Surface { <span class="kw">fn </span>as_safe(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>IUnknown           { <span class="kw-2">&amp;***</span><span class="self">self</span>.<span class="number">0 </span>} }
-<span class="kw">unsafe impl </span>AsSafe&lt;IDirect3DResource9   &gt; <span class="kw">for </span>Surface { <span class="kw">fn </span>as_safe(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>IDirect3DResource9 { <span class="kw-2">&amp;**</span><span class="self">self</span>.<span class="number">0 </span>} }
-<span class="kw">unsafe impl </span>AsSafe&lt;IDirect3DSurface9    &gt; <span class="kw">for </span>Surface { <span class="kw">fn </span>as_safe(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>IDirect3DSurface9  { <span class="kw-2">&amp;*</span><span class="self">self</span>.<span class="number">0 </span>} }
+<span class="kw">use</span> <span class="ident">std::ptr</span>::{<span class="ident">null</span>, <span class="ident">null_mut</span>};
 
 
 
-<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dsurface9)\]
-/// IDirect3DSurface9 extension method list
-///
-/// ### Methods
-/// | thindx                                                        | docs.microsoft.com    | Description |
-/// | ------------------------------------------------------------- | --------------------- | ----------- |
-/// | [get_container](Self::get_container)                          | [GetContainer]        | Provides access to the parent cube texture or texture (mipmap) object, if this surface is a child level of a cube texture or a mipmap. This method can also provide access to the parent swap chain if the surface is a back-buffer child.
-/// | [get_dc](Self::get_dc)                                        | [GetDC]               | Retrieves a device context.
-/// | [get_desc](Self::get_desc)                                    | [GetDesc]             | Retrieves a description of the surface.
-/// | [lock_rect_unchecked](Self::lock_rect_unchecked)              | [LockRect]            | Locks a rectangle on a surface.
-/// | [release_dc](Self::release_dc)                                | [ReleaseDC]           | Release a device context handle.
-/// | [unlock_rect](Self::unlock_rect)                              | [UnlockRect]          | Unlocks a rectangle on a surface.
-///
-/// [GetContainer]: https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dsurface9-getcontainer
-/// [GetDC]:        https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dsurface9-getdc
-/// [GetDesc]:      https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dsurface9-getdesc
-/// [LockRect]:     https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dsurface9-lockrect
-/// [ReleaseDC]:    https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dsurface9-releasedc
-/// [UnlockRect]:   https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dsurface9-unlockrect
-///
-</span><span class="kw">pub trait </span>IDirect3DSurface9Ext : AsSafe&lt;IDirect3DSurface9&gt; {
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3dsurface9-getcontainer)\]
-    /// IDirect3DSurface9::GetContainer
-    ///
-    /// Provides access to the parent cube texture or texture (mipmap) object, if this surface is a child level of a cube texture or a mipmap. This method can also provide access to the parent swap chain if the surface is a back-buffer child.
-    ///
-    /// ### Returns
-    /// *   [D3DERR::INVALIDCALL]
-    /// *   [D3DERR::NOINTERFACE]   The container doesn&#39;t implement `C`&#39;s interface.
-    /// *   Ok(`C`)
-    ///
-    /// ### Example
-    /// ```rust
-    /// # use dev::d3d9::*; let device = device_test();
-    /// # let texture = device.create_texture(128, 128, 8, Usage::None, Format::A8R8G8B8, Pool::Managed, ()).unwrap();
-    /// # let surface = texture.get_surface_level(0).unwrap();
-    /// let texture = surface.get_container::&lt;Texture&gt;().unwrap();
-    /// assert_eq!(E::NOINTERFACE, surface.get_container::&lt;Device&gt;().map(|_|()));
-    /// ```
-    </span><span class="kw">fn </span>get_container&lt;C: Raw&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;C, Error&gt; <span class="kw">where </span>C::Raw : Interface {
-        <span class="macro">fn_context!</span>(d3d9::IDirect3DSurface9Ext::get_container =&gt; IDirect3DSurface9::GetContainer);
-        <span class="kw">let </span><span class="kw-2">mut </span>container = null_mut();
-        <span class="macro">fn_check_hr!</span>(<span class="kw">unsafe </span>{ <span class="self">self</span>.as_winapi().GetContainer(<span class="kw-2">&amp;</span>C::Raw::uuidof(), <span class="kw-2">&amp;mut </span>container) })<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(<span class="kw">unsafe </span>{ C::from_raw(container.cast()) })
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dsurface9)\]</span>
+<span class="doccomment">/// (extends [Resource])</span>
+<span class="doccomment">/// A dense 2-dimensional region of data, often belonging to a [Texture]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>)]</span> <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">transparent</span>)]</span>
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Surface</span>(<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="ident">mcom::Rc</span><span class="op">&lt;</span><span class="ident">IDirect3DSurface9</span><span class="op">&gt;</span>);
+
+<span class="kw unsafe">unsafe</span> <span class="kw">impl</span> <span class="ident">AsSafe</span><span class="op">&lt;</span><span class="ident">IUnknown</span>             <span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Surface</span> { <span class="kw">fn</span> <span class="ident">as_safe</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">IUnknown</span>           { <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="kw-2">*</span><span class="kw-2">*</span><span class="self">self</span>.<span class="number">0</span> } }
+<span class="kw unsafe">unsafe</span> <span class="kw">impl</span> <span class="ident">AsSafe</span><span class="op">&lt;</span><span class="ident">IDirect3DResource9</span>   <span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Surface</span> { <span class="kw">fn</span> <span class="ident">as_safe</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">IDirect3DResource9</span> { <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="kw-2">*</span><span class="self">self</span>.<span class="number">0</span> } }
+<span class="kw unsafe">unsafe</span> <span class="kw">impl</span> <span class="ident">AsSafe</span><span class="op">&lt;</span><span class="ident">IDirect3DSurface9</span>    <span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Surface</span> { <span class="kw">fn</span> <span class="ident">as_safe</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">IDirect3DSurface9</span>  { <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="self">self</span>.<span class="number">0</span> } }
+
+
+
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dsurface9)\]</span>
+<span class="doccomment">/// IDirect3DSurface9 extension method list</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// ### Methods</span>
+<span class="doccomment">/// | thindx                                                        | docs.microsoft.com    | Description |</span>
+<span class="doccomment">/// | ------------------------------------------------------------- | --------------------- | ----------- |</span>
+<span class="doccomment">/// | [get_container](Self::get_container)                          | [GetContainer]        | Provides access to the parent cube texture or texture (mipmap) object, if this surface is a child level of a cube texture or a mipmap. This method can also provide access to the parent swap chain if the surface is a back-buffer child.</span>
+<span class="doccomment">/// | [get_dc](Self::get_dc)                                        | [GetDC]               | Retrieves a device context.</span>
+<span class="doccomment">/// | [get_desc](Self::get_desc)                                    | [GetDesc]             | Retrieves a description of the surface.</span>
+<span class="doccomment">/// | [lock_rect_unchecked](Self::lock_rect_unchecked)              | [LockRect]            | Locks a rectangle on a surface.</span>
+<span class="doccomment">/// | [release_dc](Self::release_dc)                                | [ReleaseDC]           | Release a device context handle.</span>
+<span class="doccomment">/// | [unlock_rect](Self::unlock_rect)                              | [UnlockRect]          | Unlocks a rectangle on a surface.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// [GetContainer]: https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dsurface9-getcontainer</span>
+<span class="doccomment">/// [GetDC]:        https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dsurface9-getdc</span>
+<span class="doccomment">/// [GetDesc]:      https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dsurface9-getdesc</span>
+<span class="doccomment">/// [LockRect]:     https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dsurface9-lockrect</span>
+<span class="doccomment">/// [ReleaseDC]:    https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dsurface9-releasedc</span>
+<span class="doccomment">/// [UnlockRect]:   https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dsurface9-unlockrect</span>
+<span class="doccomment">///</span>
+<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">IDirect3DSurface9Ext</span> : <span class="ident">AsSafe</span><span class="op">&lt;</span><span class="ident">IDirect3DSurface9</span><span class="op">&gt;</span> {
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3dsurface9-getcontainer)\]</span>
+    <span class="doccomment">/// IDirect3DSurface9::GetContainer</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Provides access to the parent cube texture or texture (mipmap) object, if this surface is a child level of a cube texture or a mipmap. This method can also provide access to the parent swap chain if the surface is a back-buffer child.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Returns</span>
+    <span class="doccomment">/// *   [D3DERR::INVALIDCALL]</span>
+    <span class="doccomment">/// *   [D3DERR::NOINTERFACE]   The container doesn&#39;t implement `C`&#39;s interface.</span>
+    <span class="doccomment">/// *   Ok(`C`)</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Example</span>
+    <span class="doccomment">/// ```rust</span>
+    <span class="doccomment">/// # use dev::d3d9::*; let device = device_test();</span>
+    <span class="doccomment">/// # let texture = device.create_texture(128, 128, 8, Usage::None, Format::A8R8G8B8, Pool::Managed, ()).unwrap();</span>
+    <span class="doccomment">/// # let surface = texture.get_surface_level(0).unwrap();</span>
+    <span class="doccomment">/// let texture = surface.get_container::&lt;Texture&gt;().unwrap();</span>
+    <span class="doccomment">/// assert_eq!(E::NOINTERFACE, surface.get_container::&lt;Device&gt;().map(|_|()));</span>
+    <span class="doccomment">/// ```</span>
+    <span class="kw">fn</span> <span class="ident">get_container</span><span class="op">&lt;</span><span class="ident">C</span>: <span class="ident">Raw</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">C</span>, <span class="ident">Error</span><span class="op">&gt;</span> <span class="kw">where</span> <span class="ident">C::Raw</span> : <span class="ident">Interface</span> {
+        <span class="macro">fn_context!</span>(<span class="ident">d3d9::IDirect3DSurface9Ext::get_container</span> =&gt; <span class="ident">IDirect3DSurface9::GetContainer</span>);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">container</span> <span class="op">=</span> <span class="ident">null_mut</span>();
+        <span class="macro">fn_check_hr!</span>(<span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="ident">as_winapi</span>().<span class="ident">GetContainer</span>(<span class="kw-2">&amp;</span><span class="ident">C::Raw::uuidof</span>(), <span class="kw-2">&amp;mut</span> <span class="ident">container</span>) })<span class="question-mark">?</span>;
+        <span class="prelude-val">Ok</span>(<span class="kw unsafe">unsafe</span> { <span class="ident">C::from_raw</span>(<span class="ident">container</span>.<span class="ident">cast</span>()) })
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3dsurface9-getdc)\]
-    /// IDirect3DSurface9::GetDC
-    ///
-    /// Retrieves a device context.
-    ///
-    /// ### Returns
-    /// *   [D3DERR::INVALIDCALL]   If a device context was already retrieved
-    /// *   Ok([HDC])
-    ///
-    /// ### Example
-    /// ```rust
-    /// # use dev::d3d9::*; let device = device_test();
-    /// # let texture = device.create_texture(128, 128, 8, Usage::None, Format::A8R8G8B8, Pool::Managed, ()).unwrap();
-    /// # let surface = texture.get_surface_level(0).unwrap();
-    /// let dc = surface.get_dc().unwrap();
-    /// assert!(!dc.is_null());
-    ///
-    /// assert_eq!(D3DERR::INVALIDCALL, surface.get_dc(), &quot;HDC already acquired&quot;);
-    /// ```
-    </span><span class="kw">fn </span>get_dc(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;HDC, Error&gt; {
-        <span class="macro">fn_context!</span>(d3d9::IDirect3DSurface9Ext::get_dc =&gt; IDirect3DSurface9::GetDC);
-        <span class="kw">let </span><span class="kw-2">mut </span>hdc = null_mut();
-        <span class="macro">fn_check_hr!</span>(<span class="kw">unsafe </span>{ <span class="self">self</span>.as_winapi().GetDC(<span class="kw-2">&amp;mut </span>hdc) })<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(hdc)
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3dsurface9-getdc)\]</span>
+    <span class="doccomment">/// IDirect3DSurface9::GetDC</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Retrieves a device context.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Returns</span>
+    <span class="doccomment">/// *   [D3DERR::INVALIDCALL]   If a device context was already retrieved</span>
+    <span class="doccomment">/// *   Ok([HDC])</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Example</span>
+    <span class="doccomment">/// ```rust</span>
+    <span class="doccomment">/// # use dev::d3d9::*; let device = device_test();</span>
+    <span class="doccomment">/// # let texture = device.create_texture(128, 128, 8, Usage::None, Format::A8R8G8B8, Pool::Managed, ()).unwrap();</span>
+    <span class="doccomment">/// # let surface = texture.get_surface_level(0).unwrap();</span>
+    <span class="doccomment">/// let dc = surface.get_dc().unwrap();</span>
+    <span class="doccomment">/// assert!(!dc.is_null());</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// assert_eq!(D3DERR::INVALIDCALL, surface.get_dc(), &quot;HDC already acquired&quot;);</span>
+    <span class="doccomment">/// ```</span>
+    <span class="kw">fn</span> <span class="ident">get_dc</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">HDC</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+        <span class="macro">fn_context!</span>(<span class="ident">d3d9::IDirect3DSurface9Ext::get_dc</span> =&gt; <span class="ident">IDirect3DSurface9::GetDC</span>);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">hdc</span> <span class="op">=</span> <span class="ident">null_mut</span>();
+        <span class="macro">fn_check_hr!</span>(<span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="ident">as_winapi</span>().<span class="ident">GetDC</span>(<span class="kw-2">&amp;mut</span> <span class="ident">hdc</span>) })<span class="question-mark">?</span>;
+        <span class="prelude-val">Ok</span>(<span class="ident">hdc</span>)
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3dsurface9-getdesc)\]
-    /// IDirect3DSurface9::GetDesc
-    ///
-    /// Retrieves a description of the surface.
-    ///
-    /// ### Returns
-    /// *   [D3DERR::INVALIDCALL]
-    /// *   Ok([SurfaceDesc])
-    ///
-    /// ### Example
-    /// ```rust
-    /// # use dev::d3d9::*; let device = device_test();
-    /// let texture = device.create_texture(128, 128, 8, Usage::None, Format::A8R8G8B8, Pool::Managed, ()).unwrap();
-    /// let surface = texture.get_surface_level(0).unwrap();
-    /// let desc : SurfaceDesc = surface.get_desc().unwrap();
-    /// assert_eq!(desc.width,  128);
-    /// assert_eq!(desc.height, 128);
-    /// // ...
-    /// ```
-    </span><span class="kw">fn </span>get_desc(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;SurfaceDesc, Error&gt; {
-        <span class="macro">fn_context!</span>(d3d9::IDirect3DSurface9Ext::get_desc =&gt; IDirect3DSurface9::GetDesc);
-        <span class="kw">let </span><span class="kw-2">mut </span>desc = SurfaceDesc::zeroed();
-        <span class="macro">fn_check_hr!</span>(<span class="kw">unsafe </span>{ <span class="self">self</span>.as_winapi().GetDesc(<span class="kw-2">&amp;mut *</span>desc) })<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(desc)
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3dsurface9-getdesc)\]</span>
+    <span class="doccomment">/// IDirect3DSurface9::GetDesc</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Retrieves a description of the surface.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Returns</span>
+    <span class="doccomment">/// *   [D3DERR::INVALIDCALL]</span>
+    <span class="doccomment">/// *   Ok([SurfaceDesc])</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Example</span>
+    <span class="doccomment">/// ```rust</span>
+    <span class="doccomment">/// # use dev::d3d9::*; let device = device_test();</span>
+    <span class="doccomment">/// let texture = device.create_texture(128, 128, 8, Usage::None, Format::A8R8G8B8, Pool::Managed, ()).unwrap();</span>
+    <span class="doccomment">/// let surface = texture.get_surface_level(0).unwrap();</span>
+    <span class="doccomment">/// let desc : SurfaceDesc = surface.get_desc().unwrap();</span>
+    <span class="doccomment">/// assert_eq!(desc.width,  128);</span>
+    <span class="doccomment">/// assert_eq!(desc.height, 128);</span>
+    <span class="doccomment">/// // ...</span>
+    <span class="doccomment">/// ```</span>
+    <span class="kw">fn</span> <span class="ident">get_desc</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">SurfaceDesc</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+        <span class="macro">fn_context!</span>(<span class="ident">d3d9::IDirect3DSurface9Ext::get_desc</span> =&gt; <span class="ident">IDirect3DSurface9::GetDesc</span>);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">desc</span> <span class="op">=</span> <span class="ident">SurfaceDesc::zeroed</span>();
+        <span class="macro">fn_check_hr!</span>(<span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="ident">as_winapi</span>().<span class="ident">GetDesc</span>(<span class="kw-2">&amp;mut</span> <span class="kw-2">*</span><span class="ident">desc</span>) })<span class="question-mark">?</span>;
+        <span class="prelude-val">Ok</span>(<span class="ident">desc</span>)
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3dsurface9-lockrect)\]
-    /// IDirect3DSurface9::LockRect
-    ///
-    /// Locks a rectangle on a surface.
-    ///
-    /// ### ⚠️ Safety ⚠️
-    /// *   `rect` must be `..` or a valid subregion of the surface in question
-    /// *   `self` should be lockable in the style specified by `flags`... and not already locked?
-    /// *   `self` may need to be unlocked again before being bound, drawn, or released
-    ///
-    /// ### Returns
-    /// *   [D3DERR::INVALIDCALL]
-    /// *   Ok([d3d::LockedRect])
-    ///
-    /// ### Example
-    /// ```rust
-    /// # use dev::d3d9::*; let device = device_test();
-    /// let texture = device.create_texture(128, 128, 8, Usage::None, Format::A8R8G8B8, Pool::Managed, ()).unwrap();
-    /// let surface = texture.get_surface_level(0).unwrap();
-    /// let data = [[Color::argb(0xFF112233); 128]; 128];
-    /// unsafe {
-    ///     let lock = surface.lock_rect_unchecked(.., Lock::None).unwrap();
-    ///     for y in 0..128 {
-    ///         let src = data[y].as_ptr();
-    ///         let dst = (lock.pBits as *mut u8).add(y * lock.Pitch as usize);
-    ///         std::ptr::copy(src, dst.cast(), 128);
-    ///     }
-    ///     surface.unlock_rect();
-    /// }
-    /// ```
-    </span><span class="kw">unsafe fn </span>lock_rect_unchecked(<span class="kw-2">&amp;</span><span class="self">self</span>, rect: <span class="kw">impl </span>IntoRectOrFull, flags: <span class="kw">impl </span>Into&lt;Lock&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;LockedRect, Error&gt; {
-        <span class="macro">fn_context!</span>(d3d9::IDirect3DSurface9Ext::lock_rect_unchecked =&gt; IDirect3DSurface9::LockRect);
-        <span class="kw">let </span>rect = rect.into_rect();
-        <span class="kw">let </span>rect = rect.as_ref().map_or(null(), |b| <span class="kw-2">&amp;**</span>b);
-        <span class="kw">let </span><span class="kw-2">mut </span>locked = LockedRect::zeroed();
-        <span class="macro">fn_check_hr!</span>(<span class="kw">unsafe </span>{ <span class="self">self</span>.as_winapi().LockRect(locked.as_mut(), rect.cast(), flags.into().into()) })<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(locked)
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3dsurface9-lockrect)\]</span>
+    <span class="doccomment">/// IDirect3DSurface9::LockRect</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Locks a rectangle on a surface.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### ⚠️ Safety ⚠️</span>
+    <span class="doccomment">/// *   `rect` must be `..` or a valid subregion of the surface in question</span>
+    <span class="doccomment">/// *   `self` should be lockable in the style specified by `flags`... and not already locked?</span>
+    <span class="doccomment">/// *   `self` may need to be unlocked again before being bound, drawn, or released</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Returns</span>
+    <span class="doccomment">/// *   [D3DERR::INVALIDCALL]</span>
+    <span class="doccomment">/// *   Ok([d3d::LockedRect])</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Example</span>
+    <span class="doccomment">/// ```rust</span>
+    <span class="doccomment">/// # use dev::d3d9::*; let device = device_test();</span>
+    <span class="doccomment">/// let texture = device.create_texture(128, 128, 8, Usage::None, Format::A8R8G8B8, Pool::Managed, ()).unwrap();</span>
+    <span class="doccomment">/// let surface = texture.get_surface_level(0).unwrap();</span>
+    <span class="doccomment">/// let data = [[Color::argb(0xFF112233); 128]; 128];</span>
+    <span class="doccomment">/// unsafe {</span>
+    <span class="doccomment">///     let lock = surface.lock_rect_unchecked(.., Lock::None).unwrap();</span>
+    <span class="doccomment">///     for y in 0..128 {</span>
+    <span class="doccomment">///         let src = data[y].as_ptr();</span>
+    <span class="doccomment">///         let dst = (lock.pBits as *mut u8).add(y * lock.Pitch as usize);</span>
+    <span class="doccomment">///         std::ptr::copy(src, dst.cast(), 128);</span>
+    <span class="doccomment">///     }</span>
+    <span class="doccomment">///     surface.unlock_rect();</span>
+    <span class="doccomment">/// }</span>
+    <span class="doccomment">/// ```</span>
+    <span class="kw unsafe">unsafe</span> <span class="kw">fn</span> <span class="ident">lock_rect_unchecked</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">rect</span>: <span class="kw">impl</span> <span class="ident">IntoRectOrFull</span>, <span class="ident">flags</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Lock</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">LockedRect</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+        <span class="macro">fn_context!</span>(<span class="ident">d3d9::IDirect3DSurface9Ext::lock_rect_unchecked</span> =&gt; <span class="ident">IDirect3DSurface9::LockRect</span>);
+        <span class="kw">let</span> <span class="ident">rect</span> <span class="op">=</span> <span class="ident">rect</span>.<span class="ident">into_rect</span>();
+        <span class="kw">let</span> <span class="ident">rect</span> <span class="op">=</span> <span class="ident">rect</span>.<span class="ident">as_ref</span>().<span class="ident">map_or</span>(<span class="ident">null</span>(), <span class="op">|</span><span class="ident">b</span><span class="op">|</span> <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="kw-2">*</span><span class="ident">b</span>);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">locked</span> <span class="op">=</span> <span class="ident">LockedRect::zeroed</span>();
+        <span class="macro">fn_check_hr!</span>(<span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="ident">as_winapi</span>().<span class="ident">LockRect</span>(<span class="ident">locked</span>.<span class="ident">as_mut</span>(), <span class="ident">rect</span>.<span class="ident">cast</span>(), <span class="ident">flags</span>.<span class="ident">into</span>().<span class="ident">into</span>()) })<span class="question-mark">?</span>;
+        <span class="prelude-val">Ok</span>(<span class="ident">locked</span>)
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3dsurface9-releasedc)\]
-    /// IDirect3DSurface9::ReleaseDC
-    ///
-    /// Release a device context handle.
-    ///
-    /// ### Returns
-    /// *   [D3DERR::INVALIDCALL]
-    /// *   Ok(`()`)
-    ///
-    /// ### Example
-    /// ```rust
-    /// # use dev::d3d9::*; let device = device_test();
-    /// # let texture = device.create_texture(128, 128, 8, Usage::None, Format::A8R8G8B8, Pool::Managed, ()).unwrap();
-    /// # let surface = texture.get_surface_level(0).unwrap();
-    /// let dc = surface.get_dc().unwrap();
-    /// assert!(!dc.is_null());
-    ///
-    /// assert_eq!(D3DERR::INVALIDCALL, surface.get_dc(), &quot;HDC already acquired&quot;);
-    /// assert_eq!(D3DERR::INVALIDCALL, surface.release_dc(42 as _), &quot;not the right HDC&quot;);
-    ///
-    /// surface.release_dc(dc).unwrap();
-    /// let dc = surface.get_dc().unwrap();
-    /// surface.release_dc(dc).unwrap();
-    /// ```
-    </span><span class="kw">fn </span>release_dc(<span class="kw-2">&amp;</span><span class="self">self</span>, hdc: HDC) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
-        <span class="macro">fn_context!</span>(d3d9::IDirect3DSurface9Ext::release_dc =&gt; IDirect3DSurface9::ReleaseDC);
-        <span class="macro">fn_check_hr!</span>(<span class="kw">unsafe </span>{ <span class="self">self</span>.as_winapi().ReleaseDC(hdc) })
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3dsurface9-releasedc)\]</span>
+    <span class="doccomment">/// IDirect3DSurface9::ReleaseDC</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Release a device context handle.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Returns</span>
+    <span class="doccomment">/// *   [D3DERR::INVALIDCALL]</span>
+    <span class="doccomment">/// *   Ok(`()`)</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Example</span>
+    <span class="doccomment">/// ```rust</span>
+    <span class="doccomment">/// # use dev::d3d9::*; let device = device_test();</span>
+    <span class="doccomment">/// # let texture = device.create_texture(128, 128, 8, Usage::None, Format::A8R8G8B8, Pool::Managed, ()).unwrap();</span>
+    <span class="doccomment">/// # let surface = texture.get_surface_level(0).unwrap();</span>
+    <span class="doccomment">/// let dc = surface.get_dc().unwrap();</span>
+    <span class="doccomment">/// assert!(!dc.is_null());</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// assert_eq!(D3DERR::INVALIDCALL, surface.get_dc(), &quot;HDC already acquired&quot;);</span>
+    <span class="doccomment">/// assert_eq!(D3DERR::INVALIDCALL, surface.release_dc(42 as _), &quot;not the right HDC&quot;);</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// surface.release_dc(dc).unwrap();</span>
+    <span class="doccomment">/// let dc = surface.get_dc().unwrap();</span>
+    <span class="doccomment">/// surface.release_dc(dc).unwrap();</span>
+    <span class="doccomment">/// ```</span>
+    <span class="kw">fn</span> <span class="ident">release_dc</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">hdc</span>: <span class="ident">HDC</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
+        <span class="macro">fn_context!</span>(<span class="ident">d3d9::IDirect3DSurface9Ext::release_dc</span> =&gt; <span class="ident">IDirect3DSurface9::ReleaseDC</span>);
+        <span class="macro">fn_check_hr!</span>(<span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="ident">as_winapi</span>().<span class="ident">ReleaseDC</span>(<span class="ident">hdc</span>) })
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3dsurface9-unlockrect)\]
-    /// IDirect3DSurface9::UnlockRect
-    ///
-    /// Unlocks a rectangle on a surface.
-    ///
-    /// ### Returns
-    /// *   [D3DERR::INVALIDCALL]
-    /// *   Ok(`()`)
-    ///
-    /// ### Example
-    /// ```rust
-    /// # use dev::d3d9::*; let device = device_test();
-    /// let texture = device.create_texture(128, 128, 8, Usage::None, Format::A8R8G8B8, Pool::Managed, ()).unwrap();
-    /// let surface = texture.get_surface_level(0).unwrap();
-    /// let data = [[Color::argb(0xFF112233); 128]; 128];
-    /// unsafe {
-    ///     let lock = surface.lock_rect_unchecked(.., Lock::None).unwrap();
-    ///     for y in 0..128 {
-    ///         let src = data[y].as_ptr();
-    ///         let dst = (lock.pBits as *mut u8).add(y * lock.Pitch as usize);
-    ///         std::ptr::copy(src, dst.cast(), 128);
-    ///     }
-    ///     surface.unlock_rect();
-    /// }
-    /// ```
-    </span><span class="kw">fn </span>unlock_rect(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
-        <span class="macro">fn_context!</span>(d3d9::IDirect3DSurface9Ext::unlock_rect =&gt; IDirect3DSurface9::UnlockRect);
-        <span class="macro">fn_check_hr!</span>(<span class="kw">unsafe </span>{ <span class="self">self</span>.as_winapi().UnlockRect() })
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3dsurface9-unlockrect)\]</span>
+    <span class="doccomment">/// IDirect3DSurface9::UnlockRect</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Unlocks a rectangle on a surface.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Returns</span>
+    <span class="doccomment">/// *   [D3DERR::INVALIDCALL]</span>
+    <span class="doccomment">/// *   Ok(`()`)</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Example</span>
+    <span class="doccomment">/// ```rust</span>
+    <span class="doccomment">/// # use dev::d3d9::*; let device = device_test();</span>
+    <span class="doccomment">/// let texture = device.create_texture(128, 128, 8, Usage::None, Format::A8R8G8B8, Pool::Managed, ()).unwrap();</span>
+    <span class="doccomment">/// let surface = texture.get_surface_level(0).unwrap();</span>
+    <span class="doccomment">/// let data = [[Color::argb(0xFF112233); 128]; 128];</span>
+    <span class="doccomment">/// unsafe {</span>
+    <span class="doccomment">///     let lock = surface.lock_rect_unchecked(.., Lock::None).unwrap();</span>
+    <span class="doccomment">///     for y in 0..128 {</span>
+    <span class="doccomment">///         let src = data[y].as_ptr();</span>
+    <span class="doccomment">///         let dst = (lock.pBits as *mut u8).add(y * lock.Pitch as usize);</span>
+    <span class="doccomment">///         std::ptr::copy(src, dst.cast(), 128);</span>
+    <span class="doccomment">///     }</span>
+    <span class="doccomment">///     surface.unlock_rect();</span>
+    <span class="doccomment">/// }</span>
+    <span class="doccomment">/// ```</span>
+    <span class="kw">fn</span> <span class="ident">unlock_rect</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
+        <span class="macro">fn_context!</span>(<span class="ident">d3d9::IDirect3DSurface9Ext::unlock_rect</span> =&gt; <span class="ident">IDirect3DSurface9::UnlockRect</span>);
+        <span class="macro">fn_check_hr!</span>(<span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="ident">as_winapi</span>().<span class="ident">UnlockRect</span>() })
     }
 }
 
-<span class="kw">impl</span>&lt;T: AsSafe&lt;IDirect3DSurface9&gt;&gt; IDirect3DSurface9Ext <span class="kw">for </span>T {}
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">AsSafe</span><span class="op">&lt;</span><span class="ident">IDirect3DSurface9</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="ident">IDirect3DSurface9Ext</span> <span class="kw">for</span> <span class="ident">T</span> {}
 
 
 
-<span class="attribute">#[cfg(test)] </span><span class="kw">mod </span>tests {
-    <span class="kw">use </span>dev::d3d9::<span class="kw-2">*</span>;
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span> <span class="kw">mod</span> <span class="ident">tests</span> {
+    <span class="kw">use</span> <span class="ident">dev::d3d9</span>::<span class="kw-2">*</span>;
 
-    <span class="comment">// #[test] fn create_depth_stencil_surface() {} // TODO
-    // #[test] fn create_offscreen_plain_surface() {} // TODO
-    // #[test] fn create_render_target() {} // TODO
+    <span class="comment">// #[test] fn create_depth_stencil_surface() {} // TODO</span>
+    <span class="comment">// #[test] fn create_offscreen_plain_surface() {} // TODO</span>
+    <span class="comment">// #[test] fn create_render_target() {} // TODO</span>
 
-    // #[test] fn get_back_buffer() {} // TODO
+    <span class="comment">// #[test] fn get_back_buffer() {} // TODO</span>
 
-    </span><span class="attribute">#[test] </span><span class="kw">fn </span>get_set_depth_stencil_surface() {
-        <span class="kw">let </span>device = device_test_pp(<span class="bool-val">false</span>, |pp, <span class="kw">_</span>| {
-            pp.enable_auto_depth_stencil = <span class="bool-val">true</span>.into();
-            pp.auto_depth_stencil_format = Format::D24S8;
-        }).unwrap();
+    <span class="attribute">#[<span class="ident">test</span>]</span> <span class="kw">fn</span> <span class="ident">get_set_depth_stencil_surface</span>() {
+        <span class="kw">let</span> <span class="ident">device</span> <span class="op">=</span> <span class="ident">device_test_pp</span>(<span class="bool-val">false</span>, <span class="op">|</span><span class="ident">pp</span>, <span class="kw">_</span><span class="op">|</span> {
+            <span class="ident">pp</span>.<span class="ident">enable_auto_depth_stencil</span> <span class="op">=</span> <span class="bool-val">true</span>.<span class="ident">into</span>();
+            <span class="ident">pp</span>.<span class="ident">auto_depth_stencil_format</span> <span class="op">=</span> <span class="ident">Format::D24S8</span>;
+        }).<span class="ident">unwrap</span>();
 
-        <span class="kw">let </span>ds = device.get_depth_stencil_surface().unwrap().unwrap();
-        <span class="macro">assert_eq!</span>(ds.as_raw(), device.get_depth_stencil_surface().unwrap().unwrap().as_raw());
-        device.set_depth_stencil_surface(<span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span>ds)).unwrap();
-        <span class="macro">assert_eq!</span>(ds.as_raw(), device.get_depth_stencil_surface().unwrap().unwrap().as_raw());
-        device.set_depth_stencil_surface(<span class="prelude-val">None</span>).unwrap();
-        <span class="macro">assert!</span>(device.get_depth_stencil_surface().unwrap().is_none());
+        <span class="kw">let</span> <span class="ident">ds</span> <span class="op">=</span> <span class="ident">device</span>.<span class="ident">get_depth_stencil_surface</span>().<span class="ident">unwrap</span>().<span class="ident">unwrap</span>();
+        <span class="macro">assert_eq!</span>(<span class="ident">ds</span>.<span class="ident">as_raw</span>(), <span class="ident">device</span>.<span class="ident">get_depth_stencil_surface</span>().<span class="ident">unwrap</span>().<span class="ident">unwrap</span>().<span class="ident">as_raw</span>());
+        <span class="ident">device</span>.<span class="ident">set_depth_stencil_surface</span>(<span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="ident">ds</span>)).<span class="ident">unwrap</span>();
+        <span class="macro">assert_eq!</span>(<span class="ident">ds</span>.<span class="ident">as_raw</span>(), <span class="ident">device</span>.<span class="ident">get_depth_stencil_surface</span>().<span class="ident">unwrap</span>().<span class="ident">unwrap</span>().<span class="ident">as_raw</span>());
+        <span class="ident">device</span>.<span class="ident">set_depth_stencil_surface</span>(<span class="prelude-val">None</span>).<span class="ident">unwrap</span>();
+        <span class="macro">assert!</span>(<span class="ident">device</span>.<span class="ident">get_depth_stencil_surface</span>().<span class="ident">unwrap</span>().<span class="ident">is_none</span>());
 
-        <span class="comment">// TODO: What happens with pure devices?
-        // TODO: What happens with setting surfaces with poor formats?
-        // TODO: What happens with setting surfaces with mismatched resolutions?
-    </span>}
+        <span class="comment">// TODO: What happens with pure devices?</span>
+        <span class="comment">// TODO: What happens with setting surfaces with poor formats?</span>
+        <span class="comment">// TODO: What happens with setting surfaces with mismatched resolutions?</span>
+    }
 
-    <span class="attribute">#[test] </span><span class="kw">fn </span>get_set_render_target() {
-        <span class="kw">let </span>device = device_test();
-        <span class="comment">//let caps = device...
-        </span><span class="kw">let </span>max_rts = <span class="number">4</span>; <span class="comment">// TODO: caps
+    <span class="attribute">#[<span class="ident">test</span>]</span> <span class="kw">fn</span> <span class="ident">get_set_render_target</span>() {
+        <span class="kw">let</span> <span class="ident">device</span> <span class="op">=</span> <span class="ident">device_test</span>();
+        <span class="comment">//let caps = device...</span>
+        <span class="kw">let</span> <span class="ident">max_rts</span> <span class="op">=</span> <span class="number">4</span>; <span class="comment">// TODO: caps</span>
 
-        // attempt to muck with RT0
-        </span><span class="kw">let </span>rt0 = device.get_render_target(<span class="number">0</span>).expect(<span class="string">&quot;RT0 inaccessable&quot;</span>).expect(<span class="string">&quot;RT0 null&quot;</span>);
-        device.set_render_target(<span class="number">0</span>, <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span>rt0)).unwrap();
-        <span class="macro">assert_eq!</span>(rt0.as_raw(), device.get_render_target(<span class="number">0</span>).expect(<span class="string">&quot;RT0 inaccessable&quot;</span>).expect(<span class="string">&quot;RT0 null&quot;</span>).as_raw());
-        <span class="macro">assert_eq!</span>(D3DERR::INVALIDCALL, device.set_render_target(<span class="number">0</span>, <span class="prelude-val">None</span>));
-        <span class="macro">assert_eq!</span>(rt0.as_raw(), device.get_render_target(<span class="number">0</span>).expect(<span class="string">&quot;RT0 inaccessable&quot;</span>).expect(<span class="string">&quot;RT0 null&quot;</span>).as_raw());
-        device.set_render_target(<span class="number">0</span>, <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span>rt0)).unwrap();
-        <span class="macro">assert_eq!</span>(rt0.as_raw(), device.get_render_target(<span class="number">0</span>).expect(<span class="string">&quot;RT0 inaccessable&quot;</span>).expect(<span class="string">&quot;RT0 null&quot;</span>).as_raw());
+        <span class="comment">// attempt to muck with RT0</span>
+        <span class="kw">let</span> <span class="ident">rt0</span> <span class="op">=</span> <span class="ident">device</span>.<span class="ident">get_render_target</span>(<span class="number">0</span>).<span class="ident">expect</span>(<span class="string">&quot;RT0 inaccessable&quot;</span>).<span class="ident">expect</span>(<span class="string">&quot;RT0 null&quot;</span>);
+        <span class="ident">device</span>.<span class="ident">set_render_target</span>(<span class="number">0</span>, <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="ident">rt0</span>)).<span class="ident">unwrap</span>();
+        <span class="macro">assert_eq!</span>(<span class="ident">rt0</span>.<span class="ident">as_raw</span>(), <span class="ident">device</span>.<span class="ident">get_render_target</span>(<span class="number">0</span>).<span class="ident">expect</span>(<span class="string">&quot;RT0 inaccessable&quot;</span>).<span class="ident">expect</span>(<span class="string">&quot;RT0 null&quot;</span>).<span class="ident">as_raw</span>());
+        <span class="macro">assert_eq!</span>(<span class="ident">D3DERR::INVALIDCALL</span>, <span class="ident">device</span>.<span class="ident">set_render_target</span>(<span class="number">0</span>, <span class="prelude-val">None</span>));
+        <span class="macro">assert_eq!</span>(<span class="ident">rt0</span>.<span class="ident">as_raw</span>(), <span class="ident">device</span>.<span class="ident">get_render_target</span>(<span class="number">0</span>).<span class="ident">expect</span>(<span class="string">&quot;RT0 inaccessable&quot;</span>).<span class="ident">expect</span>(<span class="string">&quot;RT0 null&quot;</span>).<span class="ident">as_raw</span>());
+        <span class="ident">device</span>.<span class="ident">set_render_target</span>(<span class="number">0</span>, <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="ident">rt0</span>)).<span class="ident">unwrap</span>();
+        <span class="macro">assert_eq!</span>(<span class="ident">rt0</span>.<span class="ident">as_raw</span>(), <span class="ident">device</span>.<span class="ident">get_render_target</span>(<span class="number">0</span>).<span class="ident">expect</span>(<span class="string">&quot;RT0 inaccessable&quot;</span>).<span class="ident">expect</span>(<span class="string">&quot;RT0 null&quot;</span>).<span class="ident">as_raw</span>());
 
-        <span class="comment">// muck with probably-in-bounds RTs
-        </span><span class="kw">for </span>_i <span class="kw">in </span><span class="number">1</span>..max_rts {
-            <span class="comment">// TODO: create real textures to bind
-            // println!(&quot;rt[{}]&quot;, i);
-            // device.set_render_target(i, Some(&amp;rt0)).unwrap();
-        </span>}
+        <span class="comment">// muck with probably-in-bounds RTs</span>
+        <span class="kw">for</span> <span class="ident">_i</span> <span class="kw">in</span> <span class="number">1</span>..<span class="ident">max_rts</span> {
+            <span class="comment">// TODO: create real textures to bind</span>
+            <span class="comment">// println!(&quot;rt[{}]&quot;, i);</span>
+            <span class="comment">// device.set_render_target(i, Some(&amp;rt0)).unwrap();</span>
+        }
 
-        <span class="comment">// TODO: What happens with setting surfaces with poor formats?
-        // TODO: What happens with setting surfaces with mismatched resolutions?
+        <span class="comment">// TODO: What happens with setting surfaces with poor formats?</span>
+        <span class="comment">// TODO: What happens with setting surfaces with mismatched resolutions?</span>
 
-        // muck with probably-out-of-bounds RTs
-        </span><span class="kw">for </span>i <span class="kw">in </span>[<span class="number">100</span>, <span class="number">1000</span>, <span class="number">100000</span>, !<span class="number">0</span>].iter().copied() {
-            <span class="comment">// TODO: create real textures to bind
-            </span><span class="macro">assert_eq!</span>(D3DERR::INVALIDCALL, device.set_render_target(i, <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span>rt0)));
+        <span class="comment">// muck with probably-out-of-bounds RTs</span>
+        <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> [<span class="number">100</span>, <span class="number">1000</span>, <span class="number">100000</span>, <span class="op">!</span><span class="number">0</span>].<span class="ident">iter</span>().<span class="ident">copied</span>() {
+            <span class="comment">// TODO: create real textures to bind</span>
+            <span class="macro">assert_eq!</span>(<span class="ident">D3DERR::INVALIDCALL</span>, <span class="ident">device</span>.<span class="ident">set_render_target</span>(<span class="ident">i</span>, <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="ident">rt0</span>)));
         }
     }
 
-    <span class="comment">// #[test] fn get_front_buffer_data() {} // TODO
+    <span class="comment">// #[test] fn get_front_buffer_data() {} // TODO</span>
 
-    </span><span class="attribute">#[test] </span><span class="kw">fn </span>clear() {
-        <span class="comment">// TODO: fuzz rects harder
+    <span class="attribute">#[<span class="ident">test</span>]</span> <span class="kw">fn</span> <span class="ident">clear</span>() {
+        <span class="comment">// TODO: fuzz rects harder</span>
 
-        </span><span class="kw">for </span>(ds_fmt,                        has_depth,  has_sten,   require ) <span class="kw">in </span>[
-            (<span class="prelude-val">None</span>,                          <span class="bool-val">false</span>,      <span class="bool-val">false</span>,      <span class="bool-val">true    </span>),
-            (<span class="prelude-val">Some</span>(Format::D24S8),           <span class="bool-val">true</span>,       <span class="bool-val">true</span>,       <span class="bool-val">true    </span>),
-            (<span class="prelude-val">Some</span>(Format::D24X8),           <span class="bool-val">true</span>,       <span class="bool-val">false</span>,      <span class="bool-val">true    </span>),
-            (<span class="prelude-val">Some</span>(Format::D16),             <span class="bool-val">true</span>,       <span class="bool-val">false</span>,      <span class="bool-val">true    </span>),
-            (<span class="prelude-val">Some</span>(Format::D15S1),           <span class="bool-val">true</span>,       <span class="bool-val">true</span>,       <span class="bool-val">false   </span>),
-            (<span class="prelude-val">Some</span>(Format::D24X4S4),         <span class="bool-val">true</span>,       <span class="bool-val">true</span>,       <span class="bool-val">false   </span>),
-            (<span class="prelude-val">Some</span>(Format::D16_LOCKABLE),    <span class="bool-val">true</span>,       <span class="bool-val">false</span>,      <span class="bool-val">false   </span>), <span class="comment">// Not supported on &quot;necromancy&quot;
-            </span>(<span class="prelude-val">Some</span>(Format::D24FS8),          <span class="bool-val">true</span>,       <span class="bool-val">true</span>,       <span class="bool-val">false   </span>),
-            (<span class="prelude-val">Some</span>(Format::D32),             <span class="bool-val">true</span>,       <span class="bool-val">false</span>,      <span class="bool-val">false   </span>),
-            (<span class="prelude-val">Some</span>(Format::D32_LOCKABLE),    <span class="bool-val">true</span>,       <span class="bool-val">false</span>,      <span class="bool-val">false   </span>),
-            (<span class="prelude-val">Some</span>(Format::D32F_LOCKABLE),   <span class="bool-val">true</span>,       <span class="bool-val">false</span>,      <span class="bool-val">false   </span>), <span class="comment">// Not supported on &quot;necromancy&quot;
-            </span>(<span class="prelude-val">Some</span>(Format::X8_LOCKABLE),     <span class="bool-val">false</span>,      <span class="bool-val">false</span>,      <span class="bool-val">false   </span>),
-        ].iter().copied() {
-            <span class="kw">let </span>device = device_test_pp(<span class="bool-val">false</span>, |pp, <span class="kw">_</span>| {
-                <span class="kw">if let </span><span class="prelude-val">Some</span>(ds_fmt) = ds_fmt {
-                    pp.enable_auto_depth_stencil = <span class="bool-val">true</span>.into();
-                    pp.auto_depth_stencil_format = ds_fmt;
+        <span class="kw">for</span> (<span class="ident">ds_fmt</span>,                        <span class="ident">has_depth</span>,  <span class="ident">has_sten</span>,   <span class="ident">require</span> ) <span class="kw">in</span> [
+            (<span class="prelude-val">None</span>,                          <span class="bool-val">false</span>,      <span class="bool-val">false</span>,      <span class="bool-val">true</span>    ),
+            (<span class="prelude-val">Some</span>(<span class="ident">Format::D24S8</span>),           <span class="bool-val">true</span>,       <span class="bool-val">true</span>,       <span class="bool-val">true</span>    ),
+            (<span class="prelude-val">Some</span>(<span class="ident">Format::D24X8</span>),           <span class="bool-val">true</span>,       <span class="bool-val">false</span>,      <span class="bool-val">true</span>    ),
+            (<span class="prelude-val">Some</span>(<span class="ident">Format::D16</span>),             <span class="bool-val">true</span>,       <span class="bool-val">false</span>,      <span class="bool-val">true</span>    ),
+            (<span class="prelude-val">Some</span>(<span class="ident">Format::D15S1</span>),           <span class="bool-val">true</span>,       <span class="bool-val">true</span>,       <span class="bool-val">false</span>   ),
+            (<span class="prelude-val">Some</span>(<span class="ident">Format::D24X4S4</span>),         <span class="bool-val">true</span>,       <span class="bool-val">true</span>,       <span class="bool-val">false</span>   ),
+            (<span class="prelude-val">Some</span>(<span class="ident">Format::D16_LOCKABLE</span>),    <span class="bool-val">true</span>,       <span class="bool-val">false</span>,      <span class="bool-val">false</span>   ), <span class="comment">// Not supported on &quot;necromancy&quot;</span>
+            (<span class="prelude-val">Some</span>(<span class="ident">Format::D24FS8</span>),          <span class="bool-val">true</span>,       <span class="bool-val">true</span>,       <span class="bool-val">false</span>   ),
+            (<span class="prelude-val">Some</span>(<span class="ident">Format::D32</span>),             <span class="bool-val">true</span>,       <span class="bool-val">false</span>,      <span class="bool-val">false</span>   ),
+            (<span class="prelude-val">Some</span>(<span class="ident">Format::D32_LOCKABLE</span>),    <span class="bool-val">true</span>,       <span class="bool-val">false</span>,      <span class="bool-val">false</span>   ),
+            (<span class="prelude-val">Some</span>(<span class="ident">Format::D32F_LOCKABLE</span>),   <span class="bool-val">true</span>,       <span class="bool-val">false</span>,      <span class="bool-val">false</span>   ), <span class="comment">// Not supported on &quot;necromancy&quot;</span>
+            (<span class="prelude-val">Some</span>(<span class="ident">Format::X8_LOCKABLE</span>),     <span class="bool-val">false</span>,      <span class="bool-val">false</span>,      <span class="bool-val">false</span>   ),
+        ].<span class="ident">iter</span>().<span class="ident">copied</span>() {
+            <span class="kw">let</span> <span class="ident">device</span> <span class="op">=</span> <span class="ident">device_test_pp</span>(<span class="bool-val">false</span>, <span class="op">|</span><span class="ident">pp</span>, <span class="kw">_</span><span class="op">|</span> {
+                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">ds_fmt</span>) <span class="op">=</span> <span class="ident">ds_fmt</span> {
+                    <span class="ident">pp</span>.<span class="ident">enable_auto_depth_stencil</span> <span class="op">=</span> <span class="bool-val">true</span>.<span class="ident">into</span>();
+                    <span class="ident">pp</span>.<span class="ident">auto_depth_stencil_format</span> <span class="op">=</span> <span class="ident">ds_fmt</span>;
                 }
             });
-            <span class="kw">if </span>device.is_err() &amp;&amp; !require { <span class="kw">continue </span>}
-            <span class="kw">let </span>device = device.unwrap_or_else(|err| <span class="macro">panic!</span>(<span class="string">&quot;bad depth-stencil: {:?} {:?}&quot;</span>, ds_fmt, err));
+            <span class="kw">if</span> <span class="ident">device</span>.<span class="ident">is_err</span>() <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">require</span> { <span class="kw">continue</span> }
+            <span class="kw">let</span> <span class="ident">device</span> <span class="op">=</span> <span class="ident">device</span>.<span class="ident">unwrap_or_else</span>(<span class="op">|</span><span class="ident">err</span><span class="op">|</span> <span class="macro">panic!</span>(<span class="string">&quot;bad depth-stencil: {:?} {:?}&quot;</span>, <span class="ident">ds_fmt</span>, <span class="ident">err</span>));
 
-            <span class="kw">for </span>remove_ds <span class="kw">in </span>[<span class="bool-val">false</span>, <span class="bool-val">true</span>].iter().copied() {
-                <span class="kw">let </span>autods = device.get_depth_stencil_surface().unwrap();
-                <span class="kw">if </span>remove_ds {
-                    <span class="kw">if </span>autods.is_none() { <span class="kw">continue </span>}
-                    device.set_depth_stencil_surface(<span class="prelude-val">None</span>).unwrap();
+            <span class="kw">for</span> <span class="ident">remove_ds</span> <span class="kw">in</span> [<span class="bool-val">false</span>, <span class="bool-val">true</span>].<span class="ident">iter</span>().<span class="ident">copied</span>() {
+                <span class="kw">let</span> <span class="ident">autods</span> <span class="op">=</span> <span class="ident">device</span>.<span class="ident">get_depth_stencil_surface</span>().<span class="ident">unwrap</span>();
+                <span class="kw">if</span> <span class="ident">remove_ds</span> {
+                    <span class="kw">if</span> <span class="ident">autods</span>.<span class="ident">is_none</span>() { <span class="kw">continue</span> }
+                    <span class="ident">device</span>.<span class="ident">set_depth_stencil_surface</span>(<span class="prelude-val">None</span>).<span class="ident">unwrap</span>();
                 }
 
-                <span class="kw">let </span>has_depth = has_depth &amp;&amp; !remove_ds;
-                <span class="kw">let </span>has_sten  = has_sten  &amp;&amp; !remove_ds;
+                <span class="kw">let</span> <span class="ident">has_depth</span> <span class="op">=</span> <span class="ident">has_depth</span> <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">remove_ds</span>;
+                <span class="kw">let</span> <span class="ident">has_sten</span>  <span class="op">=</span> <span class="ident">has_sten</span>  <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">remove_ds</span>;
 
-                <span class="kw">for </span>(target,                        depth,                      stencil     ) <span class="kw">in </span>[
-                    (<span class="prelude-val">None</span>,                          <span class="prelude-val">None</span>,                       <span class="prelude-val">None        </span>), <span class="comment">// none
-                    </span>(<span class="prelude-val">Some</span>(Color::argb(<span class="number">0xFF112233</span>)), <span class="prelude-val">Some</span>(<span class="number">0.5</span>),                  <span class="prelude-val">Some</span>(<span class="number">0xFFFF</span>)), <span class="comment">// all
-                    // color
-                    </span>(<span class="prelude-val">Some</span>(Color::argb(<span class="number">0xFF112233</span>)), <span class="prelude-val">None</span>,                       <span class="prelude-val">None        </span>),
-                    <span class="comment">// depth
-                    </span>(<span class="prelude-val">None</span>,                          <span class="prelude-val">Some</span>(-<span class="number">1.0</span>),                 <span class="prelude-val">None        </span>),
-                    (<span class="prelude-val">None</span>,                          <span class="prelude-val">Some</span>(-<span class="number">0.5</span>),                 <span class="prelude-val">None        </span>),
-                    (<span class="prelude-val">None</span>,                          <span class="prelude-val">Some</span>( <span class="number">0.0</span>),                 <span class="prelude-val">None        </span>),
-                    (<span class="prelude-val">None</span>,                          <span class="prelude-val">Some</span>( <span class="number">0.5</span>),                 <span class="prelude-val">None        </span>),
-                    (<span class="prelude-val">None</span>,                          <span class="prelude-val">Some</span>( <span class="number">1.0</span>),                 <span class="prelude-val">None        </span>),
-                    (<span class="prelude-val">None</span>,                          <span class="prelude-val">Some</span>( <span class="number">1.5</span>),                 <span class="prelude-val">None        </span>),
-                    (<span class="prelude-val">None</span>,                          <span class="prelude-val">Some</span>( <span class="number">2.0</span>),                 <span class="prelude-val">None        </span>),
-                    (<span class="prelude-val">None</span>,                          <span class="prelude-val">Some</span>( <span class="number">2.0</span>),                 <span class="prelude-val">None        </span>),
-                    (<span class="prelude-val">None</span>,                          <span class="prelude-val">Some</span>(f32::MIN),             <span class="prelude-val">None        </span>),
-                    (<span class="prelude-val">None</span>,                          <span class="prelude-val">Some</span>(f32::MIN_POSITIVE),    <span class="prelude-val">None        </span>),
-                    (<span class="prelude-val">None</span>,                          <span class="prelude-val">Some</span>(f32::NAN),             <span class="prelude-val">None        </span>),
-                    (<span class="prelude-val">None</span>,                          <span class="prelude-val">Some</span>(f32::INFINITY),        <span class="prelude-val">None        </span>),
-                    <span class="comment">// stencil
-                    </span>(<span class="prelude-val">None</span>,                          <span class="prelude-val">None</span>,                       <span class="prelude-val">Some</span>(<span class="number">0</span>)     ),
+                <span class="kw">for</span> (<span class="ident">target</span>,                        <span class="ident">depth</span>,                      <span class="ident">stencil</span>     ) <span class="kw">in</span> [
+                    (<span class="prelude-val">None</span>,                          <span class="prelude-val">None</span>,                       <span class="prelude-val">None</span>        ), <span class="comment">// none</span>
+                    (<span class="prelude-val">Some</span>(<span class="ident">Color::argb</span>(<span class="number">0xFF112233</span>)), <span class="prelude-val">Some</span>(<span class="number">0.5</span>),                  <span class="prelude-val">Some</span>(<span class="number">0xFFFF</span>)), <span class="comment">// all</span>
+                    <span class="comment">// color</span>
+                    (<span class="prelude-val">Some</span>(<span class="ident">Color::argb</span>(<span class="number">0xFF112233</span>)), <span class="prelude-val">None</span>,                       <span class="prelude-val">None</span>        ),
+                    <span class="comment">// depth</span>
+                    (<span class="prelude-val">None</span>,                          <span class="prelude-val">Some</span>(<span class="op">-</span><span class="number">1.0</span>),                 <span class="prelude-val">None</span>        ),
+                    (<span class="prelude-val">None</span>,                          <span class="prelude-val">Some</span>(<span class="op">-</span><span class="number">0.5</span>),                 <span class="prelude-val">None</span>        ),
+                    (<span class="prelude-val">None</span>,                          <span class="prelude-val">Some</span>( <span class="number">0.0</span>),                 <span class="prelude-val">None</span>        ),
+                    (<span class="prelude-val">None</span>,                          <span class="prelude-val">Some</span>( <span class="number">0.5</span>),                 <span class="prelude-val">None</span>        ),
+                    (<span class="prelude-val">None</span>,                          <span class="prelude-val">Some</span>( <span class="number">1.0</span>),                 <span class="prelude-val">None</span>        ),
+                    (<span class="prelude-val">None</span>,                          <span class="prelude-val">Some</span>( <span class="number">1.5</span>),                 <span class="prelude-val">None</span>        ),
+                    (<span class="prelude-val">None</span>,                          <span class="prelude-val">Some</span>( <span class="number">2.0</span>),                 <span class="prelude-val">None</span>        ),
+                    (<span class="prelude-val">None</span>,                          <span class="prelude-val">Some</span>( <span class="number">2.0</span>),                 <span class="prelude-val">None</span>        ),
+                    (<span class="prelude-val">None</span>,                          <span class="prelude-val">Some</span>(<span class="ident">f32::MIN</span>),             <span class="prelude-val">None</span>        ),
+                    (<span class="prelude-val">None</span>,                          <span class="prelude-val">Some</span>(<span class="ident">f32::MIN_POSITIVE</span>),    <span class="prelude-val">None</span>        ),
+                    (<span class="prelude-val">None</span>,                          <span class="prelude-val">Some</span>(<span class="ident">f32::NAN</span>),             <span class="prelude-val">None</span>        ),
+                    (<span class="prelude-val">None</span>,                          <span class="prelude-val">Some</span>(<span class="ident">f32::INFINITY</span>),        <span class="prelude-val">None</span>        ),
+                    <span class="comment">// stencil</span>
+                    (<span class="prelude-val">None</span>,                          <span class="prelude-val">None</span>,                       <span class="prelude-val">Some</span>(<span class="number">0</span>)     ),
                     (<span class="prelude-val">None</span>,                          <span class="prelude-val">None</span>,                       <span class="prelude-val">Some</span>(<span class="number">0xFF</span>)  ),
-                    (<span class="prelude-val">None</span>,                          <span class="prelude-val">None</span>,                       <span class="prelude-val">Some</span>(!<span class="number">0</span>)    ),
-                ].iter().copied() {
-                    <span class="macro">println!</span>(<span class="string">&quot;ds_fmt={:?} target={:?} depth={:?} stencil={:?}&quot;</span>, ds_fmt, target, depth, stencil);
-                    <span class="kw">for </span>rects <span class="kw">in </span>[
+                    (<span class="prelude-val">None</span>,                          <span class="prelude-val">None</span>,                       <span class="prelude-val">Some</span>(<span class="op">!</span><span class="number">0</span>)    ),
+                ].<span class="ident">iter</span>().<span class="ident">copied</span>() {
+                    <span class="macro">println!</span>(<span class="string">&quot;ds_fmt={:?} target={:?} depth={:?} stencil={:?}&quot;</span>, <span class="ident">ds_fmt</span>, <span class="ident">target</span>, <span class="ident">depth</span>, <span class="ident">stencil</span>);
+                    <span class="kw">for</span> <span class="ident">rects</span> <span class="kw">in</span> [
                         <span class="prelude-val">None</span>,
                         <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span>[][..]),
-                        <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span>[Rect::from([<span class="number">0</span>..<span class="number">0</span>,   <span class="number">0</span>..<span class="number">0</span>])][..]),                                    <span class="comment">// empty rect
-                        </span><span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span>[Rect::from([<span class="number">0</span>..<span class="number">100</span>, <span class="number">0</span>..<span class="number">100</span>])][..]),                                  <span class="comment">// small rect
-                        </span><span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span>[Rect::from([<span class="number">100</span>..<span class="number">10000</span>, <span class="number">100</span>..<span class="number">10000</span>])][..]),                          <span class="comment">// out of bounds rect
-                        </span><span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span>[Rect::from([-<span class="number">10000</span>..<span class="number">10000</span>, -<span class="number">10000</span>..<span class="number">10000</span>])][..]),                    <span class="comment">// positive dims huge rect
-                        </span><span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span>[Rect::from([<span class="number">10000</span>..-<span class="number">10000</span>, <span class="number">10000</span>..-<span class="number">10000</span>])][..]),                    <span class="comment">// negative dims huge rect
-                        </span><span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span>[Rect::from([<span class="number">0</span>..<span class="number">100</span>, <span class="number">0</span>..<span class="number">100</span>]), Rect::from([<span class="number">0</span>..<span class="number">100</span>, <span class="number">0</span>..<span class="number">100</span>])][..]),    <span class="comment">// overlapping rects
-                    </span>].iter().copied() {
-                        <span class="kw">let </span>result = device.clear(rects, target, depth, stencil);
-                        <span class="macro">println!</span>(<span class="string">&quot;  rects: {: &lt;70} == {:?}&quot;</span>, <span class="macro">format!</span>(<span class="string">&quot;{:?}&quot;</span>, rects), result);
+                        <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span>[<span class="ident">Rect::from</span>([<span class="number">0</span>..<span class="number">0</span>,   <span class="number">0</span>..<span class="number">0</span>])][..]),                                    <span class="comment">// empty rect</span>
+                        <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span>[<span class="ident">Rect::from</span>([<span class="number">0</span>..<span class="number">100</span>, <span class="number">0</span>..<span class="number">100</span>])][..]),                                  <span class="comment">// small rect</span>
+                        <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span>[<span class="ident">Rect::from</span>([<span class="number">100</span>..<span class="number">10000</span>, <span class="number">100</span>..<span class="number">10000</span>])][..]),                          <span class="comment">// out of bounds rect</span>
+                        <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span>[<span class="ident">Rect::from</span>([<span class="op">-</span><span class="number">10000</span>..<span class="number">10000</span>, <span class="op">-</span><span class="number">10000</span>..<span class="number">10000</span>])][..]),                    <span class="comment">// positive dims huge rect</span>
+                        <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span>[<span class="ident">Rect::from</span>([<span class="number">10000</span>..<span class="op">-</span><span class="number">10000</span>, <span class="number">10000</span>..<span class="op">-</span><span class="number">10000</span>])][..]),                    <span class="comment">// negative dims huge rect</span>
+                        <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span>[<span class="ident">Rect::from</span>([<span class="number">0</span>..<span class="number">100</span>, <span class="number">0</span>..<span class="number">100</span>]), <span class="ident">Rect::from</span>([<span class="number">0</span>..<span class="number">100</span>, <span class="number">0</span>..<span class="number">100</span>])][..]),    <span class="comment">// overlapping rects</span>
+                    ].<span class="ident">iter</span>().<span class="ident">copied</span>() {
+                        <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">device</span>.<span class="ident">clear</span>(<span class="ident">rects</span>, <span class="ident">target</span>, <span class="ident">depth</span>, <span class="ident">stencil</span>);
+                        <span class="macro">println!</span>(<span class="string">&quot;  rects: {: &lt;70} == {:?}&quot;</span>, <span class="macro">format!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="ident">rects</span>), <span class="ident">result</span>);
 
-                        <span class="kw">if </span>target.is_none() &amp;&amp; depth.is_none() &amp;&amp; stencil.is_none() {
-                            <span class="macro">assert_eq!</span>(D3DERR::INVALIDCALL, result, <span class="string">&quot;expected failure - target=depth=stencil=None - nothing to clear&quot;</span>);
-                        } <span class="kw">else if </span>depth.is_some() &amp;&amp; !has_depth {
-                            <span class="macro">assert_eq!</span>(D3DERR::INVALIDCALL, result, <span class="string">&quot;expected failure - depth={:?} was specified but no depth buffer was bound&quot;</span>, depth);
-                        } <span class="kw">else if </span>stencil.is_some() &amp;&amp; !has_sten {
-                            <span class="macro">assert_eq!</span>(D3DERR::INVALIDCALL, result, <span class="string">&quot;expected failure - stencil={:?} was specified but no stencil buffer was bound&quot;</span>, stencil);
-                        } <span class="kw">else </span>{
-                            result.expect(<span class="string">&quot;expected success, got&quot;</span>);
+                        <span class="kw">if</span> <span class="ident">target</span>.<span class="ident">is_none</span>() <span class="op">&amp;&amp;</span> <span class="ident">depth</span>.<span class="ident">is_none</span>() <span class="op">&amp;&amp;</span> <span class="ident">stencil</span>.<span class="ident">is_none</span>() {
+                            <span class="macro">assert_eq!</span>(<span class="ident">D3DERR::INVALIDCALL</span>, <span class="ident">result</span>, <span class="string">&quot;expected failure - target=depth=stencil=None - nothing to clear&quot;</span>);
+                        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">depth</span>.<span class="ident">is_some</span>() <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">has_depth</span> {
+                            <span class="macro">assert_eq!</span>(<span class="ident">D3DERR::INVALIDCALL</span>, <span class="ident">result</span>, <span class="string">&quot;expected failure - depth={:?} was specified but no depth buffer was bound&quot;</span>, <span class="ident">depth</span>);
+                        } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">stencil</span>.<span class="ident">is_some</span>() <span class="op">&amp;&amp;</span> <span class="op">!</span><span class="ident">has_sten</span> {
+                            <span class="macro">assert_eq!</span>(<span class="ident">D3DERR::INVALIDCALL</span>, <span class="ident">result</span>, <span class="string">&quot;expected failure - stencil={:?} was specified but no stencil buffer was bound&quot;</span>, <span class="ident">stencil</span>);
+                        } <span class="kw">else</span> {
+                            <span class="ident">result</span>.<span class="ident">expect</span>(<span class="string">&quot;expected success, got&quot;</span>);
                         }
                     }
                 }
 
-                device.set_depth_stencil_surface(autods.as_ref()).unwrap();
+                <span class="ident">device</span>.<span class="ident">set_depth_stencil_surface</span>(<span class="ident">autods</span>.<span class="ident">as_ref</span>()).<span class="ident">unwrap</span>();
             }
         }
     }
 
-    <span class="attribute">#[test] </span><span class="kw">fn </span>color_fill() {
-        <span class="kw">let </span>device = device_test();
-        <span class="kw">let </span>rt0 = device.get_render_target(<span class="number">0</span>).unwrap().unwrap();
-        device.color_fill(<span class="kw-2">&amp;</span>rt0, <span class="prelude-val">None</span>, Color::argb(<span class="number">0xFF112233</span>)).unwrap();
-        device.color_fill(<span class="kw-2">&amp;</span>rt0, <span class="prelude-val">Some</span>(Rect::from([<span class="number">0</span>..<span class="number">1</span>, <span class="number">0</span>..<span class="number">1</span>])), Color::argb(<span class="number">0xFF112233</span>)).unwrap();
-        <span class="macro">assert_eq!</span>(D3DERR::INVALIDCALL, device.color_fill(<span class="kw-2">&amp;</span>rt0, <span class="prelude-val">Some</span>( Rect::from([-<span class="number">1</span>..<span class="number">1</span>, -<span class="number">1</span>..<span class="number">1</span>])                 ), Color::argb(<span class="number">0xFF112233</span>)));
-        <span class="macro">assert_eq!</span>(D3DERR::INVALIDCALL, device.color_fill(<span class="kw-2">&amp;</span>rt0, <span class="prelude-val">Some</span>( Rect::from([<span class="number">0</span>..<span class="number">100000</span>, <span class="number">0</span>..<span class="number">100000</span>])         ), Color::argb(<span class="number">0xFF112233</span>)));
-        <span class="macro">assert_eq!</span>(D3DERR::INVALIDCALL, device.color_fill(<span class="kw-2">&amp;</span>rt0, <span class="prelude-val">Some</span>( Rect::from([<span class="number">10000</span>..-<span class="number">10000</span>, <span class="number">10000</span>..-<span class="number">10000</span>]) ), Color::argb(<span class="number">0xFF112233</span>)));
-        <span class="macro">assert_eq!</span>(D3DERR::INVALIDCALL, device.color_fill(<span class="kw-2">&amp;</span>rt0, <span class="prelude-val">Some</span>( Rect::from([-<span class="number">10000</span>..<span class="number">10000</span>, -<span class="number">10000</span>..<span class="number">10000</span>]) ), Color::argb(<span class="number">0xFF112233</span>)));
+    <span class="attribute">#[<span class="ident">test</span>]</span> <span class="kw">fn</span> <span class="ident">color_fill</span>() {
+        <span class="kw">let</span> <span class="ident">device</span> <span class="op">=</span> <span class="ident">device_test</span>();
+        <span class="kw">let</span> <span class="ident">rt0</span> <span class="op">=</span> <span class="ident">device</span>.<span class="ident">get_render_target</span>(<span class="number">0</span>).<span class="ident">unwrap</span>().<span class="ident">unwrap</span>();
+        <span class="ident">device</span>.<span class="ident">color_fill</span>(<span class="kw-2">&amp;</span><span class="ident">rt0</span>, <span class="prelude-val">None</span>, <span class="ident">Color::argb</span>(<span class="number">0xFF112233</span>)).<span class="ident">unwrap</span>();
+        <span class="ident">device</span>.<span class="ident">color_fill</span>(<span class="kw-2">&amp;</span><span class="ident">rt0</span>, <span class="prelude-val">Some</span>(<span class="ident">Rect::from</span>([<span class="number">0</span>..<span class="number">1</span>, <span class="number">0</span>..<span class="number">1</span>])), <span class="ident">Color::argb</span>(<span class="number">0xFF112233</span>)).<span class="ident">unwrap</span>();
+        <span class="macro">assert_eq!</span>(<span class="ident">D3DERR::INVALIDCALL</span>, <span class="ident">device</span>.<span class="ident">color_fill</span>(<span class="kw-2">&amp;</span><span class="ident">rt0</span>, <span class="prelude-val">Some</span>( <span class="ident">Rect::from</span>([<span class="op">-</span><span class="number">1</span>..<span class="number">1</span>, <span class="op">-</span><span class="number">1</span>..<span class="number">1</span>])                 ), <span class="ident">Color::argb</span>(<span class="number">0xFF112233</span>)));
+        <span class="macro">assert_eq!</span>(<span class="ident">D3DERR::INVALIDCALL</span>, <span class="ident">device</span>.<span class="ident">color_fill</span>(<span class="kw-2">&amp;</span><span class="ident">rt0</span>, <span class="prelude-val">Some</span>( <span class="ident">Rect::from</span>([<span class="number">0</span>..<span class="number">100000</span>, <span class="number">0</span>..<span class="number">100000</span>])         ), <span class="ident">Color::argb</span>(<span class="number">0xFF112233</span>)));
+        <span class="macro">assert_eq!</span>(<span class="ident">D3DERR::INVALIDCALL</span>, <span class="ident">device</span>.<span class="ident">color_fill</span>(<span class="kw-2">&amp;</span><span class="ident">rt0</span>, <span class="prelude-val">Some</span>( <span class="ident">Rect::from</span>([<span class="number">10000</span>..<span class="op">-</span><span class="number">10000</span>, <span class="number">10000</span>..<span class="op">-</span><span class="number">10000</span>]) ), <span class="ident">Color::argb</span>(<span class="number">0xFF112233</span>)));
+        <span class="macro">assert_eq!</span>(<span class="ident">D3DERR::INVALIDCALL</span>, <span class="ident">device</span>.<span class="ident">color_fill</span>(<span class="kw-2">&amp;</span><span class="ident">rt0</span>, <span class="prelude-val">Some</span>( <span class="ident">Rect::from</span>([<span class="op">-</span><span class="number">10000</span>..<span class="number">10000</span>, <span class="op">-</span><span class="number">10000</span>..<span class="number">10000</span>]) ), <span class="ident">Color::argb</span>(<span class="number">0xFF112233</span>)));
 
-        <span class="comment">// TODO: test unsupported pools
-        // TODO: test unsupported formats
-    </span>}
+        <span class="comment">// TODO: test unsupported pools</span>
+        <span class="comment">// TODO: test unsupported formats</span>
+    }
 }
 
 
 
-<span class="comment">//#cpp2rust IDirect3DSurface9                       = d3d9::Surface
-//#cpp2rust IDirect3DSurface9                       = d3d9::IDirect3DSurface9Ext
-</span></code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (b44197abb 2022-09-05)" ></div></body></html>
+<span class="comment">//#cpp2rust IDirect3DSurface9                       = d3d9::Surface</span>
+<span class="comment">//#cpp2rust IDirect3DSurface9                       = d3d9::IDirect3DSurface9Ext</span>
+</code></pre></div>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0 (4b91a6ea7 2022-08-08)" ></div>
+</body></html>

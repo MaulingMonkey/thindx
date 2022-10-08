@@ -1,4 +1,10 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3dcompiler.h\dll\archive.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>archive.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../../normalize.css"><link rel="stylesheet" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../../dark.css" disabled><link rel="stylesheet" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3dcompiler.h\dll\archive.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>archive.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div>
+        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
+                                <a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -257,264 +263,265 @@
 <span id="257">257</span>
 <span id="258">258</span>
 <span id="259">259</span>
-</pre><pre class="rust"><code><span class="kw">use crate</span>::<span class="kw-2">*</span>;
-<span class="kw">use </span><span class="kw">crate</span>::d3d::<span class="kw-2">*</span>;
+</pre><pre class="rust"><code><span class="kw">use</span> <span class="kw">crate</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::d3d</span>::<span class="kw-2">*</span>;
 
-<span class="kw">use </span>std::ptr::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">std::ptr</span>::<span class="kw-2">*</span>;
 
 
 
-<span class="doccomment">/// &lt;h1 id=&quot;archive&quot; class=&quot;section-header&quot;&gt;&lt;a href=&quot;#archive&quot;&gt;Manipulate Bytecode Archives&lt;/a&gt;&lt;/h1&gt;
-</span><span class="kw">impl </span>Compiler {
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dcompressshaders)\]
-    /// D3DCompressShaders
-    ///
-    /// Compresses a set of shaders into a more compact form.
-    ///
-    /// ### Arguments
-    /// *   `shaders`       - The compiled shader(s) to compress.
-    /// *   `flags`         - [CompressShader] flags controlling compression.
-    ///
-    /// ### Errors
-    /// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_42.dll` and earlier
-    ///
-    /// ### Example
-    /// ```rust
-    /// # use thindx::d3d::*; let d3dc = Compiler::load_system(47).unwrap();
-    /// let basic_hlsl  = std::fs::read(r&quot;test\data\basic.hlsl&quot;).unwrap();
-    /// let plain_txt   = std::fs::read(r&quot;test\data\plain.txt&quot;).unwrap();
-    /// let tocompress = [
-    ///     ShaderData::from(&amp;basic_hlsl[..]),
-    ///     ShaderData::from(&amp;plain_txt[..]),
-    /// ];
-    /// println!(&quot;tocompress: [{} bytes, {} bytes]&quot;, basic_hlsl.len(), plain_txt.len());
-    ///
-    /// let compress = d3dc.compress_shaders(&amp;tocompress, CompressShader::default()).unwrap();
-    /// println!(&quot;compressed:  {} bytes&quot;, compress.len());
-    /// ```
-    ///
-    /// ### Output
-    /// ```text
-    /// to_compress: [493 bytes, 58 bytes]
-    /// compressed:   432 bytes
-    /// ```
-    ///
-    /// ### Remarks
-    /// *   You can use this API to develop your Windows Store apps, but you can&#39;t use it in apps that you submit to the Windows Store.
-    /// *   This was introduced by d3dcompiler_43.dll, and is unavailable in earlier versions.
-    </span><span class="kw">pub fn </span>compress_shaders(
+<span class="doccomment">/// &lt;h1 id=&quot;archive&quot; class=&quot;section-header&quot;&gt;&lt;a href=&quot;#archive&quot;&gt;Manipulate Bytecode Archives&lt;/a&gt;&lt;/h1&gt;</span>
+<span class="kw">impl</span> <span class="ident">Compiler</span> {
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dcompressshaders)\]</span>
+    <span class="doccomment">/// D3DCompressShaders</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Compresses a set of shaders into a more compact form.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Arguments</span>
+    <span class="doccomment">/// *   `shaders`       - The compiled shader(s) to compress.</span>
+    <span class="doccomment">/// *   `flags`         - [CompressShader] flags controlling compression.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Errors</span>
+    <span class="doccomment">/// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_42.dll` and earlier</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Example</span>
+    <span class="doccomment">/// ```rust</span>
+    <span class="doccomment">/// # use thindx::d3d::*; let d3dc = Compiler::load_system(47).unwrap();</span>
+    <span class="doccomment">/// let basic_hlsl  = std::fs::read(r&quot;test\data\basic.hlsl&quot;).unwrap();</span>
+    <span class="doccomment">/// let plain_txt   = std::fs::read(r&quot;test\data\plain.txt&quot;).unwrap();</span>
+    <span class="doccomment">/// let tocompress = [</span>
+    <span class="doccomment">///     ShaderData::from(&amp;basic_hlsl[..]),</span>
+    <span class="doccomment">///     ShaderData::from(&amp;plain_txt[..]),</span>
+    <span class="doccomment">/// ];</span>
+    <span class="doccomment">/// println!(&quot;tocompress: [{} bytes, {} bytes]&quot;, basic_hlsl.len(), plain_txt.len());</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// let compress = d3dc.compress_shaders(&amp;tocompress, CompressShader::default()).unwrap();</span>
+    <span class="doccomment">/// println!(&quot;compressed:  {} bytes&quot;, compress.len());</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Output</span>
+    <span class="doccomment">/// ```text</span>
+    <span class="doccomment">/// to_compress: [493 bytes, 58 bytes]</span>
+    <span class="doccomment">/// compressed:   432 bytes</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Remarks</span>
+    <span class="doccomment">/// *   You can use this API to develop your Windows Store apps, but you can&#39;t use it in apps that you submit to the Windows Store.</span>
+    <span class="doccomment">/// *   This was introduced by d3dcompiler_43.dll, and is unavailable in earlier versions.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">compress_shaders</span>(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        shaders:                <span class="kw-2">&amp;</span>[ShaderData],
-        flags:                  <span class="kw">impl </span>Into&lt;CompressShader&gt;,
-    ) -&gt; <span class="prelude-ty">Result</span>&lt;BytesBlob, Error&gt; {
-        <span class="comment">// Early outs
-        </span><span class="macro">fn_context_dll!</span>(d3d::Compiler::compress_shaders =&gt; <span class="self">self</span>.D3DCompressShaders);
-        <span class="kw">let </span>num_shaders = <span class="macro">fn_param_try_len32!</span>(shaders)<span class="question-mark">?</span>;
+        <span class="ident">shaders</span>:                <span class="kw-2">&amp;</span>[<span class="ident">ShaderData</span>],
+        <span class="ident">flags</span>:                  <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">CompressShader</span><span class="op">&gt;</span>,
+    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">BytesBlob</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+        <span class="comment">// Early outs</span>
+        <span class="macro">fn_context_dll!</span>(<span class="ident">d3d::Compiler::compress_shaders</span> =&gt; <span class="self">self</span>.<span class="ident">D3DCompressShaders</span>);
+        <span class="kw">let</span> <span class="ident">num_shaders</span> <span class="op">=</span> <span class="macro">fn_param_try_len32!</span>(<span class="ident">shaders</span>)<span class="question-mark">?</span>;
 
-        <span class="comment">// SAFETY: ⚠️ This sketchy mut cast *should* be sane (famous last words.)
-        // We&#39;re only casting away the immutability of the D3D_SHADER_DATA elements, not the bytecode those elements point to.
-        // The array is far too small to reuse as an in-place compression buffer or anything like that.
-        // Additionally, in manual testing, I see no mutation of the underlying array.
-        // Finally, `pShaderData` is marked `_In_reads_(uNumShaders)` - if this was actually written to, it should be `_Inout_count_` instead.
-        </span><span class="kw">let </span>shader_data = shaders.as_ptr() <span class="kw">as </span><span class="kw-2">*mut </span><span class="kw">_</span>;
+        <span class="comment">// SAFETY: ⚠️ This sketchy mut cast *should* be sane (famous last words.)</span>
+        <span class="comment">// We&#39;re only casting away the immutability of the D3D_SHADER_DATA elements, not the bytecode those elements point to.</span>
+        <span class="comment">// The array is far too small to reuse as an in-place compression buffer or anything like that.</span>
+        <span class="comment">// Additionally, in manual testing, I see no mutation of the underlying array.</span>
+        <span class="comment">// Finally, `pShaderData` is marked `_In_reads_(uNumShaders)` - if this was actually written to, it should be `_Inout_count_` instead.</span>
+        <span class="kw">let</span> <span class="ident">shader_data</span> <span class="op">=</span> <span class="ident">shaders</span>.<span class="ident">as_ptr</span>() <span class="kw">as</span> <span class="kw-2">*mut</span> <span class="kw">_</span>;
 
-        <span class="kw">let </span>flags       = flags.into().into();
+        <span class="kw">let</span> <span class="ident">flags</span>       <span class="op">=</span> <span class="ident">flags</span>.<span class="ident">into</span>().<span class="ident">into</span>();
 
-        <span class="comment">// SAFETY: ❌ needs fuzz testing for alloc overflow bugs
-        //  * `f`               ✔️ should be valid/sound like all `self.*`
-        //  * `num_shaders`     ⚠️ could truncate within `D3DCompressShaders` (harmless?)
-        //  * `shader_data`     ❌ could overflow an alloc within `D3DCompressShaders`
-        //  * `shader_data`     ✔️ may contain arbitrary non-shader data
-        //  * `flags`           ⚠️ could be invalid
-        //  * `compressed_data` ✔️ is a trivial out-param
-        </span><span class="kw">let </span><span class="kw-2">mut </span>compressed_data = null_mut();
-        <span class="macro">fn_check_hr!</span>(<span class="kw">unsafe </span>{ D3DCompressShaders(num_shaders, shader_data, flags, <span class="kw-2">&amp;mut </span>compressed_data) })<span class="question-mark">?</span>;
+        <span class="comment">// SAFETY: ❌ needs fuzz testing for alloc overflow bugs</span>
+        <span class="comment">//  * `f`               ✔️ should be valid/sound like all `self.*`</span>
+        <span class="comment">//  * `num_shaders`     ⚠️ could truncate within `D3DCompressShaders` (harmless?)</span>
+        <span class="comment">//  * `shader_data`     ❌ could overflow an alloc within `D3DCompressShaders`</span>
+        <span class="comment">//  * `shader_data`     ✔️ may contain arbitrary non-shader data</span>
+        <span class="comment">//  * `flags`           ⚠️ could be invalid</span>
+        <span class="comment">//  * `compressed_data` ✔️ is a trivial out-param</span>
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">compressed_data</span> <span class="op">=</span> <span class="ident">null_mut</span>();
+        <span class="macro">fn_check_hr!</span>(<span class="kw unsafe">unsafe</span> { <span class="ident">D3DCompressShaders</span>(<span class="ident">num_shaders</span>, <span class="ident">shader_data</span>, <span class="ident">flags</span>, <span class="kw-2">&amp;mut</span> <span class="ident">compressed_data</span>) })<span class="question-mark">?</span>;
 
-        <span class="comment">// SAFETY: ✔️
-        //  * `compressed_data` ✔️ is either null (from_raw panics) or a valid, owned, non-dangling ID3DBlob (ownership transfers)
-        //  * `ReadOnlyBlob`    ✔️ imposes no restrictions on `compressed_data`&#39;s contents.
-        </span><span class="prelude-val">Ok</span>(BytesBlob::new(<span class="kw">unsafe </span>{ ReadOnlyBlob::from_raw(compressed_data) }))
+        <span class="comment">// SAFETY: ✔️</span>
+        <span class="comment">//  * `compressed_data` ✔️ is either null (from_raw panics) or a valid, owned, non-dangling ID3DBlob (ownership transfers)</span>
+        <span class="comment">//  * `ReadOnlyBlob`    ✔️ imposes no restrictions on `compressed_data`&#39;s contents.</span>
+        <span class="prelude-val">Ok</span>(<span class="ident">BytesBlob::new</span>(<span class="kw unsafe">unsafe</span> { <span class="ident">ReadOnlyBlob::from_raw</span>(<span class="ident">compressed_data</span>) }))
     }
 
-    <span class="comment">// D3DDecompressShaders behavior:
-    //  * if `ppShaders` is null, E_FAIL, even if you&#39;re requesting 0 shaders
-    //  * if `indices` is specified:
-    //      * `start_index` is ignored
-    //      * `indices[0..num_shaders]` is read for archive indexes to read
-    //      * if `indices` has duplicates, those are null
-    //  * if `indices` is null:
-    //      * treated as if indicies == (start_index .. start_index + num_shaders).collect()
-    //
-    // https://github.com/MaulingMonkey/thindx/issues/5
+    <span class="comment">// D3DDecompressShaders behavior:</span>
+    <span class="comment">//  * if `ppShaders` is null, E_FAIL, even if you&#39;re requesting 0 shaders</span>
+    <span class="comment">//  * if `indices` is specified:</span>
+    <span class="comment">//      * `start_index` is ignored</span>
+    <span class="comment">//      * `indices[0..num_shaders]` is read for archive indexes to read</span>
+    <span class="comment">//      * if `indices` has duplicates, those are null</span>
+    <span class="comment">//  * if `indices` is null:</span>
+    <span class="comment">//      * treated as if indicies == (start_index .. start_index + num_shaders).collect()</span>
+    <span class="comment">//</span>
+    <span class="comment">// https://github.com/MaulingMonkey/thindx/issues/5</span>
 
-    </span><span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3ddecompressshaders)\]
-    /// D3DDecompressShaders
-    ///
-    /// Get the number of compressed shaders in the `src_data` archive.
-    ///
-    /// ### Arguments
-    /// *   `src_data`      - The compressed shaders.
-    ///
-    /// ### Errors
-    /// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_42.dll` and earlier
-    ///
-    /// ### Example
-    /// ```rust
-    /// # use thindx::d3d::*; let d3dc = Compiler::load_system(47).unwrap();
-    /// # let basic_hlsl  = std::fs::read(r&quot;test\data\basic.hlsl&quot;).unwrap();
-    /// # let plain_txt   = std::fs::read(r&quot;test\data\plain.txt&quot;).unwrap();
-    /// # let tocompress = [
-    /// #     ShaderData::from(&amp;basic_hlsl[..]),
-    /// #     ShaderData::from(&amp;plain_txt[..]),
-    /// # ];
-    /// #
-    /// # let compress = d3dc.compress_shaders(&amp;tocompress, CompressShader::default()).unwrap();
-    /// assert_eq!(2, d3dc.decompress_shaders_count(&amp;compress).unwrap());
-    /// ```
-    ///
-    /// ### Remarks
-    /// *   You can use this API to develop your Windows Store apps, but you can&#39;t use it in apps that you submit to the Windows Store.
-    /// *   This was introduced by d3dcompiler_43.dll, and is unavailable in earlier versions.
-    </span><span class="kw">pub fn </span>decompress_shaders_count(<span class="kw-2">&amp;</span><span class="self">self</span>, src_data: <span class="kw-2">&amp;</span>[u8]) -&gt; <span class="prelude-ty">Result</span>&lt;u32, Error&gt; {
-        <span class="macro">fn_context_dll!</span>(d3d::Compiler::decompress_shaders_count =&gt; <span class="self">self</span>.D3DDecompressShaders);
-        <span class="kw">let </span><span class="kw-2">mut </span>shader = null_mut(); <span class="comment">// D3DDecompressShaders will fail with E_FAIL if ppShaders is null, even if it doesn&#39;t use it
-        </span><span class="kw">let </span><span class="kw-2">mut </span>total_shaders = <span class="number">0</span>;
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3ddecompressshaders)\]</span>
+    <span class="doccomment">/// D3DDecompressShaders</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Get the number of compressed shaders in the `src_data` archive.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Arguments</span>
+    <span class="doccomment">/// *   `src_data`      - The compressed shaders.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Errors</span>
+    <span class="doccomment">/// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_42.dll` and earlier</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Example</span>
+    <span class="doccomment">/// ```rust</span>
+    <span class="doccomment">/// # use thindx::d3d::*; let d3dc = Compiler::load_system(47).unwrap();</span>
+    <span class="doccomment">/// # let basic_hlsl  = std::fs::read(r&quot;test\data\basic.hlsl&quot;).unwrap();</span>
+    <span class="doccomment">/// # let plain_txt   = std::fs::read(r&quot;test\data\plain.txt&quot;).unwrap();</span>
+    <span class="doccomment">/// # let tocompress = [</span>
+    <span class="doccomment">/// #     ShaderData::from(&amp;basic_hlsl[..]),</span>
+    <span class="doccomment">/// #     ShaderData::from(&amp;plain_txt[..]),</span>
+    <span class="doccomment">/// # ];</span>
+    <span class="doccomment">/// #</span>
+    <span class="doccomment">/// # let compress = d3dc.compress_shaders(&amp;tocompress, CompressShader::default()).unwrap();</span>
+    <span class="doccomment">/// assert_eq!(2, d3dc.decompress_shaders_count(&amp;compress).unwrap());</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Remarks</span>
+    <span class="doccomment">/// *   You can use this API to develop your Windows Store apps, but you can&#39;t use it in apps that you submit to the Windows Store.</span>
+    <span class="doccomment">/// *   This was introduced by d3dcompiler_43.dll, and is unavailable in earlier versions.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">decompress_shaders_count</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">src_data</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">u32</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+        <span class="macro">fn_context_dll!</span>(<span class="ident">d3d::Compiler::decompress_shaders_count</span> =&gt; <span class="self">self</span>.<span class="ident">D3DDecompressShaders</span>);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">shader</span> <span class="op">=</span> <span class="ident">null_mut</span>(); <span class="comment">// D3DDecompressShaders will fail with E_FAIL if ppShaders is null, even if it doesn&#39;t use it</span>
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">total_shaders</span> <span class="op">=</span> <span class="number">0</span>;
 
-        <span class="comment">// SAFETY: ❌ needs fuzz testing for alloc overflow and corruption bugs
-        //  * `f`               ✔️ should be valid/sound like all `self.*`
-        //  * `src_data`        ⚠️ probably won&#39;t overflow an alloc within `D3DDecompressShaders` with these params?
-        //  * `src_data`        ❌ could contain corrupt decompression data
-        //  * `shader`          ✔️ is unused except for a null ptr check
-        //  * `total_shaders`   ⚠️ could be truncated at the 4 GB mark
-        </span><span class="kw">let </span>hr = <span class="kw">unsafe </span>{ D3DDecompressShaders(src_data.as_ptr().cast(), src_data.len(), <span class="number">0</span>, <span class="number">0</span>, null_mut(), <span class="number">0</span>, <span class="kw-2">&amp;mut </span>shader, <span class="kw-2">&amp;mut </span>total_shaders) };
-        <span class="macro">debug_assert!</span>(shader.is_null(), <span class="string">&quot;BUG: shader shouldn&#39;t have been touched!?!?&quot;</span>);
-        <span class="macro">fn_check_hr!</span>(hr)<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(total_shaders)
+        <span class="comment">// SAFETY: ❌ needs fuzz testing for alloc overflow and corruption bugs</span>
+        <span class="comment">//  * `f`               ✔️ should be valid/sound like all `self.*`</span>
+        <span class="comment">//  * `src_data`        ⚠️ probably won&#39;t overflow an alloc within `D3DDecompressShaders` with these params?</span>
+        <span class="comment">//  * `src_data`        ❌ could contain corrupt decompression data</span>
+        <span class="comment">//  * `shader`          ✔️ is unused except for a null ptr check</span>
+        <span class="comment">//  * `total_shaders`   ⚠️ could be truncated at the 4 GB mark</span>
+        <span class="kw">let</span> <span class="ident">hr</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="ident">D3DDecompressShaders</span>(<span class="ident">src_data</span>.<span class="ident">as_ptr</span>().<span class="ident">cast</span>(), <span class="ident">src_data</span>.<span class="ident">len</span>(), <span class="number">0</span>, <span class="number">0</span>, <span class="ident">null_mut</span>(), <span class="number">0</span>, <span class="kw-2">&amp;mut</span> <span class="ident">shader</span>, <span class="kw-2">&amp;mut</span> <span class="ident">total_shaders</span>) };
+        <span class="macro">debug_assert!</span>(<span class="ident">shader</span>.<span class="ident">is_null</span>(), <span class="string">&quot;BUG: shader shouldn&#39;t have been touched!?!?&quot;</span>);
+        <span class="macro">fn_check_hr!</span>(<span class="ident">hr</span>)<span class="question-mark">?</span>;
+        <span class="prelude-val">Ok</span>(<span class="ident">total_shaders</span>)
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3ddecompressshaders)\]
-    /// D3DDecompressShaders
-    ///
-    /// Decompresses one or more shaders from a compressed set.
-    ///
-    /// ### Arguments
-    /// *   `src_data`      - The compressed shaders to decompress.
-    /// *   `flags`         - Reserved (pass [None]).
-    /// *   `start_index`   - The first shader to read, by archive index order.
-    /// *   `out_shaders`   - An output buffer of shaders to read.  The size of the buffer dictates how many shaders will be read.
-    ///
-    /// ### Errors
-    /// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_42.dll` and earlier
-    ///
-    /// ### Example
-    /// ```rust
-    /// # use thindx::d3d::*; let d3dc = Compiler::load_system(47).unwrap();
-    /// # let basic_hlsl  = std::fs::read(r&quot;test\data\basic.hlsl&quot;).unwrap();
-    /// # let plain_txt   = std::fs::read(r&quot;test\data\plain.txt&quot;).unwrap();
-    /// # let tocompress = [
-    /// #     ShaderData::from(&amp;basic_hlsl[..]),
-    /// #     ShaderData::from(&amp;plain_txt[..]),
-    /// # ];
-    /// #
-    /// # let compress = d3dc.compress_shaders(&amp;tocompress, CompressShader::default()).unwrap();
-    /// let mut decompressed = [None, None, None];
-    /// let decompressed2 = d3dc.decompress_shaders_inplace(
-    ///     &amp;compress, None, 0, &amp;mut decompressed[..]
-    /// ).unwrap();
-    ///
-    /// assert_eq!(2, decompressed2.len());
-    /// assert_eq!(basic_hlsl, decompressed2[0].as_ref().unwrap().get_buffer());
-    /// assert_eq!(plain_txt,  decompressed2[1].as_ref().unwrap().get_buffer());
-    ///
-    /// assert_eq!(&amp;basic_hlsl[..], decompressed[0].as_ref().unwrap().get_buffer());
-    /// assert_eq!(&amp;plain_txt[..],  decompressed[1].as_ref().unwrap().get_buffer());
-    /// assert!(decompressed[2].is_none());
-    /// ```
-    ///
-    /// ### Remarks
-    /// *   You can use this API to develop your Windows Store apps, but you can&#39;t use it in apps that you submit to the Windows Store.
-    /// *   This was introduced by d3dcompiler_43.dll, and is unavailable in earlier versions.
-    </span><span class="kw">pub fn </span>decompress_shaders_inplace&lt;<span class="lifetime">&#39;s</span>&gt;(
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3ddecompressshaders)\]</span>
+    <span class="doccomment">/// D3DDecompressShaders</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Decompresses one or more shaders from a compressed set.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Arguments</span>
+    <span class="doccomment">/// *   `src_data`      - The compressed shaders to decompress.</span>
+    <span class="doccomment">/// *   `flags`         - Reserved (pass [None]).</span>
+    <span class="doccomment">/// *   `start_index`   - The first shader to read, by archive index order.</span>
+    <span class="doccomment">/// *   `out_shaders`   - An output buffer of shaders to read.  The size of the buffer dictates how many shaders will be read.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Errors</span>
+    <span class="doccomment">/// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_42.dll` and earlier</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Example</span>
+    <span class="doccomment">/// ```rust</span>
+    <span class="doccomment">/// # use thindx::d3d::*; let d3dc = Compiler::load_system(47).unwrap();</span>
+    <span class="doccomment">/// # let basic_hlsl  = std::fs::read(r&quot;test\data\basic.hlsl&quot;).unwrap();</span>
+    <span class="doccomment">/// # let plain_txt   = std::fs::read(r&quot;test\data\plain.txt&quot;).unwrap();</span>
+    <span class="doccomment">/// # let tocompress = [</span>
+    <span class="doccomment">/// #     ShaderData::from(&amp;basic_hlsl[..]),</span>
+    <span class="doccomment">/// #     ShaderData::from(&amp;plain_txt[..]),</span>
+    <span class="doccomment">/// # ];</span>
+    <span class="doccomment">/// #</span>
+    <span class="doccomment">/// # let compress = d3dc.compress_shaders(&amp;tocompress, CompressShader::default()).unwrap();</span>
+    <span class="doccomment">/// let mut decompressed = [None, None, None];</span>
+    <span class="doccomment">/// let decompressed2 = d3dc.decompress_shaders_inplace(</span>
+    <span class="doccomment">///     &amp;compress, None, 0, &amp;mut decompressed[..]</span>
+    <span class="doccomment">/// ).unwrap();</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// assert_eq!(2, decompressed2.len());</span>
+    <span class="doccomment">/// assert_eq!(basic_hlsl, decompressed2[0].as_ref().unwrap().get_buffer());</span>
+    <span class="doccomment">/// assert_eq!(plain_txt,  decompressed2[1].as_ref().unwrap().get_buffer());</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// assert_eq!(&amp;basic_hlsl[..], decompressed[0].as_ref().unwrap().get_buffer());</span>
+    <span class="doccomment">/// assert_eq!(&amp;plain_txt[..],  decompressed[1].as_ref().unwrap().get_buffer());</span>
+    <span class="doccomment">/// assert!(decompressed[2].is_none());</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Remarks</span>
+    <span class="doccomment">/// *   You can use this API to develop your Windows Store apps, but you can&#39;t use it in apps that you submit to the Windows Store.</span>
+    <span class="doccomment">/// *   This was introduced by d3dcompiler_43.dll, and is unavailable in earlier versions.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">decompress_shaders_inplace</span><span class="op">&lt;</span><span class="lifetime">&#39;s</span><span class="op">&gt;</span>(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        src_data:               <span class="kw-2">&amp;</span>[u8],
-        flags:                  <span class="kw">impl </span>Into&lt;<span class="prelude-ty">Option</span>&lt;std::convert::Infallible&gt;&gt;,
-        start_index:            u32,
-        out_shaders:            <span class="kw-2">&amp;</span><span class="lifetime">&#39;s </span><span class="kw-2">mut </span>[<span class="prelude-ty">Option</span>&lt;ReadOnlyBlob&gt;],
-    ) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;s </span>[<span class="prelude-ty">Option</span>&lt;ReadOnlyBlob&gt;], Error&gt; {
-        <span class="macro">fn_context_dll!</span>(d3d::Compiler::decompress_shaders_inplace =&gt; <span class="self">self</span>.D3DDecompressShaders);
-        <span class="kw">let </span>n = <span class="macro">fn_param_try_len32!</span>(out_shaders)<span class="question-mark">?</span>;
-        <span class="kw">let _ </span>= flags;
+        <span class="ident">src_data</span>:               <span class="kw-2">&amp;</span>[<span class="ident">u8</span>],
+        <span class="ident">flags</span>:                  <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">std::convert::Infallible</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+        <span class="ident">start_index</span>:            <span class="ident">u32</span>,
+        <span class="ident">out_shaders</span>:            <span class="kw-2">&amp;</span><span class="lifetime">&#39;s</span> <span class="kw-2">mut</span> [<span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ReadOnlyBlob</span><span class="op">&gt;</span>],
+    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;s</span> [<span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ReadOnlyBlob</span><span class="op">&gt;</span>], <span class="ident">Error</span><span class="op">&gt;</span> {
+        <span class="macro">fn_context_dll!</span>(<span class="ident">d3d::Compiler::decompress_shaders_inplace</span> =&gt; <span class="self">self</span>.<span class="ident">D3DDecompressShaders</span>);
+        <span class="kw">let</span> <span class="ident">n</span> <span class="op">=</span> <span class="macro">fn_param_try_len32!</span>(<span class="ident">out_shaders</span>)<span class="question-mark">?</span>;
+        <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">flags</span>;
 
-        <span class="kw">for </span>shader <span class="kw">in </span>out_shaders.iter_mut() { <span class="kw-2">*</span>shader = <span class="prelude-val">None</span>; } <span class="comment">// D3DCompressShaders will overwrite
-        </span><span class="kw">let </span><span class="kw-2">mut </span>total_shaders = <span class="number">0</span>;
+        <span class="kw">for</span> <span class="ident">shader</span> <span class="kw">in</span> <span class="ident">out_shaders</span>.<span class="ident">iter_mut</span>() { <span class="kw-2">*</span><span class="ident">shader</span> <span class="op">=</span> <span class="prelude-val">None</span>; } <span class="comment">// D3DCompressShaders will overwrite</span>
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">total_shaders</span> <span class="op">=</span> <span class="number">0</span>;
 
-        <span class="comment">// SAFETY: ❌ needs fuzz testing for alloc overflow and corruption bugs
-        //  * `f`               ✔️ should be valid/sound like all `self.*`
-        //  * `src_data`        ❌ could overflow an alloc within `D3DDecompressShaders`
-        //  * `src_data`        ❌ could contain corrupt decompression data
-        //  * `n`               ⚠️ &quot;shouldn&#39;t&quot; (famous last words) cause cause alloc overflow issues inside `D3DDecompressShaders` ?
-        //  * `flags`           ✔️ are reserved / 0
-        //  * `start_index`     ❌ could be out-of-bounds
-        //  * `out_shaders`     ✔️ should be ABI compatible thanks to the #[repr(transparent)] conversion chain: Option&lt;ReadOnlyBlob&gt; -&gt; Option&lt;mcom::Rc&lt;ID3DBlob&gt;&gt; -&gt; Option&lt;NonNull&lt;ID3DBlob&gt;&gt; -&gt; `*mut ID3DBlob`
-        //  * `out_shaders`     ✔️ should not leak (explicitly `None`ed out earlier)
-        //  * `out_shaders`     ✔️ should contain sufficient elements to avoid overflow (`n` inferred from `.len`)
-        </span><span class="macro">fn_check_hr!</span>(<span class="kw">unsafe </span>{ D3DDecompressShaders(src_data.as_ptr().cast(), src_data.len(), n, start_index, null_mut(), <span class="number">0</span>, out_shaders.as_mut_ptr().cast(), <span class="kw-2">&amp;mut </span>total_shaders) })<span class="question-mark">?</span>;
-        <span class="kw">let </span>read = n.min(total_shaders) <span class="kw">as </span>usize;
-        <span class="prelude-val">Ok</span>(<span class="kw-2">&amp;</span>out_shaders[..read])
+        <span class="comment">// SAFETY: ❌ needs fuzz testing for alloc overflow and corruption bugs</span>
+        <span class="comment">//  * `f`               ✔️ should be valid/sound like all `self.*`</span>
+        <span class="comment">//  * `src_data`        ❌ could overflow an alloc within `D3DDecompressShaders`</span>
+        <span class="comment">//  * `src_data`        ❌ could contain corrupt decompression data</span>
+        <span class="comment">//  * `n`               ⚠️ &quot;shouldn&#39;t&quot; (famous last words) cause cause alloc overflow issues inside `D3DDecompressShaders` ?</span>
+        <span class="comment">//  * `flags`           ✔️ are reserved / 0</span>
+        <span class="comment">//  * `start_index`     ❌ could be out-of-bounds</span>
+        <span class="comment">//  * `out_shaders`     ✔️ should be ABI compatible thanks to the #[repr(transparent)] conversion chain: Option&lt;ReadOnlyBlob&gt; -&gt; Option&lt;mcom::Rc&lt;ID3DBlob&gt;&gt; -&gt; Option&lt;NonNull&lt;ID3DBlob&gt;&gt; -&gt; `*mut ID3DBlob`</span>
+        <span class="comment">//  * `out_shaders`     ✔️ should not leak (explicitly `None`ed out earlier)</span>
+        <span class="comment">//  * `out_shaders`     ✔️ should contain sufficient elements to avoid overflow (`n` inferred from `.len`)</span>
+        <span class="macro">fn_check_hr!</span>(<span class="kw unsafe">unsafe</span> { <span class="ident">D3DDecompressShaders</span>(<span class="ident">src_data</span>.<span class="ident">as_ptr</span>().<span class="ident">cast</span>(), <span class="ident">src_data</span>.<span class="ident">len</span>(), <span class="ident">n</span>, <span class="ident">start_index</span>, <span class="ident">null_mut</span>(), <span class="number">0</span>, <span class="ident">out_shaders</span>.<span class="ident">as_mut_ptr</span>().<span class="ident">cast</span>(), <span class="kw-2">&amp;mut</span> <span class="ident">total_shaders</span>) })<span class="question-mark">?</span>;
+        <span class="kw">let</span> <span class="ident">read</span> <span class="op">=</span> <span class="ident">n</span>.<span class="ident">min</span>(<span class="ident">total_shaders</span>) <span class="kw">as</span> <span class="ident">usize</span>;
+        <span class="prelude-val">Ok</span>(<span class="kw-2">&amp;</span><span class="ident">out_shaders</span>[..<span class="ident">read</span>])
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3ddecompressshaders)\]
-    /// D3DDecompressShaders
-    ///
-    /// Decompresses one or more shaders from a compressed set.
-    ///
-    /// ### Arguments
-    /// *   `src_data`      - The compressed shaders to decompress.
-    /// *   `flags`         - Reserved (pass [None]).
-    /// *   `_range`        - The archive index range to read (pass `..` - other options may be supported in the future.)
-    ///
-    /// ### Errors
-    /// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_42.dll` and earlier
-    ///
-    /// ### Example
-    /// ```rust
-    /// # use thindx::d3d::*; let d3dc = Compiler::load_system(47).unwrap();
-    /// # let basic_hlsl  = std::fs::read(r&quot;test\data\basic.hlsl&quot;).unwrap();
-    /// # let plain_txt   = std::fs::read(r&quot;test\data\plain.txt&quot;).unwrap();
-    /// # let tocompress = [
-    /// #     ShaderData::from(&amp;basic_hlsl[..]),
-    /// #     ShaderData::from(&amp;plain_txt[..]),
-    /// # ];
-    /// #
-    /// # let compress = d3dc.compress_shaders(&amp;tocompress, CompressShader::default()).unwrap();
-    /// let decompressed = d3dc.decompress_shaders(&amp;compress, None, ..).unwrap();
-    ///
-    /// assert_eq!(2, decompressed.len());
-    /// assert_eq!(basic_hlsl, decompressed[0].as_ref().unwrap().get_buffer());
-    /// assert_eq!(plain_txt,  decompressed[1].as_ref().unwrap().get_buffer());
-    /// ```
-    ///
-    /// ### Remarks
-    /// *   You can use this API to develop your Windows Store apps, but you can&#39;t use it in apps that you submit to the Windows Store.
-    /// *   This was introduced by d3dcompiler_43.dll, and is unavailable in earlier versions.
-    </span><span class="kw">pub fn </span>decompress_shaders(
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3ddecompressshaders)\]</span>
+    <span class="doccomment">/// D3DDecompressShaders</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Decompresses one or more shaders from a compressed set.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Arguments</span>
+    <span class="doccomment">/// *   `src_data`      - The compressed shaders to decompress.</span>
+    <span class="doccomment">/// *   `flags`         - Reserved (pass [None]).</span>
+    <span class="doccomment">/// *   `_range`        - The archive index range to read (pass `..` - other options may be supported in the future.)</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Errors</span>
+    <span class="doccomment">/// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_42.dll` and earlier</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Example</span>
+    <span class="doccomment">/// ```rust</span>
+    <span class="doccomment">/// # use thindx::d3d::*; let d3dc = Compiler::load_system(47).unwrap();</span>
+    <span class="doccomment">/// # let basic_hlsl  = std::fs::read(r&quot;test\data\basic.hlsl&quot;).unwrap();</span>
+    <span class="doccomment">/// # let plain_txt   = std::fs::read(r&quot;test\data\plain.txt&quot;).unwrap();</span>
+    <span class="doccomment">/// # let tocompress = [</span>
+    <span class="doccomment">/// #     ShaderData::from(&amp;basic_hlsl[..]),</span>
+    <span class="doccomment">/// #     ShaderData::from(&amp;plain_txt[..]),</span>
+    <span class="doccomment">/// # ];</span>
+    <span class="doccomment">/// #</span>
+    <span class="doccomment">/// # let compress = d3dc.compress_shaders(&amp;tocompress, CompressShader::default()).unwrap();</span>
+    <span class="doccomment">/// let decompressed = d3dc.decompress_shaders(&amp;compress, None, ..).unwrap();</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// assert_eq!(2, decompressed.len());</span>
+    <span class="doccomment">/// assert_eq!(basic_hlsl, decompressed[0].as_ref().unwrap().get_buffer());</span>
+    <span class="doccomment">/// assert_eq!(plain_txt,  decompressed[1].as_ref().unwrap().get_buffer());</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Remarks</span>
+    <span class="doccomment">/// *   You can use this API to develop your Windows Store apps, but you can&#39;t use it in apps that you submit to the Windows Store.</span>
+    <span class="doccomment">/// *   This was introduced by d3dcompiler_43.dll, and is unavailable in earlier versions.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">decompress_shaders</span>(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        src_data:               <span class="kw-2">&amp;</span>[u8],
-        flags:                  <span class="kw">impl </span>Into&lt;<span class="prelude-ty">Option</span>&lt;std::convert::Infallible&gt;&gt;,
-        _range:                 std::ops::RangeFull,
-    ) -&gt; <span class="prelude-ty">Result</span>&lt;Vec&lt;<span class="prelude-ty">Option</span>&lt;ReadOnlyBlob&gt;&gt;, Error&gt; {
-        <span class="macro">fn_context!</span>(d3d::Compiler::decompress_shaders =&gt; D3DDecompressShaders);
-        <span class="kw">let </span>n = <span class="self">self</span>.decompress_shaders_count(src_data)<span class="question-mark">? </span><span class="kw">as </span>usize;
-        <span class="kw">let </span><span class="kw-2">mut </span>v = Vec::new();
-        v.resize_with(n, || <span class="prelude-val">None</span>);
-        <span class="kw">let </span>n2 = <span class="self">self</span>.decompress_shaders_inplace(src_data, flags, <span class="number">0</span>, <span class="kw-2">&amp;mut </span>v[..])<span class="question-mark">?</span>.len();
-        <span class="macro">debug_assert_eq!</span>(n, n2);
-        <span class="prelude-val">Ok</span>(v)
+        <span class="ident">src_data</span>:               <span class="kw-2">&amp;</span>[<span class="ident">u8</span>],
+        <span class="ident">flags</span>:                  <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">std::convert::Infallible</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+        <span class="ident">_range</span>:                 <span class="ident">std::ops::RangeFull</span>,
+    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ReadOnlyBlob</span><span class="op">&gt;</span><span class="op">&gt;</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+        <span class="macro">fn_context!</span>(<span class="ident">d3d::Compiler::decompress_shaders</span> =&gt; <span class="ident">D3DDecompressShaders</span>);
+        <span class="kw">let</span> <span class="ident">n</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">decompress_shaders_count</span>(<span class="ident">src_data</span>)<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">usize</span>;
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">v</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
+        <span class="ident">v</span>.<span class="ident">resize_with</span>(<span class="ident">n</span>, <span class="op">|</span><span class="op">|</span> <span class="prelude-val">None</span>);
+        <span class="kw">let</span> <span class="ident">n2</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">decompress_shaders_inplace</span>(<span class="ident">src_data</span>, <span class="ident">flags</span>, <span class="number">0</span>, <span class="kw-2">&amp;mut</span> <span class="ident">v</span>[..])<span class="question-mark">?</span>.<span class="ident">len</span>();
+        <span class="macro">debug_assert_eq!</span>(<span class="ident">n</span>, <span class="ident">n2</span>);
+        <span class="prelude-val">Ok</span>(<span class="ident">v</span>)
     }
 
-    <span class="comment">// TODO: D3DDecompressShaders accepting RangeBounds ?
-    // TODO: D3DDecompressShaders accepting array of indicies ?
-    // TODO: D3DDecompressShaders eliding Option s?
-</span>}
+    <span class="comment">// TODO: D3DDecompressShaders accepting RangeBounds ?</span>
+    <span class="comment">// TODO: D3DDecompressShaders accepting array of indicies ?</span>
+    <span class="comment">// TODO: D3DDecompressShaders eliding Option s?</span>
+}
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (b44197abb 2022-09-05)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0 (4b91a6ea7 2022-08-08)" ></div>
+</body></html>

@@ -1,4 +1,10 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3d11shader.h\structures\parameter_desc.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>parameter_desc.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../../normalize.css"><link rel="stylesheet" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../../dark.css" disabled><link rel="stylesheet" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3d11shader.h\structures\parameter_desc.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>parameter_desc.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div>
+        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
+                                <a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -101,108 +107,109 @@
 <span id="101">101</span>
 <span id="102">102</span>
 <span id="103">103</span>
-</pre><pre class="rust"><code><span class="attribute">#[allow(unused_imports)] </span><span class="kw">use crate</span>::<span class="kw-2">*</span>;
-<span class="kw">use </span><span class="kw">crate</span>::ctypes::<span class="kw-2">*</span>;
-<span class="kw">use </span><span class="kw">crate</span>::d3d::<span class="kw-2">*</span>;
+</pre><pre class="rust"><code><span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span> <span class="kw">use</span> <span class="kw">crate</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::ctypes</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::d3d</span>::<span class="kw-2">*</span>;
 
 
 
-<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/ns-d3d11shader-d3d11_parameter_desc)\]
-/// D3D11_PARAMETER_DESC
-///
-/// ### See Also
-/// *   [d3d11::FunctionLinkingGraph] for examples
-/// *   [d3d11::FunctionLinkingGraph::set_input_signature]
-/// *   [d3d11::FunctionLinkingGraph::set_output_signature]
-</span><span class="attribute">#[allow(missing_docs)]
-#[derive(Clone, Copy, Debug, Default)]
-#[repr(C)] </span><span class="kw">pub struct </span>ParameterDesc&lt;<span class="lifetime">&#39;s</span>&gt; {
-    <span class="kw">pub </span>name:                   <span class="prelude-ty">Option</span>&lt;CStrNonNull&lt;<span class="lifetime">&#39;s</span>&gt;&gt;,
-    <span class="doccomment">/// An input semantic name + index such as &quot;POSITION0&quot;, &quot;TEXCOORD0&quot;, &quot;TEXCOORD1&quot;, etc.
-    </span><span class="kw">pub </span>semantic_name:          <span class="prelude-ty">Option</span>&lt;CStrNonNull&lt;<span class="lifetime">&#39;s</span>&gt;&gt;,
-    <span class="kw">pub </span>ty:                     ShaderVariableType,
-    <span class="kw">pub </span>class:                  ShaderVariableClass,
-    <span class="kw">pub </span>rows:                   u32,
-    <span class="kw">pub </span>columns:                u32,
-    <span class="kw">pub </span>interpolation_mode:     InterpolationMode,
-    <span class="kw">pub </span>flags:                  ParameterFlags,
-    <span class="kw">pub </span>first_in_register:      u32,
-    <span class="kw">pub </span>first_in_component:     u32,
-    <span class="kw">pub </span>first_out_register:     u32,
-    <span class="kw">pub </span>first_out_component:    u32,
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/ns-d3d11shader-d3d11_parameter_desc)\]</span>
+<span class="doccomment">/// D3D11_PARAMETER_DESC</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// ### See Also</span>
+<span class="doccomment">/// *   [d3d11::FunctionLinkingGraph] for examples</span>
+<span class="doccomment">/// *   [d3d11::FunctionLinkingGraph::set_input_signature]</span>
+<span class="doccomment">/// *   [d3d11::FunctionLinkingGraph::set_output_signature]</span>
+<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">missing_docs</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">Debug</span>, <span class="ident">Default</span>)]</span>
+<span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span> <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ParameterDesc</span><span class="op">&lt;</span><span class="lifetime">&#39;s</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="ident">name</span>:                   <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">CStrNonNull</span><span class="op">&lt;</span><span class="lifetime">&#39;s</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+    <span class="doccomment">/// An input semantic name + index such as &quot;POSITION0&quot;, &quot;TEXCOORD0&quot;, &quot;TEXCOORD1&quot;, etc.</span>
+    <span class="kw">pub</span> <span class="ident">semantic_name</span>:          <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">CStrNonNull</span><span class="op">&lt;</span><span class="lifetime">&#39;s</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+    <span class="kw">pub</span> <span class="ident">ty</span>:                     <span class="ident">ShaderVariableType</span>,
+    <span class="kw">pub</span> <span class="ident">class</span>:                  <span class="ident">ShaderVariableClass</span>,
+    <span class="kw">pub</span> <span class="ident">rows</span>:                   <span class="ident">u32</span>,
+    <span class="kw">pub</span> <span class="ident">columns</span>:                <span class="ident">u32</span>,
+    <span class="kw">pub</span> <span class="ident">interpolation_mode</span>:     <span class="ident">InterpolationMode</span>,
+    <span class="kw">pub</span> <span class="ident">flags</span>:                  <span class="ident">ParameterFlags</span>,
+    <span class="kw">pub</span> <span class="ident">first_in_register</span>:      <span class="ident">u32</span>,
+    <span class="kw">pub</span> <span class="ident">first_in_component</span>:     <span class="ident">u32</span>,
+    <span class="kw">pub</span> <span class="ident">first_out_register</span>:     <span class="ident">u32</span>,
+    <span class="kw">pub</span> <span class="ident">first_out_component</span>:    <span class="ident">u32</span>,
 }
 
-<span class="kw">impl</span>&lt;<span class="lifetime">&#39;s</span>&gt; ParameterDesc&lt;<span class="lifetime">&#39;s</span>&gt; {
-    <span class="doccomment">/// Shorthand construction for ParamterDesc structs.
-    ///
-    /// ### Arguments
-    /// *   `name`                  - The name of the parameter (optional - for debugging / readable codegen.)
-    /// *   `semantic_name`         - A semantic name + index such as `&quot;POSITION0&quot;`, `&quot;TEXCOORD3&quot;`, etc.
-    /// *   `ty`                    - The type of individual components of the parameter (ex: [`SVT::Float`].)
-    /// *   `class`                 - The class of the parameter (ex: [`SVC::Scalar`], [`SVC::Vector`], [`SVC::MatrixRows`], ...)
-    /// *   `rows`                  - The number of rows for a matrix (otherwise typically `1`.)
-    /// *   `columns`               - The number of columns for a matrix (or vector components, or `1` for a scalar.)
-    /// *   `interpolation_mode`    - How the parameter is interpolated during rasterization.
-    /// *   `flags`                 - Parameter flags (ex: &lt;code&gt;[PF::In] | [PF::Out]&lt;/code&gt;.)
-    /// *   `first_in_register`     - The first register to read this parameter from (or `0` if auto-assigning.)
-    /// *   `first_in_component`    - The first component of the register to read this parameter from (`0`=`x`=`r`, `1`=`y`=`g`, ...? - or `0` if auto-assigning.)
-    /// *   `first_out_register`    - The first register to write this parameter to (or `0` if auto-assigning.)
-    /// *   `first_out_component`   - The first component of the register to write this parameter to (`0`=`x`=`r`, `1`=`y`=`g`, ...? - or `0` if auto-assigning.)
-    ///
-    /// ### Example
-    /// ```rust
-    /// use thindx::{cstr, d3d::{SVT, SVC, Interpolation, PF}, d3d11::ParameterDesc};
-    /// let parameters = [
-    ///     ParameterDesc::new(cstr!(&quot;inputPos&quot;),  cstr!(&quot;POSITION0&quot;), SVT::Float, SVC::Vector, 1, 3, Interpolation::Linear, PF::In, 0, 0, 0, 0),
-    ///     ParameterDesc::new(cstr!(&quot;inputTex&quot;),  cstr!(&quot;TEXCOORD0&quot;), SVT::Float, SVC::Vector, 1, 2, Interpolation::Linear, PF::In, 0, 0, 0, 0),
-    ///     ParameterDesc::new(cstr!(&quot;inputNorm&quot;), cstr!(&quot;NORMAL0&quot;),   SVT::Float, SVC::Vector, 1, 3, Interpolation::Linear, PF::In, 0, 0, 0, 0),
-    /// ];
-    /// ```
-    </span><span class="kw">pub fn </span>new(
-        name:                   <span class="kw">impl </span>Into&lt;<span class="prelude-ty">Option</span>&lt;CStrNonNull&lt;<span class="lifetime">&#39;s</span>&gt;&gt;&gt;,
-        semantic_name:          <span class="kw">impl </span>Into&lt;CStrNonNull&lt;<span class="lifetime">&#39;s</span>&gt;&gt;, <span class="comment">// Seems fairly mandatory in testing
-        </span>ty:                     ShaderVariableType,
-        class:                  ShaderVariableClass,
-        rows:                   u32,
-        columns:                u32,
-        interpolation_mode:     InterpolationMode,
-        flags:                  ParameterFlags,
-        first_in_register:      u32,
-        first_in_component:     u32,
-        first_out_register:     u32,
-        first_out_component:    u32,
-    ) -&gt; <span class="self">Self </span>{
-        <span class="self">Self </span>{
-            name:           name.into(),
-            semantic_name:  <span class="prelude-val">Some</span>(semantic_name.into()),
-            ty, class, rows, columns, interpolation_mode, flags,
-            first_in_register, first_in_component, first_out_register, first_out_component,
+<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;s</span><span class="op">&gt;</span> <span class="ident">ParameterDesc</span><span class="op">&lt;</span><span class="lifetime">&#39;s</span><span class="op">&gt;</span> {
+    <span class="doccomment">/// Shorthand construction for ParamterDesc structs.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Arguments</span>
+    <span class="doccomment">/// *   `name`                  - The name of the parameter (optional - for debugging / readable codegen.)</span>
+    <span class="doccomment">/// *   `semantic_name`         - A semantic name + index such as `&quot;POSITION0&quot;`, `&quot;TEXCOORD3&quot;`, etc.</span>
+    <span class="doccomment">/// *   `ty`                    - The type of individual components of the parameter (ex: [`SVT::Float`].)</span>
+    <span class="doccomment">/// *   `class`                 - The class of the parameter (ex: [`SVC::Scalar`], [`SVC::Vector`], [`SVC::MatrixRows`], ...)</span>
+    <span class="doccomment">/// *   `rows`                  - The number of rows for a matrix (otherwise typically `1`.)</span>
+    <span class="doccomment">/// *   `columns`               - The number of columns for a matrix (or vector components, or `1` for a scalar.)</span>
+    <span class="doccomment">/// *   `interpolation_mode`    - How the parameter is interpolated during rasterization.</span>
+    <span class="doccomment">/// *   `flags`                 - Parameter flags (ex: &lt;code&gt;[PF::In] | [PF::Out]&lt;/code&gt;.)</span>
+    <span class="doccomment">/// *   `first_in_register`     - The first register to read this parameter from (or `0` if auto-assigning.)</span>
+    <span class="doccomment">/// *   `first_in_component`    - The first component of the register to read this parameter from (`0`=`x`=`r`, `1`=`y`=`g`, ...? - or `0` if auto-assigning.)</span>
+    <span class="doccomment">/// *   `first_out_register`    - The first register to write this parameter to (or `0` if auto-assigning.)</span>
+    <span class="doccomment">/// *   `first_out_component`   - The first component of the register to write this parameter to (`0`=`x`=`r`, `1`=`y`=`g`, ...? - or `0` if auto-assigning.)</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Example</span>
+    <span class="doccomment">/// ```rust</span>
+    <span class="doccomment">/// use thindx::{cstr, d3d::{SVT, SVC, Interpolation, PF}, d3d11::ParameterDesc};</span>
+    <span class="doccomment">/// let parameters = [</span>
+    <span class="doccomment">///     ParameterDesc::new(cstr!(&quot;inputPos&quot;),  cstr!(&quot;POSITION0&quot;), SVT::Float, SVC::Vector, 1, 3, Interpolation::Linear, PF::In, 0, 0, 0, 0),</span>
+    <span class="doccomment">///     ParameterDesc::new(cstr!(&quot;inputTex&quot;),  cstr!(&quot;TEXCOORD0&quot;), SVT::Float, SVC::Vector, 1, 2, Interpolation::Linear, PF::In, 0, 0, 0, 0),</span>
+    <span class="doccomment">///     ParameterDesc::new(cstr!(&quot;inputNorm&quot;), cstr!(&quot;NORMAL0&quot;),   SVT::Float, SVC::Vector, 1, 3, Interpolation::Linear, PF::In, 0, 0, 0, 0),</span>
+    <span class="doccomment">/// ];</span>
+    <span class="doccomment">/// ```</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(
+        <span class="ident">name</span>:                   <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">CStrNonNull</span><span class="op">&lt;</span><span class="lifetime">&#39;s</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+        <span class="ident">semantic_name</span>:          <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">CStrNonNull</span><span class="op">&lt;</span><span class="lifetime">&#39;s</span><span class="op">&gt;</span><span class="op">&gt;</span>, <span class="comment">// Seems fairly mandatory in testing</span>
+        <span class="ident">ty</span>:                     <span class="ident">ShaderVariableType</span>,
+        <span class="ident">class</span>:                  <span class="ident">ShaderVariableClass</span>,
+        <span class="ident">rows</span>:                   <span class="ident">u32</span>,
+        <span class="ident">columns</span>:                <span class="ident">u32</span>,
+        <span class="ident">interpolation_mode</span>:     <span class="ident">InterpolationMode</span>,
+        <span class="ident">flags</span>:                  <span class="ident">ParameterFlags</span>,
+        <span class="ident">first_in_register</span>:      <span class="ident">u32</span>,
+        <span class="ident">first_in_component</span>:     <span class="ident">u32</span>,
+        <span class="ident">first_out_register</span>:     <span class="ident">u32</span>,
+        <span class="ident">first_out_component</span>:    <span class="ident">u32</span>,
+    ) -&gt; <span class="self">Self</span> {
+        <span class="self">Self</span> {
+            <span class="ident">name</span>:           <span class="ident">name</span>.<span class="ident">into</span>(),
+            <span class="ident">semantic_name</span>:  <span class="prelude-val">Some</span>(<span class="ident">semantic_name</span>.<span class="ident">into</span>()),
+            <span class="ident">ty</span>, <span class="ident">class</span>, <span class="ident">rows</span>, <span class="ident">columns</span>, <span class="ident">interpolation_mode</span>, <span class="ident">flags</span>,
+            <span class="ident">first_in_register</span>, <span class="ident">first_in_component</span>, <span class="ident">first_out_register</span>, <span class="ident">first_out_component</span>,
         }
     }
 }
 
-<span class="macro">struct_mapping! </span>{
-    <span class="attribute">#[derive(<span class="kw">unsafe </span>{ AsRefD3D, IntoD3D })]
-    </span><span class="comment">// forbidden: AsRef     (could invalidate `name` &amp; `semantic_name`)
-    // forbidden: AsMut     (could invalidate `name` &amp; `semantic_name`)
-    // forbidden: DerefMut  (could invalidate `name` &amp; `semantic_name`)
-    // forbidden: FromD3D   (could invalidate `name` &amp; `semantic_name`)
-    </span>ParameterDesc&lt;<span class="lifetime">&#39;_</span>&gt; =&gt; winapi::um::d3d11shader::D3D11_PARAMETER_DESC {
-        name                    =&gt; Name,
-        semantic_name           =&gt; SemanticName,
-        ty                      =&gt; Type,
-        class                   =&gt; Class,
-        rows                    =&gt; Rows,
-        columns                 =&gt; Columns,
-        interpolation_mode      =&gt; InterpolationMode,
-        flags                   =&gt; Flags,
-        first_in_register       =&gt; FirstInRegister,
-        first_in_component      =&gt; FirstInComponent,
-        first_out_register      =&gt; FirstOutRegister,
-        first_out_component     =&gt; FirstOutComponent,
+<span class="macro">struct_mapping!</span> {
+    <span class="attribute">#[<span class="ident">derive</span>(<span class="kw unsafe">unsafe</span> { <span class="ident">AsRefD3D</span>, <span class="ident">IntoD3D</span> })]</span>
+    <span class="comment">// forbidden: AsRef     (could invalidate `name` &amp; `semantic_name`)</span>
+    <span class="comment">// forbidden: AsMut     (could invalidate `name` &amp; `semantic_name`)</span>
+    <span class="comment">// forbidden: DerefMut  (could invalidate `name` &amp; `semantic_name`)</span>
+    <span class="comment">// forbidden: FromD3D   (could invalidate `name` &amp; `semantic_name`)</span>
+    <span class="ident">ParameterDesc</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span> =&gt; <span class="ident">winapi::um::d3d11shader::D3D11_PARAMETER_DESC</span> {
+        <span class="ident">name</span>                    =&gt; <span class="ident">Name</span>,
+        <span class="ident">semantic_name</span>           =&gt; <span class="ident">SemanticName</span>,
+        <span class="ident">ty</span>                      =&gt; <span class="ident">Type</span>,
+        <span class="ident">class</span>                   =&gt; <span class="ident">Class</span>,
+        <span class="ident">rows</span>                    =&gt; <span class="ident">Rows</span>,
+        <span class="ident">columns</span>                 =&gt; <span class="ident">Columns</span>,
+        <span class="ident">interpolation_mode</span>      =&gt; <span class="ident">InterpolationMode</span>,
+        <span class="ident">flags</span>                   =&gt; <span class="ident">Flags</span>,
+        <span class="ident">first_in_register</span>       =&gt; <span class="ident">FirstInRegister</span>,
+        <span class="ident">first_in_component</span>      =&gt; <span class="ident">FirstInComponent</span>,
+        <span class="ident">first_out_register</span>      =&gt; <span class="ident">FirstOutRegister</span>,
+        <span class="ident">first_out_component</span>     =&gt; <span class="ident">FirstOutComponent</span>,
     }
 }
 
-<span class="comment">//#cpp2rust D3D11_PARAMETER_DESC                    = d3d11::ParameterDesc
-</span></code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (b44197abb 2022-09-05)" ></div></body></html>
+<span class="comment">//#cpp2rust D3D11_PARAMETER_DESC                    = d3d11::ParameterDesc</span>
+</code></pre></div>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0 (4b91a6ea7 2022-08-08)" ></div>
+</body></html>

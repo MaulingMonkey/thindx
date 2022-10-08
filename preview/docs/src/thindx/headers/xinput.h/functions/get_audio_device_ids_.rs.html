@@ -1,4 +1,10 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\xinput.h\functions\get_audio_device_ids_.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>get_audio_device_ids_.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../../normalize.css"><link rel="stylesheet" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../../dark.css" disabled><link rel="stylesheet" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\xinput.h\functions\get_audio_device_ids_.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>get_audio_device_ids_.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div>
+        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
+                                <a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -72,79 +78,80 @@
 <span id="72">72</span>
 <span id="73">73</span>
 <span id="74">74</span>
-</pre><pre class="rust"><code><span class="kw">use crate</span>::<span class="kw-2">*</span>;
-<span class="kw">use </span><span class="kw">crate</span>::xinput::<span class="kw-2">*</span>;
+</pre><pre class="rust"><code><span class="kw">use</span> <span class="kw">crate</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::xinput</span>::<span class="kw-2">*</span>;
 
-<span class="kw">use </span>std::ffi::OsString;
-<span class="kw">use </span>std::os::windows::ffi::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">std::ffi::OsString</span>;
+<span class="kw">use</span> <span class="ident">std::os::windows::ffi</span>::<span class="kw-2">*</span>;
 
 
 
-<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetaudiodeviceids)\]
-/// XInputGetAudioDeviceIds
-///
-/// Get XAudio2 / Windows Core Audio Device Names.
-///
-/// **NOTE:** This tends to succeed, even when no gamepad is connected, with empty/None paths.
-///
-</span><span class="comment">// | XInput | State    |
-// | ------ | -------- |
-// | 1.4   | Available |
-// | 1.3   | N/A       |
-// | 9.1.0 | N/A       |
-</span><span class="doccomment">///
-/// ### Errors
-/// *   [ERROR::BAD_ARGUMENTS]          - Invalid [`User`] or [`User::Any`]
-/// *   [ERROR::DEVICE_NOT_CONNECTED]   - **Unreliably.**
-/// *   [THINERR::MISSING_DLL_EXPORT]   - XAudio2 / Windows Core Audio Device Names unavailable: XInput 1.4 or later
-/// *   [THINERR::SLICE_TOO_LARGE]      - Audio device paths exceedingly large
-///
-/// | System            | Windows `ver`     | Windows SKU           | Behavior |
-/// | ----------------- | ----------------- | --------------------- | -------- |
-/// | Github Actions    | 10.0.17763.2366   | Windows 2019 Server   | [ERROR::DEVICE_NOT_CONNECTED] observed.
-/// | &quot;SACRILEGE&quot;       | 10.0.19041.1415   | Windows 10 Pro        | Succeeds when called on missing gamepads
-///
-/// ### See Also
-/// *   [Getting Audio Device Identifiers](https://docs.microsoft.com/en-us/windows/win32/xinput/getting-started-with-xinput#getting-audio-device-identifiers)
-</span><span class="kw">pub fn </span>get_audio_device_ids(user_index: <span class="kw">impl </span>Into&lt;u32&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;AudioDeviceIds, Error&gt; {
-    <span class="macro">fn_context!</span>(xinput::get_audio_device_ids =&gt; XInputGetAudioDeviceIds);
-    <span class="attribute">#[allow(non_snake_case)] </span><span class="kw">let </span>XInputGetAudioDeviceIds = Imports::get().XInputGetAudioDeviceIds.ok_or(<span class="macro">fn_error!</span>(THINERR::MISSING_DLL_EXPORT))<span class="question-mark">?</span>;
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetaudiodeviceids)\]</span>
+<span class="doccomment">/// XInputGetAudioDeviceIds</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Get XAudio2 / Windows Core Audio Device Names.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// **NOTE:** This tends to succeed, even when no gamepad is connected, with empty/None paths.</span>
+<span class="doccomment">///</span>
+<span class="comment">// | XInput | State    |</span>
+<span class="comment">// | ------ | -------- |</span>
+<span class="comment">// | 1.4   | Available |</span>
+<span class="comment">// | 1.3   | N/A       |</span>
+<span class="comment">// | 9.1.0 | N/A       |</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// ### Errors</span>
+<span class="doccomment">/// *   [ERROR::BAD_ARGUMENTS]          - Invalid [`User`] or [`User::Any`]</span>
+<span class="doccomment">/// *   [ERROR::DEVICE_NOT_CONNECTED]   - **Unreliably.**</span>
+<span class="doccomment">/// *   [THINERR::MISSING_DLL_EXPORT]   - XAudio2 / Windows Core Audio Device Names unavailable: XInput 1.4 or later</span>
+<span class="doccomment">/// *   [THINERR::SLICE_TOO_LARGE]      - Audio device paths exceedingly large</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// | System            | Windows `ver`     | Windows SKU           | Behavior |</span>
+<span class="doccomment">/// | ----------------- | ----------------- | --------------------- | -------- |</span>
+<span class="doccomment">/// | Github Actions    | 10.0.17763.2366   | Windows 2019 Server   | [ERROR::DEVICE_NOT_CONNECTED] observed.</span>
+<span class="doccomment">/// | &quot;SACRILEGE&quot;       | 10.0.19041.1415   | Windows 10 Pro        | Succeeds when called on missing gamepads</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// ### See Also</span>
+<span class="doccomment">/// *   [Getting Audio Device Identifiers](https://docs.microsoft.com/en-us/windows/win32/xinput/getting-started-with-xinput#getting-audio-device-identifiers)</span>
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_audio_device_ids</span>(<span class="ident">user_index</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">AudioDeviceIds</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+    <span class="macro">fn_context!</span>(<span class="ident">xinput::get_audio_device_ids</span> =&gt; <span class="ident">XInputGetAudioDeviceIds</span>);
+    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">non_snake_case</span>)]</span> <span class="kw">let</span> <span class="ident">XInputGetAudioDeviceIds</span> <span class="op">=</span> <span class="ident">Imports::get</span>().<span class="ident">XInputGetAudioDeviceIds</span>.<span class="ident">ok_or</span>(<span class="macro">fn_error!</span>(<span class="ident">THINERR::MISSING_DLL_EXPORT</span>))<span class="question-mark">?</span>;
 
-    <span class="kw">let </span><span class="kw-2">mut </span>render_id  = [<span class="number">0u16</span>; <span class="number">4096</span>];
-    <span class="kw">let </span><span class="kw-2">mut </span>capture_id = [<span class="number">0u16</span>; <span class="number">4096</span>];
-    <span class="kw">let </span><span class="kw-2">mut </span>render_len  = <span class="number">4096</span>;
-    <span class="kw">let </span><span class="kw-2">mut </span>capture_len = <span class="number">4096</span>;
+    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">render_id</span>  <span class="op">=</span> [<span class="number">0u16</span>; <span class="number">4096</span>];
+    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">capture_id</span> <span class="op">=</span> [<span class="number">0u16</span>; <span class="number">4096</span>];
+    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">render_len</span>  <span class="op">=</span> <span class="number">4096</span>;
+    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">capture_len</span> <span class="op">=</span> <span class="number">4096</span>;
 
-    <span class="comment">// SAFETY: ⚠️ Needs testing with real audio devices
-    //  * fuzzed        in `tests/fuzz-xinput.rs`
-    //  * `user_index`  is well tested
-    //  * `*_ptr`       is never null, should only be accessed during XInputGetAudioDeviceIds&#39;s scope
-    //  * `*_len`       are in/out, properly initialized.
-    </span><span class="kw">let </span>code = <span class="kw">unsafe </span>{ XInputGetAudioDeviceIds(user_index.into(), render_id.as_mut_ptr(), <span class="kw-2">&amp;mut </span>render_len, capture_id.as_mut_ptr(), <span class="kw-2">&amp;mut </span>capture_len) };
-    <span class="comment">// a dynamic alloc fallback might be appropriate...? what error is returned? experiment, as it&#39;s not documented? D3D&#39;s own docs show only 256 byte buffers, surely 16x that (4096) is enough?
-    </span><span class="macro">check_success!</span>(code)<span class="question-mark">?</span>;
-    <span class="kw">let </span>render_device_id    = OsString::from_wide(render_id .get(..render_len  <span class="kw">as </span>usize).ok_or(<span class="macro">fn_param_error!</span>(render_device_id,  THINERR::SLICE_TOO_LARGE))<span class="question-mark">?</span>.split(|c| <span class="kw-2">*</span>c==<span class="number">0</span>).next().unwrap_or(<span class="kw-2">&amp;</span>[]));
-    <span class="kw">let </span>capture_device_id   = OsString::from_wide(capture_id.get(..capture_len <span class="kw">as </span>usize).ok_or(<span class="macro">fn_param_error!</span>(capture_device_id, THINERR::SLICE_TOO_LARGE))<span class="question-mark">?</span>.split(|c| <span class="kw-2">*</span>c==<span class="number">0</span>).next().unwrap_or(<span class="kw-2">&amp;</span>[]));
-    <span class="prelude-val">Ok</span>(AudioDeviceIds {
-        render_device_id:   <span class="kw">if </span>render_device_id .is_empty() { <span class="prelude-val">None </span>} <span class="kw">else </span>{ <span class="prelude-val">Some</span>(render_device_id ) },
-        capture_device_id:  <span class="kw">if </span>capture_device_id.is_empty() { <span class="prelude-val">None </span>} <span class="kw">else </span>{ <span class="prelude-val">Some</span>(capture_device_id) },
+    <span class="comment">// SAFETY: ⚠️ Needs testing with real audio devices</span>
+    <span class="comment">//  * fuzzed        in `tests/fuzz-xinput.rs`</span>
+    <span class="comment">//  * `user_index`  is well tested</span>
+    <span class="comment">//  * `*_ptr`       is never null, should only be accessed during XInputGetAudioDeviceIds&#39;s scope</span>
+    <span class="comment">//  * `*_len`       are in/out, properly initialized.</span>
+    <span class="kw">let</span> <span class="ident">code</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="ident">XInputGetAudioDeviceIds</span>(<span class="ident">user_index</span>.<span class="ident">into</span>(), <span class="ident">render_id</span>.<span class="ident">as_mut_ptr</span>(), <span class="kw-2">&amp;mut</span> <span class="ident">render_len</span>, <span class="ident">capture_id</span>.<span class="ident">as_mut_ptr</span>(), <span class="kw-2">&amp;mut</span> <span class="ident">capture_len</span>) };
+    <span class="comment">// a dynamic alloc fallback might be appropriate...? what error is returned? experiment, as it&#39;s not documented? D3D&#39;s own docs show only 256 byte buffers, surely 16x that (4096) is enough?</span>
+    <span class="macro">check_success!</span>(<span class="ident">code</span>)<span class="question-mark">?</span>;
+    <span class="kw">let</span> <span class="ident">render_device_id</span>    <span class="op">=</span> <span class="ident">OsString::from_wide</span>(<span class="ident">render_id</span> .<span class="ident">get</span>(..<span class="ident">render_len</span>  <span class="kw">as</span> <span class="ident">usize</span>).<span class="ident">ok_or</span>(<span class="macro">fn_param_error!</span>(<span class="ident">render_device_id</span>,  <span class="ident">THINERR::SLICE_TOO_LARGE</span>))<span class="question-mark">?</span>.<span class="ident">split</span>(<span class="op">|</span><span class="ident">c</span><span class="op">|</span> <span class="kw-2">*</span><span class="ident">c</span><span class="op">==</span><span class="number">0</span>).<span class="ident">next</span>().<span class="ident">unwrap_or</span>(<span class="kw-2">&amp;</span>[]));
+    <span class="kw">let</span> <span class="ident">capture_device_id</span>   <span class="op">=</span> <span class="ident">OsString::from_wide</span>(<span class="ident">capture_id</span>.<span class="ident">get</span>(..<span class="ident">capture_len</span> <span class="kw">as</span> <span class="ident">usize</span>).<span class="ident">ok_or</span>(<span class="macro">fn_param_error!</span>(<span class="ident">capture_device_id</span>, <span class="ident">THINERR::SLICE_TOO_LARGE</span>))<span class="question-mark">?</span>.<span class="ident">split</span>(<span class="op">|</span><span class="ident">c</span><span class="op">|</span> <span class="kw-2">*</span><span class="ident">c</span><span class="op">==</span><span class="number">0</span>).<span class="ident">next</span>().<span class="ident">unwrap_or</span>(<span class="kw-2">&amp;</span>[]));
+    <span class="prelude-val">Ok</span>(<span class="ident">AudioDeviceIds</span> {
+        <span class="ident">render_device_id</span>:   <span class="kw">if</span> <span class="ident">render_device_id</span> .<span class="ident">is_empty</span>() { <span class="prelude-val">None</span> } <span class="kw">else</span> { <span class="prelude-val">Some</span>(<span class="ident">render_device_id</span> ) },
+        <span class="ident">capture_device_id</span>:  <span class="kw">if</span> <span class="ident">capture_device_id</span>.<span class="ident">is_empty</span>() { <span class="prelude-val">None</span> } <span class="kw">else</span> { <span class="prelude-val">Some</span>(<span class="ident">capture_device_id</span>) },
     })
 }
 
-<span class="attribute">#[test] </span><span class="kw">fn </span>test_returns() {
-    <span class="kw">if </span>get_audio_device_ids(User::Zero) == THINERR::MISSING_DLL_EXPORT { <span class="kw">return </span>}
+<span class="attribute">#[<span class="ident">test</span>]</span> <span class="kw">fn</span> <span class="ident">test_returns</span>() {
+    <span class="kw">if</span> <span class="ident">get_audio_device_ids</span>(<span class="ident">User::Zero</span>) <span class="op">==</span> <span class="ident">THINERR::MISSING_DLL_EXPORT</span> { <span class="kw">return</span> }
 
-    <span class="comment">// May or may not succeed, even if gamepad not connected
-    </span><span class="kw">if let </span><span class="prelude-val">Err</span>(err) = get_audio_device_ids(User::Zero ) { <span class="macro">assert_eq!</span>(ERROR::DEVICE_NOT_CONNECTED, err); }
-    <span class="kw">if let </span><span class="prelude-val">Err</span>(err) = get_audio_device_ids(User::One  ) { <span class="macro">assert_eq!</span>(ERROR::DEVICE_NOT_CONNECTED, err); }
-    <span class="kw">if let </span><span class="prelude-val">Err</span>(err) = get_audio_device_ids(User::Two  ) { <span class="macro">assert_eq!</span>(ERROR::DEVICE_NOT_CONNECTED, err); }
-    <span class="kw">if let </span><span class="prelude-val">Err</span>(err) = get_audio_device_ids(User::Three) { <span class="macro">assert_eq!</span>(ERROR::DEVICE_NOT_CONNECTED, err); }
+    <span class="comment">// May or may not succeed, even if gamepad not connected</span>
+    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=</span> <span class="ident">get_audio_device_ids</span>(<span class="ident">User::Zero</span> ) { <span class="macro">assert_eq!</span>(<span class="ident">ERROR::DEVICE_NOT_CONNECTED</span>, <span class="ident">err</span>); }
+    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=</span> <span class="ident">get_audio_device_ids</span>(<span class="ident">User::One</span>  ) { <span class="macro">assert_eq!</span>(<span class="ident">ERROR::DEVICE_NOT_CONNECTED</span>, <span class="ident">err</span>); }
+    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=</span> <span class="ident">get_audio_device_ids</span>(<span class="ident">User::Two</span>  ) { <span class="macro">assert_eq!</span>(<span class="ident">ERROR::DEVICE_NOT_CONNECTED</span>, <span class="ident">err</span>); }
+    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=</span> <span class="ident">get_audio_device_ids</span>(<span class="ident">User::Three</span>) { <span class="macro">assert_eq!</span>(<span class="ident">ERROR::DEVICE_NOT_CONNECTED</span>, <span class="ident">err</span>); }
 
-    <span class="comment">// Invalid User s
-    </span><span class="macro">assert_eq!</span>(ERROR::BAD_ARGUMENTS, get_audio_device_ids(User::Any));
-    <span class="kw">for </span>u <span class="kw">in </span>User::iter_invalid() {
-        <span class="macro">assert_eq!</span>(ERROR::BAD_ARGUMENTS, get_audio_device_ids(u));
+    <span class="comment">// Invalid User s</span>
+    <span class="macro">assert_eq!</span>(<span class="ident">ERROR::BAD_ARGUMENTS</span>, <span class="ident">get_audio_device_ids</span>(<span class="ident">User::Any</span>));
+    <span class="kw">for</span> <span class="ident">u</span> <span class="kw">in</span> <span class="ident">User::iter_invalid</span>() {
+        <span class="macro">assert_eq!</span>(<span class="ident">ERROR::BAD_ARGUMENTS</span>, <span class="ident">get_audio_device_ids</span>(<span class="ident">u</span>));
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (b44197abb 2022-09-05)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0 (4b91a6ea7 2022-08-08)" ></div>
+</body></html>

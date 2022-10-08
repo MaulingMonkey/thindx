@@ -1,4 +1,10 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3d9types.h\flags\fvf.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>fvf.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../../normalize.css"><link rel="stylesheet" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../../dark.css" disabled><link rel="stylesheet" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3d9types.h\flags\fvf.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>fvf.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div>
+        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
+                                <a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -112,119 +118,120 @@
 <span id="112">112</span>
 <span id="113">113</span>
 <span id="114">114</span>
-</pre><pre class="rust"><code><span class="attribute">#[allow(unused_imports)] </span><span class="kw">use crate</span>::<span class="kw-2">*</span>;
+</pre><pre class="rust"><code><span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span> <span class="kw">use</span> <span class="kw">crate</span>::<span class="kw-2">*</span>;
 
-<span class="kw">use </span>bytemuck::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">bytemuck</span>::<span class="kw-2">*</span>;
 
-<span class="kw">use </span>winapi::shared::d3d9types::<span class="kw-2">*</span>;
-<span class="kw">type </span>D3DFVF = u32; <span class="comment">// there&#39;s no actual type
+<span class="kw">use</span> <span class="ident">winapi::shared::d3d9types</span>::<span class="kw-2">*</span>;
+<span class="kw">type</span> <span class="ident">D3DFVF</span> <span class="op">=</span> <span class="ident">u32</span>; <span class="comment">// there&#39;s no actual type</span>
 
-</span><span class="kw">use </span>std::ops::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">std::ops</span>::<span class="kw-2">*</span>;
 
 
 
-<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dfvf)\]
-/// DWORD / D3DFVF_*
-///
-/// Flexible Vertex Format Constants, or FVF codes, are used to describe the contents of vertices interleaved in a single data stream that will be processed by the fixed-function pipeline.
-</span><span class="attribute">#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[derive(Pod, Zeroable)]
-#[repr(transparent)] </span><span class="kw">pub struct </span>FVF(D3DFVF);
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dfvf)\]</span>
+<span class="doccomment">/// DWORD / D3DFVF_*</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Flexible Vertex Format Constants, or FVF codes, are used to describe the contents of vertices interleaved in a single data stream that will be processed by the fixed-function pipeline.</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">PartialOrd</span>, <span class="ident">Ord</span>, <span class="ident">Hash</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Pod</span>, <span class="ident">Zeroable</span>)]</span>
+<span class="attribute">#[<span class="ident">repr</span>(<span class="ident">transparent</span>)]</span> <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">FVF</span>(<span class="ident">D3DFVF</span>);
 
-<span class="macro">flags! </span>{
-    FVF =&gt; D3DFVF;
-    LastBetaUByte4, LastBetaD3DColor,
-    Reserved2, Reserved0,
-    Tex8, Tex7, Tex6, Tex5, Tex4, Tex3, Tex2, Tex1,<span class="comment">// Tex0,
-    </span>XYZW, XYZB5, XYZB4, XYZB3, XYZB2, XYZB1, XYZRHW, XYZ,
-    Specular, PSize, Normal, Diffuse, <span class="prelude-val">None</span>,
+<span class="macro">flags!</span> {
+    <span class="ident">FVF</span> =&gt; <span class="ident">D3DFVF</span>;
+    <span class="ident">LastBetaUByte4</span>, <span class="ident">LastBetaD3DColor</span>,
+    <span class="ident">Reserved2</span>, <span class="ident">Reserved0</span>,
+    <span class="ident">Tex8</span>, <span class="ident">Tex7</span>, <span class="ident">Tex6</span>, <span class="ident">Tex5</span>, <span class="ident">Tex4</span>, <span class="ident">Tex3</span>, <span class="ident">Tex2</span>, <span class="ident">Tex1</span>,<span class="comment">// Tex0,</span>
+    <span class="ident">XYZW</span>, <span class="ident">XYZB5</span>, <span class="ident">XYZB4</span>, <span class="ident">XYZB3</span>, <span class="ident">XYZB2</span>, <span class="ident">XYZB1</span>, <span class="ident">XYZRHW</span>, <span class="ident">XYZ</span>,
+    <span class="ident">Specular</span>, <span class="ident">PSize</span>, <span class="ident">Normal</span>, <span class="ident">Diffuse</span>, <span class="prelude-val">None</span>,
 }
 
-<span class="attribute">#[allow(non_upper_case_globals)] </span><span class="kw">impl </span>FVF { <span class="comment">// These are enum-like
-    </span><span class="kw">pub const </span><span class="prelude-val">None              </span>: FVF = FVF(<span class="number">0</span>);
+<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">non_upper_case_globals</span>)]</span> <span class="kw">impl</span> <span class="ident">FVF</span> { <span class="comment">// These are enum-like</span>
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="prelude-val">None</span>              : <span class="ident">FVF</span> <span class="op">=</span> <span class="ident">FVF</span>(<span class="number">0</span>);
 
-    <span class="comment">// Vertex Data Flags
+    <span class="comment">// Vertex Data Flags</span>
 
-    </span><span class="kw">pub const </span>Diffuse           : FVF = FVF(D3DFVF_DIFFUSE);
-    <span class="kw">pub const </span>Normal            : FVF = FVF(D3DFVF_NORMAL);
-    <span class="kw">pub const </span>PSize             : FVF = FVF(D3DFVF_PSIZE);
-    <span class="kw">pub const </span>Specular          : FVF = FVF(D3DFVF_SPECULAR);
-    <span class="kw">pub const </span>XYZ               : FVF = FVF(D3DFVF_XYZ);
-    <span class="kw">pub const </span>XYZRHW            : FVF = FVF(D3DFVF_XYZRHW);
-    <span class="kw">pub const </span>XYZB1             : FVF = FVF(D3DFVF_XYZB1);
-    <span class="kw">pub const </span>XYZB2             : FVF = FVF(D3DFVF_XYZB2);
-    <span class="kw">pub const </span>XYZB3             : FVF = FVF(D3DFVF_XYZB3);
-    <span class="kw">pub const </span>XYZB4             : FVF = FVF(D3DFVF_XYZB4);
-    <span class="kw">pub const </span>XYZB5             : FVF = FVF(D3DFVF_XYZB5);
-    <span class="kw">pub const </span>XYZW              : FVF = FVF(D3DFVF_XYZW);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Diffuse</span>           : <span class="ident">FVF</span> <span class="op">=</span> <span class="ident">FVF</span>(<span class="ident">D3DFVF_DIFFUSE</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Normal</span>            : <span class="ident">FVF</span> <span class="op">=</span> <span class="ident">FVF</span>(<span class="ident">D3DFVF_NORMAL</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">PSize</span>             : <span class="ident">FVF</span> <span class="op">=</span> <span class="ident">FVF</span>(<span class="ident">D3DFVF_PSIZE</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Specular</span>          : <span class="ident">FVF</span> <span class="op">=</span> <span class="ident">FVF</span>(<span class="ident">D3DFVF_SPECULAR</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">XYZ</span>               : <span class="ident">FVF</span> <span class="op">=</span> <span class="ident">FVF</span>(<span class="ident">D3DFVF_XYZ</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">XYZRHW</span>            : <span class="ident">FVF</span> <span class="op">=</span> <span class="ident">FVF</span>(<span class="ident">D3DFVF_XYZRHW</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">XYZB1</span>             : <span class="ident">FVF</span> <span class="op">=</span> <span class="ident">FVF</span>(<span class="ident">D3DFVF_XYZB1</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">XYZB2</span>             : <span class="ident">FVF</span> <span class="op">=</span> <span class="ident">FVF</span>(<span class="ident">D3DFVF_XYZB2</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">XYZB3</span>             : <span class="ident">FVF</span> <span class="op">=</span> <span class="ident">FVF</span>(<span class="ident">D3DFVF_XYZB3</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">XYZB4</span>             : <span class="ident">FVF</span> <span class="op">=</span> <span class="ident">FVF</span>(<span class="ident">D3DFVF_XYZB4</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">XYZB5</span>             : <span class="ident">FVF</span> <span class="op">=</span> <span class="ident">FVF</span>(<span class="ident">D3DFVF_XYZB5</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">XYZW</span>              : <span class="ident">FVF</span> <span class="op">=</span> <span class="ident">FVF</span>(<span class="ident">D3DFVF_XYZW</span>);
 
-    <span class="comment">// Texture Flags
+    <span class="comment">// Texture Flags</span>
 
-    </span><span class="kw">pub const </span>Tex0              : FVF = FVF(D3DFVF_TEX0);
-    <span class="kw">pub const </span>Tex1              : FVF = FVF(D3DFVF_TEX1);
-    <span class="kw">pub const </span>Tex2              : FVF = FVF(D3DFVF_TEX2);
-    <span class="kw">pub const </span>Tex3              : FVF = FVF(D3DFVF_TEX3);
-    <span class="kw">pub const </span>Tex4              : FVF = FVF(D3DFVF_TEX4);
-    <span class="kw">pub const </span>Tex5              : FVF = FVF(D3DFVF_TEX5);
-    <span class="kw">pub const </span>Tex6              : FVF = FVF(D3DFVF_TEX6);
-    <span class="kw">pub const </span>Tex7              : FVF = FVF(D3DFVF_TEX7);
-    <span class="kw">pub const </span>Tex8              : FVF = FVF(D3DFVF_TEX8);
-    <span class="comment">// D3DFVF_TEXCOORDSIZEN(coordIndex)
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Tex0</span>              : <span class="ident">FVF</span> <span class="op">=</span> <span class="ident">FVF</span>(<span class="ident">D3DFVF_TEX0</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Tex1</span>              : <span class="ident">FVF</span> <span class="op">=</span> <span class="ident">FVF</span>(<span class="ident">D3DFVF_TEX1</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Tex2</span>              : <span class="ident">FVF</span> <span class="op">=</span> <span class="ident">FVF</span>(<span class="ident">D3DFVF_TEX2</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Tex3</span>              : <span class="ident">FVF</span> <span class="op">=</span> <span class="ident">FVF</span>(<span class="ident">D3DFVF_TEX3</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Tex4</span>              : <span class="ident">FVF</span> <span class="op">=</span> <span class="ident">FVF</span>(<span class="ident">D3DFVF_TEX4</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Tex5</span>              : <span class="ident">FVF</span> <span class="op">=</span> <span class="ident">FVF</span>(<span class="ident">D3DFVF_TEX5</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Tex6</span>              : <span class="ident">FVF</span> <span class="op">=</span> <span class="ident">FVF</span>(<span class="ident">D3DFVF_TEX6</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Tex7</span>              : <span class="ident">FVF</span> <span class="op">=</span> <span class="ident">FVF</span>(<span class="ident">D3DFVF_TEX7</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Tex8</span>              : <span class="ident">FVF</span> <span class="op">=</span> <span class="ident">FVF</span>(<span class="ident">D3DFVF_TEX8</span>);
+    <span class="comment">// D3DFVF_TEXCOORDSIZEN(coordIndex)</span>
 
-    // Mask Flags
+    <span class="comment">// Mask Flags</span>
 
-    </span><span class="kw">pub const </span>PositionMask      : FVF = FVF(D3DFVF_POSITION_MASK);
-    <span class="kw">pub const </span>Reserved0         : FVF = FVF(D3DFVF_RESERVED0);
-    <span class="kw">pub const </span>Reserved2         : FVF = FVF(D3DFVF_RESERVED2);
-    <span class="kw">pub const </span>TexCountMask      : FVF = FVF(D3DFVF_TEXCOUNT_MASK);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">PositionMask</span>      : <span class="ident">FVF</span> <span class="op">=</span> <span class="ident">FVF</span>(<span class="ident">D3DFVF_POSITION_MASK</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Reserved0</span>         : <span class="ident">FVF</span> <span class="op">=</span> <span class="ident">FVF</span>(<span class="ident">D3DFVF_RESERVED0</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Reserved2</span>         : <span class="ident">FVF</span> <span class="op">=</span> <span class="ident">FVF</span>(<span class="ident">D3DFVF_RESERVED2</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">TexCountMask</span>      : <span class="ident">FVF</span> <span class="op">=</span> <span class="ident">FVF</span>(<span class="ident">D3DFVF_TEXCOUNT_MASK</span>);
 
-    <span class="comment">// Miscellanieous Flags
+    <span class="comment">// Miscellanieous Flags</span>
 
-    </span><span class="kw">pub const </span>LastBetaD3DColor  : FVF = FVF(D3DFVF_LASTBETA_D3DCOLOR);
-    <span class="kw">pub const </span>LastBetaUByte4    : FVF = FVF(D3DFVF_LASTBETA_UBYTE4);
-    <span class="kw">pub const </span>TexCountShift     : u32 = D3DFVF_TEXCOUNT_SHIFT;
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">LastBetaD3DColor</span>  : <span class="ident">FVF</span> <span class="op">=</span> <span class="ident">FVF</span>(<span class="ident">D3DFVF_LASTBETA_D3DCOLOR</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">LastBetaUByte4</span>    : <span class="ident">FVF</span> <span class="op">=</span> <span class="ident">FVF</span>(<span class="ident">D3DFVF_LASTBETA_UBYTE4</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">TexCountShift</span>     : <span class="ident">u32</span> <span class="op">=</span> <span class="ident">D3DFVF_TEXCOUNT_SHIFT</span>;
 }
 
-<span class="kw">impl </span>Deref <span class="kw">for </span>FVF {
-    <span class="kw">type </span>Target = D3DFVF;
-    <span class="kw">fn </span>deref(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="self">Self</span>::Target { <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="number">0 </span>}
+<span class="kw">impl</span> <span class="ident">Deref</span> <span class="kw">for</span> <span class="ident">FVF</span> {
+    <span class="kw">type</span> <span class="ident">Target</span> <span class="op">=</span> <span class="ident">D3DFVF</span>;
+    <span class="kw">fn</span> <span class="ident">deref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::Target</span> { <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="number">0</span> }
 }
 
-<span class="kw">impl </span>DerefMut <span class="kw">for </span>FVF {
-    <span class="kw">fn </span>deref_mut(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>::Target { <span class="kw-2">&amp;mut </span><span class="self">self</span>.<span class="number">0 </span>}
+<span class="kw">impl</span> <span class="ident">DerefMut</span> <span class="kw">for</span> <span class="ident">FVF</span> {
+    <span class="kw">fn</span> <span class="ident">deref_mut</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="ident"><span class="self">Self</span>::Target</span> { <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="number">0</span> }
 }
 
 
 
-<span class="comment">//#cpp2rust D3DFVF                      = d3d::FVF
+<span class="comment">//#cpp2rust D3DFVF                      = d3d::FVF</span>
 
-//#cpp2rust D3DFVF_DIFFUSE              = d3d::FVF::Diffuse
-//#cpp2rust D3DFVF_NORMAL               = d3d::FVF::Normal
-//#cpp2rust D3DFVF_PSIZE                = d3d::FVF::PSize
-//#cpp2rust D3DFVF_SPECULAR             = d3d::FVF::Specular
-//#cpp2rust D3DFVF_XYZ                  = d3d::FVF::XYZ
-//#cpp2rust D3DFVF_XYZRHW               = d3d::FVF::XYZRHW
-//#cpp2rust D3DFVF_XYZB1                = d3d::FVF::XYZB1
-//#cpp2rust D3DFVF_XYZB2                = d3d::FVF::XYZB2
-//#cpp2rust D3DFVF_XYZB3                = d3d::FVF::XYZB3
-//#cpp2rust D3DFVF_XYZB4                = d3d::FVF::XYZB4
-//#cpp2rust D3DFVF_XYZB5                = d3d::FVF::XYZB5
-//#cpp2rust D3DFVF_XYZW                 = d3d::FVF::XYZW
-//#cpp2rust D3DFVF_TEX0                 = d3d::FVF::Tex0
-//#cpp2rust D3DFVF_TEX1                 = d3d::FVF::Tex1
-//#cpp2rust D3DFVF_TEX2                 = d3d::FVF::Tex2
-//#cpp2rust D3DFVF_TEX3                 = d3d::FVF::Tex3
-//#cpp2rust D3DFVF_TEX4                 = d3d::FVF::Tex4
-//#cpp2rust D3DFVF_TEX5                 = d3d::FVF::Tex5
-//#cpp2rust D3DFVF_TEX6                 = d3d::FVF::Tex6
-//#cpp2rust D3DFVF_TEX7                 = d3d::FVF::Tex7
-//#cpp2rust D3DFVF_TEX8                 = d3d::FVF::Tex8
-//#cpp2rust D3DFVF_POSITION_MASK        = d3d::FVF::PositionMask
-//#cpp2rust D3DFVF_RESERVED0            = d3d::FVF::Reserved0
-//#cpp2rust D3DFVF_RESERVED2            = d3d::FVF::Reserved2
-//#cpp2rust D3DFVF_TEXCOUNT_MASK        = d3d::FVF::TexCountMask
-//#cpp2rust D3DFVF_LASTBETA_D3DCOLOR    = d3d::FVF::LastBetaD3DColor
-//#cpp2rust D3DFVF_LASTBETA_UBYTE4      = d3d::FVF::LastBetaUByte4
-//#cpp2rust D3DFVF_TEXCOUNT_SHIFT       = d3d::FVF::TexCountShift
-</span></code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (b44197abb 2022-09-05)" ></div></body></html>
+<span class="comment">//#cpp2rust D3DFVF_DIFFUSE              = d3d::FVF::Diffuse</span>
+<span class="comment">//#cpp2rust D3DFVF_NORMAL               = d3d::FVF::Normal</span>
+<span class="comment">//#cpp2rust D3DFVF_PSIZE                = d3d::FVF::PSize</span>
+<span class="comment">//#cpp2rust D3DFVF_SPECULAR             = d3d::FVF::Specular</span>
+<span class="comment">//#cpp2rust D3DFVF_XYZ                  = d3d::FVF::XYZ</span>
+<span class="comment">//#cpp2rust D3DFVF_XYZRHW               = d3d::FVF::XYZRHW</span>
+<span class="comment">//#cpp2rust D3DFVF_XYZB1                = d3d::FVF::XYZB1</span>
+<span class="comment">//#cpp2rust D3DFVF_XYZB2                = d3d::FVF::XYZB2</span>
+<span class="comment">//#cpp2rust D3DFVF_XYZB3                = d3d::FVF::XYZB3</span>
+<span class="comment">//#cpp2rust D3DFVF_XYZB4                = d3d::FVF::XYZB4</span>
+<span class="comment">//#cpp2rust D3DFVF_XYZB5                = d3d::FVF::XYZB5</span>
+<span class="comment">//#cpp2rust D3DFVF_XYZW                 = d3d::FVF::XYZW</span>
+<span class="comment">//#cpp2rust D3DFVF_TEX0                 = d3d::FVF::Tex0</span>
+<span class="comment">//#cpp2rust D3DFVF_TEX1                 = d3d::FVF::Tex1</span>
+<span class="comment">//#cpp2rust D3DFVF_TEX2                 = d3d::FVF::Tex2</span>
+<span class="comment">//#cpp2rust D3DFVF_TEX3                 = d3d::FVF::Tex3</span>
+<span class="comment">//#cpp2rust D3DFVF_TEX4                 = d3d::FVF::Tex4</span>
+<span class="comment">//#cpp2rust D3DFVF_TEX5                 = d3d::FVF::Tex5</span>
+<span class="comment">//#cpp2rust D3DFVF_TEX6                 = d3d::FVF::Tex6</span>
+<span class="comment">//#cpp2rust D3DFVF_TEX7                 = d3d::FVF::Tex7</span>
+<span class="comment">//#cpp2rust D3DFVF_TEX8                 = d3d::FVF::Tex8</span>
+<span class="comment">//#cpp2rust D3DFVF_POSITION_MASK        = d3d::FVF::PositionMask</span>
+<span class="comment">//#cpp2rust D3DFVF_RESERVED0            = d3d::FVF::Reserved0</span>
+<span class="comment">//#cpp2rust D3DFVF_RESERVED2            = d3d::FVF::Reserved2</span>
+<span class="comment">//#cpp2rust D3DFVF_TEXCOUNT_MASK        = d3d::FVF::TexCountMask</span>
+<span class="comment">//#cpp2rust D3DFVF_LASTBETA_D3DCOLOR    = d3d::FVF::LastBetaD3DColor</span>
+<span class="comment">//#cpp2rust D3DFVF_LASTBETA_UBYTE4      = d3d::FVF::LastBetaUByte4</span>
+<span class="comment">//#cpp2rust D3DFVF_TEXCOUNT_SHIFT       = d3d::FVF::TexCountShift</span>
+</code></pre></div>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0 (4b91a6ea7 2022-08-08)" ></div>
+</body></html>

@@ -1,4 +1,10 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3dcompiler.h\dll\reflection.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>reflection.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../../normalize.css"><link rel="stylesheet" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../../dark.css" disabled><link rel="stylesheet" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3dcompiler.h\dll\reflection.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>reflection.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div>
+        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
+                                <a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -266,273 +272,274 @@
 <span id="266">266</span>
 <span id="267">267</span>
 <span id="268">268</span>
-</pre><pre class="rust"><code><span class="kw">use crate</span>::<span class="kw-2">*</span>;
-<span class="kw">use </span><span class="kw">crate</span>::d3d::<span class="kw-2">*</span>;
+</pre><pre class="rust"><code><span class="kw">use</span> <span class="kw">crate</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::d3d</span>::<span class="kw-2">*</span>;
 
-<span class="kw">use </span>winapi::Interface;
+<span class="kw">use</span> <span class="ident">winapi::Interface</span>;
 
-<span class="kw">use </span>std::ptr::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">std::ptr</span>::<span class="kw-2">*</span>;
 
 
 
-<span class="doccomment">/// &lt;h1 id=&quot;reflection&quot; class=&quot;section-header&quot;&gt;&lt;a href=&quot;#reflection&quot;&gt;Bytecode Reflection&lt;/a&gt;&lt;/h1&gt;
-</span><span class="kw">impl </span>Compiler {
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dreflect)\]
-    /// D3DReflect
-    ///
-    /// Gets a pointer to a reflection interface.
-    ///
-    /// ### Arguments
-    /// *   `src_data`  - A compiled HLSL shader.
-    ///
-    /// ### Errors
-    /// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_4?.dll` and earlier
-    /// *   [E::INVALIDARG]                 - On invalid `I`
-    /// *   [D3DERR::INVALIDCALL]           - On invalid `src_data`
-    /// *   [D3DERR::INVALIDCALL]           - On shaders not compatible with `I` (e.g. Shader Model 3 shaders with &lt;code&gt;I: [d3d11::ShaderReflection]&lt;/code&gt;
-    ///
-    /// ### Example
-    /// ```rust
-    /// # use thindx::{*, d3d::*}; let d3dc = Compiler::load_system(47).unwrap();
-    /// let shader = d3dc.compile_from_file(
-    ///     r&quot;test\data\basic.hlsl&quot;, None, None, &quot;ps_main&quot;, &quot;ps_4_0&quot;,
-    ///     Compile::Debug, CompileEffect::None
-    /// ).unwrap();
-    ///
-    /// // Should succeed:
-    /// let r = d3dc.reflect::&lt;d3d11::ShaderReflection&gt;(&amp;shader).unwrap();
-    ///
-    /// // Invalid interface:
-    /// let r = d3dc.reflect::&lt;Unknown&gt;(&amp;shader);
-    /// assert_eq!(E::INVALIDARG, r.map(|_|()));
-    ///
-    /// // Invalid `src_data`:
-    /// let r = d3dc.reflect::&lt;d3d11::ShaderReflection&gt;(unsafe { Bytecode::from_unchecked(&amp;[]) });
-    /// assert_eq!(D3DERR::INVALIDCALL, r.map(|_|()));
-    /// ```
-    ///
-    /// ### See Also
-    /// *   [d3d11::ShaderReflection] for a more complete example
-    ///
-    /// ### Remarks
-    /// *   This was introduced by d3dcompiler_40.dll, and is unavailable in earlier versions.
-    </span><span class="kw">pub fn </span>reflect&lt;I: Raw&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, src_data: <span class="kw-2">&amp;</span>Bytecode) -&gt; <span class="prelude-ty">Result</span>&lt;I, Error&gt; <span class="kw">where </span>I::Raw : Interface {
-        <span class="macro">fn_context_dll!</span>(d3d::Compiler::reflect =&gt; <span class="self">self</span>.D3DReflect);
-        <span class="kw">let </span>src_data = src_data.as_bytes();
+<span class="doccomment">/// &lt;h1 id=&quot;reflection&quot; class=&quot;section-header&quot;&gt;&lt;a href=&quot;#reflection&quot;&gt;Bytecode Reflection&lt;/a&gt;&lt;/h1&gt;</span>
+<span class="kw">impl</span> <span class="ident">Compiler</span> {
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dreflect)\]</span>
+    <span class="doccomment">/// D3DReflect</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Gets a pointer to a reflection interface.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Arguments</span>
+    <span class="doccomment">/// *   `src_data`  - A compiled HLSL shader.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Errors</span>
+    <span class="doccomment">/// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_4?.dll` and earlier</span>
+    <span class="doccomment">/// *   [E::INVALIDARG]                 - On invalid `I`</span>
+    <span class="doccomment">/// *   [D3DERR::INVALIDCALL]           - On invalid `src_data`</span>
+    <span class="doccomment">/// *   [D3DERR::INVALIDCALL]           - On shaders not compatible with `I` (e.g. Shader Model 3 shaders with &lt;code&gt;I: [d3d11::ShaderReflection]&lt;/code&gt;</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Example</span>
+    <span class="doccomment">/// ```rust</span>
+    <span class="doccomment">/// # use thindx::{*, d3d::*}; let d3dc = Compiler::load_system(47).unwrap();</span>
+    <span class="doccomment">/// let shader = d3dc.compile_from_file(</span>
+    <span class="doccomment">///     r&quot;test\data\basic.hlsl&quot;, None, None, &quot;ps_main&quot;, &quot;ps_4_0&quot;,</span>
+    <span class="doccomment">///     Compile::Debug, CompileEffect::None</span>
+    <span class="doccomment">/// ).unwrap();</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// // Should succeed:</span>
+    <span class="doccomment">/// let r = d3dc.reflect::&lt;d3d11::ShaderReflection&gt;(&amp;shader).unwrap();</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// // Invalid interface:</span>
+    <span class="doccomment">/// let r = d3dc.reflect::&lt;Unknown&gt;(&amp;shader);</span>
+    <span class="doccomment">/// assert_eq!(E::INVALIDARG, r.map(|_|()));</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// // Invalid `src_data`:</span>
+    <span class="doccomment">/// let r = d3dc.reflect::&lt;d3d11::ShaderReflection&gt;(unsafe { Bytecode::from_unchecked(&amp;[]) });</span>
+    <span class="doccomment">/// assert_eq!(D3DERR::INVALIDCALL, r.map(|_|()));</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### See Also</span>
+    <span class="doccomment">/// *   [d3d11::ShaderReflection] for a more complete example</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Remarks</span>
+    <span class="doccomment">/// *   This was introduced by d3dcompiler_40.dll, and is unavailable in earlier versions.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">reflect</span><span class="op">&lt;</span><span class="ident">I</span>: <span class="ident">Raw</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">src_data</span>: <span class="kw-2">&amp;</span><span class="ident">Bytecode</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">I</span>, <span class="ident">Error</span><span class="op">&gt;</span> <span class="kw">where</span> <span class="ident">I::Raw</span> : <span class="ident">Interface</span> {
+        <span class="macro">fn_context_dll!</span>(<span class="ident">d3d::Compiler::reflect</span> =&gt; <span class="self">self</span>.<span class="ident">D3DReflect</span>);
+        <span class="kw">let</span> <span class="ident">src_data</span> <span class="op">=</span> <span class="ident">src_data</span>.<span class="ident">as_bytes</span>();
 
-        <span class="comment">// SAFETY: ❌ needs fuzz testing against ~4GB `data` to attempt to induce alloc overflow bugs
-        //  * `f`           ✔️ should be valid/sound like all `self.*`
-        //  * `src_data`    ❌ needs fuzz testing against ~4GB data to attempt to induce alloc overflow bugs
-        //  * `src_data`    ✔️ should be valid bytecode as implied by [`Bytecode`]
-        //  * `uuid`        ✔️ is a simple GUID input
-        //  * `reflector`   ✔️ is a simple out-param
-        </span><span class="kw">let </span><span class="kw-2">mut </span>reflector = null_mut();
-        <span class="macro">fn_check_hr!</span>(<span class="kw">unsafe </span>{ D3DReflect(src_data.as_ptr().cast(), src_data.len(), <span class="kw-2">&amp;</span>I::Raw::uuidof(), <span class="kw-2">&amp;mut </span>reflector) })<span class="question-mark">?</span>;
+        <span class="comment">// SAFETY: ❌ needs fuzz testing against ~4GB `data` to attempt to induce alloc overflow bugs</span>
+        <span class="comment">//  * `f`           ✔️ should be valid/sound like all `self.*`</span>
+        <span class="comment">//  * `src_data`    ❌ needs fuzz testing against ~4GB data to attempt to induce alloc overflow bugs</span>
+        <span class="comment">//  * `src_data`    ✔️ should be valid bytecode as implied by [`Bytecode`]</span>
+        <span class="comment">//  * `uuid`        ✔️ is a simple GUID input</span>
+        <span class="comment">//  * `reflector`   ✔️ is a simple out-param</span>
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">reflector</span> <span class="op">=</span> <span class="ident">null_mut</span>();
+        <span class="macro">fn_check_hr!</span>(<span class="kw unsafe">unsafe</span> { <span class="ident">D3DReflect</span>(<span class="ident">src_data</span>.<span class="ident">as_ptr</span>().<span class="ident">cast</span>(), <span class="ident">src_data</span>.<span class="ident">len</span>(), <span class="kw-2">&amp;</span><span class="ident">I::Raw::uuidof</span>(), <span class="kw-2">&amp;mut</span> <span class="ident">reflector</span>) })<span class="question-mark">?</span>;
 
-        <span class="comment">// SAFETY: ✔️ `reflector` should be null (from_raw panics) or a valid non-dangling I::Raw (from_raw takes ownership)
-        </span><span class="prelude-val">Ok</span>(<span class="kw">unsafe </span>{ I::from_raw(reflector.cast()) })
+        <span class="comment">// SAFETY: ✔️ `reflector` should be null (from_raw panics) or a valid non-dangling I::Raw (from_raw takes ownership)</span>
+        <span class="prelude-val">Ok</span>(<span class="kw unsafe">unsafe</span> { <span class="ident">I::from_raw</span>(<span class="ident">reflector</span>.<span class="ident">cast</span>()) })
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dreflect)\]
-    /// D3DReflect
-    ///
-    /// Gets a pointer to a reflection interface.
-    ///
-    /// ### Arguments
-    /// *   `src_data`  - A compiled HLSL shader.
-    ///
-    /// ### Errors
-    /// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_4?.dll` and earlier
-    /// *   [D3DERR::INVALIDCALL]           - On invalid `src_data`
-    /// *   [D3DERR::INVALIDCALL]           - On shaders not compatible with [`d3d11::ShaderReflection`] (e.g. Shader Model 3.0 and earlier)
-    ///
-    /// ### Example
-    /// ```rust
-    /// # use thindx::{*, d3d::*}; let d3dc = Compiler::load_system(47).unwrap();
-    /// let shader = d3dc.compile_from_file(
-    ///     r&quot;test\data\basic.hlsl&quot;, None, None, &quot;ps_main&quot;, &quot;ps_4_0&quot;,
-    ///     Compile::Debug, CompileEffect::None
-    /// ).unwrap();
-    ///
-    /// // Should succeed:
-    /// let r = d3dc.reflect11(&amp;shader).unwrap();
-    ///
-    /// // Invalid `src_data`:
-    /// let r = d3dc.reflect11(unsafe { Bytecode::from_unchecked(&amp;[]) });
-    /// assert_eq!(D3DERR::INVALIDCALL, r.map(|_|()));
-    /// ```
-    ///
-    /// ### See Also
-    /// *   [d3d11::ShaderReflection] for a more complete example
-    ///
-    /// ### Remarks
-    /// *   This was introduced by d3dcompiler_40.dll, and is unavailable in earlier versions.
-    </span><span class="kw">pub fn </span>reflect11(<span class="kw-2">&amp;</span><span class="self">self</span>, src_data: <span class="kw-2">&amp;</span>Bytecode) -&gt; <span class="prelude-ty">Result</span>&lt;d3d11::ShaderReflection, Error&gt; {
-        <span class="macro">fn_context_dll!</span>(d3d::Compiler::reflect11 =&gt; <span class="self">self</span>.D3DReflect);
-        <span class="self">self</span>.reflect(src_data)
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dreflect)\]</span>
+    <span class="doccomment">/// D3DReflect</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Gets a pointer to a reflection interface.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Arguments</span>
+    <span class="doccomment">/// *   `src_data`  - A compiled HLSL shader.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Errors</span>
+    <span class="doccomment">/// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_4?.dll` and earlier</span>
+    <span class="doccomment">/// *   [D3DERR::INVALIDCALL]           - On invalid `src_data`</span>
+    <span class="doccomment">/// *   [D3DERR::INVALIDCALL]           - On shaders not compatible with [`d3d11::ShaderReflection`] (e.g. Shader Model 3.0 and earlier)</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Example</span>
+    <span class="doccomment">/// ```rust</span>
+    <span class="doccomment">/// # use thindx::{*, d3d::*}; let d3dc = Compiler::load_system(47).unwrap();</span>
+    <span class="doccomment">/// let shader = d3dc.compile_from_file(</span>
+    <span class="doccomment">///     r&quot;test\data\basic.hlsl&quot;, None, None, &quot;ps_main&quot;, &quot;ps_4_0&quot;,</span>
+    <span class="doccomment">///     Compile::Debug, CompileEffect::None</span>
+    <span class="doccomment">/// ).unwrap();</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// // Should succeed:</span>
+    <span class="doccomment">/// let r = d3dc.reflect11(&amp;shader).unwrap();</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// // Invalid `src_data`:</span>
+    <span class="doccomment">/// let r = d3dc.reflect11(unsafe { Bytecode::from_unchecked(&amp;[]) });</span>
+    <span class="doccomment">/// assert_eq!(D3DERR::INVALIDCALL, r.map(|_|()));</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### See Also</span>
+    <span class="doccomment">/// *   [d3d11::ShaderReflection] for a more complete example</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Remarks</span>
+    <span class="doccomment">/// *   This was introduced by d3dcompiler_40.dll, and is unavailable in earlier versions.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">reflect11</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">src_data</span>: <span class="kw-2">&amp;</span><span class="ident">Bytecode</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">d3d11::ShaderReflection</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+        <span class="macro">fn_context_dll!</span>(<span class="ident">d3d::Compiler::reflect11</span> =&gt; <span class="self">self</span>.<span class="ident">D3DReflect</span>);
+        <span class="self">self</span>.<span class="ident">reflect</span>(<span class="ident">src_data</span>)
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dreflectlibrary)\]
-    /// D3DReflectLibrary
-    ///
-    /// Creates a library-reflection interface from source data that contains an HLSL library of functions.
-    ///
-    /// &gt; **Note:** This function is part of the HLSL shader linking technology that you can use on all Direct3D 11
-    /// &gt; platforms to create precompiled HLSL functions, package them into libraries, and link them into full shaders
-    /// &gt; at run time.
-    ///
-    /// ### Arguments
-    /// *   `src_data`  - An HLSL library of functions.
-    ///
-    /// ### Errors
-    /// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_4?.dll` and earlier
-    /// *   [E::INVALIDARG]                 - On invalid `I`
-    /// *   [D3DERR::INVALIDCALL]           - On invalid `src_data`
-    /// *   [D3DERR::INVALIDCALL]           - On shaders not compatible with `I` (e.g. Shader Model 3 shaders with &lt;code&gt;I: [d3d11::ShaderReflection]&lt;/code&gt;
-    ///
-    /// ### Example
-    /// ```rust
-    /// # use thindx::{*, d3d::*}; let d3dc = Compiler::load_system(47).unwrap();
-    /// let shader = d3dc.compile_from_file(
-    ///     r&quot;test\data\library.hlsl&quot;, None, None, (), &quot;lib_5_0&quot;,
-    ///     Compile::Debug, CompileEffect::None
-    /// ).unwrap();
-    ///
-    /// // Should succeed:
-    /// let r = d3dc.reflect_library::&lt;d3d11::LibraryReflection&gt;(&amp;shader).unwrap();
-    ///
-    /// // Invalid interface:
-    /// let r = d3dc.reflect_library::&lt;Unknown&gt;(&amp;shader);
-    /// assert_eq!(E::INVALIDARG, r.map(|_|()));
-    ///
-    /// // Invalid `src_data`:
-    /// let r = d3dc.reflect_library::&lt;d3d11::LibraryReflection&gt;(unsafe { Bytecode::from_unchecked(&amp;[]) });
-    /// assert_eq!(D3DERR::INVALIDCALL, r.map(|_|()));
-    /// ```
-    ///
-    /// ### See Also
-    /// *   [d3d11::LibraryReflection] for a more complete example
-    </span><span class="comment">// #[requires(d3dcompiler=47)] // ?
-    </span><span class="kw">pub fn </span>reflect_library&lt;I: Raw&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, src_data: <span class="kw-2">&amp;</span>Bytecode) -&gt; <span class="prelude-ty">Result</span>&lt;I, Error&gt; <span class="kw">where </span>I::Raw : Interface {
-        <span class="macro">fn_context_dll!</span>(d3d::Compiler::reflect_library =&gt; <span class="self">self</span>.D3DReflectLibrary);
-        <span class="kw">let </span>src_data = src_data.as_bytes();
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dreflectlibrary)\]</span>
+    <span class="doccomment">/// D3DReflectLibrary</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Creates a library-reflection interface from source data that contains an HLSL library of functions.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// &gt; **Note:** This function is part of the HLSL shader linking technology that you can use on all Direct3D 11</span>
+    <span class="doccomment">/// &gt; platforms to create precompiled HLSL functions, package them into libraries, and link them into full shaders</span>
+    <span class="doccomment">/// &gt; at run time.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Arguments</span>
+    <span class="doccomment">/// *   `src_data`  - An HLSL library of functions.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Errors</span>
+    <span class="doccomment">/// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_4?.dll` and earlier</span>
+    <span class="doccomment">/// *   [E::INVALIDARG]                 - On invalid `I`</span>
+    <span class="doccomment">/// *   [D3DERR::INVALIDCALL]           - On invalid `src_data`</span>
+    <span class="doccomment">/// *   [D3DERR::INVALIDCALL]           - On shaders not compatible with `I` (e.g. Shader Model 3 shaders with &lt;code&gt;I: [d3d11::ShaderReflection]&lt;/code&gt;</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Example</span>
+    <span class="doccomment">/// ```rust</span>
+    <span class="doccomment">/// # use thindx::{*, d3d::*}; let d3dc = Compiler::load_system(47).unwrap();</span>
+    <span class="doccomment">/// let shader = d3dc.compile_from_file(</span>
+    <span class="doccomment">///     r&quot;test\data\library.hlsl&quot;, None, None, (), &quot;lib_5_0&quot;,</span>
+    <span class="doccomment">///     Compile::Debug, CompileEffect::None</span>
+    <span class="doccomment">/// ).unwrap();</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// // Should succeed:</span>
+    <span class="doccomment">/// let r = d3dc.reflect_library::&lt;d3d11::LibraryReflection&gt;(&amp;shader).unwrap();</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// // Invalid interface:</span>
+    <span class="doccomment">/// let r = d3dc.reflect_library::&lt;Unknown&gt;(&amp;shader);</span>
+    <span class="doccomment">/// assert_eq!(E::INVALIDARG, r.map(|_|()));</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// // Invalid `src_data`:</span>
+    <span class="doccomment">/// let r = d3dc.reflect_library::&lt;d3d11::LibraryReflection&gt;(unsafe { Bytecode::from_unchecked(&amp;[]) });</span>
+    <span class="doccomment">/// assert_eq!(D3DERR::INVALIDCALL, r.map(|_|()));</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### See Also</span>
+    <span class="doccomment">/// *   [d3d11::LibraryReflection] for a more complete example</span>
+    <span class="comment">// #[requires(d3dcompiler=47)] // ?</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">reflect_library</span><span class="op">&lt;</span><span class="ident">I</span>: <span class="ident">Raw</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">src_data</span>: <span class="kw-2">&amp;</span><span class="ident">Bytecode</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">I</span>, <span class="ident">Error</span><span class="op">&gt;</span> <span class="kw">where</span> <span class="ident">I::Raw</span> : <span class="ident">Interface</span> {
+        <span class="macro">fn_context_dll!</span>(<span class="ident">d3d::Compiler::reflect_library</span> =&gt; <span class="self">self</span>.<span class="ident">D3DReflectLibrary</span>);
+        <span class="kw">let</span> <span class="ident">src_data</span> <span class="op">=</span> <span class="ident">src_data</span>.<span class="ident">as_bytes</span>();
 
-        <span class="comment">// SAFETY: ❌ needs fuzz testing against ~4GB `data` to attempt to induce alloc overflow bugs
-        //  * `f`           ✔️ should be valid/sound like all `self.*`
-        //  * `src_data`    ❌ needs fuzz testing against ~4GB data to attempt to induce alloc overflow bugs
-        //  * `src_data`    ✔️ should be valid bytecode as implied by [`Bytecode`]
-        //  * `uuid`        ✔️ is a simple GUID input
-        //  * `reflector`   ✔️ is a simple out-param
-        </span><span class="kw">let </span><span class="kw-2">mut </span>reflector = null_mut();
-        <span class="macro">fn_check_hr!</span>(<span class="kw">unsafe </span>{ D3DReflectLibrary(src_data.as_ptr().cast(), src_data.len(), <span class="kw-2">&amp;</span>I::Raw::uuidof(), <span class="kw-2">&amp;mut </span>reflector) })<span class="question-mark">?</span>;
+        <span class="comment">// SAFETY: ❌ needs fuzz testing against ~4GB `data` to attempt to induce alloc overflow bugs</span>
+        <span class="comment">//  * `f`           ✔️ should be valid/sound like all `self.*`</span>
+        <span class="comment">//  * `src_data`    ❌ needs fuzz testing against ~4GB data to attempt to induce alloc overflow bugs</span>
+        <span class="comment">//  * `src_data`    ✔️ should be valid bytecode as implied by [`Bytecode`]</span>
+        <span class="comment">//  * `uuid`        ✔️ is a simple GUID input</span>
+        <span class="comment">//  * `reflector`   ✔️ is a simple out-param</span>
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">reflector</span> <span class="op">=</span> <span class="ident">null_mut</span>();
+        <span class="macro">fn_check_hr!</span>(<span class="kw unsafe">unsafe</span> { <span class="ident">D3DReflectLibrary</span>(<span class="ident">src_data</span>.<span class="ident">as_ptr</span>().<span class="ident">cast</span>(), <span class="ident">src_data</span>.<span class="ident">len</span>(), <span class="kw-2">&amp;</span><span class="ident">I::Raw::uuidof</span>(), <span class="kw-2">&amp;mut</span> <span class="ident">reflector</span>) })<span class="question-mark">?</span>;
 
-        <span class="comment">// SAFETY: ✔️ `reflector` should be null (from_raw panics) or a valid non-dangling I::Raw (from_raw takes ownership)
-        </span><span class="prelude-val">Ok</span>(<span class="kw">unsafe </span>{ I::from_raw(reflector.cast()) })
+        <span class="comment">// SAFETY: ✔️ `reflector` should be null (from_raw panics) or a valid non-dangling I::Raw (from_raw takes ownership)</span>
+        <span class="prelude-val">Ok</span>(<span class="kw unsafe">unsafe</span> { <span class="ident">I::from_raw</span>(<span class="ident">reflector</span>.<span class="ident">cast</span>()) })
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dreflectlibrary)\]
-    /// D3DReflectLibrary
-    ///
-    /// Creates a library-reflection interface from source data that contains an HLSL library of functions.
-    ///
-    /// &gt; **Note:** This function is part of the HLSL shader linking technology that you can use on all Direct3D 11
-    /// &gt; platforms to create precompiled HLSL functions, package them into libraries, and link them into full shaders
-    /// &gt; at run time.
-    ///
-    /// ### Arguments
-    /// *   `src_data`  - An HLSL library of functions.
-    ///
-    /// ### Errors
-    /// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_4?.dll` and earlier
-    /// *   [D3DERR::INVALIDCALL]           - On invalid `src_data`
-    /// *   [D3DERR::INVALIDCALL]           - On shaders not compatible with [`d3d11::LibraryReflection`] (e.g. Shader Model 3.0 and earlier)
-    ///
-    /// ### Example
-    /// ```rust
-    /// # use thindx::{*, d3d::*}; let d3dc = Compiler::load_system(47).unwrap();
-    /// let shader = d3dc.compile_from_file(
-    ///     r&quot;test\data\library.hlsl&quot;, None, None, (), &quot;lib_5_0&quot;,
-    ///     Compile::Debug, CompileEffect::None
-    /// ).unwrap();
-    ///
-    /// // Should succeed:
-    /// let r = d3dc.reflect_library_11(&amp;shader).unwrap();
-    ///
-    /// // Invalid `src_data`:
-    /// let r = d3dc.reflect_library_11(unsafe { Bytecode::from_unchecked(&amp;[]) });
-    /// assert_eq!(D3DERR::INVALIDCALL, r.map(|_|()));
-    /// ```
-    ///
-    /// ### See Also
-    /// *   [d3d11::LibraryReflection] for a more complete example
-    </span><span class="comment">// #[requires(d3dcompiler=47)] // ?
-    </span><span class="kw">pub fn </span>reflect_library_11(<span class="kw-2">&amp;</span><span class="self">self</span>, src_data: <span class="kw-2">&amp;</span>Bytecode) -&gt; <span class="prelude-ty">Result</span>&lt;d3d11::LibraryReflection, Error&gt; {
-        <span class="macro">fn_context_dll!</span>(d3d::Compiler::reflect_library_11 =&gt; <span class="self">self</span>.D3DReflectLibrary);
-        <span class="self">self</span>.reflect_library(src_data)
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dreflectlibrary)\]</span>
+    <span class="doccomment">/// D3DReflectLibrary</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Creates a library-reflection interface from source data that contains an HLSL library of functions.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// &gt; **Note:** This function is part of the HLSL shader linking technology that you can use on all Direct3D 11</span>
+    <span class="doccomment">/// &gt; platforms to create precompiled HLSL functions, package them into libraries, and link them into full shaders</span>
+    <span class="doccomment">/// &gt; at run time.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Arguments</span>
+    <span class="doccomment">/// *   `src_data`  - An HLSL library of functions.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Errors</span>
+    <span class="doccomment">/// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_4?.dll` and earlier</span>
+    <span class="doccomment">/// *   [D3DERR::INVALIDCALL]           - On invalid `src_data`</span>
+    <span class="doccomment">/// *   [D3DERR::INVALIDCALL]           - On shaders not compatible with [`d3d11::LibraryReflection`] (e.g. Shader Model 3.0 and earlier)</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Example</span>
+    <span class="doccomment">/// ```rust</span>
+    <span class="doccomment">/// # use thindx::{*, d3d::*}; let d3dc = Compiler::load_system(47).unwrap();</span>
+    <span class="doccomment">/// let shader = d3dc.compile_from_file(</span>
+    <span class="doccomment">///     r&quot;test\data\library.hlsl&quot;, None, None, (), &quot;lib_5_0&quot;,</span>
+    <span class="doccomment">///     Compile::Debug, CompileEffect::None</span>
+    <span class="doccomment">/// ).unwrap();</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// // Should succeed:</span>
+    <span class="doccomment">/// let r = d3dc.reflect_library_11(&amp;shader).unwrap();</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// // Invalid `src_data`:</span>
+    <span class="doccomment">/// let r = d3dc.reflect_library_11(unsafe { Bytecode::from_unchecked(&amp;[]) });</span>
+    <span class="doccomment">/// assert_eq!(D3DERR::INVALIDCALL, r.map(|_|()));</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### See Also</span>
+    <span class="doccomment">/// *   [d3d11::LibraryReflection] for a more complete example</span>
+    <span class="comment">// #[requires(d3dcompiler=47)] // ?</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">reflect_library_11</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">src_data</span>: <span class="kw-2">&amp;</span><span class="ident">Bytecode</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">d3d11::LibraryReflection</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+        <span class="macro">fn_context_dll!</span>(<span class="ident">d3d::Compiler::reflect_library_11</span> =&gt; <span class="self">self</span>.<span class="ident">D3DReflectLibrary</span>);
+        <span class="self">self</span>.<span class="ident">reflect_library</span>(<span class="ident">src_data</span>)
     }
 }
 
-<span class="attribute">#[test] </span><span class="kw">fn </span>library_reflection() {
-    <span class="kw">let </span>d3dc = Compiler::load_system(<span class="number">47</span>).unwrap();
+<span class="attribute">#[<span class="ident">test</span>]</span> <span class="kw">fn</span> <span class="ident">library_reflection</span>() {
+    <span class="kw">let</span> <span class="ident">d3dc</span> <span class="op">=</span> <span class="ident">Compiler::load_system</span>(<span class="number">47</span>).<span class="ident">unwrap</span>();
 
-    <span class="kw">let </span>shader = d3dc.compile_from_file(
+    <span class="kw">let</span> <span class="ident">shader</span> <span class="op">=</span> <span class="ident">d3dc</span>.<span class="ident">compile_from_file</span>(
         <span class="string">r&quot;test\data\library.hlsl&quot;</span>, <span class="prelude-val">None</span>, <span class="prelude-val">None</span>, (), <span class="string">&quot;lib_5_0&quot;</span>,
-        Compile::Debug, CompileEffect::None
-    ).unwrap();
+        <span class="ident">Compile::Debug</span>, <span class="ident">CompileEffect::None</span>
+    ).<span class="ident">unwrap</span>();
 
-    <span class="kw">let </span>r : d3d11::LibraryReflection = d3dc.reflect_library(<span class="kw-2">&amp;</span>shader).unwrap();
-    <span class="kw">let </span>desc = r.get_desc().unwrap();
-    <span class="macro">assert!</span>(desc.function_count &gt; <span class="number">0</span>);
+    <span class="kw">let</span> <span class="ident">r</span> : <span class="ident">d3d11::LibraryReflection</span> <span class="op">=</span> <span class="ident">d3dc</span>.<span class="ident">reflect_library</span>(<span class="kw-2">&amp;</span><span class="ident">shader</span>).<span class="ident">unwrap</span>();
+    <span class="kw">let</span> <span class="ident">desc</span> <span class="op">=</span> <span class="ident">r</span>.<span class="ident">get_desc</span>().<span class="ident">unwrap</span>();
+    <span class="macro">assert!</span>(<span class="ident">desc</span>.<span class="ident">function_count</span> <span class="op">&gt;</span> <span class="number">0</span>);
 
-    <span class="kw">let </span><span class="kw-2">mut </span>found_xyz1 = <span class="bool-val">false</span>;
-    <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..desc.function_count {
-        <span class="kw">let </span>f : d3d11::FunctionReflection = r.get_function_by_index(i);
-        <span class="kw">let </span>desc = f.get_desc().unwrap();
-        <span class="kw">if </span>desc.name.to_bytes() == <span class="string">b&quot;xyz1&quot; </span>{
-            found_xyz1 = <span class="bool-val">true</span>;
-            <span class="macro">assert_eq!</span>(desc.function_parameter_count,   <span class="number">1   </span>);
-            <span class="macro">assert_eq!</span>(desc.has_return,                 <span class="bool-val">true</span>);
+    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">found_xyz1</span> <span class="op">=</span> <span class="bool-val">false</span>;
+    <span class="kw">for</span> <span class="ident">i</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">desc</span>.<span class="ident">function_count</span> {
+        <span class="kw">let</span> <span class="ident">f</span> : <span class="ident">d3d11::FunctionReflection</span> <span class="op">=</span> <span class="ident">r</span>.<span class="ident">get_function_by_index</span>(<span class="ident">i</span>);
+        <span class="kw">let</span> <span class="ident">desc</span> <span class="op">=</span> <span class="ident">f</span>.<span class="ident">get_desc</span>().<span class="ident">unwrap</span>();
+        <span class="kw">if</span> <span class="ident">desc</span>.<span class="ident">name</span>.<span class="ident">to_bytes</span>() <span class="op">==</span> <span class="string">b&quot;xyz1&quot;</span> {
+            <span class="ident">found_xyz1</span> <span class="op">=</span> <span class="bool-val">true</span>;
+            <span class="macro">assert_eq!</span>(<span class="ident">desc</span>.<span class="ident">function_parameter_count</span>,   <span class="number">1</span>   );
+            <span class="macro">assert_eq!</span>(<span class="ident">desc</span>.<span class="ident">has_return</span>,                 <span class="bool-val">true</span>);
         }
     }
-    <span class="macro">assert!</span>(found_xyz1);
+    <span class="macro">assert!</span>(<span class="ident">found_xyz1</span>);
 
-    <span class="comment">// Reflection likes to use the null object pattern for functions returning interface pointers.
-    // Most out-of-bounds accesses result in a reused &quot;null&quot; object that E::FAIL on most calls.
+    <span class="comment">// Reflection likes to use the null object pattern for functions returning interface pointers.</span>
+    <span class="comment">// Most out-of-bounds accesses result in a reused &quot;null&quot; object that E::FAIL on most calls.</span>
 
-    </span><span class="kw">let </span>invalid1 = r.get_function_by_index(desc.function_count);
-    <span class="kw">let </span>invalid2 = r.get_function_by_index(!<span class="number">0</span>);
-    <span class="macro">assert_eq!</span>(invalid1.as_raw(), invalid2.as_raw()); <span class="comment">// same object
+    <span class="kw">let</span> <span class="ident">invalid1</span> <span class="op">=</span> <span class="ident">r</span>.<span class="ident">get_function_by_index</span>(<span class="ident">desc</span>.<span class="ident">function_count</span>);
+    <span class="kw">let</span> <span class="ident">invalid2</span> <span class="op">=</span> <span class="ident">r</span>.<span class="ident">get_function_by_index</span>(<span class="op">!</span><span class="number">0</span>);
+    <span class="macro">assert_eq!</span>(<span class="ident">invalid1</span>.<span class="ident">as_raw</span>(), <span class="ident">invalid2</span>.<span class="ident">as_raw</span>()); <span class="comment">// same object</span>
 
-    </span><span class="kw">let </span>valid = r.get_function_by_index(<span class="number">0</span>);
-    <span class="macro">assert_ne!</span>(valid.as_raw(), invalid1.as_raw()); <span class="comment">// valid is a different object
-    </span><span class="macro">assert_ne!</span>(valid.as_raw(), invalid2.as_raw()); <span class="comment">// valid is a different object
+    <span class="kw">let</span> <span class="ident">valid</span> <span class="op">=</span> <span class="ident">r</span>.<span class="ident">get_function_by_index</span>(<span class="number">0</span>);
+    <span class="macro">assert_ne!</span>(<span class="ident">valid</span>.<span class="ident">as_raw</span>(), <span class="ident">invalid1</span>.<span class="ident">as_raw</span>()); <span class="comment">// valid is a different object</span>
+    <span class="macro">assert_ne!</span>(<span class="ident">valid</span>.<span class="ident">as_raw</span>(), <span class="ident">invalid2</span>.<span class="ident">as_raw</span>()); <span class="comment">// valid is a different object</span>
 
-    </span><span class="kw">for </span>invalid_index <span class="kw">in </span>[
+    <span class="kw">for</span> <span class="ident">invalid_index</span> <span class="kw">in</span> [
         <span class="number">1000</span>, <span class="number">10000</span>,
-        !<span class="number">0</span>/<span class="number">2</span>-<span class="number">100</span>, !<span class="number">0</span>/<span class="number">2</span>-<span class="number">10</span>, !<span class="number">0</span>/<span class="number">2</span>-<span class="number">4</span>, !<span class="number">0</span>/<span class="number">2</span>, !<span class="number">0</span>/<span class="number">2</span>+<span class="number">1</span>, !<span class="number">0</span>/<span class="number">2</span>+<span class="number">4</span>, !<span class="number">0</span>/<span class="number">2</span>+<span class="number">100</span>,
-        !<span class="number">0</span>-<span class="number">100</span>, !<span class="number">0</span>-<span class="number">10</span>, !<span class="number">0</span>-<span class="number">4</span>, !<span class="number">0</span>-<span class="number">1</span>, !<span class="number">0</span>,
-    ].iter().copied() {
-        <span class="macro">println!</span>(<span class="string">&quot;testing get_function_by_index({})&quot;</span>, invalid_index);
-        <span class="kw">let </span>f = r.get_function_by_index(invalid_index);
-        <span class="macro">assert_eq!</span>(E::FAIL, f.get_desc());
+        <span class="op">!</span><span class="number">0</span><span class="op">/</span><span class="number">2</span><span class="op">-</span><span class="number">100</span>, <span class="op">!</span><span class="number">0</span><span class="op">/</span><span class="number">2</span><span class="op">-</span><span class="number">10</span>, <span class="op">!</span><span class="number">0</span><span class="op">/</span><span class="number">2</span><span class="op">-</span><span class="number">4</span>, <span class="op">!</span><span class="number">0</span><span class="op">/</span><span class="number">2</span>, <span class="op">!</span><span class="number">0</span><span class="op">/</span><span class="number">2</span><span class="op">+</span><span class="number">1</span>, <span class="op">!</span><span class="number">0</span><span class="op">/</span><span class="number">2</span><span class="op">+</span><span class="number">4</span>, <span class="op">!</span><span class="number">0</span><span class="op">/</span><span class="number">2</span><span class="op">+</span><span class="number">100</span>,
+        <span class="op">!</span><span class="number">0</span><span class="op">-</span><span class="number">100</span>, <span class="op">!</span><span class="number">0</span><span class="op">-</span><span class="number">10</span>, <span class="op">!</span><span class="number">0</span><span class="op">-</span><span class="number">4</span>, <span class="op">!</span><span class="number">0</span><span class="op">-</span><span class="number">1</span>, <span class="op">!</span><span class="number">0</span>,
+    ].<span class="ident">iter</span>().<span class="ident">copied</span>() {
+        <span class="macro">println!</span>(<span class="string">&quot;testing get_function_by_index({})&quot;</span>, <span class="ident">invalid_index</span>);
+        <span class="kw">let</span> <span class="ident">f</span> <span class="op">=</span> <span class="ident">r</span>.<span class="ident">get_function_by_index</span>(<span class="ident">invalid_index</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">E::FAIL</span>, <span class="ident">f</span>.<span class="ident">get_desc</span>());
 
-        <span class="kw">let </span>cb = f.get_constant_buffer_by_name(<span class="string">&quot;SomeNonexistantCBuffer&quot;</span>);
-        <span class="macro">assert_eq!</span>(E::FAIL, cb.get_desc());
+        <span class="kw">let</span> <span class="ident">cb</span> <span class="op">=</span> <span class="ident">f</span>.<span class="ident">get_constant_buffer_by_name</span>(<span class="string">&quot;SomeNonexistantCBuffer&quot;</span>);
+        <span class="macro">assert_eq!</span>(<span class="ident">E::FAIL</span>, <span class="ident">cb</span>.<span class="ident">get_desc</span>());
 
-        <span class="kw">for </span>invalid_index <span class="kw">in </span>[
+        <span class="kw">for</span> <span class="ident">invalid_index</span> <span class="kw">in</span> [
             <span class="number">0</span>, <span class="number">1</span>, <span class="number">4</span>, <span class="number">10</span>, <span class="number">100</span>, <span class="number">1000</span>, <span class="number">100000</span>,  <span class="number">100000</span>,
-            !<span class="number">0</span>/<span class="number">2</span>-<span class="number">100</span>, !<span class="number">0</span>/<span class="number">2</span>-<span class="number">10</span>, !<span class="number">0</span>/<span class="number">2</span>-<span class="number">4</span>, !<span class="number">0</span>/<span class="number">2</span>, !<span class="number">0</span>/<span class="number">2</span>+<span class="number">1</span>, !<span class="number">0</span>/<span class="number">2</span>+<span class="number">4</span>, !<span class="number">0</span>/<span class="number">2</span>+<span class="number">100</span>,
-            !<span class="number">0</span>-<span class="number">100</span>, !<span class="number">0</span>-<span class="number">10</span>, !<span class="number">0</span>-<span class="number">4</span>, !<span class="number">0</span>-<span class="number">1</span>, !<span class="number">0</span>,
-        ].iter().copied() {
-            <span class="kw">let </span>cb = f.get_constant_buffer_by_index(invalid_index);
-            <span class="macro">assert_eq!</span>(E::FAIL, cb.get_desc());
+            <span class="op">!</span><span class="number">0</span><span class="op">/</span><span class="number">2</span><span class="op">-</span><span class="number">100</span>, <span class="op">!</span><span class="number">0</span><span class="op">/</span><span class="number">2</span><span class="op">-</span><span class="number">10</span>, <span class="op">!</span><span class="number">0</span><span class="op">/</span><span class="number">2</span><span class="op">-</span><span class="number">4</span>, <span class="op">!</span><span class="number">0</span><span class="op">/</span><span class="number">2</span>, <span class="op">!</span><span class="number">0</span><span class="op">/</span><span class="number">2</span><span class="op">+</span><span class="number">1</span>, <span class="op">!</span><span class="number">0</span><span class="op">/</span><span class="number">2</span><span class="op">+</span><span class="number">4</span>, <span class="op">!</span><span class="number">0</span><span class="op">/</span><span class="number">2</span><span class="op">+</span><span class="number">100</span>,
+            <span class="op">!</span><span class="number">0</span><span class="op">-</span><span class="number">100</span>, <span class="op">!</span><span class="number">0</span><span class="op">-</span><span class="number">10</span>, <span class="op">!</span><span class="number">0</span><span class="op">-</span><span class="number">4</span>, <span class="op">!</span><span class="number">0</span><span class="op">-</span><span class="number">1</span>, <span class="op">!</span><span class="number">0</span>,
+        ].<span class="ident">iter</span>().<span class="ident">copied</span>() {
+            <span class="kw">let</span> <span class="ident">cb</span> <span class="op">=</span> <span class="ident">f</span>.<span class="ident">get_constant_buffer_by_index</span>(<span class="ident">invalid_index</span>);
+            <span class="macro">assert_eq!</span>(<span class="ident">E::FAIL</span>, <span class="ident">cb</span>.<span class="ident">get_desc</span>());
 
-            <span class="kw">let </span>param = f.get_function_parameter(invalid_index <span class="kw">as _</span>);
-            <span class="macro">assert_eq!</span>(E::FAIL, param.get_desc());
+            <span class="kw">let</span> <span class="ident">param</span> <span class="op">=</span> <span class="ident">f</span>.<span class="ident">get_function_parameter</span>(<span class="ident">invalid_index</span> <span class="kw">as</span> <span class="kw">_</span>);
+            <span class="macro">assert_eq!</span>(<span class="ident">E::FAIL</span>, <span class="ident">param</span>.<span class="ident">get_desc</span>());
         }
     }
 
-    <span class="comment">// TODO: full test coverage of all methods
-</span>}
+    <span class="comment">// TODO: full test coverage of all methods</span>
+}
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (b44197abb 2022-09-05)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0 (4b91a6ea7 2022-08-08)" ></div>
+</body></html>

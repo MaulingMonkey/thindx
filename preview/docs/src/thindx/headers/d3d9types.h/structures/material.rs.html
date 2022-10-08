@@ -1,4 +1,10 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3d9types.h\structures\material.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>material.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../../normalize.css"><link rel="stylesheet" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../../dark.css" disabled><link rel="stylesheet" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3d9types.h\structures\material.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>material.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div>
+        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
+                                <a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -42,49 +48,50 @@
 <span id="42">42</span>
 <span id="43">43</span>
 <span id="44">44</span>
-</pre><pre class="rust"><code><span class="kw">use </span><span class="kw">crate</span>::d3d9::<span class="kw-2">*</span>;
+</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::d3d9</span>::<span class="kw-2">*</span>;
 
-<span class="kw">use </span>winapi::shared::d3d9types::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">winapi::shared::d3d9types</span>::<span class="kw-2">*</span>;
 
 
 
-<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dmaterial9)\]
-/// D3DMATERIAL9
-///
-/// Defines material properties.
-///
-/// ### See Also
-/// *   [IDirect3DDevice9Ext::set_material]
-/// *   [IDirect3DDevice9Ext::get_material]
-</span><span class="attribute">#[derive(Clone, Copy, Debug, Default)]
-#[repr(C)] </span><span class="kw">pub struct </span>Material {
-    <span class="doccomment">/// [Diffuse](https://docs.microsoft.com/en-us/windows/uwp/graphics-concepts/diffuse-lighting) lighting
-    </span><span class="kw">pub </span>diffuse:    ColorValue,
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dmaterial9)\]</span>
+<span class="doccomment">/// D3DMATERIAL9</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Defines material properties.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// ### See Also</span>
+<span class="doccomment">/// *   [IDirect3DDevice9Ext::set_material]</span>
+<span class="doccomment">/// *   [IDirect3DDevice9Ext::get_material]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">Debug</span>, <span class="ident">Default</span>)]</span>
+<span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span> <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Material</span> {
+    <span class="doccomment">/// [Diffuse](https://docs.microsoft.com/en-us/windows/uwp/graphics-concepts/diffuse-lighting) lighting</span>
+    <span class="kw">pub</span> <span class="ident">diffuse</span>:    <span class="ident">ColorValue</span>,
 
-    <span class="doccomment">/// [Ambient](https://docs.microsoft.com/en-us/windows/uwp/graphics-concepts/ambient-lighting) lighting
-    </span><span class="kw">pub </span>ambient:    ColorValue,
+    <span class="doccomment">/// [Ambient](https://docs.microsoft.com/en-us/windows/uwp/graphics-concepts/ambient-lighting) lighting</span>
+    <span class="kw">pub</span> <span class="ident">ambient</span>:    <span class="ident">ColorValue</span>,
 
-    <span class="doccomment">/// [Specular](https://docs.microsoft.com/en-us/windows/uwp/graphics-concepts/specular-lighting) highlighting
-    </span><span class="kw">pub </span>specular:   ColorValue,
+    <span class="doccomment">/// [Specular](https://docs.microsoft.com/en-us/windows/uwp/graphics-concepts/specular-lighting) highlighting</span>
+    <span class="kw">pub</span> <span class="ident">specular</span>:   <span class="ident">ColorValue</span>,
 
-    <span class="doccomment">/// [Emissive](https://docs.microsoft.com/en-us/windows/uwp/graphics-concepts/emissive-lighting) glow
-    </span><span class="kw">pub </span>emissive:   ColorValue,
+    <span class="doccomment">/// [Emissive](https://docs.microsoft.com/en-us/windows/uwp/graphics-concepts/emissive-lighting) glow</span>
+    <span class="kw">pub</span> <span class="ident">emissive</span>:   <span class="ident">ColorValue</span>,
 
-    <span class="doccomment">/// Floating-point value specifying the sharpness of specular highlights. The higher the value, the sharper the highlight.
-    </span><span class="kw">pub </span>power:      f32,
+    <span class="doccomment">/// Floating-point value specifying the sharpness of specular highlights. The higher the value, the sharper the highlight.</span>
+    <span class="kw">pub</span> <span class="ident">power</span>:      <span class="ident">f32</span>,
 }
 
-<span class="macro">struct_mapping! </span>{
-    <span class="attribute">#[derive(<span class="kw">unsafe </span>{ AsRef, AsMut, Deref, DerefMut, FromInto })]
-    </span>Material =&gt; D3DMATERIAL9 {
-        diffuse     =&gt; Diffuse,
-        ambient     =&gt; Ambient,
-        specular    =&gt; Specular,
-        emissive    =&gt; Emissive,
-        power       =&gt; Power
+<span class="macro">struct_mapping!</span> {
+    <span class="attribute">#[<span class="ident">derive</span>(<span class="kw unsafe">unsafe</span> { <span class="ident">AsRef</span>, <span class="ident">AsMut</span>, <span class="ident">Deref</span>, <span class="ident">DerefMut</span>, <span class="ident">FromInto</span> })]</span>
+    <span class="ident">Material</span> =&gt; <span class="ident">D3DMATERIAL9</span> {
+        <span class="ident">diffuse</span>     =&gt; <span class="ident">Diffuse</span>,
+        <span class="ident">ambient</span>     =&gt; <span class="ident">Ambient</span>,
+        <span class="ident">specular</span>    =&gt; <span class="ident">Specular</span>,
+        <span class="ident">emissive</span>    =&gt; <span class="ident">Emissive</span>,
+        <span class="ident">power</span>       =&gt; <span class="ident">Power</span>
     }
 }
 
-<span class="comment">//#cpp2rust D3DMATERIAL9 = d3d9::Material
-</span></code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (b44197abb 2022-09-05)" ></div></body></html>
+<span class="comment">//#cpp2rust D3DMATERIAL9 = d3d9::Material</span>
+</code></pre></div>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0 (4b91a6ea7 2022-08-08)" ></div>
+</body></html>

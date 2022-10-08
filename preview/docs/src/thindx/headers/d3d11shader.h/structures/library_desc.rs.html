@@ -1,4 +1,10 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3d11shader.h\structures\library_desc.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>library_desc.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../../normalize.css"><link rel="stylesheet" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../../dark.css" disabled><link rel="stylesheet" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3d11shader.h\structures\library_desc.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>library_desc.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div>
+        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
+                                <a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -65,72 +71,73 @@
 <span id="65">65</span>
 <span id="66">66</span>
 <span id="67">67</span>
-</pre><pre class="rust"><code><span class="attribute">#[allow(unused_imports)] </span><span class="kw">use crate</span>::<span class="kw-2">*</span>;
-<span class="kw">use </span><span class="kw">crate</span>::ctypes::<span class="kw-2">*</span>;
-<span class="kw">use </span><span class="kw">crate</span>::d3d::<span class="kw-2">*</span>;
+</pre><pre class="rust"><code><span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span> <span class="kw">use</span> <span class="kw">crate</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::ctypes</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::d3d</span>::<span class="kw-2">*</span>;
 
-<span class="kw">use </span>winapi::um::d3d11shader::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">winapi::um::d3d11shader</span>::<span class="kw-2">*</span>;
 
 
 
-<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/ns-d3d11shader-d3d11_library_desc)\]
-/// D3D11_LIBRARY_DESC
-///
-/// ### Example
-/// ```rust
-/// # use thindx::{*, d3d::*}; let d3dc = Compiler::load_system(47).unwrap();
-/// let shader = d3dc.compile_from_file(
-///     r&quot;test\data\library.hlsl&quot;, None, None, (), &quot;lib_5_0&quot;,
-///     Compile::Debug, CompileEffect::None
-/// ).unwrap();
-///
-/// let r : d3d11::LibraryReflection = d3dc.reflect_library(&amp;shader).unwrap();
-/// let desc : d3d11::LibraryDesc = r.get_desc().unwrap();
-/// println!(&quot;{:#?}&quot;, desc);
-/// assert!(desc.function_count &gt; 0);
-/// ```
-///
-/// ### Output
-/// ```text
-/// LibraryDesc {
-///     creator: Some(
-///         &quot;Microsoft (R) HLSL Shader Compiler 10.1&quot;,
-///     ),
-///     flags: Compile::None,
-///     function_count: 1,
-/// }
-/// ```
-///
-/// ### See Also
-/// *   [d3d11::LibraryReflection::get_desc]
-</span><span class="attribute">#[allow(missing_docs)]
-#[derive(Clone, Copy, Debug, Default)]
-#[repr(C)] </span><span class="kw">pub struct </span>LibraryDesc&lt;<span class="lifetime">&#39;s</span>&gt; {
-    <span class="doccomment">/// e.g. &quot;Microsoft (R) HLSL Shader Compiler 10.1&quot;
-    </span><span class="kw">pub </span>creator:        CStrPtr&lt;<span class="lifetime">&#39;s</span>&gt;, <span class="comment">// maybe never null?
-    </span><span class="kw">pub </span>flags:          Compile,
-    <span class="kw">pub </span>function_count: u32,
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/ns-d3d11shader-d3d11_library_desc)\]</span>
+<span class="doccomment">/// D3D11_LIBRARY_DESC</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// ### Example</span>
+<span class="doccomment">/// ```rust</span>
+<span class="doccomment">/// # use thindx::{*, d3d::*}; let d3dc = Compiler::load_system(47).unwrap();</span>
+<span class="doccomment">/// let shader = d3dc.compile_from_file(</span>
+<span class="doccomment">///     r&quot;test\data\library.hlsl&quot;, None, None, (), &quot;lib_5_0&quot;,</span>
+<span class="doccomment">///     Compile::Debug, CompileEffect::None</span>
+<span class="doccomment">/// ).unwrap();</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// let r : d3d11::LibraryReflection = d3dc.reflect_library(&amp;shader).unwrap();</span>
+<span class="doccomment">/// let desc : d3d11::LibraryDesc = r.get_desc().unwrap();</span>
+<span class="doccomment">/// println!(&quot;{:#?}&quot;, desc);</span>
+<span class="doccomment">/// assert!(desc.function_count &gt; 0);</span>
+<span class="doccomment">/// ```</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// ### Output</span>
+<span class="doccomment">/// ```text</span>
+<span class="doccomment">/// LibraryDesc {</span>
+<span class="doccomment">///     creator: Some(</span>
+<span class="doccomment">///         &quot;Microsoft (R) HLSL Shader Compiler 10.1&quot;,</span>
+<span class="doccomment">///     ),</span>
+<span class="doccomment">///     flags: Compile::None,</span>
+<span class="doccomment">///     function_count: 1,</span>
+<span class="doccomment">/// }</span>
+<span class="doccomment">/// ```</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// ### See Also</span>
+<span class="doccomment">/// *   [d3d11::LibraryReflection::get_desc]</span>
+<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">missing_docs</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">Debug</span>, <span class="ident">Default</span>)]</span>
+<span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span> <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">LibraryDesc</span><span class="op">&lt;</span><span class="lifetime">&#39;s</span><span class="op">&gt;</span> {
+    <span class="doccomment">/// e.g. &quot;Microsoft (R) HLSL Shader Compiler 10.1&quot;</span>
+    <span class="kw">pub</span> <span class="ident">creator</span>:        <span class="ident">CStrPtr</span><span class="op">&lt;</span><span class="lifetime">&#39;s</span><span class="op">&gt;</span>, <span class="comment">// maybe never null?</span>
+    <span class="kw">pub</span> <span class="ident">flags</span>:          <span class="ident">Compile</span>,
+    <span class="kw">pub</span> <span class="ident">function_count</span>: <span class="ident">u32</span>,
 }
 
-<span class="kw">impl </span>LibraryDesc&lt;<span class="lifetime">&#39;_</span>&gt; {
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>as_mut_ptr(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="kw-2">*mut </span>D3D11_LIBRARY_DESC {
-        <span class="self">self </span><span class="kw">as </span><span class="kw-2">*mut </span><span class="self">Self </span><span class="kw">as </span><span class="kw-2">*mut </span><span class="kw">_
-    </span>}
-}
-
-<span class="macro">struct_mapping! </span>{
-    <span class="attribute">#[derive(<span class="kw">unsafe </span>{ AsRefD3D, IntoD3D })]
-    </span><span class="comment">// forbidden: AsRef     (could invalidate `creator`)
-    // forbidden: AsMut     (could invalidate `creator`)
-    // forbidden: DerefMut  (could invalidate `creator`)
-    // forbidden: FromD3D   (could invalidate `creator`)
-    </span>LibraryDesc&lt;<span class="lifetime">&#39;_</span>&gt; =&gt; D3D11_LIBRARY_DESC {
-        creator         =&gt; Creator,
-        flags           =&gt; Flags,
-        function_count  =&gt; FunctionCount,
+<span class="kw">impl</span> <span class="ident">LibraryDesc</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">as_mut_ptr</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">*mut</span> <span class="ident">D3D11_LIBRARY_DESC</span> {
+        <span class="self">self</span> <span class="kw">as</span> <span class="kw-2">*mut</span> <span class="self">Self</span> <span class="kw">as</span> <span class="kw-2">*mut</span> <span class="kw">_</span>
     }
 }
 
-<span class="comment">//#cpp2rust D3D11_LIBRARY_DESC                      = d3d11::LibraryDesc
-</span></code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (b44197abb 2022-09-05)" ></div></body></html>
+<span class="macro">struct_mapping!</span> {
+    <span class="attribute">#[<span class="ident">derive</span>(<span class="kw unsafe">unsafe</span> { <span class="ident">AsRefD3D</span>, <span class="ident">IntoD3D</span> })]</span>
+    <span class="comment">// forbidden: AsRef     (could invalidate `creator`)</span>
+    <span class="comment">// forbidden: AsMut     (could invalidate `creator`)</span>
+    <span class="comment">// forbidden: DerefMut  (could invalidate `creator`)</span>
+    <span class="comment">// forbidden: FromD3D   (could invalidate `creator`)</span>
+    <span class="ident">LibraryDesc</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span> =&gt; <span class="ident">D3D11_LIBRARY_DESC</span> {
+        <span class="ident">creator</span>         =&gt; <span class="ident">Creator</span>,
+        <span class="ident">flags</span>           =&gt; <span class="ident">Flags</span>,
+        <span class="ident">function_count</span>  =&gt; <span class="ident">FunctionCount</span>,
+    }
+}
+
+<span class="comment">//#cpp2rust D3D11_LIBRARY_DESC                      = d3d11::LibraryDesc</span>
+</code></pre></div>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0 (4b91a6ea7 2022-08-08)" ></div>
+</body></html>

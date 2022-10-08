@@ -1,4 +1,10 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3dcompiler.h\dll\blobs.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>blobs.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../../normalize.css"><link rel="stylesheet" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../../dark.css" disabled><link rel="stylesheet" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3dcompiler.h\dll\blobs.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>blobs.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div>
+        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
+                                <a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -160,167 +166,168 @@
 <span id="160">160</span>
 <span id="161">161</span>
 <span id="162">162</span>
-</pre><pre class="rust"><code><span class="kw">use crate</span>::<span class="kw-2">*</span>;
-<span class="kw">use </span><span class="kw">crate</span>::d3d::<span class="kw-2">*</span>;
+</pre><pre class="rust"><code><span class="kw">use</span> <span class="kw">crate</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::d3d</span>::<span class="kw-2">*</span>;
 
-<span class="kw">use </span>std::path::<span class="kw-2">*</span>;
-<span class="kw">use </span>std::ptr::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">std::path</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">std::ptr</span>::<span class="kw-2">*</span>;
 
-<span class="doccomment">/// &lt;h1 id=&quot;blobs&quot; class=&quot;section-header&quot;&gt;&lt;a href=&quot;#blobs&quot;&gt;ReadOnlyBlob Utilities&lt;/a&gt;&lt;/h1&gt;
-</span><span class="kw">impl </span>Compiler {
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dcreateblob)\]
-    /// D3DCreateBlob
-    ///
-    /// Compresses a set of shaders into a more compact form.
-    ///
-    /// ### Arguments
-    /// *   `data`          - The data to create a [ReadOnlyBlob] out of.
-    ///
-    /// ### Errors
-    /// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_42.dll` and earlier
-    ///
-    /// ### Example
-    /// ```rust
-    /// # use thindx::d3d::*; let d3dc = Compiler::load_system(47).unwrap();
-    /// let blob = d3dc.create_read_only_blob(&amp;[1,2,3,4]).unwrap();
-    /// assert_eq!(blob.get_buffer_size(),  4           );
-    /// assert_eq!(blob.get_buffer(),       &amp;[1,2,3,4]  );
-    /// ```
-    ///
-    /// ### Remarks
-    /// *   This was introduced by d3dcompiler_43.dll, and is unavailable in earlier versions.
-    </span><span class="kw">pub fn </span>create_read_only_blob(<span class="kw-2">&amp;</span><span class="self">self</span>, data: <span class="kw-2">&amp;</span>[u8]) -&gt; <span class="prelude-ty">Result</span>&lt;ReadOnlyBlob, Error&gt; {
-        <span class="macro">fn_context_dll!</span>(d3d::Compiler::create_read_only_blob =&gt; <span class="self">self</span>.D3DCreateBlob);
+<span class="doccomment">/// &lt;h1 id=&quot;blobs&quot; class=&quot;section-header&quot;&gt;&lt;a href=&quot;#blobs&quot;&gt;ReadOnlyBlob Utilities&lt;/a&gt;&lt;/h1&gt;</span>
+<span class="kw">impl</span> <span class="ident">Compiler</span> {
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dcreateblob)\]</span>
+    <span class="doccomment">/// D3DCreateBlob</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Compresses a set of shaders into a more compact form.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Arguments</span>
+    <span class="doccomment">/// *   `data`          - The data to create a [ReadOnlyBlob] out of.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Errors</span>
+    <span class="doccomment">/// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_42.dll` and earlier</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Example</span>
+    <span class="doccomment">/// ```rust</span>
+    <span class="doccomment">/// # use thindx::d3d::*; let d3dc = Compiler::load_system(47).unwrap();</span>
+    <span class="doccomment">/// let blob = d3dc.create_read_only_blob(&amp;[1,2,3,4]).unwrap();</span>
+    <span class="doccomment">/// assert_eq!(blob.get_buffer_size(),  4           );</span>
+    <span class="doccomment">/// assert_eq!(blob.get_buffer(),       &amp;[1,2,3,4]  );</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Remarks</span>
+    <span class="doccomment">/// *   This was introduced by d3dcompiler_43.dll, and is unavailable in earlier versions.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">create_read_only_blob</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">ReadOnlyBlob</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+        <span class="macro">fn_context_dll!</span>(<span class="ident">d3d::Compiler::create_read_only_blob</span> =&gt; <span class="self">self</span>.<span class="ident">D3DCreateBlob</span>);
 
-        <span class="comment">// SAFETY: ❌ needs fuzz testing against ~4GB `data` to attempt to induce alloc overflow bugs
-        //  * `f`           should be valid/sound like all `self.*`
-        //  * `blob`        is a trivial out param.
-        </span><span class="kw">let </span><span class="kw-2">mut </span>blob = null_mut();
-        <span class="macro">fn_check_hr!</span>(<span class="kw">unsafe </span>{ D3DCreateBlob(data.len(), <span class="kw-2">&amp;mut </span>blob) })<span class="question-mark">?</span>;
+        <span class="comment">// SAFETY: ❌ needs fuzz testing against ~4GB `data` to attempt to induce alloc overflow bugs</span>
+        <span class="comment">//  * `f`           should be valid/sound like all `self.*`</span>
+        <span class="comment">//  * `blob`        is a trivial out param.</span>
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">blob</span> <span class="op">=</span> <span class="ident">null_mut</span>();
+        <span class="macro">fn_check_hr!</span>(<span class="kw unsafe">unsafe</span> { <span class="ident">D3DCreateBlob</span>(<span class="ident">data</span>.<span class="ident">len</span>(), <span class="kw-2">&amp;mut</span> <span class="ident">blob</span>) })<span class="question-mark">?</span>;
 
-        <span class="kw">if </span>!blob.is_null() {
-            <span class="comment">// SAFETY: ⚠️ see earlier safety comments about ~4GB overflow concerns
-            //  * `T`       is `u8`, no lifetime/drop concerns etc.
-            //  * `blob`    is non-null, non-dangling, and should be a valid ID3DBlob
-            //  * read      is within `data`&#39;s range
-            //  * write     *should* be within `blob`&#39;s range, unless `D3DCreateBlob` earlier has overflow bugs
-            </span><span class="kw">unsafe </span>{ std::ptr::copy_nonoverlapping(data.as_ptr(), (<span class="kw-2">*</span>blob).GetBufferPointer().cast(), data.len()) };
+        <span class="kw">if</span> <span class="op">!</span><span class="ident">blob</span>.<span class="ident">is_null</span>() {
+            <span class="comment">// SAFETY: ⚠️ see earlier safety comments about ~4GB overflow concerns</span>
+            <span class="comment">//  * `T`       is `u8`, no lifetime/drop concerns etc.</span>
+            <span class="comment">//  * `blob`    is non-null, non-dangling, and should be a valid ID3DBlob</span>
+            <span class="comment">//  * read      is within `data`&#39;s range</span>
+            <span class="comment">//  * write     *should* be within `blob`&#39;s range, unless `D3DCreateBlob` earlier has overflow bugs</span>
+            <span class="kw unsafe">unsafe</span> { <span class="ident">std::ptr::copy_nonoverlapping</span>(<span class="ident">data</span>.<span class="ident">as_ptr</span>(), (<span class="kw-2">*</span><span class="ident">blob</span>).<span class="ident">GetBufferPointer</span>().<span class="ident">cast</span>(), <span class="ident">data</span>.<span class="ident">len</span>()) };
         }
 
-        <span class="comment">// SAFETY: ✔️
-        //  * `blob`            should be null (panics) or a valid pointer.
-        //  * `ReadOnlyBlob`    imposes no restrictions on `blob`&#39;s contents.
-        </span><span class="prelude-val">Ok</span>(<span class="kw">unsafe </span>{ ReadOnlyBlob::from_raw(blob) })
+        <span class="comment">// SAFETY: ✔️</span>
+        <span class="comment">//  * `blob`            should be null (panics) or a valid pointer.</span>
+        <span class="comment">//  * `ReadOnlyBlob`    imposes no restrictions on `blob`&#39;s contents.</span>
+        <span class="prelude-val">Ok</span>(<span class="kw unsafe">unsafe</span> { <span class="ident">ReadOnlyBlob::from_raw</span>(<span class="ident">blob</span>) })
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dreadfiletoblob)\]
-    /// D3DReadFileToBlob
-    ///
-    /// &gt; **Note:** You can use this API to develop your Windows Store apps, but you can&#39;t use it in apps that you submit to the Windows Store.
-    ///
-    /// Reads a file into memory.
-    ///
-    /// ### Arguments
-    /// *   `file_name`         - The path to read the blob from.
-    ///
-    /// ### Errors
-    /// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_43.dll` and earlier
-    /// *   [HResultError::from_win32](winresult::HResultError::from_win32):
-    ///     *   [ERROR::FILE_NOT_FOUND]         - `file_name` not found
-    ///     *   [ERROR::ACCESS_DENIED]          - Access denied (`file_name` not a file? bad perms? ...?)
-    ///
-    /// ### Example
-    /// ```rust
-    /// # use thindx::{*, d3d::*};
-    /// # use winresult::*;
-    /// # let d3dc = Compiler::load_system(47).unwrap();
-    /// let blob : ReadOnlyBlob = d3dc.read_file_to_blob(r&quot;test\data\basic.hlsl&quot;).unwrap();
-    ///
-    /// let err = d3dc.read_file_to_blob(r&quot;test\data\nonexistant&quot;);
-    /// assert_eq!(err, HResultError::from_win32(ERROR::FILE_NOT_FOUND));
-    ///
-    /// let err = d3dc.read_file_to_blob(r&quot;test\data&quot;);
-    /// assert_eq!(err, HResultError::from_win32(ERROR::ACCESS_DENIED));
-    /// ```
-    ///
-    /// ### Remarks
-    /// *   This was introduced by d3dcompiler_44.dll, and is unavailable in earlier versions.
-    </span><span class="kw">pub fn </span>read_file_to_blob(<span class="kw-2">&amp;</span><span class="self">self</span>, file_name: <span class="kw">impl </span>AsRef&lt;Path&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;ReadOnlyBlob, Error&gt; {
-        <span class="macro">fn_context_dll!</span>(d3d::Compiler::read_file_to_blob =&gt; <span class="self">self</span>.D3DReadFileToBlob);
-        <span class="kw">let </span>file_name = file_name.to_wcstr().map_err(|e| <span class="macro">fn_param_error!</span>(file_name, e))<span class="question-mark">?</span>;
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dreadfiletoblob)\]</span>
+    <span class="doccomment">/// D3DReadFileToBlob</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// &gt; **Note:** You can use this API to develop your Windows Store apps, but you can&#39;t use it in apps that you submit to the Windows Store.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Reads a file into memory.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Arguments</span>
+    <span class="doccomment">/// *   `file_name`         - The path to read the blob from.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Errors</span>
+    <span class="doccomment">/// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_43.dll` and earlier</span>
+    <span class="doccomment">/// *   [HResultError::from_win32](winresult::HResultError::from_win32):</span>
+    <span class="doccomment">///     *   [ERROR::FILE_NOT_FOUND]         - `file_name` not found</span>
+    <span class="doccomment">///     *   [ERROR::ACCESS_DENIED]          - Access denied (`file_name` not a file? bad perms? ...?)</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Example</span>
+    <span class="doccomment">/// ```rust</span>
+    <span class="doccomment">/// # use thindx::{*, d3d::*};</span>
+    <span class="doccomment">/// # use winresult::*;</span>
+    <span class="doccomment">/// # let d3dc = Compiler::load_system(47).unwrap();</span>
+    <span class="doccomment">/// let blob : ReadOnlyBlob = d3dc.read_file_to_blob(r&quot;test\data\basic.hlsl&quot;).unwrap();</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// let err = d3dc.read_file_to_blob(r&quot;test\data\nonexistant&quot;);</span>
+    <span class="doccomment">/// assert_eq!(err, HResultError::from_win32(ERROR::FILE_NOT_FOUND));</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// let err = d3dc.read_file_to_blob(r&quot;test\data&quot;);</span>
+    <span class="doccomment">/// assert_eq!(err, HResultError::from_win32(ERROR::ACCESS_DENIED));</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Remarks</span>
+    <span class="doccomment">/// *   This was introduced by d3dcompiler_44.dll, and is unavailable in earlier versions.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">read_file_to_blob</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">file_name</span>: <span class="kw">impl</span> <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Path</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">ReadOnlyBlob</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+        <span class="macro">fn_context_dll!</span>(<span class="ident">d3d::Compiler::read_file_to_blob</span> =&gt; <span class="self">self</span>.<span class="ident">D3DReadFileToBlob</span>);
+        <span class="kw">let</span> <span class="ident">file_name</span> <span class="op">=</span> <span class="ident">file_name</span>.<span class="ident">to_wcstr</span>().<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">fn_param_error!</span>(<span class="ident">file_name</span>, <span class="ident">e</span>))<span class="question-mark">?</span>;
 
-        <span class="comment">// SAFETY: ❌ needs fuzz testing against ~4GB files to attempt to induce alloc overflow bugs
-        //  * `f`           should be valid/sound like all `self.*`
-        //  * `file_name`   is `\0` terminated per `to_wcstr`.
-        //  * `blob`        is a trivial out param.
-        </span><span class="kw">let </span><span class="kw-2">mut </span>blob = null_mut();
-        <span class="macro">fn_check_hr!</span>(<span class="kw">unsafe </span>{ D3DReadFileToBlob(file_name.as_ptr(), <span class="kw-2">&amp;mut </span>blob) })<span class="question-mark">?</span>;
+        <span class="comment">// SAFETY: ❌ needs fuzz testing against ~4GB files to attempt to induce alloc overflow bugs</span>
+        <span class="comment">//  * `f`           should be valid/sound like all `self.*`</span>
+        <span class="comment">//  * `file_name`   is `\0` terminated per `to_wcstr`.</span>
+        <span class="comment">//  * `blob`        is a trivial out param.</span>
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">blob</span> <span class="op">=</span> <span class="ident">null_mut</span>();
+        <span class="macro">fn_check_hr!</span>(<span class="kw unsafe">unsafe</span> { <span class="ident">D3DReadFileToBlob</span>(<span class="ident">file_name</span>.<span class="ident">as_ptr</span>(), <span class="kw-2">&amp;mut</span> <span class="ident">blob</span>) })<span class="question-mark">?</span>;
 
-        <span class="comment">// SAFETY: ✔️
-        //  * `blob`            should be null (panics) or non-dangling, and should be a valid ID3DBlob
-        //  * `ReadOnlyBlob`    imposes no restrictions on `blob`&#39;s contents.
-        </span><span class="prelude-val">Ok</span>(<span class="kw">unsafe </span>{ ReadOnlyBlob::from_raw(blob) })
+        <span class="comment">// SAFETY: ✔️</span>
+        <span class="comment">//  * `blob`            should be null (panics) or non-dangling, and should be a valid ID3DBlob</span>
+        <span class="comment">//  * `ReadOnlyBlob`    imposes no restrictions on `blob`&#39;s contents.</span>
+        <span class="prelude-val">Ok</span>(<span class="kw unsafe">unsafe</span> { <span class="ident">ReadOnlyBlob::from_raw</span>(<span class="ident">blob</span>) })
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dwriteblobtofile)\]
-    /// D3DWriteBlobToFile
-    ///
-    /// &gt; **Note:** You can use this API to develop your Windows Store apps, but you can&#39;t use it in apps that you submit to the Windows Store.
-    ///
-    /// Writes a memory blob to a file on disk.
-    ///
-    /// ### Arguments
-    /// *   `blob`          - The blob of data to write to disk.
-    /// *   `file_name`     - The path to write it to.
-    /// *   `overwrite`     - Overwrite any existing file.
-    ///
-    /// ### Errors
-    /// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_43.dll` and earlier
-    /// *   [HResultError::from_win32](winresult::HResultError::from_win32):
-    ///     *   [ERROR::PATH_NOT_FOUND]         - Path not found (missing filename in `file_name`)
-    ///     *   [ERROR::ACCESS_DENIED]          - Access denied (target `file_name` is a directory?)
-    ///     *   [ERROR::FILE_EXISTS]            - `file_name` already exists (if `!overwrite`)
-    ///
-    /// ### Example
-    /// ```rust
-    /// # use thindx::{*, d3d::*};
-    /// # use winresult::*;
-    /// # let d3dc = Compiler::load_system(47).unwrap();
-    /// let blob = d3dc.create_read_only_blob(&amp;[1,2,3,4]).unwrap();
-    /// d3dc.write_blob_to_file(&amp;blob, r&quot;..\target\1234.bin&quot;, true).unwrap();
-    ///
-    /// let err = d3dc.write_blob_to_file(&amp;blob, r&quot;..\target\1234.bin&quot;, false);
-    /// assert_eq!(err, HResultError::from_win32(ERROR::FILE_EXISTS));
-    ///
-    /// let err = d3dc.write_blob_to_file(&amp;blob, r&quot;..\target\&quot;, false);
-    /// assert_eq!(err, HResultError::from_win32(ERROR::PATH_NOT_FOUND));
-    ///
-    /// let err = d3dc.write_blob_to_file(&amp;blob, r&quot;..\target&quot;, false);
-    /// assert_eq!(err, HResultError::from_win32(ERROR::ACCESS_DENIED));
-    /// ```
-    ///
-    /// ### Remarks
-    /// *   This was introduced by d3dcompiler_44.dll, and is unavailable in earlier versions.
-    </span><span class="kw">pub fn </span>write_blob_to_file(
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dwriteblobtofile)\]</span>
+    <span class="doccomment">/// D3DWriteBlobToFile</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// &gt; **Note:** You can use this API to develop your Windows Store apps, but you can&#39;t use it in apps that you submit to the Windows Store.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Writes a memory blob to a file on disk.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Arguments</span>
+    <span class="doccomment">/// *   `blob`          - The blob of data to write to disk.</span>
+    <span class="doccomment">/// *   `file_name`     - The path to write it to.</span>
+    <span class="doccomment">/// *   `overwrite`     - Overwrite any existing file.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Errors</span>
+    <span class="doccomment">/// *   [THINERR::MISSING_DLL_EXPORT]   - `d3dcompiler_43.dll` and earlier</span>
+    <span class="doccomment">/// *   [HResultError::from_win32](winresult::HResultError::from_win32):</span>
+    <span class="doccomment">///     *   [ERROR::PATH_NOT_FOUND]         - Path not found (missing filename in `file_name`)</span>
+    <span class="doccomment">///     *   [ERROR::ACCESS_DENIED]          - Access denied (target `file_name` is a directory?)</span>
+    <span class="doccomment">///     *   [ERROR::FILE_EXISTS]            - `file_name` already exists (if `!overwrite`)</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Example</span>
+    <span class="doccomment">/// ```rust</span>
+    <span class="doccomment">/// # use thindx::{*, d3d::*};</span>
+    <span class="doccomment">/// # use winresult::*;</span>
+    <span class="doccomment">/// # let d3dc = Compiler::load_system(47).unwrap();</span>
+    <span class="doccomment">/// let blob = d3dc.create_read_only_blob(&amp;[1,2,3,4]).unwrap();</span>
+    <span class="doccomment">/// d3dc.write_blob_to_file(&amp;blob, r&quot;..\target\1234.bin&quot;, true).unwrap();</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// let err = d3dc.write_blob_to_file(&amp;blob, r&quot;..\target\1234.bin&quot;, false);</span>
+    <span class="doccomment">/// assert_eq!(err, HResultError::from_win32(ERROR::FILE_EXISTS));</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// let err = d3dc.write_blob_to_file(&amp;blob, r&quot;..\target\&quot;, false);</span>
+    <span class="doccomment">/// assert_eq!(err, HResultError::from_win32(ERROR::PATH_NOT_FOUND));</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// let err = d3dc.write_blob_to_file(&amp;blob, r&quot;..\target&quot;, false);</span>
+    <span class="doccomment">/// assert_eq!(err, HResultError::from_win32(ERROR::ACCESS_DENIED));</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Remarks</span>
+    <span class="doccomment">/// *   This was introduced by d3dcompiler_44.dll, and is unavailable in earlier versions.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">write_blob_to_file</span>(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        blob:       <span class="kw-2">&amp;</span>ReadOnlyBlob,
-        file_name:  <span class="kw">impl </span>AsRef&lt;Path&gt;,
-        overwrite:  bool,
-    ) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
-        <span class="macro">fn_context_dll!</span>(d3d::Compiler::write_blob_to_file =&gt; <span class="self">self</span>.D3DWriteBlobToFile);
-        <span class="kw">let </span>file_name = file_name.to_wcstr().map_err(|e| <span class="macro">fn_param_error!</span>(file_name, e))<span class="question-mark">?</span>;
+        <span class="ident">blob</span>:       <span class="kw-2">&amp;</span><span class="ident">ReadOnlyBlob</span>,
+        <span class="ident">file_name</span>:  <span class="kw">impl</span> <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Path</span><span class="op">&gt;</span>,
+        <span class="ident">overwrite</span>:  <span class="ident">bool</span>,
+    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
+        <span class="macro">fn_context_dll!</span>(<span class="ident">d3d::Compiler::write_blob_to_file</span> =&gt; <span class="self">self</span>.<span class="ident">D3DWriteBlobToFile</span>);
+        <span class="kw">let</span> <span class="ident">file_name</span> <span class="op">=</span> <span class="ident">file_name</span>.<span class="ident">to_wcstr</span>().<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="macro">fn_param_error!</span>(<span class="ident">file_name</span>, <span class="ident">e</span>))<span class="question-mark">?</span>;
 
-        <span class="comment">// SAFETY: ✔️
-        //  * `f`           should be valid/sound like all `self.*`
-        //  * `file_name`   is `\0` terminated per `to_wcstr`.
-        //  * `overwrite`   is a trivial well tested bool.
-        </span><span class="macro">fn_check_hr!</span>(<span class="kw">unsafe </span>{ D3DWriteBlobToFile(blob.as_raw(), file_name.as_ptr(), overwrite.into()) })
+        <span class="comment">// SAFETY: ✔️</span>
+        <span class="comment">//  * `f`           should be valid/sound like all `self.*`</span>
+        <span class="comment">//  * `file_name`   is `\0` terminated per `to_wcstr`.</span>
+        <span class="comment">//  * `overwrite`   is a trivial well tested bool.</span>
+        <span class="macro">fn_check_hr!</span>(<span class="kw unsafe">unsafe</span> { <span class="ident">D3DWriteBlobToFile</span>(<span class="ident">blob</span>.<span class="ident">as_raw</span>(), <span class="ident">file_name</span>.<span class="ident">as_ptr</span>(), <span class="ident">overwrite</span>.<span class="ident">into</span>()) })
     }
 }
 
-<span class="comment">//TODO:     D3DCreateBlob                           = d3d::Compiler::create_blob
-//#cpp2rust D3DCreateBlob                           = d3d::Compiler::create_read_only_blob
-//#cpp2rust D3DReadFileToBlob                       = d3d::Compiler::read_file_to_blob
-//#cpp2rust D3DWriteBlobToFile                      = d3d::Compiler::write_blob_to_file
-</span></code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (b44197abb 2022-09-05)" ></div></body></html>
+<span class="comment">//TODO:     D3DCreateBlob                           = d3d::Compiler::create_blob</span>
+<span class="comment">//#cpp2rust D3DCreateBlob                           = d3d::Compiler::create_read_only_blob</span>
+<span class="comment">//#cpp2rust D3DReadFileToBlob                       = d3d::Compiler::read_file_to_blob</span>
+<span class="comment">//#cpp2rust D3DWriteBlobToFile                      = d3d::Compiler::write_blob_to_file</span>
+</code></pre></div>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0 (4b91a6ea7 2022-08-08)" ></div>
+</body></html>

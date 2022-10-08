@@ -1,4 +1,10 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3d9types.h\d3d9types.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>d3d9types.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../normalize.css"><link rel="stylesheet" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../dark.css" disabled><link rel="stylesheet" href="../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../storage.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../thindx/index.html"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3d9types.h\d3d9types.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>d3d9types.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../storage.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div>
+        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../thindx/index.html"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
+                                <a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -101,108 +107,109 @@
 <span id="101">101</span>
 <span id="102">102</span>
 <span id="103">103</span>
-</pre><pre class="rust"><code><span class="comment">// XXX: temporary attributes
-</span><span class="attribute">#![allow(rustdoc::broken_intra_doc_links)]
-#![allow(missing_docs)]
+</pre><pre class="rust"><code><span class="comment">// XXX: temporary attributes</span>
+<span class="attribute">#![<span class="ident">allow</span>(<span class="ident">rustdoc::broken_intra_doc_links</span>)]</span>
+<span class="attribute">#![<span class="ident">allow</span>(<span class="ident">missing_docs</span>)]</span>
 
-</span><span class="macro">mods! </span>{
-    inl <span class="kw">mod </span>enumerations {
-        inl <span class="kw">mod </span>back_buffer_type;
-        inl <span class="kw">mod </span>basis_type;
-        inl <span class="kw">mod </span>blend_op;
-        inl <span class="kw">mod </span>blend;
-        inl <span class="kw">mod </span>cmp_func;
-        inl <span class="kw">mod </span>compose_rects_op;
-        inl <span class="kw">mod </span>cube_map_faces;
-        inl <span class="kw">mod </span>cull;
-        inl <span class="kw">mod </span>debug_monitor_tokens;
-        inl <span class="kw">mod </span>decl_method;
-        inl <span class="kw">mod </span>decl_type;
-        inl <span class="kw">mod </span>decl_usage;
-        inl <span class="kw">mod </span>degree;
-        inl <span class="kw">mod </span>devtype;
-        inl <span class="kw">mod </span>display_rotation;
-        inl <span class="kw">mod </span>fill_mode;
-        inl <span class="kw">mod </span>fog_mode;
-        inl <span class="kw">mod </span>format;
-        inl <span class="kw">mod </span>light_type;
-        inl <span class="kw">mod </span>material_color_source;
-        inl <span class="kw">mod </span>multi_sample_type;
-        inl <span class="kw">mod </span>pool;
-        inl <span class="kw">mod </span>patch_edge_style;
-        inl <span class="kw">mod </span>primitive_type;
-        inl <span class="kw">mod </span>query_type;
-        inl <span class="kw">mod </span>render_state_type;
-        inl <span class="kw">mod </span>resource_type;
-        inl <span class="kw">mod </span>sampler_state_type;
-        inl <span class="kw">mod </span>sampler_state_value;
-        inl <span class="kw">mod </span>sampler_texture_type;
-        inl <span class="kw">mod </span>scanline_ordering;
-        inl <span class="kw">mod </span>sgr;
-        inl <span class="kw">mod </span>shade_mode;
-        inl <span class="kw">mod </span>state_block_type;
-        inl <span class="kw">mod </span>stencil_op;
-        inl <span class="kw">mod </span>stream_source;
-        inl <span class="kw">mod </span>swap_effect;
-        inl <span class="kw">mod </span>texture_address;
-        inl <span class="kw">mod </span>texture_filter_type;
-        inl <span class="kw">mod </span>texture_op;
-        inl <span class="kw">mod </span>texture_stage_state_type;
-        inl <span class="kw">mod </span>transform_state_type;
-        inl <span class="kw">mod </span>zbuffer_type;
+<span class="macro">mods!</span> {
+    <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">enumerations</span> {
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">back_buffer_type</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">basis_type</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">blend_op</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">blend</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">cmp_func</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">compose_rects_op</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">cube_map_faces</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">cull</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">debug_monitor_tokens</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">decl_method</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">decl_type</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">decl_usage</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">degree</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">devtype</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">display_rotation</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">fill_mode</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">fog_mode</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">format</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">light_type</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">material_color_source</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">multi_sample_type</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">pool</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">patch_edge_style</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">primitive_type</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">query_type</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">render_state_type</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">resource_type</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">sampler_state_type</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">sampler_state_value</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">sampler_texture_type</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">scanline_ordering</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">sgr</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">shade_mode</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">state_block_type</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">stencil_op</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">stream_source</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">swap_effect</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">texture_address</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">texture_filter_type</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">texture_op</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">texture_stage_state_type</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">transform_state_type</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">zbuffer_type</span>;
     }
 
-    inl <span class="kw">mod </span>flags {
-        inl <span class="kw">mod </span>create;
-        inl <span class="kw">mod </span>fvf;
-        inl <span class="kw">mod </span>get_data;
-        inl <span class="kw">mod </span>issue;
-        inl <span class="kw">mod </span>lock;
-        inl <span class="kw">mod </span>present;
-        inl <span class="kw">mod </span>present_flag;
-        inl <span class="kw">mod </span>usage;
+    <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">flags</span> {
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">create</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">fvf</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">get_data</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">issue</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">lock</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">present</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">present_flag</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">usage</span>;
     }
 
-    inl <span class="kw">mod </span>macros {
-        inl <span class="kw">mod </span>makefourcc;
+    <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">macros</span> {
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">makefourcc</span>;
     }
 
-    inl <span class="kw">mod </span>structures {
-        inl <span class="kw">mod </span>adapter_identifier;
-        inl <span class="kw">mod </span>box_;
-        inl <span class="kw">mod </span>clip_status;
-        inl <span class="kw">mod </span>color_value;
-        inl <span class="kw">mod </span>device_creation_parameters;
-        inl <span class="kw">mod </span>display_mode_ex;
-        inl <span class="kw">mod </span>display_mode_filter;
-        inl <span class="kw">mod </span>display_mode;
-        inl <span class="kw">mod </span>gamma_ramp;
-        inl <span class="kw">mod </span>index_buffer_desc;
-        inl <span class="kw">mod </span>light;
-        inl <span class="kw">mod </span>locked_box;
-        inl <span class="kw">mod </span>locked_rect;
-        inl <span class="kw">mod </span>material;
-        inl <span class="kw">mod </span>matrix;
-        inl <span class="kw">mod </span>memory_pressure;
-        inl <span class="kw">mod </span>present_parameters;
-        inl <span class="kw">mod </span>present_stats;
-        inl <span class="kw">mod </span>raster_status;
-        inl <span class="kw">mod </span>rect;
-        inl <span class="kw">mod </span>resource_stats;
-        inl <span class="kw">mod </span>surface_desc;
-        inl <span class="kw">mod </span>vector;
-        inl <span class="kw">mod </span>vertex_buffer_desc;
-        inl <span class="kw">mod </span>vertex_element;
-        inl <span class="kw">mod </span>viewport;
-        inl <span class="kw">mod </span>volume_desc;
+    <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">structures</span> {
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">adapter_identifier</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">box_</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">clip_status</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">color_value</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">device_creation_parameters</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">display_mode_ex</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">display_mode_filter</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">display_mode</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">gamma_ramp</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">index_buffer_desc</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">light</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">locked_box</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">locked_rect</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">material</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">matrix</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">memory_pressure</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">present_parameters</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">present_stats</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">raster_status</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">rect</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">resource_stats</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">surface_desc</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">vector</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">vertex_buffer_desc</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">vertex_element</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">viewport</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">volume_desc</span>;
     }
 
-    inl <span class="kw">mod </span>values {
-        inl <span class="kw">mod </span>color;
-        inl <span class="kw">mod </span>luid;
-        inl <span class="kw">mod </span>sdk_version;
-        inl <span class="kw">mod </span>shader_version;
+    <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">values</span> {
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">color</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">luid</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">sdk_version</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">shader_version</span>;
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (b44197abb 2022-09-05)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0 (4b91a6ea7 2022-08-08)" ></div>
+</body></html>

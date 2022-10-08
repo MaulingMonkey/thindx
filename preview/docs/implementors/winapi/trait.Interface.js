@@ -1,0 +1,3 @@
+(function() {var implementors = {};
+implementors["thindx"] = [{"text":"impl Interface for <a class=\"struct\" href=\"thindx/xaudio2_8/xaudio2_0/struct.IXAudio2.html\" title=\"struct thindx::xaudio2_8::xaudio2_0::IXAudio2\">IXAudio2</a>","synthetic":false,"types":["thindx::xaudio2_h::xaudio2_0::IXAudio2"]}];
+if (window.register_implementors) {window.register_implementors(implementors);} else {window.pending_implementors = implementors;}})()

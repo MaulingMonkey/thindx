@@ -1,4 +1,10 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3d9types.h\values\color.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>color.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../../normalize.css"><link rel="stylesheet" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../../dark.css" disabled><link rel="stylesheet" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3d9types.h\values\color.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>color.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div>
+        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
+                                <a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -85,92 +91,93 @@
 <span id="85">85</span>
 <span id="86">86</span>
 <span id="87">87</span>
-</pre><pre class="rust"><code><span class="attribute">#[allow(unused_imports)] </span><span class="kw">use crate</span>::<span class="kw-2">*</span>;
+</pre><pre class="rust"><code><span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span> <span class="kw">use</span> <span class="kw">crate</span>::<span class="kw-2">*</span>;
 
-<span class="kw">use </span>bytemuck::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">bytemuck</span>::<span class="kw-2">*</span>;
 
-<span class="kw">use </span>winapi::shared::d3d9types::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">winapi::shared::d3d9types</span>::<span class="kw-2">*</span>;
 
-<span class="kw">use </span>std::ops::<span class="kw-2">*</span>;
-<span class="kw">use </span>std::fmt::{<span class="self">self</span>, Debug, Formatter};
+<span class="kw">use</span> <span class="ident">std::ops</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">std::fmt</span>::{<span class="self">self</span>, <span class="ident">Debug</span>, <span class="ident">Formatter</span>};
 
 
 
-<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dcolor)\]
-/// D3DCOLOR
-///
-/// 0xAA&lt;span style=&quot;color: red&quot;&gt;RR&lt;/span&gt;&lt;span style=&quot;color: green&quot;&gt;GG&lt;/span&gt;&lt;span style=&quot;color: blue&quot;&gt;BB&lt;/span&gt;
-</span><span class="attribute">#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[derive(Default, Pod, Zeroable)]
-#[repr(transparent)] </span><span class="kw">pub struct </span>Color(D3DCOLOR);
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dcolor)\]</span>
+<span class="doccomment">/// D3DCOLOR</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// 0xAA&lt;span style=&quot;color: red&quot;&gt;RR&lt;/span&gt;&lt;span style=&quot;color: green&quot;&gt;GG&lt;/span&gt;&lt;span style=&quot;color: blue&quot;&gt;BB&lt;/span&gt;</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">PartialOrd</span>, <span class="ident">Ord</span>, <span class="ident">Hash</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Default</span>, <span class="ident">Pod</span>, <span class="ident">Zeroable</span>)]</span>
+<span class="attribute">#[<span class="ident">repr</span>(<span class="ident">transparent</span>)]</span> <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Color</span>(<span class="ident">D3DCOLOR</span>);
 
-<span class="kw">impl </span>Color {
-    <span class="doccomment">/// ### Arguments
-    /// *   `color` - `0xAARRGGBB`, `[0xAA, 0xRR, 0xGG, 0xBB]`, or `(0xAA, 0xRR, 0xGG, 0xBB)`
-    ///
-    /// ### Examples
-    /// ```rust
-    /// # use thindx::d3d9::*;
-    /// let colors = [
-    ///     Color::argb(0xFF224466),                // native endian
-    ///     Color::argb([0xFF, 0x22, 0x44, 0x66]),  // big endian!
-    ///     Color::argb((0xFF, 0x22, 0x44, 0x66)),  // big endian!
-    /// ];
-    /// for color in colors.iter().copied() {
-    ///     assert_eq!(0xFF, color.alpha());
-    ///     assert_eq!(0x22, color.red());
-    ///     assert_eq!(0x44, color.green());
-    ///     assert_eq!(0x66, color.blue());
-    /// }
-    /// ```
-    </span><span class="kw">pub fn </span>argb(color: <span class="kw">impl </span>IntoARGB) -&gt; <span class="self">Self </span>{ color.into_argb() }
+<span class="kw">impl</span> <span class="ident">Color</span> {
+    <span class="doccomment">/// ### Arguments</span>
+    <span class="doccomment">/// *   `color` - `0xAARRGGBB`, `[0xAA, 0xRR, 0xGG, 0xBB]`, or `(0xAA, 0xRR, 0xGG, 0xBB)`</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Examples</span>
+    <span class="doccomment">/// ```rust</span>
+    <span class="doccomment">/// # use thindx::d3d9::*;</span>
+    <span class="doccomment">/// let colors = [</span>
+    <span class="doccomment">///     Color::argb(0xFF224466),                // native endian</span>
+    <span class="doccomment">///     Color::argb([0xFF, 0x22, 0x44, 0x66]),  // big endian!</span>
+    <span class="doccomment">///     Color::argb((0xFF, 0x22, 0x44, 0x66)),  // big endian!</span>
+    <span class="doccomment">/// ];</span>
+    <span class="doccomment">/// for color in colors.iter().copied() {</span>
+    <span class="doccomment">///     assert_eq!(0xFF, color.alpha());</span>
+    <span class="doccomment">///     assert_eq!(0x22, color.red());</span>
+    <span class="doccomment">///     assert_eq!(0x44, color.green());</span>
+    <span class="doccomment">///     assert_eq!(0x66, color.blue());</span>
+    <span class="doccomment">/// }</span>
+    <span class="doccomment">/// ```</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">argb</span>(<span class="ident">color</span>: <span class="kw">impl</span> <span class="ident">IntoARGB</span>) -&gt; <span class="self">Self</span> { <span class="ident">color</span>.<span class="ident">into_argb</span>() }
 
-    <span class="kw">pub fn </span>a(<span class="self">self</span>) -&gt; u8 { (<span class="self">self</span>.<span class="number">0 </span>&gt;&gt; <span class="number">24</span>) <span class="kw">as </span>u8 }
-    <span class="kw">pub fn </span>r(<span class="self">self</span>) -&gt; u8 { (<span class="self">self</span>.<span class="number">0 </span>&gt;&gt; <span class="number">16</span>) <span class="kw">as </span>u8 }
-    <span class="kw">pub fn </span>g(<span class="self">self</span>) -&gt; u8 { (<span class="self">self</span>.<span class="number">0 </span>&gt;&gt;  <span class="number">8</span>) <span class="kw">as </span>u8 }
-    <span class="kw">pub fn </span>b(<span class="self">self</span>) -&gt; u8 { (<span class="self">self</span>.<span class="number">0 </span>&gt;&gt;  <span class="number">0</span>) <span class="kw">as </span>u8 }
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">a</span>(<span class="self">self</span>) -&gt; <span class="ident">u8</span> { (<span class="self">self</span>.<span class="number">0</span> <span class="op">&gt;</span><span class="op">&gt;</span> <span class="number">24</span>) <span class="kw">as</span> <span class="ident">u8</span> }
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">r</span>(<span class="self">self</span>) -&gt; <span class="ident">u8</span> { (<span class="self">self</span>.<span class="number">0</span> <span class="op">&gt;</span><span class="op">&gt;</span> <span class="number">16</span>) <span class="kw">as</span> <span class="ident">u8</span> }
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">g</span>(<span class="self">self</span>) -&gt; <span class="ident">u8</span> { (<span class="self">self</span>.<span class="number">0</span> <span class="op">&gt;</span><span class="op">&gt;</span>  <span class="number">8</span>) <span class="kw">as</span> <span class="ident">u8</span> }
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">b</span>(<span class="self">self</span>) -&gt; <span class="ident">u8</span> { (<span class="self">self</span>.<span class="number">0</span> <span class="op">&gt;</span><span class="op">&gt;</span>  <span class="number">0</span>) <span class="kw">as</span> <span class="ident">u8</span> }
 
-    <span class="kw">pub fn </span>alpha(<span class="self">self</span>) -&gt; u8 { (<span class="self">self</span>.<span class="number">0 </span>&gt;&gt; <span class="number">24</span>) <span class="kw">as </span>u8 }
-    <span class="kw">pub fn </span>red  (<span class="self">self</span>) -&gt; u8 { (<span class="self">self</span>.<span class="number">0 </span>&gt;&gt; <span class="number">16</span>) <span class="kw">as </span>u8 }
-    <span class="kw">pub fn </span>green(<span class="self">self</span>) -&gt; u8 { (<span class="self">self</span>.<span class="number">0 </span>&gt;&gt;  <span class="number">8</span>) <span class="kw">as </span>u8 }
-    <span class="kw">pub fn </span>blue (<span class="self">self</span>) -&gt; u8 { (<span class="self">self</span>.<span class="number">0 </span>&gt;&gt;  <span class="number">0</span>) <span class="kw">as </span>u8 }
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">alpha</span>(<span class="self">self</span>) -&gt; <span class="ident">u8</span> { (<span class="self">self</span>.<span class="number">0</span> <span class="op">&gt;</span><span class="op">&gt;</span> <span class="number">24</span>) <span class="kw">as</span> <span class="ident">u8</span> }
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">red</span>  (<span class="self">self</span>) -&gt; <span class="ident">u8</span> { (<span class="self">self</span>.<span class="number">0</span> <span class="op">&gt;</span><span class="op">&gt;</span> <span class="number">16</span>) <span class="kw">as</span> <span class="ident">u8</span> }
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">green</span>(<span class="self">self</span>) -&gt; <span class="ident">u8</span> { (<span class="self">self</span>.<span class="number">0</span> <span class="op">&gt;</span><span class="op">&gt;</span>  <span class="number">8</span>) <span class="kw">as</span> <span class="ident">u8</span> }
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">blue</span> (<span class="self">self</span>) -&gt; <span class="ident">u8</span> { (<span class="self">self</span>.<span class="number">0</span> <span class="op">&gt;</span><span class="op">&gt;</span>  <span class="number">0</span>) <span class="kw">as</span> <span class="ident">u8</span> }
 }
 
-<span class="kw">impl </span>Debug <span class="kw">for </span>Color {
-    <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>Formatter) -&gt; fmt::Result {
-        <span class="macro">write!</span>(f, <span class="string">&quot;Color(0x{:08X})&quot;</span>, <span class="self">self</span>.<span class="number">0</span>)
+<span class="kw">impl</span> <span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">Color</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
+        <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;Color(0x{:08X})&quot;</span>, <span class="self">self</span>.<span class="number">0</span>)
     }
 }
 
-<span class="kw">impl </span>Deref <span class="kw">for </span>Color {
-    <span class="kw">type </span>Target = D3DCOLOR;
-    <span class="kw">fn </span>deref(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="self">Self</span>::Target { <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="number">0 </span>}
+<span class="kw">impl</span> <span class="ident">Deref</span> <span class="kw">for</span> <span class="ident">Color</span> {
+    <span class="kw">type</span> <span class="ident">Target</span> <span class="op">=</span> <span class="ident">D3DCOLOR</span>;
+    <span class="kw">fn</span> <span class="ident">deref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::Target</span> { <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="number">0</span> }
 }
 
-<span class="kw">impl </span>DerefMut <span class="kw">for </span>Color {
-    <span class="kw">fn </span>deref_mut(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>::Target { <span class="kw-2">&amp;mut </span><span class="self">self</span>.<span class="number">0 </span>}
+<span class="kw">impl</span> <span class="ident">DerefMut</span> <span class="kw">for</span> <span class="ident">Color</span> {
+    <span class="kw">fn</span> <span class="ident">deref_mut</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="ident"><span class="self">Self</span>::Target</span> { <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="number">0</span> }
 }
 
-<span class="attribute">#[cfg(feature = <span class="string">&quot;impl-from-unchecked&quot;</span>)]
-</span><span class="kw">impl </span>From&lt;D3DCOLOR&gt; <span class="kw">for </span>Color {
-    <span class="kw">fn </span>from(value: D3DCOLOR) -&gt; <span class="self">Self </span>{ <span class="self">Self</span>(value) }
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;impl-from-unchecked&quot;</span>)]</span>
+<span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">D3DCOLOR</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Color</span> {
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">value</span>: <span class="ident">D3DCOLOR</span>) -&gt; <span class="self">Self</span> { <span class="self">Self</span>(<span class="ident">value</span>) }
 }
 
-<span class="kw">impl </span>From&lt;Color&gt; <span class="kw">for </span>D3DCOLOR {
-    <span class="kw">fn </span>from(value: Color) -&gt; <span class="self">Self </span>{ value.<span class="number">0 </span>}
+<span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Color</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">D3DCOLOR</span> {
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">value</span>: <span class="ident">Color</span>) -&gt; <span class="self">Self</span> { <span class="ident">value</span>.<span class="number">0</span> }
 }
 
 
 
-<span class="doccomment">/// 0xAA&lt;span style=&quot;color: red&quot;&gt;RR&lt;/span&gt;&lt;span style=&quot;color: green&quot;&gt;GG&lt;/span&gt;&lt;span style=&quot;color: blue&quot;&gt;BB&lt;/span&gt;,
-/// [0xAA, &lt;span style=&quot;color: red&quot;&gt;0xRR&lt;/span&gt;, &lt;span style=&quot;color: green&quot;&gt;0xGG&lt;/span&gt;, &lt;span style=&quot;color: blue&quot;&gt;0xBB&lt;/span&gt;], or
-/// (0xAA, &lt;span style=&quot;color: red&quot;&gt;0xRR&lt;/span&gt;, &lt;span style=&quot;color: green&quot;&gt;0xGG&lt;/span&gt;, &lt;span style=&quot;color: blue&quot;&gt;0xBB&lt;/span&gt;)
-</span><span class="kw">pub trait </span>IntoARGB                  { <span class="kw">fn </span>into_argb(<span class="self">self</span>) -&gt; Color; }
-<span class="kw">impl </span>IntoARGB <span class="kw">for </span>u32               { <span class="kw">fn </span>into_argb(<span class="self">self</span>) -&gt; Color { Color(<span class="self">self</span>) } }
-<span class="kw">impl </span>IntoARGB <span class="kw">for </span>[u8; <span class="number">4</span>]           { <span class="kw">fn </span>into_argb(<span class="self">self</span>) -&gt; Color { Color(u32::from_be_bytes(<span class="self">self</span>)) } }
-<span class="kw">impl </span>IntoARGB <span class="kw">for </span>(u8, u8, u8, u8)  { <span class="kw">fn </span>into_argb(<span class="self">self</span>) -&gt; Color { <span class="kw">let </span>(a,r,g,b) = <span class="self">self</span>; Color(u32::from_be_bytes([a,r,g,b])) } }
+<span class="doccomment">/// 0xAA&lt;span style=&quot;color: red&quot;&gt;RR&lt;/span&gt;&lt;span style=&quot;color: green&quot;&gt;GG&lt;/span&gt;&lt;span style=&quot;color: blue&quot;&gt;BB&lt;/span&gt;,</span>
+<span class="doccomment">/// [0xAA, &lt;span style=&quot;color: red&quot;&gt;0xRR&lt;/span&gt;, &lt;span style=&quot;color: green&quot;&gt;0xGG&lt;/span&gt;, &lt;span style=&quot;color: blue&quot;&gt;0xBB&lt;/span&gt;], or</span>
+<span class="doccomment">/// (0xAA, &lt;span style=&quot;color: red&quot;&gt;0xRR&lt;/span&gt;, &lt;span style=&quot;color: green&quot;&gt;0xGG&lt;/span&gt;, &lt;span style=&quot;color: blue&quot;&gt;0xBB&lt;/span&gt;)</span>
+<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">IntoARGB</span>                  { <span class="kw">fn</span> <span class="ident">into_argb</span>(<span class="self">self</span>) -&gt; <span class="ident">Color</span>; }
+<span class="kw">impl</span> <span class="ident">IntoARGB</span> <span class="kw">for</span> <span class="ident">u32</span>               { <span class="kw">fn</span> <span class="ident">into_argb</span>(<span class="self">self</span>) -&gt; <span class="ident">Color</span> { <span class="ident">Color</span>(<span class="self">self</span>) } }
+<span class="kw">impl</span> <span class="ident">IntoARGB</span> <span class="kw">for</span> [<span class="ident">u8</span>; <span class="number">4</span>]           { <span class="kw">fn</span> <span class="ident">into_argb</span>(<span class="self">self</span>) -&gt; <span class="ident">Color</span> { <span class="ident">Color</span>(<span class="ident">u32::from_be_bytes</span>(<span class="self">self</span>)) } }
+<span class="kw">impl</span> <span class="ident">IntoARGB</span> <span class="kw">for</span> (<span class="ident">u8</span>, <span class="ident">u8</span>, <span class="ident">u8</span>, <span class="ident">u8</span>)  { <span class="kw">fn</span> <span class="ident">into_argb</span>(<span class="self">self</span>) -&gt; <span class="ident">Color</span> { <span class="kw">let</span> (<span class="ident">a</span>,<span class="ident">r</span>,<span class="ident">g</span>,<span class="ident">b</span>) <span class="op">=</span> <span class="self">self</span>; <span class="ident">Color</span>(<span class="ident">u32::from_be_bytes</span>([<span class="ident">a</span>,<span class="ident">r</span>,<span class="ident">g</span>,<span class="ident">b</span>])) } }
 
-<span class="comment">//#cpp2rust D3DCOLOR        = d3d::Color
-//#cpp2rust D3DCOLOR_ARGB   = d3d::Color::argb
-</span></code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (b44197abb 2022-09-05)" ></div></body></html>
+<span class="comment">//#cpp2rust D3DCOLOR        = d3d::Color</span>
+<span class="comment">//#cpp2rust D3DCOLOR_ARGB   = d3d::Color::argb</span>
+</code></pre></div>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0 (4b91a6ea7 2022-08-08)" ></div>
+</body></html>

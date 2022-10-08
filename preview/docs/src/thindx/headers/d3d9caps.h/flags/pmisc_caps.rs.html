@@ -1,4 +1,10 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3d9caps.h\flags\pmisc_caps.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>pmisc_caps.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../../normalize.css"><link rel="stylesheet" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../../dark.css" disabled><link rel="stylesheet" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3d9caps.h\flags\pmisc_caps.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>pmisc_caps.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div>
+        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
+                                <a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -57,64 +63,65 @@
 <span id="57">57</span>
 <span id="58">58</span>
 <span id="59">59</span>
-</pre><pre class="rust"><code><span class="kw">use </span>bytemuck::<span class="kw-2">*</span>;
-<span class="kw">use </span>winapi::shared::d3d9caps::<span class="kw-2">*</span>;
-<span class="kw">use </span>winapi::shared::minwindef::DWORD;
+</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">bytemuck</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">winapi::shared::d3d9caps</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">winapi::shared::minwindef::DWORD</span>;
 
 
 
-<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dpmisccaps)\]
-/// D3DPMISCCAPS_*
-</span><span class="attribute">#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[derive(Pod, Zeroable)]
-#[repr(transparent)] </span><span class="kw">pub struct </span>PMiscCaps(DWORD);
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dpmisccaps)\]</span>
+<span class="doccomment">/// D3DPMISCCAPS_*</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">PartialOrd</span>, <span class="ident">Ord</span>, <span class="ident">Hash</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Pod</span>, <span class="ident">Zeroable</span>)]</span>
+<span class="attribute">#[<span class="ident">repr</span>(<span class="ident">transparent</span>)]</span> <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">PMiscCaps</span>(<span class="ident">DWORD</span>);
 
-<span class="macro">flags! </span>{
-    PMiscCaps =&gt; DWORD;
-    <span class="prelude-val">None</span>, MaskZ, CullNone, CullCW, CullCCW, ColorWriteEnable, ClipPlaneScaledPoints, ClipTlVerts, TssArgTemp, BlendOp,
-    NullReference, IndependentWriteMasks, PerStageConstant, PostBlendSrgbConvert, FogAndSpecularAlpha,
-    SeparateAlphaBlend, MrtIndependentBitDepths, MrtPostPixelShaderBlending, FogVertexClamped,
+<span class="macro">flags!</span> {
+    <span class="ident">PMiscCaps</span> =&gt; <span class="ident">DWORD</span>;
+    <span class="prelude-val">None</span>, <span class="ident">MaskZ</span>, <span class="ident">CullNone</span>, <span class="ident">CullCW</span>, <span class="ident">CullCCW</span>, <span class="ident">ColorWriteEnable</span>, <span class="ident">ClipPlaneScaledPoints</span>, <span class="ident">ClipTlVerts</span>, <span class="ident">TssArgTemp</span>, <span class="ident">BlendOp</span>,
+    <span class="ident">NullReference</span>, <span class="ident">IndependentWriteMasks</span>, <span class="ident">PerStageConstant</span>, <span class="ident">PostBlendSrgbConvert</span>, <span class="ident">FogAndSpecularAlpha</span>,
+    <span class="ident">SeparateAlphaBlend</span>, <span class="ident">MrtIndependentBitDepths</span>, <span class="ident">MrtPostPixelShaderBlending</span>, <span class="ident">FogVertexClamped</span>,
 }
 
-<span class="attribute">#[allow(non_upper_case_globals)] </span><span class="kw">impl </span>PMiscCaps {
-    <span class="kw">pub const </span><span class="prelude-val">None                              </span>: PMiscCaps = PMiscCaps(<span class="number">0</span>);
-    <span class="kw">pub const </span>MaskZ                             : PMiscCaps = PMiscCaps(D3DPMISCCAPS_MASKZ);
-    <span class="kw">pub const </span>CullNone                          : PMiscCaps = PMiscCaps(D3DPMISCCAPS_CULLNONE);
-    <span class="kw">pub const </span>CullCW                            : PMiscCaps = PMiscCaps(D3DPMISCCAPS_CULLCW);
-    <span class="kw">pub const </span>CullCCW                           : PMiscCaps = PMiscCaps(D3DPMISCCAPS_CULLCCW);
-    <span class="kw">pub const </span>ColorWriteEnable                  : PMiscCaps = PMiscCaps(D3DPMISCCAPS_COLORWRITEENABLE);
-    <span class="kw">pub const </span>ClipPlaneScaledPoints             : PMiscCaps = PMiscCaps(D3DPMISCCAPS_CLIPPLANESCALEDPOINTS);
-    <span class="kw">pub const </span>ClipTlVerts                       : PMiscCaps = PMiscCaps(D3DPMISCCAPS_CLIPTLVERTS);
-    <span class="kw">pub const </span>TssArgTemp                        : PMiscCaps = PMiscCaps(D3DPMISCCAPS_TSSARGTEMP);
-    <span class="kw">pub const </span>BlendOp                           : PMiscCaps = PMiscCaps(D3DPMISCCAPS_BLENDOP);
-    <span class="kw">pub const </span>NullReference                     : PMiscCaps = PMiscCaps(D3DPMISCCAPS_NULLREFERENCE);
-    <span class="kw">pub const </span>IndependentWriteMasks             : PMiscCaps = PMiscCaps(D3DPMISCCAPS_INDEPENDENTWRITEMASKS);
-    <span class="kw">pub const </span>PerStageConstant                  : PMiscCaps = PMiscCaps(D3DPMISCCAPS_PERSTAGECONSTANT);
-    <span class="kw">pub const </span>PostBlendSrgbConvert              : PMiscCaps = PMiscCaps(D3DPMISCCAPS_POSTBLENDSRGBCONVERT);
-    <span class="kw">pub const </span>FogAndSpecularAlpha               : PMiscCaps = PMiscCaps(D3DPMISCCAPS_FOGANDSPECULARALPHA);
-    <span class="kw">pub const </span>SeparateAlphaBlend                : PMiscCaps = PMiscCaps(D3DPMISCCAPS_SEPARATEALPHABLEND);
-    <span class="kw">pub const </span>MrtIndependentBitDepths           : PMiscCaps = PMiscCaps(D3DPMISCCAPS_MRTINDEPENDENTBITDEPTHS);
-    <span class="kw">pub const </span>MrtPostPixelShaderBlending        : PMiscCaps = PMiscCaps(D3DPMISCCAPS_MRTPOSTPIXELSHADERBLENDING);
-    <span class="kw">pub const </span>FogVertexClamped                  : PMiscCaps = PMiscCaps(D3DPMISCCAPS_FOGVERTEXCLAMPED);
+<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">non_upper_case_globals</span>)]</span> <span class="kw">impl</span> <span class="ident">PMiscCaps</span> {
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="prelude-val">None</span>                              : <span class="ident">PMiscCaps</span> <span class="op">=</span> <span class="ident">PMiscCaps</span>(<span class="number">0</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">MaskZ</span>                             : <span class="ident">PMiscCaps</span> <span class="op">=</span> <span class="ident">PMiscCaps</span>(<span class="ident">D3DPMISCCAPS_MASKZ</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CullNone</span>                          : <span class="ident">PMiscCaps</span> <span class="op">=</span> <span class="ident">PMiscCaps</span>(<span class="ident">D3DPMISCCAPS_CULLNONE</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CullCW</span>                            : <span class="ident">PMiscCaps</span> <span class="op">=</span> <span class="ident">PMiscCaps</span>(<span class="ident">D3DPMISCCAPS_CULLCW</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CullCCW</span>                           : <span class="ident">PMiscCaps</span> <span class="op">=</span> <span class="ident">PMiscCaps</span>(<span class="ident">D3DPMISCCAPS_CULLCCW</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">ColorWriteEnable</span>                  : <span class="ident">PMiscCaps</span> <span class="op">=</span> <span class="ident">PMiscCaps</span>(<span class="ident">D3DPMISCCAPS_COLORWRITEENABLE</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">ClipPlaneScaledPoints</span>             : <span class="ident">PMiscCaps</span> <span class="op">=</span> <span class="ident">PMiscCaps</span>(<span class="ident">D3DPMISCCAPS_CLIPPLANESCALEDPOINTS</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">ClipTlVerts</span>                       : <span class="ident">PMiscCaps</span> <span class="op">=</span> <span class="ident">PMiscCaps</span>(<span class="ident">D3DPMISCCAPS_CLIPTLVERTS</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">TssArgTemp</span>                        : <span class="ident">PMiscCaps</span> <span class="op">=</span> <span class="ident">PMiscCaps</span>(<span class="ident">D3DPMISCCAPS_TSSARGTEMP</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">BlendOp</span>                           : <span class="ident">PMiscCaps</span> <span class="op">=</span> <span class="ident">PMiscCaps</span>(<span class="ident">D3DPMISCCAPS_BLENDOP</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">NullReference</span>                     : <span class="ident">PMiscCaps</span> <span class="op">=</span> <span class="ident">PMiscCaps</span>(<span class="ident">D3DPMISCCAPS_NULLREFERENCE</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">IndependentWriteMasks</span>             : <span class="ident">PMiscCaps</span> <span class="op">=</span> <span class="ident">PMiscCaps</span>(<span class="ident">D3DPMISCCAPS_INDEPENDENTWRITEMASKS</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">PerStageConstant</span>                  : <span class="ident">PMiscCaps</span> <span class="op">=</span> <span class="ident">PMiscCaps</span>(<span class="ident">D3DPMISCCAPS_PERSTAGECONSTANT</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">PostBlendSrgbConvert</span>              : <span class="ident">PMiscCaps</span> <span class="op">=</span> <span class="ident">PMiscCaps</span>(<span class="ident">D3DPMISCCAPS_POSTBLENDSRGBCONVERT</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">FogAndSpecularAlpha</span>               : <span class="ident">PMiscCaps</span> <span class="op">=</span> <span class="ident">PMiscCaps</span>(<span class="ident">D3DPMISCCAPS_FOGANDSPECULARALPHA</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SeparateAlphaBlend</span>                : <span class="ident">PMiscCaps</span> <span class="op">=</span> <span class="ident">PMiscCaps</span>(<span class="ident">D3DPMISCCAPS_SEPARATEALPHABLEND</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">MrtIndependentBitDepths</span>           : <span class="ident">PMiscCaps</span> <span class="op">=</span> <span class="ident">PMiscCaps</span>(<span class="ident">D3DPMISCCAPS_MRTINDEPENDENTBITDEPTHS</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">MrtPostPixelShaderBlending</span>        : <span class="ident">PMiscCaps</span> <span class="op">=</span> <span class="ident">PMiscCaps</span>(<span class="ident">D3DPMISCCAPS_MRTPOSTPIXELSHADERBLENDING</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">FogVertexClamped</span>                  : <span class="ident">PMiscCaps</span> <span class="op">=</span> <span class="ident">PMiscCaps</span>(<span class="ident">D3DPMISCCAPS_FOGVERTEXCLAMPED</span>);
 }
 
-<span class="comment">//#cpp2rust D3DPMISCCAPS_MASKZ                              = d3d::PMiscCaps::MaskZ
-//#cpp2rust D3DPMISCCAPS_CULLNONE                           = d3d::PMiscCaps::CullNone
-//#cpp2rust D3DPMISCCAPS_CULLCW                             = d3d::PMiscCaps::CullCW
-//#cpp2rust D3DPMISCCAPS_CULLCCW                            = d3d::PMiscCaps::CullCCW
-//#cpp2rust D3DPMISCCAPS_COLORWRITEENABLE                   = d3d::PMiscCaps::ColorWriteEnable
-//#cpp2rust D3DPMISCCAPS_CLIPPLANESCALEDPOINTS              = d3d::PMiscCaps::ClipPlaneScaledPoints
-//#cpp2rust D3DPMISCCAPS_CLIPTLVERTS                        = d3d::PMiscCaps::ClipTlVerts
-//#cpp2rust D3DPMISCCAPS_TSSARGTEMP                         = d3d::PMiscCaps::TssArgTemp
-//#cpp2rust D3DPMISCCAPS_BLENDOP                            = d3d::PMiscCaps::BlendOp
-//#cpp2rust D3DPMISCCAPS_NULLREFERENCE                      = d3d::PMiscCaps::NullReference
-//#cpp2rust D3DPMISCCAPS_INDEPENDENTWRITEMASKS              = d3d::PMiscCaps::IndependentWriteMasks
-//#cpp2rust D3DPMISCCAPS_PERSTAGECONSTANT                   = d3d::PMiscCaps::PerStageConstant
-//#cpp2rust D3DPMISCCAPS_POSTBLENDSRGBCONVERT               = d3d::PMiscCaps::PostBlendSrgbConvert
-//#cpp2rust D3DPMISCCAPS_FOGANDSPECULARALPHA                = d3d::PMiscCaps::FogAndSpecularAlpha
-//#cpp2rust D3DPMISCCAPS_SEPARATEALPHABLEND                 = d3d::PMiscCaps::SeparateAlphaBlend
-//#cpp2rust D3DPMISCCAPS_MRTINDEPENDENTBITDEPTHS            = d3d::PMiscCaps::MrtIndependentBitDepths
-//#cpp2rust D3DPMISCCAPS_MRTPOSTPIXELSHADERBLENDING         = d3d::PMiscCaps::MrtPostPixelShaderBlending
-//#cpp2rust D3DPMISCCAPS_FOGVERTEXCLAMPED                   = d3d::PMiscCaps::FogVertexClamped
-</span></code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (b44197abb 2022-09-05)" ></div></body></html>
+<span class="comment">//#cpp2rust D3DPMISCCAPS_MASKZ                              = d3d::PMiscCaps::MaskZ</span>
+<span class="comment">//#cpp2rust D3DPMISCCAPS_CULLNONE                           = d3d::PMiscCaps::CullNone</span>
+<span class="comment">//#cpp2rust D3DPMISCCAPS_CULLCW                             = d3d::PMiscCaps::CullCW</span>
+<span class="comment">//#cpp2rust D3DPMISCCAPS_CULLCCW                            = d3d::PMiscCaps::CullCCW</span>
+<span class="comment">//#cpp2rust D3DPMISCCAPS_COLORWRITEENABLE                   = d3d::PMiscCaps::ColorWriteEnable</span>
+<span class="comment">//#cpp2rust D3DPMISCCAPS_CLIPPLANESCALEDPOINTS              = d3d::PMiscCaps::ClipPlaneScaledPoints</span>
+<span class="comment">//#cpp2rust D3DPMISCCAPS_CLIPTLVERTS                        = d3d::PMiscCaps::ClipTlVerts</span>
+<span class="comment">//#cpp2rust D3DPMISCCAPS_TSSARGTEMP                         = d3d::PMiscCaps::TssArgTemp</span>
+<span class="comment">//#cpp2rust D3DPMISCCAPS_BLENDOP                            = d3d::PMiscCaps::BlendOp</span>
+<span class="comment">//#cpp2rust D3DPMISCCAPS_NULLREFERENCE                      = d3d::PMiscCaps::NullReference</span>
+<span class="comment">//#cpp2rust D3DPMISCCAPS_INDEPENDENTWRITEMASKS              = d3d::PMiscCaps::IndependentWriteMasks</span>
+<span class="comment">//#cpp2rust D3DPMISCCAPS_PERSTAGECONSTANT                   = d3d::PMiscCaps::PerStageConstant</span>
+<span class="comment">//#cpp2rust D3DPMISCCAPS_POSTBLENDSRGBCONVERT               = d3d::PMiscCaps::PostBlendSrgbConvert</span>
+<span class="comment">//#cpp2rust D3DPMISCCAPS_FOGANDSPECULARALPHA                = d3d::PMiscCaps::FogAndSpecularAlpha</span>
+<span class="comment">//#cpp2rust D3DPMISCCAPS_SEPARATEALPHABLEND                 = d3d::PMiscCaps::SeparateAlphaBlend</span>
+<span class="comment">//#cpp2rust D3DPMISCCAPS_MRTINDEPENDENTBITDEPTHS            = d3d::PMiscCaps::MrtIndependentBitDepths</span>
+<span class="comment">//#cpp2rust D3DPMISCCAPS_MRTPOSTPIXELSHADERBLENDING         = d3d::PMiscCaps::MrtPostPixelShaderBlending</span>
+<span class="comment">//#cpp2rust D3DPMISCCAPS_FOGVERTEXCLAMPED                   = d3d::PMiscCaps::FogVertexClamped</span>
+</code></pre></div>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0 (4b91a6ea7 2022-08-08)" ></div>
+</body></html>

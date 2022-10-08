@@ -1,4 +1,10 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3d9types.h\structures\clip_status.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>clip_status.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../../normalize.css"><link rel="stylesheet" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../../dark.css" disabled><link rel="stylesheet" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3d9types.h\structures\clip_status.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>clip_status.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div>
+        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
+                                <a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -126,133 +132,134 @@
 <span id="126">126</span>
 <span id="127">127</span>
 <span id="128">128</span>
-</pre><pre class="rust"><code><span class="attribute">#[allow(unused_imports)] </span><span class="kw">use crate</span>::<span class="kw-2">*</span>;
+</pre><pre class="rust"><code><span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span> <span class="kw">use</span> <span class="kw">crate</span>::<span class="kw-2">*</span>;
 
-<span class="kw">use </span>bytemuck::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">bytemuck</span>::<span class="kw-2">*</span>;
 
-<span class="kw">use </span>winapi::shared::d3d9types::<span class="kw-2">*</span>;
-<span class="kw">use </span>winapi::shared::minwindef::DWORD;
+<span class="kw">use</span> <span class="ident">winapi::shared::d3d9types</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">winapi::shared::minwindef::DWORD</span>;
 
-<span class="kw">use </span>std::fmt::Debug;
+<span class="kw">use</span> <span class="ident">std::fmt::Debug</span>;
 
 
 
-<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dclipstatus9)\]
-/// D3DCLIPSTATUS9
-///
-/// Describes the current clip status.
-</span><span class="attribute">#[derive(Clone, Copy, Debug)]
-#[derive(Pod, Zeroable)]
-#[repr(C)] </span><span class="kw">pub struct </span>ClipStatus {
-    <span class="doccomment">/// Default: [CS::None]
-    </span><span class="kw">pub </span>clip_union:         ClipStatusFlags,
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dclipstatus9)\]</span>
+<span class="doccomment">/// D3DCLIPSTATUS9</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Describes the current clip status.</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">Debug</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Pod</span>, <span class="ident">Zeroable</span>)]</span>
+<span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span> <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ClipStatus</span> {
+    <span class="doccomment">/// Default: [CS::None]</span>
+    <span class="kw">pub</span> <span class="ident">clip_union</span>:         <span class="ident">ClipStatusFlags</span>,
 
-    <span class="doccomment">/// Default: [CS::All] \| 0xfffff000
-    </span><span class="kw">pub </span>clip_intersection:  ClipStatusFlags,
+    <span class="doccomment">/// Default: [CS::All] \| 0xfffff000</span>
+    <span class="kw">pub</span> <span class="ident">clip_intersection</span>:  <span class="ident">ClipStatusFlags</span>,
 }
 
-<span class="kw">impl </span>ClipStatus {
-    <span class="attribute">#[allow(missing_docs)]
-    </span><span class="kw">pub const fn </span>zeroed() -&gt; <span class="self">Self </span>{
-        <span class="self">Self </span>{
-            clip_union:         ClipStatusFlags::zeroed(),
-            clip_intersection:  ClipStatusFlags::zeroed(),
+<span class="kw">impl</span> <span class="ident">ClipStatus</span> {
+    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">missing_docs</span>)]</span>
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">zeroed</span>() -&gt; <span class="self">Self</span> {
+        <span class="self">Self</span> {
+            <span class="ident">clip_union</span>:         <span class="ident">ClipStatusFlags::zeroed</span>(),
+            <span class="ident">clip_intersection</span>:  <span class="ident">ClipStatusFlags::zeroed</span>(),
         }
     }
 
-    <span class="comment">// &quot;Initial values are zero for ClipUnion and 0xFFFFFFFF for ClipIntersection&quot;
-    // Ref: https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dclipstatus9
-    // TODO: impl const fn default() / Default?
+    <span class="comment">// &quot;Initial values are zero for ClipUnion and 0xFFFFFFFF for ClipIntersection&quot;</span>
+    <span class="comment">// Ref: https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dclipstatus9</span>
+    <span class="comment">// TODO: impl const fn default() / Default?</span>
 
-    </span><span class="doccomment">/// Convert a raw [D3DCLIPSTATUS9] value into a [ClipStatus].
-    ///
-    /// [D3DCLIPSTATUS9]:       https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dclipstatus9
-    </span><span class="kw">pub const fn </span>from_unchecked(value: D3DCLIPSTATUS9) -&gt; <span class="self">Self </span>{ <span class="kw">unsafe </span>{ std::mem::transmute(value) } }
+    <span class="doccomment">/// Convert a raw [D3DCLIPSTATUS9] value into a [ClipStatus].</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// [D3DCLIPSTATUS9]:       https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dclipstatus9</span>
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">from_unchecked</span>(<span class="ident">value</span>: <span class="ident">D3DCLIPSTATUS9</span>) -&gt; <span class="self">Self</span> { <span class="kw unsafe">unsafe</span> { <span class="ident">std::mem::transmute</span>(<span class="ident">value</span>) } }
 }
 
-<span class="macro">struct_mapping! </span>{
-    <span class="attribute">#[derive(<span class="kw">unsafe </span>{ AsRef, AsMut, Deref, DerefMut, FromInto })]
-    </span>ClipStatus =&gt; D3DCLIPSTATUS9 {
-        clip_union          =&gt; ClipUnion,
-        clip_intersection   =&gt; ClipIntersection,
+<span class="macro">struct_mapping!</span> {
+    <span class="attribute">#[<span class="ident">derive</span>(<span class="kw unsafe">unsafe</span> { <span class="ident">AsRef</span>, <span class="ident">AsMut</span>, <span class="ident">Deref</span>, <span class="ident">DerefMut</span>, <span class="ident">FromInto</span> })]</span>
+    <span class="ident">ClipStatus</span> =&gt; <span class="ident">D3DCLIPSTATUS9</span> {
+        <span class="ident">clip_union</span>          =&gt; <span class="ident">ClipUnion</span>,
+        <span class="ident">clip_intersection</span>   =&gt; <span class="ident">ClipIntersection</span>,
     }
 }
 
-<span class="comment">//#cpp2rust D3DCLIPSTATUS9  = d3d9::ClipStatus
+<span class="comment">//#cpp2rust D3DCLIPSTATUS9  = d3d9::ClipStatus</span>
 
 
 
-</span><span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dclipstatus9)\]
-/// D3DCS_\*
-///
-/// [d3d9::ClipStatus] flags
-</span><span class="attribute">#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[derive(Pod, Zeroable)]
-#[repr(transparent)] </span><span class="kw">pub struct </span>ClipStatusFlags(DWORD);
-<span class="kw">pub use </span>ClipStatusFlags <span class="kw">as </span>CS;
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dclipstatus9)\]</span>
+<span class="doccomment">/// D3DCS_\*</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// [d3d9::ClipStatus] flags</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">PartialOrd</span>, <span class="ident">Ord</span>, <span class="ident">Hash</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Pod</span>, <span class="ident">Zeroable</span>)]</span>
+<span class="attribute">#[<span class="ident">repr</span>(<span class="ident">transparent</span>)]</span> <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ClipStatusFlags</span>(<span class="ident">DWORD</span>);
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident">ClipStatusFlags</span> <span class="kw">as</span> <span class="ident">CS</span>;
 
-<span class="macro">flags! </span>{ CS =&gt; DWORD; <span class="prelude-val">None</span>, All, Left, Right, Top, Bottom, Front, Back, Plane0, Plane1, Plane2, Plane3, Plane4, Plane5 }
+<span class="macro">flags!</span> { <span class="ident">CS</span> =&gt; <span class="ident">DWORD</span>; <span class="prelude-val">None</span>, <span class="ident">All</span>, <span class="ident">Left</span>, <span class="ident">Right</span>, <span class="ident">Top</span>, <span class="ident">Bottom</span>, <span class="ident">Front</span>, <span class="ident">Back</span>, <span class="ident">Plane0</span>, <span class="ident">Plane1</span>, <span class="ident">Plane2</span>, <span class="ident">Plane3</span>, <span class="ident">Plane4</span>, <span class="ident">Plane5</span> }
 
-<span class="attribute">#[allow(non_upper_case_globals)] </span><span class="kw">impl </span>CS {
-    <span class="doccomment">/// No clip flags.
-    </span><span class="kw">pub const </span><span class="prelude-val">None </span>: CS = CS(<span class="number">0</span>);
+<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">non_upper_case_globals</span>)]</span> <span class="kw">impl</span> <span class="ident">CS</span> {
+    <span class="doccomment">/// No clip flags.</span>
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="prelude-val">None</span> : <span class="ident">CS</span> <span class="op">=</span> <span class="ident">CS</span>(<span class="number">0</span>);
 
-    <span class="doccomment">/// A combination of &quot;all&quot; clip flags
-    ///
-    /// **NOTE:** This is equivalent to `0xFFF` (all individual flags), not `0xFFFFFFFF` (all bits.)
-    ///
-    /// Additionally, note that the default for e.g. [d3d::ClipStatus::clip_intersection] is `0xFFFFFFFF` (all bits!)
-    </span><span class="kw">pub const </span>All : CS = CS(D3DCS_ALL);
+    <span class="doccomment">/// A combination of &quot;all&quot; clip flags</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// **NOTE:** This is equivalent to `0xFFF` (all individual flags), not `0xFFFFFFFF` (all bits.)</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Additionally, note that the default for e.g. [d3d::ClipStatus::clip_intersection] is `0xFFFFFFFF` (all bits!)</span>
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">All</span> : <span class="ident">CS</span> <span class="op">=</span> <span class="ident">CS</span>(<span class="ident">D3DCS_ALL</span>);
 
-    <span class="doccomment">/// All verticies are clipped by the left plane of the viewing frustrum.
-    </span><span class="kw">pub const </span>Left : CS = CS(D3DCS_LEFT);
+    <span class="doccomment">/// All verticies are clipped by the left plane of the viewing frustrum.</span>
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Left</span> : <span class="ident">CS</span> <span class="op">=</span> <span class="ident">CS</span>(<span class="ident">D3DCS_LEFT</span>);
 
-    <span class="doccomment">/// All verticies are clipped by the right plane of the viewing frustrum.
-    </span><span class="kw">pub const </span>Right : CS = CS(D3DCS_RIGHT);
+    <span class="doccomment">/// All verticies are clipped by the right plane of the viewing frustrum.</span>
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Right</span> : <span class="ident">CS</span> <span class="op">=</span> <span class="ident">CS</span>(<span class="ident">D3DCS_RIGHT</span>);
 
-    <span class="doccomment">/// All verticies are clipped by the top plane of the viewing frustrum.
-    </span><span class="kw">pub const </span>Top : CS = CS(D3DCS_TOP);
+    <span class="doccomment">/// All verticies are clipped by the top plane of the viewing frustrum.</span>
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Top</span> : <span class="ident">CS</span> <span class="op">=</span> <span class="ident">CS</span>(<span class="ident">D3DCS_TOP</span>);
 
-    <span class="doccomment">/// All verticies are clipped by the bottom plane of the viewing frustrum.
-    </span><span class="kw">pub const </span>Bottom : CS = CS(D3DCS_BOTTOM);
+    <span class="doccomment">/// All verticies are clipped by the bottom plane of the viewing frustrum.</span>
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Bottom</span> : <span class="ident">CS</span> <span class="op">=</span> <span class="ident">CS</span>(<span class="ident">D3DCS_BOTTOM</span>);
 
-    <span class="doccomment">/// All verticies are clipped by the front plane of the viewing frustrum.
-    </span><span class="kw">pub const </span>Front : CS = CS(D3DCS_FRONT);
+    <span class="doccomment">/// All verticies are clipped by the front plane of the viewing frustrum.</span>
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Front</span> : <span class="ident">CS</span> <span class="op">=</span> <span class="ident">CS</span>(<span class="ident">D3DCS_FRONT</span>);
 
-    <span class="doccomment">/// All verticies are clipped by the back plane of the viewing frustrum.
-    </span><span class="kw">pub const </span>Back : CS = CS(D3DCS_BACK);
+    <span class="doccomment">/// All verticies are clipped by the back plane of the viewing frustrum.</span>
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Back</span> : <span class="ident">CS</span> <span class="op">=</span> <span class="ident">CS</span>(<span class="ident">D3DCS_BACK</span>);
 
-    <span class="doccomment">/// All verticies are clipped by application defined clipping plane 0.
-    </span><span class="kw">pub const </span>Plane0 : CS = CS(D3DCS_PLANE0);
+    <span class="doccomment">/// All verticies are clipped by application defined clipping plane 0.</span>
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Plane0</span> : <span class="ident">CS</span> <span class="op">=</span> <span class="ident">CS</span>(<span class="ident">D3DCS_PLANE0</span>);
 
-    <span class="doccomment">/// All verticies are clipped by application defined clipping plane 1.
-    </span><span class="kw">pub const </span>Plane1 : CS = CS(D3DCS_PLANE1);
+    <span class="doccomment">/// All verticies are clipped by application defined clipping plane 1.</span>
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Plane1</span> : <span class="ident">CS</span> <span class="op">=</span> <span class="ident">CS</span>(<span class="ident">D3DCS_PLANE1</span>);
 
-    <span class="doccomment">/// All verticies are clipped by application defined clipping plane 2.
-    </span><span class="kw">pub const </span>Plane2 : CS = CS(D3DCS_PLANE2);
+    <span class="doccomment">/// All verticies are clipped by application defined clipping plane 2.</span>
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Plane2</span> : <span class="ident">CS</span> <span class="op">=</span> <span class="ident">CS</span>(<span class="ident">D3DCS_PLANE2</span>);
 
-    <span class="doccomment">/// All verticies are clipped by application defined clipping plane 3.
-    </span><span class="kw">pub const </span>Plane3 : CS = CS(D3DCS_PLANE3);
+    <span class="doccomment">/// All verticies are clipped by application defined clipping plane 3.</span>
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Plane3</span> : <span class="ident">CS</span> <span class="op">=</span> <span class="ident">CS</span>(<span class="ident">D3DCS_PLANE3</span>);
 
-    <span class="doccomment">/// All verticies are clipped by application defined clipping plane 4.
-    </span><span class="kw">pub const </span>Plane4 : CS = CS(D3DCS_PLANE4);
+    <span class="doccomment">/// All verticies are clipped by application defined clipping plane 4.</span>
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Plane4</span> : <span class="ident">CS</span> <span class="op">=</span> <span class="ident">CS</span>(<span class="ident">D3DCS_PLANE4</span>);
 
-    <span class="doccomment">/// All verticies are clipped by application defined clipping plane 5.
-    </span><span class="kw">pub const </span>Plane5 : CS = CS(D3DCS_PLANE5);
+    <span class="doccomment">/// All verticies are clipped by application defined clipping plane 5.</span>
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Plane5</span> : <span class="ident">CS</span> <span class="op">=</span> <span class="ident">CS</span>(<span class="ident">D3DCS_PLANE5</span>);
 }
 
-<span class="comment">//#cpp2rust D3DCS_ALL       = d3d::CS::All
-//#cpp2rust D3DCS_LEFT      = d3d::CS::Left
-//#cpp2rust D3DCS_RIGHT     = d3d::CS::Right
-//#cpp2rust D3DCS_TOP       = d3d::CS::Top
-//#cpp2rust D3DCS_BOTTOM    = d3d::CS::Bottom
-//#cpp2rust D3DCS_FRONT     = d3d::CS::Front
-//#cpp2rust D3DCS_BACK      = d3d::CS::Back
-//#cpp2rust D3DCS_PLANE0    = d3d::CS::Plane0
-//#cpp2rust D3DCS_PLANE1    = d3d::CS::Plane1
-//#cpp2rust D3DCS_PLANE2    = d3d::CS::Plane2
-//#cpp2rust D3DCS_PLANE3    = d3d::CS::Plane3
-//#cpp2rust D3DCS_PLANE4    = d3d::CS::Plane4
-//#cpp2rust D3DCS_PLANE5    = d3d::CS::Plane5
-</span></code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (b44197abb 2022-09-05)" ></div></body></html>
+<span class="comment">//#cpp2rust D3DCS_ALL       = d3d::CS::All</span>
+<span class="comment">//#cpp2rust D3DCS_LEFT      = d3d::CS::Left</span>
+<span class="comment">//#cpp2rust D3DCS_RIGHT     = d3d::CS::Right</span>
+<span class="comment">//#cpp2rust D3DCS_TOP       = d3d::CS::Top</span>
+<span class="comment">//#cpp2rust D3DCS_BOTTOM    = d3d::CS::Bottom</span>
+<span class="comment">//#cpp2rust D3DCS_FRONT     = d3d::CS::Front</span>
+<span class="comment">//#cpp2rust D3DCS_BACK      = d3d::CS::Back</span>
+<span class="comment">//#cpp2rust D3DCS_PLANE0    = d3d::CS::Plane0</span>
+<span class="comment">//#cpp2rust D3DCS_PLANE1    = d3d::CS::Plane1</span>
+<span class="comment">//#cpp2rust D3DCS_PLANE2    = d3d::CS::Plane2</span>
+<span class="comment">//#cpp2rust D3DCS_PLANE3    = d3d::CS::Plane3</span>
+<span class="comment">//#cpp2rust D3DCS_PLANE4    = d3d::CS::Plane4</span>
+<span class="comment">//#cpp2rust D3DCS_PLANE5    = d3d::CS::Plane5</span>
+</code></pre></div>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0 (4b91a6ea7 2022-08-08)" ></div>
+</body></html>

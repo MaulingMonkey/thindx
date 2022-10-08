@@ -1,4 +1,10 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3d9.h\interfaces\direct3d.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>direct3d.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../../normalize.css"><link rel="stylesheet" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../../dark.css" disabled><link rel="stylesheet" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3d9.h\interfaces\direct3d.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>direct3d.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div>
+        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
+                                <a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -739,746 +745,747 @@
 <span id="739">739</span>
 <span id="740">740</span>
 <span id="741">741</span>
-</pre><pre class="rust"><code><span class="kw">use crate</span>::<span class="kw-2">*</span>;
-<span class="kw">use </span><span class="kw">crate</span>::d3d9::<span class="kw-2">*</span>;
+</pre><pre class="rust"><code><span class="kw">use</span> <span class="kw">crate</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::d3d9</span>::<span class="kw-2">*</span>;
 
-<span class="kw">use </span>bytemuck::Zeroable;
+<span class="kw">use</span> <span class="ident">bytemuck::Zeroable</span>;
 
-<span class="kw">use </span>winapi::shared::d3d9::{Direct3DCreate9, IDirect3D9};
-<span class="kw">use </span>winapi::shared::windef::HMONITOR;
-<span class="kw">use </span>winapi::um::unknwnbase::IUnknown;
+<span class="kw">use</span> <span class="ident">winapi::shared::d3d9</span>::{<span class="ident">Direct3DCreate9</span>, <span class="ident">IDirect3D9</span>};
+<span class="kw">use</span> <span class="ident">winapi::shared::windef::HMONITOR</span>;
+<span class="kw">use</span> <span class="ident">winapi::um::unknwnbase::IUnknown</span>;
 
-<span class="kw">use </span>std::ptr::null_mut;
-
-
-
-<span class="kw">type </span>AdapterIndex   = u32;
-<span class="kw">type </span>ModeIndex      = u32;
+<span class="kw">use</span> <span class="ident">std::ptr::null_mut</span>;
 
 
 
-<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3d9)\]
-/// Factory for use in creating your initial [Device].
-///
-/// Microsoft&#39;s documentation claims that several APIs return [D3DERR::NOTAVAILABLE] when, in my testing, they return [D3DERR::INVALIDCALL] instead.
-/// Do not trust the greyed out, crossed out, air quoted documentation &lt;span style=&quot;opacity: 25%&quot;&gt;like this&lt;/span&gt;!
-</span><span class="attribute">#[derive(Clone)] #[repr(transparent)]
-</span><span class="kw">pub struct </span>Direct3D(<span class="kw">pub</span>(<span class="kw">crate</span>) mcom::Rc&lt;IDirect3D9&gt;);
-
-<span class="kw">unsafe impl </span>AsSafe&lt;IUnknown     &gt; <span class="kw">for </span>Direct3D { <span class="kw">fn </span>as_safe(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>IUnknown     { <span class="kw-2">&amp;**</span><span class="self">self</span>.<span class="number">0 </span>} }
-<span class="kw">unsafe impl </span>AsSafe&lt;IDirect3D9   &gt; <span class="kw">for </span>Direct3D { <span class="kw">fn </span>as_safe(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>IDirect3D9   { <span class="kw-2">&amp;*</span><span class="self">self</span>.<span class="number">0 </span>} }
+<span class="kw">type</span> <span class="ident">AdapterIndex</span>   <span class="op">=</span> <span class="ident">u32</span>;
+<span class="kw">type</span> <span class="ident">ModeIndex</span>      <span class="op">=</span> <span class="ident">u32</span>;
 
 
 
-<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3d9)\]
-/// IDirect3D9 extension methods
-///
-/// ### Methods
-/// | thindx                                                                    | docs.microsoft.com            | Description |
-/// | ------------------------------------------------------------------------- | ----------------------------- | ----------- |
-/// | [create](Self::create)                                                    | [Direct3DCreate9]             | Creates an [IDirect3D9] object and returns it.
-/// | [check_depth_stencil_match](Self::check_depth_stencil_match)              | [CheckDepthStencilMatch]      | Determines whether a depth-stencil format is compatible with a render-target format in a particular display mode.
-/// | [check_device_format](Self::check_device_format)                          | [CheckDeviceFormat]           | Determines whether a surface format is available as a specified resource type and can be used as a texture, depth-stencil buffer, or render target, or any combination of the three, on a device representing this adapter.
-/// | [check_device_format_conversion](Self::check_device_format_conversion)    | [CheckDeviceFormatConversion] | Tests the device to see if it supports conversion from one display format to another.
-/// | [check_device_multi_sample_type](Self::check_device_multi_sample_type)    | [CheckDeviceMultiSampleType]  | Determines if a multisampling technique is available on this device.
-/// | [check_device_type](Self::check_device_type)                              | [CheckDeviceType]             | Verifies whether a hardware accelerated device type can be used on this adapter.
-/// | [create_device](Self::create_device)                                      | [CreateDevice]                | Creates a [Device].
-/// | [enum_adapter_modes](Self::enum_adapter_modes)                            | [EnumAdapterModes]            | Queries the possible display modes of an adapter (~ connected monitor)
-/// | [get_adapter_count](Self::get_adapter_count)                              | [GetAdapterCount]             | Gets the number of adapters (~ connected monitors) available to this device.
-/// | [get_adapter_display_mode](Self::get_adapter_display_mode)                | [GetAdapterDisplayMode]       | Gets the current display mode of an adapter (~ connected monitor)
-/// | [get_adapter_identifier](Self::get_adapter_identifier)                    | [GetAdapterIdentifier]        | Gets metadata about an adapter (~ connected monitor), including driver name/version/guids/...
-/// | [get_adapter_mode_count](Self::get_adapter_mode_count)                    | [GetAdapterModeCount]         | Get the number of display modes this adapter/monitor supports.
-/// | [get_adapter_monitor](Self::get_adapter_monitor)                          | [GetAdapterMonitor]           | Get the [HMONITOR] associated with this adapter.
-/// | [get_device_caps](Self::get_device_caps)                                  | [GetDeviceCaps]               | Get the [Caps] of this device.
-/// | ~~register_software_device~~ (N/A)                                        | [RegisterSoftwareDevice]      | Registers a pluggable software device.
-///
-/// [Direct3DCreate9]:              https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-direct3dcreate9
-/// [IDirect3D9]:                   https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3d9
-///
-/// [CheckDepthStencilMatch]:       https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdepthstencilmatch
-/// [CheckDeviceFormat]:            https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdeviceformat
-/// [CheckDeviceFormatConversion]:  https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdeviceformatconversion
-/// [CheckDeviceMultiSampleType]:   https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdevicemultisampletype
-/// [CheckDeviceType]:              https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdevicetype
-/// [CreateDevice]:                 https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-createdevice
-/// [EnumAdapterModes]:             https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-enumadaptermodes
-/// [GetAdapterCount]:              https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadaptercount
-/// [GetAdapterDisplayMode]:        https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadapterdisplaymode
-/// [GetAdapterIdentifier]:         https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadapteridentifier
-/// [GetAdapterModeCount]:          https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadaptermodecount
-/// [GetAdapterMonitor]:            https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadaptermonitor
-/// [GetDeviceCaps]:                https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getdevicecaps
-/// [RegisterSoftwareDevice]:       https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-registersoftwaredevice
-///
-</span><span class="kw">pub trait </span>IDirect3D9Ext : AsSafe&lt;IDirect3D9&gt; + Sized {
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-direct3dcreate9)\]
-    /// Direct3DCreate9
-    ///
-    /// Creates an [IDirect3D9] object and returns it.
-    ///
-    /// ### ⚠️ Safety ⚠️
-    /// While this individual call should be 100% safe/sound, there is a bunch of general
-    /// soundness holes that Rust can&#39;t always sanely guard against.  These include:
-    ///
-    /// *   Unsound Direct3D API designs (e.g. shader creation functions that take a pointer and no length boundary!)
-    /// *   Direct3D bugs (e.g. failing allocations may cause segfaults and worse)
-    /// *   Kernel bugs (e.g. windows may BSOD)
-    /// *   Driver bugs (e.g. gpus may hang/reset/???)
-    ///
-    /// The `unsafe` of this fn is the token acknowledgement of those errors.
-    ///
-    /// ### Returns
-    /// *   [THINERR::NONSPECIFIC]  on an invalid SDK version
-    /// *   [THINERR::NONSPECIFIC]  if d3d access is forbidden? (services?)
-    /// *   Ok([Direct3D])          otherwise
-    ///
-    /// Consider calling [Direct3DEx::create_ex] instead if you want a meaningful error code than [THINERR::NONSPECIFIC].
-    ///
-    /// ### Example
-    /// ```rust
-    /// use thindx::d3d9::*;
-    /// let d3d = unsafe { Direct3D::create(SdkVersion::default()) }.unwrap();
-    /// ```
-    ///
-    /// [IDirect3D9]:                   https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3d9
-    ///
-    </span><span class="kw">unsafe fn </span>create(sdk_version: SdkVersion) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, Error&gt; <span class="kw">where </span><span class="self">Self </span>: From&lt;mcom::Rc&lt;IDirect3D9&gt;&gt; {
-        <span class="macro">fn_context!</span>(d3d9::IDirect3D9Ext::create =&gt; Direct3DCreate9);
-        <span class="kw">let </span>d3d9 = <span class="kw">unsafe </span>{ Direct3DCreate9(sdk_version.into()) };
-        <span class="kw">unsafe </span>{ mcom::Rc::from_raw_opt(d3d9) }.ok_or(<span class="macro">fn_error!</span>(THINERR::NONSPECIFIC)).map(<span class="self">Self</span>::from)
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3d9)\]</span>
+<span class="doccomment">/// Factory for use in creating your initial [Device].</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Microsoft&#39;s documentation claims that several APIs return [D3DERR::NOTAVAILABLE] when, in my testing, they return [D3DERR::INVALIDCALL] instead.</span>
+<span class="doccomment">/// Do not trust the greyed out, crossed out, air quoted documentation &lt;span style=&quot;opacity: 25%&quot;&gt;like this&lt;/span&gt;!</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>)]</span> <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">transparent</span>)]</span>
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Direct3D</span>(<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="ident">mcom::Rc</span><span class="op">&lt;</span><span class="ident">IDirect3D9</span><span class="op">&gt;</span>);
+
+<span class="kw unsafe">unsafe</span> <span class="kw">impl</span> <span class="ident">AsSafe</span><span class="op">&lt;</span><span class="ident">IUnknown</span>     <span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Direct3D</span> { <span class="kw">fn</span> <span class="ident">as_safe</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">IUnknown</span>     { <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="kw-2">*</span><span class="self">self</span>.<span class="number">0</span> } }
+<span class="kw unsafe">unsafe</span> <span class="kw">impl</span> <span class="ident">AsSafe</span><span class="op">&lt;</span><span class="ident">IDirect3D9</span>   <span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Direct3D</span> { <span class="kw">fn</span> <span class="ident">as_safe</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">IDirect3D9</span>   { <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="self">self</span>.<span class="number">0</span> } }
+
+
+
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3d9)\]</span>
+<span class="doccomment">/// IDirect3D9 extension methods</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// ### Methods</span>
+<span class="doccomment">/// | thindx                                                                    | docs.microsoft.com            | Description |</span>
+<span class="doccomment">/// | ------------------------------------------------------------------------- | ----------------------------- | ----------- |</span>
+<span class="doccomment">/// | [create](Self::create)                                                    | [Direct3DCreate9]             | Creates an [IDirect3D9] object and returns it.</span>
+<span class="doccomment">/// | [check_depth_stencil_match](Self::check_depth_stencil_match)              | [CheckDepthStencilMatch]      | Determines whether a depth-stencil format is compatible with a render-target format in a particular display mode.</span>
+<span class="doccomment">/// | [check_device_format](Self::check_device_format)                          | [CheckDeviceFormat]           | Determines whether a surface format is available as a specified resource type and can be used as a texture, depth-stencil buffer, or render target, or any combination of the three, on a device representing this adapter.</span>
+<span class="doccomment">/// | [check_device_format_conversion](Self::check_device_format_conversion)    | [CheckDeviceFormatConversion] | Tests the device to see if it supports conversion from one display format to another.</span>
+<span class="doccomment">/// | [check_device_multi_sample_type](Self::check_device_multi_sample_type)    | [CheckDeviceMultiSampleType]  | Determines if a multisampling technique is available on this device.</span>
+<span class="doccomment">/// | [check_device_type](Self::check_device_type)                              | [CheckDeviceType]             | Verifies whether a hardware accelerated device type can be used on this adapter.</span>
+<span class="doccomment">/// | [create_device](Self::create_device)                                      | [CreateDevice]                | Creates a [Device].</span>
+<span class="doccomment">/// | [enum_adapter_modes](Self::enum_adapter_modes)                            | [EnumAdapterModes]            | Queries the possible display modes of an adapter (~ connected monitor)</span>
+<span class="doccomment">/// | [get_adapter_count](Self::get_adapter_count)                              | [GetAdapterCount]             | Gets the number of adapters (~ connected monitors) available to this device.</span>
+<span class="doccomment">/// | [get_adapter_display_mode](Self::get_adapter_display_mode)                | [GetAdapterDisplayMode]       | Gets the current display mode of an adapter (~ connected monitor)</span>
+<span class="doccomment">/// | [get_adapter_identifier](Self::get_adapter_identifier)                    | [GetAdapterIdentifier]        | Gets metadata about an adapter (~ connected monitor), including driver name/version/guids/...</span>
+<span class="doccomment">/// | [get_adapter_mode_count](Self::get_adapter_mode_count)                    | [GetAdapterModeCount]         | Get the number of display modes this adapter/monitor supports.</span>
+<span class="doccomment">/// | [get_adapter_monitor](Self::get_adapter_monitor)                          | [GetAdapterMonitor]           | Get the [HMONITOR] associated with this adapter.</span>
+<span class="doccomment">/// | [get_device_caps](Self::get_device_caps)                                  | [GetDeviceCaps]               | Get the [Caps] of this device.</span>
+<span class="doccomment">/// | ~~register_software_device~~ (N/A)                                        | [RegisterSoftwareDevice]      | Registers a pluggable software device.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// [Direct3DCreate9]:              https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-direct3dcreate9</span>
+<span class="doccomment">/// [IDirect3D9]:                   https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3d9</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// [CheckDepthStencilMatch]:       https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdepthstencilmatch</span>
+<span class="doccomment">/// [CheckDeviceFormat]:            https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdeviceformat</span>
+<span class="doccomment">/// [CheckDeviceFormatConversion]:  https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdeviceformatconversion</span>
+<span class="doccomment">/// [CheckDeviceMultiSampleType]:   https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdevicemultisampletype</span>
+<span class="doccomment">/// [CheckDeviceType]:              https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdevicetype</span>
+<span class="doccomment">/// [CreateDevice]:                 https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-createdevice</span>
+<span class="doccomment">/// [EnumAdapterModes]:             https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-enumadaptermodes</span>
+<span class="doccomment">/// [GetAdapterCount]:              https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadaptercount</span>
+<span class="doccomment">/// [GetAdapterDisplayMode]:        https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadapterdisplaymode</span>
+<span class="doccomment">/// [GetAdapterIdentifier]:         https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadapteridentifier</span>
+<span class="doccomment">/// [GetAdapterModeCount]:          https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadaptermodecount</span>
+<span class="doccomment">/// [GetAdapterMonitor]:            https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadaptermonitor</span>
+<span class="doccomment">/// [GetDeviceCaps]:                https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getdevicecaps</span>
+<span class="doccomment">/// [RegisterSoftwareDevice]:       https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-registersoftwaredevice</span>
+<span class="doccomment">///</span>
+<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">IDirect3D9Ext</span> : <span class="ident">AsSafe</span><span class="op">&lt;</span><span class="ident">IDirect3D9</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Sized</span> {
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-direct3dcreate9)\]</span>
+    <span class="doccomment">/// Direct3DCreate9</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Creates an [IDirect3D9] object and returns it.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### ⚠️ Safety ⚠️</span>
+    <span class="doccomment">/// While this individual call should be 100% safe/sound, there is a bunch of general</span>
+    <span class="doccomment">/// soundness holes that Rust can&#39;t always sanely guard against.  These include:</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// *   Unsound Direct3D API designs (e.g. shader creation functions that take a pointer and no length boundary!)</span>
+    <span class="doccomment">/// *   Direct3D bugs (e.g. failing allocations may cause segfaults and worse)</span>
+    <span class="doccomment">/// *   Kernel bugs (e.g. windows may BSOD)</span>
+    <span class="doccomment">/// *   Driver bugs (e.g. gpus may hang/reset/???)</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// The `unsafe` of this fn is the token acknowledgement of those errors.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Returns</span>
+    <span class="doccomment">/// *   [THINERR::NONSPECIFIC]  on an invalid SDK version</span>
+    <span class="doccomment">/// *   [THINERR::NONSPECIFIC]  if d3d access is forbidden? (services?)</span>
+    <span class="doccomment">/// *   Ok([Direct3D])          otherwise</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Consider calling [Direct3DEx::create_ex] instead if you want a meaningful error code than [THINERR::NONSPECIFIC].</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Example</span>
+    <span class="doccomment">/// ```rust</span>
+    <span class="doccomment">/// use thindx::d3d9::*;</span>
+    <span class="doccomment">/// let d3d = unsafe { Direct3D::create(SdkVersion::default()) }.unwrap();</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// [IDirect3D9]:                   https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3d9</span>
+    <span class="doccomment">///</span>
+    <span class="kw unsafe">unsafe</span> <span class="kw">fn</span> <span class="ident">create</span>(<span class="ident">sdk_version</span>: <span class="ident">SdkVersion</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">Error</span><span class="op">&gt;</span> <span class="kw">where</span> <span class="self">Self</span> : <span class="ident">From</span><span class="op">&lt;</span><span class="ident">mcom::Rc</span><span class="op">&lt;</span><span class="ident">IDirect3D9</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+        <span class="macro">fn_context!</span>(<span class="ident">d3d9::IDirect3D9Ext::create</span> =&gt; <span class="ident">Direct3DCreate9</span>);
+        <span class="kw">let</span> <span class="ident">d3d9</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="ident">Direct3DCreate9</span>(<span class="ident">sdk_version</span>.<span class="ident">into</span>()) };
+        <span class="kw unsafe">unsafe</span> { <span class="ident">mcom::Rc::from_raw_opt</span>(<span class="ident">d3d9</span>) }.<span class="ident">ok_or</span>(<span class="macro">fn_error!</span>(<span class="ident">THINERR::NONSPECIFIC</span>)).<span class="ident">map</span>(<span class="ident"><span class="self">Self</span>::from</span>)
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdepthstencilmatch)\]
-    /// IDirect3D9::CheckDepthStencilMatch
-    ///
-    /// Determines whether a depth-stencil format is compatible with a render-target format in a particular display mode.
-    ///
-    /// ### Returns
-    /// *   [D3DERR::INVALIDCALL]   if `adapter` &gt;= `self.get_adapter_count()`
-    /// *   [D3DERR::INVALIDCALL]   on most bad parameters
-    /// *   &lt;span style=&quot;opacity: 25%&quot;&gt;[D3DERR::NOTAVAILABLE] &quot;If a depth-stencil format is not compatible&quot;&lt;/span&gt;
-    /// *   `Ok(())`                if the adapter x render target x depth stencil format combination is supported
-    ///
-    /// ### Example
-    /// ```rust
-    /// # use dev::d3d9::*;
-    /// # let d3d = d3d_test();
-    /// assert!([Format::D24S8, Format::D24X8, Format::D16, Format::D32].iter().copied().any(|fmt|
-    ///     d3d.check_depth_stencil_match(
-    ///         D3DADAPTER_DEFAULT,
-    ///         DevType::HAL,
-    ///         Format::X8R8G8B8,   // adapter format
-    ///         Format::A8R8G8B8,   // render target format
-    ///         fmt,                // depth stencil format
-    ///     ).is_ok()
-    /// ));
-    /// ```
-    </span><span class="kw">fn </span>check_depth_stencil_match(<span class="kw-2">&amp;</span><span class="self">self</span>, adapter: AdapterIndex, device_type: <span class="kw">impl </span>Into&lt;DevType&gt;, adapter_format: <span class="kw">impl </span>Into&lt;Format&gt;, render_target_format: <span class="kw">impl </span>Into&lt;Format&gt;, depth_stencil_format: <span class="kw">impl </span>Into&lt;Format&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
-        <span class="macro">fn_context!</span>(d3d9::IDirect3D9Ext::check_depth_stencil_match =&gt; IDirect3D9::CheckDepthStencilMatch);
-        <span class="macro">fn_check_hr!</span>(<span class="kw">unsafe </span>{ <span class="self">self</span>.as_winapi().CheckDepthStencilMatch(adapter, device_type.into().into(), adapter_format.into().into(), render_target_format.into().into(), depth_stencil_format.into().into()) })<span class="question-mark">?</span>;
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdepthstencilmatch)\]</span>
+    <span class="doccomment">/// IDirect3D9::CheckDepthStencilMatch</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Determines whether a depth-stencil format is compatible with a render-target format in a particular display mode.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Returns</span>
+    <span class="doccomment">/// *   [D3DERR::INVALIDCALL]   if `adapter` &gt;= `self.get_adapter_count()`</span>
+    <span class="doccomment">/// *   [D3DERR::INVALIDCALL]   on most bad parameters</span>
+    <span class="doccomment">/// *   &lt;span style=&quot;opacity: 25%&quot;&gt;[D3DERR::NOTAVAILABLE] &quot;If a depth-stencil format is not compatible&quot;&lt;/span&gt;</span>
+    <span class="doccomment">/// *   `Ok(())`                if the adapter x render target x depth stencil format combination is supported</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Example</span>
+    <span class="doccomment">/// ```rust</span>
+    <span class="doccomment">/// # use dev::d3d9::*;</span>
+    <span class="doccomment">/// # let d3d = d3d_test();</span>
+    <span class="doccomment">/// assert!([Format::D24S8, Format::D24X8, Format::D16, Format::D32].iter().copied().any(|fmt|</span>
+    <span class="doccomment">///     d3d.check_depth_stencil_match(</span>
+    <span class="doccomment">///         D3DADAPTER_DEFAULT,</span>
+    <span class="doccomment">///         DevType::HAL,</span>
+    <span class="doccomment">///         Format::X8R8G8B8,   // adapter format</span>
+    <span class="doccomment">///         Format::A8R8G8B8,   // render target format</span>
+    <span class="doccomment">///         fmt,                // depth stencil format</span>
+    <span class="doccomment">///     ).is_ok()</span>
+    <span class="doccomment">/// ));</span>
+    <span class="doccomment">/// ```</span>
+    <span class="kw">fn</span> <span class="ident">check_depth_stencil_match</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">adapter</span>: <span class="ident">AdapterIndex</span>, <span class="ident">device_type</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">DevType</span><span class="op">&gt;</span>, <span class="ident">adapter_format</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Format</span><span class="op">&gt;</span>, <span class="ident">render_target_format</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Format</span><span class="op">&gt;</span>, <span class="ident">depth_stencil_format</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Format</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
+        <span class="macro">fn_context!</span>(<span class="ident">d3d9::IDirect3D9Ext::check_depth_stencil_match</span> =&gt; <span class="ident">IDirect3D9::CheckDepthStencilMatch</span>);
+        <span class="macro">fn_check_hr!</span>(<span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="ident">as_winapi</span>().<span class="ident">CheckDepthStencilMatch</span>(<span class="ident">adapter</span>, <span class="ident">device_type</span>.<span class="ident">into</span>().<span class="ident">into</span>(), <span class="ident">adapter_format</span>.<span class="ident">into</span>().<span class="ident">into</span>(), <span class="ident">render_target_format</span>.<span class="ident">into</span>().<span class="ident">into</span>(), <span class="ident">depth_stencil_format</span>.<span class="ident">into</span>().<span class="ident">into</span>()) })<span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(())
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdeviceformat)\]
-    /// IDirect3D9::CheckDeviceFormat
-    ///
-    /// Determines whether a surface format is available as a specified resource type and can be used as a texture, depth-stencil buffer, or render target, or any combination of the three, on a device representing this adapter.
-    ///
-    /// ### Returns
-    /// *   [D3DERR::INVALIDCALL]       if `adapter` &gt;= `self.get_adapter_count()`
-    /// *   [D3DERR::INVALIDCALL]       on most bad parameters
-    /// *   &lt;span style=&quot;opacity: 25%&quot;&gt;[D3DERR::NOTAVAILABLE] &quot;if the format is not acceptable to the device for this usage&quot;&lt;/span&gt;
-    /// *   `Ok(())`                    if the format is supported
-    ///
-    /// ### Example
-    /// ```rust
-    /// # use dev::d3d9::*; let d3d = d3d_test();
-    /// assert!(d3d.check_device_format(
-    ///     D3DADAPTER_DEFAULT,
-    ///     DevType::HAL,
-    ///     Format::X8R8G8B8,       // adapter format
-    ///     0,                      // usage
-    ///     ResourceType::Texture,
-    ///     Format::A8R8G8B8        // texture format
-    /// ).is_ok());
-    /// ```
-    </span><span class="kw">fn </span>check_device_format(<span class="kw-2">&amp;</span><span class="self">self</span>, adapter: AdapterIndex, device_type: <span class="kw">impl </span>Into&lt;DevType&gt;, adapter_format: <span class="kw">impl </span>Into&lt;Format&gt;, usage: u32, rtype: <span class="kw">impl </span>Into&lt;ResourceType&gt;, check_format: <span class="kw">impl </span>Into&lt;Format&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
-        <span class="macro">fn_context!</span>(d3d9::IDirect3D9Ext::check_device_format =&gt; IDirect3D9::CheckDeviceFormat);
-        <span class="macro">fn_check_hr!</span>(<span class="kw">unsafe </span>{ <span class="self">self</span>.as_winapi().CheckDeviceFormat(adapter, device_type.into().into(), adapter_format.into().into(), usage, rtype.into().into(), check_format.into().into()) })<span class="question-mark">?</span>;
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdeviceformat)\]</span>
+    <span class="doccomment">/// IDirect3D9::CheckDeviceFormat</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Determines whether a surface format is available as a specified resource type and can be used as a texture, depth-stencil buffer, or render target, or any combination of the three, on a device representing this adapter.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Returns</span>
+    <span class="doccomment">/// *   [D3DERR::INVALIDCALL]       if `adapter` &gt;= `self.get_adapter_count()`</span>
+    <span class="doccomment">/// *   [D3DERR::INVALIDCALL]       on most bad parameters</span>
+    <span class="doccomment">/// *   &lt;span style=&quot;opacity: 25%&quot;&gt;[D3DERR::NOTAVAILABLE] &quot;if the format is not acceptable to the device for this usage&quot;&lt;/span&gt;</span>
+    <span class="doccomment">/// *   `Ok(())`                    if the format is supported</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Example</span>
+    <span class="doccomment">/// ```rust</span>
+    <span class="doccomment">/// # use dev::d3d9::*; let d3d = d3d_test();</span>
+    <span class="doccomment">/// assert!(d3d.check_device_format(</span>
+    <span class="doccomment">///     D3DADAPTER_DEFAULT,</span>
+    <span class="doccomment">///     DevType::HAL,</span>
+    <span class="doccomment">///     Format::X8R8G8B8,       // adapter format</span>
+    <span class="doccomment">///     0,                      // usage</span>
+    <span class="doccomment">///     ResourceType::Texture,</span>
+    <span class="doccomment">///     Format::A8R8G8B8        // texture format</span>
+    <span class="doccomment">/// ).is_ok());</span>
+    <span class="doccomment">/// ```</span>
+    <span class="kw">fn</span> <span class="ident">check_device_format</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">adapter</span>: <span class="ident">AdapterIndex</span>, <span class="ident">device_type</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">DevType</span><span class="op">&gt;</span>, <span class="ident">adapter_format</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Format</span><span class="op">&gt;</span>, <span class="ident">usage</span>: <span class="ident">u32</span>, <span class="ident">rtype</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">ResourceType</span><span class="op">&gt;</span>, <span class="ident">check_format</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Format</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
+        <span class="macro">fn_context!</span>(<span class="ident">d3d9::IDirect3D9Ext::check_device_format</span> =&gt; <span class="ident">IDirect3D9::CheckDeviceFormat</span>);
+        <span class="macro">fn_check_hr!</span>(<span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="ident">as_winapi</span>().<span class="ident">CheckDeviceFormat</span>(<span class="ident">adapter</span>, <span class="ident">device_type</span>.<span class="ident">into</span>().<span class="ident">into</span>(), <span class="ident">adapter_format</span>.<span class="ident">into</span>().<span class="ident">into</span>(), <span class="ident">usage</span>, <span class="ident">rtype</span>.<span class="ident">into</span>().<span class="ident">into</span>(), <span class="ident">check_format</span>.<span class="ident">into</span>().<span class="ident">into</span>()) })<span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(())
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdeviceformatconversion)\]
-    /// IDirect3D9::CheckDeviceFormatConversion
-    ///
-    /// Tests the device to see if it supports conversion from one display format to another.
-    ///
-    /// ### Returns
-    /// *   [D3DERR::INVALIDCALL]       if `adapter` &gt;= `self.get_adapter_count()`
-    /// *   [D3DERR::INVALIDDEVICE]     if `device_type` is invalid
-    /// *   [D3DERR::NOTAVAILABLE]      on an invalid source format
-    /// *   [D3DERR::NOTAVAILABLE]      on an invalid target format
-    /// *   [D3DERR::NOTAVAILABLE]      when the device cannot convert between the formats
-    /// *   `Ok(())`                    if the device can convert from `source_format` to `target_format`
-    ///
-    /// ### Example
-    /// ```rust
-    /// # use dev::d3d9::*; let d3d = d3d_test();
-    /// assert!(d3d.check_device_format_conversion(
-    ///     D3DADAPTER_DEFAULT,
-    ///     DevType::HAL,
-    ///     Format::A8R8G8B8,
-    ///     Format::A8R8G8B8
-    /// ).is_ok());
-    /// ```
-    </span><span class="kw">fn </span>check_device_format_conversion(<span class="kw-2">&amp;</span><span class="self">self</span>, adapter: AdapterIndex, device_type: <span class="kw">impl </span>Into&lt;DevType&gt;, source_format: <span class="kw">impl </span>Into&lt;Format&gt;, target_format: <span class="kw">impl </span>Into&lt;Format&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
-        <span class="macro">fn_context!</span>(d3d9::IDirect3D9Ext::check_device_format_conversion =&gt; IDirect3D9::CheckDeviceFormatConversion);
-        <span class="macro">fn_check_hr!</span>(<span class="kw">unsafe </span>{ <span class="self">self</span>.as_winapi().CheckDeviceFormatConversion(adapter, device_type.into().into(), source_format.into().into(), target_format.into().into()) })<span class="question-mark">?</span>;
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdeviceformatconversion)\]</span>
+    <span class="doccomment">/// IDirect3D9::CheckDeviceFormatConversion</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Tests the device to see if it supports conversion from one display format to another.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Returns</span>
+    <span class="doccomment">/// *   [D3DERR::INVALIDCALL]       if `adapter` &gt;= `self.get_adapter_count()`</span>
+    <span class="doccomment">/// *   [D3DERR::INVALIDDEVICE]     if `device_type` is invalid</span>
+    <span class="doccomment">/// *   [D3DERR::NOTAVAILABLE]      on an invalid source format</span>
+    <span class="doccomment">/// *   [D3DERR::NOTAVAILABLE]      on an invalid target format</span>
+    <span class="doccomment">/// *   [D3DERR::NOTAVAILABLE]      when the device cannot convert between the formats</span>
+    <span class="doccomment">/// *   `Ok(())`                    if the device can convert from `source_format` to `target_format`</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Example</span>
+    <span class="doccomment">/// ```rust</span>
+    <span class="doccomment">/// # use dev::d3d9::*; let d3d = d3d_test();</span>
+    <span class="doccomment">/// assert!(d3d.check_device_format_conversion(</span>
+    <span class="doccomment">///     D3DADAPTER_DEFAULT,</span>
+    <span class="doccomment">///     DevType::HAL,</span>
+    <span class="doccomment">///     Format::A8R8G8B8,</span>
+    <span class="doccomment">///     Format::A8R8G8B8</span>
+    <span class="doccomment">/// ).is_ok());</span>
+    <span class="doccomment">/// ```</span>
+    <span class="kw">fn</span> <span class="ident">check_device_format_conversion</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">adapter</span>: <span class="ident">AdapterIndex</span>, <span class="ident">device_type</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">DevType</span><span class="op">&gt;</span>, <span class="ident">source_format</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Format</span><span class="op">&gt;</span>, <span class="ident">target_format</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Format</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
+        <span class="macro">fn_context!</span>(<span class="ident">d3d9::IDirect3D9Ext::check_device_format_conversion</span> =&gt; <span class="ident">IDirect3D9::CheckDeviceFormatConversion</span>);
+        <span class="macro">fn_check_hr!</span>(<span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="ident">as_winapi</span>().<span class="ident">CheckDeviceFormatConversion</span>(<span class="ident">adapter</span>, <span class="ident">device_type</span>.<span class="ident">into</span>().<span class="ident">into</span>(), <span class="ident">source_format</span>.<span class="ident">into</span>().<span class="ident">into</span>(), <span class="ident">target_format</span>.<span class="ident">into</span>().<span class="ident">into</span>()) })<span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(())
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdevicemultisampletype)\]
-    /// IDirect3D9::CheckDeviceMultiSampleType
-    ///
-    /// Determines if a multisampling technique is available on this device.
-    ///
-    /// ### Returns
-    /// *   [D3DERR::INVALIDCALL]   if `adapter` &gt;= `self.get_adapter_count()`
-    /// *   [D3DERR::NOTAVAILABLE]  on invalid surface formats, unless `D3DMULTISAMPLE_NONE`
-    /// *   `Ok(quality_levels)`    if the multisampling type is valid for the given format
-    ///
-    /// ### Example
-    /// ```rust
-    /// # use dev::d3d9::*; let d3d = d3d_test();
-    /// assert!(d3d.check_device_multi_sample_type(
-    ///     D3DADAPTER_DEFAULT,
-    ///     DevType::HAL,
-    ///     Format::A8R8G8B8,
-    ///     true,
-    ///     MultiSample::None,
-    /// ).is_ok());
-    /// ```
-    </span><span class="kw">fn </span>check_device_multi_sample_type(<span class="kw-2">&amp;</span><span class="self">self</span>, adapter: AdapterIndex, device_type: <span class="kw">impl </span>Into&lt;DevType&gt;, surface_format: <span class="kw">impl </span>Into&lt;Format&gt;, windowed: bool, multi_sample_type: <span class="kw">impl </span>Into&lt;MultiSample&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;u32, Error&gt; {
-        <span class="macro">fn_context!</span>(d3d9::IDirect3D9Ext::check_device_multi_sample_type =&gt; IDirect3D9::CheckDeviceMultiSampleType);
-        <span class="kw">let </span><span class="kw-2">mut </span>quality_levels = <span class="number">0</span>;
-        <span class="macro">fn_check_hr!</span>(<span class="kw">unsafe </span>{ <span class="self">self</span>.as_winapi().CheckDeviceMultiSampleType(adapter, device_type.into().into(), surface_format.into().into(), windowed.into(), multi_sample_type.into().into(), <span class="kw-2">&amp;mut </span>quality_levels) })<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(quality_levels)
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdevicemultisampletype)\]</span>
+    <span class="doccomment">/// IDirect3D9::CheckDeviceMultiSampleType</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Determines if a multisampling technique is available on this device.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Returns</span>
+    <span class="doccomment">/// *   [D3DERR::INVALIDCALL]   if `adapter` &gt;= `self.get_adapter_count()`</span>
+    <span class="doccomment">/// *   [D3DERR::NOTAVAILABLE]  on invalid surface formats, unless `D3DMULTISAMPLE_NONE`</span>
+    <span class="doccomment">/// *   `Ok(quality_levels)`    if the multisampling type is valid for the given format</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Example</span>
+    <span class="doccomment">/// ```rust</span>
+    <span class="doccomment">/// # use dev::d3d9::*; let d3d = d3d_test();</span>
+    <span class="doccomment">/// assert!(d3d.check_device_multi_sample_type(</span>
+    <span class="doccomment">///     D3DADAPTER_DEFAULT,</span>
+    <span class="doccomment">///     DevType::HAL,</span>
+    <span class="doccomment">///     Format::A8R8G8B8,</span>
+    <span class="doccomment">///     true,</span>
+    <span class="doccomment">///     MultiSample::None,</span>
+    <span class="doccomment">/// ).is_ok());</span>
+    <span class="doccomment">/// ```</span>
+    <span class="kw">fn</span> <span class="ident">check_device_multi_sample_type</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">adapter</span>: <span class="ident">AdapterIndex</span>, <span class="ident">device_type</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">DevType</span><span class="op">&gt;</span>, <span class="ident">surface_format</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Format</span><span class="op">&gt;</span>, <span class="ident">windowed</span>: <span class="ident">bool</span>, <span class="ident">multi_sample_type</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">MultiSample</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">u32</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+        <span class="macro">fn_context!</span>(<span class="ident">d3d9::IDirect3D9Ext::check_device_multi_sample_type</span> =&gt; <span class="ident">IDirect3D9::CheckDeviceMultiSampleType</span>);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">quality_levels</span> <span class="op">=</span> <span class="number">0</span>;
+        <span class="macro">fn_check_hr!</span>(<span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="ident">as_winapi</span>().<span class="ident">CheckDeviceMultiSampleType</span>(<span class="ident">adapter</span>, <span class="ident">device_type</span>.<span class="ident">into</span>().<span class="ident">into</span>(), <span class="ident">surface_format</span>.<span class="ident">into</span>().<span class="ident">into</span>(), <span class="ident">windowed</span>.<span class="ident">into</span>(), <span class="ident">multi_sample_type</span>.<span class="ident">into</span>().<span class="ident">into</span>(), <span class="kw-2">&amp;mut</span> <span class="ident">quality_levels</span>) })<span class="question-mark">?</span>;
+        <span class="prelude-val">Ok</span>(<span class="ident">quality_levels</span>)
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdevicetype)\]
-    /// IDirect3D9::CheckDeviceType
-    ///
-    /// Verifies whether a hardware accelerated device type can be used on this adapter.
-    ///
-    /// ### Returns
-    /// *   [D3DERR::INVALIDCALL]   if `adapter` &gt;= `self.get_adapter_count()`
-    /// *   [D3DERR::INVALIDCALL]   if `device_type` is invalid
-    /// *   [D3DERR::NOTAVAILABLE]  if `adapter_format` x `back_buffer_format` x `windowed` is invalid
-    /// *   `Ok(())`                otherwise
-    ///
-    /// ### Example
-    /// ```rust
-    /// # use dev::d3d9::*; let d3d = d3d_test();
-    /// assert!(d3d.check_device_type(
-    ///     D3DADAPTER_DEFAULT, // adapter
-    ///     DevType::HAL,       // device_type
-    ///     Format::X8R8G8B8,   // adapter_format
-    ///     Format::A8R8G8B8,   // back_buffer_format
-    ///     true,               // windowed
-    /// ).is_ok());
-    /// ```
-    </span><span class="kw">fn </span>check_device_type(<span class="kw-2">&amp;</span><span class="self">self</span>, adapter: AdapterIndex, device_type: <span class="kw">impl </span>Into&lt;DevType&gt;, adapter_format: <span class="kw">impl </span>Into&lt;Format&gt;, back_buffer_format: <span class="kw">impl </span>Into&lt;Format&gt;, windowed: bool) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
-        <span class="macro">fn_context!</span>(d3d9::IDirect3D9Ext::check_device_type =&gt; IDirect3D9::CheckDeviceType);
-        <span class="macro">fn_check_hr!</span>(<span class="kw">unsafe </span>{ <span class="self">self</span>.as_winapi().CheckDeviceType(adapter, device_type.into().into(), adapter_format.into().into(), back_buffer_format.into().into(), windowed.into()) })<span class="question-mark">?</span>;
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdevicetype)\]</span>
+    <span class="doccomment">/// IDirect3D9::CheckDeviceType</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Verifies whether a hardware accelerated device type can be used on this adapter.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Returns</span>
+    <span class="doccomment">/// *   [D3DERR::INVALIDCALL]   if `adapter` &gt;= `self.get_adapter_count()`</span>
+    <span class="doccomment">/// *   [D3DERR::INVALIDCALL]   if `device_type` is invalid</span>
+    <span class="doccomment">/// *   [D3DERR::NOTAVAILABLE]  if `adapter_format` x `back_buffer_format` x `windowed` is invalid</span>
+    <span class="doccomment">/// *   `Ok(())`                otherwise</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Example</span>
+    <span class="doccomment">/// ```rust</span>
+    <span class="doccomment">/// # use dev::d3d9::*; let d3d = d3d_test();</span>
+    <span class="doccomment">/// assert!(d3d.check_device_type(</span>
+    <span class="doccomment">///     D3DADAPTER_DEFAULT, // adapter</span>
+    <span class="doccomment">///     DevType::HAL,       // device_type</span>
+    <span class="doccomment">///     Format::X8R8G8B8,   // adapter_format</span>
+    <span class="doccomment">///     Format::A8R8G8B8,   // back_buffer_format</span>
+    <span class="doccomment">///     true,               // windowed</span>
+    <span class="doccomment">/// ).is_ok());</span>
+    <span class="doccomment">/// ```</span>
+    <span class="kw">fn</span> <span class="ident">check_device_type</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">adapter</span>: <span class="ident">AdapterIndex</span>, <span class="ident">device_type</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">DevType</span><span class="op">&gt;</span>, <span class="ident">adapter_format</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Format</span><span class="op">&gt;</span>, <span class="ident">back_buffer_format</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Format</span><span class="op">&gt;</span>, <span class="ident">windowed</span>: <span class="ident">bool</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
+        <span class="macro">fn_context!</span>(<span class="ident">d3d9::IDirect3D9Ext::check_device_type</span> =&gt; <span class="ident">IDirect3D9::CheckDeviceType</span>);
+        <span class="macro">fn_check_hr!</span>(<span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="ident">as_winapi</span>().<span class="ident">CheckDeviceType</span>(<span class="ident">adapter</span>, <span class="ident">device_type</span>.<span class="ident">into</span>().<span class="ident">into</span>(), <span class="ident">adapter_format</span>.<span class="ident">into</span>().<span class="ident">into</span>(), <span class="ident">back_buffer_format</span>.<span class="ident">into</span>().<span class="ident">into</span>(), <span class="ident">windowed</span>.<span class="ident">into</span>()) })<span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(())
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-createdevice)\]
-    /// IDirect3D9::CreateDevice
-    ///
-    /// Creates a [Device].
-    ///
-    /// ### ⚠️ Safety ⚠️
-    /// *   The caller&#39;s codebase is responsible for ensuring any [HWND]s outlive the [Device].
-    ///     This is effectively impossible to enforce at compile time.
-    ///     Windows can typically destroy themselves without warning at any time.
-    ///     Middleware can acquire [Device]s and hold onto them indefinitely with static data.
-    ///     Graphics debuggers can acquire and leak [Device]s as well.
-    ///
-    ///     Instead, I recommend catching this at runtime.  You can check a [Device]&#39;s refcount when freeing it from
-    ///     within [WM_DESTROY], and explicitly exploding if it wasn&#39;t the last reference.  &quot;Explicitly exploding&quot; might include:
-    ///     *   Printing diagnostics
-    ///     *   [Triggering breakpoints](https://docs.rs/winapi/0.3/winapi/um/debugapi/fn.DebugBreak.html)
-    ///     *   [Terminating the Process](https://docs.rs/winapi/0.3/winapi/um/errhandlingapi/fn.RaiseFailFastException.html)
-    ///         (panics may be caught / cross WndProc ABI boundaries, and are insufficient for soundness!)
-    ///
-    ///     This will make device lifetime bugs obvious and shallow even in the face of non-rust code, *and* avoids
-    ///     time sinks like self borrowing structs that come about if you attempt to abuse the borrow checker to
-    ///     &quot;enforce&quot; safety.
-    ///
-    /// *   ???
-    ///
-    /// ### Example
-    /// ```rust
-    /// # use dev::d3d9::*; let d3d = d3d_test();
-    /// let device = unsafe { d3d.create_device(
-    ///     D3DADAPTER_DEFAULT,     // adapter
-    ///     DevType::HAL,           // device_type
-    ///     None,                   // focus_window
-    ///     Create::FpuPreserve,    // behavior_flags
-    ///     &amp;mut PresentParameters {
-    ///         // In/Out paramters - if these are 0 before the method create_device
-    ///         // is called, they will be changed when create_device returns
-    ///         back_buffer_width:              0,
-    ///         back_buffer_height:             0,
-    ///         back_buffer_count:              0,
-    ///
-    ///         // In/Out - if this equals Format::Unknown, it will be changed when
-    ///         // create_device returns
-    ///         back_buffer_format:             Format::X8R8G8B8,
-    ///
-    ///         // In parameters
-    ///         multi_sample_type:              MultiSample::None,
-    ///         multi_sample_quality:           0,
-    ///         swap_effect:                    SwapEffect::Discard,
-    ///         device_window:                  None,
-    ///         windowed:                       true.into(),
-    ///         enable_auto_depth_stencil:      false.into(),
-    ///         auto_depth_stencil_format:      Format::Unknown,
-    ///         flags:                          PresentFlag::none(),
-    ///         full_screen_refresh_rate_in_hz: 0,
-    ///         presentation_interval:          Present::zeroed(),
-    ///     }
-    /// )};
-    /// let _device = device; // XXX
-    /// ```
-    ///
-    /// [WM_DESTROY]:           https://docs.microsoft.com/en-us/windows/win32/winmsg/wm-destroy
-    </span><span class="kw">unsafe fn </span>create_device(<span class="kw-2">&amp;</span><span class="self">self</span>, adapter: AdapterIndex, device_type: <span class="kw">impl </span>Into&lt;DevType&gt;, focus_window: <span class="kw">impl </span>AsHWND, behavior_flags: <span class="kw">impl </span>Into&lt;Create&gt;, present_parameters: <span class="kw-2">&amp;mut </span>PresentParameters&lt;<span class="lifetime">&#39;static</span>&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;Device, Error&gt; {
-        <span class="macro">fn_context!</span>(d3d9::IDirect3D9Ext::create_device =&gt; IDirect3D9::CreateDevice);
-        <span class="comment">// TODO: better doc comments
-        </span><span class="kw">let </span><span class="kw-2">mut </span>device = null_mut();
-        <span class="macro">fn_check_hr!</span>(<span class="kw">unsafe </span>{ <span class="self">self</span>.as_winapi().CreateDevice(adapter, device_type.into().into(), focus_window.as_hwnd(), behavior_flags.into().into(), present_parameters.as_mut(), <span class="kw-2">&amp;mut </span>device) })<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(<span class="kw">unsafe </span>{ Device::from_raw(device) })
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-createdevice)\]</span>
+    <span class="doccomment">/// IDirect3D9::CreateDevice</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Creates a [Device].</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### ⚠️ Safety ⚠️</span>
+    <span class="doccomment">/// *   The caller&#39;s codebase is responsible for ensuring any [HWND]s outlive the [Device].</span>
+    <span class="doccomment">///     This is effectively impossible to enforce at compile time.</span>
+    <span class="doccomment">///     Windows can typically destroy themselves without warning at any time.</span>
+    <span class="doccomment">///     Middleware can acquire [Device]s and hold onto them indefinitely with static data.</span>
+    <span class="doccomment">///     Graphics debuggers can acquire and leak [Device]s as well.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">///     Instead, I recommend catching this at runtime.  You can check a [Device]&#39;s refcount when freeing it from</span>
+    <span class="doccomment">///     within [WM_DESTROY], and explicitly exploding if it wasn&#39;t the last reference.  &quot;Explicitly exploding&quot; might include:</span>
+    <span class="doccomment">///     *   Printing diagnostics</span>
+    <span class="doccomment">///     *   [Triggering breakpoints](https://docs.rs/winapi/0.3/winapi/um/debugapi/fn.DebugBreak.html)</span>
+    <span class="doccomment">///     *   [Terminating the Process](https://docs.rs/winapi/0.3/winapi/um/errhandlingapi/fn.RaiseFailFastException.html)</span>
+    <span class="doccomment">///         (panics may be caught / cross WndProc ABI boundaries, and are insufficient for soundness!)</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">///     This will make device lifetime bugs obvious and shallow even in the face of non-rust code, *and* avoids</span>
+    <span class="doccomment">///     time sinks like self borrowing structs that come about if you attempt to abuse the borrow checker to</span>
+    <span class="doccomment">///     &quot;enforce&quot; safety.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// *   ???</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Example</span>
+    <span class="doccomment">/// ```rust</span>
+    <span class="doccomment">/// # use dev::d3d9::*; let d3d = d3d_test();</span>
+    <span class="doccomment">/// let device = unsafe { d3d.create_device(</span>
+    <span class="doccomment">///     D3DADAPTER_DEFAULT,     // adapter</span>
+    <span class="doccomment">///     DevType::HAL,           // device_type</span>
+    <span class="doccomment">///     None,                   // focus_window</span>
+    <span class="doccomment">///     Create::FpuPreserve,    // behavior_flags</span>
+    <span class="doccomment">///     &amp;mut PresentParameters {</span>
+    <span class="doccomment">///         // In/Out paramters - if these are 0 before the method create_device</span>
+    <span class="doccomment">///         // is called, they will be changed when create_device returns</span>
+    <span class="doccomment">///         back_buffer_width:              0,</span>
+    <span class="doccomment">///         back_buffer_height:             0,</span>
+    <span class="doccomment">///         back_buffer_count:              0,</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">///         // In/Out - if this equals Format::Unknown, it will be changed when</span>
+    <span class="doccomment">///         // create_device returns</span>
+    <span class="doccomment">///         back_buffer_format:             Format::X8R8G8B8,</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">///         // In parameters</span>
+    <span class="doccomment">///         multi_sample_type:              MultiSample::None,</span>
+    <span class="doccomment">///         multi_sample_quality:           0,</span>
+    <span class="doccomment">///         swap_effect:                    SwapEffect::Discard,</span>
+    <span class="doccomment">///         device_window:                  None,</span>
+    <span class="doccomment">///         windowed:                       true.into(),</span>
+    <span class="doccomment">///         enable_auto_depth_stencil:      false.into(),</span>
+    <span class="doccomment">///         auto_depth_stencil_format:      Format::Unknown,</span>
+    <span class="doccomment">///         flags:                          PresentFlag::none(),</span>
+    <span class="doccomment">///         full_screen_refresh_rate_in_hz: 0,</span>
+    <span class="doccomment">///         presentation_interval:          Present::zeroed(),</span>
+    <span class="doccomment">///     }</span>
+    <span class="doccomment">/// )};</span>
+    <span class="doccomment">/// let _device = device; // XXX</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// [WM_DESTROY]:           https://docs.microsoft.com/en-us/windows/win32/winmsg/wm-destroy</span>
+    <span class="kw unsafe">unsafe</span> <span class="kw">fn</span> <span class="ident">create_device</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">adapter</span>: <span class="ident">AdapterIndex</span>, <span class="ident">device_type</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">DevType</span><span class="op">&gt;</span>, <span class="ident">focus_window</span>: <span class="kw">impl</span> <span class="ident">AsHWND</span>, <span class="ident">behavior_flags</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Create</span><span class="op">&gt;</span>, <span class="ident">present_parameters</span>: <span class="kw-2">&amp;mut</span> <span class="ident">PresentParameters</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Device</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+        <span class="macro">fn_context!</span>(<span class="ident">d3d9::IDirect3D9Ext::create_device</span> =&gt; <span class="ident">IDirect3D9::CreateDevice</span>);
+        <span class="comment">// TODO: better doc comments</span>
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">device</span> <span class="op">=</span> <span class="ident">null_mut</span>();
+        <span class="macro">fn_check_hr!</span>(<span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="ident">as_winapi</span>().<span class="ident">CreateDevice</span>(<span class="ident">adapter</span>, <span class="ident">device_type</span>.<span class="ident">into</span>().<span class="ident">into</span>(), <span class="ident">focus_window</span>.<span class="ident">as_hwnd</span>(), <span class="ident">behavior_flags</span>.<span class="ident">into</span>().<span class="ident">into</span>(), <span class="ident">present_parameters</span>.<span class="ident">as_mut</span>(), <span class="kw-2">&amp;mut</span> <span class="ident">device</span>) })<span class="question-mark">?</span>;
+        <span class="prelude-val">Ok</span>(<span class="kw unsafe">unsafe</span> { <span class="ident">Device::from_raw</span>(<span class="ident">device</span>) })
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-enumadaptermodes)\] IDirect3D9::EnumAdapterModes
-    ///
-    /// Queries the possible display modes of an adapter (~ connected monitor)
-    ///
-    /// ### Returns
-    /// *   [D3DERR::INVALIDCALL]       if `adapter` &gt;= `self.get_adapter_count()`
-    /// *   [D3DERR::INVALIDCALL]       if `mode` &gt;= `self.get_adapter_mode_count(adapter, format)`
-    /// *   Ok([DisplayMode])           otherwise
-    ///
-    /// ### Example
-    /// ```rust
-    /// # use dev::d3d9::*; let d3d = d3d_test();
-    /// let adapter = 0;
-    /// let fmt = Format::X8R8G8B8;
-    /// for mode in 0..d3d.get_adapter_mode_count(adapter, fmt) {
-    ///     let mode = d3d.enum_adapter_modes(adapter, fmt, mode).unwrap();
-    ///     let DisplayMode { width, height, refresh_rate, format } = mode;
-    ///     println!(&quot;{}x{} @ {}hz {:?}&quot;, width, height, refresh_rate, format);
-    /// }
-    /// ```
-    ///
-    /// ### Output
-    /// ```text
-    /// 480x640 @ 59hz Format(D3DFMT_X8R8G8B8)
-    /// 480x640 @ 60hz Format(D3DFMT_X8R8G8B8)
-    /// 480x640 @ 67hz Format(D3DFMT_X8R8G8B8)
-    /// 480x640 @ 72hz Format(D3DFMT_X8R8G8B8)
-    /// 480x640 @ 75hz Format(D3DFMT_X8R8G8B8)
-    /// ...
-    /// 2160x3840 @ 30hz Format(D3DFMT_X8R8G8B8)
-    /// 2160x3840 @ 60hz Format(D3DFMT_X8R8G8B8)
-    /// ```
-    </span><span class="kw">fn </span>enum_adapter_modes(<span class="kw-2">&amp;</span><span class="self">self</span>, adapter: AdapterIndex, format: <span class="kw">impl </span>Into&lt;Format&gt;, mode: ModeIndex) -&gt; <span class="prelude-ty">Result</span>&lt;DisplayMode, Error&gt; {
-        <span class="macro">fn_context!</span>(d3d9::IDirect3D9Ext::enum_adapter_modes =&gt; IDirect3D9::EnumAdapterModes);
-        <span class="kw">let </span><span class="kw-2">mut </span>dm = DisplayMode::zeroed();
-        <span class="macro">fn_check_hr!</span>(<span class="kw">unsafe </span>{ <span class="self">self</span>.as_winapi().EnumAdapterModes(adapter, format.into().into(), mode, <span class="kw-2">&amp;mut *</span>dm) })<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(dm)
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-enumadaptermodes)\] IDirect3D9::EnumAdapterModes</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Queries the possible display modes of an adapter (~ connected monitor)</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Returns</span>
+    <span class="doccomment">/// *   [D3DERR::INVALIDCALL]       if `adapter` &gt;= `self.get_adapter_count()`</span>
+    <span class="doccomment">/// *   [D3DERR::INVALIDCALL]       if `mode` &gt;= `self.get_adapter_mode_count(adapter, format)`</span>
+    <span class="doccomment">/// *   Ok([DisplayMode])           otherwise</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Example</span>
+    <span class="doccomment">/// ```rust</span>
+    <span class="doccomment">/// # use dev::d3d9::*; let d3d = d3d_test();</span>
+    <span class="doccomment">/// let adapter = 0;</span>
+    <span class="doccomment">/// let fmt = Format::X8R8G8B8;</span>
+    <span class="doccomment">/// for mode in 0..d3d.get_adapter_mode_count(adapter, fmt) {</span>
+    <span class="doccomment">///     let mode = d3d.enum_adapter_modes(adapter, fmt, mode).unwrap();</span>
+    <span class="doccomment">///     let DisplayMode { width, height, refresh_rate, format } = mode;</span>
+    <span class="doccomment">///     println!(&quot;{}x{} @ {}hz {:?}&quot;, width, height, refresh_rate, format);</span>
+    <span class="doccomment">/// }</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Output</span>
+    <span class="doccomment">/// ```text</span>
+    <span class="doccomment">/// 480x640 @ 59hz Format(D3DFMT_X8R8G8B8)</span>
+    <span class="doccomment">/// 480x640 @ 60hz Format(D3DFMT_X8R8G8B8)</span>
+    <span class="doccomment">/// 480x640 @ 67hz Format(D3DFMT_X8R8G8B8)</span>
+    <span class="doccomment">/// 480x640 @ 72hz Format(D3DFMT_X8R8G8B8)</span>
+    <span class="doccomment">/// 480x640 @ 75hz Format(D3DFMT_X8R8G8B8)</span>
+    <span class="doccomment">/// ...</span>
+    <span class="doccomment">/// 2160x3840 @ 30hz Format(D3DFMT_X8R8G8B8)</span>
+    <span class="doccomment">/// 2160x3840 @ 60hz Format(D3DFMT_X8R8G8B8)</span>
+    <span class="doccomment">/// ```</span>
+    <span class="kw">fn</span> <span class="ident">enum_adapter_modes</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">adapter</span>: <span class="ident">AdapterIndex</span>, <span class="ident">format</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Format</span><span class="op">&gt;</span>, <span class="ident">mode</span>: <span class="ident">ModeIndex</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">DisplayMode</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+        <span class="macro">fn_context!</span>(<span class="ident">d3d9::IDirect3D9Ext::enum_adapter_modes</span> =&gt; <span class="ident">IDirect3D9::EnumAdapterModes</span>);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">dm</span> <span class="op">=</span> <span class="ident">DisplayMode::zeroed</span>();
+        <span class="macro">fn_check_hr!</span>(<span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="ident">as_winapi</span>().<span class="ident">EnumAdapterModes</span>(<span class="ident">adapter</span>, <span class="ident">format</span>.<span class="ident">into</span>().<span class="ident">into</span>(), <span class="ident">mode</span>, <span class="kw-2">&amp;mut</span> <span class="kw-2">*</span><span class="ident">dm</span>) })<span class="question-mark">?</span>;
+        <span class="prelude-val">Ok</span>(<span class="ident">dm</span>)
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadaptercount)\] IDirect3D9::GetAdapterCount
-    ///
-    /// Gets the number of adapters (~ connected monitors) available to this device.
-    ///
-    /// ### Example
-    /// ```rust
-    /// # use dev::d3d9::*; let d3d = d3d_test();
-    /// println!(&quot;{} adapters&quot;, d3d.get_adapter_count());
-    /// ```
-    ///
-    /// ### Output
-    /// ```text
-    /// 4 adapters
-    /// ```
-    </span><span class="kw">fn </span>get_adapter_count(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; AdapterIndex {
-        <span class="macro">fn_context!</span>(d3d9::IDirect3D9Ext::get_adapter_count =&gt; IDirect3D9::GetAdapterCount);
-        <span class="kw">unsafe </span>{ <span class="self">self</span>.as_winapi().GetAdapterCount() } <span class="comment">// Safety:  Seems 100% safe per unit testing bellow
-    </span>}
-
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadapterdisplaymode)\] IDirect3D9::GetAdapterDisplayMode
-    ///
-    /// Gets the current display mode of an adapter (~ connected monitor)
-    ///
-    /// ### Example
-    /// ```rust
-    /// # use dev::d3d9::*; let d3d = d3d_test();
-    /// for adapter in 0..d3d.get_adapter_count() {
-    ///     let mode = d3d.get_adapter_display_mode(adapter).unwrap();
-    ///     let DisplayMode { width, height, refresh_rate, format } = mode;
-    ///     println!(&quot;{}x{} @ {}hz {:?}&quot;, width, height, refresh_rate, format);
-    /// }
-    /// ```
-    ///
-    /// ### Output
-    /// ```text
-    /// 2160x3840 @ 60hz Format(D3DFMT_X8R8G8B8)
-    /// 2160x3840 @ 60hz Format(D3DFMT_X8R8G8B8)
-    /// 2160x3840 @ 29hz Format(D3DFMT_X8R8G8B8)
-    /// 2160x3840 @ 29hz Format(D3DFMT_X8R8G8B8)
-    /// ```
-    </span><span class="kw">fn </span>get_adapter_display_mode(<span class="kw-2">&amp;</span><span class="self">self</span>, adapter: AdapterIndex) -&gt; <span class="prelude-ty">Result</span>&lt;DisplayMode, Error&gt; {
-        <span class="macro">fn_context!</span>(d3d9::IDirect3D9Ext::get_adapter_display_mode =&gt; IDirect3D9::GetAdapterDisplayMode);
-        <span class="kw">let </span><span class="kw-2">mut </span>dm = DisplayMode::zeroed();
-        <span class="macro">fn_check_hr!</span>(<span class="kw">unsafe </span>{ <span class="self">self</span>.as_winapi().GetAdapterDisplayMode(adapter, <span class="kw-2">&amp;mut *</span>dm) })<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(dm)
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadaptercount)\] IDirect3D9::GetAdapterCount</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Gets the number of adapters (~ connected monitors) available to this device.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Example</span>
+    <span class="doccomment">/// ```rust</span>
+    <span class="doccomment">/// # use dev::d3d9::*; let d3d = d3d_test();</span>
+    <span class="doccomment">/// println!(&quot;{} adapters&quot;, d3d.get_adapter_count());</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Output</span>
+    <span class="doccomment">/// ```text</span>
+    <span class="doccomment">/// 4 adapters</span>
+    <span class="doccomment">/// ```</span>
+    <span class="kw">fn</span> <span class="ident">get_adapter_count</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">AdapterIndex</span> {
+        <span class="macro">fn_context!</span>(<span class="ident">d3d9::IDirect3D9Ext::get_adapter_count</span> =&gt; <span class="ident">IDirect3D9::GetAdapterCount</span>);
+        <span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="ident">as_winapi</span>().<span class="ident">GetAdapterCount</span>() } <span class="comment">// Safety:  Seems 100% safe per unit testing bellow</span>
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadapteridentifier)\] IDirect3D9::GetAdapterIdentifier
-    ///
-    /// Gets metadata about an adapter (~ connected monitor), including driver name/version/guids/whql info/vendor/device ids/blood type/birthplace/???
-    ///
-    /// ### Returns
-    /// *   [D3DERR::INVALIDCALL]       if `adapter` &gt;= `self.get_adapter_count()`
-    /// *   [D3DERR::INVALIDCALL]       if `flags` isn&#39;t valid (0, D3DENUM_WHQL_LEVEL, ...)
-    /// *   Ok([AdapterIdentifier])     otherwise
-    ///
-    /// ### Example
-    /// ```rust
-    /// # use dev::d3d9::*; let d3d = d3d_test();
-    /// eprintln!(&quot;{:#?}&quot;, d3d.get_adapter_identifier(0, 0).unwrap());
-    /// ```
-    ///
-    /// ### Output
-    /// ```text
-    /// AdapterIdentifier {
-    ///     Driver: &quot;aticfx64.dll&quot;,
-    ///     Description: &quot;Radeon RX Vega M GL Graphics&quot;,
-    ///     DeviceName: &quot;\\\\.\\DISPLAY1&quot;,
-    ///     DriverVersion: 0x1800142B1207D1,
-    ///     VendorId: 0x1002,
-    ///     DeviceId: 0x694E,
-    ///     SubSysId: 0x20738086,
-    ///     Revision: 0x000000C0,
-    ///     DeviceIdentifier: &quot;{...}&quot;,
-    ///     WHQLLevel: 0,
-    /// }
-    /// ```
-    </span><span class="kw">fn </span>get_adapter_identifier(<span class="kw-2">&amp;</span><span class="self">self</span>, adapter: AdapterIndex, flags: u32) -&gt; <span class="prelude-ty">Result</span>&lt;AdapterIdentifier, Error&gt; {
-        <span class="macro">fn_context!</span>(d3d9::IDirect3D9Ext::get_adapter_identifier =&gt; IDirect3D9::GetAdapterIdentifier);
-        <span class="kw">let </span><span class="kw-2">mut </span>ident = AdapterIdentifier::default();
-        <span class="macro">fn_check_hr!</span>(<span class="kw">unsafe </span>{ <span class="self">self</span>.as_winapi().GetAdapterIdentifier(adapter, flags, <span class="kw-2">&amp;mut *</span>ident) })<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(ident)
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadapterdisplaymode)\] IDirect3D9::GetAdapterDisplayMode</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Gets the current display mode of an adapter (~ connected monitor)</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Example</span>
+    <span class="doccomment">/// ```rust</span>
+    <span class="doccomment">/// # use dev::d3d9::*; let d3d = d3d_test();</span>
+    <span class="doccomment">/// for adapter in 0..d3d.get_adapter_count() {</span>
+    <span class="doccomment">///     let mode = d3d.get_adapter_display_mode(adapter).unwrap();</span>
+    <span class="doccomment">///     let DisplayMode { width, height, refresh_rate, format } = mode;</span>
+    <span class="doccomment">///     println!(&quot;{}x{} @ {}hz {:?}&quot;, width, height, refresh_rate, format);</span>
+    <span class="doccomment">/// }</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Output</span>
+    <span class="doccomment">/// ```text</span>
+    <span class="doccomment">/// 2160x3840 @ 60hz Format(D3DFMT_X8R8G8B8)</span>
+    <span class="doccomment">/// 2160x3840 @ 60hz Format(D3DFMT_X8R8G8B8)</span>
+    <span class="doccomment">/// 2160x3840 @ 29hz Format(D3DFMT_X8R8G8B8)</span>
+    <span class="doccomment">/// 2160x3840 @ 29hz Format(D3DFMT_X8R8G8B8)</span>
+    <span class="doccomment">/// ```</span>
+    <span class="kw">fn</span> <span class="ident">get_adapter_display_mode</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">adapter</span>: <span class="ident">AdapterIndex</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">DisplayMode</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+        <span class="macro">fn_context!</span>(<span class="ident">d3d9::IDirect3D9Ext::get_adapter_display_mode</span> =&gt; <span class="ident">IDirect3D9::GetAdapterDisplayMode</span>);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">dm</span> <span class="op">=</span> <span class="ident">DisplayMode::zeroed</span>();
+        <span class="macro">fn_check_hr!</span>(<span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="ident">as_winapi</span>().<span class="ident">GetAdapterDisplayMode</span>(<span class="ident">adapter</span>, <span class="kw-2">&amp;mut</span> <span class="kw-2">*</span><span class="ident">dm</span>) })<span class="question-mark">?</span>;
+        <span class="prelude-val">Ok</span>(<span class="ident">dm</span>)
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadaptermodecount)\] IDirect3D9::GetAdapterModeCount
-    ///
-    /// Get the number of display modes this adapter/monitor supports.
-    ///
-    /// ### Arguments
-    /// *   `adapter`   - the adapter/monitor to query modes for
-    /// *   `format`    - the adapter format to query modes for.  `Format::X8R8G8B8` likely works, many other formats likely don&#39;t.
-    ///
-    /// ### Returns
-    /// *   `0`         if `adapter` &gt;= `self.get_adapter_count()`
-    /// *   `0`         if `format` is an invalid format
-    /// *   `0`         if `format` is an unsupported format
-    /// *   `n`         modes you can query [enum_adapter_modes] for
-    ///
-    /// ### Example
-    /// ```rust
-    /// # use dev::d3d9::*; let d3d = d3d_test();
-    /// for fmt in [Format::X8R8G8B8, Format::A8R8G8B8].iter().copied() {
-    ///     let modes = d3d.get_adapter_mode_count(0, fmt);
-    ///     println!(&quot;adapter 1: {:?}: {} mode(s)&quot;, fmt, modes);
-    /// }
-    /// ```
-    ///
-    /// ### Output
-    /// ```text
-    /// adapter 1: Format(D3DFMT_X8R8G8B8): 44 mode(s)
-    /// adapter 1: Format(D3DFMT_A8R8G8B8): 0 mode(s)
-    /// ```
-    ///
-    /// ### See Also
-    /// *   [enum_adapter_modes]
-    ///
-    /// [enum_adapter_modes]:       #method.enum_adapter_modes
-    </span><span class="kw">fn </span>get_adapter_mode_count(<span class="kw-2">&amp;</span><span class="self">self</span>, adapter: AdapterIndex, format: <span class="kw">impl </span>Into&lt;Format&gt;) -&gt; ModeIndex {
-        <span class="macro">fn_context!</span>(d3d9::IDirect3D9Ext::get_adapter_mode_count =&gt; IDirect3D9::GetAdapterModeCount);
-        <span class="kw">unsafe </span>{ <span class="self">self</span>.as_winapi().GetAdapterModeCount(adapter, format.into().into()) }
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadapteridentifier)\] IDirect3D9::GetAdapterIdentifier</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Gets metadata about an adapter (~ connected monitor), including driver name/version/guids/whql info/vendor/device ids/blood type/birthplace/???</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Returns</span>
+    <span class="doccomment">/// *   [D3DERR::INVALIDCALL]       if `adapter` &gt;= `self.get_adapter_count()`</span>
+    <span class="doccomment">/// *   [D3DERR::INVALIDCALL]       if `flags` isn&#39;t valid (0, D3DENUM_WHQL_LEVEL, ...)</span>
+    <span class="doccomment">/// *   Ok([AdapterIdentifier])     otherwise</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Example</span>
+    <span class="doccomment">/// ```rust</span>
+    <span class="doccomment">/// # use dev::d3d9::*; let d3d = d3d_test();</span>
+    <span class="doccomment">/// eprintln!(&quot;{:#?}&quot;, d3d.get_adapter_identifier(0, 0).unwrap());</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Output</span>
+    <span class="doccomment">/// ```text</span>
+    <span class="doccomment">/// AdapterIdentifier {</span>
+    <span class="doccomment">///     Driver: &quot;aticfx64.dll&quot;,</span>
+    <span class="doccomment">///     Description: &quot;Radeon RX Vega M GL Graphics&quot;,</span>
+    <span class="doccomment">///     DeviceName: &quot;\\\\.\\DISPLAY1&quot;,</span>
+    <span class="doccomment">///     DriverVersion: 0x1800142B1207D1,</span>
+    <span class="doccomment">///     VendorId: 0x1002,</span>
+    <span class="doccomment">///     DeviceId: 0x694E,</span>
+    <span class="doccomment">///     SubSysId: 0x20738086,</span>
+    <span class="doccomment">///     Revision: 0x000000C0,</span>
+    <span class="doccomment">///     DeviceIdentifier: &quot;{...}&quot;,</span>
+    <span class="doccomment">///     WHQLLevel: 0,</span>
+    <span class="doccomment">/// }</span>
+    <span class="doccomment">/// ```</span>
+    <span class="kw">fn</span> <span class="ident">get_adapter_identifier</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">adapter</span>: <span class="ident">AdapterIndex</span>, <span class="ident">flags</span>: <span class="ident">u32</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">AdapterIdentifier</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+        <span class="macro">fn_context!</span>(<span class="ident">d3d9::IDirect3D9Ext::get_adapter_identifier</span> =&gt; <span class="ident">IDirect3D9::GetAdapterIdentifier</span>);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ident</span> <span class="op">=</span> <span class="ident">AdapterIdentifier::default</span>();
+        <span class="macro">fn_check_hr!</span>(<span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="ident">as_winapi</span>().<span class="ident">GetAdapterIdentifier</span>(<span class="ident">adapter</span>, <span class="ident">flags</span>, <span class="kw-2">&amp;mut</span> <span class="kw-2">*</span><span class="ident">ident</span>) })<span class="question-mark">?</span>;
+        <span class="prelude-val">Ok</span>(<span class="ident">ident</span>)
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadaptermonitor)\] IDirect3D9::GetAdapterMonitor
-    ///
-    /// ### Returns
-    /// *   [THINERR::NONSPECIFIC]  on an invalid `adapter`
-    /// *   [THINERR::NONSPECIFIC]  if no monitor is connected to `adapter`?
-    /// *   Ok([HMONITOR])          otherwise
-    ///
-    /// ### Example
-    /// ```rust
-    /// # use dev::d3d9::*; let d3d = d3d_test();
-    /// let monitor : HMONITOR  = d3d.get_adapter_monitor(   0).unwrap();
-    /// let error               = d3d.get_adapter_monitor(9001).unwrap_err();
-    /// ```
-    </span><span class="kw">fn </span>get_adapter_monitor(<span class="kw-2">&amp;</span><span class="self">self</span>, adapter: AdapterIndex) -&gt; <span class="prelude-ty">Result</span>&lt;HMONITOR, Error&gt; {
-        <span class="macro">fn_context!</span>(d3d9::IDirect3D9Ext::get_adapter_monitor =&gt; IDirect3D9::GetAdapterMonitor);
-        <span class="kw">let </span>hm = <span class="kw">unsafe </span>{ <span class="self">self</span>.as_winapi().GetAdapterMonitor(adapter) }; <span class="comment">// Safety: Seems to be safe even when `adapter` &gt;= `self.get_adapter_count()` per unit test bellow
-        </span><span class="kw">if </span>hm.is_null() { <span class="prelude-val">Err</span>(<span class="macro">fn_error!</span>(THINERR::NONSPECIFIC)) } <span class="kw">else </span>{ <span class="prelude-val">Ok</span>(hm) }
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadaptermodecount)\] IDirect3D9::GetAdapterModeCount</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Get the number of display modes this adapter/monitor supports.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Arguments</span>
+    <span class="doccomment">/// *   `adapter`   - the adapter/monitor to query modes for</span>
+    <span class="doccomment">/// *   `format`    - the adapter format to query modes for.  `Format::X8R8G8B8` likely works, many other formats likely don&#39;t.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Returns</span>
+    <span class="doccomment">/// *   `0`         if `adapter` &gt;= `self.get_adapter_count()`</span>
+    <span class="doccomment">/// *   `0`         if `format` is an invalid format</span>
+    <span class="doccomment">/// *   `0`         if `format` is an unsupported format</span>
+    <span class="doccomment">/// *   `n`         modes you can query [enum_adapter_modes] for</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Example</span>
+    <span class="doccomment">/// ```rust</span>
+    <span class="doccomment">/// # use dev::d3d9::*; let d3d = d3d_test();</span>
+    <span class="doccomment">/// for fmt in [Format::X8R8G8B8, Format::A8R8G8B8].iter().copied() {</span>
+    <span class="doccomment">///     let modes = d3d.get_adapter_mode_count(0, fmt);</span>
+    <span class="doccomment">///     println!(&quot;adapter 1: {:?}: {} mode(s)&quot;, fmt, modes);</span>
+    <span class="doccomment">/// }</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Output</span>
+    <span class="doccomment">/// ```text</span>
+    <span class="doccomment">/// adapter 1: Format(D3DFMT_X8R8G8B8): 44 mode(s)</span>
+    <span class="doccomment">/// adapter 1: Format(D3DFMT_A8R8G8B8): 0 mode(s)</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### See Also</span>
+    <span class="doccomment">/// *   [enum_adapter_modes]</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// [enum_adapter_modes]:       #method.enum_adapter_modes</span>
+    <span class="kw">fn</span> <span class="ident">get_adapter_mode_count</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">adapter</span>: <span class="ident">AdapterIndex</span>, <span class="ident">format</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Format</span><span class="op">&gt;</span>) -&gt; <span class="ident">ModeIndex</span> {
+        <span class="macro">fn_context!</span>(<span class="ident">d3d9::IDirect3D9Ext::get_adapter_mode_count</span> =&gt; <span class="ident">IDirect3D9::GetAdapterModeCount</span>);
+        <span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="ident">as_winapi</span>().<span class="ident">GetAdapterModeCount</span>(<span class="ident">adapter</span>, <span class="ident">format</span>.<span class="ident">into</span>().<span class="ident">into</span>()) }
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getdevicecaps)\] IDirect3D9::GetDeviceCaps
-    ///
-    /// ### Returns
-    /// *   [D3DERR::INVALIDCALL]       on an invalid `adapter`
-    /// *   [D3DERR::INVALIDDEVICE]     on an invalid `device_type`
-    /// *   Ok([Caps])                  otherwise
-    ///
-    /// ### Example
-    /// ```rust
-    /// # use dev::d3d9::*; let d3d = d3d_test();
-    /// let caps : Caps = d3d.get_device_caps(0, DevType::HAL).unwrap();
-    /// assert_eq!(caps.device_type,        DevType::HAL);
-    /// assert_eq!(caps.adapter_ordinal,    0);
-    /// assert!(caps.max_texture_width    &gt; 0);
-    /// assert!(caps.max_texture_height   &gt; 0);
-    /// // ...
-    /// ```
-    </span><span class="kw">fn </span>get_device_caps(<span class="kw-2">&amp;</span><span class="self">self</span>, adapter: AdapterIndex, device_type: DevType) -&gt; <span class="prelude-ty">Result</span>&lt;Caps, Error&gt; {
-        <span class="macro">fn_context!</span>(d3d9::IDirect3D9Ext::get_device_caps =&gt; IDirect3D9::GetDeviceCaps);
-        <span class="kw">let </span><span class="kw-2">mut </span>caps = Caps::zeroed();
-        <span class="macro">fn_check_hr!</span>(<span class="kw">unsafe </span>{ <span class="self">self</span>.as_winapi().GetDeviceCaps(adapter, device_type.into(), <span class="kw-2">&amp;mut *</span>caps) })<span class="question-mark">?</span>; <span class="comment">// Safety: Appears sound on all invalid parameters per unit testing
-        </span><span class="prelude-val">Ok</span>(caps)
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadaptermonitor)\] IDirect3D9::GetAdapterMonitor</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Returns</span>
+    <span class="doccomment">/// *   [THINERR::NONSPECIFIC]  on an invalid `adapter`</span>
+    <span class="doccomment">/// *   [THINERR::NONSPECIFIC]  if no monitor is connected to `adapter`?</span>
+    <span class="doccomment">/// *   Ok([HMONITOR])          otherwise</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Example</span>
+    <span class="doccomment">/// ```rust</span>
+    <span class="doccomment">/// # use dev::d3d9::*; let d3d = d3d_test();</span>
+    <span class="doccomment">/// let monitor : HMONITOR  = d3d.get_adapter_monitor(   0).unwrap();</span>
+    <span class="doccomment">/// let error               = d3d.get_adapter_monitor(9001).unwrap_err();</span>
+    <span class="doccomment">/// ```</span>
+    <span class="kw">fn</span> <span class="ident">get_adapter_monitor</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">adapter</span>: <span class="ident">AdapterIndex</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">HMONITOR</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+        <span class="macro">fn_context!</span>(<span class="ident">d3d9::IDirect3D9Ext::get_adapter_monitor</span> =&gt; <span class="ident">IDirect3D9::GetAdapterMonitor</span>);
+        <span class="kw">let</span> <span class="ident">hm</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="ident">as_winapi</span>().<span class="ident">GetAdapterMonitor</span>(<span class="ident">adapter</span>) }; <span class="comment">// Safety: Seems to be safe even when `adapter` &gt;= `self.get_adapter_count()` per unit test bellow</span>
+        <span class="kw">if</span> <span class="ident">hm</span>.<span class="ident">is_null</span>() { <span class="prelude-val">Err</span>(<span class="macro">fn_error!</span>(<span class="ident">THINERR::NONSPECIFIC</span>)) } <span class="kw">else</span> { <span class="prelude-val">Ok</span>(<span class="ident">hm</span>) }
     }
 
-    <span class="comment">// TODO: IDirect3D9::RegisterSoftwareDevice = d3d9::IDirect3D9Ext::register_software_device
-    // I can&#39;t easily find proper documentation demonstrating usage.  Supposedly it&#39;s buried in a DDK somewhere.
-    // Pull requests welcome w/ unit testing coverage!
-</span>}
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getdevicecaps)\] IDirect3D9::GetDeviceCaps</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Returns</span>
+    <span class="doccomment">/// *   [D3DERR::INVALIDCALL]       on an invalid `adapter`</span>
+    <span class="doccomment">/// *   [D3DERR::INVALIDDEVICE]     on an invalid `device_type`</span>
+    <span class="doccomment">/// *   Ok([Caps])                  otherwise</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Example</span>
+    <span class="doccomment">/// ```rust</span>
+    <span class="doccomment">/// # use dev::d3d9::*; let d3d = d3d_test();</span>
+    <span class="doccomment">/// let caps : Caps = d3d.get_device_caps(0, DevType::HAL).unwrap();</span>
+    <span class="doccomment">/// assert_eq!(caps.device_type,        DevType::HAL);</span>
+    <span class="doccomment">/// assert_eq!(caps.adapter_ordinal,    0);</span>
+    <span class="doccomment">/// assert!(caps.max_texture_width    &gt; 0);</span>
+    <span class="doccomment">/// assert!(caps.max_texture_height   &gt; 0);</span>
+    <span class="doccomment">/// // ...</span>
+    <span class="doccomment">/// ```</span>
+    <span class="kw">fn</span> <span class="ident">get_device_caps</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">adapter</span>: <span class="ident">AdapterIndex</span>, <span class="ident">device_type</span>: <span class="ident">DevType</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Caps</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+        <span class="macro">fn_context!</span>(<span class="ident">d3d9::IDirect3D9Ext::get_device_caps</span> =&gt; <span class="ident">IDirect3D9::GetDeviceCaps</span>);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">caps</span> <span class="op">=</span> <span class="ident">Caps::zeroed</span>();
+        <span class="macro">fn_check_hr!</span>(<span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="ident">as_winapi</span>().<span class="ident">GetDeviceCaps</span>(<span class="ident">adapter</span>, <span class="ident">device_type</span>.<span class="ident">into</span>(), <span class="kw-2">&amp;mut</span> <span class="kw-2">*</span><span class="ident">caps</span>) })<span class="question-mark">?</span>; <span class="comment">// Safety: Appears sound on all invalid parameters per unit testing</span>
+        <span class="prelude-val">Ok</span>(<span class="ident">caps</span>)
+    }
 
-<span class="kw">impl</span>&lt;T: AsSafe&lt;IDirect3D9&gt; + Sized&gt; IDirect3D9Ext <span class="kw">for </span>T {}
+    <span class="comment">// TODO: IDirect3D9::RegisterSoftwareDevice = d3d9::IDirect3D9Ext::register_software_device</span>
+    <span class="comment">// I can&#39;t easily find proper documentation demonstrating usage.  Supposedly it&#39;s buried in a DDK somewhere.</span>
+    <span class="comment">// Pull requests welcome w/ unit testing coverage!</span>
+}
+
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">AsSafe</span><span class="op">&lt;</span><span class="ident">IDirect3D9</span><span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Sized</span><span class="op">&gt;</span> <span class="ident">IDirect3D9Ext</span> <span class="kw">for</span> <span class="ident">T</span> {}
 
 
 
-<span class="attribute">#[cfg(test)] </span><span class="kw">mod </span>tests {
-    <span class="kw">use </span>dev::d3d9::<span class="kw-2">*</span>;
-    <span class="kw">use </span>std::ptr::null_mut;
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span> <span class="kw">mod</span> <span class="ident">tests</span> {
+    <span class="kw">use</span> <span class="ident">dev::d3d9</span>::<span class="kw-2">*</span>;
+    <span class="kw">use</span> <span class="ident">std::ptr::null_mut</span>;
 
-    <span class="attribute">#[test] </span><span class="kw">fn </span>create() {
-        <span class="kw">use </span>winapi::shared::d3d9::D3D_SDK_VERSION;
-        <span class="kw">unsafe </span>{
-            Direct3D::create(SdkVersion::default()).unwrap();
-            Direct3D::create(SdkVersion::default().with_debug_disabled()).unwrap();
-            Direct3D::create(SdkVersion::default().with_debug_enabled()).unwrap();
-            Direct3D::create(SdkVersion::DEFAULT.with_debug_disabled()).unwrap();
-            Direct3D::create(SdkVersion::DEFAULT.with_debug_enabled()).unwrap();
-            Direct3D::create(SdkVersion::DEFAULT9B.with_debug_disabled()).unwrap();
-            Direct3D::create(SdkVersion::DEFAULT9B.with_debug_enabled()).unwrap();
-            Direct3D::create(SdkVersion::from(D3D_SDK_VERSION).with_debug_disabled()).unwrap();
-            Direct3D::create(SdkVersion::from(D3D_SDK_VERSION).with_debug_enabled()).unwrap();
-            <span class="macro">assert_eq!</span>(THINERR::NONSPECIFIC, Direct3D::create(SdkVersion::from(<span class="number">0</span>)                       ).map(|<span class="kw">_</span>|()));
-            <span class="macro">assert_eq!</span>(THINERR::NONSPECIFIC, Direct3D::create(SdkVersion::from(<span class="number">0</span>).with_debug_disabled() ).map(|<span class="kw">_</span>|()));
-            <span class="macro">assert_eq!</span>(THINERR::NONSPECIFIC, Direct3D::create(SdkVersion::from(<span class="number">0</span>).with_debug_enabled()  ).map(|<span class="kw">_</span>|()));
+    <span class="attribute">#[<span class="ident">test</span>]</span> <span class="kw">fn</span> <span class="ident">create</span>() {
+        <span class="kw">use</span> <span class="ident">winapi::shared::d3d9::D3D_SDK_VERSION</span>;
+        <span class="kw unsafe">unsafe</span> {
+            <span class="ident">Direct3D::create</span>(<span class="ident">SdkVersion::default</span>()).<span class="ident">unwrap</span>();
+            <span class="ident">Direct3D::create</span>(<span class="ident">SdkVersion::default</span>().<span class="ident">with_debug_disabled</span>()).<span class="ident">unwrap</span>();
+            <span class="ident">Direct3D::create</span>(<span class="ident">SdkVersion::default</span>().<span class="ident">with_debug_enabled</span>()).<span class="ident">unwrap</span>();
+            <span class="ident">Direct3D::create</span>(<span class="ident">SdkVersion::DEFAULT</span>.<span class="ident">with_debug_disabled</span>()).<span class="ident">unwrap</span>();
+            <span class="ident">Direct3D::create</span>(<span class="ident">SdkVersion::DEFAULT</span>.<span class="ident">with_debug_enabled</span>()).<span class="ident">unwrap</span>();
+            <span class="ident">Direct3D::create</span>(<span class="ident">SdkVersion::DEFAULT9B</span>.<span class="ident">with_debug_disabled</span>()).<span class="ident">unwrap</span>();
+            <span class="ident">Direct3D::create</span>(<span class="ident">SdkVersion::DEFAULT9B</span>.<span class="ident">with_debug_enabled</span>()).<span class="ident">unwrap</span>();
+            <span class="ident">Direct3D::create</span>(<span class="ident">SdkVersion::from</span>(<span class="ident">D3D_SDK_VERSION</span>).<span class="ident">with_debug_disabled</span>()).<span class="ident">unwrap</span>();
+            <span class="ident">Direct3D::create</span>(<span class="ident">SdkVersion::from</span>(<span class="ident">D3D_SDK_VERSION</span>).<span class="ident">with_debug_enabled</span>()).<span class="ident">unwrap</span>();
+            <span class="macro">assert_eq!</span>(<span class="ident">THINERR::NONSPECIFIC</span>, <span class="ident">Direct3D::create</span>(<span class="ident">SdkVersion::from</span>(<span class="number">0</span>)                       ).<span class="ident">map</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span>()));
+            <span class="macro">assert_eq!</span>(<span class="ident">THINERR::NONSPECIFIC</span>, <span class="ident">Direct3D::create</span>(<span class="ident">SdkVersion::from</span>(<span class="number">0</span>).<span class="ident">with_debug_disabled</span>() ).<span class="ident">map</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span>()));
+            <span class="macro">assert_eq!</span>(<span class="ident">THINERR::NONSPECIFIC</span>, <span class="ident">Direct3D::create</span>(<span class="ident">SdkVersion::from</span>(<span class="number">0</span>).<span class="ident">with_debug_enabled</span>()  ).<span class="ident">map</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span>()));
         }
     }
 
-    <span class="attribute">#[test] </span><span class="kw">fn </span>check_depth_stencil_match() {
-        <span class="kw">let </span>d3d = d3d_test();
-        <span class="macro">assert!</span>(                        d3d.check_depth_stencil_match(<span class="number">0</span>,    DevType::HAL, Format::X8R8G8B8, Format::A8R8G8B8, Format::D24S8  ).is_ok()); <span class="comment">// valid
-        </span><span class="macro">assert_eq!</span>(D3DERR::INVALIDCALL, d3d.check_depth_stencil_match(<span class="number">9001</span>, DevType::HAL, Format::X8R8G8B8, Format::A8R8G8B8, Format::D24S8  )); <span class="comment">// invalid adapter
-        </span><span class="macro">assert_eq!</span>(D3DERR::INVALIDCALL, d3d.check_depth_stencil_match(<span class="number">0</span>,    Invalid,      Format::X8R8G8B8, Format::A8R8G8B8, Format::D24S8  )); <span class="comment">// invalid devtype
-        </span><span class="macro">assert_eq!</span>(D3DERR::INVALIDCALL, d3d.check_depth_stencil_match(<span class="number">0</span>,    DevType::HAL, Format::UNKNOWN,  Format::A8R8G8B8, Format::D24S8  )); <span class="comment">// invalid adapter format
-        </span><span class="macro">assert_eq!</span>(D3DERR::INVALIDCALL, d3d.check_depth_stencil_match(<span class="number">0</span>,    DevType::HAL, Format::X8R8G8B8, Format::UNKNOWN,  Format::D24S8  )); <span class="comment">// invalid render target format
-        </span><span class="macro">assert_eq!</span>(D3DERR::INVALIDCALL, d3d.check_depth_stencil_match(<span class="number">0</span>,    DevType::HAL, Format::X8R8G8B8, Format::A8R8G8B8, Format::UNKNOWN)); <span class="comment">// invalid depth stencil format
-    </span>}
+    <span class="attribute">#[<span class="ident">test</span>]</span> <span class="kw">fn</span> <span class="ident">check_depth_stencil_match</span>() {
+        <span class="kw">let</span> <span class="ident">d3d</span> <span class="op">=</span> <span class="ident">d3d_test</span>();
+        <span class="macro">assert!</span>(                        <span class="ident">d3d</span>.<span class="ident">check_depth_stencil_match</span>(<span class="number">0</span>,    <span class="ident">DevType::HAL</span>, <span class="ident">Format::X8R8G8B8</span>, <span class="ident">Format::A8R8G8B8</span>, <span class="ident">Format::D24S8</span>  ).<span class="ident">is_ok</span>()); <span class="comment">// valid</span>
+        <span class="macro">assert_eq!</span>(<span class="ident">D3DERR::INVALIDCALL</span>, <span class="ident">d3d</span>.<span class="ident">check_depth_stencil_match</span>(<span class="number">9001</span>, <span class="ident">DevType::HAL</span>, <span class="ident">Format::X8R8G8B8</span>, <span class="ident">Format::A8R8G8B8</span>, <span class="ident">Format::D24S8</span>  )); <span class="comment">// invalid adapter</span>
+        <span class="macro">assert_eq!</span>(<span class="ident">D3DERR::INVALIDCALL</span>, <span class="ident">d3d</span>.<span class="ident">check_depth_stencil_match</span>(<span class="number">0</span>,    <span class="ident">Invalid</span>,      <span class="ident">Format::X8R8G8B8</span>, <span class="ident">Format::A8R8G8B8</span>, <span class="ident">Format::D24S8</span>  )); <span class="comment">// invalid devtype</span>
+        <span class="macro">assert_eq!</span>(<span class="ident">D3DERR::INVALIDCALL</span>, <span class="ident">d3d</span>.<span class="ident">check_depth_stencil_match</span>(<span class="number">0</span>,    <span class="ident">DevType::HAL</span>, <span class="ident">Format::UNKNOWN</span>,  <span class="ident">Format::A8R8G8B8</span>, <span class="ident">Format::D24S8</span>  )); <span class="comment">// invalid adapter format</span>
+        <span class="macro">assert_eq!</span>(<span class="ident">D3DERR::INVALIDCALL</span>, <span class="ident">d3d</span>.<span class="ident">check_depth_stencil_match</span>(<span class="number">0</span>,    <span class="ident">DevType::HAL</span>, <span class="ident">Format::X8R8G8B8</span>, <span class="ident">Format::UNKNOWN</span>,  <span class="ident">Format::D24S8</span>  )); <span class="comment">// invalid render target format</span>
+        <span class="macro">assert_eq!</span>(<span class="ident">D3DERR::INVALIDCALL</span>, <span class="ident">d3d</span>.<span class="ident">check_depth_stencil_match</span>(<span class="number">0</span>,    <span class="ident">DevType::HAL</span>, <span class="ident">Format::X8R8G8B8</span>, <span class="ident">Format::A8R8G8B8</span>, <span class="ident">Format::UNKNOWN</span>)); <span class="comment">// invalid depth stencil format</span>
+    }
 
-    <span class="attribute">#[test] </span><span class="kw">fn </span>check_device_format() {
-        <span class="kw">let </span>d3d = d3d_test();
-        <span class="macro">assert!</span>(                        d3d.check_device_format(<span class="number">0</span>,    DevType::HAL, Format::X8R8G8B8,  <span class="number">0</span>, ResourceType::Texture, Format::A8R8G8B8).is_ok()); <span class="comment">// valid
-        </span><span class="macro">assert_eq!</span>(D3DERR::INVALIDCALL, d3d.check_device_format(<span class="number">9001</span>, DevType::HAL, Format::X8R8G8B8,  <span class="number">0</span>, ResourceType::Texture, Format::A8R8G8B8)); <span class="comment">// invalid adapter
-        </span><span class="macro">assert_eq!</span>(D3DERR::INVALIDCALL, d3d.check_device_format(<span class="number">0</span>,    Invalid,      Format::X8R8G8B8,  <span class="number">0</span>, ResourceType::Texture, Format::A8R8G8B8)); <span class="comment">// invalid devtype
-        </span><span class="macro">assert_eq!</span>(D3DERR::INVALIDCALL, d3d.check_device_format(<span class="number">0</span>,    DevType::HAL, Format::UNKNOWN,   <span class="number">0</span>, ResourceType::Texture, Format::A8R8G8B8)); <span class="comment">// invalid adapter format
-        </span><span class="macro">assert_eq!</span>(D3DERR::INVALIDCALL, d3d.check_device_format(<span class="number">0</span>,    DevType::HAL, Format::X8R8G8B8, !<span class="number">0</span>, ResourceType::Texture, Format::A8R8G8B8)); <span class="comment">// invalid usage
-        </span><span class="macro">assert_eq!</span>(D3DERR::INVALIDCALL, d3d.check_device_format(<span class="number">0</span>,    DevType::HAL, Format::X8R8G8B8,  <span class="number">0</span>, Invalid,               Format::A8R8G8B8)); <span class="comment">// invalid resource type
-        </span><span class="macro">assert_eq!</span>(D3DERR::INVALIDCALL, d3d.check_device_format(<span class="number">0</span>,    DevType::HAL, Format::X8R8G8B8,  <span class="number">0</span>, ResourceType::Texture, Format::UNKNOWN )); <span class="comment">// invalid check format
-    </span>}
+    <span class="attribute">#[<span class="ident">test</span>]</span> <span class="kw">fn</span> <span class="ident">check_device_format</span>() {
+        <span class="kw">let</span> <span class="ident">d3d</span> <span class="op">=</span> <span class="ident">d3d_test</span>();
+        <span class="macro">assert!</span>(                        <span class="ident">d3d</span>.<span class="ident">check_device_format</span>(<span class="number">0</span>,    <span class="ident">DevType::HAL</span>, <span class="ident">Format::X8R8G8B8</span>,  <span class="number">0</span>, <span class="ident">ResourceType::Texture</span>, <span class="ident">Format::A8R8G8B8</span>).<span class="ident">is_ok</span>()); <span class="comment">// valid</span>
+        <span class="macro">assert_eq!</span>(<span class="ident">D3DERR::INVALIDCALL</span>, <span class="ident">d3d</span>.<span class="ident">check_device_format</span>(<span class="number">9001</span>, <span class="ident">DevType::HAL</span>, <span class="ident">Format::X8R8G8B8</span>,  <span class="number">0</span>, <span class="ident">ResourceType::Texture</span>, <span class="ident">Format::A8R8G8B8</span>)); <span class="comment">// invalid adapter</span>
+        <span class="macro">assert_eq!</span>(<span class="ident">D3DERR::INVALIDCALL</span>, <span class="ident">d3d</span>.<span class="ident">check_device_format</span>(<span class="number">0</span>,    <span class="ident">Invalid</span>,      <span class="ident">Format::X8R8G8B8</span>,  <span class="number">0</span>, <span class="ident">ResourceType::Texture</span>, <span class="ident">Format::A8R8G8B8</span>)); <span class="comment">// invalid devtype</span>
+        <span class="macro">assert_eq!</span>(<span class="ident">D3DERR::INVALIDCALL</span>, <span class="ident">d3d</span>.<span class="ident">check_device_format</span>(<span class="number">0</span>,    <span class="ident">DevType::HAL</span>, <span class="ident">Format::UNKNOWN</span>,   <span class="number">0</span>, <span class="ident">ResourceType::Texture</span>, <span class="ident">Format::A8R8G8B8</span>)); <span class="comment">// invalid adapter format</span>
+        <span class="macro">assert_eq!</span>(<span class="ident">D3DERR::INVALIDCALL</span>, <span class="ident">d3d</span>.<span class="ident">check_device_format</span>(<span class="number">0</span>,    <span class="ident">DevType::HAL</span>, <span class="ident">Format::X8R8G8B8</span>, <span class="op">!</span><span class="number">0</span>, <span class="ident">ResourceType::Texture</span>, <span class="ident">Format::A8R8G8B8</span>)); <span class="comment">// invalid usage</span>
+        <span class="macro">assert_eq!</span>(<span class="ident">D3DERR::INVALIDCALL</span>, <span class="ident">d3d</span>.<span class="ident">check_device_format</span>(<span class="number">0</span>,    <span class="ident">DevType::HAL</span>, <span class="ident">Format::X8R8G8B8</span>,  <span class="number">0</span>, <span class="ident">Invalid</span>,               <span class="ident">Format::A8R8G8B8</span>)); <span class="comment">// invalid resource type</span>
+        <span class="macro">assert_eq!</span>(<span class="ident">D3DERR::INVALIDCALL</span>, <span class="ident">d3d</span>.<span class="ident">check_device_format</span>(<span class="number">0</span>,    <span class="ident">DevType::HAL</span>, <span class="ident">Format::X8R8G8B8</span>,  <span class="number">0</span>, <span class="ident">ResourceType::Texture</span>, <span class="ident">Format::UNKNOWN</span> )); <span class="comment">// invalid check format</span>
+    }
 
-    <span class="attribute">#[test] </span><span class="kw">fn </span>check_device_format_conversion() {
-        <span class="kw">let </span>d3d = d3d_test();
-        <span class="macro">assert!</span>(                            d3d.check_device_format_conversion(<span class="number">0</span>,    DevType::HAL, Format::A8R8G8B8, Format::A8R8G8B8).is_ok()); <span class="comment">// valid
-        </span><span class="macro">assert!</span>(                            d3d.check_device_format_conversion(<span class="number">0</span>,    DevType::HAL, Format::D24S8,    Format::D24S8   ).is_ok()); <span class="comment">// valid
-        </span><span class="macro">assert_eq!</span>(D3DERR::INVALIDCALL,     d3d.check_device_format_conversion(<span class="number">9001</span>, DevType::HAL, Format::A8R8G8B8, Format::A8R8G8B8)); <span class="comment">// invalid adapter
-        </span><span class="macro">assert_eq!</span>(D3DERR::INVALIDDEVICE,   d3d.check_device_format_conversion(<span class="number">0</span>,    Invalid,      Format::A8R8G8B8, Format::A8R8G8B8)); <span class="comment">// invalid devtype
-        </span><span class="macro">assert_eq!</span>(D3DERR::NOTAVAILABLE,    d3d.check_device_format_conversion(<span class="number">0</span>,    DevType::HAL, Invalid,          Format::A8R8G8B8)); <span class="comment">// invalid source format
-        </span><span class="macro">assert_eq!</span>(D3DERR::NOTAVAILABLE,    d3d.check_device_format_conversion(<span class="number">0</span>,    DevType::HAL, Format::A8R8G8B8, Invalid         )); <span class="comment">// invalid target format
-        </span><span class="macro">assert_eq!</span>(D3DERR::NOTAVAILABLE,    d3d.check_device_format_conversion(<span class="number">0</span>,    DevType::HAL, Format::D24S8,    Format::A8R8G8B8)); <span class="comment">// invalid conversion
-        </span><span class="macro">assert_eq!</span>(D3DERR::NOTAVAILABLE,    d3d.check_device_format_conversion(<span class="number">0</span>,    DevType::HAL, Format::A8R8G8B8, Format::D24S8   )); <span class="comment">// invalid conversion
-    </span>}
+    <span class="attribute">#[<span class="ident">test</span>]</span> <span class="kw">fn</span> <span class="ident">check_device_format_conversion</span>() {
+        <span class="kw">let</span> <span class="ident">d3d</span> <span class="op">=</span> <span class="ident">d3d_test</span>();
+        <span class="macro">assert!</span>(                            <span class="ident">d3d</span>.<span class="ident">check_device_format_conversion</span>(<span class="number">0</span>,    <span class="ident">DevType::HAL</span>, <span class="ident">Format::A8R8G8B8</span>, <span class="ident">Format::A8R8G8B8</span>).<span class="ident">is_ok</span>()); <span class="comment">// valid</span>
+        <span class="macro">assert!</span>(                            <span class="ident">d3d</span>.<span class="ident">check_device_format_conversion</span>(<span class="number">0</span>,    <span class="ident">DevType::HAL</span>, <span class="ident">Format::D24S8</span>,    <span class="ident">Format::D24S8</span>   ).<span class="ident">is_ok</span>()); <span class="comment">// valid</span>
+        <span class="macro">assert_eq!</span>(<span class="ident">D3DERR::INVALIDCALL</span>,     <span class="ident">d3d</span>.<span class="ident">check_device_format_conversion</span>(<span class="number">9001</span>, <span class="ident">DevType::HAL</span>, <span class="ident">Format::A8R8G8B8</span>, <span class="ident">Format::A8R8G8B8</span>)); <span class="comment">// invalid adapter</span>
+        <span class="macro">assert_eq!</span>(<span class="ident">D3DERR::INVALIDDEVICE</span>,   <span class="ident">d3d</span>.<span class="ident">check_device_format_conversion</span>(<span class="number">0</span>,    <span class="ident">Invalid</span>,      <span class="ident">Format::A8R8G8B8</span>, <span class="ident">Format::A8R8G8B8</span>)); <span class="comment">// invalid devtype</span>
+        <span class="macro">assert_eq!</span>(<span class="ident">D3DERR::NOTAVAILABLE</span>,    <span class="ident">d3d</span>.<span class="ident">check_device_format_conversion</span>(<span class="number">0</span>,    <span class="ident">DevType::HAL</span>, <span class="ident">Invalid</span>,          <span class="ident">Format::A8R8G8B8</span>)); <span class="comment">// invalid source format</span>
+        <span class="macro">assert_eq!</span>(<span class="ident">D3DERR::NOTAVAILABLE</span>,    <span class="ident">d3d</span>.<span class="ident">check_device_format_conversion</span>(<span class="number">0</span>,    <span class="ident">DevType::HAL</span>, <span class="ident">Format::A8R8G8B8</span>, <span class="ident">Invalid</span>         )); <span class="comment">// invalid target format</span>
+        <span class="macro">assert_eq!</span>(<span class="ident">D3DERR::NOTAVAILABLE</span>,    <span class="ident">d3d</span>.<span class="ident">check_device_format_conversion</span>(<span class="number">0</span>,    <span class="ident">DevType::HAL</span>, <span class="ident">Format::D24S8</span>,    <span class="ident">Format::A8R8G8B8</span>)); <span class="comment">// invalid conversion</span>
+        <span class="macro">assert_eq!</span>(<span class="ident">D3DERR::NOTAVAILABLE</span>,    <span class="ident">d3d</span>.<span class="ident">check_device_format_conversion</span>(<span class="number">0</span>,    <span class="ident">DevType::HAL</span>, <span class="ident">Format::A8R8G8B8</span>, <span class="ident">Format::D24S8</span>   )); <span class="comment">// invalid conversion</span>
+    }
 
-    <span class="attribute">#[test] </span><span class="kw">fn </span>check_device_multi_sample_type() {
-        <span class="kw">let </span>d3d = d3d_test();
-        <span class="macro">assert!</span>(                            d3d.check_device_multi_sample_type(<span class="number">0</span>,    DevType::HAL, Format::A8R8G8B8, <span class="bool-val">true</span>, MultiSample::None    ).is_ok()); <span class="comment">// valid
-        </span><span class="macro">assert!</span>(                            d3d.check_device_multi_sample_type(<span class="number">0</span>,    DevType::HAL, Format::A8R8G8B8, <span class="bool-val">true</span>, MultiSample::X2      ).is_ok()); <span class="comment">// valid
-        </span><span class="macro">assert_eq!</span>(D3DERR::INVALIDCALL,     d3d.check_device_multi_sample_type(<span class="number">9001</span>, DevType::HAL, Format::A8R8G8B8, <span class="bool-val">true</span>, MultiSample::X2      )); <span class="comment">// invalid adapter
-        </span><span class="macro">assert_eq!</span>(D3DERR::INVALIDCALL,     d3d.check_device_multi_sample_type(<span class="number">0</span>,    Invalid,      Format::A8R8G8B8, <span class="bool-val">true</span>, MultiSample::X2      )); <span class="comment">// invalid devtype
-        </span><span class="macro">assert_eq!</span>(D3DERR::NOTAVAILABLE,    d3d.check_device_multi_sample_type(<span class="number">0</span>,    DevType::HAL, Invalid,          <span class="bool-val">true</span>, MultiSample::X2      )); <span class="comment">// invalid surface format
-        </span><span class="kw">let _ </span>=                             d3d.check_device_multi_sample_type(<span class="number">0</span>,    DevType::HAL, Invalid,          <span class="bool-val">true</span>, MultiSample::None     ); <span class="comment">// can succeed despite invalid format when we use D3DMULTISAMPLE_NONE
-        </span><span class="macro">assert_eq!</span>(D3DERR::INVALIDCALL,     d3d.check_device_multi_sample_type(<span class="number">0</span>,    DevType::HAL, Format::A8R8G8B8, <span class="bool-val">true</span>, Invalid              )); <span class="comment">// invalid multisampling
-    </span>}
+    <span class="attribute">#[<span class="ident">test</span>]</span> <span class="kw">fn</span> <span class="ident">check_device_multi_sample_type</span>() {
+        <span class="kw">let</span> <span class="ident">d3d</span> <span class="op">=</span> <span class="ident">d3d_test</span>();
+        <span class="macro">assert!</span>(                            <span class="ident">d3d</span>.<span class="ident">check_device_multi_sample_type</span>(<span class="number">0</span>,    <span class="ident">DevType::HAL</span>, <span class="ident">Format::A8R8G8B8</span>, <span class="bool-val">true</span>, <span class="ident">MultiSample::None</span>    ).<span class="ident">is_ok</span>()); <span class="comment">// valid</span>
+        <span class="macro">assert!</span>(                            <span class="ident">d3d</span>.<span class="ident">check_device_multi_sample_type</span>(<span class="number">0</span>,    <span class="ident">DevType::HAL</span>, <span class="ident">Format::A8R8G8B8</span>, <span class="bool-val">true</span>, <span class="ident">MultiSample::X2</span>      ).<span class="ident">is_ok</span>()); <span class="comment">// valid</span>
+        <span class="macro">assert_eq!</span>(<span class="ident">D3DERR::INVALIDCALL</span>,     <span class="ident">d3d</span>.<span class="ident">check_device_multi_sample_type</span>(<span class="number">9001</span>, <span class="ident">DevType::HAL</span>, <span class="ident">Format::A8R8G8B8</span>, <span class="bool-val">true</span>, <span class="ident">MultiSample::X2</span>      )); <span class="comment">// invalid adapter</span>
+        <span class="macro">assert_eq!</span>(<span class="ident">D3DERR::INVALIDCALL</span>,     <span class="ident">d3d</span>.<span class="ident">check_device_multi_sample_type</span>(<span class="number">0</span>,    <span class="ident">Invalid</span>,      <span class="ident">Format::A8R8G8B8</span>, <span class="bool-val">true</span>, <span class="ident">MultiSample::X2</span>      )); <span class="comment">// invalid devtype</span>
+        <span class="macro">assert_eq!</span>(<span class="ident">D3DERR::NOTAVAILABLE</span>,    <span class="ident">d3d</span>.<span class="ident">check_device_multi_sample_type</span>(<span class="number">0</span>,    <span class="ident">DevType::HAL</span>, <span class="ident">Invalid</span>,          <span class="bool-val">true</span>, <span class="ident">MultiSample::X2</span>      )); <span class="comment">// invalid surface format</span>
+        <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span>                             <span class="ident">d3d</span>.<span class="ident">check_device_multi_sample_type</span>(<span class="number">0</span>,    <span class="ident">DevType::HAL</span>, <span class="ident">Invalid</span>,          <span class="bool-val">true</span>, <span class="ident">MultiSample::None</span>     ); <span class="comment">// can succeed despite invalid format when we use D3DMULTISAMPLE_NONE</span>
+        <span class="macro">assert_eq!</span>(<span class="ident">D3DERR::INVALIDCALL</span>,     <span class="ident">d3d</span>.<span class="ident">check_device_multi_sample_type</span>(<span class="number">0</span>,    <span class="ident">DevType::HAL</span>, <span class="ident">Format::A8R8G8B8</span>, <span class="bool-val">true</span>, <span class="ident">Invalid</span>              )); <span class="comment">// invalid multisampling</span>
+    }
 
-    <span class="attribute">#[test] </span><span class="kw">fn </span>check_device_type() {
-        <span class="kw">let </span>d3d = d3d_test();
-        <span class="macro">assert!</span>(                            d3d.check_device_type(<span class="number">0</span>,    DevType::HAL, Format::X8R8G8B8, Format::A8R8G8B8, <span class="bool-val">true</span>).is_ok()); <span class="comment">// valid
-        </span><span class="macro">assert_eq!</span>(D3DERR::INVALIDCALL,     d3d.check_device_type(<span class="number">9001</span>, DevType::HAL, Format::X8R8G8B8, Format::A8R8G8B8, <span class="bool-val">true</span>)); <span class="comment">// invalid adapter
-        </span><span class="macro">assert_eq!</span>(D3DERR::INVALIDCALL,     d3d.check_device_type(<span class="number">0</span>,    Invalid,      Format::X8R8G8B8, Format::A8R8G8B8, <span class="bool-val">true</span>)); <span class="comment">// invalid devtype
-        </span><span class="macro">assert_eq!</span>(D3DERR::NOTAVAILABLE,    d3d.check_device_type(<span class="number">0</span>,    DevType::HAL, Invalid,          Format::A8R8G8B8, <span class="bool-val">true</span>)); <span class="comment">// invalid adapter format
-        </span><span class="macro">assert_eq!</span>(D3DERR::NOTAVAILABLE,    d3d.check_device_type(<span class="number">0</span>,    DevType::HAL, Format::X8R8G8B8, Invalid,          <span class="bool-val">true</span>)); <span class="comment">// invalid back buffer format
-    </span>}
+    <span class="attribute">#[<span class="ident">test</span>]</span> <span class="kw">fn</span> <span class="ident">check_device_type</span>() {
+        <span class="kw">let</span> <span class="ident">d3d</span> <span class="op">=</span> <span class="ident">d3d_test</span>();
+        <span class="macro">assert!</span>(                            <span class="ident">d3d</span>.<span class="ident">check_device_type</span>(<span class="number">0</span>,    <span class="ident">DevType::HAL</span>, <span class="ident">Format::X8R8G8B8</span>, <span class="ident">Format::A8R8G8B8</span>, <span class="bool-val">true</span>).<span class="ident">is_ok</span>()); <span class="comment">// valid</span>
+        <span class="macro">assert_eq!</span>(<span class="ident">D3DERR::INVALIDCALL</span>,     <span class="ident">d3d</span>.<span class="ident">check_device_type</span>(<span class="number">9001</span>, <span class="ident">DevType::HAL</span>, <span class="ident">Format::X8R8G8B8</span>, <span class="ident">Format::A8R8G8B8</span>, <span class="bool-val">true</span>)); <span class="comment">// invalid adapter</span>
+        <span class="macro">assert_eq!</span>(<span class="ident">D3DERR::INVALIDCALL</span>,     <span class="ident">d3d</span>.<span class="ident">check_device_type</span>(<span class="number">0</span>,    <span class="ident">Invalid</span>,      <span class="ident">Format::X8R8G8B8</span>, <span class="ident">Format::A8R8G8B8</span>, <span class="bool-val">true</span>)); <span class="comment">// invalid devtype</span>
+        <span class="macro">assert_eq!</span>(<span class="ident">D3DERR::NOTAVAILABLE</span>,    <span class="ident">d3d</span>.<span class="ident">check_device_type</span>(<span class="number">0</span>,    <span class="ident">DevType::HAL</span>, <span class="ident">Invalid</span>,          <span class="ident">Format::A8R8G8B8</span>, <span class="bool-val">true</span>)); <span class="comment">// invalid adapter format</span>
+        <span class="macro">assert_eq!</span>(<span class="ident">D3DERR::NOTAVAILABLE</span>,    <span class="ident">d3d</span>.<span class="ident">check_device_type</span>(<span class="number">0</span>,    <span class="ident">DevType::HAL</span>, <span class="ident">Format::X8R8G8B8</span>, <span class="ident">Invalid</span>,          <span class="bool-val">true</span>)); <span class="comment">// invalid back buffer format</span>
+    }
 
-    <span class="comment">// #[test] fn create_device() {} // TODO
+    <span class="comment">// #[test] fn create_device() {} // TODO</span>
 
-    </span><span class="attribute">#[test] </span><span class="kw">fn </span>enum_adapter_modes() {
-        <span class="kw">let </span>d3d = d3d_test();
-        <span class="kw">let </span>adapters = d3d.get_adapter_count();
+    <span class="attribute">#[<span class="ident">test</span>]</span> <span class="kw">fn</span> <span class="ident">enum_adapter_modes</span>() {
+        <span class="kw">let</span> <span class="ident">d3d</span> <span class="op">=</span> <span class="ident">d3d_test</span>();
+        <span class="kw">let</span> <span class="ident">adapters</span> <span class="op">=</span> <span class="ident">d3d</span>.<span class="ident">get_adapter_count</span>();
 
-        <span class="comment">// all adapters should be valid
-        </span><span class="kw">for </span>adapter <span class="kw">in </span><span class="number">0</span>..adapters {
-            <span class="macro">eprintln!</span>(<span class="string">&quot;checking adapter {} of {}&quot;</span>, adapter+<span class="number">1</span>, adapters);
-            <span class="kw">for </span>fmt <span class="kw">in </span>[
-                Format::UNKNOWN, Format::R8G8B8, Format::A8R8G8B8, Format::X8R8G8B8, Format::A8B8G8R8, Format::X8B8G8R8,
-                Format::from_unchecked(<span class="number">1</span>), Format::from_unchecked(<span class="number">10000</span>), Format::from_unchecked(!<span class="number">0</span>),
-            ].iter().copied() {
-                <span class="kw">let </span>modes = d3d.get_adapter_mode_count(adapter, fmt);
-                <span class="kw">for </span>mode <span class="kw">in </span><span class="number">0</span>..modes {
-                    d3d.enum_adapter_modes(adapter, fmt, mode).unwrap_or_else(|err| <span class="macro">panic!</span>(<span class="string">&quot;enum_adapter_modes({}, {:?}, {}) failed: {}&quot;</span>, adapter, fmt, mode, err));
+        <span class="comment">// all adapters should be valid</span>
+        <span class="kw">for</span> <span class="ident">adapter</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">adapters</span> {
+            <span class="macro">eprintln!</span>(<span class="string">&quot;checking adapter {} of {}&quot;</span>, <span class="ident">adapter</span><span class="op">+</span><span class="number">1</span>, <span class="ident">adapters</span>);
+            <span class="kw">for</span> <span class="ident">fmt</span> <span class="kw">in</span> [
+                <span class="ident">Format::UNKNOWN</span>, <span class="ident">Format::R8G8B8</span>, <span class="ident">Format::A8R8G8B8</span>, <span class="ident">Format::X8R8G8B8</span>, <span class="ident">Format::A8B8G8R8</span>, <span class="ident">Format::X8B8G8R8</span>,
+                <span class="ident">Format::from_unchecked</span>(<span class="number">1</span>), <span class="ident">Format::from_unchecked</span>(<span class="number">10000</span>), <span class="ident">Format::from_unchecked</span>(<span class="op">!</span><span class="number">0</span>),
+            ].<span class="ident">iter</span>().<span class="ident">copied</span>() {
+                <span class="kw">let</span> <span class="ident">modes</span> <span class="op">=</span> <span class="ident">d3d</span>.<span class="ident">get_adapter_mode_count</span>(<span class="ident">adapter</span>, <span class="ident">fmt</span>);
+                <span class="kw">for</span> <span class="ident">mode</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">modes</span> {
+                    <span class="ident">d3d</span>.<span class="ident">enum_adapter_modes</span>(<span class="ident">adapter</span>, <span class="ident">fmt</span>, <span class="ident">mode</span>).<span class="ident">unwrap_or_else</span>(<span class="op">|</span><span class="ident">err</span><span class="op">|</span> <span class="macro">panic!</span>(<span class="string">&quot;enum_adapter_modes({}, {:?}, {}) failed: {}&quot;</span>, <span class="ident">adapter</span>, <span class="ident">fmt</span>, <span class="ident">mode</span>, <span class="ident">err</span>));
                 }
-                <span class="kw">for </span>mode <span class="kw">in </span>modes..modes+<span class="number">100 </span>{
-                    <span class="macro">assert_eq!</span>(D3DERR::INVALIDCALL, d3d.enum_adapter_modes(adapter, fmt, mode));
+                <span class="kw">for</span> <span class="ident">mode</span> <span class="kw">in</span> <span class="ident">modes</span>..<span class="ident">modes</span><span class="op">+</span><span class="number">100</span> {
+                    <span class="macro">assert_eq!</span>(<span class="ident">D3DERR::INVALIDCALL</span>, <span class="ident">d3d</span>.<span class="ident">enum_adapter_modes</span>(<span class="ident">adapter</span>, <span class="ident">fmt</span>, <span class="ident">mode</span>));
                 }
             }
         }
 
-        <span class="comment">// doublecheck that d3d doesn&#39;t segfault for out-of-bounds adapters or anything
-        </span><span class="kw">for </span>adapter <span class="kw">in </span>[adapters+<span class="number">0</span>, adapters+<span class="number">100</span>, adapters+<span class="number">100000</span>, adapters+<span class="number">10000000</span>].iter().copied() {
-            <span class="macro">eprintln!</span>(<span class="string">&quot;checking invalid adapter {} of {}&quot;</span>, adapter+<span class="number">1</span>, adapters);
-            <span class="macro">assert_eq!</span>(D3DERR::INVALIDCALL, d3d.enum_adapter_modes(adapter, Format::X8R8G8B8, <span class="number">0</span>));
-            <span class="macro">assert_eq!</span>(D3DERR::INVALIDCALL, d3d.enum_adapter_modes(adapter, Format::X8R8G8B8, <span class="number">100</span>));
-            <span class="macro">assert_eq!</span>(D3DERR::INVALIDCALL, d3d.enum_adapter_modes(adapter, Format::X8R8G8B8, <span class="number">10000</span>));
+        <span class="comment">// doublecheck that d3d doesn&#39;t segfault for out-of-bounds adapters or anything</span>
+        <span class="kw">for</span> <span class="ident">adapter</span> <span class="kw">in</span> [<span class="ident">adapters</span><span class="op">+</span><span class="number">0</span>, <span class="ident">adapters</span><span class="op">+</span><span class="number">100</span>, <span class="ident">adapters</span><span class="op">+</span><span class="number">100000</span>, <span class="ident">adapters</span><span class="op">+</span><span class="number">10000000</span>].<span class="ident">iter</span>().<span class="ident">copied</span>() {
+            <span class="macro">eprintln!</span>(<span class="string">&quot;checking invalid adapter {} of {}&quot;</span>, <span class="ident">adapter</span><span class="op">+</span><span class="number">1</span>, <span class="ident">adapters</span>);
+            <span class="macro">assert_eq!</span>(<span class="ident">D3DERR::INVALIDCALL</span>, <span class="ident">d3d</span>.<span class="ident">enum_adapter_modes</span>(<span class="ident">adapter</span>, <span class="ident">Format::X8R8G8B8</span>, <span class="number">0</span>));
+            <span class="macro">assert_eq!</span>(<span class="ident">D3DERR::INVALIDCALL</span>, <span class="ident">d3d</span>.<span class="ident">enum_adapter_modes</span>(<span class="ident">adapter</span>, <span class="ident">Format::X8R8G8B8</span>, <span class="number">100</span>));
+            <span class="macro">assert_eq!</span>(<span class="ident">D3DERR::INVALIDCALL</span>, <span class="ident">d3d</span>.<span class="ident">enum_adapter_modes</span>(<span class="ident">adapter</span>, <span class="ident">Format::X8R8G8B8</span>, <span class="number">10000</span>));
         }
     }
 
-    <span class="attribute">#[test] </span><span class="kw">fn </span>get_adapter_count() {
-        <span class="kw">let </span>d3d = d3d_test();
-        <span class="macro">assert!</span>(d3d.get_adapter_count() &gt; <span class="number">0</span>);
+    <span class="attribute">#[<span class="ident">test</span>]</span> <span class="kw">fn</span> <span class="ident">get_adapter_count</span>() {
+        <span class="kw">let</span> <span class="ident">d3d</span> <span class="op">=</span> <span class="ident">d3d_test</span>();
+        <span class="macro">assert!</span>(<span class="ident">d3d</span>.<span class="ident">get_adapter_count</span>() <span class="op">&gt;</span> <span class="number">0</span>);
     }
 
-    <span class="attribute">#[test] </span><span class="kw">fn </span>get_adapter_display_mode() {
-        <span class="kw">let </span>d3d = d3d_test();
-        <span class="kw">let </span>adapters = d3d.get_adapter_count();
-        <span class="kw">for </span>adapter <span class="kw">in </span><span class="number">0</span>..adapters {
-            d3d.get_adapter_display_mode(adapter).unwrap_or_else(|err| <span class="macro">panic!</span>(<span class="string">&quot;unable to query display mode of adapter {} of {}: {}&quot;</span>, adapter+<span class="number">1</span>, adapters, err));
+    <span class="attribute">#[<span class="ident">test</span>]</span> <span class="kw">fn</span> <span class="ident">get_adapter_display_mode</span>() {
+        <span class="kw">let</span> <span class="ident">d3d</span> <span class="op">=</span> <span class="ident">d3d_test</span>();
+        <span class="kw">let</span> <span class="ident">adapters</span> <span class="op">=</span> <span class="ident">d3d</span>.<span class="ident">get_adapter_count</span>();
+        <span class="kw">for</span> <span class="ident">adapter</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">adapters</span> {
+            <span class="ident">d3d</span>.<span class="ident">get_adapter_display_mode</span>(<span class="ident">adapter</span>).<span class="ident">unwrap_or_else</span>(<span class="op">|</span><span class="ident">err</span><span class="op">|</span> <span class="macro">panic!</span>(<span class="string">&quot;unable to query display mode of adapter {} of {}: {}&quot;</span>, <span class="ident">adapter</span><span class="op">+</span><span class="number">1</span>, <span class="ident">adapters</span>, <span class="ident">err</span>));
         }
-        <span class="kw">for </span>adapter <span class="kw">in </span>adapters..(<span class="number">100</span>+adapters) {
-            <span class="macro">assert_eq!</span>(D3DERR::INVALIDCALL, d3d.get_adapter_display_mode(adapter));
+        <span class="kw">for</span> <span class="ident">adapter</span> <span class="kw">in</span> <span class="ident">adapters</span>..(<span class="number">100</span><span class="op">+</span><span class="ident">adapters</span>) {
+            <span class="macro">assert_eq!</span>(<span class="ident">D3DERR::INVALIDCALL</span>, <span class="ident">d3d</span>.<span class="ident">get_adapter_display_mode</span>(<span class="ident">adapter</span>));
         }
     }
 
-    <span class="attribute">#[test] </span><span class="kw">fn </span>get_adapter_identifier() {
-        <span class="kw">let </span>d3d = d3d_test();
+    <span class="attribute">#[<span class="ident">test</span>]</span> <span class="kw">fn</span> <span class="ident">get_adapter_identifier</span>() {
+        <span class="kw">let</span> <span class="ident">d3d</span> <span class="op">=</span> <span class="ident">d3d_test</span>();
 
-        <span class="doccomment">/// The D3DENUM_WHQL_LEVEL value has been retired for 9Ex and future versions
-        ///
-        /// Ref: `d3d9.h`
-        </span><span class="kw">const </span>D3DENUM_WHQL_LEVEL : u32 = <span class="number">2</span>;
+        <span class="doccomment">/// The D3DENUM_WHQL_LEVEL value has been retired for 9Ex and future versions</span>
+        <span class="doccomment">///</span>
+        <span class="doccomment">/// Ref: `d3d9.h`</span>
+        <span class="kw">const</span> <span class="ident">D3DENUM_WHQL_LEVEL</span> : <span class="ident">u32</span> <span class="op">=</span> <span class="number">2</span>;
 
-        <span class="kw">let </span>valid = <span class="number">0</span>;
-        d3d.get_adapter_identifier(valid, <span class="number">0                 </span>).unwrap();
-        d3d.get_adapter_identifier(valid, D3DENUM_WHQL_LEVEL).unwrap();
-        <span class="macro">assert_eq!</span>(D3DERR::INVALIDCALL, d3d.get_adapter_identifier(valid, D3DENUM_WHQL_LEVEL+<span class="number">1</span>));
-        <span class="macro">assert_eq!</span>(D3DERR::INVALIDCALL, d3d.get_adapter_identifier(valid, D3DENUM_WHQL_LEVEL+<span class="number">1000</span>));
-        <span class="macro">assert_eq!</span>(D3DERR::INVALIDCALL, d3d.get_adapter_identifier(valid, D3DENUM_WHQL_LEVEL+<span class="number">1000000</span>));
+        <span class="kw">let</span> <span class="ident">valid</span> <span class="op">=</span> <span class="number">0</span>;
+        <span class="ident">d3d</span>.<span class="ident">get_adapter_identifier</span>(<span class="ident">valid</span>, <span class="number">0</span>                 ).<span class="ident">unwrap</span>();
+        <span class="ident">d3d</span>.<span class="ident">get_adapter_identifier</span>(<span class="ident">valid</span>, <span class="ident">D3DENUM_WHQL_LEVEL</span>).<span class="ident">unwrap</span>();
+        <span class="macro">assert_eq!</span>(<span class="ident">D3DERR::INVALIDCALL</span>, <span class="ident">d3d</span>.<span class="ident">get_adapter_identifier</span>(<span class="ident">valid</span>, <span class="ident">D3DENUM_WHQL_LEVEL</span><span class="op">+</span><span class="number">1</span>));
+        <span class="macro">assert_eq!</span>(<span class="ident">D3DERR::INVALIDCALL</span>, <span class="ident">d3d</span>.<span class="ident">get_adapter_identifier</span>(<span class="ident">valid</span>, <span class="ident">D3DENUM_WHQL_LEVEL</span><span class="op">+</span><span class="number">1000</span>));
+        <span class="macro">assert_eq!</span>(<span class="ident">D3DERR::INVALIDCALL</span>, <span class="ident">d3d</span>.<span class="ident">get_adapter_identifier</span>(<span class="ident">valid</span>, <span class="ident">D3DENUM_WHQL_LEVEL</span><span class="op">+</span><span class="number">1000000</span>));
 
-        <span class="kw">let </span>invalid = <span class="number">9001</span>;
-        <span class="macro">assert_eq!</span>(D3DERR::INVALIDCALL, d3d.get_adapter_identifier(invalid, <span class="number">0                   </span>));
-        <span class="macro">assert_eq!</span>(D3DERR::INVALIDCALL, d3d.get_adapter_identifier(invalid, D3DENUM_WHQL_LEVEL  ));
+        <span class="kw">let</span> <span class="ident">invalid</span> <span class="op">=</span> <span class="number">9001</span>;
+        <span class="macro">assert_eq!</span>(<span class="ident">D3DERR::INVALIDCALL</span>, <span class="ident">d3d</span>.<span class="ident">get_adapter_identifier</span>(<span class="ident">invalid</span>, <span class="number">0</span>                   ));
+        <span class="macro">assert_eq!</span>(<span class="ident">D3DERR::INVALIDCALL</span>, <span class="ident">d3d</span>.<span class="ident">get_adapter_identifier</span>(<span class="ident">invalid</span>, <span class="ident">D3DENUM_WHQL_LEVEL</span>  ));
     }
 
-    <span class="attribute">#[test] </span><span class="kw">fn </span>get_adapter_mode_count() {
-        <span class="kw">let </span>d3d = d3d_test();
-        <span class="kw">let </span>adapters = d3d.get_adapter_count();
-        <span class="kw">for </span>valid <span class="kw">in </span><span class="number">0</span>..adapters {
-            <span class="kw">for </span>(fmt,                           expect) <span class="kw">in </span>[
-                (Format::UNKNOWN,               <span class="prelude-val">Some</span>(<span class="bool-val">false</span>)),
-                (Format::from_unchecked(<span class="number">1</span>),     <span class="prelude-val">Some</span>(<span class="bool-val">false</span>)),
-                (Format::R8G8B8,                <span class="prelude-val">None</span>),
-                (Format::A8R8G8B8,              <span class="prelude-val">None</span>),
-                (Format::X8R8G8B8,              <span class="prelude-val">Some</span>(<span class="bool-val">true</span>)),
-                (Format::A8B8G8R8,              <span class="prelude-val">None</span>),
-                (Format::X8B8G8R8,              <span class="prelude-val">None</span>),
-                (Format::from_unchecked(<span class="number">10000</span>), <span class="prelude-val">Some</span>(<span class="bool-val">false</span>)),
-                (Format::from_unchecked(!<span class="number">0</span>),    <span class="prelude-val">Some</span>(<span class="bool-val">false</span>)),
-            ].iter().copied() {
-                <span class="kw">let </span>modes = d3d.get_adapter_mode_count(valid, fmt);
-                <span class="macro">assert!</span>(expect.unwrap_or(<span class="bool-val">true</span>)   || modes == <span class="number">0</span>, <span class="string">&quot;adapter {} of {}: {:?} has {} modes, none expected&quot;</span>, valid+<span class="number">1</span>, adapters, fmt, modes);
-                <span class="macro">assert!</span>(!expect.unwrap_or(<span class="bool-val">false</span>) || modes &gt;  <span class="number">0</span>, <span class="string">&quot;adapter {} of {}: {:?} has {} modes, some expected&quot;</span>, valid+<span class="number">1</span>, adapters, fmt, modes);
+    <span class="attribute">#[<span class="ident">test</span>]</span> <span class="kw">fn</span> <span class="ident">get_adapter_mode_count</span>() {
+        <span class="kw">let</span> <span class="ident">d3d</span> <span class="op">=</span> <span class="ident">d3d_test</span>();
+        <span class="kw">let</span> <span class="ident">adapters</span> <span class="op">=</span> <span class="ident">d3d</span>.<span class="ident">get_adapter_count</span>();
+        <span class="kw">for</span> <span class="ident">valid</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">adapters</span> {
+            <span class="kw">for</span> (<span class="ident">fmt</span>,                           <span class="ident">expect</span>) <span class="kw">in</span> [
+                (<span class="ident">Format::UNKNOWN</span>,               <span class="prelude-val">Some</span>(<span class="bool-val">false</span>)),
+                (<span class="ident">Format::from_unchecked</span>(<span class="number">1</span>),     <span class="prelude-val">Some</span>(<span class="bool-val">false</span>)),
+                (<span class="ident">Format::R8G8B8</span>,                <span class="prelude-val">None</span>),
+                (<span class="ident">Format::A8R8G8B8</span>,              <span class="prelude-val">None</span>),
+                (<span class="ident">Format::X8R8G8B8</span>,              <span class="prelude-val">Some</span>(<span class="bool-val">true</span>)),
+                (<span class="ident">Format::A8B8G8R8</span>,              <span class="prelude-val">None</span>),
+                (<span class="ident">Format::X8B8G8R8</span>,              <span class="prelude-val">None</span>),
+                (<span class="ident">Format::from_unchecked</span>(<span class="number">10000</span>), <span class="prelude-val">Some</span>(<span class="bool-val">false</span>)),
+                (<span class="ident">Format::from_unchecked</span>(<span class="op">!</span><span class="number">0</span>),    <span class="prelude-val">Some</span>(<span class="bool-val">false</span>)),
+            ].<span class="ident">iter</span>().<span class="ident">copied</span>() {
+                <span class="kw">let</span> <span class="ident">modes</span> <span class="op">=</span> <span class="ident">d3d</span>.<span class="ident">get_adapter_mode_count</span>(<span class="ident">valid</span>, <span class="ident">fmt</span>);
+                <span class="macro">assert!</span>(<span class="ident">expect</span>.<span class="ident">unwrap_or</span>(<span class="bool-val">true</span>)   <span class="op">|</span><span class="op">|</span> <span class="ident">modes</span> <span class="op">==</span> <span class="number">0</span>, <span class="string">&quot;adapter {} of {}: {:?} has {} modes, none expected&quot;</span>, <span class="ident">valid</span><span class="op">+</span><span class="number">1</span>, <span class="ident">adapters</span>, <span class="ident">fmt</span>, <span class="ident">modes</span>);
+                <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">expect</span>.<span class="ident">unwrap_or</span>(<span class="bool-val">false</span>) <span class="op">|</span><span class="op">|</span> <span class="ident">modes</span> <span class="op">&gt;</span>  <span class="number">0</span>, <span class="string">&quot;adapter {} of {}: {:?} has {} modes, some expected&quot;</span>, <span class="ident">valid</span><span class="op">+</span><span class="number">1</span>, <span class="ident">adapters</span>, <span class="ident">fmt</span>, <span class="ident">modes</span>);
             }
         }
-        <span class="kw">for </span>invalid <span class="kw">in </span>[adapters+<span class="number">0</span>, adapters+<span class="number">100</span>, adapters+<span class="number">100000</span>, adapters+<span class="number">10000000</span>].iter().copied() {
-            <span class="kw">for </span>fmt <span class="kw">in </span>[Format::UNKNOWN, Format::X8R8G8B8].iter() {
-                <span class="macro">assert_eq!</span>(<span class="number">0</span>, d3d.get_adapter_mode_count(invalid, Format::UNKNOWN ), <span class="string">&quot;adapter {} of {} has modes for format {:?} despite being out-of-bounds&quot;</span>, invalid+<span class="number">1</span>, adapters, fmt);
+        <span class="kw">for</span> <span class="ident">invalid</span> <span class="kw">in</span> [<span class="ident">adapters</span><span class="op">+</span><span class="number">0</span>, <span class="ident">adapters</span><span class="op">+</span><span class="number">100</span>, <span class="ident">adapters</span><span class="op">+</span><span class="number">100000</span>, <span class="ident">adapters</span><span class="op">+</span><span class="number">10000000</span>].<span class="ident">iter</span>().<span class="ident">copied</span>() {
+            <span class="kw">for</span> <span class="ident">fmt</span> <span class="kw">in</span> [<span class="ident">Format::UNKNOWN</span>, <span class="ident">Format::X8R8G8B8</span>].<span class="ident">iter</span>() {
+                <span class="macro">assert_eq!</span>(<span class="number">0</span>, <span class="ident">d3d</span>.<span class="ident">get_adapter_mode_count</span>(<span class="ident">invalid</span>, <span class="ident">Format::UNKNOWN</span> ), <span class="string">&quot;adapter {} of {} has modes for format {:?} despite being out-of-bounds&quot;</span>, <span class="ident">invalid</span><span class="op">+</span><span class="number">1</span>, <span class="ident">adapters</span>, <span class="ident">fmt</span>);
             }
         }
     }
 
-    <span class="attribute">#[test] </span><span class="kw">fn </span>get_adapter_monitor() {
-        <span class="kw">let </span>d3d = d3d_test();
-        <span class="kw">let </span>adapters = d3d.get_adapter_count();
-        <span class="kw">for </span>valid <span class="kw">in </span><span class="number">0</span>..adapters                { <span class="macro">assert!</span>(!d3d.get_adapter_monitor(  valid).unwrap_or(null_mut()).is_null(), <span class="string">&quot;adapter {} of {} has a null HMONITOR&quot;</span>, valid+<span class="number">1</span>, adapters); }
-        <span class="kw">for </span>invalid <span class="kw">in </span>adapters..adapters+<span class="number">100   </span>{ <span class="macro">assert!</span>( d3d.get_adapter_monitor(invalid).is_err(),                        <span class="string">&quot;adapter {} of {} returned an HMONITOR despite being out-of-bounds!&quot;</span>, invalid+<span class="number">1</span>, adapters); }
+    <span class="attribute">#[<span class="ident">test</span>]</span> <span class="kw">fn</span> <span class="ident">get_adapter_monitor</span>() {
+        <span class="kw">let</span> <span class="ident">d3d</span> <span class="op">=</span> <span class="ident">d3d_test</span>();
+        <span class="kw">let</span> <span class="ident">adapters</span> <span class="op">=</span> <span class="ident">d3d</span>.<span class="ident">get_adapter_count</span>();
+        <span class="kw">for</span> <span class="ident">valid</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">adapters</span>                { <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">d3d</span>.<span class="ident">get_adapter_monitor</span>(  <span class="ident">valid</span>).<span class="ident">unwrap_or</span>(<span class="ident">null_mut</span>()).<span class="ident">is_null</span>(), <span class="string">&quot;adapter {} of {} has a null HMONITOR&quot;</span>, <span class="ident">valid</span><span class="op">+</span><span class="number">1</span>, <span class="ident">adapters</span>); }
+        <span class="kw">for</span> <span class="ident">invalid</span> <span class="kw">in</span> <span class="ident">adapters</span>..<span class="ident">adapters</span><span class="op">+</span><span class="number">100</span>   { <span class="macro">assert!</span>( <span class="ident">d3d</span>.<span class="ident">get_adapter_monitor</span>(<span class="ident">invalid</span>).<span class="ident">is_err</span>(),                        <span class="string">&quot;adapter {} of {} returned an HMONITOR despite being out-of-bounds!&quot;</span>, <span class="ident">invalid</span><span class="op">+</span><span class="number">1</span>, <span class="ident">adapters</span>); }
     }
 
-    <span class="attribute">#[test] </span><span class="kw">fn </span>get_device_caps() {
-        <span class="kw">let </span>d3d = d3d_test();
+    <span class="attribute">#[<span class="ident">test</span>]</span> <span class="kw">fn</span> <span class="ident">get_device_caps</span>() {
+        <span class="kw">let</span> <span class="ident">d3d</span> <span class="op">=</span> <span class="ident">d3d_test</span>();
 
-        <span class="kw">let </span>adapter = <span class="number">0</span>; <span class="comment">// valid
-        </span>d3d.get_device_caps(adapter, DevType::HAL).unwrap();
-        d3d.get_device_caps(adapter, DevType::Ref).unwrap();
-        d3d.get_device_caps(adapter, DevType::NullRef).unwrap();
-        <span class="macro">assert_eq!</span>(D3DERR::INVALIDDEVICE,   d3d.get_device_caps(adapter, DevType::from_unchecked(<span class="number">100</span>)));
-        <span class="macro">assert_eq!</span>(D3DERR::INVALIDDEVICE,   d3d.get_device_caps(adapter, DevType::from_unchecked(<span class="number">10000</span>)));
-        <span class="macro">assert_eq!</span>(D3DERR::INVALIDDEVICE,   d3d.get_device_caps(adapter, DevType::from_unchecked(<span class="number">1000000</span>)));
-        <span class="macro">assert_eq!</span>(D3DERR::INVALIDDEVICE,   d3d.get_device_caps(adapter, DevType::from_unchecked(<span class="number">100000000</span>)));
+        <span class="kw">let</span> <span class="ident">adapter</span> <span class="op">=</span> <span class="number">0</span>; <span class="comment">// valid</span>
+        <span class="ident">d3d</span>.<span class="ident">get_device_caps</span>(<span class="ident">adapter</span>, <span class="ident">DevType::HAL</span>).<span class="ident">unwrap</span>();
+        <span class="ident">d3d</span>.<span class="ident">get_device_caps</span>(<span class="ident">adapter</span>, <span class="ident">DevType::Ref</span>).<span class="ident">unwrap</span>();
+        <span class="ident">d3d</span>.<span class="ident">get_device_caps</span>(<span class="ident">adapter</span>, <span class="ident">DevType::NullRef</span>).<span class="ident">unwrap</span>();
+        <span class="macro">assert_eq!</span>(<span class="ident">D3DERR::INVALIDDEVICE</span>,   <span class="ident">d3d</span>.<span class="ident">get_device_caps</span>(<span class="ident">adapter</span>, <span class="ident">DevType::from_unchecked</span>(<span class="number">100</span>)));
+        <span class="macro">assert_eq!</span>(<span class="ident">D3DERR::INVALIDDEVICE</span>,   <span class="ident">d3d</span>.<span class="ident">get_device_caps</span>(<span class="ident">adapter</span>, <span class="ident">DevType::from_unchecked</span>(<span class="number">10000</span>)));
+        <span class="macro">assert_eq!</span>(<span class="ident">D3DERR::INVALIDDEVICE</span>,   <span class="ident">d3d</span>.<span class="ident">get_device_caps</span>(<span class="ident">adapter</span>, <span class="ident">DevType::from_unchecked</span>(<span class="number">1000000</span>)));
+        <span class="macro">assert_eq!</span>(<span class="ident">D3DERR::INVALIDDEVICE</span>,   <span class="ident">d3d</span>.<span class="ident">get_device_caps</span>(<span class="ident">adapter</span>, <span class="ident">DevType::from_unchecked</span>(<span class="number">100000000</span>)));
 
-        <span class="kw">let </span>adapter = <span class="number">9001</span>; <span class="comment">// invalid
-        </span><span class="macro">assert_eq!</span>(D3DERR::INVALIDCALL,     d3d.get_device_caps(adapter, DevType::HAL));
-        <span class="macro">assert_eq!</span>(D3DERR::INVALIDCALL,     d3d.get_device_caps(adapter, DevType::Ref));
-        <span class="macro">assert_eq!</span>(D3DERR::INVALIDCALL,     d3d.get_device_caps(adapter, DevType::NullRef));
-        <span class="macro">assert_eq!</span>(D3DERR::INVALIDCALL,     d3d.get_device_caps(adapter, DevType::from_unchecked(<span class="number">100</span>)));
-        <span class="macro">assert_eq!</span>(D3DERR::INVALIDCALL,     d3d.get_device_caps(adapter, DevType::from_unchecked(<span class="number">10000</span>)));
-        <span class="macro">assert_eq!</span>(D3DERR::INVALIDCALL,     d3d.get_device_caps(adapter, DevType::from_unchecked(<span class="number">1000000</span>)));
-        <span class="macro">assert_eq!</span>(D3DERR::INVALIDCALL,     d3d.get_device_caps(adapter, DevType::from_unchecked(<span class="number">100000000</span>)));
+        <span class="kw">let</span> <span class="ident">adapter</span> <span class="op">=</span> <span class="number">9001</span>; <span class="comment">// invalid</span>
+        <span class="macro">assert_eq!</span>(<span class="ident">D3DERR::INVALIDCALL</span>,     <span class="ident">d3d</span>.<span class="ident">get_device_caps</span>(<span class="ident">adapter</span>, <span class="ident">DevType::HAL</span>));
+        <span class="macro">assert_eq!</span>(<span class="ident">D3DERR::INVALIDCALL</span>,     <span class="ident">d3d</span>.<span class="ident">get_device_caps</span>(<span class="ident">adapter</span>, <span class="ident">DevType::Ref</span>));
+        <span class="macro">assert_eq!</span>(<span class="ident">D3DERR::INVALIDCALL</span>,     <span class="ident">d3d</span>.<span class="ident">get_device_caps</span>(<span class="ident">adapter</span>, <span class="ident">DevType::NullRef</span>));
+        <span class="macro">assert_eq!</span>(<span class="ident">D3DERR::INVALIDCALL</span>,     <span class="ident">d3d</span>.<span class="ident">get_device_caps</span>(<span class="ident">adapter</span>, <span class="ident">DevType::from_unchecked</span>(<span class="number">100</span>)));
+        <span class="macro">assert_eq!</span>(<span class="ident">D3DERR::INVALIDCALL</span>,     <span class="ident">d3d</span>.<span class="ident">get_device_caps</span>(<span class="ident">adapter</span>, <span class="ident">DevType::from_unchecked</span>(<span class="number">10000</span>)));
+        <span class="macro">assert_eq!</span>(<span class="ident">D3DERR::INVALIDCALL</span>,     <span class="ident">d3d</span>.<span class="ident">get_device_caps</span>(<span class="ident">adapter</span>, <span class="ident">DevType::from_unchecked</span>(<span class="number">1000000</span>)));
+        <span class="macro">assert_eq!</span>(<span class="ident">D3DERR::INVALIDCALL</span>,     <span class="ident">d3d</span>.<span class="ident">get_device_caps</span>(<span class="ident">adapter</span>, <span class="ident">DevType::from_unchecked</span>(<span class="number">100000000</span>)));
     }
 }
 
 
 
 
-<span class="comment">//#cpp2rust IDirect3D9                                          = d3d9::Direct3D
-//#cpp2rust IDirect3D9                                          = d3d9::IDirect3D9Ext
-</span></code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (b44197abb 2022-09-05)" ></div></body></html>
+<span class="comment">//#cpp2rust IDirect3D9                                          = d3d9::Direct3D</span>
+<span class="comment">//#cpp2rust IDirect3D9                                          = d3d9::IDirect3D9Ext</span>
+</code></pre></div>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0 (4b91a6ea7 2022-08-08)" ></div>
+</body></html>

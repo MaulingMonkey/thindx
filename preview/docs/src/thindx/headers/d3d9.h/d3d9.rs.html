@@ -1,4 +1,10 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3d9.h\d3d9.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>d3d9.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../normalize.css"><link rel="stylesheet" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../dark.css" disabled><link rel="stylesheet" href="../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../storage.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../thindx/index.html"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3d9.h\d3d9.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>d3d9.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../storage.js"></script><script defer src="../../../../source-script.js"></script><script defer src="../../../../source-files.js"></script><script defer src="../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></div>
+        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../thindx/index.html"><img class="rust-logo" src="../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
+                                <a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -73,80 +79,81 @@
 <span id="73">73</span>
 <span id="74">74</span>
 <span id="75">75</span>
-</pre><pre class="rust"><code><span class="comment">// XXX: temporary attributes
-</span><span class="attribute">#![allow(rustdoc::broken_intra_doc_links)]
-#![allow(missing_docs)]
+</pre><pre class="rust"><code><span class="comment">// XXX: temporary attributes</span>
+<span class="attribute">#![<span class="ident">allow</span>(<span class="ident">rustdoc::broken_intra_doc_links</span>)]</span>
+<span class="attribute">#![<span class="ident">allow</span>(<span class="ident">missing_docs</span>)]</span>
 
-</span><span class="kw">use </span><span class="kw">crate</span>::Unknown;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::Unknown</span>;
 
-<span class="macro">mods! </span>{
-    inl <span class="kw">mod </span>flags {
-        inl <span class="kw">mod </span>cursor;
+<span class="macro">mods!</span> {
+    <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">flags</span> {
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">cursor</span>;
     }
 
-    inl <span class="kw">mod </span>functions {
-        <span class="kw">pub mod </span>perf;
+    <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">functions</span> {
+        <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">perf</span>;
     }
 
-    inl <span class="kw">mod </span>interfaces {
-        inl <span class="kw">mod </span>device;
-        inl <span class="kw">mod </span>deviceex;
-        inl <span class="kw">mod </span>buffers;
-        inl <span class="kw">mod </span>direct3d;
-        inl <span class="kw">mod </span>direct3dex;
-        inl <span class="kw">mod </span>query;
-        inl <span class="kw">mod </span>resource;
-        inl <span class="kw">mod </span>shaders;
-        inl <span class="kw">mod </span>state_block;
-        inl <span class="kw">mod </span>surface;
-        inl <span class="kw">mod </span>swap_chain;
-        inl <span class="kw">mod </span>swap_chain_ex;
-        inl <span class="kw">mod </span>texture;
-        inl <span class="kw">mod </span>vertex_declaration;
-        inl <span class="kw">mod </span>volume;
-        <span class="kw">mod </span>device_misc;
+    <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">interfaces</span> {
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">device</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">deviceex</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">buffers</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">direct3d</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">direct3dex</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">query</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">resource</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">shaders</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">state_block</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">surface</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">swap_chain</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">swap_chain_ex</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">texture</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">vertex_declaration</span>;
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">volume</span>;
+        <span class="kw">mod</span> <span class="ident">device_misc</span>;
     }
 
-    inl <span class="kw">mod </span>wrappers {
-        inl <span class="kw">mod </span>safe_device;
+    <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">wrappers</span> {
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">safe_device</span>;
     }
 }
 
-<span class="comment">// Misc
-//convert!(unsafe Unknown,                            winapi::um::unknwnbase::IUnknown);
-</span><span class="macro">convert!</span>(<span class="kw">unsafe </span>Query               =&gt; Unknown,     winapi::shared::d3d9::IDirect3DQuery9);
-<span class="macro">convert!</span>(<span class="kw">unsafe </span>StateBlock          =&gt; Unknown,     winapi::shared::d3d9::IDirect3DStateBlock9);
-<span class="macro">convert!</span>(<span class="kw">unsafe </span>VertexDeclaration   =&gt; Unknown,     winapi::shared::d3d9::IDirect3DVertexDeclaration9);
+<span class="comment">// Misc</span>
+<span class="comment">//convert!(unsafe Unknown,                            winapi::um::unknwnbase::IUnknown);</span>
+<span class="macro">convert!</span>(<span class="kw unsafe">unsafe</span> <span class="ident">Query</span>               =&gt; <span class="ident">Unknown</span>,     <span class="ident">winapi::shared::d3d9::IDirect3DQuery9</span>);
+<span class="macro">convert!</span>(<span class="kw unsafe">unsafe</span> <span class="ident">StateBlock</span>          =&gt; <span class="ident">Unknown</span>,     <span class="ident">winapi::shared::d3d9::IDirect3DStateBlock9</span>);
+<span class="macro">convert!</span>(<span class="kw unsafe">unsafe</span> <span class="ident">VertexDeclaration</span>   =&gt; <span class="ident">Unknown</span>,     <span class="ident">winapi::shared::d3d9::IDirect3DVertexDeclaration9</span>);
 
-<span class="comment">// Singletonish stuff
-</span><span class="macro">convert!</span>(<span class="kw">unsafe </span>Device              =&gt; Unknown,     winapi::shared::d3d9::IDirect3DDevice9);
-<span class="macro">convert!</span>(<span class="kw">unsafe </span>Direct3D            =&gt; Unknown,     winapi::shared::d3d9::IDirect3D9);
-<span class="macro">convert!</span>(<span class="kw">unsafe </span>SwapChain           =&gt; Unknown,     winapi::shared::d3d9::IDirect3DSwapChain9);
-<span class="attribute">#[cfg(feature = <span class="string">&quot;9ex&quot;</span>)] </span><span class="macro">convert!</span>(<span class="kw">unsafe </span>DeviceEx    =&gt; Device,      winapi::shared::d3d9::IDirect3DDevice9Ex);
-<span class="attribute">#[cfg(feature = <span class="string">&quot;9ex&quot;</span>)] </span><span class="macro">convert!</span>(<span class="kw">unsafe </span>Direct3DEx  =&gt; Direct3D,    winapi::shared::d3d9::IDirect3D9Ex);
-<span class="attribute">#[cfg(feature = <span class="string">&quot;9ex&quot;</span>)] </span><span class="macro">convert!</span>(<span class="kw">unsafe </span>SwapChainEx =&gt; SwapChain,   winapi::shared::d3d9::IDirect3DSwapChain9Ex);
+<span class="comment">// Singletonish stuff</span>
+<span class="macro">convert!</span>(<span class="kw unsafe">unsafe</span> <span class="ident">Device</span>              =&gt; <span class="ident">Unknown</span>,     <span class="ident">winapi::shared::d3d9::IDirect3DDevice9</span>);
+<span class="macro">convert!</span>(<span class="kw unsafe">unsafe</span> <span class="ident">Direct3D</span>            =&gt; <span class="ident">Unknown</span>,     <span class="ident">winapi::shared::d3d9::IDirect3D9</span>);
+<span class="macro">convert!</span>(<span class="kw unsafe">unsafe</span> <span class="ident">SwapChain</span>           =&gt; <span class="ident">Unknown</span>,     <span class="ident">winapi::shared::d3d9::IDirect3DSwapChain9</span>);
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;9ex&quot;</span>)]</span> <span class="macro">convert!</span>(<span class="kw unsafe">unsafe</span> <span class="ident">DeviceEx</span>    =&gt; <span class="ident">Device</span>,      <span class="ident">winapi::shared::d3d9::IDirect3DDevice9Ex</span>);
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;9ex&quot;</span>)]</span> <span class="macro">convert!</span>(<span class="kw unsafe">unsafe</span> <span class="ident">Direct3DEx</span>  =&gt; <span class="ident">Direct3D</span>,    <span class="ident">winapi::shared::d3d9::IDirect3D9Ex</span>);
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;9ex&quot;</span>)]</span> <span class="macro">convert!</span>(<span class="kw unsafe">unsafe</span> <span class="ident">SwapChainEx</span> =&gt; <span class="ident">SwapChain</span>,   <span class="ident">winapi::shared::d3d9::IDirect3DSwapChain9Ex</span>);
 
-<span class="comment">// Resources
-</span><span class="macro">convert!</span>(<span class="kw">unsafe </span>Resource            =&gt; Unknown,     winapi::shared::d3d9::IDirect3DResource9);
-<span class="macro">convert!</span>(<span class="kw">unsafe </span>Surface             =&gt; Resource,    winapi::shared::d3d9::IDirect3DSurface9);
-<span class="macro">convert!</span>(<span class="kw">unsafe </span>BaseTexture         =&gt; Resource,    winapi::shared::d3d9::IDirect3DBaseTexture9);
-<span class="macro">convert!</span>(<span class="kw">unsafe </span>CubeTexture         =&gt; BaseTexture, winapi::shared::d3d9::IDirect3DCubeTexture9);
-<span class="macro">convert!</span>(<span class="kw">unsafe </span>VolumeTexture       =&gt; BaseTexture, winapi::shared::d3d9::IDirect3DVolumeTexture9);
-<span class="macro">convert!</span>(<span class="kw">unsafe </span>Texture             =&gt; BaseTexture, winapi::shared::d3d9::IDirect3DTexture9);
-<span class="macro">convert!</span>(<span class="kw">unsafe </span>IndexBuffer         =&gt; Resource,    winapi::shared::d3d9::IDirect3DIndexBuffer9);
-<span class="macro">convert!</span>(<span class="kw">unsafe </span>VertexBuffer        =&gt; Resource,    winapi::shared::d3d9::IDirect3DVertexBuffer9);
-<span class="comment">// Not resources despite what you might expect
-</span><span class="macro">convert!</span>(<span class="kw">unsafe </span>PixelShader         =&gt; Unknown,     winapi::shared::d3d9::IDirect3DPixelShader9);
-<span class="macro">convert!</span>(<span class="kw">unsafe </span>VertexShader        =&gt; Unknown,     winapi::shared::d3d9::IDirect3DVertexShader9);
-<span class="macro">convert!</span>(<span class="kw">unsafe </span>Volume              =&gt; Unknown,     winapi::shared::d3d9::IDirect3DVolume9);
+<span class="comment">// Resources</span>
+<span class="macro">convert!</span>(<span class="kw unsafe">unsafe</span> <span class="ident">Resource</span>            =&gt; <span class="ident">Unknown</span>,     <span class="ident">winapi::shared::d3d9::IDirect3DResource9</span>);
+<span class="macro">convert!</span>(<span class="kw unsafe">unsafe</span> <span class="ident">Surface</span>             =&gt; <span class="ident">Resource</span>,    <span class="ident">winapi::shared::d3d9::IDirect3DSurface9</span>);
+<span class="macro">convert!</span>(<span class="kw unsafe">unsafe</span> <span class="ident">BaseTexture</span>         =&gt; <span class="ident">Resource</span>,    <span class="ident">winapi::shared::d3d9::IDirect3DBaseTexture9</span>);
+<span class="macro">convert!</span>(<span class="kw unsafe">unsafe</span> <span class="ident">CubeTexture</span>         =&gt; <span class="ident">BaseTexture</span>, <span class="ident">winapi::shared::d3d9::IDirect3DCubeTexture9</span>);
+<span class="macro">convert!</span>(<span class="kw unsafe">unsafe</span> <span class="ident">VolumeTexture</span>       =&gt; <span class="ident">BaseTexture</span>, <span class="ident">winapi::shared::d3d9::IDirect3DVolumeTexture9</span>);
+<span class="macro">convert!</span>(<span class="kw unsafe">unsafe</span> <span class="ident">Texture</span>             =&gt; <span class="ident">BaseTexture</span>, <span class="ident">winapi::shared::d3d9::IDirect3DTexture9</span>);
+<span class="macro">convert!</span>(<span class="kw unsafe">unsafe</span> <span class="ident">IndexBuffer</span>         =&gt; <span class="ident">Resource</span>,    <span class="ident">winapi::shared::d3d9::IDirect3DIndexBuffer9</span>);
+<span class="macro">convert!</span>(<span class="kw unsafe">unsafe</span> <span class="ident">VertexBuffer</span>        =&gt; <span class="ident">Resource</span>,    <span class="ident">winapi::shared::d3d9::IDirect3DVertexBuffer9</span>);
+<span class="comment">// Not resources despite what you might expect</span>
+<span class="macro">convert!</span>(<span class="kw unsafe">unsafe</span> <span class="ident">PixelShader</span>         =&gt; <span class="ident">Unknown</span>,     <span class="ident">winapi::shared::d3d9::IDirect3DPixelShader9</span>);
+<span class="macro">convert!</span>(<span class="kw unsafe">unsafe</span> <span class="ident">VertexShader</span>        =&gt; <span class="ident">Unknown</span>,     <span class="ident">winapi::shared::d3d9::IDirect3DVertexShader9</span>);
+<span class="macro">convert!</span>(<span class="kw unsafe">unsafe</span> <span class="ident">Volume</span>              =&gt; <span class="ident">Unknown</span>,     <span class="ident">winapi::shared::d3d9::IDirect3DVolume9</span>);
 
-<span class="comment">// missing from winapi
-// C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\d3d9.h
-</span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">const </span>D3DSPD_IUNKNOWN : u32 = <span class="number">1</span>;
+<span class="comment">// missing from winapi</span>
+<span class="comment">// C:\Program Files (x86)\Windows Kits\10\Include\10.0.22621.0\shared\d3d9.h</span>
+<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">const</span> <span class="ident">D3DSPD_IUNKNOWN</span> : <span class="ident">u32</span> <span class="op">=</span> <span class="number">1</span>;
 
 
-<span class="comment">// d3d.h has: #define D3DAPI WINAPI
-//#cpp2rust D3DAPI          = extern &quot;system&quot;
-//#cpp2rust WINAPI          = extern &quot;system&quot;
-</span></code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (b44197abb 2022-09-05)" ></div></body></html>
+<span class="comment">// d3d.h has: #define D3DAPI WINAPI</span>
+<span class="comment">//#cpp2rust D3DAPI          = extern &quot;system&quot;</span>
+<span class="comment">//#cpp2rust WINAPI          = extern &quot;system&quot;</span>
+</code></pre></div>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0 (4b91a6ea7 2022-08-08)" ></div>
+</body></html>

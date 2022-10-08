@@ -1,4 +1,10 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3d11shader.h\interfaces\linker.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>linker.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../../normalize.css"><link rel="stylesheet" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../../dark.css" disabled><link rel="stylesheet" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3d11shader.h\interfaces\linker.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>linker.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div>
+        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
+                                <a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -174,181 +180,182 @@
 <span id="174">174</span>
 <span id="175">175</span>
 <span id="176">176</span>
-</pre><pre class="rust"><code><span class="kw">use crate</span>::<span class="kw-2">*</span>;
-<span class="kw">use </span><span class="kw">crate</span>::ctypes::<span class="kw-2">*</span>;
-<span class="kw">use </span><span class="kw">crate</span>::d3d::<span class="kw-2">*</span>;
-<span class="kw">use </span><span class="kw">crate</span>::d3d11::<span class="kw-2">*</span>;
+</pre><pre class="rust"><code><span class="kw">use</span> <span class="kw">crate</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::ctypes</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::d3d</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::d3d11</span>::<span class="kw-2">*</span>;
 
-<span class="kw">use </span>std::ptr::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">std::ptr</span>::<span class="kw-2">*</span>;
 
 
 
-<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11linker)\]
-/// ID3D11Linker
-///
-/// A linker interface is used to link a shader module.
-///
-/// ### See Also
-/// *   [d3d::Compiler::create_linker] to create [Linker]s
-/// *   [d3d11::FunctionLinkingGraph] for examples
-/// *   [examples::d3dcompiler_03_link]
-</span><span class="attribute">#[derive(Clone)] #[repr(transparent)]
-</span><span class="kw">pub struct </span>Linker(<span class="kw">pub</span>(<span class="kw">crate</span>) mcom::Rc&lt;winapi::um::d3d11shader::ID3D11Linker&gt;);
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11linker)\]</span>
+<span class="doccomment">/// ID3D11Linker</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// A linker interface is used to link a shader module.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// ### See Also</span>
+<span class="doccomment">/// *   [d3d::Compiler::create_linker] to create [Linker]s</span>
+<span class="doccomment">/// *   [d3d11::FunctionLinkingGraph] for examples</span>
+<span class="doccomment">/// *   [examples::d3dcompiler_03_link]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>)]</span> <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">transparent</span>)]</span>
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Linker</span>(<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="ident">mcom::Rc</span><span class="op">&lt;</span><span class="ident">winapi::um::d3d11shader::ID3D11Linker</span><span class="op">&gt;</span>);
 
-<span class="macro">convert!</span>(<span class="kw">unsafe </span>Linker =&gt; Unknown, winapi::um::d3d11shader::ID3D11Linker);
+<span class="macro">convert!</span>(<span class="kw unsafe">unsafe</span> <span class="ident">Linker</span> =&gt; <span class="ident">Unknown</span>, <span class="ident">winapi::um::d3d11shader::ID3D11Linker</span>);
 
-<span class="kw">impl </span>Linker {
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11linker-addclipplanefromcbuffer)\]
-    /// ID3D11Linker::AddClipPlaneFromCBuffer
-    ///
-    /// Adds a [clip plane] with the plane coefficients taken from a [cbuffer] entry for 10Level9 shaders.
-    ///
-    /// [clip plane]:       https://docs.microsoft.com/en-us/windows/desktop/direct3dhlsl/user-clip-planes-on-10level9
-    /// [cbuffer]:          https://docs.microsoft.com/en-us/windows/desktop/direct3dhlsl/dx-graphics-hlsl-constants
-    ///
-    /// ### Arguments
-    /// *   `cbuffer_slot`      - The cbuffer slot (e.g. which `cb#` register to read)
-    /// *   `cbuffer_entry`     - The cbuffer entry (e.g. which `float4` element of the cbuffer to read the plane coefficients from)
-    ///
-    /// ### Errors
-    /// *   [E::INVALIDARG]     - If `cbuffer_slot` &gt;= the maximum number of cbuffer slots (`15` on my machine)
-    /// *   [E::INVALIDARG]     - If `cbuffer_entry` &gt;= the maximum number of cbuffer entries (`4096` on my machine)
-    /// *   [E::INVALIDARG]     - If the slot + entry was already added
-    /// *   [E::FAIL]           - If trying to add too many clip planes (e.g. 6 were already added, and you&#39;re attempting to add a 7th)
-    ///
-    /// ### Example
-    /// ```rust
-    /// # use thindx::*;
-    /// let d3dc = d3d::Compiler::load_system(47).unwrap();
-    /// let linker : d3d11::Linker = d3dc.create_linker().unwrap();
-    ///
-    /// let add_clip_plane = |slot, entry| linker
-    ///     .add_clip_plane_from_cbuffer(slot, entry)
-    ///     .map_err(|e| e.kind());
-    ///
-    /// assert_eq!(add_clip_plane(0, 0), Ok(())); // 1
-    /// assert_eq!(add_clip_plane(0, 0), E::INVALIDARG); // already added
-    ///
-    /// // &quot;Each shader stage allows up to 15 shader-constant buffers; [...]&quot;
-    /// assert_eq!(add_clip_plane(1,  0), Ok(())); // 2
-    /// assert_eq!(add_clip_plane(14, 0), Ok(())); // 3
-    /// assert_eq!(add_clip_plane(15, 0), E::INVALIDARG);
-    ///
-    /// // &quot;[...] each buffer can hold up to 4096 constants.&quot;
-    /// assert_eq!(add_clip_plane(0, 1   ), Ok(())); // 4
-    /// assert_eq!(add_clip_plane(0, 4095), Ok(())); // 5
-    /// assert_eq!(add_clip_plane(0, 4096), E::INVALIDARG);
-    /// #
-    /// # assert_eq!(E::INVALIDARG, add_clip_plane(!0, 0));
-    /// # assert_eq!(E::INVALIDARG, add_clip_plane(0, !0));
-    /// # assert_eq!(E::INVALIDARG, add_clip_plane(0, !0-1));
-    /// # assert_eq!(E::INVALIDARG, add_clip_plane(0, !0-4));
-    /// # assert_eq!(E::INVALIDARG, add_clip_plane(0, !0-10));
-    /// # assert_eq!(E::INVALIDARG, add_clip_plane(0, !0-100));
-    /// # assert_eq!(E::INVALIDARG, add_clip_plane(!0-1, 0));
-    /// # assert_eq!(E::INVALIDARG, add_clip_plane(!0-4, 0));
-    /// # assert_eq!(E::INVALIDARG, add_clip_plane(!0-10, 0));
-    /// # assert_eq!(E::INVALIDARG, add_clip_plane(!0-100, 0));
-    /// # assert_eq!(E::INVALIDARG, add_clip_plane(!0, !0));
-    ///
-    /// // &quot;... you provide a list of up to 6 float4 constants that define the plane coefficients
-    /// // for each active clip plane.&quot;
-    /// assert_eq!(add_clip_plane(3, 1), Ok(())); // 6th successful clip plane added to linker
-    /// assert_eq!(add_clip_plane(3, 2), E::FAIL); // 7th clip plane exceeds limits
-    /// ```
-    ///
-    /// ### See Also
-    /// *   [User clip planes on feature level 9 hardware](https://docs.microsoft.com/en-us/windows/win32/direct3dhlsl/user-clip-planes-on-10level9) (clip plane limit)
-    /// *   [Introduction to Buffers in Direct3D 11:  Constant Buffer](https://docs.microsoft.com/en-us/windows/win32/direct3d11/overviews-direct3d-11-resources-buffers-intro#constant-buffer) (cbuffer limits quoted in example)
-    </span><span class="kw">pub fn </span>add_clip_plane_from_cbuffer(<span class="kw-2">&amp;</span><span class="self">self</span>, cbuffer_slot: u32, cbuffer_entry: u32) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
-        <span class="macro">fn_context!</span>(d3d11::Linker::add_clip_plane_from_cbuffer =&gt; ID3D11Linker::AddClipPlaneFromCBuffer);
-        <span class="macro">fn_check_hr!</span>(<span class="kw">unsafe </span>{ <span class="self">self</span>.<span class="number">0</span>.AddClipPlaneFromCBuffer(cbuffer_slot, cbuffer_entry) })
+<span class="kw">impl</span> <span class="ident">Linker</span> {
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11linker-addclipplanefromcbuffer)\]</span>
+    <span class="doccomment">/// ID3D11Linker::AddClipPlaneFromCBuffer</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Adds a [clip plane] with the plane coefficients taken from a [cbuffer] entry for 10Level9 shaders.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// [clip plane]:       https://docs.microsoft.com/en-us/windows/desktop/direct3dhlsl/user-clip-planes-on-10level9</span>
+    <span class="doccomment">/// [cbuffer]:          https://docs.microsoft.com/en-us/windows/desktop/direct3dhlsl/dx-graphics-hlsl-constants</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Arguments</span>
+    <span class="doccomment">/// *   `cbuffer_slot`      - The cbuffer slot (e.g. which `cb#` register to read)</span>
+    <span class="doccomment">/// *   `cbuffer_entry`     - The cbuffer entry (e.g. which `float4` element of the cbuffer to read the plane coefficients from)</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Errors</span>
+    <span class="doccomment">/// *   [E::INVALIDARG]     - If `cbuffer_slot` &gt;= the maximum number of cbuffer slots (`15` on my machine)</span>
+    <span class="doccomment">/// *   [E::INVALIDARG]     - If `cbuffer_entry` &gt;= the maximum number of cbuffer entries (`4096` on my machine)</span>
+    <span class="doccomment">/// *   [E::INVALIDARG]     - If the slot + entry was already added</span>
+    <span class="doccomment">/// *   [E::FAIL]           - If trying to add too many clip planes (e.g. 6 were already added, and you&#39;re attempting to add a 7th)</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Example</span>
+    <span class="doccomment">/// ```rust</span>
+    <span class="doccomment">/// # use thindx::*;</span>
+    <span class="doccomment">/// let d3dc = d3d::Compiler::load_system(47).unwrap();</span>
+    <span class="doccomment">/// let linker : d3d11::Linker = d3dc.create_linker().unwrap();</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// let add_clip_plane = |slot, entry| linker</span>
+    <span class="doccomment">///     .add_clip_plane_from_cbuffer(slot, entry)</span>
+    <span class="doccomment">///     .map_err(|e| e.kind());</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// assert_eq!(add_clip_plane(0, 0), Ok(())); // 1</span>
+    <span class="doccomment">/// assert_eq!(add_clip_plane(0, 0), E::INVALIDARG); // already added</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// // &quot;Each shader stage allows up to 15 shader-constant buffers; [...]&quot;</span>
+    <span class="doccomment">/// assert_eq!(add_clip_plane(1,  0), Ok(())); // 2</span>
+    <span class="doccomment">/// assert_eq!(add_clip_plane(14, 0), Ok(())); // 3</span>
+    <span class="doccomment">/// assert_eq!(add_clip_plane(15, 0), E::INVALIDARG);</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// // &quot;[...] each buffer can hold up to 4096 constants.&quot;</span>
+    <span class="doccomment">/// assert_eq!(add_clip_plane(0, 1   ), Ok(())); // 4</span>
+    <span class="doccomment">/// assert_eq!(add_clip_plane(0, 4095), Ok(())); // 5</span>
+    <span class="doccomment">/// assert_eq!(add_clip_plane(0, 4096), E::INVALIDARG);</span>
+    <span class="doccomment">/// #</span>
+    <span class="doccomment">/// # assert_eq!(E::INVALIDARG, add_clip_plane(!0, 0));</span>
+    <span class="doccomment">/// # assert_eq!(E::INVALIDARG, add_clip_plane(0, !0));</span>
+    <span class="doccomment">/// # assert_eq!(E::INVALIDARG, add_clip_plane(0, !0-1));</span>
+    <span class="doccomment">/// # assert_eq!(E::INVALIDARG, add_clip_plane(0, !0-4));</span>
+    <span class="doccomment">/// # assert_eq!(E::INVALIDARG, add_clip_plane(0, !0-10));</span>
+    <span class="doccomment">/// # assert_eq!(E::INVALIDARG, add_clip_plane(0, !0-100));</span>
+    <span class="doccomment">/// # assert_eq!(E::INVALIDARG, add_clip_plane(!0-1, 0));</span>
+    <span class="doccomment">/// # assert_eq!(E::INVALIDARG, add_clip_plane(!0-4, 0));</span>
+    <span class="doccomment">/// # assert_eq!(E::INVALIDARG, add_clip_plane(!0-10, 0));</span>
+    <span class="doccomment">/// # assert_eq!(E::INVALIDARG, add_clip_plane(!0-100, 0));</span>
+    <span class="doccomment">/// # assert_eq!(E::INVALIDARG, add_clip_plane(!0, !0));</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// // &quot;... you provide a list of up to 6 float4 constants that define the plane coefficients</span>
+    <span class="doccomment">/// // for each active clip plane.&quot;</span>
+    <span class="doccomment">/// assert_eq!(add_clip_plane(3, 1), Ok(())); // 6th successful clip plane added to linker</span>
+    <span class="doccomment">/// assert_eq!(add_clip_plane(3, 2), E::FAIL); // 7th clip plane exceeds limits</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### See Also</span>
+    <span class="doccomment">/// *   [User clip planes on feature level 9 hardware](https://docs.microsoft.com/en-us/windows/win32/direct3dhlsl/user-clip-planes-on-10level9) (clip plane limit)</span>
+    <span class="doccomment">/// *   [Introduction to Buffers in Direct3D 11:  Constant Buffer](https://docs.microsoft.com/en-us/windows/win32/direct3d11/overviews-direct3d-11-resources-buffers-intro#constant-buffer) (cbuffer limits quoted in example)</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">add_clip_plane_from_cbuffer</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">cbuffer_slot</span>: <span class="ident">u32</span>, <span class="ident">cbuffer_entry</span>: <span class="ident">u32</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
+        <span class="macro">fn_context!</span>(<span class="ident">d3d11::Linker::add_clip_plane_from_cbuffer</span> =&gt; <span class="ident">ID3D11Linker::AddClipPlaneFromCBuffer</span>);
+        <span class="macro">fn_check_hr!</span>(<span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="number">0</span>.<span class="ident">AddClipPlaneFromCBuffer</span>(<span class="ident">cbuffer_slot</span>, <span class="ident">cbuffer_entry</span>) })
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11linker-link)\]
-    /// ID3D11Linker::Link
-    ///
-    /// Links the shader and produces a shader blob that the Direct3D runtime can use.
-    ///
-    /// ### Arguments
-    /// *   `entry`         - A [`ModuleInstance`] created by e.g. [FunctionLinkingGraph::create_module_instance]
-    /// *   `entry_name`    - The name to give the generated entry point when linking the shader (mostly for debug purpouses.)
-    /// *   `target_name`   - What kind of shader to generate (e.g. `&quot;vs_5_0&quot;` etc.)
-    /// *   `flags`         - Reserved.  Initialize with [`None`].
-    ///
-    /// ### Example
-    /// ```rust
-    /// # use thindx::*;
-    /// let d3dc = d3d::Compiler::load_system(47).unwrap();
-    /// # let lib = d3dc.compile_from_file(r&quot;test\data\library.hlsl&quot;, None, None, (), &quot;lib_5_0&quot;, d3d::Compile::OptimizationLevel3, d3d::CompileEffect::None).unwrap();
-    /// # let lib = d3dc.load_module(&amp;lib).unwrap();
-    /// # let lib = lib.create_instance(()).unwrap();
-    /// #
-    /// # let graph : d3d11::FunctionLinkingGraph = d3dc.create_function_linking_graph(None).unwrap();
-    /// # let input  = graph.set_input_signature( &amp;[d3d11::ParameterDesc::new(None, cstr!(&quot;POSITION0&quot;),   d3d::SVT::Float, d3d::SVC::Vector, 1, 4, d3d::Interpolation::Linear,    d3d::PF::In,  0, 0, 0, 0)]).unwrap();
-    /// # let output = graph.set_output_signature(&amp;[d3d11::ParameterDesc::new(None, cstr!(&quot;SV_POSITION&quot;), d3d::SVT::Float, d3d::SVC::Vector, 1, 4, d3d::Interpolation::Undefined, d3d::PF::Out, 0, 0, 0, 0)]).unwrap();
-    /// # graph.pass_value(&amp;input, 0, &amp;output, 0).unwrap();
-    /// # let (graph, _warnings) = graph.create_module_instance().unwrap();
-    /// #
-    /// let linker = d3dc.create_linker().unwrap();
-    /// linker.use_library(&amp;lib).unwrap();
-    /// let shader = linker.link(&amp;graph, &quot;main&quot;, &quot;vs_5_0&quot;, None).unwrap();
-    /// ```
-    ///
-    /// ### See Also
-    /// *   [examples::d3dcompiler_03_link]
-    </span><span class="kw">pub fn </span>link(<span class="kw-2">&amp;</span><span class="self">self</span>, entry: <span class="kw-2">&amp;</span>ModuleInstance, entry_name: <span class="kw">impl </span>TryIntoAsCStr, target_name: <span class="kw">impl </span>TryIntoAsCStr, flags: <span class="prelude-ty">Option</span>&lt;std::convert::Infallible&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;LinkResult, ErrorWithBlob&gt; {
-        <span class="macro">fn_context!</span>(d3d11::Linker::link =&gt; ID3D11Linker::Link);
-        <span class="kw">let </span>entry_name  = <span class="macro">fn_param_try_into!</span>(entry_name)<span class="question-mark">?</span>;
-        <span class="kw">let </span>target_name = <span class="macro">fn_param_try_into!</span>(target_name)<span class="question-mark">?</span>;
-        <span class="kw">let </span>entry_name  = entry_name .as_cstr();
-        <span class="kw">let </span>target_name = target_name.as_cstr();
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11linker-link)\]</span>
+    <span class="doccomment">/// ID3D11Linker::Link</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Links the shader and produces a shader blob that the Direct3D runtime can use.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Arguments</span>
+    <span class="doccomment">/// *   `entry`         - A [`ModuleInstance`] created by e.g. [FunctionLinkingGraph::create_module_instance]</span>
+    <span class="doccomment">/// *   `entry_name`    - The name to give the generated entry point when linking the shader (mostly for debug purpouses.)</span>
+    <span class="doccomment">/// *   `target_name`   - What kind of shader to generate (e.g. `&quot;vs_5_0&quot;` etc.)</span>
+    <span class="doccomment">/// *   `flags`         - Reserved.  Initialize with [`None`].</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Example</span>
+    <span class="doccomment">/// ```rust</span>
+    <span class="doccomment">/// # use thindx::*;</span>
+    <span class="doccomment">/// let d3dc = d3d::Compiler::load_system(47).unwrap();</span>
+    <span class="doccomment">/// # let lib = d3dc.compile_from_file(r&quot;test\data\library.hlsl&quot;, None, None, (), &quot;lib_5_0&quot;, d3d::Compile::OptimizationLevel3, d3d::CompileEffect::None).unwrap();</span>
+    <span class="doccomment">/// # let lib = d3dc.load_module(&amp;lib).unwrap();</span>
+    <span class="doccomment">/// # let lib = lib.create_instance(()).unwrap();</span>
+    <span class="doccomment">/// #</span>
+    <span class="doccomment">/// # let graph : d3d11::FunctionLinkingGraph = d3dc.create_function_linking_graph(None).unwrap();</span>
+    <span class="doccomment">/// # let input  = graph.set_input_signature( &amp;[d3d11::ParameterDesc::new(None, cstr!(&quot;POSITION0&quot;),   d3d::SVT::Float, d3d::SVC::Vector, 1, 4, d3d::Interpolation::Linear,    d3d::PF::In,  0, 0, 0, 0)]).unwrap();</span>
+    <span class="doccomment">/// # let output = graph.set_output_signature(&amp;[d3d11::ParameterDesc::new(None, cstr!(&quot;SV_POSITION&quot;), d3d::SVT::Float, d3d::SVC::Vector, 1, 4, d3d::Interpolation::Undefined, d3d::PF::Out, 0, 0, 0, 0)]).unwrap();</span>
+    <span class="doccomment">/// # graph.pass_value(&amp;input, 0, &amp;output, 0).unwrap();</span>
+    <span class="doccomment">/// # let (graph, _warnings) = graph.create_module_instance().unwrap();</span>
+    <span class="doccomment">/// #</span>
+    <span class="doccomment">/// let linker = d3dc.create_linker().unwrap();</span>
+    <span class="doccomment">/// linker.use_library(&amp;lib).unwrap();</span>
+    <span class="doccomment">/// let shader = linker.link(&amp;graph, &quot;main&quot;, &quot;vs_5_0&quot;, None).unwrap();</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### See Also</span>
+    <span class="doccomment">/// *   [examples::d3dcompiler_03_link]</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">link</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">entry</span>: <span class="kw-2">&amp;</span><span class="ident">ModuleInstance</span>, <span class="ident">entry_name</span>: <span class="kw">impl</span> <span class="ident">TryIntoAsCStr</span>, <span class="ident">target_name</span>: <span class="kw">impl</span> <span class="ident">TryIntoAsCStr</span>, <span class="ident">flags</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">std::convert::Infallible</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">LinkResult</span>, <span class="ident">ErrorWithBlob</span><span class="op">&gt;</span> {
+        <span class="macro">fn_context!</span>(<span class="ident">d3d11::Linker::link</span> =&gt; <span class="ident">ID3D11Linker::Link</span>);
+        <span class="kw">let</span> <span class="ident">entry_name</span>  <span class="op">=</span> <span class="macro">fn_param_try_into!</span>(<span class="ident">entry_name</span>)<span class="question-mark">?</span>;
+        <span class="kw">let</span> <span class="ident">target_name</span> <span class="op">=</span> <span class="macro">fn_param_try_into!</span>(<span class="ident">target_name</span>)<span class="question-mark">?</span>;
+        <span class="kw">let</span> <span class="ident">entry_name</span>  <span class="op">=</span> <span class="ident">entry_name</span> .<span class="ident">as_cstr</span>();
+        <span class="kw">let</span> <span class="ident">target_name</span> <span class="op">=</span> <span class="ident">target_name</span>.<span class="ident">as_cstr</span>();
 
-        <span class="kw">let _ </span>= flags; <span class="kw">let </span>flags = <span class="number">0</span>;
+        <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">flags</span>; <span class="kw">let</span> <span class="ident">flags</span> <span class="op">=</span> <span class="number">0</span>;
 
-        <span class="kw">let </span><span class="kw-2">mut </span>blob = null_mut();
-        <span class="kw">let </span><span class="kw-2">mut </span>errors = null_mut();
-        <span class="kw">let </span>hr = <span class="kw">unsafe </span>{ <span class="self">self</span>.<span class="number">0</span>.Link(entry.as_raw(), entry_name, target_name, flags, <span class="kw-2">&amp;mut </span>blob, <span class="kw-2">&amp;mut </span>errors) };
-        <span class="kw">let </span>errors = TextBlob::new(<span class="kw">unsafe </span>{ ReadOnlyBlob::from_raw_opt(errors) });
-        <span class="kw">match </span><span class="macro">fn_check_hr!</span>(hr) {
-            <span class="prelude-val">Err</span>(error) =&gt; <span class="prelude-val">Err</span>(ErrorWithBlob { error, errors }),
-            <span class="prelude-val">Ok</span>(()) =&gt; <span class="prelude-val">Ok</span>(LinkResult {
-                shader: <span class="kw">unsafe </span>{ CodeBlob::from_unchecked(ReadOnlyBlob::from_raw(blob)) },
-                errors,
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">blob</span> <span class="op">=</span> <span class="ident">null_mut</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">errors</span> <span class="op">=</span> <span class="ident">null_mut</span>();
+        <span class="kw">let</span> <span class="ident">hr</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="number">0</span>.<span class="ident">Link</span>(<span class="ident">entry</span>.<span class="ident">as_raw</span>(), <span class="ident">entry_name</span>, <span class="ident">target_name</span>, <span class="ident">flags</span>, <span class="kw-2">&amp;mut</span> <span class="ident">blob</span>, <span class="kw-2">&amp;mut</span> <span class="ident">errors</span>) };
+        <span class="kw">let</span> <span class="ident">errors</span> <span class="op">=</span> <span class="ident">TextBlob::new</span>(<span class="kw unsafe">unsafe</span> { <span class="ident">ReadOnlyBlob::from_raw_opt</span>(<span class="ident">errors</span>) });
+        <span class="kw">match</span> <span class="macro">fn_check_hr!</span>(<span class="ident">hr</span>) {
+            <span class="prelude-val">Err</span>(<span class="ident">error</span>) =&gt; <span class="prelude-val">Err</span>(<span class="ident">ErrorWithBlob</span> { <span class="ident">error</span>, <span class="ident">errors</span> }),
+            <span class="prelude-val">Ok</span>(()) =&gt; <span class="prelude-val">Ok</span>(<span class="ident">LinkResult</span> {
+                <span class="ident">shader</span>: <span class="kw unsafe">unsafe</span> { <span class="ident">CodeBlob::from_unchecked</span>(<span class="ident">ReadOnlyBlob::from_raw</span>(<span class="ident">blob</span>)) },
+                <span class="ident">errors</span>,
             })
         }
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11linker-uselibrary)\]
-    /// ID3D11Linker::UseLibrary
-    ///
-    /// Adds an instance of a library module to be used for linking.
-    ///
-    /// ### Example
-    /// ```rust
-    /// # use thindx::*;
-    /// let d3dc = d3d::Compiler::load_system(47).unwrap();
-    ///
-    /// let lib = d3dc.compile_from_file(
-    ///     r&quot;test\data\library.hlsl&quot;, None, None, (), &quot;lib_5_0&quot;,
-    ///     d3d::Compile::OptimizationLevel3, d3d::CompileEffect::None
-    /// ).unwrap();
-    /// let lib = d3dc.load_module(&amp;lib).unwrap().create_instance(()).unwrap();
-    ///
-    /// let linker = d3dc.create_linker().unwrap();
-    /// linker.use_library(&amp;lib).unwrap();
-    /// // linker.link(...), etc.
-    /// ```
-    ///
-    /// ### See Also
-    /// *   [examples::d3dcompiler_03_link]
-    </span><span class="comment">//#allow_missing_argument_docs
-    </span><span class="kw">pub fn </span>use_library(<span class="kw-2">&amp;</span><span class="self">self</span>, library_mi: <span class="kw-2">&amp;</span>ModuleInstance) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
-        <span class="macro">fn_context!</span>(d3d11::Linker::use_library =&gt; ID3D11Linker::UseLibrary);
-        <span class="macro">fn_check_hr!</span>(<span class="kw">unsafe </span>{ <span class="self">self</span>.<span class="number">0</span>.UseLibrary(library_mi.as_raw()) })
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11linker-uselibrary)\]</span>
+    <span class="doccomment">/// ID3D11Linker::UseLibrary</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Adds an instance of a library module to be used for linking.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Example</span>
+    <span class="doccomment">/// ```rust</span>
+    <span class="doccomment">/// # use thindx::*;</span>
+    <span class="doccomment">/// let d3dc = d3d::Compiler::load_system(47).unwrap();</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// let lib = d3dc.compile_from_file(</span>
+    <span class="doccomment">///     r&quot;test\data\library.hlsl&quot;, None, None, (), &quot;lib_5_0&quot;,</span>
+    <span class="doccomment">///     d3d::Compile::OptimizationLevel3, d3d::CompileEffect::None</span>
+    <span class="doccomment">/// ).unwrap();</span>
+    <span class="doccomment">/// let lib = d3dc.load_module(&amp;lib).unwrap().create_instance(()).unwrap();</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// let linker = d3dc.create_linker().unwrap();</span>
+    <span class="doccomment">/// linker.use_library(&amp;lib).unwrap();</span>
+    <span class="doccomment">/// // linker.link(...), etc.</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### See Also</span>
+    <span class="doccomment">/// *   [examples::d3dcompiler_03_link]</span>
+    <span class="comment">//#allow_missing_argument_docs</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">use_library</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">library_mi</span>: <span class="kw-2">&amp;</span><span class="ident">ModuleInstance</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
+        <span class="macro">fn_context!</span>(<span class="ident">d3d11::Linker::use_library</span> =&gt; <span class="ident">ID3D11Linker::UseLibrary</span>);
+        <span class="macro">fn_check_hr!</span>(<span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="number">0</span>.<span class="ident">UseLibrary</span>(<span class="ident">library_mi</span>.<span class="ident">as_raw</span>()) })
     }
 }
 
-<span class="comment">//#cpp2rust ID3D11Linker                            = d3d11::Linker
-</span></code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (b44197abb 2022-09-05)" ></div></body></html>
+<span class="comment">//#cpp2rust ID3D11Linker                            = d3d11::Linker</span>
+</code></pre></div>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0 (4b91a6ea7 2022-08-08)" ></div>
+</body></html>

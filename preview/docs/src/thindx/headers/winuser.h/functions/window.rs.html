@@ -1,4 +1,10 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\winuser.h\functions\window.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>window.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../../normalize.css"><link rel="stylesheet" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../../dark.css" disabled><link rel="stylesheet" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\winuser.h\functions\window.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>window.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div>
+        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
+                                <a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -346,353 +352,354 @@
 <span id="346">346</span>
 <span id="347">347</span>
 <span id="348">348</span>
-</pre><pre class="rust"><code><span class="doccomment">//! ### ⚠️ Safety ⚠️
-//! `HWND`s are pretty funky.
-//! On the one hand, they&#39;re supposedly pointers, and in the single threaded days of 16-bit windows, they perhaps were.
-//! Modern 32-bit windows has turned these into generational indicies of sorts, and has sunken a lot of time into making Win32 safe/sound despite userspace&#39;s abuse.
-//! Windows may be owned by another thread, and thus destroyed at any time.
-//! Windows may be owned by another process, and thus destroyed at any time.
-//! Windows may be owned by another user, probably?
-//! HWNDs should generally be treated as weak references without proper validity checking.
+</pre><pre class="rust"><code><span class="doccomment">//! ### ⚠️ Safety ⚠️</span>
+<span class="doccomment">//! `HWND`s are pretty funky.</span>
+<span class="doccomment">//! On the one hand, they&#39;re supposedly pointers, and in the single threaded days of 16-bit windows, they perhaps were.</span>
+<span class="doccomment">//! Modern 32-bit windows has turned these into generational indicies of sorts, and has sunken a lot of time into making Win32 safe/sound despite userspace&#39;s abuse.</span>
+<span class="doccomment">//! Windows may be owned by another thread, and thus destroyed at any time.</span>
+<span class="doccomment">//! Windows may be owned by another process, and thus destroyed at any time.</span>
+<span class="doccomment">//! Windows may be owned by another user, probably?</span>
+<span class="doccomment">//! HWNDs should generally be treated as weak references without proper validity checking.</span>
 
-</span><span class="kw">use crate</span>::<span class="kw-2">*</span>;
-<span class="kw">use </span><span class="kw">crate</span>::d3d::Rect; <span class="comment">// ...?
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::d3d::Rect</span>; <span class="comment">// ...?</span>
 
-</span><span class="kw">use </span>winapi::um::winuser::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">winapi::um::winuser</span>::<span class="kw-2">*</span>;
 
 
 
-<span class="macro">macro_rules! </span>fn_err_get_last_error { () =&gt; { <span class="macro">fn_err!</span>(ErrorKind::from_winapi(get_last_error() <span class="kw">as _</span>)) } }
+<span class="macro">macro_rules!</span> <span class="ident">fn_err_get_last_error</span> { () =&gt; { <span class="macro">fn_err!</span>(<span class="ident">ErrorKind::from_winapi</span>(<span class="ident">get_last_error</span>() <span class="kw">as</span> <span class="kw">_</span>)) } }
 
-<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/learnwin32/what-is-a-window-)\]
-/// HWND
-///
-/// A window handle.
-/// Note that Window&#39;s definition of a &quot;window&quot; is [pretty expansive](https://docs.microsoft.com/en-us/windows/win32/learnwin32/what-is-a-window-).
-/// There&#39;s a reason it&#39;s named &quot;Windows&quot;!
-///
-/// Windows are &quot;windows&quot;.
-/// Buttons are &quot;windows&quot;.
-/// The desktop is a &quot;window&quot;.
-/// ~~You&#39;re a &quot;window&quot;.~~
-/// Windows belonging to other threads are windows.
-/// Windows belonging to other processes are windows.
-/// Windows belonging to other users... *maybe* you&#39;re isolated from those?  But probably not.
-</span><span class="kw">pub type </span>HWND = winapi::shared::windef::HWND;
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/learnwin32/what-is-a-window-)\]</span>
+<span class="doccomment">/// HWND</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// A window handle.</span>
+<span class="doccomment">/// Note that Window&#39;s definition of a &quot;window&quot; is [pretty expansive](https://docs.microsoft.com/en-us/windows/win32/learnwin32/what-is-a-window-).</span>
+<span class="doccomment">/// There&#39;s a reason it&#39;s named &quot;Windows&quot;!</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Windows are &quot;windows&quot;.</span>
+<span class="doccomment">/// Buttons are &quot;windows&quot;.</span>
+<span class="doccomment">/// The desktop is a &quot;window&quot;.</span>
+<span class="doccomment">/// ~~You&#39;re a &quot;window&quot;.~~</span>
+<span class="doccomment">/// Windows belonging to other threads are windows.</span>
+<span class="doccomment">/// Windows belonging to other processes are windows.</span>
+<span class="doccomment">/// Windows belonging to other users... *maybe* you&#39;re isolated from those?  But probably not.</span>
+<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">HWND</span> <span class="op">=</span> <span class="ident">winapi::shared::windef::HWND</span>;
 
-<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-destroywindow)\]
-/// DestroyWindow
-///
-/// Destroys the specified window.
-///
-/// ### ⚠️ Safety ⚠️
-/// *   Destroying a window out from underneath a 3D rendering API such as Direct3D is generally unsound.
-/// *   Destroying a &quot;destroyed&quot; window is unlikely to be sound.  While windows itself can handle it,
-///     it can result in multiple WM_DESTROY and WM_NCDESTROY events, which the underlying wndprocs likely can&#39;t handle.
-/// *   Destroying a window belonging to another thread or process is an incredibly bad idea, if it even works.
-/// *   Honestly, you should probably only destroy windows you created, in your own process, on your own thread, and even then be careful!
-///
-/// ### Errors
-/// *   [ERROR::INVALID_WINDOW_HANDLE]
-///
-/// ### Example
-/// ```rust
-/// # use thindx::*;
-/// # use std::ptr::*;
-/// assert_eq!(ERROR::INVALID_WINDOW_HANDLE, unsafe { win32::destroy_window(null_mut()) });
-/// ```
-</span><span class="kw">pub unsafe fn </span>destroy_window(hwnd: <span class="kw">impl </span>Into&lt;HWND&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;(), Error&gt; {
-    <span class="macro">fn_context!</span>(win32::destroy_window =&gt; DestroyWindow);
-    <span class="kw">let </span>hwnd = hwnd.into();
-    <span class="kw">let </span>succeeded = <span class="kw">unsafe </span>{ DestroyWindow(hwnd) != <span class="number">0 </span>};
-    <span class="kw">if </span>succeeded { <span class="prelude-val">Ok</span>(()) } <span class="kw">else </span>{ <span class="macro">fn_err_get_last_error!</span>() }
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-destroywindow)\]</span>
+<span class="doccomment">/// DestroyWindow</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Destroys the specified window.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// ### ⚠️ Safety ⚠️</span>
+<span class="doccomment">/// *   Destroying a window out from underneath a 3D rendering API such as Direct3D is generally unsound.</span>
+<span class="doccomment">/// *   Destroying a &quot;destroyed&quot; window is unlikely to be sound.  While windows itself can handle it,</span>
+<span class="doccomment">///     it can result in multiple WM_DESTROY and WM_NCDESTROY events, which the underlying wndprocs likely can&#39;t handle.</span>
+<span class="doccomment">/// *   Destroying a window belonging to another thread or process is an incredibly bad idea, if it even works.</span>
+<span class="doccomment">/// *   Honestly, you should probably only destroy windows you created, in your own process, on your own thread, and even then be careful!</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// ### Errors</span>
+<span class="doccomment">/// *   [ERROR::INVALID_WINDOW_HANDLE]</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// ### Example</span>
+<span class="doccomment">/// ```rust</span>
+<span class="doccomment">/// # use thindx::*;</span>
+<span class="doccomment">/// # use std::ptr::*;</span>
+<span class="doccomment">/// assert_eq!(ERROR::INVALID_WINDOW_HANDLE, unsafe { win32::destroy_window(null_mut()) });</span>
+<span class="doccomment">/// ```</span>
+<span class="kw">pub</span> <span class="kw unsafe">unsafe</span> <span class="kw">fn</span> <span class="ident">destroy_window</span>(<span class="ident">hwnd</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">HWND</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
+    <span class="macro">fn_context!</span>(<span class="ident">win32::destroy_window</span> =&gt; <span class="ident">DestroyWindow</span>);
+    <span class="kw">let</span> <span class="ident">hwnd</span> <span class="op">=</span> <span class="ident">hwnd</span>.<span class="ident">into</span>();
+    <span class="kw">let</span> <span class="ident">succeeded</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="ident">DestroyWindow</span>(<span class="ident">hwnd</span>) <span class="op">!</span><span class="op">=</span> <span class="number">0</span> };
+    <span class="kw">if</span> <span class="ident">succeeded</span> { <span class="prelude-val">Ok</span>(()) } <span class="kw">else</span> { <span class="macro">fn_err_get_last_error!</span>() }
 }
 
-<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getclientrect)\]
-/// GetClientRect
-///
-/// Retrieves the coordinates of a window&#39;s client area.
-/// The client coordinates specify the upper-left and lower-right corners of the client area.
-/// Because client coordinates are relative to the upper-left corner of a window&#39;s client area, the coordinates of the upper-left corner are (0,0).
-///
-/// ### Errors
-/// *   [ERROR::INVALID_WINDOW_HANDLE]
-///
-/// ### Example
-/// ```rust
-/// # use thindx::*;
-/// # use std::ptr::*;
-/// assert_eq!(ERROR::INVALID_WINDOW_HANDLE, win32::get_client_rect(null_mut()));
-/// let rect = win32::get_client_rect(win32::get_desktop_window()).unwrap();
-/// assert_eq!(0, rect.left());
-/// assert_eq!(0, rect.top());
-/// assert!(0 != rect.width());
-/// assert!(0 != rect.height());
-/// # for p in 0 .. 8 * std::mem::size_of::&lt;win32::HWND&gt;() {
-/// #   let e = win32::get_client_rect((1usize &lt;&lt; p) as win32::HWND); // shouldn&#39;t crash
-/// #   if e.is_err() { assert_eq!(ERROR::INVALID_WINDOW_HANDLE, e) }
-/// # }
-/// ```
-</span><span class="kw">pub fn </span>get_client_rect(hwnd: <span class="kw">impl </span>TryInto&lt;HWND&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;Rect, Error&gt; {
-    <span class="macro">fn_context!</span>(win32::get_client_rect =&gt; GetClientRect);
-    <span class="kw">let </span>hwnd = hwnd.try_into().map_err(|<span class="kw">_</span>| <span class="macro">fn_param_error!</span>(hwnd, ERROR::INVALID_WINDOW_HANDLE))<span class="question-mark">?</span>;
-    <span class="kw">let </span><span class="kw-2">mut </span>rect = Rect::zeroed();
-    <span class="kw">let </span>succeeded = <span class="kw">unsafe </span>{ GetClientRect(hwnd, rect.as_mut()) != <span class="number">0 </span>};
-    <span class="kw">if </span>succeeded { <span class="prelude-val">Ok</span>(rect) } <span class="kw">else </span>{ <span class="macro">fn_err_get_last_error!</span>() }
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getclientrect)\]</span>
+<span class="doccomment">/// GetClientRect</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Retrieves the coordinates of a window&#39;s client area.</span>
+<span class="doccomment">/// The client coordinates specify the upper-left and lower-right corners of the client area.</span>
+<span class="doccomment">/// Because client coordinates are relative to the upper-left corner of a window&#39;s client area, the coordinates of the upper-left corner are (0,0).</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// ### Errors</span>
+<span class="doccomment">/// *   [ERROR::INVALID_WINDOW_HANDLE]</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// ### Example</span>
+<span class="doccomment">/// ```rust</span>
+<span class="doccomment">/// # use thindx::*;</span>
+<span class="doccomment">/// # use std::ptr::*;</span>
+<span class="doccomment">/// assert_eq!(ERROR::INVALID_WINDOW_HANDLE, win32::get_client_rect(null_mut()));</span>
+<span class="doccomment">/// let rect = win32::get_client_rect(win32::get_desktop_window()).unwrap();</span>
+<span class="doccomment">/// assert_eq!(0, rect.left());</span>
+<span class="doccomment">/// assert_eq!(0, rect.top());</span>
+<span class="doccomment">/// assert!(0 != rect.width());</span>
+<span class="doccomment">/// assert!(0 != rect.height());</span>
+<span class="doccomment">/// # for p in 0 .. 8 * std::mem::size_of::&lt;win32::HWND&gt;() {</span>
+<span class="doccomment">/// #   let e = win32::get_client_rect((1usize &lt;&lt; p) as win32::HWND); // shouldn&#39;t crash</span>
+<span class="doccomment">/// #   if e.is_err() { assert_eq!(ERROR::INVALID_WINDOW_HANDLE, e) }</span>
+<span class="doccomment">/// # }</span>
+<span class="doccomment">/// ```</span>
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_client_rect</span>(<span class="ident">hwnd</span>: <span class="kw">impl</span> <span class="ident">TryInto</span><span class="op">&lt;</span><span class="ident">HWND</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Rect</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+    <span class="macro">fn_context!</span>(<span class="ident">win32::get_client_rect</span> =&gt; <span class="ident">GetClientRect</span>);
+    <span class="kw">let</span> <span class="ident">hwnd</span> <span class="op">=</span> <span class="ident">hwnd</span>.<span class="ident">try_into</span>().<span class="ident">map_err</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="macro">fn_param_error!</span>(<span class="ident">hwnd</span>, <span class="ident">ERROR::INVALID_WINDOW_HANDLE</span>))<span class="question-mark">?</span>;
+    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">rect</span> <span class="op">=</span> <span class="ident">Rect::zeroed</span>();
+    <span class="kw">let</span> <span class="ident">succeeded</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="ident">GetClientRect</span>(<span class="ident">hwnd</span>, <span class="ident">rect</span>.<span class="ident">as_mut</span>()) <span class="op">!</span><span class="op">=</span> <span class="number">0</span> };
+    <span class="kw">if</span> <span class="ident">succeeded</span> { <span class="prelude-val">Ok</span>(<span class="ident">rect</span>) } <span class="kw">else</span> { <span class="macro">fn_err_get_last_error!</span>() }
 }
 
-<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getdesktopwindow)\]
-/// GetDesktopWindow
-///
-/// Retrieves a handle to the desktop window.
-/// The desktop window covers the entire screen.
-/// The desktop window is the area on top of which other windows are painted.
-///
-/// ### Example
-/// ```rust
-/// # use thindx::win32;
-/// let hwnd = win32::get_desktop_window();
-/// # assert!(win32::is_window(hwnd));
-/// ```
-</span><span class="attribute">#[must_use] </span><span class="kw">pub fn </span>get_desktop_window() -&gt; HWND {
-    <span class="macro">fn_context!</span>(win32::get_desktop_window =&gt; GetDesktopWindow);
-    <span class="kw">unsafe </span>{ GetDesktopWindow() }
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getdesktopwindow)\]</span>
+<span class="doccomment">/// GetDesktopWindow</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Retrieves a handle to the desktop window.</span>
+<span class="doccomment">/// The desktop window covers the entire screen.</span>
+<span class="doccomment">/// The desktop window is the area on top of which other windows are painted.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// ### Example</span>
+<span class="doccomment">/// ```rust</span>
+<span class="doccomment">/// # use thindx::win32;</span>
+<span class="doccomment">/// let hwnd = win32::get_desktop_window();</span>
+<span class="doccomment">/// # assert!(win32::is_window(hwnd));</span>
+<span class="doccomment">/// ```</span>
+<span class="attribute">#[<span class="ident">must_use</span>]</span> <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_desktop_window</span>() -&gt; <span class="ident">HWND</span> {
+    <span class="macro">fn_context!</span>(<span class="ident">win32::get_desktop_window</span> =&gt; <span class="ident">GetDesktopWindow</span>);
+    <span class="kw unsafe">unsafe</span> { <span class="ident">GetDesktopWindow</span>() }
 }
 
-<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowlongptra)\]
-/// GetWindowLongPtrA
-///
-/// Retrieves information about the specified window. The function also retrieves the value at a specified offset into the extra window memory.
-///
-/// ### Errors
-/// *   [ERROR::ACCESS_DENIED]          If `index` is e.g. `GWLP_WNDPROC` for a `hwnd` belonging to a different process.
-/// *   [ERROR::INVALID_INDEX]          If `index` isn&#39;t valid for `hwnd`
-/// *   [ERROR::INVALID_WINDOW_HANDLE]  If `hwnd` isn&#39;t valid
-///
-/// ### Example
-/// ```rust
-/// # use thindx::*;
-/// # use winapi::um::winuser::{GWL_STYLE, GWLP_WNDPROC}; // FIXME: replace
-/// # use std::ptr::*;
-/// # let desktop = win32::get_desktop_window();
-/// assert_eq!(ERROR::INVALID_WINDOW_HANDLE, win32::get_window_long_ptr_a(null_mut(), 0));
-/// assert_eq!(ERROR::INVALID_WINDOW_HANDLE, win32::get_window_long_ptr_a(!42usize as win32::HWND, 0));
-/// assert_eq!(ERROR::INVALID_INDEX,         win32::get_window_long_ptr_a(desktop, -9001));
-/// assert_eq!(ERROR::ACCESS_DENIED,         win32::get_window_long_ptr_a(desktop, GWLP_WNDPROC));
-/// let desktop_style = win32::get_window_long_ptr_a(desktop, GWL_STYLE).unwrap();
-/// # for i in [i32::MIN, i32::MIN/2, -9001, 0, 9001, i32::MAX/2, i32::MAX].iter().copied().chain(-64 ..= 64).chain((0..30).map(|p| 1&lt;&lt;p)).chain((0..31).map(|p| -(1&lt;&lt;p))) {
-/// #   if let Err(err) = win32::get_window_long_ptr_a(desktop, i) {
-/// #       assert!(
-/// #           err == ERROR::ACCESS_DENIED || err == ERROR::INVALID_INDEX,
-/// #           &quot;get_window_long_ptr_a(desktop, {i}) == {err:?}&quot;
-/// #       );
-/// #   }
-/// # }
-/// ```
-</span><span class="kw">pub fn </span>get_window_long_ptr_a(hwnd: <span class="kw">impl </span>Into&lt;HWND&gt;, index: i32) -&gt; <span class="prelude-ty">Result</span>&lt;isize, Error&gt; {
-    <span class="macro">fn_context!</span>(win32::get_window_long_ptr_a =&gt; GetWindowLongPtrA);
-    <span class="kw">let </span>hwnd = hwnd.into();
-    <span class="kw">let </span>r = <span class="kw">unsafe </span>{ GetWindowLongPtrA(hwnd, index) };
-    <span class="kw">match </span>(r == <span class="number">0</span>).then(|| get_last_error()).unwrap_or(<span class="number">0</span>) {
-        <span class="number">0   </span>=&gt; <span class="prelude-val">Ok</span>(r <span class="kw">as _</span>), <span class="comment">// i32 -&gt; isize on 32-bit windows
-        </span>err =&gt; <span class="macro">fn_err!</span>(ErrorKind::from_winapi(err <span class="kw">as _</span>)),
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowlongptra)\]</span>
+<span class="doccomment">/// GetWindowLongPtrA</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Retrieves information about the specified window. The function also retrieves the value at a specified offset into the extra window memory.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// ### Errors</span>
+<span class="doccomment">/// *   [ERROR::ACCESS_DENIED]          If `index` is e.g. `GWLP_WNDPROC` for a `hwnd` belonging to a different process.</span>
+<span class="doccomment">/// *   [ERROR::INVALID_INDEX]          If `index` isn&#39;t valid for `hwnd`</span>
+<span class="doccomment">/// *   [ERROR::INVALID_WINDOW_HANDLE]  If `hwnd` isn&#39;t valid</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// ### Example</span>
+<span class="doccomment">/// ```rust</span>
+<span class="doccomment">/// # use thindx::*;</span>
+<span class="doccomment">/// # use winapi::um::winuser::{GWL_STYLE, GWLP_WNDPROC}; // FIXME: replace</span>
+<span class="doccomment">/// # use std::ptr::*;</span>
+<span class="doccomment">/// # let desktop = win32::get_desktop_window();</span>
+<span class="doccomment">/// assert_eq!(ERROR::INVALID_WINDOW_HANDLE, win32::get_window_long_ptr_a(null_mut(), 0));</span>
+<span class="doccomment">/// assert_eq!(ERROR::INVALID_WINDOW_HANDLE, win32::get_window_long_ptr_a(!42usize as win32::HWND, 0));</span>
+<span class="doccomment">/// assert_eq!(ERROR::INVALID_INDEX,         win32::get_window_long_ptr_a(desktop, -9001));</span>
+<span class="doccomment">/// assert_eq!(ERROR::ACCESS_DENIED,         win32::get_window_long_ptr_a(desktop, GWLP_WNDPROC));</span>
+<span class="doccomment">/// let desktop_style = win32::get_window_long_ptr_a(desktop, GWL_STYLE).unwrap();</span>
+<span class="doccomment">/// # for i in [i32::MIN, i32::MIN/2, -9001, 0, 9001, i32::MAX/2, i32::MAX].iter().copied().chain(-64 ..= 64).chain((0..30).map(|p| 1&lt;&lt;p)).chain((0..31).map(|p| -(1&lt;&lt;p))) {</span>
+<span class="doccomment">/// #   if let Err(err) = win32::get_window_long_ptr_a(desktop, i) {</span>
+<span class="doccomment">/// #       assert!(</span>
+<span class="doccomment">/// #           err == ERROR::ACCESS_DENIED || err == ERROR::INVALID_INDEX,</span>
+<span class="doccomment">/// #           &quot;get_window_long_ptr_a(desktop, {i}) == {err:?}&quot;</span>
+<span class="doccomment">/// #       );</span>
+<span class="doccomment">/// #   }</span>
+<span class="doccomment">/// # }</span>
+<span class="doccomment">/// ```</span>
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_window_long_ptr_a</span>(<span class="ident">hwnd</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">HWND</span><span class="op">&gt;</span>, <span class="ident">index</span>: <span class="ident">i32</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">isize</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+    <span class="macro">fn_context!</span>(<span class="ident">win32::get_window_long_ptr_a</span> =&gt; <span class="ident">GetWindowLongPtrA</span>);
+    <span class="kw">let</span> <span class="ident">hwnd</span> <span class="op">=</span> <span class="ident">hwnd</span>.<span class="ident">into</span>();
+    <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="ident">GetWindowLongPtrA</span>(<span class="ident">hwnd</span>, <span class="ident">index</span>) };
+    <span class="kw">match</span> (<span class="ident">r</span> <span class="op">==</span> <span class="number">0</span>).<span class="ident">then</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">get_last_error</span>()).<span class="ident">unwrap_or</span>(<span class="number">0</span>) {
+        <span class="number">0</span>   =&gt; <span class="prelude-val">Ok</span>(<span class="ident">r</span> <span class="kw">as</span> <span class="kw">_</span>), <span class="comment">// i32 -&gt; isize on 32-bit windows</span>
+        <span class="ident">err</span> =&gt; <span class="macro">fn_err!</span>(<span class="ident">ErrorKind::from_winapi</span>(<span class="ident">err</span> <span class="kw">as</span> <span class="kw">_</span>)),
     }
 }
 
-<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowlongptrw)\]
-/// GetWindowLongPtrW
-///
-/// Retrieves information about the specified window. The function also retrieves the value at a specified offset into the extra window memory.
-///
-/// ### Errors
-/// *   [ERROR::ACCESS_DENIED]          If `index` is e.g. `GWLP_WNDPROC` for a `hwnd` belonging to a different process.
-/// *   [ERROR::INVALID_INDEX]          If `index` isn&#39;t valid for `hwnd`
-/// *   [ERROR::INVALID_WINDOW_HANDLE]  If `hwnd` isn&#39;t valid
-///
-/// ### Example
-/// ```rust
-/// # use thindx::*;
-/// # use winapi::um::winuser::{GWL_STYLE, GWLP_WNDPROC}; // FIXME: replace
-/// # use std::ptr::*;
-/// # let desktop = win32::get_desktop_window();
-/// assert_eq!(ERROR::INVALID_WINDOW_HANDLE, win32::get_window_long_ptr_w(null_mut(), 0));
-/// assert_eq!(ERROR::INVALID_WINDOW_HANDLE, win32::get_window_long_ptr_w(!42usize as win32::HWND, 0));
-/// assert_eq!(ERROR::INVALID_INDEX,         win32::get_window_long_ptr_w(desktop, -9001));
-/// assert_eq!(ERROR::ACCESS_DENIED,         win32::get_window_long_ptr_w(desktop, GWLP_WNDPROC));
-/// let desktop_style = win32::get_window_long_ptr_w(desktop, GWL_STYLE).unwrap();
-/// # for i in [i32::MIN, i32::MIN/2, -9001, 0, 9001, i32::MAX/2, i32::MAX].iter().copied().chain(-64 ..= 64).chain((0..30).map(|p| 1&lt;&lt;p)).chain((0..31).map(|p| -(1&lt;&lt;p))) {
-/// #   if let Err(err) = win32::get_window_long_ptr_w(desktop, i) {
-/// #       assert!(
-/// #           err == ERROR::ACCESS_DENIED || err == ERROR::INVALID_INDEX,
-/// #           &quot;get_window_long_ptr_w(desktop, {i}) == {err:?}&quot;
-/// #       );
-/// #   }
-/// # }
-/// ```
-</span><span class="kw">pub fn </span>get_window_long_ptr_w(hwnd: <span class="kw">impl </span>Into&lt;HWND&gt;, index: i32) -&gt; <span class="prelude-ty">Result</span>&lt;isize, Error&gt; {
-    <span class="macro">fn_context!</span>(win32::get_window_long_ptr_w =&gt; GetWindowLongPtrW);
-    <span class="kw">let </span>hwnd = hwnd.into();
-    <span class="kw">let </span>r = <span class="kw">unsafe </span>{ GetWindowLongPtrW(hwnd, index) };
-    <span class="kw">match </span>(r == <span class="number">0</span>).then(|| get_last_error()).unwrap_or(<span class="number">0</span>) {
-        <span class="number">0   </span>=&gt; <span class="prelude-val">Ok</span>(r <span class="kw">as _</span>), <span class="comment">// i32 -&gt; isize on 32-bit windows
-        </span>err =&gt; <span class="macro">fn_err!</span>(ErrorKind::from_winapi(err <span class="kw">as _</span>)),
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowlongptrw)\]</span>
+<span class="doccomment">/// GetWindowLongPtrW</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Retrieves information about the specified window. The function also retrieves the value at a specified offset into the extra window memory.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// ### Errors</span>
+<span class="doccomment">/// *   [ERROR::ACCESS_DENIED]          If `index` is e.g. `GWLP_WNDPROC` for a `hwnd` belonging to a different process.</span>
+<span class="doccomment">/// *   [ERROR::INVALID_INDEX]          If `index` isn&#39;t valid for `hwnd`</span>
+<span class="doccomment">/// *   [ERROR::INVALID_WINDOW_HANDLE]  If `hwnd` isn&#39;t valid</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// ### Example</span>
+<span class="doccomment">/// ```rust</span>
+<span class="doccomment">/// # use thindx::*;</span>
+<span class="doccomment">/// # use winapi::um::winuser::{GWL_STYLE, GWLP_WNDPROC}; // FIXME: replace</span>
+<span class="doccomment">/// # use std::ptr::*;</span>
+<span class="doccomment">/// # let desktop = win32::get_desktop_window();</span>
+<span class="doccomment">/// assert_eq!(ERROR::INVALID_WINDOW_HANDLE, win32::get_window_long_ptr_w(null_mut(), 0));</span>
+<span class="doccomment">/// assert_eq!(ERROR::INVALID_WINDOW_HANDLE, win32::get_window_long_ptr_w(!42usize as win32::HWND, 0));</span>
+<span class="doccomment">/// assert_eq!(ERROR::INVALID_INDEX,         win32::get_window_long_ptr_w(desktop, -9001));</span>
+<span class="doccomment">/// assert_eq!(ERROR::ACCESS_DENIED,         win32::get_window_long_ptr_w(desktop, GWLP_WNDPROC));</span>
+<span class="doccomment">/// let desktop_style = win32::get_window_long_ptr_w(desktop, GWL_STYLE).unwrap();</span>
+<span class="doccomment">/// # for i in [i32::MIN, i32::MIN/2, -9001, 0, 9001, i32::MAX/2, i32::MAX].iter().copied().chain(-64 ..= 64).chain((0..30).map(|p| 1&lt;&lt;p)).chain((0..31).map(|p| -(1&lt;&lt;p))) {</span>
+<span class="doccomment">/// #   if let Err(err) = win32::get_window_long_ptr_w(desktop, i) {</span>
+<span class="doccomment">/// #       assert!(</span>
+<span class="doccomment">/// #           err == ERROR::ACCESS_DENIED || err == ERROR::INVALID_INDEX,</span>
+<span class="doccomment">/// #           &quot;get_window_long_ptr_w(desktop, {i}) == {err:?}&quot;</span>
+<span class="doccomment">/// #       );</span>
+<span class="doccomment">/// #   }</span>
+<span class="doccomment">/// # }</span>
+<span class="doccomment">/// ```</span>
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_window_long_ptr_w</span>(<span class="ident">hwnd</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">HWND</span><span class="op">&gt;</span>, <span class="ident">index</span>: <span class="ident">i32</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">isize</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+    <span class="macro">fn_context!</span>(<span class="ident">win32::get_window_long_ptr_w</span> =&gt; <span class="ident">GetWindowLongPtrW</span>);
+    <span class="kw">let</span> <span class="ident">hwnd</span> <span class="op">=</span> <span class="ident">hwnd</span>.<span class="ident">into</span>();
+    <span class="kw">let</span> <span class="ident">r</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="ident">GetWindowLongPtrW</span>(<span class="ident">hwnd</span>, <span class="ident">index</span>) };
+    <span class="kw">match</span> (<span class="ident">r</span> <span class="op">==</span> <span class="number">0</span>).<span class="ident">then</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">get_last_error</span>()).<span class="ident">unwrap_or</span>(<span class="number">0</span>) {
+        <span class="number">0</span>   =&gt; <span class="prelude-val">Ok</span>(<span class="ident">r</span> <span class="kw">as</span> <span class="kw">_</span>), <span class="comment">// i32 -&gt; isize on 32-bit windows</span>
+        <span class="ident">err</span> =&gt; <span class="macro">fn_err!</span>(<span class="ident">ErrorKind::from_winapi</span>(<span class="ident">err</span> <span class="kw">as</span> <span class="kw">_</span>)),
     }
 }
 
-<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowthreadprocessid)\]
-/// GetWindowThreadProcessId
-///
-/// Retrieves the identifier of the thread that created the specified window.
-///
-/// ### Returns
-/// *   Ok(thread_id)
-/// *   [ERROR::INVALID_WINDOW_HANDLE]
-///
-/// ### Example
-/// ```rust
-/// # use thindx::*;
-/// # use std::ptr::*;
-/// # let hwnd = win32::get_desktop_window();
-/// let thread = win32::get_window_thread_id(hwnd).unwrap();
-/// let hwnd_belongs_to_this_thread = thread == win32::get_current_thread_id();
-/// # assert!(!hwnd_belongs_to_this_thread, &quot;desktop doesn&#39;t belong to us!&quot;);
-/// #
-/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, win32::get_window_thread_id(null_mut()));
-/// # for p in 0 .. 8 * std::mem::size_of::&lt;win32::HWND&gt;() {
-/// #   let e = win32::get_window_thread_id((1usize &lt;&lt; p) as win32::HWND); // shouldn&#39;t crash
-/// #   if e.is_err() { assert_eq!(ERROR::INVALID_WINDOW_HANDLE, e) }
-/// # }
-/// ```
-///
-/// ### See Also
-/// *   [win32::get_window_thread_process_id]
-</span><span class="attribute">#[must_use] </span><span class="kw">pub fn </span>get_window_thread_id(hwnd: <span class="kw">impl </span>Into&lt;HWND&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;u32, Error&gt; {
-    <span class="macro">fn_context!</span>(win32::get_window_thread_id =&gt; GetWindowThreadProcessId);
-    <span class="kw">let </span>hwnd = hwnd.into();
-    <span class="kw">let </span>tid = <span class="kw">unsafe </span>{ GetWindowThreadProcessId(hwnd, std::ptr::null_mut()) };
-    <span class="kw">if </span>tid != <span class="number">0 </span>{ <span class="prelude-val">Ok</span>(tid) } <span class="kw">else </span>{ <span class="macro">fn_err_get_last_error!</span>() }
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowthreadprocessid)\]</span>
+<span class="doccomment">/// GetWindowThreadProcessId</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Retrieves the identifier of the thread that created the specified window.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// ### Returns</span>
+<span class="doccomment">/// *   Ok(thread_id)</span>
+<span class="doccomment">/// *   [ERROR::INVALID_WINDOW_HANDLE]</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// ### Example</span>
+<span class="doccomment">/// ```rust</span>
+<span class="doccomment">/// # use thindx::*;</span>
+<span class="doccomment">/// # use std::ptr::*;</span>
+<span class="doccomment">/// # let hwnd = win32::get_desktop_window();</span>
+<span class="doccomment">/// let thread = win32::get_window_thread_id(hwnd).unwrap();</span>
+<span class="doccomment">/// let hwnd_belongs_to_this_thread = thread == win32::get_current_thread_id();</span>
+<span class="doccomment">/// # assert!(!hwnd_belongs_to_this_thread, &quot;desktop doesn&#39;t belong to us!&quot;);</span>
+<span class="doccomment">/// #</span>
+<span class="doccomment">/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, win32::get_window_thread_id(null_mut()));</span>
+<span class="doccomment">/// # for p in 0 .. 8 * std::mem::size_of::&lt;win32::HWND&gt;() {</span>
+<span class="doccomment">/// #   let e = win32::get_window_thread_id((1usize &lt;&lt; p) as win32::HWND); // shouldn&#39;t crash</span>
+<span class="doccomment">/// #   if e.is_err() { assert_eq!(ERROR::INVALID_WINDOW_HANDLE, e) }</span>
+<span class="doccomment">/// # }</span>
+<span class="doccomment">/// ```</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// ### See Also</span>
+<span class="doccomment">/// *   [win32::get_window_thread_process_id]</span>
+<span class="attribute">#[<span class="ident">must_use</span>]</span> <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_window_thread_id</span>(<span class="ident">hwnd</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">HWND</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">u32</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+    <span class="macro">fn_context!</span>(<span class="ident">win32::get_window_thread_id</span> =&gt; <span class="ident">GetWindowThreadProcessId</span>);
+    <span class="kw">let</span> <span class="ident">hwnd</span> <span class="op">=</span> <span class="ident">hwnd</span>.<span class="ident">into</span>();
+    <span class="kw">let</span> <span class="ident">tid</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="ident">GetWindowThreadProcessId</span>(<span class="ident">hwnd</span>, <span class="ident">std::ptr::null_mut</span>()) };
+    <span class="kw">if</span> <span class="ident">tid</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> { <span class="prelude-val">Ok</span>(<span class="ident">tid</span>) } <span class="kw">else</span> { <span class="macro">fn_err_get_last_error!</span>() }
 }
 
-<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowthreadprocessid)\]
-/// GetWindowThreadProcessId
-///
-/// Retrieves the identifier of the thread that created the specified window and the identifier of the process that created the window.
-///
-/// ### Returns
-/// *   Ok((thread_id, process_id))
-/// *   [ERROR::INVALID_WINDOW_HANDLE]
-///
-/// ### Example
-/// ```rust
-/// # use thindx::*;
-/// # use std::ptr::*;
-/// # let hwnd = win32::get_desktop_window();
-/// let (thread, process) = win32::get_window_thread_process_id(hwnd).unwrap();
-/// let hwnd_belongs_to_this_thread = thread == win32::get_current_thread_id();
-/// # assert!(!hwnd_belongs_to_this_thread, &quot;desktop doesn&#39;t belong to us!&quot;);
-/// #
-/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, win32::get_window_thread_process_id(null_mut()));
-/// # for p in 0 .. 8 * std::mem::size_of::&lt;win32::HWND&gt;() {
-/// #   let e = win32::get_window_thread_process_id((1usize &lt;&lt; p) as win32::HWND); // shouldn&#39;t crash
-/// #   if e.is_err() { assert_eq!(ERROR::INVALID_WINDOW_HANDLE, e) }
-/// # }
-/// ```
-///
-/// ### See Also
-/// *   [win32::get_window_thread_id]
-</span><span class="attribute">#[must_use] </span><span class="kw">pub fn </span>get_window_thread_process_id(hwnd: <span class="kw">impl </span>Into&lt;HWND&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;(u32, u32), Error&gt; {
-    <span class="macro">fn_context!</span>(win32::get_window_thread_process_id =&gt; GetWindowThreadProcessId);
-    <span class="kw">let </span>hwnd = hwnd.into();
-    <span class="kw">let </span><span class="kw-2">mut </span>pid = <span class="number">0</span>;
-    <span class="kw">let </span>tid = <span class="kw">unsafe </span>{ GetWindowThreadProcessId(hwnd, <span class="kw-2">&amp;mut </span>pid) };
-    <span class="kw">if </span>tid != <span class="number">0 </span>{ <span class="prelude-val">Ok</span>((tid, pid)) } <span class="kw">else </span>{ <span class="macro">fn_err_get_last_error!</span>() }
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowthreadprocessid)\]</span>
+<span class="doccomment">/// GetWindowThreadProcessId</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Retrieves the identifier of the thread that created the specified window and the identifier of the process that created the window.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// ### Returns</span>
+<span class="doccomment">/// *   Ok((thread_id, process_id))</span>
+<span class="doccomment">/// *   [ERROR::INVALID_WINDOW_HANDLE]</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// ### Example</span>
+<span class="doccomment">/// ```rust</span>
+<span class="doccomment">/// # use thindx::*;</span>
+<span class="doccomment">/// # use std::ptr::*;</span>
+<span class="doccomment">/// # let hwnd = win32::get_desktop_window();</span>
+<span class="doccomment">/// let (thread, process) = win32::get_window_thread_process_id(hwnd).unwrap();</span>
+<span class="doccomment">/// let hwnd_belongs_to_this_thread = thread == win32::get_current_thread_id();</span>
+<span class="doccomment">/// # assert!(!hwnd_belongs_to_this_thread, &quot;desktop doesn&#39;t belong to us!&quot;);</span>
+<span class="doccomment">/// #</span>
+<span class="doccomment">/// # assert_eq!(ERROR::INVALID_WINDOW_HANDLE, win32::get_window_thread_process_id(null_mut()));</span>
+<span class="doccomment">/// # for p in 0 .. 8 * std::mem::size_of::&lt;win32::HWND&gt;() {</span>
+<span class="doccomment">/// #   let e = win32::get_window_thread_process_id((1usize &lt;&lt; p) as win32::HWND); // shouldn&#39;t crash</span>
+<span class="doccomment">/// #   if e.is_err() { assert_eq!(ERROR::INVALID_WINDOW_HANDLE, e) }</span>
+<span class="doccomment">/// # }</span>
+<span class="doccomment">/// ```</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// ### See Also</span>
+<span class="doccomment">/// *   [win32::get_window_thread_id]</span>
+<span class="attribute">#[<span class="ident">must_use</span>]</span> <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_window_thread_process_id</span>(<span class="ident">hwnd</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">HWND</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(<span class="ident">u32</span>, <span class="ident">u32</span>), <span class="ident">Error</span><span class="op">&gt;</span> {
+    <span class="macro">fn_context!</span>(<span class="ident">win32::get_window_thread_process_id</span> =&gt; <span class="ident">GetWindowThreadProcessId</span>);
+    <span class="kw">let</span> <span class="ident">hwnd</span> <span class="op">=</span> <span class="ident">hwnd</span>.<span class="ident">into</span>();
+    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">pid</span> <span class="op">=</span> <span class="number">0</span>;
+    <span class="kw">let</span> <span class="ident">tid</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="ident">GetWindowThreadProcessId</span>(<span class="ident">hwnd</span>, <span class="kw-2">&amp;mut</span> <span class="ident">pid</span>) };
+    <span class="kw">if</span> <span class="ident">tid</span> <span class="op">!</span><span class="op">=</span> <span class="number">0</span> { <span class="prelude-val">Ok</span>((<span class="ident">tid</span>, <span class="ident">pid</span>)) } <span class="kw">else</span> { <span class="macro">fn_err_get_last_error!</span>() }
 }
 
-<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-iswindow)\]
-/// IsWindow
-///
-/// Determines whether the specified window handle identifies an existing window.
-///
-/// Valid uses of this function are few and far between - windows belonging to another thread
-/// or process could be destroyed immediately after this returns true, and invalidated handles
-/// might suddenly spring back to life as the handle value is reused.
-///
-/// ### Example
-/// ```rust
-/// # use thindx::win32;
-/// # let valid_hwnd = win32::get_desktop_window();
-/// # let invalid_hwnd : win32::HWND = !42 as _;
-/// assert!( win32::is_window(  valid_hwnd));
-/// assert!(!win32::is_window(invalid_hwnd));
-/// assert!(!win32::is_window(std::ptr::null_mut()));
-/// # for p in 0 .. 8 * std::mem::size_of::&lt;win32::HWND&gt;() {
-/// #   let _ = win32::is_window((1usize &lt;&lt; p) as win32::HWND); // shouldn&#39;t crash
-/// # }
-/// ```
-</span><span class="attribute">#[must_use] </span><span class="kw">pub fn </span>is_window(hwnd: <span class="kw">impl </span>TryInto&lt;HWND&gt;) -&gt; bool {
-    <span class="macro">fn_context!</span>(win32::is_window =&gt; IsWindow);
-    <span class="kw">match </span>hwnd.try_into() {
-        <span class="prelude-val">Ok</span>(hwnd) =&gt; <span class="kw">unsafe </span>{ IsWindow(hwnd) != <span class="number">0 </span>},
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-iswindow)\]</span>
+<span class="doccomment">/// IsWindow</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Determines whether the specified window handle identifies an existing window.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Valid uses of this function are few and far between - windows belonging to another thread</span>
+<span class="doccomment">/// or process could be destroyed immediately after this returns true, and invalidated handles</span>
+<span class="doccomment">/// might suddenly spring back to life as the handle value is reused.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// ### Example</span>
+<span class="doccomment">/// ```rust</span>
+<span class="doccomment">/// # use thindx::win32;</span>
+<span class="doccomment">/// # let valid_hwnd = win32::get_desktop_window();</span>
+<span class="doccomment">/// # let invalid_hwnd : win32::HWND = !42 as _;</span>
+<span class="doccomment">/// assert!( win32::is_window(  valid_hwnd));</span>
+<span class="doccomment">/// assert!(!win32::is_window(invalid_hwnd));</span>
+<span class="doccomment">/// assert!(!win32::is_window(std::ptr::null_mut()));</span>
+<span class="doccomment">/// # for p in 0 .. 8 * std::mem::size_of::&lt;win32::HWND&gt;() {</span>
+<span class="doccomment">/// #   let _ = win32::is_window((1usize &lt;&lt; p) as win32::HWND); // shouldn&#39;t crash</span>
+<span class="doccomment">/// # }</span>
+<span class="doccomment">/// ```</span>
+<span class="attribute">#[<span class="ident">must_use</span>]</span> <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_window</span>(<span class="ident">hwnd</span>: <span class="kw">impl</span> <span class="ident">TryInto</span><span class="op">&lt;</span><span class="ident">HWND</span><span class="op">&gt;</span>) -&gt; <span class="ident">bool</span> {
+    <span class="macro">fn_context!</span>(<span class="ident">win32::is_window</span> =&gt; <span class="ident">IsWindow</span>);
+    <span class="kw">match</span> <span class="ident">hwnd</span>.<span class="ident">try_into</span>() {
+        <span class="prelude-val">Ok</span>(<span class="ident">hwnd</span>) =&gt; <span class="kw unsafe">unsafe</span> { <span class="ident">IsWindow</span>(<span class="ident">hwnd</span>) <span class="op">!</span><span class="op">=</span> <span class="number">0</span> },
         <span class="prelude-val">Err</span>(<span class="kw">_</span>) =&gt; <span class="bool-val">false</span>,
     }
 }
 
-<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-iswindow)\]
-/// IsWindowUnicode
-///
-/// Determines whether the specified window is a native Unicode window.
-///
-/// ### Returns
-/// *   `true`  if the window&#39;s class was registered with `RegisterClassW`
-/// *   `false` if the window&#39;s class was registered with `RegisterClassA`
-/// *   `false` if the window isn&#39;t valid, probably?  (TryInto failed, HWND null/dangling/destroyed, ...)
-///
-/// ### Example
-/// ```rust
-/// # use thindx::win32;
-/// # let unicode_hwnd = win32::get_desktop_window(); // TODO: replace with an explicitly created unicode hwnd
-/// assert!( win32::is_window_unicode(unicode_hwnd));
-/// assert!(!win32::is_window_unicode(std::ptr::null_mut()));
-/// # for p in 0 .. 8 * std::mem::size_of::&lt;win32::HWND&gt;() {
-/// #   let _ = win32::is_window_unicode((1usize &lt;&lt; p) as win32::HWND); // shouldn&#39;t crash
-/// # }
-/// ```
-</span><span class="attribute">#[must_use] </span><span class="kw">pub fn </span>is_window_unicode(hwnd: <span class="kw">impl </span>TryInto&lt;HWND&gt;) -&gt; bool {
-    <span class="macro">fn_context!</span>(win32::is_window_unicode =&gt; IsWindowUnicode);
-    <span class="kw">match </span>hwnd.try_into() {
-        <span class="prelude-val">Ok</span>(hwnd) =&gt; <span class="kw">unsafe </span>{ IsWindowUnicode(hwnd) != <span class="number">0 </span>},
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-iswindow)\]</span>
+<span class="doccomment">/// IsWindowUnicode</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Determines whether the specified window is a native Unicode window.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// ### Returns</span>
+<span class="doccomment">/// *   `true`  if the window&#39;s class was registered with `RegisterClassW`</span>
+<span class="doccomment">/// *   `false` if the window&#39;s class was registered with `RegisterClassA`</span>
+<span class="doccomment">/// *   `false` if the window isn&#39;t valid, probably?  (TryInto failed, HWND null/dangling/destroyed, ...)</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// ### Example</span>
+<span class="doccomment">/// ```rust</span>
+<span class="doccomment">/// # use thindx::win32;</span>
+<span class="doccomment">/// # let unicode_hwnd = win32::get_desktop_window(); // TODO: replace with an explicitly created unicode hwnd</span>
+<span class="doccomment">/// assert!( win32::is_window_unicode(unicode_hwnd));</span>
+<span class="doccomment">/// assert!(!win32::is_window_unicode(std::ptr::null_mut()));</span>
+<span class="doccomment">/// # for p in 0 .. 8 * std::mem::size_of::&lt;win32::HWND&gt;() {</span>
+<span class="doccomment">/// #   let _ = win32::is_window_unicode((1usize &lt;&lt; p) as win32::HWND); // shouldn&#39;t crash</span>
+<span class="doccomment">/// # }</span>
+<span class="doccomment">/// ```</span>
+<span class="attribute">#[<span class="ident">must_use</span>]</span> <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_window_unicode</span>(<span class="ident">hwnd</span>: <span class="kw">impl</span> <span class="ident">TryInto</span><span class="op">&lt;</span><span class="ident">HWND</span><span class="op">&gt;</span>) -&gt; <span class="ident">bool</span> {
+    <span class="macro">fn_context!</span>(<span class="ident">win32::is_window_unicode</span> =&gt; <span class="ident">IsWindowUnicode</span>);
+    <span class="kw">match</span> <span class="ident">hwnd</span>.<span class="ident">try_into</span>() {
+        <span class="prelude-val">Ok</span>(<span class="ident">hwnd</span>) =&gt; <span class="kw unsafe">unsafe</span> { <span class="ident">IsWindowUnicode</span>(<span class="ident">hwnd</span>) <span class="op">!</span><span class="op">=</span> <span class="number">0</span> },
         <span class="prelude-val">Err</span>(<span class="kw">_</span>) =&gt; <span class="bool-val">false</span>,
     }
 }
 
-<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-iswindow)\]
-/// IsWindowVisible
-///
-/// Determines whether the specified window is WS_VISIBLE.
-/// May return `true` even if the window is totally obscured by other windows, clipped out-of-bounds, etc.
-///
-/// ### Example
-/// ```rust
-/// # use thindx::win32;
-/// # let hwnd = win32::get_desktop_window(); // TODO: replace with an explicitly created unicode hwnd
-/// assert!( win32::is_window_visible(hwnd));
-/// assert!(!win32::is_window_visible(std::ptr::null_mut()));
-/// # for p in 0 .. 8 * std::mem::size_of::&lt;win32::HWND&gt;() {
-/// #   let _ = win32::is_window_visible((1usize &lt;&lt; p) as win32::HWND); // shouldn&#39;t crash
-/// # }
-/// ```
-</span><span class="attribute">#[must_use] </span><span class="kw">pub fn </span>is_window_visible(hwnd: <span class="kw">impl </span>TryInto&lt;HWND&gt;) -&gt; bool {
-    <span class="macro">fn_context!</span>(win32::is_window_unicode =&gt; IsWindowVisible);
-    <span class="kw">match </span>hwnd.try_into() {
-        <span class="prelude-val">Ok</span>(hwnd) =&gt; <span class="kw">unsafe </span>{ IsWindowVisible(hwnd) != <span class="number">0 </span>},
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-iswindow)\]</span>
+<span class="doccomment">/// IsWindowVisible</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Determines whether the specified window is WS_VISIBLE.</span>
+<span class="doccomment">/// May return `true` even if the window is totally obscured by other windows, clipped out-of-bounds, etc.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// ### Example</span>
+<span class="doccomment">/// ```rust</span>
+<span class="doccomment">/// # use thindx::win32;</span>
+<span class="doccomment">/// # let hwnd = win32::get_desktop_window(); // TODO: replace with an explicitly created unicode hwnd</span>
+<span class="doccomment">/// assert!( win32::is_window_visible(hwnd));</span>
+<span class="doccomment">/// assert!(!win32::is_window_visible(std::ptr::null_mut()));</span>
+<span class="doccomment">/// # for p in 0 .. 8 * std::mem::size_of::&lt;win32::HWND&gt;() {</span>
+<span class="doccomment">/// #   let _ = win32::is_window_visible((1usize &lt;&lt; p) as win32::HWND); // shouldn&#39;t crash</span>
+<span class="doccomment">/// # }</span>
+<span class="doccomment">/// ```</span>
+<span class="attribute">#[<span class="ident">must_use</span>]</span> <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_window_visible</span>(<span class="ident">hwnd</span>: <span class="kw">impl</span> <span class="ident">TryInto</span><span class="op">&lt;</span><span class="ident">HWND</span><span class="op">&gt;</span>) -&gt; <span class="ident">bool</span> {
+    <span class="macro">fn_context!</span>(<span class="ident">win32::is_window_unicode</span> =&gt; <span class="ident">IsWindowVisible</span>);
+    <span class="kw">match</span> <span class="ident">hwnd</span>.<span class="ident">try_into</span>() {
+        <span class="prelude-val">Ok</span>(<span class="ident">hwnd</span>) =&gt; <span class="kw unsafe">unsafe</span> { <span class="ident">IsWindowVisible</span>(<span class="ident">hwnd</span>) <span class="op">!</span><span class="op">=</span> <span class="number">0</span> },
         <span class="prelude-val">Err</span>(<span class="kw">_</span>) =&gt; <span class="bool-val">false</span>,
     }
 }
 
 
 
-<span class="attribute">#[must_use] </span><span class="kw">fn </span>get_last_error() -&gt; u32 {
-    <span class="kw">unsafe </span>{ winapi::um::errhandlingapi::GetLastError() }
+<span class="attribute">#[<span class="ident">must_use</span>]</span> <span class="kw">fn</span> <span class="ident">get_last_error</span>() -&gt; <span class="ident">u32</span> {
+    <span class="kw unsafe">unsafe</span> { <span class="ident">winapi::um::errhandlingapi::GetLastError</span>() }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (b44197abb 2022-09-05)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0 (4b91a6ea7 2022-08-08)" ></div>
+</body></html>

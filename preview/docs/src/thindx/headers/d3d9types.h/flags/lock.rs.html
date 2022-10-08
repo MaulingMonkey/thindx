@@ -1,4 +1,10 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3d9types.h\flags\lock.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lock.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../../normalize.css"><link rel="stylesheet" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../../dark.css" disabled><link rel="stylesheet" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3d9types.h\flags\lock.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lock.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div>
+        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
+                                <a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -62,69 +68,70 @@
 <span id="62">62</span>
 <span id="63">63</span>
 <span id="64">64</span>
-</pre><pre class="rust"><code><span class="attribute">#[allow(unused_imports)] </span><span class="kw">use crate</span>::<span class="kw-2">*</span>;
+</pre><pre class="rust"><code><span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span> <span class="kw">use</span> <span class="kw">crate</span>::<span class="kw-2">*</span>;
 
-<span class="kw">use </span>bytemuck::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">bytemuck</span>::<span class="kw-2">*</span>;
 
-<span class="kw">use </span>winapi::shared::d3d9types::<span class="kw-2">*</span>;
-<span class="kw">type </span>D3DLOCK = u32; <span class="comment">// there&#39;s no actual type
+<span class="kw">use</span> <span class="ident">winapi::shared::d3d9types</span>::<span class="kw-2">*</span>;
+<span class="kw">type</span> <span class="ident">D3DLOCK</span> <span class="op">=</span> <span class="ident">u32</span>; <span class="comment">// there&#39;s no actual type</span>
 
 
 
-</span><span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dlock)\]
-/// DWORD / D3DLOCK_*
-///
-/// A combination of zero or more locking options that describe the type of lock to perform.
-</span><span class="attribute">#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[derive(Pod, Zeroable)]
-#[repr(transparent)] </span><span class="kw">pub struct </span>Lock(D3DLOCK);
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dlock)\]</span>
+<span class="doccomment">/// DWORD / D3DLOCK_*</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// A combination of zero or more locking options that describe the type of lock to perform.</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">PartialOrd</span>, <span class="ident">Ord</span>, <span class="ident">Hash</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Pod</span>, <span class="ident">Zeroable</span>)]</span>
+<span class="attribute">#[<span class="ident">repr</span>(<span class="ident">transparent</span>)]</span> <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Lock</span>(<span class="ident">D3DLOCK</span>);
 
-<span class="macro">flags! </span>{ Lock =&gt; D3DLOCK; <span class="prelude-val">None</span>, Discard, DoNotWait, NoDirtyUpdate, NoOverwrite, NoSysLock, ReadOnly }
+<span class="macro">flags!</span> { <span class="ident">Lock</span> =&gt; <span class="ident">D3DLOCK</span>; <span class="prelude-val">None</span>, <span class="ident">Discard</span>, <span class="ident">DoNotWait</span>, <span class="ident">NoDirtyUpdate</span>, <span class="ident">NoOverwrite</span>, <span class="ident">NoSysLock</span>, <span class="ident">ReadOnly</span> }
 
-<span class="attribute">#[allow(non_upper_case_globals)] </span><span class="kw">impl </span>Lock { <span class="comment">// These are enum-like
-    </span><span class="doccomment">/// No lock flags
-    </span><span class="kw">pub const </span><span class="prelude-val">None              </span>: Lock = Lock(<span class="number">0</span>);
+<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">non_upper_case_globals</span>)]</span> <span class="kw">impl</span> <span class="ident">Lock</span> { <span class="comment">// These are enum-like</span>
+    <span class="doccomment">/// No lock flags</span>
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="prelude-val">None</span>              : <span class="ident">Lock</span> <span class="op">=</span> <span class="ident">Lock</span>(<span class="number">0</span>);
 
-    <span class="doccomment">/// The application discards all memory within the locked region.
-    /// For vertex and index buffers, the entire buffer will be discarded.
-    /// This option is only valid when the resource is created with [Usage::Dynamic].
-    </span><span class="kw">pub const </span>Discard           : Lock = Lock(D3DLOCK_DISCARD);
+    <span class="doccomment">/// The application discards all memory within the locked region.</span>
+    <span class="doccomment">/// For vertex and index buffers, the entire buffer will be discarded.</span>
+    <span class="doccomment">/// This option is only valid when the resource is created with [Usage::Dynamic].</span>
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Discard</span>           : <span class="ident">Lock</span> <span class="op">=</span> <span class="ident">Lock</span>(<span class="ident">D3DLOCK_DISCARD</span>);
 
-    <span class="doccomment">/// Allows an application to gain back CPU cycles if the driver cannot lock the surface immediately.
-    /// If this flag is set and the driver cannot lock the surface immediately, the lock call will return [D3DERR::WASSTILLDRAWING].
-    /// This flag can only be used when locking a surface created using [IDirect3DDevice9Ext::create_offscreen_plain_surface], [IDirect3DDevice9Ext::create_render_target], or [IDirect3DDevice9Ext::create_depth_stencil_surface].
-    /// This flag can also be used with a back buffer.
-    </span><span class="kw">pub const </span>DoNotWait         : Lock = Lock(D3DLOCK_DONOTWAIT);
+    <span class="doccomment">/// Allows an application to gain back CPU cycles if the driver cannot lock the surface immediately.</span>
+    <span class="doccomment">/// If this flag is set and the driver cannot lock the surface immediately, the lock call will return [D3DERR::WASSTILLDRAWING].</span>
+    <span class="doccomment">/// This flag can only be used when locking a surface created using [IDirect3DDevice9Ext::create_offscreen_plain_surface], [IDirect3DDevice9Ext::create_render_target], or [IDirect3DDevice9Ext::create_depth_stencil_surface].</span>
+    <span class="doccomment">/// This flag can also be used with a back buffer.</span>
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">DoNotWait</span>         : <span class="ident">Lock</span> <span class="op">=</span> <span class="ident">Lock</span>(<span class="ident">D3DLOCK_DONOTWAIT</span>);
 
-    <span class="doccomment">/// By default, a lock on a resource adds a dirty region to that resource.
-    /// This option prevents any changes to the dirty state of the resource.
-    /// Applications should use this option when they have additional information about the set of regions changed during the lock operation.
-    </span><span class="kw">pub const </span>NoDirtyUpdate     : Lock = Lock(D3DLOCK_NO_DIRTY_UPDATE);
+    <span class="doccomment">/// By default, a lock on a resource adds a dirty region to that resource.</span>
+    <span class="doccomment">/// This option prevents any changes to the dirty state of the resource.</span>
+    <span class="doccomment">/// Applications should use this option when they have additional information about the set of regions changed during the lock operation.</span>
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">NoDirtyUpdate</span>     : <span class="ident">Lock</span> <span class="op">=</span> <span class="ident">Lock</span>(<span class="ident">D3DLOCK_NO_DIRTY_UPDATE</span>);
 
-    <span class="doccomment">/// Indicates that memory that was referred to in a drawing call since the last lock without this flag will not be modified during the lock.
-    /// This can enable optimizations when the application is appending data to a resource.
-    /// Specifying this flag enables the driver to return immediately if the resource is in use, otherwise, the driver must finish using the resource before returning from locking.
-    </span><span class="kw">pub const </span>NoOverwrite       : Lock = Lock(D3DLOCK_NOOVERWRITE);
+    <span class="doccomment">/// Indicates that memory that was referred to in a drawing call since the last lock without this flag will not be modified during the lock.</span>
+    <span class="doccomment">/// This can enable optimizations when the application is appending data to a resource.</span>
+    <span class="doccomment">/// Specifying this flag enables the driver to return immediately if the resource is in use, otherwise, the driver must finish using the resource before returning from locking.</span>
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">NoOverwrite</span>       : <span class="ident">Lock</span> <span class="op">=</span> <span class="ident">Lock</span>(<span class="ident">D3DLOCK_NOOVERWRITE</span>);
 
-    <span class="doccomment">/// The default behavior of a video memory lock is to reserve a system-wide critical section, guaranteeing that no display mode changes will occur for the duration of the lock.
-    /// This option causes the system-wide critical section not to be held for the duration of the lock.
-    ///
-    /// The lock operation is time consuming, but can enable the system to perform other duties, such as moving the mouse cursor.
-    /// This option is useful for long-duration locks, such as the lock of the back buffer for software rendering that would otherwise adversely affect system responsiveness.
-    </span><span class="kw">pub const </span>NoSysLock         : Lock = Lock(D3DLOCK_NOSYSLOCK);
+    <span class="doccomment">/// The default behavior of a video memory lock is to reserve a system-wide critical section, guaranteeing that no display mode changes will occur for the duration of the lock.</span>
+    <span class="doccomment">/// This option causes the system-wide critical section not to be held for the duration of the lock.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// The lock operation is time consuming, but can enable the system to perform other duties, such as moving the mouse cursor.</span>
+    <span class="doccomment">/// This option is useful for long-duration locks, such as the lock of the back buffer for software rendering that would otherwise adversely affect system responsiveness.</span>
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">NoSysLock</span>         : <span class="ident">Lock</span> <span class="op">=</span> <span class="ident">Lock</span>(<span class="ident">D3DLOCK_NOSYSLOCK</span>);
 
-    <span class="doccomment">/// The application will not write to the buffer.
-    /// This enables resources stored in non-native formats to save the recompression step when unlocking.
-    </span><span class="kw">pub const </span>ReadOnly          : Lock = Lock(D3DLOCK_READONLY);
+    <span class="doccomment">/// The application will not write to the buffer.</span>
+    <span class="doccomment">/// This enables resources stored in non-native formats to save the recompression step when unlocking.</span>
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">ReadOnly</span>          : <span class="ident">Lock</span> <span class="op">=</span> <span class="ident">Lock</span>(<span class="ident">D3DLOCK_READONLY</span>);
 }
 
 
 
-<span class="comment">//#cpp2rust D3DLOCK_DISCARD         = d3d::Lock::Discard
-//#cpp2rust D3DLOCK_DONOTWAIT       = d3d::Lock::DoNotWait
-//#cpp2rust D3DLOCK_NO_DIRTY_UPDATE = d3d::Lock::NoDirtyUpdate
-//#cpp2rust D3DLOCK_NOOVERWRITE     = d3d::Lock::NoOverwrite
-//#cpp2rust D3DLOCK_NOSYSLOCK       = d3d::Lock::NoSysLock
-//#cpp2rust D3DLOCK_READONLY        = d3d::Lock::ReadOnly
-</span></code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (b44197abb 2022-09-05)" ></div></body></html>
+<span class="comment">//#cpp2rust D3DLOCK_DISCARD         = d3d::Lock::Discard</span>
+<span class="comment">//#cpp2rust D3DLOCK_DONOTWAIT       = d3d::Lock::DoNotWait</span>
+<span class="comment">//#cpp2rust D3DLOCK_NO_DIRTY_UPDATE = d3d::Lock::NoDirtyUpdate</span>
+<span class="comment">//#cpp2rust D3DLOCK_NOOVERWRITE     = d3d::Lock::NoOverwrite</span>
+<span class="comment">//#cpp2rust D3DLOCK_NOSYSLOCK       = d3d::Lock::NoSysLock</span>
+<span class="comment">//#cpp2rust D3DLOCK_READONLY        = d3d::Lock::ReadOnly</span>
+</code></pre></div>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0 (4b91a6ea7 2022-08-08)" ></div>
+</body></html>

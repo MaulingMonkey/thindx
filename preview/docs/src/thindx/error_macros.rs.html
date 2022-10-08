@@ -1,4 +1,10 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\error_macros.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>error_macros.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../thindx/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\error_macros.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>error_macros.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
+        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../thindx/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
+                                <a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -60,65 +66,66 @@
 <span id="60">60</span>
 <span id="61">61</span>
 </pre><pre class="rust"><code>
-<span class="macro">macro_rules! </span>fn_err         { ( <span class="macro-nonterminal">$kind</span>:expr ) =&gt; {    <span class="prelude-val">Err</span>(<span class="macro-nonterminal">$crate::Error</span>(<span class="kw-2">&amp;</span>_THINDX_FN_CONTEXT, (<span class="macro-nonterminal">$kind</span>).into())) }}
-<span class="macro">macro_rules! </span>fn_error       { ( <span class="macro-nonterminal">$kind</span>:expr ) =&gt; {        <span class="macro-nonterminal">$crate::Error</span>(<span class="kw-2">&amp;</span>_THINDX_FN_CONTEXT, (<span class="macro-nonterminal">$kind</span>).into())  }}
-<span class="macro">macro_rules! </span>fn_check_hr    { ( <span class="macro-nonterminal">$hr</span>:expr )   =&gt; { <span class="macro-nonterminal">$crate::Error::check</span>(<span class="kw-2">&amp;</span>_THINDX_FN_CONTEXT, (<span class="macro-nonterminal">$hr</span>).into())    }}
-<span class="macro">macro_rules! </span>fn_param_error { ( <span class="macro-nonterminal">$param</span>:ident, <span class="macro-nonterminal">$kind</span>:expr ) =&gt; { <span class="macro-nonterminal">$crate::Error</span>(<span class="kw-2">&amp;</span><span class="macro-nonterminal">$crate::error_macros::FnContext </span>{ parameter: <span class="prelude-val">Some</span>(<span class="macro">stringify!</span>(<span class="macro-nonterminal">$param</span>)), .._THINDX_FN_CONTEXT }, (<span class="macro-nonterminal">$kind</span>).into()) } }
-<span class="comment">// TODO: audit fn_param_error! for consistency
-</span><span class="macro">macro_rules! </span>fn_param_try_into  { ( <span class="macro-nonterminal">$param</span>:ident ) =&gt; { (<span class="macro-nonterminal">$param</span>).try_into().map_err(|err| <span class="macro">fn_param_error!</span>(<span class="macro-nonterminal">$param</span>, err)) } }
-<span class="macro">macro_rules! </span>fn_param_try_len32 { ( <span class="macro-nonterminal">$param</span>:ident ) =&gt; { u32::try_from((<span class="macro-nonterminal">$param</span>).len()).map_err(|<span class="kw">_</span>| <span class="macro">fn_param_error!</span>(<span class="macro-nonterminal">$param</span>, <span class="macro-nonterminal">$crate::THINERR::SLICE_TOO_LARGE</span>)) } }
+<span class="macro">macro_rules!</span> <span class="ident">fn_err</span>         { ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">kind</span>:<span class="ident">expr</span> ) =&gt; {    <span class="prelude-val">Err</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">crate::Error</span>(<span class="kw-2">&amp;</span><span class="ident">_THINDX_FN_CONTEXT</span>, (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">kind</span>).<span class="ident">into</span>())) }}
+<span class="macro">macro_rules!</span> <span class="ident">fn_error</span>       { ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">kind</span>:<span class="ident">expr</span> ) =&gt; {        <span class="macro-nonterminal">$</span><span class="macro-nonterminal">crate::Error</span>(<span class="kw-2">&amp;</span><span class="ident">_THINDX_FN_CONTEXT</span>, (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">kind</span>).<span class="ident">into</span>())  }}
+<span class="macro">macro_rules!</span> <span class="ident">fn_check_hr</span>    { ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">hr</span>:<span class="ident">expr</span> )   =&gt; { <span class="macro-nonterminal">$</span><span class="macro-nonterminal">crate::Error::check</span>(<span class="kw-2">&amp;</span><span class="ident">_THINDX_FN_CONTEXT</span>, (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">hr</span>).<span class="ident">into</span>())    }}
+<span class="macro">macro_rules!</span> <span class="ident">fn_param_error</span> { ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">param</span>:<span class="ident">ident</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">kind</span>:<span class="ident">expr</span> ) =&gt; { <span class="macro-nonterminal">$</span><span class="macro-nonterminal">crate::Error</span>(<span class="kw-2">&amp;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">crate::error_macros::FnContext</span> { <span class="ident">parameter</span>: <span class="prelude-val">Some</span>(<span class="macro">stringify!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">param</span>)), ..<span class="ident">_THINDX_FN_CONTEXT</span> }, (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">kind</span>).<span class="ident">into</span>()) } }
+<span class="comment">// TODO: audit fn_param_error! for consistency</span>
+<span class="macro">macro_rules!</span> <span class="ident">fn_param_try_into</span>  { ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">param</span>:<span class="ident">ident</span> ) =&gt; { (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">param</span>).<span class="ident">try_into</span>().<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">err</span><span class="op">|</span> <span class="macro">fn_param_error!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">param</span>, <span class="ident">err</span>)) } }
+<span class="macro">macro_rules!</span> <span class="ident">fn_param_try_len32</span> { ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">param</span>:<span class="ident">ident</span> ) =&gt; { <span class="ident">u32::try_from</span>((<span class="macro-nonterminal">$</span><span class="macro-nonterminal">param</span>).<span class="ident">len</span>()).<span class="ident">map_err</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="macro">fn_param_error!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">param</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">crate::THINERR::SLICE_TOO_LARGE</span>)) } }
 
-<span class="doccomment">/// Annotate a Rust =&gt; C++ function mapping.
-///
-/// This is an alternative to `//#cpp2rust Cpp = Rust` comments, and also provides a constant for other `fn_*!` macros to read.
-///
-/// ### Usage
-/// ```ignore
-/// fn_context!(Rust::method =&gt; ICpp::Method);
-/// ```
-</span><span class="macro">macro_rules! </span>fn_context {
-    ( <span class="macro-nonterminal">$thindx</span>:path ) =&gt; {
-        <span class="kw">const </span>_THINDX_FN_CONTEXT : <span class="macro-nonterminal">$crate::error_macros::FnContext </span>= <span class="macro-nonterminal">$crate::error_macros::FnContext </span>{ <span class="comment">// Ensure it&#39;s evaluated at compile time
-            </span>directx_method: <span class="prelude-val">None</span>,
-            thindx_method:  <span class="macro">stringify!</span>(<span class="macro-nonterminal">$thindx</span>),
-            parameter:      <span class="prelude-val">None</span>,
+<span class="doccomment">/// Annotate a Rust =&gt; C++ function mapping.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// This is an alternative to `//#cpp2rust Cpp = Rust` comments, and also provides a constant for other `fn_*!` macros to read.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// ### Usage</span>
+<span class="doccomment">/// ```ignore</span>
+<span class="doccomment">/// fn_context!(Rust::method =&gt; ICpp::Method);</span>
+<span class="doccomment">/// ```</span>
+<span class="macro">macro_rules!</span> <span class="ident">fn_context</span> {
+    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">thindx</span>:<span class="ident">path</span> ) =&gt; {
+        <span class="kw">const</span> <span class="ident">_THINDX_FN_CONTEXT</span> : <span class="macro-nonterminal">$</span><span class="macro-nonterminal">crate::error_macros::FnContext</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">crate::error_macros::FnContext</span> { <span class="comment">// Ensure it&#39;s evaluated at compile time</span>
+            <span class="ident">directx_method</span>: <span class="prelude-val">None</span>,
+            <span class="ident">thindx_method</span>:  <span class="macro">stringify!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">thindx</span>),
+            <span class="ident">parameter</span>:      <span class="prelude-val">None</span>,
 
-            module_path:    <span class="macro">std::module_path!</span>(),
-            file:           <span class="macro">std::file!</span>(),
-            line:           <span class="macro">std::line!</span>(),
-            column:         <span class="macro">std::column!</span>(),
+            <span class="ident">module_path</span>:    <span class="macro">std::module_path!</span>(),
+            <span class="ident">file</span>:           <span class="macro">std::file!</span>(),
+            <span class="ident">line</span>:           <span class="macro">std::line!</span>(),
+            <span class="ident">column</span>:         <span class="macro">std::column!</span>(),
         };
     };
-    ( <span class="macro-nonterminal">$thindx</span>:path =&gt; <span class="macro-nonterminal">$directx</span>:path ) =&gt; {
-        <span class="kw">const </span>_THINDX_FN_CONTEXT : <span class="macro-nonterminal">$crate::error_macros::FnContext </span>= <span class="macro-nonterminal">$crate::error_macros::FnContext </span>{ <span class="comment">// Ensure it&#39;s evaluated at compile time
-            </span>directx_method: <span class="prelude-val">Some</span>(<span class="macro">stringify!</span>(<span class="macro-nonterminal">$directx</span>)),
-            thindx_method:  <span class="macro">stringify!</span>(<span class="macro-nonterminal">$thindx</span>),
-            parameter:      <span class="prelude-val">None</span>,
+    ( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">thindx</span>:<span class="ident">path</span> =&gt; <span class="macro-nonterminal">$</span><span class="macro-nonterminal">directx</span>:<span class="ident">path</span> ) =&gt; {
+        <span class="kw">const</span> <span class="ident">_THINDX_FN_CONTEXT</span> : <span class="macro-nonterminal">$</span><span class="macro-nonterminal">crate::error_macros::FnContext</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">crate::error_macros::FnContext</span> { <span class="comment">// Ensure it&#39;s evaluated at compile time</span>
+            <span class="ident">directx_method</span>: <span class="prelude-val">Some</span>(<span class="macro">stringify!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">directx</span>)),
+            <span class="ident">thindx_method</span>:  <span class="macro">stringify!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">thindx</span>),
+            <span class="ident">parameter</span>:      <span class="prelude-val">None</span>,
 
-            module_path:    <span class="macro">std::module_path!</span>(),
-            file:           <span class="macro">std::file!</span>(),
-            line:           <span class="macro">std::line!</span>(),
-            column:         <span class="macro">std::column!</span>(),
+            <span class="ident">module_path</span>:    <span class="macro">std::module_path!</span>(),
+            <span class="ident">file</span>:           <span class="macro">std::file!</span>(),
+            <span class="ident">line</span>:           <span class="macro">std::line!</span>(),
+            <span class="ident">column</span>:         <span class="macro">std::column!</span>(),
         };
     };
 }
 
-<span class="attribute">#[allow(dead_code)] </span><span class="comment">// not all fields yet used
-</span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">struct </span>FnContext {
-    <span class="kw">pub </span>directx_method: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str&gt;,
-    <span class="kw">pub </span>thindx_method:  <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str,
-    <span class="kw">pub </span>parameter:      <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str&gt;,
+<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">dead_code</span>)]</span> <span class="comment">// not all fields yet used</span>
+<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">struct</span> <span class="ident">FnContext</span> {
+    <span class="kw">pub</span> <span class="ident">directx_method</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span><span class="op">&gt;</span>,
+    <span class="kw">pub</span> <span class="ident">thindx_method</span>:  <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span>,
+    <span class="kw">pub</span> <span class="ident">parameter</span>:      <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span><span class="op">&gt;</span>,
 
-    <span class="kw">pub </span>module_path:    <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str,
-    <span class="kw">pub </span>file:           <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>str,
-    <span class="kw">pub </span>line:           u32,
-    <span class="kw">pub </span>column:         u32,
+    <span class="kw">pub</span> <span class="ident">module_path</span>:    <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span>,
+    <span class="kw">pub</span> <span class="ident">file</span>:           <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span>,
+    <span class="kw">pub</span> <span class="ident">line</span>:           <span class="ident">u32</span>,
+    <span class="kw">pub</span> <span class="ident">column</span>:         <span class="ident">u32</span>,
 }
 
 
 
-<span class="attribute">#[test] </span><span class="kw">fn </span>asdf() {
-    <span class="macro">fn_context! </span>{ thindx::method =&gt; Method };
+<span class="attribute">#[<span class="ident">test</span>]</span> <span class="kw">fn</span> <span class="ident">asdf</span>() {
+    <span class="macro">fn_context!</span> { <span class="ident">thindx::method</span> =&gt; <span class="ident">Method</span> };
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (b44197abb 2022-09-05)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0 (4b91a6ea7 2022-08-08)" ></div>
+</body></html>

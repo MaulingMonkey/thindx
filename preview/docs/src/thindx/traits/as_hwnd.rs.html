@@ -1,4 +1,10 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\traits\as_hwnd.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>as_hwnd.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../normalize.css"><link rel="stylesheet" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../ayu.css" disabled><link rel="stylesheet" href="../../../dark.css" disabled><link rel="stylesheet" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../thindx/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\traits\as_hwnd.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>as_hwnd.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
+        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../thindx/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
+                                <a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -134,141 +140,142 @@
 <span id="134">134</span>
 <span id="135">135</span>
 <span id="136">136</span>
-</pre><pre class="rust"><code><span class="kw">use </span>winapi::shared::windef::<span class="kw-2">*</span>;
-<span class="kw">use </span>winapi::um::winuser::<span class="kw-2">*</span>;
+</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">winapi::shared::windef</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">winapi::um::winuser</span>::<span class="kw-2">*</span>;
 
-<span class="kw">use </span>std::marker::PhantomData;
-<span class="kw">use </span>std::ptr::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">std::marker::PhantomData</span>;
+<span class="kw">use</span> <span class="ident">std::ptr</span>::<span class="kw-2">*</span>;
 
 
-<span class="doccomment">/// Indicates this type can be treated as an HWND.
-///
-/// ### ⚠️ Safety ⚠️
-/// By implementing this trait, you assert that `as_hwnd` returns either:
-/// *   [std::ptr::null_mut]\(\)
-/// *   A handle to a window belonging to the current thread.
-///
-/// If you have any sense at all, you&#39;ll ensure said handle remains valid at
-/// least until a `&amp;mut self` method is called, or the type is dropped, or
-/// perhaps even longer.
-</span><span class="kw">pub unsafe trait </span>AsHWND {
-    <span class="attribute">#[allow(missing_docs)]
-    </span><span class="kw">fn </span>as_hwnd(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; HWND;
+<span class="doccomment">/// Indicates this type can be treated as an HWND.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// ### ⚠️ Safety ⚠️</span>
+<span class="doccomment">/// By implementing this trait, you assert that `as_hwnd` returns either:</span>
+<span class="doccomment">/// *   [std::ptr::null_mut]\(\)</span>
+<span class="doccomment">/// *   A handle to a window belonging to the current thread.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// If you have any sense at all, you&#39;ll ensure said handle remains valid at</span>
+<span class="doccomment">/// least until a `&amp;mut self` method is called, or the type is dropped, or</span>
+<span class="doccomment">/// perhaps even longer.</span>
+<span class="kw">pub</span> <span class="kw unsafe">unsafe</span> <span class="kw">trait</span> <span class="ident">AsHWND</span> {
+    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">missing_docs</span>)]</span>
+    <span class="kw">fn</span> <span class="ident">as_hwnd</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">HWND</span>;
 }
 
-<span class="kw">unsafe impl </span>AsHWND <span class="kw">for </span>() {
-    <span class="kw">fn </span>as_hwnd(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; HWND { std::ptr::null_mut() }
-}
-
-
-
-<span class="doccomment">/// A safer/sounder alternative to [HWND]
-///
-/// [HWND]: https://docs.microsoft.com/en-us/windows/win32/learnwin32/what-is-a-window-
-</span><span class="attribute">#[derive(Debug)] </span><span class="comment">// cmp/hash?
-</span><span class="attribute">#[repr(transparent)] </span><span class="kw">pub struct </span>SafeHWND&lt;<span class="lifetime">&#39;w</span>&gt; {
-    hwnd:       NonNull&lt;HWND__&gt;,
-    phantom:    PhantomData&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;w </span>HWND&gt;,
-}
-
-<span class="kw">impl </span>SafeHWND&lt;<span class="lifetime">&#39;static</span>&gt; {
-    <span class="doccomment">/// Assert that `hwnd` is safe for the duration of the resulting `SafeHWND`&#39;s lifetime.
-    ///
-    /// Prefer the lifetime-bounded [SafeHWND::assert] when possible.
-    ///
-    /// ### ⚠️ Safety ⚠️
-    /// By using this method, you assert that `hwnd` will be valid for the entire duration of `Self`.
-    /// This is enforced by `assert!(...)` upon construction and drop, but that&#39;s potentially *after* undefined behavior has been invoked.
-    </span><span class="kw">pub unsafe fn </span>assert_unbounded(hwnd: HWND) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>&gt; {
-        <span class="macro">assert!</span>(hwnd.is_null() || <span class="kw">unsafe </span>{ IsWindow(hwnd) } != <span class="number">0</span>);
-        <span class="prelude-val">Some</span>(<span class="self">Self </span>{ hwnd: NonNull::new(hwnd)<span class="question-mark">?</span>, phantom: PhantomData })
-    }
-}
-
-<span class="kw">impl</span>&lt;<span class="lifetime">&#39;w</span>&gt; SafeHWND&lt;<span class="lifetime">&#39;w</span>&gt; {
-    <span class="doccomment">/// Assert that `hwnd` is safe for the duration of the resulting `SafeHWND`&#39;s lifetime.
-    ///
-    /// To encourage limited lifetimes, this takes `hwnd` by reference.
-    ///
-    /// ### ⚠️ Safety ⚠️
-    /// By using this method, you assert that `hwnd` will be valid for the entire duration of `Self`.
-    /// This is enforced by `assert!(...)` upon construction and drop, but that&#39;s potentially *after* undefined behavior has been invoked.
-    </span><span class="kw">pub unsafe fn </span>assert(hwnd: <span class="kw-2">&amp;</span><span class="lifetime">&#39;w </span>HWND) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>&gt; {
-        <span class="kw">let </span>hwnd = <span class="kw-2">*</span>hwnd;
-        <span class="macro">assert!</span>(hwnd.is_null() || <span class="kw">unsafe </span>{ IsWindow(hwnd) } != <span class="number">0</span>);
-        <span class="prelude-val">Some</span>(<span class="self">Self </span>{ hwnd: NonNull::new(hwnd)<span class="question-mark">?</span>, phantom: PhantomData })
-    }
-
-    <span class="doccomment">/// Check the validity of the underlying [HWND] handle.
-    ///
-    /// Chances are, if this ever returns `false`, you&#39;ve already invoked undefined behavior.
-    ///
-    /// [HWND]: https://docs.microsoft.com/en-us/windows/win32/learnwin32/what-is-a-window-
-    </span><span class="kw">pub fn </span>is_valid(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
-        <span class="kw">unsafe </span>{ IsWindow(<span class="self">self</span>.hwnd.as_ptr()) != <span class="number">0 </span>}
-    }
-}
-
-<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; Clone <span class="kw">for </span>SafeHWND&lt;<span class="lifetime">&#39;a</span>&gt; {
-    <span class="kw">fn </span>clone(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
-        <span class="macro">assert!</span>(<span class="self">self</span>.is_valid(), <span class="string">&quot;SafeHWND wasn&#39;t valid when cloned!  Likely undefined behavior!&quot;</span>);
-        <span class="self">Self </span>{ hwnd: <span class="self">self</span>.hwnd, phantom: <span class="self">self</span>.phantom }
-    }
-}
-
-<span class="kw">impl </span>std::ops::Drop <span class="kw">for </span>SafeHWND&lt;<span class="lifetime">&#39;_</span>&gt; {
-    <span class="kw">fn </span>drop(<span class="kw-2">&amp;mut </span><span class="self">self</span>) {
-        <span class="macro">assert!</span>(<span class="self">self</span>.is_valid(), <span class="string">&quot;SafeHWND wasn&#39;t valid when dropped!  Likely undefined behavior!&quot;</span>);
-    }
-}
-
-<span class="kw">unsafe impl </span>AsHWND <span class="kw">for </span>SafeHWND&lt;<span class="lifetime">&#39;_</span>&gt; {
-    <span class="kw">fn </span>as_hwnd(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; HWND { <span class="self">self</span>.hwnd.as_ptr() }
-}
-
-<span class="kw">unsafe impl </span>AsHWND <span class="kw">for </span><span class="prelude-ty">Option</span>&lt;SafeHWND&lt;<span class="lifetime">&#39;_</span>&gt;&gt; {
-    <span class="kw">fn </span>as_hwnd(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; HWND { <span class="self">self</span>.as_ref().map_or(null_mut(), |sw| sw.hwnd.as_ptr()) }
+<span class="kw unsafe">unsafe</span> <span class="kw">impl</span> <span class="ident">AsHWND</span> <span class="kw">for</span> () {
+    <span class="kw">fn</span> <span class="ident">as_hwnd</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">HWND</span> { <span class="ident">std::ptr::null_mut</span>() }
 }
 
 
 
-<span class="attribute">#[cfg(test)] </span><span class="kw">mod </span>tests {
-    <span class="kw">use super</span>::<span class="kw-2">*</span>;
-    <span class="kw">use </span>dev::win32::<span class="kw-2">*</span>;
-    <span class="kw">use </span>dev::d3d9::AsHWND;
+<span class="doccomment">/// A safer/sounder alternative to [HWND]</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// [HWND]: https://docs.microsoft.com/en-us/windows/win32/learnwin32/what-is-a-window-</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span> <span class="comment">// cmp/hash?</span>
+<span class="attribute">#[<span class="ident">repr</span>(<span class="ident">transparent</span>)]</span> <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">SafeHWND</span><span class="op">&lt;</span><span class="lifetime">&#39;w</span><span class="op">&gt;</span> {
+    <span class="ident">hwnd</span>:       <span class="ident">NonNull</span><span class="op">&lt;</span><span class="ident">HWND__</span><span class="op">&gt;</span>,
+    <span class="ident">phantom</span>:    <span class="ident">PhantomData</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;w</span> <span class="ident">HWND</span><span class="op">&gt;</span>,
+}
 
-    <span class="attribute">#[test] </span><span class="kw">fn </span>layout() {
-        <span class="kw">use </span>std::mem::<span class="kw-2">*</span>;
+<span class="kw">impl</span> <span class="ident">SafeHWND</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span><span class="op">&gt;</span> {
+    <span class="doccomment">/// Assert that `hwnd` is safe for the duration of the resulting `SafeHWND`&#39;s lifetime.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Prefer the lifetime-bounded [SafeHWND::assert] when possible.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### ⚠️ Safety ⚠️</span>
+    <span class="doccomment">/// By using this method, you assert that `hwnd` will be valid for the entire duration of `Self`.</span>
+    <span class="doccomment">/// This is enforced by `assert!(...)` upon construction and drop, but that&#39;s potentially *after* undefined behavior has been invoked.</span>
+    <span class="kw">pub</span> <span class="kw unsafe">unsafe</span> <span class="kw">fn</span> <span class="ident">assert_unbounded</span>(<span class="ident">hwnd</span>: <span class="ident">HWND</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
+        <span class="macro">assert!</span>(<span class="ident">hwnd</span>.<span class="ident">is_null</span>() <span class="op">|</span><span class="op">|</span> <span class="kw unsafe">unsafe</span> { <span class="ident">IsWindow</span>(<span class="ident">hwnd</span>) } <span class="op">!</span><span class="op">=</span> <span class="number">0</span>);
+        <span class="prelude-val">Some</span>(<span class="self">Self</span> { <span class="ident">hwnd</span>: <span class="ident">NonNull::new</span>(<span class="ident">hwnd</span>)<span class="question-mark">?</span>, <span class="ident">phantom</span>: <span class="ident">PhantomData</span> })
+    }
+}
 
-        <span class="macro">assert_eq!</span>(size_of ::&lt;SafeHWND&gt;(), size_of ::&lt;HWND&gt;());
-        <span class="macro">assert_eq!</span>(align_of::&lt;SafeHWND&gt;(), align_of::&lt;HWND&gt;());
-        <span class="macro">assert_eq!</span>(size_of ::&lt;<span class="prelude-ty">Option</span>&lt;SafeHWND&gt;&gt;(), size_of ::&lt;HWND&gt;());
-        <span class="macro">assert_eq!</span>(align_of::&lt;<span class="prelude-ty">Option</span>&lt;SafeHWND&gt;&gt;(), align_of::&lt;HWND&gt;());
-        <span class="macro">assert_eq!</span>(<span class="number">0</span>, <span class="kw">unsafe </span>{ std::mem::transmute::&lt;<span class="prelude-ty">Option</span>&lt;SafeHWND&gt;, usize&gt;(<span class="prelude-val">None</span>) }, <span class="string">&quot;Option&lt;SafeHWND&gt; should be bytemuck::Zeroable&quot;</span>);
+<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;w</span><span class="op">&gt;</span> <span class="ident">SafeHWND</span><span class="op">&lt;</span><span class="lifetime">&#39;w</span><span class="op">&gt;</span> {
+    <span class="doccomment">/// Assert that `hwnd` is safe for the duration of the resulting `SafeHWND`&#39;s lifetime.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// To encourage limited lifetimes, this takes `hwnd` by reference.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### ⚠️ Safety ⚠️</span>
+    <span class="doccomment">/// By using this method, you assert that `hwnd` will be valid for the entire duration of `Self`.</span>
+    <span class="doccomment">/// This is enforced by `assert!(...)` upon construction and drop, but that&#39;s potentially *after* undefined behavior has been invoked.</span>
+    <span class="kw">pub</span> <span class="kw unsafe">unsafe</span> <span class="kw">fn</span> <span class="ident">assert</span>(<span class="ident">hwnd</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;w</span> <span class="ident">HWND</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
+        <span class="kw">let</span> <span class="ident">hwnd</span> <span class="op">=</span> <span class="kw-2">*</span><span class="ident">hwnd</span>;
+        <span class="macro">assert!</span>(<span class="ident">hwnd</span>.<span class="ident">is_null</span>() <span class="op">|</span><span class="op">|</span> <span class="kw unsafe">unsafe</span> { <span class="ident">IsWindow</span>(<span class="ident">hwnd</span>) } <span class="op">!</span><span class="op">=</span> <span class="number">0</span>);
+        <span class="prelude-val">Some</span>(<span class="self">Self</span> { <span class="ident">hwnd</span>: <span class="ident">NonNull::new</span>(<span class="ident">hwnd</span>)<span class="question-mark">?</span>, <span class="ident">phantom</span>: <span class="ident">PhantomData</span> })
     }
 
-    <span class="attribute">#[test] #[should_panic] </span><span class="kw">fn </span>should_panic_on_create() {
-        <span class="kw">let </span>_safe = <span class="kw">unsafe </span>{ SafeHWND::assert(<span class="kw-2">&amp;</span>(!<span class="number">42 </span><span class="kw">as </span>HWND)) };
+    <span class="doccomment">/// Check the validity of the underlying [HWND] handle.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Chances are, if this ever returns `false`, you&#39;ve already invoked undefined behavior.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// [HWND]: https://docs.microsoft.com/en-us/windows/win32/learnwin32/what-is-a-window-</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_valid</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
+        <span class="kw unsafe">unsafe</span> { <span class="ident">IsWindow</span>(<span class="self">self</span>.<span class="ident">hwnd</span>.<span class="ident">as_ptr</span>()) <span class="op">!</span><span class="op">=</span> <span class="number">0</span> }
+    }
+}
+
+<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">Clone</span> <span class="kw">for</span> <span class="ident">SafeHWND</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
+        <span class="macro">assert!</span>(<span class="self">self</span>.<span class="ident">is_valid</span>(), <span class="string">&quot;SafeHWND wasn&#39;t valid when cloned!  Likely undefined behavior!&quot;</span>);
+        <span class="self">Self</span> { <span class="ident">hwnd</span>: <span class="self">self</span>.<span class="ident">hwnd</span>, <span class="ident">phantom</span>: <span class="self">self</span>.<span class="ident">phantom</span> }
+    }
+}
+
+<span class="kw">impl</span> <span class="ident">std::ops::Drop</span> <span class="kw">for</span> <span class="ident">SafeHWND</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">drop</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {
+        <span class="macro">assert!</span>(<span class="self">self</span>.<span class="ident">is_valid</span>(), <span class="string">&quot;SafeHWND wasn&#39;t valid when dropped!  Likely undefined behavior!&quot;</span>);
+    }
+}
+
+<span class="kw unsafe">unsafe</span> <span class="kw">impl</span> <span class="ident">AsHWND</span> <span class="kw">for</span> <span class="ident">SafeHWND</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">as_hwnd</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">HWND</span> { <span class="self">self</span>.<span class="ident">hwnd</span>.<span class="ident">as_ptr</span>() }
+}
+
+<span class="kw unsafe">unsafe</span> <span class="kw">impl</span> <span class="ident">AsHWND</span> <span class="kw">for</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">SafeHWND</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">as_hwnd</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">HWND</span> { <span class="self">self</span>.<span class="ident">as_ref</span>().<span class="ident">map_or</span>(<span class="ident">null_mut</span>(), <span class="op">|</span><span class="ident">sw</span><span class="op">|</span> <span class="ident">sw</span>.<span class="ident">hwnd</span>.<span class="ident">as_ptr</span>()) }
+}
+
+
+
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span> <span class="kw">mod</span> <span class="ident">tests</span> {
+    <span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
+    <span class="kw">use</span> <span class="ident">dev::win32</span>::<span class="kw-2">*</span>;
+    <span class="kw">use</span> <span class="ident">dev::d3d9::AsHWND</span>;
+
+    <span class="attribute">#[<span class="ident">test</span>]</span> <span class="kw">fn</span> <span class="ident">layout</span>() {
+        <span class="kw">use</span> <span class="ident">std::mem</span>::<span class="kw-2">*</span>;
+
+        <span class="macro">assert_eq!</span>(<span class="ident">size_of</span> ::<span class="op">&lt;</span><span class="ident">SafeHWND</span><span class="op">&gt;</span>(), <span class="ident">size_of</span> ::<span class="op">&lt;</span><span class="ident">HWND</span><span class="op">&gt;</span>());
+        <span class="macro">assert_eq!</span>(<span class="ident">align_of</span>::<span class="op">&lt;</span><span class="ident">SafeHWND</span><span class="op">&gt;</span>(), <span class="ident">align_of</span>::<span class="op">&lt;</span><span class="ident">HWND</span><span class="op">&gt;</span>());
+        <span class="macro">assert_eq!</span>(<span class="ident">size_of</span> ::<span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">SafeHWND</span><span class="op">&gt;</span><span class="op">&gt;</span>(), <span class="ident">size_of</span> ::<span class="op">&lt;</span><span class="ident">HWND</span><span class="op">&gt;</span>());
+        <span class="macro">assert_eq!</span>(<span class="ident">align_of</span>::<span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">SafeHWND</span><span class="op">&gt;</span><span class="op">&gt;</span>(), <span class="ident">align_of</span>::<span class="op">&lt;</span><span class="ident">HWND</span><span class="op">&gt;</span>());
+        <span class="macro">assert_eq!</span>(<span class="number">0</span>, <span class="kw unsafe">unsafe</span> { <span class="ident">std::mem::transmute</span>::<span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">SafeHWND</span><span class="op">&gt;</span>, <span class="ident">usize</span><span class="op">&gt;</span>(<span class="prelude-val">None</span>) }, <span class="string">&quot;Option&lt;SafeHWND&gt; should be bytemuck::Zeroable&quot;</span>);
     }
 
-    <span class="attribute">#[test] #[should_panic] </span><span class="kw">fn </span>should_panic_on_drop() {
-        <span class="kw">let </span>window = create_window(<span class="string">&quot;destroyed before dropped&quot;</span>);
-        <span class="kw">let </span>safe = <span class="kw">unsafe </span>{ SafeHWND::assert(<span class="kw-2">&amp;</span>(!<span class="number">42 </span><span class="kw">as </span>HWND)).unwrap() };
-        <span class="kw">unsafe </span>{ CloseWindow(window.as_hwnd()) };
-        std::mem::drop(safe);
+    <span class="attribute">#[<span class="ident">test</span>]</span> <span class="attribute">#[<span class="ident">should_panic</span>]</span> <span class="kw">fn</span> <span class="ident">should_panic_on_create</span>() {
+        <span class="kw">let</span> <span class="ident">_safe</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="ident">SafeHWND::assert</span>(<span class="kw-2">&amp;</span>(<span class="op">!</span><span class="number">42</span> <span class="kw">as</span> <span class="ident">HWND</span>)) };
     }
 
-    <span class="attribute">#[test] </span><span class="kw">fn </span>should_not_panic_null() {
-        <span class="kw">let </span>safe = <span class="kw">unsafe </span>{ SafeHWND::assert(<span class="kw-2">&amp;</span>std::ptr::null_mut()) };
-        std::mem::drop(safe);
+    <span class="attribute">#[<span class="ident">test</span>]</span> <span class="attribute">#[<span class="ident">should_panic</span>]</span> <span class="kw">fn</span> <span class="ident">should_panic_on_drop</span>() {
+        <span class="kw">let</span> <span class="ident">window</span> <span class="op">=</span> <span class="ident">create_window</span>(<span class="string">&quot;destroyed before dropped&quot;</span>);
+        <span class="kw">let</span> <span class="ident">safe</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="ident">SafeHWND::assert</span>(<span class="kw-2">&amp;</span>(<span class="op">!</span><span class="number">42</span> <span class="kw">as</span> <span class="ident">HWND</span>)).<span class="ident">unwrap</span>() };
+        <span class="kw unsafe">unsafe</span> { <span class="ident">CloseWindow</span>(<span class="ident">window</span>.<span class="ident">as_hwnd</span>()) };
+        <span class="ident">std::mem::drop</span>(<span class="ident">safe</span>);
     }
 
-    <span class="attribute">#[test] </span><span class="kw">fn </span>should_not_panic_outlived() {
-        <span class="kw">let </span>window = create_window(<span class="string">&quot;destroyed before dropped&quot;</span>).as_hwnd();
-        <span class="kw">let </span>safe = <span class="kw">unsafe </span>{ SafeHWND::assert(<span class="kw-2">&amp;</span>window).unwrap() };
-        std::mem::drop(safe);
-        <span class="kw">unsafe </span>{ CloseWindow(window) };
+    <span class="attribute">#[<span class="ident">test</span>]</span> <span class="kw">fn</span> <span class="ident">should_not_panic_null</span>() {
+        <span class="kw">let</span> <span class="ident">safe</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="ident">SafeHWND::assert</span>(<span class="kw-2">&amp;</span><span class="ident">std::ptr::null_mut</span>()) };
+        <span class="ident">std::mem::drop</span>(<span class="ident">safe</span>);
+    }
+
+    <span class="attribute">#[<span class="ident">test</span>]</span> <span class="kw">fn</span> <span class="ident">should_not_panic_outlived</span>() {
+        <span class="kw">let</span> <span class="ident">window</span> <span class="op">=</span> <span class="ident">create_window</span>(<span class="string">&quot;destroyed before dropped&quot;</span>).<span class="ident">as_hwnd</span>();
+        <span class="kw">let</span> <span class="ident">safe</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="ident">SafeHWND::assert</span>(<span class="kw-2">&amp;</span><span class="ident">window</span>).<span class="ident">unwrap</span>() };
+        <span class="ident">std::mem::drop</span>(<span class="ident">safe</span>);
+        <span class="kw unsafe">unsafe</span> { <span class="ident">CloseWindow</span>(<span class="ident">window</span>) };
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (b44197abb 2022-09-05)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0 (4b91a6ea7 2022-08-08)" ></div>
+</body></html>

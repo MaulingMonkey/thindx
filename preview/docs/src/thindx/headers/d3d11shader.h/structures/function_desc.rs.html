@@ -1,4 +1,10 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3d11shader.h\structures\function_desc.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>function_desc.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../../normalize.css"><link rel="stylesheet" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../../dark.css" disabled><link rel="stylesheet" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3d11shader.h\structures\function_desc.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>function_desc.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div>
+        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
+                                <a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -139,146 +145,147 @@
 <span id="139">139</span>
 <span id="140">140</span>
 <span id="141">141</span>
-</pre><pre class="rust"><code><span class="attribute">#[allow(unused_imports)] </span><span class="kw">use crate</span>::<span class="kw-2">*</span>;
-<span class="kw">use </span><span class="kw">crate</span>::ctypes::<span class="kw-2">*</span>;
-<span class="kw">use </span><span class="kw">crate</span>::d3d::<span class="kw-2">*</span>;
+</pre><pre class="rust"><code><span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span> <span class="kw">use</span> <span class="kw">crate</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::ctypes</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::d3d</span>::<span class="kw-2">*</span>;
 
-<span class="kw">use </span>winapi::um::d3d11shader::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">winapi::um::d3d11shader</span>::<span class="kw-2">*</span>;
 
 
 
-<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/ns-d3d11shader-d3d11_function_desc)\]
-/// D3D11_FUNCTION_DESC
-///
-/// ### Example
-/// ```text
-/// FunctionDesc {
-///     version: 4293918800,
-///     creator: Some(&quot;Microsoft (R) HLSL Shader Compiler 10.1&quot;),
-///     flags: Compile::{Debug|NoPreshader},
-///     constant_buffers: 1,
-///     bound_resources: 1,
-///     instruction_count: 2,
-///     temp_register_count: 0,
-///     temp_array_count: 0,
-///     def_count: 0,
-///     dcl_count: 2,
-///     texture_normal_instructions: 0,
-///     texture_load_instructions: 0,
-///     texture_comp_instructions: 0,
-///     texture_bias_instructions: 0,
-///     texture_gradient_instructions: 0,
-///     float_instruction_count: 1,
-///     int_instruction_count: 0,
-///     uint_instruction_count: 0,
-///     static_flow_control_count: 1,
-///     dynamic_flow_control_count: 0,
-///     macro_instruction_count: 0,
-///     array_instruction_count: 0,
-///     mov_instruction_count: 0,
-///     movc_instruction_count: 0,
-///     conversion_instruction_count: 0,
-///     bitwise_instruction_count: 0,
-///     min_feature_level: FeatureLevel::_11_0,
-///     required_feature_flags: ShaderRequires::None,
-///     name: Some(&quot;scale4&quot;),
-///     function_parameter_count: 1,
-///     has_return: true,
-///     has_10_level_9_vertex_shader: false,
-///     has_10_level_9_pixel_shader: false,
-/// }
-/// ```
-///
-/// ### See Also
-/// *   [d3d11::FunctionReflection::get_desc]
-</span><span class="attribute">#[allow(missing_docs)]
-#[derive(Clone, Copy, Debug, Default)]
-#[repr(C)] </span><span class="kw">pub struct </span>FunctionDesc&lt;<span class="lifetime">&#39;s</span>&gt; {
-    <span class="kw">pub </span>version:                        u32,
-    <span class="doccomment">/// e.g. &quot;Microsoft (R) HLSL Shader Compiler 10.1&quot;
-    </span><span class="kw">pub </span>creator:                        CStrPtr&lt;<span class="lifetime">&#39;s</span>&gt;, <span class="comment">// maybe never null?
-    </span><span class="kw">pub </span>flags:                          Compile,
-    <span class="kw">pub </span>constant_buffers:               u32,
-    <span class="kw">pub </span>bound_resources:                u32,
-    <span class="kw">pub </span>instruction_count:              u32,
-    <span class="kw">pub </span>temp_register_count:            u32,
-    <span class="kw">pub </span>temp_array_count:               u32,
-    <span class="kw">pub </span>def_count:                      u32,
-    <span class="kw">pub </span>dcl_count:                      u32,
-    <span class="kw">pub </span>texture_normal_instructions:    u32,
-    <span class="kw">pub </span>texture_load_instructions:      u32,
-    <span class="kw">pub </span>texture_comp_instructions:      u32,
-    <span class="kw">pub </span>texture_bias_instructions:      u32,
-    <span class="kw">pub </span>texture_gradient_instructions:  u32,
-    <span class="kw">pub </span>float_instruction_count:        u32,
-    <span class="kw">pub </span>int_instruction_count:          u32,
-    <span class="kw">pub </span>uint_instruction_count:         u32,
-    <span class="kw">pub </span>static_flow_control_count:      u32,
-    <span class="kw">pub </span>dynamic_flow_control_count:     u32,
-    <span class="kw">pub </span>macro_instruction_count:        u32,
-    <span class="kw">pub </span>array_instruction_count:        u32,
-    <span class="kw">pub </span>mov_instruction_count:          u32,
-    <span class="kw">pub </span>movc_instruction_count:         u32,
-    <span class="kw">pub </span>conversion_instruction_count:   u32,
-    <span class="kw">pub </span>bitwise_instruction_count:      u32,
-    <span class="kw">pub </span>min_feature_level:              FeatureLevel,
-    <span class="kw">pub </span>required_feature_flags:         ShaderRequires,
-    <span class="kw">pub </span>name:                           CStrPtr&lt;<span class="lifetime">&#39;s</span>&gt;, <span class="comment">// maybe never null?
-    </span><span class="kw">pub </span>function_parameter_count:       i32,
-    <span class="kw">pub </span>has_return:                     BOOL,
-    <span class="kw">pub </span>has_10_level_9_vertex_shader:   BOOL,
-    <span class="kw">pub </span>has_10_level_9_pixel_shader:    BOOL,
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/ns-d3d11shader-d3d11_function_desc)\]</span>
+<span class="doccomment">/// D3D11_FUNCTION_DESC</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// ### Example</span>
+<span class="doccomment">/// ```text</span>
+<span class="doccomment">/// FunctionDesc {</span>
+<span class="doccomment">///     version: 4293918800,</span>
+<span class="doccomment">///     creator: Some(&quot;Microsoft (R) HLSL Shader Compiler 10.1&quot;),</span>
+<span class="doccomment">///     flags: Compile::{Debug|NoPreshader},</span>
+<span class="doccomment">///     constant_buffers: 1,</span>
+<span class="doccomment">///     bound_resources: 1,</span>
+<span class="doccomment">///     instruction_count: 2,</span>
+<span class="doccomment">///     temp_register_count: 0,</span>
+<span class="doccomment">///     temp_array_count: 0,</span>
+<span class="doccomment">///     def_count: 0,</span>
+<span class="doccomment">///     dcl_count: 2,</span>
+<span class="doccomment">///     texture_normal_instructions: 0,</span>
+<span class="doccomment">///     texture_load_instructions: 0,</span>
+<span class="doccomment">///     texture_comp_instructions: 0,</span>
+<span class="doccomment">///     texture_bias_instructions: 0,</span>
+<span class="doccomment">///     texture_gradient_instructions: 0,</span>
+<span class="doccomment">///     float_instruction_count: 1,</span>
+<span class="doccomment">///     int_instruction_count: 0,</span>
+<span class="doccomment">///     uint_instruction_count: 0,</span>
+<span class="doccomment">///     static_flow_control_count: 1,</span>
+<span class="doccomment">///     dynamic_flow_control_count: 0,</span>
+<span class="doccomment">///     macro_instruction_count: 0,</span>
+<span class="doccomment">///     array_instruction_count: 0,</span>
+<span class="doccomment">///     mov_instruction_count: 0,</span>
+<span class="doccomment">///     movc_instruction_count: 0,</span>
+<span class="doccomment">///     conversion_instruction_count: 0,</span>
+<span class="doccomment">///     bitwise_instruction_count: 0,</span>
+<span class="doccomment">///     min_feature_level: FeatureLevel::_11_0,</span>
+<span class="doccomment">///     required_feature_flags: ShaderRequires::None,</span>
+<span class="doccomment">///     name: Some(&quot;scale4&quot;),</span>
+<span class="doccomment">///     function_parameter_count: 1,</span>
+<span class="doccomment">///     has_return: true,</span>
+<span class="doccomment">///     has_10_level_9_vertex_shader: false,</span>
+<span class="doccomment">///     has_10_level_9_pixel_shader: false,</span>
+<span class="doccomment">/// }</span>
+<span class="doccomment">/// ```</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// ### See Also</span>
+<span class="doccomment">/// *   [d3d11::FunctionReflection::get_desc]</span>
+<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">missing_docs</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">Debug</span>, <span class="ident">Default</span>)]</span>
+<span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span> <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">FunctionDesc</span><span class="op">&lt;</span><span class="lifetime">&#39;s</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="ident">version</span>:                        <span class="ident">u32</span>,
+    <span class="doccomment">/// e.g. &quot;Microsoft (R) HLSL Shader Compiler 10.1&quot;</span>
+    <span class="kw">pub</span> <span class="ident">creator</span>:                        <span class="ident">CStrPtr</span><span class="op">&lt;</span><span class="lifetime">&#39;s</span><span class="op">&gt;</span>, <span class="comment">// maybe never null?</span>
+    <span class="kw">pub</span> <span class="ident">flags</span>:                          <span class="ident">Compile</span>,
+    <span class="kw">pub</span> <span class="ident">constant_buffers</span>:               <span class="ident">u32</span>,
+    <span class="kw">pub</span> <span class="ident">bound_resources</span>:                <span class="ident">u32</span>,
+    <span class="kw">pub</span> <span class="ident">instruction_count</span>:              <span class="ident">u32</span>,
+    <span class="kw">pub</span> <span class="ident">temp_register_count</span>:            <span class="ident">u32</span>,
+    <span class="kw">pub</span> <span class="ident">temp_array_count</span>:               <span class="ident">u32</span>,
+    <span class="kw">pub</span> <span class="ident">def_count</span>:                      <span class="ident">u32</span>,
+    <span class="kw">pub</span> <span class="ident">dcl_count</span>:                      <span class="ident">u32</span>,
+    <span class="kw">pub</span> <span class="ident">texture_normal_instructions</span>:    <span class="ident">u32</span>,
+    <span class="kw">pub</span> <span class="ident">texture_load_instructions</span>:      <span class="ident">u32</span>,
+    <span class="kw">pub</span> <span class="ident">texture_comp_instructions</span>:      <span class="ident">u32</span>,
+    <span class="kw">pub</span> <span class="ident">texture_bias_instructions</span>:      <span class="ident">u32</span>,
+    <span class="kw">pub</span> <span class="ident">texture_gradient_instructions</span>:  <span class="ident">u32</span>,
+    <span class="kw">pub</span> <span class="ident">float_instruction_count</span>:        <span class="ident">u32</span>,
+    <span class="kw">pub</span> <span class="ident">int_instruction_count</span>:          <span class="ident">u32</span>,
+    <span class="kw">pub</span> <span class="ident">uint_instruction_count</span>:         <span class="ident">u32</span>,
+    <span class="kw">pub</span> <span class="ident">static_flow_control_count</span>:      <span class="ident">u32</span>,
+    <span class="kw">pub</span> <span class="ident">dynamic_flow_control_count</span>:     <span class="ident">u32</span>,
+    <span class="kw">pub</span> <span class="ident">macro_instruction_count</span>:        <span class="ident">u32</span>,
+    <span class="kw">pub</span> <span class="ident">array_instruction_count</span>:        <span class="ident">u32</span>,
+    <span class="kw">pub</span> <span class="ident">mov_instruction_count</span>:          <span class="ident">u32</span>,
+    <span class="kw">pub</span> <span class="ident">movc_instruction_count</span>:         <span class="ident">u32</span>,
+    <span class="kw">pub</span> <span class="ident">conversion_instruction_count</span>:   <span class="ident">u32</span>,
+    <span class="kw">pub</span> <span class="ident">bitwise_instruction_count</span>:      <span class="ident">u32</span>,
+    <span class="kw">pub</span> <span class="ident">min_feature_level</span>:              <span class="ident">FeatureLevel</span>,
+    <span class="kw">pub</span> <span class="ident">required_feature_flags</span>:         <span class="ident">ShaderRequires</span>,
+    <span class="kw">pub</span> <span class="ident">name</span>:                           <span class="ident">CStrPtr</span><span class="op">&lt;</span><span class="lifetime">&#39;s</span><span class="op">&gt;</span>, <span class="comment">// maybe never null?</span>
+    <span class="kw">pub</span> <span class="ident">function_parameter_count</span>:       <span class="ident">i32</span>,
+    <span class="kw">pub</span> <span class="ident">has_return</span>:                     <span class="ident">BOOL</span>,
+    <span class="kw">pub</span> <span class="ident">has_10_level_9_vertex_shader</span>:   <span class="ident">BOOL</span>,
+    <span class="kw">pub</span> <span class="ident">has_10_level_9_pixel_shader</span>:    <span class="ident">BOOL</span>,
 }
 
-<span class="kw">impl </span>FunctionDesc&lt;<span class="lifetime">&#39;_</span>&gt; {
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn </span>as_mut_ptr(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="kw-2">*mut </span>D3D11_FUNCTION_DESC {
-        <span class="self">self </span><span class="kw">as </span><span class="kw-2">*mut </span><span class="self">Self </span><span class="kw">as </span><span class="kw-2">*mut </span><span class="kw">_
-    </span>}
-}
-
-<span class="macro">struct_mapping! </span>{
-    <span class="attribute">#[derive(<span class="kw">unsafe </span>{ AsRefD3D, IntoD3D })]
-    </span><span class="comment">// forbidden: AsRef     (could invalidate `creator` &amp; `name`)
-    // forbidden: AsMut     (could invalidate `creator` &amp; `name`)
-    // forbidden: DerefMut  (could invalidate `creator` &amp; `name`)
-    // forbidden: FromD3D   (could invalidate `creator` &amp; `name`)
-    </span>FunctionDesc&lt;<span class="lifetime">&#39;_</span>&gt; =&gt; D3D11_FUNCTION_DESC {
-        version                         =&gt; Version,
-        creator                         =&gt; Creator,
-        flags                           =&gt; Flags,
-        constant_buffers                =&gt; ConstantBuffers,
-        bound_resources                 =&gt; BoundResources,
-        instruction_count               =&gt; InstructionCount,
-        temp_register_count             =&gt; TempRegisterCount,
-        temp_array_count                =&gt; TempArrayCount,
-        def_count                       =&gt; DefCount,
-        dcl_count                       =&gt; DclCount,
-        texture_normal_instructions     =&gt; TextureNormalInstructions,
-        texture_load_instructions       =&gt; TextureLoadInstructions,
-        texture_comp_instructions       =&gt; TextureCompInstructions,
-        texture_bias_instructions       =&gt; TextureBiasInstructions,
-        texture_gradient_instructions   =&gt; TextureGradientInstructions,
-        float_instruction_count         =&gt; FloatInstructionCount,
-        int_instruction_count           =&gt; IntInstructionCount,
-        uint_instruction_count          =&gt; UintInstructionCount,
-        static_flow_control_count       =&gt; StaticFlowControlCount,
-        dynamic_flow_control_count      =&gt; DynamicFlowControlCount,
-        macro_instruction_count         =&gt; MacroInstructionCount,
-        array_instruction_count         =&gt; ArrayInstructionCount,
-        mov_instruction_count           =&gt; MovInstructionCount,
-        movc_instruction_count          =&gt; MovcInstructionCount,
-        conversion_instruction_count    =&gt; ConversionInstructionCount,
-        bitwise_instruction_count       =&gt; BitwiseInstructionCount,
-        min_feature_level               =&gt; MinFeatureLevel,
-        required_feature_flags          =&gt; RequiredFeatureFlags,
-        name                            =&gt; Name,
-        function_parameter_count        =&gt; FunctionParameterCount,
-        has_return                      =&gt; HasReturn,
-        has_10_level_9_vertex_shader    =&gt; Has10Level9VertexShader,
-        has_10_level_9_pixel_shader     =&gt; Has10Level9PixelShader,
+<span class="kw">impl</span> <span class="ident">FunctionDesc</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">as_mut_ptr</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">*mut</span> <span class="ident">D3D11_FUNCTION_DESC</span> {
+        <span class="self">self</span> <span class="kw">as</span> <span class="kw-2">*mut</span> <span class="self">Self</span> <span class="kw">as</span> <span class="kw-2">*mut</span> <span class="kw">_</span>
     }
 }
 
-<span class="comment">//#cpp2rust D3D11_FUNCTION_DESC     = d3d11::FunctionDesc
-</span></code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (b44197abb 2022-09-05)" ></div></body></html>
+<span class="macro">struct_mapping!</span> {
+    <span class="attribute">#[<span class="ident">derive</span>(<span class="kw unsafe">unsafe</span> { <span class="ident">AsRefD3D</span>, <span class="ident">IntoD3D</span> })]</span>
+    <span class="comment">// forbidden: AsRef     (could invalidate `creator` &amp; `name`)</span>
+    <span class="comment">// forbidden: AsMut     (could invalidate `creator` &amp; `name`)</span>
+    <span class="comment">// forbidden: DerefMut  (could invalidate `creator` &amp; `name`)</span>
+    <span class="comment">// forbidden: FromD3D   (could invalidate `creator` &amp; `name`)</span>
+    <span class="ident">FunctionDesc</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span> =&gt; <span class="ident">D3D11_FUNCTION_DESC</span> {
+        <span class="ident">version</span>                         =&gt; <span class="ident">Version</span>,
+        <span class="ident">creator</span>                         =&gt; <span class="ident">Creator</span>,
+        <span class="ident">flags</span>                           =&gt; <span class="ident">Flags</span>,
+        <span class="ident">constant_buffers</span>                =&gt; <span class="ident">ConstantBuffers</span>,
+        <span class="ident">bound_resources</span>                 =&gt; <span class="ident">BoundResources</span>,
+        <span class="ident">instruction_count</span>               =&gt; <span class="ident">InstructionCount</span>,
+        <span class="ident">temp_register_count</span>             =&gt; <span class="ident">TempRegisterCount</span>,
+        <span class="ident">temp_array_count</span>                =&gt; <span class="ident">TempArrayCount</span>,
+        <span class="ident">def_count</span>                       =&gt; <span class="ident">DefCount</span>,
+        <span class="ident">dcl_count</span>                       =&gt; <span class="ident">DclCount</span>,
+        <span class="ident">texture_normal_instructions</span>     =&gt; <span class="ident">TextureNormalInstructions</span>,
+        <span class="ident">texture_load_instructions</span>       =&gt; <span class="ident">TextureLoadInstructions</span>,
+        <span class="ident">texture_comp_instructions</span>       =&gt; <span class="ident">TextureCompInstructions</span>,
+        <span class="ident">texture_bias_instructions</span>       =&gt; <span class="ident">TextureBiasInstructions</span>,
+        <span class="ident">texture_gradient_instructions</span>   =&gt; <span class="ident">TextureGradientInstructions</span>,
+        <span class="ident">float_instruction_count</span>         =&gt; <span class="ident">FloatInstructionCount</span>,
+        <span class="ident">int_instruction_count</span>           =&gt; <span class="ident">IntInstructionCount</span>,
+        <span class="ident">uint_instruction_count</span>          =&gt; <span class="ident">UintInstructionCount</span>,
+        <span class="ident">static_flow_control_count</span>       =&gt; <span class="ident">StaticFlowControlCount</span>,
+        <span class="ident">dynamic_flow_control_count</span>      =&gt; <span class="ident">DynamicFlowControlCount</span>,
+        <span class="ident">macro_instruction_count</span>         =&gt; <span class="ident">MacroInstructionCount</span>,
+        <span class="ident">array_instruction_count</span>         =&gt; <span class="ident">ArrayInstructionCount</span>,
+        <span class="ident">mov_instruction_count</span>           =&gt; <span class="ident">MovInstructionCount</span>,
+        <span class="ident">movc_instruction_count</span>          =&gt; <span class="ident">MovcInstructionCount</span>,
+        <span class="ident">conversion_instruction_count</span>    =&gt; <span class="ident">ConversionInstructionCount</span>,
+        <span class="ident">bitwise_instruction_count</span>       =&gt; <span class="ident">BitwiseInstructionCount</span>,
+        <span class="ident">min_feature_level</span>               =&gt; <span class="ident">MinFeatureLevel</span>,
+        <span class="ident">required_feature_flags</span>          =&gt; <span class="ident">RequiredFeatureFlags</span>,
+        <span class="ident">name</span>                            =&gt; <span class="ident">Name</span>,
+        <span class="ident">function_parameter_count</span>        =&gt; <span class="ident">FunctionParameterCount</span>,
+        <span class="ident">has_return</span>                      =&gt; <span class="ident">HasReturn</span>,
+        <span class="ident">has_10_level_9_vertex_shader</span>    =&gt; <span class="ident">Has10Level9VertexShader</span>,
+        <span class="ident">has_10_level_9_pixel_shader</span>     =&gt; <span class="ident">Has10Level9PixelShader</span>,
+    }
+}
+
+<span class="comment">//#cpp2rust D3D11_FUNCTION_DESC     = d3d11::FunctionDesc</span>
+</code></pre></div>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0 (4b91a6ea7 2022-08-08)" ></div>
+</body></html>

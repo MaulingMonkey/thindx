@@ -1,4 +1,10 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3d9types.h\structures\light.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>light.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../../normalize.css"><link rel="stylesheet" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../../dark.css" disabled><link rel="stylesheet" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3d9types.h\structures\light.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>light.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div>
+        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
+                                <a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -123,130 +129,131 @@
 <span id="123">123</span>
 <span id="124">124</span>
 <span id="125">125</span>
-</pre><pre class="rust"><code><span class="kw">use </span><span class="kw">crate</span>::d3d9::<span class="kw-2">*</span>;
+</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::d3d9</span>::<span class="kw-2">*</span>;
 
-<span class="kw">use </span>winapi::shared::d3d9types::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">winapi::shared::d3d9types</span>::<span class="kw-2">*</span>;
 
 
 
-<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dlight9)\]
-/// D3DLIGHT9
-///
-/// Defines a set of lighting properties.
-///
-/// ### See Also
-/// *   [IDirect3DDevice9Ext::set_light]
-/// *   [IDirect3DDevice9Ext::light_enable]
-/// *   [IDirect3DDevice9Ext::get_light]
-/// *   [IDirect3DDevice9Ext::get_light_enable]
-/// ---
-/// *   [IDirect3DDevice9Ext::set_light_32_unchecked]
-/// *   [IDirect3DDevice9Ext::light_enable_32_unchecked]
-/// *   [IDirect3DDevice9Ext::get_light_32]
-/// *   [IDirect3DDevice9Ext::get_light_enable_32]
-</span><span class="attribute">#[derive(Clone, Copy, Debug, Default)]
-#[repr(C)] </span><span class="kw">pub struct </span>Light {
-    <span class="doccomment">/// Type of the light source.
-    </span><span class="kw">pub </span>ty:             LightType,
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dlight9)\]</span>
+<span class="doccomment">/// D3DLIGHT9</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Defines a set of lighting properties.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// ### See Also</span>
+<span class="doccomment">/// *   [IDirect3DDevice9Ext::set_light]</span>
+<span class="doccomment">/// *   [IDirect3DDevice9Ext::light_enable]</span>
+<span class="doccomment">/// *   [IDirect3DDevice9Ext::get_light]</span>
+<span class="doccomment">/// *   [IDirect3DDevice9Ext::get_light_enable]</span>
+<span class="doccomment">/// ---</span>
+<span class="doccomment">/// *   [IDirect3DDevice9Ext::set_light_32_unchecked]</span>
+<span class="doccomment">/// *   [IDirect3DDevice9Ext::light_enable_32_unchecked]</span>
+<span class="doccomment">/// *   [IDirect3DDevice9Ext::get_light_32]</span>
+<span class="doccomment">/// *   [IDirect3DDevice9Ext::get_light_enable_32]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">Debug</span>, <span class="ident">Default</span>)]</span>
+<span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span> <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Light</span> {
+    <span class="doccomment">/// Type of the light source.</span>
+    <span class="kw">pub</span> <span class="ident">ty</span>:             <span class="ident">LightType</span>,
 
-    <span class="doccomment">/// [Diffuse](https://docs.microsoft.com/en-us/windows/uwp/graphics-concepts/diffuse-lighting) color emitted by the light.
-    </span><span class="kw">pub </span>diffuse:        ColorValue,
+    <span class="doccomment">/// [Diffuse](https://docs.microsoft.com/en-us/windows/uwp/graphics-concepts/diffuse-lighting) color emitted by the light.</span>
+    <span class="kw">pub</span> <span class="ident">diffuse</span>:        <span class="ident">ColorValue</span>,
 
-    <span class="doccomment">/// [Specular](https://docs.microsoft.com/en-us/windows/uwp/graphics-concepts/specular-lighting) color emitted by the light.
-    </span><span class="kw">pub </span>specular:       ColorValue,
+    <span class="doccomment">/// [Specular](https://docs.microsoft.com/en-us/windows/uwp/graphics-concepts/specular-lighting) color emitted by the light.</span>
+    <span class="kw">pub</span> <span class="ident">specular</span>:       <span class="ident">ColorValue</span>,
 
-    <span class="doccomment">/// [Ambient](https://docs.microsoft.com/en-us/windows/uwp/graphics-concepts/ambient-lighting) color emitted by the light.
-    </span><span class="kw">pub </span>ambient:        ColorValue,
+    <span class="doccomment">/// [Ambient](https://docs.microsoft.com/en-us/windows/uwp/graphics-concepts/ambient-lighting) color emitted by the light.</span>
+    <span class="kw">pub</span> <span class="ident">ambient</span>:        <span class="ident">ColorValue</span>,
 
-    <span class="doccomment">/// Position of the light in world space.  This member has no meaning for [Directional] lights, and is ignored in that case.
-    ///
-    /// [Directional]:                      crate::LightType::Directional
-    </span><span class="kw">pub </span>position:       Vector,
+    <span class="doccomment">/// Position of the light in world space.  This member has no meaning for [Directional] lights, and is ignored in that case.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// [Directional]:                      crate::LightType::Directional</span>
+    <span class="kw">pub</span> <span class="ident">position</span>:       <span class="ident">Vector</span>,
 
-    <span class="doccomment">/// Direction that the light is pointing in world space.
-    /// This member has meaning only for [Directional] and [Spot]lights.
-    /// This vector need not be normalized, but it should have a nonzero length.
-    ///
-    /// [Directional]:      crate::LightType::Directional
-    /// [Spot]:             crate::LightType::Spot
-    </span><span class="kw">pub </span>direction:      Vector,
+    <span class="doccomment">/// Direction that the light is pointing in world space.</span>
+    <span class="doccomment">/// This member has meaning only for [Directional] and [Spot]lights.</span>
+    <span class="doccomment">/// This vector need not be normalized, but it should have a nonzero length.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// [Directional]:      crate::LightType::Directional</span>
+    <span class="doccomment">/// [Spot]:             crate::LightType::Spot</span>
+    <span class="kw">pub</span> <span class="ident">direction</span>:      <span class="ident">Vector</span>,
 
-    <span class="doccomment">/// Distance beyond which the light has no effect.
-    /// The maximum allowable value for this member is the square root of [f32::MAX].
-    /// This member does not affect [Directional] lights.
-    ///
-    /// [Directional]:                      crate::LightType::Directional
-    </span><span class="kw">pub </span>range:          f32,
+    <span class="doccomment">/// Distance beyond which the light has no effect.</span>
+    <span class="doccomment">/// The maximum allowable value for this member is the square root of [f32::MAX].</span>
+    <span class="doccomment">/// This member does not affect [Directional] lights.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// [Directional]:                      crate::LightType::Directional</span>
+    <span class="kw">pub</span> <span class="ident">range</span>:          <span class="ident">f32</span>,
 
-    <span class="doccomment">/// Decrease in illumination between a spotlight&#39;s inner cone (the angle specified by [theta](#structfield.theta)) and the outer edge of the outer cone (the angle specified by [phi](#structfield.phi)).
-    ///
-    /// The effect of falloff on the lighting is subtle.
-    /// Furthermore, a small performance penalty is incurred by shaping the falloff curve.
-    /// For these reasons, most developers set this value to 1.0.
-    </span><span class="kw">pub </span>falloff:        f32,
+    <span class="doccomment">/// Decrease in illumination between a spotlight&#39;s inner cone (the angle specified by [theta](#structfield.theta)) and the outer edge of the outer cone (the angle specified by [phi](#structfield.phi)).</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// The effect of falloff on the lighting is subtle.</span>
+    <span class="doccomment">/// Furthermore, a small performance penalty is incurred by shaping the falloff curve.</span>
+    <span class="doccomment">/// For these reasons, most developers set this value to 1.0.</span>
+    <span class="kw">pub</span> <span class="ident">falloff</span>:        <span class="ident">f32</span>,
 
-    <span class="doccomment">/// Value specifying how the light intensity changes over distance.
-    /// Attenuation values are ignored for [Directional] lights.
-    /// This member represents an attenuation constant.
-    /// For information about attenuation, see [Light Properties (Direct3D 9)].
-    /// Valid values for this member range from 0.0 to infinity.
-    /// For non-directional lights, all three attenuation values should not be set to 0.0 at the same time.
-    ///
-    /// [Directional]:                      crate::LightType::Directional
-    /// [Light Properties (Direct3D 9)]:    https://docs.microsoft.com/en-us/windows/win32/direct3d9/light-properties
-    </span><span class="kw">pub </span>attenuation0:   f32,
+    <span class="doccomment">/// Value specifying how the light intensity changes over distance.</span>
+    <span class="doccomment">/// Attenuation values are ignored for [Directional] lights.</span>
+    <span class="doccomment">/// This member represents an attenuation constant.</span>
+    <span class="doccomment">/// For information about attenuation, see [Light Properties (Direct3D 9)].</span>
+    <span class="doccomment">/// Valid values for this member range from 0.0 to infinity.</span>
+    <span class="doccomment">/// For non-directional lights, all three attenuation values should not be set to 0.0 at the same time.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// [Directional]:                      crate::LightType::Directional</span>
+    <span class="doccomment">/// [Light Properties (Direct3D 9)]:    https://docs.microsoft.com/en-us/windows/win32/direct3d9/light-properties</span>
+    <span class="kw">pub</span> <span class="ident">attenuation0</span>:   <span class="ident">f32</span>,
 
-    <span class="doccomment">/// Value specifying how the light intensity changes over distance.
-    /// Attenuation values are ignored for [Directional] lights.
-    /// This member represents an attenuation constant.
-    /// For information about attenuation, see [Light Properties (Direct3D 9)].
-    /// Valid values for this member range from 0.0 to infinity.
-    /// For non-[Directional] lights, all three attenuation values should not be set to 0.0 at the same time.
-    ///
-    /// [Directional]:                      crate::LightType::Directional
-    /// [Light Properties (Direct3D 9)]:    https://docs.microsoft.com/en-us/windows/win32/direct3d9/light-properties
-    </span><span class="kw">pub </span>attenuation1:   f32,
+    <span class="doccomment">/// Value specifying how the light intensity changes over distance.</span>
+    <span class="doccomment">/// Attenuation values are ignored for [Directional] lights.</span>
+    <span class="doccomment">/// This member represents an attenuation constant.</span>
+    <span class="doccomment">/// For information about attenuation, see [Light Properties (Direct3D 9)].</span>
+    <span class="doccomment">/// Valid values for this member range from 0.0 to infinity.</span>
+    <span class="doccomment">/// For non-[Directional] lights, all three attenuation values should not be set to 0.0 at the same time.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// [Directional]:                      crate::LightType::Directional</span>
+    <span class="doccomment">/// [Light Properties (Direct3D 9)]:    https://docs.microsoft.com/en-us/windows/win32/direct3d9/light-properties</span>
+    <span class="kw">pub</span> <span class="ident">attenuation1</span>:   <span class="ident">f32</span>,
 
-    <span class="doccomment">/// Value specifying how the light intensity changes over distance.
-    /// Attenuation values are ignored for [Directional] lights.
-    /// This member represents an attenuation constant.
-    /// For information about attenuation, see [Light Properties (Direct3D 9)].
-    /// Valid values for this member range from 0.0 to infinity.
-    /// For non-[Directional] lights, all three attenuation values should not be set to 0.0 at the same time.
-    ///
-    /// [Directional]:                      crate::LightType::Directional
-    /// [Light Properties (Direct3D 9)]:    https://docs.microsoft.com/en-us/windows/win32/direct3d9/light-properties
-    </span><span class="kw">pub </span>attenuation2:   f32,
+    <span class="doccomment">/// Value specifying how the light intensity changes over distance.</span>
+    <span class="doccomment">/// Attenuation values are ignored for [Directional] lights.</span>
+    <span class="doccomment">/// This member represents an attenuation constant.</span>
+    <span class="doccomment">/// For information about attenuation, see [Light Properties (Direct3D 9)].</span>
+    <span class="doccomment">/// Valid values for this member range from 0.0 to infinity.</span>
+    <span class="doccomment">/// For non-[Directional] lights, all three attenuation values should not be set to 0.0 at the same time.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// [Directional]:                      crate::LightType::Directional</span>
+    <span class="doccomment">/// [Light Properties (Direct3D 9)]:    https://docs.microsoft.com/en-us/windows/win32/direct3d9/light-properties</span>
+    <span class="kw">pub</span> <span class="ident">attenuation2</span>:   <span class="ident">f32</span>,
 
-    <span class="doccomment">/// Angle, in radians, of a spotlight&#39;s inner cone - that is, the fully illuminated spotlight cone.
-    /// This value must be in the range from 0 through the value specified by [phi](#structfield.phi).
-    </span><span class="kw">pub </span>theta:          f32,
+    <span class="doccomment">/// Angle, in radians, of a spotlight&#39;s inner cone - that is, the fully illuminated spotlight cone.</span>
+    <span class="doccomment">/// This value must be in the range from 0 through the value specified by [phi](#structfield.phi).</span>
+    <span class="kw">pub</span> <span class="ident">theta</span>:          <span class="ident">f32</span>,
 
-    <span class="doccomment">/// Angle, in radians, defining the outer edge of the spotlight&#39;s outer cone.
-    /// Points outside this cone are not lit by the spotlight.
-    /// This value must be between 0 and [std::f32::consts::PI].
-    </span><span class="kw">pub </span>phi:            f32,
+    <span class="doccomment">/// Angle, in radians, defining the outer edge of the spotlight&#39;s outer cone.</span>
+    <span class="doccomment">/// Points outside this cone are not lit by the spotlight.</span>
+    <span class="doccomment">/// This value must be between 0 and [std::f32::consts::PI].</span>
+    <span class="kw">pub</span> <span class="ident">phi</span>:            <span class="ident">f32</span>,
 }
 
-<span class="macro">struct_mapping! </span>{
-    <span class="attribute">#[derive(<span class="kw">unsafe </span>{ AsRef, AsMut, Deref, DerefMut, FromInto })]
-    </span>Light =&gt; D3DLIGHT9 {
-        ty              =&gt; Type,
-        diffuse         =&gt; Diffuse,
-        specular        =&gt; Specular,
-        ambient         =&gt; Ambient,
-        position        =&gt; Position,
-        direction       =&gt; Direction,
-        range           =&gt; Range,
-        falloff         =&gt; Falloff,
-        attenuation0    =&gt; Attenuation0,
-        attenuation1    =&gt; Attenuation1,
-        attenuation2    =&gt; Attenuation2,
-        theta           =&gt; Theta,
-        phi             =&gt; Phi,
+<span class="macro">struct_mapping!</span> {
+    <span class="attribute">#[<span class="ident">derive</span>(<span class="kw unsafe">unsafe</span> { <span class="ident">AsRef</span>, <span class="ident">AsMut</span>, <span class="ident">Deref</span>, <span class="ident">DerefMut</span>, <span class="ident">FromInto</span> })]</span>
+    <span class="ident">Light</span> =&gt; <span class="ident">D3DLIGHT9</span> {
+        <span class="ident">ty</span>              =&gt; <span class="ident">Type</span>,
+        <span class="ident">diffuse</span>         =&gt; <span class="ident">Diffuse</span>,
+        <span class="ident">specular</span>        =&gt; <span class="ident">Specular</span>,
+        <span class="ident">ambient</span>         =&gt; <span class="ident">Ambient</span>,
+        <span class="ident">position</span>        =&gt; <span class="ident">Position</span>,
+        <span class="ident">direction</span>       =&gt; <span class="ident">Direction</span>,
+        <span class="ident">range</span>           =&gt; <span class="ident">Range</span>,
+        <span class="ident">falloff</span>         =&gt; <span class="ident">Falloff</span>,
+        <span class="ident">attenuation0</span>    =&gt; <span class="ident">Attenuation0</span>,
+        <span class="ident">attenuation1</span>    =&gt; <span class="ident">Attenuation1</span>,
+        <span class="ident">attenuation2</span>    =&gt; <span class="ident">Attenuation2</span>,
+        <span class="ident">theta</span>           =&gt; <span class="ident">Theta</span>,
+        <span class="ident">phi</span>             =&gt; <span class="ident">Phi</span>,
     }
 }
 
-<span class="comment">//#cpp2rust D3DLIGHT9 = d3d9::Light
-</span></code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (b44197abb 2022-09-05)" ></div></body></html>
+<span class="comment">//#cpp2rust D3DLIGHT9 = d3d9::Light</span>
+</code></pre></div>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0 (4b91a6ea7 2022-08-08)" ></div>
+</body></html>

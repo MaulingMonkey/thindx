@@ -1,0 +1,53 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\namespaces\xaudio2_7.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>xaudio2_7.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../storage.js"></script><script defer src="../../../source-script.js"></script><script defer src="../../../source-files.js"></script><script defer src="../../../main.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></div>
+        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../thindx/index.html"><img class="rust-logo" src="../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
+                                <a href="../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<span id="2">2</span>
+<span id="3">3</span>
+<span id="4">4</span>
+<span id="5">5</span>
+<span id="6">6</span>
+<span id="7">7</span>
+<span id="8">8</span>
+<span id="9">9</span>
+<span id="10">10</span>
+<span id="11">11</span>
+<span id="12">12</span>
+<span id="13">13</span>
+<span id="14">14</span>
+<span id="15">15</span>
+<span id="16">16</span>
+<span id="17">17</span>
+<span id="18">18</span>
+<span id="19">19</span>
+<span id="20">20</span>
+<span id="21">21</span>
+<span id="22">22</span>
+</pre><pre class="rust"><code><span class="doccomment">//! \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/xaudio2/xaudio2-apis-portal)\]</span>
+<span class="doccomment">//! Audio APIs</span>
+<span class="doccomment">//! (Windows XP+?)</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! Introduced with the legacy [DirectX SDK (June 2010)](https://www.microsoft.com/en-us/download/details.aspx?id=6812)</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! ### References</span>
+<span class="doccomment">//! *   [XAudio2 Versions: XAudio 2.7 and earlier (Windows 7)](https://learn.microsoft.com/en-us/windows/win32/xaudio2/xaudio2-versions#xaudio-27-and-earlier-windows-7)</span>
+<span class="doccomment">//! *   [XAudio does not ship with Windows 7](https://stackoverflow.com/a/49524446/953531)</span>
+<span class="doccomment">//! *   [Known Issues - XAudio 2.7](https://walbourn.github.io/known-issues-xaudio-2-7/)</span>
+<span class="doccomment">//! *   [The Zombie DirectX SDK](https://walbourn.github.io/the-zombie-directx-sdk/)</span>
+<span class="doccomment">//! *   [Not So Direct Setup](https://walbourn.github.io/not-so-direct-setup/)</span>
+
+<span class="attribute">#![<span class="ident">allow</span>(<span class="ident">missing_docs</span>)]</span>
+<span class="comment">//#![allow(non_snake_case)]</span>
+<span class="attribute">#![<span class="ident">allow</span>(<span class="ident">non_upper_case_globals</span>)]</span>
+
+<span class="kw">use</span> <span class="kw">crate</span>::<span class="kw-2">*</span>;
+
+<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CLSID_XAudio2</span>       : <span class="ident">Guid</span> <span class="op">=</span> <span class="macro">guid!</span>(<span class="string">&quot;5a508685-a254-4fba-9b82-9a24b00306af&quot;</span>);
+<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CLSID_XAudio2_Debug</span> : <span class="ident">Guid</span> <span class="op">=</span> <span class="macro">guid!</span>(<span class="string">&quot;db05ea35-0329-4d4b-a53a-6dead03d3852&quot;</span>);
+<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">IID_IXAudio2</span>        : <span class="ident">Guid</span> <span class="op">=</span> <span class="macro">guid!</span>(<span class="string">&quot;8bcf1f58-9fe7-4583-8ac6-e2adc465c8bb&quot;</span>);
+</code></pre></div>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0 (4b91a6ea7 2022-08-08)" ></div>
+</body></html>

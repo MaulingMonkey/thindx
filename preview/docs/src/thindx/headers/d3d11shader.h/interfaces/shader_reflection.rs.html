@@ -1,4 +1,10 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3d11shader.h\interfaces\shader_reflection.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>shader_reflection.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../../normalize.css"><link rel="stylesheet" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../../dark.css" disabled><link rel="stylesheet" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3d11shader.h\interfaces\shader_reflection.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>shader_reflection.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div>
+        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
+                                <a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -530,537 +536,538 @@
 <span id="530">530</span>
 <span id="531">531</span>
 <span id="532">532</span>
-</pre><pre class="rust"><code><span class="kw">use crate</span>::<span class="kw-2">*</span>;
-<span class="kw">use </span><span class="kw">crate</span>::ctypes::<span class="kw-2">*</span>;
-<span class="kw">use </span><span class="kw">crate</span>::d3d::<span class="kw-2">*</span>;
-<span class="kw">use </span><span class="kw">crate</span>::d3d11::<span class="kw-2">*</span>;
+</pre><pre class="rust"><code><span class="kw">use</span> <span class="kw">crate</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::ctypes</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::d3d</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::d3d11</span>::<span class="kw-2">*</span>;
 
-<span class="kw">use </span>std::ptr::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">std::ptr</span>::<span class="kw-2">*</span>;
 
 
 
-<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11shaderreflection)\]
-/// ID3D11ShaderReflection
-///
-/// A shader-reflection interface accesses shader information.
-///
-/// ### Example
-/// ```rust
-/// # use thindx::*;
-/// let d3dc = d3d::Compiler::load_system(47).unwrap();
-/// let vs = d3dc.compile_from_file(
-///     r&quot;test\data\basic.hlsl&quot;, None, None, &quot;vs_main&quot;, &quot;vs_4_0&quot;,
-///     d3d::Compile::Debug, d3d::CompileEffect::None
-/// ).unwrap();
-/// let _vs : d3d11::ShaderReflection = d3dc.reflect(&amp;vs).unwrap();
-/// let vs = d3dc.reflect11(&amp;vs).unwrap();
-/// ```
-///
-/// ### See Also
-/// *   [d3d::Compiler::reflect]
-/// *   [d3d::Compiler::reflect11]
-/// *   [examples::d3dcompiler_04_reflect_shader]
-</span><span class="attribute">#[derive(Clone)] #[repr(transparent)]
-</span><span class="kw">pub struct </span>ShaderReflection(<span class="kw">pub</span>(<span class="kw">crate</span>) mcom::Rc&lt;winapi::um::d3d11shader::ID3D11ShaderReflection&gt;);
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11shaderreflection)\]</span>
+<span class="doccomment">/// ID3D11ShaderReflection</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// A shader-reflection interface accesses shader information.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// ### Example</span>
+<span class="doccomment">/// ```rust</span>
+<span class="doccomment">/// # use thindx::*;</span>
+<span class="doccomment">/// let d3dc = d3d::Compiler::load_system(47).unwrap();</span>
+<span class="doccomment">/// let vs = d3dc.compile_from_file(</span>
+<span class="doccomment">///     r&quot;test\data\basic.hlsl&quot;, None, None, &quot;vs_main&quot;, &quot;vs_4_0&quot;,</span>
+<span class="doccomment">///     d3d::Compile::Debug, d3d::CompileEffect::None</span>
+<span class="doccomment">/// ).unwrap();</span>
+<span class="doccomment">/// let _vs : d3d11::ShaderReflection = d3dc.reflect(&amp;vs).unwrap();</span>
+<span class="doccomment">/// let vs = d3dc.reflect11(&amp;vs).unwrap();</span>
+<span class="doccomment">/// ```</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// ### See Also</span>
+<span class="doccomment">/// *   [d3d::Compiler::reflect]</span>
+<span class="doccomment">/// *   [d3d::Compiler::reflect11]</span>
+<span class="doccomment">/// *   [examples::d3dcompiler_04_reflect_shader]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>)]</span> <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">transparent</span>)]</span>
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ShaderReflection</span>(<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="ident">mcom::Rc</span><span class="op">&lt;</span><span class="ident">winapi::um::d3d11shader::ID3D11ShaderReflection</span><span class="op">&gt;</span>);
 
-<span class="macro">convert!</span>(<span class="kw">unsafe </span>ShaderReflection =&gt; Unknown, winapi::um::d3d11shader::ID3D11ShaderReflection);
+<span class="macro">convert!</span>(<span class="kw unsafe">unsafe</span> <span class="ident">ShaderReflection</span> =&gt; <span class="ident">Unknown</span>, <span class="ident">winapi::um::d3d11shader::ID3D11ShaderReflection</span>);
 
-<span class="kw">impl </span>ShaderReflection {
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getbitwiseinstructioncount)\]
-    /// ID3D11ShaderReflection::GetBitwiseInstructionCount
-    ///
-    /// Gets the number of bitwise instructions.
-    ///
-    /// ### Example
-    /// ```rust
-    /// # use thindx::*;
-    /// # let d3dc = d3d::Compiler::load_system(47).unwrap();
-    /// # let vs = d3dc.compile_from_file(r&quot;test\data\basic.hlsl&quot;, None, None, &quot;vs_main&quot;, &quot;vs_4_0&quot;, d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
-    /// # let vs = d3dc.reflect11(&amp;vs).unwrap();
-    /// let count = vs.get_bitwise_instruction_count();
-    /// ```
-    </span><span class="kw">pub fn </span>get_bitwise_instruction_count(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; u32 {
-        <span class="macro">fn_context!</span>(d3d11::ShaderReflection::get_bitwise_instruction_count =&gt; ID3D11ShaderReflection::GetBitwiseInstructionCount);
-        <span class="kw">unsafe </span>{ <span class="self">self</span>.<span class="number">0</span>.GetBitwiseInstructionCount() }
+<span class="kw">impl</span> <span class="ident">ShaderReflection</span> {
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getbitwiseinstructioncount)\]</span>
+    <span class="doccomment">/// ID3D11ShaderReflection::GetBitwiseInstructionCount</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Gets the number of bitwise instructions.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Example</span>
+    <span class="doccomment">/// ```rust</span>
+    <span class="doccomment">/// # use thindx::*;</span>
+    <span class="doccomment">/// # let d3dc = d3d::Compiler::load_system(47).unwrap();</span>
+    <span class="doccomment">/// # let vs = d3dc.compile_from_file(r&quot;test\data\basic.hlsl&quot;, None, None, &quot;vs_main&quot;, &quot;vs_4_0&quot;, d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();</span>
+    <span class="doccomment">/// # let vs = d3dc.reflect11(&amp;vs).unwrap();</span>
+    <span class="doccomment">/// let count = vs.get_bitwise_instruction_count();</span>
+    <span class="doccomment">/// ```</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_bitwise_instruction_count</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u32</span> {
+        <span class="macro">fn_context!</span>(<span class="ident">d3d11::ShaderReflection::get_bitwise_instruction_count</span> =&gt; <span class="ident">ID3D11ShaderReflection::GetBitwiseInstructionCount</span>);
+        <span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="number">0</span>.<span class="ident">GetBitwiseInstructionCount</span>() }
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getconstantbufferbyindex)\]
-    /// ID3D11ShaderReflection::GetConstantBufferByIndex
-    ///
-    /// Get a constant buffer by index.
-    ///
-    /// ### Returns
-    /// *   If the index is out of bounds, a stub object will still be returned.  The stub object will return [E::FAIL] from most methods.
-    ///
-    /// ### Example
-    /// ```rust
-    /// # use thindx::*;
-    /// # let d3dc = d3d::Compiler::load_system(47).unwrap();
-    /// # let vs = d3dc.compile_from_file(r&quot;test\data\basic.hlsl&quot;, None, None, &quot;vs_main&quot;, &quot;vs_4_0&quot;, d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
-    /// # let vs = d3dc.reflect11(&amp;vs).unwrap();
-    /// let cb0 = vs.get_constant_buffer_by_index(0);
-    /// let _ = cb0.get_desc().unwrap();
-    ///
-    /// let cb1 = vs.get_constant_buffer_by_index(1);
-    /// assert_eq!(E::FAIL, cb1.get_desc());
-    /// #
-    /// # assert_eq!(E::FAIL, vs.get_constant_buffer_by_index(100).get_desc());
-    /// # assert_eq!(E::FAIL, vs.get_constant_buffer_by_index(10000).get_desc());
-    /// # assert_eq!(E::FAIL, vs.get_constant_buffer_by_index(1000000).get_desc());
-    /// # assert_eq!(E::FAIL, vs.get_constant_buffer_by_index(!0-100).get_desc());
-    /// # assert_eq!(E::FAIL, vs.get_constant_buffer_by_index(!0-16).get_desc());
-    /// # assert_eq!(E::FAIL, vs.get_constant_buffer_by_index(!0-10).get_desc());
-    /// # assert_eq!(E::FAIL, vs.get_constant_buffer_by_index(!0-4).get_desc());
-    /// # assert_eq!(E::FAIL, vs.get_constant_buffer_by_index(!0-1).get_desc());
-    /// # assert_eq!(E::FAIL, vs.get_constant_buffer_by_index(!0).get_desc());
-    /// ```
-    </span><span class="comment">//#allow_missing_argument_docs
-    </span><span class="kw">pub fn </span>get_constant_buffer_by_index(<span class="kw-2">&amp;</span><span class="self">self</span>, index: u32) -&gt; ShaderReflectionConstantBuffer {
-        <span class="macro">fn_context!</span>(d3d11::ShaderReflection::get_constant_buffer_by_index =&gt; ID3D11ShaderReflection::GetConstantBufferByIndex);
-        <span class="kw">let </span>ptr = <span class="kw">unsafe </span>{ <span class="self">self</span>.<span class="number">0</span>.GetConstantBufferByIndex(index) };
-        <span class="kw">unsafe </span>{ ShaderReflectionConstantBuffer::from_raw(<span class="self">self</span>, ptr) }
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getconstantbufferbyindex)\]</span>
+    <span class="doccomment">/// ID3D11ShaderReflection::GetConstantBufferByIndex</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Get a constant buffer by index.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Returns</span>
+    <span class="doccomment">/// *   If the index is out of bounds, a stub object will still be returned.  The stub object will return [E::FAIL] from most methods.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Example</span>
+    <span class="doccomment">/// ```rust</span>
+    <span class="doccomment">/// # use thindx::*;</span>
+    <span class="doccomment">/// # let d3dc = d3d::Compiler::load_system(47).unwrap();</span>
+    <span class="doccomment">/// # let vs = d3dc.compile_from_file(r&quot;test\data\basic.hlsl&quot;, None, None, &quot;vs_main&quot;, &quot;vs_4_0&quot;, d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();</span>
+    <span class="doccomment">/// # let vs = d3dc.reflect11(&amp;vs).unwrap();</span>
+    <span class="doccomment">/// let cb0 = vs.get_constant_buffer_by_index(0);</span>
+    <span class="doccomment">/// let _ = cb0.get_desc().unwrap();</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// let cb1 = vs.get_constant_buffer_by_index(1);</span>
+    <span class="doccomment">/// assert_eq!(E::FAIL, cb1.get_desc());</span>
+    <span class="doccomment">/// #</span>
+    <span class="doccomment">/// # assert_eq!(E::FAIL, vs.get_constant_buffer_by_index(100).get_desc());</span>
+    <span class="doccomment">/// # assert_eq!(E::FAIL, vs.get_constant_buffer_by_index(10000).get_desc());</span>
+    <span class="doccomment">/// # assert_eq!(E::FAIL, vs.get_constant_buffer_by_index(1000000).get_desc());</span>
+    <span class="doccomment">/// # assert_eq!(E::FAIL, vs.get_constant_buffer_by_index(!0-100).get_desc());</span>
+    <span class="doccomment">/// # assert_eq!(E::FAIL, vs.get_constant_buffer_by_index(!0-16).get_desc());</span>
+    <span class="doccomment">/// # assert_eq!(E::FAIL, vs.get_constant_buffer_by_index(!0-10).get_desc());</span>
+    <span class="doccomment">/// # assert_eq!(E::FAIL, vs.get_constant_buffer_by_index(!0-4).get_desc());</span>
+    <span class="doccomment">/// # assert_eq!(E::FAIL, vs.get_constant_buffer_by_index(!0-1).get_desc());</span>
+    <span class="doccomment">/// # assert_eq!(E::FAIL, vs.get_constant_buffer_by_index(!0).get_desc());</span>
+    <span class="doccomment">/// ```</span>
+    <span class="comment">//#allow_missing_argument_docs</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_constant_buffer_by_index</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">index</span>: <span class="ident">u32</span>) -&gt; <span class="ident">ShaderReflectionConstantBuffer</span> {
+        <span class="macro">fn_context!</span>(<span class="ident">d3d11::ShaderReflection::get_constant_buffer_by_index</span> =&gt; <span class="ident">ID3D11ShaderReflection::GetConstantBufferByIndex</span>);
+        <span class="kw">let</span> <span class="ident">ptr</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="number">0</span>.<span class="ident">GetConstantBufferByIndex</span>(<span class="ident">index</span>) };
+        <span class="kw unsafe">unsafe</span> { <span class="ident">ShaderReflectionConstantBuffer::from_raw</span>(<span class="self">self</span>, <span class="ident">ptr</span>) }
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getconstantbufferbyname)\]
-    /// ID3D11ShaderReflection::GetConstantBufferByName
-    ///
-    /// Get a constant buffer by name.
-    ///
-    /// ### Returns
-    /// *   If the name doesn&#39;t match a valid constant buffer, a stub object will still be returned.  The stub object will return [E::FAIL] from most methods.
-    ///
-    /// ### Example
-    /// ```rust
-    /// # use thindx::*;
-    /// # let d3dc = d3d::Compiler::load_system(47).unwrap();
-    /// # let vs = d3dc.compile_from_file(r&quot;test\data\basic.hlsl&quot;, None, None, &quot;vs_main&quot;, &quot;vs_4_0&quot;, d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
-    /// # let vs = d3dc.reflect11(&amp;vs).unwrap();
-    /// let cb0 = vs.get_constant_buffer_by_name(&quot;ExampleCBuffer&quot;);
-    /// let _ = cb0.get_desc().unwrap();
-    ///
-    /// let cb1 = vs.get_constant_buffer_by_name(&quot;Invalid&quot;);
-    /// assert_eq!(E::FAIL, cb1.get_desc());
-    /// #
-    /// # assert_eq!(E::FAIL, vs.get_constant_buffer_by_name(&quot;&quot;).get_desc());
-    /// # assert_eq!(E::FAIL, vs.get_constant_buffer_by_name(&quot;ExampleCBuffer\0&quot;).get_desc());
-    /// ```
-    </span><span class="comment">//#allow_missing_argument_docs
-    </span><span class="kw">pub fn </span>get_constant_buffer_by_name(<span class="kw-2">&amp;</span><span class="self">self</span>, name: <span class="kw">impl </span>TryIntoAsCStr) -&gt; ShaderReflectionConstantBuffer {
-        <span class="macro">fn_context!</span>(d3d11::ShaderReflection::get_constant_buffer_by_name =&gt; ID3D11ShaderReflection::GetConstantBufferByName);
-        <span class="kw">let </span>name = name.try_into().ok();
-        <span class="kw">let </span>name = name.as_ref().map_or(<span class="macro">cstr!</span>(<span class="string">&quot;&quot;</span>).as_cstr(), |n| n.as_cstr());
-        <span class="kw">let </span>ptr = <span class="kw">unsafe </span>{ <span class="self">self</span>.<span class="number">0</span>.GetConstantBufferByName(name) };
-        <span class="kw">unsafe </span>{ ShaderReflectionConstantBuffer::from_raw(<span class="self">self</span>, ptr) }
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getconstantbufferbyname)\]</span>
+    <span class="doccomment">/// ID3D11ShaderReflection::GetConstantBufferByName</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Get a constant buffer by name.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Returns</span>
+    <span class="doccomment">/// *   If the name doesn&#39;t match a valid constant buffer, a stub object will still be returned.  The stub object will return [E::FAIL] from most methods.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Example</span>
+    <span class="doccomment">/// ```rust</span>
+    <span class="doccomment">/// # use thindx::*;</span>
+    <span class="doccomment">/// # let d3dc = d3d::Compiler::load_system(47).unwrap();</span>
+    <span class="doccomment">/// # let vs = d3dc.compile_from_file(r&quot;test\data\basic.hlsl&quot;, None, None, &quot;vs_main&quot;, &quot;vs_4_0&quot;, d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();</span>
+    <span class="doccomment">/// # let vs = d3dc.reflect11(&amp;vs).unwrap();</span>
+    <span class="doccomment">/// let cb0 = vs.get_constant_buffer_by_name(&quot;ExampleCBuffer&quot;);</span>
+    <span class="doccomment">/// let _ = cb0.get_desc().unwrap();</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// let cb1 = vs.get_constant_buffer_by_name(&quot;Invalid&quot;);</span>
+    <span class="doccomment">/// assert_eq!(E::FAIL, cb1.get_desc());</span>
+    <span class="doccomment">/// #</span>
+    <span class="doccomment">/// # assert_eq!(E::FAIL, vs.get_constant_buffer_by_name(&quot;&quot;).get_desc());</span>
+    <span class="doccomment">/// # assert_eq!(E::FAIL, vs.get_constant_buffer_by_name(&quot;ExampleCBuffer\0&quot;).get_desc());</span>
+    <span class="doccomment">/// ```</span>
+    <span class="comment">//#allow_missing_argument_docs</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_constant_buffer_by_name</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">name</span>: <span class="kw">impl</span> <span class="ident">TryIntoAsCStr</span>) -&gt; <span class="ident">ShaderReflectionConstantBuffer</span> {
+        <span class="macro">fn_context!</span>(<span class="ident">d3d11::ShaderReflection::get_constant_buffer_by_name</span> =&gt; <span class="ident">ID3D11ShaderReflection::GetConstantBufferByName</span>);
+        <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">name</span>.<span class="ident">try_into</span>().<span class="ident">ok</span>();
+        <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">name</span>.<span class="ident">as_ref</span>().<span class="ident">map_or</span>(<span class="macro">cstr!</span>(<span class="string">&quot;&quot;</span>).<span class="ident">as_cstr</span>(), <span class="op">|</span><span class="ident">n</span><span class="op">|</span> <span class="ident">n</span>.<span class="ident">as_cstr</span>());
+        <span class="kw">let</span> <span class="ident">ptr</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="number">0</span>.<span class="ident">GetConstantBufferByName</span>(<span class="ident">name</span>) };
+        <span class="kw unsafe">unsafe</span> { <span class="ident">ShaderReflectionConstantBuffer::from_raw</span>(<span class="self">self</span>, <span class="ident">ptr</span>) }
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getconversioninstructioncount)\]
-    /// ID3D11ShaderReflection::GetConversionInstructionCount
-    ///
-    /// Gets the number of conversion instructions.
-    ///
-    /// ### Example
-    /// ```rust
-    /// # use thindx::*;
-    /// # let d3dc = d3d::Compiler::load_system(47).unwrap();
-    /// # let vs = d3dc.compile_from_file(r&quot;test\data\basic.hlsl&quot;, None, None, &quot;vs_main&quot;, &quot;vs_4_0&quot;, d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
-    /// # let vs = d3dc.reflect11(&amp;vs).unwrap();
-    /// let count : u32 = vs.get_conversion_instruction_count();
-    /// ```
-    </span><span class="kw">pub fn </span>get_conversion_instruction_count(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; u32 {
-        <span class="macro">fn_context!</span>(d3d11::ShaderReflection::get_conversion_instruction_count =&gt; ID3D11ShaderReflection::GetConversionInstructionCount);
-        <span class="kw">unsafe </span>{ <span class="self">self</span>.<span class="number">0</span>.GetConversionInstructionCount() }
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getconversioninstructioncount)\]</span>
+    <span class="doccomment">/// ID3D11ShaderReflection::GetConversionInstructionCount</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Gets the number of conversion instructions.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Example</span>
+    <span class="doccomment">/// ```rust</span>
+    <span class="doccomment">/// # use thindx::*;</span>
+    <span class="doccomment">/// # let d3dc = d3d::Compiler::load_system(47).unwrap();</span>
+    <span class="doccomment">/// # let vs = d3dc.compile_from_file(r&quot;test\data\basic.hlsl&quot;, None, None, &quot;vs_main&quot;, &quot;vs_4_0&quot;, d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();</span>
+    <span class="doccomment">/// # let vs = d3dc.reflect11(&amp;vs).unwrap();</span>
+    <span class="doccomment">/// let count : u32 = vs.get_conversion_instruction_count();</span>
+    <span class="doccomment">/// ```</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_conversion_instruction_count</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u32</span> {
+        <span class="macro">fn_context!</span>(<span class="ident">d3d11::ShaderReflection::get_conversion_instruction_count</span> =&gt; <span class="ident">ID3D11ShaderReflection::GetConversionInstructionCount</span>);
+        <span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="number">0</span>.<span class="ident">GetConversionInstructionCount</span>() }
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getdesc)\]
-    /// ID3D11ShaderReflection::GetDesc
-    ///
-    /// Get a shader description.
-    ///
-    /// ### Errors
-    /// *   ...perhaps [`E::FAIL`] if reflection was called on invalid or incompatible bytecode?
-    ///
-    /// ### Example
-    /// ```rust
-    /// # use thindx::*;
-    /// # let d3dc = d3d::Compiler::load_system(47).unwrap();
-    /// # let vs = d3dc.compile_from_file(r&quot;test\data\basic.hlsl&quot;, None, None, &quot;vs_main&quot;, &quot;vs_4_0&quot;, d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
-    /// # let vs = d3dc.reflect11(&amp;vs).unwrap();
-    /// let desc = vs.get_desc().unwrap();
-    /// assert_eq!(desc.version.ty(), d3d11::ShVer::VertexShader);
-    /// assert_eq!(desc.version.major(), 4);
-    /// assert_eq!(desc.version.minor(), 0);
-    /// ```
-    </span><span class="kw">pub fn </span>get_desc(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;ShaderDesc, Error&gt; {
-        <span class="macro">fn_context!</span>(d3d11::ShaderReflection::get_desc =&gt; ID3D11ShaderReflection::GetDesc);
-        <span class="kw">let </span><span class="kw-2">mut </span>desc = ShaderDesc::default();
-        <span class="macro">fn_check_hr!</span>(<span class="kw">unsafe </span>{ <span class="self">self</span>.<span class="number">0</span>.GetDesc(desc.as_mut_ptr()) })<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(desc)
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getdesc)\]</span>
+    <span class="doccomment">/// ID3D11ShaderReflection::GetDesc</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Get a shader description.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Errors</span>
+    <span class="doccomment">/// *   ...perhaps [`E::FAIL`] if reflection was called on invalid or incompatible bytecode?</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Example</span>
+    <span class="doccomment">/// ```rust</span>
+    <span class="doccomment">/// # use thindx::*;</span>
+    <span class="doccomment">/// # let d3dc = d3d::Compiler::load_system(47).unwrap();</span>
+    <span class="doccomment">/// # let vs = d3dc.compile_from_file(r&quot;test\data\basic.hlsl&quot;, None, None, &quot;vs_main&quot;, &quot;vs_4_0&quot;, d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();</span>
+    <span class="doccomment">/// # let vs = d3dc.reflect11(&amp;vs).unwrap();</span>
+    <span class="doccomment">/// let desc = vs.get_desc().unwrap();</span>
+    <span class="doccomment">/// assert_eq!(desc.version.ty(), d3d11::ShVer::VertexShader);</span>
+    <span class="doccomment">/// assert_eq!(desc.version.major(), 4);</span>
+    <span class="doccomment">/// assert_eq!(desc.version.minor(), 0);</span>
+    <span class="doccomment">/// ```</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_desc</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">ShaderDesc</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+        <span class="macro">fn_context!</span>(<span class="ident">d3d11::ShaderReflection::get_desc</span> =&gt; <span class="ident">ID3D11ShaderReflection::GetDesc</span>);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">desc</span> <span class="op">=</span> <span class="ident">ShaderDesc::default</span>();
+        <span class="macro">fn_check_hr!</span>(<span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="number">0</span>.<span class="ident">GetDesc</span>(<span class="ident">desc</span>.<span class="ident">as_mut_ptr</span>()) })<span class="question-mark">?</span>;
+        <span class="prelude-val">Ok</span>(<span class="ident">desc</span>)
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getgsinputprimitive)\]
-    /// ID3D11ShaderReflection::GetGSInputPrimitive
-    ///
-    /// Gets the geometry-shader input-primitive description.
-    ///
-    /// ### Returns
-    /// *   [`d3d::Primitive::Undefined`] if `self` is not a geometry shader
-    ///
-    /// ### Example
-    /// ```rust
-    /// # use thindx::*;
-    /// # let d3dc = d3d::Compiler::load_system(47).unwrap();
-    /// # let vs = d3dc.compile_from_file(r&quot;test\data\basic.hlsl&quot;, None, None, &quot;vs_main&quot;, &quot;vs_4_0&quot;, d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
-    /// # let vs = d3dc.reflect11(&amp;vs).unwrap();
-    /// assert_eq!(vs.get_gs_input_primitive(), d3d::Primitive::Undefined);
-    /// ```
-    </span><span class="kw">pub fn </span>get_gs_input_primitive(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Primitive {
-        <span class="macro">fn_context!</span>(d3d11::ShaderReflection::get_gs_input_primitive =&gt; ID3D11ShaderReflection::GetGSInputPrimitive);
-        Primitive::from_unchecked(<span class="kw">unsafe </span>{ <span class="self">self</span>.<span class="number">0</span>.GetGSInputPrimitive() })
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getgsinputprimitive)\]</span>
+    <span class="doccomment">/// ID3D11ShaderReflection::GetGSInputPrimitive</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Gets the geometry-shader input-primitive description.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Returns</span>
+    <span class="doccomment">/// *   [`d3d::Primitive::Undefined`] if `self` is not a geometry shader</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Example</span>
+    <span class="doccomment">/// ```rust</span>
+    <span class="doccomment">/// # use thindx::*;</span>
+    <span class="doccomment">/// # let d3dc = d3d::Compiler::load_system(47).unwrap();</span>
+    <span class="doccomment">/// # let vs = d3dc.compile_from_file(r&quot;test\data\basic.hlsl&quot;, None, None, &quot;vs_main&quot;, &quot;vs_4_0&quot;, d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();</span>
+    <span class="doccomment">/// # let vs = d3dc.reflect11(&amp;vs).unwrap();</span>
+    <span class="doccomment">/// assert_eq!(vs.get_gs_input_primitive(), d3d::Primitive::Undefined);</span>
+    <span class="doccomment">/// ```</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_gs_input_primitive</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Primitive</span> {
+        <span class="macro">fn_context!</span>(<span class="ident">d3d11::ShaderReflection::get_gs_input_primitive</span> =&gt; <span class="ident">ID3D11ShaderReflection::GetGSInputPrimitive</span>);
+        <span class="ident">Primitive::from_unchecked</span>(<span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="number">0</span>.<span class="ident">GetGSInputPrimitive</span>() })
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getinputparameterdesc)\]
-    /// ID3D11ShaderReflection::GetInputParameterDesc
-    ///
-    /// Get an input-parameter description for a shader.
-    ///
-    /// ### Errors
-    /// *   [E::INVALIDARG]     - if `parameter_index` &gt;= `self.get_desc().unwrap().input_parameters`
-    ///
-    /// ### Example
-    /// ```rust
-    /// # use thindx::*;
-    /// # let d3dc = d3d::Compiler::load_system(47).unwrap();
-    /// # let vs = d3dc.compile_from_file(r&quot;test\data\basic.hlsl&quot;, None, None, &quot;vs_main&quot;, &quot;vs_4_0&quot;, d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
-    /// # let vs = d3dc.reflect11(&amp;vs).unwrap();
-    /// assert_eq!(0,               vs.get_input_parameter_desc(0).unwrap().semantic_index);
-    /// assert_eq!(0,               vs.get_input_parameter_desc(1).unwrap().semantic_index);
-    /// assert_eq!(E::INVALIDARG,   vs.get_input_parameter_desc(2));
-    /// # assert_eq!(E::INVALIDARG, vs.get_input_parameter_desc(100));
-    /// # assert_eq!(E::INVALIDARG, vs.get_input_parameter_desc(10000));
-    /// # assert_eq!(E::INVALIDARG, vs.get_input_parameter_desc(1000000));
-    /// # assert_eq!(E::INVALIDARG, vs.get_input_parameter_desc(!0-100));
-    /// # assert_eq!(E::INVALIDARG, vs.get_input_parameter_desc(!0-16));
-    /// # assert_eq!(E::INVALIDARG, vs.get_input_parameter_desc(!0-8));
-    /// # assert_eq!(E::INVALIDARG, vs.get_input_parameter_desc(!0-4));
-    /// # assert_eq!(E::INVALIDARG, vs.get_input_parameter_desc(!0-1));
-    /// # assert_eq!(E::INVALIDARG, vs.get_input_parameter_desc(!0));
-    /// ```
-    </span><span class="comment">//#allow_missing_argument_docs
-    </span><span class="kw">pub fn </span>get_input_parameter_desc(<span class="kw-2">&amp;</span><span class="self">self</span>, parameter_index: u32) -&gt; <span class="prelude-ty">Result</span>&lt;SignatureParameterDesc, Error&gt; {
-        <span class="macro">fn_context!</span>(d3d11::ShaderReflection::get_input_parameter_desc =&gt; ID3D11ShaderReflection::GetInputParameterDesc);
-        <span class="kw">let </span><span class="kw-2">mut </span>desc = SignatureParameterDesc::default();
-        <span class="macro">fn_check_hr!</span>(<span class="kw">unsafe </span>{ <span class="self">self</span>.<span class="number">0</span>.GetInputParameterDesc(parameter_index, desc.as_mut_ptr()) })<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(desc)
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getinputparameterdesc)\]</span>
+    <span class="doccomment">/// ID3D11ShaderReflection::GetInputParameterDesc</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Get an input-parameter description for a shader.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Errors</span>
+    <span class="doccomment">/// *   [E::INVALIDARG]     - if `parameter_index` &gt;= `self.get_desc().unwrap().input_parameters`</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Example</span>
+    <span class="doccomment">/// ```rust</span>
+    <span class="doccomment">/// # use thindx::*;</span>
+    <span class="doccomment">/// # let d3dc = d3d::Compiler::load_system(47).unwrap();</span>
+    <span class="doccomment">/// # let vs = d3dc.compile_from_file(r&quot;test\data\basic.hlsl&quot;, None, None, &quot;vs_main&quot;, &quot;vs_4_0&quot;, d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();</span>
+    <span class="doccomment">/// # let vs = d3dc.reflect11(&amp;vs).unwrap();</span>
+    <span class="doccomment">/// assert_eq!(0,               vs.get_input_parameter_desc(0).unwrap().semantic_index);</span>
+    <span class="doccomment">/// assert_eq!(0,               vs.get_input_parameter_desc(1).unwrap().semantic_index);</span>
+    <span class="doccomment">/// assert_eq!(E::INVALIDARG,   vs.get_input_parameter_desc(2));</span>
+    <span class="doccomment">/// # assert_eq!(E::INVALIDARG, vs.get_input_parameter_desc(100));</span>
+    <span class="doccomment">/// # assert_eq!(E::INVALIDARG, vs.get_input_parameter_desc(10000));</span>
+    <span class="doccomment">/// # assert_eq!(E::INVALIDARG, vs.get_input_parameter_desc(1000000));</span>
+    <span class="doccomment">/// # assert_eq!(E::INVALIDARG, vs.get_input_parameter_desc(!0-100));</span>
+    <span class="doccomment">/// # assert_eq!(E::INVALIDARG, vs.get_input_parameter_desc(!0-16));</span>
+    <span class="doccomment">/// # assert_eq!(E::INVALIDARG, vs.get_input_parameter_desc(!0-8));</span>
+    <span class="doccomment">/// # assert_eq!(E::INVALIDARG, vs.get_input_parameter_desc(!0-4));</span>
+    <span class="doccomment">/// # assert_eq!(E::INVALIDARG, vs.get_input_parameter_desc(!0-1));</span>
+    <span class="doccomment">/// # assert_eq!(E::INVALIDARG, vs.get_input_parameter_desc(!0));</span>
+    <span class="doccomment">/// ```</span>
+    <span class="comment">//#allow_missing_argument_docs</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_input_parameter_desc</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">parameter_index</span>: <span class="ident">u32</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">SignatureParameterDesc</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+        <span class="macro">fn_context!</span>(<span class="ident">d3d11::ShaderReflection::get_input_parameter_desc</span> =&gt; <span class="ident">ID3D11ShaderReflection::GetInputParameterDesc</span>);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">desc</span> <span class="op">=</span> <span class="ident">SignatureParameterDesc::default</span>();
+        <span class="macro">fn_check_hr!</span>(<span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="number">0</span>.<span class="ident">GetInputParameterDesc</span>(<span class="ident">parameter_index</span>, <span class="ident">desc</span>.<span class="ident">as_mut_ptr</span>()) })<span class="question-mark">?</span>;
+        <span class="prelude-val">Ok</span>(<span class="ident">desc</span>)
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getminfeaturelevel)\]
-    /// ID3D11ShaderReflection::GetMinFeatureLevel
-    ///
-    /// Gets the minimum feature level.
-    ///
-    /// ### Errors
-    /// *   ...?
-    ///
-    /// ### Example
-    /// ```rust
-    /// # use thindx::*;
-    /// # let d3dc = d3d::Compiler::load_system(47).unwrap();
-    /// # let vs = d3dc.compile_from_file(r&quot;test\data\basic.hlsl&quot;, None, None, &quot;vs_main&quot;, &quot;vs_4_0&quot;, d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
-    /// # let vs = d3dc.reflect11(&amp;vs).unwrap();
-    /// assert_eq!(vs.get_min_feature_level().unwrap(), d3d::FeatureLevel::_10_0);
-    /// ```
-    </span><span class="kw">pub fn </span>get_min_feature_level(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;FeatureLevel, Error&gt; {
-        <span class="macro">fn_context!</span>(d3d11::ShaderReflection::get_min_feature_level =&gt; ID3D11ShaderReflection::GetMinFeatureLevel);
-        <span class="kw">let </span><span class="kw-2">mut </span>fl = <span class="number">0</span>;
-        <span class="macro">fn_check_hr!</span>(<span class="kw">unsafe </span>{ <span class="self">self</span>.<span class="number">0</span>.GetMinFeatureLevel(<span class="kw-2">&amp;mut </span>fl) })<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(FeatureLevel::from_unchecked(fl))
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getminfeaturelevel)\]</span>
+    <span class="doccomment">/// ID3D11ShaderReflection::GetMinFeatureLevel</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Gets the minimum feature level.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Errors</span>
+    <span class="doccomment">/// *   ...?</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Example</span>
+    <span class="doccomment">/// ```rust</span>
+    <span class="doccomment">/// # use thindx::*;</span>
+    <span class="doccomment">/// # let d3dc = d3d::Compiler::load_system(47).unwrap();</span>
+    <span class="doccomment">/// # let vs = d3dc.compile_from_file(r&quot;test\data\basic.hlsl&quot;, None, None, &quot;vs_main&quot;, &quot;vs_4_0&quot;, d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();</span>
+    <span class="doccomment">/// # let vs = d3dc.reflect11(&amp;vs).unwrap();</span>
+    <span class="doccomment">/// assert_eq!(vs.get_min_feature_level().unwrap(), d3d::FeatureLevel::_10_0);</span>
+    <span class="doccomment">/// ```</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_min_feature_level</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">FeatureLevel</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+        <span class="macro">fn_context!</span>(<span class="ident">d3d11::ShaderReflection::get_min_feature_level</span> =&gt; <span class="ident">ID3D11ShaderReflection::GetMinFeatureLevel</span>);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">fl</span> <span class="op">=</span> <span class="number">0</span>;
+        <span class="macro">fn_check_hr!</span>(<span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="number">0</span>.<span class="ident">GetMinFeatureLevel</span>(<span class="kw-2">&amp;mut</span> <span class="ident">fl</span>) })<span class="question-mark">?</span>;
+        <span class="prelude-val">Ok</span>(<span class="ident">FeatureLevel::from_unchecked</span>(<span class="ident">fl</span>))
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getmovcinstructioncount)\]
-    /// ID3D11ShaderReflection::GetMovcInstructionCount
-    ///
-    /// Gets the number of Movc instructions.
-    ///
-    /// ### Example
-    /// ```rust
-    /// # use thindx::*;
-    /// # let d3dc = d3d::Compiler::load_system(47).unwrap();
-    /// # let vs = d3dc.compile_from_file(r&quot;test\data\basic.hlsl&quot;, None, None, &quot;vs_main&quot;, &quot;vs_4_0&quot;, d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
-    /// # let vs = d3dc.reflect11(&amp;vs).unwrap();
-    /// let count = vs.get_movc_instruction_count();
-    /// ```
-    </span><span class="kw">pub fn </span>get_movc_instruction_count(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; u32 {
-        <span class="macro">fn_context!</span>(d3d11::ShaderReflection::get_movc_instruction_count =&gt; ID3D11ShaderReflection::GetMovcInstructionCount);
-        <span class="kw">unsafe </span>{ <span class="self">self</span>.<span class="number">0</span>.GetMovcInstructionCount() }
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getmovcinstructioncount)\]</span>
+    <span class="doccomment">/// ID3D11ShaderReflection::GetMovcInstructionCount</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Gets the number of Movc instructions.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Example</span>
+    <span class="doccomment">/// ```rust</span>
+    <span class="doccomment">/// # use thindx::*;</span>
+    <span class="doccomment">/// # let d3dc = d3d::Compiler::load_system(47).unwrap();</span>
+    <span class="doccomment">/// # let vs = d3dc.compile_from_file(r&quot;test\data\basic.hlsl&quot;, None, None, &quot;vs_main&quot;, &quot;vs_4_0&quot;, d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();</span>
+    <span class="doccomment">/// # let vs = d3dc.reflect11(&amp;vs).unwrap();</span>
+    <span class="doccomment">/// let count = vs.get_movc_instruction_count();</span>
+    <span class="doccomment">/// ```</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_movc_instruction_count</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u32</span> {
+        <span class="macro">fn_context!</span>(<span class="ident">d3d11::ShaderReflection::get_movc_instruction_count</span> =&gt; <span class="ident">ID3D11ShaderReflection::GetMovcInstructionCount</span>);
+        <span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="number">0</span>.<span class="ident">GetMovcInstructionCount</span>() }
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getmovinstructioncount)\]
-    /// ID3D11ShaderReflection::GetMovInstructionCount
-    ///
-    /// Gets the number of Mov instructions.
-    ///
-    /// ### Example
-    /// ```rust
-    /// # use thindx::*;
-    /// # let d3dc = d3d::Compiler::load_system(47).unwrap();
-    /// # let vs = d3dc.compile_from_file(r&quot;test\data\basic.hlsl&quot;, None, None, &quot;vs_main&quot;, &quot;vs_4_0&quot;, d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
-    /// # let vs = d3dc.reflect11(&amp;vs).unwrap();
-    /// let count : u32 = vs.get_mov_instruction_count();
-    /// ```
-    </span><span class="kw">pub fn </span>get_mov_instruction_count(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; u32 {
-        <span class="macro">fn_context!</span>(d3d11::ShaderReflection::get_mov_instruction_count =&gt; ID3D11ShaderReflection::GetMovInstructionCount);
-        <span class="kw">unsafe </span>{ <span class="self">self</span>.<span class="number">0</span>.GetMovInstructionCount() }
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getmovinstructioncount)\]</span>
+    <span class="doccomment">/// ID3D11ShaderReflection::GetMovInstructionCount</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Gets the number of Mov instructions.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Example</span>
+    <span class="doccomment">/// ```rust</span>
+    <span class="doccomment">/// # use thindx::*;</span>
+    <span class="doccomment">/// # let d3dc = d3d::Compiler::load_system(47).unwrap();</span>
+    <span class="doccomment">/// # let vs = d3dc.compile_from_file(r&quot;test\data\basic.hlsl&quot;, None, None, &quot;vs_main&quot;, &quot;vs_4_0&quot;, d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();</span>
+    <span class="doccomment">/// # let vs = d3dc.reflect11(&amp;vs).unwrap();</span>
+    <span class="doccomment">/// let count : u32 = vs.get_mov_instruction_count();</span>
+    <span class="doccomment">/// ```</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_mov_instruction_count</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u32</span> {
+        <span class="macro">fn_context!</span>(<span class="ident">d3d11::ShaderReflection::get_mov_instruction_count</span> =&gt; <span class="ident">ID3D11ShaderReflection::GetMovInstructionCount</span>);
+        <span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="number">0</span>.<span class="ident">GetMovInstructionCount</span>() }
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getnuminterfaceslots)\]
-    /// ID3D11ShaderReflection::GetNumInterfaceSlots
-    ///
-    /// Gets the number of interface slots in a shader.
-    ///
-    /// ### Example
-    /// ```rust
-    /// # use thindx::*;
-    /// # let d3dc = d3d::Compiler::load_system(47).unwrap();
-    /// # let vs = d3dc.compile_from_file(r&quot;test\data\basic.hlsl&quot;, None, None, &quot;vs_main&quot;, &quot;vs_4_0&quot;, d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
-    /// # let vs = d3dc.reflect11(&amp;vs).unwrap();
-    /// let slots : u32 = vs.get_num_interface_slots();
-    /// ```
-    </span><span class="kw">pub fn </span>get_num_interface_slots(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; u32 {
-        <span class="macro">fn_context!</span>(d3d11::ShaderReflection::get_num_interface_slots =&gt; ID3D11ShaderReflection::GetNumInterfaceSlots);
-        <span class="kw">unsafe </span>{ <span class="self">self</span>.<span class="number">0</span>.GetNumInterfaceSlots() }
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getnuminterfaceslots)\]</span>
+    <span class="doccomment">/// ID3D11ShaderReflection::GetNumInterfaceSlots</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Gets the number of interface slots in a shader.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Example</span>
+    <span class="doccomment">/// ```rust</span>
+    <span class="doccomment">/// # use thindx::*;</span>
+    <span class="doccomment">/// # let d3dc = d3d::Compiler::load_system(47).unwrap();</span>
+    <span class="doccomment">/// # let vs = d3dc.compile_from_file(r&quot;test\data\basic.hlsl&quot;, None, None, &quot;vs_main&quot;, &quot;vs_4_0&quot;, d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();</span>
+    <span class="doccomment">/// # let vs = d3dc.reflect11(&amp;vs).unwrap();</span>
+    <span class="doccomment">/// let slots : u32 = vs.get_num_interface_slots();</span>
+    <span class="doccomment">/// ```</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_num_interface_slots</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u32</span> {
+        <span class="macro">fn_context!</span>(<span class="ident">d3d11::ShaderReflection::get_num_interface_slots</span> =&gt; <span class="ident">ID3D11ShaderReflection::GetNumInterfaceSlots</span>);
+        <span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="number">0</span>.<span class="ident">GetNumInterfaceSlots</span>() }
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getoutputparameterdesc)\]
-    /// ID3D11ShaderReflection::GetOutputParameterDesc
-    ///
-    /// Get an output-parameter description for a shader.
-    ///
-    /// ### Errors
-    /// *   [E::INVALIDARG]     - if `parameter_index` &gt;= `self.get_desc().unwrap().output_parameters`
-    ///
-    /// ### Example
-    /// ```rust
-    /// # use thindx::*;
-    /// # let d3dc = d3d::Compiler::load_system(47).unwrap();
-    /// # let vs = d3dc.compile_from_file(r&quot;test\data\basic.hlsl&quot;, None, None, &quot;vs_main&quot;, &quot;vs_4_0&quot;, d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
-    /// # let vs = d3dc.reflect11(&amp;vs).unwrap();
-    /// assert_eq!(0,               vs.get_output_parameter_desc(0).unwrap().semantic_index);
-    /// assert_eq!(0,               vs.get_output_parameter_desc(1).unwrap().semantic_index);
-    /// assert_eq!(E::INVALIDARG,   vs.get_output_parameter_desc(2));
-    /// # assert_eq!(E::INVALIDARG, vs.get_output_parameter_desc(100));
-    /// # assert_eq!(E::INVALIDARG, vs.get_output_parameter_desc(10000));
-    /// # assert_eq!(E::INVALIDARG, vs.get_output_parameter_desc(1000000));
-    /// # assert_eq!(E::INVALIDARG, vs.get_output_parameter_desc(!0-100));
-    /// # assert_eq!(E::INVALIDARG, vs.get_output_parameter_desc(!0-16));
-    /// # assert_eq!(E::INVALIDARG, vs.get_output_parameter_desc(!0-8));
-    /// # assert_eq!(E::INVALIDARG, vs.get_output_parameter_desc(!0-4));
-    /// # assert_eq!(E::INVALIDARG, vs.get_output_parameter_desc(!0-1));
-    /// # assert_eq!(E::INVALIDARG, vs.get_output_parameter_desc(!0));
-    /// ```
-    </span><span class="comment">//#allow_missing_argument_docs
-    </span><span class="kw">pub fn </span>get_output_parameter_desc(<span class="kw-2">&amp;</span><span class="self">self</span>, parameter_index: u32) -&gt; <span class="prelude-ty">Result</span>&lt;SignatureParameterDesc, Error&gt; {
-        <span class="macro">fn_context!</span>(d3d11::ShaderReflection::get_output_parameter_desc =&gt; ID3D11ShaderReflection::GetOutputParameterDesc);
-        <span class="kw">let </span><span class="kw-2">mut </span>desc = SignatureParameterDesc::default();
-        <span class="macro">fn_check_hr!</span>(<span class="kw">unsafe </span>{ <span class="self">self</span>.<span class="number">0</span>.GetOutputParameterDesc(parameter_index, desc.as_mut_ptr()) })<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(desc)
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getoutputparameterdesc)\]</span>
+    <span class="doccomment">/// ID3D11ShaderReflection::GetOutputParameterDesc</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Get an output-parameter description for a shader.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Errors</span>
+    <span class="doccomment">/// *   [E::INVALIDARG]     - if `parameter_index` &gt;= `self.get_desc().unwrap().output_parameters`</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Example</span>
+    <span class="doccomment">/// ```rust</span>
+    <span class="doccomment">/// # use thindx::*;</span>
+    <span class="doccomment">/// # let d3dc = d3d::Compiler::load_system(47).unwrap();</span>
+    <span class="doccomment">/// # let vs = d3dc.compile_from_file(r&quot;test\data\basic.hlsl&quot;, None, None, &quot;vs_main&quot;, &quot;vs_4_0&quot;, d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();</span>
+    <span class="doccomment">/// # let vs = d3dc.reflect11(&amp;vs).unwrap();</span>
+    <span class="doccomment">/// assert_eq!(0,               vs.get_output_parameter_desc(0).unwrap().semantic_index);</span>
+    <span class="doccomment">/// assert_eq!(0,               vs.get_output_parameter_desc(1).unwrap().semantic_index);</span>
+    <span class="doccomment">/// assert_eq!(E::INVALIDARG,   vs.get_output_parameter_desc(2));</span>
+    <span class="doccomment">/// # assert_eq!(E::INVALIDARG, vs.get_output_parameter_desc(100));</span>
+    <span class="doccomment">/// # assert_eq!(E::INVALIDARG, vs.get_output_parameter_desc(10000));</span>
+    <span class="doccomment">/// # assert_eq!(E::INVALIDARG, vs.get_output_parameter_desc(1000000));</span>
+    <span class="doccomment">/// # assert_eq!(E::INVALIDARG, vs.get_output_parameter_desc(!0-100));</span>
+    <span class="doccomment">/// # assert_eq!(E::INVALIDARG, vs.get_output_parameter_desc(!0-16));</span>
+    <span class="doccomment">/// # assert_eq!(E::INVALIDARG, vs.get_output_parameter_desc(!0-8));</span>
+    <span class="doccomment">/// # assert_eq!(E::INVALIDARG, vs.get_output_parameter_desc(!0-4));</span>
+    <span class="doccomment">/// # assert_eq!(E::INVALIDARG, vs.get_output_parameter_desc(!0-1));</span>
+    <span class="doccomment">/// # assert_eq!(E::INVALIDARG, vs.get_output_parameter_desc(!0));</span>
+    <span class="doccomment">/// ```</span>
+    <span class="comment">//#allow_missing_argument_docs</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_output_parameter_desc</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">parameter_index</span>: <span class="ident">u32</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">SignatureParameterDesc</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+        <span class="macro">fn_context!</span>(<span class="ident">d3d11::ShaderReflection::get_output_parameter_desc</span> =&gt; <span class="ident">ID3D11ShaderReflection::GetOutputParameterDesc</span>);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">desc</span> <span class="op">=</span> <span class="ident">SignatureParameterDesc::default</span>();
+        <span class="macro">fn_check_hr!</span>(<span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="number">0</span>.<span class="ident">GetOutputParameterDesc</span>(<span class="ident">parameter_index</span>, <span class="ident">desc</span>.<span class="ident">as_mut_ptr</span>()) })<span class="question-mark">?</span>;
+        <span class="prelude-val">Ok</span>(<span class="ident">desc</span>)
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getpatchconstantparameterdesc)\]
-    /// ID3D11ShaderReflection::GetPatchConstantParameterDesc
-    ///
-    /// Get a patch-constant parameter description for a shader.
-    ///
-    /// ### Errors
-    /// *   [E::INVALIDARG]     - if `parameter_index` &gt;= `self.get_desc().unwrap().patch_constant_parameters`
-    ///
-    /// ### Example
-    /// ```rust
-    /// # use thindx::*;
-    /// # let d3dc = d3d::Compiler::load_system(47).unwrap();
-    /// # let vs = d3dc.compile_from_file(r&quot;test\data\basic.hlsl&quot;, None, None, &quot;vs_main&quot;, &quot;vs_4_0&quot;, d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
-    /// # let vs = d3dc.reflect11(&amp;vs).unwrap();
-    /// // TODO: proper examples
-    /// assert_eq!(E::INVALIDARG,   vs.get_patch_constant_parameter_desc(2));
-    /// # assert_eq!(E::INVALIDARG, vs.get_patch_constant_parameter_desc(100));
-    /// # assert_eq!(E::INVALIDARG, vs.get_patch_constant_parameter_desc(10000));
-    /// # assert_eq!(E::INVALIDARG, vs.get_patch_constant_parameter_desc(1000000));
-    /// # assert_eq!(E::INVALIDARG, vs.get_patch_constant_parameter_desc(!0-100));
-    /// # assert_eq!(E::INVALIDARG, vs.get_patch_constant_parameter_desc(!0-16));
-    /// # assert_eq!(E::INVALIDARG, vs.get_patch_constant_parameter_desc(!0-8));
-    /// # assert_eq!(E::INVALIDARG, vs.get_patch_constant_parameter_desc(!0-4));
-    /// # assert_eq!(E::INVALIDARG, vs.get_patch_constant_parameter_desc(!0-1));
-    /// # assert_eq!(E::INVALIDARG, vs.get_patch_constant_parameter_desc(!0));
-    /// ```
-    </span><span class="comment">//#allow_missing_argument_docs
-    </span><span class="kw">pub fn </span>get_patch_constant_parameter_desc(<span class="kw-2">&amp;</span><span class="self">self</span>, parameter_index: u32) -&gt; <span class="prelude-ty">Result</span>&lt;SignatureParameterDesc, Error&gt; {
-        <span class="macro">fn_context!</span>(d3d11::ShaderReflection::get_patch_constant_parameter_desc =&gt; ID3D11ShaderReflection::GetPatchConstantParameterDesc);
-        <span class="kw">let </span><span class="kw-2">mut </span>desc = SignatureParameterDesc::default();
-        <span class="macro">fn_check_hr!</span>(<span class="kw">unsafe </span>{ <span class="self">self</span>.<span class="number">0</span>.GetPatchConstantParameterDesc(parameter_index, desc.as_mut_ptr()) })<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(desc)
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getpatchconstantparameterdesc)\]</span>
+    <span class="doccomment">/// ID3D11ShaderReflection::GetPatchConstantParameterDesc</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Get a patch-constant parameter description for a shader.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Errors</span>
+    <span class="doccomment">/// *   [E::INVALIDARG]     - if `parameter_index` &gt;= `self.get_desc().unwrap().patch_constant_parameters`</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Example</span>
+    <span class="doccomment">/// ```rust</span>
+    <span class="doccomment">/// # use thindx::*;</span>
+    <span class="doccomment">/// # let d3dc = d3d::Compiler::load_system(47).unwrap();</span>
+    <span class="doccomment">/// # let vs = d3dc.compile_from_file(r&quot;test\data\basic.hlsl&quot;, None, None, &quot;vs_main&quot;, &quot;vs_4_0&quot;, d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();</span>
+    <span class="doccomment">/// # let vs = d3dc.reflect11(&amp;vs).unwrap();</span>
+    <span class="doccomment">/// // TODO: proper examples</span>
+    <span class="doccomment">/// assert_eq!(E::INVALIDARG,   vs.get_patch_constant_parameter_desc(2));</span>
+    <span class="doccomment">/// # assert_eq!(E::INVALIDARG, vs.get_patch_constant_parameter_desc(100));</span>
+    <span class="doccomment">/// # assert_eq!(E::INVALIDARG, vs.get_patch_constant_parameter_desc(10000));</span>
+    <span class="doccomment">/// # assert_eq!(E::INVALIDARG, vs.get_patch_constant_parameter_desc(1000000));</span>
+    <span class="doccomment">/// # assert_eq!(E::INVALIDARG, vs.get_patch_constant_parameter_desc(!0-100));</span>
+    <span class="doccomment">/// # assert_eq!(E::INVALIDARG, vs.get_patch_constant_parameter_desc(!0-16));</span>
+    <span class="doccomment">/// # assert_eq!(E::INVALIDARG, vs.get_patch_constant_parameter_desc(!0-8));</span>
+    <span class="doccomment">/// # assert_eq!(E::INVALIDARG, vs.get_patch_constant_parameter_desc(!0-4));</span>
+    <span class="doccomment">/// # assert_eq!(E::INVALIDARG, vs.get_patch_constant_parameter_desc(!0-1));</span>
+    <span class="doccomment">/// # assert_eq!(E::INVALIDARG, vs.get_patch_constant_parameter_desc(!0));</span>
+    <span class="doccomment">/// ```</span>
+    <span class="comment">//#allow_missing_argument_docs</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_patch_constant_parameter_desc</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">parameter_index</span>: <span class="ident">u32</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">SignatureParameterDesc</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+        <span class="macro">fn_context!</span>(<span class="ident">d3d11::ShaderReflection::get_patch_constant_parameter_desc</span> =&gt; <span class="ident">ID3D11ShaderReflection::GetPatchConstantParameterDesc</span>);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">desc</span> <span class="op">=</span> <span class="ident">SignatureParameterDesc::default</span>();
+        <span class="macro">fn_check_hr!</span>(<span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="number">0</span>.<span class="ident">GetPatchConstantParameterDesc</span>(<span class="ident">parameter_index</span>, <span class="ident">desc</span>.<span class="ident">as_mut_ptr</span>()) })<span class="question-mark">?</span>;
+        <span class="prelude-val">Ok</span>(<span class="ident">desc</span>)
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getrequiresflags)\]
-    /// ID3D11ShaderReflection::GetRequiresFlags
-    ///
-    /// Gets a group of flags that indicates the requirements of a shader.
-    ///
-    /// ### Example
-    /// ```rust
-    /// # use thindx::*;
-    /// # let d3dc = d3d::Compiler::load_system(47).unwrap();
-    /// # let vs = d3dc.compile_from_file(r&quot;test\data\basic.hlsl&quot;, None, None, &quot;vs_main&quot;, &quot;vs_4_0&quot;, d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
-    /// # let vs = d3dc.reflect11(&amp;vs).unwrap();
-    /// assert_eq!(vs.get_requires_flags(), d3d::ShaderRequires::None);
-    /// ```
-    </span><span class="kw">pub fn </span>get_requires_flags(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; ShaderRequires {
-        <span class="macro">fn_context!</span>(d3d11::ShaderReflection::get_requires_flags =&gt; ID3D11ShaderReflection::GetRequiresFlags);
-        ShaderRequires::from_unchecked(<span class="kw">unsafe </span>{ <span class="self">self</span>.<span class="number">0</span>.GetRequiresFlags() })
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getrequiresflags)\]</span>
+    <span class="doccomment">/// ID3D11ShaderReflection::GetRequiresFlags</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Gets a group of flags that indicates the requirements of a shader.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Example</span>
+    <span class="doccomment">/// ```rust</span>
+    <span class="doccomment">/// # use thindx::*;</span>
+    <span class="doccomment">/// # let d3dc = d3d::Compiler::load_system(47).unwrap();</span>
+    <span class="doccomment">/// # let vs = d3dc.compile_from_file(r&quot;test\data\basic.hlsl&quot;, None, None, &quot;vs_main&quot;, &quot;vs_4_0&quot;, d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();</span>
+    <span class="doccomment">/// # let vs = d3dc.reflect11(&amp;vs).unwrap();</span>
+    <span class="doccomment">/// assert_eq!(vs.get_requires_flags(), d3d::ShaderRequires::None);</span>
+    <span class="doccomment">/// ```</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_requires_flags</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">ShaderRequires</span> {
+        <span class="macro">fn_context!</span>(<span class="ident">d3d11::ShaderReflection::get_requires_flags</span> =&gt; <span class="ident">ID3D11ShaderReflection::GetRequiresFlags</span>);
+        <span class="ident">ShaderRequires::from_unchecked</span>(<span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="number">0</span>.<span class="ident">GetRequiresFlags</span>() })
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getresourcebindingdesc)\]
-    /// ID3D11ShaderReflection::GetResourceBindingDesc
-    ///
-    /// Get a description of how a resource is bound to a shader.
-    ///
-    /// ### Errors
-    /// *   [E::INVALIDARG]     - if `resource_index` &gt;= `self.get_desc().unwrap().bound_resources`
-    ///
-    /// ### Example
-    /// ```rust
-    /// # use thindx::*;
-    /// # let d3dc = d3d::Compiler::load_system(47).unwrap();
-    /// # let vs = d3dc.compile_from_file(r&quot;test\data\basic.hlsl&quot;, None, None, &quot;vs_main&quot;, &quot;vs_4_0&quot;, d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
-    /// # let vs = d3dc.reflect11(&amp;vs).unwrap();
-    /// let ex = vs.get_resource_binding_desc(0).unwrap();
-    /// assert_eq!(ex.ty, d3d::SIT::CBuffer);
-    ///
-    /// assert_eq!(E::INVALIDARG, vs.get_resource_binding_desc(1));
-    /// #
-    /// # assert_eq!(E::INVALIDARG, vs.get_resource_binding_desc(100));
-    /// # assert_eq!(E::INVALIDARG, vs.get_resource_binding_desc(10000));
-    /// # assert_eq!(E::INVALIDARG, vs.get_resource_binding_desc(1000000));
-    /// # assert_eq!(E::INVALIDARG, vs.get_resource_binding_desc(!0-100));
-    /// # assert_eq!(E::INVALIDARG, vs.get_resource_binding_desc(!0-16));
-    /// # assert_eq!(E::INVALIDARG, vs.get_resource_binding_desc(!0-10));
-    /// # assert_eq!(E::INVALIDARG, vs.get_resource_binding_desc(!0-8));
-    /// # assert_eq!(E::INVALIDARG, vs.get_resource_binding_desc(!0-4));
-    /// # assert_eq!(E::INVALIDARG, vs.get_resource_binding_desc(!0-1));
-    /// # assert_eq!(E::INVALIDARG, vs.get_resource_binding_desc(!0));
-    /// ```
-    </span><span class="comment">//#allow_missing_argument_docs
-    </span><span class="kw">pub fn </span>get_resource_binding_desc(<span class="kw-2">&amp;</span><span class="self">self</span>, resource_index: u32) -&gt; <span class="prelude-ty">Result</span>&lt;ShaderInputBindDesc, Error&gt; {
-        <span class="macro">fn_context!</span>(d3d11::ShaderReflection::get_resource_binding_desc =&gt; ID3D11ShaderReflection::GetResourceBindingDesc);
-        <span class="kw">let </span><span class="kw-2">mut </span>desc = ShaderInputBindDesc::default();
-        <span class="macro">fn_check_hr!</span>(<span class="kw">unsafe </span>{ <span class="self">self</span>.<span class="number">0</span>.GetResourceBindingDesc(resource_index, desc.as_mut_ptr()) })<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(desc)
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getresourcebindingdesc)\]</span>
+    <span class="doccomment">/// ID3D11ShaderReflection::GetResourceBindingDesc</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Get a description of how a resource is bound to a shader.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Errors</span>
+    <span class="doccomment">/// *   [E::INVALIDARG]     - if `resource_index` &gt;= `self.get_desc().unwrap().bound_resources`</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Example</span>
+    <span class="doccomment">/// ```rust</span>
+    <span class="doccomment">/// # use thindx::*;</span>
+    <span class="doccomment">/// # let d3dc = d3d::Compiler::load_system(47).unwrap();</span>
+    <span class="doccomment">/// # let vs = d3dc.compile_from_file(r&quot;test\data\basic.hlsl&quot;, None, None, &quot;vs_main&quot;, &quot;vs_4_0&quot;, d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();</span>
+    <span class="doccomment">/// # let vs = d3dc.reflect11(&amp;vs).unwrap();</span>
+    <span class="doccomment">/// let ex = vs.get_resource_binding_desc(0).unwrap();</span>
+    <span class="doccomment">/// assert_eq!(ex.ty, d3d::SIT::CBuffer);</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// assert_eq!(E::INVALIDARG, vs.get_resource_binding_desc(1));</span>
+    <span class="doccomment">/// #</span>
+    <span class="doccomment">/// # assert_eq!(E::INVALIDARG, vs.get_resource_binding_desc(100));</span>
+    <span class="doccomment">/// # assert_eq!(E::INVALIDARG, vs.get_resource_binding_desc(10000));</span>
+    <span class="doccomment">/// # assert_eq!(E::INVALIDARG, vs.get_resource_binding_desc(1000000));</span>
+    <span class="doccomment">/// # assert_eq!(E::INVALIDARG, vs.get_resource_binding_desc(!0-100));</span>
+    <span class="doccomment">/// # assert_eq!(E::INVALIDARG, vs.get_resource_binding_desc(!0-16));</span>
+    <span class="doccomment">/// # assert_eq!(E::INVALIDARG, vs.get_resource_binding_desc(!0-10));</span>
+    <span class="doccomment">/// # assert_eq!(E::INVALIDARG, vs.get_resource_binding_desc(!0-8));</span>
+    <span class="doccomment">/// # assert_eq!(E::INVALIDARG, vs.get_resource_binding_desc(!0-4));</span>
+    <span class="doccomment">/// # assert_eq!(E::INVALIDARG, vs.get_resource_binding_desc(!0-1));</span>
+    <span class="doccomment">/// # assert_eq!(E::INVALIDARG, vs.get_resource_binding_desc(!0));</span>
+    <span class="doccomment">/// ```</span>
+    <span class="comment">//#allow_missing_argument_docs</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_resource_binding_desc</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">resource_index</span>: <span class="ident">u32</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">ShaderInputBindDesc</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+        <span class="macro">fn_context!</span>(<span class="ident">d3d11::ShaderReflection::get_resource_binding_desc</span> =&gt; <span class="ident">ID3D11ShaderReflection::GetResourceBindingDesc</span>);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">desc</span> <span class="op">=</span> <span class="ident">ShaderInputBindDesc::default</span>();
+        <span class="macro">fn_check_hr!</span>(<span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="number">0</span>.<span class="ident">GetResourceBindingDesc</span>(<span class="ident">resource_index</span>, <span class="ident">desc</span>.<span class="ident">as_mut_ptr</span>()) })<span class="question-mark">?</span>;
+        <span class="prelude-val">Ok</span>(<span class="ident">desc</span>)
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getresourcebindingdescbyname)\]
-    /// ID3D11ShaderReflection::GetResourceBindingDescByName
-    ///
-    /// Get a description of how a resource is bound to a shader.
-    ///
-    /// ### Errors
-    /// *   [E::INVALIDARG]         - If `name` doesn&#39;t name a valid resource binding for the shader
-    ///
-    /// ### Example
-    /// ```rust
-    /// # use thindx::*;
-    /// # let d3dc = d3d::Compiler::load_system(47).unwrap();
-    /// # let vs = d3dc.compile_from_file(r&quot;test\data\basic.hlsl&quot;, None, None, &quot;vs_main&quot;, &quot;vs_4_0&quot;, d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
-    /// # let vs = d3dc.reflect11(&amp;vs).unwrap();
-    /// let ex = vs.get_resource_binding_desc_by_name(&quot;ExampleCBuffer&quot;).unwrap();
-    /// assert_eq!(ex.ty, d3d::SIT::CBuffer);
-    ///
-    /// assert_eq!(E::INVALIDARG, vs.get_resource_binding_desc_by_name(&quot;Invalid&quot;));
-    /// assert_eq!(E::INVALIDARG, vs.get_resource_binding_desc_by_name(&quot;ExampleCBuffer\0&quot;));
-    /// assert_eq!(E::INVALIDARG, vs.get_resource_binding_desc_by_name(&quot;&quot;));
-    /// ```
-    </span><span class="comment">//#allow_missing_argument_docs
-    </span><span class="kw">pub fn </span>get_resource_binding_desc_by_name(<span class="kw-2">&amp;</span><span class="self">self</span>, name: <span class="kw">impl </span>TryIntoAsCStr) -&gt; <span class="prelude-ty">Result</span>&lt;ShaderInputBindDesc, Error&gt; {
-        <span class="macro">fn_context!</span>(d3d11::ShaderReflection::get_resource_binding_desc_by_name =&gt; ID3D11ShaderReflection::GetResourceBindingDescByName);
-        <span class="kw">let </span>name = name.try_into();
-        <span class="kw">let </span>name = name.as_ref().map_or(null(), |name| name.as_cstr());
-        <span class="kw">let </span><span class="kw-2">mut </span>desc = ShaderInputBindDesc::default();
-        <span class="macro">fn_check_hr!</span>(<span class="kw">unsafe </span>{ <span class="self">self</span>.<span class="number">0</span>.GetResourceBindingDescByName(name, desc.as_mut_ptr()) })<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(desc)
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getresourcebindingdescbyname)\]</span>
+    <span class="doccomment">/// ID3D11ShaderReflection::GetResourceBindingDescByName</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Get a description of how a resource is bound to a shader.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Errors</span>
+    <span class="doccomment">/// *   [E::INVALIDARG]         - If `name` doesn&#39;t name a valid resource binding for the shader</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Example</span>
+    <span class="doccomment">/// ```rust</span>
+    <span class="doccomment">/// # use thindx::*;</span>
+    <span class="doccomment">/// # let d3dc = d3d::Compiler::load_system(47).unwrap();</span>
+    <span class="doccomment">/// # let vs = d3dc.compile_from_file(r&quot;test\data\basic.hlsl&quot;, None, None, &quot;vs_main&quot;, &quot;vs_4_0&quot;, d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();</span>
+    <span class="doccomment">/// # let vs = d3dc.reflect11(&amp;vs).unwrap();</span>
+    <span class="doccomment">/// let ex = vs.get_resource_binding_desc_by_name(&quot;ExampleCBuffer&quot;).unwrap();</span>
+    <span class="doccomment">/// assert_eq!(ex.ty, d3d::SIT::CBuffer);</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// assert_eq!(E::INVALIDARG, vs.get_resource_binding_desc_by_name(&quot;Invalid&quot;));</span>
+    <span class="doccomment">/// assert_eq!(E::INVALIDARG, vs.get_resource_binding_desc_by_name(&quot;ExampleCBuffer\0&quot;));</span>
+    <span class="doccomment">/// assert_eq!(E::INVALIDARG, vs.get_resource_binding_desc_by_name(&quot;&quot;));</span>
+    <span class="doccomment">/// ```</span>
+    <span class="comment">//#allow_missing_argument_docs</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_resource_binding_desc_by_name</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">name</span>: <span class="kw">impl</span> <span class="ident">TryIntoAsCStr</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">ShaderInputBindDesc</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+        <span class="macro">fn_context!</span>(<span class="ident">d3d11::ShaderReflection::get_resource_binding_desc_by_name</span> =&gt; <span class="ident">ID3D11ShaderReflection::GetResourceBindingDescByName</span>);
+        <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">name</span>.<span class="ident">try_into</span>();
+        <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">name</span>.<span class="ident">as_ref</span>().<span class="ident">map_or</span>(<span class="ident">null</span>(), <span class="op">|</span><span class="ident">name</span><span class="op">|</span> <span class="ident">name</span>.<span class="ident">as_cstr</span>());
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">desc</span> <span class="op">=</span> <span class="ident">ShaderInputBindDesc::default</span>();
+        <span class="macro">fn_check_hr!</span>(<span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="number">0</span>.<span class="ident">GetResourceBindingDescByName</span>(<span class="ident">name</span>, <span class="ident">desc</span>.<span class="ident">as_mut_ptr</span>()) })<span class="question-mark">?</span>;
+        <span class="prelude-val">Ok</span>(<span class="ident">desc</span>)
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getthreadgroupsize)\]
-    /// ID3D11ShaderReflection::GetThreadGroupSize
-    ///
-    /// Retrieves the sizes, in units of threads, of the X, Y, and Z dimensions of the shader&#39;s thread-group grid.
-    ///
-    /// ### Returns
-    /// *   `(0, 0, 0)` if not specified
-    ///
-    /// ### Example
-    /// ```rust
-    /// # use thindx::*;
-    /// # let d3dc = d3d::Compiler::load_system(47).unwrap();
-    /// # let vs = d3dc.compile_from_file(r&quot;test\data\basic.hlsl&quot;, None, None, &quot;vs_main&quot;, &quot;vs_4_0&quot;, d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
-    /// # let vs = d3dc.reflect11(&amp;vs).unwrap();
-    /// assert_eq!(vs.get_thread_group_size(), (0, 0, 0));
-    /// ```
-    </span><span class="kw">pub fn </span>get_thread_group_size(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; (u32, u32, u32) {
-        <span class="macro">fn_context!</span>(d3d11::ShaderReflection::get_thread_group_size =&gt; ID3D11ShaderReflection::GetThreadGroupSize);
-        <span class="kw">let </span>(<span class="kw-2">mut </span>x, <span class="kw-2">mut </span>y, <span class="kw-2">mut </span>z) = (<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);
-        <span class="kw">let </span>_total = <span class="kw">unsafe </span>{ <span class="self">self</span>.<span class="number">0</span>.GetThreadGroupSize(<span class="kw-2">&amp;mut </span>x, <span class="kw-2">&amp;mut </span>y, <span class="kw-2">&amp;mut </span>z) };
-        <span class="macro">debug_assert_eq!</span>(_total, x<span class="kw-2">*</span>y<span class="kw-2">*</span>z, <span class="string">&quot;ID3D11ShaderReflection::GetThreadGroupSize was supposed to return x*y*z&quot;</span>);
-        (x, y, z)
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getthreadgroupsize)\]</span>
+    <span class="doccomment">/// ID3D11ShaderReflection::GetThreadGroupSize</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Retrieves the sizes, in units of threads, of the X, Y, and Z dimensions of the shader&#39;s thread-group grid.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Returns</span>
+    <span class="doccomment">/// *   `(0, 0, 0)` if not specified</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Example</span>
+    <span class="doccomment">/// ```rust</span>
+    <span class="doccomment">/// # use thindx::*;</span>
+    <span class="doccomment">/// # let d3dc = d3d::Compiler::load_system(47).unwrap();</span>
+    <span class="doccomment">/// # let vs = d3dc.compile_from_file(r&quot;test\data\basic.hlsl&quot;, None, None, &quot;vs_main&quot;, &quot;vs_4_0&quot;, d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();</span>
+    <span class="doccomment">/// # let vs = d3dc.reflect11(&amp;vs).unwrap();</span>
+    <span class="doccomment">/// assert_eq!(vs.get_thread_group_size(), (0, 0, 0));</span>
+    <span class="doccomment">/// ```</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_thread_group_size</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; (<span class="ident">u32</span>, <span class="ident">u32</span>, <span class="ident">u32</span>) {
+        <span class="macro">fn_context!</span>(<span class="ident">d3d11::ShaderReflection::get_thread_group_size</span> =&gt; <span class="ident">ID3D11ShaderReflection::GetThreadGroupSize</span>);
+        <span class="kw">let</span> (<span class="kw-2">mut</span> <span class="ident">x</span>, <span class="kw-2">mut</span> <span class="ident">y</span>, <span class="kw-2">mut</span> <span class="ident">z</span>) <span class="op">=</span> (<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);
+        <span class="kw">let</span> <span class="ident">_total</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="number">0</span>.<span class="ident">GetThreadGroupSize</span>(<span class="kw-2">&amp;mut</span> <span class="ident">x</span>, <span class="kw-2">&amp;mut</span> <span class="ident">y</span>, <span class="kw-2">&amp;mut</span> <span class="ident">z</span>) };
+        <span class="macro">debug_assert_eq!</span>(<span class="ident">_total</span>, <span class="ident">x</span><span class="kw-2">*</span><span class="ident">y</span><span class="kw-2">*</span><span class="ident">z</span>, <span class="string">&quot;ID3D11ShaderReflection::GetThreadGroupSize was supposed to return x*y*z&quot;</span>);
+        (<span class="ident">x</span>, <span class="ident">y</span>, <span class="ident">z</span>)
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getvariablebyname)\]
-    /// ID3D11ShaderReflection::GetVariableByName
-    ///
-    /// Gets a variable by name.
-    ///
-    /// ### Returns
-    /// *   If `name` doesn&#39;t name a valid cbuffer variable, a stub object will still be returned.  The stub object will return [E::FAIL] from most methods.
-    ///
-    /// ### Example
-    /// ```rust
-    /// # use thindx::*;
-    /// # let d3dc = d3d::Compiler::load_system(47).unwrap();
-    /// # let vs = d3dc.compile_from_file(r&quot;test\data\basic.hlsl&quot;, None, None, &quot;vs_main&quot;, &quot;vs_4_0&quot;, d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
-    /// # let vs = d3dc.reflect11(&amp;vs).unwrap();
-    /// let tint = vs.get_variable_by_name(&quot;tint&quot;).get_desc().unwrap();
-    /// assert_eq!(tint.start_offset, 0, &quot;unexpected tint.start_offset&quot;);
-    /// assert_eq!(tint.size,        16, &quot;unexpected tint.size&quot;);
-    ///
-    /// assert_eq!(E::FAIL, vs.get_variable_by_name(&quot;invalid&quot;).get_desc());
-    /// #
-    /// # assert_eq!(vs.get_variable_by_name(&quot;tint\0&quot;).get_desc(), E::FAIL);
-    /// # assert_eq!(vs.get_variable_by_name(&quot;&quot;).get_desc(), E::FAIL);
-    /// ```
-    </span><span class="comment">//#allow_missing_argument_docs
-    </span><span class="kw">pub fn </span>get_variable_by_name(<span class="kw-2">&amp;</span><span class="self">self</span>, name: <span class="kw">impl </span>TryIntoAsCStr) -&gt; ShaderReflectionVariable {
-        <span class="macro">fn_context!</span>(d3d11::ShaderReflection::get_variable_by_name =&gt; ID3D11ShaderReflection::GetVariableByName);
-        <span class="kw">let </span>name = name.try_into().ok();
-        <span class="kw">let </span>name = name.as_ref().map_or(<span class="macro">cstr!</span>(<span class="string">&quot;&quot;</span>).as_cstr(), |n| n.as_cstr());
-        <span class="kw">let </span>ptr = <span class="kw">unsafe </span>{ <span class="self">self</span>.<span class="number">0</span>.GetVariableByName(name) };
-        <span class="kw">unsafe </span>{ ShaderReflectionVariable::from_raw(<span class="self">self</span>, ptr) }
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getvariablebyname)\]</span>
+    <span class="doccomment">/// ID3D11ShaderReflection::GetVariableByName</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Gets a variable by name.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Returns</span>
+    <span class="doccomment">/// *   If `name` doesn&#39;t name a valid cbuffer variable, a stub object will still be returned.  The stub object will return [E::FAIL] from most methods.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Example</span>
+    <span class="doccomment">/// ```rust</span>
+    <span class="doccomment">/// # use thindx::*;</span>
+    <span class="doccomment">/// # let d3dc = d3d::Compiler::load_system(47).unwrap();</span>
+    <span class="doccomment">/// # let vs = d3dc.compile_from_file(r&quot;test\data\basic.hlsl&quot;, None, None, &quot;vs_main&quot;, &quot;vs_4_0&quot;, d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();</span>
+    <span class="doccomment">/// # let vs = d3dc.reflect11(&amp;vs).unwrap();</span>
+    <span class="doccomment">/// let tint = vs.get_variable_by_name(&quot;tint&quot;).get_desc().unwrap();</span>
+    <span class="doccomment">/// assert_eq!(tint.start_offset, 0, &quot;unexpected tint.start_offset&quot;);</span>
+    <span class="doccomment">/// assert_eq!(tint.size,        16, &quot;unexpected tint.size&quot;);</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// assert_eq!(E::FAIL, vs.get_variable_by_name(&quot;invalid&quot;).get_desc());</span>
+    <span class="doccomment">/// #</span>
+    <span class="doccomment">/// # assert_eq!(vs.get_variable_by_name(&quot;tint\0&quot;).get_desc(), E::FAIL);</span>
+    <span class="doccomment">/// # assert_eq!(vs.get_variable_by_name(&quot;&quot;).get_desc(), E::FAIL);</span>
+    <span class="doccomment">/// ```</span>
+    <span class="comment">//#allow_missing_argument_docs</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_variable_by_name</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">name</span>: <span class="kw">impl</span> <span class="ident">TryIntoAsCStr</span>) -&gt; <span class="ident">ShaderReflectionVariable</span> {
+        <span class="macro">fn_context!</span>(<span class="ident">d3d11::ShaderReflection::get_variable_by_name</span> =&gt; <span class="ident">ID3D11ShaderReflection::GetVariableByName</span>);
+        <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">name</span>.<span class="ident">try_into</span>().<span class="ident">ok</span>();
+        <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">name</span>.<span class="ident">as_ref</span>().<span class="ident">map_or</span>(<span class="macro">cstr!</span>(<span class="string">&quot;&quot;</span>).<span class="ident">as_cstr</span>(), <span class="op">|</span><span class="ident">n</span><span class="op">|</span> <span class="ident">n</span>.<span class="ident">as_cstr</span>());
+        <span class="kw">let</span> <span class="ident">ptr</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="number">0</span>.<span class="ident">GetVariableByName</span>(<span class="ident">name</span>) };
+        <span class="kw unsafe">unsafe</span> { <span class="ident">ShaderReflectionVariable::from_raw</span>(<span class="self">self</span>, <span class="ident">ptr</span>) }
     }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-issamplefrequencyshader)\]
-    /// ID3D11ShaderReflection::IsSampleFrequencyShader
-    ///
-    /// Indicates whether a shader is a sample frequency shader.
-    ///
-    /// ### Example
-    /// ```rust
-    /// # use thindx::*;
-    /// # let d3dc = d3d::Compiler::load_system(47).unwrap();
-    /// # let vs = d3dc.compile_from_file(r&quot;test\data\basic.hlsl&quot;, None, None, &quot;vs_main&quot;, &quot;vs_4_0&quot;, d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
-    /// # let vs = d3dc.reflect11(&amp;vs).unwrap();
-    /// assert_eq!(vs.is_sample_frequency_shader(), false);
-    /// ```
-    </span><span class="kw">pub fn </span>is_sample_frequency_shader(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
-        <span class="macro">fn_context!</span>(d3d11::ShaderReflection::is_sample_frequency_shader =&gt; ID3D11ShaderReflection::IsSampleFrequencyShader);
-        <span class="number">0 </span>!= <span class="kw">unsafe </span>{ <span class="self">self</span>.<span class="number">0</span>.IsSampleFrequencyShader() }
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-issamplefrequencyshader)\]</span>
+    <span class="doccomment">/// ID3D11ShaderReflection::IsSampleFrequencyShader</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Indicates whether a shader is a sample frequency shader.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Example</span>
+    <span class="doccomment">/// ```rust</span>
+    <span class="doccomment">/// # use thindx::*;</span>
+    <span class="doccomment">/// # let d3dc = d3d::Compiler::load_system(47).unwrap();</span>
+    <span class="doccomment">/// # let vs = d3dc.compile_from_file(r&quot;test\data\basic.hlsl&quot;, None, None, &quot;vs_main&quot;, &quot;vs_4_0&quot;, d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();</span>
+    <span class="doccomment">/// # let vs = d3dc.reflect11(&amp;vs).unwrap();</span>
+    <span class="doccomment">/// assert_eq!(vs.is_sample_frequency_shader(), false);</span>
+    <span class="doccomment">/// ```</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_sample_frequency_shader</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
+        <span class="macro">fn_context!</span>(<span class="ident">d3d11::ShaderReflection::is_sample_frequency_shader</span> =&gt; <span class="ident">ID3D11ShaderReflection::IsSampleFrequencyShader</span>);
+        <span class="number">0</span> <span class="op">!</span><span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="number">0</span>.<span class="ident">IsSampleFrequencyShader</span>() }
     }
 }
 
-<span class="comment">//#cpp2rust ID3D11ShaderReflection                                          = d3d11::ShaderReflection
-</span></code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (b44197abb 2022-09-05)" ></div></body></html>
+<span class="comment">//#cpp2rust ID3D11ShaderReflection                                          = d3d11::ShaderReflection</span>
+</code></pre></div>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0 (4b91a6ea7 2022-08-08)" ></div>
+</body></html>

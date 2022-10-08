@@ -1,4 +1,10 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3d9caps.h\flags\dev_caps.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>dev_caps.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../../normalize.css"><link rel="stylesheet" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../../dark.css" disabled><link rel="stylesheet" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3d9caps.h\flags\dev_caps.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>dev_caps.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div>
+        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
+                                <a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -62,69 +68,70 @@
 <span id="62">62</span>
 <span id="63">63</span>
 <span id="64">64</span>
-</pre><pre class="rust"><code><span class="kw">use </span>bytemuck::<span class="kw-2">*</span>;
-<span class="kw">use </span>winapi::shared::d3d9caps::<span class="kw-2">*</span>;
-<span class="kw">use </span>winapi::shared::minwindef::DWORD;
+</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">bytemuck</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">winapi::shared::d3d9caps</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">winapi::shared::minwindef::DWORD</span>;
 
 
 
-<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9caps/ns-d3d9caps-d3dcaps9)\]
-/// D3DDEVCAPS_*
-</span><span class="attribute">#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[derive(Pod, Zeroable)]
-#[repr(transparent)] </span><span class="kw">pub struct </span>DevCaps(DWORD);
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9caps/ns-d3d9caps-d3dcaps9)\]</span>
+<span class="doccomment">/// D3DDEVCAPS_*</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">PartialOrd</span>, <span class="ident">Ord</span>, <span class="ident">Hash</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Pod</span>, <span class="ident">Zeroable</span>)]</span>
+<span class="attribute">#[<span class="ident">repr</span>(<span class="ident">transparent</span>)]</span> <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">DevCaps</span>(<span class="ident">DWORD</span>);
 
-<span class="macro">flags! </span>{
-    DevCaps =&gt; DWORD;
-    <span class="prelude-val">None</span>, CanBltSysToNonLocal, CanRenderAfterFlip, DrawPrimitives2, DrawPrimitives2Ex, DrawPrimTlVertex,
-    ExecuteSystemMemory, ExecuteVideoMemory, HwRasterization, HwTransformAndLight, NPatches, PureDevice,
-    QuinticRtPatches, RtPatches, RtPatchHandleZero, SeparateTextureMemories, TextureNonLocalVidMem,
-    TextureSystemMemory, TextureVideoMemory, TlVertexSystemMemory, TlVertexVideoMemory
+<span class="macro">flags!</span> {
+    <span class="ident">DevCaps</span> =&gt; <span class="ident">DWORD</span>;
+    <span class="prelude-val">None</span>, <span class="ident">CanBltSysToNonLocal</span>, <span class="ident">CanRenderAfterFlip</span>, <span class="ident">DrawPrimitives2</span>, <span class="ident">DrawPrimitives2Ex</span>, <span class="ident">DrawPrimTlVertex</span>,
+    <span class="ident">ExecuteSystemMemory</span>, <span class="ident">ExecuteVideoMemory</span>, <span class="ident">HwRasterization</span>, <span class="ident">HwTransformAndLight</span>, <span class="ident">NPatches</span>, <span class="ident">PureDevice</span>,
+    <span class="ident">QuinticRtPatches</span>, <span class="ident">RtPatches</span>, <span class="ident">RtPatchHandleZero</span>, <span class="ident">SeparateTextureMemories</span>, <span class="ident">TextureNonLocalVidMem</span>,
+    <span class="ident">TextureSystemMemory</span>, <span class="ident">TextureVideoMemory</span>, <span class="ident">TlVertexSystemMemory</span>, <span class="ident">TlVertexVideoMemory</span>
 }
 
-<span class="attribute">#[allow(non_upper_case_globals)] </span><span class="kw">impl </span>DevCaps {
-    <span class="kw">pub const </span><span class="prelude-val">None                          </span>: DevCaps = DevCaps(<span class="number">0</span>);
-    <span class="kw">pub const </span>CanBltSysToNonLocal           : DevCaps = DevCaps(D3DDEVCAPS_CANBLTSYSTONONLOCAL);
-    <span class="kw">pub const </span>CanRenderAfterFlip            : DevCaps = DevCaps(D3DDEVCAPS_CANRENDERAFTERFLIP);
-    <span class="kw">pub const </span>DrawPrimitives2               : DevCaps = DevCaps(D3DDEVCAPS_DRAWPRIMITIVES2);
-    <span class="kw">pub const </span>DrawPrimitives2Ex             : DevCaps = DevCaps(D3DDEVCAPS_DRAWPRIMITIVES2EX);
-    <span class="kw">pub const </span>DrawPrimTlVertex              : DevCaps = DevCaps(D3DDEVCAPS_DRAWPRIMTLVERTEX);
-    <span class="kw">pub const </span>ExecuteSystemMemory           : DevCaps = DevCaps(D3DDEVCAPS_EXECUTESYSTEMMEMORY);
-    <span class="kw">pub const </span>ExecuteVideoMemory            : DevCaps = DevCaps(D3DDEVCAPS_EXECUTEVIDEOMEMORY);
-    <span class="kw">pub const </span>HwRasterization               : DevCaps = DevCaps(D3DDEVCAPS_HWRASTERIZATION);
-    <span class="kw">pub const </span>HwTransformAndLight           : DevCaps = DevCaps(D3DDEVCAPS_HWTRANSFORMANDLIGHT);
-    <span class="kw">pub const </span>NPatches                      : DevCaps = DevCaps(D3DDEVCAPS_NPATCHES);
-    <span class="kw">pub const </span>PureDevice                    : DevCaps = DevCaps(D3DDEVCAPS_PUREDEVICE);
-    <span class="kw">pub const </span>QuinticRtPatches              : DevCaps = DevCaps(D3DDEVCAPS_QUINTICRTPATCHES);
-    <span class="kw">pub const </span>RtPatches                     : DevCaps = DevCaps(D3DDEVCAPS_RTPATCHES);
-    <span class="kw">pub const </span>RtPatchHandleZero             : DevCaps = DevCaps(D3DDEVCAPS_RTPATCHHANDLEZERO);
-    <span class="kw">pub const </span>SeparateTextureMemories       : DevCaps = DevCaps(D3DDEVCAPS_SEPARATETEXTUREMEMORIES);
-    <span class="kw">pub const </span>TextureNonLocalVidMem         : DevCaps = DevCaps(D3DDEVCAPS_TEXTURENONLOCALVIDMEM);
-    <span class="kw">pub const </span>TextureSystemMemory           : DevCaps = DevCaps(D3DDEVCAPS_TEXTURESYSTEMMEMORY);
-    <span class="kw">pub const </span>TextureVideoMemory            : DevCaps = DevCaps(D3DDEVCAPS_TEXTUREVIDEOMEMORY);
-    <span class="kw">pub const </span>TlVertexSystemMemory          : DevCaps = DevCaps(D3DDEVCAPS_TLVERTEXSYSTEMMEMORY);
-    <span class="kw">pub const </span>TlVertexVideoMemory           : DevCaps = DevCaps(D3DDEVCAPS_TLVERTEXVIDEOMEMORY);
+<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">non_upper_case_globals</span>)]</span> <span class="kw">impl</span> <span class="ident">DevCaps</span> {
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="prelude-val">None</span>                          : <span class="ident">DevCaps</span> <span class="op">=</span> <span class="ident">DevCaps</span>(<span class="number">0</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CanBltSysToNonLocal</span>           : <span class="ident">DevCaps</span> <span class="op">=</span> <span class="ident">DevCaps</span>(<span class="ident">D3DDEVCAPS_CANBLTSYSTONONLOCAL</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">CanRenderAfterFlip</span>            : <span class="ident">DevCaps</span> <span class="op">=</span> <span class="ident">DevCaps</span>(<span class="ident">D3DDEVCAPS_CANRENDERAFTERFLIP</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">DrawPrimitives2</span>               : <span class="ident">DevCaps</span> <span class="op">=</span> <span class="ident">DevCaps</span>(<span class="ident">D3DDEVCAPS_DRAWPRIMITIVES2</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">DrawPrimitives2Ex</span>             : <span class="ident">DevCaps</span> <span class="op">=</span> <span class="ident">DevCaps</span>(<span class="ident">D3DDEVCAPS_DRAWPRIMITIVES2EX</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">DrawPrimTlVertex</span>              : <span class="ident">DevCaps</span> <span class="op">=</span> <span class="ident">DevCaps</span>(<span class="ident">D3DDEVCAPS_DRAWPRIMTLVERTEX</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">ExecuteSystemMemory</span>           : <span class="ident">DevCaps</span> <span class="op">=</span> <span class="ident">DevCaps</span>(<span class="ident">D3DDEVCAPS_EXECUTESYSTEMMEMORY</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">ExecuteVideoMemory</span>            : <span class="ident">DevCaps</span> <span class="op">=</span> <span class="ident">DevCaps</span>(<span class="ident">D3DDEVCAPS_EXECUTEVIDEOMEMORY</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">HwRasterization</span>               : <span class="ident">DevCaps</span> <span class="op">=</span> <span class="ident">DevCaps</span>(<span class="ident">D3DDEVCAPS_HWRASTERIZATION</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">HwTransformAndLight</span>           : <span class="ident">DevCaps</span> <span class="op">=</span> <span class="ident">DevCaps</span>(<span class="ident">D3DDEVCAPS_HWTRANSFORMANDLIGHT</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">NPatches</span>                      : <span class="ident">DevCaps</span> <span class="op">=</span> <span class="ident">DevCaps</span>(<span class="ident">D3DDEVCAPS_NPATCHES</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">PureDevice</span>                    : <span class="ident">DevCaps</span> <span class="op">=</span> <span class="ident">DevCaps</span>(<span class="ident">D3DDEVCAPS_PUREDEVICE</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">QuinticRtPatches</span>              : <span class="ident">DevCaps</span> <span class="op">=</span> <span class="ident">DevCaps</span>(<span class="ident">D3DDEVCAPS_QUINTICRTPATCHES</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">RtPatches</span>                     : <span class="ident">DevCaps</span> <span class="op">=</span> <span class="ident">DevCaps</span>(<span class="ident">D3DDEVCAPS_RTPATCHES</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">RtPatchHandleZero</span>             : <span class="ident">DevCaps</span> <span class="op">=</span> <span class="ident">DevCaps</span>(<span class="ident">D3DDEVCAPS_RTPATCHHANDLEZERO</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SeparateTextureMemories</span>       : <span class="ident">DevCaps</span> <span class="op">=</span> <span class="ident">DevCaps</span>(<span class="ident">D3DDEVCAPS_SEPARATETEXTUREMEMORIES</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">TextureNonLocalVidMem</span>         : <span class="ident">DevCaps</span> <span class="op">=</span> <span class="ident">DevCaps</span>(<span class="ident">D3DDEVCAPS_TEXTURENONLOCALVIDMEM</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">TextureSystemMemory</span>           : <span class="ident">DevCaps</span> <span class="op">=</span> <span class="ident">DevCaps</span>(<span class="ident">D3DDEVCAPS_TEXTURESYSTEMMEMORY</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">TextureVideoMemory</span>            : <span class="ident">DevCaps</span> <span class="op">=</span> <span class="ident">DevCaps</span>(<span class="ident">D3DDEVCAPS_TEXTUREVIDEOMEMORY</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">TlVertexSystemMemory</span>          : <span class="ident">DevCaps</span> <span class="op">=</span> <span class="ident">DevCaps</span>(<span class="ident">D3DDEVCAPS_TLVERTEXSYSTEMMEMORY</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">TlVertexVideoMemory</span>           : <span class="ident">DevCaps</span> <span class="op">=</span> <span class="ident">DevCaps</span>(<span class="ident">D3DDEVCAPS_TLVERTEXVIDEOMEMORY</span>);
 }
 
-<span class="comment">//#cpp2rust D3DDEVCAPS_CANBLTSYSTONONLOCAL      = d3d::DevCaps::CanBltSysToNonLocal
-//#cpp2rust D3DDEVCAPS_CANRENDERAFTERFLIP       = d3d::DevCaps::CanRenderAfterFlip
-//#cpp2rust D3DDEVCAPS_DRAWPRIMITIVES2          = d3d::DevCaps::DrawPrimitives2
-//#cpp2rust D3DDEVCAPS_DRAWPRIMITIVES2EX        = d3d::DevCaps::DrawPrimitives2Ex
-//#cpp2rust D3DDEVCAPS_DRAWPRIMTLVERTEX         = d3d::DevCaps::DrawPrimTlVertex
-//#cpp2rust D3DDEVCAPS_EXECUTESYSTEMMEMORY      = d3d::DevCaps::ExecuteSystemMemory
-//#cpp2rust D3DDEVCAPS_EXECUTEVIDEOMEMORY       = d3d::DevCaps::ExecuteVideoMemory
-//#cpp2rust D3DDEVCAPS_HWRASTERIZATION          = d3d::DevCaps::HwRasterization
-//#cpp2rust D3DDEVCAPS_HWTRANSFORMANDLIGHT      = d3d::DevCaps::HwTransformAndLight
-//#cpp2rust D3DDEVCAPS_NPATCHES                 = d3d::DevCaps::NPatches
-//#cpp2rust D3DDEVCAPS_PUREDEVICE               = d3d::DevCaps::PureDevice
-//#cpp2rust D3DDEVCAPS_QUINTICRTPATCHES         = d3d::DevCaps::QuinticRtPatches
-//#cpp2rust D3DDEVCAPS_RTPATCHES                = d3d::DevCaps::RtPatches
-//#cpp2rust D3DDEVCAPS_RTPATCHHANDLEZERO        = d3d::DevCaps::RtPatchHandleZero
-//#cpp2rust D3DDEVCAPS_SEPARATETEXTUREMEMORIES  = d3d::DevCaps::SeparateTextureMemories
-//#cpp2rust D3DDEVCAPS_TEXTURENONLOCALVIDMEM    = d3d::DevCaps::TextureNonLocalVidMem
-//#cpp2rust D3DDEVCAPS_TEXTURESYSTEMMEMORY      = d3d::DevCaps::TextureSystemMemory
-//#cpp2rust D3DDEVCAPS_TEXTUREVIDEOMEMORY       = d3d::DevCaps::TextureVideoMemory
-//#cpp2rust D3DDEVCAPS_TLVERTEXSYSTEMMEMORY     = d3d::DevCaps::TlVertexSystemMemory
-//#cpp2rust D3DDEVCAPS_TLVERTEXVIDEOMEMORY      = d3d::DevCaps::TlVertexVideoMemory
-</span></code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (b44197abb 2022-09-05)" ></div></body></html>
+<span class="comment">//#cpp2rust D3DDEVCAPS_CANBLTSYSTONONLOCAL      = d3d::DevCaps::CanBltSysToNonLocal</span>
+<span class="comment">//#cpp2rust D3DDEVCAPS_CANRENDERAFTERFLIP       = d3d::DevCaps::CanRenderAfterFlip</span>
+<span class="comment">//#cpp2rust D3DDEVCAPS_DRAWPRIMITIVES2          = d3d::DevCaps::DrawPrimitives2</span>
+<span class="comment">//#cpp2rust D3DDEVCAPS_DRAWPRIMITIVES2EX        = d3d::DevCaps::DrawPrimitives2Ex</span>
+<span class="comment">//#cpp2rust D3DDEVCAPS_DRAWPRIMTLVERTEX         = d3d::DevCaps::DrawPrimTlVertex</span>
+<span class="comment">//#cpp2rust D3DDEVCAPS_EXECUTESYSTEMMEMORY      = d3d::DevCaps::ExecuteSystemMemory</span>
+<span class="comment">//#cpp2rust D3DDEVCAPS_EXECUTEVIDEOMEMORY       = d3d::DevCaps::ExecuteVideoMemory</span>
+<span class="comment">//#cpp2rust D3DDEVCAPS_HWRASTERIZATION          = d3d::DevCaps::HwRasterization</span>
+<span class="comment">//#cpp2rust D3DDEVCAPS_HWTRANSFORMANDLIGHT      = d3d::DevCaps::HwTransformAndLight</span>
+<span class="comment">//#cpp2rust D3DDEVCAPS_NPATCHES                 = d3d::DevCaps::NPatches</span>
+<span class="comment">//#cpp2rust D3DDEVCAPS_PUREDEVICE               = d3d::DevCaps::PureDevice</span>
+<span class="comment">//#cpp2rust D3DDEVCAPS_QUINTICRTPATCHES         = d3d::DevCaps::QuinticRtPatches</span>
+<span class="comment">//#cpp2rust D3DDEVCAPS_RTPATCHES                = d3d::DevCaps::RtPatches</span>
+<span class="comment">//#cpp2rust D3DDEVCAPS_RTPATCHHANDLEZERO        = d3d::DevCaps::RtPatchHandleZero</span>
+<span class="comment">//#cpp2rust D3DDEVCAPS_SEPARATETEXTUREMEMORIES  = d3d::DevCaps::SeparateTextureMemories</span>
+<span class="comment">//#cpp2rust D3DDEVCAPS_TEXTURENONLOCALVIDMEM    = d3d::DevCaps::TextureNonLocalVidMem</span>
+<span class="comment">//#cpp2rust D3DDEVCAPS_TEXTURESYSTEMMEMORY      = d3d::DevCaps::TextureSystemMemory</span>
+<span class="comment">//#cpp2rust D3DDEVCAPS_TEXTUREVIDEOMEMORY       = d3d::DevCaps::TextureVideoMemory</span>
+<span class="comment">//#cpp2rust D3DDEVCAPS_TLVERTEXSYSTEMMEMORY     = d3d::DevCaps::TlVertexSystemMemory</span>
+<span class="comment">//#cpp2rust D3DDEVCAPS_TLVERTEXVIDEOMEMORY      = d3d::DevCaps::TlVertexVideoMemory</span>
+</code></pre></div>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0 (4b91a6ea7 2022-08-08)" ></div>
+</body></html>

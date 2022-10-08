@@ -1,4 +1,10 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\error_kind.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>error_kind.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../thindx/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\error_kind.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>error_kind.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
+        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../thindx/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
+                                <a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -115,122 +121,123 @@
 <span id="115">115</span>
 <span id="116">116</span>
 <span id="117">117</span>
-</pre><pre class="rust"><code><span class="kw">use crate</span>::<span class="kw-2">*</span>;
+</pre><pre class="rust"><code><span class="kw">use</span> <span class="kw">crate</span>::<span class="kw-2">*</span>;
 
-<span class="kw">use </span>bytemuck::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">bytemuck</span>::<span class="kw-2">*</span>;
 
-<span class="kw">use </span>winapi::shared::winerror::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">winapi::shared::winerror</span>::<span class="kw-2">*</span>;
 
-<span class="kw">use </span>winresult::{ErrorCode, HResult, HResultError};
+<span class="kw">use</span> <span class="ident">winresult</span>::{<span class="ident">ErrorCode</span>, <span class="ident">HResult</span>, <span class="ident">HResultError</span>};
 
-<span class="kw">use </span>std::fmt::{<span class="self">self</span>, Debug, Display, Formatter};
+<span class="kw">use</span> <span class="ident">std::fmt</span>::{<span class="self">self</span>, <span class="ident">Debug</span>, <span class="ident">Display</span>, <span class="ident">Formatter</span>};
 
 
 
-<span class="comment">// https://docs.microsoft.com/en-us/windows/win32/com/structure-of-com-error-codes
-// https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3derr
+<span class="comment">// https://docs.microsoft.com/en-us/windows/win32/com/structure-of-com-error-codes</span>
+<span class="comment">// https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3derr</span>
 
-</span><span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/desktop/direct3d11/d3d11-graphics-reference-returnvalues)\]
-/// HRESULT
-///
-/// See [thindx::errors](crate::errors) for a list of constants
-</span><span class="attribute">#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[derive(Pod, Zeroable)]
-#[repr(transparent)] </span><span class="kw">pub struct </span>ErrorKind(HRESULT);
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/desktop/direct3d11/d3d11-graphics-reference-returnvalues)\]</span>
+<span class="doccomment">/// HRESULT</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// See [thindx::errors](crate::errors) for a list of constants</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">PartialOrd</span>, <span class="ident">Ord</span>, <span class="ident">Hash</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Pod</span>, <span class="ident">Zeroable</span>)]</span>
+<span class="attribute">#[<span class="ident">repr</span>(<span class="ident">transparent</span>)]</span> <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ErrorKind</span>(<span class="ident">HRESULT</span>);
 
-<span class="macro">enumish! </span>{ ErrorKind =&gt; HRESULT }
+<span class="macro">enumish!</span> { <span class="ident">ErrorKind</span> =&gt; <span class="ident">HRESULT</span> }
 
-<span class="kw">impl </span>ErrorKind {
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/dmerror/nf-dmerror-make_hresult)\]
-    /// MAKE_HRESULT
-    ///
-    /// ### Arguments
-    /// *   `sev`   - the severity of the errors (e.g. `0` for succcess, `1` for failure.)
-    /// *   `fac`   - the `FACILITY_*` category of the error (e.g. `FACILITY_WIN32`.)
-    /// *   `code`  - the `ERROR_*` code/value (e.g. `ERROR_FILE_NOT_FOUND`)
-    </span><span class="kw">pub const fn </span>make_hresult(sev: u32, fac: u32, code: u32) -&gt; <span class="self">Self </span>{
-        <span class="self">Self</span>(((sev &lt;&lt; <span class="number">31</span>) | (fac &lt;&lt; <span class="number">16</span>) | (code &lt;&lt; <span class="number">0</span>)) <span class="kw">as _</span>)
+<span class="kw">impl</span> <span class="ident">ErrorKind</span> {
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/dmerror/nf-dmerror-make_hresult)\]</span>
+    <span class="doccomment">/// MAKE_HRESULT</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Arguments</span>
+    <span class="doccomment">/// *   `sev`   - the severity of the errors (e.g. `0` for succcess, `1` for failure.)</span>
+    <span class="doccomment">/// *   `fac`   - the `FACILITY_*` category of the error (e.g. `FACILITY_WIN32`.)</span>
+    <span class="doccomment">/// *   `code`  - the `ERROR_*` code/value (e.g. `ERROR_FILE_NOT_FOUND`)</span>
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">make_hresult</span>(<span class="ident">sev</span>: <span class="ident">u32</span>, <span class="ident">fac</span>: <span class="ident">u32</span>, <span class="ident">code</span>: <span class="ident">u32</span>) -&gt; <span class="self">Self</span> {
+        <span class="self">Self</span>(((<span class="ident">sev</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">31</span>) <span class="op">|</span> (<span class="ident">fac</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">16</span>) <span class="op">|</span> (<span class="ident">code</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">0</span>)) <span class="kw">as</span> <span class="kw">_</span>)
     }
 
-    <span class="doccomment">/// MAKE_D3DHRESULT
-    </span><span class="kw">pub const fn </span>make_d3dhresult(code: u32) -&gt; ErrorKind { ErrorKind::make_hresult(<span class="number">1</span>, _FACD3D, code) }
+    <span class="doccomment">/// MAKE_D3DHRESULT</span>
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">make_d3dhresult</span>(<span class="ident">code</span>: <span class="ident">u32</span>) -&gt; <span class="ident">ErrorKind</span> { <span class="ident">ErrorKind::make_hresult</span>(<span class="number">1</span>, <span class="ident">_FACD3D</span>, <span class="ident">code</span>) }
 
-    <span class="doccomment">/// MAKE_DDHRESULT
-    </span><span class="kw">pub const fn </span>make_ddhresult(code: u32) -&gt; ErrorKind { ErrorKind::make_hresult(<span class="number">1</span>, _FACD3D, code) } <span class="comment">// Yes, _FACD3D is the same
+    <span class="doccomment">/// MAKE_DDHRESULT</span>
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">make_ddhresult</span>(<span class="ident">code</span>: <span class="ident">u32</span>) -&gt; <span class="ident">ErrorKind</span> { <span class="ident">ErrorKind::make_hresult</span>(<span class="number">1</span>, <span class="ident">_FACD3D</span>, <span class="ident">code</span>) } <span class="comment">// Yes, _FACD3D is the same</span>
 
-    </span><span class="doccomment">/// MAKE_D3DSTATUS
-    </span><span class="kw">pub const fn </span>make_d3dstatus(code: u32) -&gt; ErrorKind { ErrorKind::make_hresult(<span class="number">0</span>, _FACD3D, code) }
+    <span class="doccomment">/// MAKE_D3DSTATUS</span>
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">make_d3dstatus</span>(<span class="ident">code</span>: <span class="ident">u32</span>) -&gt; <span class="ident">ErrorKind</span> { <span class="ident">ErrorKind::make_hresult</span>(<span class="number">0</span>, <span class="ident">_FACD3D</span>, <span class="ident">code</span>) }
 
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/dmerror/nf-dmerror-make_hresult)\]
-    /// MAKE_HRESULT(1, FACILITY_WIN32, code)
-    ///
-    /// ### Arguments
-    /// *   `code`  - the `ERROR_*` code/value (e.g. `ERROR_FILE_NOT_FOUND`)
-    </span><span class="kw">pub const fn </span>from_win32(code: u32) -&gt; <span class="self">Self </span>{ <span class="self">Self</span>::make_hresult(<span class="number">1</span>, <span class="number">7</span>, code) }
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/dmerror/nf-dmerror-make_hresult)\]</span>
+    <span class="doccomment">/// MAKE_HRESULT(1, FACILITY_WIN32, code)</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Arguments</span>
+    <span class="doccomment">/// *   `code`  - the `ERROR_*` code/value (e.g. `ERROR_FILE_NOT_FOUND`)</span>
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">from_win32</span>(<span class="ident">code</span>: <span class="ident">u32</span>) -&gt; <span class="self">Self</span> { <span class="ident"><span class="self">Self</span>::make_hresult</span>(<span class="number">1</span>, <span class="number">7</span>, <span class="ident">code</span>) }
 
-    <span class="attribute">#[allow(missing_docs)] </span><span class="kw">pub const fn </span>to_code    (<span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;ErrorCode&gt; { <span class="kw">if </span>(<span class="self">self</span>.<span class="number">0 </span><span class="kw">as </span>u32) &lt; <span class="number">0x10000 </span>{ <span class="prelude-val">Some</span>(ErrorCode::from_constant(<span class="self">self</span>.<span class="number">0 </span><span class="kw">as _</span>)) } <span class="kw">else </span>{ <span class="prelude-val">None </span>} }
-    <span class="attribute">#[allow(missing_docs)] </span><span class="kw">pub const fn </span>to_hresult (<span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;HResult  &gt; { <span class="kw">if </span>(<span class="self">self</span>.<span class="number">0 </span><span class="kw">as </span>u32) &gt;=<span class="number">0x10000 </span>{ <span class="prelude-val">Some</span>(HResult  ::from_constant(<span class="self">self</span>.<span class="number">0 </span><span class="kw">as _</span>)) } <span class="kw">else </span>{ <span class="prelude-val">None </span>} }
-    <span class="attribute">#[allow(missing_docs)] </span><span class="kw">pub const fn </span>from_winapi(value: HRESULT) -&gt; <span class="self">Self </span>{ <span class="self">Self</span>(value) } <span class="comment">// TODO: remove
-    </span><span class="attribute">#[allow(missing_docs)] </span><span class="kw">pub const fn </span>to_winapi(<span class="self">self</span>) -&gt; HRESULT { <span class="self">self</span>.<span class="number">0 </span>} <span class="comment">// TODO: remove
-</span>}
+    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">missing_docs</span>)]</span> <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">to_code</span>    (<span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ErrorCode</span><span class="op">&gt;</span> { <span class="kw">if</span> (<span class="self">self</span>.<span class="number">0</span> <span class="kw">as</span> <span class="ident">u32</span>) <span class="op">&lt;</span> <span class="number">0x10000</span> { <span class="prelude-val">Some</span>(<span class="ident">ErrorCode::from_constant</span>(<span class="self">self</span>.<span class="number">0</span> <span class="kw">as</span> <span class="kw">_</span>)) } <span class="kw">else</span> { <span class="prelude-val">None</span> } }
+    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">missing_docs</span>)]</span> <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">to_hresult</span> (<span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">HResult</span>  <span class="op">&gt;</span> { <span class="kw">if</span> (<span class="self">self</span>.<span class="number">0</span> <span class="kw">as</span> <span class="ident">u32</span>) <span class="op">&gt;</span><span class="op">=</span><span class="number">0x10000</span> { <span class="prelude-val">Some</span>(<span class="ident">HResult</span>  <span class="ident">::from_constant</span>(<span class="self">self</span>.<span class="number">0</span> <span class="kw">as</span> <span class="kw">_</span>)) } <span class="kw">else</span> { <span class="prelude-val">None</span> } }
+    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">missing_docs</span>)]</span> <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">from_winapi</span>(<span class="ident">value</span>: <span class="ident">HRESULT</span>) -&gt; <span class="self">Self</span> { <span class="self">Self</span>(<span class="ident">value</span>) } <span class="comment">// TODO: remove</span>
+    <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">missing_docs</span>)]</span> <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">to_winapi</span>(<span class="self">self</span>) -&gt; <span class="ident">HRESULT</span> { <span class="self">self</span>.<span class="number">0</span> } <span class="comment">// TODO: remove</span>
+}
 
-<span class="kw">impl </span>Display <span class="kw">for </span>ErrorKind {
-    <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>Formatter) -&gt; fmt::Result {
-        <span class="kw">let </span>value = <span class="self">self</span>.<span class="number">0 </span><span class="kw">as </span>u32;
-        <span class="kw">if </span>value &lt; <span class="number">0x10000 </span>{
-            <span class="macro">write!</span>(f, <span class="string">&quot;{:?} ({value})&quot;</span>, ErrorCode::from(value <span class="kw">as </span>u16))
-        } <span class="kw">else </span>{
-            <span class="macro">write!</span>(f, <span class="string">&quot;{:?} (0x{value:08X})&quot;</span>, HResult::from(value))
+<span class="kw">impl</span> <span class="ident">Display</span> <span class="kw">for</span> <span class="ident">ErrorKind</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
+        <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="self">self</span>.<span class="number">0</span> <span class="kw">as</span> <span class="ident">u32</span>;
+        <span class="kw">if</span> <span class="ident">value</span> <span class="op">&lt;</span> <span class="number">0x10000</span> {
+            <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;{:?} ({value})&quot;</span>, <span class="ident">ErrorCode::from</span>(<span class="ident">value</span> <span class="kw">as</span> <span class="ident">u16</span>))
+        } <span class="kw">else</span> {
+            <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;{:?} (0x{value:08X})&quot;</span>, <span class="ident">HResult::from</span>(<span class="ident">value</span>))
         }
     }
 }
 
-<span class="kw">impl </span>Debug <span class="kw">for </span>ErrorKind {
-    <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>Formatter) -&gt; fmt::Result {
-        <span class="kw">let </span>value = <span class="self">self</span>.<span class="number">0 </span><span class="kw">as </span>u32;
-        <span class="kw">if </span>value &lt; <span class="number">0x10000 </span>{
-            <span class="macro">write!</span>(f, <span class="string">&quot;{:?} ({value})&quot;</span>, ErrorCode::from(value <span class="kw">as </span>u16))
-        } <span class="kw">else </span>{
-            <span class="macro">write!</span>(f, <span class="string">&quot;{:?} (0x{value:08X})&quot;</span>, HResult::from(value))
+<span class="kw">impl</span> <span class="ident">Debug</span> <span class="kw">for</span> <span class="ident">ErrorKind</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;mut</span> <span class="ident">Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
+        <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="self">self</span>.<span class="number">0</span> <span class="kw">as</span> <span class="ident">u32</span>;
+        <span class="kw">if</span> <span class="ident">value</span> <span class="op">&lt;</span> <span class="number">0x10000</span> {
+            <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;{:?} ({value})&quot;</span>, <span class="ident">ErrorCode::from</span>(<span class="ident">value</span> <span class="kw">as</span> <span class="ident">u16</span>))
+        } <span class="kw">else</span> {
+            <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;{:?} (0x{value:08X})&quot;</span>, <span class="ident">HResult::from</span>(<span class="ident">value</span>))
         }
     }
 }
 
-<span class="kw">impl </span>std::error::Error <span class="kw">for </span>ErrorKind {}
+<span class="kw">impl</span> <span class="ident">std::error::Error</span> <span class="kw">for</span> <span class="ident">ErrorKind</span> {}
 
-<span class="kw">impl </span>From&lt;std::ffi::NulError&gt; <span class="kw">for </span>ErrorKind {
-    <span class="kw">fn </span>from(<span class="kw">_</span>: std::ffi::NulError) -&gt; ErrorKind { THINERR::STRING_CONTAINS_NULS.into() }
+<span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">std::ffi::NulError</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">ErrorKind</span> {
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="kw">_</span>: <span class="ident">std::ffi::NulError</span>) -&gt; <span class="ident">ErrorKind</span> { <span class="ident">THINERR::STRING_CONTAINS_NULS</span>.<span class="ident">into</span>() }
 }
 
-<span class="kw">impl </span>From&lt;abistr::InteriorNulError&gt; <span class="kw">for </span>ErrorKind {
-    <span class="kw">fn </span>from(<span class="kw">_</span>: abistr::InteriorNulError) -&gt; ErrorKind { THINERR::STRING_CONTAINS_NULS.into() }
+<span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">abistr::InteriorNulError</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">ErrorKind</span> {
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="kw">_</span>: <span class="ident">abistr::InteriorNulError</span>) -&gt; <span class="ident">ErrorKind</span> { <span class="ident">THINERR::STRING_CONTAINS_NULS</span>.<span class="ident">into</span>() }
 }
 
-<span class="kw">impl </span>From&lt;ErrorCode     &gt; <span class="kw">for </span>ErrorKind { <span class="kw">fn </span>from(ec: ErrorCode     ) -&gt; <span class="self">Self </span>{ <span class="self">Self</span>(u32::from(ec) <span class="kw">as _</span>) } }
-<span class="kw">impl </span>From&lt;HResultError  &gt; <span class="kw">for </span>ErrorKind { <span class="kw">fn </span>from(hr: HResultError  ) -&gt; <span class="self">Self </span>{ <span class="self">Self</span>(u32::from(hr) <span class="kw">as _</span>) } }
-<span class="comment">//impl From&lt;HResult     &gt; for ErrorKind { fn from(hr: HResult       ) -&gt; Self { Self(u32::from(hr) as _) } }
+<span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">ErrorCode</span>     <span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">ErrorKind</span> { <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">ec</span>: <span class="ident">ErrorCode</span>     ) -&gt; <span class="self">Self</span> { <span class="self">Self</span>(<span class="ident">u32::from</span>(<span class="ident">ec</span>) <span class="kw">as</span> <span class="kw">_</span>) } }
+<span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">HResultError</span>  <span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">ErrorKind</span> { <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">hr</span>: <span class="ident">HResultError</span>  ) -&gt; <span class="self">Self</span> { <span class="self">Self</span>(<span class="ident">u32::from</span>(<span class="ident">hr</span>) <span class="kw">as</span> <span class="kw">_</span>) } }
+<span class="comment">//impl From&lt;HResult     &gt; for ErrorKind { fn from(hr: HResult       ) -&gt; Self { Self(u32::from(hr) as _) } }</span>
 
-</span><span class="kw">impl </span>PartialEq&lt;HRESULT&gt; <span class="kw">for </span>ErrorKind { <span class="kw">fn </span>eq(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span>HRESULT)   -&gt; bool { <span class="self">self</span>.<span class="number">0 </span>== <span class="kw-2">*</span>other } }
-<span class="kw">impl </span>PartialEq&lt;ErrorKind&gt; <span class="kw">for </span>HRESULT { <span class="kw">fn </span>eq(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span>ErrorKind)    -&gt; bool { other.<span class="number">0 </span>== <span class="kw-2">*</span><span class="self">self </span>} }
+<span class="kw">impl</span> <span class="ident">PartialEq</span><span class="op">&lt;</span><span class="ident">HRESULT</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">ErrorKind</span> { <span class="kw">fn</span> <span class="ident">eq</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="ident">HRESULT</span>)   -&gt; <span class="ident">bool</span> { <span class="self">self</span>.<span class="number">0</span> <span class="op">==</span> <span class="kw-2">*</span><span class="ident">other</span> } }
+<span class="kw">impl</span> <span class="ident">PartialEq</span><span class="op">&lt;</span><span class="ident">ErrorKind</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">HRESULT</span> { <span class="kw">fn</span> <span class="ident">eq</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="ident">ErrorKind</span>)    -&gt; <span class="ident">bool</span> { <span class="ident">other</span>.<span class="number">0</span> <span class="op">==</span> <span class="kw-2">*</span><span class="self">self</span> } }
 
-<span class="kw">impl </span>PartialEq&lt;<span class="prelude-ty">Option</span>&lt;ErrorKind&gt;&gt; <span class="kw">for </span>ErrorKind { <span class="kw">fn </span>eq(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span><span class="prelude-ty">Option</span>&lt;ErrorKind&gt;) -&gt; bool { <span class="prelude-val">Some</span>(<span class="self">self</span>) == other.as_ref() } }
-<span class="kw">impl </span>PartialEq&lt;ErrorKind&gt; <span class="kw">for </span><span class="prelude-ty">Option</span>&lt;ErrorKind&gt; { <span class="kw">fn </span>eq(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span>ErrorKind)         -&gt; bool { <span class="prelude-val">Some</span>(other) == <span class="self">self</span>.as_ref() } }
+<span class="kw">impl</span> <span class="ident">PartialEq</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ErrorKind</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">ErrorKind</span> { <span class="kw">fn</span> <span class="ident">eq</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ErrorKind</span><span class="op">&gt;</span>) -&gt; <span class="ident">bool</span> { <span class="prelude-val">Some</span>(<span class="self">self</span>) <span class="op">==</span> <span class="ident">other</span>.<span class="ident">as_ref</span>() } }
+<span class="kw">impl</span> <span class="ident">PartialEq</span><span class="op">&lt;</span><span class="ident">ErrorKind</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ErrorKind</span><span class="op">&gt;</span> { <span class="kw">fn</span> <span class="ident">eq</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="ident">ErrorKind</span>)         -&gt; <span class="ident">bool</span> { <span class="prelude-val">Some</span>(<span class="ident">other</span>) <span class="op">==</span> <span class="self">self</span>.<span class="ident">as_ref</span>() } }
 
-<span class="kw">impl</span>&lt;O&gt; PartialEq&lt;<span class="prelude-ty">Result</span>&lt;O, ErrorKind&gt;&gt; <span class="kw">for </span>ErrorKind { <span class="kw">fn </span>eq(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span><span class="prelude-ty">Result</span>&lt;O, ErrorKind&gt;) -&gt; bool { <span class="prelude-val">Some</span>(<span class="self">self</span>) == other.as_ref().err() } }
-<span class="kw">impl</span>&lt;O&gt; PartialEq&lt;ErrorKind&gt; <span class="kw">for </span><span class="prelude-ty">Result</span>&lt;O, ErrorKind&gt; { <span class="kw">fn </span>eq(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span>ErrorKind)            -&gt; bool { <span class="prelude-val">Some</span>(other) == <span class="self">self</span>.as_ref().err() } }
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">O</span><span class="op">&gt;</span> <span class="ident">PartialEq</span><span class="op">&lt;</span><span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">O</span>, <span class="ident">ErrorKind</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">ErrorKind</span> { <span class="kw">fn</span> <span class="ident">eq</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">O</span>, <span class="ident">ErrorKind</span><span class="op">&gt;</span>) -&gt; <span class="ident">bool</span> { <span class="prelude-val">Some</span>(<span class="self">self</span>) <span class="op">==</span> <span class="ident">other</span>.<span class="ident">as_ref</span>().<span class="ident">err</span>() } }
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">O</span><span class="op">&gt;</span> <span class="ident">PartialEq</span><span class="op">&lt;</span><span class="ident">ErrorKind</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">O</span>, <span class="ident">ErrorKind</span><span class="op">&gt;</span> { <span class="kw">fn</span> <span class="ident">eq</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="ident">ErrorKind</span>)            -&gt; <span class="ident">bool</span> { <span class="prelude-val">Some</span>(<span class="ident">other</span>) <span class="op">==</span> <span class="self">self</span>.<span class="ident">as_ref</span>().<span class="ident">err</span>() } }
 
-<span class="kw">impl </span>PartialEq&lt;ErrorCode&gt; <span class="kw">for </span>ErrorKind    { <span class="kw">fn </span>eq(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span>ErrorCode     ) -&gt; bool { ErrorKind::from(<span class="kw-2">*</span><span class="self">self</span>) == ErrorKind::from(<span class="kw-2">*</span>other) } }
-<span class="kw">impl </span>PartialEq&lt;ErrorKind&gt; <span class="kw">for </span>ErrorCode    { <span class="kw">fn </span>eq(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span>ErrorKind     ) -&gt; bool { ErrorKind::from(<span class="kw-2">*</span><span class="self">self</span>) == ErrorKind::from(<span class="kw-2">*</span>other) } }
-<span class="kw">impl </span>PartialEq&lt;HResultError&gt; <span class="kw">for </span>ErrorKind { <span class="kw">fn </span>eq(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span>HResultError  ) -&gt; bool { ErrorKind::from(<span class="kw-2">*</span><span class="self">self</span>) == ErrorKind::from(<span class="kw-2">*</span>other) } }
-<span class="kw">impl </span>PartialEq&lt;ErrorKind&gt; <span class="kw">for </span>HResultError { <span class="kw">fn </span>eq(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span>ErrorKind     ) -&gt; bool { ErrorKind::from(<span class="kw-2">*</span><span class="self">self</span>) == ErrorKind::from(<span class="kw-2">*</span>other) } }
+<span class="kw">impl</span> <span class="ident">PartialEq</span><span class="op">&lt;</span><span class="ident">ErrorCode</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">ErrorKind</span>    { <span class="kw">fn</span> <span class="ident">eq</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="ident">ErrorCode</span>     ) -&gt; <span class="ident">bool</span> { <span class="ident">ErrorKind::from</span>(<span class="kw-2">*</span><span class="self">self</span>) <span class="op">==</span> <span class="ident">ErrorKind::from</span>(<span class="kw-2">*</span><span class="ident">other</span>) } }
+<span class="kw">impl</span> <span class="ident">PartialEq</span><span class="op">&lt;</span><span class="ident">ErrorKind</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">ErrorCode</span>    { <span class="kw">fn</span> <span class="ident">eq</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="ident">ErrorKind</span>     ) -&gt; <span class="ident">bool</span> { <span class="ident">ErrorKind::from</span>(<span class="kw-2">*</span><span class="self">self</span>) <span class="op">==</span> <span class="ident">ErrorKind::from</span>(<span class="kw-2">*</span><span class="ident">other</span>) } }
+<span class="kw">impl</span> <span class="ident">PartialEq</span><span class="op">&lt;</span><span class="ident">HResultError</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">ErrorKind</span> { <span class="kw">fn</span> <span class="ident">eq</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="ident">HResultError</span>  ) -&gt; <span class="ident">bool</span> { <span class="ident">ErrorKind::from</span>(<span class="kw-2">*</span><span class="self">self</span>) <span class="op">==</span> <span class="ident">ErrorKind::from</span>(<span class="kw-2">*</span><span class="ident">other</span>) } }
+<span class="kw">impl</span> <span class="ident">PartialEq</span><span class="op">&lt;</span><span class="ident">ErrorKind</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">HResultError</span> { <span class="kw">fn</span> <span class="ident">eq</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="ident">ErrorKind</span>     ) -&gt; <span class="ident">bool</span> { <span class="ident">ErrorKind::from</span>(<span class="kw-2">*</span><span class="self">self</span>) <span class="op">==</span> <span class="ident">ErrorKind::from</span>(<span class="kw-2">*</span><span class="ident">other</span>) } }
 
-<span class="kw">const </span>_FACD3D : u32 = <span class="number">0x876</span>; <span class="comment">// d3d9helper.h
+<span class="kw">const</span> <span class="ident">_FACD3D</span> : <span class="ident">u32</span> <span class="op">=</span> <span class="number">0x876</span>; <span class="comment">// d3d9helper.h</span>
 
-//#cpp2rust HRESULT         = ErrorKind
-//#cpp2rust MAKE_HRESULT    = ErrorKind::make_hresult
+<span class="comment">//#cpp2rust HRESULT         = ErrorKind</span>
+<span class="comment">//#cpp2rust MAKE_HRESULT    = ErrorKind::make_hresult</span>
 
-//#cpp2rust MAKE_D3DSTATUS  = ErrorKind::make_d3dstatus
-//#cpp2rust MAKE_D3DHRESULT = ErrorKind::make_d3dhresult
-//#cpp2rust MAKE_DDHRESULT  = ErrorKind::make_ddhresult
-</span></code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (b44197abb 2022-09-05)" ></div></body></html>
+<span class="comment">//#cpp2rust MAKE_D3DSTATUS  = ErrorKind::make_d3dstatus</span>
+<span class="comment">//#cpp2rust MAKE_D3DHRESULT = ErrorKind::make_d3dhresult</span>
+<span class="comment">//#cpp2rust MAKE_DDHRESULT  = ErrorKind::make_ddhresult</span>
+</code></pre></div>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0 (4b91a6ea7 2022-08-08)" ></div>
+</body></html>

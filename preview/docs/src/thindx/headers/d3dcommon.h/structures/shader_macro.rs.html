@@ -1,4 +1,10 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3dcommon.h\structures\shader_macro.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>shader_macro.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../../normalize.css"><link rel="stylesheet" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../../dark.css" disabled><link rel="stylesheet" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3dcommon.h\structures\shader_macro.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>shader_macro.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div>
+        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
+                                <a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -31,38 +37,39 @@
 <span id="31">31</span>
 <span id="32">32</span>
 <span id="33">33</span>
-</pre><pre class="rust"><code><span class="kw">use </span><span class="kw">crate</span>::ErrorKind;
+</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::ErrorKind</span>;
 
-<span class="kw">use </span>winapi::um::d3dcommon::D3D_SHADER_MACRO;
+<span class="kw">use</span> <span class="ident">winapi::um::d3dcommon::D3D_SHADER_MACRO</span>;
 
-<span class="kw">use </span>std::ptr::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">std::ptr</span>::<span class="kw-2">*</span>;
 
 
 
-<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ns-d3dcommon-d3d_shader_macro)\]
-/// D3D_SHADER_MACRO\[\] compatible types
-///
-/// ### ⚠️ Safety ⚠️
-/// By implementing this trait, you promise that any returned [D3D_SHADER_MACRO] pointers are either [null], or:
-/// *   Points to a valid array of [D3D_SHADER_MACRO]s.
-/// *   The array is terminated by a &quot;null&quot; (zeroed/default) [D3D_SHADER_MACRO].
-/// *   All array elements before the terminal [D3D_SHADER_MACRO] have valid `\0` terminated `Name` and `Definition` pointers.
-/// *   Said array lives for at least as long as `self` remains untouched / undropped.
-///
-/// [D3D_SHADER_MACRO]: https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ns-d3dcommon-d3d_shader_macro
-</span><span class="kw">pub unsafe trait </span>AsShaderMacros {
-    <span class="doccomment">/// Returns a pointer to a `std::mem::zeroed::&lt;D3D_SHADER_MACRO&gt;()`-terminated array of shader macros.
-    </span><span class="kw">fn </span>as_shader_macros(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="kw-2">*const </span>D3D_SHADER_MACRO, ErrorKind&gt;;
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ns-d3dcommon-d3d_shader_macro)\]</span>
+<span class="doccomment">/// D3D_SHADER_MACRO\[\] compatible types</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// ### ⚠️ Safety ⚠️</span>
+<span class="doccomment">/// By implementing this trait, you promise that any returned [D3D_SHADER_MACRO] pointers are either [null], or:</span>
+<span class="doccomment">/// *   Points to a valid array of [D3D_SHADER_MACRO]s.</span>
+<span class="doccomment">/// *   The array is terminated by a &quot;null&quot; (zeroed/default) [D3D_SHADER_MACRO].</span>
+<span class="doccomment">/// *   All array elements before the terminal [D3D_SHADER_MACRO] have valid `\0` terminated `Name` and `Definition` pointers.</span>
+<span class="doccomment">/// *   Said array lives for at least as long as `self` remains untouched / undropped.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// [D3D_SHADER_MACRO]: https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ns-d3dcommon-d3d_shader_macro</span>
+<span class="kw">pub</span> <span class="kw unsafe">unsafe</span> <span class="kw">trait</span> <span class="ident">AsShaderMacros</span> {
+    <span class="doccomment">/// Returns a pointer to a `std::mem::zeroed::&lt;D3D_SHADER_MACRO&gt;()`-terminated array of shader macros.</span>
+    <span class="kw">fn</span> <span class="ident">as_shader_macros</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="kw-2">*const</span> <span class="ident">D3D_SHADER_MACRO</span>, <span class="ident">ErrorKind</span><span class="op">&gt;</span>;
 }
 
-<span class="kw">unsafe impl </span>AsShaderMacros <span class="kw">for </span>() {
-    <span class="kw">fn </span>as_shader_macros(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="kw-2">*const </span>D3D_SHADER_MACRO, ErrorKind&gt; { <span class="prelude-val">Ok</span>(null()) }
+<span class="kw unsafe">unsafe</span> <span class="kw">impl</span> <span class="ident">AsShaderMacros</span> <span class="kw">for</span> () {
+    <span class="kw">fn</span> <span class="ident">as_shader_macros</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="kw-2">*const</span> <span class="ident">D3D_SHADER_MACRO</span>, <span class="ident">ErrorKind</span><span class="op">&gt;</span> { <span class="prelude-val">Ok</span>(<span class="ident">null</span>()) }
 }
 
-<span class="kw">unsafe impl </span>AsShaderMacros <span class="kw">for </span><span class="prelude-ty">Option</span>&lt;std::convert::Infallible&gt; {
-    <span class="kw">fn </span>as_shader_macros(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="kw-2">*const </span>D3D_SHADER_MACRO, ErrorKind&gt; { <span class="prelude-val">Ok</span>(null()) }
+<span class="kw unsafe">unsafe</span> <span class="kw">impl</span> <span class="ident">AsShaderMacros</span> <span class="kw">for</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">std::convert::Infallible</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">as_shader_macros</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="kw-2">*const</span> <span class="ident">D3D_SHADER_MACRO</span>, <span class="ident">ErrorKind</span><span class="op">&gt;</span> { <span class="prelude-val">Ok</span>(<span class="ident">null</span>()) }
 }
 
-<span class="comment">//#cpp2rust D3D_SHADER_MACRO = trait d3d::AsShaderMacros
-</span></code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (b44197abb 2022-09-05)" ></div></body></html>
+<span class="comment">//#cpp2rust D3D_SHADER_MACRO = trait d3d::AsShaderMacros</span>
+</code></pre></div>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0 (4b91a6ea7 2022-08-08)" ></div>
+</body></html>

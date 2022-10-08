@@ -1,4 +1,10 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3d9caps.h\flags\praster_caps.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>praster_caps.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../../normalize.css"><link rel="stylesheet" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../../dark.css" disabled><link rel="stylesheet" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3d9caps.h\flags\praster_caps.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>praster_caps.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div>
+        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
+                                <a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -117,124 +123,125 @@
 <span id="117">117</span>
 <span id="118">118</span>
 <span id="119">119</span>
-</pre><pre class="rust"><code><span class="kw">use </span>bytemuck::<span class="kw-2">*</span>;
-<span class="kw">use </span>winapi::shared::d3d9caps::<span class="kw-2">*</span>;
-<span class="kw">use </span>winapi::shared::minwindef::DWORD;
-<span class="comment">//use winapi::um::d3dcaps::*; // does not exist
+</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">bytemuck</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">winapi::shared::d3d9caps</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">winapi::shared::minwindef::DWORD</span>;
+<span class="comment">//use winapi::um::d3dcaps::*; // does not exist</span>
 
 
 
-</span><span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9caps/ns-d3d9caps-d3dcaps9)\]
-/// D3DPRASTERCAPS_*
-</span><span class="attribute">#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[derive(Pod, Zeroable)]
-#[repr(transparent)] </span><span class="kw">pub struct </span>PRasterCaps(DWORD);
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9caps/ns-d3d9caps-d3dcaps9)\]</span>
+<span class="doccomment">/// D3DPRASTERCAPS_*</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">PartialOrd</span>, <span class="ident">Ord</span>, <span class="ident">Hash</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Pod</span>, <span class="ident">Zeroable</span>)]</span>
+<span class="attribute">#[<span class="ident">repr</span>(<span class="ident">transparent</span>)]</span> <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">PRasterCaps</span>(<span class="ident">DWORD</span>);
 
-<span class="macro">flags! </span>{
-    PRasterCaps =&gt; DWORD;
-    <span class="prelude-val">None</span>, Anisotropy, ColorPerspective, Dither, DepthBias, FogRange, FogTable, FogVertex, MipMapLodBias,
-    MultisampleToggle, ScissorTest, SlopeScaleDepthBias, WBuffer, WFog, ZBufferLessHSR, ZFog, ZTest,
-    <span class="comment">// d3dcaps.h
-    </span>Rop2, Xor, Pat, SubPixel, SubPixelX, Stipple, AntiAliasSortDependent,
-    AntiAliasSortIndependent, AntiAliasEdges, ZBias, TranslucentSortIndependent,
+<span class="macro">flags!</span> {
+    <span class="ident">PRasterCaps</span> =&gt; <span class="ident">DWORD</span>;
+    <span class="prelude-val">None</span>, <span class="ident">Anisotropy</span>, <span class="ident">ColorPerspective</span>, <span class="ident">Dither</span>, <span class="ident">DepthBias</span>, <span class="ident">FogRange</span>, <span class="ident">FogTable</span>, <span class="ident">FogVertex</span>, <span class="ident">MipMapLodBias</span>,
+    <span class="ident">MultisampleToggle</span>, <span class="ident">ScissorTest</span>, <span class="ident">SlopeScaleDepthBias</span>, <span class="ident">WBuffer</span>, <span class="ident">WFog</span>, <span class="ident">ZBufferLessHSR</span>, <span class="ident">ZFog</span>, <span class="ident">ZTest</span>,
+    <span class="comment">// d3dcaps.h</span>
+    <span class="ident">Rop2</span>, <span class="ident">Xor</span>, <span class="ident">Pat</span>, <span class="ident">SubPixel</span>, <span class="ident">SubPixelX</span>, <span class="ident">Stipple</span>, <span class="ident">AntiAliasSortDependent</span>,
+    <span class="ident">AntiAliasSortIndependent</span>, <span class="ident">AntiAliasEdges</span>, <span class="ident">ZBias</span>, <span class="ident">TranslucentSortIndependent</span>,
 }
 
-<span class="attribute">#[allow(non_upper_case_globals)] </span><span class="kw">impl </span>PRasterCaps {
-    <span class="kw">pub const </span><span class="prelude-val">None                          </span>: PRasterCaps = PRasterCaps(<span class="number">0</span>);
-    <span class="kw">pub const </span>Anisotropy                    : PRasterCaps = PRasterCaps(D3DPRASTERCAPS_ANISOTROPY);
-    <span class="kw">pub const </span>ColorPerspective              : PRasterCaps = PRasterCaps(D3DPRASTERCAPS_COLORPERSPECTIVE);
-    <span class="kw">pub const </span>Dither                        : PRasterCaps = PRasterCaps(D3DPRASTERCAPS_DITHER);
-    <span class="kw">pub const </span>DepthBias                     : PRasterCaps = PRasterCaps(D3DPRASTERCAPS_DEPTHBIAS);
-    <span class="kw">pub const </span>FogRange                      : PRasterCaps = PRasterCaps(D3DPRASTERCAPS_FOGRANGE);
-    <span class="kw">pub const </span>FogTable                      : PRasterCaps = PRasterCaps(D3DPRASTERCAPS_FOGTABLE);
-    <span class="kw">pub const </span>FogVertex                     : PRasterCaps = PRasterCaps(D3DPRASTERCAPS_FOGVERTEX);
-    <span class="kw">pub const </span>MipMapLodBias                 : PRasterCaps = PRasterCaps(D3DPRASTERCAPS_MIPMAPLODBIAS);
-    <span class="kw">pub const </span>MultisampleToggle             : PRasterCaps = PRasterCaps(D3DPRASTERCAPS_MULTISAMPLE_TOGGLE);
-    <span class="kw">pub const </span>ScissorTest                   : PRasterCaps = PRasterCaps(D3DPRASTERCAPS_SCISSORTEST);
-    <span class="kw">pub const </span>SlopeScaleDepthBias           : PRasterCaps = PRasterCaps(D3DPRASTERCAPS_SLOPESCALEDEPTHBIAS);
-    <span class="kw">pub const </span>WBuffer                       : PRasterCaps = PRasterCaps(D3DPRASTERCAPS_WBUFFER);
-    <span class="kw">pub const </span>WFog                          : PRasterCaps = PRasterCaps(D3DPRASTERCAPS_WFOG);
-    <span class="kw">pub const </span>ZBufferLessHSR                : PRasterCaps = PRasterCaps(D3DPRASTERCAPS_ZBUFFERLESSHSR);
-    <span class="kw">pub const </span>ZFog                          : PRasterCaps = PRasterCaps(D3DPRASTERCAPS_ZFOG);
-    <span class="kw">pub const </span>ZTest                         : PRasterCaps = PRasterCaps(D3DPRASTERCAPS_ZTEST);
+<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">non_upper_case_globals</span>)]</span> <span class="kw">impl</span> <span class="ident">PRasterCaps</span> {
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="prelude-val">None</span>                          : <span class="ident">PRasterCaps</span> <span class="op">=</span> <span class="ident">PRasterCaps</span>(<span class="number">0</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Anisotropy</span>                    : <span class="ident">PRasterCaps</span> <span class="op">=</span> <span class="ident">PRasterCaps</span>(<span class="ident">D3DPRASTERCAPS_ANISOTROPY</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">ColorPerspective</span>              : <span class="ident">PRasterCaps</span> <span class="op">=</span> <span class="ident">PRasterCaps</span>(<span class="ident">D3DPRASTERCAPS_COLORPERSPECTIVE</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Dither</span>                        : <span class="ident">PRasterCaps</span> <span class="op">=</span> <span class="ident">PRasterCaps</span>(<span class="ident">D3DPRASTERCAPS_DITHER</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">DepthBias</span>                     : <span class="ident">PRasterCaps</span> <span class="op">=</span> <span class="ident">PRasterCaps</span>(<span class="ident">D3DPRASTERCAPS_DEPTHBIAS</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">FogRange</span>                      : <span class="ident">PRasterCaps</span> <span class="op">=</span> <span class="ident">PRasterCaps</span>(<span class="ident">D3DPRASTERCAPS_FOGRANGE</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">FogTable</span>                      : <span class="ident">PRasterCaps</span> <span class="op">=</span> <span class="ident">PRasterCaps</span>(<span class="ident">D3DPRASTERCAPS_FOGTABLE</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">FogVertex</span>                     : <span class="ident">PRasterCaps</span> <span class="op">=</span> <span class="ident">PRasterCaps</span>(<span class="ident">D3DPRASTERCAPS_FOGVERTEX</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">MipMapLodBias</span>                 : <span class="ident">PRasterCaps</span> <span class="op">=</span> <span class="ident">PRasterCaps</span>(<span class="ident">D3DPRASTERCAPS_MIPMAPLODBIAS</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">MultisampleToggle</span>             : <span class="ident">PRasterCaps</span> <span class="op">=</span> <span class="ident">PRasterCaps</span>(<span class="ident">D3DPRASTERCAPS_MULTISAMPLE_TOGGLE</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">ScissorTest</span>                   : <span class="ident">PRasterCaps</span> <span class="op">=</span> <span class="ident">PRasterCaps</span>(<span class="ident">D3DPRASTERCAPS_SCISSORTEST</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SlopeScaleDepthBias</span>           : <span class="ident">PRasterCaps</span> <span class="op">=</span> <span class="ident">PRasterCaps</span>(<span class="ident">D3DPRASTERCAPS_SLOPESCALEDEPTHBIAS</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">WBuffer</span>                       : <span class="ident">PRasterCaps</span> <span class="op">=</span> <span class="ident">PRasterCaps</span>(<span class="ident">D3DPRASTERCAPS_WBUFFER</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">WFog</span>                          : <span class="ident">PRasterCaps</span> <span class="op">=</span> <span class="ident">PRasterCaps</span>(<span class="ident">D3DPRASTERCAPS_WFOG</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">ZBufferLessHSR</span>                : <span class="ident">PRasterCaps</span> <span class="op">=</span> <span class="ident">PRasterCaps</span>(<span class="ident">D3DPRASTERCAPS_ZBUFFERLESSHSR</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">ZFog</span>                          : <span class="ident">PRasterCaps</span> <span class="op">=</span> <span class="ident">PRasterCaps</span>(<span class="ident">D3DPRASTERCAPS_ZFOG</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">ZTest</span>                         : <span class="ident">PRasterCaps</span> <span class="op">=</span> <span class="ident">PRasterCaps</span>(<span class="ident">D3DPRASTERCAPS_ZTEST</span>);
 
-    <span class="comment">// d3dcaps.h
+    <span class="comment">// d3dcaps.h</span>
 
-    </span><span class="kw">pub const </span>Rop2                          : PRasterCaps = PRasterCaps(D3DPRASTERCAPS_ROP2);
-    <span class="kw">pub const </span>Xor                           : PRasterCaps = PRasterCaps(D3DPRASTERCAPS_XOR);
-    <span class="kw">pub const </span>Pat                           : PRasterCaps = PRasterCaps(D3DPRASTERCAPS_PAT);
-    <span class="kw">pub const </span>SubPixel                      : PRasterCaps = PRasterCaps(D3DPRASTERCAPS_SUBPIXEL);
-    <span class="kw">pub const </span>SubPixelX                     : PRasterCaps = PRasterCaps(D3DPRASTERCAPS_SUBPIXELX);
-    <span class="kw">pub const </span>Stipple                       : PRasterCaps = PRasterCaps(D3DPRASTERCAPS_STIPPLE);
-    <span class="kw">pub const </span>AntiAliasSortDependent        : PRasterCaps = PRasterCaps(D3DPRASTERCAPS_ANTIALIASSORTDEPENDENT);
-    <span class="kw">pub const </span>AntiAliasSortIndependent      : PRasterCaps = PRasterCaps(D3DPRASTERCAPS_ANTIALIASSORTINDEPENDENT);
-    <span class="kw">pub const </span>AntiAliasEdges                : PRasterCaps = PRasterCaps(D3DPRASTERCAPS_ANTIALIASEDGES);
-    <span class="kw">pub const </span>ZBias                         : PRasterCaps = PRasterCaps(D3DPRASTERCAPS_ZBIAS);
-    <span class="kw">pub const </span>TranslucentSortIndependent    : PRasterCaps = PRasterCaps(D3DPRASTERCAPS_TRANSLUCENTSORTINDEPENDENT);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Rop2</span>                          : <span class="ident">PRasterCaps</span> <span class="op">=</span> <span class="ident">PRasterCaps</span>(<span class="ident">D3DPRASTERCAPS_ROP2</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Xor</span>                           : <span class="ident">PRasterCaps</span> <span class="op">=</span> <span class="ident">PRasterCaps</span>(<span class="ident">D3DPRASTERCAPS_XOR</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Pat</span>                           : <span class="ident">PRasterCaps</span> <span class="op">=</span> <span class="ident">PRasterCaps</span>(<span class="ident">D3DPRASTERCAPS_PAT</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SubPixel</span>                      : <span class="ident">PRasterCaps</span> <span class="op">=</span> <span class="ident">PRasterCaps</span>(<span class="ident">D3DPRASTERCAPS_SUBPIXEL</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SubPixelX</span>                     : <span class="ident">PRasterCaps</span> <span class="op">=</span> <span class="ident">PRasterCaps</span>(<span class="ident">D3DPRASTERCAPS_SUBPIXELX</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Stipple</span>                       : <span class="ident">PRasterCaps</span> <span class="op">=</span> <span class="ident">PRasterCaps</span>(<span class="ident">D3DPRASTERCAPS_STIPPLE</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">AntiAliasSortDependent</span>        : <span class="ident">PRasterCaps</span> <span class="op">=</span> <span class="ident">PRasterCaps</span>(<span class="ident">D3DPRASTERCAPS_ANTIALIASSORTDEPENDENT</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">AntiAliasSortIndependent</span>      : <span class="ident">PRasterCaps</span> <span class="op">=</span> <span class="ident">PRasterCaps</span>(<span class="ident">D3DPRASTERCAPS_ANTIALIASSORTINDEPENDENT</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">AntiAliasEdges</span>                : <span class="ident">PRasterCaps</span> <span class="op">=</span> <span class="ident">PRasterCaps</span>(<span class="ident">D3DPRASTERCAPS_ANTIALIASEDGES</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">ZBias</span>                         : <span class="ident">PRasterCaps</span> <span class="op">=</span> <span class="ident">PRasterCaps</span>(<span class="ident">D3DPRASTERCAPS_ZBIAS</span>);
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">TranslucentSortIndependent</span>    : <span class="ident">PRasterCaps</span> <span class="op">=</span> <span class="ident">PRasterCaps</span>(<span class="ident">D3DPRASTERCAPS_TRANSLUCENTSORTINDEPENDENT</span>);
 }
 
 
 
-<span class="comment">// um/d3dcaps.h - many of these aren&#39;t defined in d3d9caps.h, but some are still reported by the device
-// (notably D3DPRASTERCAPS_ZBIAS on my machine!)
-// redundantly defined constants are left commented out
+<span class="comment">// um/d3dcaps.h - many of these aren&#39;t defined in d3d9caps.h, but some are still reported by the device</span>
+<span class="comment">// (notably D3DPRASTERCAPS_ZBIAS on my machine!)</span>
+<span class="comment">// redundantly defined constants are left commented out</span>
 
-//const D3DPRASTERCAPS_DITHER                       : u32 = 0x00000001;
-</span><span class="kw">const </span>D3DPRASTERCAPS_ROP2                           : u32 = <span class="number">0x00000002</span>;
-<span class="kw">const </span>D3DPRASTERCAPS_XOR                            : u32 = <span class="number">0x00000004</span>;
-<span class="kw">const </span>D3DPRASTERCAPS_PAT                            : u32 = <span class="number">0x00000008</span>;
-<span class="comment">//const D3DPRASTERCAPS_ZTEST                        : u32 = 0x00000010;
-</span><span class="kw">const </span>D3DPRASTERCAPS_SUBPIXEL                       : u32 = <span class="number">0x00000020</span>;
-<span class="kw">const </span>D3DPRASTERCAPS_SUBPIXELX                      : u32 = <span class="number">0x00000040</span>;
-<span class="comment">//const D3DPRASTERCAPS_FOGVERTEX                    : u32 = 0x00000080;
-//const D3DPRASTERCAPS_FOGTABLE                     : u32 = 0x00000100;
-</span><span class="kw">const </span>D3DPRASTERCAPS_STIPPLE                        : u32 = <span class="number">0x00000200</span>;
-<span class="comment">//#if(DIRECT3D_VERSION &gt;= 0x0500)
-</span><span class="kw">const </span>D3DPRASTERCAPS_ANTIALIASSORTDEPENDENT         : u32 = <span class="number">0x00000400</span>;
-<span class="kw">const </span>D3DPRASTERCAPS_ANTIALIASSORTINDEPENDENT       : u32 = <span class="number">0x00000800</span>;
-<span class="kw">const </span>D3DPRASTERCAPS_ANTIALIASEDGES                 : u32 = <span class="number">0x00001000</span>;
-<span class="comment">//const D3DPRASTERCAPS_MIPMAPLODBIAS                : u32 = 0x00002000;
-</span><span class="kw">const </span>D3DPRASTERCAPS_ZBIAS                          : u32 = <span class="number">0x00004000</span>;
-<span class="comment">//const D3DPRASTERCAPS_ZBUFFERLESSHSR               : u32 = 0x00008000;
-//const D3DPRASTERCAPS_FOGRANGE                     : u32 = 0x00010000;
-//const D3DPRASTERCAPS_ANISOTROPY                   : u32 = 0x00020000;
-//#endif /* DIRECT3D_VERSION &gt;= 0x0500 */
-//#if(DIRECT3D_VERSION &gt;= 0x0600)
-//const D3DPRASTERCAPS_WBUFFER                      : u32 = 0x00040000;
-</span><span class="kw">const </span>D3DPRASTERCAPS_TRANSLUCENTSORTINDEPENDENT     : u32 = <span class="number">0x00080000</span>;
-<span class="comment">//const D3DPRASTERCAPS_WFOG                         : u32 = 0x00100000;
-//const D3DPRASTERCAPS_ZFOG                         : u32 = 0x00200000;
-//#endif /* DIRECT3D_VERSION &gt;= 0x0600 */
+<span class="comment">//const D3DPRASTERCAPS_DITHER                       : u32 = 0x00000001;</span>
+<span class="kw">const</span> <span class="ident">D3DPRASTERCAPS_ROP2</span>                           : <span class="ident">u32</span> <span class="op">=</span> <span class="number">0x00000002</span>;
+<span class="kw">const</span> <span class="ident">D3DPRASTERCAPS_XOR</span>                            : <span class="ident">u32</span> <span class="op">=</span> <span class="number">0x00000004</span>;
+<span class="kw">const</span> <span class="ident">D3DPRASTERCAPS_PAT</span>                            : <span class="ident">u32</span> <span class="op">=</span> <span class="number">0x00000008</span>;
+<span class="comment">//const D3DPRASTERCAPS_ZTEST                        : u32 = 0x00000010;</span>
+<span class="kw">const</span> <span class="ident">D3DPRASTERCAPS_SUBPIXEL</span>                       : <span class="ident">u32</span> <span class="op">=</span> <span class="number">0x00000020</span>;
+<span class="kw">const</span> <span class="ident">D3DPRASTERCAPS_SUBPIXELX</span>                      : <span class="ident">u32</span> <span class="op">=</span> <span class="number">0x00000040</span>;
+<span class="comment">//const D3DPRASTERCAPS_FOGVERTEX                    : u32 = 0x00000080;</span>
+<span class="comment">//const D3DPRASTERCAPS_FOGTABLE                     : u32 = 0x00000100;</span>
+<span class="kw">const</span> <span class="ident">D3DPRASTERCAPS_STIPPLE</span>                        : <span class="ident">u32</span> <span class="op">=</span> <span class="number">0x00000200</span>;
+<span class="comment">//#if(DIRECT3D_VERSION &gt;= 0x0500)</span>
+<span class="kw">const</span> <span class="ident">D3DPRASTERCAPS_ANTIALIASSORTDEPENDENT</span>         : <span class="ident">u32</span> <span class="op">=</span> <span class="number">0x00000400</span>;
+<span class="kw">const</span> <span class="ident">D3DPRASTERCAPS_ANTIALIASSORTINDEPENDENT</span>       : <span class="ident">u32</span> <span class="op">=</span> <span class="number">0x00000800</span>;
+<span class="kw">const</span> <span class="ident">D3DPRASTERCAPS_ANTIALIASEDGES</span>                 : <span class="ident">u32</span> <span class="op">=</span> <span class="number">0x00001000</span>;
+<span class="comment">//const D3DPRASTERCAPS_MIPMAPLODBIAS                : u32 = 0x00002000;</span>
+<span class="kw">const</span> <span class="ident">D3DPRASTERCAPS_ZBIAS</span>                          : <span class="ident">u32</span> <span class="op">=</span> <span class="number">0x00004000</span>;
+<span class="comment">//const D3DPRASTERCAPS_ZBUFFERLESSHSR               : u32 = 0x00008000;</span>
+<span class="comment">//const D3DPRASTERCAPS_FOGRANGE                     : u32 = 0x00010000;</span>
+<span class="comment">//const D3DPRASTERCAPS_ANISOTROPY                   : u32 = 0x00020000;</span>
+<span class="comment">//#endif /* DIRECT3D_VERSION &gt;= 0x0500 */</span>
+<span class="comment">//#if(DIRECT3D_VERSION &gt;= 0x0600)</span>
+<span class="comment">//const D3DPRASTERCAPS_WBUFFER                      : u32 = 0x00040000;</span>
+<span class="kw">const</span> <span class="ident">D3DPRASTERCAPS_TRANSLUCENTSORTINDEPENDENT</span>     : <span class="ident">u32</span> <span class="op">=</span> <span class="number">0x00080000</span>;
+<span class="comment">//const D3DPRASTERCAPS_WFOG                         : u32 = 0x00100000;</span>
+<span class="comment">//const D3DPRASTERCAPS_ZFOG                         : u32 = 0x00200000;</span>
+<span class="comment">//#endif /* DIRECT3D_VERSION &gt;= 0x0600 */</span>
 
 
 
-//#cpp2rust D3DPRASTERCAPS_ANISOTROPY                   = d3d::PRasterCaps::Anisotropy
-//#cpp2rust D3DPRASTERCAPS_COLORPERSPECTIVE             = d3d::PRasterCaps::ColorPerspective
-//#cpp2rust D3DPRASTERCAPS_DITHER                       = d3d::PRasterCaps::Dither
-//#cpp2rust D3DPRASTERCAPS_DEPTHBIAS                    = d3d::PRasterCaps::DepthBias
-//#cpp2rust D3DPRASTERCAPS_FOGRANGE                     = d3d::PRasterCaps::FogRange
-//#cpp2rust D3DPRASTERCAPS_FOGTABLE                     = d3d::PRasterCaps::FogTable
-//#cpp2rust D3DPRASTERCAPS_FOGVERTEX                    = d3d::PRasterCaps::FogVertex
-//#cpp2rust D3DPRASTERCAPS_MIPMAPLODBIAS                = d3d::PRasterCaps::MipMapLodBias
-//#cpp2rust D3DPRASTERCAPS_MULTISAMPLE_TOGGLE           = d3d::PRasterCaps::MultisampleToggle
-//#cpp2rust D3DPRASTERCAPS_SCISSORTEST                  = d3d::PRasterCaps::ScissorTest
-//#cpp2rust D3DPRASTERCAPS_SLOPESCALEDEPTHBIAS          = d3d::PRasterCaps::SlopeScaleDepthBias
-//#cpp2rust D3DPRASTERCAPS_WBUFFER                      = d3d::PRasterCaps::WBuffer
-//#cpp2rust D3DPRASTERCAPS_WFOG                         = d3d::PRasterCaps::WFog
-//#cpp2rust D3DPRASTERCAPS_ZBUFFERLESSHSR               = d3d::PRasterCaps::ZBufferLessHSR
-//#cpp2rust D3DPRASTERCAPS_ZFOG                         = d3d::PRasterCaps::ZFog
-//#cpp2rust D3DPRASTERCAPS_ZTEST                        = d3d::PRasterCaps::ZTest
+<span class="comment">//#cpp2rust D3DPRASTERCAPS_ANISOTROPY                   = d3d::PRasterCaps::Anisotropy</span>
+<span class="comment">//#cpp2rust D3DPRASTERCAPS_COLORPERSPECTIVE             = d3d::PRasterCaps::ColorPerspective</span>
+<span class="comment">//#cpp2rust D3DPRASTERCAPS_DITHER                       = d3d::PRasterCaps::Dither</span>
+<span class="comment">//#cpp2rust D3DPRASTERCAPS_DEPTHBIAS                    = d3d::PRasterCaps::DepthBias</span>
+<span class="comment">//#cpp2rust D3DPRASTERCAPS_FOGRANGE                     = d3d::PRasterCaps::FogRange</span>
+<span class="comment">//#cpp2rust D3DPRASTERCAPS_FOGTABLE                     = d3d::PRasterCaps::FogTable</span>
+<span class="comment">//#cpp2rust D3DPRASTERCAPS_FOGVERTEX                    = d3d::PRasterCaps::FogVertex</span>
+<span class="comment">//#cpp2rust D3DPRASTERCAPS_MIPMAPLODBIAS                = d3d::PRasterCaps::MipMapLodBias</span>
+<span class="comment">//#cpp2rust D3DPRASTERCAPS_MULTISAMPLE_TOGGLE           = d3d::PRasterCaps::MultisampleToggle</span>
+<span class="comment">//#cpp2rust D3DPRASTERCAPS_SCISSORTEST                  = d3d::PRasterCaps::ScissorTest</span>
+<span class="comment">//#cpp2rust D3DPRASTERCAPS_SLOPESCALEDEPTHBIAS          = d3d::PRasterCaps::SlopeScaleDepthBias</span>
+<span class="comment">//#cpp2rust D3DPRASTERCAPS_WBUFFER                      = d3d::PRasterCaps::WBuffer</span>
+<span class="comment">//#cpp2rust D3DPRASTERCAPS_WFOG                         = d3d::PRasterCaps::WFog</span>
+<span class="comment">//#cpp2rust D3DPRASTERCAPS_ZBUFFERLESSHSR               = d3d::PRasterCaps::ZBufferLessHSR</span>
+<span class="comment">//#cpp2rust D3DPRASTERCAPS_ZFOG                         = d3d::PRasterCaps::ZFog</span>
+<span class="comment">//#cpp2rust D3DPRASTERCAPS_ZTEST                        = d3d::PRasterCaps::ZTest</span>
 
-//#cpp2rust D3DPRASTERCAPS_ROP2                         = d3d::PRasterCaps::Rop2
-//#cpp2rust D3DPRASTERCAPS_XOR                          = d3d::PRasterCaps::Xor
-//#cpp2rust D3DPRASTERCAPS_PAT                          = d3d::PRasterCaps::Pat
-//#cpp2rust D3DPRASTERCAPS_SUBPIXEL                     = d3d::PRasterCaps::SubPixel
-//#cpp2rust D3DPRASTERCAPS_SUBPIXELX                    = d3d::PRasterCaps::SubPixelX
-//#cpp2rust D3DPRASTERCAPS_STIPPLE                      = d3d::PRasterCaps::Stipple
-//#cpp2rust D3DPRASTERCAPS_ANTIALIASSORTDEPENDENT       = d3d::PRasterCaps::AntiAliasSortDependent
-//#cpp2rust D3DPRASTERCAPS_ANTIALIASSORTINDEPENDENT     = d3d::PRasterCaps::AntiAliasSortIndependent
-//#cpp2rust D3DPRASTERCAPS_ANTIALIASEDGES               = d3d::PRasterCaps::AntiAliasEdges
-//#cpp2rust D3DPRASTERCAPS_ZBIAS                        = d3d::PRasterCaps::ZBias
-//#cpp2rust D3DPRASTERCAPS_TRANSLUCENTSORTINDEPENDENT   = d3d::PRasterCaps::TranslucentSortIndependent
-</span></code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (b44197abb 2022-09-05)" ></div></body></html>
+<span class="comment">//#cpp2rust D3DPRASTERCAPS_ROP2                         = d3d::PRasterCaps::Rop2</span>
+<span class="comment">//#cpp2rust D3DPRASTERCAPS_XOR                          = d3d::PRasterCaps::Xor</span>
+<span class="comment">//#cpp2rust D3DPRASTERCAPS_PAT                          = d3d::PRasterCaps::Pat</span>
+<span class="comment">//#cpp2rust D3DPRASTERCAPS_SUBPIXEL                     = d3d::PRasterCaps::SubPixel</span>
+<span class="comment">//#cpp2rust D3DPRASTERCAPS_SUBPIXELX                    = d3d::PRasterCaps::SubPixelX</span>
+<span class="comment">//#cpp2rust D3DPRASTERCAPS_STIPPLE                      = d3d::PRasterCaps::Stipple</span>
+<span class="comment">//#cpp2rust D3DPRASTERCAPS_ANTIALIASSORTDEPENDENT       = d3d::PRasterCaps::AntiAliasSortDependent</span>
+<span class="comment">//#cpp2rust D3DPRASTERCAPS_ANTIALIASSORTINDEPENDENT     = d3d::PRasterCaps::AntiAliasSortIndependent</span>
+<span class="comment">//#cpp2rust D3DPRASTERCAPS_ANTIALIASEDGES               = d3d::PRasterCaps::AntiAliasEdges</span>
+<span class="comment">//#cpp2rust D3DPRASTERCAPS_ZBIAS                        = d3d::PRasterCaps::ZBias</span>
+<span class="comment">//#cpp2rust D3DPRASTERCAPS_TRANSLUCENTSORTINDEPENDENT   = d3d::PRasterCaps::TranslucentSortIndependent</span>
+</code></pre></div>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0 (4b91a6ea7 2022-08-08)" ></div>
+</body></html>

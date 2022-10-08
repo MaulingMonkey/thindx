@@ -1,4 +1,10 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3dcommon.h\interfaces\include.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>include.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../../normalize.css"><link rel="stylesheet" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../../dark.css" disabled><link rel="stylesheet" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3dcommon.h\interfaces\include.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>include.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div>
+        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
+                                <a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -269,276 +275,277 @@
 <span id="269">269</span>
 <span id="270">270</span>
 <span id="271">271</span>
-</pre><pre class="rust"><code><span class="kw">use crate</span>::<span class="kw-2">*</span>;
+</pre><pre class="rust"><code><span class="kw">use</span> <span class="kw">crate</span>::<span class="kw-2">*</span>;
 
-<span class="kw">use </span>winapi::shared::minwindef::{LPCVOID, UINT};
-<span class="kw">use </span>winapi::shared::ntdef::{LPCSTR, HRESULT};
-<span class="kw">use </span>winapi::um::d3dcommon::{ID3DInclude, ID3DIncludeVtbl, D3D_INCLUDE_TYPE};
-<span class="kw">use </span>winapi::um::d3dcompiler::D3D_COMPILE_STANDARD_FILE_INCLUDE;
+<span class="kw">use</span> <span class="ident">winapi::shared::minwindef</span>::{<span class="ident">LPCVOID</span>, <span class="ident">UINT</span>};
+<span class="kw">use</span> <span class="ident">winapi::shared::ntdef</span>::{<span class="ident">LPCSTR</span>, <span class="ident">HRESULT</span>};
+<span class="kw">use</span> <span class="ident">winapi::um::d3dcommon</span>::{<span class="ident">ID3DInclude</span>, <span class="ident">ID3DIncludeVtbl</span>, <span class="ident">D3D_INCLUDE_TYPE</span>};
+<span class="kw">use</span> <span class="ident">winapi::um::d3dcompiler::D3D_COMPILE_STANDARD_FILE_INCLUDE</span>;
 
-<span class="kw">use </span>std::alloc::Layout;
-<span class="kw">use </span>std::convert::TryInto;
-<span class="kw">use </span>std::path::<span class="kw-2">*</span>;
-<span class="kw">use </span>std::ptr::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">std::alloc::Layout</span>;
+<span class="kw">use</span> <span class="ident">std::convert::TryInto</span>;
+<span class="kw">use</span> <span class="ident">std::path</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">std::ptr</span>::<span class="kw-2">*</span>;
 
 
 
-<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nn-d3dcommon-id3dinclude)\]
-/// ID3DInclude compatible types
-///
-/// ### ⚠️ Safety ⚠️
-/// By implementing this trait, you promise to return one of:
-/// *   [null_mut]\(\)
-/// *   [D3D_COMPILE_STANDARD_FILE_INCLUDE](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dcompile#parameters)
-/// *   A valid, well behaved [ID3D11Include](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nn-d3dcommon-id3dinclude)
-///     instance, that lives for at least as long as `self` remains untouched / undropped.
-</span><span class="kw">pub unsafe trait </span>AsInclude {
-    <span class="doccomment">/// Treat this as a raw winapi [ID3DInclude].
-    </span><span class="kw">fn </span>as_id3dinclude(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">*mut </span>ID3DInclude;
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nn-d3dcommon-id3dinclude)\]</span>
+<span class="doccomment">/// ID3DInclude compatible types</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// ### ⚠️ Safety ⚠️</span>
+<span class="doccomment">/// By implementing this trait, you promise to return one of:</span>
+<span class="doccomment">/// *   [null_mut]\(\)</span>
+<span class="doccomment">/// *   [D3D_COMPILE_STANDARD_FILE_INCLUDE](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dcompile#parameters)</span>
+<span class="doccomment">/// *   A valid, well behaved [ID3D11Include](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nn-d3dcommon-id3dinclude)</span>
+<span class="doccomment">///     instance, that lives for at least as long as `self` remains untouched / undropped.</span>
+<span class="kw">pub</span> <span class="kw unsafe">unsafe</span> <span class="kw">trait</span> <span class="ident">AsInclude</span> {
+    <span class="doccomment">/// Treat this as a raw winapi [ID3DInclude].</span>
+    <span class="kw">fn</span> <span class="ident">as_id3dinclude</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">*mut</span> <span class="ident">ID3DInclude</span>;
 }
 
-<span class="kw">unsafe impl </span>AsInclude <span class="kw">for </span>() {
-    <span class="kw">fn </span>as_id3dinclude(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">*mut </span>ID3DInclude { null_mut() }
+<span class="kw unsafe">unsafe</span> <span class="kw">impl</span> <span class="ident">AsInclude</span> <span class="kw">for</span> () {
+    <span class="kw">fn</span> <span class="ident">as_id3dinclude</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">*mut</span> <span class="ident">ID3DInclude</span> { <span class="ident">null_mut</span>() }
 }
 
-<span class="kw">unsafe impl </span>AsInclude <span class="kw">for </span><span class="prelude-ty">Option</span>&lt;std::convert::Infallible&gt; {
-    <span class="kw">fn </span>as_id3dinclude(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">*mut </span>ID3DInclude { null_mut() }
+<span class="kw unsafe">unsafe</span> <span class="kw">impl</span> <span class="ident">AsInclude</span> <span class="kw">for</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">std::convert::Infallible</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">as_id3dinclude</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">*mut</span> <span class="ident">ID3DInclude</span> { <span class="ident">null_mut</span>() }
 }
 
-<span class="kw">unsafe impl</span>&lt;AI: AsInclude&gt; AsInclude <span class="kw">for </span><span class="kw-2">&amp;</span>AI {
-    <span class="kw">fn </span>as_id3dinclude(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">*mut </span>ID3DInclude { (<span class="kw-2">**</span><span class="self">self</span>).as_id3dinclude() }
+<span class="kw unsafe">unsafe</span> <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">AI</span>: <span class="ident">AsInclude</span><span class="op">&gt;</span> <span class="ident">AsInclude</span> <span class="kw">for</span> <span class="kw-2">&amp;</span><span class="ident">AI</span> {
+    <span class="kw">fn</span> <span class="ident">as_id3dinclude</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">*mut</span> <span class="ident">ID3DInclude</span> { (<span class="kw-2">*</span><span class="kw-2">*</span><span class="self">self</span>).<span class="ident">as_id3dinclude</span>() }
 }
 
-<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dcompile#parameters)\]
-/// D3D_COMPILE_STANDARD_FILE_INCLUDE
-///
-/// This default include handler includes files that are relative to the current directory and files that are relative to
-/// the directory of the initial source file. When you use [StandardFileInclude], you must specify the source file name
-/// in the `source_name` parameter; the compiler will derive the initial relative directory from `source_name`.
-</span><span class="kw">pub struct </span>StandardFileInclude;
-<span class="kw">unsafe impl </span>AsInclude <span class="kw">for </span>StandardFileInclude {
-    <span class="kw">fn </span>as_id3dinclude(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">*mut </span>ID3DInclude { D3D_COMPILE_STANDARD_FILE_INCLUDE }
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dcompile#parameters)\]</span>
+<span class="doccomment">/// D3D_COMPILE_STANDARD_FILE_INCLUDE</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// This default include handler includes files that are relative to the current directory and files that are relative to</span>
+<span class="doccomment">/// the directory of the initial source file. When you use [StandardFileInclude], you must specify the source file name</span>
+<span class="doccomment">/// in the `source_name` parameter; the compiler will derive the initial relative directory from `source_name`.</span>
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">StandardFileInclude</span>;
+<span class="kw unsafe">unsafe</span> <span class="kw">impl</span> <span class="ident">AsInclude</span> <span class="kw">for</span> <span class="ident">StandardFileInclude</span> {
+    <span class="kw">fn</span> <span class="ident">as_id3dinclude</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">*mut</span> <span class="ident">ID3DInclude</span> { <span class="ident">D3D_COMPILE_STANDARD_FILE_INCLUDE</span> }
 }
 
-<span class="comment">//#cpp2rust ID3DInclude                         = trait d3d::AsInclude
-//#cpp2rust D3D_COMPILE_STANDARD_FILE_INCLUDE   = d3d::StandardFileInclude
+<span class="comment">//#cpp2rust ID3DInclude                         = trait d3d::AsInclude</span>
+<span class="comment">//#cpp2rust D3D_COMPILE_STANDARD_FILE_INCLUDE   = d3d::StandardFileInclude</span>
 
 
 
 
-</span><span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nn-d3dcommon-id3dinclude)\]
-/// ID3DInclude
-</span><span class="attribute">#[repr(C)] </span><span class="kw">pub struct </span>Include&lt;I&gt; {
-    vtable: <span class="kw-2">*const </span>ID3DIncludeVtbl,
-    imp:    I,
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nn-d3dcommon-id3dinclude)\]</span>
+<span class="doccomment">/// ID3DInclude</span>
+<span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span> <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Include</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span> {
+    <span class="ident">vtable</span>: <span class="kw-2">*const</span> <span class="ident">ID3DIncludeVtbl</span>,
+    <span class="ident">imp</span>:    <span class="ident">I</span>,
 }
 
-<span class="kw">unsafe impl</span>&lt;I&gt; AsInclude <span class="kw">for </span>Include&lt;I&gt; {
-    <span class="kw">fn </span>as_id3dinclude(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">*mut </span>ID3DInclude { <span class="self">self </span><span class="kw">as </span><span class="kw-2">*const </span><span class="self">Self </span><span class="kw">as </span><span class="kw-2">*mut </span><span class="self">Self </span><span class="kw">as </span><span class="kw-2">*mut </span>ID3DInclude }
+<span class="kw unsafe">unsafe</span> <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span> <span class="ident">AsInclude</span> <span class="kw">for</span> <span class="ident">Include</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">as_id3dinclude</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">*mut</span> <span class="ident">ID3DInclude</span> { <span class="self">self</span> <span class="kw">as</span> <span class="kw-2">*const</span> <span class="self">Self</span> <span class="kw">as</span> <span class="kw-2">*mut</span> <span class="self">Self</span> <span class="kw">as</span> <span class="kw-2">*mut</span> <span class="ident">ID3DInclude</span> }
 }
 
-<span class="kw">impl </span>Include&lt;()&gt; {
-    <span class="doccomment">/// Wrap [Fn]\([d3d::IncludeType], file_name: [abistr::CStrNonNull], parent: Option&lt;(&amp;M, &amp;\[u8\])&gt;\).
-    ///
-    /// ### Examples
-    /// ```rust
-    /// # use thindx::*;
-    /// # use std::path::*;
-    /// # return; // doc tests have wrong dir
-    /// let d3dc = d3d::Compiler::load_system(47).unwrap();
-    ///
-    /// let include = d3d::Include::from_blob_meta_fn(|include_type, file_name, parent|{
-    ///     let (quote, unquote) = match include_type {
-    ///         d3d::Include::Local     =&gt; (&#39;&quot;&#39;, &#39;&quot;&#39;),
-    ///         d3d::Include::System    =&gt; (&#39;&lt;&#39;, &#39;&gt;&#39;),
-    ///         _                       =&gt; (&#39;?&#39;, &#39;?&#39;),
-    ///     };
-    ///
-    ///     let file_name   = file_name.to_str().map_err(|_| E::FAIL)?;
-    ///     let path        = Path::new(r&quot;thindx\test\data&quot;).join(file_name);
-    ///
-    ///     println!(&quot;resolving `#include {quote}{file_name}{unquote}` to {path:?}&quot;);
-    ///
-    ///     let data        = std::fs::read(&amp;path).map_err(|_| E::FAIL)?;
-    ///
-    ///     println!(&quot;  read {} bytes&quot;, data.len());
-    ///
-    ///     if let Some(parent_path) = parent {
-    ///         println!(&quot;  into {:?}&quot;, parent_path);
-    ///     } else {
-    ///         println!(&quot;  into root file&quot;);
-    ///     }
-    ///
-    ///     Ok((data, path))
-    /// });
-    ///
-    /// let compiled = d3dc.compile_from_file(
-    ///     r&quot;thindx\test\data\include-chain-1.hlsl&quot;, None, &amp;include,
-    ///     &quot;ps_main&quot;, &quot;ps_4_0&quot;, d3d::Compile::Debug, d3d::CompileEffect::None
-    /// );
-    /// ```
-    /// *   [_examples::d3dcompiler_02_compile]
-    </span><span class="kw">pub fn </span>from_blob_meta_fn&lt;M, F: Fn(d3d::IncludeType, abistr::CStrNonNull, <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>M&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;(Vec&lt;u8&gt;, M), ErrorKind&gt;&gt;(f: F) -&gt; Include&lt;F&gt; {
-        <span class="comment">// TODO: consider meta-seeded version of this fn to get rid of the Option spam.
+<span class="kw">impl</span> <span class="ident">Include</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    <span class="doccomment">/// Wrap [Fn]\([d3d::IncludeType], file_name: [abistr::CStrNonNull], parent: Option&lt;(&amp;M, &amp;\[u8\])&gt;\).</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Examples</span>
+    <span class="doccomment">/// ```rust</span>
+    <span class="doccomment">/// # use thindx::*;</span>
+    <span class="doccomment">/// # use std::path::*;</span>
+    <span class="doccomment">/// # return; // doc tests have wrong dir</span>
+    <span class="doccomment">/// let d3dc = d3d::Compiler::load_system(47).unwrap();</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// let include = d3d::Include::from_blob_meta_fn(|include_type, file_name, parent|{</span>
+    <span class="doccomment">///     let (quote, unquote) = match include_type {</span>
+    <span class="doccomment">///         d3d::Include::Local     =&gt; (&#39;&quot;&#39;, &#39;&quot;&#39;),</span>
+    <span class="doccomment">///         d3d::Include::System    =&gt; (&#39;&lt;&#39;, &#39;&gt;&#39;),</span>
+    <span class="doccomment">///         _                       =&gt; (&#39;?&#39;, &#39;?&#39;),</span>
+    <span class="doccomment">///     };</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">///     let file_name   = file_name.to_str().map_err(|_| E::FAIL)?;</span>
+    <span class="doccomment">///     let path        = Path::new(r&quot;thindx\test\data&quot;).join(file_name);</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">///     println!(&quot;resolving `#include {quote}{file_name}{unquote}` to {path:?}&quot;);</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">///     let data        = std::fs::read(&amp;path).map_err(|_| E::FAIL)?;</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">///     println!(&quot;  read {} bytes&quot;, data.len());</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">///     if let Some(parent_path) = parent {</span>
+    <span class="doccomment">///         println!(&quot;  into {:?}&quot;, parent_path);</span>
+    <span class="doccomment">///     } else {</span>
+    <span class="doccomment">///         println!(&quot;  into root file&quot;);</span>
+    <span class="doccomment">///     }</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">///     Ok((data, path))</span>
+    <span class="doccomment">/// });</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// let compiled = d3dc.compile_from_file(</span>
+    <span class="doccomment">///     r&quot;thindx\test\data\include-chain-1.hlsl&quot;, None, &amp;include,</span>
+    <span class="doccomment">///     &quot;ps_main&quot;, &quot;ps_4_0&quot;, d3d::Compile::Debug, d3d::CompileEffect::None</span>
+    <span class="doccomment">/// );</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">/// *   [_examples::d3dcompiler_02_compile]</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_blob_meta_fn</span><span class="op">&lt;</span><span class="ident">M</span>, <span class="ident">F</span>: <span class="ident">Fn</span>(<span class="ident">d3d::IncludeType</span>, <span class="ident">abistr::CStrNonNull</span>, <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">M</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(<span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>, <span class="ident">M</span>), <span class="ident">ErrorKind</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="ident">f</span>: <span class="ident">F</span>) -&gt; <span class="ident">Include</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span> {
+        <span class="comment">// TODO: consider meta-seeded version of this fn to get rid of the Option spam.</span>
 
-        </span><span class="kw">let </span>vtable : <span class="kw-2">&amp;</span><span class="lifetime">&#39;static </span>ID3DIncludeVtbl = <span class="kw-2">&amp;</span>ID3DIncludeVtbl {
-            Open:   open::&lt;M, F&gt;,
-            Close:  close::&lt;M, F&gt;,
+        <span class="kw">let</span> <span class="ident">vtable</span> : <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">ID3DIncludeVtbl</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">ID3DIncludeVtbl</span> {
+            <span class="ident">Open</span>:   <span class="ident">open</span>::<span class="op">&lt;</span><span class="ident">M</span>, <span class="ident">F</span><span class="op">&gt;</span>,
+            <span class="ident">Close</span>:  <span class="ident">close</span>::<span class="op">&lt;</span><span class="ident">M</span>, <span class="ident">F</span><span class="op">&gt;</span>,
         };
 
-        <span class="kw">return </span>Include {
-            vtable: vtable,
-            imp:    f,
+        <span class="kw">return</span> <span class="ident">Include</span> {
+            <span class="ident">vtable</span>: <span class="ident">vtable</span>,
+            <span class="ident">imp</span>:    <span class="ident">f</span>,
         };
 
-        <span class="doccomment">/// ### ⚠️ Safety ⚠️
-        /// *   All pointers should be valid
-        /// *   No pointers should alias each other
-        /// *   `this` must point at a `Self`
-        </span><span class="kw">unsafe extern </span><span class="string">&quot;system&quot; </span><span class="kw">fn </span>open&lt;M, F: Fn(d3d::IncludeType, abistr::CStrNonNull, <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>M&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;(Vec&lt;u8&gt;, M), ErrorKind&gt;&gt;(this: <span class="kw-2">*mut </span>ID3DInclude, include_type: D3D_INCLUDE_TYPE, file_name: LPCSTR, parent_data: LPCVOID, data: <span class="kw-2">*mut </span>LPCVOID, bytes: <span class="kw-2">*mut </span>UINT) -&gt; HRESULT {
-            <span class="kw">if </span>this         .is_null() { <span class="kw">return </span>E::INVALIDARG.into() }
-            <span class="kw">if </span>file_name    .is_null() { <span class="kw">return </span>E::INVALIDARG.into() }
-            <span class="kw">if </span>data         .is_null() { <span class="kw">return </span>E::INVALIDARG.into() }
-            <span class="kw">if </span>bytes        .is_null() { <span class="kw">return </span>E::INVALIDARG.into() }
+        <span class="doccomment">/// ### ⚠️ Safety ⚠️</span>
+        <span class="doccomment">/// *   All pointers should be valid</span>
+        <span class="doccomment">/// *   No pointers should alias each other</span>
+        <span class="doccomment">/// *   `this` must point at a `Self`</span>
+        <span class="kw unsafe">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;system&quot;</span> <span class="kw">fn</span> <span class="ident">open</span><span class="op">&lt;</span><span class="ident">M</span>, <span class="ident">F</span>: <span class="ident">Fn</span>(<span class="ident">d3d::IncludeType</span>, <span class="ident">abistr::CStrNonNull</span>, <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">M</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(<span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>, <span class="ident">M</span>), <span class="ident">ErrorKind</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="ident">this</span>: <span class="kw-2">*mut</span> <span class="ident">ID3DInclude</span>, <span class="ident">include_type</span>: <span class="ident">D3D_INCLUDE_TYPE</span>, <span class="ident">file_name</span>: <span class="ident">LPCSTR</span>, <span class="ident">parent_data</span>: <span class="ident">LPCVOID</span>, <span class="ident">data</span>: <span class="kw-2">*mut</span> <span class="ident">LPCVOID</span>, <span class="ident">bytes</span>: <span class="kw-2">*mut</span> <span class="ident">UINT</span>) -&gt; <span class="ident">HRESULT</span> {
+            <span class="kw">if</span> <span class="ident">this</span>         .<span class="ident">is_null</span>() { <span class="kw">return</span> <span class="ident">E::INVALIDARG</span>.<span class="ident">into</span>() }
+            <span class="kw">if</span> <span class="ident">file_name</span>    .<span class="ident">is_null</span>() { <span class="kw">return</span> <span class="ident">E::INVALIDARG</span>.<span class="ident">into</span>() }
+            <span class="kw">if</span> <span class="ident">data</span>         .<span class="ident">is_null</span>() { <span class="kw">return</span> <span class="ident">E::INVALIDARG</span>.<span class="ident">into</span>() }
+            <span class="kw">if</span> <span class="ident">bytes</span>        .<span class="ident">is_null</span>() { <span class="kw">return</span> <span class="ident">E::INVALIDARG</span>.<span class="ident">into</span>() }
 
-            <span class="kw">let </span>this            = <span class="kw">unsafe </span>{ <span class="kw-2">&amp;*</span>(this <span class="kw">as </span><span class="kw-2">*const </span>Include&lt;F&gt;) };
-            <span class="kw">let </span>include_type    = d3d::IncludeType::from_unchecked(include_type);
-            <span class="kw">let </span>file_name       = <span class="kw">unsafe </span>{ abistr::CStrNonNull::from_ptr_unchecked_unbounded(file_name) };
+            <span class="kw">let</span> <span class="ident">this</span>            <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="kw-2">&amp;</span><span class="kw-2">*</span>(<span class="ident">this</span> <span class="kw">as</span> <span class="kw-2">*const</span> <span class="ident">Include</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>) };
+            <span class="kw">let</span> <span class="ident">include_type</span>    <span class="op">=</span> <span class="ident">d3d::IncludeType::from_unchecked</span>(<span class="ident">include_type</span>);
+            <span class="kw">let</span> <span class="ident">file_name</span>       <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="ident">abistr::CStrNonNull::from_ptr_unchecked_unbounded</span>(<span class="ident">file_name</span>) };
 
-            <span class="kw">let </span>parent = <span class="kw">if </span>parent_data.is_null() {
-                <span class="prelude-val">None
-            </span>} <span class="kw">else </span>{
-                <span class="kw">let </span>parent_thb = <span class="kw">unsafe </span>{ <span class="kw-2">&amp;*</span>ThinMetaBlob::&lt;M&gt;::from_data(parent_data <span class="kw">as </span><span class="kw-2">*mut </span>u8) };
-                <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span>parent_thb.meta)
+            <span class="kw">let</span> <span class="ident">parent</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">parent_data</span>.<span class="ident">is_null</span>() {
+                <span class="prelude-val">None</span>
+            } <span class="kw">else</span> {
+                <span class="kw">let</span> <span class="ident">parent_thb</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="ident">ThinMetaBlob</span>::<span class="op">&lt;</span><span class="ident">M</span><span class="op">&gt;</span><span class="ident">::from_data</span>(<span class="ident">parent_data</span> <span class="kw">as</span> <span class="kw-2">*mut</span> <span class="ident">u8</span>) };
+                <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="ident">parent_thb</span>.<span class="ident">meta</span>)
             };
 
-            <span class="kw">let </span>o_data  = <span class="kw">unsafe </span>{ <span class="kw-2">&amp;mut *</span>data };
-            <span class="kw">let </span>o_bytes = <span class="kw">unsafe </span>{ <span class="kw-2">&amp;mut *</span>bytes };
-            <span class="kw-2">*</span>o_data     = null();
-            <span class="kw-2">*</span>o_bytes    = <span class="number">0</span>;
+            <span class="kw">let</span> <span class="ident">o_data</span>  <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="kw-2">&amp;mut</span> <span class="kw-2">*</span><span class="ident">data</span> };
+            <span class="kw">let</span> <span class="ident">o_bytes</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="kw-2">&amp;mut</span> <span class="kw-2">*</span><span class="ident">bytes</span> };
+            <span class="kw-2">*</span><span class="ident">o_data</span>     <span class="op">=</span> <span class="ident">null</span>();
+            <span class="kw-2">*</span><span class="ident">o_bytes</span>    <span class="op">=</span> <span class="number">0</span>;
 
-            <span class="kw">match </span>(this.imp)(include_type, file_name, parent) {
-                <span class="prelude-val">Ok</span>((data, meta)) =&gt; {
-                    <span class="kw">let </span>len32 : UINT = <span class="kw">match </span>data.len().try_into() {
-                        <span class="prelude-val">Ok</span>(n)   =&gt; n,
-                        <span class="prelude-val">Err</span>(<span class="kw">_</span>)  =&gt; <span class="kw">return </span>THINERR::SLICE_TOO_LARGE.into(),
+            <span class="kw">match</span> (<span class="ident">this</span>.<span class="ident">imp</span>)(<span class="ident">include_type</span>, <span class="ident">file_name</span>, <span class="ident">parent</span>) {
+                <span class="prelude-val">Ok</span>((<span class="ident">data</span>, <span class="ident">meta</span>)) =&gt; {
+                    <span class="kw">let</span> <span class="ident">len32</span> : <span class="ident">UINT</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">data</span>.<span class="ident">len</span>().<span class="ident">try_into</span>() {
+                        <span class="prelude-val">Ok</span>(<span class="ident">n</span>)   =&gt; <span class="ident">n</span>,
+                        <span class="prelude-val">Err</span>(<span class="kw">_</span>)  =&gt; <span class="kw">return</span> <span class="ident">THINERR::SLICE_TOO_LARGE</span>.<span class="ident">into</span>(),
                     };
 
-                    <span class="kw">let </span>tmb = <span class="kw">match </span>ThinMetaBlob::&lt;M&gt;::alloc(meta, <span class="kw-2">&amp;</span>data[..]) {
-                        <span class="prelude-val">Ok</span>(tmb) =&gt; tmb.as_ptr(),
-                        <span class="prelude-val">Err</span>(<span class="kw">_</span>)  =&gt; <span class="kw">return </span>THINERR::SLICE_TOO_LARGE.into(),
+                    <span class="kw">let</span> <span class="ident">tmb</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">ThinMetaBlob</span>::<span class="op">&lt;</span><span class="ident">M</span><span class="op">&gt;</span><span class="ident">::alloc</span>(<span class="ident">meta</span>, <span class="kw-2">&amp;</span><span class="ident">data</span>[..]) {
+                        <span class="prelude-val">Ok</span>(<span class="ident">tmb</span>) =&gt; <span class="ident">tmb</span>.<span class="ident">as_ptr</span>(),
+                        <span class="prelude-val">Err</span>(<span class="kw">_</span>)  =&gt; <span class="kw">return</span> <span class="ident">THINERR::SLICE_TOO_LARGE</span>.<span class="ident">into</span>(),
                     };
 
-                    <span class="kw-2">*</span>o_data     = <span class="kw">unsafe </span>{ ThinMetaBlob::&lt;M&gt;::to_data(tmb) }.cast();
-                    <span class="kw-2">*</span>o_bytes    = len32;
-                    <span class="kw">return </span>S::OK.into();
+                    <span class="kw-2">*</span><span class="ident">o_data</span>     <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="ident">ThinMetaBlob</span>::<span class="op">&lt;</span><span class="ident">M</span><span class="op">&gt;</span><span class="ident">::to_data</span>(<span class="ident">tmb</span>) }.<span class="ident">cast</span>();
+                    <span class="kw-2">*</span><span class="ident">o_bytes</span>    <span class="op">=</span> <span class="ident">len32</span>;
+                    <span class="kw">return</span> <span class="ident">S::OK</span>.<span class="ident">into</span>();
                 },
-                <span class="prelude-val">Err</span>(kind) =&gt; kind,
-            }.into()
+                <span class="prelude-val">Err</span>(<span class="ident">kind</span>) =&gt; <span class="ident">kind</span>,
+            }.<span class="ident">into</span>()
         }
 
-        <span class="doccomment">/// ### ⚠️ Safety ⚠️
-        /// *   All pointers should be valid
-        /// *   `this` must point at a `Self`
-        /// *   `data` must match the output of a previous call to `open` that has not yet been `close`d
-        </span><span class="kw">unsafe extern </span><span class="string">&quot;system&quot; </span><span class="kw">fn </span>close&lt;M, F: Fn(d3d::IncludeType, abistr::CStrNonNull, <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>M&gt;) -&gt; <span class="prelude-ty">Result</span>&lt;(Vec&lt;u8&gt;, M), ErrorKind&gt;&gt;(this: <span class="kw-2">*mut </span>ID3DInclude, data: LPCVOID) -&gt; HRESULT {
-            <span class="kw">if </span>this         .is_null() { <span class="kw">return </span>E::INVALIDARG.into() }
-            <span class="kw">if </span>data         .is_null() { <span class="kw">return </span>E::INVALIDARG.into() }
+        <span class="doccomment">/// ### ⚠️ Safety ⚠️</span>
+        <span class="doccomment">/// *   All pointers should be valid</span>
+        <span class="doccomment">/// *   `this` must point at a `Self`</span>
+        <span class="doccomment">/// *   `data` must match the output of a previous call to `open` that has not yet been `close`d</span>
+        <span class="kw unsafe">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;system&quot;</span> <span class="kw">fn</span> <span class="ident">close</span><span class="op">&lt;</span><span class="ident">M</span>, <span class="ident">F</span>: <span class="ident">Fn</span>(<span class="ident">d3d::IncludeType</span>, <span class="ident">abistr::CStrNonNull</span>, <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">M</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(<span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>, <span class="ident">M</span>), <span class="ident">ErrorKind</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="ident">this</span>: <span class="kw-2">*mut</span> <span class="ident">ID3DInclude</span>, <span class="ident">data</span>: <span class="ident">LPCVOID</span>) -&gt; <span class="ident">HRESULT</span> {
+            <span class="kw">if</span> <span class="ident">this</span>         .<span class="ident">is_null</span>() { <span class="kw">return</span> <span class="ident">E::INVALIDARG</span>.<span class="ident">into</span>() }
+            <span class="kw">if</span> <span class="ident">data</span>         .<span class="ident">is_null</span>() { <span class="kw">return</span> <span class="ident">E::INVALIDARG</span>.<span class="ident">into</span>() }
 
-            <span class="comment">// this is unused
-            </span><span class="kw">let </span>data        = data <span class="kw">as </span><span class="kw-2">*mut </span>u8;
-            <span class="kw">let </span>tmb         = <span class="kw">unsafe </span>{ ThinMetaBlob::&lt;M&gt;::from_data(data) };
+            <span class="comment">// this is unused</span>
+            <span class="kw">let</span> <span class="ident">data</span>        <span class="op">=</span> <span class="ident">data</span> <span class="kw">as</span> <span class="kw-2">*mut</span> <span class="ident">u8</span>;
+            <span class="kw">let</span> <span class="ident">tmb</span>         <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="ident">ThinMetaBlob</span>::<span class="op">&lt;</span><span class="ident">M</span><span class="op">&gt;</span><span class="ident">::from_data</span>(<span class="ident">data</span>) };
 
-            <span class="kw">unsafe </span>{ ThinMetaBlob::&lt;M&gt;::free(tmb) };
+            <span class="kw unsafe">unsafe</span> { <span class="ident">ThinMetaBlob</span>::<span class="op">&lt;</span><span class="ident">M</span><span class="op">&gt;</span><span class="ident">::free</span>(<span class="ident">tmb</span>) };
 
-            S::OK.into()
+            <span class="ident">S::OK</span>.<span class="ident">into</span>()
         }
     }
 
-    <span class="doccomment">/// Wrap [Fn]\(dir: &amp;[Path], [d3d::IncludeType], include: [abistr::CStrNonNull]\) -&gt; [PathBuf].
-    ///
-    /// ### Examples
-    /// ```rust
-    /// # use thindx::*;
-    /// # return; // doc tests have wrong dir
-    /// let d3dc = d3d::Compiler::load_system(47).unwrap();
-    ///
-    /// let include = d3d::Include::from_path_fn(
-    ///     r&quot;thindx\test\data&quot;,
-    ///     |dir, _t, file| Ok(dir.join(file.to_str().map_err(|_| D3D11::ERROR_FILE_NOT_FOUND)?))
-    /// );
-    ///
-    /// let compiled = d3dc.compile_from_file(
-    ///     r&quot;thindx\test\data\include-chain-1.hlsl&quot;, None, &amp;include,
-    ///     &quot;ps_main&quot;, &quot;ps_4_0&quot;, d3d::Compile::Debug, d3d::CompileEffect::None
-    /// );
-    /// ```
-    /// *   [_examples::d3dcompiler_02_compile]
-    </span><span class="kw">pub fn </span>from_path_fn&lt;<span class="lifetime">&#39;a</span>&gt;(dir: <span class="kw">impl </span>AsRef&lt;Path&gt; + <span class="lifetime">&#39;a</span>, f: <span class="kw">impl </span><span class="lifetime">&#39;a </span>+ Fn(<span class="kw-2">&amp;</span>Path, d3d::IncludeType, abistr::CStrNonNull) -&gt; <span class="prelude-ty">Result</span>&lt;PathBuf, ErrorKind&gt;) -&gt; <span class="kw">impl </span>AsInclude + <span class="lifetime">&#39;a </span>{
-        <span class="self">Self</span>::from_blob_meta_fn(<span class="kw">move </span>|include_type, file_name: abistr::CStrNonNull, parent: <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>PathBuf&gt;| {
-            <span class="kw">let </span>dir = <span class="kw">match </span>parent {
-                <span class="prelude-val">Some</span>(parent_dir)    =&gt; <span class="kw-2">&amp;**</span>parent_dir,
-                <span class="prelude-val">None                </span>=&gt; dir.as_ref(),
+    <span class="doccomment">/// Wrap [Fn]\(dir: &amp;[Path], [d3d::IncludeType], include: [abistr::CStrNonNull]\) -&gt; [PathBuf].</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Examples</span>
+    <span class="doccomment">/// ```rust</span>
+    <span class="doccomment">/// # use thindx::*;</span>
+    <span class="doccomment">/// # return; // doc tests have wrong dir</span>
+    <span class="doccomment">/// let d3dc = d3d::Compiler::load_system(47).unwrap();</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// let include = d3d::Include::from_path_fn(</span>
+    <span class="doccomment">///     r&quot;thindx\test\data&quot;,</span>
+    <span class="doccomment">///     |dir, _t, file| Ok(dir.join(file.to_str().map_err(|_| D3D11::ERROR_FILE_NOT_FOUND)?))</span>
+    <span class="doccomment">/// );</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// let compiled = d3dc.compile_from_file(</span>
+    <span class="doccomment">///     r&quot;thindx\test\data\include-chain-1.hlsl&quot;, None, &amp;include,</span>
+    <span class="doccomment">///     &quot;ps_main&quot;, &quot;ps_4_0&quot;, d3d::Compile::Debug, d3d::CompileEffect::None</span>
+    <span class="doccomment">/// );</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">/// *   [_examples::d3dcompiler_02_compile]</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_path_fn</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="ident">dir</span>: <span class="kw">impl</span> <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Path</span><span class="op">&gt;</span> <span class="op">+</span> <span class="lifetime">&#39;a</span>, <span class="ident">f</span>: <span class="kw">impl</span> <span class="lifetime">&#39;a</span> <span class="op">+</span> <span class="ident">Fn</span>(<span class="kw-2">&amp;</span><span class="ident">Path</span>, <span class="ident">d3d::IncludeType</span>, <span class="ident">abistr::CStrNonNull</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">PathBuf</span>, <span class="ident">ErrorKind</span><span class="op">&gt;</span>) -&gt; <span class="kw">impl</span> <span class="ident">AsInclude</span> <span class="op">+</span> <span class="lifetime">&#39;a</span> {
+        <span class="ident"><span class="self">Self</span>::from_blob_meta_fn</span>(<span class="kw">move</span> <span class="op">|</span><span class="ident">include_type</span>, <span class="ident">file_name</span>: <span class="ident">abistr::CStrNonNull</span>, <span class="ident">parent</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">PathBuf</span><span class="op">&gt;</span><span class="op">|</span> {
+            <span class="kw">let</span> <span class="ident">dir</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">parent</span> {
+                <span class="prelude-val">Some</span>(<span class="ident">parent_dir</span>)    =&gt; <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="kw-2">*</span><span class="ident">parent_dir</span>,
+                <span class="prelude-val">None</span>                =&gt; <span class="ident">dir</span>.<span class="ident">as_ref</span>(),
             };
-            <span class="kw">let </span><span class="kw-2">mut </span>path = f(dir, include_type, file_name)<span class="question-mark">?</span>;
-            <span class="kw">let </span>data = std::fs::read(<span class="kw-2">&amp;</span>path).map_err(|err| err.raw_os_error().map_or(ErrorKind::from(D3D11::ERROR_FILE_NOT_FOUND), |raw| ErrorKind::from_win32(raw <span class="kw">as _</span>)))<span class="question-mark">?</span>;
-            <span class="kw">if </span>!path.pop() { <span class="kw">return </span><span class="prelude-val">Err</span>(D3D11::ERROR_FILE_NOT_FOUND.into()); } <span class="comment">// path: filename -&gt; dir
-            </span><span class="prelude-val">Ok</span>((data, path))
+            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">path</span> <span class="op">=</span> <span class="ident">f</span>(<span class="ident">dir</span>, <span class="ident">include_type</span>, <span class="ident">file_name</span>)<span class="question-mark">?</span>;
+            <span class="kw">let</span> <span class="ident">data</span> <span class="op">=</span> <span class="ident">std::fs::read</span>(<span class="kw-2">&amp;</span><span class="ident">path</span>).<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">err</span><span class="op">|</span> <span class="ident">err</span>.<span class="ident">raw_os_error</span>().<span class="ident">map_or</span>(<span class="ident">ErrorKind::from</span>(<span class="ident">D3D11::ERROR_FILE_NOT_FOUND</span>), <span class="op">|</span><span class="ident">raw</span><span class="op">|</span> <span class="ident">ErrorKind::from_win32</span>(<span class="ident">raw</span> <span class="kw">as</span> <span class="kw">_</span>)))<span class="question-mark">?</span>;
+            <span class="kw">if</span> <span class="op">!</span><span class="ident">path</span>.<span class="ident">pop</span>() { <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">D3D11::ERROR_FILE_NOT_FOUND</span>.<span class="ident">into</span>()); } <span class="comment">// path: filename -&gt; dir</span>
+            <span class="prelude-val">Ok</span>((<span class="ident">data</span>, <span class="ident">path</span>))
         })
     }
 }
 
-<span class="comment">//#cpp2rust ID3DInclude         = struct d3d::Include
-//#cpp2rust ID3DInclude::Open   = d3d::Include::from_blob_meta_fn
-//#cpp2rust ID3DInclude::Open   = d3d::Include::from_path_fn
-//#cpp2rust ID3DInclude::Close  = std::ops::Drop::drop
+<span class="comment">//#cpp2rust ID3DInclude         = struct d3d::Include</span>
+<span class="comment">//#cpp2rust ID3DInclude::Open   = d3d::Include::from_blob_meta_fn</span>
+<span class="comment">//#cpp2rust ID3DInclude::Open   = d3d::Include::from_path_fn</span>
+<span class="comment">//#cpp2rust ID3DInclude::Close  = std::ops::Drop::drop</span>
 
 
 
-</span><span class="kw">struct </span>ThinMetaBlob&lt;M&gt; {
-    data_bytes: usize, <span class="comment">// not inclusive of `data_bytes` or `meta`
-    </span>meta:       M,
-    <span class="comment">// data follows
-</span>}
+<span class="kw">struct</span> <span class="ident">ThinMetaBlob</span><span class="op">&lt;</span><span class="ident">M</span><span class="op">&gt;</span> {
+    <span class="ident">data_bytes</span>: <span class="ident">usize</span>, <span class="comment">// not inclusive of `data_bytes` or `meta`</span>
+    <span class="ident">meta</span>:       <span class="ident">M</span>,
+    <span class="comment">// data follows</span>
+}
 
-<span class="kw">impl</span>&lt;M&gt; ThinMetaBlob&lt;M&gt; {
-    <span class="kw">pub fn </span>alloc(meta: M, data: <span class="kw-2">&amp;</span>[u8]) -&gt; <span class="prelude-ty">Result</span>&lt;NonNull&lt;<span class="self">Self</span>&gt;, ()&gt; {
-        <span class="kw">let </span>layout = <span class="self">Self</span>::layout(data.len())<span class="question-mark">?</span>;
-        <span class="kw">let </span>tmb;
-        <span class="kw">unsafe </span>{
-            tmb = std::alloc::alloc(layout) <span class="kw">as </span><span class="kw-2">*mut </span><span class="self">Self</span>;
-            std::ptr::write(tmb, <span class="self">Self </span>{ data_bytes: data.len(), meta });
-            std::ptr::copy_nonoverlapping(data.as_ptr(), tmb.add(<span class="number">1</span>).cast(), data.len());
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">M</span><span class="op">&gt;</span> <span class="ident">ThinMetaBlob</span><span class="op">&lt;</span><span class="ident">M</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">alloc</span>(<span class="ident">meta</span>: <span class="ident">M</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">NonNull</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>, ()<span class="op">&gt;</span> {
+        <span class="kw">let</span> <span class="ident">layout</span> <span class="op">=</span> <span class="ident"><span class="self">Self</span>::layout</span>(<span class="ident">data</span>.<span class="ident">len</span>())<span class="question-mark">?</span>;
+        <span class="kw">let</span> <span class="ident">tmb</span>;
+        <span class="kw unsafe">unsafe</span> {
+            <span class="ident">tmb</span> <span class="op">=</span> <span class="ident">std::alloc::alloc</span>(<span class="ident">layout</span>) <span class="kw">as</span> <span class="kw-2">*mut</span> <span class="self">Self</span>;
+            <span class="ident">std::ptr::write</span>(<span class="ident">tmb</span>, <span class="self">Self</span> { <span class="ident">data_bytes</span>: <span class="ident">data</span>.<span class="ident">len</span>(), <span class="ident">meta</span> });
+            <span class="ident">std::ptr::copy_nonoverlapping</span>(<span class="ident">data</span>.<span class="ident">as_ptr</span>(), <span class="ident">tmb</span>.<span class="ident">add</span>(<span class="number">1</span>).<span class="ident">cast</span>(), <span class="ident">data</span>.<span class="ident">len</span>());
         }
-        NonNull::new(tmb).ok_or(())
+        <span class="ident">NonNull::new</span>(<span class="ident">tmb</span>).<span class="ident">ok_or</span>(())
     }
 
-    <span class="doccomment">/// ### ⚠️ Safety ⚠️
-    /// *   `data` must belong to a valid allocated `ThinMetaBlob` that has not been `free`d
-    </span><span class="kw">pub unsafe fn </span>from_data(data: <span class="kw-2">*mut </span>u8) -&gt; <span class="kw-2">*mut </span><span class="self">Self </span>{
-        <span class="kw">unsafe </span>{ (data <span class="kw">as </span><span class="kw-2">*mut </span><span class="self">Self</span>).sub(<span class="number">1</span>) }
+    <span class="doccomment">/// ### ⚠️ Safety ⚠️</span>
+    <span class="doccomment">/// *   `data` must belong to a valid allocated `ThinMetaBlob` that has not been `free`d</span>
+    <span class="kw">pub</span> <span class="kw unsafe">unsafe</span> <span class="kw">fn</span> <span class="ident">from_data</span>(<span class="ident">data</span>: <span class="kw-2">*mut</span> <span class="ident">u8</span>) -&gt; <span class="kw-2">*mut</span> <span class="self">Self</span> {
+        <span class="kw unsafe">unsafe</span> { (<span class="ident">data</span> <span class="kw">as</span> <span class="kw-2">*mut</span> <span class="self">Self</span>).<span class="ident">sub</span>(<span class="number">1</span>) }
     }
 
-    <span class="doccomment">/// ### ⚠️ Safety ⚠️
-    /// *   `tmb` must be a valid allocated `ThinMetaBlob` that has not been `free`d
-    </span><span class="kw">pub unsafe fn </span>to_data(tmb: <span class="kw-2">*mut </span><span class="self">Self</span>) -&gt; <span class="kw-2">*mut </span>u8 {
-        <span class="kw">unsafe </span>{ tmb.add(<span class="number">1</span>).cast() }
+    <span class="doccomment">/// ### ⚠️ Safety ⚠️</span>
+    <span class="doccomment">/// *   `tmb` must be a valid allocated `ThinMetaBlob` that has not been `free`d</span>
+    <span class="kw">pub</span> <span class="kw unsafe">unsafe</span> <span class="kw">fn</span> <span class="ident">to_data</span>(<span class="ident">tmb</span>: <span class="kw-2">*mut</span> <span class="self">Self</span>) -&gt; <span class="kw-2">*mut</span> <span class="ident">u8</span> {
+        <span class="kw unsafe">unsafe</span> { <span class="ident">tmb</span>.<span class="ident">add</span>(<span class="number">1</span>).<span class="ident">cast</span>() }
     }
 
-    <span class="doccomment">/// ### ⚠️ Safety ⚠️
-    /// *   `tmb` must be a valid allocated `ThinMetaBlob` that has not been `free`d
-    /// *   `tmb` will no longer be valid after this call
-    </span><span class="kw">pub unsafe fn </span>free(tmb: <span class="kw-2">*mut </span><span class="self">Self</span>) {
-        <span class="kw">let </span>_header : <span class="self">Self </span>= <span class="kw">unsafe </span>{ std::ptr::read(tmb) };
-        <span class="kw">let </span>layout = <span class="self">Self</span>::layout(<span class="kw">unsafe </span>{ (<span class="kw-2">*</span>tmb).data_bytes }).unwrap();
-        <span class="kw">unsafe </span>{ std::alloc::dealloc(tmb.cast(), layout) }
+    <span class="doccomment">/// ### ⚠️ Safety ⚠️</span>
+    <span class="doccomment">/// *   `tmb` must be a valid allocated `ThinMetaBlob` that has not been `free`d</span>
+    <span class="doccomment">/// *   `tmb` will no longer be valid after this call</span>
+    <span class="kw">pub</span> <span class="kw unsafe">unsafe</span> <span class="kw">fn</span> <span class="ident">free</span>(<span class="ident">tmb</span>: <span class="kw-2">*mut</span> <span class="self">Self</span>) {
+        <span class="kw">let</span> <span class="ident">_header</span> : <span class="self">Self</span> <span class="op">=</span> <span class="kw unsafe">unsafe</span> { <span class="ident">std::ptr::read</span>(<span class="ident">tmb</span>) };
+        <span class="kw">let</span> <span class="ident">layout</span> <span class="op">=</span> <span class="ident"><span class="self">Self</span>::layout</span>(<span class="kw unsafe">unsafe</span> { (<span class="kw-2">*</span><span class="ident">tmb</span>).<span class="ident">data_bytes</span> }).<span class="ident">unwrap</span>();
+        <span class="kw unsafe">unsafe</span> { <span class="ident">std::alloc::dealloc</span>(<span class="ident">tmb</span>.<span class="ident">cast</span>(), <span class="ident">layout</span>) }
     }
 
-    <span class="kw">fn </span>layout(data_bytes: usize) -&gt; <span class="prelude-ty">Result</span>&lt;Layout, ()&gt; {
-        <span class="kw">let </span>meta = Layout::new::&lt;<span class="self">Self</span>&gt;();
-        <span class="kw">let </span>data   = Layout::array::&lt;u8&gt;(data_bytes).map_err(|<span class="kw">_</span>|())<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(meta.extend(data).map_err(|<span class="kw">_</span>| ())<span class="question-mark">?</span>.<span class="number">0</span>)
+    <span class="kw">fn</span> <span class="ident">layout</span>(<span class="ident">data_bytes</span>: <span class="ident">usize</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Layout</span>, ()<span class="op">&gt;</span> {
+        <span class="kw">let</span> <span class="ident">meta</span> <span class="op">=</span> <span class="ident">Layout::new</span>::<span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>();
+        <span class="kw">let</span> <span class="ident">data</span>   <span class="op">=</span> <span class="ident">Layout::array</span>::<span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>(<span class="ident">data_bytes</span>).<span class="ident">map_err</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span>())<span class="question-mark">?</span>;
+        <span class="prelude-val">Ok</span>(<span class="ident">meta</span>.<span class="ident">extend</span>(<span class="ident">data</span>).<span class="ident">map_err</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> ())<span class="question-mark">?</span>.<span class="number">0</span>)
     }
 }
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (b44197abb 2022-09-05)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0 (4b91a6ea7 2022-08-08)" ></div>
+</body></html>

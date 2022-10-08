@@ -1,4 +1,10 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src/_lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>_lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../normalize.css"><link rel="stylesheet" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../ayu.css" disabled><link rel="stylesheet" href="../../dark.css" disabled><link rel="stylesheet" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../thindx/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src/_lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>_lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script><script defer src="../../main.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
+        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../thindx/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
+                                <a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -61,68 +67,73 @@
 <span id="61">61</span>
 <span id="62">62</span>
 <span id="63">63</span>
-</pre><pre class="rust"><code><span class="attribute">#![doc = <span class="macro">include_str!</span>(<span class="string">&quot;../Readme.md&quot;</span>)]
-#![forbid(unsafe_op_in_unsafe_fn)]
-#![forbid(unaligned_references)]
-#![warn(rustdoc::broken_intra_doc_links)]
-#![warn(missing_docs)]
-#![deny(unreachable_patterns)] </span><span class="comment">// probably improperly `match { ... }`ed constants
+<span id="64">64</span>
+<span id="65">65</span>
+</pre><pre class="rust"><code><span class="attribute">#![<span class="ident">doc</span> <span class="op">=</span> <span class="macro">include_str!</span>(<span class="string">&quot;../Readme.md&quot;</span>)]</span>
+<span class="attribute">#![<span class="ident">forbid</span>(<span class="ident">unsafe_op_in_unsafe_fn</span>)]</span>
+<span class="attribute">#![<span class="ident">forbid</span>(<span class="ident">unaligned_references</span>)]</span>
+<span class="attribute">#![<span class="ident">warn</span>(<span class="ident">rustdoc::broken_intra_doc_links</span>)]</span>
+<span class="attribute">#![<span class="ident">warn</span>(<span class="ident">missing_docs</span>)]</span>
+<span class="attribute">#![<span class="ident">deny</span>(<span class="ident">unreachable_patterns</span>)]</span> <span class="comment">// probably improperly `match { ... }`ed constants</span>
 
-</span><span class="attribute">#![allow(clippy::identity_op)]                  </span><span class="comment">// I like to `&lt;&lt; 0`, `+ 0`, etc. for consistency
-</span><span class="attribute">#![allow(clippy::missing_safety_doc)]           </span><span class="comment">// I prefer ⚠️ Safety ⚠️ docs
-</span><span class="attribute">#![allow(clippy::derivable_impls)]              </span><span class="comment">// I do this a lot for explicitness with d3d enums
-</span><span class="attribute">#![allow(clippy::too_many_arguments)]           </span><span class="comment">// 1:1 mapping to D3D... I don&#39;t have much of a choice!
+<span class="attribute">#![<span class="ident">allow</span>(<span class="ident">clippy::identity_op</span>)]</span>                  <span class="comment">// I like to `&lt;&lt; 0`, `+ 0`, etc. for consistency</span>
+<span class="attribute">#![<span class="ident">allow</span>(<span class="ident">clippy::missing_safety_doc</span>)]</span>           <span class="comment">// I prefer ⚠️ Safety ⚠️ docs</span>
+<span class="attribute">#![<span class="ident">allow</span>(<span class="ident">clippy::derivable_impls</span>)]</span>              <span class="comment">// I do this a lot for explicitness with d3d enums</span>
+<span class="attribute">#![<span class="ident">allow</span>(<span class="ident">clippy::too_many_arguments</span>)]</span>           <span class="comment">// 1:1 mapping to D3D... I don&#39;t have much of a choice!</span>
 
-// #![warn(clippy::undocumented_unsafe_blocks)]    // too noisy to implement yet
+<span class="comment">// #![warn(clippy::undocumented_unsafe_blocks)]    // too noisy to implement yet</span>
 
-</span><span class="kw">pub extern crate </span>abibool;
-<span class="kw">pub extern crate </span>abistr;
+<span class="kw">pub</span> <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">abibool</span>;
+<span class="kw">pub</span> <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">abistr</span>;
 
-<span class="attribute">#[doc(hidden)] </span><span class="kw">pub use </span>abistr::cstr;
+<span class="attribute">#[<span class="ident">doc</span>(<span class="ident">no_inline</span>)]</span> <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">thindx_xaudio2</span>::{<span class="ident">xaudio2_8</span>, <span class="ident">xaudio2_9</span>};
+<span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span> <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">abistr::cstr</span>;
 
 
 
-<span class="attribute">#[macro_use] </span><span class="kw">mod </span>macros;
-<span class="attribute">#[macro_use] </span><span class="kw">mod </span>error_macros;
+<span class="attribute">#[<span class="ident">macro_use</span>]</span> <span class="kw">mod</span> <span class="ident">macros</span>;
+<span class="attribute">#[<span class="ident">macro_use</span>]</span> <span class="kw">mod</span> <span class="ident">error_macros</span>;
 
-<span class="doccomment">/// C ABI interop types
-</span><span class="attribute">#[path=<span class="string">&quot;ctypes/_ctypes.rs&quot;</span>] </span><span class="kw">pub mod </span>ctypes;
+<span class="doccomment">/// C ABI interop types</span>
+<span class="attribute">#[<span class="ident">path</span><span class="op">=</span><span class="string">&quot;ctypes/_ctypes.rs&quot;</span>]</span> <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">ctypes</span>;
 
-<span class="macro">mods! </span>{
-    inl <span class="kw">mod </span>namespaces {
-        inl <span class="kw">mod </span>_root;
-        <span class="kw">pub mod </span>d3d;
-        <span class="kw">pub mod </span>d3d9;
-        <span class="kw">pub mod </span>d3d11;
-        <span class="kw">pub mod </span>wkpdid;
-        <span class="kw">pub mod </span>xinput;
-        <span class="kw">pub mod </span>win32;
+<span class="macro">mods!</span> {
+    <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">namespaces</span> {
+        <span class="ident">inl</span> <span class="kw">mod</span> <span class="ident">_root</span>;
+        <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">d3d</span>;
+        <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">d3d9</span>;
+        <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">d3d11</span>;
+        <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">wkpdid</span>;
+        <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">xaudio2</span>;
+        <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">xinput</span>;
+        <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">win32</span>;
     }
 
-    <span class="attribute">#[path=<span class="string">&quot;headers/d3d9.h/d3d9.rs&quot;</span>]                </span><span class="kw">mod </span>d3d9_h;         <span class="comment">// d3d9 mod
-    </span><span class="attribute">#[path=<span class="string">&quot;headers/d3d9caps.h/d3d9caps.rs&quot;</span>]        </span><span class="kw">mod </span>d3d9caps_h;     <span class="comment">// d3d9 mod
-    </span><span class="attribute">#[path=<span class="string">&quot;headers/d3d9types.h/d3d9types.rs&quot;</span>]      </span><span class="kw">mod </span>d3d9types_h;    <span class="comment">// d3d9 mod
-    </span><span class="attribute">#[path=<span class="string">&quot;headers/d3d11shader.h/d3d11shader.rs&quot;</span>]  </span><span class="kw">mod </span>d3d11shader_h;  <span class="comment">// d3d11 mod
-    </span><span class="attribute">#[path=<span class="string">&quot;headers/d3dcommon.h/d3dcommon.rs&quot;</span>]      </span><span class="kw">mod </span>d3dcommon_h;    <span class="comment">// d3d mod
-    </span><span class="attribute">#[path=<span class="string">&quot;headers/d3dcompiler.h/d3dcompiler.rs&quot;</span>]  </span><span class="kw">mod </span>d3dcompiler_h;  <span class="comment">// d3d mod
-    </span><span class="attribute">#[path=<span class="string">&quot;headers/guiddef.h/guiddef.rs&quot;</span>]          </span><span class="kw">mod </span>guiddef_h;
-    <span class="attribute">#[path=<span class="string">&quot;headers/processthreadsapi.h/processthreadsapi.rs&quot;</span>] </span><span class="kw">mod </span>processthreadsapi_h;
-    <span class="attribute">#[path=<span class="string">&quot;headers/unknwn.h/unknwn.rs&quot;</span>]            </span><span class="kw">mod </span>unknwn_h;
-    <span class="attribute">#[path=<span class="string">&quot;headers/winuser.h/winuser.rs&quot;</span>]          </span><span class="kw">mod </span>winuser_h;
-    <span class="attribute">#[path=<span class="string">&quot;headers/xinput.h/xinput.rs&quot;</span>]            </span><span class="kw">mod </span>xinput_h;
+    <span class="attribute">#[<span class="ident">path</span><span class="op">=</span><span class="string">&quot;headers/d3d9.h/d3d9.rs&quot;</span>]</span>                <span class="kw">mod</span> <span class="ident">d3d9_h</span>;         <span class="comment">// d3d9 mod</span>
+    <span class="attribute">#[<span class="ident">path</span><span class="op">=</span><span class="string">&quot;headers/d3d9caps.h/d3d9caps.rs&quot;</span>]</span>        <span class="kw">mod</span> <span class="ident">d3d9caps_h</span>;     <span class="comment">// d3d9 mod</span>
+    <span class="attribute">#[<span class="ident">path</span><span class="op">=</span><span class="string">&quot;headers/d3d9types.h/d3d9types.rs&quot;</span>]</span>      <span class="kw">mod</span> <span class="ident">d3d9types_h</span>;    <span class="comment">// d3d9 mod</span>
+    <span class="attribute">#[<span class="ident">path</span><span class="op">=</span><span class="string">&quot;headers/d3d11shader.h/d3d11shader.rs&quot;</span>]</span>  <span class="kw">mod</span> <span class="ident">d3d11shader_h</span>;  <span class="comment">// d3d11 mod</span>
+    <span class="attribute">#[<span class="ident">path</span><span class="op">=</span><span class="string">&quot;headers/d3dcommon.h/d3dcommon.rs&quot;</span>]</span>      <span class="kw">mod</span> <span class="ident">d3dcommon_h</span>;    <span class="comment">// d3d mod</span>
+    <span class="attribute">#[<span class="ident">path</span><span class="op">=</span><span class="string">&quot;headers/d3dcompiler.h/d3dcompiler.rs&quot;</span>]</span>  <span class="kw">mod</span> <span class="ident">d3dcompiler_h</span>;  <span class="comment">// d3d mod</span>
+    <span class="attribute">#[<span class="ident">path</span><span class="op">=</span><span class="string">&quot;headers/guiddef.h/guiddef.rs&quot;</span>]</span>          <span class="kw">mod</span> <span class="ident">guiddef_h</span>;
+    <span class="attribute">#[<span class="ident">path</span><span class="op">=</span><span class="string">&quot;headers/processthreadsapi.h/processthreadsapi.rs&quot;</span>]</span> <span class="kw">mod</span> <span class="ident">processthreadsapi_h</span>;
+    <span class="attribute">#[<span class="ident">path</span><span class="op">=</span><span class="string">&quot;headers/unknwn.h/unknwn.rs&quot;</span>]</span>            <span class="kw">mod</span> <span class="ident">unknwn_h</span>;
+    <span class="attribute">#[<span class="ident">path</span><span class="op">=</span><span class="string">&quot;headers/winuser.h/winuser.rs&quot;</span>]</span>          <span class="kw">mod</span> <span class="ident">winuser_h</span>;
+    <span class="attribute">#[<span class="ident">path</span><span class="op">=</span><span class="string">&quot;headers/xinput.h/xinput.rs&quot;</span>]</span>            <span class="kw">mod</span> <span class="ident">xinput_h</span>;
 
-    <span class="attribute">#[path=<span class="string">&quot;traits/_traits.rs&quot;</span>]                     </span><span class="kw">mod </span>traits;
+    <span class="attribute">#[<span class="ident">path</span><span class="op">=</span><span class="string">&quot;traits/_traits.rs&quot;</span>]</span>                     <span class="kw">mod</span> <span class="ident">traits</span>;
 
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">mod </span>dll;
-    <span class="kw">mod </span>error_kind;
-    <span class="kw">pub mod </span>errors;
-    <span class="kw">mod </span>error_with_blob;
-    <span class="kw">mod </span>error;
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">mod</span> <span class="ident">dll</span>;
+    <span class="kw">mod</span> <span class="ident">error_kind</span>;
+    <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">errors</span>;
+    <span class="kw">mod</span> <span class="ident">error_with_blob</span>;
+    <span class="kw">mod</span> <span class="ident">error</span>;
 }
 
-<span class="attribute">#[cfg(doc)] #[doc = <span class="macro">include_str!</span>(<span class="string">&quot;../doc/changelog.md&quot;</span>)] </span><span class="kw">pub mod </span>_changelog {}
-<span class="attribute">#[cfg(doc)] </span><span class="kw">pub mod </span>_examples;
-<span class="attribute">#[cfg(doc)] </span><span class="kw">pub mod </span>_headers;
-<span class="attribute">#[cfg(doc)] #[doc(hidden)] </span><span class="kw">pub use </span>_examples <span class="kw">as </span>examples;
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">doc</span>)]</span> <span class="attribute">#[<span class="ident">doc</span> <span class="op">=</span> <span class="macro">include_str!</span>(<span class="string">&quot;../doc/changelog.md&quot;</span>)]</span> <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">_changelog</span> {}
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">doc</span>)]</span> <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">_examples</span>;
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">doc</span>)]</span> <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">_headers</span>;
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">doc</span>)]</span> <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span> <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">_examples</span> <span class="kw">as</span> <span class="ident">examples</span>;
 </code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (b44197abb 2022-09-05)" ></div></body></html>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0 (4b91a6ea7 2022-08-08)" ></div>
+</body></html>

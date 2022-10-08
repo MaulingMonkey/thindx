@@ -1,4 +1,10 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3d11shader.h\interfaces\function_parameter_reflection.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>function_parameter_reflection.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../../normalize.css"><link rel="stylesheet" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../../dark.css" disabled><link rel="stylesheet" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3d11shader.h\interfaces\function_parameter_reflection.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>function_parameter_reflection.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div>
+        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
+                                <a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -125,132 +131,133 @@
 <span id="125">125</span>
 <span id="126">126</span>
 <span id="127">127</span>
-</pre><pre class="rust"><code><span class="kw">use crate</span>::<span class="kw-2">*</span>;
-<span class="kw">use </span><span class="kw">crate</span>::d3d11::<span class="kw-2">*</span>;
+</pre><pre class="rust"><code><span class="kw">use</span> <span class="kw">crate</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::d3d11</span>::<span class="kw-2">*</span>;
 
-<span class="kw">use </span>winapi::um::d3d11shader::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">winapi::um::d3d11shader</span>::<span class="kw-2">*</span>;
 
-<span class="kw">use </span>std::marker::PhantomData;
-<span class="kw">use </span>std::ptr::NonNull;
+<span class="kw">use</span> <span class="ident">std::marker::PhantomData</span>;
+<span class="kw">use</span> <span class="ident">std::ptr::NonNull</span>;
 
 
 
-<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11functionparameterreflection)\]
-/// ID3D11FunctionParameterReflection
-///
-/// A function-parameter-reflection interface accesses function-parameter info.
-///
-/// ### See Also
-/// *   [FunctionReflection::get_function_parameter]
-</span><span class="attribute">#[derive(Clone)] #[repr(transparent)]
-</span><span class="kw">pub struct </span>FunctionParameterReflection&lt;<span class="lifetime">&#39;r</span>&gt; {
-    ptr:        NonNull&lt;ID3D11FunctionParameterReflection&gt;,
-    phantom:    PhantomData&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;r </span>ShaderReflection&gt;,
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11functionparameterreflection)\]</span>
+<span class="doccomment">/// ID3D11FunctionParameterReflection</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// A function-parameter-reflection interface accesses function-parameter info.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// ### See Also</span>
+<span class="doccomment">/// *   [FunctionReflection::get_function_parameter]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>)]</span> <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">transparent</span>)]</span>
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">FunctionParameterReflection</span><span class="op">&lt;</span><span class="lifetime">&#39;r</span><span class="op">&gt;</span> {
+    <span class="ident">ptr</span>:        <span class="ident">NonNull</span><span class="op">&lt;</span><span class="ident">ID3D11FunctionParameterReflection</span><span class="op">&gt;</span>,
+    <span class="ident">phantom</span>:    <span class="ident">PhantomData</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;r</span> <span class="ident">ShaderReflection</span><span class="op">&gt;</span>,
 }
 
-<span class="kw">impl</span>&lt;<span class="lifetime">&#39;r</span>&gt; FunctionParameterReflection&lt;<span class="lifetime">&#39;r</span>&gt; {
-    <span class="doccomment">/// ### ⚠️ Safety ⚠️
-    /// *   `ptr` must be a valid `ID3D11FunctionParameterReflection` for the entire lifetime of `_`
-    </span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">unsafe fn </span>from_raw(<span class="kw">_</span>: <span class="kw">impl </span>ParentOrPhantom&lt;<span class="lifetime">&#39;r</span>&gt;, ptr: <span class="kw-2">*mut </span>ID3D11FunctionParameterReflection) -&gt; <span class="self">Self </span>{
-        <span class="self">Self </span>{
-            ptr:        NonNull::new(ptr).expect(<span class="string">&quot;FunctionParameterReflection should never be null&quot;</span>),
-            phantom:    PhantomData,
+<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;r</span><span class="op">&gt;</span> <span class="ident">FunctionParameterReflection</span><span class="op">&lt;</span><span class="lifetime">&#39;r</span><span class="op">&gt;</span> {
+    <span class="doccomment">/// ### ⚠️ Safety ⚠️</span>
+    <span class="doccomment">/// *   `ptr` must be a valid `ID3D11FunctionParameterReflection` for the entire lifetime of `_`</span>
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw unsafe">unsafe</span> <span class="kw">fn</span> <span class="ident">from_raw</span>(<span class="kw">_</span>: <span class="kw">impl</span> <span class="ident">ParentOrPhantom</span><span class="op">&lt;</span><span class="lifetime">&#39;r</span><span class="op">&gt;</span>, <span class="ident">ptr</span>: <span class="kw-2">*mut</span> <span class="ident">ID3D11FunctionParameterReflection</span>) -&gt; <span class="self">Self</span> {
+        <span class="self">Self</span> {
+            <span class="ident">ptr</span>:        <span class="ident">NonNull::new</span>(<span class="ident">ptr</span>).<span class="ident">expect</span>(<span class="string">&quot;FunctionParameterReflection should never be null&quot;</span>),
+            <span class="ident">phantom</span>:    <span class="ident">PhantomData</span>,
         }
     }
 }
 
-<span class="kw">impl</span>&lt;<span class="lifetime">&#39;r</span>&gt; FunctionParameterReflection&lt;<span class="lifetime">&#39;r</span>&gt; {
-    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionparameterreflection-getdesc)\]
-    /// ID3D11FunctionParameterReflection::GetDesc
-    ///
-    /// ### Errors
-    /// *   [E::FAIL] if `self` is a stub object for an invalid parameter
-    ///
-    /// ### Example
-    /// ```rust
-    /// # use thindx::*;
-    /// # let d3dc = d3d::Compiler::load_system(47).unwrap();
-    /// # let shader = d3dc.compile_from_file(r&quot;test\data\library.hlsl&quot;, None, None, (), &quot;lib_5_0&quot;, d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();
-    /// # let lib : d3d11::LibraryReflection = d3dc.reflect_library(&amp;shader).unwrap();
-    /// # let scale4 = lib.functions().unwrap().find(|f| f.get_desc().unwrap().name.to_bytes() == b&quot;scale4&quot;).unwrap();
-    /// #
-    /// let ret = scale4.get_function_parameter(-1).get_desc().unwrap();
-    /// assert_eq!(ret.name.as_ref().unwrap().to_bytes(),   b&quot;scale4&quot;);
-    /// assert_eq!(ret.ty,      d3d::SVT::Float);
-    /// assert_eq!(ret.class,   d3d::SVC::Vector);
-    /// assert_eq!(ret.rows,    1);
-    /// assert_eq!(ret.columns, 4);
-    /// println!(&quot;{:#?}&quot;, ret);
-    ///
-    /// let v = scale4.get_function_parameter(0).get_desc().unwrap();
-    /// assert_eq!(v.name.as_ref().unwrap().to_bytes(),   b&quot;v&quot;);
-    /// assert_eq!(v.ty,        d3d::SVT::Float);
-    /// assert_eq!(v.class,     d3d::SVC::Vector);
-    /// assert_eq!(v.rows,      1);
-    /// assert_eq!(v.columns,   4);
-    /// println!(&quot;{:#?}&quot;, v);
-    ///
-    /// assert_eq!(E::FAIL, scale4.get_function_parameter(-2).get_desc());
-    /// assert_eq!(E::FAIL, scale4.get_function_parameter( 1).get_desc());
-    /// #
-    /// # assert_eq!(E::FAIL, scale4.get_function_parameter(std::i32::MIN).get_desc());
-    /// # assert_eq!(E::FAIL, scale4.get_function_parameter(-1000000).get_desc());
-    /// # assert_eq!(E::FAIL, scale4.get_function_parameter(-10000).get_desc());
-    /// # assert_eq!(E::FAIL, scale4.get_function_parameter(-100).get_desc());
-    /// # assert_eq!(E::FAIL, scale4.get_function_parameter(100).get_desc());
-    /// # assert_eq!(E::FAIL, scale4.get_function_parameter(10000).get_desc());
-    /// # assert_eq!(E::FAIL, scale4.get_function_parameter(1000000).get_desc());
-    /// # assert_eq!(E::FAIL, scale4.get_function_parameter(std::i32::MAX-100).get_desc());
-    /// # assert_eq!(E::FAIL, scale4.get_function_parameter(std::i32::MAX-16).get_desc());
-    /// # assert_eq!(E::FAIL, scale4.get_function_parameter(std::i32::MAX-10).get_desc());
-    /// # assert_eq!(E::FAIL, scale4.get_function_parameter(std::i32::MAX-4).get_desc());
-    /// # assert_eq!(E::FAIL, scale4.get_function_parameter(std::i32::MAX-1).get_desc());
-    /// # assert_eq!(E::FAIL, scale4.get_function_parameter(std::i32::MAX).get_desc());
-    /// ```
-    ///
-    /// ### Output
-    /// ```text
-    /// ParameterDesc {
-    ///     name: Some(
-    ///         &quot;scale4&quot;,
-    ///     ),
-    ///     semantic_name: None,
-    ///     ty: SVT::Float,
-    ///     class: SVC::Vector,
-    ///     rows: 1,
-    ///     columns: 4,
-    ///     interpolation_mode: Interpolation::Undefined,
-    ///     flags: PF::Out,
-    ///     first_in_register: 4294967295,
-    ///     first_in_component: 4294967295,
-    ///     first_out_register: 0,
-    ///     first_out_component: 0,
-    /// }
-    /// ParameterDesc {
-    ///     name: Some(
-    ///         &quot;v&quot;,
-    ///     ),
-    ///     semantic_name: None,
-    ///     ty: SVT::Float,
-    ///     class: SVC::Vector,
-    ///     rows: 1,
-    ///     columns: 4,
-    ///     interpolation_mode: Interpolation::Undefined,
-    ///     flags: PF::In,
-    ///     first_in_register: 0,
-    ///     first_in_component: 0,
-    ///     first_out_register: 4294967295,
-    ///     first_out_component: 4294967295,
-    /// }
-    /// ```
-    </span><span class="kw">pub fn </span>get_desc(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span>&lt;ParameterDesc&lt;<span class="lifetime">&#39;r</span>&gt;, Error&gt; {
-        <span class="macro">fn_context!</span>(d3d11::FunctionParameterReflection::get_desc =&gt; ID3D11FunctionParameterReflection::GetDesc);
-        <span class="kw">let </span><span class="kw-2">mut </span>desc = ParameterDesc::default();
-        <span class="macro">fn_check_hr!</span>(<span class="kw">unsafe </span>{ <span class="self">self</span>.ptr.as_ref().GetDesc(<span class="kw-2">&amp;mut </span>desc <span class="kw">as </span><span class="kw-2">*mut </span><span class="kw">_ as </span><span class="kw-2">*mut </span><span class="kw">_</span>) })<span class="question-mark">?</span>;
-        <span class="prelude-val">Ok</span>(desc)
+<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;r</span><span class="op">&gt;</span> <span class="ident">FunctionParameterReflection</span><span class="op">&lt;</span><span class="lifetime">&#39;r</span><span class="op">&gt;</span> {
+    <span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionparameterreflection-getdesc)\]</span>
+    <span class="doccomment">/// ID3D11FunctionParameterReflection::GetDesc</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Errors</span>
+    <span class="doccomment">/// *   [E::FAIL] if `self` is a stub object for an invalid parameter</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Example</span>
+    <span class="doccomment">/// ```rust</span>
+    <span class="doccomment">/// # use thindx::*;</span>
+    <span class="doccomment">/// # let d3dc = d3d::Compiler::load_system(47).unwrap();</span>
+    <span class="doccomment">/// # let shader = d3dc.compile_from_file(r&quot;test\data\library.hlsl&quot;, None, None, (), &quot;lib_5_0&quot;, d3d::Compile::Debug, d3d::CompileEffect::None).unwrap();</span>
+    <span class="doccomment">/// # let lib : d3d11::LibraryReflection = d3dc.reflect_library(&amp;shader).unwrap();</span>
+    <span class="doccomment">/// # let scale4 = lib.functions().unwrap().find(|f| f.get_desc().unwrap().name.to_bytes() == b&quot;scale4&quot;).unwrap();</span>
+    <span class="doccomment">/// #</span>
+    <span class="doccomment">/// let ret = scale4.get_function_parameter(-1).get_desc().unwrap();</span>
+    <span class="doccomment">/// assert_eq!(ret.name.as_ref().unwrap().to_bytes(),   b&quot;scale4&quot;);</span>
+    <span class="doccomment">/// assert_eq!(ret.ty,      d3d::SVT::Float);</span>
+    <span class="doccomment">/// assert_eq!(ret.class,   d3d::SVC::Vector);</span>
+    <span class="doccomment">/// assert_eq!(ret.rows,    1);</span>
+    <span class="doccomment">/// assert_eq!(ret.columns, 4);</span>
+    <span class="doccomment">/// println!(&quot;{:#?}&quot;, ret);</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// let v = scale4.get_function_parameter(0).get_desc().unwrap();</span>
+    <span class="doccomment">/// assert_eq!(v.name.as_ref().unwrap().to_bytes(),   b&quot;v&quot;);</span>
+    <span class="doccomment">/// assert_eq!(v.ty,        d3d::SVT::Float);</span>
+    <span class="doccomment">/// assert_eq!(v.class,     d3d::SVC::Vector);</span>
+    <span class="doccomment">/// assert_eq!(v.rows,      1);</span>
+    <span class="doccomment">/// assert_eq!(v.columns,   4);</span>
+    <span class="doccomment">/// println!(&quot;{:#?}&quot;, v);</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// assert_eq!(E::FAIL, scale4.get_function_parameter(-2).get_desc());</span>
+    <span class="doccomment">/// assert_eq!(E::FAIL, scale4.get_function_parameter( 1).get_desc());</span>
+    <span class="doccomment">/// #</span>
+    <span class="doccomment">/// # assert_eq!(E::FAIL, scale4.get_function_parameter(std::i32::MIN).get_desc());</span>
+    <span class="doccomment">/// # assert_eq!(E::FAIL, scale4.get_function_parameter(-1000000).get_desc());</span>
+    <span class="doccomment">/// # assert_eq!(E::FAIL, scale4.get_function_parameter(-10000).get_desc());</span>
+    <span class="doccomment">/// # assert_eq!(E::FAIL, scale4.get_function_parameter(-100).get_desc());</span>
+    <span class="doccomment">/// # assert_eq!(E::FAIL, scale4.get_function_parameter(100).get_desc());</span>
+    <span class="doccomment">/// # assert_eq!(E::FAIL, scale4.get_function_parameter(10000).get_desc());</span>
+    <span class="doccomment">/// # assert_eq!(E::FAIL, scale4.get_function_parameter(1000000).get_desc());</span>
+    <span class="doccomment">/// # assert_eq!(E::FAIL, scale4.get_function_parameter(std::i32::MAX-100).get_desc());</span>
+    <span class="doccomment">/// # assert_eq!(E::FAIL, scale4.get_function_parameter(std::i32::MAX-16).get_desc());</span>
+    <span class="doccomment">/// # assert_eq!(E::FAIL, scale4.get_function_parameter(std::i32::MAX-10).get_desc());</span>
+    <span class="doccomment">/// # assert_eq!(E::FAIL, scale4.get_function_parameter(std::i32::MAX-4).get_desc());</span>
+    <span class="doccomment">/// # assert_eq!(E::FAIL, scale4.get_function_parameter(std::i32::MAX-1).get_desc());</span>
+    <span class="doccomment">/// # assert_eq!(E::FAIL, scale4.get_function_parameter(std::i32::MAX).get_desc());</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// ### Output</span>
+    <span class="doccomment">/// ```text</span>
+    <span class="doccomment">/// ParameterDesc {</span>
+    <span class="doccomment">///     name: Some(</span>
+    <span class="doccomment">///         &quot;scale4&quot;,</span>
+    <span class="doccomment">///     ),</span>
+    <span class="doccomment">///     semantic_name: None,</span>
+    <span class="doccomment">///     ty: SVT::Float,</span>
+    <span class="doccomment">///     class: SVC::Vector,</span>
+    <span class="doccomment">///     rows: 1,</span>
+    <span class="doccomment">///     columns: 4,</span>
+    <span class="doccomment">///     interpolation_mode: Interpolation::Undefined,</span>
+    <span class="doccomment">///     flags: PF::Out,</span>
+    <span class="doccomment">///     first_in_register: 4294967295,</span>
+    <span class="doccomment">///     first_in_component: 4294967295,</span>
+    <span class="doccomment">///     first_out_register: 0,</span>
+    <span class="doccomment">///     first_out_component: 0,</span>
+    <span class="doccomment">/// }</span>
+    <span class="doccomment">/// ParameterDesc {</span>
+    <span class="doccomment">///     name: Some(</span>
+    <span class="doccomment">///         &quot;v&quot;,</span>
+    <span class="doccomment">///     ),</span>
+    <span class="doccomment">///     semantic_name: None,</span>
+    <span class="doccomment">///     ty: SVT::Float,</span>
+    <span class="doccomment">///     class: SVC::Vector,</span>
+    <span class="doccomment">///     rows: 1,</span>
+    <span class="doccomment">///     columns: 4,</span>
+    <span class="doccomment">///     interpolation_mode: Interpolation::Undefined,</span>
+    <span class="doccomment">///     flags: PF::In,</span>
+    <span class="doccomment">///     first_in_register: 0,</span>
+    <span class="doccomment">///     first_in_component: 0,</span>
+    <span class="doccomment">///     first_out_register: 4294967295,</span>
+    <span class="doccomment">///     first_out_component: 4294967295,</span>
+    <span class="doccomment">/// }</span>
+    <span class="doccomment">/// ```</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_desc</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">ParameterDesc</span><span class="op">&lt;</span><span class="lifetime">&#39;r</span><span class="op">&gt;</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+        <span class="macro">fn_context!</span>(<span class="ident">d3d11::FunctionParameterReflection::get_desc</span> =&gt; <span class="ident">ID3D11FunctionParameterReflection::GetDesc</span>);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">desc</span> <span class="op">=</span> <span class="ident">ParameterDesc::default</span>();
+        <span class="macro">fn_check_hr!</span>(<span class="kw unsafe">unsafe</span> { <span class="self">self</span>.<span class="ident">ptr</span>.<span class="ident">as_ref</span>().<span class="ident">GetDesc</span>(<span class="kw-2">&amp;mut</span> <span class="ident">desc</span> <span class="kw">as</span> <span class="kw-2">*mut</span> <span class="kw">_</span> <span class="kw">as</span> <span class="kw-2">*mut</span> <span class="kw">_</span>) })<span class="question-mark">?</span>;
+        <span class="prelude-val">Ok</span>(<span class="ident">desc</span>)
     }
 }
 
-<span class="comment">//#cpp2rust ID3D11FunctionParameterReflection           = d3d11::FunctionParameterReflection
-</span></code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (b44197abb 2022-09-05)" ></div></body></html>
+<span class="comment">//#cpp2rust ID3D11FunctionParameterReflection           = d3d11::FunctionParameterReflection</span>
+</code></pre></div>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0 (4b91a6ea7 2022-08-08)" ></div>
+</body></html>

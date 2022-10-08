@@ -1,4 +1,10 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3d9caps.h\structures\caps.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>caps.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../../normalize.css"><link rel="stylesheet" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../../dark.css" disabled><link rel="stylesheet" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3d9caps.h\structures\caps.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>caps.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div>
+        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
+                                <a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -521,528 +527,529 @@
 <span id="521">521</span>
 <span id="522">522</span>
 <span id="523">523</span>
-</pre><pre class="rust"><code><span class="kw">use </span><span class="kw">crate</span>::d3d9::<span class="kw-2">*</span>;
-
-<span class="kw">use </span>bytemuck::<span class="kw-2">*</span>;
-
-<span class="kw">use </span>winapi::shared::d3d9caps::<span class="kw-2">*</span>;
-<span class="kw">use </span>winapi::shared::minwindef::DWORD;
-
-<span class="comment">// use std::fmt::{self, Debug, Formatter}; // TODO: a super awesome Debug impl
-
-</span><span class="attribute">#[allow(non_camel_case_types)] </span><span class="kw">type </span>dword  = u32;
-<span class="attribute">#[allow(non_camel_case_types)] </span><span class="kw">type </span>uint   = u32;
-<span class="attribute">#[allow(non_camel_case_types)] </span><span class="kw">type </span>int    = i32;
-<span class="attribute">#[allow(non_camel_case_types)] </span><span class="kw">type </span>float  = f32;
-<span class="kw">type </span>AdapterOrdinal = uint; <span class="comment">// FIXME: ???
-
-
-
-</span><span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9caps/ns-d3d9caps-d3dcaps9)\]
-/// D3DCAPS9
-///
-/// Contains various information about an adapter/device&#39;s capabilities and limitations
-</span><span class="attribute">#[derive(Clone, Copy, Debug, Pod, Zeroable)]
-#[repr(C)]
-</span><span class="kw">pub struct </span>Caps {
-    <span class="comment">// Device Info
-
-    </span><span class="doccomment">/// Typically [DevType::HAL]
-    </span><span class="kw">pub </span>device_type:                                    DevType,
-
-    <span class="doccomment">/// Typically `0`, but could be something higher on multi-screen / multi-GPU systems.
-    </span><span class="kw">pub </span>adapter_ordinal:                                AdapterOrdinal, <span class="comment">// UINT
-
-    // Caps from DX7 Draw
-
-    </span><span class="doccomment">/// | System    | Value     |
-    /// | --------- | --------- |
-    /// | Sacrilege | [Caps1]::{[ReadScanline](Caps1::ReadScanline)}
-    /// | (other)   | [Caps1]::{[Overlay](Caps1::Overlay)}
-    </span><span class="kw">pub </span>caps:                                           Caps1,
-
-    <span class="doccomment">/// | System    | Value     |
-    /// | --------- | --------- |
-    /// | Sacrilege | [Caps2]::{[CanAutoGenMipMap](Caps2::CanAutoGenMipMap) \|&amp;nbsp;[CanShareResource](Caps2::CanShareResource) \|&amp;nbsp;[DynamicTextures](Caps2::DynamicTextures) \|&amp;nbsp;[FullScreenGamma](Caps2::FullScreenGamma)}
-    /// | (other)   | [Caps2]::{[CanCalibrateGamma](Caps2::CanCalibrateGamma) \|&amp;nbsp;[CanManageResource](Caps2::CanManageResource)}
-    </span><span class="kw">pub </span>caps2:                                          Caps2,
-
-    <span class="doccomment">/// | System    | Value     |
-    /// | --------- | --------- |
-    /// | Sacrilege | [Caps3]::{[AlphaFullscreenFlipOrDiscard](Caps3::AlphaFullscreenFlipOrDiscard) \|&amp;nbsp;[CopyToVidMem](Caps3::CopyToVidMem) \|&amp;nbsp;[CopyToSystemMem](Caps3::CopyToSystemMem) \|&amp;nbsp;[LinearToSrgbPresentation](Caps3::LinearToSrgbPresentation)}
-    /// | (other)   | [Caps3]::{[DxvaHD](Caps3::DxvaHD)}
-    </span><span class="kw">pub </span>caps3:                                          Caps3,
-
-    <span class="doccomment">/// Mask of available presentation swap intervals.
-    ///
-    /// Intervals documented by caps include: [Present]::{[IntervalImmediate](Present::IntervalImmediate) \|&amp;nbsp;[IntervalOne](Present::IntervalOne) \|&amp;nbsp;... \|&amp;nbsp;[IntervalFour](Present::IntervalFour)}
-    ///
-    /// | System    | Value     |
-    /// | --------- | --------- |
-    /// | Sacrilege | [Present]::{[IntervalOne](Present::IntervalOne) \|&amp;nbsp;... \|&amp;nbsp;[IntervalFour](Present::IntervalFour) \|&amp;nbsp;[IntervalImmediate](Present::IntervalImmediate)}
-    /// | (other)   | None?
-    </span><span class="kw">pub </span>presentation_intervals:                         Present,
-
-    <span class="comment">// Cursor Caps
-
-    </span><span class="doccomment">/// | System    | Value     |
-    /// | --------- | --------- |
-    /// | Sacrilege | [CursorCaps]::{[Color](CursorCaps::Color)}
-    /// | (other)   | [CursorCaps]::{[LowRes](CursorCaps::LowRes)}
-    </span><span class="kw">pub </span>cursor_caps:                                    CursorCaps,
-
-    <span class="comment">// 3D Device Caps
-
-    </span><span class="doccomment">/// | System    | Value     |
-    /// | --------- | --------- |
-    /// | Sacrilege | [DevCaps]::{[CanBltSysToNonLocal](DevCaps::CanBltSysToNonLocal) \|&amp;nbsp;[CanRenderAfterFlip](DevCaps::CanRenderAfterFlip) \|&amp;nbsp;[DrawPrimitives2](DevCaps::DrawPrimitives2) \|&amp;nbsp;[DrawPrimitives2Ex](DevCaps::DrawPrimitives2Ex) \|&amp;nbsp;[DrawPrimTlVertex](DevCaps::DrawPrimTlVertex) \|&amp;nbsp;[ExecuteSystemMemory](DevCaps::ExecuteSystemMemory) \|&amp;nbsp;[ExecuteVideoMemory](DevCaps::ExecuteVideoMemory) \|&amp;nbsp;[HwRasterization](DevCaps::HwRasterization) \|&amp;nbsp;[HwTransformAndLight](DevCaps::HwTransformAndLight) \|&amp;nbsp;[PureDevice](DevCaps::PureDevice) \|&amp;nbsp;[TextureNonLocalVidMem](DevCaps::TextureNonLocalVidMem) \|&amp;nbsp;[TextureVideoMemory](DevCaps::TextureVideoMemory) \|&amp;nbsp;[TlVertexSystemMemory](DevCaps::TlVertexSystemMemory) \|&amp;nbsp;[TlVertexVideoMemory](DevCaps::TlVertexVideoMemory)}
-    </span><span class="kw">pub </span>dev_caps:                                       DevCaps,
-
-    <span class="doccomment">/// | System    | Value     |
-    /// | --------- | --------- |
-    /// | Sacrilege | [PMiscCaps]::{[MaskZ](PMiscCaps::MaskZ) \|&amp;nbsp;[CullNone](PMiscCaps::CullNone) \|&amp;nbsp;[CullCW](PMiscCaps::CullCW) \|&amp;nbsp;[CullCCW](PMiscCaps::CullCCW) \|&amp;nbsp;[ColorWriteEnable](PMiscCaps::ColorWriteEnable) \|&amp;nbsp;[TssArgTemp](PMiscCaps::TssArgTemp) \|&amp;nbsp;[BlendOp](PMiscCaps::BlendOp) \|&amp;nbsp;[IndependentWriteMasks](PMiscCaps::IndependentWriteMasks) \|&amp;nbsp;[PerStageConstant](PMiscCaps::PerStageConstant) \|&amp;nbsp;[PostBlendSrgbConvert](PMiscCaps::PostBlendSrgbConvert) \|&amp;nbsp;[FogAndSpecularAlpha](PMiscCaps::FogAndSpecularAlpha) \|&amp;nbsp;[SeparateAlphaBlend](PMiscCaps::SeparateAlphaBlend) \|&amp;nbsp;[MrtIndependentBitDepths](PMiscCaps::MrtIndependentBitDepths) \|&amp;nbsp;[MrtPostPixelShaderBlending](PMiscCaps::MrtPostPixelShaderBlending) \|&amp;nbsp;[FogVertexClamped](PMiscCaps::FogVertexClamped)}
-    </span><span class="kw">pub </span>primitive_misc_caps:                            PMiscCaps,
-
-    <span class="doccomment">/// | System    | Value     |
-    /// | --------- | --------- |
-    /// | Sacrilege | [PRasterCaps]::{[Anisotropy](PRasterCaps::Anisotropy) \|&amp;nbsp;[ColorPerspective](PRasterCaps::ColorPerspective) \|&amp;nbsp;[Dither](PRasterCaps::Dither) \|&amp;nbsp;[DepthBias](PRasterCaps::DepthBias) \|&amp;nbsp;[FogRange](PRasterCaps::FogRange) \|&amp;nbsp;[FogTable](PRasterCaps::FogTable) \|&amp;nbsp;[FogVertex](PRasterCaps::FogVertex) \|&amp;nbsp;[MipMapLodBias](PRasterCaps::MipMapLodBias) \|&amp;nbsp;[MultisampleToggle](PRasterCaps::MultisampleToggle) \|&amp;nbsp;[ScissorTest](PRasterCaps::ScissorTest) \|&amp;nbsp;[SlopeScaleDepthBias](PRasterCaps::SlopeScaleDepthBias) \|&amp;nbsp;[WFog](PRasterCaps::WFog) \|&amp;nbsp;[ZFog](PRasterCaps::ZFog) \|&amp;nbsp;[ZTest](PRasterCaps::ZTest) \|&amp;nbsp;[ZBias](PRasterCaps::ZBias)}
-    </span><span class="kw">pub </span>raster_caps:                                    PRasterCaps,
-
-    <span class="doccomment">/// | System    | Value     |
-    /// | --------- | --------- |
-    /// | Sacrilege | [PCmpCaps]::{[Always](PCmpCaps::Always) \|&amp;nbsp;[Equal](PCmpCaps::Equal) \|&amp;nbsp;[Greater](PCmpCaps::Greater) \|&amp;nbsp;[GreaterEqual](PCmpCaps::GreaterEqual) \|&amp;nbsp;[Less](PCmpCaps::Less) \|&amp;nbsp;[LessEqual](PCmpCaps::LessEqual) \|&amp;nbsp;[Never](PCmpCaps::Never) \|&amp;nbsp;[NotEqual](PCmpCaps::NotEqual)}
-    </span><span class="kw">pub </span>z_cmp_caps:                                     PCmpCaps,
-
-    <span class="doccomment">/// | System    | Value     |
-    /// | --------- | --------- |
-    /// | Sacrilege | [PBlendCaps]::{[BlendFactor](PBlendCaps::BlendFactor) \|&amp;nbsp;[BothInvSrcAlpha](PBlendCaps::BothInvSrcAlpha) \|&amp;nbsp;[BothSrcAlpha](PBlendCaps::BothSrcAlpha) \|&amp;nbsp;[DestAlpha](PBlendCaps::DestAlpha) \|&amp;nbsp;[DestColor](PBlendCaps::DestColor) \|&amp;nbsp;[InvDestAlpha](PBlendCaps::InvDestAlpha) \|&amp;nbsp;[InvDestColor](PBlendCaps::InvDestColor) \|&amp;nbsp;[InvSrcAlpha](PBlendCaps::InvSrcAlpha) \|&amp;nbsp;[InvSrcColor](PBlendCaps::InvSrcColor) \|&amp;nbsp;[One](PBlendCaps::One) \|&amp;nbsp;[SrcAlpha](PBlendCaps::SrcAlpha) \|&amp;nbsp;[SrcAlphaSat](PBlendCaps::SrcAlphaSat) \|&amp;nbsp;[SrcColor](PBlendCaps::SrcColor) \|&amp;nbsp;[Zero](PBlendCaps::Zero)}
-    </span><span class="kw">pub </span>src_blend_caps:                                 PBlendCaps,
-
-    <span class="doccomment">/// | System    | Value     |
-    /// | --------- | --------- |
-    /// | Sacrilege | [PBlendCaps]::{[BlendFactor](PBlendCaps::BlendFactor) \|&amp;nbsp;[BothInvSrcAlpha](PBlendCaps::BothInvSrcAlpha) \|&amp;nbsp;[BothSrcAlpha](PBlendCaps::BothSrcAlpha) \|&amp;nbsp;[DestAlpha](PBlendCaps::DestAlpha) \|&amp;nbsp;[DestColor](PBlendCaps::DestColor) \|&amp;nbsp;[InvDestAlpha](PBlendCaps::InvDestAlpha) \|&amp;nbsp;[InvDestColor](PBlendCaps::InvDestColor) \|&amp;nbsp;[InvSrcAlpha](PBlendCaps::InvSrcAlpha) \|&amp;nbsp;[InvSrcColor](PBlendCaps::InvSrcColor) \|&amp;nbsp;[One](PBlendCaps::One) \|&amp;nbsp;[SrcAlpha](PBlendCaps::SrcAlpha) \|&amp;nbsp;[SrcAlphaSat](PBlendCaps::SrcAlphaSat) \|&amp;nbsp;[SrcColor](PBlendCaps::SrcColor) \|&amp;nbsp;[Zero](PBlendCaps::Zero)}
-    </span><span class="kw">pub </span>dest_blend_caps:                                PBlendCaps,
-
-    <span class="doccomment">/// Alpha-test comparison capabilities. This member can include the same capability flags defined for the ZCmpCaps member.
-    /// If this member contains only the [PCmpCaps::Always] or only the [PCmpCaps::Never] capability, the driver does not support alpha tests.
-    /// Otherwise, the flags identify the individual comparisons that are supported for alpha testing.
-    ///
-    /// | System    | Value     |
-    /// | --------- | --------- |
-    /// | Sacrilege | [PCmpCaps]::{[Always](PCmpCaps::Always) \|&amp;nbsp;[Equal](PCmpCaps::Equal) \|&amp;nbsp;[Greater](PCmpCaps::Greater) \|&amp;nbsp;[GreaterEqual](PCmpCaps::GreaterEqual) \|&amp;nbsp;[Less](PCmpCaps::Less) \|&amp;nbsp;[LessEqual](PCmpCaps::LessEqual) \|&amp;nbsp;[Never](PCmpCaps::Never) \|&amp;nbsp;[NotEqual](PCmpCaps::NotEqual)}
-    </span><span class="kw">pub </span>alpha_cmp_caps:                                 PCmpCaps,
-
-    <span class="doccomment">/// | System    | Value     |
-    /// | --------- | --------- |
-    /// | Sacrilege | [PShadeCaps]::{[AlphaGouraudBlend](PShadeCaps::AlphaGouraudBlend) \|&amp;nbsp;[ColorGouraudRgb](PShadeCaps::ColorGouraudRgb) \|&amp;nbsp;[FogGouraud](PShadeCaps::FogGouraud) \|&amp;nbsp;[SpecularGouraudRgb](PShadeCaps::SpecularGouraudRgb)}
-    </span><span class="kw">pub </span>shade_caps:                                     PShadeCaps,
-
-    <span class="doccomment">/// | System    | Value     |
-    /// | --------- | --------- |
-    /// | Sacrilege | [PTextureCaps]::{[Alpha](PTextureCaps::Alpha) \|&amp;nbsp;[CubeMap](PTextureCaps::CubeMap) \|&amp;nbsp;[MipCubeMap](PTextureCaps::MipCubeMap) \|&amp;nbsp;[MipMap](PTextureCaps::MipMap) \|&amp;nbsp;[MipVolumeMap](PTextureCaps::MipVolumeMap) \|&amp;nbsp;[Perspective](PTextureCaps::Perspective) \|&amp;nbsp;[Projected](PTextureCaps::Projected) \|&amp;nbsp;[TexRepeatNotScaledBySize](PTextureCaps::TexRepeatNotScaledBySize) \|&amp;nbsp;[VolumeMap](PTextureCaps::VolumeMap)}
-    </span><span class="kw">pub </span>texture_caps:                                   PTextureCaps,
-
-    <span class="doccomment">/// | System    | Value     |
-    /// | --------- | --------- |
-    /// | Sacrilege | [PTFilterCaps]::{[MagFPoint](PTFilterCaps::MagFPoint) \|&amp;nbsp;[MagFLinear](PTFilterCaps::MagFLinear) \|&amp;nbsp;[MagFAnisotropic](PTFilterCaps::MagFAnisotropic) \|&amp;nbsp;[MinFPoint](PTFilterCaps::MinFPoint) \|&amp;nbsp;[MinFLinear](PTFilterCaps::MinFLinear) \|&amp;nbsp;[MinFAnisotropic](PTFilterCaps::MinFAnisotropic) \|&amp;nbsp;[MipFPoint](PTFilterCaps::MipFPoint) \|&amp;nbsp;[MipFLinear](PTFilterCaps::MipFLinear)}
-    </span><span class="kw">pub </span>texture_filter_caps:                            PTFilterCaps,
-
-    <span class="doccomment">/// | System    | Value     |
-    /// | --------- | --------- |
-    /// | Sacrilege | [PTFilterCaps]::{[MagFPoint](PTFilterCaps::MagFPoint) \|&amp;nbsp;[MagFLinear](PTFilterCaps::MagFLinear) \|&amp;nbsp;[MinFPoint](PTFilterCaps::MinFPoint) \|&amp;nbsp;[MinFLinear](PTFilterCaps::MinFLinear) \|&amp;nbsp;[MipFPoint](PTFilterCaps::MipFPoint) \|&amp;nbsp;[MipFLinear](PTFilterCaps::MipFLinear)}
-    </span><span class="kw">pub </span>cube_texture_filter_caps:                       PTFilterCaps,
-
-    <span class="doccomment">/// | System    | Value     |
-    /// | --------- | --------- |
-    /// | Sacrilege | [PTFilterCaps]::{[MagFPoint](PTFilterCaps::MagFPoint) \|&amp;nbsp;[MagFLinear](PTFilterCaps::MagFLinear) \|&amp;nbsp;[MagFAnisotropic](PTFilterCaps::MagFAnisotropic) \|&amp;nbsp;[MinFPoint](PTFilterCaps::MinFPoint) \|&amp;nbsp;[MinFLinear](PTFilterCaps::MinFLinear) \|&amp;nbsp;[MinFAnisotropic](PTFilterCaps::MinFAnisotropic) \|&amp;nbsp;[MipFPoint](PTFilterCaps::MipFPoint) \|&amp;nbsp;[MipFLinear](PTFilterCaps::MipFLinear)}
-    </span><span class="kw">pub </span>volume_texture_filter_caps:                     PTFilterCaps,
-
-    <span class="doccomment">/// | System    | Value     |
-    /// | --------- | --------- |
-    /// | Sacrilege | [PTAddressCaps]::{[Border](PTAddressCaps::Border) \|&amp;nbsp;[Clamp](PTAddressCaps::Clamp) \|&amp;nbsp;[IndependentUV](PTAddressCaps::IndependentUV) \|&amp;nbsp;[Mirror](PTAddressCaps::Mirror) \|&amp;nbsp;[MirrorOnce](PTAddressCaps::MirrorOnce) \|&amp;nbsp;[Wrap](PTAddressCaps::Wrap)}
-    </span><span class="kw">pub </span>texture_address_caps:                           PTAddressCaps,
-
-    <span class="doccomment">/// | System    | Value     |
-    /// | --------- | --------- |
-    /// | Sacrilege | [PTAddressCaps]::{[Border](PTAddressCaps::Border) \|&amp;nbsp;[Clamp](PTAddressCaps::Clamp) \|&amp;nbsp;[IndependentUV](PTAddressCaps::IndependentUV) \|&amp;nbsp;[Mirror](PTAddressCaps::Mirror) \|&amp;nbsp;[MirrorOnce](PTAddressCaps::MirrorOnce) \|&amp;nbsp;[Wrap](PTAddressCaps::Wrap)}
-    </span><span class="kw">pub </span>volume_texture_address_caps:                    PTAddressCaps,
-
-    <span class="doccomment">/// | System    | Value     |
-    /// | --------- | --------- |
-    /// | Sacrilege | [LineCaps]::{[AlphaCmp](LineCaps::AlphaCmp) \|&amp;nbsp;[Blend](LineCaps::Blend) \|&amp;nbsp;[Fog](LineCaps::Fog) \|&amp;nbsp;[Texture](LineCaps::Texture) \|&amp;nbsp;[ZTest](LineCaps::ZTest)}
-    </span><span class="kw">pub </span>line_caps:                                      LineCaps,
-
-    <span class="doccomment">/// | System    | Value     |
-    /// | --------- | --------- |
-    /// | Sacrilege | 16384
-    </span><span class="kw">pub </span>max_texture_width:                              dword,
-
-    <span class="doccomment">/// | System    | Value     |
-    /// | --------- | --------- |
-    /// | Sacrilege | 16384
-    </span><span class="kw">pub </span>max_texture_height:                             dword,
-
-    <span class="doccomment">/// | System    | Value     |
-    /// | --------- | --------- |
-    /// | Sacrilege | 8192
-    </span><span class="kw">pub </span>max_volume_extent:                              dword,
-
-    <span class="doccomment">/// | System    | Value     |
-    /// | --------- | --------- |
-    /// | Sacrilege | 8192
-    </span><span class="kw">pub </span>max_texture_repeat:                             dword,
-
-    <span class="doccomment">/// | System    | Value     |
-    /// | --------- | --------- |
-    /// | Sacrilege | 8192
-    </span><span class="kw">pub </span>max_texture_aspect_ratio:                       dword,
-
-    <span class="doccomment">/// | System    | Value     |
-    /// | --------- | --------- |
-    /// | Sacrilege | 16
-    </span><span class="kw">pub </span>max_anisotropy:                                 dword,
-
-    <span class="doccomment">/// | System    | Value     |
-    /// | --------- | --------- |
-    /// | Sacrilege | 10000000000.0
-    </span><span class="kw">pub </span>max_vertex_w:                                   float,
-
-    <span class="doccomment">/// | System    | Value     |
-    /// | --------- | --------- |
-    /// | Sacrilege | -32768.0
-    </span><span class="kw">pub </span>guard_band_left:                                float,
-
-    <span class="doccomment">/// | System    | Value     |
-    /// | --------- | --------- |
-    /// | Sacrilege | -32768.0
-    </span><span class="kw">pub </span>guard_band_top:                                 float,
-
-    <span class="doccomment">/// | System    | Value     |
-    /// | --------- | --------- |
-    /// | Sacrilege | 32768.0
-    </span><span class="kw">pub </span>guard_band_right:                               float,
-
-    <span class="doccomment">/// | System    | Value     |
-    /// | --------- | --------- |
-    /// | Sacrilege | 32768.0
-    </span><span class="kw">pub </span>guard_band_bottom:                              float,
-
-    <span class="doccomment">/// | System    | Value     |
-    /// | --------- | --------- |
-    /// | Sacrilege | 0.0
-    </span><span class="kw">pub </span>extents_adjust:                                 float,
-
-    <span class="doccomment">/// | System    | Value     |
-    /// | --------- | --------- |
-    /// | Sacrilege | [StencilCaps]::{[Keep](StencilCaps::Keep) \|&amp;nbsp;[Zero](StencilCaps::Zero) \|&amp;nbsp;[Replace](StencilCaps::Replace) \|&amp;nbsp;[IncrSat](StencilCaps::IncrSat) \|&amp;nbsp;[DecrSat](StencilCaps::DecrSat) \|&amp;nbsp;[Invert](StencilCaps::Invert) \|&amp;nbsp;[Incr](StencilCaps::Incr) \|&amp;nbsp;[Decr](StencilCaps::Decr) \|&amp;nbsp;[TwoSided](StencilCaps::TwoSided)}
-    </span><span class="kw">pub </span>stencil_caps:                                   StencilCaps,
-
-    <span class="doccomment">/// | System    | Value     |
-    /// | --------- | --------- |
-    /// | Sacrilege | [FvfCaps]::{[PSize](FvfCaps::PSize) \|&amp;nbsp;0x00000008}
-    </span><span class="kw">pub </span>fvf_caps:                                       FvfCaps,
-
-    <span class="doccomment">/// | System    | Value     |
-    /// | --------- | --------- |
-    /// | Sacrilege | [TexOpCaps]::{[Add](TexOpCaps::Add) \|&amp;nbsp;[AddSigned](TexOpCaps::AddSigned) \|&amp;nbsp;[AddSigned2x](TexOpCaps::AddSigned2x) \|&amp;nbsp;[AddSmooth](TexOpCaps::AddSmooth) \|&amp;nbsp;[BlendCurrentAlpha](TexOpCaps::BlendCurrentAlpha) \|&amp;nbsp;[BlendDiffuseAlpha](TexOpCaps::BlendDiffuseAlpha) \|&amp;nbsp;[BlendFactorAlpha](TexOpCaps::BlendFactorAlpha) \|&amp;nbsp;[BlendTextureAlpha](TexOpCaps::BlendTextureAlpha) \|&amp;nbsp;[BlendTextureAlphaPM](TexOpCaps::BlendTextureAlphaPM) \|&amp;nbsp;[BumpEnvMap](TexOpCaps::BumpEnvMap) \|&amp;nbsp;[BumpEnvMapLuminance](TexOpCaps::BumpEnvMapLuminance) \|&amp;nbsp;[Disable](TexOpCaps::Disable) \|&amp;nbsp;[DotProduct3](TexOpCaps::DotProduct3) \|&amp;nbsp;[Lerp](TexOpCaps::Lerp) \|&amp;nbsp;[Modulate](TexOpCaps::Modulate) \|&amp;nbsp;[Modulate2x](TexOpCaps::Modulate2x) \|&amp;nbsp;[Modulate4x](TexOpCaps::Modulate4x) \|&amp;nbsp;[ModulateAlphaAddColor](TexOpCaps::ModulateAlphaAddColor) \|&amp;nbsp;[ModulateColorAddAlpha](TexOpCaps::ModulateColorAddAlpha) \|&amp;nbsp;[ModulateInvAlphaAddColor](TexOpCaps::ModulateInvAlphaAddColor) \|&amp;nbsp;[ModulateInvColorAddAlpha](TexOpCaps::ModulateInvColorAddAlpha) \|&amp;nbsp;[MultiplyAdd](TexOpCaps::MultiplyAdd) \|&amp;nbsp;[Premodulate](TexOpCaps::Premodulate) \|&amp;nbsp;[SelectArg1](TexOpCaps::SelectArg1) \|&amp;nbsp;[SelectArg2](TexOpCaps::SelectArg2) \|&amp;nbsp;[Subtract](TexOpCaps::Subtract)}
-    </span><span class="kw">pub </span>texture_op_caps:                                TexOpCaps,
-
-    <span class="doccomment">/// | System    | Value     |
-    /// | --------- | --------- |
-    /// | Sacrilege | 8
-    </span><span class="kw">pub </span>max_texture_blend_stages:                       dword,
-
-    <span class="doccomment">/// | System    | Value     |
-    /// | --------- | --------- |
-    /// | Sacrilege | 8
-    </span><span class="kw">pub </span>max_simultaneous_textures:                      dword,
-
-    <span class="doccomment">/// | System    | Value     |
-    /// | --------- | --------- |
-    /// | Sacrilege | [VtxPCaps]::{[DirectionalLights](VtxPCaps::DirectionalLights) \|&amp;nbsp;[LocalViewer](VtxPCaps::LocalViewer) \|&amp;nbsp;[MaterialSource7](VtxPCaps::MaterialSource7) \|&amp;nbsp;[PositionalLights](VtxPCaps::PositionalLights) \|&amp;nbsp;[TexGen](VtxPCaps::TexGen) \|&amp;nbsp;[TexGenSphereMap](VtxPCaps::TexGenSphereMap) \|&amp;nbsp;[Tweening](VtxPCaps::Tweening)}
-    </span><span class="kw">pub </span>vertex_processing_caps:                         VtxPCaps,
-
-    <span class="doccomment">/// | System    | Value     |
-    /// | --------- | --------- |
-    /// | Sacrilege | 10
-    </span><span class="kw">pub </span>max_active_lights:                              dword,
-
-    <span class="doccomment">/// | System    | Value     |
-    /// | --------- | --------- |
-    /// | Sacrilege | 6
-    </span><span class="kw">pub </span>max_user_clip_planes:                           dword,
-
-    <span class="doccomment">/// | System    | Value     |
-    /// | --------- | --------- |
-    /// | Sacrilege | 4
-    </span><span class="kw">pub </span>max_vertex_blend_matrices:                      dword,
-
-    <span class="doccomment">/// | System    | Value     |
-    /// | --------- | --------- |
-    /// | Sacrilege | 8
-    </span><span class="kw">pub </span>max_vertex_blend_matrix_index:                  dword,
-
-    <span class="doccomment">/// | System    | Value     |
-    /// | --------- | --------- |
-    /// | Sacrilege | 256.0
-    </span><span class="kw">pub </span>max_point_size:                                 float,
-
-    <span class="doccomment">/// | System    | Value     |
-    /// | --------- | --------- |
-    /// | Sacrilege | 5592405
-    </span><span class="kw">pub </span>max_primitive_count:                            dword,
-
-    <span class="doccomment">/// | System    | Value     |
-    /// | --------- | --------- |
-    /// | Sacrilege | 16777215
-    </span><span class="kw">pub </span>max_vertex_index:                               dword,
-
-    <span class="doccomment">/// | System    | Value     |
-    /// | --------- | --------- |
-    /// | Sacrilege | 16
-    </span><span class="kw">pub </span>max_streams:                                    dword,
-
-    <span class="doccomment">/// | System    | Value     |
-    /// | --------- | --------- |
-    /// | Sacrilege | 508
-    </span><span class="kw">pub </span>max_stream_stride:                              dword,
-
-    <span class="doccomment">/// | System    | Value     |
-    /// | --------- | --------- |
-    /// | Sacrilege | [ShaderVersion::VS_3_0]
-    </span><span class="kw">pub </span>vertex_shader_version:                          ShaderVersion,
-
-    <span class="doccomment">/// | System    | Value     |
-    /// | --------- | --------- |
-    /// | Sacrilege | 256
-    </span><span class="kw">pub </span>max_vertex_shader_const:                        dword,
-
-    <span class="doccomment">/// | System    | Value     |
-    /// | --------- | --------- |
-    /// | Sacrilege | [ShaderVersion::PS_3_0]
-    </span><span class="kw">pub </span>pixel_shader_version:                           ShaderVersion,
-
-    <span class="doccomment">/// | System    | Value     |
-    /// | --------- | --------- |
-    /// | Sacrilege | 3.4028235e38
-    </span><span class="kw">pub </span>pixel_shader_1x_max_value:                      float,
-
-    <span class="comment">// DX9 specific
-
-    </span><span class="doccomment">/// | System    | Value     |
-    /// | --------- | --------- |
-    /// | Sacrilege | [DevCaps2]::{[CanStretchRectFromTextures](DevCaps2::CanStretchRectFromTextures) \|&amp;nbsp;[PresampledDMapNPatch](DevCaps2::PresampledDMapNPatch) \|&amp;nbsp;[StreamOffset](DevCaps2::StreamOffset) \|&amp;nbsp;[VertexElementsCanShareStreamOffset](DevCaps2::VertexElementsCanShareStreamOffset)}
-    </span><span class="kw">pub </span>dev_caps2:                                      DevCaps2,
-
-    <span class="doccomment">/// | System    | Value     |
-    /// | --------- | --------- |
-    /// | Sacrilege | 1.0
-    </span><span class="kw">pub </span>max_npatch_tessellation_level:                  float,
-
-    <span class="attribute">#[doc(hidden)]
-    </span><span class="kw">pub </span>reserved5:                                      Reserved5,
-
-    <span class="doccomment">/// | System    | Value     |
-    /// | --------- | --------- |
-    /// | Sacrilege | 0
-    </span><span class="kw">pub </span>master_adapter_ordinal:                         AdapterOrdinal,
-
-    <span class="doccomment">/// | System    | Value     |
-    /// | --------- | --------- |
-    /// | Sacrilege | 0
-    </span><span class="kw">pub </span>adapter_ordinal_in_group:                       uint,
-
-    <span class="doccomment">/// | System    | Value     |
-    /// | --------- | --------- |
-    /// | Sacrilege | 4
-    </span><span class="kw">pub </span>number_of_adapters_in_group:                    uint,
-
-    <span class="doccomment">/// | System    | Value     |
-    /// | --------- | --------- |
-    /// | Sacrilege | [DtCaps]::{[UByte4](DtCaps::UByte4) \|&amp;nbsp;[UByte4N](DtCaps::UByte4N) \|&amp;nbsp;[Short2N](DtCaps::Short2N) \|&amp;nbsp;[Short4N](DtCaps::Short4N) \|&amp;nbsp;[UShort2N](DtCaps::UShort2N) \|&amp;nbsp;[UShort4N](DtCaps::UShort4N) \|&amp;nbsp;[UDec3](DtCaps::UDec3) \|&amp;nbsp;[Dec3N](DtCaps::Dec3N) \|&amp;nbsp;[Float16_2](DtCaps::Float16_2) \|&amp;nbsp;[Float16_4](DtCaps::Float16_4)}
-    </span><span class="kw">pub </span>decl_types:                                     DtCaps,
-
-    <span class="doccomment">/// | System    | Value     |
-    /// | --------- | --------- |
-    /// | Sacrilege | 4
-    </span><span class="kw">pub </span>num_simultaneous_rts:                           dword,
-
-    <span class="doccomment">/// | System    | Value     |
-    /// | --------- | --------- |
-    /// | Sacrilege | [PTFilterCaps]::{[MagFPoint](PTFilterCaps::MagFPoint) \|&amp;nbsp;[MagFLinear](PTFilterCaps::MagFLinear) \|&amp;nbsp;[MinFPoint](PTFilterCaps::MinFPoint) \|&amp;nbsp;[MinFLinear](PTFilterCaps::MinFLinear)}
-    </span><span class="kw">pub </span>stretch_rect_filter_caps:                       PTFilterCaps, <span class="comment">// just some subset
-
-    </span><span class="doccomment">/// &lt;h3&gt;Sacrilege&lt;/h3&gt;
-    ///
-    /// [VShaderCaps20] {&lt;br&gt;
-    /// &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;caps: [Vs20Caps]::[Predication](Vs20Caps::Predication),&lt;br&gt;
-    /// &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;dynamic_flow_control_depth: 24,&lt;br&gt;
-    /// &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;num_temps: 32,&lt;br&gt;
-    /// &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;static_flow_control_depth: 4,&lt;br&gt;
-    /// }&lt;br&gt;
-    </span><span class="kw">pub </span>vs_20_caps:                                     VShaderCaps20,
-
-    <span class="doccomment">/// &lt;h3&gt;Sacrilege&lt;/h3&gt;
-    ///
-    /// [PShaderCaps20] {&lt;br&gt;
-    /// &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;caps: [Ps20Caps]::{[ArbitrarySwizzle](Ps20Caps::ArbitrarySwizzle) \|&amp;nbsp;[GradientInstructions](Ps20Caps::GradientInstructions) \|&amp;nbsp;[Predication](Ps20Caps::Predication) \|&amp;nbsp;[NoDependentReadLimit](Ps20Caps::NoDependentReadLimit) \|&amp;nbsp;[NoTexInstructionLimit](Ps20Caps::NoTexInstructionLimit)},&lt;br&gt;
-    /// &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;dynamic_flow_control_depth: 24,&lt;br&gt;
-    /// &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;num_temps: 32,&lt;br&gt;
-    /// &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;static_flow_control_depth: 4,&lt;br&gt;
-    /// &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;num_instruction_slots: 512,&lt;br&gt;
-    /// }
-    </span><span class="kw">pub </span>ps_20_caps:                                     PShaderCaps20,
-
-    <span class="doccomment">/// | System    | Value     |
-    /// | --------- | --------- |
-    /// | Sacrilege | [PTFilterCaps]::{[MagFPoint](PTFilterCaps::MagFPoint) \|&amp;nbsp;[MagFLinear](PTFilterCaps::MagFLinear) \|&amp;nbsp;[MinFPoint](PTFilterCaps::MinFPoint) \|&amp;nbsp;[MinFLinear](PTFilterCaps::MinFLinear)}
-    </span><span class="kw">pub </span>vertex_texture_filter_caps:                     PTFilterCaps,
-
-    <span class="doccomment">/// | System    | Value     |
-    /// | --------- | --------- |
-    /// | Sacrilege | 4294967295
-    </span><span class="kw">pub </span>max_vshader_instructions_executed:              dword,
-
-    <span class="doccomment">/// | System    | Value     |
-    /// | --------- | --------- |
-    /// | Sacrilege | 4294967295
-    </span><span class="kw">pub </span>max_pshader_instructions_executed:              dword,
-
-    <span class="doccomment">/// | System    | Value     |
-    /// | --------- | --------- |
-    /// | Sacrilege | 32768
-    </span><span class="kw">pub </span>max_vertex_shader_30_instruction_slots:         dword,
-
-    <span class="doccomment">/// | System    | Value     |
-    /// | --------- | --------- |
-    /// | Sacrilege | 32768
-    </span><span class="kw">pub </span>max_pixel_shader_30_instruction_slots:          dword,
+</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::d3d9</span>::<span class="kw-2">*</span>;
+
+<span class="kw">use</span> <span class="ident">bytemuck</span>::<span class="kw-2">*</span>;
+
+<span class="kw">use</span> <span class="ident">winapi::shared::d3d9caps</span>::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">winapi::shared::minwindef::DWORD</span>;
+
+<span class="comment">// use std::fmt::{self, Debug, Formatter}; // TODO: a super awesome Debug impl</span>
+
+<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">non_camel_case_types</span>)]</span> <span class="kw">type</span> <span class="ident">dword</span>  <span class="op">=</span> <span class="ident">u32</span>;
+<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">non_camel_case_types</span>)]</span> <span class="kw">type</span> <span class="ident">uint</span>   <span class="op">=</span> <span class="ident">u32</span>;
+<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">non_camel_case_types</span>)]</span> <span class="kw">type</span> <span class="ident">int</span>    <span class="op">=</span> <span class="ident">i32</span>;
+<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">non_camel_case_types</span>)]</span> <span class="kw">type</span> <span class="ident">float</span>  <span class="op">=</span> <span class="ident">f32</span>;
+<span class="kw">type</span> <span class="ident">AdapterOrdinal</span> <span class="op">=</span> <span class="ident">uint</span>; <span class="comment">// FIXME: ???</span>
+
+
+
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9caps/ns-d3d9caps-d3dcaps9)\]</span>
+<span class="doccomment">/// D3DCAPS9</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Contains various information about an adapter/device&#39;s capabilities and limitations</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">Debug</span>, <span class="ident">Pod</span>, <span class="ident">Zeroable</span>)]</span>
+<span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Caps</span> {
+    <span class="comment">// Device Info</span>
+
+    <span class="doccomment">/// Typically [DevType::HAL]</span>
+    <span class="kw">pub</span> <span class="ident">device_type</span>:                                    <span class="ident">DevType</span>,
+
+    <span class="doccomment">/// Typically `0`, but could be something higher on multi-screen / multi-GPU systems.</span>
+    <span class="kw">pub</span> <span class="ident">adapter_ordinal</span>:                                <span class="ident">AdapterOrdinal</span>, <span class="comment">// UINT</span>
+
+    <span class="comment">// Caps from DX7 Draw</span>
+
+    <span class="doccomment">/// | System    | Value     |</span>
+    <span class="doccomment">/// | --------- | --------- |</span>
+    <span class="doccomment">/// | Sacrilege | [Caps1]::{[ReadScanline](Caps1::ReadScanline)}</span>
+    <span class="doccomment">/// | (other)   | [Caps1]::{[Overlay](Caps1::Overlay)}</span>
+    <span class="kw">pub</span> <span class="ident">caps</span>:                                           <span class="ident">Caps1</span>,
+
+    <span class="doccomment">/// | System    | Value     |</span>
+    <span class="doccomment">/// | --------- | --------- |</span>
+    <span class="doccomment">/// | Sacrilege | [Caps2]::{[CanAutoGenMipMap](Caps2::CanAutoGenMipMap) \|&amp;nbsp;[CanShareResource](Caps2::CanShareResource) \|&amp;nbsp;[DynamicTextures](Caps2::DynamicTextures) \|&amp;nbsp;[FullScreenGamma](Caps2::FullScreenGamma)}</span>
+    <span class="doccomment">/// | (other)   | [Caps2]::{[CanCalibrateGamma](Caps2::CanCalibrateGamma) \|&amp;nbsp;[CanManageResource](Caps2::CanManageResource)}</span>
+    <span class="kw">pub</span> <span class="ident">caps2</span>:                                          <span class="ident">Caps2</span>,
+
+    <span class="doccomment">/// | System    | Value     |</span>
+    <span class="doccomment">/// | --------- | --------- |</span>
+    <span class="doccomment">/// | Sacrilege | [Caps3]::{[AlphaFullscreenFlipOrDiscard](Caps3::AlphaFullscreenFlipOrDiscard) \|&amp;nbsp;[CopyToVidMem](Caps3::CopyToVidMem) \|&amp;nbsp;[CopyToSystemMem](Caps3::CopyToSystemMem) \|&amp;nbsp;[LinearToSrgbPresentation](Caps3::LinearToSrgbPresentation)}</span>
+    <span class="doccomment">/// | (other)   | [Caps3]::{[DxvaHD](Caps3::DxvaHD)}</span>
+    <span class="kw">pub</span> <span class="ident">caps3</span>:                                          <span class="ident">Caps3</span>,
+
+    <span class="doccomment">/// Mask of available presentation swap intervals.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Intervals documented by caps include: [Present]::{[IntervalImmediate](Present::IntervalImmediate) \|&amp;nbsp;[IntervalOne](Present::IntervalOne) \|&amp;nbsp;... \|&amp;nbsp;[IntervalFour](Present::IntervalFour)}</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// | System    | Value     |</span>
+    <span class="doccomment">/// | --------- | --------- |</span>
+    <span class="doccomment">/// | Sacrilege | [Present]::{[IntervalOne](Present::IntervalOne) \|&amp;nbsp;... \|&amp;nbsp;[IntervalFour](Present::IntervalFour) \|&amp;nbsp;[IntervalImmediate](Present::IntervalImmediate)}</span>
+    <span class="doccomment">/// | (other)   | None?</span>
+    <span class="kw">pub</span> <span class="ident">presentation_intervals</span>:                         <span class="ident">Present</span>,
+
+    <span class="comment">// Cursor Caps</span>
+
+    <span class="doccomment">/// | System    | Value     |</span>
+    <span class="doccomment">/// | --------- | --------- |</span>
+    <span class="doccomment">/// | Sacrilege | [CursorCaps]::{[Color](CursorCaps::Color)}</span>
+    <span class="doccomment">/// | (other)   | [CursorCaps]::{[LowRes](CursorCaps::LowRes)}</span>
+    <span class="kw">pub</span> <span class="ident">cursor_caps</span>:                                    <span class="ident">CursorCaps</span>,
+
+    <span class="comment">// 3D Device Caps</span>
+
+    <span class="doccomment">/// | System    | Value     |</span>
+    <span class="doccomment">/// | --------- | --------- |</span>
+    <span class="doccomment">/// | Sacrilege | [DevCaps]::{[CanBltSysToNonLocal](DevCaps::CanBltSysToNonLocal) \|&amp;nbsp;[CanRenderAfterFlip](DevCaps::CanRenderAfterFlip) \|&amp;nbsp;[DrawPrimitives2](DevCaps::DrawPrimitives2) \|&amp;nbsp;[DrawPrimitives2Ex](DevCaps::DrawPrimitives2Ex) \|&amp;nbsp;[DrawPrimTlVertex](DevCaps::DrawPrimTlVertex) \|&amp;nbsp;[ExecuteSystemMemory](DevCaps::ExecuteSystemMemory) \|&amp;nbsp;[ExecuteVideoMemory](DevCaps::ExecuteVideoMemory) \|&amp;nbsp;[HwRasterization](DevCaps::HwRasterization) \|&amp;nbsp;[HwTransformAndLight](DevCaps::HwTransformAndLight) \|&amp;nbsp;[PureDevice](DevCaps::PureDevice) \|&amp;nbsp;[TextureNonLocalVidMem](DevCaps::TextureNonLocalVidMem) \|&amp;nbsp;[TextureVideoMemory](DevCaps::TextureVideoMemory) \|&amp;nbsp;[TlVertexSystemMemory](DevCaps::TlVertexSystemMemory) \|&amp;nbsp;[TlVertexVideoMemory](DevCaps::TlVertexVideoMemory)}</span>
+    <span class="kw">pub</span> <span class="ident">dev_caps</span>:                                       <span class="ident">DevCaps</span>,
+
+    <span class="doccomment">/// | System    | Value     |</span>
+    <span class="doccomment">/// | --------- | --------- |</span>
+    <span class="doccomment">/// | Sacrilege | [PMiscCaps]::{[MaskZ](PMiscCaps::MaskZ) \|&amp;nbsp;[CullNone](PMiscCaps::CullNone) \|&amp;nbsp;[CullCW](PMiscCaps::CullCW) \|&amp;nbsp;[CullCCW](PMiscCaps::CullCCW) \|&amp;nbsp;[ColorWriteEnable](PMiscCaps::ColorWriteEnable) \|&amp;nbsp;[TssArgTemp](PMiscCaps::TssArgTemp) \|&amp;nbsp;[BlendOp](PMiscCaps::BlendOp) \|&amp;nbsp;[IndependentWriteMasks](PMiscCaps::IndependentWriteMasks) \|&amp;nbsp;[PerStageConstant](PMiscCaps::PerStageConstant) \|&amp;nbsp;[PostBlendSrgbConvert](PMiscCaps::PostBlendSrgbConvert) \|&amp;nbsp;[FogAndSpecularAlpha](PMiscCaps::FogAndSpecularAlpha) \|&amp;nbsp;[SeparateAlphaBlend](PMiscCaps::SeparateAlphaBlend) \|&amp;nbsp;[MrtIndependentBitDepths](PMiscCaps::MrtIndependentBitDepths) \|&amp;nbsp;[MrtPostPixelShaderBlending](PMiscCaps::MrtPostPixelShaderBlending) \|&amp;nbsp;[FogVertexClamped](PMiscCaps::FogVertexClamped)}</span>
+    <span class="kw">pub</span> <span class="ident">primitive_misc_caps</span>:                            <span class="ident">PMiscCaps</span>,
+
+    <span class="doccomment">/// | System    | Value     |</span>
+    <span class="doccomment">/// | --------- | --------- |</span>
+    <span class="doccomment">/// | Sacrilege | [PRasterCaps]::{[Anisotropy](PRasterCaps::Anisotropy) \|&amp;nbsp;[ColorPerspective](PRasterCaps::ColorPerspective) \|&amp;nbsp;[Dither](PRasterCaps::Dither) \|&amp;nbsp;[DepthBias](PRasterCaps::DepthBias) \|&amp;nbsp;[FogRange](PRasterCaps::FogRange) \|&amp;nbsp;[FogTable](PRasterCaps::FogTable) \|&amp;nbsp;[FogVertex](PRasterCaps::FogVertex) \|&amp;nbsp;[MipMapLodBias](PRasterCaps::MipMapLodBias) \|&amp;nbsp;[MultisampleToggle](PRasterCaps::MultisampleToggle) \|&amp;nbsp;[ScissorTest](PRasterCaps::ScissorTest) \|&amp;nbsp;[SlopeScaleDepthBias](PRasterCaps::SlopeScaleDepthBias) \|&amp;nbsp;[WFog](PRasterCaps::WFog) \|&amp;nbsp;[ZFog](PRasterCaps::ZFog) \|&amp;nbsp;[ZTest](PRasterCaps::ZTest) \|&amp;nbsp;[ZBias](PRasterCaps::ZBias)}</span>
+    <span class="kw">pub</span> <span class="ident">raster_caps</span>:                                    <span class="ident">PRasterCaps</span>,
+
+    <span class="doccomment">/// | System    | Value     |</span>
+    <span class="doccomment">/// | --------- | --------- |</span>
+    <span class="doccomment">/// | Sacrilege | [PCmpCaps]::{[Always](PCmpCaps::Always) \|&amp;nbsp;[Equal](PCmpCaps::Equal) \|&amp;nbsp;[Greater](PCmpCaps::Greater) \|&amp;nbsp;[GreaterEqual](PCmpCaps::GreaterEqual) \|&amp;nbsp;[Less](PCmpCaps::Less) \|&amp;nbsp;[LessEqual](PCmpCaps::LessEqual) \|&amp;nbsp;[Never](PCmpCaps::Never) \|&amp;nbsp;[NotEqual](PCmpCaps::NotEqual)}</span>
+    <span class="kw">pub</span> <span class="ident">z_cmp_caps</span>:                                     <span class="ident">PCmpCaps</span>,
+
+    <span class="doccomment">/// | System    | Value     |</span>
+    <span class="doccomment">/// | --------- | --------- |</span>
+    <span class="doccomment">/// | Sacrilege | [PBlendCaps]::{[BlendFactor](PBlendCaps::BlendFactor) \|&amp;nbsp;[BothInvSrcAlpha](PBlendCaps::BothInvSrcAlpha) \|&amp;nbsp;[BothSrcAlpha](PBlendCaps::BothSrcAlpha) \|&amp;nbsp;[DestAlpha](PBlendCaps::DestAlpha) \|&amp;nbsp;[DestColor](PBlendCaps::DestColor) \|&amp;nbsp;[InvDestAlpha](PBlendCaps::InvDestAlpha) \|&amp;nbsp;[InvDestColor](PBlendCaps::InvDestColor) \|&amp;nbsp;[InvSrcAlpha](PBlendCaps::InvSrcAlpha) \|&amp;nbsp;[InvSrcColor](PBlendCaps::InvSrcColor) \|&amp;nbsp;[One](PBlendCaps::One) \|&amp;nbsp;[SrcAlpha](PBlendCaps::SrcAlpha) \|&amp;nbsp;[SrcAlphaSat](PBlendCaps::SrcAlphaSat) \|&amp;nbsp;[SrcColor](PBlendCaps::SrcColor) \|&amp;nbsp;[Zero](PBlendCaps::Zero)}</span>
+    <span class="kw">pub</span> <span class="ident">src_blend_caps</span>:                                 <span class="ident">PBlendCaps</span>,
+
+    <span class="doccomment">/// | System    | Value     |</span>
+    <span class="doccomment">/// | --------- | --------- |</span>
+    <span class="doccomment">/// | Sacrilege | [PBlendCaps]::{[BlendFactor](PBlendCaps::BlendFactor) \|&amp;nbsp;[BothInvSrcAlpha](PBlendCaps::BothInvSrcAlpha) \|&amp;nbsp;[BothSrcAlpha](PBlendCaps::BothSrcAlpha) \|&amp;nbsp;[DestAlpha](PBlendCaps::DestAlpha) \|&amp;nbsp;[DestColor](PBlendCaps::DestColor) \|&amp;nbsp;[InvDestAlpha](PBlendCaps::InvDestAlpha) \|&amp;nbsp;[InvDestColor](PBlendCaps::InvDestColor) \|&amp;nbsp;[InvSrcAlpha](PBlendCaps::InvSrcAlpha) \|&amp;nbsp;[InvSrcColor](PBlendCaps::InvSrcColor) \|&amp;nbsp;[One](PBlendCaps::One) \|&amp;nbsp;[SrcAlpha](PBlendCaps::SrcAlpha) \|&amp;nbsp;[SrcAlphaSat](PBlendCaps::SrcAlphaSat) \|&amp;nbsp;[SrcColor](PBlendCaps::SrcColor) \|&amp;nbsp;[Zero](PBlendCaps::Zero)}</span>
+    <span class="kw">pub</span> <span class="ident">dest_blend_caps</span>:                                <span class="ident">PBlendCaps</span>,
+
+    <span class="doccomment">/// Alpha-test comparison capabilities. This member can include the same capability flags defined for the ZCmpCaps member.</span>
+    <span class="doccomment">/// If this member contains only the [PCmpCaps::Always] or only the [PCmpCaps::Never] capability, the driver does not support alpha tests.</span>
+    <span class="doccomment">/// Otherwise, the flags identify the individual comparisons that are supported for alpha testing.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// | System    | Value     |</span>
+    <span class="doccomment">/// | --------- | --------- |</span>
+    <span class="doccomment">/// | Sacrilege | [PCmpCaps]::{[Always](PCmpCaps::Always) \|&amp;nbsp;[Equal](PCmpCaps::Equal) \|&amp;nbsp;[Greater](PCmpCaps::Greater) \|&amp;nbsp;[GreaterEqual](PCmpCaps::GreaterEqual) \|&amp;nbsp;[Less](PCmpCaps::Less) \|&amp;nbsp;[LessEqual](PCmpCaps::LessEqual) \|&amp;nbsp;[Never](PCmpCaps::Never) \|&amp;nbsp;[NotEqual](PCmpCaps::NotEqual)}</span>
+    <span class="kw">pub</span> <span class="ident">alpha_cmp_caps</span>:                                 <span class="ident">PCmpCaps</span>,
+
+    <span class="doccomment">/// | System    | Value     |</span>
+    <span class="doccomment">/// | --------- | --------- |</span>
+    <span class="doccomment">/// | Sacrilege | [PShadeCaps]::{[AlphaGouraudBlend](PShadeCaps::AlphaGouraudBlend) \|&amp;nbsp;[ColorGouraudRgb](PShadeCaps::ColorGouraudRgb) \|&amp;nbsp;[FogGouraud](PShadeCaps::FogGouraud) \|&amp;nbsp;[SpecularGouraudRgb](PShadeCaps::SpecularGouraudRgb)}</span>
+    <span class="kw">pub</span> <span class="ident">shade_caps</span>:                                     <span class="ident">PShadeCaps</span>,
+
+    <span class="doccomment">/// | System    | Value     |</span>
+    <span class="doccomment">/// | --------- | --------- |</span>
+    <span class="doccomment">/// | Sacrilege | [PTextureCaps]::{[Alpha](PTextureCaps::Alpha) \|&amp;nbsp;[CubeMap](PTextureCaps::CubeMap) \|&amp;nbsp;[MipCubeMap](PTextureCaps::MipCubeMap) \|&amp;nbsp;[MipMap](PTextureCaps::MipMap) \|&amp;nbsp;[MipVolumeMap](PTextureCaps::MipVolumeMap) \|&amp;nbsp;[Perspective](PTextureCaps::Perspective) \|&amp;nbsp;[Projected](PTextureCaps::Projected) \|&amp;nbsp;[TexRepeatNotScaledBySize](PTextureCaps::TexRepeatNotScaledBySize) \|&amp;nbsp;[VolumeMap](PTextureCaps::VolumeMap)}</span>
+    <span class="kw">pub</span> <span class="ident">texture_caps</span>:                                   <span class="ident">PTextureCaps</span>,
+
+    <span class="doccomment">/// | System    | Value     |</span>
+    <span class="doccomment">/// | --------- | --------- |</span>
+    <span class="doccomment">/// | Sacrilege | [PTFilterCaps]::{[MagFPoint](PTFilterCaps::MagFPoint) \|&amp;nbsp;[MagFLinear](PTFilterCaps::MagFLinear) \|&amp;nbsp;[MagFAnisotropic](PTFilterCaps::MagFAnisotropic) \|&amp;nbsp;[MinFPoint](PTFilterCaps::MinFPoint) \|&amp;nbsp;[MinFLinear](PTFilterCaps::MinFLinear) \|&amp;nbsp;[MinFAnisotropic](PTFilterCaps::MinFAnisotropic) \|&amp;nbsp;[MipFPoint](PTFilterCaps::MipFPoint) \|&amp;nbsp;[MipFLinear](PTFilterCaps::MipFLinear)}</span>
+    <span class="kw">pub</span> <span class="ident">texture_filter_caps</span>:                            <span class="ident">PTFilterCaps</span>,
+
+    <span class="doccomment">/// | System    | Value     |</span>
+    <span class="doccomment">/// | --------- | --------- |</span>
+    <span class="doccomment">/// | Sacrilege | [PTFilterCaps]::{[MagFPoint](PTFilterCaps::MagFPoint) \|&amp;nbsp;[MagFLinear](PTFilterCaps::MagFLinear) \|&amp;nbsp;[MinFPoint](PTFilterCaps::MinFPoint) \|&amp;nbsp;[MinFLinear](PTFilterCaps::MinFLinear) \|&amp;nbsp;[MipFPoint](PTFilterCaps::MipFPoint) \|&amp;nbsp;[MipFLinear](PTFilterCaps::MipFLinear)}</span>
+    <span class="kw">pub</span> <span class="ident">cube_texture_filter_caps</span>:                       <span class="ident">PTFilterCaps</span>,
+
+    <span class="doccomment">/// | System    | Value     |</span>
+    <span class="doccomment">/// | --------- | --------- |</span>
+    <span class="doccomment">/// | Sacrilege | [PTFilterCaps]::{[MagFPoint](PTFilterCaps::MagFPoint) \|&amp;nbsp;[MagFLinear](PTFilterCaps::MagFLinear) \|&amp;nbsp;[MagFAnisotropic](PTFilterCaps::MagFAnisotropic) \|&amp;nbsp;[MinFPoint](PTFilterCaps::MinFPoint) \|&amp;nbsp;[MinFLinear](PTFilterCaps::MinFLinear) \|&amp;nbsp;[MinFAnisotropic](PTFilterCaps::MinFAnisotropic) \|&amp;nbsp;[MipFPoint](PTFilterCaps::MipFPoint) \|&amp;nbsp;[MipFLinear](PTFilterCaps::MipFLinear)}</span>
+    <span class="kw">pub</span> <span class="ident">volume_texture_filter_caps</span>:                     <span class="ident">PTFilterCaps</span>,
+
+    <span class="doccomment">/// | System    | Value     |</span>
+    <span class="doccomment">/// | --------- | --------- |</span>
+    <span class="doccomment">/// | Sacrilege | [PTAddressCaps]::{[Border](PTAddressCaps::Border) \|&amp;nbsp;[Clamp](PTAddressCaps::Clamp) \|&amp;nbsp;[IndependentUV](PTAddressCaps::IndependentUV) \|&amp;nbsp;[Mirror](PTAddressCaps::Mirror) \|&amp;nbsp;[MirrorOnce](PTAddressCaps::MirrorOnce) \|&amp;nbsp;[Wrap](PTAddressCaps::Wrap)}</span>
+    <span class="kw">pub</span> <span class="ident">texture_address_caps</span>:                           <span class="ident">PTAddressCaps</span>,
+
+    <span class="doccomment">/// | System    | Value     |</span>
+    <span class="doccomment">/// | --------- | --------- |</span>
+    <span class="doccomment">/// | Sacrilege | [PTAddressCaps]::{[Border](PTAddressCaps::Border) \|&amp;nbsp;[Clamp](PTAddressCaps::Clamp) \|&amp;nbsp;[IndependentUV](PTAddressCaps::IndependentUV) \|&amp;nbsp;[Mirror](PTAddressCaps::Mirror) \|&amp;nbsp;[MirrorOnce](PTAddressCaps::MirrorOnce) \|&amp;nbsp;[Wrap](PTAddressCaps::Wrap)}</span>
+    <span class="kw">pub</span> <span class="ident">volume_texture_address_caps</span>:                    <span class="ident">PTAddressCaps</span>,
+
+    <span class="doccomment">/// | System    | Value     |</span>
+    <span class="doccomment">/// | --------- | --------- |</span>
+    <span class="doccomment">/// | Sacrilege | [LineCaps]::{[AlphaCmp](LineCaps::AlphaCmp) \|&amp;nbsp;[Blend](LineCaps::Blend) \|&amp;nbsp;[Fog](LineCaps::Fog) \|&amp;nbsp;[Texture](LineCaps::Texture) \|&amp;nbsp;[ZTest](LineCaps::ZTest)}</span>
+    <span class="kw">pub</span> <span class="ident">line_caps</span>:                                      <span class="ident">LineCaps</span>,
+
+    <span class="doccomment">/// | System    | Value     |</span>
+    <span class="doccomment">/// | --------- | --------- |</span>
+    <span class="doccomment">/// | Sacrilege | 16384</span>
+    <span class="kw">pub</span> <span class="ident">max_texture_width</span>:                              <span class="ident">dword</span>,
+
+    <span class="doccomment">/// | System    | Value     |</span>
+    <span class="doccomment">/// | --------- | --------- |</span>
+    <span class="doccomment">/// | Sacrilege | 16384</span>
+    <span class="kw">pub</span> <span class="ident">max_texture_height</span>:                             <span class="ident">dword</span>,
+
+    <span class="doccomment">/// | System    | Value     |</span>
+    <span class="doccomment">/// | --------- | --------- |</span>
+    <span class="doccomment">/// | Sacrilege | 8192</span>
+    <span class="kw">pub</span> <span class="ident">max_volume_extent</span>:                              <span class="ident">dword</span>,
+
+    <span class="doccomment">/// | System    | Value     |</span>
+    <span class="doccomment">/// | --------- | --------- |</span>
+    <span class="doccomment">/// | Sacrilege | 8192</span>
+    <span class="kw">pub</span> <span class="ident">max_texture_repeat</span>:                             <span class="ident">dword</span>,
+
+    <span class="doccomment">/// | System    | Value     |</span>
+    <span class="doccomment">/// | --------- | --------- |</span>
+    <span class="doccomment">/// | Sacrilege | 8192</span>
+    <span class="kw">pub</span> <span class="ident">max_texture_aspect_ratio</span>:                       <span class="ident">dword</span>,
+
+    <span class="doccomment">/// | System    | Value     |</span>
+    <span class="doccomment">/// | --------- | --------- |</span>
+    <span class="doccomment">/// | Sacrilege | 16</span>
+    <span class="kw">pub</span> <span class="ident">max_anisotropy</span>:                                 <span class="ident">dword</span>,
+
+    <span class="doccomment">/// | System    | Value     |</span>
+    <span class="doccomment">/// | --------- | --------- |</span>
+    <span class="doccomment">/// | Sacrilege | 10000000000.0</span>
+    <span class="kw">pub</span> <span class="ident">max_vertex_w</span>:                                   <span class="ident">float</span>,
+
+    <span class="doccomment">/// | System    | Value     |</span>
+    <span class="doccomment">/// | --------- | --------- |</span>
+    <span class="doccomment">/// | Sacrilege | -32768.0</span>
+    <span class="kw">pub</span> <span class="ident">guard_band_left</span>:                                <span class="ident">float</span>,
+
+    <span class="doccomment">/// | System    | Value     |</span>
+    <span class="doccomment">/// | --------- | --------- |</span>
+    <span class="doccomment">/// | Sacrilege | -32768.0</span>
+    <span class="kw">pub</span> <span class="ident">guard_band_top</span>:                                 <span class="ident">float</span>,
+
+    <span class="doccomment">/// | System    | Value     |</span>
+    <span class="doccomment">/// | --------- | --------- |</span>
+    <span class="doccomment">/// | Sacrilege | 32768.0</span>
+    <span class="kw">pub</span> <span class="ident">guard_band_right</span>:                               <span class="ident">float</span>,
+
+    <span class="doccomment">/// | System    | Value     |</span>
+    <span class="doccomment">/// | --------- | --------- |</span>
+    <span class="doccomment">/// | Sacrilege | 32768.0</span>
+    <span class="kw">pub</span> <span class="ident">guard_band_bottom</span>:                              <span class="ident">float</span>,
+
+    <span class="doccomment">/// | System    | Value     |</span>
+    <span class="doccomment">/// | --------- | --------- |</span>
+    <span class="doccomment">/// | Sacrilege | 0.0</span>
+    <span class="kw">pub</span> <span class="ident">extents_adjust</span>:                                 <span class="ident">float</span>,
+
+    <span class="doccomment">/// | System    | Value     |</span>
+    <span class="doccomment">/// | --------- | --------- |</span>
+    <span class="doccomment">/// | Sacrilege | [StencilCaps]::{[Keep](StencilCaps::Keep) \|&amp;nbsp;[Zero](StencilCaps::Zero) \|&amp;nbsp;[Replace](StencilCaps::Replace) \|&amp;nbsp;[IncrSat](StencilCaps::IncrSat) \|&amp;nbsp;[DecrSat](StencilCaps::DecrSat) \|&amp;nbsp;[Invert](StencilCaps::Invert) \|&amp;nbsp;[Incr](StencilCaps::Incr) \|&amp;nbsp;[Decr](StencilCaps::Decr) \|&amp;nbsp;[TwoSided](StencilCaps::TwoSided)}</span>
+    <span class="kw">pub</span> <span class="ident">stencil_caps</span>:                                   <span class="ident">StencilCaps</span>,
+
+    <span class="doccomment">/// | System    | Value     |</span>
+    <span class="doccomment">/// | --------- | --------- |</span>
+    <span class="doccomment">/// | Sacrilege | [FvfCaps]::{[PSize](FvfCaps::PSize) \|&amp;nbsp;0x00000008}</span>
+    <span class="kw">pub</span> <span class="ident">fvf_caps</span>:                                       <span class="ident">FvfCaps</span>,
+
+    <span class="doccomment">/// | System    | Value     |</span>
+    <span class="doccomment">/// | --------- | --------- |</span>
+    <span class="doccomment">/// | Sacrilege | [TexOpCaps]::{[Add](TexOpCaps::Add) \|&amp;nbsp;[AddSigned](TexOpCaps::AddSigned) \|&amp;nbsp;[AddSigned2x](TexOpCaps::AddSigned2x) \|&amp;nbsp;[AddSmooth](TexOpCaps::AddSmooth) \|&amp;nbsp;[BlendCurrentAlpha](TexOpCaps::BlendCurrentAlpha) \|&amp;nbsp;[BlendDiffuseAlpha](TexOpCaps::BlendDiffuseAlpha) \|&amp;nbsp;[BlendFactorAlpha](TexOpCaps::BlendFactorAlpha) \|&amp;nbsp;[BlendTextureAlpha](TexOpCaps::BlendTextureAlpha) \|&amp;nbsp;[BlendTextureAlphaPM](TexOpCaps::BlendTextureAlphaPM) \|&amp;nbsp;[BumpEnvMap](TexOpCaps::BumpEnvMap) \|&amp;nbsp;[BumpEnvMapLuminance](TexOpCaps::BumpEnvMapLuminance) \|&amp;nbsp;[Disable](TexOpCaps::Disable) \|&amp;nbsp;[DotProduct3](TexOpCaps::DotProduct3) \|&amp;nbsp;[Lerp](TexOpCaps::Lerp) \|&amp;nbsp;[Modulate](TexOpCaps::Modulate) \|&amp;nbsp;[Modulate2x](TexOpCaps::Modulate2x) \|&amp;nbsp;[Modulate4x](TexOpCaps::Modulate4x) \|&amp;nbsp;[ModulateAlphaAddColor](TexOpCaps::ModulateAlphaAddColor) \|&amp;nbsp;[ModulateColorAddAlpha](TexOpCaps::ModulateColorAddAlpha) \|&amp;nbsp;[ModulateInvAlphaAddColor](TexOpCaps::ModulateInvAlphaAddColor) \|&amp;nbsp;[ModulateInvColorAddAlpha](TexOpCaps::ModulateInvColorAddAlpha) \|&amp;nbsp;[MultiplyAdd](TexOpCaps::MultiplyAdd) \|&amp;nbsp;[Premodulate](TexOpCaps::Premodulate) \|&amp;nbsp;[SelectArg1](TexOpCaps::SelectArg1) \|&amp;nbsp;[SelectArg2](TexOpCaps::SelectArg2) \|&amp;nbsp;[Subtract](TexOpCaps::Subtract)}</span>
+    <span class="kw">pub</span> <span class="ident">texture_op_caps</span>:                                <span class="ident">TexOpCaps</span>,
+
+    <span class="doccomment">/// | System    | Value     |</span>
+    <span class="doccomment">/// | --------- | --------- |</span>
+    <span class="doccomment">/// | Sacrilege | 8</span>
+    <span class="kw">pub</span> <span class="ident">max_texture_blend_stages</span>:                       <span class="ident">dword</span>,
+
+    <span class="doccomment">/// | System    | Value     |</span>
+    <span class="doccomment">/// | --------- | --------- |</span>
+    <span class="doccomment">/// | Sacrilege | 8</span>
+    <span class="kw">pub</span> <span class="ident">max_simultaneous_textures</span>:                      <span class="ident">dword</span>,
+
+    <span class="doccomment">/// | System    | Value     |</span>
+    <span class="doccomment">/// | --------- | --------- |</span>
+    <span class="doccomment">/// | Sacrilege | [VtxPCaps]::{[DirectionalLights](VtxPCaps::DirectionalLights) \|&amp;nbsp;[LocalViewer](VtxPCaps::LocalViewer) \|&amp;nbsp;[MaterialSource7](VtxPCaps::MaterialSource7) \|&amp;nbsp;[PositionalLights](VtxPCaps::PositionalLights) \|&amp;nbsp;[TexGen](VtxPCaps::TexGen) \|&amp;nbsp;[TexGenSphereMap](VtxPCaps::TexGenSphereMap) \|&amp;nbsp;[Tweening](VtxPCaps::Tweening)}</span>
+    <span class="kw">pub</span> <span class="ident">vertex_processing_caps</span>:                         <span class="ident">VtxPCaps</span>,
+
+    <span class="doccomment">/// | System    | Value     |</span>
+    <span class="doccomment">/// | --------- | --------- |</span>
+    <span class="doccomment">/// | Sacrilege | 10</span>
+    <span class="kw">pub</span> <span class="ident">max_active_lights</span>:                              <span class="ident">dword</span>,
+
+    <span class="doccomment">/// | System    | Value     |</span>
+    <span class="doccomment">/// | --------- | --------- |</span>
+    <span class="doccomment">/// | Sacrilege | 6</span>
+    <span class="kw">pub</span> <span class="ident">max_user_clip_planes</span>:                           <span class="ident">dword</span>,
+
+    <span class="doccomment">/// | System    | Value     |</span>
+    <span class="doccomment">/// | --------- | --------- |</span>
+    <span class="doccomment">/// | Sacrilege | 4</span>
+    <span class="kw">pub</span> <span class="ident">max_vertex_blend_matrices</span>:                      <span class="ident">dword</span>,
+
+    <span class="doccomment">/// | System    | Value     |</span>
+    <span class="doccomment">/// | --------- | --------- |</span>
+    <span class="doccomment">/// | Sacrilege | 8</span>
+    <span class="kw">pub</span> <span class="ident">max_vertex_blend_matrix_index</span>:                  <span class="ident">dword</span>,
+
+    <span class="doccomment">/// | System    | Value     |</span>
+    <span class="doccomment">/// | --------- | --------- |</span>
+    <span class="doccomment">/// | Sacrilege | 256.0</span>
+    <span class="kw">pub</span> <span class="ident">max_point_size</span>:                                 <span class="ident">float</span>,
+
+    <span class="doccomment">/// | System    | Value     |</span>
+    <span class="doccomment">/// | --------- | --------- |</span>
+    <span class="doccomment">/// | Sacrilege | 5592405</span>
+    <span class="kw">pub</span> <span class="ident">max_primitive_count</span>:                            <span class="ident">dword</span>,
+
+    <span class="doccomment">/// | System    | Value     |</span>
+    <span class="doccomment">/// | --------- | --------- |</span>
+    <span class="doccomment">/// | Sacrilege | 16777215</span>
+    <span class="kw">pub</span> <span class="ident">max_vertex_index</span>:                               <span class="ident">dword</span>,
+
+    <span class="doccomment">/// | System    | Value     |</span>
+    <span class="doccomment">/// | --------- | --------- |</span>
+    <span class="doccomment">/// | Sacrilege | 16</span>
+    <span class="kw">pub</span> <span class="ident">max_streams</span>:                                    <span class="ident">dword</span>,
+
+    <span class="doccomment">/// | System    | Value     |</span>
+    <span class="doccomment">/// | --------- | --------- |</span>
+    <span class="doccomment">/// | Sacrilege | 508</span>
+    <span class="kw">pub</span> <span class="ident">max_stream_stride</span>:                              <span class="ident">dword</span>,
+
+    <span class="doccomment">/// | System    | Value     |</span>
+    <span class="doccomment">/// | --------- | --------- |</span>
+    <span class="doccomment">/// | Sacrilege | [ShaderVersion::VS_3_0]</span>
+    <span class="kw">pub</span> <span class="ident">vertex_shader_version</span>:                          <span class="ident">ShaderVersion</span>,
+
+    <span class="doccomment">/// | System    | Value     |</span>
+    <span class="doccomment">/// | --------- | --------- |</span>
+    <span class="doccomment">/// | Sacrilege | 256</span>
+    <span class="kw">pub</span> <span class="ident">max_vertex_shader_const</span>:                        <span class="ident">dword</span>,
+
+    <span class="doccomment">/// | System    | Value     |</span>
+    <span class="doccomment">/// | --------- | --------- |</span>
+    <span class="doccomment">/// | Sacrilege | [ShaderVersion::PS_3_0]</span>
+    <span class="kw">pub</span> <span class="ident">pixel_shader_version</span>:                           <span class="ident">ShaderVersion</span>,
+
+    <span class="doccomment">/// | System    | Value     |</span>
+    <span class="doccomment">/// | --------- | --------- |</span>
+    <span class="doccomment">/// | Sacrilege | 3.4028235e38</span>
+    <span class="kw">pub</span> <span class="ident">pixel_shader_1x_max_value</span>:                      <span class="ident">float</span>,
+
+    <span class="comment">// DX9 specific</span>
+
+    <span class="doccomment">/// | System    | Value     |</span>
+    <span class="doccomment">/// | --------- | --------- |</span>
+    <span class="doccomment">/// | Sacrilege | [DevCaps2]::{[CanStretchRectFromTextures](DevCaps2::CanStretchRectFromTextures) \|&amp;nbsp;[PresampledDMapNPatch](DevCaps2::PresampledDMapNPatch) \|&amp;nbsp;[StreamOffset](DevCaps2::StreamOffset) \|&amp;nbsp;[VertexElementsCanShareStreamOffset](DevCaps2::VertexElementsCanShareStreamOffset)}</span>
+    <span class="kw">pub</span> <span class="ident">dev_caps2</span>:                                      <span class="ident">DevCaps2</span>,
+
+    <span class="doccomment">/// | System    | Value     |</span>
+    <span class="doccomment">/// | --------- | --------- |</span>
+    <span class="doccomment">/// | Sacrilege | 1.0</span>
+    <span class="kw">pub</span> <span class="ident">max_npatch_tessellation_level</span>:                  <span class="ident">float</span>,
+
+    <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
+    <span class="kw">pub</span> <span class="ident">reserved5</span>:                                      <span class="ident">Reserved5</span>,
+
+    <span class="doccomment">/// | System    | Value     |</span>
+    <span class="doccomment">/// | --------- | --------- |</span>
+    <span class="doccomment">/// | Sacrilege | 0</span>
+    <span class="kw">pub</span> <span class="ident">master_adapter_ordinal</span>:                         <span class="ident">AdapterOrdinal</span>,
+
+    <span class="doccomment">/// | System    | Value     |</span>
+    <span class="doccomment">/// | --------- | --------- |</span>
+    <span class="doccomment">/// | Sacrilege | 0</span>
+    <span class="kw">pub</span> <span class="ident">adapter_ordinal_in_group</span>:                       <span class="ident">uint</span>,
+
+    <span class="doccomment">/// | System    | Value     |</span>
+    <span class="doccomment">/// | --------- | --------- |</span>
+    <span class="doccomment">/// | Sacrilege | 4</span>
+    <span class="kw">pub</span> <span class="ident">number_of_adapters_in_group</span>:                    <span class="ident">uint</span>,
+
+    <span class="doccomment">/// | System    | Value     |</span>
+    <span class="doccomment">/// | --------- | --------- |</span>
+    <span class="doccomment">/// | Sacrilege | [DtCaps]::{[UByte4](DtCaps::UByte4) \|&amp;nbsp;[UByte4N](DtCaps::UByte4N) \|&amp;nbsp;[Short2N](DtCaps::Short2N) \|&amp;nbsp;[Short4N](DtCaps::Short4N) \|&amp;nbsp;[UShort2N](DtCaps::UShort2N) \|&amp;nbsp;[UShort4N](DtCaps::UShort4N) \|&amp;nbsp;[UDec3](DtCaps::UDec3) \|&amp;nbsp;[Dec3N](DtCaps::Dec3N) \|&amp;nbsp;[Float16_2](DtCaps::Float16_2) \|&amp;nbsp;[Float16_4](DtCaps::Float16_4)}</span>
+    <span class="kw">pub</span> <span class="ident">decl_types</span>:                                     <span class="ident">DtCaps</span>,
+
+    <span class="doccomment">/// | System    | Value     |</span>
+    <span class="doccomment">/// | --------- | --------- |</span>
+    <span class="doccomment">/// | Sacrilege | 4</span>
+    <span class="kw">pub</span> <span class="ident">num_simultaneous_rts</span>:                           <span class="ident">dword</span>,
+
+    <span class="doccomment">/// | System    | Value     |</span>
+    <span class="doccomment">/// | --------- | --------- |</span>
+    <span class="doccomment">/// | Sacrilege | [PTFilterCaps]::{[MagFPoint](PTFilterCaps::MagFPoint) \|&amp;nbsp;[MagFLinear](PTFilterCaps::MagFLinear) \|&amp;nbsp;[MinFPoint](PTFilterCaps::MinFPoint) \|&amp;nbsp;[MinFLinear](PTFilterCaps::MinFLinear)}</span>
+    <span class="kw">pub</span> <span class="ident">stretch_rect_filter_caps</span>:                       <span class="ident">PTFilterCaps</span>, <span class="comment">// just some subset</span>
+
+    <span class="doccomment">/// &lt;h3&gt;Sacrilege&lt;/h3&gt;</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// [VShaderCaps20] {&lt;br&gt;</span>
+    <span class="doccomment">/// &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;caps: [Vs20Caps]::[Predication](Vs20Caps::Predication),&lt;br&gt;</span>
+    <span class="doccomment">/// &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;dynamic_flow_control_depth: 24,&lt;br&gt;</span>
+    <span class="doccomment">/// &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;num_temps: 32,&lt;br&gt;</span>
+    <span class="doccomment">/// &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;static_flow_control_depth: 4,&lt;br&gt;</span>
+    <span class="doccomment">/// }&lt;br&gt;</span>
+    <span class="kw">pub</span> <span class="ident">vs_20_caps</span>:                                     <span class="ident">VShaderCaps20</span>,
+
+    <span class="doccomment">/// &lt;h3&gt;Sacrilege&lt;/h3&gt;</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// [PShaderCaps20] {&lt;br&gt;</span>
+    <span class="doccomment">/// &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;caps: [Ps20Caps]::{[ArbitrarySwizzle](Ps20Caps::ArbitrarySwizzle) \|&amp;nbsp;[GradientInstructions](Ps20Caps::GradientInstructions) \|&amp;nbsp;[Predication](Ps20Caps::Predication) \|&amp;nbsp;[NoDependentReadLimit](Ps20Caps::NoDependentReadLimit) \|&amp;nbsp;[NoTexInstructionLimit](Ps20Caps::NoTexInstructionLimit)},&lt;br&gt;</span>
+    <span class="doccomment">/// &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;dynamic_flow_control_depth: 24,&lt;br&gt;</span>
+    <span class="doccomment">/// &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;num_temps: 32,&lt;br&gt;</span>
+    <span class="doccomment">/// &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;static_flow_control_depth: 4,&lt;br&gt;</span>
+    <span class="doccomment">/// &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;num_instruction_slots: 512,&lt;br&gt;</span>
+    <span class="doccomment">/// }</span>
+    <span class="kw">pub</span> <span class="ident">ps_20_caps</span>:                                     <span class="ident">PShaderCaps20</span>,
+
+    <span class="doccomment">/// | System    | Value     |</span>
+    <span class="doccomment">/// | --------- | --------- |</span>
+    <span class="doccomment">/// | Sacrilege | [PTFilterCaps]::{[MagFPoint](PTFilterCaps::MagFPoint) \|&amp;nbsp;[MagFLinear](PTFilterCaps::MagFLinear) \|&amp;nbsp;[MinFPoint](PTFilterCaps::MinFPoint) \|&amp;nbsp;[MinFLinear](PTFilterCaps::MinFLinear)}</span>
+    <span class="kw">pub</span> <span class="ident">vertex_texture_filter_caps</span>:                     <span class="ident">PTFilterCaps</span>,
+
+    <span class="doccomment">/// | System    | Value     |</span>
+    <span class="doccomment">/// | --------- | --------- |</span>
+    <span class="doccomment">/// | Sacrilege | 4294967295</span>
+    <span class="kw">pub</span> <span class="ident">max_vshader_instructions_executed</span>:              <span class="ident">dword</span>,
+
+    <span class="doccomment">/// | System    | Value     |</span>
+    <span class="doccomment">/// | --------- | --------- |</span>
+    <span class="doccomment">/// | Sacrilege | 4294967295</span>
+    <span class="kw">pub</span> <span class="ident">max_pshader_instructions_executed</span>:              <span class="ident">dword</span>,
+
+    <span class="doccomment">/// | System    | Value     |</span>
+    <span class="doccomment">/// | --------- | --------- |</span>
+    <span class="doccomment">/// | Sacrilege | 32768</span>
+    <span class="kw">pub</span> <span class="ident">max_vertex_shader_30_instruction_slots</span>:         <span class="ident">dword</span>,
+
+    <span class="doccomment">/// | System    | Value     |</span>
+    <span class="doccomment">/// | --------- | --------- |</span>
+    <span class="doccomment">/// | Sacrilege | 32768</span>
+    <span class="kw">pub</span> <span class="ident">max_pixel_shader_30_instruction_slots</span>:          <span class="ident">dword</span>,
 }
 
-<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9caps/ns-d3d9caps-d3dpshadercaps2_0)\]
-/// D3DPSHADERCAPS2_0
-</span><span class="attribute">#[derive(Clone, Copy, Debug, Pod, Zeroable)]
-#[repr(C)]
-</span><span class="kw">pub struct </span>PShaderCaps20 {
-    <span class="kw">pub </span>caps:                                           Ps20Caps,
-    <span class="kw">pub </span>dynamic_flow_control_depth:                     int,    <span class="comment">// FIXME: type
-    </span><span class="kw">pub </span>num_temps:                                      int,    <span class="comment">// FIXME: type
-    </span><span class="kw">pub </span>static_flow_control_depth:                      int,    <span class="comment">// FIXME: type
-    </span><span class="kw">pub </span>num_instruction_slots:                          int,    <span class="comment">// FIXME: type
-</span>}
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9caps/ns-d3d9caps-d3dpshadercaps2_0)\]</span>
+<span class="doccomment">/// D3DPSHADERCAPS2_0</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">Debug</span>, <span class="ident">Pod</span>, <span class="ident">Zeroable</span>)]</span>
+<span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">PShaderCaps20</span> {
+    <span class="kw">pub</span> <span class="ident">caps</span>:                                           <span class="ident">Ps20Caps</span>,
+    <span class="kw">pub</span> <span class="ident">dynamic_flow_control_depth</span>:                     <span class="ident">int</span>,    <span class="comment">// FIXME: type</span>
+    <span class="kw">pub</span> <span class="ident">num_temps</span>:                                      <span class="ident">int</span>,    <span class="comment">// FIXME: type</span>
+    <span class="kw">pub</span> <span class="ident">static_flow_control_depth</span>:                      <span class="ident">int</span>,    <span class="comment">// FIXME: type</span>
+    <span class="kw">pub</span> <span class="ident">num_instruction_slots</span>:                          <span class="ident">int</span>,    <span class="comment">// FIXME: type</span>
+}
 
-<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9caps/ns-d3d9caps-d3dvshadercaps2_0)\]
-/// D3DVSHADERCAPS2_0
-</span><span class="attribute">#[derive(Clone, Copy, Debug, Pod, Zeroable)]
-#[repr(C)]
-</span><span class="kw">pub struct </span>VShaderCaps20 {
-    <span class="kw">pub </span>caps:                                           Vs20Caps,
-    <span class="kw">pub </span>dynamic_flow_control_depth:                     int,    <span class="comment">// FIXME: type
-    </span><span class="kw">pub </span>num_temps:                                      int,    <span class="comment">// FIXME: type
-    </span><span class="kw">pub </span>static_flow_control_depth:                      int,    <span class="comment">// FIXME: type
-</span>}
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9caps/ns-d3d9caps-d3dvshadercaps2_0)\]</span>
+<span class="doccomment">/// D3DVSHADERCAPS2_0</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">Debug</span>, <span class="ident">Pod</span>, <span class="ident">Zeroable</span>)]</span>
+<span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">VShaderCaps20</span> {
+    <span class="kw">pub</span> <span class="ident">caps</span>:                                           <span class="ident">Vs20Caps</span>,
+    <span class="kw">pub</span> <span class="ident">dynamic_flow_control_depth</span>:                     <span class="ident">int</span>,    <span class="comment">// FIXME: type</span>
+    <span class="kw">pub</span> <span class="ident">num_temps</span>:                                      <span class="ident">int</span>,    <span class="comment">// FIXME: type</span>
+    <span class="kw">pub</span> <span class="ident">static_flow_control_depth</span>:                      <span class="ident">int</span>,    <span class="comment">// FIXME: type</span>
+}
 
-<span class="macro">struct_mapping! </span>{
-    <span class="attribute">#[derive(<span class="kw">unsafe </span>{ AsRef, AsMut, Deref, DerefMut, FromInto })]
-    </span>Caps =&gt; D3DCAPS9 {
-        device_type                                     =&gt; DeviceType,
-        adapter_ordinal                                 =&gt; AdapterOrdinal,
-        caps                                            =&gt; Caps,
-        caps2                                           =&gt; Caps2,
-        caps3                                           =&gt; Caps3,
-        presentation_intervals                          =&gt; PresentationIntervals,
-        cursor_caps                                     =&gt; CursorCaps,
-        dev_caps                                        =&gt; DevCaps,
-        primitive_misc_caps                             =&gt; PrimitiveMiscCaps,
-        raster_caps                                     =&gt; RasterCaps,
-        z_cmp_caps                                      =&gt; ZCmpCaps,
-        src_blend_caps                                  =&gt; SrcBlendCaps,
-        dest_blend_caps                                 =&gt; DestBlendCaps,
-        alpha_cmp_caps                                  =&gt; AlphaCmpCaps,
-        shade_caps                                      =&gt; ShadeCaps,
-        texture_caps                                    =&gt; TextureCaps,
-        texture_filter_caps                             =&gt; TextureFilterCaps,
-        cube_texture_filter_caps                        =&gt; CubeTextureFilterCaps,
-        volume_texture_filter_caps                      =&gt; VolumeTextureFilterCaps,
-        texture_address_caps                            =&gt; TextureAddressCaps,
-        volume_texture_address_caps                     =&gt; VolumeTextureAddressCaps,
-        line_caps                                       =&gt; LineCaps,
-        max_texture_width                               =&gt; MaxTextureWidth,
-        max_texture_height                              =&gt; MaxTextureHeight,
-        max_volume_extent                               =&gt; MaxVolumeExtent,
-        max_texture_repeat                              =&gt; MaxTextureRepeat,
-        max_texture_aspect_ratio                        =&gt; MaxTextureAspectRatio,
-        max_anisotropy                                  =&gt; MaxAnisotropy,
-        max_vertex_w                                    =&gt; MaxVertexW,
-        guard_band_left                                 =&gt; GuardBandLeft,
-        guard_band_top                                  =&gt; GuardBandTop,
-        guard_band_right                                =&gt; GuardBandRight,
-        guard_band_bottom                               =&gt; GuardBandBottom,
-        extents_adjust                                  =&gt; ExtentsAdjust,
-        stencil_caps                                    =&gt; StencilCaps,
-        fvf_caps                                        =&gt; FVFCaps,
-        texture_op_caps                                 =&gt; TextureOpCaps,
-        max_texture_blend_stages                        =&gt; MaxTextureBlendStages,
-        max_simultaneous_textures                       =&gt; MaxSimultaneousTextures,
-        vertex_processing_caps                          =&gt; VertexProcessingCaps,
-        max_active_lights                               =&gt; MaxActiveLights,
-        max_user_clip_planes                            =&gt; MaxUserClipPlanes,
-        max_vertex_blend_matrices                       =&gt; MaxVertexBlendMatrices,
-        max_vertex_blend_matrix_index                   =&gt; MaxVertexBlendMatrixIndex,
-        max_point_size                                  =&gt; MaxPointSize,
-        max_primitive_count                             =&gt; MaxPrimitiveCount,
-        max_vertex_index                                =&gt; MaxVertexIndex,
-        max_streams                                     =&gt; MaxStreams,
-        max_stream_stride                               =&gt; MaxStreamStride,
-        vertex_shader_version                           =&gt; VertexShaderVersion,
-        max_vertex_shader_const                         =&gt; MaxVertexShaderConst,
-        pixel_shader_version                            =&gt; PixelShaderVersion,
-        pixel_shader_1x_max_value                       =&gt; PixelShader1xMaxValue,
-        dev_caps2                                       =&gt; DevCaps2,
-        max_npatch_tessellation_level                   =&gt; MaxNpatchTessellationLevel,
-        reserved5                                       =&gt; Reserved5,
-        master_adapter_ordinal                          =&gt; MasterAdapterOrdinal,
-        adapter_ordinal_in_group                        =&gt; AdapterOrdinalInGroup,
-        number_of_adapters_in_group                     =&gt; NumberOfAdaptersInGroup,
-        decl_types                                      =&gt; DeclTypes,
-        num_simultaneous_rts                            =&gt; NumSimultaneousRTs,
-        stretch_rect_filter_caps                        =&gt; StretchRectFilterCaps,
-        vs_20_caps                                      =&gt; VS20Caps,
-        ps_20_caps                                      =&gt; PS20Caps,
-        vertex_texture_filter_caps                      =&gt; VertexTextureFilterCaps,
-        max_vshader_instructions_executed               =&gt; MaxVShaderInstructionsExecuted,
-        max_pshader_instructions_executed               =&gt; MaxPShaderInstructionsExecuted,
-        max_vertex_shader_30_instruction_slots          =&gt; MaxVertexShader30InstructionSlots,
-        max_pixel_shader_30_instruction_slots           =&gt; MaxPixelShader30InstructionSlots,
+<span class="macro">struct_mapping!</span> {
+    <span class="attribute">#[<span class="ident">derive</span>(<span class="kw unsafe">unsafe</span> { <span class="ident">AsRef</span>, <span class="ident">AsMut</span>, <span class="ident">Deref</span>, <span class="ident">DerefMut</span>, <span class="ident">FromInto</span> })]</span>
+    <span class="ident">Caps</span> =&gt; <span class="ident">D3DCAPS9</span> {
+        <span class="ident">device_type</span>                                     =&gt; <span class="ident">DeviceType</span>,
+        <span class="ident">adapter_ordinal</span>                                 =&gt; <span class="ident">AdapterOrdinal</span>,
+        <span class="ident">caps</span>                                            =&gt; <span class="ident">Caps</span>,
+        <span class="ident">caps2</span>                                           =&gt; <span class="ident">Caps2</span>,
+        <span class="ident">caps3</span>                                           =&gt; <span class="ident">Caps3</span>,
+        <span class="ident">presentation_intervals</span>                          =&gt; <span class="ident">PresentationIntervals</span>,
+        <span class="ident">cursor_caps</span>                                     =&gt; <span class="ident">CursorCaps</span>,
+        <span class="ident">dev_caps</span>                                        =&gt; <span class="ident">DevCaps</span>,
+        <span class="ident">primitive_misc_caps</span>                             =&gt; <span class="ident">PrimitiveMiscCaps</span>,
+        <span class="ident">raster_caps</span>                                     =&gt; <span class="ident">RasterCaps</span>,
+        <span class="ident">z_cmp_caps</span>                                      =&gt; <span class="ident">ZCmpCaps</span>,
+        <span class="ident">src_blend_caps</span>                                  =&gt; <span class="ident">SrcBlendCaps</span>,
+        <span class="ident">dest_blend_caps</span>                                 =&gt; <span class="ident">DestBlendCaps</span>,
+        <span class="ident">alpha_cmp_caps</span>                                  =&gt; <span class="ident">AlphaCmpCaps</span>,
+        <span class="ident">shade_caps</span>                                      =&gt; <span class="ident">ShadeCaps</span>,
+        <span class="ident">texture_caps</span>                                    =&gt; <span class="ident">TextureCaps</span>,
+        <span class="ident">texture_filter_caps</span>                             =&gt; <span class="ident">TextureFilterCaps</span>,
+        <span class="ident">cube_texture_filter_caps</span>                        =&gt; <span class="ident">CubeTextureFilterCaps</span>,
+        <span class="ident">volume_texture_filter_caps</span>                      =&gt; <span class="ident">VolumeTextureFilterCaps</span>,
+        <span class="ident">texture_address_caps</span>                            =&gt; <span class="ident">TextureAddressCaps</span>,
+        <span class="ident">volume_texture_address_caps</span>                     =&gt; <span class="ident">VolumeTextureAddressCaps</span>,
+        <span class="ident">line_caps</span>                                       =&gt; <span class="ident">LineCaps</span>,
+        <span class="ident">max_texture_width</span>                               =&gt; <span class="ident">MaxTextureWidth</span>,
+        <span class="ident">max_texture_height</span>                              =&gt; <span class="ident">MaxTextureHeight</span>,
+        <span class="ident">max_volume_extent</span>                               =&gt; <span class="ident">MaxVolumeExtent</span>,
+        <span class="ident">max_texture_repeat</span>                              =&gt; <span class="ident">MaxTextureRepeat</span>,
+        <span class="ident">max_texture_aspect_ratio</span>                        =&gt; <span class="ident">MaxTextureAspectRatio</span>,
+        <span class="ident">max_anisotropy</span>                                  =&gt; <span class="ident">MaxAnisotropy</span>,
+        <span class="ident">max_vertex_w</span>                                    =&gt; <span class="ident">MaxVertexW</span>,
+        <span class="ident">guard_band_left</span>                                 =&gt; <span class="ident">GuardBandLeft</span>,
+        <span class="ident">guard_band_top</span>                                  =&gt; <span class="ident">GuardBandTop</span>,
+        <span class="ident">guard_band_right</span>                                =&gt; <span class="ident">GuardBandRight</span>,
+        <span class="ident">guard_band_bottom</span>                               =&gt; <span class="ident">GuardBandBottom</span>,
+        <span class="ident">extents_adjust</span>                                  =&gt; <span class="ident">ExtentsAdjust</span>,
+        <span class="ident">stencil_caps</span>                                    =&gt; <span class="ident">StencilCaps</span>,
+        <span class="ident">fvf_caps</span>                                        =&gt; <span class="ident">FVFCaps</span>,
+        <span class="ident">texture_op_caps</span>                                 =&gt; <span class="ident">TextureOpCaps</span>,
+        <span class="ident">max_texture_blend_stages</span>                        =&gt; <span class="ident">MaxTextureBlendStages</span>,
+        <span class="ident">max_simultaneous_textures</span>                       =&gt; <span class="ident">MaxSimultaneousTextures</span>,
+        <span class="ident">vertex_processing_caps</span>                          =&gt; <span class="ident">VertexProcessingCaps</span>,
+        <span class="ident">max_active_lights</span>                               =&gt; <span class="ident">MaxActiveLights</span>,
+        <span class="ident">max_user_clip_planes</span>                            =&gt; <span class="ident">MaxUserClipPlanes</span>,
+        <span class="ident">max_vertex_blend_matrices</span>                       =&gt; <span class="ident">MaxVertexBlendMatrices</span>,
+        <span class="ident">max_vertex_blend_matrix_index</span>                   =&gt; <span class="ident">MaxVertexBlendMatrixIndex</span>,
+        <span class="ident">max_point_size</span>                                  =&gt; <span class="ident">MaxPointSize</span>,
+        <span class="ident">max_primitive_count</span>                             =&gt; <span class="ident">MaxPrimitiveCount</span>,
+        <span class="ident">max_vertex_index</span>                                =&gt; <span class="ident">MaxVertexIndex</span>,
+        <span class="ident">max_streams</span>                                     =&gt; <span class="ident">MaxStreams</span>,
+        <span class="ident">max_stream_stride</span>                               =&gt; <span class="ident">MaxStreamStride</span>,
+        <span class="ident">vertex_shader_version</span>                           =&gt; <span class="ident">VertexShaderVersion</span>,
+        <span class="ident">max_vertex_shader_const</span>                         =&gt; <span class="ident">MaxVertexShaderConst</span>,
+        <span class="ident">pixel_shader_version</span>                            =&gt; <span class="ident">PixelShaderVersion</span>,
+        <span class="ident">pixel_shader_1x_max_value</span>                       =&gt; <span class="ident">PixelShader1xMaxValue</span>,
+        <span class="ident">dev_caps2</span>                                       =&gt; <span class="ident">DevCaps2</span>,
+        <span class="ident">max_npatch_tessellation_level</span>                   =&gt; <span class="ident">MaxNpatchTessellationLevel</span>,
+        <span class="ident">reserved5</span>                                       =&gt; <span class="ident">Reserved5</span>,
+        <span class="ident">master_adapter_ordinal</span>                          =&gt; <span class="ident">MasterAdapterOrdinal</span>,
+        <span class="ident">adapter_ordinal_in_group</span>                        =&gt; <span class="ident">AdapterOrdinalInGroup</span>,
+        <span class="ident">number_of_adapters_in_group</span>                     =&gt; <span class="ident">NumberOfAdaptersInGroup</span>,
+        <span class="ident">decl_types</span>                                      =&gt; <span class="ident">DeclTypes</span>,
+        <span class="ident">num_simultaneous_rts</span>                            =&gt; <span class="ident">NumSimultaneousRTs</span>,
+        <span class="ident">stretch_rect_filter_caps</span>                        =&gt; <span class="ident">StretchRectFilterCaps</span>,
+        <span class="ident">vs_20_caps</span>                                      =&gt; <span class="ident">VS20Caps</span>,
+        <span class="ident">ps_20_caps</span>                                      =&gt; <span class="ident">PS20Caps</span>,
+        <span class="ident">vertex_texture_filter_caps</span>                      =&gt; <span class="ident">VertexTextureFilterCaps</span>,
+        <span class="ident">max_vshader_instructions_executed</span>               =&gt; <span class="ident">MaxVShaderInstructionsExecuted</span>,
+        <span class="ident">max_pshader_instructions_executed</span>               =&gt; <span class="ident">MaxPShaderInstructionsExecuted</span>,
+        <span class="ident">max_vertex_shader_30_instruction_slots</span>          =&gt; <span class="ident">MaxVertexShader30InstructionSlots</span>,
+        <span class="ident">max_pixel_shader_30_instruction_slots</span>           =&gt; <span class="ident">MaxPixelShader30InstructionSlots</span>,
     }
 
-    <span class="attribute">#[derive(<span class="kw">unsafe </span>{ AsRef, AsMut, FromInto })]
-    </span>VShaderCaps20 =&gt; D3DVSHADERCAPS2_0 {
-        caps                                            =&gt; Caps,
-        dynamic_flow_control_depth                      =&gt; DynamicFlowControlDepth,
-        num_temps                                       =&gt; NumTemps,
-        static_flow_control_depth                       =&gt; StaticFlowControlDepth,
+    <span class="attribute">#[<span class="ident">derive</span>(<span class="kw unsafe">unsafe</span> { <span class="ident">AsRef</span>, <span class="ident">AsMut</span>, <span class="ident">FromInto</span> })]</span>
+    <span class="ident">VShaderCaps20</span> =&gt; <span class="ident">D3DVSHADERCAPS2_0</span> {
+        <span class="ident">caps</span>                                            =&gt; <span class="ident">Caps</span>,
+        <span class="ident">dynamic_flow_control_depth</span>                      =&gt; <span class="ident">DynamicFlowControlDepth</span>,
+        <span class="ident">num_temps</span>                                       =&gt; <span class="ident">NumTemps</span>,
+        <span class="ident">static_flow_control_depth</span>                       =&gt; <span class="ident">StaticFlowControlDepth</span>,
     }
 
-    <span class="attribute">#[derive(<span class="kw">unsafe </span>{ AsRef, AsMut, FromInto })]
-    </span>PShaderCaps20 =&gt; D3DPSHADERCAPS2_0 {
-        caps                                            =&gt; Caps,
-        dynamic_flow_control_depth                      =&gt; DynamicFlowControlDepth,
-        num_temps                                       =&gt; NumTemps,
-        static_flow_control_depth                       =&gt; StaticFlowControlDepth,
-        num_instruction_slots                           =&gt; NumInstructionSlots,
+    <span class="attribute">#[<span class="ident">derive</span>(<span class="kw unsafe">unsafe</span> { <span class="ident">AsRef</span>, <span class="ident">AsMut</span>, <span class="ident">FromInto</span> })]</span>
+    <span class="ident">PShaderCaps20</span> =&gt; <span class="ident">D3DPSHADERCAPS2_0</span> {
+        <span class="ident">caps</span>                                            =&gt; <span class="ident">Caps</span>,
+        <span class="ident">dynamic_flow_control_depth</span>                      =&gt; <span class="ident">DynamicFlowControlDepth</span>,
+        <span class="ident">num_temps</span>                                       =&gt; <span class="ident">NumTemps</span>,
+        <span class="ident">static_flow_control_depth</span>                       =&gt; <span class="ident">StaticFlowControlDepth</span>,
+        <span class="ident">num_instruction_slots</span>                           =&gt; <span class="ident">NumInstructionSlots</span>,
     }
 }
 
 
-<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9caps/ns-d3d9caps-d3dcaps9)\]
-</span><span class="attribute">#[doc(hidden)]
-#[derive(Clone, Copy, Debug, Default, PartialEq, Eq, PartialOrd, Ord, Hash, Pod, Zeroable)] #[repr(transparent)] </span><span class="kw">pub struct </span>Reserved5(DWORD);
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9caps/ns-d3d9caps-d3dcaps9)\]</span>
+<span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">Debug</span>, <span class="ident">Default</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">PartialOrd</span>, <span class="ident">Ord</span>, <span class="ident">Hash</span>, <span class="ident">Pod</span>, <span class="ident">Zeroable</span>)]</span> <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">transparent</span>)]</span> <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Reserved5</span>(<span class="ident">DWORD</span>);
 
-<span class="comment">//#cpp2rust D3DCAPS9                    = d3d9::Caps
-//#cpp2rus_ D3DCONTENTPROTECTIONCAPS    = d3d::
-//#cpp2rus_ D3DOVERLAYCAPS              = d3d::
-//#cpp2rust D3DPSHADERCAPS2_0           = d3d::PShaderCaps20
-//#cpp2rust D3DVSHADERCAPS2_0           = d3d::VShaderCaps20
-</span></code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (b44197abb 2022-09-05)" ></div></body></html>
+<span class="comment">//#cpp2rust D3DCAPS9                    = d3d9::Caps</span>
+<span class="comment">//#cpp2rus_ D3DCONTENTPROTECTIONCAPS    = d3d::</span>
+<span class="comment">//#cpp2rus_ D3DOVERLAYCAPS              = d3d::</span>
+<span class="comment">//#cpp2rust D3DPSHADERCAPS2_0           = d3d::PShaderCaps20</span>
+<span class="comment">//#cpp2rust D3DVSHADERCAPS2_0           = d3d::VShaderCaps20</span>
+</code></pre></div>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0 (4b91a6ea7 2022-08-08)" ></div>
+</body></html>

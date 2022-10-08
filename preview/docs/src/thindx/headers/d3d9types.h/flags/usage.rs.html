@@ -1,4 +1,10 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3d9types.h\flags\usage.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>usage.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" href="../../../../../normalize.css"><link rel="stylesheet" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" href="../../../../../ayu.css" disabled><link rel="stylesheet" href="../../../../../dark.css" disabled><link rel="stylesheet" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a><h2 class="location"></h2></nav><nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div></a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><button type="button">?</button></div><div id="settings-menu" tabindex="-1"><a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `thindx\src\headers\d3d9types.h\flags\usage.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>usage.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../../../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../../../../storage.js"></script><script defer src="../../../../../source-script.js"></script><script defer src="../../../../../source-files.js"></script><script defer src="../../../../../main.js"></script><noscript><link rel="stylesheet" href="../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../../../../../thindx/index.html"><div class="logo-container"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></div>
+        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../../../../thindx/index.html"><img class="rust-logo" src="../../../../../rust-logo.svg" alt="logo"></a><nav class="sub"><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><div id="settings-menu" tabindex="-1">
+                                <a href="../../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../../wheel.svg"></a></div>
+                        </div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">1</span>
 <span id="2">2</span>
 <span id="3">3</span>
 <span id="4">4</span>
@@ -204,211 +210,212 @@
 <span id="204">204</span>
 <span id="205">205</span>
 <span id="206">206</span>
-</pre><pre class="rust"><code><span class="attribute">#[allow(unused_imports)] </span><span class="kw">use crate</span>::<span class="kw-2">*</span>;
+</pre><pre class="rust"><code><span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span> <span class="kw">use</span> <span class="kw">crate</span>::<span class="kw-2">*</span>;
 
-<span class="kw">use </span>bytemuck::<span class="kw-2">*</span>;
+<span class="kw">use</span> <span class="ident">bytemuck</span>::<span class="kw-2">*</span>;
 
-<span class="kw">use </span>winapi::shared::d3d9types::<span class="kw-2">*</span>;
-<span class="kw">type </span>D3DUSAGE = u32; <span class="comment">// there&#39;s no actual type
+<span class="kw">use</span> <span class="ident">winapi::shared::d3d9types</span>::<span class="kw-2">*</span>;
+<span class="kw">type</span> <span class="ident">D3DUSAGE</span> <span class="op">=</span> <span class="ident">u32</span>; <span class="comment">// there&#39;s no actual type</span>
 
 
 
-</span><span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dusage)\]
-/// DWORD / D3DUSAGE_*
-///
-/// Usage options that identify how resources are to be used.
-</span><span class="attribute">#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[derive(Pod, Zeroable)]
-#[repr(transparent)] </span><span class="kw">pub struct </span>Usage(D3DUSAGE);
-<span class="comment">// TODO: usage table from https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dusage#usage-and-resource-combinations?
+<span class="doccomment">/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dusage)\]</span>
+<span class="doccomment">/// DWORD / D3DUSAGE_*</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Usage options that identify how resources are to be used.</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Copy</span>, <span class="ident">PartialEq</span>, <span class="ident">Eq</span>, <span class="ident">PartialOrd</span>, <span class="ident">Ord</span>, <span class="ident">Hash</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Pod</span>, <span class="ident">Zeroable</span>)]</span>
+<span class="attribute">#[<span class="ident">repr</span>(<span class="ident">transparent</span>)]</span> <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Usage</span>(<span class="ident">D3DUSAGE</span>);
+<span class="comment">// TODO: usage table from https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dusage#usage-and-resource-combinations?</span>
 
-</span><span class="macro">flags! </span>{
-    Usage =&gt; D3DUSAGE;
-    <span class="prelude-val">None</span>, AutoGenMipMap, DepthStencil, DMap, DoNotClip, Dynamic, NonSecure, NPatches, Points, RenderTarget, RTPatches,
-    SoftwareProcessing, TextAPI, WriteOnly, RestrictedContent, RestrictSharedResource, RestrictSharedResourceDriver,
+<span class="macro">flags!</span> {
+    <span class="ident">Usage</span> =&gt; <span class="ident">D3DUSAGE</span>;
+    <span class="prelude-val">None</span>, <span class="ident">AutoGenMipMap</span>, <span class="ident">DepthStencil</span>, <span class="ident">DMap</span>, <span class="ident">DoNotClip</span>, <span class="ident">Dynamic</span>, <span class="ident">NonSecure</span>, <span class="ident">NPatches</span>, <span class="ident">Points</span>, <span class="ident">RenderTarget</span>, <span class="ident">RTPatches</span>,
+    <span class="ident">SoftwareProcessing</span>, <span class="ident">TextAPI</span>, <span class="ident">WriteOnly</span>, <span class="ident">RestrictedContent</span>, <span class="ident">RestrictSharedResource</span>, <span class="ident">RestrictSharedResourceDriver</span>,
 }
 
-<span class="attribute">#[allow(non_upper_case_globals)] </span><span class="kw">impl </span>Usage { <span class="comment">// These are enum-like
-    </span><span class="kw">pub const </span><span class="prelude-val">None                          </span>: Usage = Usage(<span class="number">0</span>);
+<span class="attribute">#[<span class="ident">allow</span>(<span class="ident">non_upper_case_globals</span>)]</span> <span class="kw">impl</span> <span class="ident">Usage</span> { <span class="comment">// These are enum-like</span>
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="prelude-val">None</span>                          : <span class="ident">Usage</span> <span class="op">=</span> <span class="ident">Usage</span>(<span class="number">0</span>);
 
-    <span class="doccomment">/// The resource will automatically generate mipmaps.
-    /// See [Automatic Generation of Mipmaps (Direct3D 9)].
-    /// Automatic generation of mipmaps is not supported for volume textures and depth stencil surfaces/textures.
-    /// This usage is not valid for a resource in system memory ([Pool::SystemMem]).
-    ///
-    /// [Automatic Generation of Mipmaps (Direct3D 9)]:         https://docs.microsoft.com/en-us/windows/win32/direct3d9/automatic-generation-of-mipmaps
-    </span><span class="kw">pub const </span>AutoGenMipMap                 : Usage = Usage(D3DUSAGE_AUTOGENMIPMAP);
+    <span class="doccomment">/// The resource will automatically generate mipmaps.</span>
+    <span class="doccomment">/// See [Automatic Generation of Mipmaps (Direct3D 9)].</span>
+    <span class="doccomment">/// Automatic generation of mipmaps is not supported for volume textures and depth stencil surfaces/textures.</span>
+    <span class="doccomment">/// This usage is not valid for a resource in system memory ([Pool::SystemMem]).</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// [Automatic Generation of Mipmaps (Direct3D 9)]:         https://docs.microsoft.com/en-us/windows/win32/direct3d9/automatic-generation-of-mipmaps</span>
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">AutoGenMipMap</span>                 : <span class="ident">Usage</span> <span class="op">=</span> <span class="ident">Usage</span>(<span class="ident">D3DUSAGE_AUTOGENMIPMAP</span>);
 
-    <span class="doccomment">/// The resource will be a depth stencil buffer. [Usage::DepthStencil] can only be used with [Pool::Default].
-    </span><span class="kw">pub const </span>DepthStencil                  : Usage = Usage(D3DUSAGE_DEPTHSTENCIL);
+    <span class="doccomment">/// The resource will be a depth stencil buffer. [Usage::DepthStencil] can only be used with [Pool::Default].</span>
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">DepthStencil</span>                  : <span class="ident">Usage</span> <span class="op">=</span> <span class="ident">Usage</span>(<span class="ident">D3DUSAGE_DEPTHSTENCIL</span>);
 
-    <span class="doccomment">/// The resource will be a displacement map.
-    </span><span class="kw">pub const </span>DMap                          : Usage = Usage(D3DUSAGE_DMAP);
+    <span class="doccomment">/// The resource will be a displacement map.</span>
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">DMap</span>                          : <span class="ident">Usage</span> <span class="op">=</span> <span class="ident">Usage</span>(<span class="ident">D3DUSAGE_DMAP</span>);
 
-    <span class="doccomment">/// Set to indicate that the vertex buffer content will never require clipping. When rendering with buffers that have this flag set, the D3DRS_CLIPPING render state must be set to false.
-    </span><span class="kw">pub const </span>DoNotClip                     : Usage = Usage(D3DUSAGE_DONOTCLIP);
+    <span class="doccomment">/// Set to indicate that the vertex buffer content will never require clipping. When rendering with buffers that have this flag set, the D3DRS_CLIPPING render state must be set to false.</span>
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">DoNotClip</span>                     : <span class="ident">Usage</span> <span class="op">=</span> <span class="ident">Usage</span>(<span class="ident">D3DUSAGE_DONOTCLIP</span>);
 
-    <span class="doccomment">/// Set to indicate that the vertex buffer requires dynamic memory use.
-    /// This is useful for drivers because it enables them to decide where to place the buffer.
-    /// In general, static vertex buffers are placed in video memory and dynamic vertex buffers are placed in AGP memory.
-    /// Note that there is no separate static use.
-    /// If you do not specify [Usage::Dynamic], the vertex buffer is made static.
-    /// [Usage::Dynamic] is strictly enforced through the [Lock::Discard] and [Lock::NoOverwrite] locking flags.
-    /// As a result, [Lock::Discard] and [Lock::NoOverwrite] are valid only on vertex buffers created with [Usage::Dynamic].
-    /// They are not valid flags on static vertex buffers. For more information, see [Managing Resources (Direct3D 9)].
-    ///
-    /// For more information about using dynamic vertex buffers, see [Performance Optimizations (Direct3D 9)].
-    ///
-    /// [Usage::Dynamic] and [Pool::Managed] are incompatible and should not be used together. See [Pool].
-    ///
-    /// Textures can specify [Usage::Dynamic].
-    /// However, managed textures cannot use [Usage::Dynamic].
-    /// For more information about dynamic textures, see [Using Dynamic Textures].
-    ///
-    /// [Managing Resources (Direct3D 9)]:          https://docs.microsoft.com/en-us/windows/win32/direct3d9/managing-resources
-    /// [Performance Optimizations (Direct3D 9)]:   https://docs.microsoft.com/en-us/windows/win32/direct3d9/performance-optimizations
-    /// [Using Dynamic Textures]:                   https://docs.microsoft.com/en-us/windows/win32/direct3d9/performance-optimizations
-    </span><span class="kw">pub const </span>Dynamic                       : Usage = Usage(D3DUSAGE_DYNAMIC);
+    <span class="doccomment">/// Set to indicate that the vertex buffer requires dynamic memory use.</span>
+    <span class="doccomment">/// This is useful for drivers because it enables them to decide where to place the buffer.</span>
+    <span class="doccomment">/// In general, static vertex buffers are placed in video memory and dynamic vertex buffers are placed in AGP memory.</span>
+    <span class="doccomment">/// Note that there is no separate static use.</span>
+    <span class="doccomment">/// If you do not specify [Usage::Dynamic], the vertex buffer is made static.</span>
+    <span class="doccomment">/// [Usage::Dynamic] is strictly enforced through the [Lock::Discard] and [Lock::NoOverwrite] locking flags.</span>
+    <span class="doccomment">/// As a result, [Lock::Discard] and [Lock::NoOverwrite] are valid only on vertex buffers created with [Usage::Dynamic].</span>
+    <span class="doccomment">/// They are not valid flags on static vertex buffers. For more information, see [Managing Resources (Direct3D 9)].</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// For more information about using dynamic vertex buffers, see [Performance Optimizations (Direct3D 9)].</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// [Usage::Dynamic] and [Pool::Managed] are incompatible and should not be used together. See [Pool].</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Textures can specify [Usage::Dynamic].</span>
+    <span class="doccomment">/// However, managed textures cannot use [Usage::Dynamic].</span>
+    <span class="doccomment">/// For more information about dynamic textures, see [Using Dynamic Textures].</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// [Managing Resources (Direct3D 9)]:          https://docs.microsoft.com/en-us/windows/win32/direct3d9/managing-resources</span>
+    <span class="doccomment">/// [Performance Optimizations (Direct3D 9)]:   https://docs.microsoft.com/en-us/windows/win32/direct3d9/performance-optimizations</span>
+    <span class="doccomment">/// [Using Dynamic Textures]:                   https://docs.microsoft.com/en-us/windows/win32/direct3d9/performance-optimizations</span>
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Dynamic</span>                       : <span class="ident">Usage</span> <span class="op">=</span> <span class="ident">Usage</span>(<span class="ident">D3DUSAGE_DYNAMIC</span>);
 
-    <span class="doccomment">/// Allow a shared surface created by a secure application to be opened by a non-secure application that has the shared handle.
-    /// Differences between **Direct3D 9** and **Direct3D 9Ex**: This flag is available in Direct3D 9Ex only.
-    </span><span class="attribute">#[cfg(feature = <span class="string">&quot;9ex&quot;</span>)]
-    </span><span class="kw">pub const </span>NonSecure                     : Usage = Usage(D3DUSAGE_NONSECURE);
-    <span class="attribute">#[cfg(not(feature = <span class="string">&quot;9ex&quot;</span>))]
-    </span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">const </span>NonSecure              : Usage = Usage(D3DUSAGE_NONSECURE);
+    <span class="doccomment">/// Allow a shared surface created by a secure application to be opened by a non-secure application that has the shared handle.</span>
+    <span class="doccomment">/// Differences between **Direct3D 9** and **Direct3D 9Ex**: This flag is available in Direct3D 9Ex only.</span>
+    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;9ex&quot;</span>)]</span>
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">NonSecure</span>                     : <span class="ident">Usage</span> <span class="op">=</span> <span class="ident">Usage</span>(<span class="ident">D3DUSAGE_NONSECURE</span>);
+    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;9ex&quot;</span>))]</span>
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">const</span> <span class="ident">NonSecure</span>              : <span class="ident">Usage</span> <span class="op">=</span> <span class="ident">Usage</span>(<span class="ident">D3DUSAGE_NONSECURE</span>);
 
-    <span class="doccomment">/// Set to indicate that the vertex buffer is to be used for drawing N-patches.
-    </span><span class="kw">pub const </span>NPatches                      : Usage = Usage(D3DUSAGE_NPATCHES);
+    <span class="doccomment">/// Set to indicate that the vertex buffer is to be used for drawing N-patches.</span>
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">NPatches</span>                      : <span class="ident">Usage</span> <span class="op">=</span> <span class="ident">Usage</span>(<span class="ident">D3DUSAGE_NPATCHES</span>);
 
-    <span class="doccomment">/// Set to indicate that the vertex or index buffer will be used for drawing point sprites.
-    /// The buffer will be loaded in system memory if software vertex processing is needed to emulate point sprites.
-    </span><span class="kw">pub const </span>Points                        : Usage = Usage(D3DUSAGE_POINTS);
+    <span class="doccomment">/// Set to indicate that the vertex or index buffer will be used for drawing point sprites.</span>
+    <span class="doccomment">/// The buffer will be loaded in system memory if software vertex processing is needed to emulate point sprites.</span>
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">Points</span>                        : <span class="ident">Usage</span> <span class="op">=</span> <span class="ident">Usage</span>(<span class="ident">D3DUSAGE_POINTS</span>);
 
-    <span class="doccomment">/// The resource will be a render target. [Usage::RenderTarget] can only be used with [Pool::Default].
-    </span><span class="kw">pub const </span>RenderTarget                  : Usage = Usage(D3DUSAGE_RENDERTARGET);
+    <span class="doccomment">/// The resource will be a render target. [Usage::RenderTarget] can only be used with [Pool::Default].</span>
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">RenderTarget</span>                  : <span class="ident">Usage</span> <span class="op">=</span> <span class="ident">Usage</span>(<span class="ident">D3DUSAGE_RENDERTARGET</span>);
 
-    <span class="doccomment">/// Set to indicate that the vertex buffer is to be used for drawing high-order primitives.
-    </span><span class="kw">pub const </span>RTPatches                     : Usage = Usage(D3DUSAGE_RTPATCHES);
+    <span class="doccomment">/// Set to indicate that the vertex buffer is to be used for drawing high-order primitives.</span>
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">RTPatches</span>                     : <span class="ident">Usage</span> <span class="op">=</span> <span class="ident">Usage</span>(<span class="ident">D3DUSAGE_RTPATCHES</span>);
 
-    <span class="doccomment">/// If this flag is used, vertex processing is done in software.
-    /// If this flag is not used, vertex processing is done in hardware.
-    ///
-    /// The [Usage::SoftwareProcessing] flag can be set when mixed-mode or software vertex processing (D3DCREATE_MIXED_VERTEXPROCESSING / D3DCREATE_SOFTWARE_VERTEXPROCESSING) is enabled for that device.
-    /// [Usage::SoftwareProcessing] must be set for buffers to be used with software vertex processing in mixed mode, but it should not be set for the best possible performance when using hardware index processing in mixed mode (D3DCREATE_HARDWARE_VERTEXPROCESSING).
-    /// However, setting [Usage::SoftwareProcessing] is the only option when a single buffer is used with both hardware and software vertex processing.
-    /// [Usage::SoftwareProcessing] is allowed for mixed and software devices.
-    ///
-    /// [Usage::SoftwareProcessing] is used with [check_device_format](d3d9::IDirect3DDevice9Ext::check_device_format) to find out if a particular texture format can be used as a vertex texture during software vertex processing.
-    /// If it can, the texture must be created in [Pool::Scratch].
-    </span><span class="kw">pub const </span>SoftwareProcessing            : Usage = Usage(D3DUSAGE_SOFTWAREPROCESSING);
+    <span class="doccomment">/// If this flag is used, vertex processing is done in software.</span>
+    <span class="doccomment">/// If this flag is not used, vertex processing is done in hardware.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// The [Usage::SoftwareProcessing] flag can be set when mixed-mode or software vertex processing (D3DCREATE_MIXED_VERTEXPROCESSING / D3DCREATE_SOFTWARE_VERTEXPROCESSING) is enabled for that device.</span>
+    <span class="doccomment">/// [Usage::SoftwareProcessing] must be set for buffers to be used with software vertex processing in mixed mode, but it should not be set for the best possible performance when using hardware index processing in mixed mode (D3DCREATE_HARDWARE_VERTEXPROCESSING).</span>
+    <span class="doccomment">/// However, setting [Usage::SoftwareProcessing] is the only option when a single buffer is used with both hardware and software vertex processing.</span>
+    <span class="doccomment">/// [Usage::SoftwareProcessing] is allowed for mixed and software devices.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// [Usage::SoftwareProcessing] is used with [check_device_format](d3d9::IDirect3DDevice9Ext::check_device_format) to find out if a particular texture format can be used as a vertex texture during software vertex processing.</span>
+    <span class="doccomment">/// If it can, the texture must be created in [Pool::Scratch].</span>
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">SoftwareProcessing</span>            : <span class="ident">Usage</span> <span class="op">=</span> <span class="ident">Usage</span>(<span class="ident">D3DUSAGE_SOFTWAREPROCESSING</span>);
 
-    <span class="doccomment">/// This usage flag must be specified for vertex buffers and source surfaces, used in calls to [IDirect3DDevice9ExExt::compose_rects].
-    /// Textures created with this usage flag cannot be used for texture filtering.
-    /// Vertex buffers, created with this usage flag, cannot be used as input stream sources.
-    ///
-    /// **Differences between Direct3D 9 and Direct3D 9Ex:** This flag is available in Direct3D 9Ex only.
-    </span><span class="attribute">#[cfg(feature = <span class="string">&quot;9ex&quot;</span>)]
-    </span><span class="kw">pub const </span>TextAPI                       : Usage = Usage(D3DUSAGE_TEXTAPI);
-    <span class="attribute">#[cfg(not(feature = <span class="string">&quot;9ex&quot;</span>))]
-    </span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">const </span>TextAPI                : Usage = Usage(D3DUSAGE_TEXTAPI);
+    <span class="doccomment">/// This usage flag must be specified for vertex buffers and source surfaces, used in calls to [IDirect3DDevice9ExExt::compose_rects].</span>
+    <span class="doccomment">/// Textures created with this usage flag cannot be used for texture filtering.</span>
+    <span class="doccomment">/// Vertex buffers, created with this usage flag, cannot be used as input stream sources.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// **Differences between Direct3D 9 and Direct3D 9Ex:** This flag is available in Direct3D 9Ex only.</span>
+    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;9ex&quot;</span>)]</span>
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">TextAPI</span>                       : <span class="ident">Usage</span> <span class="op">=</span> <span class="ident">Usage</span>(<span class="ident">D3DUSAGE_TEXTAPI</span>);
+    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;9ex&quot;</span>))]</span>
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">const</span> <span class="ident">TextAPI</span>                : <span class="ident">Usage</span> <span class="op">=</span> <span class="ident">Usage</span>(<span class="ident">D3DUSAGE_TEXTAPI</span>);
 
-    <span class="doccomment">/// Informs the system that the application writes only to the vertex buffer.
-    /// Using this flag enables the driver to choose the best memory location for efficient write operations and rendering.
-    /// Attempts to read from a vertex buffer that is created with this capability will fail.
-    /// Buffers created with [Pool::Default] that do not specify [Usage::WriteOnly] may suffer a severe performance penalty.
-    /// [Usage::WriteOnly] only affects the performance of [Pool::Default] buffers.
-    </span><span class="kw">pub const </span>WriteOnly                     : Usage = Usage(D3DUSAGE_WRITEONLY);
+    <span class="doccomment">/// Informs the system that the application writes only to the vertex buffer.</span>
+    <span class="doccomment">/// Using this flag enables the driver to choose the best memory location for efficient write operations and rendering.</span>
+    <span class="doccomment">/// Attempts to read from a vertex buffer that is created with this capability will fail.</span>
+    <span class="doccomment">/// Buffers created with [Pool::Default] that do not specify [Usage::WriteOnly] may suffer a severe performance penalty.</span>
+    <span class="doccomment">/// [Usage::WriteOnly] only affects the performance of [Pool::Default] buffers.</span>
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">WriteOnly</span>                     : <span class="ident">Usage</span> <span class="op">=</span> <span class="ident">Usage</span>(<span class="ident">D3DUSAGE_WRITEONLY</span>);
 
-    <span class="doccomment">/// Setting this flag indicates that the resource might contain protected content.
-    ///
-    /// **Differences between Direct3D 9 and Direct3D 9Ex:** This flag is available in Direct3D 9Ex only.
-    </span><span class="attribute">#[cfg(feature = <span class="string">&quot;9ex&quot;</span>)]
-    </span><span class="kw">pub const </span>RestrictedContent             : Usage = Usage(D3DUSAGE_RESTRICTED_CONTENT);
-    <span class="attribute">#[cfg(not(feature = <span class="string">&quot;9ex&quot;</span>))]
-    </span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">const </span>RestrictedContent      : Usage = Usage(D3DUSAGE_RESTRICTED_CONTENT);
+    <span class="doccomment">/// Setting this flag indicates that the resource might contain protected content.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// **Differences between Direct3D 9 and Direct3D 9Ex:** This flag is available in Direct3D 9Ex only.</span>
+    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;9ex&quot;</span>)]</span>
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">RestrictedContent</span>             : <span class="ident">Usage</span> <span class="op">=</span> <span class="ident">Usage</span>(<span class="ident">D3DUSAGE_RESTRICTED_CONTENT</span>);
+    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;9ex&quot;</span>))]</span>
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">const</span> <span class="ident">RestrictedContent</span>      : <span class="ident">Usage</span> <span class="op">=</span> <span class="ident">Usage</span>(<span class="ident">D3DUSAGE_RESTRICTED_CONTENT</span>);
 
-    <span class="doccomment">/// Setting this flag indicates that access to the shared resource should be restricted.
-    ///
-    /// **Differences between Direct3D 9 and Direct3D 9Ex:** This flag is available in Direct3D 9Ex only.
-    </span><span class="attribute">#[cfg(feature = <span class="string">&quot;9ex&quot;</span>)]
-    </span><span class="kw">pub const </span>RestrictSharedResource        : Usage = Usage(D3DUSAGE_RESTRICT_SHARED_RESOURCE);
-    <span class="attribute">#[cfg(not(feature = <span class="string">&quot;9ex&quot;</span>))]
-    </span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">const </span>RestrictSharedResource : Usage = Usage(D3DUSAGE_RESTRICT_SHARED_RESOURCE);
+    <span class="doccomment">/// Setting this flag indicates that access to the shared resource should be restricted.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// **Differences between Direct3D 9 and Direct3D 9Ex:** This flag is available in Direct3D 9Ex only.</span>
+    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;9ex&quot;</span>)]</span>
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">RestrictSharedResource</span>        : <span class="ident">Usage</span> <span class="op">=</span> <span class="ident">Usage</span>(<span class="ident">D3DUSAGE_RESTRICT_SHARED_RESOURCE</span>);
+    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;9ex&quot;</span>))]</span>
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">const</span> <span class="ident">RestrictSharedResource</span> : <span class="ident">Usage</span> <span class="op">=</span> <span class="ident">Usage</span>(<span class="ident">D3DUSAGE_RESTRICT_SHARED_RESOURCE</span>);
 
-    <span class="doccomment">/// Setting this flag indicates that the driver should restrict access to the shared resource.
-    /// The caller must create an authenticated channel with the driver.
-    /// The driver should then allow access to processes that attempt to open that shared resource.
-    ///
-    /// **Differences between Direct3D 9 and Direct3D 9Ex:** This flag is available in Direct3D 9Ex only.
-    </span><span class="attribute">#[cfg(feature = <span class="string">&quot;9ex&quot;</span>)]
-    </span><span class="kw">pub const </span>RestrictSharedResourceDriver  : Usage = Usage(D3DUSAGE_RESTRICT_SHARED_RESOURCE_DRIVER);
-    <span class="attribute">#[cfg(not(feature = <span class="string">&quot;9ex&quot;</span>))]
-    </span><span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">const </span>RestrictSharedResourceDriver : Usage = Usage(D3DUSAGE_RESTRICT_SHARED_RESOURCE_DRIVER);
+    <span class="doccomment">/// Setting this flag indicates that the driver should restrict access to the shared resource.</span>
+    <span class="doccomment">/// The caller must create an authenticated channel with the driver.</span>
+    <span class="doccomment">/// The driver should then allow access to processes that attempt to open that shared resource.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// **Differences between Direct3D 9 and Direct3D 9Ex:** This flag is available in Direct3D 9Ex only.</span>
+    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;9ex&quot;</span>)]</span>
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">RestrictSharedResourceDriver</span>  : <span class="ident">Usage</span> <span class="op">=</span> <span class="ident">Usage</span>(<span class="ident">D3DUSAGE_RESTRICT_SHARED_RESOURCE_DRIVER</span>);
+    <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;9ex&quot;</span>))]</span>
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">const</span> <span class="ident">RestrictSharedResourceDriver</span> : <span class="ident">Usage</span> <span class="op">=</span> <span class="ident">Usage</span>(<span class="ident">D3DUSAGE_RESTRICT_SHARED_RESOURCE_DRIVER</span>);
 
 
 
-    <span class="doccomment">/// Query the resource format to see if it supports texture filter types other than [d3d::TexF::Point] (which is always supported).
-    ///
-    /// Valid for use with [check_device_format](d3d9::IDirect3DDevice9Ext::check_device_format) only.
-    </span><span class="kw">pub const </span>QueryFilter                   : Usage = Usage(D3DUSAGE_QUERY_FILTER);
+    <span class="doccomment">/// Query the resource format to see if it supports texture filter types other than [d3d::TexF::Point] (which is always supported).</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Valid for use with [check_device_format](d3d9::IDirect3DDevice9Ext::check_device_format) only.</span>
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">QueryFilter</span>                   : <span class="ident">Usage</span> <span class="op">=</span> <span class="ident">Usage</span>(<span class="ident">D3DUSAGE_QUERY_FILTER</span>);
 
-    <span class="doccomment">/// Query the resource about a legacy bump map.
-    ///
-    /// Valid for use with [check_device_format](d3d9::IDirect3DDevice9Ext::check_device_format) only.
-    </span><span class="kw">pub const </span>QueryLegacyBumpMap            : Usage = Usage(D3DUSAGE_QUERY_LEGACYBUMPMAP);
+    <span class="doccomment">/// Query the resource about a legacy bump map.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Valid for use with [check_device_format](d3d9::IDirect3DDevice9Ext::check_device_format) only.</span>
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">QueryLegacyBumpMap</span>            : <span class="ident">Usage</span> <span class="op">=</span> <span class="ident">Usage</span>(<span class="ident">D3DUSAGE_QUERY_LEGACYBUMPMAP</span>);
 
-    <span class="doccomment">/// Query the resource to verify support for post pixel shader blending support.
-    /// If [check_device_format](d3d9::IDirect3DDevice9Ext::check_device_format) fails with [d3d::Usage::QueryPostPixelShaderBlending], post pixel blending operations are not supported.
-    /// These include alpha test, pixel fog, render-target blending, color write enable, and dithering.
-    ///
-    /// Valid for use with [check_device_format](d3d9::IDirect3DDevice9Ext::check_device_format) only.
-    </span><span class="kw">pub const </span>QueryPostPixelShaderBlending  : Usage = Usage(D3DUSAGE_QUERY_POSTPIXELSHADER_BLENDING);
+    <span class="doccomment">/// Query the resource to verify support for post pixel shader blending support.</span>
+    <span class="doccomment">/// If [check_device_format](d3d9::IDirect3DDevice9Ext::check_device_format) fails with [d3d::Usage::QueryPostPixelShaderBlending], post pixel blending operations are not supported.</span>
+    <span class="doccomment">/// These include alpha test, pixel fog, render-target blending, color write enable, and dithering.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Valid for use with [check_device_format](d3d9::IDirect3DDevice9Ext::check_device_format) only.</span>
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">QueryPostPixelShaderBlending</span>  : <span class="ident">Usage</span> <span class="op">=</span> <span class="ident">Usage</span>(<span class="ident">D3DUSAGE_QUERY_POSTPIXELSHADER_BLENDING</span>);
 
-    <span class="doccomment">/// Query the resource to verify if a texture supports gamma correction during a read operation.
-    ///
-    /// Valid for use with [check_device_format](d3d9::IDirect3DDevice9Ext::check_device_format) only.
-    </span><span class="kw">pub const </span>QuerySRGBRead                 : Usage = Usage(D3DUSAGE_QUERY_SRGBREAD);
+    <span class="doccomment">/// Query the resource to verify if a texture supports gamma correction during a read operation.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Valid for use with [check_device_format](d3d9::IDirect3DDevice9Ext::check_device_format) only.</span>
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">QuerySRGBRead</span>                 : <span class="ident">Usage</span> <span class="op">=</span> <span class="ident">Usage</span>(<span class="ident">D3DUSAGE_QUERY_SRGBREAD</span>);
 
-    <span class="doccomment">/// Query the resource to verify if a texture supports gamma correction during a write operation.
-    ///
-    /// Valid for use with [check_device_format](d3d9::IDirect3DDevice9Ext::check_device_format) only.
-    </span><span class="kw">pub const </span>QuerySRGBWrite                : Usage = Usage(D3DUSAGE_QUERY_SRGBWRITE);
+    <span class="doccomment">/// Query the resource to verify if a texture supports gamma correction during a write operation.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Valid for use with [check_device_format](d3d9::IDirect3DDevice9Ext::check_device_format) only.</span>
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">QuerySRGBWrite</span>                : <span class="ident">Usage</span> <span class="op">=</span> <span class="ident">Usage</span>(<span class="ident">D3DUSAGE_QUERY_SRGBWRITE</span>);
 
-    <span class="doccomment">/// Query the resource to verify support for vertex shader texture sampling.
-    ///
-    /// Valid for use with [check_device_format](d3d9::IDirect3DDevice9Ext::check_device_format) only.
-    </span><span class="kw">pub const </span>QueryVertexTexture            : Usage = Usage(D3DUSAGE_QUERY_VERTEXTEXTURE);
+    <span class="doccomment">/// Query the resource to verify support for vertex shader texture sampling.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Valid for use with [check_device_format](d3d9::IDirect3DDevice9Ext::check_device_format) only.</span>
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">QueryVertexTexture</span>            : <span class="ident">Usage</span> <span class="op">=</span> <span class="ident">Usage</span>(<span class="ident">D3DUSAGE_QUERY_VERTEXTEXTURE</span>);
 
-    <span class="doccomment">/// Query the resource to verify support for texture wrapping and mip-mapping.
-    ///
-    /// Valid for use with [check_device_format](d3d9::IDirect3DDevice9Ext::check_device_format) only.
-    </span><span class="kw">pub const </span>QueryWrapAndMip               : Usage = Usage(D3DUSAGE_QUERY_WRAPANDMIP);
+    <span class="doccomment">/// Query the resource to verify support for texture wrapping and mip-mapping.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Valid for use with [check_device_format](d3d9::IDirect3DDevice9Ext::check_device_format) only.</span>
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">QueryWrapAndMip</span>               : <span class="ident">Usage</span> <span class="op">=</span> <span class="ident">Usage</span>(<span class="ident">D3DUSAGE_QUERY_WRAPANDMIP</span>);
 }
 
 
 
-<span class="comment">//#cpp2rust D3DUSAGE_RENDERTARGET                       = d3d::Usage::RenderTarget
-//#cpp2rust D3DUSAGE_DEPTHSTENCIL                       = d3d::Usage::DepthStencil
-//#cpp2rust D3DUSAGE_DYNAMIC                            = d3d::Usage::Dynamic
-//#cpp2rust D3DUSAGE_NONSECURE                          = d3d::Usage::NonSecure
-//#cpp2rust D3DUSAGE_AUTOGENMIPMAP                      = d3d::Usage::AutoGenMipMap
-//#cpp2rust D3DUSAGE_DMAP                               = d3d::Usage::DMap
-//#cpp2rust D3DUSAGE_QUERY_LEGACYBUMPMAP                = d3d::Usage::QueryLegacyBumpMap
-//#cpp2rust D3DUSAGE_QUERY_SRGBREAD                     = d3d::Usage::QuerySRGBRead
-//#cpp2rust D3DUSAGE_QUERY_FILTER                       = d3d::Usage::QueryFilter
-//#cpp2rust D3DUSAGE_QUERY_SRGBWRITE                    = d3d::Usage::QuerySRGBWrite
-//#cpp2rust D3DUSAGE_QUERY_POSTPIXELSHADER_BLENDING     = d3d::Usage::QueryPostPixelShaderBlending
-//#cpp2rust D3DUSAGE_QUERY_VERTEXTEXTURE                = d3d::Usage::QueryVertexTexture
-//#cpp2rust D3DUSAGE_QUERY_WRAPANDMIP                   = d3d::Usage::QueryWrapAndMip
-//#cpp2rust D3DUSAGE_WRITEONLY                          = d3d::Usage::WriteOnly
-//#cpp2rust D3DUSAGE_SOFTWAREPROCESSING                 = d3d::Usage::SoftwareProcessing
-//#cpp2rust D3DUSAGE_DONOTCLIP                          = d3d::Usage::DoNotClip
-//#cpp2rust D3DUSAGE_POINTS                             = d3d::Usage::Points
-//#cpp2rust D3DUSAGE_RTPATCHES                          = d3d::Usage::RTPatches
-//#cpp2rust D3DUSAGE_NPATCHES                           = d3d::Usage::NPatches
-//#cpp2rust D3DUSAGE_TEXTAPI                            = d3d::Usage::TextAPI
-//#cpp2rust D3DUSAGE_RESTRICTED_CONTENT                 = d3d::Usage::RestrictedContent
-//#cpp2rust D3DUSAGE_RESTRICT_SHARED_RESOURCE           = d3d::Usage::RestrictSharedResource
-//#cpp2rust D3DUSAGE_RESTRICT_SHARED_RESOURCE_DRIVER    = d3d::Usage::RestrictSharedResourceDriver
-</span></code></pre></div>
-</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.65.0-nightly (b44197abb 2022-09-05)" ></div></body></html>
+<span class="comment">//#cpp2rust D3DUSAGE_RENDERTARGET                       = d3d::Usage::RenderTarget</span>
+<span class="comment">//#cpp2rust D3DUSAGE_DEPTHSTENCIL                       = d3d::Usage::DepthStencil</span>
+<span class="comment">//#cpp2rust D3DUSAGE_DYNAMIC                            = d3d::Usage::Dynamic</span>
+<span class="comment">//#cpp2rust D3DUSAGE_NONSECURE                          = d3d::Usage::NonSecure</span>
+<span class="comment">//#cpp2rust D3DUSAGE_AUTOGENMIPMAP                      = d3d::Usage::AutoGenMipMap</span>
+<span class="comment">//#cpp2rust D3DUSAGE_DMAP                               = d3d::Usage::DMap</span>
+<span class="comment">//#cpp2rust D3DUSAGE_QUERY_LEGACYBUMPMAP                = d3d::Usage::QueryLegacyBumpMap</span>
+<span class="comment">//#cpp2rust D3DUSAGE_QUERY_SRGBREAD                     = d3d::Usage::QuerySRGBRead</span>
+<span class="comment">//#cpp2rust D3DUSAGE_QUERY_FILTER                       = d3d::Usage::QueryFilter</span>
+<span class="comment">//#cpp2rust D3DUSAGE_QUERY_SRGBWRITE                    = d3d::Usage::QuerySRGBWrite</span>
+<span class="comment">//#cpp2rust D3DUSAGE_QUERY_POSTPIXELSHADER_BLENDING     = d3d::Usage::QueryPostPixelShaderBlending</span>
+<span class="comment">//#cpp2rust D3DUSAGE_QUERY_VERTEXTEXTURE                = d3d::Usage::QueryVertexTexture</span>
+<span class="comment">//#cpp2rust D3DUSAGE_QUERY_WRAPANDMIP                   = d3d::Usage::QueryWrapAndMip</span>
+<span class="comment">//#cpp2rust D3DUSAGE_WRITEONLY                          = d3d::Usage::WriteOnly</span>
+<span class="comment">//#cpp2rust D3DUSAGE_SOFTWAREPROCESSING                 = d3d::Usage::SoftwareProcessing</span>
+<span class="comment">//#cpp2rust D3DUSAGE_DONOTCLIP                          = d3d::Usage::DoNotClip</span>
+<span class="comment">//#cpp2rust D3DUSAGE_POINTS                             = d3d::Usage::Points</span>
+<span class="comment">//#cpp2rust D3DUSAGE_RTPATCHES                          = d3d::Usage::RTPatches</span>
+<span class="comment">//#cpp2rust D3DUSAGE_NPATCHES                           = d3d::Usage::NPatches</span>
+<span class="comment">//#cpp2rust D3DUSAGE_TEXTAPI                            = d3d::Usage::TextAPI</span>
+<span class="comment">//#cpp2rust D3DUSAGE_RESTRICTED_CONTENT                 = d3d::Usage::RestrictedContent</span>
+<span class="comment">//#cpp2rust D3DUSAGE_RESTRICT_SHARED_RESOURCE           = d3d::Usage::RestrictSharedResource</span>
+<span class="comment">//#cpp2rust D3DUSAGE_RESTRICT_SHARED_RESOURCE_DRIVER    = d3d::Usage::RestrictSharedResourceDriver</span>
+</code></pre></div>
+</section></div></main><div id="rustdoc-vars" data-root-path="../../../../../" data-current-crate="thindx" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.63.0 (4b91a6ea7 2022-08-08)" ></div>
+</body></html>
