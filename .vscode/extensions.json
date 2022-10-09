@@ -1,6 +1,6 @@
 {
     "recommendations": [
-        "matklad.rust-analyzer",                // intellisense, syntax highlighting, build problem parsers
+        "rust-lang.rust-analyzer",              // intellisense, syntax highlighting, build problem parsers
         "ms-vscode.cpptools",                   // debugging
         "ryanluker.vscode-coverage-gutters",    // test coverage gutters
     ]
