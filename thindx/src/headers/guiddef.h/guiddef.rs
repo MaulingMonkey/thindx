@@ -17,7 +17,7 @@ use std::hash::*;
 
 /// = [Guid]
 /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/wmformat/interface-identifiers)\]
-/// **I**interface **Id**entifier - used for uniquely identifiying COM interfaces
+/// **I**nterface **Id**entifier - used for uniquely identifiying COM interfaces
 pub type IID    = Guid;
 
 /// = [Guid]
