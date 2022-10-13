@@ -40,7 +40,7 @@ default                                 = []
 
 
 [target.'cfg(windows)'.dependencies]
-thindx-xaudio2                          = "0.0.0-2022-10-07"
+thindx-xaudio2                          = "=0.0.0-2022-10-07"
 
 abibool.version                         = "0.5"
 abistr.version                          = "0.2.0-rc3" # const abistr::cstr!("...")
