@@ -2934,7 +2934,7 @@ pub const xinput_h : cxx_header = cxx_header;
 /// `IXAudio2MasteringVoice`&nbsp;→ [`xaudio2::sys::IXAudio2MasteringVoice`], [`xaudio2::MasteringVoice`], [`xaudio2::IXAudio2MasteringVoiceExt`] <br>
 /// * `GetChannelMask`&nbsp;→ [`xaudio2::IXAudio2MasteringVoiceExt::get_channel_mask`] <br>
 ///
-/// `IXAudio2SourceVoice`&nbsp;→ [`xaudio2::sys::IXAudio2SourceVoice`], [`xaudio2::SourceVoice`], [`xaudio2::IXAudio2SourceVoiceTyped`], [`xaudio2::IXAudio2SourceVoiceExt`] <br>
+/// `IXAudio2SourceVoice`&nbsp;→ [`xaudio2::sys::IXAudio2SourceVoice`], [`xaudio2::SourceVoice`], [`xaudio2::SourceVoiceDynamic`], [`xaudio2::SourceVoiceUntyped`], [`xaudio2::IXAudio2SourceVoiceExt`] <br>
 /// * `Discontinuity`&nbsp;→ [`xaudio2::IXAudio2SourceVoiceExt::discontinuity`] <br>
 /// * `ExitLoop`&nbsp;→ [`xaudio2::IXAudio2SourceVoiceExt::exit_loop`] <br>
 /// * `FlushSourceBuffers`&nbsp;→ [`xaudio2::IXAudio2SourceVoiceExt::flush_source_buffers`] <br>
@@ -2944,7 +2944,7 @@ pub const xinput_h : cxx_header = cxx_header;
 /// * `SetSourceSampleRate`&nbsp;→ [`xaudio2::IXAudio2SourceVoiceExt::set_source_sample_rate`] <br>
 /// * `Start`&nbsp;→ [`xaudio2::IXAudio2SourceVoiceExt::start`] <br>
 /// * `Stop`&nbsp;→ [`xaudio2::IXAudio2SourceVoiceExt::stop`] <br>
-/// * `SubmitSourceBuffer`&nbsp;→ [`xaudio2::IXAudio2SourceVoiceTyped::submit_source_buffer`] <br>
+/// * `SubmitSourceBuffer`&nbsp;→ [`xaudio2::SourceVoice::submit_source_buffer`], [`xaudio2::SourceVoiceDynamic::submit_source_buffer_blob_unchecked`] <br>
 ///
 /// `IXAudio2SubmixVoice`&nbsp;→ [`xaudio2::sys::IXAudio2SubmixVoice`], [`xaudio2::SubmixVoice`] <br>
 ///

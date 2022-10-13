@@ -6,9 +6,6 @@
 #[doc(inline)] pub use thindx_xaudio2::xaudio2_9::xaudio2::*;
 
 #[doc(inline)] pub use thindx_xaudio2::xaudio2_9::{
-    // Real types
-    IXAudio2SourceVoiceTyped,
-
     // Ext. traits
     IXAudio2Ext,
     IXAudio2ExtensionExt,
@@ -52,7 +49,8 @@
 //
 //#cpp2rust IXAudio2SourceVoice                                 = xaudio2::sys::IXAudio2SourceVoice
 //#cpp2rust IXAudio2SourceVoice                                 = xaudio2::SourceVoice
-//#cpp2rust IXAudio2SourceVoice                                 = xaudio2::IXAudio2SourceVoiceTyped
+//#cpp2rust IXAudio2SourceVoice                                 = xaudio2::SourceVoiceDynamic
+//#cpp2rust IXAudio2SourceVoice                                 = xaudio2::SourceVoiceUntyped
 //#cpp2rust IXAudio2SourceVoice                                 = xaudio2::IXAudio2SourceVoiceExt
 //#cpp2rust IXAudio2SourceVoice::Discontinuity                  = xaudio2::IXAudio2SourceVoiceExt::discontinuity
 //#cpp2rust IXAudio2SourceVoice::ExitLoop                       = xaudio2::IXAudio2SourceVoiceExt::exit_loop
@@ -63,7 +61,8 @@
 //#cpp2rust IXAudio2SourceVoice::SetSourceSampleRate            = xaudio2::IXAudio2SourceVoiceExt::set_source_sample_rate
 //#cpp2rust IXAudio2SourceVoice::Start                          = xaudio2::IXAudio2SourceVoiceExt::start
 //#cpp2rust IXAudio2SourceVoice::Stop                           = xaudio2::IXAudio2SourceVoiceExt::stop
-//#cpp2rust IXAudio2SourceVoice::SubmitSourceBuffer             = xaudio2::IXAudio2SourceVoiceTyped::submit_source_buffer
+//#cpp2rust IXAudio2SourceVoice::SubmitSourceBuffer             = xaudio2::SourceVoice::submit_source_buffer
+//#cpp2rust IXAudio2SourceVoice::SubmitSourceBuffer             = xaudio2::SourceVoiceDynamic::submit_source_buffer_blob_unchecked
 //
 //#cpp2rust IXAudio2SubmixVoice                                 = xaudio2::sys::IXAudio2SubmixVoice
 //#cpp2rust IXAudio2SubmixVoice                                 = xaudio2::SubmixVoice
