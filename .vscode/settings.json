@@ -25,4 +25,5 @@
         120,    // author preference
         160,    // author preference
     ],
+    "dotnet.defaultSolution": "disable",
 }
