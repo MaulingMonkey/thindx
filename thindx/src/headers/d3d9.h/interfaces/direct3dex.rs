@@ -81,10 +81,18 @@ pub trait IDirect3D9ExExt : AsSafe<IDirect3D9Ex> {
     ///
     /// ### ⚠️ Safety ⚠️
     /// *   The caller's codebase is responsible for ensuring any [HWND]s (`hwnd`, `presentation_parameters.hDeviceWindow`) outlive the [Device].
-    ///      See [IDirect3D9Ext::create_device] for guidance and details.
+    ///     See [IDirect3D9Ext::create_device] for guidance and details.
     /// *   `fullscreen_display_modes` is assumed to contain an entry for every adapter if `behavior_flags & D3DCREATE_ADAPTERGROUP_DEVICE` (TODO: enforce this via checks?)
+    ///
+    /// ### Errors
+    /// *   [D3DERR::INVALIDCALL]       - If `behavior_flags` is missing [Create::FpuPreserve] (would be undefined behavior)
+    /// *   [D3DERR::INVALIDCALL]       - Various other invalid parameters
+    /// *   ???
     unsafe fn create_device_ex(&self, adapter: u32, device_type: impl Into<DevType>, hwnd: HWND, behavior_flags: impl Into<Create>, presentation_parameters: &mut PresentParameters<'static>, fullscreen_display_modes: &mut [DisplayModeEx]) -> Result<DeviceEx, Error> {
         fn_context!(d3d9::IDirect3D9ExExt::create_device_ex => IDirect3D9Ex::CreateDeviceEx);
+        let behavior_flags = u32::from(behavior_flags.into());
+        if behavior_flags & u32::from(Create::FpuPreserve) == 0 { return Err(fn_param_error!(behavior_flags, D3DERR::INVALIDCALL)); }
+
         for fdm in fullscreen_display_modes.iter_mut() {
             fdm.size = std::mem::size_of_val(fdm).try_into().unwrap();
         }
@@ -92,7 +100,7 @@ pub trait IDirect3D9ExExt : AsSafe<IDirect3D9Ex> {
         // TODO: examples, returns, etc.
         let mut device = null_mut();
         let modes = if fullscreen_display_modes.is_empty() { null_mut() } else { fullscreen_display_modes.as_mut_ptr().cast() };
-        fn_check_hr!(unsafe { self.as_winapi().CreateDeviceEx(adapter, device_type.into().into(), hwnd, behavior_flags.into().into(), presentation_parameters.as_mut(), modes, &mut device) })?;
+        fn_check_hr!(unsafe { self.as_winapi().CreateDeviceEx(adapter, device_type.into().into(), hwnd, behavior_flags, presentation_parameters.as_mut(), modes, &mut device) })?;
         Ok(unsafe { DeviceEx::from_raw(device) })
     }
 

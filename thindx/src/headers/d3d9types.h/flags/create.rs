@@ -62,10 +62,32 @@ impl Create {
     #[cfg(feature = "9ex")]
     pub const EnablePresentStats        : Create = Create(D3DCREATE_ENABLE_PRESENTSTATS);
 
-    /// Set the precision for Direct3D floating-point calculations to the precision used by the calling thread.
-    /// If you do not specify this flag, Direct3D defaults to single-precision round-to-nearest mode for two reasons:
-    /// *   Double-precision mode will reduce Direct3D performance.
+    /// Don't modify the calling thread's (x87) FPU control word (to specify round-to-nearest, single precision behavior.)
+    ///
+    /// ### ⚠️ Safety ⚠️
+    /// **This flag is generally required for sound Rust interop.**
+    /// Credit to [@saethlin](https://github.com/saethlin) for pointing this out.
+    /// [Rust's stdlib](https://github.com/rust-lang/rust/blob/7b4d9e155fec06583c763f176fc432dc779f1fc6/library/core/src/num/dec2flt/fpu.rs#L12-L13) claims:
+    ///
+    /// > Note that normally, it is Undefined Behavior to alter the FPU control word while Rust code runs.
+    /// > The compiler assumes that the control word is always in its default state.
+    ///
+    /// The FPU control word is the very thing Direct3D will modify if you do not specify this flag.
+    /// This *probably* doesn't matter *too* terribly much unless you're targeting non-SSE2, 32-bit, x86 -
+    /// and thus have rust code actually relying on the x87 FPU stack -
+    /// but it's better to be safe than sorry, and simply always specify this flag.
+    /// After all, rust code is not the only thing that modifying global FPU state interferes with:
+    /// *   [MDX/SlimDX messes up WPF scrollbars?](https://stackoverflow.com/questions/1060158/mdx-slimdx-messes-up-wpf-scrollbars) (Stack Overflow)
+    /// *   [Everything Old is New Again, and a Compiler Bug](https://randomascii.wordpress.com/2016/09/16/everything-old-is-new-again-and-a-compiler-bug/) (Random ASCII)
+    ///
+    /// The original rationale for modifying FPU state was:
+    /// *   Double-precision mode would reduce Direct3D performance.
     /// *   Portions of Direct3D assume floating-point unit exceptions are masked; unmasking these exceptions may result in undefined behavior.
+    ///
+    /// However:
+    /// *   Modern SSE instructions specify their precisions directly instead of relying on the legacy X87 stack control word
+    /// *   FPU modes should generally default to floating-point exceptions being masked (e.g. no need to set default behavior)
+    /// *   If x87 state matters, you likely want to modify it on more threads than simply the thread that creates the device.
     pub const FpuPreserve               : Create = Create(D3DCREATE_FPU_PRESERVE);
 
     /// Specifies hardware vertex processing.

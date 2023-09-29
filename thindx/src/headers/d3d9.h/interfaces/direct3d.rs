@@ -277,6 +277,11 @@ pub trait IDirect3D9Ext : AsSafe<IDirect3D9> + Sized {
     ///
     /// *   ???
     ///
+    /// ### Errors
+    /// *   [D3DERR::INVALIDCALL]       - If `behavior_flags` is missing [Create::FpuPreserve] (would be undefined behavior)
+    /// *   [D3DERR::INVALIDCALL]       - Various other invalid parameters
+    /// *   ???
+    ///
     /// ### Example
     /// ```rust
     /// # use dev::d3d9::*; let d3d = d3d_test();
@@ -315,9 +320,11 @@ pub trait IDirect3D9Ext : AsSafe<IDirect3D9> + Sized {
     /// [WM_DESTROY]:           https://docs.microsoft.com/en-us/windows/win32/winmsg/wm-destroy
     unsafe fn create_device(&self, adapter: AdapterIndex, device_type: impl Into<DevType>, focus_window: impl AsHWND, behavior_flags: impl Into<Create>, present_parameters: &mut PresentParameters<'static>) -> Result<Device, Error> {
         fn_context!(d3d9::IDirect3D9Ext::create_device => IDirect3D9::CreateDevice);
+        let behavior_flags = u32::from(behavior_flags.into());
+        if behavior_flags & u32::from(Create::FpuPreserve) == 0 { return Err(fn_param_error!(behavior_flags, D3DERR::INVALIDCALL)); }
         // TODO: better doc comments
         let mut device = null_mut();
-        fn_check_hr!(unsafe { self.as_winapi().CreateDevice(adapter, device_type.into().into(), focus_window.as_hwnd(), behavior_flags.into().into(), present_parameters.as_mut(), &mut device) })?;
+        fn_check_hr!(unsafe { self.as_winapi().CreateDevice(adapter, device_type.into().into(), focus_window.as_hwnd(), behavior_flags, present_parameters.as_mut(), &mut device) })?;
         Ok(unsafe { Device::from_raw(device) })
     }
 
