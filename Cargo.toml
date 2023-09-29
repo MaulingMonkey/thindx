@@ -5,8 +5,8 @@ members = [
     "thindx",
 ]
 
-[patch.crates-io]
-bytemuck.git            = "https://github.com/MaulingMonkey/bytemuck"
-bytemuck_derive.git     = "https://github.com/MaulingMonkey/bytemuck"
-bytemuck.branch         = "pr-unsafe-unsound-unstable-remove-static-asserts-for-coverage"
-bytemuck_derive.branch  = "pr-unsafe-unsound-unstable-remove-static-asserts-for-coverage"
+#[patch.crates-io]
+#bytemuck.git            = "https://github.com/MaulingMonkey/bytemuck"
+#bytemuck_derive.git     = "https://github.com/MaulingMonkey/bytemuck"
+#bytemuck.branch         = "pr-unsafe-unsound-unstable-remove-static-asserts-for-coverage"
+#bytemuck_derive.branch  = "pr-unsafe-unsound-unstable-remove-static-asserts-for-coverage"
