@@ -1,9 +1,9 @@
 #[doc(no_inline)] pub use crate::misc::*;
 #[doc(no_inline)] pub use crate::win32::*;
 
-#[doc(no_inline)] pub use thindx::*;
+#[doc(no_inline)] pub use thindx::{*, ErrorKind};
 #[doc(no_inline)] pub use thindx::Error;
-#[doc(no_inline)] pub use thindx::d3d::*;
+#[doc(no_inline)] pub use thindx::d3d::{*, Cursor};
 #[doc(no_inline)] pub use thindx::d3d9::*;
 
 use std::fs::*;
