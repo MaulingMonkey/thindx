@@ -151,9 +151,9 @@ impl Default for EventScope {
 impl Drop for EventScope {
     //#cpp2rust D3DPERF_EndEvent = d3d::perf::EventScope::drop
     fn drop(&mut self) {
-        drop(self.close_impl().map_err(|err| {
+        if let Err(err) = self.close_impl() {
             assert!(!cfg!(debug_assertions), "{}", err);
-        }))
+        }
     }
 }
 
