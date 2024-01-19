@@ -1,4 +1,4 @@
 [toolchain]
-channel = "1.64.0"  # raw-window-handle 0.5.2 MSRV
+channel = "1.71.0" # debugger_visualizer MSRV
 targets = [ "x86_64-pc-windows-msvc", "i686-pc-windows-msvc" ]
 profile = "minimal"

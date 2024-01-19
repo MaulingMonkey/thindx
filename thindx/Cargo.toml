@@ -12,6 +12,7 @@ readme                                  = "Readme.md"
 description                             = "Thin DirectX wrappers"
 keywords                                = ["directx", "direct3d", "d3d", "d3dcompiler", "hlsl"]
 categories                              = ["api-bindings", "graphics", "os::windows-apis", "rendering::graphics-api"]
+rust-version                            = "1.71.0" # debugger_visualizer MSRV
 
 include = [
     "doc/changelog.md",
@@ -41,6 +42,7 @@ default                                 = []
 
 [target.'cfg(windows)'.dependencies]
 thindx-xaudio2                          = "=0.0.0-2022-10-10"
+thindx-xinput                           = { package = "thindx-xinput", version = "=0.0.0-2024-01-17b" }
 
 abibool.version                         = "0.5"
 abistr.version                          = "0.2.0-rc3" # const abistr::cstr!("...")
