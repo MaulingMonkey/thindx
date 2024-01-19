@@ -44,7 +44,7 @@ pub fn update() {
             if let Some(screenshot) = output.screenshot.as_ref() {
                 writeln!(o, "///")?;
                 writeln!(o, "/// <center>")?;
-                writeln!(o, "/// <h4 id=\"screenshots\" class=\"section-header\"><a href=\"#screenshots\">Screenshots</h4>")?;
+                writeln!(o, "/// <h4 id=\"screenshots\" class=\"section-header\"><a href=\"#screenshots\">Screenshots</a></h4>")?;
                 let url = format!("data:image/png;base64,{}", base64::encode(screenshot));
                 writeln!(o, "/// <img src=\"{}\">", url)?;
                 writeln!(o, "/// </center>")?;
