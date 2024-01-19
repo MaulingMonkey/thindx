@@ -74,7 +74,7 @@ fn find_merge_natvis(nv: &mut impl Write, path: &Path) -> io::Result<()> {
                 writeln!(nv, "{}", line)?;
             }
 
-            for (line_idx, tail) in lines.next() {
+            for (line_idx, tail) in lines {
                 if !tail.trim().is_empty() {
                     error!(at: &path, line: line_idx+1, "expected nothing after </AutoVisualizer>");
                     Err(Other)?;
