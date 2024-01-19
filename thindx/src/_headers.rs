@@ -2910,109 +2910,109 @@ pub const xinput_h : cxx_header = cxx_header;
 ///
 /// ### C++ Interfaces → Rust Types
 ///
-/// `IXAudio2` →&nbsp;❌ <br>
-/// * `CommitChanges`&nbsp;→ [`xaudio2::IXAudio2Ext::commit_changes`] <br>
-/// * `CreateMasteringVoice`&nbsp;→ [`xaudio2::IXAudio2Ext::create_mastering_voice`] <br>
-/// * `CreateSourceVoice`&nbsp;→ [`xaudio2::IXAudio2Ext::create_source_voice_typed_callback`], [`xaudio2::IXAudio2Ext::create_source_voice_unchecked`] <br>
-/// * `CreateSubmixVoice`&nbsp;→ [`xaudio2::IXAudio2Ext::create_submix_voice`] <br>
-/// * `GetPerformanceData`&nbsp;→ [`xaudio2::IXAudio2Ext::get_performance_data`] <br>
-/// * `RegisterForCallbacks`&nbsp;→ [`xaudio2::IXAudio2Ext::register_for_callbacks`], [`xaudio2::IXAudio2Ext::register_for_callbacks_leak`] <br>
-/// * `SetDebugConfiguration`&nbsp;→ [`xaudio2::IXAudio2Ext::set_debug_configuration`] <br>
-/// * `StartEngine`&nbsp;→ [`xaudio2::IXAudio2Ext::start_engine`] <br>
-/// * `StopEngine`&nbsp;→ [`xaudio2::IXAudio2Ext::stop_engine`] <br>
-/// * `UnregisterForCallbacks`&nbsp;→ [`xaudio2::IXAudio2Ext::unregister_for_callbacks`] <br>
+/// [`IXAudio2`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/nn-xaudio2-ixaudio2) →&nbsp;❌ <br>
+/// * [`CommitChanges`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/nf-xaudio2-ixaudio2-commitchanges)&nbsp;→ [`xaudio2::IXAudio2Ext::commit_changes`] <br>
+/// * [`CreateMasteringVoice`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/nf-xaudio2-ixaudio2-createmasteringvoice)&nbsp;→ [`xaudio2::IXAudio2Ext::create_mastering_voice`] <br>
+/// * [`CreateSourceVoice`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/nf-xaudio2-ixaudio2-createsourcevoice)&nbsp;→ [`xaudio2::IXAudio2Ext::create_source_voice_typed_callback`], [`xaudio2::IXAudio2Ext::create_source_voice_unchecked`] <br>
+/// * [`CreateSubmixVoice`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/nf-xaudio2-ixaudio2-createsubmixvoice)&nbsp;→ [`xaudio2::IXAudio2Ext::create_submix_voice`] <br>
+/// * [`GetPerformanceData`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/nf-xaudio2-ixaudio2-getperformancedata)&nbsp;→ [`xaudio2::IXAudio2Ext::get_performance_data`] <br>
+/// * [`RegisterForCallbacks`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/nf-xaudio2-ixaudio2-registerforcallbacks)&nbsp;→ [`xaudio2::IXAudio2Ext::register_for_callbacks`], [`xaudio2::IXAudio2Ext::register_for_callbacks_leak`] <br>
+/// * [`SetDebugConfiguration`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/nf-xaudio2-ixaudio2-setdebugconfiguration)&nbsp;→ [`xaudio2::IXAudio2Ext::set_debug_configuration`] <br>
+/// * [`StartEngine`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/nf-xaudio2-ixaudio2-startengine)&nbsp;→ [`xaudio2::IXAudio2Ext::start_engine`] <br>
+/// * [`StopEngine`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/nf-xaudio2-ixaudio2-stopengine)&nbsp;→ [`xaudio2::IXAudio2Ext::stop_engine`] <br>
+/// * [`UnregisterForCallbacks`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/nf-xaudio2-ixaudio2-unregisterforcallbacks)&nbsp;→ [`xaudio2::IXAudio2Ext::unregister_for_callbacks`] <br>
 ///
-/// `IXAudio2EngineCallback`&nbsp;→ [`xaudio2::sys::IXAudio2EngineCallback`], [`xaudio2::EngineCallbackWrapper`], [`xaudio2::EngineCallback`] <br>
-/// * `OnCriticalError`&nbsp;→ [`xaudio2::EngineCallback::on_critical_error`] <br>
-/// * `OnProcessingPassEnd`&nbsp;→ [`xaudio2::EngineCallback::on_processing_pass_end`] <br>
-/// * `OnProcessingPassStart`&nbsp;→ [`xaudio2::EngineCallback::on_processing_pass_start`] <br>
+/// [`IXAudio2EngineCallback`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/nn-xaudio2-ixaudio2enginecallback)&nbsp;→ [`xaudio2::sys::IXAudio2EngineCallback`], [`xaudio2::EngineCallbackWrapper`], [`xaudio2::EngineCallback`] <br>
+/// * [`OnCriticalError`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/nf-xaudio2-ixaudio2enginecallback-oncriticalerror)&nbsp;→ [`xaudio2::EngineCallback::on_critical_error`] <br>
+/// * [`OnProcessingPassEnd`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/nf-xaudio2-ixaudio2enginecallback-onprocessingpassend)&nbsp;→ [`xaudio2::EngineCallback::on_processing_pass_end`] <br>
+/// * [`OnProcessingPassStart`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/nf-xaudio2-ixaudio2enginecallback-onprocessingpassstart)&nbsp;→ [`xaudio2::EngineCallback::on_processing_pass_start`] <br>
 ///
 /// `IXAudio2Extension` →&nbsp;❌ <br>
-/// * `GetProcessingQuantum`&nbsp;→ [`xaudio2::IXAudio2ExtensionExt::get_processing_quantum`] <br>
-/// * `GetProcessor`&nbsp;→ [`xaudio2::IXAudio2ExtensionExt::get_processor`] <br>
+/// * [`GetProcessingQuantum`](https://learn.microsoft.com/en-us/windows/win32/xaudio2/xaudio2-redistributable#duration-of-audio-processing-quantum)&nbsp;→ [`xaudio2::IXAudio2ExtensionExt::get_processing_quantum`] <br>
+/// * [`GetProcessor`](https://learn.microsoft.com/en-us/windows/win32/xaudio2/xaudio2-redistributable#preferred-cpu-core)&nbsp;→ [`xaudio2::IXAudio2ExtensionExt::get_processor`] <br>
 ///
-/// `IXAudio2MasteringVoice`&nbsp;→ [`xaudio2::sys::IXAudio2MasteringVoice`], [`xaudio2::MasteringVoice`], [`xaudio2::IXAudio2MasteringVoiceExt`] <br>
-/// * `GetChannelMask`&nbsp;→ [`xaudio2::IXAudio2MasteringVoiceExt::get_channel_mask`] <br>
+/// [`IXAudio2MasteringVoice`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/nn-xaudio2-ixaudio2masteringvoice)&nbsp;→ [`xaudio2::sys::IXAudio2MasteringVoice`], [`xaudio2::MasteringVoice`], [`xaudio2::IXAudio2MasteringVoiceExt`] <br>
+/// * [`GetChannelMask`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/nf-xaudio2-ixaudio2masteringvoice-getchannelmask)&nbsp;→ [`xaudio2::IXAudio2MasteringVoiceExt::get_channel_mask`] <br>
 ///
-/// `IXAudio2SourceVoice`&nbsp;→ [`xaudio2::sys::IXAudio2SourceVoice`], [`xaudio2::SourceVoice`], [`xaudio2::SourceVoiceDynamic`], [`xaudio2::SourceVoiceUntyped`], [`xaudio2::IXAudio2SourceVoiceExt`] <br>
-/// * `Discontinuity`&nbsp;→ [`xaudio2::IXAudio2SourceVoiceExt::discontinuity`] <br>
-/// * `ExitLoop`&nbsp;→ [`xaudio2::IXAudio2SourceVoiceExt::exit_loop`] <br>
-/// * `FlushSourceBuffers`&nbsp;→ [`xaudio2::IXAudio2SourceVoiceExt::flush_source_buffers`] <br>
-/// * `GetFrequencyRatio`&nbsp;→ [`xaudio2::IXAudio2SourceVoiceExt::get_frequency_ratio`] <br>
-/// * `GetState`&nbsp;→ [`xaudio2::IXAudio2SourceVoiceExt::get_state`] <br>
-/// * `SetFrequencyRatio`&nbsp;→ [`xaudio2::IXAudio2SourceVoiceExt::set_frequency_ratio`] <br>
-/// * `SetSourceSampleRate`&nbsp;→ [`xaudio2::IXAudio2SourceVoiceExt::set_source_sample_rate`] <br>
-/// * `Start`&nbsp;→ [`xaudio2::IXAudio2SourceVoiceExt::start`] <br>
-/// * `Stop`&nbsp;→ [`xaudio2::IXAudio2SourceVoiceExt::stop`] <br>
-/// * `SubmitSourceBuffer`&nbsp;→ [`xaudio2::SourceVoice::submit_source_buffer`], [`xaudio2::SourceVoiceDynamic::submit_source_buffer_blob_unchecked`] <br>
+/// [`IXAudio2SourceVoice`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/nn-xaudio2-ixaudio2sourcevoice)&nbsp;→ [`xaudio2::sys::IXAudio2SourceVoice`], [`xaudio2::SourceVoice`], [`xaudio2::SourceVoiceDynamic`], [`xaudio2::SourceVoiceUntyped`], [`xaudio2::IXAudio2SourceVoiceExt`] <br>
+/// * [`Discontinuity`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/nf-xaudio2-ixaudio2sourcevoice-discontinuity)&nbsp;→ [`xaudio2::IXAudio2SourceVoiceExt::discontinuity`] <br>
+/// * [`ExitLoop`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/nf-xaudio2-ixaudio2sourcevoice-exitloop)&nbsp;→ [`xaudio2::IXAudio2SourceVoiceExt::exit_loop`] <br>
+/// * [`FlushSourceBuffers`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/nf-xaudio2-ixaudio2sourcevoice-flushsourcebuffers)&nbsp;→ [`xaudio2::IXAudio2SourceVoiceExt::flush_source_buffers`] <br>
+/// * [`GetFrequencyRatio`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/nf-xaudio2-ixaudio2sourcevoice-getfrequencyratio)&nbsp;→ [`xaudio2::IXAudio2SourceVoiceExt::get_frequency_ratio`] <br>
+/// * [`GetState`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/nf-xaudio2-ixaudio2sourcevoice-getstate)&nbsp;→ [`xaudio2::IXAudio2SourceVoiceExt::get_state`] <br>
+/// * [`SetFrequencyRatio`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/nf-xaudio2-ixaudio2sourcevoice-setfrequencyratio)&nbsp;→ [`xaudio2::IXAudio2SourceVoiceExt::set_frequency_ratio`] <br>
+/// * [`SetSourceSampleRate`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/nf-xaudio2-ixaudio2sourcevoice-setsourcesamplerate)&nbsp;→ [`xaudio2::IXAudio2SourceVoiceExt::set_source_sample_rate`] <br>
+/// * [`Start`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/nf-xaudio2-ixaudio2sourcevoice-start)&nbsp;→ [`xaudio2::IXAudio2SourceVoiceExt::start`] <br>
+/// * [`Stop`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/nf-xaudio2-ixaudio2sourcevoice-stop)&nbsp;→ [`xaudio2::IXAudio2SourceVoiceExt::stop`] <br>
+/// * [`SubmitSourceBuffer`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/nf-xaudio2-ixaudio2sourcevoice-submitsourcebuffer)&nbsp;→ [`xaudio2::SourceVoice::submit_source_buffer`], [`xaudio2::SourceVoiceDynamic::submit_source_buffer_blob_unchecked`] <br>
 ///
-/// `IXAudio2SubmixVoice`&nbsp;→ [`xaudio2::sys::IXAudio2SubmixVoice`], [`xaudio2::SubmixVoice`] <br>
+/// [`IXAudio2SubmixVoice`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/nn-xaudio2-ixaudio2submixvoice)&nbsp;→ [`xaudio2::sys::IXAudio2SubmixVoice`], [`xaudio2::SubmixVoice`] <br>
 ///
-/// `IXAudio2Voice`&nbsp;→ [`xaudio2::sys::IXAudio2Voice`], [`xaudio2::Voice`], [`xaudio2::IXAudio2VoiceExt`] <br>
-/// * `DestroyVoice`&nbsp;→ [`xaudio2::Voice::destroy_voice`] <br>
-/// * `DisableEffect`&nbsp;→ [`xaudio2::IXAudio2VoiceExt::disable_effect`] <br>
-/// * `EnableEffect`&nbsp;→ [`xaudio2::IXAudio2VoiceExt::enable_effect`] <br>
-/// * `GetChannelVolumes`&nbsp;→ [`xaudio2::IXAudio2VoiceExt::get_channel_volumes`] <br>
-/// * `GetEffectParameters`&nbsp;→ [`xaudio2::IXAudio2VoiceExt::get_effect_parameters_raw`] <br>
-/// * `GetEffectState`&nbsp;→ [`xaudio2::IXAudio2VoiceExt::get_effect_state`] <br>
-/// * `GetFilterParameters`&nbsp;→ [`xaudio2::IXAudio2VoiceExt::get_filter_parameters`] <br>
-/// * `GetOutputFilterParameters`&nbsp;→ [`xaudio2::IXAudio2VoiceExt::get_output_filter_parameters`] <br>
-/// * `GetOutputMatrix`&nbsp;→ [`xaudio2::IXAudio2VoiceExt::get_output_matrix`] <br>
-/// * `GetVoiceDetails`&nbsp;→ [`xaudio2::IXAudio2VoiceExt::get_voice_details`] <br>
-/// * `GetVolume`&nbsp;→ [`xaudio2::IXAudio2VoiceExt::get_volume`] <br>
-/// * `SetChannelVolumes`&nbsp;→ [`xaudio2::IXAudio2VoiceExt::set_channel_volumes`] <br>
-/// * `SetEffectChain`&nbsp;→ [`xaudio2::IXAudio2VoiceExt::set_effect_chain`] <br>
-/// * `SetEffectParameters`&nbsp;→ [`xaudio2::IXAudio2VoiceExt::set_effect_parameters_raw`] <br>
-/// * `SetFilterParameters`&nbsp;→ [`xaudio2::IXAudio2VoiceExt::set_filter_parameters`] <br>
-/// * `SetOutputFilterParameters`&nbsp;→ [`xaudio2::IXAudio2VoiceExt::set_output_filter_parameters`] <br>
-/// * `SetOutputMatrix`&nbsp;→ [`xaudio2::IXAudio2VoiceExt::set_output_matrix`] <br>
-/// * `SetOutputVoices`&nbsp;→ [`xaudio2::IXAudio2VoiceExt::set_output_voices`] <br>
-/// * `SetVolume`&nbsp;→ [`xaudio2::IXAudio2VoiceExt::set_volume`] <br>
+/// [`IXAudio2Voice`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/nn-xaudio2-ixaudio2voice)&nbsp;→ [`xaudio2::sys::IXAudio2Voice`], [`xaudio2::Voice`], [`xaudio2::IXAudio2VoiceExt`] <br>
+/// * [`DestroyVoice`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/nf-xaudio2-ixaudio2voice-destroyvoice)&nbsp;→ [`xaudio2::Voice::destroy_voice`] <br>
+/// * [`DisableEffect`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/nf-xaudio2-ixaudio2voice-disableeffect)&nbsp;→ [`xaudio2::IXAudio2VoiceExt::disable_effect`] <br>
+/// * [`EnableEffect`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/nf-xaudio2-ixaudio2voice-enableeffect)&nbsp;→ [`xaudio2::IXAudio2VoiceExt::enable_effect`] <br>
+/// * [`GetChannelVolumes`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/nf-xaudio2-ixaudio2voice-getchannelvolumes)&nbsp;→ [`xaudio2::IXAudio2VoiceExt::get_channel_volumes`] <br>
+/// * [`GetEffectParameters`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/nf-xaudio2-ixaudio2voice-geteffectparameters)&nbsp;→ [`xaudio2::IXAudio2VoiceExt::get_effect_parameters_raw`] <br>
+/// * [`GetEffectState`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/nf-xaudio2-ixaudio2voice-geteffectstate)&nbsp;→ [`xaudio2::IXAudio2VoiceExt::get_effect_state`] <br>
+/// * [`GetFilterParameters`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/nf-xaudio2-ixaudio2voice-getfilterparameters)&nbsp;→ [`xaudio2::IXAudio2VoiceExt::get_filter_parameters`] <br>
+/// * [`GetOutputFilterParameters`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/nf-xaudio2-ixaudio2voice-getoutputfilterparameters)&nbsp;→ [`xaudio2::IXAudio2VoiceExt::get_output_filter_parameters`] <br>
+/// * [`GetOutputMatrix`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/nf-xaudio2-ixaudio2voice-getoutputmatrix)&nbsp;→ [`xaudio2::IXAudio2VoiceExt::get_output_matrix`] <br>
+/// * [`GetVoiceDetails`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/nf-xaudio2-ixaudio2voice-getvoicedetails)&nbsp;→ [`xaudio2::IXAudio2VoiceExt::get_voice_details`] <br>
+/// * [`GetVolume`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/nf-xaudio2-ixaudio2voice-getvolume)&nbsp;→ [`xaudio2::IXAudio2VoiceExt::get_volume`] <br>
+/// * [`SetChannelVolumes`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/nf-xaudio2-ixaudio2voice-setchannelvolumes)&nbsp;→ [`xaudio2::IXAudio2VoiceExt::set_channel_volumes`] <br>
+/// * [`SetEffectChain`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/nf-xaudio2-ixaudio2voice-seteffectchain)&nbsp;→ [`xaudio2::IXAudio2VoiceExt::set_effect_chain`] <br>
+/// * [`SetEffectParameters`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/nf-xaudio2-ixaudio2voice-seteffectparameters)&nbsp;→ [`xaudio2::IXAudio2VoiceExt::set_effect_parameters_raw`] <br>
+/// * [`SetFilterParameters`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/nf-xaudio2-ixaudio2voice-setfilterparameters)&nbsp;→ [`xaudio2::IXAudio2VoiceExt::set_filter_parameters`] <br>
+/// * [`SetOutputFilterParameters`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/nf-xaudio2-ixaudio2voice-setoutputfilterparameters)&nbsp;→ [`xaudio2::IXAudio2VoiceExt::set_output_filter_parameters`] <br>
+/// * [`SetOutputMatrix`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/nf-xaudio2-ixaudio2voice-setoutputmatrix)&nbsp;→ [`xaudio2::IXAudio2VoiceExt::set_output_matrix`] <br>
+/// * [`SetOutputVoices`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/nf-xaudio2-ixaudio2voice-setoutputvoices)&nbsp;→ [`xaudio2::IXAudio2VoiceExt::set_output_voices`] <br>
+/// * [`SetVolume`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/nf-xaudio2-ixaudio2voice-setvolume)&nbsp;→ [`xaudio2::IXAudio2VoiceExt::set_volume`] <br>
 ///
-/// `IXAudio2VoiceCallback`&nbsp;→ [`xaudio2::sys::IXAudio2VoiceCallback`], [`xaudio2::VoiceCallbackWrapper`], [`xaudio2::VoiceCallback`] <br>
-/// * `OnBufferEnd`&nbsp;→ [`xaudio2::VoiceCallback::on_buffer_end`] <br>
-/// * `OnBufferStart`&nbsp;→ [`xaudio2::VoiceCallback::on_buffer_start`] <br>
-/// * `OnLoopEnd`&nbsp;→ [`xaudio2::VoiceCallback::on_loop_end`] <br>
-/// * `OnStreamEnd`&nbsp;→ [`xaudio2::VoiceCallback::on_stream_end`] <br>
-/// * `OnVoiceError`&nbsp;→ [`xaudio2::VoiceCallback::on_voice_error`] <br>
-/// * `OnVoiceProcessingPassEnd`&nbsp;→ [`xaudio2::VoiceCallback::on_voice_processing_pass_end`] <br>
-/// * `OnVoiceProcessingPassStart`&nbsp;→ [`xaudio2::VoiceCallback::on_voice_processing_pass_start`] <br>
+/// [`IXAudio2VoiceCallback`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/nn-xaudio2-ixaudio2voicecallback)&nbsp;→ [`xaudio2::sys::IXAudio2VoiceCallback`], [`xaudio2::VoiceCallbackWrapper`], [`xaudio2::VoiceCallback`] <br>
+/// * [`OnBufferEnd`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/nf-xaudio2-ixaudio2voicecallback-onbufferend)&nbsp;→ [`xaudio2::VoiceCallback::on_buffer_end`] <br>
+/// * [`OnBufferStart`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/nf-xaudio2-ixaudio2voicecallback-onbufferstart)&nbsp;→ [`xaudio2::VoiceCallback::on_buffer_start`] <br>
+/// * [`OnLoopEnd`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/nf-xaudio2-ixaudio2voicecallback-onloopend)&nbsp;→ [`xaudio2::VoiceCallback::on_loop_end`] <br>
+/// * [`OnStreamEnd`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/nf-xaudio2-ixaudio2voicecallback-onstreamend)&nbsp;→ [`xaudio2::VoiceCallback::on_stream_end`] <br>
+/// * [`OnVoiceError`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/nf-xaudio2-ixaudio2voicecallback-onvoiceerror)&nbsp;→ [`xaudio2::VoiceCallback::on_voice_error`] <br>
+/// * [`OnVoiceProcessingPassEnd`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/nf-xaudio2-ixaudio2voicecallback-onvoiceprocessingpassend)&nbsp;→ [`xaudio2::VoiceCallback::on_voice_processing_pass_end`] <br>
+/// * [`OnVoiceProcessingPassStart`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/nf-xaudio2-ixaudio2voicecallback-onvoiceprocessingpassstart)&nbsp;→ [`xaudio2::VoiceCallback::on_voice_processing_pass_start`] <br>
 ///
 /// ### C++ Structs -> Rust Structs
 ///
-/// `XAUDIO2_BUFFER` →&nbsp;❌ <br>
-/// `XAUDIO2_BUFFER_WMA` →&nbsp;❌ <br>
-/// `XAUDIO2_DEBUG_CONFIGURATION`&nbsp;→ [`xaudio2::DebugConfiguration`] <br>
-/// `XAUDIO2_EFFECT_CHAIN` →&nbsp;❌ <br>
-/// `XAUDIO2_EFFECT_DESCRIPTOR`&nbsp;→ [`xaudio2::EffectDescriptor`] <br>
-/// `XAUDIO2_FILTER_PARAMETERS`&nbsp;→ [`xaudio2::FilterParameters`] <br>
-/// `XAUDIO2_PERFORMANCE_DATA`&nbsp;→ [`xaudio2::PerformanceData`] <br>
-/// `XAUDIO2_SEND_DESCRIPTOR`&nbsp;→ [`xaudio2::SendDescriptor`] <br>
-/// `XAUDIO2_VOICE_DETAILS`&nbsp;→ [`xaudio2::VoiceDetails`] <br>
-/// `XAUDIO2_VOICE_SENDS` →&nbsp;❌ <br>
-/// `XAUDIO2_VOICE_STATE`&nbsp;→ [`xaudio2::VoiceState`] <br>
+/// [`XAUDIO2_BUFFER`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/ns-xaudio2-xaudio2_buffer) →&nbsp;❌ <br>
+/// [`XAUDIO2_BUFFER_WMA`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/ns-xaudio2-xaudio2_buffer_wma) →&nbsp;❌ <br>
+/// [`XAUDIO2_DEBUG_CONFIGURATION`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/ns-xaudio2-xaudio2_debug_configuration)&nbsp;→ [`xaudio2::DebugConfiguration`] <br>
+/// [`XAUDIO2_EFFECT_CHAIN`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/ns-xaudio2-xaudio2_effect_chain) →&nbsp;❌ <br>
+/// [`XAUDIO2_EFFECT_DESCRIPTOR`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/ns-xaudio2-xaudio2_effect_descriptor)&nbsp;→ [`xaudio2::EffectDescriptor`] <br>
+/// [`XAUDIO2_FILTER_PARAMETERS`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/ns-xaudio2-xaudio2_filter_parameters)&nbsp;→ [`xaudio2::FilterParameters`] <br>
+/// [`XAUDIO2_PERFORMANCE_DATA`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/ns-xaudio2-xaudio2_performance_data)&nbsp;→ [`xaudio2::PerformanceData`] <br>
+/// [`XAUDIO2_SEND_DESCRIPTOR`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/ns-xaudio2-xaudio2_send_descriptor)&nbsp;→ [`xaudio2::SendDescriptor`] <br>
+/// [`XAUDIO2_VOICE_DETAILS`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/ns-xaudio2-xaudio2_voice_details)&nbsp;→ [`xaudio2::VoiceDetails`] <br>
+/// [`XAUDIO2_VOICE_SENDS`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/ns-xaudio2-xaudio2_voice_sends) →&nbsp;❌ <br>
+/// [`XAUDIO2_VOICE_STATE`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/ns-xaudio2-xaudio2_voice_state)&nbsp;→ [`xaudio2::VoiceState`] <br>
 /// ### C++ Enums → Rust Structs
 ///
-/// `XAUDIO2_FILTER_TYPE` →&nbsp;❌ <br>
-/// * `BandPassFilter` →&nbsp;❌ <br>
-/// * `HighPassFilter` →&nbsp;❌ <br>
-/// * `HighPassOnePoleFilter` →&nbsp;❌ <br>
-/// * `LowPassFilter` →&nbsp;❌ <br>
-/// * `LowPassOnePoleFilter` →&nbsp;❌ <br>
-/// * `NotchFilter` →&nbsp;❌ <br>
+/// [`XAUDIO2_FILTER_TYPE`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/ne-xaudio2-xaudio2_filter_type) →&nbsp;❌ <br>
+/// * [`BandPassFilter`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/ne-xaudio2-xaudio2_filter_type) →&nbsp;❌ <br>
+/// * [`HighPassFilter`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/ne-xaudio2-xaudio2_filter_type) →&nbsp;❌ <br>
+/// * [`HighPassOnePoleFilter`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/ne-xaudio2-xaudio2_filter_type) →&nbsp;❌ <br>
+/// * [`LowPassFilter`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/ne-xaudio2-xaudio2_filter_type) →&nbsp;❌ <br>
+/// * [`LowPassOnePoleFilter`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/ne-xaudio2-xaudio2_filter_type) →&nbsp;❌ <br>
+/// * [`NotchFilter`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/ne-xaudio2-xaudio2_filter_type) →&nbsp;❌ <br>
 ///
 /// ### C++ Constants → Rust Constants
 ///
 /// `FACILITY_XAUDIO2`&nbsp;→ [`xaudio2::FACILITY`] <br>
-/// `Processor1`&nbsp;→ [`xaudio2::Processor1`] <br>
-/// `Processor2`&nbsp;→ [`xaudio2::Processor2`] <br>
-/// `Processor31`&nbsp;→ [`xaudio2::Processor31`] <br>
-/// `Processor32`&nbsp;→ [`xaudio2::Processor32`] <br>
+/// [`Processor1`](https://learn.microsoft.com/en-us/windows/win32/xaudio2/uint32-xaudio2-processor)&nbsp;→ [`xaudio2::Processor1`] <br>
+/// [`Processor2`](https://learn.microsoft.com/en-us/windows/win32/xaudio2/uint32-xaudio2-processor)&nbsp;→ [`xaudio2::Processor2`] <br>
+/// [`Processor31`](https://learn.microsoft.com/en-us/windows/win32/xaudio2/uint32-xaudio2-processor)&nbsp;→ [`xaudio2::Processor31`] <br>
+/// [`Processor32`](https://learn.microsoft.com/en-us/windows/win32/xaudio2/uint32-xaudio2-processor)&nbsp;→ [`xaudio2::Processor32`] <br>
 /// `XAUDIO2D_DLL`&nbsp;→ [`xaudio2::D_DLL`] <br>
 /// `XAUDIO2D_DLL_A`&nbsp;→ [`xaudio2::D_DLL_A`] <br>
 /// `XAUDIO2D_DLL_W`&nbsp;→ [`xaudio2::D_DLL_W`] <br>
 /// `XAUDIO2_1024_QUANTUM` →&nbsp;❌ <br>
-/// `XAUDIO2_ANY_PROCESSOR`&nbsp;→ [`xaudio2::ANY_PROCESSOR`] <br>
+/// [`XAUDIO2_ANY_PROCESSOR`](https://learn.microsoft.com/en-us/windows/win32/xaudio2/uint32-xaudio2-processor)&nbsp;→ [`xaudio2::ANY_PROCESSOR`] <br>
 /// `XAUDIO2_COMMIT_ALL`&nbsp;→ [`xaudio2::COMMIT_ALL`] <br>
 /// `XAUDIO2_COMMIT_NOW`&nbsp;→ [`xaudio2::COMMIT_NOW`] <br>
 /// `XAUDIO2_DEBUG_ENGINE` →&nbsp;❌ <br>
@@ -3021,27 +3021,27 @@ pub const xinput_h : cxx_header = cxx_header;
 /// `XAUDIO2_DEFAULT_FILTER_ONEOVERQ`&nbsp;→ [`xaudio2::DEFAULT_FILTER_ONEOVERQ`] <br>
 /// `XAUDIO2_DEFAULT_FILTER_TYPE`&nbsp;→ [`xaudio2::DEFAULT_FILTER_TYPE`] <br>
 /// `XAUDIO2_DEFAULT_FREQ_RATIO`&nbsp;→ [`xaudio2::DEFAULT_FREQ_RATIO`] <br>
-/// `XAUDIO2_DEFAULT_PROCESSOR`&nbsp;→ [`xaudio2::DEFAULT_PROCESSOR`] <br>
+/// [`XAUDIO2_DEFAULT_PROCESSOR`](https://learn.microsoft.com/en-us/windows/win32/xaudio2/uint32-xaudio2-processor)&nbsp;→ [`xaudio2::DEFAULT_PROCESSOR`] <br>
 /// `XAUDIO2_DEFAULT_SAMPLERATE`&nbsp;→ [`xaudio2::DEFAULT_SAMPLERATE`] <br>
 /// `XAUDIO2_DLL`&nbsp;→ [`xaudio2::DLL`] <br>
 /// `XAUDIO2_DLL_A`&nbsp;→ [`xaudio2::DLL_A`] <br>
 /// `XAUDIO2_DLL_W`&nbsp;→ [`xaudio2::DLL_W`] <br>
 /// `XAUDIO2_END_OF_STREAM`&nbsp;→ [`xaudio2::END_OF_STREAM`] <br>
-/// `XAUDIO2_E_DEVICE_INVALIDATED`&nbsp;→ [`xaudio2::E_DEVICE_INVALIDATED`] <br>
-/// `XAUDIO2_E_INVALID_CALL`&nbsp;→ [`xaudio2::E_INVALID_CALL`] <br>
-/// `XAUDIO2_E_XAPO_CREATION_FAILED`&nbsp;→ [`xaudio2::E_XAPO_CREATION_FAILED`] <br>
-/// `XAUDIO2_E_XMA_DECODER_ERROR`&nbsp;→ [`xaudio2::E_XMA_DECODER_ERROR`] <br>
+/// [`XAUDIO2_E_DEVICE_INVALIDATED`](https://learn.microsoft.com/en-us/windows/win32/xaudio2/xaudio2-error-codes)&nbsp;→ [`xaudio2::E_DEVICE_INVALIDATED`] <br>
+/// [`XAUDIO2_E_INVALID_CALL`](https://learn.microsoft.com/en-us/windows/win32/xaudio2/xaudio2-error-codes)&nbsp;→ [`xaudio2::E_INVALID_CALL`] <br>
+/// [`XAUDIO2_E_XAPO_CREATION_FAILED`](https://learn.microsoft.com/en-us/windows/win32/xaudio2/xaudio2-error-codes)&nbsp;→ [`xaudio2::E_XAPO_CREATION_FAILED`] <br>
+/// [`XAUDIO2_E_XMA_DECODER_ERROR`](https://learn.microsoft.com/en-us/windows/win32/xaudio2/xaudio2-error-codes)&nbsp;→ [`xaudio2::E_XMA_DECODER_ERROR`] <br>
 /// `XAUDIO2_INVALID_OPSET`&nbsp;→ [`xaudio2::INVALID_OPSET`] <br>
-/// `XAUDIO2_LOG_API_CALLS` →&nbsp;❌ <br>
-/// `XAUDIO2_LOG_DETAIL` →&nbsp;❌ <br>
-/// `XAUDIO2_LOG_ERRORS` →&nbsp;❌ <br>
-/// `XAUDIO2_LOG_FUNC_CALLS` →&nbsp;❌ <br>
-/// `XAUDIO2_LOG_INFO` →&nbsp;❌ <br>
-/// `XAUDIO2_LOG_LOCKS` →&nbsp;❌ <br>
-/// `XAUDIO2_LOG_MEMORY` →&nbsp;❌ <br>
-/// `XAUDIO2_LOG_STREAMING` →&nbsp;❌ <br>
-/// `XAUDIO2_LOG_TIMING` →&nbsp;❌ <br>
-/// `XAUDIO2_LOG_WARNINGS` →&nbsp;❌ <br>
+/// [`XAUDIO2_LOG_API_CALLS`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/ns-xaudio2-xaudio2_debug_configuration) →&nbsp;❌ <br>
+/// [`XAUDIO2_LOG_DETAIL`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/ns-xaudio2-xaudio2_debug_configuration) →&nbsp;❌ <br>
+/// [`XAUDIO2_LOG_ERRORS`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/ns-xaudio2-xaudio2_debug_configuration) →&nbsp;❌ <br>
+/// [`XAUDIO2_LOG_FUNC_CALLS`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/ns-xaudio2-xaudio2_debug_configuration) →&nbsp;❌ <br>
+/// [`XAUDIO2_LOG_INFO`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/ns-xaudio2-xaudio2_debug_configuration) →&nbsp;❌ <br>
+/// [`XAUDIO2_LOG_LOCKS`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/ns-xaudio2-xaudio2_debug_configuration) →&nbsp;❌ <br>
+/// [`XAUDIO2_LOG_MEMORY`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/ns-xaudio2-xaudio2_debug_configuration) →&nbsp;❌ <br>
+/// [`XAUDIO2_LOG_STREAMING`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/ns-xaudio2-xaudio2_debug_configuration) →&nbsp;❌ <br>
+/// [`XAUDIO2_LOG_TIMING`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/ns-xaudio2-xaudio2_debug_configuration) →&nbsp;❌ <br>
+/// [`XAUDIO2_LOG_WARNINGS`](https://learn.microsoft.com/en-us/windows/win32/api/xaudio2/ns-xaudio2-xaudio2_debug_configuration) →&nbsp;❌ <br>
 /// `XAUDIO2_LOOP_INFINITE`&nbsp;→ [`xaudio2::LOOP_INFINITE`] <br>
 /// `XAUDIO2_MAX_AUDIO_CHANNELS`&nbsp;→ [`xaudio2::MAX_AUDIO_CHANNELS`] <br>
 /// `XAUDIO2_MAX_BUFFERS_SYSTEM`&nbsp;→ [`xaudio2::MAX_BUFFERS_SYSTEM`] <br>
@@ -3067,7 +3067,7 @@ pub const xinput_h : cxx_header = cxx_header;
 /// `XAUDIO2_SEND_USEFILTER`&nbsp;→ [`xaudio2::SEND_USEFILTER`] <br>
 /// `XAUDIO2_STDAPI`&nbsp;→ [`extern "system"`](https://doc.rust-lang.org/reference/items/external-blocks.html#abi) <br>
 /// `XAUDIO2_STOP_ENGINE_WHEN_IDLE` →&nbsp;❌ <br>
-/// `XAUDIO2_USE_DEFAULT_PROCESSOR`&nbsp;→ [`xaudio2::USE_DEFAULT_PROCESSOR`] <br>
+/// [`XAUDIO2_USE_DEFAULT_PROCESSOR`](https://learn.microsoft.com/en-us/windows/win32/xaudio2/uint32-xaudio2-processor)&nbsp;→ [`xaudio2::USE_DEFAULT_PROCESSOR`] <br>
 /// `XAUDIO2_VOICE_NOPITCH`&nbsp;→ [`xaudio2::VOICE_NOPITCH`] <br>
 /// `XAUDIO2_VOICE_NOSAMPLESPLAYED`&nbsp;→ [`xaudio2::VOICE_NOSAMPLESPLAYED`] <br>
 /// `XAUDIO2_VOICE_NOSRC`&nbsp;→ [`xaudio2::VOICE_NOSRC`] <br>
