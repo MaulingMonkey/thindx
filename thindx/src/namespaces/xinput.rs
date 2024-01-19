@@ -1,109 +1,107 @@
 //! \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/xinput/xinput-game-controller-apis-portal)\]
 //! APIs for Xbox 360 style controllers
-//!
-//! ### Enumerations
-//! | C++                       | Rust                  |
-//! | ------------------------- | --------------------- |
-//! | [`BATTERY_DEVTYPE_*`]     | [`BatteryDevType`]::\*
-//! | [`BATTERY_LEVEL_*`]       | [`BatteryLevel`]::\*
-//! | [`BATTERY_TYPE_*`]        | [`BatteryType`]::\*
-//! | [`XINPUT_DEVSUBTYPE_*`]   | [`DevSubType`]::\*
-//! | [`XINPUT_DEVTYPE_*`]      | [`DevType`]::\*
-//! | `XUSER_*`                 | [`User`]::\*
-//! | [`VK_*`]                  | [`VK`]::\*
-//!
-//! [`BATTERY_DEVTYPE_*`]:      https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetbatteryinformation
-//! [`BATTERY_LEVEL_*`]:        https://docs.microsoft.com/en-us/windows/win32/api/XInput/ns-xinput-xinput_battery_information
-//! [`BATTERY_TYPE_*`]:         https://docs.microsoft.com/en-us/windows/win32/api/XInput/ns-xinput-xinput_battery_information
-//! [`XINPUT_DEVSUBTYPE_*`]:    https://docs.microsoft.com/en-us/windows/win32/xinput/xinput-and-controller-subtypes
-//! [`XINPUT_DEVTYPE_*`]:       https://docs.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_capabilities
-//! [`VK_*`]:                   https://docs.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_keystroke#remarks
-//!
-//!
-//!
-//! ### Flags
-//! | C++                       | Rust                  |
-//! | ------------------------- | --------------------- |
-//! | [`XINPUT_GAMEPAD_*`]      | [`Buttons`]::\*
-//! | [`XINPUT_CAPS_*`]         | [`Caps`]::\*
-//! | [`XINPUT_FLAG_*`]         | [`Flag`]::\*
-//!
-//! [`XINPUT_GAMEPAD_*`]:       https://docs.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_gamepad#members
-//! [`XINPUT_CAPS_*`]:          https://docs.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_capabilities#members
-//! [`XINPUT_FLAG_*`]:          https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetcapabilities#parameters
-//!
-//!
-//!
-//! ### Functions
-//! | C++                                   | Rust                  |
-//! | ------------------------------------- | --------------------- |
-//! | [`XInputEnable`]                      | [`enable`]
-//! | [`XInputGetAudioDeviceIds`]           | [`get_audio_device_ids`]
-//! | [`XInputGetBatteryInformation`]       | [`get_battery_information`]
-//! | [`XInputGetCapabilities`]             | [`get_capabilities`]
-//! | [`XInputGetDSoundAudioDeviceGuids`] ❌ | [`get_dsound_audio_device_guids`]
-//! | [`XInputGetKeystroke`]                | [`get_keystroke`]
-//! | [`XInputGetState`]                    | [`get_state`]
-//! | `XInputGetStateEx` ⚠️ 1.3             | [`get_state_ex`]
-//! | [`XInputSetState`]                    | [`set_state`]
-//! | `XInputWaitForGuideButton`    ⚠️ 1.3  | <span style="opacity: 25%">TODO?</span>
-//! | `XInputCancelGuideButtonWait` ⚠️ 1.3  | <span style="opacity: 25%">TODO?</span>
-//! | `XInputPowerOffController`    ⚠️ 1.3  | <span style="opacity: 25%">TODO?</span>
-//! | `XInputGetBaseBusInformation` ⚠️ 1.4  | <span style="opacity: 25%">TODO?</span>
-//! | `XInputGetCapabilitiesEx`     ⚠️ 1.4  | <span style="opacity: 25%">TODO?</span>
-//!
-//! | Legend | Desc |
-//! | ------ | ---- |
-//! | ❌     | Deprecated
-//! | ⚠️ 1.3 | Undocumented XInput 1.3+ function exported by ordinal only
-//! | ⚠️ 1.4 | Undocumented XInput 1.4+ function exported by ordinal only
-//!
-//! [`XInputEnable`]:                       https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputenable
-//! [`XInputGetAudioDeviceIds`]:            https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetaudiodeviceids
-//! [`XInputGetBatteryInformation`]:        https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetbatteryinformation
-//! [`XInputGetCapabilities`]:              https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetcapabilities
-//! [`XInputGetDSoundAudioDeviceGuids`]:    https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetdsoundaudiodeviceguids
-//! [`XInputGetKeystroke`]:                 https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetkeystroke
-//! [`XInputGetState`]:                     https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetstate
-//! [`XInputSetState`]:                     https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputsetstate
-//!
-//!
-//!
-//! ### Structures
-//! | C++                               | Rust                  |
-//! | --------------------------------- | --------------------- |
-//! | [`XINPUT_BATTERY_INFORMATION`]    | [`BatteryInformation`]
-//! | [`XINPUT_CAPABILITIES`]           | [`Capabilities`]
-//! | [`XINPUT_GAMEPAD`]                | [`Gamepad`]
-//! | [`XINPUT_KEYSTROKE`]              | [`Keystroke`]
-//! | [`XINPUT_STATE`]                  | [`State`]
-//! | [`XINPUT_VIBRATION`]              | [`Vibration`]
-//! | <code>std::array&lt;[std::wstring], 2&gt;</code>  | [`AudioDeviceIds`]
-//! | <code>std::array&lt;[GUID], 2&gt;</code>          | [`DSoundAudioDeviceGuids`]
-//!
-//! [`XINPUT_BATTERY_INFORMATION`]:     https://docs.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_battery_information
-//! [`XINPUT_CAPABILITIES`]:            https://docs.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_capabilities
-//! [`XINPUT_GAMEPAD`]:                 https://docs.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_gamepad
-//! [`XINPUT_KEYSTROKE`]:               https://docs.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_keystroke
-//! [`XINPUT_STATE`]:                   https://docs.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_state
-//! [`XINPUT_VIBRATION`]:               https://docs.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_vibration
-//! [std::wstring]:                     https://docs.microsoft.com/en-us/cpp/standard-library/string-typedefs?view=msvc-170#wstring
-//! [GUID]:                             https://docs.microsoft.com/en-us/windows/win32/api/guiddef/ns-guiddef-guid
-//!
-//!
-//! # Alternatives
-//!
-//! \[[docs.microsoft.com](https://docs.microsoft.com/en-us/previous-versions/windows/desktop/ee416842(v=vs.85))\] **DirectInput**
-//! *   ✔️ Supports joysticks with many more buttons and axises than XInput.
-//! *   ✔️ Leverages Windows's built in support for configuring idle positions, deadzones.
-//! *   ⚠️ Older, "deprecated" in favor of XInput.
-//! *   ❌ Xbox 360 controllers map both triggers to a single axis in DirectInput.
-//! *   [Comparison of XInput and DirectInput features](https://docs.microsoft.com/en-us/windows/win32/xinput/xinput-and-directinput)
-//!     discusses how to use a hybrid approach of XInput for 360 controllers and DirectInput for non-XInput devices
-//!
-//! \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/uwp/gaming/input-for-games)\] **UWP**
-//! *   ✔️ Supports Xbox One trigger rumble (XInput only supports base controller rumble)
-//! *   ⚠️ Can't recieve input through UWP when the app/window is not active (useful for dev cruft.)
-//! *   ⚠️ No Windows 7 support?
 
-pub use crate::xinput_h::*;
+pub use ::thindx_xinput::*;
+
+//#cpp2rust XINPUT_BATTERY_INFORMATION              = xinput::BatteryInformation
+//#cpp2rust XINPUT_CAPABILITIES                     = xinput::Capabilities
+//#cpp2rust XINPUT_GAMEPAD                          = xinput::Gamepad
+//#cpp2rust XINPUT_KEYSTROKE                        = xinput::Keystroke
+//#cpp2rust XINPUT_STATE                            = xinput::State
+//#cpp2rust XINPUT_VIBRATION                        = xinput::Vibration
+
+//#cpp2rust XInputEnable                            = xinput::enable
+//#cpp2rust XInputGetAudioDeviceIds                 = xinput::get_audio_device_ids
+//#cpp2rust XInputGetBatteryInformation             = xinput::get_battery_information
+//#cpp2rust XInputGetCapabilities                   = xinput::get_capabilities
+//#cpp2rust XInputGetDSoundAudioDeviceGuids         = xinput::get_dsound_audio_device_guids
+//#cpp2rust XInputGetKeystroke                      = xinput::get_keystroke
+//#cpp2rust XInputGetState                          = xinput::get_state
+//#cpp2rust XInputSetState                          = xinput::set_state
+
+//#cpp2rust BATTERY_DEVTYPE_GAMEPAD                 = xinput::BatteryDevType::Gamepad
+//#cpp2rust BATTERY_DEVTYPE_HEADSET                 = xinput::BatteryDevType::Headset
+//#cpp2rust BATTERY_LEVEL_EMPTY                     = xinput::BatteryLevel::Empty
+//#cpp2rust BATTERY_LEVEL_FULL                      = xinput::BatteryLevel::Full
+//#cpp2rust BATTERY_LEVEL_LOW                       = xinput::BatteryLevel::Low
+//#cpp2rust BATTERY_LEVEL_MEDIUM                    = xinput::BatteryLevel::Medium
+//#cpp2rust BATTERY_TYPE_ALKALINE                   = xinput::BatteryType::Alkaline
+//#cpp2rust BATTERY_TYPE_DISCONNECTED               = xinput::BatteryType::Disconnected
+//#cpp2rust BATTERY_TYPE_NIMH                       = xinput::BatteryType::NiMH
+//#cpp2rust BATTERY_TYPE_UNKNOWN                    = xinput::BatteryType::Unknown
+//#cpp2rust BATTERY_TYPE_WIRED                      = xinput::BatteryType::Wired
+//#cpp2rust VK_PAD_A                                = xinput::VK::PadA
+//#cpp2rust VK_PAD_B                                = xinput::VK::PadB
+//#cpp2rust VK_PAD_BACK                             = xinput::VK::PadBack
+//#cpp2rust VK_PAD_DPAD_DOWN                        = xinput::VK::PadDPadDown
+//#cpp2rust VK_PAD_DPAD_LEFT                        = xinput::VK::PadDPadLeft
+//#cpp2rust VK_PAD_DPAD_RIGHT                       = xinput::VK::PadDPadRight
+//#cpp2rust VK_PAD_DPAD_UP                          = xinput::VK::PadDPadUp
+//#cpp2rust VK_PAD_LSHOULDER                        = xinput::VK::PadLShoulder
+//#cpp2rust VK_PAD_LTHUMB_DOWN                      = xinput::VK::PadLThumbDown
+//#cpp2rust VK_PAD_LTHUMB_DOWNLEFT                  = xinput::VK::PadLThumbDownLeft
+//#cpp2rust VK_PAD_LTHUMB_DOWNRIGHT                 = xinput::VK::PadLThumbDownRight
+//#cpp2rust VK_PAD_LTHUMB_LEFT                      = xinput::VK::PadLThumbLeft
+//#cpp2rust VK_PAD_LTHUMB_PRESS                     = xinput::VK::PadLThumbPress
+//#cpp2rust VK_PAD_LTHUMB_RIGHT                     = xinput::VK::PadLThumbRight
+//#cpp2rust VK_PAD_LTHUMB_UP                        = xinput::VK::PadLThumbUp
+//#cpp2rust VK_PAD_LTHUMB_UPLEFT                    = xinput::VK::PadLThumbUpLeft
+//#cpp2rust VK_PAD_LTHUMB_UPRIGHT                   = xinput::VK::PadLThumbUpRight
+//#cpp2rust VK_PAD_LTRIGGER                         = xinput::VK::PadLTrigger
+//#cpp2rust VK_PAD_RSHOULDER                        = xinput::VK::PadRShoulder
+//#cpp2rust VK_PAD_RTHUMB_DOWN                      = xinput::VK::PadRThumbDown
+//#cpp2rust VK_PAD_RTHUMB_DOWNLEFT                  = xinput::VK::PadRThumbDownLeft
+//#cpp2rust VK_PAD_RTHUMB_DOWNRIGHT                 = xinput::VK::PadRThumbDownRight
+//#cpp2rust VK_PAD_RTHUMB_LEFT                      = xinput::VK::PadRThumbLeft
+//#cpp2rust VK_PAD_RTHUMB_PRESS                     = xinput::VK::PadRThumbPress
+//#cpp2rust VK_PAD_RTHUMB_RIGHT                     = xinput::VK::PadRThumbRight
+//#cpp2rust VK_PAD_RTHUMB_UP                        = xinput::VK::PadRThumbUp
+//#cpp2rust VK_PAD_RTHUMB_UPLEFT                    = xinput::VK::PadRThumbUpLeft
+//#cpp2rust VK_PAD_RTHUMB_UPRIGHT                   = xinput::VK::PadRThumbUpRight
+//#cpp2rust VK_PAD_RTRIGGER                         = xinput::VK::PadRTrigger
+//#cpp2rust VK_PAD_START                            = xinput::VK::PadStart
+//#cpp2rust VK_PAD_X                                = xinput::VK::PadX
+//#cpp2rust VK_PAD_Y                                = xinput::VK::PadY
+//#cpp2rust XINPUT_CAPS_FFB_SUPPORTED               = xinput::Caps::FfbSupported
+//#cpp2rust XINPUT_CAPS_NO_NAVIGATION               = xinput::Caps::NoNavigation
+//#cpp2rust XINPUT_CAPS_PMD_SUPPORTED               = xinput::Caps::PmdSupported
+//#cpp2rust XINPUT_CAPS_VOICE_SUPPORTED             = xinput::Caps::VoiceSupported
+//#cpp2rust XINPUT_CAPS_WIRELESS                    = xinput::Caps::Wireless
+//#cpp2rust XINPUT_DEVSUBTYPE_ARCADE_PAD            = xinput::DevSubType::ArcadePad
+//#cpp2rust XINPUT_DEVSUBTYPE_ARCADE_STICK          = xinput::DevSubType::ArcadeStick
+//#cpp2rust XINPUT_DEVSUBTYPE_DANCE_PAD             = xinput::DevSubType::DancePad
+//#cpp2rust XINPUT_DEVSUBTYPE_DRUM_KIT              = xinput::DevSubType::DrumKit
+//#cpp2rust XINPUT_DEVSUBTYPE_FLIGHT_STICK          = xinput::DevSubType::FlightStick
+//#cpp2rust XINPUT_DEVSUBTYPE_GAMEPAD               = xinput::DevSubType::Gamepad
+//#cpp2rust XINPUT_DEVSUBTYPE_GUITAR                = xinput::DevSubType::Guitar
+//#cpp2rust XINPUT_DEVSUBTYPE_GUITAR_ALTERNATE      = xinput::DevSubType::GuitarAlternate
+//#cpp2rust XINPUT_DEVSUBTYPE_GUITAR_BASS           = xinput::DevSubType::GuitarBass
+//#cpp2rust XINPUT_DEVSUBTYPE_UNKNOWN               = xinput::DevSubType::Unknown
+//#cpp2rust XINPUT_DEVSUBTYPE_WHEEL                 = xinput::DevSubType::Wheel
+//#cpp2rust XINPUT_DEVTYPE_GAMEPAD                  = xinput::DevType::Gamepad
+//  xxx     XINPUT_DLL                              = xinput::DLL
+//  xxx     XINPUT_DLL_A                            = xinput::DLL_A
+//  xxx     XINPUT_DLL_W                            = xinput::DLL_W
+//#cpp2rust XINPUT_FLAG_GAMEPAD                     = xinput::Flag::Gamepad
+//#cpp2rust XINPUT_GAMEPAD_A                        = xinput::Buttons::A
+//#cpp2rust XINPUT_GAMEPAD_B                        = xinput::Buttons::B
+//#cpp2rust XINPUT_GAMEPAD_BACK                     = xinput::Buttons::Back
+//#cpp2rust XINPUT_GAMEPAD_DPAD_DOWN                = xinput::Buttons::DPadDown
+//#cpp2rust XINPUT_GAMEPAD_DPAD_LEFT                = xinput::Buttons::DPadLeft
+//#cpp2rust XINPUT_GAMEPAD_DPAD_RIGHT               = xinput::Buttons::DPadRight
+//#cpp2rust XINPUT_GAMEPAD_DPAD_UP                  = xinput::Buttons::DPadUp
+//#cpp2rust XINPUT_GAMEPAD_LEFT_SHOULDER            = xinput::Buttons::LeftShoulder
+//#cpp2rust XINPUT_GAMEPAD_LEFT_THUMB               = xinput::Buttons::LeftThumb
+//#cpp2rust XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE      = xinput::Gamepad::LEFT_THUMB_DEADZONE
+//#cpp2rust XINPUT_GAMEPAD_RIGHT_SHOULDER           = xinput::Buttons::RightShoulder
+//#cpp2rust XINPUT_GAMEPAD_RIGHT_THUMB              = xinput::Buttons::RightThumb
+//#cpp2rust XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE     = xinput::Gamepad::RIGHT_THUMB_DEADZONE
+//#cpp2rust XINPUT_GAMEPAD_START                    = xinput::Buttons::Start
+//#cpp2rust XINPUT_GAMEPAD_TRIGGER_THRESHOLD        = xinput::Gamepad::TRIGGER_THRESHOLD
+//#cpp2rust XINPUT_GAMEPAD_X                        = xinput::Buttons::X
+//#cpp2rust XINPUT_GAMEPAD_Y                        = xinput::Buttons::Y
+//#cpp2rust XINPUT_KEYSTROKE_KEYDOWN                = xinput::Keystroke::KeyDown
+//#cpp2rust XINPUT_KEYSTROKE_KEYUP                  = xinput::Keystroke::KeyUp
+//#cpp2rust XINPUT_KEYSTROKE_REPEAT                 = xinput::Keystroke::Repeat
+//#cpp2rust XUSER_INDEX_ANY                         = xinput::User::Any
+//#cpp2rust XUSER_MAX_COUNT                         = xinput::User::MAX_COUNT

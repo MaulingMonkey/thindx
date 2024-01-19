@@ -1,6 +1,5 @@
 #![doc = include_str!("../Readme.md")]
 #![forbid(unsafe_op_in_unsafe_fn)]
-#![forbid(unaligned_references)]
 #![warn(rustdoc::broken_intra_doc_links)]
 #![warn(missing_docs)]
 #![deny(unreachable_patterns)] // probably improperly `match { ... }`ed constants
@@ -48,7 +47,6 @@ mods! {
     #[path="headers/processthreadsapi.h/processthreadsapi.rs"] mod processthreadsapi_h;
     #[path="headers/unknwn.h/unknwn.rs"]            mod unknwn_h;
     #[path="headers/winuser.h/winuser.rs"]          mod winuser_h;
-    #[path="headers/xinput.h/xinput.rs"]            mod xinput_h;
 
     #[path="traits/_traits.rs"]                     mod traits;
 
