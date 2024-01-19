@@ -336,7 +336,7 @@ fn collect_cpp2ignore() -> BTreeSet<&'static str> {
     let mut r = BTreeSet::<&'static str>::new();
     for (&path, text) in TEXTFILES.iter() {
         let name = path.rsplit_once(&['/', '\\']).map_or(path, |p| p.1);
-        if name == "cpp2ignore.txt" {
+        if name.starts_with("cpp2ignore.") && name.ends_with(".txt") {
             for line in text.lines() {
                 let line = line.split_once('#').map_or(line, |s| s.0).trim();
                 if line.is_empty() { continue }
@@ -400,7 +400,7 @@ fn collect_cpp2url() -> BTreeMap<&'static str, Vec<&'static str>> {
     let mut r = BTreeMap::<&'static str, Vec<&'static str>>::new();
     for (&path, text) in TEXTFILES.iter() {
         let name = path.rsplit_once(&['/', '\\']).map_or(path, |p| p.1);
-        if name == "cpp2url.md" {
+        if name.starts_with("cpp2url.") && name.ends_with(".md") {
             for (line_idx, line) in text.lines().enumerate() {
                 let line_no = line_idx + 1;
                 let line = line.trim();
