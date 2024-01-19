@@ -8,7 +8,7 @@ use std::mem::size_of;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddisplaymodeex)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3ddisplaymodeex)\]
 /// D3DDISPLAYMODEEX
 ///
 /// Describes the display mode.

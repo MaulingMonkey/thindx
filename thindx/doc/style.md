@@ -4,7 +4,7 @@ Function doc comments should generally follow the following style, skipping irre
 (e.g. if the fn takes no arguments, remove the entire "### Arguments" header and section.)
 
 ```rust
-/// \[[docs.microsoft.com](https://docs.microsoft.com/...)\]
+/// \[[microsoft.com](https://learn.microsoft.com/...)\]
 /// FunctionName
 ///
 /// Short description of the function and it's behavior

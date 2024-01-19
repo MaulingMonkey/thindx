@@ -5,7 +5,7 @@ use crate::d3d11::*;
 use std::ptr::*;
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11module)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11module)\]
 /// ID3D11Module
 ///
 /// A module interface creates an instance of a module that is used for resource rebinding.
@@ -31,7 +31,7 @@ pub struct Module(pub(crate) mcom::Rc<winapi::um::d3d11shader::ID3D11Module>);
 convert!(unsafe Module => Unknown, winapi::um::d3d11shader::ID3D11Module);
 
 impl Module {
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11module-createinstance)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11module-createinstance)\]
     /// ID3D11Module::CreateInstance
     ///
     /// Initializes an instance of a shader module that is used for resource rebinding.

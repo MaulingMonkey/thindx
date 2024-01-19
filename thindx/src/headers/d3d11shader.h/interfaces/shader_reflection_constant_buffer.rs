@@ -9,7 +9,7 @@ use std::ptr::NonNull;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11shaderreflectionconstantbuffer)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11shaderreflectionconstantbuffer)\]
 /// ID3D11ShaderReflectionConstantBuffer
 ///
 /// This shader-reflection interface provides access to a constant buffer.
@@ -35,7 +35,7 @@ impl<'r> ShaderReflectionConstantBuffer<'r> {
 }
 
 impl<'r> ShaderReflectionConstantBuffer<'r> {
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectionconstantbuffer-getdesc)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectionconstantbuffer-getdesc)\]
     /// ID3D11ShaderReflectionConstantBuffer::GetDesc
     ///
     /// Get a constant-buffer description.
@@ -81,7 +81,7 @@ impl<'r> ShaderReflectionConstantBuffer<'r> {
         Ok(desc)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectionconstantbuffer-getvariablebyindex)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectionconstantbuffer-getvariablebyindex)\]
     /// ID3D11ShaderReflectionConstantBuffer::GetVariableByIndex
     ///
     /// Get a shader-reflection variable by index.
@@ -132,7 +132,7 @@ impl<'r> ShaderReflectionConstantBuffer<'r> {
         unsafe { ShaderReflectionVariable::from_raw(self.phantom, ptr) }
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectionconstantbuffer-getvariablebyname)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectionconstantbuffer-getvariablebyname)\]
     /// ID3D11ShaderReflectionConstantBuffer::GetVariableByName
     ///
     /// Get a shader-reflection variable by name.

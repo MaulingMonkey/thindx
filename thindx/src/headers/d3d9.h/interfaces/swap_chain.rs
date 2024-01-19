@@ -14,7 +14,7 @@ use std::ptr::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dswapchain9)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dswapchain9)\]
 /// Manages swapping buffers for a view.
 #[derive(Clone)] #[repr(transparent)]
 pub struct SwapChain(pub(crate) mcom::Rc<IDirect3DSwapChain9>);
@@ -24,11 +24,11 @@ unsafe impl AsSafe<IDirect3DSwapChain9  > for SwapChain { fn as_safe(&self) -> &
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dswapchain9)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dswapchain9)\]
 /// IDirect3DSwapChain9 extension methods
 ///
 /// ### Methods
-/// | thindx                                                    | docs.microsoft.com        | description   |
+/// | thindx                                                    | microsoft.com             | Description   |
 /// | --------------------------------------------------------- | ------------------------- | ------------- |
 /// | [get_back_buffer](Self::get_back_buffer)                  | [GetBackBuffer]           | Retrieves a back buffer from the swap chain of the device.
 /// | [get_device](Self::get_device)                            | [GetDevice]               | Retrieves the device associated with the swap chain.
@@ -41,19 +41,19 @@ unsafe impl AsSafe<IDirect3DSwapChain9  > for SwapChain { fn as_safe(&self) -> &
 /// ### See Also
 /// *   [IDirect3DDevice9Ext::create_additional_swap_chain]
 ///
-/// [GetBackBuffer]:        https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getbackbuffer
-/// [GetDevice]:            https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getdevice
-/// [GetDisplayMode]:       https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getdisplaymode
-/// [GetFrontBufferData]:   https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getfrontbufferdata
-/// [GetPresentParameters]: https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getpresentparameters
-/// [GetRasterStatus]:      https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getrasterstatus
-/// [Present]:              https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-present
+/// [GetBackBuffer]:        https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getbackbuffer
+/// [GetDevice]:            https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getdevice
+/// [GetDisplayMode]:       https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getdisplaymode
+/// [GetFrontBufferData]:   https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getfrontbufferdata
+/// [GetPresentParameters]: https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getpresentparameters
+/// [GetRasterStatus]:      https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getrasterstatus
+/// [Present]:              https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-present
 ///
 pub trait IDirect3DSwapChain9Ext : AsSafe<IDirect3DSwapChain9> {
     type Device     : From<Device>;
     type Surface    : From<Surface>;
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getbackbuffer)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getbackbuffer)\]
     /// IDirect3DSwapChain9::GetBackBuffer
     ///
     /// Retrieves a back buffer from the swap chain of the device.
@@ -65,7 +65,7 @@ pub trait IDirect3DSwapChain9Ext : AsSafe<IDirect3DSwapChain9> {
         Ok(Self::Surface::from(unsafe { Surface::from_raw(back_buffer) }))
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getdevice)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getdevice)\]
     /// IDirect3DSwapChain9::GetDevice
     ///
     /// Retrieves the device associated with the swap chain.
@@ -76,7 +76,7 @@ pub trait IDirect3DSwapChain9Ext : AsSafe<IDirect3DSwapChain9> {
         Ok(Self::Device::from(unsafe { Device::from_raw(device) }))
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getdisplaymode)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getdisplaymode)\]
     /// IDirect3DSwapChain9::GetDisplayMode
     ///
     /// Retrieves the display mode's spatial resolution, color resolution, and refresh frequency.
@@ -87,7 +87,7 @@ pub trait IDirect3DSwapChain9Ext : AsSafe<IDirect3DSwapChain9> {
         Ok(dm)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getfrontbufferdata)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getfrontbufferdata)\]
     /// IDirect3DSwapChain9::GetFrontBufferData
     ///
     /// Retrieves a copy of the swapchain's front buffer
@@ -100,7 +100,7 @@ pub trait IDirect3DSwapChain9Ext : AsSafe<IDirect3DSwapChain9> {
         fn_check_hr!(unsafe { self.as_winapi().GetFrontBufferData(dest_surface.as_winapi() as *const _ as *mut _) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getpresentparameters)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getpresentparameters)\]
     /// IDirect3DSwapChain9::GetPresentParameters
     ///
     /// Retrieves the presentation parameters associated with a swap chain.
@@ -113,7 +113,7 @@ pub trait IDirect3DSwapChain9Ext : AsSafe<IDirect3DSwapChain9> {
         Ok(pp)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getrasterstatus)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getrasterstatus)\]
     /// IDirect3DSwapChain9::GetRasterStatus
     ///
     /// Returns information describing the raster of the monitor on which the swap chain is presented.
@@ -124,7 +124,7 @@ pub trait IDirect3DSwapChain9Ext : AsSafe<IDirect3DSwapChain9> {
         Ok(rs)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-present)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-present)\]
     /// IDirect3DSwapChain9::Present
     ///
     /// Presents the contents of the next buffer in the sequence of back buffers owned by the swap chain.

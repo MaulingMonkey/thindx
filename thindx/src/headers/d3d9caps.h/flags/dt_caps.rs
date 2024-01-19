@@ -4,7 +4,7 @@ use winapi::shared::minwindef::DWORD;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddtcaps)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3ddtcaps)\]
 /// D3DDTCAPS_*
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[derive(Pod, Zeroable)]

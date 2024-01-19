@@ -10,8 +10,8 @@ use std::fmt::{self, Debug, Formatter};
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3drect)\]
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/windef/ns-windef-rect)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drect)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/windef/ns-windef-rect)\]
 /// D3DRECT / RECT
 ///
 /// Two near-identical, ABI-compatible, but slightly differently named/labeled sets of 4 `LONG`s
@@ -23,8 +23,8 @@ use std::fmt::{self, Debug, Formatter};
 /// | x2                    | right     |
 /// | y2                    | bottom    |
 ///
-/// [D3DRECT]:  https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3drect
-/// [RECT]:     https://docs.microsoft.com/en-us/windows/win32/api/windef/ns-windef-rect
+/// [D3DRECT]:  https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drect
+/// [RECT]:     https://learn.microsoft.com/en-us/windows/win32/api/windef/ns-windef-rect
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[derive(Default, Pod, Zeroable)]
 #[repr(C)] pub struct Rect {

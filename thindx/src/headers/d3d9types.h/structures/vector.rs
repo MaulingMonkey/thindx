@@ -4,7 +4,7 @@ use winapi::shared::d3d9types::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dvector)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dvector)\]
 /// D3DVECTOR
 ///
 /// Defines a 3-component [f32] vector.

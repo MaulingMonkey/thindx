@@ -4,14 +4,14 @@ use winapi::shared::d3d9types::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)\]
 /// D3DSAMPLERSTATETYPE
 ///
 /// Sampler states define texture sampling operations such as texture addressing and texture filtering.
 /// Some sampler states set-up vertex processing, and some set-up pixel processing.
 /// Sampler states can be saved and restored using stateblocks (see [State Blocks Save and Restore State (Direct3D 9)]).
 ///
-/// [State Blocks Save and Restore State (Direct3D 9)]:     https://docs.microsoft.com/en-us/windows/win32/direct3d9/state-blocks-save-and-restore-state
+/// [State Blocks Save and Restore State (Direct3D 9)]:     https://learn.microsoft.com/en-us/windows/win32/direct3d9/state-blocks-save-and-restore-state
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct SamplerStateType(D3DSAMPLERSTATETYPE);

@@ -9,7 +9,7 @@ use std::fmt::{self, Debug, Formatter};
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dcolor)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dcolor)\]
 /// D3DCOLOR
 ///
 /// 0xAA<span style="color: red">RR</span><span style="color: green">GG</span><span style="color: blue">BB</span>

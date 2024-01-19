@@ -5,7 +5,7 @@ use std::os::raw::c_int as int;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dlocked-box)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dlocked-box)\]
 /// D3DLOCKED_BOX
 ///
 /// A locked 3-dimensional box/volume.

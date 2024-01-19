@@ -10,23 +10,23 @@ use std::hash::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/guiddef/ns-guiddef-guid)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/guiddef/ns-guiddef-guid)\]
 /// A 128-bit identifier used for COM interfaces, COM class objects, and various other purpouses.
 #[derive(Clone, Copy)]
 #[repr(transparent)] pub struct Guid(GUID);
 
 /// = [Guid]
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/wmformat/interface-identifiers)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/wmformat/interface-identifiers)\]
 /// **I**nterface **Id**entifier - used for uniquely identifiying COM interfaces
 pub type IID    = Guid;
 
 /// = [Guid]
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/com/com-class-objects-and-clsids)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/com/com-class-objects-and-clsids)\]
 /// **Cl**as**s** **Id**entifier - used for uniquely identifying COM classes
 pub type ClsID  = Guid;
 
 /// = [Guid]
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/stg/format-identifiers)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/stg/format-identifiers)\]
 /// **F**or**m**a**t** **Id**entifier - used for tagging sections in e.g. structured storage property sets
 pub type FmtID  = Guid;
 

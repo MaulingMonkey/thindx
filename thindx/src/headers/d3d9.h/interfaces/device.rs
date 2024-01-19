@@ -23,7 +23,7 @@ pub(crate) const MAX_BUFFER_ALLOC : u32 = 0xFFFF_0000;
 // TODO: fuzz / torture-test Device operations in randomized combinations for odd interactions
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3ddevice9)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3ddevice9)\]
 /// Core interface used for general rendering, resource creation, etc.
 ///
 /// # Table of Contents
@@ -50,11 +50,11 @@ unsafe impl AsSafe<IDirect3DDevice9 > for Device { fn as_safe(&self) -> &IDirect
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3ddevice9)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3ddevice9)\]
 /// IDirect3DDevice9 extension methods
 ///
 /// ### Methods
-/// | thindx                                                                    | docs.microsoft.com            | Description |
+/// | thindx                                                                    | learn.microsoft.com            | Description |
 /// | ------------------------------------------------------------------------- | ----------------------------- | ----------- |
 /// | [begin_scene](Self::begin_scene)                                          | [BeginScene]                  | Begins a scene.
 /// | [begin_state_block](Self::begin_state_block)                              | [BeginStateBlock]             | Signals Direct3D to begin recording a device-state block.
@@ -179,127 +179,127 @@ unsafe impl AsSafe<IDirect3DDevice9 > for Device { fn as_safe(&self) -> &IDirect
 /// | <span style="opacity: 25%">N/A</span>                                     | [BeginScene], [EndScene]      | Scoped scenes?
 /// | <span style="opacity: 25%">N/A</span>                                     | [BeginStateBlock], [EndStateBlock]    | Scoped state blocks?
 ///
-/// [BeginScene]:                   https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-beginscene
-/// [BeginStateBlock]:              https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-beginstateblock
-/// [Clear]:                        https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-clear
-/// [ColorFill]:                    https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-colorfill
-/// [CreateAdditionalSwapChain]:    https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createadditionalswapchain
-/// [CreateCubeTexture]:            https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createcubetexture
-/// [CreateDepthStencilSurface]:    https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createdepthstencilsurface
-/// [CreateIndexBuffer]:            https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createindexbuffer
-/// [CreateOffscreenPlainSurface]:  https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createoffscreenplainsurface
-/// [CreatePixelShader]:            https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createpixelshader
-/// [CreateQuery]:                  https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createquery
-/// [CreateRenderTarget]:           https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createrendertarget
-/// [CreateStateBlock]:             https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createstateblock
-/// [CreateTexture]:                https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createtexture
-/// [CreateVertexBuffer]:           https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createvertexbuffer
-/// [CreateVertexDeclaration]:      https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createvertexdeclaration
-/// [CreateVertexShader]:           https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createvertexshader
-/// [CreateVolumeTexture]:          https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createvolumetexture
-/// [DeletePatch]:                  https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-deletepatch
-/// [DrawIndexedPrimitive]:         https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-drawindexedprimitive
-/// [DrawIndexedPrimitiveUP]:       https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-drawindexedprimitiveup
-/// [DrawPrimitive]:                https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-drawprimitive
-/// [DrawPrimitiveUP]:              https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-drawprimitiveup
-/// [DrawRectPatch]:                https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-drawrectpatch
-/// [DrawTriPatch]:                 https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-drawtripatch
-/// [EndScene]:                     https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-endscene
-/// [EndStateBlock]:                https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-endstateblock
-/// [EvictManagedResources]:        https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-evictmanagedresources
-/// [GetAvailableTextureMem]:       https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getavailabletexturemem
-/// [GetBackBuffer]:                https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getbackbuffer
-/// [GetClipPlane]:                 https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getclipplane
-/// [GetClipStatus]:                https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getclipstatus
-/// [GetCreationParameters]:        https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getcreationparameters
-/// [GetCurrentTexturePalette]:     https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getcurrenttexturepalette
-/// [GetDepthStencilSurface]:       https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getdepthstencilsurface
-/// [GetDeviceCaps]:                https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getdevicecaps
-/// [GetDirect3D]:                  https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getdirect3d
-/// [GetDisplayMode]:               https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getdisplaymode
-/// [GetFrontBufferData]:           https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getfrontbufferdata
-/// [GetFVF]:                       https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getfvf
-/// [GetGammaRamp]:                 https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getgammaramp
-/// [GetIndices]:                   https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getindices
-/// [GetLight]:                     https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getlight
-/// [GetLightEnable]:               https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getlightenable
-/// [GetMaterial]:                  https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getmaterial
-/// [GetNPatchMode]:                https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getnpatchmode
-/// [GetNumberOfSwapChains]:        https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getnumberofswapchains
-/// [GetPaletteEntries]:            https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getpaletteentries
-/// [GetPixelShader]:               https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getpixelshader
-/// [GetPixelShaderConstantB]:      https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getpixelshaderconstantb
-/// [GetPixelShaderConstantF]:      https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getpixelshaderconstantf
-/// [GetPixelShaderConstantI]:      https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getpixelshaderconstanti
-/// [GetRasterStatus]:              https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getrasterstatus
-/// [GetRenderState]:               https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getrenderstate
-/// [GetRenderTarget]:              https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getrendertarget
-/// [GetRenderTargetData]:          https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getrendertargetdata
-/// [GetSamplerState]:              https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getsamplerstate
-/// [GetScissorRect]:               https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getscissorrect
-/// [GetSoftwareVertexProcessing]:  https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getsoftwarevertexprocessing
-/// [GetStreamSource]:              https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getstreamsource
-/// [GetStreamSourceFreq]:          https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getstreamsourcefreq
-/// [GetSwapChain]:                 https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getswapchain
-/// [GetTexture]:                   https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-gettexture
-/// [GetTextureStageState]:         https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-gettexturestagestate
-/// [GetTransform]:                 https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-gettransform
-/// [GetVertexDeclaration]:         https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getvertexdeclaration
-/// [GetVertexShader]:              https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getvertexshader
-/// [GetVertexShaderConstantB]:     https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getvertexshaderconstantb
-/// [GetVertexShaderConstantF]:     https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getvertexshaderconstantf
-/// [GetVertexShaderConstantI]:     https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getvertexshaderconstanti
-/// [GetViewport]:                  https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getviewport
-/// [LightEnable]:                  https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-lightenable
-/// [MultiplyTransform]:            https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-multiplytransform
-/// [Present]:                      https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-present
-/// [ProcessVertices]:              https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-processvertices
-/// [Reset]:                        https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-reset
-/// [SetClipPlane]:                 https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setclipplane
-/// [SetClipStatus]:                https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setclipstatus
-/// [SetCurrentTexturePalette]:     https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setcurrenttexturepalette
-/// [SetCursorPosition]:            https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setcursorposition
-/// [SetCursorProperties]:          https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setcursorproperties
-/// [SetDepthStencilSurface]:       https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setdepthstencilsurface
-/// [SetDialogBoxMode]:             https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setdialogboxmode
-/// [SetFVF]:                       https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setfvf
-/// [SetGammaRamp]:                 https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setgammaramp
-/// [SetIndices]:                   https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setindices
-/// [SetLight]:                     https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setlight
-/// [SetMaterial]:                  https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setmaterial
-/// [SetNPatchMode]:                https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setnpatchmode
-/// [SetPaletteEntries]:            https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setpaletteentries
-/// [SetPixelShader]:               https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setpixelshader
-/// [SetPixelShaderConstantB]:      https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setpixelshaderconstantb
-/// [SetPixelShaderConstantF]:      https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setpixelshaderconstantf
-/// [SetPixelShaderConstantI]:      https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setpixelshaderconstanti
-/// [SetRenderState]:               https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setrenderstate
-/// [SetRenderTarget]:              https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setrendertarget
-/// [SetSamplerState]:              https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setsamplerstate
-/// [SetScissorRect]:               https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setscissorrect
-/// [SetSoftwareVertexProcessing]:  https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setsoftwarevertexprocessing
-/// [SetStreamSource]:              https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setstreamsource
-/// [SetStreamSourceFreq]:          https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setstreamsourcefreq
-/// [SetTexture]:                   https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-settexture
-/// [SetTextureStageState]:         https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-settexturestagestate
-/// [SetTransform]:                 https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-settransform
-/// [SetVertexDeclaration]:         https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setvertexdeclaration
-/// [SetVertexShader]:              https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setvertexshader
-/// [SetVertexShaderConstantB]:     https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setvertexshaderconstantb
-/// [SetVertexShaderConstantF]:     https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setvertexshaderconstantf
-/// [SetVertexShaderConstantI]:     https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setvertexshaderconstanti
-/// [SetViewport]:                  https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setviewport
-/// [ShowCursor]:                   https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-showcursor
-/// [StretchRect]:                  https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-stretchrect
-/// [TestCooperativeLevel]:         https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-testcooperativelevel
-/// [UpdateSurface]:                https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-updatesurface
-/// [UpdateTexture]:                https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-updatetexture
-/// [ValidateDevice]:               https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-validatedevice
+/// [BeginScene]:                   https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-beginscene
+/// [BeginStateBlock]:              https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-beginstateblock
+/// [Clear]:                        https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-clear
+/// [ColorFill]:                    https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-colorfill
+/// [CreateAdditionalSwapChain]:    https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createadditionalswapchain
+/// [CreateCubeTexture]:            https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createcubetexture
+/// [CreateDepthStencilSurface]:    https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createdepthstencilsurface
+/// [CreateIndexBuffer]:            https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createindexbuffer
+/// [CreateOffscreenPlainSurface]:  https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createoffscreenplainsurface
+/// [CreatePixelShader]:            https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createpixelshader
+/// [CreateQuery]:                  https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createquery
+/// [CreateRenderTarget]:           https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createrendertarget
+/// [CreateStateBlock]:             https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createstateblock
+/// [CreateTexture]:                https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createtexture
+/// [CreateVertexBuffer]:           https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createvertexbuffer
+/// [CreateVertexDeclaration]:      https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createvertexdeclaration
+/// [CreateVertexShader]:           https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createvertexshader
+/// [CreateVolumeTexture]:          https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createvolumetexture
+/// [DeletePatch]:                  https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-deletepatch
+/// [DrawIndexedPrimitive]:         https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-drawindexedprimitive
+/// [DrawIndexedPrimitiveUP]:       https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-drawindexedprimitiveup
+/// [DrawPrimitive]:                https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-drawprimitive
+/// [DrawPrimitiveUP]:              https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-drawprimitiveup
+/// [DrawRectPatch]:                https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-drawrectpatch
+/// [DrawTriPatch]:                 https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-drawtripatch
+/// [EndScene]:                     https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-endscene
+/// [EndStateBlock]:                https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-endstateblock
+/// [EvictManagedResources]:        https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-evictmanagedresources
+/// [GetAvailableTextureMem]:       https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getavailabletexturemem
+/// [GetBackBuffer]:                https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getbackbuffer
+/// [GetClipPlane]:                 https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getclipplane
+/// [GetClipStatus]:                https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getclipstatus
+/// [GetCreationParameters]:        https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getcreationparameters
+/// [GetCurrentTexturePalette]:     https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getcurrenttexturepalette
+/// [GetDepthStencilSurface]:       https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getdepthstencilsurface
+/// [GetDeviceCaps]:                https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getdevicecaps
+/// [GetDirect3D]:                  https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getdirect3d
+/// [GetDisplayMode]:               https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getdisplaymode
+/// [GetFrontBufferData]:           https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getfrontbufferdata
+/// [GetFVF]:                       https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getfvf
+/// [GetGammaRamp]:                 https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getgammaramp
+/// [GetIndices]:                   https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getindices
+/// [GetLight]:                     https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getlight
+/// [GetLightEnable]:               https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getlightenable
+/// [GetMaterial]:                  https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getmaterial
+/// [GetNPatchMode]:                https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getnpatchmode
+/// [GetNumberOfSwapChains]:        https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getnumberofswapchains
+/// [GetPaletteEntries]:            https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getpaletteentries
+/// [GetPixelShader]:               https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getpixelshader
+/// [GetPixelShaderConstantB]:      https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getpixelshaderconstantb
+/// [GetPixelShaderConstantF]:      https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getpixelshaderconstantf
+/// [GetPixelShaderConstantI]:      https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getpixelshaderconstanti
+/// [GetRasterStatus]:              https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getrasterstatus
+/// [GetRenderState]:               https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getrenderstate
+/// [GetRenderTarget]:              https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getrendertarget
+/// [GetRenderTargetData]:          https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getrendertargetdata
+/// [GetSamplerState]:              https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getsamplerstate
+/// [GetScissorRect]:               https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getscissorrect
+/// [GetSoftwareVertexProcessing]:  https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getsoftwarevertexprocessing
+/// [GetStreamSource]:              https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getstreamsource
+/// [GetStreamSourceFreq]:          https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getstreamsourcefreq
+/// [GetSwapChain]:                 https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getswapchain
+/// [GetTexture]:                   https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-gettexture
+/// [GetTextureStageState]:         https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-gettexturestagestate
+/// [GetTransform]:                 https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-gettransform
+/// [GetVertexDeclaration]:         https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getvertexdeclaration
+/// [GetVertexShader]:              https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getvertexshader
+/// [GetVertexShaderConstantB]:     https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getvertexshaderconstantb
+/// [GetVertexShaderConstantF]:     https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getvertexshaderconstantf
+/// [GetVertexShaderConstantI]:     https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getvertexshaderconstanti
+/// [GetViewport]:                  https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getviewport
+/// [LightEnable]:                  https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-lightenable
+/// [MultiplyTransform]:            https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-multiplytransform
+/// [Present]:                      https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-present
+/// [ProcessVertices]:              https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-processvertices
+/// [Reset]:                        https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-reset
+/// [SetClipPlane]:                 https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setclipplane
+/// [SetClipStatus]:                https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setclipstatus
+/// [SetCurrentTexturePalette]:     https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setcurrenttexturepalette
+/// [SetCursorPosition]:            https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setcursorposition
+/// [SetCursorProperties]:          https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setcursorproperties
+/// [SetDepthStencilSurface]:       https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setdepthstencilsurface
+/// [SetDialogBoxMode]:             https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setdialogboxmode
+/// [SetFVF]:                       https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setfvf
+/// [SetGammaRamp]:                 https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setgammaramp
+/// [SetIndices]:                   https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setindices
+/// [SetLight]:                     https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setlight
+/// [SetMaterial]:                  https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setmaterial
+/// [SetNPatchMode]:                https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setnpatchmode
+/// [SetPaletteEntries]:            https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setpaletteentries
+/// [SetPixelShader]:               https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setpixelshader
+/// [SetPixelShaderConstantB]:      https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setpixelshaderconstantb
+/// [SetPixelShaderConstantF]:      https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setpixelshaderconstantf
+/// [SetPixelShaderConstantI]:      https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setpixelshaderconstanti
+/// [SetRenderState]:               https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setrenderstate
+/// [SetRenderTarget]:              https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setrendertarget
+/// [SetSamplerState]:              https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setsamplerstate
+/// [SetScissorRect]:               https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setscissorrect
+/// [SetSoftwareVertexProcessing]:  https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setsoftwarevertexprocessing
+/// [SetStreamSource]:              https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setstreamsource
+/// [SetStreamSourceFreq]:          https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setstreamsourcefreq
+/// [SetTexture]:                   https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-settexture
+/// [SetTextureStageState]:         https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-settexturestagestate
+/// [SetTransform]:                 https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-settransform
+/// [SetVertexDeclaration]:         https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setvertexdeclaration
+/// [SetVertexShader]:              https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setvertexshader
+/// [SetVertexShaderConstantB]:     https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setvertexshaderconstantb
+/// [SetVertexShaderConstantF]:     https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setvertexshaderconstantf
+/// [SetVertexShaderConstantI]:     https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setvertexshaderconstanti
+/// [SetViewport]:                  https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setviewport
+/// [ShowCursor]:                   https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-showcursor
+/// [StretchRect]:                  https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-stretchrect
+/// [TestCooperativeLevel]:         https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-testcooperativelevel
+/// [UpdateSurface]:                https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-updatesurface
+/// [UpdateTexture]:                https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-updatetexture
+/// [ValidateDevice]:               https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-validatedevice
 ///
 pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     // TODO: fn scene(&self) with sane error handling / drop behavior?
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-beginscene)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-beginscene)\]
     /// IDirect3DDevice9::BeginScene
     ///
     /// ### Returns
@@ -323,7 +323,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         fn_check_hr!(unsafe { self.as_winapi().BeginScene() })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-beginstateblock)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-beginstateblock)\]
     /// IDirect3DDevice9::BeginStateBlock
     ///
     /// ### Returns
@@ -344,7 +344,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         fn_check_hr!(unsafe { self.as_winapi().BeginStateBlock() })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-clear)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-clear)\]
     /// IDirect3DDevice9::Clear
     ///
     /// Clears one or more surfaces such as a render target, multiple render targets, a stencil buffer, and a depth buffer.
@@ -382,7 +382,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         fn_check_hr!(unsafe { self.as_winapi().Clear(n, rects, flags, color, depth, stencil) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-colorfill)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-colorfill)\]
     /// IDirect3DDevice9::ColorFill
     ///
     /// Allows an application to fill a rectangular area of a [Pool::Default] surface with a specified color.
@@ -399,7 +399,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         fn_check_hr!(unsafe { self.as_winapi().ColorFill(surface.as_raw(), rect, color.into().into()) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createadditionalswapchain)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createadditionalswapchain)\]
     /// IDirect3DDevice9::CreateAdditionalSwapChain
     ///
     /// Creates an additional swap chain for rendering multiple views.
@@ -423,7 +423,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// *   Ok([SwapChain])
     ///
     /// ### See Also
-    /// *   [Presenting Multiple Views in Windowed Mode (Direct3D 9)](https://docs.microsoft.com/en-us/windows/desktop/direct3d9/presenting-multiple-views-in-windowed-mode)
+    /// *   [Presenting Multiple Views in Windowed Mode (Direct3D 9)](https://learn.microsoft.com/en-us/windows/desktop/direct3d9/presenting-multiple-views-in-windowed-mode)
     ///
     /// [create_device]:            #method.create_device
     unsafe fn create_additional_swap_chain(&self, presentation_parameters: &mut PresentParameters<'static>) -> Result<SwapChain, Error> {
@@ -433,7 +433,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         Ok(unsafe { SwapChain::from_raw(swap_chain) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createcubetexture)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createcubetexture)\]
     /// IDirect3DDevice9::CreateCubeTexture
     ///
     /// Creates a cube texture resource.
@@ -441,7 +441,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// ### Arguments
     /// *   `edge_length`       The size in pixels of every edge of the cubemap at mip 0.  E.g. an edge length of 128 means 6 x 128 x 128 pixel cubemap faces.
     /// *   `levels`            The number of mipmap levels, or `0` to have Direct3D generate sublevels down to 1x1.
-    /// *   `usage`             See [Usage and Resource Combinations](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dusage#usage-and-resource-combinations)
+    /// *   `usage`             See [Usage and Resource Combinations](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dusage#usage-and-resource-combinations)
     /// *   `format`            The format to be used by this texture to store pixels or pixel blocks.
     /// *   `pool`              Specifies how to manage the memory of the cube texture.
     /// *   `shared_handle`     Reserved, specify `()`.
@@ -467,7 +467,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         Ok(unsafe { CubeTexture::from_raw(texture) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createcubetexture)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createcubetexture)\]
     /// IDirect3DDevice9::CreateCubeTexture
     ///
     /// Creates a cube texture resource.
@@ -475,7 +475,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// ### Arguments
     /// *   `size`              The size in pixels of every edge of the cubemap at mip 0.  E.g. an edge length of 128 means 6 x 128 x 128 pixel cubemap faces.
     /// *   `mips`              The pixel data to initialize the cubemap with.
-    /// *   `usage`             See [Usage and Resource Combinations](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dusage#usage-and-resource-combinations)
+    /// *   `usage`             See [Usage and Resource Combinations](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dusage#usage-and-resource-combinations)
     /// *   `format`            The format to be used by this texture to store pixels or pixel blocks, and to use to interpret `mips`.
     /// *   `pool`              Specifies how to manage the memory of the cube texture.
     /// *   `shared_handle`     Reserved, specify `()`.
@@ -546,7 +546,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
                     // while `[..block_row_bytes]` looks redundant, its bounds check is necessary for soundness!
                     let src = mip_ref.data[block_row as usize * mip_ref.stride ..][..block_row_bytes].as_ptr();
 
-                    // In Direct3D 8+, Pitch is bytes per *row of blocks* (ref: https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dlocked-rect)
+                    // In Direct3D 8+, Pitch is bytes per *row of blocks* (ref: https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dlocked-rect)
                     let dst = unsafe { dst_origin.add((block_row * dst_pitch) as usize) };
 
                     unsafe { std::ptr::copy_nonoverlapping(src, dst, block_row_bytes) };
@@ -561,7 +561,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         Ok(texture)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createdepthstencilsurface)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createdepthstencilsurface)\]
     /// IDirect3DDevice9::CreateDepthStencilSurface
     ///
     /// Creates a depth-stencil resource.
@@ -572,7 +572,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         Ok(unsafe { Surface::from_raw(surface) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createindexbuffer)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createindexbuffer)\]
     /// IDirect3DDevice9::CreateIndexBuffer
     ///
     /// Creates an index buffer.
@@ -582,7 +582,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// *   `usage`             Typically [Usage::None] or [Usage::Dynamic]
     /// *   `format`            Typically [Format::Index16] or [Format::Index32] (type of index buffer)
     /// *   `pool`              Memory class into which to place the [IndexBuffer].
-    /// *   `shared_handle`     Used in Direct3D 9 for Windows Vista to [share resources](https://docs.microsoft.com/en-us/windows/desktop/direct3d9/dx9lh); set it to `()` to not share a resource.
+    /// *   `shared_handle`     Used in Direct3D 9 for Windows Vista to [share resources](https://learn.microsoft.com/en-us/windows/desktop/direct3d9/dx9lh); set it to `()` to not share a resource.
     ///
     /// ### Returns
     /// *   [D3DERR::INVALIDCALL]       if `length` cannot hold at least one index (2 for [Format::Index16], 4 for [Format::Index32])
@@ -611,7 +611,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         Ok(unsafe { IndexBuffer::from_raw(buffer) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createindexbuffer)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createindexbuffer)\]
     /// IDirect3DDevice9::CreateIndexBuffer
     ///
     /// Creates an index buffer.
@@ -620,7 +620,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// *   `data`              &\[u16\] or &\[u32\]
     /// *   `usage`             Typically [Usage::None] or [Usage::Dynamic]
     /// *   `pool`              Memory class into which to place the [IndexBuffer].
-    /// *   `shared_handle`     Used in Direct3D 9 for Windows Vista to [share resources](https://docs.microsoft.com/en-us/windows/desktop/direct3d9/dx9lh); set it to `()` to not share a resource.
+    /// *   `shared_handle`     Used in Direct3D 9 for Windows Vista to [share resources](https://learn.microsoft.com/en-us/windows/desktop/direct3d9/dx9lh); set it to `()` to not share a resource.
     ///
     /// ### Returns
     /// *   [D3DERR::INVALIDCALL]       if `length` cannot hold at least one index (2 for [Format::Index16], 4 for [Format::Index32])
@@ -652,7 +652,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         Ok(ib)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createoffscreenplainsurface)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createoffscreenplainsurface)\]
     /// IDirect3DDevice9::CreateOffscreenPlainSurface
     ///
     /// Create an off-screen surface.
@@ -663,7 +663,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         Ok(unsafe { Surface::from_raw(surface) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createpixelshader)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createpixelshader)\]
     /// IDirect3DDevice9::CreatePixelShader
     ///
     /// Creates a pixel shader.
@@ -686,7 +686,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         Ok(unsafe { PixelShader::from_raw(shader) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createquery)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createquery)\]
     /// IDirect3DDevice9::CreateQuery
     ///
     /// Creates a status query.
@@ -697,7 +697,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         Ok(unsafe { Query::from_raw(query) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createrendertarget)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createrendertarget)\]
     /// IDirect3DDevice9::CreateRenderTarget
     ///
     /// Creates a render-target surface.
@@ -708,7 +708,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         Ok(unsafe { Surface::from_raw(surface) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createstateblock)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createstateblock)\]
     /// IDirect3DDevice9::CreateStateBlock
     ///
     /// Creates a new state block that contains the values for all device states, vertex-related states, or pixel-related states.
@@ -729,7 +729,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         Ok(unsafe { StateBlock::from_raw(sb) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createtexture)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createtexture)\]
     /// IDirect3DDevice9::CreateTexture
     ///
     /// Creates a texture resource.
@@ -754,7 +754,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         Ok(unsafe { Texture::from_raw(texture) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createtexture)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createtexture)\]
     /// IDirect3DDevice9::CreateTexture
     ///
     /// Creates a texture resource.
@@ -817,7 +817,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
                 // while `[..block_row_bytes]` looks redundant, its bounds check is necessary for soundness!
                 let src = mip_ref.data[block_row as usize * mip_ref.stride ..][..block_row_bytes].as_ptr();
 
-                // In Direct3D 8+, Pitch is bytes per *row of blocks* (ref: https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dlocked-rect)
+                // In Direct3D 8+, Pitch is bytes per *row of blocks* (ref: https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dlocked-rect)
                 let dst = unsafe { dst_origin.add((block_row * dst_pitch) as usize) };
 
                 unsafe { std::ptr::copy_nonoverlapping(src, dst, block_row_bytes) };
@@ -831,7 +831,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         Ok(texture)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createvertexbuffer)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createvertexbuffer)\]
     /// IDirect3DDevice9::CreateVertexBuffer
     ///
     /// Creates an vertex buffer.
@@ -843,7 +843,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// *   `usage`             Typically [Usage::None] or [Usage::Dynamic]
     /// *   `fvf`               Combination of [FVF], a usage specifier that describes the vertex format of the verticies in this buffer.
     /// *   `pool`              Memory class into which to place the [IndexBuffer].
-    /// *   `shared_handle`     Used in Direct3D 9 for Windows Vista to [share resources](https://docs.microsoft.com/en-us/windows/desktop/direct3d9/dx9lh); set it to `()` to not share a resource.
+    /// *   `shared_handle`     Used in Direct3D 9 for Windows Vista to [share resources](https://learn.microsoft.com/en-us/windows/desktop/direct3d9/dx9lh); set it to `()` to not share a resource.
     ///
     /// ### Returns
     /// *   [D3DERR::INVALIDCALL]       if `length` cannot hold at least one [FVF]-sized vertex (1 if [FVF::None])
@@ -873,7 +873,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         Ok(unsafe { VertexBuffer::from_raw(buffer) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createvertexbuffer)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createvertexbuffer)\]
     /// IDirect3DDevice9::CreateVertexBuffer
     ///
     /// Creates an vertex buffer.
@@ -883,7 +883,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// *   `usage`             Typically [Usage::None] or [Usage::Dynamic]
     /// *   `fvf`               Combination of [FVF], a usage specifier that describes the vertex format of the verticies in this buffer.
     /// *   `pool`              Memory class into which to place the [IndexBuffer].
-    /// *   `shared_handle`     Used in Direct3D 9 for Windows Vista to [share resources](https://docs.microsoft.com/en-us/windows/desktop/direct3d9/dx9lh); set it to `()` to not share a resource.
+    /// *   `shared_handle`     Used in Direct3D 9 for Windows Vista to [share resources](https://learn.microsoft.com/en-us/windows/desktop/direct3d9/dx9lh); set it to `()` to not share a resource.
     ///
     /// ### Returns
     /// *   [D3DERR::INVALIDCALL]       if `length` cannot hold at least one [FVF]-sized vertex (1 if [FVF::None])
@@ -917,7 +917,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         Ok(vb)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createvertexdeclaration)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createvertexdeclaration)\]
     /// IDirect3DDevice9::CreateVertexDeclaration
     ///
     /// Create a vertex shader declaration from the device and the vertex elements.
@@ -939,7 +939,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// ]).unwrap();
     /// ```
     ///
-    /// [Vertex Declaration (Direct3D 9)]:          https://docs.microsoft.com/en-us/windows/desktop/direct3d9/vertex-declaration
+    /// [Vertex Declaration (Direct3D 9)]:          https://learn.microsoft.com/en-us/windows/desktop/direct3d9/vertex-declaration
     fn create_vertex_declaration(&self, elements: &[VertexElement]) -> Result<VertexDeclaration, Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::create_vertex_declaration => IDirect3DDevice9::CreateVertexDeclaration);
         let end = elements.last().ok_or(fn_param_error!(elements, D3DERR::INVALIDCALL))?;
@@ -951,7 +951,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         Ok(unsafe { VertexDeclaration::from_raw(vd) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createvertexshader)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createvertexshader)\]
     /// IDirect3DDevice9::CreateVertexShader
     ///
     /// Creates a vertex shader.
@@ -974,7 +974,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         Ok(unsafe { VertexShader::from_raw(shader) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createvolumetexture)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createvolumetexture)\]
     /// IDirect3DDevice9::CreateVolumeTexture
     ///
     /// Creates a volume texture resource.
@@ -999,7 +999,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         Ok(unsafe { VolumeTexture::from_raw(volumetexture) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createvolumetexture)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createvolumetexture)\]
     /// IDirect3DDevice9::CreateVolumeTexture
     ///
     /// Creates a volume texture resource.
@@ -1067,7 +1067,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
                     // while `[..block_row_bytes]` looks redundant, its bounds check is necessary for soundness!
                     let src = mip_ref.data[pixel_slice as usize * mip_ref.stride_slice + block_row as usize * mip_ref.stride_row ..][..block_row_bytes].as_ptr();
 
-                    // In Direct3D 8+, Pitch is bytes per *row of blocks* (ref: https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dlocked-rect)
+                    // In Direct3D 8+, Pitch is bytes per *row of blocks* (ref: https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dlocked-rect)
                     let dst = unsafe { dst_origin.add((pixel_slice * dst_pitch_slice + block_row * dst_pitch_row) as usize) };
 
                     unsafe { std::ptr::copy_nonoverlapping(src, dst, block_row_bytes) };
@@ -1083,7 +1083,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         Ok(texture)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-deletepatch)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-deletepatch)\]
     /// IDirect3DDevice9::DeletePatch
     ///
     /// ### Errors
@@ -1099,13 +1099,13 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// ```
     ///
     /// ### See Also
-    /// *   [Using Higher-Order Primitives (Direct3D 9)](https://docs.microsoft.com/en-us/windows/win32/direct3d9/using-higher-order-primitives)
+    /// *   [Using Higher-Order Primitives (Direct3D 9)](https://learn.microsoft.com/en-us/windows/win32/direct3d9/using-higher-order-primitives)
     fn delete_patch(&self, handle: u32) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::delete_patch => IDirect3DDevice9::DeletePatch);
         fn_check_hr!(unsafe { self.as_winapi().DeletePatch(handle) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-drawindexedprimitive)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-drawindexedprimitive)\]
     /// IDirect3DDevice9::DrawIndexedPrimitive
     ///
     /// ### ⚠️ Safety ⚠️
@@ -1121,7 +1121,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         fn_check_hr!(unsafe { self.as_winapi().DrawIndexedPrimitive(primitive_type.into(), base_vertex_index, min_vertex_index, num_verticies, start_index, primitive_count) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-drawindexedprimitiveup)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-drawindexedprimitiveup)\]
     /// IDirect3DDevice9::DrawIndexedPrimitiveUP
     ///
     /// ### ⚠️ Safety ⚠️
@@ -1137,7 +1137,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         fn_check_hr!(unsafe { self.as_winapi().DrawIndexedPrimitiveUP(primitive_type.into(), min_vertex_index, num_verticies, primitive_count, indicies.as_ptr().cast(), I::format().into(), vertex_stream_zero.as_ptr().cast(), std::mem::size_of::<V>() as _) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-drawprimitive)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-drawprimitive)\]
     /// IDirect3DDevice9::DrawPrimitive
     ///
     /// ### ⚠️ Safety ⚠️
@@ -1153,7 +1153,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         fn_check_hr!(unsafe { self.as_winapi().DrawPrimitive(primitive_type.into(), start_vertex, primitive_count) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-drawprimitiveup)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-drawprimitiveup)\]
     /// IDirect3DDevice9::DrawPrimitiveUP
     ///
     /// ### ⚠️ Safety ⚠️
@@ -1175,7 +1175,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     // TODO: docs for args, remarks, deep links, etc.
     // TODO: safety sections
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-endscene)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-endscene)\]
     /// IDirect3DDevice9::EndScene
     ///
     /// ### Returns
@@ -1200,7 +1200,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         fn_check_hr!(unsafe { self.as_winapi().EndScene() })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-endstateblock)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-endstateblock)\]
     /// IDirect3DDevice9::EndStateBlock
     ///
     /// ### Returns
@@ -1223,7 +1223,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         Ok(unsafe { StateBlock::from_raw(sb) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-evictmanagedresources)]\
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-evictmanagedresources)]\
     /// IDirect3DDevice9::EvictManagedResources
     ///
     /// Evicts all managed resources, including both Direct3D and driver-managed resources.
@@ -1240,7 +1240,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         fn_check_hr!(unsafe { self.as_winapi().EvictManagedResources() })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getavailabletexturemem)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getavailabletexturemem)\]
     /// IDirect3DDevice9::GetAvailableTextureMem
     ///
     /// Returns an estimate of the amount of available texture memory.
@@ -1274,7 +1274,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         unsafe { self.as_winapi().GetAvailableTextureMem() }
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getbackbuffer)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getbackbuffer)\]
     /// IDirect3DDevice9::GetBackBuffer
     ///
     /// Retrieves a back buffer from the device's swap chain.
@@ -1289,7 +1289,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         Ok(unsafe { Surface::from_raw(surface) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getclipplane)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getclipplane)\]
     /// IDirect3DDevice9::GetClipPlane
     ///
     /// Retrieves the coefficients of a user-defined clipping plane for the device.
@@ -1315,7 +1315,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         Ok(plane)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getclipstatus)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getclipstatus)\]
     /// IDirect3DDevice9::GetClipStatus
     ///
     /// Retrieves the clip status.
@@ -1341,7 +1341,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         Ok(status)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getcreationparameters)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getcreationparameters)\]
     /// IDirect3DDevice9::GetCreationParameters
     ///
     /// Retrieves the creation parameters of the device.
@@ -1374,7 +1374,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         Ok(dcp)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getcurrenttexturepalette)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getcurrenttexturepalette)\]
     /// IDirect3DDevice9::GetCurrentTexturePalette
     ///
     /// Retrieves the current texture palette
@@ -1393,7 +1393,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// ```
     ///
     /// ### See Also
-    /// *   [Texture Palettes (Direct3D 9)](https://docs.microsoft.com/en-us/windows/win32/direct3d9/texture-palettes)
+    /// *   [Texture Palettes (Direct3D 9)](https://learn.microsoft.com/en-us/windows/win32/direct3d9/texture-palettes)
     /// *   [set_current_texture_palette_unchecked](Self::set_current_texture_palette_unchecked)
     fn get_current_texture_palette(&self) -> Result<u32, Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::get_current_texture_palette => IDirect3DDevice9::GetCurrentTexturePalette);
@@ -1402,7 +1402,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         Ok(pal)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getdepthstencilsurface)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getdepthstencilsurface)\]
     /// IDirect3DDevice9::GetDepthStencilSurface
     ///
     /// Gets the depth-stencil surface owned by the Direct3DDevice object.
@@ -1424,7 +1424,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         }
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getdevicecaps)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getdevicecaps)\]
     /// IDirect3DDevice9::GetDeviceCaps
     ///
     /// ### Returns
@@ -1537,7 +1537,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         Ok(caps)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getdirect3d)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getdirect3d)\]
     /// IDirect3DDevice9::GetDirect3D
     ///
     /// ### Returns
@@ -1556,7 +1556,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         Ok(unsafe { Direct3D::from_raw(d3d) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getdisplaymode)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getdisplaymode)\]
     /// IDirect3DDevice9::GetDisplayMode
     ///
     /// ### Returns
@@ -1588,7 +1588,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         Ok(dm)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getfrontbufferdata)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getfrontbufferdata)\]
     /// IDirect3DDevice9::GetFrontBufferData
     fn get_front_buffer_data(&self, swap_chain: u32, surface: &Surface) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::get_front_buffer_data => IDirect3DDevice9::GetFrontBufferData);
@@ -1596,7 +1596,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         fn_check_hr!(unsafe { self.as_winapi().GetFrontBufferData(swap_chain, surface.as_raw()) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getfvf)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getfvf)\]
     /// IDirect3DDevice9::GetFVF
     ///
     /// ### Returns
@@ -1615,7 +1615,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         Ok(fvf)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getgammaramp)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getgammaramp)\]
     /// IDirect3DDevice9::GetGammaRamp
     ///
     /// ### Returns
@@ -1633,7 +1633,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         ramp
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getindices)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getindices)\]
     /// IDirect3DDevice9::GetIndices
     ///
     /// Retrieves index data.
@@ -1660,7 +1660,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         Ok(unsafe { IndexBuffer::from_raw_opt(buffer) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getlight)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getlight)\]
     /// IDirect3DDevice9::GetLight
     ///
     /// Get the [Light] that was previously set for this device.
@@ -1694,7 +1694,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         self.get_light_32(index.into())
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getlight)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getlight)\]
     /// IDirect3DDevice9::GetLight
     ///
     /// This API appears sound despite the 32-bit indicies
@@ -1727,7 +1727,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         Ok(light)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getlightenable)
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getlightenable)
     /// IDirect3DDevice9::GetLightEnable
     ///
     /// Queries if the light is enabled.
@@ -1763,7 +1763,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         self.get_light_enable_32(index.into())
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getlightenable)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getlightenable)\]
     /// IDirect3DDevice9::GetLightEnable
     ///
     /// This API appears sound despite the 32-bit indicies
@@ -1796,7 +1796,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         Ok(enable != 0)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getmaterial)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getmaterial)\]
     /// IDirect3DDevice9::GetMaterial
     ///
     /// ### Returns
@@ -1815,7 +1815,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         Ok(material)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getnpatchmode)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getnpatchmode)\]
     /// IDirect3DDevice9::GetNPatchMode
     ///
     /// Gets the N-patch mode segments.
@@ -1834,7 +1834,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         unsafe { self.as_winapi().GetNPatchMode() }
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getnumberofswapchains)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getnumberofswapchains)\]
     /// IDirect3DDevice9::GetNumberOfSwapChains
     ///
     /// Gets the number of implicit swap chains created for this device during [IDirect3D9Ext::create_device].
@@ -1851,7 +1851,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         unsafe { self.as_winapi().GetNumberOfSwapChains() }
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getpaletteentries)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getpaletteentries)\]
     /// IDirect3DDevice9::GetPaletteEntries
     ///
     /// Retrieves palette entries.
@@ -1889,7 +1889,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         Ok(colors)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getpixelshader)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getpixelshader)\]
     /// IDirect3DDevice9::GetPixelShader
     ///
     /// Gets the pixel shader currently bound to the device, if any.
@@ -1905,7 +1905,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         Ok(unsafe { PixelShader::from_raw(shader) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getpixelshaderconstantb)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getpixelshaderconstantb)\]
     /// IDirect3DDevice9::GetPixelShaderConstantB
     ///
     /// Gets boolean shader constants.
@@ -1918,7 +1918,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// ```rust
     /// # use dev::d3d9::*; let device = device_pure();
     /// // ps_3_0 (d3d9 max) only supports 16 boolean registers
-    /// // ref: https://docs.microsoft.com/en-us/windows/win32/direct3dhlsl/dx9-graphics-reference-asm-ps-registers-ps-3-0
+    /// // ref: https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx9-graphics-reference-asm-ps-registers-ps-3-0
     /// let mut constants = [abibool::bool32::FALSE; 16];
     /// let mut too_many  = [abibool::bool32::FALSE; 16+1];
     ///
@@ -1939,7 +1939,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         fn_check_hr!(unsafe { self.as_winapi().GetPixelShaderConstantB(start_register, constant_data.as_mut_ptr().cast(), n) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getpixelshaderconstantf)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getpixelshaderconstantf)\]
     /// IDirect3DDevice9::GetPixelShaderConstantF
     ///
     /// Gets floating-point shader constants.
@@ -1952,7 +1952,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// ```rust
     /// # use dev::d3d9::*; let device = device_pure();
     /// // ps_3_0 (d3d9 max) supports 224 float4 registers
-    /// // ref: https://docs.microsoft.com/en-us/windows/win32/direct3dhlsl/dx9-graphics-reference-asm-ps-registers-ps-3-0
+    /// // ref: https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx9-graphics-reference-asm-ps-registers-ps-3-0
     /// let cmax = 224;
     /// let mut constants = vec![[0.0, 0.0, 0.0, 0.0]; cmax];
     /// let mut too_many  = vec![[0.0, 0.0, 0.0, 0.0]; cmax+1];
@@ -1974,7 +1974,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         fn_check_hr!(unsafe { self.as_winapi().GetPixelShaderConstantF(start_register, constant_data.as_mut_ptr().cast(), n) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getpixelshaderconstanti)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getpixelshaderconstanti)\]
     /// IDirect3DDevice9::GetPixelShaderConstantI
     ///
     /// Gets integer shader constants.
@@ -1987,7 +1987,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// ```rust
     /// # use dev::d3d9::*; let device = device_pure();
     /// // ps_3_0 (d3d9 max) only supports 16 int4 registers
-    /// // ref: https://docs.microsoft.com/en-us/windows/win32/direct3dhlsl/dx9-graphics-reference-asm-ps-registers-ps-3-0
+    /// // ref: https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx9-graphics-reference-asm-ps-registers-ps-3-0
     /// let mut constants = [[0, 0, 0, 0]; 16];
     /// let mut too_many  = [[0, 0, 0, 0]; 16+1];
     ///
@@ -2008,7 +2008,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         fn_check_hr!(unsafe { self.as_winapi().GetPixelShaderConstantI(start_register, constant_data.as_mut_ptr().cast(), n) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getrasterstatus)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getrasterstatus)\]
     /// IDirect3DDevice9::GetRasterStatus
     ///
     /// Returns information describing the [RasterStatus] of the monitor on which the swap chain is presented.
@@ -2045,7 +2045,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
 
     //TODO: get_render_state (typed)
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getrenderstate)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getrenderstate)\]
     /// IDirect3DDevice9::GetRenderState
     ///
     /// Retrieves a render-state value for a device.
@@ -2087,7 +2087,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         Ok(value)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getrendertarget)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getrendertarget)\]
     /// IDirect3DDevice9::GetRenderTarget
     ///
     /// Typically, methods that return state will not work on a device that is created using D3DCREATE_PUREDEVICE. This method however, will work even on a pure device because it returns an interface.
@@ -2098,7 +2098,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// *   Ok(Some([Surface]))       the render target bound to that index
     /// *   Ok(None)                  no render target was bound to that index
     ///
-    /// [Multiple Render Targets (Direct3D 9)]:         https://docs.microsoft.com/en-us/windows/win32/direct3d9/multiple-render-targets
+    /// [Multiple Render Targets (Direct3D 9)]:         https://learn.microsoft.com/en-us/windows/win32/direct3d9/multiple-render-targets
     fn get_render_target(&self, render_target_index: u32) -> Result<Option<Surface>, Error> {
         // TODO: verify soundness before making pub
         fn_context!(d3d9::IDirect3DDevice9Ext::get_render_target => IDirect3DDevice9::GetRenderTarget);
@@ -2112,7 +2112,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         }
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getrendertargetdata)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getrendertargetdata)\]
     /// IDirect3DDevice9::GetRenderTargetData
     ///
     /// Copies the render-target data from device memory to system memory.
@@ -2131,7 +2131,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
 
     //TODO: get_sampler_state (typed)
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getsamplerstate)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getsamplerstate)\]
     /// IDirect3DDevice9::GetSamplerState
     ///
     /// Retrieves a sampler state value for a device.
@@ -2182,7 +2182,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         Ok(value)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getsamplerstate)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getsamplerstate)\]
     /// IDirect3DDevice9::GetSamplerState
     ///
     /// Retrieves a sampler state value for a device.
@@ -2241,7 +2241,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         unsafe { self.get_sampler_state_unchecked(sampler, ty) }
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getscissorrect)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getscissorrect)\]
     /// IDirect3DDevice9::GetScissorRect
     ///
     /// ### Returns
@@ -2260,7 +2260,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         Ok(rect)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getsoftwarevertexprocessing)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getsoftwarevertexprocessing)\]
     /// IDirect3DDevice9::GetSoftwareVertexProcessing
     ///
     /// ### Returns
@@ -2279,7 +2279,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         unsafe { self.as_winapi().GetSoftwareVertexProcessing() != 0 }
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getstreamsource)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getstreamsource)\]
     /// IDirect3DDevice9::GetStreamSource
     ///
     /// Retrieves a vertex buffer bound to the specified data stream.
@@ -2317,7 +2317,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         Ok((buffer, offset, stride))
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getstreamsourcefreq)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getstreamsourcefreq)\]
     /// IDirect3DDevice9::GetStreamSourceFreq
     ///
     /// Gets the stream source frequency divider value.
@@ -2345,7 +2345,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         Ok(StreamSource::from_unchecked(freq))
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getswapchain)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getswapchain)\]
     /// IDirect3DDevice9::GetSwapChain
     ///
     /// Gets a pointer to a swap chain.
@@ -2372,7 +2372,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         Ok(swap_chain)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-gettexture)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-gettexture)\]
     /// IDirect3DDevice9::GetTexture
     ///
     /// Retrieves a texture assigned to a stage for a device.
@@ -2411,7 +2411,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
 
     //TODO: get_texture_stage_state (typed)
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-gettexturestagestate)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-gettexturestagestate)\]
     /// IDirect3DDevice9::GetTextureStageState
     ///
     /// Retrieves the value associated with a [TextureStageStateType]
@@ -2445,7 +2445,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         Ok(value)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-gettransform)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-gettransform)\]
     /// IDirect3DDevice9::GetTransform
     ///
     /// Gets a single device transform.
@@ -2477,7 +2477,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         Ok(matrix)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getvertexdeclaration)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getvertexdeclaration)\]
     /// IDirect3DDevice9::GetVertexDeclaration
     ///
     /// Gets the currently bound [VertexDeclaration], or None if none was set.
@@ -2509,7 +2509,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         Ok(unsafe { VertexDeclaration::from_raw_opt(vd) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getvertexshader)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getvertexshader)\]
     /// IDirect3DDevice9::GetVertexShader
     ///
     /// Gets the vertex shader currently bound to the device, if any.
@@ -2525,7 +2525,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         Ok(unsafe { VertexShader::from_raw(shader) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getvertexshaderconstantb)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getvertexshaderconstantb)\]
     /// IDirect3DDevice9::GetVertexShaderConstantB
     ///
     /// Gets boolean shader constants.
@@ -2538,7 +2538,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// ```rust
     /// # use dev::d3d9::*; let device = device_pure();
     /// // vs_3_0 (d3d9 max) only supports 16 boolean registers
-    /// // ref: https://docs.microsoft.com/en-us/windows/win32/direct3dhlsl/dx9-graphics-reference-asm-vs-registers-vs-3-0
+    /// // ref: https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx9-graphics-reference-asm-vs-registers-vs-3-0
     /// let mut constants = [abibool::bool32::FALSE; 16];
     /// let mut too_many  = [abibool::bool32::FALSE; 16+1];
     ///
@@ -2559,7 +2559,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         fn_check_hr!(unsafe { self.as_winapi().GetVertexShaderConstantB(start_register, constant_data.as_mut_ptr().cast(), n) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getvertexshaderconstantf)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getvertexshaderconstantf)\]
     /// IDirect3DDevice9::GetVertexShaderConstantF
     ///
     /// Gets floating-point shader constants.
@@ -2572,7 +2572,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// ```rust
     /// # use dev::d3d9::*; let device = device_pure();
     /// // vs_3_0 (d3d9 max) only supports at least 256 float4 registers
-    /// // ref: https://docs.microsoft.com/en-us/windows/win32/direct3dhlsl/dx9-graphics-reference-asm-vs-registers-vs-3-0
+    /// // ref: https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx9-graphics-reference-asm-vs-registers-vs-3-0
     /// let cmax = device.get_device_caps().unwrap().max_vertex_shader_const as usize;
     /// let mut constants = vec![[0.0, 0.0, 0.0, 0.0]; cmax];
     /// let mut too_many  = vec![[0.0, 0.0, 0.0, 0.0]; cmax+1];
@@ -2594,7 +2594,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         fn_check_hr!(unsafe { self.as_winapi().GetVertexShaderConstantF(start_register, constant_data.as_mut_ptr().cast(), n) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getvertexshaderconstanti)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getvertexshaderconstanti)\]
     /// IDirect3DDevice9::GetVertexShaderConstantI
     ///
     /// Gets integer shader constants.
@@ -2607,7 +2607,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// ```rust
     /// # use dev::d3d9::*; let device = device_pure();
     /// // vs_3_0 (d3d9 max) only supports 16 int4 registers
-    /// // ref: https://docs.microsoft.com/en-us/windows/win32/direct3dhlsl/dx9-graphics-reference-asm-vs-registers-vs-3-0
+    /// // ref: https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx9-graphics-reference-asm-vs-registers-vs-3-0
     /// let mut constants = [[0, 0, 0, 0]; 16];
     /// let mut too_many  = [[0, 0, 0, 0]; 16+1];
     ///
@@ -2628,7 +2628,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         fn_check_hr!(unsafe { self.as_winapi().GetVertexShaderConstantI(start_register, constant_data.as_mut_ptr().cast(), n) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getviewport)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getviewport)\]
     /// IDirect3DDevice9::GetViewport
     ///
     /// ### Returns
@@ -2648,7 +2648,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         Ok(viewport)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-lightenable)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-lightenable)\]
     /// IDirect3DDevice9::LightEnable
     ///
     /// Enables or disables a set of lighting parameters within a device.
@@ -2672,7 +2672,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         unsafe { self.light_enable_32_unchecked(index.into(), enable) }
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-lightenable)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-lightenable)\]
     /// IDirect3DDevice9::LightEnable
     ///
     /// Enables or disables a set of lighting parameters within a device.
@@ -2703,7 +2703,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         fn_check_hr!(unsafe { self.as_winapi().LightEnable(index, enable.into()) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-multiplytransform)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-multiplytransform)\]
     /// IDirect3DDevice9::MultiplyTransform
     ///
     /// Multiplies a device's world, view, or projection matrices by a specified matrix.
@@ -2729,7 +2729,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         fn_check_hr!(unsafe { self.as_winapi().MultiplyTransform(ts.into().into(), &matrix.into().into()) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-present)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-present)\]
     /// IDirect3DDevice9::Present
     ///
     /// Presents the contents of the next buffer in the sequence of back buffers owned by the device.
@@ -2794,7 +2794,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
 
     //TODO:     IDirect3DDevice9::ProcessVertices                   = d3d9::IDirect3DDevice9Ext::process_vertices
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-reset)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-reset)\]
     /// IDirect3DDevice9::Reset
     ///
     /// Resets the type, size, and format of the swap chain.
@@ -2814,7 +2814,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         fn_check_hr!(unsafe { self.as_winapi().Reset(presentation_parameters.as_mut()) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setclipplane)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setclipplane)\]
     /// IDirect3DDevice9::SetClipPlane
     ///
     /// Sets the coefficients of a user-defined clipping plane for the device.
@@ -2839,7 +2839,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         fn_check_hr!(unsafe { self.as_winapi().SetClipPlane(index, plane.as_ptr().cast()) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setclipstatus)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setclipstatus)\]
     /// IDirect3DDevice9::SetClipStatus
     ///
     /// Sets the [ClipStatus], indicating what clipping plane(s) to use.
@@ -2866,7 +2866,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         fn_check_hr!(unsafe { self.as_winapi().SetClipStatus(clip_status.as_ref()) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setcurrenttexturepalette)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setcurrenttexturepalette)\]
     /// IDirect3DDevice9::SetCurrentTexturePalette
     ///
     /// Sets the current texture palette.
@@ -2874,7 +2874,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// ### ⚠️ Safety ⚠️
     /// Undefined behavior may result unless:
     /// *   `palette_number` <= `max`, given a previous call to [set_palette_entries](Self::set_palette_entries)\(max\)
-    /// *   `palette_number` <= `0xFFFF` (max palette count per [Texture Palettes (Direct3D 9)](https://docs.microsoft.com/en-us/windows/win32/direct3d9/texture-palettes))
+    /// *   `palette_number` <= `0xFFFF` (max palette count per [Texture Palettes (Direct3D 9)](https://learn.microsoft.com/en-us/windows/win32/direct3d9/texture-palettes))
     ///
     /// ### Returns
     /// *   Ok(`()`)
@@ -2899,7 +2899,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// ```
     ///
     /// ### See Also
-    /// *   [Texture Palettes (Direct3D 9)](https://docs.microsoft.com/en-us/windows/win32/direct3d9/texture-palettes)
+    /// *   [Texture Palettes (Direct3D 9)](https://learn.microsoft.com/en-us/windows/win32/direct3d9/texture-palettes)
     /// *   [get_current_texture_palette](Self::get_current_texture_palette)
     /// *   [set_palette_entries](Self::set_palette_entries)
     /// *   [set_palette_entries_unchecked](Self::set_palette_entries_unchecked)
@@ -2908,7 +2908,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         fn_check_hr!(unsafe { self.as_winapi().SetCurrentTexturePalette(palette_number) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setcursorposition)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setcursorposition)\]
     /// IDirect3DDevice9::SetCursorPosition
     ///
     /// Sets the cursor position (either in virtual desktop coordinates when in windowed mode, with `0,0` generally
@@ -2932,7 +2932,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         unsafe { self.as_winapi().SetCursorPosition(x, y, flags.into().into()) };
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setcursorproperties)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setcursorproperties)\]
     /// IDirect3DDevice9::SetCursorProperties
     ///
     /// Set cursor properties.
@@ -2981,7 +2981,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         fn_check_hr!(unsafe { self.as_winapi().SetCursorProperties(x, y, cursor_bitmap.as_mut_ptr()) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setdepthstencilsurface)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setdepthstencilsurface)\]
     /// IDirect3DDevice9::SetDepthStencilSurface
     ///
     /// ### Returns
@@ -2993,7 +2993,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         fn_check_hr!(unsafe { self.as_winapi().SetDepthStencilSurface(ds) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setdialogboxmode)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setdialogboxmode)\]
     /// IDirect3DDevice9::SetDialogBoxMode
     ///
     /// Enable the use of GDI dialog boxes in full-screen mode.
@@ -3024,7 +3024,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         fn_check_hr!(unsafe { self.as_winapi().SetDialogBoxMode(mode as _) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setfvf)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setfvf)\]
     /// IDirect3DDevice9::SetFVF
     ///
     /// ### Returns
@@ -3042,7 +3042,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         fn_check_hr!(unsafe { self.as_winapi().SetFVF(fvf.into().into()) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setgammaramp)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setgammaramp)\]
     /// IDirect3DDevice9::SetGammaRamp
     ///
     /// Sets the gamma correction ramp for the implicit swap chain. This method will affect the entire screen (not just the active window if you are running in windowed mode).
@@ -3062,13 +3062,13 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// device.set_gamma_ramp(0, SGR::NoCalibration, &ramp);
     /// ```
     ///
-    /// [Gamma (Direct3D 9)]:           https://docs.microsoft.com/en-us/windows/desktop/direct3d9/gamma
+    /// [Gamma (Direct3D 9)]:           https://learn.microsoft.com/en-us/windows/desktop/direct3d9/gamma
     fn set_gamma_ramp(&self, swap_chain: u32, flags: impl Into<SGR>, ramp: &GammaRamp) {
         fn_context!(d3d9::IDirect3DDevice9Ext::set_gamma_ramp => IDirect3DDevice9::SetGammaRamp);
         let _nohr : () = unsafe { self.as_winapi().SetGammaRamp(swap_chain, flags.into().into(), ramp.as_ref()) };
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setindices)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setindices)\]
     /// IDirect3DDevice9::SetIndices
     ///
     /// Sets index data.
@@ -3100,7 +3100,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         fn_check_hr!(unsafe { self.as_winapi().SetIndices(ptr) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setlight)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setlight)\]
     /// IDirect3DDevice9::SetLight
     ///
     /// Assigns a set of lighting properties for this device.
@@ -3127,7 +3127,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         unsafe { self.set_light_32_unchecked(index.into(), light.into()) }
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setlight)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setlight)\]
     /// IDirect3DDevice9::SetLight
     ///
     /// Assigns a set of lighting properties for this device.
@@ -3179,7 +3179,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         fn_check_hr!(unsafe { self.as_winapi().SetLight(index, &*light) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setmaterial)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setmaterial)\]
     /// IDirect3DDevice9::SetMaterial
     ///
     /// ### Returns
@@ -3200,7 +3200,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         fn_check_hr!(unsafe { self.as_winapi().SetMaterial(&*material.into()) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getnpatchmode)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getnpatchmode)\]
     /// IDirect3DDevice9::SetNPatchMode
     ///
     /// Specifies the number of subdivision segments.
@@ -3219,7 +3219,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         fn_check_hr!(unsafe { self.as_winapi().SetNPatchMode(mode) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setpaletteentries)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setpaletteentries)\]
     /// IDirect3DDevice9::SetPaletteEntries
     ///
     /// Sets palette entries.
@@ -3248,21 +3248,21 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// ```
     ///
     /// ### See Also
-    /// *   [Texture Palettes (Direct3D 9)](https://docs.microsoft.com/en-us/windows/win32/direct3d9/texture-palettes)
+    /// *   [Texture Palettes (Direct3D 9)](https://learn.microsoft.com/en-us/windows/win32/direct3d9/texture-palettes)
     fn set_palette_entries(&self, palette_number: u16, entries: &[Color; 256]) -> Result<(), Error> {
         fn_context!(d3d9::IDirect3DDevice9Ext::set_palette_entries => IDirect3DDevice9::SetPaletteEntries);
         // Safety: ✔️ u16::MAX is documented to be valid, tests OK
         unsafe { self.set_palette_entries_unchecked(palette_number.into(), entries) }
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setpaletteentries)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setpaletteentries)\]
     /// IDirect3DDevice9::SetPaletteEntries
     ///
     /// Sets palette entries.
     ///
     /// ### ⚠️ Safety ⚠️
     /// *   Prefer [set_palette_entries](Self::set_palette_entries), which should be sound!
-    /// *   `palette_number` should probably be <= `0x0000FFFF` as "[There is a maximum of 65,536 (0x0000FFFF) palettes.](https://docs.microsoft.com/en-us/windows/win32/direct3d9/texture-palettes)"
+    /// *   `palette_number` should probably be <= `0x0000FFFF` as "[There is a maximum of 65,536 (0x0000FFFF) palettes.](https://learn.microsoft.com/en-us/windows/win32/direct3d9/texture-palettes)"
     /// *   `palette_number` > `0x0000FFFF` may work with some runtimes... or may **hang** (my experience trying e.g. `!0u32`), overflow an alloc, crash, etc.
     ///
     /// ### Returns
@@ -3297,7 +3297,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// ```
     ///
     /// ### See Also
-    /// *   [Texture Palettes (Direct3D 9)](https://docs.microsoft.com/en-us/windows/win32/direct3d9/texture-palettes)
+    /// *   [Texture Palettes (Direct3D 9)](https://learn.microsoft.com/en-us/windows/win32/direct3d9/texture-palettes)
     /// *   [set_current_texture_palette_unchecked](Self::set_current_texture_palette_unchecked)
     /// *   [set_palette_entries](Self::set_palette_entries)
     unsafe fn set_palette_entries_unchecked(&self, palette_number: u32, entries: &[Color; 256]) -> Result<(), Error> {
@@ -3306,7 +3306,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         fn_check_hr!(unsafe { self.as_winapi().SetPaletteEntries(palette_number, entries.as_ptr().cast()) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setpixelshader)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setpixelshader)\]
     /// IDirect3DDevice9::SetPixelShader
     ///
     /// Sets the pixel shader to render with.
@@ -3321,7 +3321,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         fn_check_hr!(unsafe { self.as_winapi().SetPixelShader(ps) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setpixelshaderconstantb)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setpixelshaderconstantb)\]
     /// IDirect3DDevice9::SetPixelShaderConstantB
     ///
     /// Sets boolean shader constants.
@@ -3334,7 +3334,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// ```rust
     /// # use dev::d3d9::*; let device = device_pure();
     /// // ps_3_0 (d3d9 max) only supports 16 boolean registers
-    /// // ref: https://docs.microsoft.com/en-us/windows/win32/direct3dhlsl/dx9-graphics-reference-asm-ps-registers-ps-3-0
+    /// // ref: https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx9-graphics-reference-asm-ps-registers-ps-3-0
     /// let constants = [abibool::bool32::TRUE; 16];
     /// let too_many  = [abibool::bool32::TRUE; 17];
     ///
@@ -3355,7 +3355,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         fn_check_hr!(unsafe { self.as_winapi().SetPixelShaderConstantB(start_register, constant_data.as_ptr().cast(), n) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setpixelshaderconstantf)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setpixelshaderconstantf)\]
     /// IDirect3DDevice9::SetPixelShaderConstantF
     ///
     /// Sets floating-point shader constants.
@@ -3368,7 +3368,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// ```rust
     /// # use dev::d3d9::*; let device = device_pure();
     /// // ps_3_0 (d3d9 max) supports 224 float4 registers
-    /// // ref: https://docs.microsoft.com/en-us/windows/win32/direct3dhlsl/dx9-graphics-reference-asm-ps-registers-ps-3-0
+    /// // ref: https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx9-graphics-reference-asm-ps-registers-ps-3-0
     /// let constants   = vec![[0.0, 0.0, 0.0, 0.0]; 224];
     /// let too_many    = vec![[0.0, 0.0, 0.0, 0.0]; 225];
     ///
@@ -3389,7 +3389,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         fn_check_hr!(unsafe { self.as_winapi().SetPixelShaderConstantF(start_register, constant_data.as_ptr().cast(), n) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setpixelshaderconstanti)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setpixelshaderconstanti)\]
     /// IDirect3DDevice9::SetPixelShaderConstantI
     ///
     /// Sets integer shader constants.
@@ -3402,7 +3402,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// ```rust
     /// # use dev::d3d9::*; let device = device_pure();
     /// // ps_3_0 (d3d9 max) only supports 16 int4 registers
-    /// // ref: https://docs.microsoft.com/en-us/windows/win32/direct3dhlsl/dx9-graphics-reference-asm-ps-registers-ps-3-0
+    /// // ref: https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx9-graphics-reference-asm-ps-registers-ps-3-0
     /// let constants = [[0, 0, 0, 0]; 16];
     /// let too_many  = [[0, 0, 0, 0]; 17];
     ///
@@ -3425,7 +3425,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
 
     //TODO: set_render_state (typed)
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setrenderstate)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setrenderstate)\]
     /// IDirect3DDevice9::SetRenderState
     ///
     /// Sets a single device render-state parameter
@@ -3452,7 +3452,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         fn_check_hr!(unsafe { self.as_winapi().SetRenderState(state.into().into(), value.into()) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setrendertarget)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setrendertarget)\]
     /// IDirect3DDevice9::SetRenderTarget
     ///
     /// ### Returns
@@ -3465,7 +3465,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         fn_check_hr!(unsafe { self.as_winapi().SetRenderTarget(render_target_index, rt) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setsamplerstate)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setsamplerstate)\]
     /// IDirect3DDevice9::SetSamplerState
     ///
     /// Prefer [set_sampler_state](Self::set_sampler_state)
@@ -3508,7 +3508,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         fn_check_hr!(unsafe { self.as_winapi().SetSamplerState(sampler, ty.into(), value.into()) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setsamplerstate)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setsamplerstate)\]
     /// IDirect3DDevice9::SetSamplerState
     ///
     /// ### Returns
@@ -3551,7 +3551,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         unsafe { self.set_sampler_state_unchecked(sampler, ty, value) }
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setscissorrect)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setscissorrect)\]
     /// IDirect3DDevice9::SetScissorRect
     ///
     /// Sets the scissor rectangle.
@@ -3574,7 +3574,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         fn_check_hr!(unsafe { self.as_winapi().SetScissorRect(rect.into().as_ref()) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setsoftwarevertexprocessing)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setsoftwarevertexprocessing)\]
     /// IDirect3DDevice9::SetSoftwareVertexProcessing
     ///
     /// Use this method to switch between software and hardware vertex processing on devices created with [d3d::Create::MixedVertexProcessing].
@@ -3611,12 +3611,12 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         fn_check_hr!(unsafe { self.as_winapi().SetSoftwareVertexProcessing(software as _) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setstreamsource)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setstreamsource)\]
     /// IDirect3DDevice9::SetStreamSource
     ///
     /// Binds a vertex buffer to a device data stream. For more information, see [Setting the Stream Source (Direct3D 9)].
     ///
-    /// [Setting the Stream Source (Direct3D 9)]:       https://docs.microsoft.com/en-us/windows/desktop/direct3d9/setting-the-stream-source
+    /// [Setting the Stream Source (Direct3D 9)]:       https://learn.microsoft.com/en-us/windows/desktop/direct3d9/setting-the-stream-source
     ///
     /// ### Returns
     /// *   [D3DERR::INVALIDCALL]       if the [VertexBuffer] belongs to another device?
@@ -3645,7 +3645,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         fn_check_hr!(unsafe { self.as_winapi().SetStreamSource(stream_number, stream_data, offset_in_bytes, stride) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setstreamsourcefreq)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setstreamsourcefreq)\]
     /// IDirect3DDevice9::SetStreamSourceFreq
     ///
     /// Sets the stream source frequency divider value. This may be used to draw several instances of geometry.
@@ -3673,7 +3673,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         fn_check_hr!(unsafe { self.as_winapi().SetStreamSourceFreq(stream_number, setting) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-settexture)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-settexture)\]
     /// IDirect3DDevice9::SetTexture
     ///
     /// Assigns a texture to a stage for a device.
@@ -3710,7 +3710,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
 
     // TODO: set_texture_stage_state (typed)
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-settexturestagestate)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-settexturestagestate)\]
     /// IDirect3DDevice9::SetTextureStageState
     ///
     /// Sets the state value for the currently assigned texture.
@@ -3738,7 +3738,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         fn_check_hr!(unsafe { self.as_winapi().SetTextureStageState(stage, ty.into().into(), value) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-settransform)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-settransform)\]
     /// IDirect3DDevice9::SetTransform
     ///
     /// Sets a single device transform
@@ -3762,7 +3762,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         fn_check_hr!(unsafe { self.as_winapi().SetTransform(ts.into().into(), &matrix.into().into()) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setvertexdeclaration)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setvertexdeclaration)\]
     /// IDirect3DDevice9::SetVertexDeclaration
     ///
     /// Describes the layout of vertexes for rendering.
@@ -3777,7 +3777,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         fn_check_hr!(unsafe { self.as_winapi().SetVertexDeclaration(decl) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setvertexshader)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setvertexshader)\]
     /// IDirect3DDevice9::SetVertexShader
     ///
     /// Sets the vertex shader to render with.
@@ -3792,7 +3792,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         fn_check_hr!(unsafe { self.as_winapi().SetVertexShader(ps) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setvertexshaderconstantb)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setvertexshaderconstantb)\]
     /// IDirect3DDevice9::SetVertexShaderConstantB
     ///
     /// Sets boolean shader constants (b#). Unlike floating-point or integer constants, these have a dimension of 1, and are **not** grouped into 4-element vectors.
@@ -3805,7 +3805,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// ```rust
     /// # use dev::d3d9::*; let device = device_pure();
     /// // vs_3_0 (d3d9 max) only supports 16 boolean registers
-    /// // ref: https://docs.microsoft.com/en-us/windows/win32/direct3dhlsl/dx9-graphics-reference-asm-vs-registers-vs-3-0
+    /// // ref: https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx9-graphics-reference-asm-vs-registers-vs-3-0
     /// let constants = [abibool::bool32::TRUE; 16];
     /// let too_many  = [abibool::bool32::TRUE; 16+1];
     ///
@@ -3826,7 +3826,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         fn_check_hr!(unsafe { self.as_winapi().SetVertexShaderConstantB(start_register, constant_data.as_ptr().cast(), n) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setvertexshaderconstantf)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setvertexshaderconstantf)\]
     /// IDirect3DDevice9::SetVertexShaderConstantF
     ///
     /// Sets floating-point shader constants (c#).  Each individual c# register is a 4-element floating point vector: \[[f32]; 4\]
@@ -3839,7 +3839,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// ```rust
     /// # use dev::d3d9::*; let device = device_pure();
     /// // vs_3_0 (d3d9 max) supports at least 256 float4 registers
-    /// // ref: https://docs.microsoft.com/en-us/windows/win32/direct3dhlsl/dx9-graphics-reference-asm-vs-registers-vs-3-0
+    /// // ref: https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx9-graphics-reference-asm-vs-registers-vs-3-0
     /// let cmax = device.get_device_caps().unwrap().max_vertex_shader_const as usize;
     /// let constants = vec![[0.0, 0.0, 0.0, 0.0]; cmax];
     /// let too_many  = vec![[0.0, 0.0, 0.0, 0.0]; cmax+1];
@@ -3861,7 +3861,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         fn_check_hr!(unsafe { self.as_winapi().SetVertexShaderConstantF(start_register, constant_data.as_ptr().cast(), n) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setvertexshaderconstanti)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setvertexshaderconstanti)\]
     /// IDirect3DDevice9::SetVertexShaderConstantI
     ///
     /// Sets integer shader constants (i#).  Each individual i# register is a 4-element integer vector: \[[i32]; 4\]
@@ -3874,7 +3874,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
     /// ```rust
     /// # use dev::d3d9::*; let device = device_pure();
     /// // vs_3_0 (d3d9 max) only supports 16 int4 registers
-    /// // ref: https://docs.microsoft.com/en-us/windows/win32/direct3dhlsl/dx9-graphics-reference-asm-vs-registers-vs-3-0
+    /// // ref: https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/dx9-graphics-reference-asm-vs-registers-vs-3-0
     /// let constants = [[0, 0, 0, 0]; 16];
     /// let too_many  = [[0, 0, 0, 0]; 16+1];
     ///
@@ -3895,7 +3895,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         fn_check_hr!(unsafe { self.as_winapi().SetVertexShaderConstantI(start_register, constant_data.as_ptr().cast(), n) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setviewport)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-setviewport)\]
     /// IDirect3DDevice9::SetViewport
     ///
     /// ### Returns
@@ -3913,7 +3913,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
         fn_check_hr!(unsafe { self.as_winapi().SetViewport(&*viewport) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-showcursor)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-showcursor)\]
     /// IDirect3DDevice9::ShowCursor
     ///
     /// Displays or hides the cursor.
@@ -3936,7 +3936,7 @@ pub trait IDirect3DDevice9Ext : AsSafe<IDirect3DDevice9> + Sized {
 
     //TODO:     IDirect3DDevice9::StretchRect                       = d3d9::IDirect3DDevice9Ext::stretch_rect
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-testcooperativelevel)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-testcooperativelevel)\]
     /// IDirect3DDevice9::TestCooperativeLevel
     ///
     /// Reports the current cooperative-level status of the Direct3D device for a windowed or full-screen application.
@@ -3966,7 +3966,7 @@ impl<T: AsSafe<IDirect3DDevice9>> IDirect3DDevice9Ext for T {}
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/wingdi/ns-wingdi-rgndata)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/wingdi/ns-wingdi-rgndata)\]
 /// RGNDATA placeholder
 ///
 /// RGNDATA is a header-prefixed array.  While constructable in Rust, they're slightly awkward at best.

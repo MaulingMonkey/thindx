@@ -4,7 +4,7 @@ use winapi::shared::d3d9types::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dvertexelement9)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dvertexelement9)\]
 /// D3DVERTEXELEMENT9
 ///
 /// Defines the vertex data layout. Each vertex can contain one or more data types, and each data type is described by a vertex element.
@@ -19,7 +19,7 @@ use winapi::shared::d3d9types::*;
 }
 
 impl VertexElement {
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddecl-end)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3ddecl-end)\]
     /// D3DDECL_END
     pub const END : VertexElement = VertexElement {
         stream:         0xFF,

@@ -11,9 +11,9 @@ use std::ptr::null_mut;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dindexbuffer9)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dindexbuffer9)\]
 /// (extends [Resource])
-/// An [index buffer](https://docs.microsoft.com/en-us/windows/win32/direct3d9/rendering-from-vertex-and-index-buffers#scenario-2-drawing-two-triangles-with-indexing)
+/// An [index buffer](https://learn.microsoft.com/en-us/windows/win32/direct3d9/rendering-from-vertex-and-index-buffers#scenario-2-drawing-two-triangles-with-indexing)
 /// indexes verticies in a [VertexBuffer] when rendering.
 ///
 /// ### See Also
@@ -23,9 +23,9 @@ use std::ptr::null_mut;
 #[derive(Clone)] #[repr(transparent)]
 pub struct IndexBuffer(pub(crate) mcom::Rc<IDirect3DIndexBuffer9>);
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dvertexbuffer9)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dvertexbuffer9)\]
 /// (extends [Resource])
-/// A [vertex buffer](https://docs.microsoft.com/en-us/windows/win32/direct3d9/rendering-from-vertex-and-index-buffers#scenario-2-drawing-two-triangles-with-indexing)
+/// A [vertex buffer](https://learn.microsoft.com/en-us/windows/win32/direct3d9/rendering-from-vertex-and-index-buffers#scenario-2-drawing-two-triangles-with-indexing)
 /// typically contains points of a mesh to be rendered.
 ///
 /// ### See Also
@@ -49,22 +49,22 @@ unsafe impl AsSafe<IDirect3DVertexBuffer9   > for VertexBuffer { fn as_safe(&sel
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dindexbuffer9)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dindexbuffer9)\]
 /// IDirect3DIndexBuffer9 extension methods
 ///
 /// ### Methods
-/// | thindx                                    | docs.microsoft.com    | Description |
+/// | thindx                                    | microsoft.com         | Description |
 /// | ----------------------------------------- | --------------------- | ----------- |
 /// | [get_desc](Self::get_desc)                | [GetDesc]             | Retrieves a description of the index buffer.
 /// | [lock_unchecked](Self::lock_unchecked)    | [Lock]                | Locks a range of index data, and obtains a pointer to the index buffer memory.
 /// | [unlock](Self::unlock)                    | [Unlock]              | Unlocks index data.
 ///
-/// [GetDesc]:  https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dindexbuffer9-getdesc
-/// [Lock]:     https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dindexbuffer9-lock
-/// [Unlock]:   https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dindexbuffer9-unlock
+/// [GetDesc]:  https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dindexbuffer9-getdesc
+/// [Lock]:     https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dindexbuffer9-lock
+/// [Unlock]:   https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dindexbuffer9-unlock
 ///
 pub trait IDirect3DIndexBuffer9Ext : AsSafe<IDirect3DIndexBuffer9> {
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dindexbuffer9-getdesc)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dindexbuffer9-getdesc)\]
     /// IDirect3DIndexBuffer9::GetDesc
     ///
     /// Retrieves a description of the index buffer.
@@ -91,7 +91,7 @@ pub trait IDirect3DIndexBuffer9Ext : AsSafe<IDirect3DIndexBuffer9> {
         Ok(desc)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dindexbuffer9-lock)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dindexbuffer9-lock)\]
     /// IDirect3DIndexBuffer9::Lock
     ///
     /// Locks a range of index data, and obtains a pointer to the index buffer memory.
@@ -126,7 +126,7 @@ pub trait IDirect3DIndexBuffer9Ext : AsSafe<IDirect3DIndexBuffer9> {
         Ok(data)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dindexbuffer9-unlock)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dindexbuffer9-unlock)\]
     /// IDirect3DIndexBuffer9::Unlock
     ///
     /// Unlocks index data.
@@ -151,22 +151,22 @@ impl<T: AsSafe<IDirect3DIndexBuffer9>> IDirect3DIndexBuffer9Ext for T {}
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dvertexbuffer9)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dvertexbuffer9)\]
 /// IDirect3DVertexBuffer9 extension methods
 ///
 /// ### Methods
-/// | thindx                                    | docs.microsoft.com    | Description |
+/// | thindx                                    | microsoft.com         | Description |
 /// | ----------------------------------------- | --------------------- | ----------- |
 /// | [get_desc](Self::get_desc)                | [GetDesc]             | Retrieves a description of the vertex buffer.
 /// | [lock_unchecked](Self::lock_unchecked)    | [Lock]                | Locks a range of vertex data, and obtains a pointer to the vertex buffer memory.
 /// | [unlock](Self::unlock)                    | [Unlock]              | Unlocks vertex data.
 ///
-/// [GetDesc]:  https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexbuffer9-getdesc
-/// [Lock]:     https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexbuffer9-lock
-/// [Unlock]:   https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexbuffer9-unlock
+/// [GetDesc]:  https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexbuffer9-getdesc
+/// [Lock]:     https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexbuffer9-lock
+/// [Unlock]:   https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexbuffer9-unlock
 ///
 pub trait IDirect3DVertexBuffer9Ext : AsSafe<IDirect3DVertexBuffer9> {
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexbuffer9-getdesc)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexbuffer9-getdesc)\]
     /// IDirect3DVertexBuffer9::GetDesc
     ///
     /// Retrieves a description of the vertex buffer.
@@ -194,7 +194,7 @@ pub trait IDirect3DVertexBuffer9Ext : AsSafe<IDirect3DVertexBuffer9> {
         Ok(desc)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexbuffer9-lock)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexbuffer9-lock)\]
     /// IDirect3DVertexBuffer9::Lock
     ///
     /// Locks a range of vertex data, and obtains a pointer to the vertex buffer memory.
@@ -233,7 +233,7 @@ pub trait IDirect3DVertexBuffer9Ext : AsSafe<IDirect3DVertexBuffer9> {
         Ok(data)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexbuffer9-unlock)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexbuffer9-unlock)\]
     /// IDirect3DVertexBuffer9::Unlock
     ///
     /// Unlocks vertex data.

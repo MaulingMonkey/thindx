@@ -29,7 +29,7 @@
 ///
 /// ### C++ Structs -> Rust Structs
 ///
-/// [`GUID`](https://docs.microsoft.com/en-us/windows/win32/api/guiddef/ns-guiddef-guid)&nbsp;→ [`Guid`] <br>
+/// [`GUID`](https://learn.microsoft.com/en-us/windows/win32/api/guiddef/ns-guiddef-guid)&nbsp;→ [`Guid`] <br>
 /// ### C++ Constants → Rust Constants
 ///
 /// `CLSID_NULL`&nbsp;→ [`ClsID::NULL`] <br>
@@ -56,10 +56,10 @@ pub const guiddef_h : cxx_header = cxx_header;
 ///
 /// ### C++ Interfaces → Rust Types
 ///
-/// [`IUnknown`](https://docs.microsoft.com/en-us/windows/win32/api/unknwn/nn-unknwn-iunknown)&nbsp;→ [`Unknown`] <br>
-/// * [`AddRef`](https://docs.microsoft.com/en-us/windows/win32/api/unknwn/nf-unknwn-iunknown-addref)&nbsp;→ [`mcom::Rc::clone`] <br>
-/// * [`QueryInterface`](https://docs.microsoft.com/en-us/windows/win32/api/unknwn/nf-unknwn-iunknown-queryinterface(q))&nbsp;→ [`mcom::Rc::try_cast`] <br>
-/// * [`Release`](https://docs.microsoft.com/en-us/windows/win32/api/unknwn/nf-unknwn-iunknown-release)&nbsp;→ [`mcom::Rc::drop`] <br>
+/// [`IUnknown`](https://learn.microsoft.com/en-us/windows/win32/api/unknwn/nn-unknwn-iunknown)&nbsp;→ [`Unknown`] <br>
+/// * [`AddRef`](https://learn.microsoft.com/en-us/windows/win32/api/unknwn/nf-unknwn-iunknown-addref)&nbsp;→ [`mcom::Rc::clone`] <br>
+/// * [`QueryInterface`](https://learn.microsoft.com/en-us/windows/win32/api/unknwn/nf-unknwn-iunknown-queryinterface(q))&nbsp;→ [`mcom::Rc::try_cast`] <br>
+/// * [`Release`](https://learn.microsoft.com/en-us/windows/win32/api/unknwn/nf-unknwn-iunknown-release)&nbsp;→ [`mcom::Rc::drop`] <br>
 ///
 pub const unknwn_h : cxx_header = cxx_header;
 
@@ -69,24 +69,24 @@ pub const unknwn_h : cxx_header = cxx_header;
 ///
 /// ### C++ Interfaces → Rust Types
 ///
-/// [`ID3D10Blob`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nn-d3dcommon-id3d10blob)&nbsp;→ [`d3d::BytesBlob`], [`d3d::CodeBlob`], [`d3d::ReadOnlyBlob`], [`d3d::TextBlob`] <br>
-/// * [`GetBufferPointer`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nf-d3dcommon-id3d10blob-getbufferpointer)&nbsp;→ [`d3d::BytesBlob::as_bytes`], [`d3d::CodeBlob::as_bytes`], [`d3d::CodeBlob::as_bytecode`], [`d3d::ReadOnlyBlob::get_buffer`], [`d3d::TextBlob::to_utf8`], [`d3d::TextBlob::to_utf8_lossy`] <br>
-/// * [`GetBufferSize`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nf-d3dcommon-id3d10blob-getbuffersize)&nbsp;→ [`d3d::BytesBlob::len`], [`d3d::CodeBlob::len`], [`d3d::ReadOnlyBlob::get_buffer_size`] <br>
+/// [`ID3D10Blob`](https://learn.microsoft.com/en-us/windows/win32/api/d3dcommon/nn-d3dcommon-id3d10blob)&nbsp;→ [`d3d::BytesBlob`], [`d3d::CodeBlob`], [`d3d::ReadOnlyBlob`], [`d3d::TextBlob`] <br>
+/// * [`GetBufferPointer`](https://learn.microsoft.com/en-us/windows/win32/api/d3dcommon/nf-d3dcommon-id3d10blob-getbufferpointer)&nbsp;→ [`d3d::BytesBlob::as_bytes`], [`d3d::CodeBlob::as_bytes`], [`d3d::CodeBlob::as_bytecode`], [`d3d::ReadOnlyBlob::get_buffer`], [`d3d::TextBlob::to_utf8`], [`d3d::TextBlob::to_utf8_lossy`] <br>
+/// * [`GetBufferSize`](https://learn.microsoft.com/en-us/windows/win32/api/d3dcommon/nf-d3dcommon-id3d10blob-getbuffersize)&nbsp;→ [`d3d::BytesBlob::len`], [`d3d::CodeBlob::len`], [`d3d::ReadOnlyBlob::get_buffer_size`] <br>
 ///
-/// [`ID3DDestructionNotifier`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nn-d3dcommon-id3ddestructionotifier) →&nbsp;❌ <br>
-/// * [`RegisterDestructionCallback`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nf-d3dcommon-id3ddestructionotifier-registerdestructioncallback) →&nbsp;❌ <br>
-/// * [`UnregisterDestructionCallback`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nf-d3dcommon-id3ddestructionotifier-unregisterdestructioncallback) →&nbsp;❌ <br>
+/// [`ID3DDestructionNotifier`](https://learn.microsoft.com/en-us/windows/win32/api/d3dcommon/nn-d3dcommon-id3ddestructionotifier) →&nbsp;❌ <br>
+/// * [`RegisterDestructionCallback`](https://learn.microsoft.com/en-us/windows/win32/api/d3dcommon/nf-d3dcommon-id3ddestructionotifier-registerdestructioncallback) →&nbsp;❌ <br>
+/// * [`UnregisterDestructionCallback`](https://learn.microsoft.com/en-us/windows/win32/api/d3dcommon/nf-d3dcommon-id3ddestructionotifier-unregisterdestructioncallback) →&nbsp;❌ <br>
 ///
-/// [`ID3DInclude`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nn-d3dcommon-id3dinclude)&nbsp;→ <code>trait [d3d::AsInclude](d3d::AsInclude)</code>, <code>struct [d3d::Include](d3d::Include)</code> <br>
-/// * [`Close`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nf-d3dcommon-id3dinclude-close)&nbsp;→ [`std::ops::Drop::drop`] <br>
-/// * [`Open`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nf-d3dcommon-id3dinclude-open)&nbsp;→ [`d3d::Include::from_blob_meta_fn`], [`d3d::Include::from_path_fn`] <br>
+/// [`ID3DInclude`](https://learn.microsoft.com/en-us/windows/win32/api/d3dcommon/nn-d3dcommon-id3dinclude)&nbsp;→ <code>trait [d3d::AsInclude](d3d::AsInclude)</code>, <code>struct [d3d::Include](d3d::Include)</code> <br>
+/// * [`Close`](https://learn.microsoft.com/en-us/windows/win32/api/d3dcommon/nf-d3dcommon-id3dinclude-close)&nbsp;→ [`std::ops::Drop::drop`] <br>
+/// * [`Open`](https://learn.microsoft.com/en-us/windows/win32/api/d3dcommon/nf-d3dcommon-id3dinclude-open)&nbsp;→ [`d3d::Include::from_blob_meta_fn`], [`d3d::Include::from_path_fn`] <br>
 ///
 /// ### C++ Structs -> Rust Structs
 ///
-/// [`D3D_SHADER_MACRO`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ns-d3dcommon-d3d_shader_macro)&nbsp;→ <code>trait [d3d::AsShaderMacros](d3d::AsShaderMacros)</code> <br>
+/// [`D3D_SHADER_MACRO`](https://learn.microsoft.com/en-us/windows/win32/api/d3dcommon/ns-d3dcommon-d3d_shader_macro)&nbsp;→ <code>trait [d3d::AsShaderMacros](d3d::AsShaderMacros)</code> <br>
 /// ### C++ Enums → Rust Structs
 ///
-/// [`D3D_CBUFFER_TYPE`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_cbuffer_type)&nbsp;→ [`d3d::CBufferType`] <br>
+/// [`D3D_CBUFFER_TYPE`](https://learn.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_cbuffer_type)&nbsp;→ [`d3d::CBufferType`] <br>
 /// * `D3D10_CT_CBUFFER`&nbsp;→ [`d3d::CT::CBuffer`] <br>
 /// * `D3D10_CT_TBUFFER`&nbsp;→ [`d3d::CT::TBuffer`] <br>
 /// * `D3D11_CT_CBUFFER`&nbsp;→ [`d3d::CT::CBuffer`] <br>
@@ -98,7 +98,7 @@ pub const unknwn_h : cxx_header = cxx_header;
 /// * `D3D_CT_RESOURCE_BIND_INFO`&nbsp;→ [`d3d::CT::ResourceBindInfo`] <br>
 /// * `D3D_CT_TBUFFER`&nbsp;→ [`d3d::CT::TBuffer`] <br>
 ///
-/// [`D3D_DRIVER_TYPE`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_driver_type)&nbsp;→ [`d3d::DriverType`] <br>
+/// [`D3D_DRIVER_TYPE`](https://learn.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_driver_type)&nbsp;→ [`d3d::DriverType`] <br>
 /// * `D3D_DRIVER_TYPE_HARDWARE`&nbsp;→ [`d3d::DriverType::Hardware`] <br>
 /// * `D3D_DRIVER_TYPE_NULL`&nbsp;→ [`d3d::DriverType::Null`] <br>
 /// * `D3D_DRIVER_TYPE_REFERENCE`&nbsp;→ [`d3d::DriverType::Reference`] <br>
@@ -106,7 +106,7 @@ pub const unknwn_h : cxx_header = cxx_header;
 /// * `D3D_DRIVER_TYPE_UNKNOWN`&nbsp;→ [`d3d::DriverType::Unknown`] <br>
 /// * `D3D_DRIVER_TYPE_WARP`&nbsp;→ [`d3d::DriverType::WARP`] <br>
 ///
-/// [`D3D_FEATURE_LEVEL`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_feature_level)&nbsp;→ [`d3d::FeatureLevel`] <br>
+/// [`D3D_FEATURE_LEVEL`](https://learn.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_feature_level)&nbsp;→ [`d3d::FeatureLevel`] <br>
 /// * `D3D_FEATURE_LEVEL_10_0`&nbsp;→ [`d3d::FeatureLevel::_10_0`] <br>
 /// * `D3D_FEATURE_LEVEL_10_1`&nbsp;→ [`d3d::FeatureLevel::_10_1`] <br>
 /// * `D3D_FEATURE_LEVEL_11_0`&nbsp;→ [`d3d::FeatureLevel::_11_0`] <br>
@@ -119,13 +119,13 @@ pub const unknwn_h : cxx_header = cxx_header;
 /// * `D3D_FEATURE_LEVEL_9_2`&nbsp;→ [`d3d::FeatureLevel::_9_2`] <br>
 /// * `D3D_FEATURE_LEVEL_9_3`&nbsp;→ [`d3d::FeatureLevel::_9_3`] <br>
 ///
-/// [`D3D_INCLUDE_TYPE`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_include_type)&nbsp;→ [`d3d::IncludeType`] <br>
+/// [`D3D_INCLUDE_TYPE`](https://learn.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_include_type)&nbsp;→ [`d3d::IncludeType`] <br>
 /// * `D3D10_INCLUDE_LOCAL`&nbsp;→ [`d3d::Include::Local`] <br>
 /// * `D3D10_INCLUDE_SYSTEM`&nbsp;→ [`d3d::Include::System`] <br>
 /// * `D3D_INCLUDE_LOCAL`&nbsp;→ [`d3d::Include::Local`] <br>
 /// * `D3D_INCLUDE_SYSTEM`&nbsp;→ [`d3d::Include::System`] <br>
 ///
-/// [`D3D_INTERPOLATION_MODE`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_interpolation_mode)&nbsp;→ [`d3d::InterpolationMode`] <br>
+/// [`D3D_INTERPOLATION_MODE`](https://learn.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_interpolation_mode)&nbsp;→ [`d3d::InterpolationMode`] <br>
 /// * `D3D_INTERPOLATION_CONSTANT`&nbsp;→ [`d3d::Interpolation::Constant`] <br>
 /// * `D3D_INTERPOLATION_LINEAR`&nbsp;→ [`d3d::Interpolation::Linear`] <br>
 /// * `D3D_INTERPOLATION_LINEAR_CENTROID`&nbsp;→ [`d3d::Interpolation::LinearCentroid`] <br>
@@ -135,7 +135,7 @@ pub const unknwn_h : cxx_header = cxx_header;
 /// * `D3D_INTERPOLATION_LINEAR_SAMPLE`&nbsp;→ [`d3d::Interpolation::LinearSample`] <br>
 /// * `D3D_INTERPOLATION_UNDEFINED`&nbsp;→ [`d3d::Interpolation::Undefined`] <br>
 ///
-/// [`D3D_MIN_PRECISION`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_min_precision)&nbsp;→ [`d3d::MinPrecision`] <br>
+/// [`D3D_MIN_PRECISION`](https://learn.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_min_precision)&nbsp;→ [`d3d::MinPrecision`] <br>
 /// * `D3D_MIN_PRECISION_ANY_10`&nbsp;→ [`d3d::MinPrecision::Any10`] <br>
 /// * `D3D_MIN_PRECISION_ANY_16`&nbsp;→ [`d3d::MinPrecision::Any16`] <br>
 /// * `D3D_MIN_PRECISION_DEFAULT`&nbsp;→ [`d3d::MinPrecision::Default`] <br>
@@ -145,7 +145,7 @@ pub const unknwn_h : cxx_header = cxx_header;
 /// * `D3D_MIN_PRECISION_SINT_16`&nbsp;→ [`d3d::MinPrecision::SInt16`] <br>
 /// * `D3D_MIN_PRECISION_UINT_16`&nbsp;→ [`d3d::MinPrecision::UInt16`] <br>
 ///
-/// [`D3D_NAME`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_name)&nbsp;→ [`d3d::Name`] <br>
+/// [`D3D_NAME`](https://learn.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_name)&nbsp;→ [`d3d::Name`] <br>
 /// * `D3D10_NAME_CLIP_DISTANCE`&nbsp;→ [`d3d::Name::ClipDistance`] <br>
 /// * `D3D10_NAME_COVERAGE`&nbsp;→ [`d3d::Name::Coverage`] <br>
 /// * `D3D10_NAME_CULL_DISTANCE`&nbsp;→ [`d3d::Name::CullDistance`] <br>
@@ -201,12 +201,12 @@ pub const unknwn_h : cxx_header = cxx_header;
 /// * `D3D_NAME_VERTEX_ID`&nbsp;→ [`d3d::Name::VertexId`] <br>
 /// * `D3D_NAME_VIEWPORT_ARRAY_INDEX`&nbsp;→ [`d3d::Name::ViewportArrayIndex`] <br>
 ///
-/// [`D3D_PARAMETER_FLAGS`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_parameter_flags)&nbsp;→ [`d3d::ParameterFlags`] <br>
+/// [`D3D_PARAMETER_FLAGS`](https://learn.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_parameter_flags)&nbsp;→ [`d3d::ParameterFlags`] <br>
 /// * `D3D_PF_IN`&nbsp;→ [`d3d::PF::In`] <br>
 /// * `D3D_PF_NONE`&nbsp;→ [`d3d::PF::None`] <br>
 /// * `D3D_PF_OUT`&nbsp;→ [`d3d::PF::Out`] <br>
 ///
-/// [`D3D_PRIMITIVE`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_primitive)&nbsp;→ [`d3d::Primitive`] <br>
+/// [`D3D_PRIMITIVE`](https://learn.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_primitive)&nbsp;→ [`d3d::Primitive`] <br>
 /// * `D3D10_PRIMITIVE_LINE`&nbsp;→ [`d3d::Primitive::Line`] <br>
 /// * `D3D10_PRIMITIVE_LINE_ADJ`&nbsp;→ [`d3d::Primitive::LineAdj`] <br>
 /// * `D3D10_PRIMITIVE_POINT`&nbsp;→ [`d3d::Primitive::Point`] <br>
@@ -290,7 +290,7 @@ pub const unknwn_h : cxx_header = cxx_header;
 /// * `D3D_PRIMITIVE_TRIANGLE_ADJ`&nbsp;→ [`d3d::Primitive::TriangleAdj`] <br>
 /// * `D3D_PRIMITIVE_UNDEFINED`&nbsp;→ [`d3d::Primitive::Undefined`] <br>
 ///
-/// [`D3D_PRIMITIVE_TOPOLOGY`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_primitive_topology)&nbsp;→ [`d3d::PrimitiveTopology`] <br>
+/// [`D3D_PRIMITIVE_TOPOLOGY`](https://learn.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_primitive_topology)&nbsp;→ [`d3d::PrimitiveTopology`] <br>
 /// * `D3D10_PRIMITIVE_TOPOLOGY_LINELIST`&nbsp;→ [`d3d::PrimitiveTopology::LineList`] <br>
 /// * `D3D10_PRIMITIVE_TOPOLOGY_LINELIST_ADJ`&nbsp;→ [`d3d::PrimitiveTopology::LineListAdj`] <br>
 /// * `D3D10_PRIMITIVE_TOPOLOGY_LINESTRIP`&nbsp;→ [`d3d::PrimitiveTopology::LineStrip`] <br>
@@ -386,7 +386,7 @@ pub const unknwn_h : cxx_header = cxx_header;
 /// * `D3D_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP_ADJ`&nbsp;→ [`d3d::PrimitiveTopology::TriangleStripAdj`] <br>
 /// * `D3D_PRIMITIVE_TOPOLOGY_UNDEFINED`&nbsp;→ [`d3d::PrimitiveTopology::Undefined`] <br>
 ///
-/// [`D3D_REGISTER_COMPONENT_TYPE`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_register_component_type)&nbsp;→ [`d3d::RegisterComponentType`] <br>
+/// [`D3D_REGISTER_COMPONENT_TYPE`](https://learn.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_register_component_type)&nbsp;→ [`d3d::RegisterComponentType`] <br>
 /// * `D3D10_REGISTER_COMPONENT_FLOAT32`&nbsp;→ [`d3d::RegisterComponent::Float32`] <br>
 /// * `D3D10_REGISTER_COMPONENT_SINT32`&nbsp;→ [`d3d::RegisterComponent::SInt32`] <br>
 /// * `D3D10_REGISTER_COMPONENT_UINT32`&nbsp;→ [`d3d::RegisterComponent::UInt32`] <br>
@@ -396,7 +396,7 @@ pub const unknwn_h : cxx_header = cxx_header;
 /// * `D3D_REGISTER_COMPONENT_UINT32`&nbsp;→ [`d3d::RegisterComponent::UInt32`] <br>
 /// * `D3D_REGISTER_COMPONENT_UNKNOWN`&nbsp;→ [`d3d::RegisterComponent::Unknown`] <br>
 ///
-/// [`D3D_RESOURCE_RETURN_TYPE`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_resource_return_type)&nbsp;→ [`d3d::ResourceReturnType`] <br>
+/// [`D3D_RESOURCE_RETURN_TYPE`](https://learn.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_resource_return_type)&nbsp;→ [`d3d::ResourceReturnType`] <br>
 /// * `D3D10_RETURN_TYPE_FLOAT`&nbsp;→ [`d3d::ReturnType::Float`] <br>
 /// * `D3D10_RETURN_TYPE_MIXED`&nbsp;→ [`d3d::ReturnType::Mixed`] <br>
 /// * `D3D10_RETURN_TYPE_SINT`&nbsp;→ [`d3d::ReturnType::SInt`] <br>
@@ -420,11 +420,11 @@ pub const unknwn_h : cxx_header = cxx_header;
 /// * `D3D_RETURN_TYPE_UINT`&nbsp;→ [`d3d::ReturnType::UInt`] <br>
 /// * `D3D_RETURN_TYPE_UNORM`&nbsp;→ [`d3d::ReturnType::UNorm`] <br>
 ///
-/// [`D3D_SHADER_CBUFFER_FLAGS`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_shader_cbuffer_flags)&nbsp;→ [`d3d::ShaderCbufferFlags`] <br>
+/// [`D3D_SHADER_CBUFFER_FLAGS`](https://learn.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_shader_cbuffer_flags)&nbsp;→ [`d3d::ShaderCbufferFlags`] <br>
 /// * `D3D10_CBF_USERPACKED`&nbsp;→ [`d3d::CBF::UserPacked`] <br>
 /// * `D3D_CBF_USERPACKED`&nbsp;→ [`d3d::CBF::UserPacked`] <br>
 ///
-/// [`D3D_SHADER_INPUT_FLAGS`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_shader_input_flags)&nbsp;→ [`d3d::ShaderInputFlags`] <br>
+/// [`D3D_SHADER_INPUT_FLAGS`](https://learn.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_shader_input_flags)&nbsp;→ [`d3d::ShaderInputFlags`] <br>
 /// * `D3D10_SIF_COMPARISON_SAMPLER`&nbsp;→ [`d3d::SIF::ComparisonSampler`] <br>
 /// * `D3D10_SIF_TEXTURE_COMPONENTS`&nbsp;→ [`d3d::SIF::TextureComponents`] <br>
 /// * `D3D10_SIF_TEXTURE_COMPONENT_0`&nbsp;→ [`d3d::SIF::TextureComponent0`] <br>
@@ -437,7 +437,7 @@ pub const unknwn_h : cxx_header = cxx_header;
 /// * `D3D_SIF_UNUSED`&nbsp;→ [`d3d::SIF::Unused`] <br>
 /// * `D3D_SIF_USERPACKED`&nbsp;→ [`d3d::SIF::UserPacked`] <br>
 ///
-/// [`D3D_SHADER_INPUT_TYPE`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_shader_input_type)&nbsp;→ [`d3d::ShaderInputType`] <br>
+/// [`D3D_SHADER_INPUT_TYPE`](https://learn.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_shader_input_type)&nbsp;→ [`d3d::ShaderInputType`] <br>
 /// * `D3D10_SIT_CBUFFER`&nbsp;→ [`d3d::SIT::CBuffer`] <br>
 /// * `D3D10_SIT_SAMPLER`&nbsp;→ [`d3d::SIT::Sampler`] <br>
 /// * `D3D10_SIT_TBUFFER`&nbsp;→ [`d3d::SIT::TBuffer`] <br>
@@ -465,7 +465,7 @@ pub const unknwn_h : cxx_header = cxx_header;
 /// * `D3D_SIT_UAV_RWSTRUCTURED_WITH_COUNTER`&nbsp;→ [`d3d::SIT::UavRWStructuredWithCounter`] <br>
 /// * `D3D_SIT_UAV_RWTYPED`&nbsp;→ [`d3d::SIT::UavRWTyped`] <br>
 ///
-/// [`D3D_SHADER_VARIABLE_CLASS`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_shader_variable_class)&nbsp;→ [`d3d::ShaderVariableClass`] <br>
+/// [`D3D_SHADER_VARIABLE_CLASS`](https://learn.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_shader_variable_class)&nbsp;→ [`d3d::ShaderVariableClass`] <br>
 /// * `D3D10_SVC_MATRIX_COLUMNS`&nbsp;→ [`d3d::SVC::MatrixColumns`] <br>
 /// * `D3D10_SVC_MATRIX_ROWS`&nbsp;→ [`d3d::SVC::MatrixRows`] <br>
 /// * `D3D10_SVC_OBJECT`&nbsp;→ [`d3d::SVC::Object`] <br>
@@ -483,7 +483,7 @@ pub const unknwn_h : cxx_header = cxx_header;
 /// * `D3D_SVC_STRUCT`&nbsp;→ [`d3d::SVC::Struct`] <br>
 /// * `D3D_SVC_VECTOR`&nbsp;→ [`d3d::SVC::Vector`] <br>
 ///
-/// [`D3D_SHADER_VARIABLE_FLAGS`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_shader_variable_flags)&nbsp;→ [`d3d::ShaderVariableFlags`] <br>
+/// [`D3D_SHADER_VARIABLE_FLAGS`](https://learn.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_shader_variable_flags)&nbsp;→ [`d3d::ShaderVariableFlags`] <br>
 /// * `D3D10_SVF_USED`&nbsp;→ [`d3d::SVF::Used`] <br>
 /// * `D3D10_SVF_USERPACKED`&nbsp;→ [`d3d::SVF::UserPacked`] <br>
 /// * `D3D11_SVF_INTERFACE_PARAMETER`&nbsp;→ [`d3d::SVF::InterfaceParameter`] <br>
@@ -493,7 +493,7 @@ pub const unknwn_h : cxx_header = cxx_header;
 /// * `D3D_SVF_USED`&nbsp;→ [`d3d::SVF::Used`] <br>
 /// * `D3D_SVF_USERPACKED`&nbsp;→ [`d3d::SVF::UserPacked`] <br>
 ///
-/// [`D3D_SHADER_VARIABLE_TYPE`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_shader_variable_type)&nbsp;→ [`d3d::ShaderVariableType`] <br>
+/// [`D3D_SHADER_VARIABLE_TYPE`](https://learn.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_shader_variable_type)&nbsp;→ [`d3d::ShaderVariableType`] <br>
 /// * `D3D10_SVT_BLEND`&nbsp;→ [`d3d::SVT::Blend`] <br>
 /// * `D3D10_SVT_BOOL`&nbsp;→ [`d3d::SVT::Bool`] <br>
 /// * `D3D10_SVT_BUFFER`&nbsp;→ [`d3d::SVT::Buffer`] <br>
@@ -610,7 +610,7 @@ pub const unknwn_h : cxx_header = cxx_header;
 /// * `D3D_SVT_VERTEXSHADER`&nbsp;→ [`d3d::SVT::VertexShader`] <br>
 /// * `D3D_SVT_VOID`&nbsp;→ [`d3d::SVT::Void`] <br>
 ///
-/// [`D3D_SRV_DIMENSION`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_srv_dimension)&nbsp;→ [`d3d::SrvDimension`] <br>
+/// [`D3D_SRV_DIMENSION`](https://learn.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_srv_dimension)&nbsp;→ [`d3d::SrvDimension`] <br>
 /// * `D3D10_1_SRV_DIMENSION_BUFFER`&nbsp;→ [`d3d::SrvDimension::Buffer`] <br>
 /// * `D3D10_1_SRV_DIMENSION_TEXTURE1D`&nbsp;→ [`d3d::SrvDimension::Texture1D`] <br>
 /// * `D3D10_1_SRV_DIMENSION_TEXTURE1DARRAY`&nbsp;→ [`d3d::SrvDimension::Texture1DArray`] <br>
@@ -657,7 +657,7 @@ pub const unknwn_h : cxx_header = cxx_header;
 /// * `D3D_SRV_DIMENSION_TEXTURECUBEARRAY`&nbsp;→ [`d3d::SrvDimension::TextureCubeArray`] <br>
 /// * `D3D_SRV_DIMENSION_UNKNOWN`&nbsp;→ [`d3d::SrvDimension::Unknown`] <br>
 ///
-/// [`D3D_TESSELLATOR_DOMAIN`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_tessellator_domain)&nbsp;→ [`d3d::TessellatorDomain`] <br>
+/// [`D3D_TESSELLATOR_DOMAIN`](https://learn.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_tessellator_domain)&nbsp;→ [`d3d::TessellatorDomain`] <br>
 /// * `D3D11_TESSELLATOR_DOMAIN_ISOLINE`&nbsp;→ [`d3d::TessellatorDomain::IsoLine`] <br>
 /// * `D3D11_TESSELLATOR_DOMAIN_QUAD`&nbsp;→ [`d3d::TessellatorDomain::Quad`] <br>
 /// * `D3D11_TESSELLATOR_DOMAIN_TRI`&nbsp;→ [`d3d::TessellatorDomain::Tri`] <br>
@@ -667,7 +667,7 @@ pub const unknwn_h : cxx_header = cxx_header;
 /// * `D3D_TESSELLATOR_DOMAIN_TRI`&nbsp;→ [`d3d::TessellatorDomain::Tri`] <br>
 /// * `D3D_TESSELLATOR_DOMAIN_UNDEFINED`&nbsp;→ [`d3d::TessellatorDomain::Undefined`] <br>
 ///
-/// [`D3D_TESSELLATOR_OUTPUT_PRIMITIVE`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_tessellator_output_primitive)&nbsp;→ [`d3d::TessellatorOutputPrimitive`] <br>
+/// [`D3D_TESSELLATOR_OUTPUT_PRIMITIVE`](https://learn.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_tessellator_output_primitive)&nbsp;→ [`d3d::TessellatorOutputPrimitive`] <br>
 /// * `D3D11_TESSELLATOR_OUTPUT_LINE`&nbsp;→ [`d3d::TessellatorOutput::Line`] <br>
 /// * `D3D11_TESSELLATOR_OUTPUT_POINT`&nbsp;→ [`d3d::TessellatorOutput::Point`] <br>
 /// * `D3D11_TESSELLATOR_OUTPUT_TRIANGLE_CCW`&nbsp;→ [`d3d::TessellatorOutput::TriangleCCW`] <br>
@@ -679,7 +679,7 @@ pub const unknwn_h : cxx_header = cxx_header;
 /// * `D3D_TESSELLATOR_OUTPUT_TRIANGLE_CW`&nbsp;→ [`d3d::TessellatorOutput::TriangleCW`] <br>
 /// * `D3D_TESSELLATOR_OUTPUT_UNDEFINED`&nbsp;→ [`d3d::TessellatorOutput::Undefined`] <br>
 ///
-/// [`D3D_TESSELLATOR_PARTITIONING`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_tessellator_partitioning)&nbsp;→ [`d3d::TessellatorPartitioning`] <br>
+/// [`D3D_TESSELLATOR_PARTITIONING`](https://learn.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_tessellator_partitioning)&nbsp;→ [`d3d::TessellatorPartitioning`] <br>
 /// * `D3D11_TESSELLATOR_PARTITIONING_FRACTIONAL_EVEN`&nbsp;→ [`d3d::TessellatorPartitioning::FractionalEven`] <br>
 /// * `D3D11_TESSELLATOR_PARTITIONING_FRACTIONAL_ODD`&nbsp;→ [`d3d::TessellatorPartitioning::FractionalOdd`] <br>
 /// * `D3D11_TESSELLATOR_PARTITIONING_INTEGER`&nbsp;→ [`d3d::TessellatorPartitioning::Integer`] <br>
@@ -756,17 +756,17 @@ pub const d3dcommon_h : cxx_header = cxx_header;
 ///
 /// ### C++ Structs -> Rust Structs
 ///
-/// [`D3D_SHADER_DATA`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/ns-d3dcompiler-d3d_shader_data)&nbsp;→ [`d3d::ShaderData`] <br>
+/// [`D3D_SHADER_DATA`](https://learn.microsoft.com/en-us/windows/win32/api/d3dcompiler/ns-d3dcompiler-d3d_shader_data)&nbsp;→ [`d3d::ShaderData`] <br>
 /// ### C++ Enums → Rust Structs
 ///
-/// [`D3DCOMPILER_STRIP_FLAGS`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/ne-d3dcompiler-d3dcompiler_strip_flags)&nbsp;→ [`d3d::CompilerStripFlags`] <br>
+/// [`D3DCOMPILER_STRIP_FLAGS`](https://learn.microsoft.com/en-us/windows/win32/api/d3dcompiler/ne-d3dcompiler-d3dcompiler_strip_flags)&nbsp;→ [`d3d::CompilerStripFlags`] <br>
 /// * `D3DCOMPILER_STRIP_DEBUG_INFO`&nbsp;→ [`d3d::CompilerStrip::DebugInfo`] <br>
 /// * `D3DCOMPILER_STRIP_PRIVATE_DATA`&nbsp;→ [`d3d::CompilerStrip::PrivateData`] <br>
 /// * `D3DCOMPILER_STRIP_REFLECTION_DATA`&nbsp;→ [`d3d::CompilerStrip::ReflectionData`] <br>
 /// * `D3DCOMPILER_STRIP_ROOT_SIGNATURE`&nbsp;→ [`d3d::CompilerStrip::RootSignature`] <br>
 /// * `D3DCOMPILER_STRIP_TEST_BLOBS`&nbsp;→ [`d3d::CompilerStrip::TestBlobs`] <br>
 ///
-/// [`D3D_BLOB_PART`](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/ne-d3dcompiler-d3d_blob_part)&nbsp;→ [`d3d::BlobPart`] <br>
+/// [`D3D_BLOB_PART`](https://learn.microsoft.com/en-us/windows/win32/api/d3dcompiler/ne-d3dcompiler-d3d_blob_part)&nbsp;→ [`d3d::BlobPart`] <br>
 /// * `D3D_BLOB_ALL_SIGNATURE_BLOB`&nbsp;→ [`d3d::Blob::AllSignatureBlob`] <br>
 /// * `D3D_BLOB_DEBUG_INFO`&nbsp;→ [`d3d::Blob::DebugInfo`] <br>
 /// * `D3D_BLOB_DEBUG_NAME`&nbsp;→ [`d3d::Blob::DebugName`] <br>
@@ -844,306 +844,306 @@ pub const d3dcompiler_h : cxx_header = cxx_header;
 ///
 /// ### C++ Interfaces → Rust Types
 ///
-/// [`IDirect3D9`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3d9)&nbsp;→ [`d3d9::Direct3D`], [`d3d9::IDirect3D9Ext`] <br>
-/// * [`CheckDepthStencilMatch`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdepthstencilmatch)&nbsp;→ [`d3d9::IDirect3D9Ext::check_depth_stencil_match`] <br>
-/// * [`CheckDeviceFormat`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdeviceformat)&nbsp;→ [`d3d9::IDirect3D9Ext::check_device_format`] <br>
-/// * [`CheckDeviceFormatConversion`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdeviceformatconversion)&nbsp;→ [`d3d9::IDirect3D9Ext::check_device_format_conversion`] <br>
-/// * [`CheckDeviceMultiSampleType`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdevicemultisampletype)&nbsp;→ [`d3d9::IDirect3D9Ext::check_device_multi_sample_type`] <br>
-/// * [`CheckDeviceType`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdevicetype)&nbsp;→ [`d3d9::IDirect3D9Ext::check_device_type`] <br>
-/// * [`CreateDevice`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-createdevice)&nbsp;→ [`d3d9::IDirect3D9Ext::create_device`] <br>
-/// * [`EnumAdapterModes`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-enumadaptermodes)&nbsp;→ [`d3d9::IDirect3D9Ext::enum_adapter_modes`] <br>
-/// * [`GetAdapterCount`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadaptercount)&nbsp;→ [`d3d9::IDirect3D9Ext::get_adapter_count`] <br>
-/// * [`GetAdapterDisplayMode`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadapterdisplaymode)&nbsp;→ [`d3d9::IDirect3D9Ext::get_adapter_display_mode`] <br>
-/// * [`GetAdapterIdentifier`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadapteridentifier)&nbsp;→ [`d3d9::IDirect3D9Ext::get_adapter_identifier`] <br>
-/// * [`GetAdapterModeCount`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadaptermodecount)&nbsp;→ [`d3d9::IDirect3D9Ext::get_adapter_mode_count`] <br>
-/// * [`GetAdapterMonitor`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadaptermonitor)&nbsp;→ [`d3d9::IDirect3D9Ext::get_adapter_monitor`] <br>
-/// * [`GetDeviceCaps`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getdevicecaps)&nbsp;→ [`d3d9::IDirect3D9Ext::get_device_caps`] <br>
-/// * [`RegisterSoftwareDevice`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-registersoftwaredevice) →&nbsp;❌ <br>
+/// [`IDirect3D9`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3d9)&nbsp;→ [`d3d9::Direct3D`], [`d3d9::IDirect3D9Ext`] <br>
+/// * [`CheckDepthStencilMatch`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdepthstencilmatch)&nbsp;→ [`d3d9::IDirect3D9Ext::check_depth_stencil_match`] <br>
+/// * [`CheckDeviceFormat`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdeviceformat)&nbsp;→ [`d3d9::IDirect3D9Ext::check_device_format`] <br>
+/// * [`CheckDeviceFormatConversion`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdeviceformatconversion)&nbsp;→ [`d3d9::IDirect3D9Ext::check_device_format_conversion`] <br>
+/// * [`CheckDeviceMultiSampleType`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdevicemultisampletype)&nbsp;→ [`d3d9::IDirect3D9Ext::check_device_multi_sample_type`] <br>
+/// * [`CheckDeviceType`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdevicetype)&nbsp;→ [`d3d9::IDirect3D9Ext::check_device_type`] <br>
+/// * [`CreateDevice`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-createdevice)&nbsp;→ [`d3d9::IDirect3D9Ext::create_device`] <br>
+/// * [`EnumAdapterModes`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-enumadaptermodes)&nbsp;→ [`d3d9::IDirect3D9Ext::enum_adapter_modes`] <br>
+/// * [`GetAdapterCount`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadaptercount)&nbsp;→ [`d3d9::IDirect3D9Ext::get_adapter_count`] <br>
+/// * [`GetAdapterDisplayMode`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadapterdisplaymode)&nbsp;→ [`d3d9::IDirect3D9Ext::get_adapter_display_mode`] <br>
+/// * [`GetAdapterIdentifier`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadapteridentifier)&nbsp;→ [`d3d9::IDirect3D9Ext::get_adapter_identifier`] <br>
+/// * [`GetAdapterModeCount`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadaptermodecount)&nbsp;→ [`d3d9::IDirect3D9Ext::get_adapter_mode_count`] <br>
+/// * [`GetAdapterMonitor`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadaptermonitor)&nbsp;→ [`d3d9::IDirect3D9Ext::get_adapter_monitor`] <br>
+/// * [`GetDeviceCaps`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getdevicecaps)&nbsp;→ [`d3d9::IDirect3D9Ext::get_device_caps`] <br>
+/// * [`RegisterSoftwareDevice`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-registersoftwaredevice) →&nbsp;❌ <br>
 ///
-/// [`IDirect3D9Ex`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3d9ex)&nbsp;→ [`d3d9::Direct3DEx`], [`d3d9::IDirect3D9ExExt`] <br>
-/// * [`CreateDeviceEx`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9ex-createdeviceex)&nbsp;→ [`d3d9::IDirect3D9ExExt::create_device_ex`] <br>
-/// * [`EnumAdapterModesEx`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9ex-enumadaptermodesex)&nbsp;→ [`d3d9::IDirect3D9ExExt::enum_adapter_modes_ex`] <br>
-/// * [`GetAdapterDisplayModeEx`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9ex-getadapterdisplaymodeex)&nbsp;→ [`d3d9::IDirect3D9ExExt::get_adapter_display_mode_ex`] <br>
-/// * [`GetAdapterLUID`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9ex-getadapterluid)&nbsp;→ [`d3d9::IDirect3D9ExExt::get_adapter_luid`] <br>
-/// * [`GetAdapterModeCountEx`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9ex-getadaptermodecountex)&nbsp;→ [`d3d9::IDirect3D9ExExt::get_adapter_mode_count_ex`] <br>
+/// [`IDirect3D9Ex`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3d9ex)&nbsp;→ [`d3d9::Direct3DEx`], [`d3d9::IDirect3D9ExExt`] <br>
+/// * [`CreateDeviceEx`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9ex-createdeviceex)&nbsp;→ [`d3d9::IDirect3D9ExExt::create_device_ex`] <br>
+/// * [`EnumAdapterModesEx`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9ex-enumadaptermodesex)&nbsp;→ [`d3d9::IDirect3D9ExExt::enum_adapter_modes_ex`] <br>
+/// * [`GetAdapterDisplayModeEx`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9ex-getadapterdisplaymodeex)&nbsp;→ [`d3d9::IDirect3D9ExExt::get_adapter_display_mode_ex`] <br>
+/// * [`GetAdapterLUID`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9ex-getadapterluid)&nbsp;→ [`d3d9::IDirect3D9ExExt::get_adapter_luid`] <br>
+/// * [`GetAdapterModeCountEx`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9ex-getadaptermodecountex)&nbsp;→ [`d3d9::IDirect3D9ExExt::get_adapter_mode_count_ex`] <br>
 ///
-/// [`IDirect3D9ExOverlayExtension`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3d9exoverlayextension) →&nbsp;❌ <br>
-/// * [`CheckDeviceOverlayType`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3d9exoverlayextension) →&nbsp;❌ <br>
+/// [`IDirect3D9ExOverlayExtension`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3d9exoverlayextension) →&nbsp;❌ <br>
+/// * [`CheckDeviceOverlayType`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3d9exoverlayextension) →&nbsp;❌ <br>
 ///
-/// [`IDirect3DAuthenticatedChannel9`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dauthenticatedchannel9) →&nbsp;❌ <br>
-/// * [`Configure`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dauthenticatedchannel9-configure) →&nbsp;❌ <br>
-/// * [`GetCertificate`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dauthenticatedchannel9-getcertificate) →&nbsp;❌ <br>
-/// * [`GetCertificateSize`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dauthenticatedchannel9-getcertificatesize) →&nbsp;❌ <br>
-/// * [`NegotiateKeyExchange`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dauthenticatedchannel9-negotiatekeyexchange) →&nbsp;❌ <br>
-/// * [`Query`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dauthenticatedchannel9-query) →&nbsp;❌ <br>
+/// [`IDirect3DAuthenticatedChannel9`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dauthenticatedchannel9) →&nbsp;❌ <br>
+/// * [`Configure`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dauthenticatedchannel9-configure) →&nbsp;❌ <br>
+/// * [`GetCertificate`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dauthenticatedchannel9-getcertificate) →&nbsp;❌ <br>
+/// * [`GetCertificateSize`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dauthenticatedchannel9-getcertificatesize) →&nbsp;❌ <br>
+/// * [`NegotiateKeyExchange`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dauthenticatedchannel9-negotiatekeyexchange) →&nbsp;❌ <br>
+/// * [`Query`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dauthenticatedchannel9-query) →&nbsp;❌ <br>
 ///
-/// [`IDirect3DBaseTexture9`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dbasetexture9)&nbsp;→ [`d3d9::BaseTexture`], [`d3d9::IDirect3DBaseTexture9Ext`] <br>
-/// * [`GenerateMipSubLevels`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-generatemipsublevels)&nbsp;→ [`d3d9::IDirect3DBaseTexture9Ext::generate_mip_sub_levels`] <br>
-/// * [`GetAutoGenFilterType`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-getautogenfiltertype)&nbsp;→ [`d3d9::IDirect3DBaseTexture9Ext::get_auto_gen_filter_type`] <br>
-/// * [`GetLOD`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-getlod)&nbsp;→ [`d3d9::IDirect3DBaseTexture9Ext::get_lod`] <br>
-/// * [`GetLevelCount`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-getlevelcount)&nbsp;→ [`d3d9::IDirect3DBaseTexture9Ext::get_level_count`] <br>
-/// * [`SetAutoGenFilterType`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-setautogenfiltertype)&nbsp;→ [`d3d9::IDirect3DBaseTexture9Ext::set_auto_gen_filter_type`] <br>
-/// * [`SetLOD`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-setlod)&nbsp;→ [`d3d9::IDirect3DBaseTexture9Ext::set_lod`] <br>
+/// [`IDirect3DBaseTexture9`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dbasetexture9)&nbsp;→ [`d3d9::BaseTexture`], [`d3d9::IDirect3DBaseTexture9Ext`] <br>
+/// * [`GenerateMipSubLevels`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-generatemipsublevels)&nbsp;→ [`d3d9::IDirect3DBaseTexture9Ext::generate_mip_sub_levels`] <br>
+/// * [`GetAutoGenFilterType`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-getautogenfiltertype)&nbsp;→ [`d3d9::IDirect3DBaseTexture9Ext::get_auto_gen_filter_type`] <br>
+/// * [`GetLOD`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-getlod)&nbsp;→ [`d3d9::IDirect3DBaseTexture9Ext::get_lod`] <br>
+/// * [`GetLevelCount`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-getlevelcount)&nbsp;→ [`d3d9::IDirect3DBaseTexture9Ext::get_level_count`] <br>
+/// * [`SetAutoGenFilterType`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-setautogenfiltertype)&nbsp;→ [`d3d9::IDirect3DBaseTexture9Ext::set_auto_gen_filter_type`] <br>
+/// * [`SetLOD`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dbasetexture9-setlod)&nbsp;→ [`d3d9::IDirect3DBaseTexture9Ext::set_lod`] <br>
 ///
-/// [`IDirect3DCryptoSession9`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dcryptosession9) →&nbsp;❌ <br>
-/// * [`DecryptionBlt`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcryptosession9-decryptionblt) →&nbsp;❌ <br>
-/// * [`EncryptionBlt`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcryptosession9-encryptionblt) →&nbsp;❌ <br>
-/// * [`FinishSessionKeyRefresh`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcryptosession9-finishsessionkeyrefresh) →&nbsp;❌ <br>
-/// * [`GetCertificate`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcryptosession9-getcertificate) →&nbsp;❌ <br>
-/// * [`GetCertificateSize`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcryptosession9-getcertificatesize) →&nbsp;❌ <br>
-/// * [`GetEncryptionBltKey`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcryptosession9-getencryptionbltkey) →&nbsp;❌ <br>
-/// * [`GetSurfacePitch`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcryptosession9-getsurfacepitch) →&nbsp;❌ <br>
-/// * [`NegotiateKeyExchange`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcryptosession9-negotiatekeyexchange) →&nbsp;❌ <br>
-/// * [`StartSessionKeyRefresh`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcryptosession9-startsessionkeyrefresh) →&nbsp;❌ <br>
+/// [`IDirect3DCryptoSession9`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dcryptosession9) →&nbsp;❌ <br>
+/// * [`DecryptionBlt`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcryptosession9-decryptionblt) →&nbsp;❌ <br>
+/// * [`EncryptionBlt`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcryptosession9-encryptionblt) →&nbsp;❌ <br>
+/// * [`FinishSessionKeyRefresh`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcryptosession9-finishsessionkeyrefresh) →&nbsp;❌ <br>
+/// * [`GetCertificate`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcryptosession9-getcertificate) →&nbsp;❌ <br>
+/// * [`GetCertificateSize`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcryptosession9-getcertificatesize) →&nbsp;❌ <br>
+/// * [`GetEncryptionBltKey`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcryptosession9-getencryptionbltkey) →&nbsp;❌ <br>
+/// * [`GetSurfacePitch`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcryptosession9-getsurfacepitch) →&nbsp;❌ <br>
+/// * [`NegotiateKeyExchange`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcryptosession9-negotiatekeyexchange) →&nbsp;❌ <br>
+/// * [`StartSessionKeyRefresh`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcryptosession9-startsessionkeyrefresh) →&nbsp;❌ <br>
 ///
-/// [`IDirect3DCubeTexture9`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dcubetexture9)&nbsp;→ [`d3d9::CubeTexture`], [`d3d9::IDirect3DCubeTexture9Ext`] <br>
-/// * [`AddDirtyRect`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcubetexture9-adddirtyrect)&nbsp;→ [`d3d9::IDirect3DCubeTexture9Ext::add_dirty_rect`] <br>
-/// * [`GetCubeMapSurface`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcubetexture9-getcubemapsurface)&nbsp;→ [`d3d9::IDirect3DCubeTexture9Ext::get_cube_map_surface`] <br>
-/// * [`GetLevelDesc`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcubetexture9-getleveldesc)&nbsp;→ [`d3d9::IDirect3DCubeTexture9Ext::get_level_desc`] <br>
-/// * [`LockRect`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcubetexture9-lockrect)&nbsp;→ [`d3d9::IDirect3DCubeTexture9Ext::lock_rect_unchecked`] <br>
-/// * [`UnlockRect`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcubetexture9-unlockrect)&nbsp;→ [`d3d9::IDirect3DCubeTexture9Ext::unlock_rect`] <br>
+/// [`IDirect3DCubeTexture9`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dcubetexture9)&nbsp;→ [`d3d9::CubeTexture`], [`d3d9::IDirect3DCubeTexture9Ext`] <br>
+/// * [`AddDirtyRect`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcubetexture9-adddirtyrect)&nbsp;→ [`d3d9::IDirect3DCubeTexture9Ext::add_dirty_rect`] <br>
+/// * [`GetCubeMapSurface`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcubetexture9-getcubemapsurface)&nbsp;→ [`d3d9::IDirect3DCubeTexture9Ext::get_cube_map_surface`] <br>
+/// * [`GetLevelDesc`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcubetexture9-getleveldesc)&nbsp;→ [`d3d9::IDirect3DCubeTexture9Ext::get_level_desc`] <br>
+/// * [`LockRect`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcubetexture9-lockrect)&nbsp;→ [`d3d9::IDirect3DCubeTexture9Ext::lock_rect_unchecked`] <br>
+/// * [`UnlockRect`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dcubetexture9-unlockrect)&nbsp;→ [`d3d9::IDirect3DCubeTexture9Ext::unlock_rect`] <br>
 ///
-/// [`IDirect3DDevice9`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3ddevice9)&nbsp;→ [`d3d9::Device`], [`d3d9::IDirect3DDevice9Ext`] <br>
-/// * [`BeginScene`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-beginscene)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::begin_scene`] <br>
-/// * [`BeginStateBlock`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-beginstateblock)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::begin_state_block`] <br>
-/// * [`Clear`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-clear)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::clear`] <br>
-/// * [`ColorFill`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-colorfill)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::color_fill`] <br>
-/// * [`CreateAdditionalSwapChain`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createadditionalswapchain)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::create_additional_swap_chain`] <br>
-/// * [`CreateCubeTexture`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createcubetexture)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::create_cube_texture`], [`d3d9::IDirect3DDevice9Ext::create_cube_texture_from`] <br>
-/// * [`CreateDepthStencilSurface`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createdepthstencilsurface)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::create_depth_stencil_surface`] <br>
-/// * [`CreateIndexBuffer`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createindexbuffer)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::create_index_buffer`], [`d3d9::IDirect3DDevice9Ext::create_index_buffer_from`] <br>
-/// * [`CreateOffscreenPlainSurface`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createoffscreenplainsurface)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::create_offscreen_plain_surface`] <br>
-/// * [`CreatePixelShader`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createpixelshader)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::create_pixel_shader`] <br>
-/// * [`CreateQuery`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createquery)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::create_query`] <br>
-/// * [`CreateRenderTarget`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createrendertarget)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::create_render_target`] <br>
-/// * [`CreateStateBlock`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createstateblock)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::create_state_block`] <br>
-/// * [`CreateTexture`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createtexture)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::create_texture`], [`d3d9::IDirect3DDevice9Ext::create_texture_from`] <br>
-/// * [`CreateVertexBuffer`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createvertexbuffer)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::create_vertex_buffer`], [`d3d9::IDirect3DDevice9Ext::create_vertex_buffer_from`] <br>
-/// * [`CreateVertexDeclaration`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createvertexdeclaration)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::create_vertex_declaration`] <br>
-/// * [`CreateVertexShader`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createvertexshader)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::create_vertex_shader`] <br>
-/// * [`CreateVolumeTexture`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createvolumetexture)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::create_volume_texture`], [`d3d9::IDirect3DDevice9Ext::create_volume_texture_from`] <br>
-/// * [`DeletePatch`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-deletepatch)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::delete_patch`] <br>
-/// * [`DrawIndexedPrimitive`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-drawindexedprimitive)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::draw_indexed_primitive`] <br>
-/// * [`DrawIndexedPrimitiveUP`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-drawindexedprimitiveup)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::draw_indexed_primitive_up`] <br>
-/// * [`DrawPrimitive`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-drawprimitive)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::draw_primitive`] <br>
-/// * [`DrawPrimitiveUP`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-drawprimitiveup)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::draw_primitive_up`] <br>
-/// * [`DrawRectPatch`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-drawrectpatch) →&nbsp;❌ <br>
-/// * [`DrawTriPatch`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-drawtripatch) →&nbsp;❌ <br>
-/// * [`EndScene`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-endscene)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::end_scene`] <br>
-/// * [`EndStateBlock`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-endstateblock)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::end_state_block`] <br>
-/// * [`EvictManagedResources`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-evictmanagedresources)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::evict_managed_resources`] <br>
-/// * [`GetAvailableTextureMem`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getavailabletexturemem)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_available_texture_mem`] <br>
-/// * [`GetBackBuffer`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getbackbuffer)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_back_buffer`] <br>
-/// * [`GetClipPlane`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getclipplane)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_clip_plane`] <br>
-/// * [`GetClipStatus`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getclipstatus)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_clip_status`] <br>
-/// * [`GetCreationParameters`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getcreationparameters)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_creation_parameters`] <br>
-/// * [`GetCurrentTexturePalette`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getcurrenttexturepalette)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_current_texture_palette`] <br>
-/// * [`GetDepthStencilSurface`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getdepthstencilsurface)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_depth_stencil_surface`] <br>
-/// * [`GetDeviceCaps`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getdevicecaps)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_device_caps`] <br>
-/// * [`GetDirect3D`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getdirect3d)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_direct3d`] <br>
-/// * [`GetDisplayMode`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getdisplaymode)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_display_mode`] <br>
-/// * [`GetFVF`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getfvf)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_fvf`] <br>
-/// * [`GetFrontBufferData`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getfrontbufferdata)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_front_buffer_data`] <br>
-/// * [`GetGammaRamp`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getgammaramp)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_gamma_ramp`] <br>
-/// * [`GetIndices`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getindices)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_indices`] <br>
-/// * [`GetLight`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getlight)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_light`], [`d3d9::IDirect3DDevice9Ext::get_light_32`] <br>
-/// * [`GetLightEnable`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getlightenable)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_light_enable`], [`d3d9::IDirect3DDevice9Ext::get_light_enable_32`] <br>
-/// * [`GetMaterial`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getmaterial)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_material`] <br>
-/// * [`GetNPatchMode`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getnpatchmode)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_npatch_mode`] <br>
-/// * [`GetNumberOfSwapChains`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getnumberofswapchains)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_number_of_swap_chains`] <br>
-/// * [`GetPaletteEntries`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getpaletteentries)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_palette_entries_unchecked`] <br>
-/// * [`GetPixelShader`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getpixelshader)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_pixel_shader`] <br>
-/// * [`GetPixelShaderConstantB`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getpixelshaderconstantb)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_pixel_shader_constant_b`] <br>
-/// * [`GetPixelShaderConstantF`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getpixelshaderconstantf)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_pixel_shader_constant_f`] <br>
-/// * [`GetPixelShaderConstantI`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getpixelshaderconstanti)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_pixel_shader_constant_i`] <br>
-/// * [`GetRasterStatus`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getrasterstatus)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_raster_status`] <br>
-/// * [`GetRenderState`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getrenderstate)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_render_state_untyped`] <br>
-/// * [`GetRenderTarget`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getrendertarget)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_render_target`] <br>
-/// * [`GetRenderTargetData`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getrendertargetdata)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_render_target_data`] <br>
-/// * [`GetSamplerState`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getsamplerstate)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_sampler_state_unchecked`], [`d3d9::IDirect3DDevice9Ext::get_sampler_state_untyped`] <br>
-/// * [`GetScissorRect`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getscissorrect)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_scissor_rect`] <br>
-/// * [`GetSoftwareVertexProcessing`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getsoftwarevertexprocessing)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_software_vertex_processing`] <br>
-/// * [`GetStreamSource`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getstreamsource)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_stream_source`] <br>
-/// * [`GetStreamSourceFreq`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getstreamsourcefreq)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_stream_source_freq`] <br>
-/// * [`GetSwapChain`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getswapchain)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_swap_chain`] <br>
-/// * [`GetTexture`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-gettexture)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_texture`], [`d3d9::SafeDevice::get_texture`] <br>
-/// * [`GetTextureStageState`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-gettexturestagestate)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_texture_stage_state_untyped`] <br>
-/// * [`GetTransform`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-gettransform)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_transform`] <br>
-/// * [`GetVertexDeclaration`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getvertexdeclaration)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_vertex_declaration`] <br>
-/// * [`GetVertexShader`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getvertexshader)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_vertex_shader`] <br>
-/// * [`GetVertexShaderConstantB`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getvertexshaderconstantb)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_vertex_shader_constant_b`] <br>
-/// * [`GetVertexShaderConstantF`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getvertexshaderconstantf)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_vertex_shader_constant_f`] <br>
-/// * [`GetVertexShaderConstantI`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getvertexshaderconstanti)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_vertex_shader_constant_i`] <br>
-/// * [`GetViewport`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getviewport)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_viewport`] <br>
-/// * [`LightEnable`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-lightenable)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::light_enable`], [`d3d9::IDirect3DDevice9Ext::light_enable_32_unchecked`] <br>
-/// * [`MultiplyTransform`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-multiplytransform)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::multiply_transform`] <br>
-/// * [`Present`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-present)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::present`] <br>
-/// * [`ProcessVertices`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-processvertices) →&nbsp;❌ <br>
-/// * [`Reset`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-reset)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::reset`] <br>
-/// * [`SetClipPlane`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setclipplane)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_clip_plane`] <br>
-/// * [`SetClipStatus`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setclipstatus)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_clip_status`] <br>
-/// * [`SetCurrentTexturePalette`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setcurrenttexturepalette)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_current_texture_palette_unchecked`] <br>
-/// * [`SetCursorPosition`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setcursorposition)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_cursor_position`] <br>
-/// * [`SetCursorProperties`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setcursorproperties)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_cursor_properties`] <br>
-/// * [`SetDepthStencilSurface`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setdepthstencilsurface)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_depth_stencil_surface`] <br>
-/// * [`SetDialogBoxMode`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setdialogboxmode)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_dialog_box_mode`] <br>
-/// * [`SetFVF`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setfvf)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_fvf`] <br>
-/// * [`SetGammaRamp`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setgammaramp)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_gamma_ramp`] <br>
-/// * [`SetIndices`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setindices)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_indices`] <br>
-/// * [`SetLight`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setlight)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_light`], [`d3d9::IDirect3DDevice9Ext::set_light_32_unchecked`] <br>
-/// * [`SetMaterial`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setmaterial)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_material`] <br>
-/// * [`SetNPatchMode`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setnpatchmode)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_npatch_mode`] <br>
-/// * [`SetPaletteEntries`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setpaletteentries)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_palette_entries`], [`d3d9::IDirect3DDevice9Ext::set_palette_entries_unchecked`] <br>
-/// * [`SetPixelShader`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setpixelshader)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_pixel_shader`] <br>
-/// * [`SetPixelShaderConstantB`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setpixelshaderconstantb)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_pixel_shader_constant_b`] <br>
-/// * [`SetPixelShaderConstantF`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setpixelshaderconstantf)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_pixel_shader_constant_f`] <br>
-/// * [`SetPixelShaderConstantI`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setpixelshaderconstanti)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_pixel_shader_constant_i`] <br>
-/// * [`SetRenderState`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setrenderstate)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_render_state_untyped`] <br>
-/// * [`SetRenderTarget`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setrendertarget)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_render_target`] <br>
-/// * [`SetSamplerState`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setsamplerstate)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_sampler_state_unchecked`], [`d3d9::IDirect3DDevice9Ext::set_sampler_state`] <br>
-/// * [`SetScissorRect`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setscissorrect)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_scissor_rect`] <br>
-/// * [`SetSoftwareVertexProcessing`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setsoftwarevertexprocessing)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_software_vertex_processing`] <br>
-/// * [`SetStreamSource`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setstreamsource)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_stream_source`] <br>
-/// * [`SetStreamSourceFreq`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setstreamsourcefreq)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_stream_source_freq`] <br>
-/// * [`SetTexture`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-settexture)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_texture`], [`d3d9::SafeDevice::set_texture`] <br>
-/// * [`SetTextureStageState`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-settexturestagestate)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_texture_stage_state_untyped`] <br>
-/// * [`SetTransform`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-settransform)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_transform`] <br>
-/// * [`SetVertexDeclaration`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setvertexdeclaration)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_vertex_declaration`] <br>
-/// * [`SetVertexShader`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setvertexshader)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_vertex_shader`] <br>
-/// * [`SetVertexShaderConstantB`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setvertexshaderconstantb)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_vertex_shader_constant_b`] <br>
-/// * [`SetVertexShaderConstantF`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setvertexshaderconstantf)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_vertex_shader_constant_f`] <br>
-/// * [`SetVertexShaderConstantI`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setvertexshaderconstanti)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_vertex_shader_constant_i`] <br>
-/// * [`SetViewport`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setviewport)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_viewport`] <br>
-/// * [`ShowCursor`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-showcursor)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::show_cursor`] <br>
-/// * [`StretchRect`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-stretchrect) →&nbsp;❌ <br>
-/// * [`TestCooperativeLevel`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-testcooperativelevel)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::test_cooperative_level`] <br>
-/// * [`UpdateSurface`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-updatesurface) →&nbsp;❌ <br>
-/// * [`UpdateTexture`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-updatetexture) →&nbsp;❌ <br>
-/// * [`ValidateDevice`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-validatedevice) →&nbsp;❌ <br>
+/// [`IDirect3DDevice9`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3ddevice9)&nbsp;→ [`d3d9::Device`], [`d3d9::IDirect3DDevice9Ext`] <br>
+/// * [`BeginScene`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-beginscene)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::begin_scene`] <br>
+/// * [`BeginStateBlock`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-beginstateblock)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::begin_state_block`] <br>
+/// * [`Clear`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-clear)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::clear`] <br>
+/// * [`ColorFill`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-colorfill)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::color_fill`] <br>
+/// * [`CreateAdditionalSwapChain`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createadditionalswapchain)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::create_additional_swap_chain`] <br>
+/// * [`CreateCubeTexture`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createcubetexture)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::create_cube_texture`], [`d3d9::IDirect3DDevice9Ext::create_cube_texture_from`] <br>
+/// * [`CreateDepthStencilSurface`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createdepthstencilsurface)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::create_depth_stencil_surface`] <br>
+/// * [`CreateIndexBuffer`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createindexbuffer)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::create_index_buffer`], [`d3d9::IDirect3DDevice9Ext::create_index_buffer_from`] <br>
+/// * [`CreateOffscreenPlainSurface`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createoffscreenplainsurface)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::create_offscreen_plain_surface`] <br>
+/// * [`CreatePixelShader`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createpixelshader)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::create_pixel_shader`] <br>
+/// * [`CreateQuery`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createquery)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::create_query`] <br>
+/// * [`CreateRenderTarget`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createrendertarget)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::create_render_target`] <br>
+/// * [`CreateStateBlock`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createstateblock)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::create_state_block`] <br>
+/// * [`CreateTexture`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createtexture)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::create_texture`], [`d3d9::IDirect3DDevice9Ext::create_texture_from`] <br>
+/// * [`CreateVertexBuffer`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createvertexbuffer)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::create_vertex_buffer`], [`d3d9::IDirect3DDevice9Ext::create_vertex_buffer_from`] <br>
+/// * [`CreateVertexDeclaration`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createvertexdeclaration)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::create_vertex_declaration`] <br>
+/// * [`CreateVertexShader`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createvertexshader)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::create_vertex_shader`] <br>
+/// * [`CreateVolumeTexture`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-createvolumetexture)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::create_volume_texture`], [`d3d9::IDirect3DDevice9Ext::create_volume_texture_from`] <br>
+/// * [`DeletePatch`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-deletepatch)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::delete_patch`] <br>
+/// * [`DrawIndexedPrimitive`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-drawindexedprimitive)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::draw_indexed_primitive`] <br>
+/// * [`DrawIndexedPrimitiveUP`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-drawindexedprimitiveup)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::draw_indexed_primitive_up`] <br>
+/// * [`DrawPrimitive`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-drawprimitive)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::draw_primitive`] <br>
+/// * [`DrawPrimitiveUP`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-drawprimitiveup)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::draw_primitive_up`] <br>
+/// * [`DrawRectPatch`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-drawrectpatch) →&nbsp;❌ <br>
+/// * [`DrawTriPatch`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-drawtripatch) →&nbsp;❌ <br>
+/// * [`EndScene`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-endscene)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::end_scene`] <br>
+/// * [`EndStateBlock`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-endstateblock)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::end_state_block`] <br>
+/// * [`EvictManagedResources`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-evictmanagedresources)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::evict_managed_resources`] <br>
+/// * [`GetAvailableTextureMem`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getavailabletexturemem)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_available_texture_mem`] <br>
+/// * [`GetBackBuffer`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getbackbuffer)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_back_buffer`] <br>
+/// * [`GetClipPlane`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getclipplane)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_clip_plane`] <br>
+/// * [`GetClipStatus`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getclipstatus)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_clip_status`] <br>
+/// * [`GetCreationParameters`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getcreationparameters)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_creation_parameters`] <br>
+/// * [`GetCurrentTexturePalette`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getcurrenttexturepalette)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_current_texture_palette`] <br>
+/// * [`GetDepthStencilSurface`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getdepthstencilsurface)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_depth_stencil_surface`] <br>
+/// * [`GetDeviceCaps`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getdevicecaps)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_device_caps`] <br>
+/// * [`GetDirect3D`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getdirect3d)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_direct3d`] <br>
+/// * [`GetDisplayMode`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getdisplaymode)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_display_mode`] <br>
+/// * [`GetFVF`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getfvf)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_fvf`] <br>
+/// * [`GetFrontBufferData`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getfrontbufferdata)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_front_buffer_data`] <br>
+/// * [`GetGammaRamp`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getgammaramp)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_gamma_ramp`] <br>
+/// * [`GetIndices`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getindices)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_indices`] <br>
+/// * [`GetLight`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getlight)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_light`], [`d3d9::IDirect3DDevice9Ext::get_light_32`] <br>
+/// * [`GetLightEnable`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getlightenable)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_light_enable`], [`d3d9::IDirect3DDevice9Ext::get_light_enable_32`] <br>
+/// * [`GetMaterial`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getmaterial)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_material`] <br>
+/// * [`GetNPatchMode`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getnpatchmode)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_npatch_mode`] <br>
+/// * [`GetNumberOfSwapChains`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getnumberofswapchains)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_number_of_swap_chains`] <br>
+/// * [`GetPaletteEntries`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getpaletteentries)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_palette_entries_unchecked`] <br>
+/// * [`GetPixelShader`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getpixelshader)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_pixel_shader`] <br>
+/// * [`GetPixelShaderConstantB`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getpixelshaderconstantb)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_pixel_shader_constant_b`] <br>
+/// * [`GetPixelShaderConstantF`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getpixelshaderconstantf)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_pixel_shader_constant_f`] <br>
+/// * [`GetPixelShaderConstantI`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getpixelshaderconstanti)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_pixel_shader_constant_i`] <br>
+/// * [`GetRasterStatus`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getrasterstatus)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_raster_status`] <br>
+/// * [`GetRenderState`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getrenderstate)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_render_state_untyped`] <br>
+/// * [`GetRenderTarget`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getrendertarget)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_render_target`] <br>
+/// * [`GetRenderTargetData`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getrendertargetdata)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_render_target_data`] <br>
+/// * [`GetSamplerState`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getsamplerstate)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_sampler_state_unchecked`], [`d3d9::IDirect3DDevice9Ext::get_sampler_state_untyped`] <br>
+/// * [`GetScissorRect`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getscissorrect)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_scissor_rect`] <br>
+/// * [`GetSoftwareVertexProcessing`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getsoftwarevertexprocessing)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_software_vertex_processing`] <br>
+/// * [`GetStreamSource`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getstreamsource)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_stream_source`] <br>
+/// * [`GetStreamSourceFreq`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getstreamsourcefreq)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_stream_source_freq`] <br>
+/// * [`GetSwapChain`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getswapchain)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_swap_chain`] <br>
+/// * [`GetTexture`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-gettexture)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_texture`], [`d3d9::SafeDevice::get_texture`] <br>
+/// * [`GetTextureStageState`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-gettexturestagestate)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_texture_stage_state_untyped`] <br>
+/// * [`GetTransform`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-gettransform)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_transform`] <br>
+/// * [`GetVertexDeclaration`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getvertexdeclaration)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_vertex_declaration`] <br>
+/// * [`GetVertexShader`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getvertexshader)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_vertex_shader`] <br>
+/// * [`GetVertexShaderConstantB`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getvertexshaderconstantb)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_vertex_shader_constant_b`] <br>
+/// * [`GetVertexShaderConstantF`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getvertexshaderconstantf)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_vertex_shader_constant_f`] <br>
+/// * [`GetVertexShaderConstantI`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getvertexshaderconstanti)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_vertex_shader_constant_i`] <br>
+/// * [`GetViewport`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-getviewport)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::get_viewport`] <br>
+/// * [`LightEnable`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-lightenable)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::light_enable`], [`d3d9::IDirect3DDevice9Ext::light_enable_32_unchecked`] <br>
+/// * [`MultiplyTransform`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-multiplytransform)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::multiply_transform`] <br>
+/// * [`Present`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-present)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::present`] <br>
+/// * [`ProcessVertices`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-processvertices) →&nbsp;❌ <br>
+/// * [`Reset`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-reset)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::reset`] <br>
+/// * [`SetClipPlane`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setclipplane)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_clip_plane`] <br>
+/// * [`SetClipStatus`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setclipstatus)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_clip_status`] <br>
+/// * [`SetCurrentTexturePalette`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setcurrenttexturepalette)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_current_texture_palette_unchecked`] <br>
+/// * [`SetCursorPosition`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setcursorposition)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_cursor_position`] <br>
+/// * [`SetCursorProperties`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setcursorproperties)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_cursor_properties`] <br>
+/// * [`SetDepthStencilSurface`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setdepthstencilsurface)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_depth_stencil_surface`] <br>
+/// * [`SetDialogBoxMode`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setdialogboxmode)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_dialog_box_mode`] <br>
+/// * [`SetFVF`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setfvf)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_fvf`] <br>
+/// * [`SetGammaRamp`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setgammaramp)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_gamma_ramp`] <br>
+/// * [`SetIndices`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setindices)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_indices`] <br>
+/// * [`SetLight`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setlight)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_light`], [`d3d9::IDirect3DDevice9Ext::set_light_32_unchecked`] <br>
+/// * [`SetMaterial`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setmaterial)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_material`] <br>
+/// * [`SetNPatchMode`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setnpatchmode)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_npatch_mode`] <br>
+/// * [`SetPaletteEntries`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setpaletteentries)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_palette_entries`], [`d3d9::IDirect3DDevice9Ext::set_palette_entries_unchecked`] <br>
+/// * [`SetPixelShader`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setpixelshader)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_pixel_shader`] <br>
+/// * [`SetPixelShaderConstantB`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setpixelshaderconstantb)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_pixel_shader_constant_b`] <br>
+/// * [`SetPixelShaderConstantF`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setpixelshaderconstantf)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_pixel_shader_constant_f`] <br>
+/// * [`SetPixelShaderConstantI`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setpixelshaderconstanti)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_pixel_shader_constant_i`] <br>
+/// * [`SetRenderState`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setrenderstate)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_render_state_untyped`] <br>
+/// * [`SetRenderTarget`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setrendertarget)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_render_target`] <br>
+/// * [`SetSamplerState`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setsamplerstate)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_sampler_state_unchecked`], [`d3d9::IDirect3DDevice9Ext::set_sampler_state`] <br>
+/// * [`SetScissorRect`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setscissorrect)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_scissor_rect`] <br>
+/// * [`SetSoftwareVertexProcessing`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setsoftwarevertexprocessing)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_software_vertex_processing`] <br>
+/// * [`SetStreamSource`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setstreamsource)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_stream_source`] <br>
+/// * [`SetStreamSourceFreq`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setstreamsourcefreq)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_stream_source_freq`] <br>
+/// * [`SetTexture`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-settexture)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_texture`], [`d3d9::SafeDevice::set_texture`] <br>
+/// * [`SetTextureStageState`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-settexturestagestate)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_texture_stage_state_untyped`] <br>
+/// * [`SetTransform`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-settransform)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_transform`] <br>
+/// * [`SetVertexDeclaration`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setvertexdeclaration)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_vertex_declaration`] <br>
+/// * [`SetVertexShader`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setvertexshader)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_vertex_shader`] <br>
+/// * [`SetVertexShaderConstantB`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setvertexshaderconstantb)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_vertex_shader_constant_b`] <br>
+/// * [`SetVertexShaderConstantF`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setvertexshaderconstantf)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_vertex_shader_constant_f`] <br>
+/// * [`SetVertexShaderConstantI`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setvertexshaderconstanti)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_vertex_shader_constant_i`] <br>
+/// * [`SetViewport`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setviewport)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::set_viewport`] <br>
+/// * [`ShowCursor`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-showcursor)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::show_cursor`] <br>
+/// * [`StretchRect`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-stretchrect) →&nbsp;❌ <br>
+/// * [`TestCooperativeLevel`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-testcooperativelevel)&nbsp;→ [`d3d9::IDirect3DDevice9Ext::test_cooperative_level`] <br>
+/// * [`UpdateSurface`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-updatesurface) →&nbsp;❌ <br>
+/// * [`UpdateTexture`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-updatetexture) →&nbsp;❌ <br>
+/// * [`ValidateDevice`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-validatedevice) →&nbsp;❌ <br>
 ///
-/// [`IDirect3DDevice9Ex`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3ddevice9ex)&nbsp;→ [`d3d9::DeviceEx`], [`d3d9::IDirect3DDevice9ExExt`] <br>
-/// * [`CheckDeviceState`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-checkdevicestate)&nbsp;→ [`d3d9::IDirect3DDevice9ExExt::check_device_state`] <br>
-/// * [`CheckResourceResidency`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-checkresourceresidency)&nbsp;→ [`d3d9::IDirect3DDevice9ExExt::_xxx_check_resource_residency`] <br>
-/// * [`ComposeRects`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-composerects)&nbsp;→ [`d3d9::IDirect3DDevice9ExExt::compose_rects`] <br>
-/// * [`CreateDepthStencilSurfaceEx`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-createdepthstencilsurfaceex)&nbsp;→ [`d3d9::IDirect3DDevice9ExExt::create_depth_stencil_surface_ex`] <br>
-/// * [`CreateOffscreenPlainSurfaceEx`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-createoffscreenplainsurfaceex)&nbsp;→ [`d3d9::IDirect3DDevice9ExExt::create_offscreen_plain_surface_ex`] <br>
-/// * [`CreateRenderTargetEx`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-createrendertargetex)&nbsp;→ [`d3d9::IDirect3DDevice9ExExt::create_render_target_ex`] <br>
-/// * [`GetDisplayModeEx`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-getdisplaymodeex)&nbsp;→ [`d3d9::IDirect3DDevice9ExExt::get_display_mode_ex`] <br>
-/// * [`GetGPUThreadPriority`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-getgputhreadpriority)&nbsp;→ [`d3d9::IDirect3DDevice9ExExt::get_gpu_thread_priority`] <br>
-/// * [`GetMaximumFrameLatency`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-getmaximumframelatency)&nbsp;→ [`d3d9::IDirect3DDevice9ExExt::get_maximum_frame_latency`] <br>
-/// * [`PresentEx`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-presentex)&nbsp;→ [`d3d9::IDirect3DDevice9ExExt::present_ex`] <br>
-/// * [`ResetEx`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-resetex)&nbsp;→ [`d3d9::IDirect3DDevice9ExExt::reset_ex`] <br>
-/// * [`SetConvolutionMonoKernel`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-setconvolutionmonokernel)&nbsp;→ [`d3d9::IDirect3DDevice9ExExt::set_convolution_mono_kernel_unweighted`], [`d3d9::IDirect3DDevice9ExExt::set_convolution_mono_kernel`] <br>
-/// * [`SetGPUThreadPriority`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-setgputhreadpriority)&nbsp;→ [`d3d9::IDirect3DDevice9ExExt::set_gpu_thread_priority`] <br>
-/// * [`SetMaximumFrameLatency`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-setmaximumframelatency)&nbsp;→ [`d3d9::IDirect3DDevice9ExExt::set_maximum_frame_latency`] <br>
-/// * [`WaitForVBlank`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-waitforvblank)&nbsp;→ [`d3d9::IDirect3DDevice9ExExt::wait_for_vblank`] <br>
+/// [`IDirect3DDevice9Ex`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3ddevice9ex)&nbsp;→ [`d3d9::DeviceEx`], [`d3d9::IDirect3DDevice9ExExt`] <br>
+/// * [`CheckDeviceState`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-checkdevicestate)&nbsp;→ [`d3d9::IDirect3DDevice9ExExt::check_device_state`] <br>
+/// * [`CheckResourceResidency`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-checkresourceresidency)&nbsp;→ [`d3d9::IDirect3DDevice9ExExt::_xxx_check_resource_residency`] <br>
+/// * [`ComposeRects`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-composerects)&nbsp;→ [`d3d9::IDirect3DDevice9ExExt::compose_rects`] <br>
+/// * [`CreateDepthStencilSurfaceEx`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-createdepthstencilsurfaceex)&nbsp;→ [`d3d9::IDirect3DDevice9ExExt::create_depth_stencil_surface_ex`] <br>
+/// * [`CreateOffscreenPlainSurfaceEx`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-createoffscreenplainsurfaceex)&nbsp;→ [`d3d9::IDirect3DDevice9ExExt::create_offscreen_plain_surface_ex`] <br>
+/// * [`CreateRenderTargetEx`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-createrendertargetex)&nbsp;→ [`d3d9::IDirect3DDevice9ExExt::create_render_target_ex`] <br>
+/// * [`GetDisplayModeEx`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-getdisplaymodeex)&nbsp;→ [`d3d9::IDirect3DDevice9ExExt::get_display_mode_ex`] <br>
+/// * [`GetGPUThreadPriority`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-getgputhreadpriority)&nbsp;→ [`d3d9::IDirect3DDevice9ExExt::get_gpu_thread_priority`] <br>
+/// * [`GetMaximumFrameLatency`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-getmaximumframelatency)&nbsp;→ [`d3d9::IDirect3DDevice9ExExt::get_maximum_frame_latency`] <br>
+/// * [`PresentEx`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-presentex)&nbsp;→ [`d3d9::IDirect3DDevice9ExExt::present_ex`] <br>
+/// * [`ResetEx`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-resetex)&nbsp;→ [`d3d9::IDirect3DDevice9ExExt::reset_ex`] <br>
+/// * [`SetConvolutionMonoKernel`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-setconvolutionmonokernel)&nbsp;→ [`d3d9::IDirect3DDevice9ExExt::set_convolution_mono_kernel_unweighted`], [`d3d9::IDirect3DDevice9ExExt::set_convolution_mono_kernel`] <br>
+/// * [`SetGPUThreadPriority`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-setgputhreadpriority)&nbsp;→ [`d3d9::IDirect3DDevice9ExExt::set_gpu_thread_priority`] <br>
+/// * [`SetMaximumFrameLatency`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-setmaximumframelatency)&nbsp;→ [`d3d9::IDirect3DDevice9ExExt::set_maximum_frame_latency`] <br>
+/// * [`WaitForVBlank`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9ex-waitforvblank)&nbsp;→ [`d3d9::IDirect3DDevice9ExExt::wait_for_vblank`] <br>
 ///
-/// [`IDirect3DDevice9Video`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3ddevice9video) →&nbsp;❌ <br>
-/// * [`CreateAuthenticatedChannel`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9video-createauthenticatedchannel) →&nbsp;❌ <br>
-/// * [`CreateCryptoSession`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9video-createcryptosession) →&nbsp;❌ <br>
-/// * [`GetContentProtectionCaps`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9video-getcontentprotectioncaps) →&nbsp;❌ <br>
+/// [`IDirect3DDevice9Video`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3ddevice9video) →&nbsp;❌ <br>
+/// * [`CreateAuthenticatedChannel`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9video-createauthenticatedchannel) →&nbsp;❌ <br>
+/// * [`CreateCryptoSession`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9video-createcryptosession) →&nbsp;❌ <br>
+/// * [`GetContentProtectionCaps`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9video-getcontentprotectioncaps) →&nbsp;❌ <br>
 ///
-/// [`IDirect3DIndexBuffer9`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dindexbuffer9)&nbsp;→ [`d3d9::IndexBuffer`], [`d3d9::IDirect3DIndexBuffer9Ext`] <br>
-/// * [`GetDesc`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dindexbuffer9-getdesc)&nbsp;→ [`d3d9::IDirect3DIndexBuffer9Ext::get_desc`] <br>
-/// * [`Lock`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dindexbuffer9-lock)&nbsp;→ [`d3d9::IDirect3DIndexBuffer9Ext::lock_unchecked`] <br>
-/// * [`Unlock`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dindexbuffer9-unlock)&nbsp;→ [`d3d9::IDirect3DIndexBuffer9Ext::unlock`] <br>
+/// [`IDirect3DIndexBuffer9`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dindexbuffer9)&nbsp;→ [`d3d9::IndexBuffer`], [`d3d9::IDirect3DIndexBuffer9Ext`] <br>
+/// * [`GetDesc`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dindexbuffer9-getdesc)&nbsp;→ [`d3d9::IDirect3DIndexBuffer9Ext::get_desc`] <br>
+/// * [`Lock`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dindexbuffer9-lock)&nbsp;→ [`d3d9::IDirect3DIndexBuffer9Ext::lock_unchecked`] <br>
+/// * [`Unlock`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dindexbuffer9-unlock)&nbsp;→ [`d3d9::IDirect3DIndexBuffer9Ext::unlock`] <br>
 ///
-/// [`IDirect3DPixelShader9`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dpixelshader9)&nbsp;→ [`d3d9::PixelShader`], [`d3d9::IDirect3DPixelShader9Ext`] <br>
-/// * [`GetDevice`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dpixelshader9-getdevice)&nbsp;→ [`d3d9::IDirect3DPixelShader9Ext::get_device`] <br>
-/// * [`GetFunction`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dpixelshader9-getfunction)&nbsp;→ [`d3d9::IDirect3DPixelShader9Ext::get_function_size`], [`d3d9::IDirect3DPixelShader9Ext::get_function_inplace`], [`d3d9::IDirect3DPixelShader9Ext::get_function`] <br>
+/// [`IDirect3DPixelShader9`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dpixelshader9)&nbsp;→ [`d3d9::PixelShader`], [`d3d9::IDirect3DPixelShader9Ext`] <br>
+/// * [`GetDevice`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dpixelshader9-getdevice)&nbsp;→ [`d3d9::IDirect3DPixelShader9Ext::get_device`] <br>
+/// * [`GetFunction`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dpixelshader9-getfunction)&nbsp;→ [`d3d9::IDirect3DPixelShader9Ext::get_function_size`], [`d3d9::IDirect3DPixelShader9Ext::get_function_inplace`], [`d3d9::IDirect3DPixelShader9Ext::get_function`] <br>
 ///
-/// [`IDirect3DQuery9`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dquery9)&nbsp;→ [`d3d9::Query`], [`d3d9::IDirect3DQuery9Ext`] <br>
-/// * [`GetData`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dquery9-getdata)&nbsp;→ [`d3d9::IDirect3DQuery9Ext::get_data_inplace`] <br>
-/// * [`GetDataSize`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dquery9-getdatasize)&nbsp;→ [`d3d9::IDirect3DQuery9Ext::get_data_size`] <br>
-/// * [`GetDevice`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dquery9-getdevice)&nbsp;→ [`d3d9::IDirect3DQuery9Ext::get_device`] <br>
-/// * [`GetType`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dquery9-gettype)&nbsp;→ [`d3d9::IDirect3DQuery9Ext::get_type`] <br>
-/// * [`Issue`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dquery9-issue)&nbsp;→ [`d3d9::IDirect3DQuery9Ext::issue`] <br>
+/// [`IDirect3DQuery9`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dquery9)&nbsp;→ [`d3d9::Query`], [`d3d9::IDirect3DQuery9Ext`] <br>
+/// * [`GetData`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dquery9-getdata)&nbsp;→ [`d3d9::IDirect3DQuery9Ext::get_data_inplace`] <br>
+/// * [`GetDataSize`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dquery9-getdatasize)&nbsp;→ [`d3d9::IDirect3DQuery9Ext::get_data_size`] <br>
+/// * [`GetDevice`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dquery9-getdevice)&nbsp;→ [`d3d9::IDirect3DQuery9Ext::get_device`] <br>
+/// * [`GetType`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dquery9-gettype)&nbsp;→ [`d3d9::IDirect3DQuery9Ext::get_type`] <br>
+/// * [`Issue`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dquery9-issue)&nbsp;→ [`d3d9::IDirect3DQuery9Ext::issue`] <br>
 ///
-/// [`IDirect3DResource9`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dresource9)&nbsp;→ [`d3d9::Resource`], [`d3d9::IDirect3DResource9Ext`] <br>
-/// * [`FreePrivateData`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-freeprivatedata)&nbsp;→ [`d3d9::IDirect3DResource9Ext::free_private_data`] <br>
-/// * [`GetDevice`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-getdevice)&nbsp;→ [`d3d9::IDirect3DResource9Ext::get_device`] <br>
-/// * [`GetPriority`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-getpriority)&nbsp;→ [`d3d9::IDirect3DResource9Ext::get_priority`] <br>
-/// * [`GetPrivateData`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-getprivatedata)&nbsp;→ [`d3d9::IDirect3DResource9Ext::get_private_data_inplace`] <br>
-/// * [`GetType`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-gettype)&nbsp;→ [`d3d9::IDirect3DResource9Ext::get_type`] <br>
-/// * [`PreLoad`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-preload)&nbsp;→ [`d3d9::IDirect3DResource9Ext::preload`] <br>
-/// * [`SetPriority`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-setpriority)&nbsp;→ [`d3d9::IDirect3DResource9Ext::set_priority`] <br>
-/// * [`SetPrivateData`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-setprivatedata)&nbsp;→ [`d3d9::IDirect3DResource9Ext::set_private_data`], [`d3d9::IDirect3DResource9Ext::set_private_data_com`], [`d3d9::IDirect3DResource9Ext::set_object_name`], [`d3d9::IDirect3DResource9Ext::set_object_name_a`], [`d3d9::IDirect3DResource9Ext::set_object_name_w`] <br>
+/// [`IDirect3DResource9`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dresource9)&nbsp;→ [`d3d9::Resource`], [`d3d9::IDirect3DResource9Ext`] <br>
+/// * [`FreePrivateData`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-freeprivatedata)&nbsp;→ [`d3d9::IDirect3DResource9Ext::free_private_data`] <br>
+/// * [`GetDevice`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-getdevice)&nbsp;→ [`d3d9::IDirect3DResource9Ext::get_device`] <br>
+/// * [`GetPriority`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-getpriority)&nbsp;→ [`d3d9::IDirect3DResource9Ext::get_priority`] <br>
+/// * [`GetPrivateData`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-getprivatedata)&nbsp;→ [`d3d9::IDirect3DResource9Ext::get_private_data_inplace`] <br>
+/// * [`GetType`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-gettype)&nbsp;→ [`d3d9::IDirect3DResource9Ext::get_type`] <br>
+/// * [`PreLoad`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-preload)&nbsp;→ [`d3d9::IDirect3DResource9Ext::preload`] <br>
+/// * [`SetPriority`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-setpriority)&nbsp;→ [`d3d9::IDirect3DResource9Ext::set_priority`] <br>
+/// * [`SetPrivateData`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-setprivatedata)&nbsp;→ [`d3d9::IDirect3DResource9Ext::set_private_data`], [`d3d9::IDirect3DResource9Ext::set_private_data_com`], [`d3d9::IDirect3DResource9Ext::set_object_name`], [`d3d9::IDirect3DResource9Ext::set_object_name_a`], [`d3d9::IDirect3DResource9Ext::set_object_name_w`] <br>
 ///
-/// [`IDirect3DStateBlock9`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dstateblock9)&nbsp;→ [`d3d9::StateBlock`], [`d3d9::IDirect3DStateBlock9Ext`] <br>
-/// * [`Apply`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dstateblock9-apply)&nbsp;→ [`d3d9::IDirect3DStateBlock9Ext::apply`] <br>
-/// * [`Capture`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dstateblock9-capture)&nbsp;→ [`d3d9::IDirect3DStateBlock9Ext::capture`] <br>
-/// * [`GetDevice`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dstateblock9-getdevice)&nbsp;→ [`d3d9::IDirect3DStateBlock9Ext::get_device`] <br>
+/// [`IDirect3DStateBlock9`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dstateblock9)&nbsp;→ [`d3d9::StateBlock`], [`d3d9::IDirect3DStateBlock9Ext`] <br>
+/// * [`Apply`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dstateblock9-apply)&nbsp;→ [`d3d9::IDirect3DStateBlock9Ext::apply`] <br>
+/// * [`Capture`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dstateblock9-capture)&nbsp;→ [`d3d9::IDirect3DStateBlock9Ext::capture`] <br>
+/// * [`GetDevice`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dstateblock9-getdevice)&nbsp;→ [`d3d9::IDirect3DStateBlock9Ext::get_device`] <br>
 ///
-/// [`IDirect3DSurface9`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dsurface9)&nbsp;→ [`d3d9::Surface`], [`d3d9::IDirect3DSurface9Ext`] <br>
-/// * [`GetContainer`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dsurface9-getcontainer)&nbsp;→ [`d3d9::IDirect3DSurface9Ext::get_container`] <br>
-/// * [`GetDC`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dsurface9-getdc)&nbsp;→ [`d3d9::IDirect3DSurface9Ext::get_dc`] <br>
-/// * [`GetDesc`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dsurface9-getdesc)&nbsp;→ [`d3d9::IDirect3DSurface9Ext::get_desc`] <br>
-/// * [`LockRect`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dsurface9-lockrect)&nbsp;→ [`d3d9::IDirect3DSurface9Ext::lock_rect_unchecked`] <br>
-/// * [`ReleaseDC`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dsurface9-releasedc)&nbsp;→ [`d3d9::IDirect3DSurface9Ext::release_dc`] <br>
-/// * [`UnlockRect`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dsurface9-unlockrect)&nbsp;→ [`d3d9::IDirect3DSurface9Ext::unlock_rect`] <br>
+/// [`IDirect3DSurface9`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dsurface9)&nbsp;→ [`d3d9::Surface`], [`d3d9::IDirect3DSurface9Ext`] <br>
+/// * [`GetContainer`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dsurface9-getcontainer)&nbsp;→ [`d3d9::IDirect3DSurface9Ext::get_container`] <br>
+/// * [`GetDC`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dsurface9-getdc)&nbsp;→ [`d3d9::IDirect3DSurface9Ext::get_dc`] <br>
+/// * [`GetDesc`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dsurface9-getdesc)&nbsp;→ [`d3d9::IDirect3DSurface9Ext::get_desc`] <br>
+/// * [`LockRect`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dsurface9-lockrect)&nbsp;→ [`d3d9::IDirect3DSurface9Ext::lock_rect_unchecked`] <br>
+/// * [`ReleaseDC`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dsurface9-releasedc)&nbsp;→ [`d3d9::IDirect3DSurface9Ext::release_dc`] <br>
+/// * [`UnlockRect`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dsurface9-unlockrect)&nbsp;→ [`d3d9::IDirect3DSurface9Ext::unlock_rect`] <br>
 ///
-/// [`IDirect3DSwapChain9`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dswapchain9)&nbsp;→ [`d3d9::SwapChain`], [`d3d9::IDirect3DSwapChain9Ext`] <br>
-/// * [`GetBackBuffer`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getbackbuffer)&nbsp;→ [`d3d9::IDirect3DSwapChain9Ext::get_back_buffer`] <br>
-/// * [`GetDevice`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getdevice)&nbsp;→ [`d3d9::IDirect3DSwapChain9Ext::get_device`] <br>
-/// * [`GetDisplayMode`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getdisplaymode)&nbsp;→ [`d3d9::IDirect3DSwapChain9Ext::get_display_mode`] <br>
-/// * [`GetFrontBufferData`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getfrontbufferdata)&nbsp;→ [`d3d9::IDirect3DSwapChain9Ext::get_front_buffer_data`] <br>
-/// * [`GetPresentParameters`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getpresentparameters)&nbsp;→ [`d3d9::IDirect3DSwapChain9Ext::get_present_parameters`] <br>
-/// * [`GetRasterStatus`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getrasterstatus)&nbsp;→ [`d3d9::IDirect3DSwapChain9Ext::get_raster_status`] <br>
-/// * [`Present`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-present)&nbsp;→ [`d3d9::IDirect3DSwapChain9Ext::present`] <br>
+/// [`IDirect3DSwapChain9`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dswapchain9)&nbsp;→ [`d3d9::SwapChain`], [`d3d9::IDirect3DSwapChain9Ext`] <br>
+/// * [`GetBackBuffer`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getbackbuffer)&nbsp;→ [`d3d9::IDirect3DSwapChain9Ext::get_back_buffer`] <br>
+/// * [`GetDevice`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getdevice)&nbsp;→ [`d3d9::IDirect3DSwapChain9Ext::get_device`] <br>
+/// * [`GetDisplayMode`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getdisplaymode)&nbsp;→ [`d3d9::IDirect3DSwapChain9Ext::get_display_mode`] <br>
+/// * [`GetFrontBufferData`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getfrontbufferdata)&nbsp;→ [`d3d9::IDirect3DSwapChain9Ext::get_front_buffer_data`] <br>
+/// * [`GetPresentParameters`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getpresentparameters)&nbsp;→ [`d3d9::IDirect3DSwapChain9Ext::get_present_parameters`] <br>
+/// * [`GetRasterStatus`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-getrasterstatus)&nbsp;→ [`d3d9::IDirect3DSwapChain9Ext::get_raster_status`] <br>
+/// * [`Present`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9-present)&nbsp;→ [`d3d9::IDirect3DSwapChain9Ext::present`] <br>
 ///
-/// [`IDirect3DSwapChain9Ex`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dswapchain9ex)&nbsp;→ [`d3d9::SwapChainEx`], [`d3d9::IDirect3DSwapChain9ExExt`] <br>
-/// * [`GetDisplayModeEx`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9ex-getdisplaymodeex)&nbsp;→ [`d3d9::IDirect3DSwapChain9ExExt::get_display_mode_ex`] <br>
-/// * [`GetLastPresentCount`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9ex-getlastpresentcount)&nbsp;→ [`d3d9::IDirect3DSwapChain9ExExt::get_last_present_count`] <br>
-/// * [`GetPresentStats`](https://docs.microsoft.com/en-us/previous-versions/windows/desktop/legacy/bb205901(v=vs.85))&nbsp;→ [`d3d9::IDirect3DSwapChain9ExExt::get_present_statistics`] <br>
+/// [`IDirect3DSwapChain9Ex`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dswapchain9ex)&nbsp;→ [`d3d9::SwapChainEx`], [`d3d9::IDirect3DSwapChain9ExExt`] <br>
+/// * [`GetDisplayModeEx`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9ex-getdisplaymodeex)&nbsp;→ [`d3d9::IDirect3DSwapChain9ExExt::get_display_mode_ex`] <br>
+/// * [`GetLastPresentCount`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9ex-getlastpresentcount)&nbsp;→ [`d3d9::IDirect3DSwapChain9ExExt::get_last_present_count`] <br>
+/// * [`GetPresentStats`](https://learn.microsoft.com/en-us/previous-versions/windows/desktop/legacy/bb205901(v=vs.85))&nbsp;→ [`d3d9::IDirect3DSwapChain9ExExt::get_present_statistics`] <br>
 ///
-/// [`IDirect3DTexture9`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dtexture9)&nbsp;→ [`d3d9::Texture`], [`d3d9::IDirect3DTexture9Ext`] <br>
-/// * [`AddDirtyRect`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dtexture9-adddirtyrect)&nbsp;→ [`d3d9::IDirect3DTexture9Ext::add_dirty_rect`] <br>
-/// * [`GetLevelDesc`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dtexture9-getleveldesc)&nbsp;→ [`d3d9::IDirect3DTexture9Ext::get_level_desc`] <br>
-/// * [`GetSurfaceLevel`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dtexture9-getsurfacelevel)&nbsp;→ [`d3d9::IDirect3DTexture9Ext::get_surface_level`] <br>
-/// * [`LockRect`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dtexture9-lockrect)&nbsp;→ [`d3d9::IDirect3DTexture9Ext::lock_rect_unchecked`] <br>
-/// * [`UnlockRect`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dtexture9-unlockrect)&nbsp;→ [`d3d9::IDirect3DTexture9Ext::unlock_rect`] <br>
+/// [`IDirect3DTexture9`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dtexture9)&nbsp;→ [`d3d9::Texture`], [`d3d9::IDirect3DTexture9Ext`] <br>
+/// * [`AddDirtyRect`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dtexture9-adddirtyrect)&nbsp;→ [`d3d9::IDirect3DTexture9Ext::add_dirty_rect`] <br>
+/// * [`GetLevelDesc`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dtexture9-getleveldesc)&nbsp;→ [`d3d9::IDirect3DTexture9Ext::get_level_desc`] <br>
+/// * [`GetSurfaceLevel`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dtexture9-getsurfacelevel)&nbsp;→ [`d3d9::IDirect3DTexture9Ext::get_surface_level`] <br>
+/// * [`LockRect`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dtexture9-lockrect)&nbsp;→ [`d3d9::IDirect3DTexture9Ext::lock_rect_unchecked`] <br>
+/// * [`UnlockRect`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dtexture9-unlockrect)&nbsp;→ [`d3d9::IDirect3DTexture9Ext::unlock_rect`] <br>
 ///
-/// [`IDirect3DVertexBuffer9`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dvertexbuffer9)&nbsp;→ [`d3d9::VertexBuffer`], [`d3d9::IDirect3DVertexBuffer9Ext`] <br>
-/// * [`GetDesc`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexbuffer9-getdesc)&nbsp;→ [`d3d9::IDirect3DVertexBuffer9Ext::get_desc`] <br>
-/// * [`Lock`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexbuffer9-lock)&nbsp;→ [`d3d9::IDirect3DVertexBuffer9Ext::lock_unchecked`] <br>
-/// * [`Unlock`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexbuffer9-unlock)&nbsp;→ [`d3d9::IDirect3DVertexBuffer9Ext::unlock`] <br>
+/// [`IDirect3DVertexBuffer9`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dvertexbuffer9)&nbsp;→ [`d3d9::VertexBuffer`], [`d3d9::IDirect3DVertexBuffer9Ext`] <br>
+/// * [`GetDesc`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexbuffer9-getdesc)&nbsp;→ [`d3d9::IDirect3DVertexBuffer9Ext::get_desc`] <br>
+/// * [`Lock`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexbuffer9-lock)&nbsp;→ [`d3d9::IDirect3DVertexBuffer9Ext::lock_unchecked`] <br>
+/// * [`Unlock`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexbuffer9-unlock)&nbsp;→ [`d3d9::IDirect3DVertexBuffer9Ext::unlock`] <br>
 ///
-/// [`IDirect3DVertexDeclaration9`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dvertexdeclaration9)&nbsp;→ [`d3d9::VertexDeclaration`], [`d3d9::IDirect3DVertexDeclaration9Ext`] <br>
-/// * [`GetDeclaration`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexdeclaration9-getdeclaration)&nbsp;→ [`d3d9::IDirect3DVertexDeclaration9Ext::get_declaration_size`], [`d3d9::IDirect3DVertexDeclaration9Ext::get_declaration_inplace`], [`d3d9::IDirect3DVertexDeclaration9Ext::get_declaration`] <br>
-/// * [`GetDevice`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexdeclaration9-getdevice)&nbsp;→ [`d3d9::IDirect3DVertexDeclaration9Ext::get_device`] <br>
+/// [`IDirect3DVertexDeclaration9`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dvertexdeclaration9)&nbsp;→ [`d3d9::VertexDeclaration`], [`d3d9::IDirect3DVertexDeclaration9Ext`] <br>
+/// * [`GetDeclaration`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexdeclaration9-getdeclaration)&nbsp;→ [`d3d9::IDirect3DVertexDeclaration9Ext::get_declaration_size`], [`d3d9::IDirect3DVertexDeclaration9Ext::get_declaration_inplace`], [`d3d9::IDirect3DVertexDeclaration9Ext::get_declaration`] <br>
+/// * [`GetDevice`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexdeclaration9-getdevice)&nbsp;→ [`d3d9::IDirect3DVertexDeclaration9Ext::get_device`] <br>
 ///
-/// [`IDirect3DVertexShader9`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dvertexshader9)&nbsp;→ [`d3d9::VertexShader`], [`d3d9::IDirect3DVertexShader9Ext`] <br>
-/// * [`GetDevice`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexshader9-getdevice)&nbsp;→ [`d3d9::IDirect3DVertexShader9Ext::get_device`] <br>
-/// * [`GetFunction`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexshader9-getfunction)&nbsp;→ [`d3d9::IDirect3DVertexShader9Ext::get_function_size`], [`d3d9::IDirect3DVertexShader9Ext::get_function_inplace`], [`d3d9::IDirect3DVertexShader9Ext::get_function`] <br>
+/// [`IDirect3DVertexShader9`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dvertexshader9)&nbsp;→ [`d3d9::VertexShader`], [`d3d9::IDirect3DVertexShader9Ext`] <br>
+/// * [`GetDevice`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexshader9-getdevice)&nbsp;→ [`d3d9::IDirect3DVertexShader9Ext::get_device`] <br>
+/// * [`GetFunction`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexshader9-getfunction)&nbsp;→ [`d3d9::IDirect3DVertexShader9Ext::get_function_size`], [`d3d9::IDirect3DVertexShader9Ext::get_function_inplace`], [`d3d9::IDirect3DVertexShader9Ext::get_function`] <br>
 ///
-/// [`IDirect3DVolume9`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dvolume9)&nbsp;→ [`d3d9::Volume`], [`d3d9::IDirect3DVolume9Ext`] <br>
-/// * [`FreePrivateData`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-freeprivatedata)&nbsp;→ [`d3d9::IDirect3DVolume9Ext::free_private_data`] <br>
-/// * [`GetContainer`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-getcontainer)&nbsp;→ [`d3d9::IDirect3DVolume9Ext::get_container`] <br>
-/// * [`GetDesc`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-getdesc)&nbsp;→ [`d3d9::IDirect3DVolume9Ext::get_desc`] <br>
-/// * [`GetDevice`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-getdevice)&nbsp;→ [`d3d9::IDirect3DVolume9Ext::get_device`] <br>
-/// * [`GetPrivateData`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-getprivatedata)&nbsp;→ [`d3d9::IDirect3DVolume9Ext::get_private_data_inplace`] <br>
-/// * [`LockBox`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-lockbox)&nbsp;→ [`d3d9::IDirect3DVolume9Ext::lock_box_unchecked`] <br>
-/// * [`SetPrivateData`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-setprivatedata)&nbsp;→ [`d3d9::IDirect3DVolume9Ext::set_private_data`], [`d3d9::IDirect3DVolume9Ext::set_private_data_com`], [`d3d9::IDirect3DVolume9Ext::set_object_name`], [`d3d9::IDirect3DVolume9Ext::set_object_name_a`], [`d3d9::IDirect3DVolume9Ext::set_object_name_w`] <br>
-/// * [`UnlockBox`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-unlockbox)&nbsp;→ [`d3d9::IDirect3DVolume9Ext::unlock_box`] <br>
+/// [`IDirect3DVolume9`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dvolume9)&nbsp;→ [`d3d9::Volume`], [`d3d9::IDirect3DVolume9Ext`] <br>
+/// * [`FreePrivateData`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-freeprivatedata)&nbsp;→ [`d3d9::IDirect3DVolume9Ext::free_private_data`] <br>
+/// * [`GetContainer`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-getcontainer)&nbsp;→ [`d3d9::IDirect3DVolume9Ext::get_container`] <br>
+/// * [`GetDesc`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-getdesc)&nbsp;→ [`d3d9::IDirect3DVolume9Ext::get_desc`] <br>
+/// * [`GetDevice`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-getdevice)&nbsp;→ [`d3d9::IDirect3DVolume9Ext::get_device`] <br>
+/// * [`GetPrivateData`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-getprivatedata)&nbsp;→ [`d3d9::IDirect3DVolume9Ext::get_private_data_inplace`] <br>
+/// * [`LockBox`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-lockbox)&nbsp;→ [`d3d9::IDirect3DVolume9Ext::lock_box_unchecked`] <br>
+/// * [`SetPrivateData`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-setprivatedata)&nbsp;→ [`d3d9::IDirect3DVolume9Ext::set_private_data`], [`d3d9::IDirect3DVolume9Ext::set_private_data_com`], [`d3d9::IDirect3DVolume9Ext::set_object_name`], [`d3d9::IDirect3DVolume9Ext::set_object_name_a`], [`d3d9::IDirect3DVolume9Ext::set_object_name_w`] <br>
+/// * [`UnlockBox`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-unlockbox)&nbsp;→ [`d3d9::IDirect3DVolume9Ext::unlock_box`] <br>
 ///
-/// [`IDirect3DVolumeTexture9`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dvolumetexture9)&nbsp;→ [`d3d9::VolumeTexture`], [`d3d9::IDirect3DVolumeTexture9Ext`] <br>
-/// * [`AddDirtyBox`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolumetexture9-adddirtybox)&nbsp;→ [`d3d9::IDirect3DVolumeTexture9Ext::add_dirty_box`] <br>
-/// * [`GetLevelDesc`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolumetexture9-getleveldesc)&nbsp;→ [`d3d9::IDirect3DVolumeTexture9Ext::get_level_desc`] <br>
-/// * [`GetVolumeLevel`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolumetexture9-getvolumelevel)&nbsp;→ [`d3d9::IDirect3DVolumeTexture9Ext::get_volume_level`] <br>
-/// * [`LockBox`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolumetexture9-lockbox)&nbsp;→ [`d3d9::IDirect3DVolumeTexture9Ext::lock_box_unchecked`] <br>
-/// * [`UnlockBox`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolumetexture9-unlockbox)&nbsp;→ [`d3d9::IDirect3DVolumeTexture9Ext::unlock_box`] <br>
+/// [`IDirect3DVolumeTexture9`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dvolumetexture9)&nbsp;→ [`d3d9::VolumeTexture`], [`d3d9::IDirect3DVolumeTexture9Ext`] <br>
+/// * [`AddDirtyBox`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolumetexture9-adddirtybox)&nbsp;→ [`d3d9::IDirect3DVolumeTexture9Ext::add_dirty_box`] <br>
+/// * [`GetLevelDesc`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolumetexture9-getleveldesc)&nbsp;→ [`d3d9::IDirect3DVolumeTexture9Ext::get_level_desc`] <br>
+/// * [`GetVolumeLevel`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolumetexture9-getvolumelevel)&nbsp;→ [`d3d9::IDirect3DVolumeTexture9Ext::get_volume_level`] <br>
+/// * [`LockBox`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolumetexture9-lockbox)&nbsp;→ [`d3d9::IDirect3DVolumeTexture9Ext::lock_box_unchecked`] <br>
+/// * [`UnlockBox`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolumetexture9-unlockbox)&nbsp;→ [`d3d9::IDirect3DVolumeTexture9Ext::unlock_box`] <br>
 ///
 /// ### C++ Functions → Rust Fns
 ///
-/// [`D3DPERF_BeginEvent`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_beginevent)&nbsp;→ [`d3d::perf::begin_event`], [`d3d::perf::event_scope`], [`d3d::perf::event_scope_if`] <br>
-/// [`D3DPERF_EndEvent`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_endevent)&nbsp;→ [`d3d::perf::EventScope::close_unchecked`], [`d3d::perf::EventScope::close`], [`d3d::perf::EventScope::drop`], [`d3d::perf::end_event`] <br>
-/// [`D3DPERF_GetStatus`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_getstatus)&nbsp;→ [`d3d::perf::get_status`] <br>
-/// [`D3DPERF_QueryRepeatFrame`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_queryrepeatframe)&nbsp;→ [`d3d::perf::query_repeat_frame`] <br>
-/// [`D3DPERF_SetMarker`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_setmarker)&nbsp;→ [`d3d::perf::set_marker`] <br>
-/// [`D3DPERF_SetOptions`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_setoptions)&nbsp;→ [`d3d::perf::set_options`] <br>
-/// [`D3DPERF_SetRegion`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_setregion)&nbsp;→ [`d3d::perf::set_region`] <br>
-/// [`Direct3DCreate9`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-direct3dcreate9)&nbsp;→ [`d3d9::IDirect3D9Ext::create`] <br>
-/// [`Direct3DCreate9Ex`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-direct3dcreate9ex)&nbsp;→ [`d3d9::IDirect3D9ExExt::create_ex`] <br>
+/// [`D3DPERF_BeginEvent`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_beginevent)&nbsp;→ [`d3d::perf::begin_event`], [`d3d::perf::event_scope`], [`d3d::perf::event_scope_if`] <br>
+/// [`D3DPERF_EndEvent`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_endevent)&nbsp;→ [`d3d::perf::EventScope::close_unchecked`], [`d3d::perf::EventScope::close`], [`d3d::perf::EventScope::drop`], [`d3d::perf::end_event`] <br>
+/// [`D3DPERF_GetStatus`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_getstatus)&nbsp;→ [`d3d::perf::get_status`] <br>
+/// [`D3DPERF_QueryRepeatFrame`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_queryrepeatframe)&nbsp;→ [`d3d::perf::query_repeat_frame`] <br>
+/// [`D3DPERF_SetMarker`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_setmarker)&nbsp;→ [`d3d::perf::set_marker`] <br>
+/// [`D3DPERF_SetOptions`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_setoptions)&nbsp;→ [`d3d::perf::set_options`] <br>
+/// [`D3DPERF_SetRegion`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_setregion)&nbsp;→ [`d3d::perf::set_region`] <br>
+/// [`Direct3DCreate9`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-direct3dcreate9)&nbsp;→ [`d3d9::IDirect3D9Ext::create`] <br>
+/// [`Direct3DCreate9Ex`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-direct3dcreate9ex)&nbsp;→ [`d3d9::IDirect3D9ExExt::create_ex`] <br>
 /// ### C++ Constants → Rust Constants
 ///
 /// `D3D9b_SDK_VERSION`&nbsp;→ [`d3d::SdkVersion::DEFAULT9B`] <br>
@@ -1231,11 +1231,11 @@ pub const d3d9_h : cxx_header = cxx_header;
 ///
 /// ### C++ Structs -> Rust Structs
 ///
-/// [`D3DCAPS9`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9caps/ns-d3d9caps-d3dcaps9)&nbsp;→ [`d3d9::Caps`] <br>
+/// [`D3DCAPS9`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9caps/ns-d3d9caps-d3dcaps9)&nbsp;→ [`d3d9::Caps`] <br>
 /// `D3DCONTENTPROTECTIONCAPS` →&nbsp;❌ <br>
 /// `D3DOVERLAYCAPS` →&nbsp;❌ <br>
-/// [`D3DPSHADERCAPS2_0`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9caps/ns-d3d9caps-d3dpshadercaps2_0)&nbsp;→ [`d3d::PShaderCaps20`] <br>
-/// [`D3DVSHADERCAPS2_0`](https://docs.microsoft.com/en-us/windows/win32/api/d3d9caps/ns-d3d9caps-d3dvshadercaps2_0)&nbsp;→ [`d3d::VShaderCaps20`] <br>
+/// [`D3DPSHADERCAPS2_0`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9caps/ns-d3d9caps-d3dpshadercaps2_0)&nbsp;→ [`d3d::PShaderCaps20`] <br>
+/// [`D3DVSHADERCAPS2_0`](https://learn.microsoft.com/en-us/windows/win32/api/d3d9caps/ns-d3d9caps-d3dvshadercaps2_0)&nbsp;→ [`d3d::VShaderCaps20`] <br>
 /// ### C++ Constants → Rust Constants
 ///
 /// `D3DCAPS2_CANAUTOGENMIPMAP`&nbsp;→ [`d3d::Caps2::CanAutoGenMipMap`] <br>
@@ -1495,7 +1495,7 @@ pub const d3d9caps_h : cxx_header = cxx_header;
 ///
 /// ### C++ Structs -> Rust Structs
 ///
-/// [`D3DADAPTER_IDENTIFIER9`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dadapter-identifier9)&nbsp;→ [`d3d::AdapterIdentifier`] <br>
+/// [`D3DADAPTER_IDENTIFIER9`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dadapter-identifier9)&nbsp;→ [`d3d::AdapterIdentifier`] <br>
 /// `D3DAES_CTR_IV` →&nbsp;❌ <br>
 /// `D3DAUTHENTICATEDCHANNEL_CONFIGURECRYPTOSESSION` →&nbsp;❌ <br>
 /// `D3DAUTHENTICATEDCHANNEL_CONFIGUREINITIALIZE` →&nbsp;❌ <br>
@@ -1525,12 +1525,12 @@ pub const d3d9caps_h : cxx_header = cxx_header;
 /// `D3DAUTHENTICATEDCHANNEL_QUERYUNRESTRICTEDPROTECTEDSHAREDRESOURCECOUNT_OUTPUT` →&nbsp;❌ <br>
 /// `D3DAUTHENTICATEDCHANNEL_QUERY_INPUT` →&nbsp;❌ <br>
 /// `D3DAUTHENTICATEDCHANNEL_QUERY_OUTPUT` →&nbsp;❌ <br>
-/// [`D3DBOX`](https://docs.microsoft.com/en-us/windows/win32/dibox3d9/d3dbox)&nbsp;→ [`d3d::Box`] <br>
-/// [`D3DCLIPSTATUS9`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dclipstatus9)&nbsp;→ [`d3d9::ClipStatus`] <br>
-/// [`D3DCOLORVALUE`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dcolorvalue)&nbsp;→ [`d3d::ColorValue`] <br>
-/// [`D3DCOMPOSERECTDESC`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dcomposerectdesc) →&nbsp;❌ <br>
-/// [`D3DCOMPOSERECTDESTINATION`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dcomposerectdestination) →&nbsp;❌ <br>
-/// [`D3DDEVICE_CREATION_PARAMETERS`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddevice-creation-parameters)&nbsp;→ [`d3d::DeviceCreationParameters`] <br>
+/// [`D3DBOX`](https://learn.microsoft.com/en-us/windows/win32/dibox3d9/d3dbox)&nbsp;→ [`d3d::Box`] <br>
+/// [`D3DCLIPSTATUS9`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dclipstatus9)&nbsp;→ [`d3d9::ClipStatus`] <br>
+/// [`D3DCOLORVALUE`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dcolorvalue)&nbsp;→ [`d3d::ColorValue`] <br>
+/// [`D3DCOMPOSERECTDESC`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dcomposerectdesc) →&nbsp;❌ <br>
+/// [`D3DCOMPOSERECTDESTINATION`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dcomposerectdestination) →&nbsp;❌ <br>
+/// [`D3DDEVICE_CREATION_PARAMETERS`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3ddevice-creation-parameters)&nbsp;→ [`d3d::DeviceCreationParameters`] <br>
 /// `D3DDEVINFO_D3D9BANDWIDTHTIMINGS` →&nbsp;❌ <br>
 /// `D3DDEVINFO_D3D9CACHEUTILIZATION` →&nbsp;❌ <br>
 /// `D3DDEVINFO_D3D9INTERFACETIMINGS` →&nbsp;❌ <br>
@@ -1539,32 +1539,32 @@ pub const d3d9caps_h : cxx_header = cxx_header;
 /// `D3DDEVINFO_D3DVERTEXSTATS` →&nbsp;❌ <br>
 /// `D3DDEVINFO_RESOURCEMANAGER` →&nbsp;❌ <br>
 /// `D3DDEVINFO_VCACHE` →&nbsp;❌ <br>
-/// [`D3DDISPLAYMODE`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddisplaymode)&nbsp;→ [`d3d::DisplayMode`] <br>
-/// [`D3DDISPLAYMODEEX`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddisplaymodeex)&nbsp;→ [`d3d::DisplayModeEx`] <br>
-/// [`D3DDISPLAYMODEFILTER`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddisplaymodefilter)&nbsp;→ [`d3d::DisplayModeFilter`] <br>
+/// [`D3DDISPLAYMODE`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3ddisplaymode)&nbsp;→ [`d3d::DisplayMode`] <br>
+/// [`D3DDISPLAYMODEEX`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3ddisplaymodeex)&nbsp;→ [`d3d::DisplayModeEx`] <br>
+/// [`D3DDISPLAYMODEFILTER`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3ddisplaymodefilter)&nbsp;→ [`d3d::DisplayModeFilter`] <br>
 /// `D3DENCRYPTED_BLOCK_INFO` →&nbsp;❌ <br>
-/// [`D3DGAMMARAMP`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dgammaramp)&nbsp;→ [`d3d::GammaRamp`] <br>
-/// [`D3DINDEXBUFFER_DESC`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dindexbuffer-desc)&nbsp;→ [`d3d::IndexBufferDesc`] <br>
-/// [`D3DLIGHT9`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dlight9)&nbsp;→ [`d3d9::Light`] <br>
-/// [`D3DLOCKED_BOX`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dlocked-box)&nbsp;→ [`d3d::LockedBox`] <br>
-/// [`D3DLOCKED_RECT`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dlocked-rect)&nbsp;→ [`d3d::LockedRect`] <br>
-/// [`D3DMATERIAL9`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dmaterial9)&nbsp;→ [`d3d9::Material`] <br>
-/// [`D3DMATRIX`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dmatrix)&nbsp;→ [`d3d::Matrix`] <br>
-/// [`D3DMEMORYPRESSURE`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dmemorypressure)&nbsp;→ [`d3d::MemoryPressure`] <br>
-/// [`D3DPRESENTSTATS`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dpresentstats)&nbsp;→ [`d3d::PresentStats`] <br>
-/// [`D3DPRESENT_PARAMETERS`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dpresent-parameters)&nbsp;→ [`d3d::PresentParameters`] <br>
-/// [`D3DRANGE`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3drange)&nbsp;→ [`d3d::Range`] <br>
-/// [`D3DRASTER_STATUS`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3draster-status)&nbsp;→ [`d3d::RasterStatus`] <br>
-/// [`D3DRECT`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3drect)&nbsp;→ [`d3d::Rect`] <br>
-/// [`D3DRECTPATCH_INFO`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3drectpatch-info) →&nbsp;❌ <br>
-/// [`D3DRESOURCESTATS`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dresourcestats)&nbsp;→ [`d3d::ResourceStats`] <br>
-/// [`D3DSURFACE_DESC`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dsurface-desc)&nbsp;→ [`d3d::SurfaceDesc`] <br>
-/// [`D3DTRIPATCH_INFO`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dtripatch-info) →&nbsp;❌ <br>
-/// [`D3DVECTOR`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dvector)&nbsp;→ [`d3d::Vector`] <br>
-/// [`D3DVERTEXBUFFER_DESC`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/D3DVERTEXBUFFER_DESC)&nbsp;→ [`d3d::VertexBufferDesc`] <br>
-/// [`D3DVERTEXELEMENT9`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dvertexelement9)&nbsp;→ [`d3d9::VertexElement`] <br>
-/// [`D3DVIEWPORT9`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dviewport9)&nbsp;→ [`d3d9::Viewport`] <br>
-/// [`D3DVOLUME_DESC`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dvolume-desc)&nbsp;→ [`d3d::VolumeDesc`] <br>
+/// [`D3DGAMMARAMP`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dgammaramp)&nbsp;→ [`d3d::GammaRamp`] <br>
+/// [`D3DINDEXBUFFER_DESC`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dindexbuffer-desc)&nbsp;→ [`d3d::IndexBufferDesc`] <br>
+/// [`D3DLIGHT9`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dlight9)&nbsp;→ [`d3d9::Light`] <br>
+/// [`D3DLOCKED_BOX`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dlocked-box)&nbsp;→ [`d3d::LockedBox`] <br>
+/// [`D3DLOCKED_RECT`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dlocked-rect)&nbsp;→ [`d3d::LockedRect`] <br>
+/// [`D3DMATERIAL9`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dmaterial9)&nbsp;→ [`d3d9::Material`] <br>
+/// [`D3DMATRIX`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dmatrix)&nbsp;→ [`d3d::Matrix`] <br>
+/// [`D3DMEMORYPRESSURE`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dmemorypressure)&nbsp;→ [`d3d::MemoryPressure`] <br>
+/// [`D3DPRESENTSTATS`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dpresentstats)&nbsp;→ [`d3d::PresentStats`] <br>
+/// [`D3DPRESENT_PARAMETERS`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dpresent-parameters)&nbsp;→ [`d3d::PresentParameters`] <br>
+/// [`D3DRANGE`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drange)&nbsp;→ [`d3d::Range`] <br>
+/// [`D3DRASTER_STATUS`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3draster-status)&nbsp;→ [`d3d::RasterStatus`] <br>
+/// [`D3DRECT`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drect)&nbsp;→ [`d3d::Rect`] <br>
+/// [`D3DRECTPATCH_INFO`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drectpatch-info) →&nbsp;❌ <br>
+/// [`D3DRESOURCESTATS`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dresourcestats)&nbsp;→ [`d3d::ResourceStats`] <br>
+/// [`D3DSURFACE_DESC`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsurface-desc)&nbsp;→ [`d3d::SurfaceDesc`] <br>
+/// [`D3DTRIPATCH_INFO`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dtripatch-info) →&nbsp;❌ <br>
+/// [`D3DVECTOR`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dvector)&nbsp;→ [`d3d::Vector`] <br>
+/// [`D3DVERTEXBUFFER_DESC`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/D3DVERTEXBUFFER_DESC)&nbsp;→ [`d3d::VertexBufferDesc`] <br>
+/// [`D3DVERTEXELEMENT9`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dvertexelement9)&nbsp;→ [`d3d9::VertexElement`] <br>
+/// [`D3DVIEWPORT9`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dviewport9)&nbsp;→ [`d3d9::Viewport`] <br>
+/// [`D3DVOLUME_DESC`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dvolume-desc)&nbsp;→ [`d3d::VolumeDesc`] <br>
 /// `D3D_OMAC` →&nbsp;❌ <br>
 /// ### C++ Enums → Rust Structs
 ///
@@ -1578,17 +1578,17 @@ pub const d3d9caps_h : cxx_header = cxx_header;
 /// * `PROCESSIDTYPE_HANDLE` →&nbsp;❌ <br>
 /// * `PROCESSIDTYPE_UNKNOWN` →&nbsp;❌ <br>
 ///
-/// [`D3DBACKBUFFER_TYPE`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dbackbuffer-type)&nbsp;→ [`d3d::BackBufferType`] <br>
+/// [`D3DBACKBUFFER_TYPE`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dbackbuffer-type)&nbsp;→ [`d3d::BackBufferType`] <br>
 /// * `D3DBACKBUFFER_TYPE_LEFT`&nbsp;→ [`d3d::BackBufferType::Left`] <br>
 /// * `D3DBACKBUFFER_TYPE_MONO`&nbsp;→ [`d3d::BackBufferType::Mono`] <br>
 /// * `D3DBACKBUFFER_TYPE_RIGHT`&nbsp;→ [`d3d::BackBufferType::Right`] <br>
 ///
-/// [`D3DBASISTYPE`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dbasistype)&nbsp;→ [`d3d::BasisType`] <br>
+/// [`D3DBASISTYPE`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dbasistype)&nbsp;→ [`d3d::BasisType`] <br>
 /// * `D3DBASIS_BEZIER`&nbsp;→ [`d3d::Basis::Bezier`] <br>
 /// * `D3DBASIS_BSPLINE`&nbsp;→ [`d3d::Basis::BSpline`] <br>
 /// * `D3DBASIS_CATMULL_ROM`&nbsp;→ [`d3d::Basis::CatmullRom`] <br>
 ///
-/// [`D3DBLEND`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dblend)&nbsp;→ [`d3d::Blend`] <br>
+/// [`D3DBLEND`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dblend)&nbsp;→ [`d3d::Blend`] <br>
 /// * `D3DBLEND_BLENDFACTOR`&nbsp;→ [`d3d::Blend::BlendFactor`] <br>
 /// * `D3DBLEND_BOTHINVSRCALPHA`&nbsp;→ [`d3d::Blend::BothInvSrcAlpha`] <br>
 /// * `D3DBLEND_BOTHSRCALPHA`&nbsp;→ [`d3d::Blend::BothSrcAlpha`] <br>
@@ -1607,7 +1607,7 @@ pub const d3d9caps_h : cxx_header = cxx_header;
 /// * `D3DBLEND_SRCCOLOR2`&nbsp;→ [`d3d::Blend::SrcColor2`] <br>
 /// * `D3DBLEND_ZERO`&nbsp;→ [`d3d::Blend::Zero`] <br>
 ///
-/// [`D3DBLENDOP`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dblendop)&nbsp;→ [`d3d::BlendOp`] <br>
+/// [`D3DBLENDOP`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dblendop)&nbsp;→ [`d3d::BlendOp`] <br>
 /// * `D3DBLENDOP_ADD`&nbsp;→ [`d3d::BlendOp::Add`] <br>
 /// * `D3DBLENDOP_MAX`&nbsp;→ [`d3d::BlendOp::Max`] <br>
 /// * `D3DBLENDOP_MIN`&nbsp;→ [`d3d::BlendOp::Min`] <br>
@@ -1627,7 +1627,7 @@ pub const d3d9caps_h : cxx_header = cxx_header;
 /// * `D3DBUSTYPE_PCIEXPRESS` →&nbsp;❌ <br>
 /// * `D3DBUSTYPE_PCIX` →&nbsp;❌ <br>
 ///
-/// [`D3DCMPFUNC`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dcmpfunc)&nbsp;→ [`d3d::CmpFunc`] <br>
+/// [`D3DCMPFUNC`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dcmpfunc)&nbsp;→ [`d3d::CmpFunc`] <br>
 /// * `D3DCMP_ALWAYS`&nbsp;→ [`d3d::Cmp::Always`] <br>
 /// * `D3DCMP_EQUAL`&nbsp;→ [`d3d::Cmp::Equal`] <br>
 /// * `D3DCMP_GREATER`&nbsp;→ [`d3d::Cmp::Greater`] <br>
@@ -1637,13 +1637,13 @@ pub const d3d9caps_h : cxx_header = cxx_header;
 /// * `D3DCMP_NEVER`&nbsp;→ [`d3d::Cmp::Never`] <br>
 /// * `D3DCMP_NOTEQUAL`&nbsp;→ [`d3d::Cmp::NotEqual`] <br>
 ///
-/// [`D3DCOMPOSERECTSOP`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dcomposerectsop)&nbsp;→ [`d3d::ComposeRectsOp`] <br>
+/// [`D3DCOMPOSERECTSOP`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dcomposerectsop)&nbsp;→ [`d3d::ComposeRectsOp`] <br>
 /// * `D3DCOMPOSERECTS_AND`&nbsp;→ [`d3d::ComposeRects::And`] <br>
 /// * `D3DCOMPOSERECTS_COPY`&nbsp;→ [`d3d::ComposeRects::Copy`] <br>
 /// * `D3DCOMPOSERECTS_NEG`&nbsp;→ [`d3d::ComposeRects::Neg`] <br>
 /// * `D3DCOMPOSERECTS_OR`&nbsp;→ [`d3d::ComposeRects::Or`] <br>
 ///
-/// [`D3DCUBEMAP_FACES`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dcubemap-faces)&nbsp;→ [`d3d::CubeMapFace`] <br>
+/// [`D3DCUBEMAP_FACES`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dcubemap-faces)&nbsp;→ [`d3d::CubeMapFace`] <br>
 /// * `D3DCUBEMAP_FACE_NEGATIVE_X`&nbsp;→ [`d3d::CubeMapFace::NegativeX`] <br>
 /// * `D3DCUBEMAP_FACE_NEGATIVE_Y`&nbsp;→ [`d3d::CubeMapFace::NegativeY`] <br>
 /// * `D3DCUBEMAP_FACE_NEGATIVE_Z`&nbsp;→ [`d3d::CubeMapFace::NegativeZ`] <br>
@@ -1651,16 +1651,16 @@ pub const d3d9caps_h : cxx_header = cxx_header;
 /// * `D3DCUBEMAP_FACE_POSITIVE_Y`&nbsp;→ [`d3d::CubeMapFace::PositiveY`] <br>
 /// * `D3DCUBEMAP_FACE_POSITIVE_Z`&nbsp;→ [`d3d::CubeMapFace::PositiveZ`] <br>
 ///
-/// [`D3DCULL`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dcull)&nbsp;→ [`d3d::Cull`] <br>
+/// [`D3DCULL`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dcull)&nbsp;→ [`d3d::Cull`] <br>
 /// * `D3DCULL_CCW`&nbsp;→ [`d3d::Cull::CCW`] <br>
 /// * `D3DCULL_CW`&nbsp;→ [`d3d::Cull::CW`] <br>
 /// * `D3DCULL_NONE`&nbsp;→ [`d3d::Cull::None`] <br>
 ///
-/// [`D3DDEBUGMONITORTOKENS`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddebugmonitortokens)&nbsp;→ [`d3d::DebugMonitorTokens`] <br>
+/// [`D3DDEBUGMONITORTOKENS`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3ddebugmonitortokens)&nbsp;→ [`d3d::DebugMonitorTokens`] <br>
 /// * `D3DDMT_DISABLE`&nbsp;→ [`d3d::DMT::Disable`] <br>
 /// * `D3DDMT_ENABLE`&nbsp;→ [`d3d::DMT::Enable`] <br>
 ///
-/// [`D3DDECLMETHOD`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddeclmethod)&nbsp;→ [`d3d::DeclMethod8`] <br>
+/// [`D3DDECLMETHOD`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3ddeclmethod)&nbsp;→ [`d3d::DeclMethod8`] <br>
 /// * `D3DDECLMETHOD_CROSSUV`&nbsp;→ [`d3d::DeclMethod8::CrossUV`] <br>
 /// * `D3DDECLMETHOD_DEFAULT`&nbsp;→ [`d3d::DeclMethod8::Default`] <br>
 /// * `D3DDECLMETHOD_LOOKUP`&nbsp;→ [`d3d::DeclMethod8::Lookup`] <br>
@@ -1669,7 +1669,7 @@ pub const d3d9caps_h : cxx_header = cxx_header;
 /// * `D3DDECLMETHOD_PARTIALV`&nbsp;→ [`d3d::DeclMethod8::PartialV`] <br>
 /// * `D3DDECLMETHOD_UV`&nbsp;→ [`d3d::DeclMethod8::UV`] <br>
 ///
-/// [`D3DDECLTYPE`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddecltype)&nbsp;→ [`d3d::DeclType8`] <br>
+/// [`D3DDECLTYPE`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3ddecltype)&nbsp;→ [`d3d::DeclType8`] <br>
 /// * `D3DDECLTYPE_D3DCOLOR`&nbsp;→ [`d3d::DeclType8::Color`] <br>
 /// * `D3DDECLTYPE_DEC3N`&nbsp;→ [`d3d::DeclType8::Dec3N`] <br>
 /// * `D3DDECLTYPE_FLOAT1`&nbsp;→ [`d3d::DeclType8::Float1`] <br>
@@ -1689,7 +1689,7 @@ pub const d3d9caps_h : cxx_header = cxx_header;
 /// * `D3DDECLTYPE_USHORT2N`&nbsp;→ [`d3d::DeclType8::UShort2N`] <br>
 /// * `D3DDECLTYPE_USHORT4N`&nbsp;→ [`d3d::DeclType8::UShort4N`] <br>
 ///
-/// [`D3DDECLUSAGE`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddeclusage)&nbsp;→ [`d3d::DeclUsage8`] <br>
+/// [`D3DDECLUSAGE`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3ddeclusage)&nbsp;→ [`d3d::DeclUsage8`] <br>
 /// * `D3DDECLUSAGE_BINORMAL`&nbsp;→ [`d3d::DeclUsage8::Binormal`] <br>
 /// * `D3DDECLUSAGE_BLENDINDICES`&nbsp;→ [`d3d::DeclUsage8::BlendIndices`] <br>
 /// * `D3DDECLUSAGE_BLENDWEIGHT`&nbsp;→ [`d3d::DeclUsage8::BlendWeight`] <br>
@@ -1705,36 +1705,36 @@ pub const d3d9caps_h : cxx_header = cxx_header;
 /// * `D3DDECLUSAGE_TESSFACTOR`&nbsp;→ [`d3d::DeclUsage8::TessFactor`] <br>
 /// * `D3DDECLUSAGE_TEXCOORD`&nbsp;→ [`d3d::DeclUsage8::TexCoord`] <br>
 ///
-/// [`D3DDEGREETYPE`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddegreetype)&nbsp;→ [`d3d::DegreeType`] <br>
+/// [`D3DDEGREETYPE`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3ddegreetype)&nbsp;→ [`d3d::DegreeType`] <br>
 /// * `D3DDEGREE_CUBIC`&nbsp;→ [`d3d::Degree::Cubic`] <br>
 /// * `D3DDEGREE_LINEAR`&nbsp;→ [`d3d::Degree::Linear`] <br>
 /// * `D3DDEGREE_QUADRATIC`&nbsp;→ [`d3d::Degree::Quadratic`] <br>
 /// * `D3DDEGREE_QUINTIC`&nbsp;→ [`d3d::Degree::Quintic`] <br>
 ///
-/// [`D3DDEVTYPE`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddevtype)&nbsp;→ [`d3d::DevType`] <br>
+/// [`D3DDEVTYPE`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3ddevtype)&nbsp;→ [`d3d::DevType`] <br>
 /// * `D3DDEVTYPE_HAL`&nbsp;→ [`d3d::DevType::HAL`] <br>
 /// * `D3DDEVTYPE_NULLREF`&nbsp;→ [`d3d::DevType::NullRef`] <br>
 /// * `D3DDEVTYPE_REF`&nbsp;→ [`d3d::DevType::Ref`] <br>
 /// * `D3DDEVTYPE_SW`&nbsp;→ [`d3d::DevType::SW`] <br>
 ///
-/// [`D3DDISPLAYROTATION`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddisplayrotation)&nbsp;→ [`d3d::DisplayRotation`] <br>
+/// [`D3DDISPLAYROTATION`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3ddisplayrotation)&nbsp;→ [`d3d::DisplayRotation`] <br>
 /// * `D3DDISPLAYROTATION_180`&nbsp;→ [`d3d::DisplayRotation::_180`] <br>
 /// * `D3DDISPLAYROTATION_270`&nbsp;→ [`d3d::DisplayRotation::_270`] <br>
 /// * `D3DDISPLAYROTATION_90`&nbsp;→ [`d3d::DisplayRotation::_90`] <br>
 /// * `D3DDISPLAYROTATION_IDENTITY`&nbsp;→ [`d3d::DisplayRotation::Identity`] <br>
 ///
-/// [`D3DFILLMODE`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dfillmode)&nbsp;→ [`d3d::FillMode`] <br>
+/// [`D3DFILLMODE`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dfillmode)&nbsp;→ [`d3d::FillMode`] <br>
 /// * `D3DFILL_POINT`&nbsp;→ [`d3d::Fill::Point`] <br>
 /// * `D3DFILL_SOLID`&nbsp;→ [`d3d::Fill::Solid`] <br>
 /// * `D3DFILL_WIREFRAME`&nbsp;→ [`d3d::Fill::Wireframe`] <br>
 ///
-/// [`D3DFOGMODE`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dfogmode)&nbsp;→ [`d3d::FogMode`] <br>
+/// [`D3DFOGMODE`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dfogmode)&nbsp;→ [`d3d::FogMode`] <br>
 /// * `D3DFOG_EXP`&nbsp;→ [`d3d::Fog::Exp`] <br>
 /// * `D3DFOG_EXP2`&nbsp;→ [`d3d::Fog::Exp2`] <br>
 /// * `D3DFOG_LINEAR`&nbsp;→ [`d3d::Fog::Linear`] <br>
 /// * `D3DFOG_NONE`&nbsp;→ [`d3d::Fog::None`] <br>
 ///
-/// [`D3DFORMAT`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dformat)&nbsp;→ [`d3d::Format`] <br>
+/// [`D3DFORMAT`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dformat)&nbsp;→ [`d3d::Format`] <br>
 /// * `D3DFMT_A1`&nbsp;→ [`d3d::Format::A1`] <br>
 /// * `D3DFMT_A16B16G16R16`&nbsp;→ [`d3d::Format::A16B16G16R16`] <br>
 /// * `D3DFMT_A16B16G16R16F`&nbsp;→ [`d3d::Format::A16B16G16R16F`] <br>
@@ -1801,17 +1801,17 @@ pub const d3d9caps_h : cxx_header = cxx_header;
 /// * `D3DFMT_X8R8G8B8`&nbsp;→ [`d3d::Format::X8R8G8B8`] <br>
 /// * `D3DFMT_YUY2`&nbsp;→ [`d3d::Format::YUY2`] <br>
 ///
-/// [`D3DLIGHTTYPE`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dlighttype)&nbsp;→ [`d3d::LightType`] <br>
+/// [`D3DLIGHTTYPE`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dlighttype)&nbsp;→ [`d3d::LightType`] <br>
 /// * `D3DLIGHT_DIRECTIONAL`&nbsp;→ [`d3d::Light::Directional`] <br>
 /// * `D3DLIGHT_POINT`&nbsp;→ [`d3d::Light::Point`] <br>
 /// * `D3DLIGHT_SPOT`&nbsp;→ [`d3d::Light::Spot`] <br>
 ///
-/// [`D3DMATERIALCOLORSOURCE`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dmaterialcolorsource)&nbsp;→ [`d3d::MaterialColorSource`] <br>
+/// [`D3DMATERIALCOLORSOURCE`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dmaterialcolorsource)&nbsp;→ [`d3d::MaterialColorSource`] <br>
 /// * `D3DMCS_COLOR1`&nbsp;→ [`d3d::MCS::Color1`] <br>
 /// * `D3DMCS_COLOR2`&nbsp;→ [`d3d::MCS::Color2`] <br>
 /// * `D3DMCS_MATERIAL`&nbsp;→ [`d3d::MCS::Material`] <br>
 ///
-/// [`D3DMULTISAMPLE_TYPE`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dmultisample-type)&nbsp;→ [`d3d::MultiSampleType`] <br>
+/// [`D3DMULTISAMPLE_TYPE`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dmultisample-type)&nbsp;→ [`d3d::MultiSampleType`] <br>
 /// * `D3DMULTISAMPLE_10_SAMPLES`&nbsp;→ [`d3d::MultiSample::X10`] <br>
 /// * `D3DMULTISAMPLE_11_SAMPLES`&nbsp;→ [`d3d::MultiSample::X11`] <br>
 /// * `D3DMULTISAMPLE_12_SAMPLES`&nbsp;→ [`d3d::MultiSample::X12`] <br>
@@ -1830,17 +1830,17 @@ pub const d3d9caps_h : cxx_header = cxx_header;
 /// * `D3DMULTISAMPLE_NONE`&nbsp;→ [`d3d::MultiSample::None`] <br>
 /// * `D3DMULTISAMPLE_NONMASKABLE`&nbsp;→ [`d3d::MultiSample::NonMaskable`] <br>
 ///
-/// [`D3DPATCHEDGESTYLE`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dpatchedgestyle)&nbsp;→ [`d3d::PatchEdgeStyle`] <br>
+/// [`D3DPATCHEDGESTYLE`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dpatchedgestyle)&nbsp;→ [`d3d::PatchEdgeStyle`] <br>
 /// * `D3DPATCHEDGE_CONTINUOUS`&nbsp;→ [`d3d::PatchEdge::Continuous`] <br>
 /// * `D3DPATCHEDGE_DISCRETE`&nbsp;→ [`d3d::PatchEdge::Discrete`] <br>
 ///
-/// [`D3DPOOL`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dpool)&nbsp;→ [`d3d::Pool`] <br>
+/// [`D3DPOOL`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dpool)&nbsp;→ [`d3d::Pool`] <br>
 /// * `D3DPOOL_DEFAULT`&nbsp;→ [`d3d::Pool::Default`] <br>
 /// * `D3DPOOL_MANAGED`&nbsp;→ [`d3d::Pool::Managed`] <br>
 /// * `D3DPOOL_SCRATCH`&nbsp;→ [`d3d::Pool::Scratch`] <br>
 /// * `D3DPOOL_SYSTEMMEM`&nbsp;→ [`d3d::Pool::SystemMem`] <br>
 ///
-/// [`D3DPRIMITIVETYPE`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dprimitivetype)&nbsp;→ [`d3d::PrimitiveType`] <br>
+/// [`D3DPRIMITIVETYPE`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dprimitivetype)&nbsp;→ [`d3d::PrimitiveType`] <br>
 /// * `D3DPT_LINELIST`&nbsp;→ [`d3d::PT::LineList`] <br>
 /// * `D3DPT_LINESTRIP`&nbsp;→ [`d3d::PT::LineStrip`] <br>
 /// * `D3DPT_POINTLIST`&nbsp;→ [`d3d::PT::PointList`] <br>
@@ -1848,7 +1848,7 @@ pub const d3d9caps_h : cxx_header = cxx_header;
 /// * `D3DPT_TRIANGLELIST`&nbsp;→ [`d3d::PT::TriangleList`] <br>
 /// * `D3DPT_TRIANGLESTRIP`&nbsp;→ [`d3d::PT::TriangleStrip`] <br>
 ///
-/// [`D3DQUERYTYPE`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dquerytype)&nbsp;→ [`d3d::QueryType`] <br>
+/// [`D3DQUERYTYPE`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dquerytype)&nbsp;→ [`d3d::QueryType`] <br>
 /// * `D3DQUERYTYPE_BANDWIDTHTIMINGS`&nbsp;→ [`d3d::QueryType::BandwidthTimings`] <br>
 /// * `D3DQUERYTYPE_CACHEUTILIZATION`&nbsp;→ [`d3d::QueryType::CacheUtilization`] <br>
 /// * `D3DQUERYTYPE_EVENT`&nbsp;→ [`d3d::QueryType::Event`] <br>
@@ -1865,7 +1865,7 @@ pub const d3d9caps_h : cxx_header = cxx_header;
 /// * `D3DQUERYTYPE_VERTEXSTATS`&nbsp;→ [`d3d::QueryType::VertexStats`] <br>
 /// * `D3DQUERYTYPE_VERTEXTIMINGS`&nbsp;→ [`d3d::QueryType::VertexTimings`] <br>
 ///
-/// [`D3DRENDERSTATETYPE`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)&nbsp;→ [`d3d::RenderStateType`] <br>
+/// [`D3DRENDERSTATETYPE`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)&nbsp;→ [`d3d::RenderStateType`] <br>
 /// * `D3DRS_ADAPTIVETESS_W`&nbsp;→ [`d3d::RS::AdaptiveTessW`] <br>
 /// * `D3DRS_ADAPTIVETESS_X`&nbsp;→ [`d3d::RS::AdaptiveTessX`] <br>
 /// * `D3DRS_ADAPTIVETESS_Y`&nbsp;→ [`d3d::RS::AdaptiveTessY`] <br>
@@ -1970,7 +1970,7 @@ pub const d3d9caps_h : cxx_header = cxx_header;
 /// * `D3DRS_ZFUNC`&nbsp;→ [`d3d::RS::ZFunc`] <br>
 /// * `D3DRS_ZWRITEENABLE`&nbsp;→ [`d3d::RS::ZWriteEnable`] <br>
 ///
-/// [`D3DRESOURCETYPE`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dresourcetype)&nbsp;→ [`d3d::ResourceType`] <br>
+/// [`D3DRESOURCETYPE`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dresourcetype)&nbsp;→ [`d3d::ResourceType`] <br>
 /// * `D3DRTYPE_CUBETEXTURE`&nbsp;→ [`d3d::RType::CubeTexture`] <br>
 /// * `D3DRTYPE_INDEXBUFFER`&nbsp;→ [`d3d::RType::IndexBuffer`] <br>
 /// * `D3DRTYPE_SURFACE`&nbsp;→ [`d3d::RType::Surface`] <br>
@@ -1979,7 +1979,7 @@ pub const d3d9caps_h : cxx_header = cxx_header;
 /// * `D3DRTYPE_VOLUME`&nbsp;→ [`d3d::RType::Volume`] <br>
 /// * `D3DRTYPE_VOLUMETEXTURE`&nbsp;→ [`d3d::RType::VolumeTexture`] <br>
 ///
-/// [`D3DSAMPLERSTATETYPE`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)&nbsp;→ [`d3d::SamplerStateType`], [`d3d::SamplerStateValue`] <br>
+/// [`D3DSAMPLERSTATETYPE`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsamplerstatetype)&nbsp;→ [`d3d::SamplerStateType`], [`d3d::SamplerStateValue`] <br>
 /// * `D3DSAMP_ADDRESSU`&nbsp;→ [`d3d::Samp::AddressU`], [`d3d::SampV::AddressU`] <br>
 /// * `D3DSAMP_ADDRESSV`&nbsp;→ [`d3d::Samp::AddressV`], [`d3d::SampV::AddressV`] <br>
 /// * `D3DSAMP_ADDRESSW`&nbsp;→ [`d3d::Samp::AddressW`], [`d3d::SampV::AddressW`] <br>
@@ -1994,18 +1994,18 @@ pub const d3d9caps_h : cxx_header = cxx_header;
 /// * `D3DSAMP_MIPMAPLODBIAS`&nbsp;→ [`d3d::Samp::MipMapLODBias`], [`d3d::SampV::MipMapLODBias`] <br>
 /// * `D3DSAMP_SRGBTEXTURE`&nbsp;→ [`d3d::Samp::SRGBTexture`], [`d3d::SampV::SRGBTexture`] <br>
 ///
-/// [`D3DSAMPLER_TEXTURE_TYPE`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dsampler-texture-type)&nbsp;→ [`d3d::SamplerTextureType`] <br>
+/// [`D3DSAMPLER_TEXTURE_TYPE`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsampler-texture-type)&nbsp;→ [`d3d::SamplerTextureType`] <br>
 /// * `D3DSTT_2D`&nbsp;→ [`d3d::STT::_2D`], [`d3d::STT::Regular`] <br>
 /// * `D3DSTT_CUBE`&nbsp;→ [`d3d::STT::Cube`] <br>
 /// * `D3DSTT_UNKNOWN`&nbsp;→ [`d3d::STT::Unknown`] <br>
 /// * `D3DSTT_VOLUME`&nbsp;→ [`d3d::STT::Volume`] <br>
 ///
-/// [`D3DSCANLINEORDERING`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dscanlineordering)&nbsp;→ [`d3d::ScanlineOrdering`] <br>
+/// [`D3DSCANLINEORDERING`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dscanlineordering)&nbsp;→ [`d3d::ScanlineOrdering`] <br>
 /// * `D3DSCANLINEORDERING_INTERLACED`&nbsp;→ [`d3d::ScanlineOrdering::Interlaced`] <br>
 /// * `D3DSCANLINEORDERING_PROGRESSIVE`&nbsp;→ [`d3d::ScanlineOrdering::Progressive`] <br>
 /// * `D3DSCANLINEORDERING_UNKNOWN`&nbsp;→ [`d3d::ScanlineOrdering::Unknown`] <br>
 ///
-/// [`D3DSHADEMODE`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dshademode)&nbsp;→ [`d3d::ShadeMode`] <br>
+/// [`D3DSHADEMODE`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dshademode)&nbsp;→ [`d3d::ShadeMode`] <br>
 /// * `D3DSHADE_FLAT`&nbsp;→ [`d3d::Shade::Flat`] <br>
 /// * `D3DSHADE_GOURAUD`&nbsp;→ [`d3d::Shade::Gouraud`] <br>
 /// * `D3DSHADE_PHONG`&nbsp;→ [`d3d::Shade::Phong`] <br>
@@ -2160,12 +2160,12 @@ pub const d3d9caps_h : cxx_header = cxx_header;
 /// * `D3DSPSM_X2` →&nbsp;❌ <br>
 /// * `D3DSPSM_X2NEG` →&nbsp;❌ <br>
 ///
-/// [`D3DSTATEBLOCKTYPE`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dstateblocktype)&nbsp;→ [`d3d::StateBlockType`] <br>
+/// [`D3DSTATEBLOCKTYPE`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dstateblocktype)&nbsp;→ [`d3d::StateBlockType`] <br>
 /// * `D3DSBT_ALL`&nbsp;→ [`d3d::SBT::All`] <br>
 /// * `D3DSBT_PIXELSTATE`&nbsp;→ [`d3d::SBT::PixelState`] <br>
 /// * `D3DSBT_VERTEXSTATE`&nbsp;→ [`d3d::SBT::VertexState`] <br>
 ///
-/// [`D3DSTENCILOP`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dstencilop)&nbsp;→ [`d3d::StencilOp`] <br>
+/// [`D3DSTENCILOP`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dstencilop)&nbsp;→ [`d3d::StencilOp`] <br>
 /// * `D3DSTENCILOP_DECR`&nbsp;→ [`d3d::StencilOp::Decr`] <br>
 /// * `D3DSTENCILOP_DECRSAT`&nbsp;→ [`d3d::StencilOp::DecrSat`] <br>
 /// * `D3DSTENCILOP_INCR`&nbsp;→ [`d3d::StencilOp::Incr`] <br>
@@ -2175,21 +2175,21 @@ pub const d3d9caps_h : cxx_header = cxx_header;
 /// * `D3DSTENCILOP_REPLACE`&nbsp;→ [`d3d::StencilOp::Replace`] <br>
 /// * `D3DSTENCILOP_ZERO`&nbsp;→ [`d3d::StencilOp::Zero`] <br>
 ///
-/// [`D3DSWAPEFFECT`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dswapeffect)&nbsp;→ [`d3d::SwapEffect`] <br>
+/// [`D3DSWAPEFFECT`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dswapeffect)&nbsp;→ [`d3d::SwapEffect`] <br>
 /// * `D3DSWAPEFFECT_COPY`&nbsp;→ [`d3d::SwapEffect::Copy`] <br>
 /// * `D3DSWAPEFFECT_DISCARD`&nbsp;→ [`d3d::SwapEffect::Discard`] <br>
 /// * `D3DSWAPEFFECT_FLIP`&nbsp;→ [`d3d::SwapEffect::Flip`] <br>
 /// * `D3DSWAPEFFECT_FLIPEX`&nbsp;→ [`d3d::SwapEffect::FlipEx`] <br>
 /// * `D3DSWAPEFFECT_OVERLAY`&nbsp;→ [`d3d::SwapEffect::Overlay`] <br>
 ///
-/// [`D3DTEXTUREADDRESS`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dtextureaddress)&nbsp;→ [`d3d::TextureAddress`] <br>
+/// [`D3DTEXTUREADDRESS`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dtextureaddress)&nbsp;→ [`d3d::TextureAddress`] <br>
 /// * `D3DTADDRESS_BORDER`&nbsp;→ [`d3d::TAddress::Border`] <br>
 /// * `D3DTADDRESS_CLAMP`&nbsp;→ [`d3d::TAddress::Clamp`] <br>
 /// * `D3DTADDRESS_MIRROR`&nbsp;→ [`d3d::TAddress::Mirror`] <br>
 /// * `D3DTADDRESS_MIRRORONCE`&nbsp;→ [`d3d::TAddress::MirrorOnce`] <br>
 /// * `D3DTADDRESS_WRAP`&nbsp;→ [`d3d::TAddress::Wrap`] <br>
 ///
-/// [`D3DTEXTUREFILTERTYPE`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dtexturefiltertype)&nbsp;→ [`d3d::TextureFilterType`] <br>
+/// [`D3DTEXTUREFILTERTYPE`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dtexturefiltertype)&nbsp;→ [`d3d::TextureFilterType`] <br>
 /// * `D3DTEXF_ANISOTROPIC`&nbsp;→ [`d3d::TexF::Anisotropic`] <br>
 /// * `D3DTEXF_CONVOLUTIONMONO`&nbsp;→ [`d3d::TexF::ConvolutionMono`] <br>
 /// * `D3DTEXF_GAUSSIANQUAD`&nbsp;→ [`d3d::TexF::GaussianQuad`] <br>
@@ -2198,7 +2198,7 @@ pub const d3d9caps_h : cxx_header = cxx_header;
 /// * `D3DTEXF_POINT`&nbsp;→ [`d3d::TexF::Point`] <br>
 /// * `D3DTEXF_PYRAMIDALQUAD`&nbsp;→ [`d3d::TexF::PyramidalQuad`] <br>
 ///
-/// [`D3DTEXTUREOP`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dtextureop)&nbsp;→ [`d3d::TextureOp`] <br>
+/// [`D3DTEXTUREOP`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dtextureop)&nbsp;→ [`d3d::TextureOp`] <br>
 /// * `D3DTOP_ADD`&nbsp;→ [`d3d::TOP::Add`] <br>
 /// * `D3DTOP_ADDSIGNED`&nbsp;→ [`d3d::TOP::AddSigned`] <br>
 /// * `D3DTOP_ADDSIGNED2X`&nbsp;→ [`d3d::TOP::AddSigned2x`] <br>
@@ -2226,7 +2226,7 @@ pub const d3d9caps_h : cxx_header = cxx_header;
 /// * `D3DTOP_SELECTARG2`&nbsp;→ [`d3d::TOP::SelectArg2`] <br>
 /// * `D3DTOP_SUBTRACT`&nbsp;→ [`d3d::TOP::Subtract`] <br>
 ///
-/// [`D3DTEXTURESTAGESTATETYPE`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dtexturestagestatetype)&nbsp;→ [`d3d::TextureStageStateType`] <br>
+/// [`D3DTEXTURESTAGESTATETYPE`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dtexturestagestatetype)&nbsp;→ [`d3d::TextureStageStateType`] <br>
 /// * `D3DTSS_ALPHAARG0`&nbsp;→ [`d3d::TSS::AlphaArg0`] <br>
 /// * `D3DTSS_ALPHAARG1`&nbsp;→ [`d3d::TSS::AlphaArg1`] <br>
 /// * `D3DTSS_ALPHAARG2`&nbsp;→ [`d3d::TSS::AlphaArg2`] <br>
@@ -2254,7 +2254,7 @@ pub const d3d9caps_h : cxx_header = cxx_header;
 /// * `D3DTTFF_DISABLE` →&nbsp;❌ <br>
 /// * `D3DTTFF_PROJECTED` →&nbsp;❌ <br>
 ///
-/// [`D3DTRANSFORMSTATETYPE`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dtransformstatetype)&nbsp;→ [`d3d::TransformStateType`] <br>
+/// [`D3DTRANSFORMSTATETYPE`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dtransformstatetype)&nbsp;→ [`d3d::TransformStateType`] <br>
 /// * `D3DTS_PROJECTION`&nbsp;→ [`d3d::TS::Projection`] <br>
 /// * `D3DTS_TEXTURE0`&nbsp;→ [`d3d::TS::Texture0`] <br>
 /// * `D3DTS_TEXTURE1`&nbsp;→ [`d3d::TS::Texture1`] <br>
@@ -2266,7 +2266,7 @@ pub const d3d9caps_h : cxx_header = cxx_header;
 /// * `D3DTS_TEXTURE7`&nbsp;→ [`d3d::TS::Texture7`] <br>
 /// * `D3DTS_VIEW`&nbsp;→ [`d3d::TS::View`] <br>
 ///
-/// [`D3DVERTEXBLENDFLAGS`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dvertexblendflags) →&nbsp;❌ <br>
+/// [`D3DVERTEXBLENDFLAGS`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dvertexblendflags) →&nbsp;❌ <br>
 /// * `D3DVBF_0WEIGHTS` →&nbsp;❌ <br>
 /// * `D3DVBF_1WEIGHTS` →&nbsp;❌ <br>
 /// * `D3DVBF_2WEIGHTS` →&nbsp;❌ <br>
@@ -2283,7 +2283,7 @@ pub const d3d9caps_h : cxx_header = cxx_header;
 /// * `D3DSRO_POINT_SIZE` →&nbsp;❌ <br>
 /// * `D3DSRO_POSITION` →&nbsp;❌ <br>
 ///
-/// [`D3DZBUFFERTYPE`](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dzbuffertype)&nbsp;→ [`d3d::ZBufferType`] <br>
+/// [`D3DZBUFFERTYPE`](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dzbuffertype)&nbsp;→ [`d3d::ZBufferType`] <br>
 /// * `D3DZB_FALSE`&nbsp;→ [`d3d::ZB::False`] <br>
 /// * `D3DZB_TRUE`&nbsp;→ [`d3d::ZB::True`] <br>
 /// * `D3DZB_USEW`&nbsp;→ [`d3d::ZB::UseW`] <br>
@@ -2552,113 +2552,113 @@ pub const d3d9types_h : cxx_header = cxx_header;
 ///
 /// ### C++ Interfaces → Rust Types
 ///
-/// [`ID3D11FunctionLinkingGraph`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11functionlinkinggraph)&nbsp;→ [`d3d11::FunctionLinkingGraph`] <br>
-/// * [`CallFunction`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionlinkinggraph-callfunction)&nbsp;→ [`d3d11::FunctionLinkingGraph::call_function`] <br>
-/// * [`CreateModuleInstance`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionlinkinggraph-createmoduleinstance)&nbsp;→ [`d3d11::FunctionLinkingGraph::create_module_instance`] <br>
-/// * [`GenerateHlsl`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionlinkinggraph-generatehlsl)&nbsp;→ [`d3d11::FunctionLinkingGraph::generate_hlsl`] <br>
-/// * [`GetLastError`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionlinkinggraph-getlasterror)&nbsp;→ [`d3d11::FunctionLinkingGraph::get_last_error`] <br>
-/// * [`PassValue`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionlinkinggraph-passvalue)&nbsp;→ [`d3d11::FunctionLinkingGraph::pass_value`] <br>
-/// * [`PassValueWithSwizzle`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionlinkinggraph-passvaluewithswizzle)&nbsp;→ [`d3d11::FunctionLinkingGraph::pass_value_with_swizzle`] <br>
-/// * [`SetInputSignature`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionlinkinggraph-setinputsignature)&nbsp;→ [`d3d11::FunctionLinkingGraph::set_input_signature`] <br>
-/// * [`SetOutputSignature`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionlinkinggraph-setoutputsignature)&nbsp;→ [`d3d11::FunctionLinkingGraph::set_output_signature`] <br>
+/// [`ID3D11FunctionLinkingGraph`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11functionlinkinggraph)&nbsp;→ [`d3d11::FunctionLinkingGraph`] <br>
+/// * [`CallFunction`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionlinkinggraph-callfunction)&nbsp;→ [`d3d11::FunctionLinkingGraph::call_function`] <br>
+/// * [`CreateModuleInstance`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionlinkinggraph-createmoduleinstance)&nbsp;→ [`d3d11::FunctionLinkingGraph::create_module_instance`] <br>
+/// * [`GenerateHlsl`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionlinkinggraph-generatehlsl)&nbsp;→ [`d3d11::FunctionLinkingGraph::generate_hlsl`] <br>
+/// * [`GetLastError`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionlinkinggraph-getlasterror)&nbsp;→ [`d3d11::FunctionLinkingGraph::get_last_error`] <br>
+/// * [`PassValue`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionlinkinggraph-passvalue)&nbsp;→ [`d3d11::FunctionLinkingGraph::pass_value`] <br>
+/// * [`PassValueWithSwizzle`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionlinkinggraph-passvaluewithswizzle)&nbsp;→ [`d3d11::FunctionLinkingGraph::pass_value_with_swizzle`] <br>
+/// * [`SetInputSignature`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionlinkinggraph-setinputsignature)&nbsp;→ [`d3d11::FunctionLinkingGraph::set_input_signature`] <br>
+/// * [`SetOutputSignature`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionlinkinggraph-setoutputsignature)&nbsp;→ [`d3d11::FunctionLinkingGraph::set_output_signature`] <br>
 ///
-/// [`ID3D11FunctionParameterReflection`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11functionparameterreflection)&nbsp;→ [`d3d11::FunctionParameterReflection`] <br>
-/// * [`GetDesc`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionparameterreflection-getdesc)&nbsp;→ [`d3d11::FunctionParameterReflection::get_desc`] <br>
+/// [`ID3D11FunctionParameterReflection`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11functionparameterreflection)&nbsp;→ [`d3d11::FunctionParameterReflection`] <br>
+/// * [`GetDesc`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionparameterreflection-getdesc)&nbsp;→ [`d3d11::FunctionParameterReflection::get_desc`] <br>
 ///
-/// [`ID3D11FunctionReflection`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11functionreflection)&nbsp;→ [`d3d11::FunctionReflection`] <br>
-/// * [`GetConstantBufferByIndex`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionreflection-getconstantbufferbyindex)&nbsp;→ [`d3d11::FunctionReflection::get_constant_buffer_by_index`] <br>
-/// * [`GetConstantBufferByName`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionreflection-getconstantbufferbyname)&nbsp;→ [`d3d11::FunctionReflection::get_constant_buffer_by_name`] <br>
-/// * [`GetDesc`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionreflection-getdesc)&nbsp;→ [`d3d11::FunctionReflection::get_desc`] <br>
-/// * [`GetFunctionParameter`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionreflection-getfunctionparameter)&nbsp;→ [`d3d11::FunctionReflection::get_function_parameter`] <br>
-/// * [`GetResourceBindingDesc`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionreflection-getresourcebindingdesc)&nbsp;→ [`d3d11::FunctionReflection::get_resource_binding_desc`] <br>
-/// * [`GetResourceBindingDescByName`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionreflection-getresourcebindingdescbyname)&nbsp;→ [`d3d11::FunctionReflection::get_resource_binding_desc_by_name`] <br>
-/// * [`GetVariableByName`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionreflection-getvariablebyname)&nbsp;→ [`d3d11::FunctionReflection::get_variable_by_name`] <br>
+/// [`ID3D11FunctionReflection`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11functionreflection)&nbsp;→ [`d3d11::FunctionReflection`] <br>
+/// * [`GetConstantBufferByIndex`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionreflection-getconstantbufferbyindex)&nbsp;→ [`d3d11::FunctionReflection::get_constant_buffer_by_index`] <br>
+/// * [`GetConstantBufferByName`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionreflection-getconstantbufferbyname)&nbsp;→ [`d3d11::FunctionReflection::get_constant_buffer_by_name`] <br>
+/// * [`GetDesc`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionreflection-getdesc)&nbsp;→ [`d3d11::FunctionReflection::get_desc`] <br>
+/// * [`GetFunctionParameter`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionreflection-getfunctionparameter)&nbsp;→ [`d3d11::FunctionReflection::get_function_parameter`] <br>
+/// * [`GetResourceBindingDesc`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionreflection-getresourcebindingdesc)&nbsp;→ [`d3d11::FunctionReflection::get_resource_binding_desc`] <br>
+/// * [`GetResourceBindingDescByName`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionreflection-getresourcebindingdescbyname)&nbsp;→ [`d3d11::FunctionReflection::get_resource_binding_desc_by_name`] <br>
+/// * [`GetVariableByName`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionreflection-getvariablebyname)&nbsp;→ [`d3d11::FunctionReflection::get_variable_by_name`] <br>
 ///
-/// [`ID3D11LibraryReflection`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11libraryreflection)&nbsp;→ [`d3d11::LibraryReflection`] <br>
-/// * [`GetDesc`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11libraryreflection-getdesc)&nbsp;→ [`d3d11::LibraryReflection::get_desc`] <br>
-/// * [`GetFunctionByIndex`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11libraryreflection-getfunctionbyindex)&nbsp;→ [`d3d11::LibraryReflection::get_function_by_index`], [`d3d11::LibraryReflection::functions`] <br>
+/// [`ID3D11LibraryReflection`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11libraryreflection)&nbsp;→ [`d3d11::LibraryReflection`] <br>
+/// * [`GetDesc`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11libraryreflection-getdesc)&nbsp;→ [`d3d11::LibraryReflection::get_desc`] <br>
+/// * [`GetFunctionByIndex`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11libraryreflection-getfunctionbyindex)&nbsp;→ [`d3d11::LibraryReflection::get_function_by_index`], [`d3d11::LibraryReflection::functions`] <br>
 ///
-/// [`ID3D11Linker`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11linker)&nbsp;→ [`d3d11::Linker`] <br>
-/// * [`AddClipPlaneFromCBuffer`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11linker-addclipplanefromcbuffer)&nbsp;→ [`d3d11::Linker::add_clip_plane_from_cbuffer`] <br>
-/// * [`Link`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11linker-link)&nbsp;→ [`d3d11::Linker::link`] <br>
-/// * [`UseLibrary`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11linker-uselibrary)&nbsp;→ [`d3d11::Linker::use_library`] <br>
+/// [`ID3D11Linker`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11linker)&nbsp;→ [`d3d11::Linker`] <br>
+/// * [`AddClipPlaneFromCBuffer`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11linker-addclipplanefromcbuffer)&nbsp;→ [`d3d11::Linker::add_clip_plane_from_cbuffer`] <br>
+/// * [`Link`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11linker-link)&nbsp;→ [`d3d11::Linker::link`] <br>
+/// * [`UseLibrary`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11linker-uselibrary)&nbsp;→ [`d3d11::Linker::use_library`] <br>
 ///
-/// [`ID3D11LinkingNode`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11linkingnode)&nbsp;→ [`d3d11::LinkingNode`] <br>
+/// [`ID3D11LinkingNode`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11linkingnode)&nbsp;→ [`d3d11::LinkingNode`] <br>
 ///
-/// [`ID3D11Module`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11module)&nbsp;→ [`d3d11::Module`] <br>
-/// * [`CreateInstance`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11module-createinstance)&nbsp;→ [`d3d11::Module::create_instance`] <br>
+/// [`ID3D11Module`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11module)&nbsp;→ [`d3d11::Module`] <br>
+/// * [`CreateInstance`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11module-createinstance)&nbsp;→ [`d3d11::Module::create_instance`] <br>
 ///
-/// [`ID3D11ModuleInstance`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11moduleinstance)&nbsp;→ [`d3d11::ModuleInstance`] <br>
-/// * [`BindConstantBuffer`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindconstantbuffer)&nbsp;→ [`d3d11::ModuleInstance::bind_constant_buffer`] <br>
-/// * [`BindConstantBufferByName`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindconstantbufferbyname)&nbsp;→ [`d3d11::ModuleInstance::bind_constant_buffer_by_name`] <br>
-/// * [`BindResource`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindresource)&nbsp;→ [`d3d11::ModuleInstance::bind_resource`] <br>
-/// * [`BindResourceAsUnorderedAccessView`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindresourceasunorderedaccessview)&nbsp;→ [`d3d11::ModuleInstance::bind_resource_as_unordered_access_view`] <br>
-/// * [`BindResourceAsUnorderedAccessViewByName`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindresourceasunorderedaccessviewbyname)&nbsp;→ [`d3d11::ModuleInstance::bind_resource_as_unordered_access_view_by_name`] <br>
-/// * [`BindResourceByName`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindresourcebyname)&nbsp;→ [`d3d11::ModuleInstance::bind_resource_by_name`] <br>
-/// * [`BindSampler`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindsampler)&nbsp;→ [`d3d11::ModuleInstance::bind_sampler`] <br>
-/// * [`BindSamplerByName`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindsamplerbyname)&nbsp;→ [`d3d11::ModuleInstance::bind_sampler_by_name`] <br>
-/// * [`BindUnorderedAccessView`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindunorderedaccessview)&nbsp;→ [`d3d11::ModuleInstance::bind_unordered_access_view`] <br>
-/// * [`BindUnorderedAccessViewByName`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindunorderedaccessviewbyname)&nbsp;→ [`d3d11::ModuleInstance::bind_unordered_access_view_by_name`] <br>
+/// [`ID3D11ModuleInstance`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11moduleinstance)&nbsp;→ [`d3d11::ModuleInstance`] <br>
+/// * [`BindConstantBuffer`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindconstantbuffer)&nbsp;→ [`d3d11::ModuleInstance::bind_constant_buffer`] <br>
+/// * [`BindConstantBufferByName`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindconstantbufferbyname)&nbsp;→ [`d3d11::ModuleInstance::bind_constant_buffer_by_name`] <br>
+/// * [`BindResource`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindresource)&nbsp;→ [`d3d11::ModuleInstance::bind_resource`] <br>
+/// * [`BindResourceAsUnorderedAccessView`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindresourceasunorderedaccessview)&nbsp;→ [`d3d11::ModuleInstance::bind_resource_as_unordered_access_view`] <br>
+/// * [`BindResourceAsUnorderedAccessViewByName`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindresourceasunorderedaccessviewbyname)&nbsp;→ [`d3d11::ModuleInstance::bind_resource_as_unordered_access_view_by_name`] <br>
+/// * [`BindResourceByName`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindresourcebyname)&nbsp;→ [`d3d11::ModuleInstance::bind_resource_by_name`] <br>
+/// * [`BindSampler`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindsampler)&nbsp;→ [`d3d11::ModuleInstance::bind_sampler`] <br>
+/// * [`BindSamplerByName`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindsamplerbyname)&nbsp;→ [`d3d11::ModuleInstance::bind_sampler_by_name`] <br>
+/// * [`BindUnorderedAccessView`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindunorderedaccessview)&nbsp;→ [`d3d11::ModuleInstance::bind_unordered_access_view`] <br>
+/// * [`BindUnorderedAccessViewByName`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindunorderedaccessviewbyname)&nbsp;→ [`d3d11::ModuleInstance::bind_unordered_access_view_by_name`] <br>
 ///
-/// [`ID3D11ShaderReflection`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11shaderreflection)&nbsp;→ [`d3d11::ShaderReflection`] <br>
-/// * [`GetBitwiseInstructionCount`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getbitwiseinstructioncount)&nbsp;→ [`d3d11::ShaderReflection::get_bitwise_instruction_count`] <br>
-/// * [`GetConstantBufferByIndex`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getconstantbufferbyindex)&nbsp;→ [`d3d11::ShaderReflection::get_constant_buffer_by_index`] <br>
-/// * [`GetConstantBufferByName`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getconstantbufferbyname)&nbsp;→ [`d3d11::ShaderReflection::get_constant_buffer_by_name`] <br>
-/// * [`GetConversionInstructionCount`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getconversioninstructioncount)&nbsp;→ [`d3d11::ShaderReflection::get_conversion_instruction_count`] <br>
-/// * [`GetDesc`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getdesc)&nbsp;→ [`d3d11::ShaderReflection::get_desc`] <br>
-/// * [`GetGSInputPrimitive`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getgsinputprimitive)&nbsp;→ [`d3d11::ShaderReflection::get_gs_input_primitive`] <br>
-/// * [`GetInputParameterDesc`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getinputparameterdesc)&nbsp;→ [`d3d11::ShaderReflection::get_input_parameter_desc`] <br>
-/// * [`GetMinFeatureLevel`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getminfeaturelevel)&nbsp;→ [`d3d11::ShaderReflection::get_min_feature_level`] <br>
-/// * [`GetMovInstructionCount`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getmovinstructioncount)&nbsp;→ [`d3d11::ShaderReflection::get_mov_instruction_count`] <br>
-/// * [`GetMovcInstructionCount`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getmovcinstructioncount)&nbsp;→ [`d3d11::ShaderReflection::get_movc_instruction_count`] <br>
-/// * [`GetNumInterfaceSlots`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getnuminterfaceslots)&nbsp;→ [`d3d11::ShaderReflection::get_num_interface_slots`] <br>
-/// * [`GetOutputParameterDesc`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getoutputparameterdesc)&nbsp;→ [`d3d11::ShaderReflection::get_output_parameter_desc`] <br>
-/// * [`GetPatchConstantParameterDesc`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getpatchconstantparameterdesc)&nbsp;→ [`d3d11::ShaderReflection::get_patch_constant_parameter_desc`] <br>
-/// * [`GetRequiresFlags`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getrequiresflags)&nbsp;→ [`d3d11::ShaderReflection::get_requires_flags`] <br>
-/// * [`GetResourceBindingDesc`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getresourcebindingdesc)&nbsp;→ [`d3d11::ShaderReflection::get_resource_binding_desc`] <br>
-/// * [`GetResourceBindingDescByName`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getresourcebindingdescbyname)&nbsp;→ [`d3d11::ShaderReflection::get_resource_binding_desc_by_name`] <br>
-/// * [`GetThreadGroupSize`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getthreadgroupsize)&nbsp;→ [`d3d11::ShaderReflection::get_thread_group_size`] <br>
-/// * [`GetVariableByName`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getvariablebyname)&nbsp;→ [`d3d11::ShaderReflection::get_variable_by_name`] <br>
-/// * [`IsSampleFrequencyShader`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-issamplefrequencyshader)&nbsp;→ [`d3d11::ShaderReflection::is_sample_frequency_shader`] <br>
+/// [`ID3D11ShaderReflection`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11shaderreflection)&nbsp;→ [`d3d11::ShaderReflection`] <br>
+/// * [`GetBitwiseInstructionCount`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getbitwiseinstructioncount)&nbsp;→ [`d3d11::ShaderReflection::get_bitwise_instruction_count`] <br>
+/// * [`GetConstantBufferByIndex`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getconstantbufferbyindex)&nbsp;→ [`d3d11::ShaderReflection::get_constant_buffer_by_index`] <br>
+/// * [`GetConstantBufferByName`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getconstantbufferbyname)&nbsp;→ [`d3d11::ShaderReflection::get_constant_buffer_by_name`] <br>
+/// * [`GetConversionInstructionCount`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getconversioninstructioncount)&nbsp;→ [`d3d11::ShaderReflection::get_conversion_instruction_count`] <br>
+/// * [`GetDesc`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getdesc)&nbsp;→ [`d3d11::ShaderReflection::get_desc`] <br>
+/// * [`GetGSInputPrimitive`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getgsinputprimitive)&nbsp;→ [`d3d11::ShaderReflection::get_gs_input_primitive`] <br>
+/// * [`GetInputParameterDesc`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getinputparameterdesc)&nbsp;→ [`d3d11::ShaderReflection::get_input_parameter_desc`] <br>
+/// * [`GetMinFeatureLevel`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getminfeaturelevel)&nbsp;→ [`d3d11::ShaderReflection::get_min_feature_level`] <br>
+/// * [`GetMovInstructionCount`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getmovinstructioncount)&nbsp;→ [`d3d11::ShaderReflection::get_mov_instruction_count`] <br>
+/// * [`GetMovcInstructionCount`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getmovcinstructioncount)&nbsp;→ [`d3d11::ShaderReflection::get_movc_instruction_count`] <br>
+/// * [`GetNumInterfaceSlots`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getnuminterfaceslots)&nbsp;→ [`d3d11::ShaderReflection::get_num_interface_slots`] <br>
+/// * [`GetOutputParameterDesc`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getoutputparameterdesc)&nbsp;→ [`d3d11::ShaderReflection::get_output_parameter_desc`] <br>
+/// * [`GetPatchConstantParameterDesc`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getpatchconstantparameterdesc)&nbsp;→ [`d3d11::ShaderReflection::get_patch_constant_parameter_desc`] <br>
+/// * [`GetRequiresFlags`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getrequiresflags)&nbsp;→ [`d3d11::ShaderReflection::get_requires_flags`] <br>
+/// * [`GetResourceBindingDesc`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getresourcebindingdesc)&nbsp;→ [`d3d11::ShaderReflection::get_resource_binding_desc`] <br>
+/// * [`GetResourceBindingDescByName`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getresourcebindingdescbyname)&nbsp;→ [`d3d11::ShaderReflection::get_resource_binding_desc_by_name`] <br>
+/// * [`GetThreadGroupSize`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getthreadgroupsize)&nbsp;→ [`d3d11::ShaderReflection::get_thread_group_size`] <br>
+/// * [`GetVariableByName`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getvariablebyname)&nbsp;→ [`d3d11::ShaderReflection::get_variable_by_name`] <br>
+/// * [`IsSampleFrequencyShader`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-issamplefrequencyshader)&nbsp;→ [`d3d11::ShaderReflection::is_sample_frequency_shader`] <br>
 ///
-/// [`ID3D11ShaderReflectionConstantBuffer`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11shaderreflectionconstantbuffer)&nbsp;→ [`d3d11::ShaderReflectionConstantBuffer`] <br>
-/// * [`GetDesc`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectionconstantbuffer-getdesc)&nbsp;→ [`d3d11::ShaderReflectionConstantBuffer::get_desc`] <br>
-/// * [`GetVariableByIndex`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectionconstantbuffer-getvariablebyindex)&nbsp;→ [`d3d11::ShaderReflectionConstantBuffer::get_variable_by_index`] <br>
-/// * [`GetVariableByName`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectionconstantbuffer-getvariablebyname)&nbsp;→ [`d3d11::ShaderReflectionConstantBuffer::get_variable_by_name`] <br>
+/// [`ID3D11ShaderReflectionConstantBuffer`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11shaderreflectionconstantbuffer)&nbsp;→ [`d3d11::ShaderReflectionConstantBuffer`] <br>
+/// * [`GetDesc`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectionconstantbuffer-getdesc)&nbsp;→ [`d3d11::ShaderReflectionConstantBuffer::get_desc`] <br>
+/// * [`GetVariableByIndex`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectionconstantbuffer-getvariablebyindex)&nbsp;→ [`d3d11::ShaderReflectionConstantBuffer::get_variable_by_index`] <br>
+/// * [`GetVariableByName`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectionconstantbuffer-getvariablebyname)&nbsp;→ [`d3d11::ShaderReflectionConstantBuffer::get_variable_by_name`] <br>
 ///
-/// [`ID3D11ShaderReflectionType`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11shaderreflectiontype)&nbsp;→ [`d3d11::ShaderReflectionType`] <br>
-/// * [`GetBaseClass`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectiontype-getbaseclass)&nbsp;→ [`d3d11::ShaderReflectionType::get_base_class`] <br>
-/// * [`GetDesc`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectiontype-getdesc)&nbsp;→ [`d3d11::ShaderReflectionType::get_desc`] <br>
-/// * [`GetInterfaceByIndex`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectiontype-getinterfacebyindex)&nbsp;→ [`d3d11::ShaderReflectionType::get_interface_by_index`] <br>
-/// * [`GetMemberTypeByIndex`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectiontype-getmembertypebyindex)&nbsp;→ [`d3d11::ShaderReflectionType::get_member_type_by_index`] <br>
-/// * [`GetMemberTypeByName`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectiontype-getmembertypebyname)&nbsp;→ [`d3d11::ShaderReflectionType::get_member_type_by_name`] <br>
-/// * [`GetMemberTypeName`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectiontype-getmembertypename)&nbsp;→ [`d3d11::ShaderReflectionType::get_member_type_name`] <br>
-/// * [`GetNumInterfaces`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectiontype-getnuminterfaces)&nbsp;→ [`d3d11::ShaderReflectionType::get_num_interfaces`] <br>
-/// * [`GetSubType`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectiontype-getsubtype)&nbsp;→ [`d3d11::ShaderReflectionType::get_sub_type`] <br>
-/// * [`ImplementsInterface`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectiontype-implementsinterface)&nbsp;→ [`d3d11::ShaderReflectionType::implements_interface`] <br>
-/// * [`IsEqual`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectiontype-isequal)&nbsp;→ [`d3d11::ShaderReflectionType::is_equal`] <br>
-/// * [`IsOfType`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectiontype-isoftype)&nbsp;→ [`d3d11::ShaderReflectionType::is_of_type`] <br>
+/// [`ID3D11ShaderReflectionType`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11shaderreflectiontype)&nbsp;→ [`d3d11::ShaderReflectionType`] <br>
+/// * [`GetBaseClass`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectiontype-getbaseclass)&nbsp;→ [`d3d11::ShaderReflectionType::get_base_class`] <br>
+/// * [`GetDesc`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectiontype-getdesc)&nbsp;→ [`d3d11::ShaderReflectionType::get_desc`] <br>
+/// * [`GetInterfaceByIndex`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectiontype-getinterfacebyindex)&nbsp;→ [`d3d11::ShaderReflectionType::get_interface_by_index`] <br>
+/// * [`GetMemberTypeByIndex`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectiontype-getmembertypebyindex)&nbsp;→ [`d3d11::ShaderReflectionType::get_member_type_by_index`] <br>
+/// * [`GetMemberTypeByName`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectiontype-getmembertypebyname)&nbsp;→ [`d3d11::ShaderReflectionType::get_member_type_by_name`] <br>
+/// * [`GetMemberTypeName`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectiontype-getmembertypename)&nbsp;→ [`d3d11::ShaderReflectionType::get_member_type_name`] <br>
+/// * [`GetNumInterfaces`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectiontype-getnuminterfaces)&nbsp;→ [`d3d11::ShaderReflectionType::get_num_interfaces`] <br>
+/// * [`GetSubType`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectiontype-getsubtype)&nbsp;→ [`d3d11::ShaderReflectionType::get_sub_type`] <br>
+/// * [`ImplementsInterface`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectiontype-implementsinterface)&nbsp;→ [`d3d11::ShaderReflectionType::implements_interface`] <br>
+/// * [`IsEqual`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectiontype-isequal)&nbsp;→ [`d3d11::ShaderReflectionType::is_equal`] <br>
+/// * [`IsOfType`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectiontype-isoftype)&nbsp;→ [`d3d11::ShaderReflectionType::is_of_type`] <br>
 ///
-/// [`ID3D11ShaderReflectionVariable`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11shaderreflectionvariable)&nbsp;→ [`d3d11::ShaderReflectionVariable`] <br>
-/// * [`GetBuffer`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectionvariable-getbuffer)&nbsp;→ [`d3d11::ShaderReflectionVariable::get_buffer`] <br>
-/// * [`GetDesc`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectionvariable-getdesc)&nbsp;→ [`d3d11::ShaderReflectionVariable::get_desc`] <br>
-/// * [`GetInterfaceSlot`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectionvariable-getinterfaceslot)&nbsp;→ [`d3d11::ShaderReflectionVariable::get_interface_slot`] <br>
-/// * [`GetType`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectionvariable-gettype)&nbsp;→ [`d3d11::ShaderReflectionVariable::get_type`] <br>
+/// [`ID3D11ShaderReflectionVariable`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11shaderreflectionvariable)&nbsp;→ [`d3d11::ShaderReflectionVariable`] <br>
+/// * [`GetBuffer`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectionvariable-getbuffer)&nbsp;→ [`d3d11::ShaderReflectionVariable::get_buffer`] <br>
+/// * [`GetDesc`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectionvariable-getdesc)&nbsp;→ [`d3d11::ShaderReflectionVariable::get_desc`] <br>
+/// * [`GetInterfaceSlot`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectionvariable-getinterfaceslot)&nbsp;→ [`d3d11::ShaderReflectionVariable::get_interface_slot`] <br>
+/// * [`GetType`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectionvariable-gettype)&nbsp;→ [`d3d11::ShaderReflectionVariable::get_type`] <br>
 ///
 /// ### C++ Structs -> Rust Structs
 ///
-/// [`D3D11_FUNCTION_DESC`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/ns-d3d11shader-d3d11_function_desc)&nbsp;→ [`d3d11::FunctionDesc`] <br>
-/// [`D3D11_LIBRARY_DESC`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/ns-d3d11shader-d3d11_library_desc)&nbsp;→ [`d3d11::LibraryDesc`] <br>
-/// [`D3D11_PARAMETER_DESC`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/ns-d3d11shader-d3d11_parameter_desc)&nbsp;→ [`d3d11::ParameterDesc`] <br>
-/// [`D3D11_SHADER_BUFFER_DESC`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/ns-d3d11shader-d3d11_shader_buffer_desc)&nbsp;→ [`d3d11::ShaderBufferDesc`] <br>
-/// [`D3D11_SHADER_DESC`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/ns-d3d11shader-d3d11_shader_desc)&nbsp;→ [`d3d11::ShaderDesc`] <br>
-/// [`D3D11_SHADER_INPUT_BIND_DESC`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/ns-d3d11shader-d3d11_shader_input_bind_desc)&nbsp;→ [`d3d11::ShaderInputBindDesc`] <br>
-/// [`D3D11_SHADER_TYPE_DESC`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/ns-d3d11shader-d3d11_shader_type_desc)&nbsp;→ [`d3d11::ShaderTypeDesc`] <br>
-/// [`D3D11_SHADER_VARIABLE_DESC`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/ns-d3d11shader-d3d11_shader_variable_desc)&nbsp;→ [`d3d11::ShaderVariableDesc`] <br>
-/// [`D3D11_SIGNATURE_PARAMETER_DESC`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/ns-d3d11shader-d3d11_signature_parameter_desc)&nbsp;→ [`d3d11::SignatureParameterDesc`] <br>
+/// [`D3D11_FUNCTION_DESC`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/ns-d3d11shader-d3d11_function_desc)&nbsp;→ [`d3d11::FunctionDesc`] <br>
+/// [`D3D11_LIBRARY_DESC`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/ns-d3d11shader-d3d11_library_desc)&nbsp;→ [`d3d11::LibraryDesc`] <br>
+/// [`D3D11_PARAMETER_DESC`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/ns-d3d11shader-d3d11_parameter_desc)&nbsp;→ [`d3d11::ParameterDesc`] <br>
+/// [`D3D11_SHADER_BUFFER_DESC`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/ns-d3d11shader-d3d11_shader_buffer_desc)&nbsp;→ [`d3d11::ShaderBufferDesc`] <br>
+/// [`D3D11_SHADER_DESC`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/ns-d3d11shader-d3d11_shader_desc)&nbsp;→ [`d3d11::ShaderDesc`] <br>
+/// [`D3D11_SHADER_INPUT_BIND_DESC`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/ns-d3d11shader-d3d11_shader_input_bind_desc)&nbsp;→ [`d3d11::ShaderInputBindDesc`] <br>
+/// [`D3D11_SHADER_TYPE_DESC`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/ns-d3d11shader-d3d11_shader_type_desc)&nbsp;→ [`d3d11::ShaderTypeDesc`] <br>
+/// [`D3D11_SHADER_VARIABLE_DESC`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/ns-d3d11shader-d3d11_shader_variable_desc)&nbsp;→ [`d3d11::ShaderVariableDesc`] <br>
+/// [`D3D11_SIGNATURE_PARAMETER_DESC`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/ns-d3d11shader-d3d11_signature_parameter_desc)&nbsp;→ [`d3d11::SignatureParameterDesc`] <br>
 /// ### C++ Enums → Rust Structs
 ///
-/// [`D3D11_SHADER_VERSION_TYPE`](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/ne-d3d11shader-d3d11_shader_version_type)&nbsp;→ [`d3d11::ShaderVersionType`] <br>
+/// [`D3D11_SHADER_VERSION_TYPE`](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/ne-d3d11shader-d3d11_shader_version_type)&nbsp;→ [`d3d11::ShaderVersionType`] <br>
 /// * `D3D11_SHVER_COMPUTE_SHADER`&nbsp;→ [`d3d11::ShVer::ComputeShader`] <br>
 /// * `D3D11_SHVER_DOMAIN_SHADER`&nbsp;→ [`d3d11::ShVer::DomainShader`] <br>
 /// * `D3D11_SHVER_GEOMETRY_SHADER`&nbsp;→ [`d3d11::ShVer::GeometryShader`] <br>
@@ -2798,22 +2798,22 @@ pub const d3d11shadertracing_h : cxx_header = cxx_header;
 ///
 /// ### C++ Structs -> Rust Structs
 ///
-/// [`XINPUT_BATTERY_INFORMATION`](https://docs.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_battery_information)&nbsp;→ [`xinput::BatteryInformation`] <br>
-/// [`XINPUT_CAPABILITIES`](https://docs.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_capabilities)&nbsp;→ [`xinput::Capabilities`] <br>
-/// [`XINPUT_GAMEPAD`](https://docs.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_gamepad)&nbsp;→ [`xinput::Gamepad`] <br>
-/// [`XINPUT_KEYSTROKE`](https://docs.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_keystroke)&nbsp;→ [`xinput::Keystroke`] <br>
-/// [`XINPUT_STATE`](https://docs.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_state)&nbsp;→ [`xinput::State`] <br>
-/// [`XINPUT_VIBRATION`](https://docs.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_vibration)&nbsp;→ [`xinput::Vibration`] <br>
+/// [`XINPUT_BATTERY_INFORMATION`](https://learn.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_battery_information)&nbsp;→ [`xinput::BatteryInformation`] <br>
+/// [`XINPUT_CAPABILITIES`](https://learn.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_capabilities)&nbsp;→ [`xinput::Capabilities`] <br>
+/// [`XINPUT_GAMEPAD`](https://learn.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_gamepad)&nbsp;→ [`xinput::Gamepad`] <br>
+/// [`XINPUT_KEYSTROKE`](https://learn.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_keystroke)&nbsp;→ [`xinput::Keystroke`] <br>
+/// [`XINPUT_STATE`](https://learn.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_state)&nbsp;→ [`xinput::State`] <br>
+/// [`XINPUT_VIBRATION`](https://learn.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_vibration)&nbsp;→ [`xinput::Vibration`] <br>
 /// ### C++ Functions → Rust Fns
 ///
-/// [`XInputEnable`](https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputenable)&nbsp;→ [`xinput::enable`] <br>
-/// [`XInputGetAudioDeviceIds`](https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetaudiodeviceids)&nbsp;→ [`xinput::get_audio_device_ids`] <br>
-/// [`XInputGetBatteryInformation`](https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetbatteryinformation)&nbsp;→ [`xinput::get_battery_information`] <br>
-/// [`XInputGetCapabilities`](https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetcapabilities)&nbsp;→ [`xinput::get_capabilities`] <br>
-/// [`XInputGetDSoundAudioDeviceGuids`](https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetdsoundaudiodeviceguids)&nbsp;→ [`xinput::get_dsound_audio_device_guids`] <br>
-/// [`XInputGetKeystroke`](https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetkeystroke)&nbsp;→ [`xinput::get_keystroke`] <br>
-/// [`XInputGetState`](https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetstate)&nbsp;→ [`xinput::get_state`] <br>
-/// [`XInputSetState`](https://docs.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputsetstate)&nbsp;→ [`xinput::set_state`] <br>
+/// [`XInputEnable`](https://learn.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputenable)&nbsp;→ [`xinput::enable`] <br>
+/// [`XInputGetAudioDeviceIds`](https://learn.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetaudiodeviceids)&nbsp;→ [`xinput::get_audio_device_ids`] <br>
+/// [`XInputGetBatteryInformation`](https://learn.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetbatteryinformation)&nbsp;→ [`xinput::get_battery_information`] <br>
+/// [`XInputGetCapabilities`](https://learn.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetcapabilities)&nbsp;→ [`xinput::get_capabilities`] <br>
+/// [`XInputGetDSoundAudioDeviceGuids`](https://learn.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetdsoundaudiodeviceguids)&nbsp;→ [`xinput::get_dsound_audio_device_guids`] <br>
+/// [`XInputGetKeystroke`](https://learn.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetkeystroke)&nbsp;→ [`xinput::get_keystroke`] <br>
+/// [`XInputGetState`](https://learn.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetstate)&nbsp;→ [`xinput::get_state`] <br>
+/// [`XInputSetState`](https://learn.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputsetstate)&nbsp;→ [`xinput::set_state`] <br>
 /// ### C++ Constants → Rust Constants
 ///
 /// `BATTERY_DEVTYPE_GAMEPAD`&nbsp;→ [`xinput::BatteryDevType::Gamepad`] <br>

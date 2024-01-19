@@ -4,7 +4,7 @@ use winapi::shared::d3d9types::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dlight9)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dlight9)\]
 /// D3DLIGHT9
 ///
 /// Defines a set of lighting properties.
@@ -24,13 +24,13 @@ use winapi::shared::d3d9types::*;
     /// Type of the light source.
     pub ty:             LightType,
 
-    /// [Diffuse](https://docs.microsoft.com/en-us/windows/uwp/graphics-concepts/diffuse-lighting) color emitted by the light.
+    /// [Diffuse](https://learn.microsoft.com/en-us/windows/uwp/graphics-concepts/diffuse-lighting) color emitted by the light.
     pub diffuse:        ColorValue,
 
-    /// [Specular](https://docs.microsoft.com/en-us/windows/uwp/graphics-concepts/specular-lighting) color emitted by the light.
+    /// [Specular](https://learn.microsoft.com/en-us/windows/uwp/graphics-concepts/specular-lighting) color emitted by the light.
     pub specular:       ColorValue,
 
-    /// [Ambient](https://docs.microsoft.com/en-us/windows/uwp/graphics-concepts/ambient-lighting) color emitted by the light.
+    /// [Ambient](https://learn.microsoft.com/en-us/windows/uwp/graphics-concepts/ambient-lighting) color emitted by the light.
     pub ambient:        ColorValue,
 
     /// Position of the light in world space.  This member has no meaning for [Directional] lights, and is ignored in that case.
@@ -68,7 +68,7 @@ use winapi::shared::d3d9types::*;
     /// For non-directional lights, all three attenuation values should not be set to 0.0 at the same time.
     ///
     /// [Directional]:                      crate::LightType::Directional
-    /// [Light Properties (Direct3D 9)]:    https://docs.microsoft.com/en-us/windows/win32/direct3d9/light-properties
+    /// [Light Properties (Direct3D 9)]:    https://learn.microsoft.com/en-us/windows/win32/direct3d9/light-properties
     pub attenuation0:   f32,
 
     /// Value specifying how the light intensity changes over distance.
@@ -79,7 +79,7 @@ use winapi::shared::d3d9types::*;
     /// For non-[Directional] lights, all three attenuation values should not be set to 0.0 at the same time.
     ///
     /// [Directional]:                      crate::LightType::Directional
-    /// [Light Properties (Direct3D 9)]:    https://docs.microsoft.com/en-us/windows/win32/direct3d9/light-properties
+    /// [Light Properties (Direct3D 9)]:    https://learn.microsoft.com/en-us/windows/win32/direct3d9/light-properties
     pub attenuation1:   f32,
 
     /// Value specifying how the light intensity changes over distance.
@@ -90,7 +90,7 @@ use winapi::shared::d3d9types::*;
     /// For non-[Directional] lights, all three attenuation values should not be set to 0.0 at the same time.
     ///
     /// [Directional]:                      crate::LightType::Directional
-    /// [Light Properties (Direct3D 9)]:    https://docs.microsoft.com/en-us/windows/win32/direct3d9/light-properties
+    /// [Light Properties (Direct3D 9)]:    https://learn.microsoft.com/en-us/windows/win32/direct3d9/light-properties
     pub attenuation2:   f32,
 
     /// Angle, in radians, of a spotlight's inner cone - that is, the fully illuminated spotlight cone.

@@ -14,7 +14,7 @@ use std::ptr::{null, null_mut};
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dsurface9)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dsurface9)\]
 /// (extends [Resource])
 /// A dense 2-dimensional region of data, often belonging to a [Texture]
 #[derive(Clone)] #[repr(transparent)]
@@ -26,11 +26,11 @@ unsafe impl AsSafe<IDirect3DSurface9    > for Surface { fn as_safe(&self) -> &ID
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dsurface9)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dsurface9)\]
 /// IDirect3DSurface9 extension method list
 ///
 /// ### Methods
-/// | thindx                                                        | docs.microsoft.com    | Description |
+/// | thindx                                                        | microsoft.com         | Description |
 /// | ------------------------------------------------------------- | --------------------- | ----------- |
 /// | [get_container](Self::get_container)                          | [GetContainer]        | Provides access to the parent cube texture or texture (mipmap) object, if this surface is a child level of a cube texture or a mipmap. This method can also provide access to the parent swap chain if the surface is a back-buffer child.
 /// | [get_dc](Self::get_dc)                                        | [GetDC]               | Retrieves a device context.
@@ -39,15 +39,15 @@ unsafe impl AsSafe<IDirect3DSurface9    > for Surface { fn as_safe(&self) -> &ID
 /// | [release_dc](Self::release_dc)                                | [ReleaseDC]           | Release a device context handle.
 /// | [unlock_rect](Self::unlock_rect)                              | [UnlockRect]          | Unlocks a rectangle on a surface.
 ///
-/// [GetContainer]: https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dsurface9-getcontainer
-/// [GetDC]:        https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dsurface9-getdc
-/// [GetDesc]:      https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dsurface9-getdesc
-/// [LockRect]:     https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dsurface9-lockrect
-/// [ReleaseDC]:    https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dsurface9-releasedc
-/// [UnlockRect]:   https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dsurface9-unlockrect
+/// [GetContainer]: https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dsurface9-getcontainer
+/// [GetDC]:        https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dsurface9-getdc
+/// [GetDesc]:      https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dsurface9-getdesc
+/// [LockRect]:     https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dsurface9-lockrect
+/// [ReleaseDC]:    https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dsurface9-releasedc
+/// [UnlockRect]:   https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dsurface9-unlockrect
 ///
 pub trait IDirect3DSurface9Ext : AsSafe<IDirect3DSurface9> {
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3dsurface9-getcontainer)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3dsurface9-getcontainer)\]
     /// IDirect3DSurface9::GetContainer
     ///
     /// Provides access to the parent cube texture or texture (mipmap) object, if this surface is a child level of a cube texture or a mipmap. This method can also provide access to the parent swap chain if the surface is a back-buffer child.
@@ -72,7 +72,7 @@ pub trait IDirect3DSurface9Ext : AsSafe<IDirect3DSurface9> {
         Ok(unsafe { C::from_raw(container.cast()) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3dsurface9-getdc)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3dsurface9-getdc)\]
     /// IDirect3DSurface9::GetDC
     ///
     /// Retrieves a device context.
@@ -98,7 +98,7 @@ pub trait IDirect3DSurface9Ext : AsSafe<IDirect3DSurface9> {
         Ok(hdc)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3dsurface9-getdesc)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3dsurface9-getdesc)\]
     /// IDirect3DSurface9::GetDesc
     ///
     /// Retrieves a description of the surface.
@@ -124,7 +124,7 @@ pub trait IDirect3DSurface9Ext : AsSafe<IDirect3DSurface9> {
         Ok(desc)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3dsurface9-lockrect)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3dsurface9-lockrect)\]
     /// IDirect3DSurface9::LockRect
     ///
     /// Locks a rectangle on a surface.
@@ -163,7 +163,7 @@ pub trait IDirect3DSurface9Ext : AsSafe<IDirect3DSurface9> {
         Ok(locked)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3dsurface9-releasedc)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3dsurface9-releasedc)\]
     /// IDirect3DSurface9::ReleaseDC
     ///
     /// Release a device context handle.
@@ -192,7 +192,7 @@ pub trait IDirect3DSurface9Ext : AsSafe<IDirect3DSurface9> {
         fn_check_hr!(unsafe { self.as_winapi().ReleaseDC(hdc) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3dsurface9-unlockrect)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3dsurface9-unlockrect)\]
     /// IDirect3DSurface9::UnlockRect
     ///
     /// Unlocks a rectangle on a surface.

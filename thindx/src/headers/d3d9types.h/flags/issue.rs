@@ -5,7 +5,7 @@ type D3DISSUE = u32; // there's no actual type
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dlock)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dlock)\]
 /// DWORD / D3DISSUE_*
 ///
 /// Controls how [IDirect3DQuery9Ext::issue] behaves.
@@ -19,13 +19,13 @@ flags! { Issue => D3DISSUE; None, Begin, End }
     /// No flags
     pub const None          : Issue = Issue(0);
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dissue-begin)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dissue-begin)\]
     /// D3DISSUE_BEGIN
     ///
     /// [Issue::Begin] is valid for [QueryType::Occlusion].
     pub const Begin         : Issue = Issue(D3DISSUE_BEGIN);
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dissue-end)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dissue-end)\]
     /// D3DISSUE_END
     ///
     /// [Issue::End] is valid for [QueryType::VCache], [QueryType::ResourceManager], [QueryType::VertexStats], [QueryType::Event], and [QueryType::Occlusion]

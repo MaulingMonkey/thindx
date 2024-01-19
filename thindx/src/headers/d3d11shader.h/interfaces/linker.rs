@@ -7,7 +7,7 @@ use std::ptr::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11linker)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11linker)\]
 /// ID3D11Linker
 ///
 /// A linker interface is used to link a shader module.
@@ -22,13 +22,13 @@ pub struct Linker(pub(crate) mcom::Rc<winapi::um::d3d11shader::ID3D11Linker>);
 convert!(unsafe Linker => Unknown, winapi::um::d3d11shader::ID3D11Linker);
 
 impl Linker {
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11linker-addclipplanefromcbuffer)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11linker-addclipplanefromcbuffer)\]
     /// ID3D11Linker::AddClipPlaneFromCBuffer
     ///
     /// Adds a [clip plane] with the plane coefficients taken from a [cbuffer] entry for 10Level9 shaders.
     ///
-    /// [clip plane]:       https://docs.microsoft.com/en-us/windows/desktop/direct3dhlsl/user-clip-planes-on-10level9
-    /// [cbuffer]:          https://docs.microsoft.com/en-us/windows/desktop/direct3dhlsl/dx-graphics-hlsl-constants
+    /// [clip plane]:       https://learn.microsoft.com/en-us/windows/desktop/direct3dhlsl/user-clip-planes-on-10level9
+    /// [cbuffer]:          https://learn.microsoft.com/en-us/windows/desktop/direct3dhlsl/dx-graphics-hlsl-constants
     ///
     /// ### Arguments
     /// *   `cbuffer_slot`      - The cbuffer slot (e.g. which `cb#` register to read)
@@ -82,14 +82,14 @@ impl Linker {
     /// ```
     ///
     /// ### See Also
-    /// *   [User clip planes on feature level 9 hardware](https://docs.microsoft.com/en-us/windows/win32/direct3dhlsl/user-clip-planes-on-10level9) (clip plane limit)
-    /// *   [Introduction to Buffers in Direct3D 11:  Constant Buffer](https://docs.microsoft.com/en-us/windows/win32/direct3d11/overviews-direct3d-11-resources-buffers-intro#constant-buffer) (cbuffer limits quoted in example)
+    /// *   [User clip planes on feature level 9 hardware](https://learn.microsoft.com/en-us/windows/win32/direct3dhlsl/user-clip-planes-on-10level9) (clip plane limit)
+    /// *   [Introduction to Buffers in Direct3D 11:  Constant Buffer](https://learn.microsoft.com/en-us/windows/win32/direct3d11/overviews-direct3d-11-resources-buffers-intro#constant-buffer) (cbuffer limits quoted in example)
     pub fn add_clip_plane_from_cbuffer(&self, cbuffer_slot: u32, cbuffer_entry: u32) -> Result<(), Error> {
         fn_context!(d3d11::Linker::add_clip_plane_from_cbuffer => ID3D11Linker::AddClipPlaneFromCBuffer);
         fn_check_hr!(unsafe { self.0.AddClipPlaneFromCBuffer(cbuffer_slot, cbuffer_entry) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11linker-link)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11linker-link)\]
     /// ID3D11Linker::Link
     ///
     /// Links the shader and produces a shader blob that the Direct3D runtime can use.
@@ -143,7 +143,7 @@ impl Linker {
         }
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11linker-uselibrary)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11linker-uselibrary)\]
     /// ID3D11Linker::UseLibrary
     ///
     /// Adds an instance of a library module to be used for linking.

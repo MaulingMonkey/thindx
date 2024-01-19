@@ -1,18 +1,18 @@
 <!-- functions -->
 
-[DestroyWindow]:                        https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-destroywindow
+[DestroyWindow]:                        https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-destroywindow
 
-[GetClientRect]:                        https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getclientrect
-[GetDesktopWindow]:                     https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getdesktopwindow
+[GetClientRect]:                        https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getclientrect
+[GetDesktopWindow]:                     https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getdesktopwindow
 
-[GetWindowThreadProcessId]:             https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowthreadprocessid
+[GetWindowThreadProcessId]:             https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowthreadprocessid
 
-[IsWindow]:                             https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-iswindow
-[IsWindowUnicode]:                      https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-iswindowunicode
-[IsWindowVisible]:                      https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-iswindowvisible
+[IsWindow]:                             https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-iswindow
+[IsWindowUnicode]:                      https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-iswindowunicode
+[IsWindowVisible]:                      https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-iswindowvisible
 
 
 
 <!-- types -->
-[HWND]:                                 https://docs.microsoft.com/en-us/windows/win32/learnwin32/what-is-a-window-
+[HWND]:                                 https://learn.microsoft.com/en-us/windows/win32/learnwin32/what-is-a-window-
 

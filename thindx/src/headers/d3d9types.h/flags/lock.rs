@@ -7,7 +7,7 @@ type D3DLOCK = u32; // there's no actual type
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dlock)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dlock)\]
 /// DWORD / D3DLOCK_*
 ///
 /// A combination of zero or more locking options that describe the type of lock to perform.

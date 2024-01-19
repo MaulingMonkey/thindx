@@ -4,7 +4,7 @@ use winapi::shared::d3d9types::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dblendop)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dblendop)\]
 /// D3DBLENDOP
 ///
 /// Defines the supported blend operations.

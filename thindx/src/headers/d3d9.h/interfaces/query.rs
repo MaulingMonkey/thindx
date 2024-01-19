@@ -11,8 +11,8 @@ use std::ptr::null_mut;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dquery9)\]
-/// An asyncronous GPU query for [occlusion or other information](https://docs.microsoft.com/en-us/windows/win32/direct3d9/queries).
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dquery9)\]
+/// An asyncronous GPU query for [occlusion or other information](https://learn.microsoft.com/en-us/windows/win32/direct3d9/queries).
 ///
 /// ### See Also
 /// *   [IDirect3DDevice9Ext::create_query]
@@ -24,11 +24,11 @@ unsafe impl AsSafe<IDirect3DQuery9  > for Query { fn as_safe(&self) -> &IDirect3
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dquery9)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dquery9)\]
 /// IDirect3DQuery9 extension methods
 ///
 /// ### Methods
-/// | thindx                                    | docs.microsoft.com    | Description |
+/// | thindx                                    | microsoft.com         | Description |
 /// | ----------------------------------------- | --------------------- | ----------- |
 /// | [get_data](Self::get_data_inplace)        | [GetData]             | Polls a queried resource to get the query state or a query result. For more information about queries, see [Queries (Direct3D 9)].
 /// | [get_data_size](Self::get_data_size)      | [GetDataSize]         | Gets the number of bytes in the query data.
@@ -36,22 +36,22 @@ unsafe impl AsSafe<IDirect3DQuery9  > for Query { fn as_safe(&self) -> &IDirect3
 /// | [get_type](Self::get_type)                | [GetType]             | Gets the query type.
 /// | [issue](Self::issue)                      | [Issue]               | Issue a query.
 ///
-/// [GetData]:              https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dquery9-getdata
-/// [GetDataSize]:          https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dquery9-getdatasize
-/// [GetDevice]:            https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dquery9-getdevice
-/// [GetType]:              https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dquery9-gettype
-/// [Issue]:                https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dquery9-issue
+/// [GetData]:              https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dquery9-getdata
+/// [GetDataSize]:          https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dquery9-getdatasize
+/// [GetDevice]:            https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dquery9-getdevice
+/// [GetType]:              https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dquery9-gettype
+/// [Issue]:                https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dquery9-issue
 ///
-/// [Queries (Direct3D 9)]: https://docs.microsoft.com/en-us/windows/win32/direct3d9/queries
+/// [Queries (Direct3D 9)]: https://learn.microsoft.com/en-us/windows/win32/direct3d9/queries
 ///
 pub trait IDirect3DQuery9Ext : AsSafe<IDirect3DQuery9> {
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dquery9-getdata)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dquery9-getdata)\]
     /// IDirect3DQuery9::GetData
     ///
     /// Polls a queried resource to get the query state or a query result.
     /// For more information about queries, see [Queries (Direct3D9)].
     ///
-    /// [Queries (Direct3D9)]:          https://docs.microsoft.com/en-us/windows/desktop/direct3d9/queries
+    /// [Queries (Direct3D9)]:          https://learn.microsoft.com/en-us/windows/desktop/direct3d9/queries
     ///
     /// ### Returns
     /// *   [D3DERR::DEVICELOST]    The device was lost
@@ -72,7 +72,7 @@ pub trait IDirect3DQuery9Ext : AsSafe<IDirect3DQuery9> {
 
     // TODO: fn get_data<T>?
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dquery9-getdatasize)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dquery9-getdatasize)\]
     /// IDirect3DQuery9::GetDataSize
     ///
     /// Gets the number of bytes in the query data.
@@ -81,7 +81,7 @@ pub trait IDirect3DQuery9Ext : AsSafe<IDirect3DQuery9> {
         unsafe { self.as_winapi().GetDataSize() }
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dquery9-getdevice)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dquery9-getdevice)\]
     /// IDirect3DQuery9::GetDevice
     ///
     /// Gets the device that is being queried.
@@ -92,7 +92,7 @@ pub trait IDirect3DQuery9Ext : AsSafe<IDirect3DQuery9> {
         Ok(unsafe { Device::from_raw(device) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dquery9-gettype)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dquery9-gettype)\]
     /// IDirect3DQuery9::GetType
     ///
     /// Gets the query type.
@@ -101,7 +101,7 @@ pub trait IDirect3DQuery9Ext : AsSafe<IDirect3DQuery9> {
         QueryType::from_unchecked(unsafe { self.as_winapi().GetType() })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dquery9-issue)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dquery9-issue)\]
     /// IDirect3DQuery9::Issue
     ///
     /// Issue a query.

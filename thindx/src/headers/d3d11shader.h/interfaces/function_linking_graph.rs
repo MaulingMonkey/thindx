@@ -18,7 +18,7 @@ use std::ptr::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11functionlinkinggraph)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11functionlinkinggraph)\]
 /// ID3D11FunctionLinkingGraph
 ///
 /// A function-linking-graph interface is used for constructing shaders that consist of a
@@ -114,7 +114,7 @@ pub struct FunctionLinkingGraph(pub(crate) mcom::Rc<winapi::um::d3d11shader::ID3
 convert!(unsafe FunctionLinkingGraph => Unknown, winapi::um::d3d11shader::ID3D11FunctionLinkingGraph);
 
 impl FunctionLinkingGraph {
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionlinkinggraph-callfunction)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionlinkinggraph-callfunction)\]
     /// ID3D11FunctionLinkingGraph::CallFunction
     ///
     /// Creates a call-function linking node to use in the function-linking-graph.
@@ -158,7 +158,7 @@ impl FunctionLinkingGraph {
         Ok(unsafe { LinkingNode::from_raw(node) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionlinkinggraph-createmoduleinstance)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionlinkinggraph-createmoduleinstance)\]
     /// ID3D11FunctionLinkingGraph::CreateModuleInstance
     ///
     /// Initializes a shader module from the function-linking-graph object.
@@ -182,7 +182,7 @@ impl FunctionLinkingGraph {
         }
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionlinkinggraph-generatehlsl)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionlinkinggraph-generatehlsl)\]
     /// ID3D11FunctionLinkingGraph::GenerateHlsl
     ///
     /// Generates Microsoft High Level Shader Language (HLSL) shader code that represents the function-linking-graph.
@@ -214,7 +214,7 @@ impl FunctionLinkingGraph {
         Ok(TextBlob::new(unsafe { ReadOnlyBlob::from_raw(blob) }))
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionlinkinggraph-getlasterror)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionlinkinggraph-getlasterror)\]
     /// ID3D11FunctionLinkingGraph::GetLastError
     ///
     /// Gets the error from the last function call of the function-linking-graph.
@@ -238,7 +238,7 @@ impl FunctionLinkingGraph {
         Ok(TextBlob::new(unsafe { ReadOnlyBlob::from_raw_opt(errors) }))
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionlinkinggraph-passvalue)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionlinkinggraph-passvalue)\]
     /// ID3D11FunctionLinkingGraph::PassValue
     ///
     /// Passes a value from a source linking node to a destination linking node.
@@ -268,7 +268,7 @@ impl FunctionLinkingGraph {
         fn_check_hr!(unsafe { self.0.PassValue(src_node.as_raw(), src_parameter_index, dst_node.as_raw(), dst_parameter_index) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionlinkinggraph-passvaluewithswizzle)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionlinkinggraph-passvaluewithswizzle)\]
     /// ID3D11FunctionLinkingGraph::PassValueWithSwizzle
     ///
     /// Passes a value with swizzle from a source linking node to a destination linking node.
@@ -299,7 +299,7 @@ impl FunctionLinkingGraph {
         fn_check_hr!(unsafe { self.0.PassValueWithSwizzle(src_node.as_raw(), src_parameter_index, src_swizzle.as_cstr(), dst_node.as_raw(), dst_parameter_index, dst_swizzle.as_cstr()) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionlinkinggraph-setinputsignature)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionlinkinggraph-setinputsignature)\]
     /// ID3D11FunctionLinkingGraph::SetInputSignature
     ///
     /// Sets the input signature of the function-linking-graph.
@@ -333,7 +333,7 @@ impl FunctionLinkingGraph {
         Ok(unsafe { LinkingNode::from_raw(node) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionlinkinggraph-setoutputsignature)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionlinkinggraph-setoutputsignature)\]
     /// ID3D11FunctionLinkingGraph::SetOutputSignature
     ///
     /// Sets the output signature of the function-linking-graph.

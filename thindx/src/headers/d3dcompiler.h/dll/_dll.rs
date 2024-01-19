@@ -84,7 +84,7 @@ mod d3d11_methods;                  pub use d3d11_methods::*;
 #[allow(non_snake_case)] // fn ptrs
 #[allow(clippy::type_complexity)] // no point extracting `type`s with these single use types... would just increase the chances of editing shrapnel
 pub struct Compiler {
-    // https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/
+    // https://learn.microsoft.com/en-us/windows/win32/api/d3dcompiler/
 
     // TODO: D3DDisassemble10Effect
 

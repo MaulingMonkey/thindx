@@ -7,7 +7,7 @@ use std::ptr::*;
 
 /// <h1 id="archive" class="section-header"><a href="#archive">Manipulate Bytecode Archives</a></h1>
 impl Compiler {
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dcompressshaders)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dcompressshaders)\]
     /// D3DCompressShaders
     ///
     /// Compresses a set of shaders into a more compact form.
@@ -88,7 +88,7 @@ impl Compiler {
     //
     // https://github.com/MaulingMonkey/thindx/issues/5
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3ddecompressshaders)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3ddecompressshaders)\]
     /// D3DDecompressShaders
     ///
     /// Get the number of compressed shaders in the `src_data` archive.
@@ -133,7 +133,7 @@ impl Compiler {
         Ok(total_shaders)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3ddecompressshaders)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3ddecompressshaders)\]
     /// D3DDecompressShaders
     ///
     /// Decompresses one or more shaders from a compressed set.
@@ -204,7 +204,7 @@ impl Compiler {
         Ok(&out_shaders[..read])
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3ddecompressshaders)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3ddecompressshaders)\]
     /// D3DDecompressShaders
     ///
     /// Decompresses one or more shaders from a compressed set.

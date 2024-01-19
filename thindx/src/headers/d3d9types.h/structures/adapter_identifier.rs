@@ -10,7 +10,7 @@ use std::fmt::{self, Debug, Formatter, UpperHex};
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dadapter-identifier9)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dadapter-identifier9)\]
 /// D3DADAPTER_IDENTIFIER9
 ///
 /// Contains various information about an adapter

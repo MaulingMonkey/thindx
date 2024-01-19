@@ -6,7 +6,7 @@ use winapi::um::d3dcommon::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_driver_type)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3dcommon/ne-d3dcommon-d3d_driver_type)\]
 /// D3D_DRIVER_TYPE
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[derive(Pod, Zeroable)]
@@ -18,7 +18,7 @@ enumish! { DriverType => D3D_DRIVER_TYPE; default: Unknown == 0; Unknown, Hardwa
     /// The device type is unknown.
     ///
     /// You must use this when calling
-    /// [D3D11CreateDevice](https://docs.microsoft.com/en-us/windows/win32/api/d3d11/nf-d3d11-d3d11createdevice)
+    /// [D3D11CreateDevice](https://learn.microsoft.com/en-us/windows/win32/api/d3d11/nf-d3d11-d3d11createdevice)
     /// (and friends) on a specific adapter, since the adapter dictates what driver type is used.
     pub const Unknown   : DriverType = DriverType(D3D_DRIVER_TYPE_UNKNOWN); // 0
 
@@ -42,7 +42,7 @@ enumish! { DriverType => D3D_DRIVER_TYPE; default: Unknown == 0; Unknown, Hardwa
     /// Given it's slow performance, you probably don't want this.
     pub const Software  : DriverType = DriverType(D3D_DRIVER_TYPE_SOFTWARE);
 
-    /// Use [Windows Advanced Rasterization Platform (WARP)](https://docs.microsoft.com/en-us/windows/win32/direct3darticles/directx-warp),
+    /// Use [Windows Advanced Rasterization Platform (WARP)](https://learn.microsoft.com/en-us/windows/win32/direct3darticles/directx-warp),
     /// a high performance software rasterizer in Windows 8 (and perhaps Windows 7 SP2+?).
     ///
     /// While slower than a dedicated GPU, it *is* optimized for performance (JIT compiling shaders taking advantage of SSE etc.)

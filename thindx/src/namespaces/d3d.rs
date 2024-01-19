@@ -8,7 +8,7 @@ pub use crate::d3d9types_h::*; // TODO: exclude d3d9::ShaderVersion (conflicts w
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3drange)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drange)\]
 /// D3DRANGE
 pub type Range = std::ops::Range<u32>; // TODO: make a Pod/Zeroable/??? struct ala other d3d9 structs?
 

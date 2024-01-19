@@ -7,7 +7,7 @@ use winapi::shared::minwindef::UINT;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3draster-status)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3draster-status)\]
 /// D3DRASTER_STATUS
 ///
 /// Describes the raster status.

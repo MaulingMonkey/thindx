@@ -9,7 +9,7 @@ use std::ptr::null_mut;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dpixelshader9)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dpixelshader9)\]
 /// A [pixel/fragment shader](https://en.wikipedia.org/wiki/Shader#Pixel_shaders) is a GPU program, run on rasterized fragments.
 ///
 /// ### See Also
@@ -24,7 +24,7 @@ use std::ptr::null_mut;
 #[derive(Clone)] #[repr(transparent)]
 pub struct PixelShader(pub(crate) mcom::Rc<IDirect3DPixelShader9>);
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dvertexshader9)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dvertexshader9)\]
 /// A [vertex shader](https://en.wikipedia.org/wiki/Shader#Vertex_shaders) transforms mesh verticies when rendering.
 ///
 /// ### See Also
@@ -49,22 +49,22 @@ unsafe impl AsSafe<IDirect3DVertexShader9> for VertexShader { fn as_safe(&self) 
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dpixelshader9)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dpixelshader9)\]
 /// IDirect3DPixelShader9 extension methods
 ///
 /// ### Methods
-/// | thindx                                                        | docs.microsoft.com    | Description |
+/// | thindx                                                        | microsoft.com         | Description |
 /// | ------------------------------------------------------------- | --------------------- | ----------- |
 /// | [get_device](Self::get_device)                                | [GetDevice]           | Gets the device.
 /// | [get_function_size](Self::get_function_size)                  | [GetFunction]         | Gets the size of the shader function data.
 /// | [get_function_inplace](Self::get_function_inplace)            | [GetFunction]         | Gets the shader function data.
 /// | [get_function](Self::get_function)                            | [GetFunction]         | Gets the shader function data.
 ///
-/// [GetDevice]:    https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dpixelshader9-getdevice
-/// [GetFunction]:  https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dpixelshader9-getfunction
+/// [GetDevice]:    https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dpixelshader9-getdevice
+/// [GetFunction]:  https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dpixelshader9-getfunction
 ///
 pub trait IDirect3DPixelShader9Ext : AsSafe<IDirect3DPixelShader9> {
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dpixelshader9-getdevice)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dpixelshader9-getdevice)\]
     /// IDirect3DPixelShader9::GetDevice
     ///
     /// Gets the [Device].
@@ -79,7 +79,7 @@ pub trait IDirect3DPixelShader9Ext : AsSafe<IDirect3DPixelShader9> {
         Ok(unsafe { Device::from_raw(device) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dpixelshader9-getfunction)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dpixelshader9-getfunction)\]
     /// IDirect3DPixelShader9::GetFunction
     ///
     /// Gets the size of the shader function data.
@@ -94,7 +94,7 @@ pub trait IDirect3DPixelShader9Ext : AsSafe<IDirect3DPixelShader9> {
         Ok(size)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dpixelshader9-getfunction)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dpixelshader9-getfunction)\]
     /// IDirect3DPixelShader9::GetFunction
     ///
     /// Gets the shader function data.
@@ -111,7 +111,7 @@ pub trait IDirect3DPixelShader9Ext : AsSafe<IDirect3DPixelShader9> {
         Ok(&data[0..(size as usize)])
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dpixelshader9-getfunction)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dpixelshader9-getfunction)\]
     /// IDirect3DPixelShader9::GetFunction
     ///
     /// Gets the shader function data.
@@ -133,22 +133,22 @@ impl<T: AsSafe<IDirect3DPixelShader9>> IDirect3DPixelShader9Ext for T {}
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dvertexshader9)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dvertexshader9)\]
 /// IDirect3DVertexShader9 extension methods
 ///
 /// ### Methods
-/// | thindx                                                        | docs.microsoft.com    | Description |
+/// | thindx                                                        | microsoft.com         | Description |
 /// | ------------------------------------------------------------- | --------------------- | ----------- |
 /// | [get_device](Self::get_device)                                | [GetDevice]           | Gets the device.
 /// | [get_function_size](Self::get_function_size)                  | [GetFunction]         | Gets the size of the shader function data.
 /// | [get_function_inplace](Self::get_function_inplace)            | [GetFunction]         | Gets the shader function data.
 /// | [get_function](Self::get_function)                            | [GetFunction]         | Gets the shader function data.
 ///
-/// [GetDevice]:    https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexshader9-getdevice
-/// [GetFunction]:  https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexshader9-getfunction
+/// [GetDevice]:    https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexshader9-getdevice
+/// [GetFunction]:  https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexshader9-getfunction
 ///
 pub trait IDirect3DVertexShader9Ext : AsSafe<IDirect3DVertexShader9> {
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexshader9-getdevice)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexshader9-getdevice)\]
     /// IDirect3DVertexShader9::GetDevice
     ///
     /// Gets the [Device].
@@ -163,7 +163,7 @@ pub trait IDirect3DVertexShader9Ext : AsSafe<IDirect3DVertexShader9> {
         Ok(unsafe { Device::from_raw(device) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexshader9-getfunction)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexshader9-getfunction)\]
     /// IDirect3DVertexShader9::GetFunction
     ///
     /// Gets the size of the shader function data.
@@ -178,7 +178,7 @@ pub trait IDirect3DVertexShader9Ext : AsSafe<IDirect3DVertexShader9> {
         Ok(size)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexshader9-getfunction)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexshader9-getfunction)\]
     /// IDirect3DVertexShader9::GetFunction
     ///
     /// Gets the shader function data.
@@ -195,7 +195,7 @@ pub trait IDirect3DVertexShader9Ext : AsSafe<IDirect3DVertexShader9> {
         Ok(&data[0..(size as usize)])
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexshader9-getfunction)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexshader9-getfunction)\]
     /// IDirect3DVertexShader9::GetFunction
     ///
     /// Gets the shader function data.

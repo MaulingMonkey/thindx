@@ -5,7 +5,7 @@ type D3DPRESENTFLAG = u32; // there's no actual type
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dpresentflag)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dpresentflag)\]
 /// DWORD / D3DPRESENTFLAG_*
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[derive(Pod, Zeroable)]

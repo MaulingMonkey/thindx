@@ -9,7 +9,7 @@ use winapi::um::unknwnbase::IUnknown;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dswapchain9ex)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dswapchain9ex)\]
 /// (extends [SwapChain])
 /// Adds more querying options.
 #[cfg(feature = "9ex")]
@@ -22,23 +22,23 @@ pub struct SwapChainEx(pub(crate) mcom::Rc<IDirect3DSwapChain9Ex>);
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dswapchain9ex)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dswapchain9ex)\]
 /// IDirect3DSwapChain9Ex extension methods
 ///
 /// ### Methods
-/// | thindx                                                    | docs.microsoft.com        | description   |
+/// | thindx                                                    | microsoft.com             | Description   |
 /// | --------------------------------------------------------- | ------------------------- | ------------- |
 /// | [get_display_mode_ex](Self::get_display_mode_ex)          | [GetDisplayModeEx]        | Retrieves the display mode's spatial resolution, color resolution, refresh frequency, and rotation settings.
 /// | [get_last_present_count](Self::get_last_present_count)    | [GetLastPresentCount]     | Returns the number of times the swapchain has been processed.
 /// | [get_present_statistics](Self::get_present_statistics)    | [GetPresentStatistics]    | Gets presentation statistics so an application can identify frames that do not have a Present method call.
 ///
-/// [GetDisplayModeEx]:     https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9ex-getdisplaymodeex
-/// [GetLastPresentCount]:  https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9ex-getlastpresentcount
-/// [GetPresentStatistics]: https://docs.microsoft.com/en-us/previous-versions/windows/desktop/legacy/bb205901(v=vs.85)
+/// [GetDisplayModeEx]:     https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9ex-getdisplaymodeex
+/// [GetLastPresentCount]:  https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9ex-getlastpresentcount
+/// [GetPresentStatistics]: https://learn.microsoft.com/en-us/previous-versions/windows/desktop/legacy/bb205901(v=vs.85)
 ///
 #[cfg(feature = "9ex")]
 pub trait IDirect3DSwapChain9ExExt : AsSafe<IDirect3DSwapChain9Ex> {
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9ex-getdisplaymodeex)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9ex-getdisplaymodeex)\]
     /// IDirect3DSwapChain9Ex::GetDisplayModeEx
     ///
     /// Retrieves the display mode's spatial resolution, color resolution, refresh frequency, and rotation settings.
@@ -50,7 +50,7 @@ pub trait IDirect3DSwapChain9ExExt : AsSafe<IDirect3DSwapChain9Ex> {
         Ok((mode, DisplayRotation::from_unchecked(rot)))
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9ex-getlastpresentcount)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dswapchain9ex-getlastpresentcount)\]
     /// IDirect3DSwapChain9Ex::GetLastPresentCount
     ///
     /// Returns the number of times the swapchain has been processed.
@@ -61,7 +61,7 @@ pub trait IDirect3DSwapChain9ExExt : AsSafe<IDirect3DSwapChain9Ex> {
         Ok(count)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/previous-versions/windows/desktop/legacy/bb205901(v=vs.85))\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/previous-versions/windows/desktop/legacy/bb205901(v=vs.85))\]
     /// IDirect3DSwapChain9Ex::GetPresentStatistics
     ///
     /// Gets presentation statistics so an application can identify frames that do not have a Present method call.

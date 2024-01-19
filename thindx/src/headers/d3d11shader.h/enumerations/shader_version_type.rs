@@ -8,7 +8,7 @@ use std::fmt::{self, Debug, Formatter};
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/ne-d3d11shader-d3d11_shader_version_type)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/ne-d3d11shader-d3d11_shader_version_type)\]
 /// D3D11_SHADER_VERSION_TYPE / D3D11_SHVER_\*
 ///
 /// ### Example
@@ -47,7 +47,7 @@ enumish! { ShVer => D3D11_SHADER_VERSION_TYPE; PixelShader, VertexShader, Geomet
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/ne-d3d11shader-d3d11_shader_version_type)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/ne-d3d11shader-d3d11_shader_version_type)\]
 /// UINT mask of ([ShaderVersionType] << 16) | (major << 4) | (minor << 0)
 ///
 /// ### Example

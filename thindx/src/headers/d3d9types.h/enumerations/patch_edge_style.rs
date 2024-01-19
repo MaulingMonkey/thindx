@@ -4,7 +4,7 @@ use winapi::shared::d3d9types::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dpatchedgestyle)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dpatchedgestyle)\]
 /// D3DPATCHEDGESTYLE
 ///
 /// Defines whether the current tessellation mode is [Discrete](crate::PatchEdge::Discrete) or [Continuous](crate::PatchEdge::Continuous).

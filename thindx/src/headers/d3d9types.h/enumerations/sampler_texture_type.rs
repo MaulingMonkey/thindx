@@ -4,7 +4,7 @@ use winapi::shared::d3d9types::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dsampler-texture-type)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dsampler-texture-type)\]
 /// D3DSAMPLER_TEXTURE_TYPE
 ///
 /// Defines the sampler texture types for vertex shaders.

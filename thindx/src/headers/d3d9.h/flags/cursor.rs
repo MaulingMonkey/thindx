@@ -5,7 +5,7 @@ const D3DCURSOR_IMMEDIATE_UPDATE : u32 = 1; // not defined in winapi
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setcursorposition)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setcursorposition)\]
 /// DWORD / D3DCURSOR_\*
 ///
 /// Controls how [IDirect3DQuery9Ext::set_cursor_position] behaves.
@@ -19,7 +19,7 @@ flags! { Cursor => DWORD; None, ImmediateUpdate }
     /// No flags
     pub const None : Cursor = Cursor(0);
 
-    /// [D3DCURSOR_IMMEDIATE_UPDATE](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setcursorposition)
+    /// [D3DCURSOR_IMMEDIATE_UPDATE](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3ddevice9-setcursorposition)
     pub const ImmediateUpdate : Cursor = Cursor(D3DCURSOR_IMMEDIATE_UPDATE);
 }
 

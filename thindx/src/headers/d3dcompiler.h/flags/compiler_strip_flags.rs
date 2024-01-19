@@ -6,7 +6,7 @@ use winapi::um::d3dcompiler::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/ne-d3dcompiler-d3dcompiler_strip_flags)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3dcompiler/ne-d3dcompiler-d3dcompiler_strip_flags)\]
 /// DWORD / D3DCOMPILER_STRIP_FLAGS / D3DCOMPILER_STRIP_*
 ///
 /// Flags controlling what data is stripped by [d3d::Compiler::strip_shader]
@@ -35,7 +35,7 @@ flags! { CompilerStrip => D3DCOMPILER_STRIP_FLAGS; None, ReflectionData, DebugIn
 
     /// Strip the root signature ([d3d::Blob::RootSignature]). Refer to [Specifying Root Signatures in HLSL] for more information on using Direct3D12 with HLSL.
     ///
-    /// [Specifying Root Signatures in HLSL]:   https://docs.microsoft.com/en-us/windows/desktop/direct3d12/specifying-root-signatures-in-hlsl
+    /// [Specifying Root Signatures in HLSL]:   https://learn.microsoft.com/en-us/windows/desktop/direct3d12/specifying-root-signatures-in-hlsl
     pub const RootSignature     : CompilerStrip = CompilerStrip(D3DCOMPILER_STRIP_ROOT_SIGNATURE);
 }
 

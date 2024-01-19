@@ -7,7 +7,7 @@ use winapi::shared::minwindef::UINT;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddisplaymodefilter)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3ddisplaymodefilter)\]
 /// D3DDISPLAYMODEFILTER
 ///
 /// Specifies types of display modes to filter out.

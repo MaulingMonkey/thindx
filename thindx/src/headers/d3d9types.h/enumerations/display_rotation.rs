@@ -4,7 +4,7 @@ use winapi::shared::d3d9types::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddisplayrotation)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3ddisplayrotation)\]
 /// D3DDISPLAYROTATION
 ///
 /// Specifies how the monitor being used to display a full-screen application is rotated.

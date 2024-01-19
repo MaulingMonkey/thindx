@@ -7,7 +7,7 @@ use winapi::um::d3dcompiler::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3ddisassemble#parameters)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3ddisassemble#parameters)\]
 /// UINT / D3D_DISASM_\*
 ///
 /// Flags controlling how [d3d::Compiler::disassemble_region] disassembles the compiled shader data.
@@ -46,7 +46,7 @@ flags! {
     /// This flag has no effect in [d3d::Compiler::disassemble_region].
     /// Cycle information comes from the trace; therefore, cycle information is available only in [D3DDisassemble11Trace]'s trace disassembly.
     ///
-    /// [D3DDisassemble11Trace]:    https://docs.microsoft.com/en-us/windows/win32/api/d3d11shadertracing/nf-d3d11shadertracing-d3ddisassemble11trace
+    /// [D3DDisassemble11Trace]:    https://learn.microsoft.com/en-us/windows/win32/api/d3d11shadertracing/nf-d3d11shadertracing-d3ddisassemble11trace
     pub const InstructionOnly                   : Disasm = Disasm(D3D_DISASM_INSTRUCTION_ONLY);
 
     /// Use hex symbols in disassemblies.

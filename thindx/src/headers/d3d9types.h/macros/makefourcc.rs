@@ -1,4 +1,4 @@
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows-hardware/drivers/ddi/d3dukmdt/nf-d3dukmdt-makefourcc)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/d3dukmdt/nf-d3dukmdt-makefourcc)\]
 /// MAKEFOURCC
 ///
 /// Used by the D3D SDK to create various oddball identifiers.

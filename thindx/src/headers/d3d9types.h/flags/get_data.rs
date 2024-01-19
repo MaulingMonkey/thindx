@@ -5,7 +5,7 @@ type D3DGETDATA = u32; // there's no actual type
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dgetdata-flush)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dgetdata-flush)\]
 /// DWORD / D3DGETDATA_*
 ///
 /// Controls how [IDirect3DQuery9Ext::get_data_inplace] behaves.
@@ -19,7 +19,7 @@ flags! { GetData => D3DGETDATA; None, Flush }
     /// No flags
     pub const None      : GetData = GetData(0);
 
-    /// [D3DGETDATA_FLUSH](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dgetdata-flush)
+    /// [D3DGETDATA_FLUSH](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dgetdata-flush)
     pub const Flush     : GetData = GetData(D3DGETDATA_FLUSH);
 }
 

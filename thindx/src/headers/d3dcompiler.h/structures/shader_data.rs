@@ -7,7 +7,7 @@ use std::ptr::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/ns-d3dcompiler-d3d_shader_data)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3dcompiler/ns-d3dcompiler-d3d_shader_data)\]
 /// D3D_SHADER_DATA
 ///
 /// &amp;\[[u8]\] equivalent that's ABI-compatible with some D3D APIs

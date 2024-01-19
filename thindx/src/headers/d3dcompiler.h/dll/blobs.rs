@@ -6,7 +6,7 @@ use std::ptr::*;
 
 /// <h1 id="blobs" class="section-header"><a href="#blobs">ReadOnlyBlob Utilities</a></h1>
 impl Compiler {
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dcreateblob)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dcreateblob)\]
     /// D3DCreateBlob
     ///
     /// Compresses a set of shaders into a more compact form.
@@ -51,7 +51,7 @@ impl Compiler {
         Ok(unsafe { ReadOnlyBlob::from_raw(blob) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dreadfiletoblob)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dreadfiletoblob)\]
     /// D3DReadFileToBlob
     ///
     /// > **Note:** You can use this API to develop your Windows Store apps, but you can't use it in apps that you submit to the Windows Store.
@@ -100,7 +100,7 @@ impl Compiler {
         Ok(unsafe { ReadOnlyBlob::from_raw(blob) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dwriteblobtofile)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dwriteblobtofile)\]
     /// D3DWriteBlobToFile
     ///
     /// > **Note:** You can use this API to develop your Windows Store apps, but you can't use it in apps that you submit to the Windows Store.

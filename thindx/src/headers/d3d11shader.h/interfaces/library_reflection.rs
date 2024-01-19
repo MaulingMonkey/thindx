@@ -5,7 +5,7 @@ use std::iter::Iterator;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11libraryreflection)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11libraryreflection)\]
 /// ID3D11LibraryReflection
 ///
 /// A library-reflection interface accesses library info.
@@ -20,7 +20,7 @@ convert!(unsafe LibraryReflection => Unknown, winapi::um::d3d11shader::ID3D11Lib
 
 /// Direct API calls
 impl LibraryReflection {
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11libraryreflection-getdesc)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11libraryreflection-getdesc)\]
     /// ID3D11LibraryReflection::GetDesc
     ///
     /// Get a library descriptor structure for the library reflection.
@@ -56,7 +56,7 @@ impl LibraryReflection {
         Ok(desc)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11libraryreflection-getfunctionbyindex)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11libraryreflection-getfunctionbyindex)\]
     /// ID3D11LibraryReflection::GetFunctionByIndex
     ///
     /// Gets the function reflector.

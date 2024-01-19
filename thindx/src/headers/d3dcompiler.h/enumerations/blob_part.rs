@@ -8,7 +8,7 @@ const D3D_BLOB_DEBUG_NAME : D3D_BLOB_PART = 12; // not part of winapi 0.3.9
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/ne-d3dcompiler-d3d_blob_part)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3dcompiler/ne-d3dcompiler-d3d_blob_part)\]
 /// D3D_BLOB_PART
 ///
 /// Values that identify parts of the content of an arbitrary length data buffer.
@@ -54,7 +54,7 @@ enumish! {
 
     /// The blob part is a root signature. Refer to [Specifying Root Signatures in HLSL] for more information on using Direct3D12 with HLSL.
     ///
-    /// [Specifying Root Signatures in HLSL]:   https://docs.microsoft.com/en-us/windows/desktop/direct3d12/specifying-root-signatures-in-hlsl
+    /// [Specifying Root Signatures in HLSL]:   https://learn.microsoft.com/en-us/windows/desktop/direct3d12/specifying-root-signatures-in-hlsl
     ///
     /// ### Remarks
     /// *   This was introduced by d3dcompiler_47.dll, and is unavailable in earlier versions.

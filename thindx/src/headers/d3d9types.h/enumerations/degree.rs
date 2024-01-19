@@ -4,7 +4,7 @@ use winapi::shared::d3d9types::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddegreetype)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3ddegreetype)\]
 /// D3DDEGREETYPE
 ///
 /// Defines the degree of the variables in the equation that describes a curve.

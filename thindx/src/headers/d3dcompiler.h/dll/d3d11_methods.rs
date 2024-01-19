@@ -5,7 +5,7 @@ use std::ptr::*;
 
 /// <h1 id="d3d11" class="section-header"><a href="#d3d11">D3D11 Factories & APIs</a></h1>
 impl Compiler {
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dcreatefunctionlinkinggraph)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dcreatefunctionlinkinggraph)\]
     /// D3DCreateFunctionLinkingGraph
     ///
     /// Creates a function-linking-graph interface.
@@ -42,7 +42,7 @@ impl Compiler {
         Ok(unsafe { d3d11::FunctionLinkingGraph::from_raw(flg) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dcreatelinker)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dcreatelinker)\]
     /// D3DCreateLinker
     ///
     /// Creates a linker interface.
@@ -75,7 +75,7 @@ impl Compiler {
         Ok(unsafe { d3d11::Linker::from_raw(linker) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dloadmodule)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dloadmodule)\]
     /// D3DLoadModule
     ///
     /// Creates a shader module interface from source data for the shader module.

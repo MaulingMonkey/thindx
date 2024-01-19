@@ -4,14 +4,14 @@ use winapi::shared::d3d9types::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dtexturestagestatetype)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dtexturestagestatetype)\]
 /// D3DTEXTURESTAGESTATETYPE
 ///
 /// Texture stage states define multi-blender texture operations.
 /// Some sampler states set up vertex processing, and some set up pixel processing.
 /// Texture stage states can be saved and restored using stateblocks (see [State Blocks Save and Restore State (Direct3D 9)]).
 ///
-/// [State Blocks Save and Restore State (Direct3D 9)]:     https://docs.microsoft.com/en-us/windows/win32/direct3d9/state-blocks-save-and-restore-state
+/// [State Blocks Save and Restore State (Direct3D 9)]:     https://learn.microsoft.com/en-us/windows/win32/direct3d9/state-blocks-save-and-restore-state
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct TextureStageStateType(D3DTEXTURESTAGESTATETYPE);

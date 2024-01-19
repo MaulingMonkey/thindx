@@ -6,14 +6,14 @@ use std::fmt::{self, Debug, Formatter};
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/efficiently-drawing-multiple-instances-of-geometry)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3d9/efficiently-drawing-multiple-instances-of-geometry)\]
 /// D3DSTREAMSOURCE
 ///
 /// Used for specifying which streams should use instanced rendering.
 ///
 /// See [Efficiently Drawing Multiple Instances of Geometry (Direct3D 9)] for details.
 ///
-/// [Efficiently Drawing Multiple Instances of Geometry (Direct3D 9)]:  https://docs.microsoft.com/en-us/windows/win32/direct3d9/efficiently-drawing-multiple-instances-of-geometry
+/// [Efficiently Drawing Multiple Instances of Geometry (Direct3D 9)]:  https://learn.microsoft.com/en-us/windows/win32/direct3d9/efficiently-drawing-multiple-instances-of-geometry
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct StreamSource(D3DSTREAMSOURCE);

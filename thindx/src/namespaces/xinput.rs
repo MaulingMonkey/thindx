@@ -1,4 +1,4 @@
-//! \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/xinput/xinput-game-controller-apis-portal)\]
+//! \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/xinput/xinput-game-controller-apis-portal)\]
 //! APIs for Xbox 360 style controllers
 
 pub use ::thindx_xinput::*;

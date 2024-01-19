@@ -5,7 +5,7 @@ use std::ops::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3ddevice9)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3ddevice9)\]
 /// [Device] + stored metadata allowing more APIs to be safe
 pub struct SafeDevice {
     device:     Device,

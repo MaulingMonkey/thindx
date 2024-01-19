@@ -19,7 +19,7 @@ impl Compiler {
     /// Recommended reading, to secure more than just this call:
     ///
     /// *   Dynamic-Link Library Security<br>
-    ///     <https://docs.microsoft.com/en-us/windows/win32/dlls/dynamic-link-library-security>
+    ///     <https://learn.microsoft.com/en-us/windows/win32/dlls/dynamic-link-library-security>
     /// *   Secure loading of libraries to prevent DLL preloading attacks<br>
     ///     <https://support.microsoft.com/en-us/topic/secure-loading-of-libraries-to-prevent-dll-preloading-attacks-d41303ec-0748-9211-f317-2edc819682e1>
     ///

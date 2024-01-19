@@ -10,8 +10,8 @@ use std::ptr::null_mut;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dstateblock9)\]
-/// Used to [capture/save and restore](https://docs.microsoft.com/en-us/windows/win32/direct3d9/state-blocks-save-and-restore-state)
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dstateblock9)\]
+/// Used to [capture/save and restore](https://learn.microsoft.com/en-us/windows/win32/direct3d9/state-blocks-save-and-restore-state)
 /// changes to [Device] state.
 ///
 /// ### See Also
@@ -26,22 +26,22 @@ unsafe impl AsSafe<IDirect3DStateBlock9 > for StateBlock { fn as_safe(&self) -> 
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dstateblock9)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dstateblock9)\]
 /// IDirect3DStateBlock9 extension methods
 ///
 /// ### Methods
-/// | thindx                                                        | docs.microsoft.com    | Description |
+/// | thindx                                                        | microsoft.com         | Description |
 /// | ------------------------------------------------------------- | --------------------- | ----------- |
 /// | [apply](Self::apply)                                          | [Apply]               | Apply the state block to the current device state.
 /// | [capture](Self::capture)                                      | [Capture]             | Capture the current value of states that are included in a stateblock.
 /// | [get_device](Self::get_device)                                | [GetDevice]           | Gets the device.
 ///
-/// [Apply]:        https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dstateblock9-apply
-/// [Capture]:      https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dstateblock9-capture
-/// [GetDevice]:    https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dstateblock9-getdevice
+/// [Apply]:        https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dstateblock9-apply
+/// [Capture]:      https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dstateblock9-capture
+/// [GetDevice]:    https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dstateblock9-getdevice
 ///
 pub trait IDirect3DStateBlock9Ext : AsSafe<IDirect3DStateBlock9> {
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dstateblock9-apply)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dstateblock9-apply)\]
     /// IDirect3DStateBlock9::Apply
     ///
     /// Apply the state block to the current device state.
@@ -54,7 +54,7 @@ pub trait IDirect3DStateBlock9Ext : AsSafe<IDirect3DStateBlock9> {
         fn_check_hr!(unsafe { self.as_winapi().Apply() })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dstateblock9-capture)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dstateblock9-capture)\]
     /// IDirect3DStateBlock9::Capture
     ///
     /// Capture the current value of states that are included in a stateblock.
@@ -67,7 +67,7 @@ pub trait IDirect3DStateBlock9Ext : AsSafe<IDirect3DStateBlock9> {
         fn_check_hr!(unsafe { self.as_winapi().Capture() })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dstateblock9-getdevice)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dstateblock9-getdevice)\]
     /// IDirect3DStateBlock9::GetDevice
     ///
     /// Gets the device.

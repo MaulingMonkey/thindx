@@ -10,7 +10,7 @@ use std::ops::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dcreate)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dcreate)\]
 /// DWORD / D3DCREATE_*
 ///
 /// Controls how [IDirect3D9Ext::create_device] behaves.

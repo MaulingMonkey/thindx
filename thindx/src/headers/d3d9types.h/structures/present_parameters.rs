@@ -8,7 +8,7 @@ use winapi::shared::d3d9types::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dpresent-parameters)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dpresent-parameters)\]
 /// D3DPRESENT_PARAMETERS
 ///
 /// Describes presentation parameters.

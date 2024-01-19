@@ -28,7 +28,7 @@ unsafe impl AsHWND for () {
 
 /// A safer/sounder alternative to [HWND]
 ///
-/// [HWND]: https://docs.microsoft.com/en-us/windows/win32/learnwin32/what-is-a-window-
+/// [HWND]: https://learn.microsoft.com/en-us/windows/win32/learnwin32/what-is-a-window-
 #[derive(Debug)] // cmp/hash?
 #[repr(transparent)] pub struct SafeHWND<'w> {
     hwnd:       NonNull<HWND__>,
@@ -67,7 +67,7 @@ impl<'w> SafeHWND<'w> {
     ///
     /// Chances are, if this ever returns `false`, you've already invoked undefined behavior.
     ///
-    /// [HWND]: https://docs.microsoft.com/en-us/windows/win32/learnwin32/what-is-a-window-
+    /// [HWND]: https://learn.microsoft.com/en-us/windows/win32/learnwin32/what-is-a-window-
     pub fn is_valid(&self) -> bool {
         unsafe { IsWindow(self.hwnd.as_ptr()) != 0 }
     }

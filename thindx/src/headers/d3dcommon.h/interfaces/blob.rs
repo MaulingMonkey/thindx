@@ -10,7 +10,7 @@ use std::str::Utf8Error;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/previous-versions/windows/desktop/legacy/ff728743(v=vs.85))\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/previous-versions/windows/desktop/legacy/ff728743(v=vs.85))\]
 /// ID3DBlob
 ///
 /// This interface is used to return arbitrary-length data.
@@ -26,7 +26,7 @@ pub struct ReadOnlyBlob(pub(crate) mcom::Rc<ID3DBlob>);
 convert!(unsafe ReadOnlyBlob => Unknown, winapi::um::d3dcommon::ID3DBlob);
 
 impl ReadOnlyBlob {
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/previous-versions/windows/desktop/legacy/ff728745(v=vs.85))\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/previous-versions/windows/desktop/legacy/ff728745(v=vs.85))\]
     /// ID3DBlob::GetBufferSize
     ///
     /// Gets the size of the buffer.
@@ -34,8 +34,8 @@ impl ReadOnlyBlob {
         unsafe { self.0.GetBufferSize() }
     }
 
-    /// [ID3DBlob::GetBufferPointer](https://docs.microsoft.com/en-us/previous-versions/windows/desktop/legacy/ff728744(v=vs.85)) +
-    /// [ID3DBlob::GetBufferSize](https://docs.microsoft.com/en-us/previous-versions/windows/desktop/legacy/ff728745(v=vs.85))
+    /// [ID3DBlob::GetBufferPointer](https://learn.microsoft.com/en-us/previous-versions/windows/desktop/legacy/ff728744(v=vs.85)) +
+    /// [ID3DBlob::GetBufferSize](https://learn.microsoft.com/en-us/previous-versions/windows/desktop/legacy/ff728745(v=vs.85))
     ///
     /// Gets the data of the buffer as a readonly slice.
     pub fn get_buffer(&self) -> &[u8] {

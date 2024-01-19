@@ -4,7 +4,7 @@ use winapi::shared::d3d9types::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dmaterial9)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dmaterial9)\]
 /// D3DMATERIAL9
 ///
 /// Defines material properties.
@@ -14,16 +14,16 @@ use winapi::shared::d3d9types::*;
 /// *   [IDirect3DDevice9Ext::get_material]
 #[derive(Clone, Copy, Debug, Default)]
 #[repr(C)] pub struct Material {
-    /// [Diffuse](https://docs.microsoft.com/en-us/windows/uwp/graphics-concepts/diffuse-lighting) lighting
+    /// [Diffuse](https://learn.microsoft.com/en-us/windows/uwp/graphics-concepts/diffuse-lighting) lighting
     pub diffuse:    ColorValue,
 
-    /// [Ambient](https://docs.microsoft.com/en-us/windows/uwp/graphics-concepts/ambient-lighting) lighting
+    /// [Ambient](https://learn.microsoft.com/en-us/windows/uwp/graphics-concepts/ambient-lighting) lighting
     pub ambient:    ColorValue,
 
-    /// [Specular](https://docs.microsoft.com/en-us/windows/uwp/graphics-concepts/specular-lighting) highlighting
+    /// [Specular](https://learn.microsoft.com/en-us/windows/uwp/graphics-concepts/specular-lighting) highlighting
     pub specular:   ColorValue,
 
-    /// [Emissive](https://docs.microsoft.com/en-us/windows/uwp/graphics-concepts/emissive-lighting) glow
+    /// [Emissive](https://learn.microsoft.com/en-us/windows/uwp/graphics-concepts/emissive-lighting) glow
     pub emissive:   ColorValue,
 
     /// Floating-point value specifying the sharpness of specular highlights. The higher the value, the sharper the highlight.

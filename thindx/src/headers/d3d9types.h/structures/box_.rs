@@ -7,7 +7,7 @@ use std::fmt::{self, Debug, Formatter};
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/dibox3d9/d3dbox)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/dibox3d9/d3dbox)\]
 /// D3DBOX / BOX
 ///
 /// Define a 3d volume with [u32]s: `{ left, top, right, bottom, front, back }`

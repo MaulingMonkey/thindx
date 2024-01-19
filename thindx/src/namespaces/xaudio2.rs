@@ -1,4 +1,4 @@
-//! \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/xaudio2/xaudio2-apis-portal)\]
+//! \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/xaudio2/xaudio2-apis-portal)\]
 //! APIs for XAudio2 style audio output
 
 // TODO: document to hell and back

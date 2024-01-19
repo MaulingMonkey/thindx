@@ -9,7 +9,7 @@ use std::ptr::*;
 
 /// <h1 id="reflection" class="section-header"><a href="#reflection">Bytecode Reflection</a></h1>
 impl Compiler {
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dreflect)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dreflect)\]
     /// D3DReflect
     ///
     /// Gets a pointer to a reflection interface.
@@ -65,7 +65,7 @@ impl Compiler {
         Ok(unsafe { I::from_raw(reflector.cast()) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dreflect)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dreflect)\]
     /// D3DReflect
     ///
     /// Gets a pointer to a reflection interface.
@@ -104,7 +104,7 @@ impl Compiler {
         self.reflect(src_data)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dreflectlibrary)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dreflectlibrary)\]
     /// D3DReflectLibrary
     ///
     /// Creates a library-reflection interface from source data that contains an HLSL library of functions.
@@ -162,7 +162,7 @@ impl Compiler {
         Ok(unsafe { I::from_raw(reflector.cast()) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dreflectlibrary)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dreflectlibrary)\]
     /// D3DReflectLibrary
     ///
     /// Creates a library-reflection interface from source data that contains an HLSL library of functions.

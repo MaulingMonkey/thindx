@@ -16,7 +16,7 @@ type ModeIndex      = u32;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3d9)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3d9)\]
 /// Factory for use in creating your initial [Device].
 ///
 /// Microsoft's documentation claims that several APIs return [D3DERR::NOTAVAILABLE] when, in my testing, they return [D3DERR::INVALIDCALL] instead.
@@ -29,11 +29,11 @@ unsafe impl AsSafe<IDirect3D9   > for Direct3D { fn as_safe(&self) -> &IDirect3D
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3d9)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3d9)\]
 /// IDirect3D9 extension methods
 ///
 /// ### Methods
-/// | thindx                                                                    | docs.microsoft.com            | Description |
+/// | thindx                                                                    | learn.microsoft.com            | Description |
 /// | ------------------------------------------------------------------------- | ----------------------------- | ----------- |
 /// | [create](Self::create)                                                    | [Direct3DCreate9]             | Creates an [IDirect3D9] object and returns it.
 /// | [check_depth_stencil_match](Self::check_depth_stencil_match)              | [CheckDepthStencilMatch]      | Determines whether a depth-stencil format is compatible with a render-target format in a particular display mode.
@@ -51,26 +51,26 @@ unsafe impl AsSafe<IDirect3D9   > for Direct3D { fn as_safe(&self) -> &IDirect3D
 /// | [get_device_caps](Self::get_device_caps)                                  | [GetDeviceCaps]               | Get the [Caps] of this device.
 /// | ~~register_software_device~~ (N/A)                                        | [RegisterSoftwareDevice]      | Registers a pluggable software device.
 ///
-/// [Direct3DCreate9]:              https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-direct3dcreate9
-/// [IDirect3D9]:                   https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3d9
+/// [Direct3DCreate9]:              https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-direct3dcreate9
+/// [IDirect3D9]:                   https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3d9
 ///
-/// [CheckDepthStencilMatch]:       https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdepthstencilmatch
-/// [CheckDeviceFormat]:            https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdeviceformat
-/// [CheckDeviceFormatConversion]:  https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdeviceformatconversion
-/// [CheckDeviceMultiSampleType]:   https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdevicemultisampletype
-/// [CheckDeviceType]:              https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdevicetype
-/// [CreateDevice]:                 https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-createdevice
-/// [EnumAdapterModes]:             https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-enumadaptermodes
-/// [GetAdapterCount]:              https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadaptercount
-/// [GetAdapterDisplayMode]:        https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadapterdisplaymode
-/// [GetAdapterIdentifier]:         https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadapteridentifier
-/// [GetAdapterModeCount]:          https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadaptermodecount
-/// [GetAdapterMonitor]:            https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadaptermonitor
-/// [GetDeviceCaps]:                https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getdevicecaps
-/// [RegisterSoftwareDevice]:       https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-registersoftwaredevice
+/// [CheckDepthStencilMatch]:       https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdepthstencilmatch
+/// [CheckDeviceFormat]:            https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdeviceformat
+/// [CheckDeviceFormatConversion]:  https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdeviceformatconversion
+/// [CheckDeviceMultiSampleType]:   https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdevicemultisampletype
+/// [CheckDeviceType]:              https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdevicetype
+/// [CreateDevice]:                 https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-createdevice
+/// [EnumAdapterModes]:             https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-enumadaptermodes
+/// [GetAdapterCount]:              https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadaptercount
+/// [GetAdapterDisplayMode]:        https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadapterdisplaymode
+/// [GetAdapterIdentifier]:         https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadapteridentifier
+/// [GetAdapterModeCount]:          https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadaptermodecount
+/// [GetAdapterMonitor]:            https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadaptermonitor
+/// [GetDeviceCaps]:                https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getdevicecaps
+/// [RegisterSoftwareDevice]:       https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-registersoftwaredevice
 ///
 pub trait IDirect3D9Ext : AsSafe<IDirect3D9> + Sized {
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-direct3dcreate9)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-direct3dcreate9)\]
     /// Direct3DCreate9
     ///
     /// Creates an [IDirect3D9] object and returns it.
@@ -99,7 +99,7 @@ pub trait IDirect3D9Ext : AsSafe<IDirect3D9> + Sized {
     /// let d3d = unsafe { Direct3D::create(SdkVersion::default()) }.unwrap();
     /// ```
     ///
-    /// [IDirect3D9]:                   https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3d9
+    /// [IDirect3D9]:                   https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3d9
     ///
     unsafe fn create(sdk_version: SdkVersion) -> Result<Self, Error> where Self : From<mcom::Rc<IDirect3D9>> {
         fn_context!(d3d9::IDirect3D9Ext::create => Direct3DCreate9);
@@ -107,7 +107,7 @@ pub trait IDirect3D9Ext : AsSafe<IDirect3D9> + Sized {
         unsafe { mcom::Rc::from_raw_opt(d3d9) }.ok_or(fn_error!(THINERR::NONSPECIFIC)).map(Self::from)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdepthstencilmatch)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdepthstencilmatch)\]
     /// IDirect3D9::CheckDepthStencilMatch
     ///
     /// Determines whether a depth-stencil format is compatible with a render-target format in a particular display mode.
@@ -138,7 +138,7 @@ pub trait IDirect3D9Ext : AsSafe<IDirect3D9> + Sized {
         Ok(())
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdeviceformat)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdeviceformat)\]
     /// IDirect3D9::CheckDeviceFormat
     ///
     /// Determines whether a surface format is available as a specified resource type and can be used as a texture, depth-stencil buffer, or render target, or any combination of the three, on a device representing this adapter.
@@ -167,7 +167,7 @@ pub trait IDirect3D9Ext : AsSafe<IDirect3D9> + Sized {
         Ok(())
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdeviceformatconversion)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdeviceformatconversion)\]
     /// IDirect3D9::CheckDeviceFormatConversion
     ///
     /// Tests the device to see if it supports conversion from one display format to another.
@@ -196,7 +196,7 @@ pub trait IDirect3D9Ext : AsSafe<IDirect3D9> + Sized {
         Ok(())
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdevicemultisampletype)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdevicemultisampletype)\]
     /// IDirect3D9::CheckDeviceMultiSampleType
     ///
     /// Determines if a multisampling technique is available on this device.
@@ -224,7 +224,7 @@ pub trait IDirect3D9Ext : AsSafe<IDirect3D9> + Sized {
         Ok(quality_levels)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdevicetype)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-checkdevicetype)\]
     /// IDirect3D9::CheckDeviceType
     ///
     /// Verifies whether a hardware accelerated device type can be used on this adapter.
@@ -252,7 +252,7 @@ pub trait IDirect3D9Ext : AsSafe<IDirect3D9> + Sized {
         Ok(())
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-createdevice)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-createdevice)\]
     /// IDirect3D9::CreateDevice
     ///
     /// Creates a [Device].
@@ -317,7 +317,7 @@ pub trait IDirect3D9Ext : AsSafe<IDirect3D9> + Sized {
     /// let _device = device; // XXX
     /// ```
     ///
-    /// [WM_DESTROY]:           https://docs.microsoft.com/en-us/windows/win32/winmsg/wm-destroy
+    /// [WM_DESTROY]:           https://learn.microsoft.com/en-us/windows/win32/winmsg/wm-destroy
     unsafe fn create_device(&self, adapter: AdapterIndex, device_type: impl Into<DevType>, focus_window: impl AsHWND, behavior_flags: impl Into<Create>, present_parameters: &mut PresentParameters<'static>) -> Result<Device, Error> {
         fn_context!(d3d9::IDirect3D9Ext::create_device => IDirect3D9::CreateDevice);
         let behavior_flags = u32::from(behavior_flags.into());
@@ -328,7 +328,7 @@ pub trait IDirect3D9Ext : AsSafe<IDirect3D9> + Sized {
         Ok(unsafe { Device::from_raw(device) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-enumadaptermodes)\] IDirect3D9::EnumAdapterModes
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-enumadaptermodes)\] IDirect3D9::EnumAdapterModes
     ///
     /// Queries the possible display modes of an adapter (~ connected monitor)
     ///
@@ -367,7 +367,7 @@ pub trait IDirect3D9Ext : AsSafe<IDirect3D9> + Sized {
         Ok(dm)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadaptercount)\] IDirect3D9::GetAdapterCount
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadaptercount)\] IDirect3D9::GetAdapterCount
     ///
     /// Gets the number of adapters (~ connected monitors) available to this device.
     ///
@@ -386,7 +386,7 @@ pub trait IDirect3D9Ext : AsSafe<IDirect3D9> + Sized {
         unsafe { self.as_winapi().GetAdapterCount() } // Safety:  Seems 100% safe per unit testing bellow
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadapterdisplaymode)\] IDirect3D9::GetAdapterDisplayMode
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadapterdisplaymode)\] IDirect3D9::GetAdapterDisplayMode
     ///
     /// Gets the current display mode of an adapter (~ connected monitor)
     ///
@@ -414,7 +414,7 @@ pub trait IDirect3D9Ext : AsSafe<IDirect3D9> + Sized {
         Ok(dm)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadapteridentifier)\] IDirect3D9::GetAdapterIdentifier
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadapteridentifier)\] IDirect3D9::GetAdapterIdentifier
     ///
     /// Gets metadata about an adapter (~ connected monitor), including driver name/version/guids/whql info/vendor/device ids/blood type/birthplace/???
     ///
@@ -451,7 +451,7 @@ pub trait IDirect3D9Ext : AsSafe<IDirect3D9> + Sized {
         Ok(ident)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadaptermodecount)\] IDirect3D9::GetAdapterModeCount
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadaptermodecount)\] IDirect3D9::GetAdapterModeCount
     ///
     /// Get the number of display modes this adapter/monitor supports.
     ///
@@ -489,7 +489,7 @@ pub trait IDirect3D9Ext : AsSafe<IDirect3D9> + Sized {
         unsafe { self.as_winapi().GetAdapterModeCount(adapter, format.into().into()) }
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadaptermonitor)\] IDirect3D9::GetAdapterMonitor
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getadaptermonitor)\] IDirect3D9::GetAdapterMonitor
     ///
     /// ### Returns
     /// *   [THINERR::NONSPECIFIC]  on an invalid `adapter`
@@ -508,7 +508,7 @@ pub trait IDirect3D9Ext : AsSafe<IDirect3D9> + Sized {
         if hm.is_null() { Err(fn_error!(THINERR::NONSPECIFIC)) } else { Ok(hm) }
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getdevicecaps)\] IDirect3D9::GetDeviceCaps
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-getdevicecaps)\] IDirect3D9::GetDeviceCaps
     ///
     /// ### Returns
     /// *   [D3DERR::INVALIDCALL]       on an invalid `adapter`

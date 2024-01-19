@@ -4,7 +4,7 @@ use winapi::shared::d3d9types::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddevtype)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3ddevtype)\]
 /// D3DDEVTYPE
 ///
 /// All methods of the [Direct3D] interface that take a [DevType] will fail if [DevType::NullRef] is specified. To use these methods, substitute [DevType::Ref] in the method call.
@@ -30,7 +30,7 @@ enumish! { DevType => D3DDEVTYPE; default: HAL != 0; HAL, NullRef, Ref, SW }
     /// The reference device is installed by the Windows SDK 8.0 or later and is intended as an aid in debugging for development only.
     pub const Ref       : DevType = DevType(D3DDEVTYPE_REF);
 
-    /// A pluggable software device that has been registered with [IDirect3D9::RegisterSoftwareDevice](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-registersoftwaredevice)
+    /// A pluggable software device that has been registered with [IDirect3D9::RegisterSoftwareDevice](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9-registersoftwaredevice)
     pub const SW        : DevType = DevType(D3DDEVTYPE_SW);
 }
 

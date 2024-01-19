@@ -12,7 +12,7 @@ use std::ptr::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dvolume9)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dvolume9)\]
 /// A dense 3-dimensional region of data, often belonging to a [VolumeTexture]
 #[derive(Clone)] #[repr(transparent)]
 pub struct Volume(pub(crate) mcom::Rc<IDirect3DVolume9>);
@@ -20,11 +20,11 @@ pub struct Volume(pub(crate) mcom::Rc<IDirect3DVolume9>);
 unsafe impl AsSafe<IUnknown         > for Volume { fn as_safe(&self) -> &IUnknown         { &*self.0 } }
 unsafe impl AsSafe<IDirect3DVolume9 > for Volume { fn as_safe(&self) -> &IDirect3DVolume9 { &*self.0 } }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dvolume9)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dvolume9)\]
 /// IDirect3DVolume9 extension methods
 ///
 /// ### Methods
-/// | thindx                                                        | docs.microsoft.com    | Description |
+/// | thindx                                                        | microsoft.com         | Description |
 /// | ------------------------------------------------------------- | --------------------- | ----------- |
 /// | [free_private_data](Self::free_private_data)                  | [FreePrivateData]     | Frees the specified private data associated with this volume.
 /// | [get_container](Self::get_container)                          | [GetContainer]        | Provides access to the parent volume texture object, if this surface is a child level of a volume texture.
@@ -40,17 +40,17 @@ unsafe impl AsSafe<IDirect3DVolume9 > for Volume { fn as_safe(&self) -> &IDirect
 /// | <span style="opacity: 25%">set_private_data_com</span>        | [SetPrivateData]      | Associates a COM object with the resource for use by the application.
 /// | [unlock_box](Self::unlock_box)                                | [UnlockBox]           | Unlocks a box on a volume resource.
 ///
-/// [FreePrivateData]:  https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-freeprivatedata
-/// [GetContainer]:     https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-getcontainer
-/// [GetDesc]:          https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-getdesc
-/// [GetDevice]:        https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-getdevice
-/// [GetPrivateData]:   https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-getprivatedata
-/// [LockBox]:          https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-lockbox
-/// [SetPrivateData]:   https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-setprivatedata
-/// [UnlockBox]:        https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-unlockbox
+/// [FreePrivateData]:  https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-freeprivatedata
+/// [GetContainer]:     https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-getcontainer
+/// [GetDesc]:          https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-getdesc
+/// [GetDevice]:        https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-getdevice
+/// [GetPrivateData]:   https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-getprivatedata
+/// [LockBox]:          https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-lockbox
+/// [SetPrivateData]:   https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-setprivatedata
+/// [UnlockBox]:        https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-unlockbox
 ///
 pub trait IDirect3DVolume9Ext : AsSafe<IDirect3DVolume9> {
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-freeprivatedata)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-freeprivatedata)\]
     /// IDirect3DVolume9::FreePrivateData
     ///
     /// Frees the specified private data associated with this resource.
@@ -79,7 +79,7 @@ pub trait IDirect3DVolume9Ext : AsSafe<IDirect3DVolume9> {
         fn_check_hr!(unsafe { self.as_winapi().FreePrivateData(guid.as_ref().as_ref()) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-getcontainer)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-getcontainer)\]
     /// IDirect3DVolume9::GetContainer
     ///
     /// Provides access to the parent volume texture object, if this surface is a child level of a volume texture.
@@ -109,7 +109,7 @@ pub trait IDirect3DVolume9Ext : AsSafe<IDirect3DVolume9> {
         Ok(unsafe { C::from_raw(container.cast()) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-getdesc)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-getdesc)\]
     /// IDirect3DVolume9::GetDesc
     ///
     /// Retrieves a description of the volume.
@@ -145,7 +145,7 @@ pub trait IDirect3DVolume9Ext : AsSafe<IDirect3DVolume9> {
         Ok(desc)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-getdevice)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-getdevice)\]
     /// IDirect3DVolume9::GetDevice
     ///
     /// Retrieves the device associated with a resource.
@@ -172,7 +172,7 @@ pub trait IDirect3DVolume9Ext : AsSafe<IDirect3DVolume9> {
         Ok(unsafe { Device::from_raw(device) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-getprivatedata)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-getprivatedata)\]
     /// IDirect3DVolume9::GetPrivateData
     ///
     /// Copies the private data associated with the resource to a provided buffer.
@@ -207,7 +207,7 @@ pub trait IDirect3DVolume9Ext : AsSafe<IDirect3DVolume9> {
         Ok(&data[..(n as usize)])
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-setprivatedata)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-setprivatedata)\]
     /// IDirect3DVolume9::SetPrivateData
     ///
     /// Associate arbitrary data with a volume and guid.
@@ -250,7 +250,7 @@ pub trait IDirect3DVolume9Ext : AsSafe<IDirect3DVolume9> {
         fn_check_hr!(unsafe { self.as_winapi().SetPrivateData(guid.as_ref().as_ref(), data.as_ptr().cast(), n, 0) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-setprivatedata)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-setprivatedata)\]
     /// IDirect3DVolume9::SetPrivateData w/ D3DSPD_IUNKNOWN
     ///
     /// Associate arbitrary COM objects with a volume and guid.
@@ -291,7 +291,7 @@ pub trait IDirect3DVolume9Ext : AsSafe<IDirect3DVolume9> {
         fn_check_hr!(unsafe { self.as_winapi().SetPrivateData(guid.as_ref().as_ref(), data.cast(), size_of_val(&data) as _, D3DSPD_IUNKNOWN) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-setprivatedata)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-setprivatedata)\]
     /// IDirect3DVolume9::SetPrivateData(WKPDID_D3DDebugObjectName, ...)
     ///
     /// Set a human-readable name for this object, to make graphics debug captures easier to understand.
@@ -308,7 +308,7 @@ pub trait IDirect3DVolume9Ext : AsSafe<IDirect3DVolume9> {
         self.set_object_name_a(name.as_bytes())
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-setprivatedata)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-setprivatedata)\]
     /// IDirect3DVolume9::SetPrivateData(WKPDID_D3DDebugObjectName, ...)
     ///
     /// Set a human-readable name for this object, to make graphics debug captures easier to understand.
@@ -325,7 +325,7 @@ pub trait IDirect3DVolume9Ext : AsSafe<IDirect3DVolume9> {
         unsafe { self.set_private_data(&wkpdid::D3DDebugObjectName, name) }
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-setprivatedata)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-setprivatedata)\]
     /// IDirect3DVolume9::SetPrivateData(WKPDID_D3DDebugObjectNameW, ...)
     ///
     /// Set a human-readable name for this object, to make graphics debug captures easier to understand.
@@ -346,7 +346,7 @@ pub trait IDirect3DVolume9Ext : AsSafe<IDirect3DVolume9> {
     // TODO: get_private_data_unk ?
     // figure out where unsoundness should lie - both of those fns?  set_private_data too, as it can invalidate unknown ptrs?
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-lockbox)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-lockbox)\]
     /// IDirect3DVolume9::LockBox
     ///
     /// ### ⚠️ Safety ⚠️
@@ -376,7 +376,7 @@ pub trait IDirect3DVolume9Ext : AsSafe<IDirect3DVolume9> {
         Ok(locked)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-unlockbox)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvolume9-unlockbox)\]
     /// IDirect3DVolume9::UnlockBox
     ///
     /// Unlocks a box on a volume resource.

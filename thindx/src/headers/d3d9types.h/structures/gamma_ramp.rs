@@ -5,7 +5,7 @@ use winapi::shared::minwindef::WORD;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dgammaramp)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dgammaramp)\]
 /// D3DGAMMARAMP
 ///
 /// Contains red, green, and blue ramp data.

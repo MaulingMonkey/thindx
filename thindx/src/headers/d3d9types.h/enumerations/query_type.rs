@@ -4,12 +4,12 @@ use winapi::shared::d3d9types::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dquerytype)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dquerytype)\]
 /// D3DQUERYTYPE
 ///
 /// Identifies the query type. For information about queries, see [Queries (Direct3D 9)]
 ///
-/// [Queries (Direct3D 9)]:         https://docs.microsoft.com/en-us/windows/win32/direct3d9/queries
+/// [Queries (Direct3D 9)]:         https://learn.microsoft.com/en-us/windows/win32/direct3d9/queries
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct QueryType(D3DQUERYTYPE);

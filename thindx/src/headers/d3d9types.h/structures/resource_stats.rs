@@ -4,7 +4,7 @@ use winapi::shared::d3d9types::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dresourcestats)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dresourcestats)\]
 /// D3DRESOURCESTATS
 ///
 /// Resource statistics gathered by the D3DDEVINFO_ResourceManager when using the asynchronous query mechanism.

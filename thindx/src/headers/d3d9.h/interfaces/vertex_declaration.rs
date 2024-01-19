@@ -10,7 +10,7 @@ use std::ptr::null_mut;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dvertexdeclaration9)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dvertexdeclaration9)\]
 /// Describes the layout of the contents of a [VertexBuffer]
 #[derive(Clone)] #[repr(transparent)]
 pub struct VertexDeclaration(pub(crate) mcom::Rc<IDirect3DVertexDeclaration9>);
@@ -20,22 +20,22 @@ unsafe impl AsSafe<IDirect3DVertexDeclaration9  > for VertexDeclaration { fn as_
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dvertexdeclaration9)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dvertexdeclaration9)\]
 /// IDirect3DVertexDeclaration9 extension methods
 ///
 /// ### Methods
-/// | thindx                                                        | docs.microsoft.com    | Description |
+/// | thindx                                                        | microsoft.com         | Description |
 /// | ------------------------------------------------------------- | --------------------- | ----------- |
 /// | [get_declaration_size](Self::get_declaration_size)            | [GetDeclaration]      | Get the number of elements in this vertex declaration, including the [VertexElement::END]
 /// | [get_declaration_inplace](Self::get_declaration_inplace)      | [GetDeclaration]      | Gets the elements in this vertex declaration, including the [VertexElement::END]
 /// | [get_declaration](Self::get_declaration)                      | [GetDeclaration]      | Gets the elements in this vertex declaration, including the [VertexElement::END]
 /// | [get_device](Self::get_device)                                | [GetDevice]           | Gets the current device.
 ///
-/// [GetDeclaration]:   https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexdeclaration9-getdeclaration
-/// [GetDevice]:        https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexdeclaration9-getdevice
+/// [GetDeclaration]:   https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexdeclaration9-getdeclaration
+/// [GetDevice]:        https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexdeclaration9-getdevice
 ///
 pub trait IDirect3DVertexDeclaration9Ext : AsSafe<IDirect3DVertexDeclaration9> {
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexdeclaration9-getdeclaration)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexdeclaration9-getdeclaration)\]
     /// IDirect3DVertexDeclaration9::GetDeclaration
     ///
     /// Get the number of elements in this vertex declaration, including the [VertexElement::END]
@@ -50,7 +50,7 @@ pub trait IDirect3DVertexDeclaration9Ext : AsSafe<IDirect3DVertexDeclaration9> {
         Ok(num_elements)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexdeclaration9-getdeclaration)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexdeclaration9-getdeclaration)\]
     /// IDirect3DVertexDeclaration9::GetDeclaration
     ///
     /// Gets the elements in this vertex declaration, including the [VertexElement::END]
@@ -67,7 +67,7 @@ pub trait IDirect3DVertexDeclaration9Ext : AsSafe<IDirect3DVertexDeclaration9> {
         Ok(&elements[0..(num_elements as usize)])
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexdeclaration9-getdeclaration)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexdeclaration9-getdeclaration)\]
     /// IDirect3DVertexDeclaration9::GetDeclaration
     ///
     /// Gets the elements in this vertex declaration, including the [VertexElement::END]
@@ -85,7 +85,7 @@ pub trait IDirect3DVertexDeclaration9Ext : AsSafe<IDirect3DVertexDeclaration9> {
         Ok(v)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexdeclaration9-getdevice)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dvertexdeclaration9-getdevice)\]
     /// IDirect3DVertexDeclaration9::GetDevice
     ///
     /// Gets the current device.

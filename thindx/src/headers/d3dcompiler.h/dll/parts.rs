@@ -7,7 +7,7 @@ use std::ptr::*;
 
 /// <h1 id="parts" class="section-header"><a href="#parts">Manipulate Bytecode by BlobPart</a></h1>
 impl Compiler {
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dgetblobpart)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dgetblobpart)\]
     /// D3DGetBlobPart
     ///
     /// Retrieves a specific part from a compilation result.
@@ -56,7 +56,7 @@ impl Compiler {
         Ok(BytesBlob::new(unsafe { ReadOnlyBlob::from_raw(blob) }))
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dgetdebuginfo)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dgetdebuginfo)\]
     /// D3DGetDebugInfo
     ///
     /// > **Note:** You can use this API to develop your Windows Store apps, but you can't use it in apps that you submit to the Windows Store.
@@ -115,7 +115,7 @@ impl Compiler {
         Ok(BytesBlob::new(unsafe { ReadOnlyBlob::from_raw(blob) }))
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dgetinputandoutputsignatureblob)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dgetinputandoutputsignatureblob)\]
     /// D3DGetInputAndOutputSignatureBlob
     ///
     /// > **Note:** [get_input_and_output_signature_blob](Self::get_input_and_output_signature_blob) may be altered or
@@ -154,7 +154,7 @@ impl Compiler {
         Ok(BytesBlob::new(unsafe { ReadOnlyBlob::from_raw(blob) }))
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dgetinputsignatureblob)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dgetinputsignatureblob)\]
     /// D3DGetInputSignatureBlob
     ///
     /// > **Note:** [get_input_signature_blob](Self::get_input_signature_blob) may be altered or
@@ -193,7 +193,7 @@ impl Compiler {
         Ok(BytesBlob::new(unsafe { ReadOnlyBlob::from_raw(blob) }))
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dgetoutputsignatureblob)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dgetoutputsignatureblob)\]
     /// D3DGetOutputSignatureBlob
     ///
     /// > **Note:** [get_output_signature_blob](Self::get_output_signature_blob) may be altered or
@@ -232,7 +232,7 @@ impl Compiler {
         Ok(BytesBlob::new(unsafe { ReadOnlyBlob::from_raw(blob) }))
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dsetblobpart)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dsetblobpart)\]
     /// D3DSetBlobPart
     ///
     /// Sets information in a compilation result.
@@ -288,7 +288,7 @@ impl Compiler {
         Ok(unsafe { CodeBlob::from_unchecked(ReadOnlyBlob::from_raw(blob)) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dstripshader)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dstripshader)\]
     /// D3DStripShader
     ///
     /// Removes unwanted blobs from a compilation result.

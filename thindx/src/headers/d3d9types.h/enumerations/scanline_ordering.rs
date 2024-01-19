@@ -6,7 +6,7 @@ use winapi::shared::d3d9types::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dscanlineordering)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dscanlineordering)\]
 /// D3DSCANLINEORDERING
 ///
 /// Flags indicating the method the rasterizer uses to create an image on a surface.

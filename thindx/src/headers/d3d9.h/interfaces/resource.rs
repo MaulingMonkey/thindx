@@ -9,7 +9,7 @@ use std::ptr::null_mut;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dresource9)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dresource9)\]
 /// [\*Texture\*](crate::BaseTexture), [Surface] (but not <strike>[Volume]</strike>!), [IndexBuffer], [VertexBuffer], but not <strike>[\*Shader](crate::PixelShader)</strike>!
 ///
 /// ### See Also
@@ -38,11 +38,11 @@ impl Resource {
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dresource9)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3dresource9)\]
 /// IDirect3DResource9 extension methods
 ///
 /// ### Methods
-/// | thindx                                                        | docs.microsoft.com    | Description |
+/// | thindx                                                        | microsoft.com         | Description |
 /// | ------------------------------------------------------------- | --------------------- | ----------- |
 /// | [free_private_data](Self::free_private_data)                  | [FreePrivateData]     | Frees the specified private data associated with this resource.
 /// | [get_device](Self::get_device)                                | [GetDevice]           | Retrieves the device associated with a resource.
@@ -58,17 +58,17 @@ impl Resource {
 /// | [set_object_name_w](Self::set_object_name_w)                  | [SetPrivateData]      | Associates a debug name with the resource for graphics debuggers.
 /// | <span style="opacity: 25%">set_private_data_com</span>        | [SetPrivateData]      | Associates a COM object with the resource for use by the application.
 ///
-/// [FreePrivateData]:  https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-freeprivatedata
-/// [GetDevice]:        https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-getdevice
-/// [GetPriority]:      https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-getpriority
-/// [GetPrivateData]:   https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-getprivatedata
-/// [GetType]:          https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-gettype
-/// [PreLoad]:          https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-preload
-/// [SetPriority]:      https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-setpriority
-/// [SetPrivateData]:   https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-setprivatedata
+/// [FreePrivateData]:  https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-freeprivatedata
+/// [GetDevice]:        https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-getdevice
+/// [GetPriority]:      https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-getpriority
+/// [GetPrivateData]:   https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-getprivatedata
+/// [GetType]:          https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-gettype
+/// [PreLoad]:          https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-preload
+/// [SetPriority]:      https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-setpriority
+/// [SetPrivateData]:   https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-setprivatedata
 ///
 pub trait IDirect3DResource9Ext : AsSafe<IDirect3DResource9> {
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-freeprivatedata)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-freeprivatedata)\]
     /// IDirect3DResource9::FreePrivateData
     ///
     /// Frees the specified private data associated with this resource.
@@ -96,7 +96,7 @@ pub trait IDirect3DResource9Ext : AsSafe<IDirect3DResource9> {
         fn_check_hr!(unsafe { self.as_winapi().FreePrivateData(guid.as_ref().as_ref()) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-getdevice)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-getdevice)\]
     /// IDirect3DResource9::GetDevice
     ///
     /// Retrieves the device associated with a resource.
@@ -122,7 +122,7 @@ pub trait IDirect3DResource9Ext : AsSafe<IDirect3DResource9> {
         Ok(unsafe { Device::from_raw(device) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-getpriority)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-getpriority)\]
     /// IDirect3DResource9::GetPriority
     ///
     /// Retrieves the priority for this resource.
@@ -147,7 +147,7 @@ pub trait IDirect3DResource9Ext : AsSafe<IDirect3DResource9> {
         unsafe { self.as_winapi().GetPriority() }
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-getprivatedata)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-getprivatedata)\]
     /// IDirect3DResource9::GetPrivateData
     ///
     /// Copies the private data associated with the resource to a provided buffer.
@@ -181,7 +181,7 @@ pub trait IDirect3DResource9Ext : AsSafe<IDirect3DResource9> {
         Ok(&data[..(n as usize)])
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-gettype)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-gettype)\]
     /// IDirect3DResource9::GetType
     ///
     /// Returns the type of the resource.
@@ -197,7 +197,7 @@ pub trait IDirect3DResource9Ext : AsSafe<IDirect3DResource9> {
         ResourceType::from_unchecked(unsafe { self.as_winapi().GetType() })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-preload)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-preload)\]
     /// IDirect3DResource9::PreLoad
     ///
     /// Hint to Direct3D 9 that a [d3d::Pool::Managed] resource will be needed soon.
@@ -215,7 +215,7 @@ pub trait IDirect3DResource9Ext : AsSafe<IDirect3DResource9> {
         unsafe { self.as_winapi().PreLoad() }
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-setpriority)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-setpriority)\]
     /// IDirect3DResource9::SetPriority
     ///
     /// Used to manage [d3d::Pool::Managed] resource priorities.
@@ -236,13 +236,13 @@ pub trait IDirect3DResource9Ext : AsSafe<IDirect3DResource9> {
     /// ```
     ///
     /// ### See Also
-    /// *   <https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9-resource-priority>
+    /// *   <https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3d9-resource-priority>
     fn set_priority(&self, priority: u32) -> u32 {
         fn_context!(d3d9::IDirect3DResource9Ext::set_priority => IDirect3DResource9::SetPriority);
         unsafe { self.as_winapi().SetPriority(priority) }
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-setprivatedata)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-setprivatedata)\]
     /// IDirect3DResource9::SetPrivateData
     ///
     /// Associate arbitrary data with a resource and guid.
@@ -284,7 +284,7 @@ pub trait IDirect3DResource9Ext : AsSafe<IDirect3DResource9> {
         fn_check_hr!(unsafe { self.as_winapi().SetPrivateData(guid.as_ref().as_ref(), data.as_ptr().cast(), n, 0) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-setprivatedata)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-setprivatedata)\]
     /// IDirect3DResource9::SetPrivateData w/ D3DSPD_IUNKNOWN
     ///
     /// Associate arbitrary COM objects with a resource and guid.
@@ -321,7 +321,7 @@ pub trait IDirect3DResource9Ext : AsSafe<IDirect3DResource9> {
         fn_check_hr!(unsafe { self.as_winapi().SetPrivateData(guid.as_ref().as_ref(), data.cast(), size_of_val(&data) as _, D3DSPD_IUNKNOWN) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-setprivatedata)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-setprivatedata)\]
     /// IDirect3DResource9::SetPrivateData(WKPDID_D3DDebugObjectName, ...)
     ///
     /// Set a human-readable name for this object, to make graphics debug captures easier to understand.
@@ -337,7 +337,7 @@ pub trait IDirect3DResource9Ext : AsSafe<IDirect3DResource9> {
         self.set_object_name_a(name.as_bytes())
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-setprivatedata)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-setprivatedata)\]
     /// IDirect3DResource9::SetPrivateData(WKPDID_D3DDebugObjectName, ...)
     ///
     /// Set a human-readable name for this object, to make graphics debug captures easier to understand.
@@ -353,7 +353,7 @@ pub trait IDirect3DResource9Ext : AsSafe<IDirect3DResource9> {
         unsafe { self.set_private_data(&wkpdid::D3DDebugObjectName, name) }
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-setprivatedata)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3dresource9-setprivatedata)\]
     /// IDirect3DResource9::SetPrivateData(WKPDID_D3DDebugObjectNameW, ...)
     ///
     /// Set a human-readable name for this object, to make graphics debug captures easier to understand.

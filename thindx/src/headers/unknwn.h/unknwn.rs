@@ -5,7 +5,7 @@ use winapi::um::unknwnbase::IUnknown;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/unknwn/nn-unknwn-iunknown)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/unknwn/nn-unknwn-iunknown)\]
 /// IUnknown
 ///
 /// Base COM interface most (but not all!) DirectX interfaces eventually derive from.

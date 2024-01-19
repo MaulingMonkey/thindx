@@ -11,7 +11,7 @@ use std::ptr::NonNull;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11shaderreflectiontype)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11shaderreflectiontype)\]
 /// ID3D11ShaderReflectionType
 ///
 /// This shader-reflection interface provides access to variable type.
@@ -38,7 +38,7 @@ impl<'r> ShaderReflectionType<'r> {
 }
 
 impl<'r> ShaderReflectionType<'r> {
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectiontype-getbaseclass)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectiontype-getbaseclass)\]
     /// ID3D11ShaderReflectionType::GetBaseClass
     ///
     /// Gets an [d3d11::ShaderReflectionType] Interface interface containing the variable base class type.
@@ -54,7 +54,7 @@ impl<'r> ShaderReflectionType<'r> {
         unsafe { ShaderReflectionType::from_raw(self.phantom, ptr) }
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectiontype-getdesc)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectiontype-getdesc)\]
     /// ID3D11ShaderReflectionType::GetDesc
     ///
     /// Get the description of a shader-reflection-variable type.
@@ -71,7 +71,7 @@ impl<'r> ShaderReflectionType<'r> {
         Ok(desc)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectiontype-getinterfacebyindex)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectiontype-getinterfacebyindex)\]
     /// ID3D11ShaderReflectionType::GetInterfaceByIndex
     ///
     /// Get an interface by index.
@@ -88,7 +88,7 @@ impl<'r> ShaderReflectionType<'r> {
         unsafe { ShaderReflectionType::from_raw(self.phantom, ptr) }
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectiontype-getmembertypebyindex)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectiontype-getmembertypebyindex)\]
     /// ID3D11ShaderReflectionType::GetMemberTypeByIndex
     ///
     /// Get a shader-reflection-variable type by index.
@@ -105,7 +105,7 @@ impl<'r> ShaderReflectionType<'r> {
         unsafe { ShaderReflectionType::from_raw(self.phantom, ptr) }
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectiontype-getmembertypebyname)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectiontype-getmembertypebyname)\]
     /// ID3D11ShaderReflectionType::GetMemberTypeByName
     ///
     /// Get a shader-reflection-variable type by name.
@@ -124,7 +124,7 @@ impl<'r> ShaderReflectionType<'r> {
         unsafe { ShaderReflectionType::from_raw(self.phantom, ptr) }
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectiontype-getmembertypename)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectiontype-getmembertypename)\]
     /// ID3D11ShaderReflectionType::GetMemberTypeName
     ///
     /// Get a shader-reflection-variable type.
@@ -145,7 +145,7 @@ impl<'r> ShaderReflectionType<'r> {
         }
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectiontype-getnuminterfaces)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectiontype-getnuminterfaces)\]
     /// ID3D11ShaderReflectionType::GetNumInterfaces
     ///
     /// Gets the number of interfaces.
@@ -160,7 +160,7 @@ impl<'r> ShaderReflectionType<'r> {
         unsafe { self.ptr.as_ref().GetNumInterfaces() }
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectiontype-getsubtype)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectiontype-getsubtype)\]
     /// ID3D11ShaderReflectionType::GetSubType
     ///
     /// Gets the base class of a class.
@@ -176,7 +176,7 @@ impl<'r> ShaderReflectionType<'r> {
         unsafe { ShaderReflectionType::from_raw(self.phantom, ptr) }
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectiontype-implementsinterface)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectiontype-implementsinterface)\]
     /// ID3D11ShaderReflectionType::ImplementsInterface
     ///
     /// Indicates whether a class type implements an interface.
@@ -205,7 +205,7 @@ impl<'r> ShaderReflectionType<'r> {
         }
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectiontype-isequal)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectiontype-isequal)\]
     /// ID3D11ShaderReflectionType::IsEqual
     ///
     /// Indicates whether two [ShaderReflectionType] pointers have the same underlying type.
@@ -234,7 +234,7 @@ impl<'r> ShaderReflectionType<'r> {
         }
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectiontype-isoftype)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectiontype-isoftype)\]
     /// ID3D11ShaderReflectionType::IsOfType
     ///
     /// Indicates whether a variable is of the specified type.

@@ -9,7 +9,7 @@ use std::ptr::null_mut;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/libloaderapi/nf-libloaderapi-loadlibraryexa)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/libloaderapi/nf-libloaderapi-loadlibraryexa)\]
 /// Load a library using with `LOAD_LIBRARY_SEARCH_SYSTEM32`
 ///
 /// ### Arguments
@@ -21,7 +21,7 @@ use std::ptr::null_mut;
 ///
 /// ### See Also
 /// *   Dynamic-Link Library Security<br>
-///     <https://docs.microsoft.com/en-us/windows/win32/dlls/dynamic-link-library-security>
+///     <https://learn.microsoft.com/en-us/windows/win32/dlls/dynamic-link-library-security>
 /// *   Secure loading of libraries to prevent DLL preloading attacks<br>
 ///     <https://support.microsoft.com/en-us/topic/secure-loading-of-libraries-to-prevent-dll-preloading-attacks-d41303ec-0748-9211-f317-2edc819682e1>
 pub(crate) fn load_system_0(name0: &str) -> minidl::Result<Library> {
@@ -61,7 +61,7 @@ pub(crate) fn load_system_0(name0: &str) -> minidl::Result<Library> {
 
 impl LibraryExt for Library {}
 pub(crate) trait LibraryExt : Sized + From<Library> + Into<Library> {
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/libloaderapi/nf-libloaderapi-getprocaddress)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/libloaderapi/nf-libloaderapi-getprocaddress)\]
     /// Load a symbol from the library by ordinal.
     ///
     /// ### ⚠️ Safety ⚠️

@@ -7,7 +7,7 @@ use winapi::um::d3dcompiler::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dcompile2#parameters)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dcompile2#parameters)\]
 /// UINT / D3DCOMPILE_SECDATA_*
 ///
 /// Flags controlling how HLSL shaders are compiled to bytecode via [compile2](d3d::Compiler::compile2).

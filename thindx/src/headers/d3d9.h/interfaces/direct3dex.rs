@@ -15,7 +15,7 @@ use std::ptr::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3d9ex)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3d9ex)\]
 /// (extends [Direct3D])
 /// Factory for use in creating your initial [DeviceEx].
 #[cfg(feature = "9ex")]
@@ -28,11 +28,11 @@ pub struct Direct3DEx(pub(crate) mcom::Rc<IDirect3D9Ex>);
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3d9ex)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nn-d3d9-idirect3d9ex)\]
 /// IDirect3D9Ex extension methods
 ///
 /// ### Methods
-/// | thindx                                                            | docs.microsoft.com        | Description |
+/// | thindx                                                            | learn.microsoft.com        | Description |
 /// | ----------------------------------------------------------------- | ------------------------- | ----------- |
 /// | [create](Self::create)                                            | [Direct3DCreate9Ex]       | Creates an [IDirect3D9Ex] object and returns an interface to it.
 /// | [create_device_ex](Self::create_device_ex)                        | [CreateDeviceEx]          | Creates a device to represent the display adapter.
@@ -41,18 +41,18 @@ pub struct Direct3DEx(pub(crate) mcom::Rc<IDirect3D9Ex>);
 /// | [get_adapter_luid](Self::get_adapter_luid)                        | [GetAdapterLUID]          | This method returns a [Luid] for the adapter that is specific to the adapter hardware.
 /// | [get_adapter_mode_count_ex](Self::get_adapter_mode_count_ex)      | [GetAdapterModeCountEx]   | Returns the number of display modes available.
 ///
-/// [Direct3DCreate9Ex]:    https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-direct3dcreate9ex
-/// [IDirect3D9Ex]:         https://docs.microsoft.com/en-us/windows/desktop/api/d3d9/nn-d3d9-idirect3d9ex
+/// [Direct3DCreate9Ex]:    https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-direct3dcreate9ex
+/// [IDirect3D9Ex]:         https://learn.microsoft.com/en-us/windows/desktop/api/d3d9/nn-d3d9-idirect3d9ex
 ///
-/// [CreateDeviceEx]:           https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9ex-createdeviceex
-/// [EnumAdapterModesEx]:       https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9ex-enumadaptermodesex
-/// [GetAdapterDisplayModeEx]:  https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9ex-getadapterdisplaymodeex
-/// [GetAdapterLUID]:           https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9ex-getadapterluid
-/// [GetAdapterModeCountEx]:    https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9ex-getadaptermodecountex
+/// [CreateDeviceEx]:           https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9ex-createdeviceex
+/// [EnumAdapterModesEx]:       https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9ex-enumadaptermodesex
+/// [GetAdapterDisplayModeEx]:  https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9ex-getadapterdisplaymodeex
+/// [GetAdapterLUID]:           https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9ex-getadapterluid
+/// [GetAdapterModeCountEx]:    https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9ex-getadaptermodecountex
 ///
 #[cfg(feature = "9ex")]
 pub trait IDirect3D9ExExt : AsSafe<IDirect3D9Ex> {
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-direct3dcreate9ex)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-direct3dcreate9ex)\]
     /// Direct3DCreate9Ex
     ///
     /// Creates an [IDirect3D9Ex](IDirect3D9ExExt) object and returns an interface to it.
@@ -74,7 +74,7 @@ pub trait IDirect3D9ExExt : AsSafe<IDirect3D9Ex> {
         Ok(Self::from(unsafe { mcom::Rc::from_raw(d3d9ex) }))
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9ex-createdeviceex)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9ex-createdeviceex)\]
     /// IDirect3D9Ex::CreateDeviceEx
     ///
     /// Creates a device to represent the display adapter.
@@ -104,7 +104,7 @@ pub trait IDirect3D9ExExt : AsSafe<IDirect3D9Ex> {
         Ok(unsafe { DeviceEx::from_raw(device) })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9ex-enumadaptermodesex)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9ex-enumadaptermodesex)\]
     /// IDirect3D9Ex::EnumAdapterModesEx
     ///
     /// Enumerate actual display mode info based on the given mode index.
@@ -118,7 +118,7 @@ pub trait IDirect3D9ExExt : AsSafe<IDirect3D9Ex> {
         Ok(dmex)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9ex-getadapterdisplaymodeex)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9ex-getadapterdisplaymodeex)\]
     /// IDirect3D9Ex::GetAdapterDisplayModeEx
     ///
     /// Retrieves the current display mode and rotation settings of the adapter.
@@ -131,7 +131,7 @@ pub trait IDirect3D9ExExt : AsSafe<IDirect3D9Ex> {
         Ok((mode, DisplayRotation::from_unchecked(rot)))
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9ex-getadapterluid)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9ex-getadapterluid)\]
     /// IDirect3D9Ex::GetAdapterLUID
     ///
     /// This method returns a unique identifier for the adapter that is specific to the adapter hardware.
@@ -143,7 +143,7 @@ pub trait IDirect3D9ExExt : AsSafe<IDirect3D9Ex> {
         Ok(luid)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9ex-getadaptermodecountex)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d9/nf-d3d9-idirect3d9ex-getadaptermodecountex)\]
     /// IDirect3D9Ex::GetAdapterModeCountEx
     ///
     /// Returns the number of display modes available.

@@ -4,7 +4,7 @@ use winapi::shared::d3d9types::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dpresentstats)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dpresentstats)\]
 /// D3DPRESENTSTATS
 ///
 /// Describes swapchain statistics relating to PresentEx calls.
@@ -19,12 +19,12 @@ use winapi::shared::d3d9types::*;
 
     /// The vblank count when the scheduler last sampled the machine time by calling [QueryPerformanceCounter].
     ///
-    /// [QueryPerformanceCounter]:  https://docs.microsoft.com/en-us/windows/win32/api/profileapi/nf-profileapi-queryperformancecounter
+    /// [QueryPerformanceCounter]:  https://learn.microsoft.com/en-us/windows/win32/api/profileapi/nf-profileapi-queryperformancecounter
     pub sync_refresh_count:     u32,
 
     /// The scheduler's last sampled machine time, obtained by calling [QueryPerformanceCounter].
     ///
-    /// [QueryPerformanceCounter]:  https://docs.microsoft.com/en-us/windows/win32/api/profileapi/nf-profileapi-queryperformancecounter
+    /// [QueryPerformanceCounter]:  https://learn.microsoft.com/en-us/windows/win32/api/profileapi/nf-profileapi-queryperformancecounter
     pub sync_qpc_time:          Pack4OnX86<u64>,
 
     /// This value is not used.

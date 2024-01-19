@@ -174,7 +174,7 @@ formats! {
 
         (Q16W16V16U16,          64, (1,1)),
 
-        //(MULTI2_ARGB8,        ??, (?,?)), // variable bits per pixel! https://docs.microsoft.com/en-us/windows/win32/direct3d9/multiple-element-textures
+        //(MULTI2_ARGB8,        ??, (?,?)), // variable bits per pixel! https://learn.microsoft.com/en-us/windows/win32/direct3d9/multiple-element-textures
 
         (R16F,                  16, (1,1)),
         (G16R16F,               32, (1,1)),
@@ -185,8 +185,8 @@ formats! {
         (A32B32G32R32F,        128, (1,1)),
 
         // I've seen conflicting documentation for if this is 16 or 32 bits.  I assume it's *probably* 16 bits based on the name, but I'm holding off on defining it until this can be confirmed.
-        // "A 16-bit normal compression format."    https://docs.microsoft.com/en-us/previous-versions/windows/desktop/bb153349(v=vs.85)
-        // "A 32-bit normal compression format."    https://docs.microsoft.com/en-us/previous-versions/windows/desktop/bb322854(v=vs.85)
+        // "A 16-bit normal compression format."    https://learn.microsoft.com/en-us/previous-versions/windows/desktop/bb153349(v=vs.85)
+        // "A 32-bit normal compression format."    https://learn.microsoft.com/en-us/previous-versions/windows/desktop/bb322854(v=vs.85)
         // (CxV8U8              16, (?,?)),
 
         (A1,                     1, (1,1)),

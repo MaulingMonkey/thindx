@@ -4,7 +4,7 @@ use winapi::shared::d3d9types::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dcomposerectsop)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dcomposerectsop)\]
 /// D3DCOMPOSERECTSOP
 ///
 /// Specifies how to combine the glyph data from the source and destination surfaces in a call to [IDirect3DDevice9ExExt::compose_rects]

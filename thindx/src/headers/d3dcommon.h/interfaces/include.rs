@@ -12,14 +12,14 @@ use std::ptr::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nn-d3dcommon-id3dinclude)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3dcommon/nn-d3dcommon-id3dinclude)\]
 /// ID3DInclude compatible types
 ///
 /// ### ⚠️ Safety ⚠️
 /// By implementing this trait, you promise to return one of:
 /// *   [null_mut]\(\)
-/// *   [D3D_COMPILE_STANDARD_FILE_INCLUDE](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dcompile#parameters)
-/// *   A valid, well behaved [ID3D11Include](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nn-d3dcommon-id3dinclude)
+/// *   [D3D_COMPILE_STANDARD_FILE_INCLUDE](https://learn.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dcompile#parameters)
+/// *   A valid, well behaved [ID3D11Include](https://learn.microsoft.com/en-us/windows/win32/api/d3dcommon/nn-d3dcommon-id3dinclude)
 ///     instance, that lives for at least as long as `self` remains untouched / undropped.
 pub unsafe trait AsInclude {
     /// Treat this as a raw winapi [ID3DInclude].
@@ -38,7 +38,7 @@ unsafe impl<AI: AsInclude> AsInclude for &AI {
     fn as_id3dinclude(&self) -> *mut ID3DInclude { (**self).as_id3dinclude() }
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dcompile#parameters)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dcompile#parameters)\]
 /// D3D_COMPILE_STANDARD_FILE_INCLUDE
 ///
 /// This default include handler includes files that are relative to the current directory and files that are relative to
@@ -55,7 +55,7 @@ unsafe impl AsInclude for StandardFileInclude {
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcommon/nn-d3dcommon-id3dinclude)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3dcommon/nn-d3dcommon-id3dinclude)\]
 /// ID3DInclude
 #[repr(C)] pub struct Include<I> {
     vtable: *const ID3DIncludeVtbl,

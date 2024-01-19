@@ -40,11 +40,11 @@
 //!
 //! ### See Also
 //! *   <https://www.hresult.info/>
-//! *   <https://docs.microsoft.com/en-us/windows/win32/debug/system-error-codes#system-error-codes>
-//! *   <https://docs.microsoft.com/en-us/windows/win32/direct3d11/d3d11-graphics-reference-returnvalues>
-//! *   <https://docs.microsoft.com/en-us/windows/win32/com/structure-of-com-error-codes>
+//! *   <https://learn.microsoft.com/en-us/windows/win32/debug/system-error-codes#system-error-codes>
+//! *   <https://learn.microsoft.com/en-us/windows/win32/direct3d11/d3d11-graphics-reference-returnvalues>
+//! *   <https://learn.microsoft.com/en-us/windows/win32/com/structure-of-com-error-codes>
 //!
-//! [HRESULT]:  https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-erref/0642cb2f-2075-4469-918c-4441e69c548a
+//! [HRESULT]:  https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-erref/0642cb2f-2075-4469-918c-4441e69c548a
 
 #![allow(overflowing_literals)] // ErrorKind is signed for some reason
 #![allow(non_snake_case)]
@@ -58,7 +58,7 @@ use winresult::HResultError;
 
 /// `0xA7D8....` • **T**hin**DX** [ErrorKind]s
 ///
-/// *   `0xA.......`  - **S**everity and **C**ustomer bits for [HRESULT](https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-erref/0642cb2f-2075-4469-918c-4441e69c548a)s
+/// *   `0xA.......`  - **S**everity and **C**ustomer bits for [HRESULT](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-erref/0642cb2f-2075-4469-918c-4441e69c548a)s
 /// *   `0x.7D8....`  - **T**hin **DX** error codes
 pub mod THINERR {
     use super::*;
@@ -93,34 +93,34 @@ pub mod THINERR {
     pub const INVALID_BYTECODE : HResultError = HResultError::from_constant(0xA7D80008);
 }
 
-/// `0x887C....` • \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d11/d3d11-graphics-reference-returnvalues)\] • Direct3D 11 [ErrorKind](crate::ErrorKind)s
+/// `0x887C....` • \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3d11/d3d11-graphics-reference-returnvalues)\] • Direct3D 11 [ErrorKind](crate::ErrorKind)s
 pub use winresult::D3D11;
 
-/// `0x8876....` • \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3derr)\] • Direct3D / Direct3D9 [ErrorKind](crate::ErrorKind)s
+/// `0x8876....` • \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3derr)\] • Direct3D / Direct3D9 [ErrorKind](crate::ErrorKind)s
 pub use winresult::D3DERR;
 
-/// `0x8876....` • \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dxerr)\] • D3DX [ErrorKind](crate::ErrorKind)s
+/// `0x8876....` • \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dxerr)\] • D3DX [ErrorKind](crate::ErrorKind)s
 ///
 /// Some of these can be returned by Direct3D itself
 pub use winresult::D3DXERR;
 
-/// `0x887A....` • \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3ddxgi/dxgi-error)\] • DXGI [ErrorKind](crate::ErrorKind)s
+/// `0x887A....` • \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3ddxgi/dxgi-error)\] • DXGI [ErrorKind](crate::ErrorKind)s
 pub use winresult::DXGI;
 
-/// `0x8000....` • \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/learnwin32/error-handling-in-com)\] • General [ErrorKind](crate::ErrorKind)s<br>
-/// `0x8007....` • \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/learnwin32/error-handling-in-com)\] • Win32/COM [ErrorKind](crate::ErrorKind)s
+/// `0x8000....` • \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/learnwin32/error-handling-in-com)\] • General [ErrorKind](crate::ErrorKind)s<br>
+/// `0x8007....` • \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/learnwin32/error-handling-in-com)\] • Win32/COM [ErrorKind](crate::ErrorKind)s
 ///
 /// Errors that aren't part of the D3DERR_\* family, but might still be returned by DirectX API calls.
 pub use winresult::E;
 
-/// `0x0000....` • \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/debug/system-error-codes--0-499-)\] • Non-hresult [ErrorKind](crate::ErrorKind)s
+/// `0x0000....` • \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/debug/system-error-codes--0-499-)\] • Non-hresult [ErrorKind](crate::ErrorKind)s
 pub use winresult::ERROR;
 
-/// `0x0000....` • \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/learnwin32/error-handling-in-com)\] • Win32/COM success "[ErrorKind](crate::ErrorKind)"s<br>
-/// `0x0876....` • \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3derr)\] • Success "[ErrorKind](crate::ErrorKind)"s
+/// `0x0000....` • \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/learnwin32/error-handling-in-com)\] • Win32/COM success "[ErrorKind](crate::ErrorKind)"s<br>
+/// `0x0876....` • \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3derr)\] • Success "[ErrorKind](crate::ErrorKind)"s
 pub use winresult::S;
 
-/// `0x0876....` • \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3derr)\] • Success "[ErrorKind](crate::ErrorKind)"s
+/// `0x0876....` • \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3derr)\] • Success "[ErrorKind](crate::ErrorKind)"s
 pub mod D3D {
     pub use winresult::D3D::*;
     pub use winresult::D3DOK::NOAUTOGEN as OK_NOAUTOGEN; // TODO: eliminate in favor of fixing winresult

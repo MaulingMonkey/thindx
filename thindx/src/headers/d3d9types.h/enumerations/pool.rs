@@ -4,7 +4,7 @@ use winapi::shared::d3d9types::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dpool)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dpool)\]
 /// D3DPOOL
 ///
 /// Defines the memory class that holds the buffers for a resource.
@@ -27,12 +27,12 @@ enumish! { Pool => D3DPOOL; default: Default == 0; Default, Managed, SystemMem, 
     /// When a device is lost, resources created using [Pool::Default] must be released before calling [IDirect3DDevice9::Reset].
     /// For more information, see [Lost Devices (Direct3D 9)].
     ///
-    /// [IDirect3DDevice9::UpdateSurface]:          https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-updatesurface
-    /// [IDirect3DDevice9::UpdateTexture]:          https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-updatetexture
-    /// [IDirect3DDevice9::GetFrontBufferData]:     https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getfrontbufferdata
-    /// [IDirect3DDevice9::GetRenderTargetData]:    https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getrendertargetdata
-    /// [IDirect3DDevice9::Reset]:                  https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-reset
-    /// [Lost Devices (Direct3D 9)]:                https://docs.microsoft.com/en-us/windows/win32/direct3d9/lost-devices
+    /// [IDirect3DDevice9::UpdateSurface]:          https://learn.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-updatesurface
+    /// [IDirect3DDevice9::UpdateTexture]:          https://learn.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-updatetexture
+    /// [IDirect3DDevice9::GetFrontBufferData]:     https://learn.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getfrontbufferdata
+    /// [IDirect3DDevice9::GetRenderTargetData]:    https://learn.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-getrendertargetdata
+    /// [IDirect3DDevice9::Reset]:                  https://learn.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-reset
+    /// [Lost Devices (Direct3D 9)]:                https://learn.microsoft.com/en-us/windows/win32/direct3d9/lost-devices
     pub const Default   : Pool = Pool(D3DPOOL_DEFAULT); // 0
 
     /// Resources are copied automatically to device-accessible memory as needed.
@@ -41,7 +41,7 @@ enumish! { Pool => D3DPOOL; default: Default == 0; Default, Managed, SystemMem, 
     /// Managed resources can be locked. Only the system-memory copy is directly modified.
     /// Direct3D copies your changes to driver-accessible memory as needed.
     ///
-    /// [Managing Resources (Direct3D 9)]:          https://docs.microsoft.com/en-us/windows/win32/direct3d9/managing-resources
+    /// [Managing Resources (Direct3D 9)]:          https://learn.microsoft.com/en-us/windows/win32/direct3d9/managing-resources
     pub const Managed   : Pool = Pool(D3DPOOL_MANAGED);
 
     /// Resources are placed in memory that is not typically accessible by the Direct3D device.
@@ -49,8 +49,8 @@ enumish! { Pool => D3DPOOL; default: Default == 0; Default, Managed, SystemMem, 
     /// These resources do not need to be recreated when a device is lost.
     /// Resources in this pool can be locked and can be used as the source for a IDirect3DDevice9::UpdateSurface or IDirect3DDevice9::UpdateTexture operation to a memory resource created with [Pool::Default].
     ///
-    /// [IDirect3DDevice9::UpdateSurface]:          https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-updatesurface
-    /// [IDirect3DDevice9::UpdateTexture]:          https://docs.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-updatetexture
+    /// [IDirect3DDevice9::UpdateSurface]:          https://learn.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-updatesurface
+    /// [IDirect3DDevice9::UpdateTexture]:          https://learn.microsoft.com/en-us/windows/win32/api/d3d9helper/nf-d3d9helper-idirect3ddevice9-updatetexture
     pub const SystemMem : Pool = Pool(D3DPOOL_SYSTEMMEM);
 
     /// Resources are placed in system RAM and do not need to be recreated when a device is lost.

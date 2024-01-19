@@ -7,14 +7,14 @@ type D3DUSAGE = u32; // there's no actual type
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dusage)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dusage)\]
 /// DWORD / D3DUSAGE_*
 ///
 /// Usage options that identify how resources are to be used.
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct Usage(D3DUSAGE);
-// TODO: usage table from https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dusage#usage-and-resource-combinations?
+// TODO: usage table from https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dusage#usage-and-resource-combinations?
 
 flags! {
     Usage => D3DUSAGE;
@@ -30,7 +30,7 @@ flags! {
     /// Automatic generation of mipmaps is not supported for volume textures and depth stencil surfaces/textures.
     /// This usage is not valid for a resource in system memory ([Pool::SystemMem]).
     ///
-    /// [Automatic Generation of Mipmaps (Direct3D 9)]:         https://docs.microsoft.com/en-us/windows/win32/direct3d9/automatic-generation-of-mipmaps
+    /// [Automatic Generation of Mipmaps (Direct3D 9)]:         https://learn.microsoft.com/en-us/windows/win32/direct3d9/automatic-generation-of-mipmaps
     pub const AutoGenMipMap                 : Usage = Usage(D3DUSAGE_AUTOGENMIPMAP);
 
     /// The resource will be a depth stencil buffer. [Usage::DepthStencil] can only be used with [Pool::Default].
@@ -59,9 +59,9 @@ flags! {
     /// However, managed textures cannot use [Usage::Dynamic].
     /// For more information about dynamic textures, see [Using Dynamic Textures].
     ///
-    /// [Managing Resources (Direct3D 9)]:          https://docs.microsoft.com/en-us/windows/win32/direct3d9/managing-resources
-    /// [Performance Optimizations (Direct3D 9)]:   https://docs.microsoft.com/en-us/windows/win32/direct3d9/performance-optimizations
-    /// [Using Dynamic Textures]:                   https://docs.microsoft.com/en-us/windows/win32/direct3d9/performance-optimizations
+    /// [Managing Resources (Direct3D 9)]:          https://learn.microsoft.com/en-us/windows/win32/direct3d9/managing-resources
+    /// [Performance Optimizations (Direct3D 9)]:   https://learn.microsoft.com/en-us/windows/win32/direct3d9/performance-optimizations
+    /// [Using Dynamic Textures]:                   https://learn.microsoft.com/en-us/windows/win32/direct3d9/performance-optimizations
     pub const Dynamic                       : Usage = Usage(D3DUSAGE_DYNAMIC);
 
     /// Allow a shared surface created by a secure application to be opened by a non-secure application that has the shared handle.

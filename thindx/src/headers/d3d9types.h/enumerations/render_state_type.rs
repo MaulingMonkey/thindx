@@ -4,15 +4,15 @@ use winapi::shared::d3d9types::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3drenderstatetype)\]
 /// D3DRENDERSTATETYPE
 ///
 /// Render states define set-up states for all kinds of vertex and pixel processing.
 /// Some render states set up vertex processing, and some set up pixel processing (see [Render States (Direct3D 9)]).
 /// Render states can be saved and restored using stateblocks (see [State Blocks Save and Restore State (Direct3D 9)]).
 ///
-/// [Render States (Direct3D 9)]:                       https://docs.microsoft.com/en-us/windows/win32/direct3d9/render-states
-/// [State Blocks Save and Restore State (Direct3D 9)]: https://docs.microsoft.com/en-us/windows/win32/direct3d9/state-blocks-save-and-restore-state
+/// [Render States (Direct3D 9)]:                       https://learn.microsoft.com/en-us/windows/win32/direct3d9/render-states
+/// [State Blocks Save and Restore State (Direct3D 9)]: https://learn.microsoft.com/en-us/windows/win32/direct3d9/state-blocks-save-and-restore-state
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct RenderStateType(D3DRENDERSTATETYPE);

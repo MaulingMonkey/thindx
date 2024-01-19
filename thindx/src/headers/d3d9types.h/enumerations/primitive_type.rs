@@ -4,15 +4,15 @@ use winapi::shared::d3d9types::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dprimitivetype)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dprimitivetype)\]
 /// D3DPRIMITIVETYPE
 ///
 /// Defines the primitives supported by Direct3D.
 ///
 /// Using [Triangle Strips] or [Triangle Fans (Direct3D 9)] is often more efficient than using triangle lists because fewer vertices are duplicated.
 ///
-/// [Triangle Strips]:              https://docs.microsoft.com/en-us/windows/win32/direct3d9/triangle-strips
-/// [Triangle Fans (Direct3D 9)]:   https://docs.microsoft.com/en-us/windows/win32/direct3d9/triangle-fans
+/// [Triangle Strips]:              https://learn.microsoft.com/en-us/windows/win32/direct3d9/triangle-strips
+/// [Triangle Fans (Direct3D 9)]:   https://learn.microsoft.com/en-us/windows/win32/direct3d9/triangle-fans
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[derive(Pod, Zeroable)]
 #[repr(transparent)] pub struct PrimitiveType(D3DPRIMITIVETYPE);

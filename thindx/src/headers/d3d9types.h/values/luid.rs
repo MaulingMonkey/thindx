@@ -9,7 +9,7 @@ use std::hash::{Hash, Hasher};
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/previous-versions/windows/hardware/drivers/ff549708(v=vs.85))\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/previous-versions/windows/hardware/drivers/ff549708(v=vs.85))\]
 /// LUID
 ///
 /// The locally unique identifier (LUID) is a 64-bit value guaranteed to be unique only on the system on which it was generated.

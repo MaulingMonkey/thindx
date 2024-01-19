@@ -10,10 +10,10 @@ use std::fmt::{self, Debug, Display, Formatter};
 
 
 
-// https://docs.microsoft.com/en-us/windows/win32/com/structure-of-com-error-codes
-// https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3derr
+// https://learn.microsoft.com/en-us/windows/win32/com/structure-of-com-error-codes
+// https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3derr
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/desktop/direct3d11/d3d11-graphics-reference-returnvalues)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/desktop/direct3d11/d3d11-graphics-reference-returnvalues)\]
 /// HRESULT
 ///
 /// See [thindx::errors](crate::errors) for a list of constants
@@ -24,7 +24,7 @@ use std::fmt::{self, Debug, Display, Formatter};
 enumish! { ErrorKind => HRESULT }
 
 impl ErrorKind {
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/dmerror/nf-dmerror-make_hresult)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/dmerror/nf-dmerror-make_hresult)\]
     /// MAKE_HRESULT
     ///
     /// ### Arguments
@@ -44,7 +44,7 @@ impl ErrorKind {
     /// MAKE_D3DSTATUS
     pub const fn make_d3dstatus(code: u32) -> ErrorKind { ErrorKind::make_hresult(0, _FACD3D, code) }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/dmerror/nf-dmerror-make_hresult)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/dmerror/nf-dmerror-make_hresult)\]
     /// MAKE_HRESULT(1, FACILITY_WIN32, code)
     ///
     /// ### Arguments

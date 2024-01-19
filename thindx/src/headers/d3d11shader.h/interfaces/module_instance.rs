@@ -5,7 +5,7 @@ use winapi::shared::winerror::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11moduleinstance)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11moduleinstance)\]
 /// ID3D11ModuleInstance
 ///
 /// A module-instance interface is used for resource rebinding.
@@ -27,7 +27,7 @@ macro_rules! check { ( $hr:expr ) => {{
 // TODO: traitify
 
 impl ModuleInstance {
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindconstantbuffer)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindconstantbuffer)\]
     /// ID3D11ModuleInstance::BindConstantBuffer
     ///
     /// Rebinds a constant buffer from a source slot to a destination slot.
@@ -57,7 +57,7 @@ impl ModuleInstance {
         check!(hr)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindconstantbufferbyname)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindconstantbufferbyname)\]
     /// ID3D11ModuleInstance::BindConstantBufferByName
     ///
     /// Rebinds a constant buffer by name to a destination slot.
@@ -88,7 +88,7 @@ impl ModuleInstance {
         check!(hr)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindresource)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindresource)\]
     /// ID3D11ModuleInstance::BindResource
     ///
     /// Rebinds a texture or buffer from source slot to destination slot.
@@ -118,7 +118,7 @@ impl ModuleInstance {
         check!(hr)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindresourceasunorderedaccessview)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindresourceasunorderedaccessview)\]
     /// ID3D11ModuleInstance::BindResourceAsUnorderedAccessView
     ///
     /// Rebinds a resource as an unordered access view (UAV) from source slot to destination slot.
@@ -148,7 +148,7 @@ impl ModuleInstance {
         check!(hr)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindresourceasunorderedaccessviewbyname)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindresourceasunorderedaccessviewbyname)\]
     /// ID3D11ModuleInstance::BindResourceAsUnorderedAccessViewByName
     ///
     /// Rebinds a resource by name as an unordered access view (UAV) to destination slots.
@@ -179,7 +179,7 @@ impl ModuleInstance {
         check!(hr)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindresourcebyname)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindresourcebyname)\]
     /// ID3D11ModuleInstance::BindResourceByName
     ///
     /// Rebinds a texture or buffer by name to destination slots.
@@ -210,7 +210,7 @@ impl ModuleInstance {
         check!(hr)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindsampler)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindsampler)\]
     /// ID3D11ModuleInstance::BindSampler
     ///
     /// Rebinds a sampler from source slot to destination slot.
@@ -240,7 +240,7 @@ impl ModuleInstance {
         check!(hr)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindsamplerbyname)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindsamplerbyname)\]
     /// ID3D11ModuleInstance::BindSamplerByName
     ///
     /// Rebinds a sampler by name to destination slots.
@@ -271,7 +271,7 @@ impl ModuleInstance {
         check!(hr)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindunorderedaccessview)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindunorderedaccessview)\]
     /// ID3D11ModuleInstance::BindUnorderedAccessView
     ///
     /// Rebinds an unordered access view (UAV) from source slot to destination slot.
@@ -301,7 +301,7 @@ impl ModuleInstance {
         check!(hr)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindunorderedaccessviewbyname)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11moduleinstance-bindunorderedaccessviewbyname)\]
     /// ID3D11ModuleInstance::BindUnorderedAccessViewByName
     ///
     /// Rebinds an unordered access view (UAV) by name to destination slots.

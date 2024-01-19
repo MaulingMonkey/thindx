@@ -8,7 +8,7 @@ use std::ptr::NonNull;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11functionparameterreflection)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11functionparameterreflection)\]
 /// ID3D11FunctionParameterReflection
 ///
 /// A function-parameter-reflection interface accesses function-parameter info.
@@ -33,7 +33,7 @@ impl<'r> FunctionParameterReflection<'r> {
 }
 
 impl<'r> FunctionParameterReflection<'r> {
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionparameterreflection-getdesc)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionparameterreflection-getdesc)\]
     /// ID3D11FunctionParameterReflection::GetDesc
     ///
     /// ### Errors

@@ -9,7 +9,7 @@ use std::fmt::Debug;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dclipstatus9)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dclipstatus9)\]
 /// D3DCLIPSTATUS9
 ///
 /// Describes the current clip status.
@@ -33,12 +33,12 @@ impl ClipStatus {
     }
 
     // "Initial values are zero for ClipUnion and 0xFFFFFFFF for ClipIntersection"
-    // Ref: https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dclipstatus9
+    // Ref: https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dclipstatus9
     // TODO: impl const fn default() / Default?
 
     /// Convert a raw [D3DCLIPSTATUS9] value into a [ClipStatus].
     ///
-    /// [D3DCLIPSTATUS9]:       https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dclipstatus9
+    /// [D3DCLIPSTATUS9]:       https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dclipstatus9
     pub const fn from_unchecked(value: D3DCLIPSTATUS9) -> Self { unsafe { std::mem::transmute(value) } }
 }
 
@@ -54,7 +54,7 @@ struct_mapping! {
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dclipstatus9)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dclipstatus9)\]
 /// D3DCS_\*
 ///
 /// [d3d9::ClipStatus] flags

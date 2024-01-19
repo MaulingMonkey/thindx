@@ -7,7 +7,7 @@ use winapi::shared::windef::HWND;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3ddevice-creation-parameters)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3ddevice-creation-parameters)\]
 /// D3DDEVICE_CREATION_PARAMETERS
 ///
 /// Describes the creation parameters for a device.

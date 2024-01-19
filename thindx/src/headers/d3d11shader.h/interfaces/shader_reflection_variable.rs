@@ -8,7 +8,7 @@ use std::ptr::NonNull;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11shaderreflectionvariable)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11shaderreflectionvariable)\]
 /// ID3D11ShaderReflectionVariable
 ///
 /// This shader-reflection interface provides access to a variable.
@@ -33,7 +33,7 @@ impl<'r> ShaderReflectionVariable<'r> {
 }
 
 impl<'r> ShaderReflectionVariable<'r> {
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectionvariable-getbuffer)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectionvariable-getbuffer)\]
     /// ID3D11ShaderReflectionVariable::GetBuffer
     ///
     /// This method returns the buffer of the current [d3d11::ShaderReflectionVariable].
@@ -49,7 +49,7 @@ impl<'r> ShaderReflectionVariable<'r> {
         unsafe { ShaderReflectionConstantBuffer::from_raw(self.phantom, ptr) }
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectionvariable-getdesc)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectionvariable-getdesc)\]
     /// ID3D11ShaderReflectionVariable::GetDesc
     ///
     /// Get a shader-variable description.
@@ -66,7 +66,7 @@ impl<'r> ShaderReflectionVariable<'r> {
         Ok(desc)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectionvariable-getinterfaceslot)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectionvariable-getinterfaceslot)\]
     /// ID3D11ShaderReflectionVariable::GetInterfaceSlot
     ///
     /// Gets the corresponding interface slot for a variable that represents an interface pointer.
@@ -82,7 +82,7 @@ impl<'r> ShaderReflectionVariable<'r> {
         unsafe { self.ptr.as_ref().GetInterfaceSlot(array_index) }
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectionvariable-gettype)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflectionvariable-gettype)\]
     /// ID3D11ShaderReflectionVariable::GetType
     ///
     /// Get a shader-variable type.

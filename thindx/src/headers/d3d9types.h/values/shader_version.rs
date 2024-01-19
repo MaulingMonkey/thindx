@@ -16,7 +16,7 @@ use std::fmt::{self, Debug, Formatter};
 pub struct ShaderVersion(DWORD);
 
 impl ShaderVersion {
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dps-version)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dps-version)\]
     /// D3DPS_VERSION
     ///
     /// Construct a pixel shader version
@@ -24,7 +24,7 @@ impl ShaderVersion {
         Self(0xFFFF0000 | ((major as u32) << 8) | ((minor as u32) << 0))
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dvs-version)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dvs-version)\]
     /// D3DVS_VERSION
     ///
     /// Construct a vertex shader version
@@ -49,7 +49,7 @@ impl ShaderVersion {
     pub fn is_vertex_shader(&self) -> bool { self.0 >> 16 == 0xFFFE }
 
     // all valid pixel shader versions per
-    // <https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dps-version#remarks>
+    // <https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dps-version#remarks>
 
     pub const PS_1_1 : ShaderVersion = ShaderVersion::ps(1, 1);
     pub const PS_1_2 : ShaderVersion = ShaderVersion::ps(1, 2);
@@ -59,7 +59,7 @@ impl ShaderVersion {
     pub const PS_3_0 : ShaderVersion = ShaderVersion::ps(2, 0);
 
     // all valid vertex shader versions per
-    // <https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dvs-version#remarks>
+    // <https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dvs-version#remarks>
 
     pub const VS_1_1 : ShaderVersion = ShaderVersion::vs(1, 1);
     pub const VS_2_0 : ShaderVersion = ShaderVersion::vs(1, 0);

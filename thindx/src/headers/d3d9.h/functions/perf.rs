@@ -1,4 +1,4 @@
-//! \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/dx9-graphics-reference-d3d-functions)\]
+//! \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3d9/dx9-graphics-reference-d3d-functions)\]
 //! Direct3D PIX events for annotating graphics debugger traces and captures.
 
 use crate::*;
@@ -12,7 +12,7 @@ use std::fmt::{self, Debug, Display, Formatter};
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_beginevent)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_beginevent)\]
 /// D3DPERF_BeginEvent
 ///
 /// Marks the beginning of a user-defined event.
@@ -43,7 +43,7 @@ pub fn begin_event(col: impl Into<d3d::Color>, name: impl abistr::TryIntoAsCStr<
 }
 
 //#cpp2rust D3DPERF_BeginEvent = d3d::perf::event_scope
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_beginevent)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_beginevent)\]
 /// D3DPERF_BeginEvent .. D3DPERF_EndEvent scope
 ///
 /// Marks the beginning and end of a user-defined event.
@@ -61,7 +61,7 @@ pub fn event_scope(col: impl Into<d3d::Color>, name: impl abistr::TryIntoAsCStr<
 }
 
 //#cpp2rust D3DPERF_BeginEvent = d3d::perf::event_scope_if
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_beginevent)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_beginevent)\]
 /// D3DPERF_BeginEvent .. D3DPERF_EndEvent scope
 ///
 /// Marks the beginning and end of a user-defined event.
@@ -82,7 +82,7 @@ pub fn event_scope_if(condition: bool, col: impl Into<d3d::Color>, name: impl ab
     if condition { event_scope(col, name) } else { EventScope::default() }
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_beginevent)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_beginevent)\]
 /// D3DPERF_BeginEvent .. D3DPERF_EndEvent scope
 ///
 /// Keeps track of if D3DPERF_BeginEvent succeeded, and attempts to pair it with a D3DPERF_EndEvent.
@@ -101,7 +101,7 @@ pub struct EventScope { scope: Option<u32> }
 
 impl EventScope {
     //#cpp2rust D3DPERF_EndEvent = d3d::perf::EventScope::close_unchecked
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_endevent)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_endevent)\]
     /// D3DPERF_EndEvent
     ///
     /// Marks the end of a user-defined event, if this event scope was open to begin with.
@@ -118,7 +118,7 @@ impl EventScope {
     pub fn close_unchecked(mut self) { drop(self.close_impl()) }
 
     //#cpp2rust D3DPERF_EndEvent = d3d::perf::EventScope::close
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_endevent)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_endevent)\]
     /// D3DPERF_EndEvent
     ///
     /// Marks the end of a user-defined event, if this event scope was open to begin with.
@@ -159,7 +159,7 @@ impl Drop for EventScope {
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_endevent)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_endevent)\]
 /// D3DPERF_EndEvent
 ///
 /// Marks the end of a user-defined event.
@@ -188,7 +188,7 @@ pub fn end_event() -> Result<u32, Error> {
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_getstatus)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_getstatus)\]
 /// D3DPERF_GetStatus
 ///
 /// Determine the current state of the profiler from the target program.
@@ -210,7 +210,7 @@ pub fn get_status() -> u32 {
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_queryrepeatframe)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_queryrepeatframe)\]
 /// D3DPERF_QueryRepeatFrame
 ///
 /// Determine whether a performance profiler is requesting that the current frame be resubmitted to Direct3D for performance analysis.
@@ -235,7 +235,7 @@ pub fn query_repeat_frame() -> bool {
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_setmarker)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_setmarker)\]
 /// D3DPERF_SetMarker
 ///
 /// Mark an instantaneous event.
@@ -261,7 +261,7 @@ pub fn set_marker(col: impl Into<d3d::Color>, name: impl abistr::TryIntoAsCStr<u
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_setoptions)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_setoptions)\]
 /// D3DPERF_SetOptions
 ///
 /// Set profiler options specified by the target program.
@@ -285,7 +285,7 @@ pub fn set_options(options: impl Into<Options>) {
     unsafe { D3DPERF_SetOptions(options) };
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_setoptions#parameters)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_setoptions#parameters)\]
 /// D3DPERF_SetOptions's dwOptions
 #[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[repr(transparent)] pub struct Options(DWORD);
@@ -300,7 +300,7 @@ flags! { Options => DWORD; None, ForbidPix }
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_setregion)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_setregion)\]
 /// D3DPERF_SetRegion
 ///
 /// Mark a series of frames with the specified color and name.
@@ -330,8 +330,8 @@ pub fn set_region(col: impl Into<d3d::Color>, name: impl abistr::TryIntoAsCStr<u
 
 /// [D3DPERF_BeginEvent] .. [D3DPERF_EndEvent] were incorrectly matched
 ///
-/// [D3DPERF_BeginEvent]:   https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_beginevent
-/// [D3DPERF_EndEvent]:     https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_endevent
+/// [D3DPERF_BeginEvent]:   https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_beginevent
+/// [D3DPERF_EndEvent]:     https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3d9/nf-d3d9-d3dperf_endevent
 pub struct EventMismatchError {
     expected:   u32,
     actual:     u32, // or == expected if none was present

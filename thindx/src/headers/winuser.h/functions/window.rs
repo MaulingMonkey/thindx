@@ -16,11 +16,11 @@ use winapi::um::winuser::*;
 
 macro_rules! fn_err_get_last_error { () => { fn_err!(ErrorKind::from_winapi(get_last_error() as _)) } }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/learnwin32/what-is-a-window-)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/learnwin32/what-is-a-window-)\]
 /// HWND
 ///
 /// A window handle.
-/// Note that Window's definition of a "window" is [pretty expansive](https://docs.microsoft.com/en-us/windows/win32/learnwin32/what-is-a-window-).
+/// Note that Window's definition of a "window" is [pretty expansive](https://learn.microsoft.com/en-us/windows/win32/learnwin32/what-is-a-window-).
 /// There's a reason it's named "Windows"!
 ///
 /// Windows are "windows".
@@ -32,7 +32,7 @@ macro_rules! fn_err_get_last_error { () => { fn_err!(ErrorKind::from_winapi(get_
 /// Windows belonging to other users... *maybe* you're isolated from those?  But probably not.
 pub type HWND = winapi::shared::windef::HWND;
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-destroywindow)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-destroywindow)\]
 /// DestroyWindow
 ///
 /// Destroys the specified window.
@@ -60,7 +60,7 @@ pub unsafe fn destroy_window(hwnd: impl Into<HWND>) -> Result<(), Error> {
     if succeeded { Ok(()) } else { fn_err_get_last_error!() }
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getclientrect)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getclientrect)\]
 /// GetClientRect
 ///
 /// Retrieves the coordinates of a window's client area.
@@ -93,7 +93,7 @@ pub fn get_client_rect(hwnd: impl TryInto<HWND>) -> Result<Rect, Error> {
     if succeeded { Ok(rect) } else { fn_err_get_last_error!() }
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getdesktopwindow)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getdesktopwindow)\]
 /// GetDesktopWindow
 ///
 /// Retrieves a handle to the desktop window.
@@ -111,7 +111,7 @@ pub fn get_client_rect(hwnd: impl TryInto<HWND>) -> Result<Rect, Error> {
     unsafe { GetDesktopWindow() }
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowlongptra)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowlongptra)\]
 /// GetWindowLongPtrA
 ///
 /// Retrieves information about the specified window. The function also retrieves the value at a specified offset into the extra window memory.
@@ -151,7 +151,7 @@ pub fn get_window_long_ptr_a(hwnd: impl Into<HWND>, index: i32) -> Result<isize,
     }
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowlongptrw)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowlongptrw)\]
 /// GetWindowLongPtrW
 ///
 /// Retrieves information about the specified window. The function also retrieves the value at a specified offset into the extra window memory.
@@ -191,7 +191,7 @@ pub fn get_window_long_ptr_w(hwnd: impl Into<HWND>, index: i32) -> Result<isize,
     }
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowthreadprocessid)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowthreadprocessid)\]
 /// GetWindowThreadProcessId
 ///
 /// Retrieves the identifier of the thread that created the specified window.
@@ -225,7 +225,7 @@ pub fn get_window_long_ptr_w(hwnd: impl Into<HWND>, index: i32) -> Result<isize,
     if tid != 0 { Ok(tid) } else { fn_err_get_last_error!() }
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowthreadprocessid)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getwindowthreadprocessid)\]
 /// GetWindowThreadProcessId
 ///
 /// Retrieves the identifier of the thread that created the specified window and the identifier of the process that created the window.
@@ -260,7 +260,7 @@ pub fn get_window_long_ptr_w(hwnd: impl Into<HWND>, index: i32) -> Result<isize,
     if tid != 0 { Ok((tid, pid)) } else { fn_err_get_last_error!() }
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-iswindow)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-iswindow)\]
 /// IsWindow
 ///
 /// Determines whether the specified window handle identifies an existing window.
@@ -289,7 +289,7 @@ pub fn get_window_long_ptr_w(hwnd: impl Into<HWND>, index: i32) -> Result<isize,
     }
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-iswindow)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-iswindow)\]
 /// IsWindowUnicode
 ///
 /// Determines whether the specified window is a native Unicode window.
@@ -317,7 +317,7 @@ pub fn get_window_long_ptr_w(hwnd: impl Into<HWND>, index: i32) -> Result<isize,
     }
 }
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-iswindow)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-iswindow)\]
 /// IsWindowVisible
 ///
 /// Determines whether the specified window is WS_VISIBLE.

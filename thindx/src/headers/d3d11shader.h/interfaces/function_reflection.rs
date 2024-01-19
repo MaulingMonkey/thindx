@@ -9,7 +9,7 @@ use std::ptr::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11functionreflection)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11functionreflection)\]
 /// ID3D11FunctionReflection
 ///
 /// A function-reflection interface accesses function info.
@@ -55,7 +55,7 @@ impl<'r> FunctionReflection<'r> {
 }
 
 impl<'r> FunctionReflection<'r> {
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionreflection-getconstantbufferbyindex)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionreflection-getconstantbufferbyindex)\]
     /// ID3D11FunctionReflection::GetConstantBufferByIndex
     ///
     /// Gets a constant buffer by index for a function.
@@ -94,7 +94,7 @@ impl<'r> FunctionReflection<'r> {
         unsafe { ShaderReflectionConstantBuffer::from_raw(self.phantom, ptr) }
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionreflection-getconstantbufferbyname)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionreflection-getconstantbufferbyname)\]
     /// ID3D11FunctionReflection::GetConstantBufferByName
     ///
     /// Gets a constant buffer by name for a function.
@@ -138,7 +138,7 @@ impl<'r> FunctionReflection<'r> {
         unsafe { ShaderReflectionConstantBuffer::from_raw(self.phantom, ptr) }
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionreflection-getdesc)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionreflection-getdesc)\]
     /// ID3D11FunctionReflection::GetDesc
     ///
     /// Fills the function descriptor structure for the function.
@@ -178,7 +178,7 @@ impl<'r> FunctionReflection<'r> {
         Ok(desc)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionreflection-getfunctionparameter)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionreflection-getfunctionparameter)\]
     /// ID3D11FunctionReflection::GetFunctionParameter
     ///
     /// Gets the function parameter reflector.
@@ -272,7 +272,7 @@ impl<'r> FunctionReflection<'r> {
         unsafe { FunctionParameterReflection::from_raw(self.phantom, ptr) }
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionreflection-getresourcebindingdesc)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionreflection-getresourcebindingdesc)\]
     /// ID3D11FunctionReflection::GetResourceBindingDesc
     ///
     /// Gets a description of how a resource is bound to a function.
@@ -329,7 +329,7 @@ impl<'r> FunctionReflection<'r> {
         Ok(desc)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionreflection-getresourcebindingdescbyname)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionreflection-getresourcebindingdescbyname)\]
     /// ID3D11FunctionReflection::GetResourceBindingDescByName
     ///
     /// Gets a description of how a resource is bound to a function.
@@ -381,7 +381,7 @@ impl<'r> FunctionReflection<'r> {
         Ok(desc)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionreflection-getvariablebyname)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11functionreflection-getvariablebyname)\]
     /// ID3D11FunctionReflection::GetVariableByName
     ///
     /// Gets a variable by name.

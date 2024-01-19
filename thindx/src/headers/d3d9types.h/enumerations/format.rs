@@ -8,7 +8,7 @@ use std::fmt::{self, Debug, Formatter};
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dformat)\] D3DFORMAT
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dformat)\] D3DFORMAT
 ///
 /// Enumeration cases are labeled in native endian.
 ///
@@ -138,12 +138,12 @@ impl Format {
 
     /// Convert a raw [D3DFORMAT] value into a [Format].  This is *probably* safe... probably...
     ///
-    /// [D3DFORMAT]:     https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dformat
+    /// [D3DFORMAT]:     https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dformat
     pub const fn from_unchecked(format: D3DFORMAT) -> Self { Self(format) }
 
     /// Convert a [Format] back into a [D3DFORMAT].
     ///
-    /// [D3DFORMAT]:     https://docs.microsoft.com/en-us/windows/win32/direct3d9/d3dformat
+    /// [D3DFORMAT]:     https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dformat
     pub const fn into(self) -> D3DFORMAT { self.0 }
 
 }
@@ -226,7 +226,7 @@ impl Format {
 
     pub const Q16W16V16U16          : Format = Format(D3DFMT_Q16W16V16U16);
 
-    /// See [Multiple-element Textures](https://docs.microsoft.com/en-us/windows/win32/direct3d9/multiple-element-textures)
+    /// See [Multiple-element Textures](https://learn.microsoft.com/en-us/windows/win32/direct3d9/multiple-element-textures)
     pub const MULTI2_ARGB8          : Format = Format(D3DFMT_MULTI2_ARGB8);
 
     pub const R16F                  : Format = Format(D3DFMT_R16F);

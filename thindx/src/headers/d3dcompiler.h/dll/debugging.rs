@@ -60,7 +60,7 @@ pub struct DisassembledRegion {
 
 /// <h1 id="debugging" class="section-header"><a href="#debugging">Bytecode Debugging</a></h1>
 impl Compiler {
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3ddisassemble)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3ddisassemble)\]
     /// D3DDisassemble
     ///
     /// Disassembles compiled HLSL code.
@@ -148,7 +148,7 @@ impl Compiler {
         Ok(TextBlob::new(unsafe { ReadOnlyBlob::from_raw(disassembly) }))
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3ddisassembleregion)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3ddisassembleregion)\]
     /// D3DDisassembleRegion
     ///
     /// Disassembles a specific region of compiled Microsoft High Level Shader Language (HLSL) code.
@@ -251,7 +251,7 @@ impl Compiler {
         })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dgettraceinstructionoffsets)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dgettraceinstructionoffsets)\]
     /// D3DGetTraceInstructionOffsets
     ///
     /// Retrieves the number of byte offsets for instructions within a section of shader code.
@@ -299,7 +299,7 @@ impl Compiler {
         Ok(n)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dgettraceinstructionoffsets)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dgettraceinstructionoffsets)\]
     /// D3DGetTraceInstructionOffsets
     ///
     /// Retrieves the byte offsets for instructions within a section of shader code.
@@ -349,7 +349,7 @@ impl Compiler {
         Ok(&offsets[..n])
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dgettraceinstructionoffsets)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3dcompiler/nf-d3dcompiler-d3dgettraceinstructionoffsets)\]
     /// D3DGetTraceInstructionOffsets
     ///
     /// Retrieves the byte offsets for instructions within a section of shader code.

@@ -2,7 +2,7 @@ use winapi::shared::ntdef::HANDLE;
 
 
 
-/// Placeholder for [Sharing Resources](https://docs.microsoft.com/en-us/windows/win32/direct3d9/dx9lh#sharing-resources)
+/// Placeholder for [Sharing Resources](https://learn.microsoft.com/en-us/windows/win32/direct3d9/dx9lh#sharing-resources)
 ///
 /// This would generally be an in/out parameter.
 /// Currently, the only type that implements this is `()`, which represents not using resource sharing.

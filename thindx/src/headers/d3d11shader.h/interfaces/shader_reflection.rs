@@ -7,7 +7,7 @@ use std::ptr::*;
 
 
 
-/// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11shaderreflection)\]
+/// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nn-d3d11shader-id3d11shaderreflection)\]
 /// ID3D11ShaderReflection
 ///
 /// A shader-reflection interface accesses shader information.
@@ -34,7 +34,7 @@ pub struct ShaderReflection(pub(crate) mcom::Rc<winapi::um::d3d11shader::ID3D11S
 convert!(unsafe ShaderReflection => Unknown, winapi::um::d3d11shader::ID3D11ShaderReflection);
 
 impl ShaderReflection {
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getbitwiseinstructioncount)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getbitwiseinstructioncount)\]
     /// ID3D11ShaderReflection::GetBitwiseInstructionCount
     ///
     /// Gets the number of bitwise instructions.
@@ -52,7 +52,7 @@ impl ShaderReflection {
         unsafe { self.0.GetBitwiseInstructionCount() }
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getconstantbufferbyindex)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getconstantbufferbyindex)\]
     /// ID3D11ShaderReflection::GetConstantBufferByIndex
     ///
     /// Get a constant buffer by index.
@@ -89,7 +89,7 @@ impl ShaderReflection {
         unsafe { ShaderReflectionConstantBuffer::from_raw(self, ptr) }
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getconstantbufferbyname)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getconstantbufferbyname)\]
     /// ID3D11ShaderReflection::GetConstantBufferByName
     ///
     /// Get a constant buffer by name.
@@ -121,7 +121,7 @@ impl ShaderReflection {
         unsafe { ShaderReflectionConstantBuffer::from_raw(self, ptr) }
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getconversioninstructioncount)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getconversioninstructioncount)\]
     /// ID3D11ShaderReflection::GetConversionInstructionCount
     ///
     /// Gets the number of conversion instructions.
@@ -139,7 +139,7 @@ impl ShaderReflection {
         unsafe { self.0.GetConversionInstructionCount() }
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getdesc)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getdesc)\]
     /// ID3D11ShaderReflection::GetDesc
     ///
     /// Get a shader description.
@@ -165,7 +165,7 @@ impl ShaderReflection {
         Ok(desc)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getgsinputprimitive)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getgsinputprimitive)\]
     /// ID3D11ShaderReflection::GetGSInputPrimitive
     ///
     /// Gets the geometry-shader input-primitive description.
@@ -186,7 +186,7 @@ impl ShaderReflection {
         Primitive::from_unchecked(unsafe { self.0.GetGSInputPrimitive() })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getinputparameterdesc)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getinputparameterdesc)\]
     /// ID3D11ShaderReflection::GetInputParameterDesc
     ///
     /// Get an input-parameter description for a shader.
@@ -221,7 +221,7 @@ impl ShaderReflection {
         Ok(desc)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getminfeaturelevel)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getminfeaturelevel)\]
     /// ID3D11ShaderReflection::GetMinFeatureLevel
     ///
     /// Gets the minimum feature level.
@@ -244,7 +244,7 @@ impl ShaderReflection {
         Ok(FeatureLevel::from_unchecked(fl))
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getmovcinstructioncount)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getmovcinstructioncount)\]
     /// ID3D11ShaderReflection::GetMovcInstructionCount
     ///
     /// Gets the number of Movc instructions.
@@ -262,7 +262,7 @@ impl ShaderReflection {
         unsafe { self.0.GetMovcInstructionCount() }
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getmovinstructioncount)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getmovinstructioncount)\]
     /// ID3D11ShaderReflection::GetMovInstructionCount
     ///
     /// Gets the number of Mov instructions.
@@ -280,7 +280,7 @@ impl ShaderReflection {
         unsafe { self.0.GetMovInstructionCount() }
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getnuminterfaceslots)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getnuminterfaceslots)\]
     /// ID3D11ShaderReflection::GetNumInterfaceSlots
     ///
     /// Gets the number of interface slots in a shader.
@@ -298,7 +298,7 @@ impl ShaderReflection {
         unsafe { self.0.GetNumInterfaceSlots() }
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getoutputparameterdesc)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getoutputparameterdesc)\]
     /// ID3D11ShaderReflection::GetOutputParameterDesc
     ///
     /// Get an output-parameter description for a shader.
@@ -333,7 +333,7 @@ impl ShaderReflection {
         Ok(desc)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getpatchconstantparameterdesc)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getpatchconstantparameterdesc)\]
     /// ID3D11ShaderReflection::GetPatchConstantParameterDesc
     ///
     /// Get a patch-constant parameter description for a shader.
@@ -367,7 +367,7 @@ impl ShaderReflection {
         Ok(desc)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getrequiresflags)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getrequiresflags)\]
     /// ID3D11ShaderReflection::GetRequiresFlags
     ///
     /// Gets a group of flags that indicates the requirements of a shader.
@@ -385,7 +385,7 @@ impl ShaderReflection {
         ShaderRequires::from_unchecked(unsafe { self.0.GetRequiresFlags() })
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getresourcebindingdesc)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getresourcebindingdesc)\]
     /// ID3D11ShaderReflection::GetResourceBindingDesc
     ///
     /// Get a description of how a resource is bound to a shader.
@@ -423,7 +423,7 @@ impl ShaderReflection {
         Ok(desc)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getresourcebindingdescbyname)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getresourcebindingdescbyname)\]
     /// ID3D11ShaderReflection::GetResourceBindingDescByName
     ///
     /// Get a description of how a resource is bound to a shader.
@@ -454,7 +454,7 @@ impl ShaderReflection {
         Ok(desc)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getthreadgroupsize)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getthreadgroupsize)\]
     /// ID3D11ShaderReflection::GetThreadGroupSize
     ///
     /// Retrieves the sizes, in units of threads, of the X, Y, and Z dimensions of the shader's thread-group grid.
@@ -478,7 +478,7 @@ impl ShaderReflection {
         (x, y, z)
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getvariablebyname)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-getvariablebyname)\]
     /// ID3D11ShaderReflection::GetVariableByName
     ///
     /// Gets a variable by name.
@@ -510,7 +510,7 @@ impl ShaderReflection {
         unsafe { ShaderReflectionVariable::from_raw(self, ptr) }
     }
 
-    /// \[[docs.microsoft.com](https://docs.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-issamplefrequencyshader)\]
+    /// \[[microsoft.com](https://learn.microsoft.com/en-us/windows/win32/api/d3d11shader/nf-d3d11shader-id3d11shaderreflection-issamplefrequencyshader)\]
     /// ID3D11ShaderReflection::IsSampleFrequencyShader
     ///
     /// Indicates whether a shader is a sample frequency shader.
