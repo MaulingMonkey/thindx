@@ -58,6 +58,7 @@ mods! {
 }
 
 #[cfg(doc)] #[doc = include_str!("../doc/changelog.md")] pub mod _changelog {}
+#[cfg(doc)] #[doc = include_str!("../doc/dependencies.md")] pub mod _dependencies {}
 #[cfg(doc)] pub mod _examples;
 #[cfg(doc)] pub mod _headers;
 #[cfg(doc)] #[doc(hidden)] pub use _examples as examples;
